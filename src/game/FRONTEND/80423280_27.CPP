@@ -10,7 +10,7 @@
 
 
 
-extern struct State_func_804232AC_de *g_optionsPage;
+extern struct StateFrontendUpdateOptionsPageExit *g_optionsPage;
 
 extern s32 func_8041A470_de(void *);
 
@@ -29,11 +29,11 @@ enum { SHORTCUT_RESET = 0x5C, SHORTCUT_SIX = 0x52, SHORTCUT_FIVE = 0x55 };
 /* Handles the menu shortcut codes by selecting an entry and refreshing the screen. */
 
 
-extern void MarkMenuEventHandled(void),func_80422FC0_de(void),func_8041A430_de(void *,s32);
+extern void MarkMenuEventHandled(void),Menu_CommitOptionsPage(void),func_8041A430_de(void *,s32);
 
 extern s32 func_80299A08_de(void);
 
-s32 func_804232AC_de(void) {
+s32 Frontend_UpdateOptionsPageExit(void) {
     switch (func_8041A470_de(g_optionsPage->menu)) {
     case 3:
         break;
@@ -49,7 +49,7 @@ s32 func_804232AC_de(void) {
     return 0;
 }
 
-s32 func_80423328_de(void) {
+s32 Frontend_HandleOptionsPageShortcut(void) {
     s32 temp_v0;
     s32 var_s0;
     MarkMenuEventHandled();
@@ -62,7 +62,7 @@ s32 func_80423328_de(void) {
     default:var_s0=0;break;
     }
     if (var_s0 == 1) {
-        func_80422FC0_de();
+        Menu_CommitOptionsPage();
         func_8041A430_de(g_optionsPage->menu, 2);
     }
     return 0;

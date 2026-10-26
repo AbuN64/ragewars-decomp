@@ -13,10 +13,10 @@
 #include "sdk/os.h"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-extern void func_8028EACC_de(void *arg0);
+extern void Sched_HandleRetrace(void *arg0);
 
-extern void func_8028F278_de(void *arg0);
-extern void func_8028FC10_de(void *arg0);
+extern void Sched_HandleRdpCompletion(void *arg0);
+extern void Sched_HandleTaskCommands(void *arg0);
 
 
 extern void *func_8025CC6C_de(void);
@@ -33,7 +33,7 @@ extern void osViBlack(s32 arg0);
 
 
 
-void func_8028E930_de(void *arg0) {
+void Sched_RunEventLoop(void *arg0) {
     OSSched *scheduler = arg0;
     s32 event;
     OSScClientWork *node;
@@ -78,16 +78,16 @@ event_29a:
             }
         }
     }
-    func_8028EACC_de(scheduler);
+    Sched_HandleRetrace(scheduler);
     Frontend_UpdateScreenMode();
     goto loop_1;
 
 event_29b:
-    func_8028EDA0_de(scheduler);
+    Sched_HandleRspCompletion(scheduler);
     goto loop_1;
 
 event_29c:
-    func_8028F278_de(scheduler);
+    Sched_HandleRdpCompletion(scheduler);
     goto loop_1;
 
 event_29d:
@@ -106,7 +106,7 @@ event_29d:
     goto loop_1;
 
 event_6:
-    func_8028FC10_de(scheduler);
+    Sched_HandleTaskCommands(scheduler);
     goto loop_1;
 }
 #endif

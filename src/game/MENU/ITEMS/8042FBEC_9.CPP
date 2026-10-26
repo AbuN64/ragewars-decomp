@@ -15,9 +15,9 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
 extern void Frontend_RequestScreenMode(s32);
-extern void func_802A2394_de(void);
-extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_802A2400_de(f32);
+extern void Tsmos_DeactivateControllerState(void);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern void Tsmos_SetIdleTimer(f32);
 
 s32 func_8043A3B0_eu(MenuWidget *tree) {
     s32 i;
@@ -35,14 +35,14 @@ s32 func_8043A3B0_eu(MenuWidget *tree) {
     }
     Frontend_RequestScreenMode(0);
     i = 7;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     record = &object->playerSettings[7];
     do {
         record->enabled = 0;
         i--;
         record--;
     } while (i >= 0);
-    D_800E5950->widget = func_8040EC30_de(tree, 0x397);
+    D_800E5950->widget = Frontend_FindWidgetByResourceId(tree, 0x397);
     D_800E5950->phase = 0;
     settings = &D_801462C8;
     settings->laps = 10;
@@ -50,7 +50,7 @@ s32 func_8043A3B0_eu(MenuWidget *tree) {
     for (i = 0; i < 4; i++) {
         Player_InitializeProfile(&D_80102B00[i]);
     }
-    func_802A2400_de(0.0f);
+    Tsmos_SetIdleTimer(0.0f);
     return 0;
 }
 #endif

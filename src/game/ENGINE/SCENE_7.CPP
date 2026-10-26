@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 void Scene_SetLevelActorStateBit(void *arg0, s32 index, s32 arg2, s32 arg3) {
     void *entry;
@@ -38,7 +38,7 @@ void Scene_SetLevelActorStateBit(void *arg0, s32 index, s32 arg2, s32 arg3) {
     field80 = ((Shared_World *)arg0)->bitSections;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), (s32) index), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
@@ -67,7 +67,7 @@ void Scene_SetRecordBitForLevel(Field_void_80 *worldState, s32 index, s32 record
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(worldState->value, 0), index), 1);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (recordBitIndex & 7);
@@ -102,7 +102,7 @@ void Scene_SetLevelRecordStateBit(void *arg0, struct LevelBitRecord *levelBitRec
     field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (bitIndex & 7);
@@ -134,7 +134,7 @@ s32 Scene_TestLevelRecordStateBit(void *world, struct LevelBitRecord *levelBitRe
     field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     recordBits = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     if (bitIndex < 0) {
@@ -153,7 +153,7 @@ void Scene_SetTriggerBitForLevel(Field_void_80 *worldState, s32 index, s32 trigg
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(worldState->value, 0), index), 2);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (triggerBitIndex & 7);
@@ -189,7 +189,7 @@ void Scene_SetTriggerStateBit(void *world, void *trigger, s32 arg2) {
     field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 2);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (bitIndex & 7);
@@ -221,7 +221,7 @@ s32 Scene_TestTriggerStateBit(Shared_World *world, void *trigger) {
     field1B40C = world->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 2);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     temp_a0 = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     if (bitIndex < 0) {

@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 void Scene_ReleaseCachedLevelData(Shared_World *world) {
     void *handle;
@@ -31,7 +31,7 @@ void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     SetN64_GetPackSection(table, 1);
 }
 
@@ -51,7 +51,7 @@ void Scene_SetSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigge
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg4 & 7);
@@ -84,7 +84,7 @@ s32 Scene_TestSelectedLevelStateBit(struct WorldSceneDispatchEnabledEntityTrigge
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32)table, 1);
+    SetN64_GetPackSectionSize((s32)table, 1);
     temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
     mask = 1 << (arg4 & 7);
     i = arg4;
@@ -103,7 +103,7 @@ s32 Scene_TestSecondaryLevelBit(void *arg0, s32 index, s32 arg2) {
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->secondaryLevels, 0), index), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32)table, 1);
+    SetN64_GetPackSectionSize((s32)table, 1);
     temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
@@ -121,7 +121,7 @@ s32 Scene_TestActorBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32)table, 1);
+    SetN64_GetPackSectionSize((s32)table, 1);
     temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
@@ -139,7 +139,7 @@ s32 Scene_TestRecordBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 1);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32)table, 1);
+    SetN64_GetPackSectionSize((s32)table, 1);
     temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
@@ -157,7 +157,7 @@ s32 Scene_TestTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 2);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32)table, 1);
+    SetN64_GetPackSectionSize((s32)table, 1);
     temp_a0 = (u8 *)SetN64_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;

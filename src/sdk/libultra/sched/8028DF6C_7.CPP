@@ -20,13 +20,13 @@ extern s32 D_80142C30;
 s32 func_802BD170_de(s32);
 
 extern s32 func_802BD170_de(s32);
-void osScAddClient(OSSched *arg0, OSScClientWork *arg1, OSMesgQueue *arg2) {
-    s32 temp_v0;
-    temp_v0 = func_802BD170_de(1);
-    arg1->queue = arg2;
-    arg1->next = arg0->clientList;
-    arg0->clientList = arg1;
-    func_802BD170_de(temp_v0);
+void osScAddClient(OSSched *scheduler, OSScClientWork *client, OSMesgQueue *messageQueue) {
+    s32 savedInterruptMask;
+    savedInterruptMask = func_802BD170_de(1);
+    client->queue = messageQueue;
+    client->next = scheduler->clientList;
+    scheduler->clientList = client;
+    func_802BD170_de(savedInterruptMask);
 }
 
 void osScRemoveClient(OSSched *arg0, void *arg1) {

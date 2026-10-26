@@ -14,7 +14,7 @@
 #include "sdk/os.h"
 
 #include "COMMON/GAME_SESSION.H"
-void func_8028EDA0_de(void *object) {
+void Sched_HandleRspCompletion(void *object) {
  OSSched *scheduler=object;
  OSScTask_s *nextRsp,*nextRdp;
  OSScTask_s *task;
@@ -64,10 +64,10 @@ void func_8028EDA0_de(void *object) {
    D_800CD74C=duration4*D_800C5360_de;
    if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
   }
-  func_8028FA0C_de(scheduler,task);
+  Sched_CompleteTaskAndSwapBuffer(scheduler,task);
  }
  flags=((scheduler->curRSPTask==0)<<1)|(scheduler->curRDPTask==0);
- if(func_8028F544_de(scheduler,&nextRsp,&nextRdp,flags)!=flags) func_8028FA60_de(scheduler,nextRsp,nextRdp);
+ if(Sched_SelectRunnableTasks(scheduler,&nextRsp,&nextRdp,flags)!=flags) Sched_StartSelectedTasks(scheduler,nextRsp,nextRdp);
 }
 
 /* Mechanically ported from github/legacy:src/func_8028F258.c by address. */
@@ -89,7 +89,7 @@ extern s32 D_80146CD0;
 
 extern u32 D_80146CCC;
 
-void func_8028F278_de(OSSched *sc)
+void Sched_HandleRdpCompletion(OSSched *sc)
 {
     s32 value1 = 0;
     s32 value2 = 0;
@@ -132,12 +132,12 @@ void func_8028F278_de(OSSched *sc)
                     D_80146CCC = 0;
                 }
             }
-            func_80290A0C_de(schedule);
+            SetN64_OnFrameComplete(schedule);
         }
     }
-    func_8028FA0C_de(sc, task);
+    Sched_CompleteTaskAndSwapBuffer(sc, task);
     flags = (sc->curRSPTask == 0) * 2 | (sc->curRDPTask == 0);
-    if (func_8028F544_de(sc, &value1, &value2, flags) != flags) {
-        func_8028FA60_de(sc, value1, value2);
+    if (Sched_SelectRunnableTasks(sc, &value1, &value2, flags) != flags) {
+        Sched_StartSelectedTasks(sc, value1, value2);
     }
 }

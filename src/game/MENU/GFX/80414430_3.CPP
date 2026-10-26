@@ -151,7 +151,7 @@ extern s32 D_800DF278;
 extern char D_80141168;
 
 extern void XMath_SetIdentityMatrix(Matrix *m);
-extern Vtx10 *func_802A15E4_de(s32 size);
+extern Vtx10 *ESmem_AllocateFrameHeapHigh(s32 size);
 
 void func_80416ECC_de(s32 mode) {
     CVector3 point;
@@ -172,7 +172,7 @@ void func_80416ECC_de(s32 mode) {
         point.z = D_800DD3FC;
         GraphU64_TransformPoint(&D_80141168, &point, &projected);
         count = 4;
-        vertices = func_802A15E4_de(0x40);
+        vertices = ESmem_AllocateFrameHeapHigh(0x40);
         for (i = 0; i < count; i++) {
             vertices[i].v.ob[0] = projected.x;
             vertices[i].v.ob[1] = projected.y;

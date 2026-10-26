@@ -15,7 +15,7 @@ extern char D_8011D8D0;
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
-extern void func_8027892C_de(void *object, void *colors);
+extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Cache_UnlockResource(s32, s32);
 extern s32 Geometry_GetViewEffect(void);
@@ -56,7 +56,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
     if (header[0] == 1) {
         char *object = (char *)header + header[1];
 
-        func_8027892C_de(object, (char *)header + header[2]);
+        Link_AnimateVertexColors(object, (char *)header + header[2]);
         data = object;
     } else {
         data = (char *)(header + 2);

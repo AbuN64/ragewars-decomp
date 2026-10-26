@@ -6,13 +6,13 @@
 #include "RENDER/802909E0.H"
 #include "RENDER/802909E0_5.H"
 
-void func_80290A00_de(void *frame) {
+void SetN64_ClearFrameDirection(void *frame) {
     Frame *view = frame;
     view->direction.x = 0.0f;
     view->direction.y = 0.0f;
 }
 
-void func_80290A0C_de(void *schedule) {}
+void SetN64_OnFrameComplete(void *schedule) {}
 
 
 void func_80290A14_de(void *frame, void *arg1) {

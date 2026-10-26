@@ -12,7 +12,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
 
-/* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through func_8040EDE4_de and records it as the owner's overlay. */
+/* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through Frontend_InsertWidgetBefore and records it as the owner's overlay. */
 
 
 
@@ -25,18 +25,18 @@
 extern NodeMenuCreateOverlayNode *Cache_AllocateMemory(s32 size);
 
 
-extern void func_8040EDE4_de(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
+extern void Frontend_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
 
-/* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through func_8040EC30_de, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
-
-
+/* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Frontend_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
 
 
 
 
 
 
-extern NodeMenuShowSlotById *func_8040EC30_de(void *root, s32 id);
+
+
+extern NodeMenuShowSlotById *Frontend_FindWidgetByResourceId(void *root, s32 id);
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
 
@@ -89,7 +89,7 @@ NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32
     node->owner = owner;
     node->tag = 0x7A51;
     node->field_6C = 0;
-    func_8040EDE4_de(owner->root, node);
+    Frontend_InsertWidgetBefore(owner->root, node);
     return owner->overlay = node;
 }
 
@@ -103,7 +103,7 @@ void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
         if (context->shown[index] != 0) {
             func_802995D4_de(context->shown[index]->id, 0x10, 0, 0, 0);
         }
-        node = func_8040EC30_de(context->root, id & 0xFFFF);
+        node = Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
         func_802995D4_de(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
@@ -166,7 +166,7 @@ void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
         if (context->shown[index] != 0) {
             func_802995D4_de(context->shown[index]->id, 0x10, 0, 0, 0);
         }
-        node = func_8040EC30_de(context->root, id & 0xFFFF);
+        node = Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
         func_802995D4_de(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;

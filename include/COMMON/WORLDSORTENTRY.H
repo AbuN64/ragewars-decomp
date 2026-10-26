@@ -161,8 +161,8 @@ typedef struct OSSched OSSched;
 struct ObjRecAtE4V2;
 typedef struct ObjRecAtE4V2 ObjRecAtE4V2;
 
-struct Node_func_8028FC10_de;
-typedef struct Node_func_8028FC10_de Node_func_8028FC10_de;
+struct NodeSchedHandleTaskCommands;
+typedef struct NodeSchedHandleTaskCommands NodeSchedHandleTaskCommands;
 
 struct ObjRecAt78V2;
 
@@ -177,8 +177,8 @@ struct ObjRecAt78V2;
 struct Panel;
 typedef struct Panel Panel;
 
-struct Node_func_8028FC10_de;
-struct Node_func_8028FC10_de {
+struct NodeSchedHandleTaskCommands;
+struct NodeSchedHandleTaskCommands {
     char pad0[8];
     u32 flags;
     char padC[4];

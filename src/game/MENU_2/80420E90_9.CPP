@@ -7,10 +7,10 @@
 #include "MENU_2/80420E90_9.H"
 #include "SCENE/802508E0_13.H"
 extern NumberPadScreen *D_800E4400;
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points
-   to, and with one on the entry 0x3AB that func_8040EC30_de finds in the list at offset 8, then sets
+   to, and with one on the entry 0x3AB that Frontend_FindWidgetByResourceId finds in the list at offset 8, then sets
    the word at offset 0x34. */
 
 
@@ -30,8 +30,8 @@ void Menu_AdvanceTextRows(void *, void *);
 
 
 /* Polls the dialog of screen D_800E4400 through func_8041A470_de: state 3 opens the screen through
-   func_804217D4_de while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
-   screen confirmed at 0x38 and calls func_80421234_de; state 4 calls MarkMenuEventHandled and waits 3
+   Menu_ScrollOptionsKeypad while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
+   screen confirmed at 0x38 and calls Menu_RefreshExtraOptionLocks; state 4 calls MarkMenuEventHandled and waits 3
    through func_80298368_de. Returns zero. */
 
 
@@ -44,19 +44,19 @@ extern void MarkMenuEventHandled(void);
 
 extern void func_80298368_de(s32);
 
-void func_8042177C_de(void) {
+void Menu_ShowExtraOptionsPanel(void) {
     Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
 #if defined(VERSION_DE)
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3A5), 1);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3AB), 1);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
 #elif defined(VERSION_EU_X)
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3AF), 1);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
 #endif
     D_800E4400->open = 1;
 }
 
-void func_804217D4_de(void) {
+void Menu_ScrollOptionsKeypad(void) {
     s32 currentMode;
     MenuWidget *temp_a0;
     MenuWidget *temp_a0_2;
@@ -65,11 +65,11 @@ void func_804217D4_de(void) {
     D_800E4400->mode = currentMode;
     if (currentMode <= 0) {
 #if defined(VERSION_DE)
-        temp_v0_2 = func_8040EC30_de(D_800E4400->window, 0x3B2);
+        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3B2);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        temp_v0_2 = func_8040EC30_de(D_800E4400->window, 0x3B8);
+        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3B8);
 #elif defined(VERSION_EU_X)
-        temp_v0_2 = func_8040EC30_de(D_800E4400->window, 0x3BC);
+        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3BC);
 #endif
         temp_a0 = D_800E4400->pad;
         temp_a0->y = (u16) (temp_a0->y - 1);
@@ -82,24 +82,24 @@ void func_804217D4_de(void) {
     }
 }
 
-s32 func_80421854_de(void) {
+s32 Menu_DestroyExtraOptionsMenu(void) {
     Cache_FreeMemory(D_800E4400);
     D_800E4400 = 0;
     return 0;
 }
 
-s32 func_80421884_de(void) {
+s32 Menu_UpdateExtraOptionsMenu(void) {
     switch (func_8041A470_de(D_800E4400->dialog)) {
     case 3:
         if (D_800E4400->open == 0) {
-            func_804217D4_de();
+            Menu_ScrollOptionsKeypad();
             return 0;
         }
         if (D_8010B0E0.buttons != 0x433) {
             return 0;
         }
         D_800E4400->confirmed = 1;
-        func_80421234_de();
+        Menu_RefreshExtraOptionLocks();
         return 0;
     case 4:
         MarkMenuEventHandled();

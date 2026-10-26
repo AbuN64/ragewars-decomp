@@ -10,7 +10,7 @@
 
 /* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,
  * fills it with the given transform multiplied by the camera matrix (GraphU64_MultiplyMatrices, GraphU64_ClampMatrixToFixedRange,
- * func_8026FC9C_de), loads it into the display list, draws the model through Geometry_DrawResourceModel with the
+ * GraphU64_PackFixedMatrix), loads it into the display list, draws the model through Geometry_DrawResourceModel with the
  * actor's per-frame state for the current frame, then reloads the camera's per-frame matrix. */
 
 
@@ -25,7 +25,7 @@ extern s32 func_802799C0_de(void *, s32);
 
 extern void GraphU64_ClampMatrixToFixedRange(f32 *);
 
-extern void func_8026FC9C_de(f32 *, s32);
+extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
 
 /* Moves an actor toward a point given relative to it: the offset is turned by the actor's facing and added to its position (or, for a mirrored actor with a parent, negated in x and z and transformed by the parent's matrix at 0x160), then passed to InstHdr_CopyActorPositionAndModel with both final flags set. */
@@ -54,7 +54,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
             matrices = camera->matrices;
             GraphU64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
             GraphU64_ClampMatrixToFixedRange(mf);
-            func_8026FC9C_de(mf, mtx);
+            GraphU64_PackFixedMatrix(mf, mtx);
             gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
             Geometry_DrawResourceModel(layer, camera->style, object->fieldB4, 1,
                           &object->lighting[D_800D297C], 0, object->field3);

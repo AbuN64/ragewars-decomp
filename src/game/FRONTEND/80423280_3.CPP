@@ -8,21 +8,21 @@
 #include "FRONTEND/80423280_3.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E4514 holds through Cache_FreeMemory, calls func_802A2360_de, clears
+/* Releases the object D_800E4514 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears
    D_800E4514 and returns zero. */
 
 
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
-/* Sets the word at offset 0xC of the object D_800E4514 points to and calls func_802A2360_de, once:
+/* Sets the word at offset 0xC of the object D_800E4514 points to and calls Tsmos_ActivateControllerState, once:
    nothing happens when the word is already set. Returns zero. */
 
 
 
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
-   0x1C4 send codes -1, 13, 12 and 14 to func_8042E988_de; a handled message then runs func_8042302C_de
+   0x1C4 send codes -1, 13, 12 and 14 to func_8042E988_de; a handled message then runs Menu_CommitCompactOptionsPage
    and func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled(void);
 
@@ -32,7 +32,7 @@ extern void func_8042E988_de(s32);
 
 extern void func_802998A8_de(void);
 
-/* Calls MarkMenuEventHandled, func_8042E988_de with -1, func_8042302C_de and func_802998A8_de, and returns zero. */
+/* Calls MarkMenuEventHandled, func_8042E988_de with -1, Menu_CommitCompactOptionsPage and func_802998A8_de, and returns zero. */
 extern void MarkMenuEventHandled();
 
 extern void func_802998A8_de();
@@ -45,7 +45,7 @@ extern FieldRow D_800E4568[];
 
 extern Handler80423930 D_800E456C;
 
-/* Releases the object D_800E4518 holds through Cache_FreeMemory, calls func_802A2360_de, clears D_800E4518, calls
+/* Releases the object D_800E4518 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears D_800E4518, calls
    func_80245B28_de and returns zero. */
 
 
@@ -56,12 +56,12 @@ extern void Cinema_ReleaseSequenceContext();
    refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries func_8042ACD8_de
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
    others pass codes 0x17, 13, 12 and 14 to func_8042E988_de. Any handled message then runs
-   func_80423080_de. Returns zero. */
+   Menu_CommitTabOptionsPage. Returns zero. */
 /* The first message this handles and how many it takes: eu-x numbers the messages 4 higher, de 4
    lower and takes only 8, as each cartridge's own bytes show; us, us-rev1 and eu share 0x377 and 10. */
 
 
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 
 /* The message screen D_800E4514; its word at 0xC marks the message handled. */
 extern struct func_80205628_S3 *D_800E4514;
@@ -84,24 +84,24 @@ extern FieldRow D_800E45B0[];
 
 extern Handler80423B88 D_800E45B4;
 
-s32 func_804235E8_de(void) {
+s32 Frontend_DestroyCompactOptionsPage(void) {
     Cache_FreeMemory(D_800E4514);
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800E4514 = 0;
     return 0;
 }
 
-s32 func_80423620_de(void) {
+s32 Frontend_ActivateCompactOptionsPage(void) {
     struct func_80205628_S3 *state = D_800E4514;
 
     if (state->unkC == 0) {
         state->unkC = 1;
-        func_802A2360_de();
+        Tsmos_ActivateControllerState();
     }
     return 0;
 }
 
-s32 func_80423654_de(void) {
+s32 Frontend_HandleCompactOptionsShortcut(void) {
     s32 handled;
     MarkMenuEventHandled();
     handled = 1;
@@ -147,21 +147,21 @@ s32 func_80423654_de(void) {
         break;
     }
     if (handled == 1) {
-        func_8042302C_de();
+        Menu_CommitCompactOptionsPage();
         func_802998A8_de();
     }
     return 0;
 }
 
-s32 func_80423720_de(void) {
+s32 Frontend_CloseCompactOptionsPage(void) {
     MarkMenuEventHandled();
     func_8042E988_de(-1);
-    func_8042302C_de();
+    Menu_CommitCompactOptionsPage();
     func_802998A8_de();
     return 0;
 }
 
-s32 func_80423758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchCompactOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80423930 *entry;
     ObjRecAtCV1 *actor;
     s32 index;
@@ -189,15 +189,15 @@ s32 func_80423758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-s32 func_804237E8_de(void) {
+s32 Frontend_DestroyTabOptionsPage(void) {
     Cache_FreeMemory(D_800E4518);
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800E4518 = 0;
     Cinema_ReleaseSequenceContext();
     return 0;
 }
 
-s32 func_80423828_de(void) {
+s32 Frontend_HandleTabOptionsShortcut(void) {
     s32 handled;
     u32 message;
     MarkMenuEventHandled();
@@ -243,7 +243,7 @@ s32 func_80423828_de(void) {
 #endif
         }
 reopen:
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_8043C278_de(D_800E4518);
     D_800E4518->shown = 1;
     D_800E4518->timer = -1;
@@ -255,7 +255,7 @@ code_17:
     func_8042E988_de(0x17);
     goto done;
 retry:
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     if (func_8042ACD8_de() == 0) {
         D_800E4518->mode = 5;
         D_800E4518->next_mode = 4;
@@ -279,17 +279,17 @@ other:
     handled = 0;
 done:
     if (handled == 1) {
-        func_80423080_de();
+        Menu_CommitTabOptionsPage();
     }
     return 0;
 }
 
-s32 func_80423990_de(void) {
+s32 Frontend_ConsumeTabOptionsEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 func_804239B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchTabOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80423B88 *entry;
     s32 index;
     s32 wildcard;

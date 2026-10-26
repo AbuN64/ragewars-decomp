@@ -52,7 +52,7 @@ extern Gfx *g_displayListCursor;
 extern s32 D_800CD8C8_de;
 extern u32 D_800DE850;
 extern void *D_8014D468_de[];
-extern void func_8028F754_de(Panel *, s32, s32, s32, u8);
+extern void Sched_InitializeSchedulerThread(Panel *, s32, s32, s32, u8);
 #include "sdk/SCHED/8028DF6C_7.H"
 extern void func_802B6B80_de(s32 *);
 extern void Items_ResetGameOptions(void *);

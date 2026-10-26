@@ -109,13 +109,13 @@ Acmd *func_802B5570_de(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleO
 }
 
 /** Apply a control message to this node and forward handled messages. */
-s32 func_802B5730_de(void *arg0, s32 arg1, s32 arg2) {
-    void *node = arg0;
+s32 func_802B5730_de(void *resampler, s32 parameterId, s32 parameterValue) {
+    void *node = resampler;
     void *target;
     void (*callback)(void *, s32, s32);
 
     {
-        s32 sw_message_value = arg1;
+        s32 sw_message_value = parameterId;
         sw_message_value -= (1);
         if ((unsigned int)sw_message_value > 8) {
             goto sw_message_default;
@@ -134,14 +134,14 @@ s32 func_802B5730_de(void *arg0, s32 arg1, s32 arg2) {
     }
     do {
     sw_message_1:
-        *(s32 *)arg0 = arg2;
+        *(s32 *)resampler = parameterValue;
         break;
     sw_message_4:
         ((IntegerState34 *)(node))->unk_20 = 0;
         ((IntegerState34 *)(node))->unk_24 = 1;
         ((IntegerState34 *)(node))->unk_30 = 0;
         ((IntegerState34 *)(node))->unk_1C = 0;
-        target = *(void **)arg0;
+        target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
             callback(target, 4, 0);
@@ -149,23 +149,23 @@ s32 func_802B5730_de(void *arg0, s32 arg1, s32 arg2) {
         break;
     sw_message_9:
         ((IntegerState34 *)(node))->unk_30 = 1;
-        target = *(void **)arg0;
+        target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
             callback(target, 9, 0);
         }
         break;
     sw_message_7:
-        ((IntegerState34 *)(node))->unk_18 = arg2;
+        ((IntegerState34 *)(node))->unk_18 = parameterValue;
         break;
     sw_message_8:
         ((IntegerState34 *)(node))->unk_1C = 1;
         break;
     sw_message_default:
-        target = *(void **)arg0;
+        target = *(void **)resampler;
         if (target != 0) {
             callback = ((struct CallbackStateC *) ((char *) target))->callback;
-            callback(target, arg1, arg2);
+            callback(target, parameterId, parameterValue);
         }
         break;
 

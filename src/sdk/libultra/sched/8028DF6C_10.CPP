@@ -17,32 +17,32 @@
 #include "sdk/os.h"
 extern s32 D_80142C30;
 extern s32 D_80142C38;
-void __scAppendList(OSSched *arg0, void *arg1) {
-    void *temp_v0;
+void __scAppendList(OSSched *scheduler, void *task) {
+    void *previousTail;
 
-    if ((((struct OSScTask_s *)arg1)->list.type) == 2) {
-        temp_v0 = arg0->audioListTail;
-        if (temp_v0 != 0) {
-            ((struct OSScTask_s *)temp_v0)->next = arg1;
+    if ((((struct OSScTask_s *)task)->list.type) == 2) {
+        previousTail = scheduler->audioListTail;
+        if (previousTail != 0) {
+            ((struct OSScTask_s *)previousTail)->next = task;
         } else {
-            arg0->audioListHead = arg1;
+            scheduler->audioListHead = task;
         }
-        arg0->audioListTail = arg1;
-        arg0->doAudio = 1;
+        scheduler->audioListTail = task;
+        scheduler->doAudio = 1;
     } else {
-        temp_v0 = arg0->gfxListTail;
-        if (temp_v0 != 0) {
-            ((struct OSScTask_s *)temp_v0)->next = arg1;
+        previousTail = scheduler->gfxListTail;
+        if (previousTail != 0) {
+            ((struct OSScTask_s *)previousTail)->next = task;
         } else {
-            arg0->gfxListHead = arg1;
+            scheduler->gfxListHead = task;
         }
-        arg0->gfxListTail = arg1;
+        scheduler->gfxListTail = task;
     }
-    ((struct OSScTask_s *)arg1)->next = 0;
-    ((struct OSScTask_s *)arg1)->state = (((struct OSScTask_s *)arg1)->flags) & 3;
+    ((struct OSScTask_s *)task)->next = 0;
+    ((struct OSScTask_s *)task)->state = (((struct OSScTask_s *)task)->flags) & 3;
 }
 
-void *func_8028F9AC_de(struct OSScTask_s *arg0) {
+void *Sched_GetTaskWithAvailableFramebuffer(struct OSScTask_s *arg0) {
     s32 f1a;
     s32 f1b;
     void *v2;
@@ -65,7 +65,7 @@ void *func_8028F9AC_de(struct OSScTask_s *arg0) {
     return 0;
 }
 
-s32 func_8028FA0C_de(void *arg0, void *arg1) {
+s32 Sched_CompleteTaskAndSwapBuffer(void *arg0, void *arg1) {
     if ((((s32)((struct OSScTask_s *)arg1)->state)) & 3) {
         return 0;
     }

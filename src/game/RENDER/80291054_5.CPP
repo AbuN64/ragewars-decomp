@@ -77,7 +77,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
     scaledFrameTime = (f32)elapsedUnits * D_800C546C * D_800CA560;
 #endif
     D_801428A0 = nowTicks;
-    if (func_802A23B4_de() == 0) {
+    if (Tsmos_IsFrontendActive() == 0) {
         if (func_802934F8_de() == 0) {
             world->unk26DD4 = 0;
         } else {

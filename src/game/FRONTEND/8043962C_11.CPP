@@ -31,14 +31,14 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     }
     Frontend_RequestScreenMode(0);
     i = 7;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     record = &object->playerSettings[7];
     do {
         record->enabled = 0;
         i--;
         record--;
     } while (i >= 0);
-    D_800E5950->widget = func_8040EC30_de(tree, 0x397);
+    D_800E5950->widget = Frontend_FindWidgetByResourceId(tree, 0x397);
     D_800E5950->phase = 0;
     settings = &D_801462C8;
     settings->laps = 10;
@@ -46,7 +46,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     for (i = 0; i < 4; i++) {
         Player_InitializeProfile(&D_80102B00[i]);
     }
-    func_802A2400_de(0.0f);
+    Tsmos_SetIdleTimer(0.0f);
     return 0;
 }
 #endif

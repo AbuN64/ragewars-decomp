@@ -32,9 +32,9 @@ extern ALParam_s_func_802B3000_de *Audio_AllocParam(void);
 void alSynAddPlayer(void *synth, void *audioPlayer) {
     s32 savedInterruptMask;
     savedInterruptMask = func_802BD170_de(1);
-    (((struct State_func_80421D94_de *) ((s8 *) audioPlayer))->value) = (s32) (((struct State_func_804232AC_de *) ((s8 *) synth))->value);
-    (((struct State_func_80421D94_de *) ((s8 *) audioPlayer))->first) = (void *) (((struct State_func_804232AC_de *) ((s8 *) synth))->menu);
-    (((struct State_func_804232AC_de *) ((s8 *) synth))->menu) = audioPlayer;
+    (((struct StateMenuCancelSixChoiceMenu *) ((s8 *) audioPlayer))->value) = (s32) (((struct StateFrontendUpdateOptionsPageExit *) ((s8 *) synth))->value);
+    (((struct StateMenuCancelSixChoiceMenu *) ((s8 *) audioPlayer))->first) = (void *) (((struct StateFrontendUpdateOptionsPageExit *) ((s8 *) synth))->menu);
+    (((struct StateFrontendUpdateOptionsPageExit *) ((s8 *) synth))->menu) = audioPlayer;
     func_802BD170_de(savedInterruptMask);
 }
 

@@ -13,7 +13,7 @@
 #include "particle/8024D018_4.H"
 #include "FX_2/80271B18.H"
 
-/* Returns a player's body lean on the ground: a controlled player on an accepted floor (func_802757E4_de) that
+/* Returns a player's body lean on the ground: a controlled player on an accepted floor (Region_TestPolygonSlopeFlag) that
  * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by
  * three eighths of its slope (at most 25 degrees), which the body tilt from GameObject_BuildActorDirectionTilt then replaces,
  * and leans along its heading by three quarters of the ground slope ahead from func_80240A98_de (at most 25),
@@ -21,7 +21,7 @@
  * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
 
 
-extern s32 func_802757E4_de(s32);
+extern s32 Region_TestPolygonSlopeFlag(s32);
 
 extern void Region_GetNodeNormal(CVector3 *, s32);
 
@@ -40,7 +40,7 @@ static inline s32 is_held(char *obj) {
 
 /* Plays a sound effect for an actor at a position: snaps the position to the nearest registered emitter
  * in D_8013B364 when there is one, draws a random direction and (except for sound 0xBD7) scales it to a
- * velocity of 409.6, then starts the sound through func_8028FFD0_de on D_80131600 with the actor's id and
+ * velocity of 409.6, then starts the sound through SetN64_SpawnModelEffect on D_80131600 with the actor's id and
  * the given volume. */
 
 
@@ -59,7 +59,7 @@ extern CVector3 *Nav_GetGraphPoint(void *, s32);
 
 extern void GraphU64_ScaleVector(void *, void *, f32);
 
-extern s32 func_8028FFD0_de(s32, s32, s32, CVector3, CVector3, s32, f32);
+extern s32 SetN64_SpawnModelEffect(s32, s32, s32, CVector3, CVector3, s32, f32);
 
 
 /* Callers write the lean through a pointer (the MIPS hidden result pointer); a native host cannot call a
@@ -86,7 +86,7 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 goto identity;
             }
             if (((LevelActor *)(obj))->flags & 0x300000) {
-                if (func_802757E4_de(((LevelActor *)(obj))->model) != 0) {
+                if (Region_TestPolygonSlopeFlag(((LevelActor *)(obj))->model) != 0) {
                     goto identity;
                 }
                 Region_GetNodeNormal(&normal, ((LevelActor *)(obj))->model);
@@ -153,7 +153,7 @@ void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     if (sound != 0xBD7) {
         GraphU64_ScaleVector(&velocity, &dir, 409.59998f);
     }
-    func_8028FFD0_de((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
+    SetN64_SpawnModelEffect((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
 }
 
 /** Reset three byte-sized fields. */

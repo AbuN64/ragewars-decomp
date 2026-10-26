@@ -29,7 +29,7 @@
 #include "RENDER_2/8025DE50_5.H"
 extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status g_playerSettings[];
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
@@ -81,7 +81,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2440))) = 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2444))) = 4;
-    temp_v0_2 = func_8040EC30_de(owner, 0x145);
+    temp_v0_2 = Frontend_FindWidgetByResourceId(owner, 0x145);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424))) = temp_v0_2;
     temp_v0_2->x = (u16) temp_v0_2->x - (u16) temp_v0_2->width;
@@ -96,7 +96,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     temp_a2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)));
     temp_a2->x = (u16) temp_a2->x + (temp_a2->width - (temp_v1 * 4));
-    temp_v0_3 = func_8040EC30_de(owner, 0x144);
+    temp_v0_3 = Frontend_FindWidgetByResourceId(owner, 0x144);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432))) = temp_v0_3;
     temp_v0_3->x = (u16) temp_v0_3->x + (u16) temp_v0_3->width;
@@ -114,15 +114,15 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     temp_a2_2->x = (u16) temp_a2_2->x - (temp_a2_2->width - (temp_v1_2 * 4));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2448))) = func_80419E54_de(0x141, 0x6E);
-    temp_v0_4 = func_8040EC30_de(owner, 0x13F);
+    temp_v0_4 = Frontend_FindWidgetByResourceId(owner, 0x13F);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = temp_v0_4;
     Frontend_SetWidgetFlag08(temp_v0_4, 0);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = func_8040EC30_de(owner, 0x154);
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = Frontend_FindWidgetByResourceId(owner, 0x154);
     var_a0 = g_playerSettings;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2460))) = func_8040EC30_de(owner, 0x155);
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2460))) = Frontend_FindWidgetByResourceId(owner, 0x155);
     (*(ResultsOptionsScreen **)&D_800E4690)->player = 0;
 loop_7:
     if (var_a0[0x78] != 1) {
@@ -147,13 +147,13 @@ loop_7:
     func_80427008_de();
     func_80427F10_de();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = func_8040EC30_de(owner, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = Frontend_FindWidgetByResourceId(owner, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
     func_804280BC_de();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     func_8043C210_de(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
-    temp_v0_5 = func_8040EC30_de(owner, 0x151);
+    temp_v0_5 = Frontend_FindWidgetByResourceId(owner, 0x151);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2640))) = temp_v0_5;
     temp_v0_5->alpha = 0xFF;
@@ -175,11 +175,11 @@ loop_7:
     default:                                        /* switch 1 */
     case 1:                                         /* switch 1 */
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2656))) = func_8040EC30_de(owner, 0x13D);
-        func_80422170_de();
+        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2656))) = Frontend_FindWidgetByResourceId(owner, 0x13D);
+        Menu_InitializeOptionsScene();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2660))) = func_8040EC30_de(owner, 0x147);
-        func_8040EC30_de(owner, 0x148)->alpha = 0x6E;
+        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2660))) = Frontend_FindWidgetByResourceId(owner, 0x147);
+        Frontend_FindWidgetByResourceId(owner, 0x148)->alpha = 0x6E;
         /* fallthrough */
     case 2:                                         /* switch 1 */
         break;

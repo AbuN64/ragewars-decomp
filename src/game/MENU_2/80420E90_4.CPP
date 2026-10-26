@@ -16,7 +16,7 @@ extern void Cinema_ClearResponse();
 
 extern void func_80245A30_de();
 
-void func_80422020_de(void) {
+void Menu_ReleaseOptionsScene(void) {
     char *object;
 
     Cinema_ReleaseSequenceContext();
@@ -32,12 +32,12 @@ void func_80422020_de(void) {
     func_80245A30_de();
 }
 
-void func_804220A8_de(int key) {
- Globals_func_804220A8_de *g = &D_80140FE8_de;
+void Menu_SetOptionsSceneSelection(int key) {
+ GlobalsMenuSetOptionsSceneSelection *g = &D_80140FE8_de;
  GameplayCamera *o = g->camera;
  float width = 45.0f;
  float height = D_800DD610[1];
- State_func_804220A8_de *state = D_800E2830;
+ StateMenuSetOptionsSceneSelection *state = D_800E2830;
  int selection;
  o->fovY = width; o->aspect = height;
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;

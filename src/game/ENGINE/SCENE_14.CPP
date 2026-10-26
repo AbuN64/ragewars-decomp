@@ -43,7 +43,7 @@ extern s32 D_00285160;
 
 extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
-s32 func_8029076C_de(s32, s32);
+s32 SetN64_CollectVisibleEffectNodes(s32, s32);
 
 /* Advances the fractional animation clock and updates every active object with the resulting tick flag. */
 
@@ -184,7 +184,7 @@ void Scene_ReleaseCachedGeometry(void *arg0) {
 }
 
 void Scene_CollectVisibleEffects(s32 arg0) {
-    func_8029076C_de(arg0 + 0x11778, arg0);
+    SetN64_CollectVisibleEffectNodes(arg0 + 0x11778, arg0);
 }
 
 /** Clear the object field at offset 0x10BC. */

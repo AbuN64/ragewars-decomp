@@ -22,11 +22,11 @@
 
 extern void func_80297EA4_de(s32 arg0);
 
-extern void func_80411E18_de(s16 arg0);
+extern void Frontend_ReleaseReferencedBuffer(s16 arg0);
 
 
 
-extern void func_8040E67C_de(void *, ArgsCode80296014);
+extern void Frontend_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
 extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, ArgsCode80296014 *);
 
@@ -111,7 +111,7 @@ void func_80298ECC_de(void) {
         StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         {
             Element *element = D_8014D080->screens[D_8014D080->current].primary;
-            func_80411E18_de(element->id);
+            Frontend_ReleaseReferencedBuffer(element->id);
         }
     }
     D_8014D080->screens[D_8014D080->current].primary = 0;
@@ -159,8 +159,8 @@ void func_80298FE8_de(void) {
         do {
             index++;
             func_802A18F4_de();
-            func_8040E67C_de(*(void **)(offset + (s32)D_8014D080->screens), args);
-            func_8040E894_de();
+            Frontend_DrawVisibleWidgetClipped(*(void **)(offset + (s32)D_8014D080->screens), args);
+            Frontend_ResetTextClipBounds();
             func_802A18FC_de();
             Frontend_ComputeWidgetBounds(&first, &basis,
                           *(void **)(offset + (s32)D_8014D080->screens), &args);
@@ -210,7 +210,7 @@ void func_80299468_de(void) {
     Cache_FreeMemory(D_8014D080);
     D_8014D080 = 0;
     Smos_FreeControllerContext();
-    func_8040F568_de();
+    Frontend_NoOperation();
     func_80411F28_de();
 }
 

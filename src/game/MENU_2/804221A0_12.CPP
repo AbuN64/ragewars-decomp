@@ -15,7 +15,7 @@
 
 
 
-extern struct Screen_func_80422960_de *D_800E4518;
+extern struct ScreenMenuFinishTabOptionsTransition *D_800E4518;
 
 extern struct LevelActor *D_800E2830;
 
@@ -23,16 +23,16 @@ extern struct LevelActor *D_800E2830;
 
 
 
-extern s32 func_8043C308_de(struct Screen_func_80422960_de *);
-extern void Frontend_DrawMenuImage(struct Screen_func_80422960_de *);
-extern void func_8043C2A4_de(struct Screen_func_80422960_de *);
+extern s32 func_8043C308_de(struct ScreenMenuFinishTabOptionsTransition *);
+extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
+extern void func_8043C2A4_de(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_RequestScreenMode(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_804030E0_de(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 GraphU64_NextRandom(void);
 
-extern void func_802A230C_de(void);
+extern void Tsmos_RequestFrontendShutdown(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
@@ -41,7 +41,7 @@ extern void func_8042DEA0_de(void);
 
 
 
-s32 func_80422960_de(void *item, s32 unused1, s32 event) {
+s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
     s32 state;
     s32 humans;
     s32 i;
@@ -93,7 +93,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
                 } else {
                     Frontend_RequestScreenMode(settings->reserved580);
                 }
-                func_802A230C_de();
+                Tsmos_RequestFrontendShutdown();
                 return 0;
             }
             Items_ResetActorPools((u8 *)pause - 0x180C, 0);

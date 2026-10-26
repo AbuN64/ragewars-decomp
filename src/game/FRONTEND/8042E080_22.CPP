@@ -32,7 +32,7 @@ extern s32 D_8015402C;
 
 extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
-extern void func_802A230C_de(void);
+extern void Tsmos_RequestFrontendShutdown(void);
 
 
 
@@ -54,7 +54,7 @@ void func_8042DEA0_de(void) {
 
     MarkMenuEventHandled();
     func_80298368_de(2);
-    func_802A230C_de();
+    Tsmos_RequestFrontendShutdown();
     humans = 0;
     settings = (u8 *)&D_801462C8;
     for (i = 0; i < 8; i++) {

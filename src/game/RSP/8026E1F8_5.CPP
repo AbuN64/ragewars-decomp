@@ -217,7 +217,7 @@ void GraphU64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
     out[15] = (left[12] * right[3]) + (left[13] * right[7]) + (left[14] * right[11]) + (left[15] * right[15]);
 }
 #ifdef NON_MATCHING
-void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
+void GraphU64_PackFixedMatrix(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;
@@ -233,7 +233,7 @@ void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
     value = (src[(7) * 2]) * (D_800C4760_de); if (!(*(&(D_800C4760_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4760_de) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (D_800C4768_de); if (!(*(&(D_800C4768_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4768_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
 }
 #else
-INCLUDE_ASM("span_1000", func_8026FC9C_de);
+INCLUDE_ASM("span_1000", GraphU64_PackFixedMatrix);
 #endif
 #ifdef NON_MATCHING
 void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
@@ -936,7 +936,7 @@ void GraphU64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
     out[(3) * 4 + (3)] = (left[(3) * 4] * right[(3)]) + (left[(3) * 4 + 1] * right[4 + (3)]) + (left[(3) * 4 + 2] * right[8 + (3)]) + (left[(3) * 4 + 3] * right[12 + (3)]);
 }
 
-void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
+void GraphU64_PackFixedMatrix(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;

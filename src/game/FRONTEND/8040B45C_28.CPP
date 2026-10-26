@@ -3,6 +3,6 @@
 
 #if !(defined(VERSION_US))
 /** Perform no work. */
-void func_8040C948_de(void) {
+void Frontend_ReturnWithoutAction(void) {
 }
 #endif

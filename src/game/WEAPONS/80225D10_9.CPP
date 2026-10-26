@@ -16,7 +16,7 @@
 #include "RENDER_2/802192C0_6.H"
 
 /* Draws the marker over a player that is alive at 0x5E4: loads the player's matrix from its table at
-   0x1640 (the first entry while func_802A23B4_de reports a shared view, otherwise the entry for the current
+   0x1640 (the first entry while Tsmos_IsFrontendActive reports a shared view, otherwise the entry for the current
    view D_800D297C), sets the render and geometry modes, fills the five vertices of a green pyramid in
    D_800FE9F8 and emits them with its four triangles. Adapted from func_8021C698_de with the pyramid, the
    colour and the matrix selection changed. */
@@ -25,7 +25,7 @@ extern s32 D_800D297C;
 
 extern Gfx *g_displayListCursor;
 
-extern s32 func_802A23B4_de(void);
+extern s32 Tsmos_IsFrontendActive(void);
 
 extern void Geometry_InvalidateMaterialKeys(void);
 
@@ -227,7 +227,7 @@ void func_80229D28_de(Player16C0 *player) {
     s32 alpha;
 
     if (player->alive != 0) {
-        if (func_802A23B4_de() != 0) {
+        if (Tsmos_IsFrontendActive() != 0) {
             gSPMatrix(g_displayListCursor++, (u32) &player->markers[0], G_MTX_LOAD);
         } else {
             gSPMatrix(g_displayListCursor++, (u32) &player->markers[D_800D297C], G_MTX_LOAD);

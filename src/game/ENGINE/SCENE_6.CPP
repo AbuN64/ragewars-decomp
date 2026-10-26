@@ -184,7 +184,7 @@ s32 Scene_GetModelSectionTwoRecord(void *world, s32 arg1) {
     return base + (arg1 << 5);
 }
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 
 
@@ -199,7 +199,7 @@ void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2,
 
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->secondaryLevels, 0), index), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
@@ -221,7 +221,7 @@ void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2,
 void func_8028B4C8_de(void) {
 }
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 
 
@@ -240,7 +240,7 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
     field1B40C = world->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field84, 0), field1B40C), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg1 & 7);
@@ -259,7 +259,7 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
     base2[idx2 >> 3] &= ~mask;
 }
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 
 
@@ -276,7 +276,7 @@ s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex)
     field1B40C = world->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field84, 0), field1B40C), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     stateBits = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     i = bitIndex;

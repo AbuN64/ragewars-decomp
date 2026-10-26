@@ -25,14 +25,14 @@ Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     Record_func_802A1990_de *result;
     Record_func_802A1990_de *child;
 
-    source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x6C);
     XPlus_FillBytes(result, 0, 0x6C);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB65;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = func_8040EC30_de((void*)context, arg1 & 0xFFFF);
+    child = Frontend_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
     result->field_44 = child;
     child->fields_2C[3] = (s32)&result->field_60;
     result->field_4C = arg3;

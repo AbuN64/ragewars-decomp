@@ -45,7 +45,7 @@ extern signed char func_80411BE8_de(int entry, int index);
 extern short D_80153C2C;
 
 
-extern short func_80411C60_de(int index);
+extern short Frontend_GetFontLetterSpacing(int index);
 
 struct Manager_func_80411D18_de;
 struct Manager_func_80411D18_de {

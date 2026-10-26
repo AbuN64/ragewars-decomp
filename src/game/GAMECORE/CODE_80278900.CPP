@@ -17,7 +17,7 @@ extern s32 D_800D2978;
 
 
 
-f32 func_80278890_de(void *arg0)
+f32 Link_GetLightAnimationOffset(void *arg0)
 {
   ObjectRecAtBC *volume = arg0;
   u32 temp_a0;
@@ -34,7 +34,7 @@ f32 func_80278890_de(void *arg0)
 
 
 
-void func_8027892C_de(ObjectRecAt8 *object, u8 *colors) {
+void Link_AnimateVertexColors(ObjectRecAt8 *object, u8 *colors) {
     s32 state;
     s32 i;
     Vtx *record;
@@ -79,9 +79,9 @@ void func_8027892C_de(ObjectRecAt8 *object, u8 *colors) {
     }
 }
 
-/* Saves each vertex's base colour for the colour pulse (func_8027892C_de): copies the r, g, b of every
+/* Saves each vertex's base colour for the colour pulse (Link_AnimateVertexColors): copies the r, g, b of every
    vertex of the object into colors (4 bytes per vertex), clamped to 30..225. */
-void func_80278A08_de(ObjectRecAt8 *object, u8 *colors) {
+void Link_CaptureVertexColors(ObjectRecAt8 *object, u8 *colors) {
     s32 i, count;
     Vtx *records;
     Vtx *record;
@@ -123,7 +123,7 @@ void func_80278A08_de(ObjectRecAt8 *object, u8 *colors) {
 
 
 
-s32 func_80278ABC_de(void) {
+s32 Link_SumWorldSectionCounts(void) {
     s32 total = 0;
     s32 i;
     char *base = (char *)&g_world;
@@ -134,7 +134,7 @@ s32 func_80278ABC_de(void) {
     return total;
 }
 
-void func_80278B3C_de(s32 arg0, s32 count, CVector3 *vtx) {
+void Link_ApplyPackedVertexDeltas(s32 arg0, s32 count, CVector3 *vtx) {
     Table *t;
     s32 zero;
     s32 i;

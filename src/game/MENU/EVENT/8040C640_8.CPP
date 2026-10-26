@@ -6,24 +6,24 @@
 
 #if defined(VERSION_US)
 /* Releases the object D_800E42D0 holds through Cache_FreeMemory, clears D_800E42D0, calls
-   func_802A2360_de and func_802A23C4_de with 2, and returns zero. */
+   Tsmos_ActivateControllerState and Tsmos_SetModeOneFlag with 2, and returns zero. */
 extern void *D_800E42D0;
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 
-s32 func_80420B80_us(void) {
+s32 Menu_DestroyUsCharacterSelectionMenu(void) {
     Cache_FreeMemory(D_800E42D0);
     D_800E42D0 = 0;
-    func_802A2360_de();
-    func_802A23C4_de(2);
+    Tsmos_ActivateControllerState();
+    Tsmos_SetModeOneFlag(2);
     return 0;
 }
 
-/* Calls func_802A23C4_de with 1 and SoundElement_PlayFlatSound with 0xE78, and returns zero. */
+/* Calls Tsmos_SetModeOneFlag with 1 and SoundElement_PlayFlatSound with 0xE78, and returns zero. */
 
 
-s32 func_80420B50_de(void) {
-    func_802A23C4_de(1);
+s32 Menu_ActivateCharacterSelectionMode(void) {
+    Tsmos_SetModeOneFlag(1);
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }

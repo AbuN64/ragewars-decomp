@@ -3,18 +3,18 @@
 #include "COMMON/SCREEN.H"
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X))
-s32 func_80421E70_eu(void) {
+s32 Menu_HandleExtraOptionsChoice(void) {
     MarkMenuEventHandled();
     if (D_800E4400->open == 0) {
-        func_8042177C_de();
+        Menu_ShowExtraOptionsPanel();
     } else {
         switch (func_80299A08_de()) {
         case 0x3AC:
             func_8041A430_de(D_800E4400->dialog, 2);
-            func_804210E8_de();
+            Menu_ApplyExtraOptionFlags();
             break;
         case 0x3B6:
-            func_804213DC_de();
+            Menu_OpenOptionsKeypad();
             break;
         }
     }

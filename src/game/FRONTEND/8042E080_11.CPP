@@ -74,7 +74,7 @@ typedef struct {
 
 int Control_IsControllerConnected(int);
 u8 * XPlus_CopyString(u8 *, u8 *);
-char * func_80411D78_de(s32);
+char * Frontend_GetStringByIndex(s32);
 void SmpOverlay_SetSlotValue(void *, s32, s32);
 s32 SmpOverlay_GetSlotValue(void *, s32);
 void SmpOverlay_ShowSlotNode(void *, s32, void *);
@@ -185,40 +185,40 @@ void PAKInterface_RefreshPlayerPanel(s32 arg0) {
     switch (temp_v1) {                              /* switch 1 */
     case 0:                                         /* switch 1 */
 
-        temp_v0 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, PANEL_ROOT_ID);
+        temp_v0 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, PANEL_ROOT_ID);
         D_800E54A4->players[arg0].menuWidget = temp_v0;
         Frontend_SetWidgetFlag08(temp_v0, 1);
-        text_node = (s32)func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, PANEL_TEXT_ID);
+        text_node = (s32)Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, PANEL_TEXT_ID);
         ((SetupTextNode *)text_node)->unk38 = D_800E54A4->players[arg0].nameText;
         temp_v1_2 = D_800E54A4->phase;
         
         switch (temp_v1_2) {                        /* switch 2 */
         case 1:                                     /* switch 2 */
         case 7:                                     /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_17_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_17_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 2:                                     /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_2_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_2_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 3:                                     /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_3_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_3_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 4:                                     /* switch 2 */
         case 6:                                     /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_46_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_46_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 5:                                     /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_5_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_5_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 0:                                     /* switch 2 */
         default:                                    /* switch 2 */
-            temp_s1 = func_80411D78_de(MODE_DEFAULT_ID);
-            temp_copy_source = func_80411D78_de(((SetupTextNode *)text_node)->unk34);
+            temp_s1 = Frontend_GetStringByIndex(MODE_DEFAULT_ID);
+            temp_copy_source = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         }
 
@@ -227,16 +227,16 @@ void PAKInterface_RefreshPlayerPanel(s32 arg0) {
         func_8042E9B4_de((&D_800E54A4->players[arg0])->nameText, g_modeToken, temp_s1);
         var_v0 = arg0 * 8;
         if (D_800E54A4->phase == 6) {
-            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, MODE_HIDE_ID), 0);
+            Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, MODE_HIDE_ID), 0);
             var_v0 = arg0 * 8;
         }
         break;
     case 1:                                         /* switch 1 */
 
-        temp_v0_3 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_1_2EC);
+        temp_v0_3 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_1_2EC);
         D_800E54A4->players[arg0].menuWidget = temp_v0_3;
         Frontend_SetWidgetFlag08(temp_v0_3, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_1_2EE));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_1_2EE));
         var_v0 = arg0 * 8;
         break;
     case 2:                                         /* switch 1 */
@@ -244,24 +244,24 @@ void PAKInterface_RefreshPlayerPanel(s32 arg0) {
         var_a0_3 = D_800E54A4->players[arg0].sprite;
         var_a1_2 = UI_CASE_2_2D4;
 block_36:
-        temp_v0_4 = func_8040EC30_de(var_a0_3, var_a1_2);
+        temp_v0_4 = Frontend_FindWidgetByResourceId(var_a0_3, var_a1_2);
         D_800E54A4->players[arg0].menuWidget = temp_v0_4;
         Frontend_SetWidgetFlag08(temp_v0_4, 1);
         var_v0 = arg0 * 8;
         break;
     case 3:                                         /* switch 1 */
 
-        temp_v0_5 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_3_2BB);
+        temp_v0_5 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_3_2BB);
         D_800E54A4->players[arg0].menuWidget = temp_v0_5;
         Frontend_SetWidgetFlag08(temp_v0_5, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_3_2BC));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_3_2BC));
         break;
     case 4:                                         /* switch 1 */
 
-        temp_v0_6 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_4_2D5);
+        temp_v0_6 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_4_2D5);
         D_800E54A4->players[arg0].menuWidget = temp_v0_6;
         Frontend_SetWidgetFlag08(temp_v0_6, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_4_2DA));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_4_2DA));
         func_80433EA0_de(arg0);
         var_v0 = arg0 * 8;
         break;
@@ -313,67 +313,67 @@ case22_selected:
         break;
     case 6:                                         /* switch 1 */
 
-        temp_v0_7 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_6_2E4);
+        temp_v0_7 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_6_2E4);
         D_800E54A4->players[arg0].menuWidget = temp_v0_7;
         Frontend_SetWidgetFlag08(temp_v0_7, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_6_2E8));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_6_2E8));
         func_80434C2C_de(arg0);
         var_v0 = arg0 * 8;
         break;
     case 7:                                         /* switch 1 */
 
-        temp_v0_8 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_7_2CA);
+        temp_v0_8 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_7_2CA);
         D_800E54A4->players[arg0].menuWidget = temp_v0_8;
         Frontend_SetWidgetFlag08(temp_v0_8, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_7_2CC));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_7_2CC));
 
         var_a0_4 = D_800E54A4->players[arg0].menuWidget;
         var_s1 = D_800E54A4->players[arg0].chosen;
         var_a1_3 = UI_CASE_7_2CB;
 
-        (((MenuWidget *)(func_8040EC30_de(var_a0_4, var_a1_3)))->text) = (&D_800E54A4->players[arg0])->slots[var_s1];
+        (((MenuWidget *)(Frontend_FindWidgetByResourceId(var_a0_4, var_a1_3)))->text) = (&D_800E54A4->players[arg0])->slots[var_s1];
         goto block_84;
     case 8:                                         /* switch 1 */
 
-        temp_v0_10 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_8_2CE);
+        temp_v0_10 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_8_2CE);
         D_800E54A4->players[arg0].menuWidget = temp_v0_10;
         Frontend_SetWidgetFlag08(temp_v0_10, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_8_2CF));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_8_2CF));
 
         var_s1 = D_800E54A4->players[arg0].slot;
-        temp_v0_10 = func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_8_2CB);
+        temp_v0_10 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_8_2CB);
 
         ((MenuWidget *)temp_v0_10)->text = D_800E54A4->players[arg0].names[var_s1].code;
         goto block_84;
     case 9:                                         /* switch 1 */
 
-        temp_v0_12 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_9_2C6);
+        temp_v0_12 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_9_2C6);
         D_800E54A4->players[arg0].menuWidget = temp_v0_12;
         Frontend_SetWidgetFlag08(temp_v0_12, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_9_2C8));
-        ((MenuWidget *)func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_9_2C7))->text = D_800E54A4->players[D_800E54A4->links[0].player].slots[D_800E54A4->links[0].entry];
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_9_2C8));
+        ((MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_9_2C7))->text = D_800E54A4->players[D_800E54A4->links[0].player].slots[D_800E54A4->links[0].entry];
         goto block_84;
     case 10:                                        /* switch 1 */
 
-        temp_v0_4 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_10_2A4);
+        temp_v0_4 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_10_2A4);
         D_800E54A4->players[arg0].menuWidget = temp_v0_4;
         Frontend_SetWidgetFlag08(temp_v0_4, 1);
         var_v0 = arg0 * 8;
         break;
     case 11:                                        /* switch 1 */
 
-        temp_v0_13 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_11_2D1);
+        temp_v0_13 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_11_2D1);
         D_800E54A4->players[arg0].menuWidget = temp_v0_13;
         Frontend_SetWidgetFlag08(temp_v0_13, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_11_2D2));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_11_2D2));
         break;
     case 12:                                        /* switch 1 */
 
-        temp_v0_14 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_12_2F2);
+        temp_v0_14 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_12_2F2);
         D_800E54A4->players[arg0].menuWidget = temp_v0_14;
         Frontend_SetWidgetFlag08(temp_v0_14, 1);
         temp_s2 = 0;
-        var_s1 = (s32)func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_12_2F3);
+        var_s1 = (s32)Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_12_2F3);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, (void *)var_s1);
  
 
@@ -403,10 +403,10 @@ case22_selected:
         break;
     case 13:                                        /* switch 1 */
 
-        temp_v0_16 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_13_2AF);
+        temp_v0_16 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_13_2AF);
         D_800E54A4->players[arg0].menuWidget = temp_v0_16;
         Frontend_SetWidgetFlag08(temp_v0_16, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_13_2B6));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_13_2B6));
         func_80433914_de(arg0);
         var_v0 = arg0 * 8;
         break;
@@ -415,7 +415,7 @@ case22_selected:
         SmpOverlay_ShowSlotById((s32) D_800E54A4->field0, arg0, SETUP_LABEL_ID);
         SmpOverlay_SetSlotValue(D_800E54A4->root, arg0, 1);
 
-        temp_v0_17 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_17_2A5);
+        temp_v0_17 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_17_2A5);
         D_800E54A4->players[arg0].menuWidget = temp_v0_17;
         Frontend_SetWidgetFlag08(temp_v0_17, 1);
         if (func_80435528_de() == 0) {
@@ -434,7 +434,7 @@ case22_selected:
             }
             goto mode_default;
 mode_five:
-            func_802A2394_de();
+            Tsmos_DeactivateControllerState();
             func_8043C278_de(D_800E54A4->menu);
             goto mode_end;
 mode_six:
@@ -456,59 +456,59 @@ mode_end:;
         break;
     case 15:                                        /* switch 1 */
 
-        temp_v0_18 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_15_2EF);
+        temp_v0_18 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_15_2EF);
         D_800E54A4->players[arg0].menuWidget = temp_v0_18;
         Frontend_SetWidgetFlag08(temp_v0_18, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_15_2F1));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_15_2F1));
         break;
     case 16:                                        /* switch 1 */
 
-        temp_v0_19 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_16_2B7);
+        temp_v0_19 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_16_2B7);
         D_800E54A4->players[arg0].menuWidget = temp_v0_19;
         Frontend_SetWidgetFlag08(temp_v0_19, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_16_2B9));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_16_2B9));
         var_a1_3 = UI_CASE_16_2BA;
 
         var_a0_4 = D_800E54A4->players[arg0].menuWidget;
         var_s1 = D_800E54A4->players[arg0].record;
 block_61:
 
-        (((MenuWidget *)(func_8040EC30_de(var_a0_4, var_a1_3)))->text) = (&D_800E54A4->players[arg0])->slots[var_s1];
+        (((MenuWidget *)(Frontend_FindWidgetByResourceId(var_a0_4, var_a1_3)))->text) = (&D_800E54A4->players[arg0])->slots[var_s1];
         goto block_84;
     case 21:                                        /* switch 1 */
 
-        temp_v0_21 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_21_2E1);
+        temp_v0_21 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_21_2E1);
         D_800E54A4->players[arg0].menuWidget = temp_v0_21;
         Frontend_SetWidgetFlag08(temp_v0_21, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_21_2E2));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_21_2E2));
         break;
     case 23:                                        /* switch 1 */
 
-        temp_v0_22 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_23_2AC);
+        temp_v0_22 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_23_2AC);
         D_800E54A4->players[arg0].menuWidget = temp_v0_22;
         Frontend_SetWidgetFlag08(temp_v0_22, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_23_2AE));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_23_2AE));
         break;
     case 24:                                        /* switch 1 */
 
-        temp_v0_23 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_24_2A9);
+        temp_v0_23 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_24_2A9);
         D_800E54A4->players[arg0].menuWidget = temp_v0_23;
         Frontend_SetWidgetFlag08(temp_v0_23, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_24_2AA));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_24_2AA));
         break;
     case 25:                                        /* switch 1 */
 
-        temp_v0_24 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_25_2EA);
+        temp_v0_24 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_25_2EA);
         D_800E54A4->players[arg0].menuWidget = temp_v0_24;
         Frontend_SetWidgetFlag08(temp_v0_24, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_25_2EB));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_25_2EB));
         break;
     case 26:                                        /* switch 1 */
 
-        temp_v0_25 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_26_2A6);
+        temp_v0_25 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_26_2A6);
         D_800E54A4->players[arg0].menuWidget = temp_v0_25;
         Frontend_SetWidgetFlag08(temp_v0_25, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_26_2A7));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_26_2A7));
         break;
 case27_found:
         SmpOverlay_ShowSlotById((s32) D_800E54A4->field0, arg0, var_s0);
@@ -558,17 +558,17 @@ case27_done:
         break;
     case 28:                                        /* switch 1 */
 
-        temp_v0_26 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_28_2DE);
+        temp_v0_26 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_28_2DE);
         D_800E54A4->players[arg0].menuWidget = temp_v0_26;
         Frontend_SetWidgetFlag08(temp_v0_26, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_28_2DF));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_28_2DF));
         break;
     case 29:                                        /* switch 1 */
 
-        temp_v0_27 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_29_2BF);
+        temp_v0_27 = Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].sprite, UI_CASE_29_2BF);
         D_800E54A4->players[arg0].menuWidget = temp_v0_27;
         Frontend_SetWidgetFlag08(temp_v0_27, 1);
-        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_29_2C0));
+        SmpOverlay_ShowSlotNode(D_800E54A4->root, arg0, Frontend_FindWidgetByResourceId(D_800E54A4->players[arg0].menuWidget, UI_CASE_29_2C0));
         var_v0 = arg0 * 8;
         break;
     default:                                        /* switch 1 */

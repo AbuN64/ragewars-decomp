@@ -19,17 +19,17 @@
 extern s32 D_800D2C90;
 extern s8 D_8010BBB8;
 extern void Frontend_SetupRandomTeams(void);
-void func_802A2090_de(void) {
+void Tsmos_UpdateFrontend(void) {
     s32 mode;
     s32 value;
     s32 active;
     s32 state;
     if (D_800D2C98 == 1) {
-        func_802A17C4_de();
+        ESmem_SwapFrameHeap();
         mode = GetMenuScreenOwner();
         func_802995D4_de(mode, 0xE08, 0, 0, 0);
         func_80298FE8_de();
-        func_80410448_de();
+        Frontend_EvictExpiredImages();
         func_802A1944_de();
         mode = GetMenuScreenOwner();
         active = 1;
@@ -51,7 +51,7 @@ mode_done:
         if ((D_801462C8.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
             Frontend_SetupRandomTeams();
             func_8042DEA0_de();
-            func_802A2400_de(0.0f);
+            Tsmos_SetIdleTimer(0.0f);
         }
         D_800CDA30_de.value += D_800D2988;
         state = D_800CDA30_de.state;
@@ -63,14 +63,14 @@ mode_done:
             }
         }
         if (D_800D2C90 == 1) {
-            func_802A2434_de();
+            Tsmos_ShutdownFrontend();
         }
     }
 }
 #if defined(VERSION_DE)
 s32 func_802A2224_de();
 #elif defined(VERSION_EU)
-s32 func_802A2344_eu();
+s32 Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
 s32 func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -83,7 +83,7 @@ void Tsmos_InitFrontendOnce(void) {
 #if defined(VERSION_DE)
         func_802A2224_de();
 #elif defined(VERSION_EU)
-        func_802A2344_eu();
+        Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
         func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)

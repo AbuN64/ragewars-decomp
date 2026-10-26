@@ -16,7 +16,7 @@
 
 
 /** Store a scalar and clear its associated global state word. */
-void func_802A2400_de(float value) {
+void Tsmos_SetIdleTimer(float value) {
     D_800CDA30_de.value = value;
     D_8011FAC0.transitionTime = 0;
 }

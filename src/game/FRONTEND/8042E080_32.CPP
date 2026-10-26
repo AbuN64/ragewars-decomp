@@ -21,7 +21,7 @@ enum { PAK_LIST_FIELD = 726 };
    70-byte name entries at 0x658 from the scroll position, and points item PAK_LIST_FIELD of the player's
    window at 0xC at the code at 0x3C of the entry under the cursor. */
 
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 void func_80434250_de(s32 player, s32 direction) {
     s32 i;
@@ -51,7 +51,7 @@ void func_80434250_de(s32 player, s32 direction) {
             D_800E54A4->players[player].displayNames[D_800E54A4->players[player].scroll + i].text;
     }
     cursor = D_800E54A4->players[player].slot;
-    func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_LIST_FIELD)->text =
+    Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_LIST_FIELD)->text =
         D_800E54A4->players[player].displayNames[cursor].code;
 }
 

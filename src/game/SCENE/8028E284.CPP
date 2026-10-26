@@ -19,7 +19,7 @@
 
 extern LevelActor *D_800F3CD0[],*D_800F3D0C;
 extern s32 XPlus_NextRandomInteger(void);
-void func_8028E284_de(SceneRecAt140 *scene) {
+void Scene_CollectSecondarySpecialActors(SceneRecAt140 *scene) {
  s32 count=0,i=9,offset=36;LevelActor *actor=scene->actors;
  D_800F3D0C=0;
  do {*(LevelActor **)((char *)D_800F3CD0+offset)=0;i--;offset-=4;} while(i>=0);
@@ -43,7 +43,7 @@ void func_8028E284_de(SceneRecAt140 *scene) {
 
 extern void func_802AA8EC_de(void *table, s32 index, void **out, u8 *tag);
 
-void func_8028E390_de(void *unused0, void *table, u8 *remap) {
+void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
     s32 i;
     void *data;
     u8 tag;
@@ -108,7 +108,7 @@ void func_8028E390_de(void *unused0, void *table, u8 *remap) {
 extern u8 D_800D2910[];
 extern s32 PpDecom_UnpackResource(void *resource, s32 flags);
 
-void func_8028E4A4_de(void *unused0, void **resource) {
+void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
     s32 i;
     void *data;
     u8 tag;
@@ -171,7 +171,7 @@ void func_8028E4A4_de(void *unused0, void **resource) {
     } while (0);
 }
 
-/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2920, once the resource has been loaded by func_80285180_de. Adapted from func_8028E4A4_de with the nibble table changed to D_800D2920. */
+/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2920, once the resource has been loaded by func_80285180_de. Adapted from Scene_UnpackImagesWithLowBoost with the nibble table changed to D_800D2920. */
 
 
 
@@ -179,7 +179,7 @@ void func_8028E4A4_de(void *unused0, void **resource) {
 
 extern u8 D_800D2920[];
 
-void func_8028E5D0_de(void *unused0, void **resource) {
+void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     s32 i;
     void *data;
     u8 tag;
@@ -255,7 +255,7 @@ const unsigned int D_blob_5ed4fa86953393fbfcea[1] = {
 };
 #endif
 
-s32 func_8028E6FC_de(Shared_World *arg0)
+s32 Scene_TestSectorSectionTwoEntries(Shared_World *arg0)
 {
   Shared_World *elem;
   s32 i;
@@ -294,7 +294,7 @@ s32 func_8028E6FC_de(Shared_World *arg0)
 }
 
 /** Return an indexed record from the table at object offset 0xAC. */
-void *func_8028E770_de(struct Shared_World *object, int index) {
+void *Scene_GetStridedActorRecord(struct Shared_World *object, int index) {
     char *base = (char *)object->actorRecords;
     int stride = *(int *)base;
     return base + (index * stride + 8);
@@ -305,7 +305,7 @@ extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *a
 
 
 
-s32 func_8028E78C_de(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
+s32 Scene_TestNearbyActiveActor(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
     CVector3 vector;
     f32 magnitude;
     u16 type;
@@ -339,7 +339,7 @@ s32 func_8028E78C_de(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
 
 
 
-s32 func_8028E860_de(ObjRecAtE4V2 *player, CVector3 *arg1) {
+s32 Scene_ClassifyNearbySpecialActor(ObjRecAtE4V2 *player, CVector3 *arg1) {
     CVector3 delta;
     u16 type;
 

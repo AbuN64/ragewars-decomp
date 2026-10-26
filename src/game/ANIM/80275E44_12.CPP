@@ -120,7 +120,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
 
 
 
-s32 func_80277128_de(ObjectRecAtBC *arg0, CVector3 arg1,
+s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *arg0, CVector3 arg1,
                   CVector3 *arg4, f32 *arg5) {
     f32 temp_f0;
     f32 var_f0;

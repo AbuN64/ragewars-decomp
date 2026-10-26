@@ -39,7 +39,7 @@ extern s32 *Geometry_CollectMaterialResources(void **arg0, s32 arg1, s32 *arg2);
 
 extern void Cache_MarkResourceInUse(s32, s32);
 
-extern void func_8027892C_de(void *object, void *colors);
+extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
@@ -159,7 +159,7 @@ void StaticInstance_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *
             char *colors = (char *)header + header[2];
 
             if (owner->colorFrame != (u8)D_800D2978) {
-                func_8027892C_de(object, colors);
+                Link_AnimateVertexColors(object, colors);
             }
             data = object;
         } else {

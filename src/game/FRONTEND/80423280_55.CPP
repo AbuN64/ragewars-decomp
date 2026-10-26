@@ -21,25 +21,25 @@ void func_8042CC74_de(void)
     bank = 0;
     offset = 0;
     do {
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[0]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[0]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[2]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[2]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[4]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[4]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[6]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[6]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[8]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[8]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[10]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[10]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[12]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[12]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[14]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[14]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[16]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[16]);
         Frontend_SetWidgetFlag08(resource, 0);
-        resource = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[bank].ids[18]);
+        resource = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[18]);
         Frontend_SetWidgetFlag08(resource, 0);
         offset += 0x28;
         bank++;
@@ -85,11 +85,11 @@ void func_8042CE74_de(void) {
     CVector3 position;
     if (PREVIEW_SCREEN->model != -1) {
 #if defined(VERSION_DE)
-        item = func_8040EC30_de(PREVIEW_SCREEN->window, 0x263);
+        item = Frontend_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x263);
 #elif defined(VERSION_EU_X)
-        item = func_8040EC30_de(PREVIEW_SCREEN->window, 0x26C);
+        item = Frontend_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x26C);
 #else
-        item = func_8040EC30_de(PREVIEW_SCREEN->window, 0x268);
+        item = Frontend_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x268);
 #endif
         Frontend_SetWidgetFlag08(item, 1);
         item->alpha = 0xAF;

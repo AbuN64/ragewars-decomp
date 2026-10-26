@@ -74,7 +74,7 @@ f32 GameObject_GetActorHeight(void *);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 s32 Scene_GetIndexedModelResource(void *, s32);
 void Scene_SampleWorldLighting(void *, CVector3 *, void *);
-void func_80290950_de(void *, void *);
+void SetN64_RecycleEffectNode(void *, void *);
 
 
 
@@ -89,7 +89,7 @@ extern s32 D_800CD764_de[];
 
 
 
-void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10)
+void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10)
 {
   CVector3 center;
   s32 temp_v0;
@@ -103,7 +103,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   }
   if ((((WorldRecAt3C08 *)(arg0))->free) == 0)
   {
-    func_80290950_de(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
+    SetN64_RecycleEffectNode(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
   }
   temp_s0 = ((WorldRecAt3C08 *)(arg0))->free;
   temp_v1 = ((WorldRecAt3C08 *)(arg0))->head;
@@ -170,7 +170,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   return temp_s0;
 }
 
-/* Updates a world's active actors: counts each actor's lifetime down by the frame time and expires it when the lifetime runs out or when its bounds leave the world box D_801031F0 (unless it is flagged 0x200); an expired active actor loses its active bit, decrements its owner's counter and moves from the active list to the free list, and every other actor is updated through func_80290424_de. */
+/* Updates a world's active actors: counts each actor's lifetime down by the frame time and expires it when the lifetime runs out or when its bounds leave the world box D_801031F0 (unless it is flagged 0x200); an expired active actor loses its active bit, decrements its owner's counter and moves from the active list to the free list, and every other actor is updated through SetN64_UpdateEffectMotionAndBounds. */
 
 
 
@@ -179,9 +179,9 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
 
 extern Box D_801031F0;
 extern f32 D_800D2988;
-extern void func_80290424_de(SceneEffect *actor);
+extern void SetN64_UpdateEffectMotionAndBounds(SceneEffect *actor);
 
-void func_80290238_de(WorldRecAt3C08 *world) {
+void SetN64_UpdateEffectPool(WorldRecAt3C08 *world) {
     SceneEffect *actor;
     SceneEffect *next;
     s32 expired;
@@ -232,7 +232,7 @@ void func_80290238_de(WorldRecAt3C08 *world) {
                 world->free = actor;
             }
         } else {
-            func_80290424_de(actor);
+            SetN64_UpdateEffectMotionAndBounds(actor);
         }
     } while (next != 0);
 }
@@ -242,7 +242,7 @@ void func_80290238_de(WorldRecAt3C08 *world) {
 
 
 
-void func_80290408_de(struct EffectSlot *effectSlot) {
+void SetN64_InitializeEffectSlot(struct EffectSlot *effectSlot) {
     effectSlot->definition = &g_defaultEffectDefinition;
     effectSlot->active = 3;
     effectSlot->state = 0;
@@ -257,7 +257,7 @@ extern f32 D_800C53A4_de;
 extern void func_8024F4A0_de(SceneEffect *);
 extern void Unicol_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
 
-void func_80290424_de(SceneEffect *arg0)
+void SetN64_UpdateEffectMotionAndBounds(SceneEffect *arg0)
 {
   void *var_s1;
   f32 temp_f1;

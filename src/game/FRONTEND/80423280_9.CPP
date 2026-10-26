@@ -67,7 +67,7 @@ extern void Frontend_ResetJoinRequestEntries(void);
    screen D_800E4EF0 busy: 0x36B closes the menu through func_804294C4_de, sends code -1 to
    func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset func_80429654_de(0)
    and code 0x17 when func_802A1B18_de reports the screen's list at 0x34 non-empty; 0x36A always does
-   it with Frontend_SeatJoinRequests and code 0x19, then calls func_802A2394_de. Returns zero. */
+   it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
 
 
@@ -268,7 +268,7 @@ s32 func_804297F8_de(void) {
         Frontend_SeatJoinRequests();
         func_8042E988_de(0x19);
         func_802998A8_de();
-        func_802A2394_de();
+        Tsmos_DeactivateControllerState();
         break;
     }
     return 0;

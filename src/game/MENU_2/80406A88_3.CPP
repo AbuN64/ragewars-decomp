@@ -8,12 +8,12 @@ extern EuxDrawScreen *D_800E39C0;
 extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern void *func_8040EC30_de(void *, s32);
+extern void *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 func_802999A0_de(s32);
 extern s32 Frontend_CountUsedSlots(void);
-extern void func_8041E408_de(s32);
-extern void func_802A2360_de(void);
+extern void Frontend_UpdateJoinRequestDisplay(s32);
+extern void Tsmos_ActivateControllerState(void);
 /* Builds the pak-draw selection screen: allocates its 0x20-byte state, creates the four rows, hides the pointer item
    when the pad answer is 0x16, collects the three root items and hides their cursors, then shows the cursor of the
    current root. Returns 0. */
@@ -30,23 +30,23 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     SmpOverlay_ShowSlotById(window, 1, 0x38D);
     SmpOverlay_ShowSlotById(window, 2, 0x38D);
     SmpOverlay_ShowSlotById(window, 3, 0x38D);
-    item = func_8040EC30_de(window, 0x38F);
+    item = Frontend_FindWidgetByResourceId(window, 0x38F);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 0x16) {
         Frontend_SetWidgetFlag08(item, 0);
     }
     D_800E39C0->unk18 = 0;
     D_800E39C0->unk14 = 0;
-    D_800E39C0->roots[0] = func_8040EC30_de(window, 0x390);
-    D_800E39C0->roots[1] = func_8040EC30_de(window, 0x399);
-    D_800E39C0->roots[2] = func_8040EC30_de(window, 0x39A);
+    D_800E39C0->roots[0] = Frontend_FindWidgetByResourceId(window, 0x390);
+    D_800E39C0->roots[1] = Frontend_FindWidgetByResourceId(window, 0x399);
+    D_800E39C0->roots[2] = Frontend_FindWidgetByResourceId(window, 0x39A);
     D_800E39C0->count = Frontend_CountUsedSlots();
     for (i = 0; i < 3; i++) {
-        func_8041E408_de(i);
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->roots[i], 0x396), 0);
+        Frontend_UpdateJoinRequestDisplay(i);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->roots[i], 0x396), 0);
     }
-    func_802A2360_de();
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
+    Tsmos_ActivateControllerState();
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
     return 0;
 }
 #endif

@@ -86,8 +86,8 @@ struct CharacterSelectionRoot;
 typedef struct CharacterSelectionRoot CharacterSelectionRoot;
 
 
-struct State_func_80420C10_de;
-typedef struct State_func_80420C10_de State_func_80420C10_de;
+struct StateMenuCancelCharacterConfirmation;
+typedef struct StateMenuCancelCharacterConfirmation StateMenuCancelCharacterConfirmation;
 
 struct PanelRecord;
 typedef struct PanelRecord PanelRecord;
@@ -116,8 +116,8 @@ struct RosterSlot {
 
 struct MatchMenuApplySlotValueGfx;
 
-struct State_func_80420C10_de;
-struct State_func_80420C10_de {
+struct StateMenuCancelCharacterConfirmation;
+struct StateMenuCancelCharacterConfirmation {
     s32 a;
     s32 unk4;
     char p0[8];
@@ -131,7 +131,7 @@ struct State_func_80420C10_de {
 };
 
 
-extern s32 func_80420AD4_de(void);
+extern s32 Menu_CountPendingCharacterSelections(void);
 
-extern void func_80420438_de(s32);
+extern void Menu_RefreshPlayerCharacterVariants(s32);
 #endif

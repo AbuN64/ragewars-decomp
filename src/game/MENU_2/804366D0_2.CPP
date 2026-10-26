@@ -19,7 +19,7 @@ extern void *func_8041ABC0_de(s32, s32);
 extern void SmpButton_AppendListText(void *, char *);
 extern void *func_8041A580_de(s32, s32, s32);
 extern void *func_80419E54_de(s32, s32);
-extern void *func_8040EC30_de(s32, s32);
+extern void *Frontend_FindWidgetByResourceId(s32, s32);
 #define ST ((void **)D_800E5690)
 /* Builds the five player-settings controls and opens their parent screen. */
 s32 Menu_InitPlayerSettingsScreen(s32 root) {
@@ -42,7 +42,7 @@ s32 Menu_InitPlayerSettingsScreen(s32 root) {
     ST[1] = func_80419E54_de(PLAYER_SETTINGS_ID(0x5D), 0x6E);
     ((s32 *)D_800E5690)[9] = 3;
     ((s32 *)D_800E5690)[8] = -1;
-    ST[0xB] = func_8040EC30_de(root, PLAYER_SETTINGS_ID(0x5F));
+    ST[0xB] = Frontend_FindWidgetByResourceId(root, PLAYER_SETTINGS_ID(0x5F));
     ((s32 *)D_800E5690)[10] = 0;
     Menu_SelectPlayerSettingsEntry(0);
     return 0;

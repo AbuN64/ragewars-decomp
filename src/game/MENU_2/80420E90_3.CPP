@@ -26,10 +26,10 @@ void func_80298368_de(s32);
 void MarkMenuEventHandled();
 
                                   /* extern */
-void func_802A2360_de();
+void Tsmos_ActivateControllerState();
 
                                   /* extern */
-void func_802A2394_de();
+void Tsmos_DeactivateControllerState();
 
                                   /* extern */
 s32 func_8041A470_de(void *);
@@ -67,7 +67,7 @@ extern void MarkMenuEventHandled();
 /* Advances a filling or draining bar by the step and writes its level byte at 0x10 of the bar at
    0xC: while rising it scales the amount for the display and, at or above the wrap point, stores
    the remainder with the high bit set, and it finishes at 1000 by storing 0xFF, marking 0x4 and
-   calling func_802A2360_de; while falling it does the same from the other pair of constants and
+   calling Tsmos_ActivateControllerState; while falling it does the same from the other pair of constants and
    finishes at zero. Returns the finished flag. */
 
 
@@ -76,15 +76,15 @@ extern void MarkMenuEventHandled();
 
 
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 /* Resets a five-word record: clears the first three words, stores a value in the fourth and one
-   in the fifth, then calls func_802A2394_de. */
+   in the fifth, then calls Tsmos_DeactivateControllerState. */
 
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
-s32 func_80421BBC_de(void) {
+s32 Menu_DestroySixChoiceMenu(void) {
     Cache_FreeMemory(D_800E4450);
     D_800E4450 = 0;
     return 0;
@@ -92,7 +92,7 @@ s32 func_80421BBC_de(void) {
 
                      
 
-s32 func_80421BEC_de(void) {
+s32 Menu_UpdateSixChoiceMenu(void) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_a0;
@@ -100,10 +100,10 @@ s32 func_80421BEC_de(void) {
     CellRecAt1A *temp_v1;
 
     if (D_800E28E0 >= 2) {
-        func_802A2394_de();
+        Tsmos_DeactivateControllerState();
         return 0;
     }
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     temp_v0 = func_8041A470_de(D_800E4450->unk0);
     switch (temp_v0) {                              /* irregular */
     case 3:
@@ -133,7 +133,7 @@ block_12:
     }
 }
 
-s32 func_80421CE8_de(void) {
+s32 Menu_ChooseSixChoiceOption(void) {
     s32 option;
     u32 message;
     MarkMenuEventHandled();
@@ -190,7 +190,7 @@ done:
     return 0;
 }
 
-s32 func_80421D94_de(void) {
+s32 Menu_CancelSixChoiceMenu(void) {
     StateCode80420E90 *state;
 
     MarkMenuEventHandled();
@@ -200,7 +200,7 @@ s32 func_80421D94_de(void) {
     return 0;
 }
 
-s32 func_80421DD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSixChoiceEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -227,7 +227,7 @@ s32 func_80421DD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 /* Returns the word at offset 0x4 of a record. */
-s32 func_80421E60_de(s32 *record) {
+s32 Menu_GetFadeMeterDone(s32 *record) {
     return record[0x4 / 4];
 }
 
@@ -236,7 +236,7 @@ s32 func_80421E60_de(s32 *record) {
    word at offset 4. */
 
 
-void func_80421E6C_de(struct Triple *timer, s32 mode) {
+void Menu_SetFadeMeterDirection(struct Triple *timer, s32 mode) {
     if (timer->z != mode) {
         timer->z = mode;
         if (mode == 0) {
@@ -248,7 +248,7 @@ void func_80421E6C_de(struct Triple *timer, s32 mode) {
     }
 }
 
-s32 func_80421E9C_de(struct Meter *meter, s32 step) {
+s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
     struct Resource_func_80419E54_de *bar;
     s32 level;
     f32 value;
@@ -267,7 +267,7 @@ s32 func_80421E9C_de(struct Meter *meter, s32 step) {
             } else {
                 meter->bar->value = 0xFF;
                 meter->done = 1;
-                func_802A2360_de();
+                Tsmos_ActivateControllerState();
             }
             meter->amount = meter->amount + step;
         } else {
@@ -283,7 +283,7 @@ s32 func_80421E9C_de(struct Meter *meter, s32 step) {
             } else {
                 meter->bar->value = 0;
                 meter->done = 1;
-                func_802A2360_de();
+                Tsmos_ActivateControllerState();
             }
             meter->amount = meter->amount - step;
         }
@@ -291,13 +291,13 @@ s32 func_80421E9C_de(struct Meter *meter, s32 step) {
     return meter->done;
 }
 
-void func_80421FEC_de(struct Rec_func_8024C92C_de *record, s32 value) {
+void Menu_InitializeFadeMeter(struct Rec_func_8024C92C_de *record, s32 value) {
     record->y = 0;
     record->x = 0;
     record->z = 0;
     record->pad0 = value;
     record->pad1 = 1;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
 }
 
 #if defined(VERSION_US)

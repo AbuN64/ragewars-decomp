@@ -9,7 +9,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 
-extern void func_8028FDF8_de(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     LevelActor *entry;
@@ -56,7 +56,7 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     field80 = world->bitSections;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (index & 7);
@@ -108,7 +108,7 @@ s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer) {
     field1B40C = world->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
     SetN64_GetPackSection(table, 0);
-    func_8028FDF8_de((s32) table, 1);
+    SetN64_GetPackSectionSize((s32) table, 1);
     base = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (index & 7);
     i = index;

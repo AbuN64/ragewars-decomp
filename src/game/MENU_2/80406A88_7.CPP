@@ -2,14 +2,14 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_804235A8_eu Menu_UpdateLocalizedOptionsTransitions
+#define Menu_AnimateTabOptionsMenu Menu_UpdateLocalizedOptionsTransitions
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/S1_5.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
-s32 func_804235A8_eu(void) {
+s32 Menu_AnimateTabOptionsMenu(void) {
     s32 temp_s0;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -28,7 +28,7 @@ s32 func_804235A8_eu(void) {
     if (D_800E28E0 <= 0) {
         if ((func_8043C308_de(D_800E4518) != 1) && ((((Shared_OptionsScreen *)(D_800E4518))->state) == 0)) {
             (((Shared_OptionsScreen *)(D_800E4518))->state) = 1;
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             return 0;
         }
         temp_s0 = D_800E2830->state3C;

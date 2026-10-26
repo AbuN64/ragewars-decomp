@@ -33,7 +33,7 @@
  * 0x800E1B10 = 2147483600.0 (float, D_800EE160 in this cartridge's tables)
  */
 
-void func_802A2360_de(void);
+void Tsmos_ActivateControllerState(void);
 
 void func_80419F24_de(void *);
 
@@ -122,7 +122,7 @@ block_7:
         break;
     case 3:
         if (D_800E4F60->unk_460 == 0) {
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             var_a1 = 0;
             var_a0_3 = D_800E4F60->unk_458;
             D_800E4F60->unk_460 = 1;
@@ -157,7 +157,7 @@ block_7:
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 8:
-        temp_v0 = ((ListScreenItem *)func_8040EC30_de(root, 0x316U))->alpha;
+        temp_v0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, 0x316U))->alpha;
         temp_s0 = temp_v0 >> 1;
         func_8042A7B4_de(temp_s0);
         if (temp_s0 < 0xA) {
@@ -167,7 +167,7 @@ block_7:
         }
         break;
     case 9:
-        temp_s0 = ((ListScreenItem *)func_8040EC30_de(root, 0x316U))->alpha;
+        temp_s0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, 0x316U))->alpha;
         temp_s0 = (temp_s0 + 1) * 2;
         if (temp_s0 >= 0x42) {
             temp_s0 = 0x41;

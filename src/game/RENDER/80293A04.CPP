@@ -51,7 +51,7 @@ void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
 
 
 #if defined(VERSION_EU)
-extern void func_802A2344_eu(void);
+extern void Tsmos_InitializeEuropeanFrontend(void);
 #elif defined(VERSION_EU_X)
 extern void func_802A2374_eu_x(void);
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -79,7 +79,7 @@ void func_80293B28_de(void *session) {
                 D_8014288C = 0;
                 
 #if defined(VERSION_EU)
-func_802A2344_eu
+Tsmos_InitializeEuropeanFrontend
 #elif defined(VERSION_EU_X)
 func_802A2374_eu_x
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -96,7 +96,7 @@ func_802A2224_de
                 D_8014288C = 0;
                 
 #if defined(VERSION_EU)
-func_802A2344_eu
+Tsmos_InitializeEuropeanFrontend
 #elif defined(VERSION_EU_X)
 func_802A2374_eu_x
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)

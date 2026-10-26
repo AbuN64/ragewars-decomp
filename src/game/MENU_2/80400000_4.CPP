@@ -75,9 +75,9 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
         firstR = SetN64_GetPackSection(firstPart, 2);
         size += splineRecordSize(firstP->count,firstR->count);
     }
-    sc = func_8028FEB8_de(c);
-    sa = func_8028FEB8_de(a);
-    sb = func_8028FEB8_de(b);
+    sc = SetN64_GetRecordBlockSize(c);
+    sa = SetN64_GetRecordBlockSize(a);
+    sb = SetN64_GetRecordBlockSize(b);
     output = Cache_AllocResourceBlock(0, handle, size + sa + sb + sc + 24);
     if (output == 0) return;
     pack = output->pack;

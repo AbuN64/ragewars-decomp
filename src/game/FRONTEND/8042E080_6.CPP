@@ -12,7 +12,7 @@
 
 extern void func_80298368_de(s32);
 extern void MarkMenuEventHandled(void);
-extern void func_802A2360_de(void);
+extern void Tsmos_ActivateControllerState(void);
 extern void func_80419F24_de(void *);
 extern void SmpFlicker_StartFlicker(void *, s32);
 
@@ -63,7 +63,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             }
             break;
         case 3:
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             break;
         case 4:
             D_800E54A4->timer = RW_CLAMP(D_800E54A4->timer - 1, 0, D_800E54A4->timer);

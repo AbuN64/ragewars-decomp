@@ -12,7 +12,7 @@
 
 
 
-void func_8040C950_de(Slider *slider) {
+void Frontend_UpdateSliderGeometry(Slider *slider) {
     s32 pos;
 
     if (slider->flags & 1) {

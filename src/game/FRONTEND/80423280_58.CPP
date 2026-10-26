@@ -24,14 +24,14 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own state type */
     D_800E5430 = (struct State_func_8042D9E8_de *) Cache_AllocateMemory(0x24);
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     handle = func_8041A280_de(0x398, 0x399);
     state = D_800E5430;
     state->menu = handle;
     func_8041A47C_de(handle);
     func_8041B110_de(0x39C);
     /* the MenuWidget view names the alpha byte at +0x10 and the text pointer at +0x34 that the hub's Item omits */
-    node = (struct MenuWidget *) func_8040EC30_de((void *) arg0, 0x39A);
+    node = (struct MenuWidget *) Frontend_FindWidgetByResourceId((void *) arg0, 0x39A);
     state = D_800E5430;
     state->window = node;
     node->alpha = 0xF;
@@ -39,7 +39,7 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
     state = D_800E5430;
     state->button = handle;
     state->delay = 3;
-    node = (struct MenuWidget *) func_8040EC30_de((void *) arg0, 0x39D);
+    node = (struct MenuWidget *) Frontend_FindWidgetByResourceId((void *) arg0, 0x39D);
     state = D_800E5430;
     text = &state->text;
     node->text = text;

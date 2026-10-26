@@ -17,7 +17,7 @@ extern s32 func_802833D0_de(void *host);
 
 extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
-/* Forwards a position read from an object to func_8028FFD0_de on the global D_80131600 with a zero offset and a zero trailing weight, returning its result. Adapted from Scene_SpawnUnrotatedEffect with the base argument, the source vector, the trailing arguments passed as a by-value struct and the return value changed. */
+/* Forwards a position read from an object to SetN64_SpawnModelEffect on the global D_80131600 with a zero offset and a zero trailing weight, returning its result. Adapted from Scene_SpawnUnrotatedEffect with the base argument, the source vector, the trailing arguments passed as a by-value struct and the return value changed. */
 
 
 
@@ -27,7 +27,7 @@ extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
 
 
-extern s32 func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
+extern s32 SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
 void Events_SpawnAttachedEffect(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unused, Spawn spawn) {
     Vec3f scale;
@@ -91,7 +91,7 @@ s32 Events_SpawnPositionedEffect(s32 unused0, Input80216D3C *arg1, s32 unused2, 
     scale.x = arg6.scale;
     scale.y = arg6.scale;
     scale.z = arg6.scale;
-    return func_8028FFD0_de((s32)&D_80131600, 0, arg6.id, zero, arg1->vec, 0, 0.0f);
+    return SetN64_SpawnModelEffect((s32)&D_80131600, 0, arg6.id, zero, arg1->vec, 0, 0.0f);
 }
 
 typedef struct SoundDefinition { s32 kind; } SoundDefinition;

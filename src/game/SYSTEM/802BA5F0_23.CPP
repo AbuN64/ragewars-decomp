@@ -24,13 +24,13 @@ extern struct OSMesgQueue D_80149A80;
 extern void *D_80149AA0[5];
 extern u64 D_8014ED10_de[0x200];
 
-void func_802BA5F0_eu(s32 arg0) {
-    s32 temp_v0;
-    s32 var_s3;
-    u32 temp_v0_2;
+void func_802BA5F0_eu(s32 managerPriority) {
+    s32 currentPriority;
+    s32 restorePriority;
+    u32 savedInterruptMask;
 
     if (D_800D4420.active == 0) {
-        var_s3 = -1;
+        restorePriority = -1;
         func_802BB9F8_de();
         osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
         D_80149AC0.hdr.type = 0xD;
@@ -41,12 +41,12 @@ void func_802BA5F0_eu(s32 arg0) {
         D_80149AE0.hdr.retQueue = 0;
         osSetEventMesg(7, &D_80149A80, &D_80149AC0);
         osSetEventMesg(3, &D_80149A80, &D_80149AE0);
-        temp_v0 = func_802BADA0_de(0);
-        if (temp_v0 < arg0) {
-            var_s3 = temp_v0;
-            func_802BB5F0_de(0, arg0);
+        currentPriority = func_802BADA0_de(0);
+        if (currentPriority < managerPriority) {
+            restorePriority = currentPriority;
+            func_802BB5F0_de(0, managerPriority);
         }
-        temp_v0_2 = __osDisableInt();
+        savedInterruptMask = __osDisableInt();
         D_800D4420.active = 1;
         D_800D4420.cmdQueue = &D_80149A80;
         D_800D4420.evtQueue = &D_80149A80;
@@ -54,12 +54,12 @@ void func_802BA5F0_eu(s32 arg0) {
         D_800D4420.acsQueue = 0;
         D_800D4420.dma = 0;
         D_800D4420.edma = 0;
-        osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), arg0);
+        osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), managerPriority);
         func_802BA210_de();
         osStartThread(&D_80148850);
-        __osRestoreInt(temp_v0_2);
-        if (var_s3 != -1) {
-            func_802BB5F0_de(0, var_s3);
+        __osRestoreInt(savedInterruptMask);
+        if (restorePriority != -1) {
+            func_802BB5F0_de(0, restorePriority);
         }
     }
 }

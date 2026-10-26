@@ -119,7 +119,7 @@ extern f32 D_800DDB08_de[];
 extern f32 D_800DDB10;
 extern void func_8042D28C_de();
 
-extern void func_804220A8_de(s32);
+extern void Menu_SetOptionsSceneSelection(s32);
 
 extern char D_800DD9BC[];
 extern char D_800DD9C8[];

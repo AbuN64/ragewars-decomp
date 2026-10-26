@@ -7,17 +7,17 @@
 #include "TYPES.H"
 extern char D_80106248[], D_800C6080_eu_x[], D_0043D330_eu_x[];
 extern s32 D_800D2C90, D_800D2C98;
-extern void func_80255228_de(void *), func_80253908_de(s32), func_80414360_de(void), func_802A16F8_de(s32);
+extern void func_80255228_de(void *), func_80253908_de(s32), func_80414360_de(void), ESmem_InitializeFrameHeaps(s32);
 extern void func_80297FA0_de(s32, void *), Frontend_OpenResourceArchive(void *), SmpOverlay_RegisterOverlayClass(void), SmpFrameAnim_RegisterFrameAnimClass(void);
 extern void SmpFade_RegisterFadeClass(void), SmpButton_RegisterButtonClass(void), SmpFlicker_RegisterFlickerClass(void), SmpSlider_RegisterSliderClass(void);
-extern void SmpList_RegisterListClass(void), func_802A1960_de(void), func_802A2400_de(f32), func_802A2418_de(s32);
-extern void func_802A2360_de(void), func_802A23C4_de(s32), Frontend_LoadLanguageStringsIfAny(s32);
+extern void SmpList_RegisterListClass(void), func_802A1960_de(void), Tsmos_SetIdleTimer(f32), Tsmos_SetTimerState(s32);
+extern void Tsmos_ActivateControllerState(void), Tsmos_SetModeOneFlag(s32), Frontend_LoadLanguageStringsIfAny(s32);
 /* Brings the screen layer up: display state, resources, the menu builders, then the language-specific start sound. */
 void func_802A2374_eu_x(void) {
     func_80255228_de(D_80106248);
     func_80253908_de(0);
     func_80414360_de();
-    func_802A16F8_de(0x3000);
+    ESmem_InitializeFrameHeaps(0x3000);
     func_80297FA0_de(0x23, D_0043D330_eu_x);
     Frontend_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
@@ -29,12 +29,12 @@ void func_802A2374_eu_x(void) {
     SmpList_RegisterListClass();
     func_802A1960_de();
     D_800CBC14 = 0x3C;
-    func_802A2400_de(0.0f);
-    func_802A2418_de(1);
+    Tsmos_SetIdleTimer(0.0f);
+    Tsmos_SetTimerState(1);
     D_800D2C98 = 1;
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800D2C90 = 0;
-    func_802A23C4_de(2);
+    Tsmos_SetModeOneFlag(2);
     Frontend_LoadLanguageStringsIfAny(g_languageIndex);
 }
 #else

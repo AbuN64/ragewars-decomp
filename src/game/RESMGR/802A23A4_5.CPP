@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "RESMGR/802A23A4_5.H"
 
-s32 func_802A13A4_de(s32 arg0) {
+s32 ESmem_AllocateFrameHeapLow(s32 arg0) {
     s32 amount;
     s32 result;
     f32 value;
@@ -43,7 +43,7 @@ s32 func_802A13A4_de(s32 arg0) {
     return result;
 }
 
-void func_802A14B8_de(void) {
+void ESmem_RestoreFrameHeapMark(void) {
     s32 index;
     s32 value;
     s32 amount;

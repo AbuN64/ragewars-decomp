@@ -19,7 +19,7 @@ s32 SetN64_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2) {
     return arg0 + entry[1];
 }
 
-s32 func_8028FDF8_de(s32 *table, s32 index) {
+s32 SetN64_GetPackSectionSize(s32 *table, s32 index) {
     s32 nextIndex = index + 1;
     s32 *next = &table[nextIndex];
     s32 *entry = &table[index];

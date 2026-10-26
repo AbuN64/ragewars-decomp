@@ -11,7 +11,7 @@
 #include "COMMON/REQUESTRECAT10.H"
 #include "FRONTEND/8041DF04_3.H"
 
-/* Enables mode 1 through func_802A23C4_de, places the menu model at (17, -10, -50) with uniform scale 0.14, zero rotation and a (0, 5, 0) offset, then issues request 0xE78 through SoundElement_PlayFlatSound; returns zero. */
+/* Enables mode 1 through Tsmos_SetModeOneFlag, places the menu model at (17, -10, -50) with uniform scale 0.14, zero rotation and a (0, 5, 0) offset, then issues request 0xE78 through SoundElement_PlayFlatSound; returns zero. */
 
 
 
@@ -29,7 +29,7 @@ s32 Frontend_PositionSelectionMenuModel(void) {
     CVector3 rotation;
     CVector3 offset;
 
-    func_802A23C4_de(1);
+    Tsmos_SetModeOneFlag(1);
     scale.x = 0.14f;
     scale.y = 0.14f;
     scale.z = 0.14f;

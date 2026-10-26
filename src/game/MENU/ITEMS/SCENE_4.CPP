@@ -30,7 +30,7 @@ extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **ar
 
 
 extern s32 SetN64_GetSizedPackSection(s32 node, s32 index, s32 *size);
-extern s32 func_8028FDF8_de(s32 *node, s32 arg1);
+extern s32 SetN64_GetPackSectionSize(s32 *node, s32 arg1);
 
 static inline s32 testBit(s32 n, u8 *bits) {
     s32 mask = 1 << (n & 7);
@@ -122,7 +122,7 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
                 index = world->group;
                 group = (void*)SetN64_GetPackSection((void*)SetN64_GetPackSection((void*)SetN64_GetPackSection(world->tree, 0), index), 0);
                 SetN64_GetPackSection(group, 0);
-                func_8028FDF8_de(group, 1);
+                SetN64_GetPackSectionSize(group, 1);
                 bits = (void*)SetN64_GetPackSection(group, 1);
                 if (testBit(j, bits)) {
                     tri->fields.flags |= 0x400;

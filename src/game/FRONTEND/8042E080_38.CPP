@@ -13,7 +13,7 @@ extern u8 D_80102B00[];
 extern s8 D_80102B0D[];
 extern s8 D_800FEB0E[];
 extern struct MatchSetupGlobals D_801462C8;
-extern struct Label *func_8040EC30_de(void *, s32);
+extern struct Label *Frontend_FindWidgetByResourceId(void *, s32);
 void func_80434C2C_de(s32 player) {
     struct MatchSetupGlobals *globals;
     s32 row;
@@ -62,7 +62,7 @@ void func_80434C2C_de(s32 player) {
         }
         if (D_800FEB0E[i * 400] == 0 && D_80102B0D[i * 400] == player &&
             globals->status[i].active == 1 && globals->status[i].m_IsBot == 0) {
-            func_8040EC30_de(D_800E54A4->players[player].menuWidget, id)->text = &D_80102B00[i * 400];
+            Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, id)->text = &D_80102B00[i * 400];
             row++;
         }
     }

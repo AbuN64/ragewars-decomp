@@ -2,7 +2,7 @@
 #include "COMMON/S1_5.H"
 #include "TYPES.H"
 
-/* Sets up the match display: calls func_804221E8_de, starts the objects at D_80145088 and 0x48 bytes
+/* Sets up the match display: calls Menu_ConfigureOptionsCamera, starts the objects at D_80145088 and 0x48 bytes
    before it through Items_ResetActorPools and func_804499B0_de, loads the resource func_804030E0_de names for
    0x27D into D_8011FE88 through func_8044D528_de, and calls func_8025476C_de with one when func_8025477C_de
    reports nothing. */
@@ -16,10 +16,10 @@ extern void OvlScene_SetSelection(void *, s32, s32);
 extern s32 func_8025477C_de();
 extern void func_8025476C_de(s32);
 
-void func_80422170_de(void) {
+void Menu_InitializeOptionsScene(void) {
     char *object;
 
-    func_804221E8_de();
+    Menu_ConfigureOptionsCamera();
     object = &D_80145088;
     Items_ResetActorPools(object, 1);
     func_804499B0_de(object - 0x48, 1, 0);
@@ -35,7 +35,7 @@ void func_80422170_de(void) {
 
 
 
-void func_804221E8_de(void) {
+void Menu_ConfigureOptionsCamera(void) {
     func_80245A20_de(1);
     Cinema_SetResponse((45.0f));
     func_80245A5C_de(0x43, 0x4F, 0x12, 0x80);

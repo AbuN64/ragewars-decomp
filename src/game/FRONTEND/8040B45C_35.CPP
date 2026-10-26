@@ -17,12 +17,12 @@
 extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, sm_dldc *);
 #include "RESMGR/resmgr_string_memory.H"
 
-/* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor func_8040ECA8_de's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
-   Adapted from func_8040EDE4_de with the new node taking the old node's next link and child position and the old node's links reset afterwards changed. */
+/* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor Frontend_FindWidgetPredecessor's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
+   Adapted from Frontend_InsertWidgetBefore with the new node taking the old node's next link and child position and the old node's links reset afterwards changed. */
 
 
 
-extern struct Tree *func_8040ECA8_de(struct Tree *node, s32 id);
+extern struct Tree *Frontend_FindWidgetPredecessor(struct Tree *node, s32 id);
 
 static inline struct Tree *findPredecessor(struct Tree *node, s32 id) {
     s32 childId;
@@ -34,23 +34,23 @@ static inline struct Tree *findPredecessor(struct Tree *node, s32 id) {
             found = node;
         }
         if (found == 0 && node->child != 0) {
-            found = func_8040ECA8_de(node->child, (u16)childId);
+            found = Frontend_FindWidgetPredecessor(node->child, (u16)childId);
         }
         node = node->next;
     }
     return found;
 }
 
-/* Measures the pixel width of a string of the given length in the given font by summing each character's signed width byte from the font record func_8041200C_de returns, then adding the spacing func_80411C60_de reports once between each pair of characters.
+/* Measures the pixel width of a string of the given length in the given font by summing each character's signed width byte from the font record Frontend_GetGlyphBuffer returns, then adding the spacing Frontend_GetFontLetterSpacing reports once between each pair of characters.
    Adapted from func_8025C8D8_de with the two clears and per-record call replaced by the font lookup, the width sum and the spacing term changed. */
 
 
 
 
 
-extern GlyphBuffer *func_8041200C_de(s32 index);
+extern GlyphBuffer *Frontend_GetGlyphBuffer(s32 index);
 
-extern short func_80411C60_de(s32 index);
+extern short Frontend_GetFontLetterSpacing(s32 index);
 
 /* Draws a widget's variant image: when Frontend_ComputeWidgetBounds accepts the widget at the position, picks the
    pressed (flag 0x100), highlighted (flag 0x40) or normal image of the widget, and when present
@@ -99,7 +99,7 @@ extern struct Shape_typemap_165 D_8014D580;
 /* Releases every loaded slot of the active, referenced entries of the pool at D_80153C20: each
    loaded slot (flag 1) has its data released through Gfx_ReleaseImage, its flags and owner cleared and
    the entry's reference count decremented, and an entry left without references is unloaded
-   through func_80411518_de and marked inactive. Pool layout and indexed slot access follow func_80411518_de. */
+   through Frontend_ReleaseChunkImages and marked inactive. Pool layout and indexed slot access follow Frontend_ReleaseChunkImages. */
 
 
 
@@ -109,7 +109,7 @@ extern struct Shape_typemap_165 D_8014D580;
 
 
 
-extern Pool_func_8040F580_de D_80153C20;
+extern PoolFrontendReleaseActiveChunkImages D_80153C20;
 
 
 /* Relocates a loaded widget list and its children from the stored base to base: for widgets
@@ -285,17 +285,17 @@ testB:
     b->parent = saved.parent;
 }
 
-s32 func_8040F160_de(s32 font, u8 *text, s32 length) {
+s32 Frontend_MeasureTextPrefix(s32 font, u8 *text, s32 length) {
     GlyphBuffer *record;
     s32 i;
     s32 total;
 
-    record = func_8041200C_de(font);
+    record = Frontend_GetGlyphBuffer(font);
     total = 0;
     for (i = 0; i < length; i++) {
         total += record->glyphs[*text++ - 0x20].width;
     }
-    total += func_80411C60_de(font) * (length - 1);
+    total += Frontend_GetFontLetterSpacing(font) * (length - 1);
     return total;
 }
 
@@ -424,7 +424,7 @@ s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typema
     return ok;
 }
 
-void func_8040F534_de(s32 width, s32 height) {
+void Frontend_SetDisplayClipBounds(s32 width, s32 height) {
     struct Shape_typemap_165 *rect = &D_8014D580;
 
     width--;
@@ -438,7 +438,7 @@ void func_8040F534_de(s32 width, s32 height) {
 }
 
 /** Perform no work. */
-void func_8040F568_de(void) {
+void Frontend_NoOperation(void) {
 }
 
 /* Orders two records by the unsigned halfword at offset 0x14, returning the difference in the
@@ -449,7 +449,7 @@ int func_8040F570_de(struct Field_u16_14 *a, struct Field_u16_14 *b) {
     return a->value - b->value;
 }
 
-void func_8040F580_de(void) {
+void Frontend_ReleaseActiveChunkImages(void) {
     s32 e;
     s32 n;
     s32 i;
@@ -469,14 +469,14 @@ void func_8040F580_de(void) {
                 }
             }
             if (D_80153C20.entries[e].refCount == 0) {
-                func_80411518_de(e);
+                Frontend_ReleaseChunkImages(e);
                 D_80153C20.entries[e].active = 0;
             }
         }
     }
 }
 
-void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
+void Frontend_RelocateWidgetTree(UiWidget *widget, s32 base, s32 old) {
     for (; widget != 0; widget = widget->next) {
         if (widget->flags & 0x10) {
             if (widget->words[0] != 0) {
@@ -518,7 +518,7 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
         }
         if (widget->children != 0) {
             widget->children = (UiWidget *)((s32)widget->children + base - old);
-            func_8040F6DC_de(widget->children, base, old);
+            Frontend_RelocateWidgetTree(widget->children, base, old);
         }
         if (widget->next != 0) {
             widget->next = (UiWidget *)((s32)widget->next + base - old);

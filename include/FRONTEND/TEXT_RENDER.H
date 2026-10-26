@@ -21,5 +21,5 @@ typedef struct TextSprite {
     u16 pad16;
 } TextSprite;
 /* Arena allocator, also used as a pointer-returning API by Gfx_EmitMatrix. */
-extern void *func_802A15E4_de(s32 size);
+extern void *ESmem_AllocateFrameHeapHigh(s32 size);
 #endif

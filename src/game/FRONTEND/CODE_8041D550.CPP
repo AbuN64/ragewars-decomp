@@ -109,30 +109,30 @@ void Frontend_RefreshProfileStatistics(void) {
     func_8041F2A0_Item *item;
     s32 score;
 
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
     Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
     Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
-    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
+    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
@@ -167,7 +167,7 @@ void Frontend_ShowUnlockedEntries(s32 style) {
     MenuWidget *node;
     s32 i;
     for (i = 0; i < 50; i++) {
-        node = func_8040EC30_de(D_800E3590->root, (u16)D_800DF544[i].id);
+        node = Frontend_FindWidgetByResourceId(D_800E3590->root, (u16)D_800DF544[i].id);
         if (Defs_TestBit(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
             Frontend_SetWidgetFlag08(node, 1);
             node->alpha = style;

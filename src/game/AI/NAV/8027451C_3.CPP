@@ -34,7 +34,7 @@ static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     GraphU64_NormalizeVec3(out);
 }
 
-s32 func_802757E4_de(Triangle *polygon) {
+s32 Region_TestPolygonSlopeFlag(Triangle *polygon) {
     CVector3 up;
     CVector3 normal;
     CVector3 edge0;
@@ -70,80 +70,80 @@ s32 func_802757E4_de(Triangle *polygon) {
     return 0;
 }
 
-void Region_ComputePointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Region_ComputePointBounds(f32 *pointBounds, s32 pointCount, CVector3 *pointCursor)
 {
     s32 i;
 
     i = 0;
-    if (arg1 != 0) {
-        arg0[0] = arg2->x;
-        arg0[1] = arg2->y;
-        arg0[2] = arg2->z;
-        arg0[3] = arg2->x;
-        arg0[4] = arg2->y;
-        arg1 -= 1;
-        arg0[5] = arg2->z;
-        arg2 += 1;
+    if (pointCount != 0) {
+        pointBounds[0] = pointCursor->x;
+        pointBounds[1] = pointCursor->y;
+        pointBounds[2] = pointCursor->z;
+        pointBounds[3] = pointCursor->x;
+        pointBounds[4] = pointCursor->y;
+        pointCount -= 1;
+        pointBounds[5] = pointCursor->z;
+        pointCursor += 1;
 
-        if (arg1 > 0) {
+        if (pointCount > 0) {
 bounds_loop:
                 {
-                    f32 value = arg2->x;
-                    f32 bound = arg0[0];
+                    f32 value = pointCursor->x;
+                    f32 bound = pointBounds[0];
                     if (!(value <= bound)) {
                         value = bound;
                     }
-                    arg0[0] = value;
+                    pointBounds[0] = value;
                 }
 
                 {
-                    f32 value = arg2->y;
-                    f32 bound = arg0[1];
+                    f32 value = pointCursor->y;
+                    f32 bound = pointBounds[1];
                     if (!(value <= bound)) {
                         value = bound;
                     }
-                    arg0[1] = value;
+                    pointBounds[1] = value;
                 }
 
                 {
-                    f32 value = arg2->z;
-                    f32 bound = arg0[2];
+                    f32 value = pointCursor->z;
+                    f32 bound = pointBounds[2];
                     if (!(value <= bound)) {
                         value = bound;
                     }
-                    arg0[2] = value;
+                    pointBounds[2] = value;
                 }
 
                 {
-                    f32 value = arg2->x;
-                    f32 bound = arg0[3];
+                    f32 value = pointCursor->x;
+                    f32 bound = pointBounds[3];
                     if (!(bound <= value)) {
                         value = bound;
                     }
-                    arg0[3] = value;
+                    pointBounds[3] = value;
                 }
 
                 {
-                    f32 value = arg2->y;
-                    f32 bound = arg0[4];
+                    f32 value = pointCursor->y;
+                    f32 bound = pointBounds[4];
                     if (!(bound <= value)) {
                         value = bound;
                     }
-                    arg0[4] = value;
+                    pointBounds[4] = value;
                 }
 
                 {
-                    f32 value = arg2->z;
-                    f32 bound = arg0[5];
+                    f32 value = pointCursor->z;
+                    f32 bound = pointBounds[5];
                     if (!(bound <= value)) {
                         value = bound;
                     }
-                    arg0[5] = value;
+                    pointBounds[5] = value;
                 }
 
                 i += 1;
-                arg2 += 1;
-            if (i < arg1) goto bounds_loop;
+                pointCursor += 1;
+            if (i < pointCount) goto bounds_loop;
         }
     }
 }

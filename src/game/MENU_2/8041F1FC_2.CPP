@@ -16,15 +16,15 @@ extern s32 Frontend_ListHasFlag100(struct WidgetNode *);
 extern struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
-s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
+s32 Menu_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTicks) {
     CVector3 scale;
-    f32 temp_f0;
+    f32 highlightAlpha;
     s16 resource;
-    s32 temp_s0;
+    s32 previewModelOffset;
     s32 phase;
-    s32 temp_v0_2;
-    s32 temp_v0_4;
-    s32 temp_v0_6;
+    s32 enterTicksRemaining;
+    s32 exitTicksRemaining;
+    s32 fadeTicksRemaining;
     s32 entryIndex;
     s32 i;
     s32 empty_slot;
@@ -44,9 +44,9 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         header->x = (u16) (header->x + (u16)D_800E42D0->headerStep);
         footer = D_800E42D0->footer;
         footer->x = (u16) (footer->x - (u16)D_800E42D0->footerStep);
-        temp_v0_2 = D_800E42D0->timer - 1;
-        D_800E42D0->timer = temp_v0_2;
-        if (temp_v0_2 <= 0) {
+        enterTicksRemaining = D_800E42D0->timer - 1;
+        D_800E42D0->timer = enterTicksRemaining;
+        if (enterTicksRemaining <= 0) {
             SoundElement_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 1);
             SmpFlicker_StartFlicker(D_800E42D0->prompt, 4);
@@ -59,9 +59,9 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         headerWidget->x = (u16) (headerWidget->x - (u16)D_800E42D0->headerStep);
         footerWidget = D_800E42D0->footer;
         footerWidget->x = (u16) (footerWidget->x + (u16)D_800E42D0->footerStep);
-        temp_v0_4 = D_800E42D0->timer - 1;
-        D_800E42D0->timer = temp_v0_4;
-        if (temp_v0_4 <= 0) {
+        exitTicksRemaining = D_800E42D0->timer - 1;
+        D_800E42D0->timer = exitTicksRemaining;
+        if (exitTicksRemaining <= 0) {
             D_800E42D0->phase = 3;
             MarkMenuEventHandled();
             func_80298368_de(D_800E42D0->result);
@@ -69,7 +69,7 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         }
         break;
     case 3:
-        func_802A2360_de();
+        Tsmos_ActivateControllerState();
         break;
     case 4:
         D_800E42D0->timer = D_800E42D0->timer - 1 < 0 ? 0 :
@@ -92,9 +92,9 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
     case 6:
         pulse = D_800E42D0->pulse;
         pulse->alpha = (u8) (pulse->alpha + (u8)D_800E42D0->pulseStep);
-        temp_v0_6 = D_800E42D0->timer - 1;
-        D_800E42D0->timer = temp_v0_6;
-        if (temp_v0_6 <= 0) {
+        fadeTicksRemaining = D_800E42D0->timer - 1;
+        D_800E42D0->timer = fadeTicksRemaining;
+        if (fadeTicksRemaining <= 0) {
             D_800E42D0->pulse->alpha = 0xC8;
             D_800E42D0->phase = 3;
         }
@@ -103,13 +103,13 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         if (D_800E42D0->phase == 3) {
             i = 0;
             empty_slot = CHARACTER_EMPTY_SLOT;
-            D_800E42D0->clock = (s32) (D_800E42D0->clock + arg2);
+            D_800E42D0->clock = (s32) (D_800E42D0->clock + elapsedTicks);
             do {
                 if (D_800E42D0->players[i].unkC == 1) {
                     if (D_800E42D0->players[i].highlight != 0) {
-                        temp_f0 = (Math_Cosf((f32) i + ((f32) D_800E42D0->clock * 0.0033333334f)) * 70.0f) + 170.0f;
+                        highlightAlpha = (Math_Cosf((f32) i + ((f32) D_800E42D0->clock * 0.0033333334f)) * 70.0f) + 170.0f;
                         highlight = D_800E42D0->players[i].highlight;
-                        highlight->alpha=(unsigned int)temp_f0;
+                        highlight->alpha=(unsigned int)highlightAlpha;
                     }
                     widgetNode = SmpOverlay_GetSlotValue(D_800E42D0->unk4, i);
                     highlightWidget = D_800E42D0->players[i].highlight;
@@ -119,19 +119,19 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {
                                 D_800E42D0->players[i].kind = (s32) resource;
-                                temp_s0 = func_8041F1D8_de(resource);
+                                previewModelOffset = func_8041F1D8_de(resource);
                                 entryIndex = func_8041F18C_de(D_800E42D0->players[i].kind);
                                 scale.x = D_800E3A58[entryIndex].scale[i];
                                 scale.y = D_800E3A58[entryIndex].scale[i];
                                 scale.z = D_800E3A58[entryIndex].scale[i];
-                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[entryIndex].position[i], D_800E3A58[entryIndex].distance[i], D_800E3A58[entryIndex].light[i]);
+                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, previewModelOffset + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[entryIndex].position[i], D_800E3A58[entryIndex].distance[i], D_800E3A58[entryIndex].light[i]);
                             } else {
                                 Menu_RandomizeCharacterPreview(i);
                             }
                         } else {
                             D_800E42D0->players[i].kind = -1;
                         }
-                        func_80420438_de(i);
+                        Menu_RefreshPlayerCharacterVariants(i);
                     } else if (widgetNode->resource == empty_slot) {
                         Menu_RandomizeCharacterPreview(i);
                     }

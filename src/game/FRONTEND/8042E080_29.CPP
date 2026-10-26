@@ -85,25 +85,25 @@ void func_80433914_de(s32 player) {
  MenuWidget *label,*value;
  D_800E54A4->players[player].chosen=0;
  /* the hub EC30 returns the item view; nodes[] hold this unit's MenuWidget storage */
- D_800E54A4->players[player].nodes[0]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_694);
- D_800E54A4->players[player].nodes[1]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_691);
- D_800E54A4->players[player].nodes[2]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_688);
- D_800E54A4->players[player].nodes[3]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_692);
+ D_800E54A4->players[player].nodes[0]=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_694);
+ D_800E54A4->players[player].nodes[1]=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_691);
+ D_800E54A4->players[player].nodes[2]=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_688);
+ D_800E54A4->players[player].nodes[3]=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_692);
  for(i=0;i<4;i++) {
   D_800E54A4->players[player].used[i]=2;
   D_800E54A4->players[player].nodes[i]->alpha=255;
-  label=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
+  label=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
   Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],0);
-  value=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
+  value=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
   if(D_800E54A4->players[player].records[i].player!=-1) {
    value->text=D_800E54A4->players[player].records[i].name;
    D_800E54A4->players[player].used[i]=1;
    if(D_800E54A4->phase==1) {
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
     if(func_804358C0_de(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
      D_800E54A4->players[player].used[i]=0;
      Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
-     Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
+     Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
     }
    }
 #if defined(VERSION_EU)

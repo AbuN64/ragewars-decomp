@@ -19,7 +19,7 @@
 extern PoolRecAtC D_80153C0C;
 
 
-void func_80410E1C_de(s32 mode) {
+void Frontend_UpdateImageReleaseTimers(s32 mode) {
     s32 i;
 
     for (i = 0; i < D_80153C0C.count; i++) {

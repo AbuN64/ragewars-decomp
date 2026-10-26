@@ -4,7 +4,7 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && defined(VERSION_EU))
 #if defined(VERSION_EU)
-#define func_8040CB40_eu_x Frontend_HandleBoundedValueEvent
+#define Frontend_HandleSliderMessage Frontend_HandleBoundedValueEvent
 #endif
 /* Slider widget message handler: clamps the current value into range, then dispatches on the
    message to get/set the value, range, step or user word, adjusts by one step, or posts the new
@@ -17,7 +17,7 @@
 extern s32 GetMenuScreenOwner(void);
 extern void MarkMenuEventHandled(void);
 
-s32 func_8040CB40_eu_x(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
+s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     s32 result;
     Slider *widget = slider;
 
@@ -108,7 +108,7 @@ s32 func_8040CB40_eu_x(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     }
 
 post:
-    func_8040C950_de((Slider *)widget);
+    Frontend_UpdateSliderGeometry((Slider *)widget);
     func_802995D4_de(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
     MarkMenuEventHandled();
     result = 0;

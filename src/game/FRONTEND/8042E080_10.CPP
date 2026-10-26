@@ -282,11 +282,11 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         slot = func_80435128_de(p);
         if (slot >= 0) {
 #if defined(VERSION_DE)
-            node = func_8040EC30_de((void*)D_800E54A4->players[p].menu, 0x2DA);
+            node = Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].menu, 0x2DA);
 #elif defined(VERSION_EU_X)
-            node = func_8040EC30_de((void*)D_800E54A4->players[p].menu, 0x2B2);
+            node = Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].menu, 0x2B2);
 #else
-            node = func_8040EC30_de((void*)D_800E54A4->players[p].menu, 0x2F3);
+            node = Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].menu, 0x2F3);
 #endif
             for (j = 0; ((Shared_Item *) node)->flags & 0x10; j++) {
                 D_800E54A4->players[p].records[slot].name[j] = *(u8 *) ((Shared_Item *) node)->label->unk38;
@@ -738,11 +738,11 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         func_8043599C_de(p, D_800E54A4->players[p].choice, i);
         func_804356BC_de(i);
 #if defined(VERSION_DE)
-        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
 #elif defined(VERSION_EU_X)
-        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
 #else
-        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
 #endif
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
         D_800E54A4->links[i].state = 0;

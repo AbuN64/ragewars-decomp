@@ -2789,8 +2789,8 @@ struct GameLocalizationState;
 typedef struct GameLocalizationState GameLocalizationState;
 
 
-struct Globals_func_804220A8_de;
-typedef struct Globals_func_804220A8_de Globals_func_804220A8_de;
+struct GlobalsMenuSetOptionsSceneSelection;
+typedef struct GlobalsMenuSetOptionsSceneSelection GlobalsMenuSetOptionsSceneSelection;
 
 struct GroupCode8044E2B8;
 typedef struct GroupCode8044E2B8 GroupCode8044E2B8;
@@ -3065,8 +3065,8 @@ typedef struct ResourceRequest ResourceRequest;
 struct ResourceData80295B84;
 typedef struct ResourceData80295B84 ResourceData80295B84;
 
-struct Resource_func_80410E1C_de;
-typedef struct Resource_func_80410E1C_de Resource_func_80410E1C_de;
+struct ResourceFrontendUpdateImageReleaseTimers;
+typedef struct ResourceFrontendUpdateImageReleaseTimers ResourceFrontendUpdateImageReleaseTimers;
 
 struct ResultsHeadingCharacter;
 typedef struct ResultsHeadingCharacter ResultsHeadingCharacter;
@@ -3191,8 +3191,8 @@ typedef struct Spawn Spawn;
 struct StateEntry;
 typedef struct StateEntry StateEntry;
 
-struct State_func_804220A8_de;
-typedef struct State_func_804220A8_de State_func_804220A8_de;
+struct StateMenuSetOptionsSceneSelection;
+typedef struct StateMenuSetOptionsSceneSelection StateMenuSetOptionsSceneSelection;
 
 
 
@@ -3237,8 +3237,8 @@ typedef struct TextBoundsRecord23 TextBoundsRecord23;
 struct TextBoundsText;
 typedef struct TextBoundsText TextBoundsText;
 
-struct Timer_func_80410E1C_de;
-typedef struct Timer_func_80410E1C_de Timer_func_80410E1C_de;
+struct TimerFrontendUpdateImageReleaseTimers;
+typedef struct TimerFrontendUpdateImageReleaseTimers TimerFrontendUpdateImageReleaseTimers;
 
 
 struct TrailNode;
@@ -3287,8 +3287,8 @@ typedef struct WeaponMenuView WeaponMenuView;
 
 struct Slider;
 
-struct Window_func_80421AE8_de;
-typedef struct Window_func_80421AE8_de Window_func_80421AE8_de;
+struct WindowMenuCreateSixChoiceMenu;
+typedef struct WindowMenuCreateSixChoiceMenu WindowMenuCreateSixChoiceMenu;
 
 struct World24;
 typedef struct World24 World24;
@@ -3985,9 +3985,9 @@ struct GameLocalizationState {
     u8 reserved[0x581];
     u8 language;
 };
-struct Globals_func_804220A8_de;
+struct GlobalsMenuSetOptionsSceneSelection;
 struct GameplayCamera;
-struct Globals_func_804220A8_de {
+struct GlobalsMenuSetOptionsSceneSelection {
     struct GameplayCamera *camera; /* the camera particle matrices are built for once per frame */
     char pad4[0x88];
     float width;
@@ -4472,17 +4472,17 @@ struct SceneState {
     u8 pad10[0xC0];
     CVector3 direction;
 };
-struct Window_func_80421AE8_de;
-struct Window_func_80421AE8_de {
+struct WindowMenuCreateSixChoiceMenu;
+struct WindowMenuCreateSixChoiceMenu {
     u8 pad0[0x10];
     s8 unk10;
 };
 struct ScreenState;
-struct Window_func_80421AE8_de;
+struct WindowMenuCreateSixChoiceMenu;
 struct ScreenState {
     s32 screen;
     s32 label;
-    struct Window_func_80421AE8_de *window;
+    struct WindowMenuCreateSixChoiceMenu *window;
     s32 state;
 };
 struct Selection;
@@ -4698,8 +4698,8 @@ struct SlotDialog {
 };
 struct SourceRecAt1C;
 struct Spawn;
-struct State_func_804220A8_de;
-struct State_func_804220A8_de {
+struct StateMenuSetOptionsSceneSelection;
+struct StateMenuSetOptionsSceneSelection {
     char pad0[0x108];
     int a;
     int b;
@@ -4848,7 +4848,7 @@ union fu {
     float f;
 };
 struct ObjRecAtCV2;
-struct Screen_func_80422960_de;
+struct ScreenMenuFinishTabOptionsTransition;
 struct LevelActor;
 struct func_8043D2D0_S;
 struct func_8043D2D0_S {
@@ -4894,8 +4894,8 @@ struct Messages;
 typedef struct Messages Messages;
 struct Mode;
 typedef struct Mode Mode;
-struct Obj_func_80421BEC_de;
-typedef struct Obj_func_80421BEC_de Obj_func_80421BEC_de;
+struct ObjMenuUpdateSixChoiceMenu;
+typedef struct ObjMenuUpdateSixChoiceMenu ObjMenuUpdateSixChoiceMenu;
 struct Other8043E458;
 typedef struct Other8043E458 Other8043E458;
 struct Owner_func_804066BC_de;
@@ -4925,7 +4925,7 @@ typedef struct StateInfo StateInfo;
 struct TablePakUpdateDialogList;
 typedef struct TablePakUpdateDialogList TablePakUpdateDialogList;
 struct CROMSwoosh_t;
-struct Widget_func_8040C950_de;
-typedef struct Widget_func_8040C950_de Widget_func_8040C950_de;
+struct WidgetFrontendUpdateSliderGeometry;
+typedef struct WidgetFrontendUpdateSliderGeometry WidgetFrontendUpdateSliderGeometry;
 typedef char * va_list;
 #endif

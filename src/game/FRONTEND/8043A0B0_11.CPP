@@ -51,17 +51,17 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 extern struct StateFlags D_800E5A06[];
 
-extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
+extern struct Resource_func_80419E54_de *Frontend_FindWidgetByResourceId(void *, s32);
 
 extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
 
 
 /* Releases the object D_800E59E0 holds through Cache_FreeMemory, clears D_800E59E0, calls
-   func_802A2360_de and func_802A23C4_de with 2, and returns zero. */
+   Tsmos_ActivateControllerState and Tsmos_SetModeOneFlag with 2, and returns zero. */
 
 
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 /* Handles an input event for the 0x4D0-byte entry of D_800E59E0 the low half of the third argument
    selects: when that entry is active, the high half is 3 and the fourth argument is zero, it calls
@@ -164,10 +164,10 @@ void func_8043BA5C_de(s32 player, s32 column) {
     struct Resource_func_80419E54_de *item;
 
     if (column != 5) {
-        item = func_8040EC30_de(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
+        item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
         Frontend_SetWidgetFlag08(item, 1);
     }
-    item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][column].value);
+    item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
     Frontend_SetWidgetFlag40(item, 1);
     item->value = 0x96;
     D_800E59E0->panels[player].selection = column;
@@ -177,8 +177,8 @@ void func_8043BA5C_de(s32 player, s32 column) {
 s32 func_8043BB70_de(void) {
     Cache_FreeMemory(D_800E59E0);
     D_800E59E0 = 0;
-    func_802A2360_de();
-    func_802A23C4_de(2);
+    Tsmos_ActivateControllerState();
+    Tsmos_SetModeOneFlag(2);
     return 0;
 }
 

@@ -16,7 +16,7 @@ extern s32 D_800E5240[];
 extern s32 D_800E5214[];
 extern s32 D_800E51F8[];
 extern s32 D_800E51E4[];
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 func_8042B1B8_de(s32, s32);
 
@@ -136,11 +136,11 @@ void func_8042A7B4_de(s32 alpha) {
                 j = 0;
             scan:
                 if (table[i] == D_800E4F64[j].key) {
-                    item = func_8040EC30_de(D_800E4F60->window, (u16)D_800E4F64[j].key);
+                    item = Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].key);
                     Frontend_SetWidgetFlag08(item, visible);
                     item->alpha = alpha;
                     if (D_800E4F64[j].other != -1) {
-                        item = func_8040EC30_de(D_800E4F60->window, (u16)D_800E4F64[j].other);
+                        item = Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].other);
                         Frontend_SetWidgetFlag08(item, visible);
                         item->alpha = alpha;
                     }
@@ -174,7 +174,7 @@ void func_8042A990_de(void) {
     default:
         return;
     }
-    D_800E4F60->item = func_8040EC30_de(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
+    D_800E4F60->item = Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
     if (D_800E4F60->selection == 0) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         XPlus_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
@@ -199,9 +199,9 @@ void func_8042AAD0_de(void) {
     category = map_category(D_800E4F60->category);
     list = func_8042B1B8_de(category, D_800E4F60->selection);
     for (i = 0; i < 40; i++) {
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
         if (D_800E4F64[i].other != -1) {
-            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
+            Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
         }
     }
     func_8042E9A0_de(category, list);

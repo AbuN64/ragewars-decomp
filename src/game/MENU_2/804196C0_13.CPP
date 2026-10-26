@@ -7,10 +7,10 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Creates a frame animation for widget id of the current screen: finds the widget through
-   func_8040EC30_de, allocates and clears a 0x64-byte animation, sets its type fields, widget and
+   Frontend_FindWidgetByResourceId, allocates and clears a 0x64-byte animation, sets its type fields, widget and
    -1-terminated frame list, counts the frames, initialises its playback state through
    func_80419A18_de, func_804199DC_de, func_804199E4_de and func_80419A04_de, attaches it to the widget through
-   func_8040EDE4_de and returns it. */
+   Frontend_InsertWidgetBefore and returns it. */
 
 
 
@@ -30,7 +30,7 @@ extern void func_804199E4_de(Animation *anim, s32 value);
 
 extern void func_80419A04_de(Animation *anim, s32 value);
 
-extern void func_8040EDE4_de(s32 widget, Animation *anim);
+extern void Frontend_InsertWidgetBefore(s32 widget, Animation *anim);
 
 void SmpFrameAnim_RegisterFrameAnimClass(void) {
     func_802982C4_de(0xB5F, D_00419A4C, D_00419ADC, 3);
@@ -40,7 +40,7 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
     s32 widget;
     Animation *anim;
 
-    widget = (s32)func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)id);
+    widget = (s32)Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)id);
     Frontend_GetScreenData(GetMenuScreenOwner());
     anim = Cache_AllocateMemory(0x64);
     XPlus_FillBytes(anim, 0, 0x64);
@@ -59,6 +59,6 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
     func_804199DC_de(anim, 0);
     func_804199E4_de(anim, 0);
     func_80419A04_de(anim, 0);
-    func_8040EDE4_de(widget, anim);
+    Frontend_InsertWidgetBefore(widget, anim);
     return anim;
 }

@@ -101,7 +101,7 @@ typedef struct Shared_World {
     struct Record14 * recordArray; /* 0x11D0 */
     struct Record14 * alternateRecordArray; /* 0x11D4 */
     u8 unknown11D8[0x328];
-    s32 sectorEntryCount; /* 0x1500: func_80278ABC_de */
+    s32 sectorEntryCount; /* 0x1500: Link_SumWorldSectionCounts */
     s32 sectorCount; /* 0x1504 */
     WorldSector sectors[128]; /* 0x1508 */
     u8 system1B08[0x11778 - 0x1B08];

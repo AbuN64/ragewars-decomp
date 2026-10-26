@@ -3,27 +3,27 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_DE))
-/* Calls MarkMenuEventHandled, then func_8042177C_de when the word at offset 0x34 of the object D_800E4400
-   points to is clear, or func_8041A430_de on its first word with 2 and func_804210E8_de otherwise.
+/* Calls MarkMenuEventHandled, then Menu_ShowExtraOptionsPanel when the word at offset 0x34 of the object D_800E4400
+   points to is clear, or func_8041A430_de on its first word with 2 and Menu_ApplyExtraOptionFlags otherwise.
    Returns zero. */
-struct State_func_804219E0_de;
+struct StateMenuConfirmGermanExtraOptions;
 
-extern struct State_func_804219E0_de *D_800E4400;
+extern struct StateMenuConfirmGermanExtraOptions *D_800E4400;
 extern void MarkMenuEventHandled();
 
 extern void func_8041A430_de(void *, s32);
 
 
-s32 func_80421F08_eu(void) {
-    struct State_func_804219E0_de *state;
+s32 Menu_ConfirmExtraOptions(void) {
+    struct StateMenuConfirmGermanExtraOptions *state;
 
     MarkMenuEventHandled();
     state = D_800E4400;
     if (state->ready == 0) {
-        func_8042177C_de();
+        Menu_ShowExtraOptionsPanel();
     } else {
         func_8041A430_de(state->first, 2);
-        func_804210E8_de();
+        Menu_ApplyExtraOptionFlags();
     }
     return 0;
 }

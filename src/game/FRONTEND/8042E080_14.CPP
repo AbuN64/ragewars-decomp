@@ -138,7 +138,7 @@ D_800DDEC0,
     }
     if (failed == 0) {
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
-        item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
+        item = (Label *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
         if (Pak_GetFreePages(player, &size) == 0) {
             XStdio_FormatBuffer(D_800E54A4->players[player].freeText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -148,7 +148,7 @@ g_noteInfoIntFormat,
 #endif
  size);
             item->text = D_800E54A4->players[player].freeText;
-            item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
+            item = (Label *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
             size = PAKInterface_GetRecordsNoteSize();
             XStdio_FormatBuffer(D_800E54A4->players[player].usedText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -169,9 +169,9 @@ g_noteInfoIntFormat,
     }
     D_800E54A4->players[player].slot = -1;
     D_800E54A4->players[player].scroll = 0;
-    D_800E54A4->players[player].labels[0] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DB);
-    D_800E54A4->players[player].labels[1] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DC);
-    D_800E54A4->players[player].labels[2] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
+    D_800E54A4->players[player].labels[0] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DB);
+    D_800E54A4->players[player].labels[1] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DC);
+    D_800E54A4->players[player].labels[2] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
     func_80434250_de(player, 1);
 }
 

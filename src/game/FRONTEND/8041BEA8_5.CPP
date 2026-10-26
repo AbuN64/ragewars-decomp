@@ -51,7 +51,7 @@ extern void func_802991D4_de(s32);
 
 extern void MarkMenuEventHandled(void);
 
-extern void func_802A2360_de(void);
+extern void Tsmos_ActivateControllerState(void);
 
 extern s32 XStdio_FormatBuffer(void *, const char *, ...);
 
@@ -90,10 +90,10 @@ extern s32 D_800E3514;
 
 #endif
 
-/* Calls func_802A2394_de and MarkMenuEventHandled, then func_80298368_de with 2, sets D_8014ADA0 and returns
+/* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then func_80298368_de with 2, sets D_8014ADA0 and returns
    one. */
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
 extern void MarkMenuEventHandled();
 
@@ -114,7 +114,7 @@ extern void SmpOverlay_RefreshPakDialog(void);
 
 /* Builds screen state D_800E3518 under a parent window: allocates its 0x2C bytes, keeps the parent,
    opens windows 0x3C3 (shown), 0x3C9, 0x3C4 and 0x3C5 (hidden) at 0x4 to 0x10, clears the words at
-   0x14 and 0x18, resets through func_8040C428_de(0) and func_802A2394_de, sets D_800E28C8 to -1 and
+   0x14 and 0x18, resets through func_8040C428_de(0) and Tsmos_DeactivateControllerState, sets D_800E28C8 to -1 and
    D_80146D70 to 0, releases the resources of D_8011FAC0 and of its block at 0x3C8, clears the
    word at 0x1C and returns zero. */
 
@@ -125,7 +125,7 @@ extern void SmpOverlay_RefreshPakDialog(void);
 
 extern void Frontend_RequestScreenMode(s32);
 
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 
 extern void func_80293334_de(void *, s32, s32);
 
@@ -136,7 +136,7 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 
 
 /* In one- or no-player mode, counts a tick on the state D_800E3518 and, while it is not paused, once
-   more than five ticks have passed runs func_802A2360_de and SmpOverlay_AdvancePakDialogPort; always returns 0. */
+   more than five ticks have passed runs Tsmos_ActivateControllerState and SmpOverlay_AdvancePakDialogPort; always returns 0. */
 
 
 
@@ -269,7 +269,7 @@ void SmpOverlay_RefreshPakDialog(void) {
         SmpOverlay_AdvancePakDialogPort();
         return;
     }
-    temp_s0 = func_8040EC30_de(D_800E3518->root, SLOT_RESOURCE_968);
+    temp_s0 = Frontend_FindWidgetByResourceId(D_800E3518->root, SLOT_RESOURCE_968);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     XStdio_FormatBuffer(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
 #else
@@ -284,11 +284,11 @@ void SmpOverlay_RefreshPakDialog(void) {
 block_24:
     func_802991D4_de(var_a0);
 block_25:
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
 }
 
 s32 SmpOverlay_FinishPakDialog(void) {
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     MarkMenuEventHandled();
     func_80298368_de(2);
     D_8014ADA0 = 1;
@@ -317,7 +317,7 @@ void SmpOverlay_ProbePakDialogPorts(void) {
 void SmpOverlay_AdvancePakDialogPort(void) {
     D_800DF4C0++;
     if (D_800DF4C0 >= 4) {
-        func_802A2394_de();
+        Tsmos_DeactivateControllerState();
         MarkMenuEventHandled();
         func_80298368_de(2);
         D_8014ADA0 = 1;
@@ -332,45 +332,45 @@ s32 func_8041C2AC_de(void *parent) {
     D_800E3518 = Cache_AllocateMemory(0x2C);
     D_800E3518->root = parent;
 #if defined(VERSION_DE)
-    window = func_8040EC30_de(parent, 0x3BE);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3BE);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = func_8040EC30_de(parent, 0x3C3);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C3);
 #elif defined(VERSION_EU_X)
-    window = func_8040EC30_de(parent, 0x3CC);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3CC);
 #endif
     D_800E3518->main = window;
     Frontend_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
-    window = func_8040EC30_de(parent, 0x3C3);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C3);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = func_8040EC30_de(parent, 0x3C9);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C9);
 #elif defined(VERSION_EU_X)
-    window = func_8040EC30_de(parent, 0x3CD);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3CD);
 #endif
     D_800E3518->absent = window;
     Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = func_8040EC30_de(parent, 0x3BD);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3BD);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = func_8040EC30_de(parent, 0x3C4);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C4);
 #elif defined(VERSION_EU_X)
-    window = func_8040EC30_de(parent, 0x3C6);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C6);
 #endif
     D_800E3518->unavailable = window;
     Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = func_8040EC30_de(parent, 0x3BF);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3BF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = func_8040EC30_de(parent, 0x3C5);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C5);
 #elif defined(VERSION_EU_X)
-    window = func_8040EC30_de(parent, 0x3C8);
+    window = Frontend_FindWidgetByResourceId(parent, 0x3C8);
 #endif
     D_800E3518->prompt = window;
     Frontend_SetWidgetFlag08(window, 0);
     D_800E3518->elapsed = 0;
     D_800E3518->state = 0;
     Frontend_RequestScreenMode(0);
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     D_800E28C8 = -1;
     D_80146D70 = 0;
     resources = (char *)&D_8011FAC0;
@@ -393,7 +393,7 @@ int SmpOverlay_TickPakDialog(void) {
             if (D_800E3518->elapsed < 6) {
                 return 0;
             }
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             SmpOverlay_AdvancePakDialogPort();
         }
     }

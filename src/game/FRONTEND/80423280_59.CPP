@@ -16,8 +16,8 @@ extern void func_8041A430_de(void *, s32);
 
 
 
-/* Runs the screen D_800E5430 each frame: past stage 1 of D_800E28E0 it only calls func_802A2394_de;
-   otherwise it calls func_802A2360_de and, while its menu reports 3, counts the delay at 0xC down and
+/* Runs the screen D_800E5430 each frame: past stage 1 of D_800E28E0 it only calls Tsmos_DeactivateControllerState;
+   otherwise it calls Tsmos_ActivateControllerState and, while its menu reports 3, counts the delay at 0xC down and
    on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
    restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves through
    func_80298368_de with the stored target or func_802998A8_de when that is -1. Returns zero. Written
@@ -30,9 +30,9 @@ extern void func_8041A430_de(void *, s32);
 
 
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
 
@@ -62,7 +62,7 @@ extern void MarkMenuEventHandled(void);
 
 
 /* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with D_800E1B60, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
-   Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
+   Adapted from Menu_StartOptionsImageTransition with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
 
@@ -99,10 +99,10 @@ s32 func_8042DAF8_de(void) {
     s32 result;
 
     if (D_800E28E0 >= 2) {
-        func_802A2394_de();
+        Tsmos_DeactivateControllerState();
         return 0;
     }
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     switch (result = func_8041A470_de(D_800E5430->head.menu)) {
     case 3:
         if (--D_800E5430->head.delay <= 0) {

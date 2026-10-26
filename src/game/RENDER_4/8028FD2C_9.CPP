@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_9.H"
 
-int func_8028FEB8_de(int *arg0) {
+int SetN64_GetRecordBlockSize(int *arg0) {
     return arg0[0] * arg0[1] + 8;
 }
 

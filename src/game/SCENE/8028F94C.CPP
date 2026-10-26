@@ -17,7 +17,7 @@
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
 /** Return the address 0x78 bytes into the supplied object. */
-void *func_8028F94C_de(void *object) {
+void *Sched_GetCommandQueue(void *object) {
     ObjRecAt78V2 *record = object;
     return &record->unk78;
 }

@@ -31,7 +31,7 @@ s32 func_802A7AA4_de(void *);
 s32 func_802AA70C_de(void *, s32 *);
 
 
-extern int func_802A23B4_de(void);
+extern int Tsmos_IsFrontendActive(void);
 
 extern void OnScreen_SetupSpriteMode(s32);
 
@@ -88,8 +88,8 @@ void func_802AA7A4_de(void *arg0) {
     char pad[256];
     (void)pad;
 
-    if (func_802A23B4_de() == 1) {
-        func_802A2090_de();
+    if (Tsmos_IsFrontendActive() == 1) {
+        Tsmos_UpdateFrontend();
         Geometry_InvalidateMaterialKeys();
         TextLoad_ResetTextureCache();
     }

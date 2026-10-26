@@ -386,21 +386,21 @@ s32 func_802B51B8_de(void *filter, s32 paramID, void *param)
     return 0;
 }
 
-f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3)
+f32 Audio_GetEnvelopeVolume(f32 initialVolume, s32 sampleCount, s32 rateInteger, s32 rateFraction)
 {
     f32 base;
     f32 result;
     s32 n;
     s32 i;
 
-    n = arg1 >> 3;
+    n = sampleCount >> 3;
     i = 0;
     if (n == 0) {
-        return arg0;
+        return initialVolume;
     }
 
-    base = (f32)(arg2 << 16);
-    base += (f32)(arg3 & 0xFFFF);
+    base = (f32)(rateInteger << 16);
+    base += (f32)(rateFraction & 0xFFFF);
     base *= D_800C7708_de;
     result = D_800C770C_de;
     do {
@@ -415,7 +415,7 @@ f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3)
         base *= base;
     } while (i < 0x20);
 
-    return arg0 * result;
+    return initialVolume * result;
 }
 
 
@@ -445,11 +445,11 @@ f64 frexp(f64 arg0, s32 *arg2) {
     return value;
 }
 
-f64 func_802B53B4_de(f64 arg0, s32 arg1) {
-    if (arg1 != 0) {
-        arg0 = arg0 * (f64)(1 << arg1);
+f64 func_802B53B4_de(f64 value, s32 shift) {
+    if (shift != 0) {
+        value = value * (f64)(1 << shift);
     }
-    return arg0;
+    return value;
 }
 
 #if defined(VERSION_US)

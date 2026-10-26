@@ -5,16 +5,16 @@ struct ModelTreeNode;
 #define SPAN_1000_CODE_80275E44_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern void func_80276298_de(struct ModelTreeNode *arg0, u16 arg1);
+extern void Region_UnmarkMatchingNodes(struct ModelTreeNode *arg0, u16 arg1);
 
-extern void func_802765A0_de(void);
+extern void Region_NoOperation(void);
 
-extern void func_802761B8_de(void *arg0);
+extern void Region_ClearNodeGroupFlag(void *arg0);
 
 
 extern float D_800C4A04_de;
 
-extern void func_80276184_de(void *arg0);
+extern void Region_SetNodeGroupFlag(void *arg0);
 
 extern float D_800CD3F8[];
 
@@ -71,13 +71,13 @@ typedef struct ObjectLinks1C ObjectLinks1C;
 
 extern float D_800C4AC4_de;
 
-extern void func_8027640C_de(f32 *arg0, s32 arg1, CVector3 *arg2);
+extern void Region_ExpandPointBounds(f32 *arg0, s32 arg1, CVector3 *arg2);
 
 extern float D_800CD4FC[];
 
 
 
-extern void func_80276214_de(struct ModelTreeNode *arg0, u16 arg1);
+extern void Region_MarkMatchingNodes(struct ModelTreeNode *arg0, u16 arg1);
 
 
 /* Shared object layout established by model-tree consumers. */
@@ -88,7 +88,7 @@ struct ModelTreeNode {
     struct ModelTreeNode *branches[3]; /* 0x10 */
 };
 
-extern f32 func_8027631C_de(u16 *arg0, f32 arg1, u16 arg2);
+extern f32 Region_SetMatchingVertexHeights(u16 *arg0, f32 arg1, u16 arg2);
 
 #endif
 #endif

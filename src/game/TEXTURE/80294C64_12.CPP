@@ -6,7 +6,7 @@ extern s32 D_800CD894_de;
 
 extern s32 PpDecom_UnpackResource(void *, s32);
 extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);
-extern s32 func_8028FDF8_de(void *, s32);
+extern s32 SetN64_GetPackSectionSize(void *, s32);
 extern s32 **Cache_AllocResourceBlock(s32, void *, s32);
 extern void Cache_ReplaceResourceBlock(s32, void *, s32 **);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
@@ -94,10 +94,10 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     if (arg0 < 0) {
         return;
     }
-    len0 = func_8028FDF8_de(obj, 0);
-    len1 = func_8028FDF8_de(list1, rem1) + 0x10;
+    len0 = SetN64_GetPackSectionSize(obj, 0);
+    len1 = SetN64_GetPackSectionSize(list1, rem1) + 0x10;
     if (count != 0) {
-        len2 = func_8028FDF8_de(list2, rem2) + 0x10;
+        len2 = SetN64_GetPackSectionSize(list2, rem2) + 0x10;
     } else {
         len2 = 8;
     }
@@ -113,16 +113,16 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
         hdr[1] = 0x18;
         hdr[2] = off1;
         hdr[3] = off2;
-        func_802BD3A0_de(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), func_8028FDF8_de(obj, 0));
+        func_802BD3A0_de(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), SetN64_GetPackSectionSize(obj, 0));
         entry = SetN64_GetPackSection(hdr, 1);
         entry[0] = 1;
         entry[1] = 0x10;
-        func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), func_8028FDF8_de(list1, rem1));
+        func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), SetN64_GetPackSectionSize(list1, rem1));
         entry = SetN64_GetPackSection(hdr, 2);
         if (count != 0) {
             entry[0] = 1;
             entry[1] = 0x10;
-            func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), func_8028FDF8_de(list2, rem2));
+            func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), SetN64_GetPackSectionSize(list2, rem2));
         } else {
             entry[0] = 0;
         }

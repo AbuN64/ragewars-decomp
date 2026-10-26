@@ -61,7 +61,7 @@ extern int GetMenuScreenOwner(void);
 
 
 
-extern void func_8040EDE4_de(Resource_func_80419E54_de *, MenuResourceWidget *);
+extern void Frontend_InsertWidgetBefore(Resource_func_80419E54_de *, MenuResourceWidget *);
 
 extern void *Frontend_GetScreenData(s32 index);
 
@@ -98,7 +98,7 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   Resource_func_80419E54_de *r;
   MenuResourceWidget *p;
   int kind;
-  r = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
+  r = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
   Frontend_GetScreenData(GetMenuScreenOwner());
   p = Cache_AllocateMemory(0x88);
   XPlus_FillBytes(p, 0, 0x88);
@@ -110,6 +110,6 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   p->resource->value = p->owner.bytes[3];
   SmpFlicker_InitFlicker(p, -1);
   func_80419F18_de(p);
-  func_8040EDE4_de(r, p);
+  Frontend_InsertWidgetBefore(r, p);
   return p;
 }

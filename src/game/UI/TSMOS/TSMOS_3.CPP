@@ -11,7 +11,7 @@ extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
 extern void func_80253908_de(s32);
 extern void func_80414360_de(void);
-extern void func_802A16F8_de(s32);
+extern void ESmem_InitializeFrameHeaps(s32);
 extern void func_80297FA0_de(s32, s32);
 extern void Frontend_OpenResourceArchive(char *);
 extern void SmpOverlay_RegisterOverlayClass(void);
@@ -22,16 +22,16 @@ extern void SmpFlicker_RegisterFlickerClass(void);
 extern void SmpSlider_RegisterSliderClass(void);
 extern void SmpList_RegisterListClass(void);
 extern void func_802A1960_de(void);
-extern void func_802A2400_de(f32);
-extern void func_802A2418_de(s32);
-extern void func_802A2360_de(void);
+extern void Tsmos_SetIdleTimer(f32);
+extern void Tsmos_SetTimerState(s32);
+extern void Tsmos_ActivateControllerState(void);
 
-void func_802A2344_eu(void) {
+void Tsmos_InitializeEuropeanFrontend(void) {
     s32 *selected;
     func_80255228_de(&D_80106248);
     func_80253908_de(0);
     func_80414360_de();
-    func_802A16F8_de(0x3000);
+    ESmem_InitializeFrameHeaps(0x3000);
     func_80297FA0_de(0x23, (s32)D_0043C500);
     Frontend_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
@@ -43,12 +43,12 @@ void func_802A2344_eu(void) {
     SmpList_RegisterListClass();
     func_802A1960_de();
     D_800CBC14 = 0x3C;
-    func_802A2400_de(0.0f);
-    func_802A2418_de(1);
+    Tsmos_SetIdleTimer(0.0f);
+    Tsmos_SetTimerState(1);
     selected = &D_800D2C90.z;
     *selected = 1;
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800D2C90.x = 0;
-    func_802A23C4_de(2);
+    Tsmos_SetModeOneFlag(2);
 }
 #endif

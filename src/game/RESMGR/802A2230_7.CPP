@@ -15,13 +15,13 @@ s32 GetMenuScreenOwner();
 
 extern void Smos_ClearControllerFlags(s32 *arg0);
 
-void func_802A230C_de(void) {
+void Tsmos_RequestFrontendShutdown(void) {
     extern int D_800D2C90;
     D_800D2C90 = 1;
 }
 
-void func_802A2320_de(void) {
+void Tsmos_ScaleCurrentScreen(void) {
     if (D_800E28D8 == 1) {
-        func_802A2480_de(Frontend_GetScreenData(GetMenuScreenOwner()), 0);
+        Tsmos_ScaleWidgetTree(Frontend_GetScreenData(GetMenuScreenOwner()), 0);
     }
 }

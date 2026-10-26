@@ -109,7 +109,7 @@ void OvlScene_FreeSceneResources(func_8044CBE0_S1 *arg0) {
    the second, then for every face of both lists clears the solid bit when it is hidden and marks it
    0xF0 when its group bit is set in the current group's bitmap. */
 extern s32 PpDecom_UnpackResource(void ***handle, s32 arg1);
-extern void func_8028FDF8_de(void *node, s32 arg1);
+extern void SetN64_GetPackSectionSize(void *node, s32 arg1);
 static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     s32 index;
     void *g;
@@ -118,7 +118,7 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     index = world->group;
     g = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->tree, 0), index), 2);
     SetN64_GetPackSection(g, 0);
-    func_8028FDF8_de(g, 1);
+    SetN64_GetPackSectionSize(g, 1);
     bits = SetN64_GetPackSection(g, 1);
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;

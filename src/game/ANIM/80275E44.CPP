@@ -41,7 +41,7 @@ extern void *Scene_GetModelRecordByIndexPointer(Shared_World *arg0, s32 arg1);
 extern f32 Math_Sqrtf(f32);
 
 
-extern void func_80276510_de(void *arg0, s32 arg1, void *arg2);
+extern void Region_ExpandHorizontalBounds(void *arg0, s32 arg1, void *arg2);
 
 f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
@@ -64,7 +64,7 @@ f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
            normal.y;
 }
 
-CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
+CVector3 *Region_GetCachedCeilingNormal(CVector3 *out, Node75 *node) {
     CVector3 a;
     CVector3 b;
     CollisionBuildVertex *p;
@@ -100,7 +100,7 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
     return out;
 }
 
-u8 func_80276054_de(s32 modelId) {
+u8 Region_GetModelBlendByte58(s32 modelId) {
     ModelBlend *blend = Scene_GetModelRecordByIndexPointer(&g_world, modelId);
     if (blend == 0) {
         return 0;
@@ -108,7 +108,7 @@ u8 func_80276054_de(s32 modelId) {
     return blend->byte58;
 }
 
-u8 func_80276088_de(s32 modelId) {
+u8 Region_GetModelBlendByte59(s32 modelId) {
     ModelBlend *blend = Scene_GetModelRecordByIndexPointer(&g_world, modelId);
     if (blend == 0) {
         return 0;
@@ -116,7 +116,7 @@ u8 func_80276088_de(s32 modelId) {
     return blend->byte59;
 }
 
-f32 Region_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
+f32 Region_GetTriangleEdgeAngle(void *triangle, s32 edgeIndex) {
     Triangle *polygon = triangle;
     CVector3 *v0;
     CVector3 *v1;
@@ -124,8 +124,8 @@ f32 Region_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
     f32 mag;
     f32 result;
 
-    v1 = polygon->vertices[arg1];
-    v0 = polygon->vertices[(arg1 + 1) % 3];
+    v1 = polygon->vertices[edgeIndex];
+    v0 = polygon->vertices[(edgeIndex + 1) % 3];
     dx = v0->x - v1->x;
     dz = v0->z - v1->z;
     mag = Math_Sqrtf((dx * dx) + (dz * dz));
@@ -139,29 +139,29 @@ f32 Region_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
     return result;
 }
 
-void func_80276184_de(void *modelTreeNode) {
+void Region_SetNodeGroupFlag(void *modelTreeNode) {
     struct ModelTreeNode *node = modelTreeNode;
     if ((modelTreeNode != 0) && (node->flags & 2)) {
-        func_80276214_de(modelTreeNode, node->modelId);
+        Region_MarkMatchingNodes(modelTreeNode, node->modelId);
     }
 }
 
-void func_802761B8_de(void *modelTreeNode) {
+void Region_ClearNodeGroupFlag(void *modelTreeNode) {
     struct ModelTreeNode *node = modelTreeNode;
     if ((modelTreeNode != 0) && (node->flags & 2)) {
-        func_80276298_de(modelTreeNode, node->modelId);
+        Region_UnmarkMatchingNodes(modelTreeNode, node->modelId);
     }
 }
 
-f32 func_802761EC_de(u16 *arg0, f32 arg1) {
+f32 Region_SetNodeGroupHeight(u16 *arg0, f32 arg1) {
     f32 result = arg1;
     if (arg0 != 0) {
-        result = func_8027631C_de(arg0, arg1, *arg0);
+        result = Region_SetMatchingVertexHeights(arg0, arg1, *arg0);
     }
     return result;
 }
 
-void func_80276214_de(struct ModelTreeNode *modelTreeNode, u16 arg1) {
+void Region_MarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1) {
     u16 modelId;
     u16 flags;
     void *temp_a0;
@@ -173,21 +173,21 @@ void func_80276214_de(struct ModelTreeNode *modelTreeNode, u16 arg1) {
             temp_a0 = modelTreeNode->branches[0];
             modelTreeNode->flags = flags | 4;
             if (temp_a0 != 0) {
-                func_80276214_de(temp_a0, modelId);
+                Region_MarkMatchingNodes(temp_a0, modelId);
             }
             temp_a0 = modelTreeNode->branches[1];
             if (temp_a0 != 0) {
-                func_80276214_de(temp_a0, modelId);
+                Region_MarkMatchingNodes(temp_a0, modelId);
             }
             temp_a0 = modelTreeNode->branches[2];
             if (temp_a0 != 0) {
-                func_80276214_de(temp_a0, modelId);
+                Region_MarkMatchingNodes(temp_a0, modelId);
             }
         }
     }
 }
 
-void func_80276298_de(struct ModelTreeNode *modelTreeNode, u16 arg1) {
+void Region_UnmarkMatchingNodes(struct ModelTreeNode *modelTreeNode, u16 arg1) {
     u16 modelId;
     u16 flags;
     void *temp_a0;
@@ -199,21 +199,21 @@ void func_80276298_de(struct ModelTreeNode *modelTreeNode, u16 arg1) {
             temp_a0 = modelTreeNode->branches[0];
             modelTreeNode->flags = flags & 0xFFFB;
             if (temp_a0 != 0) {
-                func_80276298_de(temp_a0, modelId);
+                Region_UnmarkMatchingNodes(temp_a0, modelId);
             }
             temp_a0 = modelTreeNode->branches[1];
             if (temp_a0 != 0) {
-                func_80276298_de(temp_a0, modelId);
+                Region_UnmarkMatchingNodes(temp_a0, modelId);
             }
             temp_a0 = modelTreeNode->branches[2];
             if (temp_a0 != 0) {
-                func_80276298_de(temp_a0, modelId);
+                Region_UnmarkMatchingNodes(temp_a0, modelId);
             }
         }
     }
 }
 
-f32 func_8027631C_de(u16 *arg0, f32 arg1, u16 arg2) {
+f32 Region_SetMatchingVertexHeights(u16 *arg0, f32 arg1, u16 arg2) {
     u16 *node = arg0;
     u16 id = arg2;
 
@@ -226,19 +226,19 @@ f32 func_8027631C_de(u16 *arg0, f32 arg1, u16 arg2) {
             ((struct func_802077F4_S2 *) ((ObjectLinks1C *) node)->unk_C)->unk4 = arg1;
 
             if (((ObjectLinks1C *)(node))->unk_10.v0 != 0) {
-                func_8027631C_de(((ObjectLinks1C *)(node))->unk_10.v1, arg1, id);
+                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_10.v1, arg1, id);
             }
             if (((ObjectLinks1C *)(node))->unk_14.v0 != 0) {
-                func_8027631C_de(((ObjectLinks1C *)(node))->unk_14.v1, arg1, id);
+                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_14.v1, arg1, id);
             }
             if (((ObjectLinks1C *)(node))->unk_18.v0 != 0) {
-                func_8027631C_de(((ObjectLinks1C *)(node))->unk_18.v1, arg1, id);
+                Region_SetMatchingVertexHeights(((ObjectLinks1C *)(node))->unk_18.v1, arg1, id);
             }
         }
     }
 }
 
-void func_8027640C_de(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Region_ExpandPointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
 {
     s32 i;
     i = 0;
@@ -297,7 +297,7 @@ void func_8027640C_de(f32 *arg0, s32 arg1, CVector3 *arg2)
     }
 }
 
-void func_802764D4_de(void *arg0, s32 arg1, void *arg2) {
+void Region_ComputeHorizontalBounds(void *arg0, s32 arg1, void *arg2) {
     f32 *bounds = arg0;
     CVector3 *points = arg2;
     f32 temp_f0;
@@ -310,6 +310,6 @@ void func_802764D4_de(void *arg0, s32 arg1, void *arg2) {
         temp_f0_2 = points->z;
         bounds[3] = temp_f0_2;
         bounds[1] = temp_f0_2;
-        func_80276510_de(arg0, arg1 - 1, points + 1);
+        Region_ExpandHorizontalBounds(arg0, arg1 - 1, points + 1);
     }
 }

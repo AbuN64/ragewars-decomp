@@ -58,9 +58,9 @@ void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC 
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
+extern s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
 extern void GraphU64_ProjectPoint(void *, CVector3 *, CVector3 *);
-extern f32 func_80278890_de(void *);
+extern f32 Link_GetLightAnimationOffset(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
 void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
     Shared_Game *settings;
@@ -137,14 +137,14 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
             sampleDirection = directions + sampleIndex * 3;
             volume = volumes[sampleIndex];
             GraphU64_TransformPoint(volume->inverse, position, &transformed);
-            if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
+            if (Lighting_EvaluateLocalVolume(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 GraphU64_AddVec3(&translatedDirection, &localDirection, &transformed);
                 GraphU64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
                 GraphU64_SubtractVectors(sampleDirection, position, &localDirection);
                 GraphU64_NormalizeVec3(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
-                    level = func_80278890_de(volume);
+                    level = Link_GetLightAnimationOffset(volume);
                     animationColor.x = level;
                     animationColor.y = level;
                     animationColor.z = level;
@@ -197,7 +197,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
             color = volume->direction;
             scale = one - backScale;
             if (volume == animatedVolume) {
-                pulse = func_80278890_de(volume);
+                pulse = Link_GetLightAnimationOffset(volume);
                 animationColor.x = pulse;
                 animationColor.y = pulse;
                 animationColor.z = pulse;

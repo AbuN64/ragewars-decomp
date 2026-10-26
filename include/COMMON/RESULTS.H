@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-struct Node_func_8029076C_de;
-struct Node_func_8029076C_de {
+struct NodeSetN64CollectVisibleEffectNodes;
+struct NodeSetN64CollectVisibleEffectNodes {
     char pad0[0x17C];
     f32 x0;
     f32 x1;
@@ -15,20 +15,20 @@ struct Node_func_8029076C_de {
     char pad194[8];
     s32 flags;
     char pad1A0[0x3C];
-    struct Node_func_8029076C_de *next;
+    struct NodeSetN64CollectVisibleEffectNodes *next;
 };
 
 struct Results;
 typedef struct Results Results;
 
 
-struct Node_func_8029076C_de;
-typedef struct Node_func_8029076C_de Node_func_8029076C_de;
+struct NodeSetN64CollectVisibleEffectNodes;
+typedef struct NodeSetN64CollectVisibleEffectNodes NodeSetN64CollectVisibleEffectNodes;
 
 struct Results;
 struct Results {
     char pad0[0x144];
-    Node_func_8029076C_de *nodes[0x200];
+    NodeSetN64CollectVisibleEffectNodes *nodes[0x200];
     s32 count;
 };
 
@@ -52,7 +52,7 @@ struct ObjectLinks1E0;
 
 
 struct ContainerRecAt3C04;
-struct Node_func_8029076C_de;
+struct NodeSetN64CollectVisibleEffectNodes;
 
 
 struct SceneEffect;

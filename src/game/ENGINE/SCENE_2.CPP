@@ -12,7 +12,7 @@
 
 
 
-extern s32 func_8028FDF8_de(void *table, s32 index);
+extern s32 SetN64_GetPackSectionSize(void *table, s32 index);
 extern void Link_DispatchTrigger(Entity *entity);
 
 void Scene_DispatchEnabledEntityTrigger(WorldSceneDispatchEnabledEntityTrigger *world, Entity *entity) {
@@ -28,7 +28,7 @@ void Scene_DispatchEnabledEntityTrigger(WorldSceneDispatchEnabledEntityTrigger *
     level = world->level;
     mask = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->levels, 0), level), 2);
     SetN64_GetPackSection(mask, 0);
-    func_8028FDF8_de(mask, 1);
+    SetN64_GetPackSectionSize(mask, 1);
     bits = SetN64_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     if (bits[index / 8] & bit) {
@@ -95,7 +95,7 @@ typedef struct LightVolumeRecord {
     u8 data[0x4C];
 } LightVolumeRecord;
 
-extern s32 func_8028FDF8_de(void *table, s32 index);
+extern s32 SetN64_GetPackSectionSize(void *table, s32 index);
 extern s32 SetN64_GetPackSize(void *table);
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
 extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);
@@ -125,7 +125,7 @@ static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *in
     level = world->level;
     mask = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(sections, 0), level), 1);
     SetN64_GetPackSection(mask, 0);
-    func_8028FDF8_de(mask, 1);
+    SetN64_GetPackSectionSize(mask, 1);
     bits = SetN64_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     return (bits[index / 8] & bit) != 0;

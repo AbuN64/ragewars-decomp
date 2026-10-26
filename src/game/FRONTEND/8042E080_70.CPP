@@ -3,7 +3,7 @@
 
 /* Calls InitFrontendMenus and then func_80298368_de with 1. */
 #if defined(VERSION_EU)
-extern void func_802A2344_eu();
+extern void Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
 extern void func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -16,7 +16,7 @@ extern void func_80298368_de(int);
 void func_80435B10_de(void) {
     
 #if defined(VERSION_EU)
-func_802A2344_eu
+Tsmos_InitializeEuropeanFrontend
 #elif defined(VERSION_EU_X)
 func_802A2374_eu_x
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)

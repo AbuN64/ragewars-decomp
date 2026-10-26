@@ -63,30 +63,30 @@ s32 func_804224E0_de(void *node) {
     func_8025E214_de(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
-    D_800E4518->leftTab = func_8040EC30_de(node, 0x37b);
+    D_800E4518->leftTab = Frontend_FindWidgetByResourceId(node, 0x37b);
     D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
     D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
     rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
     D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = func_8040EC30_de(node, 0x382);
+    D_800E4518->rightTab = Frontend_FindWidgetByResourceId(node, 0x382);
     D_800E4518->rightTab->x += D_800E4518->rightTab->width;
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
     D_800E4518->title = func_80419E54_de(0x36f, 0x6E);
-    marker = func_8040EC30_de(node, 0x36e);
+    marker = Frontend_FindWidgetByResourceId(node, 0x36e);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
-    (func_8040EC30_de(node, 0x380))->alpha = 0x6E;
-    header = func_8040EC30_de(node, 0x381);
+    (Frontend_FindWidgetByResourceId(node, 0x380))->alpha = 0x6E;
+    header = Frontend_FindWidgetByResourceId(node, 0x381);
     D_800E4518->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = func_8040EC30_de(node, 0x36c);
-    rumble = func_8040EC30_de(node, 0x37e);
+    D_800E4518->footer = Frontend_FindWidgetByResourceId(node, 0x36c);
+    rumble = Frontend_FindWidgetByResourceId(node, 0x37e);
     D_800E4518->rumbleIcon = rumble;
     Frontend_SetWidgetFlag08(rumble, 1);
-    (func_8040EC30_de(node, 0x37f))->alpha = 0x6E;
-    pak = func_8040EC30_de(node, 0x370);
+    (Frontend_FindWidgetByResourceId(node, 0x37f))->alpha = 0x6E;
+    pak = Frontend_FindWidgetByResourceId(node, 0x370);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
     func_8041B110_de(0x379);
@@ -107,9 +107,9 @@ s32 func_804224E0_de(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x374), 1);
+            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
         }
-        handle = func_8040EC30_de(node, 0x376);
+        handle = Frontend_FindWidgetByResourceId(node, 0x376);
         Frontend_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
@@ -122,8 +122,8 @@ s32 func_804224E0_de(void *node) {
     case 2:
     case 3:
     case 4:
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x376), 1);
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x374), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x376), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
         break;
     }
     func_8041B110_de(0x376);
@@ -131,7 +131,7 @@ s32 func_804224E0_de(void *node) {
     func_8041B110_de(0x374);
     func_8041B110_de(0x375);
     D_800E4518->state = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);
     func_8043C278_de(D_800E4518);
     D_800E4518->cursor = 0;
@@ -140,8 +140,8 @@ s32 func_804224E0_de(void *node) {
     D_8011FAC0.clockPaused = 1;
     D_80154020[1] = 0;
     D_80154020[0] = -1;
-    func_804221E8_de();
-    prompt = func_8040EC30_de(node, 0x36d);
+    Menu_ConfigureOptionsCamera();
+    prompt = Frontend_FindWidgetByResourceId(node, 0x36d);
     D_800E4518->prompt = prompt;
     Frontend_SetWidgetFlag08(prompt, 1);
     return 0;

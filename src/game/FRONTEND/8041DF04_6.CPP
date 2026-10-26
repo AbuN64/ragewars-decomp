@@ -9,7 +9,7 @@
 #include "TYPES.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_8041E408_de);
+INCLUDE_ASM("ovl_80400000", Frontend_UpdateJoinRequestDisplay);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -22,7 +22,7 @@ enum { DRAW_ICON=903, DRAW_NAME=905, DRAW_VARIANT=904, DRAW_FIRST=906, DRAW_SECO
 #else
 enum { DRAW_ICON=909, DRAW_NAME=911, DRAW_VARIANT=910, DRAW_FIRST=912, DRAW_SECOND=913 };
 #endif
-void func_8041E408_de(s32 index) {
+void Frontend_UpdateJoinRequestDisplay(s32 index) {
     void *window;
     RequestDrawScreen *screen;
     MenuWidget *widget;
@@ -36,12 +36,12 @@ void func_8041E408_de(s32 index) {
     if (screen->count < index || D_80153F80[index].id < 0) {
         Frontend_SetWidgetFlag08(window, 0);
     } else {
-        widgetObject = func_8040EC30_de(window, DRAW_ICON);
+        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_ICON);
         widget = widgetObject;
         widget->alpha = 125;
         model = Frontend_FindKeyIndex(D_80153F80[index].id);
         widget->value = D_800E3A58[model].portrait;
-        widgetObject = func_8040EC30_de(window, DRAW_NAME);
+        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_NAME);
         widget = widgetObject;
         widget->alpha = 125;
         model = Frontend_FindJoinModelIndex(D_80153F80[index].variant, D_80153F80[index].id);
@@ -50,17 +50,17 @@ void func_8041E408_de(s32 index) {
           (u8 *)*D_800E381C[D_80153F80[index].variant][model].text
         );
         widget->text = name;
-        widgetObject = func_8040EC30_de(window, DRAW_VARIANT);
+        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_VARIANT);
         widget = widgetObject;
         widget->alpha = 125;
         variantObject = &D_800DF964[D_80153F80[index].variant];
         variantSlot = variantObject;
         widget->text = **variantSlot;
-        widgetObject = func_8040EC30_de(window, DRAW_FIRST);
+        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_FIRST);
         widget = widgetObject;
         widget->alpha = 125;
         widget->value = D_800DF740[D_80153F80[index].word8].first;
-        widgetObject = func_8040EC30_de(window, DRAW_SECOND);
+        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_SECOND);
         widget = widgetObject;
         widget->alpha = 125;
         widget->value = D_800DF740[D_80153F80[index].word8].second;

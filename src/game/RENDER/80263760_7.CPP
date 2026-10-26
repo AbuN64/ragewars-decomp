@@ -177,11 +177,11 @@ void Control_CommitControllerInputs(void) {
         p = D_8010F328;
         for (; i < 4; i++, p += 1) {
             Control_CommitProfileInput(p);
-            temp = func_802A23B4_de();
+            temp = Tsmos_IsFrontendActive();
             if (temp != one) {
                 continue;
             }
-            if (func_802A23A4_de() != temp) {
+            if (Tsmos_IsControllerStateActive() != temp) {
                 continue;
             }
             Smos_DispatchControllerProfileChanges(p);

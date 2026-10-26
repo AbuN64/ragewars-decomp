@@ -20,7 +20,7 @@ extern void Smos_ClearControllerFlags(s32 *arg0);
 
 
 
-void func_802A2360_de(void) {
+void Tsmos_ActivateControllerState(void) {
     s32 *p;
 
     p = &D_800CDA24;
@@ -30,19 +30,19 @@ void func_802A2360_de(void) {
     }
 }
 
-void func_802A2394_de(void) {
+void Tsmos_DeactivateControllerState(void) {
     D_800CDA24 = 0;
 }
 
-int func_802A23A4_de(void) {
+int Tsmos_IsControllerStateActive(void) {
     return D_800CDA24;
 }
 
-int func_802A23B4_de(void) {
+int Tsmos_IsFrontendActive(void) {
     return D_800D2C98;
 }
 
-void func_802A23C4_de(s32 arg0) {
+void Tsmos_SetModeOneFlag(s32 arg0) {
     if (arg0 == 1) {
         D_800CDA2C = arg0;
         return;
@@ -50,6 +50,6 @@ void func_802A23C4_de(s32 arg0) {
     D_800CDA2C = 0;
 }
 
-int func_802A23F0_de(void) {
+int Tsmos_GetModeOneFlag(void) {
     return D_800CDA2C;
 }

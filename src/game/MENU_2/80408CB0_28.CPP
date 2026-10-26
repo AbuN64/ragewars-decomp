@@ -14,13 +14,12 @@
 #define func_8041A580_de fz_func_8041A580_de
 #define func_8041A6EC_de fz_func_8041A6EC_de
 #define func_80419E54_de fz_func_80419E54_de
-#define func_8040EC30_de fz_func_8040EC30_de
 typedef struct EuOptsPage_eu { void *title; void *list; void *bar; void *rowC; void *row10; void *row14; s32 pad18, pad1C, sel, count; } EuOptsPage_eu;
 extern EuOptsPage_eu *g_optionsPage;
 extern char *D_800E1C14[], *D_800E1C34[], *D_800E1C44[], *D_auto_800E1C54[], *D_auto_800E1C64[], *D_800D2134[], *D_800D2138[], *D_800D213C[];
 extern void *Cache_AllocateMemory(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
 extern void SmpButton_AppendListText(); extern void SmpButton_SelectListEntry(); extern u32 Defs_GetMemorySize(); extern void *func_8041A580_de();
-extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *func_8040EC30_de();
+extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *Frontend_FindWidgetByResourceId();
 extern char *D_auto_800DDB08[];
 /* Builds the options page (0x28-byte state g_optionsPage): title, the three toggle rows (ids 0x59/0x55/0x51) labelled in the
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x53 and its list. Returns 0. */
@@ -60,7 +59,6 @@ s32 func_804229E0_eu(void) {
 #undef func_8041A580_de
 #undef func_8041A6EC_de
 #undef func_80419E54_de
-#undef func_8040EC30_de
 #else
 INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
 #endif
@@ -110,7 +108,7 @@ s32 func_80422C58_eu(void) {
     func_8041B110_de(0x1C3);
     func_8041B110_de(0x1C4);
     D_800E4514->players[0].unk4 = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     return 0;
 }
 #else
@@ -173,30 +171,30 @@ s32 func_80422E34_eu(void *node) {
     func_8025E214_de(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
-    D_800E4518->leftTab = func_8040EC30_de(node, 0x381);
+    D_800E4518->leftTab = Frontend_FindWidgetByResourceId(node, 0x381);
     D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
     D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
     rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
     D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = func_8040EC30_de(node, 0x388);
+    D_800E4518->rightTab = Frontend_FindWidgetByResourceId(node, 0x388);
     D_800E4518->rightTab->x += D_800E4518->rightTab->width;
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
     D_800E4518->title = func_80419E54_de(0x373, 0x6E);
-    marker = func_8040EC30_de(node, 0x372);
+    marker = Frontend_FindWidgetByResourceId(node, 0x372);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
-    (func_8040EC30_de(node, 0x386))->alpha = 0x6E;
-    header = func_8040EC30_de(node, 0x387);
+    (Frontend_FindWidgetByResourceId(node, 0x386))->alpha = 0x6E;
+    header = Frontend_FindWidgetByResourceId(node, 0x387);
     D_800E4518->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = func_8040EC30_de(node, 0x370);
-    rumble = func_8040EC30_de(node, 0x384);
+    D_800E4518->footer = Frontend_FindWidgetByResourceId(node, 0x370);
+    rumble = Frontend_FindWidgetByResourceId(node, 0x384);
     D_800E4518->rumbleIcon = rumble;
     Frontend_SetWidgetFlag08(rumble, 1);
-    (func_8040EC30_de(node, 0x385))->alpha = 0x6E;
-    pak = func_8040EC30_de(node, 0x374);
+    (Frontend_FindWidgetByResourceId(node, 0x385))->alpha = 0x6E;
+    pak = Frontend_FindWidgetByResourceId(node, 0x374);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
     func_8041B110_de(0x377);
@@ -223,9 +221,9 @@ s32 func_80422E34_eu(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
+            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         }
-        handle = func_8040EC30_de(node, 0x380);
+        handle = Frontend_FindWidgetByResourceId(node, 0x380);
         Frontend_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
@@ -238,8 +236,8 @@ s32 func_80422E34_eu(void *node) {
     case 2:
     case 3:
     case 4:
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x380), 1);
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x380), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         break;
     }
     func_8041B110_de(0x380);
@@ -247,7 +245,7 @@ s32 func_80422E34_eu(void *node) {
     func_8041B110_de(0x37E);
     func_8041B110_de(0x37F);
     D_800E4518->state = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);
     func_8043C278_de(D_800E4518);
     D_800E4518->cursor = 0;
@@ -256,8 +254,8 @@ s32 func_80422E34_eu(void *node) {
     D_8011FAC0.clockPaused = 1;
     D_80154020[1] = 0;
     D_80154020[0] = -1;
-    func_804221E8_de();
-    prompt = func_8040EC30_de(node, 0x371);
+    Menu_ConfigureOptionsCamera();
+    prompt = Frontend_FindWidgetByResourceId(node, 0x371);
     D_800E4518->prompt = prompt;
     Frontend_SetWidgetFlag08(prompt, 1);
     return 0;

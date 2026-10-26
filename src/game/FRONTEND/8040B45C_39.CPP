@@ -19,7 +19,7 @@ extern EntryRecAt18V1 *D_80153C10;
 /* Releases the buffers of the pool at D_80153C40: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
    reaches zero the buffer is freed through Cache_FreeMemory, along with the entry's secondary buffer
-   when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at D_80153C40, as in func_80410E1C_de. */
+   when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at D_80153C40, as in Frontend_UpdateImageReleaseTimers. */
 
 
 
@@ -72,11 +72,11 @@ extern struct ResourceRecAt6 *D_8014D988;
 
 
 /* Returns the halfword at offset 0xE of the object held at offset 0x48C of record i in the
-   font table D_801539B0.Font (1180-byte records); func_80411C60_de reads offset 0x10 of the same
+   font table D_801539B0.Font (1180-byte records); Frontend_GetFontLetterSpacing reads offset 0x10 of the same
    object. */
 
 
-/* Runs func_80411518_de for each of the manager D_80153C20's entries unless its mode word at 0x34 is 1. */
+/* Runs Frontend_ReleaseChunkImages for each of the manager D_80153C20's entries unless its mode word at 0x34 is 1. */
 
 
 
@@ -129,11 +129,11 @@ extern void Frontend_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
 
 
 
-extern void func_80411AF0_de(s32 i);
+extern void Frontend_ReleaseRetainedImageSlot(s32 i);
 
 /* Loads or unloads the images of a widget subtree: visits the later siblings when asked and the
    children, then for an image widget (type 3) loads its image through func_80410674_de or unloads it
-   through func_80411AF0_de, and for a button (type 8) visits its normal, pressed and highlighted
+   through Frontend_ReleaseRetainedImageSlot, and for a button (type 8) visits its normal, pressed and highlighted
    variants without their siblings; type 4 widgets and other types have nothing to do. */
 
 
@@ -152,7 +152,7 @@ extern s32 D_800E2AD4;
 
 extern Handler802A2B50 D_800E2AD8;
 
-void func_804118E4_de(s32 force) {
+void Frontend_ReleaseUnprotectedBuffers(s32 force) {
     s32 i;
 
     for (i = 0; i < D_80153C40.count; i++) {
@@ -211,7 +211,7 @@ int func_80411AE8_de(void) {
     return 1;
 }
 
-void func_80411AF0_de(s32 i) {
+void Frontend_ReleaseRetainedImageSlot(s32 i) {
     struct ResourceRecAt6 *resource;
 
     resource = (struct ResourceRecAt6 *)(i * 8 + (s32)D_8014D988);
@@ -240,7 +240,7 @@ short func_80411C28_de(int index) {
     return D_801539B0.Font[index].TableEntry->bitmapCount;
 }
 
-short func_80411C60_de(int index) {
+short Frontend_GetFontLetterSpacing(int index) {
     return D_801539B0.Font[index].TableEntry->field_10;
 }
 
@@ -267,12 +267,12 @@ void func_80411D18_de(void) {
 
     if (D_80153C20.mode != 1) {
         for (i = 0; i < D_80153C20.count; i++) {
-            func_80411518_de(i);
+            Frontend_ReleaseChunkImages(i);
         }
     }
 }
 
-char *func_80411D78_de(s32 index) {
+char *Frontend_GetStringByIndex(s32 index) {
     return D_801539B0.StringTable[index];
 }
 
@@ -300,7 +300,7 @@ s32 Frontend_IsValidScreenIndex(s32 index) {
     return 0;
 }
 
-void func_80411E18_de(s32 i) {
+void Frontend_ReleaseReferencedBuffer(s32 i) {
     D_80153C40.refs[i]--;
     if (D_80153C40.primary[i].unk8 != 0 && D_80153C40.refs[i] == 0) {
         Cache_FreeMemory(D_80153C40.primary[i].unk8);
@@ -341,7 +341,7 @@ void func_80411F48_de(void) {
     }
 }
 
-GlyphBuffer *func_8041200C_de(s32 index) {
+GlyphBuffer *Frontend_GetGlyphBuffer(s32 index) {
     return (GlyphBuffer *)&D_801539B0.Font[index];
 }
 
@@ -359,7 +359,7 @@ void func_80412038_de(void) {
             if (((EntryRecAt18V1 *)(offset + (s32)D_80153C10))->unk4 & 1) {
                 resource = D_8014D988 + i;
                 if (resource->id != invalid && resource->retained == 0) {
-                    func_80411AF0_de(i);
+                    Frontend_ReleaseRetainedImageSlot(i);
                 }
             }
             offset += 0x1C;
@@ -384,7 +384,7 @@ void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
             if (load != 0) {
                 Frontend_GetImageTexture(widget->normal, 3);
             } else {
-                func_80411AF0_de(widget->normal);
+                Frontend_ReleaseRetainedImageSlot(widget->normal);
             }
             break;
         case 8:
@@ -405,7 +405,7 @@ void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
 
 
 
-void func_804121F0_de(List *list) {
+void Frontend_ClampListCursorAndScroll(List *list) {
     if (list->maxY < list->cursorY) {
         list->cursorY = list->maxY;
     }

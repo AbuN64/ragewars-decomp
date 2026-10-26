@@ -21,7 +21,7 @@
 
 
 
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgs_func_8040E67C_de *args);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
 
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
@@ -33,14 +33,14 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 
 extern struct Shape_typemap_165 D_8014D580;
-extern void Frontend_DrawWidget(Widget *widget, DrawArgs_func_8040E67C_de args);
+extern void Frontend_DrawWidget(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args);
 
-void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
+void Frontend_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
     struct Shape_typemap_165 clip;
-    DrawArgs_func_8040E67C_de local;
+    DrawArgsFrontendDrawVisibleWidgetClipped local;
     s32 clipped;
 
     clipped = 0;
@@ -65,7 +65,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
 }
 
 /* Walks a sibling node list and dispatches the by-value event to every node whose flag bit 3 is set. */
-void Frontend_DrawVisibleSiblings(Widget *node, DrawArgs_func_8040E67C_de event) {
+void Frontend_DrawVisibleSiblings(Widget *node, DrawArgsFrontendDrawVisibleWidgetClipped event) {
     for (; node != 0; node = node->next) {
         if (node->flags & 8) {
             Frontend_DrawWidget(node, event);
@@ -73,7 +73,7 @@ void Frontend_DrawVisibleSiblings(Widget *node, DrawArgs_func_8040E67C_de event)
     }
 }
 
-void func_8040E894_de(void) {
+void Frontend_ResetTextClipBounds(void) {
 
     struct Shape_typemap_165 *state;
 
@@ -98,7 +98,7 @@ void Frontend_SetWidgetFlag08(void *object, int enabled) {
    argument. */
 
 
-void func_8040E900_de(struct Widget *record, int enable) {
+void Frontend_SetWidgetFlag01(struct Widget *record, int enable) {
     if (enable) {
         record->flags |= 1;
     } else {
@@ -130,7 +130,7 @@ void Frontend_SetWidgetFlag100(struct Widget *record, int enable) {
 /* Stores two halfwords at offsets 0x14 and 0x16 of a record, a pair set together. */
 
 
-void func_8040E978_de(struct Pair14 *record, s16 first, s16 second) {
+void Frontend_SetPairValues(struct Pair14 *record, s16 first, s16 second) {
     record->first = first;
     record->second = second;
 }
@@ -147,12 +147,12 @@ void func_8040E978_de(struct Pair14 *record, s16 first, s16 second) {
 
 
 
-void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_8040E67C_de args, s32 px, s32 py) {
+void Frontend_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgsFrontendDrawVisibleWidgetClipped args, s32 px, s32 py) {
     if (*hit != 0) {
         return;
     }
     if (node->next != 0) {
-        func_8040E984_de(hit, node->next, args, px, py);
+        Frontend_FindWidgetAtPoint(hit, node->next, args, px, py);
     }
     if (*hit != 0) {
         return;
@@ -160,7 +160,7 @@ void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_80
     args.x += node->x;
     args.y += node->y;
     if (node->child != 0) {
-        func_8040E984_de(hit, node->child, args, px, py);
+        Frontend_FindWidgetAtPoint(hit, node->child, args, px, py);
     }
     if (*hit != 0) {
         return;
@@ -180,7 +180,7 @@ void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_80
 /* Returns the union of the flag halfwords at offset 0x12 of every node in a linked list. */
 
 
-s32 func_8040EB48_de(struct WidgetNode *node) {
+s32 Frontend_CollectSiblingFlags(struct WidgetNode *node) {
     s32 flags = 0;
 
     while (node != 0) {
@@ -193,7 +193,7 @@ s32 func_8040EB48_de(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 3 set in its flag halfword at offset 0x12. */
 
 
-s32 func_8040EB68_de(struct WidgetNode *node) {
+s32 Frontend_AnyVisibleSibling(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {
@@ -206,7 +206,7 @@ s32 func_8040EB68_de(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 0 set in its flag halfword at offset 0x12. */
 
 
-s32 func_8040EB8C_de(struct WidgetNode *node) {
+s32 Frontend_AnySiblingFlag01(struct WidgetNode *node) {
     s32 flags = 0;
 
     while (node != 0) {
@@ -219,7 +219,7 @@ s32 func_8040EB8C_de(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 6 set in its flag halfword at offset 0x12. */
 
 
-s32 func_8040EBAC_de(struct WidgetNode *node) {
+s32 Frontend_AnySiblingFlag40(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {
@@ -246,7 +246,7 @@ s32 Frontend_ListHasFlag100(struct WidgetNode *node) {
    reports the totals through the two pointers. */
 
 
-void func_8040EBF4_de(struct NodeRecAt16 *node, s32 *x, s32 *y) {
+void Frontend_SumNodeOffsets(struct NodeRecAt16 *node, s32 *x, s32 *y) {
     s32 sumX = node->x;
     s32 sumY = node->y;
 

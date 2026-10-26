@@ -10,7 +10,7 @@
 #include "COMMON/TEXTURE.H"
 
 /** Store the active value and reset its timer to sixty. */
-void func_802A2418_de(int arg0) {
+void Tsmos_SetTimerState(int arg0) {
     D_800CDA30_de.state = arg0;
     D_800CBC14 = 60;
 }

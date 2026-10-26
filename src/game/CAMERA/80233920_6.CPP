@@ -16,7 +16,7 @@ float func_80245AD8_de(void);
 void GraphU64_InvertAffineMatrix(f32 *, f32 *);
 void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
-void func_8026FC9C_de(f32 *, void *);
+void GraphU64_PackFixedMatrix(f32 *, void *);
 void GraphU64_IdentityMatrix(void *);
 void GraphU64_ClampMatrixToFixedRange(f32 *);
 void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
@@ -29,8 +29,8 @@ void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 f32 Region_GetPolygonHeight(void *, f32, f32);
-int func_802A23B4_de(void);
-int func_802A23F0_de(void);
+int Tsmos_IsFrontendActive(void);
+int Tsmos_GetModeOneFlag(void);
 
 void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
@@ -208,8 +208,8 @@ actor_found:
     if (Cinema_IsSequenceInWindow() != 0) {
         fovy = func_802459A0_de(camera);
     } else {
-        fovOverrideState = func_802A23B4_de();
-        if ((fovOverrideState == 1) && (func_802A23F0_de() == fovOverrideState)) {
+        fovOverrideState = Tsmos_IsFrontendActive();
+        if ((fovOverrideState == 1) && (Tsmos_GetModeOneFlag() == fovOverrideState)) {
             fovy = 45.0f;
         } else if (temp_f24 != 0.0f) {
             fovy = (temp_f24 * (initial_zoom - 75.0f)) + 75.0f;
@@ -255,7 +255,7 @@ actor_found:
     viewProjectionMatrix = (s8 *)camera->viewProjection;
     GraphU64_MultiplyMatrices((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
     GraphU64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
-    func_8026FC9C_de((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
+    GraphU64_PackFixedMatrix((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
     CopyMatrix(matrix, worldToViewMatrix);
     state = &D_80140FF8.state;
     if (state->unk0 == 4) {
@@ -319,7 +319,7 @@ actor_found:
         GraphU64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
         GraphU64_MultiplyMatrices(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
         GraphU64_ClampMatrixToFixedRange(hudProjectionMatrix);
-        func_8026FC9C_de(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
+        GraphU64_PackFixedMatrix(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
     }
     Sky_UpdateSceneEffects(&camera->sceneEffects, camera);
     Pak_UpdateDialogList(&camera->messageList);
@@ -363,7 +363,7 @@ extern void Geometry_SetViewEffect(s32);
 extern void TextLoad_SetTextureEffect(s32);
 extern void Geometry_SelectEffectModes(void);
 extern void TextLoad_ResetTextureCache(void);
-extern s32 func_802A23B4_de(void), GetMenuScreenOwner(void);
+extern s32 Tsmos_IsFrontendActive(void), GetMenuScreenOwner(void);
 extern s32 Geometry_SetModePreset(s32);
 extern void SetN64_ClearDepthRect(void *, s32, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
@@ -441,7 +441,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
     TextLoad_ResetTextureCache();
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     flag = 0;
-    if (func_802A23B4_de() != 0) {
+    if (Tsmos_IsFrontendActive() != 0) {
         flag = GetMenuScreenOwner() != 2;
     }
     if (view != &D_80140FF8.view || D_80140FF8.unk0 == 0 || flag != 0) {

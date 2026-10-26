@@ -100,7 +100,7 @@ func_804397E8_de
     if (event == 0 && GetMenuScreenOwner() != 0x19) {
         if (D_800E4F60->frames < 20) {
             if (++D_800E4F60->frames == 20 && D_800E4F60->winner > 0) {
-                func_804220A8_de(func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
+                Menu_SetOptionsSceneSelection(func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
                 D_800E4F60->blinkDelay = 0;
             }
         }

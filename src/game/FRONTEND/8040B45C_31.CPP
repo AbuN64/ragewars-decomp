@@ -88,7 +88,7 @@ static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
 
 s32 XPlus_StringLength(u8 *);
 
-GlyphBuffer *func_8041200C_de(s32);
+GlyphBuffer *Frontend_GetGlyphBuffer(s32);
 
 void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 
@@ -97,8 +97,8 @@ static inline void textBegin(u8 font, u8 style) {
                    &D_8014D580.field_4, &D_8014D580.field_C);
     D_8014D710 = (s8)font;
     D_8014D714 = (s8)style;
-    D_8014D560 = func_8041200C_de((s8)font);
-    D_8014D564 = func_80411C60_de((s8)font);
+    D_8014D560 = Frontend_GetGlyphBuffer((s8)font);
+    D_8014D564 = Frontend_GetFontLetterSpacing((s8)font);
     D_8014D568 = func_80411CD0_de((s8)font);
     D_8014D56C = func_80411C98_de((s8)font);
 }
@@ -280,7 +280,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     clipped = 0;
     if (!resolved) {
         if (widget->stringId == -1) return;
-        resolved = (u8 *)func_80411D78_de(widget->stringId);
+        resolved = (u8 *)Frontend_GetStringByIndex(widget->stringId);
     }
     text=resolved;
     if (!Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) return;
@@ -305,7 +305,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
             textBegin(font, style);
         }
     } else textBegin(font, style);
-    width = func_8040F160_de((s8)font, text, length) * args.XScale;
+    width = Frontend_MeasureTextPrefix((s8)font, text, length) * args.XScale;
     x = 0.0f;
     switch (widget->align & 3) {
         case 0: x=area.field_0; break;
@@ -328,7 +328,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
     if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
     if (textOverlaps(batch)) { Frontend_FlushTextBatches(); textBegin(font, style); }
-    sprite=func_802A15E4_de(length*sizeof(TextSprite));
+    sprite=ESmem_AllocateFrameHeapHigh(length*sizeof(TextSprite));
     sprites=sprite;
     D_8014D590[D_8014D570].cursor=sprites;
     color=((u32)args.alpha<<24)|0xFFFFFF;

@@ -17,17 +17,17 @@ extern void osViSetYScale(f32);
 extern void osViSetMode(OSViMode *);
 extern void osViBlack(s32);
 extern void func_802BA700_de(s32);
-extern void func_8028EACC_de(OSSched *);
+extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
-extern void func_8028EDA0_de(void *);
-extern void func_8028F278_de(OSSched *);
+extern void Sched_HandleRspCompletion(void *);
+extern void Sched_HandleRdpCompletion(OSSched *);
 extern void func_8025E318_de(void);
 extern void func_8025E214_de(s32);
 extern void *func_8025CC6C_de(void);
 extern void func_8025CBEC_de(void *);
-extern void func_8028FC10_de(OSSched *);
+extern void Sched_HandleTaskCommands(OSSched *);
 
-void func_8028EA40_eu(OSSched *sc) {
+void Sched_RunEventLoopEu(OSSched *sc) {
     void *msg;
     OSScClientWork *client;
     OSViMode *mode;
@@ -44,11 +44,11 @@ void func_8028EA40_eu(OSSched *sc) {
                 func_802BA700_de(2);
                 for (;;) {}
             }
-            func_8028EACC_de(sc);
+            Sched_HandleRetrace(sc);
             Frontend_UpdateScreenMode();
             break;
-        case 0x29B: func_8028EDA0_de(sc); break;
-        case 0x29C: func_8028F278_de(sc); break;
+        case 0x29B: Sched_HandleRspCompletion(sc); break;
+        case 0x29C: Sched_HandleRdpCompletion(sc); break;
         case 0x29D:
             func_8025E318_de();
             func_8025E214_de(-1);
@@ -61,7 +61,7 @@ void func_8028EA40_eu(OSSched *sc) {
                 client = client->next;
             }
             break;
-        case 6: func_8028FC10_de(sc); break;
+        case 6: Sched_HandleTaskCommands(sc); break;
         }
     }
 }
@@ -84,7 +84,7 @@ extern s32 D_8011B9F4, D_80142920, D_80142C30, D_80142C38, D_80146CC8, D_80146CD
 
 
 /** Handle one scheduler retrace, recover a lost yielded-task completion, and notify clients. */
-void func_8028EACC_de(OSSched *sc) {
+void Sched_HandleRetrace(OSSched *sc) {
     OSScTask_s *event = 0;
     s32 value1 = 0;
     s32 value2 = 0;
@@ -124,7 +124,7 @@ void func_8028EACC_de(OSSched *sc) {
             sc->curRSPTask = sc->gfxListHead;
             sc->gfxListHead = sc->gfxListHead->next;
             if (sc->gfxListHead == 0) sc->gfxListTail = 0;
-            func_8028EDA0_de(sc);
+            Sched_HandleRspCompletion(sc);
         }
     }
     D_800CD700++;
@@ -132,7 +132,7 @@ void func_8028EACC_de(OSSched *sc) {
     if (sc->doAudio != 0 && sc->curRSPTask != 0) __scYield(sc);
     else {
         flags = (sc->curRSPTask == 0) * 2 | (sc->curRDPTask == 0);
-        if (((s32 (*)(void *, s32 *, s32 *, s32))func_8028F544_de)(sc, &value1, &value2, flags) != flags) ((void (*)(void *, s32, s32))func_8028FA60_de)(sc, value1, value2);
+        if (((s32 (*)(void *, s32 *, s32 *, s32))Sched_SelectRunnableTasks)(sc, &value1, &value2, flags) != flags) ((void (*)(void *, s32, s32))Sched_StartSelectedTasks)(sc, value1, value2);
     }
     work = sc->clientList;
     while (work != 0) {

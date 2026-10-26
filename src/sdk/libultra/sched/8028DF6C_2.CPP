@@ -16,17 +16,17 @@ extern void osViSetYScale(f32);
 extern void osViSetMode(void *);
 extern void osViBlack(s32);
 extern void func_802BA700_de(s32);
-extern void func_8028EACC_de(OSSched *);
+extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
-extern void func_8028EDA0_de(void *);
-extern void func_8028F278_de(OSSched *);
+extern void Sched_HandleRspCompletion(void *);
+extern void Sched_HandleRdpCompletion(OSSched *);
 extern void func_8025E318_de(void);
 extern void func_8025E214_de(s32);
 extern void *func_8025CC6C_de(void);
 extern void func_8025CBEC_de(void *);
-extern void func_8028FC10_de(OSSched *);
+extern void Sched_HandleTaskCommands(OSSched *);
 
-void func_8028E880_us(OSSched *sc) {
+void Sched_RunEventLoopUs(OSSched *sc) {
     void *msg;
     OSScClientWork *client;
     for (;;) {
@@ -37,11 +37,11 @@ void func_8028E880_us(OSSched *sc) {
                 osViBlack(1);
                 for (;;) {}
             }
-            func_8028EACC_de(sc);
+            Sched_HandleRetrace(sc);
             Frontend_UpdateScreenMode();
             break;
-        case 0x29B: func_8028EDA0_de(sc); break;
-        case 0x29C: func_8028F278_de(sc); break;
+        case 0x29B: Sched_HandleRspCompletion(sc); break;
+        case 0x29C: Sched_HandleRdpCompletion(sc); break;
         case 0x29D:
             func_8025E318_de();
             func_8025E214_de(-1);
@@ -54,7 +54,7 @@ void func_8028E880_us(OSSched *sc) {
                 client = client->next;
             }
             break;
-        case 6: func_8028FC10_de(sc); break;
+        case 6: Sched_HandleTaskCommands(sc); break;
         }
     }
 }

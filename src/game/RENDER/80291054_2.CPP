@@ -33,7 +33,7 @@ void SetN64_InitFrameRing(RenderState *state) {
     Frame *view;
     osCreateMesgQueue(&D_801428C0, (s32)D_80142CB8, 0x1000);
     XPlus_FillMemory(D_800EFC80_de, 7, 0x2000);
-    func_8028F754_de((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
+    Sched_InitializeSchedulerThread((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
     osScAddClient(&D_80142928, &D_80146CC0, &D_801428C0);
     state->handle = -1;
     func_80293590_de(state);
@@ -66,7 +66,7 @@ void SetN64_InitFrameRing(RenderState *state) {
 
         view->previous = &state->ring.views[previous];
         view->next = &state->ring.views[next];
-        func_80290A00_de(view++);
+        SetN64_ClearFrameDirection(view++);
         ++i;
         count = D_800DE850;
 

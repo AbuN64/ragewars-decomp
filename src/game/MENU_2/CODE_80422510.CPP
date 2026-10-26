@@ -106,13 +106,13 @@ s32 Menu_CreateOptionsPage(void) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void func_8025E384_de(void);
 extern s32 ScenarioSetup_IsCupSelected(void);
-extern void func_804221E8_de(void);
-extern void func_802A2394_de(void);
+extern void Menu_ConfigureOptionsCamera(void);
+extern void Tsmos_DeactivateControllerState(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);
 s32 Menu_OpenOptionsScreen(void *node) {
@@ -136,30 +136,30 @@ s32 Menu_OpenOptionsScreen(void *node) {
     func_8025E214_de(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
-    D_800E4518->leftTab = func_8040EC30_de(node, 0x381);
+    D_800E4518->leftTab = Frontend_FindWidgetByResourceId(node, 0x381);
     D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
     D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
     rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
     D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = func_8040EC30_de(node, 0x388);
+    D_800E4518->rightTab = Frontend_FindWidgetByResourceId(node, 0x388);
     D_800E4518->rightTab->x += D_800E4518->rightTab->width;
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
     D_800E4518->title = func_80419E54_de(0x373, 0x6E);
-    marker = func_8040EC30_de(node, 0x372);
+    marker = Frontend_FindWidgetByResourceId(node, 0x372);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
-    (func_8040EC30_de(node, 0x386))->alpha = 0x6E;
-    header = func_8040EC30_de(node, 0x387);
+    (Frontend_FindWidgetByResourceId(node, 0x386))->alpha = 0x6E;
+    header = Frontend_FindWidgetByResourceId(node, 0x387);
     D_800E4518->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = func_8040EC30_de(node, 0x370);
-    rumble = func_8040EC30_de(node, 0x384);
+    D_800E4518->footer = Frontend_FindWidgetByResourceId(node, 0x370);
+    rumble = Frontend_FindWidgetByResourceId(node, 0x384);
     D_800E4518->rumbleIcon = rumble;
     Frontend_SetWidgetFlag08(rumble, 1);
-    (func_8040EC30_de(node, 0x385))->alpha = 0x6E;
-    pak = func_8040EC30_de(node, 0x374);
+    (Frontend_FindWidgetByResourceId(node, 0x385))->alpha = 0x6E;
+    pak = Frontend_FindWidgetByResourceId(node, 0x374);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
     func_8041B110_de(0x377);
@@ -186,9 +186,9 @@ s32 Menu_OpenOptionsScreen(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
+            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         }
-        handle = func_8040EC30_de(node, 0x380);
+        handle = Frontend_FindWidgetByResourceId(node, 0x380);
         Frontend_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
@@ -201,8 +201,8 @@ s32 Menu_OpenOptionsScreen(void *node) {
     case 2:
     case 3:
     case 4:
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x380), 1);
-        Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x380), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         break;
     }
     func_8041B110_de(0x380);
@@ -210,7 +210,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     func_8041B110_de(0x37E);
     func_8041B110_de(0x37F);
     D_800E4518->state = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);
     func_8043C278_de(D_800E4518);
     D_800E4518->cursor = 0;
@@ -219,8 +219,8 @@ s32 Menu_OpenOptionsScreen(void *node) {
     D_8011FAC0.clockPaused = 1;
     D_80154020.ready = 0;
     D_80154020.value = -1;
-    func_804221E8_de();
-    prompt = func_8040EC30_de(node, 0x371);
+    Menu_ConfigureOptionsCamera();
+    prompt = Frontend_FindWidgetByResourceId(node, 0x371);
     D_800E4518->prompt = prompt;
     Frontend_SetWidgetFlag08(prompt, 1);
     return 0;

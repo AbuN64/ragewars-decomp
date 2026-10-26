@@ -43,11 +43,11 @@ typedef struct t_dldc sm_dldc;
 
 extern int D_800DEA6C;
 
-struct Node_func_8040ED38_de;
-struct Node_func_8040ED38_de {
-    struct Node_func_8040ED38_de *unk0;
-    struct Node_func_8040ED38_de *unk4;
-    struct Node_func_8040ED38_de *unk8;
+struct NodeFrontendReplaceWidgetLinks;
+struct NodeFrontendReplaceWidgetLinks {
+    struct NodeFrontendReplaceWidgetLinks *unk0;
+    struct NodeFrontendReplaceWidgetLinks *unk4;
+    struct NodeFrontendReplaceWidgetLinks *unk8;
 };
 
 
@@ -92,8 +92,8 @@ typedef struct BatchRec BatchRec;
 
 struct WidgetNode;
 
-struct Node_func_8040ED38_de;
-typedef struct Node_func_8040ED38_de Node_func_8040ED38_de;
+struct NodeFrontendReplaceWidgetLinks;
+typedef struct NodeFrontendReplaceWidgetLinks NodeFrontendReplaceWidgetLinks;
 
 struct WidgetLayout;
 struct WidgetLayout {
@@ -123,8 +123,8 @@ struct Tree {
 };
 typedef struct Tree Tree;
 
-struct DrawArgs_func_8040E67C_de;
-struct DrawArgs_func_8040E67C_de {
+struct DrawArgsFrontendDrawVisibleWidgetClipped;
+struct DrawArgsFrontendDrawVisibleWidgetClipped {
     s32 x;
     s32 y;
     s32 flags;
@@ -159,8 +159,8 @@ struct WidgetNode;
 
 struct Pair14;
 
-struct Widget_func_8040C950_de;
-struct Widget_func_8040C950_de {
+struct WidgetFrontendUpdateSliderGeometry;
+struct WidgetFrontendUpdateSliderGeometry {
     char pad0[0x14];
     s16 x;
     s16 y;
@@ -168,7 +168,7 @@ struct Widget_func_8040C950_de {
     s16 height;
 };
 struct Slider;
-struct Widget_func_8040C950_de;
+struct WidgetFrontendUpdateSliderGeometry;
 struct Slider {
     char pad0[0xC];
     s16 parentId;
@@ -181,8 +181,8 @@ struct Slider {
     s32 top;
     s32 right;
     s32 bottom;
-    struct Widget_func_8040C950_de *thumb;
-    struct Widget_func_8040C950_de *fill;
+    struct WidgetFrontendUpdateSliderGeometry *thumb;
+    struct WidgetFrontendUpdateSliderGeometry *fill;
     s32 flags;
 };
 
@@ -211,8 +211,8 @@ struct NodeRecAt44 {
     void *ref44;
 };
 
-struct DrawArgs_func_8040E67C_de;
-typedef struct DrawArgs_func_8040E67C_de DrawArgs_func_8040E67C_de;
+struct DrawArgsFrontendDrawVisibleWidgetClipped;
+typedef struct DrawArgsFrontendDrawVisibleWidgetClipped DrawArgsFrontendDrawVisibleWidgetClipped;
 
 struct WidgetRecAt1A;
 typedef struct WidgetRecAt1A WidgetRecAt1A;
@@ -236,6 +236,6 @@ struct BatchRec {
     s32 count;
 };
 
-char *func_80411D78_de(s32);
+char *Frontend_GetStringByIndex(s32);
 s32 D_0040F570(char *, char *);
 #endif

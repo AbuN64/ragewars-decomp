@@ -24,7 +24,7 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
     SmpOverlay_ShowSlotById((s32) arg0, 2, 0x389);
     SmpOverlay_ShowSlotById((s32) arg0, 3, 0x389);
 
-    item = func_8040EC30_de(arg0, 0x38B);
+    item = Frontend_FindWidgetByResourceId(arg0, 0x38B);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
@@ -32,23 +32,23 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    item = func_8040EC30_de(arg0, 0x38C);
+    item = Frontend_FindWidgetByResourceId(arg0, 0x38C);
     D_800E39C0->rows[0] = item;
-    item = func_8040EC30_de(arg0, 0x395);
+    item = Frontend_FindWidgetByResourceId(arg0, 0x395);
     D_800E39C0->rows[1] = item;
-    item = func_8040EC30_de(arg0, 0x396);
+    item = Frontend_FindWidgetByResourceId(arg0, 0x396);
     D_800E39C0->rows[2] = item;
     D_800E39C0->step = Frontend_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
-        func_8041E408_de(row);
-        item = func_8040EC30_de(D_800E39C0->rows[row], 0x392);
+        Frontend_UpdateJoinRequestDisplay(row);
+        item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }
 
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
 
-    item = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
     Frontend_SetWidgetFlag08(item, 1);
     return 0;
 }
@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
 extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
-extern void func_8041E408_de(s32);
+extern void Frontend_UpdateJoinRequestDisplay(s32);
 
 s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, s32 event) {
     s32 variant;
@@ -87,7 +87,7 @@ s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argume
     XPlus_CopyString(D_80153F80[D_800E39C0->selection].name,
                     *D_800E381C[variant][id].text);
     D_80153F80[D_800E39C0->selection].variantC = variant;
-    func_8041E408_de(D_800E39C0->selection);
+    Frontend_UpdateJoinRequestDisplay(D_800E39C0->selection);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -191,7 +191,7 @@ void func_8041E2F0_us(void) {
         "addu       $at, $at, $v0\n"
         "sw         $s0, %lo(D_8014DCFC)($at)\n"
         "lw         $a0, 0x14($a0)\n"
-        "jal        func_8041E408_de\n"
+        "jal        Frontend_UpdateJoinRequestDisplay\n"
         "nop\n"
         "jal        SoundElement_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE81\n"

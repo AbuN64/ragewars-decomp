@@ -12,29 +12,29 @@
 #include "RESMGR/802A2230_9.H"
 #include "RESMGR/802A23A4_6.H"
 
-void func_802A2434_de(void) {
+void Tsmos_ShutdownFrontend(void) {
     extern struct Triple D_800D2C90;
     s32 *selected;
     func_80299468_de();
-    func_804101BC_de();
-    func_802A176C_de();
+    Frontend_CloseResourceArchive();
+    ESmem_FreeFrameHeaps();
     func_80414384_de();
     selected = &D_800D2C90.z;
     *selected = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     D_800D2C90.x = 0;
 }
 
 extern f32 D_800C5DB8_de, D_800C5DBC_de;
 
-void func_802A2480_de(Widget *widget, Widget *parent) {
+void Tsmos_ScaleWidgetTree(Widget *widget, Widget *parent) {
     if (widget != 0) {
-        if (widget->next != 0) func_802A2480_de(widget->next, parent);
-        if (widget->child != 0) func_802A2480_de(widget->child, widget);
+        if (widget->next != 0) Tsmos_ScaleWidgetTree(widget->next, parent);
+        if (widget->child != 0) Tsmos_ScaleWidgetTree(widget->child, widget);
         if (widget->kind == 8) {
-            if (widget->links[0] != 0) func_802A2480_de(widget->links[0], widget);
-            if (widget->links[2] != 0) func_802A2480_de(widget->links[2], widget);
-            if (widget->links[1] != 0) func_802A2480_de(widget->links[1], widget);
+            if (widget->links[0] != 0) Tsmos_ScaleWidgetTree(widget->links[0], widget);
+            if (widget->links[2] != 0) Tsmos_ScaleWidgetTree(widget->links[2], widget);
+            if (widget->links[1] != 0) Tsmos_ScaleWidgetTree(widget->links[1], widget);
         }
         if (widget->scaled == 0) {
             f32 factorX = D_800C5DB8_de;

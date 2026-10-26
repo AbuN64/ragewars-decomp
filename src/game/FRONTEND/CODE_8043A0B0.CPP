@@ -18,19 +18,19 @@ extern f32 D_800DDF90_de;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void *func_80419E54_de(s32, s32);
 extern void func_8043B96C_de(void);
 extern void func_8043B0CC_de(s32);
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags D_800E5A06[][19];
 extern s32 func_80419F38_de(void *);
 extern void func_80419F24_de(void *);
 extern void SmpFlicker_StartFlicker(void *, int);
 extern void func_80298368_de(s32);
-extern void func_802A2360_de(void);
+extern void Tsmos_ActivateControllerState(void);
 extern void MarkMenuEventHandled(void);
 
 /* Construct the four-player results/loadout menu and animate its panels into view. */
@@ -68,11 +68,11 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
         Shared_PlayerSettingsRecord *config;
         D_800E59E0->panels[player].state = 0;
         D_800E59E0->panels[player].selection = 5;
-        bar = func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][1].value);
+        bar = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][1].value);
         D_800E59E0->panels[player].item = bar;
         bar->alpha = 0x64;
         Frontend_SetWidgetFlag08(bar, 0);
-        widget = func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][0].value);
+        widget = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value);
         widget->alpha = 0x6E;
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
@@ -85,19 +85,19 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     }
     D_800E59E0->state = 1;
     D_800E59E0->timer = 4;
-    D_800E59E0->leftArrow = func_8040EC30_de(window, leftResource);
+    D_800E59E0->leftArrow = Frontend_FindWidgetByResourceId(window, leftResource);
     D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x - (u16)D_800E59E0->leftArrow->width;
     D_800E59E0->leftStep = D_800E59E0->leftArrow->width / 4;
     delta = D_800E59E0->leftArrow->width - D_800E59E0->leftStep * 4;
     D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x + delta;
-    D_800E59E0->rightArrow = func_8040EC30_de(window, rightResource);
+    D_800E59E0->rightArrow = Frontend_FindWidgetByResourceId(window, rightResource);
     D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x + (u16)D_800E59E0->rightArrow->width;
     D_800E59E0->rightStep = D_800E59E0->rightArrow->width / 4;
     delta = D_800E59E0->rightArrow->width - D_800E59E0->rightStep * 4;
     D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - delta;
-    func_8040EC30_de(window, titleResource)->alpha = 0x6E;
+    Frontend_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
     D_800E59E0->resource = func_80419E54_de(messageResource, 0xFF);
-    widget = func_8040EC30_de(window, messageResource);
+    widget = Frontend_FindWidgetByResourceId(window, messageResource);
     D_800E59E0->message = widget;
     Frontend_SetWidgetFlag08(widget, 0);
     screen = D_800E59E0;
@@ -124,7 +124,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
         }
     }
     D_800E59E0->next = -1;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     return 0;
 }
 
@@ -147,7 +147,7 @@ s32 Frontend_StartFourPlayerResults(void) {
     s32 baseAngle;
     s32 badgeOffset;
     Shared_PlayerSettingsRecord *config;
-    func_802A23C4_de(1);
+    Tsmos_SetModeOneFlag(1);
     i = 0;
     badgeOffset = (s32)&((struct FourPlayerResultsScreen *)0)->badges;
     scale.x = D_800E1FC4;
@@ -188,7 +188,7 @@ s32 Frontend_StartFourPlayerResults(void) {
     for (i = 0; i < 4; i++) {
         config = &g_playerSettings[i];
         if (config->enabled == 1) {
-            widget = func_8040EC30_de(D_800E59E0->window, D_800E19DE[i * 0x26]);
+            widget = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E19DE[i * 0x26]);
             Frontend_SetWidgetFlag40(widget, 0);
             widget->alpha = 0x23;
             screen = D_800E59E0;
@@ -246,7 +246,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         }
         break;
     case 3:
-        func_802A2360_de();
+        Tsmos_ActivateControllerState();
         return 0;
     case 4:
         screen = D_800E59E0;
@@ -272,7 +272,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         Frontend_SetWidgetFlag08(D_800E59E0->message, 0);
         for (player = 0; player < 4; player++) {
             for (i = 0; i < 5; i++) {
-                Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+                Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
             }
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
         }

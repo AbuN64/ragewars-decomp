@@ -28,7 +28,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
     if (player->views1C.view594_40.mode == 2 && player->views5E8.view62E_14.weapon == 3) {
         return;
     }
-    if (func_802A23B4_de() != 0) {
+    if (Tsmos_IsFrontendActive() != 0) {
         return;
     }
     if (player->views5E8.view798_96.carried == 0x2DA) {

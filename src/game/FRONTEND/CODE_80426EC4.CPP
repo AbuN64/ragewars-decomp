@@ -86,7 +86,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
             if (D_800E4690->frames < 20) {
                 if (++D_800E4690->frames == 20) {
                     k = D_800E4690->selection;
-                    func_804220A8_de(k + 0x259);
+                    Menu_SetOptionsSceneSelection(k + 0x259);
                     D_800E4690->blinkDelay = 0;
                 }
             }

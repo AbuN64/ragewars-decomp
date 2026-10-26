@@ -3,16 +3,16 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern void func_804210E8_de();
+extern void Menu_ApplyExtraOptionFlags();
 
 struct CellRecAt1A;
 
 extern float D_800DD600;
 
-extern void func_80422020_de();
+extern void Menu_ReleaseOptionsScene();
 
 
-extern void func_8042177C_de();
+extern void Menu_ShowExtraOptionsPanel();
 
 
 
@@ -24,7 +24,7 @@ struct NumberPadScreen;
 typedef struct NumberPadScreen NumberPadScreen;
 
 
-extern void func_804213DC_de();
+extern void Menu_OpenOptionsKeypad();
 
 struct Meter;
 struct Resource_func_80419E54_de;

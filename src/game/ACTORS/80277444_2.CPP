@@ -14,14 +14,14 @@
 #include "particle/80271B18_3.H"
 
 extern void GraphU64_TransformDirection(void *arg0, void *arg1, void *arg2);
-extern s32 func_80277128_de(ObjectRecAtBC *volume, CVector3 point, CVector3 *normal, f32 *amount);
+extern s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *volume, CVector3 point, CVector3 *normal, f32 *amount);
 
 
 
 
 
-s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4, f32 *arg7,
-                  CVector3 *arg8, f32 *arg9) {
+s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint, CVector3 surfaceNormal, f32 *lightTransform,
+                  CVector3 *lightContribution, f32 *contributionWeight) {
     CVector3 second;
     CVector3 first;
     CVector3 normal;
@@ -30,22 +30,22 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 ar
     f32 value;
     f32 objectValue;
 
-    if (arg0->flagB9 != 0) {
-        first.x = arg1.x * arg7[0];
-        first.y = arg1.y * arg7[5];
-        first.z = arg1.z * arg7[10];
-        first.x += arg7[12];
-        first.y += arg7[13];
-        first.z += arg7[14];
-        second.x = arg4.x * arg7[0];
-        second.y = arg4.y * arg7[5];
-        second.z = arg4.z * arg7[10];
+    if (lightVolume->flagB9 != 0) {
+        first.x = worldPoint.x * lightTransform[0];
+        first.y = worldPoint.y * lightTransform[5];
+        first.z = worldPoint.z * lightTransform[10];
+        first.x += lightTransform[12];
+        first.y += lightTransform[13];
+        first.z += lightTransform[14];
+        second.x = surfaceNormal.x * lightTransform[0];
+        second.y = surfaceNormal.y * lightTransform[5];
+        second.z = surfaceNormal.z * lightTransform[10];
     } else {
-        GraphU64_TransformPoint(arg7, &arg1.x, &first);
-        GraphU64_TransformDirection(arg7, &arg4.x, &second);
+        GraphU64_TransformPoint(lightTransform, &worldPoint.x, &first);
+        GraphU64_TransformDirection(lightTransform, &surfaceNormal.x, &second);
     }
     GraphU64_NormalizeVec3(&second.x);
-    if (func_80277128_de(arg0, first, &normal, &amount) == 0) {
+    if (Lighting_EvaluateLocalVolume(lightVolume, first, &normal, &amount) == 0) {
         return 0;
     }
     {
@@ -54,20 +54,20 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 ar
         if (dot < 0.0f) {
             dot = 0.0f;
         }
-        objectValue = arg0->value;
+        objectValue = lightVolume->value;
         value = amount * (objectValue +
                           (dot * (1.0f - objectValue)));
         amount = value;
         if (value <= 0.0f) {
             amount = 0.0f;
         }
-        if (arg0->flagB8 != 0) {
+        if (lightVolume->flagB8 != 0) {
             amount = -amount;
         }
-        if (arg9 != 0) {
-            *arg9 = amount;
+        if (contributionWeight != 0) {
+            *contributionWeight = amount;
         }
-        GraphU64_ScaleVector(arg8, &arg0->direction, amount);
+        GraphU64_ScaleVector(lightContribution, &lightVolume->direction, amount);
     }
     return 1;
 }

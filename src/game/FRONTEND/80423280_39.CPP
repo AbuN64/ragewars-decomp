@@ -65,17 +65,17 @@ void func_80427B08_de(void) {
     char buffer[32];
 
     /* the hub lookup returns its Item view; the Label view names the text pointer this unit writes */
-    ((struct Label *) func_8040EC30_de(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
+    ((struct Label *) Frontend_FindWidgetByResourceId(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
     settings = &D_801462C8;
     switch (settings->controllerMode) {
     case 1:
-        XPlus_CopyString(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
+        XPlus_CopyString(D_800E4690->heading, Frontend_GetStringByIndex(NAME_PHRASE));
         func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
                       RES_NAME(Frontend_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
-        XPlus_CopyString(D_800E4690->time, func_80411D78_de(TIME_PHRASE));
-        item = (struct Label *) func_8040EC30_de(D_800E4690->window, TIME_ITEM);
+        XPlus_CopyString(D_800E4690->time, Frontend_GetStringByIndex(TIME_PHRASE));
+        item = (struct Label *) Frontend_FindWidgetByResourceId(D_800E4690->window, TIME_ITEM);
         Frontend_SetWidgetFlag08(item, 1);
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];

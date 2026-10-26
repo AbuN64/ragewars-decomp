@@ -7,7 +7,7 @@
 extern s32 Cache_AllocateMemory(s32 arg0);
 
 
-void func_802A16F8_de(s32 arg0) {
+void ESmem_InitializeFrameHeaps(s32 arg0) {
     extern void ESmem_ResetFrameHeap(void);
     s32 size;
 
@@ -20,7 +20,7 @@ void func_802A16F8_de(s32 arg0) {
     D_800CD960_de = 1;
 }
 
-void func_802A176C_de(void) {
+void ESmem_FreeFrameHeaps(void) {
     if (D_800CD960_de != 0) {
         Cache_FreeMemory(D_800CD964[0]);
         Cache_FreeMemory(D_800CD964[1]);

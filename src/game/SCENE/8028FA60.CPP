@@ -39,7 +39,7 @@ extern void func_802B7B90_de(s32 music, s64 time);
 
 
 
-void func_8028FA60_de(OSSched *view, OSScTask_s *current, OSScTask_s *next) {
+void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *next) {
     s64 now;
 
     if (next != 0 && (next->flags & 0x20) && !(next->state & 0x10)) {

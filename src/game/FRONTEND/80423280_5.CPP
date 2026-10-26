@@ -69,7 +69,7 @@ extern void func_80298368_de(s32);
 
 extern void SmpFlicker_StartFlicker(void *, s32);
 
-extern void func_802A2360_de(void);
+extern void Tsmos_ActivateControllerState(void);
 
 extern s32 func_80419F38_de(void *);
 
@@ -118,7 +118,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         return 0;
     case 3:
         if (D_800E4690->requested == 0) {
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             D_800E4690->requested = 1;
         }
         break;

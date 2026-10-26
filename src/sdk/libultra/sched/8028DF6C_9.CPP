@@ -23,17 +23,17 @@ s32 func_802BD170_de(s32);
 extern s32 func_802BD170_de(s32);
 extern s32 D_800CD704;
 extern void func_802BB5F0_de(void *arg0, s32 arg1);
-void __scYield(void *arg0) {
-    void *temp_a0;
-    temp_a0 = (((struct ObjectLinks2F8 *) ((s8 *) arg0))->unk_2F4);
-    if ((((struct IntegerState14 *) ((s8 *) temp_a0))->unk_10) == 1) {
-        (((struct IntegerState14 *) ((s8 *) temp_a0))->unk_4) = (s32) ((((struct IntegerState14 *) ((s8 *) temp_a0))->unk_4) | 0x10);
+void __scYield(void *scheduler) {
+    void *currentRspTask;
+    currentRspTask = (((struct ObjectLinks2F8 *) ((s8 *) scheduler))->unk_2F4);
+    if ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_10) == 1) {
+        (((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) = (s32) ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) | 0x10);
         func_802BA120_de();
     }
 }
 
-void func_8028FC10_de(void *arg0) {
-    Node_func_8028FC10_de *node = 0;
+void Sched_HandleTaskCommands(void *arg0) {
+    NodeSchedHandleTaskCommands *node = 0;
     s32 value1 = 0;
     s32 value2 = 0;
     s32 flags;
@@ -54,11 +54,11 @@ void func_8028FC10_de(void *arg0) {
 
     flags = (((OSSched *)arg0)->curRSPTask == 0) * 2 |
             (((OSSched *)arg0)->curRDPTask == 0);
-    if (((s32 (*)(void *, s32 *, s32 *, s32))func_8028F544_de)(arg0, &value1, &value2, flags) != flags) {
-        ((void (*)(void *, s32, s32))func_8028FA60_de)(arg0, value1, value2);
+    if (((s32 (*)(void *, s32 *, s32 *, s32))Sched_SelectRunnableTasks)(arg0, &value1, &value2, flags) != flags) {
+        ((void (*)(void *, s32, s32))Sched_StartSelectedTasks)(arg0, value1, value2);
     }
 }
 
-int func_8028FD44_de(int arg0) {
+int Sched_GetInterruptQueueAddress(int arg0) {
     return arg0 + 0x40;
 }

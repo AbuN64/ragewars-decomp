@@ -25,7 +25,7 @@ void Menu_UpdateGameOptionsTransitions(void) {
         "lw         $v0, 0x5C($v1)\n"
         "bnez       $v0, .Lauto_80422BEC\n"
         "nop\n"
-        "jal        func_802A2360_de\n"
+        "jal        Tsmos_ActivateControllerState\n"
         "sw        $a0, 0x5C($v1)\n"
         "j          .Lauto_80422F8C\n"
         "addu      $v0, $zero, $zero\n"

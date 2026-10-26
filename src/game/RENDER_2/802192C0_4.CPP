@@ -56,9 +56,9 @@ s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern
 void func_80283278_de(void *, s32);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 void Scene_SetLevelRecordStateBit(void *, void *, s32);
-void *func_8028FFD0_de(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* extern */
+void *SetN64_SpawnModelEffect(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* extern */
 struct ListNode80290528;
-void func_80290548_de(struct ListNode80290528 *);
+void SetN64_RecycleGlobalEffectNode(struct ListNode80290528 *);
 s32 XPlus_NextRandomInteger(void);
 s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void func_8044972C_de(void *);
@@ -249,7 +249,7 @@ case 7:
                     ((struct Shared_ProjectileView *)existingAmmoPickup)->flags = (u16) (((struct Shared_ProjectileView *)existingAmmoPickup)->flags | 1);
                     retiredAmmoPickup = ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex];
                     if (((struct Shared_ProjectileView *)retiredAmmoPickup)->flags & 8) {
-                        func_80290548_de(retiredAmmoPickup);
+                        SetN64_RecycleGlobalEffectNode(retiredAmmoPickup);
                     } else {
                         Scene_SetLevelRecordStateBit(&g_world, retiredAmmoPickup, 1);
                         func_80278E04_de(((struct Shared_ProjectileView *)((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex])->source, 0x400, player);
@@ -339,7 +339,7 @@ case 7:
                     spawnVector.x = 0;
                     spawnVector.y = 0.0f;
                     spawnVector.z = 0;
-                    spawnedAmmoPickup = func_8028FFD0_de(&D_80131600, 0, ammoPickupType, spawnVector, spawnPosition, 0, 0);
+                    spawnedAmmoPickup = SetN64_SpawnModelEffect(&D_80131600, 0, ammoPickupType, spawnVector, spawnPosition, 0, 0);
                     if (spawnedAmmoPickup != 0) {
                         spawnPosition.y += D_800C2608_eu.spawn;
                         ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex] = (void *)spawnedAmmoPickup;

@@ -146,7 +146,7 @@ extern f32 Rumble_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3
 
 extern void Control_ReadControllerStates(void);
 extern void Control_CommitProfileInput(void *arg0);
-extern s32 func_802A23A4_de(void);
+extern s32 Tsmos_IsControllerStateActive(void);
 
 extern s32 Control_IsAnyControllerPakEnabled(void);
 

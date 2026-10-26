@@ -298,7 +298,7 @@ typedef struct ParticleDrawWorld {
     IntrusiveList render;
 } ParticleDrawWorld;
 extern Gfx *g_displayListCursor;
-extern Globals_func_804220A8_de D_80140FE8_de;
+extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
 extern void Geometry_SetColorDither(s32 arg0);

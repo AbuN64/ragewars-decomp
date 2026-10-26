@@ -548,9 +548,9 @@ void Events_UpdateNodeAtPosition(void *actor, CVector3 input, s32 arg4) {
 
     InstHdr_CopyActorPositionAndModel(actor, input, &output, &value, 0, 0);
     if (arg4 != 0) {
-        func_80276184_de((void *)value);
+        Region_SetNodeGroupFlag((void *)value);
     } else {
-        func_802761B8_de((void *)value);
+        Region_ClearNodeGroupFlag((void *)value);
     }
 }
 

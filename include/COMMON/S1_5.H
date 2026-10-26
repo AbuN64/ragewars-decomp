@@ -5,13 +5,13 @@
 
 
 
-extern void func_80422170_de();
+extern void Menu_InitializeOptionsScene();
 
 
-extern void func_804221E8_de();
+extern void Menu_ConfigureOptionsCamera();
 
-struct Screen_func_80422960_de;
-struct Screen_func_80422960_de {
+struct ScreenMenuFinishTabOptionsTransition;
+struct ScreenMenuFinishTabOptionsTransition {
     char pad0[0x1C];
     s32 choice;
     char pad20[0x60 - 0x20];

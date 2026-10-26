@@ -32,7 +32,7 @@ extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 
 
-extern void func_8027892C_de(void *object, void *colors);
+extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
@@ -185,7 +185,7 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
                 char *colors = (char *)header + header[2];
 
                 if (owner->colorFrame != (u8)D_800D2978) {
-                    func_8027892C_de(object, colors);
+                    Link_AnimateVertexColors(object, colors);
                 }
                 data = object;
             } else {
@@ -230,7 +230,7 @@ void StaticInstance_DrawModel(ModelOwner *owner) {
             char *colors = (char *)header + header[2];
 
             if (owner->colorFrame != (u8)D_800D2978) {
-                func_8027892C_de(object, colors);
+                Link_AnimateVertexColors(object, colors);
             }
             data = object;
         } else {

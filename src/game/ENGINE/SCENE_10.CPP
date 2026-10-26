@@ -10,7 +10,7 @@
 #include "SYSTEM_3/80265370.H"
 extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
-extern void func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
+extern void SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
 extern s32 Region_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
 
@@ -28,7 +28,7 @@ void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, 
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    func_8028FFD0_de(worldAddress + 0x11778, 0, modelId, zero, position, ownerId, lifetime);
+    SetN64_SpawnModelEffect(worldAddress + 0x11778, 0, modelId, zero, position, ownerId, lifetime);
 }
 
 void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *arg1) {

@@ -140,7 +140,7 @@ extern f32 GraphU64_DecayToZero(f32 arg0, f32 arg1);
 
 extern f32 GraphU64_RandomBetween(f32 arg0, f32 arg1);
 
-extern void func_80276968_de(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
+extern void Region_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
 
 extern void func_80279990_de(void *arg0);
 
@@ -156,7 +156,7 @@ extern s32 Scene_FindFloorPolygon(struct Shared_World *, struct CVector3_t *);
 
 extern s32 Scene_GetModelSectionTwoRecord(void *arg0, s32 arg1);
 
-extern void func_8028EDA0_de(void *arg0);
+extern void Sched_HandleRspCompletion(void *arg0);
 
 struct OSSched;
 
@@ -196,7 +196,7 @@ extern s32 XPlus_ParseDecimalInteger(u8 *s);
 
 extern void func_802A1918_de(int *arg0, int *arg1);
 
-extern void func_802A23C4_de(s32 arg0);
+extern void Tsmos_SetModeOneFlag(s32 arg0);
 
 extern void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
 

@@ -16,7 +16,7 @@
 
 extern f32 D_800DD610[];
 
-extern Globals_func_804220A8_de D_80140FE8_de;
+extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 
 
 

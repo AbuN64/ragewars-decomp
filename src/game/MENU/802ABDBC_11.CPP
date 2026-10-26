@@ -134,7 +134,7 @@ void *func_802ACA20_de(s32 arg0) {
 
 extern int InstHdr_GetActorType(void *arg0);
 extern s32 func_802AB6EC_de(void *arg0, void *arg1, s32 arg2);
-extern void func_80290548_de(void *arg0);
+extern void SetN64_RecycleGlobalEffectNode(void *arg0);
 extern void Scene_SetLevelRecordStateBit(void *arg0, void *arg1, s32 arg2);
 extern void func_80278E04_de(s32 arg0, s32 arg1, void *arg2);
 
@@ -157,7 +157,7 @@ block_4:
             temp_v0 = ((struct Shared_ProjectileView *)(arg1))->flags | 1;
             ((struct Shared_ProjectileView *)(arg1))->flags = temp_v0;
             if (temp_v0 & 8) {
-                func_80290548_de(arg1);
+                SetN64_RecycleGlobalEffectNode(arg1);
                 return;
             }
             Scene_SetLevelRecordStateBit(&g_world, arg1, 1);

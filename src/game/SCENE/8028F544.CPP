@@ -30,7 +30,7 @@ extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *ow
 
 extern void osStartThread(char *list);
 
-s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
+s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
     OSScTask_s *gfxListHead;
     OSScTask_s *audioListHead;
     OSScTask_s *next;
@@ -123,12 +123,12 @@ s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 ar
         }
     }
     if (var_s1 != temp_s5) {
-        var_s1 = func_8028F544_de(arg0, arg1, arg2, var_s1);
+        var_s1 = Sched_SelectRunnableTasks(arg0, arg1, arg2, var_s1);
     }
     return var_s1;
 }
 
-void func_8028F754_de(Panel *panel, s32 arg1, s32 priority, s32 arg3, unsigned char style) {
+void Sched_InitializeSchedulerThread(Panel *panel, s32 arg1, s32 priority, s32 arg3, unsigned char style) {
     panel->active = 1;
     panel->field2F4 = 0;
     panel->field2F8 = 0;

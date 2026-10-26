@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "MENU_2/80420E90.H"
 extern NumberPadScreen *D_800E4400;
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word
    D_801462C8, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as
@@ -59,7 +59,7 @@ enum { MENU_8042144C_939 = 943, MENU_8042144C_952 = 956, MENU_8042144C_953 = 957
 enum { MENU_8042144C_939 = 939, MENU_8042144C_952 = 952, MENU_8042144C_953 = 953, MENU_8042144C_954 = 954, MENU_8042144C_955 = 955, MENU_8042144C_956 = 956, MENU_8042144C_957 = 957, MENU_8042144C_958 = 958, MENU_8042144C_959 = 959, MENU_8042144C_960 = 960, MENU_8042144C_961 = 961 };
 #endif
 
-void func_804210E8_de(void) {
+void Menu_ApplyExtraOptionFlags(void) {
     if (func_8041AD04_de(D_800E4400->buttons[0]) == 0) {
         D_801462C8.field_0 &= ~0x08000000;
     } else {
@@ -82,7 +82,7 @@ void func_804210E8_de(void) {
     }
 }
 
-void func_80421234_de(void) {
+void Menu_RefreshExtraOptionLocks(void) {
     s32 total;
     s32 i;
 
@@ -95,30 +95,30 @@ void func_80421234_de(void) {
     if (D_800E4400->full == 1) {
         total = 40;
     }
-    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 1);
-    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 1);
-    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 1);
-    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 1);
+    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
+    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
+    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
+    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
     if (total >= 10) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 0);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
     }
     if (total >= 6) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 0);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
     }
     if (total >= 12) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 0);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
     }
     if (total >= 14) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 0);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
     }
 }
 
-void func_804213DC_de(void) {
+void Menu_OpenOptionsKeypad(void) {
     MenuWidget *item;
     s32 key;
 
     Frontend_SetWidgetFlag08(D_800E4400->pad, 1);
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, MENU_8042144C_939), 0);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
     D_800E4400->mode = 1;
     D_800E4400->length = 8;
     D_800E4400->value = 0;
@@ -126,35 +126,35 @@ void func_804213DC_de(void) {
     for (key = 0; key < 10; key++) {
         switch (key) {
         case 1:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_953);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_953);
             break;
         case 2:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_954);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_954);
             break;
         case 3:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_955);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_955);
             break;
         case 4:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_956);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_956);
             break;
         case 5:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_957);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_957);
             break;
         case 6:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_958);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_958);
             break;
         case 7:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_959);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_959);
             break;
         case 8:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_960);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_960);
             break;
         case 9:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_961);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_961);
             break;
         case 0:
         default:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_952);
+            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_952);
             break;
         }
         item->alpha = 0x96;

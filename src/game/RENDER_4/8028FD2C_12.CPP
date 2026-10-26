@@ -27,12 +27,12 @@ extern f32 D_801031F8[];
 
 extern s32 func_8024D160_de(void *arg0);
 
-extern void func_80290950_de(void *arg0, void *arg1);
+extern void SetN64_RecycleEffectNode(void *arg0, void *arg1);
 
 extern void GameObject_ResetActorMotion(void *arg0);
 
 /** Unlink an active node and return it to the global free list. */
-void func_80290548_de(ListNode80290528 *node) {
+void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
     ListNode80290528 *oldHead;
 
     if (node->flags & 1) {
@@ -59,7 +59,7 @@ void func_80290548_de(ListNode80290528 *node) {
     }
 }
 
-void func_802905F4_de(char *arg0, char *view) {
+void SetN64_DrawVisibleEffects(char *arg0, char *view) {
     WorldRecAt3C08 *world = (void *)arg0;
     GameplayCamera *camera = (void *)view;
     SceneEffect *entry;
@@ -97,13 +97,13 @@ void func_802905F4_de(char *arg0, char *view) {
     Geometry_FlushModelBatch();
 }
 
-void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *results) {
+void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *arg0, Results *results) {
     f32 *bounds;
     s32 count;
     s32 mask;
     s32 required;
     s32 limit;
-    Node_func_8029076C_de *node;
+    NodeSetN64CollectVisibleEffectNodes *node;
 
     node = arg0->head;
     if (node != 0) {
@@ -140,7 +140,7 @@ void *func_802908C0_de(ObjectLinks3C0C *arg0)
   struct ListNode80290528 *next;
   if ((arg0->unk_3C00) == 0)
   {
-    func_80290950_de(arg0, arg0->unk_3C08);
+    SetN64_RecycleEffectNode(arg0, arg0->unk_3C08);
   }
   node = arg0->unk_3C00;
   next = arg0->next;

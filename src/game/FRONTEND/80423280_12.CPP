@@ -21,12 +21,12 @@
 
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
-/* Calls InitFrontendMenus and func_802A2394_de, then func_80298368_de with 0x11. */
+/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then func_80298368_de with 0x11. */
 #if defined(VERSION_EU)
-extern void func_802A2344_eu();
+extern void Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
 extern void func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -35,7 +35,7 @@ extern void InitFrontendMenus();
 extern void func_802A2224_de();
 #endif
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
 extern void func_80298368_de(s32);
 
@@ -159,7 +159,7 @@ extern void MarkMenuEventHandled();
 
 /* Runs one frame of the screen D_800E53C0's confirmation prompt while D_800E28E0 is not positive:
    on the first frame it marks the prompt open at 0x320 and asks func_802991D4_de for message 0x238,
-   or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls func_802A2360_de. Once
+   or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls Tsmos_ActivateControllerState. Once
    the choice word D_80154020[1] reads one it clears it and either enables the prompt's object at
    0xE4 and records the choice at 0x328, when the pending action D_80154020[0] is -1, or disables
    the object, clears 0x328 and hands the pending action to func_80298368_de through MarkMenuEventHandled.
@@ -176,7 +176,7 @@ extern s32 Frontend_ListHasFlag100(void *);
 
 extern void func_802991D4_de(s32);
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 #if defined(VERSION_DE)
 enum { CONFIRM_MESSAGE = 0x234, FALLBACK_MESSAGE = 0x233 };
@@ -189,7 +189,7 @@ enum { CONFIRM_MESSAGE = 0x238, FALLBACK_MESSAGE = 0x237 };
 void func_8042CFB0_de(void) {
     
 #if defined(VERSION_EU)
-func_802A2344_eu
+Tsmos_InitializeEuropeanFrontend
 #elif defined(VERSION_EU_X)
 func_802A2374_eu_x
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -198,7 +198,7 @@ InitFrontendMenus
 func_802A2224_de
 #endif
 ();
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_80298368_de(0x11);
 }
 
@@ -320,7 +320,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
     s32 id;
     s32 frame;
     record = &g_playerSettings[player];
-    parent = func_8040EC30_de(D_800E53C0->unkE0, group);
+    parent = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, group);
     switch (kind) {
     case 0:
     default:
@@ -360,7 +360,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
 #endif
         break;
     }
-    item = func_8040EC30_de(parent, id);
+    item = Frontend_FindWidgetByResourceId(parent, id);
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     rank = record->rank;
@@ -393,7 +393,7 @@ void func_8042D418_de(s32 arg0) {
     s32 var_a1;
     s32 var_s0;
 
-    root = func_8040EC30_de(D_800E53C0->unkE0, arg0 & 0xFFFF);
+    root = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, arg0 & 0xFFFF);
     var_s0 = 0;
     do {
         switch(var_s0) {
@@ -403,7 +403,7 @@ void func_8042D418_de(s32 arg0) {
         case 3: var_a1=ITEM3; break;
         default: var_a1=ITEM0; break;
         }
-        Frontend_SetWidgetFlag08(func_8040EC30_de(root, var_a1), 0);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(root, var_a1), 0);
         var_s0 += 1;
     } while (var_s0 < 4);
 }
@@ -473,13 +473,13 @@ s32 func_8042D690_de(s32 context) {
     if (D_800E28E0 <= 0) {
         if (D_800E53C0->phase == 0) {
             D_800E53C0->phase = 1;
-            if (Frontend_ListHasFlag100(func_8040EC30_de(context, CONFIRM_MESSAGE)) == 0) {
+            if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(context, CONFIRM_MESSAGE)) == 0) {
                 message = CONFIRM_MESSAGE;
             } else {
                 message = FALLBACK_MESSAGE;
             }
             func_802991D4_de(message);
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
         }
         choice = &D_80154020[1];
         taken = choice[0];

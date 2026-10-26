@@ -23,7 +23,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
@@ -65,24 +65,24 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     D_800E4690->state = 1;
     D_800E4690->slideFrames = 4;
-    wLeft = func_8040EC30_de(arg0, 0x145);
+    wLeft = Frontend_FindWidgetByResourceId(arg0, 0x145);
     D_800E4690->leftPanel = wLeft;
     wLeft->x -= wLeft->width;
     D_800E4690->leftStep = D_800E4690->leftPanel->width / 4;
     d = D_800E4690->leftPanel->width - D_800E4690->leftStep * 4;
     D_800E4690->leftPanel->x += d;
-    wRight = func_8040EC30_de(arg0, 0x144);
+    wRight = Frontend_FindWidgetByResourceId(arg0, 0x144);
     D_800E4690->rightPanel = wRight;
     wRight->x += wRight->width;
     D_800E4690->rightStep = D_800E4690->rightPanel->width / 4;
     d = D_800E4690->rightPanel->width - D_800E4690->rightStep * 4;
     D_800E4690->rightPanel->x -= d;
     D_800E4690->resource = func_80419E54_de(0x141, 0x6E);
-    wHead = func_8040EC30_de(arg0, 0x13F);
+    wHead = Frontend_FindWidgetByResourceId(arg0, 0x13F);
     D_800E4690->focusItem = wHead;
     Frontend_SetWidgetFlag08(wHead, 0);
-    D_800E4690->owner = (void *)func_8040EC30_de(arg0, 0x154);
-    D_800E4690->item155 = func_8040EC30_de(arg0, 0x155);
+    D_800E4690->owner = (void *)Frontend_FindWidgetByResourceId(arg0, 0x154);
+    D_800E4690->item155 = Frontend_FindWidgetByResourceId(arg0, 0x155);
     D_800E4690->player = 0;
     for (i = 0; i < 4; i++) {
         if (((struct Status *)g_playerSettings)[i].active == 1) {
@@ -98,12 +98,12 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     func_80427008_de();
     func_80427F10_de();
-    D_800E4690->window = func_8040EC30_de(arg0, (u16)D_800E4694[D_800E4690->selection].id);
+    D_800E4690->window = Frontend_FindWidgetByResourceId(arg0, (u16)D_800E4694[D_800E4690->selection].id);
     func_804280BC_de();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     func_8043C210_de((s32 *)D_800E4690, 0x67, 0, 0, 0);
-    wItem = func_8040EC30_de(arg0, 0x151);
+    wItem = Frontend_FindWidgetByResourceId(arg0, 0x151);
     D_800E4690->item = wItem;
     wItem->alpha = 0xFF;
     D_800E4690->modeFlag = 0;
@@ -121,10 +121,10 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     case 1:
     case 3:
     case 4:
-        D_800E4690->bannerShadow = func_8040EC30_de(arg0, 0x13D);
-        func_80422170_de();
-        D_800E4690->banner = func_8040EC30_de(arg0, 0x147);
-        func_8040EC30_de(arg0, 0x148)->alpha = 0x6E;
+        D_800E4690->bannerShadow = Frontend_FindWidgetByResourceId(arg0, 0x13D);
+        Menu_InitializeOptionsScene();
+        D_800E4690->banner = Frontend_FindWidgetByResourceId(arg0, 0x147);
+        Frontend_FindWidgetByResourceId(arg0, 0x148)->alpha = 0x6E;
         break;
     case 2:
         break;
@@ -149,7 +149,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
 #endif
 
 /* Places the models of the first two active players on the screen D_800E4690: calls
-   func_802A23C4_de(1) and func_802A2394_de, clears the word at 0xA58, and for each player whose 150-byte
+   Tsmos_SetModeOneFlag(1) and Tsmos_DeactivateControllerState, clears the word at 0xA58, and for each player whose 150-byte
    status record in D_80146398 has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
    row of D_800E3A58 through func_8041F140_de and shows object 0x38F plus the kind through
    Frontend_InitModelPreview in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
@@ -165,7 +165,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
 
 
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
 s32 Frontend_ShowResultsPlayerModels(void) {
     s32 shown;
@@ -177,8 +177,8 @@ s32 Frontend_ShowResultsPlayerModels(void) {
     struct Status *status;
     s32 offset;
 
-    func_802A23C4_de(1);
-    func_802A2394_de();
+    Tsmos_SetModeOneFlag(1);
+    Tsmos_DeactivateControllerState();
     shown = 0;
     layout = 0;
     i = 0;

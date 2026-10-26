@@ -56,7 +56,7 @@ struct CommandListMenu {
 
 
 struct Widget;
-void func_802A2480_de(struct Widget *, struct Widget *);
+void Tsmos_ScaleWidgetTree(struct Widget *, struct Widget *);
 
 extern void func_8042DEA0_de(void);
 #endif

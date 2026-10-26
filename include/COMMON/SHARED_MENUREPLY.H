@@ -12,7 +12,7 @@
 int Cinema_IsSequenceInWindow(void);
 void func_8025476C_de(unsigned int);
 void func_802991D4_de(s32);
-void func_802A2360_de(void);
+void Tsmos_ActivateControllerState(void);
 void SmpFlicker_StartFlicker(void *, int);
 s32 func_8043C308_de(Shared_OptionsScreen *);
 void func_804499B0_de(void *, s32, s32);

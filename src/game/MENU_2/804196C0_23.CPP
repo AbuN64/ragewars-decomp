@@ -15,7 +15,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record func_8040EC30_de finds for the low half of the first argument, links the record func_8040EC30_de finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from func_8041A580_de with the record size 0x118, the tag 0xB64 and the tail fields changed. */
+/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from func_8041A580_de with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 
 
 
@@ -29,7 +29,7 @@ extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
 extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
-extern MenuWidget *func_8040EC30_de(void *root, s32 id);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 id);
 extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
@@ -107,14 +107,14 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
     MenuListWidget *result;
     void *child;
 
-    source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x118);
     XPlus_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = func_8040EC30_de(context, arg1 & 0xFFFF);
+    child = Frontend_FindWidgetByResourceId(context, arg1 & 0xFFFF);
     result->owner = child;
     result->index = 0;
     result->count = 0;
@@ -291,7 +291,7 @@ void func_8041B110_de(s32 arg0) {
     void *context;
     Record_func_8041B110_de *result;
 
-    source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);

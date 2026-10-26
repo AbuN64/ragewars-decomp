@@ -18,7 +18,7 @@
 
 extern void GraphU64_BuildScaleMatrix(void *, float, float, float);
 
-extern void func_8026FC9C_de(void *, void *);
+extern void GraphU64_PackFixedMatrix(void *, void *);
 
 
 
@@ -70,7 +70,7 @@ void Geometry_InitializeModelRenderState(void) {
 
     Geometry_InvalidateMaterialKeys();
     GraphU64_BuildScaleMatrix(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
-    func_8026FC9C_de(local, &D_8010C520);
+    GraphU64_PackFixedMatrix(local, &D_8010C520);
 }
 
 void Geometry_SelectEffectModes(void) {

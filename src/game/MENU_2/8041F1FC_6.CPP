@@ -9,13 +9,13 @@
 #include "RENDER_2/8025DE50_5.H"
 
 /* Handles a packed message whose high half is type 3 with no extra argument: when the entry named by
-   its low half in the 0x4C8-byte table D_800E42D0 is active and has a target, runs func_804201A4_de on it
+   its low half in the 0x4C8-byte table D_800E42D0 is active and has a target, runs Menu_CyclePlayerCharacterVariant on it
    and plays sound 0xE7C; always returns 0. */
 
 
 
 
-extern void func_804201A4_de(int, EntryRecAt14V1 *);
+extern void Menu_CyclePlayerCharacterVariant(int, EntryRecAt14V1 *);
 
 
 /* Advances a player panel from its ready state and starts its selection. */
@@ -27,13 +27,13 @@ extern void func_804201A4_de(int, EntryRecAt14V1 *);
 void MarkMenuEventHandled(void);
 
                            /* extern */
-void SmpOverlay_SetSlotValue(s32, s32, s32, State_func_80420C10_de *);
+void SmpOverlay_SetSlotValue(s32, s32, s32, StateMenuCancelCharacterConfirmation *);
 
          /* extern */
 void Frontend_SetPreviewTransformUpdate(void *, s32);
 
                     /* extern */
-void func_80420438_de(s32);
+void Menu_RefreshPlayerCharacterVariants(s32);
 
 /* Applies the chosen character when the active player panel is ready. */
 
@@ -72,14 +72,14 @@ extern s32 D_800E4368;
 
 extern Handler802A2B50 D_800E436C;
 
-int func_80420B78_de(int unused0, int unused1, unsigned int message, int extra) {
+int Menu_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int message, int extra) {
     int index = message & 0xFFFF;
     EntryRecAt14V1 *e;
 
     if ((message >> 16) == 3 && extra == 0) {
         e = &((EntryRecAt14V1 *)D_800E42D0)[index];
         if (e->active == 1 && e->target != -1) {
-            func_804201A4_de(index, e);
+            Menu_CyclePlayerCharacterVariant(index, e);
             SoundElement_PlayFlatSound(0xE7C);
         }
     }
@@ -88,25 +88,25 @@ int func_80420B78_de(int unused0, int unused1, unsigned int message, int extra) 
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80420BF0_de(void) {
+s32 Menu_ReturnCharacterEventZeroA(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80420BF8_de(void) {
+s32 Menu_ReturnCharacterEventZeroB(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80420C00_de(void) {
+s32 Menu_ReturnCharacterEventZeroC(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80420C08_de(void) {
+s32 Menu_ReturnCharacterEventZeroD(void) {
     return 0;
 }
 
@@ -115,16 +115,16 @@ s32 func_80420C08_de(void) {
 
 /* extern */
 
-s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
+s32 Menu_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_a0;
     s32 entryIndex;
     s32 temp_s1;
-    State_func_80420C10_de *temp_a3;
+    StateMenuCancelCharacterConfirmation *temp_a3;
 
     MarkMenuEventHandled();
     entryIndex = arg2 & 0xFFFF;
     temp_s1 = entryIndex * 0x4C8;
-    temp_a3 = (State_func_80420C10_de *)&((PanelRecord *)D_800E42D0)[entryIndex];
+    temp_a3 = (StateMenuCancelCharacterConfirmation *)&((PanelRecord *)D_800E42D0)[entryIndex];
     temp_a0 = temp_a3->unk14;
     switch (temp_a0) {
     case 1:
@@ -138,19 +138,19 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
         temp_a3->unk14 = 1;
         SmpOverlay_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
         Frontend_SetPreviewTransformUpdate(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
-        func_80420438_de(entryIndex);
+        Menu_RefreshPlayerCharacterVariants(entryIndex);
         break;
     }
     return 0;
 }
 
-s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
+s32 Menu_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPlayer) {
     s32 entryIndex;
     s32 choice;
-    s32 var_a1;
+    s32 unusedValue;
     CharacterSelectionRoot *characterSelectionRoot;
 
-    entryIndex = arg2 & 0xFFFF;
+    entryIndex = packedPlayer & 0xFFFF;
     choice = SmpOverlay_GetSlotNodeId(D_800E42D0->unk4, entryIndex);
     MarkMenuEventHandled();
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
@@ -161,7 +161,7 @@ s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-s32 func_80420D90_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchCharacterSelectionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

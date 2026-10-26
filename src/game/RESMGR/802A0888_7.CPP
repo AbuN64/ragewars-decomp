@@ -9,7 +9,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the DE twin. */
 #else
-INCLUDE_ASM("span_1000", func_802A0BE8_eu);
+INCLUDE_ASM("span_1000", XStdio_FormatEuropeanScratchBuffer);
 #endif
 #endif
 
@@ -17,9 +17,9 @@ INCLUDE_ASM("span_1000", func_802A0BE8_eu);
 #include "stdarg.h"
 
 #if defined(VERSION_EU)
-int *func_802A0BE8_eu(int format, ...) {
+int *XStdio_FormatEuropeanScratchBuffer(int format, ...) {
 #else
-int *func_802A0AD0_de(int format, ...) {
+int *XStdio_FormatGermanScratchBuffer(int format, ...) {
 #endif
     va_list args;
     va_start(args, format);

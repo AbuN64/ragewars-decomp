@@ -60,11 +60,11 @@ extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
 extern void func_8042AFC0_de(int);
 extern void func_8042E9A0_de(s32, s32);
-extern void func_802A2400_de(f32);
-extern void func_802A2360_de(void);
+extern void Tsmos_SetIdleTimer(f32);
+extern void Tsmos_ActivateControllerState(void);
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_TestBit(u8 *, s32);
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_8041B110_de(s32);
@@ -93,7 +93,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     func_8042AFC0_de(-1);
     func_8042E9A0_de(0, 0);
     counters->humanWon = 0;
-    func_802A2400_de(0.0f);
+    Tsmos_SetIdleTimer(0.0f);
     D_801462C8.local = 1;
 
     for (i = 0; i < 8; i++) {
@@ -110,7 +110,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         XPlus_FillMemory((char *)&D_80102B00[i] + 0x83, 0, 5);
     }
     D_800E4600 = Cache_AllocateMemory(0x1C);
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     groupA = 0;
     groupB = 0;
     groupC = 0;
@@ -131,11 +131,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     } else if (groupB == 1) {
         layout = 2;
     }
-    title = func_8040EC30_de(menu, 0x42);
+    title = Frontend_FindWidgetByResourceId(menu, 0x42);
     switch (layout) {
     case 2:
         func_8041B110_de(0x48);
-        widget = func_8040EC30_de(menu, 0x4A);
+        widget = Frontend_FindWidgetByResourceId(menu, 0x4A);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
@@ -148,10 +148,10 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         title->height = 0x88;
         break;
     default:
-        widget = func_8040EC30_de(menu, 0x48);
+        widget = Frontend_FindWidgetByResourceId(menu, 0x48);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
-        widget = func_8040EC30_de(menu, 0x4A);
+        widget = Frontend_FindWidgetByResourceId(menu, 0x4A);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
@@ -161,11 +161,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     i = -1;
     Frontend_AdvanceActiveSlot(&i);
     if (i < 0) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x4C), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x4C), 1);
     }
     mode = Control_IsControllerConnected(0);
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x49), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x49), 1);
     }
     D_800E4600->music = func_8041A280_de(0x42, 0x24);
     func_8041A488_de(D_800E4600->music);
@@ -175,7 +175,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     func_8041B110_de(0x4B);
     func_8041B110_de(0x4C);
     func_8041B110_de(0x47);
-    D_800E4600->title = func_8040EC30_de(menu, 0x43);
+    D_800E4600->title = Frontend_FindWidgetByResourceId(menu, 0x43);
     D_800E4600->title->alpha = 0xF;
     D_800E4600->prompt = func_80419E54_de(0x44, 0x6E);
     if (func_802999F4_de() == 2) {

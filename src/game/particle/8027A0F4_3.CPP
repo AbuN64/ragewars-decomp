@@ -81,7 +81,7 @@ extern CVector3 D_80100290;
 
 extern CVector3 D_801042C8;
 
-extern s32 func_80276088_de(s32);
+extern s32 Region_GetModelBlendByte59(s32);
 
 extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
 extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
@@ -102,9 +102,9 @@ extern CVector3 D_801002B8;
 
 extern CVector3 D_801002A8;
 
-extern s32 func_802757E4_de(s32);
+extern s32 Region_TestPolygonSlopeFlag(s32);
 
-extern s32 func_80276054_de(s32);
+extern s32 Region_GetModelBlendByte58(s32);
 
 /* Per-frame step of one live particle: sizes its culling box, resolves target hit and death, grows and spins it,
  * applies influence to nearby players, then runs the move and collision passes. */
@@ -426,7 +426,7 @@ void func_8027C274_de(Shared_Particle *particle) {
         }
     }
     {
-        var_a0 = func_80276088_de(0);
+        var_a0 = Region_GetModelBlendByte59(0);
         if (var_a0 == 10) {
             var_a0 = 0;
         }
@@ -544,10 +544,10 @@ void func_8027C758_de(Shared_Particle *particle) {
     struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
-    if (func_802757E4_de(0) != 0) {
-        var_a0 = func_80276088_de(0);
+    if (Region_TestPolygonSlopeFlag(0) != 0) {
+        var_a0 = Region_GetModelBlendByte59(0);
     } else {
-        var_a0 = func_80276054_de(0);
+        var_a0 = Region_GetModelBlendByte58(0);
     }
     if (var_a0 == 10) {
         var_a0 = 0;
@@ -603,7 +603,7 @@ void func_8027C9CC_de(Shared_Particle *particle) {
     struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
-    var_a0 = func_80276088_de(0);
+    var_a0 = Region_GetModelBlendByte59(0);
     if (var_a0 == 10) {
         var_a0 = 0;
     }

@@ -2,7 +2,7 @@
 #include "COMMON/RESULTS.H"
 
 /** Unlink an active node and return it to the container's free list. */
-void func_80290950_de(void *container, ListNode80290528 *node) {
+void SetN64_RecycleEffectNode(void *container, ListNode80290528 *node) {
     WorldRecAt3C08 *world = container;
     struct SceneEffect *actor = (struct SceneEffect *)node;
     struct SceneEffect *free_node;

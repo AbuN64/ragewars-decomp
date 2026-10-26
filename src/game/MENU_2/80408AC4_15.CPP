@@ -156,7 +156,7 @@ void Frontend_HandleBoundedValueEvent(void) {
         ".Lauto_8040C8FC:\n"
         "sw         $a2, 0x6C($s0)\n"
         ".Lauto_8040C900:\n"
-        "jal        func_8040C950_de\n"
+        "jal        Frontend_UpdateSliderGeometry\n"
         "addu      $a0, $s0, $zero\n"
         "jal        GetMenuScreenOwner\n"
         "nop\n"

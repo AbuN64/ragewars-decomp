@@ -14,7 +14,7 @@
    model table D_800E381C through Frontend_FindJoinModelIndex, walks back through its variants and, before the
    first, to the last variant of the previous model (wrapping to the last), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
-   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through func_8041E408_de and plays sound
+   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Frontend_UpdateJoinRequestDisplay and plays sound
    0xE81. Returns zero. */
 
 
@@ -29,7 +29,7 @@ extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
-extern void func_8041E408_de(s32);
+extern void Frontend_UpdateJoinRequestDisplay(s32);
 
 s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 variant;
@@ -66,7 +66,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
 #endif
     );
     D_80153F80[D_800E39C0->unk14].variantC = variant;
-    func_8041E408_de(D_800E39C0->unk14);
+    Frontend_UpdateJoinRequestDisplay(D_800E39C0->unk14);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -79,7 +79,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
    model table D_800E381C through Frontend_FindJoinModelIndex, walks forward through its variants and, past the
    last, to the first variant of the next model (wrapping to the first), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
-   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through func_8041E408_de and plays sound
+   D_80153F80, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Frontend_UpdateJoinRequestDisplay and plays sound
    0xE81. Returns zero. Adapted from Frontend_SelectPreviousJoinModel with the walk direction reversed. */
 
 
@@ -94,7 +94,7 @@ extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
-extern void func_8041E408_de(s32);
+extern void Frontend_UpdateJoinRequestDisplay(s32);
 
 s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 variant;
@@ -132,7 +132,7 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
     );
     D_80153F80[D_800E39C0->unk14].variantC = variant;
     id = D_800E39C0->unk14;
-    func_8041E408_de(id);
+    Frontend_UpdateJoinRequestDisplay(id);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }

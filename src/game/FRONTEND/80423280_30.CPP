@@ -17,7 +17,7 @@ extern Handler8042359C D_800E4524;
 
 
 
-s32 func_8042343C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchOptionsPageEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042359C *entry;
     s32 index;
     s32 wildcard;
@@ -54,7 +54,7 @@ s32 func_8042343C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    selects byte 0x1B of the settings D_801462C8, creates list (0x1BE - OPTIONS_RESOURCE_SHIFT)/(0x1BF - OPTIONS_RESOURCE_SHIFT) at 0x8 with gameOptionsLabel(3),
    plus gameOptionsLabel(4) and gameOptionsLabel(5) unless Defs_GetMemorySize reports 0x400000, and selects settings byte
    0x580, creates the 0x80-step slider (0x1C0 - OPTIONS_RESOURCE_SHIFT)/(0x1C1 - OPTIONS_RESOURCE_SHIFT) at 0x0 set to the settings word at 0x10,
-   registers (0x1C3 - OPTIONS_RESOURCE_SHIFT) and (0x1C4 - OPTIONS_RESOURCE_SHIFT), clears the word at 0xC, resets through func_802A2394_de and returns
+   registers (0x1C3 - OPTIONS_RESOURCE_SHIFT) and (0x1C4 - OPTIONS_RESOURCE_SHIFT), clears the word at 0xC, resets through Tsmos_DeactivateControllerState and returns
    zero. */
 struct SliderScreen {
     s32 slider;
@@ -74,7 +74,7 @@ extern void SmpButton_SelectListEntry(s32, s32);
 extern s32 Defs_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 
 typedef struct func_8042362C_S1 func_8042362C_S1;
 struct func_8042362C_S1 {
@@ -116,7 +116,7 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     func_8041B110_de((0x1C3 - OPTIONS_RESOURCE_SHIFT));
     func_8041B110_de((0x1C4 - OPTIONS_RESOURCE_SHIFT));
     D_800E4514->state = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     return 0;
 }
 #endif

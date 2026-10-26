@@ -54,9 +54,9 @@ extern void func_802A4598_de(void *, ParticleEffect *, s32);
 extern s32 DynLight_AllocateWorldLight(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
 extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
+extern void Region_ShiftColorHue(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
-extern void func_80276B44_de(u8, u8, u8, u8, u8 *, u8 *, u8 *);
+extern void Region_DarkenColor(u8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 static inline s32 effect_spawn_random_count(s32 range) {
     return range != 0 ? GraphU64_NextRandom() % (range + 1) : 0;
@@ -501,15 +501,15 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];
-                func_802765B0_de(hue, r, g, b, &h, &sv, &v);
-                func_80276968_de(sat, h, sv, v, &r, &g, &b);
-                func_80276B44_de(val, r, g, b, &r0, &g0, &b0);
+                Region_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
+                Region_DesaturateColor(sat, h, sv, v, &r, &g, &b);
+                Region_DarkenColor(val, r, g, b, &r0, &g0, &b0);
                 r = entry->color->m_BlackColor[0];
                 g = entry->color->m_BlackColor[1];
                 b = entry->color->m_BlackColor[2];
-                func_802765B0_de(hue, r, g, b, &h, &sv, &v);
-                func_80276968_de(sat, h, sv, v, &r, &g, &b);
-                func_80276B44_de(val, r, g, b, &r1, &g1, &b1);
+                Region_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
+                Region_DesaturateColor(sat, h, sv, v, &r, &g, &b);
+                Region_DarkenColor(val, r, g, b, &r1, &g1, &b1);
                 effect->rgb0[0] = r0;
                 effect->rgb0[1] = g0;
                 effect->rgb0[2] = b0;

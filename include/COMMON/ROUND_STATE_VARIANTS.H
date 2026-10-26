@@ -5,7 +5,7 @@
 extern void func_802954E0_us_rev1(void), func_80294F1C_us_rev1(void);
 extern s32 D_800D2970;
 extern f32 D_800CA5C4, D_800C54D8_de;
-extern void func_802A2224_de(void), func_802A2344_eu(void), func_802A2374_eu_x(void), InitFrontendMenus(void);
+extern void func_802A2224_de(void), Tsmos_InitializeEuropeanFrontend(void), func_802A2374_eu_x(void), InitFrontendMenus(void);
 static inline void resetRoundExtra(void) {
 #if defined(VERSION_US_REV1)
 func_802954E0_us_rev1();
@@ -32,7 +32,7 @@ static inline u8 *gameplayResetMessage(u8 language) { return D_800D1D60; }
 static inline u8 *gameplayReleaseMessage(u8 language) { return D_800D31B8; }
 static inline void *gameplayMessageContext(s32 *context) { return &D_80145088; }
 #elif defined(VERSION_EU)
-static inline void stopRoundPlatform(void) { func_802A2344_eu(); }
+static inline void stopRoundPlatform(void) { Tsmos_InitializeEuropeanFrontend(); }
 static inline s32 gameplayTransitionEnabled(u8 flag) { return 1; }
 extern u8 *D_auto_800E0D24[], *D_800D31B8[];
 static inline u8 *gameplayResetMessage(u8 language) { return D_auto_800E0D24[language]; }

@@ -23,10 +23,10 @@
 
 
 
-extern Pool_func_80411518_de D_80153C20;
+extern PoolFrontendReleaseChunkImages D_80153C20;
 
 
-void func_80411518_de(s32 index) {
+void Frontend_ReleaseChunkImages(s32 index) {
     s32 n;
     s32 i;
     SlotRecAtCV1 *slot;
@@ -52,7 +52,7 @@ void func_80411518_de(s32 index) {
 
 extern void *Cache_AllocateMemory(s32);
 
-extern void func_8040F6DC_de(void *, void *, s32);
+extern void Frontend_RelocateWidgetTree(void *, void *, s32);
 extern void XStdio_CloseStream(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry
@@ -66,7 +66,7 @@ void Frontend_AcquireArchiveEntry(s32 index) {
         if (D_801539B0.Screen[index].data == 0) goto load;
         XPlus_CopyBytes(D_801539B0.Screen[index].data, D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].size);
         data = D_801539B0.Screen[index].data;
-        func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
+        Frontend_RelocateWidgetTree(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
     }
     if (D_801539B0.Screen[index].data != 0) return;
 load:
@@ -82,6 +82,6 @@ load:
     XStdio_CloseStream(D_801539B0.In);
     D_801539B0.In = 0;
     data = D_801539B0.Screen[index].data;
-    func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
+    Frontend_RelocateWidgetTree(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
     func_802A18CC_de();
 }

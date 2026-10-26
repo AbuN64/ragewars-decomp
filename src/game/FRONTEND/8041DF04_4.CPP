@@ -21,7 +21,7 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
     SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
 
-    item = func_8040EC30_de(root, 0x38B);
+    item = Frontend_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
@@ -29,23 +29,23 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
 
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    item = func_8040EC30_de(root, 0x38C);
+    item = Frontend_FindWidgetByResourceId(root, 0x38C);
     D_800E39C0->rows[0] = item;
-    item = func_8040EC30_de(root, 0x395);
+    item = Frontend_FindWidgetByResourceId(root, 0x395);
     D_800E39C0->rows[1] = item;
-    item = func_8040EC30_de(root, 0x396);
+    item = Frontend_FindWidgetByResourceId(root, 0x396);
     D_800E39C0->rows[2] = item;
     D_800E39C0->step = Frontend_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
-        func_8041E408_de(row);
-        item = func_8040EC30_de(D_800E39C0->rows[row], 0x392);
+        Frontend_UpdateJoinRequestDisplay(row);
+        item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }
 
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
 
-    item = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
     Frontend_SetWidgetFlag08(item, 1);
     return 0;
 }

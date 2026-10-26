@@ -6,7 +6,7 @@
 /* Releases the object g_optionsPage holds through Cache_FreeMemory, clears g_optionsPage and returns zero. */
 extern void *g_optionsPage;
 
-s32 func_80423B30_eu(void) {
+s32 Menu_DestroyOptionsPage(void) {
     Cache_FreeMemory(g_optionsPage);
     g_optionsPage = 0;
     return 0;

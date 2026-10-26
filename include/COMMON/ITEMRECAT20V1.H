@@ -718,8 +718,8 @@ struct Rec_func_8024C92C_de {
 };
 
 
-struct State_func_804232AC_de;
-struct State_func_804232AC_de {
+struct StateFrontendUpdateOptionsPageExit;
+struct StateFrontendUpdateOptionsPageExit {
     void *menu;
     char pad4[0x20 - 4];
     s32 value;
@@ -1061,16 +1061,16 @@ struct CellRecAt1A {
 };
 
 struct CellRecAt1A;
-struct Obj_func_80421BEC_de;
-struct Obj_func_80421BEC_de {
+struct ObjMenuUpdateSixChoiceMenu;
+struct ObjMenuUpdateSixChoiceMenu {
     char pad[0x44];
     struct CellRecAt1A *unk44;
 };
 struct CellRecAt1A;
-struct Obj_func_80421BEC_de;
+struct ObjMenuUpdateSixChoiceMenu;
 struct StateCode80420E90;
 struct StateCode80420E90 {
-    struct Obj_func_80421BEC_de *unk0;
+    struct ObjMenuUpdateSixChoiceMenu *unk0;
     s32 unk4;
     struct CellRecAt1A *unk8;
     s32 unkC;
@@ -1683,8 +1683,8 @@ typedef struct Vec3Words Vec3Words;
 
 
 
-struct State_func_80421D94_de;
-struct State_func_80421D94_de {
+struct StateMenuCancelSixChoiceMenu;
+struct StateMenuCancelSixChoiceMenu {
     void *first;
     char pad4[0x10 - 4];
     s32 value;

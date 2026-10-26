@@ -145,7 +145,7 @@ extern void *Cache_AllocateMemory(s32);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void PAKInterface_RelabelSlotRows(s32);
@@ -155,8 +155,8 @@ extern void Player_InitializeProfile(Profile *);
 extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32);
 extern void Frontend_RequestScreenMode(s32);
-extern void func_802A2394_de(void);
-extern void func_802A2418_de(s32);
+extern void Tsmos_DeactivateControllerState(void);
+extern void Tsmos_SetTimerState(s32);
 
 s32 func_8042F130_us_rev1(void *screen) {
     PakMenuController *block;
@@ -181,24 +181,24 @@ s32 func_8042F130_us_rev1(void *screen) {
     }
     D_800E54A4->ready = 1;
     D_800E54A4->timer = 4;
-    D_800E54A4->top = func_8040EC30_de(screen, SPRITE_2FB);
+    D_800E54A4->top = Frontend_FindWidgetByResourceId(screen, SPRITE_2FB);
     D_800E54A4->top->x -= D_800E54A4->top->w;
     D_800E54A4->topStep = D_800E54A4->top->w / 4;
     rest = D_800E54A4->top->w - D_800E54A4->topStep * 4;
     D_800E54A4->top->x += rest;
-    D_800E54A4->bottom = func_8040EC30_de(screen, SPRITE_2A2);
+    D_800E54A4->bottom = Frontend_FindWidgetByResourceId(screen, SPRITE_2A2);
     D_800E54A4->bottom->x += D_800E54A4->bottom->w;
     D_800E54A4->bottomStep = D_800E54A4->bottom->w / 4;
     rest = D_800E54A4->bottom->w - D_800E54A4->bottomStep * 4;
     D_800E54A4->bottom->x -= rest;
-    func_8040EC30_de(screen, SPRITE_286)->alpha = 0x6E;
+    Frontend_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
     D_800E54A4->music = func_80419E54_de(SPRITE_287, 0xFF);
-    D_800E54A4->title = func_8040EC30_de(screen, SPRITE_287);
+    D_800E54A4->title = Frontend_FindWidgetByResourceId(screen, SPRITE_287);
     Frontend_SetWidgetFlag08(D_800E54A4->title, 0);
-    D_800E54A4->players[0].sprite = func_8040EC30_de(screen, SPRITE_2FC);
-    D_800E54A4->players[1].sprite = func_8040EC30_de(screen, SPRITE_2A3);
-    D_800E54A4->players[2].sprite = func_8040EC30_de(screen, SPRITE_2FD);
-    D_800E54A4->players[3].sprite = func_8040EC30_de(screen, SPRITE_2FA);
+    D_800E54A4->players[0].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FC);
+    D_800E54A4->players[1].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2A3);
+    D_800E54A4->players[2].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FD);
+    D_800E54A4->players[3].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FA);
     D_800E54A4->phase = D_800E54A0;
     for (i = 0; i < 4; i++) {
         D_800E54A4->links[i].player = -1;
@@ -207,32 +207,32 @@ s32 func_8042F130_us_rev1(void *screen) {
     }
     switch (D_800E54A4->phase) {
     case 5:
-        sprite = func_8040EC30_de(screen, SPRITE_293);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_293);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 6:
-        sprite = func_8040EC30_de(screen, SPRITE_296);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_296);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 4:
-        sprite = func_8040EC30_de(screen, SPRITE_288);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_288);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 0:
-        sprite = func_8040EC30_de(screen, SPRITE_2A1);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2A1);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 3:
-        sprite = func_8040EC30_de(screen, SPRITE_295);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_295);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 1:
-        sprite = func_8040EC30_de(screen, SPRITE_289);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_289);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
@@ -253,7 +253,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     case 7:
         break;
     case 2:
-        sprite = func_8040EC30_de(screen, SPRITE_297);
+        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_297);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
@@ -346,8 +346,8 @@ s32 func_8042F130_us_rev1(void *screen) {
         break;
     }
     Frontend_RequestScreenMode(0);
-    func_802A2394_de();
-    func_802A2418_de(0);
+    Tsmos_DeactivateControllerState();
+    Tsmos_SetTimerState(0);
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }

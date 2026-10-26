@@ -41,7 +41,7 @@ extern SceneEffect *AnimPool_SpawnSceneEffect(void *scene, s32 id, s32 variant, 
 
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
 
-extern void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10);
+extern void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10);
 
 extern char D_8011D8D0[];
 
@@ -140,7 +140,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
             return;
         }
     }
-    actor = func_8028FFD0_de(&D_80131600, &owner->spawn, id,
+    actor = SetN64_SpawnModelEffect(&D_80131600, &owner->spawn, id,
         object->rotation, position, (s32)world, 0);
     if (actor) {
         actor->state = 0;
@@ -161,7 +161,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
             return;
         }
     }
-    actor = func_8028FFD0_de(&D_80131600, &owner->spawn, id,
+    actor = SetN64_SpawnModelEffect(&D_80131600, &owner->spawn, id,
         object->rotation, position, (s32)world, 0);
     if (actor) {
         actor->state = 0;

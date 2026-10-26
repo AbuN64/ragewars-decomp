@@ -26,12 +26,12 @@ s32 Menu_CreateUnlockGatedListScreen(void *arg0) {
     D_800E5780->unk14 = 0;
 
     if (Defs_TestBit(D_80102B7E, 0) == 0) {
-        Frontend_SetWidgetFlag100(func_8040EC30_de(arg0, 0x13A), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(arg0, 0x13A), 1);
     }
 
     D_800E5780->resourceWidget = func_80419E54_de(0x139, 0x6E);
 
-    obj = func_8040EC30_de(arg0, 0x138);
+    obj = Frontend_FindWidgetByResourceId(arg0, 0x138);
     D_800E5780->item = obj;
     ((ListScreenItem *)obj)->alpha = 0xF;
 

@@ -11,11 +11,11 @@ enum { START_MATCH = 0x40, RETURN_MENU = 0x3C, WAIT_SHORT = 0x41, WAIT_LONG = 0x
 #include "MENU_2/804221A0_13.H"
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x40 clears D_80146894 and
-   calls func_802A230C_de and func_8025E384_de; 0x3C clears D_80146894 and calls func_80422F9C_de; 0x41 and
+   calls Tsmos_RequestFrontendShutdown and func_8025E384_de; 0x3C clears D_80146894 and calls Menu_RequestOptionsScreen22; 0x41 and
    0x3E wait 0x1F and 0x20 through func_80298368_de. Returns zero. */
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
-extern void func_802A230C_de(void);
+extern void Tsmos_RequestFrontendShutdown(void);
 extern void func_8025E384_de(void);
 
 extern void func_80298368_de(s32);
@@ -27,12 +27,12 @@ s32 func_80435CD8_de(void) {
     switch (func_80299A08_de()) {
     case START_MATCH:
         D_8011FAC0.clockPaused = 0;
-        func_802A230C_de();
+        Tsmos_RequestFrontendShutdown();
         func_8025E384_de();
         return 0;
     case RETURN_MENU:
         D_8011FAC0.clockPaused = 0;
-        func_80422F9C_de();
+        Menu_RequestOptionsScreen22();
         return 0;
     case WAIT_SHORT:
         time = 0x1F;

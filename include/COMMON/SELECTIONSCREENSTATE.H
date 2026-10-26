@@ -122,8 +122,8 @@ extern NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *, s
 extern void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *, s32, s32);
 extern void func_8042E9A0_de(s32, s32);
 extern s32 func_8041F18C_de(s32);
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(func_8041F2A0_Item *, s32);
-extern void func_80420308_de(s32);
-extern void func_802A2394_de(void);
+extern void Menu_ShowPlayerCharacterSelection(s32);
+extern void Tsmos_DeactivateControllerState(void);
 #endif

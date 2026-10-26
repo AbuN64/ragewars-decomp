@@ -24,7 +24,7 @@ void func_80298ECC_de(void);
 void StreamBufferFree(StreamBuffer *);
 void func_80299CC4_de(void);
 void Frontend_AcquireArchiveEntry(s32);
-void func_80411E18_de(s32);
+void Frontend_ReleaseReferencedBuffer(s32);
 
  
 
@@ -331,7 +331,7 @@ after_e03:
             var_s0 = var_s1_2;
             do {
                 var_s1_2 += 1;
-                func_80411E18_de(temp_v1_2->screens[var_s0].owner);
+                Frontend_ReleaseReferencedBuffer(temp_v1_2->screens[var_s0].owner);
                 temp_v1_2 = D_8014D080;
                 D_8014D080->screens[var_s0].primary = 0;
                 D_8014D080->screens[var_s0].focus = 0;

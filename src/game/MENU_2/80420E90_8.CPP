@@ -11,7 +11,7 @@ INCLUDE_ASM("ovl_80400000", func_80420E20_de);
 /* Fuzzy draft in EU and EU-X: their body differs. */
 /* Opens the options screen: allocates its 0x3C-byte state into D_800E4400 for window arg0, builds
    its title, heading and the four toggle buttons 0x3B4, 0x3B1, 0x3AD and 0x3AF set from bits of
-   D_801462C8, creates the item list and refreshes the limit markers through func_80421234_de. */
+   D_801462C8, creates the item list and refreshes the limit markers through Menu_RefreshExtraOptionLocks. */
 
 extern struct OptionsOpenScreen *D_800E4400;
 extern s32 D_801462C8;
@@ -21,7 +21,7 @@ extern void *func_8041A280_de(s32, s32);
 extern void *func_8041ABC0_de(s32, s32);
 extern void SmpButton_AppendListText(void *, void *);
 extern void SmpButton_SelectListEntry(void *, s32);
-extern void func_80421234_de(void);
+extern void Menu_RefreshExtraOptionLocks(void);
 
 #if defined(VERSION_DE)
 #define ID(n) ((n) - 6)
@@ -39,7 +39,7 @@ s32 func_80420E20_de(void *window) {
     screen->window = window;
     screen->full = 0;
     /* the hub's item type carries no color; this unit's options view names the byte at +0x1A */
-    ((OptionsOpenItem *) func_8040EC30_de(window, ID(0x3A8)))->color = COLOR;
+    ((OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3A8)))->color = COLOR;
     D_800E4400->title = func_8041A280_de(ID(0x3A8), ID(0x3A9));
     func_8041B110_de(ID(0x3B6));
 
@@ -84,13 +84,13 @@ s32 func_80420E20_de(void *window) {
     }
 
     func_8041B110_de(ID(0x3AC));
-    D_800E4400->cursor = (OptionsOpenItem *) func_8040EC30_de(window, ID(0x3B7));
+    D_800E4400->cursor = (OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3B7));
     D_800E4400->unk_28 = 0;
     D_800E4400->unk_2C = 0;
     D_800E4400->unk_34 = 1;
     /* the hub publishes the list builder as returning the word naming the list; the member stores it */
     D_800E4400->list = (void *) func_80419E54_de(ID(0x3AA), 0x6E);
-    func_80421234_de();
+    Menu_RefreshExtraOptionLocks();
     return 0;
 }
 #endif

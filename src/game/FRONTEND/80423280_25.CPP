@@ -41,7 +41,7 @@ extern CompactOptionsCommitContext *D_800E4514;
 
 extern TabOptionsCommitContext *D_800E4518;
 
-void func_80422FC0_de(void) {
+void Menu_CommitOptionsPage(void) {
     Shared_Game *options;
     s32 value;
 
@@ -59,7 +59,7 @@ void func_80422FC0_de(void) {
     options->buttons = func_8041A6E0_de(g_optionsPage->unk_8);
 }
 
-void func_8042302C_de(void) {
+void Menu_CommitCompactOptionsPage(void) {
     Shared_Game *options;
     s32 value;
 
@@ -76,7 +76,7 @@ void func_8042302C_de(void) {
     options->buttons = func_8041A6E0_de(D_800E4514->unk_0);
 }
 
-void func_80423080_de(void) {
+void Menu_CommitTabOptionsPage(void) {
     Shared_Game *options;
     s32 value;
 

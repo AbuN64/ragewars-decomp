@@ -62,7 +62,7 @@
 #include "ACHIEVE/80424E30_3.H"
 
 /* Hides every model named by the sixty-four 12-byte entries of D_800E4A84: for each entry it looks
-   up the first and second identifier in the current screen's context at 0x970 through func_8040EC30_de
+   up the first and second identifier in the current screen's context at 0x970 through Frontend_FindWidgetByResourceId
    and disables the object with func_8040E8D8_de, and does the same for the third identifier unless it
    is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
    so the table address is not hoisted. */
@@ -76,10 +76,10 @@ void Frontend_HideTrialCatalogueWidgets(void) {
     absentResource = -1;
     byteOffset = index;
 loop:
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
     if (((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.id != absentResource) {
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, (u16)*(u32 *)((u8 *)D_800E4A84 + byteOffset + 8)), 0);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)D_800E4A84 + byteOffset + 8)), 0);
     }
     index += 1;
     byteOffset += 0xC;
@@ -133,7 +133,7 @@ void Frontend_RefreshTrialCatalogueWidgets(void) {
         unlockIndex = 0;
 found1:;
         if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
+            widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
             Frontend_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
             resourceKey = D_800E4A84[entryIndex].b;
@@ -143,11 +143,11 @@ found1:;
             unlockIndex = 0;
 found2:;
             if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
+                widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
                 Frontend_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
                 if (D_800E4A84[entryIndex].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
+                    widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
                     Frontend_SetWidgetFlag08(widget, 1);
                     widget->alpha = 20;
                 }
@@ -169,7 +169,7 @@ found2:;
         unlockIndex = 0;
 found3:;
         if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
+            widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
             if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
             else widget->alpha = 170;
             resourceKey = D_800E4A84[entryIndex].b;
@@ -179,11 +179,11 @@ found3:;
             unlockIndex = 0;
 found4:;
             if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
+                widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
                 if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
                 else widget->alpha = 170;
                 if (D_800E4A84[entryIndex].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
+                    widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
                     widget->alpha = opacity;
                 }
             }

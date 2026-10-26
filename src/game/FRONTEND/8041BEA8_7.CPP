@@ -41,7 +41,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 
     D_800E3590->unk216 = 1;
     D_800E3590->unk220 = 4;
-    D_800E3590->item492 = func_8040EC30_de(arg0, 492);
+    D_800E3590->item492 = Frontend_FindWidgetByResourceId(arg0, 492);
     D_800E3590->item492->x = D_800E3590->item492->x - D_800E3590->item492->w;
     shift = D_800E3590->item492->w;
     if (shift < 0) {
@@ -51,7 +51,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     adjust = D_800E3590->item492->w - ((shift >> 2) << 2);
     D_800E3590->item492->x = D_800E3590->item492->x + adjust;
 
-    D_800E3590->item491 = func_8040EC30_de(arg0, 491);
+    D_800E3590->item491 = Frontend_FindWidgetByResourceId(arg0, 491);
     D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
     shift = D_800E3590->item491->w;
     if (shift < 0) {
@@ -61,33 +61,33 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     adjust = D_800E3590->item491->w - ((shift >> 2) << 2);
     D_800E3590->item491->x = D_800E3590->item491->x - adjust;
 
-    func_8040EC30_de(arg0, 488)->alpha = 110;
+    Frontend_FindWidgetByResourceId(arg0, 488)->alpha = 110;
     D_800E3590->lookup486 = func_80419E54_de(486, 255);
 
-    item = func_8040EC30_de(arg0, 486);
+    item = Frontend_FindWidgetByResourceId(arg0, 486);
     D_800E3590->item486 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
-    item = func_8040EC30_de(arg0, 563);
+    item = Frontend_FindWidgetByResourceId(arg0, 563);
     D_800E3590->item563 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
-    func_8040EC30_de(arg0, 496)->alpha = 110;
-    func_8040EC30_de(arg0, 497)->alpha = 120;
+    Frontend_FindWidgetByResourceId(arg0, 496)->alpha = 110;
+    Frontend_FindWidgetByResourceId(arg0, 497)->alpha = 120;
 
-    item = func_8040EC30_de(arg0, 512);
+    item = Frontend_FindWidgetByResourceId(arg0, 512);
     D_800E3590->item512 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->style = 0;
     D_800E3590->unk248 = 27;
-    item = func_8040EC30_de(arg0, 511);
+    item = Frontend_FindWidgetByResourceId(arg0, 511);
     D_800E3590->item511 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->item511->alpha = 0;
     D_800E3590->unk260 = 25;
-    item = func_8040EC30_de(arg0, 510);
+    item = Frontend_FindWidgetByResourceId(arg0, 510);
     D_800E3590->item510 = item;
 
     D_800E3590->player = 0;
@@ -95,7 +95,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
     Frontend_RefreshProfileStatistics();
     Frontend_ShowUnlockedEntries(D_800E3590->style);
-    func_8040EC30_de(arg0, 493)->alpha = 110;
+    Frontend_FindWidgetByResourceId(arg0, 493)->alpha = 110;
     D_800E3590->focus = 0;
     return 0;
 }

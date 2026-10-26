@@ -16,7 +16,7 @@
 #include "SCENE/802508E0_13.H"
 
 extern ResultsOptionsScreen *D_800E4690;
-extern MenuWidget *func_8040EC30_de(void *, s32);
+extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Opens the five option windows of screen D_800E4690: for each of options 0 to 4 it picks window
    0x149, 0x14C, 0x14D, 0x14E or 0x14F through jtbl_800DD9F0, opens it under the screen's parent at
@@ -34,12 +34,12 @@ enum { RESULTS_OPTION_329 = 333, RESULTS_OPTION_331 = 335, RESULTS_OPTION_332 = 
 enum { RESULTS_OPTION_329 = 329, RESULTS_OPTION_331 = 331, RESULTS_OPTION_332 = 332, RESULTS_OPTION_333 = 333, RESULTS_OPTION_334 = 334, RESULTS_OPTION_335 = 335 };
 #endif
 
-/* Releases the object D_800E4690 holds through Cache_FreeMemory, calls func_802A2360_de, clears D_800E4690, calls
+/* Releases the object D_800E4690 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears D_800E4690, calls
    func_80245B28_de and returns zero. */
 
 
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, sets the word at offset 0x988 of the object
    D_800E4690 points to to 8 and the byte at 0x10 of its item at 0xA50 to 0x5A, and plays sound
@@ -161,13 +161,13 @@ void func_80428700_de(void) {
             id = RESULTS_OPTION_335;
             break;
         }
-        Frontend_SetWidgetFlag08(func_8040EC30_de(func_8040EC30_de(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(Frontend_FindWidgetByResourceId(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
     }
 }
 
 s32 func_804287B8_de(void) {
     Cache_FreeMemory(D_800E4690);
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800E4690 = 0;
     Cinema_ReleaseSequenceContext();
     return 0;
@@ -210,7 +210,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
+    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -248,7 +248,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
+    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -286,7 +286,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
+    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -324,7 +324,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
+    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {

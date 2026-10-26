@@ -61,7 +61,7 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
         if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
             func_802A5680_de(manager);
             Scene_UpdateActorsAndRoundState(state);
-            func_80290238_de(&state->system11778);
+            SetN64_UpdateEffectPool(&state->system11778);
             state->elapsed += D_800D2988 * D_800C50E4_de;
             Scene_UpdateTriggerTimers(state);
         }

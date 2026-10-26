@@ -22,8 +22,8 @@ struct EntryCode8040B45C80411518 {
     char pad490[0xC];
 };
 struct EntryCode8040B45C80411518;
-struct Pool_func_80411518_de;
-struct Pool_func_80411518_de {
+struct PoolFrontendReleaseChunkImages;
+struct PoolFrontendReleaseChunkImages {
     s16 count;
     char pad2[6];
     struct EntryCode8040B45C80411518 *entries;
@@ -55,25 +55,25 @@ struct ChunkRecAt48C {
 };
 
 
-struct Resource_func_80410E1C_de;
-struct Resource_func_80410E1C_de {
+struct ResourceFrontendUpdateImageReleaseTimers;
+struct ResourceFrontendUpdateImageReleaseTimers {
     void *data;
     s32 flags;
     char pad8[0x14];
 };
-struct Timer_func_80410E1C_de;
-struct Timer_func_80410E1C_de {
+struct TimerFrontendUpdateImageReleaseTimers;
+struct TimerFrontendUpdateImageReleaseTimers {
     s32 owner;
     s16 delay;
 };
 struct PoolRecAtC;
-struct Resource_func_80410E1C_de;
-struct Timer_func_80410E1C_de;
+struct ResourceFrontendUpdateImageReleaseTimers;
+struct TimerFrontendUpdateImageReleaseTimers;
 struct PoolRecAtC {
     s16 count;
-    struct Resource_func_80410E1C_de *resources;
+    struct ResourceFrontendUpdateImageReleaseTimers *resources;
     s32 unk8;
-    struct Timer_func_80410E1C_de *timers;
+    struct TimerFrontendUpdateImageReleaseTimers *timers;
 };
 
 struct Field_u16_14;
@@ -92,8 +92,8 @@ struct QuadRecAt2C {
 
 extern s32 func_80411A74_de(void);
 
-struct Pool_func_80411518_de;
-typedef struct Pool_func_80411518_de Pool_func_80411518_de;
+struct PoolFrontendReleaseChunkImages;
+typedef struct PoolFrontendReleaseChunkImages PoolFrontendReleaseChunkImages;
 
 struct ButtonWidget;
 typedef struct ButtonWidget ButtonWidget;
@@ -120,8 +120,8 @@ struct EntryCode8040B45C {
     char pad491[0xB];
 };
 struct EntryCode8040B45C;
-struct Pool_func_8040F580_de;
-struct Pool_func_8040F580_de {
+struct PoolFrontendReleaseActiveChunkImages;
+struct PoolFrontendReleaseActiveChunkImages {
     s16 count;
     char pad2[6];
     struct EntryCode8040B45C *entries;
@@ -213,7 +213,7 @@ struct ButtonWidget {
 struct FileState;
 struct EntryRecAt8V1;
 struct ResourceRecAt6;
-struct Chunk_func_80410448_de;
+struct ChunkFrontendEvictExpiredImages;
 struct FileState {
     s32 unk0;
     char pad4[0x244];
@@ -226,13 +226,13 @@ struct FileState {
     char pad26C[4];
     s16 chunkCount;
     char pad272[6];
-    struct Chunk_func_80410448_de *chunks;
+    struct ChunkFrontendEvictExpiredImages *chunks;
     char pad27C[0x28];
     s32 locked;
 };
 
-struct Pool_func_8040F580_de;
-typedef struct Pool_func_8040F580_de Pool_func_8040F580_de;
+struct PoolFrontendReleaseActiveChunkImages;
+typedef struct PoolFrontendReleaseActiveChunkImages PoolFrontendReleaseActiveChunkImages;
 
 struct FileState;
 typedef struct FileState FileState;
@@ -241,10 +241,10 @@ struct QuadRecAt2C;
 
 extern s32 func_80411ACC_de(s32 index);
 
-struct Chunk_func_80410448_de;
+struct ChunkFrontendEvictExpiredImages;
 struct SlotRecAtCV2;
 struct ObjRecAtE;
-struct Chunk_func_80410448_de {
+struct ChunkFrontendEvictExpiredImages {
     void *active;
     char pad4[0x480];
     struct SlotRecAtCV2 **slots;
@@ -253,7 +253,7 @@ struct Chunk_func_80410448_de {
     u8 live;
     char pad491[0xB];
 };
-struct Chunk_func_80410448_de;
+struct ChunkFrontendEvictExpiredImages;
 struct EntryRecAt8V1;
 struct ResourceRecAt6;
 #endif

@@ -56,7 +56,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
         break;
     case 3:
         if (D_800E4F60->unk460 == 0) {
-            func_802A2360_de();
+            Tsmos_ActivateControllerState();
             D_800E4F60->unk460 = 1;
             Frontend_SetWidgetFlag08(D_800E4F60->unk458, 0);
         }
@@ -82,7 +82,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
         break;
     case 6: case 7: break;
     case 8:
-        fade = func_8040EC30_de(root, 0x31A)->alpha >> 1;
+        fade = Frontend_FindWidgetByResourceId(root, 0x31A)->alpha >> 1;
         func_8042A7B4_de(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
@@ -91,7 +91,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
         }
         break;
     case 9:
-        fade = (func_8040EC30_de(root, 0x31A)->alpha + 1) * 2;
+        fade = (Frontend_FindWidgetByResourceId(root, 0x31A)->alpha + 1) * 2;
         if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
         func_8042A7B4_de(fade);
         if (D_800E4F60->selection == 0) Frontend_SetWidgetFlag08(D_800E4F60->unk448, 1);

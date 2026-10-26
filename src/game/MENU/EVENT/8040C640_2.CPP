@@ -8,7 +8,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void MarkMenuEventHandled(void);
 
 /* Clamp the slider and handle range, value, step and parent notifications. */
-s32 func_8040C780_us(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
+s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     s32 result;
     Slider *widget = slider;
 
@@ -99,7 +99,7 @@ s32 func_8040C780_us(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     }
 
 post:
-    func_8040C950_de(widget);
+    Frontend_UpdateSliderGeometry(widget);
     func_802995D4_de(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
     MarkMenuEventHandled();
     result = 0;

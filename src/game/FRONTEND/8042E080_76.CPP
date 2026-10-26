@@ -2,9 +2,9 @@
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
 
-/* On event 3 with value 0xD, clears D_80146894 and calls func_802A230C_de and func_8025E384_de. Returns
+/* On event 3 with value 0xD, clears D_80146894 and calls Tsmos_RequestFrontendShutdown and func_8025E384_de. Returns
    zero. */
-extern void func_802A230C_de();
+extern void Tsmos_RequestFrontendShutdown();
 extern void func_8025E384_de();
 
 s32 func_80435C70_de(void *first, void *second, u32 event, s32 value) {
@@ -13,7 +13,7 @@ s32 func_80435C70_de(void *first, void *second, u32 event, s32 value) {
             return 0;
         }
         D_8011FAC0.clockPaused = 0;
-        func_802A230C_de();
+        Tsmos_RequestFrontendShutdown();
         func_8025E384_de();
     }
     return 0;

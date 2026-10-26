@@ -6,7 +6,7 @@
 extern s32 Cache_AllocateMemory(s32 arg0);
 
 
-s32 func_802A15E4_de(s32 arg0) {
+s32 ESmem_AllocateFrameHeapHigh(s32 arg0) {
     s32 amount;
     s32 result;
 

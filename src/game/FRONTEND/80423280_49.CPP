@@ -12,7 +12,7 @@ extern void func_8042B080_de(void);
    items of the window with their alpha and visibility, resets the selection and the counters at
    D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
    character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
-   request 0xE78 through SoundElement_PlayFlatSound and calls func_80422170_de; returns zero. */
+   request 0xE78 through SoundElement_PlayFlatSound and calls Menu_InitializeOptionsScene; returns zero. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -114,32 +114,32 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk3E0 = 4;
 
-    item1 = func_8040EC30_de(window, ID_306);
+    item1 = Frontend_FindWidgetByResourceId(window, ID_306);
     D_800E4F60->left = item1;
     item1->x -= item1->width;
     D_800E4F60->leftCount = D_800E4F60->left->width / 4;
     x = D_800E4F60->left->width - D_800E4F60->leftCount * 4;
     D_800E4F60->left->x += x;
 
-    item2 = func_8040EC30_de(window, ID_30F);
+    item2 = Frontend_FindWidgetByResourceId(window, ID_30F);
     D_800E4F60->right = item2;
     item2->x += item2->width;
     D_800E4F60->rightCount = D_800E4F60->right->width / 4;
     x = D_800E4F60->right->width - D_800E4F60->rightCount * 4;
     D_800E4F60->right->x -= x;
 
-    opacityItem = func_8040EC30_de(window, ID_30A);
+    opacityItem = Frontend_FindWidgetByResourceId(window, ID_30A);
     opacityItem->alpha = 0x6E;
-    item3 = func_8040EC30_de(window, ID_35D);
+    item3 = Frontend_FindWidgetByResourceId(window, ID_35D);
     D_800E4F60->unk448 = item3;
     item3->alpha = 0x41;
     Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
     D_800E4F60->text3E4 = func_80419E54_de(ID_303, 0x6E);
-    item4 = func_8040EC30_de(window, ID_301);
+    item4 = Frontend_FindWidgetByResourceId(window, ID_301);
     D_800E4F60->unk3E8 = item4;
     Frontend_SetWidgetFlag08(item4, 0);
-    D_800E4F60->label = func_8040EC30_de(window, ID_30E);
-    D_800E4F60->unk3F0 = func_8040EC30_de(window, ID_310);
+    D_800E4F60->label = Frontend_FindWidgetByResourceId(window, ID_30E);
+    D_800E4F60->unk3F0 = Frontend_FindWidgetByResourceId(window, ID_310);
     func_8042B080_de();
     D_800E4F60->selection = 0;
     D_800E4F60->category = 0;
@@ -147,26 +147,26 @@ s32 func_80429A24_de(void *window) {
     func_8042AFE0_de();
     D_80154020.ready = 0;
     D_80154020.value = -1;
-    D_800E4F60->unk454 = func_8040EC30_de(window, ID_308);
-    opacityItem = func_8040EC30_de(window, ID_309);
+    D_800E4F60->unk454 = Frontend_FindWidgetByResourceId(window, ID_308);
+    opacityItem = Frontend_FindWidgetByResourceId(window, ID_309);
     opacityItem->alpha = 0x6E;
     D_800E4F60->unk46C = 0;
-    item5 = func_8040EC30_de(window, ID_30B);
+    item5 = Frontend_FindWidgetByResourceId(window, ID_30B);
     D_800E4F60->unk440 = item5;
     item5->alpha = 0x8C;
     Frontend_SetWidgetFlag08(D_800E4F60->unk440, 1);
-    item6 = func_8040EC30_de(window, ID_30D);
+    item6 = Frontend_FindWidgetByResourceId(window, ID_30D);
     D_800E4F60->unk444 = item6;
     item6->alpha = 0x8C;
     Frontend_SetWidgetFlag08(D_800E4F60->unk444, 0);
-    item7 = func_8040EC30_de(window, ID_30C);
+    item7 = Frontend_FindWidgetByResourceId(window, ID_30C);
     D_800E4F60->unk44C = item7;
     item7->alpha = 0xFF;
-    D_800E4F60->unk450 = func_8040EC30_de(window, ID_2FE);
-    item8 = func_8040EC30_de(window, ID_300);
+    D_800E4F60->unk450 = Frontend_FindWidgetByResourceId(window, ID_2FE);
+    item8 = Frontend_FindWidgetByResourceId(window, ID_300);
     D_800E4F60->unk458 = item8;
     Frontend_SetWidgetFlag08(item8, 1);
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     D_800E4F60->unk460 = 0;
     D_800E4F60->unk464 = 0;
     D_800E4F60->unk468 = -1;
@@ -178,7 +178,7 @@ s32 func_80429A24_de(void *window) {
             record->m_IsBot = 0;
         }
     }
-    func_802A23C4_de(1);
+    Tsmos_SetModeOneFlag(1);
 
     x = 0;
     id = 0;
@@ -228,7 +228,7 @@ s32 func_80429A24_de(void *window) {
     func_80439BE0_de(&D_800E4F60->models[4].rotation, rotation.words);
     func_80439C30_de(&D_800E4F60->models[4].offset, offset.words);
     SoundElement_PlayFlatSound(0xE78);
-    func_80422170_de();
+    Menu_InitializeOptionsScene();
     return 0;
 }
 

@@ -21,6 +21,6 @@ struct ObjectLinks1E0 {
 };
 struct ContainerRecAt3C04 {
     char pad0[0x3C04];
-    struct Node_func_8029076C_de *head;
+    struct NodeSetN64CollectVisibleEffectNodes *head;
 };
 #endif

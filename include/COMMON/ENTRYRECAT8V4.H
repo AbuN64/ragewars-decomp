@@ -149,7 +149,7 @@ typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } Scree
 
 typedef struct SplineSource { s32 stride,count; union { char data[0]; CVector3 points[0]; f32 weights[0]; }; } SplineSource;
 typedef struct SplineTable { s32 count; } SplineTable;
-extern int func_8028FEB8_de(int *);
+extern int SetN64_GetRecordBlockSize(int *);
 extern void func_802610A8_de(void *,s32);
 extern char *func_802610F0_de(Pack *,s32,s32);
 typedef union SplineSourceCursor { SplineSource *header; CVector3 *points; f32 *weights; } SplineSourceCursor;

@@ -23,7 +23,7 @@ struct ObjectRecAtBC {
     Box bounds; /* 0xA0: func_80275954_de over the 8 corners */
     u8 flagB8;
     u8 flagB9;
-    u8 animatedLight; /* 0xBA: func_80278890_de */
+    u8 animatedLight; /* 0xBA: Link_GetLightAnimationOffset */
     u8 shape; /* 0xBB */
     u8 animationSeed; /* 0xBC */
     u8 fieldBD; /* 0xBD: Lighting_DecodeBoxTransform */

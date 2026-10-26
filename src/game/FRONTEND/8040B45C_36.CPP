@@ -32,18 +32,18 @@ extern s16 D_80153C0C, D_80153C20;
 extern struct ChunkRecAt48C *D_80153C28;
 
 
-extern void func_80411AF0_de(s32 i);
+extern void Frontend_ReleaseRetainedImageSlot(s32 i);
 
-extern void func_8040F580_de(void);
+extern void Frontend_ReleaseActiveChunkImages(void);
 
-extern void func_804118E4_de(s32), func_80410E1C_de(s32), func_80411D18_de(void);
+extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageReleaseTimers(s32), func_80411D18_de(void);
 
 
 /* Expires cached UI resources against the current tick from func_802A1934_de unless the cache is
-   locked: releases through func_80411AF0_de the first flagged entry whose unretained resource has an
+   locked: releases through Frontend_ReleaseRetainedImageSlot the first flagged entry whose unretained resource has an
    id below the tick and stops; otherwise, for each live chunk, clears every flagged slot whose time
    has passed (freeing its data through Gfx_ReleaseImage) and stops as soon as a chunk still holds live
-   slots after one expires, freeing through func_80411518_de and clearing each chunk left empty. */
+   slots after one expires, freeing through Frontend_ReleaseChunkImages and clearing each chunk left empty. */
 
 
 
@@ -111,7 +111,7 @@ static inline void touch(s32 index, s32 mode) {
 
 extern void func_80413480_de(s32 output, s32 id);
 
-void func_804101BC_de(void) {
+void Frontend_CloseResourceArchive(void) {
     s32 i;
     s32 invalid;
     s32 i_chunks;
@@ -132,17 +132,17 @@ void func_804101BC_de(void) {
             if (((EntryRecAt18V1 *)(offset + (s32)D_80153C10))->unk4 & 1) {
                 resource = D_8014D988 + i;
                 if (resource->id != invalid && resource->retained == 0) {
-                    func_80411AF0_de(i);
+                    Frontend_ReleaseRetainedImageSlot(i);
                 }
             }
             offset += 0x1C;
         } while (++i < D_80153C0C);
     }
-    func_8040F580_de();
+    Frontend_ReleaseActiveChunkImages();
     state = &D_801539B0;
     if (state->unk0) XStdio_CloseStream(state->unk0);
-    func_804118E4_de(1);
-    func_80410E1C_de(1);
+    Frontend_ReleaseUnprotectedBuffers(1);
+    Frontend_UpdateImageReleaseTimers(1);
     if (state->entries) Cache_FreeMemory(state->entries);
     i_chunks = 0;
     func_80411D18_de();
@@ -179,7 +179,7 @@ void func_804101BC_de(void) {
     XPlus_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
 }
 
-void func_80410448_de(void) {
+void Frontend_EvictExpiredImages(void) {
     s32 now;
     s32 i;
     s32 j;
@@ -196,7 +196,7 @@ void func_80410448_de(void) {
         if (D_801539B0.entries[i].flags & 1) {
             resource = &D_801539B0.resources[i];
             if (resource->id != -1 && resource->retained == 0 && resource->id < now) {
-                func_80411AF0_de(i);
+                Frontend_ReleaseRetainedImageSlot(i);
                 return;
             }
         }
@@ -219,7 +219,7 @@ void func_80410448_de(void) {
                 }
             }
             if (D_801539B0.chunks[i].live == 0) {
-                func_80411518_de(i);
+                Frontend_ReleaseChunkImages(i);
                 D_801539B0.chunks[i].active = 0;
             }
         }

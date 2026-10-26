@@ -41,7 +41,7 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 extern char *XPlus_UppercaseString(char *);
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void func_80438614_de(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning
@@ -66,10 +66,10 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     func_8043C210_de(D_800E5830, 0x67, 0, 0, 0);
     func_8043C278_de(D_800E5830);
     D_800E5830->cursor = 1;
-    func_8040EC30_de(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
-    func_8040EC30_de(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
-    func_8040EC30_de(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
-    func_8040EC30_de(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
+    Frontend_FindWidgetByResourceId(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
+    Frontend_FindWidgetByResourceId(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
+    Frontend_FindWidgetByResourceId(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
+    Frontend_FindWidgetByResourceId(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
     config = g_playerSettings;
     D_800E5830->player = 0;
     for (i = 0; i < 4; i++) {
@@ -89,7 +89,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
             if (D_800E4680->recorded != 0) {
                 slot = D_80102B00[D_800E5830->player].slot;
                 if (Defs_TestBit(D_80102B00[D_800E5830->player].slotLevels[slot], D_8015402C) == 1) {
-                    item = func_8040EC30_de(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
+                    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
                     Frontend_SetWidgetFlag08(item, 1);
                     item->alpha = 0xAF;
                     item->text = D_800D3580;
@@ -134,7 +134,7 @@ done:
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {
                     XStdio_FormatBuffer(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Frontend_FindKeyIndex(character)].name);
-                    item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                     item->alpha = 0xAF;
                     Frontend_SetWidgetFlag08(item, 1);
                     item->text = D_800E5830->resultText;
@@ -142,7 +142,7 @@ done:
             }
         } else {
             XPlus_CopyString(D_800E5830->resultText, D_800D357C);
-            item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -161,14 +161,14 @@ done:
                 D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
             }
             if (D_8015402C == 0x23) {
-                item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
                 item->text = D_800D3598;
             }
         } else {
             XPlus_CopyString(D_800E5830->resultText, D_800D357C);
-            item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -178,14 +178,14 @@ done:
         if (game->humanWon == 1) {
             func_80425D14_de(D_800E5830->player);
             if (D_8015402C == 0x23) {
-                item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
                 item->text = D_800D3594;
             }
         } else {
             XPlus_CopyString(D_800E5830->resultText, D_800D357C);
-            item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -197,29 +197,29 @@ done:
     func_8041B110_de(0x26E + PREVIEW_ID_SHIFT);
     func_8041B110_de(0x26F + PREVIEW_ID_SHIFT);
     func_8041B110_de(0x273 + PREVIEW_ID_SHIFT);
-    Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
+    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B00[i].player >= 0 && D_80102B00[i].fresh == 0) {
-            Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x26F + PREVIEW_ID_SHIFT), 0);
+            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 0);
             break;
         }
     }
-    func_8040EC30_de(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = D_800D3588;
-    item = func_8040EC30_de(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
+    Frontend_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = D_800D3588;
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
     if (D_8014DD98.kind == 0) {
         item->text = D_800D3590;
     } else {
         item->text = D_800D358C;
     }
-    item = func_8040EC30_de(menu, 0x26C + PREVIEW_ID_SHIFT);
+    item = Frontend_FindWidgetByResourceId(menu, 0x26C + PREVIEW_ID_SHIFT);
     Scene_CopyLevelName(&g_world, D_8015402C, levelName, 0x3F);
     XPlus_CopyString(D_800E5830->nameText, XPlus_UppercaseString(levelName));
     item->text = D_800E5830->nameText;
-    D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
+    D_800E5830->item24 = Frontend_FindWidgetByResourceId(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;
     D_80145088.status[7] = 1;
     D_800E5830->started = 0;
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     return 0;
 }
 #endif
@@ -265,29 +265,29 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     player = D_800E5830->player;
     statIndex = player;
     record = &g_playerSettings[player];
-    item = func_8040EC30_de(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     item->value = D_800E3A58[Frontend_FindKeyIndex((s32) record->kind)].portrait;
-    item = func_8040EC30_de(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     item->text = D_80102B00[player].name;
-    item = func_8040EC30_de(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x73;
     item->text = func_80424DE8_de(player);
-    item = func_8040EC30_de(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     XStdio_FormatBuffer(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
     item->text = D_800E5830->killsText;
-    item = func_8040EC30_de(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     XStdio_FormatBuffer(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
     item->text = D_800E5830->scoreText;
-    item = func_8040EC30_de(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     denominator = D_800FF140_de[statIndex];
@@ -297,7 +297,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     }
     XStdio_FormatBuffer(D_800E5830->ratioText, D_800E1F48, percent);
     item->text = D_800E5830->ratioText;
-    item = func_8040EC30_de(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
+    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     lastItem=item;
@@ -308,7 +308,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     }
     lastItem->text = D_800E5830->otherText;
     if (D_800E5830->badge != -1) {
-        item = func_8040EC30_de(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
+        item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
         item->alpha = 0x96;
         Frontend_SetWidgetFlag08(item, 1);
         item->value = D_800E01B0_de[D_800E5830->badge];
@@ -332,7 +332,7 @@ void func_80438614_de(void) {
  model=D_800E5830->rows[index].unk0;
  if(model>=0) {
   /* the hub's Item view shares the MenuWidget prefix; this unit writes alpha and image through its own view */
-  item=(MenuWidget *)func_8040EC30_de(D_800E5830->window,MENU_804387F4_642);
+  item=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E5830->window,MENU_804387F4_642);
   Frontend_SetWidgetFlag08(item,1);
   item->alpha=0xAF;
   item->image=D_800E5830->rows[index].unk10;

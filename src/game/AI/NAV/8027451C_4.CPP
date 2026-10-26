@@ -44,9 +44,9 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     return out;
 }
 
-void Region_ScaleWordsToFloats(void *arg0) {
-    s32 *ip = (s32 *)arg0;
-    f32 *fp = (f32 *)arg0;
+void Region_ScaleWordsToFloats(void *wordStorage) {
+    s32 *ip = (s32 *)wordStorage;
+    f32 *fp = (f32 *)wordStorage;
     f32 scale = D_800C49EC_de;
     fp[0] = (f32)ip[0] * scale;
     fp[1] = (f32)ip[1] * scale;

@@ -74,7 +74,7 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 /* Activates player p's panel on the screen D_800E42D0: passes p and the frame item id from p's
    36-byte layout row D_800E42D4 to func_8041B6E8_de, takes the row's cursor item into the word at 0x8
    of p's 0x4C8-byte entry, places it two units up and left of the frame item, shows it, sets the
-   entry's state at 0x14 to one, redraws through func_80420438_de and hides the row's prompt item. */
+   entry's state at 0x14 to one, redraws through Menu_RefreshPlayerCharacterVariants and hides the row's prompt item. */
 
 
 
@@ -87,7 +87,7 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 
 
 
-extern void func_80420438_de(s32);
+extern void Menu_RefreshPlayerCharacterVariants(s32);
 
 /* Resets player p's choice on the screen D_800E42D0: calls func_8040E8D8_de(1) on the three items in
    option cells from 0x18 of p's 36-byte layout row D_800E42D4, dims the item of the current choice at 0x18 of
@@ -95,7 +95,7 @@ extern void func_80420438_de(s32);
    the entry's kind at 0x10 is -1 it then calls func_8040E8D8_de(0) on as many of those cells as the
    count byte (at least one) at 0x57 plus the index func_8041F1D8_de gives for the kind in p's
    400-byte record of D_80102B00, and highlights the item of the choice with alpha 0x96. Adapted
-   from func_804201A4_de. */
+   from Menu_CyclePlayerCharacterVariant. */
 
 
 
@@ -155,7 +155,7 @@ extern s32 Frontend_ListHasFlag100(void *widget);
 
 
 /* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in D_800E41C0 and draws that panel through Frontend_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
-s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
+s32 Menu_RenderPlayerCharacterPreviews(void *arg0, void *arg1, s32 event)
 {
     s32 i;
     if (event == 1 && D_800E42D0->phase == 3) {
@@ -229,7 +229,7 @@ void Menu_RefreshCharacterUnlocks(void) {
         Defs_SetBitValue(bits, 1, 1);
     }
     for (i = 0; i < 17; i++) {
-        widget = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E3A50[i].id);
+        widget = Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E3A50[i].id);
         Frontend_SetWidgetFlag100(widget, 0);
         if (!Defs_TestBit(bits, i)) {
             if (widget) {
@@ -237,20 +237,20 @@ void Menu_RefreshCharacterUnlocks(void) {
                 Frontend_SetWidgetFlag08(widget, 0);
             }
         } else if (D_801462C8->trialKind == 1 && Defs_TestBit(D_800FEB54, D_800E3A54[i][0]) == 1) {
-            mark = func_8040EC30_de(widget, UNLOCK_MARK);
+            mark = Frontend_FindWidgetByResourceId(widget, UNLOCK_MARK);
             Frontend_SetWidgetFlag08(mark, 1);
             mark->alpha = 50;
         }
     }
 }
 
-void func_804201A4_de(s32 player) {
+void Menu_CyclePlayerCharacterVariant(s32 player) {
     MenuWidget *item;
     s32 choice;
     s32 count;
 
     choice = D_800E42D0->players[player].choice;
-    item = func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
+    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
     Frontend_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
     count = D_800FEB57[player][func_8041F1D8_de(D_800E42D0->players[player].kind)];
@@ -258,35 +258,35 @@ void func_804201A4_de(s32 player) {
         count = 1;
     }
     choice = (choice + 1) % count;
-    item = func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
+    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
     Frontend_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
     D_800E42D0->players[player].choice = choice;
 }
 
-void func_80420308_de(s32 player) {
+void Menu_ShowPlayerCharacterSelection(s32 player) {
     MenuWidget *frame;
 
     SmpOverlay_ShowSlotById(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
-    D_800E42D0->players[player].highlight = func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].cursor);
-    frame = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
+    D_800E42D0->players[player].highlight = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cursor);
+    frame = Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight->x = frame->x - 2;
     D_800E42D0->players[player].highlight->y = frame->y - 2;
     Frontend_SetWidgetFlag08(D_800E42D0->players[player].highlight, 1);
     D_800E42D0->players[player].unkC = 1;
-    func_80420438_de(player);
-    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].title), 0);
+    Menu_RefreshPlayerCharacterVariants(player);
+    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].title), 0);
 }
 
-void func_80420438_de(s32 player) {
+void Menu_RefreshPlayerCharacterVariants(s32 player) {
     MenuWidget *item;
     s32 count;
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
     }
-    item = func_8040EC30_de(D_800E42D0->screen,
+    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
     Frontend_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
@@ -299,9 +299,9 @@ void func_80420438_de(s32 player) {
         count = 1;
     }
     for (i = 0; i < count; i++) {
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
     }
-    item = func_8040EC30_de(D_800E42D0->screen,
+    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
     Frontend_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
@@ -318,7 +318,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     SmpOverlay_SetSlotValue(D_800E42D0->unk4, player, 1);
     D_800E42D0->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E029E[player][i].id), 1);
+        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
     }
     D_800E42D0->players[player].kind = choice;
     func_8041F18C_de(choice);
@@ -364,7 +364,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     done = 0;
     do {
         id = D_800E3A50[GraphU64_NextRandom() % 17].id;
-        if (Frontend_ListHasFlag100(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
+        if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
 #if defined(VERSION_DE)
@@ -396,7 +396,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     D_800E42D0->players[player].choice = GraphU64_NextRandom() % costumes;
 }
 
-s32 func_80420AD4_de(void) {
+s32 Menu_CountPendingCharacterSelections(void) {
     s32 count = 0;
     s32 i;
 

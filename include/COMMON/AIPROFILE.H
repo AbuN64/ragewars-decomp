@@ -320,8 +320,8 @@ struct ModelBlend {
     char pad50[2];
     u16 materialFlags; /* 0x52 */
     char pad54[4];
-    u8 byte58; /* model byte queried by func_80276054_de */
-    u8 byte59; /* model byte queried by func_80276088_de */
+    u8 byte58; /* model byte queried by Region_GetModelBlendByte58 */
+    u8 byte59; /* model byte queried by Region_GetModelBlendByte59 */
     char pad5A[0x9A];
     f32 height;
 };

@@ -10,9 +10,9 @@
 #include "COMMON/MENUSELECTIONMESSAGE.H"
 #include "ACHIEVE/80437C30_2.H"
 
-/* Calls InitFrontendMenus and func_802A2394_de, then func_80298368_de with 0x12. */
+/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then func_80298368_de with 0x12. */
 #if defined(VERSION_EU)
-extern void func_802A2344_eu();
+extern void Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
 extern void func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -21,12 +21,12 @@ extern void InitFrontendMenus();
 extern void func_802A2224_de();
 #endif
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
 void func_804389C4_de(void) {
     
 #if defined(VERSION_EU)
-func_802A2344_eu
+Tsmos_InitializeEuropeanFrontend
 #elif defined(VERSION_EU_X)
 func_802A2374_eu_x
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -35,7 +35,7 @@ InitFrontendMenus
 func_802A2224_de
 #endif
 ();
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     func_80298368_de(0x12);
 }
 

@@ -13,7 +13,7 @@ extern s32 func_8043C308_de(s32 *record);
 extern void *Cache_AllocateMemory(s32 size);
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 
-s32 func_80422228_de(void) {
+s32 Menu_CreateOptionsImageTransition(void) {
     s32 *record = Cache_AllocateMemory(0x24);
     D_800E44A0 = record;
     record[7] = 0;
@@ -28,7 +28,7 @@ s32 func_80422228_de(void) {
 
 /* Event callback for screen D_800E44A0: on event 1 while func_8043C308_de reports the screen in state
    1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in
-   state 2 it tears the match display down through func_80422020_de and func_8042DEA0_de and calls
+   state 2 it tears the match display down through Menu_ReleaseOptionsScene and func_8042DEA0_de and calls
    func_80264854_de(1). Returns zero. */
 
 
@@ -37,17 +37,17 @@ extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void func_80422020_de(void);
+extern void Menu_ReleaseOptionsScene(void);
 #else
 extern void func_8042201C_de(void);
 #endif
 
-extern void func_80422020_de(void);
+extern void Menu_ReleaseOptionsScene(void);
 
 extern void func_8042DEA0_de(void);
 
-/* Unless func_8043C308_de reports one for the object D_800E44A0 holds, calls func_802A2360_de and, when
-   the object's word at 0x20 is one, calls func_802A2394_de, then func_80245B28_de and func_8042B2E4_de unless
+/* Unless func_8043C308_de reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
+   the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and func_8042B2E4_de unless
    the option byte D_801462D5 is set, and finally resets the object through func_8043C278_de. Returns
    zero. */
 
@@ -55,9 +55,9 @@ extern void func_8042DEA0_de(void);
 
 
 
-extern void func_802A2360_de();
+extern void Tsmos_ActivateControllerState();
 
-extern void func_802A2394_de();
+extern void Tsmos_DeactivateControllerState();
 
 extern void Cinema_ReleaseSequenceContext();
 
@@ -85,13 +85,13 @@ extern void MarkMenuEventHandled();
 
 
 
-s32 func_80422278_de(void) {
+s32 Menu_DestroyOptionsImageTransition(void) {
     Cache_FreeMemory(D_800E44A0);
     D_800E44A0 = 0;
     return 0;
 }
 
-s32 func_804222A8_de(s32 unused0, s32 unused1, s32 event) {
+s32 Menu_DrawOptionsImageTransition(s32 unused0, s32 unused1, s32 event) {
     if (event == 1) {
         if (func_8043C308_de(D_800E44A0) != 1) {
             return 0;
@@ -102,11 +102,11 @@ s32 func_804222A8_de(s32 unused0, s32 unused1, s32 event) {
             return 0;
         }
 #if defined(VERSION_DE)
-        func_80422020_de();
+        Menu_ReleaseOptionsScene();
 #else
         
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_80422020_de
+Menu_ReleaseOptionsScene
 #else
 func_8042201C_de
 #endif
@@ -118,17 +118,17 @@ func_8042201C_de
     return 0;
 }
 
-s32 func_80422340_de(void) {
+s32 Menu_StartOptionsImageTransition(void) {
     s32 one = 1;
 
     if (func_8043C308_de(D_800E44A0) == one) {
         return 0;
     }
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     if (D_800E44A0[8] != one) {
         return 0;
     }
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     if (D_801462C8.controllerMode == 0) {
         Cinema_ReleaseSequenceContext();
         func_8042B2E4_de();
@@ -137,7 +137,7 @@ s32 func_80422340_de(void) {
     return 0;
 }
 
-s32 func_804223CC_de(void *first, void *second, u32 event, s32 value) {
+s32 Menu_HandleOptionsTransitionRequest(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0xB) {
         MarkMenuEventHandled();
         D_800E44A0[8] = 1;
@@ -145,17 +145,17 @@ s32 func_804223CC_de(void *first, void *second, u32 event, s32 value) {
     return 0;
 }
 
-s32 func_80422414_de(void) {
+s32 Menu_RequestOptionsImageTransition(void) {
     D_800E44A0[8] = 1;
     return 0;
 }
 
-s32 func_8042242C_de(void) {
+s32 Menu_ConsumeOptionsTransitionEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 func_8042244C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchOptionsTransitionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

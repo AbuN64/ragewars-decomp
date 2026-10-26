@@ -50,7 +50,7 @@ int func_80299CC4_de();
 extern void *Cache_AllocateMemory(s32 size);
 
 
-/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through func_8040EC30_de, counts the load in D_8014D0A0 with its high-water mark in D_8014D09C, and records it while the cache holds fewer than 75 entries. */
+/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through Frontend_FindWidgetByResourceId, counts the load in D_8014D0A0 with its high-water mark in D_8014D09C, and records it while the cache holds fewer than 75 entries. */
 
 
 
@@ -109,7 +109,7 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     D_80146E18 = -1;
     func_802A1918_de(&D_80146E08, &D_80146E0C);
     func_80411EEC_de();
-    func_8040F534_de(D_80146E08, D_80146E0C);
+    Frontend_SetDisplayClipBounds(D_80146E08, D_80146E0C);
     Smos_AllocateControllerContext();
     g_menuEventCount = 0;
     D_8014D080 = Cache_AllocateMemory(0x544);
@@ -156,7 +156,7 @@ Element *FindMenuElement(s32 id) {
             return D_8014D080->cache[i].object;
         }
     }
-    object = (Element *)func_8040EC30_de((struct Tree *)context, id & 0xFFFF);
+    object = (Element *)Frontend_FindWidgetByResourceId((struct Tree *)context, id & 0xFFFF);
     D_8014D0A0++;
     if (D_8014D09C < D_8014D0A0) {
         D_8014D09C = D_8014D0A0;

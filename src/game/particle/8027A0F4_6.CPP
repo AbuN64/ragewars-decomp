@@ -25,7 +25,7 @@ extern f32 D_800D2988;
 extern s32 D_800D297C;
 extern char D_80100030;
 extern s32 D_80140FF8;
-extern Globals_func_804220A8_de D_80140FE8_de;
+extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 
 extern s32 D_801462C8;
 

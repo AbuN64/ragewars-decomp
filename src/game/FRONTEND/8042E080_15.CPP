@@ -11,11 +11,11 @@
 
 
 
-extern void func_802A2394_de(void);
+extern void Tsmos_DeactivateControllerState(void);
 void func_8043577C_de(s32 focusEntry) {
     s32 var_v0;
 
-    func_802A2394_de();
+    Tsmos_DeactivateControllerState();
     D_800E54A4->ready = 5;
     D_800E54A4->timer = 4;
     D_800E54A4->focus = focusEntry;

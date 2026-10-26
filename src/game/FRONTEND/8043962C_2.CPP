@@ -11,7 +11,7 @@
 
 
 
-extern void func_802A2360_de(void);
+extern void Tsmos_ActivateControllerState(void);
 
 /* On event 3 with value 0xD, calls MarkMenuEventHandled and func_80298368_de with 3. Returns zero. */
 extern void MarkMenuEventHandled();
@@ -31,7 +31,7 @@ s32 func_80439628_de(s32 unused0, s32 unused1, s32 arg2) {
     if (D_800E28E0 >= 2) {
         return 0;
     }
-    func_802A2360_de();
+    Tsmos_ActivateControllerState();
     D_800E5950->phase += arg2;
     D_800E5950->light->field_10 = (u32)(Math_Cosf(D_800E5950->phase * 0.005f) * 100.0f + 150.0f);
     return 0;
