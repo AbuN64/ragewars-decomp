@@ -142,8 +142,8 @@ typedef struct LookupRecAtC LookupRecAtC;
 
 extern float D_800C3B98;
 
-struct ObjectLinks24;
-typedef struct ObjectLinks24 ObjectLinks24;
+struct AnimInfo;
+typedef struct AnimInfo AnimInfo;
 
 
 
@@ -155,8 +155,8 @@ typedef struct ObjectLinks24 ObjectLinks24;
 struct Rec_func_8024C92C_de;
 
 
-struct ObjectLinks24;
-struct ObjectLinks24 {
+struct AnimInfo;
+struct AnimInfo {
     char * unk_0;
     char pad0[0x4 - 0x0 - sizeof(char*)];
     char * unk_4;

@@ -32,7 +32,7 @@ static inline void toggle(ToggleMenu *menu, MenuItem *item) {
 
 /* Clears a record: its four 0x38-byte entries through an inline per-entry clear, its two leading
    flag bytes and trailing words, and sets the word at 0xE6 to -5. */
-static inline void clear_entry(EntryRecAt34 *e) {
+static inline void clear_entry(CItem *e) {
     e->unk4 = 0;
     e->unk0 = 0;
     e->unkD = 0;
@@ -231,8 +231,8 @@ s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 ar
     s32 var_a1;
     u32 key;
     char *temp_v1;
-    EntryRecAt34 *var_v1;
-    EntryRecAt34 *var_v1_2;
+    CItem *var_v1;
+    CItem *var_v1_2;
     var_a1 = 0;
     key = arg2 & 0xFFFF;
     for (var_a1 = 0; var_a1 < 4; var_a1++) {
@@ -253,16 +253,16 @@ s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 ar
     }
     temp_v1 = arg0 + ((var_a1 * 0x38) + 4);
     ((CItemMenu *)arg0)->m_LastItemPos = var_a1;
-    ((EntryRecAt34 *)(temp_v1))->unk0 = 1;
-    ((EntryRecAt34 *)(temp_v1))->unk8 = arg1;
-    ((EntryRecAt34 *)(temp_v1))->unkC = arg2;
-    ((EntryRecAt34 *)(temp_v1))->unk10 = arg3;
-    ((EntryRecAt34 *)(temp_v1))->unk14 = arg4;
-    ((EntryRecAt34 *)(temp_v1))->unk28 = arg5;
-    ((EntryRecAt34 *)(temp_v1))->unk2C = arg6;
-    ((EntryRecAt34 *)(temp_v1))->unk30 = arg7;
-    ((EntryRecAt34 *)(temp_v1))->unkD = (u8) (((EntryRecAt34 *)(temp_v1))->unkD + 1);
-    ((EntryRecAt34 *)(temp_v1))->unk34 = arg8;
+    ((CItem *)(temp_v1))->unk0 = 1;
+    ((CItem *)(temp_v1))->unk8 = arg1;
+    ((CItem *)(temp_v1))->unkC = arg2;
+    ((CItem *)(temp_v1))->unk10 = arg3;
+    ((CItem *)(temp_v1))->unk14 = arg4;
+    ((CItem *)(temp_v1))->unk28 = arg5;
+    ((CItem *)(temp_v1))->unk2C = arg6;
+    ((CItem *)(temp_v1))->unk30 = arg7;
+    ((CItem *)(temp_v1))->unkD = (u8) (((CItem *)(temp_v1))->unkD + 1);
+    ((CItem *)(temp_v1))->unk34 = arg8;
     return 1;
 }
 
@@ -306,7 +306,7 @@ s32 ItemMenu_AdvanceSelection(MenuCode802A6AC0 *menu, s32 backward) {
     return cursor;
 }
 
-void ItemMenu_ClearEntry(EntryRecAt34 *arg0) {
+void ItemMenu_ClearEntry(CItem *arg0) {
     arg0->unk4 = 0;
     arg0->unk0 = 0;
     arg0->unkD = 0;

@@ -190,7 +190,7 @@ void func_8024C8C4_de(void *cQuatern, f32 t, void *a, void *b) {
 }
 
 void func_8024C92C_de(void *poseTrack, s32 boneIndex, void *outTranslation) {
-    ObjectLinks24 *o = poseTrack;
+    AnimInfo *o = poseTrack;
     CVector3 *out = outTranslation;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
@@ -223,10 +223,10 @@ void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
     void *base;
     char *a;
 
-    idx = ((struct ObjRecAt2V1 *) (((ObjectLinks24 *) o)->unk_0 + (boneIndex * 4)))->unk2;
+    idx = ((struct ObjRecAt2V1 *) (((AnimInfo *) o)->unk_0 + (boneIndex * 4)))->unk2;
     if (idx == -1) {
         f32 scale;
-        rec = ((ObjectLinks24 *)(o))->unk_4 + boneIndex * 0x14;
+        rec = ((AnimInfo *)(o))->unk_4 + boneIndex * 0x14;
         scale = (3.0518509447574615e-05f);
         outRotation->x = (f32)(((CROMInitialOrientation_t *)(rec))->unk_C) * scale;
         outRotation->y = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotY) * scale;
@@ -234,12 +234,12 @@ void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
         outRotation->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
         return;
     }
-    base = SetN64_GetPackSection(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
-    a = (char *)base + (((ObjectLinks24 *)(o))->unk_10) * 4;
-    base = (char *)base + (((ObjectLinks24 *)(o))->unk_14) * 4;
+    base = SetN64_GetPackSection(((AnimInfo *)(o))->unk_C, (s32)idx);
+    a = (char *)base + (((AnimInfo *)(o))->unk_10) * 4;
+    base = (char *)base + (((AnimInfo *)(o))->unk_14) * 4;
     {
         f32 scale;
-        scale = ((ObjectLinks24 *)(o))->unk_20;
+        scale = ((AnimInfo *)(o))->unk_20;
         outRotation->x = ((CQuatern *)(a))->x + scale * (((CQuatern *)(base))->x - ((CQuatern *)(a))->x);
         outRotation->y = ((CQuatern *)(a))->y + scale * (((CQuatern *)(base))->y - ((CQuatern *)(a))->y);
         outRotation->z = ((CQuatern *)(a))->z + scale * (((CQuatern *)(base))->z - ((CQuatern *)(a))->z);

@@ -2,7 +2,7 @@
 #define SCENE_SIMPLE_INSTANCE_RECORD_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-typedef struct SimpleInstanceRecord {
+typedef struct CROMSimpleInstance {
     s32 visBits;
     CVector3 position;
     f32 maxRadius;
@@ -13,5 +13,5 @@ typedef struct SimpleInstanceRecord {
     u16 variation;
     s8 rotY;
     u8 pad;
-} SimpleInstanceRecord;
+} CROMSimpleInstance;
 #endif

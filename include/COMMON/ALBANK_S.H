@@ -81,8 +81,8 @@ struct ALInstrument {
     ALSound_s *soundArray[1];
 };
 
-struct ALChanState10;
-struct ALChanState10 {
+struct ALChanState;
+struct ALChanState {
     ALInstrument *instrument;
     s16 bendRange;
     u8 fxId;
@@ -241,8 +241,8 @@ struct ObjectLinks88 {
 
 typedef int ALMicroTime;
 
-struct ALChanState10;
-typedef struct ALChanState10 ALChanState10;
+struct ALChanState;
+typedef struct ALChanState ALChanState;
 
 struct ALNoteEvent;
 
@@ -273,7 +273,7 @@ struct ALSeqPlayer {
     ALEvent nextEvent;
     ALEventQueue evtq;
     ALMicroTime frameTime;
-    ALChanState10 *chanState;
+    ALChanState *chanState;
     ALVoiceState *vAllocHead;
     ALVoiceState *vAllocTail;
     ALVoiceState *vFreeList;

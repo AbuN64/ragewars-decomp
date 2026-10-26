@@ -37,7 +37,7 @@ void Libultra_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c)
     seqp->loopCount = 0;
     seqp->base.nextEvent.type = 9;
     seqp->base.maxChannels = c->kind;
-    seqp->base.chanState = func_802B0340_de(0, 0, heap, c->kind, sizeof(ALChanState10));
+    seqp->base.chanState = func_802B0340_de(0, 0, heap, c->kind, sizeof(ALChanState));
     func_802B1990_de(seqp);
     voices = func_802B0340_de(0, 0, heap, c->count38, sizeof(ALVoiceState));
     seqp->base.vFreeList = 0;

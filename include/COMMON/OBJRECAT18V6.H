@@ -84,7 +84,7 @@ typedef struct ToggleMenu ToggleMenu;
 
 
 
-struct EntryRecAt34;
+struct CItem;
 
 struct Lists802A6DF8;
 typedef struct Lists802A6DF8 Lists802A6DF8;
@@ -97,8 +97,8 @@ struct Owner802A6DF8 {
 
 
 
-struct EntryRecAt34;
-typedef struct EntryRecAt34 EntryRecAt34;
+struct CItem;
+typedef struct CItem CItem;
 
 struct State802A6DF8;
 typedef struct State802A6DF8 State802A6DF8;
@@ -118,8 +118,8 @@ extern float D_800C5EB0_de;
 struct Owner802A6DF8;
 typedef struct Owner802A6DF8 Owner802A6DF8;
 
-struct EntryRecAt34;
-struct EntryRecAt34 {
+struct CItem;
+struct CItem {
     int unk0;
     int unk4;
     s32 unk8;
@@ -246,7 +246,7 @@ struct CItemMenu_t {
     unsigned char unk0;
     unsigned char m_ModePos;
     char pad2[2];
-    EntryRecAt34 entries[4];
+    CItem entries[4];
     short m_LastItemPos;
     short m_ItemAlphaFade;
     int m_FrameCount;

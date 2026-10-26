@@ -10,7 +10,7 @@
 typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef StridedTable ObjRecV1;
 
-void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, ObjectLinks24 *frames) {
+void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) {
     f32 frameScale;
     f32 scaledCurrentLoopStart;
     f32 scaledNextLoopStart;

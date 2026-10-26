@@ -52,7 +52,7 @@ typedef struct SimpleInstanceOut {
     s32 visBits;
     s32 f1C4;
 } SimpleInstanceOut;
-void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleInstanceRecord *rec, s32 owner, char *segments) {
+void World_InitSimpleInstance(SimpleInstanceOut *inst, CROMSimpleInstance *rec, s32 owner, char *segments) {
     CVector3 v;
     inst->kind = 3;
     inst->type = rec->type;

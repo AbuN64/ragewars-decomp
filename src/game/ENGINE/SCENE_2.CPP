@@ -89,7 +89,7 @@ extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
-extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
+extern void World_InitSimpleInstance(SimpleInstance *instance, CROMSimpleInstance *record, s32 owner, char *segments);
 extern void Lighting_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 extern f32 GameObject_GetActorHeight(void *);
 
@@ -150,7 +150,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
     s32 k;
     PlacedProp *props;
     RecordRecAt1A *efficient;
-    SimpleInstanceRecord *simpleRecords;
+    CROMSimpleInstance *simpleRecords;
     LightVolumeRecord *volumeRecords;
     ObjectRecAtBC *volumes;
     void *objects;
@@ -205,7 +205,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
             SetN64_TransposeRecords(simpleSet, base + offset, 1);
             ((RecordSet *)(base + offset))->size = sizeof(SimpleInstance);
             ((RecordSet *)(base + offset))->count = simpleCount;
-            simpleRecords = (SimpleInstanceRecord *)(simpleSet + 1);
+            simpleRecords = (CROMSimpleInstance *)(simpleSet + 1);
             simples = (SimpleInstance *)(base + offset + 8);
             for (k = 0; k < simpleCount; k++) {
                 World_InitSimpleInstance(&simples[k], &simpleRecords[k],

@@ -29,11 +29,11 @@ extern void alSeqSetLoc(void *arg0, void *arg1);
 void __setInstChanState(void *seqPlayer, void *selectedInstrument, s32 channelNumber) {
     s32 stride = channelNumber * 0x10;
 
-    ((ALChanState10 *)(stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState))->instrument = selectedInstrument;
-    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->pan = ((ALInstrument *)selectedInstrument)->pan;
-    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->vol = ((ALInstrument *)selectedInstrument)->volume;
-    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->priority = ((ALInstrument *)selectedInstrument)->priority;
-    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->bendRange = (u16)((ALInstrument *)selectedInstrument)->bendRange;
+    ((ALChanState *)(stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState))->instrument = selectedInstrument;
+    ((ALChanState *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->pan = ((ALInstrument *)selectedInstrument)->pan;
+    ((ALChanState *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->vol = ((ALInstrument *)selectedInstrument)->volume;
+    ((ALChanState *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->priority = ((ALInstrument *)selectedInstrument)->priority;
+    ((ALChanState *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->bendRange = (u16)((ALInstrument *)selectedInstrument)->bendRange;
 }
 
 void func_802B1B14_de(void *seqPlayer, void *releasedVoice, s32 releaseDuration) {
