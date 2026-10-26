@@ -1,13 +1,21 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/BUF16B.H"
 #include "TYPES.H"
+#include "sdk/libgultra_inferred/802AD870_8.H"
+struct SeqpSetSeqEvent {
+    s16 count;
+    s16 _pad2;
+    ALCSeq_s *sequence;
+    s32 _pad8;
+    s32 _padC;
+};
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
+extern void func_802B00D4_de(void *, s16 *, s32);
 
-void func_802AFF30_de(s32 player, s32 sequence) {
-    Buf16 sp10;
+void func_802AFF30_de(s32 player, ALCSeq_s *sequence) {
+    struct SeqpSetSeqEvent sp10;
 
-    sp10.value = sequence;
+    sp10.sequence = sequence;
     sp10.count = 0xD;
     func_802B00D4_de(player + 0x48, &sp10, 0);
 }

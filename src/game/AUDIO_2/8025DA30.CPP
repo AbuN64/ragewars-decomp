@@ -26,8 +26,8 @@ extern f32 D_800C4008_de;
 s32 Audio_LoadMusicSequence(Track *state, s32 index) {
     s32 selection;
 
-    void *result;
-    void *selected;
+    struct ALCMidiHdr *result;
+    struct ALCMidiHdr *selected;
     Resource *command;
     f32 duration;
     selection = Defs_FindSortedValue(state->unk0->unk2B60, state->unk0->unk2B64, index);

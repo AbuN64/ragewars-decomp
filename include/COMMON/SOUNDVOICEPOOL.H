@@ -145,13 +145,15 @@ extern int D_800CBB1C;
 
 struct ContextRecAt2BB8;
 struct IntPair;
+struct ALCMidiHdr;
+struct ALCSeq_s;
 struct Track;
 struct Track {
     struct ContextRecAt2BB8 *unk0;
     s32 unk4;
     struct IntPair *unk8;
-    void *unkC;
-    s32 unk10;
+    struct ALCMidiHdr *unkC;
+    struct ALCSeq_s *unk10;
     s32 unk14;
     s32 unk18;
     s32 unk1C;

@@ -228,7 +228,6 @@ extern f32 func_802AFE30_de(s32 arg0);
 
 extern void func_802AFEB0_de(s32 arg0, s32 arg1);
 
-extern void func_802AFF30_de(s32 arg0, s32 arg1);
 
 extern void func_802AFF60_de(s32 arg0, s16 arg1);
 

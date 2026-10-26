@@ -9,9 +9,9 @@
 #include "sdk/libgultra_inferred/802B3AFC.H"
 #include "sdk/libgultra_inferred/802B3B80_7.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "sdk/libgultra_inferred/802AD870_8.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
 extern f32 Menu_ExpandFloatHighWord(u16);
-extern void func_802AE5B8_de(s32, void *);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}
 void Audio_UpdateMusicPlayback(Track *queue) {
     f32 temp_f0;
@@ -26,11 +26,11 @@ void Audio_UpdateMusicPlayback(Track *queue) {
     s32 temp_v1;
     s32 i;
     s32 var_v0;
-    void *temp_s0_2;
+    struct ALCMidiHdr *temp_s0_2;
     ContextRecAt2BB8 *temp_v0_2;
     struct Resource *temp_v0_4;
     ContextRecAt2BB8 *temp_v0_5;
-    void *var_v0_2;
+    struct ALCMidiHdr *var_v0_2;
     temp_v1 = queue->unk18;
     switch (temp_v1) { /* irregular */
     case 0x20:

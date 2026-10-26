@@ -10,6 +10,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "UTIL/8025DBA0.H"
+#include "sdk/libgultra_inferred/802AD870_8.H"
 #include "sdk/libgultra_inferred/802B3B80_7.H"
 #include "stddef.h"
 #include "RENDER_4/8028FD2C_6.H"
@@ -82,7 +83,6 @@ void *func_8025DB80_de(Track *state, s32 index) {
     return NULL;
 }
 
-extern void func_802AE5B8_de(s32 arg0, s32 arg1);
 
 
 void func_8025DC34_de(void *arg0, f32 arg1) {
