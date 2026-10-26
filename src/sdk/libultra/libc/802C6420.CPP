@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-#if !defined(VERSION_EU)
 /* UnsignedRemainder: libgcc2 remainder with the VR4300 HI/LO hazards. */
 /* gcc-2.8.1 libgcc2 __umoddi3 compiled in place: the remainder libcall of u64 '%'. */
 #define L_umoddi3
@@ -10,6 +9,3 @@
 #define LIBGCC2_EXTERNAL_CLZ D_auto_src_rw_u64_remainder_normalization_width_us_rev1
 #endif
 #include "libgcc2.inc.c"
-#else
-INCLUDE_ASM("span_1000", __umoddi3);
-#endif

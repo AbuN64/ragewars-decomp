@@ -15,7 +15,6 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
     return (f32)result;
 }
 
-#if !defined(VERSION_EU)
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
 #include "RENDER_4/8028FD2C_6.H"
@@ -91,9 +90,6 @@ void PolyTrak_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *ou
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8025E574);
-#endif
 
 extern void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
 
@@ -287,7 +283,9 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
     }
 }
 #else
+#if defined(VERSION_US)
 INCLUDE_ASM("span_1000", func_8025F074_us);
+#endif
 #endif
 #endif
 

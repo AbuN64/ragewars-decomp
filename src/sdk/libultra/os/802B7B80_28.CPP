@@ -108,7 +108,7 @@ s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
 }
 
 #if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_802B83E4_us);
+unsigned char D_auto_func_802B83E4_us_padding_B8FE4[4] = { 0x00, 0x0B, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)

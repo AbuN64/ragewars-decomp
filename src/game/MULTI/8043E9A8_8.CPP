@@ -10,11 +10,11 @@
 #include "GFX/TEXT/802A8A94_5.H"
 #include "MULTI/8043E9A8_9.H"
 
-#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
+#if (!(defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", Multi_DrawPlayerItemAvailability);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(NON_MATCHING)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 
 void Multi_DrawPlayerItemAvailability(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct HolderMultiIsPlayerItemAvailable *context) {

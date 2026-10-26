@@ -46,7 +46,7 @@ void Region_NoOperation(void)
 }
 
 #if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_80276598_us);
+unsigned char D_auto_func_80276598_us_padding_77198[4] = { 0x00, 0x06, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)

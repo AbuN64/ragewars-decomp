@@ -35,13 +35,7 @@ unsigned int rodata_unresolved_802B73BC[1] = {
 #endif
 
 #if defined(VERSION_EU)
-#ifdef NON_MATCHING
-int func_802B772C_eu(int arg0, int *arg1) {
-    return *arg1;
-}
-#else
-INCLUDE_ASM("span_1000", func_802B772C_eu);
-#endif
+unsigned char D_auto_func_802B772C_eu_padding_B832C[4] = { 0x8C, 0xA2, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_DE)

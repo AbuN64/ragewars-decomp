@@ -15,7 +15,6 @@
 
 s32 func_80263154_de(BitReader *, s32);
 
-#if defined(NON_MATCHING) || !defined(VERSION_EU_X)
 extern void AnimPool_InitializeBitReader(BitReader *, void *);
 /* Decode a 17-by-17 region grid, then replace variable cells with stream offsets. */
 void VisData_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
@@ -65,9 +64,6 @@ void VisData_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80296174);
-#endif
 
 /* Tests a centered grid cell and interprets its sentinel value. */
 

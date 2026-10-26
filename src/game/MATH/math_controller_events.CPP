@@ -9,9 +9,6 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", Smos_TranslateControlButtonEvent);
-#endif
 #if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)
 /* US and EU keep their asm: their jump table sits inside D_auto_rodata_unresolved_800C55BC / _800C592C, which
  * have no unit split yet. */
@@ -21,7 +18,7 @@ INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 extern s32 Smos_GetControlRepeatLimit(void);
 extern s32 GetMenuScreenOwner(void);
 
-#if !defined(VERSION_DE) && (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
+#if (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
 /* Turns one control event into manager events. Controls 4..7 and 11..12 first send their own event on a
  * press (controls 4..7 send it twice with amount 10000 when the control was not already held); then every control
  * sends event 10 (first press only) and 9 on a press, or 11 on a release. The per-device held-flag bit for the
@@ -325,12 +322,6 @@ const unsigned int D_auto_rodata_unresolved_800C592C[13] = {
  * semantic proposal: RwSwitchTableFunc80299E80_de
  * member=rodata/DispatchControllerButtonEvent/800CA820 rom=0xC6290(de)+36B rom=0xC6570(eu-x)+36B rom=0xCB420(us-rev1)+36B vram=0x800CA820 sect=rodata seg=span_C76B0 status=open symbol=D_auto_rodata_func_80299E80_de_800CA820(legacy-src)
  * cart rows: de 0xC6290->0xC62B4 = 36 B; eu-x 0xC6570->0xC6594 = 36 B; us-rev1 0xCB420->0xCB444 = 36 B. eu/us hold no row; parent withholds. Branch targets lie inside landed sibling funcs 0x80299EF8..0x8029A1F4 (de), 0x8029A048..0x8029A344 (eu-x), 0x8029AEF8..0x8029B1F4 (us-rev1). Values verbatim from src/rodata.DispatchControllerButtonEvent.800CA820.c with VERSION_US_REV -> VERSION_US_REV1 fixed. */
-#if defined(VERSION_DE)
-const unsigned int D_auto_rodata_func_80299E80_de_800CA820[9] = {
-    0x00299FD8, 0x0029A05C, 0x0029A0E0, 0x0029A164, 0x0029A1F4, 0x0029A1F4, 0x0029A1F4, 0x00299EF8,
-    0x00299F68,
-};
-#endif
 #endif
 
 #if defined(VERSION_DE)

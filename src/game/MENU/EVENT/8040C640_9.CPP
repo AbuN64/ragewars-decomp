@@ -23,7 +23,7 @@ s32 Frontend_DispatchPakProfileEventUs(ActorDefinitionHeader *actor, s32 event, 
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_80435CE4_us);
+unsigned char D_auto_func_80435CE4_us_padding_199CE4[8] = { 0x67, 0x48, 0x64, 0x72, 0x52, 0x00, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)

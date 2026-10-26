@@ -41,12 +41,14 @@ OSPiHandle_s *func_802B8F48_de(void)
 }
 #endif
 
-#if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_802B92B0_eu);
+#if defined(VERSION_DE) || defined(VERSION_EU)
+INCLUDE_ASM("span_1000", System_RunPiManager);
 #endif
-
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802B9010_de);
+#if VERSION_EU
+INCLUDE_DATA("span_1000", System_RunPiManager_padding_BA248);
+#endif
+#if VERSION_DE
+INCLUDE_DATA("span_1000", System_RunPiManager_padding_B9FA8);
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

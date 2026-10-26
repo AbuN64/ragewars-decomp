@@ -7,14 +7,6 @@
 #include "sdk/libgultra_inferred/802AD870_2.H"
 #include "sdk/libgultra/part_800C7F20/code_802B2378_2.h"
 
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80285160_de);
-#endif
-
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80285174_de);
-#endif
-
 void Cache_ReplaceResourceBlock(s32, void **, void *);
 void * Cache_AllocResourceBlock(s32, void *, s32);
 void * func_80254600_de(s32, s32, s32);

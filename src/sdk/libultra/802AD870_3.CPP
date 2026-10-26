@@ -1,5 +1,5 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_802ADBDC_eu);
+unsigned char D_auto_func_802ADBDC_eu_padding_AE7DC[4] = { 0x08, 0x0A, 0xA3, 0x01 };
 #endif

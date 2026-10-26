@@ -3,14 +3,6 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802BB5B0_de);
-#endif
-
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802BB5E0_de);
-#endif
-
 /* osSetThreadPri, drafted from ultralib src/os/setthreadpri.c (2.0I-L, non-debug). */
 
 

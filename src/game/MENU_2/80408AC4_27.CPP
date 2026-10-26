@@ -1,5 +1,16 @@
 #include "include_asm.h"
-
 #if defined(VERSION_DE)
-INCLUDE_ASM("ovl_80400000", Frontend_CloseSettingsPage);
+#include "COMMON/RECRECAT4.H"
+#include "TYPES.H"
+#include "SCENE/802508E0_13.H"
+/* German Menu_DestroyOptionsPage: releases the object g_optionsPage holds through Cache_FreeMemory, clears
+   g_optionsPage, reloads the default language strings and returns zero. */
+extern void *g_optionsPage;
+extern void Frontend_LoadLanguageStringsIfAny(s32);
+s32 Frontend_CloseSettingsPage(void) {
+    Cache_FreeMemory(g_optionsPage);
+    g_optionsPage = 0;
+    Frontend_LoadLanguageStringsIfAny(0);
+    return 0;
+}
 #endif

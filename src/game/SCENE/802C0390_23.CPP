@@ -4,7 +4,7 @@
 #include "SCENE/802C0390_23.H"
 #include "sdk/os.h"
 
-#if !(defined(VERSION_DE))
+extern u32 __osDisableInt(void);
 
 
 void func_802BB850_eu(s32 interruptMask) {
@@ -16,4 +16,3 @@ void func_802BB850_eu(s32 interruptMask) {
     *p |= interruptMask;
     __osRestoreInt(mask);
 }
-#endif

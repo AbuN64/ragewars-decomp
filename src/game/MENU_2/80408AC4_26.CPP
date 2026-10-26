@@ -63,7 +63,3 @@ s32 Menu_CreateSettingsPage(void) {
     return 0;
 }
 #endif
-
-#if defined(VERSION_DE)
-unsigned char D_auto_func_80423274_de_padding_189274[12] = { 0x3C, 0x04, 0x80, 0x0E, 0x8C, 0x84, 0x04, 0xC0, 0x27, 0xBD, 0xFF, 0xE8 };
-#endif

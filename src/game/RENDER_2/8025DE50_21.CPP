@@ -1,5 +1,5 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_8025E10C_de);
+unsigned char D_auto_func_802B83EC_us_padding_B8FEC[4] = { 0x00, 0x00, 0x00, 0x00 };
 #endif

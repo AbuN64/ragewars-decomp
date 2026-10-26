@@ -93,10 +93,6 @@ void Nav_AddPickupCategoryCosts(void) {
     }
 }
 
-#if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_8020EF54_us);
-#endif
-
 
 #if defined(VERSION_EU_X)
 unsigned int func_8020EF74_eu_x_padding_FB74[3] = {

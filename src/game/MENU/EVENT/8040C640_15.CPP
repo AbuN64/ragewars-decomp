@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_80448E88_us);
+unsigned char D_auto_func_80448E88_us_padding_1ACE88[4] = { 0x52, 0x00, 0x00, 0x00 };
 #endif
 
 #if defined(VERSION_US)
