@@ -4,8 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
 #include "MATH/80299ECC.H"
-
-
+#include "include_asm.h"
 
 void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                    s32 depth) {
@@ -42,3 +41,17 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s
         *value = saved;
     }
 }
+
+void *Smos_GetScreenManager(void) {
+    return D_8014D080;
+}
+
+#if defined(VERSION_DE)
+unsigned char D_auto_func_80299E74_de_padding_9AA74[12] = { 0xC6, 0x00, 0x00, 0x08, 0x02, 0x00, 0x20, 0x21, 0x0C, 0x09, 0x34, 0x99 };
+#endif
+
+#if defined(VERSION_DE)
+unsigned int data_unresolved_80299E80[1] = {
+    0x27BDFFD0,
+};
+#endif

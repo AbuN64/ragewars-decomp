@@ -6,6 +6,8 @@
 #include "MATH/8029AE80.H"
 #include "MATH/80299ECC.H"
 #include "MATH/math_controller_events.H"
+#include "SCENE/802508E0_13.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 #if defined(VERSION_DE)
 INCLUDE_ASM("span_1000", Smos_TranslateControlButtonEvent);
@@ -147,7 +149,6 @@ void DispatchControllerAxisEvents(ControllerEvent *event) {
 }
 
 
-extern s32 GetMenuScreenOwner(void);
 
 
 
@@ -232,3 +233,108 @@ void Smos_DispatchControllerProfileChanges(char *controllerProfile) {
     if (!(current & (1))) goto release_c_right; if (previous & (1)) goto select_c_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 1); return; release_c_right: if (!(previous & (1))) goto next_c_right; select_c_right: if (current & (1)) goto next_c_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 0); return; next_c_right: /* C-Right */
     if (!(current & (4))) goto release_c_down; if (previous & (4)) goto select_c_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 1); return; release_c_down: if (!(previous & (4))) goto next_c_down; select_c_down: if (current & (4)) goto next_c_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 0); return; next_c_down: /* C-Down */
 }
+
+void Smos_SetControllerEventFilter(s32 (*arg0)(void)) {
+    D_8014D0B0->callback = arg0;
+}
+
+void Smos_ClearControllerFlags(void) {
+    s32 idx;
+    s32 i;
+    s32 j;
+    Callback *context;
+
+    j = 0;
+    do {
+        i = 0;
+        do {
+            idx = i + j * 4;
+            i += 1;
+            context = D_8014D0B0;
+            context->flags[idx] = 0;
+        } while (i < 4);
+        j += 1;
+    } while (j < 0x10);
+}
+
+/** Store a word through the global pointer at D_8014D0B0. */
+
+
+void *Cache_AllocateMemory(s32);
+
+
+
+void Smos_AllocateControllerContext(void) {
+    Callback *callback;
+    callback = Cache_AllocateMemory(0xC44);
+    D_8014D0B0 = callback;
+    XPlus_FillBytes(callback, 0, 0xC44);
+}
+
+void Smos_FreeControllerContext(void) {
+    Cache_FreeMemory(D_8014D0B0);
+    D_8014D0B0 = 0;
+}
+
+void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
+    ControllerEvent m;
+
+    m.source = 4;
+    m.device = arg0;
+    m.kind = 1;
+    m.control = arg1;
+    m.reserved08 = 0;
+    m.pressed = arg2 != 0;
+    m.x = 0;
+    m.y = 0;
+    m.z = 0;
+    Smos_DispatchControllerEvent(&m);
+}
+
+void Smos_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
+    ControllerEvent m;
+
+    m.source = 4;
+    m.kind = 3;
+    m.control = 0x162;
+    m.x = arg1 * 0x64;
+    m.device = arg0;
+    m.reserved08 = 0;
+    m.pressed = 0;
+    m.y = arg2 * 0x64;
+    m.z = 0;
+    Smos_DispatchControllerEvent(&m);
+}
+
+#if defined(VERSION_US)
+const unsigned int D_auto_rodata_unresolved_800C55BC[13] = {
+    0x40000000, 0x00299F18, 0x00299F9C, 0x0029A020, 0x0029A0A4, 0x0029A134, 0x0029A134, 0x0029A134,
+    0x00299E38, 0x00299EA8, 0x00400000, 0x00020004, 0x00000004,
+};
+#endif
+
+#if defined(VERSION_EU)
+const unsigned int D_auto_rodata_unresolved_800C592C[13] = {
+    0x14C00009, 0x0029A0F8, 0x0029A17C, 0x0029A200, 0x0029A284, 0x0029A314, 0x0029A314, 0x0029A314,
+    0x0029A018, 0x0029A088, 0x00C81804, 0x00A91006, 0x00624025,
+};
+#endif
+
+#if !(defined(VERSION_EU) || defined(VERSION_US))
+/* class: switch jump table (9 entries: 5 monotonic cases + 3 shared default + 2 early cases)
+ * semantic proposal: RwSwitchTableFunc80299E80_de
+ * member=rodata/DispatchControllerButtonEvent/800CA820 rom=0xC6290(de)+36B rom=0xC6570(eu-x)+36B rom=0xCB420(us-rev1)+36B vram=0x800CA820 sect=rodata seg=span_C76B0 status=open symbol=D_auto_rodata_func_80299E80_de_800CA820(legacy-src)
+ * cart rows: de 0xC6290->0xC62B4 = 36 B; eu-x 0xC6570->0xC6594 = 36 B; us-rev1 0xCB420->0xCB444 = 36 B. eu/us hold no row; parent withholds. Branch targets lie inside landed sibling funcs 0x80299EF8..0x8029A1F4 (de), 0x8029A048..0x8029A344 (eu-x), 0x8029AEF8..0x8029B1F4 (us-rev1). Values verbatim from src/rodata.DispatchControllerButtonEvent.800CA820.c with VERSION_US_REV -> VERSION_US_REV1 fixed. */
+#if defined(VERSION_DE)
+const unsigned int D_auto_rodata_func_80299E80_de_800CA820[9] = {
+    0x00299FD8, 0x0029A05C, 0x0029A0E0, 0x0029A164, 0x0029A1F4, 0x0029A1F4, 0x0029A1F4, 0x00299EF8,
+    0x00299F68,
+};
+#endif
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C56B4[3] = {
+    0x00000000, 0x3FF00000, 0x00000000,
+};
+#endif

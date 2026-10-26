@@ -14,11 +14,13 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "FRONTEND/8040B45C_35.H"
 #include "MATH/80297CD0.H"
-#include "MATH/math_stream_lifecycle.H"
-#include "RESMGR/8029AA48_12.H"
-#include "RESMGR/802A23A4_9.H"
+#include "RESMGR/8029AA48_7.H"
+#include "MATH/math_controller_events.H"
+#include "MATH/802A2870.H"
 #include "SCENE/802508E0_13.H"
 #include "MATH/80299ECC.H"
+#include "COMMON/OBJRECAT3CV2.H"
+#include "include_asm.h"
 
 extern void SmSmngr_DeactivateCurrentScreen(s32 arg0);
 
@@ -432,3 +434,50 @@ s16 Smos_GetFocusedElementId(void) {
     }
     return -1;
 }
+
+void Smos_SetScreenDrawOrigin(int arg0, int arg1) {
+    D_8014D080->field534 = arg0;
+    D_8014D080->field538 = arg1;
+}
+
+void Smos_GetScreenDrawOrigin(s32 *arg0, s32 *arg1) {
+    *arg0 = D_8014D080->field534;
+    *arg1 = D_8014D080->field538;
+}
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80298FE8_CB408[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_800C55AC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C595C[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C591C[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C567C[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80298FE8_CB408_us_rev1.c */
+const unsigned int D_blob_95c14edb8bb0fb2af018[1] = {
+    0x3F800000,
+};
+#endif

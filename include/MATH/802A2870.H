@@ -1,6 +1,8 @@
 #ifndef MATH_802A2870_H
 #define MATH_802A2870_H
 #include "TYPES.H"
+#include "COMMON/RECORD.H"
+
 struct CommandListController {
     u8 padding000[8];
     struct LinkedCommandEntry *entries; /* 0x08 */
@@ -16,4 +18,11 @@ extern u32 D_800CD99C;
 extern void N64Eng_SetClipBounds(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int a3);
 /* Elapsed game time in seconds; callers must preserve the floating return ABI. */
 extern f64 N64Eng_GetTimeSeconds(void);
+
+extern void N64Eng_RenderNoop();
+extern void N64Eng_ResetRenderState();
+
+extern void N64Eng_AdvanceFrameCounter();
+extern void N64Eng_RegisterNumericWidgetClass();
+extern int N64Eng_GetFrameCounter();
 #endif

@@ -12,7 +12,7 @@
 #include "RESMGR/802A2230_6.H"
 #include "RESMGR/802A2230_8.H"
 #include "RESMGR/802A2230_9.H"
-#include "RESMGR/802A23A4_10.H"
+#include "MATH/802A2870.H"
 #include "RESMGR/802A23A4_7.H"
 #include "MATH/80299ECC.H"
 

@@ -5,7 +5,7 @@
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "MATH/80297CD0_3.H"
-#include "MATH/math_stream_lifecycle.H"
+#include "RESMGR/8029AA48_7.H"
 #include "MATH/80297CD0.H"
 
 typedef struct Shared_MenuDefinition Shared_MenuDefinition;

@@ -7,6 +7,12 @@
 #include "COMMON/WIDGETRECAT1A.H"
 #include "RESMGR/802A23A4_11.H"
 #include "MATH/802A2870.H"
+#include "COMMON/STATEPAIR.H"
+#include "COMMON/OBJRECAT3CV2.H"
+#include "COMMON/SHARED_MENUREPLY.H"
+#include "RENDER_2/8025DE50_5.H"
+#include "include_asm.h"
+#include "SCENE/802508E0_13.H"
 
 extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
@@ -66,3 +72,207 @@ void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
         }
     }
 }
+
+extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
+
+
+void N64Eng_DecrementNumericWidget(void *arg0)
+{
+    RecordN64EngCreateNumericWidget *object = arg0;
+  s32 temp_a1;
+  s32 temp_v1;
+  s32 var_a1;
+  if ((object->field_54) == 0)
+  {
+    temp_a1 = object->field_58;
+    if ((object->field_50) < temp_a1)
+    {
+      var_a1 = temp_a1 - 1;
+      goto block_7;
+    }
+  }
+  else
+  {
+    temp_v1 = object->field_58;
+    if (temp_v1 == (object->field_50))
+    {
+      object->field_58 = object->field_4C;
+    }
+    else
+    {
+      object->field_58 = temp_v1 - 1;
+    }
+    var_a1 = object->field_58;
+    block_7:
+    N64Eng_SetNumericWidgetValue(object, var_a1);
+
+  }
+}
+
+
+extern unsigned int Smos_GetControlRepeatLimit(void);
+
+void N64Eng_IncrementNumericWidget(void *arg0);
+
+
+void N64Eng_IncrementNumericWidget(void *arg0)
+{
+    RecordN64EngCreateNumericWidget *object = arg0;
+  s32 temp_a1;
+  s32 temp_v1;
+  s32 var_a1;
+  if ((object->field_54) == 0)
+  {
+    temp_a1 = object->field_58;
+    if (temp_a1 < (object->field_4C))
+    {
+      var_a1 = temp_a1 + 1;
+      goto block_7;
+    }
+  }
+  else
+  {
+    temp_v1 = object->field_58;
+    if (temp_v1 == (object->field_4C))
+    {
+      object->field_58 = object->field_50;
+    }
+    else
+    {
+      object->field_58 = temp_v1 + 1;
+    }
+    var_a1 = object->field_58;
+    block_7:
+    N64Eng_SetNumericWidgetValue(object, var_a1);
+  }
+}
+
+/** Reset the object state and mark non-type-eight linked records. */
+int N64Eng_SetLinkedCommand100(struct CommandListController *object) {
+    struct LinkedCommandEntry *record = object->entries;
+    object->state = 2;
+    object->progress = 0;
+    while (record != 0) {
+        if (record->kind != 8) {
+            record->command = 100;
+        }
+        record = record->next;
+    }
+    return 0;
+}
+
+int N64Eng_SetLinkedCommand200(struct CommandListController *object) {
+    struct LinkedCommandEntry *record = object->entries;
+    object->state = 2;
+    object->progress = 0;
+    while (record != 0) {
+        if (record->kind != 8) {
+            record->command = 200;
+        }
+        record = record->next;
+    }
+    return 0;
+}
+
+s32 N64Eng_SetLinkedCommand100WithSound(struct CommandListController *commandListController) {
+    struct LinkedCommandEntry *p;
+
+    commandListController->state = 2;
+    commandListController->progress = 0;
+    SoundElement_PlayFlatSound(0xE74);
+    p = commandListController->entries;
+    if (p != 0) {
+        do {
+            if (p->kind != 8) {
+                p->command = 0x64;
+            }
+            p = p->next;
+        } while (p != 0);
+    }
+    return 0;
+}
+
+s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+    RecordN64EngCreateNumericWidget *object = arg0;
+    s32 temp_s0;
+
+    temp_s0 = XMath_AbsoluteInteger(arg4);
+    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
+        object->field_5C = 2;
+        object->field_48 = 0;
+    }
+    if (arg3 != 1) {
+        return 0;
+    }
+    object->field_5C = arg3;
+    N64Eng_IncrementNumericWidget(object);
+    SoundElement_PlayFlatSound(0xE81);
+    return 0;
+}
+
+s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+    RecordN64EngCreateNumericWidget *object = arg0;
+    s32 temp_s0;
+
+    temp_s0 = XMath_AbsoluteInteger(arg4);
+    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
+        object->field_5C = 2;
+        object->field_48 = 0;
+    }
+    if (arg3 != 1) {
+        return 0;
+    }
+    object->field_5C = 0;
+    N64Eng_DecrementNumericWidget(object);
+    SoundElement_PlayFlatSound(0xE81);
+    return 0;
+}
+
+/** Apply state two for event class three when the subcode is six or seven. */
+int N64Eng_CancelSelectionRepeat(void *object, int unused, unsigned int event, int subcode) {
+    struct CommandListController *controller = object;
+    if ((event >> 16) == 3 && subcode < 8 && subcode >= 6) {
+        controller->state = 2;
+        controller->progress = 0;
+    }
+    return 0;
+}
+
+
+/* Counts ticks while the controller state is 0 or 1; after ten, steps the list selection backward (state 0) or forward (state 1). Returns 0. */
+s32 TickSelectionRepeat(void *widget) {
+    struct CommandListController *cmd = widget;
+
+    switch (cmd->state) {
+    case 0:
+        if (++cmd->progress > 10) {
+            N64Eng_DecrementNumericWidget(cmd);
+        }
+        break;
+    case 1:
+        if (++cmd->progress > 10) {
+            N64Eng_IncrementNumericWidget(cmd);
+        }
+        break;
+    case 2:
+        break;
+    }
+    return 0;
+}
+
+s32 N64Eng_FreeNumericWidget(void *arg0) {
+    Cache_FreeMemory(arg0);
+    return 0;
+}
+
+#if defined(VERSION_US)
+unsigned int func_802A206C_de_padding_A2BCC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int func_802A206C_de_padding_A2DDC[1] = {
+    0x00000000,
+};
+#endif
