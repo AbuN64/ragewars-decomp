@@ -51,10 +51,6 @@ struct ResourceBinding {
     u16 status; /* 0xD8 */
     u8 colorFrame; /* 0xDA */
 };
-typedef struct State802532E4 {
-    s32 active;
-    s32 count;
-} State802532E4;
 /* Actor resource fade selects the near/far value using its frame threshold. */
 struct ResourceFadeDefinition {
     u8 reserved0[0xE];

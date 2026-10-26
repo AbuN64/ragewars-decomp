@@ -17,7 +17,7 @@ INCLUDE_ASM("span_1000", func_80253344_de);
 #if !(defined(VERSION_US)) || defined(NON_MATCHING)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern OSMesgQueue D_80101140;
-extern State802532E4 D_8010117C;
+extern ResourceManagerState D_8010117C;
 
 
 void func_80253344_de(s32 unused) {
@@ -26,7 +26,7 @@ void func_80253344_de(s32 unused) {
     u32 mask;
     u32 temp_v0;
     s32 var_s0;
-    State802532E4 *temp_s1;
+    ResourceManagerState *temp_s1;
     void *queueAddress;
     OSMesgQueue *receive;
     OSMesgQueue *send;
