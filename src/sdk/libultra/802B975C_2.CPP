@@ -11,7 +11,7 @@
 #include "COMMON/ALPARAM_S.H"
 
 #if defined(VERSION_EU)
-Acmd *func_802B56A0_eu(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *alMainBusPull(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
     ALMainBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;

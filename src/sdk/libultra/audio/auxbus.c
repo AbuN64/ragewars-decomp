@@ -8,7 +8,7 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* alAuxBusPull: clears the aux left and right output buffers, then pulls every source filter of the bus into the command list. */
-Acmd *func_802B40E0_eu_x(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
     ALAuxBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;
@@ -61,7 +61,7 @@ Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset
 #endif
 
 #if defined(VERSION_EU)
-Acmd *func_802B40A0_eu(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
     ALAuxBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;
