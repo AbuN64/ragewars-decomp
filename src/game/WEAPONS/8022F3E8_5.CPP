@@ -213,8 +213,6 @@ INCLUDE_ASM("span_1000", Weapon_UpdateAlternateFire);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-#define Weapon_UpdateIdleWeaponSelection func_80230610_eu
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/INTEGERSTATE244.H"
@@ -227,6 +225,7 @@ INCLUDE_ASM("span_1000", Weapon_UpdateAlternateFire);
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 
 
+extern s16 D_800CE8DC[];
 extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
@@ -241,7 +240,8 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 
-void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
+/* The PAL copy of Weapon_UpdateIdleWeaponSelection: the weapon switch and the idle request are two calls here. */
+void func_80230610_eu(LevelActor *arg0, void *arg1) {
     s32 state;
     void *actor;
     CGameStatus *audio;
@@ -290,10 +290,8 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
-        Weapon_InitializeSwitchAndRequestIdle(arg0, arg1);
+        Weapon_ApplyWeaponSwitch(arg0, arg1);
+        Nav_RequestActorState(arg0, arg1, 0);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80230610_eu);
-#endif
 #endif
