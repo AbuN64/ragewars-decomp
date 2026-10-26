@@ -6,14 +6,12 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
-
 #include "COMMON/OBJRECAT5F14.H"
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "FX_2/80271B18.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "COMMON/OBJRECAT3CV2.H"
 
 s32 func_80263154_de(BitReader *, s32);
 
@@ -379,4 +377,17 @@ s32 func_80296C30_de(f32 *arg0, f32 *arg1) {
 #if defined(VERSION_US)
 char rodata_unresolved_80296C08[8] =
     "\000\000\000\003s16R";
+#endif
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80296930_CB2A0[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80296930_CB2A0_us_rev1.c */
+const unsigned int D_blob_0e557f3de25e32e16abb[1] = {
+    0x3F800000,
+};
 #endif
