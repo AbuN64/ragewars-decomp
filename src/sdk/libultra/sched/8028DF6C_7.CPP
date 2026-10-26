@@ -15,11 +15,9 @@
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
-extern s32 D_80142C30;
 
 s32 func_802BD170_de(s32);
 
-extern s32 func_802BD170_de(s32);
 void osScAddClient(OSSched *scheduler, OSScClientWork *client, OSMesgQueue *messageQueue) {
     s32 savedInterruptMask;
     savedInterruptMask = func_802BD170_de(1);

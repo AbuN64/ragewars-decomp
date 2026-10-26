@@ -16,11 +16,9 @@
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
-extern s32 D_80142C30;
 
 s32 func_802BD170_de(s32);
 
-extern s32 func_802BD170_de(s32);
 extern s32 D_800CD704;
 extern void func_802BB5F0_de(void *arg0, s32 arg1);
 void __scYield(void *scheduler) {
