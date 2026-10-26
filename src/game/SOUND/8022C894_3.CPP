@@ -9,6 +9,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJB.H"
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 extern void Items_ReleaseObjectHandles(ResourceHandleOwner *object);
 
 extern s32 D_800CED30;
@@ -17,7 +18,6 @@ extern s32 D_800CED30;
 
 
 
-extern void Weapons_SetPlayerState(Actor_func_8022D290_de *, Actor_func_8022D290_de *, s32);
 
 extern f32 D_800C2DB0_de[];
 
