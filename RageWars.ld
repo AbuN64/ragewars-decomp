@@ -103,6 +103,7 @@ SECTIONS
         src/game/AI/NAV/80212C90.CPP.o(.data);
         src/game/AI/NAV/80212C90_3.CPP.o(.text);
         src/game/AI/NAV/80212C90_3.CPP.o(.data);
+        src/game/AI/NAV/80212C90_6.CPP.o(.text);
         src/game/AI/NAV/80212C90_8.CPP.o(.text);
         src/game/AI/NAV/80212C90_9.CPP.o(.text);
         src/game/DATA/MAINCODE/DATA_802131D8.CPP.o(.data);
@@ -5096,6 +5097,7 @@ SECTIONS
         src/game/AI/NAV/802106E0_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80212C90.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80212C90_3.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_6.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80212C90_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80212C90_9.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/DATA_802131D8.CPP.o(.bss .sbss COMMON);
