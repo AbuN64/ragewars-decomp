@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
@@ -106,7 +107,6 @@ s32 Menu_CreateOptionsPage(void) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 ScenarioSetup_IsCupSelected(void);

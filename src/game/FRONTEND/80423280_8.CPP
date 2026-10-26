@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -16,7 +17,6 @@
 #include "SCENE/802508E0_13.H"
 
 extern ResultsOptionsScreen *D_800E4690;
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Opens the five option windows of screen D_800E4690: for each of options 0 to 4 it picks window
    0x149, 0x14C, 0x14D, 0x14E or 0x14F through jtbl_800DD9F0, opens it under the screen's parent at

@@ -1,3 +1,4 @@
+#include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "RENDER_4/8026AC38.H"
@@ -23,7 +24,6 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 extern Active *D_800E4680;
 extern struct ResultsHeadingCharacter D_800DFA6C[];
-extern s32 D_8015402C;
 extern f32 D_800E1F40;
 extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_800D3590, *D_800D3594, *D_800D3598;
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);

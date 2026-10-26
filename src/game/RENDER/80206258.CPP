@@ -18,7 +18,6 @@
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
-extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
 
 /* Spawns effect kind at an actor's position through SetN64_SpawnModelEffect in D_80131600's list: kind 0xBD7
    is skipped while both of D_801468A0's flags at 0x78 and 0x80 are set, and kind 0x1388 is offset by

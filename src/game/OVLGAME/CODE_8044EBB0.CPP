@@ -1,3 +1,4 @@
+#include "MENU/802ABDBC_6.H"
 #include "include_asm.h"
 #include "TYPES.H"
 extern void Ovlgame_EmptyCallback(void);
@@ -9,7 +10,6 @@ extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
 extern void Fx_UpdateEffectLists(void *world);
 extern void OnScreen_LoadFontTexture(void);
-extern void Pickup_BuildByteLookup(int unused, unsigned char *pairs, int count, unsigned char *table);
 extern void OnScreen_InitMover(void *mover, s16 x, s16 y);
 extern s32 OnScreen_StartMoverScript(void *mover, s32 *frames);
 extern unsigned char D_800D3080[];

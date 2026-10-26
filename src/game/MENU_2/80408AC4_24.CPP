@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
@@ -16,7 +17,6 @@ extern u8 *D_auto_800D3488[1];
 extern u8 *D_auto_800D348C;
 extern u8 *D_auto_800D3490;
 extern void *Cache_AllocateMemory(s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void func_8025E384_de(void);

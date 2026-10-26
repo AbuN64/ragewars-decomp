@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "FRONTEND/PAKMENU.H"
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
@@ -145,7 +146,6 @@ extern void *Cache_AllocateMemory(s32);
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void PAKInterface_RelabelSlotRows(s32);

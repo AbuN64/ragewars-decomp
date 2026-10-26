@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "RENDER_4/8026AC38.H"
@@ -21,7 +22,6 @@
 
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
 /* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x11. */

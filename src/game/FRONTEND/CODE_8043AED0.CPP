@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
@@ -29,7 +30,6 @@
 extern struct StateFlags D_800E5A06[][19];
 
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern FourPlayerResultsScreen *D_800E59E0;
 
 

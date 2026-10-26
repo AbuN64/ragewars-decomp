@@ -1,3 +1,4 @@
+#include "COMMON/MENULISTSCREEN.H"
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
@@ -6,7 +7,6 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
 extern void ScenarioSetup_SetCatalogueAlpha(s32);
-extern void Frontend_SetMenuChoiceResult(s32);
 extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 s32 ScenarioSetup_UpdateScreenTransitions(void *root, s32 unused, s32 delta) {

@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHARED_MENUREPLY.H"
@@ -29,7 +30,6 @@
 #include "RENDER_2/8025DE50_5.H"
 extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status g_playerSettings[];
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void Frontend_SelectSuggestedTrial(void);
 void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);

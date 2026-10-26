@@ -76,7 +76,6 @@ extern void *Frontend_FindWidgetByResourceId(void *, s32);
 extern s32 Frontend_ListHasFlag100(void *);
 
 
-extern void Tsmos_ActivateControllerState();
 
 void func_80438A88_de(void) {
     struct SelectionMessageScreen *state = D_800E5830;

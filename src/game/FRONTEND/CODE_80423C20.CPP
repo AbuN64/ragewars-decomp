@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SCENE/802508E0_13.H"
@@ -54,7 +55,6 @@ extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_ActivateControllerState(void);
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_TestBit(u8 *, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void SmpButton_WrapButtonWidget(s32);

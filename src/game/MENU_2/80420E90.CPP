@@ -1,10 +1,10 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "MENU_2/80420E90.H"
 extern NumberPadScreen *D_800E4400;
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word
    D_801462C8, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as

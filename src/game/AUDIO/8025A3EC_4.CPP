@@ -23,7 +23,6 @@
 
 
 
-extern s32 func_802B2620_de(void *arg0);
 
 /* Stops the selected sound slot and sets its release flag; split unsigned offset-to-pointer casts and a one-pass statement group preserve the separate table and offset schedule. */
 

@@ -1,3 +1,4 @@
+#include "particle/80271B18_3.H"
 #include "include_asm.h"
 #include "MENU/TEAMMENU.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,7 +11,6 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "gbi.h"
-extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *g_displayListCursor;
 extern s32 Player_PlayerHasAmmoForWeapon(Player *player, s32 weapon);

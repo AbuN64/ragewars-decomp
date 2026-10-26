@@ -1,3 +1,4 @@
+#include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU_2/STATE.H"
@@ -20,11 +21,8 @@ extern void MarkMenuEventHandled(void);
 
 extern s32 Smos_GetFocusedElementId(void);
 
-extern void Menu_ShowExtraOptionsPanel(void);
 
-extern void Menu_ApplyExtraOptionFlags(void);
 
-extern void Menu_OpenOptionsKeypad(void);
 
 /* Calls MarkMenuEventHandled, then Menu_ShowExtraOptionsPanel when the word at offset 0x34 of the object D_800E4400
    points to is clear, or SmpSlider_SetTransitionMode on its first word with 2 and Menu_ApplyExtraOptionFlags otherwise.
@@ -35,9 +33,7 @@ extern void Menu_OpenOptionsKeypad(void);
 
 extern void MarkMenuEventHandled();
 
-extern void Menu_ShowExtraOptionsPanel();
 
-extern void Menu_ApplyExtraOptionFlags();
 
 s32 Menu_HandleGermanExtraOptionsChoice(void) {
     extern s32 SmpSlider_GetTransitionMode(s32);

@@ -1,3 +1,4 @@
+#include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/CHEATCODE.H"
@@ -17,12 +18,10 @@
 #if defined(VERSION_DE)
 extern FieldRow D_800E1738[];
 #else
-extern FieldRow D_800F1DA8[];
 #endif
 #if defined(VERSION_DE)
 extern FieldRow D_800E173C[];
 #else
-extern FieldRow D_800F1DAC[];
 #endif
 extern Handler80437868 D_800F1DB0_de;
 

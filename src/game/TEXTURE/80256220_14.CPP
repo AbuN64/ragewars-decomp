@@ -175,7 +175,6 @@ typedef struct AudioBankHeader {
     ALBankFile *bankFile;
 } AudioBankHeader;
 extern void func_802567A4_de(MenuRules *lock);
-extern void __osRestoreInt(u32);
 extern void AudioMgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);

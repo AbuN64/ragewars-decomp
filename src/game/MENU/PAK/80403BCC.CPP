@@ -42,7 +42,6 @@ extern s32 Pak_UpdateStatus(s32);
 extern u8 D_800DE80C[];
 
 
-extern void Control_ReleasePakLock(void);
 
 extern s32 XPlus_UppercaseCharacter(s32 c);
 

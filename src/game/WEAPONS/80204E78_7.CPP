@@ -13,7 +13,6 @@ extern s32 D_801462C8;
 
 extern int Rumble_TestActorStateBit(char *a, int b);
 
-extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
 
 void func_80206080_de(void *levelActor, void *actorMotionState) {
     LevelActor *actor = levelActor;

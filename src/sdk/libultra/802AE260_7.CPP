@@ -1,3 +1,4 @@
+#include "sdk/libgultra_inferred/802AE260_5.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -8,7 +9,6 @@
 
 extern s32 (*D_800D364C)(s32 arg0);
 
-extern s32 Libultra_WriteDebugLinkByte(s32);
 extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 extern u8 D_800CB480;

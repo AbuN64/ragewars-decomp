@@ -1,3 +1,4 @@
+#include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -9,7 +10,7 @@
 /* Allocates menu state, selects the language-dependent title and enables the appropriate menu item. */
 extern s32 *D_800E5550;
 extern s32 *Cache_AllocateMemory(s32);
-extern void Control_SaveControllerSetup(void); extern void Tsmos_ActivateControllerState(void); extern void Frontend_SetWidgetFlag100(s32, s32);
+extern void Tsmos_ActivateControllerState(void); extern void Frontend_SetWidgetFlag100(s32, s32);
 extern s32 Frontend_GetScreenMode(void),ScenarioSetup_IsCupSelected(void);
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 enum { MENU_80435D14_62 = 62 };

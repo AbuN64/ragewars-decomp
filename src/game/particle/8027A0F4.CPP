@@ -144,7 +144,6 @@ extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
 extern void Particle_DispatchActorContactEvents(void *);
 extern void Particle_Release(void *, void *);
-extern f32 GraphU64_ArcCos(f32);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
  * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
  * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,

@@ -12,7 +12,6 @@
 extern OSMesgQueue D_80101140;
 extern s32 s_allocText;
 
-extern u32 __osDisableInt(void);
 extern struct Shape_func_802BC570_de *func_802548B8_de(s32, s32, u32, s32 *);
 extern void func_802511AC_de(s32);
 extern s32 func_80254B58_de(s32, s32, s32);

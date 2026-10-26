@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -16,7 +17,6 @@ extern s32 D_800E5240[];
 extern s32 D_800E5214[];
 extern s32 D_800E51F8[];
 extern s32 D_800E51E4[];
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 

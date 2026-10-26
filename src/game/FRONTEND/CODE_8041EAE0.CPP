@@ -1,3 +1,5 @@
+#include "FRONTEND/8041DF04_8.H"
+#include "COMMON/MENULISTSCREEN.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/REQUESTRECAT10.H"
@@ -26,7 +28,6 @@ extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 
 /* Returns entry column - 1 of row r in the five-word table D_800E37B8, or zero when the column is
    not positive. */
-extern s32 D_800E37B8[];
 
 /* Returns the score of the three entries: 5, 10 or 20 points by kind for each active one, repeating the previous award for other kinds. */
 
@@ -38,7 +39,6 @@ extern s32 D_800E37B8[];
    identifier matches, or zero when none does. */
 
 
-extern struct IntPair D_800E381C[][17];
 
 /* Releases the object D_800E39C0 holds through Cache_FreeMemory, clears D_800E39C0 and returns zero. */
 
@@ -52,7 +52,6 @@ extern struct IntPair D_800E381C[][17];
 extern void MarkMenuEventHandled();
 
 
-extern void Frontend_SetMenuChoiceResult(s32);
 
 extern void Smos_ReturnToPreviousScreen();
 

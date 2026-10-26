@@ -1,3 +1,4 @@
+#include "sdk/libgultra_inferred/802AE260_5.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -20,7 +21,6 @@ extern void Libultra_InitDebugLink(void);
 
 extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
-extern s32 Libultra_WriteDebugLinkByte(s32);
 
 extern void Libultra_ReadDebugLinkHalfword(void);
 

@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/PLAYERPROFILES.H"
 
@@ -16,7 +17,6 @@ extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
 extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Tsmos_SetIdleTimer(f32);
 
 s32 Frontend_CreateProfileResetScreenUs(MenuWidget *tree) {

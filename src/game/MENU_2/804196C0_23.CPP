@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "COMMON/FRUSTUM.H"
 #include "include_asm.h"
 #include "COMMON/ANIMATION.H"
@@ -28,7 +29,6 @@
 
 
 extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 id);
 extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at

@@ -1,3 +1,4 @@
+#include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
@@ -8,7 +9,6 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "TYPES.H"
-extern void *D_800D052C[];
 #include "WEAPONS/80213ED4.H"
 #include "COMMON/CHANNEL.H"
 

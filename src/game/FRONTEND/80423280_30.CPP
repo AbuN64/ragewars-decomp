@@ -1,3 +1,4 @@
+#include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -10,8 +11,6 @@
 typedef s32 (*Handler8042359C)(void *, s32, s32, s32, s32);
 
 
-extern FieldRow D_800E451C[];
-extern FieldRow D_800E4520[];
 extern Handler8042359C D_800E4524;
 
 

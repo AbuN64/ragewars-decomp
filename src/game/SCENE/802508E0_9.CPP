@@ -10,7 +10,6 @@
 #include "SCENE/802508E0_9.H"
 #include "sdk/os.h"
 
-extern u32 __osDisableInt(void);
 
 
 extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);

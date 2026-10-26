@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/PAKMENU.H"
 #include "include_asm.h"
@@ -21,7 +22,6 @@ enum { PAK_LIST_FIELD = 726 };
    70-byte name entries at 0x658 from the scroll position, and points item PAK_LIST_FIELD of the player's
    window at 0xC at the code at 0x3C of the entry under the cursor. */
 
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 void PAKInterface_ScrollNoteList(s32 player, s32 direction) {
     s32 i;

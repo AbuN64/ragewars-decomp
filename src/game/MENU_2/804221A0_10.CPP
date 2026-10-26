@@ -1,3 +1,4 @@
+#include "COMMON/ACCESS_S8_10F.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -59,7 +60,6 @@ extern void Tsmos_ActivateControllerState();
 
 extern void Tsmos_DeactivateControllerState();
 
-extern void Cinema_ReleaseSequenceContext();
 
 extern void ScenarioSetup_ResetSelectionIndicators();
 

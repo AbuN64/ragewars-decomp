@@ -1,3 +1,4 @@
+#include "COMMON/RESOURCELOADSTATE.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E0D44.H"
@@ -132,7 +133,6 @@ s32 func_802301F4_de(void *actor, void *attack) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 extern s16 D_800CE8DC[];
-extern void *D_800D052C[];
 /* Updates alternate fire, falling back to another weapon when neither mode has
  * ammunition. Reports unavailable modes, preserves the selected action captured
  * on entry, then processes the attack trigger. */

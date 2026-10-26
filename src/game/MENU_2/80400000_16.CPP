@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_9.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -51,7 +52,6 @@ extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
-extern void Scene_UnlockActiveSectionResources(void *);
 extern f32 GraphU64_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
 void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {

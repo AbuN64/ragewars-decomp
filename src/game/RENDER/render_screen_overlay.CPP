@@ -64,8 +64,6 @@ void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
 }
 
-extern void OnScreen_SetTextColors(s32, s32, s32, s32, s32, s32);
-extern void OnScreen_SetTextScale(f32, f32);
 
 /* Draw a null-terminated list of scaled strings, with an optional full-screen backdrop. */
 void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {

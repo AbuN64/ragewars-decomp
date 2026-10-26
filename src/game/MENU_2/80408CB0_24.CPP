@@ -1,3 +1,4 @@
+#include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
@@ -6,7 +7,6 @@ extern struct CourseOptionsScreen *D_800E39C0;
 extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void Tsmos_ActivateControllerState(void);
 

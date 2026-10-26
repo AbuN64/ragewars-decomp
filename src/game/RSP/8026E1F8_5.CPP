@@ -144,7 +144,6 @@ void GraphU64_InvertAffineMatrix(f32 *out, f32 *m) {
 
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern f32 Math_Sqrtf(f32);
 
 void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
     CVector3 upward;
@@ -406,7 +405,6 @@ void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, C
 
 
 
-extern f32 Math_Sqrtf(f32);
 
 void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
@@ -473,7 +471,6 @@ void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
     }
 }
 
-extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -515,7 +512,6 @@ CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -558,7 +554,6 @@ CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -600,7 +595,6 @@ CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern f32 Math_Sqrtf(f32);
 
 CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {
     CVector3 random;
@@ -650,7 +644,6 @@ CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
 }
 
 
-extern f32 Math_Sqrtf(f32);
 
 
 

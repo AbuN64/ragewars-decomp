@@ -1,3 +1,4 @@
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -78,11 +79,8 @@ s32 func_8043E658_de(void *unused0, Handle8043E788 *menuContext) {
 
 
 
-extern s32 D_800E1DF8_de;
-extern Extra D_800E2358;
 
 
-extern f32 D_00450854[];
 
 extern s32 Pak_AdjustValue(struct Shape_typemap_114 *, s32, s32, s32, s32, s32);
 

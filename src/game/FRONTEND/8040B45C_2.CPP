@@ -1,3 +1,4 @@
+#include "COMMON/RECORDRECATCV1.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/MENURECAT24.H"
@@ -40,7 +41,6 @@ extern s32 D_800E28C0;
 
 
 
-extern s32 Control_PeekPakChange(s32);
 
 extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 

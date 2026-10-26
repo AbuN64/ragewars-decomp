@@ -105,7 +105,6 @@ extern s32 Defs_ReadResourceWord(s32 size);
 extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
 extern void Ovlgame_InitializeControllerSession(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
-extern void Control_EnableAllControllerPaks(void);
 extern void SetN64_BeginModeTransition(GameSession *session, s32 arg1);
 extern void SetN64_UpdateGameMode(void *session);
 extern void SetN64_UpdateFrameTiming(void *session);

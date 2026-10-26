@@ -80,7 +80,6 @@ extern void Smos_ReturnToPreviousScreen(void);
    Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and Smos_ReturnToPreviousScreen. Returns zero. */
 
 
-extern void MarkMenuEventHandled();
 
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EF4, an actor kind at D_800E4EF8 and a handler at D_800E4EFC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
