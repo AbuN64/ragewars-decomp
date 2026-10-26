@@ -63,13 +63,6 @@ struct ObjRecAt8V3;
 typedef struct ObjRecAt8V3 ObjRecAt8V3;
 
 
-struct DecodeResult_func_802AE6BC_de;
-struct DecodeResult_func_802AE6BC_de {
-    s16 type;
-    u8 pad2[2];
-    u32 value;
-    u8 pad8[8];
-};
 
 struct ObjectLinks4_5;
 typedef struct ObjectLinks4_5 ObjectLinks4_5;
@@ -135,8 +128,6 @@ typedef struct ObjectLinks54_2 ObjectLinks54_2;
 
 extern float D_800C7320_de;
 
-struct DecodeResult_func_802AE6BC_de;
-typedef struct DecodeResult_func_802AE6BC_de DecodeResult_func_802AE6BC_de;
 
 struct ALCMidiHdr;
 struct ALCSeq_s;

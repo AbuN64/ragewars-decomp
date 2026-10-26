@@ -183,7 +183,7 @@ void func_802AE5B8_de(ALCSeq_s *state, ALCMidiHdr *base) {
     state->qnpt = D_800C7308_de / (f32)converted;
 }
 
-void func_802AE6BC_de(ALCSeq_s *state, DecodeResult_func_802AE6BC_de *result) {
+void func_802AE6BC_de(ALCSeq_s *state, ALEvent *result) {
     u32 minimum;
     u32 index;
     u32 selected;
@@ -205,8 +205,8 @@ void func_802AE6BC_de(ALCSeq_s *state, DecodeResult_func_802AE6BC_de *result) {
         index++;
     } while (index < 16);
 
-    func_802AE030_de(state, selected, (ALEvent *)result);
-    result->value = minimum;
+    func_802AE030_de(state, selected, result);
+    result->msg.midi.ticks = minimum;
     state->lastDeltaTicks = minimum;
     state->lastTicks += minimum;
     if (result->type != 0x12) {
@@ -313,7 +313,7 @@ void func_802AE93C_de(ALCSeq_s *src, ALCSeqMarker *dst) {
     }
 }
 
-s32 func_802AE9B0_de(ALCSeq_s *seq, u32 *result) {
+s32 func_802AE9B0_de(ALCSeq_s *seq, s32 *result) {
     u32 amount;
     u32 minimum;
     u32 i;

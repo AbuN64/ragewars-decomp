@@ -2,6 +2,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJECTSTATE10_2.H"
+#include "sdk/libgultra_inferred/802AD870_8.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -252,9 +253,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
     return seqp->nextDelta;
 }
 
-extern void func_802AE6BC_de(s32 arg0, ALEvent *arg1);
 
-extern s32 func_802AE9B0_de(s32 arg0, s32 *arg1);
 
 
 
@@ -291,12 +290,11 @@ void func_802AF150_de(void *rawPlayer) {
     s32 value1;
     s32 value2;
     s32 value3;
-    s32 field18;
+    ALCSeq_s *sequence;
     s32 value;
-
-    field18 = (s32)arg0->target;
-    if (field18 != 0) {
-        func_802AE6BC_de(field18, &message);
+    sequence = arg0->target;
+    if (sequence != 0) {
+        func_802AE6BC_de(sequence, &message);
         {
         s32 sw_message_value = (s16)((u16)message.type - 1);
         if ((unsigned int)sw_message_value > 19) {
@@ -329,8 +327,8 @@ void func_802AF150_de(void *rawPlayer) {
         sw_message_0:
             func_802AF2E0_de(arg0, &message);
             if (arg0->state == 1) {
-                field18 = (s32)arg0->target;
-                if (field18 != 0 && (func_802AE9B0_de(field18, &value1) & 0xFF)) {
+                sequence = arg0->target;
+                if (sequence != 0 && (func_802AE9B0_de(sequence, &value1) & 0xFF)) {
                     output.type = 0;
                     value = value1;
                     goto send_value;
@@ -340,8 +338,8 @@ void func_802AF150_de(void *rawPlayer) {
         sw_message_2:
             func_802AFB6C_de(arg0, &message);
             if (arg0->state == 1) {
-                field18 = (s32)arg0->target;
-                if (field18 != 0 && (func_802AE9B0_de(field18, &value2) & 0xFF)) {
+                sequence = arg0->target;
+                if (sequence != 0 && (func_802AE9B0_de(sequence, &value2) & 0xFF)) {
                     output.type = 0;
                     value = value2;
                     goto send_value;
@@ -357,8 +355,8 @@ void func_802AF150_de(void *rawPlayer) {
         sw_message_18:
         sw_message_19:
             if (arg0->state == 1) {
-                field18 = (s32)arg0->target;
-                if (field18 != 0 && (func_802AE9B0_de(field18, &value3) & 0xFF)) {
+                sequence = arg0->target;
+                if (sequence != 0 && (func_802AE9B0_de(sequence, &value3) & 0xFF)) {
                     output.type = 0;
                     value = value3;
 send_value:
@@ -665,11 +663,11 @@ void func_802AFD00_de(void *arg0) {
     struct ALSeqPlayer *player = arg0;
     ALEvent sp10;
     s32 sp20;
-    s32 field18;
+    ALCSeq_s *sequence;
 
     if (player->state == 1) {
-        field18 = (s32)player->target;
-        if (field18 != 0 && (func_802AE9B0_de(field18, &sp20) & 0xFF)) {
+        sequence = player->target;
+        if (sequence != 0 && (func_802AE9B0_de(sequence, &sp20) & 0xFF)) {
             sp10.type = 0;
             func_802B00D4_de(&player->evtq, &sp10, sp20 * player->uspt);
         }
