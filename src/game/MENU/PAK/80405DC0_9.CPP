@@ -83,7 +83,6 @@ void Pak_BeginBlockLoad(Shared_PakMenu *menu)
 #include "COMMON/PAK_SAVE_TEXT.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 extern void Cache_ReleaseResource(s32, void *);
-extern s32 D_8015375C;
 extern void *D_800DE860_de;
 extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800E28BC;

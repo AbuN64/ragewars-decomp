@@ -296,7 +296,6 @@ extern void func_804397F0_auto(char *);
 extern void func_804399D0(char *);
 #endif
 extern struct Shape_typemap_6 D_800E41C0[];
-extern struct FourPlayerResultsScreen *D_800E59E0;
 /* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour D_800D15E0
    and the colour table D_800D15E4, scissors the display list to each active panel rectangle in D_800E41C0 and draws
    the panel, then clips to the full screen and draws the badge of every panel whose state is 1. Returns zero. */

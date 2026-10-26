@@ -215,8 +215,6 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
 #include "COMMON/CALLBACK.H"
 #include "COMMON/UNUSED.H"
 extern void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *, s32, s32, s32, s32, s32);
-extern void MarkMenuEventHandled(void);
-extern void SmXlate_SwitchScreen(s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
     if (code < 0xE00) return 0;
     if (code - 0x1000 < 0x1000) return 1;

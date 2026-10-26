@@ -543,10 +543,8 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
 #include "FRONTEND/RESULTS_SCREEN_TEXT.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
 extern s32 Frontend_FindKeyIndex(s32);
-extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);
 extern char *Achieve_UpdateRankText(s32);
 extern s32 XStdio_FormatBuffer(void *,const char *,...);
@@ -783,15 +781,10 @@ void ScenarioSetup_SortResultsPlayers(void) {
 
 
 
-extern RecordRecAtCV2 D_800E4F64[];
 
-extern s32 D_800E51E4[];
 
-extern s32 D_800E51F8[];
 
-extern s32 D_800E5214[];
 
-extern s32 D_800E5240[];
 
 /* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure D_800E4F60
    points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0x46C. */
@@ -804,7 +797,6 @@ extern s32 D_800E5240[];
 
 /* Calls Defs_SetBitValue on D_80154018 for each index from 0 to 0x27 with zero. */
 
-extern void Defs_SetBitValue(void *, s32, s32);
 
 /* Releases the object D_800E4F60 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState and
    Menu_ReleaseOptionsScene, clears D_800E4F60 and returns zero. */
@@ -846,13 +838,11 @@ extern void ScenarioSetup_SetCatalogueAlpha(s32 a0);
 
 
 
-extern void MarkMenuEventHandled();
 
 
 
 extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
 
-extern void Frontend_SetPreviewModel(void *, s32);
 
 /* Moves the selection of the screen D_800E4F60 on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 forward while it stays below the count ScenarioSetup_GetCategoryEntryCount gives for the category's

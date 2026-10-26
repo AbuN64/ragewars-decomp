@@ -156,7 +156,6 @@ static __inline__ char *pakPrompt(s32 *channel) {
 #include "MENU/80405DC0.H"
 extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_800E28C8;
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
-extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), Pak_NeedsIdRepair(s32), Control_TakePakChange(s32);
@@ -214,7 +213,6 @@ extern struct { u8 value; } D_8014D4B0_de;
 extern u8 D_8014D4B1, D_8014D4B2, D_8014D4B3;
 extern u8 D_8014D4B4[];
 extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
-extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
