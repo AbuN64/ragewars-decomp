@@ -212,7 +212,6 @@ s32 Pickup_ApplyAmmo(void *arg0, void *arg1) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 extern s32 Player_GetMaxHealth(void *arg0);
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 /** Advance a timed effect and apply its optional resource, sound, and callback. */
@@ -267,7 +266,6 @@ s32 Pickup_ApplyHealth(void *arg0, void *arg1) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 

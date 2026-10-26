@@ -20,7 +20,6 @@ s32 Items_UpdateOptionBit0Item(TextBoundsText *optionItem) {
     return 0;
 }
 
-extern s32 D_801462C8;
 
 /* Toggles bit 1 of the settings flag word D_801462C8 and returns 0. */
 s32 Items_ToggleOptionBit1(void) {

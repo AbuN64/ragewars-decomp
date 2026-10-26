@@ -122,7 +122,6 @@ void Gfx_DrawClippedGradientQuad(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1,
 
 /* Switches the graphics combiner and emits a pipeline sync once per frame. */
 extern int D_800DF270;
-extern Gfx *g_displayListCursor;
 static inline void sync(void){D_800E32E4=1;gDPPipeSync(g_displayListCursor++);}
 
 void Gfx_SetCombineMode(int mode){
@@ -145,7 +144,6 @@ void Gfx_SetCombineMode(int mode){
    g_uiPointTransform, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
-extern Gfx *g_displayListCursor;
 extern s32 D_800DF278;
 
 extern char g_uiPointTransform;
@@ -202,7 +200,6 @@ void Gfx_SetPrimitiveVertexMode(s32 mode) {
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
    Gfx_ConfigurePrimitiveRenderFlags. */
 
-extern Triple D_80153F60;
 
 extern s32 D_800E32CC;
 
