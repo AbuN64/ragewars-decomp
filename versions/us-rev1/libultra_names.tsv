@@ -118,6 +118,16 @@ vram	name	basis
 0x802C2468	proutSprintf	machine code
 0x802C3120	lldiv	machine code
 0x802C0390	osRecvMesg	machine code
+0x802B3CF0	__CSPVoiceHandler	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AEC20_de)
+0x802B4220	__CSPHandleNextSeqEvent	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AF150_de)
+0x802B43B0	__CSPHandleMIDIMsg	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AF2E0_de)
+0x802B7850	_handleEvent	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndplayer.c; reviewed source correspondence (func_802B2780_de)
+0x802B3B70	alCSPGetState	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspgetstate.c; reviewed source correspondence (func_802AEAA0_de)
+0x802B4F80	alCSPSetBank	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspsetbank.c; reviewed source correspondence (func_802AFEB0_de)
+0x802B4FB0	alCSPSetChlFXMix	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspsetfxmix.c; reviewed source correspondence (func_802AFEE0_de)
+0x802B5000	alCSPSetSeq	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspsetseq.c; reviewed source correspondence (func_802AFF30_de)
+0x802B5030	alCSPSetVol	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspsetvol.c; reviewed source correspondence (func_802AFF60_de)
+0x802B5060	alCSPStop	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cspstop.c; reviewed source correspondence (func_802AFF90_de)
 0x802C0510	osSendMesg	machine code
 0x802C2020	__osDisableInt	machine code
 0x802C0640	osSetEventMesg	machine code
