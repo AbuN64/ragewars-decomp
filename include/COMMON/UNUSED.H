@@ -3109,8 +3109,6 @@ typedef struct SceneState SceneState;
 struct Screen;
 typedef struct Screen Screen;
 
-struct ScreenState;
-typedef struct ScreenState ScreenState;
 
 
 struct Selection;
@@ -3287,8 +3285,6 @@ typedef struct WeaponMenuView WeaponMenuView;
 
 struct Slider;
 
-struct WindowMenuCreateSixChoiceMenu;
-typedef struct WindowMenuCreateSixChoiceMenu WindowMenuCreateSixChoiceMenu;
 
 
 struct _Pft;
@@ -4403,19 +4399,6 @@ struct SceneState {
     u8 actor_byte;
     u8 pad10[0xC0];
     CVector3 direction;
-};
-struct WindowMenuCreateSixChoiceMenu;
-struct WindowMenuCreateSixChoiceMenu {
-    u8 pad0[0x10];
-    s8 unk10;
-};
-struct ScreenState;
-struct WindowMenuCreateSixChoiceMenu;
-struct ScreenState {
-    s32 screen;
-    s32 label;
-    struct WindowMenuCreateSixChoiceMenu *window;
-    s32 state;
 };
 struct Selection;
 struct Selection {

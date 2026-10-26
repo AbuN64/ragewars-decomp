@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
+#include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 
 #if defined(VERSION_DE)
@@ -42,18 +43,17 @@ extern void Tsmos_ActivateControllerState(void);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(s32);
-extern struct ScreenState *D_800E4450;
+extern StateCode80420E90 *D_800E4450;
 
 /* Builds the screen state D_800E4450: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */
 s32 Menu_CreateSixChoiceMenu(s32 root) {
     s32 screen;
     MenuWidget *window;
 
-    /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own screen state type */
-    D_800E4450 = (struct ScreenState *) Cache_AllocateMemory(0x14);
+    D_800E4450 = (StateCode80420E90 *) Cache_AllocateMemory(0x14);
     Tsmos_ActivateControllerState();
     screen = SmpFade_CreateFadeWidget(ID_SCREEN, ID_SCREEN_B);
-    D_800E4450->screen = screen;
+    D_800E4450->unk0 = (struct ObjMenuUpdateSixChoiceMenu *) screen;
     SmpSlider_EnableTransition(screen);
     SmpButton_WrapButtonWidget(ID_ROW0);
     SmpButton_WrapButtonWidget(ID_ROW1);
@@ -62,9 +62,9 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
     SmpButton_WrapButtonWidget(ID_ROW4);
     SmpButton_WrapButtonWidget(ID_ROW5);
     window = Frontend_FindWidgetByResourceId(root, ID_WINDOW);
-    D_800E4450->window = window;
+    D_800E4450->unk8 = (struct CellRecAt1A *) window;
     window->alpha = 0xF;
-    D_800E4450->label = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);
-    D_800E4450->state = 3;
+    D_800E4450->unk4 = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);
+    D_800E4450->unkC = 3;
     return 0;
 }
