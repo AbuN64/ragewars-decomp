@@ -1,4 +1,5 @@
 #include "include_asm.h"
+
 #if defined(VERSION_US)
 const char D_auto_rodata_func_8043D1DC_de_800DCF94[12] =
     "equ\004.eosR\000\000\000";
