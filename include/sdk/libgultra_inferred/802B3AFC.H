@@ -2,5 +2,5 @@
 #define SDK_LIBGULTRA_INFERRED_802B3AFC_H
 #include "TYPES.H"
 /* Read the object word at offset 0x2C. */
-extern int func_802AEAA0_de(void *object);
+extern int alCSPGetState(void *object);
 #endif

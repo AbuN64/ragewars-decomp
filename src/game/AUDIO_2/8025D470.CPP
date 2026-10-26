@@ -110,7 +110,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
         goto block_44;
     case 0x10:
     default:
-        if ((D_800CBB50_de > 0) && (func_802AEAA0_de((void *)queue->unk14) == 0)) {
+        if ((D_800CBB50_de > 0) && (alCSPGetState((void *)queue->unk14) == 0)) {
             D_800CBB50_de = 0;
             queue->unk28 = 0;
         } else {

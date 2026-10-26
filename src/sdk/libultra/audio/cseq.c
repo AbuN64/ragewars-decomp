@@ -358,7 +358,7 @@ s32 __readVarLen(ALCSeq_s *seq, s32 track) {
 }
 
 /** Read the object word at offset 0x2C. */
-int func_802AEAA0_de(void *object) {
+int alCSPGetState(void *object) {
     ObjRecAt2CV2 *record = object;
     return record->unk2C;
 }
