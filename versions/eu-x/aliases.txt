@@ -2603,3 +2603,6 @@ literals_Menu_GetTrackStartAngles = 0x800E84B8; // rom:0xE90B8 size:0x4
 literals_NaturalLogDouble = 0x800C59B8; // rom:0xC65B8 size:0x68
 literals_Player_ApplyDamageOverTime = 0x800C3004; // rom:0xC3C04 size:0x8
 literals_Items_ResetGameOptions = 0x800E9FC8; // rom:0xEABC8 size:0x4
+D_auto_800CE480 = 0x800CA7F0;
+D_auto_rodata_unresolved_800CE410_unclaimed_CF230 = 0x800CA9A0;
+literals_Ovlgame_InitActorHudState = 0x800C25E0; // rom:0xC31E0 size:0x18

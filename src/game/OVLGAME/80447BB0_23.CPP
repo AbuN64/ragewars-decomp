@@ -211,7 +211,6 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
 INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
 #endif
 
-#if defined(VERSION_US_REV1)
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -318,9 +317,6 @@ void Ovlgame_InitActorHudState(void *actor) {
     }
     func_802458C4_de();
 }
-#else
-INCLUDE_ASM("ovl_80400000", Ovlgame_InitActorHudState);
-#endif
 
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 #include "TYPES.H"
