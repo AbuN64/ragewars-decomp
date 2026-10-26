@@ -20,7 +20,7 @@ extern void func_802BB5F0_de(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
 extern void osStartThread(struct OSThread_s *);
 
-void func_802BDEC0_us_rev1(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
+void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 {
     u32 savedMask;
     s32 oldPri;

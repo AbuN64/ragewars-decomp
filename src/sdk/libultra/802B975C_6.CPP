@@ -8,7 +8,7 @@
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
 /* alMainBusPull (libultra audio main bus): clears the main left and right buffers, then pulls each source and mixes the aux outputs into the main buffers. */
-Acmd *func_802B56E0_eu_x(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *alMainBusPull(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
     ALMainBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;
