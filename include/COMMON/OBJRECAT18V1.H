@@ -3,18 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct MidiState802B70B8;
-struct MidiState802B70B8 {
-    s32 start;
-    s32 track_start;
-    s32 current;
-    s32 unkC;
-    s32 end;
-    f32 tick_scale;
-    s16 division;
-    s16 unk1A;
-};
-
 
 struct ObjRecAt18V1;
 typedef struct ObjRecAt18V1 ObjRecAt18V1;
@@ -36,8 +24,6 @@ struct ALEvent;
 struct ALSeq_s;
 typedef struct ALSeq_s ALSeq_s;
 
-struct MidiState802B70B8;
-typedef struct MidiState802B70B8 MidiState802B70B8;
 
 extern float D_800C74E0_de;
 
@@ -68,5 +54,8 @@ struct ALSeqMarker;
 typedef struct ALSeqMarker ALSeqMarker;
 
 
+
+extern s16 func_802B23C4_de(ALSeq_s *sequenceObject);
+extern s32 func_802B23F4_de(ALSeq_s *sequenceObject);
 
 #endif

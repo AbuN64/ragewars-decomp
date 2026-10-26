@@ -16,9 +16,7 @@
  /* readVarLen */
 extern u8 func_802B23B0_de(ALSeq_s *);
 
-extern s32 func_802B23F4_de(MidiState802B70B8 *state);
 
-extern s16 func_802B23C4_de(MidiState802B70B8 *state);
 
 
 /* alSeqSecToTicks, drafted from ultralib src/audio/seq.c: convert seconds to ticks at the given
@@ -83,24 +81,24 @@ void func_802B1E80_de(ALSeq_s *seq, ALEvent *event)
     }
 }
 
-void func_802B1FE8_de(MidiState802B70B8 *state, s32 start, s32 end) {
+void func_802B1FE8_de(ALSeq_s *state, u8 *start, s32 len) {
     s16 division;
 
-    state->start = start;
-    state->end = end;
-    state->unk1A = 0;
-    state->unkC = 0;
-    state->current = start;
+    state->base = start;
+    state->len = len;
+    state->lastStatus = 0;
+    state->lastTicks = 0;
+    state->curPtr = start;
     if (func_802B23F4_de(state) == 0x4D546864) {
         func_802B23F4_de(state);
         if (((func_802B23C4_de(state) << 16) == 0) && (func_802B23C4_de(state) == 1)) {
             division = func_802B23C4_de(state);
             state->division = division;
             if (!(division & 0x8000)) {
-                state->tick_scale = D_800C74E0_de / (f32) division;
+                state->qnpt = D_800C74E0_de / (f32) division;
                 if (func_802B23F4_de(state) == 0x4D54726B) {
                     func_802B23F4_de(state);
-                    state->track_start = state->current;
+                    state->trackStart = state->curPtr;
                 }
             }
         }
