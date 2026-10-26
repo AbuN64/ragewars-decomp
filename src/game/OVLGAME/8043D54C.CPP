@@ -18,7 +18,6 @@ s32 Items_ToggleOptionBit2(void) {
    set in D_801462C8 and D_800D3B20 otherwise; returns zero. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit2Item(struct StateRecAt14 *item) {
@@ -37,7 +36,6 @@ s32 Items_UpdateOptionBit2Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 8 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit3(void) {
     D_801462C8 ^= 8;
@@ -49,7 +47,6 @@ s32 Items_ToggleOptionBit3(void) {
    set in D_801462C8 and D_800D3B28 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit3Item(struct StateRecAt14 *item) {
@@ -68,7 +65,6 @@ s32 Items_UpdateOptionBit3Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x10 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit4(void) {
     D_801462C8 ^= 0x10;
@@ -80,7 +76,6 @@ s32 Items_ToggleOptionBit4(void) {
    set in D_801462C8 and D_800D3B30 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit4Item(struct StateRecAt14 *item) {
@@ -99,7 +94,6 @@ s32 Items_UpdateOptionBit4Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x20 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit5(void) {
     D_801462C8 ^= 0x20;
@@ -111,7 +105,6 @@ s32 Items_ToggleOptionBit5(void) {
    set in D_801462C8 and D_800D3B38 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit5Item(struct StateRecAt14 *item) {
@@ -130,7 +123,6 @@ s32 Items_UpdateOptionBit5Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x40 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit6(void) {
     D_801462C8 ^= 0x40;
@@ -142,7 +134,6 @@ s32 Items_ToggleOptionBit6(void) {
    set in D_801462C8 and D_800D3B40 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit6Item(struct StateRecAt14 *item) {
@@ -161,7 +152,6 @@ s32 Items_UpdateOptionBit6Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x80 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit7(void) {
     D_801462C8 ^= 0x80;
@@ -173,7 +163,6 @@ s32 Items_ToggleOptionBit7(void) {
    set in D_801462C8 and D_800D3B48 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit7Item(struct StateRecAt14 *item) {
@@ -192,7 +181,6 @@ s32 Items_UpdateOptionBit7Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x100 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit8(void) {
     D_801462C8 ^= 0x100;
@@ -204,7 +192,6 @@ s32 Items_ToggleOptionBit8(void) {
    set in D_801462C8 and D_800D3B50 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit8Item(struct StateRecAt14 *item) {
@@ -223,7 +210,6 @@ s32 Items_UpdateOptionBit8Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x200 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit9(void) {
     D_801462C8 ^= 0x200;
@@ -235,7 +221,6 @@ s32 Items_ToggleOptionBit9(void) {
    set in D_801462C8 and D_800D3B58 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit9Item(struct StateRecAt14 *item) {
@@ -254,7 +239,6 @@ s32 Items_UpdateOptionBit9Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x400 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit10(void) {
     D_801462C8 ^= 0x400;
@@ -266,7 +250,6 @@ s32 Items_ToggleOptionBit10(void) {
    set in D_801462C8 and D_800D3B60 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit10Item(struct StateRecAt14 *item) {
@@ -285,7 +268,6 @@ s32 Items_UpdateOptionBit10Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x800 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit11(void) {
     D_801462C8 ^= 0x800;
@@ -297,7 +279,6 @@ s32 Items_ToggleOptionBit11(void) {
    set in D_801462C8 and D_800D3B68 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit11Item(struct StateRecAt14 *item) {
@@ -316,7 +297,6 @@ s32 Items_UpdateOptionBit11Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x1000 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit12(void) {
     D_801462C8 ^= 0x1000;
@@ -328,7 +308,6 @@ s32 Items_ToggleOptionBit12(void) {
    set in D_801462C8 and D_800D3B70 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit12Item(struct StateRecAt14 *item) {
@@ -347,7 +326,6 @@ s32 Items_UpdateOptionBit12Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x2000 of the option word D_801462C8 and returns zero; the functions after it in this
    run each toggle the next bit. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit13(void) {
     D_801462C8 ^= 0x2000;
@@ -359,7 +337,6 @@ s32 Items_ToggleOptionBit13(void) {
    set in D_801462C8 and D_800D3B78 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit13Item(struct StateRecAt14 *item) {
@@ -378,7 +355,6 @@ s32 Items_UpdateOptionBit13Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x4000 of the option word D_801462C8 and returns zero; it is one of a run of
    functions that each toggle one bit of that word. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit14(void) {
     D_801462C8 ^= 0x4000;
@@ -390,7 +366,6 @@ s32 Items_ToggleOptionBit14(void) {
    set in D_801462C8 and D_800D3B80 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit14Item(struct StateRecAt14 *item) {
@@ -409,7 +384,6 @@ s32 Items_UpdateOptionBit14Item(struct StateRecAt14 *item) {
 
 /* Toggles bit 0x8000 of the option word D_801462C8 and returns zero; it is one of a run of
    functions that each toggle one bit of that word. */
-extern s32 D_801462C8;
 
 s32 Items_ToggleOptionBit15(void) {
     D_801462C8 ^= 0x8000;
@@ -421,7 +395,6 @@ s32 Items_ToggleOptionBit15(void) {
    set in D_801462C8 and D_800D3B88 otherwise; returns zero. Adapted from Items_UpdateOptionBit2Item with the bit changed. */
 
 
-extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 s32 Items_UpdateOptionBit15Item(struct StateRecAt14 *item) {

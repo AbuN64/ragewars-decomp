@@ -86,8 +86,6 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
 
 
 extern struct func_80204468_S3 *D_800E39C0;
-extern struct TextEntry D_800E381C[][17];
-extern void MarkMenuEventHandled();
 extern void XPlus_CopyString(char *, char *);
 
 s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s32 event) {

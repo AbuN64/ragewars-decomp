@@ -104,7 +104,6 @@ void Frontend_StartFragTagMatch(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Active *D_800E4680;
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 Frontend_GetStageTransitionResource(void);
 extern void Ovlgame_StartMatchTransition(GameSession *, s32);
@@ -118,7 +117,6 @@ void Frontend_StartCaptureTheFlagMatch(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Active *D_800E4680;
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 Frontend_GetStageTransitionResource(void);
 extern void Ovlgame_StartMatchTransition(GameSession *, s32);

@@ -64,7 +64,6 @@ void Frontend_AdvanceVideoMode(void)
   D_800E28D4 = h;
 }
 /* Stores its argument in D_800E28D8, which func_8040C474_de returns, and calls Frontend_ApplyVideoMode. */
-extern s32 D_800E28D8;
 void Frontend_ApplyScreenModeValue(s32 value) {
     D_800E28D8 = value;
     Frontend_ApplyVideoMode();
@@ -79,9 +78,6 @@ void Frontend_StartScreenModeFade(void) {
 /* Detects the storage configuration and updates the cached selection. */
 s32 Defs_GetMemorySize(); /* extern */
                                   /* extern */
-extern s32 D_800E28D8;
-extern s32 D_800E28DC;
-extern s32 D_800E28E0;
 extern u8 D_80146848;
 void Frontend_UpdateScreenMode(void) {
     if (D_800E28D8 == -1) {
@@ -99,7 +95,6 @@ void Frontend_UpdateScreenMode(void) {
 }
 /* Returns the palette for the current screen mode D_800E28D8: modes 1, 2 and 3 have their own, mode 0
    and anything else use the first. */
-extern int D_800E28D8;
 extern int D_800D3610;
 extern int D_800D3614;
 extern int D_800D3618;
@@ -120,10 +115,6 @@ int *Frontend_GetScreenModePalette(void) {
 /* Requests a new value when no change is pending: if D_800E28E0 is zero and the value differs from
    D_800E28D8, remembers the old value in D_800E28DC, stores the new one, sets D_800E28E4 and starts
    the 0x14-tick countdown D_800E28E0. */
-extern s32 D_800E28D8;
-extern s32 D_800E28DC;
-extern s32 D_800E28E0;
-extern s32 D_800E28E4;
 void Frontend_RequestScreenMode(s32 value) {
     if (D_800E28E0 == 0 && value != D_800E28D8) {
         D_800E28E4 = 1;
@@ -133,7 +124,6 @@ void Frontend_RequestScreenMode(s32 value) {
     }
 }
 /* Returns the word held in D_800E28D8. */
-extern s32 D_800E28D8;
 s32 Frontend_GetScreenMode(void) {
     return D_800E28D8;
 }
@@ -147,7 +137,6 @@ struct VideoViewList {
     NodeRecAt2A8 defaultView;
 };
 extern struct VideoViewList D_80140FE8_de;
-extern int D_800E28D0;
 extern void Frontend_SetVideoViewport(unsigned, int, int, int, int, int);
 
 void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, int a4, int a5) {
