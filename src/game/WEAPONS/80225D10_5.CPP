@@ -13,7 +13,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "WEAPONS/8022F3E8_3.H"
-#include "WEAPONS/GAME_SESSION.H"
+#include "COMMON/GAME_SESSION.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 
@@ -56,7 +56,7 @@ extern int Player_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 
 
-extern s32 Pak_CountLiveNodes(GameSession *);
+extern s32 Pak_CountLiveNodes(struct CMenu_t **);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
@@ -125,8 +125,6 @@ extern void Geometry_QueueDirectModel(void *, void *, char *, s32, s32);
 extern void func_80229D28_de(void *);
 
 extern HudGlobals D_801462DE;
-extern GameSession D_8014561C;
-extern GameRules D_801468A0[];
 
 
 extern s32 D_800CD730;
@@ -141,7 +139,7 @@ extern s32 D_80140FF8;
 
 
 s32 Player_CheckTotalScoreWin(Root *root) {
-    GameRules *initial=D_801468A0; GameRules *state;
+    GameRules *initial=D_8011FAC0.match.rules; GameRules *state;
  ObjRecAt16E0V1 *node; int i,sum,skip; unsigned char *settings;
  if(initial->totalScoreTarget==0) return 0;
  node=root->unk20; state=initial;
@@ -176,26 +174,26 @@ s32 Player_CheckTeamPointWin(struct World *world) {
     s32 team;
     s32 kind;
 
-    target = &D_8014561C.rules;
+    target = D_8011FAC0.match.rules;
     if (target->pointTarget == 0) {
         return 0;
     }
     i = 0;
-    settings = &D_8014561C.settings;
+    settings = &D_8011FAC0.match.settings;
     humanTeam = 0xFF;
     if (settings->trialKind != 0) {
         for (; settings->roster[i].active == 0; i++) {
         }
-        humanTeam = D_8014561C.settings.roster[i].team;
+        humanTeam = D_8011FAC0.match.settings.roster[i].team;
     }
     for (team = 0; team < 5; team++) {
-        rules = &D_8014561C.rules;
+        rules = D_8011FAC0.match.rules;
         if (rules->teamPoints[team] >= rules->pointTarget) {
             if (team == humanTeam) {
                 rules->humanWon = 1;
                 return 1;
             }
-            trial = &D_8014561C.settings;
+            trial = &D_8011FAC0.match.settings;
             kind = trial->trialKind;
             rules->humanWon = 0;
             if (kind == 0) {
@@ -209,7 +207,7 @@ s32 Player_CheckTeamPointWin(struct World *world) {
 void func_802283B8_de(World_func_802283B8_de *world) {
     SharedPlayer *player;
     GameRules *rules;
-    GameSession *game;
+    GameSessionState *game;
     GameRules *limits;
     s32 i;
     s32 active;
@@ -217,26 +215,26 @@ void func_802283B8_de(World_func_802283B8_de *world) {
     s32 special;
 
     if (Cinema_IsSequenceActive() == 0 && Cinema_IsSequenceInWindow() == 0) {
-        rules = &D_8014561C.rules;
-        if (rules->locked != 0 || D_8014561C.settings.allowed == 0) {
+        rules = D_8011FAC0.match.rules;
+        if (rules->locked != 0 || D_8011FAC0.match.settings.allowed == 0) {
             return;
         }
-        if (Pak_CountLiveNodes(&D_8014561C) == 0 && rules->timeLimit > 0.0f && D_8014561C.paused == 0) {
+        if (Pak_CountLiveNodes(&D_8011FAC0.match.messages.head) == 0 && rules->timeLimit > 0.0f && D_8011FAC0.clockPaused == 0) {
             if (func_8022C650_de(world) != 0) {
                 rules->timeLimit -= D_800D2988;
             }
             if (rules->timeLimit <= 0.0f && rules->locked == 0) {
                 rules->timeLimit = 0.0f;
-                if (D_8014561C.settings.trialKind == 3) {
+                if (D_8011FAC0.match.settings.trialKind == 3) {
                     rules->humanWon = 0;
                 }
                 Player_EndRound(world);
             }
         }
-        game = &D_8014561C;
-        if (Pak_CountLiveNodes(game) == 0 && Player_CheckScoreLimit(world) != 0) {
-            limits = &game->rules;
-            if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
+        game = &D_8011FAC0.match;
+        if (Pak_CountLiveNodes(&game->messages.head) == 0 && Player_CheckScoreLimit(world) != 0) {
+            limits = game->rules;
+            if (limits->locked == 0 && D_8011FAC0.clockPaused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
                 Player_EndRound(world);
             }
         }
@@ -258,7 +256,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
             }
             if (out == active) {
                 if (special) {
-                    limits = &D_8014561C.rules;
+                    limits = D_8011FAC0.match.rules;
                     if (limits->rounds >= 3) {
                         limits->humanWon = 1;
                         Player_EndRound(world);
@@ -405,7 +403,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     s32 zoomed;
     s32 model;
 
-    match = D_801468A0;
+    match = D_8011FAC0.match.rules;
     team = -1;
     if (match->teams != 0 || match->teamRule != 0) {
         team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Sky_FindScreenMessage(view))->settings)->team;
@@ -429,7 +427,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
         if (((ObjectLinks16E4 *)(player))->unk_5DC != 0 && ((ObjectLinks16E4 *)(player))->unk_1210 != 0 && ((ObjectLinks16E4 *)(player))->unk_5DC == view) {
             Weapon_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
         }
-        if ((D_801468A0->teams != 0 || D_801468A0->teamRule != 0)
+        if ((D_8011FAC0.match.rules->teams != 0 || D_8011FAC0.match.rules->teamRule != 0)
             && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Sky_FindScreenMessage(view) != player) {
             func_80229D28_de(player);
         }
@@ -498,7 +496,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
-extern void SoundElement_PlayFlatSound(s32), Camera_PostScreenMessage(void *, void *, void *);
+extern void SoundElement_PlayFlatSound(s32);
 extern void BuildDirectionMatrix(void *, void *), GraphU64_AddVec3(void *, void *, void *);
 extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), GraphU64_ConvertMatrixToFixed(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the

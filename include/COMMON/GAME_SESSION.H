@@ -7,6 +7,7 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/RENDERSETTINGS.H"
+#include "COMMON/SESSION_STATE.H"
 typedef struct GameSession GameSession;
 struct GameSession {
     Display ring;
@@ -17,26 +18,37 @@ struct GameSession {
     u8 reservedHud[0x25580 - 0x1BCF8 - sizeof(Hud)];
     CPlayerPool menu[1]; /* +0x25580, func_80449DB0_de */
     u8 reserved255C4[4];
-    struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
-    u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
-    u8 local; /* +0x26825: D_801462C8.local, the local-player input flag (func_8044DE7C_de) */
-    u8 arena; /* +0x26826: SetN64_StartRound */
-    u8 reserved26827[0x26D8C - 0x26827];
-    RenderSettings settings; /* +0x26D8C */
-    f32 transitionTime; /* +0x26DB0 */
-    s32 previousMode;
-    s32 mode;
-    s32 target;
-    u8 fastFade; /* +0x26DC0: SetN64_UpdateFadeTransition steps the fade by 0.5 instead of 0.1 */
-    u8 phase; /* +0x26DC1: fade phase: 0 idle, 1 fading in, 2 fading out */
-    u8 reserved26DC2[2];
-    f32 timer;
-    s32 enabled;
-    s32 field26DCC;
-    s32 transitionBlocked;
-    s32 clockPaused;
-    s32 selector;
-    s32 selectionActive;
+    /* D_8014561C is this session's match state at +0x25B5C. Its
+     * messages overlap the screen-message owner, and its settings overlap
+     * local/arena. The pause word belongs to clockPaused only. */
+    union {
+        struct {
+            struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
+            u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
+            u8 local; /* +0x26825: D_801462C8.local, the local-player input flag (func_8044DE7C_de) */
+            u8 arena; /* +0x26826: SetN64_StartRound */
+            u8 reserved26827[0x26D8C - 0x26827];
+            RenderSettings settings; /* +0x26D8C */
+            f32 transitionTime; /* +0x26DB0 */
+            s32 previousMode;
+            s32 mode;
+            s32 target;
+            u8 fastFade; /* +0x26DC0: SetN64_UpdateFadeTransition steps the fade by 0.5 instead of 0.1 */
+            u8 phase; /* +0x26DC1: fade phase: 0 idle, 1 fading in, 2 fading out */
+            u8 reserved26DC2[2];
+            f32 timer;
+            s32 enabled;
+            s32 field26DCC;
+            s32 transitionBlocked;
+            s32 clockPaused;
+            s32 selector;
+            s32 selectionActive;
+        };
+        struct {
+            u8 reserved255C8[0x25B5C - 0x255C8];
+            GameSessionState match; /* +0x25B5C; rules at +0x26DE0 */
+        };
+    };
 };
 /* The game session; its ring.current is D_8011BDC0 (+0x3C0). */
 extern GameSession D_8011FAC0;
