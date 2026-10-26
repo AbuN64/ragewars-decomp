@@ -89,7 +89,6 @@ loop:
 }
 
 extern struct EntryRecAt0V1 D_800E4694[];
-extern struct Pair D_800E4A84[];
 extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 Defs_TestBit(s32, s32);
 

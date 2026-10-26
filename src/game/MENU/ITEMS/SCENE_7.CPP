@@ -29,7 +29,6 @@ void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern char D_00285160[],g_gamePersistentData[],D_800F41F0[];
 extern void func_802BD3A0_de(void *,int,int);
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 

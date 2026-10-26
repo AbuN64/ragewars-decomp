@@ -210,7 +210,6 @@ void func_80204E48_de(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 

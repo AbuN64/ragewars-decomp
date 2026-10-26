@@ -201,8 +201,6 @@ void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettin
     }
 }
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
-extern void func_8024C454_de(void *arg0, void *arg1);
 
 void func_8024B990_de(void *actor, void *unusedShadowContext, void *renderSettings, Block24 *lighting) {
     s8 index;

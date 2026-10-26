@@ -220,7 +220,6 @@ void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2,
 void func_8028B4C8_de(void) {
 }
 
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 
 
@@ -258,7 +257,6 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
     base2[idx2 >> 3] &= ~mask;
 }
 
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
 
 
 
