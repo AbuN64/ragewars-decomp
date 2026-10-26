@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "TEXTURE/80294C64.H"
+#include "RENDER/802944E8_10.H"
 
 #if defined(VERSION_US_REV1)
 #include "COMMON/ITEMRECAT20V1.H"

@@ -10,6 +10,8 @@
 #include "GAME/CODE_8027302C.H"
 #include "WORLD_2/8024E914_8.H"
 #include "SCENE/802508E0_4.H"
+#include "include_asm.h"
+
 extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /** Clear the word at object offset 0x1C4. */
@@ -66,7 +68,6 @@ void func_8024F4A0_de(void *arg0) {
     }
 }
 
-extern f32 D_800D2988;
 
 void func_8024F5A0_de(StaticObject *staticObject) {
     f32 temp_f1;
@@ -201,3 +202,27 @@ void func_8024F8DC_de(void *arg0, s32 **arg1) {
     new_var = **arg1;
     func_80253E64_de(0, arg1, Actors_BuildLitModel(new_var, *((StaticObject *)(arg0))->renderResource, &((StaticObject *)(arg0))->effect[0], (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
 }
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_8024F4A0_C9AE0[4] = {
+    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_8024F4A0_C9AE0_us_rev1[4] = {
+    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+};
+#endif
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_8024F5A0_C9AF0[4] = {
+    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_8024F5A0_C9AF0_us_rev1[4] = {
+    0x3D888889, 0x3F400000, 0x3EEEEEEF, 0x3EB33333,
+};
+#endif

@@ -1,8 +1,9 @@
-#ifndef FX_8026E5E0_H
-#define FX_8026E5E0_H
+#ifndef ENGINE_GHOT_H
+#define ENGINE_GHOT_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
+
 struct ObjRecAt4V7 {
     u32 unk0;
     u16 unk4;

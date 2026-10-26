@@ -1,5 +1,5 @@
 #include "COMMON/RESIDENTSTATE.H"
-#include "TEXTURE/80294C64.H"
+#include "RENDER/802944E8_10.H"
 #include "TEXTURE/80294C64_7.H"
 #if defined(VERSION_US_REV1)
 /** Report the global count only while its enable byte is set. */

@@ -1,5 +1,5 @@
 #include "COMMON/RESIDENTSTATE.H"
-#include "TEXTURE/80294C64.H"
+#include "RENDER/802944E8_10.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "TEXTURE/80294C64_11.H"
