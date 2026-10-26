@@ -139,17 +139,12 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
    800DF4C4, eu writes 800EFB34, eu-x writes 800EACF4, us writes 800DE174, us-rev1 800E3514. */
 #if defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_US)
 #elif defined(VERSION_EU_X)
-extern s32 D_800EACF4;
 #else
-extern s32 D_800E3514;
 #endif
 
 #if defined(VERSION_EU)
-extern s32 D_800EFB34;
 #elif defined(VERSION_DE)
-extern s32 D_800DF4C4;
 #elif defined(VERSION_US)
-extern s32 D_800DE174;
 #else
 #endif
 

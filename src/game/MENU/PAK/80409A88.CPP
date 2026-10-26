@@ -783,10 +783,8 @@ s32 Pak_SelectOperationDescription(struct FieldRecAt14 *field) {
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM_3/80265370.H"
-extern s32 D_8015375C;
 extern char D_800ED41C[];
 extern char *D_800D394C[];
-extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
@@ -811,18 +809,15 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800ED41C[];
 #else
 #endif
 /* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Pak_CountLineChars reports, returning zero.
    Adapted from Pak_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
 
-extern s32 D_8015375C;
 
 extern u8 *D_800D394C[];
 
 extern char g_digitDotFormat[];
-extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *holder) {

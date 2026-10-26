@@ -269,7 +269,6 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
    Adapted from Items_FormatPackedGameOption with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
-extern s32 D_8015375C;
 extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_UpdateManagerChannelLabel(struct Field *field) {
@@ -296,7 +295,6 @@ s32 Pak_UpdateManagerChannelLabel(struct Field *field) {
 
 
 
-extern s32 D_8015375C;
 extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_UpdateManagerChannelLabel(struct Field *field) {
