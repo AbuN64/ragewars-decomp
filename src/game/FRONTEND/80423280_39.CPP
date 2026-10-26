@@ -10,15 +10,6 @@
 #include "ACHIEVE/80424E30_3.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_UpdateResultsHeading);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct ResultsHeadingCharacter D_800F00DC[];
 extern char D_800EE048[];
 extern char D_800EE050[];
@@ -41,10 +32,12 @@ extern char D_800EE050[];
    four-player mode the heading D_800D34D8. */
 
 /* The results screen item and phrase ids renumber on the de cartridge: its heading item is 0x151,
-   its name phrase 0x6B, its time phrase 0x3F and its time item 0x154. eu and eu-x use heading
-   strings this unit cannot name, so those cartridges keep their own screen code. */
+   its name phrase 0x6B, its time phrase 0x3F and its time item 0x154; on eu-x 0x157, 0x6C, 0x40 and
+   0x15A. eu and eu-x pick the heading and character name strings by language (RES_* above). */
 #if defined(VERSION_DE)
 enum { HEADING_ITEM = 0x151, NAME_PHRASE = 0x6B, TIME_PHRASE = 0x3F, TIME_ITEM = 0x154 };
+#elif defined(VERSION_EU_X)
+enum { HEADING_ITEM = 0x157, NAME_PHRASE = 0x6C, TIME_PHRASE = 0x40, TIME_ITEM = 0x15A };
 #else
 enum { HEADING_ITEM = 0x153, NAME_PHRASE = 0x69, TIME_PHRASE = 0x3D, TIME_ITEM = 0x156 };
 #endif
@@ -93,4 +86,3 @@ void Frontend_UpdateResultsHeading(void) {
         break;
     }
 }
-#endif
