@@ -1,3 +1,4 @@
+#include "COMMON/ACTOR_DEFINITION.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
@@ -74,8 +75,8 @@ s32 func_8028B21C_de(struct Shared_World *, s32);
 s32 func_8028C198_de(void *, s32);
 void Engine_SampleWorldLighting(void *, CVector3 *, void *);
 void func_80290950_de(void *, void *);
-extern struct ActorDefinitionHeader D_8011B200;
-extern struct ActorDefinitionHeader D_8011B388;
+
+
 
 extern s32 D_800CD764_de[];
 
@@ -130,11 +131,11 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   }
   if (D_801462C8.local != 0)
   {
-    ((SceneEffect *)(temp_s0))->definition = &D_8011B200;
+    ((SceneEffect *)(temp_s0))->definition = &g_boundedEffectDefinition.header;
   }
   else
   {
-    ((SceneEffect *)(temp_s0))->definition = &D_8011B388;
+    ((SceneEffect *)(temp_s0))->definition = &g_defaultEffectDefinition;
   }
   ((SceneEffect *)(temp_s0))->lifetime = arg10;
   ((SceneEffect *)(temp_s0))->lifetimeState = 0;
@@ -236,13 +237,13 @@ void func_80290238_de(WorldRecAt3C08 *world) {
     } while (next != 0);
 }
 
-extern struct ActorDefinitionHeader D_8011B388;
+
 
 
 
 
 void func_80290408_de(struct EffectSlot *effectSlot) {
-    effectSlot->definition = &D_8011B388;
+    effectSlot->definition = &g_defaultEffectDefinition;
     effectSlot->active = 3;
     effectSlot->state = 0;
 }
@@ -251,7 +252,7 @@ void func_80290408_de(struct EffectSlot *effectSlot) {
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 extern char D_801003F8;
 extern char D_80100438;
-extern ActorDefinitionHeader D_8011B388;
+
 extern f32 D_800C53A4_de;
 extern void func_8024F4A0_de(SceneEffect *);
 extern void Camera_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
@@ -275,7 +276,7 @@ void func_80290424_de(SceneEffect *arg0)
     saved = arg0->position;
   }
   func_8024F4A0_de(arg0);
-  if (arg0->definition != (&D_8011B388))
+  if (arg0->definition != (&g_defaultEffectDefinition))
   {
     arg0->rotation.x = 0.0f;
     arg0->rotation.y = 0.0f;

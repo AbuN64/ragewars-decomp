@@ -286,7 +286,7 @@ extern int D_800E12D4[];
 
 extern void *D_80107EA0;
 
-extern char D_8011B388;
+
 
 extern s32 D_002A11EC;
 
@@ -686,7 +686,7 @@ extern s32 D_80142850;
 
 extern void *D_8014D98C[];
 
-extern char D_8011B200;
+
 
 extern u8 *D_80153C7C;
 
@@ -1399,7 +1399,7 @@ extern FieldRow D_800E5838[];
 
 extern char D_800D388C[];
 
-extern char D_801469A0;
+
 
 extern s32 D_80146878;
 

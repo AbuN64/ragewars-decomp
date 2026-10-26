@@ -1,16 +1,45 @@
+#include "MENU/BUILD/DEFINITION_DATA.H"
 
 #if defined(VERSION_US_REV1)
 extern char rw_menu_paged_func_80407748_de[];
 extern char rw_menu_paged_func_80407F6C_de[];
 extern char rw_menu_paged_func_80442064_de[];
+
 struct {
-    unsigned int w0[2];
-    unsigned char b1[12];
-    unsigned int w2[4];
-} D_auto_80154050[4] = {
-    { { 0x00000000, 0x00000000 }, { 0x00, 0x01, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x01 }, { 0x800D7724, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de } },
-    { { 0x00000000, 0x00000000 }, { 0x00, 0x01, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x01 }, { 0x800D7728, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de } },
-    { { 0x00000000, 0x00000000 }, { 0x00, 0x01, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x01 }, { 0x800D772C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de } },
-    { { 0x00000000, 0x00000000 }, { 0x00, 0x01, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x01 }, { 0x800D7730, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de } },
+    unsigned int parameter1;
+    struct MenuBuildItemData items1[3];
+    short type1;
+    unsigned short reserved021;
+    unsigned int flags1;
+    short x1;
+    short y1;
+    unsigned char red1;
+    unsigned char green1;
+    unsigned char blue1;
+    unsigned char alpha1;
+    int resource1;
+    unsigned int resourceCallback1;
+    unsigned int callback1;
+    unsigned int initializeCallback1;
+} g_menuItemFragment10 = {
+    0x00000000,
+    {
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7724, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7728, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D772C, (unsigned int)rw_menu_paged_func_80442064_de, (unsigned int)rw_menu_paged_func_80407F6C_de, (unsigned int)rw_menu_paged_func_80407748_de, 0x00000000 },
+    },
+    0x0000,
+    0x0000,
+    0x00011001,
+    0x0000,
+    0x0000,
+    0x00,
+    0x00,
+    0xFF,
+    0x01,
+    0x800D7730,
+    (unsigned int)rw_menu_paged_func_80442064_de,
+    (unsigned int)rw_menu_paged_func_80407F6C_de,
+    (unsigned int)rw_menu_paged_func_80407748_de,
 };
 #endif

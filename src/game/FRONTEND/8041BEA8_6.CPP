@@ -112,7 +112,7 @@ s32 func_80249E28_de(void *, void *);
 s32 func_8024B8C4_de(void *);
 s32 PitchMatrixLocal(void *, f32);
 extern MenuModelScreen D_80141008[];
-void func_8041C7F4_de(Obj8041CAD8 *self) {
+void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
     CVector3 local10;
     CVector3 local20;
     MenuModelScreen *view;
@@ -125,7 +125,7 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
         D_800CC380 = 0;
         {
             Gfx *g = g_displayListCursor++;
-            char *address = (char *)(u32)(D_800D297C << 6);
+            u32 address = (u32)(D_800D297C << 6);
             address += 0x380;
             address += (u32)view;
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
@@ -252,7 +252,7 @@ void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1) {
 }
 
 /* Stores a value into the word at offset 0x49C of an object; func_80420618_de and func_8043AB40_de call
-   it with zero, Frontend_InitModelPreview writes the same word directly and func_8041C7F4_de reads it. */
+   it with zero, Frontend_InitModelPreview writes the same word directly and Frontend_DrawModelPreview reads it. */
 
 
 void func_8041CE10_de(struct Object49C *object, s32 value) {

@@ -345,6 +345,9 @@ struct Vtx {
     u8 a;
 };
 
+/* Shared four-vertex particle quad initialized by Ovlgame_InitParticleQuad. */
+extern Vtx g_particleQuadVertices[4];
+
 
 struct Nodes;
 typedef struct Nodes Nodes;

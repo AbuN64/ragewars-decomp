@@ -205,12 +205,12 @@ s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1)
 void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
 {
   unsigned int offset = index * (sizeof(SlotRecAtB8));
-  char *entry = (char *) offset;
+  unsigned int entry = offset;
   SlotRecAtB8 *slots;
   SlotRecAtB8 *selected;
   entry += (unsigned int) base;
   slots = base;
- do { func_802B2D80_de(0x84 + ((SlotRecAtB8 *) entry)->owner); entry = (char *) slots; entry += offset; selected = (SlotRecAtB8 *) entry; } while (0);
+ do { func_802B2D80_de(0x84 + ((SlotRecAtB8 *) entry)->owner); entry = (unsigned int) slots; entry += offset; selected = (SlotRecAtB8 *) entry; } while (0);
   selected->flags |= 8;
 }
 

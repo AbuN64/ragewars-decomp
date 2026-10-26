@@ -4530,7 +4530,7 @@ segments:
       - [0xEE6D0, rodata, data_800C/rodata_func_8041BE90_de_800EDAD0]
       - [0xEE6D3, data, data_800C/rodata_unresolved_800EDAD3]
       - [0xEE6E0, rodata, data_800C/literals_Frontend_SelectMatchingPreviewModel]
-      - [0xEE708, rodata, data_800C/literals_func_8041C7F4_de]
+      - [0xEE708, rodata, data_800C/literals_Frontend_DrawModelPreview]
       - [0xEE710, rodata, data_800C/literals_Frontend_InitModelPreview]
       - [0xEE718, data, data_800C/rodata_unresolved_800EDB18]
       - [0xEE720, rodata, data_800C/literals_func_8041D134_de]

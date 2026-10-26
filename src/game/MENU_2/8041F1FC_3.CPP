@@ -21,7 +21,7 @@ extern s32 D_800E28D0;
 
 extern Gfx *g_displayListCursor;
 
-extern void func_8041C7F4_de(void *);
+extern void Frontend_DrawModelPreview(void *);
 extern u8 D_800FEB57[][0x190];
 extern HudStatusShared_Settings D_801462C8[];
 
@@ -154,7 +154,7 @@ extern s32 Frontend_ListHasFlag100(void *widget);
 
 
 
-/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in D_800E41C0 and draws that panel through func_8041C7F4_de, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
+/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in D_800E41C0 and draws that panel through Frontend_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
 s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
 {
     s32 i;
@@ -183,7 +183,7 @@ s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
                         D_800D15E4[2] = 255.0f;
                         D_800D15E4[3] = 255.0f;
                     }
-                    func_8041C7F4_de(D_800E42D0->players[i].model);
+                    Frontend_DrawModelPreview(D_800E42D0->players[i].model);
                 }
             }
         }

@@ -1,3 +1,4 @@
+#include "COMMON/ACTOR_DEFINITION.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -83,7 +84,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     inst->f58 = 0;
     inst->f5C = 0;
     if (rec->variation == 0xFFFF) {
-        inst->variation = &D_8011B388;
+        inst->variation = &g_defaultEffectDefinition;
     } else {
         inst->variation = Engine_GetActorDefinition(&g_world, rec->variation);
     }

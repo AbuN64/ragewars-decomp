@@ -18,7 +18,7 @@ extern ResultsOptionsScreen *D_800E4690;
 
 /* Draw callback of the results screen D_800E4690: on draw event 1 in states 3, 8 or 9 it resets
    the fill colour D_800D15E0 to opaque white, and for each of the one or two viewports clips the
-   display list to its rectangle in D_800E41C0 (0, then 2 for the lower view), draws the player's panel through func_8041C7F4_de and restores the
+   display list to its rectangle in D_800E41C0 (0, then 2 for the lower view), draws the player's panel through Frontend_DrawModelPreview and restores the
    full-screen clip. Outside two-player mode (and unless GetMenuScreenOwner reports 0x19) it plays sound
    0x259 past the base at 0xA44 on the twentieth frame, raises the banner blink after six more
    frames, and fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
@@ -40,7 +40,7 @@ extern s32 D_800E28D0;
 
 
 
-extern void func_8041C7F4_de(char *);
+extern void Frontend_DrawModelPreview(char *);
 
 extern void Frontend_SetWidgetFlag08(struct Shape_typemap_21 *, s32);
 
@@ -79,7 +79,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
         }
         for (i = 0, k = 0; i < views; i++, k = 2) {
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[k].field_0, D_800E41C0[k].field_4, D_800E41C0[k].field_8, D_800E41C0[k].field_C);
-            func_8041C7F4_de(D_800E4690->panels[i]);
+            Frontend_DrawModelPreview(D_800E4690->panels[i]);
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         }
         if (D_801462C8.controllerMode != 2 && GetMenuScreenOwner() != 0x19) {

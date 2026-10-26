@@ -26,7 +26,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad D_801469A0, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and System_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and System_ResetTextureCache. */
 
 
 
@@ -44,7 +44,7 @@ extern char D_800D14B0;
 
 extern char D_800D2E60;
 
-extern char D_801469A0;
+
 
 
 extern char D_800CDCA8;
@@ -149,7 +149,7 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
                 func_80255D14_de(&scene->free, particle);
             } else {
                 gSPMatrix(g_displayListCursor++, (u32)transform, G_MTX_LOAD);
-                gSPVertex(g_displayListCursor++, (u32)&D_801469A0, 4, 0);
+                gSPVertex(g_displayListCursor++, (u32)&g_particleQuadVertices, 4, 0);
                 gSP2Triangles(g_displayListCursor++, 0, 1, 2, 0, 2, 3, 0, 0);
             }
             particle = next;
@@ -195,7 +195,7 @@ void func_802A5498_de(u32 arg0) {
     cmd = g_displayListCursor++;
     gSPMatrix(cmd, arg0, G_MTX_LOAD);
     cmd = g_displayListCursor++;
-    gSPVertex(cmd, &D_801469A0, 4, 0);
+    gSPVertex(cmd, &g_particleQuadVertices, 4, 0);
     cmd = g_displayListCursor++;
     gSP2Triangles(cmd, 0, 1, 2, 0, 2, 3, 0, 0);
 

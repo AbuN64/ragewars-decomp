@@ -14,4 +14,14 @@ typedef struct ActorDefinitionHeader {
     u8 pad13;
     s32 flags;
 } ActorDefinitionHeader;
+
+/* The bounded variant extends the common definition with two bound values. */
+typedef struct EffectDefinitionBounds {
+    ActorDefinitionHeader header;
+    f32 boundsA;
+    f32 boundsB;
+} EffectDefinitionBounds;
+
+extern ActorDefinitionHeader g_defaultEffectDefinition;
+extern EffectDefinitionBounds g_boundedEffectDefinition;
 #endif

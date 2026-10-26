@@ -7,8 +7,8 @@
 #include "COMMON/UNUSED.H"
 #include "OVLGAME/8044E2B8_5.H"
 
-s32 func_8044DCC0_de(void) {
-    Vtx *vertices = (Vtx *)&D_801469A0;
+s32 Ovlgame_InitParticleQuad(void) {
+    Vtx *vertices = (Vtx *)&g_particleQuadVertices;
     s32 i = 0;
     s32 more;
 

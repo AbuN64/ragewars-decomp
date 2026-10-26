@@ -19,9 +19,7 @@ unsigned short D_blob_025aee43d9ad81e0a028[] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_7dd3c087[1] = {
-    0x00010064,
-};
+unsigned short g_weaponAmmoSlotCapacity44[2] = { 0x0001, 0x0064 };
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -29,9 +27,7 @@ unsigned int D_src_7dd3c087[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_c6313c7e[1] = {
-    0x0401000A,
-};
+unsigned short g_weaponAmmoResourceCost44[2] = { 0x0401, 0x000A };
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -39,9 +35,7 @@ unsigned int D_src_c6313c7e[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_005e47ee[1] = {
-    0x00010064,
-};
+unsigned short g_weaponAmmoSlotCapacity45[2] = { 0x0001, 0x0064 };
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -49,9 +43,7 @@ unsigned int D_src_005e47ee[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_fc585885[1] = {
-    0x04030032,
-};
+unsigned short g_weaponAmmoResourceCost45[2] = { 0x0403, 0x0032 };
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -59,7 +51,5 @@ unsigned int D_src_fc585885[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_05c94009[1] = {
-    0x0002004B,
-};
+unsigned short g_weaponAmmoSlotCapacity46[2] = { 0x0002, 0x004B };
 #endif

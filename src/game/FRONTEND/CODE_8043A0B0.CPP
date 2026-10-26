@@ -287,7 +287,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
 #include "gbi.h"
 extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
-extern void func_8041C7F4_de(struct ResultsPlayerPanel *);
+extern void Frontend_DrawModelPreview(struct ResultsPlayerPanel *);
 extern s32 Frontend_GetModelRecordCount(char *);
 #if defined(VERSION_DE)
 extern void func_804397F0_auto(char *);
@@ -310,7 +310,7 @@ s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
                 gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
-                func_8041C7F4_de(&D_800E59E0->panels[i]);
+                Frontend_DrawModelPreview(&D_800E59E0->panels[i]);
             }
         }
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);

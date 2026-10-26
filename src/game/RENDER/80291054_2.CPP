@@ -45,7 +45,7 @@ void Render_InitFrameRing(RenderState *state) {
     }
     i = 0;
     func_80244D70_de();
-    func_8044DCC0_de();
+    Ovlgame_InitParticleQuad();
     func_8044DC60_de(&state->settings);
     count = D_800DE850;
     state->field26DD0 = 0;

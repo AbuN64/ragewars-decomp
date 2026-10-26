@@ -4538,7 +4538,7 @@ segments:
       - [0xDE050, rodata, data_800C/D_8041BE90_E2080]
       - [0xDE053, data, data_800C/rodata_unresolved_800DD453]
       - [0xDE060, rodata, data_800C/literals_Frontend_SelectMatchingPreviewModel]
-      - [0xDE088, rodata, data_800C/literals_func_8041C7F4_de]
+      - [0xDE088, rodata, data_800C/literals_Frontend_DrawModelPreview]
       - [0xDE090, rodata, data_800C/literals_Frontend_InitModelPreview]
       - [0xDE098, data, data_800C/rodata_unresolved_800DD498]
       - [0xDE0A0, rodata, data_800C/literals_func_8041D134_de]

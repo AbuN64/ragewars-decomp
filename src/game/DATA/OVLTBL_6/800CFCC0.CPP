@@ -19,7 +19,5 @@ unsigned short D_blob_827e6949fb532d0a8ce9[] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_src_aca6c9a3[1] = {
-    0x00010064,
-};
+unsigned short g_weaponAmmoSlotCapacity55[2] = { 0x0001, 0x0064 };
 #endif
