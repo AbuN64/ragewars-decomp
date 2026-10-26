@@ -6,6 +6,10 @@
 #include "COMMON/LABEL.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/REQUESTRECAT10.H"
+#include "FRONTEND/8041DF04_3.H"
 
 /* Enables mode 1 through func_802A23C4_de, places the menu model at (17, -10, -50) with uniform scale 0.14, zero rotation and a (0, 5, 0) offset, then issues request 0xE78 through Render_PlayFlatSound; returns zero. */
 
@@ -72,3 +76,89 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
     }
     return 0;
 }
+
+/* On event 3 with value 0, calls MarkMenuEventHandled, hands func_8041DB30_de the cursor word the hub
+   names unk268 at +0x10C of the menu block D_800E3590 points to, calls Frontend_ShowUnlockedEntries with 0x6E,
+   func_8041D6A8_de and func_8041D960_de, and clears the hub's focus word at +0x0EC. Returns zero. */
+
+extern void MarkMenuEventHandled();
+
+extern void Frontend_ShowUnlockedEntries(s32);
+
+s32 func_8041DDF4_de(void *first, void *second, u32 event, s32 value) {
+    if ((event >> 16) == 3 && value == 0) {
+        MarkMenuEventHandled();
+        Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
+        Frontend_ShowUnlockedEntries(0x6E);
+        func_8041D6A8_de();
+        func_8041D960_de();
+        D_800E3590->focus = 0;
+    }
+    return 0;
+}
+
+s32 func_8041DE5C_de(void) {
+    MarkMenuEventHandled();
+    D_800E3590->unk216 = 5;
+    D_800E3590->unk220 = 4;
+    return 0;
+}
+
+/* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
+
+s32 func_8041DE94_de(void) {
+    MarkMenuEventHandled();
+    return 0;
+}
+
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3724, an actor kind at D_800E3728 and a handler at D_800E372C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+
+
+
+extern s32 D_800E3724;
+extern s32 D_800E3728;
+extern Handler802A2B50 D_800E372C;
+
+s32 func_8041DEB4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    char *entry;
+    s32 offset;
+    s32 wildcard;
+    s32 actor_kind;
+    s32 table_kind;
+
+    if (D_800E372C != 0) {
+        wildcard = 0x7530;
+        entry = (char *)&D_800E372C;
+        offset = 0;
+        do {
+            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3724)) + offset))->field_0 == arg1) {
+                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
+                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3728)) + offset))->field_0;
+                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
+                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                }
+            }
+            entry += 0xC;
+            offset += 0xC;
+        } while (*(Handler802A2B50 *)entry != 0);
+    }
+    return 0;
+}
+
+#if defined(VERSION_US)
+unsigned int func_8041DFB4_us_padding_181FB4[3] = {
+    0x65717568, 0x10000094, 0x10000B00,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int func_8041E394_eu_x_padding_10E394[3] = {
+    0xAFB00010, 0x0C0A6623, 0x241000FF,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int func_8041E394_eu_padding_194394[3] = {
+    0xAFA20014, 0x8FA2005C, 0x4600A306,
+};
+#endif

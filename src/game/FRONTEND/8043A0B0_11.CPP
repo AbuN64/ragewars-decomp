@@ -13,6 +13,7 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
+
 extern FourPlayerResultsScreen *D_800E59E0;
 
 /* Clears the 22 owned bytes at 0x4C of each of the 4 player records (150 bytes apart) in
@@ -350,3 +351,15 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
                          a * 9.0f, b * 4.0f, 1);
     }
 }
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800E9864[3] = {
+    0x000000FF, 0x00000000, 0x00000010,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800DE024[3] = {
+    0x3FD85689, 0x3FCF914C, 0x3FD85689,
+};
+#endif
