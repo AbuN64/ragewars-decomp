@@ -2545,3 +2545,4 @@ D_auto_rodata_unresolved_800CE410_unclaimed_CF230 = 0x800C93EC;
 literals_Ovlgame_InitActorHudState = 0x800C2300; // rom:0xC2F00 size:0x18
 literals_func_8026F368_de = 0x800C46D0; // rom:0xC52D0 size:0x1C
 literals_Text_DrawTileGrid = 0x800C61C0; // rom:0xC6DC0 size:0x30
+literals_Pickup_ApplySpecialPickup = 0x800C6260; // rom:0xC6E60 size:0x54

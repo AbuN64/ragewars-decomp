@@ -12,21 +12,6 @@
 #include "SYSTEM_2/8025E280.H"
 #include "COMMON/CHANNEL.H"
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("span_1000", Pickup_ApplySpecialPickup);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-extern float D_800C6264;
-extern float D_800C626C;
-extern float D_800C6278_de;
-extern float D_800C62A0;
-extern float D_800C62A8;
-extern float D_800C62B0;
 extern u8 *D_800D30AC[];
 extern u8 *D_800D3128[];
 extern u8 *D_800D312C[];
@@ -197,53 +182,23 @@ struct SharedRecAt92V2 {
 
 
 
-typedef struct Shared_PlayerListMenuGlobals Shared_PlayerListMenuGlobals;
-struct Shared_PlayerListMenuGlobals {
-    void * players; /* +0x0: src/Pickup_ApplySpecialPickup.c */
-    u8 padToMenu[6204]; /* +0x4: src/Pickup_ApplySpecialPickup.c */
-    SharedRecAt84 menu; /* +0x1840: src/Pickup_ApplySpecialPickup.c */
-};
-
-
-
-typedef struct Shared_PlayerMenuGlobals Shared_PlayerMenuGlobals;
-struct Shared_PlayerMenuGlobals {
-    s32 count; /* +0x0: src/Pickup_ApplySpecialPickup.c */
-    u8 padToPlayers[20]; /* +0x4: src/Pickup_ApplySpecialPickup.c */
-    Shared_PlayerListMenuGlobals list; /* +0x18: src/Pickup_ApplySpecialPickup.c */
-};
-
-
-
+/* D_80140F84 is the game root: the player records, the list of active players, then the match globals
+   D_80145088 at +0x44, whose modes block D_801468A0 (+0x185C) the pickup commands write. */
 typedef struct Shared_FullPlayerMenuGlobals Shared_FullPlayerMenuGlobals;
 struct Shared_FullPlayerMenuGlobals {
-    struct SharedRecAt16E0V1 * entries; /* +0x0: src/Pickup_ApplySpecialPickup.c */
-    Shared_PlayerMenuGlobals tail; /* +0x4: src/Pickup_ApplySpecialPickup.c */
+    struct SharedRecAt16E0V1 * entries; /* +0x0: player records */
+    s32 count; /* +0x4 */
+    u8 pad8[0x14];
+    struct SharedRecAt16E0V1 * players; /* +0x1C: active players, linked through unk16E0 */
+    u8 pad20[0x24];
+    union {
+        MenuMatchGlobals match; /* +0x44: D_80145088 */
+        struct {
+            u8 pad0[0x1818];
+            SharedRecAt84 modes; /* +0x185C: D_801468A0 */
+        } view;
+    } game;
 };
-
-/* The values Pickup_ApplySpecialPickup loads by address:
- * 0x800CB3F0 = 105.0 (float, D_800C6260 in this cartridge's tables)
- * 0x800CB3F4 = 195.0 (float, D_800C6264 in this cartridge's tables)
- * 0x800CB3F8 = 300.0 (float, D_800CB3F8 in this cartridge's tables)
- * 0x800CB3FC = 255.0 (float, D_800C626C in this cartridge's tables)
- * 0x800CB400 = 225.0 (float, D_800C6270_de in this cartridge's tables)
- * 0x800CB404 = 150.0 (float, D_800C6274_de in this cartridge's tables)
- * 0x800CB408 = 255.0 (float, D_800C6278_de in this cartridge's tables)
- * 0x800CB40C = 150.0 (float, D_800C627C_de in this cartridge's tables)
- * 0x800CB410 = 255.0 (float, D_800CB410 in this cartridge's tables)
- * 0x800CB414 = 180.0 (float, D_800CB414 in this cartridge's tables)
- * 0x800CB418 = 225.0 (float, D_800C6288_de in this cartridge's tables)
- * 0x800CB41C = 225.0 (float, D_800C628C_de in this cartridge's tables)
- * 0x800CB420 = 450.0 (float, D_800C6290_de in this cartridge's tables)
- * 0x800CB424 = 270.0 (float, D_800C6294_de in this cartridge's tables)
- * 0x800CB428 = 255.0 (float, D_800C6298 in this cartridge's tables)
- * 0x800CB42C = 180.0 (float, D_800C629C in this cartridge's tables)
- * 0x800CB430 = 255.0 (float, D_800C62A0 in this cartridge's tables)
- * 0x800CB434 = 300.0 (float, D_800C62A4 in this cartridge's tables)
- * 0x800CB438 = 255.0 (float, D_800C62A8 in this cartridge's tables)
- * 0x800CB43C = 300.0 (float, D_800C62AC in this cartridge's tables)
- * 0x800CB440 = 255.0 (float, D_800C62B0 in this cartridge's tables)
- */
 void Player_IncrementLevelProgress(void *, int);
 
 
@@ -265,7 +220,6 @@ extern Shared_FullPlayerMenuGlobals D_80140F84;
 
 
 
-extern f32 D_800CB410;
 
 
 
@@ -309,11 +263,22 @@ typedef SharedRecV2 ObjRecV7;
 typedef SharedRecAt16E0V1 ObjRecV3;
 typedef SharedRecAt92V2 ObjRecV8;
 
-typedef Shared_PlayerListMenuGlobals PlayerListMenuGlobals;
-typedef Shared_PlayerMenuGlobals PlayerMenuGlobals;
 typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
 
-/* Handles player menu commands and updates selection and game mode state. */
+/* PAL builds declare the match globals inside the game root, so their message context and language
+   come from D_80140F84; the other builds post through D_80145088 with the one language. */
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#define PICKUP_CONTEXT (&D_80140F84.game.match)
+#define PICKUP_TEXT(table) ((table)[PICKUP_CONTEXT->settings.language])
+#else
+#define PICKUP_CONTEXT (&D_80145088)
+#define PICKUP_TEXT(table) ((table)[0])
+#endif
+/* Special pickup handler; arg1 is the pickup row (text per language, id, sound, event). The id selects the effect:
+   match-mode switches (0xBD6, 0xBD7, which tells every other player), a random reaction (0xBD8: one of 13 flags
+   with its tint, duration and message), level progress (0x1389, 0x138A) and health or ammunition bonuses
+   (0x1398..0x13C1). A handled pickup then flashes the view, posts the row text, plays its sound and raises its
+   event. Returns 1 when handled. */
 
 s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     f32 temp_f20;
@@ -336,7 +301,6 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     s32 var_s3;
     s32 var_s4;
     u8 **temp_s0_2;
-    u8 *var_a2;
     u8 temp_a0;
     void *temp_a1;
     void *temp_a1_10;
@@ -403,7 +367,7 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
 case_BD6:
                 temp_v1_2 = arg0->unk5D8;
                 temp_a0 = temp_v1_2->unk8F;
-                if ((temp_a0 == 1) && ((commandMenuData = &D_80140F84.tail.list.menu)->unk54 != 0)) {
+                if ((temp_a0 == 1) && ((commandMenuData = &D_80140F84.game.view.modes)->unk54 != 0)) {
                     temp_v1_2->unk8F = 0U;
                     arg0->unk5D8->unk90 = temp_a0;
                     commandMenuData->unk74 = 2;
@@ -416,24 +380,34 @@ case_BD6:
                 goto command_done;
 case_BD7:
             {
-                ObjRecV12 *listMenuData = &D_80140F84.tail.list.menu;
+                ObjRecV12 *listMenuData = &D_80140F84.game.view.modes;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                MenuSettings *settings;
+                MenuMatchGlobals *game;
+#endif
                 listMenuData->unk84 = 0;
                 listMenuData->unk80 = 1;
                 arg0->unk5D8->unk8F = 1U;
-                temp_s0 = D_80140F84.tail.list.players;
+                temp_s0 = D_80140F84.players;
                 var_s4 = 1;
                 if (temp_s0 != 0) {
-loop_37:
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                    game = PICKUP_CONTEXT;
+                    settings = &game->settings;
+#endif
+                    do {
                     if (temp_s0 != arg0) {
                         temp_a1 = temp_s0->unk5DC;
                         if (temp_a1 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1, D_800D30AC[MENU_LANGUAGE]);
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                            Camera_PostScreenMessage(game, temp_a1, D_800D30AC[settings->language]);
+#else
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1, PICKUP_TEXT(D_800D30AC));
+#endif
                         }
                     }
                     temp_s0 = temp_s0->unk16E0;
-                    if (temp_s0 != 0) {
-                        goto loop_37;
-                    }
+                    } while (temp_s0 != 0);
                 }
                 goto command_done;
             }
@@ -450,7 +424,7 @@ case_BD8:
                     arg0->unk11E4 = temp_f20;
                     arg0->unk13E0 = 0;
                     if (temp_a1_2 != 0) {
-                        Camera_PostScreenMessage(&D_80145088, temp_a1_2, D_800D31B8[MENU_LANGUAGE]);
+                        Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_2, PICKUP_TEXT(D_800D31B8));
                     }
                 } else {
                     temp_fp = arg0->unk122C & 0x6000;
@@ -460,18 +434,18 @@ case_BD8:
                         arg0->unk1238 = -1;
                         arg0->unk1230 = temp_f20;
                     } else {
-                        arg0->unk1230 = D_800C6260;
+                        arg0->unk1230 = 105.0f;
                     }
                     temp_v1_3 = arg0->unk122C;
                     switch (temp_v1_3) {            /* switch 3; irregular */
                     case 0x1:                       /* switch 3 */
                         func_8025E11C_de(0x15E);
                         var_s1 = 0;
-                        if (var_s1 < D_80140F84.tail.count) {
+                        if (var_s1 < D_80140F84.count) {
                             menuGlobals = &D_80140F84;
                             loopEntries = &menuGlobals->entries;
-                            loopMenuData = &menuGlobals->tail.list.menu;
-                            loopBonus = D_800C6264;
+                            loopMenuData = &menuGlobals->game.view.modes;
+                            loopBonus = 195.0f;
                             do {
                                 temp_s0 = &(*loopEntries)[var_s1];
                                 if ((temp_s0 != 0) && (temp_s0 != arg0) && (((loopMenuData->unk24) == 0) || (temp_s0->unk5D8->unk92 != arg0->unk5D8->unk92))) {
@@ -480,136 +454,130 @@ case_BD8:
                                 }
                                 temp_a1_3 = temp_s0->unk5DC;
                                 if (temp_a1_3 != 0) {
-                                    Camera_PostScreenMessage(&D_80145088, temp_a1_3, D_800D3128[MENU_LANGUAGE]);
+                                    Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_3, PICKUP_TEXT(D_800D3128));
                                 }
-                            } while (++var_s1 < D_80140F84.tail.count);
+                            } while (++var_s1 < D_80140F84.count);
                         }
                         break;
                     case 0x2:                       /* switch 3 */
-                        arg0->unk1230 = D_800CB3F8;
+                        arg0->unk1230 = 300.0f;
                         func_8025E11C_de(0x164);
                         temp_a1_4 = arg0->unk5DC;
                         if (temp_a1_4 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_4, D_800D312C[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_4, PICKUP_TEXT(D_800D312C));
                         }
-                        temp_alpha = D_800C626C;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123C = 0xFF;
                         goto block_115;
                     case 0x4:                       /* switch 3 */
-                        arg0->unk1230 = D_800C6270_de;
+                        arg0->unk1230 = 225.0f;
                         func_8025E11C_de(0x15F);
                         temp_a1_11 = arg0->unk5DC;
                         if (temp_a1_11 != 0) {
-                            var_a2 = D_800D3130[MENU_LANGUAGE];
-block_119:
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_11, var_a2);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3130));
                         }
                         break;
                     case 0x8:                       /* switch 3 */
-                        arg0->unk1230 = D_800C6274_de;
+                        arg0->unk1230 = 150.0f;
                         func_8025E11C_de(0x165);
                         temp_a1_5 = arg0->unk5DC;
                         if (temp_a1_5 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_5, D_800D3134[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_5, PICKUP_TEXT(D_800D3134));
                         }
-                        temp_alpha = D_800C6278_de;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123C = 0xFF;
 block_114:
                         arg0->unk123D = 0xFF;
                         goto block_115;
                     case 0x10:                      /* switch 3 */
-                        arg0->unk1230 = D_800C627C_de;
+                        arg0->unk1230 = 150.0f;
                         func_8025E11C_de(0x160);
                         temp_a1_6 = arg0->unk5DC;
                         if (temp_a1_6 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_6, D_800D3138[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_6, PICKUP_TEXT(D_800D3138));
                         }
-                        temp_alpha = D_800CB410;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123C = 0xFF;
                         arg0->unk123E = 0xFF;
                         goto block_115;
                     case 0x20:                      /* switch 3 */
-                        arg0->unk1230 = D_800CB414;
+                        arg0->unk1230 = 180.0f;
                         func_8025E11C_de(0x166);
                         temp_a1_11 = arg0->unk5DC;
                         if (temp_a1_11 != 0) {
-                            var_a2 = D_800D313C[MENU_LANGUAGE];
-                            goto block_119;
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D313C));
                         }
                         break;
                     case 0x40:                      /* switch 3 */
-                        arg0->unk1230 = D_800C6288_de;
+                        arg0->unk1230 = 225.0f;
                         func_8025E11C_de(0x161);
                         temp_a1_11 = arg0->unk5DC;
                         if (temp_a1_11 != 0) {
-                            var_a2 = D_800D3140_de[MENU_LANGUAGE];
-                            goto block_119;
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3140_de));
                         }
                         break;
                     case 0x80:                      /* switch 3 */
-                        arg0->unk1230 = D_800C628C_de;
+                        arg0->unk1230 = 225.0f;
                         func_8025E11C_de(0x169);
                         temp_a1_11 = arg0->unk5DC;
                         if (temp_a1_11 != 0) {
-                            var_a2 = D_800D3144[MENU_LANGUAGE];
-                            goto block_119;
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3144));
                         }
                         break;
                     case 0x100:                     /* switch 3 */
-                        arg0->unk1230 = D_800C6290_de;
+                        arg0->unk1230 = 450.0f;
                         func_8025E11C_de(0x162);
                         temp_a1_11 = arg0->unk5DC;
                         if (temp_a1_11 != 0) {
-                            var_a2 = D_800D3148[MENU_LANGUAGE];
-                            goto block_119;
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3148));
                         }
                         break;
                     case 0x200:                     /* switch 3 */
-                        arg0->unk1230 = D_800C6294_de;
+                        arg0->unk1230 = 270.0f;
                         func_8025E11C_de(0x16A);
                         temp_a1_7 = arg0->unk5DC;
                         if (temp_a1_7 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_7, D_800D3150[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_7, PICKUP_TEXT(D_800D3150));
                         }
-                        temp_alpha = D_800C6298;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk1240 = temp_alpha;
                         goto block_116;
                     case 0x400:                     /* switch 3 */
-                        arg0->unk1230 = D_800C629C;
+                        arg0->unk1230 = 180.0f;
                         func_8025E11C_de(0x163);
                         temp_a1_8 = arg0->unk5DC;
                         if (temp_a1_8 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_8, D_800D3154[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_8, PICKUP_TEXT(D_800D3154));
                         }
-                        temp_alpha = D_800C62A0;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123C = 0xFF;
                         arg0->unk123D = 0xFF;
                         arg0->unk123E = 0xFF;
                         goto block_115;
                     case 0x800:                     /* switch 3 */
-                        arg0->unk1230 = D_800C62A4;
+                        arg0->unk1230 = 300.0f;
                         func_8025E11C_de(0x168);
                         temp_a1_9 = arg0->unk5DC;
                         if (temp_a1_9 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_9, D_800D3158[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_9, PICKUP_TEXT(D_800D3158));
                         }
-                        temp_alpha = D_800C62A8;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123E = 0xFF;
                         goto block_115;
                     case 0x1000:                    /* switch 3 */
-                        arg0->unk1230 = D_800C62AC;
+                        arg0->unk1230 = 300.0f;
                         func_8025E11C_de(0x15F);
                         temp_a1_10 = arg0->unk5DC;
                         if (temp_a1_10 != 0) {
-                            Camera_PostScreenMessage(&D_80145088, temp_a1_10, D_800D315C[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_10, PICKUP_TEXT(D_800D315C));
                         }
-                        temp_alpha = D_800C62B0;
+                        temp_alpha = 255.0f;
                         temp_duration = arg0->unk1230;
                         arg0->unk123D = 0xFF;
                         goto block_115;
@@ -625,7 +593,7 @@ block_116:
 block_default:
                     temp_a1_11 = arg0->unk5DC;
                     if (temp_a1_11 != 0) {
-                        Camera_PostScreenMessage(&D_80145088, temp_a1_11, D_800D3160[MENU_LANGUAGE]);
+                        Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3160));
                     }
 block_after_alpha:
                     arg0->unk122C = (s32) (arg0->unk122C | temp_fp);
@@ -685,7 +653,7 @@ command_done:
         if (arg0->unk5DC != 0) {
             Sky_StartFade(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (temp_s0_2 != 0) {
-                Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, *temp_s0_2);
+                Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, temp_s0_2[MENU_LANGUAGE]);
             }
         }
         if (temp_s1 != 0) {
@@ -697,7 +665,6 @@ command_done:
     }
     return var_s4;
 }
-#endif
 
 /* A D_800D31D0 powerup row (0x18 bytes, three rows): the item entry head shared with the other item tables,
    the action slot the powerup fills, the ammunition it grants and its pickup handler. */

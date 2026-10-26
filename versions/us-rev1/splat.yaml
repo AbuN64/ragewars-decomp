@@ -4276,7 +4276,7 @@ segments:
       - [0xCBF88, rodata, data_800C/literals_OnScreen_InitMover]
       - [0xCBFD0, rodata, data_800C/literals_Pickup_DrawIntensityTileGrid]
       - [0xCBFEC, data, data_800C/s_mattText]
-      - [0xCBFF0, rodata, data_800C/D_auto_src_rw_pool_802ABBDC_CBFF0_us_rev1]
+      - [0xCBFF0, rodata, data_800C/literals_Pickup_ApplySpecialPickup]
       - [0xCC044, data, data_800C/D_blob_ada4811f7dd87eb28c14]
       - [0xCC048, rodata, data_800C/literals_Pickup_ApplyPowerup]
       - [0xCC070, rodata, data_800C/D_blob_3b03b810626fcc494f4f]

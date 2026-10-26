@@ -4142,7 +4142,7 @@ segments:
       - [0xC6D28, rodata, data_800C/literals_OnScreen_InitMover]
       - [0xC6D70, rodata, data_800C/literals_Pickup_DrawIntensityTileGrid]
       - [0xC6D8C, data, data_800C/rodata_unresolved_800C618C]
-      - [0xC6D90, rodata, data_800C/data_func_802ABBDC_de_800C6190]
+      - [0xC6D90, rodata, data_800C/literals_Pickup_ApplySpecialPickup]
       - [0xC6DE4, rodata, data_800C/D_auto_rodata_unresolved_800C61E4]
       - [0xC6DE8, rodata, data_800C/literals_Pickup_ApplyPowerup]
       - [0xC6E10, rodata, data_800C/D_802AD1B4_CC070]
