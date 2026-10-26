@@ -20,15 +20,13 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-extern OSTask *func_802B9D90_de(OSTask *arg0);
-
 OSTask *func_802B9D90_de(OSTask *intp);
+
 
 extern void func_802BD280_de(OSTask *, s32);
 
 extern s32 __osSpDeviceBusy(void);
 
-extern OSTask *func_802B9D90_de(OSTask *intp);
 
 OSTask *func_802B9D90_de(OSTask *intp)
 {
@@ -72,4 +70,11 @@ void func_802B9E78_de(OSTask *intp) {
     do {
         result = func_802B9FD0_de(1, 0x04001000, (s32)block->t.ucode_boot, block->t.ucode_boot_size);
     } while (result == -1);
+}
+
+
+void osSpTaskStartGo(void) {
+    do {
+    } while (__osSpDeviceBusy() != 0);
+    func_802BA100_de(0x125U);
 }

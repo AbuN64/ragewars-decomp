@@ -6,9 +6,6 @@
 #include "sdk/AUDIO_2/802BF400.H"
 #include "sdk/os.h"
 
-
-
-
 extern Field_void_4 *D_800D8440;
 
 void *osViGetCurrentFramebuffer(void) {

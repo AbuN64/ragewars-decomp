@@ -56,7 +56,6 @@
 #include "COMMON/OBJECTRECAT28.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/OBJB.H"
-#include "TYPES.H"
 #include "COMMON/EXTERNS_3.H"
 #include "sdk/libultra/io/pirawread.H"
 #include "AUDIO_3/802BEE60.H"
@@ -166,3 +165,5 @@ unsigned int rodata_unresolved_802BB08C[1] = {
     0x7265656E,
 };
 #endif
+
+const char D_d1_1d7305bb329aa011[16] = "io/sirawwrite.c";
