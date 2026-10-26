@@ -56,8 +56,6 @@ void Libsn_CopyPortBytes(s32 address, s32 port, s32 count) {
 #include "IO/DEBUG_MEMORY.H"
 extern void Libsn_EnumerateMemoryRanges(void);
 extern u8 D_8F0F3130[];
-extern void Libsn_FillPortBytes(s32, s32, u32);
-extern void Libsn_CopyPortBytes(s32, s32, s32);
 extern void Libsn_WritePortBuffer(u32, u32, u32);
 extern void Libsn_ReadPortBuffer(u32, u32, u32);
 extern void Libsn_CopyPortToWordMemory(u32, u32, u32);

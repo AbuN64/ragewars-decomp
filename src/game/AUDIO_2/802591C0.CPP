@@ -49,7 +49,6 @@ extern void Audio_EnableMusicGainOverride(Track *a);
 
 extern void Audio_DisableMusicGainOverride(Track *a);
 
-extern void Audio_ClearVoiceFlags(int a);
 
 /* Picks a weighted random entry from the range func_80265550_de finds for an id in a scene's table: -1 when
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs

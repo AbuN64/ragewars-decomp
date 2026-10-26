@@ -7,7 +7,6 @@
 extern s32 func_8041A280_de(s32, s32);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
-extern void func_8041B110_de(s32);
 extern s32 func_80419E54_de(s32, s32);
 
 s32 func_80438F0C_de(void) {

@@ -324,7 +324,6 @@ extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
-extern void Sky_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;

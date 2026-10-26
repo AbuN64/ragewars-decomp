@@ -20,7 +20,6 @@
 
 
 extern void MarkMenuEventHandled();
-extern void func_8043577C_de(s32);
 extern s32 func_804355B4_de();
 extern void PAKInterface_RelabelSlotRows(s32);
 extern void PAKInterface_UpdatePlayerControlRows(s32);

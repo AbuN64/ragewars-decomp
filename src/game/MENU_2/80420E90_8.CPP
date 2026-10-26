@@ -18,7 +18,6 @@ extern s32 D_801462C8;
 
 /* The hub spells the allocator, the window item lookup and the list builder; these helpers stay. */
 extern void *func_8041A280_de(s32, s32);
-extern void func_8041B110_de(s32);
 extern void *func_8041ABC0_de(s32, s32);
 extern void SmpButton_AppendListText(void *, void *);
 extern void SmpButton_SelectListEntry(void *, s32);

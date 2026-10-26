@@ -13,7 +13,6 @@
 
 extern s32 D_80141008;
 extern void MultiplyQuaternions(void*,void*,void*);
-extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis*);
 extern void GraphU64_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */

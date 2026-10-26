@@ -32,7 +32,6 @@ extern float D_800DDF58;
 extern float D_800DDF50_de;
 extern float D_800DDF58;
 #endif
-extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
 extern s32 func_802A1934_de(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);

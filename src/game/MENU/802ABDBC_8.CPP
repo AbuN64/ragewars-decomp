@@ -188,7 +188,6 @@ extern DraftWeaponAB97C *D_800D052C[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void *Camera_PostScreenMessage(void *, void *, u8 *);
 extern s32 Player_AddAmmo(void *, s32, s32), SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-extern void Sky_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
 
 s32 Pickup_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
 {

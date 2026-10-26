@@ -83,7 +83,6 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
 
 extern void MarkMenuEventHandled();
 
-extern void Frontend_ShowUnlockedEntries(s32);
 
 s32 func_8041DDF4_de(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {

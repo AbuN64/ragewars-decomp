@@ -42,7 +42,6 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
 
 
 
-extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
 extern s32 Frontend_GetBankTileTexture(s32 page, s32 a, s32 b);
 
@@ -381,7 +380,6 @@ typedef struct DraftWidget {
 } DraftWidget;
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
-extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
 extern s32 func_80299838_de(s32);
 extern void func_802A18FC_de(void);

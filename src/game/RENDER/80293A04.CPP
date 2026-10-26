@@ -158,12 +158,10 @@ void func_80293C34_de(GameSession *world) {
 
 #include "COMMON/SESSIONHANDLERROW.H"
 extern f32 D_800C54B8_de, D_800C54BC_de;
-extern void func_80286080_de(void *);
 extern void func_802394B4_de(void *);
 extern void func_80298368_de(s32);
 extern void SetN64_BeginModeTransition(GameSession *, s32);
 extern void func_80293394_de(GameSession *);
-extern void func_802AA7A4_de(void *);
 
 void func_80293CE4_de(GameSession *session) {
     CGameStatus *counters = &D_801462C8.counters;

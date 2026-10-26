@@ -42,7 +42,6 @@ extern void func_802A2360_de(void);
 extern s32 func_80419E54_de(s32, s32);
 extern s32 func_8041A280_de(s32, s32);
 extern void func_8041A47C_de(s32);
-extern void func_8041B110_de(s32);
 extern struct ScreenState *D_800E4450;
 
 /* Builds the screen state D_800E4450: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */

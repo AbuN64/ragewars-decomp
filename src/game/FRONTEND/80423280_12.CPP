@@ -148,7 +148,6 @@ extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
 
 
-extern void Frontend_RequestScreenMode(s32);
 
 extern void Items_ResetActorPools(void *, s32);
 

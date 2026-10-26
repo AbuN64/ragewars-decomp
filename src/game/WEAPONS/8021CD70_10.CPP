@@ -262,7 +262,6 @@ typedef struct SurfaceView {
     u32 flags; /* 0x50 */
 } SurfaceView;
 extern void *InstHdr_FindActorModelEntry(void *);
-extern void GraphU64_EaseValueToward(f32 *, f32, f32);
 /* Smooths a player's view: the turn and look rates are the tuning table's rates damped by the state
    at 0x7EC and scaled by the profile's yaw and pitch sensitivities (128 = centre); control mode 1
    locks the look rate at 0.5 and mode 0 without the pitch option at 0.8. Unless the body stands on

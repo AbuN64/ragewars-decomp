@@ -10,7 +10,6 @@
 
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
-extern void func_8026EE20_de(void *, s32, void *);
 extern void func_80262480_de(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
 

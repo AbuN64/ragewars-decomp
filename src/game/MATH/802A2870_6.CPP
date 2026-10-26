@@ -6,7 +6,6 @@
 #include "SCENE/802508E0_13.H"
 
 extern void func_802A1D7C_de(void *);
-extern void func_802A1D14_de(void *);
 
 /* Counts ticks while the controller state is 0 or 1; after ten, steps the list selection backward (state 0) or forward (state 1). Returns 0. */
 s32 TickSelectionRepeat(void *arg0) {

@@ -189,7 +189,6 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
 extern s32 Audio_GetSpatialPanMode(OwnerCode8025A3EC *);
 extern s16 func_80259B10_de(void *, GameplayCamera *);
 
-extern void func_802B2F00_de(void *, s16);
 extern void alSndpSetPan(void *, s32);
 
 static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {

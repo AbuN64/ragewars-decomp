@@ -122,7 +122,6 @@ extern char D_800CBC90;
 
 extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
-extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *arg0, f32 *arg1);

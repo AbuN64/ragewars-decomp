@@ -74,8 +74,6 @@ extern s32 func_802567A4_de(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
 extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
 extern s32 osStartThread(void *);
-extern void func_80255CA0_de(IntrusiveList *, s32, s32);
-extern s32 func_80255D14_de(IntrusiveList *, void *);
 extern void func_802552E0_de(s32);
 extern s32 D_002524B0;
 extern s32 D_800CD8BC;

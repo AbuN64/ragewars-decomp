@@ -10,7 +10,6 @@
 extern void func_802B9C14_de(void);
 extern void func_802B9C80_de(void);
 extern void func_8044799C_de(u8);
-extern void func_80447A38_de(u8 *, EntryRecAt3 *);
 
 s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
     EntryRecAt3 data[4];

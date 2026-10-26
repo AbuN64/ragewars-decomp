@@ -33,7 +33,6 @@ extern void func_80425D14_de(s32);
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 func_80425014_de(s32);
-extern void func_804259E0_de(s32);
 extern s32 func_80425674_de(s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void func_802A0C08_de(char *, char *, ...);

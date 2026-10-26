@@ -7,7 +7,6 @@
 extern u8 D_800F3452;
 extern s32 Libsn_DisableInterrupts(void);
 extern void func_802022E0_de(void);
-extern void Libsn_WritePortWord(s32, s32);
 
 void Libsn_InitializeHostMemoryAccess(void) {
     s32 saved;

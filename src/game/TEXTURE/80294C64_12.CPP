@@ -135,7 +135,6 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
 extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
 extern u32 *g_displayListCursor;
 extern void Cache_MarkResourceInUse(s32);
-extern void *SetN64_GetPackSection(void *, s32);
 extern u8 D_800CBD50_de[];
 #define DLW(a, b) do { g_displayListCursor[0] = (u32)(a); g_displayListCursor[1] = (u32)(b); g_displayListCursor += 2; } while (0)
 /* Texture state setter (the gDP texture-load sequence of a texture-header object): looks up the header, bitmap and palette
