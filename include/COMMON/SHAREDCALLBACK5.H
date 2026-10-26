@@ -1,6 +1,7 @@
 #ifndef COMMON_SHAREDCALLBACK5_H
 #define COMMON_SHAREDCALLBACK5_H
 #include "TYPES.H"
+#include "COMMON/BRAIN.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -46,8 +47,7 @@ struct Brain_func_80209308_de {
 
 
 
-struct Brain;
-typedef struct Brain Brain;
+
 
 
 struct Body;
@@ -79,19 +79,7 @@ struct Behaviour {
     void (*update)(SharedPlayer *, s32);
 };
 struct Behaviour;
-struct Brain;
-struct Brain {
-    SharedPlayer *player;
-    s32 start;
-    s32 route;
-    char padC[0x20C];
-    struct Behaviour *behaviour;
-    char pad21C[0x20];
-    s32 w23C;
-    s32 w240;
-    char pad244[0xE0];
-    s32 cooldown;
-};
+
 
 
 

@@ -2,6 +2,7 @@
 /* Runs a computer rider's close attack state: refreshes its view, re-checks line of sight every fourth frame, backs off
    when its target is out of its layer or too close, re-rolls its strafe pattern and steers toward the target. */
 #include "TYPES.H"
+#include "COMMON/BRAIN.H"
 
 #include "COMMON/VECTOR3.H"
 
@@ -24,25 +25,7 @@ typedef struct Actor {
     struct Brain *brain;
 } Actor;
 
-typedef struct Brain {
-    Actor *player;
-    s32 route;
-    s32 w8,destination;
-    s32 node;
-    s32 w14;
-    char pad18[0x4C];
-    Actor *target;
-    char pad68[0x188];
-    f32 clearance[8];
-    char pad210[0x20];
-    s32 combat;
-    char pad234[0xA4];
-    s32 timer;
-    s32 pattern;
-    s32 distance;char pad2E4[0x34];
-    s32 frames;
-    s32 visible,fireTimer;
-} Brain;
+
 
 extern s32 D_800D297C;
 extern char D_8013B364[];
@@ -79,15 +62,15 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
         }
         brain->frames += 1;
         target = brain->target->self;
-        mine = brain->player->flags & 0x3000;
+        mine = ((Actor *)brain->player)->flags & 0x3000;
         theirs = (target->flags & 0x3000) != 0;
         if (mine && !theirs) {
             Nav_SetBehaviourState(brain, 12);
             return;
         }
-        route = target->brain->route;
+        route = target->brain->start;
         if (brain->visible != 0) {
-            if (GraphU64_GetSquaredDistance(&target->pos, &brain->player->pos) < 360000.0f) {
+            if (GraphU64_GetSquaredDistance(&target->pos, &((Actor *)brain->player)->pos) < 360000.0f) {
                 brain->combat = 3;
                 Nav_SetBehaviourState(brain, 7);
                 return;
@@ -103,31 +86,31 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
             Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
             pattern = brain->pattern;
             if (pattern == 0) {
-                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) - 1.5707964f);
-                player = brain->player;
+                dir = Nav_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) - 1.5707964f);
+                player = ((Actor *)brain->player);
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
-                    brain->player->strafe = -speed;
+                    ((Actor *)brain->player)->strafe = -speed;
                 } else {
                     goto halt;
                 }
             } else if (pattern == 1) {
-                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) + 1.5707964f);
-                player = brain->player;
+                dir = Nav_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) + 1.5707964f);
+                player = ((Actor *)brain->player);
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
                 if (brain->clearance[dir] < 100.0f) {
 halt:
-                    brain->player->strafe = 0.0f;
+                    ((Actor *)brain->player)->strafe = 0.0f;
                     brain->pattern = 2;
                 } else {
-                    brain->player->strafe = speed;
+                    ((Actor *)brain->player)->strafe = speed;
                 }
             } else {
-                brain->player->strafe = 0.0f;
+                ((Actor *)brain->player)->strafe = 0.0f;
             }
             brain->w14 = -1;
             Nav_DispatchActorBehavior(brain);
@@ -138,7 +121,7 @@ halt:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (Nav_GetRouteRelation(D_8013B364, brain->route, route) == 0) {
+            if (Nav_GetRouteRelation(D_8013B364, brain->start, route) == 0) {
                 Nav_SetBehaviourState(brain, 1);
             }
         }
