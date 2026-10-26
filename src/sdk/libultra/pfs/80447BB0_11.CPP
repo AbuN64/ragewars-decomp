@@ -9,7 +9,7 @@
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern void func_802B9C14_de(void);
 extern void func_802B9C80_de(void);
-extern void func_8044799C_de(u8);
+extern void __osPfsRequestData(u8);
 
 s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     EntryRecAt3 data[4];
@@ -22,7 +22,7 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     s32 retry = 3;
     func_802B9C14_de();
     do {
-        func_8044799C_de(0);
+        __osPfsRequestData(0);
         __osSiRawStartDma(1, &D_80154110);
         osRecvMesg(queue, &dummy, 1);
         ret = __osSiRawStartDma(0, &D_80154110);
@@ -63,7 +63,7 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 
 
 
-void func_8044799C_de(u8 cmd) {
+void __osPfsRequestData(u8 cmd) {
     u8 *ptr;
     __OSContRequesFormat requestformat;
     s32 i;

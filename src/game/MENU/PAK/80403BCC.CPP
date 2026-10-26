@@ -11,9 +11,9 @@
 #include "sdk/PFS/80447BB0_9.H"
 
 /* Refreshes the cached directory of the Controller Pak on channel ch: when the directory buffer
-   exists it reads the state of each of the 16 notes through osPfsFileState (func_80446A20_de),
+   exists it reads the state of each of the 16 notes through osPfsFileState (osPfsFileState),
    retrying a failure once and clearing the cached note when it does not exist (5), then reads the
-   free space through func_80446C60_de into the buffer on success and returns that result. */
+   free space through osPfsFreeBlocks into the buffer on success and returns that result. */
 
 
 
@@ -25,9 +25,9 @@ extern OSPfs D_8014D280[];
 
 extern PakDirectory *D_800E2854;
 
-extern s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state);
+extern s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state);
 
-extern s32 func_80446C60_de(OSPfs *pfs, s32 *free);
+extern s32 osPfsFreeBlocks(OSPfs *pfs, s32 *free);
 
 static inline void *pak27(s32 ch) {return ((u8 *)D_8014D280)+ch*0x68;}
 
@@ -48,7 +48,7 @@ extern s32 XPlus_UppercaseCharacter(s32 c);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
+extern s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
                          s32 size, s32 *file_no);
 
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
@@ -81,9 +81,9 @@ s32 Pak_RefreshNotes(s32 ch) {
 
     if (D_800E2854 != 0) {
         for (i = 0; i < 16; i++) {
-            result = func_80446A20_de(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
+            result = osPfsFileState(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
             if (result != 0 && result != 5) {
-                result = func_80446A20_de(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
+                result = osPfsFileState(&D_8014D280[ch], i, &D_800E2854[ch].notes[i]);
             }
             if (result == 5) {
                 D_800E2854[ch].notes[i].file_size = 0;
@@ -94,7 +94,7 @@ s32 Pak_RefreshNotes(s32 ch) {
             }
         }
     }
-    result = func_80446C60_de(&D_8014D280[ch], &free);
+    result = osPfsFreeBlocks(&D_8014D280[ch], &free);
     if (result == 0) {
         D_800E2854[ch].free = free;
     }
@@ -113,7 +113,7 @@ s32 Pak_UpdateStatus(s32 ch) {
     tries=0;
     do {
         pfs=pak27(ch);
-        result=func_80446F60_de(D_8010FC00,pfs,ch);
+        result=osPfsInitPak(D_8010FC00,pfs,ch);
         switch(result) {
         case 0: case 2:
             D_80153500[ch]=-5;
@@ -168,7 +168,7 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
 
 s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                   u8 *company, u8 *code) {
-    extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name);
+    extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name);
     extern s32 Pak_UpdateStatus(s32 ch);
     s32 result;
     u8 name[16];
@@ -193,7 +193,7 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
         pfs = &D_8014D280[ch];
         company_code = (company[0] << 8) | company[1];
         game_code = (code[0] << 24) | (code[1] << 16) | (code[2] << 8) | code[3];
-        result = func_80445F80_de(pfs, company_code, game_code, name, ext, size, file_no);
+        result = osPfsAllocateFile(pfs, company_code, game_code, name, ext, size, file_no);
         if (result != 0) {
             result = -1;
         }
@@ -201,7 +201,7 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
         if (result == 0) {
             result = Pfs_ReadWriteFile(pfs, *file_no, 1, offset, size, data);
             if (result != 0) {
-                func_80446580_de(pfs, company_code, game_code, name, ext);
+                osPfsDeleteFile(pfs, company_code, game_code, name, ext);
                 result = -1;
             }
         }

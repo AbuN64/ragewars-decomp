@@ -22,10 +22,10 @@
 
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp);
-extern s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
+extern s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp);
+extern s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
 
-s32 func_80447F30_de(OSPfs *pfs)
+s32 osPfsRepairId(OSPfs *pfs)
 {
     int k;
     u16 sum;
@@ -48,10 +48,10 @@ s32 func_80447F30_de(OSPfs *pfs)
     id = (__OSPackId *)&temp;
 
     if (((__OSPackId *)temp)->checksum != sum || ((__OSPackId *)temp)->inverted_checksum != isum) {
-        ret = func_80448548_de(pfs, id);
+        ret = __osCheckPackId(pfs, id);
 
         if (ret == 10) {
-            ret = func_80448260_de(pfs, id, &newid);
+            ret = __osRepairPackId(pfs, id, &newid);
             if (ret != 0)
                 return ret;
             id = &newid;
@@ -61,7 +61,7 @@ s32 func_80447F30_de(OSPfs *pfs)
     }
 
     if ((id->deviceid & 1) == 0) {
-        ret = func_80448260_de(pfs, id, &newid);
+        ret = __osRepairPackId(pfs, id, &newid);
         if (ret != 0)
             return ret;
         id = &newid;
@@ -101,7 +101,7 @@ s32 func_80447F30_de(OSPfs *pfs)
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 func_804480E0_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name, s32 *file_no)
+s32 osPfsFindFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name, s32 *file_no)
 {
     s32 j;
     int i;

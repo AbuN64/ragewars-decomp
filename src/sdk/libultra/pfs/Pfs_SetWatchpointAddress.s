@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_80445F34_de
-func_80445F34_de:
+.globl Pfs_SetWatchpointAddress
+Pfs_SetWatchpointAddress:
 .if VERSION_DE
     jr $ra
 .elseif VERSION_US_REV1

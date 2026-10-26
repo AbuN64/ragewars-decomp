@@ -20,7 +20,7 @@
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state)
+s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state)
 {
     s32 ret;
     int pages;

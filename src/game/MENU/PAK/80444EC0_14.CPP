@@ -36,27 +36,27 @@ s32 Pak_SelectMusicPreview(s32 arg0, Shared_PakMenu *pThis) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Cycles a menu selection from directional input while skipping reserved entries. */
  /* extern */
-s32 Pak_SelectMusicPreview(s32 arg0, struct RecordRecAt20V1 *arg1) {
-    s32 var_a0;
-    var_a0 = D_800E63B8;
-    if (arg1->inner->unkB0 & 0x20202) {
-        var_a0 -= 1;
-        if (var_a0 < 0) {
-            var_a0 = 0x16;
-        } else if (var_a0 == 0xE) {
-            var_a0 = 0xB;
+s32 Pak_SelectMusicPreview(s32 unused, struct RecordRecAt20V1 *menu) {
+    s32 musicSelection;
+    musicSelection = D_800E63B8;
+    if (menu->inner->unkB0 & 0x20202) {
+        musicSelection -= 1;
+        if (musicSelection < 0) {
+            musicSelection = 0x16;
+        } else if (musicSelection == 0xE) {
+            musicSelection = 0xB;
         }
     }
-    if (arg1->inner->unkB0 & 0x4D101) {
-        var_a0 += 1;
-        if (var_a0 >= 0x17) {
-            var_a0 = 0;
-        } else if (var_a0 == 0xC) {
-            var_a0 = 0xF;
+    if (menu->inner->unkB0 & 0x4D101) {
+        musicSelection += 1;
+        if (musicSelection >= 0x17) {
+            musicSelection = 0;
+        } else if (musicSelection == 0xC) {
+            musicSelection = 0xF;
         }
     }
-    D_800E63B8 = var_a0;
-    func_8025E2D4_de(var_a0);
+    D_800E63B8 = musicSelection;
+    func_8025E2D4_de(musicSelection);
     return 0;
 }
 #endif

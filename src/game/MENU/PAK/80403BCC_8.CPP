@@ -52,7 +52,7 @@ void Control_ReleasePakLock();
 void Pak_UpdateStatus(s32);
 
  /* extern */
-s32 func_80447F30_de(void *);
+s32 osPfsRepairId(void *);
 
 /* Reports the address of the field at offset 0xE of entry j in record i of the table D_800E2854
    points to, returning zero, or returns -2 when record i's state in D_801534F0 is not 3. */
@@ -176,7 +176,7 @@ s32 Pak_RepairIdIfNeeded(s32 channel) {
     result = D_80153500[channel];
     D_8010BBB8 = 2;
     if (result == -4) {
-        result = func_80447F30_de(&D_8014D280[channel]);
+        result = osPfsRepairId(&D_8014D280[channel]);
         if (result != 0) {
             result = -1;
         }
@@ -194,7 +194,7 @@ s32 Pak_RepairId(s32 channel) {
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
     D_8010BBB8 = 2;
-    result = func_80447F30_de(&D_8014D280[channel]);
+    result = osPfsRepairId(&D_8014D280[channel]);
     if (result != 0) {
         result = -1;
     }

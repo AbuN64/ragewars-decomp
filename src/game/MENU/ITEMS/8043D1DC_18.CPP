@@ -8,7 +8,7 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
-void func_8044799C_de(u8 cmd);
+void __osPfsRequestData(u8 cmd);
 
 s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
     EntryRecAt3 sp10;
@@ -26,7 +26,7 @@ s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
     var_s0 = 3;
     func_802B9C14_de();
     do {
-        func_8044799C_de(0U);
+        __osPfsRequestData(0U);
         __osSiRawStartDma(1, (u8 *)&D_80154110);
         osRecvMesg(arg0, &sp20, 1);
         temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);

@@ -13,7 +13,7 @@
 /* Writes a note to the Controller Pak on channel ch: refuses with -2 unless the pak is ready,
    takes the controller lock and, when the pak has no pending error, converts the extension and
    game name to pak font codes, allocates the note rounded up to whole 256-byte blocks through
-   osPfsAllocateFile (func_80445F80_de), writes the data through osPfsReadWriteFile (Pfs_ReadWriteFile),
+   osPfsAllocateFile (osPfsAllocateFile), writes the data through osPfsReadWriteFile (Pfs_ReadWriteFile),
    deletes the note again if the write fails, refreshes the pak state through Pak_UpdateStatus and
    returns 0 or -1. */
 
@@ -35,7 +35,7 @@ extern void Control_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
+extern s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
                          s32 size, s32 *file_no);
 
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
@@ -161,7 +161,7 @@ s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *siz
 }
 
 s32 Pak_DeleteNote(s32 ch, s32 index) {
-    extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
+    extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
     extern void Pak_UpdateStatus(s32 ch);
     s32 result;
 
@@ -173,7 +173,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
-        result = func_80446580_de(&D_8014D280[ch], D_800E2854[ch].notes[index].company_code,
+        result = osPfsDeleteFile(&D_8014D280[ch], D_800E2854[ch].notes[index].company_code,
                                D_800E2854[ch].notes[index].game_code,
                                D_800E2854[ch].notes[index].game_name,
                                D_800E2854[ch].notes[index].ext_name);

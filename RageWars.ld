@@ -27464,7 +27464,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.text);
         src/game/MULTI/804453C4_2.CPP.o(.text);
         src/game/MULTI/804453C4_11.CPP.o(.text);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.text);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.text);
         src/game/MENU/ITEMS/8043D1DC_14.CPP.o(.data);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.text);
         src/game/MENU/ITEMS/8043D1DC_15.CPP.o(.data);
@@ -27937,7 +27937,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.text);
         src/game/MULTI/804453C4_2.CPP.o(.text);
         src/game/MULTI/804453C4_11.CPP.o(.text);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.text);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.text);
         src/game/DATA/MAINCODE/8042FBEC_28.CPP.o(.data);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.text);
         src/game/DATA/MAINCODE/8042FBEC_29.CPP.o(.data);
@@ -28413,7 +28413,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.text);
         src/game/MULTI/804453C4_2.CPP.o(.text);
         src/game/MULTI/804453C4_11.CPP.o(.text);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.text);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.text);
         src/game/MULTI/804453C4_12.CPP.o(.data);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.text);
         src/sdk/libultra/pfs/80446BD0_5.CPP.o(.data);
@@ -29329,7 +29329,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.text);
         src/game/MULTI/804453C4_2.CPP.o(.text);
         src/game/MULTI/804453C4_11.CPP.o(.text);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.text);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.text);
         src/game/MULTI/804453C4_12.CPP.o(.data);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.text);
         src/sdk/libultra/pfs/80446BD0_5.CPP.o(.data);
@@ -29781,7 +29781,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_11.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.bss .sbss COMMON);
         src/game/MENU/ITEMS/8043D1DC_14.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ITEMS/8043D1DC_15.CPP.o(.bss .sbss COMMON);
@@ -30239,7 +30239,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_11.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/8042FBEC_28.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/8042FBEC_29.CPP.o(.bss .sbss COMMON);
@@ -30699,7 +30699,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_11.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_12.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_5.CPP.o(.bss .sbss COMMON);
@@ -31580,7 +31580,7 @@ SECTIONS
         src/game/MULTI/804453C4_10.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_11.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/pfs/func_80445F34_de.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/pfs/Pfs_SetWatchpointAddress.s.o(.bss .sbss COMMON);
         src/game/MULTI/804453C4_12.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_4.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80446BD0_5.CPP.o(.bss .sbss COMMON);

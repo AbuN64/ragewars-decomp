@@ -9,7 +9,7 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
-extern u32 func_80446D80_de(s32 arg0, s32 arg1);
+extern u32 __osPfsGetStatus(s32 arg0, s32 arg1);
 
 
 u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outputData) {
@@ -43,7 +43,7 @@ u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *out
         result = (saved.bytes[2] & 0xC0) >> 4;
         if (result == 0) {
             if ((func_802B8C88_de(&saved.bytes[6]) & 0xFF) != saved.bytes[0x26]) {
-                result = func_80446D80_de(completionQueue, channel);
+                result = __osPfsGetStatus(completionQueue, channel);
                 if (result != 0) {
                     break;
                 }

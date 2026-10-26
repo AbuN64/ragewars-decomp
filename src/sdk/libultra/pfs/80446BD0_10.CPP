@@ -36,13 +36,13 @@
 
 
 
-s32 func_80446D80_de(void *queue, int channel)
+s32 __osPfsGetStatus(void *queue, int channel)
 {
     s32 ret = 0;
     void *dummy;
     EntryRecAt3 data;
 
-    func_80446E58_de(channel);
+    __osPfsRequestOneChannel(channel);
 
     ret = __osSiRawStartDma(1, &D_80154110);
     osRecvMesg(queue, &dummy, 1);
@@ -63,7 +63,7 @@ s32 func_80446D80_de(void *queue, int channel)
     return ret;
 }
 
-void func_80446E58_de(int channel)
+void __osPfsRequestOneChannel(int channel)
 {
     u8 *base;
     u8 *ptr;

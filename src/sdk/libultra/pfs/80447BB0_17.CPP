@@ -38,7 +38,7 @@ static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)
     return 0;
 }
 
-s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
+s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
 {
     s32 ret = 0;
     u8 temp[32];

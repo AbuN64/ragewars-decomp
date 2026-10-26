@@ -17,7 +17,7 @@
 
 
 
-s32 func_80446C60_de(OSPfs *pfs, s32 *bytes_not_used)
+s32 osPfsFreeBlocks(OSPfs *pfs, s32 *bytes_not_used)
 {
     int j;
     int pages = 0;

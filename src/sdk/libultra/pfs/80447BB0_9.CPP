@@ -26,12 +26,12 @@
 
 
 
-extern s32 func_80446D80_de(void *queue, int channel);
+extern s32 __osPfsGetStatus(void *queue, int channel);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp);
-extern s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
+extern s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp);
+extern s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
 
-s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
+s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 {
     int k;
     s32 ret = 0;
@@ -43,7 +43,7 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
 
     func_802B9C14_de();
 
-    ret = func_80446D80_de(queue, channel);
+    ret = __osPfsGetStatus(queue, channel);
 
     func_802B9C80_de();
 
@@ -67,7 +67,7 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
     id = (__OSPackId *)temp;
 
     if ((((__OSPackId *)temp)->checksum != sum) || (((__OSPackId *)temp)->inverted_checksum != isum)) {
-        ret = func_80448548_de(pfs, id);
+        ret = __osCheckPackId(pfs, id);
 
         if (ret != 0) {
             return ret;
@@ -77,7 +77,7 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
     }
 
     if (!(id->deviceid & 1)) {
-        ret = func_80448260_de(pfs, id, &newid);
+        ret = __osRepairPackId(pfs, id, &newid);
 
         if (ret != 0) {
             return ret;
@@ -106,7 +106,7 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
     if (ret != 0)
         return ret;
 
-    ret = func_80447130_de(pfs);
+    ret = osPfsChecker(pfs);
     pfs->status |= 1;
 
     return ret;
@@ -127,10 +127,10 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
-extern s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache);
+extern s32 corrupted_init(OSPfs *pfs, __OSInodeCache *cache);
 extern s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
 
-s32 func_80447130_de(OSPfs *pfs)
+s32 osPfsChecker(OSPfs *pfs)
 {
     int j;
     s32 ret;
@@ -149,14 +149,14 @@ s32 func_80447130_de(OSPfs *pfs)
     ret = func_80448BFC_de(pfs);
 
     if (ret == 2) {
-        ret = func_804486B8_de(pfs);
+        ret = __osGetId(pfs);
     }
 
     if (ret != 0) {
         return ret;
     }
 
-    ret = func_8044756C_de(pfs, &cache);
+    ret = corrupted_init(pfs, &cache);
     if (ret != 0)
         return ret;
 
@@ -293,7 +293,7 @@ Pfs_CountPageReferences
 
 
 
-s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
+s32 corrupted_init(OSPfs *pfs, __OSInodeCache *cache)
 {
     int i;
     int n;

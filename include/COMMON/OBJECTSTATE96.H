@@ -136,6 +136,6 @@ extern short D_800CF198[];
 s32 Control_IsSnapshotActive(void);
 
 extern s32 Pfs_ComputeIdChecksums(u16 *ptr, u16 *csum, u16 *icsum);
-extern s32 func_80447130_de(OSPfs *pfs);
-extern s32 func_804486B8_de(OSPfs *pfs);
+extern s32 osPfsChecker(OSPfs *pfs);
+extern s32 __osGetId(OSPfs *pfs);
 #endif
