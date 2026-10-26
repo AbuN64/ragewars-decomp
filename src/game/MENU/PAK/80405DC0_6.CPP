@@ -20,7 +20,6 @@ extern void XPlus_FillMemory(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
-#ifndef VERSION_EU_X
 void Pak_CreateSaveSnapshot(u8 *player) {
     s32 snapshotSize = D_8011FECC + 0x610;
     s32 allocationSize;
@@ -46,9 +45,6 @@ void Pak_CreateSaveSnapshot(u8 *player) {
     snapshot->dataSize = g_world.noteCount;
     func_802BD3A0_de(snapshot->name, D_800F91F0, g_world.noteCount);
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
-#endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *D_800E25D4[];
