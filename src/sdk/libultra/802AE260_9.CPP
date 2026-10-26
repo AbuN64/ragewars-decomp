@@ -414,7 +414,6 @@ s32 Libultra_ExecuteDebugLinkAddress(void) {
     return result;
 }
 
-extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
 
@@ -451,7 +450,6 @@ s32 Libultra_WriteDebugLinkMemoryByte(void) {
     return result;
 }
 
-extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
 
@@ -485,7 +483,6 @@ s32 Libultra_ReadDebugLinkMemoryByte(void) {
     return result;
 }
 
-extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 s32 Libultra_HandshakeDebugLink(void) {
     u8 sp10;

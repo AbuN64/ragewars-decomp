@@ -125,7 +125,6 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 
 
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
 extern s32 corrupted_init(OSPfs *pfs, __OSInodeCache *cache);
 extern s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);

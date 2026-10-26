@@ -88,7 +88,6 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
 
 
 
-extern void *Pickup_FindAmmoEntry(s32);
 
 
 

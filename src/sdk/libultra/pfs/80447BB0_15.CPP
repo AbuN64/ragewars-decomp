@@ -99,7 +99,6 @@ s32 osPfsRepairId(OSPfs *pfs)
 
 
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 
 s32 osPfsFindFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name, s32 *file_no)
 {
