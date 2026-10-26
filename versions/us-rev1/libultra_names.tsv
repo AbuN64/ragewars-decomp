@@ -1,4 +1,6 @@
 vram	name	basis
+0x802B8ED0	alAuxBusPull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/auxbus.c; reviewed source correspondence (func_802B40E0_eu_x)
+0x802BA4D0	alMainBusPull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/mainbus.c; reviewed source correspondence (func_802B56E0_eu_x)
 0x8028F89C	osScRemoveClient	machine code
 0x802B4ECC	__setUsptFromTempo	machine code
 0x802B53E0	alCopy	machine code
