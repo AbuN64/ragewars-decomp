@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -12,7 +13,6 @@
 extern u32 D_80111D28;
 extern f32 D_800C4960_de[2];
 
-extern f32 D_800D2988;
 
 
 

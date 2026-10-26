@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_6.H"
 #include "include_asm.h"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/UNUSED.H"
@@ -12,7 +13,6 @@
 extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-extern f32 D_800D2988; /* frame time scale (Particle code saves and rescales it) */
 
 s32 SetN64_StartGameThreadAndIdle(s32 *, s32);
 

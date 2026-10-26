@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_6.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -31,9 +32,7 @@ s32 OnScreen_UpdateMoverScript(void *);
 s32 OnScreen_StartMoverScript(void *, s32 *);
 
 
-extern int Tsmos_IsFrontendActive(void);
 
-extern void OnScreen_SetupSpriteMode(s32);
 
 extern void OnScreen_DrawStatusBar(void *arg0, int arg1);
 

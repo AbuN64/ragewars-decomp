@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_6.H"
 #include "RENDER_2/OBJECTSTATE8E.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -17,7 +18,6 @@
 #include "ENGINE/SCENE_6.H"
 
 
-extern s32 D_801468F4;
 
 
 extern f32 GameObject_GetActorHeight(void *arg0);
