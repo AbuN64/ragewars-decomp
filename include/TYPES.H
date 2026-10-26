@@ -218,9 +218,9 @@ extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *arg0, struct Mul
 
 extern void osUnmapTLB(int arg0);
 
-extern void func_802AF150_de(void *rawPlayer);
+extern void __CSPHandleNextSeqEvent(void *rawPlayer);
 
-extern void func_802AFD00_de(void *arg0);
+extern void __CSPPostNextSeqEvent(void *arg0);
 
 extern void __setUsptFromTempo(void *arg0, f32 arg1);
 

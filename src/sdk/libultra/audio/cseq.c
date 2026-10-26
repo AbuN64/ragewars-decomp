@@ -10,7 +10,7 @@
 #include "sdk/libgultra_inferred/802B3AFC.H"
 
 s32 __readVarLen(ALCSeq_s *seq, s32 track);
-extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
+extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);
 
 /* alCSeqNewMarker, drafted from ultralib src/audio/cseq.c: fill a compressed-sequence marker
    with the track state of the first event at or after the given tick count, stepping a scratch
@@ -78,7 +78,7 @@ static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
             }
         }
     }
-    func_802AE030_de(seq, firstTrack, evt);
+    __alCSeqGetTrackEvent(seq, firstTrack, evt);
     evt->msg.midi.ticks = firstTime;
     seq->lastTicks += firstTime;
     seq->lastDeltaTicks = firstTime;
@@ -114,7 +114,7 @@ void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
 /* __getTrackByte, drafted from ultralib src/audio/cseq.c: read the next byte of a compressed
    sequence track, following a back-up block (0xFE, offset, length) into the track's earlier data
    and counting down the back-up length while in it. */
-u8 func_802AE500_de(ALCSeq_s *seq, u32 track)
+u8 __getTrackByte(ALCSeq_s *seq, u32 track)
 {
     u8 theByte;
     if (seq->curBULen[track]) {
@@ -205,7 +205,7 @@ void func_802AE6BC_de(ALCSeq_s *state, ALEvent *result) {
         index++;
     } while (index < 16);
 
-    func_802AE030_de(state, selected, result);
+    __alCSeqGetTrackEvent(state, selected, result);
     result->msg.midi.ticks = minimum;
     state->lastDeltaTicks = minimum;
     state->lastTicks += minimum;
@@ -313,7 +313,7 @@ void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst) {
     }
 }
 
-s32 func_802AE9B0_de(ALCSeq_s *seq, s32 *result) {
+s32 __alCSeqNextDelta(ALCSeq_s *seq, s32 *result) {
     u32 amount;
     u32 minimum;
     u32 i;
@@ -340,17 +340,17 @@ s32 func_802AE9B0_de(ALCSeq_s *seq, s32 *result) {
     return 1;
 }
 
-u8 func_802AE500_de(ALCSeq_s *seq, u32 track);
+u8 __getTrackByte(ALCSeq_s *seq, u32 track);
 
 s32 __readVarLen(ALCSeq_s *seq, s32 track) {
     s32 temp_v0;
     s32 decodedValue;
 
-    decodedValue = (u8) func_802AE500_de(seq, track);
+    decodedValue = (u8) __getTrackByte(seq, track);
     if (decodedValue & 0x80) {
         decodedValue &= 0x7F;
         do {
-            temp_v0 = (u8) func_802AE500_de(seq, track);
+            temp_v0 = (u8) __getTrackByte(seq, track);
             decodedValue = (decodedValue << 7) + (temp_v0 & 0x7F);
         } while (temp_v0 & 0x80);
     }

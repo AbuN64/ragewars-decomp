@@ -26,7 +26,7 @@ extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(s32, void *);
 
 
-void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1);
+void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1);
 
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 
@@ -108,7 +108,7 @@ void func_802AEAB0_de(void *arg0, InitParams *config) {
 /* Drain due compact-sequence events and advance to the next event time.
  * Event-kind10 reads the shared short carrier; kind12 uses its two byte
  * carriers for channel and priority. Existing message/voice views are reused. */
-ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
+ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
 {
     ALSeqPlayer *seqp = node;
     ALEvent evt;
@@ -124,7 +124,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
     do {
         switch (seqp->nextEvent.type) {
         case 0: /* AL_SEQ_REF_EVT */
-            func_802AF150_de(seqp);
+            __CSPHandleNextSeqEvent(seqp);
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
@@ -179,10 +179,10 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
             break;
         case 2:  /* AL_SEQP_MIDI_EVT */
         case 21: /* AL_CSP_NOTEOFF_EVT */
-            func_802AF2E0_de(seqp, (ALEvent *)&seqp->nextEvent);
+            __CSPHandleMIDIMsg(seqp, (ALEvent *)&seqp->nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
-            func_802AFB6C_de(seqp, (ObjectState10_2 *)&seqp->nextEvent);
+            __CSPHandleMetaMsg(seqp, (ObjectState10_2 *)&seqp->nextEvent);
             break;
         case 10: /* AL_SEQP_VOL_EVT */
             seqp->vol = seqp->nextEvent.msg.spvol.type;
@@ -194,7 +194,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
         case 15: /* AL_SEQP_PLAY_EVT */
             if (seqp->state != 1) {
                 seqp->state = 1;
-                func_802AFD00_de(seqp);
+                __CSPPostNextSeqEvent(seqp);
             }
             break;
         case 16: /* AL_SEQP_STOP_EVT */
@@ -283,7 +283,7 @@ extern void func_802B32A0_de(void *, void *, u8);
 extern void __setInstChanState(void *, void *, s32);
 
 /** Dispatch the current object message and forward any resulting value. */
-void func_802AF150_de(void *rawPlayer) {
+void __CSPHandleNextSeqEvent(void *rawPlayer) {
     struct ALSeqPlayer *arg0 = rawPlayer;
     ALEvent message;
     ALEvent output;
@@ -325,10 +325,10 @@ void func_802AF150_de(void *rawPlayer) {
     }
     do {
         sw_message_0:
-            func_802AF2E0_de(arg0, &message);
+            __CSPHandleMIDIMsg(arg0, &message);
             if (arg0->state == 1) {
                 sequence = arg0->target;
-                if (sequence != 0 && (func_802AE9B0_de(sequence, &value1) & 0xFF)) {
+                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value1) & 0xFF)) {
                     output.type = 0;
                     value = value1;
                     goto send_value;
@@ -336,10 +336,10 @@ void func_802AF150_de(void *rawPlayer) {
             }
             break;
         sw_message_2:
-            func_802AFB6C_de(arg0, &message);
+            __CSPHandleMetaMsg(arg0, &message);
             if (arg0->state == 1) {
                 sequence = arg0->target;
-                if (sequence != 0 && (func_802AE9B0_de(sequence, &value2) & 0xFF)) {
+                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value2) & 0xFF)) {
                     output.type = 0;
                     value = value2;
                     goto send_value;
@@ -356,7 +356,7 @@ void func_802AF150_de(void *rawPlayer) {
         sw_message_19:
             if (arg0->state == 1) {
                 sequence = arg0->target;
-                if (sequence != 0 && (func_802AE9B0_de(sequence, &value3) & 0xFF)) {
+                if (sequence != 0 && (__alCSeqNextDelta(sequence, &value3) & 0xFF)) {
                     output.type = 0;
                     value = value3;
 send_value:
@@ -375,7 +375,7 @@ send_value:
 
 /* Apply one compact-sequence MIDI message. The existing event storage and
  * callee-specific voice/player views share their measured O32 prefixes. */
-void func_802AF2E0_de(void *object, ALEvent *message)
+void __CSPHandleMIDIMsg(void *object, ALEvent *message)
 {
     ALSeqPlayer *seqp = object;
     ALEvent *event = (ALEvent *)message;
@@ -612,7 +612,7 @@ void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1);
 
 extern s32 func_802BD170_de(s32);
 
-void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
+void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1) {
     s32 padding[4];
     s32 total = 0;
     Node_func_802AFD6C_de *head = 0;
@@ -659,7 +659,7 @@ void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
     }
 }
 
-void func_802AFD00_de(void *arg0) {
+void __CSPPostNextSeqEvent(void *arg0) {
     struct ALSeqPlayer *player = arg0;
     ALEvent sp10;
     s32 sp20;
@@ -667,7 +667,7 @@ void func_802AFD00_de(void *arg0) {
 
     if (player->state == 1) {
         sequence = player->target;
-        if (sequence != 0 && (func_802AE9B0_de(sequence, &sp20) & 0xFF)) {
+        if (sequence != 0 && (__alCSeqNextDelta(sequence, &sp20) & 0xFF)) {
             sp10.type = 0;
             func_802B00D4_de(&player->evtq, &sp10, sp20 * player->uspt);
         }

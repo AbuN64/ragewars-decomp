@@ -4313,7 +4313,7 @@ segments:
       - [0xCD1A4, rodata, data_800C/g_audioCsplayerText]
       - [0xCD1B5, data, data_800C/rodata_unresolved_800CC5B5]
       - [0xCD1B8, rodata, data_800C/literals_func_802AEAB0_de]
-      - [0xCD220, rodata, data_800C/literals_func_802AF150_de]
+      - [0xCD220, rodata, data_800C/literals___CSPHandleNextSeqEvent]
       - [0xCD270, rodata, data_800C/D_blob_868e5463195d5f476023]
       - [0xCD27C, data, data_800C/D_blob_c6270e9779ff9536200b]
       - [0xCD280, rodata, data_800C/D_blob_5d5e9c19015825e88044]

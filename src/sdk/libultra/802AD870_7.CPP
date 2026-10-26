@@ -2,28 +2,28 @@
 #include "TYPES.H"
 #include "sdk/MEASUREDRECAT18.H"
 
-extern s32 func_802AE500_de(s32, s32);
+extern s32 __getTrackByte(s32, s32);
 extern u32 __readVarLen(ALCSeq_s *, u32);
 
 
-s32 func_802AE030_de(ALCSeq_s *state, u32 index, DecodeResult *result) {
+s32 __alCSeqGetTrackEvent(ALCSeq_s *state, u32 index, DecodeResult *result) {
     u8 first;
     u8 command;
     u32 first_value;
     u32 command_value;
 
-    first = func_802AE500_de(state, index);
+    first = __getTrackByte(state, index);
     first_value = first & 0xFF;
     if (first_value == 0xFF) {
-        command = func_802AE500_de(state, index);
+        command = __getTrackByte(state, index);
         command_value = command & 0xFF;
         if (command_value == 0x51) {
             result->type = 3;
             result->status = first;
             result->first_data = command;
-            result->extra1 = func_802AE500_de(state, index);
-            ((u8 *)&result->extra2)[0] = func_802AE500_de(state, index);
-            ((u8 *)&result->extra2)[1] = func_802AE500_de(state, index);
+            result->extra1 = __getTrackByte(state, index);
+            ((u8 *)&result->extra2)[0] = __getTrackByte(state, index);
+            ((u8 *)&result->extra2)[1] = __getTrackByte(state, index);
             state->lastStatus[index] = 0;
         } else if (command_value == 0x2F) {
             u32 active = state->validTracks ^ (1U << index);
@@ -34,8 +34,8 @@ s32 func_802AE030_de(ALCSeq_s *state, u32 index, DecodeResult *result) {
                 result->type = 4;
             }
         } else if (command_value == 0x2E) {
-            func_802AE500_de(state, index);
-            func_802AE500_de(state, index);
+            __getTrackByte(state, index);
+            __getTrackByte(state, index);
             state->lastStatus[index] = 0;
             result->type = 0x13;
         } else if (command_value == 0x2D) {
@@ -83,7 +83,7 @@ s32 func_802AE030_de(ALCSeq_s *state, u32 index, DecodeResult *result) {
         result->type = 1;
         if (first & 0x80) {
             result->status = first;
-            result->first_data = func_802AE500_de(state, index);
+            result->first_data = __getTrackByte(state, index);
             state->lastStatus[index] = first;
         } else {
             u8 running_status = state->lastStatus[index];
@@ -92,7 +92,7 @@ s32 func_802AE030_de(ALCSeq_s *state, u32 index, DecodeResult *result) {
         }
         command_value = result->status & 0xF0;
         if ((command_value != 0xC0) && (command_value != 0xD0)) {
-            result->second_data = func_802AE500_de(state, index);
+            result->second_data = __getTrackByte(state, index);
             if ((result->status & 0xF0) == 0x90) {
                 result->extra2 = __readVarLen(state, index);
             }
