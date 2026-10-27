@@ -27,7 +27,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
     s32 red;
     s16 green;
     s32 blue;
-    Racer *view;
+    RacerViewport *view;
     f32 *viewport;
     Item *item;
 

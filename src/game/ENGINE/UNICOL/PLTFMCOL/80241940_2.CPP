@@ -24,18 +24,18 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern char D_80100338;
 
-extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242288_de *, OwnerRecAt18 *);
+extern void func_80241950_de(OwnerRecAt18 *, RayCornerBounds *, Actor_func_80242288_de *, OwnerRecAt18 *);
 
-extern void Plane_BuildBoxFace5(void *, Bounds *);
-extern void Plane_BuildBoxFace4(void *, Bounds *);
-extern void Plane_BuildBoxFace3(void *, Bounds *);
-extern void Plane_BuildBoxFace2(void *, Bounds *);
-extern void Plane_BuildBoxFace1(void *, Bounds *);
-extern void Plane_BuildBoxFace0(void *, Bounds *);
+extern void Plane_BuildBoxFace5(void *, RayCornerBounds *);
+extern void Plane_BuildBoxFace4(void *, RayCornerBounds *);
+extern void Plane_BuildBoxFace3(void *, RayCornerBounds *);
+extern void Plane_BuildBoxFace2(void *, RayCornerBounds *);
+extern void Plane_BuildBoxFace1(void *, RayCornerBounds *);
+extern void Plane_BuildBoxFace0(void *, RayCornerBounds *);
 extern s32 func_8023EA44_de(void *, void *, void *, f32, s32);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, void *, f32, f32, f32, s32, void *, s32);
-void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -107,7 +107,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
 }
 
-void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -180,10 +180,10 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
 
 void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
     QueryRecAt58 query;
-    Bounds bounds;
+    RayCornerBounds bounds;
     EntryRecAt8V5 *entry;
 
-    entry = &((EntryBlock *)owner->entries)->entry;
+    entry = &((RayEntryBlock *)owner->entries)->entry;
     if ((actor->field40 != &D_80100338) && (((Shape *)actor->field40)->enabled != 0)) {
         f32 value;
         s32 *word;
@@ -200,7 +200,7 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
         case 1:
             word = &query.word0;
             owner_data = &((LevelActor *)owner)->position0;
-            value = ((EntryBlock *)owner->entries)->entry.value + actor->fieldC;
+            value = ((RayEntryBlock *)owner->entries)->entry.value + actor->fieldC;
             if ((actor->field5C != *(f32 *)&query.word4) ||
                 (actor->field64 != *(f32 *)&query.word4)) {
                 *word = 3;

@@ -165,7 +165,7 @@ void InstHdr_ResetInstanceRenderIndices(signed char *prop) {
 
 s32 func_8024DD24_de(void *actorStorage)
 {
-    struct Object *object = actorStorage;
+    struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -179,7 +179,7 @@ s32 func_8024DD24_de(void *actorStorage)
 
 s32 func_8024DD58_de(void *actorStorage)
 {
-    struct Object *object = actorStorage;
+    struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -225,7 +225,7 @@ int func_8024DDB4_de(void *actorStorage) {
 
 s32 func_8024DDDC_de(void *actorStorage)
 {
-    struct Object *object = actorStorage;
+    struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -243,7 +243,7 @@ s32 func_8024DDDC_de(void *actorStorage)
 
 s32 func_8024DE10_de(void *actorStorage)
 {
-    struct Object *object = actorStorage;
+    struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -271,7 +271,7 @@ int func_8024DE44_de(void *actorStorage) {
 
 s32 InstHdr_HasActorTerritory(void *actorStorage)
 {
-    struct Object *object = actorStorage;
+    struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
     s32 kind;
 

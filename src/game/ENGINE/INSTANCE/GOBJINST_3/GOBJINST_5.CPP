@@ -590,7 +590,7 @@ typedef struct SceneObject SceneObject;
 typedef struct DrawContext {
     s32 visible;
     s32 hasSecond;
-    struct Racer *camera;
+    struct RacerViewport *camera;
     void *first;
     void *second;
     f32 *offset;
@@ -626,7 +626,7 @@ extern void TextLoad_ResetTextureCache(void);
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is
  * patched at the end) or replays the cached list.
  * Byte-exact for us-rev1. */
-void func_80249E28_de(SceneObject *object, struct Racer *camera) {
+void func_80249E28_de(SceneObject *object, struct RacerViewport *camera) {
     void **mem;
     void *model;
     void *first;

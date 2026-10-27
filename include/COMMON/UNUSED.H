@@ -2974,8 +2974,8 @@ typedef struct OptionsOpenItem OptionsOpenItem;
 struct OptionsOpenScreen;
 typedef struct OptionsOpenScreen OptionsOpenScreen;
 
-struct OptionsScreen;
-typedef struct OptionsScreen OptionsScreen;
+struct OptionsWidgets;
+typedef struct OptionsWidgets OptionsWidgets;
 
 
 struct OwnerCode8025A3EC;
@@ -4164,8 +4164,8 @@ struct OptionsOpenScreen {
     s32 unk_34;
     s32 full;
 };
-struct OptionsScreen;
-struct OptionsScreen {
+struct OptionsWidgets;
+struct OptionsWidgets {
     s32 screen;
     s32 label;
     s32 slider;

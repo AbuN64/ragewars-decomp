@@ -4,8 +4,8 @@
 #include "COMMON/ANIMATION.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/VIEWFLAGS.H"
-extern void Camera_DrawAndAdvanceMessages(Race*race, Racer*racer);
-extern void Camera_DrawViewportBorder(Racer*racer);
+extern void Camera_DrawAndAdvanceMessages(Race*race, RacerViewport*racer);
+extern void Camera_DrawViewportBorder(RacerViewport*racer);
 extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner*owner, struct ScreenMessagePool*pool);
 extern ViewFlags D_80103220;
 extern void func_80289084_de(char*, char*);

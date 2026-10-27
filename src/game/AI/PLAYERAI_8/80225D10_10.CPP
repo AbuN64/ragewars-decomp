@@ -483,7 +483,7 @@ int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
 }
 
 f32 Player_GetObjectOwnerHeight(void *actorObject) {
-    struct Object *object = actorObject;
+    struct EffectOwnerObject *object = actorObject;
     struct ModelBlend *owner;
 
     owner = object->owner;

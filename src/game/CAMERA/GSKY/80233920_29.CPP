@@ -160,7 +160,7 @@ void *Sky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) 
 f32 func_80239678_de(Race *viewOwner, void *targetPosition) {
     CVector3 position;
     f32 sum;
-    Racer *node;
+    RacerViewport *node;
     f64 divisor;
     s32 count;
 

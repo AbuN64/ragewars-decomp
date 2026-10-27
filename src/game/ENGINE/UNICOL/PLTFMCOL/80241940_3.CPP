@@ -5,11 +5,11 @@
 
 extern void GraphU64_SubtractVectors(Triple *, Triple *, Triple *);
 
-extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, SourceBarrelUpdateActorController *);
+extern void func_80241950_de(OwnerRecAt18 *, RayCornerBounds *, Actor_func_80242550_de *, SourceBarrelUpdateActorController *);
 
-extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
+extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, RayCornerBounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
 
-extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
+extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, RayCornerBounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
 
 extern f32 GameObject_GetActorRadius(void *);
 
@@ -30,7 +30,7 @@ void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorCont
     Triple saved_previous;
     Triple saved_position;
     SurfaceHit query;
-    Bounds bounds;
+    RayCornerBounds bounds;
     OwnerRecAt18 *owner;
     EntryRecAt4V3 *entry;
 

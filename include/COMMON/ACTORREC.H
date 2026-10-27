@@ -22,15 +22,15 @@ struct ObjNavComputeScaledPointCentroid {
 
 extern float D_800C1E40_de;
 
-struct Stage;
-struct Stage {
+struct NavigationStage;
+struct NavigationStage {
     s32 to;
     s32 from;
     f32 distance;
 };
 
-struct Stage;
-typedef struct Stage Stage;
+struct NavigationStage;
+typedef struct NavigationStage NavigationStage;
 
 struct SelectionNavAppendDirectionalRouteStage;
 struct SelectionNavAppendDirectionalRouteStage {
@@ -41,7 +41,7 @@ struct SelectionNavAppendDirectionalRouteStage {
     char pad24[0x14];
     s32 objectCount;
     Player *objects[33];
-    Stage stages[10];
+    NavigationStage stages[10];
     CVector3 dirs[10];
     CVector3 result;
     s32 stageCount;

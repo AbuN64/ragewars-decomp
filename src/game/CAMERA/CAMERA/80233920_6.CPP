@@ -378,7 +378,7 @@ static inline void Camera_UnpackColor(u32 color, u8 *red, u8 *green, u8 *blue) {
 }
 
 /* Set projection, viewport and look-at, then draw the view's clear rectangle and fog. */
-void Camera_SetupViewportAndFog(Racer *view) {
+void Camera_SetupViewportAndFog(RacerViewport *view) {
     u8 red, green, blue;
     s16 uly, ulx, lrx, lry;
     s32 flag;

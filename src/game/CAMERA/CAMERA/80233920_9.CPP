@@ -26,17 +26,17 @@ extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Cache_MarkResourceInUse(s32, s32);
-extern void Camera_SetupViewportAndFog(Racer *);
-extern void Camera_DrawWorldViewLayers(Racer *, s32);
-extern void func_80239FD4_de(Racer *, s32);
-extern void Camera_DrawViewportOverlays(Racer *);
+extern void Camera_SetupViewportAndFog(RacerViewport *);
+extern void Camera_DrawWorldViewLayers(RacerViewport *, s32);
+extern void func_80239FD4_de(RacerViewport *, s32);
+extern void Camera_DrawViewportOverlays(RacerViewport *);
 extern void Pak_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);
-extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, Racer *);
+extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, RacerViewport *);
 /* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to Pak_DispatchMenuListCallback. */
 void Camera_DrawActiveViews(Race *race, s32 world)
 {
-    Racer *racer;
+    RacerViewport *racer;
     race->self.hit = 0;
     race->self.boost = 0;
     race->self.spin = 0;
@@ -104,7 +104,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
 }
 
 
-void Camera_DrawViewportBorder(Racer *racer) {
+void Camera_DrawViewportBorder(RacerViewport *racer) {
     View *entity = (View *)racer;
     f32 x;
     f32 y;
@@ -334,7 +334,7 @@ extern s32 D_800E28D8;
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
-void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
+void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
     f32 scale;
     f32 width, height, x, y;
     f32 scaleY;

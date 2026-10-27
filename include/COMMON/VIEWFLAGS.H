@@ -12,8 +12,8 @@ struct Triple;
 struct ObjRecAt260;
 
 
-struct Racer;
-typedef struct Racer Racer;
+struct RacerViewport;
+typedef struct RacerViewport RacerViewport;
 
 struct Overlay;
 typedef struct Overlay Overlay;
@@ -84,10 +84,10 @@ typedef struct WorldCameraDrawActiveViews WorldCameraDrawActiveViews;
 struct UnitVp;
 typedef struct UnitVp UnitVp;
 
-struct Racer;
-struct Racer {
+struct RacerViewport;
+struct RacerViewport {
     char pad0[4];
-    struct Racer *next;
+    struct RacerViewport *next;
     char pad8[4];
     f32 screenScaleX; /* 0xC */
     f32 screenScaleY; /* 0x10 */
@@ -135,7 +135,7 @@ struct WorldCameraDrawActiveViews {
 };
 
 struct Race;
-struct Racer;
+struct RacerViewport;
 typedef struct RaceHeader {
     s32 music;
     char pad4[0x1C];
@@ -146,8 +146,8 @@ typedef struct RaceHeader {
 } RaceHeader;
 struct Race {
     RaceHeader header;
-    Racer self;
-    char padRaceTail[0xF24 - 0x40 - sizeof(Racer)];
+    RacerViewport self;
+    char padRaceTail[0xF24 - 0x40 - sizeof(RacerViewport)];
     IntrusiveList freeMessages; /* 0xF24 */
 };
 

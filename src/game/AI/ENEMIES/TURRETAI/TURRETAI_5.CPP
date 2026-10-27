@@ -125,8 +125,8 @@ void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
     }
 }
 
-int AI_DynTurretOpposingPlayer(Actor *self, int unused, Actor *target) {
-    Actor *linked = self->linked;
+int AI_DynTurretOpposingPlayer(TurretPlayerRelation *self, int unused, TurretPlayerRelation *target) {
+    TurretPlayerRelation *linked = self->linked;
     if (linked == target || target->active == 0) {
         return 0;
     }

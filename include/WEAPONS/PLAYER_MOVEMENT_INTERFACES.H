@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 
 /* Published implementations use these concrete actor and tuning records. */
-void Player_EaseOwnerHeightEffect(struct Object *object);
+void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object);
 void func_802233F0_de(SharedPlayer *player,
                      func_802165F8_S1 *body, SharedMovement *tuning);
 s32 Player_SetPlayerState(SharedPlayer *player, void *body, s32 state);

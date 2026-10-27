@@ -56,8 +56,8 @@ struct Hit8 {
 
 extern float D_800C3744_de;
 
-struct EntryBlock;
-typedef struct EntryBlock EntryBlock;
+struct RayEntryBlock;
+typedef struct RayEntryBlock RayEntryBlock;
 
 struct ActorRecAtB0;
 typedef struct ActorRecAtB0 ActorRecAtB0;
@@ -191,8 +191,8 @@ struct FloatState68 {
     f32 unk_64;
 };
 
-struct Bounds;
-struct Bounds {
+struct RayCornerBounds;
+struct RayCornerBounds {
     CVector3 corners[8];
 };
 
@@ -207,8 +207,8 @@ struct EntryRecAt8V5 {
 struct EntryRecAt8V5;
 typedef struct EntryRecAt8V5 EntryRecAt8V5;
 
-struct EntryBlock;
-struct EntryBlock {
+struct RayEntryBlock;
+struct RayEntryBlock {
     u8 pad[0x14];
     EntryRecAt8V5 entry;
 };
@@ -369,8 +369,8 @@ struct Actor_func_80241BAC_de;
 typedef struct Actor_func_80241BAC_de Actor_func_80241BAC_de;
 
 
-struct Bounds;
-typedef struct Bounds Bounds;
+struct RayCornerBounds;
+typedef struct RayCornerBounds RayCornerBounds;
 
 struct ShapeRecAt18V1;
 typedef struct ShapeRecAt18V1 ShapeRecAt18V1;

@@ -57,8 +57,8 @@ typedef struct Result Result;
 
 extern float D_800C19FC_de;
 
-struct Actor;
-typedef struct Actor Actor;
+struct TurretPlayerRelation;
+typedef struct TurretPlayerRelation TurretPlayerRelation;
 
 struct Hook;
 struct Obj;
@@ -74,10 +74,10 @@ struct Obj {
 struct RiderRecAt130V1;
 typedef struct RiderRecAt130V1 RiderRecAt130V1;
 
-struct Actor;
-struct Actor {
+struct TurretPlayerRelation;
+struct TurretPlayerRelation {
     char pad[0x1D8];
-    struct Actor *linked;
+    struct TurretPlayerRelation *linked;
     char pad1DC[0x5D8 - 0x1DC];
     Record *info;
     char pad5DC[0x5E4 - 0x5DC];

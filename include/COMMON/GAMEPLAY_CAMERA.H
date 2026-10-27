@@ -181,8 +181,8 @@ struct Shared_func_80234FDC_S4 {
     s32 unk4; /* +0x4: src/func_80234FDC.c */
     s32 unk8; /* +0x8: src/func_80234FDC.c */
     char padC[4];
-    Racer view; /* +0x10: D_80141008, the render view embedded in D_80140FF8 */
-    char padView[0x122F - 0x10 - sizeof(Racer)];
+    RacerViewport view; /* +0x10: D_80141008, the render view embedded in D_80140FF8 */
+    char padView[0x122F - 0x10 - sizeof(RacerViewport)];
     u8 unk122F; /* +0x122F: src/func_80234FDC.c */
     char pad1230[0x590];
     Shared_func_80234FDC_S5 state; /* +0x17C0: src/func_80234FDC.c */

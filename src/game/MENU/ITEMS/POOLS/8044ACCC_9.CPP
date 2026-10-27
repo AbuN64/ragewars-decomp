@@ -104,14 +104,14 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
     func_802390F4_de(arg0, 0);
     temp_a0 = D_800E28D0 * 2;
     for (var_a1 = 0; var_a1 < 2; var_a1++) {
-        ((Racer *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vscale[1] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vscale[2] = 0x3FF;
-        ((Racer *)arg0)->viewports[var_a1].vscale[3] = 0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[0] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[1] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[2] = 0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vscale[1] = temp_a0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vscale[2] = 0x3FF;
+        ((RacerViewport *)arg0)->viewports[var_a1].vscale[3] = 0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[0] = temp_a0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[1] = temp_a0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[2] = 0;
+        ((RacerViewport *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
     Pak_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
     GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);

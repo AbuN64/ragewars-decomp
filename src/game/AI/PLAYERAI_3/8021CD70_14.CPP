@@ -14,7 +14,7 @@ extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
-void Player_EaseOwnerHeightEffect(struct Object *object) {
+void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
     f32 level;
 
     if (object->owner != 0) {
