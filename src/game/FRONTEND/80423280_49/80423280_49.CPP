@@ -3,7 +3,6 @@
 #include "COMMON/UNUSED.H"
 #include "RENDER_2/8025DE50_5.H"
 
-
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at
@@ -13,27 +12,6 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #if defined(VERSION_DE)
 #define ID_2FE 0x2FA
@@ -230,13 +208,7 @@ s32 func_80429A24_de(void *window) {
     return 0;
 }
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-const unsigned int D_80429A24_E26A0[7] = {
-    0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000, 0xC1200000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_80429A24_E26A0_us_rev1[7] = {
     0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000, 0xC1200000,
 };

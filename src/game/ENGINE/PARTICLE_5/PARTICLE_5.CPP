@@ -50,10 +50,6 @@ void Particle_UpdateMatrix(Shared_Particle *particle) {
 
 extern char D_8011D8D0;
 
-
-
-
-
 void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         CQuatern rotation;
         int temp;
@@ -435,20 +431,12 @@ finished:
 
 /* 8028469C_2.CPP */
 
-
 extern f32 GraphU64_GetSquaredDistance(f32 *arg0, f32 *arg1);
 extern void func_80282E98_de(void *arg0, void *arg1);
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80284B20_CAB80[2] = {
-    0x4123D70A, 0x3F000000,
-};
-#endif
-#if defined(VERSION_US_REV1)
 const unsigned int D_blob_35af2254633920324f03[2] = {
     0x4123D70A, 0x3F000000,
 };
-#endif
 void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
     CVector3 point;
     void *node;
@@ -520,7 +508,6 @@ s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *arg1) {
 }
 
 /* Marks nearby objects other than type 87 as active. */
-
 
 void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center, ObjParticleMarkNearbyObjects **objects, s32 count) {
  f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;

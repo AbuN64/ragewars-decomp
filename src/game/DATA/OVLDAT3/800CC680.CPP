@@ -3,22 +3,12 @@
 #include "sdk/BUF16B.H"
 #include "TYPES.H"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802AFE30_CD280[2] = {
-    0x3F800000, 0x3F8012EF,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802AFE30_CD280_us_rev1.c */
 const unsigned int D_blob_5d5e9c19015825e88044[2] = {
     0x3F800000, 0x3F8012EF,
 };
-#endif
 
 extern f32 D_800C7430_de[];
-
-
 
 f32 func_802AFE30_de(s32 arg0)
 {

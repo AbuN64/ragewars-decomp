@@ -40,27 +40,11 @@ u32 Weapon_UpdateShakeAxis(CShakeAxis *state) {
     return state->m_Amp == 0.0f;
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802337D0_C8D70[4] = {
-    0x42B40000, 0x40400000, 0x40C00000, 0x40C00000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_802337D0_C8D70_us_rev1[4] = {
     0x42B40000, 0x40400000, 0x40C00000, 0x40C00000,
 };
-#endif
 
 /* 800C8180.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80233930_C8D80[4] = {
-    0x3F800000, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_80233930_C8D80_us_rev1[4] = {
     0x3F800000, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
 };
-#endif

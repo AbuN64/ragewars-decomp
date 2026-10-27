@@ -913,18 +913,10 @@ const unsigned int D_blob_c47a1224be0864d16b8f[1] = {
 #endif
 
 /* 800C906C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025B758_C9C6C[3] = {
-    0x3C360B61, 0x46FA0000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025B758_C9C6C_us_rev1.c */
 const unsigned int D_blob_2f4433e4bee06427c8ee[3] = {
     0x3C360B61, 0x46FA0000, 0x3F800000,
 };
-#endif
 
 /* 800C9078.CPP */
 #if !(defined(VERSION_US_REV1))
@@ -941,32 +933,16 @@ const unsigned int D_blob_d58ac873383264ce9118[1] = {
 #endif
 
 /* 800C907C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025C1CC_C9C7C[2] = {
-    0x45BB8000, 0x3C888889,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025C1CC_C9C7C_us_rev1.c */
 const unsigned int D_blob_fe75a13ded2f86ba8f91[2] = {
     0x45BB8000, 0x3C888889,
 };
-#endif
 
 /* 800C9084.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025C2EC_C9C84[2] = {
-    0x3C23D70A, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025C2EC_C9C84_us_rev1.c */
 const unsigned int D_blob_e7465b1d1ef08856aedf[2] = {
     0x3C23D70A, 0x3F800000,
 };
-#endif
 
 /* 800C908C.CPP */
 #if !(defined(VERSION_US_REV1))

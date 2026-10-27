@@ -11,28 +11,16 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "SYSTEM/802609CC_5.H"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802612A8_C9E88[1] = {
-    0xC4FA0000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */
 const unsigned int D_blob_d39bcb9851fad48bdbd2[1] = {
     0xC4FA0000,
 };
-#endif
 
 /* Reads a sampled track from a stream: parses its header through func_8025FFB0_de, evaluates the track at each whole frame into the first float of consecutive 16-byte output records, and advances the stream cursor past the track's key data. */
-
-
 
 extern void func_8025FFB0_de(Track_func_80261180_de *track, char **cursor);
 
 extern f32 PolyTrak_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond);
-
-
 
 #if defined(VERSION_EU)
 extern s32 func_8025F094_eu(void *, void *, s32, s32, s32, s32);
@@ -45,7 +33,6 @@ extern s32 PolyTrak_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 #else
 extern s32 func_8025F0D4_de(void *, void *, s32, s32, s32, s32);
 #endif
-
 
 extern s32 D_8010AC78;
 
@@ -270,15 +257,7 @@ const unsigned int D_blob_5472735a2d60c7e3f0e5[2] = {
     0xBF800000, 0x3F800000,
 };
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8026154C_C9E98[2] = {
-    0x3F000000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8026154C_C9E98_us_rev1.c */
 const unsigned int D_blob_30a83c3cc53f2e58e087[2] = {
     0x3F000000, 0x3F800000,
 };
-#endif

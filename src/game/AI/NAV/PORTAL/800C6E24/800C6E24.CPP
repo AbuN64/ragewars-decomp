@@ -1,11 +1,10 @@
 #include "include_asm.h"
 
 /* 800C6E24.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020AA0C_C7A24[2] = {
+/* ROM-grounded data: src/rw_pool_8020AA0C_C7A24_us_rev1.c */
+const unsigned int D_blob_3fa52e80a8180b523c67[2] = {
     0x3F800000, 0x3F060A93,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C1C6C[1] = {
@@ -28,13 +27,6 @@ unsigned int rodata_unresolved_800C1FDC[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C1D3C[1] = {
     0xBF800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020AA0C_C7A24_us_rev1.c */
-const unsigned int D_blob_3fa52e80a8180b523c67[2] = {
-    0x3F800000, 0x3F060A93,
 };
 #endif
 

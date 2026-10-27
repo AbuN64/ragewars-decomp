@@ -51,8 +51,9 @@ unsigned int D_blob_phase2_5a247187d2e6747d8707[1] = {
     0x00000002,
 };
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800EA084[3] = {
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+unsigned int D_blob_f32799a6cdf43a0d380f[3] = {
     0x00002C00, 0x00000200, 0x00000001,
 };
 #endif
@@ -70,38 +71,13 @@ unsigned int rodata_unresolved_800E28A4[3] = {
 };
 #endif
 
-#if defined(VERSION_US_REV1)
-/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_f32799a6cdf43a0d380f[3] = {
-    0x00002C00, 0x00000200, 0x00000001,
-};
-#endif
-
 /* 800E28A4_2.CPP */
 unsigned int D_auto_rodata_writable_800E28B0[8] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
 };
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 unsigned int data_unresolved_800DD530[3] = {
-    0x00000140, 0x000000F0, 0xFFFFFFFF,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int data_unresolved_800EA0B0[3] = {
-    0x00000140, 0x000000F0, 0xFFFFFFFF,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int data_unresolved_800EEEF0[3] = {
-    0x00000140, 0x000000F0, 0xFFFFFFFF,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int data_unresolved_800DE880[3] = {
     0x00000140, 0x000000F0, 0xFFFFFFFF,
 };
 #endif

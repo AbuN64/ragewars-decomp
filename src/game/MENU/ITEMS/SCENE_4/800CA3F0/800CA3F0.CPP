@@ -1,29 +1,13 @@
 #include "include_asm.h"
 
 /* 800CA3F0.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8028D28C_CAFF0[1] = {
-    0xBF800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8028D28C_CAFF0_us_rev1.c */
 const unsigned int D_blob_ad682bde1098985f10f1[1] = {
     0xBF800000,
 };
-#endif
 
 /* 800CA3F4.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8044D934_CAFF4[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_cells_8044D934_CAFF4_us_rev1.c */
 const unsigned int D_blob_77963e13064c8e978272[1] = {
     0x3F800000,
 };
-#endif

@@ -55,7 +55,6 @@ void func_80218464_de(void *);
 
 void Player_InitializePlayerHealth(void *);
 
-
 void * Player_GetPlayerByIndex(void *, u32);
 
 void * func_8022C55C_de(void *, u32);
@@ -69,7 +68,6 @@ void * func_8022C55C_de(void *, u32);
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
    scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Player_EndRound
    when func_802282EC_de reports it over. */
-
 
 extern u8 D_801462D5; /* MIXED Player_UpdateFragTagSelection */
 extern u8 D_801462DE; /* MIXED Player_UpdateFragTagSelection */
@@ -688,7 +686,6 @@ extern s32 Pak_CountLiveNodes(struct CMenu_t **);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
-
 static inline SharedPlayer *player_at(World_func_802283B8_de *world, u32 index) {
     SharedPlayer *player;
     s32 count;
@@ -739,8 +736,6 @@ extern void *Scene_GetIndexedModelResource(char *, s32);
 extern void Geometry_QueueDirectModel(void *, void *, char *, s32, s32);
 
 extern void func_80229D28_de(void *);
-
-
 
 extern s32 D_800CD730;
 
@@ -1200,17 +1195,9 @@ void Player_ApplyPlayerForces(void *listObject, void *bodyObject) {
 }
 
 /* 800C7C90.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80227038_C8890[8] = {
-    0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_tail_80227038_C8890_us_rev1[8] = {
     0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000, 0x3F000000, 0x42000000,
 };
-#endif
 
 /* 800C7CB0.CPP */
 const char D_auto_src_ragewars_resident_strings_C88B0_us_rev1[24] = "player anim object info";

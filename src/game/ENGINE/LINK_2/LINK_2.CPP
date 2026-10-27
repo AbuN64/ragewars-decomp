@@ -73,12 +73,9 @@ void Link_DispatchTrigger(Trigger *trigger) {
 INCLUDE_ASM("span_1000", Link_DispatchTrigger);
 #endif
 
-
 extern s32 Scene_FindActorTriggerRange(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
 
 extern s32 Scene_FindAlternateTriggerRange(s8 *arg0, s32 arg1, s32 *arg2, s32 *arg3);
-
-
 
 extern void Scene_ResetTransitionViewport(void);
 
@@ -215,7 +212,6 @@ extern s32 Scene_TestTriggerKindFlags(Shared_World *world, s32 id);
 
 extern void Scene_DispatchSecondaryTriggersOfKind(Shared_World *world, s32 id);
 
-
 extern void Scene_SetTriggerStateBit(Shared_World *world, Trigger *trigger, s32 arg);
 
 extern void Scene_DecrementTriggerCounter(Shared_World *world, s32 id);
@@ -327,11 +323,10 @@ s32 Link_CheckTriggerMessage(void *trigger, struct Player *player) {
 }
 
 /* 800C9C20.CPP */
-#if defined(VERSION_DE) || defined(VERSION_US)
-const unsigned int D_80278C10_CA820[1] = {
+/* ROM-grounded data: src/rw_pool_80278C10_CA820_us_rev1.c */
+const unsigned int D_blob_68c3074edad0ea851da3[1] = {
     0x40800000,
 };
-#endif
 
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C4B34[3] = {
@@ -339,19 +334,7 @@ unsigned int rodata_unresolved_800C4B34[3] = {
 };
 #endif
 
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80278C10_CA820_us_rev1.c */
-const unsigned int D_blob_68c3074edad0ea851da3[1] = {
-    0x40800000,
-};
-#endif
-
 /* 800C9C0C.CPP */
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int rodata_func_80278C10_de_800C4DE0[1] = {
-    0x40800000,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C4E24[3] = {

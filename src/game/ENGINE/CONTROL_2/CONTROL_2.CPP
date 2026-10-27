@@ -36,16 +36,9 @@ extern void *Player_GetFirstPlayer(void *);
 
 extern s32 Scene_GetModelSectionTwoIndex(Shared_World *table, s32 id);
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80264DF0_CA000[3] = {
-    0x3F800000, 0x3F800000, 0x3B808081,
-};
-#endif
-#if defined(VERSION_US_REV1)
 const unsigned int D_d0_0d3281030ce1b896[3] = {
     0x3F800000, 0x3F800000, 0x3B808081,
 };
-#endif
 void Control_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
     slot->mode = profileMode;
     if (profileMode == 0) {

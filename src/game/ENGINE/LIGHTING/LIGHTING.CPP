@@ -214,17 +214,9 @@ fail:
 }
 
 /* 800C9BB0.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80277128_CA7B0[6] = {
-    0x3F800000, 0xBF800000, 0x42800000, 0x42800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_80277128_CA7B0_us_rev1[6] = {
     0x3F800000, 0xBF800000, 0x42800000, 0x42800000, 0x3F800000, 0x3F800000,
 };
-#endif
 
 /* 80277444_2.CPP */
 extern void GraphU64_TransformDirection(void *arg0, void *arg1, void *arg2);

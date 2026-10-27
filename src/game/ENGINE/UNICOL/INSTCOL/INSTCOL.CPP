@@ -165,18 +165,7 @@ typedef struct Query Query;
  * then InstCol_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
  * a body at 0x174 when the shape is flagged 1 and type 3 entities when the shape is not flagged 0x20. */
 
-
-
-
-
-
-
 extern void InstCol_TestEntityContact(ActorMotion *, Query *, LevelActor *);
-
-
-
-
-
 
 void func_8023F43C_de(char *obj) {
     Query query;
@@ -309,8 +298,8 @@ const char rodata_unresolved_800C3618[8] =
     "_t\004.eosT";
 #endif
 
-#if defined(VERSION_EU_X)
-const unsigned int rodata_unresolved_800C39D8[2] = {
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+const unsigned int rodata_unresolved_800C87D8[2] = {
     0x3F800000, 0x3F800000,
 };
 #endif
@@ -324,12 +313,5 @@ unsigned int rodata_unresolved_800C3998[2] = {
 #if defined(VERSION_DE)
 const unsigned int rodata_unresolved_800C36E8[2] = {
     0x0023F858, 0x0023F880,
-};
-#endif
-
-
-#if defined(VERSION_US_REV1)
-const unsigned int rodata_unresolved_800C87D8[2] = {
-    0x3F800000, 0x3F800000,
 };
 #endif

@@ -362,9 +362,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
 /* 8023A284_7.CPP */
 /* Sorts and draws scene translucent objects in two groups around the view depth. */
 
-
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
-
 
 extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 
@@ -540,14 +538,6 @@ int Sky_CompareRotorSpeeds(void *first, void *second) {
 }
 
 /* 800C86E0.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8023B718_C92E0[4] = {
-    0x3F800000, 0x3FC49BA6, 0x46A00000, 0x40449BA6,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_8023B718_C92E0_us_rev1[4] = {
     0x3F800000, 0x3FC49BA6, 0x46A00000, 0x40449BA6,
 };
-#endif

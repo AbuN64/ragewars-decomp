@@ -10,19 +10,11 @@
 
 extern Gfx *g_displayListCursor;
 
-
-
-
-
-
-
 extern void Gfx_SetRenderMode(s32 mode);
 
 extern void Gfx_SetCombineMode(s32 mode);
 
 extern void Gfx_SetPrimitiveVertexMode(s32 mode);
-
-
 
 static inline void sync(void) {
     Gfx *cmd;
@@ -116,17 +108,9 @@ void Gfx_SetTexturePerspectiveMode(s32 mode) {
 
 /* Switches the texture mode (forced to 14 while D_80153F68 is clear), emitting a full-sync command the first time and a texture-enable command for modes 13 and 14. */
 
-
-
-
-
-
-
 /* Sets the environment and primitive colours from a packed 0xAARRGGBB colour when it differs from
    the last one set, D_800DF28C: appends 0xFB (environment, alpha zero) and 0xFA (primitive, with
    alpha) commands to the display list D_80110634 points into. */
-
-
 
 void Gfx_SetTextureMode(s32 mode) {
     if (D_80153F60.z == 0) {
@@ -198,11 +182,10 @@ char rodata_unresolved_804194A8[8] =
     "_SLOW5_T";
 #endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80418DA0_E2040[1] = {
+/* ROM-grounded data: src/rw_pool_80418DA0_E2040_us_rev1.c */
+const unsigned int D_blob_4dd9abd2df7b01df530e[1] = {
     0x3F800000,
 };
-#endif
 
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800EDA94[3] = {
@@ -213,12 +196,5 @@ unsigned int rodata_unresolved_800EDA94[3] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800DD414[3] = {
     0x3C23D70A, 0x3F99999A, 0x3D4CCCCD,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80418DA0_E2040_us_rev1.c */
-const unsigned int D_blob_4dd9abd2df7b01df530e[1] = {
-    0x3F800000,
 };
 #endif

@@ -6,13 +6,7 @@
 #include "COMMON/TRIPLE.H"
 #include "sdk/lib_802BB630/802BBC50.H"
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-const unsigned int D_802B6DEC_CD6F0[5] = {
-    0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_constants_802B6DEC_CD6F0_us_rev1[5] = {
     0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000,
 };
@@ -29,7 +23,6 @@ extern void func_802B6CBC_de(f32 *mf, s32 *m);
  /* 0.5 */
  /* -1, followed by 2 */
  /* 2 * 65536, followed by 2^31 */
-
 
   /* guMtxF2L */
                      /* cosf */
@@ -127,17 +120,9 @@ void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, 
     }
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802B6F9C_CD708[6] = {
-    0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000, 0x4F000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_802B6F9C_CD708_us_rev1[6] = {
     0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000, 0x4F000000,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C77B4[8] = {

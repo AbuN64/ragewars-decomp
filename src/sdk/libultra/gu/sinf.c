@@ -9,7 +9,6 @@
    evaluated in double, and anything beyond 2^28 returns zero. P, rpi, pihi, pilo and zero are the
    cartridge's tables, and the two 0.5 literals of ROUND are its own constants. */
 
-
 extern const f64 D_800C78D0_de[5]; /* P */
 extern const f64 D_800C78F8_de;    /* rpi */
 extern const f64 D_800C7900_de;    /* pihi */
@@ -85,7 +84,7 @@ unsigned int rodata_unresolved_802B71DC[1] = {
 };
 #endif
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_constants_802B7130_CD728_us_rev1[17] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
     0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
@@ -93,38 +92,8 @@ const unsigned int D_auto_src_rw_constants_802B7130_CD728_us_rev1[17] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-const unsigned int D_auto_rodata_func_802B7130_de_800C84C8[17] = {
-    0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
-    0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
-    0x3F000000,
-};
-#endif
-
-#if defined(VERSION_EU)
+#if defined(VERSION_DE) || defined(VERSION_EU)
 unsigned int rodata_unresolved_800C850C[1] = {
-    0x4F000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_802B7130_de_800C8E98[17] = {
-    0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
-    0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
-    0x3F000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int D_auto_rodata_func_802B7130_de_800C78D8[17] = {
-    0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
-    0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000, 0x3F000000,
-    0x3F000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C791C[1] = {
     0x4F000000,
 };
 #endif

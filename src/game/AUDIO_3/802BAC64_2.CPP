@@ -14,50 +14,21 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "sdk/al_globals.h"
 
-
  /* alGlobals */
 
        /* 1/1000 */
 
  /* 2^32 */
 
-
-
-
-
 /* _saveBuffer, drafted from ultralib src/audio/reverb.c: write count samples from the DMEM buffer
    buff back into the delay line at curr_ptr, wrapping the write back to r->base when it would run
    past the end of the line. The wrapped arm ends with its own set-buffer command, which the
    straight arm does not emit. */
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* _loadBuffer, drafted from ultralib src/audio/reverb.c: load count samples of the delay line at
    curr_ptr into the DMEM buffer buff, wrapping the read back to r->base when it would run past
    the end of the line. The wrapped arm emits its two loads as a pair of set-buffer and load-buffer
    commands against this function's own cartridge command words. */
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* _doModFunc, drafted from ultralib src/audio/reverb.c: advance the chorus sawtooth by rsinc per
    sample, wrap it from +RANGE, fold it into a triangle and return it scaled by rsgain. The library
@@ -158,12 +129,6 @@ Acmd *func_802B5D70_de(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)
 
  /* osVirtualToPhysical */
 
-
-
-
-
-
-
 Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
     Acmd *ptr = p;
@@ -201,12 +166,6 @@ int alFxParam(int *filter, int paramId, int param) {
 }
 
  /* osVirtualToPhysical */
-
-
-
-
-
-
 
 Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
 {
@@ -273,14 +232,8 @@ f32 func_802B6300_de(ALDelay28 *d, s32 count)
     return d->rsgain * val;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_EU) || defined(VERSION_US)
 unsigned int func_802B6300_de_padding_B6EA8[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int func_802B6300_de_padding_B7218[1] = {
     0x00000000,
 };
 #endif

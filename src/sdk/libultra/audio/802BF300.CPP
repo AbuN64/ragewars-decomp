@@ -40,14 +40,8 @@ void __osViInit(void)
     __osViSwapContext();
 }
 
-#if defined(VERSION_EU_X)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
 unsigned int func_802BA210_de_padding_BB1EC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int func_802BA210_de_padding_BB1AC[1] = {
     0x00000000,
 };
 #endif

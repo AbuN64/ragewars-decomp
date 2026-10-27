@@ -1,10 +1,9 @@
 #include "include_asm.h"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802688E4_CA174[1] = {
+/* ROM-grounded data: src/rw_pool_802688E4_CA174_us_rev1.c */
+const unsigned int D_blob_bbd398ceb1a519e00049[1] = {
     0x4123D70A,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C43B8[2] = {
@@ -27,12 +26,5 @@ unsigned int rodata_unresolved_800C4738[2] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C4488[2] = {
     0x3F800000, 0xACA40000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802688E4_CA174_us_rev1.c */
-const unsigned int D_blob_bbd398ceb1a519e00049[1] = {
-    0x4123D70A,
 };
 #endif

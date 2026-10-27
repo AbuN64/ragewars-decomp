@@ -7,13 +7,7 @@ const unsigned int D_blob_8953d58d3c35985f217c[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-const unsigned char rodata_func_8043829C_de_800DDF14[3] = {
-    0x25, 0x64, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US_REV1)
 const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
     0x25, 0x64, 0x00,
 };

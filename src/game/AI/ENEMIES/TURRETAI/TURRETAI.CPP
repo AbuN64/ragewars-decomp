@@ -106,28 +106,12 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
 }
 
 /* 800C6B18.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802034A4_C7718[5] = {
-    0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_802034A4_C7718_us_rev1[5] = {
     0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
 };
-#endif
 
 /* 800C6B2C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020388C_C772C[2] = {
-    0x3F800000, 0xBFC90FDC,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020388C_C772C_us_rev1.c */
 const unsigned int D_blob_f9c773ad0f04affb460a[2] = {
     0x3F800000, 0xBFC90FDC,
 };
-#endif

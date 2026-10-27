@@ -13,7 +13,7 @@ const unsigned int D_auto_src_rw_pool_8029F5E0_CBA60_us_rev1[34] = {
 #endif
 
 /* 8029FA7C_6.CPP */
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const f32 data_func_8029F5E0_de_800C5C00[34] = {
     1.875f, 0.0f, 0.0f, 0.0f, -1.875f, 0.0f,
     0.0f, 0.0f, 2.5625f, 0.0f, 0.0f, 0.0f,
@@ -25,40 +25,10 @@ const f32 data_func_8029F5E0_de_800C5C00[34] = {
 #endif
 
 /* 8029FA7C_7.CPP */
-#if defined(VERSION_DE)
-const f32 data_func_8029F5E0_de_800C5CD0[34] = {
-    1.875f, 0.0f, 0.0f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 0.0f, 0.0f,
-    2.5625f, 0.0f, 1.875f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 2.96875f, 0.0f,
-    0.0f, 0.0f, 1.875f, 0.0f, 2.5625f, 0.0f,
-    2.5625f, 0.0f, 0.0f, 0.0f,
-};
-#endif
 
 /* 8029FA7C_8.CPP */
-#if defined(VERSION_EU)
-const f32 data_func_8029F5E0_de_800C5F70[34] = {
-    1.875f, 0.0f, 0.0f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 0.0f, 0.0f,
-    2.5625f, 0.0f, 1.875f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 2.96875f, 0.0f,
-    0.0f, 0.0f, 1.875f, 0.0f, 2.5625f, 0.0f,
-    2.5625f, 0.0f, 0.0f, 0.0f,
-};
-#endif
 
 /* 8029FA7C_9.CPP */
-#if defined(VERSION_EU_X)
-const f32 data_func_8029F5E0_de_800C5FB0[34] = {
-    1.875f, 0.0f, 0.0f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 0.0f, 0.0f,
-    2.5625f, 0.0f, 1.875f, 0.0f, -1.875f, 0.0f,
-    0.0f, 0.0f, 2.5625f, 0.0f, 2.96875f, 0.0f,
-    0.0f, 0.0f, 1.875f, 0.0f, 2.5625f, 0.0f,
-    2.5625f, 0.0f, 0.0f, 0.0f,
-};
-#endif
 
 /* DATA_802A0A08.CPP */
 #if defined(VERSION_US)

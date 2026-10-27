@@ -12,7 +12,7 @@ unsigned int D_blob_phase2_8e8a0590f73b6be4f79d[4] = {
     0x00000000, 0x00000000, 0x002AF3A0, 0x002AF3A0,
 };
 #endif
-#ifdef VERSION_EU_X
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 unsigned int D_blob_phase2_8e8a0590f73b6be4f79d[4] = {
     0x00000000, 0x00000000, 0x3DB52AB7, 0x3D9CE1DE,
 };
@@ -20,11 +20,6 @@ unsigned int D_blob_phase2_8e8a0590f73b6be4f79d[4] = {
 #ifdef VERSION_US
 unsigned int D_blob_phase2_8e8a0590f73b6be4f79d[4] = {
     0x00000000, 0x00000000, 0x4D504143, 0x545F464C,
-};
-#endif
-#ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_8e8a0590f73b6be4f79d[4] = {
-    0x00000000, 0x00000000, 0x3DB52AB7, 0x3D9CE1DE,
 };
 #endif
 

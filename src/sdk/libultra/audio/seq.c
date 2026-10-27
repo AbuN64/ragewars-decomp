@@ -16,9 +16,6 @@
  /* readVarLen */
 extern u8 read8(ALSeq_s *);
 
-
-
-
 /* alSeqSecToTicks, drafted from ultralib src/audio/seq.c: convert seconds to ticks at the given
    tempo. The library evaluates it in single precision as sec * (division * 1e6f), so the product is
    spelled in that order against the cartridge constant after D_800CC740; GCC's u32-to-float and
@@ -32,7 +29,6 @@ extern u8 read8(ALSeq_s *);
    of the first event at or after the given tick count (the track start for zero), stepping a
    scratch pass with alSeqNextEvent and restoring the sequence's own position afterwards. */
 void alSeqNextEvent(ALSeq_s *seq, ALEvent *event);
-
 
  /* read8 */
 void alSeqNextEvent(ALSeq_s *seq, ALEvent *event)
@@ -235,15 +231,7 @@ s32 readVarLen(struct ALSeq_s *sequence) {
     return val;
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802B1FE8_CD330[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802B1FE8_CD330_us_rev1.c */
 const unsigned int D_blob_049096e9a996bdbf5044[1] = {
     0x3F800000,
 };
-#endif

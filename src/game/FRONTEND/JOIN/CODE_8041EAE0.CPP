@@ -12,51 +12,31 @@
 /* Resets the three 28-byte entries of D_80153F80: -1 in the first word and zero in the next
    three. */
 
-
-
-
 /* Counts the four player records whose byte 0x78 is one and returns 3, 2 or 1 for one, two or three such players, otherwise zero. */
-
-
 
 extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 
 /* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
-
-
-
 
 /* Returns entry column - 1 of row r in the five-word table D_800E37B8, or zero when the column is
    not positive. */
 
 /* Returns the score of the three entries: 5, 10 or 20 points by kind for each active one, repeating the previous award for other kinds. */
 
-
-
-
-
 /* Returns the column of the first of the seventeen eight-byte entries in row r of D_800E381C whose
    identifier matches, or zero when none does. */
 
-
-
 /* Releases the object D_800E39C0 holds through Cache_FreeMemory, clears D_800E39C0 and returns zero. */
 
-
-
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
-
 
 /* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
    and 0x15 otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled();
 
-
-
 extern void Smos_ReturnToPreviousScreen();
 
 /* Steps the selected menu item backwards and updates its display state. */
-
 
 extern void MarkMenuEventHandled(void),Frontend_SetWidgetFlag08(MenuWidget *,int);
 
@@ -74,12 +54,7 @@ enum { MENU_RESOURCE = 0x392 };
 
 /* Advances the selected menu item and updates its display state. */
 
-
-
-
 /* Cycles a menu selection and updates the associated character setting. */
-
-
 
 extern s32 D_8014DCF8[];
 
@@ -304,26 +279,8 @@ s32 Frontend_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) 
     return 0;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const unsigned int rodata_func_8041F298_us_800DC1F0[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int rodata_func_8041F6D8_eu_x_800E8D80[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_func_8041F6D8_eu_800EDBC0[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int rodata_func_8041F228_de_800DD540[1] = {
     0x3F800000,
 };
 #endif

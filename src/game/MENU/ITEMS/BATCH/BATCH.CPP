@@ -140,12 +140,7 @@ unsigned int D_auto_rodata_unresolved_8044C8C4[3] = {
     0x14400048, 0x00000000, 0x93B10127,
 };
 #endif
-#if defined(VERSION_EU_X)
-unsigned int D_auto_rodata_unresolved_8044C9F4[3] = {
-    0x3C010002, 0x01010821, 0x8C30B40C,
-};
-#endif
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 unsigned int D_auto_rodata_unresolved_8044C244[3] = {
     0x3C010002, 0x01010821, 0x8C30B40C,
 };

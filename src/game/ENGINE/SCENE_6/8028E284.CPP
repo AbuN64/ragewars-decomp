@@ -16,8 +16,6 @@
 
 /* Collects platform actors, records the special actor and selects one of three random states. */
 
-
-
 extern LevelActor *D_800F3CD0[];
 extern LevelActor *D_800F3D0C;
 extern s32 XPlus_NextRandomInteger(void);
@@ -38,10 +36,6 @@ void Scene_CollectSecondarySpecialActors(SceneRecAt140 *scene) {
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a table through the given
    nibble table. */
-
-
-
-
 
 extern void OnScreen_GetImageEntry(void *table, s32 index, void **out, u8 *tag);
 
@@ -102,10 +96,6 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
 }
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2910, once the resource has been loaded by func_80285180_de. */
-
-
-
-
 
 extern s32 PpDecom_UnpackResource(void *resource, s32 flags);
 
@@ -174,11 +164,6 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2920, once the resource has been loaded by func_80285180_de. Adapted from Scene_UnpackImagesWithLowBoost with the nibble table changed to D_800D2920. */
 
-
-
-
-
-
 void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     s32 i;
     void *data;
@@ -242,18 +227,10 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     } while (0);
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8028E78C_CB02C[1] = {
-    0x4AC80000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8028E78C_CB02C_us_rev1.c */
 const unsigned int D_blob_5ed4fa86953393fbfcea[1] = {
     0x4AC80000,
 };
-#endif
 
 s32 Scene_TestSectorSectionTwoEntries(Shared_World *arg0)
 {
@@ -302,9 +279,6 @@ void *Scene_GetStridedActorRecord(struct Shared_World *object, int index) {
 
 extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
-
-
-
 s32 Scene_TestNearbyActiveActor(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
     CVector3 vector;
     f32 magnitude;
@@ -330,14 +304,6 @@ s32 Scene_TestNearbyActiveActor(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
 }
 
 /* Reports whether arg1 is within range of arg0, using its type and state to pick the check. */
-
-
-
-
-
-
-
-
 
 s32 Scene_ClassifyNearbySpecialActor(ObjRecAtE4V2 *player, CVector3 *arg1) {
     CVector3 delta;

@@ -92,16 +92,9 @@ extern void GraphU64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802472F0_C9638[2] = {
-    0xC0000000, 0x40400000,
-};
-#endif
-#if defined(VERSION_US_REV1)
 const unsigned int D_blob_7feea27188c6a4b3e2db[2] = {
     0xC0000000, 0x40400000,
 };
-#endif
 void func_802472F0_de(void *actor) {
     CVector3 first;
     CVector3 second;

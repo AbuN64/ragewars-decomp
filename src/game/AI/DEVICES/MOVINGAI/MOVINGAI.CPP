@@ -274,11 +274,10 @@ void func_80206764_de(void) {
 
 /* 80204E78_7_DATA3.CPP */
 /* 800C6BD0.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802066A4_C77D0[1] = {
+/* ROM-grounded data: src/rw_pool_802066A4_C77D0_us_rev1.c */
+const unsigned int D_blob_06def481576a7536a499[1] = {
     0x3F800000,
 };
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C1DC4[3] = {
@@ -289,13 +288,6 @@ unsigned int rodata_unresolved_800C1DC4[3] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C1AE4[3] = {
     0x00206BDC, 0x00206C9C, 0x00206B3C,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802066A4_C77D0_us_rev1.c */
-const unsigned int D_blob_06def481576a7536a499[1] = {
-    0x3F800000,
 };
 #endif
 

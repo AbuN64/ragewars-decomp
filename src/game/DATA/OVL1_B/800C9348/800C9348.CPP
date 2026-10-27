@@ -1,10 +1,9 @@
 #include "include_asm.h"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802625F0_C9F48[1] = {
+/* ROM-grounded data: src/rw_pool_802625F0_C9F48_us_rev1.c */
+const unsigned int D_blob_c8f825d4ab0cc9948c9c[1] = {
     0x38C9116D,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C418C[1] = {
@@ -27,12 +26,5 @@ unsigned int rodata_unresolved_800C450C[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C425C[1] = {
     0x696E6465,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802625F0_C9F48_us_rev1.c */
-const unsigned int D_blob_c8f825d4ab0cc9948c9c[1] = {
-    0x38C9116D,
 };
 #endif

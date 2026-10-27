@@ -156,7 +156,6 @@ void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /** Check whether a human player in mode 1 may select a weapon; when refused play the refusal sound and post a notice. */
 
-
 extern int D_800D30BC;
 extern int Player_GetProfileAchievementFlag(char *, int);
 extern int Player_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
@@ -307,7 +306,6 @@ void Weapon_ApplySwitchAndSetSingleRound(void *arg0, func_80232A38_S1 *arg1) {
 /* 80231F5C_10.CPP */
 extern s32 func_802301F4_de(void *, void *);
 
-
 void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState) {
     void *controller;
 
@@ -399,7 +397,6 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
 /* Applies the negated, scaled speed of the event's source (float at 0x294, scaled by D_800C8130) to an
    object through YawMatrixLocal when the event side at 0x4 matches the mode: side 2 in mode 1, side 0
    otherwise. */
-
 
 extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 
@@ -762,18 +759,10 @@ const unsigned int D_blob_ee0e31e93888967ca263[1] = {
 #endif
 
 /* 800C810C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80232BD0_C8D0C[1] = {
-    0x3DCCCCCD,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80232BD0_C8D0C_us_rev1.c */
 const unsigned int D_blob_f7f44b23f073277f33ae[1] = {
     0x3DCCCCCD,
 };
-#endif
 
 /* 800C8110.CPP */
 #if !(defined(VERSION_US_REV1))
@@ -790,31 +779,15 @@ const unsigned int D_blob_8ff3ca9afe35ca23c56e[1] = {
 #endif
 
 /* 800C8114.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80232E64_C8D14[7] = {
-    0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_80232E64_C8D14_us_rev1[7] = {
     0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
 };
-#endif
 
 /* 800C8130.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80232F8C_C8D30[1] = {
-    0x3FC00000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80232F8C_C8D30_us_rev1.c */
 const unsigned int D_blob_0fd23d14ffff3a7a287e[1] = {
     0x3FC00000,
 };
-#endif
 
 /* 800C8134.CPP */
 #if !(defined(VERSION_US_REV1))
@@ -831,66 +804,33 @@ const unsigned int D_blob_8cabd7ec07ecd852f532[1] = {
 #endif
 
 /* 800C8138.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802331FC_C8D38[2] = {
-    0x40200000, 0x41700000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802331FC_C8D38_us_rev1.c */
 const unsigned int D_blob_3c990c36019f9d2fdf72[2] = {
     0x40200000, 0x41700000,
 };
-#endif
 
 /* 800C8140.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8023331C_C8D40[1] = {
-    0x43960000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8023331C_C8D40_us_rev1.c */
 const unsigned int D_blob_820ef7fd0a7ce277e362[1] = {
     0x43960000,
 };
-#endif
 
 /* 800C8144.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8023334C_C8D44[1] = {
-    0x40800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8023334C_C8D44_us_rev1.c */
 const unsigned int D_blob_5a75d5298ddd3c892ea1[1] = {
     0x40800000,
 };
-#endif
 
 /* 800C8148.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802335EC_C8D48[8] = {
-    0x3C8EFA36, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_802335EC_C8D48_us_rev1[8] = {
     0x3C8EFA36, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3F800000, 0x3FE52EDF, 0x3FE52EDF, 0x3F800000,
 };
-#endif
 
 /* 800C8168.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8023371C_C8D68[1] = {
+/* ROM-grounded data: src/rw_pool_8023371C_C8D68_us_rev1.c */
+const unsigned int D_blob_9c143aa5516c0958c802[1] = {
     0x44160000,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C2FAC[1] = {
@@ -907,12 +847,5 @@ unsigned int rodata_unresolved_800C332C[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C307C[1] = {
     0x40C00000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8023371C_C8D68_us_rev1.c */
-const unsigned int D_blob_9c143aa5516c0958c802[1] = {
-    0x44160000,
 };
 #endif

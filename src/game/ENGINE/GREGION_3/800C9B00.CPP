@@ -5,17 +5,9 @@
 #include "COMMON/OBJECTLINKS4_2.H"
 #include "COMMON/TRIPLE.H"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802765B0_CA700[3] = {
-    0x3C40C0C1, 0x3C40C0C1, 0x3C40C0C1,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_d0_960271c30e399034[3] = {
     0x3C40C0C1, 0x3C40C0C1, 0x3C40C0C1,
 };
-#endif
 
 void Region_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
     void *red_out, void *green_out, void *blue_out) {

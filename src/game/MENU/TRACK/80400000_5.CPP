@@ -12,13 +12,6 @@
    blends the surrounding keys' positions linearly with the vector scale and add helpers. Vector
    counterpart of Menu_EvaluateTrackOpacity. */
 
-
-
-
-
-
-
-
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
@@ -67,26 +60,8 @@ CVector3 Menu_EvaluateTrackColor(f32 t) {
     return result;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const unsigned int rodata_func_8040170C_de_800DB7DC[2] = {
-    0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int rodata_func_8040170C_de_800E836C[2] = {
-    0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_func_8040170C_de_800ED1AC[2] = {
-    0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int rodata_func_8040170C_de_800DCB2C[2] = {
     0x3F800000, 0x3F800000,
 };
 #endif

@@ -103,7 +103,7 @@ unsigned int D_auto_rodata_unresolved_800E39C4[35] = {
 };
 #endif
 
-#if defined(VERSION_US)
+#if defined(VERSION_EU) || defined(VERSION_US)
 unsigned int data_unresolved_800DE6B0[7] = {
     0x00000092, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
 };
@@ -112,12 +112,6 @@ unsigned int data_unresolved_800DE6B0[7] = {
 #if defined(VERSION_EU_X)
 unsigned int data_unresolved_800EB230[7] = {
     0x00000096, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int data_unresolved_800F0070[7] = {
-    0x00000092, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
 };
 #endif
 

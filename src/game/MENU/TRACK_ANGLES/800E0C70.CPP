@@ -1,15 +1,6 @@
 #include "include_asm.h"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80402BA0_E1870[12] = {
-    0x41F00000, 0x00000000, 0x4F000000, 0x3F800000, 0x437F0000, 0x4F000000, 0x437F0000, 0x4F000000,
-    0x437F0000, 0x4F000000, 0x437F0000, 0x4F000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_constants_80402BA0_E1870_us_rev1[12] = {
     0x41F00000, 0x00000000, 0x4F000000, 0x3F800000, 0x437F0000, 0x4F000000, 0x437F0000, 0x4F000000,
     0x437F0000, 0x4F000000, 0x437F0000, 0x4F000000,
 };
-#endif

@@ -497,29 +497,13 @@ void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *arg0)
 }
 
 /* 800CA494.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80290424_CB094[1] = {
-    0x42A3D70A,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80290424_CB094_us_rev1.c */
 const unsigned int D_blob_44d8067648dded17f40b[1] = {
     0x42A3D70A,
 };
-#endif
 
 /* 800CA498.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802905F4_CB098[2] = {
-    0x40F00000, 0x42080000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802905F4_CB098_us_rev1.c */
 const unsigned int D_blob_4aa51b098be20f0efb1c[2] = {
     0x40F00000, 0x42080000,
 };
-#endif

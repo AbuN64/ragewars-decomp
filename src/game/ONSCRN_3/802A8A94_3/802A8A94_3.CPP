@@ -180,15 +180,7 @@ void OnScreen_DrawScaledIntensityTexture(void *pTexture, f32 XPos, f32 YPos, int
 }
 
 /* 802A8A94_7.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802A9734_CBF48[1] = {
-    0x40800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802A9734_CBF48_us_rev1.c */
 const unsigned int D_blob_92c5c4c132cac6f4e59b[1] = {
     0x40800000,
 };
-#endif

@@ -16,17 +16,6 @@ extern f32 Nav_GetScaledAggression(void *arg0);
 
 extern s32 D_801468A0;
 
-
-
-
-
-
-
-
-
-
-
-
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     char *base;
     f32 temp_f20;
@@ -56,11 +45,10 @@ s32 Nav_EvaluateCaptureFlagMarkerSearch(void **arg0) {
     return 1;
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020EA10_C7B40[3] = {
+/* ROM-grounded data: src/rw_pool_8020EA10_C7B40_us_rev1.c */
+const unsigned int D_blob_e2105c22ed856e4916b8[3] = {
     0x3F19999A, 0x3E4CCCCD, 0x3F800000,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C1D8C[1] = {
@@ -77,12 +65,5 @@ unsigned int rodata_unresolved_800C213C[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C1E5C[1] = {
     0x0020ED00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020EA10_C7B40_us_rev1.c */
-const unsigned int D_blob_e2105c22ed856e4916b8[3] = {
-    0x3F19999A, 0x3E4CCCCD, 0x3F800000,
 };
 #endif

@@ -67,19 +67,11 @@ void VisData_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
 
 /* Tests a centered grid cell and interprets its sentinel value. */
 
-
 static inline int offset(int v){return v+9;}
 
 /* Looks up the neighbour cell for (x,y) in the object's inline grid when both axes are within 9, and sets its state from the sentinel found (or starts a placement for a normal cell). */
 
-
 /* Builds six clipping planes from an eye point and four corner points: each of the first five planes takes as its normal the normalised cross product of two edges between the points and as its distance the normal's projection of a point on it (the third plane through the corners, the others through the eye), and the sixth plane is the third plane with its normal reversed, its distance projected through the eye. */
-
-
-
-
-
-
 
 extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
@@ -242,10 +234,6 @@ s32 VisData_ContainsPoint(f32 (*planes)[4], f32 *point) {
 
 /* Returns 1 when each of the six planes has at least one of the n points on or inside it (normal dot point <= plane distance), else 0. */
 
-
-
-
-
 s32 VisData_TestPointsAgainstFrustum(CQuatern *planes, s32 n, CVector3 *points) {
     s32 i;
     s32 j;
@@ -375,15 +363,7 @@ char rodata_unresolved_80296C08[8] =
     "\000\000\000\003s16R";
 #endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80296930_CB2A0[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80296930_CB2A0_us_rev1.c */
 const unsigned int D_blob_0e557f3de25e32e16abb[1] = {
     0x3F800000,
 };
-#endif

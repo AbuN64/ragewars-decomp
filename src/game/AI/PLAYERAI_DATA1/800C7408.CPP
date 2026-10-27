@@ -1,13 +1,5 @@
 #include "include_asm.h"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8021A9A4_C8008[8] = {
-    0x41500000, 0x41A80000, 0x40E00000, 0x40400000, 0x40400000, 0x41B80000, 0x40E00000, 0x41000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_8021A9A4_C8008_us_rev1[8] = {
     0x41500000, 0x41A80000, 0x40E00000, 0x40400000, 0x40400000, 0x41B80000, 0x40E00000, 0x41000000,
 };
-#endif

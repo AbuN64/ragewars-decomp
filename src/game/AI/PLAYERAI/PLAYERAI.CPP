@@ -128,7 +128,6 @@ void func_80219480_de(void *effect, void *player) {
     char pad[0x10];
 }
 
-
 extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
@@ -263,8 +262,6 @@ s32 XPlus_NextRandomInteger(void);
 
 extern s32 D_8011D8D0;
 extern Shared_MatchRules D_801468A0[];
-
-
 
 void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct Shared_ReactionInteraction *packet) {
     f32 facingSine;
@@ -1137,15 +1134,7 @@ done:
 }
 
 /* 800C73E8.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8021A78C_C7FE8[2] = {
-    0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8021A78C_C7FE8_us_rev1.c */
 const unsigned int D_blob_87bff964910f8ef44402[2] = {
     0x3F800000, 0x3F800000,
 };
-#endif

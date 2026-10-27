@@ -82,7 +82,6 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
    weapon's icon from D_800D052C (no icon for weapons outside 0 to 21), then passes the list to
    TeamSelect_DrawWeaponIcons. */
 
-
 extern f32 GraphU64_ApproachValue(f32, f32, f32);
 
 extern void GraphU64_IdentityMatrix(Matrix *);
@@ -477,25 +476,16 @@ clamp:
 #endif
 
 /* 800C733C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8021836C_C7F3C[1] = {
-    0x3E32B8C4,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8021836C_C7F3C_us_rev1.c */
 const unsigned int D_blob_5c38d58e12f46481afc5[1] = {
     0x3E32B8C4,
 };
-#endif
 
 /* 800C7340.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802184C0_C7F40[2] = {
+/* ROM-grounded data: src/rw_pool_802184C0_C7F40_us_rev1.c */
+const unsigned int D_blob_32e5c09556bbd500697d[2] = {
     0x40C90FDC, 0x40C90FDC,
 };
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C2538[2] = {
@@ -512,12 +502,5 @@ unsigned int rodata_unresolved_800C24F8[2] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C2258[2] = {
     0x65616D00, 0x437F0000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802184C0_C7F40_us_rev1.c */
-const unsigned int D_blob_32e5c09556bbd500697d[2] = {
-    0x40C90FDC, 0x40C90FDC,
 };
 #endif

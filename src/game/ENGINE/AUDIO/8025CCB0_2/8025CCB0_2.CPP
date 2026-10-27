@@ -17,14 +17,6 @@
 
 /* Starts a random song from a group on a music player: picks one of the group's songs with equal weight, returning -1 when the group has none, records the group and song and takes the next request id, repeats the pick for the queued group, sets the volume to 0x40 and the speed from the given scale, then either stops the current song so it restarts (while starting or playing) or requests a start, and returns the request id. The picker and restart are inline helpers; the pick for the queued group is repeated with its result unused, as in the cartridge. */
 
-
-
-
-
-
-
-
-
 static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
     s32 first;
     s32 last;
@@ -66,9 +58,6 @@ static inline void restart(PlayerRecAt1E *player) {
 }
 
 /* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword func_802B2510_de returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
-
-
-
 
 extern s16 func_802B2510_de(void *, void *);
 
@@ -201,11 +190,10 @@ char rodata_unresolved_8025D3E8[8] =
     "EHAVIOR_";
 #endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025D350_C9CA8[3] = {
+/* ROM-grounded data: src/rw_pool_8025D350_C9CA8_us_rev1.c */
+const unsigned int D_blob_a274f83a44ed3e23c66c[3] = {
     0x41F00000, 0x00000000, 0x3C23D70A,
 };
-#endif
 
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800C4274[3] = {
@@ -216,12 +204,5 @@ unsigned int rodata_unresolved_800C4274[3] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C3FC4[3] = {
     0x3C23D70A, 0x46FFFE00, 0x3C23D70A,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8025D350_C9CA8_us_rev1.c */
-const unsigned int D_blob_a274f83a44ed3e23c66c[3] = {
-    0x41F00000, 0x00000000, 0x3C23D70A,
 };
 #endif

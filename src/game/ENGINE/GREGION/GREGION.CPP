@@ -135,10 +135,6 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
 /* 8027451C_3.CPP */
 /* Returns whether a polygon counts as a wall: without flag 0x2000 it returns its flag 8, and otherwise it takes the polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one) and returns whether the normal's upward component is at most D_800C9AD8. */
 
-
-
-
-
 s32 Region_TestPolygonSlopeFlag(Triangle *polygon) {
     CVector3 up;
     CVector3 normal;
@@ -258,8 +254,6 @@ bounds_loop:
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
    Adapted from GraphU64_GetCachedSurfaceNormal with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
-
-
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     CVector3 a;
     CVector3 b;
@@ -370,7 +364,6 @@ CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
 /* 80275E44.CPP */
 /* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in D_80115E10, or the mean vertex height when the plane is vertical.
    Adapted from func_8027525C_de with the edge vectors computed through the GraphU64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
-
 
 static inline void cross_node_edges(Node75 *node) {
     CVector3 a;
@@ -685,67 +678,34 @@ const unsigned int D_blob_704ee15b1ec28a1ee6e6[2] = {
 #endif
 
 /* 800C9ADC.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80275A58_CA6DC[1] = {
-    0x3CF00000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80275A58_CA6DC_us_rev1.c */
 const unsigned int D_blob_1dd2bb61dda88f70e062[1] = {
     0x3CF00000,
 };
-#endif
 
 /* 800C9AE0.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80275BC8_CA6E0[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80275BC8_CA6E0_us_rev1.c */
 const unsigned int D_blob_2007bd9d947de3a8f876[1] = {
     0x3F800000,
 };
-#endif
 
 /* 800C9AE4.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80275C94_CA6E4[2] = {
-    0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80275C94_CA6E4_us_rev1.c */
 const unsigned int D_blob_39bb6df7b4af97a3ff93[2] = {
     0x3F800000, 0x3F800000,
 };
-#endif
 
 /* 800C9AEC.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80275DD4_CA6EC[2] = {
-    0xC6600000, 0x3EAAAAAB,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80275DD4_CA6EC_us_rev1.c */
 const unsigned int D_blob_be6f94624239bf08ad99[2] = {
     0xC6600000, 0x3EAAAAAB,
 };
-#endif
 
 /* 800C9AF4.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80275F28_CA6F4[1] = {
+/* ROM-grounded data: src/rw_pool_80275F28_CA6F4_us_rev1.c */
+const unsigned int D_blob_dd17c7991d2f6b062f5a[1] = {
     0xBF800000,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C4938[2] = {
@@ -768,12 +728,5 @@ unsigned int rodata_unresolved_800C4CB8[2] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C4A08[2] = {
     0x3C40C0C1, 0x4F000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80275F28_CA6F4_us_rev1.c */
-const unsigned int D_blob_dd17c7991d2f6b062f5a[1] = {
-    0xBF800000,
 };
 #endif

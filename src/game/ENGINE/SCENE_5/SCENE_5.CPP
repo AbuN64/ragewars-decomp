@@ -335,26 +335,8 @@ void Scene_CacheBlLevelData(void *world, s32 arg1) {
     }
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 unsigned int rodata_unresolved_800CD64C[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800CECEC[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800CE31C[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800CD73C[3] = {
     0x3F800000, 0x3F800000, 0x3F800000,
 };
 #endif

@@ -15,18 +15,10 @@ const unsigned int D_blob_e29b56041f092c4f90be[2] = {
 #endif
 
 /* 800C80A8.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80231BB0_C8CA8[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80231BB0_C8CA8_us_rev1.c */
 const unsigned int D_blob_180bbdfd44b8ddc5fb9c[1] = {
     0x3F800000,
 };
-#endif
 
 /* 800C80AC.CPP */
 #if !(defined(VERSION_US_REV1))

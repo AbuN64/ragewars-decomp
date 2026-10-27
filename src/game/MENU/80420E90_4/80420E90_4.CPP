@@ -8,7 +8,6 @@
    Scene_LoadLevelResources, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
 
-
 void Menu_ReleaseOptionsScene(void) {
     char *object;
 
@@ -40,26 +39,8 @@ void Menu_SetOptionsSceneSelection(int key) {
  g->width = width; width = height; g->height = width;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const unsigned int rodata_unresolved_800DC2C4[1] = {
-    0x3FAAAAA8,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int rodata_unresolved_800E8E54[1] = {
-    0x3FAAAAA8,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800EDC94[1] = {
-    0x3FAAAAA8,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int rodata_unresolved_800DD614[1] = {
     0x3FAAAAA8,
 };
 #endif

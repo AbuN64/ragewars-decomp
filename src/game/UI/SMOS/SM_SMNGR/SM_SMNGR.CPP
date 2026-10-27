@@ -9,18 +9,10 @@
 #include "COMMON/CALLBACK.H"
 
 /* 800CA60C_5.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80297A34_CB3B0[2] = {
-    0x408F4000, 0x00000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 const unsigned int D_blob_a8b599cb23bc51b717e6[2] = {
     0x408F4000, 0x00000000,
 };
-#endif
 
 /* 80297CD0.CPP */
 /* Moves the focus of the current screen's selected widget in a direction (5 to 8 following its first, second, third or fourth link) past linked widgets flagged 0x100, and selects the first unflagged one through Smos_SetFocusedElement. */

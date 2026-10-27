@@ -19,9 +19,7 @@ extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);
    cartridge constants and each deltaFlag store made through a pointer local, as the library's
    -fforce-addr kept it frame-relative. */
 
-
  /* __readVarLen */
-
 
  /* __alCSeqGetTrackEvent */
 
@@ -246,13 +244,6 @@ f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
 
 /* Scales the float argument by the unsigned rate at offset 0x40 of the object behind arg0 times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
 
-
-
-
-
-
-
-
 u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
     f64 val;
     f64 div;
@@ -370,39 +361,18 @@ unsigned int rodata_unresolved_802AE9DC[1] = {
 #endif
 
 /* ROM-grounded data: rodata/shared/800CC540 */
-#ifdef VERSION_DE
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)
 const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
     0x41F00000, 0x00000000, 0x3F800000,
 };
 #endif
-#ifdef VERSION_EU
-const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
-    0x41F00000, 0x00000000, 0x3F800000,
-};
-#endif
-#ifdef VERSION_EU_X
-const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
-    0x41F00000, 0x00000000,
-};
-#endif
-#ifdef VERSION_US
-const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
-    0x41F00000, 0x00000000, 0x3F800000,
-};
-#endif
-#ifdef VERSION_US_REV1
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
     0x41F00000, 0x00000000,
 };
 #endif
 
-#if defined(VERSION_EU_X)
-const unsigned int D_802AE290_CD148[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802AE290_CD148_us_rev1.c */
 const unsigned int D_blob_6068a82f1f3c1327b771[1] = {
     0x3F800000,

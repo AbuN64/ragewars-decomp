@@ -69,17 +69,6 @@ INCLUDE_ASM("span_1000", Rumble_GetSpatialEffectLevel);
 
 /* With interrupts masked, takes the first node of a pool's free list, moves it onto the pool's active list and initialises it with its key, position, two values and owner slot (storing the node there), then binds the two handles named by the key's identifiers, returning the node or null. */
 
-
-
-
-
-
-
-
-
-
-
-
 static inline void bind(NodeCode8028469C *node, s32 offset, s32 id) {
 
     Control_InitializeCurvePlayer((char *)node + offset, Scene_GetEffectCurveRecord(&g_world, id));
@@ -264,11 +253,10 @@ const unsigned int D_802856E0_CABB0[3] = {
 };
 #endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802859D0_CABBC[2] = {
+/* ROM-grounded data: src/rw_pool_802859D0_CABBC_us_rev1.c */
+const unsigned int D_blob_4faf23a8416908d6583f[2] = {
     0x3F800000, 0x3F800000,
 };
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C4E04[3] = {
@@ -291,11 +279,4 @@ unsigned int rodata_unresolved_800C5184[3] = {
 #if defined(VERSION_DE)
 char rodata_unresolved_800C4ED4[12] =
     "ne__Construc";
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802859D0_CABBC_us_rev1.c */
-const unsigned int D_blob_4faf23a8416908d6583f[2] = {
-    0x3F800000, 0x3F800000,
-};
 #endif

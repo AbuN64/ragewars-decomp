@@ -10,35 +10,20 @@
 extern Shared_Entry D_800E5CA0;
 #include "GFX/TEXT/802A8A94_5.H"
 
-
-
 extern func_802077F4_S2 *Pak_GetWidgetStyle(void *, s32);
-
 
 extern void Pak_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, MenuStyle *);
 
 /* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
-
-
-
-
-
-
-
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
 /* Shifts the input history, appends the current byte, and advances the history counters. */
 
-
-
-
-
 extern s32 D_80154030;
 
 /* Checks whether the input matches the indexed, XOR-masked reference string. */
-
 
 s32 func_802BD400_de(u8 *);
 
@@ -159,26 +144,8 @@ s32 Menu_CheckEncodedText(u8 *input) {
     return 1;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
 const unsigned int rodata_func_8043CB30_de_800DCF04[1] = {
-    0x41700000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-const unsigned int rodata_func_8043CB30_de_800E9A94[1] = {
-    0x41700000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_func_8043CB30_de_800EE8D4[1] = {
-    0x41700000,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int rodata_func_8043CB30_de_800DE254[1] = {
     0x41700000,
 };
 #endif

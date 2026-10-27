@@ -561,7 +561,6 @@ loop_81:
     actor_kind_bd7 = 0xBD7;
     var_v0_3 = 3 * sizeof(void *);
 
-
     (((struct SharedRecAt1B92C *)(table))->unk1B6A4) = i;
     D_800F3CD0.primary.kindBd7 = 0;
     do {
@@ -634,7 +633,6 @@ block_109:
     var_a0_3 = 9;
     var_a2_2 = (((struct SharedRecAt1B92C *)(table))->unk138);
     var_v0_4 = 9 * sizeof(void *);
-
 
     D_800F3CD0.kindBd6 = 0;
     do {
@@ -718,7 +716,6 @@ block_122:
             var_s2_4 += sizeof(struct Shared_SceneActorStride);
         } while (k < temp_s4);
     }
-
 
     count = (char *)&((struct SharedRecAt1B92C *)table)->navPointSet - (char *)table;
     temp_v0_2 = (char *)table + count;
@@ -1113,15 +1110,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
 #undef ACTOR_OVERLAPS
 
 /* 800CA2FC.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80287F18_CAEFC[1] = {
-    0x453B8000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80287F18_CAEFC_us_rev1.c */
 const unsigned int D_blob_2dee24b4263488ecc3b2[1] = {
     0x453B8000,
 };
-#endif

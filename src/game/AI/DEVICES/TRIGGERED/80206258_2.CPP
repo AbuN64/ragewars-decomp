@@ -216,7 +216,6 @@ void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
 
 /* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through GraphU64_InterpolateVector, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and Region_SetNodeGroupHeight. */
 
-
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
@@ -261,7 +260,6 @@ void *func_80219434_de(struct Cursor *);
 
 void GraphU64_SubtractVectors(void *, void *, void *);
 
-
 f32 Math_Sqrtf(f32);
 
 f32 Barrel_GetSignedAngleToPoint(void *, CVector3);
@@ -284,7 +282,6 @@ extern char D_002079B0;
 extern char D_00207910;
 
 extern f32 D_800C1B9C_de;
-
 
 void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
     CVector3 point;
@@ -600,15 +597,7 @@ void func_80207890_de(void *object, void *state) {
     }
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_802077F4_C788C[1] = {
-    0x40C90FDC,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802077F4_C788C_us_rev1.c */
 const unsigned int D_blob_349aecbf22c8d4304034[1] = {
     0x40C90FDC,
 };
-#endif

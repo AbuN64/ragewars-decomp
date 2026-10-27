@@ -11,11 +11,8 @@ unsigned char D_auto_func_802B339C_us_padding_B3F9C[4] = { 0x20, 0x00, 0x00, 0x0
 #endif
 
 /* 802B63E4_11.CPP */
-#if defined(VERSION_EU_X)
-unsigned char D_auto_func_802B6900_de_padding_B7A58[8] = { 0x14, 0x40, 0xFF, 0xE4, 0x25, 0x08, 0x00, 0x04 };
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+unsigned char D_auto_func_802B6900_de_padding_BC848[8] = { 0x14, 0x40, 0xFF, 0xE4, 0x25, 0x08, 0x00, 0x04 };
 #endif
 
 /* 802B63E4_14.CPP */
-#if defined(VERSION_US_REV1)
-unsigned char D_auto_func_802B6900_de_padding_BC848[8] = { 0x14, 0x40, 0xFF, 0xE4, 0x25, 0x08, 0x00, 0x04 };
-#endif

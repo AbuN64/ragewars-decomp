@@ -23,7 +23,6 @@
 
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */
 
-
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 
 extern void *Scene_GetActorDefinition(void *arg0, s32 arg1);
@@ -44,9 +43,6 @@ extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor 
 extern void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10);
 
 extern char D_8011D8D0[];
-
-
-
 
 static __inline__ SpawnChoice *spawnTable0(void) {
     extern SpawnChoice D_800C8510_de[];
@@ -183,12 +179,6 @@ static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwne
     owner->remaining -= func_802800C0_de((EffectSystem *)D_8011D8D0, (EffectActor *)object, (EffectActor *)object, &owner->spawn,
             0, count, object->rotation, object->motion, position, 0, -1, 0);
 }
-
-
-
-
-
-
 
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
@@ -365,15 +355,7 @@ void func_80206018_de(void *actor, EventRecAt30 *callbackRecord) {
     }
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80205F18_C77B8[2] = {
-    0x42340000, 0x42700000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80205F18_C77B8_us_rev1.c */
 const unsigned int D_blob_2e03215b6ac2c405dd16[2] = {
     0x42340000, 0x42700000,
 };
-#endif

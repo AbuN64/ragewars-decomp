@@ -26,22 +26,11 @@ extern void SmSmngr_DeactivateCurrentScreen(s32 arg0);
 
 extern void Frontend_ReleaseReferencedBuffer(s16 arg0);
 
-
-
 extern void Frontend_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
 extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, ArgsCode80296014 *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
-
-
-
-
-
-
-
-
-
 
 extern Element *FindMenuElement(s32 id);
 static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 context) {
@@ -82,28 +71,11 @@ static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 con
     return result;
 }
 
-                                                              
-
-
-
-
-
-
 typedef s32 (*FuncPtr)(s32, s32, s32, s32);
-
-
-                                                             
-
-
-
-
-
 
 /** Mark the global object's field at offset 0x520. */
 
-
 s32 SmXlate_SwitchScreen(s32);
-
 
 void Smos_PopScreen(void) {
     s32 index;
@@ -445,15 +417,7 @@ void Smos_GetScreenDrawOrigin(s32 *arg0, s32 *arg1) {
     *arg1 = D_8014D080->field538;
 }
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80298FE8_CB408[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80298FE8_CB408_us_rev1.c */
 const unsigned int D_blob_95c14edb8bb0fb2af018[1] = {
     0x3F800000,
 };
-#endif

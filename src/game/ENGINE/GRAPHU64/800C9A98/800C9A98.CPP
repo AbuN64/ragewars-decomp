@@ -1,11 +1,10 @@
 #include "include_asm.h"
 
 /* 800C9A98.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80274DFC_CA698[3] = {
+/* ROM-grounded data: src/rw_pool_80274DFC_CA698_us_rev1.c */
+const unsigned int D_blob_a3631d75d7ffe498db90[3] = {
     0xBF800000, 0x3F800000, 0x3F800000,
 };
-#endif
 
 #if defined(VERSION_US)
 char rodata_unresolved_800C48E4[12] =
@@ -27,13 +26,6 @@ unsigned int rodata_unresolved_800C4C64[3] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C49B4[3] = {
     0xBF800000, 0x3EAAAAAB, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80274DFC_CA698_us_rev1.c */
-const unsigned int D_blob_a3631d75d7ffe498db90[3] = {
-    0xBF800000, 0x3F800000, 0x3F800000,
 };
 #endif
 

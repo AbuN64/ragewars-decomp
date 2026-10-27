@@ -25,32 +25,16 @@ const unsigned int D_blob_74d7be23a8e853412850[2] = {
 #endif
 
 /* 800C6E60.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020BE7C_C7A60[1] = {
-    0x4E6E6B28,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020BE7C_C7A60_us_rev1.c */
 const unsigned int D_blob_785e6c1675c45c6d0eb6[1] = {
     0x4E6E6B28,
 };
-#endif
 
 /* 800C6E64.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020C078_C7A64[1] = {
-    0x4B189680,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020C078_C7A64_us_rev1.c */
 const unsigned int D_blob_8b2c36613f6e931f799c[1] = {
     0x4B189680,
 };
-#endif
 
 /* 800C6E68.CPP */
 #if !(defined(VERSION_US_REV1))
@@ -67,46 +51,22 @@ const unsigned int D_blob_b5e321df298d67e78639[2] = {
 #endif
 
 /* 800C6E70.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020C5A0_C7A70[3] = {
-    0xBF800000, 0xBF800000, 0x47480000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020C5A0_C7A70_us_rev1.c */
 const unsigned int D_blob_346f9c890bf7cff82b8a[3] = {
     0xBF800000, 0xBF800000, 0x47480000,
 };
-#endif
 
 /* 800C6E7C.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020CA10_C7A7C[2] = {
-    0xBF800000, 0x41700000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020CA10_C7A7C_us_rev1.c */
 const unsigned int D_blob_8d7cc47a80dd77f04129[2] = {
     0xBF800000, 0x41700000,
 };
-#endif
 
 /* 800C6E84_6.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8020CD74_C7A84[1] = {
-    0x4275C28F,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8020CD74_C7A84_us_rev1.c */
 const unsigned int D_blob_bfa68451c3e10a33f992[1] = {
     0x4275C28F,
 };
-#endif
 
 /* 80208000_6.CPP */
 /** Returns the difference between the constant after D_800C6E20 and Nav_GetDifficultyEngagementAdjustment's result, scaled by D_800C6E28. */

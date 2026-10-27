@@ -16,13 +16,7 @@
 #include "gbi.h"
 
 /* 800E1FC0.CPP */
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-const unsigned int D_80439EC4_E2BC0[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80439EC4_E2BC0_us_rev1.c */
 const unsigned int D_blob_9c12cf7de65376bb1f33[1] = {
     0x3F800000,
@@ -30,24 +24,11 @@ const unsigned int D_blob_9c12cf7de65376bb1f33[1] = {
 #endif
 
 /* 800E1FC4.CPP */
-#if !(defined(VERSION_EU) || defined(VERSION_US_REV1))
-const unsigned int D_8043A330_E2BC4[7] = {
-    0x3B656042, 0x40A00000, 0xC2C80000, 0x41E00000, 0x41400000, 0xC0400000, 0xC1900000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_8043A330_E2BC4_us_rev1[7] = {
     0x3B656042, 0x40A00000, 0xC2C80000, 0x41E00000, 0x41400000, 0xC0400000, 0xC1900000,
 };
-#endif
 
 /* 8043A0B0_6.CPP */
-#if defined(VERSION_EU)
-const unsigned int D_auto_rodata_func_8043A330_de_800EE614[7] = {
-    0x3B656042, 0x40A00000, 0xC2C80000, 0x41E00000, 0x41400000, 0xC0400000, 0xC1900000,
-};
-#endif
 
 /* CODE_8043A0B0.CPP */
 extern struct FourPlayerResultsScreen *D_800E59E0;

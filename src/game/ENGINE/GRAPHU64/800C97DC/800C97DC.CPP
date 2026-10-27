@@ -2,18 +2,10 @@
 #include "TYPES.H"
 
 /* 800C97DC.CPP */
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8026F620_CA3DC[1] = {
-    0x3F800000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8026F620_CA3DC_us_rev1.c */
 const unsigned int D_blob_8e83d0eb29d7c4111e69[1] = {
     0x3F800000,
 };
-#endif
 
 /* 800C97E0.CPP */
 #if defined(VERSION_US_REV1)
@@ -35,7 +27,7 @@ const unsigned int D_auto_src_rw_pool_8027027C_CA460_us_rev1[24] = {
 #endif
 
 /* 8026E1F8_10.CPP */
-#if defined(VERSION_EU)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
 const u32 data_func_8026FC9C_de_800C49A0[32] = {
     0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
     0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
@@ -47,16 +39,6 @@ const u32 data_func_8026FC9C_de_800C49A0[32] = {
 #endif
 
 /* 8026E1F8_11.CPP */
-#if defined(VERSION_EU_X)
-const u32 data_func_8026FC9C_de_800C49E0[32] = {
-    0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
-    0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
-    0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
-    0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
-    0x47800000, 0x4F000000, 0x47800000, 0x4F000000, 0x47800000, 0x4F000000,
-    0x47800000, 0x4F000000,
-};
-#endif
 
 /* 8026E1F8_12.CPP */
 #if defined(VERSION_EU)

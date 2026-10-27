@@ -64,8 +64,9 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
 }
 
 /* 800C6E84_21.CPP */
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-const unsigned int D_8021321C_C7DE0[1] = {
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_8021321C_C7DE0_us_rev1.c */
+const unsigned int D_blob_191e35959cee9de3e658[1] = {
     0x42CCCCCC,
 };
 #endif
@@ -85,12 +86,5 @@ unsigned int rodata_unresolved_800C2394[3] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C20F4[3] = {
     0x43000000, 0x41F00000, 0x00000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8021321C_C7DE0_us_rev1.c */
-const unsigned int D_blob_191e35959cee9de3e658[1] = {
-    0x42CCCCCC,
 };
 #endif

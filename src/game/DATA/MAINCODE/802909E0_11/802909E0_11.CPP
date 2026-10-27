@@ -1,14 +1,11 @@
 
 
 /* 802909E0_11.CPP */
-#if defined(VERSION_EU)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
 unsigned char D_auto_func_80290B88_eu_padding_91788[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
 #endif
 
 /* 802909E0_12.CPP */
-#if defined(VERSION_EU_X)
-unsigned char D_auto_func_80290BB8_eu_x_padding_917B8[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
-#endif
 
 /* 80296FF8_7.CPP */
 #if defined(VERSION_US_REV1)

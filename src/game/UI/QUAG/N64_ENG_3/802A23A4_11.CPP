@@ -20,7 +20,6 @@ extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
-
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -75,7 +74,6 @@ void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
 
 extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
 
-
 void N64Eng_DecrementNumericWidget(void *arg0)
 {
     RecordN64EngCreateNumericWidget *object = arg0;
@@ -109,11 +107,9 @@ void N64Eng_DecrementNumericWidget(void *arg0)
   }
 }
 
-
 extern unsigned int Smos_GetControlRepeatLimit(void);
 
 void N64Eng_IncrementNumericWidget(void *arg0);
-
 
 void N64Eng_IncrementNumericWidget(void *arg0)
 {
@@ -238,7 +234,6 @@ int N64Eng_CancelSelectionRepeat(void *object, int unused, unsigned int event, i
     return 0;
 }
 
-
 /* Counts ticks while the controller state is 0 or 1; after ten, steps the list selection backward (state 0) or forward (state 1). Returns 0. */
 s32 TickSelectionRepeat(void *widget) {
     struct CommandListController *cmd = widget;
@@ -265,14 +260,8 @@ s32 N64Eng_FreeNumericWidget(void *arg0) {
     return 0;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_EU_X) || defined(VERSION_US)
 unsigned int func_802A206C_de_padding_A2BCC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int func_802A206C_de_padding_A2DDC[1] = {
     0x00000000,
 };
 #endif

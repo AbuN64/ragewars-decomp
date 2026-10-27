@@ -296,29 +296,9 @@ s32 func_8023DDC4_de(Ray *ray, CQuatern *rect, f32 *t) {
     return 0;
 }
 
-#if defined(VERSION_EU_X)
-const unsigned int rodata_unresolved_800C3960[8] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
-};
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int rodata_unresolved_800C3670[8] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
-};
-#endif
-
-#if defined(VERSION_EU) || defined(VERSION_US)
-const unsigned int D_8023D380_C9360[8] = {
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_tail_8023D380_C9360_us_rev1[8] = {
     0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
 };
-#endif
 
 /* 800C8710_5.CPP */
 #if !(defined(VERSION_US_REV1))
@@ -340,4 +320,3 @@ const unsigned int D_blob_15414668f9063e063991[2] = {
 #endif
 
 /* 800C878C.CPP */
-

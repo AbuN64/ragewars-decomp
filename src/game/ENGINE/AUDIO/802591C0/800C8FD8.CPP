@@ -22,36 +22,19 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/EXTERNS_11.H"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80258B94_C9BD8[2] = {
-    0x41F00000, 0x00000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80258B94_C9BD8_us_rev1.c */
 const unsigned int D_blob_5ba0e1e9862d81f4542d[2] = {
     0x41F00000, 0x00000000,
 };
-#endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_80258E5C_C9BE0[2] = {
-    0x3F800000, 0x42200000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_80258E5C_C9BE0_us_rev1.c */
 const unsigned int D_blob_a66da9ca903522cb6da3[2] = {
     0x3F800000, 0x42200000,
 };
-#endif
 
 extern void Audio_StopVoicesByKey(void *arg0, s32 arg1);
 
 extern void Audio_StopVoicesBySecondaryValue(void *, s32);
-
 
 extern void Audio_StopVoicesByFlags(void *arg0, s32 arg1);
 
@@ -73,15 +56,11 @@ extern void Audio_EnableMusicGainOverride(Track *a);
 
 extern void Audio_DisableMusicGainOverride(Track *a);
 
-
 /* Picks a weighted random entry from the range func_80265550_de finds for an id in a scene's table: -1 when
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs
  * ten times its table value, a random draw selects one, and when avoidance is requested and it equals the
  * scene's last pick at 0x130 it steps to the next entry (or back from the last). Adapted from
  * Audio_ChooseSequenceVariant with the table weights and the stored last pick. */
-
-
-
 
 void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
     {
@@ -386,10 +365,6 @@ void Audio_StopContextMusic(int contextAddress) {
 /* Clamps a level to between zero and D_800C8FE0, scales it by D_800C8FE4 and stores it as an integer
    at 0x2B9C of the object. */
 
-
-
-
-
 void Audio_SetClampedAudioLevel(ObjRecAt2B9C *obj, float value) {
     float v;
     float max = D_800C8FE0;
@@ -455,9 +430,6 @@ void Audio_SortTableEntries(SortTable *table) {
 /* Returns the index of the first of seventeen 0xCC-byte slots at offset 0x1DBC whose id at 0xC
    equals the given id, or -1 when the id is -1 or absent. */
 
-
-
-
 int Audio_FindVoiceSlotById(char *context, int id) {
     Voice *slot;
     int i;
@@ -522,9 +494,6 @@ void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index) {
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of
    its seventeen 0xCC-byte slots at 0x1E64 already carry that id; otherwise 0. */
-
-
-
 
 int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id) {
     int count;

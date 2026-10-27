@@ -11,16 +11,11 @@ unsigned char D_auto_func_802B9BE4_eu_padding_BA7E4[12] = { 0x27, 0xA5, 0x00, 0x
 unsigned int func_802BB6A8_eu_x[1] = { 0x445BF800U };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int func_802BB6A8_eu_x_padding_BC2AC[1] = {
-    0x00000000,
-};
-#endif
-
-/* DATA_802C04BC.CPP */
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* ROM-grounded data: func_802BB6A8_eu_x_padding_C10BC */
 unsigned int D_blob_phase2_26cb097518dd7297e264[1] = {
     0x00000000,
 };
 #endif
+
+/* DATA_802C04BC.CPP */

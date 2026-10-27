@@ -15,44 +15,20 @@
 #include "stddef.h"
 #include "RENDER_4/8028FD2C_6.H"
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025DB80_C9D0C[1] = {
-    0x3DCCCCCD,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025DB80_C9D0C_us_rev1.c */
 const unsigned int D_blob_c2e990d7fbcab1f9b43c[1] = {
     0x3DCCCCCD,
 };
-#endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025DC34_C9D10[1] = {
-    0x46FFFE00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025DC34_C9D10_us_rev1.c */
 const unsigned int D_blob_818b493a54f22a804367[1] = {
     0x46FFFE00,
 };
-#endif
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025DC88_C9D14[2] = {
-    0x3C23D70A, 0x3C23D70A,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8025DC88_C9D14_us_rev1.c */
 const unsigned int D_blob_713397d39e7015fa86e1[2] = {
     0x3C23D70A, 0x3C23D70A,
 };
-#endif
 
 extern f32 D_800C4030_de;
 extern s32 Defs_FindSortedValue(s32, s32, s32);
@@ -82,8 +58,6 @@ void *func_8025DB80_de(Track *state, s32 index) {
     }
     return NULL;
 }
-
-
 
 void func_8025DC34_de(void *arg0, f32 arg1) {
     Track *track = arg0;
@@ -143,21 +117,13 @@ const unsigned int D_blob_97655e5ead2f6b44a8c7[1] = {
     0x46FFFE00,
 };
 
-#if !(defined(VERSION_US_REV1))
-const unsigned int D_8025DD60_C9D24[2] = {
+/* ROM-grounded data: src/rw_pool_8025DD60_C9D24_us_rev1.c */
+const unsigned int D_blob_4d5302c2d0e80d970cfa[2] = {
     0x3C23D70A, 0x46FFFE00,
 };
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C432C[1] = {
     0x68696373,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8025DD60_C9D24_us_rev1.c */
-const unsigned int D_blob_4d5302c2d0e80d970cfa[2] = {
-    0x3C23D70A, 0x46FFFE00,
 };
 #endif
