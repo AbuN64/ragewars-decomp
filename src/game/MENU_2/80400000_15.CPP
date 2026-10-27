@@ -5,8 +5,6 @@
 
 
 
-struct SharedTrackObject;
-
 
 
 
