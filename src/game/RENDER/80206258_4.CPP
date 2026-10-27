@@ -79,8 +79,6 @@ void func_80207A90_de(void *actor, s32 *stateFlags) {
     }
 }
 
-typedef struct Owner Owner;
-
 extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 

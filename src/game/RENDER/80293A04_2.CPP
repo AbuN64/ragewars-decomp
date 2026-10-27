@@ -88,8 +88,6 @@ void SetN64_ResetSceneForIntro(void *arg0) {
     TextLoad_SetTextureEffect(0);
 }
 
-struct ObjRecV2;
-
 void SetN64_AdvanceIntroForMemorySize(GameSession *session) {
     s32 var_a2;
     s32 call_result;

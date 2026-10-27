@@ -60,8 +60,6 @@ void SetN64_HandleMode12Input(s32 session) {
 
 void SetN64_DrawMode12Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-struct func_802077F4_S2;
-
 void SetN64_ResumeSelectedSession(GameSession *arg0) {
     void *dst;
     s32 field;
