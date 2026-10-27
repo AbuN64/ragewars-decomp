@@ -7280,7 +7280,6 @@ D_auto_func_802B9FC8_de_padding_BABC8 = 0x802B9FC8; // rom:0xBABC8
 __osSpRawStartDma = 0x802B9FD0; // type:func rom:0xBABD0
 D_auto_func_802BA0CC_de_padding_BACCC = 0x802BA0CC; // rom:0xBACCC
 func_802BA0D0_de = 0x802BA0D0; // type:func rom:0xBACD0
-func_802BA0F4_de = 0x802BA0F4; // type:func rom:0xBACF4
 D_auto_func_802BA0FC_de_padding_BACFC = 0x802BA0FC; // rom:0xBACFC
 func_802BA100_de = 0x802BA100; // type:func rom:0xBAD00
 D_auto_func_802BA114_de_padding_BAD14 = 0x802BA114; // rom:0xBAD14

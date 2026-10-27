@@ -3044,7 +3044,6 @@ segments:
       - [0xBABD0, c, span_1000]
       - [0xBACCC, data, span_1000/D_auto_func_802BA0CC_de_padding_BACCC]
       - [0xBACD0, c, span_1000]
-      - [0xBACF4, c, span_1000]
       - [0xBACFC, data, span_1000/D_auto_func_802BA0FC_de_padding_BACFC]
       - [0xBAD00, c, span_1000]
       - [0xBAD14, data, span_1000/D_auto_func_802BA114_de_padding_BAD14]
