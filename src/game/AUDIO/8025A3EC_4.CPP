@@ -47,7 +47,7 @@ extern void func_8025AE1C_de(void *arg0);
 
 
 
-extern void func_802B2F10_de(void *arg0, s16 arg1);
+extern void alSndpSetVol(void *arg0, s16 arg1);
 
 extern void alSndpSetPitch(void *arg0, f32 arg1);
 
@@ -555,7 +555,7 @@ void Audio_SetScaledVoiceVolume(void *arg0, s32 arg1) {
     owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
     sound = owner->sound;
     func_802B2F00_de(sound, owner->samples[slot->index]);
-    func_802B2F10_de(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
+    alSndpSetVol(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }
 
 void Audio_SetScaledVoicePitch(void *arg0, f32 arg1) {

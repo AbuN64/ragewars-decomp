@@ -357,8 +357,8 @@ struct ALVoice_s {
     s16 unityPitch;
 };
 
-struct ALSynth_func_802B3000_de;
-typedef struct ALSynth_func_802B3000_de ALSynth_func_802B3000_de;
+struct ALSynthalSynAllocVoice;
+typedef struct ALSynthalSynAllocVoice ALSynthalSynAllocVoice;
 
 
 
@@ -963,8 +963,8 @@ typedef struct MenuRules MenuRules;
 struct Extra;
 typedef struct Extra Extra;
 
-struct ALSynth_func_802B3000_de;
-struct ALSynth_func_802B3000_de {
+struct ALSynthalSynAllocVoice;
+struct ALSynthalSynAllocVoice {
     void *head;
     ListLink pFreeList;
     ListLink pAllocList;

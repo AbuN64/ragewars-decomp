@@ -15,14 +15,14 @@ s32 func_802B3130_de(void *synth, void **selectedVoice, s16 requestedPriority) {
     void *candidateVoice;
 
     lowestPriority = requestedPriority;
-    candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pLameList.next;
+    candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pLameList.next;
     voiceStolen = 0;
-    if ((candidateVoice != 0) || (candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pFreeList.next, (candidateVoice != 0))) {
+    if ((candidateVoice != 0) || (candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pFreeList.next, (candidateVoice != 0))) {
         *selectedVoice = candidateVoice;
         alUnlink(candidateVoice);
-        alLink(candidateVoice, &((ALSynth_func_802B3000_de *)synth)->pAllocList.next);
+        alLink(candidateVoice, &((ALSynthalSynAllocVoice *)synth)->pAllocList.next);
     } else {
-        candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pAllocList.next;
+        candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pAllocList.next;
         stolenResultCopy = voiceStolen;
         if (candidateVoice != 0) {
             do {

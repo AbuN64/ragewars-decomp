@@ -25,7 +25,7 @@
 
 
 
-void func_802B35E0_de(ALSynth_func_802B3000_de *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
+void func_802B35E0_de(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
 {
     ALStartParamAlt *update;
     ALFilter_s_func_802B3000_de *f;

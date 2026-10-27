@@ -265,13 +265,13 @@ extern void *__mapVoice(void *, u8, u8, u8);
 
 extern ALVoiceState *__lookupVoice(ALSeqPlayer *, u8, u8);
 
-extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s *, ALVoiceConfig_s *);
+extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_s *);
 
 extern s32 __vsPan(void *, void *);
 
 
 
-extern void func_802B35E0_de(ALSynth_func_802B3000_de *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
+extern void func_802B35E0_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
 
 
 
@@ -424,7 +424,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             if (!vstate)
                 return;
             voice = &vstate->voice;
-            func_802B3000_de(seqp->drvr, (ALVoice_s *)voice, &config);
+            alSynAllocVoice(seqp->drvr, (ALVoice_s *)voice, &config);
             vstate->sound = sound;
             vstate->envPhase = 0;
             if (seqp->chanState[chan].sustain > 63)

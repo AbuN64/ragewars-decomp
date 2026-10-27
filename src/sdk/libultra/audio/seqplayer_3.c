@@ -33,7 +33,7 @@ extern ALVoiceState *__mapVoice(ALSeqPlayer *, u8, u8, u8);
 extern ALVoiceState *__lookupVoice(ALSeqPlayer *, u8, u8);
 
  /* __lookupVoice */
-extern s32 func_802B3000_de(void *, ALVoice_s *, ALVoiceConfig_s *);
+extern s32 alSynAllocVoice(void *, ALVoice_s *, ALVoiceConfig_s *);
 
  /* alSynAllocVoice */
                                    /* alCents2Ratio */
@@ -148,7 +148,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             if (!vstate)
                 return;
             voice = &vstate->voice;
-            func_802B3000_de(seqp->drvr, voice, &config);
+            alSynAllocVoice(seqp->drvr, voice, &config);
             vstate->sound = sound;
             vstate->envPhase = 0;
             if (seqp->chanState[chan].sustain > 63)

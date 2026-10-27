@@ -62,28 +62,28 @@ extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 /* _sndpVoiceHandler (_sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
 
 
-extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s *, ALVoiceConfig_s *);
+extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_s *);
 
  /* alSynAllocVoice */
-extern void func_802B3540_de(ALSynth_func_802B3000_de *, ALVoice_s *, void *);
+extern void func_802B3540_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *);
 
          /* alSynStartVoice */
-extern void func_802B3350_de(ALSynth_func_802B3000_de *, ALVoice_s *, u8);
+extern void func_802B3350_de(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
 
              /* alSynSetPan */
-extern void func_802B3480_de(ALSynth_func_802B3000_de *, ALVoice_s *, s16, s32);
+extern void func_802B3480_de(ALSynthalSynAllocVoice *, ALVoice_s *, s16, s32);
 
        /* alSynSetVol */
-extern void func_802B33E0_de(ALSynth_func_802B3000_de *, ALVoice_s *, f32);
+extern void func_802B33E0_de(ALSynthalSynAllocVoice *, ALVoice_s *, f32);
 
             /* alSynSetPitch */
-extern void func_802B32A0_de(ALSynth_func_802B3000_de *, ALVoice_s *, u8);
+extern void func_802B32A0_de(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
 
              /* alSynSetFXMix */
-extern void alSynStopVoice(ALSynth_func_802B3000_de *, ALVoice_s *);
+extern void alSynStopVoice(ALSynthalSynAllocVoice *, ALVoice_s *);
 
                  /* alSynStopVoice */
-extern void alSynFreeVoice(ALSynth_func_802B3000_de *, ALVoice_s *);
+extern void alSynFreeVoice(ALSynthalSynAllocVoice *, ALVoice_s *);
 
        /* alEvtqPostEvent */
 void _removeEvents(ALEventQueue *arg0, void *arg1);
@@ -148,7 +148,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             vc.priority = state->priority;
             vc.unityPitch = 0;
             voice = &state->voice;
-            func_802B3000_de(sndp->drvr, voice, &vc);
+            alSynAllocVoice(sndp->drvr, voice, &vc);
             vol = (s16)((s32)snd->envelope->attackVolume * state->vol / 127);
             tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
             tmp = ((tmp) > (0) ? (tmp) : (0));

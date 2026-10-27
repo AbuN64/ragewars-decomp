@@ -348,7 +348,7 @@ typedef struct VoiceMix {
 extern void alSndpSetPitch(void *, s32);
 extern void alSndpSetFXMix(void *, u8);
 extern void alSndpSetPan(void *, u8);
-extern void func_802B2F10_de(void *, s16);
+extern void alSndpSetVol(void *, s16);
 static inline s32 findVoiceById(ContextRecAt2BC0 *context, s32 id) {
     s32 i;
     Voice *voice = context->voices;
@@ -397,7 +397,7 @@ s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector
                 gain *= 0.5f;
             }
         }
-        func_802B2F10_de(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
+        alSndpSetVol(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
         if (!context->voices[index].pending) {
             Audio_PlayVoiceSound((SlotRecAtB8 *)context->menu, index);
         }

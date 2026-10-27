@@ -33,7 +33,7 @@ extern s32 func_802B2620_de(char *);
 
 extern void alSndpSetPitch(char *, f32);
 
-extern void func_802B2F10_de(char *, s32);
+extern void alSndpSetVol(char *, s32);
 
 extern void alSndpSetPan(char *, s32);
 
@@ -83,7 +83,7 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             player->state = 3;
             func_802B2F00_de(channel, player->id);
             alSndpSetPitch(channel, rate * 4.5351473e-05f);
-            func_802B2F10_de(channel, (s16)(player->speed * player->tempoScale));
+            alSndpSetVol(channel, (s16)(player->speed * player->tempoScale));
             alSndpSetPan(channel, player->priority);
             func_802B2ED0_de(channel, player->id, 0x7F);
             alSndpSetFXMix(channel, (u8)(u32)player->volume);

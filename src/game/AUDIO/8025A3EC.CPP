@@ -18,7 +18,7 @@
 #include "stddef.h"
 int Cinema_IsSequenceActive(void);
 f32 GraphU64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
-void func_802B2F10_de(void *arg0, s16 arg1);
+void alSndpSetVol(void *arg0, s16 arg1);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 #include "AUDIO/VOLUME_MIX.H"
 
@@ -53,7 +53,7 @@ static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
     outputSound = outputContext->list;
     volume = (s32)level;
     func_802B2F00_de(outputSound, outputContext->handles[voice->unk0]);
-    func_802B2F10_de(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
+    alSndpSetVol(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
 }
 
 /* Updates spatial attenuation and the volume envelope, then applies the scaled level. */
