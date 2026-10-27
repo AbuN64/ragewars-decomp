@@ -45,27 +45,3 @@ case_4:
 done:
     return 0;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DBCE4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8874[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800ED6B4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD034[1] = {
-    0x00000000,
-};
-#endif

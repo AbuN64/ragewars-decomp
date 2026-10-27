@@ -19,12 +19,6 @@ char rodata_unresolved_800C7658[8] =
     "_t\014m_Gam";
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8CF8[2] = {
-    0x00000000, 0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 char rodata_unresolved_800C8328[8] =
     "D\026\000\000\077333";

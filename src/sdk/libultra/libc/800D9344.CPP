@@ -12,12 +12,6 @@ const char D_802BDDE0_D9F44[20] =
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800E0B65[11] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
 /* bytes live in the preceding array */
 #endif
 

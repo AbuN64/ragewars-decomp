@@ -56,27 +56,3 @@ struct {
 };
 #endif
 #endif
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800CBBB4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800CD254[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800CC884[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800CBCA4[1] = {
-    0x00000000,
-};
-#endif

@@ -7,30 +7,6 @@ const unsigned int D_8023CFE0_C9310[11] = {
 };
 #endif
 
-#if defined(VERSION_US)
-const unsigned int rodata_unresolved_800C357C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C393C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800C38FC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C364C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_8023CFE0_C9310_us_rev1[4] = {
     0x3D888889, 0x41700000, 0x3F800000, 0x3F000000,

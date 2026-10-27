@@ -1,7 +1,0 @@
-
-#if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_audio_effect_D8E18_us_rev1[10] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000,
-};
-#endif

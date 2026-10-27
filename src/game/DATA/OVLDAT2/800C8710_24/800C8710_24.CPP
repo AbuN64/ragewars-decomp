@@ -23,33 +23,3 @@ const unsigned int D_blob_5a9c85ab6d0a17155d40[2] = {
 const unsigned char D_blob_b453b23abee7d0469414[13] = {
     0x6C, 0x69, 0x74, 0x20, 0x76, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
 };
-
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C39A1[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C3D61[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C3D21[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C3A71[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800C8B61[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

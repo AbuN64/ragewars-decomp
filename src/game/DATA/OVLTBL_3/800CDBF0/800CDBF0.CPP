@@ -23,38 +23,14 @@ char rodata_writable_800CDD10[12] =
 /* bytes live in the preceding array */
 #endif
 
-#if defined(VERSION_US)
-unsigned int data_unresolved_800CDC2C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int data_unresolved_800CF2CC[1] = {
-    0x00000000,
-};
 #endif
 
 #if defined(VERSION_EU)
 /* bytes live in the preceding array */
 #endif
 
-#if defined(VERSION_EU)
-unsigned int data_unresolved_800CE8FC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_DE)
-unsigned int data_unresolved_800CDD1C[1] = {
-    0x00000000,
-};
 #endif

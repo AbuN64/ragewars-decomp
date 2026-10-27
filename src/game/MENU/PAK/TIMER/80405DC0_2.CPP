@@ -143,22 +143,10 @@ const unsigned int rodata_unresolved_800DBA84[17] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8614[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 const unsigned int rodata_unresolved_800ED454[17] = {
     0x00000000, 0x0040ACC8, 0x0040ACC8, 0x0040AD28, 0x0040AD08, 0x0040ACC8, 0x0040ACE8, 0x0040ACC8,
     0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040AD48,
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DCDD4[1] = {
     0x00000000,
 };
 #endif

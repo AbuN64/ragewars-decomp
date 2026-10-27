@@ -218,21 +218,3 @@ state_4:
 done:
     return 0;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DBC9C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E882C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800ED66C[1] = {
-    0x00000000,
-};
-#endif

@@ -17,36 +17,12 @@ const unsigned int D_8043F120_E2FC0[1] = {
 /* bytes live in the preceding array */
 #endif
 
-#if defined(VERSION_US)
-const unsigned int rodata_unresolved_800DD044[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800E9BD3[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 /* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800EEA14[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800DE393[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
 #endif
 
 #if defined(VERSION_DE)

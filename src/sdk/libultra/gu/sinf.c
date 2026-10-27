@@ -115,12 +115,6 @@ const unsigned int D_auto_rodata_func_802B7130_de_800C8E98[17] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8EDC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 const unsigned int D_auto_rodata_func_802B7130_de_800C78D8[17] = {
     0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,

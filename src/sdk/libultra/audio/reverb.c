@@ -261,12 +261,6 @@ unsigned int rodata_unresolved_800C7694[3] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8D34[3] = {
-    0x00000000, 0x00000000, 0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800C8364[3] = {
     0x00000000, 0x41F00000, 0x00000000,

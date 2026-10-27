@@ -396,27 +396,9 @@ const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C7EEC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C72FC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 const unsigned int D_802AE290_CD148[1] = {
     0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C88BC[1] = {
-    0x00000000,
 };
 #endif
 

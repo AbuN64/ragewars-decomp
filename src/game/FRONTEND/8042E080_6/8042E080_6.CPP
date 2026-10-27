@@ -83,27 +83,3 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
     }
     return 0;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DC85C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E93EC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE22C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DDBAC[1] = {
-    0x00000000,
-};
-#endif

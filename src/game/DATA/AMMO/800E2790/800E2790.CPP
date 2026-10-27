@@ -6,21 +6,3 @@ const unsigned short g_fmtSpaceDec3[3] = {
     0x2025, 0x3033, 0x6400,
 };
 #endif
-
-#if defined(VERSION_US)
-unsigned short rodata_unresolved_800DD416[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned short rodata_unresolved_800DE766[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned short rodata_unresolved_800E2796[1] = {
-    0x0000,
-};
-#endif

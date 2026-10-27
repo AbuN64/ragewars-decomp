@@ -14,12 +14,6 @@ const unsigned int D_blob_phase2_4abd2dc3cf6e7a8e8e8d[8] = {
 #endif
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8F0C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C794C[1] = {
     0x77726561,

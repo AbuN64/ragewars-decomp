@@ -281,27 +281,3 @@ void func_80260ECC_de(void *arg0, int arg1, Triple t) {
     arg0_record->unk0 = arg1;
     arg0_record->unk4 = t;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C40AC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C446C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C442C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C417C[1] = {
-    0x00000000,
-};
-#endif

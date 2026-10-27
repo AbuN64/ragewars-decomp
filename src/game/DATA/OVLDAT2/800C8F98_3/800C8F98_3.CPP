@@ -24,12 +24,6 @@ unsigned short rodata_unresolved_800C419E[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-unsigned short rodata_unresolved_800C3EAE[1] = {
-    0x0000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8025305C_C9B98_us_rev1.c */
 const char s_allocText[6] = "alloc";

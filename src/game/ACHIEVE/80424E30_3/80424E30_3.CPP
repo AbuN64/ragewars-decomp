@@ -384,12 +384,6 @@ void Achieve_ApplyProfileWeaponUnlocks(Arg *arg0) {
     }
 }
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E91BC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800EDFFC[1] = {
     0x00600061,
@@ -399,12 +393,5 @@ unsigned int rodata_unresolved_800EDFFC[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800DD97C[1] = {
     0x00426AB0,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800E195C */
-unsigned int D_blob_8168f1bc3cd4c4757edb[1] = {
-    0x00000000,
 };
 #endif

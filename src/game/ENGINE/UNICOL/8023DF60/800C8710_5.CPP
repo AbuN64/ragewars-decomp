@@ -6,24 +6,6 @@ const unsigned int D_8023DF70_C9380[3] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C35CC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C394C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C369C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8023DF70_C9380_us_rev1.c */
 const unsigned int D_blob_6624772531fcc4dc0e62[1] = {

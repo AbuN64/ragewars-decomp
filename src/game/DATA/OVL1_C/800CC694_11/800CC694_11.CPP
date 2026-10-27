@@ -12,12 +12,6 @@ char rodata_unresolved_800C7488[8] =
     "t\011m_Opti";
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8B28[2] = {
-    0x00000000, 0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800C8158[2] = {
     0x00230180, 0x00230180,

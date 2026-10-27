@@ -4,21 +4,9 @@
 const char s_audioHeapText[11] = "audio heap";
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800DBA0F[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 unsigned char rodata_unresolved_800E859F[1] = {
     0x38,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800ED3DF[1] = {
-    0x00,
 };
 #endif
 

@@ -11,9 +11,3 @@ const unsigned char rodata_func_8043829C_de_800E9754[3] = {
     0x25, 0x64, 0x00,
 };
 #endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800E9757[1] = {
-    0x00,
-};
-#endif

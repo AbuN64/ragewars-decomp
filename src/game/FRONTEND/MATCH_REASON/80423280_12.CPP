@@ -497,12 +497,6 @@ unsigned int rodata_unresolved_800DC7DC[1] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E936C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800EE1AC[1] = {
     0x00CC00CD,
@@ -515,11 +509,4 @@ unsigned int rodata_unresolved_800DDB2C[1] = {
     (unsigned int)&D_800CBB1C + 0x4,
 };
 #endif
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800E1B44 */
-unsigned int D_blob_2b6f958a3aa45420c4fc[1] = {
-    0x00000000,
-};
 #endif

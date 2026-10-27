@@ -6,9 +6,3 @@ const unsigned int D_auto_rodata_func_8043D55C_eu_x_800E99C8[11] = {
     0x0043D5D8, 0x0043D5E0, 0x0043D5E8,
 };
 #endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E99F4[1] = {
-    0x00000000,
-};
-#endif

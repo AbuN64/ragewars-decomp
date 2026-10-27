@@ -6,30 +6,6 @@ const unsigned int D_8043F52C_E3058[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DD0DC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E9C6C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800EEAAC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DE42C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8043F52C_E3058_us_rev1.c */
 const unsigned int D_blob_b7ff8d583778774702c5[1] = {

@@ -105,9 +105,3 @@ const unsigned char g_fmtDec4Pad[] = {
 #if defined(VERSION_US)
 /* bytes live in the preceding array */
 #endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800DE705[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

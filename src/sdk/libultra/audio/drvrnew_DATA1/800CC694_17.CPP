@@ -7,9 +7,3 @@ const unsigned int D_blob_phase2_65373cfd01a52ee32139[2] = {
     0x40D00000, 0x00000000,
 };
 #endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C8BB8[2] = {
-    0x00000000, 0x00000000,
-};
-#endif

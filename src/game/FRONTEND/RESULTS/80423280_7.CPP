@@ -68,27 +68,3 @@ int Frontend_GetWeaponIconValue(int id) {
  for(i=0;i<3;i++) if(D_800E1ACC_de[i*4]==id) return D_800E5B14[i*4];
  return D_800E5BC4[0];
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DC69C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E922C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE06C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD9EC[1] = {
-    0x00000000,
-};
-#endif

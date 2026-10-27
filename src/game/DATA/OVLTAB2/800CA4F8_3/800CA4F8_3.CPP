@@ -19,37 +19,7 @@ const char D_80293534_CB0F8[21] =
 #endif
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C534D[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C570D[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C56CD[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C541D[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 const char D_blob_0bf5bb915a923121e978[21] = "Oct 13 1999\0" "14:57:39";
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA50D[3] = {
-    0x00, 0x00, 0x00,
-};
 #endif

@@ -310,21 +310,9 @@ const unsigned int rodata_func_8041F298_us_800DC1F0[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-const unsigned int rodata_unresolved_800DC1F4[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 const unsigned int rodata_func_8041F6D8_eu_x_800E8D80[1] = {
     0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8D84[1] = {
-    0x00000000,
 };
 #endif
 
@@ -334,21 +322,9 @@ const unsigned int rodata_func_8041F6D8_eu_800EDBC0[1] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800EDBC4[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 const unsigned int rodata_func_8041F228_de_800DD540[1] = {
     0x3F800000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD544[1] = {
-    0x00000000,
 };
 #endif
 

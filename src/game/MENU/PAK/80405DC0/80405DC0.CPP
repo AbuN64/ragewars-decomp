@@ -294,27 +294,3 @@ s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
     }
     return 1;
 }
-
-#if defined(VERSION_US)
-const unsigned int rodata_unresolved_800DBA6C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E85FC[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-const unsigned int rodata_unresolved_800ED43C[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DCDBC[1] = {
-    0x00000000,
-};
-#endif

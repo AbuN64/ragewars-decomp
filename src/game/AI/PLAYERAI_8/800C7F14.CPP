@@ -6,18 +6,6 @@ const unsigned int D_8022EA3C_C8B14[3] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C3114[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C30D4[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8022EA3C_C8B14_us_rev1.c */
 const unsigned int D_blob_135fa7c8aae48ab6d5b0[3] = {

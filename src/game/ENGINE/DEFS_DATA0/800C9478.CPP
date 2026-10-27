@@ -5,38 +5,8 @@ const char D_80265964_CA078[15] =
     "ROMLookupTable\000";
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C42C7[1] = {
-    0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C4687[1] = {
-    0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C4647[1] = {
-    0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C4397[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 const unsigned char D_d0_8f69d496172d0b84[15] = {
     0x52, 0x4F, 0x4D, 0x4C, 0x6F, 0x6F, 0x6B, 0x75, 0x70, 0x54, 0x61, 0x62, 0x6C, 0x65, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800C9487[1] = {
-    0x00,
 };
 #endif

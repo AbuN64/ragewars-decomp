@@ -295,10 +295,3 @@ unsigned int func_802B4728_de_padding_B5328[2] = {
     0x8FB30058, 0xAFB60038,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800CC814 */
-unsigned int D_blob_b2806becfa4191cf25ef[1] = {
-    0x00000000,
-};
-#endif

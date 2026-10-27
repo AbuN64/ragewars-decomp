@@ -17,12 +17,6 @@ unsigned char rodata_unresolved_800E853F[1] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800ED37F[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_DE)
 unsigned char rodata_unresolved_800DCCFF[1] = {
     0x70,

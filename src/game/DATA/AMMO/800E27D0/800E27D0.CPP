@@ -6,9 +6,3 @@ const unsigned char g_pakFormatInt06[5] = {
     0x25, 0x30, 0x36, 0x64, 0x00,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800E27D5[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

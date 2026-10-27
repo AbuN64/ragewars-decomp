@@ -8,12 +8,6 @@
 
 
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C2F64[1] = {
-    0x00000000,
-};
-#endif
-
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 typedef struct {
     char pad0[0x98];
@@ -61,9 +55,3 @@ void Player_ApplyStun(SharedPlayer *player, f32 amount) {
         }
     }
 }
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C2F24[1] = {
-    0x00000000,
-};
-#endif

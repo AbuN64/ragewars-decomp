@@ -23,18 +23,6 @@ const char rodata_func_8040A614_de_800ED404[14] =
     "%3d.%02d.%02d\000";
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800E85D2[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned short rodata_unresolved_800ED412[1] = {
-    0x0000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_80408118_E19A8_us_rev1.c */
 const unsigned char D_blob_4fb6fb10cdfd8ef7403a[4] = {

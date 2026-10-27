@@ -15,12 +15,6 @@ const unsigned int D_d2_dbb2b4d9ceef[7] = {
 #endif
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E9F64[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 /* bytes live in the preceding array */
 #endif

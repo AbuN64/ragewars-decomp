@@ -6,9 +6,3 @@ const unsigned char D_auto_rodata_func_802A2224_de_800C5DA0[23] = {
     0x74, 0x61, 0x2E, 0x65, 0x78, 0x70, 0x00,
 };
 #endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C5DB7[1] = {
-    0x00,
-};
-#endif

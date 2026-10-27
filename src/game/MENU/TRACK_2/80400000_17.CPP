@@ -270,10 +270,3 @@ const unsigned int D_blob_a5ffcbf0d25acc16f622[2] = {
     0x4F000000, 0x4F000000,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800E0C5C */
-unsigned int D_blob_14b22e830d48d55f6c93[1] = {
-    0x00000000,
-};
-#endif

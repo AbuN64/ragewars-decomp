@@ -12,31 +12,7 @@ const char D_80286AA8_CAE50[8] =
 #endif
 #endif
 
-#if defined(VERSION_US)
-unsigned short rodata_unresolved_800C5096[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800C5456[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned short rodata_unresolved_800C5166[1] = {
-    0x0000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_80286AA8_CAE50_us_rev1.c */
 const char s_linksText[6] = "links";
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned short rodata_unresolved_800CA256[1] = {
-    0x0000,
-};
 #endif

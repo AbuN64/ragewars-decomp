@@ -16,12 +16,6 @@ unsigned char rodata_unresolved_800C78A3[13] = {
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C8F43[13] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
 /* bytes live in the preceding array */
 #endif
 

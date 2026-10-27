@@ -11,9 +11,3 @@ const unsigned char rodata_shared_800EED80[5] = {
 };
 #endif
 #endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800E9F45[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

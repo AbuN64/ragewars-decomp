@@ -5,33 +5,3 @@ const unsigned char D_auto_rodata_shared_800CA3AC[37] = {
     0x65, 0x6C, 0x44, 0x61, 0x74, 0x61, 0x3A, 0x20, 0x62, 0x6C, 0x6C, 0x65, 0x76, 0x65, 0x6C, 0x20,
     0x64, 0x61, 0x74, 0x61, 0x00,
 };
-
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C5211[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C55D1[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C5591[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C52E1[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA3D1[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

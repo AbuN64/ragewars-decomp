@@ -11,12 +11,6 @@ unsigned int data_unresolved_800D3F0C[1] = {
 };
 #endif
 
-#if defined(VERSION_EU_X)
-unsigned int data_unresolved_800E0A9C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
 extern char D_auto_rodata_unresolved_800C6588[];

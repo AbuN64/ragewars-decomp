@@ -6,9 +6,3 @@ const unsigned char g_graphicsetIndex[17] = {
     0x00,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA139[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

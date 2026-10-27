@@ -6,12 +6,6 @@ const unsigned int D_802191B8_C7FB8[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C21FC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C25AC[1] = {
     0x3E800000,

@@ -296,15 +296,3 @@ const unsigned short rodata_shared_800EEE10[3] = {
     0x2020, 0x2532, 0x6400,
 };
 #endif
-
-#if defined(VERSION_EU_X)
-unsigned short rodata_unresolved_800E9FD6[1] = {
-    0x0000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned short rodata_unresolved_800EEE16[1] = {
-    0x0000,
-};
-#endif

@@ -6,9 +6,3 @@ const unsigned char s_visibilityText[11] = {
     0x56, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6C, 0x69, 0x74, 0x79, 0x00,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA243[1] = {
-    0x00,
-};
-#endif

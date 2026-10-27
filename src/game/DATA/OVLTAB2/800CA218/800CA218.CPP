@@ -7,21 +7,9 @@ const char rodata_unresolved_800C5078[11] =
     "Visibility\000";
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C5083[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 const char rodata_unresolved_800C5438[11] =
     "Visibility\000";
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C5443[1] = {
-    0x00,
-};
 #endif
 
 #if defined(VERSION_EU)
@@ -29,19 +17,7 @@ const char rodata_unresolved_800C53F8[11] =
     "Visibility\000";
 #endif
 
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C5403[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_DE)
 const char rodata_unresolved_800C5148[11] =
     "Visibility\000";
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C5153[1] = {
-    0x00,
-};
 #endif

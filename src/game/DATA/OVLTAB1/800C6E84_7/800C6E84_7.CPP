@@ -5,12 +5,6 @@ const float D_800C1DB8_de = 1.0f;
 #endif
 
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C1CEC[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800C1DBC[1] = {
     0x0020DF30,

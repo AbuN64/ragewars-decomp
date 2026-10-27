@@ -23,12 +23,6 @@ unsigned int rodata_unresolved_800C3A2C[1] = {
 };
 #endif
 
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C377C[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_802433DC_C9464_us_rev1.c */
 const unsigned int D_blob_a1f4d95838a1e04b9138[2] = {

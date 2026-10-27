@@ -173,21 +173,3 @@ g_noteInfoIntFormat,
     D_800E54A4->players[player].labels[2] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
     PAKInterface_ScrollNoteList(player, 1);
 }
-
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800DCB6D[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800DDEBD[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800E1EED[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif

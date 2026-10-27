@@ -7,19 +7,7 @@ const unsigned char D_8040B444_E19CC[5] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800DBA51[7] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_US)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800DCDA1[7] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
 #endif
 
 #if defined(VERSION_DE)

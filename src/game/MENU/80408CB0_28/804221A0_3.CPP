@@ -137,9 +137,3 @@ block_11:
     }
     return 0;
 }
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EDCB4[1] = {
-    0x00000000,
-};
-#endif

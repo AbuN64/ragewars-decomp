@@ -6,30 +6,6 @@ const unsigned int D_802BD430_CD960[1] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C7A34[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C90D4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C8704[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C7B14[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802BD430_CD960_us_rev1.c */
 const unsigned char D_blob_a0a68c2fc90206a13910[4] = {

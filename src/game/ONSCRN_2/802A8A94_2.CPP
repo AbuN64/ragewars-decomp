@@ -110,27 +110,3 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
         Cache_UnlockResource(0, font);
     }
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800C6074[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800C6424[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800C63E4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800C6144[1] = {
-    0x00000000,
-};
-#endif

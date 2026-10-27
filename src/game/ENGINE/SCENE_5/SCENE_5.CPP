@@ -341,21 +341,9 @@ unsigned int rodata_unresolved_800CD64C[3] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800CD658[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800CECEC[3] = {
     0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800CECF8[1] = {
-    0x00000000,
 };
 #endif
 
@@ -365,21 +353,9 @@ unsigned int rodata_unresolved_800CE31C[3] = {
 };
 #endif
 
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800CE328[1] = {
-    0x00000000,
-};
-#endif
-
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800CD73C[3] = {
     0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800CD748[1] = {
-    0x00000000,
 };
 #endif
 

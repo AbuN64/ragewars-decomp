@@ -7,9 +7,3 @@ const unsigned char g_constructMapSimpleModel[35] = {
     0x65, 0x6C, 0x00,
 };
 #endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA03F[1] = {
-    0x00,
-};
-#endif

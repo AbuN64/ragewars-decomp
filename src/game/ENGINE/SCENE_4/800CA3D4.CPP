@@ -6,27 +6,9 @@ const unsigned char D_8028A948_CAFD4[3] = {
 };
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C5217[1] = {
-    0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C52E7[1] = {
-    0x00,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_formats_8028A948_CAFD4_us_rev1.c */
 const unsigned char D_blob_7af543284835d222fd61[3] = {
     0x25, 0x73, 0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800CA3D7[1] = {
-    0x00,
 };
 #endif

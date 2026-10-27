@@ -1837,9 +1837,3 @@ unsigned int D_auto_data_unresolved_800E400C[14109] = {
     0xC28C0000, 0xC1E80000, 0xC2BE0000, 0xC28C0000, 0x00000000,
 };
 #endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_writable_800F1C80[1] = {
-    0x00000000,
-};
-#endif

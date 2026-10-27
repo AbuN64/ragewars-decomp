@@ -232,27 +232,3 @@ void *Pak_GetWidgetStyle(ObjRecAt8V4 *widget) {
 #endif
  return D_800E1E24_de+index*28;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DD344[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E9ED4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EED14[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DE694[1] = {
-    0x00000000,
-};
-#endif

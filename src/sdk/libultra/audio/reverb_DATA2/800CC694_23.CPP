@@ -7,19 +7,7 @@ const char D_802B57F0_CD5D4[15] =
 #endif
 
 #if defined(VERSION_US)
-unsigned char rodata_unresolved_800C76B3[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_US)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C8D53[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
 #endif
 
 #if defined(VERSION_EU_X)
@@ -27,19 +15,7 @@ unsigned char rodata_unresolved_800C8D53[5] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C8383[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
 /* bytes live in the preceding array */
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C7793[5] = {
-    0x00, 0x00, 0x00, 0x00, 0x00,
-};
 #endif
 
 #if defined(VERSION_DE)

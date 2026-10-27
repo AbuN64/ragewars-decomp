@@ -5,9 +5,3 @@ const char data_func_8044B600_de_800C4E34[75] =
     "CScene__ConstructMap: simp models index\0"
     "CScene__ConstructMap: simple model\0";
 #endif
-
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C4E7F[1] = {
-    0x00,
-};
-#endif

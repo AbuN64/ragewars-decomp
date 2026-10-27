@@ -45,34 +45,3 @@ case_4:
 done:
     return 0;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DBCB4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E8844[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800ED684[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DD004[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-/* ROM-grounded data: rodata/unresolved/800E101C */
-unsigned int D_blob_bdad146406771ef9f005[1] = {
-    0x00000000,
-};
-#endif

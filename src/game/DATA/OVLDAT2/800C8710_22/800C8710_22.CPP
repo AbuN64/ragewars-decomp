@@ -5,30 +5,6 @@ const char D_80247004_C9614[33] =
     "\077\200\000\000>\000\000\000=\031\231\232\077\200\000\000animations index\000";
 #endif
 
-#if defined(VERSION_US)
-unsigned char rodata_unresolved_800C3875[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned char rodata_unresolved_800C3C35[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned char rodata_unresolved_800C3BF5[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned char rodata_unresolved_800C3945[3] = {
-    0x00, 0x00, 0x00,
-};
-#endif
-
 #if defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_pool_80247004_C9614_us_rev1[4] = {
     0x3F800000, 0x3E000000, 0x3D19999A, 0x3F800000,
@@ -37,11 +13,5 @@ const unsigned int D_auto_src_rw_pool_80247004_C9614_us_rev1[4] = {
 const unsigned char g_animationsIndexText[17] = {
     0x61, 0x6E, 0x69, 0x6D, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x73, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78,
     0x00,
-};
-#endif
-
-#if defined(VERSION_US_REV1)
-unsigned char rodata_unresolved_800C8A35[3] = {
-    0x00, 0x00, 0x00,
 };
 #endif

@@ -433,27 +433,3 @@ option_c:
 done:
     return 0;
 }
-
-#if defined(VERSION_US)
-unsigned int rodata_unresolved_800DC844[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU_X)
-unsigned int rodata_unresolved_800E93D4[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_EU)
-unsigned int rodata_unresolved_800EE214[1] = {
-    0x00000000,
-};
-#endif
-
-#if defined(VERSION_DE)
-unsigned int rodata_unresolved_800DDB94[1] = {
-    0x00000000,
-};
-#endif
