@@ -36,7 +36,7 @@ void alCSPNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     p->eventType = 9;
     p->channels = c->channels;
     p->channelState = func_802B0340_de(0, 0, heap, c->channels, 16);
-    func_802B1990_de(p);
+    __initChanState(p);
     {
         SeqFreeVoice *base = func_802B0340_de(0, 0, heap, c->voices, 56);
         p->freeList = 0;

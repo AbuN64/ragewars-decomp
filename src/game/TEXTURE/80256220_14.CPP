@@ -58,9 +58,9 @@ void func_80256FC0_de(void) {
                 if (D_80107DF4[0] == node) {
                     D_80107DF4[0] = next;
                 }
-                func_802B2450_de((ListLink *)node);
+                alUnlink((ListLink *)node);
                 if (D_80107DF4[1] != 0) {
-                    func_802B2480_de(node, (void **)D_80107DF4[1]);
+                    alLink(node, (void **)D_80107DF4[1]);
                 } else {
                     D_80107DF4[1] = node;
                     node->next = 0;
@@ -135,9 +135,9 @@ u32 func_802571F0_de(s32 offset, s32 length) {
     pool = &D_80107DF0.firstFree;
     window = *pool;
     *pool = window->next;
-    func_802B2450_de((ListLink *)window);
+    alUnlink((ListLink *)window);
     if (after != 0) {
-        func_802B2480_de(window, after);
+        alLink(window, after);
     } else if (pool[-1] != 0) {
         after = pool[-1];
         pool[-1] = window;

@@ -114,7 +114,7 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
     pvoices = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(PVoice_s));
     for (i = 0; i < c->maxPVoices; i++) {
         pv = &pvoices[i];
-        func_802B2480_de((ListLink *)pv, &drvr->pFreeList);
+        alLink((ListLink *)pv, &drvr->pFreeList);
         pv->vvoice = 0;
 
         alLoadNew(&pv->decoder, drvr->dma, hp);
@@ -211,8 +211,8 @@ void Audio_FreeParam(void *arg0) {
 }
 
 void _freePVoice(s32 arg0, s32 listLink) {
-    func_802B2450_de((ListLink *)listLink);
-    func_802B2480_de(listLink, arg0 + 0x14);
+    alUnlink((ListLink *)listLink);
+    alLink(listLink, arg0 + 0x14);
 }
 
 void _collectPVoices(void *arg0) {
@@ -221,8 +221,8 @@ void _collectPVoices(void *arg0) {
     node = ((ALSynth4C *)arg0)->pLameList.next;
     if (node != 0) {
         do {
-            func_802B2450_de(node);
-            func_802B2480_de(node, (char *)arg0 + 4);
+            alUnlink(node);
+            alLink(node, (char *)arg0 + 4);
             node = ((ALSynth4C *)arg0)->pLameList.next;
         } while (node != 0);
     }

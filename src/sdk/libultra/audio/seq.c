@@ -14,7 +14,7 @@
    events. */
 
  /* readVarLen */
-extern u8 func_802B23B0_de(ALSeq_s *);
+extern u8 read8(ALSeq_s *);
 
 
 
@@ -31,34 +31,34 @@ extern u8 func_802B23B0_de(ALSeq_s *);
 /* alSeqNewMarker, drafted from ultralib src/audio/seq.c: fill a marker with the sequence position
    of the first event at or after the given tick count (the track start for zero), stepping a
    scratch pass with alSeqNextEvent and restoring the sequence's own position afterwards. */
-void func_802B1E80_de(ALSeq_s *seq, ALEvent *event);
+void alSeqNextEvent(ALSeq_s *seq, ALEvent *event);
 
 
  /* read8 */
-void func_802B1E80_de(ALSeq_s *seq, ALEvent *event)
+void alSeqNextEvent(ALSeq_s *seq, ALEvent *event)
 {
     u8 status;
     s32 deltaTicks;
-    deltaTicks = func_802B235C_de(seq);
+    deltaTicks = readVarLen(seq);
     seq->lastTicks += deltaTicks;
-    status = func_802B23B0_de(seq);
+    status = read8(seq);
     if (status == 0xFF) {
-        u8 type = func_802B23B0_de(seq);
+        u8 type = read8(seq);
         if (type == 0x51) {
             event->type = 3;
             event->msg.tempo.ticks = deltaTicks;
             event->msg.tempo.status = status;
             event->msg.tempo.type = type;
-            event->msg.tempo.len = func_802B23B0_de(seq);
-            event->msg.tempo.byte1 = func_802B23B0_de(seq);
-            event->msg.tempo.byte2 = func_802B23B0_de(seq);
-            event->msg.tempo.byte3 = func_802B23B0_de(seq);
+            event->msg.tempo.len = read8(seq);
+            event->msg.tempo.byte1 = read8(seq);
+            event->msg.tempo.byte2 = read8(seq);
+            event->msg.tempo.byte3 = read8(seq);
         } else if (type == 0x2F) {
             event->type = AL_SEQ_END_EVT;
             event->msg.end.ticks = deltaTicks;
             event->msg.end.status = status;
             event->msg.end.type = type;
-            event->msg.end.len = func_802B23B0_de(seq);
+            event->msg.end.len = read8(seq);
         }
         seq->lastStatus = 0;
     } else {
@@ -66,7 +66,7 @@ void func_802B1E80_de(ALSeq_s *seq, ALEvent *event)
         event->msg.midi.ticks = deltaTicks;
         if (status & 0x80) {
             event->msg.midi.status = status;
-            event->msg.midi.byte1 = func_802B23B0_de(seq);
+            event->msg.midi.byte1 = read8(seq);
             seq->lastStatus = status;
         } else {
             event->msg.midi.status = seq->lastStatus;
@@ -74,14 +74,14 @@ void func_802B1E80_de(ALSeq_s *seq, ALEvent *event)
         }
         if (((event->msg.midi.status & 0xf0) != 0xC0) &&
             ((event->msg.midi.status & 0xf0) != 0xD0)) {
-            event->msg.midi.byte2 = func_802B23B0_de(seq);
+            event->msg.midi.byte2 = read8(seq);
         } else {
             event->msg.midi.byte2 = 0;
         }
     }
 }
 
-void func_802B1FE8_de(ALSeq_s *state, u8 *start, s32 len) {
+void alSeqNew(ALSeq_s *state, u8 *start, s32 len) {
     s16 division;
 
     state->base = start;
@@ -89,15 +89,15 @@ void func_802B1FE8_de(ALSeq_s *state, u8 *start, s32 len) {
     state->lastStatus = 0;
     state->lastTicks = 0;
     state->curPtr = start;
-    if (func_802B23F4_de(state) == 0x4D546864) {
-        func_802B23F4_de(state);
-        if (((func_802B23C4_de(state) << 16) == 0) && (func_802B23C4_de(state) == 1)) {
-            division = func_802B23C4_de(state);
+    if (read32(state) == 0x4D546864) {
+        read32(state);
+        if (((read16(state) << 16) == 0) && (read16(state) == 1)) {
+            division = read16(state);
             state->division = division;
             if (!(division & 0x8000)) {
                 state->qnpt = D_800C74E0_de / (f32) division;
-                if (func_802B23F4_de(state) == 0x4D54726B) {
-                    func_802B23F4_de(state);
+                if (read32(state) == 0x4D54726B) {
+                    read32(state);
                     state->trackStart = state->curPtr;
                 }
             }
@@ -105,11 +105,11 @@ void func_802B1FE8_de(ALSeq_s *state, u8 *start, s32 len) {
     }
 }
 
-int func_802B20C8_de(struct ALSeq_s *arg0) {
+int alSeqGetTicks(struct ALSeq_s *arg0) {
     return arg0->lastTicks;
 }
 
-f32 func_802B20D4_de(ObjRecAt18V1 *sequence, s32 ticks, s32 tempo) {
+f32 alSeqTicksToSec(ObjRecAt18V1 *sequence, s32 ticks, s32 tempo) {
     f64 v;
     f32 new_var;
 
@@ -122,7 +122,7 @@ f32 func_802B20D4_de(ObjRecAt18V1 *sequence, s32 ticks, s32 tempo) {
 }
 
  /* 2147483648.0f */
-u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo)
+u32 alSeqSecToTicks(ObjRecAt18V1 *seq, f32 sec, u32 tempo)
 {
     f32 ticks;
     f64 t;
@@ -145,7 +145,7 @@ u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo)
 }
 
  /* alSeqNextEvent */
-void func_802B21A8_de(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
+void alSeqNewMarker(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
 {
     ALEvent evt;
     u8 *savePtr, *lastPtr;
@@ -168,7 +168,7 @@ void func_802B21A8_de(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
             lastPtr = seq->curPtr;
             lastStatus = seq->lastStatus;
             lastTicks = seq->lastTicks;
-            func_802B1E80_de(seq, &evt);
+            alSeqNextEvent(seq, &evt);
             if (evt.type == AL_SEQ_END_EVT) {
                 lastPtr = seq->curPtr;
                 lastStatus = seq->lastStatus;
@@ -202,19 +202,19 @@ void alSeqGetLoc(void *arg0, void *markerObject) {
     marker->lastTicks = sequence->lastTicks;
 }
 
-s32 func_802B22F4_de(ALSeq_s *sequence, s32 *deltaTicks) {
+s32 __alSeqNextDelta(ALSeq_s *sequence, s32 *deltaTicks) {
     u8 *field8;
 
     field8 = sequence->curPtr;
     if (!(field8 < (sequence->base + sequence->len))) {
         return 0;
     }
-    *deltaTicks = func_802B235C_de(sequence);
+    *deltaTicks = readVarLen(sequence);
     sequence->curPtr = field8;
     return 1;
 }
 
-s32 func_802B235C_de(struct ALSeq_s *sequence) {
+s32 readVarLen(struct ALSeq_s *sequence) {
     u8 *p;
     s32 b;
     s32 val;

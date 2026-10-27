@@ -22,11 +22,11 @@ struct ALSequenceLoopEvent {
 };
 
 
-extern void func_802B1E80_de(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
+extern void alSeqNextEvent(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
 extern void Audio_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
-extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
-extern u8 func_802B22F4_de(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
-extern int func_802B20C8_de(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
+extern void __handleMetaMsg(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
+extern u8 __alSeqNextDelta(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
+extern int alSeqGetTicks(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
 extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
                 /* __assert */
@@ -40,11 +40,11 @@ static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
     if ((seqp->base.state != 1) || (seq == 0))
         return;
 
-    if (!func_802B22F4_de(seq, &deltaTicks))
+    if (!__alSeqNextDelta(seq, &deltaTicks))
         return;
 
     if (seqp->loopCount) {
-        if (func_802B20C8_de(seq) + deltaTicks >= seqp->loopEnd->curTicks) {
+        if (alSeqGetTicks(seq) + deltaTicks >= seqp->loopEnd->curTicks) {
             alSeqSetLoc(seq, seqp->loopStart);
             if (seqp->loopCount != -1)
                 seqp->loopCount--;

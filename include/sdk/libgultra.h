@@ -22,18 +22,18 @@ extern s32 Libultra_SendDebugLinkString(u8 *arg0);
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
-extern f32 func_802B20D4_de(ObjRecAt18V1 *arg0, s32 arg1, s32 arg2);
+extern f32 alSeqTicksToSec(ObjRecAt18V1 *arg0, s32 arg1, s32 arg2);
 
-extern u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo);
+extern u32 alSeqSecToTicks(ObjRecAt18V1 *seq, f32 sec, u32 tempo);
 
 #include "COMMON/PARAMSRECAT8V3.H"
 extern void func_802B2780_de(struct ALSndPlayer * arg0, union ALSndpEvent * arg1);
 
 extern s32 func_802B2BBC_de(void *node);
 
-extern s32 func_802B235C_de(ALSeq_s *);
+extern s32 readVarLen(ALSeq_s *);
 extern const float D_800CC740;
-extern s32 func_802B235C_de(struct ALSeq_s *arg0);
+extern s32 readVarLen(struct ALSeq_s *arg0);
 
 extern void func_802B31F0_de(s32 *arg0);
 

@@ -47,9 +47,9 @@ extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
 
 extern s32 __vsDelta(void *, s32);
 
-extern void func_802B1B14_de(void *, void *, s32);
+extern void __seqpReleaseVoice(void *, void *, s32);
 
-extern void func_802B18E4_de(void *, void *);
+extern void __initFromBank(void *, void *);
 
 void func_802AEAB0_de(void *arg0, InitParams *config) {
     ALSeqPlayer *obj = arg0;
@@ -75,7 +75,7 @@ void func_802AEAB0_de(void *arg0, InitParams *config) {
     obj->nextEvent.type = 9;
     obj->maxChannels = params->kind;
     obj->chanState = func_802B0340_de(0, 0, (void *)context, params->kind, 0x10);
-    func_802B1990_de(obj);
+    __initChanState(obj);
 
     allocation = func_802B0340_de(0, 0, (void *)context, params->count38, 0x38);
     obj->vFreeList = 0;
@@ -136,7 +136,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             alSynFreeVoice(seqp->drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
-                func_802B1C34_de(seqp, vs);
+                __seqpStopOsc(seqp, vs);
             Audio_ReleaseSequenceVoice((List802B663C *)seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
@@ -203,7 +203,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                     alSynStopVoice(seqp->drvr, &vs->voice);
                     alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
-                        func_802B1C34_de(seqp, vs);
+                        __seqpStopOsc(seqp, vs);
                     Audio_ReleaseSequenceVoice((List802B663C *)seqp, &vs->voice);
                 }
                 seqp->state = 0;
@@ -216,7 +216,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                 alEvtqFlushType(&seqp->evtq, 2);
                 for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                     if ((u8)__voiceNeedsNoteKill(seqp, (s32)&vs->voice, 50000))
-                        func_802B1B14_de(seqp, &vs->voice, 50000);
+                        __seqpReleaseVoice(seqp, &vs->voice, 50000);
                 }
                 seqp->state = 2;
                 evt.type = 16;
@@ -233,13 +233,13 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             seqp->target = seqp->nextEvent.msg.spseq.unk0;
             __setUsptFromTempo(seqp, 500000.0f);
             if (seqp->bank)
-                func_802B18E4_de(seqp, seqp->bank);
+                __initFromBank(seqp, seqp->bank);
             break;
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->state != 0)
                 Audio_Assert(D_800C7350_de, g_audioCsplayerText, 304);
             seqp->bank = seqp->nextEvent.msg.spbank.unk0;
-            func_802B18E4_de(seqp, seqp->bank);
+            __initFromBank(seqp, seqp->bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
@@ -267,7 +267,7 @@ extern ALVoiceState *__lookupVoice(ALSeqPlayer *, u8, u8);
 
 extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s *, ALVoiceConfig_s *);
 
-extern s32 func_802B18A4_de(void *, void *);
+extern s32 __vsPan(void *, void *);
 
 
 
@@ -479,7 +479,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             vstate->vibrato = oscValue;
             pitch = vstate->pitch * seqp->chanState[chan].pitchBend * vstate->vibrato;
             fxmix = seqp->chanState[chan].fxmix;
-            pan = func_802B18A4_de(vstate, seqp);
+            pan = __vsPan(vstate, seqp);
             vol = __vsVol((ALVoiceState *)vstate, (ALSeqPlayer *)seqp);
             deltaTime = sound->envelope->attackTime;
             func_802B35E0_de(seqp->drvr, (ALVoice_s *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
@@ -506,7 +506,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             vstate->phase = 4;
         else {
             vstate->phase = 3;
-            func_802B1B14_de(seqp, &vstate->voice, vstate->sound->envelope->releaseTime);
+            __seqpReleaseVoice(seqp, &vstate->voice, vstate->sound->envelope->releaseTime);
         }
         break;
     case 0xA0: /* AL_MIDI_PolyKeyPressure */
@@ -532,7 +532,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             seqp->chanState[chan].pan = byte2;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan) {
-                    pan = func_802B18A4_de(vs, seqp);
+                    pan = __vsPan(vs, seqp);
                     func_802B3350_de(seqp->drvr, &vs->voice, pan);
                 }
             }
@@ -561,7 +561,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
                             vs->phase = 0;
                         else if (vs->phase == 4) {
                             vs->phase = 3;
-                            func_802B1B14_de(seqp, &vs->voice, vs->sound->envelope->releaseTime);
+                            __seqpReleaseVoice(seqp, &vs->voice, vs->sound->envelope->releaseTime);
                         }
                     }
                 }
@@ -632,9 +632,9 @@ void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1) {
             total += node->value;
             if (node->type == 0x15) {
                 s32 node_total;
-                func_802B2450_de((ListLink *)node);
+                alUnlink((ListLink *)node);
                 if (head != 0) {
-                    func_802B2480_de(node, head);
+                    alLink(node, head);
                 } else {
                     head = node;
                     node->prev = 0;
@@ -695,7 +695,7 @@ loop:
         if (value < node_value) {
             node->value = node_value - value;
 insert:
-            func_802B2480_de(arg1, link);
+            alLink(arg1, link);
             goto done;
         }
         arg1->value = value - node_value;

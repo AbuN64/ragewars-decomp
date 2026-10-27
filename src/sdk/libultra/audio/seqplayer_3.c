@@ -37,7 +37,7 @@ extern s32 func_802B3000_de(void *, ALVoice_s *, ALVoiceConfig_s *);
 
  /* alSynAllocVoice */
                                    /* alCents2Ratio */
-extern u8 func_802B18A4_de(ALVoiceState *, ALSeqPlayer *);
+extern u8 __vsPan(ALVoiceState *, ALSeqPlayer *);
 
  /* __vsPan */
 extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
@@ -51,7 +51,7 @@ extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMi
  /* alSynStartVoiceParams */
 
  /* alEvtqPostEvent */
-extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime);
+extern void __seqpReleaseVoice(ALSeqPlayer *, ALVoice_s *, ALMicroTime);
 
  /* __seqpReleaseVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime);
@@ -77,7 +77,7 @@ void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
     if (seqp->base.target == 0)
         return;
 
-    func_802B1E80_de(seqp->base.target, &evt);
+    alSeqNextEvent(seqp->base.target, &evt);
 
     switch (evt.type) {
     case 1:     /* AL_SEQ_MIDI_EVT */
@@ -86,7 +86,7 @@ void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
         break;
 
     case 3:     /* AL_TEMPO_EVT */
-        func_802B1DEC_de(&seqp->base, &evt);
+        __handleMetaMsg(&seqp->base, &evt);
         postNextSeqEvent(seqp);
         break;
 
@@ -201,7 +201,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             vstate->vibrato = oscValue;
             pitch = vstate->pitch * seqp->chanState[chan].pitchBend * vstate->vibrato;
             fxmix = seqp->chanState[chan].fxmix;
-            pan = func_802B18A4_de(vstate, seqp);
+            pan = __vsPan(vstate, seqp);
             vol = __vsVol(vstate, seqp);
             deltaTime = sound->envelope->attackTime;
             func_802B35E0_de(seqp->drvr, voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
@@ -221,7 +221,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             vstate->phase = 4;
         else {
             vstate->phase = 3;
-            func_802B1B14_de(seqp, &vstate->voice, vstate->sound->envelope->releaseTime);
+            __seqpReleaseVoice(seqp, &vstate->voice, vstate->sound->envelope->releaseTime);
         }
         break;
     case 0xA0: /* AL_MIDI_PolyKeyPressure */
@@ -247,7 +247,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             seqp->chanState[chan].pan = byte2;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan) {
-                    pan = func_802B18A4_de(vs, seqp);
+                    pan = __vsPan(vs, seqp);
                     func_802B3350_de(seqp->drvr, &vs->voice, pan);
                 }
             }
@@ -276,7 +276,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
                             vs->phase = 0;
                         else if (vs->phase == 4) {
                             vs->phase = 3;
-                            func_802B1B14_de(seqp, &vs->voice, vs->sound->envelope->releaseTime);
+                            __seqpReleaseVoice(seqp, &vs->voice, vs->sound->envelope->releaseTime);
                         }
                     }
                 }

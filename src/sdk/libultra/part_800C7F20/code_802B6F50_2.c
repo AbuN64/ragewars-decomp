@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 /** Consume and return one byte from the stream pointer at offset 8. */
-int func_802B23B0_de(struct ALSeq_s *stream) {
+int read8(struct ALSeq_s *stream) {
     unsigned char *cursor = stream->curPtr;
     int value = *cursor;
     stream->curPtr = cursor + 1;
@@ -12,7 +12,7 @@ int func_802B23B0_de(struct ALSeq_s *stream) {
 }
 
 /** Consume and return two big-endian bytes from the stream pointer at offset 8. */
-s16 func_802B23C4_de(ALSeq_s *sequenceObject) {
+s16 read16(ALSeq_s *sequenceObject) {
     struct ALSeq_s *stream = sequenceObject;
     unsigned char *p;
     u32 b0;
@@ -27,7 +27,7 @@ s16 func_802B23C4_de(ALSeq_s *sequenceObject) {
     return (s16)((b0 << 8) | b1);
 }
 
-s32 func_802B23F4_de(ALSeq_s *sequenceObject) {
+s32 read32(ALSeq_s *sequenceObject) {
     struct ALSeq_s *stream = sequenceObject;
     unsigned char *p;
     unsigned int b0, b1, b2, b3;

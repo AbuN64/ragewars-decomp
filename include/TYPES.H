@@ -235,7 +235,7 @@ extern void alCopy(unsigned char *source, unsigned char *destination, int count)
 
 extern s32 __voiceNeedsNoteKill(void *arg0, s32 arg1, s32 arg2);
 
-extern void func_802B1C34_de(void *arg0, void *arg1);
+extern void __seqpStopOsc(void *arg0, void *arg1);
 
 extern float Math_Cosf(float x);
 

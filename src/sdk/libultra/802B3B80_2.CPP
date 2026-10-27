@@ -7,7 +7,7 @@
 #include "sdk/al_globals.h"
 extern s32 D_002B0554;
 extern void *func_802B0340_de(s32, s32, void *, s32, s32);
-extern void func_802B1990_de(void *);
+extern void __initChanState(void *);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
@@ -38,7 +38,7 @@ void Libultra_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c)
     seqp->base.nextEvent.type = 9;
     seqp->base.maxChannels = c->kind;
     seqp->base.chanState = func_802B0340_de(0, 0, heap, c->kind, sizeof(ALChanState));
-    func_802B1990_de(seqp);
+    __initChanState(seqp);
     voices = func_802B0340_de(0, 0, heap, c->count38, sizeof(ALVoiceState));
     seqp->base.vFreeList = 0;
     for (i = 0; i < c->count38; i++) {

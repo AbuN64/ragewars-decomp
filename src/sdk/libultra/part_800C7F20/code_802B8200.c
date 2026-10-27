@@ -19,8 +19,8 @@ s32 func_802B3130_de(void *synth, void **selectedVoice, s16 requestedPriority) {
     voiceStolen = 0;
     if ((candidateVoice != 0) || (candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pFreeList.next, (candidateVoice != 0))) {
         *selectedVoice = candidateVoice;
-        func_802B2450_de(candidateVoice);
-        func_802B2480_de(candidateVoice, &((ALSynth_func_802B3000_de *)synth)->pAllocList.next);
+        alUnlink(candidateVoice);
+        alLink(candidateVoice, &((ALSynth_func_802B3000_de *)synth)->pAllocList.next);
     } else {
         candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pAllocList.next;
         stolenResultCopy = voiceStolen;

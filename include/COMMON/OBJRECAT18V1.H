@@ -55,7 +55,7 @@ typedef struct ALSeqMarker ALSeqMarker;
 
 
 
-extern s16 func_802B23C4_de(ALSeq_s *sequenceObject);
-extern s32 func_802B23F4_de(ALSeq_s *sequenceObject);
+extern s16 read16(ALSeq_s *sequenceObject);
+extern s32 read32(ALSeq_s *sequenceObject);
 
 #endif

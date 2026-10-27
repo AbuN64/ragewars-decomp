@@ -4,7 +4,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
 
-extern void func_802B1A40_de(void *arg0, s32 arg1);
+extern void __resetPerfChanState(void *arg0, s32 arg1);
 
 extern void __setInstChanState(void *arg0, void *arg1, s32 arg2);
 
@@ -43,7 +43,7 @@ int __vsDelta(void *voiceObject, int currentTime) {
     return 0x3E8;
 }
 
-s32 func_802B18A4_de(void *voiceObject, void *playerObject) {
+s32 __vsPan(void *voiceObject, void *playerObject) {
     ALVoiceState *voice = voiceObject;
     ALSeqPlayer *player = playerObject;
     s32 pan;
@@ -54,7 +54,7 @@ s32 func_802B18A4_de(void *voiceObject, void *playerObject) {
     return pan & 0xFF;
 }
 
-void func_802B18E4_de(void *seqPlayer, void *instrumentBank) {
+void __initFromBank(void *seqPlayer, void *instrumentBank) {
     s32 i;
     ALBank_s *p;
     void *found;
@@ -68,18 +68,18 @@ void func_802B18E4_de(void *seqPlayer, void *instrumentBank) {
     i = 0;
     if (((ALSeqPlayer *)seqPlayer)->maxChannels != 0) {
         do {
-            func_802B1A40_de(seqPlayer, i);
+            __resetPerfChanState(seqPlayer, i);
             __setInstChanState(seqPlayer, found, i);
             i += 1;
         } while (i < ((ALSeqPlayer *)seqPlayer)->maxChannels);
     }
     if (((ALBank_s *)instrumentBank)->percussion != 0) {
-        func_802B1A40_de(seqPlayer, i);
+        __resetPerfChanState(seqPlayer, i);
         __setInstChanState(seqPlayer, ((ALBank_s *)instrumentBank)->percussion, 9);
     }
 }
 
-void func_802B1990_de(void *playerObject) {
+void __initChanState(void *playerObject) {
     ALSeqPlayer *player = playerObject;
     s32 i;
     s32 off;
@@ -110,7 +110,7 @@ void func_802B1990_de(void *playerObject) {
 }
 
 /* Initialize one channel of the sequence player's channel table. */
-void func_802B1A40_de(void *playerObject, s32 index) {
+void __resetPerfChanState(void *playerObject, s32 index) {
     ALSeqPlayer *player = playerObject;
 
     player->chanState[index].fxId = 0;

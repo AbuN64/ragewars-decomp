@@ -27,7 +27,7 @@ void func_802AFFC0_de(void *eventQueue, void *eventStorage, s32 eventCapacity) {
     if (eventCapacity > 0) {
         p = (char *)eventStorage;
         do {
-            func_802B2480_de(p, eventQueue);
+            alLink(p, eventQueue);
             i += 1;
             p += 0x1C;
         } while (i < eventCapacity);
@@ -42,9 +42,9 @@ s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
     saved = func_802BD170_de(1);
     node = ((ALEventQueue *)eventQueue)->allocList.next;
     if (node != 0) {
-        func_802B2450_de(node);
+        alUnlink(node);
         ((void (*)(void *, void *, s32))alCopy)(&((ALEventListItem *)node)->evt, outputEvent, 0x10);
-        func_802B2480_de(node, eventQueue);
+        alLink(node, eventQueue);
         result = ((ALEventListItem *)node)->delta;
     } else {
         *outputEvent = -1;
@@ -73,7 +73,7 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
         return;
     }
 
-    func_802B2450_de((ListLink *)item);
+    alUnlink((ListLink *)item);
     ((void (*)(void *, void *, s32))alCopy)(evt, &item->evt, sizeof(*evt));
 
     if (delta == 0x7FFFFFFF)
@@ -85,7 +85,7 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
                 item->delta = 0;
             else
                 item->delta = delta;
-            func_802B2480_de((ListLink *)item, node);
+            alLink((ListLink *)item, node);
             break;
         } else {
             nextItem = (ALEventListItem *)node->next;
@@ -94,7 +94,7 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
                 item->delta = delta;
                 nextItem->delta -= delta;
 
-                func_802B2480_de((ListLink *)item, node);
+                alLink((ListLink *)item, node);
                 break;
             }
 
@@ -116,8 +116,8 @@ void alEvtqFlush(void *arg0) {
     if (cur != 0) {
         do {
             next = cur->next;
-            func_802B2450_de((ListLink *)cur);
-            func_802B2480_de(cur, arg0);
+            alUnlink((ListLink *)cur);
+            alLink(cur, arg0);
             cur = next;
         } while (cur != 0);
     }
@@ -139,8 +139,8 @@ void alEvtqFlushType(void *arg0, s16 arg1) {
                 if (next != 0) {
                     ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + ((ALEventListItem *)cur)->delta;
                 }
-                func_802B2450_de((ListLink *)cur);
-                func_802B2480_de(cur, arg0);
+                alUnlink((ListLink *)cur);
+                alLink(cur, arg0);
             }
             cur = next;
         } while (cur != 0);

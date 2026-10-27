@@ -19,9 +19,9 @@ static inline ALVoice_s *event_voice(ALEvent *event) {
 
 typedef void (*Callback802B6D04)(void *arg0);
 
-extern s32 func_802B22F4_de(void *arg0, s32 *arg1);
+extern s32 __alSeqNextDelta(void *arg0, s32 *arg1);
 
-extern s32 func_802B20C8_de(void *arg0);
+extern s32 alSeqGetTicks(void *arg0);
 
 extern void alSeqSetLoc(void *arg0, void *arg1);
 
@@ -36,7 +36,7 @@ void __setInstChanState(void *seqPlayer, void *selectedInstrument, s32 channelNu
     ((ALChanState *)((stride + (s32)((ALSeqPlayer *)seqPlayer)->chanState)))->bendRange = (u16)((ALInstrument *)selectedInstrument)->bendRange;
 }
 
-void func_802B1B14_de(void *seqPlayer, void *releasedVoice, s32 releaseDuration) {
+void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuration) {
     ALEventListItem *cur;
     ALEventListItem *next;
     ALVoiceState *object;
@@ -56,8 +56,8 @@ void func_802B1B14_de(void *seqPlayer, void *releasedVoice, s32 releaseDuration)
                         next->delta = next->delta +
                                             cur->delta;
                     }
-                    func_802B2450_de(cur);
-                    func_802B2480_de(cur, &((ALSeqPlayer *)seqPlayer)->evtq);
+                    alUnlink(cur);
+                    alLink(cur, &((ALSeqPlayer *)seqPlayer)->evtq);
                 }
                 cur = next;
             } while (cur != 0);
@@ -74,7 +74,7 @@ void func_802B1B14_de(void *seqPlayer, void *releasedVoice, s32 releaseDuration)
     func_802B00D4_de(&((ALSeqPlayer *)seqPlayer)->evtq, &entry, releaseDuration);
 }
 
-void func_802B1C34_de(void *seqPlayer, void *voiceState) {
+void __seqpStopOsc(void *seqPlayer, void *voiceState) {
     ALEventListItem *cur;
     ALEventListItem *next;
     u16 type;
@@ -90,12 +90,12 @@ void func_802B1C34_de(void *seqPlayer, void *voiceState) {
                 ((ALEvent *)&cur->evt)->msg.osc.vs == voiceState) {
                 ((ALSeqPlayer *)seqPlayer)->stopOsc(
                     ((ALEvent *)&cur->evt)->msg.osc.oscState);
-                func_802B2450_de(cur);
+                alUnlink(cur);
                 if (next != 0) {
                     next->delta = next->delta +
                                         cur->delta;
                 }
-                func_802B2480_de(cur, &((ALSeqPlayer *)seqPlayer)->evtq.freeList.next);
+                alLink(cur, &((ALSeqPlayer *)seqPlayer)->evtq.freeList.next);
                 if ((short)type == type16) {
                     ((ALVoiceState *)voiceState)->flags &= 0xFE;
                 } else {
@@ -110,7 +110,7 @@ void func_802B1C34_de(void *seqPlayer, void *voiceState) {
     }
 }
 
-void func_802B1D24_de(void *seqPlayer) {
+void __postNextSeqEvent(void *seqPlayer) {
     ALEvent referenceEvent;
     s32 deltaTicks;
     s32 remainingLoops;
@@ -118,9 +118,9 @@ void func_802B1D24_de(void *seqPlayer) {
 
     sequence = ((ObjectLinks88 *)(seqPlayer))->unk_18;
     if ((((ObjectLinks88 *)(seqPlayer))->unk_2C == 1) && (sequence != 0) &&
-        (func_802B22F4_de(sequence, &deltaTicks) & 0xFF)) {
+        (__alSeqNextDelta(sequence, &deltaTicks) & 0xFF)) {
         if ((((ObjectLinks88 *)(seqPlayer))->unk_84 != 0) &&
-            ((func_802B20C8_de(sequence) + deltaTicks) >=
+            ((alSeqGetTicks(sequence) + deltaTicks) >=
              ((struct func_80254D70_S2 *) ((ObjectLinks88 *) seqPlayer)->unk_80)->unk8)) {
             alSeqSetLoc(sequence, ((ObjectLinks88 *)(seqPlayer))->unk_7C);
             remainingLoops = ((ObjectLinks88 *)(seqPlayer))->unk_84;
@@ -136,7 +136,7 @@ void func_802B1D24_de(void *seqPlayer) {
 
 extern void func_802B1E50_de(void *arg0, f32 arg1);
 
-void func_802B1DEC_de(void *arg0, void *arg1) {
+void __handleMetaMsg(void *arg0, void *arg1) {
     u8 *p = (u8 *)arg1;
     int pad[4];
 

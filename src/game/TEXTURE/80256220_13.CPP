@@ -76,7 +76,7 @@ void func_80256C90_de(void) {
             break;
         }
     } while (stop == 0);
-    func_802B24D0_de(&D_80107E34);
+    alClose(&D_80107E34);
 }
 
 s32 *func_80256E6C_de(s32 **arg0) {

@@ -73,7 +73,7 @@ extern char D_00256E6C, D_00256C90;
 s32 *func_80256E6C_de(s32 **);
 void func_80256C90_de(void);
 s32 func_802B72E0_de(u32);
-void func_802B24A0_de(void *, void *);
+void alInit(void *, void *);
 void *func_802B0340_de(s32, s32, void *, s32, u32);
 void osSetEventMesg(s32, void *, s32);
 void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
@@ -90,11 +90,11 @@ void AudioMgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInit
     D_80107E98 = (s32)samplesPerFrame;
     if ((f32)D_80107E98 < samplesPerFrame) D_80107E98++;
     if (D_80107E98 & 15) D_80107E98 = (D_80107E98 & ~15U) + 16;
-    func_802B24A0_de(&D_80107E34, config);
+    alInit(&D_80107E34, config);
     D_80107928[0].prev = 0;
     D_80107928[0].next = 0;
     for (i = 0; i < 59; i++) {
-        func_802B2480_de(&D_80107928[i+1], &D_80107928[i]);
+        alLink(&D_80107928[i+1], &D_80107928[i]);
         D_80107928[i].buffer = func_802B0340_de(0, 0, config->heap, 1, 0x300);
     }
     D_80107928[i].buffer = func_802B0340_de(0, 0, config->heap, 1, 0x300);

@@ -27,8 +27,8 @@ s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline) {
                     if (next != 0) {
                         ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + amount;
                     }
-                    func_802B2450_de(cur);
-                    func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->evtq.freeList.next);
+                    alUnlink(cur);
+                    alLink(cur, &((ALSeqPlayer *)arg0)->evtq.freeList.next);
                     goto done;
                 }
                 result = 0;

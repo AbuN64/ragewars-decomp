@@ -5,7 +5,7 @@
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 #include "sdk/al_globals.h"
 
-void func_802B2450_de(ListLink *node) {
+void alUnlink(ListLink *node) {
     if (node->next != 0) {
         node->next->prev = node->prev;
     }
@@ -14,7 +14,7 @@ void func_802B2450_de(ListLink *node) {
     }
 }
 
-void func_802B2480_de(void *node, void **previousNode) {
+void alLink(void *node, void **previousNode) {
     void *temp;
 
     temp = *previousNode;
@@ -29,7 +29,7 @@ void func_802B2480_de(void *node, void **previousNode) {
 
 extern void func_802B3770_de(void);
 
-void func_802B24A0_de(void *audioGlobals) {
+void alInit(void *audioGlobals) {
     void **p;
 
     p = (void **)&D_800D4070;
@@ -40,7 +40,7 @@ void func_802B24A0_de(void *audioGlobals) {
 }
 
 
-void func_802B24D0_de(s32 *audioGlobals) {
+void alClose(s32 *audioGlobals) {
     void **p;
 
     p = (void **)&D_800D4070;

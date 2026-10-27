@@ -309,8 +309,8 @@ void func_802B2C48_de(ALEventQueue *arg0, void *arg1) {
                 if (next != 0) {
                     next->delta = next->delta + cur->delta;
                 }
-                func_802B2450_de(cur);
-                func_802B2480_de(cur, arg0);
+                alUnlink(cur);
+                alLink(cur, arg0);
             }
             cur = next;
         } while (cur != 0);
