@@ -24,8 +24,6 @@ extern char s_audioEnvText[]; /* "audio/env.c" */
 /* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
 #define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(D_800CC850, s_audioEnvText, line))
 
-extern void _freePVoice(ALSynth4C *drvr, PVoice_s *pvoice);
-extern void Audio_FreeParam(void *param);
 Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
 /* alEnvmixerPull: walk the envelope mixer's control list up to outCount samples, pulling the

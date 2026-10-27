@@ -34,4 +34,8 @@ struct ALSynth {
     s32 outputRate;
     s32 maxOutSamples;
 };
+extern void*Audio_AllocParam(void);
+extern void Audio_FreeParam(void*arg0);
+extern void _freePVoice(s32 arg0, s32 listLink);
+extern s32 func_802B3CD0_de(func_8022E694_S1*arg0, s32 arg1);
 #endif

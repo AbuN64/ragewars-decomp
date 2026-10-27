@@ -2,8 +2,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
+#include "sdk/libultra/audio/synthesizer.h"
 
-extern void *Audio_AllocParam(void);
 
 
 

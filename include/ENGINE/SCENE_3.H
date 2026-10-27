@@ -3,4 +3,5 @@
 #include "COMMON/EXTERNS_9.H"
 #include "SCENE/80286050.H"
 extern void Scene_RequestVisibleGridSections(DraftStreamWorld *);
+extern void Scene_BuildCachedGeometry(DraftStreamWorld*world);
 #endif

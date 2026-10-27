@@ -1,12 +1,12 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ANIMATION.H"
 #include "TYPES.H"
+#include "FRONTEND/8040B45C_42.H"
 
 /* Copies image src into dst when they differ, then fixes dst's pixel rows through Gfx_SwizzleImage when a paletted image has more than 0x800 bytes of pixels or a true-color image more than 0x1000; returns zero. */
 
 typedef struct Image Image;
 
-extern s32 Frontend_CopyOwnedImage(Image *dst, Image *src);
 extern s32 Frontend_GetImagePaletteByteCount(Image *image);
 extern s32 Frontend_GetImagePixelByteCount(Image *image);
 extern void Gfx_SwizzleImage(Image *image);

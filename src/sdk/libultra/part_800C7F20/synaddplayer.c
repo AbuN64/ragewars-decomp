@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
+#include "sdk/libultra/audio/synthesizer.h"
 
 s32 func_802BD170_de(s32);
 
@@ -27,7 +28,6 @@ s32 func_802BD170_de(s32);
 extern s32 func_802B3130_de(ALSynth_func_802B3000_de *, PVoice_s_func_802B3000_de **, s16);
 
  /* _allocatePVoice */
-extern ALParam_s_func_802B3000_de *Audio_AllocParam(void);
 
 void alSynAddPlayer(void *synth, void *audioPlayer) {
     s32 savedInterruptMask;

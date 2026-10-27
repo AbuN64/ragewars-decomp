@@ -16,6 +16,7 @@
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "SCENE/802508E0_9.H"
+#include "AI/ENEMIES/TURRETAI.H"
 
 
 extern void func_80261670_de(void *, s32, s32, s32, s32 *, void *);
@@ -74,7 +75,6 @@ extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
 extern void Player_BuildPlayerOrientation(void *, CQuatern *);
 
-extern void Turret_BuildPlaneRot(CQuatern *, void *, void *);
 
 /* Returns an actor's aim with auto-aim applied: with no assist cone the actor's aiming orientation from
  * func_8024796C_de is returned unchanged; otherwise, of the live entities other than the actor (not flagged 1,

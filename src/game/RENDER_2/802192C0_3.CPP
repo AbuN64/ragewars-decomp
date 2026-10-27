@@ -16,6 +16,7 @@
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/TRIPLE.H"
 #include "FX/802631D0.H"
+#include "ACHIEVE/80424E30_3.H"
 
 extern char D_8010F328[];
 void func_8021A78C_de(void *playerObject) {
@@ -242,7 +243,6 @@ spawn:
    sets the starting ammo by whether the player has a definition, and chooses the starting weapon (fixed for states 17 and
    18, none for a bonus profile, the low half of the second loadout word of the definition when the player is a computer, else the first
    action marked 1) before loading the weapon's animation table and count. */
-extern s32 Achieve_ApplyProfileWeaponUnlocks(struct Player *);
 extern s32 Achieve_ApplyPlayerOptionOverrides(struct Player *);
 extern s32 Achieve_EnableLevelWeapons(struct Player *);
 

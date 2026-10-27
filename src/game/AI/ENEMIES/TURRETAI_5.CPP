@@ -16,7 +16,6 @@ extern s32 Rumble_TestActorStateBit(void *arg0, void *arg1);
 
 extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
-extern CQuatern CVector3_GetDirectionRotation2(f32 *);
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);

@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/OBJECTSTATE10_5.H"
 #include "TYPES.H"
+#include "sdk/libultra/audio/synthesizer.h"
 
 /* alSynStartVoiceParams, drafted from ultralib src/audio/synstartvoiceparam.c (2.0I branch, no
    fxmix clamp): posts a start-voice-alt update carrying pitch, volume, pan, fx mix, wave table and
@@ -23,8 +24,6 @@
 
 
 
-extern Node_func_80239AF4_de *Audio_AllocParam(void);          /* __allocParam */
-extern s32 func_802B3CD0_de(ALSynth_func_802B3000_de *, s32);     /* _timeToSamples */
 
 void func_802B35E0_de(ALSynth_func_802B3000_de *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
 {

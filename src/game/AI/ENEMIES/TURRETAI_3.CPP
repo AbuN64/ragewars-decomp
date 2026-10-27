@@ -35,8 +35,6 @@ f32 GraphU64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 
 /* Callers reserve a 136-byte result workspace shared by both target searches. */
-extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
-extern f32 D_800C6B30;
 static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;

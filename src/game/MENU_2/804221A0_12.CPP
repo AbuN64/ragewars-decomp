@@ -4,6 +4,7 @@
 #include "COMMON/S1_5.H"
 #include "TYPES.H"
 #include "SYSTEM_2/8025E280.H"
+#include "FRONTEND/8043A0B0_12.H"
 
 /* Event callback for the match setup screen D_800E4518: on event 1 with the screen in state 1 it
    advances it, and once it reaches state 2 either goes back (choice 0: resets the mode, shows the
@@ -26,7 +27,6 @@ extern struct LevelActor *D_800E2830;
 
 extern s32 Frontend_GetMenuImageState(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
-extern void Frontend_AdvanceMenuImageTransition(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_RequestScreenMode(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Menu_RequestTrackByKey(s32);

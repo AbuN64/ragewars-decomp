@@ -6,6 +6,7 @@
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "ENGINE/SCENE_3.H"
 
 /* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through StaticInstance_DrawModel inside a Geometry_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
 
@@ -15,7 +16,6 @@
 
 
 extern Gfx *g_displayListCursor;
-extern void Scene_BuildCachedGeometry(SceneSceneDrawCachedOpaqueGeometry *scene);
 
 
 extern void StaticInstance_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);

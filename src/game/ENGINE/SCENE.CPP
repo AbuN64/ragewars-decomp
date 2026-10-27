@@ -47,6 +47,7 @@
 #include "AI/NAV/80208000_8.H"
 #include "OVLGAME/8044E2B8.H"
 #include "SCHED/8023A284_29.H"
+#include "OVLGAME/8044BD30.H"
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
@@ -80,7 +81,6 @@ extern void Menu_TriggerTrackEvent();
 extern void Ovlgame_RefreshActivePlayerSceneState();
 extern void Items_InitGroupPools();
 extern void Ovlgame_InitializeSceneEffectPool();
-extern void Ovlgame_InitializeDynamicLightPool();
 extern void Items_InitEntryBatch();
 extern void Items_InitSlotPool();
 extern void OvlScene_LoadSceneLight();

@@ -7,4 +7,5 @@ extern void Achieve_UpdateUnlockTiers(s32 a0);
 extern s32 Achieve_AwardMilestoneCompletion(s32);
 extern void Achieve_AwardAllMilestoneAchievement(s32, s32 *);
 extern Preset *Achieve_CopyPreset(s32 key, s32 row, s32 column);
+extern void Achieve_ApplyProfileWeaponUnlocks(Arg*arg0);
 #endif

@@ -87,6 +87,7 @@ extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, stru
 extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
 
 #include "particle/8027A0F4_8.H"
+#include "ENGINE/PARTICLE.H"
 
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
@@ -1257,7 +1258,6 @@ extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 #if !(defined(VERSION_DE))
 #include "FX_2/PARTICLE_LIFECYCLE.H"
 extern LiveParticle *D_8013D538;
-extern u8 D_8011026D;
 
 s32 func_8024E2C4_de(void *);
 void GraphU64_ConvertMatrixToFloat(f32 *, void *);

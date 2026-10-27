@@ -22,7 +22,6 @@ extern s32 D_80153788;
    PAL items select their text using the current language. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u16 g_pakPreviewNumber;
 extern char D_800ED414[];
 #else
 #endif

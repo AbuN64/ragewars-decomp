@@ -19,6 +19,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "ACHIEVE/80424E30_3.H"
 #include "SCENE/802508E0_13.H"
+#include "FRONTEND/8043A0B0_12.H"
 
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];
@@ -141,7 +142,6 @@ extern s32 Frontend_GetMenuImageState(void *);
 
 extern void Frontend_DrawMenuImage(void *);
 
-extern void Frontend_AdvanceMenuImageTransition(void *);
 
 
 

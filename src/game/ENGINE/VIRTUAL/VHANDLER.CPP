@@ -7,6 +7,7 @@
 #include "sdk/libgultra/libasm_802BD1A8.h"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
+#include "ENGINE/VIRTUAL/VHANDLER_2.H"
 
 /* Initializes the game state: clears the whole state block and fills its slot and lookup tables
    with 0xFF, resets the 24 player entries and queue slots, sets up the three lists and the stream
@@ -23,7 +24,6 @@
 
 extern char D_801011B8[];
 
-extern void Virtual_AppendPageChainNode(Field_void_4 *base, SlotVirtualInitializePagerEuroExtended *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 Defs_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);

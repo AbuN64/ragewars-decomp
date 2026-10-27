@@ -4,6 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
+#include "FRONTEND/8043A0B0_12.H"
 
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
@@ -375,7 +376,6 @@ extern void Pak_ProbeStatus(s32);
 extern void PAKInterface_ResolvePlayerPakState(s32);
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
-extern void Frontend_AdvanceMenuImageTransition(void *);
 extern void MarkMenuEventHandled();
 extern void Frontend_ContinueCupOrOpenResults();
 extern void Frontend_OpenControllerModeResults();

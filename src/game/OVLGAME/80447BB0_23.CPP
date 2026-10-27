@@ -80,6 +80,7 @@ extern void Weapon_ApplyWeaponSwitch(void *, void *);
 extern void Player_UpdatePlayerCamera(void *, void *);
 extern void Cinema_UpdateSequenceTrack(void *);
 #include "MENU/INITVIEW.H"
+#include "ACHIEVE/80424E30_3.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 typedef struct ActorInitPart {
@@ -282,7 +283,6 @@ extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[]
 extern u32 D_8013B2BC;
 extern void Player_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
-extern void Achieve_ApplyProfileWeaponUnlocks(void *);
 extern void OnScreen_InitMover(void *, s32, s32);
 extern void Link_DispatchObjectLinks(void *, s32, void *);
 /* Prepares an actor's per-run HUD state: runs the mode-specific setup when the session byte is set, resets

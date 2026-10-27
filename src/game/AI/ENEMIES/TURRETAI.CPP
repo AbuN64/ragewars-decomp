@@ -7,10 +7,10 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
+#include "AI/ENEMIES/TURRETAI.H"
 
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
 CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 

@@ -12,6 +12,7 @@
 #include "FRONTEND/80423280_53.H"
 #include "FRONTEND/80423280_56.H"
 #include "FRONTEND/8042E080_42.H"
+#include "COMMON/EXTERNS_6.H"
 extern MatchScoreScreen *D_800E53C0;
 
 /* Handles the answer on the screen D_800E53C0. */
@@ -55,7 +56,6 @@ typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
 extern Handler8042DB38 D_800E53CC;
 
 extern s32 D_80146894; /* MIXED Frontend_ActivateResultsAction */
-extern s32 D_801468F4; /* MIXED Frontend_ActivateResultsAction */
 s32 Frontend_ActivateResultsAction(void) {
     s32 *paused;
     MarkMenuEventHandled();

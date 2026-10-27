@@ -4,6 +4,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
+#include "FRONTEND/8043A0B0_12.H"
 
 /* Event callback for screen D_800E5558: on event 1 while Frontend_GetMenuImageState reports the screen in state
    1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
@@ -16,7 +17,6 @@
 
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
-extern void Frontend_AdvanceMenuImageTransition(void *);
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);

@@ -4,8 +4,8 @@
 #include "sdk/OBJECTSTATE10_5.H"
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/code_802B8370_4.h"
+#include "sdk/libultra/audio/synthesizer.h"
 
-extern void *Audio_AllocParam(void);
 
 
 

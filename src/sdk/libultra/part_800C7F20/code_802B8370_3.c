@@ -3,9 +3,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/OBJECTSTATE10_5.H"
 #include "TYPES.H"
+#include "sdk/libultra/audio/synthesizer.h"
 
-extern void *Audio_AllocParam(void);
-extern s32 func_802B3CD0_de(void *arg0, s32 arg3);
 
 
 

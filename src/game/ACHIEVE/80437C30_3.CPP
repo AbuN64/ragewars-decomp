@@ -16,6 +16,7 @@
 #include "ACHIEVE/80437C30.H"
 #include "ACHIEVE/80437C30_3.H"
 #include "SCENE/802508E0_13.H"
+#include "FRONTEND/8043A0B0_12.H"
 
 /* Resets three words of the object D_800E5830 points to: the words at 0x9C and 0xB0 to -1 and
    the word at 0x188 to zero. */
@@ -50,7 +51,6 @@ extern struct SelectionMessageScreen *D_800E5830;
 
 extern void Frontend_DrawMenuImage(struct MenuRules *);
 
-extern void Frontend_AdvanceMenuImageTransition(struct MenuRules *);
 
 
 

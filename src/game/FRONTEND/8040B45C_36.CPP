@@ -11,6 +11,7 @@
 #include "RESMGR/resmgr_stream_io.H"
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/8040B45C_42.H"
 extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
 extern EntryRecAt18V1 *g_frontendResourceTextures;
 extern FileState g_frontendResourceState;
@@ -108,7 +109,6 @@ static inline void touch(s32 index, s32 mode) {
 
 
 
-extern void Frontend_CopyOwnedImage(s32 output, s32 id);
 
 void Frontend_CloseResourceArchive(void) {
     s32 i;
