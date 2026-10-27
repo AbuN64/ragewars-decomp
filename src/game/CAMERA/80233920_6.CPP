@@ -350,8 +350,10 @@ actor_found:
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "gbi.h"
-extern Gfx D_800CBCC0[], D_800CBCF0_de[];
-extern s32 D_800D297C, D_800E28D0;
+extern Gfx D_800CBCC0[];
+extern Gfx D_800CBCF0_de[];
+extern s32 D_800D297C;
+extern s32 D_800E28D0;
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern Shared_func_80234FDC_S4 D_80140FF8;
@@ -360,7 +362,8 @@ extern void Geometry_SetViewEffect(s32);
 extern void TextLoad_SetTextureEffect(s32);
 extern void Geometry_SelectEffectModes(void);
 extern void TextLoad_ResetTextureCache(void);
-extern s32 Tsmos_IsFrontendActive(void), GetMenuScreenOwner(void);
+extern s32 Tsmos_IsFrontendActive(void);
+extern s32 GetMenuScreenOwner(void);
 extern s32 Geometry_SetModePreset(s32);
 extern void SetN64_ClearDepthRect(void *, s32, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
