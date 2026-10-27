@@ -5350,3 +5350,38 @@ src/sdk/libultra/libasm_802BD1A8_2.c	src/sdk/libultra/libasm_802BD1A8_2.c	sdk/li
 src/sdk/libultra/libasm_802BD1A8_3.c	src/sdk/libultra/libasm_802BD1A8_3.c	sdk/libultra	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
 src/sdk/libultra/libasm_804453C4.c	src/sdk/libultra/libasm_804453C4.c	sdk/libultra	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
 src/sdk/libultra/part_800C7F20/code_802B2378_2.c	src/sdk/libultra/part_800C7F20/code_802B2378_2.c	sdk/libultra/part_800C7F20	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
+src/game/ENGINE/INSTANCE/GOBJINST_2/GOBJINST_2.CPP	src/game/ENGINE/INSTANCE/GOBJINST_2.CPP	game/ENGINE/INSTANCE	GameObject	include/ENGINE/INSTANCE/GOBJINST_2.H	code	high	TU0833.0	now	merged from 2 units by pivot wave A
+src/game/ENGINE/INSTANCE/GOBJINST_4/GOBJINST_4.CPP	src/game/ENGINE/INSTANCE/GOBJINST_4.CPP	game/ENGINE/INSTANCE	GameObject	include/ENGINE/INSTANCE/GOBJINST_4.H	code	high	TU0097.0	now	merged from 2 units by pivot wave A
+src/game/ENGINE/SCENE_5/SCENE_5.CPP	src/game/ENGINE/SCENE_5.CPP	game/ENGINE	Scene	include/ENGINE/SCENE_5.H	code	high	TU0164.2	now	merged from 3 units by pivot wave A
+src/game/ENGINE/VIRTUAL/VHANDLER_2/VHANDLER_2.CPP	src/game/ENGINE/VIRTUAL/VHANDLER_2.CPP	game/ENGINE/VIRTUAL	Virtual	include/ENGINE/VIRTUAL/VHANDLER_2.H	code	high	TU0069.0	now	merged from 2 units by pivot wave A
+src/game/CAMERA/GSKY_2/GSKY_2.CPP	src/game/CAMERA/GSKY_2.CPP	game/CAMERA	Sky	include/CAMERA/GSKY_2.H	code	low	TU0067.0	now	merged from 4 units by pivot wave A
+src/game/ENGINE/ANIM/BULKYDCMP/BULKYDCMP.CPP	src/game/ENGINE/ANIM/BULKYDCMP.CPP	game/ENGINE/ANIM	BulkyDcmp	include/ENGINE/ANIM/BULKYDCMP.H	code	low	TU0121.0	now	merged from 2 units by pivot wave A
+src/game/ENGINE/AUDIO/T2SOUNDELEMENT/T2SOUNDELEMENT.CPP	src/game/ENGINE/AUDIO/T2SOUNDELEMENT.CPP	game/ENGINE/AUDIO	SoundElement	include/ENGINE/AUDIO/T2SOUNDELEMENT.H	code	low	TU0120.0	now	merged from 3 units by pivot wave A
+src/game/ENGINE/AUDIO/VOICE/VOICE.CPP	src/game/ENGINE/AUDIO/VOICE.CPP	game/ENGINE/AUDIO	Audio	include/ENGINE/AUDIO/VOICE.H	code	low	TU0116.0	now	merged from 10 units by pivot wave A
+src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP	src/game/ENGINE/CINEMA/CINEMA.CPP	game/ENGINE/CINEMA	Cinema	include/ENGINE/CINEMA/CINEMA.H	code	medium	TU0094.0	now	merged from 4 units by pivot wave A
+src/game/ENGINE/CONTPAD/CONTPAD.CPP	src/game/ENGINE/CONTPAD.CPP	game/ENGINE	ContPad	include/ENGINE/CONTPAD.H	code	medium	TU0132.0	now	merged from 2 units by pivot wave A
+src/game/ENGINE/CONTROL_2/CONTROL_2.CPP	src/game/ENGINE/CONTROL_2.CPP	game/ENGINE	Control	include/ENGINE/CONTROL_2.H	code	medium	TU0861.1	now	merged from 2 units by pivot wave A
+src/game/ENGINE/DEFS/DEFS.CPP	src/game/ENGINE/DEFS.CPP	game/ENGINE	Defs	include/ENGINE/DEFS.H	code	medium	TU0864.1	now	merged from 2 units by pivot wave A
+src/game/ENGINE/GEOMETRY_2/GEOMETRY_2.CPP	src/game/ENGINE/GEOMETRY_2.CPP	game/ENGINE	Geometry	include/ENGINE/GEOMETRY_2.H	code	low	TU0140.0	now	merged from 5 units by pivot wave A
+src/game/ENGINE/GREGION/GREGION.CPP	src/game/ENGINE/GREGION.CPP	game/ENGINE	Region	include/ENGINE/GREGION.H	code	medium	TU0142.0	now	merged from 11 units by pivot wave A
+src/game/ENGINE/INSTANCE/INSTHDR_2/INSTHDR_2.CPP	src/game/ENGINE/INSTANCE/INSTHDR_2.CPP	game/ENGINE/INSTANCE	InstHdr	include/ENGINE/INSTANCE/INSTHDR_2.H	code	low	TU0100.0	now	merged from 6 units by pivot wave A
+src/game/ENGINE/LIGHTING/LIGHTING.CPP	src/game/ENGINE/LIGHTING.CPP	game/ENGINE	Lighting	include/ENGINE/LIGHTING.H	code	medium	TU0144.0	now	merged from 4 units by pivot wave A
+src/game/ENGINE/LINK_2/LINK_2.CPP	src/game/ENGINE/LINK_2.CPP	game/ENGINE	Link	include/ENGINE/LINK_2.H	code	medium	TU0146.0	now	merged from 5 units by pivot wave A
+src/game/ENGINE/PARTICLE_5/PARTICLE_5.CPP	src/game/ENGINE/PARTICLE_5.CPP	game/ENGINE	Particle	include/ENGINE/PARTICLE_5.H	code	medium	TU0155.0	now	merged from 6 units by pivot wave A
+src/game/ENGINE/SETN64/SETN64.CPP	src/game/ENGINE/SETN64.CPP	game/ENGINE	SetN64	include/ENGINE/SETN64.H	code	low	TU0169.0	now	merged from 8 units by pivot wave A
+src/game/ENGINE/TEXTLOAD/TEXTLOAD.CPP	src/game/ENGINE/TEXTLOAD.CPP	game/ENGINE	TextLoad	include/ENGINE/TEXTLOAD.H	code	medium	TU0177.0	now	merged from 7 units by pivot wave A
+src/game/ENGINE/UNICOL/COLLIDE/COLLIDE.CPP	src/game/ENGINE/UNICOL/COLLIDE.CPP	game/ENGINE/UNICOL	Collide	include/ENGINE/UNICOL/COLLIDE.H	code	low	TU0074.0	now	merged from 3 units by pivot wave A
+src/game/ENGINE/UNICOL/INSTCOL_2/INSTCOL_2.CPP	src/game/ENGINE/UNICOL/INSTCOL_2.CPP	game/ENGINE/UNICOL	InstCol	include/ENGINE/UNICOL/INSTCOL_2.H	code	low	TU0077.0	now	merged from 2 units by pivot wave A
+src/game/ENGINE/UNICOL/PLANE/PLANE.CPP	src/game/ENGINE/UNICOL/PLANE.CPP	game/ENGINE/UNICOL	Plane	include/ENGINE/UNICOL/PLANE.H	code	low	TU0080.0	now	merged from 9 units by pivot wave A
+src/game/ENGINE/UNICOL/PLTFMCOL/PLTFMCOL.CPP	src/game/ENGINE/UNICOL/PLTFMCOL.CPP	game/ENGINE/UNICOL	PltfmCol	include/ENGINE/UNICOL/PLTFMCOL.H	code	low	TU0088.0	now	merged from 3 units by pivot wave A
+src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP	src/game/ENGINE/UNICOL/UNICOL.CPP	game/ENGINE/UNICOL	Unicol	include/ENGINE/UNICOL/UNICOL.H	code	medium	TU0092.0	now	merged from 2 units by pivot wave A
+src/game/FX_2/FX_2.CPP	src/game/FX_2.CPP	game	Fx	include/FX_2.H	code	medium	TU0203.0	now	merged from 6 units by pivot wave A
+src/game/ITEMMENU/ITEMMENU.CPP	src/game/ITEMMENU.CPP	game	ItemMenu	include/ITEMMENU.H	code	medium	TU0204.0	now	merged from 3 units by pivot wave A
+src/game/ONSCRN_4/ONSCRN_4.CPP	src/game/ONSCRN_4.CPP	game	OnScreen	include/ONSCRN_4.H	code	medium	TU0942.1	now	merged from 2 units by pivot wave A
+src/game/ONSCRN/ONSCRN.CPP	src/game/ONSCRN.CPP	game	OnScreen	include/ONSCRN.H	code	medium	TU0206.0	now	merged from 3 units by pivot wave A
+src/game/UI/TSMOS/SCREENS/SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.CPP	src/game/UI/TSMOS/SCREENS/SCENARIOSETUPSCREEN.CPP	game/UI/TSMOS/SCREENS	ScenarioSetup	include/UI/TSMOS/SCREENS/SCENARIOSETUPSCREEN.H	code	medium	TU0433.0	after-reclass	merged from 14 units by pivot wave A
+src/game/UI/TSMOS/SMP/SMP_OVERLAY/SMP_OVERLAY.CPP	src/game/UI/TSMOS/SMP/SMP_OVERLAY.CPP	game/UI/TSMOS/SMP	SmpOverlay	include/UI/TSMOS/SMP/SMP_OVERLAY.H	code	low	TU0408.0	now	merged from 4 units by pivot wave A
+src/game/UI/X_FILES/X_PLUS/X_PLUS.CPP	src/game/UI/X_FILES/X_PLUS.CPP	game/UI/X_FILES	XPlus	include/UI/X_FILES/X_PLUS.H	code	low	TU0190.0	now	merged from 10 units by pivot wave A
+src/game/UI/X_FILES/X_STDIO/X_STDIO.CPP	src/game/UI/X_FILES/X_STDIO.CPP	game/UI/X_FILES	XStdio	include/UI/X_FILES/X_STDIO.H	code	medium	TU0192.0	now	merged from 5 units by pivot wave A
+src/sdk/libultra/audio/seqplayer_2/seqplayer_2.c	src/sdk/libultra/audio/seqplayer_2.c	sdk/libultra/audio	-	include/sdk/libultra/audio/seqplayer_2.h	sdk	high	TU0237.0	now	moved into its module folder by pivot wave A (L8)
+src/sdk/libultra/libc/xprintf_DATA0/xprintf_DATA0.c	src/sdk/libultra/libc/xprintf_DATA0.c	sdk/libultra/libc	-	-	part	pending	TU1025.0	now	moved into its module folder by pivot wave A (L8)

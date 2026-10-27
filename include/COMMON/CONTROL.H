@@ -24,16 +24,6 @@ struct ScreenScenarioSetupSelectPreviousCatalogueCategory {
 extern void ScenarioSetup_ClearFlagBits();
 
 struct Label;
-struct ScreenScenarioSetupLoadSetupArenaLabel;
-struct ScreenScenarioSetupLoadSetupArenaLabel {
-    s32 field0;
-    char pad4[0x3EC - 4];
-    struct Label *widget;
-    char pad3F0[0x3F4 - 0x3F0];
-    char label[0x40];
-    s32 list;
-    s32 entry;
-};
 
 
 struct G;
@@ -107,13 +97,6 @@ struct ResourceSmpFlickerCreateFlickerWidget;
 
 
 
-struct RecordRecAtCV2;
-struct RecordRecAtCV2 {
-    s32 key;
-    char pad4[0x8];
-    s32 value;
-};
-
 struct Label;
 struct ScreenScenarioSetupRefreshSelectedArenaLabel;
 struct ScreenScenarioSetupRefreshSelectedArenaLabel {
@@ -146,15 +129,6 @@ extern s32 D_800E5214[];
 extern s32 D_800E5240[];
 
 
-struct Icon;
-struct Icon {
-    s32 key;
-    s32 other;
-    char pad8[0x10 - 0x8];
-};
 
 
-
-struct RecordRecAtCV2;
-typedef struct RecordRecAtCV2 RecordRecAtCV2;
 #endif

@@ -2660,8 +2660,6 @@ typedef struct Binding Binding;
 
 
 
-struct Block12;
-typedef struct Block12 Block12;
 
 
 
@@ -2973,9 +2971,6 @@ typedef struct OptionsOpenItem OptionsOpenItem;
 
 struct OptionsOpenScreen;
 typedef struct OptionsOpenScreen OptionsOpenScreen;
-
-struct OptionsWidgets;
-typedef struct OptionsWidgets OptionsWidgets;
 
 
 struct OwnerCode8025A3EC;
@@ -3568,10 +3563,6 @@ struct Binding {
     char pad8[16];
     void *(*storage)(void);
 };
-struct Block12;
-struct Block12 {
-    u8 bytes[12];
-};
 struct Bytes12;
 struct Shape_typemap_13;
 struct Triple;
@@ -4163,18 +4154,6 @@ struct OptionsOpenScreen {
     char pad30[0x34 - 0x30];
     s32 unk_34;
     s32 full;
-};
-struct OptionsWidgets;
-struct OptionsWidgets {
-    s32 screen;
-    s32 label;
-    s32 slider;
-    s32 list0;
-    s32 list1;
-    s32 list2;
-    u8 padding18[8];
-    s32 selection;
-    s32 state;
 };
 struct Label;
 struct OwnerCode8025A3EC;

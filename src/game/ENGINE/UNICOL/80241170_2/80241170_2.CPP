@@ -6,17 +6,18 @@
 #include "COMMON/OUTPUT.H"
 #include "ANIM/RAY180.H"
 #include "stddef.h"
+#include "COMMON/BALLISTICPARAMS.H"
+#include "ANIM/802412C0.H"
 
+/* 80241170_2.CPP */
 s32 GraphU64_InterpolateVector(CVector3 *, u32, void *, void *);
 
 /* Tests a point against every edge plane of a polygon. */
-
 
  /* extern */
 void GraphU64_CrossVectors(f32 *, void *, f32 *);
 
 s32 func_802412D0_de(void *poly, void *start, void *segmentEnd, f32 *outputFraction) {
-    extern void GraphU64_SubtractVectors(f32 *, void *, void *);
     f32 segmentDirection[3];
     f32 planeToStart[3];
     f32 normalDotDirection;
@@ -41,7 +42,6 @@ s32 func_802412D0_de(void *poly, void *start, void *segmentEnd, f32 *outputFract
 }
 
 s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, void *outputPoint) {
-    extern void GraphU64_SubtractVectors(f32 *, void *, void *);
     f32 segmentDirection[3];
     f32 planeToStart[3];
     f32 hitFraction;
@@ -71,7 +71,6 @@ s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, v
 
 /* extern */
 s32 func_802414F4_de(func_80204468_S3 *poly, void *testPoint) {
-    void GraphU64_SubtractVectors(f32 *, void *, void *);
     f32 edgePlaneNormal[3];
     f32 edgeVector[3];
     f32 vertexToPoint[3];
@@ -111,10 +110,6 @@ s32 func_80241614_de(void *poly, void *point, f32 radius, void *testPoint) {
 
 /* Tests whether a point lies inside an object's four-sided footprint: for each edge of the corners at 0x18 it checks the side the point falls on in the x-z plane, walking the edges in reverse when the winding value at 0x4C is negative. */
 
-
-
-
-
 s32 func_80241668_de(Footprint *fp, CVector3 *p)
 {
     s32 i;
@@ -148,4 +143,22 @@ f32 func_80241728_de(void *query, f32 x, f32 z) {
     }
     point = ((SurfaceHit *)query)->point;
     return (((point.z - z) * normal.z) + ((point.x - x) * normal.x) + (point.y * normal.y)) / normal.y;
+}
+
+/* 802412C0.CPP */
+f32 func_802417C4_de(f32 *contactRecord) {
+    f32 magnitude;
+    f32 result;
+    f32 zero;
+
+    magnitude = Math_Sqrtf((contactRecord[18] * contactRecord[18]) + (contactRecord[20] * contactRecord[20]));
+    zero = 0.0f;
+    if (magnitude == zero) {
+        return zero;
+    }
+    result = GraphU64_ArcCos(contactRecord[20] / magnitude);
+    if (!(zero < contactRecord[18])) {
+        result = -result;
+    }
+    return result;
 }

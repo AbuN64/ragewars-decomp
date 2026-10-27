@@ -12,7 +12,10 @@
 #include "gbi.h"
 #include "MENU/GFX/80414430_19.H"
 #include "particle/80271B18_3.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "stddef.h"
 
+/* 8043962C_13.CPP */
 /* Draws a menu model with screen-scaled translation, animated and fixed rotations, restoring the render-state flag afterward; the unsigned offset-to-pointer cast preserves matrix-address scheduling. */
 extern MenuModelScreen D_80141008[]; extern Gfx *g_displayListCursor;
 extern s32 D_800D297C, D_800E28D0;
@@ -37,6 +40,11 @@ extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForw
 extern s32 N64Eng_GetFrameCounter(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 Scene_GetIndexedModelResource(void *,s32);
 extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_804397F0_E2B80[1] = {
+    0x3C8EFA36,
+};
+#endif
 void func_804399D0(MenuModelItem *item) {
  Matrix matrix;
  CVector3 position, transformed, scale;
@@ -111,5 +119,58 @@ unsigned int rodata_unresolved_800EE5E8[2] = {
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800DDF68[2] = {
     0x00439D80, 0x00439D88,
+};
+#endif
+
+/* 8043962C_14.CPP */
+/* Initializes the six object parameters and clears its transient state. */
+s32 Frontend_SetPreviewModel(void *, s32);
+
+ /* extern */
+
+ /* extern */
+s32 Frontend_InitModelPreviewTransform(StateFrontendInitModelPreviewTransform *preview, s32 modelId, Triple first, Triple second) {
+    preview->second = second;
+    preview->first = first;
+    preview->unk1C = 0;
+    preview->unk20 = 0;
+    preview->unk24 = 0;
+    preview->unk28 = 0;
+    preview->unk2C = 0;
+    preview->unk30 = 0;
+    Frontend_SetPreviewModel(preview, modelId);
+    Frontend_SetPreviewRenderFlags(preview, 0);
+    return preview->unk34;
+}
+
+/* Stores a three-word vector passed by value into offset 0x1C of an object. */
+
+void Frontend_SetPreviewRotation(struct ObjRecAt1CV3 *object, struct Triple vector) {
+    object->unk1C = vector;
+}
+
+/* Returns by value the three-word vector at offset 0x1C of an object. */
+
+struct Triple Frontend_GetPreviewRotation(struct ObjRecAt1CV3 *object) {
+    return object->unk1C;
+}
+
+/* Stores a three-word vector passed by value into offset 0x28 of an object. */
+
+void Frontend_SetPreviewRotationSpeed(struct ObjectRecAt28 *object, struct Triple vector) {
+    object->vector = vector;
+}
+
+/* Returns by value the three-word vector at offset 0x28 of an object. */
+
+struct Triple Frontend_GetPreviewRotationSpeed(struct ObjectRecAt28 *object) {
+    return object->vector;
+}
+
+/* 800E1F80.CPP */
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_804397F0_E2B80_us_rev1[6] = {
+    0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
 };
 #endif

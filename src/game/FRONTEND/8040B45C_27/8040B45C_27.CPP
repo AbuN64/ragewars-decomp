@@ -2,16 +2,15 @@
 #include "COMMON/WIDGETRECAT1A.H"
 #include "FRONTEND/8040B45C_29.H"
 #include "MATH/80299ECC.H"
+#include "FRONTEND/8040B45C_28.H"
 
+/* 8040B45C_27.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_EU)
 /* Slider widget message handler: clamps the current value into range, then dispatches on the
    message to get/set the value, range, step or user word, adjusts by one step, or posts the new
    value to the parent. */
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-
-
-
 
 s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     s32 result;
@@ -111,5 +110,12 @@ post:
 
 end:
     return result;
+}
+#endif
+
+/* 8040B45C_28.CPP */
+#if !(defined(VERSION_US))
+/** Perform no work. */
+void Frontend_ReturnWithoutAction(void) {
 }
 #endif
