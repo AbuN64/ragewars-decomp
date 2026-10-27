@@ -120,8 +120,6 @@ void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
     }
 }
 
-struct OwnerRecAtD8;
-
 void Audio_StopAudioBySecondaryValue(ContextRecAt2BC0 *context, s32 matchValue) {
     void *contextLock;
     void *record;
