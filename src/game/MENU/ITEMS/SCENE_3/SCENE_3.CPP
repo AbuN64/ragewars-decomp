@@ -17,7 +17,6 @@
 #include "WEAPONS/80213ED4_22.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
-
 extern void Cache_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 size);
@@ -66,7 +65,7 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern struct Shape_func_8021A2D4_de_2 D_801462CC;
 
-extern void Items_LoadPreviewBufferA(char *);
+extern void Items_LoadPreviewBufferA(ItemsPreviewStateA *);
 
 extern void Items_LoadPreviewBufferB(char *);
 
@@ -303,9 +302,33 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
 }
 
 void OvlScene_InitPreview(Shared_World *world, s32 level) {
-    Items_LoadPreviewBufferA((char *)world);
+    Items_LoadPreviewBufferA((ItemsPreviewStateA *)world);
     Items_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
     world->previewTimer = 0x15;
     world->previewStart = D_801462CC.field_0;
+}
+
+extern void Cache_ReleaseResource(void *, void *); /* extern */
+
+/* Loads a selected resource into the shared buffer and releases the temporary allocation. */
+
+struct ItemsPreviewStateA;
+
+/* extern */
+extern s32 Control_IsSnapshotActive(void); /* extern */
+extern void *func_802BD3A0_de(void *, const void *, int); /* extern */
+extern char D_00285160;
+extern char g_loadSavePersistentData;
+
+void Items_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
+    s32 *persistentDataResource;
+    s32 temp_a1;
+
+    if (Control_IsSnapshotActive() == 0) {
+        persistentDataResource = Cache_RequestResource(0, previewToLoad->unk38, previewToLoad->unk38, previewToLoad->unk44, 0, 0, &D_00285160, &g_loadSavePersistentData, 1);
+        func_802BD3A0_de(&D_800F91F0, (const void *)*persistentDataResource, 0x5800);
+        Cache_ReleaseResource(0, persistentDataResource);
+        previewToLoad->unk4 = 1;
+    }
 }

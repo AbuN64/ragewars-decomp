@@ -5,7 +5,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_14.H"
-#include "MENU/ITEMS/SCENE_7.H"
+#include "MENU/ITEMS/SCENE_4/SCENE_7.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "SYSTEM/80255C40_3.H"
@@ -18,21 +18,20 @@ extern char D_00285160[];
 extern char g_gamePersistentData[];
 extern char D_800F41F0[];
 extern int Control_IsSnapshotActive(void);
-extern void func_802BD3A0_de(void *,int,int);
+extern void *func_802BD3A0_de(void *, const void *, int);
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
  if(Control_IsSnapshotActive()==0) {
   resource=Cache_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,g_gamePersistentData,1);
-  func_802BD3A0_de(D_800F41F0,*resource,0x5000);
+  func_802BD3A0_de(D_800F41F0,(const void *)*resource,0x5000);
   Cache_ReleaseResource(0,resource);
  }
 }
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern void func_802BD3A0_de(void *,int,int);
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 
 
