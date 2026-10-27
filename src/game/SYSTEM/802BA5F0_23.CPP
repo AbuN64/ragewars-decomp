@@ -17,7 +17,6 @@
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 func_802BADA0_de(OSThread_s *thread);
 void func_802BB5F0_de(OSThread_s *thread, s32 priority);
-void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stack, s32 priority);
 void osStartThread(OSThread_s *thread);
 extern OSThread_s D_80148850;
 extern struct OSMesgQueue D_80149A80;
