@@ -151,7 +151,6 @@ typedef struct {
     s32 modelId; s32 maxHealth; u8 pad5E8[0xE68]; s32 bot;
 } BonusPlayer;
 typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
-struct World;
 struct Shared_World;
 extern void *Scene_FindActorDefinition(struct Shared_World *, s32, s32);
 
