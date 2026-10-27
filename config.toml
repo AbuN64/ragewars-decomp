@@ -120,51 +120,6 @@ toolchain = "gcc-2.7.2-sn64"
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []
-[file."src/game/MATH/80299368.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
-omit = []
-[file."src/game/particle/8027A0F4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_3.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_6.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_7.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_8.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/CODE_80281A70.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_10.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8027A0F4_4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-[file."src/game/particle/8028308C.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
 [file."src/sdk/libultra/audio/802C3EA4.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
@@ -246,3 +201,59 @@ hilo_nops = true
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
+
+[file."src/game/UI/SMOS/SM_XLATE/80299368.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/8027A0F4.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/8027A0F4_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/8027A0F4_3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_3/8027A0F4_6.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_3/8027A0F4_7.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_3/8027A0F4_8.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_3/CODE_80281A70.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_3/8027A0F4_10.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_2/8027A0F4_4.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE_4/8028308C.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
