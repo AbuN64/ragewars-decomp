@@ -11,8 +11,6 @@
 /** Set D_800D2C90 to one. */
 
 
-s32 GetMenuScreenOwner();
-
 extern void Smos_ClearControllerFlags(s32 *arg0);
 
 /** Return the global word at D_800D2C98. */
