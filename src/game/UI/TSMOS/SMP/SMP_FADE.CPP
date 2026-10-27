@@ -6,7 +6,9 @@
 #include "MENU_2/804196C0_20.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_33.H"
+#include "include_asm.h"
 
+/* 804196C0_20.CPP */
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
    the item the second names in the current context through GetMenuScreenOwner, Frontend_GetScreenData and
    Frontend_FindWidgetByResourceId, allocates and zeroes the widget, tags it 0xB60 with kind 8, links the frame at
@@ -15,12 +17,6 @@
    stores the green and red differences between them over 75 steps at 0x70 and 0x74, marks it
    active at 0x78, starts it through SmpSlider_EnableTransition and SmpSlider_SetTransitionMode(1) and attaches it to the
    frame through Frontend_InsertWidgetBefore. Returns the widget. */
-
-
-
-
-
-
 
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
 extern void SmpSlider_EnableTransition(MenuFadeWidget *);
@@ -59,7 +55,46 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     return result;
 }
 
-
 void SmpFade_RegisterFadeClass(void) {
     SmSmngr_RegisterElementHandlers(0xB60, D_0041A490, D_0041A520, 3);
 }
+
+/* 800E1470.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_8041A280_E2070[2] = {
+    0x3EAAAAAB, 0x3D4CCCCD,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_800DC0F8[2] = {
+    0x00000000, 0x00164D55,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800E8C88[2] = {
+    0x3DDD67C9, 0x3F000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800EDAC8[2] = {
+    0x0800FFE0, 0x01270134,
+};
+#endif
+
+#if defined(VERSION_DE)
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800DD448[2] = {
+    (unsigned int)&D_800C8380_de + 0x70, (unsigned int)&D_800C8420_de + 0x90,
+};
+#endif
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_8041A280_E2070_us_rev1.c */
+const unsigned int D_blob_1466e2b8289b860d4bb9[2] = {
+    0x3EAAAAAB, 0x3D4CCCCD,
+};
+#endif
