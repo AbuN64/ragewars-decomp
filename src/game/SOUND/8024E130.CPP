@@ -88,8 +88,6 @@ s32 func_8024E208_de(char *actor)
     return 0;
 }
 
-typedef struct Owner Owner;
-
 
 
 /** Return bit two of the nested state word. */
