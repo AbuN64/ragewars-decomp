@@ -113,7 +113,6 @@ void Multi_EnableMenuControllerPak(void *arg0) {
 
 struct List;
 
-struct Owner;
 extern void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 extern char D_8014561C[];
 
