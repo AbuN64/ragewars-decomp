@@ -73,10 +73,6 @@ void Nav_CloseSearchNode(void *object) {
     node->open = 2;
 }
 
-int Nav_IsSearchNodeOpen(void *navigationSearchNode) {
-    NavigationSearchNode *node = navigationSearchNode;
-    return node->open == 1;
-}
 
 /** Report whether the word at object offset 0x28 equals two. */
 int Nav_IsSearchNodeClosed(void *navigationSearchNode) {

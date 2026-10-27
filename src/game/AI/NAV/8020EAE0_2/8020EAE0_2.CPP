@@ -68,6 +68,10 @@ void Nav_AccumulateNodeTickCosts(void) {
         } while (node != 0);
     }
 }
+int Nav_IsSearchNodeOpen(void *navigationSearchNode) {
+    NavigationSearchNode *node = navigationSearchNode;
+    return node->open == 1;
+}
 
 void Nav_AddPickupCategoryCosts(void) {
     CNavData *base;

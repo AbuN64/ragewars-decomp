@@ -1,5 +1,5 @@
 # Turok: Rage Wars: matching build.
-# generator: 66459ece4361
+# generator: 2db6f9d5aae0
 # make check             builds every version ROM from the committed sources and verifies its SHA-1.
 # make check CHECK=tree  verifies only that the committed generated files are present (no ROMs needed).
 # make extract           splits every baserom into asm/<version>/ with splat; a data file's section is its stand-in's.
@@ -92,7 +92,7 @@ COMPILE_gcc_2_7_2_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif 
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(PPFRONT) $(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && $(if $(HILO),python3 -I -c "$$HILO_HAZARD" $(@:.o=.s),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
+COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(if $(FSPLIT),-ffunction-sections) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && $(if $(HILO),python3 -I -c "$$HILO_HAZARD" $(@:.o=.s),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && if [ -n "$(FSPLIT)" ]; then $(N64LINK) asn64 $(@:.o=.s) > $(@:.o=.n.s) && python3 -I -c "$$FSPLIT_PASS" $(@:.o=.n.s) $(@:.o=.f.s) && $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.f.s) -o $@; else $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
@@ -367,6 +367,73 @@ for line in open(path):
 open(path, "w").write("".join(out))
 endef
 export STRIP_ALIGN
+# A compiler run with its function-sections flag gives each function a section of its own (`.Fn`), but its assembler
+# front rewrites the assembly and puts every function back in `.text`, every string, jump table and float pool in one
+# `.rdata`. FSPLIT (text_sizes.mk: an object whose functions or read-only data the ROM places apart) puts each function
+# in `.text.Fn` again and tags each read-only block with the function it belongs to, as `.rdata.Fn`: a block inside the
+# function (jump table, float pool) is that function's, a block is named as the ROM names it (its first label, else its
+# function's pool), so the link script lays every block at its ROM address.
+define FSPLIT_PASS
+import re, sys
+lines = open(sys.argv[1]).read().replace("\r", "").split("\n")
+code = re.compile(r"^\.section\s+\.([^\s,\"]+),\"ax\"")
+reopen = re.compile(r"^\.section\s+\.([^\s,\"]+)\Z")
+names = [m.group(1) for m in map(code.match, lines) if m]
+funcs = set(names)
+label_re = re.compile(r"^((?!RODATA_SYM_)[A-Za-z_][A-Za-z_0-9]*):")  # not the compiler front's own pool labels
+def next_block(i):
+    for j in range(i + 1, len(lines)):
+        if lines[j].startswith(".section") or lines[j].strip() in (".text", ".data"):
+            return j
+    return len(lines)
+def next_section(i):
+    for j in range(i + 1, len(lines)):
+        text = lines[j].strip()
+        if text.startswith((".section", ".data")) or text == ".text":
+            return lines[j]
+    return ""
+# the compiler writes a pool where the previous function ends or where its own code is: the function a pool belongs to
+# is the first one whose code names a label of it
+label_any = re.compile(r"^([.A-Za-z_][\w.]*):")
+token = re.compile(r"[.A-Za-z_][\w.]*")
+owner, at, in_code = {}, None, False
+for line in lines:
+    found = code.match(line) or (reopen.match(line) if reopen.match(line) and reopen.match(line).group(1) in funcs else None)
+    if found:
+        at, in_code = found.group(1), True
+    elif line.strip() == ".text":
+        in_code = True
+    elif re.match(r"\s*\.(section|data)\b", line):
+        in_code = False
+    elif in_code and at and not label_any.match(line):
+        for word in token.findall(line):
+            owner.setdefault(word, at)
+out, current = [], None
+for i, line in enumerate(lines):
+    found = code.match(line)
+    if found:
+        current = found.group(1)
+        out.append('.section\t.text.%s,"ax",@progbits' % current)
+    elif reopen.match(line) and reopen.match(line).group(1) in funcs:
+        current = reopen.match(line).group(1)
+        out.append('.section\t.text.%s,"ax",@progbits' % current)
+    elif line.strip() == ".text":
+        out.append('.section\t.text.%s,"ax",@progbits' % current if current else line)
+    elif re.match(r"^\s*\.section\s+\.(rdata|rodata)\s*\Z", line):
+        base = "rdata" if "rdata" in line else "rodata"
+        label = next((m.group(1) for m in map(label_re.match, lines[i + 1 : next_block(i)]) if m), None)
+        # a block is named as the ROM names it: its first source label, else the pool of the function it sits in (strings before the first function: that one's)
+        user = next((owner[m.group(1)] for m in map(label_any.match, lines[i + 1 : next_block(i)]) if m and m.group(1) in owner), None)
+        key = label or ("literals_" + (user or current or names[0]) if names else None)
+        out.append('.section\t.%s.%s,"a",@progbits' % (base, key) if key else line)
+        # `SUBALIGN(1)` drops the section's alignment: a block aligned to 8 says so to the link script
+        if key and any(re.match(r"\s*\.align\s+[3-9]\b", x) for x in lines[i + 1 : next_block(i)]):
+            out.append("\t.weak __align8_%s\n\t.set __align8_%s, 0" % (key, key))
+    else:
+        out.append(line)
+open(sys.argv[2], "w").write("\n".join(out))
+endef
+export FSPLIT_PASS
 # The R4000 reads HI/LO late: an mfhi/mflo needs two instructions before the next mult/div/mthi/mtlo. The assembler the
 # ROMs were made with wrote two nops where the compiler placed the two back to back (gas lays the gap itself only when
 # one instruction is already between, so here they stay adjacent). A toolchain row's hilo_hazard_nops puts those two
@@ -1326,7 +1393,7 @@ $(STAMPREC): Makefile
 	$(Q)$(HOSTCC) -O2 -o $@ build/stamprec.c 2>/dev/null || rm -f $@
 RECORD = { [ -x $(STAMPREC) ] && $(STAMPREC) record $(1); } || python3 -I build/stamp-sweep.py record $(1)
 shq = '$(subst ','\'',$(1))'
-CC_FLAGS = $(TC) $(CC_$(TC)) $(CFLAGS) $(ASFLAGS) $(DEFINES)
+CC_FLAGS = $(TC) $(CC_$(TC)) $(CFLAGS) $(ASFLAGS) $(DEFINES) $(FSPLIT)
 PP_FLAGS = $(TC) $(CPPFLAGS) $(DEFINES)
 same_flags = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
 flags_changed = $(if $(wildcard $@.flags),$(if $(call same_flags,$(CC_FLAGS),$(file <$@.flags)),,flags-changed))
