@@ -96,7 +96,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+            Sky_PostTargetedScreenMessage(&D_80145040.object, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
                           Player_GetPlayerIndex(&D_80145040, player), D_800C2EE4_de);
         }
     }
@@ -131,7 +131,6 @@ s32 func_802301F4_de(void *actor, void *attack) {
     return 0;
 }
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 extern s16 D_800CE8DC[];
 /* Updates alternate fire, falling back to another weapon when neither mode has
  * ammunition. Reports unavailable modes, preserves the selected action captured
@@ -140,9 +139,6 @@ extern s16 D_800CE8DC[];
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 typedef struct AlternateModeInfo { u8 pad0[0x14]; u32 flags; } AlternateModeInfo;
-#if defined(VERSION_EU)
-#elif defined(VERSION_EU_X)
-#endif
 /* The adjacent exact can_fire supplies the same readiness check; this call site
  * owns its distinct message-duration literal and localized European strings. */
 static inline s32 can_toggle_mode(Player *player) {
@@ -154,7 +150,7 @@ static inline s32 can_toggle_mode(Player *player) {
     if (allowed == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->camera) {
-            Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+            Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
                                              Player_GetPlayerIndex(&D_80145040, player), 1.0f);
         }
     }
@@ -182,7 +178,7 @@ void Weapon_UpdateAlternateFire(void *actor, void *attack) {
             if (!Player_HasAmmoForMode(player, player->selectedAction)) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera) {
-                    Sky_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->camera,
+                    Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
                                                      Player_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
@@ -199,9 +195,6 @@ void Weapon_UpdateAlternateFire(void *actor, void *attack) {
         Nav_RequestActorState(actor, attack, action);
     }
 }
-#else
-INCLUDE_ASM("span_1000", Weapon_UpdateAlternateFire);
-#endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/UNUSED.H"
