@@ -1921,20 +1921,20 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
     }
 }
 
-extern const f32 D_800C3414_de;
-extern const f32 D_800C3418_de;
-extern const f32 D_800C341C_de;
-extern const f32 D_800C3420_de;
-extern const f32 D_800C3424_de;
-extern const f32 D_800C3428_de;
-extern const f32 D_800C342C_de;
-extern const f32 D_800C3430_de;
-extern const f32 D_800C3434_de;
-extern const f32 D_800C3438_de;
-extern const f32 D_800C343C_de;
-extern const f32 D_800C3440_de;
-extern const f32 D_800C3444_de;
-extern const f32 D_800C3448_de;
+extern float D_800C3414_de;
+extern float D_800C3418_de;
+extern float D_800C341C_de;
+extern float D_800C3420_de;
+extern float D_800C3424_de;
+extern float D_800C3428_de;
+extern float D_800C342C_de;
+extern float D_800C3430_de;
+extern float D_800C3434_de;
+extern float D_800C3438_de;
+extern float D_800C343C_de;
+extern float D_800C3440_de;
+extern float D_800C3444_de;
+extern float D_800C3448_de;
 extern s32 D_800E28D8;
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
