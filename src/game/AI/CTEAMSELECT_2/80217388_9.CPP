@@ -36,7 +36,7 @@ extern void func_80219124_de(TeamMenu *, s32, SharedPlayer *);
 extern s32 func_80218988_de(SharedPlayer *);
 extern s32 func_8021917C_de(TeamMenu *, SharedPlayer *);
 
-void func_80218B84_de(TeamMenu *menu, SharedPlayer *player) {
+void func_80218B84_de(TeamMenu *menu, SharedPlayer *player, void *unused) {
     s32 held;
     s32 slot;
     Entry *entry;

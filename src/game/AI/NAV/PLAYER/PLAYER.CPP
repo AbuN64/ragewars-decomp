@@ -1,28 +1,93 @@
-#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-#include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
-#include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
+#include "COMMON/UNUSED.H"
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
+#include "COMMON/NAVIGATION_GRAPH.H"
+#include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "FX_2/80271B18.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
 #include "AI/NAV/CODE_80208158.H"
+#include "COMMON/SHAREDPLAYER.H"
 
+/* 80208000.CPP */
+/* Resets a player controller: marks the active, requested and committed selections empty, sets the
+   request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
+   and 0x1C8 and the target list, installs the default table D_800CE040 through Nav_SetBehaviorTable and mode
+   2 through func_80209874_de, zeroes the tracking values from 0x23C to 0x260, runs the resets
+   Nav_ResetWheelProbeState, Nav_ResetBehaviorState and Nav_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
+
+extern void Nav_SetBehaviorTable(void *, char *, s32);
+extern void Nav_SetBehaviourState(void *, s32);
+extern void Nav_ResetWheelProbeState(void *);
+
+extern void Nav_ClearAuxiliaryBehaviorState(void *);
+
+void Nav_ResetPlayerState(s32 *state) {
+    s32 i;
+    s32 none;
+
+    state[1] = -1;
+    state[2] = -1;
+    state[3] = 0xB;
+    state[4] = -1;
+    state[11] = 0;
+    state[12] = 0;
+    state[13] = 0;
+    none = -1;
+    for (i = 3; i >= 0; i--) {
+        state[5 + i] = none;
+    }
+    state[10] = -1;
+    state[0x1BC / 4] = 0xFFFF;
+    state[0x220 / 4] = 0;
+    state[0x1C8 / 4] = 0;
+    state[14] = 1;
+    state[15] = 0;
+    state[25] = 0;
+    state[0x28C / 4] = 0;
+    state[26] = 0;
+    state[0xBC / 4] = -1;
+    state[0x224 / 4] = -1;
+    state[0x228 / 4] = 0;
+    for (i = 0; i < 10; i++) {
+        state[15 + i] = 0;
+        state[27 + i] = 0;
+        state[37 + i] = 0;
+    }
+    state[0x238 / 4] = 0;
+    Nav_SetBehaviorTable(state, &D_800CE040, none);
+    Nav_SetBehaviourState(state, 2);
+    ((f32 *) state)[0x244 / 4] = 0.0f;
+    state[0x23C / 4] = 0;
+    state[0x240 / 4] = 0;
+    ((f32 *) state)[0x250 / 4] = ((f32 *) state)[0x254 / 4] = ((f32 *) state)[0x248 / 4] =
+        ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
+        ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
+    Nav_ResetWheelProbeState(state);
+    Nav_ResetBehaviorState(state);
+    Nav_ClearAuxiliaryBehaviorState(state);
+    state[0x318 / 4] = 0;
+    state[0x31C / 4] = 0;
+    state[0x320 / 4] = -1;
+    state[0x324 / 4] = 0;
+    state[0x328 / 4] = 0;
+    state[0x2D8 / 4] = 0;
+    state[0x2E4 / 4] = 0;
+    state[0x2EC / 4] = 0;
+    state[0x2E8 / 4] = 0;
+    state[0x2DC / 4] = 0;
+    state[0x2E0 / 4] = 0;
+    state[0x32C / 4] = -1;
+}
+
+/* CODE_80208158.CPP */
 /* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Nav_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Nav_HandlePlayerTimeout. */
 
-
-
-
-
-
-
-
-
 extern char D_801376F8[];
-
 
 extern void Nav_UpdateTargetPitch(Brain *);
 extern s32 Player_GetMaxHealth(SharedPlayer *);
@@ -110,8 +175,8 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
 extern CNavData D_8013B364;
 float GraphU64_GetPointDistance(void *, void *);
 void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
-void Nav_SetPitchFromAngle(AiController *,float,s32);
+f32 Nav_SteerTowardPoint(Brain_func_80209308_de *, CVector3 *, f32, f32);
+void Nav_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
 void Nav_DispatchActorBehavior(AiController *);
 float Math_Sqrtf(float);
 NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
@@ -430,20 +495,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
     }
 }
 
-#include "COMMON/SHAREDCALLBACK5.H"
-#include "COMMON/OBJECTLINKS14.H"
-#include "COMMON/REC.H"
-float GraphU64_GetPointDistance(void *, void *);
-void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
-void Nav_SetPitchFromAngle(AiController *,float,s32);
-void Nav_DispatchActorBehavior(AiController *);
-float Math_Sqrtf(float);
-NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
-NavigationPortal *Nav_GetStridedTableEntry(CNavData *,s32);
-NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
-s32 Nav_FindLinkIndex(CNavData *,s32,s32);
-s32 Nav_AdvanceNodeQueue(AiController *);
+f32 Nav_SteerTowardPoint(Brain_func_80209308_de *, CVector3 *, f32, f32);
 
 extern f32 D_800C1C00;
 extern f32 D_800C1C04;
@@ -548,3 +600,219 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         }
     }
 }
+
+/* 80208000_3.CPP */
+/* Steers a computer player toward a point: measures the heading error to the point through Barrel_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to func_80209910_de and returns the heading error. */
+
+extern f32 Barrel_GetSignedAngleToPoint(Player_func_80209308_de *, CVector3);
+extern void Nav_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80208410_C78A8[9] = {
+    0x42480000, 0x3E860A93, 0x3E860A93, 0x42480000, 0x42480000, 0x42480000, 0x42480000, 0x42C80000,
+    0x41F00000,
+};
+#endif
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80208AAC_C78CC[9] = {
+    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
+    0x3F800000,
+};
+#endif
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80208EB0_C78F0[9] = {
+    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
+    0x3F800000,
+};
+#endif
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80208410_C78A8_us_rev1[9] = {
+    0x42480000, 0x3E860A93, 0x3E860A93, 0x42480000, 0x42480000, 0x42480000, 0x42480000, 0x42C80000,
+    0x41F00000,
+};
+#endif
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80208AAC_C78CC_us_rev1[9] = {
+    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
+    0x3F800000,
+};
+#endif
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80208EB0_C78F0_us_rev1[9] = {
+    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
+    0x3F800000,
+};
+#endif
+f32 Nav_SteerTowardPoint(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, f32 offset) {
+    f32 angle;
+    f32 direction;
+    f32 limit;
+    f32 scale;
+
+    angle = Barrel_GetSignedAngleToPoint(brain->player, *target) + offset;
+    if (angle > 3.141593f) {
+        angle -= 6.283186f;
+    } else if (angle < -3.141593f) {
+        angle += 6.283186f;
+    }
+    direction = -1.0f;
+    if (angle > 0.0f) {
+        direction = 1.0f;
+    }
+    limit = rate * 0.017453294f;
+    if (angle < 0.0f ? limit < -angle : limit < angle) {
+        if (angle < 0.0f ? 1.0471977f < -angle : 1.0471977f < angle) {
+            brain->player->steer = direction;
+        } else {
+            if (angle < 0.0f ? 0.52359885f < -angle : 0.52359885f < angle) {
+                scale = 0.5f;
+            } else if (angle < 0.0f ? 0.17453295f < -angle : 0.17453295f < angle) {
+                scale = 0.25f;
+            } else if (angle < 0.0f ? 0.06981318f < -angle : 0.06981318f < angle) {
+                scale = 0.125f;
+            } else {
+                scale = 0.1f;
+            }
+            brain->player->steer = direction * scale;
+        }
+    }
+    Nav_SetPitchFromAngle(brain, (brain->player->gear == 2 ? brain->speed[1] + brain->speed[3] : brain->speed[0] + brain->speed[2]) * 0.017453294f, rate);
+    return angle;
+}
+
+/* 800C6CA8.CPP */
+
+
+/* 800C6CCC.CPP */
+
+
+/* 800C6CF0.CPP */
+
+
+/* 800C6D64.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802095F8_C7964[5] = {
+    0x3F666666, 0x3F333333, 0xC2B40000, 0x42B40000, 0x42652EE0,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_802095F8_C7964_us_rev1[5] = {
+    0x3F666666, 0x3F333333, 0xC2B40000, 0x42B40000, 0x42652EE0,
+};
+#endif
+
+/* 800C6D78.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209910_C7978[1] = {
+    0x3F22F982,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80209910_C7978_us_rev1.c */
+const unsigned int D_blob_0e77fd4c639ef9183fe4[1] = {
+    0x3F22F982,
+};
+#endif
+
+/* 800C6D7C.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802099B4_C797C[1] = {
+    0x42CCCCCC,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802099B4_C797C_us_rev1.c */
+const unsigned int D_blob_789de96649ad15205aab[1] = {
+    0x42CCCCCC,
+};
+#endif
+
+/* 800C6D80.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209AE8_C7980[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80209AE8_C7980_us_rev1.c */
+const unsigned int D_blob_6e292876e4716f614682[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+/* 800C6D8C.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209B64_C798C[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80209B64_C798C_us_rev1.c */
+const unsigned int D_blob_0db9d39470b972d797f5[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+/* 800C6D98.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209BE0_C7998[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_d0_528874f1c086d773[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+/* 800C6DA4.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209C5C_C79A4[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80209C5C_C79A4_us_rev1.c */
+const unsigned int D_blob_f0806fafd081e266cae3[3] = {
+    0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
+};
+#endif
+
+/* 800C6DB0_2.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80209DAC_C79B0[2] = {
+    0x3E860A93, 0x3E860A93,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_800C1BF8[2] = {
+    0x001C0000, 0x00080008,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C1FA8[2] = {
+    0x00229F54, 0x3B800000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C1F68[2] = {
+    0x1440FFFD, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80209DAC_C79B0_us_rev1.c */
+const unsigned int D_blob_a2d7485e1df5f3becc88[2] = {
+    0x3E860A93, 0x3E860A93,
+};
+#endif

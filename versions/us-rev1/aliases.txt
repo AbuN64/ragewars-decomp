@@ -3006,3 +3006,5 @@ g_menuSettingsDataPart3 = 0x80156CD8;
 D_auto_menu_17_untyped_4 = 0x80157A10;
 g_menuCheatCodeData = 0x80154D48;
 literals_Pickup_ApplySpecialPickup = 0x800CB3F0; // rom:0xCBFF0 size:0x54
+literals_Player_DrawPlayerBodyAndWeapon = 0x800C73D4; // rom:0xC7FD4 size:0x10
+literals_TeamSelect_InitWeaponChoices = 0x800C7338; // rom:0xC7F38 size:0x4

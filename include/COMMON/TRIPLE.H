@@ -69,7 +69,6 @@ extern float D_800C1E54_de;
 extern float D_800C20CC_de;
 extern double D_800C2130_de;
 extern float D_800C2168_de;
-extern float D_800C2248_de;
 extern float D_800C22A8_us;
 extern float D_800C22AC_de;
 extern float D_800C22AC_us;

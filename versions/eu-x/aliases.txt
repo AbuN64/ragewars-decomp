@@ -2619,3 +2619,5 @@ literals_Menu_UpdateOptionToggleLabel = 0x800E9B40; // rom:0xEA740 size:0x20
 D_800C22A8_us = 0x800C2658;
 D_800C22AC_us = 0x800C265C;
 D_800D2A90 = 0x800DF3E0;
+literals_Player_DrawPlayerBodyAndWeapon = 0x800C25C4; // rom:0xC31C4 size:0x10
+literals_TeamSelect_InitWeaponChoices = 0x800C2528; // rom:0xC3128 size:0x4

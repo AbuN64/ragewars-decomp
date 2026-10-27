@@ -2617,3 +2617,5 @@ literals_Nav_CheckCloseAttackRoute = 0x800C21E0; // rom:0xC2DE0 size:0x4
 D_800C22A8_us = 0x800C2618;
 D_800C22AC_us = 0x800C261C;
 D_800D2A90 = 0x800E41E4;
+literals_Player_DrawPlayerBodyAndWeapon = 0x800C2584; // rom:0xC3184 size:0x10
+literals_TeamSelect_InitWeaponChoices = 0x800C24E8; // rom:0xC30E8 size:0x4

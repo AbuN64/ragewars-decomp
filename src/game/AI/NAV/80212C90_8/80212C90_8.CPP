@@ -1,8 +1,13 @@
 #include "include_asm.h"
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
 #include "COMMON/TRIPLE.H"
+#include "COMMON/VECTOR4F.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "AI/SOURCE.H"
+#include "TYPES.H"
+#include "AI/NAV/80212C90_9.H"
 
-
+/* 80212C90_8.CPP */
 #if !defined(VERSION_DE)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Runs a computer player's chase step toward the object at 0x68: without a target id at 0xBC it
@@ -13,21 +18,7 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-
-
-
-
-
-
-
-
-
-
-
-
 extern RouteChaseGraph D_8013B364;
-
-
 
 extern void Nav_SetBehaviourState(RouteChaseBot *bot, s32 mode);
 extern void Nav_RunBehaviorHandler(RouteChaseBot *bot);
@@ -86,4 +77,40 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
         }
     }
 }
+#endif
+
+/* 80212C90_9.CPP */
+void Nav_ResetObjectArrivalChase(void *actor) {
+    void *brain;
+    brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
+    (((struct IntegerState23C *) ((s8 *) brain))->unk_68) = 0;
+    (((struct IntegerState23C *) ((s8 *) brain))->unk_238) = 0;
+    (((struct IntegerState23C *) ((s8 *) brain))->unk_220) = 0;
+    Nav_ResetBehaviorState(brain);
+}
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_EU)
+unsigned int func_802131D8_de_padding_13DF8[2] = {
+    0x8E020030, 0x460005C6,
+};
+#endif
+#if defined(VERSION_EU_X)
+unsigned int func_802131D8_de_padding_13DF8[2] = {
+    0x8E220030, 0x10400006,
+};
+#endif
+#endif
+
+/* 800C6E84_2.CPP */
+#if defined(VERSION_DE)
+const unsigned int rodata_func_80212FBC_de_800C20E0[2] = {
+    0x42CCCCCC, 0x424CCCCC,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C20E8[2] = {
+    0x24040001, 0xAFBF0028,
+};
 #endif

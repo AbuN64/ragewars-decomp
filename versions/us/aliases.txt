@@ -2634,3 +2634,5 @@ literals_func_8026F368_de = 0x800C4600; // rom:0xC5200 size:0x1C
 literals_Text_DrawTileGrid = 0x800C60F0; // rom:0xC6CF0 size:0x30
 literals_Pickup_ApplySpecialPickup = 0x800C6190; // rom:0xC6D90 size:0x54
 literals_Nav_SelectPickupGoal = 0x800C1E20; // rom:0xC2A20 size:0x20
+literals_Player_DrawPlayerBodyAndWeapon = 0x800C2214; // rom:0xC2E14 size:0x10
+literals_TeamSelect_InitWeaponChoices = 0x800C2178; // rom:0xC2D78 size:0x4

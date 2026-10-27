@@ -8,7 +8,9 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/SELF.H"
 #include "AI/NAV/80212C90_10.H"
+#include "include_asm.h"
 
+/* 80212C90_10.CPP */
 void Nav_InitTimedJumpRoute(Root802131E0 *arg0) {
     Target802131E0 *inner;
 
@@ -24,17 +26,6 @@ extern void Nav_RunBehaviorHandler(void *arg0);
 extern f32 Nav_DistanceToNode(void *arg0, s32 arg1);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *arg0);
-
-
-
-
-
-
-
-
-
-
-
 
 void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
 {
@@ -71,3 +62,35 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
     Nav_SteerAlongRoute(state);
     Nav_UpdatePlayerSteering(state);
 }
+
+/* 800C6E84_21.CPP */
+#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+const unsigned int D_8021321C_C7DE0[1] = {
+    0x42CCCCCC,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C23D4[3] = {
+    0x00000000, 0x41F00000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C2394[3] = {
+    0x216BFFFF, 0x40021000, 0x04010002,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C20F4[3] = {
+    0x43000000, 0x41F00000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_8021321C_C7DE0_us_rev1.c */
+const unsigned int D_blob_191e35959cee9de3e658[1] = {
+    0x42CCCCCC,
+};
+#endif

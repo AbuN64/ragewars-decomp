@@ -2560,3 +2560,5 @@ D_800C6080_eu_x = 0x800C5DA0;
 D_800C22A8_us = 0x800C2378;
 D_800C22AC_us = 0x800C237C;
 D_800D2A90 = 0x800D3DE4;
+literals_Player_DrawPlayerBodyAndWeapon = 0x800C22E4; // rom:0xC2EE4 size:0x10
+literals_TeamSelect_InitWeaponChoices = 0x800C2248; // rom:0xC2E48 size:0x4
