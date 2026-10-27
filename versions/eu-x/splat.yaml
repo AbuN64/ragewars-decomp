@@ -4198,7 +4198,7 @@ segments:
       - [0xC96C4, data, data_800C/rodata_unresolved_800C8AC4]
       - [0xC96D0, rodata, data_800C/D_802B2510_CD360]
       - [0xC96D4, data, data_800C/rodata_unresolved_800C8AD4]
-      - [0xC96E0, rodata, data_800C/literals_func_802B2650_de]
+      - [0xC96E0, rodata, data_800C/literals_alSndpNew]
       - [0xC9704, rodata, data_800C/D_802B2780_CD394]
       - [0xC970B, data, data_800C/rodata_unresolved_800C8B0B]
       - [0xC970C, rodata, data_800C/s_audioSndplayerText]

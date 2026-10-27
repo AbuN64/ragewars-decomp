@@ -176,7 +176,7 @@ typedef struct AudioBankHeader {
 } AudioBankHeader;
 extern void func_802567A4_de(MenuRules *lock);
 extern void AudioMgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
-extern void func_802B2650_de(void *, void *);
+extern void alSndpNew(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
 extern void Audio_InitializeMusicPlayer(void *, void *);
 extern void func_802596B4_de(void *, void *);
@@ -254,7 +254,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->field24 = 0x11;
     ctx->field28 = 0xC0;
     ctx->field2C = ctx->frames;
-    func_802B2650_de(ctx->list, &ctx->field24);
+    alSndpNew(ctx->list, &ctx->field24);
     {
         s16 noHandle = -1;
 
@@ -346,7 +346,7 @@ typedef struct VoiceMix {
     f32 attenuation;
 } VoiceMix;
 extern void alSndpSetPitch(void *, s32);
-extern void func_802B2DE0_de(void *, u8);
+extern void alSndpSetFXMix(void *, u8);
 extern void alSndpSetPan(void *, u8);
 extern void func_802B2F10_de(void *, s16);
 static inline s32 findVoiceById(ContextRecAt2BC0 *context, s32 id) {
@@ -387,7 +387,7 @@ s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector
     }
     if (!Audio_GetVoiceSoundState((SlotRecAtB8 *)context->menu, index)) {
         alSndpSetPitch(player, mix->pitch);
-        func_802B2DE0_de(player, (mix->volume + context->field2B9C < 128) ? (u8)mix->volume + (u8)context->field2B9C : 127);
+        alSndpSetFXMix(player, (mix->volume + context->field2B9C < 128) ? (u8)mix->volume + (u8)context->field2B9C : 127);
         alSndpSetPan(player, mix->pan);
         if (context->voices[index].flags & 0x200) {
             gain = context->blue;

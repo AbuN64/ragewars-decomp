@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "SOUND/CODE_8025C544.H"
 struct ALSndPlayer;
-extern void func_802B2D80_de(struct ALSndPlayer *player);
+extern void alSndpPlay(struct ALSndPlayer *player);
 extern void alSndpSetPan(struct ObjRecAt40V2 *player, u8 pan);
 extern s32 func_802B2620_de(void *arg0);
 extern void func_802B2F00_de(void *arg0, s16 arg1);
@@ -36,7 +36,7 @@ void func_8025C578_de(SlotRecAtB4V2 *voiceRecord)
 }
 
 void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord) {
-    func_802B2D80_de(voiceRecord->owner->sound);
+    alSndpPlay(voiceRecord->owner->sound);
 }
 
 extern void alSndpStop(void *arg0);

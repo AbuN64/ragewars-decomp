@@ -5,18 +5,18 @@
 struct ContReadFormat;
 typedef struct ContReadFormat ContReadFormat;
 
-struct ALSynth_func_802B2650_de;
-struct ALSynth_func_802B2650_de {
+struct ALSynthalSndpNew;
+struct ALSynthalSndpNew {
     ALPlayer_s14 *head;
 };
 
-struct ALSndPlayer_func_802B2650_de;
-struct ALSynth_func_802B2650_de;
-struct ALSndPlayer_func_802B2650_de {
+struct ALSndPlayeralSndpNew;
+struct ALSynthalSndpNew;
+struct ALSndPlayeralSndpNew {
     ALPlayer_s14 node;
     ALEventQueue evtq;
     ALEvent nextEvent;
-    struct ALSynth_func_802B2650_de *drvr;
+    struct ALSynthalSndpNew *drvr;
     s32 target;
     void *sndState;
     s32 maxSounds;
@@ -25,8 +25,8 @@ struct ALSndPlayer_func_802B2650_de {
     s32 curTime;
 };
 
-struct ALGlobals_func_802B2650_de;
-typedef struct ALGlobals_func_802B2650_de ALGlobals_func_802B2650_de;
+struct ALGlobalsalSndpNew;
+typedef struct ALGlobalsalSndpNew ALGlobalsalSndpNew;
 
 extern int D_800D4340;
 
@@ -40,18 +40,18 @@ struct ALSndpConfig {
 struct ALSoundState;
 typedef struct ALSoundState ALSoundState;
 
-struct ALSndPlayer_func_802B2650_de;
-typedef struct ALSndPlayer_func_802B2650_de ALSndPlayer_func_802B2650_de;
+struct ALSndPlayeralSndpNew;
+typedef struct ALSndPlayeralSndpNew ALSndPlayeralSndpNew;
 
 struct ALSndpConfig;
 typedef struct ALSndpConfig ALSndpConfig;
 
-struct ALSynth_func_802B2650_de;
-typedef struct ALSynth_func_802B2650_de ALSynth_func_802B2650_de;
+struct ALSynthalSndpNew;
+typedef struct ALSynthalSndpNew ALSynthalSndpNew;
 
-struct ALGlobals_func_802B2650_de;
-struct ALGlobals_func_802B2650_de {
-    ALSynth_func_802B2650_de drvr;
+struct ALGlobalsalSndpNew;
+struct ALGlobalsalSndpNew {
+    ALSynthalSndpNew drvr;
 };
 
 struct ContReadFormat;

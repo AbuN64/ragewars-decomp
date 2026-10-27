@@ -41,7 +41,7 @@
 
 
 
-extern ALGlobals_func_802B2650_de *D_800D4070;
+extern ALGlobalsalSndpNew *D_800D4070;
 
  /* alGlobals */
 
@@ -51,7 +51,7 @@ extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
 extern void func_802AFFC0_de(ALEventQueue *, ALEventListItem *, s32);
 
   /* alEvtqNew */
-extern void alSynAddPlayer(ALSynth_func_802B2650_de *, ALPlayer_s14 *);
+extern void alSynAddPlayer(ALSynthalSndpNew *, ALPlayer_s14 *);
 
                    /* alSynAddPlayer */
 
@@ -59,7 +59,7 @@ extern void alSynAddPlayer(ALSynth_func_802B2650_de *, ALPlayer_s14 *);
 extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 
                 /* alEvtqNextEvent */
-/* _sndpVoiceHandler (func_802B2BBC_de); the cartridge stores the handler by its 0x002B7C8C address. */
+/* _sndpVoiceHandler (_sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
 
 
 extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s *, ALVoiceConfig_s *);
@@ -86,9 +86,9 @@ extern void alSynStopVoice(ALSynth_func_802B3000_de *, ALVoice_s *);
 extern void alSynFreeVoice(ALSynth_func_802B3000_de *, ALVoice_s *);
 
        /* alEvtqPostEvent */
-void func_802B2C48_de(ALEventQueue *arg0, void *arg1);
+void _removeEvents(ALEventQueue *arg0, void *arg1);
 
-void func_802B2650_de(ALSndPlayer_func_802B2650_de *sndp, ALSndpConfig *c)
+void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
 {
     u8 *ptr;
     ALEvent evt;
@@ -121,7 +121,7 @@ void func_802B2650_de(ALSndPlayer_func_802B2650_de *sndp, ALSndpConfig *c)
 
        /* _removeEvents */
 
-void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
+void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 {
     ALVoiceConfig_s vc;
     ALSound_s *snd;
@@ -134,8 +134,8 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
     s16 tmp;
     s32 vtmp;
     ALSoundState *state;
-    const ALSndpEvent_func_802B2780_de *event_view =
-        (const ALSndpEvent_func_802B2780_de *)event;
+    const ALSndpEventhandleEvent *event_view =
+        (const ALSndpEventhandleEvent *)event;
 
     state = event->common.state;
     snd = state->sound;
@@ -163,14 +163,14 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
             func_802B32A0_de(sndp->drvr, voice, state->fxMix);
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
             evt.common.state = state;
-            delta = (s32)func_802B2CF0_de(snd->envelope->attackTime, state->pitch);
+            delta = (s32)_DivS32ByF32(snd->envelope->attackTime, state->pitch);
             func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
             break;
 
         case 1: /* AL_SNDP_STOP_EVT */
             if (state->state != 1 || !snd)
                 return;
-            delta = (s32)func_802B2CF0_de(snd->envelope->releaseTime, state->pitch);
+            delta = (s32)_DivS32ByF32(snd->envelope->releaseTime, state->pitch);
             func_802B3480_de(sndp->drvr, &state->voice, 0, delta);
             if (delta) {
                 evt.common.type = 7; /* AL_SNDP_END_EVT */
@@ -180,7 +180,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
             } else {
                 alSynStopVoice(sndp->drvr, &state->voice);
                 alSynFreeVoice(sndp->drvr, &state->voice);
-                func_802B2C48_de(&sndp->evtq, state);
+                _removeEvents(&sndp->evtq, state);
                 state->state = 0;
             }
             break;
@@ -223,7 +223,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
         case 6: /* AL_SNDP_DECAY_EVT */
             if (snd->envelope->decayTime != -1) {
                 vtmp = snd->envelope->decayVolume * state->vol / 127;
-                delta = (s32)func_802B2CF0_de(snd->envelope->decayTime, state->pitch);
+                delta = (s32)_DivS32ByF32(snd->envelope->decayTime, state->pitch);
                 func_802B3480_de(sndp->drvr, &state->voice, (s16)vtmp, delta);
                 evt.common.type = 1; /* AL_SNDP_STOP_EVT */
                 evt.common.state = state;
@@ -234,7 +234,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
         case 7: /* AL_SNDP_END_EVT */
             alSynStopVoice(sndp->drvr, &state->voice);
             alSynFreeVoice(sndp->drvr, &state->voice);
-            func_802B2C48_de(&sndp->evtq, state);
+            _removeEvents(&sndp->evtq, state);
             state->state = 0;
             break;
 
@@ -263,7 +263,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
    /* _handleEvent */
        /* alEvtqNextEvent */
 
-s32 func_802B2BBC_de(void *node)
+s32 _sndpVoiceHandler(void *node)
 {
     ALSndPlayer *sndp = (ALSndPlayer *)node;
     ALSndpEvent evt;
@@ -276,7 +276,7 @@ s32 func_802B2BBC_de(void *node)
                 func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
                 break;
             default:
-                func_802B2780_de(sndp, next);
+                _handleEvent(sndp, next);
                 break;
         }
         sndp->nextDelta = alEvtqNextEvent(&sndp->evtq, &sndp->nextEvent);
@@ -295,7 +295,7 @@ extern s32 func_802BD170_de(s32);
 
 
 
-void func_802B2C48_de(ALEventQueue *arg0, void *arg1) {
+void _removeEvents(ALEventQueue *arg0, void *arg1) {
     s32 saved;
     ALEventListItem *cur;
     ALEventListItem *next;
@@ -318,7 +318,7 @@ void func_802B2C48_de(ALEventQueue *arg0, void *arg1) {
     func_802BD170_de(saved);
 }
 
-s32 func_802B2CF0_de(s32 val, f32 div) {
+s32 _DivS32ByF32(s32 val, f32 div) {
     f32 fval;
     f64 dresult;
     s32 result;

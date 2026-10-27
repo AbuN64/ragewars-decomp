@@ -26,7 +26,7 @@ extern short func_8025E500_de(void *arg0);
 
 
 extern s32 Sky_FindNearestCamera(MenuMatchGlobals *, Triple *);
-extern void func_802B2D80_de(char *);
+extern void alSndpPlay(char *);
 extern void func_802B25D0_de(char *, s32);
 extern void Channel_UpdateVoiceVolume(View_func_8025AE1C_de *);
 extern void func_8025A844_de(View_func_8025AE1C_de *);
@@ -75,7 +75,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
         return;
     }
     if ((view->flags & 0x18) == 0x10) {
-        func_802B2D80_de(((OwnerCode8025A3EC *)view->context)->sound);
+        alSndpPlay(((OwnerCode8025A3EC *)view->context)->sound);
         return;
     }
     if (playing == 0) {

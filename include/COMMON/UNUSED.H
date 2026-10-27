@@ -2601,14 +2601,14 @@ typedef struct ALSeqPlayer88 ALSeqPlayer88;
 
 
 
-union ALSndpEvent_func_802B2780_de;
-typedef union ALSndpEvent_func_802B2780_de ALSndpEvent_func_802B2780_de;
+union ALSndpEventhandleEvent;
+typedef union ALSndpEventhandleEvent ALSndpEventhandleEvent;
 
 struct ALSound;
 typedef struct ALSound ALSound;
 
-struct ALSoundState_func_802B2780_de;
-typedef struct ALSoundState_func_802B2780_de ALSoundState_func_802B2780_de;
+struct ALSoundStatehandleEvent;
+typedef struct ALSoundStatehandleEvent ALSoundStatehandleEvent;
 
 struct ALWaveTable_s;
 typedef struct ALWaveTable_s ALWaveTable_s;
@@ -3455,8 +3455,8 @@ struct ALSeqPlayer88 {
     s32 loopCount;
 };
 struct ALSeq_s;
-struct ALSoundState_func_802B2780_de;
-struct ALSoundState_func_802B2780_de {
+struct ALSoundStatehandleEvent;
+struct ALSoundStatehandleEvent {
     ALVoice_s voice;
     struct ALSound *sound;
     s16 priority;
@@ -3466,31 +3466,31 @@ struct ALSoundState_func_802B2780_de {
     u8 pan;
     u8 fxMix;
 };
-union ALSndpEvent_func_802B2780_de;
-union ALSndpEvent_func_802B2780_de {
+union ALSndpEventhandleEvent;
+union ALSndpEventhandleEvent {
     ALEvent msg;
     struct {
         s16 type;
-        ALSoundState_func_802B2780_de *state;
+        ALSoundStatehandleEvent *state;
     } common;
     struct {
         s16 type;
-        ALSoundState_func_802B2780_de *state;
+        ALSoundStatehandleEvent *state;
         s16 vol;
     } vol;
     struct {
         s16 type;
-        ALSoundState_func_802B2780_de *state;
+        ALSoundStatehandleEvent *state;
         f32 pitch;
     } pitch;
     struct {
         s16 type;
-        ALSoundState_func_802B2780_de *state;
+        ALSoundStatehandleEvent *state;
         u8 pan;
     } pan;
     struct {
         s16 type;
-        ALSoundState_func_802B2780_de *state;
+        ALSoundStatehandleEvent *state;
         u8 mix;
     } fx;
 };

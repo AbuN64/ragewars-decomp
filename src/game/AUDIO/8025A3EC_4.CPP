@@ -27,7 +27,7 @@
 /* Stops the selected sound slot and sets its release flag; split unsigned offset-to-pointer casts and a one-pass statement group preserve the separate table and offset schedule. */
 
 
-extern void func_802B2D80_de(void *);
+extern void alSndpPlay(void *);
 
 
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
@@ -204,7 +204,7 @@ void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
   SlotRecAtB8 *selected;
   entry += (unsigned int) base;
   slots = base;
- do { func_802B2D80_de(0x84 + ((SlotRecAtB8 *) entry)->owner); entry = (unsigned int) slots; entry += offset; selected = (SlotRecAtB8 *) entry; } while (0);
+ do { alSndpPlay(0x84 + ((SlotRecAtB8 *) entry)->owner); entry = (unsigned int) slots; entry += offset; selected = (SlotRecAtB8 *) entry; } while (0);
   selected->flags |= 8;
 }
 
