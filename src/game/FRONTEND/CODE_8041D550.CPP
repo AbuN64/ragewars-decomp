@@ -57,8 +57,6 @@ extern char D_800DD4C8[];
 extern signed char D_80102B0D[];
 
 
-struct ObjectB8;
-
 void Frontend_UpdateFocusCaption(void) {
     s32 index;
     s32 count;
