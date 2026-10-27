@@ -41,8 +41,6 @@ extern s32 func_8024DF5C_de(Instance8020CD74 *);
 
 extern s32 func_8024DFA0_de(Instance8020CD74 *);
 
-typedef struct CollisionInfo CollisionInfo;
-
 
 extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
 
