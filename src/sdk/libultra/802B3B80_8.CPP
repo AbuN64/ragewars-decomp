@@ -12,7 +12,7 @@ struct SeqpSetSeqEvent {
 
 extern void func_802B00D4_de(void *, s16 *, s32);
 
-void func_802AFF30_de(s32 player, ALCSeq_s *sequence) {
+void alCSPSetSeq(s32 player, ALCSeq_s *sequence) {
     struct SeqpSetSeqEvent sp10;
 
     sp10.sequence = sequence;
@@ -21,7 +21,7 @@ void func_802AFF30_de(s32 player, ALCSeq_s *sequence) {
 }
 
 
-void func_802AFF60_de(s32 player, s16 arg1) {
+void alCSPSetVol(s32 player, s16 arg1) {
     Buf16b volumeEvent;
 
     volumeEvent.value = arg1;

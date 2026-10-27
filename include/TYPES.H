@@ -226,10 +226,10 @@ extern void __setUsptFromTempo(void *arg0, f32 arg1);
 
 extern f32 func_802AFE30_de(s32 arg0);
 
-extern void func_802AFEB0_de(s32 arg0, s32 arg1);
+extern void alCSPSetBank(s32 arg0, s32 arg1);
 
 
-extern void func_802AFF60_de(s32 arg0, s16 arg1);
+extern void alCSPSetVol(s32 arg0, s16 arg1);
 
 extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 

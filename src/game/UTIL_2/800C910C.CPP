@@ -89,7 +89,7 @@ void func_8025DC34_de(void *arg0, f32 arg1) {
     Track *track = arg0;
     f32 f20 = arg1;
     f32 f0 = f20 * D_800C4020_de;
-    func_802AFF60_de(track->unk14, (s16)(s32) f0);
+    alCSPSetVol(track->unk14, (s16)(s32) f0);
     track->unk2C = f20;
 }
 
@@ -113,7 +113,7 @@ void func_8025DC88_de(void *arg0) {
     }
     if (var_f20 != o->unk_2C) {
 do_update:
-        func_802AFF60_de(o->unk_14, (s16) (s32) (var_f20 * D_800C4030_de));
+        alCSPSetVol(o->unk_14, (s16) (s32) (var_f20 * D_800C4030_de));
         o->unk_2C = var_f20;
     }
 }
@@ -124,17 +124,17 @@ void func_8025DD60_de(Track *track) {
 
     i = 0;
     func_802AE5B8_de(track->unk10, track->unkC);
-    func_802AFF30_de(track->unk14, track->unk10);
-    func_802AFEB0_de(track->unk14,
+    alCSPSetSeq(track->unk14, track->unk10);
+    alCSPSetBank(track->unk14,
                   track->unk8->field_4);
     do {
-        func_802AFEE0_de(track->unk14, i & 0xFF, 0);
+        alCSPSetChlFXMix(track->unk14, i & 0xFF, 0);
         i++;
     } while (i < 0x14);
 
     scaled = (f32)track->unk24 *
              (track->unk0->unk2BA4 * (&D_800C4030_de)[1]);
-    func_802AFF60_de(track->unk14, (s16)(s32)(scaled * D_800C4038_de));
+    alCSPSetVol(track->unk14, (s16)(s32)(scaled * D_800C4038_de));
     track->unk2C = scaled;
 }
 

@@ -92,14 +92,14 @@ void Audio_UpdateMusicPlayback(Track *queue) {
         case 0x80:
             i = 0;
             func_802AE5B8_de(queue->unk10, queue->unkC);
-            func_802AFF30_de(queue->unk14, queue->unk10);
-            func_802AFEB0_de(queue->unk14, queue->unk8->field_4);
+            alCSPSetSeq(queue->unk14, queue->unk10);
+            alCSPSetBank(queue->unk14, queue->unk8->field_4);
             do {
-                func_802AFEE0_de(queue->unk14, i & 0xFF, 0);
+                alCSPSetChlFXMix(queue->unk14, i & 0xFF, 0);
                 i += 1;
             } while (i < 0x14);
             temp_f20 = (f32) queue->unk24 * (queue->unk0->unk2BA4 * *(&D_800C3FD0_de+1));
-            func_802AFF60_de(queue->unk14, (s16) (s32) (temp_f20 * D_800C3FD8_de));
+            alCSPSetVol(queue->unk14, (s16) (s32) (temp_f20 * D_800C3FD8_de));
             queue->unk2C = temp_f20;
             func_802AFE80_de(queue->unk14);
             queue->unk1C = 0;
@@ -127,7 +127,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             }
             if (var_f20 != queue->unk2C) {
 block_37:
-                func_802AFF60_de(queue->unk14, (s16) (s32) (var_f20 * D_800C3FE8_de));
+                alCSPSetVol(queue->unk14, (s16) (s32) (var_f20 * D_800C3FE8_de));
                 queue->unk2C = var_f20;
             }
         }

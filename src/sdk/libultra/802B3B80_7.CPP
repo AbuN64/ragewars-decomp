@@ -5,7 +5,7 @@
 
 extern s32 func_802B00D4_de(void *, s16 *, s32);
 
-void func_802AFEB0_de(s32 player, s32 bank) {
+void alCSPSetBank(s32 player, s32 bank) {
     Buf16 bankEvent;
 
     bankEvent.value = bank;
@@ -14,7 +14,7 @@ void func_802AFEB0_de(s32 player, s32 bank) {
 }
 
 
-void func_802AFEE0_de(s32 player, s32 channel, s8 effectMix) {
+void alCSPSetChlFXMix(s32 player, s32 channel, s8 effectMix) {
     Buf16c controlEvent;
 
     controlEvent.count = 2;

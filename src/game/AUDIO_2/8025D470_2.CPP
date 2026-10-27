@@ -50,7 +50,7 @@ void Audio_UpdateMusicFade(void *queue) {
     s32 temp_f3;
 
     if (o->flags & 2) {
-        func_802AFF60_de(o->unk_14, (s16)o->volume);
+        alCSPSetVol(o->unk_14, (s16)o->volume);
         temp_f3 = (s32) ((f32) o->volume - o->fadeStep);
         o->volume = temp_f3;
         if (temp_f3 <= 0) {
