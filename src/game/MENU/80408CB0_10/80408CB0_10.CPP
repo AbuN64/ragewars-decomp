@@ -1,42 +1,9 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
+#include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "MENU/80408CB0_10.H"
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-#include "TYPES.H"
-typedef struct { u8 pad0[0x14]; char **text; } PakTextEu;
-extern s32 D_80153774;
-extern s32 Pak_CountLineChars(void *);
-extern char D_8014B49B[];
-extern char D_800D2478[];
-extern char D_8014B494[];
-/* Select the status text and right-align its nonblank characters (the us body with eu addresses; the eu symbol of the
-   pointer table is D_8014B49B, of the last status character D_800D2478, of the status characters D_8014B494). */
-s32 Menu_FormatLocalizedPakName(PakTextEu *entry) {
-    s32 count = 8;
-    u8 *scan;
-    char *dst;
-    s32 i;
-
-    if (D_80153774 != 0) {
-        entry->text = (char **)D_800E2984_eu;
-        return 0;
-    }
-    entry->text = (char **)D_8014B49B;
-    scan = (u8 *)D_800D2478;
-    while (*scan-- == 0x20 && count != 0) count--;
-    dst = entry->text[g_languageIndex];
-    dst += Pak_CountLineChars(entry) - 8;
-    for (i = 7; i >= 0; i--) dst[i] = 0x20;
-    dst += 8 - count;
-    for (i = 0; i < count; i++) *dst++ = D_8014B494[i];
-    return 0;
-}
-#else
-INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakName);
-#endif
-#endif
+#include "MENU/PAK/80409A88_9.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
@@ -50,7 +17,7 @@ extern char *D_800E32B4_eu[];
 extern char *D_800E32C4_eu[];
 /* Pak status line: picks the 11-character status text for the state D_8014D490 in the current language and copies it into
    the entry's line; with D_80153774 set it only selects the heading table. */
-s32 Menu_FormatLocalizedPakStatus(PakTextEu *entry) {
+s32 Menu_FormatLocalizedPakStatus(struct Field *entry) {
     char **table;
     char *src;
     char *dst;

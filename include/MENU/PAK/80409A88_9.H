@@ -6,4 +6,5 @@ extern void Pak_EnableProfilePreview(void);
 extern void Pak_ClearProfilePreview(void);
 extern void Pak_DisablePreviewSelection(struct RecordRecAtCV1 *record);
 extern s32 Pak_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record);
+extern s32 Pak_CountLineChars(struct Field *);
 #endif

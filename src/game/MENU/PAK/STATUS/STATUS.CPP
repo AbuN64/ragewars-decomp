@@ -3,15 +3,15 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/ITEMRECAT24.H"
 #include "stddef.h"
+#include "MENU/80408CB0_10.H"
+#include "MENU/PAK/80409A88_9.H"
+#include "COMMON/MENU_TEXT.H"
+#include "COMMON/LONE/D_80152789.H"
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define Pak_FormatRightAlignedPreviewName Menu_FormatLocalizedPakName
-#endif
+#if !defined(VERSION_DE)
 /* Select the status text and right-align its nonblank characters. */
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-s32 Pak_CountLineChars(void *); /* extern */
  /* const */
  /* const */
 s32 Pak_FormatRightAlignedPreviewName(struct Field *arg0) {
@@ -27,12 +27,20 @@ s32 Pak_FormatRightAlignedPreviewName(struct Field *arg0) {
     u8 temp_v0;
     var_s1 = 8;
     if (D_80153774 != 0) {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        arg0->text = D_800E2984_eu;
+#else
         arg0->text = &D_800D2478;
+#endif
     } else {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        arg0->text = D_800E29A4;
+#else
         arg0->text = &D_800D2480;
+#endif
         var_a1 = &D_8014B49B;
         while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
-        temp_s0 = *arg0->text;
+        temp_s0 = RW_LOCALIZED_TEXT(*arg0->text, arg0->text, arg0->text, g_languageIndex);
         temp_s0 = temp_s0 + (Pak_CountLineChars(arg0) - 8);
         space = 0x20;
         var_v1 = 7;
