@@ -1,0 +1,31 @@
+#include "include_asm.h"
+
+/* 8044ACCC_10.CPP */
+#if defined(VERSION_US_REV1)
+const unsigned char g_constructMapSimpleModel[35] = {
+    0x43, 0x53, 0x63, 0x65, 0x6E, 0x65, 0x5F, 0x5F, 0x43, 0x6F, 0x6E, 0x73, 0x74, 0x72, 0x75, 0x63,
+    0x74, 0x4D, 0x61, 0x70, 0x3A, 0x20, 0x73, 0x69, 0x6D, 0x70, 0x6C, 0x65, 0x20, 0x6D, 0x6F, 0x64,
+    0x65, 0x6C, 0x00,
+};
+#endif
+
+/* 8044ACCC_3.CPP */
+#if defined(VERSION_DE)
+const char data_func_8044B600_de_800C4F04[75] =
+    "CScene__ConstructMap: simp models index\0"
+    "CScene__ConstructMap: simple model\0";
+#endif
+
+/* 8044ACCC_5.CPP */
+#if defined(VERSION_EU)
+const char data_func_8044B600_de_800C51B4[75] =
+    "CScene__ConstructMap: simp models index\0"
+    "CScene__ConstructMap: simple model\0";
+#endif
+
+/* 8044ACCC_6.CPP */
+#if defined(VERSION_EU_X)
+const char data_func_8044B600_de_800C51F4[75] =
+    "CScene__ConstructMap: simp models index\0"
+    "CScene__ConstructMap: simple model\0";
+#endif

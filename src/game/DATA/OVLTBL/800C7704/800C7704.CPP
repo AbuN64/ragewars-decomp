@@ -1,4 +1,6 @@
+#include "include_asm.h"
 
+/* 800C7704.CPP */
 #if defined(VERSION_US)
 struct {
     unsigned int w0[4];
@@ -14,5 +16,21 @@ struct {
     {
         0x00000F56, 0x49445F4D, 0x4F44455F, 0x3FF00000, 0x00000000,
     },
+};
+#endif
+
+/* 800C816C.CPP */
+
+/* 800C83D4.CPP */
+#if defined(VERSION_EU)
+unsigned int D_d1_57a81820031ac38e[3] = {
+    0x42800000, 0x43000000, 0x4F000000,
+};
+#endif
+
+/* 800C853C_4.CPP */
+#if defined(VERSION_EU_X)
+const unsigned char rodata_func_80238670_de_800C3754[3] = {
+    0x42, 0x40, 0x00,
 };
 #endif

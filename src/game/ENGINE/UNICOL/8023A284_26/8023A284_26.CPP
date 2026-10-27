@@ -13,6 +13,7 @@
 #include "ANIM/8023DF60_4.H"
 #include "FX_2/80271B18.H"
 
+/* 8023A284_26.CPP */
 extern void GraphU64_InterpolateVector(CVector3 *,f32,void *,void *);
 
 /* Resolve contact response, updating translation and rotation along the contact normal. */
@@ -177,12 +178,6 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
  * approaches, and the first such hit nearer than the ray's current nearest hit whose point lies within the
  * face's other two extents is written out. Returns whether the box was hit. */
 
-
-
-
-
-
-
 s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out) {
     CVector3 hit;
     CVector3 *start;
@@ -249,12 +244,6 @@ s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out) {
  * then the z edge, each accepted when nearer than the ray's current nearest hit at 0x17C and landing within
  * the other axis's extent (using the ray's direction at 0x5C/0x64); the accepted parameter is stored and 1
  * is returned, 0 when the segment misses. */
-
-
-
-
-
-
 
 s32 func_8023DDC4_de(Ray *ray, CQuatern *rect, f32 *t) {
     CVector3 *start;
@@ -330,3 +319,25 @@ const unsigned int D_auto_src_rw_tail_8023D380_C9360_us_rev1[8] = {
     0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
 };
 #endif
+
+/* 800C8710_5.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_8023DF70_C9380[3] = {
+    0x4123D70A, 0x3F800000, 0x4123D70A,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_8023DF70_C9380_us_rev1.c */
+const unsigned int D_blob_6624772531fcc4dc0e62[1] = {
+    0x4123D70A,
+};
+
+/* ROM-grounded data: src/rw_pool_8023E178_C9384_us_rev1.c */
+const unsigned int D_blob_15414668f9063e063991[2] = {
+    0x3F800000, 0x4123D70A,
+};
+#endif
+
+/* 800C878C.CPP */
+

@@ -1,0 +1,23 @@
+
+
+/* 800CF1CC_2.CPP */
+/* ROM-grounded data: rodata/writable/800CF1E4 */
+unsigned int D_blob_phase2_88dd293952021d89d2d4[2] = {
+    0x00000000, 0x42CCCCCC,
+};
+
+/* 800CF1EC.CPP */
+#if !(defined(VERSION_DE))
+unsigned int D_auto_rodata_unresolved_800CF1EC[15] = {
+    0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+    0x00000001, 0x00000001, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+};
+#endif
+
+/* 800C9FA8.CPP */
+#if defined(VERSION_DE)
+unsigned int D_auto_rodata_unresolved_800C9FA8[15] = {
+    0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+    0x00000001, 0x00000001, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+};
+#endif

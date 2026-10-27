@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "DATA/COMMON/DATA_800D2E40.H"
 
+/* DATA_800D2E40.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 extern char D_800CDA34_de[];
@@ -34,3 +35,9 @@ unsigned int D_blob_945ad6e50c70b61397fd[6] = {
     0x800D2CB0, 0x800D2CD8, 0x800D2D00, 0x800D2D78, 0x800D2DF0, 0x800D2E18,
 };
 #endif
+
+/* DATA_800D2E58.CPP */
+/* ROM-grounded data: rodata/writable/800D2E58 */
+unsigned int D_blob_phase2_41266a38e49ad24ad049[2] = {
+    0x00000000, 0x00000000,
+};

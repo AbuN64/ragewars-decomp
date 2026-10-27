@@ -2,8 +2,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
-extern StateCode80420E90 *D_800E5784;
 #include "RESMGR/802A0888.H"
+#include "include_asm.h"
+
+/* 804379C8_2.CPP */
+extern StateCode80420E90 *D_800E5784;
 
 /* Advances a menu selection on its countdown and dispatches the exit action. */
 void SmXlate_SwitchScreen(s32);
@@ -19,14 +22,8 @@ s32 SmpSlider_GetTransitionMode(void *);
 
  /* extern */
 
-
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5784 points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
-
-
-
-
-extern void MarkMenuEventHandled();
 
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
@@ -35,11 +32,9 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
    sets that word to -1; then it calls SmpSlider_SetTransitionMode on the block's first word with 2. Returns
    zero. */
 
-
 extern char D_80102B7E[];
 
 extern s32 Smos_GetFocusedElementId();
-
 
 #if defined(VERSION_DE)
 enum { MENU_80437B10_976 = 970, MENU_80437B10_977 = 971 };
@@ -113,3 +108,26 @@ s32 Menu_HandleTitleButtonChoice(void) {
     SmpSlider_SetTransitionMode(D_800E5784->unk0, 2);
     return 0;
 }
+
+/* 804389B0_2.CPP */
+#if defined(VERSION_EU)
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "COMMON/MULTIPLAYEROPTIONS.H"
+extern ResidentEventHandlerEntry D_800E57DC[];
+
+s32 Menu_DispatchTitleButtonTableEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+    s32 index;
+    index = 0;
+    if (D_800E57DC[index].handler != 0) {
+        do {
+            if (D_800E57DC[index].event == event) {
+                if (D_800E57DC[index].actorKind == actor->character || D_800E57DC[index].actorKind == 30000) {
+                    return D_800E57DC[index].handler(actor, event, arg2, arg3, arg4);
+                }
+            }
+            index++;
+        } while (D_800E57DC[index].handler != 0);
+    }
+    return 0;
+}
+#endif

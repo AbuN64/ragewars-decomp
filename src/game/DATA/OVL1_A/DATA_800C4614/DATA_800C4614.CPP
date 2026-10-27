@@ -1,4 +1,6 @@
 
+
+/* DATA_800C4614.CPP */
 #if defined(VERSION_EU_X)
 struct {
     unsigned int w0[3];
@@ -15,5 +17,17 @@ struct {
         0x66, 0x61, 0x75, 0x6C, 0x74, 0x00, 0x00, 0x00, 0x6D, 0x61, 0x69, 0x6E, 0x00, 0x00, 0x00, 0x00,
         0x69, 0x64, 0x6C, 0x65, 0x00, 0x00, 0x00, 0x00,
     },
+};
+#endif
+
+/* DATA_800C4A64.CPP */
+#if defined(VERSION_US)
+char D_d1_fa26e1c1d31ab9c4[12] = "wport_tR";
+#endif
+
+/* DATA_800C5154.CPP */
+#if defined(VERSION_EU)
+unsigned int D_d1_b549e5583b90c55a[3] = {
+    0x00042043, 0x00042080, 0x008A2021,
 };
 #endif

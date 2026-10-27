@@ -1,4 +1,6 @@
 
+
+/* 800CC018.CPP */
 #if defined(VERSION_EU)
 unsigned int s_robertsoText[17] = {
     0x524F4245, 0x5254534F, 0x00000000, 0x00000000, 0x800C9370, 0x800C91BC, 0x800C8E40, 0x00000000,
@@ -6,3 +8,13 @@ unsigned int s_robertsoText[17] = {
     0x00000000,
 };
 #endif
+
+/* 800CC2C0.CPP */
+#if defined(VERSION_US)
+unsigned int D_d4_16595a0689fefc99[4] = {
+    0xA0000000, 0xA0000000, 0x00FF0000, 0x00FF0000,
+};
+#endif
+
+/* 800CC54C.CPP */
+

@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
+/* 800CDEB4.CPP */
 #if defined(VERSION_US)
 char rodata_unresolved_800CDEB4[16008] =
     "\000\000\000\003\000\000\000\000\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000\003"
@@ -6289,4 +6290,19 @@ char data_unresolved_800D3C50[52880] =
     "e\240\200\014e\240\200\014e\240\200\014e\334\000\000\000\000\000\000\000\000\200\016\012\274\200"
     "\016\012\274\200\016\012\274\200\016\012\274\200\014\357\260\200\015)|\200\015\216\270\200\015\315"
     "\000";
+#endif
+
+/* 800D7028_2.CPP */
+#if !(defined(VERSION_US_REV1))
+const char D_src_3e6e0646[36] =
+    "<use this to fade out cinema text>\000\000";
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+unsigned char D_blob_9d129132f0eff55f707d[36] = {
+    0x3C, 0x75, 0x73, 0x65, 0x20, 0x74, 0x68, 0x69, 0x73, 0x20, 0x74, 0x6F, 0x20, 0x66, 0x61, 0x64, 0x65,
+    0x20, 0x6F, 0x75, 0x74, 0x20, 0x63, 0x69, 0x6E, 0x65, 0x6D, 0x61, 0x20, 0x74, 0x65, 0x78, 0x74, 0x3E,
+    0x00, 0x00,
+};
 #endif

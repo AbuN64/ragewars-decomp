@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
+/* DATA_800D2B10.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int rodata_unresolved_800D2B10[16] = {
@@ -36,3 +37,37 @@ unsigned int D_auto_rodata_unresolved_800D2B10[16] = {
     0x00000010, 0x00000011, 0x00000012, 0x6E746564, 0xFFFFFFFF, 0x456D6272, 0x796F2044, 0x65737472,
 };
 #endif
+
+/* DATA_800D2B50.CPP */
+/* ROM-grounded data: rodata/writable/800D2B50 */
+#ifdef VERSION_DE
+unsigned int s_smackFormat[4] = {
+    0x00000000, 0x40490FDB, 0x00000000, 0xC0490FDB,
+};
+#endif
+#ifdef VERSION_EU
+unsigned int s_smackFormat[4] = {
+    0x00000000, 0x00000000, 0xBF800000, 0xBF3504F3,
+};
+#endif
+#ifdef VERSION_EU_X
+unsigned int s_smackFormat[4] = {
+    0x00000000, 0x72650000, 0x456E6572, 0x67792072,
+};
+#endif
+#ifdef VERSION_US
+unsigned int s_smackFormat[4] = {
+    0x00000000, 0x71755200, 0x00D90900, 0x0010000B,
+};
+#endif
+#ifdef VERSION_US_REV1
+unsigned int s_smackFormat[4] = {
+    0x00000000, 0x00000000, 0x536D6163, 0x6B202573,
+};
+#endif
+
+/* DATA_800D2B60.CPP */
+/* ROM-grounded data: rodata/unresolved/800D2B60 */
+unsigned int D_blob_7190fe9f1a5afa1446f5[4] = {
+    0x00000000, 0x40490FDB, 0x00000000, 0xC0490FDB,
+};

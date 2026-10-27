@@ -1,4 +1,3 @@
-/* SN debug stream left in us-rev1 (src/ragewars_debug_stream_us_rev1.c, ROM 0xE7092..0xF6880): function records at the retail vram */
 #include "COMMON/EXTERNS_15.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -8,11 +7,12 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 #include "AI/ENEMIES/TURRETAI.H"
+#include "include_asm.h"
+
+/* TURRETAI.CPP */
+/* SN debug stream left in us-rev1 (src/ragewars_debug_stream_us_rev1.c, ROM 0xE7092..0xF6880): function records at the retail vram */
 
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
-
-
-CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
 void MultiplyQuaternions(void *, void *, void *);
 
@@ -35,7 +35,6 @@ static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
     q = CVector3_GetDirectionRotation2(&aim);
     MatrixFromQuaternion(&q, matrix);
 }
-
 
 CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     CQuatern q;
@@ -105,3 +104,30 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     GraphU64_MultiplyAffineMatrices(&owner->transform.right.x, alignment, model);
     SwapMatrixUpForward(&owner->transform);
 }
+
+/* 800C6B18.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802034A4_C7718[5] = {
+    0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_802034A4_C7718_us_rev1[5] = {
+    0x3F000000, 0x40C90FDC, 0x3F000000, 0x3C23D70A, 0x3C23D70A,
+};
+#endif
+
+/* 800C6B2C.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_8020388C_C772C[2] = {
+    0x3F800000, 0xBFC90FDC,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_8020388C_C772C_us_rev1.c */
+const unsigned int D_blob_f9c773ad0f04affb460a[2] = {
+    0x3F800000, 0xBFC90FDC,
+};
+#endif

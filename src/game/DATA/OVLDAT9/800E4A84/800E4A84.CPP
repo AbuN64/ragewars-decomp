@@ -1,4 +1,6 @@
+#include "DATA/OVLDAT9/800E4EBC.H"
 
+/* 800E4A84.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int D_auto_src_ragewars_arena_compatibility_us_rev1[192] = {
     0x000001A6, 0x00000158, 0x00000170, 0x000001A6, 0x00000157, 0x00000168, 0x00000158, 0x00000157,
@@ -25,5 +27,59 @@ unsigned int D_auto_src_ragewars_arena_compatibility_us_rev1[192] = {
     0x00000167, 0x00000165, 0x00000198, 0x000001A7, 0x00000166, 0x0000019A, 0x000001A7, 0x00000165,
     0x000001B8, 0x00000166, 0x00000165, 0x00000199, 0x00000165, 0x00000191, 0x00000196, 0x00000191,
     0x00000192, 0x00000194, 0x00000192, 0x00000193, 0x00000195, 0x00000193, 0x0000019E, 0x0000015C,
+};
+#endif
+
+/* 800E4D84.CPP */
+#if defined(VERSION_US_REV1)
+extern char D_004264F0[];
+extern char D_00426968[];
+extern char D_00426AF8[];
+extern char D_00426EC4[];
+extern char D_00428998[];
+extern char D_004289D8[];
+extern char D_00428A30[];
+extern char D_00428B94[];
+extern char D_00428CF8[];
+extern char D_00428E5C[];
+extern char D_00428FC0[];
+extern char D_00428FF0[];
+unsigned int D_auto_src_rw_menu_event_handlers_E5984_us_rev1[39] = {
+    0x00000E07, 0x0000000A, (unsigned int)D_00426968, 0x00000E08, 0x0000000A, (unsigned int)D_00426AF8, 0x0000000A, 0x0000000A,
+    (unsigned int)D_004289D8, 0x00000E0A, 0x0000000A, (unsigned int)D_00426EC4, 0x00000E06, 0x0000000A, (unsigned int)D_004264F0, 0x00000E03,
+    0x0000000A, (unsigned int)D_00428998, 0x00000002, 0x0000000A, (unsigned int)D_00428FC0, 0x00000001, 0x0000000A, (unsigned int)D_00428FF0,
+    0x00000005, 0x0000000A, (unsigned int)D_00428A30, 0x00000006, 0x0000000A, (unsigned int)D_00428B94, 0x00000008, 0x0000000A,
+    (unsigned int)D_00428E5C, 0x00000007, 0x0000000A, (unsigned int)D_00428CF8, 0x00000000, 0x00000000, 0x00000000,
+};
+#endif
+
+/* 800E4E20.CPP */
+#if defined(VERSION_US_REV1)
+extern char D_004264F0[];
+extern char D_00426968[];
+extern char D_00426AF8[];
+extern char D_00426EC4[];
+extern char D_00428998[];
+extern char D_004289D8[];
+extern char D_00428A30[];
+extern char D_00428B94[];
+extern char D_00428CF8[];
+extern char D_00428E5C[];
+extern char D_00428FC0[];
+extern char D_00428FF0[];
+unsigned int D_auto_src_rw_menu_event_handlers_E5A20_us_rev1[39] = {
+    0x00000E07, 0x0000000F, (unsigned int)D_00426968, 0x00000E08, 0x0000000F, (unsigned int)D_00426AF8, 0x0000000A, 0x0000000F,
+    (unsigned int)D_004289D8, 0x00000E0A, 0x0000000F, (unsigned int)D_00426EC4, 0x00000E06, 0x0000000F, (unsigned int)D_004264F0, 0x00000E03,
+    0x0000000F, (unsigned int)D_00428998, 0x00000002, 0x0000000F, (unsigned int)D_00428FC0, 0x00000001, 0x0000000F, (unsigned int)D_00428FF0,
+    0x00000005, 0x0000000F, (unsigned int)D_00428A30, 0x00000006, 0x0000000F, (unsigned int)D_00428B94, 0x00000008, 0x0000000F,
+    (unsigned int)D_00428E5C, 0x00000007, 0x0000000F, (unsigned int)D_00428CF8, 0x00000000, 0x00000000, 0x00000000,
+};
+#endif
+
+/* 800E4EBC.CPP */
+#if defined(VERSION_US_REV1)
+unsigned int D_auto_rodata_unresolved_800E4694_unclaimed_E5984_unclaimed_E5A20_unclaimed_E5ABC[13] = {
+    0x3F19999A, 0x00000E06, 0x0000000E, (unsigned int)D_00429180, 0x00000002, 0x0000000E, (unsigned int)D_004292D4, 0x00000001,
+    0x0000000E, (unsigned int)D_004291A8, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

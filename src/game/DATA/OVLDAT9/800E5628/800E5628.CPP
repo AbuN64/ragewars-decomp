@@ -1,9 +1,0 @@
-#include "DATA/OVLDAT9/800E5628.H"
-
-#if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_menu_event_handlers_E6228_us_rev1[24] = {
-    0x00000E07, 0x00000020, (unsigned int)D_00436468, 0x00000E08, 0x00000020, (unsigned int)D_00436574, 0x00000E0A, 0x00000020,
-    (unsigned int)D_00436488, 0x00000E06, 0x00000020, (unsigned int)D_0043639C, 0x00000E03, 0x00000020, (unsigned int)D_00436430, 0x00000001,
-    0x00000020, (unsigned int)D_0043659C, 0x00000002, 0x00000020, (unsigned int)D_0043657C, 0x00000000, 0x00000000, 0x00000000,
-};
-#endif

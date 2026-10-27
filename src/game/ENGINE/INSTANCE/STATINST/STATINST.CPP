@@ -11,6 +11,9 @@
 #include "SCENE/802508E0.H"
 #include "SCENE/802508E0_9.H"
 #include "particle/80271B18_3.H"
+#include "include_asm.h"
+
+/* STATINST.CPP */
 extern s32 D_800D2978;
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
@@ -18,19 +21,7 @@ extern f32 D_800C3E50_de[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
 
-
-
-
-
-
-
-
-
-
-
 extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
-
-
 
 extern void Link_AnimateVertexColors(void *object, void *colors);
 
@@ -64,9 +55,7 @@ extern char D_800C3DA0[];
 extern char D_800C8F60[];
 #endif
 
-
 extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
-
 
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
@@ -291,3 +280,8 @@ void StaticInstance_DispatchAttachmentEvents(void *object, s32 all) {
     }
     Cache_UnlockResource(0, model);
 }
+
+/* 800C8F30.CPP */
+const unsigned char D_d0_0ba355c47669e01e[13] = {
+    0x6C, 0x69, 0x74, 0x20, 0x76, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
+};

@@ -1,4 +1,6 @@
+#include "include_asm.h"
 
+/* DATA_800E20A0.CPP */
 #if defined(VERSION_DE)
 char data_unresolved_800E20A0[8032] =
     "\0"
@@ -2239,4 +2241,10 @@ char data_unresolved_800E20A0[8032] =
     "\0"
     "\0"
     "vier";
+#endif
+
+/* DATA_800E4000.CPP */
+#if defined(VERSION_DE)
+const char rodata_shared_800E4000[12] =
+    "    :0000\000\000\000";
 #endif

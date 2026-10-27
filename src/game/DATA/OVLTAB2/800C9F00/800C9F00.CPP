@@ -1,4 +1,6 @@
+#include "include_asm.h"
 
+/* 800C9F00.CPP */
 #if defined(VERSION_US)
 extern char D_0022FEE4[];
 extern char D_00230380[];
@@ -40,4 +42,24 @@ unsigned int D_auto_rodata_unresolved_800C9F00[186] = {
     0x00000003, 0x00000020, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000,
 };
+#endif
+
+/* 800C9FAC.CPP */
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800C9FAC */
+unsigned int D_blob_2dcaa653845d51211766[1] = {
+    0x002A51C8,
+};
+#endif
+
+/* 800CA258_5.CPP */
+#if defined(VERSION_EU)
+const char rodata_unresolved_800C5424[12] =
+    "level info\000\000";
+#endif
+
+/* 800CA270_6.CPP */
+#if defined(VERSION_EU_X)
+const char rodata_unresolved_800C5490[20] =
+    "level nav vision\000\000\000\000";
 #endif

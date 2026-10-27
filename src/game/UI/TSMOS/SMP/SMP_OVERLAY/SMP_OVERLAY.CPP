@@ -28,14 +28,13 @@
 #include "COMMON/GAME_SESSION.H"
 #include "FRONTEND/SCREEN.H"
 
+/* SMP_OVERLAY.CPP */
 /* 804196C0_24.CPP */
 /* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through Frontend_InsertWidgetBefore and records it as the owner's overlay. */
-
 
 extern void Frontend_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
 
 /* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Frontend_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
-
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
 
@@ -464,7 +463,6 @@ extern void SmpOverlay_RefreshPakDialog(void);
    D_80146D70 to 0, releases the resources of D_8011FAC0 and of its block at 0x3C8, clears the
    word at 0x1C and returns zero. */
 
-
 extern void SetN64_ResetSessionPlayerPools(void *, s32, s32);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
@@ -825,4 +823,28 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, 
 unsigned int rodata_unresolved_8041C67C[1] = {
     0x00941000,
 };
+#endif
+
+/* 800E1470_2.CPP */
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_EU)
+const unsigned char rodata_func_8041BE90_de_800EDAD0[3] = {
+    0x25, 0x64, 0x00,
+};
+#endif
+#if defined(VERSION_EU_X)
+const unsigned int rodata_func_8041BE90_de_800EDAD0[1] = {
+    0x25640086,
+};
+#endif
+#endif
+
+#if defined(VERSION_EU)
+unsigned char rodata_unresolved_800EDAD3[13] = {
+    0x2F, 0x01, 0x29, 0x01, 0x2C, 0x01, 0x2A, 0x01, 0x2B, 0x08, 0x00, 0xFF, 0xE5,
+};
+#endif
+
+#if defined(VERSION_EU)
+/* bytes live in the preceding array */
 #endif

@@ -1,0 +1,52 @@
+#include "include_asm.h"
+#include "COMMON/EXTERNS_18.H"
+#include "TYPES.H"
+#include "sdk/os.h"
+
+/* 802C0390_4.CPP */
+#if defined(VERSION_DE)
+unsigned char D_auto_func_802BB3C4_de_padding_BBFC4[12] = { 0xAF, 0xB0, 0x00, 0x10, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x0A, 0xF3, 0xC8 };
+#endif
+
+/* recvmesg.c */
+extern OSThread_s *D_800D5270;
+extern void func_802BC36C_de(void *);
+extern void *__osPopThread(void *);
+extern void osStartThread(void *);
+
+s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
+{
+    u32 mask = __osDisableInt();
+
+    while (queue->validCount == 0) {
+        if (!block) {
+            __osRestoreInt(mask);
+            return -1;
+        }
+        D_800D5270->state = 8;
+        func_802BC36C_de(&queue->mtqueue);
+    }
+
+    if (message != 0) {
+        *message = queue->msg[queue->first];
+    }
+    queue->first = (queue->first + 1) % queue->msgCount;
+    queue->validCount--;
+    if (*queue->fullqueue != 0) {
+        osStartThread(__osPopThread(&queue->fullqueue));
+    }
+    __osRestoreInt(mask);
+    return 0;
+}
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_802BB2F4[3] = {
+    0x0800F200, 0x69000000, 0x02000500,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int func_802BB2A0_de_padding_BC2A4[1] = {
+    0x00000000,
+};
+#endif

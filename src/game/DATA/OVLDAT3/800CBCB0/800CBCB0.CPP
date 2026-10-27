@@ -1,5 +1,7 @@
 #include "TYPES.H"
+#include "include_asm.h"
 
+/* 800CBCB0.CPP */
 #if defined(VERSION_DE)
 extern char D_0026730C[];
 extern char D_002673EC[];
@@ -111,4 +113,22 @@ u32 data_unresolved_800CBCB0[428] = {
     0x00000000, 0x00071015, 0x15110700, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000,
 };
+#endif
+
+/* 80268160_14.CPP */
+#if defined(VERSION_DE)
+u32 data_writable_800CC360[20] = {
+    0xFFFFFFFF, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+    0x00000001, 0x00000001, 0x00000001, 0x00010000, 0xC4000000, 0xC8000000,
+    0x00000000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000,
+    0x00000000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_DE)
+#if defined(VERSION_DE)
+unsigned short rodata_unresolved_800CC3B0[8] = {
+    0xA000, 0x0000, 0xA000, 0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
+};
+#endif
 #endif

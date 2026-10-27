@@ -1,5 +1,6 @@
 #include "FX/CONTROLLER_INPUT.H"
 
+/* 800D0DA4.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int D_d0_17d69b582942ad4a[3] = {
     0x3F8AD4AA, 0x3F8AB06C, 0x3F8A8C29,
@@ -25,5 +26,13 @@ ButtonRemap g_controllerButtonRemap[19] = {
     { 0x40000, 0x40000 },
     { 0x80000, 0x80000 },
     { 0, 0 },
+};
+#endif
+
+/* 800D0E48.CPP */
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800D0DA4_unclaimed_D1A48 */
+unsigned int D_blob_1bcfb5257718bb2d745a[2] = {
+    0x3F84F47C, 0x3F84CF4E,
 };
 #endif

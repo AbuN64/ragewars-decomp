@@ -1,4 +1,6 @@
+#include "include_asm.h"
 
+/* 800C7934.CPP */
 #if defined(VERSION_US)
 struct {
     unsigned int w0[3];
@@ -33,5 +35,20 @@ struct {
         0x0A55, 0x0A56, 0x0A59, 0x0A5A, 0x0A65, 0x0A66, 0x0A69, 0x0A6A, 0x0A95, 0x0A96, 0x0A99, 0x0A9A,
         0x0AA5, 0x0AA6, 0x0AA9, 0x0AAA,
     },
+};
+#endif
+
+/* 800C853C_3.CPP */
+#if defined(VERSION_EU)
+const unsigned char rodata_func_80238670_de_800C3714[3] = {
+    0x42, 0x40, 0x00,
+};
+#endif
+
+/* 800C869C.CPP */
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800C869C */
+unsigned int D_blob_a4aff838b432642be78b[1] = {
+    0x00269804,
 };
 #endif

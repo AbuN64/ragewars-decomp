@@ -1,6 +1,0 @@
-
-#if defined(VERSION_EU)
-unsigned int D_d1_b549e5583b90c55a[3] = {
-    0x00042043, 0x00042080, 0x008A2021,
-};
-#endif

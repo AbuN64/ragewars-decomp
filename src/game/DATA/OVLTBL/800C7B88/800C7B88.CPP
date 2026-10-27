@@ -1,8 +1,18 @@
 
+
+/* 800C7B88.CPP */
 #if defined(VERSION_US)
 unsigned int D_auto_rodata_unresolved_800C7B88[22] = {
     0x00007000, 0x00000800, 0x40240000, 0x00000000, 0x40590000, 0x00000000, 0x40C38800, 0x00000000,
     0x4197D784, 0x00000000, 0x4341C379, 0x37E08000, 0x4693B8B5, 0xB5056E17, 0x4D384F03, 0xE93FF9F5,
     0x5A827748, 0xF9301D32, 0x75154FDD, 0x7F73BF3C, 0x63744469, 0x72656374,
+};
+#endif
+
+/* 800C8554.CPP */
+#if defined(VERSION_EU)
+/* ROM-grounded data for eu; supplied-list member has no us-rev1 placement. */
+unsigned int D_blob_e1b3ac257814e8cf83fb[3] = {
+    0x42FE0000, 0x45E00000, 0x3DC80000,
 };
 #endif

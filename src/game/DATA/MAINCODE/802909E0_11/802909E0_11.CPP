@@ -1,3 +1,16 @@
+
+
+/* 802909E0_11.CPP */
 #if defined(VERSION_EU)
 unsigned char D_auto_func_80290B88_eu_padding_91788[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+#endif
+
+/* 802909E0_12.CPP */
+#if defined(VERSION_EU_X)
+unsigned char D_auto_func_80290BB8_eu_x_padding_917B8[8] = { 0x03, 0xE0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 };
+#endif
+
+/* 80296FF8_7.CPP */
+#if defined(VERSION_US_REV1)
+unsigned char D_auto_func_80296168_eu_x_padding_97C18[8] = { 0x8E, 0x04, 0x00, 0x3C, 0x0C, 0x0A, 0x64, 0xDA };
 #endif

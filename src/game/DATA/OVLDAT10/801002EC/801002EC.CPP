@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
+/* 801002EC.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
 #ifdef VERSION_DE
 unsigned int D_auto_rodata_unresolved_801002EC[61] = {
@@ -36,5 +37,12 @@ unsigned int rodata_writable_800FE3E0[1] = {
 #if defined(VERSION_DE)
 unsigned int rodata_writable_801003E0[1] = {
     0xD3EFE631,
+};
+#endif
+
+/* 801003E4.CPP */
+#if defined(VERSION_DE)
+unsigned int D_auto_rodata_unresolved_801003E4[7] = {
+    0x01C332F2, 0x11D113F0, 0x17F3C0FE, 0xC15B2320, 0xF11FFFC1, 0x00DF00FE, 0x0DF7FF41,
 };
 #endif

@@ -1,4 +1,6 @@
+#include "include_asm.h"
 
+/* 800D064C_2.CPP */
 /* ROM-grounded data: rodata/writable/800D0650 */
 #ifdef VERSION_DE
 unsigned int D_blob_phase2_d22516f1bab4d1b82ec1[8] = {
@@ -23,5 +25,19 @@ unsigned int D_blob_phase2_d22516f1bab4d1b82ec1[8] = {
 #ifdef VERSION_US_REV1
 unsigned int D_blob_phase2_d22516f1bab4d1b82ec1[8] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x3FC74F67, 0x3FC72F5E, 0x3FC70F55,
+};
+#endif
+
+/* 800D0670.CPP */
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80245D30_D1270[2] = {
+    0x3E99999A, 0x40400000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_80245D30_D1270_us_rev1.c */
+const unsigned int D_blob_d42151d20be748bd773d[2] = {
+    0x3E99999A, 0x40400000,
 };
 #endif
