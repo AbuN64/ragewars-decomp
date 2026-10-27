@@ -26,6 +26,7 @@
 #include "FRONTEND/8041BEA8_5.H"
 #include "FRONTEND/8042E080_42.H"
 #include "COMMON/GAME_SESSION.H"
+#include "FRONTEND/SCREEN.H"
 
 /* 804196C0_24.CPP */
 /* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through Frontend_InsertWidgetBefore and records it as the owner's overlay. */
@@ -463,7 +464,6 @@ extern void SmpOverlay_RefreshPakDialog(void);
    D_80146D70 to 0, releases the resources of D_8011FAC0 and of its block at 0x3C8, clears the
    word at 0x1C and returns zero. */
 
-extern void Frontend_RequestScreenMode(s32);
 
 extern void SetN64_ResetSessionPlayerPools(void *, s32, s32);
 

@@ -19,6 +19,8 @@
 #include "COMMON/OBJECTSTATE18.H"
 #include "ENGINE/SCENE_6.H"
 #include "AI/NAV/CODE_80208158.H"
+#include "AI/PLAYERAI_7.H"
+#include "BULKYDCMP/BULKYDCMP.H"
 
 
 extern char D_8013B364;
@@ -44,7 +46,6 @@ extern void func_80220D44_de(void *);
 extern void func_80222908_de(void *, void *, ObjectState54 *);
 extern void func_80222EA4_de(void *, void *);
 extern void func_80222FE0_de(void *, void *, s32 *);
-extern void func_802292B8_de(void *);
 extern s32 Player_GetAmmoCapacity(void *, s32, s32);
 extern void func_8022B5C0_de(void *);
 extern void func_8022B8E0_de(void *);
@@ -66,7 +67,6 @@ extern f32 InstHdr_GetActorReach(void *);
 extern s32 InstHdr_GetActorMotionState(void *);
 extern struct Shared_Surface *InstHdr_FindActorModelEntry(void *);
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-extern void func_8025E418_de(s32);
 
 
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);

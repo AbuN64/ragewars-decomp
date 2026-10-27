@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/EXTERNS_3.H"
-#include "FRONTEND/8040B45C_21.H"
+#include "FRONTEND/SCREEN.H"
 #include "sdk/AUDIO_2/802BF7F0.H"
 #include "FRONTEND/8040B45C_22.H"
 

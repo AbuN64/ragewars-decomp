@@ -13,6 +13,7 @@
 #include "COMMON/CONTROL.H"
 #include "TYPES.H"
 #include "FRONTEND/80423280_53.H"
+#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
 
 /* Draw callback of the versus results screen D_800E4F60: on draw event 1 in states 3, 8 or 9 it
    sets the fill D_800D15E0 to blended white, restores the full-screen clip, and at alpha 210 draws
@@ -35,7 +36,6 @@ extern void func_804399D0(char *);
 #else
 #endif
 
-extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 
 extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 

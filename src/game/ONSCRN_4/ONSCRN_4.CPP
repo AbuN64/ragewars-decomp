@@ -24,7 +24,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "GFX/TEXT/802A8A94_6.H"
 #include "COMMON/ENTRYRECATE.H"
-#include "MENU/802ABDBC_5.H"
+#include "ONSCRN_4/ONSCRN_4.H"
 
 /* 802A8A94_4.CPP */
 s32 OnScreen_UpdateMoverScript(void *);

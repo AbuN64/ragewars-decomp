@@ -17,6 +17,7 @@
 #include "WEAPONS/80213ED4_22.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "ENGINE/SCENE_3.H"
 extern void Cache_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 size);
@@ -42,7 +43,6 @@ extern s32 OvlScene_FindNearestPlacedObject(World *world, void *data, s32 group,
 
 
 
-extern const char D_800C5210_de[];
 
 extern void SimpleInstance_RegisterModelVariantResources(ObjB *obj, s32 arg1);
 

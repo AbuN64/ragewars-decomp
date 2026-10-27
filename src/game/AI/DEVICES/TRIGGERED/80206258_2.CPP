@@ -16,6 +16,7 @@
 #include "stddef.h"
 #include "FX_2/80271B18.H"
 #include "WEAPONS/80213ED4.H"
+#include "GOBJINST_2/GOBJINST_2.H"
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
@@ -28,7 +29,6 @@ extern void *func_8024BFD4_de(void *, int);
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 
-extern void func_802472F0_de(void *);
 extern void Menu_RequestTrackByIds(s32, void *);
 
 void func_8020676C_de(void *actor, void *motionState, Trigger *trigger) {

@@ -11,9 +11,8 @@
 #include "COMMON/FUNCPTR.H"
 #include "CAMERA/EXTERNS.H"
 #include "COMMON/EXTERNS_8.H"
-#include "CAMERA/80243A80_10.H"
+#include "CINEMA/CINEMA.H"
 #include "include_asm.h"
-#include "CAMERA/80243A80_11.H"
 #include "CAMERA/80243A80_6.H"
 
 /* 80243A80_8.CPP */

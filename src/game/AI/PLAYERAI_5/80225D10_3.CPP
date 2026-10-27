@@ -10,6 +10,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "FRONTEND/8042E080_70.H"
 #include "RESMGR/802A0888.H"
+#include "BULKYDCMP/BULKYDCMP.H"
 
 /** Allocate and clear the player array and its per-player state blocks, linking each player to its block. */
 extern void **Cache_AllocateResource(int, int, int, char *);
@@ -69,8 +70,6 @@ extern s32 Control_IsStartPressed(Shared_Effect *);
 
 extern s32 Tsmos_IsFrontendActive(void);
 extern s32 Pak_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
-extern void func_8025E360_de(void);
-extern void func_8025E3A8_de(void);
 extern void func_80218464_de(char *);
 
 extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);

@@ -19,6 +19,7 @@
 #include "ENGINE/SCENE_3.H"
 #include "WEAPONS/80225D10_5.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "VOICE/VOICE.H"
 
 void Scene_UpdateAndDrawWorld(void *arg0) {
     Shared_World *state;
@@ -91,7 +92,6 @@ extern s32 Player_BeginRoundEnd(void *arg0);
 
 
 extern void *func_8025CC6C_de(void);
-extern void func_8025CB88_de(void *arg0);
 
 
 

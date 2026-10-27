@@ -13,7 +13,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "SOUND/8022C894.H"
 #include "COMMON/WORLD.H"
-#include "SOUND/8024E130_4.H"
+#include "INSTHDR_2/INSTHDR_2.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/REC.H"
 #include "COMMON/OBJ.H"

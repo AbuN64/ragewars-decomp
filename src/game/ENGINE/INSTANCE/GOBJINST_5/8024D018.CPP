@@ -4,6 +4,7 @@
 #include "COMMON/PROBE.H"
 #include "TYPES.H"
 #include "particle/8024D018.H"
+#include "INSTHDR_2/INSTHDR_2.H"
 
 /* Builds a 4x4 transform from a rotation quaternion (x, y, z, w) and a translation, with a zero fourth column and the corner set to the constant at D_800C8CA0. */
 
@@ -104,7 +105,6 @@ s32 func_8024D160_de(InteractionActor *actor) {
 }
 
 
-f32 InstHdr_GetInactiveActorHeight(Actor_u1 *actor);
 
 f32 GameObject_GetActorHeight(Actor_u1 *actor) {
     Resource_u1 *resource;

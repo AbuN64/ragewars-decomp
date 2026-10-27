@@ -2,7 +2,7 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
 #include "MATH/math_double.H"
-#include "MATH/802A0470.H"
+#include "X_PLUS/X_PLUS.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "RESMGR/802A0888.H"
 #include "include_asm.h"

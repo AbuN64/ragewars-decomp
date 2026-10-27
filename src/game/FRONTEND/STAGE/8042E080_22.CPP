@@ -7,6 +7,7 @@
 #include "FRONTEND/8042E080_22.H"
 #include "SYSTEM_2/8025E280.H"
 #include "ACHIEVE/80424E30_3.H"
+#include "FRONTEND/SCREEN.H"
 
 /* Prepares a match: stops the current screen, starts screen 2, resets the eight player status
    records (clearing bytes 0x94 and 0x95 and, for human slots, the team byte 0x92) while counting
@@ -40,7 +41,6 @@ extern void Tsmos_RequestFrontendShutdown(void);
 
 
 extern void XPlus_CopyString(char *, char *);
-extern void Frontend_RequestScreenMode(s32);
 
 
 void Frontend_StartConfiguredMatch(void) {

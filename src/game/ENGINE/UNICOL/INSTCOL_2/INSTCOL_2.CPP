@@ -7,7 +7,7 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
-#include "ANIM/8023EEF0_3.H"
+#include "INSTCOL_2/INSTCOL_2.H"
 #include "RENDER_2/8022AE90_5.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_14.H"

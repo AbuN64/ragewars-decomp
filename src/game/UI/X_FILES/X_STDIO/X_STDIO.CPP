@@ -13,7 +13,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/STATEPAIR.H"
-#include "RESMGR/resmgr_stream_status.H"
+#include "X_STDIO/X_STDIO.H"
 
 /* 802A0888_6.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
@@ -67,7 +67,6 @@ s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 arg2, ...) {
 /* Formats its arguments into the shared buffer D_8014D0D0 and writes the text to the stream through XStdio_WriteStreamNoop in runs, emitting the one-byte D_800CAEF0 before every newline, returning the number of bytes written. */
 
 
-s32 XStdio_WriteStreamNoop(const unsigned char *data, s32 size, s32 count, void *stream);
 
 /* Initializes and dispatches the resource on the first guarded call. */
 

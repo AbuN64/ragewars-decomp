@@ -6,8 +6,8 @@
 #include "TEXTURE/80256220_16.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
+#include "VOICE/VOICE.H"
 
-extern void Audio_InitializeVoiceRecord(void *arg0, int arg1, int arg2);
 
 /* Starts a sound instance from a description: when the scene's free node list is not empty it takes the
  * first node under the audio lock (func_80258740_de/func_802587A4_de), unlinks it, gives it the next handle, the
@@ -193,7 +193,6 @@ void *AudioWorld_UnlinkChannelNode(LinkPair *channelNode) {
     return channelNode;
 }
 
-extern void Audio_InitializeVoiceRecord(void *header, int owner, int arg2);
 
 static inline void func_802596D4_linkInit(ListLink *link) {
     link->prev = link;

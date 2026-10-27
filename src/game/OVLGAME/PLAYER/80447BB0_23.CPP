@@ -5,6 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER_2/802192C0_3.H"
+#include "CINEMA/CINEMA.H"
 
 extern f32 D_800C73E4;
 /* ROM offsets of the actor part tables: each version names its own copies. */
@@ -78,7 +79,6 @@ extern void func_8024B3A8_de(void *, void *, void *, s32);
 extern void Nav_RequestActorState(void *, void *, s32);
 extern void Weapon_ApplyWeaponSwitch(void *, void *);
 extern void Player_UpdatePlayerCamera(void *, void *);
-extern void Cinema_UpdateSequenceTrack(void *);
 #include "MENU/INITVIEW.H"
 #include "ACHIEVE/80424E30_3.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag

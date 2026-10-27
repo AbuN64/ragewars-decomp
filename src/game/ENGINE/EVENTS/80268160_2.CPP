@@ -8,6 +8,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "T2SOUNDELEMENT/T2SOUNDELEMENT.H"
 
 /* Spawns an effect of the given kind for an object through AnimPool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through Particle_GetEffectResource, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through AnimPool_ReleaseSceneEffect. */
 
@@ -107,7 +108,6 @@ typedef struct SoundSource {
 extern f32 D_800C4478_de;
 extern f32 D_800C447C;
 extern s32 InstHdr_GetActorMotionIndex(void *);
-extern s32 func_8025DEC0_de(s32, CVector3, s32, s32, f32);
 
 void Events_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
                      CVector3 position, ParamsRecAt4 params) {

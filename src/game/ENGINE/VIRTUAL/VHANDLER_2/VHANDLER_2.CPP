@@ -2,7 +2,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "TYPES.H"
-#include "ENGINE/VIRTUAL/VHANDLER_4.H"
 #include "include_asm.h"
 #include "ENGINE/VIRTUAL/VHANDLER_5.H"
 #include "SCHED/8023A284.H"

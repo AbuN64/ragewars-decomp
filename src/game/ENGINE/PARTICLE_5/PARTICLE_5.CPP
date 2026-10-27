@@ -17,7 +17,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "RENDER/8028469C_2.H"
+#include "PARTICLE_5/PARTICLE_5.H"
 
 /* CODE_8028414C.CPP */
 extern s32 func_8025CA24_de(void *arg0, void *arg1);

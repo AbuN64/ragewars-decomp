@@ -32,7 +32,6 @@
 #include "gbi.h"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/RESULTS.H"
-#include "CAMERA/80233920_7.H"
 #include "RENDER_4/8028FD2C_15.H"
 #include "CAMERA/CAMERA.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -48,6 +47,9 @@
 #include "COMMON/S1.H"
 #include "GFX/TEXT/802A8A94_5.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
+#include "CINEMA/CINEMA.H"
+#include "SETN64/SETN64.H"
+#include "ONSCRN/ONSCRN.H"
 
 /* 80233920.CPP */
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
@@ -710,9 +712,7 @@ struct CShakeAxis_t;
 extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 int Cinema_IsSequenceInWindow(void);
-void Cinema_UpdateSequenceTrack(void *);
 f32 func_802459A0_de(void *);
-float func_80245AD8_de(void);
 void GraphU64_InvertAffineMatrix(f32 *, f32 *);
 void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
@@ -736,7 +736,6 @@ void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
 f32 Math_Sqrtf(f32);
 void Pak_UpdateDialogList(void *);
-void Camera_BuildShakenViewTransform(void *);                        /* extern */
 void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
 s32 func_802B6900_de(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
@@ -1196,7 +1195,6 @@ extern s32 SetN64_IsModeThirteen(void);
 extern void func_8022A2A0_de(void *, char *);
 extern void Scene_DrawOpaqueActors(char *, char *);
 extern void Fx_DrawBoundedParticleQuads(void *, char *);
-extern void SetN64_DrawVisibleEffects(char *, char *);
 extern void Scene_DrawTransparentObjects(char *, char *);
 extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
@@ -1638,7 +1636,6 @@ extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Cache_MarkResourceInUse(s32, s32);
-extern void Camera_SetupViewportAndFog(RacerViewport *);
 extern void func_80239FD4_de(RacerViewport *, s32);
 extern void Pak_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);
@@ -1853,8 +1850,6 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
     return post_lines(owner, pool, text, kind, 1.0f, -1);
 }
 
-extern void OnScreen_SetupTextRendering(void);
-extern void OnScreen_LoadTextTileModeTwo(void);
 extern void OnScreen_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;

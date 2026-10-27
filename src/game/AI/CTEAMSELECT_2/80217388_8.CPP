@@ -8,6 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "GFX/TEXT/802A8A94_5.H"
+#include "ONSCRN/ONSCRN.H"
 
 
 
@@ -18,7 +19,6 @@ extern s32 D_800E28D0;
  /* "Select Team" */
 
 
-extern void OnScreen_SetupTextRendering(void);
 
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 

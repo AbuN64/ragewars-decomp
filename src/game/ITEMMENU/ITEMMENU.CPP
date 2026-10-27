@@ -15,7 +15,7 @@
 #include "COMMON/EXTERNS_2.H"
 #include "AUDIO_3/802BFF30.H"
 #include "RENDER/80291054_6.H"
-#include "SYSTEM_3/802A6AC0_7.H"
+#include "ITEMMENU/ITEMMENU.H"
 #include "RESMGR/802A0888.H"
 #include "GFX/TEXT/802A8A94_5.H"
 #include "COMMON/ACTORRECAT5E0.H"
@@ -24,7 +24,6 @@
 /* 802A6AC0_4.CPP */
 /* Steps a four-item toggle menu: counts frames, and once ItemMenu_IsSelectedEntryActive allows input opens the menu on button 0x20 or, on release, closes it after running the selected item's select callback (toggling it when that reports 1, or directly when it has none); each frame it settles every item's bounce animation toward zero, toggles the selected item off when an enabled item's update callback fails, advances the blink counter twice, and then either finishes opening, finishes closing, or moves the selection through ItemMenu_AdvanceSelection on buttons 0x100 and 0x200. Toggling an item starts its bounce at +5 with the current frame and its restore values, or at -5 when switching off. */
 
-s32 ItemMenu_AdvanceSelection(MenuCode802A6AC0 *menu, s32 backward);
 
 static inline void toggle(ToggleMenu *menu, MenuItem *item) {
     if ((item->on = !item->on) != 0) {

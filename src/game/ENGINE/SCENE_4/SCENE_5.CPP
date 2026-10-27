@@ -13,6 +13,7 @@
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/PLAYERPROFILES.H"
+#include "CINEMA/CINEMA.H"
 
 /* Collects up to 10 light volumes holding a point from the world sector whose x/z extent holds it, returning their
  * count through total (0 outside every sector). */
@@ -532,7 +533,6 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D3354, *D_800D3358, *D_800D335C, *D_800D3360, *D_800D3364, *D_800D3368_de, *D_800D336C,
     *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
-extern void Cinema_ClearMessageCount(void);
 extern void Cinema_AddMessage(char *);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);

@@ -14,12 +14,11 @@
 #include "AUDIO/80259280_11.H"
 #include "include_asm.h"
 #include "COMMON/SOUNDVOICEPOOL.H"
-#include "SOUND/CODE_8025C544.H"
+#include "VOICE/VOICE.H"
 #include "COMMON/S1.H"
 #include "COMMON/STATERECAT34.H"
 #include "RENDER_2/8025DE50_6.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SOUND/8025C544_6.H"
 
 /* 8025A3EC_4.CPP */
 /* Releases occupied nonlocal slots unless their value equals the exclusion. */

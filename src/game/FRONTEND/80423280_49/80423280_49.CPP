@@ -3,9 +3,6 @@
 #include "COMMON/UNUSED.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern void ScenarioSetup_RefreshSelectedArenaLabel(void);
-extern void ScenarioSetup_LoadSetupArenaLabel(void);
-extern void ScenarioSetup_HideSetupCatalogue(void);
 
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
@@ -15,6 +12,7 @@ extern void ScenarioSetup_HideSetupCatalogue(void);
    request 0xE78 through SoundElement_PlayFlatSound and calls Menu_InitializeOptionsScene; returns zero. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
+#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
 
 
 

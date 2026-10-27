@@ -12,14 +12,12 @@
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/AIPROFILE.H"
+#include "GREGION/GREGION.H"
 
 extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-extern CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon);
-extern CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon);
 extern void MatrixFromQuaternion(void *quaternion, f32 *matrix);
 extern void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
-extern f32 Region_GetTriangleEdgeAngle(void *triangle, s32 edge);
 
 
 

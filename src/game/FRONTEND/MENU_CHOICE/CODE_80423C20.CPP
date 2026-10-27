@@ -11,6 +11,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/ALAUXBUS_S.H"
+#include "FRONTEND/SCREEN.H"
 
 extern s32 D_800E4680;
 
@@ -61,7 +62,6 @@ extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 Smos_GetBlockedScreenOwner(void);
-extern void Frontend_RequestScreenMode(s32);
 #if defined(VERSION_EU_X)
 #define WID_42 0x44
 #define WID_43 0x45

@@ -13,14 +13,13 @@
 #include "ENGINE/SCENE_7.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "ENGINE/SCENE_14.H"
+#include "SCENE_5/SCENE_5.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/EXTERNS_8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/WORLDSORTENTRY.H"
-#include "sdk/SCHED/world_actorscan.H"
 
 /* SCENE_14.CPP */
 

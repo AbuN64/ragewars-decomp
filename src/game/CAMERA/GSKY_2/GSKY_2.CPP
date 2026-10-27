@@ -21,7 +21,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SCHED/8023A284_8.H"
+#include "GSKY_2/GSKY_2.H"
 
 /* 8023A284_4.CPP */
 extern void Cache_UnlockResource(void *, Node80253610 *);
@@ -365,7 +365,6 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
-extern void func_8023A4E0_de(ObjectRecAt220 *, ClipView *);
 
 extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 

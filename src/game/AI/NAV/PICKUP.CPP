@@ -7,6 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "AI/SHARED_PICKUPGOALNODE.H"
 #include "FX_2/80271B18.H"
+#include "AI/NAV/PICKUP.H"
 
 /* 80208000_12.CPP */
 /* Advances a committed selection's stage against the node list D_8013B364: finishes through
@@ -16,8 +17,6 @@
 /* Navigation selection/list/node canonical ownership remains unresolved. */
 
 extern Link *Nav_GetStridedTableEntry(PickupGoalNodeList *, s32);
-extern s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel);
-extern s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel);
 extern s32 Nav_ComputeScaledPointCentroid(Selection *sel);
 extern s32 Nav_FindSpecialLinkedCandidate(Selection *sel);
 

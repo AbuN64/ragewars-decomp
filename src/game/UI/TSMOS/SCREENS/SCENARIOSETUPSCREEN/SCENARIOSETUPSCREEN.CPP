@@ -28,18 +28,9 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "DATA/OVLDAT9/800E5320.H"
 #include "FRONTEND/PREVIEW_MODEL_IMAGE.H"
+#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
 
-void ScenarioSetup_SetCatalogueAlpha(s32);
-void ScenarioSetup_StartSelectedScenario(void);
-void ScenarioSetup_RefreshSelectedArenaLabel(void);
 void ScenarioSetup_SetCupCategory(s32);
-void ScenarioSetup_SetCupStageCount(s32);
-void ScenarioSetup_LoadSetupArenaLabel(void);
-void ScenarioSetup_HideArenaCatalogueWidgets(void);
-void ScenarioSetup_HideSetupCatalogue(void);
-s32 ScenarioSetup_ReturnResultsGateTrue(void);
-s32 ScenarioSetup_CategoryToList(s32);
-void ScenarioSetup_FillResultRows(void);
 
 /* 80423280_11.CPP */
 #if !defined(VERSION_DE)
@@ -676,7 +667,6 @@ s32 ScenarioSetup_IsCupComplete(void) {
    makes of it. Either text is copied into the screen's label at 0x3F4 through func_802A025C_de, and the
    widget at 0x3EC is pointed at that label. */
 
-extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 
 extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 

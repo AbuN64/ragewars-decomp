@@ -16,6 +16,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "WEAPONS/80213ED4.H"
+#include "CINEMA/CINEMA.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern char D_8010F328[];
@@ -44,7 +45,6 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 void Player_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 
                  /* extern */
-void Cinema_UpdateSequenceTrack(void *);
 
                             /* extern */
 

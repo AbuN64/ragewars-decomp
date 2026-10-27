@@ -21,6 +21,7 @@
 #include "TYPES.H"
 #include "RENDER_2/802192C0_11.H"
 #include "RENDER_2/802192C0_7.H"
+#include "AI/PLAYERAI_7.H"
 /* Selects and records a player's reaction to an interaction. */
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
@@ -457,7 +458,6 @@ reaction_statistics_done:
 extern s32 D_800D297C;
 extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
-extern void Player_DrawTintedPlayer(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);
 extern void Cache_UnlockResource(s32, void *);
 void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)

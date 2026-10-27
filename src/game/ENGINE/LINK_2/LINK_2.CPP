@@ -7,19 +7,19 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "ACTORS/80277444_8.H"
+#include "LINK_2/LINK_2.H"
 #include "COMMON/EXTERNS_10.H"
 #include "SYSTEM_2/8025E280.H"
 #include "COMMON/OBJECTLINKS14.H"
 
 /* 80277444_8.CPP */
-extern s32 SoundElement_PlayFlatSound(s32 arg0);
 
 #if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "COMMON/OBJECTLINKS14.H"
+#include "T2SOUNDELEMENT/T2SOUNDELEMENT.H"
 typedef void (*NavPrimaryFn)(NavigationPlatform *, void *, Trigger *);
 typedef void (*NavSecondaryFn)(Trigger *);
 typedef struct NavCallbackPair { NavPrimaryFn primary; NavSecondaryFn secondary; } NavCallbackPair;
@@ -73,7 +73,6 @@ void Link_DispatchTrigger(Trigger *trigger) {
 INCLUDE_ASM("span_1000", Link_DispatchTrigger);
 #endif
 
-void Link_DispatchMatchingTriggers(Trigger *, s32, s32, s32, s32, s32, struct Player *);
 
 extern s32 Scene_FindActorTriggerRange(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
 
@@ -216,7 +215,6 @@ extern s32 Scene_TestTriggerKindFlags(Shared_World *world, s32 id);
 
 extern void Scene_DispatchSecondaryTriggersOfKind(Shared_World *world, s32 id);
 
-s32 Link_CheckTriggerMessage(void *trigger, struct Player *arg);
 
 extern void Scene_SetTriggerStateBit(Shared_World *world, Trigger *trigger, s32 arg);
 

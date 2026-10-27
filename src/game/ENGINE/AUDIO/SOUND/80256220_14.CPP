@@ -8,6 +8,7 @@
 #include "sdk/os.h"
 #include "RENDER_4/8028FD2C_6.H"
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
+#include "DEFS/DEFS.H"
 
 /* Returns the physical address of a cached copy of a data block: finds the cache entry keyed by the
  * block's address and refreshes the copy (and flushes it from the data cache) when the size changed;
@@ -184,7 +185,6 @@ extern void Audio_InitializeVoicePool(void *, void *);
 extern void Audio_InitializeDialogPlayer(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
-s32 Defs_ReadResourceWord(s32 arg0);
 void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {
     u32 mask = __osDisableInt();
@@ -288,7 +288,6 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/EXTERNS_14.H"
 #include "TYPES.H"
-s32 Defs_ReadResourceWord(s32 arg0);
 void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     s32 total;
