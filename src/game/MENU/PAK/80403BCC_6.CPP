@@ -35,9 +35,6 @@ extern void Control_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
-                         s32 size, s32 *file_no);
-
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
 /* Inline copy of Pak_DecodeNoteText: decodes the n pak font codes at src into dst as text (codes from
