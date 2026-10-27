@@ -64,7 +64,7 @@ void func_802BA350_de(s32 pri)
     D_800D4420.dma = 0;
     D_800D4420.edma = 0;
     osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + 0x1000 / sizeof(u64), pri);
-    func_802BA210_de();
+    __osViInit();
     osStartThread(&D_80148850);
     __osRestoreInt(savedMask);
 

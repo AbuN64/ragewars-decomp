@@ -7,17 +7,17 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
-extern void func_802B7A20_de(s32 arg0);
+extern void __osPackRequestData(s32 arg0);
 
 
-s32 func_802B74B0_de(s32 completionQueue) {
+s32 osContStartQuery(s32 completionQueue) {
     s32 result;
     u8 *p;
 
     func_802B9C14_de();
     p = &D_8014D4B0;
     if (*p != 0) {
-        func_802B7A20_de(0);
+        __osPackRequestData(0);
         __osSiRawStartDma(1, &D_8014D470);
         osRecvMesg(completionQueue, 0, 1);
     }
@@ -27,8 +27,8 @@ s32 func_802B74B0_de(s32 completionQueue) {
     return result;
 }
 
-s32 func_802B7AD8_de(s32 *, s32);
-void func_802B7538_de(s32 controllerStatus) {
+s32 __osContGetInitData(s32 *, s32);
+void osContGetQuery(s32 controllerStatus) {
     s32 validControllerMask;
-    func_802B7AD8_de(&validControllerMask, controllerStatus);
+    __osContGetInitData(&validControllerMask, controllerStatus);
 }

@@ -202,7 +202,7 @@ void alAuxBusNew(void *arg0, s32 arg1, s32 arg2) {
 
 s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 
-void func_802B450C_de(ALResampler_s *arg0, s32 arg1) {
+void alResampleNew(ALResampler_s *arg0, s32 arg1) {
     s32 result;
     f32 k;
 
@@ -227,7 +227,7 @@ void alSaveNew(ALSave *arg0) {
 
 extern char D_002B4730, D_002B51B8;
 
-void func_802B45DC_de(ALEnvMixer *arg0, ALHeap *arg1) {
+void alEnvmixerNew(ALEnvMixer *arg0, ALHeap *arg1) {
     s32 result;
     ALEnvMixer *mixer = arg0;
 
@@ -261,7 +261,7 @@ void func_802B45DC_de(ALEnvMixer *arg0, ALHeap *arg1) {
    inlined body in alFxNew uses. */
 
 
-void func_802B468C_de(AudioLowPassFilter *lp)
+void init_lpfilter(AudioLowPassFilter *lp)
 {
     s32 i, temp;
     s16 fc;

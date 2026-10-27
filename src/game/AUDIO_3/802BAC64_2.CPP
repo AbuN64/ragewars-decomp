@@ -106,7 +106,7 @@ s32 func_802B5B94_de(ALFxCode802BAC64 *filter, s32 paramID, void *param)
         case 7:
             if (f->delay[s].lp) {
                 f->delay[s].lp->mode = (s16)val;
-                func_802B468C_de(f->delay[s].lp);
+                init_lpfilter(f->delay[s].lp);
             }
             break;
     }

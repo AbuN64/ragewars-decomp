@@ -115,7 +115,7 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 }
 #endif
 
-/* Sets the last controller command to the given byte, marks the pak PIF RAM block for execution and packs one request-status command per controller followed by the end marker (libultra __osPfsRequestData). Adapted from func_802B7A20_de with the RAM clearing loop dropped, the command byte also stored to D_8014D4B0, and the pak PIF RAM block D_80154110 used in place of D_8014D470, with the pointer taken before the status word is written. */
+/* Sets the last controller command to the given byte, marks the pak PIF RAM block for execution and packs one request-status command per controller followed by the end marker (libultra __osPfsRequestData). Adapted from __osPackRequestData with the RAM clearing loop dropped, the command byte also stored to D_8014D4B0, and the pak PIF RAM block D_80154110 used in place of D_8014D470, with the pointer taken before the status word is written. */
 
 
 
@@ -124,7 +124,7 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
 
 
 
-/* Decodes the controller status replies in D_80154110 for each of D_8014D46C channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from func_802B7AD8_de. */
+/* Decodes the controller status replies in D_80154110 for each of D_8014D46C channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from __osContGetInitData. */
 
 
 

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 
 /** CRC-5-style bit-shuffle: 16 rounds folding bit 10 of arg0 with a rotating tap. */
-int func_802B8C40_de(unsigned int blockAddress) {
+int __osContAddressCrc(unsigned int blockAddress) {
     int crcRegister;
     int feedbackPolynomial;
     int remainingBits;

@@ -30,11 +30,11 @@
 
 extern s64 func_802BADC0_de(void);
 
-extern void func_802B9E78_de(s32 *mode);
+extern void osSpTaskLoad(s32 *mode);
 
 extern void osSpTaskStartGo(s32 *mode);
 
-extern void func_802B7B90_de(s32 music, s64 time);
+extern void osDpSetNextBuffer(s32 music, s64 time);
 
 
 
@@ -58,7 +58,7 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
             }
         }
         current->state &= ~0x30;
-        func_802B9E78_de((s32 *)&current->list.type);
+        osSpTaskLoad((s32 *)&current->list.type);
         osSpTaskStartGo((s32 *)&current->list.type);
         view->curRSPTask = current;
         if (current == next) {
@@ -66,7 +66,7 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
         }
     }
     if (next != 0 && next != current) {
-        func_802B7B90_de((s32)next->list.output_buff, *next->list.output_buff_size);
+        osDpSetNextBuffer((s32)next->list.output_buff, *next->list.output_buff_size);
         D_800CD710 = 1;
         D_800CD714 = 0;
         view->curRDPTask = next;

@@ -54,7 +54,7 @@ void func_802BA5F0_eu(s32 managerPriority) {
         D_800D4420.dma = 0;
         D_800D4420.edma = 0;
         osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), managerPriority);
-        func_802BA210_de();
+        __osViInit();
         osStartThread(&D_80148850);
         __osRestoreInt(savedInterruptMask);
         if (restorePriority != -1) {
@@ -106,7 +106,7 @@ void func_802BA4C0_de(struct OSDevMgr *arg)
         osRecvMesg(dm->evtQueue, (OSMesg *)&mb, 1);
         switch (mb->hdr.type) {
             case 13:
-                func_802BA910_de();
+                __osViSwapContext();
                 if (--*viRetrace() == 0) {
                     vc = func_802BA640_de();
                     if (vc->msgq != 0) {

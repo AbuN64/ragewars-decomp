@@ -27,7 +27,7 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     osCreateMesgQueue(&D_801486A0, D_801486B8, 1);
 
     if (!D_800D83C0[0]) {
-        func_802B9950_de();
+        __osPiCreateAccessQueue();
     }
 
     osSetEventMesg(8, &D_801486A0, 0x22222222);

@@ -71,7 +71,7 @@ extern void func_802BB3D0_de(s32);
 extern void func_802BB850_eu(s32);
 extern s32 func_802B9730_de(OSPiHandle_s *, u32, u32);
 extern s32 func_802B9590_de(OSPiHandle_s *, u32, u32 *);
-extern void func_802BBC20_de(void);
+extern void osYieldThread(void);
 
 /* The PI manager thread: serves DMA and 64DD disk requests from the command queue for ever. */
 void System_RunPiManager(void *argument) {
@@ -127,7 +127,7 @@ void System_RunPiManager(void *argument) {
             }
             osSendMesg(manager->accessQueue, 0, 0);
             if (((PiDiskTransfer *)request->handle->transferInfo.bytes)->blockNumber == 1) {
-                func_802BBC20_de();
+                osYieldThread();
             }
             continue;
         }

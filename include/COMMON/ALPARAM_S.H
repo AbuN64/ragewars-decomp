@@ -133,12 +133,12 @@ struct LogTab {
     f64 v[8];
 };
 
-extern s16 func_802B4F68_de(f64 vol, f64 tgt, s32 count, u16 *ratel);
+extern s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel);
 
 struct ALEnvMixer;
 typedef struct ALEnvMixer ALEnvMixer;
 
-extern f64 func_802B53B4_de(f64 arg0, s32 arg1);
+extern f64 _ldexpf(f64 arg0, s32 arg1);
 
 extern f64 frexp(f64 arg0, s32 *arg2);
 

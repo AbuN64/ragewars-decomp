@@ -213,9 +213,9 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
         e->first = 0;
 
         e->ltgt = (e->volume * D_800D4210[e->pan]) >> 15;
-        e->lratm = func_802B4F68_de((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
+        e->lratm = _getRate((f64)e->cvolL, (f64)e->ltgt, e->segEnd, &(e->lratl));
         e->rtgt = (e->volume * D_800D4210[128 - e->pan - 1]) >> 15;
-        e->rratm = func_802B4F68_de((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
+        e->rratm = _getRate((f64)e->cvolR, (f64)e->rtgt, e->segEnd, &(e->rratl));
 
         aSetVolume(ptr++, 0x02 | 0x04, e->cvolL, 0, 0);
         aSetVolume(ptr++, 0x00 | 0x04, e->cvolR, 0, 0);
@@ -235,7 +235,7 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
 
 /* _getRate: approximate per-step volume scaling using the public ultralib log table and repeated squaring. */
 
-s16 func_802B4F68_de(f64 vol, f64 tgt, s32 count, u16 *ratel)
+s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel)
 {
   s16 s;
   f64 invn = (1.0f) / ((f32) count);
@@ -342,7 +342,7 @@ s16 func_802B4F68_de(f64 vol, f64 tgt, s32 count, u16 *ratel)
    mixer, appending an update to the control list, resetting or starting the filter, setting its
    source, and otherwise passing the parameter down to the source. The parameter identifiers are
    the cartridge's own 1, 3, 4 and 9. */
-s32 func_802B51B8_de(void *filter, s32 paramID, void *param)
+s32 alEnvmixerParam(void *filter, s32 paramID, void *param)
 {
     ALFilter_s *f = (ALFilter_s *)filter;
     ALEnvMixer *e = (ALEnvMixer *)filter;
@@ -443,7 +443,7 @@ f64 frexp(f64 arg0, s32 *arg2) {
     return value;
 }
 
-f64 func_802B53B4_de(f64 value, s32 shift) {
+f64 _ldexpf(f64 value, s32 shift) {
     if (shift != 0) {
         value = value * (f64)(1 << shift);
     }

@@ -6,9 +6,9 @@
 #include "sdk/OS_2/802BD950_2.H"
 #include "sdk/os_pif.h"
 
-extern u32 func_802B8C40_de(u32 arg0);
+extern u32 __osContAddressCrc(u32 arg0);
 
-void func_802B8AA0_de(s32 channel, s32 blockAddress, u8 *inputData) {
+void __osPackRamWriteData(s32 channel, s32 blockAddress, u8 *inputData) {
     Block40 packet;
     u8 *dst;
     s32 i;
@@ -23,7 +23,7 @@ void func_802B8AA0_de(s32 channel, s32 blockAddress, u8 *inputData) {
     packet.bytes[1] = 0x23;
     packet.bytes[2] = 1;
     packet.bytes[3] = 3;
-    checksum = func_802B8C40_de(blockAddress & 0xFFFF);
+    checksum = __osContAddressCrc(blockAddress & 0xFFFF);
     shifted = blockAddress << 5;
     *(u16 *)&packet.bytes[4] = (checksum & 0xFF) | shifted;
     packet.bytes[0x26] = tail;

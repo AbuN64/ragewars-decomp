@@ -11,16 +11,16 @@
 #include "sdk/OS_2/802BC630_3.H"
 #include "sdk/OS_2/802BECB0.H"
 
-void func_802B768C_de(void);
+void __osPackReadData(void);
 
-s32 func_802B7560_de(s32 completionQueue) {
+s32 osContStartReadData(s32 completionQueue) {
     s32 result;
     u8 *p;
 
     func_802B9C14_de();
     p = &D_8014D4B0;
     if (*p != 1) {
-        func_802B768C_de();
+        __osPackReadData();
         __osSiRawStartDma(1, &D_8014D470);
         osRecvMesg(completionQueue, 0, 1);
     }
@@ -30,13 +30,13 @@ s32 func_802B7560_de(s32 completionQueue) {
     return result;
 }
 
-extern void func_802B7A20_de(s32 arg0);
+extern void __osPackRequestData(s32 arg0);
 
-extern void func_802B7AD8_de(s32 *arg0, s32 arg1);
+extern void __osContGetInitData(s32 *arg0, s32 arg1);
 
-void func_802B784C_de(void);
+void __osPackResetData(void);
 
-void func_802B75F4_de(ContPad *data) {
+void osContGetReadData(ContPad *data) {
     u8 *ptr = (u8 *)&D_8014D470;
     u8 *count = D_8014D46C;
     ContReadFormat readformat;
@@ -55,7 +55,7 @@ void func_802B75F4_de(ContPad *data) {
 }
 
 
-void func_802B768C_de(void) {
+void __osPackReadData(void) {
     ContReadFormat readformat;
     u8 *ptr;
     u8 *count;
@@ -83,7 +83,7 @@ void func_802B768C_de(void) {
     *ptr = 0xFE;
 }
 
-s32 func_802B7740_de(s32 arg0, s32 controllerStatus) {
+s32 osContReset(s32 arg0, s32 controllerStatus) {
     s32 output;
     s32 result;
     u8 *state;
@@ -95,20 +95,20 @@ s32 func_802B7740_de(s32 arg0, s32 controllerStatus) {
     if (*state != sentinel) {
         char *data;
 
-        func_802B784C_de();
+        __osPackResetData();
         data = &D_8014D470;
         __osSiRawStartDma(1, data);
         osRecvMesg(arg0, 0, 1);
         __osSiRawStartDma(0, data);
         osRecvMesg(arg0, 0, 1);
-        func_802B7A20_de(sentinel);
+        __osPackRequestData(sentinel);
         __osSiRawStartDma(1, data);
         osRecvMesg(arg0, 0, 1);
         *state = sentinel;
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     osRecvMesg(arg0, 0, 1);
-    func_802B7AD8_de(&output, controllerStatus);
+    __osContGetInitData(&output, controllerStatus);
     func_802B9C80_de();
     return result;
 }
@@ -118,7 +118,7 @@ s32 func_802B7740_de(s32 arg0, s32 controllerStatus) {
 extern void func_802BB6C0_de(void *arg0, u64 arg1, u64 arg2, void *arg3, void *arg4);
 
 
-void func_802B784C_de(void) {
+void __osPackResetData(void) {
     OSPifRam *ram = (OSPifRam *)&D_8014D470;
     s32 var_v0;
     u8 *var_v1;
@@ -136,7 +136,7 @@ void func_802B784C_de(void) {
     *var_v1 = 0xFE;
 }
 
-s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
+s32 osContInit(s32 arg0, s32 *arg1, s32 arg2) {
     s32 sp20[8];
     s32 sp40[6];
     s32 sp58[2];
@@ -155,12 +155,12 @@ s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
         osRecvMesg(sp40, (s32)sp58, 1);
     }
     D_8014D46C[0] = 4;
-    func_802B7A20_de(0);
+    __osPackRequestData(0);
     __osSiRawStartDma(1, &D_8014D470);
     osRecvMesg(arg0, (s32)sp58, 1);
     result = __osSiRawStartDma(0, &D_8014D470);
     osRecvMesg(arg0, (s32)sp58, 1);
-    func_802B7AD8_de(arg1, arg2);
+    __osContGetInitData(arg1, arg2);
     D_8014D4B0 = 0;
     func_802B9BC0_de();
     osCreateMesgQueue(&D_801471C0, (s32)&D_801471D8, 1);

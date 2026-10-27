@@ -9,7 +9,7 @@
 
 
 
-s32 func_802B7B90_de(void *bufPtr, u64 size) {
+s32 osDpSetNextBuffer(void *bufPtr, u64 size) {
     if (__osDpDeviceBusy()) {
         return -1;
     }

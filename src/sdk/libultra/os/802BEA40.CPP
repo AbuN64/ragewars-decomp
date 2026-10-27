@@ -21,13 +21,13 @@ static inline void create_access_queue(void) {
     osSendMesg(&D_8014EA58, 0, 0);
 }
 
-void func_802B9950_de(void) {
+void __osPiCreateAccessQueue(void) {
     D_800D83C0[0] = 1;
     osCreateMesgQueue(&D_8014EA58, &D_8014EA50, 1);
     osSendMesg(&D_8014EA58, 0, 0);
 }
 
-void func_802B99A4_de(void) {
+void __osPiGetAccess(void) {
     OSMesg token;
 
     if (!D_800D83C0[0]) {

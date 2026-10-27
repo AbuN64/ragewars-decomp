@@ -41,13 +41,13 @@ extern void alLoadNew(ALLoadFilter *, ALDMANew, ALHeap *);
    /* alLoadNew */
 
                    /* alLoadParam */
-extern void func_802B450C_de(ALResampler *, ALHeap *);
+extern void alResampleNew(ALResampler *, ALHeap *);
 
               /* alResampleNew */
-extern s32 func_802B5730_de(void *, s32, void *);
+extern s32 alResampleParam(void *, s32, void *);
 
                    /* alResampleParam */
-extern void func_802B45DC_de(ALEnvMixer4C *, ALHeap *);
+extern void alEnvmixerNew(ALEnvMixer4C *, ALHeap *);
 
                /* alEnvmixerNew */
 
@@ -118,13 +118,13 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
         pv->vvoice = 0;
 
         alLoadNew(&pv->decoder, drvr->dma, hp);
-        func_802BEAA4_de(&pv->decoder, 1, 0); /* AL_FILTER_SET_SOURCE */
+        alLoadParam(&pv->decoder, 1, 0); /* AL_FILTER_SET_SOURCE */
 
-        func_802B450C_de(&pv->resampler, hp);
-        func_802B5730_de(&pv->resampler, 1, &pv->decoder);
+        alResampleNew(&pv->resampler, hp);
+        alResampleParam(&pv->resampler, 1, &pv->decoder);
 
-        func_802B45DC_de(&pv->envmixer, hp);
-        func_802B51B8_de(&pv->envmixer, 1, &pv->resampler);
+        alEnvmixerNew(&pv->envmixer, hp);
+        alEnvmixerParam(&pv->envmixer, 1, &pv->resampler);
 
         func_802B3EDC_de(drvr->auxBus, 2, &pv->envmixer);
 

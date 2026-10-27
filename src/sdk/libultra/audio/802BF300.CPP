@@ -12,7 +12,7 @@
 extern __OSViContext_func_802BA910_de *D_800D8440;
 extern __OSViContext_func_802BA910_de *D_800D4414;
 
-void func_802BA210_de(void)
+void __osViInit(void)
 {
     __OSViContext_func_802BA910_de *contexts = D_800D43B0;
     s32 tv_type;
@@ -37,7 +37,7 @@ void func_802BA210_de(void)
     while (IO_READ_WORD(0xA4400010U) > 10) {
     }
     IO_WRITE(0xA4400000U, 0);
-    func_802BA910_de();
+    __osViSwapContext();
 }
 
 #if defined(VERSION_EU_X)

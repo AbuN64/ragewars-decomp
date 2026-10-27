@@ -11,7 +11,7 @@
 
 /* Takes the access token from the message queue D_8014EA78, first creating that one-message queue
    over D_8014EA70 with osCreateMesgQueue and seeding it with a null message through func_802BB420_de
-   when D_800D83D0 says it does not exist yet. Adapted from func_802B99A4_de with the queue, its buffer and its flag changed. */
+   when D_800D83D0 says it does not exist yet. Adapted from __osPiGetAccess with the queue, its buffer and its flag changed. */
 
 
 

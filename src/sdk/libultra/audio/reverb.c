@@ -62,7 +62,7 @@ s32 alMainBusParam(ALAuxBus_s *bus, s32 param, ALFilter_s14 *source) {
 
     /* 1 / UNITY_PITCH */
 
-Acmd *func_802B5570_de(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleOffset, Acmd *p)
+Acmd *alResamplePull(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleOffset, Acmd *p)
 {
     ALResampler_s *f = filter;
     Acmd *ptr = p;
@@ -108,7 +108,7 @@ Acmd *func_802B5570_de(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleO
 }
 
 /** Apply a control message to this node and forward handled messages. */
-s32 func_802B5730_de(void *resampler, s32 parameterId, s32 parameterValue) {
+s32 alResampleParam(void *resampler, s32 parameterId, s32 parameterValue) {
     void *node = resampler;
     void *target;
     void (*callback)(void *, s32, s32);
@@ -174,7 +174,7 @@ s32 func_802B5730_de(void *resampler, s32 parameterId, s32 parameterValue) {
 }
 
  /* _saveBuffer */
-Acmd *func_802B57F0_de(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     struct ALFx *r = filter;

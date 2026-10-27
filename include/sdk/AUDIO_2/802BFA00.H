@@ -2,5 +2,5 @@
 #define SDK_AUDIO_2_802BFA00_H
 #include "acmd.h"
 #include "TYPES.H"
-extern void func_802BA910_de();
+extern void __osViSwapContext();
 #endif

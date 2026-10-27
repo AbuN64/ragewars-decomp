@@ -2,5 +2,5 @@
 #define SDK_AUDIO_2_802BF300_H
 #include "acmd.h"
 #include "TYPES.H"
-extern void func_802BA210_de(void);
+extern void __osViInit(void);
 #endif

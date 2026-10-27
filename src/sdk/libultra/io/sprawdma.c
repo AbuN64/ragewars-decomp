@@ -9,7 +9,7 @@
 #include "AUDIO_3/802BFD40.H"
 
 
-s32 func_802B9FD0_de(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
+s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
     if (deviceAddress & 7) {
         Audio_Assert(&D_800C79B0_de, &s_sprawdmaText, 0x3A);
     }

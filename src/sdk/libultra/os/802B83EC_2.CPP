@@ -5,13 +5,13 @@
 #include "sdk/OS_2/802B83EC_2.H"
 #include "sdk/os_pif.h"
 
-/* Packs one controller-pak read command for a given address into the PIF RAM block D_80154110 after skipping one zero byte per preceding channel, with its data bytes set to 0xFF and the end marker after it (libultra __osPackRamReadData). Adapted from func_802B8AA0_de with the command bytes changed to a read and the data bytes filled with 0xFF instead of copied. */
+/* Packs one controller-pak read command for a given address into the PIF RAM block D_80154110 after skipping one zero byte per preceding channel, with its data bytes set to 0xFF and the end marker after it (libultra __osPackRamReadData). Adapted from __osPackRamWriteData with the command bytes changed to a read and the data bytes filled with 0xFF instead of copied. */
 
 
 
-extern u32 func_802B8C40_de(u32 arg0);
+extern u32 __osContAddressCrc(u32 arg0);
 
-void func_802B86F0_de(s32 channel, s32 blockAddress) {
+void __osPackRamReadData(s32 channel, s32 blockAddress) {
     Block40 packet;
     u8 *dst;
     s32 i;
@@ -26,7 +26,7 @@ void func_802B86F0_de(s32 channel, s32 blockAddress) {
     packet.bytes[1] = 3;
     packet.bytes[2] = 0x21;
     packet.bytes[3] = 2;
-    checksum = func_802B8C40_de(blockAddress & 0xFFFF);
+    checksum = __osContAddressCrc(blockAddress & 0xFFFF);
     shifted = blockAddress << 5;
     *(u16 *)&packet.bytes[4] = (checksum & 0xFF) | shifted;
     packet.bytes[0x26] = tail;

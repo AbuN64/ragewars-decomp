@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-extern void func_802B784C_de();
+extern void __osPackResetData();
 #endif

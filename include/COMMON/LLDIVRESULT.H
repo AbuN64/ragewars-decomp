@@ -19,7 +19,7 @@ extern s64 Libc_SignedRemainder(s64, s64) __attribute__((const));
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
+extern Acmd *alRaw16Pull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
 
 

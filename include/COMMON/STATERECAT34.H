@@ -80,8 +80,8 @@ extern void func_8025E150_de(void);
 extern void func_8025E1EC_de(s32 arg0);
 
 struct ALWaveTable_s;
-extern s32 func_802BEAA4_de(void *, s32, struct ALWaveTable_s *);
-extern s32 func_802B51B8_de(void *, s32, void *);
+extern s32 alLoadParam(void *, s32, struct ALWaveTable_s *);
+extern s32 alEnvmixerParam(void *, s32, void *);
 
 struct ContextRecAt2BC0;
 extern s32 Audio_PlaySoundAtPosition(struct ContextRecAt2BC0 *, s32, CVector3, s32, s32);

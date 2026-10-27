@@ -25,7 +25,7 @@
 
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern u32 func_802B8880_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite);
+extern u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite);
 
 static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)
 {
@@ -81,7 +81,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
             temp[i] = ~temp[i];
         }
 
-        ret = func_802B8880_de(pfs->queue, pfs->channel, 0, temp, 0);
+        ret = __osContRamWrite(pfs->queue, pfs->channel, 0, temp, 0);
         if (ret != 0)
             return ret;
         ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, comp);
@@ -132,7 +132,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     index[3] = 6;
 
     for (i = 0; i < 4; i++) {
-        ret = func_802B8880_de(pfs->queue, pfs->channel, index[i], (u8 *)newid, 1);
+        ret = __osContRamWrite(pfs->queue, pfs->channel, index[i], (u8 *)newid, 1);
         if (ret != 0)
             return ret;
     }
@@ -200,7 +200,7 @@ s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp)
 
     for (j = 0; j < 4; j++) {
         if (j != i) {
-            ret = func_802B8880_de(pfs->queue, pfs->channel, index[j], (u8 *)temp, 1);
+            ret = __osContRamWrite(pfs->queue, pfs->channel, index[j], (u8 *)temp, 1);
             if (ret != 0)
                 return ret;
         }
@@ -333,8 +333,8 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
         addr = ((u8 *)inode->inode_page + j * 32);
 
         if (flag == 1) {
-            ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr, 0);
-            ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr, 0);
+            ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr, 0);
+            ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr, 0);
         } else {
             ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr);
         }
@@ -358,12 +358,12 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
 
             for (j = 0; j < 8; j++) {
                 addr = ((u8 *)inode->inode_page + j * 32);
-                ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr, 0);
+                ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr, 0);
             }
         } else {
             for (j = 0; j < 8; j++) {
                 addr = ((u8 *)inode->inode_page + j * 32);
-                ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr, 0);
+                ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr, 0);
             }
         }
     }
@@ -448,7 +448,7 @@ s32 Pfs_SelectActiveBank(OSPfs *pfs)
     for (i = 0; i < 32; i++) {
         name[i] = pfs->activebank;
     }
-    return func_802B8880_de(pfs->queue, pfs->channel, 0x400, name, 0);
+    return __osContRamWrite(pfs->queue, pfs->channel, 0x400, name, 0);
 }
 
 #if defined(VERSION_US)

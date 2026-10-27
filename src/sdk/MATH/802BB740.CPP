@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_2.H"
 
 void func_802B6CBC_de(f32 *arg0, s32 *arg1);
-void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
+void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];
     f32 (*matrixPointer)[4] = matrix;

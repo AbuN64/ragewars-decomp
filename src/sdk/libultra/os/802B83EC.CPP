@@ -23,7 +23,7 @@ u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *out
     retries = 2;
     func_802B9C14_de();
     D_8014D4B0 = 2;
-    func_802B86F0_de(channel, blockAddress & 0xFFFF);
+    __osPackRamReadData(channel, blockAddress & 0xFFFF);
     __osSiRawStartDma(1, (u8 *)&D_80154110);
     osRecvMesg(completionQueue, 0, 1);
     do {

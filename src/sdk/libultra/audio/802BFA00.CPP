@@ -13,7 +13,7 @@ extern __OSViContext_func_802BA910_de *D_800D8440;
 extern __OSViContext_func_802BA910_de *D_800D4414;
  /* 2^32 */
  /* 2^31 */
-void func_802BA910_de(void)
+void __osViSwapContext(void)
 {
     register Modep *vm;
     register __OSViContext_func_802BA910_de *vc;

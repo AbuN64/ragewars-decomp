@@ -3,6 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-extern void func_802B75F4_de(ContPad *data);
-extern void func_802B768C_de();
+extern void osContGetReadData(ContPad *data);
+extern void __osPackReadData();
 #endif

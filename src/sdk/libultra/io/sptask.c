@@ -20,14 +20,14 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-OSTask *func_802B9D90_de(OSTask *intp);
+OSTask *_VirtualToPhysicalTask(OSTask *intp);
 
 
 extern void func_802BD280_de(OSTask *, s32);
 
 
 
-OSTask *func_802B9D90_de(OSTask *intp)
+OSTask *_VirtualToPhysicalTask(OSTask *intp)
 {
     OSTask *tp;
     OSTask *task = &D_80148800;
@@ -43,11 +43,11 @@ OSTask *func_802B9D90_de(OSTask *intp)
     return tp;
 }
 
-void func_802B9E78_de(OSTask *intp) {
+void osSpTaskLoad(OSTask *intp) {
     OSTask *block;
     s32 result;
 
-    block = func_802B9D90_de(intp);
+    block = _VirtualToPhysicalTask(intp);
     if (block->t.flags & 1) {
         block->t.ucode_data = block->t.yield_data_ptr;
         block->t.ucode_data_size = block->t.yield_data_size;
@@ -62,12 +62,12 @@ void func_802B9E78_de(OSTask *intp) {
         result = func_802BA0D0_de(0x04001000);
     } while (result == -1);
     do {
-        result = func_802B9FD0_de(1, 0x04000FC0, (s32)block, 0x40);
+        result = __osSpRawStartDma(1, 0x04000FC0, (s32)block, 0x40);
     } while (result == -1);
     while (__osSpDeviceBusy() != 0) {
     }
     do {
-        result = func_802B9FD0_de(1, 0x04001000, (s32)block->t.ucode_boot, block->t.ucode_boot_size);
+        result = __osSpRawStartDma(1, 0x04001000, (s32)block->t.ucode_boot, block->t.ucode_boot_size);
     } while (result == -1);
 }
 

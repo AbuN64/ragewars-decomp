@@ -18,8 +18,8 @@
 extern u8 D_8010BBB8;
 extern char D_8010FC00;
 extern ContPad D_8010AEA0[4];
-extern void func_802B7538_de(void *);
-extern void func_802B7740_de(void *, void *);
+extern void osContGetQuery(void *);
+extern void osContReset(void *, void *);
 void Control_ReadControllerStates(void) {
     ControllerProfile *summary;
     s32 i;
@@ -28,7 +28,7 @@ void Control_ReadControllerStates(void) {
     switch (D_8010BBB8) {
     case 0:
         osRecvMesg((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
-        func_802B75F4_de(D_8010AEA0);
+        osContGetReadData(D_8010AEA0);
         D_8010B0E0.port = -1;
         D_8010B0E0.connected = 0;
         D_8010B0E0.stickX = 0;
@@ -76,7 +76,7 @@ void Control_ReadControllerStates(void) {
         break;
     case 1:
         osRecvMesg((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
-        func_802B7538_de(D_8010BBE0);
+        osContGetQuery(D_8010BBE0);
         for (i = 0; i < 4; i++) {
             Control_RefreshControllerConnection(&D_8010F328[i]);
         }
@@ -84,15 +84,15 @@ void Control_ReadControllerStates(void) {
     case 2:
         break;
     case 3:
-        func_802B7740_de(&D_8010FC00, D_8010BBE0);
+        osContReset(&D_8010FC00, D_8010BBE0);
         break;
     }
 }
 
 /* Polls the controller paks when they are enabled: after Rumble_RecycleFinishedEffectNodes it tries to take the pak lock
  * D_8010FBC0 without blocking and, holding it, refreshes the four pak entries through Control_UpdateControllerRumble and
- * advances the pak state (state 0 opens the pak through func_802B74B0_de once Control_IsAnyControllerPakEnabled detects it,
- * otherwise closes it through func_802B7560_de; states 1 to 3 reset to 0 and close it), then releases the
+ * advances the pak state (state 0 opens the pak through osContStartQuery once Control_IsAnyControllerPakEnabled detects it,
+ * otherwise closes it through osContStartReadData; states 1 to 3 reset to 0 and close it), then releases the
  * lock. */
 
 extern u8 D_800CBC10;
@@ -100,8 +100,8 @@ extern char D_8010EC90;
 
 
 extern void Control_UpdateControllerRumble(void *);
-extern void func_802B74B0_de(void *);
-extern void func_802B7560_de(void *);
+extern void osContStartQuery(void *);
+extern void osContStartReadData(void *);
 
 void Control_PollControllerPaks(void) {
     s32 locked;
@@ -121,16 +121,16 @@ void Control_PollControllerPaks(void) {
             case 0:
                 if (Control_IsAnyControllerPakEnabled() != 0) {
                     D_8010BBB8 = 1;
-                    func_802B74B0_de(&D_8010FC00);
+                    osContStartQuery(&D_8010FC00);
                 } else {
-                    func_802B7560_de(&D_8010FC00);
+                    osContStartReadData(&D_8010FC00);
                 }
                 break;
             case 1:
             case 2:
             case 3:
                 D_8010BBB8 = 0;
-                func_802B7560_de(&D_8010FC00);
+                osContStartReadData(&D_8010FC00);
                 break;
             }
             D_800CBC1C = -1;

@@ -15,7 +15,7 @@
 #include "TYPES.H"
 #include "stdarg.h"
 unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value);
-void func_802BD974_de(_Pft *px, va_list *pap, int code, unsigned char *ac);
+void _Putfld(_Pft *px, va_list *pap, int code, unsigned char *ac);
 extern u8 D_800C7AF0_de;
 extern u8 D_800C7B10_de;
 extern const char D_800D52B0[];
@@ -94,7 +94,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             x.qual = 0x4C;
             ++s;
         }
-        func_802BD974_de(&x, &ap, *s, ac);
+        _Putfld(&x, &ap, *s, ac);
         x.width -= x.n0 + x.nz0 + x.n1 + x.nz1 + x.n2 + x.nz2;
         if (!(x.flags & 4)) {
             PRINTF_PAD(32, D_800D52B0, x.width);
@@ -117,7 +117,7 @@ extern size_t func_802BD400_de(const unsigned char *s);
 extern void Libc_FormatInteger(_Pft *px, unsigned char code);
 
 
-void func_802BD974_de(_Pft *px, va_list *pap, int code, unsigned char *ac)
+void _Putfld(_Pft *px, va_list *pap, int code, unsigned char *ac)
 {
     px->n0 = px->nz0 = px->n1 = px->nz1 = px->n2 =
         px->nz2 = 0;
@@ -201,7 +201,7 @@ case_e:
         ac[px->n0++] = ' ';
 
     px->s = (unsigned char *)&ac[px->n0];
-    func_802BE0C0_de(px, (unsigned char)code);
+    _Ldtob(px, (unsigned char)code);
     return;
 case_n:
     if (px->qual == 'h') {

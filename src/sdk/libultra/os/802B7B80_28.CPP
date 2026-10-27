@@ -11,8 +11,8 @@ extern OSPifRam D_8014D5E0[4];
 extern u8 D_8014D6E0[32];
 extern s32 D_800D8380[4];
 extern s32 func_802B84C0_de(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
-extern s32 func_802B8880_de(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
-extern u8 func_802B8C40_de(u16 address);
+extern s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
+extern u8 __osContAddressCrc(u16 address);
 static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam *mdata)
 {
     u8 *ptr = (u8 *)mdata->ramarray;
@@ -26,7 +26,7 @@ static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam
     ramreadformat.txsize = 35;
     ramreadformat.rxsize = 1;
     ramreadformat.cmd = 3;
-    ramreadformat.address = (address << 0x5) | func_802B8C40_de(address);
+    ramreadformat.address = (address << 0x5) | __osContAddressCrc(address);
     ramreadformat.datacrc = 0xFF;
     for (i = 0; i < ((s32)(sizeof(ramreadformat.data) / sizeof(ramreadformat.data[0]))); i++) {
         ramreadformat.data[i] = *buffer++;
@@ -54,9 +54,9 @@ s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
     for (i = 0; i < ((s32)(sizeof(temp) / sizeof(temp[0]))); i++) {
         temp[i] = 254;
     }
-    ret = func_802B8880_de(mq, channel, 0x400, temp, 0);
+    ret = __osContRamWrite(mq, channel, 0x400, temp, 0);
     if (ret == 2) {
-        ret = func_802B8880_de(mq, channel, 0x400, temp, 0);
+        ret = __osContRamWrite(mq, channel, 0x400, temp, 0);
     }
     if (ret != 0) {
         return ret;
@@ -74,9 +74,9 @@ s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
     for (i = 0; i < ((s32)(sizeof(temp) / sizeof(temp[0]))); i++) {
         temp[i] = 128;
     }
-    ret = func_802B8880_de(mq, channel, 0x400, temp, 0);
+    ret = __osContRamWrite(mq, channel, 0x400, temp, 0);
     if (ret == 2) {
-        ret = func_802B8880_de(mq, channel, 0x400, temp, 0);
+        ret = __osContRamWrite(mq, channel, 0x400, temp, 0);
     }
     if (ret != 0) {
         return ret;

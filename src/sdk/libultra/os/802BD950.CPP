@@ -9,7 +9,7 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
-/* Writes a 32-byte block to a controller pak address through the PIF RAM, re-reading the reply up to three times until the data CRC matches, and returns 0, 1 for no pak, 4 for a CRC failure or the pak status error (libultra __osContRamWrite). Adapted from func_802B84C0_de with the read command 2 changed to the write command 3 packed by func_802B8AA0_de, a guard returning 0 for label-area addresses below 7 unless forced, the CRC taken over the caller's buffer with no copy back, and the DMA results assigned to the result as libultra does. */
+/* Writes a 32-byte block to a controller pak address through the PIF RAM, re-reading the reply up to three times until the data CRC matches, and returns 0, 1 for no pak, 4 for a CRC failure or the pak status error (libultra __osContRamWrite). Adapted from func_802B84C0_de with the read command 2 changed to the write command 3 packed by __osPackRamWriteData, a guard returning 0 for label-area addresses below 7 unless forced, the CRC taken over the caller's buffer with no copy back, and the DMA results assigned to the result as libultra does. */
 
 
 
@@ -18,7 +18,7 @@
 extern u32 __osPfsGetStatus(s32 arg0, s32 arg1);
 
 
-u32 func_802B8880_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite) {
+u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite) {
     Block40 saved;
     u8 *source;
     s32 i;
@@ -31,7 +31,7 @@ u32 func_802B8880_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inp
     }
     func_802B9C14_de();
     D_8014D4B0 = 3;
-    func_802B8AA0_de(channel, blockAddress & 0xFFFF, inputData);
+    __osPackRamWriteData(channel, blockAddress & 0xFFFF, inputData);
     result = __osSiRawStartDma(1, (u8 *)&D_80154110);
     osRecvMesg(completionQueue, 0, 1);
     do {

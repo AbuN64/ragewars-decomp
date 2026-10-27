@@ -49,7 +49,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     nframes = (tsam + 16 - 1) >> 4;
     nbytes = nframes * 9;
     if (looped) {
-        ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
         if (f->lastsam)
             *outp += (f->lastsam << 1);
         else
@@ -70,7 +70,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
             if (tsam < 0) tsam = 0;
             nframes = (tsam + 16 - 1) >> 4;
             nbytes = nframes * 9;
-            ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
+            ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
             aDMEMMove(ptr++, op + (f->lastsam << 1), bEnd, nSam << 1);
         }
         f->lastsam = (outCount + f->lastsam) & 0xf;
@@ -88,7 +88,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     nbytes -= overFlow;
     if ((nOver - (nOver & 0xf)) < outCount) {
         decoded = 1;
-        ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
         if (f->lastsam)
             *outp += (f->lastsam << 1);
         else
@@ -157,7 +157,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 
     if (looped) {
 
-        ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, *outp, inp, f->first);
 
         if (f->lastsam)
             *outp += (f->lastsam << 1);
@@ -186,7 +186,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
             if (tsam < 0) tsam = 0;
             nframes = (tsam + 16 - 1) >> 4;
             nbytes = nframes * 9;
-            ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
+            ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, tsam, nbytes, op, inp, f->first | 0x02);
 
             aDMEMMove(ptr++, op + (f->lastsam << 1), bEnd, nSam << 1);
         }
@@ -210,7 +210,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 
     if ((nOver - (nOver & 0xf)) < outCount) {
         decoded = 1;
-        ptr = func_802BEC34_de(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, (ALLoadFilter48_2 *)f, nSam - nOver, nbytes, *outp, inp, f->first);
 
         if (f->lastsam)
             *outp += (f->lastsam << 1);
@@ -287,7 +287,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
     if (looped){
 
-        ptr = func_802BEC34_de(ptr, f, tsam, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, f, tsam, nbytes, *outp, inp, f->first);
 
         
         if (f->lastsam)
@@ -322,7 +322,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
             if (tsam<0) tsam = 0;
             nframes = (tsam+16-1)>>4;
             nbytes =  nframes*9;
-            ptr = func_802BEC34_de(ptr, f, tsam, nbytes, op, inp, f->first | 2);
+            ptr = _decodeChunk(ptr, f, tsam, nbytes, op, inp, f->first | 2);
             
             aDMEMMove(ptr++, op+(f->lastsam<<1), bEnd, nSam<<1);
 
@@ -351,7 +351,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
     if ((nOver - (nOver & 0xf))< outCount){
         decoded = 1;
-        ptr = func_802BEC34_de(ptr, f, nSam - nOver, nbytes, *outp, inp, f->first);
+        ptr = _decodeChunk(ptr, f, nSam - nOver, nbytes, *outp, inp, f->first);
     
         if (f->lastsam)
             *outp += (f->lastsam<<1);
@@ -381,7 +381,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 }
 #endif
 
-/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at D_800D9360 through func_802C016C_de and func_802BD280_de whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from func_802BE514_de (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to D_800D9360. */
+/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at D_800D9360 through func_802C016C_de and func_802BD280_de whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from alRaw16Pull (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to D_800D9360. */
 extern s32 func_802C016C_de();
 
 extern void func_802BD280_de(s32 buffer, s32 size);
@@ -389,7 +389,7 @@ extern void func_802BD280_de(s32 buffer, s32 size);
 /* alRaw16Pull, drafted from ultralib src/audio/load.c: DMA raw 16-bit samples into DMEM at 8-byte
    alignment for the requested output count, restarting from the loop start and merging the
    sections in DMEM when the count crosses the loop end, and clearing what runs past the table. */
-Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alRaw16Pull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s32 nbytes;
@@ -536,7 +536,7 @@ Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 samp
  /* alRaw16Pull */
  /* the type 2 pull handler */
 
-s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
+s32 alLoadParam(void *filter, s32 paramID, struct ALWaveTable_s *param)
 {
     ALLoadFilter48_2 *a = (ALLoadFilter48_2 *)filter;
     ALFilter_s14 *f = (ALFilter_s14 *)filter;
@@ -608,7 +608,7 @@ s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
 /* _decodeChunk, libultra's ADPCM chunk decoder called by alAdpcmPull (alAdpcmPull): DMA the next
    ADPCM bytes into DMEM aligned down to 8 bytes, set the loop state when looping, and queue the ADPCM
    decode of tsam samples. */
-Acmd *func_802BEC34_de(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)
+Acmd *_decodeChunk(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)
 {
     s32 dramAlign, dramLoc;
 

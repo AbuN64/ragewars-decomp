@@ -38,7 +38,7 @@ extern s32 readVarLen(struct ALSeq_s *arg0);
 extern void func_802B31F0_de(s32 *arg0);
 
 #include "COMMON/ALPARAM_S.H"
-extern void func_802B468C_de(AudioLowPassFilter *lp);
+extern void init_lpfilter(AudioLowPassFilter *lp);
 
 extern int __osDpDeviceBusy();
 

@@ -141,7 +141,7 @@ void func_802B6CBC_de(f32 *floatMatrix, s32 *fixedMatrix) {
     } while (i < 4);
 }
 
-void func_802B6D54_de(f32 *floatMatrix, s32 *fixedMatrix) {
+void guMtxL2F(f32 *floatMatrix, s32 *fixedMatrix) {
     s32 *inLo;
     u32 *inHi;
     f32 *outRow;

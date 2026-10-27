@@ -5,7 +5,7 @@
 #include "sdk/PRINTF/802C31B0.H"
 
 /* This hook intentionally ignores both supplied words. */
-void func_802BE0C0_de(void *unused_state, unsigned char unused_code)
+void _Ldtob(void *unused_state, unsigned char unused_code)
 {
 }
 

@@ -22,7 +22,7 @@ s32 func_802BC36C_de(s32 *, s32);
 extern void *D_800D5270;
 
 
-void func_802BBC20_de(void)
+void osYieldThread(void)
 {
   void *savedInterruptMask;
   s32 *new_var2;

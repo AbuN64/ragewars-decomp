@@ -126,7 +126,7 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 
 
 
-extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
+extern s32 __osContRamWrite(void *queue, int channel, u16 address, u8 *buffer, int force);
 
 s32 osPfsChecker(OSPfs *pfs)
 {
@@ -201,7 +201,7 @@ Pfs_CountPageReferences
                     if (ret != 0)
                         return ret;
                 }
-                ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir, 0);
+                ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir, 0);
                 if (ret != 0)
                     return ret;
                 fixed++;
@@ -220,7 +220,7 @@ Pfs_CountPageReferences
                     if (ret != 0)
                         return ret;
                 }
-                ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir, 0);
+                ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir, 0);
                 if (ret != 0)
                     return ret;
                 fixed++;

@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
-extern void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2);
+extern void __osPackRamWriteData(s32 arg0, s32 arg1, u8 *arg2);
 #endif

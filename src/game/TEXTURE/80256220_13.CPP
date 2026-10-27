@@ -39,7 +39,7 @@ extern void *alAudioFrame(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
 
 extern void Sched_SendSchedulerTask(void *arg0, void *arg1);
 
-extern void func_802B7400_de(void *arg0, s32 arg1);
+extern void osAiSetNextBuffer(void *arg0, s32 arg1);
 
 void func_80256C90_de(void) {
     u32 stop, argument, frame;
@@ -110,7 +110,7 @@ s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
     D_800CB708 ^= 1;
     func_8025E23C_de();
     osRecvMesg(&D_80107E80, &event, 1);
-    func_802B7400_de(audioTask->owner, audioTask->id << 2);
+    osAiSetNextBuffer(audioTask->owner, audioTask->id << 2);
     return 1;
   }
   if (completed || audioTask->id)

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "sdk/os_pif.h"
 
-/* Clears the controller PIF RAM block, sets its status word to execute, and packs one request-status command with the given command byte per controller followed by the end marker (libultra __osPackRequestData). Adapted from func_802B768C_de with the request format and command argument changed, the clearing loop counting up and the status word written through a local pointer to the PIF RAM block. */
+/* Clears the controller PIF RAM block, sets its status word to execute, and packs one request-status command with the given command byte per controller followed by the end marker (libultra __osPackRequestData). Adapted from __osPackReadData with the request format and command argument changed, the clearing loop counting up and the status word written through a local pointer to the PIF RAM block. */
 
 
 
@@ -13,7 +13,7 @@
 
 
 
-void func_802B7A20_de(u8 cmd) {
+void __osPackRequestData(u8 cmd) {
     u8 *ptr;
     __OSContRequesFormat requestformat;
     s32 i;
@@ -43,7 +43,7 @@ void func_802B7A20_de(u8 cmd) {
     *ptr = 0xFE;
 }
 
-void func_802B7AD8_de(u8 *valid, EntryRecAt3 *data) {
+void __osContGetInitData(u8 *valid, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

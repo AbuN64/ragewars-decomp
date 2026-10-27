@@ -20,7 +20,7 @@
 
 
 
-extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
+extern s32 __osContRamWrite(void *queue, int channel, u16 address, u8 *buffer, int force);
 
 s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
                   int file_size_in_bytes, s32 *file_no)
@@ -134,7 +134,7 @@ s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name
         for (j = 0; j < 4; j++)
             dir.ext_name[j] = *ext_name++;
 
-        ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->dir_table + *file_no, (u8 *)&dir, 0);
+        ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + *file_no, (u8 *)&dir, 0);
         if (ret != 0)
             return ret;
         return ret;
@@ -230,7 +230,7 @@ s32 __osClearPage(OSPfs *pfs, int page_no, u8 *data, u8 bank)
     if (ret != 0)
         return ret;
     for (i = 0; i < 8; i++) {
-        ret = func_802B8880_de(pfs->queue, pfs->channel, page_no * 8 + i, data, 0);
+        ret = __osContRamWrite(pfs->queue, pfs->channel, page_no * 8 + i, data, 0);
         if (ret != 0) {
             break;
         }
@@ -326,7 +326,7 @@ s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, 
     }
     dir.status = 0;
 
-    ret = func_802B8880_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir, 0);
+    ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir, 0);
 
     return ret;
 }
