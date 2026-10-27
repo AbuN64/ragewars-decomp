@@ -109,7 +109,6 @@ extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern s32 ScenarioSetup_IsCupSelected(void);
 extern void Menu_ConfigureOptionsCamera(void);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);

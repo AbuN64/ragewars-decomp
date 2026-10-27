@@ -58,10 +58,7 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 #if defined(VERSION_US)
 #include "COMMON/ITEMRECAT20V1.H"
 extern struct TextEntry D_800E381C[][17];
-extern s32 Smos_GetPreviousScreenOwner(s32);
-extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
-extern void Frontend_UpdateJoinRequestDisplay(s32);
 
 s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, s32 event) {
     s32 variant;
