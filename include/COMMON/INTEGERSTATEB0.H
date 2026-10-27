@@ -39,9 +39,6 @@ extern float D_800C54C0_de;
 struct GameSession;
 
 
-struct ObjRecV2;
-typedef struct ObjRecV2 ObjRecV2;
-
 struct IntegerState164;
 
 extern int D_800CD770;
@@ -50,8 +47,6 @@ extern int D_800CD770;
 
 
 
-
-struct ObjRecV2;
 
 
 
