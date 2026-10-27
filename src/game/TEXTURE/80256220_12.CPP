@@ -70,8 +70,6 @@ extern u8 D_801076F8[], D_800E5400[0x2800];
 extern u8 rspbootTextStart[0xD0], g_audioMicrocodeText[0x1000], D_800DC830_de[0x800];
 extern u8 D_800D8CE0[];
 extern char D_00256E6C, D_00256C90;
-s32 *func_80256E6C_de(s32 **);
-void func_80256C90_de(void);
 s32 func_802B72E0_de(u32);
 void alInit(void *, void *);
 void *func_802B0340_de(s32, s32, void *, s32, u32);

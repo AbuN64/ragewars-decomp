@@ -5,7 +5,6 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "TEXTURE/80294C64_10.H"
-struct Node80253610;
 
 #if defined(VERSION_US_REV1)
 
