@@ -97,11 +97,8 @@ void TEngine_LoadSelectedTexture(void) {
 #include "COMMON/TEXTURE_REQUEST.H"
 #include "COMMON/CHANNEL.H"
 
-struct MenuGlobalRecAt21B8;
-
 struct SelectionRecAt8;
 
-struct CCameraText_t;
 extern s32 D_8014AEC0;
 
 
