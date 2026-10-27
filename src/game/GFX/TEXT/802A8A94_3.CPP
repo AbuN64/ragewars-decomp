@@ -6,7 +6,6 @@
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "abi.h"
-struct Node80253610;
 
 /* Draws a text string in the current font style D_801376F8: when centring, measures it through Pak_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through OnScreen_DrawTextGlyphs, first as a shadow when requested. */
 

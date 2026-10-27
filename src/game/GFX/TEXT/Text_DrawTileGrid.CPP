@@ -5,7 +5,6 @@
 #include "COMMON/GFX.H"
 #include "gbi.h"
 
-struct Node80253610;
 extern Gfx *g_displayListCursor;
 
 void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
