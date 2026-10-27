@@ -35,7 +35,6 @@ extern OSMesgQueue D_800F2F40;
 extern void *D_800F2F58;
 extern OSThread_s D_800F2F60; /* host request thread */
 extern OSMesgQueue D_800F3110;
-void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
 void osStartThread(OSThread_s *thread); /* osStartThread */
 extern s32 Libsn_SendHostCommand(s32, s32, s32, s32);
