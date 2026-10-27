@@ -17,8 +17,6 @@ static inline ALVoice_s *event_voice(ALEvent *event) {
     return (ALVoice_s *)event->msg.note.voice;
 }
 
-typedef void (*Callback802B6D04)(void *arg0);
-
 extern s32 __alSeqNextDelta(void *arg0, s32 *arg1);
 
 extern s32 alSeqGetTicks(void *arg0);
