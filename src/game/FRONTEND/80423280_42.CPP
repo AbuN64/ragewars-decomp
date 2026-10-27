@@ -8,6 +8,7 @@
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "FRONTEND/80423280_42.H"
 #include "FRONTEND/80423280_8.H"
+#include "FRONTEND/RESULTS.H"
 extern ResultsOptionsScreen *D_800E4690;
 
 /* Formats the name of entry D_800E4690's word at 0xA44 into a local 0x40-byte buffer through
@@ -36,7 +37,6 @@ extern struct EntryRecAt0V1 D_800E4694[];
 
 
 
-extern struct Pair D_800E4A84[];
 
 /* Sets the byte at offset 0x10 of the two objects at offsets 0xA64 and 0xA60 of the structure D_800E4690
    points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0xA68. */

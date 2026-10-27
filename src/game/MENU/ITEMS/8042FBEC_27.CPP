@@ -1,13 +1,14 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
+#include "MULTI/SETUP.H"
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #define EUW(p, o) (*(u32 *)((u8 *)(p) + (o)))
 extern u8 D_80145040[];
-extern char D_800E20AC[], D_8015235C_eu[];
-extern s32 D_800E20A4_de[], D_800E20A8[], D_800E63C0[];
+extern char D_800E20AC[];
+extern s32 D_800E63C0[];
 extern char *D_800E3B64[];
 extern s32 Player_GetPlayerIndex();
 /* Name-entry slot update: marks the slot's flag word (offsets 0x30/0x58/0x80/0xA8 of the record at 0xC, one per slot) with bits

@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_D_DATA_800CE208_H
+#define DATA_OVL1_D_DATA_800CE208_H
+extern char D_00212088[];
+#endif

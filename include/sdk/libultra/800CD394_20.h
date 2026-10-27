@@ -1,0 +1,4 @@
+#ifndef SDK_LIBULTRA_800CD394_20_H
+#define SDK_LIBULTRA_800CD394_20_H
+extern char D_00203A94[];
+#endif

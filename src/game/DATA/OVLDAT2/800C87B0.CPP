@@ -1,53 +1,10 @@
 #include "TYPES.H"
+#include "DATA/OVL1_C/DATA_800CCBF4.H"
+#include "DATA/OVL1_D/DATA_800CE204.H"
+#include "DATA/OVL1_D/DATA_800CE208.H"
+#include "DATA/OVLDAT2/800C87B0.H"
 
 #if defined(VERSION_US)
-extern char D_0020D370[];
-extern char D_0020DC10[];
-extern char D_0020DDE0[];
-extern char D_0020EAE0[];
-extern char D_0020ED50[];
-extern char D_0020EF60[];
-extern char D_0020F2A8[];
-extern char D_0020F388[];
-extern char D_0020F444[];
-extern char D_0020F6C0[];
-extern char D_0020FA10[];
-extern char D_00210018[];
-extern char D_00210040[];
-extern char D_00210068[];
-extern char D_00210090[];
-extern char D_002100B8[];
-extern char D_00210180[];
-extern char D_00210230[];
-extern char D_00210E88[];
-extern char D_00211120[];
-extern char D_00211470[];
-extern char D_00211A7C[];
-extern char D_00212088[];
-extern char D_002123DC[];
-extern char D_00212450[];
-extern char D_00212524[];
-extern char D_002125F0[];
-extern char D_002127F4[];
-extern char D_00212828[];
-extern char D_0021290C[];
-extern char D_00212948[];
-extern char D_00212A40[];
-extern char D_00212A7C[];
-extern char D_00212BD0[];
-extern char D_00212C04[];
-extern char D_00212C90[];
-extern char D_00212CC4[];
-extern char D_00212D60[];
-extern char D_00212D94[];
-extern char D_00212E10[];
-extern char D_00212FBC[];
-extern char D_00212FE0[];
-extern char D_002131AC[];
-extern char D_002131E0[];
-extern char D_0021321C[];
-extern char D_00213500[];
-extern char D_002136EC[];
 u32 data_unresolved_800C870C_0C93B0[472] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x3F800000, 0x3F3504F3, 0x00000000, 0x3F3504F3, 0x3F800000, 0x00000000,

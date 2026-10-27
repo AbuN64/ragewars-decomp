@@ -8,6 +8,7 @@
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "sdk/PFS/80447BB0_20.H"
+#include "sdk/libultra/pfs/80447BB0_17.h"
 
 /* __osRepairPackId, drafted from ultralib src/io/contpfs.c (2.0I branch): probe how many banks the
    controller pak really has, build a fresh id from the damaged one, write it to all four id areas and

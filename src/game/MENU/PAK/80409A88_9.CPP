@@ -8,6 +8,7 @@
 extern PakPreview *D_800E28BC;
 #include "MENU/PAK/80409A88_9.H"
 #include "SYSTEM_3/80265370.H"
+#include "MENU/PAK/TIMER.H"
 
 /* Calls func_802B2378 on the word at offset 0x24 of the structure D_800E28BC points to and
    returns zero. */
@@ -22,7 +23,6 @@ extern void func_802AD2A8(s32);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800ED404_eu[];
 
 #else
 #endif

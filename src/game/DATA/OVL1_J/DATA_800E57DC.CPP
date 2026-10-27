@@ -1,11 +1,6 @@
+#include "DATA/OVL1_J/DATA_800E57DC.H"
 
 #if defined(VERSION_US_REV1)
-extern char D_004378F8[];
-extern char D_00437998[];
-extern char D_004379C8[];
-extern char D_004379F0[];
-extern char D_00437AD4[];
-extern char D_00437B10[];
 unsigned int D_auto_rodata_unresolved_800E5788_unclaimed_E63DC[21] = {
     0x00000E08, 0x0000001E, (unsigned int)D_004379F0, 0x00000E06, 0x0000001E, (unsigned int)D_004378F8, 0x00000E07, 0x0000001E,
     (unsigned int)D_004379C8, 0x00000E03, 0x0000001E, (unsigned int)D_00437998, 0x00000001, 0x0000001E, (unsigned int)D_00437B10, 0x00000002,

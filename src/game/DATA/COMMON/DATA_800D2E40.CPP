@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "DATA/COMMON/DATA_800D2E40.H"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
@@ -20,10 +21,6 @@ unsigned int rodata_unresolved_800D2E40[6] = {
 };
 #endif
 #if defined(VERSION_US)
-extern char D_800CD978_us[];
-extern char D_800CD9A0_us[];
-extern char D_800CD9B8_us[];
-extern char D_800CDA2C_us[];
 extern char D_800CDA34_de[];
 unsigned int rodata_unresolved_800D2E40[6] = {
     (unsigned int)D_800CDA34_de + 0xC, (unsigned int)D_800CD978_us, (unsigned int)D_800CD9A0_us, (unsigned int)D_800CD9B8_us + 0x60, (unsigned int)D_800CDA2C_us + 0x64, (unsigned int)D_800CDA2C_us + 0x8C,

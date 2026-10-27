@@ -1,0 +1,4 @@
+#ifndef DATA_OVLTAB3_800CD548_2_H
+#define DATA_OVLTAB3_800CD548_2_H
+extern char D_00204C68[];
+#endif

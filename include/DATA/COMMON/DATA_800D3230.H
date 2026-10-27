@@ -1,0 +1,4 @@
+#ifndef DATA_COMMON_DATA_800D3230_H
+#define DATA_COMMON_DATA_800D3230_H
+extern char D_002ADB08[];
+#endif

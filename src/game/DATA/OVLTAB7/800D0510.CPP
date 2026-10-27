@@ -1,3 +1,4 @@
+#include "DATA/OVLTAB7/800D0510.H"
 
 #if defined(VERSION_US_REV1)
 unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D1110[7] = {
@@ -10,7 +11,6 @@ unsigned int D_auto_src_ragewars_weapon_resource_directory_us_rev1[22] = {
     0x800CFD4C, 0x800CFDAC, 0x800D03AC, 0x800D040C, 0x800D046C, 0x800D04CC,
 };
 
-extern char D_00239FBC[];
 unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D1184[17] = {
     0x00000000, 0x0BEA0BEB, 0x0BECFFFF, 0x0BED0BEE, 0x0BEF0BF0, 0x800D720C, 0x800D7210, 0x800D7214,
     0x800D7218, 0x800D721C, 0x800D7220, 0x800D7224, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000000,

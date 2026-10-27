@@ -18,7 +18,8 @@
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
+#include "CAMERA/CAMERA.H"
+#include "COMMON/DESCRIPTORRECAT29.H"
 extern s32 D_800E28D0;
 extern s32 D_800D297C;
 extern f32 D_800D2988;
@@ -29,9 +30,7 @@ extern void Camera_SetupViewportAndFog(Racer *);
 extern void Camera_DrawWorldViewLayers(Racer *, s32);
 extern void func_80239FD4_de(Racer *, s32);
 extern void Camera_DrawViewportOverlays(Racer *);
-extern void Camera_DrawAndAdvanceMessages(Race *, Racer *);
 extern void Pak_DispatchMenuListCallback(void *);
-extern void Camera_DrawViewportBorder(Racer *);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, Racer *);
 /* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to Pak_DispatchMenuListCallback. */
@@ -156,7 +155,6 @@ extern func_80237E70_G1 D_800D7028;
 
 extern func_80237E70_G1 D_800D7034;
 
-extern void func_80239CE0_de(void *arg0);
 
 
 
@@ -318,10 +316,20 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
     }
 }
 
-extern const f32 D_800C3414_de, D_800C3418_de, D_800C341C_de, D_800C3420_de;
-extern const f32 D_800C3424_de, D_800C3428_de, D_800C342C_de, D_800C3430_de;
-extern const f32 D_800C3434_de, D_800C3438_de, D_800C343C_de, D_800C3440_de;
-extern const f32 D_800C3444_de, D_800C3448_de;
+extern const f32 D_800C3414_de;
+extern const f32 D_800C3418_de;
+extern const f32 D_800C341C_de;
+extern const f32 D_800C3420_de;
+extern const f32 D_800C3424_de;
+extern const f32 D_800C3428_de;
+extern const f32 D_800C342C_de;
+extern const f32 D_800C3430_de;
+extern const f32 D_800C3434_de;
+extern const f32 D_800C3438_de;
+extern const f32 D_800C343C_de;
+extern const f32 D_800C3440_de;
+extern const f32 D_800C3444_de;
+extern const f32 D_800C3448_de;
 extern s32 D_800E28D8;
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 

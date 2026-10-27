@@ -1,0 +1,5 @@
+#ifndef SDK_LIBULTRA_OS_802BECB0_3_H
+#define SDK_LIBULTRA_OS_802BECB0_3_H
+#include "TYPES.H"
+extern s32 D_8014EA78;
+#endif

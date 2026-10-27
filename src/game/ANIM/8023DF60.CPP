@@ -1,6 +1,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OUTPUT.H"
 #include "TYPES.H"
+#include "ENGINE/UNICOL/PLANE.H"
 
 /* Tests a swept sphere against a polygon: shifts the ray from 0x44 to 0x50 back along the polygon normal by
  * the radius (plus an optional offset), intersects the shifted ray with the polygon's plane through
@@ -21,7 +22,6 @@ extern s32 func_802412D0_de(Polygon *, CVector3 *, CVector3 *, f32 *);
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
-extern s32 Plane_TestPointNearPolygon(Polygon *, CVector3 *, f32);
 
 static inline s32 accepts(CapsuleSweep *ray, Polygon *poly) {
     if (poly->t <= 0.0f) {

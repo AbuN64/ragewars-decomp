@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
+#include "MENU/80408AC4_26.H"
 
 #if defined(VERSION_DE)
 #include "SYSTEM_2/8025E280.H"
@@ -13,8 +14,6 @@ struct MenuResourceWidget;
 extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern OptionsCommitContext *g_optionsPage;
 /* Localized label pointers for the two option lists (rev1 D_auto_800D74AC..B0, D_800D2134..213C). */
-extern u8 *D_auto_800D3480[1];
-extern u8 *D_auto_800D3484;
 extern u8 *D_auto_800D3488[1];
 extern u8 *D_auto_800D348C;
 extern u8 *D_auto_800D3490;

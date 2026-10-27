@@ -1,0 +1,4 @@
+#ifndef DATA_OVLTAB7_800D0390_H
+#define DATA_OVLTAB7_800D0390_H
+extern char D_0023377C[];
+#endif

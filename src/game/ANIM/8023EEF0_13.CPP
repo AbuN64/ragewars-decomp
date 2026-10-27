@@ -2,6 +2,7 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/BALLISTICPARAMS.H"
+#include "ENGINE/UNICOL/PLANE.H"
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 /* Is `point` inside the polygon prism, or within `radius` of its edges?
  * Each edge's outward normal (normal x edge) splits off the outside half-space; a point outside an edge

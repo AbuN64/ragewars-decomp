@@ -1,27 +1,25 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_80106248.H"
+#include "COMMON/EXTERNS_4.H"
+#include "COMMON/OWNERRECAT8V1.H"
+#include "MATH/80297CD0_3.H"
+#include "MATH/802A2870.H"
+#include "MENU_2/804196C0_13.H"
+#include "MENU_2/804196C0_20.H"
+#include "MENU_2/804196C0_21.H"
+#include "MENU_2/804196C0_22.H"
+#include "RESMGR/802A23A4_6.H"
+#include "UI/TSMOS/SMP/SMP_FLICKER.H"
+#include "UI/TSMOS/TSMOS.H"
 
 #if defined(VERSION_EU)
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern u8 D_0043C500[];
-extern char D_800C6080_eu_x[];
 extern s32 D_800CBC14;
 extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
 extern void func_80253908_de(s32);
-extern void Gfx_InitializeFrontendServices(void);
-extern void ESmem_InitializeFrameHeaps(s32);
-extern void SmSmngr_InitializeScreenManager(s32, s32);
 extern void Frontend_OpenResourceArchive(char *);
-extern void SmpOverlay_RegisterOverlayClass(void);
-extern void SmpFrameAnim_RegisterFrameAnimClass(void);
-extern void SmpFade_RegisterFadeClass(void);
-extern void SmpButton_RegisterButtonClass(void);
-extern void SmpFlicker_RegisterFlickerClass(void);
-extern void SmpSlider_RegisterSliderClass(void);
-extern void SmpList_RegisterListClass(void);
-extern void N64Eng_RegisterNumericWidgetClass(void);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_SetTimerState(s32);
 extern void Tsmos_ActivateControllerState(void);

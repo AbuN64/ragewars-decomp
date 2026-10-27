@@ -8,11 +8,10 @@
 #include "COMMON/RECRECAT4.H"
 #include "FRONTEND/80423280_39.H"
 #include "ACHIEVE/80424E30_3.H"
+#include "FRONTEND/RESULTS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct ResultsHeadingCharacter D_800F00DC[];
-extern char D_800EE048[];
-extern char D_800EE050[];
 #define RES_TIMEFMT D_800EE048
 #define RES_TIMEPOST D_800EE050
 #define RES_HEAD3 ((char *)D_800E1DC4[g_languageIndex])

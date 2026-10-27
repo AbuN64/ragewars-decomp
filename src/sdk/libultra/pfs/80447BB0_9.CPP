@@ -9,6 +9,9 @@
 #include "sdk/PFS/80447BB0_20.H"
 #include "sdk/PFS/80447BB0_21.H"
 #include "sdk/PFS/80447BB0_9.H"
+#include "sdk/libultra/pfs/8043D1DC_17.h"
+#include "sdk/libultra/pfs/80447BB0_17.h"
+#include "sdk/libultra/pfs/80447BB0_9.h"
 
 /* osPfsInitPak, drafted from ultralib src/io/pfsinitpak.c (2.0I branch): confirm a controller pak is
    present, read and if needed repair its id block, derive the file system layout from it, read the
@@ -28,8 +31,6 @@
 
 extern s32 __osPfsGetStatus(void *queue, int channel);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp);
-extern s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
 
 s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 {
@@ -126,8 +127,6 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 
 
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
-extern s32 corrupted_init(OSPfs *pfs, __OSInodeCache *cache);
-extern s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
 
 s32 osPfsChecker(OSPfs *pfs)
 {

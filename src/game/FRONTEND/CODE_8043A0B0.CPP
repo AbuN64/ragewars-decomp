@@ -11,6 +11,9 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "FRONTEND/8041BEA8_6.H"
+#include "FRONTEND/8043A0B0_11.H"
+#include "FRONTEND/CODE_8043AED0.H"
+#include "FRONTEND/PLAYER.H"
 extern struct FourPlayerResultsScreen *D_800E59E0;
 extern Shared_PlayerSettingsRecord g_playerSettings[];
 extern struct RowRecAt54 D_800E3A58[];
@@ -23,8 +26,6 @@ extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
-extern void Frontend_ResetEquipmentFromCharacter(void);
-extern void Frontend_ActivateEquipmentPanel(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags D_800E5A06[][19];
 extern s32 SmpFlicker_IsFlickerIdle(void *);
@@ -137,8 +138,11 @@ extern void Frontend_SetPreviewRotationSpeed(void *, CVector3);
 #define D_800E1FC4 D_800EE614_eu
 #define D_800E1FD4 D_800EE624_eu
 #endif
-extern f32 D_800E1FC4, D_800DDF98_de, D_800DDF9C, D_800E1FD0, D_800E1FD4, D_800DDFA8, D_800DDFAC_de;
-extern u16 D_800E19DE[];
+extern f32 D_800E1FC4;
+extern f32 D_800DDF98_de;
+extern f32 D_800E1FD4;
+extern f32 D_800DDFA8;
+extern f32 D_800DDFAC_de;
 /* Initialize four rotating result badges and reveal enabled player cards. */
 s32 Frontend_StartFourPlayerResults(void) {
     CVector3 scale;

@@ -5,6 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "SYSTEM_3/80265370.H"
+#include "MENU/PAK/TIMER.H"
 
 /* Formats the halfword at offset 0x22 of the structure D_800E28BC points to into a field's text
    (the current menu language's text in the EU builds) with the format string, two bytes before
@@ -15,7 +16,6 @@ struct PreviewTextValue { char pad[0x22]; s16 value; };
 extern struct PreviewTextValue *D_800E28BC;
 extern s32 Pak_CountLineChars(struct Field *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800ED400[];
 #define PREVIEW_VALUE_FORMAT D_800ED400
 #else
 #define PREVIEW_VALUE_FORMAT D_800DCD80

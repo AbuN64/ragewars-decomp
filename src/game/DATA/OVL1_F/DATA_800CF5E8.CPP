@@ -1,7 +1,7 @@
+#include "DATA/OVL1_F/DATA_800CF5E8.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800CF5C0_unclaimed_D01E8 */
-extern char D_00230FCC[];
 unsigned int D_blob_86eaab3a3165f65c6fef[2] = {
     (unsigned int)D_00230FCC, 0x00000000,
 };

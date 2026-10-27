@@ -2,6 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "TYPES.H"
+#include "MENU_2/80420E90.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", Menu_OpenRuleToggleScreen);
@@ -21,7 +22,6 @@ extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, void *);
 extern void SmpButton_SelectListEntry(void *, s32);
-extern void Menu_RefreshExtraOptionLocks(void);
 
 #if defined(VERSION_DE)
 #define ID(n) ((n) - 6)

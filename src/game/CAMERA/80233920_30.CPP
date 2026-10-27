@@ -8,6 +8,7 @@
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
+#include "COMMON/DESCRIPTORRECAT29.H"
 
 /* Posts a text as on-screen messages for a target: the target's messages still in the pool's list at 0xE40
  * are unlinked and returned to the owner's list at 0xF24, then the text (or D_800D7028 when given D_800D7034)
@@ -24,7 +25,6 @@ extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
 
-extern void func_80239CE0_de(void *arg0);
 
 static inline CCameraText *recycle(void *owner, void *pool) {
     CCameraText *oldest;

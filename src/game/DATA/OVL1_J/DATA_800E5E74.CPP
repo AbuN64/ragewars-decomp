@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "MENU/MENU_BOX.H"
+#include "DATA/OVL1_J/DATA_800E5E74.H"
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-extern char D_800E1FD4_de[];
 unsigned int D_src_afbf569b[63] = {
     0x00000000, 0x41ACCCCC, 0x41C00000, 0x3F666666, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x411E6666, 0x41200000, 0x3F4F5C28, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x414F5C29,
@@ -49,8 +49,6 @@ unsigned int D_src_afbf569b[63] = {
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-extern char D_800E0C14_us[];
-extern char D_800E0CB0_us[];
 MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
@@ -74,7 +72,6 @@ unsigned int D_auto_rodata_unresolved_800E0C90[45] = {
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-extern char D_800EDAD0_eu_x[];
 unsigned int data_unresolved_800ED7C0[189] = {
     0x00000000, 0x41900000, 0x41C00000, 0x3F400000, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x41040000, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x412CCCCD,

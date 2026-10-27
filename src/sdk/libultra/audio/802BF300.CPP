@@ -7,13 +7,10 @@
 #include "sdk/AUDIO_2/802BF300.H"
 #include "sdk/AUDIO_2/802BFA00.H"
 #include "RESMGR/802A0888.H"
+#include "sdk/libultra/audio/802BF300.h"
 
-extern __OSViContext_func_802BA910_de D_800D43B0[2];
 extern __OSViContext_func_802BA910_de *D_800D8440;
 extern __OSViContext_func_802BA910_de *D_800D4414;
-extern Modep D_800D4440;
-extern Modep D_800D4490;
-extern Modep D_800D44E0;
 
 void func_802BA210_de(void)
 {

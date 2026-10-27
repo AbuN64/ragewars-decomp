@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "sdk/OSINT/802BEA40.H"
+#include "sdk/libultra/os/802BDEA0.h"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #include "TYPES.H"
@@ -6,14 +8,6 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 extern OSDevMgr D_800D4360;
-extern struct OSThread_s D_80147470;
-extern OSMesgQueue D_801486A0;
-extern void *D_801486B8[1];
-extern char D_801476A0[0x1000];
-extern s32 D_002B9A40(s32, u32, void *, u32);
-extern s32 D_002B93B0(struct OSPiHandle_s *, s32, u32, void *, u32);
-extern void D_002B9010(void *);
-extern void func_802B9950_de(void);
 extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 func_802BADA0_de(struct OSThread_s *);
 extern void func_802BB5F0_de(struct OSThread_s *, s32);

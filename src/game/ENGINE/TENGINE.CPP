@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "RENDER/802944E8_10.H"
+#include "ENGINE/TENGINE.H"
 
 #if defined(VERSION_US_REV1)
 #include "COMMON/ITEMRECAT20V1.H"
@@ -15,11 +16,8 @@
 #include "stddef.h"
 u32 SetN64_LocatePackSection(s32, s32, s32, u32 *);
 s32 func_802BD400_de(const char *);
-extern s32 D_00295B90_us_rev1;
 /* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */
 extern struct Node80253610 *D_8014AECC;
-extern s32 D_8014AED0;
-extern s32 D_8014AED4;
 /* Releases the previous texture viewer entry, loads entry D_8014AEB0.selectionIndex from the resident pack,
    wraps the frame selection into its texture/palette tables and prints the "tex N frm F of C" title. */
 void TEngine_LoadSelectedTexture(void) {
@@ -99,7 +97,6 @@ void TEngine_LoadSelectedTexture(void) {
 
 struct SelectionRecAt8;
 
-extern s32 D_8014AEC0;
 
 
 void TEngine_UpdateArtsendTexturePreview(void) {

@@ -1,11 +1,10 @@
 #include "TYPES.H"
+#include "ENGINE/CURVE.H"
 
 /* Two LSB-first bit streams, each a 32-bit window, its count of valid bits and the next byte to load:
  * D_8010C070.. carries the 6-bit predictor codes, D_8010C07C.. the 3-bit sample deltas. */
-extern u32 D_8010C070;
 extern s32 D_8010C074;
 extern u8 *D_8010C078;
-extern u32 D_8010C07C;
 extern s32 D_8010C080_de;
 extern u8 *D_8010C084;
 

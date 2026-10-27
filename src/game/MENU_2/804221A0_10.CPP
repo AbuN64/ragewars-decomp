@@ -10,7 +10,8 @@
 #include "MENU_2/804221A0_10.H"
 #include "SCENE/802508E0_13.H"
 #include "FRONTEND/8043A0B0_12.H"
-extern s32 *D_800E44A0;
+#include "COMMON/NUMBERPADSCREEN.H"
+#include "MENU/804221A0_10.H"
 extern s32 Frontend_GetMenuImageState(s32 *record);
 extern void *Cache_AllocateMemory(s32 size);
 extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
@@ -38,12 +39,10 @@ extern void Frontend_DrawMenuImage(void *);
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void Menu_ReleaseOptionsScene(void);
 #else
 extern void func_8042201C_de(void);
 #endif
 
-extern void Menu_ReleaseOptionsScene(void);
 
 extern void Frontend_StartConfiguredMatch(void);
 

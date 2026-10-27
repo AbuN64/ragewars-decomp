@@ -1,0 +1,4 @@
+#ifndef DATA_OVLDAT6_800CF584_H
+#define DATA_OVLDAT6_800CF584_H
+extern char D_00230BB8[];
+#endif

@@ -5,15 +5,15 @@
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/UNUSED.H"
 #include "FX_2/80271B18.H"
+#include "COMMON/EXTERNS_15.H"
+#include "RENDER_2/OBJECTSTATE8E.H"
 
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_801462C8;
 extern void GraphU64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
-extern void YawMatrix(void *, f32);
 extern void GraphU64_ProjectPoint(void *, void *, void *);
 extern void GraphU64_ScaleMatrixWorld(void *, f32, f32, f32);
-extern void PitchMatrix(void *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void GraphU64_InvertAffineMatrix(void *, void *);
 extern void Region_ComputePointBounds(void *, s32, void *);

@@ -14,11 +14,11 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "WEAPONS/80213ED4.H"
+#include "RENDER_2/OBJECTSTATE8E.H"
 
 extern void BuildRollMatrix(void *arg0, f32 arg1);
 
 
-extern void YawMatrix(void *arg0, f32 arg1);
 
 extern void CopyMatrix(float *arg0, float *arg1);
 

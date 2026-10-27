@@ -14,6 +14,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "FRONTEND/80423280_38.H"
 #include "FRONTEND/CODE_80426EC4.H"
+#include "FRONTEND/RESULTS.H"
 extern ResultsOptionsScreen *D_800E4690;
 
 /* Draw callback of the results screen D_800E4690: on draw event 1 in states 3, 8 or 9 it resets
@@ -156,7 +157,6 @@ void Frontend_LoadTrialCompletionFlags(void) {
 }
 
 extern struct EntryRecAt0V1 D_800E4694[];
-extern s32 Frontend_IsUnlockLinked(s32, s32);
 
 /* Backtracking search over the 36 unlock nodes of D_800E4694: while any node is still set in the
    remaining bit set, appends to the -1-terminated path the first remaining node linked to the

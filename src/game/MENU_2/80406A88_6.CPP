@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "MENU/80406A88_6.H"
 
 #if defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -12,10 +13,6 @@ struct MenuResourceWidget;
 extern OptionsCommitContext *g_optionsPage;
 /* Per-language label pointer tables, indexed by the settings language byte (0x581). */
 extern u8 *D_800E1C14[];
-extern u8 *D_800E1C34[];
-extern u8 *D_800E1C44[];
-extern u8 *D_auto_800E1C54[];
-extern u8 *D_auto_800E1C64[];
 extern u8 *D_800D2134[];
 extern u8 *D_800D2138[];
 extern u8 *D_800D213C[];

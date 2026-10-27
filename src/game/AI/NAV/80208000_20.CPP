@@ -9,8 +9,8 @@
 #include "TYPES.H"
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "MATH/DOUBLEBITS.H"
 
-extern f32 XMath_EvaluateTangent(f32);
 
 
 f32 Rumble_SamplePackedFloatRange(s32 arg0);

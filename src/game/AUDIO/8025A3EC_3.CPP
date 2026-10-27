@@ -22,7 +22,7 @@
 struct ALSndPlayer;
 extern void func_802B2ED0_de(struct ALSndPlayer *player, short index, unsigned char value);
 #include "TEXTURE/80256220_16.H"
-extern short func_8025E500_de(void *arg0);
+#include "COMMON/LISTNODE.H"
 
 
 extern s32 Sky_FindNearestCamera(MenuMatchGlobals *, Triple *);

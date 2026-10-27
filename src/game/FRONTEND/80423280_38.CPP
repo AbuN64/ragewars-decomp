@@ -60,13 +60,13 @@
 #include "FRONTEND/80423280_38.H"
 #include "FRONTEND/80423280_40.H"
 #include "ACHIEVE/80424E30_3.H"
+#include "FRONTEND/RESULTS.H"
 
 /* Hides every model named by the sixty-four 12-byte entries of D_800E4A84: for each entry it looks
    up the first and second identifier in the current screen's context at 0x970 through Frontend_FindWidgetByResourceId
    and disables the object with func_8040E8D8_de, and does the same for the third identifier unless it
    is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
    so the table address is not hoisted. */
-extern struct Pair D_800E4A84[];
 /* Read the optional resource as the low half of its word value on every host. */
 void Frontend_HideTrialCatalogueWidgets(void) {
     s32 absentResource;

@@ -18,8 +18,8 @@
 #include "COMMON/TRIPLE.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
+#include "CAMERA/CAMERA.H"
 
-extern ViewFlags D_80103220;
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis *);
 extern void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */

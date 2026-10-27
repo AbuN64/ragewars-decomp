@@ -3,6 +3,8 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "SYSTEM_2/8025E280.H"
+#include "COMMON/S1_5.H"
+#include "MENU/OPTIONS.H"
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #if defined(VERSION_US)
@@ -39,13 +41,11 @@ extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern OptionsCommitContext *g_optionsPage;
 /* Localized label pointers supplied to each option list. */
 extern u8 *D_800D3470_de[1];
-extern u8 *D_auto_800D74AC[1];
 extern u8 *D_800D2124;
 extern u8 *D_800D2128;
 extern u8 *D_800D2134[1];
 extern u8 *D_800D2138;
 extern u8 *D_800D213C;
-extern u8 *D_auto_800D74B0;
 
 extern void *Cache_AllocateMemory(s32);
 extern struct MenuFadeWidget *SmpFade_CreateFadeWidget(s32, s32);
@@ -109,7 +109,6 @@ extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern void Menu_ConfigureOptionsCamera(void);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);

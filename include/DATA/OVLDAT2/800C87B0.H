@@ -1,0 +1,45 @@
+#ifndef DATA_OVLDAT2_800C87B0_H
+#define DATA_OVLDAT2_800C87B0_H
+extern char D_0020D370[];
+extern char D_0020DC10[];
+extern char D_0020DDE0[];
+extern char D_0020ED50[];
+extern char D_0020EF60[];
+extern char D_0020F2A8[];
+extern char D_0020F388[];
+extern char D_0020F444[];
+extern char D_0020FA10[];
+extern char D_00210018[];
+extern char D_00210040[];
+extern char D_00210068[];
+extern char D_00210090[];
+extern char D_002100B8[];
+extern char D_00210180[];
+extern char D_00210E88[];
+extern char D_00211120[];
+extern char D_00211470[];
+extern char D_00211A7C[];
+extern char D_002123DC[];
+extern char D_00212450[];
+extern char D_00212524[];
+extern char D_002127F4[];
+extern char D_00212828[];
+extern char D_0021290C[];
+extern char D_00212948[];
+extern char D_00212A40[];
+extern char D_00212A7C[];
+extern char D_00212BD0[];
+extern char D_00212C04[];
+extern char D_00212C90[];
+extern char D_00212CC4[];
+extern char D_00212D60[];
+extern char D_00212D94[];
+extern char D_00212E10[];
+extern char D_00212FBC[];
+extern char D_00212FE0[];
+extern char D_002131AC[];
+extern char D_002131E0[];
+extern char D_0021321C[];
+extern char D_00213500[];
+extern char D_002136EC[];
+#endif

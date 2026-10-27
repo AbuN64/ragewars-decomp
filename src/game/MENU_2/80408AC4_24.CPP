@@ -2,6 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
+#include "COMMON/S1_5.H"
 
 #if defined(VERSION_DE)
 #include "SYSTEM_2/8025E280.H"
@@ -26,7 +27,6 @@ extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(Scroll *, s32);
 extern s32 ScenarioSetup_IsCupSelected(void);
-extern void Menu_ConfigureOptionsCamera(void);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);

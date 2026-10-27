@@ -3,6 +3,8 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "SYSTEM_2/8025E280.H"
+#include "COMMON/S1_5.H"
+#include "MENU/80406A88_6.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "MENU_2/SCROLL.H"
@@ -13,8 +15,6 @@ struct MenuFadeWidget;
 struct MenuResourceWidget;
 /* Per-language label pointer tables, indexed by the settings language byte (0x581). */
 extern u8 *D_800E1C14[];
-extern u8 *D_800E1C34[];
-extern u8 *D_800E1C44[];
 extern u8 *D_800D2134[];
 extern u8 *D_800D2138[];
 extern u8 *D_800D213C[];
@@ -32,8 +32,6 @@ extern void Tsmos_DeactivateControllerState(void);
 
 #if defined(VERSION_EU)
 extern OptionsCommitContext *g_optionsPage;
-extern u8 *D_auto_800E1C54[];
-extern u8 *D_auto_800E1C64[];
 /* PAL Menu_CreateOptionsPage: the three option lists take their labels from the per-language tables
    indexed by settings->language. */
 s32 Menu_CreateEuropeanSettingsPage(void) {
@@ -136,7 +134,6 @@ extern Shared_MenuReply D_80154020;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern void Menu_ConfigureOptionsCamera(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
 /* PAL Menu_OpenOptionsScreen: the list labels come from the per-language tables. */

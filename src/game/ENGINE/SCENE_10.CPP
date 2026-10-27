@@ -8,11 +8,11 @@
 #include "COMMON/OBJECTLINKS150C.H"
 #include "TYPES.H"
 #include "SYSTEM_3/80265370.H"
+#include "COMMON/APPROACHLOCATION.H"
 extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 extern void SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
-extern s32 Region_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
 
 extern f32 Region_GetPolygonHeight(void *, f32, f32);
 

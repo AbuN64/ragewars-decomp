@@ -1,6 +1,6 @@
+#include "DATA/COMMON/DATA_800D31D0.H"
 
 #if defined(VERSION_US_REV1)
-extern char D_002AD65C[];
 struct {
     unsigned int w0;
     unsigned short h1[6];

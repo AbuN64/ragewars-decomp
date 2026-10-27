@@ -9,6 +9,7 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "CAMERA/80233920_7.H"
 #include "RENDER_4/8028FD2C_15.H"
+#include "CAMERA/CAMERA.H"
 
 /* Draws one view of the game world: after the per-frame setup (SetN64_OnWorldViewDraw) it runs the world, player,
  * effect, particle, object and translucent passes for the view in order, skipping the player and effect
@@ -21,7 +22,6 @@ extern Gfx *g_displayListCursor;
 extern char D_80145040;
 extern s32 D_801462C8;
 
-extern void func_80289084_de(char *, char *);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_80228798_de(void *, char *);
 extern s32 SetN64_IsModeThirteen(void);

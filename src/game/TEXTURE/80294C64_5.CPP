@@ -4,13 +4,11 @@
 #include "COMMON/UNUSED.H"
 #include "TEXTURE/80294C64_5.H"
 #include "RESMGR/802A0888.H"
+#include "ENGINE/TENGINE.H"
 
 #if defined(VERSION_US_REV1)
 
-extern s32 D_8014AEC0;
 extern s32 D_8014AECC;
-extern s32 D_8014AED0;
-extern s32 D_8014AED4;
 
 
 void TextLoad_ResetArtsendTextureState(void) {

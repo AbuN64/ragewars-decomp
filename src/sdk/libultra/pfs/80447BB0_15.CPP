@@ -5,6 +5,7 @@
 #include "sdk/PFS/80447BB0_15.H"
 #include "sdk/PFS/80447BB0_20.H"
 #include "sdk/PFS/80447BB0_21.H"
+#include "sdk/libultra/pfs/80447BB0_17.h"
 
 /* osPfsRepairId, drafted from ultralib src/io/pfsrepairid.c (2.0I branch): reread a controller pak's
    id block from bank zero, restore or rebuild it when damaged, and refresh the file system layout and
@@ -22,8 +23,6 @@
 
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp);
-extern s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
 
 s32 osPfsRepairId(OSPfs *pfs)
 {
