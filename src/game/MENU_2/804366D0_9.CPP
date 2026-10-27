@@ -43,7 +43,9 @@ extern void SmXlate_SwitchScreen(s32);
 
 /* Handles menu selection and updates the active menu state. */
 
- extern u8 D_800FEB0F, D_80102B7E, D_80142358;
+extern u8 D_800FEB0F;
+extern u8 D_80102B7E;
+extern u8 D_80142358;
 
  void MarkMenuEventHandled(void);
 

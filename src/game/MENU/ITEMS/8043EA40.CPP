@@ -2,10 +2,30 @@
 #include "TYPES.H"
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-extern u8 D_80152235_eu, D_80152236_eu, D_80152237_eu, D_80152238_eu, D_80152239_eu, D_8015223A_eu, D_8015223B_eu, D_8015223D_eu;
-extern char *D_auto_800E3EA4[], *D_auto_800E3EB4[], *D_auto_800E3EC4[], *D_auto_800E3ED4[], *D_auto_800E3EE4[],
-    *D_auto_800E3EF4[], *D_auto_800E3F04[], *D_auto_800E3F14[], *D_auto_800E3F24[], *D_auto_800E3F34[],
-    *D_auto_800E3F44[], *D_auto_800E3F54[], *D_auto_800E3F64[], *D_auto_800E3F74[], *D_auto_800E3F84[], *D_auto_800E3F94[];
+extern u8 D_80152235_eu;
+extern u8 D_80152236_eu;
+extern u8 D_80152237_eu;
+extern u8 D_80152238_eu;
+extern u8 D_80152239_eu;
+extern u8 D_8015223A_eu;
+extern u8 D_8015223B_eu;
+extern u8 D_8015223D_eu;
+extern char *D_auto_800E3EA4[];
+extern char *D_auto_800E3EB4[];
+extern char *D_auto_800E3EC4[];
+extern char *D_auto_800E3ED4[];
+extern char *D_auto_800E3EE4[];
+extern char *D_auto_800E3EF4[];
+extern char *D_auto_800E3F04[];
+extern char *D_auto_800E3F14[];
+extern char *D_auto_800E3F24[];
+extern char *D_auto_800E3F34[];
+extern char *D_auto_800E3F44[];
+extern char *D_auto_800E3F54[];
+extern char *D_auto_800E3F64[];
+extern char *D_auto_800E3F74[];
+extern char *D_auto_800E3F84[];
+extern char *D_auto_800E3F94[];
 /* Picks the label for each of the eight option rows (ids 2..9): the first text when the row's flag is set, else the second. */
 typedef struct { s32 id; u8 pad4[0x10]; char ***text; } OptionRowEu;
 s32 Items_SelectOptionRowLabel(OptionRowEu *row) {

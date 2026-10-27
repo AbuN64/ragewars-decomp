@@ -9,7 +9,8 @@
 #include "TYPES.H"
 extern void InstHdr_ResetInstanceRenderIndices(signed char *arg0);
 
-extern f32 D_800CB430_de[],D_800D2988[];
+extern f32 D_800CB430_de[];
+extern f32 D_800D2988[];
 
 extern s32 InstHdr_GetActorMotionState(Actor_func_80245D30_de *);
 

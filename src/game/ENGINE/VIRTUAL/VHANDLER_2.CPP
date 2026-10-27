@@ -149,7 +149,10 @@ void Virtual_UnmapResourcePage(ResourcePageMapping *mapping) {
 
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 extern s32 D_800CB3F8_de;
-extern f32 D_800C3610_de, D_800C3614_de, D_800C3618_de, D_800C361C_de;
+extern f32 D_800C3610_de;
+extern f32 D_800C3614_de;
+extern f32 D_800C3618_de;
+extern f32 D_800C361C_de;
 u64 func_802BADC0_de(void);
 void *Virtual_FindRegionForPage(u16);
 void osWritebackDCacheAll(void);

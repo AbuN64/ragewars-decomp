@@ -12,8 +12,14 @@
 
 
 
-extern const f32 D_800C23B4_de, D_800C23B8_de, D_800C23BC_de, D_800C23C0_de;
-extern const f32 D_800C23C4_de, D_800C23C8_de, D_800C23CC_de, D_800C23D0_de;
+extern const f32 D_800C23B4_de;
+extern const f32 D_800C23B8_de;
+extern const f32 D_800C23BC_de;
+extern const f32 D_800C23C0_de;
+extern const f32 D_800C23C4_de;
+extern const f32 D_800C23C8_de;
+extern const f32 D_800C23CC_de;
+extern const f32 D_800C23D0_de;
 extern f32 D_800D2988;
 extern AimHit *D_80103FCC;
 extern char D_801000F0;

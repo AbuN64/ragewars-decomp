@@ -2,7 +2,22 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #if defined(VERSION_EU_X)
 #include "TYPES.H"
-extern char *D_800D3D14, *D_800D3D18, *D_800D3D1C, *D_800D3D20, *D_800D3D24, *D_800D3D28, *D_800D3D2C, *D_800D3D30, *D_800D3D34, *D_800D3D38, *D_800D3D3C, *D_800D3D40, *D_800D3D44, *D_800D3D48, *D_800D3D4C, *D_800D3D50;
+extern char *D_800D3D14;
+extern char *D_800D3D18;
+extern char *D_800D3D1C;
+extern char *D_800D3D20;
+extern char *D_800D3D24;
+extern char *D_800D3D28;
+extern char *D_800D3D2C;
+extern char *D_800D3D30;
+extern char *D_800D3D34;
+extern char *D_800D3D38;
+extern char *D_800D3D3C;
+extern char *D_800D3D40;
+extern char *D_800D3D44;
+extern char *D_800D3D48;
+extern char *D_800D3D4C;
+extern char *D_800D3D50;
 /* Picks the label of option row 2..9 from its on/off flag (the eu-x twin of Items_SelectOptionRowLabel, without the language table). */
 typedef struct { s32 id; u8 pad4[0x10]; char **text; } OptionRowEux;
 s32 Menu_UpdateOptionToggleLabel(OptionRowEux *row) {

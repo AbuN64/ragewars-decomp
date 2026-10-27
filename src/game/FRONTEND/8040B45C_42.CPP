@@ -94,7 +94,8 @@ static inline u32 encode(u32 color, Format *format) {
     return r | g | b | a;
 }
 
-extern void *g_destinationColorBuffer,*g_sourceColorBuffer;
+extern void *g_destinationColorBuffer;
+extern void *g_sourceColorBuffer;
 
 /* Releases a resource object's buffers through Cache_FreeMemory (the one at 0x18 when flag 1 is set, the
    one at 0x14 when flag 2 is set and its size at 0x10 is positive) and clears its 32 bytes. */

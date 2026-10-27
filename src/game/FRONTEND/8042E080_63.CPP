@@ -5,7 +5,8 @@
 #include "FRONTEND/8042E080_63.H"
 
 /* Checks that every active player on the selected team has the configured value. */
-  extern s32 D_80102B08[]; extern s8 D_80102B0D[], D_800FEB0E[];
+extern s32 D_80102B08[]; extern s8 D_80102B0D[];
+extern s32 D_80102B08[]; extern s8 D_800FEB0E[];
 s32 Frontend_CheckOwnedProfileIds(s32 player) {
     s32 profileOffset;
     s32 profileIndex;

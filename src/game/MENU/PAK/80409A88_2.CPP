@@ -41,7 +41,8 @@ typedef struct SavedState {
 typedef struct RestorePlayer { char pad0[0x5E0]; SavedPlayer saved; } RestorePlayer;
 extern SavedState *D_800E28BC;
 extern s32 D_8013B2D4[]; /* an array: its store may alias the loads through D_800E28BC, so it stays after them */
-extern u8 D_80146848, D_800F91F0[];
+extern u8 D_80146848;
+extern u8 D_800F91F0[];
 void Pak_RestoreSavedSession(RestorePlayer *player) {
     Shared_World *world = &g_world;
     s32 i;

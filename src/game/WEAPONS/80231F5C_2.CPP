@@ -19,7 +19,8 @@
  */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *D_800E0D44[], *D_800DCC68[];
+extern u8 *D_800E0D44[];
+extern u8 *D_800DCC68[];
 
 #else
 #endif

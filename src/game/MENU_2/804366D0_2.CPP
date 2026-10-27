@@ -11,7 +11,13 @@
 #define PLAYER_SETTINGS_ID(id) (id)
 #endif
 extern struct StateMenuSelectPlayerSettingsEntry *D_800E5690;
-extern char *D_800D34A4[1], *D_800D34B0[1], *D_800D3470_de[1], *D_800D3474[1], *D_800D34B4[1], *D_800D34B8[1], *D_800D34BC[1];
+extern char *D_800D34A4[1];
+extern char *D_800D34B0[1];
+extern char *D_800D3470_de[1];
+extern char *D_800D3474[1];
+extern char *D_800D34B4[1];
+extern char *D_800D34B8[1];
+extern char *D_800D34BC[1];
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpButton_WrapButtonWidget(s32);

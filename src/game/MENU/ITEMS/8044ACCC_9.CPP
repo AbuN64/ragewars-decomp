@@ -142,9 +142,11 @@ typedef struct DraftOwnerA370 {
     s32 empty;
 } DraftOwnerA370;
 extern f32 D_800C32EC_de;
-extern char g_camerasText[], D_800C32DC_de[];
+extern char g_camerasText[];
+extern char D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
-extern void func_80253908_de(s32), Cache_ReleaseResource(s32, void *);
+extern void func_80253908_de(s32);
+extern void Cache_ReleaseResource(s32, void *);
 extern void *Cache_AllocateResource(s32, s32, s32, char *);
 static inline void resetDraftList(DraftListA370 *list) {
     list->tail = 0;

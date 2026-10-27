@@ -18,7 +18,8 @@
 
 
 
-extern LevelActor *D_800F3CD0[],*D_800F3D0C;
+extern LevelActor *D_800F3CD0[];
+extern LevelActor *D_800F3D0C;
 extern s32 XPlus_NextRandomInteger(void);
 void Scene_CollectSecondarySpecialActors(SceneRecAt140 *scene) {
  s32 count=0,i=9,offset=36;LevelActor *actor=scene->actors;
