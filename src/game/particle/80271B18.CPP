@@ -96,8 +96,6 @@ void GraphU64_InterpolateVector(CVector3 *arg0, f32 t, void *a, void *b) {
     arg0->z = ((CVector3 *)(a))->z + (t * (((CVector3 *)(b))->z - ((CVector3 *)(a))->z));
 }
 
-struct CVector3_t;
-
 /** Cross product of two vectors, written directly to the output (no aliasing guard). */
 void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->x = (a->y * b->z) - (a->z * b->y);
