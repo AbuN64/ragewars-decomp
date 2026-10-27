@@ -233,7 +233,7 @@ extern void alCSPSetVol(s32 arg0, s16 arg1);
 
 extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 
-extern s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2);
+extern s32 __voiceNeedsNoteKill(void *arg0, s32 arg1, s32 arg2);
 
 extern void func_802B1C34_de(void *arg0, void *arg1);
 

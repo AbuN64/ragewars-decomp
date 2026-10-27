@@ -7,7 +7,7 @@
 
 
 
-s32 func_802B15D0_de(void *arg0, s32 targetVoice, s32 releaseDeadline) {
+s32 __voiceNeedsNoteKill(void *arg0, s32 targetVoice, s32 releaseDeadline) {
     s32 amount;
     s32 total;
     s32 result;
@@ -52,7 +52,7 @@ done:
 
 
 
-ALVoiceState *func_802B1680_de(ALSeqPlayer *seqp, u8 key, u8 channel)
+ALVoiceState *__lookupVoice(ALSeqPlayer *seqp, u8 key, u8 channel)
 {
     ALVoiceState *vs;
 

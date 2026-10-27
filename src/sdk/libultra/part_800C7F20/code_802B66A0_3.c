@@ -19,7 +19,7 @@ extern void __setInstChanState(void *arg0, void *arg1, s32 arg2);
 
 
 
-s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)
+s16 __vsVol(ALVoiceState *vs, ALSeqPlayer *seqp)
 {
     u32 t1, t2;
 
