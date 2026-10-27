@@ -3,6 +3,7 @@
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_44.H"
+#include "COMMON/UNUSED.H"
 
 /* Reads the pixel at (x, y) of the current image g_conversionSourceImage as a 0xAARRGGBB colour: seeks to
    x + y * width through the format's seek hook g_readSourceIndex, fetches through g_readSourceColor and converts
@@ -12,17 +13,11 @@
 
 
 
-extern s32 g_sourcePixelOffset;
 
-extern u32 g_sourceRedMask;
 
-extern u32 g_sourceGreenMask;
 
-extern u32 g_sourceBlueMask;
 
-extern u32 g_sourceAlphaMask;
 
-extern void (*g_readSourceColor)(void);
 
 /* Sets the read position g_sourcePixelOffset to row y of column x, the row stride being the halfword at
    offset 8 of the structure g_conversionSourceImage points to, calls the reader g_readSourceIndex points to, and
@@ -31,14 +26,12 @@ extern void (*g_readSourceColor)(void);
 
 
 
-extern s32 g_sourcePixelIndex;
 
 /* Reads the pixel at index as a 0xAARRGGBB colour: stores the index for the current format's fetch
    hook g_readSourceColor, then extracts each channel of the fetched value with the format's channel mask
    and signed shift (a negative shift scales up) and packs alpha, red, green and blue, using 0xFF
    for alpha when the format has no alpha mask. */
 
-extern s32 g_sourceColorIndex;
 
 /* Writes a 0xAARRGGBB colour to the pixel at (x, y) of the current target image g_conversionDestinationImage:
    converts the colour to the format's packed value like Frontend_WriteDestinationColorEntry, then stores it and the
@@ -48,17 +41,11 @@ extern s32 g_sourceColorIndex;
 
 
 
-extern s32 g_destinationColorIndex;
 
-extern u32 g_destinationRedMask;
 
-extern u32 g_destinationGreenMask;
 
-extern u32 g_destinationBlueMask;
 
-extern u32 g_destinationAlphaMask;
 
-extern void (*g_writeDestinationColor)(void);
 
 /* Stores a value in g_destinationPixelIndex, sets the write position g_destinationPixelOffset to row y of column x, the row
    stride being the halfword at offset 8 of the structure g_conversionDestinationImage points to, and calls the
@@ -67,9 +54,7 @@ extern void (*g_writeDestinationColor)(void);
 
 
 
-extern void (*g_writeDestinationIndex)(void);
 
-extern s32 g_destinationPixelOffset;
 
 /* Encodes an 0xAARRGGBB color into a packed pixel value of entry `format` of the format table D_800E2B20, shifting each channel by its signed shift and masking it. */
 
@@ -148,10 +133,8 @@ extern u32 g_sourceEncodedColor; /* the fetched pixel */
 extern u32 g_destinationEncodedColor; /* the pixel to store */
 extern u8 g_destinationColorMiddleByte; /* the third byte of g_destinationEncodedColor */
 extern void (*g_readSourceIndex)();
-extern u8 *g_sourcePixelIndexBuffer;
 
 /* Stores the byte (u8)g_destinationPixelIndex at the offset g_destinationPixelOffset within the buffer g_destinationPixelIndexBuffer points to. */
-extern u8 *g_destinationPixelIndexBuffer;
 
 
 u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {

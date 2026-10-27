@@ -12,6 +12,7 @@
 #include "sdk/os.h"
 #include "RENDER_4/8028FD2C_6.H"
 #include "WORLD/8028E6FC.H"
+#include "COMMON/UNUSED.H"
 
 /* Collects platform actors, records the special actor and selects one of three random states. */
 
@@ -105,7 +106,6 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
 
 
 
-extern u8 D_800D2910[];
 extern s32 PpDecom_UnpackResource(void *resource, s32 flags);
 
 void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
@@ -177,7 +177,6 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
 
 
 
-extern u8 D_800D2920[];
 
 void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     s32 i;
