@@ -4,12 +4,11 @@
 
 #if defined(VERSION_US)
 #include "COMMON/OBJECTRECAT28.H"
-#include "COMMON/SHARED_OPTIONSSCREEN.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/WORLD.H"
 extern void *Cache_AllocateMemory(s32);
 extern void Player_InitializeProfile(Profile *);
 extern Pulse *D_800E5950;
-extern Shared_MenuData D_80145040;
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);

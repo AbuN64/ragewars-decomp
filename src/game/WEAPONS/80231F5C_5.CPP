@@ -73,8 +73,7 @@ s32 Weapon_IsSpecialSwitchGroup(s32 arg0) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#include "COMMON/SHARED_OPTIONSSCREEN.H"
-extern Shared_MenuData D_80145040;
+#include "COMMON/SHARED_WORLDFUNC.H"
 extern char *D_800E0D44[];
 extern char *D_800DCC68[];
 extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
