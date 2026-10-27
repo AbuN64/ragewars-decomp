@@ -6,7 +6,6 @@
 
 #include "IO/DEBUG_MEMORY.H"
 extern u8 D_800F3452;
-extern s32 Libsn_DisableInterrupts(void);
 extern void func_802022E0_de(void);
 
 void Libsn_InitializeHostMemoryAccess(void) {
@@ -32,7 +31,6 @@ void Libsn_InitializeHostMemoryAccess(void) {
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
 extern void Libsn_SpinDelay(s32);
-extern void Libsn_TransferHostMemoryRanges(u32);
 extern u32 D_800F32A8;
 
 /* Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */

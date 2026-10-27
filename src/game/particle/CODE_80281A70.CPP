@@ -121,7 +121,7 @@ typedef struct CParticleSystem_t {
 } CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
 extern void Particle_Update(void *),Particle_FinishActorEffects(void *),Particle_UpdateMatrix(void *);
-extern void Fx_DetachParticleSwooshes(void *,void *),DynLight_ReleaseLight(void *,s32);
+extern void Fx_DetachParticleSwooshes(void *,void *);
 extern void Particle_SpawnChildEffect(void *,s32,s32,s32);
 extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32);
 extern void GraphU64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
