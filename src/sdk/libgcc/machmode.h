@@ -220,8 +220,4 @@ extern enum machine_mode class_narrowest_mode[];
 /* Define the integer modes whose sizes are BITS_PER_UNIT and BITS_PER_WORD
    and the mode whose class is Pmode and whose size is POINTER_SIZE.  */
 
-extern enum machine_mode byte_mode;
-extern enum machine_mode word_mode;
-extern enum machine_mode ptr_mode;
-
 #endif /* not HAVE_MACHINE_MODES */
