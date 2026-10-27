@@ -56,7 +56,7 @@ extern void alSynAddPlayer(ALSynth_func_802B2650_de *, ALPlayer_s14 *);
                    /* alSynAddPlayer */
 
           /* alEvtqPostEvent */
-extern s32 func_802B003C_de(ALEventQueue *, ALEvent *);
+extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 
                 /* alEvtqNextEvent */
 /* _sndpVoiceHandler (func_802B2BBC_de); the cartridge stores the handler by its 0x002B7C8C address. */
@@ -116,7 +116,7 @@ void func_802B2650_de(ALSndPlayer_func_802B2650_de *sndp, ALSndpConfig *c)
 
     evt.type = 5; /* AL_SNDP_API_EVT */
     func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
-    sndp->nextDelta = func_802B003C_de(&sndp->evtq, &sndp->nextEvent);
+    sndp->nextDelta = alEvtqNextEvent(&sndp->evtq, &sndp->nextEvent);
 }
 
        /* _removeEvents */
@@ -279,7 +279,7 @@ s32 func_802B2BBC_de(void *node)
                 func_802B2780_de(sndp, next);
                 break;
         }
-        sndp->nextDelta = func_802B003C_de(&sndp->evtq, &sndp->nextEvent);
+        sndp->nextDelta = alEvtqNextEvent(&sndp->evtq, &sndp->nextEvent);
     } while (sndp->nextDelta == 0);
 
     sndp->curTime += sndp->nextDelta;

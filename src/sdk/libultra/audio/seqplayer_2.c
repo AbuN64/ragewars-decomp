@@ -17,8 +17,8 @@
 
 extern void Audio_AdvanceSequenceEvent(ALSeqPlayer *);                        /* __handleNextSeqEvent */
 extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
-extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
-extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
+extern ALMicroTime alEvtqNextEvent(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
+extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlushType */
 extern void alSynStopVoice(struct Shape_typemap_71 *, ALVoice_s *);                   /* alSynStopVoice */
 extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
@@ -125,8 +125,8 @@ ALMicroTime Audio_ProcessSequenceEvents(void *node)
             break;
         case 17: /* AL_SEQP_STOPPING_EVT */
             if (seqp->base.state == 1) {
-                func_802B0258_de(&seqp->base.evtq, 0);
-                func_802B0258_de(&seqp->base.evtq, 2);
+                alEvtqFlushType(&seqp->base.evtq, 0);
+                alEvtqFlushType(&seqp->base.evtq, 2);
                 for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
                     if ((u8)func_802B15D0_de(&seqp->base, &vs->voice, 50000))
                         func_802B1B14_de(&seqp->base, &vs->voice, 50000);
@@ -172,7 +172,7 @@ ALMicroTime Audio_ProcessSequenceEvents(void *node)
             Audio_Assert(D_800C7440, g_audioSeqplayerText, 315);
             break;
         }
-        seqp->base.nextDelta = func_802B003C_de(&seqp->base.evtq, &seqp->base.nextEvent);
+        seqp->base.nextDelta = alEvtqNextEvent(&seqp->base.evtq, &seqp->base.nextEvent);
     } while (seqp->base.nextDelta == 0);
     seqp->base.curTime += seqp->base.nextDelta;
     return seqp->base.nextDelta;

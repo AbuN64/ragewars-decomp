@@ -30,9 +30,9 @@ void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1);
 
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 
-extern s32 func_802B003C_de(void *, s16 *);
+extern s32 alEvtqNextEvent(void *, s16 *);
 
-extern void func_802B0258_de(void *, s16);
+extern void alEvtqFlushType(void *, s16);
 
 extern void alSynStopVoice(struct Shape_typemap_71 *, void *);
 
@@ -211,9 +211,9 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             break;
         case 17: /* AL_SEQP_STOPPING_EVT */
             if (seqp->state == 1) {
-                func_802B0258_de(&seqp->evtq, 0);
-                func_802B0258_de(&seqp->evtq, 21);
-                func_802B0258_de(&seqp->evtq, 2);
+                alEvtqFlushType(&seqp->evtq, 0);
+                alEvtqFlushType(&seqp->evtq, 21);
+                alEvtqFlushType(&seqp->evtq, 2);
                 for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                     if ((u8)func_802B15D0_de(seqp, (s32)&vs->voice, 50000))
                         func_802B1B14_de(seqp, &vs->voice, 50000);
@@ -247,7 +247,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             Audio_Assert(D_800C7350_de, g_audioCsplayerText, 314);
             break;
         }
-        seqp->nextDelta = func_802B003C_de(&seqp->evtq, (s16 *)&seqp->nextEvent);
+        seqp->nextDelta = alEvtqNextEvent(&seqp->evtq, (s16 *)&seqp->nextEvent);
     } while (seqp->nextDelta == 0);
     seqp->curTime += seqp->nextDelta;
     return seqp->nextDelta;

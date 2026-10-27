@@ -34,7 +34,7 @@ void func_802AFFC0_de(void *eventQueue, void *eventStorage, s32 eventCapacity) {
     }
 }
 
-s32 func_802B003C_de(void *eventQueue, s16 *outputEvent) {
+s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
     void *node;
     s32 saved;
     s32 result;
@@ -125,7 +125,7 @@ void alEvtqFlush(void *arg0) {
 }
 
 
-void func_802B0258_de(void *arg0, s16 arg1) {
+void alEvtqFlushType(void *arg0, s16 arg1) {
     s32 saved;
     char *cur;
     char *next;
