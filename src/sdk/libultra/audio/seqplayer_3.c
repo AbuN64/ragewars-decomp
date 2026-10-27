@@ -46,7 +46,7 @@ extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
 extern ALMicroTime __vsDelta(ALVoiceState *, ALMicroTime);
 
  /* __vsDelta */
-extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime);
+extern void alSynStartVoiceParams(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime);
 
  /* alSynStartVoiceParams */
 
@@ -54,7 +54,7 @@ extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMi
 extern void __seqpReleaseVoice(ALSeqPlayer *, ALVoice_s *, ALMicroTime);
 
  /* __seqpReleaseVoice */
-extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime);
+extern void alSynSetVol(void *, ALVoice_s *, s16, ALMicroTime);
 
  /* alSynSetVol */
 extern void alSynSetPan(void *, ALVoice_s *, u8);
@@ -204,7 +204,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             pan = __vsPan(vstate, seqp);
             vol = __vsVol(vstate, seqp);
             deltaTime = sound->envelope->attackTime;
-            func_802B35E0_de(seqp->drvr, voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
+            alSynStartVoiceParams(seqp->drvr, voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
             evt.type = 6; /* AL_SEQP_ENV_EVT */
             evt.msg.vol.voice = voice;
             evt.msg.vol.vol = sound->envelope->decayVolume;
@@ -229,14 +229,14 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
         if (!vstate)
             return;
         vstate->velocity = byte2;
-        func_802B3480_de(seqp->drvr, &vstate->voice, __vsVol(vstate, seqp),
+        alSynSetVol(seqp->drvr, &vstate->voice, __vsVol(vstate, seqp),
                       __vsDelta(vstate, seqp->curTime));
         break;
     case 0xD0: /* AL_MIDI_ChannelPressure */
         for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
             if (vs->channel == chan) {
                 vs->velocity = byte1;
-                func_802B3480_de(seqp->drvr, &vs->voice, __vsVol(vs, seqp),
+                alSynSetVol(seqp->drvr, &vs->voice, __vsVol(vs, seqp),
                               __vsDelta(vs, seqp->curTime));
             }
         }
@@ -257,7 +257,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if ((vs->channel == chan) && (vs->envPhase != 3)) {
                     vol = __vsVol(vs, seqp);
-                    func_802B3480_de(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
+                    alSynSetVol(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
                 }
             }
             break;

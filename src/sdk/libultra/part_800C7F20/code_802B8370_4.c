@@ -17,7 +17,7 @@
 
 
 
-void func_802B3540_de(void *synth, void *voice, s32 waveTable) {
+void alSynStartVoice(void *synth, void *voice, s32 waveTable) {
     s32 new_var;
     void *Shared_func_802B3540_de_v0;
     void *voiceFilter;

@@ -45,7 +45,7 @@ struct ObjectState1C {
     u16 unk_1A;
 };
 
-extern void func_802B3540_de(void *arg0, void *arg1, s32 arg2);
+extern void alSynStartVoice(void *arg0, void *arg1, s32 arg2);
 
 struct func_802B8540_S1;
 typedef struct func_802B8540_S1 func_802B8540_S1;

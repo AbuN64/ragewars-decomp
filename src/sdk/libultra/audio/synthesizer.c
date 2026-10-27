@@ -59,7 +59,7 @@ extern s32 func_802B6480_de(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 
-s32 func_802B3DB8_de(func_8022E694_S1 *arg0, s32 arg1);
+s32 _timeToSamplesNoRound(func_8022E694_S1 *arg0, s32 arg1);
 
          /* _timeToSamplesNoRound */
 void _collectPVoices(void *arg0);
@@ -67,7 +67,7 @@ void _collectPVoices(void *arg0);
 
                    /* alSaveParam */
 
-void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
+void alSynNew(ALSynth *drvr, ALSynConfig *c)
 {
     s32 i;
     PVoice_s *pv;
@@ -145,7 +145,7 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
 
              /* _collectPVoices */
 
-Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
+Acmd *alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
 {
     ALPlayer_s14 *client;
     ALFilter_sC *output;
@@ -161,11 +161,11 @@ Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
         return cmdList;
     }
 
-    for (drvr->paramSamples = func_802B3D10_de(drvr, &client);
+    for (drvr->paramSamples = __nextSampleTime(drvr, &client);
          drvr->paramSamples - drvr->curSamples < outLen;
-         drvr->paramSamples = func_802B3D10_de(drvr, &client)) {
+         drvr->paramSamples = __nextSampleTime(drvr, &client)) {
         drvr->paramSamples &= ~0xf;
-        client->samplesLeft += func_802B3DB8_de(drvr, (*client->handler)(client));
+        client->samplesLeft += _timeToSamplesNoRound(drvr, (*client->handler)(client));
     }
     drvr->paramSamples &= ~0xf;
 
@@ -228,7 +228,7 @@ void _collectPVoices(void *arg0) {
     }
 }
 
-s32 func_802B3CD0_de(func_8022E694_S1 *arg0, s32 arg1) {
+s32 _timeToSamples(func_8022E694_S1 *arg0, s32 arg1) {
     f32 v;
     int idx;
 
@@ -244,7 +244,7 @@ extern char D_800C7570;
 extern char s_audioSynthesizerText;
 
 
-s32 func_802B3D10_de(ALSynth4C *drvr, ALPlayer_s14 **client) {
+s32 __nextSampleTime(ALSynth4C *drvr, ALPlayer_s14 **client) {
  s32 smallest = 0x7FFFFFFF;
  ALPlayer_s14 *scan;
  if (drvr->head == 0) Audio_Assert(&D_800C7570, &s_audioSynthesizerText, 0x133);
@@ -262,7 +262,7 @@ s32 func_802B3D10_de(ALSynth4C *drvr, ALPlayer_s14 **client) {
  return (*client)->samplesLeft;
 }
 
-s32 func_802B3DB8_de(func_8022E694_S1 *arg0, s32 arg1) {
+s32 _timeToSamplesNoRound(func_8022E694_S1 *arg0, s32 arg1) {
     f32 v;
     int idx;
 

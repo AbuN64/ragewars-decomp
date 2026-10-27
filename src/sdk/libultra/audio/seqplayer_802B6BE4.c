@@ -8,7 +8,7 @@
 
 extern void func_802B3470_de(void *arg0, void *arg1, s16 arg2);
 
-extern void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3);
+extern void alSynSetVol(void *arg0, void *arg1, s16 arg2, s32 arg3);
 
 extern s32 func_802B00D4_de(void *, s16 *, s32);
 
@@ -66,7 +66,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     object->envGain = 0;
     object->envEndTime = ((ALSeqPlayer *)seqPlayer)->curTime + releaseDuration;
     func_802B3470_de(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0);
-    func_802B3480_de(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0, releaseDuration);
+    alSynSetVol(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0, releaseDuration);
     entry.type = 5;
     entry.object = releasedVoice;
     func_802B00D4_de(&((ALSeqPlayer *)seqPlayer)->evtq, &entry, releaseDuration);

@@ -38,7 +38,7 @@ extern void alSynStopVoice(struct Shape_typemap_71 *, void *);
 
 extern void alSynFreeVoice(void *, void *);
 
-extern void func_802B3480_de(void *, void *, s16, s32);
+extern void alSynSetVol(void *, void *, s16, s32);
 
 extern void alSynSetPitch(void *, void *, f32);
 
@@ -147,7 +147,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             delta = seqp->nextEvent.msg.vol.delta;
             vs->envEndTime = seqp->curTime + delta;
             vs->envGain = seqp->nextEvent.msg.vol.vol;
-            func_802B3480_de(seqp->drvr, voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp), delta);
+            alSynSetVol(seqp->drvr, voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp), delta);
             break;
         case 22: /* AL_TREM_OSC_EVT */
             vs = seqp->nextEvent.msg.osc.vs;
@@ -156,7 +156,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             tremeloSlot = &vs->tremelo;
             tremelo = (u32)oscValue;
             *tremeloSlot = tremelo;
-            func_802B3480_de(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
+            alSynSetVol(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
                           __vsDelta(vs, seqp->curTime));
             evt.type = 22;
             evt.msg.osc.vs = vs;
@@ -187,7 +187,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
         case 10: /* AL_SEQP_VOL_EVT */
             seqp->vol = seqp->nextEvent.msg.spvol.type;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
-                func_802B3480_de(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
+                alSynSetVol(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
                               __vsDelta(vs, seqp->curTime));
             }
             break;
@@ -271,7 +271,7 @@ extern s32 __vsPan(void *, void *);
 
 
 
-extern void func_802B35E0_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
+extern void alSynStartVoiceParams(ALSynthalSynAllocVoice *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
 
 
 
@@ -482,7 +482,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             pan = __vsPan(vstate, seqp);
             vol = __vsVol((ALVoiceState *)vstate, (ALSeqPlayer *)seqp);
             deltaTime = sound->envelope->attackTime;
-            func_802B35E0_de(seqp->drvr, (ALVoice_s *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
+            alSynStartVoiceParams(seqp->drvr, (ALVoice_s *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
             evt.type = 6; /* AL_SEQP_ENV_EVT */
             evt.msg.vol.voice = voice;
             evt.msg.vol.vol = sound->envelope->decayVolume;
@@ -514,14 +514,14 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
         if (!vstate)
             return;
         vstate->velocity = byte2;
-        func_802B3480_de(seqp->drvr, &vstate->voice, __vsVol((ALVoiceState *)vstate, (ALSeqPlayer *)seqp),
+        alSynSetVol(seqp->drvr, &vstate->voice, __vsVol((ALVoiceState *)vstate, (ALSeqPlayer *)seqp),
                       __vsDelta(vstate, seqp->curTime));
         break;
     case 0xD0: /* AL_MIDI_ChannelPressure */
         for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
             if (vs->channel == chan) {
                 vs->velocity = byte1;
-                func_802B3480_de(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
+                alSynSetVol(seqp->drvr, &vs->voice, __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
                               __vsDelta(vs, seqp->curTime));
             }
         }
@@ -542,7 +542,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if ((vs->channel == chan) && (vs->envPhase != 3)) {
                     vol = __vsVol((ALVoiceState *)vs, (ALSeqPlayer *)seqp);
-                    func_802B3480_de(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
+                    alSynSetVol(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
                 }
             }
             break;

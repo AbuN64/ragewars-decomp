@@ -27,7 +27,7 @@ void alLink(void *node, void **previousNode) {
     *previousNode = node;
 }
 
-extern void func_802B3770_de(void);
+extern void alSynNew(void);
 
 void alInit(void *audioGlobals) {
     void **p;
@@ -35,7 +35,7 @@ void alInit(void *audioGlobals) {
     p = (void **)&D_800D4070;
     if (*p == 0) {
         *p = audioGlobals;
-        func_802B3770_de();
+        alSynNew();
     }
 }
 

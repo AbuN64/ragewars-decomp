@@ -25,7 +25,7 @@
 
 
 
-void func_802B35E0_de(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
+void alSynStartVoiceParams(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
 {
     ALStartParamAlt *update;
     ALFilter_s_func_802B3000_de *f;
@@ -46,7 +46,7 @@ void func_802B35E0_de(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32 pitc
         update->volume = vol;
         update->fxMix = fxmix;
         update->pitch = pitch;
-        update->samples = func_802B3CD0_de(s, t);
+        update->samples = _timeToSamples(s, t);
         update->wave = w;
 
         f = v->pvoice->channelKnob;

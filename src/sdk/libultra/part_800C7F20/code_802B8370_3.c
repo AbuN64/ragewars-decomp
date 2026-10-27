@@ -16,7 +16,7 @@
 
 
 
-void func_802B3480_de(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
+void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
     s32 new_var;
     void *Shared_func_802B3480_de_v0;
     void *voiceFilter;
@@ -29,7 +29,7 @@ void func_802B3480_de(void *synth, void *voice, s16 targetVolume, s32 rampTime) 
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_8 = 0xB;
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_C = (s32) targetVolume;
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_4 = new_var;
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_10 = func_802B3CD0_de(synth, rampTime);
+            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_10 = _timeToSamples(synth, rampTime);
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_0 = 0;
             voiceFilter = ((struct Draw *) ((ObjectStateC_2 *) voice)->unk_8.v1)->model;
             fn = ((CallbackStateC_4 *)(voiceFilter))->callback;

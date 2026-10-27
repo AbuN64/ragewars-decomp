@@ -65,13 +65,13 @@ extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_s *);
 
  /* alSynAllocVoice */
-extern void func_802B3540_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *);
+extern void alSynStartVoice(ALSynthalSynAllocVoice *, ALVoice_s *, void *);
 
          /* alSynStartVoice */
 extern void alSynSetPan(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
 
              /* alSynSetPan */
-extern void func_802B3480_de(ALSynthalSynAllocVoice *, ALVoice_s *, s16, s32);
+extern void alSynSetVol(ALSynthalSynAllocVoice *, ALVoice_s *, s16, s32);
 
        /* alSynSetVol */
 extern void alSynSetPitch(ALSynthalSynAllocVoice *, ALVoice_s *, f32);
@@ -155,10 +155,10 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             pan = (u8)((tmp) < (127) ? (tmp) : (127));
             pitch = state->pitch;
             delta = snd->envelope->attackTime;
-            func_802B3540_de(sndp->drvr, voice, snd->wavetable);
+            alSynStartVoice(sndp->drvr, voice, snd->wavetable);
             state->state = 1;
             alSynSetPan(sndp->drvr, voice, pan);
-            func_802B3480_de(sndp->drvr, voice, vol, delta);
+            alSynSetVol(sndp->drvr, voice, vol, delta);
             alSynSetPitch(sndp->drvr, voice, pitch);
             alSynSetFXMix(sndp->drvr, voice, state->fxMix);
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
@@ -171,7 +171,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             if (state->state != 1 || !snd)
                 return;
             delta = (s32)_DivS32ByF32(snd->envelope->releaseTime, state->pitch);
-            func_802B3480_de(sndp->drvr, &state->voice, 0, delta);
+            alSynSetVol(sndp->drvr, &state->voice, 0, delta);
             if (delta) {
                 evt.common.type = 7; /* AL_SNDP_END_EVT */
                 evt.common.state = state;
@@ -216,7 +216,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             state->vol = event_view->vol.vol;
             if (state->state == 1 && snd) {
                 vtmp = snd->envelope->decayVolume * state->vol / 127;
-                func_802B3480_de(sndp->drvr, &state->voice, (s16)vtmp, 1000);
+                alSynSetVol(sndp->drvr, &state->voice, (s16)vtmp, 1000);
             }
             break;
 
@@ -224,7 +224,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             if (snd->envelope->decayTime != -1) {
                 vtmp = snd->envelope->decayVolume * state->vol / 127;
                 delta = (s32)_DivS32ByF32(snd->envelope->decayTime, state->pitch);
-                func_802B3480_de(sndp->drvr, &state->voice, (s16)vtmp, delta);
+                alSynSetVol(sndp->drvr, &state->voice, (s16)vtmp, delta);
                 evt.common.type = 1; /* AL_SNDP_STOP_EVT */
                 evt.common.state = state;
                 func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);

@@ -35,7 +35,7 @@ extern u32 D_800CB710;
 extern void func_80256FC0_de(Work56EC8 *arg0);
 
 
-extern void *func_802B3A44_de(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
+extern void *alAudioFrame(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
 
 extern void Sched_SendSchedulerTask(void *arg0, void *arg1);
 
@@ -99,7 +99,7 @@ s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
   value = func_802BBBC0_de(audioTask->owner);
   audioTask->id = (u16)D_80107E98;
   func_8025E48C_de();
-  item = func_802B3A44_de(D_80107E20[D_800CB708], &completed, value, audioTask->id);
+  item = alAudioFrame(D_80107E20[D_800CB708], &completed, value, audioTask->id);
   func_8025E4B0_de();
   if (completed != 0)
   {
