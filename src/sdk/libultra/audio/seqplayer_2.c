@@ -22,7 +22,7 @@ extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlush
 extern void alSynStopVoice(struct Shape_typemap_71 *, ALVoice_s *);                   /* alSynStopVoice */
 extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
-extern void func_802B33E0_de(void *, ALVoice_s *, f32);              /* alSynSetPitch */
+extern void alSynSetPitch(void *, ALVoice_s *, f32);              /* alSynSetPitch */
 extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);        /* __vsVol */
 extern ALMicroTime __vsDelta(ALVoiceState *, ALMicroTime);  /* __vsDelta */
 extern void __seqpReleaseVoice(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
@@ -90,7 +90,7 @@ ALMicroTime Audio_ProcessSequenceEvents(void *node)
             chan = seqp->base.nextEvent.msg.osc.chan;
             delta = (*seqp->base.updateOsc)(oscState, &oscValue);
             vs->vibrato = oscValue;
-            func_802B33E0_de(seqp->base.drvr, &vs->voice,
+            alSynSetPitch(seqp->base.drvr, &vs->voice,
                           vs->pitch * vs->vibrato * seqp->base.chanState[chan].pitchBend);
             evt.type = 23;
             evt.msg.osc.vs = vs;

@@ -25,7 +25,7 @@ s32 func_802BD170_de(s32);
 
 
 
-extern s32 func_802B3130_de(ALSynthalSynAllocVoice *, PVoice_s_func_802B3000_de **, s16);
+extern s32 _allocatePVoice(ALSynthalSynAllocVoice *, PVoice_s_func_802B3000_de **, s16);
 
  /* _allocatePVoice */
 
@@ -54,7 +54,7 @@ s32 alSynAllocVoice(ALSynthalSynAllocVoice *drvr, ALVoice_s *voice, ALVoiceConfi
     voice->state = 0;
     voice->pvoice = 0;
 
-    stolen = func_802B3130_de(drvr, &pvoice, vc->priority);
+    stolen = _allocatePVoice(drvr, &pvoice, vc->priority);
 
     if (pvoice) {
         f = pvoice->channelKnob;

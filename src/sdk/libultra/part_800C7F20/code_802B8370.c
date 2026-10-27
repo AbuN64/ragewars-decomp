@@ -15,7 +15,7 @@
 
 
 
-void func_802B32A0_de(void *synth, void *voice, s8 effectMix) {
+void alSynSetFXMix(void *synth, void *voice, s8 effectMix) {
     s32 new_var;
     s32 mixMagnitude;
     void *Shared_func_802B32A0_de_v0;
@@ -53,7 +53,7 @@ void func_802B32A0_de(void *synth, void *voice, s8 effectMix) {
 
 
 
-void func_802B3350_de(void *synth, void *voice, u8 pan) {
+void alSynSetPan(void *synth, void *voice, u8 pan) {
     s32 new_var;
     void *Shared_func_802B3350_de_v0;
     void *voiceFilter;
@@ -85,7 +85,7 @@ void func_802B3350_de(void *synth, void *voice, u8 pan) {
 
 
 
-void func_802B33E0_de(void *synth, void *voice, f32 pitchRatio) {
+void alSynSetPitch(void *synth, void *voice, f32 pitchRatio) {
     s32 new_var;
     void *Shared_func_802B33E0_de_v0;
     void *voiceFilter;

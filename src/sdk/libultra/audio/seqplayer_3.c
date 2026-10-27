@@ -57,13 +57,13 @@ extern void __seqpReleaseVoice(ALSeqPlayer *, ALVoice_s *, ALMicroTime);
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime);
 
  /* alSynSetVol */
-extern void func_802B3350_de(void *, ALVoice_s *, u8);
+extern void alSynSetPan(void *, ALVoice_s *, u8);
 
  /* alSynSetPan */
-extern void func_802B32A0_de(void *, ALVoice_s *, u8);
+extern void alSynSetFXMix(void *, ALVoice_s *, u8);
 
  /* alSynSetFXMix */
-extern void func_802B33E0_de(void *, ALVoice_s *, f32);
+extern void alSynSetPitch(void *, ALVoice_s *, f32);
 
  /* alSynSetPitch */
 extern void __setInstChanState(ALSeqPlayer *, ALInstrument *, s32);
@@ -248,7 +248,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan) {
                     pan = __vsPan(vs, seqp);
-                    func_802B3350_de(seqp->drvr, &vs->voice, pan);
+                    alSynSetPan(seqp->drvr, &vs->voice, pan);
                 }
             }
             break;
@@ -286,7 +286,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             seqp->chanState[chan].fxmix = byte2;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan)
-                    func_802B32A0_de(seqp->drvr, &vs->voice, byte2);
+                    alSynSetFXMix(seqp->drvr, &vs->voice, byte2);
             }
             break;
         case 0x14: /* AL_MIDI_FX_CTRL_0 */
@@ -321,7 +321,7 @@ void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
             seqp->chanState[chan].pitchBend = bendRatio;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
                 if (vs->channel == chan)
-                    func_802B33E0_de(seqp->drvr, &vs->voice, vs->pitch * bendRatio * vs->vibrato);
+                    alSynSetPitch(seqp->drvr, &vs->voice, vs->pitch * bendRatio * vs->vibrato);
         }
         break;
     default:

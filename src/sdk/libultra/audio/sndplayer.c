@@ -68,16 +68,16 @@ extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_
 extern void func_802B3540_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *);
 
          /* alSynStartVoice */
-extern void func_802B3350_de(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
+extern void alSynSetPan(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
 
              /* alSynSetPan */
 extern void func_802B3480_de(ALSynthalSynAllocVoice *, ALVoice_s *, s16, s32);
 
        /* alSynSetVol */
-extern void func_802B33E0_de(ALSynthalSynAllocVoice *, ALVoice_s *, f32);
+extern void alSynSetPitch(ALSynthalSynAllocVoice *, ALVoice_s *, f32);
 
             /* alSynSetPitch */
-extern void func_802B32A0_de(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
+extern void alSynSetFXMix(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
 
              /* alSynSetFXMix */
 extern void alSynStopVoice(ALSynthalSynAllocVoice *, ALVoice_s *);
@@ -157,10 +157,10 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             delta = snd->envelope->attackTime;
             func_802B3540_de(sndp->drvr, voice, snd->wavetable);
             state->state = 1;
-            func_802B3350_de(sndp->drvr, voice, pan);
+            alSynSetPan(sndp->drvr, voice, pan);
             func_802B3480_de(sndp->drvr, voice, vol, delta);
-            func_802B33E0_de(sndp->drvr, voice, pitch);
-            func_802B32A0_de(sndp->drvr, voice, state->fxMix);
+            alSynSetPitch(sndp->drvr, voice, pitch);
+            alSynSetFXMix(sndp->drvr, voice, state->fxMix);
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
             evt.common.state = state;
             delta = (s32)_DivS32ByF32(snd->envelope->attackTime, state->pitch);
@@ -191,7 +191,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
                 tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
                 tmp = ((tmp) > (0) ? (tmp) : (0));
                 pan = (u8)((tmp) < (127) ? (tmp) : (127));
-                func_802B3350_de(sndp->drvr, &state->voice, pan);
+                alSynSetPan(sndp->drvr, &state->voice, pan);
             }
             break;
 
@@ -202,14 +202,14 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
                     state->pitch = min;
             }
             if (state->state == 1) {
-                func_802B33E0_de(sndp->drvr, &state->voice, state->pitch);
+                alSynSetPitch(sndp->drvr, &state->voice, state->pitch);
             }
             break;
 
         case 8: /* AL_SNDP_FX_EVT */
             state->fxMix = event_view->fx.mix;
             if (state->state == 1)
-                func_802B32A0_de(sndp->drvr, &state->voice, state->fxMix);
+                alSynSetFXMix(sndp->drvr, &state->voice, state->fxMix);
             break;
 
         case 3: /* AL_SNDP_VOL_EVT */

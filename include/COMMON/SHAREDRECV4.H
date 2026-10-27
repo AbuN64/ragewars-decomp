@@ -4,8 +4,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 typedef void ( *SharedRecV4)(void *, signed int, void *);
 
-struct Node_func_802B3130_de;
-typedef struct Node_func_802B3130_de Node_func_802B3130_de;
+struct NodeallocatePVoice;
+typedef struct NodeallocatePVoice NodeallocatePVoice;
 
 struct ObjectLinks10_2;
 typedef struct ObjectLinks10_2 ObjectLinks10_2;
@@ -74,9 +74,9 @@ struct ObjectState10_3 {
 };
 
 struct Limit;
-struct Node_func_802B3130_de;
-struct Node_func_802B3130_de {
-    struct Node_func_802B3130_de *next;
+struct NodeallocatePVoice;
+struct NodeallocatePVoice {
+    struct NodeallocatePVoice *next;
     char pad4[4];
     struct Limit *limit;
     char padC[0xCC];

@@ -40,7 +40,7 @@ extern void alSynFreeVoice(void *, void *);
 
 extern void func_802B3480_de(void *, void *, s16, s32);
 
-extern void func_802B33E0_de(void *, void *, f32);
+extern void alSynSetPitch(void *, void *, f32);
 
 
 extern s16 __vsVol(ALVoiceState *, ALSeqPlayer *);
@@ -169,7 +169,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             chan = seqp->nextEvent.msg.osc.chan;
             delta = (*seqp->updateOsc)(oscState, &oscValue);
             vs->vibrato = oscValue;
-            func_802B33E0_de(seqp->drvr, &vs->voice,
+            alSynSetPitch(seqp->drvr, &vs->voice,
                           vs->pitch * vs->vibrato * seqp->chanState[chan].pitchBend);
             evt.type = 23;
             evt.msg.osc.vs = vs;
@@ -275,9 +275,9 @@ extern void func_802B35E0_de(ALSynthalSynAllocVoice *, ALVoice_s *, void *, f32,
 
 
 
-extern void func_802B3350_de(void *, void *, u8);
+extern void alSynSetPan(void *, void *, u8);
 
-extern void func_802B32A0_de(void *, void *, u8);
+extern void alSynSetFXMix(void *, void *, u8);
 
 
 extern void __setInstChanState(void *, void *, s32);
@@ -533,7 +533,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan) {
                     pan = __vsPan(vs, seqp);
-                    func_802B3350_de(seqp->drvr, &vs->voice, pan);
+                    alSynSetPan(seqp->drvr, &vs->voice, pan);
                 }
             }
             break;
@@ -571,7 +571,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             seqp->chanState[chan].fxmix = byte2;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if (vs->channel == chan)
-                    func_802B32A0_de(seqp->drvr, &vs->voice, byte2);
+                    alSynSetFXMix(seqp->drvr, &vs->voice, byte2);
             }
             break;
         default:
@@ -598,7 +598,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             seqp->chanState[chan].pitchBend = bendRatio;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
                 if (vs->channel == chan)
-                    func_802B33E0_de(seqp->drvr, &vs->voice, vs->pitch * bendRatio * vs->vibrato);
+                    alSynSetPitch(seqp->drvr, &vs->voice, vs->pitch * bendRatio * vs->vibrato);
         }
         break;
     default:

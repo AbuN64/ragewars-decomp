@@ -8,7 +8,7 @@
 
 
 
-s32 func_802B3130_de(void *synth, void **selectedVoice, s16 requestedPriority) {
+s32 _allocatePVoice(void *synth, void **selectedVoice, s16 requestedPriority) {
     s16 lowestPriority;
     s32 voiceStolen;
     s32 stolenResultCopy;
@@ -26,13 +26,13 @@ s32 func_802B3130_de(void *synth, void **selectedVoice, s16 requestedPriority) {
         stolenResultCopy = voiceStolen;
         if (candidateVoice != 0) {
             do {
-                if ((lowestPriority >= ((Node_func_802B3130_de *)candidateVoice)->limit->limit) &&
-                    (((Node_func_802B3130_de *)candidateVoice)->flags == 0)) {
+                if ((lowestPriority >= ((NodeallocatePVoice *)candidateVoice)->limit->limit) &&
+                    (((NodeallocatePVoice *)candidateVoice)->flags == 0)) {
                     *selectedVoice = candidateVoice;
                     voiceStolen = 1;
-                    lowestPriority = (s16)(u16)((Node_func_802B3130_de *)candidateVoice)->limit->limit;
+                    lowestPriority = (s16)(u16)((NodeallocatePVoice *)candidateVoice)->limit->limit;
                 }
-                candidateVoice = ((Node_func_802B3130_de *)candidateVoice)->next;
+                candidateVoice = ((NodeallocatePVoice *)candidateVoice)->next;
                 stolenResultCopy = voiceStolen;
             } while (candidateVoice != 0);
         }
