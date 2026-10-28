@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "TYPES.H"
@@ -537,7 +538,7 @@ extern void Cinema_AddMessage(char *);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *Cache_RequestWordCountedResourcePinned(s32, void **, s32, void *);
 extern ResultsText *Cache_RequestPackSection(s32, void *, s32, s32, void *, s32, void *);
-extern void func_802BD3A0_de(void *, const void *, s32);
+
 extern s32 XStdio_FormatBuffer(char *, const char *, ...);
 extern u8 Player_GetLevelProgress(Profile *, s32);
 extern void Scene_ReleaseCachedLevelData(Shared_World *);

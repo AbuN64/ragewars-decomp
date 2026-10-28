@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
@@ -10,7 +11,7 @@
 void Cache_ReplaceResourceBlock(s32, void **, void *);
 void * Cache_AllocResourceBlock(s32, void *, s32);
 void * func_80254600_de(s32, s32, s32);
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
  /* extern */
 /* extern */
 /* Unpack or copy a resource into an allocated buffer and install it. */

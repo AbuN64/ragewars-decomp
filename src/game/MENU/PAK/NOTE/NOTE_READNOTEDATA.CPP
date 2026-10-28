@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "COMMON/UNUSED.H"
 #include "MENU/80403BCC.H"
@@ -30,7 +31,7 @@ extern void Control_ReadControllerStates(void);
 
 extern void Control_ReleasePakLock(void);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern s32 Pfs_ReadWriteFile(Device *, s32, s32, s32, s32, s32);
 

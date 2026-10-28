@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TEXTURE/80256220.H"
@@ -30,7 +31,7 @@
  * otherwise reuses a free entry or allocates and links a new 0x90-byte one, copies the block into it and
  * marks it in use. */
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern void func_802BD280_de(void *, s32);
 

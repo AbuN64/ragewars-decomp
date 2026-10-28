@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/STREAM.H"
 #include "COMMON/LONE/D_8010AC80.H"
 #include "GAME/SOUNDINFO.H"
@@ -29,7 +30,7 @@ extern s32 SetN64_GetSizedPackSection(s32, s32, s32 *);
 
 extern void *Cache_AllocResourceBlock(s32, void *, s32);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 
 extern void Cache_ReplaceResourceBlock(s32, void **, void *);

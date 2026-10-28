@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -13,7 +14,7 @@
 /* _VirtualToPhysicalTask, drafted from ultralib src/io/sptask.c; this library's bcopy is the
    destination-first copy func_802BD3A0_de. */
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 
 /* The yielded task records its ucode pointer in the last word of its 0xC00-byte yield buffer. */

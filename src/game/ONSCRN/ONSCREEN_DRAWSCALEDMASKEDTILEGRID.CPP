@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/EXTERNS_6.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKSC_2.H"
@@ -321,7 +322,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
 }
 
 extern u8 D_801470C0_de[0x90];
-extern void *func_802BD3A0_de(void *, const void *, int);
+
 typedef struct ResourceView {
     u8 *data;
     u8 type;

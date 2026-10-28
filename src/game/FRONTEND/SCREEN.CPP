@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -71,7 +72,7 @@ void Frontend_ApplyVideoMode(void) {
 extern unsigned short g_frontendVideoModeId;
 extern Modep g_frontendVideoMode;
 extern Modep D_800D4530[];
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 extern void osViSetMode(void *);
 /* VI start registers (hStart, vStart) hold the first pixel/line in the high half and the last in the low half. The
    ROM reads the halves through a stack copy, so a little-endian host keeps the low half at the first address. */

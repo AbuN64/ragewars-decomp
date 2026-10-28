@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "sdk/EXTERNS.H"
 #include "COMMON/UNUSED.H"
@@ -22,7 +23,7 @@ unsigned int D_auto_rodata_unresolved_800C7C68[22] = {
 
 /* 802C2520.CPP */
 /* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */
-unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value);
+
 extern u8 g_printfFlagCharactersText;
 extern u8 D_800C7B10_de;
 extern const char D_800D52B0[];
@@ -66,7 +67,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             return x.nchar;
         }
         ++s;
-        for (x.flags = 0, fchar = &g_printfFlagCharactersText, fbit = D_auto_data_unresolved_800CCD48; (t = func_802BD3C8_de(fchar, *s)) != 0; ++s) {
+        for (x.flags = 0, fchar = &g_printfFlagCharactersText, fbit = D_auto_data_unresolved_800CCD48; (t = (unsigned char *)func_802BD3C8_de((const char *)fchar, *s)) != 0; ++s) {
             x.flags |= fbit[t - fchar];
         }
         if (*s == 0x2A) {
@@ -95,7 +96,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
                 }
             }
         }
-        x.qual = func_802BD3C8_de(&D_800C7B10_de, *s) ? *s++ : 0;
+        x.qual = func_802BD3C8_de((const char *)&D_800C7B10_de, *s) ? *s++ : 0;
         if (x.qual == 0x6C && *s == 0x6C) {
             x.qual = 0x4C;
             ++s;
@@ -118,7 +119,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
     }
 }
 
-extern size_t func_802BD400_de(const unsigned char *s);
+
 
 void _Putfld(_Pft *px, va_list *pap, int code, unsigned char *ac)
 {
@@ -224,7 +225,7 @@ case_p:
     return;
 case_s:
     px->s = va_arg(*pap, unsigned char *);
-    px->n1 = func_802BD400_de(px->s);
+    px->n1 = func_802BD400_de((const char *)px->s);
 
     if (px->prec >= 0 && px->prec < px->n1) {
         px->n1 = px->prec;
@@ -242,7 +243,7 @@ case_default:
 extern u8 g_lowercaseHexDigitsText[];
 extern u8 D_800D5314[];
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 static inline void lldivInline(LldivResult *result, s64 numerator, s64 denominator) {
     result->quot = Libc_SignedDivide(numerator, denominator);

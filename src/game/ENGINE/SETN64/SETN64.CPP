@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/RESULTS.H"
 #include "TYPES.H"
 #include "include_asm.h"
@@ -101,7 +102,7 @@ void *SetN64_GetChunkPayload(int *arg0, int *arg1) {
 
 /* Transposes the byte matrix after its eight-byte dimensions header and optionally copies the result back. */
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 void SetN64_TransposeRecords(void *sourceBlock, void *destinationBlock, s32 copyBack)
 {

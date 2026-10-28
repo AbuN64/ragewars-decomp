@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
@@ -17,7 +18,7 @@ extern struct IntPair D_801462C8;
 
 extern s32 D_80154030;
 
-extern s32 func_802BD400_de(u8 *);
+
 
 s32 Encoded_ApplyCheatCode(void)
 {
@@ -32,11 +33,11 @@ s32 Encoded_ApplyCheatCode(void)
     for (i = 0; i < 12; i++) {
         code = D_0044FB90[i].code;
         j = 0;
-        if (func_802BD400_de(code) != func_802BD400_de(D_800E5CAC)) {
+        if ((s32)func_802BD400_de((const char *)code) != (s32)func_802BD400_de((const char *)D_800E5CAC)) {
             match = 0;
         } else {
             for (;;) {
-                if (j < func_802BD400_de(code)) {
+                if (j < (s32)func_802BD400_de((const char *)code)) {
                     if ((code[j] ^ j) != D_800E5CAC[j]) {
                         match = 0;
                         break;

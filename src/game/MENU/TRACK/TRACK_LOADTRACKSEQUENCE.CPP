@@ -24,8 +24,8 @@ extern void Track_BuildWeightedSpline(s32,CVector3 *,f32 *,Spline *);
 
 extern void Cache_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
 
-/* The pack append API tests the second ABI word for a nonzero preparation flag. */
-static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return Polytrak2_AppendOutputPackSection(pack,(s32)prepare,size); }
+/* A nonnull source is copied into the new pack section; null reserves it. */
+static inline char *packAppend(Pack *pack,const void *source,s32 size) { return Polytrak2_AppendOutputPackSection(pack,source,size); }
 
 static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9; return (b+a)*4+48; }
 

@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "COMMON/MEASUREDRECAT14V4.H"
@@ -29,7 +30,7 @@ extern s32 Cache_RequestWordCountedResourcePinned(s32 arg0, s32 *arg1, s32 arg2,
 
 extern void **Cache_RequestPackSection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern void Scene_ReleaseCachedLevelData(Shared_World *arg0);
 

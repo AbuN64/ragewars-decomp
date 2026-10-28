@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "sdk/libgultra_inferred/LIBULTRA_WRITEDEBUGLINKBYTE.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -15,7 +16,7 @@ extern u8 D_800CB480;
 
 extern void Libultra_WriteDebugLinkBlock(s32, s32);
 
-extern s32 func_802BD400_de(u8 *arg0);
+
 
 extern void Libultra_ReadDebugLinkBlock(s32, s32, void *);
 
@@ -88,8 +89,8 @@ s32 Libultra_SendDebugLinkIdentification(void) {
                 if (D_8014D3E8 == 0) {
                     word |= first.byte;
                     first.word = word;
-                    if (first.word >= (u32)func_802BD400_de(data)) {
-                        transferLength = func_802BD400_de(data);
+                    if (first.word >= (u32)func_802BD400_de((const char *)data)) {
+                        transferLength = func_802BD400_de((const char *)data);
                     } else {
                         transferLength = first.word;
                     }

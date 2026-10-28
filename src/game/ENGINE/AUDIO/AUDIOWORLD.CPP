@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/LISTNODE.H"
 #include "AUDIO/80259280.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -57,7 +58,7 @@ extern s16 func_8025E578_de(void *);
 
 extern s16 alSndpAllocate(char *, s32);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern void Sound_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
 

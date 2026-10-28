@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS4_2.H"
@@ -694,7 +695,7 @@ extern CVector3 D_80111D70[];
 extern s32 D_800D2850;
 extern s32 SetN64_GetSizedPackSection(s32 pack, s32 index, s32 *size);
 extern u8 **Cache_AllocateResource(s32, s32, u32, void *);
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 /* A lit model vertex: the Vtx_t layout, colour bytes at 0xC. */
 typedef struct LitVertex {
     s16 position[3];

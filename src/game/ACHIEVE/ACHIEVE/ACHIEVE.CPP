@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -43,7 +44,7 @@ static inline s32 count_achievements(s32 index) {
 
 extern PresetTable *Scene_GetBlLevelData(void *table, s32 key);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 /* Announces the current arena's entry for a slot: selects one of four five-byte name tables from the
    mode byte D_801462D5, indexes it by the argument times 400 and hands that entry to Defs_SetBitValue

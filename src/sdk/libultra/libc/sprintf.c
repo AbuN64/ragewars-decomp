@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/LLDIVRESULT.H"
@@ -14,7 +15,7 @@ s32 func_802BD320_de(char *buffer, const char *format, ...) {
     return length;
 }
 
-void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 /* _Printf output routine: copy a span and return the next output position. */
 void *proutSprintf(void *arg0, const void *arg1, s32 arg2) {
@@ -22,7 +23,7 @@ void *proutSprintf(void *arg0, const void *arg1, s32 arg2) {
 }
 
 /** Copy a byte span and return its destination. */
-void *func_802BD3A0_de(void *destination, const void *source, int count) {
+void *func_802BD3A0_de(void *destination, const void *source, size_t count) {
     unsigned char *out = destination;
     const unsigned char *in = source;
     while (count != 0) {
@@ -33,25 +34,28 @@ void *func_802BD3A0_de(void *destination, const void *source, int count) {
 }
 
 /** Find a byte in a zero-terminated string. */
-unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value) {
-    while (*string != value) {
-        if (*string == 0) {
+char *func_802BD3C8_de(const char *string, int value) {
+    const unsigned char *cursor = (const unsigned char *)string;
+    unsigned char byte = (unsigned char)value;
+    while (*cursor != byte) {
+        if (*cursor == 0) {
             return 0;
         }
-        ++string;
+        ++cursor;
     }
-    return string;
+    return (char *)cursor;
 }
 
-s32 func_802BD400_de(u8 *arg0) {
-    u8 *terminator;
-    terminator = arg0;
-    if (*arg0 != 0) {
+size_t func_802BD400_de(const char *string) {
+    const unsigned char *cursor = (const unsigned char *)string;
+    const unsigned char *terminator;
+    terminator = cursor;
+    if (*cursor != 0) {
         do {
             terminator += 1;
         } while (*terminator != 0);
     }
-    return terminator - arg0;
+    return terminator - cursor;
 }
 
 #if defined(VERSION_US)

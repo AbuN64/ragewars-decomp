@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "MENU/PAK/pak_note_search.H"
 #include "COMMON/UNUSED.H"
 #include "RESMGR/resmgr_string_memory.H"
@@ -33,7 +34,7 @@ extern void Control_ReadControllerStates(void);
 
 extern void Control_ReleasePakLock(void);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 

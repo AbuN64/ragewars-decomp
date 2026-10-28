@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "COMMON/LONE/D_8010FC00.H"
 #include "MENU/80403BCC.H"
@@ -45,7 +46,7 @@ extern u8 g_controllerPakFilenameAlphabet[];
 
 extern s32 XPlus_UppercaseCharacter(s32 c);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
                          s32 size, s32 *file_no);

@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -317,7 +318,7 @@ struct ItemsPreviewStateA;
 
 /* extern */
 extern s32 Control_IsSnapshotActive(void); /* extern */
-extern void *func_802BD3A0_de(void *, const void *, int); /* extern */
+
 extern char D_00285160;
 extern char g_loadSavePersistentData;
 

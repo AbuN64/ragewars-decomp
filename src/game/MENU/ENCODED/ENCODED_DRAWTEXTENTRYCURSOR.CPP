@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
@@ -25,7 +26,7 @@ extern s32 D_80154030;
 
 /* Checks whether the input matches the indexed, XOR-masked reference string. */
 
-s32 func_802BD400_de(u8 *);
+
 
 extern u8 D_800E5CAC[0x64];
 
@@ -133,10 +134,10 @@ s32 Encoded_DeletePreviousTextEntryCharacter(void) {
 s32 Encoded_CheckEncodedText(u8 *input) {
     s32 index = 0;
 
-    if (func_802BD400_de(input) != func_802BD400_de(D_800E5CAC)) {
+    if ((s32)func_802BD400_de((const char *)input) != (s32)func_802BD400_de((const char *)D_800E5CAC)) {
         return 0;
     }
-    for (; index < func_802BD400_de(input); index++) {
+    for (; index < (s32)func_802BD400_de((const char *)input); index++) {
         if ((input[index] ^ index) != D_800E5CAC[index]) {
             return 0;
         }

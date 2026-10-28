@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJB.H"
@@ -18,7 +19,7 @@ extern char D_00285160[];
 extern char g_gamePersistentData[];
 extern char D_800F41F0[];
 extern int Control_IsSnapshotActive(void);
-extern void *func_802BD3A0_de(void *, const void *, int);
+
 extern void Scene_SetSelection(ItemsPreviewStateB *,int,int);
 void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;

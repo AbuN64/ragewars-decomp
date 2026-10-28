@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -131,7 +132,7 @@ extern DraftStreamHandle **Statinst_CollectPropResources(ObjectSceneDrawCachedOp
 extern void Statinst_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
 extern DraftStreamHandle *Statinst_AcquireGeometry(ObjectSceneDrawCachedOpaqueGeometry *object, s32 index);
 extern void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     f32 matrix[16];
     CVector3 position;

@@ -151,7 +151,7 @@ typedef struct SplineSource { s32 stride,count; union { char data[0]; CVector3 p
 typedef struct SplineTable { s32 count; } SplineTable;
 extern int SetN64_GetRecordBlockSize(int *);
 extern void Polytrak2_InitializeOutputPack(void *,s32);
-extern char *Polytrak2_AppendOutputPackSection(Pack *,s32,s32);
+extern char *Polytrak2_AppendOutputPackSection(Pack *,const void *,s32);
 typedef union SplineSourceCursor { SplineSource *header; CVector3 *points; f32 *weights; } SplineSourceCursor;
 
 extern char D_0040067C[];

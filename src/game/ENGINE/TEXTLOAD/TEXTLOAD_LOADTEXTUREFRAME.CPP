@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
@@ -9,7 +10,7 @@ extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);
 extern s32 SetN64_GetPackSectionSize(void *, s32);
 extern s32 **Cache_AllocResourceBlock(s32, void *, s32);
 extern void Cache_ReplaceResourceBlock(s32, void *, s32 **);
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 typedef struct {
     s32 **handle;

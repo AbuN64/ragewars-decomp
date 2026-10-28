@@ -1,5 +1,6 @@
 #ifndef COMMON_UNUSED_H
 #define COMMON_UNUSED_H
+#include <stddef.h>
 #include "COMMON/LONE/D_8011B1D8.H"
 #include "COMMON/LONE/D_8011AF38.H"
 #include "COMMON/LONE/D_800C32DC_de.H"
@@ -4704,7 +4705,6 @@ struct t_dldc;
 typedef signed int ( *WidgetCallback)(void *, struct t_dldc);
 struct EntrySmosSetFocusedElement;
 struct Slider;
-typedef unsigned int size_t;
 struct _Pft;
 struct _Pft {
     union {

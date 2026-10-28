@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E4F8.H"
@@ -17,7 +18,7 @@ extern u8 D_800F91F0[];
 extern void Cache_DrainAndCompactResources(s32);
 extern SaveSnapshot **Cache_AllocateResource(s32, s32, s32, void *);
 extern void XPlus_FillMemory(void *, s32, s32);
-extern void func_802BD3A0_de(void *, void *, s32);
+
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
 void Snapshot_CreateSaveSnapshot(u8 *player) {

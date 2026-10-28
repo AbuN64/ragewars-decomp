@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "RENDER/802944E8_10.H"
@@ -15,7 +16,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 u32 SetN64_LocatePackSection(s32, s32, s32, u32 *);
-s32 func_802BD400_de(const char *);
+
 /* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */
 extern struct Node80253610 *D_8014AECC;
 /* Releases the previous texture viewer entry, loads entry D_8014AEB0.selectionIndex from the resident pack,
@@ -62,7 +63,7 @@ void Tengine_LoadSelectedTexture(void) {
     frame = texture;
     if (*entries == 4) {
         name = SetN64_GetPackSection(entries, 3);
-        for (i = 0; i < func_802BD400_de((char *)name); i++) {
+        for (i = 0; i < (s32)func_802BD400_de((const char *)name); i++) {
             if (name[i] == '.') {
                 name[i] = '\0';
                 break;

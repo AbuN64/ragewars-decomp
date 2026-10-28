@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -30,7 +31,7 @@ extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32, void *, s32);
 
 void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
 
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
 
 extern s32 g_geometryViewEffect;
 

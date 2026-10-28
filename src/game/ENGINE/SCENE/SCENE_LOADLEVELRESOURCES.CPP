@@ -1,3 +1,4 @@
+#include "sdk/LIBC.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/LONE/D_800E4680.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
@@ -795,7 +796,7 @@ typedef struct LightVolumeRecord {
 extern s32 SetN64_GetPackSize(void *table);
 extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);
 extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
-extern void func_802BD3A0_de(void *dst, void *src, s32 size);
+
 extern void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void Simple_InitSimpleInstance(SimpleInstance *instance, CROMSimpleInstance *record, s32 owner, char *segments);
