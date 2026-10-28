@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/S1_3.H"
-#include "particle/80271B18_2.H"
+#include "particle/GRAPHU64_PROJECTONTOCROSSNORMAL.H"
 
 static inline void normalizeProjectionNormal(CVector3 *normal) {
     f32 length;

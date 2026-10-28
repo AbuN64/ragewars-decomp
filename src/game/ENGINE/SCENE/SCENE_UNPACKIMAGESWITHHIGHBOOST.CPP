@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "sdk/SCHED/sched_runeventloopus.H"
 #include "sdk/os.h"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "WORLD/8028E6FC.H"
 #include "COMMON/UNUSED.H"
 

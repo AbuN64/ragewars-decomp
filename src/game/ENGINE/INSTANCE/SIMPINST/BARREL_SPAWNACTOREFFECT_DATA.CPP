@@ -9,7 +9,7 @@
 #include "ACTORS/LIGHTING_BUILDLITMODEL.H"
 #include "GAME/CODE_8027302C.H"
 #include "WORLD/8024E914_8.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "include_asm.h"
 
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

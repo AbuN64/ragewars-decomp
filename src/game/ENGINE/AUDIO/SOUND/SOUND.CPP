@@ -6,7 +6,7 @@
 #include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "sdk/OSINT/osyieldthread.H"
 #include "sdk/os.h"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/AUDIO/AUDIOWORLD.H"
 #include "DEFS/DEFS.H"
 #include "COMMON/AUDIO_CONTEXT.H"

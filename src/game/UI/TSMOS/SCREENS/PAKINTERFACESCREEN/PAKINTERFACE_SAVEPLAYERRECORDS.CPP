@@ -1,4 +1,4 @@
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/PAKMENU.H"
 #include "include_asm.h"

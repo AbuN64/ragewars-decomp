@@ -7,7 +7,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_31.H"
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through Node_ConfigureScrolledTableCell and drawing it through func_8040D2D0_de with the given style. */
 

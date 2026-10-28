@@ -1,4 +1,4 @@
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "include_asm.h"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"

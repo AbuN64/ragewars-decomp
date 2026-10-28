@@ -17,7 +17,7 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
 
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 
 /* Fills a three-float sample for an animation track: either the stored constant vector or a linear blend

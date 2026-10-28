@@ -3,7 +3,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Samples the current record's clip sequence at time t: walks clip list 0 accumulating each
    clip's end time (the time of its last 0x24-byte key) until the clip spanning t is found or the

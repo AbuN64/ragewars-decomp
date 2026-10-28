@@ -19,7 +19,7 @@
 #include "sdk/OS/AUDIO_STOPMUSIC.H"
 #include "sdk/os.h"
 #include "SYSTEM/80265370.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/EXTERNS_11.H"
 
 /* ROM-grounded data: src/rw_pool_80258B94_C9BD8_us_rev1.c */

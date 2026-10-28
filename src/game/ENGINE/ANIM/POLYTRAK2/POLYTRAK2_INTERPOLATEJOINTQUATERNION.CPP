@@ -7,7 +7,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void Graphu64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
 

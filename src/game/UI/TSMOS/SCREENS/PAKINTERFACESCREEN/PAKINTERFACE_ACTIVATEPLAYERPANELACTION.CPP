@@ -16,7 +16,7 @@
 #include "FRONTEND/FRONTEND_FINDPROFILEOWNER.H"
 #include "FRONTEND/FRONTEND_SETPLAYERPROFILELINK.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Steps player arg2's menu state machine at 0x58 of its 0xB68-byte record in the block D_800E54A4 points to
    on the event SmpOverlay_GetSlotNodeId reports: each state accepts its events, moves to the next state (by the game

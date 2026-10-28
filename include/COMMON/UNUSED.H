@@ -1515,7 +1515,7 @@ extern void (*g_readSourceColor)(void);
 
 extern char D_800D3888[];
 
-#include "GFX/TEXT/802A8A94_6.H"
+#include "GFX/TEXT/ONSCREEN_GETFONTTEXTURE.H"
 
 extern s32 D_80147054;
 

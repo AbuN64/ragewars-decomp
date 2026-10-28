@@ -14,7 +14,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/APPROACHLOCATION.H"
 #include "ACTORS/80277444.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "particle/80271B18_3.H"
 #include "stddef.h"
 

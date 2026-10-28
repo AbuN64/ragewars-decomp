@@ -15,8 +15,8 @@
 #include "ENGINE/INSTANCE/GOBJINST_INITIALIZEPLACEDACTOR.H"
 #include "particle/8024D018_4.H"
 #include "WEAPONS/BARREL_GETEYEDISTANCESQUARED.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "ENGINE/SCENE_3.H"
 extern void Cache_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 

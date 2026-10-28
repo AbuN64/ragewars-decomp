@@ -2,7 +2,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
 #include "MENU/MENU_PROCESSTRACKITEMEVENTS.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Releases the current record's track-2 timed items whose time has come (or all live ones once the
    record's end time has passed): special items (kind and subkind 1 and 5, 9 and 4, 10 and 3) go to

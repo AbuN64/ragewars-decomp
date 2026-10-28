@@ -1,6 +1,6 @@
 #include "include_asm.h"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 

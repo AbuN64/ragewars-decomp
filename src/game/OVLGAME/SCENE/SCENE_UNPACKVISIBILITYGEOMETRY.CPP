@@ -11,7 +11,7 @@
 #include "SYSTEM/8025E280.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */

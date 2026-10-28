@@ -13,7 +13,7 @@
 #include "sdk/libgultra_inferred/802AD870_8.H"
 #include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* ROM-grounded data: src/rw_pool_8025DB80_C9D0C_us_rev1.c */
 const unsigned int g_trackCommandFallbackDuration[1] = {

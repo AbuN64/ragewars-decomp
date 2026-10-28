@@ -6,7 +6,7 @@
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/80271B18_3.H"
 
 /* 80265370.CPP */

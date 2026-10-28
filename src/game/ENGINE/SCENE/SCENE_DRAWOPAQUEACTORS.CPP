@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "gbi.h"
 #include "ENGINE/SCENE_6.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 char *Scene_GetLinkedResourceSection(void *arg0, s32 resourceId) {
     return SetN64_GetPackSection((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);

@@ -15,8 +15,8 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "MENU/TRACK_LOADTRACKSEQUENCE.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32,void *,s32);
 

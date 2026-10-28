@@ -9,7 +9,7 @@
 #include "ENGINE/INSTANCE/GOBJINST_INITIALIZEPLACEDACTOR.H"
 #include "SCENE/802508E0_9.H"
 #include "particle/80271B18_3.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Finds the hit box of an object nearest a point: with the object's bone matrices (0xB4, else 0xB8) and its
  * hit-box resource from Gobjinst_RequestAnimatedModelVariant, each box whose mask matches the object's mask 0x17C has the average

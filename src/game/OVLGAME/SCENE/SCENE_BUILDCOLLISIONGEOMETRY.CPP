@@ -12,7 +12,7 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/OBJB.H"
 #include "MENU/8044ACCC.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 struct Shape_typemap_165;
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *arg1, s32 arg2);
 extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);

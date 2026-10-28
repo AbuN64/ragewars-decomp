@@ -11,7 +11,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SCENE/802508E0_9.H"
-#include "GFX/TEXT/802A8A94_6.H"
+#include "GFX/TEXT/ONSCREEN_GETFONTTEXTURE.H"
 #include "include_asm.h"
 
 /* 802A6AC0_9.CPP */

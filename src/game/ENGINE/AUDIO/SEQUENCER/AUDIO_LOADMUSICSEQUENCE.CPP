@@ -18,7 +18,7 @@
 #include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "stddef.h"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 extern s32 Defs_FindSortedValue(s32, s32, s32);
 #include "COMMON.H"
 extern f32 D_800C4008_de;

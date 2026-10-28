@@ -2,7 +2,7 @@
 #define COMMON_TEXTURE_REQUEST_H
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #if defined(VERSION_US_REV1)
 extern s32 D_800D2AE0;
 extern char D_auto_00295B90;

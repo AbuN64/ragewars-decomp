@@ -8,7 +8,7 @@
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
 #include "SYSTEM/80265370.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "MATH/DOUBLEBITS.H"
 
 

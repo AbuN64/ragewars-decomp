@@ -18,7 +18,7 @@
 #include "ENGINE/SCENE_2.H"
 #include "ENGINE/SCENE_3.H"
 #include "WEAPONS/80225D10_5.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "VOICE/VOICE.H"
 
 void Scene_UpdateAndDrawWorld(void *arg0) {

@@ -11,7 +11,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/STATERECAT91.H"
-#include "ACHIEVE/80424E30_2.H"
+#include "ACHIEVE/MATCH_GETRESULTTEXT.H"
 #include "COMMON/PLAYERPROFILES.H"
 extern s32 Player_GetLevelProgress(Profile *, s32);
 

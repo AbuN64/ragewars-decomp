@@ -3,7 +3,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "sdk/libgultra/libasm_802BD1A8.h"
+#include "sdk/libgultra/OSUNMAPTLBALL.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 #include "ENGINE/VIRTUAL/VHANDLER_2.H"

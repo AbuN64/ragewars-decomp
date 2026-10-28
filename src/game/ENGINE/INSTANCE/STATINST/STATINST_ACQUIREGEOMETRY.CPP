@@ -5,7 +5,7 @@
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/OBJB.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 
 extern char g_statObjectIndexText[];
 extern s32 SetN64_GetDirectoryEntry(s32 *,s32,s32);

@@ -5,7 +5,7 @@
 #include "stddef.h"
 #include "COMMON/UNUSED.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/S1_2.H"
 #include "MENU/PAK/80444EC0_5.H"
 #include "SYSTEM/8025E280.H"

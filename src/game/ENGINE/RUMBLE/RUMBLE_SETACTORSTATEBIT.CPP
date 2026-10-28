@@ -6,7 +6,7 @@
 #include "RENDER/POOLRECAT28V1.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "TYPES.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 
 extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);

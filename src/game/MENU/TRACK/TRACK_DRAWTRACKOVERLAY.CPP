@@ -14,8 +14,8 @@
 #include "COMMON/WORLD.H"
 #include "SCENE/802508E0_9.H"
 #include "COMMON/AIPROFILE.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void SetN64_DrawColorRectangle(void *,u8 *,s32,s32,s32,s32);
 static inline u32 toUnsigned(f32 v,f32 limit) { u32 result; if(!(limit<=v)) result=(u32)(s32)v; else { v-=limit; result=(u32)(s32)v; result|=0x80000000; } return result; }

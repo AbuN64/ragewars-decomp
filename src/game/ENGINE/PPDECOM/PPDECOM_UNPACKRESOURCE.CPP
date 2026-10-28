@@ -4,8 +4,8 @@
 #include "RENDER/8028469C.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "sdk/libgultra_inferred/802AD870_2.H"
-#include "sdk/libgultra/part_800C7F20/code_802B2378_2.h"
+#include "sdk/libgultra_inferred/RNC_UNPACKMETHOD2.H"
+#include "sdk/libgultra/part_800C7F20/RNC_UNPACKMETHOD1.H"
 
 void Cache_ReplaceResourceBlock(s32, void **, void *);
 void * Cache_AllocResourceBlock(s32, void *, s32);

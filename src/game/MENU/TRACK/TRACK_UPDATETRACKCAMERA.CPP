@@ -6,7 +6,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
 #include "MENU/TRACK_UPDATETRACKCAMERA.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Evaluates keyframe track 3 of the current record's resource at time t: before the first key or
    after the last it holds that key's value, otherwise it finds the surrounding keys and blends

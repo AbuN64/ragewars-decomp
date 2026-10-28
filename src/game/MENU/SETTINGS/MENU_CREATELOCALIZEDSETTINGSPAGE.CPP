@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "MENU/80406A88_6.H"
 #include "COMMON/EXTERNS_20.H"
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* 80406A88_6.CPP */
 #if defined(VERSION_EU_X)

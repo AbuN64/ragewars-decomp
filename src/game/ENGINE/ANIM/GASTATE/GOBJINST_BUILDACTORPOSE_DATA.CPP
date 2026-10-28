@@ -5,13 +5,13 @@
 #include "SCENE/802508E0_7.H"
 #include "SCENE/802508E0_9.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/AIPROFILE.H"
 #include "include_asm.h"
 #include "COMMON/STREAM.H"
 #include "GAME/8025E520.H"
 #include "COMMON/RESULTS.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 
 /* GASTATE_3.CPP */
 /** Initialize the compact record fields written by the VRAM 0x802624A0 leaf. */

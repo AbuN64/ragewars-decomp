@@ -6,7 +6,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Calls InitFrontendMenus and then SmXlate_SwitchScreen with 1. */
 #if defined(VERSION_EU)

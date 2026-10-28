@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "sdk/OSINT/pigetstatus.H"
 #include "sdk/libgultra/libasm_802BBC68_20.h"
-#include "sdk/libgultra/libasm_802BD1A8_3.h"
+#include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra_inferred/LIBULTRA_WRITEDEBUGLINKBYTE.H"
 #include "sdk/libgultra_inferred/libultra_executedebuglinkaddress.H"
 

@@ -3,7 +3,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
-#include "sdk/AUDIO/802BF400.H"
+#include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/os.h"
 
 extern Field_void_4 *D_800D8440;

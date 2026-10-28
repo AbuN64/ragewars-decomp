@@ -6,11 +6,11 @@
 #include "TYPES.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "MENU/ITEMS/SCENE/SCENE_7.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SYSTEM/80265370.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 

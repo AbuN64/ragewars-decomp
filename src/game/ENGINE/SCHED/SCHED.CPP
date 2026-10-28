@@ -11,9 +11,9 @@
 #include "TYPES.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_3.H"
-#include "sdk/AUDIO/802BF400.H"
+#include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/SCHED/osscremoveclient.H"
-#include "sdk/libgultra/libasm_802BD1A8_3.h"
+#include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"
 /* Switches a view to a new current and next scene: stamps the time of a pending next scene, starts the current scene (resetting its timer for mode 2, and stamping its start and, unless flagged 0x10, its first-start time for flag 0x20), clears its flags 0x30, runs its start and update hooks and records it, then when the next scene differs starts its music at its time and records it. */

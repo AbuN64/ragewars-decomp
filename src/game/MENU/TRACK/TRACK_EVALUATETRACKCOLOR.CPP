@@ -5,7 +5,7 @@
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "MENU/TRACK_EVALUATETRACKCOLOR.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Evaluates the position keyframe track 1 of the current record's resource at time t: holds the
    first or last key's position outside the track, is zero when the track is empty, and otherwise

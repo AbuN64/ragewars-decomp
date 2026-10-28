@@ -14,7 +14,7 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
 #include "ANIM/802412C0_7.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);
 

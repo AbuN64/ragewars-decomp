@@ -12,7 +12,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LEGACY_COLLISION_ACTOR.H"
 #include "COMMON/LEVEL_ACTOR.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* GOBJINST_12.CPP */
 /* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,

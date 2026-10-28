@@ -3,7 +3,7 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SETN64/SETN64.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTOR_DEFINITION.H"

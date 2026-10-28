@@ -16,7 +16,7 @@
 #include "SYSTEM/8025E280_3.H"
 #include "TEXTURE/80256220_13.H"
 #include "sdk/MATH/aigetlen.H"
-#include "sdk/libgultra/libasm_802BD1A8_3.h"
+#include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "sdk/OSINT/osyieldthread.H"
 #include "sdk/os.h"

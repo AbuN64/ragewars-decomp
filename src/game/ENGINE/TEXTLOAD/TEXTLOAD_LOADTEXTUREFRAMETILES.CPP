@@ -8,7 +8,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/RESIDENTSTATE.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];

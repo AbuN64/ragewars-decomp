@@ -11,7 +11,7 @@
 #include "ENGINE/PARTICLE.H"
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/80271B18_3.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

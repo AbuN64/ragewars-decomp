@@ -8,10 +8,10 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 
 /* SCENE_7.CPP */
 extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);

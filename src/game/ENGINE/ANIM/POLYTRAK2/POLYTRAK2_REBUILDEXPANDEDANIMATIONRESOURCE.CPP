@@ -3,7 +3,7 @@
 #include "GAME/8025E520.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Resource blocks store a count and relative offsets; unused entries carry
  * the resource builder's DEADBEEF sentinel. */

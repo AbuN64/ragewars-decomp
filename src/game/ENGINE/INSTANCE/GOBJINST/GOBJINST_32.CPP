@@ -10,9 +10,9 @@
 #include "TYPES.H"
 #include "ENGINE/INSTANCE/GOBJINST_16.H"
 #include "GAME/CODE_8027302C.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/80271B18_3.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* GOBJINST_15.CPP */
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))

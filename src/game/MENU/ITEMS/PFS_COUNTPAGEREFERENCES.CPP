@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "sdk/libultra/pfs/8043D1DC_17.h"
+#include "sdk/libultra/pfs/PFS_COUNTPAGEREFERENCES.H"
 
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
 #ifdef NON_MATCHING

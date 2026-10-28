@@ -17,7 +17,7 @@
 #include "MATH/80297CD0.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
-#include "FRONTEND/8040B45C_33.H"
+#include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Refreshes the selected entry and updates its interface state. */
 

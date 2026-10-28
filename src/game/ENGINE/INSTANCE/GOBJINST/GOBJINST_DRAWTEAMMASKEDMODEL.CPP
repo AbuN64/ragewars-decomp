@@ -3,7 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 struct Node80253610;
 extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 

@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SYSTEM/802609CC_5.H"
 
 /* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */

@@ -13,8 +13,8 @@
 #include "COMMON/LISTHEADER.H"
 #include "CAMERA/80243A80.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "LISTS/80279520.H"
 
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object

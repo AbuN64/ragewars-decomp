@@ -7,8 +7,8 @@
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "MENU/PAK/80403BCC_4.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Returns one less than the word D_8011FEFC points to. */
 

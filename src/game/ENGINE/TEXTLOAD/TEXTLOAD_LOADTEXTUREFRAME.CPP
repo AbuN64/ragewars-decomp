@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern s32 D_800CD894_de;
 

@@ -9,7 +9,7 @@
 #include "abi.h"
 #include "gbi.h"
 #include "TYPES.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Draws every part of a model resource with the shared material D_8013B2D8 when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from Geometry_DrawWithMaterialOverride with the render mode, blend and light commands added and the per-part lighting call removed. */
 

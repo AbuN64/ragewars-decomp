@@ -12,8 +12,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "FX/80246E34_10.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Complete nonpadded pose records recovered from the pinned shared pose header. */
 typedef struct Shared_PoseJointRef Shared_PoseJointRef;

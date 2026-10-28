@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "AI/NAV/PORTAL_LOADCOLLISIONTABLE.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 

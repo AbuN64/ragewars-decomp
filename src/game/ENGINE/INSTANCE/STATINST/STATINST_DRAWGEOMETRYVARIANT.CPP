@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "ACTORS/LIGHTING_BUILDLITMODEL.H"
 #include "SCENE/802508E0.H"
-#include "RENDER/8028FD2C_6.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 extern s32 D_800D2978;
 
 /* Returns the matching resource entry index, or minus one when absent. */

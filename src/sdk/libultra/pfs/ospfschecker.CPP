@@ -9,7 +9,7 @@
 #include "sdk/PFS/__OSCHECKID.H"
 #include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
 #include "sdk/PFS/ospfschecker.H"
-#include "sdk/libultra/pfs/8043D1DC_17.h"
+#include "sdk/libultra/pfs/PFS_COUNTPAGEREFERENCES.H"
 #include "sdk/libultra/pfs/80447BB0_17.h"
 #include "sdk/libultra/pfs/ospfschecker.h"
 

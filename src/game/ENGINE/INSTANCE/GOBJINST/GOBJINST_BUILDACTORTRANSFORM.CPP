@@ -7,8 +7,8 @@
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "TYPES.H"
 #include "ENGINE/INSTANCE/GOBJINST_11.H"
-#include "SCENE/802508E0_4.H"
-#include "RENDER/8028FD2C_6.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
+#include "RENDER/SETN64_GETPACKSECTION.H"
 #include "LISTS/80279520.H"
 
 extern s32 Cinema_IsSequenceInWindow(void);

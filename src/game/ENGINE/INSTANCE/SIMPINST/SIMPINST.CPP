@@ -8,7 +8,7 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD/8024E914.H"
 #include "COMMON/OBJB.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 
 struct ObjB;
 extern CachedResource *Cache_RequestPairedResource(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);

@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_4.H"
+#include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SCENE/802508E0.H"
 #include "SCENE/802508E0_9.H"
 #include "particle/80271B18_3.H"
