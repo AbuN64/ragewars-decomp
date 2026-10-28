@@ -517,7 +517,13 @@ SECTIONS
         . = MAX(., 0x2EB30);
         src/game/AI/PLAYERPROFILE/PLAYERPROFILE.CPP.o(.text);
         . = MAX(., 0x2F370);
-        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_DrawRedMarkerQuad);
+        . = MAX(., 0x2F56C);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_FindNextUsableWeapon);
+        . = MAX(., 0x2F6F8);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_NextAvailableWeapon);
+        . = MAX(., 0x2F820);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_UpdateCallbacksAndTimers);
         . = MAX(., 0x2F9AC);
         src/game/AI/WEAPONAI/WEAPONAI_17.CPP.o(.text);
         . = MAX(., 0x2FDF4);
@@ -545,7 +551,7 @@ SECTIONS
         . = MAX(., 0x321E0);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.text);
         . = MAX(., 0x321FC);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_ApplyWeaponSwitch);
         . = MAX(., 0x32344);
         src/game/AI/WEAPON/WEAPON.CPP.o(.text);
         . = MAX(., 0x333C8);
@@ -6898,7 +6904,13 @@ SECTIONS
         . = MAX(., 0x2EB10);
         src/game/AI/PLAYERPROFILE/PLAYERPROFILE.CPP.o(.text);
         . = MAX(., 0x2F350);
-        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_DrawRedMarkerQuad);
+        . = MAX(., 0x2F54C);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_FindNextUsableWeapon);
+        . = MAX(., 0x2F6D8);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_NextAvailableWeapon);
+        . = MAX(., 0x2F800);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_UpdateCallbacksAndTimers);
         . = MAX(., 0x2F98C);
         src/game/AI/WEAPONAI/WEAPONAI_17.CPP.o(.text);
         . = MAX(., 0x2FDD4);
@@ -6926,7 +6938,7 @@ SECTIONS
         . = MAX(., 0x321C0);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.text);
         . = MAX(., 0x321DC);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_ApplyWeaponSwitch);
         . = MAX(., 0x32324);
         src/game/AI/WEAPON/WEAPON.CPP.o(.text);
         . = MAX(., 0x333A8);
@@ -9029,7 +9041,13 @@ SECTIONS
         . = MAX(., 0x2EB20);
         src/game/AI/PLAYERPROFILE/PLAYERPROFILE.CPP.o(.text);
         . = MAX(., 0x2F360);
-        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_DrawRedMarkerQuad);
+        . = MAX(., 0x2F55C);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_FindNextUsableWeapon);
+        . = MAX(., 0x2F6E8);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_NextAvailableWeapon);
+        . = MAX(., 0x2F810);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weaponai_UpdateCallbacksAndTimers);
         . = MAX(., 0x2F99C);
         src/game/AI/WEAPONAI/WEAPONAI_17.CPP.o(.text);
         . = MAX(., 0x2FDE4);
@@ -9057,7 +9075,7 @@ SECTIONS
         . = MAX(., 0x321D0);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.text);
         . = MAX(., 0x321EC);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.text);
+        src/game/AI/WEAPONAI/WEAPONAI_16.CPP.o(.text.Weapon_ApplyWeaponSwitch);
         . = MAX(., 0x32334);
         src/game/AI/WEAPON/WEAPON.CPP.o(.text);
         . = MAX(., 0x333B8);
@@ -10844,7 +10862,6 @@ SECTIONS
         src/game/AI/WEAPONAI/WEAPONAI_22.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_23.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.bss .sbss COMMON);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPON/WEAPON.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPON/WEAPON.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
@@ -13267,7 +13284,6 @@ SECTIONS
         src/game/AI/WEAPONAI/WEAPONAI_22.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_23.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.bss .sbss COMMON);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPON/WEAPON.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
@@ -14017,7 +14033,6 @@ SECTIONS
         src/game/AI/WEAPONAI/WEAPONAI_22.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_23.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_24.CPP.o(.bss .sbss COMMON);
-        src/game/AI/WEAPONAI/WEAPONAI_25.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPON/WEAPON.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPON/WEAPON.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);

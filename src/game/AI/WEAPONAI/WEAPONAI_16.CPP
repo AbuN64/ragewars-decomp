@@ -259,8 +259,7 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
     D_800D2988 = old_delta;
 }
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
+
 #include "COMMON/WORLD.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -269,6 +268,7 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
 #include "TYPES.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/OBJECTLINKS14C.H"
+
 extern s32 D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
@@ -309,7 +309,11 @@ void Weapon_ApplyWeaponSwitch(void *part, void *body) {
         owner = ((Shared_ActorView *)state)->message;
         if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
             Camera_PostScreenMessage(&D_80145088, owner,
+                #if defined(VERSION_EU) || defined(VERSION_EU_X)
+                (*(void ***)D_800D052C[((Shared_ActorView *)state)->selectedAction])[D_80145088.settings.language]);
+#else
                 *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
+#endif
         }
         ((WeaponFireState *)body)->spinStep = 0;
         ((WeaponFireState *)body)->spin = 0;
@@ -317,7 +321,3 @@ void Weapon_ApplyWeaponSwitch(void *part, void *body) {
         ((WeaponFireState *)body)->charge = 0;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Weapon_ApplyWeaponSwitch);
-#endif
-#endif
