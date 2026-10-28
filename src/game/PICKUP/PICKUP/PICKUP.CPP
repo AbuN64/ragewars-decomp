@@ -13,7 +13,7 @@ void func_802AD2A0_de(void) {}
 #if defined(VERSION_DE)
 #include "TYPES.H"
 
-s32 func_802AD2A8_de(s32 menuCode) {
+s32 Pickup_ClassifyMenuCode(s32 menuCode) {
     if ((menuCode == 0x7CF) || (menuCode == 0xBB7) || (menuCode == 0xF9F) ||
         (menuCode == 0x1387) || (menuCode == 0x176F) || (menuCode == 0x1B57) ||
         (menuCode == 0x63)) {

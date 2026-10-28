@@ -31,7 +31,7 @@ extern void MatrixFromQuaternion(f32 *, f32 *);
 extern void Graphu64_MultiplyAffineMatrices(void *, f32 *, f32 *);
 extern void Gobjinst_DrawModelWithProjection(char *, char *, void *, u8);
 extern void GameObject_DrawBlobShadow(struct LevelActor *, CVector3 *, s32);
-void func_8024AA18_de(char *obj, s32 unused, char *info) {
+void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
     CVector3 dir;
     f32 projection[16];
     f32 turn[16];

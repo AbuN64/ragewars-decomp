@@ -13,11 +13,11 @@
 #include "particle/8027A0F4_8.H"
 
 /* GOBJINST_6.CPP */
-/* Refreshes the actor's animation from the lookup through func_8024AA18_de and Geometry_DrawModelResource and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from Gobjinst_SpawnAnimatedModelViewEffect with its body moved into a static inline helper, the Gobjinst_DrawMaskedModel update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
+/* Refreshes the actor's animation from the lookup through GameObject_DrawActorShadow and Geometry_DrawModelResource and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from Gobjinst_SpawnAnimatedModelViewEffect with its body moved into a static inline helper, the Gobjinst_DrawMaskedModel update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
 
 extern char D_8011D8D0;
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
+extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 
 extern s32 Geometry_GetViewEffect(void);
 
@@ -62,7 +62,7 @@ void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *context, Lookup *look
     s32 one;
 
     if (lookup->unk4 != 0) {
-        func_8024AA18_de(actor, context, lookup);
+        GameObject_DrawActorShadow(actor, context, lookup);
     }
     if (lookup->unk0 != 0) {
         one = 1;
@@ -80,7 +80,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animati
     s32 *node;
 
     if (params->updateAnimation != 0) {
-        func_8024AA18_de(actor, animationContext, params);
+        GameObject_DrawActorShadow(actor, animationContext, params);
     }
     if (params->drawModel != 0) {
         Geometry_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
@@ -102,7 +102,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animati
 }
 
 /* GOBJINST_7.CPP */
-/* Optionally runs func_8024AA18_de, then starts the actor's current block through Geometry_DrawBlendParts and, when the resulting animation node is flagged, spawns an effect at the actor raised by its height and scales it to the actor's size, always clearing D_800D15E0 at the end. Adapted from func_8024A3B0_de with Geometry_DrawActorModelParts changed to Geometry_DrawBlendParts and the height and scale constants taken from D_800C8B48[1] and D_800C8B50. */
+/* Optionally runs GameObject_DrawActorShadow, then starts the actor's current block through Geometry_DrawBlendParts and, when the resulting animation node is flagged, spawns an effect at the actor raised by its height and scales it to the actor's size, always clearing D_800D15E0 at the end. Adapted from func_8024A3B0_de with Geometry_DrawActorModelParts changed to Geometry_DrawBlendParts and the height and scale constants taken from D_800C8B48[1] and D_800C8B50. */
 
 extern void Geometry_DrawBlendParts(void **value, s32 arg1, s32 arg2, s32 arg3, BlockRecAt0 *block, s32 arg5, s32 arg6);
 
@@ -123,7 +123,7 @@ void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 drawView, s32 animation
     s32 *node;
 
     if (params->unk4 != 0) {
-        func_8024AA18_de(actor, animationContext, params);
+        GameObject_DrawActorShadow(actor, animationContext, params);
     }
     if (params->unk0 != 0) {
         Geometry_DrawBlendParts(params->value, drawView, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);

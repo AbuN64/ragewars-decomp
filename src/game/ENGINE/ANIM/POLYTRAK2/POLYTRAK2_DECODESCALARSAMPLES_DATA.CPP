@@ -195,7 +195,7 @@ void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult 
     array->count = elementCount;
 }
 
-f32 func_80260C9C_de(DecodeArray *packedArray, s32 elementIndex) {
+f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementIndex) {
     return decode(packedArray->base + (packedArray->range.value * elementIndex), packedArray->range);
 }
 
@@ -268,7 +268,7 @@ int func_80260E4C_de(BitFieldSource *packedArray, int elementIndex) {
 }
 
 /** Store a scalar word plus a three-word record by value. */
-void func_80260ECC_de(void *arg0, int arg1, Triple t) {
+void Polytrak2_InitializeQuantizedStream(void *arg0, int arg1, Triple t) {
     ObjRecAt4V4 *arg0_record = arg0;
     arg0_record->unk0 = arg1;
     arg0_record->unk4 = t;

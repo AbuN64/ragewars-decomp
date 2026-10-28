@@ -16,17 +16,17 @@
 #include "RENDER/8028FD2C_6.H"
 
 /* ROM-grounded data: src/rw_pool_8025DB80_C9D0C_us_rev1.c */
-const unsigned int D_blob_c2e990d7fbcab1f9b43c[1] = {
+const unsigned int g_trackCommandFallbackDuration[1] = {
     0x3DCCCCCD,
 };
 
 /* ROM-grounded data: src/rw_pool_8025DC34_C9D10_us_rev1.c */
-const unsigned int D_blob_818b493a54f22a804367[1] = {
+const unsigned int g_trackNormalizedVolumeScale[1] = {
     0x46FFFE00,
 };
 
 /* ROM-grounded data: src/rw_pool_8025DC88_C9D14_us_rev1.c */
-const unsigned int D_blob_713397d39e7015fa86e1[2] = {
+const unsigned int g_trackContextVolumePercentScales[2] = {
     0x3C23D70A, 0x3C23D70A,
 };
 

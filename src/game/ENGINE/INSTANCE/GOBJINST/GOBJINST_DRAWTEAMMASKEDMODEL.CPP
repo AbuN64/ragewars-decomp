@@ -13,7 +13,7 @@ extern char D_800C3A64_de;
 
 extern char D_8011D8D0;
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
+extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 extern s32 Cache_RequestPairedResource(s32, s32, void *, s32, s32, void *, void *, void *, s32);
 extern void Link_AnimateVertexColors(void *object, void *colors);
 
@@ -41,7 +41,7 @@ void Gobjinst_DrawTeamMaskedModel(LevelActor *actor, s32 unusedShadowContext, Lo
 
     actor->mask = 1 << actor->team;
     if (params->unk4 != 0) {
-        func_8024AA18_de(actor, unusedShadowContext, params);
+        GameObject_DrawActorShadow(actor, unusedShadowContext, params);
     }
     if (params->unk0 == 0) {
         return;

@@ -761,7 +761,7 @@ SECTIONS
         . = MAX(., 0x4A3A0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A618);
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawActorShadow);
         . = MAX(., 0x4A9D0);
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC6C);
@@ -2876,7 +2876,7 @@ SECTIONS
         . = MAX(., 0x4A3B0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A628);
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawActorShadow);
         . = MAX(., 0x4A9E0);
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC7C);
@@ -4995,7 +4995,7 @@ SECTIONS
         . = MAX(., 0x4A3E0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A658);
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawActorShadow);
         . = MAX(., 0x4AA10);
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4ACAC);
@@ -7130,7 +7130,7 @@ SECTIONS
         . = MAX(., 0x4A380);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A5F8);
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawActorShadow);
         . = MAX(., 0x4A9B0);
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC4C);
@@ -9261,7 +9261,7 @@ SECTIONS
         . = MAX(., 0x4A390);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A608);
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawActorShadow);
         . = MAX(., 0x4A9C0);
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC5C);
@@ -15515,8 +15515,8 @@ SECTIONS
         . = MAX(., 0x20B4);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
-        . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        . = DEFINED(__align8_literals_GameObject_DrawActorShadow) ? ALIGN(8) : .;
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawActorShadow .rdata.literals_GameObject_DrawActorShadow);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
@@ -18386,8 +18386,8 @@ SECTIONS
         . = MAX(., 0x20C4);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20CC);
-        . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        . = DEFINED(__align8_literals_GameObject_DrawActorShadow) ? ALIGN(8) : .;
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawActorShadow .rdata.literals_GameObject_DrawActorShadow);
         . = MAX(., 0x2108);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
@@ -21209,8 +21209,8 @@ SECTIONS
         . = MAX(., 0x20C4);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20CC);
-        . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        . = DEFINED(__align8_literals_GameObject_DrawActorShadow) ? ALIGN(8) : .;
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawActorShadow .rdata.literals_GameObject_DrawActorShadow);
         . = MAX(., 0x2108);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
@@ -24021,8 +24021,8 @@ SECTIONS
         . = MAX(., 0x20B4);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
-        . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        . = DEFINED(__align8_literals_GameObject_DrawActorShadow) ? ALIGN(8) : .;
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawActorShadow .rdata.literals_GameObject_DrawActorShadow);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
@@ -26899,8 +26899,8 @@ SECTIONS
         . = MAX(., 0x20B4);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
-        . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        . = DEFINED(__align8_literals_GameObject_DrawActorShadow) ? ALIGN(8) : .;
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawActorShadow .rdata.literals_GameObject_DrawActorShadow);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
         src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);

@@ -27,7 +27,7 @@ extern int D_800D297C;
 
 extern void *Gobjinst_RequestAnimatedModelVariant(void *, int);
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
+extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 
 extern void Track_RequestTrackByIds(s32, void *);
 
@@ -96,7 +96,7 @@ void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
         if (child != 0) {
             info->a = child;
             info->b = child;
-            func_8024AA18_de(actor, renderContext, info);
+            GameObject_DrawActorShadow(actor, renderContext, info);
             Geometry_DrawModelResource(child, ((LevelActor *)actor)->fieldB4, 1, &((LevelActor *)actor)->lighting[D_800D297C], 0, ((LevelActor *)actor)->field3);
         }
     }

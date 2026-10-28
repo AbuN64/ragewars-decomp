@@ -61,10 +61,10 @@ void Items_PrepareControllerReturnEuX(s32 arg0) {
 extern int D_8013B2BC;
 extern int D_801540F4;
 extern int D_801540F0;
-extern int func_802AD2A8_de(int);
+extern int Pickup_ClassifyMenuCode(int);
 
 void Items_PrepareMenuReturnDe(void) {
-    D_801540F4 = func_802AD2A8_de(D_8013B2BC);
+    D_801540F4 = Pickup_ClassifyMenuCode(D_8013B2BC);
     D_801540F0 = 1;
 }
 #endif
@@ -76,7 +76,7 @@ extern s32 D_8013B2BC;
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern s32 Menu_ClassifyResourceRange(s32);
 #else
-extern s32 func_802AD2A8(s32);
+extern s32 Pickup_ClassifyMenuCode(s32);
 #endif
 
 void Items_PrepareControllerReturn(void) {
@@ -84,7 +84,7 @@ void Items_PrepareControllerReturn(void) {
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Menu_ClassifyResourceRange
 #else
-func_802AD2A8
+Pickup_ClassifyMenuCode
 #endif
 (D_8013B2BC);
     D_801540F0 = 0;

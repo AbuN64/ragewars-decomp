@@ -221,7 +221,7 @@ f32 Bitarray_EvaluateCubicPolynomial(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32
 }
 
 /** Return the low five bits of the supplied value. */
-unsigned int func_8026160C_de(unsigned int value) {
+unsigned int Bitarray_GetWordBitOffset(unsigned int value) {
     return value & 0x1F;
 }
 

@@ -175,7 +175,7 @@ void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState) {
 }
 
 extern s32 D_800D297C;
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
+extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
 extern void Gobjinst_SpawnAnimatedModelViewEffect(void *arg0, void *arg1);
 
 void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *renderSettings) {
@@ -186,7 +186,7 @@ void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *rend
     if (index != -1) {
         ((struct LevelActor *)(actor))->mask = 1 << index;
         if (((struct ActorRenderSettings *)(renderSettings))->drawShadow != 0) {
-            func_8024AA18_de(actor, unusedShadowContext, renderSettings);
+            GameObject_DrawActorShadow(actor, unusedShadowContext, renderSettings);
         }
         if (*(s32 *)renderSettings != 0) {
             one = 1;
@@ -211,7 +211,7 @@ void Gobjinst_DrawMaskedModelWithLighting(void *actor, void *unusedShadowContext
     if (index != -1) {
         ((struct LevelActor *)(actor))->mask = 1 << index;
         if (((struct ActorRenderSettings *)(renderSettings))->drawShadow != 0) {
-            func_8024AA18_de(actor, unusedShadowContext, renderSettings);
+            GameObject_DrawActorShadow(actor, unusedShadowContext, renderSettings);
         }
         if (*(s32 *)renderSettings != 0) {
             one = 1;

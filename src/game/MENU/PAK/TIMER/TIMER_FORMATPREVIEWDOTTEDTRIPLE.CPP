@@ -19,7 +19,7 @@ extern PakPreview *D_800E28BC;
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern void Menu_ClassifyResourceRange(s32);
 #else
-extern void func_802AD2A8(s32);
+extern void Pickup_ClassifyMenuCode(s32);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -54,7 +54,7 @@ s32 Timer_DispatchPreviewHandle(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Menu_ClassifyResourceRange
 #else
-func_802AD2A8
+Pickup_ClassifyMenuCode
 #endif
 (D_800E28BC->handle);
     return 0;
