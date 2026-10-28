@@ -3,6 +3,8 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern ResultsHeadingCharacter D_800F00DC[];
+extern char *D_auto_800E2034[], *D_auto_800E2054[], *D_auto_800E20A4[], *D_auto_800E20B4[];
 extern char *D_800E2044_eu[], *D_800E2064_eu[], *D_800E2074_eu[], *D_800E2084[], *D_800E2094_eu[];
 static inline char *resultsUnavailable(Shared_Game *game) { return D_800E2044_eu[game->language]; }
 static inline char *resultsFirstHeading(void) { return D_800E2064_eu[g_languageIndex]; }

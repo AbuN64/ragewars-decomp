@@ -11,7 +11,9 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
 };
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_DE)
+#include "COMMON/MENU_TEXT.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
+#include "FRONTEND/RESULTS_SETUP_TEXT.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -24,7 +26,9 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 extern Active *D_800E4680;
 extern struct ResultsHeadingCharacter D_800DFA6C[];
+#if !defined(VERSION_EU) && !defined(VERSION_EU_X)
 extern f32 D_800E1F40;
+#endif
 extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_800D3590, *D_800D3594, *D_800D3598;
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(void *);
@@ -44,6 +48,7 @@ extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void Achieve_ConfigureResultModelPreview(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning
    player, unlocks the level-end achievements and fills the level name and status lines. */
+static inline Shared_Game *Results_CurrentGame(void) { return &D_801462C8; }
 s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     char levelName[0x40];
     MenuWidget *item;
@@ -55,6 +60,7 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     s32 time;
     s32 slot;
     s32 character;
+    Shared_Game *nameGame;
     s32 *level;
     s32 i;
 
@@ -90,7 +96,7 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
                     item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
                     Frontend_SetWidgetFlag08(item, 1);
                     item->alpha = 0xAF;
-                    item->text = D_800D3580;
+                    item->text = RW_LOCALIZED_TEXT(D_800D3580, D_auto_800E2054, D_auto_800E2054, Results_CurrentGame()->language);
                     goto done;
                 }
             }
@@ -130,8 +136,10 @@ done:
                 Defs_SetBitValue(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
                 XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = Achieve_AwardCharacterCompletionUnlock(D_800E5830->player);
+                nameGame = Results_CurrentGame();
                 if (character >= 0) {
-                    XStdio_FormatBuffer(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Key_FindKeyIndex(character)].name);
+                    character = Key_FindKeyIndex(character);
+                    XStdio_FormatBuffer(D_800E5830->resultText, RW_LOCALIZED_TEXT(D_800D3578, D_auto_800E2034, D_auto_800E2034, nameGame->language), RW_LOCALIZED_TEXT(D_800DFA6C[character].name[0], D_800F00DC[character].name, D_800F00DC[character].name, nameGame->language));
                     item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                     item->alpha = 0xAF;
                     Frontend_SetWidgetFlag08(item, 1);
@@ -139,7 +147,8 @@ done:
                 }
             }
         } else {
-            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
+            nameGame = Results_CurrentGame();
+            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
             item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -152,7 +161,11 @@ done:
             Achieve_MarkLevelPlayed(D_800E5830->player);
             level = &D_8015402C;
             preset = Achieve_CopyPreset(*level, 3, 0);
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+            time = counters->timeLimit * 0.06666667f;
+#else
             time = counters->timeLimit * D_800E1F40;
+#endif
             if (D_80102B00[D_800E5830->player].times[*level] == 0) {
                 D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
             } else if (preset->time - time < D_80102B00[D_800E5830->player].times[*level]) {
@@ -162,10 +175,15 @@ done:
                 item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                item->text = RW_LOCALIZED_TEXT(D_800D3598, D_auto_800E20B4, D_auto_800E20B4, g_languageIndex);
+#else
                 item->text = D_800D3598;
+#endif
             }
         } else {
-            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
+            nameGame = Results_CurrentGame();
+            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
             item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -179,10 +197,11 @@ done:
                 item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
-                item->text = D_800D3594;
+                item->text = RW_LOCALIZED_TEXT(D_800D3594, D_auto_800E20A4, D_auto_800E20A4, Results_CurrentGame()->language);
             }
         } else {
-            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
+            nameGame = Results_CurrentGame();
+            XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
             item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -202,12 +221,18 @@ done:
             break;
         }
     }
-    Frontend_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = D_800D3588;
+    Frontend_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = RW_LOCALIZED_TEXT(D_800D3588, D_800E2074_eu, D_800E2074_eu, Results_CurrentGame()->language);
     item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
-    if (D_8014DD98.kind == 0) {
-        item->text = D_800D3590;
-    } else {
-        item->text = D_800D358C;
+    switch (D_8014DD98.kind) {
+    case 0:
+        item->text = RW_LOCALIZED_TEXT(D_800D3590, D_800E2094_eu, D_800E2094_eu, Results_CurrentGame()->language);
+        break;
+    case 1:
+        item->text = RW_LOCALIZED_TEXT(D_800D358C, D_800E2084, D_800E2084, Results_CurrentGame()->language);
+        break;
+    default:
+        item->text = RW_LOCALIZED_TEXT(D_800D358C, D_800E2084, D_800E2084, g_languageIndex);
+        break;
     }
     item = Frontend_FindWidgetByResourceId(menu, 0x26C + PREVIEW_ID_SHIFT);
     Scene_CopyLevelName(&g_world, D_8015402C, levelName, 0x3F);
@@ -220,7 +245,6 @@ done:
     Tsmos_DeactivateControllerState();
     return 0;
 }
-#endif
 
 
 #include "TYPES.H"

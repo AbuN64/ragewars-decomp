@@ -3858,7 +3858,7 @@ segments:
       - [0xC59D4, data, data_800C/D_d1_071fa7ba9a485148]
       - [0xC59E0, rodata, data_800C/D_blob_069ab1292059e03559c0]
       - [0xC59EC, data, data_800C/rodata_unresolved_800C4DEC]
-      - [0xC59F0, rodata, data_800C/D_802856E0_CABB0]
+      - [0xC59F0, rodata, data_800C/literals_Rumble_GetSpatialEffectLevel]
       - [0xC59FC, rodata, data_800C/D_blob_4faf23a8416908d6583f]
       - [0xC5A04, data, data_800C/rodata_unresolved_800C4E04]
       - [0xC5A10, rodata, data_800C/D_8044B600_CABD0]

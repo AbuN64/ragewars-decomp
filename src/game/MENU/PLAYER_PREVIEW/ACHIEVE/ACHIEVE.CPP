@@ -159,11 +159,6 @@ unsigned int D_auto_rodata_unresolved_80444F98[1110] = {
 #endif
 
 /* 8042E080_19.CPP */
-#if defined(VERSION_EU_X)
-const unsigned int rodata_func_804389A8_eu_x_800E9750[1] = {
-    0x3D888889,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 const unsigned char rodata_func_8043829C_de_800E9754[3] = {
@@ -186,11 +181,6 @@ const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
 #endif
 
 /* 8042E080_20.CPP */
-#if defined(VERSION_EU)
-const unsigned int rodata_func_80438878_eu_800EE590[1] = {
-    0x3D888889,
-};
-#endif
 
 #if defined(VERSION_EU)
 const unsigned char rodata_func_8043829C_de_800EE594[3] = {
