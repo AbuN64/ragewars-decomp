@@ -10,7 +10,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/STATERECAT91.H"
-#include "ACHIEVE/80424E30.H"
+#include "ACHIEVE/PRESET_AND_WEAPON_UNLOCK_VIEWS.H"
 #include "stddef.h"
 #include "ACHIEVE/ACHIEVE.H"
 #include "COMMON/PLAYERPROFILES.H"
