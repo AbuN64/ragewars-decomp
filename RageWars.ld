@@ -35,7 +35,7 @@ SECTIONS
         . = MAX(., 0x2414);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.data);
         . = MAX(., 0x2438);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.text);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.text);
         . = MAX(., 0x2898);
         src/game/DATA/MAINCODE/MAINCODE/ACTION_UPDATEBREAKABLEPROXIMITY_DATA.CPP.o(.data);
         . = MAX(., 0x28A0);
@@ -761,9 +761,9 @@ SECTIONS
         . = MAX(., 0x4A3A0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A618);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
         . = MAX(., 0x4A9D0);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC6C);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.text);
         . = MAX(., 0x4B13C);
@@ -1301,13 +1301,13 @@ SECTIONS
         . = MAX(., 0x90C74);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.text);
         . = MAX(., 0x90E08);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_InitFrameRing);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_InitFrameRing);
         . = MAX(., 0x91024);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_RunGameLoop);
         . = MAX(., 0x913D8);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
         . = MAX(., 0x9152C);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
         . = MAX(., 0x917E8);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.text);
         . = MAX(., 0x91F08);
@@ -1557,7 +1557,7 @@ SECTIONS
         . = MAX(., 0xADE90);
         src/sdk/libultra/audio/cseq.c.o(.text);
         . = MAX(., 0xAE6AC);
-        src/game/DATA/MAINCODE/802AD544_10/CSEQ.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSEQ.CPP.o(.data);
         . = MAX(., 0xAE6B0);
         src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
         . = MAX(., 0xAE820);
@@ -1583,11 +1583,11 @@ SECTIONS
         . = MAX(., 0xAFAB0);
         src/sdk/libultra/cspsetbank.CPP.o(.text);
         . = MAX(., 0xAFB24);
-        src/game/DATA/MAINCODE/802AFEEC_3/CSPSETBANK.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSPSETBANK.CPP.o(.data);
         . = MAX(., 0xAFB30);
         src/sdk/libultra/cspsetseq.CPP.o(.text);
         . = MAX(., 0xAFBBC);
-        src/game/DATA/MAINCODE/802AFEEC_4/CSPSETSEQ.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSPSETSEQ.CPP.o(.data);
         . = MAX(., 0xAFBC0);
         src/sdk/libultra/audio/event.c.o(.text);
         . = MAX(., 0xAFF08);
@@ -1623,7 +1623,7 @@ SECTIONS
         . = MAX(., 0xB2050);
         src/sdk/libultra/alsynset/alunlink.c.o(.text);
         . = MAX(., 0xB210C);
-        src/game/DATA/AUDIO/802B243C_4/ALUNLINK.CPP.o(.data);
+        src/game/DATA/AUDIO/ALUNLINK.CPP.o(.data);
         . = MAX(., 0xB2110);
         src/sdk/libultra/alsynset/sndplayer.c.o(.text);
         . = MAX(., 0xB21C8);
@@ -1669,7 +1669,7 @@ SECTIONS
         . = MAX(., 0xB2D30);
         src/sdk/libultra/alsynset/allocatepvoice.c.o(.text);
         . = MAX(., 0xB2DE8);
-        src/game/DATA/AUDIO/802B3128_7/ALLOCATEPVOICE.CPP.o(.data);
+        src/game/DATA/AUDIO/ALLOCATEPVOICE.CPP.o(.data);
         . = MAX(., 0xB2DF0);
         src/sdk/libultra/alsynset/synsetfx.c.o(.text);
         . = MAX(., 0xB2DF8);
@@ -1681,7 +1681,7 @@ SECTIONS
         . = MAX(., 0xB2EA0);
         src/sdk/libultra/alsynset/alsynset.c.o(.text);
         . = MAX(., 0xB306C);
-        src/game/DATA/AUDIO/802B3128_14/ALSYNSET.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSET.CPP.o(.data);
         . = MAX(., 0xB3070);
         src/sdk/libultra/alsynset/synsetpriority.c.o(.text);
         . = MAX(., 0xB3078);
@@ -1717,7 +1717,7 @@ SECTIONS
         . = MAX(., 0xB4330);
         src/sdk/libultra/audio/env.c.o(.text);
         . = MAX(., 0xB4FD4);
-        src/game/DATA/MAINCODE/802AFD5C_6/ENV.CPP.o(.data);
+        src/game/DATA/MAINCODE/ENV.CPP.o(.data);
         . = MAX(., 0xB4FE0);
         src/sdk/libultra/audio/filter.c.o(.text);
         . = MAX(., 0xB4FFC);
@@ -1785,7 +1785,7 @@ SECTIONS
         . = MAX(., 0xB7620);
         src/sdk/libultra/os/oscontreset_data.CPP.o(.text);
         . = MAX(., 0xB778C);
-        src/game/DATA/AUDIO/802B7488_8/CONTROLLER.CPP.o(.data);
+        src/game/DATA/AUDIO/CONTROLLER.CPP.o(.data);
         . = MAX(., 0xB7790);
         src/sdk/libultra/os/dpsetnextbuf.CPP.o(.text);
         . = MAX(., 0xB782C);
@@ -1859,11 +1859,11 @@ SECTIONS
         . = MAX(., 0xB9880);
         src/sdk/libultra/os/siaccess.CPP.o(.text);
         . = MAX(., 0xB98A8);
-        src/game/DATA/AUDIO/802BE040_20/SIACCESS.CPP.o(.data);
+        src/game/DATA/AUDIO/SIACCESS.CPP.o(.data);
         . = MAX(., 0xB98B0);
         src/sdk/libultra/io/sirawdma.c.o(.text);
         . = MAX(., 0xB9968);
-        src/game/DATA/AUDIO/802BE040_23/SIRAWDMA.CPP.o(.data);
+        src/game/DATA/AUDIO/SIRAWDMA.CPP.o(.data);
         . = MAX(., 0xB9970);
         src/game/REVERB/SIRAW.CPP.o(.text);
         . = MAX(., 0xB9988);
@@ -1921,7 +1921,7 @@ SECTIONS
         . = MAX(., 0xBA2B0);
         src/sdk/libultra/io/visetmode.c.o(.text);
         . = MAX(., 0xBA2FC);
-        src/game/DATA/MAINCODE/802BA5F0_8/VISETMODE.CPP.o(.data);
+        src/game/DATA/MAINCODE/VISETMODE.CPP.o(.data);
         . = MAX(., 0xBA300);
         src/sdk/libultra/audio/visetmode.CPP.o(.text);
         . = MAX(., 0xBA464);
@@ -2127,7 +2127,7 @@ SECTIONS
         . = MAX(., 0xC1480);
         src/sdk/libultra/libc/longarith.CPP.o(.text);
         . = MAX(., 0xC1508);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.data);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.data);
         . = MAX(., 0xC1510);
         src/sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
@@ -2158,7 +2158,7 @@ SECTIONS
         . = MAX(., 0x2414);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.data);
         . = MAX(., 0x2438);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.text);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.text);
         . = MAX(., 0x2898);
         src/sdk/libultra/libasm_80200610_5.c.o(.data);
         . = MAX(., 0x28A0);
@@ -2876,9 +2876,9 @@ SECTIONS
         . = MAX(., 0x4A3B0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A628);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
         . = MAX(., 0x4A9E0);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC7C);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.text);
         . = MAX(., 0x4B14C);
@@ -3414,13 +3414,13 @@ SECTIONS
         . = MAX(., 0x90DA4);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.text);
         . = MAX(., 0x90F48);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_InitFrameRing);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_InitFrameRing);
         . = MAX(., 0x91164);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_RunGameLoop);
         . = MAX(., 0x91518);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
         . = MAX(., 0x9166C);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
         . = MAX(., 0x91928);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.text);
         . = MAX(., 0x92048);
@@ -3688,7 +3688,7 @@ SECTIONS
         . = MAX(., 0xAFC9C);
         src/sdk/libultra/audio/csplayer.c.o(.text.__setUsptFromTempo);
         . = MAX(., 0xAFCCC);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.data);
         . = MAX(., 0xAFCD0);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.text);
         . = MAX(., 0xAFD4C);
@@ -3704,7 +3704,7 @@ SECTIONS
         . = MAX(., 0xAFE60);
         src/sdk/libultra/audio/event.c.o(.text);
         . = MAX(., 0xB01A8);
-        src/game/DATA/MAINCODE/802AFEEC_13/EVENT.CPP.o(.data);
+        src/game/DATA/MAINCODE/EVENT.CPP.o(.data);
         . = MAX(., 0xB01B0);
         src/sdk/libultra/audio/copy.c.o(.text);
         . = MAX(., 0xB01DC);
@@ -3756,7 +3756,7 @@ SECTIONS
         . = MAX(., 0xB2C20);
         src/sdk/libultra/alsynset/alsndp.c.o(.text);
         . = MAX(., 0xB2CCC);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.data);
         . = MAX(., 0xB2CD0);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.text);
         . = MAX(., 0xB2D1C);
@@ -3772,7 +3772,7 @@ SECTIONS
         . = MAX(., 0xB2DA0);
         src/sdk/libultra/alsynset/alsndpsetvol.c.o(.text);
         . = MAX(., 0xB2DFC);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.data);
         . = MAX(., 0xB2E00);
         src/sdk/libultra/alsynset/sndpstop.c.o(.text);
         . = MAX(., 0xB2E48);
@@ -3802,7 +3802,7 @@ SECTIONS
         . = MAX(., 0xB3320);
         src/sdk/libultra/alsynset/alsynsetvol.c.o(.text);
         . = MAX(., 0xB33D8);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.data);
         . = MAX(., 0xB33E0);
         src/sdk/libultra/audio/ALSYNSTARTVOICE/ALSYNSTARTVOICE.CPP.o(.text);
         . = MAX(., 0xB3474);
@@ -3810,7 +3810,7 @@ SECTIONS
         . = MAX(., 0xB3480);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.text);
         . = MAX(., 0xB3584);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
         . = MAX(., 0xB3590);
         src/sdk/libultra/synstopvoice.c.o(.text);
         . = MAX(., 0xB360C);
@@ -3882,11 +3882,11 @@ SECTIONS
         . = MAX(., 0xB7160);
         src/sdk/MATH/aigetlen.CPP.o(.text);
         . = MAX(., 0xB7174);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.data);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.data);
         . = MAX(., 0xB7180);
         src/sdk/MATH/aisetfreq.CPP.o(.text);
         . = MAX(., 0xB7298);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.data);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xB72A0);
         src/sdk/libultra/os/aisetnextbuf.CPP.o(.text);
         . = MAX(., 0xB732C);
@@ -3898,7 +3898,7 @@ SECTIONS
         . = MAX(., 0xB7350);
         src/sdk/libultra/os/contquery.CPP.o(.text);
         . = MAX(., 0xB73F8);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.data);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.data);
         . = MAX(., 0xB7400);
         src/sdk/libultra/os/controller.CPP.o(.text);
         . = MAX(., 0xB78C0);
@@ -3970,7 +3970,7 @@ SECTIONS
         . = MAX(., 0xB99C0);
         src/sdk/libultra/io/pirawread.c.o(.text);
         . = MAX(., 0xB9A54);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.data);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.data);
         . = MAX(., 0xB9A60);
         src/sdk/libultra/os/siaccess/siaccess.CPP.o(.text);
         . = MAX(., 0xB9B20);
@@ -3996,7 +3996,7 @@ SECTIONS
         . = MAX(., 0xB9E70);
         src/sdk/libultra/io/sprawdma.c.o(.text);
         . = MAX(., 0xB9F6C);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.data);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.data);
         . = MAX(., 0xB9F70);
         src/game/REVERB/SPSETPC.CPP.o(.text);
         . = MAX(., 0xB9F9C);
@@ -4050,7 +4050,7 @@ SECTIONS
         . = MAX(., 0xBA760);
         src/sdk/libultra/viswapbuf.c.o(.text);
         . = MAX(., 0xBA7A4);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.data);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.data);
         . = MAX(., 0xBA7B0);
         src/sdk/libultra/audio/vi_data.CPP.o(.text);
         . = MAX(., 0xBAAEC);
@@ -4275,7 +4275,7 @@ SECTIONS
         . = MAX(., 0x2414);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.data);
         . = MAX(., 0x2438);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.text);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.text);
         . = MAX(., 0x2898);
         src/sdk/libsn/80200800_4.CPP.o(.data);
         . = MAX(., 0x28A0);
@@ -4995,9 +4995,9 @@ SECTIONS
         . = MAX(., 0x4A3E0);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A658);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
         . = MAX(., 0x4AA10);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4ACAC);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.text);
         . = MAX(., 0x4B17C);
@@ -5537,13 +5537,13 @@ SECTIONS
         . = MAX(., 0x90DD4);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.text);
         . = MAX(., 0x90F78);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_InitFrameRing);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_InitFrameRing);
         . = MAX(., 0x91194);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_RunGameLoop);
         . = MAX(., 0x91548);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
         . = MAX(., 0x9169C);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
         . = MAX(., 0x91958);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.text);
         . = MAX(., 0x92078);
@@ -5883,7 +5883,7 @@ SECTIONS
         . = MAX(., 0xB2C60);
         src/sdk/libultra/alsynset/alsndp.c.o(.text);
         . = MAX(., 0xB2D0C);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.data);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.data);
         . = MAX(., 0xB2D10);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.text);
         . = MAX(., 0xB2D5C);
@@ -5939,11 +5939,11 @@ SECTIONS
         . = MAX(., 0xB34C0);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.text);
         . = MAX(., 0xB35C4);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.data);
         . = MAX(., 0xB35D0);
         src/sdk/libultra/synstopvoice.c.o(.text);
         . = MAX(., 0xB364C);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
         . = MAX(., 0xB3650);
         src/sdk/libultra/audio/synthesizer.c.o(.text);
         . = MAX(., 0xB3CD4);
@@ -5971,7 +5971,7 @@ SECTIONS
         . = MAX(., 0xB5A74);
         src/game/REVERB/REVERB.CPP.o(.text);
         . = MAX(., 0xB6258);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.data);
         . = MAX(., 0xB6260);
         src/sdk/libultra/audio/save/save.c.o(.text);
         . = MAX(., 0xB6394);
@@ -6105,7 +6105,7 @@ SECTIONS
         . = MAX(., 0xB9B90);
         src/sdk/libultra/io/sirawdma.c.o(.text);
         . = MAX(., 0xB9C48);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.data);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.data);
         . = MAX(., 0xB9C50);
         src/game/REVERB/SIRAW.CPP.o(.text);
         . = MAX(., 0xB9C68);
@@ -6113,7 +6113,7 @@ SECTIONS
         . = MAX(., 0xB9C70);
         src/sdk/libultra/io/sptask.c.o(.text);
         . = MAX(., 0xB9E88);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.data);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xB9E90);
         src/sdk/libultra/sp.c.o(.text);
         . = MAX(., 0xB9EA8);
@@ -6175,7 +6175,7 @@ SECTIONS
         . = MAX(., 0xBA7A0);
         src/sdk/libultra/viswapbuf.c.o(.text);
         . = MAX(., 0xBA7E4);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.data);
         . = MAX(., 0xBA7F0);
         src/sdk/libultra/audio/vi_data.CPP.o(.text);
         . = MAX(., 0xBAB2C);
@@ -6187,7 +6187,7 @@ SECTIONS
         . = MAX(., 0xBAB40);
         src/sdk/libultra/createmesgqueue/createmesgqueue.c.o(.text);
         . = MAX(., 0xBAB64);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.data);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.data);
         . = MAX(., 0xBAB70);
         src/sdk/libultra/os/createthread/createthread.c.o(.text);
         . = MAX(., 0xBAC48);
@@ -6199,7 +6199,7 @@ SECTIONS
         . = MAX(., 0xBAC80);
         src/sdk/libultra/os/getthreadpri.CPP.o(.text);
         . = MAX(., 0xBAC9C);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.data);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.data);
         . = MAX(., 0xBACA0);
         src/game/GETTIME/GETTIME.CPP.o(.text);
         . = MAX(., 0xBAD1C);
@@ -6233,7 +6233,7 @@ SECTIONS
         . = MAX(., 0xBB4D0);
         src/game/SCENE/SETTHREADPRI.CPP.o(.text);
         . = MAX(., 0xBB594);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.data);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.data);
         . = MAX(., 0xBB5A0);
         src/sdk/libultra/os/SETTIMER/SETTIMER.CPP.o(.text);
         . = MAX(., 0xBB62C);
@@ -6402,7 +6402,7 @@ SECTIONS
         . = MAX(., 0x2414);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.data);
         . = MAX(., 0x2438);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.text);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.text);
         . = MAX(., 0x2898);
         src/game/DATA/MAINCODE/MAINCODE/ACTION_UPDATEBREAKABLEPROXIMITY_DATA.CPP.o(.data);
         . = MAX(., 0x28A0);
@@ -6626,7 +6626,7 @@ SECTIONS
         . = MAX(., 0x12960);
         src/game/AI/NAV/TARGETFOLLOW/TARGETFOLLOW.CPP.o(.text);
         . = MAX(., 0x12A04);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.data);
         . = MAX(., 0x12A10);
         src/game/AI/NAV/PATROL/PATROL.CPP.o(.text);
         . = MAX(., 0x12BD4);
@@ -7130,9 +7130,9 @@ SECTIONS
         . = MAX(., 0x4A380);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A5F8);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
         . = MAX(., 0x4A9B0);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC4C);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.text);
         . = MAX(., 0x4B11C);
@@ -7666,13 +7666,13 @@ SECTIONS
         . = MAX(., 0x90B84);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.text);
         . = MAX(., 0x90D18);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_InitFrameRing);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_InitFrameRing);
         . = MAX(., 0x90F34);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_RunGameLoop);
         . = MAX(., 0x912F0);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
         . = MAX(., 0x91444);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
         . = MAX(., 0x91700);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.text);
         . = MAX(., 0x91E20);
@@ -7996,11 +7996,11 @@ SECTIONS
         . = MAX(., 0xB1F80);
         src/sdk/libultra/alsynset/alunlink.c.o(.text);
         . = MAX(., 0xB203C);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.data);
         . = MAX(., 0xB2040);
         src/sdk/libultra/alsynset/sndplayer.c.o(.text);
         . = MAX(., 0xB20F8);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
         . = MAX(., 0xB2100);
         src/sdk/libultra/alsynset/sndpdeallocate.c.o(.text);
         . = MAX(., 0xB2144);
@@ -8046,7 +8046,7 @@ SECTIONS
         . = MAX(., 0xB2D20);
         src/sdk/libultra/alsynset/synsetfx.c.o(.text);
         . = MAX(., 0xB2D28);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.data);
         . = MAX(., 0xB2D30);
         src/sdk/libultra/alsynset/synfreevoice.c.o(.text);
         . = MAX(., 0xB2DCC);
@@ -8082,7 +8082,7 @@ SECTIONS
         . = MAX(., 0xB3930);
         src/sdk/libultra/audio/auxbus.c.o(.text);
         . = MAX(., 0xB3A3C);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.data);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.data);
         . = MAX(., 0xB3A40);
         src/sdk/libultra/audio/drvrnew.c.o(.text);
         . = MAX(., 0xB4258);
@@ -8166,7 +8166,7 @@ SECTIONS
         . = MAX(., 0xB76C0);
         src/sdk/libultra/os/dpsetnextbuf.CPP.o(.text);
         . = MAX(., 0xB775C);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.data);
         . = MAX(., 0xB7760);
         src/sdk/libultra/dp/dp.c.o(.text);
         . = MAX(., 0xB7778);
@@ -8220,7 +8220,7 @@ SECTIONS
         . = MAX(., 0xB9570);
         src/game/GAMECORE/PIRAWDMA.CPP.o(.text);
         . = MAX(., 0xB9644);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.data);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xB9650);
         src/sdk/libultra/io/pirawread.c.o(.text);
         . = MAX(., 0xB96E4);
@@ -8382,7 +8382,7 @@ SECTIONS
         . = MAX(., 0xBB6F0);
         src/sdk/libultra/os/osyieldthread.CPP.o(.text);
         . = MAX(., 0xBB798);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.data);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.data);
         . = MAX(., 0xBB7A0);
         src/sdk/libultra/os/__osEnqueueThread/__osEnqueueThread.s.o(.text);
         . = MAX(., 0xBC0A0);
@@ -8502,7 +8502,7 @@ SECTIONS
         . = MAX(., 0xC13B0);
         src/sdk/libultra/libc/longarith.CPP.o(.text);
         . = MAX(., 0xC1438);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.data);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.data);
         . = MAX(., 0xC1440);
         src/sdk/libgcc/_floatdisf.CPP.o(.text);
 #endif
@@ -8533,7 +8533,7 @@ SECTIONS
         . = MAX(., 0x2414);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.data);
         . = MAX(., 0x2438);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.text);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.text);
         . = MAX(., 0x2898);
         src/sdk/libsn/80200800_4.CPP.o(.data);
         . = MAX(., 0x28A0);
@@ -8759,7 +8759,7 @@ SECTIONS
         . = MAX(., 0x12960);
         src/game/AI/NAV/TARGETFOLLOW/TARGETFOLLOW.CPP.o(.text);
         . = MAX(., 0x12A04);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.data);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.data);
         . = MAX(., 0x12A10);
         src/game/AI/NAV/PATROL/PATROL.CPP.o(.text);
         . = MAX(., 0x12BD4);
@@ -9151,7 +9151,7 @@ SECTIONS
         . = MAX(., 0x3B5A0);
         src/game/ENGINE/VIRTUAL/VHANDLER/VHANDLER.C.o(.text);
         . = MAX(., 0x3CBB8);
-        src/game/DATA/MAINCODE/802AFEEC_13/EVENT.CPP.o(.data);
+        src/game/DATA/MAINCODE/EVENT.CPP.o(.data);
         . = MAX(., 0x3CBC0);
         src/game/ENGINE/UNICOL/ACCEPTS/ACCEPTS_2.CPP.o(.text);
         . = MAX(., 0x3CBC8);
@@ -9261,9 +9261,9 @@ SECTIONS
         . = MAX(., 0x4A390);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.text);
         . = MAX(., 0x4A608);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.func_8024AA18_de);
         . = MAX(., 0x4A9C0);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.text.GameObject_DrawBlobShadow);
         . = MAX(., 0x4AC5C);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.text);
         . = MAX(., 0x4B12C);
@@ -9797,13 +9797,13 @@ SECTIONS
         . = MAX(., 0x90C54);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.text);
         . = MAX(., 0x90DE8);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_InitFrameRing);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_InitFrameRing);
         . = MAX(., 0x91004);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_RunGameLoop);
         . = MAX(., 0x913E8);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_BeginFrameDisplayList);
         . = MAX(., 0x9153C);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.text.SetN64_SubmitFrameTasks);
         . = MAX(., 0x917F8);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.text);
         . = MAX(., 0x91F18);
@@ -10043,7 +10043,7 @@ SECTIONS
         . = MAX(., 0xB1F40);
         src/game/MENU/FLOATCONVERT/FLOATCONVERT.CPP.o(.text);
         . = MAX(., 0xB1F68);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.data);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.data);
         . = MAX(., 0xB1F70);
         src/game/MENU/IDENTIFIER/IDENTIFIER.CPP.o(.text);
         . = MAX(., 0xB2038);
@@ -10165,7 +10165,7 @@ SECTIONS
         . = MAX(., 0xB7A50);
         src/sdk/libultra/alsynset/alsndp.c.o(.text);
         . = MAX(., 0xB7AFC);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.data);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.data);
         . = MAX(., 0xB7B00);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.text);
         . = MAX(., 0xB7B4C);
@@ -10221,11 +10221,11 @@ SECTIONS
         . = MAX(., 0xB82B0);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.text);
         . = MAX(., 0xB83B4);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.data);
         . = MAX(., 0xB83C0);
         src/sdk/libultra/synstopvoice.c.o(.text);
         . = MAX(., 0xB843C);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.data);
         . = MAX(., 0xB8440);
         src/sdk/libultra/audio/synthesizer.c.o(.text);
         . = MAX(., 0xB8AC4);
@@ -10277,7 +10277,7 @@ SECTIONS
         . = MAX(., 0xBBAC0);
         src/game/REVERB/PERSPECTIVE.CPP.o(.text);
         . = MAX(., 0xBBDF8);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.data);
         . = MAX(., 0xBBE00);
         src/sdk/libultra/gu/sinf.c.o(.text);
         . = MAX(., 0xBBF7C);
@@ -10361,7 +10361,7 @@ SECTIONS
         . = MAX(., 0xBE0A0);
         src/game/SYSTEM/SYSTEM/SYSTEM_3.CPP.o(.text);
         . = MAX(., 0xBE274);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.data);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.data);
         . = MAX(., 0xBE280);
         src/sdk/libultra/io/epirawread.c.o(.text);
         . = MAX(., 0xBE414);
@@ -10399,7 +10399,7 @@ SECTIONS
         . = MAX(., 0xBEA80);
         src/sdk/libultra/io/sptask.c.o(.text);
         . = MAX(., 0xBEC98);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.data);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.data);
         . = MAX(., 0xBECA0);
         src/sdk/libultra/sp.c.o(.text);
         . = MAX(., 0xBECB8);
@@ -10415,7 +10415,7 @@ SECTIONS
         . = MAX(., 0xBEDF0);
         src/game/REVERB/SPSETSTAT.CPP.o(.text);
         . = MAX(., 0xBEE04);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.data);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.data);
         . = MAX(., 0xBEE10);
         src/sdk/libultra/sptaskyield.c.o(.text);
         . = MAX(., 0xBEE2C);
@@ -10485,7 +10485,7 @@ SECTIONS
         . = MAX(., 0xBFA90);
         src/sdk/libultra/os/getthreadpri.CPP.o(.text);
         . = MAX(., 0xBFAAC);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.data);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.data);
         . = MAX(., 0xBFAB0);
         src/game/GETTIME/GETTIME.CPP.o(.text);
         . = MAX(., 0xBFB2C);
@@ -10519,7 +10519,7 @@ SECTIONS
         . = MAX(., 0xC02E0);
         src/game/SCENE/SETTHREADPRI.CPP.o(.text);
         . = MAX(., 0xC03A4);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.data);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.data);
         . = MAX(., 0xC03B0);
         src/sdk/libultra/os/SETTIMER/SETTIMER.CPP.o(.text);
         . = MAX(., 0xC043C);
@@ -10678,7 +10678,7 @@ SECTIONS
         src/sdk/libultra/sched/Libgultra_TrwReadTlbEntry/Libgultra_TrwReadTlbEntry.s.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/Libgultra_TrwExceptionHandler.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/ACTION_UPDATEBREAKABLEPROXIMITY_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
@@ -10904,7 +10904,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.CPP.o(.bss .sbss COMMON);
@@ -11101,7 +11101,7 @@ SECTIONS
         src/game/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_DRAWCREDITSLINES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_BUILDANDSUBMITSESSIONFRAME.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING.CPP.o(.bss .sbss COMMON);
@@ -11201,15 +11201,15 @@ SECTIONS
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_11.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alcseqnewmarker_data.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/cseq.c.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AD544_10/CSEQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSEQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/CSPLAYER/CSPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_14.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/cspsetbank.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFEEC_3/CSPSETBANK.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSPSETBANK.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/cspsetseq.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFEEC_4/CSPSETSEQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSPSETSEQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/event.c.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/EVENT/EVENT.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/copy.c.o(.bss .sbss COMMON);
@@ -11225,7 +11225,7 @@ SECTIONS
         src/sdk/libultra/audio/seq.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/READ/READ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alunlink.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B243C_4/ALUNLINK.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALUNLINK.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802B243C_5/SNDPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpdeallocate.c.o(.bss .sbss COMMON);
@@ -11248,13 +11248,13 @@ SECTIONS
         src/sdk/libultra/audio/ALSNDPSTOP/ALSNDPSTOP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synaddplayer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/allocatepvoice.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_7/ALLOCATEPVOICE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALLOCATEPVOICE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synsetfx.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/SYNSETFX/SYNSETFX.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synfreevoice.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSYNFREEVOICE/ALSYNFREEVOICE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynset.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_14/ALSYNSET.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSET.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synsetpriority.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/8025DE50_8/SYNSETFX.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynsetvol.c.o(.bss .sbss COMMON);
@@ -11269,7 +11269,7 @@ SECTIONS
         src/sdk/libultra/audio/AUXBUS/AUXBUS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/drvrnew.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFD5C_6/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/filter.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/FILTER/FILTER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/mainbus.c.o(.bss .sbss COMMON);
@@ -11299,7 +11299,7 @@ SECTIONS
         src/game/DATA/AUDIO/CONTQUERY/CONTQUERY.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/controller.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/oscontreset_data.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7488_8/CONTROLLER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/CONTROLLER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/dpsetnextbuf.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/dp/dp.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/control_resetcontrollerpak_data.CPP.o(.bss .sbss COMMON);
@@ -11331,9 +11331,9 @@ SECTIONS
         src/game/DATA/AUDIO/PIRAWREAD/PIRAWREAD.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_20/SIACCESS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/SIACCESS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_23/SIRAWDMA.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/SIRAWDMA.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SIRAW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_27.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sptask.c.o(.bss .sbss COMMON);
@@ -11361,7 +11361,7 @@ SECTIONS
         src/game/SYSTEM/VIGETCURRCONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/SYSTEM/SYSTEM_4.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/visetmode.c.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802BA5F0_8/VISETMODE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/VISETMODE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/visetmode.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/VISETMODE/VISETMODE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/visetyscale.c.o(.bss .sbss COMMON);
@@ -11452,7 +11452,7 @@ SECTIONS
         src/sdk/libgcc/_cmpdi2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgcc/802C6A00_15.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/libc/longarith.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.bss .sbss COMMON);
         src/sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_EU)
@@ -11469,7 +11469,7 @@ SECTIONS
         src/sdk/libultra/sched/Libgultra_TrwReadTlbEntry/Libgultra_TrwReadTlbEntry.s.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/Libgultra_TrwExceptionHandler.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
         src/sdk/libultra/libasm_80200610_5.c.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
@@ -11699,7 +11699,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.CPP.o(.bss .sbss COMMON);
@@ -11894,7 +11894,7 @@ SECTIONS
         src/game/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_DRAWCREDITSLINES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_BUILDANDSUBMITSESSIONFRAME.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING.CPP.o(.bss .sbss COMMON);
@@ -11998,7 +11998,7 @@ SECTIONS
         src/sdk/libultra/audio/cseq.c.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/CSEQ/CSEQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_15.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/cspsetbank.CPP.o(.bss .sbss COMMON);
@@ -12006,7 +12006,7 @@ SECTIONS
         src/sdk/libultra/cspsetseq.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/CSPSETSEQ/CSPSETSEQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/event.c.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFEEC_13/EVENT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/EVENT.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/copy.c.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/802AFEEC_14/COPY.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/copy.CPP.o(.bss .sbss COMMON);
@@ -12031,7 +12031,7 @@ SECTIONS
         src/sdk/libultra/audio/sndplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802B2D5C_12/SNDPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsndp.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSNDPSETPAN/ALSNDPSETPAN.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpitch.c.o(.bss .sbss COMMON);
@@ -12039,7 +12039,7 @@ SECTIONS
         src/sdk/libultra/alsynset/sndpsetpriority.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802B3128_5/SNDPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsndpsetvol.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpstop.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSNDPSTOP/ALSNDPSTOP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synaddplayer.c.o(.bss .sbss COMMON);
@@ -12054,10 +12054,10 @@ SECTIONS
         src/sdk/libultra/alsynset/synsetpriority.c.o(.bss .sbss COMMON);
         src/sdk/libultra/SYNSTOPVOICE/SYNSTOPVOICE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynsetvol.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSYNSTARTVOICE/ALSYNSTARTVOICE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/synstopvoice.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/synthesizer.c.o(.bss .sbss COMMON);
@@ -12087,14 +12087,14 @@ SECTIONS
         src/sdk/libultra/gu/SINF/SINF.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sqrtf.c.o(.bss .sbss COMMON);
         src/sdk/MATH/aigetlen.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/aisetfreq.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/aisetnextbuf.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/ai.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AI/AI.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/contquery.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/controller.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/oscontreset_data.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/CONTROLLER/CONTROLLER.CPP.o(.bss .sbss COMMON);
@@ -12127,7 +12127,7 @@ SECTIONS
         src/game/GAMECORE/PIRAWDMA.CPP.o(.bss .sbss COMMON);
         src/game/GAMECORE/GAMECORE/GAMECORE_4.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/SIACCESS/SIACCESS.CPP.o(.bss .sbss COMMON);
@@ -12140,7 +12140,7 @@ SECTIONS
         src/sdk/libultra/sp.c.o(.bss .sbss COMMON);
         src/sdk/libultra/SP/SP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sprawdma.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SPSETPC.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_29.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SPSETSTAT.CPP.o(.bss .sbss COMMON);
@@ -12166,7 +12166,7 @@ SECTIONS
         src/sdk/libultra/visetyscale.c.o(.bss .sbss COMMON);
         src/sdk/libultra/VISETYSCALE/VISETYSCALE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/viswapbuf.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/vi_data.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/VI/VI.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/AUDIO_ASSERT/AUDIO_ASSERT.CPP.o(.bss .sbss COMMON);
@@ -12277,7 +12277,7 @@ SECTIONS
         src/sdk/libultra/sched/Libgultra_TrwReadTlbEntry/Libgultra_TrwReadTlbEntry.s.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/Libgultra_TrwExceptionHandler.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
         src/sdk/libsn/80200800_4.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
@@ -12504,7 +12504,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.CPP.o(.bss .sbss COMMON);
@@ -12703,7 +12703,7 @@ SECTIONS
         src/game/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_DRAWCREDITSLINES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_BUILDANDSUBMITSESSIONFRAME.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING.CPP.o(.bss .sbss COMMON);
@@ -12840,7 +12840,7 @@ SECTIONS
         src/sdk/libultra/audio/sndplayer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/SP/SP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsndp.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_29.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpitch.c.o(.bss .sbss COMMON);
@@ -12867,9 +12867,9 @@ SECTIONS
         src/sdk/libultra/audio/ALSYNSTARTVOICE/ALSYNSTARTVOICE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_1.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/synstopvoice.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/synthesizer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/auxbus.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AI/AI.CPP.o(.bss .sbss COMMON);
@@ -12881,7 +12881,7 @@ SECTIONS
         src/sdk/libultra/audio/MAINBUS/MAINBUS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/save/save.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_26.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SYNALLOCFX.CPP.o(.bss .sbss COMMON);
@@ -12945,11 +12945,11 @@ SECTIONS
         src/sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/SINF/SINF.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sirawdma.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SIRAW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_22.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sptask.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/sp.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_23.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sprawdma.c.o(.bss .sbss COMMON);
@@ -12979,19 +12979,19 @@ SECTIONS
         src/sdk/libultra/visetyscale.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802B3128_5/SNDPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/viswapbuf.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/vi_data.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802BA5F0_14/VISETMODE.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/AUDIO_ASSERT/AUDIO_ASSERT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802BA5F0_15/VISETMODE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/createmesgqueue/createmesgqueue.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/createthread/createthread.c.o(.bss .sbss COMMON);
         src/game/SYSTEM/SYSTEM/SYSTEM_1.CPP.o(.bss .sbss COMMON);
         src/game/LEOINTERRUPT/GETTHREADID.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/VISETYSCALE/VISETYSCALE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/getthreadpri.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.bss .sbss COMMON);
         src/game/GETTIME/GETTIME.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/VIGETCURRFRAMEBUF/VIGETCURRFRAMEBUF.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SIRAWWRITE.CPP.o(.bss .sbss COMMON);
@@ -13007,7 +13007,7 @@ SECTIONS
         src/game/GAMECORE/GAMECORE/GAMECORE_4.CPP.o(.bss .sbss COMMON);
         src/game/SCENE/SETGLOBALINTMASK.CPP.o(.bss .sbss COMMON);
         src/game/SCENE/SETTHREADPRI.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/SETTIMER/SETTIMER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/startthread/startthread.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/STARTTHREAD/STARTTHREAD.CPP.o(.bss .sbss COMMON);
@@ -13087,7 +13087,7 @@ SECTIONS
         src/sdk/libultra/sched/Libgultra_TrwReadTlbEntry/Libgultra_TrwReadTlbEntry.s.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/Libgultra_TrwExceptionHandler.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/ACTION_UPDATEBREAKABLEPROXIMITY_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
@@ -13147,7 +13147,7 @@ SECTIONS
         src/game/AI/NAV/CARRIER/CARRIER.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/NAV_FOLLOWMARKERCARRIERROUTE/NAV_FOLLOWMARKERCARRIERROUTE.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/TARGETFOLLOW/TARGETFOLLOW.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PATROL/PATROL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/OBJECTCHASE/NAV_UPDATEOBJECTARRIVALCHASE.CPP.o(.bss .sbss COMMON);
@@ -13313,7 +13313,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.CPP.o(.bss .sbss COMMON);
@@ -13490,7 +13490,7 @@ SECTIONS
         src/game/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_DRAWCREDITSLINES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_BUILDANDSUBMITSESSIONFRAME.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING.CPP.o(.bss .sbss COMMON);
@@ -13608,9 +13608,9 @@ SECTIONS
         src/sdk/libultra/audio/seq.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/READ/READ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alunlink.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndplayer.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpdeallocate.c.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/channel_updatevoiceplayback_data.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/sndplayer.c.o(.bss .sbss COMMON);
@@ -13627,7 +13627,7 @@ SECTIONS
         src/sdk/libultra/alsynset/synaddplayer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/allocatepvoice.c.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synsetfx.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/synfreevoice.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSNDPSETPAN/ALSNDPSETPAN.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynset.c.o(.bss .sbss COMMON);
@@ -13642,7 +13642,7 @@ SECTIONS
         src/sdk/libultra/audio/synthesizer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/ALSNDPSETPITCH/ALSNDPSETPITCH.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/auxbus.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/drvrnew.c.o(.bss .sbss COMMON);
         src/game/MENU/ITEMS/PLAYER/ITEMS_CONFIGURE/ITEMS_CONFIGURE_1.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
@@ -13675,7 +13675,7 @@ SECTIONS
         src/sdk/libultra/os/controller.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/oscontreset_data.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/dpsetnextbuf.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/dp/dp.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/LOOKAT/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/motor.CPP.o(.bss .sbss COMMON);
@@ -13696,7 +13696,7 @@ SECTIONS
         src/game/GAMECORE/EPIRAWIO.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/CREATE/CREATE.CPP.o(.bss .sbss COMMON);
         src/game/GAMECORE/PIRAWDMA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/pirawread.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess/siaccess.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/siaccess.CPP.o(.bss .sbss COMMON);
@@ -13757,7 +13757,7 @@ SECTIONS
         src/sdk/libultra/timerintr.c.o(.bss .sbss COMMON);
         src/sdk/libultra/TIMERINTR/TIMERINTR.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/osyieldthread.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC850_eu_x.s.o(.bss .sbss COMMON);
         src/game/LEOINTERRUPT/LEOINTERRUPT.CPP.o(.bss .sbss COMMON);
@@ -13810,7 +13810,7 @@ SECTIONS
         src/sdk/libgcc/_cmpdi2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgcc/802C6A00_15.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/libc/longarith.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.bss .sbss COMMON);
         src/sdk/libgcc/_floatdisf.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US_REV1)
@@ -13827,7 +13827,7 @@ SECTIONS
         src/sdk/libultra/sched/Libgultra_TrwReadTlbEntry/Libgultra_TrwReadTlbEntry.s.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/Libgultra_TrwExceptionHandler.s.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/MAINCODE/MAINCODE_21.CPP.o(.bss .sbss COMMON);
-        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
+        src/sdk/libultra/sched/Libgultra_TrwExceptionHandler_2.s.o(.bss .sbss COMMON);
         src/sdk/libsn/80200800_4.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
@@ -13891,7 +13891,7 @@ SECTIONS
         src/game/AI/NAV/CARRIER/CARRIER.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/NAV_FOLLOWMARKERCARRIERROUTE/NAV_FOLLOWMARKERCARRIERROUTE.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/TARGETFOLLOW/TARGETFOLLOW.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFD5C_3/CSPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/CSPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PATROL/PATROL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/OBJECTCHASE/NAV_UPDATEOBJECTARRIVALCHASE.CPP.o(.bss .sbss COMMON);
@@ -14022,7 +14022,7 @@ SECTIONS
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYER/PLAYER.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER/VHANDLER.C.o(.bss .sbss COMMON);
-        src/game/DATA/MAINCODE/802AFEEC_13/EVENT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/ACCEPTS/ACCEPTS_2.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/ALLOCATESCENEEFFECT/ALLOCATESCENEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/COLLIDE/CCOLLISION_TRACEACTORMOTION.CPP.o(.bss .sbss COMMON);
@@ -14065,7 +14065,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.CPP.o(.bss .sbss COMMON);
@@ -14262,7 +14262,7 @@ SECTIONS
         src/game/ENGINE/SETN64/SETN64_DRAWFULLSCREENBACKDROP.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_DRAWCREDITSLINES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_BUILDANDSUBMITSESSIONFRAME.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING.CPP.o(.bss .sbss COMMON);
@@ -14361,7 +14361,7 @@ SECTIONS
         src/sdk/libultra/libultra_exchangedebuglinkwords.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/libultra_executedebuglinkaddress.CPP.o(.bss .sbss COMMON);
         src/game/MENU/FLOATCONVERT/FLOATCONVERT.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7488_4/CONTQUERY.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/CONTQUERY.CPP.o(.bss .sbss COMMON);
         src/game/MENU/IDENTIFIER/IDENTIFIER.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/CSPSETSEQ/CSPSETSEQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/sched/func_802AD370_de.s.o(.bss .sbss COMMON);
@@ -14415,7 +14415,7 @@ SECTIONS
         src/sdk/libultra/audio/sndplayer.c.o(.bss .sbss COMMON);
         src/sdk/libultra/SP/SP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsndp.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_46/SPRAWDMA.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/SPRAWDMA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpan.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_29.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/sndpsetpitch.c.o(.bss .sbss COMMON);
@@ -14442,9 +14442,9 @@ SECTIONS
         src/sdk/libultra/audio/ALSYNSTARTVOICE/ALSYNSTARTVOICE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_1.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/alsynset/alsynstartvoiceparams.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_18/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/synstopvoice.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/8025DE50_20/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSYNSTARTVOICEPARAMS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/synthesizer.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/CREATEMESGQUEUE/CREATEMESGQUEUE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/auxbus.c.o(.bss .sbss COMMON);
@@ -14470,7 +14470,7 @@ SECTIONS
         src/sdk/MATH/mtxutil.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_34.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B2D5C_13/ALSNDP.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDP.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sinf.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/RECVMESG/RECVMESG.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sqrtf.c.o(.bss .sbss COMMON);
@@ -14511,7 +14511,7 @@ SECTIONS
         src/game/DATA/AUDIO/802B3128_5/SNDPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/SYSTEM/SYSTEM.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/SYSTEM/SYSTEM_3.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B3128_9/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/ALSNDPSETVOL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/epirawread.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_16.CPP.o(.bss .sbss COMMON);
         src/game/GAMECORE/EPIRAWIO.CPP.o(.bss .sbss COMMON);
@@ -14530,7 +14530,7 @@ SECTIONS
         src/game/REVERB/SIRAW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_22.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sptask.c.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_11/AIGETLEN.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AIGETLEN.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/sp.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_23.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/sprawdma.c.o(.bss .sbss COMMON);
@@ -14538,7 +14538,7 @@ SECTIONS
         src/game/REVERB/SPSETPC.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/LONGARITH/LONGARITH.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SPSETSTAT.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_13/AISETFREQ.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AISETFREQ.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/sptaskyield.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/AUDIO/AUDIO_25.CPP.o(.bss .sbss COMMON);
         src/game/LEOINTERRUPT/SPTASKYIELDED.CPP.o(.bss .sbss COMMON);
@@ -14573,7 +14573,7 @@ SECTIONS
         src/game/LEOINTERRUPT/GETTHREADID.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/VISETYSCALE/VISETYSCALE.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/getthreadpri.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BA5F0_19/VISWAPBUF.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/VISWAPBUF.CPP.o(.bss .sbss COMMON);
         src/game/GETTIME/GETTIME.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/io/VIGETCURRFRAMEBUF/VIGETCURRFRAMEBUF.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SIRAWWRITE.CPP.o(.bss .sbss COMMON);
@@ -14590,7 +14590,7 @@ SECTIONS
         src/game/GAMECORE/GAMECORE/GAMECORE_4.CPP.o(.bss .sbss COMMON);
         src/game/SCENE/SETGLOBALINTMASK.CPP.o(.bss .sbss COMMON);
         src/game/SCENE/SETTHREADPRI.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802BE040_26/PIRAWREAD.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/PIRAWREAD.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/SETTIMER/SETTIMER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/startthread/startthread.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/STARTTHREAD/STARTTHREAD.CPP.o(.bss .sbss COMMON);
@@ -15516,10 +15516,10 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
         . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
         . = MAX(., 0x2120);
         . = ALIGN(8) /* src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o */;
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.rodata .rdata);
@@ -16212,12 +16212,12 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A60);
         . = DEFINED(__align8_literals_SetN64_RunGameLoop) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
         . = MAX(., 0x3A68);
         . = DEFINED(__align8_literals_SetN64_BeginFrameDisplayList) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
         . = DEFINED(__align8_literals_SetN64_SubmitFrameTasks) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
         . = MAX(., 0x3A6C);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A88);
@@ -16505,7 +16505,7 @@ SECTIONS
         . = MAX(., 0x5A80);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5A84);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.rodata .rdata);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x5A98);
         . = ALIGN(8) /* src/sdk/libultra/audio/seqplayer/seqplayer.c.o */;
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.rodata .rdata);
@@ -16554,7 +16554,7 @@ SECTIONS
         . = MAX(., 0x5C40);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5C44);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.rodata .rdata);
         . = MAX(., 0x5C50);
         . = ALIGN(8) /* src/sdk/libultra/audio/env.c.o */;
         src/sdk/libultra/audio/env.c.o(.rodata .rdata);
@@ -16579,9 +16579,9 @@ SECTIONS
         . = MAX(., 0x5DF8);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5E00);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5E24);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.data);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.data);
         . = MAX(., 0x5E30);
         src/game/REVERB/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5E34);
@@ -16595,9 +16595,9 @@ SECTIONS
         . = MAX(., 0x5EB0);
         src/sdk/MATH/lookat.CPP.o(.rodata .rdata);
         . = MAX(., 0x5EB8);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.rodata .rdata);
         . = MAX(., 0x5ED4);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.data);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.data);
         . = MAX(., 0x5EE0);
         src/game/REVERB/PERSPECTIVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5F10);
@@ -18387,10 +18387,10 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20CC);
         . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
         . = MAX(., 0x2108);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
         . = MAX(., 0x2130);
         . = ALIGN(8) /* src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o */;
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.rodata .rdata);
@@ -19084,12 +19084,12 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A70);
         . = DEFINED(__align8_literals_SetN64_RunGameLoop) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
         . = MAX(., 0x3A78);
         . = DEFINED(__align8_literals_SetN64_BeginFrameDisplayList) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
         . = DEFINED(__align8_literals_SetN64_SubmitFrameTasks) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
         . = MAX(., 0x3A7C);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A98);
@@ -19369,7 +19369,7 @@ SECTIONS
         . = MAX(., 0x63D0);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x63D4);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.rodata .rdata);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x63E8);
         . = ALIGN(8) /* src/sdk/libultra/audio/seqplayer/seqplayer.c.o */;
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.rodata .rdata);
@@ -19418,7 +19418,7 @@ SECTIONS
         . = MAX(., 0x6590);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x6594);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.rodata .rdata);
         . = MAX(., 0x65A0);
         . = ALIGN(8) /* src/sdk/libultra/audio/env.c.o */;
         src/sdk/libultra/audio/env.c.o(.rodata .rdata);
@@ -19443,7 +19443,7 @@ SECTIONS
         . = MAX(., 0x6748);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x6750);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x6774);
         src/game/DATA/OVLTBL/SAVE/SAVE.CPP.o(.data);
         . = MAX(., 0x6780);
@@ -19459,9 +19459,9 @@ SECTIONS
         . = MAX(., 0x6800);
         src/sdk/MATH/lookat.CPP.o(.rodata .rdata);
         . = MAX(., 0x6808);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.rodata .rdata);
         . = MAX(., 0x6824);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.data);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.data);
         . = MAX(., 0x6830);
         src/game/REVERB/PERSPECTIVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x6860);
@@ -21210,10 +21210,10 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20CC);
         . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
         . = MAX(., 0x2108);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
         . = MAX(., 0x2130);
         . = ALIGN(8) /* src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o */;
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.rodata .rdata);
@@ -21907,12 +21907,12 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A70);
         . = DEFINED(__align8_literals_SetN64_RunGameLoop) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
         . = MAX(., 0x3A78);
         . = DEFINED(__align8_literals_SetN64_BeginFrameDisplayList) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
         . = DEFINED(__align8_literals_SetN64_SubmitFrameTasks) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
         . = MAX(., 0x3A7C);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A98);
@@ -22193,7 +22193,7 @@ SECTIONS
         . = MAX(., 0x6D60);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x6D64);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.rodata .rdata);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x6D78);
         . = ALIGN(8) /* src/sdk/libultra/audio/seqplayer/seqplayer.c.o */;
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.rodata .rdata);
@@ -22240,7 +22240,7 @@ SECTIONS
         . = MAX(., 0x6F20);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x6F24);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.rodata .rdata);
         . = MAX(., 0x6F30);
         . = ALIGN(8) /* src/sdk/libultra/audio/env.c.o */;
         src/sdk/libultra/audio/env.c.o(.rodata .rdata);
@@ -22261,7 +22261,7 @@ SECTIONS
         . = MAX(., 0x70D8);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x70E0);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x7104);
         src/game/DATA/OVERLAYS/TWO/RESOURCES/RESOURCES_2.CPP.o(.data);
         . = MAX(., 0x7110);
@@ -22277,7 +22277,7 @@ SECTIONS
         . = MAX(., 0x7190);
         src/sdk/MATH/lookat.CPP.o(.rodata .rdata);
         . = MAX(., 0x7198);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.rodata .rdata);
         . = MAX(., 0x71C0);
         src/game/REVERB/PERSPECTIVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x71F0);
@@ -24022,10 +24022,10 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
         . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
         . = MAX(., 0x2120);
         . = ALIGN(8) /* src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o */;
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.rodata .rdata);
@@ -24720,12 +24720,12 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A60);
         . = DEFINED(__align8_literals_SetN64_RunGameLoop) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
         . = MAX(., 0x3A68);
         . = DEFINED(__align8_literals_SetN64_BeginFrameDisplayList) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
         . = DEFINED(__align8_literals_SetN64_SubmitFrameTasks) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
         . = MAX(., 0x3A6C);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A88);
@@ -25004,7 +25004,7 @@ SECTIONS
         . = MAX(., 0x5A70);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5A74);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.rodata .rdata);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x5A88);
         . = ALIGN(8) /* src/sdk/libultra/audio/seqplayer/seqplayer.c.o */;
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.rodata .rdata);
@@ -25055,7 +25055,7 @@ SECTIONS
         . = MAX(., 0x5C30);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5C34);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.rodata .rdata);
         . = MAX(., 0x5C40);
         . = ALIGN(8) /* src/sdk/libultra/audio/env.c.o */;
         src/sdk/libultra/audio/env.c.o(.rodata .rdata);
@@ -25080,7 +25080,7 @@ SECTIONS
         . = MAX(., 0x5DE8);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5DF0);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5E14);
         src/game/DATA/OVLTBL/SAVE/SAVE.CPP.o(.data);
         . = MAX(., 0x5E48);
@@ -25092,7 +25092,7 @@ SECTIONS
         . = MAX(., 0x5EA0);
         src/game/REVERB/COSF.CPP.o(.data);
         . = MAX(., 0x5EA8);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.rodata .rdata);
         . = MAX(., 0x5EC4);
         src/game/REVERB/PERSPECTIVE.CPP.o(.data);
         . = MAX(., 0x5EE4);
@@ -26060,7 +26060,7 @@ SECTIONS
         . = ALIGN(8) /* src/sdk/libsn/io_hostmemory/io_hostmemory.CPP.o */;
         src/sdk/libsn/io_hostmemory/io_hostmemory.CPP.o(.rodata .rdata);
         . = MAX(., 0x28);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.data);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.data);
         . = MAX(., 0x3C);
         src/game/AI/ENEMIES/TURRETAI/CVECTOR3_GETDIRECTIONROTATION2_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5C);
@@ -26900,10 +26900,10 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x20BC);
         . = DEFINED(__align8_literals_func_8024AA18_de) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_func_8024AA18_de .rdata.literals_func_8024AA18_de);
         . = MAX(., 0x20F8);
         . = DEFINED(__align8_literals_GameObject_DrawBlobShadow) ? ALIGN(8) : .;
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.rodata.literals_GameObject_DrawBlobShadow .rdata.literals_GameObject_DrawBlobShadow);
         . = MAX(., 0x2120);
         . = ALIGN(8) /* src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o */;
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.rodata .rdata);
@@ -27604,12 +27604,12 @@ SECTIONS
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A60);
         . = DEFINED(__align8_literals_SetN64_RunGameLoop) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_RunGameLoop .rdata.literals_SetN64_RunGameLoop);
         . = MAX(., 0x3A68);
         . = DEFINED(__align8_literals_SetN64_BeginFrameDisplayList) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_BeginFrameDisplayList .rdata.literals_SetN64_BeginFrameDisplayList);
         . = DEFINED(__align8_literals_SetN64_SubmitFrameTasks) ? ALIGN(8) : .;
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
+        src/game/ENGINE/SETN64.CPP.o(.rodata.literals_SetN64_SubmitFrameTasks .rdata.literals_SetN64_SubmitFrameTasks);
         . = MAX(., 0x3A6C);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.rodata .rdata);
         . = MAX(., 0x3A88);
@@ -27935,7 +27935,7 @@ SECTIONS
         . = MAX(., 0x5BE0);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5BE4);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.rodata .rdata);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x5BF8);
         . = ALIGN(8) /* src/sdk/libultra/audio/seqplayer/seqplayer.c.o */;
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.rodata .rdata);
@@ -27982,7 +27982,7 @@ SECTIONS
         . = MAX(., 0x5DA0);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x5DA4);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.rodata .rdata);
         . = MAX(., 0x5DB0);
         . = ALIGN(8) /* src/sdk/libultra/audio/env.c.o */;
         src/sdk/libultra/audio/env.c.o(.rodata .rdata);
@@ -28003,7 +28003,7 @@ SECTIONS
         . = MAX(., 0x5F58);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5F60);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x5F84);
         src/game/DATA/FRONTEND/C/CONSTANTS/CONSTANTS_14.CPP.o(.data);
         . = MAX(., 0x5F90);
@@ -28019,7 +28019,7 @@ SECTIONS
         . = MAX(., 0x6010);
         src/sdk/MATH/lookat.CPP.o(.rodata .rdata);
         . = MAX(., 0x6018);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.rodata .rdata);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.rodata .rdata);
         . = MAX(., 0x6040);
         src/game/REVERB/PERSPECTIVE.CPP.o(.rodata .rdata);
         . = MAX(., 0x6070);
@@ -29632,7 +29632,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/RANDVEC/RANDVEC.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETMODELPARTICLESCALE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/S_ANIMMODELINDEXTEXT.CPP.o(.bss .sbss COMMON);
@@ -29866,7 +29866,7 @@ SECTIONS
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_RUNGAMETHREAD_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_18.CPP.o(.bss .sbss COMMON);
@@ -29956,7 +29956,7 @@ SECTIONS
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
@@ -29975,7 +29975,7 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_15/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/DRVRNEW/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb_DATA0/reverb.CPP.o(.bss .sbss COMMON);
@@ -29985,14 +29985,14 @@ SECTIONS
         src/sdk/libultra/audio/reverb_DATA2/alfxpull_data.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/G_AUDIOSAVETEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/ONE/LINKTABLES/LINKTABLES_1.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/MATHDATA/MATHDATA.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/COSF.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/lookat.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sinf.c.o(.bss .sbss COMMON);
@@ -30550,7 +30550,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/RANDVEC/RANDVEC.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETMODELPARTICLESCALE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/S_ANIMMODELINDEXTEXT.CPP.o(.bss .sbss COMMON);
@@ -30787,7 +30787,7 @@ SECTIONS
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_RUNGAMETHREAD_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_18.CPP.o(.bss .sbss COMMON);
@@ -30876,7 +30876,7 @@ SECTIONS
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/AI/WEAPONAI/WEAPONAI_26.CPP.o(.bss .sbss COMMON);
@@ -30894,7 +30894,7 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_15/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/DRVRNEW/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb_DATA0/reverb.CPP.o(.bss .sbss COMMON);
@@ -30903,7 +30903,7 @@ SECTIONS
         src/sdk/libultra/audio/reverb_DATA2/alfxpull_data.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTBL/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/G_AUDIOSAVETEXT.CPP.o(.bss .sbss COMMON);
@@ -30911,7 +30911,7 @@ SECTIONS
         src/sdk/MATH/MATHDATA/MATHDATA.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/COSF.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/lookat.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sinf.c.o(.bss .sbss COMMON);
@@ -31450,7 +31450,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/RANDVEC/RANDVEC.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETMODELPARTICLESCALE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/S_ANIMMODELINDEXTEXT.CPP.o(.bss .sbss COMMON);
@@ -31688,7 +31688,7 @@ SECTIONS
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_RUNGAMETHREAD_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_18.CPP.o(.bss .sbss COMMON);
@@ -31778,7 +31778,7 @@ SECTIONS
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seq.c.o(.bss .sbss COMMON);
@@ -31796,7 +31796,7 @@ SECTIONS
         src/game/DATA/OVL1_C/DRVRNEW/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/drvrnew_DATA1/drvrnew.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb_DATA0/reverb.CPP.o(.bss .sbss COMMON);
@@ -31805,7 +31805,7 @@ SECTIONS
         src/sdk/libultra/audio/reverb_DATA2/alfxpull_data.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/RESOURCES/RESOURCES_2.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/G_AUDIOSAVETEXT.CPP.o(.bss .sbss COMMON);
@@ -31813,7 +31813,7 @@ SECTIONS
         src/sdk/MATH/MATHDATA/MATHDATA.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/COSF.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/lookat.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sinf.c.o(.bss .sbss COMMON);
@@ -32360,7 +32360,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/RANDVEC/RANDVEC.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETMODELPARTICLESCALE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/S_ANIMMODELINDEXTEXT.CPP.o(.bss .sbss COMMON);
@@ -32601,7 +32601,7 @@ SECTIONS
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_RUNGAMETHREAD_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_18.CPP.o(.bss .sbss COMMON);
@@ -32692,7 +32692,7 @@ SECTIONS
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/OVLTAB1.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seq.c.o(.bss .sbss COMMON);
@@ -32711,7 +32711,7 @@ SECTIONS
         src/game/DATA/OVERLAYS/ONE/CONSTANTS/CONSTANTS_17.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/DRVRNEW/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb_DATA0/reverb.CPP.o(.bss .sbss COMMON);
@@ -32720,11 +32720,11 @@ SECTIONS
         src/sdk/libultra/audio/reverb_DATA2/alfxpull_data.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTBL/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/reverb.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/COSF.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/MATHDATA/MATHDATA.CPP.o(.bss .sbss COMMON);
@@ -33103,7 +33103,7 @@ SECTIONS
 #endif
 #if defined(VERSION_US_REV1)
         src/sdk/libsn/io_hostmemory/io_hostmemory.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/802B7058_48/LONGARITH.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/LONGARITH.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/CVECTOR3_GETDIRECTIONROTATION2_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRET_MOVE.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI/TURRETAI.CPP.o(.bss .sbss COMMON);
@@ -33317,7 +33317,7 @@ SECTIONS
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_BUILDACTORPOSE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/RANDVEC/RANDVEC.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_DRAWTEAMMASKEDMODEL_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/INSTANCE/GOBJINST_5/GOBJINST.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/INSTANCE/GOBJINST.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_FINDNEARESTBONEBOUNDS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/GOBJINST_GETMODELPARTICLESCALE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/INSTANCE/GOBJINST/S_ANIMMODELINDEXTEXT.CPP.o(.bss .sbss COMMON);
@@ -33575,7 +33575,7 @@ SECTIONS
         src/game/ENGINE/SETN64/CCREDITS_UPDATESCROLL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_RUNGAMETHREAD_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SETN64_UPDATEFADETRANSITION_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/SETN64_3/SETN64.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/SETN64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_CLEARDEPTHRECT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_UPDATEFRAMETIMING_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SETN64/SETN64_18.CPP.o(.bss .sbss COMMON);
@@ -33691,7 +33691,7 @@ SECTIONS
         src/sdk/libultra/audio/csplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/EVENT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/SEQPLAYER_PROCESSSEQUENCEEVENTS_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT3/800CC694_3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT3/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/seqplayer/seqplayer.c.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/SEQPLAYER/SEQPLAYER.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT3/800CC724/SEQPLAYER.CPP.o(.bss .sbss COMMON);
@@ -33713,7 +33713,7 @@ SECTIONS
         src/game/DATA/OVL1_C/DRVRNEW/DRVRNEW.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/drvrnew_DATA1/drvrnew.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/AUDIO_PULLENVELOPE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_19/ENV.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/env.c.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/ENV/ENV.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb_DATA0/reverb.CPP.o(.bss .sbss COMMON);
@@ -33722,7 +33722,7 @@ SECTIONS
         src/sdk/libultra/audio/reverb_DATA2/alfxpull_data.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_C/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_25/SAVE.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/CONSTANTS_14.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/G_AUDIOSAVETEXT.CPP.o(.bss .sbss COMMON);
@@ -33730,7 +33730,7 @@ SECTIONS
         src/sdk/libultra/gu/cosf/cosf.c.o(.bss .sbss COMMON);
         src/game/REVERB/COSF.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/lookat.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_C/800CC694_31/LOOKAT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVL1_C/LOOKAT.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/PERSPECTIVE.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/C/CONSTANTS/MATH_SINF_DATA.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/sinf.c.o(.bss .sbss COMMON);
@@ -38380,7 +38380,7 @@ SECTIONS
         . = MAX(., 0x495F0);
         src/sdk/libultra/pfs/PFS/PFS.CPP.o(.text);
         . = MAX(., 0x4A0A8);
-        src/game/DATA/PFS/80447BB0_3/PFS.CPP.o(.data);
+        src/game/DATA/PFS/PFS.CPP.o(.data);
         . = MAX(., 0x4A0B0);
         src/game/OVLGAME/PLAYER/PLAYER_RESETPLAYERFORROUND.CPP.o(.text);
         . = MAX(., 0x4AB24);
@@ -41369,7 +41369,7 @@ SECTIONS
         src/sdk/libultra/pfs/ospfsrepairid/ospfsrepairid.CPP.o(.bss .sbss COMMON);
         src/game/DATA/PFS/PFS/PFS.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/PFS/PFS.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/PFS/80447BB0_3/PFS.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/PFS/PFS.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/PLAYER/PLAYER_RESETPLAYERFORROUND.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/PLAYER/PLAYER_PLACEPLAYERFORROUND.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/PLAYER/OVLGAME_INITIALIZEPLAYERPOOL.CPP.o(.bss .sbss COMMON);

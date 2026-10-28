@@ -4,7 +4,11 @@
 
 #include "COMMON/OSTHREAD_S.H"
 
-extern char D_800C7784_de[];
+#if defined(VERSION_US_REV1)
+extern const unsigned char D_800C7784_de[];
+#else
+extern const char D_800C7784_de[];
+#endif
 
 extern int alFxParam(int *arg0, int arg1, int arg2);
 
