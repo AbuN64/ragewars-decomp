@@ -22,7 +22,7 @@
 
 
 extern s32 D_8013B364;
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 struct ObjNavAddGoalNode;
 extern void Nav_AddGoalNode(struct ObjNavAddGoalNode *, int);
 
@@ -42,7 +42,7 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
     base = &D_8013B364;
     count = 0;
     for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
-        record = Nav_GetGraphPoint(base, node->key);
+        record = Portal_GetGraphPoint(base, node->key);
         if (navigation_point_flags((NavigationPoint *)record) & 1) {
             for (i = 0; i < 30; i++) {
                 if (navigation_point_object_id((NavigationPoint *)record) == ids[i] && node->owner != 0
@@ -55,7 +55,7 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
     }
     if (count == 0) {
         for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
-            record = Nav_GetGraphPoint(base, node->key);
+            record = Portal_GetGraphPoint(base, node->key);
             if (navigation_point_flags((NavigationPoint *)record) & 1) {
                 for (i = 0; i < 30; i++) {
                     if (navigation_point_object_id((NavigationPoint *)record) == ids[i]) {
@@ -70,21 +70,21 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
 }
 
 
-extern void Nav_ResetSearchState(void *arg0);
+extern void Portal_ResetSearchState(void *arg0);
 
-extern void Nav_ClearGoalList(s32);
+extern void Route_ClearGoalList(s32);
 
 s32 Nav_AddPickupGoalsByObjectIds(s32 *ids);
 
-extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
+extern void Route_SearchPathByKey(void *arg0, s32 arg1);
 
-extern void *Nav_FindSearchNode(char *, s32);
+extern void *Portal_FindSearchNode(char *, s32);
 
-extern void Nav_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
+extern void Route_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
 
 
 
-extern s32 Player_GetWeaponClassId(Player *, s32);
+extern s32 Playerai_GetWeaponClassId(Player *, s32);
 
 s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     s32 data[30];
@@ -96,8 +96,8 @@ s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     NavigationSearchNode *entry;
 
     global = (CNavData *)&D_8013B364;
-    Nav_ResetSearchState(global);
-    Nav_ClearGoalList((s32)global);
+    Portal_ResetSearchState(global);
+    Route_ClearGoalList((s32)global);
     count = 29;
     cursor = &data[29];
     do {
@@ -113,13 +113,13 @@ s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     }
     value = -1;
     global->result = value;
-    Nav_SearchPathByKey(global, closeAttackBrain->route);
+    Route_SearchPathByKey(global, closeAttackBrain->route);
     current = global->result;
     if (current != value) {
-        entry = Nav_FindSearchNode(global, current);
+        entry = Portal_FindSearchNode(global, current);
         closeAttackBrain->destination = global->result;
         closeAttackBrain->routeObject = entry->object;
-        Nav_ReconstructSearchPath(global, &closeAttackBrain->routeNodes[0], 4);
+        Route_ReconstructSearchPath(global, &closeAttackBrain->routeNodes[0], 4);
     } else {
         closeAttackBrain->routeObject = 0;
         closeAttackBrain->routeState = current;
@@ -136,8 +136,8 @@ s32 Nav_SelectChaseObjectGoal(void *arg0) {
     s32 current;
 
     global = &D_8013B364;
-    Nav_ResetSearchState(global);
-    Nav_ClearGoalList((s32)global);
+    Portal_ResetSearchState(global);
+    Route_ClearGoalList((s32)global);
     count = 29;
     cursor = &data[29];
     do {
@@ -153,11 +153,11 @@ s32 Nav_SelectChaseObjectGoal(void *arg0) {
     }
     value = -1;
     ((CNavData *)global)->result = value;
-    Nav_SearchPathByKey(global, ((RouteChaseBot *)arg0)->node);
+    Route_SearchPathByKey(global, ((RouteChaseBot *)arg0)->node);
     current = ((CNavData *)global)->result;
     if (current != value) {
         ((RouteChaseBot *)arg0)->goal = current;
-        Nav_ReconstructSearchPath(global, &((AiController *)arg0)->queue[0], 4);
+        Route_ReconstructSearchPath(global, &((AiController *)arg0)->queue[0], 4);
     }
     return 1;
 }
@@ -173,15 +173,15 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     s32 current;
 
     global = (CNavData *)&D_8013B364;
-    Nav_ResetSearchState(global);
-    Nav_ClearGoalList((s32)global);
+    Portal_ResetSearchState(global);
+    Route_ClearGoalList((s32)global);
     count = 0;
     node = D_801372C8;
     scanbase = global;
     if (node != 0) {
         type = 0x64E;
         do {
-            result = Nav_GetGraphPoint(scanbase, node->key);
+            result = Portal_GetGraphPoint(scanbase, node->key);
             if ((navigation_point_flags(result) & 1) &&
                 navigation_point_object_id(result) == type &&
                 ((ActorMotionState *)node->object->motion)->mode == 0) {
@@ -198,11 +198,11 @@ s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     }
     value = -1;
     global->result = value;
-    Nav_SearchPathByKey(global, controller->current);
+    Route_SearchPathByKey(global, controller->current);
     current = global->result;
     if (current != value) {
         controller->mode = current;
-        Nav_ReconstructSearchPath(global, &controller->queue, 4);
+        Route_ReconstructSearchPath(global, &controller->queue, 4);
     }
     return 1;
 }
@@ -237,7 +237,7 @@ s32 Nav_GetWeaponPickupGoalClass(void **arg0) {
     void *temp_a0;
 
     temp_a0 = *arg0;
-    temp_v0 = Player_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
+    temp_v0 = Playerai_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
     switch (temp_v0) {
         case 0:
             return 5;
@@ -261,7 +261,7 @@ s32 Nav_AddInactiveObjectGoals(void) {
     count = 0;
     if (node != 0) {
         do {
-            result = Nav_GetGraphPoint(base, node->key);
+            result = Portal_GetGraphPoint(base, node->key);
             if ((navigation_point_flags((NavigationPoint *)result) & 1) &&
                 navigation_point_object_id((NavigationPoint *)result) == 0x64E &&
                 (s8)((LevelActor *)node->object)->pad1A4 == 0) {

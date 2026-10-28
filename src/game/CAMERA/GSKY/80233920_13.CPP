@@ -9,7 +9,7 @@ extern FuncPtr D_800CB380_de[][2];
 
 
 
-void func_802390F4_de(void *gameplayCamera, s16 requestedMode) {
+void Gsky_SetGameplayMode(void *gameplayCamera, s16 requestedMode) {
     FuncPtr fn;
 
     ((GameplayCamera *)gameplayCamera)->mode = requestedMode;

@@ -21,9 +21,9 @@ extern u8 D_8010BBB8;
 extern u8 D_80153330[];
 
 
-extern s32 func_802B7FD8_de(u8 *a0, u8 *a1, s32 a2);
+extern s32 osMotorInit(u8 *a0, u8 *a1, s32 a2);
 
-extern s32 Pak_UpdateStatus(s32 a0);
+extern s32 Note_UpdateStatus(s32 a0);
 
 extern void Control_ReleasePakLock(void);
 
@@ -39,7 +39,7 @@ void Pak_AllocateScratchBuffer(void) {
     D_800E2850 = 1;
 }
 
-void Pak_FreeScratchBuffer(void) {
+void Note_FreeScratchBuffer(void) {
     func_80253908_de(0);
     if (D_800DE808) {
         Cache_ReleaseResource(0, D_800DE808);
@@ -49,7 +49,7 @@ void Pak_FreeScratchBuffer(void) {
     D_800E2850 = 0;
 }
 
-/* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on Pak_UpdateStatus. */
+/* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on Note_UpdateStatus. */
 void Pak_ProbeStatus(s32 kind)
 {
     u8 *cur;
@@ -64,13 +64,13 @@ void Pak_ProbeStatus(s32 kind)
         cur[0] = 0;
         ready = 0;
     } else {
-        cur[0] = func_802B7FD8_de(D_8010FC00, cur + 8, kind) == 0;
+        cur[0] = osMotorInit(D_8010FC00, cur + 8, kind) == 0;
         ready = cur[0];
     }
 
     if (ready != 0) {
         g_controllerPakChannelStates[kind] = 2;
-    } else if (Pak_UpdateStatus(kind) != 0) {
+    } else if (Note_UpdateStatus(kind) != 0) {
         g_controllerPakChannelStates[kind] = 3;
     } else {
         g_controllerPakChannelStates[kind] = 1;
@@ -92,6 +92,6 @@ s32 Pak_GetStatus(s32 index) {
 /* Returns whether entry i of the word table g_controllerPakChannelStates equals 2. */
 
 
-s32 Pak_IsChannelReady(s32 index) {
+s32 Note_IsChannelReady(s32 index) {
     return g_controllerPakChannelStates[index] == 2;
 }

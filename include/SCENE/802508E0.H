@@ -69,9 +69,9 @@ typedef struct ResourceLockState {
     u8 reserved4[0xB98 - 4];
     OSMesgQueue waitQueue;
 } ResourceLockState;
-extern int StaticInstance_SelectDistanceVariant(void *object);
-extern void StaticInstance_RefreshResourceUsage(void *arg0);
-extern s8 StaticInstance_SelectGameModeVariant(struct LevelActor *arg0);
-extern void StaticInstance_DrawForGameMode(void *);
-extern CachedResource *func_80251F6C_de(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner, void *tag, void *spare, s32 async);
+extern int Statinst_SelectDistanceVariant(void *object);
+extern void Statinst_RefreshResourceUsage(void *arg0);
+extern s8 Statinst_SelectGameModeVariant(struct LevelActor *arg0);
+extern void Statinst_DrawForGameMode(void *);
+extern CachedResource *Cache_RequestPairedResource(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner, void *tag, void *spare, s32 async);
 #endif

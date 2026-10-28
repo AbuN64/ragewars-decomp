@@ -13,7 +13,7 @@
    definition (unsigned for kinds 1 and 4, with kind 1's two levels; signed short for kind 7). For kinds 1
    and 4 the scene mask scales it: 8 by D_800C2118_de with a floor and no second level, 0x20 by
    D_800C2120_de with second level D_800C2124_de. The health is kept as 24.8 fixed point. */
-void Nav_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Source *source) {
+void Actor_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Source *source) {
     s32 send;
     s32 first;
     s32 second;
@@ -97,7 +97,7 @@ typedef struct ActorSpawnCallbacks {
 extern char ACTOR_TABLE_A;
 extern char ACTOR_TABLE_B;
 extern f32 Region_GetPolygonHeight(void *, f32, f32);
-void Nav_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *callbacks) {
+void Actor_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *callbacks) {
     void *saved;
     void *surface;
     f32 scale;
@@ -108,7 +108,7 @@ void Nav_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *call
     XPlus_FillMemory(actor, 0, sizeof(Dest));
     actor->flags = 0x40;
     actor->field68 = saved;
-    Nav_ApplyActorDefinition(actor, source->definition, source->position, source);
+    Actor_ApplyActorDefinition(actor, source->definition, source->position, source);
     actor->callback11C = &ACTOR_TABLE_A;
     actor->draw = &ACTOR_TABLE_B;
     actor->state = -1;

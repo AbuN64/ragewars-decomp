@@ -91,21 +91,21 @@ static inline IntrusiveList *active_list(PoolRecAt28V1 *pool) {
     return &pool->active;
 }
 
-void Rumble_InitEffectNode(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
-                   f32 arg5, f32 arg6, void **arg7) {
+void Rumble_InitEffectNode(NodeCode8028469C *arg0, Clip *effectClip, CVector3 effectPosition,
+                   f32 valueStart, f32 valueEnd, void **ownerSlot) {
 
-    arg0->key = arg1;
-    arg0->position = arg2;
-    arg0->value0 = arg5;
-    arg0->value1 = arg6;
-    arg0->owner = arg7;
-    if (arg7 != 0) {
-        *arg7 = arg0;
+    arg0->key = effectClip;
+    arg0->position = effectPosition;
+    arg0->value0 = valueStart;
+    arg0->value1 = valueEnd;
+    arg0->owner = ownerSlot;
+    if (ownerSlot != 0) {
+        *ownerSlot = arg0;
     }
     Control_InitializeCurvePlayer(&arg0->amplitudeHandle,
-                  (unsigned int)Scene_GetEffectCurveRecord(&g_world, arg1->mode));
+                  (unsigned int)Scene_GetEffectCurveRecord(&g_world, effectClip->mode));
     Control_InitializeCurvePlayer(&arg0->lifetimeHandle,
-                  (unsigned int)Scene_GetEffectCurveRecord(&g_world, arg1->frames));
+                  (unsigned int)Scene_GetEffectCurveRecord(&g_world, effectClip->frames));
 }
 
 /** Clear the target word when the pointer field is populated. */
@@ -183,7 +183,7 @@ void Rumble_InitPoolNodes(void *effectPool, void *nodeStorage, s32 nodeCount) {
     __osRestoreInt(saved);
 }
 
-NodeCode8028469C *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
+NodeCode8028469C *Rumble_AllocatePoolNode(PoolRecAt28V1 *pool, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
 
     s32 mask;
     NodeCode8028469C *node;

@@ -1,7 +1,7 @@
 #include "MENU/TEAMMENU.H"
 #include "MENU/SHARED_MENUITEMRECORD.H"
 
-void func_80219124_de(Shared_MenuItemList *list) {
+void Cteamselect_InitTeamChoices(Shared_MenuItemList *list) {
     s32 i;
     f32 scale = D_800C22C4_de;
     f32 value = D_800C917C;

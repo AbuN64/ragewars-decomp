@@ -11,7 +11,7 @@ extern char D_80102B7E[];
 
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern s32 Defs_TestBit(char *, s32);
-extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
+extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 
 /* Resource ids of this screen are numbered per version (relative to us): eu-x 4, de -2. */
@@ -33,7 +33,7 @@ s32 Menu_CreateUnlockGatedListScreen(void *window) {
     D_800E5780->unk14 = 0;
 
     if (Defs_TestBit(D_80102B7E, 0) == 0) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
     }
 
     D_800E5780->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(0x139), 0x6E);

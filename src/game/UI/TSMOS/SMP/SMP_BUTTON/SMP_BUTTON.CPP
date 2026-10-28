@@ -28,7 +28,7 @@
 
 
 
-extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
+extern void Node_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
 extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
@@ -46,20 +46,20 @@ extern u8 *XPlus_CopyString(u8 *, u8 *);
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
 
 
-extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void Frontend_DrawVisibleSiblings(void *, Args);
+extern void Widget_DrawVisibleSiblings(void *, Args);
 
 /* When the fourth argument is one, advances a menu's selection at offset 0x110 to the next of its
    0x114 entries, wrapping to the first, points word 0x38 of its owner at 0x44 to the selected
@@ -117,9 +117,9 @@ MenuListWidget *SmpButton_CreateListWidget(s32 arg0, s32 arg1) {
     result->owner = child;
     result->index = 0;
     result->count = 0;
-    Frontend_WrapNodeInParent(source, result);
+    Node_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    Frontend_ReplaceNodeRefs(context, source, result);
+    Node_ReplaceNodeRefs(context, source, result);
     return result;
 }
 
@@ -180,16 +180,16 @@ void SmpButton_DrawListWidget(Shared_Item *widget, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((widget->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            Frontend_ClampRectToClip(&transformed, &basis);
+            Node_ClampRectToClip(&transformed, &basis);
             N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(widget->label, args);
+        Widget_DrawVisibleSiblings(widget->label, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
@@ -297,9 +297,9 @@ void SmpButton_WrapButtonWidget(s32 arg0) {
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    Frontend_WrapNodeInParent(source, result);
+    Node_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    Frontend_ReplaceNodeRefs(context, source, result);
+    Node_ReplaceNodeRefs(context, source, result);
 }
 
 void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
@@ -315,9 +315,9 @@ void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    Frontend_WrapNodeInParent(source, result);
+    Node_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    Frontend_ReplaceNodeRefs(context, source, result);
+    Node_ReplaceNodeRefs(context, source, result);
 }
 
 s32 SmpButton_DispatchButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -354,16 +354,16 @@ void SmpButton_DrawButtonWidget(Shared_Item *widget, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((widget->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            Frontend_ClampRectToClip(&transformed, &basis);
+            Node_ClampRectToClip(&transformed, &basis);
             N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(widget->label, args);
+        Widget_DrawVisibleSiblings(widget->label, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }

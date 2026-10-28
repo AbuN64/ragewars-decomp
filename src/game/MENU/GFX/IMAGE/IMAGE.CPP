@@ -5,14 +5,14 @@
 #include "MENU/GFX/80414430_24.H"
 
 extern void *ESmem_AllocateFrameHeapHigh(int);
-extern void func_802B6CBC_de(void *, void *);
+extern void guMtxF2L(void *, void *);
 extern struct Command *g_displayListCursor;
 
-void Gfx_EmitMatrix(void *source) {
+void Image_EmitMatrix(void *source) {
     void *allocation = ESmem_AllocateFrameHeapHigh(0x40);
     struct Command *command;
 
-    func_802B6CBC_de(source, allocation);
+    guMtxF2L(source, allocation);
     command = g_displayListCursor++;
     command->words[0] = 0xDA380003;
     command->words[1] = (unsigned)allocation;
@@ -28,7 +28,7 @@ void Gfx_EmitMatrix(void *source) {
 
 extern s32 Frontend_GetImagePixelType(u8 *record);
 
-void Gfx_SwizzleImage(Image_func_80419490_de *image) {
+void Image_SwizzleImage(Image_func_80419490_de *image) {
     s32 *src;
     s32 *dst;
     s32 groups;
@@ -79,10 +79,10 @@ struct OwnedImage;
 extern void Frontend_ReleaseOwnedImageBuffers(struct OwnedImage *image);
 
 /* The archive loader passes the image address through these forwarding calls. */
-void Gfx_ResetImage(void *image) {
+void Image_ResetImage(void *image) {
     Frontend_ClearOwnedImage((int)image);
 }
 
-void Gfx_ReleaseImage(struct OwnedImage *image) {
+void Image_ReleaseImage(struct OwnedImage *image) {
     Frontend_ReleaseOwnedImageBuffers(image);
 }

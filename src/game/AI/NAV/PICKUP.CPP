@@ -16,7 +16,7 @@
    Nav_InsertPickupRouteNode on the stage right after it and Nav_ComputeScaledPointCentroid on the one after that. */
 /* Navigation selection/list/node canonical ownership remains unresolved. */
 
-extern Link *Nav_GetStridedTableEntry(PickupGoalNodeList *, s32);
+extern Link *Portal_GetStridedTableEntry(PickupGoalNodeList *, s32);
 extern s32 Nav_ComputeScaledPointCentroid(Selection *sel);
 extern s32 Nav_FindSpecialLinkedCandidate(Selection *sel);
 
@@ -34,7 +34,7 @@ s32 Nav_AdvancePickupRouteSelection(Selection *sel)
     }
     if (sel->selection != -1 && sel->matches == 0) {
         for (i = 0; i < list->count; i++) {
-            node = (Node_func_8020D364_de *)Nav_GetStridedTableEntry((PickupGoalNodeList *)list, i);
+            node = (Node_func_8020D364_de *)Portal_GetStridedTableEntry((PickupGoalNodeList *)list, i);
             if (node->id == sel->selection && node->kind == 6) {
                 sel->matches++;
             }
@@ -55,7 +55,7 @@ s32 Nav_AdvancePickupRouteSelection(Selection *sel)
 /* 80208000_14.CPP */
 /* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route D_8013B364 (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and GraphU64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
 
-extern CVector3 *Nav_GetGraphPoint(PickupGoalNodeList *, s32);
+extern CVector3 *Portal_GetGraphPoint(PickupGoalNodeList *, s32);
 extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel) {
@@ -73,9 +73,9 @@ s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel
     stage = 0;
     route = &D_8013B364;
     for (; i < route->count; i++) {
-        link = Nav_GetStridedTableEntry(route, i);
+        link = Portal_GetStridedTableEntry(route, i);
         if (link->from == sel->id && link->type == 6) {
-            node = Nav_GetGraphPoint(route, link->to);
+            node = Portal_GetGraphPoint(route, link->to);
             sel->stages[stage].from = link->from;
             sel->stages[stage].to = link->to;
             if (stage + 1 == sel->stageCount) {
@@ -84,7 +84,7 @@ s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel
             stage++;
         }
     }
-    distance = GraphU64_GetSquaredDistance(node, Nav_GetGraphPoint(route, sel->node));
+    distance = GraphU64_GetSquaredDistance(node, Portal_GetGraphPoint(route, sel->node));
     facing.x = facing.y = facing.z = 1.0f;
     for (i = 0; i < sel->objectCount; i++) {
         if (sel->objects[i] == 0) {
@@ -107,7 +107,7 @@ s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel
     return 0;
 }
 
-extern s32 Nav_FindLinkIndex(PickupGoalNodeList *list, s32 from, s32 to);
+extern s32 Portal_FindLinkIndex(PickupGoalNodeList *list, s32 from, s32 to);
 s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
@@ -145,8 +145,8 @@ s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
             break;
         }
     }
-    if (next == -1 || Nav_FindLinkIndex(list, sel->id, sel->stages[best].to) == -1 ||
-        Nav_FindLinkIndex(list, next, sel->stages[best].to) == -1) {
+    if (next == -1 || Portal_FindLinkIndex(list, sel->id, sel->stages[best].to) == -1 ||
+        Portal_FindLinkIndex(list, next, sel->stages[best].to) == -1) {
         sel->failed = 0;
         sel->stageCount += 0x14;
         return 1;
@@ -169,11 +169,11 @@ s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     avg.x = avg.x * inv;
     avg.y = avg.y * inv;
     avg.z = avg.z * inv;
-    info = Nav_FindSearchNode(list, sel->stages[best].to);
+    info = Portal_FindSearchNode(list, sel->stages[best].to);
     avg.x = avg.x * info->radius;
     avg.y = avg.y * info->radius;
     avg.z = avg.z * info->radius;
-    node = Nav_GetGraphPoint(list, sel->stages[best].to);
+    node = Portal_GetGraphPoint(list, sel->stages[best].to);
     sel->result.x = node->x + avg.x;
     sel->result.y = node->y + avg.y;
     sel->result.z = node->z + avg.z;

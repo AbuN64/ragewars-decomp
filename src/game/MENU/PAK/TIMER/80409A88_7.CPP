@@ -22,7 +22,7 @@ extern s32 D_8015375C;
 extern char *D_800D7E14[];
 
 
-/* Sets D_80153780 to one; Pak_DisableAlternatePrompt clears it. */
+/* Sets D_80153780 to one; Timer_DisableAlternatePrompt clears it. */
 
 
 
@@ -54,7 +54,7 @@ extern s32 Pak_CountLineChars(struct Field *);
 
 
 /* Selects a menu field's label table from the connection mode and the option index. */
-s32 Pak_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
+s32 Timer_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
     s32 option;
     u32 rel;
 
@@ -89,31 +89,31 @@ done:
     return 0;
 }
 
-s32 Pak_SetManagerHeading(struct ObjRecAt14V1 *record) {
+s32 Timer_SetManagerHeading(struct ObjRecAt14V1 *record) {
     if (D_8015375C != 0) {
         record->unk14 = D_800D7794;
     }
     return 0;
 }
 
-void Pak_EnableAlternatePrompt(void) {
+void Timer_EnableAlternatePrompt(void) {
     D_80153780 = 1;
 }
 
-void Pak_DisableAlternatePrompt(void) {
+void Timer_DisableAlternatePrompt(void) {
     D_80153780 = 0;
 }
 
-s32 Pak_UpdateAlternatePromptLabel(struct FieldRecAt14 *field) {
+s32 Timer_UpdateAlternatePromptLabel(struct FieldRecAt14 *field) {
     if (D_80153780 != 0) {
-        field->text = D_800D77CC;
+        field->text = g_pakNoteLabelSlots;
     } else {
         field->text = D_800D77D0;
     }
     return 0;
 }
 
-int Pak_UpdatePreviewDepthLabel(ObjRecAt14V1 *out) {
+int Timer_UpdatePreviewDepthLabel(ObjRecAt14V1 *out) {
     switch (D_800E28BC->depth) {
     case 8:
     default:
@@ -129,7 +129,7 @@ int Pak_UpdatePreviewDepthLabel(ObjRecAt14V1 *out) {
     return 0;
 }
 
-s32 Pak_FormatPreviewPageCount(struct Field *field) {
+s32 Timer_FormatPreviewPageCount(struct Field *field) {
     s32 value = D_800E28BC->value >> 8;
     char *text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

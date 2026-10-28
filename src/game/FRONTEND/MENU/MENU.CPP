@@ -23,7 +23,7 @@ extern void Frontend_InitModelPreviewTransform(char *model, s32 arg1, CVector3 s
 extern void Frontend_SetPreviewRotation(char *model, CVector3 rotation);
 extern void Frontend_SetPreviewRotationSpeed(char *model, CVector3 offset);
 
-s32 Frontend_PositionSelectionMenuModel(void) {
+s32 Menu_PositionSelectionMenuModel(void) {
     CVector3 scale;
     CVector3 position;
     CVector3 rotation;
@@ -51,14 +51,14 @@ s32 Frontend_PositionSelectionMenuModel(void) {
 
 #include "gbi.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-extern s32 Frontend_GetModelRecordCount(struct RecordFrontendSetPreviewModel *record);
+extern s32 Model_GetModelRecordCount(struct RecordFrontendSetPreviewModel *record);
 extern void func_804399D0(struct RecordFrontendSetPreviewModel *record);
 extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
 /* Draw callback of the menu block: on draw event 1 in state 3 it clears the fill mode D_800D15E0, sets the fill
  * colour D_800D15E4 to opaque white, scissors the display list to the full screen and, when the block record at
  * +0x08 holds a model, draws it once in fill mode 1 at alpha 210, then restores the fill state. Returns zero. */
-s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
+s32 Menu_DrawMenuBlockModel(void *window, void *item, s32 event) {
     if (event == 1 && D_800E3590->unk216 == 3) {
         D_800D15E0 = 0;
         D_800D15E4[0] = 255.0f;
@@ -66,7 +66,7 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
         D_800D15E4[2] = 255.0f;
         D_800D15E4[3] = 255.0f;
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
-        if (Frontend_GetModelRecordCount(&D_800E3590->record) != 0) {
+        if (Model_GetModelRecordCount(&D_800E3590->record) != 0) {
             D_800D15E0 = 1;
             D_800D15E4[3] = 210.0f;
             func_804399D0(&D_800E3590->record);
@@ -78,25 +78,25 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
 }
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, hands func_8041DB30_de the cursor word the hub
-   names unk268 at +0x10C of the menu block D_800E3590 points to, calls Frontend_ShowUnlockedEntries with 0x6E,
-   Frontend_RefreshProfileStatistics and Frontend_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
+   names unk268 at +0x10C of the menu block D_800E3590 points to, calls Focus_ShowUnlockedEntries with 0x6E,
+   Focus_RefreshProfileStatistics and Focus_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
 
 extern void MarkMenuEventHandled();
 
 
-s32 Frontend_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value) {
+s32 Menu_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
-        Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
-        Frontend_ShowUnlockedEntries(0x6E);
-        Frontend_RefreshProfileStatistics();
-        Frontend_RefreshUnlockedFocusLabel();
+        Focus_AdvanceActiveSlot(&D_800E3590->unk268);
+        Focus_ShowUnlockedEntries(0x6E);
+        Focus_RefreshProfileStatistics();
+        Focus_RefreshUnlockedFocusLabel();
         D_800E3590->focus = 0;
     }
     return 0;
 }
 
-s32 Frontend_BeginSelectionMenuExit(void) {
+s32 Menu_BeginSelectionMenuExit(void) {
     MarkMenuEventHandled();
     D_800E3590->unk216 = 5;
     D_800E3590->unk220 = 4;
@@ -105,7 +105,7 @@ s32 Frontend_BeginSelectionMenuExit(void) {
 
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 
-s32 Frontend_ConsumeSelectionMenuEvent(void) {
+s32 Menu_ConsumeSelectionMenuEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
@@ -118,7 +118,7 @@ extern s32 D_800E3724;
 extern s32 D_800E3728;
 extern Handler802A2B50 D_800E372C;
 
-s32 Frontend_DispatchSelectionMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSelectionMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

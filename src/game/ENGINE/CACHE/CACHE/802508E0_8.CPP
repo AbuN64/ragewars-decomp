@@ -11,7 +11,7 @@
 #include "sdk/os.h"
 
 #if (defined(VERSION_US)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80253344_de);
+INCLUDE_ASM("span_1000", Cache_RunCompactionPasses);
 #endif
 
 #if !(defined(VERSION_US)) || defined(NON_MATCHING)
@@ -20,7 +20,7 @@ extern OSMesgQueue D_80101140;
 extern ResourceManagerState D_8010117C;
 
 
-void func_80253344_de(s32 unused) {
+void Cache_RunCompactionPasses(s32 unused) {
     s32 temp_v1;
     s32 temp_v1_2;
     u32 mask;
@@ -49,7 +49,7 @@ void func_80253344_de(s32 unused) {
         var_s0 = 0;
     }
     do {
-        func_802515F0_de(0, 0);
+        Cache_CompactResourceHeap(0, 0);
         var_s0++;
     } while (var_s0 < 10);
     temp_v0 = __osDisableInt();

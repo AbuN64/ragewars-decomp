@@ -12,7 +12,7 @@ u32 Defs_GetMemorySize(void);
 int SetN64_IsModeThirteen(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
-void *Pak_GetListContext(s8 *);
+void *Menu_GetListContext(s8 *);
 extern f32 D_800DE448;
 extern f32 D_800E247C;
 extern f32 D_800DE450_de;
@@ -41,7 +41,7 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
 
 /* Measures a text item into its metrics: size by kind (glyph run, image, three-part composite, box), then the scaled screen
  * rectangle from the item position (284 x 222 virtual screen). */
-void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
+void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     TextBoundsText part;
     CItemInfo first, second, third;
     TextBoundsData *data;
@@ -51,7 +51,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     s32 count, width;
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
-    data = Pak_GetListContext(text->descriptor->unk_44);
+    data = Menu_GetListContext(text->descriptor->unk_44);
     metrics->m_ScaleY = D_800DE428;
     metrics->m_ScaleX = D_800DE428;
     switch (text->mode) {
@@ -116,17 +116,17 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         first = *metrics;
         part = *text;
         part.mode = 0;
-        Pak_MeasureMenuText(&part, &first);
+        Menu_MeasureMenuText(&part, &first);
         second = *metrics;
         part = *text;
         part.mode = 1;
         part.text = 0;
-        Pak_MeasureMenuText(&part, &second);
+        Menu_MeasureMenuText(&part, &second);
         third = *metrics;
         part = *text;
         part.mode = 1;
         part.text = 0;
-        Pak_MeasureMenuText(&part, &third);
+        Menu_MeasureMenuText(&part, &third);
         width = second.width + third.width;
         if (width < first.width) {
             width = first.width;

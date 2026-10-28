@@ -49,7 +49,7 @@ void Gfx_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
     Gfx_DrawClippedImageRectangle(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
 }
 
-void Gfx_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
+void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
     D_800DF290 = 0;
     D_800E32E4 = 0;
     Gfx_SetRenderMode(0xC);
@@ -70,7 +70,7 @@ void Gfx_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, 
     }
 }
 
-void Gfx_ResetRenderState(void) {
+void Rect_ResetRenderState(void) {
     if (D_800DF250 != 0) {
         D_800DF250 = 0;
         D_800DF270 = 0;
@@ -85,7 +85,7 @@ void Gfx_ResetRenderState(void) {
     }
 }
 
-void Gfx_SetTexturePerspectiveMode(s32 mode) {
+void Rect_SetTexturePerspectiveMode(s32 mode) {
     if (mode != D_800DF274) {
         D_800DF274 = mode;
         if (D_800E32E4 == 0) {
@@ -112,7 +112,7 @@ void Gfx_SetTexturePerspectiveMode(s32 mode) {
    the last one set, D_800DF28C: appends 0xFB (environment, alpha zero) and 0xFA (primitive, with
    alpha) commands to the display list D_80110634 points into. */
 
-void Gfx_SetTextureMode(s32 mode) {
+void Rect_SetTextureMode(s32 mode) {
     if (D_80153F60.z == 0) {
         mode = 14;
     }
@@ -125,7 +125,7 @@ void Gfx_SetTextureMode(s32 mode) {
     }
 }
 
-void Gfx_SyncPipeline(void) {
+void Rect_SyncPipeline(void) {
     Gfx *gfx;
 
     if (D_800E32E4 == 0) {
@@ -134,11 +134,11 @@ void Gfx_SyncPipeline(void) {
     }
 }
 
-void Gfx_ResetPipelineSync(void) {
+void Rect_ResetPipelineSync(void) {
     D_800E32E4 = 0;
 }
 
-void Gfx_SetPackedColor(u32 color) {
+void Rect_SetPackedColor(u32 color) {
     Gfx *gfx;
 
     if (color == D_800DF28C) {
@@ -152,7 +152,7 @@ void Gfx_SetPackedColor(u32 color) {
     gDPSetPrimColor(gfx, 0, 0, color >> 16, (color & 0xFF00) >> 8, color, color >> 24);
 }
 
-void Gfx_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v0, f32 u1, f32 v1) {
+void Rect_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v0, f32 u1, f32 v1) {
     f32 scaleU;
     f32 scaleV;
     s32 dsdx;

@@ -17,7 +17,7 @@ extern EntryRecAtCV2 D_800E63C0[];
 
 extern s32 Player_GetPlayerIndex(void *,s32);
 
-s32 Multi_AppendNameCharacter(ObjRecAt14V2 *arg0, MenuRules *arg1) {
+s32 Setup_AppendNameCharacter(ObjRecAt14V2 *arg0, MenuRules *arg1) {
  s32 value; s32 count; s32 index=Player_GetPlayerIndex(&D_80145040,arg1->locked);
  D_800E63C0[index].timer=0;
  if(D_800E63C0[index].count == 8) return 0;
@@ -40,7 +40,7 @@ s32 Multi_AppendNameCharacter(ObjRecAt14V2 *arg0, MenuRules *arg1) {
 /* Compares two strings byte by byte and returns whether the last pair compared is equal. It stops
    at the first difference or terminator, and keeps going only while the count, decremented once
    per byte, is exactly zero, so a count of one compares a single byte. */
-s32 Multi_CompareByteSequence(u8 *a, u8 *b, s32 count) {
+s32 Setup_CompareByteSequence(u8 *a, u8 *b, s32 count) {
     u8 c;
     u8 d;
 

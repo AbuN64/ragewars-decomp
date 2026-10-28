@@ -6,7 +6,7 @@
 
 
 
-void func_802BB850_eu(s32 interruptMask) {
+void Scene_SetGlobalInterruptMask(s32 interruptMask) {
     u32 mask;
     s32 *p;
 

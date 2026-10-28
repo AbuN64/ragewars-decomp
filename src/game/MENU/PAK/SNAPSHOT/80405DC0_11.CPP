@@ -28,10 +28,10 @@ extern char *D_800D3758;
 
 extern char *D_800D375C;
 
-extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
+extern s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
-extern s32 Pak_ContainsInvalidNameByte(u8 *name, s32 size);
+extern s32 Note_ContainsInvalidNameByte(u8 *name, s32 size);
 
 extern void XPlus_CopyString(u8 *dst, char *src);
 
@@ -54,11 +54,11 @@ extern u8 *D_800D376C;
 
 extern u8 *D_800D7E14;
 
-extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
+extern s32 Note_GetFreePages(s32 ch, s32 *freeSpace);
 
-extern s32 Pak_BytesToPakPages(s32 size);
+extern s32 Note_BytesToPakPages(s32 size);
 
-static inline int space_required(int size) {size += 0x610; return Pak_BytesToPakPages(size);}
+static inline int space_required(int size) {size += 0x610; return Note_BytesToPakPages(size);}
 
 extern char D_8014561C[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -69,18 +69,18 @@ extern char D_8014561C[];
 
 extern char D_0044EEF4[];
 
-extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
+extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
 
-extern s32 Pak_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern s32 Snapshot_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
-extern void Pak_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern void Snapshot_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
-extern void Pak_GetNoteGameName(s32 ch, s32 note, s32 *state);
+extern void Note_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
-extern void Pak_DecodeNoteText(s32 state, char *name, s32 size);
+extern void Note_DecodeNoteText(s32 state, char *name, s32 size);
 
 
-extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
 extern void Pak_ProbeStatus(s32 ch);
 
@@ -108,8 +108,8 @@ static inline s32 findNote(s32 ch, s32 *found)
 
     D_8014D4FC = -1;
     for (i = 0; i < 16; i++) {
-        Pak_GetNoteGameName(ch, i, &state);
-        Pak_DecodeNoteText(state, name, 16);
+        Note_GetNoteGameName(ch, i, &state);
+        Note_DecodeNoteText(state, name, 16);
         if (XPlus_CompareStrings(name, game) == 0) {
             if (found != 0) {
                 *found = i;
@@ -120,7 +120,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     return 0;
 }
 
-s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
+s32 Snapshot_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     u8 name[16];
     u8 ext[8];
     char companyCode[8];
@@ -149,9 +149,9 @@ s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     } else {
         ch = menu->owner->unk4;
     }
-    result = Pak_ReadNoteInfo(ch, index, &exists, name, ext, &size, companyCode, gameCode);
+    result = Note_ReadNoteInfo(ch, index, &exists, name, ext, &size, companyCode, gameCode);
     if (exists != 0 && result == 0) {
-        if (Pak_ContainsInvalidNameByte(name, 16) != 0) {
+        if (Note_ContainsInvalidNameByte(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             XPlus_CopyString(name, D_800E27B4[g_languageIndex]);
 #else
@@ -200,7 +200,7 @@ s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     return 0;
 }
 
-s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
+s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     Digits digits;
     s32 freeSpace;
     s32 ch;
@@ -220,8 +220,8 @@ s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     buffer = &digits;
     if (D_8014D4C0_de != 0) {
         entry->text = &D_800D3754;
-        if (Pak_GetFreePages(ch, &freeSpace) == 0) {
-            if (D_8014D4EC_de) need=Pak_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
+        if (Note_GetFreePages(ch, &freeSpace) == 0) {
+            if (D_8014D4EC_de) need=Note_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
             Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
@@ -241,8 +241,8 @@ s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         header = &D_800D3754;
     fill:
         entry->text = header;
-        result = Pak_GetFreePages(ch, &freeSpace);
-        need = Pak_BytesToPakPages(D_8011FECC + 0x610);
+        result = Note_GetFreePages(ch, &freeSpace);
+        need = Note_BytesToPakPages(D_8011FECC + 0x610);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;
@@ -263,7 +263,7 @@ s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     return 0;
 }
 
-s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
+s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
 {
     s32 ch = 0;
     s32 use;
@@ -280,22 +280,22 @@ s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     } else {
         use = ch;
     }
-    if (Pak_CheckStatusPrompt(menu, use, 0) != 0) {
+    if (Snapshot_CheckStatusPrompt(menu, use, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
     if (D_8014D4EC_de != 0) {
         if (D_8014D4C0_de != 0) {
-            Pak_SaveControllerRecord(arg0, menu, arg2);
+            Snapshot_SaveControllerRecord(arg0, menu, arg2);
             return 1;
         }
     } else if (D_8014D4C0_de != 0) {
         hasNote = findNote(use, &D_8014D4FC);
         if (hasNote != 0 && D_8014D4FC >= 0 && D_8014D4FC < 16) {
-            Pak_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
+            Menu_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
-        Pak_SaveSnapshotAndClose(arg0, menu, arg2);
+        Snapshot_SaveSnapshotAndClose(arg0, menu, arg2);
         return 1;
     }
     if (D_8015375C != 0) {
@@ -330,7 +330,7 @@ s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             c = menu->owner->unk4;
         }
         ch = c;
-        if (Pak_CheckStatusPrompt(menu, c, 0) != 0) {
+        if (Snapshot_CheckStatusPrompt(menu, c, 0) != 0) {
             D_80153784 = 1;
             return 1;
         }

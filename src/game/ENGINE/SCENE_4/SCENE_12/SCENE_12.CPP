@@ -21,12 +21,12 @@
 /* SCENE_12.CPP */
 /* Draws each selected entry in the object range with shared position and scale. */
 
-extern void func_80285B64_de(s32,void *,Triple,f32,f32,s32);
+extern void Rumble_AllocatePoolNode(s32,void *,Triple,f32,f32,s32);
 
 extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-void Scene_SetTypeThreeActorStateBits(void *arg0) {
+void Scene_SetTypeThreeActorStateBits(void *world) {
     Shared_World *object;
     s32 count;
     s32 i;
@@ -35,20 +35,20 @@ void Scene_SetTypeThreeActorStateBits(void *arg0) {
     s32 field;
     s32 three;
 
-    object = arg0;
+    object = world;
     count = object->actorCount;
     i = 0;
     if (count > 0) {
         three = 3;
         offset = 0;
         do {
-            object = arg0;
+            object = world;
             entry = (void *)((char *)object->actors + offset);
             field = ((struct Def *)entry->definition)->type;
             if (field != three) {
                 i += 1;
             } else {
-                Rumble_SetActorStateBit(arg0, entry, 1);
+                Rumble_SetActorStateBit(world, entry, 1);
                 i += 1;
             }
             offset += 0x2E8;
@@ -95,16 +95,16 @@ void *Scene_GetEffectCurveRecord(Shared_World *world, s32 index) {
     return bytes + (index * stride + 8);
 }
 
-void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 resource,s32 arg2,Triple pos,D_800C7470_Pair scale) {
+void CScene_StartEventClips(ObjectCSceneStartEventClips *arg0,s32 resource,s32 arg2,Triple pos,D_800C7470_Pair scale) {
  s32 sp20,sp24; void *data; s32 count; StridedTable *temp_v1; s32 i; StridedTable *temp_v0;
  f32 arg6,arg7;
  temp_v0=arg0->unkA8;
  arg6=scale.first;arg7=scale.second;
  data=temp_v0->data;count=temp_v0->count;
- if(func_80265550_de(data,count,arg2,&sp20,&sp24)) {
+ if(Defs_FindSortedGroupRange(data,count,arg2,&sp20,&sp24)) {
   for(i=sp20;i<=sp24;i++) {
    temp_v1=arg0->unkAC;
-   func_80285B64_de(resource,(char *)temp_v1+(i*temp_v1->stride+8),pos,arg6,arg7,0);
+   Rumble_AllocatePoolNode(resource,(char *)temp_v1+(i*temp_v1->stride+8),pos,arg6,arg7,0);
   }
  }
 }

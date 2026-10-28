@@ -5,7 +5,7 @@
 extern void Control_ResetControllerProfiles(void);
 extern void Control_SetControllerMode(s32 a);
 extern void Control_SaveControllerSetup(void);
-extern void func_80264A0C_de(void);
+extern void Control_SetMenuControlFlag(void);
 extern void Control_CycleActorSnapshotMode(void);
 extern void Control_ResetActorSnapshot(void);
 extern s32 Control_GetSnapshotActorId(void);

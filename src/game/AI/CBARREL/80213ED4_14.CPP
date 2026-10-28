@@ -10,9 +10,9 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80103FD0;
 extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
-extern s32 func_802444A4_de(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
+extern s32 CCollision_SweepPoint(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
 
-s32 Barrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
+s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
     Instance8020CD74 saved;
     CVector3 desired;
     f32 scale;
@@ -26,7 +26,7 @@ s32 Barrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Insta
     desired.y += GameObject_GetActorHeight(target) * scale;
     desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
-    func_802444A4_de(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);
+    CCollision_SweepPoint(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);
     *arg0 = saved;
 
     if (D_8010028C != 0 && (D_8010028C->flags & 2)) {

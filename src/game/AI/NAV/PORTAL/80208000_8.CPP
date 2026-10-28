@@ -41,29 +41,29 @@ extern CollisionInfo8020CD74 D_80104070;
 
 extern CollisionInfo8020CD74 D_801040D0;
 
-extern s32 func_8024DEE0_de(void *);
+extern s32 Insthdr_GetModelCollisionFlag1(void *);
 
-extern s32 func_8024DF5C_de(void *);
+extern s32 Insthdr_IsInactiveOrCollisionOption4(void *);
 
-extern s32 func_8024DFA0_de(void *);
+extern s32 Insthdr_GetModelCollisionFlag8(void *);
 
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
 
 /** Return an indexed record from the table referenced by the input. */
-void *Nav_GetGraphPoint(void *table, int index) {
+void *Portal_GetGraphPoint(void *table, int index) {
     char *base = *(char **)table;
     int stride = *(int *)base;
     return base + (index * stride + 8);
 }
 
 /** Return an indexed record from the table at object offset 0x8. */
-void *Nav_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index) {
+void *Portal_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index) {
     char *base = (char *)object->table;
     int stride = *(int *)base;
     return base + (index * stride + 8);
 }
 
-s32 Nav_IsReversibleLink(Link *link) {
+s32 Portal_IsReversibleLink(Link *link) {
     u8 linkTypeByte;
     s32 linkType;
 
@@ -89,7 +89,7 @@ ret0:
     return 0;
 }
 
-void Nav_InitSearchNode(void *searchNode, s32 nodeKey)
+void Portal_InitSearchNode(void *searchNode, s32 nodeKey)
 {
   NavigationPoint *entry;
   NavigationSearchNode *node = searchNode;
@@ -128,7 +128,7 @@ void Nav_InitSearchNode(void *searchNode, s32 nodeKey)
   }
 }
 
-s32 Nav_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
+s32 Portal_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
     CVector3 offset;
     f32 distanceSq;
     f32 bestDistanceSq;
@@ -156,7 +156,7 @@ s32 Nav_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
     return bestIndex;
 }
 
-int Nav_FindLinkIndex(Graph *graph, int from, int to) {
+int Portal_FindLinkIndex(Graph *graph, int from, int to) {
     int i;
     Link *link;
 
@@ -175,7 +175,7 @@ int Nav_FindLinkIndex(Graph *graph, int from, int to) {
     return -1;
 }
 
-s32 Nav_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, s32 *indices) {
+s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, s32 *indices) {
     s32 i;
     s32 found;
 
@@ -211,7 +211,7 @@ s32 Nav_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, 
     return found;
 }
 
-s32 Nav_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
+s32 Portal_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     CVector3 position;
     CollisionInfo8020CD74 collision;
     Instance8020CD74 saved;
@@ -228,14 +228,14 @@ s32 Nav_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     if ((((LevelActor *)arg1)->kind == 1) && (((LevelActor *)arg1)->flags & 0x300000)) {
         collision = D_801040D0;
     } else {
-        first_test = func_8024DEE0_de(arg1);
-        if (func_8024DF5C_de(arg1) == 0) {
+        first_test = Insthdr_GetModelCollisionFlag1(arg1);
+        if (Insthdr_IsInactiveOrCollisionOption4(arg1) == 0) {
             if (first_test != 0) {
                 collision = D_80104050;
             } else {
                 collision = D_801040D0;
             }
-        } else if (func_8024DFA0_de(arg1) == 0) {
+        } else if (Insthdr_GetModelCollisionFlag8(arg1) == 0) {
             collision = D_80104070;
         } else {
             collision = D_80103FF0;
@@ -248,7 +248,7 @@ s32 Nav_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     return result == 0;
 }
 
-void *Nav_FindSearchNode(char *object, s32 current) {
+void *Portal_FindSearchNode(char *object, s32 current) {
     CNavData *graph = (CNavData *)object;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
@@ -262,7 +262,7 @@ void *Nav_FindSearchNode(char *object, s32 current) {
     return 0;
 }
 
-void Nav_ResetSearchState(struct Obj8020BC50 *graph) {
+void Portal_ResetSearchState(struct Obj8020BC50 *graph) {
     struct Node8020BC50 *node;
     f32 k;
 

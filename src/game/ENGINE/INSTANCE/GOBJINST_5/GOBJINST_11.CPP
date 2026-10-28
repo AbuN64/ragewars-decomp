@@ -12,7 +12,7 @@
 #include "LISTS/80279520.H"
 
 extern s32 Cinema_IsSequenceInWindow(void);
-extern CQuatern GameObject_BuildActorDirectionTilt(void *arg1);
+extern CQuatern Gobjinst_BuildActorDirectionTilt(void *arg1);
 
 
 extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
@@ -23,7 +23,7 @@ extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
 
-void func_8024B53C_de(void *levelActor) {
+void Gobjinst_BuildActorTransform(void *levelActor) {
     CQuatern trig;
     CQuatern product;
     CQuatern copy;
@@ -37,7 +37,7 @@ void func_8024B53C_de(void *levelActor) {
     copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
     if (Cinema_IsSequenceInWindow() != 0) {
-        copy = GameObject_BuildActorDirectionTilt(levelActor);
+        copy = Gobjinst_BuildActorDirectionTilt(levelActor);
     }
 
     angle = ((struct LevelActor *)(levelActor))->yaw;
@@ -64,10 +64,10 @@ void func_8024B53C_de(void *levelActor) {
     SwapMatrixUpForward(transform);
 }
 
-void func_8024B654_de(void) {
+void Gobjinst_NoOperation(void) {
 }
 
-void func_8024B65C_de(void *actorStorage, unsigned int animationIndex)
+void Gobjinst_QueueAnimation(void *actorStorage, unsigned int animationIndex)
 {
   ((struct LevelActor *)(actorStorage))->nextAnimation = animationIndex;
   ((struct LevelActor *)(actorStorage))->animationPending = 0;
@@ -77,7 +77,7 @@ void func_8024B65C_de(void *actorStorage, unsigned int animationIndex)
   }
 }
 
-void func_8024B67C_de(void *actorAnimationState) {
+void Gobjinst_RestartAnimation(void *actorAnimationState) {
     (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10F) = 1;
     (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_104) = 0;
     (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10E) = 0;
@@ -96,20 +96,20 @@ s32 func_8024B6A0_de(void *a, s32 c, s32 flag) {
     return 0;
 }
 
-extern void func_8024B65C_de(void *arg0, u32 arg1);
+extern void Gobjinst_QueueAnimation(void *arg0, u32 arg1);
 
 s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend) {
     if (animationIndex < 0 || (allowDuringBlend == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
         return 0;
     }
-    func_8024B65C_de(levelActor, (u32) animationIndex);
+    Gobjinst_QueueAnimation(levelActor, (u32) animationIndex);
     return 1;
 }
 
 extern void Lists_ClearWeightedTable(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
 
-s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
+s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 excludedAnimation) {
     WeightedTable eligibleKinds;
     u16 animationKind;
 
@@ -127,11 +127,11 @@ s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
     return Lists_ChooseWeightedTableEntry(&eligibleKinds);
 }
 
-extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);
-extern s32 func_802484B0_de(void *arg0, s32 arg1, void *arg2);
+extern s32 *Gobjinst_RequestAnimatedModelVariant(void *arg0, s8 arg1);
+extern s32 Gobjinst_BuildActorPose(void *arg0, s32 arg1, void *arg2);
 extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
-s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
+s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
 {
   void *resource;
   s32 *entry;
@@ -152,11 +152,11 @@ s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
     {
       return result;
     }
-    entry = func_8024BFD4_de(actorStorage, ((struct LevelActor *)(actorStorage))->team);
+    entry = Gobjinst_RequestAnimatedModelVariant(actorStorage, ((struct LevelActor *)(actorStorage))->team);
     if (entry != 0)
     {
       value = *entry;
-      result = func_802484B0_de(actorStorage, value, SetN64_GetPackSection(*((void **) resource), 0));
+      result = Gobjinst_BuildActorPose(actorStorage, value, SetN64_GetPackSection(*((void **) resource), 0));
       Cache_UnlockResource(0, (s32) entry);
     }
     Cache_UnlockResource(0, (s32) resource);
@@ -176,9 +176,9 @@ void func_8024B8C4_de(void *actorRenderState) {
 
 extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
-extern void func_8024C454_de(void *arg0, void *arg1);
+extern void Gobjinst_SpawnAnimatedModelViewEffect(void *arg0, void *arg1);
 
-void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettings) {
+void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *renderSettings) {
     s8 index;
     s32 one;
 
@@ -196,13 +196,13 @@ void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettin
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
                           0, ((struct LevelActor *)(actor))->field3);
-            func_8024C454_de(actor, renderSettings);
+            Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }
     }
 }
 
 
-void func_8024B990_de(void *actor, void *unusedShadowContext, void *renderSettings, Block24 *lighting) {
+void Gobjinst_DrawMaskedModelWithLighting(void *actor, void *unusedShadowContext, void *renderSettings, Block24 *lighting) {
     s8 index;
     s32 one;
 
@@ -221,7 +221,7 @@ void func_8024B990_de(void *actor, void *unusedShadowContext, void *renderSettin
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
                           0, ((struct LevelActor *)(actor))->field3);
-            func_8024C454_de(actor, renderSettings);
+            Gobjinst_SpawnAnimatedModelViewEffect(actor, renderSettings);
         }
     }
 }

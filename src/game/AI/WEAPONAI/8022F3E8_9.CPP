@@ -56,7 +56,7 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void Weapon_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weaponai_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
     player = actor->entity;

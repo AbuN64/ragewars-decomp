@@ -162,8 +162,8 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "particle/CAMERA_SCALE.H"
 #include "ENGINE/SCENE_11.H"
 
-void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
+void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
 void GraphU64_IdentityMatrix(void *matrix);
 void BuildRollMatrix(void *matrix, f32 angle);
 void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
@@ -263,7 +263,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                GraphU64_CrossVectors(&side, &up, &travel);
+                Graphu64_CrossVectors(&side, &up, &travel);
                 GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
                 GraphU64_AddVec3(&position, &position, &offset);
             }
@@ -271,8 +271,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                GraphU64_CrossVectors(&across, &up, &travel);
-                GraphU64_CrossVectors(&side, &across, &travel);
+                Graphu64_CrossVectors(&across, &up, &travel);
+                Graphu64_CrossVectors(&side, &across, &travel);
                 GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
                 GraphU64_AddVec3(&position, &position, &offset);
             }
@@ -282,7 +282,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         if (particle->space == PARTICLE_ALIGN_WORLD) {
             /* A free model points its Z axis along the direction it was attached with (else its travel), its X axis
              * level, and turns by its rotation on top, a quarter turn pitched up. */
-            GraphU64_MatrixFromEulerXYZ(orientation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
+            Graphu64_MatrixFromEulerXYZ(orientation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
             if ((attachedDirection.x == 0.0f) && (attachedDirection.y == 0.0f) && (attachedDirection.z == 0.0f)) {
                 axisZ = particle->direction;
             } else {
@@ -292,8 +292,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             up.x = 0;
             up.z = 0;
             up.y = 1.0f;
-            GraphU64_CrossVectors(&axisX, &up, &axisZ);
-            GraphU64_CrossVectors(&axisY, &axisX, &axisZ);
+            Graphu64_CrossVectors(&axisX, &up, &axisZ);
+            Graphu64_CrossVectors(&axisY, &axisX, &axisZ);
             GraphU64_IdentityMatrix(basis);
             GraphU64_NormalizeVec3(&axisX.x);
             GraphU64_NormalizeVec3(&axisY.x);
@@ -309,7 +309,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[10] = axisZ.z;
             GraphU64_MultiplyAffineMatrices(local, orientation, basis);
         } else {
-            GraphU64_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
+            Graphu64_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
         Scene_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {

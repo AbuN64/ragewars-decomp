@@ -20,7 +20,7 @@ extern void XPlus_FillMemory(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
-void Pak_CreateSaveSnapshot(u8 *player) {
+void Snapshot_CreateSaveSnapshot(u8 *player) {
     s32 snapshotSize = D_8011FECC + 0x610;
     s32 allocationSize;
     SaveSnapshot **snapshotHandle;
@@ -68,7 +68,7 @@ extern s32 D_8015375C;
 
 extern char *D_800D36E0;
 
-extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
+extern s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
 extern s32 XPlus_StringLength(char *);
 
@@ -98,7 +98,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
         ch = menu->owner->unk4;
     }
     for (i = 0; i < 16; i++) {
-        result = Pak_ReadNoteInfo(ch, i, &exists, name, ext, &size, company, code);
+        result = Note_ReadNoteInfo(ch, i, &exists, name, ext, &size, company, code);
         other = 1;
         if (result == 0 && exists != 0) {
             switch (D_800DE874) {
@@ -158,9 +158,9 @@ extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_8
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), Pak_NeedsIdRepair(s32), Control_TakePakChange(s32);
-extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
-s32 Pak_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
+extern s32 Pak_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
+extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
 {
     s32 result, busy, slot;
     char *prompt, *sel;
@@ -183,24 +183,24 @@ s32 Pak_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
     busy = Control_TakePakChange(channel);
     if ((result == 0 || busy != 0) && result != -2) {
         if (busy) {
-            Pak_OpenDialog(D_8014561C, D_0044EA98, menu->player, menu->slot, prompt);
+            Menu_OpenDialog(D_8014561C, D_0044EA98, menu->player, menu->slot, prompt);
             return -1;
         }
         return result;
     }
-    if (Pak_IsChannelReady(channel)) {
+    if (Note_IsChannelReady(channel)) {
         D_80153784 = 1;
         if (D_8015375C) message = D_0044E9E4;
         else {
             if (D_8014D4C0_de) message = D_0044EA08;
             else message = D_0044EA2C;
         }
-        Pak_OpenDialog(D_8014561C, message, menu->player, menu->slot, prompt);
+        Menu_OpenDialog(D_8014561C, message, menu->player, menu->slot, prompt);
     } else if (!quiet) {
         D_80153784 = 1;
-        if (Pak_NeedsIdRepair(channel))
-            Pak_OpenDialog(D_8014561C, D_0044ED44, menu->player, menu->slot, prompt);
-        else Pak_OpenDialog(D_8014561C, D_0044E9C0, menu->player, menu->slot, prompt);
+        if (Note_NeedsIdRepair(channel))
+            Menu_OpenDialog(D_8014561C, D_0044ED44, menu->player, menu->slot, prompt);
+        else Menu_OpenDialog(D_8014561C, D_0044E9C0, menu->player, menu->slot, prompt);
     } else if (result != -2) result = 0;
     return result;
 }
@@ -216,16 +216,16 @@ extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
-extern s32 Pak_IsChannelReady(s32 ch);
-extern s32 Pak_NeedsIdRepair(s32 ch);
-extern u32 Pak_Crc32(void *data, u32 size, u32 seed);
+extern s32 Note_IsChannelReady(s32 ch);
+extern s32 Note_NeedsIdRepair(s32 ch);
+extern u32 Note_Crc32(void *data, u32 size, u32 seed);
 
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
    prompt, else probes the Controller Pak; with no pak data it saves the player's profile (flags, four words
    and eight name bytes) with its checksum and opens the note list through Pak_MarkSaveNotes, otherwise it
    shows the D_0044EA08, D_0044ED44 or D_0044E9C0 prompt. */
-void Pak_BeginProfileSave(Shared_PakMenu *menu) {
+void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
     ObjRecAt5DC *player;
     ProfileRecAt84 *profile;
@@ -245,7 +245,7 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
     prompt = pakPrompt(&channel);
     if (D_800E28C0) {
         D_80153784 = 1;
-        Pak_OpenDialog(menu->player->unk5DC + 0x554, prompt, player, player->controller, 0);
+        Menu_OpenDialog(menu->player->unk5DC + 0x554, prompt, player, player->controller, 0);
         return;
     }
     if (D_8015375C) {
@@ -266,16 +266,16 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
         for (i = 0; i < 8; i++) {
             D_8014D4B4[i] = profile->name[i];
         }
-        D_80153738.checksum = Pak_Crc32(&D_80153738, 0x14, 4);
+        D_80153738.checksum = Note_Crc32(&D_80153738, 0x14, 4);
         Pak_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;
-    if (Pak_IsChannelReady(channel)) {
-        Pak_OpenDialog(D_8014561C, D_0044EA08, player, player->controller, prompt);
-    } else if (Pak_NeedsIdRepair(channel)) {
-        Pak_OpenDialog(D_8014561C, D_0044ED44, player, player->controller, D_0044E48C);
+    if (Note_IsChannelReady(channel)) {
+        Menu_OpenDialog(D_8014561C, D_0044EA08, player, player->controller, prompt);
+    } else if (Note_NeedsIdRepair(channel)) {
+        Menu_OpenDialog(D_8014561C, D_0044ED44, player, player->controller, D_0044E48C);
     } else {
-        Pak_OpenDialog(D_8014561C, D_0044E9C0, player, player->controller, prompt);
+        Menu_OpenDialog(D_8014561C, D_0044E9C0, player, player->controller, prompt);
     }
 }

@@ -187,11 +187,11 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
 extern s32 Audio_GetSpatialPanMode(OwnerCode8025A3EC *);
-extern s16 func_80259B10_de(void *, GameplayCamera *);
+extern s16 Channel_ComputeListenerRelativePan(void *, GameplayCamera *);
 
 extern void alSndpSetPan(void *, s32);
 
-static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {
+static inline void apply_pan(VoiceChannelUpdateVoicePan *voice, u8 pan) {
     OwnerCode8025A3EC *owner = voice->owner;
     char *sound = owner->sound;
 
@@ -199,7 +199,7 @@ static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {
     alSndpSetPan(sound, pan);
 }
 
-void func_8025A844_de(Voice_func_8025A844_de *voice) {
+void Channel_UpdateVoicePan(VoiceChannelUpdateVoicePan *voice) {
     s32 rising;
     ParamsRecAt18 *params;
 
@@ -232,7 +232,7 @@ clamp_done:
         goto apply;
     }
     if ((voice->flags & 0x400) && voice->fixed == 0) {
-        params->pan = func_80259B10_de(voice->position, voice->owner->listener);
+        params->pan = Channel_ComputeListenerRelativePan(voice->position, voice->owner->listener);
     apply:
         apply_pan(voice, params->pan);
         return;
@@ -244,7 +244,7 @@ clamp_done:
  * distance to the listener, lowers the level by a step while the distance grows and raises it while it
  * shrinks (clamped to the D_800C9048 range, remembering the distance), and otherwise eases the level one
  * step toward the rest level D_800C9044. */
-void func_8025AA2C_de(Emitter *emitter) {
+void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
     char *listener;
     f32 dx;
     f32 dy;

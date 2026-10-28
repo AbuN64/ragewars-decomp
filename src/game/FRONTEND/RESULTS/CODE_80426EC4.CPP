@@ -19,7 +19,7 @@ extern ResultsOptionsScreen *D_800E4690;
 
 /* Draw callback of the results screen D_800E4690: on draw event 1 in states 3, 8 or 9 it resets
    the fill colour D_800D15E0 to opaque white, and for each of the one or two viewports clips the
-   display list to its rectangle in D_800E41C0 (0, then 2 for the lower view), draws the player's panel through Frontend_DrawModelPreview and restores the
+   display list to its rectangle in g_menuPlayerScissorRects (0, then 2 for the lower view), draws the player's panel through Frontend_DrawModelPreview and restores the
    full-screen clip. Outside two-player mode (and unless GetMenuScreenOwner reports 0x19) it plays sound
    0x259 past the base at 0xA44 on the twentieth frame, raises the banner blink after six more
    frames, and fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
@@ -35,7 +35,7 @@ extern ResultsOptionsScreen *D_800E4690;
 
 
 
-extern struct Shape_typemap_6 D_800E41C0[];
+extern struct Shape_typemap_6 g_menuPlayerScissorRects[];
 
 extern s32 D_800E28D0;
 
@@ -48,7 +48,7 @@ extern void Frontend_SetWidgetFlag08(struct Shape_typemap_21 *, s32);
 /* Loads the stage list of the results screen D_800E4690: clears its two 36-bit sets at 0xA74 and
    0xA79, copies into the first the 36 cleared-stage bits that the player record D_80102B00[index at
    0xA5C] keeps for the current mode D_801462D5 (at 0x7E, 0x83, 0x88 or 0x8D for modes 1 to 4), and
-   refreshes the list through Frontend_RefreshTrialCatalogueWidgets. */
+   refreshes the list through Results_RefreshTrialCatalogueWidgets. */
 
 
 
@@ -62,7 +62,7 @@ extern void Defs_SetBitValue(u8 *, s32, s32);
 
 extern s32 Defs_TestBit(u8 *, s32);
 
-s32 Frontend_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event) {
+s32 Results_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event) {
     s32 views;
     s32 i;
     s32 alpha;
@@ -79,7 +79,7 @@ s32 Frontend_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event
             views = 2;
         }
         for (i = 0, k = 0; i < views; i++, k = 2) {
-            gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[k].field_0, D_800E41C0[k].field_4, D_800E41C0[k].field_8, D_800E41C0[k].field_C);
+            gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[k].field_0, g_menuPlayerScissorRects[k].field_4, g_menuPlayerScissorRects[k].field_8, g_menuPlayerScissorRects[k].field_C);
             Frontend_DrawModelPreview(D_800E4690->panels[i]);
             gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         }
@@ -114,7 +114,7 @@ s32 Frontend_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event
     return 0;
 }
 
-void Frontend_LoadTrialCompletionFlags(void) {
+void Results_LoadTrialCompletionFlags(void) {
     s32 i;
 
     i = 0;
@@ -153,7 +153,7 @@ void Frontend_LoadTrialCompletionFlags(void) {
         } while (i < 36);
         break;
     }
-    Frontend_RefreshTrialCatalogueWidgets();
+    Results_RefreshTrialCatalogueWidgets();
 }
 
 extern struct EntryRecAt0V1 D_800E4694[];
@@ -162,7 +162,7 @@ extern struct EntryRecAt0V1 D_800E4694[];
    remaining bit set, appends to the -1-terminated path the first remaining node linked to the
    path's last node, clears its bit and recurses, undoing the step when the recursion fails. Every
    exit returns one, so the first linked choice at each depth is always kept. */
-s32 Frontend_FindUnlockPath(u8 *remaining, s32 *path) {
+s32 Results_FindUnlockPath(u8 *remaining, s32 *path) {
     s32 anyLeft;
     s32 node;
     s32 last;
@@ -187,13 +187,13 @@ s32 Frontend_FindUnlockPath(u8 *remaining, s32 *path) {
             if (Defs_TestBit(remaining, node) == 0) {
                 node++;
             } else {
-                linked = Frontend_IsUnlockLinked(D_800E4694[path[last]].value, D_800E4694[node].value);
+                linked = Results_IsUnlockLinked(D_800E4694[path[last]].value, D_800E4694[node].value);
                 if (linked == 1) {
                     last++;
                     path[last] = node;
                     path[last + 1] = -1;
                     Defs_SetBitValue(remaining, node, 0);
-                    if (Frontend_FindUnlockPath(remaining, path) == linked) {
+                    if (Results_FindUnlockPath(remaining, path) == linked) {
                         return 1;
                     }
                     Defs_SetBitValue(remaining, node, 1);

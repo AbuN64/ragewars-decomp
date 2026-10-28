@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "SYSTEM_2/8025E280.H"
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D5 waits 1 through
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D5 waits 1 through
    SmXlate_SwitchScreen; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,
    resets through Tsmos_DeactivateControllerState, sets the timer at 0x1C of screen D_800E5554 by setting
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
@@ -25,9 +25,9 @@ enum { MENU_80436224_979 = 983, MENU_80436224_981 = 985 };
 enum { MENU_80436224_979 = 979, MENU_80436224_981 = 981 };
 #endif
 
-s32 Frontend_UpdateTimedScreen(void) {
+s32 Timed_UpdateTimedScreen(void) {
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
     case MENU_80436224_981:
         SmXlate_SwitchScreen(1);
         return 0;

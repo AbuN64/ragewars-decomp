@@ -9,21 +9,21 @@
 #include "SYSTEM/8025E5B0_9.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void GraphU64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
 
-extern void GraphU64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
 
 /** Return the first word of the object referenced at offset 0x10. */
-void *func_8026049C_de(void *object) {
+void *Polytrak2_GetResidentResource(void *object) {
     AnimRef *animation = object;
     return *animation->data;
 }
 
-void func_802604AC_de(void *animationLinks, s32 jointIndex, void *translationOut) {
+void Polytrak2_InterpolateJointTranslation(void *animationLinks, s32 jointIndex, void *translationOut) {
     ObjectLinks24_2 *o = animationLinks;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
-    Rec_func_8024C92C_de *recs;
+    RecGobjinstSampleBoneTranslation *recs;
     void *base;
     Triple *out = translationOut;
 
@@ -34,12 +34,12 @@ void func_802604AC_de(void *animationLinks, s32 jointIndex, void *translationOut
         return;
     }
     base = SetN64_GetPackSection(o->unk_8, (s32) idx);
-    GraphU64_InterpolateVector(translationOut, o->unk_20,
+    Graphu64_InterpolateVector(translationOut, o->unk_20,
                   (char *)base + (o->unk_18) * 4,
                   (char *)base + (o->unk_1C) * 4);
 }
 
-void func_80260550_de(void *animationLinks, s32 jointIndex, void *cQuatern) {
+void Polytrak2_InterpolateJointQuaternion(void *animationLinks, s32 jointIndex, void *cQuatern) {
     ObjectLinks24_2 *o = animationLinks;
     CQuatern *out = cQuatern;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
@@ -59,37 +59,37 @@ void func_80260550_de(void *animationLinks, s32 jointIndex, void *cQuatern) {
         return;
     }
     base = SetN64_GetPackSection(o->unk_C, (s32) idx);
-    GraphU64_InterpolateQuaternionArc(cQuatern, o->unk_20,
+    Graphu64_InterpolateQuaternionArc(cQuatern, o->unk_20,
                   (char *)base + (o->unk_10) * 4,
                   (char *)base + (o->unk_14) * 4);
 }
 
 /** Scale a value by the maximum integer represented by a bit count. */
-float PolyTrak_UnpackUnitValue(float value, int bits) {
+float Polytrak2_UnpackUnitValue(float value, int bits) {
     return value / (float)((1 << bits) - 1);
 }
 
-f32 PolyTrak_ScaleToRange(f32 value, f32 lower, f32 upper) {
+f32 Polytrak2_ScaleToRange(f32 value, f32 lower, f32 upper) {
     return value * (upper - lower) + lower;
 }
 
-s32 func_80260664_de(s32 byteAddress) {
+s32 Polytrak2_ByteAddressToBitAddress(s32 byteAddress) {
     return (byteAddress & 0xF0000000) | ((byteAddress & 0x0FFFFFFF) * 8);
 }
 
 /** Preserve the top nibble and shift the lower 28 bits right by three. */
-unsigned int func_80260684_de(unsigned int value) {
+unsigned int Polytrak2_BitAddressToByteAddress(unsigned int value) {
     return (value & 0xF0000000) | ((value & 0x0FFFFFFF) >> 3);
 }
 
 /** Repack the low address bits while retaining the high nibble. */
-unsigned int func_802606A4_de(unsigned int bitAddress) {
+unsigned int Polytrak2_BitAddressToWordAddress(unsigned int bitAddress) {
     return (bitAddress & 0xF0000000) | ((bitAddress & 0x0FFFFFE0) >> 3);
 }
 
 /* Reads a width-bit field starting at a packed bit address, returning it right-aligned. Adapted from func_80260DA8_de, with the bit address and width passed directly instead of computed from a base/width record. */
 
-int func_802606C4_de(int bitAddress, unsigned int width) {
+int Polytrak2_ReadBitsAtAddress(int bitAddress, unsigned int width) {
     int shift;
     int *word;
     unsigned int value;
@@ -111,7 +111,7 @@ int func_802606C4_de(int bitAddress, unsigned int width) {
     return value;
 }
 
-void func_80260724_de(u32 bitAddress, u32 bitCount, u32 fieldValue) {
+void Polytrak2_WriteBitsAtAddress(u32 bitAddress, u32 bitCount, u32 fieldValue) {
     u32 wordAddress;
     s32 bitOffset;
     s32 remainingWordBits;
@@ -143,7 +143,7 @@ void func_80260724_de(u32 bitAddress, u32 bitCount, u32 fieldValue) {
     ((struct func_80203E78_S1 *) wordAddress)->unk4 = (((struct func_80203E78_S1 *) wordAddress)->unk4 & ~overflowMask) | overflowValue;
 }
 
-u32 func_802607B8_de(u32 *stream, u32 width) {
+u32 Polytrak2_ReadBitsAndAdvance(u32 *stream, u32 width) {
     u32 bitAddress;
     u32 shift;
     u32 *word;
@@ -168,7 +168,7 @@ u32 func_802607B8_de(u32 *stream, u32 width) {
     return value;
 }
 
-void func_80260828_de(u32 *bitCursor, u32 bitCount, u32 fieldValue) {
+void Polytrak2_WriteBitsAndAdvance(u32 *bitCursor, u32 bitCount, u32 fieldValue) {
     u32 wordAddress;
     s32 bitOffset;
     s32 remainingWordBits;
@@ -203,7 +203,7 @@ void func_80260828_de(u32 *bitCursor, u32 bitCount, u32 fieldValue) {
     *bitCursor += bitCount;
 }
 
-Func802608ECResult func_802608CC_de(f32 minimumValue, f32 maximumValue, f32 maximumError) {
+Func802608ECResult Polytrak2_ComputeQuantizationRange(f32 minimumValue, f32 maximumValue, f32 maximumError) {
     Func802608ECResult result;
     f32 ratio;
     s32 truncated;

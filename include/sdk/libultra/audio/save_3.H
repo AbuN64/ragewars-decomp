@@ -7,7 +7,7 @@ struct ALFxCode802BAC64 {
     s16 *base;
     s16 *input;
     u32 length;
-    struct ALDelay_func_802B5B94_de *delay;
+    struct ALDelayAudioSetEffectParameter *delay;
     u8 section_count;
     void *paramHdl;
 };

@@ -27,17 +27,17 @@ extern void *D_800D052C[];
 void CopyMatrix(f32 *, f32 *);
 void Player_BuildPlayerViewTransform(void *, f32 *);
 void func_8022B144_de(void *, f32 *);
-s32 func_802444A4_de(char *, CVector3, CVector3, s32);
+s32 CCollision_SweepPoint(char *, CVector3, CVector3, s32);
 void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 f32 Math_Sqrtf(f32);
 void func_8021D408_de(struct SharedPlayer *, CVector3 *, CVector3 *);
-CQuatern Player_ComputeAimRotation(void *, AimActor **, void *);
+CQuatern Playerai_ComputeAimRotation(void *, AimActor **, void *);
 CQuatern func_8024796C_de(char *);
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
-s32 Player_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
+s32 Playerai_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 f32 GameObject_GetActorHeight(void *);
 void func_8021D774_de(AimPlayer *player) {
     AimOutput aimResult;
@@ -68,7 +68,7 @@ void func_8021D774_de(AimPlayer *player) {
     localForward.y = 0;
     localForward.z = D_800C23BC_de;
     GraphU64_TransformPoint(matrix, &localForward, &desired);
-    if (func_802444A4_de((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
+    if (CCollision_SweepPoint((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
         player->aim = D_80103FCC->point;
         player->normal = D_80103FCC->normal;
         player->target = D_80103FCC->actor;
@@ -81,7 +81,7 @@ void func_8021D774_de(AimPlayer *player) {
     localForward.z = D_800C23C0_de;
     GraphU64_TransformPoint(matrix, &localForward, &desired);
     if (player->enabled != 0) {
-        if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (rayHitActor = D_80103FCC->actor, (rayHitActor != NULL))) {
+        if ((CCollision_SweepPoint((char *)player, current, desired, (s32) &D_801000F0) != 0) && (rayHitActor = D_80103FCC->actor, (rayHitActor != NULL))) {
             if (rayHitActor->kind == 1) {
                 if (rayHitActor->flags & 0x300000) {
                     GraphU64_SubtractVectors((CVector3 *)&aimRotation, &rayHitActor->pos, &player->unk8);
@@ -137,7 +137,7 @@ block_15:
         break;
     case 1:
     case 0x12:
-        aimRotation = Player_ComputeAimRotation(player, &lockedTarget, &aimResult.words);
+        aimRotation = Playerai_ComputeAimRotation(player, &lockedTarget, &aimResult.words);
         var_s0 = 0;
         break;
     default:
@@ -161,7 +161,7 @@ block_15:
     if (lockedTarget == NULL) {
         aimResult.xyz = desired;
         if ((player->unk5D8->active != 0) && (var_s0 != 0)) {
-            probeHigh = Player_ComputeAimRotation(player, &probeTarget, &probeLow.words);
+            probeHigh = Playerai_ComputeAimRotation(player, &probeTarget, &probeLow.words);
             if (probeTarget != NULL) {
                 player->rotation = probeHigh;
             }
@@ -223,7 +223,7 @@ block_15:
             target = player->unk794;
             lockedTarget = target;
             if (target != NULL) {
-                if (Player_CanLockTarget((void *)player, (void *)target) == 0) {
+                if (Playerai_CanLockTarget((void *)player, (void *)target) == 0) {
                     player->unk788 = 1;
                     player->unk78C = 0.0f;
                 }

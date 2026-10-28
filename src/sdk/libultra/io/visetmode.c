@@ -5,7 +5,7 @@
 #include "COMMON/EXTERNS_11.H"
 #include "sdk/os.h"
 
-/* With interrupts disabled, stores a video mode pointer in the next video context, marks the mode updated and copies the mode's control word (libultra osViSetMode). Adapted from func_802BB3D0_de with the body changed to the libultra osViSetMode shape. */
+/* With interrupts disabled, stores a video mode pointer in the next video context, marks the mode updated and copies the mode's control word (libultra osViSetMode). Adapted from __osResetGlobalIntMask with the body changed to the libultra osViSetMode shape. */
 
 
 

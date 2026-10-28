@@ -1,6 +1,6 @@
 #include "COMMON/NODERECAT1C.H"
 
-void func_802BB870_de(void **listHead, void *node) {
+void Audio_DequeueThread(void **listHead, void *node) {
     void **link;
     void *current;
 

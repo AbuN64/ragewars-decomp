@@ -49,7 +49,7 @@ extern MenuSliderWidget *Cache_AllocateMemory(s32);
 
 
 
-extern void Frontend_ReplaceNodeRefs(s32 arg0, MenuSliderWidget *arg1, MenuSliderWidget *arg2);
+extern void Node_ReplaceNodeRefs(s32 arg0, MenuSliderWidget *arg1, MenuSliderWidget *arg2);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3390, an actor kind at D_800E3394 and a handler at D_800E3398: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -58,20 +58,20 @@ extern void Frontend_ReplaceNodeRefs(s32 arg0, MenuSliderWidget *arg1, MenuSlide
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
 
 
-extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void Frontend_DrawVisibleSiblings(void *, Args);
+extern void Widget_DrawVisibleSiblings(void *, Args);
 
 /* Scrolls up: moves a scroll bar to the previous item through SmpSlider_SetSliderItem unless it is already
    at the first. */
@@ -178,9 +178,9 @@ MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 arg0, s32 arg1, s32 arg2) {
     result->field_4C = arg2;
     result->field_50 = 0;
     result->field_54 = 2;
-    Frontend_WrapNodeInParent(source, result);
+    Node_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    Frontend_ReplaceNodeRefs(context, source, result);
+    Node_ReplaceNodeRefs(context, source, result);
     return result;
 }
 
@@ -236,16 +236,16 @@ void SmpSlider_DrawSliderWidget(void *widget, Args args) {
     UiWidget *window = widget;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((window->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            Frontend_ClampRectToClip(&transformed, &basis);
+            Node_ClampRectToClip(&transformed, &basis);
             N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(window->children, args);
+        Widget_DrawVisibleSiblings(window->children, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }

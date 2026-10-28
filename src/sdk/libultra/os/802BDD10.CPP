@@ -34,7 +34,7 @@ int __osContAddressCrc(unsigned int blockAddress) {
 /* __osContDataCrc, drafted from ultralib src/io/crc.c (the branch before 2.0J): the CRC of a
    32-byte Controller Pak block with generator 0x85, flushed with eight zero bits. */
 
-u8 func_802B8C88_de(u8 *data)
+u8 __osContDataCrc(u8 *data)
 {
     u8 temp = 0;
     u8 temp2;

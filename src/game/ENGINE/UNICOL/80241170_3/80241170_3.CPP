@@ -19,7 +19,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
-f32 func_80241840_de(CVector3 *a, CVector3 *b, CVector3 *p) {
+f32 CCollision_DistanceToSegment(CVector3 *a, CVector3 *b, CVector3 *p) {
     extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
     CVector3 offset;
     CVector3 dir;

@@ -712,7 +712,7 @@ typedef struct DraftAimPlayer {
 } DraftAimPlayer;
 typedef struct DraftAimWeapon { char pad0[0x1C]; f32 angle; } DraftAimWeapon;
 typedef struct AimGlobals { void *head; char pad4[0x1281]; u8 enabled; } AimGlobals;
-extern f32 Player_GetObjectOwnerHeight(void *);
+extern f32 Playerai_GetObjectOwnerHeight(void *);
 
 typedef struct ThrowDefinition { s32 kind; } ThrowDefinition;
 typedef struct ThrowState { u32 flags; s32 active; char pad08[0x2C]; s8 kind, timer; } ThrowState;

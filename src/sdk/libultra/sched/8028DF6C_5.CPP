@@ -16,7 +16,7 @@ extern OSViMode D_800D47B0, D_800D4530;
 extern void osViSetYScale(f32);
 extern void osViSetMode(OSViMode *);
 extern void osViBlack(s32);
-extern void func_802BA700_de(s32);
+extern void osViSetSpecialFeatures(s32);
 extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
 extern void Sched_HandleRdpCompletion(OSSched *);
@@ -39,7 +39,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
                 if (D_800E28D8 == 0) mode = &D_800D4530;
                 osViSetMode(mode);
                 osViBlack(1);
-                func_802BA700_de(2);
+                osViSetSpecialFeatures(2);
                 for (;;) {}
             }
             Sched_HandleRetrace(sc);
@@ -65,7 +65,7 @@ void Sched_RunEventLoopEu(OSSched *sc) {
 }
 #endif
 
-extern void func_802BB5F0_de(void *, s32);
+extern void Scene_SetThreadPriority(void *, s32);
 
 
 
@@ -93,7 +93,7 @@ void Sched_HandleRetrace(OSSched *sc) {
 
     if (D_800CD704 != 0) {
         D_800CD704--;
-        if (D_800CD704 == 0) func_802BB5F0_de(&D_80106248, D_800CD8AC_de);
+        if (D_800CD704 == 0) Scene_SetThreadPriority(&D_80106248, D_800CD8AC_de);
     }
     sc->frameCount++;
     while (osRecvMesg(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);

@@ -18,7 +18,7 @@ extern s32 D_800CD730;
 
 
 
-void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
+void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
     s16 index;
     u16 unsigned_index;
     void *owner;
@@ -51,7 +51,7 @@ void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
     Nav_RequestActorState(arg0, weaponFireState, 0);
 }
 
-void Weapon_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {
+void Weaponai_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {
     s16 temp_s0;
     u16 temp_s2;
     void *temp_a1;

@@ -6,7 +6,7 @@
 #include "sdk/libgultra/ai.h"
 #include "sdk/OSINT/802C0CB0.H"
 
-/* Queues an audio buffer for the AI DMA, backing the address up 0x2000 bytes after a buffer that ended on an 8 KiB boundary, returning -1 when __osAiDeviceBusy reports the interface busy and zero after writing the physical address from func_802BBBC0_de and the length to the AI registers (libultra osAiSetNextBuffer). Adapted from func_802BB060_de with the argument checks replaced by the boundary flag byte D_800D8360 read through its array declaration, the busy test by __osAiDeviceBusy, and the uncached read by two AI register writes. */
+/* Queues an audio buffer for the AI DMA, backing the address up 0x2000 bytes after a buffer that ended on an 8 KiB boundary, returning -1 when __osAiDeviceBusy reports the interface busy and zero after writing the physical address from osVirtualToPhysical and the length to the AI registers (libultra osAiSetNextBuffer). Adapted from Audio_ReadSerialInterfaceWord with the argument checks replaced by the boundary flag byte D_800D8360 read through its array declaration, the busy test by __osAiDeviceBusy, and the uncached read by two AI register writes. */
 
 
 s32 osAiSetNextBuffer(void *bufPtr, u32 size) {
@@ -23,7 +23,7 @@ s32 osAiSetNextBuffer(void *bufPtr, u32 size) {
     if (__osAiDeviceBusy() != 0) {
         return -1;
     }
-    *(volatile u32 *)0xA4500000 = func_802BBBC0_de(bptr);
+    *(volatile u32 *)0xA4500000 = osVirtualToPhysical(bptr);
     *(volatile u32 *)0xA4500004 = size;
     return 0;
 }

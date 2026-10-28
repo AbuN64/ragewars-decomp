@@ -24,11 +24,11 @@
 
 extern void SmSmngr_DeactivateCurrentScreen(s32 arg0);
 
-extern void Frontend_ReleaseReferencedBuffer(s16 arg0);
+extern void Node_ReleaseReferencedBuffer(s16 arg0);
 
-extern void Frontend_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
+extern void Widget_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
-extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, ArgsCode80296014 *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, ArgsCode80296014 *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
@@ -77,7 +77,7 @@ typedef s32 (*FuncPtr)(s32, s32, s32, s32);
 
 s32 SmXlate_SwitchScreen(s32);
 
-void Smos_PopScreen(void) {
+void Menu_PopScreen(void) {
     s32 index;
 
     if (D_8014D080->screens[D_8014D080->current].primary != 0) {
@@ -85,7 +85,7 @@ void Smos_PopScreen(void) {
         StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         {
             Element *element = D_8014D080->screens[D_8014D080->current].primary;
-            Frontend_ReleaseReferencedBuffer(element->id);
+            Node_ReleaseReferencedBuffer(element->id);
         }
     }
     D_8014D080->screens[D_8014D080->current].primary = 0;
@@ -98,7 +98,7 @@ void Smos_PopScreen(void) {
     }
 }
 
-void Smos_DrawScreenStack(void) {
+void Menu_DrawScreenStack(void) {
     ArgsCode80296014 args;
     QuadN64EngDrawNumericWidgetChildren first;
     QuadN64EngDrawNumericWidgetChildren basis;
@@ -133,10 +133,10 @@ void Smos_DrawScreenStack(void) {
         do {
             index++;
             N64Eng_RenderNoop();
-            Frontend_DrawVisibleWidgetClipped(*(void **)(offset + (s32)D_8014D080->screens), args);
-            Frontend_ResetTextClipBounds();
+            Widget_DrawVisibleWidgetClipped(*(void **)(offset + (s32)D_8014D080->screens), args);
+            Widget_ResetTextClipBounds();
             N64Eng_ResetRenderState();
-            Frontend_ComputeWidgetBounds(&first, &basis,
+            Widget_ComputeWidgetBounds(&first, &basis,
                           *(void **)(offset + (s32)D_8014D080->screens), &args);
             offset += 0x1C;
         } while (D_8014D080->current >= index);
@@ -159,7 +159,7 @@ void Smos_SetFocusedElement(s32 id) {
     send_event(id, 0xF,0,0,0);
 }
 
-void Smos_DestroyScreenManager(void) {
+void Menu_DestroyScreenManager(void) {
     ScreenManager *manager;
     s32 lowIndex;
     s32 one;
@@ -170,7 +170,7 @@ void Smos_DestroyScreenManager(void) {
         one = 1;
         do {
             manager->field530 = one;
-            Smos_PopScreen();
+            Menu_PopScreen();
             manager = D_8014D080;
         } while (manager->current >= lowIndex);
     }
@@ -183,19 +183,19 @@ void Smos_DestroyScreenManager(void) {
     Cache_FreeMemory(D_8014D080->screens);
     Cache_FreeMemory(D_8014D080);
     D_8014D080 = 0;
-    Smos_FreeControllerContext();
-    Frontend_NoOperation();
-    Frontend_ClearResourceInitializationFlag();
+    Controller_FreeControllerContext();
+    Node_NoOperation();
+    Node_ClearResourceInitializationFlag();
 }
 
-void Smos_SetEventCallback(FuncPtr arg0) {
+void Menu_SetEventCallback(FuncPtr arg0) {
     D_8014D080->callback = arg0;
     if (arg0 != 0) {
         arg0(0xE04, 0, 0, 0);
     }
 }
 
-void Smos_SetPagingEnabled(s32 arg0) {
+void Menu_SetPagingEnabled(s32 arg0) {
     if (arg0 != 0) {
         D_8014D080->paging = (s32) (D_8014D080->paging | 1);
         return;
@@ -207,7 +207,7 @@ void func_802995C4_de(int arg0) {
     D_80146E14 = arg0;
 }
 
-s32 Smos_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
+s32 Menu_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
     ScreenManager *manager;
     s32 blockedValue;
     s32 index;
@@ -252,11 +252,11 @@ void MarkMenuEventHandled(void) {
     object->handled = 1;
 }
 
-void Smos_SetElementUserData(s32 arg0, s32 arg1) {
+void Menu_SetElementUserData(s32 arg0, s32 arg1) {
     ((ObjRecAt40V1 *)FindMenuElement(arg0))->unk40 = arg1;
 }
 
-void Smos_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler)
+void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler)
 {
     s32 index = -1;
     s32 i;
@@ -300,7 +300,7 @@ MenuElementHandler FindKindHandler(s32 id)
     return 0;
 }
 
-s32 Smos_GetElementHandlerFlags(s32 arg0)
+s32 Menu_GetElementHandlerFlags(s32 arg0)
 {
   s32 count;
   struct MenuHandlerEntry *ptr;
@@ -331,7 +331,7 @@ s32 Smos_GetElementHandlerFlags(s32 arg0)
   return 0;
 }
 
-void Smos_SetKindHandlerFlags(s32 arg0, s32 arg1) {
+void Menu_SetKindHandlerFlags(s32 arg0, s32 arg1) {
     s32 i;
     struct MenuHandlerEntry *var_v1;
     i = 0;
@@ -345,13 +345,13 @@ void Smos_SetKindHandlerFlags(s32 arg0, s32 arg1) {
     } while (i < 0x40);
 }
 
-void Smos_ReturnToPreviousScreen(void) {
+void Menu_ReturnToPreviousScreen(void) {
     if (D_8014D080->current > 0) {
-        SmXlate_SwitchScreen(Smos_GetPreviousScreenOwner(0));
+        SmXlate_SwitchScreen(Menu_GetPreviousScreenOwner(0));
     }
 }
 
-s32 Smos_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+s32 Menu_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     Element *element = arg0;
     MenuElementHandler handler;
@@ -377,7 +377,7 @@ s32 GetMenuScreenOwner(void) {
     return result;
 }
 
-s32 Smos_GetPreviousScreenOwner(s32 arg0) {
+s32 Menu_GetPreviousScreenOwner(s32 arg0) {
     s32 idx;
     s32 countMinus1;
     countMinus1 = D_8014D080->current - 1;
@@ -389,16 +389,16 @@ s32 Smos_GetPreviousScreenOwner(s32 arg0) {
 }
 
 /** Return one greater than the current object's word at offset four. */
-unsigned int Smos_GetScreenStackDepth(void) {
+unsigned int Menu_GetScreenStackDepth(void) {
     return D_8014D080->current + 1;
 }
 
 /** Return the word at offset 0x528 of the current global object. */
-unsigned int Smos_GetBlockedScreenOwner(void) {
+unsigned int Menu_GetBlockedScreenOwner(void) {
     return D_8014D080->focus;
 }
 
-s16 Smos_GetFocusedElementId(void) {
+s16 Menu_GetFocusedElementId(void) {
     Element *ptr;
     ptr = D_8014D080->screens[D_8014D080->current].focus;
     if (ptr != 0) {
@@ -407,12 +407,12 @@ s16 Smos_GetFocusedElementId(void) {
     return -1;
 }
 
-void Smos_SetScreenDrawOrigin(int arg0, int arg1) {
+void Menu_SetScreenDrawOrigin(int arg0, int arg1) {
     D_8014D080->field534 = arg0;
     D_8014D080->field538 = arg1;
 }
 
-void Smos_GetScreenDrawOrigin(s32 *arg0, s32 *arg1) {
+void Menu_GetScreenDrawOrigin(s32 *arg0, s32 *arg1) {
     *arg0 = D_8014D080->field534;
     *arg1 = D_8014D080->field538;
 }

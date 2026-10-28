@@ -2,26 +2,26 @@
 #define CINEMA_CINEMA_H
 #include "COMMON/GROUP.H"
 extern void Cinema_EndSequence(void);
-extern void func_8024570C_de(void);
-extern int func_80245764_de(void);
-extern int func_8024576C_de(void);
-extern s32 func_802457E0_de(void);
+extern void Cinema_RequestSequenceFade(void);
+extern int Cinema_IsFadeAllowed(void);
+extern int Cinema_HasSequenceResource(void);
+extern s32 Cinema_HasSequenceEnded(void);
 extern void Cinema_UpdateSequenceTrack(void *camera);
-extern unsigned int func_802458E8_de(void);
-extern void func_802458F8_de(void);
-extern int func_80245908_de(void);
-extern int func_80245940_de(void);
-extern int func_80245968_de(void);
-extern void func_80245990_de(void *letterboxEnabled);
+extern unsigned int Cinema_GetPlaybackFlag(void);
+extern void Cinema_ClearPlaybackPauseState(void);
+extern int Cinema_IsSequenceFlagTwoSet(void);
+extern int Cinema_GetActiveSettingOne(void);
+extern int Cinema_GetActiveSettingZero(void);
+extern void Cinema_SetLetterboxState(void *letterboxEnabled);
 extern void Cinema_SetResponse(float responseValue);
 extern void Cinema_ClearResponse(void);
-extern void func_80245A20_de(int loopMode);
-extern void func_80245A30_de(void);
-extern void func_80245A5C_de(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop);
+extern void Cinema_SetLoopMode(int loopMode);
+extern void Cinema_ResetViewport(void);
+extern void Cinema_SetViewport(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop);
 extern void Cinema_ClearMessageCount(void);
 extern float func_80245AD8_de(void);
-extern void func_80245B74_de(s32 unused);
-extern void func_80245BC0_de(void);
-extern void func_80245C38_de(void);
-extern int func_80245D14_de(void);
+extern void Cinema_InitializeSequenceOnce(s32 unused);
+extern void Cinema_CloseSequenceOnce(void);
+extern void Cinema_AdvanceSequenceTime(void);
+extern int Cinema_GetSequenceActiveState(void);
 #endif

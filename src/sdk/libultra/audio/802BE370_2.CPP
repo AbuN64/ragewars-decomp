@@ -34,7 +34,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
         return ptr;
     inp = 0;
     aLoadADPCM(ptr++, f->bookSize,
-               func_802570C0_de(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
+               Sound_GetCachedAudioBlockAddress(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
     looped = (outCount + f->sample > f->loop.end) && (f->loop.count != 0);
     if (looped)
         nSam = f->loop.end - f->sample;
@@ -137,7 +137,7 @@ Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleO
 
     inp = 0;
     aLoadADPCM(ptr++, f->bookSize,
-               func_802570C0_de(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
+               Sound_GetCachedAudioBlockAddress(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
 
     looped = (outCount + f->sample > f->loop.end) && (f->loop.count != 0);
     if (looped)
@@ -267,7 +267,7 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 
     inp = 0;
     aLoadADPCM(ptr++, f->bookSize,
-               func_802570C0_de(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
+               Sound_GetCachedAudioBlockAddress(f->table->waveInfo.adpcmWave.book->book, f->bookSize));
 
     looped = (outCount + f->sample > f->loop.end) && (f->loop.count != 0);
     if (looped)
@@ -381,8 +381,8 @@ Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
 }
 #endif
 
-/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at D_800D9360 through func_802C016C_de and func_802BD280_de whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from alRaw16Pull (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to D_800D9360. */
-extern s32 func_802C016C_de();
+/* Streams raw 16-bit samples into DMEM for the requested byte count: clears the output when the wave table is empty, otherwise refills a 0x100-sample block at D_800D9360 through Audio_NextDecodedSampleBlock and func_802BD280_de whenever the filter has none left (clearing and stopping when none arrives), then loads the available samples at 8-byte alignment and moves them into place. Adapted from alRaw16Pull (alRaw16Pull) with the loop handling replaced by the streamed block, updated through a pointer to D_800D9360. */
+extern s32 Audio_NextDecodedSampleBlock();
 
 extern void func_802BD280_de(s32 buffer, s32 size);
 
@@ -473,7 +473,7 @@ Acmd *alRaw16Pull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd 
     return ptr;
 }
 
-Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
+Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s32 nbytes;
@@ -493,7 +493,7 @@ Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 samp
         do {
             nSam = byteCount;
             if (f->sample == 0) {
-                D_800D9360 = func_802C016C_de();
+                D_800D9360 = Audio_NextDecodedSampleBlock();
                 if (D_800D9360 == 0) {
                     aClearBuffer(ptr++, op, byteCount << 1);
                     return ptr;
@@ -528,7 +528,7 @@ Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 samp
 
 /* alLoadParam, drafted from ultralib src/audio/load.c: set a load filter's wave table, choosing the
    pull handler and loop points by the table's type, or reset its decode state. This cartridge's
-   version has no table length rounding and a third wave type (2) handled by func_802C3988; the
+   version has no table length rounding and a third wave type (2) handled by Audio_LoadDecodedSamples; the
    handlers are addressed by the cartridge at 0x002Cxxxx (D_002BE0D0, D_002BE514, D_002BE898). */
  /* alCopy */
 

@@ -33,7 +33,7 @@ extern f32 D_800C4960_de[2];
 
 
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -65,7 +65,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        GraphU64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&D_80111D30, &b, &a);
     }
     D_800CD3E0 = (int)node;
     *out = D_80111D30;
@@ -73,11 +73,11 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
 }
 
 /** Perform the no-op callback at VRAM 0x8027451C. */
-void GraphU64_ReturnWithoutWork(void) {
+void Graphu64_ReturnWithoutWork(void) {
 }
 
 /** Store a fill pattern into two paired global words. */
-void GraphU64_ResetRandomSeeds(void) {
+void Graphu64_ResetRandomSeeds(void) {
     g_primaryRandomSeed = 0xE3F635E3;
     g_secondaryRandomSeed = 0xE3F635E3;
 }
@@ -90,7 +90,7 @@ s32 GraphU64_NextRandom(void) {
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
-s32 GraphU64_NextRandomValue(void) {
+s32 Graphu64_NextRandomValue(void) {
     u32 seed;
 
     seed = (g_secondaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
@@ -227,7 +227,7 @@ void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     }
 }
 
-s32 GraphU64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2)
+s32 Graphu64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2)
 {
   f32 temp_f1;
   s32 var_a0;
@@ -260,7 +260,7 @@ s32 GraphU64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2)
   }
 }
 
-f32 GraphU64_NegateWrappedValue(f32 arg0)
+f32 Graphu64_NegateWrappedValue(f32 arg0)
 {
   unsigned char new_var;
   f32 val;
@@ -285,7 +285,7 @@ f32 GraphU64_NegateWrappedValue(f32 arg0)
   return -val;
 }
 
-f32 GraphU64_GetNegatedWrappedDifference(f32 angleA, f32 angleB) {
+f32 Graphu64_GetNegatedWrappedDifference(f32 angleA, f32 angleB) {
     f32 difference;
     f32 wrappedB;
 
@@ -327,7 +327,7 @@ f32 GraphU64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     return (blend * shakeMin) + ((D_800C499C_de - blend) * shakeMax);
 }
 
-s32 GraphU64_UpdateCountdown(f32 *arg0)
+s32 Graphu64_UpdateCountdown(f32 *arg0)
 {
   f32 *new_var2;
   float new_var3;
@@ -356,7 +356,7 @@ s32 GraphU64_UpdateCountdown(f32 *arg0)
 }
 
 /** Copy two 3-vectors, then derive an edge vector, its z-component twice, and a negated x. */
-void GraphU64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
+void Graphu64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
     GeometryEdge *dst = geometryEdge;
     CVector3 *a = arg1;
     CVector3 *b = arg2;
@@ -373,7 +373,7 @@ void GraphU64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
     dst->normal.x = zdiff;
 }
 
-void GraphU64_NormalizeEdgeHorizontal(void *arg0)
+void Graphu64_NormalizeEdgeHorizontal(void *arg0)
 {
     ObjRecAt2CV1 *o = arg0;
     f32 magSq;
@@ -396,7 +396,7 @@ void GraphU64_NormalizeEdgeHorizontal(void *arg0)
     o->unk2C = zOut;
 }
 
-void GraphU64_NormalizeEdgeDirection(void *arg0)
+void Graphu64_NormalizeEdgeDirection(void *arg0)
 {
     ObjRecAt2CV1 *o = arg0;
     f32 magSq;
@@ -420,7 +420,7 @@ void GraphU64_NormalizeEdgeDirection(void *arg0)
     o->unk2C = zOut;
 }
 
-s32 GraphU64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2) {
+s32 Graphu64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2) {
     CVector3 delta;
     f32 temp_f3;
     s32 result;
@@ -437,7 +437,7 @@ s32 GraphU64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2)
 }
 
 /** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
-s32 GraphU64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1) {
+s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1) {
     GeometryEdge *edge = geometryEdge;
     CVector3 *point = arg1;
     CVector3 normal;
@@ -454,13 +454,13 @@ s32 GraphU64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1) {
     return result;
 }
 
-void GraphU64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye,
+void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye,
                    float xAt, float yAt, float zAt,
                    float xUp, float yUp, float zUp)
 {
     float one, len, xLook, yLook, zLook, xRight, yRight, zRight;
 
-    func_802B6C6C_de(mf);
+    guMtxIdentF(mf);
 
     xLook = xAt - xEye;
     yLook = yAt - yEye;
@@ -512,7 +512,7 @@ void GraphU64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
     mf[3][3] = one;
 }
 
-CVector3 *GraphU64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
+CVector3 *Graphu64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
         ((CVector3 *)&D_80115E00)->x = 0;
         ((CVector3 *)&D_80115E00)->z = 0;
@@ -556,7 +556,7 @@ f32 GraphU64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        GraphU64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&D_80111D30, &b, &a);
     }
     normal = D_80111D30;
     D_800CD3E0 = (int)node;

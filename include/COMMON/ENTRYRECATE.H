@@ -96,7 +96,7 @@ typedef struct ActorPickupCanCollect ActorPickupCanCollect;
 
 extern float D_800C62E0;
 
-/* The five 0x14-byte ammunition definitions searched at D_800D3230. */
+/* The five 0x14-byte ammunition definitions searched at g_pickupWeaponDefinitions. */
 typedef struct AmmoPickupDefinition {
     u8 reserved0[4];
     s16 kind;

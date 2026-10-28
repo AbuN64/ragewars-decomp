@@ -20,7 +20,7 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
 
 extern f32 Math_Sqrtf(f32 arg0);
 
-CVector3 GraphU64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
+CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;
     f32 projectedMagnitude;
     f32 magnitudeRatio;
@@ -63,10 +63,10 @@ s32 GraphU64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength) {
     return 0;
 }
 
-void GraphU64_NoOperation(void) {
+void Graphu64_NoOperation(void) {
 }
 
-f32 GraphU64_GetVerticalAngle(f32 *delta) {
+f32 Graphu64_GetVerticalAngle(f32 *delta) {
     f32 y;
     f32 zero;
     f32 x;
@@ -105,7 +105,7 @@ f32 GraphU64_GetSquaredDistance(f32 *a, f32 *b) {
     return (dx * dx) + (dy * dy) + (dz * dz);
 }
 
-f32 GraphU64_GetPointDistance(f32 *a, f32 *b) {
+f32 Graphu64_GetPointDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -216,7 +216,7 @@ void GraphU64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count) {
     }
 }
 
-void GraphU64_ProjectPoint(void *matrix, void *inputPoint, CVector3 *localDirection) {
+void Graphu64_ProjectPoint(void *matrix, void *inputPoint, CVector3 *localDirection) {
     Matrix *m = matrix;
     CVector3 *v = inputPoint;
     f32 w;
@@ -262,7 +262,7 @@ void GraphU64_TransformDirection(void *matrix, void *inputDirection, void *trans
                        + (m->m[10] * v->z);
 }
 
-void GraphU64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) {
+void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
@@ -324,7 +324,7 @@ void GraphU64_BuildScaleMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     o->m[1] = zero;
 }
 
-void GraphU64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
+void Graphu64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
     f32 sine;
     f32 cosine;
     f32 ab, bc, ca, t, one;
@@ -361,7 +361,7 @@ void GraphU64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f3
     mfThis[0][1] = ab + Z;
 }
 
-void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
+void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 {
   f32 zero;
   f32 ax = Math_Sinf(x);
@@ -392,7 +392,7 @@ void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 }
 
 /** Trivial busy-wait delay loop (no side effects). */
-void GraphU64_RunCountdown(void) {
+void Graphu64_RunCountdown(void) {
     s32 count;
 
     count = 3;

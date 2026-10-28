@@ -28,7 +28,7 @@ extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void *Frontend_FindWidgetByResourceId(s32, s32);
 #define ST ((void **)D_800E5690)
 /* Builds the five player-settings controls and opens their parent screen. */
-s32 Menu_InitPlayerSettingsScreen(s32 root) {
+s32 Player_InitPlayerSettingsScreen(s32 root) {
     D_800E5690 = (struct StateMenuSelectPlayerSettingsEntry *)Cache_AllocateMemory(0x64);
     ST[0] = SmpFade_CreateFadeWidget(PLAYER_SETTINGS_ID(0x5B), PLAYER_SETTINGS_ID(0x5C));
     SmpButton_WrapButtonWidget(PLAYER_SETTINGS_ID(0x5E));
@@ -56,7 +56,7 @@ s32 Menu_InitPlayerSettingsScreen(s32 root) {
 #undef ST
 #undef PLAYER_SETTINGS_ID
 #else
-INCLUDE_ASM("ovl_80400000", Menu_InitPlayerSettingsScreen);
+INCLUDE_ASM("ovl_80400000", Player_InitPlayerSettingsScreen);
 #endif
 
 /* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5690 holds through func_8041AD10_de and SmpSlider_SetSliderItem. */

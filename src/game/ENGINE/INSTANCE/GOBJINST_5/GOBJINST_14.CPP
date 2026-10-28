@@ -18,14 +18,14 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 
 
-f32 func_8024BEDC_de(void *target) {
+f32 Gobjinst_GetRootMeanSquareScale(void *target) {
     float scaleX = ((LevelActor *)target)->scale.x;
     float scaleY = ((LevelActor *)target)->scale.y;
     float scaleZ = ((LevelActor *)target)->scale.z;
     return Math_Sqrtf(((scaleX * scaleX) + (scaleY * scaleY) + (scaleZ * scaleZ)) * (0.3333333432674408f));
 }
 
-f32 func_8024BF24_de(void *actor) {
+f32 Gobjinst_GetModelParticleScale(void *actor) {
     f32 result;
     void **modelResource;
 
@@ -40,7 +40,7 @@ f32 func_8024BF24_de(void *actor) {
     return result;
 }
 
-void **func_8024BFD4_de(MenuPanelRoot *actor, s32 variantIndex) {
+void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *actor, s32 variantIndex) {
     void **resource;
 
     if (variantIndex < 0) {
@@ -68,21 +68,21 @@ void **func_8024BFD4_de(MenuPanelRoot *actor, s32 variantIndex) {
 }
 
 #if defined(VERSION_EU_X)
-void func_8024C134_eu_x(void) {
+void Gobjinst_EuropeExtendedNoOperation(void) {
 }
 #endif
 
 #if defined(VERSION_EU_X)
-void func_8024C13C_eu_x(void) {
+void Gobjinst_EuropeExtendedAlternateNoOperation(void) {
 }
 #endif
 
 #if defined(VERSION_EU)
-void func_8024C104_eu(void) {
+void Gobjinst_EuropeNoOperation(void) {
 }
 #endif
 
 #if defined(VERSION_EU)
-void func_8024C10C_eu(void) {
+void Gobjinst_EuropeAlternateNoOperation(void) {
 }
 #endif

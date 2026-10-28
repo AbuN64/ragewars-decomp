@@ -9,6 +9,6 @@ extern u32 __osDisableInt(void);
 
 
 extern u32 func_802BCF00_de(void);
-extern void func_802BBA4C_de(u64 tim);
+extern void Util_SetTimerInterrupt(u64 tim);
 extern u64 __osInsertTimer(OSTimer_s *t);
 #endif

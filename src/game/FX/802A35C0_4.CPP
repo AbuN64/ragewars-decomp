@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),GraphU64_GetMatrixTranslation(void *,void *),GraphU64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),Smp_AppendRibbonSegment(void *,Node44 *,void *);
+extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),GraphU64_GetMatrixTranslation(void *,void *),Graphu64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),Linked_AppendRibbonSegment(void *,Node44 *,void *);
 
 void Fx_DrawColoredRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -124,7 +124,7 @@ s32 Fx_SelectAnimationFrame(AnimationFrameState *state,
 }
 
 void Fx_DetachParticleSwooshes(Root752C *effectWorld, Entity1DC *detachedEntity) {
-    f32 sp10[16];
+    f32 localMatrix[16];
     f32 minimumLifetime;
     f32 scale;
     f32 entityScale;
@@ -152,18 +152,18 @@ loop_4:
                                 ((struct ObjectState68 *) (((char *) segment) + (D_800D297C << 6)))->unk_28=((struct ObjectState68 *) (((char *) segment) + ((D_800D297C ^ 1) << 6)))->unk_28;
                                 segment->unk_B0 = 0;
                             } else {
-                                GraphU64_ConvertMatrixToFloat(&sp10, (char *)detachedEntity + ((D_800D297C << 6) + 0x60));
+                                GraphU64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((D_800D297C << 6) + 0x60));
                                 scale = D_800C5E28_de;
                                 if (detachedEntity->unk_118->unk14 != 0) {
                                     scale = D_800C5E2C_de;
                                 }
-                                ScaleMatrixLocal(&sp10, scale, scale, scale);
-                                GraphU64_ClampMatrixToFixedRange(&sp10);
-                                GraphU64_GetMatrixTranslation(&sp10, segment->pos);
+                                ScaleMatrixLocal(&localMatrix, scale, scale, scale);
+                                GraphU64_ClampMatrixToFixedRange(&localMatrix);
+                                GraphU64_GetMatrixTranslation(&localMatrix, segment->pos);
                                 if (ribbon->unk_3C & 4) {
-                                    GraphU64_GetMatrixScale(&sp10, segment->rot);
+                                    Graphu64_GetMatrixScale(&localMatrix, segment->rot);
                                 } else {
-                                    GraphU64_ConvertMatrixToFixed(&sp10, (char *)segment + ((D_800D297C << 6) + 0x28));
+                                    GraphU64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((D_800D297C << 6) + 0x28));
                                 }
                             }
                             segment->unk_8 = (f32) ribbon->unk_8->unk_8;
@@ -182,14 +182,14 @@ loop_4:
                     matrix += (unsigned int)detachedEntity;
                     matrix += 0x60;
                     if (ribbon->unk_24 > 0.0f) {
-                    GraphU64_ConvertMatrixToFloat(&sp10, matrix);
+                    GraphU64_ConvertMatrixToFloat(&localMatrix, matrix);
                     entityScale = D_800C5E30_de;
                     if (detachedEntity->unk_118->unk14 != 0) {
                         entityScale = D_800C5E34_de;
                     }
-                    ScaleMatrixLocal(&sp10, entityScale, entityScale, entityScale);
-                    GraphU64_ClampMatrixToFixedRange(&sp10);
-                    Smp_AppendRibbonSegment(&D_801379C0, ribbon, &sp10);
+                    ScaleMatrixLocal(&localMatrix, entityScale, entityScale, entityScale);
+                    GraphU64_ClampMatrixToFixedRange(&localMatrix);
+                    Linked_AppendRibbonSegment(&D_801379C0, ribbon, &localMatrix);
                 }
                 }
                 attachedEntity = ribbon->unk_1C;
@@ -240,7 +240,7 @@ typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
 typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstance;
 extern EffectResource *Scene_GetLinkedResourceSection(void *, s32);
 extern void Lists_ClearHeader(void *);
-extern void TextLoad_LocateTextureResource(void *, s32);
+extern void Textload_LocateTextureResource(void *, s32);
 extern void Particle_EncodeRenderLayer(void *, void *);
 extern void GraphU64_IdentityMatrix(void *);
 
@@ -292,7 +292,7 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->field30 = 0;
         node->handle = -1;
         if (node->attachment != -1) {
-            TextLoad_LocateTextureResource(node->coordinates, node->attachment);
+            Textload_LocateTextureResource(node->coordinates, node->attachment);
             if (actor) Particle_EncodeRenderLayer(actor, node->coordinates);
         }
         }
@@ -301,16 +301,16 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
         GraphU64_IdentityMatrix(matrix);
-        instance = ((EffectInstance *(*)(void *, void *, void *))Smp_AppendRibbonSegment)(world, node, matrix);
+        instance = ((EffectInstance *(*)(void *, void *, void *))Linked_AppendRibbonSegment)(world, node, matrix);
         if (instance) instance->actor = actor;
     }
     }
 }
 
 extern void TextLoad_ResetTextureCache(void);
-extern void Smp_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
-extern void Smp_UpdateRibbonMatrices(RibbonActor *ribbon, GameplayCamera *camera);
-extern void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
+extern void Linked_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
+extern void Linked_UpdateRibbonMatrices(RibbonActor *ribbon, GameplayCamera *camera);
+extern void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
 /* The ribbon arena keeps its built display list at 0 and its ribbon list at 0x7528 (Owner802A697C/Root752C
  * view the same list). */
 struct VertexArena {
@@ -321,14 +321,14 @@ struct VertexArena {
 /* Updates one ribbon's linked transforms and points, then draws it once it has at least two points. */
 static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera) {
     if (ribbon->flags & 8) {
-        Smp_UpdateLinkedNodeTransforms(ribbon);
+        Linked_UpdateLinkedNodeTransforms(ribbon);
     }
     if (ribbon->flags & 4) {
-        Smp_UpdateRibbonMatrices(ribbon, camera);
+        Linked_UpdateRibbonMatrices(ribbon, camera);
     }
     if (ribbon->pointCount >= 2) {
         if (ribbon->layer >= 0) {
-            Smp_DrawTexturedRibbon(pool, ribbon, camera);
+            Linked_DrawTexturedRibbon(pool, ribbon, camera);
         } else {
             Fx_DrawColoredRibbon(pool, ribbon, camera);
         }

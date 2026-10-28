@@ -13,7 +13,7 @@ void func_80212D80_eu_x(struct ActorRecAt1D8V2 *actor) {
     Brain_func_80212D78_eu_x *brain = actor->player->brain;
 
     brain->unk220 = 0;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->unk2FC = 0;
 }
 #endif
@@ -25,7 +25,7 @@ void Nav_ResetTargetFollowStateDe(void *object) {
     CloseAttackActor *actor = object;
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->reset2FC = 0;
 }
 #endif
@@ -79,7 +79,7 @@ unsigned int func_80212E04_de_padding_13A04[3] = {
 void Nav_ResetTargetFollowStateEu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
     controller->handlerIndex = 0;
-    Nav_ResetBehaviorState(controller);
+    Scaled_ResetBehaviorState(controller);
     controller->unk2FC = 0;
 }
 #endif

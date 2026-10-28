@@ -204,5 +204,5 @@ extern float D_800C70F0;
 
 extern s32 GraphU64_NextRandom(void);
 
-extern s32 Nav_CollectIncidentLinks(EntryList8020CCE8 *, s32, s32 *, s32 *);
+extern s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *, s32, s32 *, s32 *);
 #endif

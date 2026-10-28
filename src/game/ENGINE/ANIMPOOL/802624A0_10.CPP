@@ -68,7 +68,7 @@ static inline s32 overlaps(EffectAnimPoolUpdateSceneEffects *effect, f32 *max) {
     return 0;
 }
 
-SceneEffect *AnimPool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale,
+SceneEffect *Animpool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale,
                       CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
 
@@ -93,7 +93,7 @@ SceneEffect *AnimPool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 vari
     return effect;
 }
 
-void AnimPool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
+void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
     EffectAnimPoolUpdateSceneEffects *effect;
     EffectAnimPoolUpdateSceneEffects *next;
     f32 *max;
@@ -128,7 +128,7 @@ void AnimPool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
     }
 }
 
-void *AnimPool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
+void *Animpool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
     void *acquiredEffect;
 
     if ((g_world.visibilityEnabled != 0) || ((u32)((struct CAnimPool *) effectPool)->UsedList.count < 3)) {

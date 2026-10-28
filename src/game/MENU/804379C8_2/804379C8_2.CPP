@@ -15,7 +15,7 @@ void SmXlate_SwitchScreen(s32);
 void MarkMenuEventHandled();
 
  /* extern */
-void Smos_ReturnToPreviousScreen(void);
+void Menu_ReturnToPreviousScreen(void);
 
  /* extern */
 s32 SmpSlider_GetTransitionMode(void *);
@@ -27,14 +27,14 @@ s32 SmpSlider_GetTransitionMode(void *);
 
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
-/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x3D0 it sets the word at 0x10 of the menu block
+/* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x3D0 it sets the word at 0x10 of the menu block
    D_800E5784 points to to 7 and clears five bytes at D_80102B7E through XPlus_FillMemory, for 0x3D1 it
    sets that word to -1; then it calls SmpSlider_SetTransitionMode on the block's first word with 2. Returns
    zero. */
 
 extern char D_80102B7E[];
 
-extern s32 Smos_GetFocusedElementId();
+extern s32 Menu_GetFocusedElementId();
 
 #if defined(VERSION_DE)
 enum { MENU_80437B10_976 = 970, MENU_80437B10_977 = 971 };
@@ -71,7 +71,7 @@ block_10:
         MarkMenuEventHandled();
         temp_a0_2 = D_800E5784->unk10;
         if (temp_a0_2 == -1) {
-            Smos_ReturnToPreviousScreen();
+            Menu_ReturnToPreviousScreen();
             return 0;
         }
         SmXlate_SwitchScreen(temp_a0_2);
@@ -95,7 +95,7 @@ s32 Menu_HandleTitleButtonChoice(void) {
     s32 choice;
 
     MarkMenuEventHandled();
-    choice = Smos_GetFocusedElementId();
+    choice = Menu_GetFocusedElementId();
     switch (choice) {
     case MENU_80437B10_977:
         D_800E5784->unk10 = -1;

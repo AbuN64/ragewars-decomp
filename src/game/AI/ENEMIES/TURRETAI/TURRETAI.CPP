@@ -12,7 +12,7 @@
 /* TURRETAI.CPP */
 /* SN debug stream left in us-rev1 (src/ragewars_debug_stream_us_rev1.c, ROM 0xE7092..0xF6880): function records at the retail vram */
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 void MultiplyQuaternions(void *, void *, void *);
 
@@ -56,7 +56,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         q.w = Math_Cosf(angle);
     } else {
         turn = GraphU64_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
-        GraphU64_CrossVectors(&axis, &up, dir);
+        Graphu64_CrossVectors(&axis, &up, dir);
         GraphU64_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
         D_80115DEC = Math_Sinf(angle);

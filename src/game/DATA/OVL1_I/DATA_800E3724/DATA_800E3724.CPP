@@ -25,7 +25,7 @@ unsigned int D_d4_d3abb35991f02f9f[10] = {
     0x00000060, 0x00000030,
 };
 
-unsigned int D_auto_src_rw_reward_score_budgets_us_rev1[25] = {
+unsigned int g_rewardScoreBudgets[25] = {
     0x00000005, 0x0000000A, 0x0000000F, 0x00000014, 0x00000019, 0x00000005, 0x0000000F, 0x00000014,
     0x0000001E, 0x00000023, 0x0000000A, 0x00000014, 0x0000001E, 0x00000028, 0x00000032, 0x0000000A,
     0x0000001E, 0x0000002D, 0x0000003C, 0x0000004B, 0x00000014, 0x00000028, 0x0000003C, 0x00000050,
@@ -35,7 +35,7 @@ unsigned int D_auto_src_rw_reward_score_budgets_us_rev1[25] = {
 
 /* DATA_800E381C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_reward_item_tiers_us_rev1[102] = {
+unsigned int g_rewardItemTiers[102] = {
     0x00000000, 0x800D7284, 0x00000001, 0x800D72CC, 0x00000002, 0x800D729C, 0x00000003, 0x800D72A8,
     0x00000004, 0x800D72D8, 0x00000005, 0x800D7290, 0x00000006, 0x800D7300, 0x00000007, 0x800D730C,
     0x00000008, 0x800D72F4, 0x00000009, 0x800D72C0, 0x0000000A, 0x800D7318, 0xFFFFFFFF, 0x800D72E4,

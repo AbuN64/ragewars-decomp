@@ -132,13 +132,13 @@ typedef struct FlareSourceList { FlareSource *first; } FlareSourceList;
 extern FlareSourceList D_8012D4E4;
 extern void OnScreen_SetupSpriteMode(s32);
 extern void Geometry_SetModePreset(s32);
-extern void GraphU64_ProjectPoint(void *, void *, CVector3 *);
+extern void Graphu64_ProjectPoint(void *, void *, CVector3 *);
 
-/* Same body as Sky_ProjectToScreen: project a world point through the view matrix to screen pixels. */
+/* Same body as Gsky_ProjectToScreen: project a world point through the view matrix to screen pixels. */
 static inline void ProjectToScreen(FlareActor *view, CVector3 *point, f32 *screenX, f32 *screenY) {
     CVector3 value;
     f32 half;
-    GraphU64_ProjectPoint(view->viewProjection, point, &value);
+    Graphu64_ProjectPoint(view->viewProjection, point, &value);
     half = (f32)(D_800E28D0 / 2);
     *screenX = value.x * half + half;
     *screenY = value.y * (f32)(-D_800E28D4 / 2) + (f32)(D_800E28D4 / 2);

@@ -18,34 +18,34 @@
 #include "include_asm.h"
 
 /* 802A6AC0.CPP */
-void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *arg0) {
-    if (arg0->unk24 != 0.0f) {
-        D_800D15E4[0] += arg0->unk34;
-        D_800D15E4[1] += arg0->unk38;
-        D_800D15E4[2] += arg0->unk3C;
-        D_800D15E4[3] += arg0->unk24;
+void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *contribution) {
+    if (contribution->unk24 != 0.0f) {
+        D_800D15E4[0] += contribution->unk34;
+        D_800D15E4[1] += contribution->unk38;
+        D_800D15E4[2] += contribution->unk3C;
+        D_800D15E4[3] += contribution->unk24;
     }
-    D_800D15E4[4] += arg0->unk14;
+    D_800D15E4[4] += contribution->unk14;
 }
 
 extern f32 D_800C5EA0_de[2];
 
-void Fx_ClampScalarRange(f32 *arg0) {
+void Fx_ClampScalarRange(f32 *scalarPointer) {
     f32 new_var;
     f32 new_var2;
 
-    new_var2 = (new_var2 = *arg0);
-    if (*arg0 < 0.0f) {
-        *arg0 = 0.0f;
+    new_var2 = (new_var2 = *scalarPointer);
+    if (*scalarPointer < 0.0f) {
+        *scalarPointer = 0.0f;
     } else {
         new_var = D_800C5EA0_de[1];
         if (new_var < new_var2) {
-            *arg0 = new_var;
+            *scalarPointer = new_var;
         }
     }
 }
 
-void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
+void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 remainingCalls, f32 interval) {
     void *node;
 
     node = Lists_MoveHeadToInactiveList(arg0 + 0x7588);
@@ -53,8 +53,8 @@ void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
         ((ObjRecAt18V6 *)(node))->unk18 = arg1;
         ((ObjRecAt18V6 *)(node))->unk14 = arg2;
         ((ObjRecAt18V6 *)(node))->unk8 = 0;
-        ((ObjRecAt18V6 *)(node))->unkC = arg4;
-        ((ObjRecAt18V6 *)(node))->unk10 = arg3;
+        ((ObjRecAt18V6 *)(node))->unkC = interval;
+        ((ObjRecAt18V6 *)(node))->unk10 = remainingCalls;
     }
 }
 
@@ -98,11 +98,11 @@ done:
 }
 
 /* 802A6AC0_2.CPP */
-extern s32 Smp_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);
+extern s32 Linked_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);
 
 extern f32 D_800D2988;
 
-extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
+extern void Textload_LocateTextureResource(s32 *arg0, s32 arg1);
 
 extern void Particle_EncodeRenderLayer(void *arg0, s32 *arg1);
 
@@ -116,19 +116,19 @@ extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
 extern void GraphU64_GetMatrixTranslation(char *object, float *output);
 
-extern void GraphU64_GetMatrixScale(void *arg0, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
 
 
 
-extern void Smp_UpdateLinkedNodeTransforms(void *arg0);
+extern void Linked_UpdateLinkedNodeTransforms(void *arg0);
 
-extern void Smp_UpdateRibbonMatrices(void *, void *);
+extern void Linked_UpdateRibbonMatrices(void *, void *);
 
-extern void Smp_DrawTexturedRibbon(s32, void *, s32);
+extern void Linked_DrawTexturedRibbon(s32, void *, s32);
 
 extern void Fx_DrawColoredRibbon(s32, void *, s32);
 
-extern void Smp_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
+extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
 void Fx_RecycleOwnerParticles(SceneRecAt95A8 *arg0, s32 arg1) {
     s32 count;
@@ -168,7 +168,7 @@ void Fx_UpdateAttachedEffects(Owner802A6DF8 *owner) {
     if (state != 0) {
         do {
             next = state->next;
-            if (Smp_UpdateRibbonLifetime((s32)owner, state) == 0) {
+            if (Linked_UpdateRibbonLifetime((s32)owner, state) == 0) {
                 object = state->object;
                 if (object != 0) {
                     if (state->flags & 1) {
@@ -230,7 +230,7 @@ void Fx_UpdateTimedCallbacks(void *arg0)
   }
 }
 
-void Fx_ResolveEntryResource(void *unused, void *arg1, void *arg2) {
+void Fx_ResolveEntryResource(void *unused, void *arg1, void *actor) {
     CItem *entry = arg1;
     s32 field34;
     s32 *p;
@@ -238,9 +238,9 @@ void Fx_ResolveEntryResource(void *unused, void *arg1, void *arg2) {
     field34 = entry->unk34;
     if (field34 != -1) {
         p = &entry->unk14;
-        TextLoad_LocateTextureResource(p, field34);
-        if (arg2 != 0) {
-            Particle_EncodeRenderLayer(arg2, p);
+        Textload_LocateTextureResource(p, field34);
+        if (actor != 0) {
+            Particle_EncodeRenderLayer(actor, p);
         }
     }
 }
@@ -319,7 +319,7 @@ void Fx_UpdateChildTransform(Node44 *arg0, void *arg1) {
             GraphU64_ClampMatrixToFixedRange(local);
             GraphU64_GetMatrixTranslation((char *)local, &((ChildB4 *)arg1)->pos[0]);
             if (arg0->unk_3C & 4) {
-                GraphU64_GetMatrixScale(local, &((ChildB4 *)arg1)->rot[0]);
+                Graphu64_GetMatrixScale(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
                 GraphU64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(arg1 + ((D_800D297C << 6) + 0x28)));
             }
@@ -348,24 +348,24 @@ void Fx_UpdateNodeFractions(void *arg0) {
     }
 }
 
-void Fx_DrawEffectGeometry(s32 pool, void *arg1, s32 camera) {
-    State802A6DF8 *state = arg1;
+void Fx_DrawEffectGeometry(s32 pool, void *ribbon, s32 camera) {
+    State802A6DF8 *state = ribbon;
     if (state->flags & 8) {
-        Smp_UpdateLinkedNodeTransforms(arg1);
+        Linked_UpdateLinkedNodeTransforms(ribbon);
     }
     if (state->flags & 4) {
-        Smp_UpdateRibbonMatrices(arg1, camera);
+        Linked_UpdateRibbonMatrices(ribbon, camera);
     }
     if (state->vertexCount >= 2) {
         if (state->renderMode >= 0) {
-            Smp_DrawTexturedRibbon(pool, arg1, camera);
+            Linked_DrawTexturedRibbon(pool, ribbon, camera);
             return;
         }
-        Fx_DrawColoredRibbon(pool, arg1, camera);
+        Fx_DrawColoredRibbon(pool, ribbon, camera);
     }
 }
 
-void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 arg3) {
+void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 sourceMatrix) {
     State802A6DF8 *state = arg1;
     f32 local[16];
     Shared_Particle *entry;
@@ -373,14 +373,14 @@ void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 arg3) {
 
     entry = state->object;
     if (entry == arg2 && state->value > 0.0f) {
-        GraphU64_ConvertMatrixToFloat(local, arg3);
+        GraphU64_ConvertMatrixToFloat(local, sourceMatrix);
         scale = D_800C5EC0_de;
         if (entry->desc->renderModel != 0) {
             scale = D_800C5EC4_de;
         }
         ScaleMatrixLocal(local, scale, scale, scale);
         GraphU64_ClampMatrixToFixedRange(local);
-        Smp_AppendRibbonSegment(arg0, state, local);
+        Linked_AppendRibbonSegment(arg0, state, local);
     }
 }
 
@@ -408,14 +408,14 @@ void Fx_DrawEffectPasses(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode < 0) {
             if (node->flags & 8) {
-                Smp_UpdateLinkedNodeTransforms(node);
+                Linked_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
-                Smp_UpdateRibbonMatrices(node, camera);
+                Linked_UpdateRibbonMatrices(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    Smp_DrawTexturedRibbon(pool, node, camera);
+                    Linked_DrawTexturedRibbon(pool, node, camera);
                 } else {
                     Fx_DrawColoredRibbon(pool, node, camera);
                 }
@@ -428,14 +428,14 @@ void Fx_DrawEffectPasses(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode > 0) {
             if (node->flags & 8) {
-                Smp_UpdateLinkedNodeTransforms(node);
+                Linked_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
-                Smp_UpdateRibbonMatrices(node, camera);
+                Linked_UpdateRibbonMatrices(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    Smp_DrawTexturedRibbon(pool, node, camera);
+                    Linked_DrawTexturedRibbon(pool, node, camera);
                 } else {
                     Fx_DrawColoredRibbon(pool, node, camera);
                 }

@@ -25,7 +25,7 @@
 
 /* 8023A284_4.CPP */
 extern void Cache_UnlockResource(void *, Node80253610 *);
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
 void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
@@ -49,9 +49,9 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
     f32 maxS, minS, maxT, minT, shiftS, shiftT, factor;
     UnitVtx *vertex;
 
-    resource = TextLoad_RequestTextureVariation(object->texture, -1);
+    resource = Textload_RequestTextureVariation(object->texture, -1);
     if (resource != 0) {
-        TextLoad_ReadTextureAnimationInfo(resource, &animation);
+        Textload_ReadTextureAnimationInfo(resource, &animation);
         if (animation.unk0 != 0) {
             descriptor = object->descriptor;
             frame = animation.unk8;
@@ -62,9 +62,9 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             gDPPipeSync(g_displayListCursor++);
             frameIndex = (s32)phase % animation.unk0;
 #if defined(VERSION_US_REV1)
-            TextLoad_LoadTextureFrameTiles(object->texture, resource,
+            Textload_LoadTextureFrameTiles(object->texture, resource,
 #else
-            func_802950B4_de(object->texture, resource,
+            Textload_LoadTextureFrame(object->texture, resource,
 #endif
                 frameIndex, 0,
                 scaleS, scaleT, 0, 0, 15);
@@ -132,7 +132,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 triangle[2] = points[third];
                 GraphU64_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
                 GraphU64_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
-                GraphU64_CrossVectors(&normal, &edge0, &edge1);
+                Graphu64_CrossVectors(&normal, &edge0, &edge1);
                 if (normal.y <= 0.0f) {
                     if (below != 1) goto draw_face;
                 } else {
@@ -212,8 +212,8 @@ extern s32 D_801370CC;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
 extern f32 Region_GetPolygonHeight(void *, s32, s32);
-extern void Sky_GetObjectPositionAt260(CVector3 *, void *);
-extern void TextLoad_LocateTextureResource(s32 *, s32);
+extern void Gsky_GetObjectPositionAt260(CVector3 *, void *);
+extern void Textload_LocateTextureResource(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
 extern void func_80255CB8_de(void *, void *);
 static inline ObjectRecAt220 *allocateSceneEffect(Scene *scene) {
@@ -299,16 +299,16 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     limit = Region_GetPolygonHeight(resource, host->field38, host->field40);
     below = 0;
     if (entry->flags & 1) {
-        Sky_GetObjectPositionAt260(&anchor, host);
+        Gsky_GetObjectPositionAt260(&anchor, host);
         fadeLimit = 0.5f;
         value = (entry->height - anchor.y) * fadeLimit;
         if (20.48f < value) {
             fadeLimit = 20.48f;
         } else {
-            Sky_GetObjectPositionAt260(&probe, host);
+            Gsky_GetObjectPositionAt260(&probe, host);
             fadeLimit = (entry->height - probe.y) * fadeLimit;
         }
-        Sky_GetObjectPositionAt260(&anchor, host);
+        Gsky_GetObjectPositionAt260(&anchor, host);
         if (!(anchor.y < entry->height)) {
             below = 0;
         } else {
@@ -326,7 +326,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
             if (object != 0) {
                 object->descriptor = descriptor;
                 object->mask = bit;
-                TextLoad_LocateTextureResource(object->texture, descriptor->texture);
+                Textload_LocateTextureResource(object->texture, descriptor->texture);
                 object->offsetS = 0.0f;
                 object->offsetT = 0.0f;
                 object->throttle = 0.0f;
@@ -364,7 +364,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
-extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
+extern void Textload_LocateTextureResource(s32 *arg0, s32 arg1);
 
 /* Updates a rotor: while the control mask bit is held its throttle at 0x208 rises by the descriptor rate up
  * to D_800C86E0, otherwise it falls to zero (returning 1 once idle); the value phase advances, the two wrap
@@ -419,7 +419,7 @@ void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
                    f32 offset0, f32 offset1, f32 offset2) {
     effect->definition = definition;
     effect->mask = mask;
-    TextLoad_LocateTextureResource(&effect->resource, *definition);
+    Textload_LocateTextureResource(&effect->resource, *definition);
     effect->angle0 = 0;
     effect->angle1 = 0;
     effect->timer = 0;

@@ -19,7 +19,7 @@
 extern s32 D_8013B364;
 
 
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 extern void Nav_RunBehaviorHandler(void *);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *);
@@ -62,7 +62,7 @@ void Nav_UpdateRoamingWithJumps(Shared_Actor *arg0) {
 loop:
                 if (tries < 10) {
                     candidate = GraphU64_NextRandom() % table[1];
-                    if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -138,7 +138,7 @@ void Nav_InitRoamingWithJumps(Shared_Actor *arg0)
 loop:
                 if (tries < 10) {
                     candidate = GraphU64_NextRandom() % table[1];
-                    if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -159,7 +159,7 @@ store_c:
             ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
         }
     }
-    Nav_ResetBehaviorState(actor);
+    Scaled_ResetBehaviorState(actor);
     ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = -1;
 }
 
@@ -181,7 +181,7 @@ void Nav_ChooseNewRoamingGoal(void *arg0)
 loop:
         if (tries < 10) {
             candidate = GraphU64_NextRandom() % table[1];
-            if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
+            if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                 candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }
             tries++;

@@ -14,7 +14,7 @@ void Nav_InitRangedCombat(CloseAttackActor *arg0) {
     s32 r1, r2, r3;
 
     inner->state = 0;
-    Nav_ResetBehaviorState(inner);
+    Scaled_ResetBehaviorState(inner);
 
     r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
@@ -45,7 +45,7 @@ void Nav_InitCloseCombat(CloseAttackActor *arg0) {
     r3 = GraphU64_NextRandom();
     inner->distance = r3 % 32400 + 0x2710;
 
-    Nav_ResetBehaviorState(inner);
+    Scaled_ResetBehaviorState(inner);
 
     inner->frames = 0;
     inner->visible = 0;
@@ -58,7 +58,7 @@ void Nav_InitVisiblePursuit(CloseAttackActor *arg0) {
     s32 r1, r2;
 
     inner->state = 0;
-    Nav_ResetBehaviorState(inner);
+    Scaled_ResetBehaviorState(inner);
 
     r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
@@ -86,7 +86,7 @@ char rodata_unresolved_80212668[8] =
 void Nav_InitPursuitStrafeDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->timer = GraphU64_NextRandom() % 4 + 12;
     brain->pattern = GraphU64_NextRandom() % 2;
 }
@@ -96,7 +96,7 @@ void Nav_InitPursuitStrafeDe(CloseAttackActor *actor) {
 void Nav_InitRangedCombatDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->timer = GraphU64_NextRandom() % 4 + 12;
     brain->pattern = GraphU64_NextRandom() % 2;
     brain->distance = GraphU64_NextRandom() % 250000 + 360000;
@@ -113,7 +113,7 @@ void Nav_InitCloseCombatDe(CloseAttackActor *actor) {
     brain->timer = GraphU64_NextRandom() % 4 + 2;
     brain->pattern = GraphU64_NextRandom() % 2;
     brain->distance = GraphU64_NextRandom() % 32400 + 10000;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->frames = 0;
     brain->visible = 0;
     brain->fireTimer = -1;
@@ -124,7 +124,7 @@ void Nav_InitCloseCombatDe(CloseAttackActor *actor) {
 void Nav_InitVisiblePursuitDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    Nav_ResetBehaviorState(brain);
+    Scaled_ResetBehaviorState(brain);
     brain->timer = GraphU64_NextRandom() % 4 + 12;
     brain->pattern = GraphU64_NextRandom() % 2;
 }

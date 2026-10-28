@@ -19,7 +19,7 @@ unsigned int D_blob_baaccdf3eb4fb9c2ef70[1] = {
 #endif
 
 /* 80241940_4.CPP */
-extern s32 func_8023E8D4_de(void *, s32 *, s32);
+extern s32 CCollision_TestSegmentPolygon(void *, s32 *, s32);
 
 extern void Plane_BuildBoxFace0(s32 *, void *);
 
@@ -33,26 +33,26 @@ extern void Plane_BuildBoxFace4(s32 *, void *);
 
 extern void Plane_BuildBoxFace5(s32 *, void *);
 
-s32 func_8023E178_de(void *, void *, f32, s32, f32, s32, s32 *, s32);
+s32 CCollision_TestRayCylinder(void *, void *, f32, s32, f32, s32, s32 *, s32);
 
-s32 func_8023EA44_de(void *, s32 *, void *, f32, s32);
+s32 CCollision_TestSegmentDisk(void *, s32 *, void *, f32, s32);
 
 /* Gathers the pieces a ray sweeps through: for each entry of the counted table in D_8011CD20 whose
  * rectangle, grown by the ray's radius, overlaps the ray's rectangle and is hit by it, each visible element
  * of the entry's resource whose grown box overlaps the ray's box and is hit is recorded with its hit
  * parameter (at most 128). The hits are sorted and, while nearer than the ray's current nearest hit, each
- * is handed to func_80243874_de with a context holding the ray, its look-at matrix and segment spacing. */
+ * is handed to CPolyCollision_TraceElementMesh with a context holding the ray, its look-at matrix and segment spacing. */
 extern struct {
     char pad0[0x5AC];
     s32 count;
     EntryC entries[1];
 } D_8011CD20;
 
-extern s32 func_8023DAA0_de(Ray180 *, Box *, f32 *);
+extern s32 CCollision_IntersectSegmentBox(Ray180 *, Box *, f32 *);
 
-extern s32 func_8023DDC4_de(Ray180 *, CQuatern *, f32 *);
+extern s32 CCollision_IntersectSegmentRectangle(Ray180 *, CQuatern *, f32 *);
 
-extern void func_80243874_de(ContextB0 *);
+extern void CPolyCollision_TraceElementMesh(ContextB0 *);
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
@@ -63,23 +63,23 @@ s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
     if (((struct FloatState68 *) ray)->unk_60 > 0.0f) {
         *quad = 2;
         Plane_BuildBoxFace1(quad, corners);
-        result = func_8023E8D4_de(ray, quad, 1);
+        result = CCollision_TestSegmentPolygon(ray, quad, 1);
     }
     if ((((struct FloatState68 *) ray)->unk_5C != 0.0f) || (((struct FloatState68 *) ray)->unk_64 != 0.0f)) {
         *quad = 3;
         Plane_BuildBoxFace2(quad, corners);
-        result |= func_8023E8D4_de(ray, quad, 1);
+        result |= CCollision_TestSegmentPolygon(ray, quad, 1);
         Plane_BuildBoxFace3(quad, corners);
-        result |= func_8023E8D4_de(ray, quad, 1);
+        result |= CCollision_TestSegmentPolygon(ray, quad, 1);
         Plane_BuildBoxFace4(quad, corners);
-        result |= func_8023E8D4_de(ray, quad, 1);
+        result |= CCollision_TestSegmentPolygon(ray, quad, 1);
         Plane_BuildBoxFace5(quad, corners);
-        result |= func_8023E8D4_de(ray, quad, 1);
+        result |= CCollision_TestSegmentPolygon(ray, quad, 1);
     }
     if (((struct FloatState68 *) ray)->unk_60 < 0.0f) {
         *quad = 9;
         Plane_BuildBoxFace0(quad, corners);
-        result |= func_8023E8D4_de(ray, quad, 1);
+        result |= CCollision_TestSegmentPolygon(ray, quad, 1);
     }
     return result;
 }
@@ -94,17 +94,17 @@ s32 func_80242A94_de(void *ray, void *platform, void *corners, s32 *contactPolyg
     radius = ((struct FloatState20 *) ((struct ObjRecAt18V5 *) platform)->unk18)->unk_1C + ((struct FloatState68_2 *) ray)->unk_C;
     if ((((struct FloatState68_2 *) ray)->unk_5C != 0.0f) || (((struct FloatState68_2 *) ray)->unk_64 != 0.0f)) {
         *contactPolygon = 3;
-        hitFound = func_8023E178_de(ray, point, radius, ((struct ObjRecAt34 *) corners)->unk4, ((struct ObjRecAt34 *) corners)->unk34, 1, contactPolygon, 1);
+        hitFound = CCollision_TestRayCylinder(ray, point, radius, ((struct ObjRecAt34 *) corners)->unk4, ((struct ObjRecAt34 *) corners)->unk34, 1, contactPolygon, 1);
     }
     if (((struct FloatState68_2 *) ray)->unk_60 > 0.0f) {
         *contactPolygon = 2;
         Plane_BuildBoxFace1(contactPolygon, corners);
-        hitFound |= func_8023EA44_de(ray, contactPolygon, point, radius, 1);
+        hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);
     }
     if (((struct FloatState68_2 *) ray)->unk_60 < 0.0f) {
         *contactPolygon = 9;
         Plane_BuildBoxFace0(contactPolygon, corners);
-        hitFound |= func_8023EA44_de(ray, contactPolygon, point, radius, 1);
+        hitFound |= CCollision_TestSegmentDisk(ray, contactPolygon, point, radius, 1);
     }
     return hitFound;
 }
@@ -152,7 +152,7 @@ void func_80242BF0_de(Ray180 *ray) {
         rect.z = table[i].rect->z + ray->radius;
         rect.w = table[i].rect->w + ray->radius;
         if (ray->rect.x < rect.z && rect.x < ray->rect.z && ray->rect.y < rect.w &&
-            rect.y < ray->rect.w && func_8023DDC4_de(ray, &rect, &t) != 0) {
+            rect.y < ray->rect.w && CCollision_IntersectSegmentRectangle(ray, &rect, &t) != 0) {
             model = SetN64_GetPackSection(*table[i].resource, 0);
             remaining = model->count;
             element = model->elements;
@@ -169,7 +169,7 @@ void func_80242BF0_de(Ray180 *ray) {
                     box.max.z = element->box.max.z + ray->radius;
                     if (box.min.x < ray->box.max.x && ray->box.min.x < box.max.x && box.min.z < ray->box.max.z &&
                         ray->box.min.z < box.max.z && box.min.y < ray->box.max.y && ray->box.min.y < box.max.y &&
-                        func_8023DAA0_de(ray, &box, &t) != 0) {
+                        CCollision_IntersectSegmentBox(ray, &box, &t) != 0) {
                         hitCount++;
                         hit->element = element;
                         hit->t = t;
@@ -181,7 +181,7 @@ void func_80242BF0_de(Ray180 *ray) {
         }
     }
     if (hitCount != 0) {
-        func_8026F368_de(&ctx.matrix, start, end, &D_800CC3D0_de);
+        Graphu64_ComputeViewMatrix(&ctx.matrix, start, end, &D_800CC3D0_de);
         PpDecom_QuickSortRecords((char *) hits, hitCount, sizeof(Hit8), D_00243850, D_00243814);
         hit = hits;
         for (j = 0; j < hitCount; j++, hit++) {
@@ -196,7 +196,7 @@ void func_80242BF0_de(Ray180 *ray) {
             } else {
                 ctx.isKind9 = 0;
             }
-            func_80243874_de(&ctx);
+            CPolyCollision_TraceElementMesh(&ctx);
         }
     }
 }

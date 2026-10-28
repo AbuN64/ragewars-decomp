@@ -5,7 +5,7 @@
 
 /* Acts on the mode of the menu held first in the block g_optionsPage points to: in mode 4 it calls
    MarkMenuEventHandled and then either SmXlate_SwitchScreen with the block's word at 0x20, when that is not -1,
-   or Smos_ReturnToPreviousScreen. Returns zero. */
+   or Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
@@ -18,7 +18,7 @@ extern void MarkMenuEventHandled();
 
 extern void SmXlate_SwitchScreen(s32);
 
-extern void Smos_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen();
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 enum { SHORTCUT_RESET = 0x50, SHORTCUT_SIX = 0x57, SHORTCUT_FIVE = 0x58 };
@@ -31,7 +31,7 @@ enum { SHORTCUT_RESET = 0x5C, SHORTCUT_SIX = 0x52, SHORTCUT_FIVE = 0x55 };
 
 extern void MarkMenuEventHandled(void),Menu_CommitOptionsPage(void),SmpSlider_SetTransitionMode(void *,s32);
 
-extern s32 Smos_GetFocusedElementId(void);
+extern s32 Menu_GetFocusedElementId(void);
 
 s32 Frontend_UpdateOptionsPageExit(void) {
     switch (SmpSlider_GetTransitionMode(g_optionsPage->menu)) {
@@ -42,7 +42,7 @@ s32 Frontend_UpdateOptionsPageExit(void) {
         if (g_optionsPage->value != -1) {
             SmXlate_SwitchScreen(g_optionsPage->value);
         } else {
-            Smos_ReturnToPreviousScreen();
+            Menu_ReturnToPreviousScreen();
         }
         break;
     }
@@ -54,7 +54,7 @@ s32 Frontend_HandleOptionsPageShortcut(void) {
     s32 var_s0;
     MarkMenuEventHandled();
     var_s0 = 1;
-    temp_v0 = Smos_GetFocusedElementId();
+    temp_v0 = Menu_GetFocusedElementId();
     switch(temp_v0) {
     case SHORTCUT_RESET:g_optionsPage->value=-1;break;
     case SHORTCUT_SIX:g_optionsPage->value=6;break;

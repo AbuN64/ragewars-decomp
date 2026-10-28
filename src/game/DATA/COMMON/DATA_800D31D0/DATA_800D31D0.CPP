@@ -5,7 +5,7 @@ struct {
     unsigned int w0;
     unsigned short h1[6];
     unsigned int w2[2];
-} D_auto_src_ragewars_pickup_powerups_us_rev1[4] = {
+} g_pickupPowerupDefinitions[4] = {
     { 0x800D7134, { 0x084B, 0x0E0C, 0xFFFF, 0x0000, 0x0012, 0x0003 }, { 0x00010000, (unsigned int)D_002AD65C } },
     { 0x800D7138, { 0x084C, 0x0E0C, 0xFFFF, 0x0000, 0x0013, 0x0004 }, { 0x00030000, (unsigned int)D_002AD65C } },
     { 0x800D713C, { 0x084D, 0x0E0C, 0xFFFF, 0x0000, 0x0014, 0x0006 }, { 0x00010000, (unsigned int)D_002AD65C } },

@@ -7,7 +7,7 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "WEAPONS/80213ED4_13.H"
 
-s32 Barrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *arg2) {
+s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *arg2) {
     void *controller;
 
     if (routeChaseBot->node == 0) {

@@ -39,7 +39,7 @@ typedef struct EquipEntry {
     s32 kind;
     s32 *label;
 } EquipEntry;
-extern EquipEntry D_800E5B44[];
+extern EquipEntry g_loadoutWeaponItems[];
 
 extern HudStatusShared_Settings D_801462C8;
 
@@ -50,7 +50,7 @@ extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);
    item D_800E59E6[p][0], then by the entry's mode at 0x4D4 either hides column item
    D_800E59EE[p][5] and fades label D_800E5A1A[p][5] to alpha 0x23 (mode 0), or for each of the
    3 (mode 1) or 6 (mode 2 and any other) columns hides D_800E59EE[p][c], fades D_800E5A1A[p][c]
-   to 0x23 and redraws the column through Frontend_ShowEquipChoice with the entry's value; mode 1 then also
+   to 0x23 and redraws the column through Equip_ShowEquipChoice with the entry's value; mode 1 then also
    hides column 5's item, fades its label and hides the entry's item. Finally it hides the five
    D_800E5A06[p] items at alpha 0x37 and shows the selected column's label at alpha 0x96 through
    func_8040E928_de. */
@@ -65,13 +65,13 @@ extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);
 
 
 
-void Frontend_MoveEquipmentColumn(s32 player, s32 direction) {
+void Equip_MoveEquipmentColumn(s32 player, s32 direction) {
     MenuWidget *item;
     s32 column;
 
     column = D_800E59E0->panels[player].selection;
     item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
-    Frontend_SetWidgetFlag40(item, 0);
+    Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x23;
     if (column != 5) {
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][column].value), 0);
@@ -99,7 +99,7 @@ void Frontend_MoveEquipmentColumn(s32 player, s32 direction) {
 }
 
 /* Step an equipment choice, rejecting duplicates and the locked item 15. */
-void Frontend_CycleEquipmentChoice(s32 player, s32 step) {
+void Equip_CycleEquipmentChoice(s32 player, s32 step) {
     s32 count;
     s32 low;
     s32 high;
@@ -154,19 +154,19 @@ void Frontend_CycleEquipmentChoice(s32 player, s32 step) {
                 }
             }
             if (valid == 1 && (category == 2 || category == 3) &&
-                D_800E5B44[value].kind == 15 &&
+                g_loadoutWeaponItems[value].kind == 15 &&
                 !(D_801462C8.flags & 0x10000000) &&
                 !Player_HasProfileUnlockFlag((s32)&D_80102B00[player], 15)) {
                 value += step;
                 valid = 0;
             }
         } while (!valid);
-        Frontend_ShowEquipChoice(player, category, value);
+        Equip_ShowEquipChoice(player, category, value);
         D_800E59E0->panels[player].values[category] = value;
     }
 }
 
-void Frontend_ActivateEquipmentPanel(s32 player) {
+void Equip_ActivateEquipmentPanel(s32 player) {
     MenuWidget *item;
     s32 i;
 
@@ -185,7 +185,7 @@ void Frontend_ActivateEquipmentPanel(s32 player) {
             item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
             Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
-            Frontend_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
+            Equip_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
         }
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][5].value), 0);
         item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][5].value);
@@ -200,7 +200,7 @@ void Frontend_ActivateEquipmentPanel(s32 player) {
             item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
             Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
-            Frontend_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
+            Equip_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
         }
         break;
     }
@@ -211,20 +211,20 @@ void Frontend_ActivateEquipmentPanel(s32 player) {
     }
     item = Frontend_FindWidgetByResourceId(D_800E59E0->window,
                          D_800E5A1A[player][D_800E59E0->panels[player].selection].value);
-    Frontend_SetWidgetFlag40(item, 1);
+    Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
 }
 
 /* Redraws player p's equipment row for the chosen column: shows the panel item, picks the column's
-   table (mode 1: columns 0/1/2 -> D_800E5BC4/D_800E5B44/D_800E5B14; otherwise 0-1, 2-3, 4), writes
+   table (mode 1: columns 0/1/2 -> D_800E5BC4/g_loadoutWeaponItems/D_800E5B14; otherwise 0-1, 2-3, 4), writes
    the choice's item into the column widget's kind-3 child, sets the badge and the panel label (per
    language on EU); column 5 or out of range clears the badge and hides the item. */
 extern EquipEntry D_800E5BC4[];
 extern EquipEntry D_800E5B14[];
-extern void Frontend_SetPreviewModel(void *, s32);
+extern void Model_SetPreviewModel(void *, s32);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
+void Equip_ShowEquipChoice(s32 player, s32 category, s32 choice)
 {
     EquipEntry *table;
     MenuWidget *node;
@@ -240,13 +240,13 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
             table = D_800E5BC4;
             break;
         case 1:
-            table = D_800E5B44;
+            table = g_loadoutWeaponItems;
             break;
         case 2:
             table = D_800E5B14;
             break;
         default:
-            Frontend_SetPreviewModel(D_800E59E0->badges[player], 0);
+            Model_SetPreviewModel(D_800E59E0->badges[player], 0);
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
@@ -258,14 +258,14 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
             break;
         case 2:
         case 3:
-            table = D_800E5B44;
+            table = g_loadoutWeaponItems;
             break;
         case 4:
             table = D_800E5B14;
             break;
         case 5:
         default:
-            Frontend_SetPreviewModel(D_800E59E0->badges[player], 0);
+            Model_SetPreviewModel(D_800E59E0->badges[player], 0);
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
@@ -281,7 +281,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
                 node = node->sibling;
             }
         } while (!found);
-        Frontend_SetPreviewModel(D_800E59E0->badges[player], table[choice].resource);
+        Model_SetPreviewModel(D_800E59E0->badges[player], table[choice].resource);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         D_800E59E0->panels[player].item->word38 = table[choice].label[g_languageIndex];
 #else

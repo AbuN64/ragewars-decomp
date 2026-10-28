@@ -11,13 +11,13 @@ void func_80212C90_de(AiTarget *aiTarget) {
     AiController *controller;
     controller = aiTarget->player->controller;
     ((CloseAttackBrain *)controller)->state = 0;
-    Nav_ResetBehaviorState(controller);
+    Scaled_ResetBehaviorState(controller);
     controller->unk2FC = 0;
 }
 
-extern s32 Nav_SetBehaviourState(void *, s32);
+extern s32 Scaled_SetBehaviourState(void *, s32);
 extern void Nav_RunBehaviorHandler(void *);
-extern f32 Nav_DistanceToNode(s32 *, s32);
+extern f32 Scaled_DistanceToNode(s32 *, s32);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdateTargetSteering(s32 *);
 extern char D_80145040;
@@ -32,14 +32,14 @@ void Nav_FollowMarkerCarrierRoute(AiTarget *aiTarget) {
     void *v0;
 
     controller = aiTarget->player->controller;
-    v0 = Player_FindPlayerWithMarker(&D_80145040);
+    v0 = Playerai_FindPlayerWithMarker(&D_80145040);
     if (v0 == 0 || v0 != (void *)controller->player) {
-        Nav_SetBehaviourState(controller, 2);
+        Scaled_SetBehaviourState(controller, 2);
         return;
     }
     controller = aiTarget->player->controller;
     Nav_RunBehaviorHandler(controller);
-    Nav_DistanceToNode(controller, controller->mode);
+    Scaled_DistanceToNode(controller, controller->mode);
     Nav_SteerAlongRoute(controller);
     Nav_UpdateTargetSteering(controller);
 }

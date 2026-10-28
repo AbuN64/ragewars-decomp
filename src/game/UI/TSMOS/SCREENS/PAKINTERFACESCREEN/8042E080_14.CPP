@@ -16,12 +16,12 @@ extern char D_800EE534[], D_800EE540[];
 extern char g_noteInfoIntFormat[];
 
 #endif
-extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
-extern s32 Pak_ContainsInvalidNameByte(char *, s32);
+extern s32 Note_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
+extern s32 Note_ContainsInvalidNameByte(char *, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void XStdio_FormatBuffer(char *, char *, ...);
-extern s32 Pak_GetFreePages(s32, s32 *);
-extern s32 Pak_BytesToPakPages(s32);
+extern s32 Note_GetFreePages(s32, s32 *);
+extern s32 Note_BytesToPakPages(s32);
 extern void PAKInterface_RefreshPlayerPanel(s32, s32);
 extern void PAKInterface_ScrollNoteList(s32, s32);
 
@@ -69,7 +69,7 @@ void PAKInterface_LoadNoteList(s32 player)
 #endif
     failed = 0;
     for (i = 0; i < 16 && failed == 0; i++) {
-        note_status = Pak_ReadNoteInfo(player, i, &status, name, ext, &size, extra1, extra2);
+        note_status = Note_ReadNoteInfo(player, i, &status, name, ext, &size, extra1, extra2);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         settings = (GameLocalizationState *)D_801462C8;
@@ -78,7 +78,7 @@ void PAKInterface_LoadNoteList(s32 player)
 #endif
         if (note_status == 0) {
             if (status == 1) {
-                if (Pak_ContainsInvalidNameByte(name, 16) == 1) {
+                if (Note_ContainsInvalidNameByte(name, 16) == 1) {
 #if defined(VERSION_EU)
                     XPlus_CopyString(name, ((D_800E27B4)[settings->language]));
 #elif defined(VERSION_EU_X)
@@ -138,7 +138,7 @@ D_800DDEC0,
     if (failed == 0) {
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
         item = (Label *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
-        if (Pak_GetFreePages(player, &size) == 0) {
+        if (Note_GetFreePages(player, &size) == 0) {
             XStdio_FormatBuffer(D_800E54A4->players[player].freeText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
@@ -155,7 +155,7 @@ D_800DDEC0,
 #else
 g_noteInfoIntFormat,
 #endif
- Pak_BytesToPakPages(size));
+ Note_BytesToPakPages(size));
             item->text = D_800E54A4->players[player].usedText;
         } else {
             failed = 1;

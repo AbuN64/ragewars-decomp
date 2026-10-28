@@ -47,7 +47,7 @@ Gfx_GetNormalizedCounter
 void N64Eng_RenderNoop(void) {
 }
 
-void N64Eng_ResetRenderState(void) { Gfx_ResetRenderState(); }
+void N64Eng_ResetRenderState(void) { Rect_ResetRenderState(); }
 
 /** Copy the global two-word record into the two output pointers. */
 void N64Eng_GetScreenSize(int *arg0, int *arg1) {

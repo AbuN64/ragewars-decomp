@@ -7,9 +7,9 @@
 #include "TYPES.H"
 
 #include "RENDER_4/8028FD2C_6.H"
-extern CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
+extern CVector3 Track_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern f32 GraphU64_GetVerticalAngle(CVector3 *direction);
+extern f32 Graphu64_GetVerticalAngle(CVector3 *direction);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *direction);
 
 /* First point of the current track's camera path (pack section 0 of section 0 of the resource), or the origin with no track. */
@@ -24,7 +24,7 @@ static inline CVector3 TrackStartEye(void) {
         return origin;
     }
     path = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), 0), 0);
-    point = Menu_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
+    point = Track_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
     return point;
 }
 
@@ -40,7 +40,7 @@ static inline CVector3 TrackStartTarget(void) {
         return fallback;
     }
     path = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), 0), 1);
-    point = Menu_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
+    point = Track_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
     return point;
 }
 
@@ -56,7 +56,7 @@ CVector3 Menu_GetTrackStartAngles(void) {
         eye = TrackStartEye();
         target = TrackStartTarget();
         GraphU64_SubtractVectors(&direction, &target, &eye);
-        angles.x = -GraphU64_GetVerticalAngle(&direction);
+        angles.x = -Graphu64_GetVerticalAngle(&direction);
         angles.y = GraphU64_GetHorizontalAngle(&direction);
         angles.z = 0.0f;
         return angles;
@@ -72,7 +72,7 @@ extern int D_800DE7E8;
 
 extern unsigned char *D_80145060;
 
-extern void Menu_RequestTrackByKey(int);
+extern void Track_RequestTrackByKey(int);
 
 static inline int test_bit(unsigned char *bits, int index) {
     int offset = index >> 3;
@@ -141,7 +141,7 @@ void Menu_TriggerTrackEvent(int event) {
             if (test_bit(bits + 0x638, index)) return;
             set_bit(bits + 0x638, index);
         }
-        Menu_RequestTrackByKey(event);
+        Track_RequestTrackByKey(event);
     }
 }
 
@@ -156,7 +156,7 @@ CVector3 Menu_GetTrackStartEye(void) {
         return fallback;
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), 0), 0);
-    splinePoint = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
+    splinePoint = Track_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
     return splinePoint;
 }
 
@@ -171,7 +171,7 @@ CVector3 Menu_GetTrackStartTarget(void) {
         return fallback;
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), 0), 1);
-    splinePoint = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
+    splinePoint = Track_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
     return splinePoint;
 }
 
@@ -208,7 +208,7 @@ void *Menu_GetTrackCues(void) {
 }
 
 /** Advance a byte pointer by eight bytes. */
-void *func_80403B04_de(void *value) {
+void *CTrackResource_GetRecordPayload(void *value) {
     ObjRecAt8V2 *record = value;
     return &record->unk8;
 }

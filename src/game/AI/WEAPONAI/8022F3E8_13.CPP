@@ -54,7 +54,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void Weapon_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weaponai_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
 

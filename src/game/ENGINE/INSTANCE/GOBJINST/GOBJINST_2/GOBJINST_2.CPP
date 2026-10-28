@@ -43,7 +43,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
     if (resource1 != 0) {
         entry = *resource1;
         ((LevelActor *)actorStorage)->animationKey = SetN64_GetDirectoryEntry(entry, key, 1);
-        found = func_802540F4_de(0, &animationMetadata, ((LevelActor *)actorStorage)->animationKey, &s_animModelsIndexText, 1);
+        found = Cache_RequestWordCountedResource(0, &animationMetadata, ((LevelActor *)actorStorage)->animationKey, &s_animModelsIndexText, 1);
         if (found != 0) {
             ((LevelActor *)actorStorage)->stateE7 = (u8)*animationMetadata;
             ((LevelActor *)actorStorage)->resourceAlignment = ((*animationMetadata * 4) + 0xF) & ~7;
@@ -58,7 +58,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
             node = *resource2;
             temp = SetN64_GetPackSection(node, 0);
             ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, (char *)actorStorage + 0x170);
-            GraphU64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)temp, (char *)actorStorage + 0xE8);
+            Graphu64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)temp, (char *)actorStorage + 0xE8);
             func_80262480_de((char *)actorStorage + 0x104);
             func_80262480_de((char *)actorStorage + 0x118);
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;
@@ -86,7 +86,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
 
 /* GOBJINST_3.CPP */
 /* Update or blend object rotation when the movement state permits it. */
-CQuatern InstHdr_BuildActorGroundRotation(void *);
+CQuatern Insthdr_BuildActorGroundRotation(void *);
 
  /* extern */
 s32 InstHdr_UsesGroundRotation(void *);
@@ -140,7 +140,7 @@ void func_80246E44_de(Actor36 *actor) {
     if (resource != 0) {
         box = SetN64_GetPackSection(*resource, 0);
         actor->update(actor, actor->state);
-        GraphU64_TransformBoundingBox(actor->matrix, box, &actor->box);
+        Graphu64_TransformBoundingBox(actor->matrix, box, &actor->box);
         Cache_UnlockResource(0, (void *)resource);
     }
 }
@@ -157,14 +157,14 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     void *rotationDestination;
     actorFlags = actor->unk100;
     flags = actorFlags & 0x300000;
-    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->unk14 != NULL)) && (vec = InstHdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
+    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->unk14 != NULL)) && (vec = Insthdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
         if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
             vec.w = D_800C3924_de;
         }
         if (flags) {
             if ((!(actor->unk100 & 0x1000) && (rotationDestination = actor->rotation, (rotationState != 0))) || (rotationDestination = actor->rotation, (resetRotationFlag != 0))) {
-                GraphU64_ApproachQuaternion(rotationDestination, &vec);
+                Graphu64_ApproachQuaternion(rotationDestination, &vec);
             }
         } else {
             if ((rotationState != 0) && !(actor->unk100 & 0x1000)) {

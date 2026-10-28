@@ -7,7 +7,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "MENU/PAK/8043F69C_11.H"
 
-/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Pak_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
+/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
 
 
 
@@ -31,20 +31,20 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 
 
-/* Forwards its four arguments to Pak_DrawStyledMenuText, adding the word the object's pointer at offset
-   0x14 addresses and a zero as the fifth and sixth. Pak_DrawMenuItemLabel and Pak_DrawLocalizedMenuItemText are the
+/* Forwards its four arguments to Menu_DrawStyledMenuText, adding the word the object's pointer at offset
+   0x14 addresses and a zero as the fifth and sixth. Menu_DrawMenuItemLabel and Menu_DrawLocalizedMenuItemText are the
    same function. */
 
 
 
 
-/* Forwards its four arguments to Pak_DrawStyledMenuText with, as the fifth, a one-character string made
+/* Forwards its four arguments to Menu_DrawStyledMenuText with, as the fifth, a one-character string made
    of the byte at offset 0x17 of the object, and a zero as the sixth. */
 
 
 
 
-/* Forwards its four arguments to Pak_DrawStyledMenuText with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from Pak_DrawLocalizedMenuItemText with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
+/* Forwards its four arguments to Menu_DrawStyledMenuText with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from Menu_DrawLocalizedMenuItemText with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
 
 
 
@@ -55,7 +55,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 extern PreviewWidget *Scene_FindActorDefinition(Shared_World *,int,int);
 
-void *Pak_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
+void *Menu_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
     struct Dialog *list = params->list;
     s32 a;
     s32 b;
@@ -85,7 +85,7 @@ void *Pak_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct Params
         }
         first = *block;
         if (first != 0) {
-            Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
+            Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
             func_80255CB8_de(owner, first);
             if (++owner->unk14 >= 4) {
                 owner->unk14 = 0;
@@ -97,7 +97,7 @@ void *Pak_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct Params
 }
 
 extern u8 *func_8043F290(LayeredText *item);
-extern void Pak_DrawStyledMenuText(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
+extern void Menu_DrawStyledMenuText(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
 int Pak_CountLineChars(LayeredText *item) {
     u8 *p;
     int len;
@@ -121,39 +121,39 @@ p = *item->text;
     return len;
 }
 
-void Pak_DrawMenuItemLabel(struct Field *object, s32 second, s32 third, s32 fourth) {
+void Menu_DrawMenuItemLabel(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-Pak_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
+Menu_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
-Pak_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
+Menu_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
 #endif
 
 }
 
-void Pak_DrawLocalizedMenuItemText(struct Field *object, s32 second, s32 third, s32 fourth) {
+void Menu_DrawLocalizedMenuItemText(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-Pak_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
+Menu_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
-Pak_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
+Menu_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
 #endif
 
 }
 
-void Pak_DrawMenuCharacter(struct ObjectPakDrawMenuCharacter *object, s32 second, s32 third, s32 fourth) {
+void Menu_DrawMenuCharacter(struct ObjectPakDrawMenuCharacter *object, s32 second, s32 third, s32 fourth) {
     u8 text[2];
 
     text[0] = object->character;
     text[1] = 0;
-    Pak_DrawStyledMenuText(object, second, third, fourth, text, 0);
+    Menu_DrawStyledMenuText(object, second, third, fourth, text, 0);
 }
 
-void Pak_DrawDynamicMenuText(LayeredText *object, s32 second, s32 third, s32 fourth) {
+void Menu_DrawDynamicMenuText(LayeredText *object, s32 second, s32 third, s32 fourth) {
 #if defined(VERSION_DE)
-    Pak_DrawStyledMenuText(object, second, third, fourth, func_8043F290(object), 1);
+    Menu_DrawStyledMenuText(object, second, third, fourth, func_8043F290(object), 1);
 #else
-    Pak_DrawStyledMenuText(object, second, third, fourth,
+    Menu_DrawStyledMenuText(object, second, third, fourth,
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 func_8043F290
 #else

@@ -41,7 +41,7 @@ extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
-extern s32 Frontend_FindKeyIndex(s32);
+extern s32 Key_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags D_800E5A06[][19];
@@ -52,7 +52,7 @@ extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_ActivateControllerState(void);
 
 /* Construct the four-player results/loadout menu and animate its panels into view. */
-s32 Frontend_CreateFourPlayerResults(void *window) {
+s32 Player_CreateFourPlayerResults(void *window) {
 #if defined(VERSION_DE)
     enum { slotResource = 0xC6, leftResource = 0xCC, rightResource = 0xF4,
            titleResource = 0xC9, messageResource = 0xC7 };
@@ -94,7 +94,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
         widget->alpha = 0x6E;
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
-            row = Frontend_FindKeyIndex(config->character);
+            row = Key_FindKeyIndex(config->character);
             scale.x = D_800E3A58[row].scale[player];
             scale.y = D_800E3A58[row].scale[player];
             scale.z = D_800E3A58[row].scale[player];
@@ -138,7 +138,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     for (player = 0; player < 4; player++) {
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
-            Frontend_ActivateEquipmentPanel(player);
+            Equip_ActivateEquipmentPanel(player);
         }
     }
     D_800E59E0->next = -1;
@@ -160,7 +160,7 @@ extern f32 D_800E1FD4;
 extern f32 D_800DDFA8;
 extern f32 D_800DDFAC_de;
 /* Initialize four rotating result badges and reveal enabled player cards. */
-s32 Frontend_StartFourPlayerResults(void) {
+s32 Player_StartFourPlayerResults(void) {
     CVector3 scale;
     CVector3 position;
     CVector3 rotation;
@@ -213,7 +213,7 @@ s32 Frontend_StartFourPlayerResults(void) {
         config = &g_playerSettings[i];
         if (config->enabled == 1) {
             widget = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E19DE[i * 0x26]);
-            Frontend_SetWidgetFlag40(widget, 0);
+            Widget_SetWidgetFlag40(widget, 0);
             widget->alpha = 0x23;
             screen = D_800E59E0;
             switch (screen->panels[i].mode) {
@@ -236,7 +236,7 @@ s32 Frontend_StartFourPlayerResults(void) {
 }
 
 /* Advance the four-player results screen one frame: slide the arrows, count the timer down, step the state. */
-s32 Frontend_UpdateFourPlayerResults(void) {
+s32 Player_UpdateFourPlayerResults(void) {
     s32 i;
     s32 player;
     s32 left;
@@ -308,17 +308,17 @@ s32 Frontend_UpdateFourPlayerResults(void) {
 extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
 extern void Frontend_DrawModelPreview(struct ResultsPlayerPanel *);
-extern s32 Frontend_GetModelRecordCount(char *);
+extern s32 Model_GetModelRecordCount(char *);
 #if defined(VERSION_DE)
 extern void func_804397F0_auto(char *);
 #else
 extern void func_804399D0(char *);
 #endif
-extern struct Shape_typemap_6 D_800E41C0[];
+extern struct Shape_typemap_6 g_menuPlayerScissorRects[];
 /* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour D_800D15E0
-   and the colour table D_800D15E4, scissors the display list to each active panel rectangle in D_800E41C0 and draws
+   and the colour table D_800D15E4, scissors the display list to each active panel rectangle in g_menuPlayerScissorRects and draws
    the panel, then clips to the full screen and draws the badge of every panel whose state is 1. Returns zero. */
-s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
+s32 Player_DrawFourPlayerResults(void *window, void *item, s32 event) {
     s32 i;
     if (event == 1 && D_800E59E0->state == 3) {
         D_800D15E0 = 0;
@@ -328,13 +328,13 @@ s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
         D_800D15E4[3] = 255.0f;
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
-                gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
+                gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].field_0, g_menuPlayerScissorRects[i].field_4, g_menuPlayerScissorRects[i].field_8, g_menuPlayerScissorRects[i].field_C);
                 Frontend_DrawModelPreview(&D_800E59E0->panels[i]);
             }
         }
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         for (i = 0; i < 4; i++) {
-            if (D_800E59E0->panels[i].state == 1 && Frontend_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
+            if (D_800E59E0->panels[i].state == 1 && Model_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
                 D_800D15E0 = 1;
                 D_800D15E4[3] = 150.0f;
 #if defined(VERSION_DE)

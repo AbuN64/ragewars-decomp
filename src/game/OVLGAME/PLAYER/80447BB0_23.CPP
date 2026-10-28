@@ -75,7 +75,7 @@ extern u8 D_0021A36C_eu_x[];
 extern u8 D_0022F710_eu_x[];
 #define ACTORPART_PART1_T28C D_0022F710_eu_x
 #endif
-extern void func_8024B3A8_de(void *, void *, void *, s32);
+extern void Gobjinst_InitializePlacedActor(void *, void *, void *, s32);
 extern void Nav_RequestActorState(void *, void *, s32);
 extern void Weapon_ApplyWeaponSwitch(void *, void *);
 extern void Player_UpdatePlayerCamera(void *, void *);
@@ -98,14 +98,14 @@ typedef struct ActorInitRecord {
     u8 pad5D0[0xC]; void *auxiliary;
     u8 pad5E0[0x4E]; s16 selection;
 } ActorInitRecord;
-void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
+void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
     char *actor = (char *)player;
     ActorInitRecord *record = (ActorInitRecord *)player;
     u32 flags;
     u32 t1, t2, t3;
     InitView *view;
     record->part[0].owner = actor;
-    func_8024B3A8_de(actor, rec, (void *)mode, 0);
+    Gobjinst_InitializePlacedActor(actor, rec, (void *)mode, 0);
     record->part[0].owner = actor;
     t1 = record->part[0].flags | 0x100000;
     t2 = t1 | 0x10000;
@@ -123,7 +123,7 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
         record->part[0].action = ACTORPART_ACTION;
     }
     record->part[1].owner = actor;
-    func_8024B3A8_de((actor + 0x2E8), rec, (void *)mode, 0);
+    Gobjinst_InitializePlacedActor((actor + 0x2E8), rec, (void *)mode, 0);
     record->part[1].table28C = ACTORPART_PART1_T28C;
     record->part[1].marker = -1;
     record->part[1].flags |= 0x200000;
@@ -155,13 +155,13 @@ extern void *D_800E4680;
 extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];
 struct RespawnPlayer;
 extern s32 Control_IsSnapshotActive(void);
-extern void *Items_RecycleModel(void *);
+extern void *Pools_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
 extern u32 Player_GetLevelProgress(void *, s32);
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
-extern void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *);
-extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
+extern void Player_ResetRespawnedPlayer(struct RespawnPlayer *);
+extern void Menu_OpenDialog(void *, void *, void *, s32, s32);
 /* Resets a player/actor record for a new run: marks it active, stores the character, picks up the HUD
  * object, clears the per-slot counters and weapon tables, selects the start mode from the multiplayer setting
  * and zeroes the per-player entries of the two global tables. */
@@ -177,8 +177,8 @@ typedef struct PlayerRoundReset {
     u8 counters[2][6];
 } PlayerRoundReset;
 
-extern u8 D_801462D5; /* MIXED Ovlgame_ResetPlayerForRound */
-void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
+extern u8 D_801462D5; /* MIXED Player_ResetPlayerForRound */
+void Player_ResetPlayerForRound(void *actor, s32 character) {
     s32 i;
     unsigned long counterAddress;
     s32 openFlag = 0;
@@ -187,7 +187,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
     if (FIELD(s32, actor, 0x1450) == 0) {
-        FIELD(void *, actor, 0x5DC) = Items_RecycleModel(&D_80145088);
+        FIELD(void *, actor, 0x5DC) = Pools_RecycleModel(&D_80145088);
         if (FIELD(s32, &D_80145088, 0x18C4) != 0) {
             FIELD(s32, actor, 0x1450) = 1;
         }
@@ -247,7 +247,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x63C) = 1;
     FIELD(s32, actor, 0x640) = 0;
     FIELD(s32, actor, 0x868) = 1;
-    Ovlgame_ResetRespawnedPlayer((struct RespawnPlayer *)actor);
+    Player_ResetRespawnedPlayer((struct RespawnPlayer *)actor);
     globals = (char *)&D_801462C8;
     if (FIELD(u8, globals, 0x1D) != 0) {
         FIELD(s32, actor, 0x13E8) = 0;
@@ -265,14 +265,14 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
         } else {
             table = D_0044FF80;
         }
-        Pak_OpenDialog((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
+        Menu_OpenDialog((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
     }
     D_800FEAE0[FIELD(s32, actor, 0x5D4)] = 0;
     D_800FF140_de[FIELD(s32, actor, 0x5D4)] = 0;
 
 }
 #else
-INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
+INCLUDE_ASM("ovl_80400000", Player_ResetPlayerForRound);
 #endif
 
 #ifndef FIELD
@@ -281,7 +281,7 @@ INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
 extern char D_800C9278_de[], D_800C92E8_de[], D_800C9358[], D_auto_800CE480[], D_800C93C8_de[];
 extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[], D_800C9458[], D_800C9494_de[];
 extern u32 D_8013B2BC;
-extern void Player_LoadActorModel(void *actor);
+extern void Playerai_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
 extern void OnScreen_InitMover(void *, s32, s32);
 extern void Link_DispatchObjectLinks(void *, s32, void *);
@@ -289,13 +289,13 @@ extern void Link_DispatchObjectLinks(void *, s32, void *);
  * the record at 0x878 to its defaults, lays out the nine on-screen widgets at 0xE2C..0x10C0 (position, then
  * their string tables), the two score fields and the 0x10FC panel, and copies the parent's four-word block. */
 typedef struct { s32 a, b, c, d; } HudQuad;
-void Ovlgame_InitActorHudState(void *actor) {
+void Player_InitActorHudState(void *actor) {
     char *session = (char *)&D_801462C8;
     char *hud;
     char *widget;
     s32 enabled;
     if (FIELD(u8, session, 0x1D) != 0) {
-        Player_LoadActorModel(actor);
+        Playerai_LoadActorModel(actor);
         func_8022BB80_de(actor);
         if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
             Achieve_ApplyProfileWeaponUnlocks(actor);
@@ -372,11 +372,11 @@ void Ovlgame_InitActorHudState(void *actor) {
     }
     FIELD(s32, actor, 0x1228) = 0;
     FIELD(s32, actor, 0x1224) = 0;
-    func_802458D8_de();
+    Cinema_ClearPlaybackFlag();
     if (FIELD(void *, actor, 0x14) != 0) {
         Link_DispatchObjectLinks(FIELD(void *, actor, 0x14), 1, actor);
     }
-    func_802458C4_de();
+    Cinema_SetPlaybackFlag();
 }
 
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
@@ -449,13 +449,13 @@ extern unsigned int D_800CD730;
 
 extern void func_8022B510_de(struct RespawnPlayer *);
 extern void Control_SetProfileMode(void *, int);
-extern void Player_InitializePlayerHealth(struct RespawnPlayer *);
+extern void Playerai_InitializePlayerHealth(struct RespawnPlayer *);
 extern int SetN64_IsModeThirteen(void);
 
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Nav_ResetPlayerState(void *);
 extern void Barrel_StopActorLoopingSound(LevelActor *, s32 *);
-extern void AnimPool_ReleaseSceneEffect(LevelActor *);
+extern void Animpool_ReleaseSceneEffect(LevelActor *);
 static inline void releaseState(LevelActor *carried, s32 *state) {
     if (state != 0) {
         Barrel_StopActorLoopingSound(carried, state);
@@ -463,7 +463,7 @@ static inline void releaseState(LevelActor *carried, s32 *state) {
     }
 }
 
-void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
+void Player_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     int i;
     LevelActor *carried;
 
@@ -472,7 +472,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->fade = D_800C2338_de;
     Control_SetProfileMode(player->anim, 1);
     if (D_80145088.settings.local != 0) {
-        Player_InitializePlayerHealth(player);
+        Playerai_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
             player->health = D_800FEB10[player->character].value + 0x6400;
@@ -516,7 +516,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
         releaseState(carried, &carried->behaviorFlags);
         carried->flags &= ~0x2000;
         carried->flags &= ~0x100;
-        AnimPool_ReleaseSceneEffect(player->carried);
+        Animpool_ReleaseSceneEffect(player->carried);
         player->carried = 0;
     }
 }

@@ -57,11 +57,11 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
     u64 startTime;
     u8 fadeMode;
 
-    start = func_802BADC0_de();
+    start = Audio_ReadSystemTime();
     previousMode = (u32) start;
     startTime = start;
     D_80146CD8 = D_8011FAC0.ring.current;
-    func_802539EC_de(0, D_800D297C);
+    Cache_SelectResourceSlot(0, D_800D297C);
     TextLoad_ResetTextureCache();
     Geometry_InitializeModelRenderState();
     SetN64_BeginFrameDisplayList(world);
@@ -116,11 +116,11 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
     D_800CD884 = maxListBytes;
     D_80146CD8->dual = 0;
     D_80146CD8->ticks = (s32) D_801428A8;
-    end = func_802BADC0_de();
+    end = Audio_ReadSystemTime();
     duration = ((end - startTime) << 6) / 3;
     elapsed = (f32)duration;
     rwFrameBuildSeconds = elapsed * D_800C5450_de;
-    if (func_80253AD4_de(0) != 0) {
+    if (Cache_FinishResourceSlot(0) != 0) {
         SetN64_SubmitFrameTasks(world, D_80146CD8);
     } else {
         osSendMesg(&D_801428C0, &D_80146CD8->done, 1);
@@ -169,5 +169,5 @@ void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
             }
         }
     }
-    func_802450CC_de();
+    CCinema_UpdateSequence();
 }

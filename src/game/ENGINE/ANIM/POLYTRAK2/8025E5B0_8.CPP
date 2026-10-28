@@ -15,9 +15,9 @@
 extern s32 D_8010AC80;
 
 
-extern void func_8025FD74_de(Curve *arg0);
+extern void Polytrak2_DecodeCubicSegment(Curve *arg0);
 
-extern u32 func_802606C4_de(s32,s32);
+extern u32 Polytrak2_ReadBitsAtAddress(s32,s32);
 
 static inline void seek(Stream *arg0, u32 arg1) {
     u32 sp10[64];
@@ -44,19 +44,19 @@ static inline void seek(Stream *arg0, u32 arg1) {
         var_s1 += var_s2 * temp_s6;
         if(arg1 < temp_v1) {
             var_s1=temp_s1;var_s2=0;var_s4=0;
-            var_s0=func_802606C4_de(var_s1,6);
+            var_s0=Polytrak2_ReadBitsAtAddress(var_s1,6);
         }
         for (;;) {
             if(arg1>=var_s4 && arg1<var_s0) {
                 if(var_s2!=arg0->unk28) {
-                    arg0->unk24=var_s4;arg0->unk28=var_s2;func_8025FD74_de(arg0);
+                    arg0->unk24=var_s4;arg0->unk28=var_s2;Polytrak2_DecodeCubicSegment(arg0);
                 }
                 break;
             }
             var_s1 += temp_s6;
             var_s2++;
             var_s4=var_s0;
-            sp10[var_s2]=func_802606C4_de(var_s1,6);
+            sp10[var_s2]=Polytrak2_ReadBitsAtAddress(var_s1,6);
             var_s0+=sp10[var_s2];
         }
     }
@@ -64,7 +64,7 @@ static inline void seek(Stream *arg0, u32 arg1) {
 
 static inline float evaluate(Poly p,float t) { return p.a + p.b*t + p.c*t*t + p.d*t*t*t; }
 
-void func_8025FFB0_de(Segment8025FFD0 *curve, u32 *stream) {
+void Polytrak2_InitializePackedCurve(Segment8025FFD0 *curve, u32 *stream) {
     u32 bits;
     u32 first;
     u32 second;
@@ -72,33 +72,33 @@ void func_8025FFB0_de(Segment8025FFD0 *curve, u32 *stream) {
     f32 hi;
 
     bits = *stream;
-    curve->unk2C = func_802607B8_de(&bits, 6);
+    curve->unk2C = Polytrak2_ReadBitsAndAdvance(&bits, 6);
     if (D_8010AC78 != 0) {
-        first = func_802607B8_de(&bits, 0x20);
-        second = func_802607B8_de(&bits, 0x20);
+        first = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
+        second = Polytrak2_ReadBitsAndAdvance(&bits, 0x20);
         lo = *(f32 *)&first;
         hi = *(f32 *)&second;
     } else {
-        first = func_802607B8_de(&bits, 6);
-        second = func_802607B8_de(&bits, 6);
-        lo = PolyTrak_UnpackUnitValue((f32)first, 6);
-        hi = PolyTrak_UnpackUnitValue((f32)second, 6);
-        lo = ((f32 (*)(f32, f32, s32))PolyTrak_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
-        hi = ((f32 (*)(f32, f32, s32))PolyTrak_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
+        first = Polytrak2_ReadBitsAndAdvance(&bits, 6);
+        second = Polytrak2_ReadBitsAndAdvance(&bits, 6);
+        lo = Polytrak2_UnpackUnitValue((f32)first, 6);
+        hi = Polytrak2_UnpackUnitValue((f32)second, 6);
+        lo = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
+        hi = ((f32 (*)(f32, f32, s32))Polytrak2_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
     }
     curve->unk4 = lo;
     curve->unk8 = hi - lo;
     do {
-        curve->unk0 = func_802607B8_de(&bits, 6);
+        curve->unk0 = Polytrak2_ReadBitsAndAdvance(&bits, 6);
         curve->unk28 = 0;
         curve->unk24 = 0;
         curve->unkC = bits;
-        func_8025FD74_de(curve);
+        Polytrak2_DecodeCubicSegment(curve);
     } while (0);
     *stream = bits;
 }
 
-float PolyTrak_EvaluateAnimationCurve(Stream *stream, float time) {
+float Polytrak2_EvaluateAnimationCurve(Stream *stream, float time) {
     seek(stream, (u32)time);
     return evaluate(*(Poly *)&stream->coeff[0], time - stream->unk24);
 }
@@ -159,7 +159,7 @@ static inline void writeQuantized(u32 bitAddress, Func802608ECResult range, f32 
     write_bits(quantized, bitAddress, range.value);
 }
 
-void func_8026033C_de(u32 *stream, Func802608ECResult range, f32 value) {
+void Polytrak2_WriteQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range, f32 value) {
     writeQuantized(*stream, range, value);
     *stream += range.value;
 }

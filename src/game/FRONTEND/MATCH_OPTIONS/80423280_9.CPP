@@ -47,14 +47,14 @@ extern void SmpButton_SelectListEntry(void *arg0, s32 arg1);
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through
    SmpButton_GetListSelection and the entry count of its list at 0x34 through N64Eng_GetNumericWidgetValue. With no entries it
-   clears the list through Frontend_ResetJoinRequestEntries; otherwise, when the count differs from what
+   clears the list through Join_ResetJoinRequestEntries; otherwise, when the count differs from what
    func_8041EB50_de shows or force is 1, it clears the list and rebuilds it for the count and
-   selection through Frontend_RandomizeJoinRequestEntries. */
+   selection through Join_RandomizeJoinRequestEntries. */
 
 
 
 
-extern void Frontend_ResetJoinRequestEntries(void);
+extern void Join_ResetJoinRequestEntries(void);
 
 
 /* Releases the object D_800E4EF0 holds through Cache_FreeMemory, clears D_800E4EF0 and returns zero. */
@@ -63,11 +63,11 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled unless Frontend_GetMenuImageState reports
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled unless Frontend_GetMenuImageState reports
    screen D_800E4EF0 busy: 0x36B closes the menu through Frontend_StoreMatchOptionWidgets, sends code -1 to
-   Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
+   Random_SetMenuChoiceResult and calls Menu_ReturnToPreviousScreen; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
    and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
-   it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
+   it with Join_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
 
 
@@ -76,7 +76,7 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 /* Calls MarkMenuEventHandled and, unless Frontend_GetMenuImageState reports one for the object D_800E4EF0 holds, calls
-   Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and Smos_ReturnToPreviousScreen. Returns zero. */
+   Frontend_StoreMatchOptionWidgets, Random_SetMenuChoiceResult with -1 and Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
@@ -112,7 +112,7 @@ void Frontend_LoadMatchOptionWidgets(void) {
     N64Eng_SetNumericWidgetValue(D_800E4EF0->widget28, opts->laps);
     N64Eng_SetNumericWidgetValue(D_800E4EF0->widget2C, opts->trialOther);
     N64Eng_SetNumericWidgetValue(D_800E4EF0->widget30, opts->trialScore);
-    count = Frontend_CountUsedSlots();
+    count = Join_CountUsedSlots();
     cap = D_800E4EF0->countCap;
     if (cap < count) {
         count = cap;
@@ -122,7 +122,7 @@ void Frontend_LoadMatchOptionWidgets(void) {
     }
     N64Eng_SetNumericWidgetValue(D_800E4EF0->widget34, count);
     SmpButton_SelectListEntry(D_800E4EF0->selectWidget, opts->unknown28[0]);
-    SmpButton_SelectListEntry(D_800E4EF0->cursorWidget, Frontend_GetJoinRequestRank());
+    SmpButton_SelectListEntry(D_800E4EF0->cursorWidget, Join_GetJoinRequestRank());
 }
 
 void Frontend_SyncMatchJoinSlots(s32 force) {
@@ -132,12 +132,12 @@ void Frontend_SyncMatchJoinSlots(s32 force) {
     selection = SmpButton_GetListSelection(D_800E4EF0->cursorWidget);
     count = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34);
     if (count <= 0) {
-        Frontend_ResetJoinRequestEntries();
+        Join_ResetJoinRequestEntries();
         return;
     }
-    if (count != Frontend_CountUsedSlots() || force == 1) {
-        Frontend_ResetJoinRequestEntries();
-        Frontend_RandomizeJoinRequestEntries(count, selection);
+    if (count != Join_CountUsedSlots() || force == 1) {
+        Join_ResetJoinRequestEntries();
+        Join_RandomizeJoinRequestEntries(count, selection);
     }
 }
 
@@ -161,7 +161,7 @@ s32 Frontend_ResetMatchOptionOnEvent(s32 unused0, s32 unused1, u32 arg2, s32 arg
     kind = arg2 >> 0x10;
     if ((kind == 3) && (arg3 == 2)) {
         MarkMenuEventHandled();
-        switch (Smos_GetFocusedElementId()) {
+        switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
         case 0x35F:
 #elif defined(VERSION_EU_X)
@@ -227,7 +227,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
     if (Frontend_GetMenuImageState(D_800E4EF0) == 1) {
         return 0;
     }
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x367:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -236,8 +236,8 @@ s32 Frontend_ActivateMatchOptionAction(void) {
     case 0x36F:
 #endif
         Frontend_StoreMatchOptionWidgets();
-        Frontend_SetMenuChoiceResult(-1);
-        Smos_ReturnToPreviousScreen();
+        Random_SetMenuChoiceResult(-1);
+        Menu_ReturnToPreviousScreen();
         break;
 #if defined(VERSION_DE)
     case 0x365:
@@ -249,8 +249,8 @@ s32 Frontend_ActivateMatchOptionAction(void) {
         if (N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34) > 0) {
             Frontend_StoreMatchOptionWidgets();
             Frontend_SyncMatchJoinSlots(0);
-            Frontend_SetMenuChoiceResult(0x17);
-            Smos_ReturnToPreviousScreen();
+            Random_SetMenuChoiceResult(0x17);
+            Menu_ReturnToPreviousScreen();
         }
         break;
 #if defined(VERSION_DE)
@@ -262,9 +262,9 @@ s32 Frontend_ActivateMatchOptionAction(void) {
 #endif
         Frontend_StoreMatchOptionWidgets();
         Frontend_SyncMatchJoinSlots(0);
-        Frontend_SeatJoinRequests();
-        Frontend_SetMenuChoiceResult(0x19);
-        Smos_ReturnToPreviousScreen();
+        Join_SeatJoinRequests();
+        Random_SetMenuChoiceResult(0x19);
+        Menu_ReturnToPreviousScreen();
         Tsmos_DeactivateControllerState();
         break;
     }
@@ -277,8 +277,8 @@ s32 Frontend_ExitMatchOptions(void) {
         return 0;
     }
     Frontend_StoreMatchOptionWidgets();
-    Frontend_SetMenuChoiceResult(-1);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(-1);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 

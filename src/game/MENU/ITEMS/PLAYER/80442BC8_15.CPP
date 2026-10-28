@@ -50,20 +50,20 @@ s32 func_8044345C_de(void) {
 }
 
 /* Calls func_8025E384_de and passes what func_8025CC6C_de returns to func_8025CB0C_de; then, when D_801540F0
-   is set, calls Pak_TryCreateMenu with the three arguments, otherwise func_8026495C_de. Returns one. */
+   is set, calls Menu_TryCreateMenu with the three arguments, otherwise func_8026495C_de. Returns one. */
 extern s32 func_8025CC6C_de();
 struct SoundVoicePool;
 extern void func_8025CB0C_de(struct SoundVoicePool *);
-extern void Pak_TryCreateMenu(void *, void *, void *);
+extern void Menu_TryCreateMenu(void *, void *, void *);
 
-s32 Items_RestoreControlsOrCreateMenu(void *first, void *second, void *third) {
+s32 Player_RestoreControlsOrCreateMenu(void *first, void *second, void *third) {
     func_8025E384_de();
     func_8025CB0C_de(func_8025CC6C_de());
     if (D_801540F0 == 0) {
         Control_RestoreControllerSetup();
         return 1;
     }
-    Pak_TryCreateMenu(first, second, third);
+    Menu_TryCreateMenu(first, second, third);
     return 1;
 }
 
@@ -97,7 +97,7 @@ typedef struct {
 } Owner;
 
 
-s32 Items_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
+s32 Player_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     StatusPlayer *player = owner->player;
     char *text = *item->field->text;
     if (player->partner == player) {
@@ -126,5 +126,5 @@ s32 Items_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_FormatPlayerPartnerStatus);
+INCLUDE_ASM("ovl_80400000", Player_FormatPlayerPartnerStatus);
 #endif

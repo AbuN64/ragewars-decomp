@@ -140,7 +140,7 @@ void Gfx_SetCombineMode(int mode){
 }
 
 /* Selects vertex mode when it differs from D_800DF278: mode 9 loads an identity model matrix
-   through XMath_SetIdentityMatrix and Gfx_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
+   through XMath_SetIdentityMatrix and Image_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
    g_uiPointTransform, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
@@ -164,7 +164,7 @@ void Gfx_SetPrimitiveVertexMode(s32 mode) {
     }
     if (mode == 9) {
         XMath_SetIdentityMatrix(&identity);
-        Gfx_EmitMatrix(&identity);
+        Image_EmitMatrix(&identity);
         point.x = 0.0f;
         point.y = 0.0f;
         point.z = D_800DD3FC;
@@ -195,7 +195,7 @@ void Gfx_SetPrimitiveVertexMode(s32 mode) {
 }
 
 /* Selects render mode 11 or 12 (always 11 while D_80153F60's enable word is clear) when it differs
-   from the cached mode D_800E32CC: flushes through Gfx_ResetRenderState and applies the mode word built
+   from the cached mode D_800E32CC: flushes through Rect_ResetRenderState and applies the mode word built
    from the mode's base bits (0x53 or 0x33, with bit 2 when the first switch is set), then 0x300 or
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
    Gfx_ConfigurePrimitiveRenderFlags. */
@@ -214,12 +214,12 @@ void Gfx_SetRenderMode(s32 mode) {
     }
     D_800E32CC = mode;
     if (mode == 11) {
-        Gfx_ResetRenderState();
+        Rect_ResetRenderState();
         bits = D_80153F60.x ? 0x55 : 0x53;
         bits |= D_80153F60.z ? 0x300 : 0x500;
         Gfx_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
     } else if (mode == 12) {
-        Gfx_ResetRenderState();
+        Rect_ResetRenderState();
         bits = D_80153F60.x ? 0x35 : 0x33;
         bits |= D_80153F60.z ? 0x300 : 0x500;
         Gfx_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));

@@ -11,7 +11,7 @@
 #include "FX_2/80271B18.H"
 
 /* 8023EEF0_13.CPP */
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 /* Is `point` inside the polygon prism, or within `radius` of its edges?
  * Each edge's outward normal (normal x edge) splits off the outside half-space; a point outside an edge
  * passes only when its distance to that edge is at most `radius`. Types 3 and 4 measure the distance
@@ -41,7 +41,7 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
     if (polygon->type == 3 || polygon->type == 4) {
         for (; --remaining != -1; previousVertex = vertex++) {
             GraphU64_SubtractVectors(&edge, vertex, previousVertex);
-            GraphU64_CrossVectors(&outward, &polygon->normal, &edge);
+            Graphu64_CrossVectors(&outward, &polygon->normal, &edge);
             GraphU64_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
@@ -66,7 +66,7 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
     } else {
         for (; --remaining != -1; previousVertex = vertex++) {
             GraphU64_SubtractVectors(&edge, vertex, previousVertex);
-            GraphU64_CrossVectors(&outward, &polygon->normal, &edge);
+            Graphu64_CrossVectors(&outward, &polygon->normal, &edge);
             GraphU64_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
@@ -107,7 +107,7 @@ static inline f32 height(Plane *p,f32 x,f32 z) {
  else {CVector3 v=p->pos; return ((v.z-z)*n.z+(v.x-x)*n.x+v.y*n.y)/n.y;}
 }
 
-f32 func_80240A98_de(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
+f32 CPlane_GetSlopeAngle(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
  f32 y0,y1,dx,dz,dy,h,v,r;
  if(!p)return 0;
  y0=height(p,x0,z0);y1=height(p,x1,z1);
@@ -119,7 +119,7 @@ f32 func_80240A98_de(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
 }
 
 /* 8023EEF0_16.CPP */
-void func_80240C8C_de(void *contactStorage)
+void CPlane_ResetContact(void *contactStorage)
 {
     ObjRecAtCC *arg0_record = contactStorage;
   int new_var;
@@ -136,7 +136,7 @@ void func_80240C8C_de(void *contactStorage)
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 1, 2 and 3 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -146,11 +146,11 @@ static inline void quad_normal(struct Quad *quad) {
 
     GraphU64_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
     GraphU64_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
-    GraphU64_CrossVectors(&quad->normal, &second, &first);
+    Graphu64_CrossVectors(&quad->normal, &second, &first);
     GraphU64_NormalizeVec3(&quad->normal);
 }
 
-void func_80240CAC_de(void *query) {
+void CPlane_BuildTriangleNormal(void *query) {
     QueryE0 *object = query;
     CVector3 firstEdge;
     CVector3 secondEdge;
@@ -161,7 +161,7 @@ void func_80240CAC_de(void *query) {
     GraphU64_SubtractVectors(&firstEdge, middleVertex, &object->vectors[0]);
     GraphU64_SubtractVectors(&secondEdge, &object->vectors[2], middleVertex);
     outputNormal = &object->result;
-    GraphU64_CrossVectors(outputNormal, &secondEdge, &firstEdge);
+    Graphu64_CrossVectors(outputNormal, &secondEdge, &firstEdge);
     GraphU64_NormalizeVec3(outputNormal);
 }
 
@@ -178,7 +178,7 @@ void Plane_BuildBoxFace0(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 7, 6, 5 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -197,7 +197,7 @@ void Plane_BuildBoxFace1(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 3, 2, 6 and 7 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -216,7 +216,7 @@ void Plane_BuildBoxFace2(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 4, 5, 1 and 0 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -235,7 +235,7 @@ void Plane_BuildBoxFace3(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 3, 7 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -254,7 +254,7 @@ void Plane_BuildBoxFace4(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 2, 1, 5 and 6 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
-   GraphU64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -269,7 +269,7 @@ void Plane_BuildBoxFace5(struct Quad *quad, CVector3 *points) {
     quad_normal(quad);
 }
 
-s32 func_80241260_de(void *plane, CVector3 *testPoint) {
+s32 CPlane_IsPointBehind(void *plane, CVector3 *testPoint) {
     Plane *object = plane;
     CVector3 offset;
     s32 outside;

@@ -20,11 +20,11 @@
  * in listener space is compared with the forward axis through GraphU64_ArcCos and func_802B7130_de, given the
  * side's sign, and scaled around the centre by D_800C8FF8. */
 
-extern void GraphU64_TransformDirectionTranspose(void *, CVector3 *, CVector3 *);
+extern void Graphu64_TransformDirectionTranspose(void *, CVector3 *, CVector3 *);
 
 
 
-s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
+s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *listener) {
     CVector3 forward;
     CVector3 offset;
     CVector3 local;
@@ -37,7 +37,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    GraphU64_TransformDirectionTranspose(listener->viewOrient, &offset, &local);
+    Graphu64_TransformDirectionTranspose(listener->viewOrient, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
@@ -56,7 +56,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     return pan * D_800C8FF8 + D_800C8FF8;
 }
 
-/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from GraphU64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
+/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from GraphU64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table g_audioPitchRatioCurve with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
 extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
 extern s16 Menu_GetFloatHighWord(f32);
 
@@ -64,7 +64,7 @@ extern s32 func_8025E584_de(ControllerCode802591C0 *);
 extern s32 func_8025E590_de(ControllerCode802591C0 *);
 
 
-void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32 flags) {
+void Channel_InitializeVoicePitchMotion(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32 flags) {
     s16 x;
     s16 y;
     f32 fx;
@@ -117,10 +117,10 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     index = position;
     if (index != position) {
         next = index + 1;
-        base = D_800CB8EC[index];
-        result = base + (position - index) * (D_800CB8EC[next] - base);
+        base = g_audioPitchRatioCurve[index];
+        result = base + (position - index) * (g_audioPitchRatioCurve[next] - base);
     } else {
-        result = D_800CB8EC[index];
+        result = g_audioPitchRatioCurve[index];
     }
     motion->heading = result;
     angles->heading = Menu_GetFloatHighWord(result);

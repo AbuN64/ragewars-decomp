@@ -65,7 +65,7 @@ struct CallbackState60 {
     void (*callback)(void *, void *);
 };
 
-extern void Weapon_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *arg1);
+extern void Weaponai_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *arg1);
 
 
 struct ObjectWeaponsNextAvailableWeapon;

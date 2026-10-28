@@ -41,8 +41,8 @@ struct TeamInfo;
 struct View;
 struct ObjRecAt80;
 
-struct Menu_func_8043F37C_eu;
-struct Menu_func_8043F37C_eu {
+struct MenuCMenuProfileUpdatePlayerAnimationChoice;
+struct MenuCMenuProfileUpdatePlayerAnimationChoice {
     char pad[0x1C];
     SharedPlayer *player;
     s32 input;
@@ -150,8 +150,8 @@ struct FlaggedRosterView {
 struct FlaggedRosterView;
 typedef struct FlaggedRosterView FlaggedRosterView;
 
-struct Menu_func_8043F37C_eu;
-typedef struct Menu_func_8043F37C_eu Menu_func_8043F37C_eu;
+struct MenuCMenuProfileUpdatePlayerAnimationChoice;
+typedef struct MenuCMenuProfileUpdatePlayerAnimationChoice MenuCMenuProfileUpdatePlayerAnimationChoice;
 
 
 

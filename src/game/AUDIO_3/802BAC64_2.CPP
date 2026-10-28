@@ -38,7 +38,7 @@
 
  /* 1/CONVERT */
 
-s32 func_802B5B94_de(ALFxCode802BAC64 *filter, s32 paramID, void *param)
+s32 Audio_SetEffectParameter(ALFxCode802BAC64 *filter, s32 paramID, void *param)
 {
     ALFxCode802BAC64 *f = filter;
     s32 p = (paramID - 2) % 8;
@@ -86,7 +86,7 @@ s32 func_802B5B94_de(ALFxCode802BAC64 *filter, s32 paramID, void *param)
 
 /* Load a delay section, optionally applying chorus modulation and resampling.
  * ALDelay28 is the existing resampler-bearing view of the delay record. */
-Acmd *func_802B5D70_de(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)
+Acmd *Audio_LoadEffectOutput(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)
 {
     Acmd *ptr = p;
     s32 ratio, count, rbuff = 640;
@@ -115,7 +115,7 @@ Acmd *func_802B5D70_de(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)
 
         ratio = (s32)(fratio * unity);
         aSetBuffer(ptr++, 0, rbuff + (ramalign << 1), buff, incount << 1);
-        aResample(ptr++, d->rs->first, ratio, func_802BBBC0_de((s32)d->rs->state));
+        aResample(ptr++, d->rs->first, ratio, osVirtualToPhysical((s32)d->rs->state));
 
         d->rs->first = 0;
         d->rsdelta += count - incount;
@@ -146,13 +146,13 @@ Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
         before_end = delay_end - curr_ptr;
 
         aSetBuffer(ptr++, 0, 0, buff, before_end << 1);
-        aSaveBuffer(ptr++, func_802BBBC0_de(curr_ptr));
+        aSaveBuffer(ptr++, osVirtualToPhysical(curr_ptr));
         aSetBuffer(ptr++, 0, 0, buff + (before_end << 1), after_end << 1);
-        aSaveBuffer(ptr++, func_802BBBC0_de(r->base));
+        aSaveBuffer(ptr++, osVirtualToPhysical(r->base));
         aSetBuffer(ptr++, 0, 0, 0, count << 1);
     } else {
         aSetBuffer(ptr++, 0, 0, buff, count << 1);
-        aSaveBuffer(ptr++, func_802BBBC0_de(curr_ptr));
+        aSaveBuffer(ptr++, osVirtualToPhysical(curr_ptr));
     }
 
     return ptr;
@@ -184,12 +184,12 @@ Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
         before_end = delay_end - curr_ptr;
 
         aSetBuffer(ptr++, 0, buff, 0, before_end << 1);
-        aLoadBuffer(ptr++, func_802BBBC0_de(curr_ptr));
+        aLoadBuffer(ptr++, osVirtualToPhysical(curr_ptr));
         aSetBuffer(ptr++, 0, buff + (before_end << 1), 0, after_end << 1);
-        aLoadBuffer(ptr++, func_802BBBC0_de(r->base));
+        aLoadBuffer(ptr++, osVirtualToPhysical(r->base));
     } else {
         aSetBuffer(ptr++, 0, buff, 0, count << 1);
-        aLoadBuffer(ptr++, func_802BBBC0_de(curr_ptr));
+        aLoadBuffer(ptr++, osVirtualToPhysical(curr_ptr));
     }
 
     aSetBuffer(ptr++, 0, 0, 0, count << 1);
@@ -207,7 +207,7 @@ void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount
     d[0].w0 = a1 | 0x08000000;
     d[0].w1 = (a1 << 0x10) | ((sampleCount * 2) & 0xFFFF);
     d[1].w0 = 0x0B000020;
-    d[1].w1 = func_802BBBC0_de((s32)&o->coefficients);
+    d[1].w1 = osVirtualToPhysical((s32)&o->coefficients);
     {
         s32 c2 = 0x0E000000;
         s32 b2f = (u8)o->first;
@@ -215,7 +215,7 @@ void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount
         d[2].w0 = (b2f << 0x10) | (h2 | c2);
     }
     ret = d + 3;
-    d[2].w1 = func_802BBBC0_de((s32)o->state);
+    d[2].w1 = osVirtualToPhysical((s32)o->state);
     o->first = 0;
     return ret;
 }

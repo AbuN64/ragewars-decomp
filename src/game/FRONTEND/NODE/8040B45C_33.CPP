@@ -25,7 +25,7 @@ MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 identifier) {
 
 
 
-struct Tree *Frontend_FindWidgetPredecessor(struct Tree *node, s32 id) {
+struct Tree *Node_FindWidgetPredecessor(struct Tree *node, s32 id) {
     s32 childId;
     struct Tree *found = 0;
 
@@ -35,7 +35,7 @@ struct Tree *Frontend_FindWidgetPredecessor(struct Tree *node, s32 id) {
             found = node;
         }
         if (found == 0 && node->child != 0) {
-            found = Frontend_FindWidgetPredecessor(node->child, (u16)childId);
+            found = Node_FindWidgetPredecessor(node->child, (u16)childId);
         }
         node = node->next;
     }
@@ -43,17 +43,17 @@ struct Tree *Frontend_FindWidgetPredecessor(struct Tree *node, s32 id) {
 }
 
 /* Recursively replaces a node reference throughout a linked hierarchy and copies the old node links into its replacement. */
-void Frontend_ReplaceWidgetLinks(NodeFrontendReplaceWidgetLinks *arg0, NodeFrontendReplaceWidgetLinks *arg1, NodeFrontendReplaceWidgetLinks *arg2, NodeFrontendReplaceWidgetLinks *arg3) {
+void Node_ReplaceWidgetLinks(NodeFrontendReplaceWidgetLinks *arg0, NodeFrontendReplaceWidgetLinks *arg1, NodeFrontendReplaceWidgetLinks *arg2, NodeFrontendReplaceWidgetLinks *arg3) {
     NodeFrontendReplaceWidgetLinks *temp_a0;
     NodeFrontendReplaceWidgetLinks *temp_a0_2;
     if (arg0 != NULL) {
         temp_a0 = arg0->unk4;
         if (temp_a0 != NULL) {
-            Frontend_ReplaceWidgetLinks(temp_a0,arg1,arg2,arg3);
+            Node_ReplaceWidgetLinks(temp_a0,arg1,arg2,arg3);
         }
         temp_a0_2 = arg0->unk8;
         if (temp_a0_2 != NULL) {
-            Frontend_ReplaceWidgetLinks(temp_a0_2, arg0, arg2, arg3);
+            Node_ReplaceWidgetLinks(temp_a0_2, arg0, arg2, arg3);
         }
         if (arg0->unk0 == arg2) {
             arg0->unk0 = arg3;

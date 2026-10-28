@@ -60,7 +60,7 @@ returns = 'C(?:Vector3|Quatern|Matrix\w*)|Triple|Func\w+Result|MenuElementHandle
 [[rule]]
 id = "narrow-alias-of-word-array"
 kind = "word-alias"
-why = "A halfword extern whose address lies inside a data array defined as 32-bit words: the original reads the low half of a big-endian word at +2, the native word holds it at +0 (Frontend_AnimateResultsOptionsScreen read D_800E0646_de as 0 and built a null menu widget; first seen in monkey-wl1-start-pak-prompt). Read the word and cast, or define the data as the narrow type."
+why = "A halfword extern whose address lies inside a data array defined as 32-bit words: the original reads the low half of a big-endian word at +2, the native word holds it at +0 (Results_AnimateResultsOptionsScreen read D_800E0646_de as 0 and built a null menu widget; first seen in monkey-wl1-start-pak-prompt). Read the word and cast, or define the data as the narrow type."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C", "include/**/*.H", "include/**/*.h"]
 declare_paths = ["src/game/DATA/**/*.CPP", "src/game/DATA/**/*.c"]
@@ -71,7 +71,7 @@ narrow = '^\s*extern\s+(?:unsigned\s+)?(?:u16|s16|short)\s+(?P<datum>\w+)'
 [[rule]]
 id = "void-defined-value-declared"
 kind = "return-spelling"
-why = "A function defined void whose result another file declares as a value: the original leaves the result in $v0 or $f0 and the reader finds it there; a native host has no such register, so an integer reads garbage and a float read from an empty x87 stack faults (func_80209948_de, Sky_GetDistanceTo and func_8024BEDC_de returned the distance of a sqrt call; first seen in monkey-wl8-arena-retaliation)."
+why = "A function defined void whose result another file declares as a value: the original leaves the result in $v0 or $f0 and the reader finds it there; a native host has no such register, so an integer reads garbage and a float read from an empty x87 stack faults (func_80209948_de, Gsky_GetDistanceTo and Gobjinst_GetRootMeanSquareScale returned the distance of a sqrt call; first seen in monkey-wl8-arena-retaliation)."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C", "include/**/*.H", "include/**/*.h"]
 returns = '(?!)'

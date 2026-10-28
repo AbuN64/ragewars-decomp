@@ -222,10 +222,10 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
         aSetVolume(ptr++, 0x02 | 0x00, e->ltgt, e->lratm, e->lratl);
         aSetVolume(ptr++, 0x00 | 0x00, e->rtgt, e->rratm, e->rratl);
         aSetVolume(ptr++, 0x08, e->dryamt, 0, e->wetamt);
-        aEnvMixer(ptr++, 0x01 | 0x08, func_802BBBC0_de(e->state));
+        aEnvMixer(ptr++, 0x01 | 0x08, osVirtualToPhysical(e->state));
     }
     else
-        aEnvMixer(ptr++, 0x00 | 0x08, func_802BBBC0_de(e->state));
+        aEnvMixer(ptr++, 0x00 | 0x08, osVirtualToPhysical(e->state));
 
     *inp += (outCount << 1);
     e->delta += outCount;

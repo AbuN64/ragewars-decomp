@@ -21,11 +21,11 @@ extern void func_802558B4_de(void *, void *, s32);
 extern void func_802550F0_de(void *, s32);
 extern void func_80256280_de(void *, s32);
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void Virtual_InitializePagerEuroExtended(s32, s32);
+extern void Vhandler_InitializePagerEuroExtended(s32, s32);
 #elif defined(VERSION_EU_X)
-extern void Virtual_InitializePagerEuroExtended(s32, s32);
+extern void Vhandler_InitializePagerEuroExtended(s32, s32);
 #else
-extern void Virtual_InitializePagerEuroExtended(s32, s32);
+extern void Vhandler_InitializePagerEuroExtended(s32, s32);
 #endif
 extern void Cache_InitializeResourceCache(s32, s32);
 
@@ -47,11 +47,11 @@ void AudioMgr_InitHeap(void) {
     func_80256280_de(D_801011B8, 4);
     
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-Virtual_InitializePagerEuroExtended
+Vhandler_InitializePagerEuroExtended
 #elif defined(VERSION_EU_X)
-Virtual_InitializePagerEuroExtended
+Vhandler_InitializePagerEuroExtended
 #else
-Virtual_InitializePagerEuroExtended
+Vhandler_InitializePagerEuroExtended
 #endif
 (0, 0);
     Cache_InitializeResourceCache(0, 5);
@@ -70,7 +70,7 @@ extern u8 D_801076F8[], D_800E5400[0x2800];
 extern u8 rspbootTextStart[0xD0], g_audioMicrocodeText[0x1000], D_800DC830_de[0x800];
 extern u8 D_800D8CE0[];
 extern char D_00256E6C, D_00256C90;
-s32 func_802B72E0_de(u32);
+s32 osAiSetFrequency(u32);
 void alInit(void *, void *);
 void *func_802B0340_de(s32, s32, void *, s32, u32);
 void osSetEventMesg(s32, void *, s32);
@@ -78,12 +78,12 @@ void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
 void osStartThread(void *);
 
 /* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
-void AudioMgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
+void Audiomgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
     u32 i;
     f32 samplesPerFrame;
     D_80107DF0.initialized = 0;
     config->dmaproc = (void *)&D_00256E6C;
-    config->outputRate = func_802B72E0_de(timing->frequency);
+    config->outputRate = osAiSetFrequency(timing->frequency);
     samplesPerFrame = (f32)timing->frameTime * config->outputRate * (1.0f / 60.0f);
     D_80107E98 = (s32)samplesPerFrame;
     if ((f32)D_80107E98 < samplesPerFrame) D_80107E98++;

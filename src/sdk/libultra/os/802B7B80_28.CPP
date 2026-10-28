@@ -10,7 +10,7 @@ extern u8 D_8014D5C0[32];
 extern OSPifRam D_8014D5E0[4];
 extern u8 D_8014D6E0[32];
 extern s32 D_800D8380[4];
-extern s32 func_802B84C0_de(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 extern s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
 extern u8 __osContAddressCrc(u16 address);
 static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam *mdata)
@@ -40,7 +40,7 @@ static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam
     ptr += sizeof(__OSContRamReadFormat);
     ptr[0] = 0xFE;
 }
-s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
+s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel)
 {
     int i;
     s32 ret;
@@ -61,7 +61,7 @@ s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
     if (ret != 0) {
         return ret;
     }
-    ret = func_802B84C0_de(mq, channel, 0x400, temp);
+    ret = __osContRamRead(mq, channel, 0x400, temp);
     if (ret == 2) {
         ret = 4;
     }
@@ -81,7 +81,7 @@ s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel)
     if (ret != 0) {
         return ret;
     }
-    ret = func_802B84C0_de(mq, channel, 0x400, temp);
+    ret = __osContRamRead(mq, channel, 0x400, temp);
     if (ret == 2) {
         ret = 4;
     }

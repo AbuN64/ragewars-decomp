@@ -78,10 +78,10 @@ extern void *D_800DD124[];
 enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOURCE_690 = 690, PAK_SLOT_RESOURCE_691 = 691, PAK_SLOT_RESOURCE_692 = 692, PAK_SLOT_RESOURCE_694 = 694 };
 
 #endif
-extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
+extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 extern void SmpOverlay_ShowSlotNode(s32,s32,MenuWidget *);
 extern MenuWidget *SmpOverlay_GetSlotValue(s32,s32);
-extern s32 Frontend_ListHasFlag100(MenuWidget *);
+extern s32 Widget_ListHasFlag100(MenuWidget *);
 void PAKInterface_BuildProfileSlotList(s32 player) {
  s32 i;
  MenuWidget *label,*value;
@@ -95,7 +95,7 @@ void PAKInterface_BuildProfileSlotList(s32 player) {
   D_800E54A4->players[player].used[i]=2;
   D_800E54A4->players[player].nodes[i]->alpha=255;
   label=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
-  Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],0);
+  Widget_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],0);
   value=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
   if(D_800E54A4->players[player].records[i].player!=-1) {
    value->text=D_800E54A4->players[player].records[i].name;
@@ -104,7 +104,7 @@ void PAKInterface_BuildProfileSlotList(s32 player) {
     Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
     if(Frontend_FindProfileOwner(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
      D_800E54A4->players[player].used[i]=0;
-     Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
+     Widget_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
      Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
     }
    }
@@ -117,6 +117,6 @@ void PAKInterface_BuildProfileSlotList(s32 player) {
 #endif
  }
  label=SmpOverlay_GetSlotValue(D_800E54A4->root,player);
- while(Frontend_ListHasFlag100(label))label=label->next;
+ while(Widget_ListHasFlag100(label))label=label->next;
  SmpOverlay_ShowSlotNode(D_800E54A4->root,player,label);
 }

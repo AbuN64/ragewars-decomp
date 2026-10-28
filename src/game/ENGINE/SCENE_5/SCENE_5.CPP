@@ -25,9 +25,9 @@
 
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
-extern s32 func_80254284_de(s32 arg0, s32 *arg1, s32 arg2, void *arg3);
+extern s32 Cache_RequestWordCountedResourcePinned(s32 arg0, s32 *arg1, s32 arg2, void *arg3);
 
-extern void **func_80254408_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
+extern void **Cache_RequestPackSection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -43,7 +43,7 @@ s32 SetN64_CollectVisibleEffectNodes(s32, s32);
 
 /* Advances the fractional animation clock and updates every active object with the resulting tick flag. */
 
-extern void StaticInstance_DispatchAttachmentEvents(s32, s32);
+extern void Statinst_DispatchAttachmentEvents(s32, s32);
 
 /* Releases the resource of each of the owner's listed entries through Cache_UnlockResource, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
 
@@ -58,7 +58,7 @@ void *Scene_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
     return r2->data + (c * field);
 }
 
-s32 Scene_FindNearestRouteFrame(void *arg0, s32 arg1, void *arg2) {
+s32 Scene_FindNearestRouteFrame(void *arg0, s32 routeIndex, void *queryPosition) {
     CVector3 position;
     AnimationPoseFrameSet *list;
     Shared_World *world = arg0;
@@ -72,12 +72,12 @@ s32 Scene_FindNearestRouteFrame(void *arg0, s32 arg1, void *arg2) {
     bestIndex = D_800C5300_de;
     bestDist = 0.0f;
     index = 0;
-    list = SetN64_GetPackSection(SetN64_GetPackSection(world->routeCount, arg1), 1);
+    list = SetN64_GetPackSection(SetN64_GetPackSection(world->routeCount, routeIndex), 1);
     count = list->count;
     item = list->frames;
     if (count > 0) {
         do {
-            GraphU64_SubtractVectors(&position, arg2, item);
+            GraphU64_SubtractVectors(&position, queryPosition, item);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -100,8 +100,8 @@ void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 arg
     s32 count;
 
     tempv0 = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
-    temps2 = func_80254284_de(0, &specialTable, tempv0, g_levelIndexText);
-    node = func_80254408_de(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
+    temps2 = Cache_RequestWordCountedResourcePinned(0, &specialTable, tempv0, g_levelIndexText);
+    node = Cache_RequestPackSection(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
     if (arg3 < count) {
         count = arg3;
@@ -169,8 +169,8 @@ void Scene_ReleaseCachedGeometry(void *arg0) {
     }
 }
 
-void Scene_CollectVisibleEffects(s32 arg0) {
-    SetN64_CollectVisibleEffectNodes(arg0 + 0x11778, arg0);
+void Scene_CollectVisibleEffects(s32 results) {
+    SetN64_CollectVisibleEffectNodes(results + 0x11778, results);
 }
 
 /** Clear the object field at offset 0x10BC. */
@@ -197,32 +197,32 @@ void Scene_ClearSceneObjectCounts(void *object) {
 void Scene_UpdateStaticEventInstances(StateSceneUpdateStaticEventInstances *arg0)
 {
   f32 temp_f1;
-  s32 temp_a0;
+  s32 object;
   int first_index;
-  s32 var_s0;
-  s32 var_s3;
+  s32 instanceIndex;
+  s32 dispatchAll;
 
   temp_f1 = arg0->unk1B31C + 1.0f;
   arg0->unk1B31C = temp_f1;
-  var_s3 = 1;
+  dispatchAll = 1;
   if (!(temp_f1 > 0.0f))
   {
-    var_s3 = 0;
+    dispatchAll = 0;
   }
-  if (var_s3 != 0)
+  if (dispatchAll != 0)
   {
     arg0->unk1B31C = (f32) (temp_f1 - ((f32) (((s32) temp_f1) + 1)));
   }
-  var_s0 = (first_index = 0);
+  instanceIndex = (first_index = 0);
   if (arg0->unkC4C > first_index)
   {
     do
     {
-      temp_a0 = arg0->values[var_s0];
-      StaticInstance_DispatchAttachmentEvents(temp_a0, var_s3);
-      var_s0 += 1;
+      object = arg0->values[instanceIndex];
+      Statinst_DispatchAttachmentEvents(object, dispatchAll);
+      instanceIndex += 1;
     }
-    while (var_s0 < arg0->unkC4C);
+    while (instanceIndex < arg0->unkC4C);
   }
 }
 
@@ -242,7 +242,7 @@ s32 Scene_GetLevelActorIndex(void *container, void *arg1) {
     return -1;
 }
 
-void Scene_FindSelectedTriggerRange(char *world, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
+void Scene_FindSelectedTriggerRange(char *world, s32 arg1, s32 group, s32 *arg3, s32 *arg4) {
     s32 sp18;
     s32 sp1C;
     s32 field0;
@@ -256,7 +256,7 @@ void Scene_FindSelectedTriggerRange(char *world, s32 arg1, s32 arg2, s32 *arg3, 
         field0 = (s32)((Shared_World *)world)->recordIndex;
         field1 = ((Shared_World *)world)->recordCount;
     }
-    if (func_80265550_de(field0, field1, arg2, &sp18, &sp1C) != 0) {
+    if (Defs_FindSortedGroupRange(field0, field1, group, &sp18, &sp1C) != 0) {
         offset = sp18 * 0x14;
         if (arg1 != 0) {
             *arg3 = (s32)((Shared_World *)world)->alternateRecordArray + offset;
@@ -290,29 +290,29 @@ void Scene_UnlockActiveSectionResources(OwnerSceneUnlockActiveSectionResources *
 }
 
 void Scene_ResetTransitionViewport(void) {
-    s32 var_a0;
-    s32 var_a1;
+    s32 viewportWidth;
+    s32 viewportHeight;
 
-    func_80245A20_de(0);
+    Cinema_SetLoopMode(0);
     Cinema_SetResponse(D_800C5338_de);
-    var_a0 = 0x1E0;
+    viewportWidth = 0x1E0;
     if (D_800E28D8 == 0) {
-        var_a0 = 0x17C;
-        var_a1 = 0xDC;
+        viewportWidth = 0x17C;
+        viewportHeight = 0xDC;
     } else {
-        var_a1 = 0x168;
+        viewportHeight = 0x168;
     }
-    func_80245A5C_de(var_a0, var_a1, 0, 0);
+    Cinema_SetViewport(viewportWidth, viewportHeight, 0, 0);
 }
 
-void Scene_CacheBlLevelData(void *world, s32 arg1) {
-    s32 sp28;
+void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
+    s32 sectionSize;
     void **resource;
     s32 key;
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != arg1) {
+    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != sectionIndex) {
         Scene_ReleaseCachedLevelData(world);
         if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
@@ -323,12 +323,12 @@ void Scene_CacheBlLevelData(void *world, s32 arg1) {
                                      D_800C5290_de, one);
             if (resource != 0) {
                 key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
-                                    arg1, &sp28);
+                                    sectionIndex, &sectionSize);
                 Cache_ReleaseResource(0, resource);
                 if ((((struct MeasuredRecAt14V6 *)(world))->value =
-                     Cache_RequestResource(0, key, key, sp28, size, 0,
+                     Cache_RequestResource(0, key, key, sectionSize, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
-                    ((struct MeasuredCode8028B64C *)(world))->value = arg1;
+                    ((struct MeasuredCode8028B64C *)(world))->value = sectionIndex;
                 }
             }
         }
@@ -355,7 +355,7 @@ void Scene_ReleaseCachedLevelData(Shared_World *world) {
     }
 }
 
-void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3) {
+void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 levelIndex) {
     void *base;
     void *table;
 
@@ -364,7 +364,7 @@ void Scene_AccessLevelStateSection(struct WorldSceneDispatchEnabledEntityTrigger
     } else {
         base = arg0->secondaryLevels;
     }
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), arg3), index);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(base, 0), levelIndex), index);
     SetN64_GetPackSection(table, 0);
     SetN64_GetPackSectionSize((s32) table, 1);
     SetN64_GetPackSection(table, 1);
@@ -530,14 +530,14 @@ s32 Scene_CompareDistanceAscending(WorldSortEntry *arg0, WorldSortEntry *arg1) {
 s32 Scene_CompareDistanceDescending(WorldSortEntry *arg0, WorldSortEntry *arg1)
 {
   f32 new_var;
-  s32 var_v0;
+  s32 sortOrder;
   new_var = arg0->distance;
-  var_v0 = 1;
+  sortOrder = 1;
   if ((arg1->distance) < new_var)
   {
-    var_v0 = -1;
+    sortOrder = -1;
   }
-  return var_v0;
+  return sortOrder;
 }
 
 void Scene_CollectTypeFourteenActors(Shared_World *world) {

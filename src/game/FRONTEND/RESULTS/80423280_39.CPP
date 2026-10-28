@@ -46,10 +46,10 @@ extern struct ResultsHeadingRecord D_80102B00[];
 extern struct ResultsHeadingCharacter D_800DFA6C[];
 
 extern void XPlus_CopyString(char *, char *);
-extern s32 Frontend_FindKeyIndex(s32);
+extern s32 Key_FindKeyIndex(s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 
-void Frontend_UpdateResultsHeading(void) {
+void Results_UpdateResultsHeading(void) {
     Shared_Game *settings;
     struct Label *item;
     s32 time;
@@ -62,8 +62,8 @@ void Frontend_UpdateResultsHeading(void) {
     switch (settings->controllerMode) {
     case 1:
         XPlus_CopyString(D_800E4690->heading, Frontend_GetStringByIndex(NAME_PHRASE));
-        Frontend_ReplaceTextOccurrences(D_800E4690->heading, D_800DD9BC,
-                      RES_NAME(Frontend_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
+        Random_ReplaceTextOccurrences(D_800E4690->heading, D_800DD9BC,
+                      RES_NAME(Key_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
         XPlus_CopyString(D_800E4690->time, Frontend_GetStringByIndex(TIME_PHRASE));
@@ -77,7 +77,7 @@ void Frontend_UpdateResultsHeading(void) {
             best = ((struct ResultsHeadingStage *) Achieve_CopyPreset(D_800E4690->stage, 3, 0))->time;
             XStdio_FormatBuffer(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
         }
-        Frontend_ReplaceTextOccurrences(D_800E4690->time, RES_TIMEPOST, buffer);
+        Random_ReplaceTextOccurrences(D_800E4690->time, RES_TIMEPOST, buffer);
         XPlus_CopyString(D_800E4690->heading, RES_HEAD3);
         break;
     case 4:

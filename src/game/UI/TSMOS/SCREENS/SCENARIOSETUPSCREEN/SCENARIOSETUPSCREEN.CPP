@@ -76,7 +76,7 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 temp_v1;
-    s32 var_a1;
+    s32 enabled;
     s32 var_v0;
     ListScreenItem *closeLeft;
     ListScreenItem *closeRight;
@@ -142,10 +142,10 @@ block_7:
     case 3:
         if (D_800E4F60->unk460 == 0) {
             Tsmos_ActivateControllerState();
-            var_a1 = 0;
+            enabled = 0;
             var_a0_3 = D_800E4F60->unk458;
             D_800E4F60->unk460 = 1;
-            Frontend_SetWidgetFlag08(var_a0_3, var_a1);
+            Frontend_SetWidgetFlag08(var_a0_3, enabled);
         }
         break;
     case 4:
@@ -181,7 +181,7 @@ block_7:
         ScenarioSetup_SetCatalogueAlpha(temp_s0);
         if (temp_s0 < 0xA) {
             D_800E4F60->unk3DC = 3;
-            Frontend_SetMenuChoiceResult(0xB);
+            Random_SetMenuChoiceResult(0xB);
             return 0;
         }
         break;
@@ -193,10 +193,10 @@ block_7:
             D_800E4F60->unk3DC = 3;
         }
         ScenarioSetup_SetCatalogueAlpha(temp_s0);
-        var_a1 = 1;
+        enabled = 1;
         if (D_800E4F60->selection == 0) {
             var_a0_3 = D_800E4F60->unk448;
-            Frontend_SetWidgetFlag08(var_a0_3, var_a1);
+            Frontend_SetWidgetFlag08(var_a0_3, enabled);
         }
         break;
     default:
@@ -319,7 +319,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
-            Frontend_SetMenuChoiceResult(11);
+            Random_SetMenuChoiceResult(11);
             return 0;
         }
         break;
@@ -365,15 +365,15 @@ typedef struct ArenaCatalogueEntry {
 extern ArenaCatalogueEntry D_800E4F64[];
 
 /* Sets the alpha of every catalogue icon on the screen D_800E4F60: for categories 0 to 3 (tables
-   D_800E5240, D_800E5214, D_800E51F8 and D_800E51E4) it walks the count ScenarioSetup_GetCategoryEntryCount gives for the
+   g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls and g_cupCategoryZeroArenaControls) it walks the count ScenarioSetup_GetCategoryEntryCount gives for the
    category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records D_800E4F64
    whose key matches the entry, sets the alpha of the item its key names (and of the item its second
    word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
    12. */
 
 /* Refreshes the selection on the screen D_800E4F60: for category 0 to 3 at 0x434 it takes the item
-   the selection at 0x438 names in the 4-byte table D_800E5240, D_800E5214, D_800E51F8 or
-   D_800E51E4 from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
+   the selection at 0x438 names in the 4-byte table g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls or
+   g_cupCategoryZeroArenaControls from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
    default label for selection 0, otherwise the resource name Scene_CopyLevelName reads from
    D_8011FE88 for the entry ScenarioSetup_ResolveArenaFromSelection finds in the category's list ScenarioSetup_CategoryToList), points the
    label at 0x3EC to that text and calls func_80245B28_de. */
@@ -432,19 +432,19 @@ void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
     for (category = 0; category < 4; category++) {
         switch (category) {
         case 3:
-            table = D_800E51E4;
+            table = g_cupCategoryZeroArenaControls;
             list = 3;
             break;
         case 2:
-            table = D_800E51F8;
+            table = g_cupCategoryOneArenaControls;
             list = 2;
             break;
         case 0:
-            table = D_800E5240;
+            table = g_cupCategoryTwoArenaControls;
             list = 0;
             break;
         case 1:
-            table = D_800E5214;
+            table = g_cupCategoryThreeArenaControls;
             list = 1;
             break;
         default:
@@ -481,16 +481,16 @@ void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     char buffer[0x40];
     switch (D_800E4F60->category) {
     case 3:
-        table = D_800E51E4;
+        table = g_cupCategoryZeroArenaControls;
         break;
     case 2:
-        table = D_800E51F8;
+        table = g_cupCategoryOneArenaControls;
         break;
     case 1:
-        table = D_800E5214;
+        table = g_cupCategoryThreeArenaControls;
         break;
     case 0:
-        table = D_800E5240;
+        table = g_cupCategoryTwoArenaControls;
         break;
     default:
         return;
@@ -498,7 +498,7 @@ void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     D_800E4F60->item = Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
     if (D_800E4F60->selection == 0) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        XPlus_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
+        XPlus_CopyString(D_800E4F60->text, g_matchOptionLabelSlots[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
         XPlus_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
 #endif
@@ -525,8 +525,8 @@ void ScenarioSetup_StartSelectedScenario(void) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
         }
     }
-    Frontend_SetSelectedStage(category, list);
-    Frontend_SetMenuChoiceResult(0x15);
+    Random_SetSelectedStage(category, list);
+    Random_SetMenuChoiceResult(0x15);
     Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetC, 0);
     Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetE, 0);
     Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetD, 0);
@@ -548,7 +548,7 @@ void ScenarioSetup_StartSelectedScenario(void) {
    draws random stage numbers below the cup's size (5, 7, 17 or 11 stages) until one not yet marked
    in the played set at D_80154018 turns up (giving up after 15000 draws), marks it, counts the stage in
    D_80154014, maps it through the cup's stage table to an arena id, finds that id among the 40
-   arena entries at D_800E4F64 and starts the cup with the entry's value through Frontend_SetSelectedStage.
+   arena entries at D_800E4F64 and starts the cup with the entry's value through Random_SetSelectedStage.
    Returns 1 when a stage was started, else 0. */
 
 
@@ -583,16 +583,16 @@ static inline s32 stage_arena(s32 cup, s32 stage) {
     }
     switch (cup) {
     case 0:
-        table = D_800E51E4;
+        table = g_cupCategoryZeroArenaControls;
         break;
     case 1:
-        table = D_800E51F8;
+        table = g_cupCategoryOneArenaControls;
         break;
     case 3:
-        table = D_800E5214;
+        table = g_cupCategoryThreeArenaControls;
         break;
     case 2:
-        table = D_800E5240;
+        table = g_cupCategoryTwoArenaControls;
         break;
     default:
         return 0;
@@ -636,7 +636,7 @@ s32 ScenarioSetup_StartRandomCupStage(void) {
             }
         }
         D_80154010.stages++;
-        Frontend_SetSelectedStage(D_80154010.index, stage_arena(D_80154010.index, stage));
+        Random_SetSelectedStage(D_80154010.index, stage_arena(D_80154010.index, stage));
     }
     return started;
 }
@@ -662,7 +662,7 @@ s32 ScenarioSetup_IsCupComplete(void) {
 
 
 /* Refreshes the name label of screen D_800E4F60: with no entry at 0x438 it uses the default text
-   D_800D34D4_de; otherwise it formats the entry's name from ScenarioSetup_ResolveArenaFromSelection on the list ScenarioSetup_CategoryToList
+   g_matchOptionLabelSlots; otherwise it formats the entry's name from ScenarioSetup_ResolveArenaFromSelection on the list ScenarioSetup_CategoryToList
    returns for 0x434 into a 0x40-byte buffer through D_8011FE88 and takes the text XPlus_UppercaseString
    makes of it. Either text is copied into the screen's label at 0x3F4 through func_802A025C_de, and the
    widget at 0x3EC is pointed at that label. */
@@ -699,9 +699,9 @@ void ScenarioSetup_LoadSetupArenaLabel(void) {
     if (D_800E4F60->selection == 0) {
         XPlus_CopyString(D_800E4F60->text,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-D_800D34D4_de[D_801462C8.language]
+g_matchOptionLabelSlots[D_801462C8.language]
 #else
-D_800D34D4_de[0]
+g_matchOptionLabelSlots[0]
 #endif
 );
     } else {
@@ -766,16 +766,16 @@ s32 ScenarioSetup_ResolveArenaFromSelection(s32 arg0, s32 arg1) {
     }
     switch (arg0) {
     case 0:
-        table = D_800E51E4;
+        table = g_cupCategoryZeroArenaControls;
         break;
     case 1:
-        table = D_800E51F8;
+        table = g_cupCategoryOneArenaControls;
         break;
     case 3:
-        table = D_800E5214;
+        table = g_cupCategoryThreeArenaControls;
         break;
     case 2:
-        table = D_800E5240;
+        table = g_cupCategoryTwoArenaControls;
         break;
     default:
         return 0;
@@ -887,7 +887,7 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     return 0;
 }
 
-extern void Frontend_SetPreviewModel(void *, s32);
+extern void Model_SetPreviewModel(void *, s32);
 #define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)D_800E4F60)
 s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
@@ -928,7 +928,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void
     Frontend_SetWidgetFlag08(SCR4D4->marker, 1);
     SCR4D4->marker->x = SCR4D4->category * 34 + 0x7C;
     Frontend_SetWidgetFlag08(SCR4D4->right, 0);
-    Frontend_SetPreviewModel(SCR4D4->view, SCR4D4->category + 0xEA6);
+    Model_SetPreviewModel(SCR4D4->view, SCR4D4->category + 0xEA6);
     return 0;
 }
 #undef SCR4D4
@@ -1023,7 +1023,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, 
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR78C->selection == 0) {
-        Frontend_SetPreviewModel(SCR78C->view, SCR78C->category + 0xEA6);
+        Model_SetPreviewModel(SCR78C->view, SCR78C->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR78C->marker, 1);
         SCR78C->marker->x = SCR78C->category * 34 + 0x7C;
     }
@@ -1069,7 +1069,7 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR904->selection == 0) {
-        Frontend_SetPreviewModel(SCR904->view, SCR904->category + 0xEA6);
+        Model_SetPreviewModel(SCR904->view, SCR904->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR904->marker, 1);
         SCR904->marker->x = SCR904->category * 34 + 0x7C;
     }
@@ -1134,11 +1134,11 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(s32 *);
 extern void Frontend_AccumulatePlayerStatistics(void);
-extern void Achieve_UpdateMatchCounters(void *, s32);
+extern void Match_UpdateMatchCounters(void *, s32);
 extern void Achieve_MarkLevelPlayed(s32);
 
-extern void Frontend_SetWidgetFlag100(void *, s32);
-extern s32 Frontend_ListHasFlag100(void *);
+extern void Widget_SetWidgetFlag100(void *, s32);
+extern s32 Widget_ListHasFlag100(void *);
 extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 extern char *XPlus_CopyString(char *, char *);
 
@@ -1171,7 +1171,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     game = &D_801462C8;
     switch (game->controllerMode) {
     case 0:
-        Achieve_UpdateMatchCounters(D_800E53C0->data, D_8015402C);
+        Match_UpdateMatchCounters(D_800E53C0->data, D_8015402C);
         Frontend_AwardResultAchievements();
         D_800E53C0->mode = 0;
         break;
@@ -1216,19 +1216,19 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     SmpButton_WrapButtonWidget(0x237 + RESULTS_MENU_SHIFT);
     SmpButton_WrapButtonWidget(0x238 + RESULTS_MENU_SHIFT);
     SmpButton_WrapButtonWidget(0x23C + RESULTS_MENU_SHIFT);
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     i = 0;
     offset = 0;
     do {
         i++;
         if (D_80102B0D[offset] >= 0 && D_800FEB0E[offset] == 0) {
-            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 0);
+            Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 0);
             break;
         }
         offset += 400;
     } while (i < 4);
-    if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+    if (Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, RESULTS_HEADING1);
     if (D_8014DD98.kind == 0) item->text = resultsFirstHeading();
@@ -1252,9 +1252,9 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     return 0;
 }
 
-extern s32 Frontend_FindKeyIndex(s32);
+extern s32 Key_FindKeyIndex(s32);
 extern char *XPlus_CopyString(char *,char *);
-extern char *Achieve_UpdateRankText(s32);
+extern char *Match_UpdateRankText(s32);
 extern s32 XStdio_FormatBuffer(void *,const char *,...);
 extern void Frontend_ShowResultRankBadge(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
@@ -1274,7 +1274,7 @@ void ScenarioSetup_FillResultRows(void) {
         Frontend_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x96;
         pending = widget;
-        pending->value = D_800E3A58[Frontend_FindKeyIndex(record->kind)].portrait;
+        pending->value = D_800E3A58[Key_FindKeyIndex(record->kind)].portrait;
 
         widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[2]);
         Frontend_SetWidgetFlag08(widget, 1);
@@ -1294,7 +1294,7 @@ void ScenarioSetup_FillResultRows(void) {
         widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[6]);
         widget->alpha = 0x73;
         Frontend_SetWidgetFlag08(widget, 1);
-        if (record->out == 0) widget->text = Achieve_UpdateRankText(player);
+        if (record->out == 0) widget->text = Match_UpdateRankText(player);
         else widget->text = resultsRankText(record->rank);
 
         widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);
@@ -1588,7 +1588,7 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
    version-specific preview item of the screen window with alpha 0xAF and the preview image, then sets up the
    view at 0x20 of the screen through Frontend_InitModelPreviewTransform with mode 0, a uniform D_800DDAFC_de scale and the
    offset (0, D_800DDB04, D_800DDB08_de), through Frontend_SetPreviewRotation with a zero vector, through
-   Frontend_SetPreviewRotationSpeed with (0, D_800DDB00, 0), and loads the model through Frontend_SetPreviewModel. */
+   Frontend_SetPreviewRotationSpeed with (0, D_800DDB00, 0), and loads the model through Model_SetPreviewModel. */
 typedef struct PreviewScreen {
     char pad0[0x20];
     char view[0xE0 - 0x20];
@@ -1631,6 +1631,6 @@ void ScenarioSetup_InitResultModelPreview(void) {
         ((void (*)(void *, s32, CVector3, CVector3))Frontend_InitModelPreviewTransform)(PREVIEW_SCREEN->view, 0, scale, offset);
         ((void (*)(void *, CVector3))Frontend_SetPreviewRotation)(PREVIEW_SCREEN->view, angle);
         ((void (*)(void *, CVector3))Frontend_SetPreviewRotationSpeed)(PREVIEW_SCREEN->view, position);
-        Frontend_SetPreviewModel(PREVIEW_SCREEN->view, PREVIEW_SCREEN->model);
+        Model_SetPreviewModel(PREVIEW_SCREEN->view, PREVIEW_SCREEN->model);
     }
 }

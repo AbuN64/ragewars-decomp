@@ -4,7 +4,7 @@
 
 extern s32 D_800CD894_de;
 
-extern s32 PpDecom_UnpackResource(void *, s32);
+extern s32 Ppdecom_UnpackResource(void *, s32);
 extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);
 extern s32 SetN64_GetPackSectionSize(void *, s32);
 extern s32 **Cache_AllocResourceBlock(s32, void *, s32);
@@ -18,7 +18,7 @@ typedef struct {
 } Resource;
 
 /* Recolours the RGBA5551 frames of a resource by the global or per-resource colour mode, then rebuilds it as a three-part block holding the header, one selected entry of list 1 and one of list 2. */
-void TextLoad_PrepareTextureVariation(s32 arg0, Resource *handle) {
+void Textload_PrepareTextureVariation(s32 arg0, Resource *handle) {
     u32 size;
     s32 rem1;
     s32 rem2;
@@ -41,7 +41,7 @@ void TextLoad_PrepareTextureVariation(s32 arg0, Resource *handle) {
     s32 *hdr;
     s32 *entry;
 
-    if (PpDecom_UnpackResource(handle, arg0 >= 0) == 0) {
+    if (Ppdecom_UnpackResource(handle, arg0 >= 0) == 0) {
         return;
     }
     obj = *handle->handle;
@@ -146,7 +146,7 @@ extern Gfx D_800CBD50_de[16], D_800CBDD0[16], D_800CBE50[19], D_800CBEE8[19], D_
 
 /* Non-rev1 copy of func_80295FB4_us_rev1 (the texture state setter): the same gDP texture/TLUT load per header
    format, without rev1's two resource relocation calls before the switch. */
-void func_802950B4_de(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
+void Textload_LoadTextureFrame(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
     s32 *texture;
     s32 *palette;
     void *header;

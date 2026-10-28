@@ -6,7 +6,7 @@
 
 /* Fills player p's column values on the screen D_800E59E0 from what the player owns: unless the
    entry's mode word (0x4D4) is 0, it scans the 4 rows of D_800E5BC4 for column 1, the 3 rows of
-   D_800E5B14 for column 4 and the 8 rows of D_800E5B44 for column 5, and writes the index of each
+   D_800E5B14 for column 4 and the 8 rows of g_loadoutWeaponItems for column 5, and writes the index of each
    row whose item is marked owned at 0x4C of the player's 150-byte record in D_80146398 into the
    entry's next value slot (0x4B8 plus four per slot), starting at slot 0, 4 and 2, or at 0, 2 and
    1 in mode 1. */
@@ -21,9 +21,9 @@ extern struct ScreenFrontendLoadEquipmentSelections *D_800E59E0;
 extern u8 g_playerSettings[];
 extern struct Shape_typemap_165 D_800E5BC4[];
 extern struct Shape_typemap_165 D_800E5B14[];
-extern struct Shape_typemap_165 D_800E5B44[];
+extern struct Shape_typemap_165 g_loadoutWeaponItems[];
 
-void Frontend_LoadEquipmentSelections(s32 player) {
+void Equip_LoadEquipmentSelections(s32 player) {
     struct Shape_typemap_165 *source;
     u8 *record;
     s32 column;
@@ -49,7 +49,7 @@ void Frontend_LoadEquipmentSelections(s32 player) {
                 slot = 2;
                 break;
             case 5:
-                source = D_800E5B44;
+                source = g_loadoutWeaponItems;
                 count = 8;
                 slot = 1;
                 break;
@@ -69,7 +69,7 @@ void Frontend_LoadEquipmentSelections(s32 player) {
                 slot = 4;
                 break;
             case 5:
-                source = D_800E5B44;
+                source = g_loadoutWeaponItems;
                 count = 8;
                 slot = 2;
                 break;
@@ -91,13 +91,13 @@ void Frontend_LoadEquipmentSelections(s32 player) {
 /* Rebuilds the loadout of every active player whose entry on the screen D_800E59E0 is in mode 2:
    clears the 22 owned bytes at 0x4C and level bytes at 0x62 of the player's 150-byte record in
    D_80146398, then for columns 0 and 1 (16-byte table D_800E5BC4, level column + 1), 2 and 3
-   (D_800E5B44, level column + 3) and 4 (D_800E5B14, level 4) marks the item of the row the entry's
+   (g_loadoutWeaponItems, level column + 3) and 4 (D_800E5B14, level 4) marks the item of the row the entry's
    value for that column selects as owned at that level, and finally marks item 0 owned at level
    0. */
 
-/* US and EU keep their asm: their jump table sits inside literals_Frontend_MoveEquipmentColumn's rodata, which has no
+/* US and EU keep their asm: their jump table sits inside literals_Equip_MoveEquipmentColumn's rodata, which has no
  * unit of its own yet. */
-void Frontend_ApplySelectedPlayerLoadouts(void) {
+void Equip_ApplySelectedPlayerLoadouts(void) {
     u8 *record;
     struct Shape_typemap_165 *source;
     struct Shape_typemap_165 *row;
@@ -131,7 +131,7 @@ void Frontend_ApplySelectedPlayerLoadouts(void) {
                 break;
             case 2:
             case 3:
-                source = D_800E5B44;
+                source = g_loadoutWeaponItems;
                 level = column + 3;
                 break;
             default:
@@ -147,5 +147,5 @@ void Frontend_ApplySelectedPlayerLoadouts(void) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", Frontend_ApplySelectedPlayerLoadouts);
+INCLUDE_ASM("ovl_80400000", Equip_ApplySelectedPlayerLoadouts);
 #endif

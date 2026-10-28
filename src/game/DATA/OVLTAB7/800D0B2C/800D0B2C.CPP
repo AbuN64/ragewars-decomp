@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800D0B2C.CPP */
-unsigned int D_auto_src_ragewars_interpolated_ratio_curve_us_rev1[121] = {
+unsigned int g_audioPitchRatioCurve[121] = {
     0x3D00346E, 0x3D04B5DD, 0x3D09374C, 0x3D0E2196, 0x3D130BE1, 0x3D185F07, 0x3D1DB22D, 0x3D230553,
     0x3D28C155, 0x3D2EE632, 0x3D350B0F, 0x3D3B98C8, 0x3D422681, 0x3D48B439, 0x3D5013A9, 0x3D577319,
     0x3D5ED289, 0x3D669AD4, 0x3D6ECBFB, 0x3D7765FE, 0x3D800000, 0x3D84816F, 0x3D89374C, 0x3D8DED29,

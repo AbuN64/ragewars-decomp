@@ -73,7 +73,7 @@ void func_802B6B80_de(s32 *fixedMatrix) {
     } while (i < 4);
 }
 
-void func_802B6C6C_de(u8 *matrixBytes) {
+void guMtxIdentF(u8 *matrixBytes) {
     u8 *diag;
     u8 *elem;
     s32 r;
@@ -101,7 +101,7 @@ void func_802B6C6C_de(u8 *matrixBytes) {
     } while (r < 4);
 }
 
-void func_802B6CBC_de(f32 *floatMatrix, s32 *fixedMatrix) {
+void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix) {
     s32 *outLo;
     s32 *outHi;
     f32 *inRow;

@@ -20,7 +20,7 @@ extern struct ScreenFrontendMarkLinkedTrialsAvailable *D_800E4690;
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 
-void Frontend_MarkLinkedTrialsAvailable(void *arg0) {
+void Results_MarkLinkedTrialsAvailable(void *arg0) {
     struct Data801462C8 *globals;
     struct TableFrontendMarkLinkedTrialsAvailable *table;
     unsigned int category;

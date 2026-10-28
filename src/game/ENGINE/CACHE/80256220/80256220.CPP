@@ -22,11 +22,11 @@ extern char D_0025657C;
 
 void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker);
 
-extern s32 func_802BB160_de(void *arg0, void *arg1, s32 arg2);
+extern s32 osJamMesg(void *arg0, void *arg1, s32 arg2);
 
 typedef struct Queue Queue;
 
-extern s32 func_802BB160_de(void *, void *, s32);
+extern s32 osJamMesg(void *, void *, s32);
 
 
 void func_80256280_de(s32 workerAddress, s32 count) {
@@ -75,7 +75,7 @@ void func_8025637C_de(struct CartridgeReadWorker *cartridgeReadWorker, u32 sourc
         }
         chunk->length = length;
         chunk->queue = queue;
-        func_802BB160_de(&cartridgeReadWorker->requestQueueStorage, chunk, 1);
+        osJamMesg(&cartridgeReadWorker->requestQueueStorage, chunk, 1);
         osRecvMesg(queue, &completed, 1);
         remaining -= length;
     } while (remaining != 0);
@@ -95,7 +95,7 @@ void func_80256454_de(struct CartridgeReadWorker *worker, u32 source, s32 length
             chunk->length = length;
             chunk->queue = queue;
             chunk->value = value;
-            func_802BB160_de(&worker->requestQueueStorage, chunk, 1);
+            osJamMesg(&worker->requestQueueStorage, chunk, 1);
         }
     } else {
         remaining = length;
@@ -133,18 +133,18 @@ void func_80256454_de(struct CartridgeReadWorker *worker, u32 source, s32 length
 /* Cartridge read thread loop: waits on the manager's request queue; a 0xBEEFDEAD message arms a
  * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs Libultra_RunDebugLinkCommands when TextLoad_IsArtsendTexturePreviewEnabled
  * reports work, and any other message is a read request whose buffer is invalidated, read from the
- * device through func_802B9A40_de, awaited on the completion queue, flushed, acknowledged to its reply
+ * device through Gamecore_StartRawPeripheralDma, awaited on the completion queue, flushed, acknowledged to its reply
  * queue when one is given and finally retired through func_80256688_de. */
 
 
 
 
 
-extern void func_802BB6C0_de(void *, u64, u64, void *, void *);
+extern void osSetTimer(void *, u64, u64, void *, void *);
 extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
 extern void Libultra_RunDebugLinkCommands(void);
 extern void func_802BD280_de(void *, s32);
-extern s32 func_802B9A40_de(s32, u32, void *, u32);
+extern s32 Gamecore_StartRawPeripheralDma(s32, u32, void *, u32);
 extern void func_802BCF70_de(void *, s32);
 extern void func_80256688_de(s32, CartridgeReadRequest *);
 
@@ -158,14 +158,14 @@ void func_8025651C_us_rev1(s32 cartridgeReadWorker) {
     for (;;) {
         osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, &request, 1);
         if (request == (struct CartridgeReadRequest *)0xBEEFDEAD) {
-            func_802BB6C0_de(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
+            osSetTimer(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
         } else if (request == (struct CartridgeReadRequest *)0xDEADBEEF) {
             if (TextLoad_IsArtsendTexturePreviewEnabled() != 0) {
                 Libultra_RunDebugLinkCommands();
             }
         } else {
             func_802BD280_de(request->buffer, request->size);
-            func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
+            Gamecore_StartRawPeripheralDma(0, request->devAddr, request->buffer, request->size);
             osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->completionQueueStorage, &done, 1);
             func_802BCF70_de(request->buffer, request->size);
             if (request->replyQueue != 0) {
@@ -182,7 +182,7 @@ void func_8025651C_us_rev1(s32 cartridgeReadWorker) {
  * handling belongs to the separate US-rev1 routine, which this item does not contain. */
 
 extern void func_802BD280_de(void *, s32);
-extern s32 func_802B9A40_de(s32, u32, void *, u32);
+extern s32 Gamecore_StartRawPeripheralDma(s32, u32, void *, u32);
 extern void func_802BCF70_de(void *, s32);
 extern void func_80256688_de(s32, CartridgeReadRequest *);
 
@@ -193,7 +193,7 @@ void func_8025657C_de(CartridgeReadWorker *worker) {
     for (;;) {
         osRecvMesg(&worker->requestQueueStorage, &request, 1);
         func_802BD280_de(request->buffer, request->size);
-        func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
+        Gamecore_StartRawPeripheralDma(0, request->devAddr, request->buffer, request->size);
         osRecvMesg(&worker->completionQueueStorage, &done, 1);
         func_802BCF70_de(request->buffer, request->size);
         if (request->replyQueue != 0) {

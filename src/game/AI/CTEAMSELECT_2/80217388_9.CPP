@@ -7,11 +7,11 @@
 
 /* Runs a player's team selection menu each frame unless a menu is paused (Cinema_IsSequenceActive): while the
    game is ending (D_8014561C) an open menu is closed through func_80218F84_de; a closed menu opens through
-   func_80219124_de when team selection D_801468C4 is on and the player has no team yet (0xFF at 0x92 of its
+   Cteamselect_InitTeamChoices when team selection D_801468C4 is on and the player has no team yet (0xFF at 0x92 of its
    controls); while it is open the player is held (0x11B4, 0x11B8) and shielded for 2, and the team slot
-   under the stick (func_80218988_de) becomes the hovered entry at 0x70, moving the cursor at 0x6C and
+   under the stick (Cteamselect_GetFourWayStickSlot) becomes the hovered entry at 0x70, moving the cursor at 0x6C and
    choosing the entry's team for the player unless the entry is disabled or flagged 0x8000; the menu
-   then slides open at 0.25 per frame, and once func_8021917C_de confirms a choice it releases the player,
+   then slides open at 0.25 per frame, and once Cteamselect_TryConfirmTeamChoice confirms a choice it releases the player,
    announces the chosen team with its message and sound, and slides closed, the menu's spin at 0x14
    turning while it is shown. */
 
@@ -32,9 +32,9 @@
 #include "COMMON/CHANNEL.H"
 extern s32 D_8014561C;
 extern void func_80218F84_de(TeamMenu *);
-extern void func_80219124_de(TeamMenu *, s32, SharedPlayer *);
-extern s32 func_80218988_de(SharedPlayer *);
-extern s32 func_8021917C_de(TeamMenu *, SharedPlayer *);
+extern void Cteamselect_InitTeamChoices(TeamMenu *, s32, SharedPlayer *);
+extern s32 Cteamselect_GetFourWayStickSlot(SharedPlayer *);
+extern s32 Cteamselect_TryConfirmTeamChoice(TeamMenu *, SharedPlayer *);
 
 void func_80218B84_de(TeamMenu *menu, SharedPlayer *player, void *unused) {
     s32 held;
@@ -54,13 +54,13 @@ void func_80218B84_de(TeamMenu *menu, SharedPlayer *player, void *unused) {
         if (D_801462C8.counters.teams == 0 || player->views5D8.view5D8_1.record->team != 0xFF) {
             goto run;
         }
-        func_80219124_de(menu, held, player);
+        Cteamselect_InitTeamChoices(menu, held, player);
         menu->state = 1;
     }
     player->views5E8.view11B4_136.locked = 1;
     player->views5E8.view11B8_138.frozen = 1;
     player->views5E8.view670_31.shield = 2.0f;
-    slot = func_80218988_de(player);
+    slot = Cteamselect_GetFourWayStickSlot(player);
     if (slot != menu->hover) {
         if (slot != -1) {
             entry = (Entry *) ((char *) menu + slot * 0x14);
@@ -89,7 +89,7 @@ run:
         }
         break;
     case 2:
-        if (func_8021917C_de(menu, player) == 0) {
+        if (Cteamselect_TryConfirmTeamChoice(menu, player) == 0) {
             break;
         }
         menu->state = 3;

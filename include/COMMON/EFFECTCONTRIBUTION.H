@@ -93,7 +93,7 @@ struct Transform {
     };
 };
 
-extern void func_802A57D8_de(void);
+extern void Fx_RibbonNoop(void);
 
 extern void Fx_ResetEffectContribution(EffectContribution *arg0, s32 arg1);
 

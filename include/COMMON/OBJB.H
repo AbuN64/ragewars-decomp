@@ -207,7 +207,7 @@ struct ObjB {
 };
 
 struct Shared_World;
-extern void **func_802540F4_de(s32,void **,s32,void *,s32);
+extern void **Cache_RequestWordCountedResource(s32,void **,s32,void *,s32);
 extern s32 D_0044D804;
 extern s32 D_0044D934;
 extern char g_cartridgeIndex;
@@ -254,5 +254,5 @@ extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
 
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 g_spawnReferenceFloorPolygon;
-extern void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
+extern void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
 #endif

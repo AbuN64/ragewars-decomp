@@ -33,18 +33,18 @@ extern s16 g_frontendResourceTextureCount, g_frontendResourceFontCount;
 extern struct ChunkRecAt48C *g_frontendResourceFonts;
 
 
-extern void Frontend_ReleaseRetainedImageSlot(s32 i);
+extern void Node_ReleaseRetainedImageSlot(s32 i);
 
-extern void Frontend_ReleaseActiveChunkImages(void);
+extern void Node_ReleaseActiveChunkImages(void);
 
-extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageReleaseTimers(s32), Frontend_ReleaseAllChunkImages(void);
+extern void Node_ReleaseUnprotectedBuffers(s32), Node_UpdateImageReleaseTimers(s32), Node_ReleaseAllChunkImages(void);
 
 
 /* Expires cached UI resources against the current tick from N64Eng_GetFrameCounter unless the cache is
-   locked: releases through Frontend_ReleaseRetainedImageSlot the first flagged entry whose unretained resource has an
+   locked: releases through Node_ReleaseRetainedImageSlot the first flagged entry whose unretained resource has an
    id below the tick and stops; otherwise, for each live chunk, clears every flagged slot whose time
-   has passed (freeing its data through Gfx_ReleaseImage) and stops as soon as a chunk still holds live
-   slots after one expires, freeing through Frontend_ReleaseChunkImages and clearing each chunk left empty. */
+   has passed (freeing its data through Image_ReleaseImage) and stops as soon as a chunk still holds live
+   slots after one expires, freeing through Node_ReleaseChunkImages and clearing each chunk left empty. */
 
 
 
@@ -110,7 +110,7 @@ static inline void touch(s32 index, s32 mode) {
 
 
 
-void Frontend_CloseResourceArchive(void) {
+void Node_CloseResourceArchive(void) {
     s32 i;
     s32 invalid;
     s32 i_chunks;
@@ -131,20 +131,20 @@ void Frontend_CloseResourceArchive(void) {
             if (((EntryRecAt18V1 *)(offset + (s32)g_frontendResourceTextures))->unk4 & 1) {
                 resource = g_frontendResourceTextureTimers + i;
                 if (resource->id != invalid && resource->retained == 0) {
-                    Frontend_ReleaseRetainedImageSlot(i);
+                    Node_ReleaseRetainedImageSlot(i);
                 }
             }
             offset += 0x1C;
         } while (++i < g_frontendResourceTextureCount);
     }
-    Frontend_ReleaseActiveChunkImages();
+    Node_ReleaseActiveChunkImages();
     state = &g_frontendResourceState;
     if (state->unk0) XStdio_CloseStream(state->unk0);
-    Frontend_ReleaseUnprotectedBuffers(1);
-    Frontend_UpdateImageReleaseTimers(1);
+    Node_ReleaseUnprotectedBuffers(1);
+    Node_UpdateImageReleaseTimers(1);
     if (state->entries) Cache_FreeMemory(state->entries);
     i_chunks = 0;
-    Frontend_ReleaseAllChunkImages();
+    Node_ReleaseAllChunkImages();
     offset_chunks = 0;
     if (state->chunkCount > 0) {
         do {
@@ -178,7 +178,7 @@ void Frontend_CloseResourceArchive(void) {
     XPlus_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
 }
 
-void Frontend_EvictExpiredImages(void) {
+void Node_EvictExpiredImages(void) {
     s32 now;
     s32 i;
     s32 j;
@@ -195,7 +195,7 @@ void Frontend_EvictExpiredImages(void) {
         if (g_frontendResourceState.entries[i].flags & 1) {
             resource = &g_frontendResourceState.resources[i];
             if (resource->id != -1 && resource->retained == 0 && resource->id < now) {
-                Frontend_ReleaseRetainedImageSlot(i);
+                Node_ReleaseRetainedImageSlot(i);
                 return;
             }
         }
@@ -207,7 +207,7 @@ void Frontend_EvictExpiredImages(void) {
                 for (k = 0; k < 0x60; k++) {
                     slot = &slots[k];
                     if ((slot->flags & 1) && slot->owner < now) {
-                        Gfx_ReleaseImage((struct OwnedImage *)slot->data);
+                        Image_ReleaseImage((struct OwnedImage *)slot->data);
                         slot->owner = 0;
                         slot->flags &= ~1;
                         g_frontendResourceState.chunks[i].live--;
@@ -218,14 +218,14 @@ void Frontend_EvictExpiredImages(void) {
                 }
             }
             if (g_frontendResourceState.chunks[i].live == 0) {
-                Frontend_ReleaseChunkImages(i);
+                Node_ReleaseChunkImages(i);
                 g_frontendResourceState.chunks[i].active = 0;
             }
         }
     }
 }
 
-s32 Frontend_GetImageTexture(s32 index, s32 mode) {
+s32 Node_GetImageTexture(s32 index, s32 mode) {
     s32 id;
     s32 texture;
     u16 *palette;
@@ -311,7 +311,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     return g_frontendResourceTextures[index].unk0;
 }
 
-void Frontend_LoadTextureIntoOutput(s32 index, s32 output) {
+void Node_LoadTextureIntoOutput(s32 index, s32 output) {
     s32 *palette;
     s32 *pixels;
     s32 paletteBytes;

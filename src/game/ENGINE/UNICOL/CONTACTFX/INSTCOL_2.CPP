@@ -7,7 +7,7 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
-#include "INSTCOL_2/INSTCOL_2.H"
+#include "CONTACTFX/INSTCOL_2.H"
 #include "RENDER_2/8022AE90_5.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_14.H"
@@ -19,9 +19,9 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 
 /* 8023EEF0_3.CPP */
-s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep);
-void Ovlgame_ReleaseObjectHandles(struct ItemsHandleOwner *);
-void GraphU64_InterpolateVector(CVector3 *, f32, void *, void *);
+s32 CCollision_TestSegmentPolygon(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon *poly, s32 keep);
+void Player_ReleaseObjectHandles(struct ItemsHandleOwner *);
+void Graphu64_InterpolateVector(CVector3 *, f32, void *, void *);
 void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
 s32 Particle_GetEffectResource(void *);
 
@@ -88,21 +88,21 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         polygon.response = ray->material->response;
         polygon.count = 0; polygon.flags = 0;
         polygon.normal = normal; polygon.valid = 1; polygon.point = *corners[0];
-        if (!func_8023E8D4_de(ray, &polygon, 1)) continue;
+        if (!CCollision_TestSegmentPolygon(ray, &polygon, 1)) continue;
         ray->nearest.actor = actor; ray->nearest.index = index;
         if (transform) ray->nearest.transform = *transform;
         found = 1;
         projectile = ray->projectile;
         if (projectile->type != 2 || (projectile->kind != 0x414 && projectile->kind != 0x42D)) continue;
         if (projectile->owner == actor) {
-            Ovlgame_ReleaseObjectHandles(actor->widget);
+            Player_ReleaseObjectHandles(actor->widget);
             ray->projectile->contactState = found;
             return 0;
         }
         if (projectile->lastHit == actor) continue;
         projectile->lastHit = actor;
         ray->projectile->ticks = 0;
-        GraphU64_InterpolateVector(&effectPosition, ray->nearest.t, &ray->projectile->position, &ray->end);
+        Graphu64_InterpolateVector(&effectPosition, ray->nearest.t, &ray->projectile->position, &ray->end);
         style.kind = 5; style.flags = 0x2300; style.mode = 5;
         style.red = ray->projectile->color.x;
         style.green = ray->projectile->color.y;
@@ -121,9 +121,9 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
  * part mask whose bone sphere overlaps the ray bounds and is hit by the ray, enlarging the parts flagged
  * as soft for driven vehicles; other actors test the box of their shape bank resource, or their own box. */
 
-s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out);
+s32 CCollision_IntersectSegmentBox(Ray *ray, Box *box, f32 *out);
 
-void **func_8024BFD4_de(MenuPanelRoot *arg0, s32 arg1);
+void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *arg0, s32 arg1);
 
 void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
@@ -165,7 +165,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
     }
     soft = 0;
     if (actor->bones != 0) {
-        resource = func_8024BFD4_de(actor, actor->animation);
+        resource = Gobjinst_RequestAnimatedModelVariant(actor, actor->animation);
     } else {
         resource = 0;
     }
@@ -208,7 +208,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
             box.max.z = center.z + radius;
             if (bounds->min.x < box.max.x && box.min.x < bounds->max.x && bounds->min.z < box.max.z &&
                 box.min.z < bounds->max.z && bounds->min.y < box.max.y && box.min.y < bounds->max.y &&
-                func_8023DAA0_de(ray, &box, &t)) {
+                CCollision_IntersectSegmentBox(ray, &box, &t)) {
                 GraphU64_ConvertMatrixToFloat(matrix, &actor->bones[i]);
                 if (soft) {
                     ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
@@ -305,7 +305,7 @@ typedef struct HitSelf {
 extern LevelActor **D_80103FCC;
 extern char D_002405FC[], D_00240638[];
 extern void PpDecom_QuickSortRecords();
-extern void func_8023F644_de(void *, void *);
+extern void CInstanceCollision_BuildSweepQuery(void *, void *);
 void InstCol_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
     u8 scratch[0x30];
@@ -357,7 +357,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
         if (!(self->box.min.z < candidate->bounds.max.z)) continue;
         if (!(self->box.max.y > candidate->bounds.min.y)) continue;
         if (!(self->box.min.y < candidate->bounds.max.y)) continue;
-        if (func_8023DAA0_de(self, &candidate->bounds, &distance) != 0) {
+        if (CCollision_IntersectSegmentBox(self, &candidate->bounds, &distance) != 0) {
             entry->object = candidate;
             entry->distance = distance;
             count++;
@@ -375,8 +375,8 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
         }
         candidate = entry->object;
         if ((candidate->flags & 0x300000) && (game = &D_801462C8)->local == 0) {
-            func_8023F644_de(self, scratch);
-            InstCol_TestEntityContact(self, scratch, candidate);
+            CInstanceCollision_BuildSweepQuery(self, scratch);
+            Instcol_TestEntityContact(self, scratch, candidate);
         } else {
             func_8023FD18_de(self, candidate, ownerPosition, &self->box);
         }

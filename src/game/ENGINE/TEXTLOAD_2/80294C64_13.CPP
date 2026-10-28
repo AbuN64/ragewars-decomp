@@ -14,7 +14,7 @@ extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];
 
 
-void TextLoad_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
+void Textload_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
     s32 *texture;
     s32 *palette;
     void *header;

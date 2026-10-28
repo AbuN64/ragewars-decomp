@@ -11,7 +11,7 @@ extern char g_statObjectIndexText[];
 extern s32 SetN64_GetDirectoryEntry(s32 *,s32,s32);
 extern s32 SetN64_LocatePackSection(void *,s32,s32,s32 *);
 extern void Cache_LockResource(void *,Node80253610 *);
-void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index) {
+void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index) {
     void **block;
     void *allocation;
     s32 key;
@@ -26,7 +26,7 @@ void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index) {
         if (block != 0) {
             key = SetN64_GetDirectoryEntry(*block,owner->key,1);
             Cache_ReleaseResource(0,block);
-            allocation = func_802540F4_de(0,&table,key,s_statModelsIndexText,1);
+            allocation = Cache_RequestWordCountedResource(0,&table,key,s_statModelsIndexText,1);
             if (allocation != 0) {
                 entries = table;
                 owner->selected = SetN64_LocatePackSection(table,key,index % *entries,&owner->size);

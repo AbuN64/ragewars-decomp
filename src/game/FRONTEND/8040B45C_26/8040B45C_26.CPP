@@ -4,10 +4,10 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "MATH/802A2870.H"
-extern s32 Frontend_ComputeWidgetBounds(Shared_Quad *, Shared_Quad *, MenuWidget *, sm_dldc *);
+extern s32 Widget_ComputeWidgetBounds(Shared_Quad *, Shared_Quad *, MenuWidget *, sm_dldc *);
 extern void N64Eng_GetClipBounds(s32 *, s32 *, s32 *, s32 *);
-extern s32 Frontend_ClampRectToClip(Shared_Quad *, Shared_Quad *);
-extern void Frontend_DrawVisibleSiblings(MenuWidget *, sm_dldc);
+extern s32 Node_ClampRectToClip(Shared_Quad *, Shared_Quad *);
+extern void Widget_DrawVisibleSiblings(MenuWidget *, sm_dldc);
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 s32 Frontend_ReturnZeroCallback(void) {
@@ -23,15 +23,15 @@ void Frontend_DrawEuropeanClippedChildren(MenuWidget *widget, sm_dldc args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&area, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&area, &basis, widget, &args) != 0) {
         if (widget->flags & 0x200) {
             N64Eng_GetClipBounds(&saved.w[0], &saved.w[2], &saved.w[1], &saved.w[3]);
             clip = saved;
-            Frontend_ClampRectToClip(&clip, &basis);
+            Node_ClampRectToClip(&clip, &basis);
             N64Eng_SetClipBounds(clip.w[0], clip.w[2], clip.w[1], clip.w[3]);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(widget->child, args);
+        Widget_DrawVisibleSiblings(widget->child, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(saved.w[0], saved.w[2], saved.w[1], saved.w[3]);
         }
@@ -47,15 +47,15 @@ void Frontend_DrawChildListWithClip(MenuWidget *widget, sm_dldc args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&area, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&area, &basis, widget, &args) != 0) {
         if (widget->flags & 0x200) {
             N64Eng_GetClipBounds(&saved.w[0], &saved.w[2], &saved.w[1], &saved.w[3]);
             clip = saved;
-            Frontend_ClampRectToClip(&clip, &basis);
+            Node_ClampRectToClip(&clip, &basis);
             N64Eng_SetClipBounds(clip.w[0], clip.w[2], clip.w[1], clip.w[3]);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(widget->child, args);
+        Widget_DrawVisibleSiblings(widget->child, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(saved.w[0], saved.w[2], saved.w[1], saved.w[3]);
         }

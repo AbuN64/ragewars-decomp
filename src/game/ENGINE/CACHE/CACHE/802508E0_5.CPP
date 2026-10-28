@@ -16,10 +16,10 @@
    node's reference count and flags, stamps it and hands the node to func_80255FB8_de; otherwise, unless
    a request for the key is already active, a fresh request is taken, filled in from the arguments,
    given a reference on each of the two nodes and moved to the active list. Outside the lock the
-   request is then either started asynchronously through func_80255170_de and func_80252774_de, or run
+   request is then either started asynchronously through func_80255170_de and Cache_FinalizeResourceLoad, or run
    synchronously through func_802551FC_de, whose failure gives the two references back and finishes the
-   request. The lock, the hash lookup and the reference bump are the inline forms of func_802524B0_de,
-   func_802517B4_de and func_80252774_de. The eighth argument is never read.
+   request. The lock, the hash lookup and the reference bump are the inline forms of Cache_RunResourceCompletionWorker,
+   Cache_RetainResourceByKey and Cache_FinalizeResourceLoad. The eighth argument is never read.
 
    Manager is one object, which is what lets the compiler reach its lock queue from whichever of its
    members is already in a base register; D_8010515C is a separate symbol although it lies past the
@@ -46,13 +46,13 @@ extern s32 D_80101194;
 
 
 
-extern ResourceLoadRequest *func_80254ED0_de(s32, s32);
+extern ResourceLoadRequest *Cache_AcquireLoadRequestWithEviction(s32, s32);
 
 extern void func_80255170_de(s32 *, ResourceLoadRequest *);
 
 extern void func_80255FB8_de(void *, CachedResource *);
 
-extern ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference);
+extern ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 
 static inline void addref(CachedResource *node) {
     node->count += 1;
@@ -98,7 +98,7 @@ static inline void release(void) {
     }
 }
 
-/* Runs the resource manager thread: waits for messages on its queue D_801047E0 and, under the manager lock, frees the heap for messages 0 and 1, retries or completes a pending load request (flag 8) by unlinking it, draining its node's reference count, releasing an unused node's data and handle, and finishing the request, or otherwise (flag 4) starts it through func_80252774_de. The flag 8 path clears its reference loop with an inner do-while, and each branch unlocks itself. */
+/* Runs the resource manager thread: waits for messages on its queue D_801047E0 and, under the manager lock, frees the heap for messages 0 and 1, retries or completes a pending load request (flag 8) by unlinking it, draining its node's reference count, releasing an unused node's data and handle, and finishing the request, or otherwise (flag 4) starts it through Cache_FinalizeResourceLoad. The flag 8 path clears its reference loop with an inner do-while, and each branch unlocks itself. */
 
 
 
@@ -109,14 +109,14 @@ static inline void release(void) {
 
 
 
-extern void func_80254F9C_de(s32, Request_func_802524B0_de *);
+extern void Cache_AcknowledgeResourceSlotRelease(s32, RequestCacheRunResourceCompletionWorker *);
 extern s32 func_802551FC_de(void *, void *, Manager *);
 
-extern void func_80254DD0_de(s32, Node_func_802524B0_de *);
+extern void Cache_DetachResourceRequest(s32, NodeCacheRunResourceCompletionWorker *);
 
 extern void func_80255B2C_de(void *, void *);
 
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
 static inline void lock(void) {
     extern Manager D_801047E0;
@@ -146,7 +146,7 @@ static inline void unlock(void) {
     }
 }
 
-CachedResource *func_80251F6C_de(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner,
+CachedResource *Cache_RequestPairedResource(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner,
                     void *tag, void *spare, s32 async) {
     extern Manager D_801047E0;
     ResourceHashEntry *node;
@@ -202,7 +202,7 @@ done:
         scan = scan->next;
     }
     if (busy == 0) {
-        found = func_80254ED0_de(0, mode);
+        found = Cache_AcquireLoadRequestWithEviction(0, mode);
         if (found != 0) {
             found->key = key;
             found->priority = 0;
@@ -227,7 +227,7 @@ done:
                 found->flags &= ~0xE;
                 func_80255170_de(&D_80106248, found);
                 acquire();
-                found = func_80252774_de(0, found, 0);
+                found = Cache_FinalizeResourceLoad(0, found, 0);
                 release();
                 if (found != 0) {
                     return found->node;
@@ -245,7 +245,7 @@ done:
                 }
                 func_80255ED8_de(&D_801047E0.active, found);
                 func_80255CB8_de(&D_801047E0.pending, found);
-                func_80254E88_de(0, found);
+                Cache_RecycleLoadRequest(0, found);
                 release();
             }
             return 0;
@@ -255,17 +255,17 @@ done:
     return 0;
 }
 
-void func_802524B0_de(void *arg) {
+void Cache_RunResourceCompletionWorker(void *arg) {
     extern Manager D_801047E0;
-    Request_func_802524B0_de *request;
-    Node_func_802524B0_de *node;
+    RequestCacheRunResourceCompletionWorker *request;
+    NodeCacheRunResourceCompletionWorker *node;
     s32 flags;
 
     for (;;) {
         osRecvMesg(&D_801047E0, &request, 1);
         if ((u32)request < 2) {
             lock();
-            func_80254F9C_de(0, request);
+            Cache_AcknowledgeResourceSlotRelease(0, request);
             unlock();
         } else {
             request->flags &= ~2;
@@ -284,17 +284,17 @@ void func_802524B0_de(void *arg) {
                         node->flags &= ~0x100;
                     }
                     if (!(node->flags & 0x702)) {
-                        func_80254DD0_de(0, node);
+                        Cache_DetachResourceRequest(0, node);
                         func_80255B2C_de(&D_801051A0, node->data);
-                        func_80254AD0_de(0, node);
+                        Cache_ReleasePendingResourceEntry(0, node);
                     }
-                    func_80254E88_de(0, request);
+                    Cache_RecycleLoadRequest(0, request);
                     unlock();
                 }
             } else {
                 request->flags = flags & ~4;
                 lock();
-                func_80252774_de(0, request, 1);
+                Cache_FinalizeResourceLoad(0, request, 1);
                 unlock();
             }
         }

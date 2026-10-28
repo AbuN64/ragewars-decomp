@@ -69,16 +69,16 @@ extern StyleNextState *D_800E5694;
 
 
 
-/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x1C8, passes the word at offset 0x14 of the
-   object D_800E5694 points to to Menu_StoreAlternatePlayerSettingsEntry, then passes -1 to Frontend_SetMenuChoiceResult if Smos_GetPreviousScreenOwner
-   reports 0x16 for zero and 0xB otherwise, and calls Smos_ReturnToPreviousScreen. Returns zero. */
+/* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x1C8, passes the word at offset 0x14 of the
+   object D_800E5694 points to to Player_StoreAlternatePlayerSettingsEntry, then passes -1 to Random_SetMenuChoiceResult if Menu_GetPreviousScreenOwner
+   reports 0x16 for zero and 0xB otherwise, and calls Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
-   and 0xB otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes -1 to Random_SetMenuChoiceResult when Menu_GetPreviousScreenOwner reports 0x16 for zero
+   and 0xB otherwise, then calls Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 void MarkMenuEventHandled();
@@ -104,7 +104,7 @@ typedef s32 (*Handler80437454)(void *, s32, s32, s32, s32);
 
 extern Handler80437454 D_800E5718;
 
-s32 Menu_FreeAlternatePlayerSettingsScreen(void) {
+s32 Player_FreeAlternatePlayerSettingsScreen(void) {
     Cache_FreeMemory(D_800E5694);
     D_800E5694 = 0;
     return 0;
@@ -122,41 +122,41 @@ s32 func_80437054_de(void) {
     return 0;
 }
 
-s32 Menu_ConfirmAlternatePlayerSettingsEntry(void) {
+s32 Player_ConfirmAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Smos_GetFocusedElementId() == 0x1C4) {
+    if (Menu_GetFocusedElementId() == 0x1C4) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Smos_GetFocusedElementId() == 0x1C8) {
+    if (Menu_GetFocusedElementId() == 0x1C8) {
 #elif defined(VERSION_EU_X)
-    if (Smos_GetFocusedElementId() == 0x1CC) {
+    if (Menu_GetFocusedElementId() == 0x1CC) {
 #endif
-        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
-        Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
-        Smos_ReturnToPreviousScreen();
+        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
+        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+        Menu_ReturnToPreviousScreen();
     }
     return 0;
 }
 
-s32 Menu_CancelAlternatePlayerSettingsEntry(void) {
+s32 Player_CancelAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 
-s32 Menu_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Player_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
-        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
+        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
         temp_v0 = D_800E5694->item + 1;
         D_800E5694->item = temp_v0;
         if (temp_v0 >= 4) {
             D_800E5694->item = 0;
         }
-        Menu_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
+        Player_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
         XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;
@@ -164,18 +164,18 @@ s32 Menu_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 un
     return 0;
 }
 
-s32 Menu_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Player_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
-        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
+        Player_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
         temp_v0 = D_800E5694->item - 1;
         D_800E5694->item = temp_v0;
         if (temp_v0 < 0) {
             D_800E5694->item = 3;
         }
-        Menu_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
+        Player_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
         XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;
@@ -183,7 +183,7 @@ s32 Menu_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s3
     return 0;
 }
 
-s32 Menu_DispatchAlternatePlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Player_DispatchAlternatePlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437454 *entry;
     s32 index;
     s32 wildcard;

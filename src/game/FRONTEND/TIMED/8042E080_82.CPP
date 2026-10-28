@@ -4,7 +4,7 @@
 /* Calls Tsmos_SetModeOneFlag with 2 and returns zero. */
 
 
-s32 Frontend_SetConfirmationInputMode(void) {
+s32 Timed_SetConfirmationInputMode(void) {
     Tsmos_SetModeOneFlag(2);
     return 0;
 }

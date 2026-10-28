@@ -39,8 +39,8 @@ extern s32 D_800C9228_de[2];
 
 
 
-void *Nav_GetGraphPoint(void *, s32);
-s32 Nav_FindNearestPointIndex(void *, void *);
+void *Portal_GetGraphPoint(void *, s32);
+s32 Portal_FindNearestPointIndex(void *, void *);
 s32 Player_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
@@ -60,9 +60,9 @@ void *SetN64_SpawnModelEffect(void *, s32 *, s32, CVector3, CVector3, s32, f32);
 struct ListNode80290528;
 void SetN64_RecycleGlobalEffectNode(struct ListNode80290528 *);
 s32 XPlus_NextRandomInteger(void);
-s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
-void Ovlgame_PlacePlayerForRound(void *);
-void Ovlgame_ReleaseObjectHandles(void *);
+s32 Player_ResetPlayerForRound(void *, s8, s32);         /* extern */
+void Player_PlacePlayerForRound(void *);
+void Player_ReleaseObjectHandles(void *);
 
 
 extern s32 D_8011D8D0;
@@ -159,7 +159,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
     Link_DispatchActorLinks(attacker, 1, attacker);
-    Ovlgame_ReleaseObjectHandles(player);
+    Player_ReleaseObjectHandles(player);
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
     ((struct Shared_ActorView *)player)->marker.time = 0;
@@ -180,7 +180,7 @@ settings_loop:
                 if (playerSettingsRecord->active != 0) {
                     if (((struct Shared_PlayerSettingsView *)settingsBase)->state == 1) {
                     ((struct Shared_ActorView *)roundPlayer)->actorState = (s32) ((struct Shared_PlayerSettingsView *)settingsBase)->state;
-                    Ovlgame_ResetPlayerForRound(roundPlayer, playerSettingsRecord->character, 1);
+                    Player_ResetPlayerForRound(roundPlayer, playerSettingsRecord->character, 1);
                     roundPlayerModel = ((struct Shared_ActorView *)roundPlayer)->model;
                     ((struct Shared_ModelView *)roundPlayerModel)->flags = (s32) (((struct Shared_ModelView *)roundPlayerModel)->flags & ~4);
                     Nav_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
@@ -188,7 +188,7 @@ settings_loop:
                     func_80255ED8_de(playersGlobal->controller, roundPlayer);
                     func_80255CB8_de(&playersGlobal->effects, roundPlayer);
                     } else if (((struct Shared_PlayerSettingsView *)settingsBase)->state < 3) {
-                        Ovlgame_PlacePlayerForRound(roundPlayer);
+                        Player_PlacePlayerForRound(roundPlayer);
                     }
                 }
 block_13:
@@ -278,7 +278,7 @@ case 7:
                         }
                         if (firstAmmoDrop != 0) {
                             hasAmmoDrop = 1;
-                            firstAmmoDropRecord = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            firstAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             firstAmmoDropRecord->unkC = (s16) firstAmmoDrop;
                             firstAmmoDropRecord->unkE = 0;
                             firstAmmoDropRecord->unk10 = 0;
@@ -300,7 +300,7 @@ case 7:
                         }
                         if (secondAmmoDrop != 0) {
                             hasAmmoDrop = 1;
-                            secondAmmoDropRecord = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            secondAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             secondAmmoDropRecord->unkE = (s16) secondAmmoDrop;
                             secondAmmoDropRecord->unkC = 0;
                             secondAmmoDropRecord->unk10 = 0;
@@ -322,7 +322,7 @@ case 7:
                         }
                         if (thirdAmmoDrop != 0) {
                             hasAmmoDrop = 1;
-                            thirdAmmoDropRecord = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            thirdAmmoDropRecord = &g_pickupAmmoDefinitions[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             thirdAmmoDropRecord->unk10 = (s16) thirdAmmoDrop;
                             thirdAmmoDropRecord->unkC = 0;
                             thirdAmmoDropRecord->unkE = 0;
@@ -331,7 +331,7 @@ case 7:
                     }
                 }
                 if (hasAmmoDrop != 0) {
-                    nearestSpawnPoint = Nav_GetGraphPoint(&D_8013B364, Nav_FindNearestPointIndex(&D_8013B364, &player->position.vector));
+                    nearestSpawnPoint = Portal_GetGraphPoint(&D_8013B364, Portal_FindNearestPointIndex(&D_8013B364, &player->position.vector));
                     InstHdr_CopyActorPositionAndModel(player, player->position.words, &spawnPosition, &spawnProbeResult, 0, 0);
                     if (nearestSpawnPoint != 0) {
                         spawnPosition = *(CVector3 *)nearestSpawnPoint;
@@ -510,8 +510,8 @@ extern s32 D_800D2A90;
 extern char D_801468A0[];
 extern s32 func_8022C460_de(void *);
 extern s32 Player_GetMaxHealth(void *);
-extern void func_8028CE94_de(void *, void *, s32, CVector3, f32, f32);
-extern void func_80239194_de(void *, s32, s32);
+extern void CScene_StartEventClips(void *, void *, s32, CVector3, f32, f32);
+extern void Gsky_SetDamageEffect(void *, s32, s32);
 extern void func_8022B11C_de(void *, u16);
 /* Applies damage to a player: ignored while the game is paused, the player is protected or the damage
  * source is not allowed; scales the amount by one fifth with armour (0x80C); when the health stays above
@@ -519,7 +519,7 @@ extern void func_8022B11C_de(void *, u16);
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
  * reports the kill through func_8021B468_de. */
 /* Exact for us and us-rev1; de/eu/eu-x add extra checks (0x1450, 0x94) and keep their asm. */
-void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
+void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 damageFlags, s32 kind) {
     s32 oldHealth = FIELD(s32, player, 0x5E4);
     s32 health;
     s32 threshold;
@@ -617,7 +617,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     dead = FIELD(s32, player, 0x5E4) == 0;
     if (dead != 0) {
         if (wasDead == 0) {
-            func_8021B468_de((struct Shared_ActorView *)player, attacker, arg3, kind);
+            func_8021B468_de((struct Shared_ActorView *)player, attacker, damageFlags, kind);
         }
         intensity = 0xFF;
         delay = 0xC;
@@ -642,13 +642,13 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
-            func_8028CE94_de(&g_world, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
+            CScene_StartEventClips(&g_world, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
         }
     }
     if (dead == 0 && FIELD(s16, player, 0x650) != 0x12 && FIELD(void *, player, 0x5DC) != 0) {
         s32 hit;
         if (FIELD(s32, player, 0x16D4) == 0) {
-            func_80239194_de(FIELD(void *, player, 0x5DC), intensity & 0xFF, delay);
+            Gsky_SetDamageEffect(FIELD(void *, player, 0x5DC), intensity & 0xFF, delay);
         }
         hit = amount * 15;
         if (hit > 100) {

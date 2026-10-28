@@ -30,7 +30,7 @@ void __osViInit(void)
     } else if (tv_type == 2) {
         contexts[1].modep = &D_800D44E0;
     } else {
-        contexts[1].modep = &D_800D4440;
+        contexts[1].modep = &g_videoInterfaceModeTable;
     }
     D_800D4414->state = 0x20;
     D_800D4414->control = D_800D4414->modep->comRegs.ctrl;

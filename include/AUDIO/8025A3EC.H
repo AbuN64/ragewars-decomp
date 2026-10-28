@@ -43,7 +43,7 @@ typedef struct SoundEnvelope {
     s16 frames;
     u32 reserved8;
 } __attribute__((packed)) SoundEnvelope;
-struct View_func_8025AE1C_de {
+struct ViewChannelUpdateVoicePlayback {
     s32 slot;
     s32 handle;
     s32 field8;
@@ -119,7 +119,7 @@ typedef struct SoundSpatialSource {
     u8 reserved40[4];
     s8 curve;
 } SoundSpatialSource;
-struct View_func_8025AB94_de {
+struct ViewChannelUpdateVoicePitch {
     s32 slot;
     char pad4[0xC];
     MotionRecAt24 motion;
@@ -134,7 +134,7 @@ struct View_func_8025AB94_de {
     char padB4[4];
     f32 scale;
 };
-struct Voice_func_8025A844_de {
+struct VoiceChannelUpdateVoicePan {
     s32 index;
     char pad4[0xC];
     ParamsRecAt18 params;

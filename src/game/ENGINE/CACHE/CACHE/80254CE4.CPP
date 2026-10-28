@@ -38,7 +38,7 @@ static inline func_8022BC04_S3 *take(s32 active) {
 
 
 
-void func_80254D44_de(s32 arg0, s32 resourceSlot)
+void Cache_ClearResourceSlotProtection(s32 arg0, s32 resourceSlot)
 {
   s32 mask;
   u32 count;
@@ -68,14 +68,14 @@ void func_80254D44_de(s32 arg0, s32 resourceSlot)
   D_80101134[resourceSlot] = 0;
 }
 
-void func_80254DA4_de(void *unused0, void *resource) {
+void Cache_TouchResource(void *unused0, void *resource) {
     func_8022BC04_S3 *arg1_record = resource;
     s32 *p = D_80105180;
     arg1_record->unk10 = *p;
     func_80255FB8_de((char *)p - 0xC10, (s32)resource);
 }
 
-void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {
+void Cache_DetachResourceRequest(void *unused0, void *resourceCacheEntry) {
     void *ownerRequest;
     void *requestToRecycle;
 
@@ -89,7 +89,7 @@ void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {
     }
 }
 
-void *func_80254E30_de(void) {
+void *Cache_AcquireLoadRequest(void) {
     IntrusiveList *p = &D_801010F8;
     void *head = p->head;
     if (head != 0) {
@@ -100,23 +100,23 @@ void *func_80254E30_de(void) {
     return head;
 }
 
-void func_80254E88_de(s32 unused0, void *request) {
+void Cache_RecycleLoadRequest(s32 unused0, void *request) {
     func_80255ED8_de(&D_8010110C, request);
-    ((Request_func_802524B0_de *)request)->flags = 0;
+    ((RequestCacheRunResourceCompletionWorker *)request)->flags = 0;
     func_80255CB8_de((char *)&D_8010110C - 0x14, request);
 }
 
-void *func_80254ED0_de(s32 unused,s32 flags) {
+void *Cache_AcquireLoadRequestWithEviction(s32 unused,s32 flags) {
  func_8022BC04_S3 *node=take(1);
  if (!node) {
   s32 active=1;
   flags &= 0x10;
-  while(func_80251328_de(0,2,flags==0)) {node=take(active);if(node)break;}
+  while(Cache_EvictResource(0,2,flags==0)) {node=take(active);if(node)break;}
  }
  return node;
 }
 
-void func_80254F9C_de(s32 unused, s32 request) {
+void Cache_AcknowledgeResourceSlotRelease(s32 unused, s32 request) {
     s32 mask;
     u32 count;
     s32 new_var;
@@ -146,7 +146,7 @@ void func_80254F9C_de(s32 unused, s32 request) {
     do { D_80101134[request] = 0; } while (0);
 }
 
-EntryRecAt18V3 *func_80255048_de(s32 unused, EntryList *list, EntryRecAt18V3 **recent)
+EntryRecAt18V3 *Cache_FindEvictableResource(s32 unused, EntryList *list, EntryRecAt18V3 **recent)
 {
     EntryRecAt18V3 *e = list->first;
 

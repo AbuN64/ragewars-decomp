@@ -91,7 +91,7 @@ struct SlotVirtualInitializePagerEuroExtended {
     };
 };
 
-/* The first 0x20 bytes of the resource pager state: request statistics, copied out whole by Virtual_GetPagerCounters. */
+/* The first 0x20 bytes of the resource pager state: request statistics, copied out whole by Vhandler_GetPagerCounters. */
 struct PagerCounters {
     s32 requests;
     s32 misses;

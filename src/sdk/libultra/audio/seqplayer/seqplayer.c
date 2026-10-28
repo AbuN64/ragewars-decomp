@@ -31,7 +31,7 @@ extern void __initChanState(void *);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
-void Libultra_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c) {
+void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c) {
     void *heap = c->context;
     void *drvr = D_800D4070;
     ALVoiceState *vs;
@@ -138,7 +138,7 @@ void alCSPNew(SeqInitPlayer *p, ALSeqpConfig *c) {
 /* seqplayer_2.c */
  /* 2147483648.0f */
 
-extern void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *);                        /* __handleNextSeqEvent */
+extern void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *);                        /* __handleNextSeqEvent */
 extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
 extern ALMicroTime alEvtqNextEvent(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlushType */
@@ -152,7 +152,7 @@ extern void __seqpReleaseVoice(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __se
 extern void __initFromBank(ALSeqPlayer *, void *);               /* __initFromBank */
                  /* __assert */
 
-ALMicroTime Audio_ProcessSequenceEvents(void *node)
+ALMicroTime Seqplayer_ProcessSequenceEvents(void *node)
 {
     struct ALSequencePlayer *seqp = node;
     ALEvent evt;
@@ -168,7 +168,7 @@ ALMicroTime Audio_ProcessSequenceEvents(void *node)
     do {
         switch (seqp->base.nextEvent.type) {
         case 0: /* AL_SEQ_REF_EVT */
-            Audio_AdvanceSequenceEvent(seqp);
+            Seqplayer_AdvanceSequenceEvent(seqp);
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
@@ -222,7 +222,7 @@ ALMicroTime Audio_ProcessSequenceEvents(void *node)
             func_802B00D4_de(&seqp->base.evtq, &evt, delta);
             break;
         case 2: /* AL_SEQP_MIDI_EVT */
-            Audio_HandleSequenceMidiEvent(&seqp->base, &seqp->base.nextEvent);
+            Seqplayer_HandleSequenceMidiEvent(&seqp->base, &seqp->base.nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
             __handleMetaMsg(&seqp->base, &seqp->base.nextEvent);
@@ -357,7 +357,7 @@ extern void __setInstChanState(ALSeqPlayer *, ALInstrument *, s32);
 
  /* __setInstChanState */
 
-void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
+void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
 {
     ALEvent evt;
 
@@ -368,7 +368,7 @@ void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
 
     switch (evt.type) {
     case 1:     /* AL_SEQ_MIDI_EVT */
-        Audio_HandleSequenceMidiEvent(&seqp->base, &evt);
+        Seqplayer_HandleSequenceMidiEvent(&seqp->base, &evt);
         postNextSeqEvent(seqp);
         break;
 
@@ -389,7 +389,7 @@ void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
 }
 
  /* __assert */
-void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
+void Seqplayer_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
 {
     ALVoice_s *voice;
     ALVoiceState *vs;
@@ -644,8 +644,8 @@ ALVoiceState *__mapVoice(ALSeqPlayer *sequencePlayer, u8 noteKey, u8 noteVelocit
 }
 
 void Audio_ReleaseSequenceVoice(List802B663C *voicePool, void *voice) {
-    Node_func_80239AF4_de *node;
-    Node_func_80239AF4_de *prev;
+    NodeGskyActivateMessagePool *node;
+    NodeGskyActivateMessagePool *prev;
 
     prev = 0;
     node = voicePool->head;

@@ -62,21 +62,21 @@ unsigned int D_auto_src_ragewars_catalogue_arena_records_us_rev1[160] = {
 
 /* 800E51E4.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_cup_category_0_arena_controls_us_rev1[5] = {
+unsigned int g_cupCategoryZeroArenaControls[5] = {
     0x00000315, 0x00000355, 0x00000354, 0x00000353, 0x00000359,
 };
 #endif
 
 /* 800E51F8.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_cup_category_1_arena_controls_us_rev1[7] = {
+unsigned int g_cupCategoryOneArenaControls[7] = {
     0x00000317, 0x00000346, 0x00000345, 0x00000344, 0x0000034C, 0x0000034B, 0x0000034A,
 };
 #endif
 
 /* 800E5214.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_cup_category_3_arena_controls_us_rev1[11] = {
+unsigned int g_cupCategoryThreeArenaControls[11] = {
     0x00000318, 0x00000334, 0x00000333, 0x00000332, 0x0000033A, 0x00000339, 0x00000338, 0x0000033F,
     0x0000033E, 0x00000350, 0x0000034F,
 };
@@ -84,7 +84,7 @@ unsigned int D_auto_src_ragewars_cup_category_3_arena_controls_us_rev1[11] = {
 
 /* 800E5240.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_cup_category_2_arena_controls_us_rev1[17] = {
+unsigned int g_cupCategoryTwoArenaControls[17] = {
     0x00000316, 0x00000313, 0x00000324, 0x00000323, 0x00000322, 0x00000329, 0x00000328, 0x00000327,
     0x0000032E, 0x0000032D, 0x00000312, 0x00000311, 0x0000031F, 0x00000320, 0x00000319, 0x0000031A,
     0x0000031B,

@@ -19,9 +19,9 @@ void func_8024F470_de(void *staticObject) {
     ((StaticObject *)(staticObject))->cached = 0;
 }
 
-CQuatern InstHdr_BuildActorGroundRotation(void *);
+CQuatern Insthdr_BuildActorGroundRotation(void *);
 CQuatern func_8024F478_de(void *actor) {
-    return InstHdr_BuildActorGroundRotation(actor);
+    return Insthdr_BuildActorGroundRotation(actor);
 }
 
 
@@ -124,7 +124,7 @@ void func_8024F634_de(void *arg0) {
     GraphU64_ConvertMatrixToFixed(matrix, (D_800D297C << 6) + 0x68 + o);
 }
 
-extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
+extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
@@ -143,7 +143,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, ((Access_s32_50 *)(arg0))->field, 1);
             Cache_ReleaseResource(0, resource);
-            found = func_802540F4_de(0, &sp28, key, g_simpModelsIndexText, 1);
+            found = Cache_RequestWordCountedResource(0, &sp28, key, g_simpModelsIndexText, 1);
             if (found != 0) {
                 ((StaticObject *)(arg0))->resource = SetN64_LocatePackSection((s32)sp28, key,
                                                     arg1 % *(s32 *)sp28,
@@ -191,12 +191,12 @@ s32 func_8024F858_de(StaticObject *staticObject) {
     return value;
 }
 
-extern void func_80253E64_de(s32 a, s32 **b, s32 c);
+extern void Cache_ReplaceResourcePairFirst(s32 a, s32 **b, s32 c);
 
 void func_8024F8DC_de(void *arg0, s32 **arg1) {
     s32 new_var;
     new_var = **arg1;
-    func_80253E64_de(0, arg1, Lighting_BuildLitModel(new_var, *((StaticObject *)(arg0))->renderResource, &((StaticObject *)(arg0))->effect[0], (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
+    Cache_ReplaceResourcePairFirst(0, arg1, Lighting_BuildLitModel(new_var, *((StaticObject *)(arg0))->renderResource, &((StaticObject *)(arg0))->effect[0], (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
 }
 
 #if !(defined(VERSION_US_REV1))

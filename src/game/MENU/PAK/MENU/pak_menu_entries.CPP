@@ -16,7 +16,7 @@
 
 
 
-void Pak_MoveMenuCursor(struct MenuRecAt10 *menu, u8 dir) {
+void Menu_MoveMenuCursor(struct MenuRecAt10 *menu, u8 dir) {
     struct EntryRecAt18V2 *entry;
     s32 old;
 
@@ -101,7 +101,7 @@ struct PakMenu {
     f32 openA; /* 0x30 */
     f32 openB; /* 0x34 */
 };
-s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
+s32 Menu_UpdateMenuEntries(PakMenu *menu, void *context) {
     s32 closeRequested = 0;
     PakEntry *entry;
     s32 i;
@@ -126,7 +126,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     entry = menu->entries + menu->selected;
     menu->fade += literals_Scene_GetPlatformRoutePoint;
     selectionFlags = entry->flags & 0x400000;
-    Pak_StepSpriteFrame(menu);
+    Menu_StepSpriteFrame(menu);
     switch (menu->state) {
     case 0:
         menu->openA += literals_Scene_GetPlatformRoutePoint;
@@ -189,20 +189,20 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     }
     if (selectionFlags == 0) {
         if (Control_IsLeftPressed(menu->input) != 0) {
-            Pak_MoveMenuCursor(menu, 0x10);
+            Menu_MoveMenuCursor(menu, 0x10);
         }
         if (Control_IsRightPressed(menu->input) != 0) {
-            Pak_MoveMenuCursor(menu, 0x11);
+            Menu_MoveMenuCursor(menu, 0x11);
         }
     } else if (menu->input->buttons & 0x60303) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
         if (Control_IsNavUp(menu->input) != 0) {
-            Pak_MoveMenuCursor(menu, 0x12);
+            Menu_MoveMenuCursor(menu, 0x12);
         }
         if (Control_IsNavDown(menu->input) != 0) {
-            Pak_MoveMenuCursor(menu, 0x13);
+            Menu_MoveMenuCursor(menu, 0x13);
         }
     }
     if (menu->state != 2) {
@@ -221,20 +221,20 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
 }
 
 
-extern void *Pak_GetListContext(s8 *);
-extern void Pak_MeasureMenuText(TextBoundsText *, CItemInfo *);
+extern void *Menu_GetListContext(s8 *);
+extern void Menu_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 D_800CD730;
 extern const f32 g_menuCenterFraction;
 
 /* Lay out visible menu entries and draw their callbacks with a pulsing selection highlight. */
-void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
+void Menu_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     CItemInfo bounds, metrics, placed;
     TextBoundsData *data;
     TextBoundsText *entry;
     s32 i;
     f32 centerX, centerY, top, bottom, alpha;
 
-    data = Pak_GetListContext(member);
+    data = Menu_GetListContext(member);
     bounds.left = 1024;
     bounds.right = -1024;
     bounds.m_Top = 1024;
@@ -256,7 +256,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                 metrics.width = 0;
                 metrics.height = 0;
             } else {
-                Pak_MeasureMenuText(entry, &metrics);
+                Menu_MeasureMenuText(entry, &metrics);
             }
             bounds.left = bounds.left < metrics.left ? bounds.left : metrics.left;
             bounds.right = bounds.right > metrics.right ? bounds.right : metrics.right;
@@ -289,7 +289,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
         if (entry->flags & 0x800000) {
             metrics.field0 = i;
             if (entry->flags & 0x20000000) {
-                Pak_MeasureMenuText(entry, &metrics);
+                Menu_MeasureMenuText(entry, &metrics);
                 metrics.width = 0;
                 metrics.height = 0;
                 metrics.left = data->x;
@@ -297,7 +297,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                 metrics.m_Top = data->y;
                 metrics.m_Bottom = 0;
             } else {
-                Pak_MeasureMenuText(entry, &metrics);
+                Menu_MeasureMenuText(entry, &metrics);
             }
             placed = metrics;
             if (!(entry->flags & 0x20000000)) {
@@ -345,7 +345,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern s32 D_800E28D0;
 extern TextBoundsFont D_800E1E24_de[];
-/* The font a text entry's style bits select (the switch of Pak_DrawStyledMenuText). */
+/* The font a text entry's style bits select (the switch of Menu_DrawStyledMenuText). */
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
     switch ((u32)text->flags & 0x3FE0) {
@@ -365,7 +365,7 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
 /* Draws the dark backing panel behind a menu: as wide as the screen, centred on the menu's anchor, and as
  * tall as a fraction of the screen height less a margin. The relative pass places it above the anchor, the
  * other below. Measures every entry first and draws nothing when the menu has no extent. */
-void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative) {
+void Menu_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative) {
     TextBoundsData *data = menu->data;
     TextBoundsFont *font = textBoundsFont(text);
     CItemInfo panel;
@@ -385,7 +385,7 @@ void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relativ
     bounds.m_Top = 0;
     bounds.m_Bottom = 0;
     for (i = 0; i < menu->count; i++) {
-        Pak_MeasureMenuText(&menu->entries[i], &bounds);
+        Menu_MeasureMenuText(&menu->entries[i], &bounds);
         panel.left = panel.left < bounds.left ? panel.left : bounds.left;
         panel.right = panel.right > bounds.right ? panel.right : bounds.right;
         panel.m_Top = panel.m_Top < bounds.m_Top ? panel.m_Top : bounds.m_Top;

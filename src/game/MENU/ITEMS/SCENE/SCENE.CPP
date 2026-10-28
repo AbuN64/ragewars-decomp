@@ -9,7 +9,7 @@ extern s32 Scene_GetIndexedModelResource(void *, s32);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 typedef struct { u32 w[7]; } Blk28;
-void OvlScene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
+void Scene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
     void *table;
     s32 bytes;
     s32 key;
@@ -29,7 +29,7 @@ void OvlScene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
         header = Cache_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
         if (header != 0) {
             key = SetN64_GetDirectoryEntry(*header, size, 1);
-            resource = func_802540F4_de(0, &table, key, g_constructMapSimpModelsIndex, 1);
+            resource = Cache_RequestWordCountedResource(0, &table, key, g_constructMapSimpModelsIndex, 1);
             if (resource != 0) {
                 shapeKey = SetN64_LocatePackSection(table, key, 0, &bytes);
                 shape = Cache_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, g_constructMapSimpleModel, 1);

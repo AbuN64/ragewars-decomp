@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-void func_802BCF10_de(void) {
+void __osGetFpcCsr(void) {
 }
 #else
 #endif

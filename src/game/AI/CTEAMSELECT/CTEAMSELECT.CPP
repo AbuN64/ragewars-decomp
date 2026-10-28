@@ -24,7 +24,7 @@
 #include "MENU/TEAM/80217388_4.H"
 #include "MENU/TEAM/80217388_7.H"
 
-extern s32 Player_PlayerHasAmmoForWeapon(void *, s32);
+extern s32 Playerai_PlayerHasAmmoForWeapon(void *, s32);
 
 /* 80217388_4.CPP */
 void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
@@ -62,7 +62,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
                 alpha = 1.0f;
                 green = red;
             } else {
-                red = Player_PlayerHasAmmoForWeapon(player, item->weapon);
+                red = Playerai_PlayerHasAmmoForWeapon(player, item->weapon);
                 red = red == 0 ? 100 : 200;
                 green = red;
                 blue = red;
@@ -281,7 +281,7 @@ typedef struct DraftState17F4C {
     u8 pad18[0x380 - 0x18]; s32 mode; u8 pad384[4]; s32 selection;
 } DraftState17F4C;
 
-s16 Weapon_NextAvailableWeapon(void *);
+s16 Weaponai_NextAvailableWeapon(void *);
 s32 Rumble_SetEffectOwnerSlot(s32, s32);
 void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
 {
@@ -294,7 +294,7 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
         if (!player->enabled) return;
         if (player->input->pressed & 0x8000) player->choice = Weapon_PickRandomArmedWeapon(player);
     } else if ((player->input->held & 0x8000) && player->config->mode) {
-        player->choice = Weapon_NextAvailableWeapon(player);
+        player->choice = Weaponai_NextAvailableWeapon(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
         func_80217D74_de(&state->state, player, arg2);
     }
@@ -375,7 +375,7 @@ void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponP
                 barrel->m_WeaponList[choice].m_Weapon = weapon;
                 if (player->m_CurrentWeapon == weapon) barrel->m_Selected = choice;
                 barrel->m_WeaponList[choice].m_pInfo = D_800D052C[weapon];
-                if (Player_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
+                if (Playerai_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
                 else barrel->m_WeaponList[choice].m_bEnabled = 0;
                 barrel->m_WeaponList[choice].m_Spin = 0.0f;
                 barrel->m_WeaponList[choice].m_Scale = D_800C913C_de;
@@ -443,8 +443,8 @@ f32 func_802184C0_de(f32 currentAngle, f32 targetAngle, s32 turnDirection, f32 a
     f32 f2;
     f32 f3;
 
-    GraphU64_WrapPeriodicValue(&currentAngle);
-    GraphU64_WrapPeriodicValue(&targetAngle);
+    Graphu64_WrapPeriodicValue(&currentAngle);
+    Graphu64_WrapPeriodicValue(&targetAngle);
     if (turnDirection > 0) {
         if (targetAngle < currentAngle) {
             targetAngle += D_800C2250_de;

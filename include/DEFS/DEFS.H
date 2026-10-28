@@ -1,7 +1,7 @@
 #ifndef DEFS_DEFS_H
 #define DEFS_DEFS_H
 #include "SYSTEM_3/80265370.H"
-extern s32 func_80265550_de(u32 *, s32, u32 group, s32 *, s32 *last);
+extern s32 Defs_FindSortedGroupRange(u32 *, s32, u32 group, s32 *, s32 *last);
 extern int Defs_GetBitArrayByteCount(int);
 extern void Defs_ToggleBit(s32, s32);
 extern f32 Defs_CosineEase(f32 fraction);

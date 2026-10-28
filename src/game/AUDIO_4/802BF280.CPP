@@ -3,7 +3,7 @@
 #include "AUDIO_4/802BF280.H"
 
 /** Read the SP status register. */
-unsigned int func_802BA190_de(void) {
+unsigned int Audio_ReadSignalProcessorStatus(void) {
     return *(volatile unsigned int *)0xA4040010;
 }
 

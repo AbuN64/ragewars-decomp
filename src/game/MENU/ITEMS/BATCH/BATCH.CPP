@@ -50,7 +50,7 @@ typedef struct SlotPool {
 
 /* Sets up a batch of count 0x40-byte entries starting at entries: remembers the block and half its count, runs
  * func_802B6B80_de on every entry, then hands the batch to Map_ResetFramePool. */
-void Items_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
+void Batch_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     s32 i;
 
     batch->entries = entries;
@@ -65,7 +65,7 @@ void Items_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
  * cleared words; the free list takes all slots, then the live list and the three group lists are emptied. Sets
  * the unit quad D_8011AF78 (corner signs and texture corners per vertex, white), builds the matrix D_8011AF38
  * for a quarter turn and records the owner word. */
-void Items_InitSlotPool(SlotPool *pool, s32 owner) {
+void Batch_InitSlotPool(SlotPool *pool, s32 owner) {
     s32 i;
     s32 corner;
 

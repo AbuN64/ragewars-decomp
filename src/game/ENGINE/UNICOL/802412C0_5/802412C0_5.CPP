@@ -6,15 +6,15 @@
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /** Set flag 8 in the first object and flag 0x10 in the second. */
-void func_802428D0_de(void *first, void *second) {
+void CPlatformCollision_MarkBlocked(void *first, void *second) {
     ActorRecAtB0 *actor = first;
-    Input_func_802426CC_de *input = second;
+    InputCPlatformCollisionLiftActorToSurface *input = second;
     actor->flags |= 8;
     input->flags38 |= 0x10;
 }
 
-void func_802428EC_de(void *platformMotion, void *levelActor) {
-    Actor_func_80241BAC_de *actor = platformMotion;
+void CPlatformCollision_ApplyMovement(void *platformMotion, void *levelActor) {
+    ActorCPlatformCollisionPushActorFromBox *actor = platformMotion;
     LevelActor *target = levelActor;
     CVector3 *position = &target->position1;
     actor->flags |= 8;

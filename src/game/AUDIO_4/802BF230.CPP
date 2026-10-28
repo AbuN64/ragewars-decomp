@@ -5,13 +5,13 @@
 #include "AUDIO_4/802BF280.H"
 
 
-s32 func_802BA140_de(void *arg0)
+s32 Audio_CheckSignalProcessorTaskYield(void *arg0)
 {
     s32 selected_bit;
     u32 status;
     func_80203E78_S1 *state = arg0;
 
-    status = func_802BA190_de();
+    status = Audio_ReadSignalProcessorStatus();
     selected_bit = status >> 8;
     selected_bit = selected_bit & 1;
     if (status & 0x80) {

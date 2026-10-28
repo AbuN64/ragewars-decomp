@@ -18,7 +18,7 @@
 
 
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
 s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state)
 {
@@ -46,7 +46,7 @@ s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state)
             return ret;
     }
 
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir);
+    ret = __osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir);
     if (ret != 0)
         return ret;
 

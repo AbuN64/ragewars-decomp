@@ -25,7 +25,7 @@ extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle
 extern void *Scene_GetActorDefinition(void *world, s32 id);
 
 
-extern s32 OvlScene_FindNearestPlacedObject(World *world, void *data, s32 group, void *buf);
+extern s32 Scene_FindNearestPlacedObject(World *world, void *data, s32 group, void *buf);
 
 /* Loads every still-empty cell of the level's tile grid: for each row and column whose cell
    record has no resource, fetches the cell's block through SetN64_LocatePackSection and Cache_RequestResource,
@@ -44,13 +44,13 @@ extern s32 OvlScene_FindNearestPlacedObject(World *world, void *data, s32 group,
 
 
 
-extern void SimpleInstance_RegisterModelVariantResources(ObjB *obj, s32 arg1);
+extern void Simpinst_RegisterModelVariantResources(ObjB *obj, s32 arg1);
 
 extern void *func_8024F6EC_de(ObjB *obj, s32 type);
 
-extern void StaticInstance_RegisterGeometryResources(ObjA *obj, s32 arg1);
+extern void Statinst_RegisterGeometryResources(ObjA *obj, s32 arg1);
 
-extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
+extern void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 
 extern void Cache_UnlockResource(s32, void *);
@@ -65,11 +65,11 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern struct Shape_func_8021A2D4_de_2 D_801462CC;
 
-extern void Items_LoadPreviewBufferA(ItemsPreviewStateA *);
+extern void Scene_LoadPreviewBufferA(ItemsPreviewStateA *);
 
-extern void Items_LoadPreviewBufferB(char *);
+extern void Scene_LoadPreviewBufferB(char *);
 
-void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
+void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
     Shared_Placed spawns[8];
     Shared_Placed extra;
     s32 n;
@@ -99,7 +99,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
     f32 best;
     f32 dist;
 
-    if (PpDecom_UnpackResource(handle, 1) != 0) {
+    if (Ppdecom_UnpackResource(handle, 1) != 0) {
         mode = Scene_GetModelSectionTwoRecord(world, 0);
         node = (*handle)->data;
         n = node->count;
@@ -112,7 +112,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
             records = node->records;
             objects = hdr->objects;
             if (world->unk1B41C == 0) {
-                world->unk1B434 = OvlScene_FindNearestPlacedObject(world, node->records[0].vec4, world->unk1B40C, world->pad1B420);
+                world->unk1B434 = Scene_FindNearestPlacedObject(world, node->records[0].vec4, world->unk1B40C, world->pad1B420);
                 if (world->unk1B434 != 0) {
                     world->unk1B41C = 1;
                 }
@@ -142,7 +142,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
                 rec = &records[i];
                 obj = &objects[i];
                 specialSet = 0xC1D;
-                func_8024B3A8_de(obj, rec, mode, i);
+                Gobjinst_InitializePlacedActor(obj, rec, mode, i);
                 definition = Scene_GetActorDefinition(world, rec->resource22);
                 if (*definition != 0xB && i != 0) {
                     continue;
@@ -164,7 +164,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
                                 spawn = &spawns[spawnIndex];
                             }
                             rec->resource20 = (u16)spawn->pad12;
-                            GraphU64_WrapPeriodicValue(&spawn->unkC);
+                            Graphu64_WrapPeriodicValue(&spawn->unkC);
                             angle = spawn->unkC;
                             if (!(angle > 3.1415927f)) {
                                 if (!(angle < -3.1415927f)) {
@@ -189,7 +189,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
                                 spawnIndex = 0;
                             }
                         }
-                        Ovlgame_InitActorParts(player, rec, mode, i);
+                        Player_InitActorParts(player, rec, mode, i);
                         slot++;
                         playerIndex++;
                     } while (playerIndex < D_80145048);
@@ -199,12 +199,12 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
                 obj = &objects[i];
                 best = 3.4028235e38f;
                 obj->controller = 0;
-                if (func_8024DDB4_de(obj) == 0) {
+                if (Insthdr_GetModelPropertyFlag2(obj) == 0) {
                     continue;
                 }
                 for (peerIndex = world->unk13C; peerIndex < n; peerIndex++) {
                     other = &objects[peerIndex];
-                    if (obj->definition->kind == other->definition->kind && func_8024DD8C_de(other) != 0 && obj != other) {
+                    if (obj->definition->kind == other->definition->kind && Insthdr_GetModelPropertyFlag1(other) != 0 && obj != other) {
                         if (obj->controller != 0) {
                             dist = Barrel_GetEyeDistanceSquared(obj, other->position0);
                             if (dist < best) {
@@ -224,7 +224,7 @@ void OvlScene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle)
     }
 }
 
-void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
+void Scene_LoadGridCells(Level_func_8044CD8C_de *level) {
     s32 size;
     s32 width;
     s32 row;
@@ -275,8 +275,8 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
                 for (i = 0; i < n; i++) {
                     a = &objsA[i];
                     a->block = block;
-                    StaticInstance_RegisterGeometryResources(a, 0);
-                    handle = StaticInstance_AcquireGeometry(a, a->type);
+                    Statinst_RegisterGeometryResources(a, 0);
+                    handle = Statinst_AcquireGeometry(a, a->type);
                     if (handle != 0) {
                         Geometry_UnlockMaterialResources(handle);
                         Cache_UnlockResource(0, handle);
@@ -288,7 +288,7 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
                 for (i = 0; i < m; i++) {
                     b = &objsB[i];
                     b->block = block;
-                    SimpleInstance_RegisterModelVariantResources(b, 0);
+                    Simpinst_RegisterModelVariantResources(b, 0);
                     handle = func_8024F6EC_de(b, b->type);
                     if (handle != 0) {
                         Geometry_UnlockMaterialResources(handle);
@@ -301,9 +301,9 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
     }
 }
 
-void OvlScene_InitPreview(Shared_World *world, s32 level) {
-    Items_LoadPreviewBufferA((ItemsPreviewStateA *)world);
-    Items_LoadPreviewBufferB((char *)world);
+void Scene_InitPreview(Shared_World *world, s32 level) {
+    Scene_LoadPreviewBufferA((ItemsPreviewStateA *)world);
+    Scene_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
     world->previewTimer = 0x15;
     world->previewStart = D_801462CC.field_0;
@@ -321,7 +321,7 @@ extern void *func_802BD3A0_de(void *, const void *, int); /* extern */
 extern char D_00285160;
 extern char g_loadSavePersistentData;
 
-void Items_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
+void Scene_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
     s32 *persistentDataResource;
     s32 temp_a1;
 

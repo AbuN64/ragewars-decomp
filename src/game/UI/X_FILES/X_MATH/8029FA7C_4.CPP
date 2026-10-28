@@ -128,10 +128,10 @@ void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *arg0) {
     arg0->m[2][2] = D_800C5CBC_de;
 }
 
-void XMath_PremultiplyEulerRotation(s32 arg0, f32 *angles) {
+void XMath_PremultiplyEulerRotation(s32 matrix, f32 *angles) {
     f32 buf[16];
     MatrixFromAngles(buf, angles);
-    XMath_MultiplyMatrices(arg0, buf, arg0);
+    XMath_MultiplyMatrices(matrix, buf, matrix);
 }
 
 void XMath_PremultiplyPitchRotation(s32 arg0, f32 arg1) {

@@ -9,7 +9,7 @@ unsigned int D_blob_d9b2fec791c4c1fdb586[3] = {
 #endif
 
 /* 8043A0B0_4.CPP */
-/* ROM-grounded data: rodata/Frontend_ShowEquipChoice/800E2028 (the function's own switch table now
+/* ROM-grounded data: rodata/Equip_ShowEquipChoice/800E2028 (the function's own switch table now
    comes from its C; what follows it in eu and us stays here) */
 #ifdef VERSION_EU
 const unsigned int g_equipmentSelectionRetainedData[8] = {

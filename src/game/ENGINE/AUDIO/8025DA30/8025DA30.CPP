@@ -79,8 +79,8 @@ void Audio_DisableMusicGainOverride(Track *track) {
     track->unk38 = 0;
 }
 
-s32 func_802AFF90_de(s32);
+s32 alCSPStop(s32);
 void Audio_StopMusic(s32 a) {
     (((struct IntegerState2C_2 *) ((s8 *) a))->unk_28) = -1;
-    func_802AFF90_de((((struct IntegerState2C_2 *) ((s8 *) a))->unk_14));
+    alCSPStop((((struct IntegerState2C_2 *) ((s8 *) a))->unk_14));
 }

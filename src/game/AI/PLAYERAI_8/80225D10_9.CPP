@@ -53,7 +53,7 @@ extern s32 func_8024D160_de(void *arg0);
 #if defined(VERSION_US_REV1)
 #endif
 
-extern void Sky_LoadProjectionMatrix(void *arg0);
+extern void Gsky_LoadProjectionMatrix(void *arg0);
 
 extern void func_8021EEFC_de(void *arg0, void *arg1);
 
@@ -373,7 +373,7 @@ void func_8022A170_de(struct CPlayerPool_t *playerPool) {
             func_8024B8C4_de(&((struct Shared_ActorView *)(node))->weapon);
             func_8022BC94_de(node, 0);
             if (base[0x1D] != 0) {
-                func_8024B7E4_de(node, 1);
+                Gobjinst_BuildAnimatedPose(node, 1);
             }
             node = ((struct Shared_ActorView *)(node))->next;
         } while (node != 0);
@@ -428,7 +428,7 @@ void func_8022A2A0_de(void *world, void *view) {
             argument = view;
             if (cur->unk5DC != view ||
                 argument->unk24 == 1 ||
-                func_80245908_de() != 0) {
+                Cinema_IsSequenceFlagTwoSet() != 0) {
                 func_8021C9D8_de(cur, view);
             }
             cur = cur->unk16E0;
@@ -485,7 +485,7 @@ void func_8022A398_de(void *roundContext, void *entity) {
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
 #endif
-        Sky_LoadProjectionMatrix(entity);
+        Gsky_LoadProjectionMatrix(entity);
         viewPlayer = round->players;
         if (viewPlayer != 0) {
             do {
@@ -502,12 +502,12 @@ void func_8022A398_de(void *roundContext, void *entity) {
 
 void func_8022A3F8_de(void *arg0, void *viewState) { Player_DrawMatchCountdown(arg0, viewState); }
 
-int Player_GetFirstPlayer(void *world) {
+int Playerai_GetFirstPlayer(void *world) {
     Context *context = world;
     return (int)context->head;
 }
 
-void *Player_FindTransientPlayer(struct Context *context) {
+void *Playerai_FindTransientPlayer(struct Context *context) {
     CGameStatus *base = (&D_801462C8.counters);
     Shared_ActorView *record;
 

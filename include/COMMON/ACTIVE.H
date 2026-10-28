@@ -13,10 +13,10 @@ struct RecordRecAt189 {
     char pad18E[2];
 };
 
-extern void Frontend_StartCaptureTheFlagMatch();
+extern void Random_StartCaptureTheFlagMatch();
 
 
-extern void Frontend_StartTeamMatch();
+extern void Random_StartTeamMatch();
 
 
 struct Active;
@@ -29,9 +29,9 @@ struct Active {
     u8 time;
 };
 
-extern void Frontend_StartFragTagMatch();
+extern void Random_StartFragTagMatch();
 
-extern void Frontend_StartIndividualMatch();
+extern void Random_StartIndividualMatch();
 
 
 

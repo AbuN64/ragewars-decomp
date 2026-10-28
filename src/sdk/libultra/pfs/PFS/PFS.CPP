@@ -15,7 +15,7 @@
    controller pak really has, build a fresh id from the damaged one, write it to all four id areas and
    verify the first, with __osIdCheckSum as an inline helper the cartridge inlines. */
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 extern u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite);
 
 static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)
@@ -62,7 +62,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
         ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, temp);
+        ret = __osContRamRead(pfs->queue, pfs->channel, 0, temp);
         if (ret != 0)
             return ret;
 
@@ -75,7 +75,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
         ret = __osContRamWrite(pfs->queue, pfs->channel, 0, temp, 0);
         if (ret != 0)
             return ret;
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, comp);
+        ret = __osContRamRead(pfs->queue, pfs->channel, 0, comp);
         if (ret != 0)
             return ret;
 
@@ -94,7 +94,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
             ret = Pfs_SelectActiveBank(pfs);
             if (ret != 0)
                 return ret;
-            ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, (u8 *)temp);
+            ret = __osContRamRead(pfs->queue, pfs->channel, 0, (u8 *)temp);
             if (ret != 0)
                 return ret;
 
@@ -128,7 +128,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
             return ret;
     }
 
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, (u8 *)temp);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 1, (u8 *)temp);
     if (ret != 0)
         return ret;
 
@@ -164,7 +164,7 @@ s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp)
     index[2] = 4;
     index[3] = 6;
     for (i = 1; i < 4; i++) {
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, index[i], (u8 *)temp);
+        ret = __osContRamRead(pfs->queue, pfs->channel, index[i], (u8 *)temp);
         if (ret != 0)
             return ret;
         __osIdCheckSum((u16 *)temp, &sum, &isum);
@@ -222,7 +222,7 @@ s32 __osGetId(OSPfs *pfs)
         if (ret != 0)
             return ret;
     }
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, (u8 *)&temp);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 1, (u8 *)&temp);
     if (ret != 0)
         return ret;
     __osIdCheckSum((u16 *)&temp, &sum, &isum);
@@ -263,7 +263,7 @@ s32 __osGetId(OSPfs *pfs)
     pfs->inode_table = 8;
     pfs->minode_table = (pfs->banks + 1) * 8;
     pfs->dir_table = pfs->minode_table + pfs->banks * 8;
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 7, pfs->label);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 7, pfs->label);
     if (ret != 0)
         return ret;
     return 0;
@@ -297,7 +297,7 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
             ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr, 0);
             ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr, 0);
         } else {
-            ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr);
+            ret = __osContRamRead(pfs->queue, pfs->channel, pfs->inode_table + bank * 8 + j, addr);
         }
 
         if (ret != 0) {
@@ -310,7 +310,7 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
         if (sum != inode->inode_page[0].inode_t.page) {
             for (j = 0; j < 8; j++) {
                 addr = ((u8 *)inode->inode_page + j * 32);
-                ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr);
+                ret = __osContRamRead(pfs->queue, pfs->channel, pfs->minode_table + bank * 8 + j, addr);
             }
 
             if (sum != inode->inode_page[0].inode_t.page) {
@@ -377,13 +377,13 @@ s32 __osCheckId(OSPfs *pfs)
             return ret;
     }
 
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, temp);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 1, temp);
 
     if (ret != 0) {
         if (ret != 2) {
             return ret;
         }
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, temp);
+        ret = __osContRamRead(pfs->queue, pfs->channel, 1, temp);
         if (ret != 0)
             return ret;
     }

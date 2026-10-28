@@ -117,17 +117,17 @@ void Scene_CollectLevelSwitches(WorldRecAt1B660 *world) {
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
 extern void Nav_ResetPlayerState();
-extern void Nav_AssignPlatformEndpoints();
-extern s32 Nav_FindNearestPointIndex();
-extern void * Player_GetPlayerByIndex();
+extern void Portal_AssignPlatformEndpoints();
+extern s32 Portal_FindNearestPointIndex();
+extern void * Playerai_GetPlayerByIndex();
 extern void Camera_UpdateViewportLayoutAndBounds();
 extern void func_80246E44_de(void *);
 extern void func_8024B2D0_de(void *);
 extern void func_8024BE3C_de(void *);
 extern struct Shape_typemap_165 * Cache_AllocateResource();
 extern void func_80253908_de(s32);
-extern s32 func_80254284_de(s32, void *, s32, void *);
-extern void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
+extern s32 Cache_RequestWordCountedResourcePinned(s32, void *, s32, void *);
+extern void **Cache_RequestPackSection(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
 extern s32 func_80255228_de(void *);
 extern void func_8025C8D8_de(void *, void *, s32);
 extern void Scene_ShowResultsGoal();
@@ -142,18 +142,18 @@ extern s32 XPlus_NextRandomInteger();
 extern s32 OnScreen_StartFirstStatusBar();
 extern void OnScreen_StartSecondStatusBar();
 extern void Menu_TriggerTrackEvent();
-extern void Ovlgame_RefreshActivePlayerSceneState();
-extern void Items_InitGroupPools();
+extern void Player_RefreshActivePlayerSceneState();
+extern void Pools_InitGroupPools();
 extern void Ovlgame_InitializeSceneEffectPool();
-extern void Items_InitEntryBatch();
-extern void Items_InitSlotPool();
-extern void OvlScene_LoadSceneLight();
-extern void OvlScene_FreeSceneResources();
-extern void OvlScene_UpdatePendingObjects();
-extern void OvlScene_DispatchSelectedEntityKinds();
-extern void Ovlgame_InitEffectPool();
-extern void Ovlgame_InitializeWorldActorPools();
-extern void Ovlgame_StartPanelMovers(void *panel);
+extern void Batch_InitEntryBatch();
+extern void Batch_InitSlotPool();
+extern void Scene_LoadSceneLight();
+extern void Scene_FreeSceneResources();
+extern void Scene_UpdatePendingObjects();
+extern void Scene_DispatchSelectedEntityKinds();
+extern void Effect_InitEffectPool();
+extern void Hud_InitializeWorldActorPools();
+extern void Hud_StartPanelMovers(void *panel);
 
 extern unsigned char D_00285160[];
 extern unsigned char D_0044C108[];
@@ -201,8 +201,8 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     s32 temp_v0_20;
     s32 temp_v0_21;
     s32 resourceKey;
-    s32 temp_v0_8;
-    s32 temp_v0_9;
+    s32 sceneDirectoryEntry;
+    s32 visibilityResourceKey;
     s32 temp_v1_2;
     s32 temp_v1_3;
     s32 temp_v1_4;
@@ -234,7 +234,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     s32 var_s2_2;
     s32 var_s2_4;
     s32 var_s5;
-    s32 var_s6;
+    s32 levelSelection;
     s32 kind_656;
     s32 var_v0_2;
     s32 var_v0_3;
@@ -247,7 +247,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     s32 var_v1_2;
     s32 kind;
     u8 temp_v0_3;
-    void **temp_v0_10;
+    void **sceneResourceHandle;
     void **temp_v0_11;
     void **temp_v0_12;
     void **temp_v0_14;
@@ -262,23 +262,23 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     struct func_80203E78_S1 *temp_v0_13;
     struct func_80203E78_S1 *temp_v0_15;
     struct func_80203E78_S1 *temp_v0_18;
-    struct Shared_SceneActorKind *var_s2_3;
-    void *temp_v0_2;
+    struct Shared_SceneActorKind *primaryActorKind;
+    void *levelActor;
     struct Shared_func_80286A78_S2 *scene_actor_ptr;
     void *temp_v1;
     struct SharedRecAt14 *temp_v1_5;
     void *temp_v1_6;
-    struct SharedRecAt28V1 *temp_v1_7;
-    struct SharedRecAt28V1 *temp_v1_9;
+    struct SharedRecAt28V1 *primaryActorDefinition;
+    struct SharedRecAt28V1 *secondaryActorDefinition;
     void *var_a0;
     void *var_a1;
-    struct Shared_SceneActorKind *var_a1_2;
-    void *var_a2_2;
+    struct Shared_SceneActorKind *secondaryActorKind;
+    void *secondaryActor;
     void *var_s0_5;
-    struct Shared_func_80286A78_S2 *var_s1_4;
-    void *var_v0;
+    struct Shared_func_80286A78_S2 *playerActor;
+    void *resetCursor;
 
-    var_s6 = target;
+    levelSelection = target;
     (((struct SharedRecAt1B92C *)(table))->unk1B2FC) = D_800C51D4;
     var_s5 = arg2;
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
@@ -299,39 +299,39 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     Scene_ReleaseCachedLevelData(table);
     func_80253908_de(0);
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
-        OvlScene_FreeSceneResources(table);
+        Scene_FreeSceneResources(table);
     }
     func_80253908_de(0);
     D_800CD730 = 0;
     func_8025476C_de(8);
     Scene_ClearSceneObjectCounts(table);
-    Items_InitSlotPool(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
+    Batch_InitSlotPool(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
     var_s2 = 0;
-    Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
+    Effect_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
     Ovlgame_InitializeSceneEffectPool(&((struct SharedRecAt1B92C *)table)->address15388);
-    Ovlgame_InitializeWorldActorPools(&D_801376F8.actors);
+    Hud_InitializeWorldActorPools(&D_801376F8.actors);
     func_8023EE00_de();
     Ovlgame_InitializeDynamicLightPool(&((struct SharedRecAt1B92C *)table)->address1B320);
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
-    Ovlgame_StartPanelMovers(&D_801376F8);
+    Hud_StartPanelMovers(&D_801376F8);
     do {
-        var_s1_4 = Player_GetPlayerByIndex(&D_80145040, var_s2);
-        if (var_s1_4 != 0) {
-            temp_v1 = var_s1_4->unk5D8;
+        playerActor = Playerai_GetPlayerByIndex(&D_80145040, var_s2);
+        if (playerActor != 0) {
+            temp_v1 = playerActor->unk5D8;
             if ((((struct SharedRecAt91 *)temp_v1)->unk78 == 1) && (((struct SharedRecAt91 *)temp_v1)->unk91 == 1)) {
-                Nav_ResetPlayerState(var_s1_4->unk1454);
+                Nav_ResetPlayerState(playerActor->unk1454);
             }
             if ((((struct SharedRecAt98 *)(&D_801468A0))->unk98) != 0) {
-                temp_a2 = var_s1_4->unk5D8;
+                temp_a2 = playerActor->unk5D8;
                 temp_v0_3 = (((struct SharedRecAt94 *)(temp_a2))->unk94);
                 if (temp_v0_3 != 0) {
                     if (temp_v0_3 == 1) {
-                        OnScreen_StartFirstStatusBar(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
+                        OnScreen_StartFirstStatusBar(&D_801376F8, playerActor, &((struct SharedRecAt94 *)temp_a2)->address84);
                     } else if (temp_v0_3 == 2) {
-                        OnScreen_StartSecondStatusBar(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
+                        OnScreen_StartSecondStatusBar(&D_801376F8, playerActor, &((struct SharedRecAt94 *)temp_a2)->address84);
                     }
-                    if (var_s1_4->unk5D8->unk80 == 0xB) {
-                        OnScreen_StartFirstStatusBar(&D_801376F8, var_s1_4, D_800D3164);
+                    if (playerActor->unk5D8->unk80 == 0xB) {
+                        OnScreen_StartFirstStatusBar(&D_801376F8, playerActor, D_800D3164);
                     }
                 }
             }
@@ -339,15 +339,15 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
         var_s2 += 1;
     } while (var_s2 < 8);
     temp_v1_2 = *(((struct SharedRecAt1B92C *)(table))->unk4C);
-    if (temp_v1_2 < var_s6) {
-        var_s6 = temp_v1_2 - 1;
+    if (temp_v1_2 < levelSelection) {
+        levelSelection = temp_v1_2 - 1;
         var_s5 = 0;
     }
-    (((struct SharedRecAt1B92C *)(table))->unk1B40C) = var_s6;
+    (((struct SharedRecAt1B92C *)(table))->unk1B40C) = levelSelection;
     if (var_s5 == 0) {
         (((struct SharedRecAt1B92C *)(table))->unk1B41C) = 0;
     }
-    Scene_CopyLevelName(table, var_s6, &((struct SharedRecAt1B92C *)table)->address1B2BC, 0x3F);
+    Scene_CopyLevelName(table, levelSelection, &((struct SharedRecAt1B92C *)table)->address1B2BC, 0x3F);
     temp_v1_3 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
     if (temp_v1_3 < 0x1CEA) {
         if (temp_v1_3 < 0x1CE8) {
@@ -440,26 +440,26 @@ scene_size_done:
     func_80253908_de(0);
     temp_v0_4 = Cache_AllocateResource(0, count << 6, 3, &s_matricesText);
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
-    Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
-    resourceKey = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
-    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, g_levelIndexText);
-    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &s_collisionText);
+    Batch_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
+    resourceKey = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), levelSelection);
+    (((struct SharedRecAt1B92C *)(table))->unkB8) = Cache_RequestWordCountedResourcePinned(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, g_levelIndexText);
+    temp_v0_6 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &s_collisionText);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
     (((struct SharedRecAt1B92C *)(table))->unk6C) = (void *) *temp_v0_6;
-    temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
+    temp_v0_7 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
     (((struct SharedRecAt1B92C *)(table))->unkC0) = temp_v0_7;
     (((struct SharedRecAt1B92C *)(table))->unk68) = (void *) *temp_v0_7;
-    temp_v0_8 = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 5);
-    (((struct SharedRecAt1B92C *)(table))->unk30) = temp_v0_8;
-    (((struct SharedRecAt1B92C *)(table))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->address64, temp_v0_8, &D_800C5134_de);
+    sceneDirectoryEntry = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 5);
+    (((struct SharedRecAt1B92C *)(table))->unk30) = sceneDirectoryEntry;
+    (((struct SharedRecAt1B92C *)(table))->unkC4) = Cache_RequestWordCountedResourcePinned(0, &((struct SharedRecAt1B92C *)table)->address64, sceneDirectoryEntry, &D_800C5134_de);
     if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xD) {
-        temp_v0_9 = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
-        (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
-        (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &s_visibilityText);
-        temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
-        temp_v1_5 = *temp_v0_10;
+        visibilityResourceKey = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
+        (((struct SharedRecAt1B92C *)(table))->unk40) = visibilityResourceKey;
+        (((struct SharedRecAt1B92C *)(table))->unk100) = Cache_RequestWordCountedResourcePinned(0, &((struct SharedRecAt1B92C *)table)->unk8C, visibilityResourceKey, &s_visibilityText);
+        sceneResourceHandle = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
+        temp_v1_5 = *sceneResourceHandle;
         *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)table)->unk1B910 = *temp_v1_5;
-        Cache_ReleaseResource(0, temp_v0_10);
+        Cache_ReleaseResource(0, sceneResourceHandle);
         if ((((struct SharedRecAt1B92C *)(table))->unk1B920) != 0 || (((struct SharedRecAt1B92C *)(table))->unk1B924) != 0) {
             (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 1;
         } else {
@@ -468,21 +468,21 @@ scene_size_done:
     } else {
         (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 0;
     }
-    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 7, resourceKey, table, &D_0044C108, &s_linksText);
-    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 2, resourceKey, table, &D_0044DA54, &s_levelPathsText);
-    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &s_levelInfoText);
+    (((struct SharedRecAt1B92C *)(table))->unkD4) = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 7, resourceKey, table, &D_0044C108, &s_linksText);
+    (((struct SharedRecAt1B92C *)(table))->unkEC) = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 2, resourceKey, table, &D_0044DA54, &s_levelPathsText);
+    temp_v0_11 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &s_levelInfoText);
     (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
     (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
-    OvlScene_LoadSceneLight(table);
+    Scene_LoadSceneLight(table);
     resource_count = *(((struct SharedRecAt1B92C *)(table))->sceneResources);
     D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(table))->unk1B2B0))->unk10) >> 2) & 1;
     if (resource_count >= 9) {
-        temp_v0_12 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 9, resourceKey, table, &D_00285160, &D_800C5180_de);
+        temp_v0_12 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 9, resourceKey, table, &D_00285160, &D_800C5180_de);
         (((struct SharedRecAt1B92C *)(table))->unkF0) = temp_v0_12;
         temp_v0_13 = *temp_v0_12;
         (((struct SharedRecAt1B92C *)(table))->navPointSet) = temp_v0_13;
         (((struct SharedRecAt1B92C *)(table))->unk1B4E0) = (s32) temp_v0_13->unk4;
-        temp_v0_14 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xA, resourceKey, table, &D_00285160, &D_800C5190_de);
+        temp_v0_14 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xA, resourceKey, table, &D_00285160, &D_800C5190_de);
         (((struct SharedRecAt1B92C *)(table))->unkF4) = temp_v0_14;
         temp_v0_15 = *temp_v0_14;
         (((struct SharedRecAt1B92C *)(table))->unk1B4E4) = temp_v0_15;
@@ -495,7 +495,7 @@ scene_size_done:
             var_s2 = 0;
             if ((((struct SharedRecAt1B92C *)(table))->unk1B4E0) > 0) {
                 do {
-                    Nav_InitSearchNode(record, var_s2);
+                    Portal_InitSearchNode(record, var_s2);
                     func_80255D14_de(&((struct SharedRecAt1B92C *)table)->address1B500, record);
                     record = (void *)((char *)record + 0x50);
                 } while ((((struct SharedRecAt1B92C *)table)->unk1B4E0) > ++var_s2);
@@ -503,13 +503,13 @@ scene_size_done:
         }
     }
     if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xC) {
-        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xB, resourceKey, table, &D_00285160, &s_levelNavVisionText);
+        temp_v0_17 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xB, resourceKey, table, &D_00285160, &s_levelNavVisionText);
         (((struct SharedRecAt1B92C *)(table))->unkFC) = temp_v0_17;
         temp_v0_18 = *temp_v0_17;
         (((struct SharedRecAt1B92C *)(table))->unk1B4EC) = temp_v0_18;
         (((struct SharedRecAt1B92C *)(table))->unk1B4F0) = (s32) temp_v0_18->unk4;
     }
-    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 6, resourceKey, table, &D_00285160, &s_skyLayersText);
+    temp_v0_19 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 6, resourceKey, table, &D_00285160, &s_skyLayersText);
     (((struct SharedRecAt1B92C *)(table))->unkCC) = temp_v0_19;
     temp_v1_6 = *temp_v0_19;
     (((struct SharedRecAt1B92C *)(table))->unk1B300) = (void *) (&((struct SharedRecAt8V1 *)temp_v1_6)->address8);
@@ -517,19 +517,19 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unk0) = 1;
     (((struct SharedRecAt1B92C *)(table))->unk138) = 0;
     (((struct SharedRecAt1B92C *)(table))->unk140) = 0;
-    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &s_animatedInstancesText);
+    (((struct SharedRecAt1B92C *)(table))->unkD0) = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &s_animatedInstancesText);
     Scene_CollectLevelSwitches(table);
 
     i = 0;
     var_v1 = 0xF;
 
     var_a0_3 = (s32)(((struct SharedRecAt1B92C *)(table))->unk138);
-    var_v0 = &((struct SharedRecAt1B92C *)table)->address3C;
+    resetCursor = &((struct SharedRecAt1B92C *)table)->address3C;
     (((struct SharedRecAt1B92C *)(table))->unk1B6A4) = 0;
     do {
-        (((struct SharedRecAt1B664V2 *)(var_v0))->unk1B664) = 0;
+        (((struct SharedRecAt1B664V2 *)(resetCursor))->unk1B664) = 0;
         var_v1 -= 1;
-        var_v0 -= 4;
+        resetCursor -= 4;
     } while (var_v1 >= 0);
 
     var_v1 = 0;
@@ -575,19 +575,19 @@ loop_81:
         kind_653 = 0x653;
         kind_655 = 0x655;
         kind_656 = 0x656;
-        var_s2_3 = &((struct SharedRecAtE4V1 *)scene_actor_ptr)->kind;
+        primaryActorKind = &((struct SharedRecAtE4V1 *)scene_actor_ptr)->kind;
 loop_89:
-        temp_v1_7 = ((struct Shared_SceneActorPrefix *)var_s2_3)[-1].definition;
-        temp_v0_20 = temp_v1_7->unk0;
+        primaryActorDefinition = ((struct Shared_SceneActorPrefix *)primaryActorKind)[-1].definition;
+        temp_v0_20 = primaryActorDefinition->unk0;
         if (temp_v0_20 == actor_type3) {
-            if (Scene_GetModelIdAtIndex(&g_world, temp_v1_7->unk28) != actor_kind_bd7) {
+            if (Scene_GetModelIdAtIndex(&g_world, primaryActorDefinition->unk28) != actor_kind_bd7) {
                 goto block_108;
             }
             D_800F3CD0.primary.kindBd7 = scene_actor_ptr;
             goto block_109;
         } else {
             if (temp_v0_20 == kind_actor) {
-                kind = var_s2_3->kind;
+                kind = primaryActorKind->kind;
                 if (kind == kind_654) {
                     goto actor_kind_654;
                 }
@@ -617,7 +617,7 @@ actor_kind_656:
                 D_800F3CD0.primary.actors[3] = scene_actor_ptr;
             }
 block_108:
-            var_s2_3 = NEXT_SCENE_ACTOR(var_s2_3);
+            primaryActorKind = NEXT_SCENE_ACTOR(primaryActorKind);
             scene_actor_ptr = NEXT_SCENE_ACTOR(scene_actor_ptr);
             var_s1_3 += 1;
             if (var_s1_3 >= (((struct SharedRecAt1B92C *)(table))->unk140)) {
@@ -631,7 +631,7 @@ block_109:
     }
 
     var_a0_3 = 9;
-    var_a2_2 = (((struct SharedRecAt1B92C *)(table))->unk138);
+    secondaryActor = (((struct SharedRecAt1B92C *)(table))->unk138);
     var_v0_4 = 9 * sizeof(void *);
 
     D_800F3CD0.kindBd6 = 0;
@@ -646,24 +646,24 @@ block_109:
         second_kind_bd6 = 0xBD6;
         second_type10 = 0xA;
         second_kind_64e = 0x64E;
-        var_a1_2 = &((struct SharedRecAtE4V1 *)var_a2_2)->kind;
+        secondaryActorKind = &((struct SharedRecAtE4V1 *)secondaryActor)->kind;
 loop_114:
-        temp_v1_9 = ((struct Shared_SceneActorPrefix *)var_a1_2)[-1].definition;
-        temp_v0_21 = temp_v1_9->unk0;
+        secondaryActorDefinition = ((struct Shared_SceneActorPrefix *)secondaryActorKind)[-1].definition;
+        temp_v0_21 = secondaryActorDefinition->unk0;
         if (temp_v0_21 == second_type3) {
-            if (temp_v1_9->unk28 == second_kind_bd6) {
-                D_800F3CD0.kindBd6 = var_a2_2;
+            if (secondaryActorDefinition->unk28 == second_kind_bd6) {
+                D_800F3CD0.kindBd6 = secondaryActor;
             }
         } else if (temp_v0_21 == second_type10) {
-            if (var_a1_2->kind == second_kind_64e) {
-                D_800F3CD0.kind64e[j] = var_a2_2;
+            if (secondaryActorKind->kind == second_kind_64e) {
+                D_800F3CD0.kind64e[j] = secondaryActor;
                 j += 1;
             }
         }
         var_v0_5 = j < 0xA;
         if (var_v0_5 != 0) {
-            var_a1_2 = NEXT_SCENE_ACTOR(var_a1_2);
-            var_a2_2 = NEXT_SCENE_ACTOR(var_a2_2);
+            secondaryActorKind = NEXT_SCENE_ACTOR(secondaryActorKind);
+            secondaryActor = NEXT_SCENE_ACTOR(secondaryActor);
             var_a0_3 += 1;
             if (var_a0_3 >= (((struct SharedRecAt1B92C *)(table))->unk140)) {
                 goto block_122;
@@ -675,7 +675,7 @@ block_122:
         D_801462C8.counters.m_nFragTagSkin = XPlus_NextRandomInteger(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
-    OvlScene_UpdatePendingObjects(table);
+    Scene_UpdatePendingObjects(table);
     temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
     var_s1_3 = (((struct SharedRecAt1B92C *)(table))->unk13C);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 3;
@@ -687,22 +687,22 @@ block_122:
             var_s0_4 += sizeof(struct Shared_SceneActorStride);
         } while (var_s1_3 < temp_s4);
     }
-    var_s1_4 = D_80145060.actorList;
-    if (var_s1_4 != 0) {
+    playerActor = D_80145060.actorList;
+    if (playerActor != 0) {
 
-        temp_v0_2 = var_s1_4;
+        levelActor = playerActor;
         do {
-            func_8024B2D0_de(temp_v0_2);
-            func_8024B2D0_de(NEXT_SCENE_ACTOR(temp_v0_2));
-            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = Nav_FindNearestPointIndex(&((struct SharedRecAt1B92C *)table)->navPointSet, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
-            var_s1_4 = (((struct SharedRecAt16E0V3 *)(var_s1_4))->unk16E0);
-            if (var_s1_4 == 0) {
+            func_8024B2D0_de(levelActor);
+            func_8024B2D0_de(NEXT_SCENE_ACTOR(levelActor));
+            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(playerActor))->unk1454))->unk4) = Portal_FindNearestPointIndex(&((struct SharedRecAt1B92C *)table)->navPointSet, &((struct SharedRecAt16E0V3 *)playerActor)->address8);
+            playerActor = (((struct SharedRecAt16E0V3 *)(playerActor))->unk16E0);
+            if (playerActor == 0) {
                 break;
             }
-            temp_v0_2 = var_s1_4;
+            levelActor = playerActor;
         } while (1);
     }
-    OvlScene_DispatchSelectedEntityKinds(table);
+    Scene_DispatchSelectedEntityKinds(table);
     temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
     k = (((struct SharedRecAt1B92C *)(table))->unk13C);
     if (k < temp_s4) {
@@ -710,21 +710,21 @@ block_122:
         do {
             k += 1;
 
-            temp_v0_2 = (((struct SharedRecAt1B92C *)(table))->unk138) + var_s2_4;
-            func_8024BE3C_de(temp_v0_2);
-            func_80246E44_de(temp_v0_2);
+            levelActor = (((struct SharedRecAt1B92C *)(table))->unk138) + var_s2_4;
+            func_8024BE3C_de(levelActor);
+            func_80246E44_de(levelActor);
             var_s2_4 += sizeof(struct Shared_SceneActorStride);
         } while (k < temp_s4);
     }
 
     count = (char *)&((struct SharedRecAt1B92C *)table)->navPointSet - (char *)table;
-    temp_v0_2 = (char *)table + count;
-    Nav_LinkNavigationObjects(temp_v0_2);
-    Nav_AssignPlatformEndpoints(temp_v0_2);
+    levelActor = (char *)table + count;
+    Portal_LinkNavigationObjects(levelActor);
+    Portal_AssignPlatformEndpoints(levelActor);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
-    Ovlgame_RefreshActivePlayerSceneState(&D_80145040);
+    Player_RefreshActivePlayerSceneState(&D_80145040);
     group = &D_80145040.object;
-    Items_InitGroupPools(group);
+    Pools_InitGroupPools(group);
     Camera_UpdateViewportLayoutAndBounds(group);
 }
 
@@ -796,9 +796,9 @@ extern s32 SetN64_GetPackSize(void *table);
 extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);
 extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
-extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
-extern void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
-extern void World_InitSimpleInstance(SimpleInstance *instance, CROMSimpleInstance *record, s32 owner, char *segments);
+extern void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
+extern void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
+extern void Simple_InitSimpleInstance(SimpleInstance *instance, CROMSimpleInstance *record, s32 owner, char *segments);
 extern void Lighting_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 
 #define ALIGN8(size) (((size) + 7) & ~7)
@@ -863,7 +863,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumes;
     void *objects;
 
-    if (PpDecom_UnpackResource(handle, 1) != 0) {
+    if (Ppdecom_UnpackResource(handle, 1) != 0) {
         source = **handle;
         efficientSet = SetN64_GetPackSection(source, 0);
         efficientCount = efficientSet->count;
@@ -897,12 +897,12 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
             base = (char *)blocks;
             segments = (char *)objects + 8;
             for (i = 0; i < efficientCount; i++) {
-                StaticInstance_InitializePlacedProp(&props[i], &efficient[i],
+                Statinst_InitializePlacedProp(&props[i], &efficient[i],
                                  SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, efficient[i].id),
                                  segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
-                StaticInstance_InitPlacedProp(&props[j + efficientCount], &statics[j],
+                Statinst_InitPlacedProp(&props[j + efficientCount], &statics[j],
                                  SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, statics[j].id),
                                  segments);
             }
@@ -916,7 +916,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
             simpleRecords = (CROMSimpleInstance *)(simpleSet + 1);
             simples = (SimpleInstance *)(base + offset + 8);
             for (k = 0; k < simpleCount; k++) {
-                World_InitSimpleInstance(&simples[k], &simpleRecords[k],
+                Simple_InitSimpleInstance(&simples[k], &simpleRecords[k],
                                  SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
                                  segments);
                 if (Engine_TestInstanceBit(world, &simples[k])) {
@@ -963,9 +963,9 @@ extern void func_8022A1FC_de(void *pool, void *world);
 extern s32 func_8024D160_de(void *actor);
 extern s32 func_8024E1B4_de(void *actor);
 extern void func_8024B8C4_de(void *actor);
-extern f32 Sky_GetDistanceTo(void *camera, CVector3 *position);
-extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
-extern void AnimPool_UpdateSceneEffects(struct CAnimPool *scene, void *world);
+extern f32 Gsky_GetDistanceTo(void *camera, CVector3 *position);
+extern s32 Visdata_TestBoxAgainstFrustum(void *planes, void *bounds);
+extern void Animpool_UpdateSceneEffects(struct CAnimPool *scene, void *world);
 
 typedef struct SceneVisibilitySettings {
     u32 mask;
@@ -1034,7 +1034,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
                 if (!func_8024D160_de(actor)) {
                     if (ACTOR_OVERLAPS(actor, clipBox)) {
                         if (camera != 0) {
-                            visible = VisData_TestBoxAgainstFrustum(camera->clipPlanes, &actor->bounds);
+                            visible = Visdata_TestBoxAgainstFrustum(camera->clipPlanes, &actor->bounds);
                         } else {
                             visible = 1;
                         }
@@ -1044,7 +1044,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
             }
             if (definition->kind == 14) {
             distance_visible:
-                if (Sky_GetDistanceTo(camera, &actor->position0) < D_800C520C) {
+                if (Gsky_GetDistanceTo(camera, &actor->position0) < D_800C520C) {
                     visible = 1;
                 }
             } else {
@@ -1101,7 +1101,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
             actor->flags &= ~0x200;
         }
     }
-    AnimPool_UpdateSceneEffects((struct CAnimPool *)world->effectPool, world);
+    Animpool_UpdateSceneEffects((struct CAnimPool *)world->effectPool, world);
     world->kind1Cursor++;
     if (world->kind1Cursor >= world->kind1Count) {
         world->kind1Cursor = 0;

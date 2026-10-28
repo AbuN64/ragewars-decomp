@@ -35,22 +35,22 @@ extern struct List D_0044EB04;
 extern void Control_EnableControllerPak(int arg0);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
-   func_804097E8_de, then reallocates a fresh scoreboard entry via Pak_OpenDialog using arg1's fields
+   func_804097E8_de, then reallocates a fresh scoreboard entry via Menu_OpenDialog using arg1's fields
    at 0x1C and 0x20 against the D_44F100 list, and always reports success. Sibling of
-   func_8043E568_de, which also fires func_8025E214_de(-1) and uses the D_44F0B8 list instead. */
+   CMenuProfile_OpenTimedPlayerDialog, which also fires func_8025E214_de(-1) and uses the D_44F0B8 list instead. */
 
 
 
 extern s32 D_0044E4B0;
 
-void Pak_ClearTimerFlag(void);
+void Timer_ClearTimerFlag(void);
 
 extern void Control_DisableControllerPak(s32 arg0);
 
 #include "COMMON/GAME_SESSION.H"
 
 
-s32 Multi_ToggleMenuRowOption(s32 *arg0) {
+s32 Initial_ToggleMenuRowOption(s32 *arg0) {
     Shared_Game *base;
 
     switch (arg0[0]) {
@@ -96,7 +96,7 @@ s32 func_8043E91C_de(void *unused0, void *menuOwner, void *menuContext) {
     return 1;
 }
 
-void Multi_ProbeMenuControllerPak(struct Shared_PakMenu *arg0)
+void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *arg0)
 {
     s32 kind = arg0->owner->unk4;
 
@@ -104,7 +104,7 @@ void Multi_ProbeMenuControllerPak(struct Shared_PakMenu *arg0)
     Pak_ProbeStatus(kind);
 }
 
-void Multi_EnableMenuControllerPak(void *arg0) {
+void Initial_EnableMenuControllerPak(void *arg0) {
     Obj8043EB20 *item = arg0;
 
     Control_EnableControllerPak(item->unk20->unk4);
@@ -113,24 +113,24 @@ void Multi_EnableMenuControllerPak(void *arg0) {
 
 struct List;
 
-extern void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
+extern void *Menu_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 extern char D_8014561C[];
 
-/** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Pak_OpenDialog; ignores arg0. */
-s32 Multi_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *arg1) {
+/** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Menu_OpenDialog; ignores arg0. */
+s32 Initial_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *arg1) {
     Control_EnableControllerPak(arg1->unk20->unk4);
-    Pak_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
+    Menu_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
     return 1;
 }
 
-s32 Multi_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *arg1) {
-    Pak_ClearTimerFlag();
-    Pak_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
+s32 Initial_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *arg1) {
+    Timer_ClearTimerFlag();
+    Menu_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
     return 1;
 }
 
 /** Clears the D_8011FAC0 record and D_80154048, then re-registers the target through func_80264788_de. */
-s32 Multi_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *arg1) {
+s32 Initial_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *arg1) {
     SetN64_SetTransitionTarget(&D_8011FAC0, 8);
     D_80154048 = 0;
     Control_DisableControllerPak(arg1->unk20->unk4);
@@ -155,7 +155,7 @@ extern struct ControllerProfile D_8010F328[4];
 extern s32 Control_IsAButtonPressed(struct ControllerProfile *);
 
 
-extern void Ovlgame_StartMatchTransition(GameSession *, s32);
+extern void Match_StartMatchTransition(GameSession *, s32);
 
 extern s32 Control_CountConnectedControllers(void);
 
@@ -179,18 +179,18 @@ struct Dialog;
 
 /* Restarts sound: calls func_8025E214_de with -1, records what func_8025E2C4_de returns in D_800E63B0,
    passes D_800E63B8 to func_8025E2D4_de, calls func_8025E29C_de with 1, clears D_800E63B4, calls
-   func_802649FC_de and then Pak_AllocateMenu with the third argument, the second and D_451F58.
+   Control_ClearMenuControlFlag and then Pak_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 
 
 
-extern void func_802649FC_de();
+extern void Control_ClearMenuControlFlag();
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
 
-void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
+void Initial_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
     Shared_Game *globals;
     struct Part *settings;
     struct ControllerProfile *profile;
@@ -214,12 +214,12 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
         }
     }
     func_8025E384_de();
-    Ovlgame_StartMatchTransition(&D_8011FAC0, -1);
+    Match_StartMatchTransition(&D_8011FAC0, -1);
     D_80154048 = 1;
 }
 
 /** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
-s32 Multi_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *arg1) {
+s32 Initial_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *arg1) {
     if (Control_CountConnectedControllers() < 2) {
         arg1->unkC->unk58 &= 0xFEFFFFFF;
         if (arg1->unk0 == 2) {
@@ -231,7 +231,7 @@ s32 Multi_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *arg1) {
     return 0;
 }
 
-s32 Multi_OpenLocalPlayerSetup(void *first, void *second, void *third) {
+s32 Initial_OpenLocalPlayerSetup(void *first, void *second, void *third) {
     Shared_Game *options = &D_801462C8;
     s32 i;
 
@@ -259,13 +259,13 @@ s32 func_8043EC98_de(void *first, void *second, void *third) {
     return 1;
 }
 
-s32 Multi_OpenTrackPreviewMenu(void *first, void *second, void *third) {
+s32 Initial_OpenTrackPreviewMenu(void *first, void *second, void *third) {
     func_8025E214_de(-1);
     D_800E63B0 = func_8025E2C4_de();
     func_8025E2D4_de(D_800E63B8);
     func_8025E29C_de(1);
     D_800E63B4 = 0;
-    func_802649FC_de();
+    Control_ClearMenuControlFlag();
     Pak_AllocateMenu(third, second, D_00451094);
     return 1;
 }
@@ -275,7 +275,7 @@ s32 func_8043ED48_de(void) {
     return 1;
 }
 
-s32 Multi_RequestSessionTransition(void) {
+s32 Initial_RequestSessionTransition(void) {
     SetN64_SetTransitionTarget(&D_8011FAC0, 8);
     return 1;
 }
@@ -302,11 +302,11 @@ typedef struct HolderMultiResetPlayerGameOverTimer {
     FlagOwnerMultiResetPlayerGameOverTimer *owner;
 } HolderMultiResetPlayerGameOverTimer;
 
-void Multi_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *arg0) {
+void Initial_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *arg0) {
     D_801462C8.counters.m_GameOverTimer = 120.0f;
     arg0->owner->flags &= 0xFBFFFFFF;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Multi_ResetPlayerGameOverTimer);
+INCLUDE_ASM("ovl_80400000", Initial_ResetPlayerGameOverTimer);
 #endif
 #endif

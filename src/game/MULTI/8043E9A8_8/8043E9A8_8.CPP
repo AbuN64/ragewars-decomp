@@ -102,11 +102,11 @@ s32 Multi_IsPlayerItemAvailable(struct ItemRecAt18V2 *item, struct HolderMultiIs
     return result;
 }
 
-/* Calls func_8025E384_de and then returns what Pak_TryCreateMenu gives for the same three arguments. */
+/* Calls func_8025E384_de and then returns what Menu_TryCreateMenu gives for the same three arguments. */
 extern void func_8025E384_de();
-extern s32 Pak_TryCreateMenu(void *, void *, void *);
+extern s32 Menu_TryCreateMenu(void *, void *, void *);
 
 s32 Multi_CreateMenuWithDefaultMusicGain(void *first, void *second, void *third) {
     func_8025E384_de();
-    return Pak_TryCreateMenu(first, second, third);
+    return Menu_TryCreateMenu(first, second, third);
 }

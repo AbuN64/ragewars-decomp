@@ -9,15 +9,15 @@
 
 extern s32 Nav_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
 
-extern s32 Nav_SearchRelatedGoalPath(void *arg0, s32 arg1, s32 arg2, void *arg3);
+extern s32 Portal_SearchRelatedGoalPath(void *arg0, s32 arg1, s32 arg2, void *arg3);
 
 /** Reset the float field of each occupied player slot's table entry to the default value. */
 
 
-extern char *Nav_FindSearchNode(CNavData *, int);
+extern char *Portal_FindSearchNode(CNavData *, int);
 extern CNavData D_8013B364;
 
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 
 s32 Nav_UpdateRouteIntermediateGoal(Func8020ED50Arg *owner) {
     s32 *base;
@@ -31,7 +31,7 @@ s32 Nav_UpdateRouteIntermediateGoal(Func8020ED50Arg *owner) {
             return 1;
         }
         if (Nav_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
-            owner->fieldC = Nav_SearchRelatedGoalPath(base, owner->field4, owner->field10, owner);
+            owner->fieldC = Portal_SearchRelatedGoalPath(base, owner->field4, owner->field10, owner);
         }
     }
     return 1;
@@ -47,7 +47,7 @@ void Nav_SetLinkedActorNodeCosts(char *arg0) {
         for (i = 0; i < 10; i++) {
             Actor1DC *a = ((struct ObjectLinks40 *) (arg0 + (i * 4)))->unk_3C;
             if (a != 0) {
-                ((struct ObjRecAt18V3 *) Nav_FindSearchNode(table, ((struct func_80203E78_S1 *) ((ObjectLinks1458 *) a->info)->unk_1454)->unk4))->unk18 = value;
+                ((struct ObjRecAt18V3 *) Portal_FindSearchNode(table, ((struct func_80203E78_S1 *) ((ObjectLinks1458 *) a->info)->unk_1454)->unk4))->unk18 = value;
             }
         }
     }
@@ -85,7 +85,7 @@ void Nav_AddPickupCategoryCosts(void) {
     if (node != 0) {
         addVal = D_800C1EE4_de;
         do {
-            result = Nav_GetGraphPoint(base, node->key);
+            result = Portal_GetGraphPoint(base, node->key);
             if (navigation_point_flags(result) & 1) {
                 field0E = navigation_point_object_id(result);
                 if (func_8020F55C_de(field0E) != 0 || func_8020F57C_de(navigation_point_object_id(result)) != 0) {

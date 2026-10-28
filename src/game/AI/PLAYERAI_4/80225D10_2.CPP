@@ -32,7 +32,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "DATA/OVLDAT6/800CF230.H"
 
-extern void Sky_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
+extern void Gsky_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
 extern void Barrel_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
@@ -47,8 +47,8 @@ void func_80226340_de(SharedPlayer *player) {
         view = player->views5DC.view5DC_2.view;
         alpha = GraphU64_RandomFloat(7.5f);
         level = (u32) alpha;
-        Sky_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
-        Sky_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
+        Gsky_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
+        Gsky_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
     }
     player->views1C.view1D4_21.holdTime -= D_800D2988;
     if (player->views1C.view1D4_21.holdTime <= 0.0f || player->views5E4.view5E4_4.holding == 0) {
@@ -78,9 +78,9 @@ extern void **D_80103FCC;
 
 
 extern void Player_UpdateViewAngles(void *, void *, void *);
-extern Shared_Quad Player_ComputeAimRotation(void *, void **, Shared_Quad *);
-extern f32 GraphU64_GetPointDistance(f32 *, f32 *);
-extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
+extern Shared_Quad Playerai_ComputeAimRotation(void *, void **, Shared_Quad *);
+extern f32 Graphu64_GetPointDistance(f32 *, f32 *);
+extern s32 CCollision_SweepPoint(void *, CVector3, CVector3, void *);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 
@@ -105,18 +105,18 @@ void func_80226548_de(void *player, void *body) {
 
     Player_UpdateViewAngles(player, body, &D_800CE7E4);
     if (((Shared_ActorView *)player)->targeting != 0) {
-        aimRotation = Player_ComputeAimRotation(player, &aimTarget, &aimWords);
+        aimRotation = Playerai_ComputeAimRotation(player, &aimTarget, &aimWords);
         if (aimTarget != 0) {
             position = &((Shared_ActorView *)player)->position.vector.x;
-            if (!(D_800C2B48_de[1] < GraphU64_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
-                if (func_802444A4_de(player, ((Shared_ActorView *)player)->position.vector,
+            if (!(D_800C2B48_de[1] < Graphu64_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
+                if (CCollision_SweepPoint(player, ((Shared_ActorView *)player)->position.vector,
                                      ((Shared_ActorView *)aimTarget)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == aimTarget) {
                     GraphU64_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
                     targetAngle = GraphU64_GetHorizontalAngle(&toTarget);
-                    GraphU64_WrapPeriodicValue(&targetAngle);
-                    GraphU64_WrapPeriodicValue(&((LevelActor *)body)->yaw);
+                    Graphu64_WrapPeriodicValue(&targetAngle);
+                    Graphu64_WrapPeriodicValue(&((LevelActor *)body)->yaw);
                     comparisonAngle = ((LevelActor *)body)->yaw;
                     if (D_800C2B50_de < comparisonAngle) {
                         if (targetAngle < D_800C2B54_de) {
@@ -178,7 +178,7 @@ static inline s32 startHealth(BonusPlayer *player) {
     if (D_801462C8.controllerMode == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
     return health;
 }
-void Player_InitializePlayerHealth(BonusPlayer *player) {
+void Playerai_InitializePlayerHealth(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id;
     id = player->modelId;

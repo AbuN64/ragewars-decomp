@@ -55,7 +55,7 @@ extern void Tsmos_DeactivateControllerState(void);
 
 #if defined(VERSION_EU)
 extern OptionsCommitContext *g_optionsPage;
-/* PAL Menu_CreateOptionsPage: the three option lists take their labels from the per-language tables
+/* PAL Options_CreateOptionsPage: the three option lists take their labels from the per-language tables
    indexed by settings->language. */
 s32 Menu_CreateEuropeanSettingsPage(void) {
     Shared_Game *settings;
@@ -156,10 +156,10 @@ extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern void Frontend_SetWidgetFlag100(void *, s32);
+extern void Widget_SetWidgetFlag100(void *, s32);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
-/* PAL Menu_OpenOptionsScreen: the list labels come from the per-language tables. */
+/* PAL Options_OpenOptionsScreen: the list labels come from the per-language tables. */
 s32 Menu_OpenLocalizedGameOptions(void *node) {
     Shared_Game *settings;
     MenuWidget *handle;
@@ -231,13 +231,13 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
+            Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
         }
         handle = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
-        Frontend_SetWidgetFlag100(handle, 1);
+        Widget_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
-                Frontend_SetWidgetFlag100(handle, 0);
+                Widget_SetWidgetFlag100(handle, 0);
                 break;
             }
         }
@@ -247,8 +247,8 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     case 3:
     case 4:
         handle = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
-        Frontend_SetWidgetFlag100(handle, 1);
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
+        Widget_SetWidgetFlag100(handle, 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
         break;
     }
     SmpButton_WrapButtonWidget(MENU_RESOURCE_ID(0x380));

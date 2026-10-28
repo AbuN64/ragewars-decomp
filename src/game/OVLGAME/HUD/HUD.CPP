@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "ONSCRN_4/ONSCRN_4.H"
-extern void Ovlgame_EmptyCallback(void);
+extern void Hud_EmptyCallback(void);
 
 extern void Lists_InitFromPool(void *lists, void *pool, s32 stride, s32 count);
 extern void Lists_ClearHeader(void *list);
@@ -52,7 +52,7 @@ typedef struct PanelMovers {
 /* Initialises the actor world: builds the two list pools (0x20 shapes of 0x54 bytes, 3 tails of 0x1C), links the
  * 96 actors of 0xB8 bytes into the actor list, empties the record list and its 10 cells, links the 100 records of
  * 0x50 bytes into it, clears the mode and cursor words and finishes through Fx_UpdateEffectLists. */
-void Ovlgame_InitializeWorldActorPools(ActorWorld *world) {
+void Hud_InitializeWorldActorPools(ActorWorld *world) {
     s32 i;
 
     Lists_InitFromPool(world->shapeLists, world->shapePool, 0x54, 0x20);
@@ -73,7 +73,7 @@ void Ovlgame_InitializeWorldActorPools(ActorWorld *world) {
     Fx_UpdateEffectLists(world);
 }
 
-/* Resets the hud: clears the four words at 0x90, runs Ovlgame_EmptyCallback and OnScreen_LoadFontTexture, then fills the two
+/* Resets the hud: clears the four words at 0x90, runs Hud_EmptyCallback and OnScreen_LoadFontTexture, then fills the two
  * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists D_800D3080 and D_800D2F94 (0x75 pairs each, 0x5C in de). */
 void Ovlgame_ResetHudCharTables(HudTables *hud) {
 #if defined(VERSION_DE)
@@ -85,17 +85,17 @@ void Ovlgame_ResetHudCharTables(HudTables *hud) {
     hud->words[1] = 0;
     hud->words[2] = 0;
     hud->words[3] = 0;
-    Ovlgame_EmptyCallback();
+    Hud_EmptyCallback();
     OnScreen_LoadFontTexture();
     Pickup_BuildByteLookup((int)hud, D_800D3080, pairs, hud->tableA);
     Pickup_BuildByteLookup((int)hud, D_800D2F94, pairs, hud->tableB);
 }
 
-void Ovlgame_EmptyCallback(void) {
+void Hud_EmptyCallback(void) {
 }
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
  * given its frame table (D_800CDE94, D_800CDEA4) through OnScreen_StartMoverScript. */
-void Ovlgame_StartPanelMovers(PanelMovers *panel) {
+void Hud_StartPanelMovers(PanelMovers *panel) {
     panel->firstTarget = 0;
     OnScreen_InitMover(panel->first, 0, -0x28);
     OnScreen_StartMoverScript(panel->first, &D_800CDE94);

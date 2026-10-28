@@ -133,7 +133,7 @@ func_802BC850_eu_x:
     nop
     nop
     eret
-    jal func_802BCE20_de
+    jal Audio_DestroyThread
     addu $a0, $zero, $zero
 .if VERSION_DE
     lui $a1, 0xA460
@@ -184,7 +184,7 @@ func_802BC850_eu_x:
 .if VERSION_EU
 .Lfunc_802BC850_eu_x_280:
 .endif
-    jal func_802BCD64_de
+    jal Audio_PostDiskEventMessage
     sw $v0, 0x0($a0)
     j .Lfunc_802BC850_eu_x_708
     addiu $v0, $zero, 0x1
@@ -265,7 +265,7 @@ func_802BC850_eu_x:
     ori $v0, $v0, 0x508
     lw $s2, 0x0($v0)
     addiu $v0, $zero, 0x16
-    jal func_802BCD64_de
+    jal Audio_PostDiskEventMessage
     sw $v0, 0x0($s0)
     lui $a3, 0xA460
     ori $a3, $a3, 0x10
@@ -306,7 +306,7 @@ func_802BC850_eu_x:
     sw $a2, 0x0($a0)
     sw $zero, 0x0($s0)
     or $v0, $v0, $a1
-    jal func_802BCD64_de
+    jal Audio_PostDiskEventMessage
     sw $v0, 0x0($v1)
     j .Lfunc_802BC850_eu_x_708
     addiu $v0, $zero, 0x1
@@ -398,7 +398,7 @@ func_802BC850_eu_x:
     addiu $v0, $v0, 0x1
     beq $v0, $v1, .Lfunc_802BC850_eu_x_598
     addiu $v0, $zero, 0x18
-    jal func_802BCC90_de
+    jal Audio_AbortDiskTransfer
     sw $v0, 0x0($s0)
 .Lfunc_802BC850_eu_x_598:
     lw $v1, 0x4($s1)
@@ -466,7 +466,7 @@ func_802BC850_eu_x:
     j .Lfunc_802BC850_eu_x_6FC
     sw $v0, 0x18($s1)
 .Lfunc_802BC850_eu_x_68C:
-    jal func_802BCD64_de
+    jal Audio_PostDiskEventMessage
     sw $zero, 0x0($a1)
 .Lfunc_802BC850_eu_x_694:
     lw $v0, 0x8($s1)
@@ -499,7 +499,7 @@ func_802BC850_eu_x:
 .Lfunc_802BC850_eu_x_6F8:
     sw $v0, 0x0($s0)
 .Lfunc_802BC850_eu_x_6FC:
-    jal func_802BCC90_de
+    jal Audio_AbortDiskTransfer
     nop
 .Lfunc_802BC850_eu_x_704:
     addiu $v0, $zero, 0x1

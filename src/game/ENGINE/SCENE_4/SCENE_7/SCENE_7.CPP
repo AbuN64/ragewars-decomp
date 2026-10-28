@@ -255,10 +255,10 @@ s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *counterOwner, s32 counterId) {
 /* SCENE_8.CPP */
 void Scene_DecrementTriggerCounter(void *world, s32 arg1) {
     u8 *temp_v0_2;
-    void *temp_v0;
-    temp_v0 = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
-    SetN64_GetPackSection(temp_v0, 0);
-    temp_v0_2 = SetN64_GetPackSection(temp_v0, 1) + arg1;
+    void *counterSections;
+    counterSections = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
+    SetN64_GetPackSection(counterSections, 0);
+    temp_v0_2 = SetN64_GetPackSection(counterSections, 1) + arg1;
     *temp_v0_2 -= 1;
 }
 

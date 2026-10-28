@@ -100,12 +100,12 @@ s32 SmpSlider_GetTransitionMode(void *);
 
                           
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
    through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
    result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
 
-extern s32 Smos_GetFocusedElementId(void);
+extern s32 Menu_GetFocusedElementId(void);
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
@@ -175,11 +175,11 @@ s32 Menu_ChooseSixChoiceOption(void) {
     u32 message;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    message = Smos_GetFocusedElementId() - 0x39C;
+    message = Menu_GetFocusedElementId() - 0x39C;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    message = Smos_GetFocusedElementId() - 0x3A2;
+    message = Menu_GetFocusedElementId() - 0x3A2;
 #elif defined(VERSION_EU_X)
-    message = Smos_GetFocusedElementId() - 0x3A6;
+    message = Menu_GetFocusedElementId() - 0x3A6;
 #endif
     if (message >= 6) {
         return 0;
@@ -327,7 +327,7 @@ s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
     return meter->done;
 }
 
-void Menu_InitializeFadeMeter(struct Rec_func_8024C92C_de *record, s32 value) {
+void Menu_InitializeFadeMeter(struct RecGobjinstSampleBoneTranslation *record, s32 value) {
     record->y = 0;
     record->x = 0;
     record->z = 0;

@@ -101,7 +101,7 @@ struct SceneEffect {
 
 struct SceneEffect;
 struct WorldRecAt3C08;
-/* The world record opens with a pool of 32 effect slots of 0x1E0 bytes each (Ovlgame_InitEffectPool). */
+/* The world record opens with a pool of 32 effect slots of 0x1E0 bytes each (Effect_InitEffectPool). */
 #define EFFECT_SLOTS 32
 #define EFFECT_STRIDE 0x1E0
 /* One 0x1E0-byte slot of that pool: the leading fields of SceneEffect, with the free/live list links. */

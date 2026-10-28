@@ -76,12 +76,12 @@ struct AiTarget;
 struct Source;
 struct Source {
     u8 pad0;
-    s8 first; /* +0x1..0x3: copied from the definition by Nav_ApplyActorDefinition */
+    s8 first; /* +0x1..0x3: copied from the definition by Actor_ApplyActorDefinition */
     s8 second;
     s8 send;
     u8 pad4[4];
     CVector3 position;
-    void *surface; /* +0x14: Nav_InitSpawnedActor ground query */
+    void *surface; /* +0x14: Actor_InitSpawnedActor ground query */
     ActorDefinitionHeader *definition;
     CVector3 velocity;
     u8 pad28[0x10];

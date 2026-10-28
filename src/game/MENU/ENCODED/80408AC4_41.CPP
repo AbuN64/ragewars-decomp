@@ -19,7 +19,7 @@ extern s32 D_80154030;
 
 extern s32 func_802BD400_de(u8 *);
 
-s32 Menu_ApplyCheatCode(void)
+s32 Encoded_ApplyCheatCode(void)
 {
     u32 i;
     s32 j;

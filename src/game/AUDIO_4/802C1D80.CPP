@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "AUDIO_4/802C1D80.H"
 
-void func_802BCC90_de(void) {
+void Audio_AbortDiskTransfer(void) {
     DiskTransferInfo *diskTransferInfo;
     u32 status;
 
@@ -22,7 +22,7 @@ void func_802BCC90_de(void) {
         status = *(volatile u32 *)0xA4600010;
     }
     *(volatile u32 *)0xA5000510 = diskTransferInfo->bmControl;
-    func_802BCD64_de();
+    Audio_PostDiskEventMessage();
     {
         volatile u32 *statusAddr = (volatile u32 *)0xA4600010;
         s32 mask = 0x100401;
@@ -37,7 +37,7 @@ void func_802BCC90_de(void) {
 extern void *__osPopThread(OSMesgQueue *arg0, OSMesgQueue *arg1, Ctx *arg2);
 extern void __osEnqueueThread(void *arg0, void *arg1);
 
-void func_802BCD64_de(void) {
+void Audio_PostDiskEventMessage(void) {
     OSMesgQueue *node;
     s32 a0;
     s32 v1;

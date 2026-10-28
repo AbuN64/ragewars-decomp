@@ -60,7 +60,7 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 arg2, s32 
 
 /* Handles Controller Pak menu confirmations for the active channel, clearing its status on a confirmed state-12 prompt and returning focus to an enabled widget in the list states. */
 s32 Smos_GetControlRepeatLimit();                                /* extern */
-s32 Frontend_ListHasFlag100(void *);                          /* extern */
+s32 Widget_ListHasFlag100(void *);                          /* extern */
 void SmpOverlay_ShowSlotNode(s32, s32, void *);                  /* extern */
 void PAKInterface_RelabelSlotRows(s32);                               /* extern */
 void PAKInterface_UpdatePlayerControlRows(s32);                               /* extern */
@@ -106,7 +106,7 @@ s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3
             MarkMenuEventHandled();
             var_s0 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_11:
-            if (Frontend_ListHasFlag100(var_s0) != 0) {
+            if (Widget_ListHasFlag100(var_s0) != 0) {
                 var_s0 = var_s0->next;
                 goto loop_11;
             }
@@ -119,7 +119,7 @@ loop_11:
         if (arg3 == 1) {
             var_s0_2 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_16:
-            if (Frontend_ListHasFlag100(var_s0_2) != 0) {
+            if (Widget_ListHasFlag100(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
                 goto loop_16;
             }
@@ -131,7 +131,7 @@ loop_16:
         if (arg3 == 1) {
             var_s0_3 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_21:
-            if (Frontend_ListHasFlag100(var_s0_3) != 0) {
+            if (Widget_ListHasFlag100(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;
                 goto loop_21;
             }
@@ -178,7 +178,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
             MarkMenuEventHandled();
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (Frontend_ListHasFlag100(node) != 0) {
+            while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
@@ -189,7 +189,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
         if (pressState == 1) {
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (Frontend_ListHasFlag100(node) != 0) {
+            while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
@@ -201,7 +201,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
         if (pressState == 1) {
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (Frontend_ListHasFlag100(node) != 0) {
+            while (Widget_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);

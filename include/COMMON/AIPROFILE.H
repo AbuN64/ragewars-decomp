@@ -19,7 +19,7 @@ typedef struct AiProfile {
     s8 character; /* 0x80 */
     s8 variant; /* 0x81: Geometry_DrawCharacterEffectParts */
     u8 pad82[0xD];
-    u8 bonus; /* 0x8F: Geometry_DrawCharacterEffectParts, Ovlgame_UpdateRunEndPlayer */
+    u8 bonus; /* 0x8F: Geometry_DrawCharacterEffectParts, Player_UpdateRunEndPlayer */
     s8 state90; /* 0x90 */
     u8 pad91[1];
     u8 team; /* 0x92: Fx_UpdateTargetSelection (team play) */
@@ -70,7 +70,7 @@ struct Player {
     s32 state; /* 0x5E0 */
     s32 health; /* 0x5E4 */
     u8 pad5E8[4];
-    s32 model; /* 0x5EC: Ovlgame_UpdateRunEndPlayer passes it to Player_PlacePlayerAtSpawnPoint */
+    s32 model; /* 0x5EC: Player_UpdateRunEndPlayer passes it to Player_PlacePlayerAtSpawnPoint */
     u8 pad5F0[4];
     s16 ammo[7]; /* 0x5F4 */
     s8 actions[22][2]; /* 0x602 */
@@ -87,7 +87,7 @@ struct Player {
     f32 damageCooldown; /* 0x670 */
     u8 pad674[4];
     f32 rangeTimer; /* 0x678: Player_UpdatePlayerEffectLights */
-    struct RangeNode *rangeNodes[3]; /* 0x67C: created by DynLight_AllocateLightNode */
+    struct RangeNode *rangeNodes[3]; /* 0x67C: created by Gdynlight_AllocateLightNode */
     u8 tuning[0x10]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */
     f32 steer; /* 0x69C */
@@ -175,7 +175,7 @@ struct Player {
     u8 pad123F;
     f32 opacity; /* 0x1240 */
     u8 pad1244[0xF8];
-    s32 countdown; /* 0x133C: Ovlgame_UpdateRunEndPlayer */
+    s32 countdown; /* 0x133C: Player_UpdateRunEndPlayer */
     s32 resetState; /* 0x1340 */
     u8 pad1344[0x70];
     void *animationTable; /* 0x13B4 */

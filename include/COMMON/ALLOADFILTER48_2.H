@@ -77,7 +77,7 @@ extern float D_800C7CF4_de;
 
 extern float D_800CCF18;
 
-extern Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
+extern Acmd *Audio_LoadDecodedSamples(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
 
 extern float D_800CCF24;
 

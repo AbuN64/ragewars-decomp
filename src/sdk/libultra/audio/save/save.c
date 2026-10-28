@@ -35,7 +35,7 @@ Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
 #endif
 
 /* save_2.c */
-s32 func_802B6480_de(ALSave *saveFilter, s32 parameterId, ALFilter_s14 *parameterValue)
+s32 alSaveParam(ALSave *saveFilter, s32 parameterId, ALFilter_s14 *parameterValue)
 {
   switch (parameterId)
   {

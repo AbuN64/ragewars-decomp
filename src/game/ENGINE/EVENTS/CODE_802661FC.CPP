@@ -99,7 +99,7 @@ extern float D_800C43D4_de;
 extern float D_800C43DC_de;
 
 void func_8022B09C_de(s32, f32 *);
-void func_8028CE94_de(Shared_World *, s32, s32, CVector3, f32, f32);
+void CScene_StartEventClips(Shared_World *, s32, s32, CVector3, f32, f32);
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;
 
@@ -169,7 +169,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
                          0, 0, 0xE9, zero, rotation, effectPosition, 0, -1,
                          effectKind == 5 ? 3 : 1);
         effectPosition.x = 0.0f; effectPosition.y = 0.0f; effectPosition.z = 0.0f;
-        func_8028CE94_de(&g_world, player->sound + 0x140, 3,
+        CScene_StartEventClips(&g_world, player->sound + 0x140, 3,
                          effectPosition, D_800C43D4_de, D_800C43D8_de);
     }
 }
@@ -220,10 +220,10 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
 /* Published contiguous pool of damage scaling constants, read by index. */
 extern const f32 D_800C43E0_de[16];
 /* Forwards the actor, event value and three-component input with a zero final flag. */
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
-extern f32 func_8024BEDC_de(void *);
-extern s32 func_8024B06C_de(void *, CVector3, Shield *);
-extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern f32 Gobjinst_GetRootMeanSquareScale(void *);
+extern s32 Gobjinst_FindNearestBoneBounds(void *, CVector3, Shield *);
+extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 Events_GetActorSizeScale(u8 *);
 extern void Barrel_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 Player_GetMaxHealth(void *);
@@ -268,7 +268,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
             if (((void *)target == (void *)&owner->actor2E8) && ((ownerState = owner->unk62E, (ownerState == 0)) || (ownerState == 0x11) || (ownerState == 0x10))) {
                 body = (*position);
                 origin = owner->position;
-                GraphU64_InterpolateVector(&(*position), 0.75f, &body, &origin);
+                Graphu64_InterpolateVector(&(*position), 0.75f, &body, &origin);
                 (*position).y += GameObject_GetActorHeight(owner) * D_800C43E0_de[0];
                 adjusted = 1;
             }
@@ -276,7 +276,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
         return adjusted;
 }
 static inline f32 hitSize(Shared_ReactionActor *target) {
-    if (target->category == 1) return func_8024BEDC_de(target);
+    if (target->category == 1) return Gobjinst_GetRootMeanSquareScale(target);
     else return D_800C43E0_de[2];
 }
 static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor *target, Shared_DamageParameters copied, CVector3 *out) {
@@ -338,7 +338,7 @@ static inline f32 scaleHit(Shared_ReactionActor *self, Shared_ReactionActor *tar
             goto have;
         }
     }
-    shield = func_8024B06C_de(self, position, &D_80110570) ? &D_80110570 : 0;
+    shield = Gobjinst_FindNearestBoneBounds(self, position, &D_80110570) ? &D_80110570 : 0;
 have:
     *found = shield;
     if (shielded && shield != 0) {
@@ -359,7 +359,7 @@ have:
                 body.y = position.y;
             }
             reach = radius + GameObject_GetActorRadius(self);
-            distance = GraphU64_GetPointDistance(&position, &body);
+            distance = Graphu64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }
@@ -512,7 +512,7 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
 }
 
 
-extern f32 func_8024BEDC_de(void *arg0);
+extern f32 Gobjinst_GetRootMeanSquareScale(void *arg0);
 
 
 
@@ -552,7 +552,7 @@ void Events_UpdateNodeAtPosition(void *actor, CVector3 input, s32 arg4) {
 
 f32 Events_GetActorSizeScale(u8 *other) {
     if (*other == 1) {
-        return func_8024BEDC_de(other);
+        return Gobjinst_GetRootMeanSquareScale(other);
     } else {
         return D_800C4420_de;
     }
@@ -620,7 +620,7 @@ s32 Events_AdjustWeaponHitPosition(void *levelActor, CVector3 *arg1) {
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;
                 second = ((LevelActor *)actor)->position0;
-                GraphU64_InterpolateVector(arg1, 0.75f, &first, &second);
+                Graphu64_InterpolateVector(arg1, 0.75f, &first, &second);
                 arg1->y += GameObject_GetActorHeight(actor) * D_800C4430_de;
                 result = 1;
             }

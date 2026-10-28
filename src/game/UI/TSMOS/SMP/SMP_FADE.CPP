@@ -16,12 +16,12 @@
    scales at 0x4C and 0x50 to D_800E1470, copies the item's two colours at 0x2C and 0x30 to 0x60,
    stores the green and red differences between them over 75 steps at 0x70 and 0x74, marks it
    active at 0x78, starts it through SmpSlider_EnableTransition and SmpSlider_SetTransitionMode(1) and attaches it to the
-   frame through Frontend_InsertWidgetBefore. Returns the widget. */
+   frame through Node_InsertWidgetBefore. Returns the widget. */
 
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
 extern void SmpSlider_EnableTransition(MenuFadeWidget *);
 extern void SmpSlider_SetTransitionMode(MenuFadeWidget *, s32);
-extern void Frontend_InsertWidgetBefore(MenuFadeWidget *, MenuFadeWidget *);
+extern void Node_InsertWidgetBefore(MenuFadeWidget *, MenuFadeWidget *);
 
 MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     MenuFadeWidget *frame;
@@ -51,7 +51,7 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     result->active = 1;
     SmpSlider_EnableTransition(result);
     SmpSlider_SetTransitionMode(result, 1);
-    Frontend_InsertWidgetBefore(frame, result);
+    Node_InsertWidgetBefore(frame, result);
     return result;
 }
 

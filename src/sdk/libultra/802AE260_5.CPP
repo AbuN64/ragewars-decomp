@@ -30,22 +30,22 @@ s32 Libultra_WriteDebugLinkByte(s32 outputByte) {
     result = 0;
     D_8014D3E3 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = initial_control;
     D_8014D3E0 = outputByte;
     data = outputByte;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000000 = (u8)data;
     strobe = D_8014D3E1 | 1;
     D_8014D3E1 = strobe;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = strobe;
     control = D_8014D3E3 | 8;
     D_8014D3E3 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 1;
     timeout = 0x4E20;
@@ -54,7 +54,7 @@ s32 Libultra_WriteDebugLinkByte(s32 outputByte) {
     D_B200000C = control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto first_done;
         }
@@ -70,7 +70,7 @@ first_done:
         control = D_8014D3E3 & 0xF7;
         D_8014D3E3 = control;
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
 
         expected = 1;
         retries = D_800D3650;
@@ -78,7 +78,7 @@ first_done:
         D_B200000C = control;
         do {
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             status = D_B2000015 & expected;
             if (status == 0) {
                 goto second_done;
@@ -95,12 +95,12 @@ second_done:
             strobe = D_8014D3E1 & 0xFE;
             D_8014D3E1 = strobe;
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             D_B2000004 = strobe;
             final_control = D_8014D3E3 & 0xF8;
             D_8014D3E3 = final_control;
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             D_B200000C = final_control;
             result = 1;
         }

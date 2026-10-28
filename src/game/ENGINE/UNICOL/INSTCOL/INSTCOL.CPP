@@ -11,12 +11,12 @@
 extern f32 GameObject_GetActorRadius(void *);
 extern f32 InstHdr_GetActorBaseOffset(void *);
 extern f32 GameObject_GetActorHeight(void *);
-extern void func_80242550_de(void *, void *);
-extern void func_80242288_de(void *, void *);
+extern void CPlatformCollision_ProcessRiderMotion(void *, void *);
+extern void CPlatformCollision_TraceShape(void *, void *);
 extern s32 Pickup_CanCollect(void *, void *);
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
-extern s32 func_8023E8D4_de(void *, void *, s32);
-extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern s32 CCollision_TestSegmentPolygon(void *, void *, s32);
+extern s32 CCollision_TestRayCylinder(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
 /* Hand C from us-rev1 8023EEF0..8023F42C.
  * The query is read-only (0x30 bytes); contact storage is local (0xDC).
  * Floor/ceiling crossings use opposite signed height tests. Their normal
@@ -30,7 +30,7 @@ static inline s8 Anim_GetSurfaceKind(LevelActor *entity) {
     return 7;
 }
 
-void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
+void Instcol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
     LevelActor *owner;
     CCollisionInfo2_t *surface;
     f32 bounds[4];
@@ -65,13 +65,13 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
     surface = motion->surface;
     if (owner->kind == 1 && owner->definition->kind == 2) {
         if (entity->kind == owner->kind) {
-            func_80242550_de(motion, entity);
+            CPlatformCollision_ProcessRiderMotion(motion, entity);
         }
         return;
     }
     if (entity->kind == 1 && entity->definition->kind == 2) {
         if (owner->kind == entity->kind) {
-            func_80242288_de(motion, entity);
+            CPlatformCollision_TraceShape(motion, entity);
         }
         return;
     }
@@ -101,7 +101,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
             if (sweep->top1 <= bottom && bottom < sweep->top2) {
                 time = (bottom - sweep->top1) / motion->velocity.y;
                 if (time < motion->blend) {
-                    GraphU64_InterpolateVector(&point, time, &owner->position0, &motion->end);
+                    Graphu64_InterpolateVector(&point, time, &owner->position0, &motion->end);
                     deltaX = entityX - point.x;
                     deltaZ = entityZ - point.z;
                     if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
@@ -110,14 +110,14 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
                         contact.normal.x = 0.0f;
                         contact.normal.z = 0.0f;
                         contact.normal.y = -1.0f;
-                        func_8023E8D4_de(motion, &contact, 1);
+                        CCollision_TestSegmentPolygon(motion, &contact, 1);
                     }
                 }
             }
             if (top <= sweep->bottom1 && sweep->bottom2 < top) {
                 time = (top - sweep->bottom1) / motion->velocity.y;
                 if (time < motion->blend) {
-                    GraphU64_InterpolateVector(&point, time, &owner->position0, &motion->end);
+                    Graphu64_InterpolateVector(&point, time, &owner->position0, &motion->end);
                     deltaX = entityX - point.x;
                     deltaZ = entityZ - point.z;
                     if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
@@ -130,14 +130,14 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
                         contact.normal.x = 0.0f;
                         contact.normal.z = 0.0f;
                         contact.normal.y = 1.0f;
-                        func_8023E8D4_de(motion, &contact, 1);
+                        CCollision_TestSegmentPolygon(motion, &contact, 1);
                     }
                 }
             }
         }
     }
     contact.kind = special != 0 ? 7 : surface->InstanceBehavior;
-    func_8023E178_de(motion, &entity->position0, radius,
+    CCollision_TestRayCylinder(motion, &entity->position0, radius,
                     top - sweep->bottom, bottom - sweep->top, 1, &contact, 1);
     if (special != 0 && *(LevelActor **)((u8 *)motion + 0x104) != entity &&
         sweep->bottom1 <= top && bottom < sweep->top1) {
@@ -155,19 +155,19 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
 }
 #endif
 #if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", InstCol_TestEntityContact);
+INCLUDE_ASM("span_1000", Instcol_TestEntityContact);
 #endif
 
 typedef struct Query Query;
 /* Queries the registered entities an object may collide with: when the object's shape is enabled and is
  * not the null shape, a query holds the object's radius, its vertical span and that span offset by the
  * shape heights at 0x48 and 0x54, its horizontal bounds widened by the radius and the shape's 0x400 flag;
- * then InstCol_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
+ * then Instcol_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
  * a body at 0x174 when the shape is flagged 1 and type 3 entities when the shape is not flagged 0x20. */
 
-extern void InstCol_TestEntityContact(ActorMotion *, Query *, LevelActor *);
+extern void Instcol_TestEntityContact(ActorMotion *, Query *, LevelActor *);
 
-void func_8023F43C_de(char *obj) {
+void CInstanceCollision_TraceInteractiveActors(char *obj) {
     Query query;
     Query *q;
     CCollisionInfo2_t *shape;
@@ -235,11 +235,11 @@ void func_8023F43C_de(char *obj) {
             }
             break;
         }
-        InstCol_TestEntityContact(obj, &query, entity);
+        Instcol_TestEntityContact(obj, &query, entity);
     }
 }
 
-void func_8023F644_de(ActorMotion *motion, f32 *queryStorage)
+void CInstanceCollision_BuildSweepQuery(ActorMotion *motion, f32 *queryStorage)
 {
   f32 *new_var;
   f32 temp;

@@ -107,15 +107,15 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 argument)
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
+            if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
             break;
         case 15:
             result = 0;
-            Frontend_SetWidgetFlag40(element, 1);
+            Widget_SetWidgetFlag40(element, 1);
             break;
         case 16:
             result = 0;
-            Frontend_SetWidgetFlag40(element, 0);
+            Widget_SetWidgetFlag40(element, 0);
             break;
         default:
             result = 0;
@@ -168,13 +168,13 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
                     }
                     break;
                 case 2:
-                    if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
+                    if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
                     break;
                 case 15:
-                    Frontend_SetWidgetFlag40(element, 1);
+                    Widget_SetWidgetFlag40(element, 1);
                     break;
                 case 16:
-                    Frontend_SetWidgetFlag40(element, 0);
+                    Widget_SetWidgetFlag40(element, 0);
                     break;
                 default:
                     return 0;
@@ -238,10 +238,10 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
+            if (D_8014D080->current > 0) Menu_ReturnToPreviousScreen();
             break;
-        case 15: result = 0; Frontend_SetWidgetFlag40(element, 1); break;
-        case 16: result = 0; Frontend_SetWidgetFlag40(element, 0); break;
+        case 15: result = 0; Widget_SetWidgetFlag40(element, 1); break;
+        case 16: result = 0; Widget_SetWidgetFlag40(element, 0); break;
         default: result = 0; break;
         }
         break;

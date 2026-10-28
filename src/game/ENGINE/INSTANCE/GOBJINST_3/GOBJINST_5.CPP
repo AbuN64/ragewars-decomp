@@ -80,16 +80,16 @@ extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
 extern f32 GameObject_GetActorHeight(Shared_PoseActor *);
-extern void func_80261670_de(Shared_AnimState *, s32, s32, s32, s32, s32);
-extern void AnimState_PrepareAnimationFrames();
+extern void Gastate_SwitchRequestedAnimation(Shared_AnimState *, s32, s32, s32, s32, s32);
+extern void Gastate_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
 extern void GraphU64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void GraphU64_ConvertMatrixToFloat(PoseMatrix, u8 *);
-extern void GraphU64_InterpolateQuaternionArc(CQuatern *, f32, CQuatern *, CQuatern *);
+extern void Graphu64_InterpolateQuaternionArc(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void GraphU64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
+extern void Graphu64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
@@ -126,7 +126,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         CopyMatrix(inv, cur);
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
-        GraphU64_BuildAxisAngleMatrix(rotm, angle, axis.x, axis.y, axis.z);
+        Graphu64_BuildAxisAngleMatrix(rotm, angle, axis.x, axis.y, axis.z);
         GraphU64_MultiplyAffineMatrices(cur, inv, rotm);
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
@@ -164,7 +164,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
         } else {
             f32 *data = SetN64_GetPackSection(t->rotTable, t->joints[i].rot);
 
-            GraphU64_InterpolateQuaternionArc(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
+            Graphu64_InterpolateQuaternionArc(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
         }
     } else if (t->joints[i].rot == -1) {
         frame = t->frames;
@@ -259,7 +259,7 @@ static inline void packMtx(u32 *out, PoseMatrix m) {
 
 }
 
-s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
+s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model) {
     PoseMatrix mtx[129];
     CVector3 pos;
     Shared_PoseContext ctx;
@@ -311,10 +311,10 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
     if (mem != 0) {
         animA = &actor->animA;
         animB = &actor->animB;
-        func_80261670_de(animA, *mem, actor->unk_C8, 0, 0, 0);
+        Gastate_SwitchRequestedAnimation(animA, *mem, actor->unk_C8, 0, 0, 0);
         if (func_802624D8_de(animA)) {
             if (actor->flags & 0x400) {
-                func_80261670_de(animB, *mem, actor->unk_C8, 0, 0, 0);
+                Gastate_SwitchRequestedAnimation(animB, *mem, actor->unk_C8, 0, 0, 0);
                 f.blend = func_802624D8_de(animB);
             } else {
                 f.blend = 0;
@@ -327,8 +327,8 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
             ctx.animA = animA;
             ctx.animB = animB;
             f.frame = (!isRoot || isKind9) && !skip;
-            AnimState_PrepareAnimationFrames(&actor->animA, &tracks[0], f.frame);
-            AnimState_PrepareAnimationFrames(&actor->animB, &tracks[1]);
+            Gastate_PrepareAnimationFrames(&actor->animA, &tracks[0], f.frame);
+            Gastate_PrepareAnimationFrames(&actor->animB, &tracks[1]);
             kind = actor->model->kind;
             scaled = 0;
             scale.x = 1.0f;
@@ -428,7 +428,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                         trans.y = posB.y + t * (posA.y - posB.y);
                         trans.z = posB.z + t * (posA.z - posB.z);
                     }
-                    GraphU64_InterpolateQuaternionArc(&rot, actor->unk_130, &rotB, &rotA);
+                    Graphu64_InterpolateQuaternionArc(&rot, actor->unk_130, &rotB, &rotA);
                 } else {
                     trans = posA;
                     rot = rotA;
@@ -619,8 +619,8 @@ struct SceneObject {
     u8 pad280[0xC];
     void (*update)(SceneObject *, void *); /* 0x28C */
 };
-extern void *func_8024BFD4_de(SceneObject *, s32);
-extern s32 VisData_TestBoxAgainstFrustum(void *, void *);
+extern void *Gobjinst_RequestAnimatedModelVariant(SceneObject *, s32);
+extern s32 Visdata_TestBoxAgainstFrustum(void *, void *);
 extern void TextLoad_ResetTextureCache(void);
 /* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is
@@ -651,7 +651,7 @@ void func_80249E28_de(SceneObject *object, struct RacerViewport *camera) {
     model = SetN64_GetPackSection(*mem, 0);
     if (D_8011FAC0.clockPaused != 0) {
         object->update(object, &object->behaviorFlags);
-        GraphU64_TransformBoundingBox(object->transform, (s32)model, &object->bounds);
+        Graphu64_TransformBoundingBox(object->transform, (s32)model, &object->bounds);
     }
     visible = 1;
     if (!(object->flags & 0x200000)) {
@@ -660,7 +660,7 @@ void func_80249E28_de(SceneObject *object, struct RacerViewport *camera) {
             if (camera->clipBounds[1].x > object->bounds.min.x && camera->clipBounds[0].x < object->bounds.max.x &&
                 camera->clipBounds[1].z > object->bounds.min.z && camera->clipBounds[0].z < object->bounds.max.z &&
                 camera->clipBounds[1].y > object->bounds.min.y && camera->clipBounds[0].y < object->bounds.max.y &&
-                VisData_TestBoxAgainstFrustum((char *)camera + 0x2F0, &object->bounds) != 0) {
+                Visdata_TestBoxAgainstFrustum((char *)camera + 0x2F0, &object->bounds) != 0) {
                 visible = 1;
                 if (object->model != 0) {
                     goto sync;
@@ -682,19 +682,19 @@ void func_80249E28_de(SceneObject *object, struct RacerViewport *camera) {
         Cache_UnlockResource(0, mem);
         return;
     }
-    first = func_8024BFD4_de(object, object->firstKey);
+    first = Gobjinst_RequestAnimatedModelVariant(object, object->firstKey);
     if (first == 0) {
         Cache_UnlockResource(0, mem);
         return;
     }
-    if ((object->flags & 0x200) == 0 && func_802484B0_de(object, *(void **)first, (s32)model) == 0) {
+    if ((object->flags & 0x200) == 0 && Gobjinst_BuildActorPose(object, *(void **)first, (s32)model) == 0) {
         Cache_UnlockResource(0, first);
         Cache_UnlockResource(0, mem);
         return;
     }
     offset[0] = offset[1] = offset[2] = 0.0f;
     if (second_needed != 0) {
-        second = func_8024BFD4_de(object, object->secondKey);
+        second = Gobjinst_RequestAnimatedModelVariant(object, object->secondKey);
         second_needed = second != 0;
     } else {
         second = 0;

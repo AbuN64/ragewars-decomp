@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/COLORENTRY.H"
-struct Object_func_8028CE94_de {
+struct ObjectCSceneStartEventClips {
     char pad[0xA8];
     struct StridedTable *unkA8;
     struct StridedTable *unkAC;

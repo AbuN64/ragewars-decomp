@@ -10,11 +10,11 @@
 /* 802508E0_12.CPP */
 extern OSMesgQueue D_80101140;
 
-extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
+extern struct Shape_typemap_165 *Cache_AcquireResourceNodeWithEviction(s32, u32);
 
-extern void func_80254C70_de(s32 unused, void *object);
+extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
 /** Read the global word at VRAM 0x8010517C. */
 
@@ -39,22 +39,22 @@ struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 t
         __osRestoreInt(token);
     }
     flags = ((ResourceLoadRequest *)handle)->mode;
-    node = func_802514A8_de(0, flags);
+    node = Cache_AcquireResourceNodeWithEviction(0, flags);
     if (node != 0) {
         node->field_8++;
         node->field_C |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, total, (flags >> 5) & 1, flags);
+        result = ((s32 (*)(s32, s32, s32, u32))Cache_AllocateHeapWithEviction)(0, total, (flags >> 5) & 1, flags);
         node->field_0 = result;
         if (result != 0) {
             node->field_4 = total;
             node->field_C |= flags;
-            func_80254C70_de(0, node);
+            Cache_InsertResourceByAddress(0, node);
         } else {
             node->field_8--;
             if (node->field_8 == 0) {
                 node->field_C &= ~0x100;
             }
-            func_80254AD0_de(0, node);
+            Cache_ReleasePendingResourceEntry(0, node);
             node = 0;
         }
     }
@@ -87,22 +87,22 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 byteCou
     } else {
         __osRestoreInt(token);
     }
-    node = func_802514A8_de(0, 0x22U);
+    node = Cache_AcquireResourceNodeWithEviction(0, 0x22U);
     if (node != 0) {
         node->field_8++;
         node->field_C |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, byteCount, 1, 0x22U);
+        result = ((s32 (*)(s32, s32, s32, u32))Cache_AllocateHeapWithEviction)(0, byteCount, 1, 0x22U);
         node->field_0 = result;
         if (result != 0) {
             node->field_4 = byteCount;
             node->field_C |= 0x22;
-            func_80254C70_de(0, node);
+            Cache_InsertResourceByAddress(0, node);
         } else {
             node->field_8--;
             if (node->field_8 == 0) {
                 node->field_C &= ~0x100;
             }
-            func_80254AD0_de(0, node);
+            Cache_ReleasePendingResourceEntry(0, node);
             node = 0;
         }
     }
@@ -160,7 +160,7 @@ int func_802547DC_de(void) {
 }
 
 /* 802508E0_13.CPP */
-extern void func_80254990_de(void *, void *);
+extern void Cache_ReleaseResourceCompletely(void *, void *);
 
 /* Frees a block from Cache_AllocateMemory: releases the heap node stored 16 bytes before it under the heap lock. */
 void Cache_FreeMemory(void *allocation) {
@@ -180,7 +180,7 @@ void Cache_FreeMemory(void *allocation) {
     } else {
         __osRestoreInt(mask);
     }
-    func_80254990_de(0, resource);
+    Cache_ReleaseResourceCompletely(0, resource);
     unlockInterruptMask = __osDisableInt();
     remainingLockUsers = D_8010515C - 1;
     D_8010515C = remainingLockUsers;
@@ -196,23 +196,23 @@ struct Shape_typemap_165 *func_802548B8_de(s32 arg0_unused, s32 byteCount, u32 a
     struct Shape_typemap_165 *node;
     s32 result;
 
-    node = func_802514A8_de(0, allocationFlags);
+    node = Cache_AcquireResourceNodeWithEviction(0, allocationFlags);
     if (node != 0) {
         node->field_8++;
         node->field_C |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, byteCount, (allocationFlags >> 5) & 1, allocationFlags);
+        result = ((s32 (*)(s32, s32, s32, u32))Cache_AllocateHeapWithEviction)(0, byteCount, (allocationFlags >> 5) & 1, allocationFlags);
         node->field_0 = result;
         if (result != 0) {
             node->field_4 = byteCount;
             node->field_C |= allocationFlags;
-            func_80254C70_de(0, node);
+            Cache_InsertResourceByAddress(0, node);
             return node;
         }
         node->field_8--;
         if (node->field_8 == 0) {
             node->field_C &= ~0x100;
         }
-        func_80254AD0_de(0, node);
+        Cache_ReleasePendingResourceEntry(0, node);
         node = 0;
     }
     return node;

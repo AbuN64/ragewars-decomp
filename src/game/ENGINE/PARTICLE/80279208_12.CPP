@@ -9,7 +9,7 @@
 
 
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 void Particle_UpdateSineMotion(void *particle, f32 arg1) {
@@ -43,7 +43,7 @@ void Particle_UpdateSineMotion(void *particle, f32 arg1) {
         sp10.x = 0.0f;
         sp10.z = 0.0f;
         sp10.y = D_800C4B44_de;
-        GraphU64_CrossVectors(&sp20, &sp10, (CVector3 *)&sp30);
+        Graphu64_CrossVectors(&sp20, &sp10, (CVector3 *)&sp30);
         GraphU64_ScaleVector(&sp40, &sp20, Math_Sinf(((Shared_Particle *)particle)->sineAngleX) * ((Shared_Particle *)particle)->sineAmplitudeX * var_f20);
         temp_f12 = ((Shared_Particle *)particle)->sineAngleX + (((Shared_Particle *)particle)->sineAngleSpeedX * var_f20 * D_800D2988);
         ((Shared_Particle *)particle)->sineAngleX = temp_f12;
@@ -58,8 +58,8 @@ void Particle_UpdateSineMotion(void *particle, f32 arg1) {
         sp10.x = 0.0f;
         sp10.z = 0.0f;
         sp10.y = D_800C4B48_de;
-        GraphU64_CrossVectors(&sp60, &sp10, (CVector3 *)&sp30);
-        GraphU64_CrossVectors(&sp20, &sp60, (CVector3 *)&sp30);
+        Graphu64_CrossVectors(&sp60, &sp10, (CVector3 *)&sp30);
+        Graphu64_CrossVectors(&sp20, &sp60, (CVector3 *)&sp30);
         GraphU64_ScaleVector(&sp40, &sp20, Math_Sinf(((Shared_Particle *)particle)->sineAngleY) * ((Shared_Particle *)particle)->sineAmplitudeY * var_f20);
         temp_f12_2 = ((Shared_Particle *)particle)->sineAngleY + (((Shared_Particle *)particle)->sineAngleSpeedY * var_f20 * D_800D2988);
         ((Shared_Particle *)particle)->sineAngleY = temp_f12_2;

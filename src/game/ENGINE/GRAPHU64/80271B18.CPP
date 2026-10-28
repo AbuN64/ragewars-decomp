@@ -57,12 +57,12 @@ static inline f32 WrapAngle(f32 angle) {
 }
 #define ANGLE_ABS(a) (-(a) < 0.0f ? (a) : -(a))
 /** Absolute angle between two headings, each wrapped into [-pi, pi]. */
-f32 GraphU64_GetAngleDistance(f32 target, f32 current) {
+f32 Graphu64_GetAngleDistance(f32 target, f32 current) {
     return ANGLE_ABS(WrapAngle(target - WrapAngle(current)));
 }
 
 /** Component-wise multiply two 3-vectors. */
-void GraphU64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector3 *right) {
+void Graphu64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector3 *right) {
     result->x = left->x * right->x;
     result->y = left->y * right->y;
     result->z = left->z * right->z;
@@ -90,14 +90,14 @@ void GraphU64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void GraphU64_InterpolateVector(CVector3 *arg0, f32 t, void *a, void *b) {
+void Graphu64_InterpolateVector(CVector3 *arg0, f32 t, void *a, void *b) {
     arg0->x = ((CVector3 *)(a))->x + (t * (((CVector3 *)(b))->x - ((CVector3 *)(a))->x));
     arg0->y = ((CVector3 *)(a))->y + (t * (((CVector3 *)(b))->y - ((CVector3 *)(a))->y));
     arg0->z = ((CVector3 *)(a))->z + (t * (((CVector3 *)(b))->z - ((CVector3 *)(a))->z));
 }
 
 /** Cross product of two vectors, written directly to the output (no aliasing guard). */
-void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
+void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->x = (a->y * b->z) - (a->z * b->y);
     out->y = (a->z * b->x) - (a->x * b->z);
     out->z = (a->x * b->y) - (a->y * b->x);
@@ -117,7 +117,7 @@ void GraphU64_NormalizeVec3(f32 *vectorComponents) {
 }
 
 /** Intersect a line segment with a horizontal plane and write the point. */
-void GraphU64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
+void Graphu64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
     f32 dy = b->y - a->y;
 
     if (dy == 0.0f) {
@@ -133,7 +133,7 @@ void GraphU64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y
     }
 }
 
-void *GraphU64_ReflectVector(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
+void *Graphu64_ReflectVector(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f3;
@@ -151,7 +151,7 @@ void *GraphU64_ReflectVector(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2
     return arg0;
 }
 
-void *GraphU64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
+void *Graphu64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f4;

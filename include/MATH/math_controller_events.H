@@ -4,13 +4,13 @@
 #include "MATH/8029AE80.H"
 
 extern void DispatchControllerAxisEvents(input_event *event);
-extern void Smos_DispatchControllerEvent(input_event *event);
+extern void Controller_DispatchControllerEvent(input_event *event);
 extern void DispatchControllerButtonEvent(input_event *event);
-extern void Smos_SendControllerButtonEvent(s16 port, s16 control, s32 pressed);
-extern void Smos_SendControllerStickEvent(s16 port, s32 stick_x, s32 stick_y);
+extern void Controller_SendControllerButtonEvent(s16 port, s16 control, s32 pressed);
+extern void Controller_SendControllerStickEvent(s16 port, s32 stick_x, s32 stick_y);
 
-extern void Smos_SetControllerEventFilter(s32 (*arg0)(void));
+extern void Controller_SetControllerEventFilter(s32 (*arg0)(void));
 
-extern void Smos_AllocateControllerContext();
-extern void Smos_FreeControllerContext();
+extern void Controller_AllocateControllerContext();
+extern void Controller_FreeControllerContext();
 #endif

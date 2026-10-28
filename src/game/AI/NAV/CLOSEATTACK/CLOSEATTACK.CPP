@@ -16,16 +16,16 @@ unsigned int rodata_unresolved_800C2224[3] = {
 #endif
 #endif
 
-/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Nav_GetControllerPosition gives; always returns one. */
+/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Scaled_GetControllerPosition gives; always returns one. */
 
 
 extern char D_8013B364[];
 
-extern s32 Nav_HasLineOfSight(Brain *, void *);
+extern s32 Scaled_HasLineOfSight(Brain *, void *);
 extern void UpdateCloseAttack(Brain *arg0);
-extern void *Nav_GetControllerPosition(Brain *arg0);
-extern void *Nav_GetGraphPoint(char *, s32);
-extern f32 GraphU64_GetPointDistance(void *, void *);
+extern void *Scaled_GetControllerPosition(Brain *arg0);
+extern void *Portal_GetGraphPoint(char *, s32);
+extern f32 Graphu64_GetPointDistance(void *, void *);
 
 s32 Nav_CheckCloseAttackRoute(Brain *brain) {
     void *pos;
@@ -33,14 +33,14 @@ s32 Nav_CheckCloseAttackRoute(Brain *brain) {
     if (brain->target == 0) {
         return 1;
     }
-    if (Nav_HasLineOfSight(brain, brain->target) != 0) {
+    if (Scaled_HasLineOfSight(brain, brain->target) != 0) {
         UpdateCloseAttack(brain);
     }
     if (brain->destination == -1) {
         return 1;
     }
-    pos = Nav_GetControllerPosition(brain);
-    if (GraphU64_GetPointDistance(pos, Nav_GetGraphPoint(D_8013B364, brain->destination)) < 100.0f) {
+    pos = Scaled_GetControllerPosition(brain);
+    if (Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(D_8013B364, brain->destination)) < 100.0f) {
         UpdateCloseAttack(brain);
     }
     return 1;

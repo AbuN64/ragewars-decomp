@@ -57,7 +57,7 @@ static inline f32 decode(u32 *stream, Func802608ECResult range) {
     return result;
 }
 
-extern f32 PolyTrak_EvaluateAnimationCurve(Stream *stream, f32 time);
+extern f32 Polytrak2_EvaluateAnimationCurve(Stream *stream, f32 time);
 
 /* Opens the next entry of a packed file: finds the last filled slot before the 0xDEADBEEF end marker in the offset table, records the following slot's offset as that slot's offset plus the given size, optionally hands the slot's data to func_802BD3A0_de, and returns a pointer to it. */
 
@@ -65,16 +65,16 @@ extern f32 PolyTrak_EvaluateAnimationCurve(Stream *stream, f32 time);
 
 extern void func_802BD3A0_de(char *data);
 
-f32 func_80260EF8_de(LocalDecodeRange *valueStream) {
+f32 Polytrak2_ReadQuantizedStreamValue(LocalDecodeRange *valueStream) {
     return decode(&valueStream->unused, valueStream->range);
 }
 
 /** Advance a record pointer by an indexed number of strides. */
-void func_80260FF0_de(unsigned int *record, int index) {
+void Polytrak2_SeekArrayElement(unsigned int *record, int index) {
     record[0] += index * record[1];
 }
 
-unsigned int func_8026100C_de(unsigned int *bitCursor, unsigned int bitCount) {
+unsigned int Polytrak2_ReadCursorBits(unsigned int *bitCursor, unsigned int bitCount) {
     unsigned int bitAddress;
     unsigned int shift;
     unsigned int *word;
@@ -99,16 +99,16 @@ unsigned int func_8026100C_de(unsigned int *bitCursor, unsigned int bitCount) {
     return value;
 }
 
-void func_8026107C_de(int *bitCursor, int bitCount) {
+void Polytrak2_SkipCursorBits(int *bitCursor, int bitCount) {
     *bitCursor = *bitCursor + bitCount;
 }
 
 /** Samples the parsed animation track at the supplied frame time. */
-f32 PolyTrak_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond) {
-    return PolyTrak_EvaluateAnimationCurve((Stream *)track, time);
+f32 Polytrak2_SampleAnimationCurve(TrackBitarrayExpandCurveSamples *track, f32 time, s32 unusedFirst, s32 unusedSecond) {
+    return Polytrak2_EvaluateAnimationCurve((Stream *)track, time);
 }
 
-void func_802610A8_de(void *packBuffer, s32 sectionCount) {
+void Polytrak2_InitializeOutputPack(void *packBuffer, s32 sectionCount) {
     s32 count;
     s32 *ptr;
     Pack *pack = packBuffer;
@@ -128,7 +128,7 @@ void func_802610A8_de(void *packBuffer, s32 sectionCount) {
     }
 }
 
-char *func_802610F0_de(Pack *pack, s32 prepare, s32 size)
+char *Polytrak2_AppendOutputPackSection(Pack *pack, s32 prepare, s32 size)
 {
     s32 i;
     char *data;

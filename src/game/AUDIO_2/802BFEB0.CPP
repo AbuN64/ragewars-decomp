@@ -7,7 +7,7 @@
 
 
 
-u64 func_802BADC0_de(void) {
+u64 Audio_ReadSystemTime(void) {
     u32 saved;
     u32 count;
     u32 elapsed;

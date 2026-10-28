@@ -10,9 +10,9 @@ extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern void *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern s32 Smos_GetPreviousScreenOwner(s32);
-extern s32 Frontend_CountUsedSlots(void);
-extern void Frontend_UpdateJoinRequestDisplay(s32);
+extern s32 Menu_GetPreviousScreenOwner(s32);
+extern s32 Join_CountUsedSlots(void);
+extern void Join_UpdateJoinRequestDisplay(s32);
 extern void Tsmos_ActivateControllerState(void);
 /* Builds the pak-draw selection screen: allocates its 0x20-byte state, creates the four rows, hides the pointer item
    when the pad answer is 0x16, collects the three root items and hides their cursors, then shows the cursor of the
@@ -32,7 +32,7 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     SmpOverlay_ShowSlotById(window, 3, 0x38D);
     item = Frontend_FindWidgetByResourceId(window, 0x38F);
     item->alpha = 0x8C;
-    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
+    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(item, 0);
     }
     D_800E39C0->unk18 = 0;
@@ -40,9 +40,9 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     D_800E39C0->roots[0] = Frontend_FindWidgetByResourceId(window, 0x390);
     D_800E39C0->roots[1] = Frontend_FindWidgetByResourceId(window, 0x399);
     D_800E39C0->roots[2] = Frontend_FindWidgetByResourceId(window, 0x39A);
-    D_800E39C0->count = Frontend_CountUsedSlots();
+    D_800E39C0->count = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
-        Frontend_UpdateJoinRequestDisplay(i);
+        Join_UpdateJoinRequestDisplay(i);
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->roots[i], 0x396), 0);
     }
     Tsmos_ActivateControllerState();

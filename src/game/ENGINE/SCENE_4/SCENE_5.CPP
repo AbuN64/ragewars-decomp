@@ -60,7 +60,7 @@ void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC 
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 extern s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
-extern void GraphU64_ProjectPoint(void *, CVector3 *, CVector3 *);
+extern void Graphu64_ProjectPoint(void *, CVector3 *, CVector3 *);
 extern f32 Link_GetLightAnimationOffset(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
 void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
@@ -140,7 +140,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
             GraphU64_TransformPoint(volume->inverse, position, &transformed);
             if (Lighting_EvaluateLocalVolume(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 GraphU64_AddVec3(&translatedDirection, &localDirection, &transformed);
-                GraphU64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
+                Graphu64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
                 GraphU64_SubtractVectors(sampleDirection, position, &localDirection);
                 GraphU64_NormalizeVec3(sampleDirection);
                 color = volume->direction;
@@ -451,7 +451,7 @@ extern u8 *D_800D3A9C[];
 #else
 extern u8 *D_800D3A9C;
 #endif
-extern void func_804037D4_de(void), Menu_RequestTrackByKey(s32);
+extern void func_804037D4_de(void), Track_RequestTrackByKey(s32);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
@@ -469,7 +469,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
         break;
     case 1:
         if (scene->selectionTimer == entry->value) {
-            if (scene->selectionValues[1] == 999) { func_804037D4_de(); Menu_RequestTrackByKey(400); }
+            if (scene->selectionValues[1] == 999) { func_804037D4_de(); Track_RequestTrackByKey(400); }
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
@@ -535,15 +535,15 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
 extern void Cinema_AddMessage(char *);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
-extern void *func_80254284_de(s32, void **, s32, void *);
-extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
+extern void *Cache_RequestWordCountedResourcePinned(s32, void **, s32, void *);
+extern ResultsText *Cache_RequestPackSection(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
 extern s32 XStdio_FormatBuffer(char *, const char *, ...);
 extern u8 Player_GetLevelProgress(Profile *, s32);
 extern void Scene_ReleaseCachedLevelData(Shared_World *);
 extern void *Cache_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
-extern s32 Frontend_FindKeyIndex(s32);
+extern s32 Key_FindKeyIndex(s32);
 static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 limit) {
     void *handle;
     s32 entry;
@@ -552,8 +552,8 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     s32 length;
 
     entry = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, level);
-    bank = func_80254284_de(0, &handle, entry, g_levelIndexText);
-    name = func_80254408_de(0, handle, 8, entry, world, 0, g_levelNameText);
+    bank = Cache_RequestWordCountedResourcePinned(0, &handle, entry, g_levelIndexText);
+    name = Cache_RequestPackSection(0, handle, 8, entry, world, 0, g_levelNameText);
     length = name->length;
     if (limit < length) {
         length = limit;
@@ -706,7 +706,7 @@ void Scene_ShowResultsGoal(void) {
         break;
     case 4:
         challenge = findLevelChallenge(&g_world, D_8015402C);
-        character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
+        character = &RESULTS_CHARACTERS[Key_FindKeyIndex(challenge->character)];
         XStdio_FormatBuffer(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         Cinema_AddMessage(name);
         Cinema_AddMessage(goal);

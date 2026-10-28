@@ -14,7 +14,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
  /* extern */
 /* extern */
 /* Unpack or copy a resource into an allocated buffer and install it. */
-s32 PpDecom_UnpackResource(void **handle, s32 retainUncompressed) {
+s32 Ppdecom_UnpackResource(void **handle, s32 retainUncompressed) {
     s32 succeeded;
     u8 compressionMethod;
     void **block;

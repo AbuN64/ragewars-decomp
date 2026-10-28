@@ -72,11 +72,11 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern void *Frontend_FindWidgetByResourceId(void *, s32);
 
-extern s32 Frontend_ListHasFlag100(void *);
+extern s32 Widget_ListHasFlag100(void *);
 
 
 
-void func_80438A88_de(void) {
+void CPlayerPreview_ResetSelectionMessageState(void) {
     struct SelectionMessageScreen *state = D_800E5830;
 
     state->first = -1;
@@ -84,7 +84,7 @@ void func_80438A88_de(void) {
     state->third = 0;
 }
 
-s32 func_80438AA4_de(void) {
+s32 CPlayerPreview_CloseSelectionMessageScreen(void) {
     Cache_FreeMemory(D_800E5830);
     D_800E5830 = 0;
     return 0;
@@ -162,11 +162,11 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
     if (D_800E5830->started == 0) {
         D_800E5830->started = 1;
 #if defined(VERSION_DE)
-        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
 #elif defined(VERSION_EU_X)
-        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
         if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)
@@ -210,7 +210,7 @@ s32 Achieve_HandleResultsMenuChoice(void) {
     MarkMenuEventHandled();
     if (Frontend_GetMenuImageState((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
         D_80145088.status[7] = 0;
-        switch (Smos_GetFocusedElementId()) {
+        switch (Menu_GetFocusedElementId()) {
         case MSG_HIDE:
             Frontend_StartMenuImageTransition(D_800E5830);
             D_800E5830->rules.locked = 0;
@@ -220,7 +220,7 @@ s32 Achieve_HandleResultsMenuChoice(void) {
             SmXlate_SwitchScreen(0x13);
             return 0;
         case MSG_LEAVE:
-            Frontend_SetMenuChoiceResult(0x21);
+            Random_SetMenuChoiceResult(0x21);
             break;
         default:
             return 0;

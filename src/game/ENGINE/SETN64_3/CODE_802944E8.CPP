@@ -116,7 +116,7 @@ void SetN64_StartRound(GameSession *session) {
     D_800CD744_de = roundTimerConstant();
     D_800D298C = roundTimerConstant();
     D_800CD740_de = roundTimerConstant();
-    OvlScene_InitPreview(&g_world, session->resource);
+    Scene_InitPreview(&g_world, session->resource);
     OvlScene_SetSelection(&g_world, session->selector, 0);
 }
 

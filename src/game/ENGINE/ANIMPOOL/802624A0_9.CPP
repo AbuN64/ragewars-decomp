@@ -9,9 +9,9 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 
-/* Spawns the effect a description asks for: the spawn of AnimPool_SpawnSceneEffect (id resolution, free node, init
+/* Spawns the effect a description asks for: the spawn of Animpool_SpawnSceneEffect (id resolution, free node, init
  * through func_802466A0_de and start) inlined with the id, variant, count, owner, position, scale, direction
- * and colour taken from the description record and no counted reference. Adapted from AnimPool_SpawnSceneEffect with
+ * and colour taken from the description record and no counted reference. Adapted from Animpool_SpawnSceneEffect with
  * the enabled and count tests as separate early returns. */
 
 
@@ -78,12 +78,12 @@ static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 var
     return effect;
 }
 
-SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc) {
+SceneEffect *Animpool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc) {
     return spawn_effect(scene, desc->id, desc->variant, desc->count, desc->owner, desc->position, desc->scale,
                         desc->direction, desc->color, 0);
 }
 
-s32 AnimPool_ReleaseSceneEffect(struct SceneEffect *arg0) {
+s32 Animpool_ReleaseSceneEffect(struct SceneEffect *arg0) {
     s32 *counter;
 
     counter = arg0->ref;

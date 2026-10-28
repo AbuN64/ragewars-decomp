@@ -9,7 +9,7 @@
 #include "COMMON/LONE/D_800D83D0.H"
 
 /* 802BECB0.CPP */
-void func_802B9BC0_de(void) {
+void __osSiCreateAccessQueue(void) {
     extern OSMesgQueue D_8014EA78;
     extern OSMesg D_8014EA70;
     D_800D83D0[0] = 1;
@@ -30,7 +30,7 @@ static inline void create_access_queue(void) {
     osSendMesg(&D_8014EA78, 0, 0);
 }
 
-void func_802B9C14_de(void) {
+void __osSiGetAccess(void) {
     extern OSMesgQueue D_8014EA78;
     OSMesg token;
 

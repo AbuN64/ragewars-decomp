@@ -13,7 +13,7 @@
    label from it. The id checksums are read through the block itself and the repaired device id
    through the new id rather than through the id pointer. */
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
 s32 osPfsRepairId(OSPfs *pfs)
 {
@@ -31,7 +31,7 @@ s32 osPfsRepairId(OSPfs *pfs)
         if (ret != 0)
             return ret;
     }
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, (u8 *)&temp);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 1, (u8 *)&temp);
     if (ret != 0)
         return ret;
     Pfs_ComputeIdChecksums((u16 *)&temp, &sum, &isum);
@@ -72,7 +72,7 @@ s32 osPfsRepairId(OSPfs *pfs)
     pfs->inode_table = 8;
     pfs->minode_table = (pfs->banks + 1) * 8;
     pfs->dir_table = pfs->minode_table + pfs->banks * 8;
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 7, pfs->label);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 7, pfs->label);
     if (ret != 0)
         return ret;
     return 0;
@@ -94,7 +94,7 @@ s32 osPfsFindFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8
         return 2;
 
     for (j = 0; j < pfs->dir_size; j++) {
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&dir);
+        ret = __osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&dir);
         if (ret != 0)
             return ret;
 

@@ -21,16 +21,16 @@ extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
-extern void func_80240CAC_de(QueryE0 *arg0);
+extern void CPlane_BuildTriangleNormal(QueryE0 *arg0);
 
 /** Swap two pairs of words. */
-void func_80243814_de(Hit8 *leftHit, Hit8 *rightHit) {
+void CPolyCollision_SwapHits(Hit8 *leftHit, Hit8 *rightHit) {
     Hit8 temporary = *leftHit;
     *leftHit = *rightHit;
     *rightHit = temporary;
 }
 
-s32 func_80243850_de(Hit8 *a, Hit8 *b) {
+s32 CPolyCollision_CompareHitFractions(Hit8 *a, Hit8 *b) {
     s32 order;
     order = 1;
     if ((a->t) < (b->t)) {
@@ -39,7 +39,7 @@ s32 func_80243850_de(Hit8 *a, Hit8 *b) {
     return order;
 }
 
-void func_80243874_de(void *contextAddress) {
+void CPolyCollision_TraceElementMesh(void *contextAddress) {
     void *collisionElement;
     void **temp_s0;
     void *meshData;
@@ -65,8 +65,8 @@ void func_80243874_de(void *contextAddress) {
     }
 }
 
-void func_80243920_de(ActorB0 *actor) {
-    extern s32 func_8023E8D4_de(ActorB0 *, QueryE0 *, s32);
+void CPolyCollision_TraceCeilingTriangle(ActorB0 *actor) {
+    extern s32 CCollision_TestSegmentPolygon(ActorB0 *, QueryE0 *, s32);
     QueryE0 query;
     u8 *data;
     s32 *flags;
@@ -88,7 +88,7 @@ void func_80243920_de(ActorB0 *actor) {
                                          actor->height;
                 query.vectors[2 - i].z = ((CollisionBuildTriangle *)data)->fields.v[i]->z;
             }
-            func_80240CAC_de(&query);
+            CPlane_BuildTriangleNormal(&query);
             height = query.result.y;
             if ((0.10000000149011612f) < height) {
                 query.word0 = 5;
@@ -104,7 +104,7 @@ void func_80243920_de(ActorB0 *actor) {
                 } else {
                     query.wordC = 1;
                 }
-                func_8023E8D4_de(actor, &query, 1);
+                CCollision_TestSegmentPolygon(actor, &query, 1);
             }
            }
           }

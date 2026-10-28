@@ -20,7 +20,7 @@ extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_TransformDirectionTranspose(f32 *, CVector3 *, CVector3 *);
+extern void Graphu64_TransformDirectionTranspose(f32 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
@@ -45,7 +45,7 @@ extern void RollMatrix(void *arg0, f32 arg1);
 
 
 /* Tests whether a viewer can see a target: raises both positions by their heights scaled by one half and casts
-   a ray between them through func_802444A4_de into D_80103FD0, returning 1 when nothing or the target itself
+   a ray between them through CCollision_SweepPoint into D_80103FD0, returning 1 when nothing or the target itself
    blocks it. */
 
 
@@ -60,7 +60,7 @@ extern char D_80103FD0[];
 
 extern f32 GameObject_GetActorHeight(Player *);
 
-extern s32 func_802444A4_de(Player *, CVector3, CVector3, char *);
+extern s32 CCollision_SweepPoint(Player *, CVector3, CVector3, char *);
 
 void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedArg) {
     if ((Rumble_TestActorStateBit(&g_world, actor) == 0) &&
@@ -87,7 +87,7 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
 
     build_rotation(object, matrix);
     GraphU64_SubtractVectors(&offset, point, pivot);
-    GraphU64_TransformDirectionTranspose(matrix, &offset, point);
+    Graphu64_TransformDirectionTranspose(matrix, &offset, point);
     GraphU64_AddVec3(point, point, pivot);
 }
 
@@ -148,7 +148,7 @@ s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *oth
     from.y += GameObject_GetActorHeight(player) * lift;
     to = other->pos;
     to.y += GameObject_GetActorHeight(other) * lift;
-    blocked = func_802444A4_de(player, from, to, D_80103FD0);
+    blocked = CCollision_SweepPoint(player, from, to, D_80103FD0);
     if (blocked != 0 && *D_80103FCC != other) {
         return 0;
     }

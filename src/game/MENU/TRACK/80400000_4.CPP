@@ -20,12 +20,12 @@
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32,void *,s32);
 
-extern void Menu_BuildWeightedSpline(s32,CVector3 *,f32 *,Spline *);
+extern void Track_BuildWeightedSpline(s32,CVector3 *,f32 *,Spline *);
 
 extern void Cache_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
 
 /* The pack append API tests the second ABI word for a nonzero preparation flag. */
-static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_802610F0_de(pack,(s32)prepare,size); }
+static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return Polytrak2_AppendOutputPackSection(pack,(s32)prepare,size); }
 
 static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9; return (b+a)*4+48; }
 
@@ -49,7 +49,7 @@ static inline void setTimes(f32 *a,f32 *b,f32 *c,f32 *t) {
     *c=*t;
 }
 
-void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handle) {
+void Track_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handle) {
     struct Shape_typemap_165 *output;
     void *source, *a, *b, *c, *part, *extra;
     Pack *pack, *dest;
@@ -58,7 +58,7 @@ void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handl
     SplineSourceCursor p,q,r,s;
     s32 count, i, size, sa, sb, sc, np, nr, byteP, byteR;
     void *dp, *dr;
-    if (!PpDecom_UnpackResource((void **)handle, 1)) return;
+    if (!Ppdecom_UnpackResource((void **)handle, 1)) return;
     source = (*handle)->pack;
     parts = SetN64_GetPackSection(source, 0);
     a = SetN64_GetPackSection(source, 1);
@@ -81,12 +81,12 @@ void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handl
     output = Cache_AllocResourceBlock(0, handle, size + sa + sb + sc + 24);
     if (output == 0) return;
     pack = output->pack;
-    func_802610A8_de(pack, 4);
+    Polytrak2_InitializeOutputPack(pack, 4);
     table = (void *)packAppend(pack, 0, size);
     packAppend(pack, a, sa);
     packAppend(pack, b, sb);
     packAppend(pack, c, sc);
-    func_802610A8_de(table, count);
+    Polytrak2_InitializeOutputPack(table, count);
     for (i = 0; i < count; i++) {
         s32 byteP,byteR;
         SplineSource *sizeP,*sizeR;
@@ -96,7 +96,7 @@ void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handl
         byteP = sizeP->count * 9;
         byteR = sizeR->count * 9;
         dest = (void *)packAppend(table, 0, (byteR + byteP)*4 + 48);
-        func_802610A8_de(dest, 3);
+        Polytrak2_InitializeOutputPack(dest, 3);
         p.header = SetN64_GetPackSection(part, 0);
         q.header = SetN64_GetPackSection(part, 1);
         r.header = SetN64_GetPackSection(part, 2);
@@ -115,13 +115,13 @@ void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handl
         r.points = r.header->points;
         s.weights = s.header->weights;
         packAppend(dest, extra, 8);
-        Menu_BuildWeightedSpline(np, p.points, q.weights, dp);
-        Menu_BuildWeightedSpline(nr, r.points, s.weights, dr);
+        Track_BuildWeightedSpline(np, p.points, q.weights, dp);
+        Track_BuildWeightedSpline(nr, r.points, s.weights, dr);
     }
     Cache_ReplaceResourceBlock(0, handle, output);
 }
 
-s32 Menu_LoadTrackSequence(s32 index) {
+s32 Track_LoadTrackSequence(s32 index) {
     s32 size,size2,i,count,previous,pending,loaded;
     SharedTrackObject *captured;
     Shared_World *resources;
@@ -234,13 +234,13 @@ s32 Menu_LoadTrackSequence(s32 index) {
     }
 }
 
-/* Evaluates a spline built by Menu_BuildWeightedSpline at weight w, returning the position: zero for no nodes, the first or last node's position outside the weight range, and otherwise locates the weight segment, eases the arc length across it with a cubic blend of the neighbouring arc-length spacings, locates the arc-length segment and interpolates the position with the stored second derivatives. */
+/* Evaluates a spline built by Track_BuildWeightedSpline at weight w, returning the position: zero for no nodes, the first or last node's position outside the weight range, and otherwise locates the weight segment, eases the arc length across it with a cubic blend of the neighbouring arc-length spacings, locates the arc-length segment and interpolates the position with the stored second derivatives. */
 
 
 
 
 
-CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) {
+CVector3 Track_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) {
     CVector3 out;
     SplineNode *a;
     SplineNode *b;

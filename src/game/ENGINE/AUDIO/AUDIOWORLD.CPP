@@ -10,7 +10,7 @@
 
 
 /* Starts a sound instance from a description: when the scene's free node list is not empty it takes the
- * first node under the audio lock (func_80258740_de/func_802587A4_de), unlinks it, gives it the next handle, the
+ * first node under the audio lock (Sound_AcquireContextLock/Sound_ReleaseContextLock), unlinks it, gives it the next handle, the
  * volume, sample, priority, pan and pitch fields decoded from the description, full gain, the scene frame
  * and the position, prepares its channel through Audio_SetVoiceTrackId and Audio_InitializeVoiceParameters and inserts it into the
  * active list ahead of the first lower-priority node; returns the handle or -1 when no node is free. */
@@ -36,7 +36,7 @@ extern u8 func_8025E548_de(void *);
 extern s16 func_8025E578_de(void *);
 
 
-/* Services the pending glyph requests of a text cache: each request still counting down its delay is ticked and, when it reaches zero, stamped with the current frame and the next sequence number; a request older than sixteen frames is moved to the done list, otherwise it reserves a cell for its glyph and a texture for its bitmap, stopping when none is free, copies itself into the cell, uploads the cell through Audio_UpdateSoundSlot and moves to the done list. The slot address is written as the doubled slot plus the table address because the cartridge adds the scaled index first; array indexing puts the table first (1 word). */
+/* Services the pending glyph requests of a text cache: each request still counting down its delay is ticked and, when it reaches zero, stamped with the current frame and the next sequence number; a request older than sixteen frames is moved to the done list, otherwise it reserves a cell for its glyph and a texture for its bitmap, stopping when none is free, copies itself into the cell, uploads the cell through Sound_UpdateSoundSlot and moves to the done list. The slot address is written as the doubled slot plus the table address because the cartridge adds the scaled index first; array indexing puts the table first (1 word). */
 
 
 
@@ -55,20 +55,20 @@ extern s16 func_8025E578_de(void *);
 
 
 
-extern s16 func_802B2510_de(char *, s32);
+extern s16 alSndpAllocate(char *, s32);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern void Audio_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
+extern void Sound_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
 
-static inline void append(ListHead *head, Entry_func_80259440_de *entry) {
+static inline void append(ListHead *head, EntryAudioWorldDispatchPendingSounds *entry) {
     entry->prev = head->prev;
-    entry->next = (Entry_func_80259440_de *)head;
+    entry->next = (EntryAudioWorldDispatchPendingSounds *)head;
     head->prev->next = entry;
     head->prev = entry;
 }
 
-s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position, s32 volume, s32 extra) {
+s32 AudioWorld_QueuePrioritizedSound(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position, s32 volume, s32 extra) {
     NodeRecAtC8 *node;
     NodeRecAtC8 *first;
     NodeRecAtC8 *at;
@@ -76,7 +76,7 @@ s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position,
     s32 priority;
 
     if (manager->free.next != (NodeRecAtC8 *)&manager->free) {
-        func_80258740_de(manager->scene);
+        Sound_AcquireContextLock(manager->scene);
         first = manager->free.next;
         first->prev->next = first->next;
         first->next->prev = first->prev;
@@ -115,28 +115,28 @@ s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position,
         node->next = at;
         at->prev->next = node;
         at->prev = node;
-        func_802587A4_de(manager->scene);
+        Sound_ReleaseContextLock(manager->scene);
         return node->handle;
     }
     return -1;
 }
 
-void func_80259440_de(Cache *cache) {
+void AudioWorld_DispatchPendingSounds(Cache *cache) {
     s16 *slots;
     char *textures;
     Glyphs *glyphs;
-    Entry_func_80259440_de *entry;
-    Entry_func_80259440_de *next;
+    EntryAudioWorldDispatchPendingSounds *entry;
+    EntryAudioWorldDispatchPendingSounds *next;
     s32 slot;
     s16 *cursor;
     s32 free;
     CellCode802591C0 *cell;
 
-    func_80258740_de(cache->context);
+    Sound_AcquireContextLock(cache->context);
     slots = cache->context->slots;
     textures = cache->context->textures;
     glyphs = cache->context->font->glyphs;
-    for (entry = cache->pending.next; entry != (Entry_func_80259440_de *)&cache->pending; entry = next) {
+    for (entry = cache->pending.next; entry != (EntryAudioWorldDispatchPendingSounds *)&cache->pending; entry = next) {
         next = entry->next;
         if (entry->delay != 0) {
             if (--entry->delay == 0) {
@@ -161,7 +161,7 @@ void func_80259440_de(Cache *cache) {
         if (free != -1) {
             break;
         }
-        *cursor = func_802B2510_de(textures, glyphs->bitmaps[entry->font]);
+        *cursor = alSndpAllocate(textures, glyphs->bitmaps[entry->font]);
         if (*cursor == free) {
             break;
         }
@@ -171,17 +171,17 @@ void func_80259440_de(Cache *cache) {
         cell->texture = *cursor;
         cell->frame = cache->context->frame;
         cell->index = slot;
-        Audio_UpdateSoundSlot(cache->context, cell->sequence, 0, cell->data);
+        Sound_UpdateSoundSlot(cache->context, cell->sequence, 0, cell->data);
         entry->sequence = free;
         entry->glyph = free;
         entry->prev->next = entry->next;
         entry->next->prev = entry->prev;
         append(&cache->done, entry);
     }
-    func_802587A4_de(cache->context);
+    Sound_ReleaseContextLock(cache->context);
 }
 
-void func_8025966C_de(void *sentinel, s32 owner) {
+void AudioWorld_InitializeVoiceListSentinel(void *sentinel, s32 owner) {
     (((struct ObjectLinks8 *) ((s8 *) sentinel))->unk_4) = sentinel;
     (((struct ObjectLinks8 *) ((s8 *) sentinel))->unk_0) = sentinel;
     Audio_InitializeVoiceRecord(sentinel + 8, owner, -1);
@@ -230,7 +230,7 @@ static inline void func_802596D4_voiceInit(VoiceRecAt8 *voice, s32 owner) {
 
 
 /* Initialises a channel set: records the owner, sets up its free and active lists with headers, and appends 32 initialised voices to the active list. */
-void func_802596B4_de(ChannelSet *set, s32 owner) {
+void AudioWorld_InitializePendingSoundPool(ChannelSet *set, s32 owner) {
     s32 i;
 
     set->owner = owner;
@@ -285,16 +285,16 @@ void AudioWorld_StartSpatialVoice(ManagerRecAtD8V2 *manager, s32 index, s32 owne
     manager->scene->selection = -1;
 }
 
-void func_802598B4_de(ChannelSet *channelSet, s32 soundId) {
-    Node_func_802598B4_de *node;
-    Node_func_802598B4_de *next;
-    Node_func_802598B4_de *end;
-    Node_func_802598B4_de *initial_end;
-    Node_func_802598B4_de *tail_end;
+void AudioWorld_RecyclePendingSoundsByIdentifier(ChannelSet *channelSet, s32 soundId) {
+    NodeAudioWorldRecyclePendingSoundsByIdentifier *node;
+    NodeAudioWorldRecyclePendingSoundsByIdentifier *next;
+    NodeAudioWorldRecyclePendingSoundsByIdentifier *end;
+    NodeAudioWorldRecyclePendingSoundsByIdentifier *initial_end;
+    NodeAudioWorldRecyclePendingSoundsByIdentifier *tail_end;
 
-    node = (Node_func_802598B4_de *)channelSet->free.prev;
-    tail_end = (Node_func_802598B4_de *)&channelSet->active;
-    initial_end = (Node_func_802598B4_de *)&channelSet->free;
+    node = (NodeAudioWorldRecyclePendingSoundsByIdentifier *)channelSet->free.prev;
+    tail_end = (NodeAudioWorldRecyclePendingSoundsByIdentifier *)&channelSet->active;
+    initial_end = (NodeAudioWorldRecyclePendingSoundsByIdentifier *)&channelSet->free;
     if (node != initial_end) {
         end = initial_end;
         do {
@@ -302,9 +302,9 @@ void func_802598B4_de(ChannelSet *channelSet, s32 soundId) {
             if (node->value == soundId) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                node->prev = (Node_func_802598B4_de *)channelSet->active.next;
+                node->prev = (NodeAudioWorldRecyclePendingSoundsByIdentifier *)channelSet->active.next;
                 node->next = tail_end;
-                ((Node_func_802598B4_de *)channelSet->active.next)->next = node;
+                ((NodeAudioWorldRecyclePendingSoundsByIdentifier *)channelSet->active.next)->next = node;
                 channelSet->active.next = (ListLink *)node;
             }
             node = next;
@@ -312,38 +312,38 @@ void func_802598B4_de(ChannelSet *channelSet, s32 soundId) {
     }
 }
 
-/* Moves nodes whose key differs from arg1 (or every node when arg1 is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from func_80259988_de, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
+/* Moves nodes whose key differs from arg1 (or every node when arg1 is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from AudioWorld_RecyclePendingSoundsByKey, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
 
 
-void func_80259918_de(OwnerRecAtD8 *channelOwner, s32 retainedKey) {
-    Node_func_80259918_de *node;
-    Node_func_80259918_de *next;
+void AudioWorld_RecyclePendingSoundsExceptKey(OwnerRecAtD8 *channelOwner, s32 retainedKey) {
+    NodeAudioWorldRecyclePendingSoundsExceptKey *node;
+    NodeAudioWorldRecyclePendingSoundsExceptKey *next;
     node = channelOwner->activeNext;
-    while (node != (Node_func_80259918_de *) &channelOwner->activePrev) {
+    while (node != (NodeAudioWorldRecyclePendingSoundsExceptKey *) &channelOwner->activePrev) {
         next = node->next;
         if (retainedKey == -1 || node->key != retainedKey) {
             node->prev->next = next;
             node->next->prev = node->prev;
-            do { Node_func_80259918_de *tail_ = (channelOwner)->otherPrev; (node)->next = (Node_func_80259918_de *) &(channelOwner)->otherPrev; (node)->prev = tail_; (channelOwner)->otherPrev->next = (node); (channelOwner)->otherPrev = (node); } while (0);
+            do { NodeAudioWorldRecyclePendingSoundsExceptKey *tail_ = (channelOwner)->otherPrev; (node)->next = (NodeAudioWorldRecyclePendingSoundsExceptKey *) &(channelOwner)->otherPrev; (node)->prev = tail_; (channelOwner)->otherPrev->next = (node); (channelOwner)->otherPrev = (node); } while (0);
         }
         node = next;
     }
 }
 
 /* Move nodes with the requested key from the active list to the other list. */
-void func_80259988_de(void *channelOwner, s32 matchingKey)
+void AudioWorld_RecyclePendingSoundsByKey(void *channelOwner, s32 matchingKey)
 {
     OwnerRecAtD8 *owner = channelOwner;
-    Node_func_80259918_de *node = owner->activeNext;
-    Node_func_80259918_de *head = (Node_func_80259918_de *)&owner->activePrev;
-    Node_func_80259918_de *other = (Node_func_80259918_de *)&owner->otherPrev;
+    NodeAudioWorldRecyclePendingSoundsExceptKey *node = owner->activeNext;
+    NodeAudioWorldRecyclePendingSoundsExceptKey *head = (NodeAudioWorldRecyclePendingSoundsExceptKey *)&owner->activePrev;
+    NodeAudioWorldRecyclePendingSoundsExceptKey *other = (NodeAudioWorldRecyclePendingSoundsExceptKey *)&owner->otherPrev;
 
     if (node != head) {
-        Node_func_80259918_de *sentinel = head;
+        NodeAudioWorldRecyclePendingSoundsExceptKey *sentinel = head;
         do {
-            Node_func_80259918_de *next = node->next;
+            NodeAudioWorldRecyclePendingSoundsExceptKey *next = node->next;
             if (node->key == matchingKey) {
-                Node_func_80259918_de *tail;
+                NodeAudioWorldRecyclePendingSoundsExceptKey *tail;
                 node->prev->next = next;
                 node->next->prev = node->prev;
                 tail = owner->otherPrev;
@@ -357,7 +357,7 @@ void func_80259988_de(void *channelOwner, s32 matchingKey)
     }
 }
 
-void func_802599EC_de(OwnerRecAtD8 *listNode, s32 matchingValue) {
+void AudioWorld_RecyclePendingSoundsByTrack(OwnerRecAtD8 *listNode, s32 matchingValue) {
     ListNode *node;
     ListNode *next;
     ListNode *sentinel;
@@ -379,14 +379,14 @@ void func_802599EC_de(OwnerRecAtD8 *listNode, s32 matchingValue) {
                 node->next = append_sentinel;
                 node->prev = tail;
                 ((ListNode *)listNode->otherPrev)->next = node;
-                listNode->otherPrev = (Node_func_80259918_de *)node;
+                listNode->otherPrev = (NodeAudioWorldRecyclePendingSoundsExceptKey *)node;
             }
             node = next;
         } while (node != loop_sentinel);
     }
 }
 
-void func_80259A50_de(Lists *lists, s32 matchingFlags) {
+void AudioWorld_RecyclePendingSoundsByFlags(Lists *lists, s32 matchingFlags) {
     NodeRecAtAC *channelCursor;
     NodeRecAtAC *next;
     NodeRecAtAC *sourceSentinel;
@@ -416,9 +416,9 @@ void func_80259A50_de(Lists *lists, s32 matchingFlags) {
     }
 }
 
-int func_80259AB8_de(void *channelOwner, int wantedKey) {
+int AudioWorld_HasPendingSoundWithKey(void *channelOwner, int wantedKey) {
     struct OwnerRecAtD8 *owner = channelOwner;
-    struct Node_func_80259918_de *node = owner->activeNext;
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *node = owner->activeNext;
     void *sentinel = &owner->activePrev;
     if (node != sentinel) {
         do {

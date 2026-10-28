@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 extern ResidentEventHandlerEntry D_800E4EC0[];
 
-s32 Frontend_DispatchEuMatchMenuEvent(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Match_DispatchEuMatchMenuEvent(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 i;
     for (i = 0; D_800E4EC0[i].handler != 0; i++) {
         if (D_800E4EC0[i].event == event &&

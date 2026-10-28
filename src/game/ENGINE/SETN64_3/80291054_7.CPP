@@ -16,7 +16,7 @@ extern void osStartThread(s32 arg0);
 
 
 
-extern s32 func_802BB5F0_de(s32 *, s32);
+extern s32 Scene_SetThreadPriority(s32 *, s32);
 
 
 
@@ -36,14 +36,14 @@ void SetN64_StartBootstrapThread(void) {
     osStartThread((s32)D_8011B590);
 }
 
-void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 arg1) {
+void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 threadArgument) {
     XPlus_FillMemory((s32)D_800E7C80_de, 1, 0x8000);
-    osCreateThread((s32)D_8011B7C0, 1, D_00293534, arg1, (s32)D_800EFC80_de, D_800CD8B4);
+    osCreateThread((s32)D_8011B7C0, 1, D_00293534, threadArgument, (s32)D_800EFC80_de, D_800CD8B4);
     osStartThread((s32)D_8011B7C0);
     {
         s32 temp = D_800CD8A0_de;
         ((GameSession *)gameSession)->enabled = 0;
-        func_802BB5F0_de(0, temp);
+        Scene_SetThreadPriority(0, temp);
     }
 loop_1:
     goto loop_1;

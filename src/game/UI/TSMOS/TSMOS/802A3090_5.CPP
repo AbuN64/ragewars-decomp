@@ -11,7 +11,7 @@
 /** Set D_800D2C90 to one. */
 
 
-extern void Smos_ClearControllerFlags(s32 *arg0);
+extern void Controller_ClearControllerFlags(s32 *arg0);
 
 /** Return the global word at D_800D2C98. */
 
@@ -24,7 +24,7 @@ void Tsmos_ActivateControllerState(void) {
     p = &D_800CDA24;
     if (*p != 1) {
         *p = 1;
-        Smos_ClearControllerFlags(p);
+        Controller_ClearControllerFlags(p);
     }
 }
 

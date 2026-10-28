@@ -10,7 +10,7 @@
 typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef StridedTable ObjRecV1;
 
-void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) {
+void Gastate_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) {
     f32 frameScale;
     f32 scaledCurrentLoopStart;
     f32 scaledNextLoopStart;
@@ -40,7 +40,7 @@ void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, AnimInfo *frames) 
     if (animationHandle == 0) {
         resourceReady = 0;
     } else {
-        resourceReady = func_802532F4_de(animationHandle) != 0;
+        resourceReady = Cache_IsResourceRetained(animationHandle) != 0;
     }
     if (resourceReady != 0) {
         resource = *state->unk10;

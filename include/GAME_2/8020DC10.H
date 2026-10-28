@@ -20,5 +20,5 @@ struct ObjRecAt18V4 {
     char pad0[0x18];
     s32 unk18;
 };
-extern void func_8020DC60_de(void *arg0);
+extern void Attack_SelectWeightedAttackBehavior(void *arg0);
 #endif

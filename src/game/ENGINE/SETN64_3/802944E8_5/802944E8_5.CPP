@@ -20,7 +20,7 @@ extern f32 rodata_func_8029499C_us_800C5410;
 extern void *D_auto_rodata_unresolved_800CD698[];
 extern void osViSetMode(void *);
 extern void osViSetYScale(f32);
-extern void func_802BA700_de(s32);
+extern void osViSetSpecialFeatures(s32);
 extern void Cinema_EndSequence(void);
 #define SCR_W(state, off) (*(s32 *)((char *)(state) + (off)))
 /* Per-frame screen step: when the flag at 0x26DD0 is set it switches the video mode (label chosen by D_800E28D8, Y scale from a constant, mode 2); in state 2 of D_80142CA8 with that flag clear it latches 0x26DBC into 0x26DB8, clears 0x26DB0, runs the reset calls and dispatches the 12-byte table row D_auto_rodata_unresolved_800CD698 for that value. */
@@ -34,7 +34,7 @@ void SetN64_ConfigureVideoAndEnterModeUs(char *state) {
         }
         osViSetMode(label);
         osViSetYScale(rodata_func_8029499C_us_800C5410);
-        func_802BA700_de(2);
+        osViSetSpecialFeatures(2);
     }
     if (D_80142CA8 == 2 && SCR_W(state, 0x26DD0) == 0) {
         mode = SCR_W(state, 0x26DBC);

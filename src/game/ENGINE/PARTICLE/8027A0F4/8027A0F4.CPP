@@ -107,8 +107,8 @@ block_7:
             } else {
                 amount = D_800C4B70_de;
             }
-            GraphU64_NormalizeQuaternion(&sp58.x);
-            GraphU64_NormalizeQuaternion(&sp48.x);
+            Graphu64_NormalizeQuaternion(&sp58.x);
+            Graphu64_NormalizeQuaternion(&sp48.x);
             GraphU64_InterpolateQuaternionWithLinearFallback(&sp68, amount, &sp48, &sp58);
             MatrixFromQuaternion(&sp68.x, sp78.m);
             temp_s0_2 = &arg0->direction;
@@ -218,8 +218,8 @@ create_sound:
     v28 = v68;
     GraphU64_NormalizeVec3(&v28);
     q88 = GraphU64_BuildDirectionQuaternion(&v28);
-    GraphU64_NormalizeQuaternion(&q88);
-    GraphU64_NormalizeQuaternion(&q78);
+    Graphu64_NormalizeQuaternion(&q88);
+    Graphu64_NormalizeQuaternion(&q78);
     GraphU64_NormalizeVec3(&v28);
     v38 = homingParticle->direction;
     GraphU64_NormalizeVec3(&v38);

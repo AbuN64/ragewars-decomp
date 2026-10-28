@@ -24,7 +24,7 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
  * of the two keys around the time. */
 
 
-void PolyTrak_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out) {
+void Polytrak2_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out) {
     void *root;
     void *tracks;
     AnimTrack *track;
@@ -91,7 +91,7 @@ void PolyTrak_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *ou
     }
 }
 
-extern void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
+extern void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
 
 
 
@@ -102,7 +102,7 @@ extern f32 func_80260B80_de(u32 *stream, s32 bits, f32 base, f32 range);
 
 /* Fills a four-float keyframe sample for an animation track: either the stored constant pose or an
  * interpolation between the two keys around the time. */
-void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
+void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
     void *root;
     void *tracks;
     AnimTrack *track;
@@ -165,11 +165,11 @@ void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
                 }
             }
         }
-        GraphU64_InterpolateQuaternionArc(out, time - (f32)(time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time)), frames + first, frames + second);
+        Graphu64_InterpolateQuaternionArc(out, time - (f32)(time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time)), frames + first, frames + second);
     }
 }
 
-void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
+void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) {
     Decode8025EF54 decode;
     f32 first;
     f32 second;
@@ -178,29 +178,29 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 
     decode.stream = *stream;
     if (D_8010AC78 != 0) {
-        decode.first_bits = func_802607B8_de(&decode.stream, 0x20);
-        decode.second_bits = func_802607B8_de(&decode.stream, 0x20);
+        decode.first_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
+        decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 0x20);
         first = *(f32 *)&decode.first_bits;
         second = *(f32 *)&decode.second_bits;
     } else {
-        decode.first_bits = func_802607B8_de(&decode.stream, 6);
-        decode.second_bits = func_802607B8_de(&decode.stream, 6);
+        decode.first_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 6);
+        decode.second_bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 6);
         converted = (f64)decode.first_bits;
         if (decode.first_bits < 0) {
             converted += D_800C40F8_de;
         }
-        first = PolyTrak_UnpackUnitValue((f32)converted, 6);
+        first = Polytrak2_UnpackUnitValue((f32)converted, 6);
         converted = (f64)decode.second_bits;
         if (decode.second_bits < 0) {
             converted += D_800C4100_de;
         }
-        second = PolyTrak_UnpackUnitValue((f32)converted, 6);
-        first = PolyTrak_ScaleToRange(first, D_8010AC7C, D_8010AC80);
-        second = PolyTrak_ScaleToRange(second, D_8010AC7C, D_8010AC80);
+        second = Polytrak2_UnpackUnitValue((f32)converted, 6);
+        first = Polytrak2_ScaleToRange(first, D_8010AC7C, D_8010AC80);
+        second = Polytrak2_ScaleToRange(second, D_8010AC7C, D_8010AC80);
     }
     decode.base = first;
     decode.range = second - first;
-    decode.bits = func_802607B8_de(&decode.stream, 6);
+    decode.bits = Polytrak2_ReadBitsAndAdvance(&decode.stream, 6);
     i = 0;
     if (count > 0) {
         do {
@@ -216,8 +216,8 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through GraphU64_NormalizeQuaternion. */
-void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
+void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -247,11 +247,11 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         a--;
         arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
     }
-    state[0] = func_80260664_de(0);
+    state[0] = Polytrak2_ByteAddressToBitAddress(0);
     for (i = 0; i < arg2; i++) {
         row = (f32 *)SetN64_GetPackSection(arg1, i);
         for (j = 0; j < arg3; j++) {
-            func_802607B8_de((u32 *)state, 0x1F);
+            Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
             row += 1;
         }
@@ -276,7 +276,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         for (i = 0; i < arg2; i++) {
             row = (f32 *)SetN64_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
-                GraphU64_NormalizeQuaternion(row);
+                Graphu64_NormalizeQuaternion(row);
                 row += 4;
             }
         }
@@ -284,7 +284,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
 }
 #else
 #if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_8025F074_us);
+INCLUDE_ASM("span_1000", Polytrak2_DecodeAndSmoothSampleTracks);
 #endif
 #endif
 #endif
@@ -308,8 +308,8 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through GraphU64_NormalizeQuaternion. */
-void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
+void Polytrak2_DecodeTrackSections(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -339,11 +339,11 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         a--;
         arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
     }
-    state[0] = func_80260664_de(0);
+    state[0] = Polytrak2_ByteAddressToBitAddress(0);
     for (i = 0; i < arg2; i++) {
         row = (f32 *)SetN64_GetPackSection(arg1, i);
         for (j = 0; j < arg3; j++) {
-            func_802607B8_de((u32 *)state, 0x1F);
+            Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
             row += 1;
         }
@@ -368,14 +368,14 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         for (i = 0; i < arg2; i++) {
             row = (f32 *)SetN64_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
-                GraphU64_NormalizeQuaternion(row);
+                Graphu64_NormalizeQuaternion(row);
                 row += 4;
             }
         }
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8025F0D4_de);
+INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSections);
 #endif
 #endif
 
@@ -393,7 +393,7 @@ typedef struct {
     s32 offsets[1];
 } AnimationSampleTable;
 
-s32 PolyTrak_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 tracks, s32 channels, s32 radius, s32 encoding) {
+s32 Polytrak2_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 tracks, s32 channels, s32 radius, s32 encoding) {
     void (*decode)(void *, void *, s32) = 0;
     s32 stream[2];
     s32 *cursor;
@@ -422,7 +422,7 @@ s32 PolyTrak_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32
         index--;
         buffer->offsets[index + 1] = buffer->offsets[index] + D_8010AC88 * 16;
     }
-    stream[0] = func_80260664_de(source);
+    stream[0] = Polytrak2_ByteAddressToBitAddress(source);
     i = 0;
     if (tracks > 0) {
         cursor = stream;
@@ -432,7 +432,7 @@ s32 PolyTrak_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32
             if (channels > 0) {
                 out = values;
                 do {
-                    func_802607B8_de((u32 *)cursor, 0x1F);
+                    Polytrak2_ReadBitsAndAdvance((u32 *)cursor, 0x1F);
                     decode(cursor, out, D_8010AC84);
                     out += 1;
                     j++;
@@ -467,7 +467,7 @@ s32 PolyTrak_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32
             if (D_8010AC88 > 0) {
                 out = values;
                 do {
-                    GraphU64_NormalizeQuaternion(out);
+                    Graphu64_NormalizeQuaternion(out);
                     out += 4;
                 } while (++i < D_8010AC88);
             }

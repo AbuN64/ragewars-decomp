@@ -30,7 +30,7 @@ extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(Scroll *, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
-/* eu-x Menu_CreateOptionsPage: the PAL options page with its own resource ids, plus the caption widget
+/* eu-x Options_CreateOptionsPage: the PAL options page with its own resource ids, plus the caption widget
    0x5E whose text is set from the per-language table D_auto_800DDB08. */
 s32 Menu_CreateLocalizedSettingsPage(void *node) {
     Shared_Game *settings;
@@ -129,7 +129,7 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     SmpOverlay_ShowSlotById(handle, 3, 0x389);
     widget = Frontend_FindWidgetByResourceId(handle, 0x38B);
     widget->alpha = 0x8C;
-    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
+    if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->timer = 0;
@@ -137,9 +137,9 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     D_800E39C0->rows[0] = Frontend_FindWidgetByResourceId(handle, 0x38C);
     D_800E39C0->rows[1] = Frontend_FindWidgetByResourceId(handle, 0x395);
     D_800E39C0->rows[2] = Frontend_FindWidgetByResourceId(handle, 0x396);
-    D_800E39C0->step = Frontend_CountUsedSlots();
+    D_800E39C0->step = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
-        Frontend_UpdateJoinRequestDisplay(i);
+        Join_UpdateJoinRequestDisplay(i);
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
     }
     Tsmos_ActivateControllerState();

@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 /* Five cached flag groups written together by Gfx_ConfigurePrimitiveRenderFlags. */
-extern Rec_func_8024C92C_de D_80153F60;
+extern RecGobjinstSampleBoneTranslation D_80153F60;
 extern s32 D_800DF274;
 extern s32 D_800DF280;
 extern s32 D_800DF28C;

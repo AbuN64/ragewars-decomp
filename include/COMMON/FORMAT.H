@@ -21,7 +21,7 @@ struct Format {
 };
 
 struct Format;
-extern struct Format D_800E2B20[];
+extern struct Format g_pixelFormatDescriptors[];
 extern void Frontend_GetPixelFormatDescriptor(s32 index, struct Format *out);
 
 

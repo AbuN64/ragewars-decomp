@@ -4,7 +4,7 @@
 #include "RENDER/802944E8.H"
 #include "COMMON/RESIDENTSTATE.H"
 
-extern s32 SimpPool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0);
+extern s32 Simppool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0);
 
 struct ResidentSlot {
     s32 unk0;
@@ -30,7 +30,7 @@ typedef struct FrontendInputSelector {
 } FrontendInputSelector;
 struct Node80253610;
 /* The us-rev1 resident texture menu state (D_8014AEB0, 0x21BC bytes): TextLoad_ResetArtsendTextureState clears it,
-   TEngine_LoadSelectedTexture loads the selected entry and TEngine_UpdateArtsendTexturePreview steps the selection. */
+   Tengine_LoadSelectedTexture loads the selected entry and Tengine_UpdateArtsendTexturePreview steps the selection. */
 struct MenuGlobalRecAt21B8 {
     u8 alternateTitle; /* +0x0 */
     u8 state; /* +0x1 */
@@ -59,6 +59,6 @@ struct SelectionRecAt8 {
     s32 value; /* +0x4 */
     s32 changed; /* +0x8: == D_8014AEC4 */
 };
-extern void SimpPool_ResetEffectsAndControllers(void);
+extern void Simppool_ResetEffectsAndControllers(void);
 extern void func_80294C84_de(void);
 #endif

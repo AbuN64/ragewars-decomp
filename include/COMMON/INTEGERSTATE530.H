@@ -8,7 +8,7 @@
 
 
 
-extern void Smos_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen();
 
 
 typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, s32 arg4);
@@ -40,7 +40,7 @@ typedef struct Element Element;
 
 
 
-extern void Smos_PopScreen();
+extern void Menu_PopScreen();
 
 /* Draw providers use several existing aggregate declarations. Registration
  * stores these functions; this type does not prescribe a call signature. */
@@ -55,7 +55,7 @@ struct MenuHandlerEntry {
 };
 
 
-extern void Smos_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler);
+extern void Menu_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler);
 
 
 extern int g_dispatchingScreenOwner;
@@ -68,7 +68,7 @@ struct Entry_func_80298170_de {
 };
 struct Entry_func_80298170_de;
 
-extern void Smos_DestroyScreenManager();
+extern void Menu_DestroyScreenManager();
 
 struct Widget;
 struct Widget {
@@ -108,15 +108,15 @@ struct ScreenManager;
 
 struct ScreenManager;
 
-extern s32 Smos_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Menu_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-extern unsigned int Smos_GetScreenStackDepth(void);
+extern unsigned int Menu_GetScreenStackDepth(void);
 
 extern int g_screenDrawHeight;
 
 
 
-extern void Smos_SetPagingEnabled(s32 arg0);
+extern void Menu_SetPagingEnabled(s32 arg0);
 
 struct ScreenManager;
 
@@ -151,10 +151,10 @@ struct ScreenManager;
 
 extern int g_menuElementLoadPeak;
 
-extern void Smos_SetKindHandlerFlags(s32 arg0, s32 arg1);
+extern void Menu_SetKindHandlerFlags(s32 arg0, s32 arg1);
 
 
-extern void Smos_DrawScreenStack();
+extern void Menu_DrawScreenStack();
 
 struct ScreenManager;
 struct ScreenManager {
@@ -198,9 +198,9 @@ extern void D_002A1BE0();
 extern s32 D_0040C5C0(void *, s32, s32, s32, s32);
 /* D_0040C5C8: Menu_DrawClippedWidgetSiblings */
 extern void D_0040C5C8();
-/* D_004125A4: Frontend_DispatchTypedWidgetEvent */
+/* D_004125A4: Node_DispatchTypedWidgetEvent */
 extern s32 D_004125A4(void *, s32, s32, s32, s32);
-/* D_00412634: Frontend_DrawGridListCells */
+/* D_00412634: Node_DrawGridListCells */
 extern void D_00412634();
 /* D_00419A4C: SmpFrameAnim_DispatchEvent */
 extern s32 D_00419A4C(void *, s32, s32, s32, s32);

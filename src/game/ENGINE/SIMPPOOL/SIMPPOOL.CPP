@@ -15,16 +15,16 @@ s32 Cinema_IsSequenceInWindow();                                /* extern */
 s32 func_80245850_de();                                /* extern */
 s32 Cinema_GetSequenceRequest();                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
-s32 Pak_CountLiveNodes(void *);                             
+s32 Menu_CountLiveNodes(void *);                             
 
 
 extern func_80294BB0_S1 D_8014561C;
 
-s32 SimpPool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0) {
+s32 Simppool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
     Prompt *prompt;
 
-    if ((Pak_CountLiveNodes(&D_8014561C) == 0) && (Cinema_IsSequenceInWindow() != 0)) {
+    if ((Menu_CountLiveNodes(&D_8014561C) == 0) && (Cinema_IsSequenceInWindow() != 0)) {
         if (Cinema_GetSequenceRequest() == 0x78) {
             prompt = &D_8014561C.unk1284;
             if (prompt->unk88 == 0) {
@@ -46,12 +46,12 @@ block_7:
 }
 
 struct Context;
-s32 Player_ResetPlayerControllers(struct Context *);
+s32 Playerai_ResetPlayerControllers(struct Context *);
 s32 Rumble_FreeAllPoolNodes(s32 *);
 extern char D_80145040;
-void SimpPool_ResetEffectsAndControllers(void) {
+void Simppool_ResetEffectsAndControllers(void) {
     Rumble_FreeAllPoolNodes(&D_8010EC90);
-    Player_ResetPlayerControllers(&D_80145040);
+    Playerai_ResetPlayerControllers(&D_80145040);
 }
 
 #if defined(VERSION_EU_X)

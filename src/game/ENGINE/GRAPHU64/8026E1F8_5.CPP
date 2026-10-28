@@ -9,7 +9,7 @@
 
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */
 
-void GraphU64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
+void Graphu64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     f32 min[3];
     f32 max[3];
     f32 newMin[3];
@@ -143,9 +143,9 @@ void GraphU64_InvertAffineMatrix(f32 *out, f32 *m) {
 /* Builds a look-at view matrix from an eye position, a target and an up vector: the forward axis is the normalised direction from the target back to the eye, the right axis the normalised cross product of up and forward, the true up axis their normalised cross product, each written as a matrix column with the negated eye projections as the translation row, falling back to the x axis when forward or right degenerate. */
 
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
+void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
     CVector3 upward;
     CVector3 forward;
     CVector3 right;
@@ -164,7 +164,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         forward.z = 0.0f;
     }
 
-    GraphU64_CrossVectors(&right, up, &forward);
+    Graphu64_CrossVectors(&right, up, &forward);
     length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
@@ -177,7 +177,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         right.z = 0.0f;
     }
 
-    GraphU64_CrossVectors(&upward, &forward, &right);
+    Graphu64_CrossVectors(&upward, &forward, &right);
     length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
@@ -316,7 +316,7 @@ void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     *lower = a << 16;
 }
 
-void GraphU64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
+void Graphu64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C47D0_de;
@@ -331,7 +331,7 @@ void GraphU64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     upper = src->upper[7]; lower = src->lower[7]; dst[(7) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(7) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
 }
 
-/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from GraphU64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
+/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from Graphu64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
 void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
@@ -357,7 +357,7 @@ void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
 
 
 
-void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -472,7 +472,7 @@ void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
 }
 
 
-CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
+CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -513,7 +513,7 @@ CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
 }
 
 
-CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
+CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -555,7 +555,7 @@ CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
 }
 
 
-CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
+CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -596,7 +596,7 @@ CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
 }
 
 
-CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {
+CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;

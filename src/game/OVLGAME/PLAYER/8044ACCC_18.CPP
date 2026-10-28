@@ -15,18 +15,18 @@
 extern void *func_8025CC6C_de();
 extern void func_8025CA24_de(void *, s32);
 
-void Ovlgame_ReleaseObjectHandles(struct ItemsHandleOwner *object) {
+void Player_ReleaseObjectHandles(struct ItemsHandleOwner *object) {
     func_8025CA24_de(func_8025CC6C_de(), object->first);
     object->first = 0;
     func_8025CA24_de(func_8025CC6C_de(), object->second);
     object->second = 0;
 }
 
-/* Stores the second argument at 0x5E0 of the actor, calls Player_InitializePlayerHealth and Player_ResetPlayerWeapons on it, then starts sound D_8011FE88 for it through Scene_ChangeInstanceModel with 0x66, D_800CE47C or its type's entry of D_800CE430 chosen by the options D_801462E5 and D_801468F4.
+/* Stores the second argument at 0x5E0 of the actor, calls Playerai_InitializePlayerHealth and Player_ResetPlayerWeapons on it, then starts sound D_8011FE88 for it through Scene_ChangeInstanceModel with 0x66, D_800CE47C or its type's entry of D_800CE430 chosen by the options D_801462E5 and D_801468F4.
    Adapted from func_8022BB80_de with a leading field store and two calls added and the D_801462C8 offsets changed to the symbols D_801462E5 and D_801468F4. */
 
 
-extern void Player_InitializePlayerHealth(void *);
+extern void Playerai_InitializePlayerHealth(void *);
 extern void Player_ResetPlayerWeapons(void *);
 
 
@@ -39,11 +39,11 @@ extern void Player_ResetPlayerWeapons(void *);
 
 
 
-void Ovlgame_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
+void Player_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
     s32 modelResource;
 
     animatedPlayer->state = animationState;
-    Player_InitializePlayerHealth(animatedPlayer);
+    Playerai_InitializePlayerHealth(animatedPlayer);
     Player_ResetPlayerWeapons(animatedPlayer);
     if (D_801462C8.local == 0) {
         modelResource = 0x66;

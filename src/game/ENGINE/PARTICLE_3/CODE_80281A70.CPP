@@ -24,7 +24,7 @@ extern char D_801379C0, D_8013B1A8;
 extern SharedPlayer *D_80145060;
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_80281A9C_de **others, s32 count) {
+void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor, ActorParticleMarkCrowdedActor **others, s32 count) {
     CVector3 delta;
     Shared_World *world;
     SharedPlayer *player;
@@ -257,7 +257,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             focus = begin[i];
             switch (focus->m_nObjType) {
             case 34:
-                func_80281A9C_de((s32)world, focus, begin, pairCount);
+                Particle_MarkCrowdedActor((s32)world, focus, begin, pairCount);
                 break;
             case 87:
                 for (j = 0; j < pairCount; j++) {
@@ -301,7 +301,7 @@ extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
 extern void Geometry_SetColorDither(s32 arg0);
-extern s32 VisData_TestBoxAgainstFrustum(CQuatern *planes, Box *box);
+extern s32 Visdata_TestBoxAgainstFrustum(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
 extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
@@ -348,7 +348,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (minX < view->clipBounds[1].x && view->clipBounds[0].x < maxX &&
                         minZ < view->clipBounds[1].z && view->clipBounds[0].z < maxZ &&
                         minY < view->clipBounds[1].y && view->clipBounds[0].y < maxY &&
-                        VisData_TestBoxAgainstFrustum(view->clipPlanes, &box)) {
+                        Visdata_TestBoxAgainstFrustum(view->clipPlanes, &box)) {
                         visible = 1;
                     }
                 } else visible = 1;
@@ -370,7 +370,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (node->particle.desc->renderModel != 0) Particle_DrawModel(&node->particle, view);
                     else Particle_DrawSprite(&node->particle, view);
                     if (node->particle.desc->flags & 0x100000) {
-                        func_8027E784_de(&node->particle, view);
+                        Particle_DrawGroundShadow(&node->particle, view);
                     }
                     if (!node->particle.drawWhenHidden || built) break;
                     skipAttached = node->particle.desc->flags & 0x10000;

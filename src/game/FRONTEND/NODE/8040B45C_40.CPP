@@ -9,7 +9,7 @@
 #include "FRONTEND/8040B45C_31.H"
 #include "FRONTEND/8040B45C_33.H"
 
-/* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through Frontend_ConfigureScrolledTableCell and drawing it through func_8040D2D0_de with the given style. */
+/* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through Node_ConfigureScrolledTableCell and drawing it through func_8040D2D0_de with the given style. */
 
 
 
@@ -17,11 +17,11 @@
 
 
 
-extern void Frontend_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u32 column, u32 row);
+extern void Node_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u32 column, u32 row);
 
 
-/* Allocates and zeroes a 0x60-byte record, copies the header of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through Frontend_ReplaceWidgetLinks.
-   Adapted from SmpSlider_CreateSliderWidget with the record size, tag 0xB, the byte fields, the cell table and the Frontend_ReplaceWidgetLinks registration changed. */
+/* Allocates and zeroes a 0x60-byte record, copies the header of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through Node_ReplaceWidgetLinks.
+   Adapted from SmpSlider_CreateSliderWidget with the record size, tag 0xB, the byte fields, the cell table and the Node_ReplaceWidgetLinks registration changed. */
 
 
 
@@ -34,10 +34,10 @@ extern void Frontend_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u
 extern void *Cache_AllocateMemory(s32);
 
 
-extern void Frontend_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
+extern void Node_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
 
 /* Looks up the entry with the given identifier among the list Frontend_GetScreenData returns for what GetMenuScreenOwner returns, through Frontend_FindWidgetByResourceId, and stores two words into the eight-byte cell at the given row and column of its cell table at 0x44, whose row width is the byte at 0x4B.
-   Adapted from Frontend_SetGridBackgroundColors with the three byte stores replaced by the two cell-word stores changed. */
+   Adapted from Node_SetGridBackgroundColors with the three byte stores replaced by the two cell-word stores changed. */
 
 
 
@@ -45,8 +45,8 @@ extern void Frontend_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, Me
 
 
 /* When the fourth argument is set, lowers the byte at offset 0x4C of an entry by one while it is
-   above the minimum at 0x50; then calls Frontend_ClampListCursorAndScroll and MarkMenuEventHandled. Returns zero. */
-extern void Frontend_ClampListCursorAndScroll(void *);
+   above the minimum at 0x50; then calls Node_ClampListCursorAndScroll and MarkMenuEventHandled. Returns zero. */
+extern void Node_ClampListCursorAndScroll(void *);
 
 extern void MarkMenuEventHandled();
 
@@ -55,7 +55,7 @@ extern void MarkMenuEventHandled();
 
 
 
-void Frontend_DrawGridListCells(GridList *gridList, sm_dldc style) {
+void Node_DrawGridListCells(GridList *gridList, sm_dldc style) {
     GridList *list = gridList;
     UnitMtx cell;
     u32 column;
@@ -63,13 +63,13 @@ void Frontend_DrawGridListCells(GridList *gridList, sm_dldc style) {
 
     for (column = 0; column < list->columns; column++) {
         for (row = 0; row < list->rows; row++) {
-            Frontend_ConfigureScrolledTableCell(list, &cell, column, row);
-            Frontend_DrawTextWidget((TextWidget *)&cell, style);
+            Node_ConfigureScrolledTableCell(list, &cell, column, row);
+            Widget_DrawTextWidget((TextWidget *)&cell, style);
         }
     }
 }
 
-s32 Frontend_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6) {
+s32 Node_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6) {
     MenuWidget *source;
     s32 context;
     MenuWidget *result;
@@ -96,25 +96,25 @@ s32 Frontend_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 ar
     cells = Cache_AllocateMemory(size);
     result->field_44 = cells;
     XPlus_FillBytes(cells, 0, size);
-    Frontend_ReplaceWidgetLinks(context, 0, source, result);
+    Node_ReplaceWidgetLinks(context, 0, source, result);
     return 1;
 }
 
-void Frontend_SetGridCellValues(s32 identifier, s32 row, s32 column, s32 first, s32 second) {
+void Node_SetGridCellValues(s32 identifier, s32 row, s32 column, s32 first, s32 second) {
     EntryFrontendSetGridCellValues *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry->cells[row * entry->width + column].field_0 = first;
     entry->cells[row * entry->width + column].field_4 = second;
 }
 
-void Frontend_GetGridCellValues(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {
+void Node_GetGridCellValues(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {
     EntryFrontendSetGridCellValues *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     *first = entry->cells[row * entry->width + column].field_0;
     *second = entry->cells[row * entry->width + column].field_4;
 }
 
-void Frontend_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third) {
+void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third) {
     u8 *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry[0x54] = second;
@@ -122,7 +122,7 @@ void Frontend_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32
     entry[0x52] = first;
 }
 
-void Frontend_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32 third) {
+void Node_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32 third) {
     u8 *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry[0x55] = second;
@@ -130,65 +130,65 @@ void Frontend_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32
     entry[0x53] = first;
 }
 
-void Frontend_SetGridDimensionArrays(s32 identifier, s32 first, s32 second) {
+void Node_SetGridDimensionArrays(s32 identifier, s32 first, s32 second) {
     struct EntryFrontendSetGridDimensionArrays *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry->second = second;
     entry->first = first;
 }
 
-void Frontend_GetGridSelection(s32 identifier, s32 *first, s32 *second) {
+void Node_GetGridSelection(s32 identifier, s32 *first, s32 *second) {
     struct MenuWidget *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     *first = entry->field_4C;
     *second = entry->field_4D;
 }
 
-s32 Frontend_SelectPreviousGridRow(u8 *entry, void *second, void *third, s32 active) {
+s32 Node_SelectPreviousGridRow(u8 *entry, void *second, void *third, s32 active) {
     s32 value = entry[0x4C];
 
     if (active && entry[0x50] < value) {
         entry[0x4C] = value - 1;
     }
-    Frontend_ClampListCursorAndScroll(entry);
+    Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 Frontend_SelectNextGridRow(u8 *entry, void *second, void *third, s32 active) {
+s32 Node_SelectNextGridRow(u8 *entry, void *second, void *third, s32 active) {
     u8 value = entry[0x4C];
 
     if (active && value < entry[0x4A] - 1) {
         entry[0x4C] = value + 1;
     }
-    Frontend_ClampListCursorAndScroll(entry);
+    Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 Frontend_SelectPreviousGridColumn(u8 *entry, void *second, void *third, s32 active) {
+s32 Node_SelectPreviousGridColumn(u8 *entry, void *second, void *third, s32 active) {
     s32 value = entry[0x4D];
 
     if (active && entry[0x51] < value) {
         entry[0x4D] = value - 1;
     }
-    Frontend_ClampListCursorAndScroll(entry);
+    Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 Frontend_SelectNextGridColumn(u8 *entry, void *second, void *third, s32 active) {
+s32 Node_SelectNextGridColumn(u8 *entry, void *second, void *third, s32 active) {
     u8 value = entry[0x4D];
 
     if (active && value < entry[0x4B] - 1) {
         entry[0x4D] = value + 1;
     }
-    Frontend_ClampListCursorAndScroll(entry);
+    Node_ClampListCursorAndScroll(entry);
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 Frontend_DestroyGridList(struct ObjectFrontendDestroyGridList *object) {
+s32 Node_DestroyGridList(struct ObjectFrontendDestroyGridList *object) {
     struct ObjectFrontendDestroyGridList *self = object;
 
     if (object->child != 0) {

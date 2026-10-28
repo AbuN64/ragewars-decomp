@@ -174,7 +174,7 @@ struct Shared_Effect {
 struct Record;
 struct Record {
     char pad0[0x80];
-    s8 unk80; /* Ovlgame_PlacePlayerForRound passes it to func_8022F454_de */
+    s8 unk80; /* Player_PlacePlayerForRound passes it to func_8022F454_de */
     char pad81[0x8F - 0x81];
     u8 unk8F;
     char pad90[0x92 - 0x90];

@@ -31,14 +31,14 @@ extern f32 D_800CD6B0;
 
 extern void GraphU64_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
 extern void GraphU64_IdentityMatrix(MatrixF *);
-extern CQuatern GameObject_BuildTargetAimOrientation(EffectActor *, CVector3);
+extern CQuatern Gobjinst_BuildTargetAimOrientation(EffectActor *, CVector3);
 extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
 extern void GraphU64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
-extern void TextLoad_LocateTextureResource(u32 *, s32);
+extern void Textload_LocateTextureResource(u32 *, s32);
 extern void GameObject_ResetActorMotion(ParticleEffect *);
 extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 
@@ -49,12 +49,12 @@ extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 
 extern void func_8022B040_de(s32, ParticleEffect *);
 extern void Fx_AttachActorRibbon(void *, ParticleEffect *, s32);
-extern s32 DynLight_AllocateWorldLight(void *, s32);
+extern s32 Gdynlight_AllocateWorldLight(void *, s32);
 extern void Particle_PlayAttachedSound(ParticleEffect *, s32);
 extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-extern void Region_ShiftColorHue(s8, u8, u8, u8, u8 *, u8 *, u8 *);
+extern void Gregion_ShiftColorHue(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
-extern void Region_DarkenColor(u8, u8, u8, u8, u8 *, u8 *, u8 *);
+extern void Gregion_DarkenColor(u8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 static inline s32 effect_spawn_random_count(s32 range) {
     return range != 0 ? GraphU64_NextRandom() % (range + 1) : 0;
@@ -192,7 +192,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     sys->last = 0;
     block = SetN64_GetPackSection(resource, 1);
     numEntries = block->count;
-    if (func_80265550_de(block->entries, numEntries, kind, &first, &last) != 0) {
+    if (Defs_FindSortedGroupRange(block->entries, numEntries, kind, &first, &last) != 0) {
         entries = ((EffectBlock *)SetN64_GetPackSection(resource, 2))->entries;
         anchor = 0;
         if (D_80145060.actorList != 0) {
@@ -337,7 +337,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 GraphU64_IdentityMatrix(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
-                    quat = GameObject_BuildTargetAimOrientation(owner, pos);
+                    quat = Gobjinst_BuildTargetAimOrientation(owner, pos);
                 } else {
                     quat = rotation;
                 }
@@ -354,7 +354,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     break;
                 }
                 count++;
-                TextLoad_LocateTextureResource(&effect->unk11C, entry->unk4);
+                Textload_LocateTextureResource(&effect->unk11C, entry->unk4);
                 GameObject_ResetActorMotion(effect);
                 effect->unk110 = 0;
                 effect->unk114 = 0;
@@ -499,15 +499,15 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];
-                Region_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
-                Region_DesaturateColor(sat, h, sv, v, &r, &g, &b);
-                Region_DarkenColor(val, r, g, b, &r0, &g0, &b0);
+                Gregion_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
+                Gregion_DesaturateColor(sat, h, sv, v, &r, &g, &b);
+                Gregion_DarkenColor(val, r, g, b, &r0, &g0, &b0);
                 r = entry->color->m_BlackColor[0];
                 g = entry->color->m_BlackColor[1];
                 b = entry->color->m_BlackColor[2];
-                Region_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
-                Region_DesaturateColor(sat, h, sv, v, &r, &g, &b);
-                Region_DarkenColor(val, r, g, b, &r1, &g1, &b1);
+                Gregion_ShiftColorHue(hue, r, g, b, &h, &sv, &v);
+                Gregion_DesaturateColor(sat, h, sv, v, &r, &g, &b);
+                Gregion_DarkenColor(val, r, g, b, &r1, &g1, &b1);
                 effect->rgb0[0] = r0;
                 effect->rgb0[1] = g0;
                 effect->rgb0[2] = b0;
@@ -582,7 +582,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     Fx_AttachActorRibbon(&D_801379C0, effect, entry->unk6);
                 }
                 if (entry->unk7 != -1) {
-                    effect->unk138 = DynLight_AllocateWorldLight(&D_8013B1A8, entry->unk7);
+                    effect->unk138 = Gdynlight_AllocateWorldLight(&D_8013B1A8, entry->unk7);
                 } else {
                     effect->unk138 = 0;
                 }

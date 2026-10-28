@@ -20,7 +20,7 @@
 #include "SYSTEM/80255C40_3.H"
 
 
-extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
@@ -63,7 +63,7 @@ extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
-extern void Smp_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
+extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
 extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
@@ -82,7 +82,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
     axis.x = 0.0f;
     axis.y = one;
     axis.z = 0.0f;
-    GraphU64_CrossVectors(&cross, &axis, (CVector3 *)&bx);
+    Graphu64_CrossVectors(&cross, &axis, (CVector3 *)&bx);
 
     magnitude = Math_Sqrtf((cross.x * cross.x) +
                               (cross.y * cross.y) +
@@ -158,7 +158,7 @@ void Fx_DrawBoundedParticleQuads(SceneRecAt95A8 *scene) {
     TextLoad_ResetTextureCache();
 }
 
-void Fx_DrawRedParticleQuad(u32 arg0) {
+void Fx_DrawRedParticleQuad(u32 matrixAddress) {
     DrawMatrixScratch local;
     Gfx *cmd;
 
@@ -192,7 +192,7 @@ void Fx_DrawRedParticleQuad(u32 arg0) {
     cmd = g_displayListCursor++;
     gSPDisplayList(cmd, &D_800CDCA8);
     cmd = g_displayListCursor++;
-    gSPMatrix(cmd, arg0, G_MTX_LOAD);
+    gSPMatrix(cmd, matrixAddress, G_MTX_LOAD);
     cmd = g_displayListCursor++;
     gSPVertex(cmd, &g_particleQuadVertices, 4, 0);
     cmd = g_displayListCursor++;
@@ -251,7 +251,7 @@ void Fx_FreeRibbonSegment(s32 arg0, void *arg1, void *actors) {
     Lists_Append(arg0 + 0x6A90, actors);
 }
 
-void func_802A57D8_de(void) {
+void Fx_RibbonNoop(void) {
 }
 
 void Fx_AddActorRibbonSamples(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
@@ -269,7 +269,7 @@ void Fx_AddActorRibbonSamples(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
                 CopyMatrix(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 ScaleMatrixLocal(sp10, temp, temp, temp);
                 GraphU64_ClampMatrixToFixedRange(sp10);
-                Smp_AppendRibbonSegment(arg0, node, sp10);
+                Linked_AppendRibbonSegment(arg0, node, sp10);
             }
             node = node->next;
         } while (node != 0);
@@ -296,7 +296,7 @@ void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, 
                 }
                 ScaleMatrixLocal(local, scale, scale, scale);
                 GraphU64_ClampMatrixToFixedRange(local);
-                Smp_AppendRibbonSegment(arg0, node, local);
+                Linked_AppendRibbonSegment(arg0, node, local);
             }
             node = node->unk4;
         } while (node != 0);
@@ -304,48 +304,48 @@ void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, 
 }
 
 void Fx_DetachEffectOwner(Owner802A697C *owner, int object) {
-    float temp_f1;
+    float minimumValue;
     u8 temp_v0;
     u8 temp_v0_2;
-    void *temp_a0;
-    void *temp_a0_2;
-    void *var_v1;
+    void *attachedObject;
+    void *secondaryObject;
+    void *effect;
 
-    var_v1 = owner->head;
-    if (var_v1 != 0) {
+    effect = owner->head;
+    if (effect != 0) {
         do {
-            temp_a0 = ((struct State802A697C *)var_v1)->object;
-            if ((int)temp_a0 == object) {
-                if (temp_a0 != 0) {
-                    if (((struct State802A697C *)var_v1)->flags & 1) {
-                        temp_v0 = ((Entity1DC *)temp_a0)->unk_13B;
+            attachedObject = ((struct State802A697C *)effect)->object;
+            if ((int)attachedObject == object) {
+                if (attachedObject != 0) {
+                    if (((struct State802A697C *)effect)->flags & 1) {
+                        temp_v0 = ((Entity1DC *)attachedObject)->unk_13B;
                         if (temp_v0 != 0) {
-                            ((Entity1DC *)temp_a0)->unk_13B = (u8)(temp_v0 - 1);
+                            ((Entity1DC *)attachedObject)->unk_13B = (u8)(temp_v0 - 1);
                         }
                     }
-                    if (((struct State802A697C *)var_v1)->flags & 2) {
-                        temp_a0_2 = ((struct State802A697C *)var_v1)->object;
-                        temp_v0_2 = ((Entity1DC *)temp_a0_2)->unk_1D9;
+                    if (((struct State802A697C *)effect)->flags & 2) {
+                        secondaryObject = ((struct State802A697C *)effect)->object;
+                        temp_v0_2 = ((Entity1DC *)secondaryObject)->unk_1D9;
                         if (temp_v0_2 != 0) {
-                            ((Entity1DC *)temp_a0_2)->unk_1D9 = (u8)(temp_v0_2 - 1);
+                            ((Entity1DC *)secondaryObject)->unk_1D9 = (u8)(temp_v0_2 - 1);
                         }
                     }
                 }
-                ((struct State802A697C *)var_v1)->object = 0;
-                temp_f1 = ((struct State802A697C *)var_v1)->node->value;
-                if (((struct State802A697C *)var_v1)->value < temp_f1) {
-                    ((struct State802A697C *)var_v1)->value = temp_f1;
+                ((struct State802A697C *)effect)->object = 0;
+                minimumValue = ((struct State802A697C *)effect)->node->value;
+                if (((struct State802A697C *)effect)->value < minimumValue) {
+                    ((struct State802A697C *)effect)->value = minimumValue;
                 }
             }
-            var_v1 = ((struct State802A697C *)var_v1)->next;
-        } while (var_v1 != 0);
+            effect = ((struct State802A697C *)effect)->next;
+        } while (effect != 0);
     }
 }
 
-void Fx_ResetEffectContribution(EffectContribution *arg0, s32 arg1)
+void Fx_ResetEffectContribution(EffectContribution *arg0, s32 effectId)
 {
   arg0->scale = (f32) D_800C5EA0_de;
-  arg0->id = arg1;
+  arg0->id = effectId;
   arg0->state = 0;
   arg0->stateC = 0;
   arg0->state10 = 0;

@@ -29,7 +29,7 @@ extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 extern void GraphU64_TransformPoints(f32 *, CVector3 *, CVector3 *, s32);
 
-void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment) {
+void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *floor, s32 attachment) {
     f32 matrix[16];
     f32 rest[16];
     f32 turn[16];
@@ -132,7 +132,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
 
 
 
-extern f32 func_80241728_de(SurfaceHit *, f32, f32);
+extern f32 CCollision_GetSurfaceHeight(SurfaceHit *, f32, f32);
 
 struct CCollisionInfo2_t;
 
@@ -146,10 +146,10 @@ extern void Plane_BuildBoxFace3(void *, RayCornerBounds *);
 extern void Plane_BuildBoxFace2(void *, RayCornerBounds *);
 extern void Plane_BuildBoxFace1(void *, RayCornerBounds *);
 extern void Plane_BuildBoxFace0(void *, RayCornerBounds *);
-extern s32 func_8023EA44_de(void *, void *, void *, f32, s32);
-extern s32 func_8023E8D4_de(void *, void *, s32);
-extern s32 func_8023E178_de(void *, void *, f32, f32, f32, s32, void *, s32);
-void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+extern s32 CCollision_TestSegmentDisk(void *, void *, void *, f32, s32);
+extern s32 CCollision_TestSegmentPolygon(void *, void *, s32);
+extern s32 CCollision_TestRayCylinder(void *, void *, f32, f32, f32, s32, void *, s32);
+void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -163,10 +163,10 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         Plane_BuildBoxFace0(query, bounds);
-        if (func_8023E8D4_de(actor, query, 0)) {
+        if (CCollision_TestSegmentPolygon(actor, query, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
-            hit_y = func_80241728_de(query, input->x, input->z);
+            hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
             extent1 = GameObject_GetActorRadius(input);
@@ -197,7 +197,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
         Plane_BuildBoxFace1(query, bounds);
-        if (func_8023E8D4_de(actor, query, 1)) {
+        if (CCollision_TestSegmentPolygon(actor, query, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
         }
@@ -205,13 +205,13 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
         Plane_BuildBoxFace2(query, bounds);
-        hit = func_8023E8D4_de(actor, query, 1);
+        hit = CCollision_TestSegmentPolygon(actor, query, 1);
         Plane_BuildBoxFace3(query, bounds);
-        hit |= func_8023E8D4_de(actor, query, 1);
+        hit |= CCollision_TestSegmentPolygon(actor, query, 1);
         Plane_BuildBoxFace4(query, bounds);
-        hit |= func_8023E8D4_de(actor, query, 1);
+        hit |= CCollision_TestSegmentPolygon(actor, query, 1);
         Plane_BuildBoxFace5(query, bounds);
-        hit |= func_8023E8D4_de(actor, query, 1);
+        hit |= CCollision_TestSegmentPolygon(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
             GraphU64_AddVec3(&((LevelActor *)input)->position1,
@@ -221,7 +221,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     }
 }
 
-void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
+void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFromBox *actor, OwnerRecAt18 *owner, RayCornerBounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -240,10 +240,10 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         Plane_BuildBoxFace0(query, bounds);
-        if (func_8023EA44_de(actor, query, owner_data, height, 0)) {
+        if (CCollision_TestSegmentDisk(actor, query, owner_data, height, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
-            hit_y = func_80241728_de(query, input->x, input->z);
+            hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
             extent1 = GameObject_GetActorRadius(input);
@@ -274,14 +274,14 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
         Plane_BuildBoxFace1(query, bounds);
-        if (func_8023EA44_de(actor, query, owner_data, height, 1)) {
+        if (CCollision_TestSegmentDisk(actor, query, owner_data, height, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
         }
     }
     if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
-        if (func_8023E178_de(actor, owner_data, height,
+        if (CCollision_TestRayCylinder(actor, owner_data, height,
                           bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
@@ -292,7 +292,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, RayCor
     }
 }
 
-void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
+void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, OwnerRecAt18 *owner) {
     QueryRecAt58 query;
     RayCornerBounds bounds;
     EntryRecAt8V5 *entry;
@@ -303,7 +303,7 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
         s32 *word;
         void *owner_data;
 
-        func_80241950_de(owner, &bounds, actor, actor->owner);
+        CPlatformCollision_BuildWorldBounds(owner, &bounds, actor, actor->owner);
         query.word4 = 0;
         query.word8 = 2;
         query.wordC = 0;
@@ -318,18 +318,18 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             if ((actor->field5C != *(f32 *)&query.word4) ||
                 (actor->field64 != *(f32 *)&query.word4)) {
                 *word = 3;
-                func_8023E178_de(actor, owner_data, value, bounds.corners[0].y,
+                CCollision_TestRayCylinder(actor, owner_data, value, bounds.corners[0].y,
                               bounds.corners[4].y, 1, word, 1);
             }
             if (actor->field60 > 0.0f) {
                 *word = 2;
                 Plane_BuildBoxFace1(word, &bounds);
-                func_8023EA44_de(actor, word, owner_data, value, 1);
+                CCollision_TestSegmentDisk(actor, word, owner_data, value, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
                 Plane_BuildBoxFace0(word, &bounds);
-                func_8023EA44_de(actor, word, owner_data, value, 1);
+                CCollision_TestSegmentDisk(actor, word, owner_data, value, 1);
                 return;
             }
             break;
@@ -344,23 +344,23 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             if (zero < movement) {
                 *word = 2;
                 Plane_BuildBoxFace1(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
             }
             if ((actor->field5C != zero) || (actor->field64 != zero)) {
                 *word = 3;
                 Plane_BuildBoxFace2(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
                 Plane_BuildBoxFace3(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
                 Plane_BuildBoxFace4(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
                 Plane_BuildBoxFace5(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
                 Plane_BuildBoxFace0(word, &bounds);
-                func_8023E8D4_de(actor, word, 1);
+                CCollision_TestSegmentPolygon(actor, word, 1);
             }
             break;
         }
@@ -377,7 +377,7 @@ extern void GraphU64_SubtractVectors(Triple *, Triple *, Triple *);
 
 
 
-void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorController *input) {
+void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMotion *actor, SourceBarrelUpdateActorController *input) {
     Triple saved_previous;
     Triple saved_position;
     SurfaceHit query;
@@ -398,13 +398,13 @@ void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorCont
         query.word10 = 0;
         query.input = input;
         query.index = -1;
-        func_80241950_de(owner, &bounds, actor, input);
+        CPlatformCollision_BuildWorldBounds(owner, &bounds, actor, input);
         switch (entry->kind) {
         case 1:
-            func_80241F24_de(actor, owner, &bounds, &query, input);
+            CPlatformCollision_PushActorFromCylinder(actor, owner, &bounds, &query, input);
             break;
         case 2:
-            func_80241BAC_de(actor, owner, &bounds, &query, input);
+            CPlatformCollision_PushActorFromBox(actor, owner, &bounds, &query, input);
             break;
         }
         actor->previous = saved_previous;
@@ -414,7 +414,7 @@ void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorCont
 
 struct CCollisionInfo2_t;
 
-void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, SurfaceHit *query) {
+void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, InputCPlatformCollisionLiftActorToSurface *input, SurfaceHit *query) {
     u8 collision[0x108];
     CVector3 next;
     f32 hit_y;
@@ -426,7 +426,7 @@ void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *
 
     saved_collision = D_80103FCC;
     D_80103FCC = collision;
-    hit_y = func_80241728_de(query, input->x, input->z);
+    hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
     input->owner = owner;
     extent0 = InstHdr_GetActorReach(input);
     extent1 = GameObject_GetActorRadius(input);

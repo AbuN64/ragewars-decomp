@@ -9,7 +9,7 @@ unsigned char D_auto_func_804147E8_eu_padding_18A7E8[8] = { 0x27, 0xA5, 0x00, 0x
 #if defined(VERSION_US_REV1)
 /* Resource IDs are read with lhu at +2 within each four-byte slot.
  * Keep the intervening halfwords: native u32 storage moves IDs to +0.
- * Frontend_CreateFourPlayerResults: 8043A198..8043A1E8, stride 0x4C. */
+ * Player_CreateFourPlayerResults: 8043A198..8043A1E8, stride 0x4C. */
 unsigned short g_frontendLoadoutResourceHalfwords[150] = {
     0x0000, 0x0132, 0x0000, 0x00EA, 0x0000, 0x00EB, 0x0000, 0x00EC, 0x0000, 0x00ED, 0x0000, 0x00EE,
     0x0000, 0x00EF, 0x0000, 0x0122, 0x0000, 0x0121, 0x0000, 0x0120, 0x0000, 0x011F, 0x0000, 0x011E,
@@ -37,7 +37,7 @@ unsigned int D_auto_src_rw_loadout_equipment_items_us_rev1[12] = {
 
 /* DATA_800E5B44.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_rw_loadout_weapons_items_us_rev1[32] = {
+unsigned int g_loadoutWeaponItems[32] = {
     0x000000B3, 0x000013A9, 0x00000001, 0x800D70F8, 0x000000A2, 0x0000139B, 0x0000000F, 0x800D7130,
     0x0000009A, 0x000013A1, 0x0000000D, 0x800D7128, 0x0000009B, 0x000013A2, 0x00000009, 0x800D7118,
     0x00000099, 0x0000139A, 0x00000008, 0x800D7114, 0x000000AA, 0x0000138D, 0x0000000E, 0x800D712C,

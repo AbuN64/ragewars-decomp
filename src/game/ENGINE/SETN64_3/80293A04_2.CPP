@@ -89,22 +89,22 @@ void SetN64_ResetSceneForIntro(void *arg0) {
 }
 
 void SetN64_AdvanceIntroForMemorySize(GameSession *session) {
-    s32 var_a2;
+    s32 eight;
     s32 call_result;
     u32 result;
 
     result = Defs_GetMemorySize();
-    var_a2 = 4;
+    eight = 4;
     if ((result > 0x400000U) && (D_800D29C8 != 0)) {
-        var_a2 = 3;
+        eight = 3;
     }
     if (session->transitionTime > D_800C54C4_de) {
         D_800CD77C = 0;
     }
     if (D_800CD77C != 0) {
-        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, var_a2, -1);
+        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, eight, -1);
     } else {
-        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, var_a2, var_a2);
+        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, eight, eight);
     }
     if (call_result != 0) {
         D_800CD77C = 0;
@@ -140,9 +140,9 @@ void SetN64_AdvanceToModeFour(struct GameSession *value) {
 void SetN64_InitializeMode2(void) {
 }
 
-void SetN64_AdvanceToModeFive(struct GameSession *arg0)
+void SetN64_AdvanceToModeFive(struct GameSession *session)
 {
   s32 five;
   five = 5;
-  SetN64_CheckTimedSessionTransition(arg0, 14.0f, five, five);
+  SetN64_CheckTimedSessionTransition(session, 14.0f, five, five);
 }

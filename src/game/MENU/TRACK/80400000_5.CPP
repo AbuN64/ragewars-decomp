@@ -10,12 +10,12 @@
 /* Evaluates the position keyframe track 1 of the current record's resource at time t: holds the
    first or last key's position outside the track, is zero when the track is empty, and otherwise
    blends the surrounding keys' positions linearly with the vector scale and add helpers. Vector
-   counterpart of Menu_EvaluateTrackOpacity. */
+   counterpart of Track_EvaluateTrackOpacity. */
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
-CVector3 Menu_EvaluateTrackColor(f32 t) {
+CVector3 Track_EvaluateTrackColor(f32 t) {
     s32 *track;
     PositionKey *key;
     s32 count;

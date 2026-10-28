@@ -34,7 +34,7 @@ extern char D_800CE8DC;
 extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
-void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
+void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *weaponFireState) {
     s32 state;
     void *actor;
     CGameStatus *audio;
@@ -43,10 +43,10 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     actor = arg0->controller;
     state = *(s16 *)(&D_800CE8DC +
                      (((Shared_ActorView *)actor)->action * 0x18));
-    if ((s8)((Dest *)arg1)->count != 0) {
+    if ((s8)((Dest *)weaponFireState)->count != 0) {
         if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-            if (((Dest *)arg1)->field13C == 2) {
-                ((Dest *)arg1)->field13C = 1;
+            if (((Dest *)weaponFireState)->field13C == 2) {
+                ((Dest *)weaponFireState)->field13C = 1;
                 if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
                     ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
                 }
@@ -56,7 +56,7 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     func_8022B9C4_de(actor);
     ((Shared_ActorView *)actor)->marker.word = 0;
     ((WeaponAnimationState *)((Shared_ActorView *)actor)->controller)->speed = 0;
-    ((Dest *)arg1)->field138 = 0;
+    ((Dest *)weaponFireState)->field138 = 0;
 
     audio = &D_801462C8.counters;
     if ((audio->m_bFragTagOn != 0) &&
@@ -82,8 +82,8 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
             }
         }
     } else if ((state != 1) && (state != 7) &&
-               ((s8)((Dest *)arg1)->count != 0)) {
-        Weapon_InitializeSwitchAndRequestIdle(arg0, arg1);
+               ((s8)((Dest *)weaponFireState)->count != 0)) {
+        Weaponai_InitializeSwitchAndRequestIdle(arg0, weaponFireState);
     }
 }
 #endif

@@ -29,7 +29,7 @@ extern void *D_800CB440_de[];
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
  * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
  * the body's reversed velocity is placed in its offset transform, an impulse at the source position is
- * built by GraphU64_BuildAxisAngleMatrix and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
+ * built by Graphu64_BuildAxisAngleMatrix and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
  * the source spends a charge when its owner matches. */
 
 
@@ -39,19 +39,19 @@ extern void *D_800CB440_de[];
 
 
 
-extern void CopyMatrix(f32 *, Body_func_8024C6E8_de *);
+extern void CopyMatrix(f32 *, BodyGobjinstApplyBoneTwistImpulse *);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void TranslateMatrix(void *, f32, f32, f32);
 
-extern void GraphU64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
+extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
-extern void GraphU64_MultiplyAffineMatrices(Body_func_8024C6E8_de *, f32 *, f32 *);
+extern void GraphU64_MultiplyAffineMatrices(BodyGobjinstApplyBoneTwistImpulse *, f32 *, f32 *);
 
-extern void GraphU64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
 
-void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
+void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     CVector3 position;
     EffectRecAt154 *effect;
     f32 scale;
@@ -75,7 +75,7 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     }
 }
 
-void func_8024C5D4_de(void *actor, void *modelPack, s32 attachmentMaskIndex, s32 boneMatrices)
+void Gobjinst_DispatchAttachmentEffects(void *actor, void *modelPack, s32 attachmentMaskIndex, s32 boneMatrices)
 {
     ObjRecAt17C *object = actor;
   func_8024C5C4_S2 *attachmentTable;
@@ -94,7 +94,7 @@ void func_8024C5D4_de(void *actor, void *modelPack, s32 attachmentMaskIndex, s32
   }
 }
 
-void *func_8024C664_de(char *actorStorage)
+void *Gobjinst_GetActorTypeEntry(char *actorStorage)
 {
     s32 type;
     s32 i;
@@ -131,7 +131,7 @@ void *func_8024C664_de(char *actorStorage)
     return D_800CB440_de[type];
 }
 
-void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *body, s32 owner, s32 kind) {
+void Gobjinst_ApplyBoneTwistImpulse(s32 unused, SourceRecAt18 *source, BodyGobjinstApplyBoneTwistImpulse *body, s32 owner, s32 kind) {
     CVector3 velocity;
     CVector3 position;
     f32 impulse[16];
@@ -158,7 +158,7 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     reverse = -1.0f;
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
-    GraphU64_BuildAxisAngleMatrix(impulse, strength, position.x, position.y, position.z);
+    Graphu64_BuildAxisAngleMatrix(impulse, strength, position.x, position.y, position.z);
     GraphU64_MultiplyAffineMatrices(body, transform, impulse);
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
@@ -168,7 +168,7 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void func_8024C874_de(void *outVector, f32 t, void *a, void *b) {
+void Gobjinst_InterpolatePoseTranslation(void *outVector, f32 t, void *a, void *b) {
     CVector3 *out = outVector;
     CVector3 *start = a;
     CVector3 *end = b;
@@ -178,7 +178,7 @@ void func_8024C874_de(void *outVector, f32 t, void *a, void *b) {
 }
 
 /** Lerp a 4-component vector: out = a + t * (b - a). */
-void func_8024C8C4_de(void *cQuatern, f32 t, void *a, void *b) {
+void Gobjinst_InterpolatePoseRotation(void *cQuatern, f32 t, void *a, void *b) {
     CQuatern *out = cQuatern;
     CQuatern *left = a;
     CQuatern *right = b;
@@ -189,7 +189,7 @@ void func_8024C8C4_de(void *cQuatern, f32 t, void *a, void *b) {
     out->w = left->w + (t * (right->w - left->w));
 }
 
-void func_8024C92C_de(void *poseTrack, s32 boneIndex, void *outTranslation) {
+void Gobjinst_SampleBoneTranslation(void *poseTrack, s32 boneIndex, void *outTranslation) {
     AnimInfo *o = poseTrack;
     CVector3 *out = outTranslation;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
@@ -216,7 +216,7 @@ void func_8024C92C_de(void *poseTrack, s32 boneIndex, void *outTranslation) {
     out->z = a[2] + scale * (base[2] - a[2]);
 }
 
-void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
+void Gobjinst_SampleBoneRotation(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
     char *o = (char *)poseTrack;
     s16 idx;
     char *rec;
@@ -247,7 +247,7 @@ void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
     }
 }
 
-void GameObject_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
+void Gobjinst_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
     ObjectLinks24_2 *o = arg0;
     ObjRecAt2V1 *indices;
     s16 idx;
@@ -267,13 +267,13 @@ void GameObject_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, 
         return;
     }
     base = SetN64_GetPackSection(o->unk_C, (s32)idx);
-    GraphU64_InterpolateQuaternionArc(arg2, o->unk_20,
+    Graphu64_InterpolateQuaternionArc(arg2, o->unk_20,
                     (char *)base + o->unk_10 * 4,
                     (char *)base + o->unk_14 * 4);
 }
 
 /* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from GraphU64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
-void GameObject_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
+void Gobjinst_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     s32 a;

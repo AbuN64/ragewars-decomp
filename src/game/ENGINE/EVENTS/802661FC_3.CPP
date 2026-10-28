@@ -6,16 +6,16 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "TYPES.H"
 
-extern s32 Sky_StartEmitter(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, Triple arg6);
+extern s32 Gsky_StartEmitter(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, Triple arg6);
 
 extern f32 D_800C4450_de[2];
 
 void Events_StartEnabledCameraEmitter(s32 unused0, s32 unused1, s32 unused2, Triple t, Vec4s v) {
-    Sky_StartEmitter(&D_80145088, (f32) v.x, (f32) v.y, (f32) v.z, (f32) v.w * D_800C4450_de[1], 1, t);
+    Gsky_StartEmitter(&D_80145088, (f32) v.x, (f32) v.y, (f32) v.z, (f32) v.w * D_800C4450_de[1], 1, t);
 }
 
 void Events_StartDisabledCameraEmitter(s32 unused0, s32 unused1, s32 unused2, Triple t, Vec4s v) {
-    Sky_StartEmitter(&D_80145088, (f32) v.x, (f32) v.y, (f32) v.z, (f32) v.w * D_800C4458_de, 0, t);
+    Gsky_StartEmitter(&D_80145088, (f32) v.x, (f32) v.y, (f32) v.z, (f32) v.w * D_800C4458_de, 0, t);
 }
 
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"

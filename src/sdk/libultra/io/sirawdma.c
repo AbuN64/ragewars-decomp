@@ -18,13 +18,13 @@ s32 __osSiRawStartDma(s32 direction, void *dramAddr) {
     if ((u32)dramAddr & 3) {
         Audio_Assert(&D_800C7990_de, &s_sirawdmaText, 0x37);
     }
-    if (func_802B9D70_de() != 0) {
+    if (Audio_IsSerialInterfaceBusy() != 0) {
         return -1;
     }
     if (direction == 1) {
         func_802BD280_de(dramAddr, 0x40);
     }
-    IO_WRITE(0xA4800000U, func_802BBBC0_de(dramAddr));
+    IO_WRITE(0xA4800000U, osVirtualToPhysical(dramAddr));
     if (direction == 0) {
         IO_WRITE(0xA4800004U, 0x1FC007C0U);
     } else {

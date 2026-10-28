@@ -16,7 +16,7 @@ s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 
 void func_802AEAB0_de(void *arg0, InitParams *arg1);
 
-extern void func_802AFF90_de(s32 arg0);
+extern void alCSPStop(s32 arg0);
 
 void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD844 *root) {
     struct AudioParamsD844 params;
@@ -57,7 +57,7 @@ void Audio_UpdateMusicFade(void *queue) {
         o->volume = temp_f3;
         if (temp_f3 <= 0) {
             o->volume = 0;
-            func_802AFF90_de(o->unk_14);
+            alCSPStop(o->unk_14);
             o->flags |= 4;
         }
     } else if (o->unk_38 != 0) {

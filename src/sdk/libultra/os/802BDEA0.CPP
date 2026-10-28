@@ -9,8 +9,8 @@
 #include "sdk/os_pif.h"
 extern OSDevMgr D_800D4360;
 extern void osSetEventMesg(s32, OSMesgQueue *, s32);
-extern s32 func_802BADA0_de(struct OSThread_s *);
-extern void func_802BB5F0_de(struct OSThread_s *, s32);
+extern s32 osGetThreadPri(struct OSThread_s *);
+extern void Scene_SetThreadPriority(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
 extern void osStartThread(struct OSThread_s *);
 
@@ -32,11 +32,11 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 
     osSetEventMesg(8, &D_801486A0, 0x22222222);
     oldPri = -1;
-    myPri = func_802BADA0_de(0);
+    myPri = osGetThreadPri(0);
 
     if (myPri < pri) {
         oldPri = myPri;
-        func_802BB5F0_de(0, pri);
+        Scene_SetThreadPriority(0, pri);
     }
 
     savedMask = __osDisableInt();
@@ -52,7 +52,7 @@ void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
-        func_802BB5F0_de(0, oldPri);
+        Scene_SetThreadPriority(0, oldPri);
     }
 }
 #endif

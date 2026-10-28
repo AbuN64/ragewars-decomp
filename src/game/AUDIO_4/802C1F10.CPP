@@ -9,9 +9,9 @@
 
 extern Func802C1F10Node *D_800D526C;
 extern void *D_800D5270;
-extern void func_802BB870_de(void *arg0, Func802C1F10Node *arg1);
+extern void Audio_DequeueThread(void *arg0, Func802C1F10Node *arg1);
 
-void func_802BCE20_de(Func802C1F10Node *thread) {
+void Audio_DestroyThread(Func802C1F10Node *thread) {
     Func802C1F10Node *node;
     Func802C1F10Node *cur;
     Func802C1F10Node **head;
@@ -21,7 +21,7 @@ void func_802BCE20_de(Func802C1F10Node *thread) {
     if (node == 0) {
         node = D_800D5270;
     } else if (node->field10 != 1) {
-        func_802BB870_de(node->field8, node);
+        Audio_DequeueThread(node->field8, node);
     }
     head = &D_800D526C;
     if (*head == node) {

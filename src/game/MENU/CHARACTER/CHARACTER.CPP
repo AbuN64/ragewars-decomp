@@ -16,7 +16,7 @@
 
 /* 8041F1FC.CPP */
 #if defined(VERSION_US_REV1)
-s32 func_8041F2A0_us_rev1(s32 screen)
+s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
 {
   CVector3 scale;
   s32 j;
@@ -33,7 +33,7 @@ s32 func_8041F2A0_us_rev1(s32 screen)
   SmpOverlay_ShowSlotById(screen, 1, 0x7A);
   SmpOverlay_ShowSlotById(screen, 2, 0x7A);
   SmpOverlay_ShowSlotById(screen, 3, 0x7A);
-  Frontend_SetSelectedStage(0, 0);
+  Random_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = 1.0f;
   scale.y = 1.0f;
@@ -46,8 +46,8 @@ s32 func_8041F2A0_us_rev1(s32 screen)
     D_800E42D0->players[i].unkC = 0;
     D_800E42D0->players[i].choice = 0;
     D_800E42D0->players[i].unk4C0 = 0;
-    model = func_8041F1D8_de(D_800E42D0->players[i].kind);
-    row = func_8041F18C_de(D_800E42D0->players[i].kind);
+    model = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
+    row = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
@@ -126,7 +126,7 @@ s32 func_8041F2A0_us(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
-  Frontend_SetSelectedStage(0, 0);
+  Random_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -139,8 +139,8 @@ s32 func_8041F2A0_us(void *screen)
     D_800E42D0->players[i].unkC = 0;
     D_800E42D0->players[i].choice = 0;
     D_800E42D0->players[i].unk4C0 = 0;
-    model = func_8041F1D8_de(D_800E42D0->players[i].kind);
-    row = func_8041F18C_de(D_800E42D0->players[i].kind);
+    model = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
+    row = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
@@ -219,7 +219,7 @@ s32 func_8041F6E0_eu(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
-  Frontend_SetSelectedStage(0, 0);
+  Random_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -232,8 +232,8 @@ s32 func_8041F6E0_eu(void *screen)
     D_800E42D0->players[i].unkC = 0;
     D_800E42D0->players[i].choice = 0;
     D_800E42D0->players[i].unk4C0 = 0;
-    model = func_8041F1D8_de(D_800E42D0->players[i].kind);
-    row = func_8041F18C_de(D_800E42D0->players[i].kind);
+    model = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
+    row = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
@@ -312,7 +312,7 @@ s32 func_8041F6E0_eu_x(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7e);
-  Frontend_SetSelectedStage(0, 0);
+  Random_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -325,8 +325,8 @@ s32 func_8041F6E0_eu_x(void *screen)
     D_800E42D0->players[i].unkC = 0;
     D_800E42D0->players[i].choice = 0;
     D_800E42D0->players[i].unk4C0 = 0;
-    model = func_8041F1D8_de(D_800E42D0->players[i].kind);
-    row = func_8041F18C_de(D_800E42D0->players[i].kind);
+    model = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
+    row = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
@@ -405,7 +405,7 @@ s32 func_8041F230_de(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x78);
-  Frontend_SetSelectedStage(0, 0);
+  Random_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -418,8 +418,8 @@ s32 func_8041F230_de(void *screen)
     D_800E42D0->players[i].unkC = 0;
     D_800E42D0->players[i].choice = 0;
     D_800E42D0->players[i].unk4C0 = 0;
-    model = func_8041F1D8_de(D_800E42D0->players[i].kind);
-    row = func_8041F18C_de(D_800E42D0->players[i].kind);
+    model = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
+    row = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
@@ -472,11 +472,11 @@ s32 func_8041F230_de(void *screen)
 #endif
 
 /* 8041F1FC_2.CPP */
-extern s32 Frontend_ListHasFlag100(struct WidgetNode *);
+extern s32 Widget_ListHasFlag100(struct WidgetNode *);
 extern struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
-s32 Menu_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTicks) {
+s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTicks) {
     CVector3 scale;
     f32 highlightAlpha;
     s16 resource;
@@ -575,12 +575,12 @@ s32 Menu_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTick
                     highlightWidget = D_800E42D0->players[i].highlight;
                     if ((highlightWidget->x != (widgetNode->x - 2)) || (highlightWidget->y != (widgetNode->y - 2))) {
                         SoundElement_PlayFlatSound(0xE7F);
-                        if (Frontend_ListHasFlag100(widgetNode) == 0) {
+                        if (Widget_ListHasFlag100(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {
                                 D_800E42D0->players[i].kind = (s32) resource;
-                                previewModelOffset = func_8041F1D8_de(resource);
-                                entryIndex = func_8041F18C_de(D_800E42D0->players[i].kind);
+                                previewModelOffset = Key_GetCharacterPreviewModel(resource);
+                                entryIndex = Key_FindCharacterPreviewRow(D_800E42D0->players[i].kind);
                                 scale.x = D_800E3A58[entryIndex].scale[i];
                                 scale.y = D_800E3A58[entryIndex].scale[i];
                                 scale.z = D_800E3A58[entryIndex].scale[i];

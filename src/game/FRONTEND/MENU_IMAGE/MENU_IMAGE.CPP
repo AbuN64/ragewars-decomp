@@ -19,7 +19,7 @@ extern FourPlayerResultsScreen *D_800E59E0;
 /* Clears the 22 owned bytes at 0x4C of each of the 4 player records (150 bytes apart) in
    D_80146398; for each active player (byte 0x78 == 1) it looks up the player's model kind (byte
    0x80) through Scene_FindActorDefinition and marks each of its 8 slot ids at least 0x4C3 as owned (byte 0x4C
-   plus the id less 0x4C3), then refreshes the player's loadout columns through Frontend_LoadEquipmentSelections. */
+   plus the id less 0x4C3), then refreshes the player's loadout columns through Equip_LoadEquipmentSelections. */
 
 
 
@@ -37,7 +37,7 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 /* Moves the cursor of player p's 0x4D0-byte entry of D_800E59E0 to column c: unless c is 5 it
    hides the item whose id D_800E5A06[p * 19 + c] names in the screen window, shows the item
    D_800E5A1A[p * 19 + c] names with alpha 0x96, stores c as the entry's selection and redraws that
-   column through Frontend_ShowEquipChoice with the entry's value for it. */
+   column through Equip_ShowEquipChoice with the entry's value for it. */
 
 
 
@@ -65,8 +65,8 @@ extern void Tsmos_ActivateControllerState();
 
 /* Handles an input event for the 0x4D0-byte entry of D_800E59E0 the low half of the third argument
    selects: when that entry is active, the high half is 3 and the fourth argument is zero, it calls
-   MarkMenuEventHandled, resets the entry through Frontend_LoadEquipmentSelections, redraws its six columns and then its
-   selected column through Frontend_ShowEquipChoice, and plays sound 0xE7C; it always returns zero. Written
+   MarkMenuEventHandled, resets the entry through Equip_LoadEquipmentSelections, redraws its six columns and then its
+   selected column through Equip_ShowEquipChoice, and plays sound 0xE7C; it always returns zero. Written
    from the assembly; the entries are an array member of the screen so each column offset is
    summed before the base is added. */
 
@@ -78,25 +78,25 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Frontend_MoveEquipmentColumn with the entry index and 1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and 1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Frontend_MoveEquipmentColumn with the entry index and -1, returning zero. Adapted from Frontend_SelectPreviousEquipmentColumn with the second Frontend_MoveEquipmentColumn argument changed from 1 to -1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_MoveEquipmentColumn with the entry index and -1, returning zero. Adapted from Frontend_SelectPreviousEquipmentColumn with the second Equip_MoveEquipmentColumn argument changed from 1 to -1. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Frontend_CycleEquipmentChoice with the entry index and -1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and -1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Frontend_CycleEquipmentChoice with the entry index and 1, returning zero. Adapted from Frontend_SelectPreviousEquipmentChoice with the second Frontend_CycleEquipmentChoice argument changed from -1 to 1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls Equip_CycleEquipmentChoice with the entry index and 1, returning zero. Adapted from Frontend_SelectPreviousEquipmentChoice with the second Equip_CycleEquipmentChoice argument changed from -1 to 1. */
 
 
 
@@ -142,7 +142,7 @@ void Frontend_ResetEquipmentFromCharacter(void) {
                     (record + (id - 0x4C3))[0x4C] = 1;
                 }
             }
-            Frontend_LoadEquipmentSelections(player);
+            Equip_LoadEquipmentSelections(player);
         }
     }
 }
@@ -167,10 +167,10 @@ void Frontend_SelectEquipmentColumn(s32 player, s32 column) {
         Frontend_SetWidgetFlag08(item, 1);
     }
     item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
-    Frontend_SetWidgetFlag40(item, 1);
+    Widget_SetWidgetFlag40(item, 1);
     item->value = 0x96;
     D_800E59E0->panels[player].selection = column;
-    Frontend_ShowEquipChoice(player, column, D_800E59E0->panels[player].values[column]);
+    Equip_ShowEquipChoice(player, column, D_800E59E0->panels[player].values[column]);
 }
 
 s32 Frontend_FreeEquipmentScreen(void) {
@@ -196,11 +196,11 @@ s32 Frontend_RestoreEquipmentSelections(void *first, void *second, u32 event, s3
         return 0;
     }
     MarkMenuEventHandled();
-    Frontend_LoadEquipmentSelections(index);
+    Equip_LoadEquipmentSelections(index);
     for (i = 0; i < 6; i++) {
-        Frontend_ShowEquipChoice(index, i, D_800E59E0->panels[index].values[i]);
+        Equip_ShowEquipChoice(index, i, D_800E59E0->panels[index].values[i]);
     }
-    Frontend_ShowEquipChoice(index, D_800E59E0->panels[index].selection,
+    Equip_ShowEquipChoice(index, D_800E59E0->panels[index].selection,
                   D_800E59E0->panels[index].values[D_800E59E0->panels[index].selection]);
     SoundElement_PlayFlatSound(0xE7C);
     return 0;
@@ -214,7 +214,7 @@ s32 Frontend_SelectPreviousEquipmentColumn(void *first, void *second, s32 slot, 
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
-            Frontend_MoveEquipmentColumn(index, 1);
+            Equip_MoveEquipmentColumn(index, 1);
             return 0;
         }
     }
@@ -229,7 +229,7 @@ s32 Frontend_SelectNextEquipmentColumn(void *first, void *second, s32 slot, s32 
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
-            Frontend_MoveEquipmentColumn(index, -1);
+            Equip_MoveEquipmentColumn(index, -1);
             return 0;
         }
     }
@@ -244,7 +244,7 @@ s32 Frontend_SelectPreviousEquipmentChoice(void *first, void *second, s32 slot, 
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
-            Frontend_CycleEquipmentChoice(index, -1);
+            Equip_CycleEquipmentChoice(index, -1);
             return 0;
         }
     }
@@ -259,7 +259,7 @@ s32 Frontend_SelectNextEquipmentChoice(void *first, void *second, s32 slot, s32 
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
             SoundElement_PlayFlatSound(0xE7B);
-            Frontend_CycleEquipmentChoice(index, 1);
+            Equip_CycleEquipmentChoice(index, 1);
             return 0;
         }
     }
@@ -270,7 +270,7 @@ int Frontend_CancelEquipmentSelection(int a,int b,unsigned int player) {
  MarkMenuEventHandled();player &= 0xFFFF;
  switch(D_800E59E0->panels[player].state) {
  case 1:D_800E59E0->state=5;D_800E59E0->timer=4;D_800E59E0->next=7;break;
- case 2:D_800E59E0->panels[player].state=0;SmpOverlay_SetSlotValue(D_800E59E0->menu,player,0);Frontend_SetPreviewTransformUpdate(D_800E59E0->panels[player].pad0,1);Frontend_ActivateEquipmentPanel(player);break;
+ case 2:D_800E59E0->panels[player].state=0;SmpOverlay_SetSlotValue(D_800E59E0->menu,player,0);Frontend_SetPreviewTransformUpdate(D_800E59E0->panels[player].pad0,1);Equip_ActivateEquipmentPanel(player);break;
  }
  return 0;
 }

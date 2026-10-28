@@ -10,14 +10,14 @@
 #include "ANIM/802412C0.H"
 
 /* 80241170_2.CPP */
-s32 GraphU64_InterpolateVector(CVector3 *, u32, void *, void *);
+s32 Graphu64_InterpolateVector(CVector3 *, u32, void *, void *);
 
 /* Tests a point against every edge plane of a polygon. */
 
  /* extern */
-void GraphU64_CrossVectors(f32 *, void *, f32 *);
+void Graphu64_CrossVectors(f32 *, void *, f32 *);
 
-s32 func_802412D0_de(void *poly, void *start, void *segmentEnd, f32 *outputFraction) {
+s32 CCollision_IntersectFrontPlaneFraction(void *poly, void *start, void *segmentEnd, f32 *outputFraction) {
     f32 segmentDirection[3];
     f32 planeToStart[3];
     f32 normalDotDirection;
@@ -41,7 +41,7 @@ s32 func_802412D0_de(void *poly, void *start, void *segmentEnd, f32 *outputFract
     return result;
 }
 
-s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, void *outputPoint) {
+s32 CCollision_IntersectFrontPlanePoint(void *contactPlane, void *segmentStart, void *segmentEnd, void *outputPoint) {
     f32 segmentDirection[3];
     f32 planeToStart[3];
     f32 hitFraction;
@@ -63,14 +63,14 @@ s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, v
         }
     }
     if (intersectsPlane != 0) {
-        GraphU64_InterpolateVector(outputPoint, *(u32 *)&hitFraction, segmentStart, segmentEnd);
+        Graphu64_InterpolateVector(outputPoint, *(u32 *)&hitFraction, segmentStart, segmentEnd);
         return 1;
     }
     return 0;
 }
 
 /* extern */
-s32 func_802414F4_de(func_80204468_S3 *poly, void *testPoint) {
+s32 CCollision_IsPointInsidePolygon(func_80204468_S3 *poly, void *testPoint) {
     f32 edgePlaneNormal[3];
     f32 edgeVector[3];
     f32 vertexToPoint[3];
@@ -78,17 +78,17 @@ s32 func_802414F4_de(func_80204468_S3 *poly, void *testPoint) {
     void *vertexCursor;
     s32 remainingEdges;
     void *previousVertex;
-    vertexTotal = ((Polygon_func_8023E8D4_de *)poly)->vertexCount;
+    vertexTotal = ((PolygonCCollisionTestSegmentPolygon *)poly)->vertexCount;
     if (vertexTotal == 1) {
         return 1;
     }
     previousVertex = (char *)poly + ((vertexTotal * 0xC) + 0xC);
-    vertexCursor = ((Polygon_func_8023E8D4_de *)poly)->vertices;
+    vertexCursor = ((PolygonCCollisionTestSegmentPolygon *)poly)->vertices;
     remainingEdges = vertexTotal;
     remainingEdges = remainingEdges - 1;
     for (; remainingEdges != -1; vertexCursor += 0xC, remainingEdges--) {
         GraphU64_SubtractVectors(edgeVector, vertexCursor, previousVertex);
-        GraphU64_CrossVectors(edgePlaneNormal, &((Polygon_func_8023E8D4_de *)poly)->normal, edgeVector);
+        Graphu64_CrossVectors(edgePlaneNormal, &((PolygonCCollisionTestSegmentPolygon *)poly)->normal, edgeVector);
         GraphU64_SubtractVectors(vertexToPoint, testPoint, previousVertex);
         previousVertex = vertexCursor;
         if (edgePlaneNormal[0]*vertexToPoint[0]+edgePlaneNormal[1]*vertexToPoint[1]+edgePlaneNormal[2]*vertexToPoint[2] > 0.0f) return 0;
@@ -96,7 +96,7 @@ s32 func_802414F4_de(func_80204468_S3 *poly, void *testPoint) {
     return 1;
 }
 
-s32 func_80241614_de(void *poly, void *point, f32 radius, void *testPoint) {
+s32 CCollision_IsPointInsideDisk(void *poly, void *point, f32 radius, void *testPoint) {
     CVector3 *first = point;
     CVector3 *second = testPoint;
     f32 dx = first->x - second->x;
@@ -110,7 +110,7 @@ s32 func_80241614_de(void *poly, void *point, f32 radius, void *testPoint) {
 
 /* Tests whether a point lies inside an object's four-sided footprint: for each edge of the corners at 0x18 it checks the side the point falls on in the x-z plane, walking the edges in reverse when the winding value at 0x4C is negative. */
 
-s32 func_80241668_de(Footprint *fp, CVector3 *p)
+s32 CCollision_IsPointInsideFootprint(Footprint *fp, CVector3 *p)
 {
     s32 i;
     CVector3 *a;
@@ -133,7 +133,7 @@ s32 func_80241668_de(Footprint *fp, CVector3 *p)
     return 1;
 }
 
-f32 func_80241728_de(void *query, f32 x, f32 z) {
+f32 CCollision_GetSurfaceHeight(void *query, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 
@@ -146,7 +146,7 @@ f32 func_80241728_de(void *query, f32 x, f32 z) {
 }
 
 /* 802412C0.CPP */
-f32 func_802417C4_de(f32 *contactRecord) {
+f32 CCollision_GetContactYaw(f32 *contactRecord) {
     f32 magnitude;
     f32 result;
     f32 zero;

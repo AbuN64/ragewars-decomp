@@ -54,8 +54,8 @@ typedef struct Entry Entry;
 struct PlayerRecAt698;
 typedef struct PlayerRecAt698 PlayerRecAt698;
 
-struct Menu_func_80218F9C_de;
-typedef struct Menu_func_80218F9C_de Menu_func_80218F9C_de;
+struct MenuCteamselectDrawTeamWheel;
+typedef struct MenuCteamselectDrawTeamWheel MenuCteamselectDrawTeamWheel;
 
 struct ControllerRecAtC7;
 struct PlayerRecAt698;
@@ -224,8 +224,8 @@ struct ObjectLinks11B8 {
 struct ObjectLinks11B8;
 typedef struct ObjectLinks11B8 ObjectLinks11B8;
 
-struct Menu_func_80218F9C_de;
-struct Menu_func_80218F9C_de {
+struct MenuCteamselectDrawTeamWheel;
+struct MenuCteamselectDrawTeamWheel {
     s32 active;
     s32 unused;
     f32 open;

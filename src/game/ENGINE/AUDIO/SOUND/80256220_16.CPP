@@ -21,12 +21,12 @@ extern f32 D_800C3EE0_de;
 
 #include "COMMON/EXTERNS_11.H"
 
-extern void func_80259440_de(void *arg0);
+extern void AudioWorld_DispatchPendingSounds(void *arg0);
 extern void Audio_UpdateDialogPlayer(void *arg0);
 
 extern void Audio_UpdateMusicPlayback(void *arg0);
 extern s32 SetN64_IsModeThirteen(void);
-extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Gsky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 
 
@@ -37,7 +37,7 @@ extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 
 
-s32 func_8025842C_de(void *context) {
+s32 Sound_UpdateAudioContext(void *context) {
     char *object = context;
     u8 *bytes = &D_801462C8.volume[1];
     char *queue;
@@ -74,7 +74,7 @@ s32 func_8025842C_de(void *context) {
         }
     }
 
-    func_80259440_de((char *)object + 0x138);
+    AudioWorld_DispatchPendingSounds((char *)object + 0x138);
     Audio_UpdateDialogPlayer((char *)object + 0x2BC0);
     queue = object + 0x1D64;
     Audio_UpdateMusicFade(queue);
@@ -91,24 +91,24 @@ s32 func_8025842C_de(void *context) {
         zero.z = 0.0f;
         zero.y = 0.0f;
         zero.x = 0.0f;
-        result = Sky_FindNearestCamera(&D_80145088, &zero);
+        result = Gsky_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((((struct ContextRecAt2BC0 *)(object))->frame & 3) == 0) {
-            Audio_PlaySoundAtPosition(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
+            Sound_PlaySoundAtPosition(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
         }
     }
     return ++((struct ContextRecAt2BC0 *)(object))->frame;
 }
 
 extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *arg0, s32 arg1);
-extern s32 func_80259AB8_de(void *arg0, s32 arg1);
+extern s32 AudioWorld_HasPendingSoundWithKey(void *arg0, s32 arg1);
 
 
 
 
 
 
-s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
+s32 Sound_HasActiveOrPendingSound(struct ContextRecAt2BC0 *context, s32 queryValue) {
     {
         MenuRules *contextLock;
         s32 lockClaimCount;
@@ -142,7 +142,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
         }
         return 1;
     }
-    if (func_80259AB8_de(&context->view[0], queryValue) != 0) {
+    if (AudioWorld_HasPendingSoundWithKey(&context->view[0], queryValue) != 0) {
         MenuRules *contextLock;
         s32 lockClaimCount;
         u32 releaseInterruptMask;
@@ -184,7 +184,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
 
 
 
-void func_80258740_de(s32 *engine) {
+void Sound_AcquireContextLock(s32 *engine) {
     MenuRules *menuRules;
     s32 claimCount;
     u32 mask;
@@ -207,7 +207,7 @@ void func_80258740_de(s32 *engine) {
 
 
 
-void func_802587A4_de(s32 *engine) {
+void Sound_ReleaseContextLock(s32 *engine) {
     MenuRules *menuRules;
     s32 remainingClaims;
     u32 mask;

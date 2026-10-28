@@ -7,7 +7,7 @@
 
 /* Ramps a voice pitch toward its target, interpolates the pitch curve and applies its scaled value to the context channel. */
 
-extern void func_8025AA2C_de(View_func_8025AB94_de *);
+extern void Channel_UpdateDistancePitchFactor(ViewChannelUpdateVoicePitch *);
 
 extern void func_802B2F00_de(char *, s32);
 extern void alSndpSetPitch(char *, f32);
@@ -17,7 +17,7 @@ static inline char *selectChannel(ContextRecAt104 *context, s32 slot) {
     return context->channels;
 }
 
-static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, View_func_8025AB94_de *view) {
+static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, ViewChannelUpdateVoicePitch *view) {
     char *channel = context->channels;
 
     func_802B2F00_de(channel, context->slots[slot]);
@@ -26,7 +26,7 @@ static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, View_fun
     alSndpSetPitch(channel, value);
 }
 
-void func_8025AB94_de(View_func_8025AB94_de *view) {
+void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePitch *view) {
     MotionRecAt24 *motion;
     AnglesRecAt8 *angles;
     s32 refreshed;
@@ -45,7 +45,7 @@ void func_8025AB94_de(View_func_8025AB94_de *view) {
     angles = &view->angles;
     context = view->context;
     if ((view->flags & 0x400) && !(context->frame & 3)) {
-        func_8025AA2C_de(view);
+        Channel_UpdateDistancePitchFactor(view);
         refreshed = 1;
     }
     if ((view->flags & 0xA) == 0xA) {
@@ -71,10 +71,10 @@ clamp_done:;
                 index = (s16)truncated;
                 if (index != position) {
                     next = truncated + 1;
-                    base = D_800CB8EC[index];
-                    result = base + (position - index) * (D_800CB8EC[next] - base);
+                    base = g_audioPitchRatioCurve[index];
+                    result = base + (position - index) * (g_audioPitchRatioCurve[next] - base);
                 } else {
-                    result = D_800CB8EC[index];
+                    result = g_audioPitchRatioCurve[index];
                 }
                 motion->heading = result;
                 channel = selectChannel(view->context, view->slot);

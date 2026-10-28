@@ -29,14 +29,14 @@ extern char D_800ED414[];
 extern s32 Pak_CountLineChars(LayeredText *);
 
 
-/* Draws an item's label at its position into the text layer D_8014561C through Pak_OpenDialog, using
+/* Draws an item's label at its position into the text layer D_8014561C through Menu_OpenDialog, using
    the fixed label D_44F0B8 instead of the item's own when D_80153730 is set; returns 1. */
 
 
 extern char D_8014561C[];
 
 
-extern void Pak_OpenDialog(char *, char *, int, int, int);
+extern void Menu_OpenDialog(char *, char *, int, int, int);
 
 /* Clears the word held in D_80153788. */
 
@@ -70,7 +70,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 /* Clears bit 26 and sets bit 3 of the flag word at offset 0x120 of the object at offset 0xC of a
-   record, stores 8 in the state word D_80153788 between the two, and calls func_802649FC_de. */
+   record, stores 8 in the state word D_80153788 between the two, and calls Control_ClearMenuControlFlag. */
 
 
 
@@ -151,7 +151,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 
-/* Latches g_pakNamePromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns g_pakNamePromptAccepted. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to g_pakNamePromptAccepted. */
+/* Latches g_pakNamePromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns g_pakNamePromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch D_80153784 changed to g_pakNamePromptAccepted. */
 
 
 
@@ -159,7 +159,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 extern s32 D_8015375C;
 
-extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
+extern s32 Snapshot_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
@@ -201,9 +201,9 @@ s32 Pak_UpdateProfileActionLabel(struct FieldRecAt14 *field) {
 
 int Pak_OpenProfileActionPrompt(int unused, ItemRecAt24 *item) {
     if (D_80153730 != 0) {
-        Pak_OpenDialog(D_8014561C, D_0044E468, item->x, item->y, 0);
+        Menu_OpenDialog(D_8014561C, D_0044E468, item->x, item->y, 0);
     } else {
-        Pak_OpenDialog(D_8014561C, item->label, item->x, item->y, 0);
+        Menu_OpenDialog(D_8014561C, item->label, item->x, item->y, 0);
     }
     return 1;
 }
@@ -244,7 +244,7 @@ void Pak_SelectPromptKindEight(struct RecordRecAtCV3 *record) {
     record->target->flags &= ~0x04000000;
     D_80153788 = 8;
     record->target->flags |= 8;
-    func_802649FC_de();
+    Control_ClearMenuControlFlag();
 }
 
 void Pak_SelectPromptKindNine(void) {
@@ -726,7 +726,7 @@ s32 Pak_CheckOperationPakChange(struct Shared_PakMenu *record) {
     if (g_pakNamePromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
-                if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
+                if (Snapshot_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
                     g_pakNamePromptAccepted = 1;
                 }
             }

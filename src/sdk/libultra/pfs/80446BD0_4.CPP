@@ -250,7 +250,7 @@ s32 __osClearPage(OSPfs *pfs, int page_no, u8 *data, u8 bank)
 
 
 
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
 s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name)
 {
@@ -285,7 +285,7 @@ s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, 
     if (file_no == -1) {
         return 5;
     }
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir);
+    ret = __osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8 *)&dir);
     if (ret != 0)
         return ret;
 
@@ -424,7 +424,7 @@ s32 __osBlockSum(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank)
     if (ret != 0)
         return ret;
     for (i = 0; i < 8; i++) {
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, page_no * 8 + i, data);
+        ret = __osContRamRead(pfs->queue, pfs->channel, page_no * 8 + i, data);
         if (ret != 0) {
             pfs->activebank = 0;
             Pfs_SelectActiveBank(pfs);

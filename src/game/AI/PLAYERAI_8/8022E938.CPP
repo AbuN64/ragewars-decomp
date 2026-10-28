@@ -31,7 +31,7 @@ extern s32 InstHdr_GetActorMotionState(void *arg0);
 
 extern func_8022ECBC_S1 *D_800FE9F0;
 
-extern void Ovlgame_UpdateRunEndPlayer(void *);
+extern void Player_UpdateRunEndPlayer(void *);
 
 
 extern s32 D_800CED30;
@@ -46,9 +46,9 @@ extern void func_80218464_de(void *arg0);
 
 
 
-extern void Player_InitializePlayerHealth(void *arg0);
+extern void Playerai_InitializePlayerHealth(void *arg0);
 
-void Player_ToggleActionFlagMode(Player *player) {
+void Playerai_ToggleActionFlagMode(Player *player) {
     u8 *ptr;
 
     ptr = &D_80145088.settings.local;
@@ -70,7 +70,7 @@ void Player_ToggleActionFlagMode(Player *player) {
     player->toggle = 1;
 }
 
-void Player_SelectAlternateWeapon(Player *player) {
+void Playerai_SelectAlternateWeapon(Player *player) {
     u8 *ptr;
     WeaponInfo *temp_v0;
     s16 alternate;
@@ -104,7 +104,7 @@ void Player_SelectAlternateWeapon(Player *player) {
     }
 }
 
-void Player_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
+void Playerai_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
     f32 first;
     f32 amount;
 
@@ -127,7 +127,7 @@ void func_8022EB04_de(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
-s32 Player_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
+s32 Playerai_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
     void *entry;
     s16 *condition;
     char *indexed;
@@ -204,12 +204,12 @@ s32 Player_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
     } while (0);
 }
 
-int Player_ReturnZero(void) {
+int Playerai_ReturnZero(void) {
     char pad[0x10];
     return 0;
 }
 
-s32 Player_TryEnterLandedState(void *player, LevelActor *actor) {
+s32 Playerai_TryEnterLandedState(void *player, LevelActor *actor) {
     if (actor->position1.y <= 0.0f && InstHdr_GetActorMotionState(actor) != 0) {
         Player_SetPlayerState(player, actor, 2);
         return 1;
@@ -225,7 +225,7 @@ s32 Player_TryEnterLandedState(void *player, LevelActor *actor) {
 
 
 
-void Player_SelectMovementAnimation(ActorRecAt16E0 *object) {
+void Playerai_SelectMovementAnimation(ActorRecAt16E0 *object) {
     int suppress = 0;
     float value;
 
@@ -250,13 +250,13 @@ void Player_SelectMovementAnimation(ActorRecAt16E0 *object) {
     }
 }
 
-/** Empty adjacent entry point included in Player_SelectMovementAnimation's Splat span. */
+/** Empty adjacent entry point included in Playerai_SelectMovementAnimation's Splat span. */
 void func_8022ECC4_de(void) {
 }
 
-void Player_AdvanceCurrentRunEndState(void) {
+void Playerai_AdvanceCurrentRunEndState(void) {
     if (D_800FE9F0->unk5EA == 1) {
-        Ovlgame_UpdateRunEndPlayer((s32)D_800FE9F0);
+        Player_UpdateRunEndPlayer((s32)D_800FE9F0);
     } else {
         Player_SetPlayerState(D_800FE9F0, D_800FE9F0, 0x22);
     }
@@ -264,11 +264,11 @@ void Player_AdvanceCurrentRunEndState(void) {
     D_800C9FE4 = 0;
 }
 
-void Player_UpdateStoredRunEndPlayer(void) {
-    Ovlgame_UpdateRunEndPlayer(D_80102A48);
+void Playerai_UpdateStoredRunEndPlayer(void) {
+    Player_UpdateRunEndPlayer(D_80102A48);
 }
 
-void Player_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0)
+void Playerai_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0)
 {
   s32 temp_v0;
   temp_v0 = arg0->flags & 0xFF7FFFFF;
@@ -288,7 +288,7 @@ void Player_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0)
   arg0->unk_0x086C = 1;
 }
 
-void Player_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
+void Playerai_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
     s32 handle;
 
     Control_SetControllerMode(0);
@@ -306,7 +306,7 @@ void Player_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
 void func_8022EDF4_de(void) {
 }
 
-void Player_RespawnFragTagPlayer(void *player) {
+void Playerai_RespawnFragTagPlayer(void *player) {
     s32 mode;
 
     ((Shared_ActorView *)player)->controls->transientFlag = 1;
@@ -332,10 +332,10 @@ void Player_RespawnFragTagPlayer(void *player) {
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
     Nav_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Player_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
-    Player_InitializePlayerHealth(player);
+    Playerai_InitializePlayerHealth(player);
 }
 
-s32 Player_CountTrailingSpaces(s32 arg0, s32 arg1) {
+s32 Playerai_CountTrailingSpaces(s32 arg0, s32 arg1) {
     s32 var_a1;
     s32 result;
     s32 space;

@@ -56,7 +56,7 @@
 
 
 
-/* Encodes an 0xAARRGGBB color into a packed pixel value of entry `format` of the format table D_800E2B20, shifting each channel by its signed shift and masking it. */
+/* Encodes an 0xAARRGGBB color into a packed pixel value of entry `format` of the format table g_pixelFormatDescriptors, shifting each channel by its signed shift and masking it. */
 
 
 
@@ -299,11 +299,11 @@ void Frontend_WriteDestinationColorEntry(s32 index, u32 color) {
 }
 
 u32 Frontend_EncodePixelColor(u32 color, s32 format) {
-    return encode(color, &D_800E2B20[format]);
+    return encode(color, &g_pixelFormatDescriptors[format]);
 }
 
 u32 Frontend_DecodePixelColor(u32 value, s32 format) {
-    return decode(value, &D_800E2B20[format]);
+    return decode(value, &g_pixelFormatDescriptors[format]);
 }
 
 void Frontend_ReadSourceHalfwordPixel(void) {

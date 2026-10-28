@@ -19,7 +19,7 @@ struct Shared_ActorView {
     /* The actual player position also has a word representation in the published
      * SharedPlayer.views0.positionBits; Triple is the copy-provider transport ABI. */
     union { CVector3 vector; Triple words; } position;
-    s32 modelId; /* +0x14: as LevelActor.model; Ovlgame_RefreshActivePlayerSceneState refreshes it */
+    s32 modelId; /* +0x14: as LevelActor.model; Player_RefreshActivePlayerSceneState refreshes it */
     void * model; /* +0x18: src/func_8021B468.c */
     s32 unk_0x001C;
     s32 unk_0x0020;
@@ -196,7 +196,7 @@ struct Shared_ControlView {
     s8 mode; /* +0x80: src/func_8021B468.c */
     u8 playerId; /* 0x81 */
     u8 pad82;
-    u8 selection; /* 0x83: menu option adjusted by func_8043E28C_de */
+    u8 selection; /* 0x83: menu option adjusted by CMenuProfile_AdjustControllerSelection */
     char pad84[0xA];
     u8 roundEnded; /* 0x8E */
     u8 transientFlag; /* +0x8F: src/func_8021B468.c */
@@ -263,7 +263,7 @@ struct Shared_struct_D_800D34C0_0x18 {
     s16 unk10; /* +0x10: src/func_8021B468.c */
     char pad12[0x6];
 };
-extern Shared_struct_D_800D34C0_0x18 D_800D34C0[15]; /* item records, looked up by id */
+extern Shared_struct_D_800D34C0_0x18 g_pickupAmmoDefinitions[15]; /* item records, looked up by id */
 
 typedef struct Shared_HeightBonuses Shared_HeightBonuses;
 struct Shared_HeightBonuses {

@@ -14,10 +14,10 @@ extern s32 D_8015375C;
 
 
 
-extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 arg2);
+extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 arg2);
 
-/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if Pak_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
-extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
+/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if Snapshot_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
+extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
 
 /* Starts the configured action using the actor resource or the shared fallback. */
 
@@ -34,7 +34,7 @@ extern s32 D_800E28C0;
 
 
 
-/* Latches g_frontendPakPromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns g_frontendPakPromptAccepted. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to g_frontendPakPromptAccepted. */
+/* Latches g_frontendPakPromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns g_frontendPakPromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch D_80153784 changed to g_frontendPakPromptAccepted. */
 
 
 
@@ -42,7 +42,7 @@ extern s32 D_800E28C0;
 
 
 
-extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
+extern s32 Snapshot_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
@@ -77,11 +77,11 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 
 
 
-extern void Pak_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
+extern void Menu_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
 extern char D_8014561C[];
 extern s32 D_80153778;
-/* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through Pak_CheckStatusPrompt; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
-s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
+/* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
+s32 Pak_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     s32 channel;
 
     if (D_8015375C != 0) {
@@ -89,16 +89,16 @@ s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     } else {
         channel = menu->owner->unk4;
     }
-    if (Pak_CheckStatusPrompt(menu, channel, 1) != 0) {
+    if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         D_80153784 = 1;
-        Pak_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+        Menu_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Pak_OpenDialog(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
+    Menu_OpenDialog(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
     return 1;
 }
 
-s32 Frontend_OpenPakStatusPrompt(void *arg0, Shared_PakMenu *menu) {
+s32 Pak_OpenPakStatusPrompt(void *arg0, Shared_PakMenu *menu) {
     void *buffer;
     ObjRecAt5DC *player;
     s32 channel;
@@ -108,21 +108,21 @@ s32 Frontend_OpenPakStatusPrompt(void *arg0, Shared_PakMenu *menu) {
         channel = menu->owner->unk4;
     }
     D_80153784 = 1;
-    if (Pak_CheckStatusPrompt(menu, channel, 1) != 0) {
+    if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         player = menu->player;
         if (player != NULL) {
             buffer = player->unk5DC + 0x554;
         } else {
             buffer = D_8014561C;
         }
-        Pak_OpenDialog(buffer, menu->unk24, menu->player, menu->owner, 0);
+        Menu_OpenDialog(buffer, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Pak_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+    Menu_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
     return 1;
 }
 
-s32 Frontend_CancelPakAction(s32 unused0, ActionRecAt24 *arg1) {
+s32 Pak_CancelPakAction(s32 unused0, ActionRecAt24 *arg1) {
     void *var_a0;
     ObjRecAt5DC *temp_v0;
     D_800E28C0 = 1;
@@ -136,12 +136,12 @@ s32 Frontend_CancelPakAction(s32 unused0, ActionRecAt24 *arg1) {
         } else {
             var_a0 = D_8014561C;
         }
-        Pak_OpenDialog(var_a0, (void *)arg1->unk24, (void *)arg1->unk1C, (void *)arg1->unk20, 0);
+        Menu_OpenDialog(var_a0, (void *)arg1->unk24, (void *)arg1->unk1C, (void *)arg1->unk20, 0);
     }
     return 1;
 }
 
-s32 Frontend_SelectPakLoadHeading(struct FieldRecAt14 *field) {
+s32 Pak_SelectPakLoadHeading(struct FieldRecAt14 *field) {
     if (D_80153760 != 0) {
         field->text = D_800D7990;
     } else {
@@ -150,11 +150,11 @@ s32 Frontend_SelectPakLoadHeading(struct FieldRecAt14 *field) {
     return 0;
 }
 
-s32 Frontend_CheckPakActionChange(struct Shared_PakMenu *record) {
+s32 Pak_CheckPakActionChange(struct Shared_PakMenu *record) {
     if (g_frontendPakPromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
-                if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
+                if (Snapshot_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
                     g_frontendPakPromptAccepted = 1;
                 }
             }
@@ -163,32 +163,32 @@ s32 Frontend_CheckPakActionChange(struct Shared_PakMenu *record) {
     return g_frontendPakPromptAccepted;
 }
 
-void Frontend_SelectPakOperationZero(void) {
+void Pak_SelectPakOperationZero(void) {
     D_80153778 = 0;
     g_frontendPakPromptAccepted = 0;
 }
 
-void Frontend_SelectPakOperationOne(void) {
+void Pak_SelectPakOperationOne(void) {
     D_80153778 = 1;
     g_frontendPakPromptAccepted = 0;
 }
 
-void Frontend_SelectPakOperationTwo(void) {
+void Pak_SelectPakOperationTwo(void) {
     D_80153778 = 2;
     g_frontendPakPromptAccepted = 0;
 }
 
-void Frontend_SelectPakOperationThree(void) {
+void Pak_SelectPakOperationThree(void) {
     D_80153778 = 3;
     g_frontendPakPromptAccepted = 0;
 }
 
-void Frontend_SelectPakOperationFour(void) {
+void Pak_SelectPakOperationFour(void) {
     D_80153778 = 4;
     g_frontendPakPromptAccepted = 0;
 }
 
-s32 Frontend_SelectPakOperationTextOne(struct FieldRecAt14 *field) {
+s32 Pak_SelectPakOperationTextOne(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

@@ -33,9 +33,9 @@ struct EffectDesc {
     u16 variant;
 };
 
-extern SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc);
+extern SceneEffect *Animpool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc);
 
-extern void *AnimPool_AcquireSceneEffect(s32 arg0, s32 *arg1);
+extern void *Animpool_AcquireSceneEffect(s32 arg0, s32 *arg1);
 
 struct RecordAnimPoolSpawnAnimationObject;
 struct RecordAnimPoolSpawnAnimationObject {
@@ -122,7 +122,7 @@ struct BitReader {
     s32 bitPos;
 };
 
-/* The 0x25C-byte region-grid state (VisData_DecodeRegionGrid fills it): the bit reader on the stream, the grid's origin,
+/* The 0x25C-byte region-grid state (Visdata_DecodeRegionGrid fills it): the bit reader on the stream, the grid's origin,
  * the last cell lookup, and one signed code (or stream offset) per cell of the 17x17 grid. */
 struct ResourceBitGrid;
 typedef struct ResourceBitGrid ResourceBitGrid;
@@ -147,7 +147,7 @@ struct ResourceEntry {
 struct Six;
 typedef struct Six Six;
 
-/* The list AnimPool_ReleaseSceneEffect appends its record to. */
+/* The list Animpool_ReleaseSceneEffect appends its record to. */
 
 
 /* Shared object layout established by effect-pool consumers. */

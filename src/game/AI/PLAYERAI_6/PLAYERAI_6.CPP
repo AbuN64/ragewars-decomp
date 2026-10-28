@@ -31,7 +31,7 @@
 #include "COMMON/TRIPLE.H"
 #include "FX_2/80271B18.H"
 
-extern void Player_EndRound(void *);
+extern void Playerai_EndRound(void *);
 s32 Player_CheckTotalScoreWin(Root *);
 s32 Player_CheckTeamPointWin(struct World *);
 
@@ -53,9 +53,9 @@ typedef struct Shared_func_80227014_S19 func_80227014_S19;
 
 void func_80218464_de(void *);
 
-void Player_InitializePlayerHealth(void *);
+void Playerai_InitializePlayerHealth(void *);
 
-void * Player_GetPlayerByIndex(void *, u32);
+void * Playerai_GetPlayerByIndex(void *, u32);
 
 void * func_8022C55C_de(void *, u32);
 
@@ -66,7 +66,7 @@ void * func_8022C55C_de(void *, u32);
 /* Advances an elimination round when rule D_80146918 is on and not paused (Cinema_IsSequenceActive,
    Cinema_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
-   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Player_EndRound
+   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Playerai_EndRound
    when func_802282EC_de reports it over. */
 
 extern u8 D_801462D5; /* MIXED Player_UpdateFragTagSelection */
@@ -141,7 +141,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
 
     if ((Cinema_IsSequenceActive() == 0) && (Cinema_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((Player_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
-            Player_EndRound(world);
+            Playerai_EndRound(world);
             return;
         }
         eligiblePlayerCount = func_8022C620_de(world);
@@ -202,7 +202,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     banner_half = D_800C2BA0_de;
                     banner_size = D_800C2BA4_de;
                     do {
-                        player = Player_GetPlayerByIndex(world, playerIndex);
+                        player = Playerai_GetPlayerByIndex(world, playerIndex);
                         if (player != 0) {
                             playerProfile = player->unk5D8;
                             if (playerProfile->unk90 == 0) {
@@ -233,7 +233,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 player->unk11B4 = 0;
                                 Nav_RequestActorState(&player->unk2E8, &player->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
-                                Player_InitializePlayerHealth(player);
+                                Playerai_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
                                 if ((D_80146938 != 0) && (playerProfile->unk94 != 0)) {
@@ -307,7 +307,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     rotatingPlayer->unk11B4 = 0;
                     Nav_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
-                    Player_InitializePlayerHealth(rotatingPlayer);
+                    Playerai_InitializePlayerHealth(rotatingPlayer);
                 }
                 playerIndex = 0;
                 if (eligiblePlayerCount >= 0) {
@@ -388,7 +388,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     chosenPlayer->unk11B4 = 0;
                     Nav_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
-                    Player_InitializePlayerHealth(chosenPlayer);
+                    Playerai_InitializePlayerHealth(chosenPlayer);
                 }
                 playerIndex = 0;
                 if (eligiblePlayerCount >= 0) {
@@ -440,7 +440,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     banner_half = D_800C2BB8_de;
                     banner_size = D_800C2BBC_de;
                     do {
-                        flippedPlayer = Player_GetPlayerByIndex(world, playerIndex);
+                        flippedPlayer = Playerai_GetPlayerByIndex(world, playerIndex);
                         if (flippedPlayer != 0) {
                             priorFlipProfile = flippedPlayer->unk5D8;
                             if (priorFlipProfile->unk8F == 0) {
@@ -471,7 +471,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 flippedPlayer->unk11B4 = 0;
                                 Nav_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
-                                Player_InitializePlayerHealth(flippedPlayer);
+                                Playerai_InitializePlayerHealth(flippedPlayer);
                             } else {
                                 priorFlipProfile->unk90 = 0;
                                 flippedPlayer->unk5D8->unk8F = 0U;
@@ -583,7 +583,7 @@ void Player_ReleaseWaitingPlayer(Round *round) {
                 break;
             }
             if ((Player_CheckTeamPointWin(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
-                Player_EndRound(round);
+                Playerai_EndRound(round);
             }
         }
     }
@@ -682,7 +682,7 @@ extern int Player_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
    are out, directly or, when a mode 14 player takes part, only after the rules' round count at 0x9C
    reaches 3, marking humanWon. */
 
-extern s32 Pak_CountLiveNodes(struct CMenu_t **);
+extern s32 Menu_CountLiveNodes(struct CMenu_t **);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
@@ -723,11 +723,11 @@ extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
 /* Draws the per-player overlays for one view between Geometry_BeginModelBatch and Geometry_FlushModelBatch: for each player
    in the list from 0x20 it draws the scope model 0xC84 or 0xC85 (by the zoom mode at 0x120C) at the
-   player's view matrix while zoomed in at 0x11FC, the player's display through Weapon_DrawRedMarkerQuad when it
+   player's view matrix while zoomed in at 0x11FC, the player's display through Weaponai_DrawRedMarkerQuad when it
    belongs to this view and is enabled at 0x1210, and in team games (0x24 or 0x78 of D_801468A0) a
    teammate marker through func_80229D28_de for every other player on the viewing player's team. */
 
-extern void *Sky_FindScreenMessage(s32);
+extern void *Gsky_FindScreenMessage(s32);
 
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
@@ -822,7 +822,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
         if (rules->locked != 0 || D_8011FAC0.match.settings.allowed == 0) {
             return;
         }
-        if (Pak_CountLiveNodes(&D_8011FAC0.match.messages.head) == 0 && rules->timeLimit > 0.0f && D_8011FAC0.clockPaused == 0) {
+        if (Menu_CountLiveNodes(&D_8011FAC0.match.messages.head) == 0 && rules->timeLimit > 0.0f && D_8011FAC0.clockPaused == 0) {
             if (func_8022C650_de(world) != 0) {
                 rules->timeLimit -= D_800D2988;
             }
@@ -831,14 +831,14 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                 if (D_8011FAC0.match.settings.trialKind == 3) {
                     rules->humanWon = 0;
                 }
-                Player_EndRound(world);
+                Playerai_EndRound(world);
             }
         }
         game = &D_8011FAC0.match;
-        if (Pak_CountLiveNodes(&game->messages.head) == 0 && Player_CheckScoreLimit(world) != 0) {
+        if (Menu_CountLiveNodes(&game->messages.head) == 0 && Player_CheckScoreLimit(world) != 0) {
             limits = game->rules;
             if (limits->locked == 0 && D_8011FAC0.clockPaused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
-                Player_EndRound(world);
+                Playerai_EndRound(world);
             }
         }
         if (D_801462C8.counters.enabled != 0) {
@@ -862,11 +862,11 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                     limits = D_8011FAC0.match.rules;
                     if (limits->rounds >= 3) {
                         limits->humanWon = 1;
-                        Player_EndRound(world);
+                        Playerai_EndRound(world);
                     }
                 } else {
                     D_801462C8.counters.humanWon = 1;
-                    Player_EndRound(world);
+                    Playerai_EndRound(world);
                 }
             }
         }
@@ -959,7 +959,7 @@ void func_80228798_de(void *game, void *view) {
                                 void *temp;
 
                                 linked = ((ObjRecAt1D8V3 *)(actor))->unk1D8;
-                                func_8024B4F4_de(actor, (s32)SetN64_GetPackSection(*(void **)resource, 0));
+                                Gobjinst_UpdateModelBounds(actor, (s32)SetN64_GetPackSection(*(void **)resource, 0));
                                 temp = ((func_80228774_S5 *)(linked))->unk5DC;
                                 if (temp != 0) {
                                     CVector3 delta;
@@ -988,7 +988,7 @@ generic:
                             ((ObjRecAt16E0V2 *)(node))->unkD0,
                             4, 0, 0, D_800C2BC0_de, 1);
                         if (resource != 0) {
-                            func_8024B4F4_de(node, (s32)SetN64_GetPackSection(*(void **)resource, 0));
+                            Gobjinst_UpdateModelBounds(node, (s32)SetN64_GetPackSection(*(void **)resource, 0));
                             Cache_UnlockResource(0, (s32)resource);
                         }
                     }
@@ -1009,7 +1009,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     match = D_8011FAC0.match.rules;
     team = -1;
     if (match->teams != 0 || match->teamRule != 0) {
-        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Sky_FindScreenMessage(view))->settings)->team;
+        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Gsky_FindScreenMessage(view))->settings)->team;
     }
     Geometry_BeginModelBatch();
     for (player = game->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
@@ -1028,10 +1028,10 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
             }
         }
         if (((ObjectLinks16E4 *)(player))->unk_5DC != 0 && ((ObjectLinks16E4 *)(player))->unk_1210 != 0 && ((ObjectLinks16E4 *)(player))->unk_5DC == view) {
-            Weapon_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
+            Weaponai_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
         }
         if ((D_8011FAC0.match.rules->teams != 0 || D_8011FAC0.match.rules->teamRule != 0)
-            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Sky_FindScreenMessage(view) != player) {
+            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Gsky_FindScreenMessage(view) != player) {
             func_80229D28_de(player);
         }
     }

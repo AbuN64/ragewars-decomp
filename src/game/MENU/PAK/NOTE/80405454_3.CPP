@@ -8,16 +8,16 @@
 #include "RESMGR/802A0888.H"
 
 /* Chooses a free extension letter for a new note on the Controller Pak on channel ch: refuses with
-   -2 unless the pak is ready, queries each of the 16 notes through Pak_ReadNoteInfo (failing with -1
+   -2 unless the pak is ready, queries each of the 16 notes through Note_ReadNoteInfo (failing with -1
    on error) and marks the letter of every existing note, then writes the first unused letter from
    'A' as the extension, returning 0, or -1 when all 16 letters are taken. */
 
 
 
-extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
+extern s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
-s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
+s32 Note_FindFreeNoteExtension(s32 ch, u8 *ext) {
     char companyCode[8];
     char gameCode[8];
     char gameName[16];
@@ -31,7 +31,7 @@ s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
         return -2;
     }
     for (i = 0; i < 16; i++) {
-        if (Pak_ReadNoteInfo(ch, i, &exists, gameName, ext, &size, companyCode, gameCode) != 0) {
+        if (Note_ReadNoteInfo(ch, i, &exists, gameName, ext, &size, companyCode, gameCode) != 0) {
             return -1;
         }
         if (exists != 0) {
@@ -56,28 +56,28 @@ s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
 
 
 
-s32 Pak_NeedsIdRepair(s32 index) {
+s32 Note_NeedsIdRepair(s32 index) {
     if (g_controllerPakChannelStates[index] != 3) {
         return 0;
     }
     return g_controllerPakChannelStatuses[index] == -4;
 }
 
-/* Marks the given controller port's 0x70-byte pak record in D_80153330 present when the port's D_8010FBE3 status byte is clear and func_802B7FD8_de initialises the pak block at offset 8 of the record through D_8010FC00 without error, clearing the mark otherwise, and returns the mark.
+/* Marks the given controller port's 0x70-byte pak record in D_80153330 present when the port's D_8010FBE3 status byte is clear and osMotorInit initialises the pak block at offset 8 of the record through D_8010FC00 without error, clearing the mark otherwise, and returns the mark.
    Adapted from Scene_GetModelRecordByIndexPointer with the record reached by port index, the status byte guard and the initialisation result stored as a byte flag changed. */
 
 
 
 extern char D_8010FC00[];
 extern PakRecord D_80153330[];
-extern s32 func_802B7FD8_de(void *queue, void *pak, s32 channel);
+extern s32 osMotorInit(void *queue, void *pak, s32 channel);
 
-s32 Pak_ProbeAccessoryPresence(s32 channel) {
+s32 Note_ProbeAccessoryPresence(s32 channel) {
     PakRecord *record = &D_80153330[channel];
     s32 result;
 
     if (D_8010FBE3[channel * 4] == 0) {
-        record->present = func_802B7FD8_de(D_8010FC00, record->pak, channel) == 0;
+        record->present = osMotorInit(D_8010FC00, record->pak, channel) == 0;
         result = record->present;
     } else {
         record->present = 0;
@@ -86,10 +86,10 @@ s32 Pak_ProbeAccessoryPresence(s32 channel) {
     return result;
 }
 
-extern u8 D_800DE80C[];
+extern u8 g_controllerPakFilenameAlphabet[];
 
 /* Converts a controller-pak filename through its character table, blanking leading nulls, then trims trailing spaces. */
-void Pak_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
+void Note_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
     s32 i;
     s32 started;
 
@@ -103,7 +103,7 @@ void Pak_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
             if (*arg0 == 0 && !started) {
                 noteText[i] = ' ';
             } else {
-                noteText[i] = D_800DE80C[*arg0];
+                noteText[i] = g_controllerPakFilenameAlphabet[*arg0];
                 started = 1;
             }
         } else {
@@ -121,10 +121,10 @@ void Pak_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
 }
 
 extern u8 XPlus_UppercaseCharacter(u8);
-extern u8 D_800DE80C[0x42];
+extern u8 g_controllerPakFilenameAlphabet[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */
-void Pak_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
+void Note_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
     s32 i;
     s8 *var_s1;
     s32 j;
@@ -139,7 +139,7 @@ void Pak_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
         do {
             *var_s0 = XPlus_UppercaseCharacter(*var_s0);
             for (j = 0; j < 0x42; j += 1) {
-                if (*var_s0 == D_800DE80C[j]) {
+                if (*var_s0 == g_controllerPakFilenameAlphabet[j]) {
                     *var_s1 = (s8)j;
                     break;
                 }
@@ -155,7 +155,7 @@ void Pak_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
 }
 
 /* Returns one when a tilde appears among the first n + 1 bytes of a string, otherwise zero. */
-s32 Pak_ContainsInvalidNameByte(u8 *text, s32 count) {
+s32 Note_ContainsInvalidNameByte(u8 *text, s32 count) {
     do {
         if (*text++ == '~') {
             return 1;
@@ -166,13 +166,13 @@ s32 Pak_ContainsInvalidNameByte(u8 *text, s32 count) {
 
 /* Rounds a byte count up to whole 256-byte units; PAKInterface_CheckRecordsNoteCapacity passes it the 0x648-byte size
    that func_80435424_de returns. */
-u32 Pak_BytesToPakPages(u32 bytes) {
+u32 Note_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
 
 /* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from XPlus_UpdateCrc32. */
 
-u32 Pak_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
+u32 Note_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
     u32 table[256];
     u32 i;
     u32 j;
@@ -202,7 +202,7 @@ u32 Pak_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
 
 /* Returns the word held in D_800E2850. */
 
-s32 Pak_HasScratchBuffer(void) {
+s32 Note_HasScratchBuffer(void) {
     return D_800E2850;
 }
 

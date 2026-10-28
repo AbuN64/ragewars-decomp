@@ -8,7 +8,7 @@
 
 
 
-s32 func_802B9B20_de(s32 deviceOffset, s32 *outputWord) {
+s32 osPiRawReadIo(s32 deviceOffset, s32 *outputWord) {
     u32 status;
 
     if (outputWord == 0) {

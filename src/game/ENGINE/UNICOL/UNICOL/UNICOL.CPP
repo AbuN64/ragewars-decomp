@@ -11,21 +11,21 @@
 #include "GAME/CODE_8027302C.H"
 
 /* 80243A80.CPP */
-void func_8023E45C_de(void *);
+void CCollision_StoreContactResult(void *);
 
-void func_8023E6EC_de(void *, void *);
+void CCollision_ProjectSegmentOntoSurface(void *, void *);
 
-void func_8023E838_de(void *);
+void CCollision_ResetContactNormal(void *);
 
-void func_8023EBD4_de(void *);
+void CCollision_ClearResultFlags(void *);
 
-void func_8023EBFC_de(ActorMotion *, MotionContactResult *);
+void CCollision_UpdateSurfaceResponseFlags(ActorMotion *, MotionContactResult *);
 
-void func_8023EC54_de(ActorMotion *, MotionContactResult *);
+void CCollision_UpdateMaterialFlags(ActorMotion *, MotionContactResult *);
 
-void func_8023ECBC_de(void *, u16 *);
+void CCollision_UpdateModelSurfaceFlags(void *, u16 *);
 
-f32 func_802417C4_de(f32 *);
+f32 CCollision_GetContactYaw(f32 *);
 
 f32 InstHdr_GetActorReach(void *);
 
@@ -37,7 +37,7 @@ f32 Region_GetPolygonHeight(void *, f32, f32);
 
 void * Scene_ResolveFloorPolygon(void *, CVector3 *);
 
-s32 func_8023CFE0_de();
+s32 CCollision_IntegrateGravityAndDrag();
 
                      /* extern */
 
@@ -59,7 +59,7 @@ typedef Shared_Func80243A80Frame Func80243A80Frame;
 
 typedef CVector3 Func80243A80Vec3;
 
-extern void func_8023E6D0_de(void *arg0, f32 arg1);
+extern void CCollision_SetUniformSweepExtent(void *arg0, f32 arg1);
 
 s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
     s32 func_8023D380_de();
@@ -95,7 +95,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     f32 actorY;
     f32 savedY;
 
-    func_8023EBD4_de(&frame.sp18);
+    CCollision_ClearResultFlags(&frame.sp18);
     __builtin_memcpy(&D_80103FCC->x, &actor->room, 12);
     actor->flags = (u32) (actor->flags & ~0x18);
     frame.sp18 = actor;
@@ -107,7 +107,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     actorReach = InstHdr_GetActorReach(actor);
     count = GameObject_GetActorRadius(actor);
     high = GameObject_GetActorHeight(actor);
-    func_8023E690_de(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
+    CCollision_SetSweepRange(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
     *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);
     __builtin_memcpy(&frame.sp8C, &actor->room, 12);
@@ -124,13 +124,13 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     frame.sp34 = frame.sp28 * D_800C3790_de;
     frame.sp50 = ((u32) *motionSettings >> 0x13) & 1;
     frame.sp58 = motionSettings;
-    func_8023CFE0_de(&frame.sp18);
+    CCollision_IntegrateGravityAndDrag(&frame.sp18);
     if ((frame.sp3C != 0) && (frame.sp54 & 7) && !(frame.sp54 & 0x2000)) {
         __builtin_memcpy(&frame.sp210, &actor->contactX, 12);
         frame.sp1E0 = actor->x;
         frame.sp1E4 = actor->groundY;
         frame.sp1E8 = actor->z;
-        func_8023E6EC_de(&frame.sp18, &frame.sp1C8);
+        CCollision_ProjectSegmentOntoSurface(&frame.sp18, &frame.sp1C8);
     }
     if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (var_v0 = 0, (frame.sp64 != frame.sp70))) {
         peakMoveCount = ++D_800CB410_de;
@@ -170,7 +170,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
             verticalResponseTicks = 3;
         }
         frame.sp4C = verticalResponseTicks;
-        func_8023E838_de(&frame.sp18);
+        CCollision_ResetContactNormal(&frame.sp18);
         collisionCount = 0;
         loopMask = 0x80000;
         collisionOne = 1;
@@ -178,14 +178,14 @@ loop_34:
         if (*motionSettings & loopMask) {
             frame.spC4 = Scene_ResolveFloorPolygon(frame.spC4, &frame.sp68);
         }
-        collisionFound = func_8023D158_de((s8 *) &frame.sp18);
+        collisionFound = CCollision_TraceActorMotion((s8 *) &frame.sp18);
         motionContinuation = 0;
         if (collisionFound != 0) {
             if (frame.spC8 != collisionOne) {
                 if (frame.spC8 == 4) {
                     if (((frame.sp110 * -headingSine) + (frame.sp118 * -headingCosine)) < D_800C3794_de) {
                         frame.sp54 |= 0x80;
-                        func_8023EBFC_de(&frame.sp18, &frame.spC8);
+                        CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
                     }
                 } else {
                     goto block_42;
@@ -195,7 +195,7 @@ loop_34:
 block_42:
                 frame.sp54 &= ~0x80;
             }
-            func_8023E45C_de(&frame.sp18);
+            CCollision_StoreContactResult(&frame.sp18);
             collisionCount += 1;
             motionContinuation = func_8023D380_de(&frame.sp18);
             __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
@@ -226,13 +226,13 @@ block_42:
             frame.sp2A8 = floorProbeBaseFlags;
             frame.sp2A8 = floorProbeBaseFlags | (*motionSettings & 0x180008);
             frame.sp50 = 0;
-            func_8023E838_de(&frame.sp18);
+            CCollision_ResetContactNormal(&frame.sp18);
             actor->contactX = 0.0f;
             actor->contactZ = 0.0f;
             actor->contactBits = D_800C379C_de;
             actor->groundY = (f32) (actor->y - dropDistance);
 loop_49:
-            if (func_8023D158_de((s8 *) &frame.sp18) != 0) {
+            if (CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) {
                 if (frame.spD0 == 7) {
                     frame.sp3C = 0;
                 }
@@ -252,7 +252,7 @@ loop_49:
                 if ((actor->velY <= 0.0f) && (groundSeparation < D_800C37A4_de)) {
                     if (frame.spC8 == 5) {
                         frame.sp54 |= 0x2004;
-                        func_8023EC54_de(&frame.sp18, &frame.spC8);
+                        CCollision_UpdateMaterialFlags(&frame.sp18, &frame.spC8);
                         repeatFloorProbe = 1;
                         *frame.sp58 &= ~8;
                     } else {
@@ -300,16 +300,16 @@ block_71:
             frame.sp58 = &D_801000F0.flags;
             frame.sp68 -= headingSine * D_800C37A8_de;
             frame.sp70 -= headingCosine * D_800C37A8_de;
-            func_8023E838_de(&frame.sp18);
-            if ((func_8023D158_de((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
+            CCollision_ResetContactNormal(&frame.sp18);
+            if ((CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
                 if (frame.sp38 != 0) {
                     func_8023D380_de(&frame.sp18);
                     actor->x = frame.sp198;
                     actor->z = frame.sp1A0;
                     frame.sp54 |= 0x100;
-                    func_8023EBFC_de(&frame.sp18, &frame.spC8);
+                    CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
                     if (actor->type == 1) {
-                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - GraphU64_GetWrappedDifference(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
+                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - Graphu64_GetWrappedDifference(frame.sp2C8, CCollision_GetContactYaw((f32 *) &frame.spC8)), 0.9f);
                         actor->angle = frame.sp2C8;
                     }
                 }
@@ -329,7 +329,7 @@ block_71:
                 if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x1000;
                 }
-                func_8023ECBC_de(&frame.sp18, surface);
+                CCollision_UpdateModelSurfaceFlags(&frame.sp18, surface);
             }
             actor->collision = surface;
         }
@@ -339,7 +339,7 @@ block_71:
     return 0;
 }
 
-s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desired, s32 motionSettings) {
+s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 desired, s32 motionSettings) {
     extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
@@ -352,11 +352,11 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     s32 maximum;
     s32 flags;
 
-    func_8023E6D0_de(work.data, 0.0f);
+    CCollision_SetUniformSweepExtent(work.data, 0.0f);
     out = work.data;
     vectors.first = startPosition;
     vectors.second = desired;
-    func_8023EBD4_de(out);
+    CCollision_ClearResultFlags(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&
         vectors.first.z == vectors.second.z) {
@@ -395,13 +395,13 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
-    func_8023E838_de(out);
+    CCollision_ResetContactNormal(out);
 
     active = 1;
     count = 0;
     do {
-        if (func_8023D158_de(out) != 0) {
-            func_8023E45C_de(out);
+        if (CCollision_TraceActorMotion(out) != 0) {
+            CCollision_StoreContactResult(out);
             count += 1;
             result = func_8023D380_de(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
@@ -417,7 +417,7 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     return count;
 }
 
-s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *sweepSurfaceSettings,
+s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *sweepSurfaceSettings,
                    f32 sweepExtent) {
     extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
@@ -431,11 +431,11 @@ s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPos
     s32 maximum;
     s32 flags;
 
-    func_8023E6D0_de(work.data, sweepExtent);
+    CCollision_SetUniformSweepExtent(work.data, sweepExtent);
     out = work.data;
     vectors.first = startPosition;
     vectors.second = endPosition;
-    func_8023EBD4_de(out);
+    CCollision_ClearResultFlags(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&
         vectors.first.z == vectors.second.z) {
@@ -474,13 +474,13 @@ s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPos
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
-    func_8023E838_de(out);
+    CCollision_ResetContactNormal(out);
 
     active = 1;
     count = 0;
     do {
-        if (func_8023D158_de(out) != 0) {
-            func_8023E45C_de(out);
+        if (CCollision_TraceActorMotion(out) != 0) {
+            CCollision_StoreContactResult(out);
             count += 1;
             result = func_8023D380_de(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
@@ -510,11 +510,11 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
     s32 maximum;
     s32 flags;
 
-    func_8023E690_de(work.data, motionExtents.x, motionExtents.y, motionExtents.z, baseOffset);
+    CCollision_SetSweepRange(work.data, motionExtents.x, motionExtents.y, motionExtents.z, baseOffset);
     out = work.data;
     vectors.first = startPosition;
     vectors.second = endPosition;
-    func_8023EBD4_de(out);
+    CCollision_ClearResultFlags(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&
         vectors.first.z == vectors.second.z) {
@@ -553,13 +553,13 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
-    func_8023E838_de(out);
+    CCollision_ResetContactNormal(out);
 
     active = 1;
     count = 0;
     do {
-        if (func_8023D158_de(out) != 0) {
-            func_8023E45C_de(out);
+        if (CCollision_TraceActorMotion(out) != 0) {
+            CCollision_StoreContactResult(out);
             count += 1;
             result = func_8023D380_de(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
@@ -575,7 +575,7 @@ s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
     return count;
 }
 
-s32 func_80244B68_de(char *actorStorage, char *motionWork, CVector3 first, CVector3 second,
+s32 CCollision_SweepWithWorkBuffer(char *actorStorage, char *motionWork, CVector3 first, CVector3 second,
                    s32 motionSurface) {
     extern s32 func_8023D380_de(void *actorStorage);
     char *object = actorStorage;
@@ -587,7 +587,7 @@ s32 func_80244B68_de(char *actorStorage, char *motionWork, CVector3 first, CVect
     s32 maximum;
     s32 flags;
 
-    func_8023EBD4_de(out);
+    CCollision_ClearResultFlags(out);
     if (first.x == second.x && first.y == second.y && first.z == second.z) {
         return 0;
     }
@@ -624,13 +624,13 @@ s32 func_80244B68_de(char *actorStorage, char *motionWork, CVector3 first, CVect
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
-    func_8023E838_de(out);
+    CCollision_ResetContactNormal(out);
 
     active = 1;
     count = 0;
     do {
-        if (func_8023D158_de(out) != 0) {
-            func_8023E45C_de(out);
+        if (CCollision_TraceActorMotion(out) != 0) {
+            CCollision_StoreContactResult(out);
             count += 1;
             result = func_8023D380_de(out);
             ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;

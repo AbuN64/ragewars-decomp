@@ -8,7 +8,7 @@
 
 
 
-extern InstanceHdr D_800E37B8[];
+extern InstanceHdr g_rewardScoreBudgets[];
 
 static inline s32 entryScore(void) {
     s32 score;
@@ -50,7 +50,7 @@ static inline s32 activeCount(void) {
     return count;
 }
 
-s32 Frontend_GetJoinRequestRank(void) {
+s32 Join_GetJoinRequestRank(void) {
     s32 score;
     s32 i;
     s32 count;
@@ -63,7 +63,7 @@ s32 Frontend_GetJoinRequestRank(void) {
         return 0;
     }
     for (i = 0; i < 5; i++) {
-        if (D_800E37B8[i].w[count - 1] >= score) {
+        if (g_rewardScoreBudgets[i].w[count - 1] >= score) {
             rank = i;
             break;
         }

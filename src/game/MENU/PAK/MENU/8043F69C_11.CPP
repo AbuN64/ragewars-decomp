@@ -11,12 +11,12 @@
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 
-extern void Pak_MeasureMenuText(LayeredText *, TextLayerMetrics *);
-extern void Pak_DrawMenuOptionSprite(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
-extern void Pak_DrawStyledMenuText(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
+extern void Menu_MeasureMenuText(LayeredText *, TextLayerMetrics *);
+extern void Menu_DrawMenuOptionSprite(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
+extern void Menu_DrawStyledMenuText(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
 
 #if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
+void Menu_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
     LayeredText current;
     TextLayerMetrics first, second, third;
     int center;
@@ -24,15 +24,15 @@ void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuO
     center = (bounds->left + bounds->field18) / 2;
     current = *source;
     current.mode = 0;
-    Pak_MeasureMenuText(&current, &first);
+    Menu_MeasureMenuText(&current, &first);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    Pak_MeasureMenuText(&current, &second);
+    Menu_MeasureMenuText(&current, &second);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    Pak_MeasureMenuText(&current, &third);
+    Menu_MeasureMenuText(&current, &third);
     current = *source;
     current.text = 0;
     position->top += first.height;
@@ -40,24 +40,24 @@ void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuO
         position->left = center - (second.width + third.width) / 2;
     }
     position->left += third.width / 2;
-    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
+    Menu_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     current.text = 0;
     position->left += (source->spacing * second.width) / 256 - third.width / 2;
     position->top += second.height / 2 - third.height / 2;
-    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
+    Menu_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     if (source->flags & 1) {
         position->left = center - first.width / 2;
     }
     draw = &current;
-    Pak_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
+    Menu_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Measures three text layers, positions their labels, and renders the composite text. */
-void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
+void Menu_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
     LayeredText current;
     TextLayerMetrics first, second, third;
     int center;
@@ -65,15 +65,15 @@ void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuO
     center = (bounds->left + bounds->field18) / 2;
     current = *source;
     current.mode = 0;
-    Pak_MeasureMenuText(&current, &first);
+    Menu_MeasureMenuText(&current, &first);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    Pak_MeasureMenuText(&current, &second);
+    Menu_MeasureMenuText(&current, &second);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    Pak_MeasureMenuText(&current, &third);
+    Menu_MeasureMenuText(&current, &third);
     current = *source;
     current.text = 0;
     position->top += first.height;
@@ -81,18 +81,18 @@ void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuO
         position->left = center - (second.width + third.width) / 2;
     }
     position->left += third.width / 2;
-    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
+    Menu_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     current.text = 0;
     position->left += (source->spacing * second.width) / 256 - third.width / 2;
     position->top += second.height / 2 - third.height / 2;
-    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
+    Menu_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     if (source->flags & 1) {
         position->left = center - first.width / 2;
     }
     draw = &current;
-    Pak_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
+    Menu_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
@@ -159,7 +159,7 @@ static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 vari
 typedef struct PakMenuCursor {
     s32 selection;
 } PakMenuCursor;
-void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused, PakModelContext *context) {
+void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused, PakModelContext *context) {
     CVector3 zero;
     CVector3 offset;
     CVector3 placed;
@@ -241,9 +241,9 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
 
 #include "MENU/OBJECT1C8.H"
 #include "MENU/MENU_BOX.H"
-extern void *Pak_GetListContext(s8 *member);
-extern void Pak_StopMenuPulse(struct Object1C8 *object);
-extern void Pak_StartMenuPulse(struct Object1C8 *object);
+extern void *Menu_GetListContext(s8 *member);
+extern void Menu_StopMenuPulse(struct Object1C8 *object);
+extern void Menu_StartMenuPulse(struct Object1C8 *object);
 typedef struct MenuBuildState MenuBuildState;
 typedef struct MenuBuildEntry MenuBuildEntry;
 /* One row of a menu definition's item table (0x24 bytes). */
@@ -303,14 +303,14 @@ struct MenuBuildState {
     Vtx_t vertices[2][8];
     u8 reserved148[0x90];
 };
-/* Private block size of an item: type 3 items own 0x480 bytes (inline copy of Pak_GetMenuItemExtraSize). */
+/* Private block size of an item: type 3 items own 0x480 bytes (inline copy of Menu_GetMenuItemExtraSize). */
 static inline s32 menuItemExtraSize(MenuBuildItem *definition) {
     s32 size = 0;
     if (definition->type == 3) size = 0x480;
     return size;
 }
 /* Fills one entry from its item and hands it the next private block (inline copy of
-   Pak_InitMenuItemFromDescriptor). */
+   Menu_InitMenuItemFromDescriptor). */
 static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *definition, s32 index, MenuBuildState *menu, u8 **extra) {
     entry->index = index;
     entry->type = definition->type;
@@ -335,7 +335,7 @@ static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *def
    the private blocks packed after the entry array, stores the arguments, resets the eight highlight
    vertices of both banks from the default corner table, clears the input words, runs the definition's setup
    callback and then the setup callback of every entry whose item asks for one (flag 0x4000000). */
-void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, StateRecAtBCV1 *input, s32 value24, MessageList *owner) {
+void Menu_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, StateRecAtBCV1 *input, s32 value24, MessageList *owner) {
     u8 *extra;
     MenuBuildEntry *entry;
     s32 i, bank;
@@ -365,7 +365,7 @@ void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefini
     menu->value34 = 0;
     menu->value38 = 1;
     menu->value3C = 0;
-    menu->context = Pak_GetListContext((s8 *)owner);
+    menu->context = Menu_GetListContext((s8 *)owner);
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
@@ -383,8 +383,8 @@ void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefini
     input->field_B0 = 0;
     input->field_B4 = 0;
     input->field_BC = 0;
-    Pak_StopMenuPulse((struct Object1C8 *)menu);
-    Pak_StartMenuPulse((struct Object1C8 *)menu);
+    Menu_StopMenuPulse((struct Object1C8 *)menu);
+    Menu_StartMenuPulse((struct Object1C8 *)menu);
     if (definition->initialize != 0) definition->initialize(menu, owner);
     i = menu->count;
     entry = menu->entries;

@@ -6,9 +6,9 @@
 #include "sdk/AUDIO_2/802BF7F0.H"
 #include "sdk/os.h"
 
-extern State_func_802BA700_de *D_800D4414;
+extern StateosViSetSpecialFeatures *D_800D4414;
 
-void func_802BA700_de(s32 featureCommands) {
+void osViSetSpecialFeatures(s32 featureCommands) {
     u32 token;
 
     token = __osDisableInt();

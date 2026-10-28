@@ -7,8 +7,8 @@
 #include "WEAPONS/80213ED4_27.H"
 #include "FX_2/80271B18.H"
 
-extern s32 Barrel_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
-extern Actor_func_80214DD4_de *Barrel_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
+extern s32 Cbarrel_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
+extern Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
 extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
 extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
@@ -44,7 +44,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
     and flattened to the ground plane. The third parameter is overwritten: it serves as the boost flag. */
-void Barrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
+void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
     CVector3 pos;
     CVector3 probe;
     CVector3 away;
@@ -64,11 +64,11 @@ void Barrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s3
     }
     if (tracker->team == g_world.kind1Cursor) {
         if ((tracker->flags & 0x40000) && tracker->lockedTarget == 0) {
-            if (Barrel_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
+            if (Cbarrel_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
                 tracker->flags &= ~0x40000;
             }
         } else {
-            tracker->target = Barrel_SelectCombatTarget(actor, tracker, 0, 1);
+            tracker->target = Cbarrel_SelectCombatTarget(actor, tracker, 0, 1);
         }
     }
     target = tracker->target;

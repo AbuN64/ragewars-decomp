@@ -5,7 +5,7 @@
 #include "sdk/libgultra/libasm_802BBC68_19.h"
 #include "sdk/os.h"
 
-void func_802BB8B0_de(void)
+void Util_HandleTimerInterrupt(void)
 {
     OSTimer_s *t;
     u32 count;
@@ -31,7 +31,7 @@ void func_802BB8B0_de(void)
 
         if (elapsed_cycles < t->value) {
             t->value -= elapsed_cycles;
-            func_802BBA4C_de(t->value);
+            Util_SetTimerInterrupt(t->value);
             break;
         }
 
@@ -54,7 +54,7 @@ void func_802BB8B0_de(void)
 
 
 
-void func_802BB9F8_de(void) {
+void Util_InitializeTimerServices(void) {
     NodeRecAt1C *node = (NodeRecAt1C *)D_800D5280;
 
     D_80149B98 = 0;
@@ -72,7 +72,7 @@ void func_802BB9F8_de(void) {
    register through func_802BCF00_de into D_8014FE30, sets the Compare register through
    func_802BD150_de to that count plus the requested interval, then restores interrupts. */
 
-void func_802BBA4C_de(u64 interval) {
+void Util_SetTimerInterrupt(u64 interval) {
     u64 compare;
     u32 saved = __osDisableInt();
 

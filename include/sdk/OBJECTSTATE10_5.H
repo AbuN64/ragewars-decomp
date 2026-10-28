@@ -20,9 +20,9 @@ struct ObjectState1C;
 typedef struct ObjectState1C ObjectState1C;
 
 struct ALStartParamAlt;
-struct Node_func_80239AF4_de;
+struct NodeGskyActivateMessagePool;
 struct ALStartParamAlt {
-    struct Node_func_80239AF4_de *next;
+    struct NodeGskyActivateMessagePool *next;
     s32 delta;
     s16 type;
     s16 unity;

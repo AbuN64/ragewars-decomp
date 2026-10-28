@@ -18,8 +18,8 @@ struct LookupRecAtC {
 
 extern float D_800C3B60_de;
 
-struct Body_func_8024C6E8_de;
-typedef struct Body_func_8024C6E8_de Body_func_8024C6E8_de;
+struct BodyGobjinstApplyBoneTwistImpulse;
+typedef struct BodyGobjinstApplyBoneTwistImpulse BodyGobjinstApplyBoneTwistImpulse;
 
 
 
@@ -42,8 +42,8 @@ typedef struct ObjectList ObjectList;
 struct Camera;
 typedef struct Camera Camera;
 
-struct Body_func_8024C6E8_de;
-struct Body_func_8024C6E8_de {
+struct BodyGobjinstApplyBoneTwistImpulse;
+struct BodyGobjinstApplyBoneTwistImpulse {
     char pad0[0x30];
     CVector3 velocity;
 };
@@ -152,7 +152,7 @@ typedef struct AnimInfo AnimInfo;
 
 
 
-struct Rec_func_8024C92C_de;
+struct RecGobjinstSampleBoneTranslation;
 
 
 struct AnimInfo;
@@ -182,10 +182,10 @@ struct Shared_Func80243A80Actor;
 extern float D_800C3B88;
 
 
-extern void func_8024C104_eu(void);
-extern void func_8024C10C_eu(void);
-extern void func_8024C134_eu_x(void);
-extern void func_8024C13C_eu_x(void);
+extern void Gobjinst_EuropeNoOperation(void);
+extern void Gobjinst_EuropeAlternateNoOperation(void);
+extern void Gobjinst_EuropeExtendedNoOperation(void);
+extern void Gobjinst_EuropeExtendedAlternateNoOperation(void);
 /* Section five of an actor frame resource describes its rendering mode. */
 struct ActorFrameMetadata {
     u8 reserved0[0x6E];

@@ -13,18 +13,18 @@
 /* VHANDLER_4.CPP */
 extern Region D_80103F88;
 
-void Virtual_AppendPageChainNode(Field_void_4 *arg0, void *arg1) {
-    void *temp_v0;
+void Virtual_AppendPageChainNode(Field_void_4 *arg0, void *pageNode) {
+    void *previousTail;
 
-    *(void **)arg1 = 0;
-    ((Field_void_4 *)(arg1))->value = arg0->value;
-    temp_v0 = arg0->value;
-    if (temp_v0 != 0) {
-        *(void **)temp_v0 = arg1;
+    *(void **)pageNode = 0;
+    ((Field_void_4 *)(pageNode))->value = arg0->value;
+    previousTail = arg0->value;
+    if (previousTail != 0) {
+        *(void **)previousTail = pageNode;
     }
-    arg0->value = arg1;
+    arg0->value = pageNode;
     if (*(void **)arg0 == 0) {
-        *(void **)arg0 = arg1;
+        *(void **)arg0 = pageNode;
     }
 }
 
@@ -44,21 +44,21 @@ void Virtual_PrependPageChainNode(Field_void_4 *arg0, Field_void_4 *arg1) {
 }
 
 NodeVirtualFindRegionForPage *Virtual_FindRegionForPage(u32 arg0) {
-    NodeVirtualFindRegionForPage *var_v1;
-    u16 temp_a1;
+    NodeVirtualFindRegionForPage *region;
+    u16 firstPage;
 
-    var_v1 = (NodeVirtualFindRegionForPage *)&D_80103F88;
+    region = (NodeVirtualFindRegionForPage *)&D_80103F88;
     if (&D_80103F88 != 0) {
     loop_1:
-        temp_a1 = var_v1->f4;
-        if ((arg0 < temp_a1) || (arg0 >= (u32)(temp_a1 + var_v1->f6))) {
-            var_v1 = var_v1->next;
-            if (var_v1 != 0) {
+        firstPage = region->f4;
+        if ((arg0 < firstPage) || (arg0 >= (u32)(firstPage + region->f6))) {
+            region = region->next;
+            if (region != 0) {
                 goto loop_1;
             }
         }
     }
-    return var_v1;
+    return region;
 }
 
 /* VHANDLER_5.CPP */
@@ -66,7 +66,7 @@ extern ResourcePageMapping *D_800FFE20;
 extern Region D_80103F88;
 
 /* Releases the resource node whose id matches the handle's upper bits: unlinks it from the D_80103F88
- * list, frees each slot it holds through Virtual_UnmapResourcePage and marks the slot unused, then posts the node
+ * list, frees each slot it holds through Vhandler_UnmapResourcePage and marks the slot unused, then posts the node
  * back to the handle's message queue. */
 
 /* Registers a memory region: rounds its size to whole pages, places it after the last region of the chain at D_80103F88 on an even page at or above 0x800, marks every page of its map as free, and maps it through func_802BB420_de. */
@@ -89,7 +89,7 @@ ResourcePageMapping *Virtual_AcquireRecycledPage(void) {
         (*(ResourcePageMapping * volatile *)&entry->prev)->next = 0;
     }
 
-    Virtual_UnmapResourcePage(entry);
+    Vhandler_UnmapResourcePage(entry);
     if (entry->id != 0xFFFF) {
         node = Virtual_FindRegionForPage(entry->id);
         node->data[entry->id - node->start] = 0xFF;
@@ -120,7 +120,7 @@ void Virtual_ReleaseVirtualRegion(OwnerRecAt8V2 *arg0) {
     slot = node->map;
     for (i = 0; i < node->pages; i++) {
         if (*slot != 0xFF) {
-            Virtual_UnmapResourcePage(&D_800FFB50[*slot]);
+            Vhandler_UnmapResourcePage(&D_800FFB50[*slot]);
             D_800FFB50[*slot].id = 0xFFFF;
         }
         slot++;
@@ -191,7 +191,7 @@ void Virtual_FinishPageJob(ResourcePageJob *req) {
         if (D_800FFE20 == 0) {
             D_800FFE20 = link;
         }
-        Virtual_MapResourcePage(req->page, req->mapping, req->thread->slot, req->slot);
+        Vhandler_MapResourcePage(req->page, req->mapping, req->thread->slot, req->slot);
         func_802BCF70_de(req->page << 12, 0x1000);
         func_802BD010_de(req->page << 12, 0x1000);
     } else {

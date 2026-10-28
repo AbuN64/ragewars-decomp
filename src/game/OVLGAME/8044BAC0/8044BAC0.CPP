@@ -16,7 +16,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "AUDIO_4/802BFE60.H"
 
-/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through func_80285AC4_de, osCreateMesgQueue, func_802BB550_de, osContInit, func_802BAD80_de and func_802BB420_de, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through func_80264788_de and counts the profiles Ovlgame_ResetControllerProfile accepts in D_800D0E52, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
+/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through func_80285AC4_de, osCreateMesgQueue, func_802BB550_de, osContInit, Audio_GetThreadIdentifier and func_802BB420_de, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through func_80264788_de and counts the profiles Ovlgame_ResetControllerProfile accepts in D_800D0E52, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
 
 
 extern char D_8010EC90[];
@@ -41,7 +41,7 @@ s16 Ovlgame_InitializeControllerSession(void) {
     osCreateMesgQueue(&D_8010FBC0, g_controllerAccessMessages, 1);
     osSetEventMesg(5, D_8010FC00, 1);
     osContInit(D_8010FC00, D_800CBC11, D_8010BBE0);
-    func_802BAD80_de(0);
+    Audio_GetThreadIdentifier(0);
     D_800CBC1C = -1;
     osSendMesg(&D_8010FBC0, 0, 1);
     g_firstConnectedControllerPort = -1;

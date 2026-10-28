@@ -2,7 +2,7 @@
 #include "TYPES.H"
 
 /* 802C07B0.CPP */
-int func_802BB6C0_de(Node802C07B0 *node, u64 initialDelay, u64 repeatInterval, void *messageQueue, void *message) {
+int osSetTimer(Node802C07B0 *node, u64 initialDelay, u64 repeatInterval, void *messageQueue, void *message) {
     u64 value;
 
     node->field10 = initialDelay;
@@ -16,7 +16,7 @@ int func_802BB6C0_de(Node802C07B0 *node, u64 initialDelay, u64 repeatInterval, v
     node->field1C = message;
     value = __osInsertTimer(node);
     if (*(void **)D_800D5280 == node) {
-        func_802BBA4C_de(value);
+        Util_SetTimerInterrupt(value);
     }
     return 0;
 }

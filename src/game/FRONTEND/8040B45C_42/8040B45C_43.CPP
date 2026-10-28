@@ -9,7 +9,7 @@
    debugger returned 1 on every one of 400 calls, so the observed records all carry a non-zero
    value here and the zero arm is untested by execution. */
 
-/* Copies record i of the 52-byte table D_800E2B20 into the destination. */
+/* Copies record i of the 52-byte table g_pixelFormatDescriptors into the destination. */
 
 
 
@@ -73,5 +73,5 @@ void Frontend_ConfigureOwnedImage(struct Config *out, unsigned char type, short 
 }
 
 void Frontend_GetPixelFormatDescriptor(s32 index, struct Format *out) {
-    *out = D_800E2B20[index];
+    *out = g_pixelFormatDescriptors[index];
 }

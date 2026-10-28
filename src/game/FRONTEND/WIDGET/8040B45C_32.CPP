@@ -10,10 +10,10 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "MATH/802A2870.H"
 
-/* Draws a visible widget (flag 8): when Frontend_ComputeWidgetBounds places it, and its draw flags ask for
+/* Draws a visible widget (flag 8): when Widget_ComputeWidgetBounds places it, and its draw flags ask for
    clipping (0x200), it narrows the current scissor from N64Eng_GetClipBounds to the widget's box through
    func_8040F488_de (skipping the draw when nothing is left) and applies it with N64Eng_SetClipBounds; it then
-   draws the widget through Frontend_DrawWidget and restores the saved scissor if it was narrowed. */
+   draws the widget through Widget_DrawWidget and restores the saved scissor if it was narrowed. */
 
 
 
@@ -21,11 +21,11 @@
 
 
 
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
+extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
 
 extern void N64Eng_GetClipBounds(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
 /* Resets the state and copies the two configured values after initialization. */
@@ -33,9 +33,9 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 
 extern struct Shape_typemap_165 D_8014D580;
-extern void Frontend_DrawWidget(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args);
+extern void Widget_DrawWidget(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args);
 
-void Frontend_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args) {
+void Widget_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -46,17 +46,17 @@ void Frontend_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisib
     clipped = 0;
     if (widget->flags & 8) {
         local = args;
-        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &local) != 0) {
+        if (Widget_ComputeWidgetBounds(&area, &box, widget, &local) != 0) {
             if (local.flags & 0x200) {
                 N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (Frontend_ClampRectToClip(&clip, &box) == 0) {
+                if (Node_ClampRectToClip(&clip, &box) == 0) {
                     return;
                 }
                 clipped = 1;
                 N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            Frontend_DrawWidget(widget, args);
+            Widget_DrawWidget(widget, args);
             if (clipped) {
                 N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
             }
@@ -65,19 +65,19 @@ void Frontend_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisib
 }
 
 /* Walks a sibling node list and dispatches the by-value event to every node whose flag bit 3 is set. */
-void Frontend_DrawVisibleSiblings(Widget *node, DrawArgsFrontendDrawVisibleWidgetClipped event) {
+void Widget_DrawVisibleSiblings(Widget *node, DrawArgsFrontendDrawVisibleWidgetClipped event) {
     for (; node != 0; node = node->next) {
         if (node->flags & 8) {
-            Frontend_DrawWidget(node, event);
+            Widget_DrawWidget(node, event);
         }
     }
 }
 
-void Frontend_ResetTextClipBounds(void) {
+void Widget_ResetTextClipBounds(void) {
 
     struct Shape_typemap_165 *state;
 
-    Frontend_FlushTextBatches();
+    Widget_FlushTextBatches();
     state = &D_8014D580;
     state->field_8 = 0;
     state->field_0 = 0;
@@ -98,7 +98,7 @@ void Frontend_SetWidgetFlag08(void *object, int enabled) {
    argument. */
 
 
-void Frontend_SetWidgetFlag01(struct Widget *record, int enable) {
+void Widget_SetWidgetFlag01(struct Widget *record, int enable) {
     if (enable) {
         record->flags |= 1;
     } else {
@@ -106,7 +106,7 @@ void Frontend_SetWidgetFlag01(struct Widget *record, int enable) {
     }
 }
 
-void Frontend_SetWidgetFlag40(void *object, int enabled) {
+void Widget_SetWidgetFlag40(void *object, int enabled) {
     u16 *flags = &((Widget *)(object))->flags;
     if (enabled) {
         *flags |= 0x40;
@@ -119,7 +119,7 @@ void Frontend_SetWidgetFlag40(void *object, int enabled) {
    argument. */
 
 
-void Frontend_SetWidgetFlag100(struct Widget *record, int enable) {
+void Widget_SetWidgetFlag100(struct Widget *record, int enable) {
     if (enable) {
         record->flags |= 0x100;
     } else {
@@ -130,7 +130,7 @@ void Frontend_SetWidgetFlag100(struct Widget *record, int enable) {
 /* Stores two halfwords at offsets 0x14 and 0x16 of a record, a pair set together. */
 
 
-void Frontend_SetPairValues(struct Pair14 *record, s16 first, s16 second) {
+void Widget_SetPairValues(struct Pair14 *record, s16 first, s16 second) {
     record->first = first;
     record->second = second;
 }
@@ -147,12 +147,12 @@ void Frontend_SetPairValues(struct Pair14 *record, s16 first, s16 second) {
 
 
 
-void Frontend_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgsFrontendDrawVisibleWidgetClipped args, s32 px, s32 py) {
+void Widget_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgsFrontendDrawVisibleWidgetClipped args, s32 px, s32 py) {
     if (*hit != 0) {
         return;
     }
     if (node->next != 0) {
-        Frontend_FindWidgetAtPoint(hit, node->next, args, px, py);
+        Widget_FindWidgetAtPoint(hit, node->next, args, px, py);
     }
     if (*hit != 0) {
         return;
@@ -160,7 +160,7 @@ void Frontend_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawAr
     args.x += node->x;
     args.y += node->y;
     if (node->child != 0) {
-        Frontend_FindWidgetAtPoint(hit, node->child, args, px, py);
+        Widget_FindWidgetAtPoint(hit, node->child, args, px, py);
     }
     if (*hit != 0) {
         return;
@@ -180,7 +180,7 @@ void Frontend_FindWidgetAtPoint(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawAr
 /* Returns the union of the flag halfwords at offset 0x12 of every node in a linked list. */
 
 
-s32 Frontend_CollectSiblingFlags(struct WidgetNode *node) {
+s32 Widget_CollectSiblingFlags(struct WidgetNode *node) {
     s32 flags = 0;
 
     while (node != 0) {
@@ -193,7 +193,7 @@ s32 Frontend_CollectSiblingFlags(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 3 set in its flag halfword at offset 0x12. */
 
 
-s32 Frontend_AnyVisibleSibling(struct WidgetNode *node) {
+s32 Widget_AnyVisibleSibling(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {
@@ -206,7 +206,7 @@ s32 Frontend_AnyVisibleSibling(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 0 set in its flag halfword at offset 0x12. */
 
 
-s32 Frontend_AnySiblingFlag01(struct WidgetNode *node) {
+s32 Widget_AnySiblingFlag01(struct WidgetNode *node) {
     s32 flags = 0;
 
     while (node != 0) {
@@ -219,7 +219,7 @@ s32 Frontend_AnySiblingFlag01(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 6 set in its flag halfword at offset 0x12. */
 
 
-s32 Frontend_AnySiblingFlag40(struct WidgetNode *node) {
+s32 Widget_AnySiblingFlag40(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {
@@ -232,7 +232,7 @@ s32 Frontend_AnySiblingFlag40(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 8 set in its flag halfword at offset 0x12. */
 
 
-s32 Frontend_ListHasFlag100(struct WidgetNode *node) {
+s32 Widget_ListHasFlag100(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {
@@ -246,7 +246,7 @@ s32 Frontend_ListHasFlag100(struct WidgetNode *node) {
    reports the totals through the two pointers. */
 
 
-void Frontend_SumNodeOffsets(struct NodeRecAt16 *node, s32 *x, s32 *y) {
+void Widget_SumNodeOffsets(struct NodeRecAt16 *node, s32 *x, s32 *y) {
     s32 sumX = node->x;
     s32 sumY = node->y;
 

@@ -6,7 +6,7 @@
 #include "MATH/80299ECC.H"
 #include "include_asm.h"
 
-void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, s32 arg3, s32 arg4,
                    s32 depth) {
     ScreenManager *context;
     s32 saved;
@@ -19,22 +19,22 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s
         context->handled = 0;
         value = &context->handled;
         if (node->left != 0) {
-            Smos_DispatchDescendantScreenEvent(node->left, arg1, arg2, arg3, arg4, depth + 1);
+            Smos_DispatchDescendantScreenEvent(node->left, event, arg2, arg3, arg4, depth + 1);
         }
         if (context->handled == 0) {
             if (node->right != 0) {
-                Smos_DispatchDescendantScreenEvent(node->right, arg1, arg2, arg3, arg4, depth + 1);
+                Smos_DispatchDescendantScreenEvent(node->right, event, arg2, arg3, arg4, depth + 1);
             }
             if ((context->handled == 0) && (depth > 0) && (node->value != -1) &&
                 (node->type >= 9U)) {
                 valid = 1;
-                if (((arg1 == 0xE08) && ((node->flags | 2) == 0)) ||
-                    ((arg1 == 0xE09) && ((node->flags | 4) == 0))) {
+                if (((event == 0xE08) && ((node->flags | 2) == 0)) ||
+                    ((event == 0xE09) && ((node->flags | 4) == 0))) {
                     valid = 0;
                 }
                 if (valid != 0) {
                     GetMenuScreenOwner();
-                    Smos_RouteElementEvent(node->value, arg1, arg2, arg3, arg4);
+                    Menu_RouteElementEvent(node->value, event, arg2, arg3, arg4);
                 }
             }
         }

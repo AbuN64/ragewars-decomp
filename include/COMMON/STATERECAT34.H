@@ -84,5 +84,5 @@ extern s32 alLoadParam(void *, s32, struct ALWaveTable_s *);
 extern s32 alEnvmixerParam(void *, s32, void *);
 
 struct ContextRecAt2BC0;
-extern s32 Audio_PlaySoundAtPosition(struct ContextRecAt2BC0 *, s32, CVector3, s32, s32);
+extern s32 Sound_PlaySoundAtPosition(struct ContextRecAt2BC0 *, s32, CVector3, s32, s32);
 #endif

@@ -10,7 +10,7 @@ extern s32 D_800D2978;
 
 
 
-extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
+extern void Insthdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 
 extern void MatrixFromQuaternion(f32 *, char *);
@@ -35,12 +35,12 @@ static inline s32 advancePropKey(void) {
     return D_800D0910;
 }
 
-void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
+void Statinst_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
     f32 rotation[4];
     char matrix[0x40];
     PropGeometry *model;
 
-    InstHdr_ResetInstanceRenderIndices(prop, record, owner, segments);
+    Insthdr_ResetInstanceRenderIndices(prop, record, owner, segments);
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;
@@ -58,7 +58,7 @@ void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s
     rotation[1] = record->rotation[1] * 0.007874016f;
     rotation[2] = record->rotation[2] * 0.007874016f;
     rotation[3] = record->rotation[3] * 0.007874016f;
-    GraphU64_NormalizeQuaternion(rotation);
+    Graphu64_NormalizeQuaternion(rotation);
     MatrixFromQuaternion(rotation, matrix);
     ScaleMatrixLocal(matrix, record->scale.x, record->scale.y, record->scale.z);
     TranslateMatrix(matrix, record->position.x, record->position.y, record->position.z);

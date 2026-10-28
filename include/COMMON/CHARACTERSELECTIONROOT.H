@@ -64,7 +64,7 @@ typedef struct CharacterData_t s_CharacterData;
 struct CharacterData_t;
 struct CharacterData_t {
     s32 id;
-    s32 value; /* +0x4: second word of the slot, func_8041F1D8_de */
+    s32 value; /* +0x4: second word of the slot, Key_GetCharacterPreviewModel */
     char pad8[4];
     f32 scale[4];
     f32 m_fRotY[4];
@@ -94,7 +94,7 @@ typedef struct PanelRecord PanelRecord;
 
 
 
-extern s32 func_8041F1D8_de(s32 key);
+extern s32 Key_GetCharacterPreviewModel(s32 key);
 
 struct CharacterScreenCell;
 typedef struct CharacterScreenCell CharacterScreenCell;

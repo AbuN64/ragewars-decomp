@@ -14,7 +14,7 @@
    D_801516C0. */
 
 
-void func_802BF514_de(void) {
+void Audio_InitTransformTables(void) {
     s16 i;
     f32 angle;
     f32 s;
@@ -57,7 +57,7 @@ void func_802BF514_de(void) {
    bit-reverses it with the standard index-swapping walk, records n and returns the tables. */
 
 
-FftTables *func_802BF67C_de(s32 n) {
+FftTables *Audio_InitFftTables(s32 n) {
     FftTables *tables;
     s32 half;
     s32 i;
@@ -109,7 +109,7 @@ FftTables *func_802BF67C_de(s32 n) {
    every coefficient is the quantised value at offset 0xA0 of the input divided by the step
    D_800D93E8 selected by the band's scale index and multiplied by the gain D_800CCF24; the
    coefficients past the last band end (D_800D93E6) are cleared. Returns 1. */
-s32 func_802BF804_de(f32 *out, s16 *in) {
+s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in) {
     s16 *scale;
     s16 band;
     s16 i;
@@ -175,8 +175,8 @@ void Audio_ComplexFft(f32 *data, s32 count, s32 sign, f32 *cosines, f32 *sines, 
     }
 }
 
-/* Decoder stage helpers. Their out-of-line copies are func_802BFF30_de, func_802BFF90_de,
-   Audio_TransformFft and func_802C0044_de in the next unit (each with its own literal pool). */
+/* Decoder stage helpers. Their out-of-line copies are Audio_ReorderTransformSamples, Audio_RotateComplexSamples,
+   Audio_TransformFft and Audio_QuantizeSampleS16 in the next unit (each with its own literal pool). */
 static inline void interleaveMirrored(f32 *dst, f32 *src) {
     s16 i = 0;
     do {
@@ -224,12 +224,12 @@ void Audio_DecodeTransformBlock(s16 *out, s16 *input) {
     s16 i;
     s16 *initialized = &D_800D54C0_de;
     if (*initialized == 0) {
-        func_802BF514_de();
-        D_8014B830 = func_802BF67C_de(128);
+        Audio_InitTransformTables();
+        D_8014B830 = Audio_InitFftTables(128);
         *initialized = 1;
     }
     scale = 23170.474609375f; /* 32768 / sqrt(2) */
-    func_802BF804_de(unpacked, input + 12);
+    Audio_DequantizeTransformCoefficients(unpacked, input + 12);
     interleaveMirrored(data, unpacked);
     rotatePairs(data, D_801510C0, D_801512C0);
     transformFft(data, D_8014B830, -1);

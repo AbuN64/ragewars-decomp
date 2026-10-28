@@ -14,7 +14,7 @@ extern char D_800C3A64_de;
 extern char D_8011D8D0;
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
-extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
+extern s32 Cache_RequestPairedResource(s32, s32, void *, s32, s32, void *, void *, void *, s32);
 extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Cache_UnlockResource(s32, s32);
@@ -31,7 +31,7 @@ static inline void spawn(LevelActor *actor) {
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
-void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params) {
+void Gobjinst_DrawTeamMaskedModel(LevelActor *actor, s32 unusedShadowContext, Lookup *params) {
     EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
@@ -46,7 +46,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
     if (params->unk0 == 0) {
         return;
     }
-    resource = func_80251F6C_de(0, actor->flags2E4 | D_800CD3F0, params->value, 0, 0,
+    resource = Cache_RequestPairedResource(0, actor->flags2E4 | D_800CD3F0, params->value, 0, 0,
                              actor, &D_0024D108, &D_800C3A64_de, 1);
     if (resource == 0) {
         return;

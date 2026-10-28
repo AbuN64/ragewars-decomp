@@ -134,8 +134,8 @@ typedef struct AiController {
     u8 padC0[0xF0];
     CVector3 home; /* 0x1B0 */
     u8 pad1BC[0x14];
-    f32 reach[8]; /* 0x1D0: free distance along each wheel ray (Nav_MeasureWheelReach) */
-    f32 clearance[8]; /* 0x1F0: ground found along each wheel ray (Nav_MeasureWheelClearance) */
+    f32 reach[8]; /* 0x1D0: free distance along each wheel ray (Wheel_MeasureWheelReach) */
+    f32 clearance[8]; /* 0x1F0: ground found along each wheel ray (Wheel_MeasureWheelClearance) */
     f32 length; /* 0x210: wheel ray length */
     AiBehaviourTable * table; /* 0x214 */
     AiBehaviourEntry * behaviour; /* 0x218 */
@@ -175,5 +175,5 @@ typedef struct AiController {
 extern void OnScreen_SetFirstBarTarget(char *, s32);
 
 
-extern void *Player_FindPlayerWithMarker(char *);
+extern void *Playerai_FindPlayerWithMarker(char *);
 #endif

@@ -20,7 +20,7 @@ s32 func_802BD400_de(const char *);
 extern struct Node80253610 *D_8014AECC;
 /* Releases the previous texture viewer entry, loads entry D_8014AEB0.selectionIndex from the resident pack,
    wraps the frame selection into its texture/palette tables and prints the "tex N frm F of C" title. */
-void TEngine_LoadSelectedTexture(void) {
+void Tengine_LoadSelectedTexture(void) {
     u32 size;
     u32 key;
     struct Node80253610 *resource;
@@ -99,7 +99,7 @@ struct SelectionRecAt8;
 
 
 
-void TEngine_UpdateArtsendTexturePreview(void) {
+void Tengine_UpdateArtsendTexturePreview(void) {
     f32 scale;
     s32 temp_a0;
     s32 regpart_temp_a0; 
@@ -238,7 +238,7 @@ void TEngine_UpdateArtsendTexturePreview(void) {
         }
         D_8014AEB0.frameCount += 1;
         if (D_8014AEB0.titleWasShown != 0) {
-            TEngine_LoadSelectedTexture();
+            Tengine_LoadSelectedTexture();
             D_8014AEB0.titleWasShown = 0;
         }
         OnScreen_SetupTextRendering();

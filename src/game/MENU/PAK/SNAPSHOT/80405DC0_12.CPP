@@ -30,9 +30,9 @@ extern s32 D_8015375C;
 
 extern s32 D_800E28BC;
 
-extern SharedPlayer *Player_FindPlayerByController(void *profiles, PakMenuSlot *slot);
+extern SharedPlayer *Playerai_FindPlayerByController(void *profiles, PakMenuSlot *slot);
 extern void func_80253908_de(s32 heap);
-extern void Pak_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
+extern void Menu_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
 static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     if (D_8015375C != 0) {
@@ -42,7 +42,7 @@ static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     }
 }
 
-s32 Pak_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
+s32 Snapshot_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
     s32 channel;
     char *label;
     s8 port;
@@ -69,14 +69,14 @@ s32 Pak_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
         D_80146D60 = 0;
         D_8014AD9C = 1;
         D_80142CAC = 0;
-        Pak_OpenDialog(D_8014561C, D_0044E4F8, 0, (char *)menu->slot, 0);
+        Menu_OpenDialog(D_8014561C, D_0044E4F8, 0, (char *)menu->slot, 0);
         return 1;
     }
     if (D_8014D4EC_de != 0) {
         if (D_80153760 != 0) {
             D_80153784 = 1;
-            target = Player_FindPlayerByController(D_80145040, menu->slot);
-            Pak_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, D_0044FB2C, target, target->views5E8.view698_38.title, channel);
+            target = Playerai_FindPlayerByController(D_80145040, menu->slot);
+            Menu_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, D_0044FB2C, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (D_8014D4C0_de != 0) {
@@ -100,14 +100,14 @@ s32 Pak_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
                 label = D_00450C5C_de;
                 break;
             }
-            Pak_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, label, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, label, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
     } else {
-        target = Player_FindPlayerByController(D_80145040, menu->slot);
+        target = Playerai_FindPlayerByController(D_80145040, menu->slot);
         if (D_80153760 != 0) {
             D_80153784 = 1;
-            Pak_OpenDialog(D_80145040 + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);
+            Menu_OpenDialog(D_80145040 + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (D_8014D4C0_de != 0) {

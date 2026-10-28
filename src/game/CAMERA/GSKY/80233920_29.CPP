@@ -108,7 +108,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     return message;
 }
 
-void Sky_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
+void Gsky_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
     RaceViewportState *state = (void *)obj;
     CShake *node = state->freeEffects.head;
@@ -124,7 +124,7 @@ void Sky_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVec
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
-void *Sky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
+void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
     CVector3 position;
     GameplayCamera *node;
     void *bestNode;
@@ -157,7 +157,7 @@ void *Sky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) 
     return bestNode;
 }
 
-f32 func_80239678_de(Race *viewOwner, void *targetPosition) {
+f32 Gsky_GetMeanViewDistance(Race *viewOwner, void *targetPosition) {
     CVector3 position;
     f32 sum;
     RacerViewport *node;
@@ -187,7 +187,7 @@ f32 func_80239678_de(Race *viewOwner, void *targetPosition) {
     return sum / (f32)divisor;
 }
 
-void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
+void *Gsky_PostFlaggedScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
     struct CCameraText_t *message = Camera_PostScreenMessage(owner, pool, text);
     if (message != 0) {
         message->pad20 = 1;

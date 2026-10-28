@@ -9,20 +9,20 @@
 #include "TYPES.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Frontend_UpdateJoinRequestDisplay);
+INCLUDE_ASM("ovl_80400000", Join_UpdateJoinRequestDisplay);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 /* Fuzzy draft in EU and EU-X: their body differs (134 words). */
 extern void *D_800E39C0;
-extern struct TextEntry D_800E381C[][17];
+extern struct TextEntry g_rewardItemTiers[][17];
 extern u8 *XPlus_CopyString(u8 *, u8 *);
 #if defined(VERSION_DE)
 enum { DRAW_ICON=903, DRAW_NAME=905, DRAW_VARIANT=904, DRAW_FIRST=906, DRAW_SECOND=907 };
 #else
 enum { DRAW_ICON=909, DRAW_NAME=911, DRAW_VARIANT=910, DRAW_FIRST=912, DRAW_SECOND=913 };
 #endif
-void Frontend_UpdateJoinRequestDisplay(s32 index) {
+void Join_UpdateJoinRequestDisplay(s32 index) {
     void *window;
     RequestDrawScreen *screen;
     MenuWidget *widget;
@@ -39,15 +39,15 @@ void Frontend_UpdateJoinRequestDisplay(s32 index) {
         widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_ICON);
         widget = widgetObject;
         widget->alpha = 125;
-        model = Frontend_FindKeyIndex(D_80153F80[index].id);
+        model = Key_FindKeyIndex(D_80153F80[index].id);
         widget->value = D_800E3A58[model].portrait;
         widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_NAME);
         widget = widgetObject;
         widget->alpha = 125;
-        model = Frontend_FindJoinModelIndex(D_80153F80[index].variant, D_80153F80[index].id);
+        model = Join_FindJoinModelIndex(D_80153F80[index].variant, D_80153F80[index].id);
     name = D_80153F80[index].name;
         XPlus_CopyString((u8 *)name,
-          (u8 *)*D_800E381C[D_80153F80[index].variant][model].text
+          (u8 *)*g_rewardItemTiers[D_80153F80[index].variant][model].text
         );
         widget->text = name;
         widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_VARIANT);
@@ -70,7 +70,7 @@ void Frontend_UpdateJoinRequestDisplay(s32 index) {
 
 /* Seats the three join requests in free player settings slots, searching down from slot 7. */
 extern u8 *XPlus_CopyString(u8 *, u8 *);
-void Frontend_SeatJoinRequests(void) {
+void Join_SeatJoinRequests(void) {
     Shared_PlayerSettingsRecord *player;
     s32 slot = 7;
     s32 i = 0;

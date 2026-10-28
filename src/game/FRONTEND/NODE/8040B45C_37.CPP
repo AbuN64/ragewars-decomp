@@ -8,7 +8,7 @@
 
 /* Advances the deferred-release timers: for each of the g_frontendResourceTextureCount slots (all reset first when mode
    is 1) whose owner is not -1, counts the delay down, and once it has run out releases the slot's
-   loaded resource data through Gfx_ReleaseImage, clearing its loaded flag, and clears the owner. */
+   loaded resource data through Image_ReleaseImage, clearing its loaded flag, and clears the owner. */
 
 
 
@@ -19,7 +19,7 @@
 extern PoolRecAtC g_frontendResourceTextureCount;
 
 
-void Frontend_UpdateImageReleaseTimers(s32 mode) {
+void Node_UpdateImageReleaseTimers(s32 mode) {
     s32 i;
 
     for (i = 0; i < g_frontendResourceTextureCount.count; i++) {
@@ -32,7 +32,7 @@ void Frontend_UpdateImageReleaseTimers(s32 mode) {
                 g_frontendResourceTextureCount.timers[i].delay--;
             } else {
                 if (g_frontendResourceTextureCount.resources[i].flags & 1) {
-                    Gfx_ReleaseImage((struct OwnedImage *)g_frontendResourceTextureCount.resources[i].data);
+                    Image_ReleaseImage((struct OwnedImage *)g_frontendResourceTextureCount.resources[i].data);
                     g_frontendResourceTextureCount.resources[i].flags &= ~1;
                 }
                 g_frontendResourceTextureCount.timers[i].owner = 0;
@@ -98,11 +98,11 @@ extern void Frontend_ClearOwnedImage(Texture *texture);
 extern void Frontend_ReleaseOwnedImageBuffers(Texture *texture);
 extern void Frontend_ConfigureOwnedImage(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,
                           s32 bytes, void *offset, s32 zero2, s32 pitch, s32 *list, s32 depth);
-extern void Gfx_SwizzleImage(Texture *texture);
+extern void Image_SwizzleImage(Texture *texture);
 extern void Smp_CopyAndSwizzleImage(Texture *into, Texture *from);
 extern void Smp_SetImageStateWord(s32 flag);
 
-void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
+void *Node_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     s32 sizes[0x60];
     Texture scratch;
     Texture *texture;
@@ -195,7 +195,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
                 Frontend_ConfigureOwnedImage(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
                               g_frontendResourceState.tables.banks[group].offsets[i], 0, image->depth * 2,
                               g_frontendResourceState.tables.banks[group].listsByPass[pass], image->depth);
-                Gfx_SwizzleImage(&scratch);
+                Image_SwizzleImage(&scratch);
                 Frontend_ReleaseOwnedImageBuffers(&scratch);
             }
             i += 1;

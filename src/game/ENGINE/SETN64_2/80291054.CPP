@@ -11,9 +11,9 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 Player_GetFirstPlayer(void *);
+extern s32 Playerai_GetFirstPlayer(void *);
 
-void func_80291074_de(void *object) {
+void CCredits_UpdateScroll(void *object) {
     f32 time;
     f32 height;
     s32 line;
@@ -21,7 +21,7 @@ void func_80291074_de(void *object) {
         time = D_80142CB4 - D_800D2988;
         D_80142CB4 = time;
         if (time <= 0.0f) {
-            Player_GetFirstPlayer(&D_80145040);
+            Playerai_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
                     SetN64_SelectSpawnAfterCredits(object, 0x7CF);
@@ -60,10 +60,10 @@ advance:
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern int Player_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *arg0);
 
 
-void func_80291074_de(void *arg0) {
+void CCredits_UpdateScroll(void *arg0) {
     f32 temp_f0;
     f32 temp_f1;
     s32 temp_v1;
@@ -72,7 +72,7 @@ void func_80291074_de(void *arg0) {
         temp_f0 = D_80142CB4 - D_800D2988;
         D_80142CB4 = temp_f0;
         if (temp_f0 <= 0.0f) {
-            Player_GetFirstPlayer(&D_80145040);
+            Playerai_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
                     SetN64_SelectSpawnAfterCredits(arg0, 0x7CF);

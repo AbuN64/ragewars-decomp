@@ -110,7 +110,7 @@ void Control_PollControllerPaks(void) {
     if (D_800CBC10 != 0) {
         Rumble_RecycleFinishedEffectNodes(&D_8010EC90);
         if ((locked = osRecvMesg(&D_8010FBC0, 0, 0) == 0)) {
-            D_800CBC1C = func_802BAD80_de(0);
+            D_800CBC1C = Audio_GetThreadIdentifier(0);
         }
         if (locked) {
             Control_ReadControllerStates();

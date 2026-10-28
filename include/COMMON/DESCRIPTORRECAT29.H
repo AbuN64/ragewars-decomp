@@ -29,7 +29,7 @@ struct Host {
 
 struct CROMSkyLayer;
 struct CROMSkyLayer {
-    s16 texture; /* +0: Sky_UpdateSceneEffects passes it to TextLoad_LocateTextureResource */
+    s16 texture; /* +0: Sky_UpdateSceneEffects passes it to Textload_LocateTextureResource */
     u8 red, green, blue;
     u8 envRed, envGreen, envBlue;
     f32 spinRate;
@@ -138,7 +138,7 @@ struct Scene;
 
 struct IntegerState8A4;
 
-extern void TextLoad_ReadTextureAnimationInfo(s32 **, void *);
+extern void Textload_ReadTextureAnimationInfo(s32 **, void *);
 
 
 extern void D_0023B938();

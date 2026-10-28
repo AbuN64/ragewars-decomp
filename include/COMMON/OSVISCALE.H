@@ -143,11 +143,11 @@ struct __OSViContext_func_802BA910_de {
     __OSViScale y;
 };
 
-struct State_func_802BA700_de;
-typedef struct State_func_802BA700_de State_func_802BA700_de;
+struct StateosViSetSpecialFeatures;
+typedef struct StateosViSetSpecialFeatures StateosViSetSpecialFeatures;
 
-struct State_func_802BA700_de;
-struct State_func_802BA700_de {
+struct StateosViSetSpecialFeatures;
+struct StateosViSetSpecialFeatures {
     u16 status;
     u16 pad2;
     u32 word4;

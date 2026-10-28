@@ -17,7 +17,7 @@ s32 osContStartReadData(s32 completionQueue) {
     s32 result;
     u8 *p;
 
-    func_802B9C14_de();
+    __osSiGetAccess();
     p = &D_8014D4B0;
     if (*p != 1) {
         __osPackReadData();
@@ -26,7 +26,7 @@ s32 osContStartReadData(s32 completionQueue) {
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     *p = 1;
-    func_802B9C80_de();
+    __osSiRelAccess();
     return result;
 }
 
@@ -89,7 +89,7 @@ s32 osContReset(s32 arg0, s32 controllerStatus) {
     u8 *state;
     s32 sentinel;
 
-    func_802B9C14_de();
+    __osSiGetAccess();
     state = &D_8014D4B0;
     sentinel = 0xFF;
     if (*state != sentinel) {
@@ -109,13 +109,13 @@ s32 osContReset(s32 arg0, s32 controllerStatus) {
     result = __osSiRawStartDma(0, &D_8014D470);
     osRecvMesg(arg0, 0, 1);
     __osContGetInitData(&output, controllerStatus);
-    func_802B9C80_de();
+    __osSiRelAccess();
     return result;
 }
 
 
 
-extern void func_802BB6C0_de(void *arg0, u64 arg1, u64 arg2, void *arg3, void *arg4);
+extern void osSetTimer(void *arg0, u64 arg1, u64 arg2, void *arg3, void *arg4);
 
 
 void __osPackResetData(void) {
@@ -136,10 +136,10 @@ void __osPackResetData(void) {
     *var_v1 = 0xFE;
 }
 
-s32 osContInit(s32 arg0, s32 *arg1, s32 arg2) {
-    s32 sp20[8];
+s32 osContInit(s32 arg0, s32 *valid, s32 arg2) {
+    s32 node[8];
     s32 sp40[6];
-    s32 sp58[2];
+    s32 message[2];
     u64 value;
     s32 result;
     s32 *initialized = &D_800D4340;
@@ -148,21 +148,21 @@ s32 osContInit(s32 arg0, s32 *arg1, s32 arg2) {
         return 0;
     }
     *initialized = 1;
-    value = func_802BADC0_de();
+    value = Audio_ReadSystemTime();
     if (value <= 0x0165A0BBULL) {
-        osCreateMesgQueue(sp40, (s32)sp58, 1);
-        func_802BB6C0_de(sp20, 0x0165A0BCULL - value, 0, sp40, sp58);
-        osRecvMesg(sp40, (s32)sp58, 1);
+        osCreateMesgQueue(sp40, (s32)message, 1);
+        osSetTimer(node, 0x0165A0BCULL - value, 0, sp40, message);
+        osRecvMesg(sp40, (s32)message, 1);
     }
     D_8014D46C[0] = 4;
     __osPackRequestData(0);
     __osSiRawStartDma(1, &D_8014D470);
-    osRecvMesg(arg0, (s32)sp58, 1);
+    osRecvMesg(arg0, (s32)message, 1);
     result = __osSiRawStartDma(0, &D_8014D470);
-    osRecvMesg(arg0, (s32)sp58, 1);
-    __osContGetInitData(arg1, arg2);
+    osRecvMesg(arg0, (s32)message, 1);
+    __osContGetInitData(valid, arg2);
     D_8014D4B0 = 0;
-    func_802B9BC0_de();
+    __osSiCreateAccessQueue();
     osCreateMesgQueue(&D_801471C0, (s32)&D_801471D8, 1);
     return result;
 }

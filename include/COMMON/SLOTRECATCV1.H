@@ -30,7 +30,7 @@ struct PoolFrontendReleaseChunkImages {
 };
 
 
-extern void Frontend_SkipResourceOperation(void);
+extern void Node_SkipResourceOperation(void);
 
 struct EntryRecAt18V1;
 typedef struct EntryRecAt18V1 EntryRecAt18V1;
@@ -90,7 +90,7 @@ struct QuadRecAt2C {
     s32 values[4];
 };
 
-extern s32 Frontend_GetFirstResourceScreen(void);
+extern s32 Node_GetFirstResourceScreen(void);
 
 struct PoolFrontendReleaseChunkImages;
 typedef struct PoolFrontendReleaseChunkImages PoolFrontendReleaseChunkImages;
@@ -105,7 +105,7 @@ typedef struct SlotRecAtCV1 SlotRecAtCV1;
 
 
 
-extern s16 Frontend_GetTextureEntryHeight(s32 index);
+extern s16 Node_GetTextureEntryHeight(s32 index);
 
 struct EntryCode8040B45C;
 struct SlotRecAtCV2;
@@ -149,7 +149,7 @@ struct UiWidget {
     s32 extra;
 };
 
-extern s16 Frontend_GetResourceScreenCount(void);
+extern s16 Node_GetResourceScreenCount(void);
 
 struct FileHeader;
 typedef struct FileHeader FileHeader;
@@ -186,7 +186,7 @@ struct Pair2C {
 
 struct Pair2C;
 
-extern s16 Frontend_GetTextureEntryWidth(s32 index);
+extern s16 Node_GetTextureEntryWidth(s32 index);
 
 
 
@@ -239,7 +239,7 @@ typedef struct FileState FileState;
 
 struct QuadRecAt2C;
 
-extern s32 Frontend_GetTextureChromaKey(s32 index);
+extern s32 Node_GetTextureChromaKey(s32 index);
 
 struct ChunkFrontendEvictExpiredImages;
 struct SlotRecAtCV2;

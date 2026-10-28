@@ -31,27 +31,27 @@ void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, 
     SetN64_SpawnModelEffect(worldAddress + 0x11778, 0, modelId, zero, position, ownerId, lifetime);
 }
 
-void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *arg1) {
+void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *position) {
     f32 lower;
     f32 upper;
     f32 value;
 
     if (triangle != 0 &&
-        Region_IsPointInTriangleXZ(triangle, arg1->x,
-                          arg1->z) != 0) {
+        Region_IsPointInTriangleXZ(triangle, position->x,
+                          position->z) != 0) {
         if (!(((Triangle *)triangle)->flags & 0x40)) {
             return triangle;
         }
         lower = Region_GetPolygonHeight(triangle,
-            arg1->x, arg1->z);
+            position->x, position->z);
         upper = GraphU64_GetTrianglePlaneHeight(triangle,
-            arg1->x, arg1->z);
-        value = arg1->y;
+            position->x, position->z);
+        value = position->y;
         if (lower <= value && value <= upper) {
             return triangle;
         }
     }
-    return Scene_FindFloorPolygon(&g_world, arg1);
+    return Scene_FindFloorPolygon(&g_world, position);
 }
 
 /* Searches the counted pointer list at offset 0x1B620 of a world record for the first entry whose definition id at 0x18->0xC equals the given id, returning it or null. */
@@ -75,8 +75,8 @@ EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
     return found;
 }
 
-void Scene_LocateTextureResource(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
-    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, arg3);
+void Scene_LocateTextureResource(void *arg0, s32 arg1, s32 *arg2, s32 *sectionSizeOut) {
+    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, sectionSizeOut);
 }
 
 s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
@@ -91,27 +91,27 @@ s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
 s32 Scene_FindAlternateTriggerRange(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
     s32 sp18;
     s32 sp1C;
-    s32 temp_v0_2;
+    s32 matchCount;
     s32 field_cc;
     s32 field_c4;
 
-    temp_v0_2 = func_80265550_de(field_cc, field_c4, *arg1,
+    matchCount = Defs_FindSortedGroupRange(field_cc, field_c4, *arg1,
         (field_cc = (s32)((Shared_World *)world)->alternateRecordIndex,
          field_c4 = ((Shared_World *)world)->alternateRecordCount, &sp18), &sp1C);
-    if (temp_v0_2 != 0) {
+    if (matchCount != 0) {
         *arg2 = (s32)((Shared_World *)world)->alternateRecordArray + (sp18 * 0x14);
-        temp_v0_2 = (sp1C - sp18) + 1;
-        *arg3 = temp_v0_2;
+        matchCount = (sp1C - sp18) + 1;
+        *arg3 = matchCount;
     } else {
         *arg2 = 0;
         *arg3 = 0;
     }
-    return temp_v0_2;
+    return matchCount;
 }
 
 void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
     s32 sp18;
-    s32 sp1C;
+    s32 last;
     s32 index;
     u32 first;
     s32 lastOffset;
@@ -136,12 +136,12 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *
         *arg3 = 0;
         return;
     }
-    temp_v0 = func_80265550_de(field_c8, field_c0, index,
+    temp_v0 = Defs_FindSortedGroupRange(field_c8, field_c0, index,
         (field_c8 = (s32)((Shared_World *)world)->recordIndex,
-         field_c0 = ((Shared_World *)world)->recordCount, &sp18), &sp1C);
+         field_c0 = ((Shared_World *)world)->recordCount, &sp18), &last);
     if (temp_v0 != 0) {
         *arg2 = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
-        *arg3 = (sp1C - sp18) + 1;
+        *arg3 = (last - sp18) + 1;
     } else {
         *arg2 = 0;
         *arg3 = 0;
@@ -149,34 +149,34 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *
 }
 
 void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
-    s32 var_s0;
-    s32 var_s0_2;
+    s32 primaryRemaining;
+    s32 alternateRemaining;
     Record14 *trigger;
-    Record14 *var_s1_2;
+    Record14 *alternateTrigger;
 
-    var_s0 = world->recordCount;
+    primaryRemaining = world->recordCount;
     trigger = world->recordArray;
-    var_s0 -= 1;
-    if (var_s0 != -1) {
+    primaryRemaining -= 1;
+    if (primaryRemaining != -1) {
         do {
             if (trigger->kind == arg1) {
                 Link_ActivateTrigger(trigger);
             }
-            var_s0 -= 1;
+            primaryRemaining -= 1;
             trigger = trigger + 1;
-        } while (var_s0 != -1);
+        } while (primaryRemaining != -1);
     }
-    var_s1_2 = world->alternateRecordArray;
-    var_s0_2 = world->alternateRecordCount;
-    var_s0_2 -= 1;
-    if (var_s0_2 != -1) {
+    alternateTrigger = world->alternateRecordArray;
+    alternateRemaining = world->alternateRecordCount;
+    alternateRemaining -= 1;
+    if (alternateRemaining != -1) {
         do {
-            if (var_s1_2->kind == arg1) {
-                Link_ActivateTrigger(var_s1_2);
+            if (alternateTrigger->kind == arg1) {
+                Link_ActivateTrigger(alternateTrigger);
             }
-            var_s0_2 -= 1;
-            var_s1_2 = var_s1_2 + 1;
-        } while (var_s0_2 != -1);
+            alternateRemaining -= 1;
+            alternateTrigger = alternateTrigger + 1;
+        } while (alternateRemaining != -1);
     }
 }
 

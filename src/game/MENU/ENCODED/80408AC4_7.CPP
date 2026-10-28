@@ -10,9 +10,9 @@
 extern Shared_Entry D_800E5CA0;
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern func_802077F4_S2 *Pak_GetWidgetStyle(void *, s32);
+extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
 
-extern void Pak_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, MenuStyle *);
+extern void Menu_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, MenuStyle *);
 
 /* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
@@ -29,15 +29,15 @@ s32 func_802BD400_de(u8 *);
 
 extern u8 D_800E5CAC[0x64];
 
-/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Pak_DrawLocalizedMenuItemText. */
-void Menu_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
+/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
+void Encoded_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
     s32 x;
     unsigned int bits;
 
     if (D_800E5CA0.timer <= (6.0f)) {
-        width = Pak_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
+        width = Menu_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
         x = (f32)item->x + (f32)D_800E5CA0.value * width;
         D_800E1E20 = -1;
         alpha = style->alpha * (style->fade * (128.0f));
@@ -45,10 +45,10 @@ void Menu_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, Menu
         OnScreen_DrawBevelBox(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
                       (u8)(bits = !((2147483648.0f) <= alpha) ? (s32)alpha : (bits = (s32)(alpha - (2147483648.0f))) | 0x80000000));
     }
-    Pak_DrawLocalizedMenuItemText(menu, item, third, style);
+    Menu_DrawLocalizedMenuItemText(menu, item, third, style);
 }
 
-s32 Menu_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {
+s32 Encoded_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {
     f32 t;
 
     t = D_800E5CA0.timer + D_800D2988;
@@ -76,7 +76,7 @@ s32 func_8043CC08_de(void) {
     return 0;
 }
 
-s32 Menu_InsertTextEntryCharacter(ObjRecAt14V2 *arg0) {
+s32 Encoded_InsertTextEntryCharacter(ObjRecAt14V2 *arg0) {
     s32 index;
     s32 count;
 
@@ -105,7 +105,7 @@ s32 Menu_InsertTextEntryCharacter(ObjRecAt14V2 *arg0) {
     return 0;
 }
 
-s32 Menu_DeletePreviousTextEntryCharacter(void) {
+s32 Encoded_DeletePreviousTextEntryCharacter(void) {
     s32 index;
     s32 next;
 
@@ -130,7 +130,7 @@ s32 Menu_DeletePreviousTextEntryCharacter(void) {
     return 0;
 }
 
-s32 Menu_CheckEncodedText(u8 *input) {
+s32 Encoded_CheckEncodedText(u8 *input) {
     s32 index = 0;
 
     if (func_802BD400_de(input) != func_802BD400_de(D_800E5CAC)) {

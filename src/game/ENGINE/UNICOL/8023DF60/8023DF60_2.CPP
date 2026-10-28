@@ -6,10 +6,10 @@
 #include "COMMON/BALLISTICPARAMS.H"
 
 /* Tests a ray against a vertical cylinder: projects the center onto the ray's horizontal direction from 0x44,
- * finds the entry parameter from the radius, accepts it under the same rules as func_8023E8D4_de, places the
- * hit with GraphU64_InterpolateVector and optionally rejects hits above the top or below the bottom; when kept, the
+ * finds the entry parameter from the radius, accepts it under the same rules as CCollision_TestSegmentPolygon, places the
+ * hit with Graphu64_InterpolateVector and optionally rejects hits above the top or below the bottom; when kept, the
  * polygon record takes the hit as its point with a horizontal normal away from the center and becomes the
- * ray's nearest hit. Adapted from func_8023E8D4_de with its static acceptance helper.
+ * ray's nearest hit. Adapted from CCollision_TestSegmentPolygon with its static acceptance helper.
  */
 
 
@@ -21,10 +21,10 @@
 extern f32 D_800C3690_de[];
 
 
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 
-static inline s32 accepts(Ray_func_8023E178_de *ray, Polygon_func_8023E178_de *poly) {
+static inline s32 accepts(RayCCollisionTestRayCylinder *ray, PolygonCCollisionTestRayCylinder *poly) {
     if (poly->t <= 0.0f) {
         if (poly->kind == 7) {
             return 0;
@@ -44,7 +44,7 @@ static inline s32 accepts(Ray_func_8023E178_de *ray, Polygon_func_8023E178_de *p
 
 extern CCollisionResults *D_80103FCC;
 
-s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f32 top, f32 bottom, s32 clip, Polygon_func_8023E178_de *poly, s32 keep) {
+s32 CCollision_TestRayCylinder(RayCCollisionTestRayCylinder *ray, CVector3 *center, f32 radius, f32 top, f32 bottom, s32 clip, PolygonCCollisionTestRayCylinder *poly, s32 keep) {
     CVector3 delta;
     CVector3 dir;
     CVector3 perp;
@@ -74,7 +74,7 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     }
     poly->t = (along - Math_Sqrtf(disc)) * inv;
     if (accepts(ray, poly) != 0) {
-        GraphU64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
+        Graphu64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
         if (clip != 0 && (poly->hit.y > top || poly->hit.y < bottom)) {
             return 0;
         }
@@ -91,7 +91,7 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     return 0;
 }
 
-void func_8023E45C_de(Input *contactInput) {
+void CCollision_StoreContactResult(Input *contactInput) {
     {
         s32 type = contactInput->type;
         s32 sw_type_value = type - 1;
@@ -169,7 +169,7 @@ void func_8023E45C_de(Input *contactInput) {
 
 
 
-void func_8023E690_de(struct Range *range, f32 low, s32 count, f32 high, f32 extra) {
+void CCollision_SetSweepRange(struct Range *range, f32 low, s32 count, f32 high, f32 extra) {
     f32 larger;
 
     range->count = count;
@@ -183,7 +183,7 @@ void func_8023E690_de(struct Range *range, f32 low, s32 count, f32 high, f32 ext
     range->limit = larger + D_800C87B4;
 }
 
-void func_8023E6D0_de(void *actorMotion, float extent) {
+void CCollision_SetUniformSweepExtent(void *actorMotion, float extent) {
     ActorMotion *motion = actorMotion;
     motion->bottom = 0.0f;
     motion->field08 = extent;

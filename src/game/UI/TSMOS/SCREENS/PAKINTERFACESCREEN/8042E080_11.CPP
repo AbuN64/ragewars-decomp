@@ -63,7 +63,7 @@ char * Frontend_GetStringByIndex(s32);
 void SmpOverlay_SetSlotValue(void *, s32, s32);
 s32 SmpOverlay_GetSlotValue(void *, s32);
 void SmpOverlay_ShowSlotNode(void *, s32, void *);
-void Frontend_ReplaceTextOccurrences(char *, char *, char *);
+void Random_ReplaceTextOccurrences(char *, char *, char *);
 void PAKInterface_BuildProfileSlotList(s32);
 void PAKInterface_RelabelSlotRows(s32);
 void PAKInterface_LoadNoteList(s32);
@@ -119,7 +119,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
     s32 selectionOrLabel; 
     s32 playerLinkOffset;
 
-    s8 *temp_s1;
+    s8 *replacement;
     s8 *panelTemplate;
     u16 var_a1;
     u16 var_a1_2;
@@ -163,7 +163,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
     if (previousPanel != 0) {
         Frontend_SetWidgetFlag08((func_8041F2A0_Item *) previousPanel, 0);
     }
-    Frontend_SetWidgetFlag40(SmpOverlay_GetSlotValue(D_800E54A4->root, playerIndex), 0);
+    Widget_SetWidgetFlag40(SmpOverlay_GetSlotValue(D_800E54A4->root, playerIndex), 0);
     /* the published B6E8 takes the controller handle as a plain scalar */
     SmpOverlay_ShowSlotById((s32) D_800E54A4->field0, playerIndex, SETUP_LABEL_ID);
     panelState = D_800E54A4->players[playerIndex].state;
@@ -180,36 +180,36 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
         switch (screenPhase) {                        /* switch 2 */
         case 1:                                     /* switch 2 */
         case 7:                                     /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_17_ID);
+            replacement = Frontend_GetStringByIndex(MODE_17_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 2:                                     /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_2_ID);
+            replacement = Frontend_GetStringByIndex(MODE_2_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 3:                                     /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_3_ID);
+            replacement = Frontend_GetStringByIndex(MODE_3_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 4:                                     /* switch 2 */
         case 6:                                     /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_46_ID);
+            replacement = Frontend_GetStringByIndex(MODE_46_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 5:                                     /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_5_ID);
+            replacement = Frontend_GetStringByIndex(MODE_5_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 0:                                     /* switch 2 */
         default:                                    /* switch 2 */
-            temp_s1 = Frontend_GetStringByIndex(MODE_DEFAULT_ID);
+            replacement = Frontend_GetStringByIndex(MODE_DEFAULT_ID);
             panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         }
 
 
         XPlus_CopyString((&D_800E54A4->players[playerIndex])->nameText, panelTemplate);
-        Frontend_ReplaceTextOccurrences((&D_800E54A4->players[playerIndex])->nameText, g_modeToken, temp_s1);
+        Random_ReplaceTextOccurrences((&D_800E54A4->players[playerIndex])->nameText, g_modeToken, replacement);
         playerLinkOffset = playerIndex * 8;
         if (D_800E54A4->phase == 6) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, MODE_HIDE_ID), 0);

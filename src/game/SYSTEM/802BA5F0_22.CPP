@@ -23,8 +23,8 @@ extern OSMesg D_80149AA0[5];
 
 
 extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
-extern s32 func_802BADA0_de(OSThread *t);
-extern void func_802BB5F0_de(OSThread *t, s32 pri);
+extern s32 osGetThreadPri(OSThread *t);
+extern void Scene_SetThreadPriority(OSThread *t, s32 pri);
 
 extern void osStartThread(OSThread *t);
 
@@ -37,7 +37,7 @@ void func_802BA350_de(s32 pri)
     if (D_800D4420.active) {
         return;
     }
-    func_802BB9F8_de();
+    Util_InitializeTimerServices();
     osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
     D_80149AC0.hdr.type = 13;
     D_80149AC0.hdr.pri = 0;
@@ -48,11 +48,11 @@ void func_802BA350_de(s32 pri)
     osSetEventMesg(7, &D_80149A80, &D_80149AC0);
     osSetEventMesg(3, &D_80149A80, &D_80149AE0);
     oldPri = -1;
-    myPri = func_802BADA0_de(0);
+    myPri = osGetThreadPri(0);
 
     if (myPri < pri) {
         oldPri = myPri;
-        func_802BB5F0_de(0, pri);
+        Scene_SetThreadPriority(0, pri);
     }
 
     savedMask = __osDisableInt();
@@ -69,7 +69,7 @@ void func_802BA350_de(s32 pri)
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
-        func_802BB5F0_de(0, oldPri);
+        Scene_SetThreadPriority(0, oldPri);
     }
 }
 #endif

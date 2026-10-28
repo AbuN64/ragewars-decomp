@@ -40,7 +40,7 @@ extern void GraphU64_ScaleVector(void *, void *, f32);
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Ovlgame_ReleaseObjectHandles(s32 arg0);
+extern void Player_ReleaseObjectHandles(s32 arg0);
 
 void func_8022CF38_de(void *player, LevelActor *actor) {
     f32 value;
@@ -56,7 +56,7 @@ void func_8022CF38_de(void *player, LevelActor *actor) {
     }
 
     ((Shared_ActorView *)player)->collisionState = 0;
-    func_8023913C_de(((Shared_ActorView *)player)->message);
+    Gsky_ResetHeadBob(((Shared_ActorView *)player)->message);
     func_80218464_de(((Shared_func_80227014_S2 *)player)->unk938);
 
     if (actor->motionState & 0x8000) {
@@ -169,7 +169,7 @@ void func_8022D214_de(void *widget) {
     player->stun = 0;
     player->marker.time = 0.0f;
     actor->flags |= 0x01000000;
-    Ovlgame_ReleaseObjectHandles((s32) widget);
+    Player_ReleaseObjectHandles((s32) widget);
 }
 
 void func_8022D254_de(void) {

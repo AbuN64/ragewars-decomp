@@ -9,7 +9,7 @@
 #include "ACHIEVE/80424E30_3.H"
 
 extern s32 Defs_TestBit(void *, s32);
-void Frontend_SelectSuggestedTrial(void) {
+void Results_SelectSuggestedTrial(void) {
     CGameStatus *state;
     Shared_Game *config;
     Preset *preset;

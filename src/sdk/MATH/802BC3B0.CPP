@@ -8,7 +8,7 @@
 
  /* 0.5, followed by 2^31 */
 
-s32 func_802B72E0_de(u32 frequency)
+s32 osAiSetFrequency(u32 frequency)
 {
     register unsigned int dacRate;
     register unsigned char bitRate;

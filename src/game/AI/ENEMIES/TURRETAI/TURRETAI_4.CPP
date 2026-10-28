@@ -16,7 +16,7 @@ extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
 extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
-s32 AnimPool_ReleaseSceneEffect(void *);
+s32 Animpool_ReleaseSceneEffect(void *);
 
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
@@ -54,7 +54,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
 
 void Turret_Code_DEATH(LevelActor *actor, ActorMotionState *state) {
     if ((state->actionPending != 0) && (actor->flags & 0x80000)) {
-        AnimPool_ReleaseSceneEffect(actor);
+        Animpool_ReleaseSceneEffect(actor);
     }
 }
 

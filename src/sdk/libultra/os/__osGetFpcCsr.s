@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_802BCF10_de
-func_802BCF10_de:
+.globl __osGetFpcCsr
+__osGetFpcCsr:
     cfc1 $v0, $31
     jr $ra
     nop

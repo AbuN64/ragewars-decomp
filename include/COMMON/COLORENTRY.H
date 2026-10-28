@@ -33,11 +33,11 @@ struct ColorEntry {
 
 
 
-struct Object_func_8028CE94_de;
+struct ObjectCSceneStartEventClips;
 struct StridedTable;
 
-struct Object_func_8028CE94_de;
-typedef struct Object_func_8028CE94_de Object_func_8028CE94_de;
+struct ObjectCSceneStartEventClips;
+typedef struct ObjectCSceneStartEventClips ObjectCSceneStartEventClips;
 
 struct Container;
 typedef struct Container Container;

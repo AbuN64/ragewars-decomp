@@ -8,13 +8,13 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-/* Reloads a saved controller-pak block when Pak_CheckStatusPrompt reports no problem for the selected
+/* Reloads a saved controller-pak block when Snapshot_CheckStatusPrompt reports no problem for the selected
    channel: with D_80153780 set it loads the block D_800E28BC points to onto the player found at
    D_80145040 - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
    block D_801462C8 plus the word at its 0x580 (keeping the byte D_80146848 there), the four floats at
    0x8 (the game clock) into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
    count for the block at 0x60C copied into D_800F91F0 - then shows the D_0044EAE0 prompt through
-   Pak_OpenDialog; otherwise it retries Pak_DeleteNote on note D_8014D4FC and shows the
+   Menu_OpenDialog; otherwise it retries Note_DeleteNote on note D_8014D4FC and shows the
    D_0044EB70/D_0044EBDC result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
 
 /* The persistent options block: the first 0x584 bytes of Shared_Game (D_801462C8). */
@@ -56,13 +56,13 @@ extern f32 D_801427EC[];
 extern u8 D_800F91F0[];
 extern struct PakSaveBlock *D_800E28BC;
 
-extern s32 Pak_CheckStatusPrompt(MenuRecAt24 *menu, s32 ch, s32 quiet);
-extern s32 Pak_DeleteNote(s32 ch, s32 index);
-extern struct PakSaveOwner *Player_FindPlayerByController(char *profiles, PakMenuSlot *slot);
-extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
+extern s32 Snapshot_CheckStatusPrompt(MenuRecAt24 *menu, s32 ch, s32 quiet);
+extern s32 Note_DeleteNote(s32 ch, s32 index);
+extern struct PakSaveOwner *Playerai_FindPlayerByController(char *profiles, PakMenuSlot *slot);
+extern void Menu_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
-extern s32 D_801462CC; /* MIXED Pak_RestoreSaveBlock */
-s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
+extern s32 D_801462CC; /* MIXED Snapshot_RestoreSaveBlock */
+s32 Snapshot_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     struct PakSaveOwner *owner;
     s32 channel;
     Shared_World *world;
@@ -76,12 +76,12 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     } else {
         channel = menu->slot->unk4;
     }
-    if (Pak_CheckStatusPrompt(menu, channel, 0) != 0) {
+    if (Snapshot_CheckStatusPrompt(menu, channel, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
     if (D_80153780 != 0) {
-        owner = Player_FindPlayerByController(D_80145040, menu->slot);
+        owner = Playerai_FindPlayerByController(D_80145040, menu->slot);
         world = &g_world;
         kept = D_80146848[0];
         owner->block = D_800E28BC->block18;
@@ -99,11 +99,11 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
         }
         D_80140FB4[0] = 0;
         D_80140FB4[1] = 0;
-        Pak_OpenDialog(&D_80140FB4[0x16A], D_0044EAE0, owner, owner->slot698, 0);
-    } else if (Pak_DeleteNote(channel, D_8014D4FC) == 0) {
-        Pak_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(&D_80140FB4[0x16A], D_0044EAE0, owner, owner->slot698, 0);
+    } else if (Note_DeleteNote(channel, D_8014D4FC) == 0) {
+        Menu_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
     } else {
-        Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+        Menu_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
     }
     return 1;
 }
@@ -145,7 +145,7 @@ extern u16 D_8014D48C;
 
 extern s32 Pak_CountLineChars(void);
 
-s32 Pak_UpdateScoreTitle(PakNoteTextEntry *item) {
+s32 Snapshot_UpdateScoreTitle(PakNoteTextEntry *item) {
     char *title;
     u8 *dest;
     s32 i;

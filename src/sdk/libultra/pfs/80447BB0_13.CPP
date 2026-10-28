@@ -7,7 +7,7 @@
 #include "sdk/PFS/80447BB0_21.H"
 
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 __osContRamWrite(void *queue, int channel, u16 address, u8 *buffer, int force);
 static inline s32 __osPfsGetNextPage(OSPfs* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page) {
     s32 ret;
@@ -46,7 +46,7 @@ s32 Pfs_ReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_
     if((pfs->status&1)==0) return 5;
     if(__osCheckId(pfs)==2) return 2;
     if(pfs->activebank!=0) {pfs->activebank=0;ret=Pfs_SelectActiveBank(pfs); if(ret!=0) return ret;} (void)0;
-    ret=func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir); if(ret!=0) return ret;
+    ret=__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir); if(ret!=0) return ret;
     if (dir.company_code == 0 || dir.game_code == 0) {
         return 5;
     }
@@ -78,7 +78,7 @@ s32 Pfs_ReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_
         }
         blockno = cur_page.inode_t.page * 8 + cur_block;
         if (flag == 0) {
-            ret = func_802B84C0_de(pfs->queue, pfs->channel, blockno, buffer);
+            ret = __osContRamRead(pfs->queue, pfs->channel, blockno, buffer);
         } else {
             ret = __osContRamWrite(pfs->queue, pfs->channel, blockno, buffer, 0);
         }

@@ -183,7 +183,7 @@ extern float D_800C3528_de;
 
 extern float D_800C3524_de;
 
-extern void Sky_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
+extern void Gsky_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
 
 extern f32 D_800D05D0;

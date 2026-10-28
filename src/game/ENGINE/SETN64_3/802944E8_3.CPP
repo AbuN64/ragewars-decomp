@@ -19,7 +19,7 @@ extern s32 D_800E28D0;
 
 
 
-extern int Player_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *arg0);
 
 
 extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
@@ -27,7 +27,7 @@ extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 
 s32 SetN64_DrawCreditsLines(s32);
 
-s32 func_80291074_de(s32);
+s32 CCredits_UpdateScroll(s32);
 
 
 void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1) {
@@ -45,15 +45,15 @@ void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1) {
 }
 
 /* Initializes the game state for a new game phase with arg0 as the phase identifier. */
-void SetN64_InitializeMode16Credits(s32 arg0) {
+void SetN64_InitializeMode16Credits(s32 sessionAddress) {
     D_800CD780 = 0;
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
     D_80142898 = 0;
-    Player_GetFirstPlayer(&D_80145040);
+    Playerai_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(arg0, 0x82);
+    SetN64_ResetPlayerItems(sessionAddress, 0x82);
 }
 
 void SetN64_HandleMode16CreditsInput(s32 session) {
@@ -74,7 +74,7 @@ void SetN64_HandleMode16CreditsInput(s32 session) {
 void SetN64_DrawMode16Credits(s32 session) {
     SetN64_DrawSessionWithAttractTimeout((void *)session);
     SetN64_DrawCreditsLines(session);
-    func_80291074_de(session);
+    CCredits_UpdateScroll(session);
 }
 
 /* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
@@ -86,7 +86,7 @@ void SetN64_InitializeMode17Credits(s32 arg0) {
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
     D_80142898 = 0;
-    Player_GetFirstPlayer(&D_80145040);
+    Playerai_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, 0x82);
@@ -109,7 +109,7 @@ void SetN64_HandleMode17CreditsInput(s32 session) {
 void SetN64_DrawMode17Credits(s32 session) {
     SetN64_DrawSessionWithAttractTimeout((void *)session);
     SetN64_DrawCreditsLines(session);
-    func_80291074_de(session);
+    CCredits_UpdateScroll(session);
 }
 
 #if defined(VERSION_US)

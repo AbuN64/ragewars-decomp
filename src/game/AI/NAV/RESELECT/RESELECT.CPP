@@ -5,8 +5,8 @@
 #include "include_asm.h"
 #include "GAME_2/8020DC10.H"
 
-s32 func_8020DD04_de(WeightSource *weights);
-extern s32 Nav_SetBehaviourState(void *, s32);
+s32 Reselect_ChooseWeightedAttackBehavior(WeightSource *weights);
+extern s32 Scaled_SetBehaviourState(void *, s32);
 
 /* Reconsider an existing attack on one of four signed random remainders. */
 void ReselectCloseAttack(void *brainAddress) {
@@ -15,13 +15,13 @@ void ReselectCloseAttack(void *brainAddress) {
     s32 selectedState;
     if (GraphU64_NextRandom() % 4 == 1) {
         weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
-        selectedState = func_8020DD04_de(weights);
+        selectedState = Reselect_ChooseWeightedAttackBehavior(weights);
         brain->combat = selectedState;
-        Nav_SetBehaviourState(brainAddress, selectedState);
+        Scaled_SetBehaviourState(brainAddress, selectedState);
     }
 }
 
-s32 func_8020DD04_de(WeightSource *weights) {
+s32 Reselect_ChooseWeightedAttackBehavior(WeightSource *weights) {
     s32 first;
     s32 second;
     s32 third;

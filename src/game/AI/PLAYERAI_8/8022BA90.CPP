@@ -56,7 +56,7 @@ int func_8022BAC0_de(void) {
     return D_8011FAC0.clockPaused != 0;
 }
 
-void Player_LoadActorModel(void *actor) {
+void Playerai_LoadActorModel(void *actor) {
     s32 modelKind;
     void *result;
 
@@ -124,7 +124,7 @@ void func_8022BC94_de(void *actorIn, s32 shadowMode) {
         animationResource = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
         if (animationResource != 0) {
             actor = object->unk_1D8;
-            func_8024B4F4_de(actorIn, (s32)SetN64_GetPackSection(*(void **)animationResource, 0));
+            Gobjinst_UpdateModelBounds(actorIn, (s32)SetN64_GetPackSection(*(void **)animationResource, 0));
             if (shadowMode != 0) {
                 message = actor->message;
                 if (message != 0) {
@@ -155,7 +155,7 @@ void func_8022BD94_de(void *player, void *source, s32 enabled) {
         if (flag_1000 == 0) {
             object->unk840 = 0;
         } else {
-            Player_ApplyDamageOverTime(player, source);
+            Playerai_ApplyDamageOverTime(player, source);
         }
         if (flag_8000) {
             func_8022BEFC_de(player, source);
@@ -173,7 +173,7 @@ extern void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s
  * HONEST-FORM-OPEN: the step check stores the same value in both arms. jump2 cross-jumps the arms and
  * deletes the test, but its reads of `previous` and `step` keep both live past the sum, which puts the
  * sum in $f2 as in the ROM (REV1-ONE-65B RESULT.md). */
-void Player_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
+void Playerai_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
     s32 missing;
     s32 amount;
     f32 elapsed;

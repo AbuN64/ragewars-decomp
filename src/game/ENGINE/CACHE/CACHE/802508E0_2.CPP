@@ -30,7 +30,7 @@ extern CMemEntry *D_80100568;
 
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
- * count (0xBDC) and stamp (0xC20) are the Pool fields used by func_80254A28_de. */
+ * count (0xBDC) and stamp (0xC20) are the Pool fields used by Cache_AcquirePendingResourceEntry. */
 struct ResLink {
     s32 unk0;
     s32 unk4;
@@ -157,14 +157,14 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
 
 /* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the D_80104574 list that
  * was last used five or more frames ago, falling back unless keep_recent is set to the first unlocked node
- * even if recent; the node's resource is released through func_80254DD0_de and func_80255B2C_de, it is unlinked
+ * even if recent; the node's resource is released through Cache_DetachResourceRequest and func_80255B2C_de, it is unlinked
  * from its lists, cleared, and pushed back on the free stack, returning func_80255B2C_de's result (0 when no
  * node could be reclaimed). */
 
 
 
 
-extern void func_80254DD0_de(void *, CMemEntry *);
+extern void Cache_DetachResourceRequest(void *, CMemEntry *);
 
 static inline CMemEntry *find_stale(CMemEntry **recent) {
     CMemEntry *node;
@@ -186,10 +186,10 @@ static inline CMemEntry *find_stale(CMemEntry **recent) {
     return 0;
 }
 
-/* Allocates a node from the free pool D_8010513C (as func_80254A28_de does: pops it, resets its fields,
+/* Allocates a node from the free pool D_8010513C (as Cache_AcquirePendingResourceEntry does: pops it, resets its fields,
  * stamps the current frame and links it through func_80255CB8_de with the caller's 0xC flags); when the pool
- * is empty it runs the collector func_80251328_de (keeping the 0x10-flagged kind) and retries once, returning
- * 0 when nothing could be freed. Adapted by inlining func_80254A28_de as a static helper. */
+ * is empty it runs the collector Cache_EvictResource (keeping the 0x10-flagged kind) and retries once, returning
+ * 0 when nothing could be freed. Adapted by inlining Cache_AcquirePendingResourceEntry as a static helper. */
 
 
 
@@ -221,7 +221,7 @@ extern void Defs_MoveMemory(u32, u32, s32);
 
 extern void func_80255D70_de(void *, s32, s32);
 
-/* Looks up a key in the hash table under the queue lock and, if found, bumps the object's reference count, flags it, stamps it and passes it to func_80255FB8_de, returning the object. Adapted from func_80253F8C_de, with the count/flag updates added and the object returned. */
+/* Looks up a key in the hash table under the queue lock and, if found, bumps the object's reference count, flags it, stamps it and passes it to func_80255FB8_de, returning the object. Adapted from Cache_TouchResourceByKey, with the count/flag updates added and the object returned. */
 
 
 
@@ -234,7 +234,7 @@ extern struct Shape_func_8021A2D4_de_2 D_80101190;
 
 extern void func_80255FB8_de(void *, s32);
 
-void func_802511AC_de(void) {
+void Cache_WaitForResourceSlotRelease(void) {
     s32 lockReleaseCount;
     s32 lockClaimCount;
     s32 slotCursor;
@@ -253,7 +253,7 @@ void func_802511AC_de(void) {
                 goto block_7;
             }
             D_80100598[slotCursor] = 0;
-            func_80254D44_de(0, slotCursor);
+            Cache_ClearResourceSlotProtection(0, slotCursor);
             slotCursor += 1;
         } else {
 block_7:
@@ -290,7 +290,7 @@ block_7:
     }
 }
 
-s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
+s32 Cache_EvictResource(s32 unused0, s32 unused1, s32 keep_recent) {
     CMemEntry *recent;
     CMemEntry *node;
     s32 result;
@@ -303,7 +303,7 @@ s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
         }
     }
     if (node != 0) {
-        func_80254DD0_de(0, node);
+        Cache_DetachResourceRequest(0, node);
         result = func_80255B2C_de(&D_801051A0, node->resource);
         func_80255ED8_de(&D_80100570, node);
         if (node->flags & 0x1000) {
@@ -322,21 +322,21 @@ s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
     return 0;
 }
 
-void *func_802514A8_de(s32 unused0, s32 flags) {
+void *Cache_AcquireResourceNodeWithEviction(s32 unused0, s32 flags) {
     void *node;
 
     node = pool_alloc(flags);
     if (node == 0) {
         s32 keep = flags & 0x10;
 
-        if (func_80251328_de(0, 2, keep == 0) != 0) {
+        if (Cache_EvictResource(0, 2, keep == 0) != 0) {
             node = pool_alloc(flags);
         }
     }
     return node;
 }
 
-void func_802515F0_de(s32 unused, s32 compactAll) {
+void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     IntrusiveList queue;
     Node80254C10 *node;
     Node80254C10 *next;
@@ -396,7 +396,7 @@ drain:
     }
 }
 
-void *func_802517B4_de(s32 arg0, s32 resourceKey) {
+void *Cache_RetainResourceByKey(s32 arg0, s32 resourceKey) {
     s32 lockClaimCount;
     s32 lockReleaseCount;
     u32 mask;

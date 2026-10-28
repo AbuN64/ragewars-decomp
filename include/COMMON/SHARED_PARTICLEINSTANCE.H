@@ -6,8 +6,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-struct Actor_func_80281A9C_de;
-typedef struct Actor_func_80281A9C_de Actor_func_80281A9C_de;
+struct ActorParticleMarkCrowdedActor;
+typedef struct ActorParticleMarkCrowdedActor ActorParticleMarkCrowdedActor;
 
 struct Shared_ParticleInstance;
 struct Shared_ParticleInstance {
@@ -317,8 +317,8 @@ typedef struct RecordRecAt2C RecordRecAt2C;
 struct Ground;
 typedef struct Ground Ground;
 
-struct Actor_func_80281A9C_de;
-struct Actor_func_80281A9C_de {
+struct ActorParticleMarkCrowdedActor;
+struct ActorParticleMarkCrowdedActor {
     char pad0[4];
     u16 type;
     char pad6[2];

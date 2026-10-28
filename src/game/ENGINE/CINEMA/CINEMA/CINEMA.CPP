@@ -26,8 +26,8 @@ void Cinema_EndSequence(void) {
         s32 owner;
         Shared_MenuContext *record;
 
-        func_80245B74_de(1);
-        func_80245BC0_de();
+        Cinema_InitializeSequenceOnce(1);
+        Cinema_CloseSequenceOnce();
         owner = (s32)D_800E2830->owner;
         if (owner != 0) {
             Cache_ReleaseResource(0, owner);
@@ -41,8 +41,8 @@ void Cinema_EndSequence(void) {
     }
 }
 
-void func_8024570C_de(void) {
-    if (Cinema_IsSequenceActive() != 0 && func_80245764_de() != 0 && D_800E2830->unknown60 == 0) {
+void Cinema_RequestSequenceFade(void) {
+    if (Cinema_IsSequenceActive() != 0 && Cinema_IsFadeAllowed() != 0 && D_800E2830->unknown60 == 0) {
         f32 temp = D_800C37D0_de;
         D_800E2830->unknown60 = 1;
         D_800E2830->fade = temp;
@@ -50,11 +50,11 @@ void func_8024570C_de(void) {
 }
 
 /** Return the constant success result used by callers at VRAM 0x80245754. */
-int func_80245764_de(void) {
+int Cinema_IsFadeAllowed(void) {
     return 1;
 }
 
-int func_8024576C_de(void) {
+int Cinema_HasSequenceResource(void) {
     return D_800E2830->resourceDC != -1;
 }
 
@@ -77,7 +77,7 @@ int Cinema_IsSequenceInWindow(void) {
     return inSequenceWindow;
 }
 
-s32 func_802457E0_de(void) {
+s32 Cinema_HasSequenceEnded(void) {
     if (D_800E2830->active != 0) {
         if (D_800E2830->time > D_800E2830->end) {
             return 1;
@@ -88,9 +88,9 @@ s32 func_802457E0_de(void) {
 }
 
 /* 80243A80_9.CPP */
-/* Calls Menu_UpdateTrackCamera when the globally selected record's word at 0x38 is non-zero. */
+/* Calls Track_UpdateTrackCamera when the globally selected record's word at 0x38 is non-zero. */
 
-/* Calls Menu_DrawTrackOverlay when the globally selected record's word at 0x38 is non-zero. */
+/* Calls Track_DrawTrackOverlay when the globally selected record's word at 0x38 is non-zero. */
 
 /** Clear the global word at VRAM 0x800E2838. */
 
@@ -103,7 +103,7 @@ s32 func_802457E0_de(void) {
 /* Returns the globally selected record's word at 0xA8 while its word at 0x38 is non-zero, and 0
    otherwise. */
 
-extern f32 Menu_EvaluateTrackScalar(f32 arg0);
+extern f32 Track_EvaluateTrackScalar(f32 arg0);
 
 /** Clear the word at offset 0x100 in the active object. */
 
@@ -113,11 +113,11 @@ extern void XPlus_CopyString(void *arg0, int arg1);
 
 /* Returns the state object's word at its measured value field. */
 
-s32 func_80245814_de(void) {
+s32 Cinema_IsSequenceIdle(void) {
     s32 result;
     result = 0;
     if (Cinema_IsSequenceActive() == 0) {
-        result = func_8024576C_de() == 0;
+        result = Cinema_HasSequenceResource() == 0;
     }
     return result;
 }
@@ -130,36 +130,36 @@ unsigned int func_80245850_de(void) {
 void Cinema_UpdateSequenceTrack(void *camera) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
-        Menu_UpdateTrackCamera(camera);
+        Track_UpdateTrackCamera(camera);
     }
 }
 
 void func_80245894_de(void) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
-        Menu_DrawTrackOverlay();
+        Track_DrawTrackOverlay();
     }
 }
 
 /** Set the global word at VRAM 0x800E2838 to one. */
-void func_802458C4_de(void) {
+void Cinema_SetPlaybackFlag(void) {
     D_800DE7E8 = 1;
 }
 
-void func_802458D8_de(void) {
+void Cinema_ClearPlaybackFlag(void) {
     D_800DE7E8 = 0;
 }
 
 /** Return the current global object word. */
-unsigned int func_802458E8_de(void) {
+unsigned int Cinema_GetPlaybackFlag(void) {
     return D_800DE7E8;
 }
 
-void func_802458F8_de(void) {
+void Cinema_ClearPlaybackPauseState(void) {
     D_800E2830->state3C = 0;
 }
 
-int func_80245908_de(void) {
+int Cinema_IsSequenceFlagTwoSet(void) {
     Shared_MenuContext *record;
     if (Cinema_IsSequenceInWindow() == 0) {
         return 0;
@@ -171,7 +171,7 @@ int func_80245908_de(void) {
     return 0;
 }
 
-int func_80245940_de(void) {
+int Cinema_GetActiveSettingOne(void) {
     Shared_MenuContext *record = D_800E2830;
     int cond = record->active != 0;
     if (cond) {
@@ -184,7 +184,7 @@ int func_80245940_de(void) {
     return 0;
 }
 
-int func_80245968_de(void) {
+int Cinema_GetActiveSettingZero(void) {
     Shared_MenuContext *record = D_800E2830;
     int cond = record->active != 0;
     if (cond) {
@@ -197,7 +197,7 @@ int func_80245968_de(void) {
     return 0;
 }
 
-void func_80245990_de(void *letterboxEnabled) {
+void Cinema_SetLetterboxState(void *letterboxEnabled) {
     D_800DE7F4_de = letterboxEnabled;
 }
 
@@ -210,7 +210,7 @@ f32 func_802459A0_de(void) {
     }
     response = record->response;
     if (!(D_800C37D8_de < response)) {
-        return Menu_EvaluateTrackScalar(record->time);
+        return Track_EvaluateTrackScalar(record->time);
     }
     return response;
 }
@@ -223,12 +223,12 @@ void Cinema_ClearResponse(void) {
     D_800E2830->response = 0.0f;
 }
 
-void func_80245A20_de(int loopMode) {
+void Cinema_SetLoopMode(int loopMode) {
     D_800E2830->unknown104[0] = loopMode;
 }
 
 /** Copy a two-word record into the global record and clear two trailing fields. */
-void func_80245A30_de(void) {
+void Cinema_ResetViewport(void) {
     Shared_MenuContext *record = D_800E2830;
     int hi = D_800E28D4;
     int lo = D_800E28D0;
@@ -239,7 +239,7 @@ void func_80245A30_de(void) {
 }
 
 /** Store four incoming words into the global record's tail fields. */
-void func_80245A5C_de(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop) {
+void Cinema_SetViewport(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop) {
     Shared_MenuContext *record = D_800E2830;
     record->unknown104[2] = viewportHeight;
     record->unknown104[1] = viewportWidth;
@@ -294,7 +294,7 @@ void Cinema_ReleaseSequenceContext(void) {
 }
 
 /* 80243A80_10.CPP */
-void func_80245B74_de(s32 unused) {
+void Cinema_InitializeSequenceOnce(s32 unused) {
     Shared_MenuContext *record;
     Shared_MenuVoidCallback fn;
 
@@ -310,7 +310,7 @@ void func_80245B74_de(s32 unused) {
     }
 }
 
-void func_80245BC0_de(void) {
+void Cinema_CloseSequenceOnce(void) {
     if (D_800E2830->closed == 0) {
         {
             void *owner = D_800E2830->owner;
@@ -341,7 +341,7 @@ extern f32 D_800D2988;
 
 /** Read the word at offset 0x38 from the globally selected record. */
 
-void func_80245C38_de(void) {
+void Cinema_AdvanceSequenceTime(void) {
     f32 value;
     f32 limit;
     Shared_MenuContext *record;
@@ -355,7 +355,7 @@ void func_80245C38_de(void) {
         record->time20 = *(volatile f32 *)&record->time;
         record->time += D_800D2988 * D_800C37E0_de;
         if (record->start <= record->time) {
-            func_80244E58_de();
+            CCinema_EnterSequenceScene();
         }
         value = D_800E2830->time;
         limit = D_800E2830->clipEnd;
@@ -373,7 +373,7 @@ void func_80245C38_de(void) {
     }
 }
 
-int func_80245D14_de(void) {
+int Cinema_GetSequenceActiveState(void) {
     Shared_MenuContext *record = D_800E2830;
     return record->active;
 }

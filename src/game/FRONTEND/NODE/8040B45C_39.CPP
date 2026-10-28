@@ -19,7 +19,7 @@ extern EntryRecAt18V1 *g_frontendResourceTextures;
 /* Releases the buffers of the pool at g_frontendResourceScreenCount: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
    reaches zero the buffer is freed through Cache_FreeMemory, along with the entry's secondary buffer
-   when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at g_frontendResourceScreenCount, as in Frontend_UpdateImageReleaseTimers. */
+   when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at g_frontendResourceScreenCount, as in Node_UpdateImageReleaseTimers. */
 
 
 
@@ -40,13 +40,13 @@ extern s16 g_frontendResourceTextureCount;
 
 
 /* Returns the halfword at offset 0xA of entry i in the 28-byte record table g_frontendResourceTextures points
-   to; Frontend_GetTextureEntryWidth and Frontend_GetTextureEntryHeight read offsets 0xA and 0xC. */
+   to; Node_GetTextureEntryWidth and Node_GetTextureEntryHeight read offsets 0xA and 0xC. */
 
 
 
 
 /* Returns the halfword at offset 0xC of entry i in the 28-byte record table g_frontendResourceTextures points
-   to; Frontend_GetTextureEntryWidth and Frontend_GetTextureEntryHeight read offsets 0xA and 0xC. */
+   to; Node_GetTextureEntryWidth and Node_GetTextureEntryHeight read offsets 0xA and 0xC. */
 
 
 
@@ -72,11 +72,11 @@ extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
 
 
 /* Returns the halfword at offset 0xE of the object held at offset 0x48C of record i in the
-   font table g_frontendResourceState.Font (1180-byte records); Frontend_GetFontLetterSpacing reads offset 0x10 of the same
+   font table g_frontendResourceState.Font (1180-byte records); Node_GetFontLetterSpacing reads offset 0x10 of the same
    object. */
 
 
-/* Runs Frontend_ReleaseChunkImages for each of the manager g_frontendResourceFontCount's entries unless its mode word at 0x34 is 1. */
+/* Runs Node_ReleaseChunkImages for each of the manager g_frontendResourceFontCount's entries unless its mode word at 0x34 is 1. */
 
 
 
@@ -86,9 +86,9 @@ extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
    0x8069A673, which are guest addresses that are not word aligned, so the element type is a
    pointer to bytes. */
 
-/* Calls Frontend_LoadLanguageStrings when the language count g_frontendResourceState.NLanguages is non-zero. */
+/* Calls Node_LoadLanguageStrings when the language count g_frontendResourceState.NLanguages is non-zero. */
 
-extern void Frontend_LoadLanguageStrings(s32);
+extern void Node_LoadLanguageStrings(s32);
 
 /* Twelve bytes of stride and a load at offset 8. The debugger showed the global holding
    0x80697F80 and the results being 0, 0x8067E570, 0x8067F870 and 0x80697E00, so the third word is
@@ -113,15 +113,15 @@ extern void Frontend_LoadLanguageStrings(s32);
 extern s32 D_800E2AC0;
 
 
-/* Sets the buffer pool flag, then runs Frontend_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and Frontend_GetBankTileTexture on every chunk. */
+/* Sets the buffer pool flag, then runs Node_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and Node_GetBankTileTexture on every chunk. */
 
 
 
 
 
-extern void Frontend_AcquireArchiveEntry(s32 index);
+extern void Node_AcquireArchiveEntry(s32 index);
 
-extern void Frontend_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
+extern void Node_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
 
 /* A stride of 1180 bytes. The debugger showed the global holding 0x80696F50 and the two observed
    indices, 0 and 1, returning 0x80696F50 and 0x806973EC, which differ by exactly 1180. */
@@ -129,11 +129,11 @@ extern void Frontend_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
 
 
 
-extern void Frontend_ReleaseRetainedImageSlot(s32 i);
+extern void Node_ReleaseRetainedImageSlot(s32 i);
 
 /* Loads or unloads the images of a widget subtree: visits the later siblings when asked and the
    children, then for an image widget (type 3) loads its image through func_80410674_de or unloads it
-   through Frontend_ReleaseRetainedImageSlot, and for a button (type 8) visits its normal, pressed and highlighted
+   through Node_ReleaseRetainedImageSlot, and for a button (type 8) visits its normal, pressed and highlighted
    variants without their siblings; type 4 widgets and other types have nothing to do. */
 
 
@@ -152,7 +152,7 @@ extern s32 D_800E2AD4;
 
 extern Handler802A2B50 D_800E2AD8;
 
-void Frontend_ReleaseUnprotectedBuffers(s32 force) {
+void Node_ReleaseUnprotectedBuffers(s32 force) {
     s32 i;
 
     for (i = 0; i < g_frontendResourceScreenCount.count; i++) {
@@ -172,46 +172,46 @@ void Frontend_ReleaseUnprotectedBuffers(s32 force) {
 }
 
 /** Perform no work. */
-void Frontend_SkipResourceOperation(void) {
+void Node_SkipResourceOperation(void) {
 }
 
-s16 Frontend_GetResourceScreenCount(void) {
+s16 Node_GetResourceScreenCount(void) {
     return g_frontendResourceState.NScreens;
 }
 
-s16 Frontend_GetResourceTextureCount(void) {
+s16 Node_GetResourceTextureCount(void) {
     return g_frontendResourceState.NTextures;
 }
 
-s16 Frontend_GetResourceFontCount(void) {
+s16 Node_GetResourceFontCount(void) {
     return g_frontendResourceState.NFonts;
 }
 
 /* Returns the word held in g_frontendResourceFirstScreen. */
 
 
-s32 Frontend_GetFirstResourceScreen(void) {
+s32 Node_GetFirstResourceScreen(void) {
     return g_frontendResourceState.Header.FirstScreen;
 }
 
-s16 Frontend_GetTextureEntryWidth(s32 index) {
+s16 Node_GetTextureEntryWidth(s32 index) {
     return g_frontendResourceState.Texture[index].Width;
 }
 
-s16 Frontend_GetTextureEntryHeight(s32 index) {
+s16 Node_GetTextureEntryHeight(s32 index) {
     return g_frontendResourceState.Texture[index].Height;
 }
 
-s32 Frontend_GetTextureChromaKey(s32 index) {
+s32 Node_GetTextureChromaKey(s32 index) {
     return g_frontendResourceState.ChromaKey[index];
 }
 
 /** Report success. */
-int Frontend_ReturnOne(void) {
+int Node_ReturnOne(void) {
     return 1;
 }
 
-void Frontend_ReleaseRetainedImageSlot(s32 i) {
+void Node_ReleaseRetainedImageSlot(s32 i) {
     struct ResourceRecAt6 *resource;
 
     resource = (struct ResourceRecAt6 *)(i * 8 + (s32)g_frontendResourceTextureTimers);
@@ -220,7 +220,7 @@ void Frontend_ReleaseRetainedImageSlot(s32 i) {
             resource->retained--;
         } else {
             if (g_frontendResourceTextures[i].unk4 & 1) {
-                Gfx_ReleaseImage((struct OwnedImage *)g_frontendResourceTextures[i].unk0);
+                Image_ReleaseImage((struct OwnedImage *)g_frontendResourceTextures[i].unk0);
                 g_frontendResourceTextures[i].unk4 &= ~1;
             }
             g_frontendResourceTextureTimers[i].id = 0;
@@ -228,46 +228,46 @@ void Frontend_ReleaseRetainedImageSlot(s32 i) {
     }
 }
 
-signed char Frontend_GetFontCharacterHeight(int entry, int index) {
+signed char Node_GetFontCharacterHeight(int entry, int index) {
     return g_frontendResourceState.Font[index].CharInfo[(unsigned char)entry].height;
 }
 
-signed char Frontend_GetFontCharacterPhysicalWidth(int entry, int index) {
+signed char Node_GetFontCharacterPhysicalWidth(int entry, int index) {
     return g_frontendResourceState.Font[index].CharInfo[(unsigned char)entry].PhysicalWidth;
 }
 
-short Frontend_GetFontBitmapCount(int index) {
+short Node_GetFontBitmapCount(int index) {
     return g_frontendResourceState.Font[index].TableEntry->bitmapCount;
 }
 
-short Frontend_GetFontLetterSpacing(int index) {
+short Node_GetFontLetterSpacing(int index) {
     return g_frontendResourceState.Font[index].TableEntry->field_10;
 }
 
-short Frontend_GetFontMetricAtA(int index) {
+short Node_GetFontMetricAtA(int index) {
     return g_frontendResourceState.Font[index].TableEntry->field_A;
 }
 
-short Frontend_GetFontMetricAtC(int index) {
+short Node_GetFontMetricAtC(int index) {
     return g_frontendResourceState.Font[index].TableEntry->field_C;
 }
 
 /** Report success. */
-int Frontend_ReturnConstantOne(void) {
+int Node_ReturnConstantOne(void) {
     return 1;
 }
 
 /** Report success. */
-int Frontend_ReturnUnitValue(void) {
+int Node_ReturnUnitValue(void) {
     return 1;
 }
 
-void Frontend_ReleaseAllChunkImages(void) {
+void Node_ReleaseAllChunkImages(void) {
     int i;
 
     if (g_frontendResourceFontCount.mode != 1) {
         for (i = 0; i < g_frontendResourceFontCount.count; i++) {
-            Frontend_ReleaseChunkImages(i);
+            Node_ReleaseChunkImages(i);
         }
     }
 }
@@ -279,13 +279,13 @@ char *Frontend_GetStringByIndex(s32 index) {
 /* Returns the halfword held in g_frontendResourceLanguageCount. */
 
 
-s16 Frontend_GetResourceLanguageCount(void) {
+s16 Node_GetResourceLanguageCount(void) {
     return g_frontendResourceState.NLanguages;
 }
 
 void Frontend_LoadLanguageStringsIfAny(s32 languageIndex) {
     if (g_frontendResourceState.NLanguages != 0) {
-        Frontend_LoadLanguageStrings(languageIndex);
+        Node_LoadLanguageStrings(languageIndex);
     }
 }
 
@@ -300,7 +300,7 @@ s32 Frontend_IsValidScreenIndex(s32 index) {
     return 0;
 }
 
-void Frontend_ReleaseReferencedBuffer(s32 i) {
+void Node_ReleaseReferencedBuffer(s32 i) {
     g_frontendResourceScreenCount.refs[i]--;
     if (g_frontendResourceScreenCount.primary[i].unk8 != 0 && g_frontendResourceScreenCount.refs[i] == 0) {
         Cache_FreeMemory(g_frontendResourceScreenCount.primary[i].unk8);
@@ -312,40 +312,40 @@ void Frontend_ReleaseReferencedBuffer(s32 i) {
     }
 }
 
-void Frontend_InitializeResourceState(void) {
+void Node_InitializeResourceState(void) {
     XPlus_FillBytes(&g_frontendResourceState, 0, sizeof(g_frontendResourceState));
     D_800E2AC0 = 1;
     D_800E2AC4 = 0;
 }
 
-void Frontend_ClearResourceInitializationFlag(void) {
+void Node_ClearResourceInitializationFlag(void) {
     D_800E2AC0 = 0;
 }
 
-void Frontend_SetSecondaryBufferMode(s32 value) {
+void Node_SetSecondaryBufferMode(s32 value) {
     D_800E2AC4 = value;
 }
 
-void Frontend_AcquireAllResourceTextures(void) {
+void Node_AcquireAllResourceTextures(void) {
     s32 i;
 
     g_frontendResourceScreenCount.dirty = 1;
     for (i = 0; i < g_frontendResourceScreenCount.count; i++) {
-        Frontend_AcquireArchiveEntry(i);
+        Node_AcquireArchiveEntry(i);
     }
     for (i = 0; i < g_frontendResourceTextureCount; i++) {
-        Frontend_GetImageTexture(i, 2);
+        Node_GetImageTexture(i, 2);
     }
     for (i = 0; i < g_frontendResourceFontCount.count; i++) {
-        Frontend_GetBankTileTexture(0, i, 0);
+        Node_GetBankTileTexture(0, i, 0);
     }
 }
 
-GlyphBuffer *Frontend_GetGlyphBuffer(s32 index) {
+GlyphBuffer *Node_GetGlyphBuffer(s32 index) {
     return (GlyphBuffer *)&g_frontendResourceState.Font[index];
 }
 
-void Frontend_ReleaseUnretainedTextureEntries(void) {
+void Node_ReleaseUnretainedTextureEntries(void) {
     s32 i;
     s32 invalid;
     s32 offset;
@@ -359,7 +359,7 @@ void Frontend_ReleaseUnretainedTextureEntries(void) {
             if (((EntryRecAt18V1 *)(offset + (s32)g_frontendResourceTextures))->unk4 & 1) {
                 resource = g_frontendResourceTextureTimers + i;
                 if (resource->id != invalid && resource->retained == 0) {
-                    Frontend_ReleaseRetainedImageSlot(i);
+                    Node_ReleaseRetainedImageSlot(i);
                 }
             }
             offset += 0x1C;
@@ -367,35 +367,35 @@ void Frontend_ReleaseUnretainedTextureEntries(void) {
     }
 }
 
-void Frontend_UpdateWidgetTextureRetention(WidgetRecAt34 *widget, s32 load, s32 siblings) {
+void Node_UpdateWidgetTextureRetention(WidgetRecAt34 *widget, s32 load, s32 siblings) {
     if (widget == 0) {
         return;
     }
     if (widget->next != 0 && siblings != 0) {
-        Frontend_UpdateWidgetTextureRetention(widget->next, load, siblings);
+        Node_UpdateWidgetTextureRetention(widget->next, load, siblings);
     }
     if (widget->child != 0) {
-        Frontend_UpdateWidgetTextureRetention(widget->child, load, siblings);
+        Node_UpdateWidgetTextureRetention(widget->child, load, siblings);
     }
     switch (widget->type) {
         case 4:
             break;
         case 3:
             if (load != 0) {
-                Frontend_GetImageTexture(widget->normal, 3);
+                Node_GetImageTexture(widget->normal, 3);
             } else {
-                Frontend_ReleaseRetainedImageSlot(widget->normal);
+                Node_ReleaseRetainedImageSlot(widget->normal);
             }
             break;
         case 8:
             if (widget->normal != 0) {
-                Frontend_UpdateWidgetTextureRetention(widget->normal, load, 0);
+                Node_UpdateWidgetTextureRetention(widget->normal, load, 0);
             }
             if (widget->pressed != 0) {
-                Frontend_UpdateWidgetTextureRetention(widget->pressed, load, 0);
+                Node_UpdateWidgetTextureRetention(widget->pressed, load, 0);
             }
             if (widget->highlighted != 0) {
-                Frontend_UpdateWidgetTextureRetention(widget->highlighted, load, 0);
+                Node_UpdateWidgetTextureRetention(widget->highlighted, load, 0);
             }
             break;
     }
@@ -405,7 +405,7 @@ void Frontend_UpdateWidgetTextureRetention(WidgetRecAt34 *widget, s32 load, s32 
 
 
 
-void Frontend_ClampListCursorAndScroll(List *list) {
+void Node_ClampListCursorAndScroll(List *list) {
     if (list->maxY < list->cursorY) {
         list->cursorY = list->maxY;
     }
@@ -445,7 +445,7 @@ void Frontend_ClampListCursorAndScroll(List *list) {
 
 
 
-void Frontend_ConfigureScrolledTableCell(sm_dllistbox *table, sm_dltext *cell, u32 row, u32 col) {
+void Node_ConfigureScrolledTableCell(sm_dllistbox *table, sm_dltext *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;
@@ -536,7 +536,7 @@ void Frontend_ConfigureScrolledTableCell(sm_dllistbox *table, sm_dltext *cell, u
     cell->Hdr.y += y;
 }
 
-s32 Frontend_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Node_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

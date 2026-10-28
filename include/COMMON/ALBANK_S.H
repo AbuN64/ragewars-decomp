@@ -137,9 +137,9 @@ typedef signed int ( *Lane_ALOscUpdate)(void *, float *);
 struct List802B663C;
 struct List802B663C {
     char pad[0x64];
-    Node_func_80239AF4_de *head;
-    Node_func_80239AF4_de *tail;
-    Node_func_80239AF4_de *free;
+    NodeGskyActivateMessagePool *head;
+    NodeGskyActivateMessagePool *tail;
+    NodeGskyActivateMessagePool *free;
 };
 
 

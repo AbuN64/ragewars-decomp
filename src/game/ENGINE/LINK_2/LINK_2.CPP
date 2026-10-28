@@ -32,7 +32,7 @@ extern void *D_800CD730;
 extern s32 D_801371D4;
 
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
-extern s32 Menu_RequestTrackByKey(s32);
+extern s32 Track_RequestTrackByKey(s32);
 void Link_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
     void *fallback;
@@ -53,7 +53,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
                 callback = gameplaySoundHook(trigger->sound);
                 if (callback != 0) func_8025E11C_de(callback);
             }
-            if (trigger->action >= 2) Menu_RequestTrackByKey(trigger->action);
+            if (trigger->action >= 2) Track_RequestTrackByKey(trigger->action);
         }
         table += trigger->entry;
         if (trigger->owner == D_801371D4) {
@@ -79,11 +79,11 @@ extern s32 Scene_FindAlternateTriggerRange(s8 *arg0, s32 arg1, s32 *arg2, s32 *a
 
 extern void Scene_ResetTransitionViewport(void);
 
-extern void Menu_RequestTrackByIds(s32, s32);
+extern void Track_RequestTrackByIds(s32, s32);
 
 extern void Barrel_StopActorLoopingSound(void);
 
-extern void AnimPool_ReleaseSceneEffect(struct Shared_Actor *arg0);
+extern void Animpool_ReleaseSceneEffect(struct Shared_Actor *arg0);
 
 void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 arg1, void *arg2) {
     s32 sp20;
@@ -149,14 +149,14 @@ void Link_SetActorFlagMask(LevelActor *actor) {
 void Link_RequestOwnerTrack(s32 arg0, s32 unused1, s32 arg2) {
     if (g_world.mode == 4) {
         Scene_ResetTransitionViewport();
-        Menu_RequestTrackByIds(arg0, arg2);
+        Track_RequestTrackByIds(arg0, arg2);
     }
 }
 
 void Link_RequestGlobalTrack(s32 arg0) {
     if (g_world.mode == 4) {
         Scene_ResetTransitionViewport();
-        Menu_RequestTrackByIds(0, arg0);
+        Track_RequestTrackByIds(0, arg0);
     }
 }
 
@@ -186,7 +186,7 @@ void Link_DeactivateActorState(struct Shared_Actor *actor, s32 *stateFlags) {
     flags = flags & ~0x100;
     actor->weaponFlags = flags;
     if (flags & 0x80000) {
-        AnimPool_ReleaseSceneEffect(actor);
+        Animpool_ReleaseSceneEffect(actor);
     }
 }
 

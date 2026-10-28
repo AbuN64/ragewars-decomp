@@ -11,8 +11,8 @@ struct World;
 struct Ray;
 typedef struct Ray Ray;
 
-struct Polygon_func_8023E178_de;
-struct Polygon_func_8023E178_de {
+struct PolygonCCollisionTestRayCylinder;
+struct PolygonCCollisionTestRayCylinder {
     s32 type;
     s32 pad4;
     s32 kind;
@@ -76,11 +76,11 @@ struct ObjRecAt18C {
 struct ObjRecAt18C;
 typedef struct ObjRecAt18C ObjRecAt18C;
 
-struct Polygon_func_8023E178_de;
-typedef struct Polygon_func_8023E178_de Polygon_func_8023E178_de;
+struct PolygonCCollisionTestRayCylinder;
+typedef struct PolygonCCollisionTestRayCylinder PolygonCCollisionTestRayCylinder;
 
-struct Ray_func_8023E178_de;
-struct Ray_func_8023E178_de {
+struct RayCCollisionTestRayCylinder;
+struct RayCCollisionTestRayCylinder {
     char pad0[0x44];
     CVector3 start;
     CVector3 end;
@@ -88,12 +88,12 @@ struct Ray_func_8023E178_de {
     char pad68[0x18];
     f32 slack;
     char pad84[0x2C];
-    Polygon_func_8023E178_de nearest;
+    PolygonCCollisionTestRayCylinder nearest;
 };
 
 
 struct Polygon;
-typedef struct Polygon Polygon_func_8023E8D4_de;
+typedef struct Polygon PolygonCCollisionTestSegmentPolygon;
 
 struct CapsuleSweep;
 struct CCollisionInfo2_t;
@@ -111,7 +111,7 @@ struct CapsuleSweep {
     char pad5C[0x24];
     f32 slack;
     char pad84[0x2C];
-    Polygon_func_8023E8D4_de nearest;
+    PolygonCCollisionTestSegmentPolygon nearest;
 };
 
 struct Instance;
@@ -191,8 +191,8 @@ struct CCollisionResults {
     s32 field100;
 };
 
-struct Ray_func_8023E178_de;
-typedef struct Ray_func_8023E178_de Ray_func_8023E178_de;
+struct RayCCollisionTestRayCylinder;
+typedef struct RayCCollisionTestRayCylinder RayCCollisionTestRayCylinder;
 
 
 struct ObjRecAt48;
@@ -245,5 +245,5 @@ extern f32 D_800C3680_de;
 extern f32 D_800C3684_de;
 extern f32 D_800C3688_de;
 extern f32 D_800C368C_de;
-extern CVector3 GraphU64_ProjectVectorPreservingLength(CVector3 *,CVector3 *);
+extern CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *,CVector3 *);
 #endif

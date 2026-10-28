@@ -16,15 +16,15 @@
 /* 80208000.CPP */
 /* Resets a player controller: marks the active, requested and committed selections empty, sets the
    request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
-   and 0x1C8 and the target list, installs the default table D_800CE040 through Nav_SetBehaviorTable and mode
+   and 0x1C8 and the target list, installs the default table D_800CE040 through Scaled_SetBehaviorTable and mode
    2 through func_80209874_de, zeroes the tracking values from 0x23C to 0x260, runs the resets
-   Nav_ResetWheelProbeState, Nav_ResetBehaviorState and Nav_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
+   Nav_ResetWheelProbeState, Scaled_ResetBehaviorState and Scaled_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
 
-extern void Nav_SetBehaviorTable(void *, char *, s32);
-extern void Nav_SetBehaviourState(void *, s32);
+extern void Scaled_SetBehaviorTable(void *, char *, s32);
+extern void Scaled_SetBehaviourState(void *, s32);
 extern void Nav_ResetWheelProbeState(void *);
 
-extern void Nav_ClearAuxiliaryBehaviorState(void *);
+extern void Scaled_ClearAuxiliaryBehaviorState(void *);
 
 void Nav_ResetPlayerState(s32 *state) {
     s32 i;
@@ -59,8 +59,8 @@ void Nav_ResetPlayerState(s32 *state) {
         state[37 + i] = 0;
     }
     state[0x238 / 4] = 0;
-    Nav_SetBehaviorTable(state, &D_800CE040, none);
-    Nav_SetBehaviourState(state, 2);
+    Scaled_SetBehaviorTable(state, &D_800CE040, none);
+    Scaled_SetBehaviourState(state, 2);
     ((f32 *) state)[0x244 / 4] = 0.0f;
     state[0x23C / 4] = 0;
     state[0x240 / 4] = 0;
@@ -68,8 +68,8 @@ void Nav_ResetPlayerState(s32 *state) {
         ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
         ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
     Nav_ResetWheelProbeState(state);
-    Nav_ResetBehaviorState(state);
-    Nav_ClearAuxiliaryBehaviorState(state);
+    Scaled_ResetBehaviorState(state);
+    Scaled_ClearAuxiliaryBehaviorState(state);
     state[0x318 / 4] = 0;
     state[0x31C / 4] = 0;
     state[0x320 / 4] = -1;
@@ -85,15 +85,15 @@ void Nav_ResetPlayerState(s32 *state) {
 }
 
 /* CODE_80208158.CPP */
-/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Nav_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Nav_HandlePlayerTimeout. */
+/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Scaled_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Scaled_HandlePlayerTimeout. */
 
 extern char D_801376F8[];
 
-extern void Nav_UpdateTargetPitch(Brain *);
+extern void Scaled_UpdateTargetPitch(Brain *);
 extern s32 Player_GetMaxHealth(SharedPlayer *);
 extern void OnScreen_SetSecondBarTarget(char *, s32);
 extern void ContPad_ClearControllerInput(char *);
-extern void Nav_HandlePlayerTimeout(Brain *, SharedPlayer *);
+extern void Scaled_HandlePlayerTimeout(Brain *, SharedPlayer *);
 
 void Nav_UpdateComputerPlayerStatus(Brain *brain) {
     s32 health;
@@ -109,7 +109,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
     if (brain->route == -1) {
         brain->route = brain->start;
     }
-    Nav_UpdateTargetPitch(brain);
+    Scaled_UpdateTargetPitch(brain);
     if (brain->behaviour->update != 0) {
         brain->behaviour->update(brain->player, 0);
     }
@@ -168,22 +168,22 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
     player = brain->player;
     if (player->views5E8.view650_16.state == 0x12) {
         player->views1340.view1340_1.stalls++;
-        Nav_HandlePlayerTimeout(brain, player);
+        Scaled_HandlePlayerTimeout(brain, player);
     }
 }
 
 extern CNavData D_8013B364;
-float GraphU64_GetPointDistance(void *, void *);
+float Graphu64_GetPointDistance(void *, void *);
 void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 f32 Nav_SteerTowardPoint(Brain_func_80209308_de *, CVector3 *, f32, f32);
-void Nav_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
-void Nav_DispatchActorBehavior(AiController *);
+void Scaled_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
+void Portal_DispatchActorBehavior(AiController *);
 float Math_Sqrtf(float);
-NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
-NavigationPortal *Nav_GetStridedTableEntry(CNavData *,s32);
-NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
-s32 Nav_FindLinkIndex(CNavData *,s32,s32);
-s32 Nav_AdvanceNodeQueue(AiController *);
+NavigationPoint *Portal_GetGraphPoint(CNavData *,s32);
+NavigationPortal *Portal_GetStridedTableEntry(CNavData *,s32);
+NavigationSearchNode *Portal_FindSearchNode(CNavData *,s32);
+s32 Portal_FindLinkIndex(CNavData *,s32,s32);
+s32 Scaled_AdvanceNodeQueue(AiController *);
 typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
 GroundObject *func_8024E6A0_de(Player *);
 extern f32 D_800C1BB8_de;
@@ -224,30 +224,30 @@ void Nav_SteerAlongRoute(AiController *controller) {
         controller->unk308 = 0;
         controller->unk30C = 0;
         if (controller->queue[0] != -1) {
-                point = Nav_GetGraphPoint(graph, controller->queue[0]);
+                point = Portal_GetGraphPoint(graph, controller->queue[0]);
                 pos = &controller->player->pos;
-                distance = GraphU64_GetPointDistance(pos, point);
+                distance = Graphu64_GetPointDistance(pos, point);
                 controller->unk304 = (navigation_attributes(point) & 0x300000) != 0;
                 if (controller->queue[0] == controller->current) {
-                    link = Nav_FindLinkIndex(graph, controller->previous, controller->queue[0]);
+                    link = Portal_FindLinkIndex(graph, controller->previous, controller->queue[0]);
                 } else {
-                    link = Nav_FindLinkIndex(graph, controller->current, controller->queue[0]);
+                    link = Portal_FindLinkIndex(graph, controller->current, controller->queue[0]);
                 }
                 if (link > 0) {
-                    portal = Nav_GetStridedTableEntry(graph, link);
+                    portal = Portal_GetStridedTableEntry(graph, link);
                     if (portal->kind == 4) {
                         controller->unk30C = 1;
                     }
                     if (portal->kind == 8) {
-                        GraphU64_GetPointDistance(pos, Nav_GetGraphPoint(graph, controller->current));
-                        goal = Nav_GetGraphPoint(graph, controller->queue[0]);
+                        Graphu64_GetPointDistance(pos, Portal_GetGraphPoint(graph, controller->current));
+                        goal = Portal_GetGraphPoint(graph, controller->queue[0]);
                         controller->unk308 = 1;
                         if (link != controller->unk32C) {
                             controller->unk314 = 0;
                             controller->unk32C = link;
                         }
                         if (controller->unk314 == 0) {
-                            start = Nav_GetGraphPoint(graph, controller->current);
+                            start = Portal_GetGraphPoint(graph, controller->current);
                             GraphU64_SubtractVectors(&delta, pos, &start->position);
                             if (!(Math_Sqrtf(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
@@ -299,16 +299,16 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                     } else if (portal->kind == 5) {
                         if (controller->unk314 == 0) {
-                            entry = Nav_GetGraphPoint(graph, controller->current);
-                            if (!(GraphU64_GetPointDistance(pos, entry) < D_800C1BC4_de)) {
+                            entry = Portal_GetGraphPoint(graph, controller->current);
+                            if (!(Graphu64_GetPointDistance(pos, entry) < D_800C1BC4_de)) {
                                 controller->destination = entry->position;
                                 return;
                             }
                             controller->unk314 = 1;
                         }
                         if (controller->unk314 == 1) {
-                            node = Nav_FindSearchNode(graph, controller->current);
-                            if (GraphU64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
+                            node = Portal_FindSearchNode(graph, controller->current);
+                            if (Graphu64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
                                 controller->destination = node->platform->pos;
                                 player->actionFlags |= 0x10;
                                 controller->unk314 = 2;
@@ -323,12 +323,12 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            GraphU64_SubtractVectors(&delta, pos, &Nav_FindSearchNode(graph, controller->current)->platform->pos);
+                            GraphU64_SubtractVectors(&delta, pos, &Portal_FindSearchNode(graph, controller->current)->platform->pos);
                             gap = Math_Sqrtf(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
                             } else {
-                                controller->destination = Nav_FindSearchNode(graph, controller->current)->platform->pos;
+                                controller->destination = Portal_FindSearchNode(graph, controller->current)->platform->pos;
                                 return;
                             }
                         }
@@ -341,9 +341,9 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (riding == 0) {
                                 controller->unk314 = 0;
                             }
-                            point = Nav_GetGraphPoint(graph, controller->queue[0]);
-                            node = Nav_FindSearchNode(graph, controller->queue[0]);
-                            if (GraphU64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
+                            point = Portal_GetGraphPoint(graph, controller->queue[0]);
+                            node = Portal_FindSearchNode(graph, controller->queue[0]);
+                            if (Graphu64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
                                 controller->destination = point->position;
                                 player->actionFlags |= 0x10;
                             } else {
@@ -367,7 +367,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                     }
                 }
                 if (distance < reach && controller->current == controller->queue[0]) {
-                    if (Nav_AdvanceNodeQueue(controller) == 0) {
+                    if (Scaled_AdvanceNodeQueue(controller) == 0) {
                         return;
                     }
                 }
@@ -380,7 +380,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
         return;
     }
     if (controller->queue[0] != -1) {
-        point = Nav_GetGraphPoint(graph, controller->queue[0]);
+        point = Portal_GetGraphPoint(graph, controller->queue[0]);
         if (navigation_point_flags(point) & 2) {
             controller->destination = controller->home;
             return;
@@ -444,7 +444,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1BEC_de;
                 }
             }
@@ -462,7 +462,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             if (graph != 0 && controller->current != -1) {
                 angle = 0.0f;
             }
-            tangent = Nav_GetGraphPoint(graph, controller->current)->position;
+            tangent = Portal_GetGraphPoint(graph, controller->current)->position;
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
@@ -478,7 +478,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1BF4_de;
         }
         if (controller->player->pose == 0xF) {
@@ -530,7 +530,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         Nav_SteerTowardPoint(controller, &controller->destination, 2.0f, 0.0f);
     } else {
         Nav_SteerTowardPoint(controller, &target->player->pos, 2.0f, 0.0f);
-        Nav_DispatchActorBehavior(controller);
+        Portal_DispatchActorBehavior(controller);
     }
     if (controller->unk300 == 0) {
         destination = &controller->destination;
@@ -549,7 +549,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1C10;
                 }
             }
@@ -564,7 +564,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             if (graph != 0 && controller->current != -1) {
                 angle = 0.0f;
             }
-            tangent = Nav_GetGraphPoint(graph, controller->current)->position;
+            tangent = Portal_GetGraphPoint(graph, controller->current)->position;
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
@@ -584,7 +584,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1C18;
         }
         if (controller->player->pose == 0xF) {
@@ -605,7 +605,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
 /* Steers a computer player toward a point: measures the heading error to the point through Barrel_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to func_80209910_de and returns the heading error. */
 
 extern f32 Barrel_GetSignedAngleToPoint(Player_func_80209308_de *, CVector3);
-extern void Nav_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
+extern void Scaled_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
 
 const unsigned int D_auto_src_rw_pool_80208410_C78A8_us_rev1[9] = {
     0x42480000, 0x3E860A93, 0x3E860A93, 0x42480000, 0x42480000, 0x42480000, 0x42480000, 0x42C80000,
@@ -668,7 +668,7 @@ f32 Nav_SteerTowardPoint(Brain_func_80209308_de *brain, CVector3 *target, f32 ra
             brain->player->steer = direction * scale;
         }
     }
-    Nav_SetPitchFromAngle(brain, (brain->player->gear == 2 ? brain->speed[1] + brain->speed[3] : brain->speed[0] + brain->speed[2]) * 0.017453294f, rate);
+    Scaled_SetPitchFromAngle(brain, (brain->player->gear == 2 ? brain->speed[1] + brain->speed[3] : brain->speed[0] + brain->speed[2]) * 0.017453294f, rate);
     return angle;
 }
 

@@ -27,7 +27,7 @@
 extern f32 D_800E2848;
 
 
-f32 Menu_EvaluateTrackOpacity(f32 t) {
+f32 Track_EvaluateTrackOpacity(f32 t) {
     s32 *track;
     KeyRecAt10 *key;
     s32 count;

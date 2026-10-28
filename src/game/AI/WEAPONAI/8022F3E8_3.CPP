@@ -17,7 +17,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern s32 Player_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Playerai_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
@@ -25,7 +25,7 @@ extern WeaponActionRecord D_800CE8DC[];
 
 
 
-void Weapon_DrawRedMarkerQuad(void *object, void *unused) {
+void Weaponai_DrawRedMarkerQuad(void *object, void *unused) {
     MarkerActor *actor=object;
     MarkerNode *node;
     s32 red, alpha;
@@ -113,7 +113,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && Player_PlayerHasAmmoForWeapon(actor, slot)) {
+            if ((slot < 22) && Playerai_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     if ((actor->remote == 0) || (slot < 18)) {
                         return slot;
@@ -142,7 +142,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && Player_PlayerHasAmmoForWeapon(actor, slot)) {
+            if ((slot < 22) && Playerai_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     return slot;
                 }
@@ -154,7 +154,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
     return 0;
 }
 
-s32 Weapon_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
+s32 Weaponai_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     s32 value;
     s32 number;
     s32 index;
@@ -173,7 +173,7 @@ s32 Weapon_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         while ((number < 22) && (value != player->values[number * 2])) {
             number++;
         }
-        if ((number < 22) && (Player_PlayerHasAmmoForWeapon(player, number) != 0)) {
+        if ((number < 22) && (Playerai_PlayerHasAmmoForWeapon(player, number) != 0)) {
             return number;
         }
         value++;
@@ -185,7 +185,7 @@ s32 Weapon_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         while ((index < 22) && (number != player->values[index * 2])) {
             index++;
         }
-        if ((index < 22) && (Player_PlayerHasAmmoForWeapon(player, index) != 0)) {
+        if ((index < 22) && (Playerai_PlayerHasAmmoForWeapon(player, index) != 0)) {
             return index;
         }
         number++;
@@ -195,7 +195,7 @@ s32 Weapon_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     return result;
 }
 
-void Weapon_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
+void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
     void *actor;
     s16 index;
     s32 value;

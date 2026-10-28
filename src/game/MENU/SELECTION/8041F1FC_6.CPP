@@ -40,7 +40,7 @@ void Menu_RefreshPlayerCharacterVariants(s32);
 void MarkMenuEventHandled();
 
                                   /* extern */
-s32 Frontend_ListHasFlag100(s32);
+s32 Widget_ListHasFlag100(s32);
 
                              /* extern */
 s32 SmpOverlay_GetSlotValue(s32, s32);
@@ -72,7 +72,7 @@ extern s32 D_800E4368;
 
 extern Handler802A2B50 D_800E436C;
 
-int Menu_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int message, int extra) {
+int Selection_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int message, int extra) {
     int index = message & 0xFFFF;
     EntryRecAt14V1 *e;
 
@@ -88,25 +88,25 @@ int Menu_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int mess
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 Menu_ReturnCharacterEventZeroA(void) {
+s32 Selection_ReturnCharacterEventZeroA(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 Menu_ReturnCharacterEventZeroB(void) {
+s32 Selection_ReturnCharacterEventZeroB(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 Menu_ReturnCharacterEventZeroC(void) {
+s32 Selection_ReturnCharacterEventZeroC(void) {
     return 0;
 }
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 Menu_ReturnCharacterEventZeroD(void) {
+s32 Selection_ReturnCharacterEventZeroD(void) {
     return 0;
 }
 
@@ -115,7 +115,7 @@ s32 Menu_ReturnCharacterEventZeroD(void) {
 
 /* extern */
 
-s32 Menu_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
+s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_a0;
     s32 entryIndex;
     s32 temp_s1;
@@ -144,7 +144,7 @@ s32 Menu_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
     return 0;
 }
 
-s32 Menu_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPlayer) {
+s32 Selection_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPlayer) {
     s32 entryIndex;
     s32 choice;
     s32 unusedValue;
@@ -156,12 +156,12 @@ s32 Menu_ReadSelectionSlot(s32 unusedFirst, s32 unusedSecond, s32 packedPlayer) 
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
-        else if (Frontend_ListHasFlag100(SmpOverlay_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
+        else if (Widget_ListHasFlag100(SmpOverlay_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
     }
     return 0;
 }
 
-s32 Menu_DispatchCharacterSelectionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Selection_DispatchCharacterSelectionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

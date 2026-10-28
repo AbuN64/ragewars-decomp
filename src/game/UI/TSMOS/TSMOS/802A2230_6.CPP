@@ -26,9 +26,9 @@ void Tsmos_UpdateFrontend(void) {
     if (D_800D2C98 == 1) {
         ESmem_SwapFrameHeap();
         mode = GetMenuScreenOwner();
-        Smos_RouteElementEvent(mode, 0xE08, 0, 0, 0);
-        Smos_DrawScreenStack();
-        Frontend_EvictExpiredImages();
+        Menu_RouteElementEvent(mode, 0xE08, 0, 0, 0);
+        Menu_DrawScreenStack();
+        Node_EvictExpiredImages();
         N64Eng_AdvanceFrameCounter();
         mode = GetMenuScreenOwner();
         active = 1;
@@ -48,8 +48,8 @@ mode_inactive:
         active = 0;
 mode_done:
         if ((D_801462C8.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
-            Frontend_SetupRandomTeams();
-            Frontend_StartConfiguredMatch();
+            Random_SetupRandomTeams();
+            Stage_StartConfiguredMatch();
             Tsmos_SetIdleTimer(0.0f);
         }
         D_800CDA30_de.value += D_800D2988;
@@ -71,10 +71,10 @@ s32 Tsmos_InitializeEuropeanFrontend();
 #else
 s32 InitFrontendMenus();
 #endif
-s32 Frontend_ResetJoinRequestEntries();
+s32 Join_ResetJoinRequestEntries();
 void Tsmos_InitFrontendOnce(void) {
     if (D_800D2C98 == 0) {
-        Frontend_ResetJoinRequestEntries();
+        Join_ResetJoinRequestEntries();
 #if defined(VERSION_EU)
         Tsmos_InitializeEuropeanFrontend();
 #else

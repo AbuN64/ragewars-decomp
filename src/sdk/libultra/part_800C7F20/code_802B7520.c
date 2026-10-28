@@ -45,7 +45,7 @@ void alClose(s32 *audioGlobals) {
 
     p = (void **)&D_800D4070;
     if (*p != 0) {
-        func_802B31F0_de(audioGlobals);
+        alSynDelete(audioGlobals);
         *p = 0;
     }
 }

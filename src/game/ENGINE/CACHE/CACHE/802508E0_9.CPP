@@ -16,21 +16,21 @@ extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);
 
 extern s8 D_801051A0;
 
-extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
+extern struct Shape_typemap_165 *Cache_AcquireResourceNodeWithEviction(s32, u32);
 
 extern s32 func_80255630_de(s8 *, void *, s32);
 
-extern void func_80254C70_de(s32 unused, void *object);
+extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
-extern void func_80254DA4_de(void *, Node80253610 *);
+extern void Cache_TouchResource(void *, Node80253610 *);
 
-extern void func_80254990_de(void *, void *);
+extern void Cache_ReleaseResourceCompletely(void *, void *);
 
-extern void func_802511AC_de(s32);
+extern void Cache_WaitForResourceSlotRelease(s32);
 
-extern s32 func_80254B58_de(s32, s32, s32);
+extern s32 Cache_SelectAllocationCandidate(s32, s32, s32);
 
 
 
@@ -90,16 +90,16 @@ struct Shape_typemap_165 *Cache_AllocateResourceAt(void *arg0, void *requestedAd
     } else {
         __osRestoreInt(mask);
     }
-    allocatedResource = func_802514A8_de(0, 0U);
+    allocatedResource = Cache_AcquireResourceNodeWithEviction(0, 0U);
     if (allocatedResource != 0) {
         allocatedAddress = func_80255630_de(&D_801051A0, requestedAddress, byteCount);
         allocatedResource->field_0 = allocatedAddress;
         if (allocatedAddress != 0) {
             allocatedResource->field_4 = byteCount;
             allocatedResource->field_C |= 3;
-            func_80254C70_de(0, allocatedResource);
+            Cache_InsertResourceByAddress(0, allocatedResource);
         } else {
-            func_80254AD0_de(0, allocatedResource);
+            Cache_ReleasePendingResourceEntry(0, allocatedResource);
             allocatedResource = 0;
         }
     }
@@ -133,7 +133,7 @@ void Cache_LockResource(void *arg0, Node80253610 *resource) {
     } else {
         __osRestoreInt(mask);
     }
-    func_80254DA4_de(0, resourceNode);
+    Cache_TouchResource(0, resourceNode);
     resourceNode->references += 1;
     resourceNode->flags |= 0x100;
     unlockInterruptMask = __osDisableInt();
@@ -196,7 +196,7 @@ void Cache_ReleaseResource(void *arg0, void *resource) {
     } else {
         __osRestoreInt(mask);
     }
-    func_80254990_de(0, resource);
+    Cache_ReleaseResourceCompletely(0, resource);
     unlockInterruptMask = __osDisableInt();
     remainingLockUsers = D_8010515C - 1;
     D_8010515C = remainingLockUsers;
@@ -224,10 +224,10 @@ void func_80253908_de(s32 unusedHeap) {
     } else {
         __osRestoreInt(mask);
     }
-    func_802511AC_de(0);
-    while (func_80254B58_de(0, 0, 0) != 0) {
+    Cache_WaitForResourceSlotRelease(0);
+    while (Cache_SelectAllocationCandidate(0, 0, 0) != 0) {
     }
-    func_802515F0_de(0, 1);
+    Cache_CompactResourceHeap(0, 1);
     unlockInterruptMask = __osDisableInt();
     remainingLockUsers = D_8010515C - 1;
     D_8010515C = remainingLockUsers;
@@ -239,7 +239,7 @@ void func_80253908_de(s32 unusedHeap) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void func_802539EC_de(s32 unused, s32 resourceSlot) {
+void Cache_SelectResourceSlot(s32 unused, s32 resourceSlot) {
     s32 lockClaimCount;
     s32 lockReleaseCount;
     ResourceLockState *base;
@@ -269,7 +269,7 @@ void func_802539EC_de(s32 unused, s32 resourceSlot) {
     __osRestoreInt(releaseInterruptMask);
 }
 
-s32 func_80253AD4_de(void) {
+s32 Cache_FinishResourceSlot(void) {
     s32 lockClaimCount;
     s32 lockReleaseCount;
     s32 *base;

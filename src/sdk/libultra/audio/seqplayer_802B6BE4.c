@@ -6,7 +6,7 @@
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
-extern void func_802B3470_de(void *arg0, void *arg1, s16 arg2);
+extern void alSynSetPriority(void *arg0, void *arg1, s16 arg2);
 
 extern void alSynSetVol(void *arg0, void *arg1, s16 arg2, s32 arg3);
 
@@ -65,7 +65,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     object->envPhase = 3;
     object->envGain = 0;
     object->envEndTime = ((ALSeqPlayer *)seqPlayer)->curTime + releaseDuration;
-    func_802B3470_de(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0);
+    alSynSetPriority(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0);
     alSynSetVol(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0, releaseDuration);
     entry.type = 5;
     entry.object = releasedVoice;

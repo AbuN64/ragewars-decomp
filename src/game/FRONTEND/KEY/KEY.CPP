@@ -10,7 +10,7 @@
 
 extern struct SlotRecAt0V1 D_800E3A54[];
 
-s32 Frontend_FindKeyIndex(s32 key) {
+s32 Key_FindKeyIndex(s32 key) {
     s32 index = 0;
     s32 found = 0;
     s32 i;
@@ -33,13 +33,13 @@ extern s_CharacterData D_800E3A50[];
 
 
 /* Returns the second word of the first of the seventeen 0x70-byte slots of D_800E3A50 whose leading word equals the argument, or zero when none does.
-   Adapted from func_8041F18C_de with the returned index changed to the slot's second word D_800E3A54. */
+   Adapted from Key_FindCharacterPreviewRow with the returned index changed to the slot's second word D_800E3A54. */
 
 
 
 
 
-s32 func_8041F18C_de(s32 key) {
+s32 Key_FindCharacterPreviewRow(s32 key) {
     s32 index = 0;
     s32 found = 0;
     s32 i;
@@ -53,7 +53,7 @@ s32 func_8041F18C_de(s32 key) {
     return index;
 }
 
-s32 func_8041F1D8_de(s32 key) {
+s32 Key_GetCharacterPreviewModel(s32 key) {
     s32 value = 0;
     s32 found = 0;
     s32 i;

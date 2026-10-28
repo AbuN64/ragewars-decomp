@@ -63,34 +63,34 @@
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
 
-/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x1D3, passes -1 to Frontend_SetMenuChoiceResult if
-   Smos_GetPreviousScreenOwner reports 0x16 for zero and 0xB otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
+/* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x1D3, passes -1 to Random_SetMenuChoiceResult if
+   Menu_GetPreviousScreenOwner reports 0x16 for zero and 0xB otherwise, then calls Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
-   and 0xB otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes -1 to Random_SetMenuChoiceResult when Menu_GetPreviousScreenOwner reports 0x16 for zero
+   and 0xB otherwise, then calls Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 s32 Menu_ConfirmSoundSliderPopup(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Smos_GetFocusedElementId() == 0x1CF) {
+    if (Menu_GetFocusedElementId() == 0x1CF) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Smos_GetFocusedElementId() == 0x1D3) {
+    if (Menu_GetFocusedElementId() == 0x1D3) {
 #elif defined(VERSION_EU_X)
-    if (Smos_GetFocusedElementId() == 0x1DC) {
+    if (Menu_GetFocusedElementId() == 0x1DC) {
 #endif
-        Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
-        Smos_ReturnToPreviousScreen();
+        Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+        Menu_ReturnToPreviousScreen();
     }
     return 0;
 }
 
 s32 Menu_CancelSoundSliderPopup(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }

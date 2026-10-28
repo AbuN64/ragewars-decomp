@@ -28,7 +28,7 @@
 
 
 
-extern s64 func_802BADC0_de(void);
+extern s64 Audio_ReadSystemTime(void);
 
 extern void osSpTaskLoad(s32 *mode);
 
@@ -43,14 +43,14 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
     s64 now;
 
     if (next != 0 && (next->flags & 0x20) && !(next->state & 0x10)) {
-        D_8011B1E8 = func_802BADC0_de();
+        D_8011B1E8 = Audio_ReadSystemTime();
     }
     if (current != 0) {
         if (current->list.type == 2) {
             osWritebackDCacheAll();
-            D_8011B1D0 = func_802BADC0_de();
+            D_8011B1D0 = Audio_ReadSystemTime();
         } else if (current->flags & 0x20) {
-            now = func_802BADC0_de();
+            now = Audio_ReadSystemTime();
             D_8011B1E0 = now;
             if (!(current->state & 0x10)) {
                 D_8011B1F0 = now;

@@ -37,26 +37,26 @@ s32 func_802624D8_de(void *animationState) {
     if (temp == 0) {
         return 0;
     }
-    return func_802532F4_de(temp) != 0;
+    return Cache_IsResourceRetained(temp) != 0;
 }
 
 void func_80262504_de(void *animationState, Six *recordOut) {
-    Six *result = (Six *)SetN64_GetPackSection((void *)func_8026049C_de(animationState), 6);
+    Six *result = (Six *)SetN64_GetPackSection((void *)Polytrak2_GetResidentResource(animationState), 6);
 
     *recordOut = *result;
 }
 
 /* GASTATE_4.CPP */
 char *func_80262564_de(void *animationState) {
-    return SetN64_GetPackSection(SetN64_GetPackSection(func_8026049C_de(animationState), 3), 0);
+    return SetN64_GetPackSection(SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 3), 0);
 }
 
 s32 func_80262598_de(void *animationState) {
-    return SetN64_GetPackSection(func_8026049C_de(animationState), 4) + 8;
+    return SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 4) + 8;
 }
 
 s32 func_802625C4_de(void *animationState) {
-    return (((struct func_80203E78_S1 *) ((s8 *) SetN64_GetPackSection(func_8026049C_de(animationState), 4)))->unk4);
+    return (((struct func_80203E78_S1 *) ((s8 *) SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 4)))->unk4);
 }
 
 /* GASTATE_5.CPP */
@@ -73,7 +73,7 @@ void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     f32 b_term;
     f32 e_term;
 
-    base = (s16 *)((ResidentDataChunk *)SetN64_GetPackSection(func_8026049C_de(animationState), 0))->data;
+    base = (s16 *)((ResidentDataChunk *)SetN64_GetPackSection(Polytrak2_GetResidentResource(animationState), 0))->data;
     count = (s16)animationState->count;
     nextAngleFrame = count - 1;
     currentAngleFrame = (s32) framePosition;
@@ -83,7 +83,7 @@ void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     }
     b_term = (f32) base[currentAngleFrame] * D_800C4258_de;
     e_term = (f32) base[nextAngleFrame] * D_800C4258_de;
-    GraphU64_InterpolateWrappedValue(framePosition - (f32) currentAngleFrame, b_term, e_term);
+    Graphu64_InterpolateWrappedValue(framePosition - (f32) currentAngleFrame, b_term, e_term);
 }
 
 s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup, s32 animationId) {
@@ -107,7 +107,7 @@ s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup,
         return 0;
     }
 
-    resource = func_8026049C_de(animationState);
+    resource = Polytrak2_GetResidentResource(animationState);
     entry = SetN64_GetPackSection(resource, 0);
     value = entry->unk6;
     out->id = animationId;

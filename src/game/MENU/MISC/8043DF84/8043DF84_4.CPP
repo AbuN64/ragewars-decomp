@@ -34,7 +34,7 @@ extern char D_800DE2F0[];
 #endif
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
+s32 CMenuProfile_FormatProfileQuantityLabel(struct Field *field, Shared_MenuHandle *holder) {
     s32 value = holder->owner->views5D8.view5D8_9.profile->quantity;
     char *text;
 

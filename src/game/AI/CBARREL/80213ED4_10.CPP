@@ -17,7 +17,7 @@
 extern void Lists_ClearWeightedTable(WeightedTable *);
 extern s32 func_80246A08_de(s32, s32, s32);
 
-s32 Barrel_SelectWeightedAnimation(s32 owner, s32 unused, struct IntPair *table, s32 flags) {
+s32 Cbarrel_SelectWeightedAnimation(s32 owner, s32 unused, struct IntPair *table, s32 flags) {
     WeightedTable picker;
     s32 first;
     s16 pick;

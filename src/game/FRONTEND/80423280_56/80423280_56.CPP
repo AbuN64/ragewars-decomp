@@ -25,7 +25,7 @@ extern void MarkMenuEventHandled();
 
 extern s32 Frontend_GetMenuImageState(void *);
 
-extern s32 Smos_GetFocusedElementId();
+extern s32 Menu_GetFocusedElementId();
 
 extern void Frontend_StartMenuImageTransition(void *);
 
@@ -64,7 +64,7 @@ s32 Frontend_ActivateResultsAction(void) {
     }
     paused = &D_80146894;
     *paused = 0;
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x235 - 2:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -99,7 +99,7 @@ s32 Frontend_ActivateResultsAction(void) {
     case 0x23E + 3:
 #endif
         if (ScenarioSetup_IsCupSelected() == 1) {
-            Frontend_SetMenuChoiceResult(0x21);
+            Random_SetMenuChoiceResult(0x21);
             return 0;
         }
         if (((u8 *)paused)[-0x5BF] == 0) {

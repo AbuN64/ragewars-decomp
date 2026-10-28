@@ -12,7 +12,7 @@ extern f32 D_800C8628;
 
 
 
-void func_8023913C_de(GameplayCamera *camera) {
+void Gsky_ResetHeadBob(GameplayCamera *camera) {
     if (camera != 0) {
         f32 f0 = D_800C352C_de;
         f32 f1 = D_800C3530_de;

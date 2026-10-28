@@ -46,7 +46,7 @@ extern Params D_80100290;
 
 
  /* extern */
-s32 DynLight_AllocateWorldLight(void *, s8);
+s32 Gdynlight_AllocateWorldLight(void *, s8);
 
  /* extern */
 void Particle_PlayAttachedSound(void *, s32);
@@ -312,7 +312,7 @@ void Particle_InitializeAttachmentsAndSound(ObjParticleInitializeAttachmentsAndS
         Fx_AttachActorRibbon(&D_801379C0, actor, resourceId);
     }
     temp_a1 = arg1->unk7;
-    actor->unk138 = temp_a1 == -1 ? 0 : DynLight_AllocateWorldLight(&D_8013B1A8, temp_a1);
+    actor->unk138 = temp_a1 == -1 ? 0 : Gdynlight_AllocateWorldLight(&D_8013B1A8, temp_a1);
     if (!(actor->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
         switch(actor->unk4) {
         case 0x22: case 0x5f: case 0x60:

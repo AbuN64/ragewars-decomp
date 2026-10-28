@@ -6,13 +6,13 @@
 #include "sdk/AUDIO/802C3EA4_3.H"
 
 s16 Audio_DecodeFrame();
-u32 func_802BFE3C_de(void) {
+u32 Audio_DecodeFrameOk(void) {
     return (u32) ~Audio_DecodeFrame() >> 0x1F;
 }
 
 /* Fills the first N words of an index table with 0..N-1, then applies the bit-reversal
    permutation of an FFT of length N to it, swapping entries in place. */
-void func_802BFE68_de(s32 *permutation, s32 elementCount) {
+void Audio_InitBitReverseOrder(s32 *permutation, s32 elementCount) {
     s32 *ptr;
     s32 i;
     s32 j;
@@ -52,7 +52,7 @@ void func_802BFE68_de(s32 *permutation, s32 elementCount) {
 }
 
 /** Interleave the first and mirrored halves of 128 float pairs. */
-void func_802BFF30_de(float *output, float *input) {
+void Audio_ReorderTransformSamples(float *output, float *input) {
     short i = 0;
     do {
         output[i * 2] = input[i * 2];
@@ -62,7 +62,7 @@ void func_802BFF30_de(float *output, float *input) {
 }
 
 /** Complex-multiply 128 (re,im) pairs in-place by per-element (a,b) factors. */
-void func_802BFF90_de(float *samples, float *rotationReal, float *rotationImaginary) {
+void Audio_RotateComplexSamples(float *samples, float *rotationReal, float *rotationImaginary) {
     short i = 0;
     do {
         float re = samples[i * 2];
@@ -81,7 +81,7 @@ void Audio_TransformFft(f32 *data, FftTables *tables, s32 sign) {
     Audio_ComplexFft(data, tables->size, sign, tables->sines, tables->cosines, tables->order);
 }
 
-s16 func_802C0044_de(f32 sample) {
+s16 Audio_QuantizeSampleS16(f32 sample) {
     f32 f0;
     f32 f12;
 
@@ -102,7 +102,7 @@ s16 func_802C0044_de(f32 sample) {
 }
 
 /** Initialize the global decoder state and return its scaled period. */
-u32 func_802C00B0_de(s32 *source, u32 divisor, s32 *first)
+u32 Audio_InitDecodeStream(s32 *source, u32 divisor, s32 *first)
 {
     DecodeState *state = &D_8014BA38_de;
     state->source = source;

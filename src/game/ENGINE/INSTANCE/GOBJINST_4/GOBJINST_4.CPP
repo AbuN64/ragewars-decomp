@@ -13,7 +13,7 @@
 #include "particle/8027A0F4_8.H"
 
 /* GOBJINST_6.CPP */
-/* Refreshes the actor's animation from the lookup through func_8024AA18_de and Geometry_DrawModelResource and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from func_8024C454_de with its body moved into a static inline helper, the func_8024B8EC_de update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
+/* Refreshes the actor's animation from the lookup through func_8024AA18_de and Geometry_DrawModelResource and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from Gobjinst_SpawnAnimatedModelViewEffect with its body moved into a static inline helper, the Gobjinst_DrawMaskedModel update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
 
 extern char D_8011D8D0;
 

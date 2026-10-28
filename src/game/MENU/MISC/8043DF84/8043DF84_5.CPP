@@ -7,7 +7,7 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/8043DF84_5.H"
 
-extern s8 Pak_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+extern s8 Menu_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
@@ -37,23 +37,23 @@ extern void Control_EnableControllerPak(s32 kind);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
    func_804097E8_de, cancels the active countdown sound through func_8025E214_de, then reallocates a
-   fresh scoreboard entry via Pak_OpenDialog using arg1's fields at 0x1C and 0x20, and always
+   fresh scoreboard entry via Menu_OpenDialog using arg1's fields at 0x1C and 0x20, and always
    reports success. */
 
 extern s32 D_8014561C;
 
 extern s32 D_0044E468;
 
-void Pak_ClearTimerFlag(void);
+void Timer_ClearTimerFlag(void);
 
-void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
+void *Menu_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 
-/** Runs a target's animation/state transition through Pak_AdjustValue and stores the new state. */
-s32 func_8043E3CC_de(void *arg0, Outer8043E458 *menuContext) {
+/** Runs a target's animation/state transition through Menu_AdjustValue and stores the new state. */
+s32 CMenuProfile_ToggleProfileMode(void *arg0, Outer8043E458 *menuContext) {
     Target8043E458 *profileOptions;
 
     profileOptions = menuContext->unk1C->unk5D8;
-    profileOptions->unk7B = Pak_AdjustValue(menuContext, profileOptions->unk7B, 1, 0, 1, 1);
+    profileOptions->unk7B = Menu_AdjustValue(menuContext, profileOptions->unk7B, 1, 0, 1, 1);
     return 0;
 }
 
@@ -63,7 +63,7 @@ s32 func_8043E418_de(void *unused0, void *menuOwner, void *menuContext) {
     return 1;
 }
 
-s32 func_8043E444_de(Shared_DebugWidget *widget, Shared_MenuHandle *handle) {
+s32 CMenuProfile_BindSelectedDebugField(Shared_DebugWidget *widget, Shared_MenuHandle *handle) {
     widget->field = D_800E1CC0[handle->selection->index];
     return 0;
 }
@@ -74,7 +74,7 @@ s32 func_8043E468_de(void *unused0, void *menuOwner, void *menuContext) {
     return 1;
 }
 
-s32 func_8043E494_de(ObjRecAt14V1 *modeLabel, Menu_func_8043E494_de *menu) {
+s32 CMenuProfile_UpdateProfileModeLabel(ObjRecAt14V1 *modeLabel, MenuCMenuProfileUpdateProfileModeLabel *menu) {
     switch (menu->owner->record->mode) {
     case 0:
         modeLabel->unk14 = &D_800D7688;
@@ -87,28 +87,28 @@ s32 func_8043E494_de(ObjRecAt14V1 *modeLabel, Menu_func_8043E494_de *menu) {
 }
 
 /** Forwards the pointed-to inner byte field on to func_80264770_de. */
-void func_8043E4E0_de(Outer8043E56C *menuOwner) {
+void CMenuProfile_EnableOwnerControllerPak(Outer8043E56C *menuOwner) {
     Control_EnableControllerPak(menuOwner->unk20->unk4);
 }
 
-void func_8043E504_de(struct Shared_PakMenu *pakMenu) {
+void CMenuProfile_EnableControllerPakAndClearState(struct Shared_PakMenu *pakMenu) {
     Control_EnableControllerPak(pakMenu->owner->unk4);
     D_800E28C0 = 0;
 }
 
-s32 func_8043E530_de(void) {
+s32 CMenuProfile_HasProfileRoundProgress(void) {
     CGameStatus *state = &D_801462C8.counters;
 
     return state->round != 0 || state->elapsed != 0 || state->state != 0;
 }
 
-s32 func_8043E568_de(void *unused0, Arg1Struct *menuContext) {
+s32 CMenuProfile_OpenTimedPlayerDialog(void *unused0, Arg1Struct *menuContext) {
     s32 val1C;
 
     val1C = menuContext->unk1C;
-    Pak_ClearTimerFlag();
+    Timer_ClearTimerFlag();
     ((s32 (*)(s32))func_8025E214_de)(-1);
-    Pak_OpenDialog(&D_8014561C, &D_0044E468, val1C, menuContext->unk20, 0);
+    Menu_OpenDialog(&D_8014561C, &D_0044E468, val1C, menuContext->unk20, 0);
     return 1;
 }
 

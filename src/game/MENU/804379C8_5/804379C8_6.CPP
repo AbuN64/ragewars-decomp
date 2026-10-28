@@ -13,7 +13,7 @@ extern struct SoundOptionsScreen *D_800E58A0;
 
 
 /* Runs the sound options screen D_800E58A0 each frame: when its menu reports 4 it calls
-   MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the stored target or Smos_ReturnToPreviousScreen when
+   MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the stored target or Menu_ReturnToPreviousScreen when
    that is -1; otherwise it copies the effects slider into option byte D_801462E1, playing sound
    0x460 when it changed, and the music slider into D_801462E0, stopping the music through
    func_8025E2D4_de(0) below 5 or starting track 0x34 when func_8025E2C4_de reports none playing.
@@ -34,7 +34,7 @@ extern void SmXlate_SwitchScreen(s32);
 
 
 
-/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x73, sets the word at offset 0x14 of the object
+/* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x73, sets the word at offset 0x14 of the object
    D_800E58A0 points to to -1 and calls SmpSlider_SetTransitionMode on its first word with 2. Returns zero. */
 
 
@@ -64,7 +64,7 @@ s32 Menu_UpdateSoundOptionsScreen(void) {
             SmXlate_SwitchScreen(D_800E58A0->target);
             return 0;
         }
-        Smos_ReturnToPreviousScreen();
+        Menu_ReturnToPreviousScreen();
         return 0;
     }
     value = SmpSlider_GetSliderItem(D_800E58A0->effects);
@@ -92,11 +92,11 @@ s32 Menu_ConfirmSoundOptionsScreen(void) {
     struct SoundOptionsScreen *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Smos_GetFocusedElementId() == 0x71) {
+    if (Menu_GetFocusedElementId() == 0x71) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Smos_GetFocusedElementId() == 0x73) {
+    if (Menu_GetFocusedElementId() == 0x73) {
 #elif defined(VERSION_EU_X)
-    if (Smos_GetFocusedElementId() == 0x77) {
+    if (Menu_GetFocusedElementId() == 0x77) {
 #endif
         state = D_800E58A0;
         state->target = -1;

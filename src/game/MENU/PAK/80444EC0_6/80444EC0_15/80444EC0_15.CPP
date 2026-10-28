@@ -58,7 +58,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E384_de();
     func_8025E29C_de(1);
     D_800E63B4 = 1;
-    func_802649FC_de();
+    Control_ClearMenuControlFlag();
     Pak_AllocateMenu(third, second, D_00451094);
     return 1;
 }
@@ -67,7 +67,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Restarts sound: calls func_8025E3A8_de, records what func_8025E2C4_de returns in D_800E63B0, passes
    D_800E63B8 to func_8025E2D4_de, calls func_8025E384_de and func_8025E29C_de with 1, sets D_800E63B4,
-   calls func_802649FC_de and then Pak_AllocateMenu with the third argument, the second and D_451F58.
+   calls Control_ClearMenuControlFlag and then Pak_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
@@ -77,7 +77,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E384_de();
     func_8025E29C_de(1);
     D_800E63B4 = 1;
-    func_802649FC_de();
+    Control_ClearMenuControlFlag();
     Pak_AllocateMenu(third, second, D_00451094);
     return 1;
 }
@@ -118,12 +118,12 @@ s32 Pak_UpdateOwnerModeText(struct FieldRecAt14 *field, struct Holder *holder) {
     return 0;
 }
 
-/* Replaces D_800D0EBC with what Pak_AdjustValue returns for the second argument, D_800D0EBC, 1, 0, 1 and 1,
+/* Replaces D_800D0EBC with what Menu_AdjustValue returns for the second argument, D_800D0EBC, 1, 0, 1 and 1,
    and returns zero. */
-extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
+extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 Pak_AdjustOwnerNotificationOption(void *first, void *second) {
-    D_800D0EBC = Pak_AdjustValue(second, D_800D0EBC, 1, 0, 1, 1);
+    D_800D0EBC = Menu_AdjustValue(second, D_800D0EBC, 1, 0, 1, 1);
     return 0;
 }
 #endif

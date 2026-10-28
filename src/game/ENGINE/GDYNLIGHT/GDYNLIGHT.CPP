@@ -14,7 +14,7 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index);
 
-void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1);
+void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1);
 
 void DynLight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                    CVector3 *arg4, f32 *arg5) {
@@ -69,11 +69,11 @@ void DynLight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u3
     }
 }
 
-void *DynLight_AllocateWorldLight(s32 arg0, s32 index) {
-    return DynLight_AllocateLightNode(arg0, Scene_GetStridedWorldRecord(&g_world, index));
+void *Gdynlight_AllocateWorldLight(s32 arg0, s32 index) {
+    return Gdynlight_AllocateLightNode(arg0, Scene_GetStridedWorldRecord(&g_world, index));
 }
 
-void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1) {
+void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1) {
     void *temp_s0;
 
     temp_s0 = ((IntrusiveList *)intrusiveList)[1].head;
@@ -92,12 +92,12 @@ void DynLight_ReleaseLight(void *a, s32 b) {
     func_80255CB8_de(a + 0x14, b);
 }
 
-int DynLight_GetFirstLight(void *intrusiveList) {
+int Gdynlight_GetFirstLight(void *intrusiveList) {
     IntrusiveList *list = intrusiveList;
     return (int)list->head;
 }
 
-int DynLight_GetNextLight(void *unused0, void *rangeNode) {
+int Gdynlight_GetNextLight(void *unused0, void *rangeNode) {
     RangeNode *node = rangeNode;
     return (int)node->next;
 }

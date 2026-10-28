@@ -63,8 +63,8 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
         }
 
         if (buffer[0] != 0) {
-            Nav_ResetSearchState(base);
-            Nav_ClearGoalList(base);
+            Portal_ResetSearchState(base);
+            Route_ClearGoalList(base);
 
             key = &arg0->unk_4;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
@@ -74,14 +74,14 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
             }
 
             base->selected = -1U;
-            Nav_SearchPathByKey(base, *key);
+            Route_SearchPathByKey(base, *key);
 
             sel = base->selected;
             if (sel != -1U) {
-                record = Nav_FindSearchNode(base, sel);
+                record = Portal_FindSearchNode(base, sel);
                 arg0->unk_C = base->selected;
                 arg0->unk_68 = record->goal;
-                Nav_ReconstructSearchPath(base, arg0->history, 4);
+                Route_ReconstructSearchPath(base, arg0->history, 4);
                 return 1;
             }
             arg0->unk_68 = 0;
@@ -157,8 +157,8 @@ int Nav_SelectPickupGoalEu(void *self) {
         }
 
         if (buffer[0] != 0) {
-            Nav_ResetSearchState(base);
-            Nav_ClearGoalList(base);
+            Portal_ResetSearchState(base);
+            Route_ClearGoalList(base);
 
             key = &arg0->unk_4;
             if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
@@ -168,14 +168,14 @@ int Nav_SelectPickupGoalEu(void *self) {
             }
 
             base->selected = -1U;
-            Nav_SearchPathByKey(base, *key);
+            Route_SearchPathByKey(base, *key);
 
             sel = base->selected;
             if (sel != -1U) {
-                record = Nav_FindSearchNode(base, sel);
+                record = Portal_FindSearchNode(base, sel);
                 arg0->unk_C = base->selected;
                 arg0->unk_68 = record->goal;
-                Nav_ReconstructSearchPath(base, arg0->history, 4);
+                Route_ReconstructSearchPath(base, arg0->history, 4);
                 return 1;
             }
             arg0->unk_68 = 0;

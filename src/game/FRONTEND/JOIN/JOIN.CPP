@@ -5,7 +5,7 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 extern ResidentEventHandlerEntry D_800EB1A4[];
 
-s32 Frontend_DispatchEuJoinOptionsEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Join_DispatchEuJoinOptionsEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 index;
     index = 0;
     if (D_800EB1A4[index].handler != 0) {

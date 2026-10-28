@@ -16,22 +16,22 @@ const unsigned int D_blob_d39bcb9851fad48bdbd2[1] = {
     0xC4FA0000,
 };
 
-/* Reads a sampled track from a stream: parses its header through func_8025FFB0_de, evaluates the track at each whole frame into the first float of consecutive 16-byte output records, and advances the stream cursor past the track's key data. */
+/* Reads a sampled track from a stream: parses its header through Polytrak2_InitializePackedCurve, evaluates the track at each whole frame into the first float of consecutive 16-byte output records, and advances the stream cursor past the track's key data. */
 
-extern void func_8025FFB0_de(Track_func_80261180_de *track, char **cursor);
+extern void Polytrak2_InitializePackedCurve(TrackBitarrayExpandCurveSamples *track, char **cursor);
 
-extern f32 PolyTrak_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond);
+extern f32 Polytrak2_SampleAnimationCurve(TrackBitarrayExpandCurveSamples *track, f32 time, s32 unusedFirst, s32 unusedSecond);
 
 #if defined(VERSION_EU)
 extern s32 func_8025F094_eu(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_EU_X)
 extern s32 func_8025F0C4_eu_x(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US)
-extern s32 func_8025F074_us(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_DecodeAndSmoothSampleTracks(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US_REV1)
-extern s32 PolyTrak_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 #else
-extern s32 func_8025F0D4_de(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_DecodeTrackSections(void *, void *, s32, s32, s32, s32);
 #endif
 
 extern s32 D_8010AC78;
@@ -40,29 +40,29 @@ extern s32 D_8010AC74;
 
 /* Seeks the containing frame in a variable-length stream and reloads it when the frame changes. */
 
-extern void func_8025FD74_de(Curve *arg0);
+extern void Polytrak2_DecodeCubicSegment(Curve *arg0);
 
-extern u32 func_802606C4_de(s32,s32);
+extern u32 Polytrak2_ReadBitsAtAddress(s32,s32);
 
 extern f32 D_800C41A8_de[2];
 
-void func_80261180_de(char **stream, f32 *out, s32 frames)
+void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames)
 {
-    Track_func_80261180_de track;
+    TrackBitarrayExpandCurveSamples track;
     char *cursor;
     s32 i;
 
     cursor = *stream;
-    func_8025FFB0_de(&track, &cursor);
+    Polytrak2_InitializePackedCurve(&track, &cursor);
     for (i = 0; i < frames; i++) {
-        *out = PolyTrak_SampleAnimationCurve(&track, i, 0, 0);
+        *out = Polytrak2_SampleAnimationCurve(&track, i, 0, 0);
         out += 4;
     }
     cursor += track.stride * (track.keys * 4 + 6);
     *stream = cursor;
 }
 
-void func_80261238_de(s32 bitCursor, void *arg1, s32 arg2)
+void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *arg1, s32 arg2)
 {
   int new_var;
   s32 sp10;
@@ -76,7 +76,7 @@ void func_80261238_de(s32 bitCursor, void *arg1, s32 arg2)
     do
     {
       var_s0 += 1;
-      sp10 = func_802607B8_de(bitCursor, 0x20);
+      sp10 = Polytrak2_ReadBitsAndAdvance(bitCursor, 0x20);
       *((f32 *) var_s1) = *((f32 *) (&sp10));
       var_s1 += 0x10;
     }
@@ -84,7 +84,7 @@ void func_80261238_de(s32 bitCursor, void *arg1, s32 arg2)
   }
 }
 
-s32 func_802612A8_de(void *sourceMotionPack, void *destinationMotionPack) {
+s32 Bitarray_ExpandMotionPack(void *sourceMotionPack, void *destinationMotionPack) {
     Entry802612C8 *first;
     void *a;
     void *b;
@@ -110,11 +110,11 @@ func_8025F094_eu
 #elif defined(VERSION_EU_X)
 func_8025F0C4_eu_x
 #elif defined(VERSION_US)
-func_8025F074_us
+Polytrak2_DecodeAndSmoothSampleTracks
 #elif defined(VERSION_US_REV1)
-PolyTrak_ExpandAnimationTracks
+Polytrak2_ExpandAnimationTracks
 #else
-func_8025F0D4_de
+Polytrak2_DecodeTrackSections
 #endif
 (a, c, first->n14, 3, first->x, first->z) == 0) {
         return 0;
@@ -130,11 +130,11 @@ func_8025F094_eu
 #elif defined(VERSION_EU_X)
 func_8025F0C4_eu_x
 #elif defined(VERSION_US)
-func_8025F074_us
+Polytrak2_DecodeAndSmoothSampleTracks
 #elif defined(VERSION_US_REV1)
-PolyTrak_ExpandAnimationTracks
+Polytrak2_ExpandAnimationTracks
 #else
-func_8025F0D4_de
+Polytrak2_DecodeTrackSections
 #endif
 (b, d, first->n10, 4, first->x, first->z) != 0;
 }
@@ -145,7 +145,7 @@ int func_8026140C_de(char *object) {
     return stream->unkC;
 }
 
-void func_80261418_de(Stream *arg0, u32 sampleIndex) {
+void Bitarray_SeekCurveSegment(Stream *arg0, u32 sampleIndex) {
     u32 segmentSampleCounts[64];
     s32 temp_a0;
     s32 temp_lo;
@@ -170,25 +170,25 @@ void func_80261418_de(Stream *arg0, u32 sampleIndex) {
         segmentBitCursor += segmentIndex * temp_s6;
         if(sampleIndex < activeSegmentStart) {
             segmentBitCursor=firstSegmentBitAddress;segmentIndex=0;segmentStartSample=0;
-            segmentEndSample=func_802606C4_de(segmentBitCursor,6);
+            segmentEndSample=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
         }
         for (;;) {
             segmentBitCursor += temp_s6;
             if(sampleIndex>=segmentStartSample && sampleIndex<segmentEndSample) {
                 if(segmentIndex!=arg0->unk28) {
-                    arg0->unk24=segmentStartSample;arg0->unk28=segmentIndex;func_8025FD74_de(arg0);
+                    arg0->unk24=segmentStartSample;arg0->unk28=segmentIndex;Polytrak2_DecodeCubicSegment(arg0);
                 }
                 break;
             }
             segmentIndex++;
             segmentStartSample=segmentEndSample;
-            segmentSampleCounts[segmentIndex]=func_802606C4_de(segmentBitCursor,6);
+            segmentSampleCounts[segmentIndex]=Polytrak2_ReadBitsAtAddress(segmentBitCursor,6);
             segmentEndSample+=segmentSampleCounts[segmentIndex];
         }
     }
 }
 
-s32 func_8026154C_de(f32 arg0)
+s32 Bitarray_GetQuantizationBitCount(f32 arg0)
 {
   unsigned long long new_var;
   f32 temp_f1;
@@ -225,7 +225,7 @@ unsigned int func_8026160C_de(unsigned int value) {
     return value & 0x1F;
 }
 
-u32 func_80261614_de(s32 arg0) {
+u32 Bitarray_GetRequiredBitCount(s32 arg0) {
     u32 var_a1;
     u32 highestSetBit;
     u32 var_v1;

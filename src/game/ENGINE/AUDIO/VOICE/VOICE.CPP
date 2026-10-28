@@ -27,15 +27,15 @@
 
 extern void alSndpPlay(void *);
 
-extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
+extern void Channel_InitializeVoicePitchMotion(void *arg0, void *arg1, s32 arg2);
 
 extern void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, s32 arg1);
 
 extern s32 Audio_GetSpatialPanMode(void *arg0);
 
-extern s16 func_80259B10_de(void *arg0, GameplayCamera *arg1);
+extern s16 Channel_ComputeListenerRelativePan(void *arg0, GameplayCamera *arg1);
 
-extern void func_8025AE1C_de(void *arg0);
+extern void Channel_UpdateVoicePlayback(void *arg0);
 
 /* Returns how strongly a listener at 0x128 hears a source at 0x34: one minus the squared distance over the squared range D_800D0D10 (zero beyond it), shaped by the source's curve at 0x44 as the eighth power, the square or the plain value. */
 
@@ -261,12 +261,12 @@ void Audio_ClearVoiceFlags(s32 a) {
 }
 
 void Audio_SetVoicePositionTracking(void *arg0, void *arg1, int arg2) {
-    ((struct View_func_8025AE1C_de *)(arg0))->position = *(Triple *)arg1;
-    ((struct View_func_8025AE1C_de *)(arg0))->tracked = (Triple *)arg2;
+    ((struct ViewChannelUpdateVoicePlayback *)(arg0))->position = *(Triple *)arg1;
+    ((struct ViewChannelUpdateVoicePlayback *)(arg0))->tracked = (Triple *)arg2;
 }
 
 void Audio_SetVoiceTrackId(void *arg0, int newTrackId) {
-    ((struct View_func_8025AE1C_de *)(arg0))->trackId = newTrackId;
+    ((struct ViewChannelUpdateVoicePlayback *)(arg0))->trackId = newTrackId;
 }
 
 void Audio_InitializeVoiceParameters(void *arg0, void *desc, s32 extra) {
@@ -275,38 +275,38 @@ void Audio_InitializeVoiceParameters(void *arg0, void *desc, s32 extra) {
     s16 value;
     void *record;
 
-    func_80259C5C_de(arg0, desc, extra);
+    Channel_InitializeVoicePitchMotion(arg0, desc, extra);
     Channel_InitializeVoiceMix(arg0, desc, extra);
-    ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
+    ((struct ViewChannelUpdateVoicePlayback *)(arg0))->priority = 0x40;
     index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {
-        record = Audio_GetMetadataSectionFiveEntry(((struct View_func_8025AE1C_de *)(arg0))->context, index);
-        ((struct View_func_8025AE1C_de *)(arg0))->envelope = *(SoundEnvelope *)record;
-        first = RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
-        ((struct View_func_8025AE1C_de *)(arg0))->step =
-            (first - RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.target)) /
-            ((struct View_func_8025AE1C_de *)(arg0))->envelope.frames;
-        ((struct View_func_8025AE1C_de *)(arg0))->value =
-            RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
-        ((struct View_func_8025AE1C_de *)(arg0))->priority =
-            (s16)(s32)RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
-        ((struct View_func_8025AE1C_de *)(arg0))->sweeping = 1;
+        record = Audio_GetMetadataSectionFiveEntry(((struct ViewChannelUpdateVoicePlayback *)(arg0))->context, index);
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope = *(SoundEnvelope *)record;
+        first = RW_BITS_TO_FLOAT(((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope.initial);
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->step =
+            (first - RW_BITS_TO_FLOAT(((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope.target)) /
+            ((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope.frames;
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->value =
+            RW_BITS_TO_FLOAT(((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope.initial);
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->priority =
+            (s16)(s32)RW_BITS_TO_FLOAT(((struct ViewChannelUpdateVoicePlayback *)(arg0))->envelope.initial);
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->sweeping = 1;
         return;
     }
 
-    ((struct View_func_8025AE1C_de *)(arg0))->sweeping = 0;
-    if (((struct View_func_8025AE1C_de *)(arg0))->trackId < 0x100) {
-        if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
-            Audio_GetSpatialPanMode(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
-            value = (s8)((ContextRecAt2BC0 *)((struct View_func_8025AE1C_de *)arg0)->context)->randomPan;
+    ((struct ViewChannelUpdateVoicePlayback *)(arg0))->sweeping = 0;
+    if (((struct ViewChannelUpdateVoicePlayback *)(arg0))->trackId < 0x100) {
+        if (((struct ViewChannelUpdateVoicePlayback *)(arg0))->fixed == 0 &&
+            Audio_GetSpatialPanMode(((struct ViewChannelUpdateVoicePlayback *)(arg0))->context) != 0) {
+            value = (s8)((ContextRecAt2BC0 *)((struct ViewChannelUpdateVoicePlayback *)arg0)->context)->randomPan;
             goto store_value;
         }
-    } else if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
-               Audio_GetSpatialPanMode(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
-        value = func_80259B10_de(&((struct View_func_8025AE1C_de *)(arg0))->position,
-            ((struct View_func_8025AE1C_de *)arg0)->context->result);
+    } else if (((struct ViewChannelUpdateVoicePlayback *)(arg0))->fixed == 0 &&
+               Audio_GetSpatialPanMode(((struct ViewChannelUpdateVoicePlayback *)(arg0))->context) != 0) {
+        value = Channel_ComputeListenerRelativePan(&((struct ViewChannelUpdateVoicePlayback *)(arg0))->position,
+            ((struct ViewChannelUpdateVoicePlayback *)arg0)->context->result);
 store_value:
-        ((struct View_func_8025AE1C_de *)(arg0))->priority = value;
+        ((struct ViewChannelUpdateVoicePlayback *)(arg0))->priority = value;
     }
 }
 
@@ -320,7 +320,7 @@ void Audio_UpdateVoicePool(void **arg0) {
     i = 0;
     do {
         if (((SlotCC *)view)->used != -1 && ((HeaderRecAt102 *)(*arg0))->local != i) {
-            func_8025AE1C_de(view);
+            Channel_UpdateVoicePlayback(view);
             var_s2 += 1;
         }
         i += 1;
@@ -606,7 +606,7 @@ void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {
     }
 }
 
-void func_802B25D0_de(void *a, short b);
+void alSndpDeallocate(void *a, short b);
 
 void func_8025C65C_de(SlotRecAtB4V2 *voiceRecord) {
     void *base;
@@ -614,7 +614,7 @@ void func_8025C65C_de(SlotRecAtB4V2 *voiceRecord) {
     short *slot;
     base = voiceRecord->owner;
     arrayBase = &((ContextCode8025A3EC *)base)->slots;
-    func_802B25D0_de(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[voiceRecord->index]);
+    alSndpDeallocate(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[voiceRecord->index]);
     arrayBase->ids[voiceRecord->index] = -1;
     voiceRecord->priority = 0;
     voiceRecord->fieldC = -1;
@@ -701,7 +701,7 @@ void Audio_InitVoiceVolume(func_8025C6F4_S1 *voiceRecord, func_8025C6F4_S2 *soun
         }
     } else if (voiceRecord->unkC0 == 0 &&
                Audio_GetSpatialPanMode(voiceRecord->unkB0) != 0) {
-        value = func_80259B10_de(&voiceRecord->unk44,
+        value = Channel_ComputeListenerRelativePan(&voiceRecord->unk44,
             voiceRecord->unkB0->unk2B98);
 store_value:
         voiceRecord->unk28 = value;
@@ -726,7 +726,7 @@ int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
     owner = entry->owner;
     context = owner;
     slots = &context->slots;
-    func_802B25D0_de(entry->owner->sound, slot_id(slots, entry->index));
+    alSndpDeallocate(entry->owner->sound, slot_id(slots, entry->index));
     slots->ids[entry->index] = -1;
     entry->priority = 0;
     entry->fieldC = -1;

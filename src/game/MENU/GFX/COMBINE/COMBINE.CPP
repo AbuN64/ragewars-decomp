@@ -30,7 +30,7 @@ static inline void sync(void) {
 
 void Gfx_ConfigurePrimitiveRenderFlags(s32 flags) {
     s32 plain;
-    Rec_func_8024C92C_de groups;
+    RecGobjinstSampleBoneTranslation groups;
     s32 mode;
     u32 cycle1;
     u32 cycle2;
@@ -40,7 +40,7 @@ void Gfx_ConfigurePrimitiveRenderFlags(s32 flags) {
     groups.z = (flags & 0x300) == 0x300;
     groups.pad0 = (flags & 0x3000) == 0x3000;
     groups.pad1 = (flags & 0x30000) == 0x30000;
-    Gfx_ResetRenderState();
+    Rect_ResetRenderState();
     D_800E32E4 = 0;
     sync();
     plain = groups.y == 0;

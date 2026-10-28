@@ -30,7 +30,7 @@ extern void func_80253908_de(s32);
 
 extern void Player_AllocPlayerList(CPlayerPool *, s32);
 extern s32 D_800C9684[];
-extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
+extern void Player_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
@@ -55,9 +55,9 @@ void Player_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 s32 SetN64_IsModeThirteen(void);
 
                             /* extern */
-void Ovlgame_InitActorHudState(Shared_ActorView *);
+void Player_InitActorHudState(Shared_ActorView *);
 
-/* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Ovlgame_ResetPlayerForRound with the
+/* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Player_ResetPlayerForRound with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
    Player_PlacePlayerAtSpawnPoint with g_playerSpawnSelector, zero and one. */
 
@@ -145,7 +145,7 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field868 = 0;
             ((struct Shared_ActorView *)(object))->self = object;
             ((struct Shared_ActorView *)(object))->id = object_id;
-            Nav_InitPlayerState(owner, object);
+            Scaled_InitPlayerState(owner, object);
             ((struct Shared_ActorView *)(object))->special = 0;
             ((struct Shared_ActorView *)(object))->projectileBase = player_index;
             ((struct Shared_ActorView *)(object))->projectileIndex = 0;
@@ -167,7 +167,7 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
             ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
             if (((CPlayerOptions *)(entry))->active != 0) {
-                Ovlgame_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, 1);
+                Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, 1);
                 func_80255ED8_de(&pool->m_FreeList, object);
                 func_80255CB8_de(&pool->m_ActiveList, object);
             }
@@ -201,7 +201,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field868 = 0;
         ((struct Shared_ActorView *)(object))->self = object;
         ((struct Shared_ActorView *)(object))->id = object_id;
-        Nav_InitPlayerState(owner, object);
+        Scaled_InitPlayerState(owner, object);
         ((struct Shared_ActorView *)(object))->special = 0;
         ((struct Shared_ActorView *)(object))->projectileBase = roster_index * 2;
         ((struct Shared_ActorView *)(object))->projectileIndex = 0;
@@ -222,7 +222,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field16D4 = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
         ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
-        Ovlgame_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, force_active);
+        Player_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, force_active);
         func_80255ED8_de(&pool->m_FreeList, object);
         func_80255CB8_de(&pool->m_ActiveList, object);
     }
@@ -248,7 +248,7 @@ void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
 
                          /* extern */
 
-void Ovlgame_RefreshActivePlayerSceneState(CPlayerPool *pool) {
+void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
     void *message;
     s32 temp_v0;
     struct IntPair *model;
@@ -261,7 +261,7 @@ void Ovlgame_RefreshActivePlayerSceneState(CPlayerPool *pool) {
     actor = pool->m_ActiveList.head;
     if (actor != 0) {
         do {
-            Ovlgame_InitActorHudState(actor);
+            Player_InitActorHudState(actor);
             temp_v0 = Scene_FindFloorPolygon(&g_world, &actor->position);
             actor->weapon.model = temp_v0;
             actor->modelId = temp_v0;
@@ -278,7 +278,7 @@ void Ovlgame_RefreshActivePlayerSceneState(CPlayerPool *pool) {
         } while (actor != 0);
     }
 }
-void Ovlgame_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
+void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
     extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 computer;
@@ -304,7 +304,7 @@ void Ovlgame_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447B
     ((Shared_ActorView *)player)->field868 = 0;
     ((Shared_ActorView *)player)->self = player;
     player[3] = team;
-    Nav_InitPlayerState((s32)((Shared_ActorView *)player)->owner, player);
+    Scaled_InitPlayerState((s32)((Shared_ActorView *)player)->owner, player);
     ((Shared_ActorView *)player)->special = 0;
     ((Shared_ActorView *)player)->projectileBase = slot * 2;
     ((Shared_ActorView *)player)->projectileIndex = 0;
@@ -327,9 +327,9 @@ void Ovlgame_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447B
     ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
 
-void Ovlgame_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character) {
+void Player_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
-    Ovlgame_ResetPlayerForRound(actor, character, 1);
+    Player_ResetPlayerForRound(actor, character, 1);
     Nav_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
     Player_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
 }

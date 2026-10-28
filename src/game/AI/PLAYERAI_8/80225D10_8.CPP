@@ -18,9 +18,9 @@ typedef struct {
 
 extern StunProtectionRules D_801468A0[];
 
-extern void Sky_StartFade(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
+extern void Gsky_StartFade(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
 
-void Player_ApplyStun(SharedPlayer *player, f32 amount) {
+void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
     f32 stun;
 
     if (amount != 0.0f && !(75.0f <= player->views5E8.view11D8_149.stun) && !(player->views5E8.view670_31.shield > 0.0f)
@@ -46,7 +46,7 @@ void Player_ApplyStun(SharedPlayer *player, f32 amount) {
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
             if (((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash == 0) {
-                Sky_StartFade((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) GraphU64_RandomFloat(7.5f), 0,
+                Gsky_StartFade((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) GraphU64_RandomFloat(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
                 ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash = 3;

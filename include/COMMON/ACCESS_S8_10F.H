@@ -9,7 +9,7 @@ extern float D_800C37E0_de;
 
 
 
-extern void func_80245990_de(void *arg0);
+extern void Cinema_SetLetterboxState(void *arg0);
 
 
 
@@ -69,7 +69,7 @@ typedef struct Actor_func_80245D30_de Actor_func_80245D30_de;
 
 extern void * D_800DE7F4_de;
 
-extern void func_80245A30_de();
+extern void Cinema_ResetViewport();
 
 struct Access_s32_C4;
 

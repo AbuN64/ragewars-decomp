@@ -3,7 +3,7 @@
 #include "AUDIO_3/802BF1F0.H"
 
 /** Write a word to the SP status register. */
-void func_802BA100_de(unsigned int statusCommand) {
+void Audio_WriteSignalProcessorStatus(unsigned int statusCommand) {
     *(volatile unsigned int *)0xA4040010 = statusCommand;
 }
 

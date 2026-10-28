@@ -21,7 +21,7 @@ extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
-void func_8027FF58_de(void *recycleSystem) {
+void Particle_RecycleReleasedEffects(void *recycleSystem) {
     s32 *referenceCount;
     s32 lightHandle;
     s32 flags;

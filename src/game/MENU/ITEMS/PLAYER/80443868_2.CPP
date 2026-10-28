@@ -9,8 +9,8 @@
 #include "sdk/PFS/80443868_2.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern void Ovlgame_PlacePlayerForRound(void *player);
-/* Forwards arg1's word at 0x1C to Ovlgame_PlacePlayerForRound and always reports success. */
+extern void Player_PlacePlayerForRound(void *player);
+/* Forwards arg1's word at 0x1C to Player_PlacePlayerForRound and always reports success. */
 
 
 
@@ -19,7 +19,7 @@ extern void Ovlgame_PlacePlayerForRound(void *player);
 
 
 /* When team sync is enabled, copies a player's team flag from its actor (byte 0x8F of the record at
-   0x5D8) into D_801468A0 if it is 1; then resumes the script D_8011FAC0 through Ovlgame_ResetMatchControllerState in mode
+   0x5D8) into D_801468A0 if it is 1; then resumes the script D_8011FAC0 through Match_ResetMatchControllerState in mode
    1 or else clears the actor's word at 0x5D0; returns 1. Matched through a local pointer to
    D_801468A0 and the team byte held in a local. */
 
@@ -34,7 +34,7 @@ extern void Ovlgame_PlacePlayerForRound(void *player);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void Ovlgame_ResetMatchControllerState(char *);
+extern void Match_ResetMatchControllerState(char *);
 
 /* Advances the actor inactivity timer and reports pending menu state. */
 s32 func_8022B178_de(void *);
@@ -57,17 +57,17 @@ s32 func_8022B178_de(void *);
 
 
 
-s32 Items_SetNestedItemFlag(void *unused, struct RootRecAt1C *root) {
+s32 Player_SetNestedItemFlag(void *unused, struct RootRecAt1C *root) {
     root->middle->leaf->flag = 1;
     return 1;
 }
 
-s32 Items_RespawnItemPlayer(void *unused0, StateRecAt1C *arg1) {
-    Ovlgame_PlacePlayerForRound(arg1->unk1C);
+s32 Player_RespawnItemPlayer(void *unused0, StateRecAt1C *arg1) {
+    Player_PlacePlayerForRound(arg1->unk1C);
     return 1;
 }
 
-void Items_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyle *arg3) {
+void Player_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyle *arg3) {
     s32 phase;
     s32 amount;
     s32 half;
@@ -92,7 +92,7 @@ void Items_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg
                   sx * scale, arg1->scaleY * scale, 1);
 }
 
-int Items_ResumePlayerFromMenu(int unused, PlayerRecAt1C *player) {
+int Player_ResumePlayerFromMenu(int unused, PlayerRecAt1C *player) {
     CGameStatus *sync = &D_801462C8.counters;
     int team;
 
@@ -103,14 +103,14 @@ int Items_ResumePlayerFromMenu(int unused, PlayerRecAt1C *player) {
         }
     }
     if (D_80145070 == 1) {
-        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
+        Match_ResetMatchControllerState(&D_8011FAC0);
     } else {
         player->actor->waiting = 0;
     }
     return 1;
 }
 
-s32 Items_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
+s32 Player_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
     CGameStatus *state;
     s32 temp_v0;
     s32 var_v0;
@@ -120,7 +120,7 @@ s32 Items_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
         temp_v0 = temp_s0->unk1340 + 1;
         temp_s0->unk1340 = temp_v0;
         if (temp_v0 >= 0x4C) {
-            Ovlgame_PlacePlayerForRound(arg0->unk1C);
+            Player_PlacePlayerForRound(arg0->unk1C);
             return 1;
         }
     }
@@ -130,7 +130,7 @@ s32 Items_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
     return var_v0;
 }
 
-s32 Items_SelectFragTagLabel(struct FieldRecAt14 *field) {
+s32 Player_SelectFragTagLabel(struct FieldRecAt14 *field) {
     if (D_801462C8.counters.m_bFragTagOn != 0) {
         field->text = D_800D7BE8;
     } else {

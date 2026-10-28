@@ -13,7 +13,7 @@
 #include "RENDER_2/8025DE50_5.H"
 extern struct CourseOptionsScreen *D_800E39C0;
 
-s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
+s32 Join_CreateUsJoinOptionsMenu(void *arg0) {
     MenuWidget *item;
     s32 row;
 
@@ -27,7 +27,7 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 
     item = Frontend_FindWidgetByResourceId(arg0, 0x38B);
     item->alpha = 0x8C;
-    if (Smos_GetPreviousScreenOwner(0) == 22) {
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
     }
 
@@ -39,10 +39,10 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
     D_800E39C0->rows[1] = item;
     item = Frontend_FindWidgetByResourceId(arg0, 0x396);
     D_800E39C0->rows[2] = item;
-    D_800E39C0->step = Frontend_CountUsedSlots();
+    D_800E39C0->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
-        Frontend_UpdateJoinRequestDisplay(row);
+        Join_UpdateJoinRequestDisplay(row);
         item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }
@@ -57,19 +57,19 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 
 #if defined(VERSION_US)
 #include "COMMON/ITEMRECAT20V1.H"
-extern struct TextEntry D_800E381C[][17];
+extern struct TextEntry g_rewardItemTiers[][17];
 extern void XPlus_CopyString(char *, char *);
 
-s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, s32 event) {
+s32 Join_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, s32 event) {
     s32 variant;
     s32 model;
     s32 id;
 
     if (event != 1) return 0;
     MarkMenuEventHandled();
-    if (Smos_GetPreviousScreenOwner(0) == 0x16) return 0;
+    if (Menu_GetPreviousScreenOwner(0) == 0x16) return 0;
     variant = D_80153F80[D_800E39C0->selection].variant;
-    model = Frontend_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->selection].id);
+    model = Join_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->selection].id);
     do {
         variant--;
         if (variant < 0) {
@@ -77,14 +77,14 @@ s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argume
             model--;
             if (model < 0) model = 16;
         }
-        id = D_800E381C[variant][model].id;
+        id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
     D_80153F80[D_800E39C0->selection].variant = variant;
     D_80153F80[D_800E39C0->selection].id = id;
     XPlus_CopyString(D_80153F80[D_800E39C0->selection].name,
-                    *D_800E381C[variant][id].text);
+                    *g_rewardItemTiers[variant][id].text);
     D_80153F80[D_800E39C0->selection].variantC = variant;
-    Frontend_UpdateJoinRequestDisplay(D_800E39C0->selection);
+    Join_UpdateJoinRequestDisplay(D_800E39C0->selection);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -93,7 +93,7 @@ s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argume
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8041E2F0_us(void) {
+void CJoinCharacter_CycleModelSelection(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -104,7 +104,7 @@ void func_8041E2F0_us(void) {
         "sw        $s0, 0x10($sp)\n"
         "jal        MarkMenuEventHandled\n"
         "nop\n"
-        "jal        Smos_GetPreviousScreenOwner\n"
+        "jal        Menu_GetPreviousScreenOwner\n"
         "addu      $a0, $zero, $zero\n"
         "addiu      $v1, $zero, 0x16\n"
         "beq        $v0, $v1, .Lauto_8041E468\n"
@@ -121,7 +121,7 @@ void func_8041E2F0_us(void) {
         "lui        $at, %hi(D_80153F80)\n"
         "addu       $at, $at, $v0\n"
         "lw         $a1, %lo(D_80153F80)($at)\n"
-        "jal        Frontend_FindJoinModelIndex\n"
+        "jal        Join_FindJoinModelIndex\n"
         "addu      $a0, $s0, $zero\n"
         "addu       $a2, $v0, $zero\n"
         "addiu      $t0, $zero, -0x1\n"
@@ -143,9 +143,9 @@ void func_8041E2F0_us(void) {
         "sll        $v0, $a2, 3\n"
         "sll        $v1, $s0, 4\n"
         "addu       $v0, $v0, $a0\n"
-        "lui        $at, %hi(D_800E381C)\n"
+        "lui        $at, %hi(g_rewardItemTiers)\n"
         "addu       $at, $at, $v0\n"
-        "lw         $a1, %lo(D_800E381C)($at)\n"
+        "lw         $a1, %lo(g_rewardItemTiers)($at)\n"
         "beq        $a1, $t0, .Lauto_8041E36C\n"
         "addu      $a3, $v1, $s0\n"
         "lui        $a0, %hi(D_800E39C0)\n"
@@ -188,7 +188,7 @@ void func_8041E2F0_us(void) {
         "addu       $at, $at, $v0\n"
         "sw         $s0, %lo(D_8014DCFC)($at)\n"
         "lw         $a0, 0x14($a0)\n"
-        "jal        Frontend_UpdateJoinRequestDisplay\n"
+        "jal        Join_UpdateJoinRequestDisplay\n"
         "nop\n"
         "jal        SoundElement_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE81\n"
@@ -202,6 +202,6 @@ void func_8041E2F0_us(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8041E2F0_us);
+INCLUDE_ASM("ovl_80400000", CJoinCharacter_CycleModelSelection);
 #endif
 #endif

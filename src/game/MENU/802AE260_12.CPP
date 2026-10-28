@@ -14,7 +14,7 @@ void func_802AD1D0_us(void) {
 #endif
 
 #if !(defined(VERSION_DE))
-s32 func_802B2378(s32 arg0) {
+s32 Menu_ClassifyResourceRange(s32 arg0) {
     if ((arg0 == 0x7CF) || (arg0 == 0xBB7) || (arg0 == 0xF9F) ||
         (arg0 == 0x1387) || (arg0 == 0x176F) || (arg0 == 0x1B57) ||
         (arg0 == 0x63)) {

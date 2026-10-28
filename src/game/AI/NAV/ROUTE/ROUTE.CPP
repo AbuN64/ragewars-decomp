@@ -5,25 +5,25 @@
 #include "COMMON/OBJECTLINKS14.H"
 #include "TYPES.H"
 
-extern void Nav_ResetSearchState(void *arg0);
+extern void Portal_ResetSearchState(void *arg0);
 
-extern void Nav_ClearGoalList(s32);
+extern void Route_ClearGoalList(s32);
 
 extern void Nav_AddGoalNode(void *, s32);
 
-extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
+extern void Route_SearchPathByKey(void *arg0, s32 arg1);
 
-extern void Nav_SearchPath(void *arg0, void *node);
+extern void Portal_SearchPath(void *arg0, void *node);
 
-void Nav_SearchSingleGoalPath(void *graph, s32 arg1, s32 arg2) {
-    Nav_ResetSearchState(graph);
-    Nav_ClearGoalList((s32) graph);
+void Route_SearchSingleGoalPath(void *graph, s32 arg1, s32 arg2) {
+    Portal_ResetSearchState(graph);
+    Route_ClearGoalList((s32) graph);
     Nav_AddGoalNode(graph, arg2);
-    Nav_SearchPathByKey(graph, arg1);
+    Route_SearchPathByKey(graph, arg1);
 }
 
-/** Find a keyed node in the object's list and pass it to Nav_SearchPath. */
-void Nav_SearchPathByKey(void *graph, s32 key) {
+/** Find a keyed node in the object's list and pass it to Portal_SearchPath. */
+void Route_SearchPathByKey(void *graph, s32 key) {
     NavigationSearchNode *node = ((CNavData *)graph)->nodes;
 
     if (node == 0) {
@@ -40,10 +40,10 @@ loop:
 not_found:
     node = 0;
 found:
-    Nav_SearchPath(graph, node);
+    Portal_SearchPath(graph, node);
 }
 
-void Nav_ReconstructSearchPath(char *owner, s32 *output, s32 count) {
+void Route_ReconstructSearchPath(char *owner, s32 *output, s32 count) {
     s32 i;
     s32 done;
     s32 value;
@@ -93,7 +93,7 @@ s32 Nav_GetRouteRelation(void *relationTable, s32 sourceNode, s32 destinationNod
     return *(index + bytes->entries);
 }
 
-void Nav_ClearGoalList(s32 cNavData) {
+void Route_ClearGoalList(s32 cNavData) {
     CNavData *graph = (CNavData *)cNavData;
     s32 i;
     s32 value = -1;

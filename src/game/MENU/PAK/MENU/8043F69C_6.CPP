@@ -13,7 +13,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
 
-char *func_80442214_de(struct ObjRecAt20V2 *object) {
+char *Menu_GetObjectDetailData(struct ObjRecAt20V2 *object) {
     char *result = 0;
 
     if (object->unk20 != 0) {
@@ -23,7 +23,7 @@ char *func_80442214_de(struct ObjRecAt20V2 *object) {
 }
 
 /* Computes a glyph advance using character widths and special spacing before T. */
-f32 Pak_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
+f32 Menu_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
     f32 factor;
     s32 cur;
     s32 next_a;
@@ -67,7 +67,7 @@ f32 Pak_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
     return factor * scale;
 }
 
-/* Sums the glyph advances that Pak_GetGlyphAdvance returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
+/* Sums the glyph advances that Menu_GetGlyphAdvance returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
 
 f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     f32 total;
@@ -76,16 +76,16 @@ f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     total = 0.0f;
     while (p != 0 && (c = *p) != 0 && c != '\n') {
         p++;
-        total += Pak_GetGlyphAdvance(c, *p, sx, sy);
+        total += Menu_GetGlyphAdvance(c, *p, sx, sy);
     }
     return total;
 }
 
-/* Returns whether Pak_CreateMenuFromParameters gives a non-zero answer for the third argument. */
-extern s32 Pak_CreateMenuFromParameters(void *);
+/* Returns whether Menu_CreateMenuFromParameters gives a non-zero answer for the third argument. */
+extern s32 Menu_CreateMenuFromParameters(void *);
 
-s32 Pak_TryCreateMenu(void *first, void *second, void *third) {
-    return Pak_CreateMenuFromParameters(third) != 0;
+s32 Menu_TryCreateMenu(void *first, void *second, void *third) {
+    return Menu_CreateMenuFromParameters(third) != 0;
 }
 
 /* Returns zero. */
@@ -95,7 +95,7 @@ s32 func_804423A4_de(void) {
 
 /* Returns the word at offset 0x1C of the object that offset 0x14 of a record points to. */
 
-s32 Pak_GetInnerMenuLock(struct Outer *outer) {
+s32 Menu_GetInnerMenuLock(struct Outer *outer) {
     return outer->inner->locked;
 }
 
@@ -105,7 +105,7 @@ s32 Control_IsAButtonPressed(s32); /* extern */
  /* extern */
  /* extern */
 
-s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
+s32 Menu_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
  if(((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20))value-=step;
  if(((s32 (*)(s32))Control_IsRightPressed)(menu->unk20)||Control_IsAButtonPressed(menu->unk20))value+=step;
  if(value<minimum) {
@@ -152,17 +152,17 @@ s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 
 }
 
 
-void Pak_InitMenuMessageList(void *object) {
+void Menu_InitMenuMessageList(void *object) {
     func_80255CA0_de(object, 0x1D0, 0x1D4);
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char g_menuText[];
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
-void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
+void *Menu_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
     struct func_8025E5B0_S1 *owner;
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
@@ -184,7 +184,7 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
     if (first == 0) {
         return 0;
     }
-    Pak_InitializeMenu(first, block, list, 0, player, controller, d, parent);
+    Menu_InitializeMenu(first, block, list, 0, player, controller, d, parent);
     func_80255CB8_de(parent, first);
     owner = parent;
     if (++owner->unk14 >= 4) {
@@ -193,9 +193,9 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
     return first;
 }
 
-/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
+/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
 
-void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
+void *Menu_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -220,7 +220,7 @@ void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRe
     if (first == 0) {
         return 0;
     }
-    Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
+    Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
     func_80255CB8_de(owner, first);
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;
@@ -228,7 +228,7 @@ void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRe
     return first;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
 
 void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;
@@ -255,7 +255,7 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
     if (first == 0) {
         return 0;
     }
-    Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
+    Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
     func_80255CB8_de(owner, first);
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;
@@ -265,12 +265,12 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
 
 /* Tears down every node of one list: walks it from the head, saving the successor at 0x1D4 first,
    skips nodes of kind 2 while the list is not the global one at D_8014561C and that list's flag at
-   0x10 is set, and for each remaining node asks Pak_UpdateMenuEntries whether it may go; when it may, calls
+   0x10 is set, and for each remaining node asks Menu_UpdateMenuEntries whether it may go; when it may, calls
    the node's optional handler at 0xC of its table at 0x14, clears the three words at 0xB0, 0xB4 and
    0xBC of the state it owns at 0x20, unlinks it with func_80255ED8_de and releases its handle at 0x8
    through Cache_ReleaseResource. */
 extern MessageList D_8014561C;
-extern s32 Pak_UpdateMenuEntries(CMenu *, MessageList *);
+extern s32 Menu_UpdateMenuEntries(CMenu *, MessageList *);
 
 void Pak_UpdateDialogList(MessageList *list) {
     CMenu *node;
@@ -281,7 +281,7 @@ void Pak_UpdateDialogList(MessageList *list) {
     while (node != 0) {
         next = node->next;
         if (!((node->kind == 2) && (list != &D_8014561C) && (D_8014561C.flag != 0))) {
-            if (Pak_UpdateMenuEntries(node, list) != 0) {
+            if (Menu_UpdateMenuEntries(node, list) != 0) {
                 if (node->table->handler != 0) {
                     node->table->handler(node, list);
                 }
@@ -306,7 +306,7 @@ void Pak_DispatchMenuListCallback(struct OwnerRecAt4 *owner) {
     }
 }
 
-int Pak_CountLiveNodes(Node_Pak_CountLiveNodes **head) {
+int Menu_CountLiveNodes(Node_Pak_CountLiveNodes **head) {
     Node_Pak_CountLiveNodes *node = *head;
     int count = 0;
     while (node != 0) {

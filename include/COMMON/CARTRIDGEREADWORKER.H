@@ -43,7 +43,7 @@ struct CartridgeReadRequest;
 struct Chunk;
 struct Queue;
 
-extern u32 func_802571F0_de(s32 offset, s32 length);
+extern u32 Sound_GetSampleDmaWindowAddress(s32 offset, s32 length);
 
 struct Window;
 typedef struct Window Window;

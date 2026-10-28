@@ -30,7 +30,7 @@
 
 
 extern s32 __osPfsGetStatus(void *queue, int channel);
-extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
+extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);
 
 s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
 {
@@ -42,11 +42,11 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
     __OSPackId *id;
     __OSPackId newid;
 
-    func_802B9C14_de();
+    __osSiGetAccess();
 
     ret = __osPfsGetStatus(queue, channel);
 
-    func_802B9C80_de();
+    __osSiRelAccess();
 
     if (ret != 0) {
         return ret;
@@ -60,7 +60,7 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
     ret = Pfs_SelectActiveBank(pfs);
     if (ret != 0)
         return ret;
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, temp);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 1, temp);
     if (ret != 0)
         return ret;
 
@@ -103,7 +103,7 @@ s32 osPfsInitPak(void *queue, OSPfs *pfs, int channel)
     pfs->minode_table = (1 + pfs->banks) * 8;
     pfs->dir_table = pfs->minode_table + (pfs->banks * 8);
 
-    ret = func_802B84C0_de(pfs->queue, pfs->channel, 7, pfs->label);
+    ret = __osContRamRead(pfs->queue, pfs->channel, 7, pfs->label);
     if (ret != 0)
         return ret;
 
@@ -159,7 +159,7 @@ s32 osPfsChecker(OSPfs *pfs)
         return ret;
 
     for (j = 0; j < pfs->dir_size; j++) {
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir);
+        ret = __osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir);
         if (ret != 0)
             return ret;
 
@@ -228,7 +228,7 @@ Pfs_CountPageReferences
         }
     }
     for (j = 0; j < pfs->dir_size; j++) {
-        ret = func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir);
+        ret = __osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8 *)&tmp_dir);
         if (ret != 0)
             return ret;
 

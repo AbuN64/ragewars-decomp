@@ -25,7 +25,7 @@ static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
     s32 roll;
 
     total = 0;
-    if (func_80265550_de(bank->table, bank->count, group, &first, &last) == 0) {
+    if (Defs_FindSortedGroupRange(bank->table, bank->count, group, &first, &last) == 0) {
         return -1;
     }
     if (first != last) {
@@ -57,9 +57,9 @@ static inline void restart(PlayerRecAt1E *player) {
     }
 }
 
-/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword func_802B2510_de returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
+/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
 
-extern s16 func_802B2510_de(void *, void *);
+extern s16 alSndpAllocate(void *, void *);
 
 s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
     s32 song;
@@ -70,7 +70,7 @@ s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unus
         return -1;
     }
     Audio_GetSoundPlayer(player->bank);
-    func_80258740_de(player->bank);
+    Sound_AcquireContextLock(player->bank);
     player->group = group;
     player->song = song;
     request = ++player->request;
@@ -82,7 +82,7 @@ s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unus
     } else {
         player->state = 1;
     }
-    func_802587A4_de(player->bank);
+    Sound_ReleaseContextLock(player->bank);
     return request;
 }
 
@@ -94,7 +94,7 @@ void Audio_InitializeDialogPlayer(struct Shape_typemap_110 *record, s32 resource
     record->field_8 = 0;
     record->field_14 = 0;
     record->field_18 = 0x40;
-    record->field_1C = func_802B2510_de(Audio_GetSoundPlayer(record->field_0), D_800D0D78);
+    record->field_1C = alSndpAllocate(Audio_GetSoundPlayer(record->field_0), D_800D0D78);
 }
 
 void Audio_StopDialogPlayer(void *arg0) {
@@ -103,7 +103,7 @@ void Audio_StopDialogPlayer(void *arg0) {
     void *soundPlayer;
     s32 state;
 
-    func_80258740_de((s32 *)player->bank);
+    Sound_AcquireContextLock((s32 *)player->bank);
     state = player->state;
     if (state != 2 && state != 0) {
         player->state = 2;
@@ -111,7 +111,7 @@ void Audio_StopDialogPlayer(void *arg0) {
         func_802B2F00_de(soundPlayer, player->id);
         alSndpStop(soundPlayer);
     }
-    func_802587A4_de((s32 *)player->bank);
+    Sound_ReleaseContextLock((s32 *)player->bank);
 }
 
 s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
@@ -125,7 +125,7 @@ s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
 
     total = 0;
     table = *arg0;
-    if (func_80265550_de(table->unk2B60, table->unk2B64, id, &first, &last) == 0) {
+    if (Defs_FindSortedGroupRange(table->unk2B60, table->unk2B64, id, &first, &last) == 0) {
         return -1;
     }
     result = first;

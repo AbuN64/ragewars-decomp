@@ -3,18 +3,18 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern s32 Frontend_CountOpenPlayerSlots();
+extern s32 Join_CountOpenPlayerSlots();
 
 struct PlayerFrontendCountOpenPlayerSlots;
 typedef struct PlayerFrontendCountOpenPlayerSlots PlayerFrontendCountOpenPlayerSlots;
 
 
-extern s32 Frontend_FindKeyIndex(s32 key);
+extern s32 Key_FindKeyIndex(s32 key);
 
-extern void Frontend_SeatJoinRequests(void);
+extern void Join_SeatJoinRequests(void);
 
 
-extern s32 Frontend_ScoreJoinRequestEntries(void);
+extern s32 Join_ScoreJoinRequestEntries(void);
 
 struct RequestRecAt10;
 struct RequestRecAt10 {
@@ -24,12 +24,12 @@ struct RequestRecAt10 {
     s32 variantC;
     char name[28 - 0x10];
 };
-/* D_80153F80: the three join requests the request menus edit and Frontend_SeatJoinRequests seats. */
+/* D_80153F80: the three join requests the request menus edit and Join_SeatJoinRequests seats. */
 extern struct RequestRecAt10 D_80153F80[3];
 
 
 
-extern s32 Frontend_CountUsedSlots();
+extern s32 Join_CountUsedSlots();
 
 typedef struct RequestDrawScreen {
     char pad0[8];
@@ -39,7 +39,7 @@ typedef struct RequestDrawScreen {
     s32 count;
 } RequestDrawScreen;
 typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;
-extern s32 Frontend_FindJoinModelIndex(s32, s32);
+extern s32 Join_FindJoinModelIndex(s32, s32);
 extern RequestDrawPair D_800DF740[];
 
 struct CourseOptionsScreen {
@@ -50,6 +50,6 @@ struct CourseOptionsScreen {
     s32 timer;           /* +0x18 */
     s32 step;            /* +0x1C */
 };
-extern s32 Smos_GetPreviousScreenOwner(s32);
-extern void Frontend_UpdateJoinRequestDisplay(s32);
+extern s32 Menu_GetPreviousScreenOwner(s32);
+extern void Join_UpdateJoinRequestDisplay(s32);
 #endif

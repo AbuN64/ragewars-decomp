@@ -12,7 +12,7 @@ unsigned char D_auto_func_802BB418_de_padding_BC018[8] = { 0x00, 0x80, 0x80, 0x2
 #endif
 
 /* 802C04C0.CPP */
-void func_802BB3D0_de(s32 interruptMask) {
+void __osResetGlobalIntMask(s32 interruptMask) {
     u32 savedInterruptMask;
     s32 *p;
 

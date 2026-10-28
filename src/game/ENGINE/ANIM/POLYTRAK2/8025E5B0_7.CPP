@@ -22,7 +22,7 @@ typedef struct CAnimCompInfo {
     f32 frameStep;
 } CAnimCompInfo;
 
-extern s32 PpDecom_UnpackResource(void **, s32);
+extern s32 Ppdecom_UnpackResource(void **, s32);
 
 extern s32 SetN64_GetSizedPackSection(s32, s32, s32 *);
 
@@ -34,7 +34,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 extern void Cache_ReplaceResourceBlock(s32, void **, void *);
 
-extern s32 PolyTrak_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
+extern s32 Polytrak2_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 
 extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
 
@@ -94,7 +94,7 @@ static inline s32 motion_storage(s32 channels, s32 frames) {
 
 
 /* Rebuild the resource motion blocks, then replace the original handle. */
-void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
+void Polytrak2_RebuildExpandedAnimationResource(s32 unused, ResourceHandle **handle) {
     s32 bytes0, bytes1, bytes2, bytes3, bytes4, bytes5, bytes6;
     s32 fetchedRotationBytes, fetchedTranslationBytes;
     ResourceBlock *source;
@@ -114,7 +114,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
     s32 success;
     f32 count;
 
-    if (PpDecom_UnpackResource((void **)handle, 1)) {
+    if (Ppdecom_UnpackResource((void **)handle, 1)) {
         source = (*handle)->block;
         sourceBytes = (*handle)->bytes;
         section0 = (void *)SetN64_GetSizedPackSection((s32)source, 0, &bytes0);
@@ -165,7 +165,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
             D_8010AC7C = D_800C4120_de;
             D_8010AC80 = D_800C4124_de;
             D_8010AC70 = newHeader->duration;
-            if (PolyTrak_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
+            if (Polytrak2_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
                 success = 0;
             } else {
                 D_8010AC78 = 0;
@@ -173,7 +173,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
                 D_8010AC7C = D_800C4128_de;
                 D_8010AC80 = D_800C412C_de;
                 D_8010AC70 = newHeader->duration;
-                success = PolyTrak_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
+                success = Polytrak2_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
             }
             if (success == 0) {
                 Cache_ReleaseResource(0, output);
@@ -188,7 +188,7 @@ replace_output:
     }
 }
 
-void func_8025FD74_de(Curve *compressedCurve)
+void Polytrak2_DecodeCubicSegment(Curve *compressedCurve)
 {
   s32 bitCursor;
   int new_var;
@@ -213,11 +213,11 @@ void func_8025FD74_de(Curve *compressedCurve)
   valueBitWidth = compressedCurve->unk0;
   segmentBitOffset = compressedCurve->unk28 * ((valueBitWidth * 4) + 6);
   bitCursor = compressedCurve->unkC + segmentBitOffset;
-  segmentSampleCount = func_802607B8_de(&bitCursor, 6);
-  firstSample = func_802607B8_de(&bitCursor, valueBitWidth);
-  secondSample = func_802607B8_de(&bitCursor, valueBitWidth);
-  thirdSample = func_802607B8_de(&bitCursor, valueBitWidth);
-  fourthSample = func_802607B8_de(&bitCursor, valueBitWidth);
+  segmentSampleCount = Polytrak2_ReadBitsAndAdvance(&bitCursor, 6);
+  firstSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
+  secondSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
+  thirdSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
+  fourthSample = Polytrak2_ReadBitsAndAdvance(&bitCursor, valueBitWidth);
   constantCoefficient = (f32) firstSample;
   new_var=firstSample*0x15;
   secondSampleTimes32 = secondSample << 5;

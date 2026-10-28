@@ -55,7 +55,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void Weapon_TryEnterAmmoCostState(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weaponai_TryEnterAmmoCostState(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
 

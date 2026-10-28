@@ -9,7 +9,7 @@ const unsigned int D_d0_960271c30e399034[3] = {
     0x3C40C0C1, 0x3C40C0C1, 0x3C40C0C1,
 };
 
-void Region_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
+void Gregion_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
     void *red_out, void *green_out, void *blue_out) {
     s32 phase;
     s32 distance0, distance1, distance2;
@@ -87,7 +87,7 @@ void Region_ShiftColorHue(u8 hue, u8 red_arg, u8 green_arg, u8 blue_arg,
 }
 
 /* Blends a colour toward the grey of its brightest channel: with amount (0-100) zero it copies r, g, b to the outputs, otherwise each output is (channel * (100 - amount) + max(r, g, b) * amount) / 100. */
-void Region_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB) {
+void Gregion_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB) {
     s32 rest;
     s32 top;
     if (amount != 0) {
@@ -104,7 +104,7 @@ void Region_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 
 }
 
 /* Darkens a colour by a percentage: with a non-zero percentage each channel becomes the channel scaled by one hundredth of (100 minus the percentage), and with zero the channels are copied unchanged. */
-void Region_DarkenColor(unsigned char percent, unsigned char r, unsigned char g, unsigned char b,
+void Gregion_DarkenColor(unsigned char percent, unsigned char r, unsigned char g, unsigned char b,
                    unsigned char *outR, unsigned char *outG, unsigned char *outB) {
     int remaining;
     if (percent != 0) {

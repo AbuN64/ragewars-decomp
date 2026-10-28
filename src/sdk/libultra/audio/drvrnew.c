@@ -75,7 +75,7 @@ extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
 
  /* 1.0 / 16384 */
 
-void func_802B3F10_de(ALFx *r, ALSynConfig *c, ALHeap *hp)
+void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
 {
     u16 i, j, k;
     s32 *param = 0;

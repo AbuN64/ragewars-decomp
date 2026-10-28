@@ -26,8 +26,8 @@ const unsigned int D_blob_950cbb3daf442f25a64a[1] = {
 };
 
 /* 80213ED4_4.CPP */
-/* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Barrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
-extern void *Barrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
+/* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Cbarrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
+extern void *Cbarrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
 extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
@@ -68,7 +68,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
     Actor_func_80214DD4_de *target;
     Location *point;
     if ((tracker->team == g_world.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
-        tracker->anchor = Barrel_SelectCombatTarget(arg0, tracker, 1, 0);
+        tracker->anchor = Cbarrel_SelectCombatTarget(arg0, tracker, 1, 0);
     }
     if ((*arg0->kind == 1) && (tracker->mode == 0xB)
         && func_80215410_kind(arg0, tracker, tracker->target) == 4) {
@@ -102,7 +102,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
                 break;
         }
     }
-    GraphU64_WrapPeriodicValue(&height);
+    Graphu64_WrapPeriodicValue(&height);
     GraphU64_SubtractVectors(&delta, &pos, &arg0->pos);
     arg3->m_DeltaAngle = height;
     arg3->kind = kind;
@@ -118,7 +118,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
 }
 
 extern s32 D_801041F0;
-extern s32 func_802462E8_de(Actor_u1 *, CVector3, char **);
+extern s32 Gobjinst_ProbeActorMovement(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
  * directions and choose the first clear probe. */
@@ -156,7 +156,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
     f32 heading = Weapons_ProbeHeading(actor, point);
     f32 cosine, sine, offset, angle, bias;
     s32 step, side, parity;
-    if ((actor->flags & 0x200) && func_802462E8_de(actor, point, &hit)) {
+    if ((actor->flags & 0x200) && Gobjinst_ProbeActorMovement(actor, point, &hit)) {
         if (target != 0 && D_801041F0 == target) return heading;
         parity = ((u32)actor % 744U) & 1;
         probe.y = actor->position.y;
@@ -175,9 +175,9 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
                 probe.x = actor->position.x + cosine * (distance * GameObject_GetActorRadius(actor));
                 sine = Math_Cosf(actor->yaw + 3.1415927f + angle);
                 probe.z = actor->position.z + sine * (distance * GameObject_GetActorRadius(actor));
-                if (!func_802462E8_de(actor, probe, 0)) {
+                if (!Gobjinst_ProbeActorMovement(actor, probe, 0)) {
                     angle += bias;
-                    GraphU64_WrapPeriodicValue(&angle);
+                    Graphu64_WrapPeriodicValue(&angle);
                     return angle;
                 }
             }

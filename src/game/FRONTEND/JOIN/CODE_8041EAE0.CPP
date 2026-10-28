@@ -18,23 +18,23 @@ extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 
 /* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
 
-/* Returns entry column - 1 of row r in the five-word table D_800E37B8, or zero when the column is
+/* Returns entry column - 1 of row r in the five-word table g_rewardScoreBudgets, or zero when the column is
    not positive. */
 
 /* Returns the score of the three entries: 5, 10 or 20 points by kind for each active one, repeating the previous award for other kinds. */
 
-/* Returns the column of the first of the seventeen eight-byte entries in row r of D_800E381C whose
+/* Returns the column of the first of the seventeen eight-byte entries in row r of g_rewardItemTiers whose
    identifier matches, or zero when none does. */
 
 /* Releases the object D_800E39C0 holds through Cache_FreeMemory, clears D_800E39C0 and returns zero. */
 
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
 
-/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
-   and 0x15 otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes -1 to Random_SetMenuChoiceResult when Menu_GetPreviousScreenOwner reports 0x16 for zero
+   and 0x15 otherwise, then calls Menu_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled();
 
-extern void Smos_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen();
 
 /* Steps the selected menu item backwards and updates its display state. */
 
@@ -64,7 +64,7 @@ extern void MarkMenuEventHandled(void);
 extern struct CourseOptionsScreen *D_800E39C0;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
-void Frontend_ResetJoinRequestEntries(void) {
+void Join_ResetJoinRequestEntries(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
@@ -75,7 +75,7 @@ void Frontend_ResetJoinRequestEntries(void) {
     }
 }
 
-s32 Frontend_CountOpenPlayerSlots(void) {
+s32 Join_CountOpenPlayerSlots(void) {
     s32 count;
     s32 i;
     s32 result;
@@ -103,7 +103,7 @@ s32 Frontend_CountOpenPlayerSlots(void) {
     return result;
 }
 
-s32 Frontend_CountUsedSlots(void) {
+s32 Join_CountUsedSlots(void) {
     s32 count = 0;
     s32 i;
 
@@ -115,16 +115,16 @@ s32 Frontend_CountUsedSlots(void) {
     return count;
 }
 
-s32 Frontend_GetJoinRankThreshold(s32 column, s32 row) {
+s32 Join_GetJoinRankThreshold(s32 column, s32 row) {
     s32 previous = column - 1;
 
     if (column <= 0) {
         return 0;
     }
-    return D_800E37B8[row * 5 + previous];
+    return g_rewardScoreBudgets[row * 5 + previous];
 }
 
-s32 Frontend_ScoreJoinRequestEntries(void) {
+s32 Join_ScoreJoinRequestEntries(void) {
     s32 score;
     s32 points;
     s32 i;
@@ -150,24 +150,24 @@ s32 Frontend_ScoreJoinRequestEntries(void) {
     return score;
 }
 
-s32 Frontend_FindJoinModelIndex(s32 row, s32 id) {
+s32 Join_FindJoinModelIndex(s32 row, s32 id) {
     s32 i;
 
     for (i = 0; i < 0x11; i++) {
-        if (D_800E381C[row][i].field_0 == id) {
+        if (g_rewardItemTiers[row][i].field_0 == id) {
             return i;
         }
     }
     return 0;
 }
 
-s32 Frontend_DestroyJoinOptionsMenu(void) {
+s32 Join_DestroyJoinOptionsMenu(void) {
     Cache_FreeMemory(D_800E39C0);
     D_800E39C0 = 0;
     return 0;
 }
 
-s32 Frontend_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
+s32 Join_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
     D_800E39C0->timer += delta;
 #if defined(VERSION_DE)
@@ -181,21 +181,21 @@ s32 Frontend_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta
     return 0;
 }
 
-s32 Frontend_RequestJoinOptionsExit(void) {
+s32 Join_RequestJoinOptionsExit(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 
-s32 Frontend_RequestJoinOptionsExitAlternate(void) {
+s32 Join_RequestJoinOptionsExitAlternate(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(Menu_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 
-s32 Frontend_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 prevSelection;
     s32 idx;
     MenuWidget *oldItem;
@@ -234,7 +234,7 @@ s32 Frontend_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 ar
     return 0;
 }
 
-s32 Frontend_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 Join_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 nextSelection;
     s32 temp_v0_2;
     s32 rowCount;
@@ -260,7 +260,7 @@ s32 Frontend_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-s32 Frontend_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
+s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     s32 temp_a1;
     s32 selectedRow;
     u32 temp_a2;
@@ -270,8 +270,8 @@ s32 Frontend_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) 
         MarkMenuEventHandled();
         temp_a1 = D_800E39C0->selection * 0x1C;
         *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
-        Frontend_UpdateJoinRequestDisplay(D_800E39C0->selection);
-        if (Smos_GetPreviousScreenOwner(0) == 0x16) {
+        Join_UpdateJoinRequestDisplay(D_800E39C0->selection);
+        if (Menu_GetPreviousScreenOwner(0) == 0x16) {
             selectedRow = D_800E39C0->selection;
             D_801462C8.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
         }
@@ -289,7 +289,7 @@ const unsigned int rodata_func_8041F298_us_800DC1F0[1] = {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 extern ResidentEventHandlerEntry D_800EB1A4[];
 
-s32 Frontend_DispatchJoinOptionsEvent(MenuWidget *object, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Join_DispatchJoinOptionsEvent(MenuWidget *object, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 i = 0;
     while (D_800EB1A4[i].handler != 0) {
         if (D_800EB1A4[i].event == event &&

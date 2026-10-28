@@ -47,7 +47,7 @@ void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t)
 }
 
 extern int Lighting_BuildLitModel(int a, int b, void *c, void *d, int e, void *f);
-extern void func_80253E64_de(int a, int **b, int c);
+extern void Cache_ReplaceResourcePairFirst(int a, int **b, int c);
 
 void GameObject_BuildLitActorResource(void *levelActor, int **arg1) {
     struct LevelActor *object = levelActor;
@@ -58,7 +58,7 @@ void GameObject_BuildLitActorResource(void *levelActor, int **arg1) {
     deref1 = *arg1;
     deref2 = *deref1;
     ret = Lighting_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, levelActor);
-    func_80253E64_de(0, arg1, ret);
+    Cache_ReplaceResourcePairFirst(0, arg1, ret);
 }
 
 typedef struct InteractionDescriptor { s32 kind; char pad4[0x10]; s32 flags; } InteractionDescriptor;

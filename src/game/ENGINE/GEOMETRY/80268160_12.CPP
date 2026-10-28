@@ -304,12 +304,12 @@ struct Shared_GfxMaterial {
 
 extern u32 D_800CD730;
 
-void *TextLoad_RequestTextureVariation(s32 *, s32);
-void TextLoad_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
+void *Textload_RequestTextureVariation(s32 *, s32);
+void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)
-void TextLoad_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
-void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrame(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 void Geometry_SetCombineMode(u32);
 s32 Geometry_SetModePreset(s32);
@@ -339,11 +339,11 @@ s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     }
     tailEnum = -1;
     if (mat->unk8 != 0 && !(D_801462C8.flags & 0x400) && !(g_geometryViewEffect != 0 && (flags & 0x8000))) {
-        node = TextLoad_RequestTextureVariation(&mat->unk8, pass);
+        node = Textload_RequestTextureVariation(&mat->unk8, pass);
         if (node == 0) {
             return 0;
         }
-        TextLoad_ReadTextureAnimationInfo(node, &info);
+        Textload_ReadTextureAnimationInfo(node, &info);
         switch (pass) {
             case -2:
                 if (info.count < 2) {
@@ -394,9 +394,9 @@ a = GraphU64_NextRandom() % info.count;
             extra2 |= G_TX_MIRROR;
         }
 #if defined(VERSION_US_REV1)
-        TextLoad_LoadTextureFrameTiles(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+        Textload_LoadTextureFrameTiles(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
     #else
-        func_802950B4_de(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+        Textload_LoadTextureFrame(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
     #endif
         if (flags & 0x2000) {
             gDPSetTextureLOD(g_displayListCursor++, G_TL_LOD);

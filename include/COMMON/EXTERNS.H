@@ -16,10 +16,10 @@ extern int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id);
 
 
 
-extern void func_80259988_de(void *arg0, s32 arg1);
-extern void func_802599EC_de(struct OwnerRecAtD8 *, s32);
+extern void AudioWorld_RecyclePendingSoundsByKey(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsByTrack(struct OwnerRecAtD8 *, s32);
 
-extern void func_802B2ED0_de(char *, s32, s32);
+extern void alSndpSetPriority(char *, s32, s32);
 extern void alSndpSetFXMix(char *, s32);
 
 #include "COMMON/VECTOR4F.H"

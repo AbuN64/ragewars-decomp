@@ -35,7 +35,7 @@ void __osPiGetAccess(void) {
 }
 
 /* 802BEA40_2.CPP */
-void func_802B9A10_de(void) {
+void __osPiRelAccess(void) {
     osSendMesg(&D_8014EA58, 0, 0);
 }
 

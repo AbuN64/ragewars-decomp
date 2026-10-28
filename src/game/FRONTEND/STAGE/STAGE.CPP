@@ -43,7 +43,7 @@ extern void Tsmos_RequestFrontendShutdown(void);
 extern void XPlus_CopyString(char *, char *);
 
 
-void Frontend_StartConfiguredMatch(void) {
+void Stage_StartConfiguredMatch(void) {
     u8 *settings;
     u8 *config;
     struct StatusRecAt95 *status;
@@ -93,20 +93,20 @@ void Frontend_StartConfiguredMatch(void) {
             break;
         }
         D_801462C8.counters.humanWon = 0;
-        Frontend_PlaceStageOpponents();
+        Stage_PlaceStageOpponents();
     }
     switch (D_8014DD98.kind) {
     case 0:
-        Frontend_StartCaptureTheFlagMatch();
+        Random_StartCaptureTheFlagMatch();
         break;
     case 1:
-        Frontend_StartFragTagMatch();
+        Random_StartFragTagMatch();
         break;
     case 2:
-        Frontend_StartIndividualMatch();
+        Random_StartIndividualMatch();
         break;
     case 3:
-        Frontend_StartTeamMatch();
+        Random_StartTeamMatch();
         break;
     }
     for (i = 0; i < 4; i++) {
@@ -138,13 +138,13 @@ void Frontend_StartConfiguredMatch(void) {
 
 /* Places the computer opponents of the stage entry D_800E4680: first frees the player settings
    records still marked joined and locked, then for each of the entry's seven opponent records with a
-   nonzero kind places it through Frontend_AddStageOpponent and, by kind, sets the returned slot's controlMode
+   nonzero kind places it through Random_AddStageOpponent and, by kind, sets the returned slot's controlMode
    and the match counters: kind 12 sets 2 with enabled, timer 100 and cooldown -1; 13 sets 1 with
    enabled; 16 sets 2; 14 sets 1 with enabled for the first such opponent and 0 afterwards; 15 sets 1
    with enabled and clears unk9C; any other kind sets 0 and, once a kind 15 opponent was placed,
    marks the slot active. */
-extern s32 Frontend_AddStageOpponent(u8 *);
-void Frontend_PlaceStageOpponents(void) {
+extern s32 Random_AddStageOpponent(u8 *);
+void Stage_PlaceStageOpponents(void) {
     CGameStatus *match;
     Shared_PlayerSettingsRecord *player;
     s32 boss;
@@ -173,22 +173,22 @@ void Frontend_PlaceStageOpponents(void) {
         switch (D_800E4680->opponents[i][0]) {
         case 12:
             match->enabled = on;
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = 2;
             match->m_nBastilleShield = 100;
             match->m_nBastilleTimer = -1;
             break;
         case 13:
             match->enabled = on;
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = on;
             break;
         case 16:
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = 2;
             break;
         case 14:
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             if (boss == 0) {
                 boss = 1;
                 match->enabled = on;
@@ -201,11 +201,11 @@ void Frontend_PlaceStageOpponents(void) {
             escorted = 1;
             match->enabled = on;
             match->m_nTalsetLives = 0;
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = on;
             break;
         default:
-            slot = Frontend_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
             game->playerSettings[slot].controlMode = 0;
             if (escorted) {
                 game->playerSettings[slot].active = on;

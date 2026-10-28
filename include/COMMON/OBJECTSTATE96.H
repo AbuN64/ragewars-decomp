@@ -24,7 +24,7 @@ struct CPlayerPool_t {
 };
 
 
-extern void Pfs_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data);
+extern void Items_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data);
 
 struct IntegerState88;
 typedef struct IntegerState88 IntegerState88;

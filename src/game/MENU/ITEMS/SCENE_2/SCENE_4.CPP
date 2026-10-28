@@ -38,7 +38,7 @@ static inline s32 testBit(s32 n, u8 *bits) {
     return bits[n / 8] & mask;
 }
 
-void OvlScene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle) {
+void Scene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle) {
     s32 size0;
     s32 size1;
     s32 size3;
@@ -70,7 +70,7 @@ void OvlScene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildM
     s32 index;
     u8 *bits;
 
-    if (PpDecom_UnpackResource((void*)handle, 1) != 0) {
+    if (Ppdecom_UnpackResource((void*)handle, 1) != 0) {
         node = (*handle)->payload.data;
         first = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 0, &size0);
         vlist = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 1, &size1);

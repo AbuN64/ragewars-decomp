@@ -14,7 +14,7 @@ struct Packed {
 
 struct Packed;
 typedef struct Packed Packed;
-/* Cached path-node plane normals (GraphU64_CrossVectors edge cross products). */
+/* Cached path-node plane normals (Graphu64_CrossVectors edge cross products). */
 extern CVector3 D_80115E10;
 extern CVector3 D_80115E20;
 
@@ -29,18 +29,18 @@ struct CGameRegion_t {
 
 struct CGameRegion_t;
 typedef struct CGameRegion_t CGameRegion;
-/* Cached path-node plane normal (GraphU64_CrossVectors edge cross product). */
+/* Cached path-node plane normal (Graphu64_CrossVectors edge cross product). */
 extern CVector3 D_80111D30;
 
 extern void Region_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);
 
 extern float D_800C4980_de;
 
-extern void GraphU64_ResetRandomSeeds(void);
+extern void Graphu64_ResetRandomSeeds(void);
 
 extern float D_800C9AD8;
 
-extern void GraphU64_ReturnWithoutWork(void);
+extern void Graphu64_ReturnWithoutWork(void);
 
 
 
@@ -49,7 +49,7 @@ extern void Region_ScaleWordsToFloats(void *arg0);
 
 extern float D_800C4978_de;
 
-extern s32 GraphU64_NextRandomValue();
+extern s32 Graphu64_NextRandomValue();
 
 extern float D_800C49C0_de;
 
@@ -73,11 +73,11 @@ extern float D_800C9A38;
 
 extern float D_800C49EC_de;
 
-extern void GraphU64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp);
+extern void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp);
 
 extern float D_800C49C4_de;
 
-extern f32 GraphU64_GetNegatedWrappedDifference(f32 arg0, f32 arg1);
+extern f32 Graphu64_GetNegatedWrappedDifference(f32 arg0, f32 arg1);
 
 struct Triangle;
 struct Triangle {
@@ -86,19 +86,19 @@ struct Triangle {
     CVector3 *vertices[3];
 };
 
-extern s32 GraphU64_IsPointOnPositiveEdgeSide(void *arg0, void *arg1);
+extern s32 Graphu64_IsPointOnPositiveEdgeSide(void *arg0, void *arg1);
 
 
 struct Triangle;
 typedef struct Triangle Triangle;
 
-extern void GraphU64_NormalizeEdgeDirection(void *arg0);
+extern void Graphu64_NormalizeEdgeDirection(void *arg0);
 
 
 struct ObjRecAt2CV1;
 typedef struct ObjRecAt2CV1 ObjRecAt2CV1;
 
-extern void GraphU64_NormalizeEdgeHorizontal(void *arg0);
+extern void Graphu64_NormalizeEdgeHorizontal(void *arg0);
 
 extern float D_800C49C8_de;
 
@@ -107,9 +107,9 @@ extern float D_800C4998_de;
 
 extern double D_800C4940_de;
 
-extern void GraphU64_InitializeEdge(void *arg0, void *arg1, void *arg2);
+extern void Graphu64_InitializeEdge(void *arg0, void *arg1, void *arg2);
 
-extern s32 GraphU64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2);
+extern s32 Graphu64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2);
 
 extern float D_800C499C_de;
 
@@ -117,11 +117,11 @@ extern float D_800C4990_de;
 
 extern float D_800C49E0_de;
 
-extern f32 GraphU64_NegateWrappedValue(f32 arg0);
+extern f32 Graphu64_NegateWrappedValue(f32 arg0);
 
 extern float D_800C4988_de;
 
-extern s32 GraphU64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2);
+extern s32 Graphu64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2);
 
 /* Edge endpoints and the direction/normal derived by the edge helpers. */
 typedef struct GeometryEdge {

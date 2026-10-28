@@ -8,29 +8,29 @@
 /* 8043D54C_2.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US)
 s32 Menu_ForwardRulesLock(void *arg0, MenuRules *menuRules) {
-    Ovlgame_PlacePlayerForRound(menuRules->locked);
+    Player_PlacePlayerForRound(menuRules->locked);
     return 1;
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 s32 Menu_ForwardRulesLock(void *unused, MenuRules *rules) {
-    Ovlgame_PlacePlayerForRound(rules->locked);
+    Player_PlacePlayerForRound(rules->locked);
     return 1;
 }
 #endif
 
 /* 8043D54C_3.CPP */
 #if !(defined(VERSION_EU))
-/* Calls Ovlgame_ResetMatchControllerState on D_8011FAC0 when D_80145070 is one, otherwise clears the word at offset
+/* Calls Match_ResetMatchControllerState on D_8011FAC0 when D_80145070 is one, otherwise clears the word at offset
    0x5D0 of the owner at offset 0x1C of the second argument. Returns one. */
 
 #include "COMMON/GAME_SESSION.H"
-extern void Ovlgame_ResetMatchControllerState(void *);
+extern void Match_ResetMatchControllerState(void *);
 
 s32 Menu_HandleSessionOptionPage(void *unused, struct Holder *holder) {
     if (D_80145070 == 1) {
-        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
+        Match_ResetMatchControllerState(&D_8011FAC0);
     } else {
         holder->owner->value = 0;
     }

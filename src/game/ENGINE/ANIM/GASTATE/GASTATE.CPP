@@ -41,14 +41,14 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
     if (func_802624D8_de(anim) == 0) {
         return 0;
     }
-    header = func_8026049C_de(anim);
+    header = Polytrak2_GetResidentResource(anim);
     anim->frames = ((u16 *)SetN64_GetPackSection(header, 0))[3];
     anim->current = id;
     anim->length = ((u16 *)SetN64_GetPackSection(SetN64_GetPackSection(header, 3), 0))[1];
     return 1;
 }
 
-extern void PolyTrak_SampleVectorTrack(void *,s32,f32,CVector3 *);
+extern void Polytrak2_SampleVectorTrack(void *,s32,f32,CVector3 *);
 
 extern f32 D_800C41BC_de;
 
@@ -69,15 +69,15 @@ static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
 static __inline__ f32 wrapAngle(CGameAnimateState_t *anim,f32 time) {
     s16 *keys;
     s32 first,next,last;
-    keys=((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(anim),0))->keys;
+    keys=((AngleKeys *)SetN64_GetPackSection(Polytrak2_GetResidentResource(anim),0))->keys;
     first=(s32)time;
     next=first+1;
     last=anim->frames-1;
     if(next<last) last=next;
-    return GraphU64_InterpolateWrappedValue(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
+    return Graphu64_InterpolateWrappedValue(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
 }
 
-void func_80261670_de(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, Anim *previous) {
+void Gastate_SwitchRequestedAnimation(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, Anim *previous) {
     s32 current;
     s32 next;
     Anim saved;
@@ -116,7 +116,7 @@ void func_80261670_de(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, 
     load(anim, table, key, current);
 }
 
-void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translationDeltaOut, f32 *angleDeltaOut, RootActor *rootMotionActor) {
+void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *translationDeltaOut, f32 *angleDeltaOut, RootActor *rootMotionActor) {
     CVector3 startRootPosition;
     CVector3 endRootPosition;
     f32 angleSample;
@@ -153,7 +153,7 @@ void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translati
     s32 lastFrameIndex;
 
     void *header;
-    header = func_8026049C_de(animationChannel);
+    header = Polytrak2_GetResidentResource(animationChannel);
     translationDeltaOut->x = 0.0f;
     translationDeltaOut->y = 0.0f;
     translationDeltaOut->z = 0.0f;
@@ -166,9 +166,9 @@ void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translati
     }
     rootMotionClip = SetN64_GetPackSection(header,3);
     rootMotionClip = SetN64_GetPackSection(rootMotionClip,0);
-    PolyTrak_SampleVectorTrack(animationChannel, 0, animationChannel->time, &startRootPosition);
+    Polytrak2_SampleVectorTrack(animationChannel, 0, animationChannel->time, &startRootPosition);
     angleSample = animationChannel->time;
-    startAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+    startAngleKeys = ((AngleKeys *)SetN64_GetPackSection(Polytrak2_GetResidentResource(animationChannel), 0))->keys;
     nextStartAngleFrame = animationChannel->frames - 1;
     startAngleFrame = (s32) angleSample;
     followingAngleFrame = startAngleFrame + 1;
@@ -176,7 +176,7 @@ void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translati
         nextStartAngleFrame = followingAngleFrame;
     }
     angleScale = D_800C41BC_de;
-    startRootAngle = GraphU64_InterpolateWrappedValue(angleSample - (f32) startAngleFrame, (f32) startAngleKeys[startAngleFrame] * angleScale, (f32) startAngleKeys[nextStartAngleFrame] * angleScale);
+    startRootAngle = Graphu64_InterpolateWrappedValue(angleSample - (f32) startAngleFrame, (f32) startAngleKeys[startAngleFrame] * angleScale, (f32) startAngleKeys[nextStartAngleFrame] * angleScale);
     previousFramePosition = animationChannel->time;
     if (!(rootMotionActor->flags & 0x08000000)) {
         animationChannel->time = (f32) (previousFramePosition + (D_800D2988 * rootMotionClip->rate * D_800C41C0_de));
@@ -185,18 +185,18 @@ void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translati
     lastFrameIndex = animationChannel->frames - 1;
     lastFramePosition = (f32) lastFrameIndex;
     if (lastFramePosition < animationChannel->time) {
-        PolyTrak_SampleVectorTrack(animationChannel, 0, lastFramePosition, &endRootPosition);
-        endAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+        Polytrak2_SampleVectorTrack(animationChannel, 0, lastFramePosition, &endRootPosition);
+        endAngleKeys = ((AngleKeys *)SetN64_GetPackSection(Polytrak2_GetResidentResource(animationChannel), 0))->keys;
         endAngleFrame = (s32) lastFramePosition;
         followingEndAngleFrame = endAngleFrame + 1;
         nextEndAngleFrame = animationChannel->frames - 1;
         if (followingEndAngleFrame < nextEndAngleFrame) {
             nextEndAngleFrame = followingEndAngleFrame;
         }
-        angleSample = GraphU64_InterpolateWrappedValue(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
+        angleSample = Graphu64_InterpolateWrappedValue(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
         GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
         GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
-        *angleDeltaOut += GraphU64_GetWrappedDifference(angleSample, startRootAngle);
+        *angleDeltaOut += Graphu64_GetWrappedDifference(angleSample, startRootAngle);
         loopStartFrame = rootMotionClip->loopStart;
         restartFrame = 0;
         if (loopStartFrame != 0xFFFF) {
@@ -215,21 +215,21 @@ void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translati
         eventLoopStart = unsignedDouble(restartFrame, &D_800C41D8_de);
         func_802476C8_de((char *)rootMotionActor, animationChannel, (f32) eventLoopStart, animationChannel->time);
         positionLoopStart = unsignedDouble(restartFrame, &D_800C41E0_de);
-        PolyTrak_SampleVectorTrack(animationChannel, 0, (f32) positionLoopStart, &startRootPosition);
+        Polytrak2_SampleVectorTrack(animationChannel, 0, (f32) positionLoopStart, &startRootPosition);
         startRootAngle = wrapAngle(animationChannel,(f32)unsignedDouble(restartFrame,&D_800C41E8_de));
         animationChannel->active = 1;
     }
-    PolyTrak_SampleVectorTrack(animationChannel, 0, animationChannel->time, &endRootPosition);
+    Polytrak2_SampleVectorTrack(animationChannel, 0, animationChannel->time, &endRootPosition);
     angleSample = animationChannel->time;
-    currentAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+    currentAngleKeys = ((AngleKeys *)SetN64_GetPackSection(Polytrak2_GetResidentResource(animationChannel), 0))->keys;
     nextCurrentAngleFrame = animationChannel->frames - 1;
     currentAngleFrame = (s32) angleSample;
     followingCurrentAngleFrame = currentAngleFrame + 1;
     if (followingCurrentAngleFrame < nextCurrentAngleFrame) {
         nextCurrentAngleFrame = followingCurrentAngleFrame;
     }
-    angleSample = GraphU64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
+    angleSample = Graphu64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
     GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
     GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
-    *angleDeltaOut += GraphU64_GetWrappedDifference(angleSample, startRootAngle);
+    *angleDeltaOut += Graphu64_GetWrappedDifference(angleSample, startRootAngle);
 }

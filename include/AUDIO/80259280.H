@@ -30,9 +30,9 @@ struct CellCode802591C0 {
 };
 struct ManagerRecAtD8V1 {
     s32 *scene;
-    Link_func_80259260_de active;
+    LinkAudioWorldQueuePrioritizedSound active;
     char padC[0xCC];
-    Link_func_80259260_de free;
+    LinkAudioWorldQueuePrioritizedSound free;
 };
 struct LinkPair {
     void **first;

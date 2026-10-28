@@ -158,7 +158,7 @@ void func_802292B8_de(void *actor) {
 
 s32 GraphU64_NextRandom(); /* extern */
 
-void func_80229468_de(Inventory *inventory, Receiver *receiver) {
+void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receiver) {
  s32 amount;
  s32 index;
  s32 value;

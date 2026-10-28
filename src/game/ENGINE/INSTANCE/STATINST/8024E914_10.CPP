@@ -32,7 +32,7 @@ extern s32 D_800CD8D0[];
 
 
 
-extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, RecordRecAt1A *, s32, char *);
+extern void Insthdr_ResetInstanceRenderIndices(PlacedProp *, RecordRecAt1A *, s32, char *);
 extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
@@ -54,7 +54,7 @@ static inline s32 advancePropKey(void) {
     return D_800D0910;
 }
 
-void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
+void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
     char matrix[0x40];
     CVector3 position;
     PropGeometry *model;
@@ -62,7 +62,7 @@ void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record
     f32 x;
     f32 z;
 
-    InstHdr_ResetInstanceRenderIndices(prop, record, owner, segments);
+    Insthdr_ResetInstanceRenderIndices(prop, record, owner, segments);
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;

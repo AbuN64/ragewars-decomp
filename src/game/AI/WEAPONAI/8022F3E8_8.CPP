@@ -54,7 +54,7 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void Weapon_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *weapon) {
+void Weaponai_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *weapon) {
     char *player;
     char *model;
     player = actor->entity;

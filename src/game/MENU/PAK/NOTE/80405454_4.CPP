@@ -20,7 +20,7 @@ void Pak_ClearRenderRecord(struct RecordRecAt1C *record) {
     }
 }
 /* Releases every resource handle the render buffer record holds and clears the record. */
-void Pak_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
+void Note_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
     s32 j;
     s32 k;
 

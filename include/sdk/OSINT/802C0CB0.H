@@ -2,5 +2,5 @@
 #define SDK_OSINT_802C0CB0_H
 #include "COMMON/NODERECAT1C.H"
 extern void osYieldThread();
-extern s32 func_802BBBC0_de(s32 arg0);
+extern s32 osVirtualToPhysical(s32 arg0);
 #endif

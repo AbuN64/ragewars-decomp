@@ -16,11 +16,11 @@
 
  
 void func_80238EB8_de(void *);                               /* extern */
-void func_802390F4_de(void *, s32);                         /* extern */
-void func_802393D8_de(void *);                            /* extern */
-void func_80239C20_de(void *);                            /* extern */
+void Gsky_SetGameplayMode(void *, s32);                         /* extern */
+void Gsky_ResetFadeState(void *);                            /* extern */
+void Gsky_InitializeMessageEntryPool(void *);                            /* extern */
 void GraphU64_IdentityMatrix(void *);                            /* extern */
-void Pak_InitMenuMessageList(void *);                    /* extern */
+void Menu_InitMenuMessageList(void *);                    /* extern */
 
 
 extern s32 D_800E28D0;
@@ -32,7 +32,7 @@ extern s32 D_800E28D0;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x20, 0x24], gap at: 0x18. */
-void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
+void Pools_InitializeGameplayCamera(GameplayCamera *arg0) {
     f32 temp_f21;
     f32 zero;
     s16 temp_a0;
@@ -78,7 +78,7 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
     arg0->unk52C = (f32) 1024.0f;
     arg0->unk530 = (f32) 47.5f;
     arg0->unk534 = (f32) 47.5f;
-    func_802393D8_de(arg0);
+    Gsky_ResetFadeState(arg0);
     temp_v0_2 = ((void *)&((GameplayCamera *)arg0)->padA0);
     arg0->shakeHorizontal = zero;
     arg0->shakeVertical = zero;
@@ -101,7 +101,7 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
     temp_v0_5->unk8 = zero;
     temp_v0_5->unkC = zero;
     temp_v0_5->unk10 = zero;
-    func_802390F4_de(arg0, 0);
+    Gsky_SetGameplayMode(arg0, 0);
     temp_a0 = D_800E28D0 * 2;
     for (var_a1 = 0; var_a1 < 2; var_a1++) {
         ((RacerViewport *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
@@ -113,7 +113,7 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
         ((RacerViewport *)arg0)->viewports[var_a1].vtrans[2] = 0;
         ((RacerViewport *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
-    Pak_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
+    Menu_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
     GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
     GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
     arg0->fadeEnabled = 0;
@@ -122,7 +122,7 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
     arg0->unk126 = 0;
     D_800FF224_de = 0;
     func_80255CA0_de(&((GameplayCamera *)arg0)->objects, 0, 4);
-    func_80239C20_de(arg0);
+    Gsky_InitializeMessageEntryPool(arg0);
 }
 
 #include "TYPES.H"
@@ -171,7 +171,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     owner->word34 = 0;
     owner->word38 = 0;
     owner->word48 = 0;
-    Items_InitializeGameplayCamera(owner->parts);
+    Pools_InitializeGameplayCamera(owner->parts);
     owner->word38 = 2;
     func_80255CA0_de(&owner->entryList, 0, 4);
     func_80255CA0_de(&owner->spareList, 0, 4);
@@ -218,10 +218,10 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
 
 /* Resets a 0x1208-byte actor: clears it through XPlus_FillMemory, initialises its three lists at 0xC,
    0x20 and 0xF24 through func_80255CA0_de, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
-   0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through Items_InitializeGameplayCamera and
+   0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through Pools_InitializeGameplayCamera and
    Camera_UpdateViewProjectionAndEffects. */
 
-void Items_InitializeGameplayCamera(GameplayCamera *arg0);
+void Pools_InitializeGameplayCamera(GameplayCamera *arg0);
 
 extern void Camera_UpdateViewProjectionAndEffects(void *);
 
@@ -229,7 +229,7 @@ extern void Camera_UpdateViewProjectionAndEffects(void *);
    the block at 0x570 of each, then the group's own block at 0x5B0, all with func_8044A7D0_de. */
 
 
-extern void Items_InitEntryPool(char *);
+extern void Pool_InitEntryPool(char *);
 
 void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     char *parts;
@@ -247,21 +247,21 @@ void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     actor->unkF1C = 0;
     actor->unkF20 = 0;
     actor->unk38 = 2;
-    Items_InitializeGameplayCamera(parts);
+    Pools_InitializeGameplayCamera(parts);
     Camera_UpdateViewProjectionAndEffects(parts);
 }
 
-void Items_InitGroupPools(Triple *group) {
+void Pools_InitGroupPools(Triple *group) {
     int i;
 
     for (i = 0; i < group->z; i++) {
-        Items_InitEntryPool((char *)(i * 0xED8 + group->y + 0x570));
+        Pool_InitEntryPool((char *)(i * 0xED8 + group->y + 0x570));
     }
-    Items_InitEntryPool((char *)group + 0x5B0);
+    Pool_InitEntryPool((char *)group + 0x5B0);
 }
 
 /* Detaches the object at offset 0xC of an owner: when there is one, finalises it through
-   Items_InitializeGameplayCamera and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
+   Pools_InitializeGameplayCamera and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
    func_80255D14_de. Returns the object. */
 
 
@@ -271,18 +271,18 @@ void Items_InitGroupPools(Triple *group) {
 
 
 
-void *Items_RecycleModel(struct Draw *owner) {
+void *Pools_RecycleModel(struct Draw *owner) {
     void *object = owner->model;
 
     if (object != 0) {
-        Items_InitializeGameplayCamera(object);
+        Pools_InitializeGameplayCamera(object);
         func_80255ED8_de(&owner->model, object);
         func_80255D14_de(&owner->recycled, object);
     }
     return object;
 }
 
-void Items_TransferPoolEntry(char *object, void *value) {
+void Pools_TransferPoolEntry(char *object, void *value) {
     func_80255ED8_de(object + 0x20, value);
     func_80255CB8_de(object + 0xC, value);
 }

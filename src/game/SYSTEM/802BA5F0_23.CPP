@@ -15,8 +15,8 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/NODERECAT1C.H"
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
-s32 func_802BADA0_de(OSThread_s *thread);
-void func_802BB5F0_de(OSThread_s *thread, s32 priority);
+s32 osGetThreadPri(OSThread_s *thread);
+void Scene_SetThreadPriority(OSThread_s *thread, s32 priority);
 void osStartThread(OSThread_s *thread);
 extern OSThread_s D_80148850;
 extern struct OSMesgQueue D_80149A80;
@@ -30,7 +30,7 @@ void func_802BA5F0_eu(s32 managerPriority) {
 
     if (D_800D4420.active == 0) {
         restorePriority = -1;
-        func_802BB9F8_de();
+        Util_InitializeTimerServices();
         osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
         D_80149AC0.hdr.type = 0xD;
         D_80149AC0.hdr.pri = 0;
@@ -40,10 +40,10 @@ void func_802BA5F0_eu(s32 managerPriority) {
         D_80149AE0.hdr.retQueue = 0;
         osSetEventMesg(7, &D_80149A80, &D_80149AC0);
         osSetEventMesg(3, &D_80149A80, &D_80149AE0);
-        currentPriority = func_802BADA0_de(0);
+        currentPriority = osGetThreadPri(0);
         if (currentPriority < managerPriority) {
             restorePriority = currentPriority;
-            func_802BB5F0_de(0, managerPriority);
+            Scene_SetThreadPriority(0, managerPriority);
         }
         savedInterruptMask = __osDisableInt();
         D_800D4420.active = 1;
@@ -58,7 +58,7 @@ void func_802BA5F0_eu(s32 managerPriority) {
         osStartThread(&D_80148850);
         __osRestoreInt(savedInterruptMask);
         if (restorePriority != -1) {
-            func_802BB5F0_de(0, restorePriority);
+            Scene_SetThreadPriority(0, restorePriority);
         }
     }
 }
@@ -70,16 +70,16 @@ void func_802BA5F0_eu(s32 managerPriority) {
 
 extern u16 D_80148840;
 
-extern struct __OSViContext *func_802BA640_de(void);
+extern struct __OSViContext *System_GetCurrentVideoContext(void);
 
-extern void func_802BB8B0_de(void);
+extern void Util_HandleTimerInterrupt(void);
 
 static inline u16 *viRetrace(void)
 {
     return &D_80148840;
 }
 
-void func_802BA4C0_de(struct OSDevMgr *arg)
+void System_RunVideoManager(struct OSDevMgr *arg)
 {
     struct __OSViContext *vc;
     struct OSDevMgr *dm;
@@ -94,7 +94,7 @@ void func_802BA4C0_de(struct OSDevMgr *arg)
 
     mb = 0;
     first = 0;
-    vc = func_802BA640_de();
+    vc = System_GetCurrentVideoContext();
     retraceInit = &D_80148840;
     *retraceInit = vc->retraceCount;
     if (*retraceInit == 0) {
@@ -108,7 +108,7 @@ void func_802BA4C0_de(struct OSDevMgr *arg)
             case 13:
                 __osViSwapContext();
                 if (--*viRetrace() == 0) {
-                    vc = func_802BA640_de();
+                    vc = System_GetCurrentVideoContext();
                     if (vc->msgq != 0) {
                         osSendMesg(vc->msgq, vc->msg, 0);
                     }
@@ -132,7 +132,7 @@ void func_802BA4C0_de(struct OSDevMgr *arg)
                 *currentTime = *currentTime + count;
                 break;
             case 14:
-                func_802BB8B0_de();
+                Util_HandleTimerInterrupt();
                 break;
             default:
                 break;

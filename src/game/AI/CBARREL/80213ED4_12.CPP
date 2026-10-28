@@ -7,7 +7,7 @@ extern f32 Barrel_FindClearAimAngle(void *arg0, f32 arg1, f32 arg2, f32 arg3,
                         void *arg4, f32 arg5);
 
 
-void Barrel_TurnTowardClearAim(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
+void Cbarrel_TurnTowardClearAim(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
     f32 f0;
     f32 f1;
     f32 f2;

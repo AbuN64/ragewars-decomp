@@ -99,7 +99,7 @@ s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
 
 post:
     Frontend_UpdateSliderGeometry(widget);
-    Smos_RouteElementEvent(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
+    Menu_RouteElementEvent(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
     MarkMenuEventHandled();
     result = 0;
 

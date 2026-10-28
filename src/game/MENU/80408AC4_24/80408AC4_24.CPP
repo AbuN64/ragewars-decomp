@@ -19,7 +19,7 @@ extern u8 *D_auto_800D348C;
 extern u8 *D_auto_800D3490;
 extern void *Cache_AllocateMemory(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern void Frontend_SetWidgetFlag100(void *, s32);
+extern void Widget_SetWidgetFlag100(void *, s32);
 extern s32 Defs_GetMemorySize(void);
 extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(struct MenuListWidget *, u8 *);
@@ -30,7 +30,7 @@ extern s32 ScenarioSetup_IsCupSelected(void);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
-/* German Menu_OpenOptionsScreen: the same options screen without the first (language) list; the
+/* German Options_OpenOptionsScreen: the same options screen without the first (language) list; the
    widget resource ids are 6..0x14 lower and settings is first taken after the memory-mode labels. */
 s32 Menu_OpenGameOptionsScreen(void *node) {
     Shared_Game *settings;
@@ -96,13 +96,13 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
+            Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
         }
         handle = Frontend_FindWidgetByResourceId(node, 0x376);
-        Frontend_SetWidgetFlag100(handle, 1);
+        Widget_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
-                Frontend_SetWidgetFlag100(handle, 0);
+                Widget_SetWidgetFlag100(handle, 0);
                 break;
             }
         }
@@ -111,8 +111,8 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     case 2:
     case 3:
     case 4:
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x376), 1);
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x376), 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
         break;
     }
     SmpButton_WrapButtonWidget(0x376);

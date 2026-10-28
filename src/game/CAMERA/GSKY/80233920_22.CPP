@@ -6,7 +6,7 @@ extern float D_800C8630;
 
 
 /** Reset the object fields from 0xFC through 0x118. */
-void func_802393D8_de(void *cameraStorage) {
+void Gsky_ResetFadeState(void *cameraStorage) {
     GameplayCamera *state = cameraStorage;
     float value = D_800C8630;
     state->unkFC = 0;

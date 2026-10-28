@@ -11,12 +11,12 @@
 #include "SCENE/802508E0_4.H"
 
 struct ObjB;
-extern CachedResource *func_80251F6C_de(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);
+extern CachedResource *Cache_RequestPairedResource(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern void Cache_UnlockResource(void *, Node80253610 *);
 extern void Geometry_UnlockMaterialResources(void **);
-void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
+void Simpinst_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
     void *memory = object;
     ResourceObject23 *obj = memory;
     void *header;
@@ -32,7 +32,7 @@ void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unuse
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, obj->model, 1);
             Cache_ReleaseResource(0, resource);
-            found = func_802540F4_de(0, &header, key, g_simpModelsIndexText, 1);
+            found = Cache_RequestWordCountedResource(0, &header, key, g_simpModelsIndexText, 1);
             if (found != 0) {
                 table = header;
                 obj->resourceName = SetN64_LocatePackSection(table, key, index % table[0], &obj->resourceSize);
@@ -48,7 +48,7 @@ void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unuse
     }
     if (resource != 0) {
         Geometry_UnlockMaterialResources(resource);
-        block = func_80251F6C_de(0, D_800CD3F0, (void *)resource, obj->blockNode, 8, obj, &D_0024F8DC, &s_litVerticesText, 0);
+        block = Cache_RequestPairedResource(0, D_800CD3F0, (void *)resource, obj->blockNode, 8, obj, &D_0024F8DC, &s_litVerticesText, 0);
         if (block != 0) {
             Cache_UnlockResource(0, (void *)block);
         }

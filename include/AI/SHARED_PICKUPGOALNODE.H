@@ -18,12 +18,12 @@ struct Shared_PickupGoalNode {
 
 extern PickupGoalNodeList D_8013B364;
 
-extern void Nav_ResetSearchState(struct Obj8020BC50 *arg0);
-extern void Nav_ClearGoalList(PickupGoalNodeList *list);
+extern void Portal_ResetSearchState(struct Obj8020BC50 *arg0);
+extern void Route_ClearGoalList(PickupGoalNodeList *list);
 extern s32 Nav_AddPickupGoalsByObjectIds(s32 *ids);
-extern void Nav_SearchPathByKey(PickupGoalNodeList *list, s32 key);
-extern Shared_PickupGoalNode *Nav_FindSearchNode(PickupGoalNodeList *list, u32 key);
-extern void Nav_ReconstructSearchPath(PickupGoalNodeList *list, s32 *output, s32 count);
+extern void Route_SearchPathByKey(PickupGoalNodeList *list, s32 key);
+extern Shared_PickupGoalNode *Portal_FindSearchNode(PickupGoalNodeList *list, u32 key);
+extern void Route_ReconstructSearchPath(PickupGoalNodeList *list, s32 *output, s32 count);
 
 
 #endif

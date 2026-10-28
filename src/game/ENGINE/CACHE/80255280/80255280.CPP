@@ -121,7 +121,7 @@ found:
     }
 }
 
-/* Rounds a value up to a power of two by locating its highest set bit and bumping it unless exactly one bit is set. Adapted from func_80261614_de, with a signed loop counter, an exactly-one-bit test, and 1 << bit returned instead of the bit index. */
+/* Rounds a value up to a power of two by locating its highest set bit and bumping it unless exactly one bit is set. Adapted from Bitarray_GetRequiredBitCount, with a signed loop counter, an exactly-one-bit test, and 1 << bit returned instead of the bit index. */
 
 s32 func_80255540_de(s32 mask) {
     s32 bitCount;

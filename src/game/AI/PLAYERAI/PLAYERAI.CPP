@@ -251,7 +251,7 @@ void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
 /* Selects and records a player's reaction to an interaction. */
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
-void Player_ApplyStun(void *, f32);
+void Playerai_ApplyStun(void *, f32);
 void func_80229FA0_de(void *, void *);
 s32 Player_GetPlayerIndex(void *, unsigned int);
 s32 Player_GetMaxHealth(void *);
@@ -389,7 +389,7 @@ flag_done:
                 goto block_47;
 block_early_return:
                 if (damagedPlayer->unk5E4 > 0) {
-                    Player_ApplyStun(damagedPlayer, 2.5f);
+                    Playerai_ApplyStun(damagedPlayer, 2.5f);
                 }
                 return;
 block_33:
@@ -574,9 +574,9 @@ block_88:
                             } else {
                                 victimDeathStatistics = (void *)damagedPlayer->unk5D8;
                                 victimDeathStatistics->deaths_other = (u16) (victimDeathStatistics->deaths_other + 1);
-                                actorStatisticsNode = Nav_FindSearchNode(&D_8013B364, damagedPlayer->unk1454->unk4);
+                                actorStatisticsNode = Portal_FindSearchNode(&D_8013B364, damagedPlayer->unk1454->unk4);
                                 actorStatisticsNode->unk38 = (s32) (actorStatisticsNode->unk38 + 1);
-                                actorStatisticsNode = Nav_FindSearchNode(&D_8013B364, creditedPlayer->unk1454->unk4);
+                                actorStatisticsNode = Portal_FindSearchNode(&D_8013B364, creditedPlayer->unk1454->unk4);
                                 actorStatisticsNode->unk3C = (s32) (actorStatisticsNode->unk3C + 1);
                                 if (damagedPlayer->unk5D8->unk8F == 1) {
                                     if (D_801468A0->countRule != 0) {
@@ -654,9 +654,9 @@ reaction_statistics_done:
     }
 }
 
-extern void **func_8024BFD4_de(LevelActor *, s32);
+extern void **Gobjinst_RequestAnimatedModelVariant(LevelActor *, s32);
 extern void Cache_UnlockResource(s32, void *);
-void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
+void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Draw *context)
 {
     PlayerCode80225D10 *player;
     void **resource;
@@ -701,7 +701,7 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
             if (D_80145088.settings.local && (player->hidden || player->kind == D_800C9228_de) &&
                 player->health == 0) return;
         }
-        if (player->flags & 0x20) Player_DrawTintedPlayer(actor, arg1, context);
+        if (player->flags & 0x20) Player_DrawTintedPlayer(actor, animationContext, context);
         else {
             if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
             else actor->team = (u8)actor->definition->first;
@@ -725,7 +725,7 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
     if (player->selectedWeapon >= 16) model -= 2;
 weapon:
     if (model >= 0) {
-        resource = func_8024BFD4_de(actor, model);
+        resource = Gobjinst_RequestAnimatedModelVariant(actor, model);
         if (resource) {
             Geometry_DrawModelResource(resource, actor->fieldB4, 1,
                             &actor->lighting[D_800D297C], 0, actor->field3);
@@ -781,7 +781,7 @@ void func_8021A78C_de(void *playerObject) {
     ((ObjectLinks16D8 *)(object))->unk_734 = 0;
     ((ObjectLinks16D8 *)(object))->unk_738 = 0;
     ((ObjectLinks16D8 *)(object))->unk_73C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_740 = Player_GetObjectOwnerHeight(object);
+    ((ObjectLinks16D8 *)(object))->unk_740 = Playerai_GetObjectOwnerHeight(object);
     default_value = D_800C22F8_de;
     ((ObjectLinks16D8 *)(object))->unk_744 = 0;
     (&((ObjectLinks16D8 *)(object))->unk_748)->x = (&((ObjectLinks16D8 *)(object))->unk_748)->y = (&((ObjectLinks16D8 *)(object))->unk_748)->z = 0;
@@ -1056,12 +1056,12 @@ void Player_ResetPlayerWeapons(struct Player *player) {
 }
 
 extern s32 D_801371D4;
-extern void Ovlgame_ReleaseObjectHandles(void *);
+extern void Player_ReleaseObjectHandles(void *);
 extern void OvlScene_SetSelection(void *, s32, s32);
-extern f32 GraphU64_GetPointDistance(void *, void *);
-extern s32 Nav_FindNearestPointIndex(void *, void *);
+extern f32 Graphu64_GetPointDistance(void *, void *);
+extern s32 Portal_FindNearestPointIndex(void *, void *);
 extern void Control_SetProfileMode(void *, s32);
-extern void Ovlgame_InitActorHudState(void *);
+extern void Player_InitActorHudState(void *);
 /* Places the player at the matching level spawn. In multiplayer, choose the last
  * point tied for the greatest distance to its nearest player. Fall back when no
  * point is available, then update the controller's current cell. The single-player arm opens with a dead
@@ -1079,7 +1079,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Shared_ActorView *other;
     s32 floor;
     s32 cell;
-    Ovlgame_ReleaseObjectHandles(player);
+    Player_ReleaseObjectHandles(player);
     Control_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
     world = &g_world;
     if (reset) {
@@ -1093,7 +1093,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         for (i = 0; i < count; i++) {
             distance = D_800C2340_de;
             for (other = D_80145060.actorList; other; other = other->next) {
-                f32 d = GraphU64_GetPointDistance(&points[i].pos, &other->position.vector);
+                f32 d = Graphu64_GetPointDistance(&points[i].pos, &other->position.vector);
                 if (d < distance) distance = d;
             }
             if (bestDistance <= distance) {
@@ -1124,12 +1124,12 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     }
     ((Shared_ActorView *)player)->weapon.model = floor;
     ((Shared_ActorView *)player)->modelId = floor;
-    Ovlgame_InitActorHudState(player);
+    Player_InitActorHudState(player);
     goto done;
 fallback:
     OvlScene_SetSelection(&g_world, model, scale);
 done:
-    cell = Nav_FindNearestPointIndex(&D_8013B364, &((Shared_ActorView *)player)->position.vector);
+    cell = Portal_FindNearestPointIndex(&D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;
 }
 

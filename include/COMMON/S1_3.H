@@ -15,14 +15,14 @@ extern float D_800C48D8_de;
 
 
 
-extern f32 GraphU64_GetVerticalAngle(f32 *arg0);
+extern f32 Graphu64_GetVerticalAngle(f32 *arg0);
 
 
 
 
-extern f32 GraphU64_GetAngleDistance(f32 arg0, f32 arg1);
+extern f32 Graphu64_GetAngleDistance(f32 arg0, f32 arg1);
 
-extern void GraphU64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Graphu64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector3 *right);
 
 extern float D_800C48B0_de;
 
@@ -31,15 +31,15 @@ extern float D_800C48DC_de;
 extern float D_800C48B8_de;
 
 
-extern void *GraphU64_ReflectVector(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3);
+extern void *Graphu64_ReflectVector(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3);
 
-extern void *GraphU64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
-
-
+extern void *Graphu64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 
 
-extern void GraphU64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y);
+
+
+extern void Graphu64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y);
 
 
 

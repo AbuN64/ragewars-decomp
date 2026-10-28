@@ -25,12 +25,12 @@ s32 Libultra_ReadDebugLinkByte(u8 *receivedByte) {
     result = 0;
     D_8014D3E3 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = initial_control;
     control = D_8014D3E3 | 8;
     D_8014D3E3 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 1;
     timeout = 0x4E20;
@@ -40,7 +40,7 @@ s32 Libultra_ReadDebugLinkByte(u8 *receivedByte) {
     D_8014D3E8 = 0;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto first_done;
         }
@@ -54,12 +54,12 @@ first_done:
 
     if (D_8014D3E8 == 0) {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         *receivedByte = D_B2000001;
         control = D_8014D3E3 & 0xF7;
         D_8014D3E3 = control;
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
 
         expected = 1;
         retries = D_800D3650;
@@ -67,7 +67,7 @@ first_done:
         D_B200000C = control;
         do {
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             status = D_B2000015 & expected;
             if (status == 0) {
                 goto second_done;
@@ -84,7 +84,7 @@ second_done:
             final_control = D_8014D3E3 & 0xF8;
             D_8014D3E3 = final_control;
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             D_B200000C = final_control;
             result = 1;
         }

@@ -9,19 +9,19 @@
 #include "OVLGAME/SHAREDRECAT224.H"
 
 s32 Items_ForwardRulesLock(void *unused, MenuRules *rules) {
-    Ovlgame_PlacePlayerForRound(rules->locked);
+    Player_PlacePlayerForRound(rules->locked);
     return 1;
 }
 #endif
 
 #if defined(VERSION_EU)
 extern char D_8011FAC0[];
-extern void Ovlgame_ResetMatchControllerState(void *);
-/* Pak/option page handler: while D_80145070 is 1 it runs Ovlgame_ResetMatchControllerState on the session, otherwise it clears the
+extern void Match_ResetMatchControllerState(void *);
+/* Pak/option page handler: while D_80145070 is 1 it runs Match_ResetMatchControllerState on the session, otherwise it clears the
    flag word at 0x5D0 of the record at 0x1C of its second argument. Returns one. */
 s32 Items_HandleSessionOptionPage(void *unused, void **menu) {
     if (D_80145070 == 1) {
-        Ovlgame_ResetMatchControllerState(D_8011FAC0);
+        Match_ResetMatchControllerState(D_8011FAC0);
     } else {
         *(s32 *)((u8 *)menu[7] + 0x5D0) = 0;
     }

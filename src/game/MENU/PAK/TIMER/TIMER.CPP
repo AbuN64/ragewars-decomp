@@ -17,7 +17,7 @@
 extern char *D_800E25D4[];
 extern char *D_800E25C4[];
 
-s32 Pak_MatchesGameIdentity(char *code, char *name) {
+s32 Timer_MatchesGameIdentity(char *code, char *name) {
     Shared_Game *settings;
     if (XPlus_StringLength((u8 *)name) == 4 && XPlus_StringLength((u8 *)code) == 2) {
         settings = &D_801462C8;
@@ -37,7 +37,7 @@ extern char *D_800D36E0;
 
 extern s32 XPlus_StringLength(u8 *);
 
-s32 Pak_MatchesGameIdentity(char *code, char *name) {
+s32 Timer_MatchesGameIdentity(char *code, char *name) {
     if (XPlus_StringLength((u8 *)name) == 4 && XPlus_StringLength((u8 *)code) == 2 &&
         XPlus_CompareStrings(name, D_800D36E0) == 0 && XPlus_CompareStrings(code, D_800D36DC) == 0) {
         return 1;
@@ -70,24 +70,24 @@ extern s32 D_800E28BC;
 
 extern struct Saved D_80153738;
 
-char *Pak_GetSaveBlockByteCount(s32 block) {
+char *Timer_GetSaveBlockByteCount(s32 block) {
     if (block == 0) {
         return D_8011FECC + 0x610;
     }
     return (char *) (block << 8);
 }
 
-void Pak_SetSaveTrailerValue(s32 offset, s32 value) {
+void Timer_SetSaveTrailerValue(s32 offset, s32 value) {
     ((struct IntegerState610 *) (D_8011FECC + offset))->unk_60C = value;
 }
 
 /* Returns the last word of a self-sized block: the first word holds the block's byte length and
    the result is the word just before that many bytes from the start. */
-s32 Pak_GetSaveTrailerValue(s32 *block) {
+s32 Timer_GetSaveTrailerValue(s32 *block) {
     return ((struct Shape_typemap_3 *) (block[0] + (s32) block))[-1].field_0;
 }
 
-void Pak_AllocateSaveBlock(void ***handle, void **data, s32 units) {
+void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     void **block;
     void *first;
 
@@ -107,7 +107,7 @@ void Pak_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     XPlus_FillMemory(first, 0, units);
 }
 
-void Pak_ReleaseSaveBlocks(void) {
+void Timer_ReleaseSaveBlocks(void) {
     if ((D_800DE860_de != 0) || (D_800DE864_de != 0)) {
         func_80253908_de(0);
     }
@@ -123,7 +123,7 @@ void Pak_ReleaseSaveBlocks(void) {
     D_800E28BC = 0;
 }
 
-void Pak_CapturePlayerProfile(struct OwnerRecAt5D8V1 *owner) {
+void Timer_CapturePlayerProfile(struct OwnerRecAt5D8V1 *owner) {
     struct ProfileRecAt84 *settings = owner->settings;
     s32 i;
 

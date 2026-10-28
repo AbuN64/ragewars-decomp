@@ -9,7 +9,7 @@
 #include "SCENE/802508E0_13.H"
 
 /** Copy the same global float to two destinations. */
-void Smos_SetFloatPairToNegativeOne(float *arg0, float *arg1) {
+void Stream_SetFloatPairToNegativeOne(float *arg0, float *arg1) {
     float value = D_800C5688_de;
     *arg0 = value;
     *arg1 = value;
@@ -74,7 +74,7 @@ void StreamBufferFree(StreamBuffer *streamBuffer) {
     streamBuffer->capacity = 0;
 }
 
-void Smos_DrainResourceWork(void) {
+void Stream_DrainResourceWork(void) {
     func_80255228_de(&D_80106248);
     func_80253908_de(0);
 }

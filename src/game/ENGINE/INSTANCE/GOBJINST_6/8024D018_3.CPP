@@ -10,7 +10,7 @@
 
 /* Returns the rotation that turns an actor's aim toward a target point: a player's forward axis is its
  * aiming orientation from func_8024796C_de applied to +z, anyone else looks along +z; the target is the
- * player's lock-on at 0x1F0 or else whatever Player_FindNearestPlayer finds at the point, and with no target the
+ * player's lock-on at 0x1F0 or else whatever Playerai_FindNearestPlayer finds at the point, and with no target the
  * identity is returned. Otherwise the forward axis turns about its cross product with the direction from
  * the point up to three quarters of the target's height, by half the angle between them, composed with the
  * player's aiming orientation; the sine is kept in D_80115DEC. */
@@ -27,21 +27,21 @@ extern CQuatern func_8024796C_de(char *);
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 
-extern char *Player_FindNearestPlayer(void *, CVector3);
+extern char *Playerai_FindNearestPlayer(void *, CVector3);
 
 extern f32 GameObject_GetActorHeight(char *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
-extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
+CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     CVector3 origin;
     CVector3 dir;
     CVector3 forward;
@@ -71,7 +71,7 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
         forward.z = 1.0f;
     }
     if (target == 0) {
-        found = Player_FindNearestPlayer(&D_80145040, point);
+        found = Playerai_FindNearestPlayer(&D_80145040, point);
         if (found != 0) {
             target = found;
         }
@@ -86,7 +86,7 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
     origin.y += GameObject_GetActorHeight(target) * 0.75f;
     GraphU64_SubtractVectors(&dir, &origin, &point);
     GraphU64_NormalizeVec3(&dir);
-    GraphU64_CrossVectors(&axis, &forward, &dir);
+    Graphu64_CrossVectors(&axis, &forward, &dir);
     GraphU64_NormalizeVec3(&axis);
     angle = GraphU64_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = Math_Sinf(angle);
@@ -103,7 +103,7 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
     return result;
 }
 
-CQuatern GameObject_BuildActorDirectionTilt(InputRecAt44 *input) {
+CQuatern Gobjinst_BuildActorDirectionTilt(InputRecAt44 *input) {
     CVector3 source;
     CVector3 up;
     CVector3 axis;
@@ -134,7 +134,7 @@ source_ready:
     up.x = 0.0f;
     up.y = D_800C3C9C_de;
     up.z = 0.0f;
-    GraphU64_CrossVectors(&axis, &up, &source);
+    Graphu64_CrossVectors(&axis, &up, &source);
     GraphU64_NormalizeVec3(&axis);
 
     angle = GraphU64_ArcCos((up.x * source.x) +

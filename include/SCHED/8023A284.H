@@ -65,7 +65,7 @@ struct PagerState {
     char list0Data[0xC0 - 0x3C];
     char queue[0x2F0 - 0xC0]; /* thread 1 (osCreateThread) */
     char pool[0x4F0 - 0x2F0]; /* its stack */
-    char queueData[0x720 - 0x4F0]; /* thread 2 (Virtual_RunPagerDispatcher); its address is also thread 1's stack top */
+    char queueData[0x720 - 0x4F0]; /* thread 2 (Vhandler_RunPagerDispatcher); its address is also thread 1's stack top */
     char pool2[0x920 - 0x720]; /* thread 2's stack */
     SlotVirtualInitializePagerEuroExtended slots[24];
     OSMesgQueue jobs;

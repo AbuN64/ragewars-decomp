@@ -49,7 +49,7 @@ extern u8 D_80142358;
 
  void MarkMenuEventHandled(void);
 
- s32 Smos_GetFocusedElementId(void);
+ s32 Menu_GetFocusedElementId(void);
 
  
 
@@ -131,7 +131,7 @@ s32 Menu_HandleScrollingChoice(void) {
     s32 temp_v0;
     s32 var_v0;
     MarkMenuEventHandled();
-    temp_v0 = Smos_GetFocusedElementId();
+    temp_v0 = Menu_GetFocusedElementId();
     switch (temp_v0) { /* irregular */
 #if defined(VERSION_DE)
     case 0x138 + 2:

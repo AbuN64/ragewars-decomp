@@ -62,6 +62,6 @@ void func_80244D70_de(void)
     p[0x100 / 4] = 0;
     p[0x104 / 4] = 0;
 
-    func_80245A30_de();
+    Cinema_ResetViewport();
     Cinema_ClearMessageCount();
 }

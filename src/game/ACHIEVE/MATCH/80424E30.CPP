@@ -16,7 +16,7 @@ extern s32 D_800FF140_de[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
 extern Settings D_801462C8;
 /* Increment the capped player match count and eligible level count. */
-void Achieve_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
+void Match_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
     s32 count;
     s32 i;
     s32 eligible;
@@ -96,7 +96,7 @@ extern char *D_800E1374_eu[];
 extern char *D_800E1384[];
 #endif
 
-char *Achieve_UpdateRankText(s32 index) {
+char *Match_UpdateRankText(s32 index) {
     s32 count;
     s32 i;
     char *text;

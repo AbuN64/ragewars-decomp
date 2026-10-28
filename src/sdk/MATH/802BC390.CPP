@@ -3,7 +3,7 @@
 #include "sdk/MATH/802BC390.H"
 
 /** Read the hardware register at 0xA450000C. */
-unsigned int func_802B72C0_de(void) {
+unsigned int osAiGetStatus(void) {
     return *(volatile unsigned int *)0xA450000C;
 }
 

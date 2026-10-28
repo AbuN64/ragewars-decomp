@@ -1,9 +1,9 @@
 #ifndef FRONTEND_80423280_42_H
 #define FRONTEND_80423280_42_H
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-extern void Frontend_FillSelectedPlayerWeaponRows();
-extern void Frontend_FillTwoPlayerWeaponRows();
-extern void Frontend_ShowTrialPreviewBanner();
-extern void Frontend_RefreshTrialSelectionLabel();
-extern void Frontend_FillProfileWeaponRows();
+extern void Results_FillSelectedPlayerWeaponRows();
+extern void Results_FillTwoPlayerWeaponRows();
+extern void Results_ShowTrialPreviewBanner();
+extern void Results_RefreshTrialSelectionLabel();
+extern void Results_FillProfileWeaponRows();
 #endif

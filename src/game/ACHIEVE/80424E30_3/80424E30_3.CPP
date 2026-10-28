@@ -356,7 +356,7 @@ s32 Achieve_CountEarnedAchievements(s32 index) {
 }
 
 void Achieve_ApplyProfileWeaponUnlocks(Arg *arg0) {
-    s32 temp_s0;
+    s32 item;
     s32 temp_v0;
     s32 i;
     StateRecAt91 *temp_a0;
@@ -369,13 +369,13 @@ void Achieve_ApplyProfileWeaponUnlocks(Arg *arg0) {
             model = (Model *)arg0->unk18;
             temp_s3 = temp_a0->unk7F * 0x190;
                         do {
-                temp_s0 = model->slots[i];
-                if (temp_s0 >= 0x4C3) {
-                    temp_s0 = temp_s0 - 0x4C3;
-                    temp_v0 = Player_HasProfileUnlockFlag(temp_s3 + D_80102B00->name, temp_s0);
+                item = model->slots[i];
+                if (item >= 0x4C3) {
+                    item = item - 0x4C3;
+                    temp_v0 = Player_HasProfileUnlockFlag(temp_s3 + D_80102B00->name, item);
                     if (temp_v0 == 1) {
-                        arg0->slots[temp_s0].available = temp_v0;
-                        arg0->slots[temp_s0].slot = i;
+                        arg0->slots[item].available = temp_v0;
+                        arg0->slots[item].slot = i;
                     }
                 }
                 i += 1;

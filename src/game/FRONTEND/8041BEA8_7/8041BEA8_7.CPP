@@ -26,7 +26,7 @@
 
 /* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
  * them define them: SmpOverlay_SetObjectValue writes the word at +0x6C of the object it is handed, and
- * Frontend_ShowUnlockedEntries takes the style word this block keeps at +0x0FC. */
+ * Focus_ShowUnlockedEntries takes the style word this block keeps at +0x0FC. */
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */
@@ -111,9 +111,9 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 
     D_800E3590->player = 0;
     D_800E3590->unk268 = -1;
-    Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
-    Frontend_RefreshProfileStatistics();
-    Frontend_ShowUnlockedEntries(D_800E3590->style);
+    Focus_AdvanceActiveSlot(&D_800E3590->unk268);
+    Focus_RefreshProfileStatistics();
+    Focus_ShowUnlockedEntries(D_800E3590->style);
     Frontend_FindWidgetByResourceId(arg0, slotRes(493))->alpha = 110;
     D_800E3590->focus = 0;
     return 0;
@@ -128,12 +128,12 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 /* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
    MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
 
-extern void Smos_ReturnToPreviousScreen(void);
+extern void Menu_ReturnToPreviousScreen(void);
 
 extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
 extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
 
-/* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
+/* Focus_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
 s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
     NodeFrontendAnimateSlotSelectionMenu *node;
@@ -158,7 +158,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             ((MenuRecAt108 *) D_800E3590)->state = 3;
             MarkMenuEventHandled();
-            Smos_ReturnToPreviousScreen();
+            Menu_ReturnToPreviousScreen();
             return 0;
         }
         break;
@@ -182,10 +182,10 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
     case 6:
         ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
         ((MenuRecAt108 *) D_800E3590)->groupC->style += ((MenuRecAt108 *) D_800E3590)->alphaStep;
-        Frontend_ShowUnlockedEntries(((MenuRecAt108 *) D_800E3590)->styleValue);
+        Focus_ShowUnlockedEntries(((MenuRecAt108 *) D_800E3590)->styleValue);
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
-            Frontend_ShowUnlockedEntries(0x6E);
+            Focus_ShowUnlockedEntries(0x6E);
             ((MenuRecAt108 *) D_800E3590)->state = 3;
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
         }
@@ -205,8 +205,8 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
             }
             ((MenuRecAt108 *) D_800E3590)->focus = node;
             node->style = 0xE1;
-            Frontend_RefreshUnlockedFocusLabel();
-            Frontend_UpdateFocusCaption();
+            Focus_RefreshUnlockedFocusLabel();
+            Focus_UpdateFocusCaption();
             ((MenuRecAt108 *) D_800E3590)->cursor->x = node->x - 2;
             ((MenuRecAt108 *) D_800E3590)->cursor->y = node->y;
         }

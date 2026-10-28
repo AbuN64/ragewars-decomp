@@ -21,7 +21,7 @@ extern f32 D_800C3E50_de[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
 
-extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
+extern void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 extern void Link_AnimateVertexColors(void *object, void *colors);
 
@@ -59,7 +59,7 @@ extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
-s32 StaticInstance_UpdateDistanceFade(void *prop, s32 arg1) {
+s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
     OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;
     GameplayCamera *camera = (void *)arg1;
     CVector3 sp10;
@@ -129,7 +129,7 @@ block_20:
     return 1;
 }
 
-void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *owner) {
+void Statinst_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *owner) {
     DescriptorRecAt24 *descriptor;
     s32 remaining;
     s32 key;
@@ -162,9 +162,9 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
         }
         D_800D15E4[3] = alpha;
     }
-    instance = StaticInstance_AcquireGeometry(owner, key);
+    instance = Statinst_AcquireGeometry(owner, key);
     if (instance != 0) {
-        resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
+        resource = Cache_RequestPairedResource(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                                  D_800C3E40_de, 0);
         if (resource != 0) {
             Cache_MarkResourceInUse(0, resource);
@@ -194,7 +194,7 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
     D_800D15E4[3] = D_800C3E58_de;
 }
 
-void StaticInstance_DrawModel(ModelOwner *owner) {
+void Statinst_DrawModel(ModelOwner *owner) {
     s32 remaining;
     void *instance;
     CachedResource *resource;
@@ -205,11 +205,11 @@ void StaticInstance_DrawModel(ModelOwner *owner) {
         return;
     }
     remaining = owner->descriptor->argument;
-    instance = StaticInstance_AcquireGeometry(owner, owner->descriptor->key);
+    instance = Statinst_AcquireGeometry(owner, owner->descriptor->key);
     if (instance == 0) {
         return;
     }
-    resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
+    resource = Cache_RequestPairedResource(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                              D_800C3E40_de, 0);
     if (resource != 0) {
         Cache_MarkResourceInUse(0, resource);
@@ -236,7 +236,7 @@ void StaticInstance_DrawModel(ModelOwner *owner) {
     owner->colorFrame = (u8)D_800D2978;
 }
 
-void StaticInstance_DispatchAttachmentEvents(void *object, s32 all) {
+void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
     s32 **model;
     s32 **table;
     s32 *header;

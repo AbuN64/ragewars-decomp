@@ -15,7 +15,7 @@
 extern u8 *XPlus_CopyString(u8 *dst, u8 *name);
 
 /* Seats a joining player (request: kind+1, team, rank) in the highest free player slot, filling its index, kind (random for 20), team (random for 3, at most 2), rank and name (per language on the European cartridges); returns the slot or -1 when all are taken. */
-s32 Frontend_AddStageOpponent(u8 *request) {
+s32 Random_AddStageOpponent(u8 *request) {
     s32 i;
     s32 kind;
     s32 team;
@@ -38,7 +38,7 @@ s32 Frontend_AddStageOpponent(u8 *request) {
         player->slot = i;
         kind = request[0] - 1;
         if (kind == 19) {
-            player->character = Frontend_ChooseRandomCharacter();
+            player->character = Random_ChooseRandomCharacter();
         } else {
             player->character = kind;
         }
@@ -61,7 +61,7 @@ s32 Frontend_AddStageOpponent(u8 *request) {
             name = joinName16();
             break;
         default:
-            name = joinTeamName((u8)player->team * 17 + Frontend_FindKeyIndex(player->character));
+            name = joinTeamName((u8)player->team * 17 + Key_FindKeyIndex(player->character));
             break;
         }
         XPlus_CopyString(player->name, name);
@@ -74,7 +74,7 @@ s32 Frontend_AddStageOpponent(u8 *request) {
  * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98.
  * The last loop looks for the last enabled seat and never uses the answer: flow deletes its store after loop.c has
  * hoisted the 1 and strength-reduced the seat offset, so the ROM keeps only the counter, a0=1 and the 0xD0+0x96*i offset. */
-void Frontend_SetupRandomTeams(void) {
+void Random_SetupRandomTeams(void) {
     s32 characters[4];
     s32 arenas[4];
     LevelGoal *levelGoal;
@@ -117,7 +117,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 0;
         player->team = 2;
         player->variant = GraphU64_NextRandom() % 3;
-        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
+        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Key_FindKeyIndex(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
         player = &game->playerSettings[4 + unlockedCount + i];
@@ -126,7 +126,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 1;
         player->team = 2;
         player->variant = GraphU64_NextRandom() % 3;
-        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
+        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Key_FindKeyIndex(player->character)));
     }
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];

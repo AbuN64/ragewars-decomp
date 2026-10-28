@@ -66,7 +66,7 @@ void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 
                 glyph = D_801378C0[ch];
                 a = fontGlyphWidth();
                 b = fontGlyphWidth();
-                advance = Pak_GetGlyphAdvance(ch, next, a, b);
+                advance = Menu_GetGlyphAdvance(ch, next, a, b);
                 break;
             case 1:
                 glyph = D_801377C0[ch];

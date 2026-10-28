@@ -35,7 +35,7 @@ s32 func_802B93B0_de(OSPiHandle_s *pihandle, s32 direction, u32 devAddr, void *d
         }
         D_800D4380[domain] = pihandle;
     }
-    IO_WRITE(0xA4600000, func_802BBBC0_de(dramAddr));
+    IO_WRITE(0xA4600000, osVirtualToPhysical(dramAddr));
     IO_WRITE(0xA4600004, (pihandle->baseAddress | devAddr) & 0x1FFFFFFF);
     switch (direction) {
         case 0:

@@ -14,7 +14,7 @@ extern u8 D_8014D5E0[];
 
 
 
-u32 func_802B7B80_us(Triple *motorContext) {
+u32 osMotorStop(Triple *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
@@ -26,7 +26,7 @@ u32 func_802B7B80_us(Triple *motorContext) {
         u32 result;
         s32 count;
 
-        func_802B9C14_de();
+        __osSiGetAccess();
         D_8014D4B0 = 3;
         __osSiRawStartDma(1, &D_8014D5E0[motorContext->z << 6]);
         osRecvMesg(motorContext->y, 0, 1);
@@ -44,10 +44,10 @@ u32 func_802B7B80_us(Triple *motorContext) {
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
-        if ((result == 0) && ((func_802B8C88_de(&D_8014D6E0) & 0xFF) != saved.bytes[0x26])) {
+        if ((result == 0) && ((__osContDataCrc(&D_8014D6E0) & 0xFF) != saved.bytes[0x26])) {
             result = 4;
         }
-        func_802B9C80_de();
+        __osSiRelAccess();
         return result;
     }
 }

@@ -36,7 +36,7 @@
 #include "GAME/CODE_8027302C.H"
 #include "WEAPONS/80231F5C_12.H"
 
-extern void Ovlgame_ReleaseObjectHandles(void *);
+extern void Player_ReleaseObjectHandles(void *);
 extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
 
 /* 80231F5C_5.CPP */
@@ -203,8 +203,8 @@ void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireStat
 }
 
 /* 80231F5C_8.CPP */
-extern s32 Pak_CountLiveNodes(void *arg0);
-extern s32 Player_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Menu_CountLiveNodes(void *arg0);
+extern s32 Playerai_GetWeaponAmmo(void *arg0, s16 arg1);
 
 void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
@@ -220,7 +220,7 @@ void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
         return;
     }
     if (D_801462C8.local != 0) {
-        if (Pak_CountLiveNodes((char *)resource + 0x554) != 0) {
+        if (Menu_CountLiveNodes((char *)resource + 0x554) != 0) {
             return;
         }
     }
@@ -229,7 +229,7 @@ void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     if ((state == one) && (arg1->field144 == 0)) {
         return;
     }
-    if ((state >= 0x12) && (Player_GetWeaponAmmo(actor, state) <= 0)) {
+    if ((state >= 0x12) && (Playerai_GetWeaponAmmo(actor, state) <= 0)) {
         return;
     }
     state = ((Shared_ActorView *)actor)->selectedAction;
@@ -267,12 +267,12 @@ void Weapon_InitializeFireStateCallbacks(void *arg0, void *arg1) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 Weapon_ApplySwitchAndRequestIdle
 #else
-Weapon_InitializeSwitchAndRequestIdle
+Weaponai_InitializeSwitchAndRequestIdle
 #endif
 (arg0, arg1);
 }
 
-extern s32 Player_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Playerai_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 s32 Weapon_PickRandomArmedWeapon(void *player) {
     s32 weapon;
@@ -286,7 +286,7 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
             if (weapon >= 0x10) {
                 weapon = 0;
             }
-            if (Player_PlayerHasAmmoForWeapon(player, weapon) != 0) {
+            if (Playerai_PlayerHasAmmoForWeapon(player, weapon) != 0) {
                 remainingArmedSteps -= 1;
             }
         } while (remainingArmedSteps >= 0);
@@ -346,7 +346,7 @@ s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_Acto
 }
 
 void Weapon_ReleaseLinkedActorHandles(void *arg0) {
-    Ovlgame_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
+    Player_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
 void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *arg0, WeaponFireState *fireState) {
@@ -405,7 +405,7 @@ extern WeaponActionRecord D_800CE8DC[];
 void Weapon_ReleaseHandlesAndExitState39(void *arg0) {
     s32 temp_s0;
     temp_s0 = (((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link);
-    Ovlgame_ReleaseObjectHandles(temp_s0);
+    Player_ReleaseObjectHandles(temp_s0);
     if ((((struct ObjRecAt650 *) ((s8 *) temp_s0))->unk650) == 0x27) {
         Player_SetPlayerState((void *) temp_s0, (void *) temp_s0, 2);
     }

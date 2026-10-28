@@ -5,9 +5,9 @@
 #include "TYPES.H"
 #include "stddef.h"
 
-extern CVector3 *Nav_GetControllerPosition(AiController *controller);
-extern s32 Nav_MatchesBehaviorStateFilter(AiController *controller);
-extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
+extern CVector3 *Scaled_GetControllerPosition(AiController *controller);
+extern s32 Scaled_MatchesBehaviorStateFilter(AiController *controller);
+extern f32 Graphu64_GetPointDistance(f32 *a, f32 *b);
 
 static inline AiTarget *setSelectedTarget(AiController *controller, AiTarget *target) {
     controller->target = target;
@@ -26,7 +26,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
     s32 index;
     AiTarget *target;
 
-    position = Nav_GetControllerPosition(controller);
+    position = Scaled_GetControllerPosition(controller);
     if (controller->target != NULL) {
         linked = controller->target->player;
         if (linked->health == 0) {
@@ -42,7 +42,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         }
         if (controller->target != NULL) {
             linked = controller->target->player;
-            linkedDistance = GraphU64_GetPointDistance(&position->x, &linked->pos.x);
+            linkedDistance = Graphu64_GetPointDistance(&position->x, &linked->pos.x);
         } else {
             linked = NULL;
             linkedDistance = 0.0f;
@@ -53,12 +53,12 @@ s32 Fx_UpdateTargetSelection(void *object) {
     }
     if (controller->preferred != NULL && (controller->preferred->flags & 0x300000)) {
         alternate = controller->preferred->player;
-        alternateDistance = GraphU64_GetPointDistance(&position->x, &alternate->pos.x);
+        alternateDistance = Graphu64_GetPointDistance(&position->x, &alternate->pos.x);
     } else {
         alternate = NULL;
         alternateDistance = 0.0f;
     }
-    if (Nav_MatchesBehaviorStateFilter(controller) == 0 || linked == NULL) {
+    if (Scaled_MatchesBehaviorStateFilter(controller) == 0 || linked == NULL) {
         if (Fx_CountAcceptedTargets(controller) == 0) {
             controller->target = NULL;
             return 1;

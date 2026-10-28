@@ -54,7 +54,7 @@ typedef s32 (*Handler80436FE4)(void *, s32, s32, s32, s32);
 
 extern Handler80436FE4 D_800E56A0;
 
-s32 Menu_CancelPlayerSettingsEntry(void) {
+s32 Player_CancelPlayerSettingsEntry(void) {
     struct MenuStepState *state;
 
     MarkMenuEventHandled();
@@ -64,7 +64,7 @@ s32 Menu_CancelPlayerSettingsEntry(void) {
     return 0;
 }
 
-s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
+s32 Player_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
     s32 nextItem;
 
     MarkMenuEventHandled();
@@ -84,7 +84,7 @@ s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s3
     return 0;
 }
 
-s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
+s32 Player_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
     s32 previousItem;
 
     MarkMenuEventHandled();
@@ -104,7 +104,7 @@ s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2
     return 0;
 }
 
-s32 Menu_DispatchPlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Player_DispatchPlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80436FE4 *entry;
     s32 index;
     s32 wildcard;

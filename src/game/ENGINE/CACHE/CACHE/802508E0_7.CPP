@@ -13,8 +13,8 @@ extern OSMesgQueue D_80101140;
 extern s32 s_allocText;
 
 extern struct Shape_func_802BC570_de *func_802548B8_de(s32, s32, u32, s32 *);
-extern void func_802511AC_de(s32);
-extern s32 func_80254B58_de(s32, s32, s32);
+extern void Cache_WaitForResourceSlotRelease(s32);
+extern s32 Cache_SelectAllocationCandidate(s32, s32, s32);
 
 /* Allocates size bytes (plus a 16-byte heap header) from the scene heap under the heap lock; when the
    heap is full it purges unused resources and retries. The game uses it as its malloc. */
@@ -65,10 +65,10 @@ Record *Cache_AllocateMemory(s32 size) {
         } else {
             __osRestoreInt(token3);
         }
-        func_802511AC_de(0);
+        Cache_WaitForResourceSlotRelease(0);
         do {
-        } while (func_80254B58_de(0, 0, 0) != 0);
-        func_802515F0_de(0, 1);
+        } while (Cache_SelectAllocationCandidate(0, 0, 0) != 0);
+        Cache_CompactResourceHeap(0, 1);
         token4 = __osDisableInt();
         counter4 = D_8010515C - 1;
         D_8010515C = counter4;
@@ -109,16 +109,16 @@ Record *Cache_AllocateMemory(s32 size) {
     return 0;
 }
 
-int func_802532F4_de(void *resource) {
+int Cache_IsResourceRetained(void *resource) {
     return ((Node80253610 *)resource)->flags & 0x100;
 }
 
-void func_80253300_de(Node80253610 *resource) {
+void Cache_RetainResource(Node80253610 *resource) {
     resource->references = resource->references + 1;
     resource->flags = resource->flags | 0x100;
 }
 
-void func_8025331C_de(Node80253610 *resource) {
+void Cache_ReleaseResourceReference(Node80253610 *resource) {
     s32 remainingReferences;
     remainingReferences = resource->references - 1;
     resource->references = remainingReferences;

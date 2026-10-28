@@ -88,9 +88,9 @@ func_802B7F30_eu_x
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_802B7B80_us
+osMotorStop
 #elif defined(VERSION_US)
-((unsigned int (*)(void *))func_802B7B80_us)
+((unsigned int (*)(void *))osMotorStop)
 #endif
 #else
 #if defined(VERSION_DE)
@@ -115,7 +115,7 @@ extern char D_8010FC00;
 
 extern s32 Rumble_InitPoolNodes(void *, void *, s32);
 
-extern s32 func_802B7FD8_de(void *, void *, s32);
+extern s32 osMotorInit(void *, void *, s32);
 
 #if defined(VERSION_EU)
 
@@ -127,7 +127,7 @@ extern s32 func_802B7FD8_de(void *, void *, s32);
 
 #endif
 
-extern void Smos_DispatchControllerProfileChanges(void *arg0);
+extern void Controller_DispatchControllerProfileChanges(void *arg0);
 
 void Control_ResetControllerPak(ControllerProfile *pakProfile) {
 
@@ -136,7 +136,7 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
 
     if (D_800CBC10 != 0 && ((Obj80264124 *)address)->flags != 0) {
         if (osRecvMesg(&D_8010FBC0, 0, 1) == 0) {
-            D_800CBC1C = func_802BAD80_de(0);
+            D_800CBC1C = Audio_GetThreadIdentifier(0);
         }
         Control_ReadControllerStates();
         D_8010BBB8 = 2;
@@ -144,7 +144,7 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
         ((Obj80264124 *)o)->amount = 0;
         ((Obj80264124 *)o)->timer = 0;
         Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
-        func_802B7FD8_de(&D_8010FC00, o + 0xD8, pakProfile->port);
+        osMotorInit(&D_8010FC00, o + 0xD8, pakProfile->port);
         
 #if defined(VERSION_EU)
 func_802B7EF0_eu
@@ -156,9 +156,9 @@ func_802B7F30_eu_x
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_802B7B80_us
+osMotorStop
 #elif defined(VERSION_US)
-((u32 (*)(void *))func_802B7B80_us)
+((u32 (*)(void *))osMotorStop)
 #endif
 #else
 #if defined(VERSION_DE)
@@ -179,9 +179,9 @@ func_802B7F30_eu_x
 #endif
 #elif defined(VERSION_US)
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_802B7B80_us
+osMotorStop
 #elif defined(VERSION_US)
-((u32 (*)(void *))func_802B7B80_us)
+((u32 (*)(void *))osMotorStop)
 #endif
 #else
 #if defined(VERSION_DE)
@@ -191,7 +191,7 @@ func_802B7C50_de
 #endif
 #endif
 (((Obj80264124 *)o)->status);
-        if (func_802B7FD8_de(&D_8010FC00, o + 0xD8, pakProfile->port) == 0) {
+        if (osMotorInit(&D_8010FC00, o + 0xD8, pakProfile->port) == 0) {
             ((Obj80264124 *)o)->active = 1;
         }
         D_8010BBB8 = 2;
@@ -266,7 +266,7 @@ void Control_CommitControllerInputs(void) {
             if (Tsmos_IsControllerStateActive() != temp) {
                 continue;
             }
-            Smos_DispatchControllerProfileChanges(p);
+            Controller_DispatchControllerProfileChanges(p);
         }
         Control_CommitProfileInput(&D_8010B0E0);
     }
@@ -312,7 +312,7 @@ s32 Control_AcquireControllerLock(s32 arg0) {
 
     result = osRecvMesg(&D_8010FBC0, 0, arg0) == 0;
     if (result != 0) {
-        D_800CBC1C = func_802BAD80_de(0);
+        D_800CBC1C = Audio_GetThreadIdentifier(0);
     }
     return result;
 }

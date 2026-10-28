@@ -42,7 +42,7 @@ extern char D_800CC9D0[];
  /* "audio/reverb.c" */
 
  /* __assert */
-extern Acmd *func_802B5D70_de(struct ALFx *, ALDelay28 *, s32, s32, Acmd *);
+extern Acmd *Audio_LoadEffectOutput(struct ALFx *, ALDelay28 *, s32, s32, Acmd *);
 
  /* _loadOutputBuffer */
 
@@ -100,7 +100,7 @@ Acmd *alResamplePull(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleOff
 
         incr = (s32)(f->ratio * unity);
         aSetBuffer(ptr++, 0, inp, *outp, outCnt << 1);
-        aResample(ptr++, f->first, incr, func_802BBBC0_de(f->state));
+        aResample(ptr++, f->first, incr, osVirtualToPhysical(f->state));
         f->first = 0;
     }
 
@@ -220,7 +220,7 @@ Acmd *alFxPull(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, A
         } else {
             ptr = func_802B60EC_de(r, in_ptr, buff1, outCount, ptr);
         }
-        ptr = func_802B5D70_de(r, d, buff2, outCount, ptr);
+        ptr = Audio_LoadEffectOutput(r, d, buff2, outCount, ptr);
 
         if (d->ffcoef) {
             aMix(ptr++, 0, (u16)d->ffcoef, buff1, buff2);

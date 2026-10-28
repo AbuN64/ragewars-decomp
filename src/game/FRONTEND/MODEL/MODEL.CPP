@@ -13,7 +13,7 @@
 
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
-s32 Frontend_SetPreviewModel(struct RecordFrontendSetPreviewModel *record, s32 count) {
+s32 Model_SetPreviewModel(struct RecordFrontendSetPreviewModel *record, s32 count) {
     record->count = count;
     record->handle = -1;
     if (count > 0) {
@@ -23,14 +23,14 @@ s32 Frontend_SetPreviewModel(struct RecordFrontendSetPreviewModel *record, s32 c
 }
 
 /* Returns the word at offset 0x0 of a record. */
-s32 Frontend_GetModelRecordCount(s32 *record) {
+s32 Model_GetModelRecordCount(s32 *record) {
     return record[0x0 / 4];
 }
 
 /* Stores a value into the word at offset 0xB8 of an object. */
 
 
-void Frontend_SetPreviewRenderFlags(struct ObjectB8 *object, s32 value) {
+void Model_SetPreviewRenderFlags(struct ObjectB8 *object, s32 value) {
     object->value = value;
 }
 
@@ -39,7 +39,7 @@ void Frontend_SetPreviewRenderFlags(struct ObjectB8 *object, s32 value) {
 
 
 
-struct Triple Frontend_GetPreviewPosition(struct ObjectRecAt10 *object) {
+struct Triple Model_GetPreviewPosition(struct ObjectRecAt10 *object) {
     return object->vector;
 }
 
@@ -48,7 +48,7 @@ struct Triple Frontend_GetPreviewPosition(struct ObjectRecAt10 *object) {
 
 
 
-void Frontend_SetModelPreviewPosition(struct ObjectRecAt10 *object, struct Triple vector) {
+void Model_SetModelPreviewPosition(struct ObjectRecAt10 *object, struct Triple vector) {
     object->vector = vector;
 }
 

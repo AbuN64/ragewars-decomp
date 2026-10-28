@@ -6,6 +6,6 @@
 
 extern s32 D_80154030;
 
-void Menu_ResetTextEntryResult(void) {
+void Encoded_ResetTextEntryResult(void) {
     D_80154030 = -1;
 }

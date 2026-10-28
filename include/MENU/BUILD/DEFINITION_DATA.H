@@ -1,7 +1,7 @@
 #ifndef MENU_BUILD_DATA_H
 #define MENU_BUILD_DATA_H
 
-/* ROM menu records consumed by Pak_InitializeMenu through the cartridge window.
+/* ROM menu records consumed by Menu_InitializeMenu through the cartridge window.
  * Keep halfwords and color bytes at their load widths; callback words retain
  * the relocations of their paged entry points. Both records are 0x24 bytes. */
 struct MenuBuildItemData {
@@ -36,7 +36,7 @@ struct MenuBuildDefinitionData {
     int value;
 };
 
-/* Twelve paged cheat records: Menu_ApplyCheatCode reads code, flags and sound;
+/* Twelve paged cheat records: Encoded_ApplyCheatCode reads code, flags and sound;
    the result widget reads the label at the second word of each record. */
 struct MenuCheatCodeData {
     unsigned int code;

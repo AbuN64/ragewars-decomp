@@ -13,7 +13,7 @@ const unsigned int D_auto_src_rw_constants_802B6DEC_CD6F0_us_rev1[5] = {
 #endif
 
           /* guMtxIdentF */
-extern void func_802B6CBC_de(f32 *mf, s32 *m);
+extern void guMtxF2L(f32 *mf, s32 *m);
 
 /* guPerspectiveF, drafted from ultralib src/gu/perspective.c. This library evaluates it in single
    precision against the cartridge's constants: pi/180 and 0.5 at D_800CCB08, -1 and 2 at
@@ -35,14 +35,14 @@ extern void func_802B6CBC_de(f32 *mf, s32 *m);
  /* 2^31 */
 
 /* guPerspective (libultra gu): builds a perspective projection into a fixed-point matrix and reports its normalisation. */
-void func_802B6DF0_de(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
+void Audio_BuildPerspectiveMatrix(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
     f32 mf[4][4];
     f32 cot;
     f32 norm;
     s32 i, j;
     f32 *row = mf[0];
 
-    func_802B6C6C_de((u8 *)row);
+    guMtxIdentF((u8 *)row);
     fovy *= D_800C78A0_de;
     fovy *= D_800C78A4_de;
     cot = Math_Cosf(fovy) / Math_Sinf(fovy);
@@ -77,7 +77,7 @@ void func_802B6DF0_de(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f3
         }
     }
 
-    func_802B6CBC_de(mf[0], m);
+    guMtxF2L(mf[0], m);
 }
 
 void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, float near, float far, float scale)
@@ -86,7 +86,7 @@ void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, 
     int i, j;
     float norm;
     unsigned int value;
-    func_802B6C6C_de(mf);
+    guMtxIdentF(mf);
     fovy *= D_800CCB08;
     fovy *= D_800C78BC_de;
     cot = Math_Cosf(fovy) / Math_Sinf(fovy);

@@ -5,7 +5,7 @@
 #include "COMMON/FORMAT.H"
 struct MenuWidget;
 
-extern s32 Frontend_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Node_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
 

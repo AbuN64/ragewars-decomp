@@ -16,14 +16,14 @@ void Nav_InitTimedJumpRoute(Root802131E0 *arg0) {
 
     inner = arg0->unk1D8->unk1454;
     inner->unk220 = 0;
-    Nav_ResetBehaviorState(inner);
+    Scaled_ResetBehaviorState(inner);
     inner->unk320 = -1;
     inner->unk2FC = 0;
 }
 
-extern void Nav_SetBehaviourState(void *arg0, s32 arg1);
+extern void Scaled_SetBehaviourState(void *arg0, s32 arg1);
 extern void Nav_RunBehaviorHandler(void *arg0);
-extern f32 Nav_DistanceToNode(void *arg0, s32 arg1);
+extern f32 Scaled_DistanceToNode(void *arg0, s32 arg1);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *arg0);
 
@@ -36,7 +36,7 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
 
     state = arg0->unk1D8->unk1454;
     if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->controls)->transientFlag == 0) {
-        Nav_SetBehaviourState(state, 2);
+        Scaled_SetBehaviourState(state, 2);
         return;
     }
 
@@ -56,7 +56,7 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
         ((Brain_func_80212D78_eu_x *)state)->jumpTimer = ((random % 5) + 3) * 15;
     }
 
-    if (Nav_DistanceToNode(state, ((Brain_func_80212D78_eu_x *)state)->nextNode) < D_800C20F0_de) {
+    if (Scaled_DistanceToNode(state, ((Brain_func_80212D78_eu_x *)state)->nextNode) < D_800C20F0_de) {
         ((Brain_func_80212D78_eu_x *)state)->player->unk_0x06B0 |= 0x10;
     }
     Nav_SteerAlongRoute(state);

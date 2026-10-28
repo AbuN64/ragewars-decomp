@@ -11,7 +11,7 @@
 extern OSPiHandle_s *D_800D4380[];
 
 /** Update changed PI timing registers, then write through the uncached transfer address. */
-s32 func_802B9730_de(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
+s32 Gamecore_WritePeripheralHandleWord(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
     OSPiHandle_s *previous;
     s32 index;
 
@@ -58,7 +58,7 @@ s32 func_802B9730_de(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
 
 
 
-OSPiHandle_s *func_802B9870_de(void) {
+OSPiHandle_s *Gamecore_InitializeDiskHandle(void) {
     OSPiHandle_s *state;
     struct OSPiHandle_s *handle;
     u32 lock;

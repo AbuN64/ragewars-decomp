@@ -38,8 +38,8 @@ typedef struct Chaser {
     s32 dist[10];
 } Chaser;
 
-Racer *Player_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
-f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
+Racer *Playerai_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
+f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
 s32 Nav_CollectEnemyTargets(Chaser *self) {
@@ -59,12 +59,12 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
     world = (MatchWorld *)&D_80145040;
     rules = &world->rules;
     for (; i < 8; i++) {
-        other = Player_GetPlayerByIndex(world, i);
+        other = Playerai_GetPlayerByIndex(world, i);
         if (other != NULL && other != self->self
             && (rules->teams == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {
             self->target[count] = other;
-            self->dist[count] = GraphU64_GetPointDistance(&self->self->pos, &other->pos);
+            self->dist[count] = Graphu64_GetPointDistance(&self->self->pos, &other->pos);
             self->cost[count] = Nav_EvaluateAttackTarget((AiController *)self, count);
             count++;
         }
@@ -75,8 +75,8 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
 
 
 extern CNavData D_8013B364;
-extern f32 Nav_GetScaledAttackRange(AiController *controller);
-extern f32 Nav_GetScaledAggression(AiController *controller);
+extern f32 Scaled_GetScaledAttackRange(AiController *controller);
+extern f32 Scaled_GetScaledAggression(AiController *controller);
 extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
 extern s32 Nav_GetRouteRelation(void *table, s32 from, s32 to);
 
@@ -93,7 +93,7 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
     f32 speed, angle, scale;
 
     if (target->reactionFlags & 0x20) return 0;
-    speed = Nav_GetScaledAttackRange(brain);
+    speed = Scaled_GetScaledAttackRange(brain);
     nearLimit = speed * 1536.0f;
     middleLimit = speed * 921.6f;
     farLimit = speed * 512.0f;
@@ -137,7 +137,7 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
             brain->candidateDistances[index] = brain->candidateDistances[index] * scale;
             break;
         }
-        brain->candidateDistances[index] = brain->candidateDistances[index] * ((1.0f - Nav_GetScaledAggression(brain)) * 0.5f + 0.5f);
+        brain->candidateDistances[index] = brain->candidateDistances[index] * ((1.0f - Scaled_GetScaledAggression(brain)) * 0.5f + 0.5f);
         return 1;
     }
     return 0;

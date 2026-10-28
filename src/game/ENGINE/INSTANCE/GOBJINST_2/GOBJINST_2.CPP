@@ -20,15 +20,15 @@
 #include "include_asm.h"
 
 /* GOBJINST_4.CPP */
-extern void func_80261670_de(void *, s32, s32, s32, s32 *, void *);
+extern void Gastate_SwitchRequestedAnimation(void *, s32, s32, s32, s32 *, void *);
 
 extern s32 func_802624D8_de(void *);
 
-extern void func_8026193C_de(void *, CVector3 *, f32 *, void *);
+extern void Gastate_AdvanceRootMotion(void *, CVector3 *, f32 *, void *);
 
 extern void *func_80262564_de(void *);
 
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern f32 D_800D2988;
 
@@ -43,7 +43,7 @@ extern char D_800C3930_de;
 
 extern CROMEventEntry *func_80262598_de(void *);
 
-extern s32 *func_8024BFD4_de(char *, s8);
+extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
 extern void GraphU64_ConvertMatrixToFloat(f32 *, char *);
 
@@ -72,7 +72,7 @@ extern f32 GameObject_GetActorHeight(char *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
@@ -88,7 +88,7 @@ extern void CopyMatrix(f32 *, f32 *);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void GraphU64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
+extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
@@ -128,10 +128,10 @@ void func_802472F0_de(void *actor) {
 
     track0 = &((Actor36 *)(actor))->currentTrack;
     track1 = &((Actor36 *)(actor))->previousTrack;
-    func_80261670_de(track0, (s32)*resource, ((Actor36 *)actor)->animationKey, 1, &active, track1);
+    Gastate_SwitchRequestedAnimation(track0, (s32)*resource, ((Actor36 *)actor)->animationKey, 1, &active, track1);
     if (func_802624D8_de(track0) != 0) {
         void *entry;
-        func_8026193C_de(track0, &first, &first_value, actor);
+        Gastate_AdvanceRootMotion(track0, &first, &first_value, actor);
         value = first_value;
         saved = first;
         if (active != 0 && ((Anim *)track1)->current != -1) {
@@ -149,7 +149,7 @@ void func_802472F0_de(void *actor) {
             }
         }
         if (((Actor36 *)actor)->flags & 0x400) {
-            func_80261670_de(track1, (s32)*resource, ((Actor36 *)actor)->animationKey, 0, 0, 0);
+            Gastate_SwitchRequestedAnimation(track1, (s32)*resource, ((Actor36 *)actor)->animationKey, 0, 0, 0);
             if (func_802624D8_de(track1) != 0) {
                 f32 time;
                 f32 end;
@@ -164,9 +164,9 @@ void func_802472F0_de(void *actor) {
                     f32 t = time / (end + D_800D2988);
                     ((Actor36 *)actor)->blend = (((a + D_800C3948_de + b) * t * t * t) +
                         ((((&D_800C3948_de)[1] - a) - (2.0f * b)) * t * t) + (b * t));
-                    func_8026193C_de(&((Actor36 *)(actor))->previousTrack, &second, &second_value, actor);
-                    GraphU64_InterpolateVector(&saved, ((Actor36 *)actor)->blend, &second, &first);
-                    value = GraphU64_InterpolateWrappedValue(((Actor36 *)actor)->blend, second_value, first_value);
+                    Gastate_AdvanceRootMotion(&((Actor36 *)(actor))->previousTrack, &second, &second_value, actor);
+                    Graphu64_InterpolateVector(&saved, ((Actor36 *)actor)->blend, &second, &first);
+                    value = Graphu64_InterpolateWrappedValue(((Actor36 *)actor)->blend, second_value, first_value);
                 }
                 func_802624A8_de(track1);
             } else {
@@ -176,7 +176,7 @@ void func_802472F0_de(void *actor) {
         func_802624A8_de(track0);
         if (((Actor36 *)actor)->flags & 0x20000) {
             ((Actor36 *)actor)->heading -= value;
-            GraphU64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
+            Graphu64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
             saved.z = saved.y;
             saved.y = 0.0f;
             BuildYawMatrix(&matrix, ((Actor36 *)actor)->heading);
@@ -185,7 +185,7 @@ void func_802472F0_de(void *actor) {
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
         } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
             ((Actor36 *)actor)->heading -= value;
-            GraphU64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
+            Graphu64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
         }
     }
     Cache_UnlockResource(0, resource);
@@ -231,7 +231,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
             } else {
                 if (checkMask && (D_800CC134[events[i].effect].offset & 4)) {
                     if (resource == 0) {
-                        resource = func_8024BFD4_de(obj, ((struct ObjectLinks180 *) obj)->unk_1);
+                        resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct ObjectLinks180 *) obj)->unk_1);
                         if (resource == 0) {
                             goto masked;
                         }
@@ -379,7 +379,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         }
     }
     if (target != 0) {
-        GraphU64_CrossVectors(&axis, &aim, &best);
+        Graphu64_CrossVectors(&axis, &aim, &best);
         GraphU64_NormalizeVec3(&axis);
         angle = GraphU64_ArcCos(bestDot);
         angle *= Math_Sqrtf(Math_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
@@ -415,7 +415,7 @@ void func_80247F18_de(char *actor, char *twistState, char *boneMatrix, CVector3 
 
     if (twistState[0x34] != 0x3C) {
       if (twistState[0x12] < 0x17) {
-       modelResource = func_8024BFD4_de(actor, actor[1]);
+       modelResource = Gobjinst_RequestAnimatedModelVariant(actor, actor[1]);
        if (modelResource != 0) {
         boneTable = SetN64_GetPackSection((void *)*modelResource, 5);
         boneEntry = (char *)boneTable + ((hitBoneIndex * *boneTable) + 8);
@@ -439,11 +439,11 @@ void func_80247F18_de(char *actor, char *twistState, char *boneMatrix, CVector3 
         boneOrigin.y = ((Matrix *)boneMatrix)->m[13];
         boneOrigin.z = ((Matrix *)boneMatrix)->m[14];
         GraphU64_SubtractVectors(&impactPosition, &impactPosition, &boneOrigin);
-        GraphU64_CrossVectors(&twistAxis, &impactPosition, &impactDirection);
+        Graphu64_CrossVectors(&twistAxis, &impactPosition, &impactDirection);
         GraphU64_NormalizeVec3(&twistAxis);
         GraphU64_NormalizeVec3(&impactPosition);
         GraphU64_NormalizeVec3(&impactDirection);
-        GraphU64_CrossVectors(&perpendicularDirection, &twistAxis, &impactPosition);
+        Graphu64_CrossVectors(&perpendicularDirection, &twistAxis, &impactPosition);
         GraphU64_ScaleVector(&twistAxis, &twistAxis,
                       (perpendicularDirection.x * impactDirection.x) + (perpendicularDirection.y * impactDirection.y) +
                           (perpendicularDirection.z * impactDirection.z));
@@ -505,7 +505,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     flip = -1.0f;
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(inverse, origin.x, origin.y, origin.z);
-    GraphU64_BuildAxisAngleMatrix(rotation, angle, axis.x, axis.y, axis.z);
+    Graphu64_BuildAxisAngleMatrix(rotation, angle, axis.x, axis.y, axis.z);
     GraphU64_MultiplyAffineMatrices(matrix, inverse, rotation);
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(matrix, origin.x, origin.y, origin.z);

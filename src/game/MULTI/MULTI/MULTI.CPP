@@ -9,13 +9,13 @@
 #include "include_asm.h"
 
 /* 8043E9A8_6.CPP */
-/* When the timer D_801468B0 has run out, calls Ovlgame_ResetMatchControllerState on D_8011FAC0 and returns one;
+/* When the timer D_801468B0 has run out, calls Match_ResetMatchControllerState on D_8011FAC0 and returns one;
    otherwise returns zero. */
-extern void Ovlgame_ResetMatchControllerState(void *);
+extern void Match_ResetMatchControllerState(void *);
 
 s32 Multi_CompleteGameOverDelay(void) {
     if (D_801462C8.counters.m_GameOverTimer <= 0.0f) {
-        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
+        Match_ResetMatchControllerState(&D_8011FAC0);
         return 1;
     }
     return 0;

@@ -10,15 +10,15 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 
-void *Pickup_FindPowerupEntry(s32 arg0) {
+void *Pickup_FindPowerupEntry(s32 itemId) {
     char *v1;
     s32 i;
 
-    v1 = &D_800D31D0;
+    v1 = &g_pickupPowerupDefinitions;
     i = 3;
     do {
         i -= 1;
-        if (((struct EntryRecAtE *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != itemId) {
             v1 += 0x18;
         } else {
             return v1;
@@ -35,7 +35,7 @@ void *Pickup_FindAmmoEntry(s32 arg0) {
     char *v1;
     s32 i;
 
-    v1 = &D_800D3230;
+    v1 = &g_pickupWeaponDefinitions;
     i = 5;
     do {
         i -= 1;
@@ -56,7 +56,7 @@ void *Pickup_FindHealthEntry(s32 arg0) {
     char *v1;
     s32 i;
 
-    v1 = &D_800D32A8;
+    v1 = &g_pickupHealthDefinitions;
     i = 7;
     do {
         i -= 1;
@@ -119,7 +119,7 @@ void *Pickup_FindSpecialEntry(s32 arg0) {
     char *v1;
     s32 i;
 
-    v1 = &D_800D3390;
+    v1 = &g_pickupSpecialDefinitions;
     i = 2;
     do {
         i -= 1;
@@ -142,26 +142,26 @@ extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
 
 
 
-void Pickup_TryCollectActor(void *arg0, void *arg1) {
-    u16 temp_v0;
-    u16 temp_v1;
+void Pickup_TryCollectActor(void *arg0, void *pickup) {
+    u16 collectedFlags;
+    u16 pickupFlags;
 
-    temp_v1 = ((struct Shared_ProjectileView *)(arg1))->flags;
-    if (temp_v1 & 8) {
-        if (((struct Shared_ProjectileView *)(arg1))->stateFlags & 1) {
+    pickupFlags = ((struct Shared_ProjectileView *)(pickup))->flags;
+    if (pickupFlags & 8) {
+        if (((struct Shared_ProjectileView *)(pickup))->stateFlags & 1) {
             goto block_4;
         }
-    } else if (!(temp_v1 & 1)) {
+    } else if (!(pickupFlags & 1)) {
 block_4:
-        if (Pickup_DispatchHandler(arg0, arg1, InstHdr_GetActorType(arg1)) != 0) {
-            temp_v0 = ((struct Shared_ProjectileView *)(arg1))->flags | 1;
-            ((struct Shared_ProjectileView *)(arg1))->flags = temp_v0;
-            if (temp_v0 & 8) {
-                SetN64_RecycleGlobalEffectNode(arg1);
+        if (Pickup_DispatchHandler(arg0, pickup, InstHdr_GetActorType(pickup)) != 0) {
+            collectedFlags = ((struct Shared_ProjectileView *)(pickup))->flags | 1;
+            ((struct Shared_ProjectileView *)(pickup))->flags = collectedFlags;
+            if (collectedFlags & 8) {
+                SetN64_RecycleGlobalEffectNode(pickup);
                 return;
             }
-            Scene_SetLevelRecordStateBit(&g_world, arg1, 1);
-            Link_DispatchObjectLinks(((struct Shared_ProjectileView *)(arg1))->source, 0x400, arg0);
+            Scene_SetLevelRecordStateBit(&g_world, pickup, 1);
+            Link_DispatchObjectLinks(((struct Shared_ProjectileView *)(pickup))->source, 0x400, arg0);
         }
     }
 }
@@ -174,20 +174,20 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
-s32 Pickup_ApplyAmmo(void *arg0, void *arg1) {
+s32 Pickup_ApplyAmmo(void *arg0, void *pickupEntry) {
     void *resource;
     s32 sound;
     s32 callback;
-    if (((struct EntryRecAtE *)(arg1))->index != -1) {
-        Player_AddAmmo(arg0, ((struct EntryRecAtE *)(arg1))->index,
-                      ((struct EntryRecAtE *)(arg1))->argument);
+    if (((struct EntryRecAtE *)(pickupEntry))->index != -1) {
+        Player_AddAmmo(arg0, ((struct EntryRecAtE *)(pickupEntry))->index,
+                      ((struct EntryRecAtE *)(pickupEntry))->argument);
     }
 
-    resource = ((EntryRecAtE *)arg1)->resource;
-    sound = ((struct EntryRecAtE *)(arg1))->sound;
-    callback = ((struct EntryRecAtE *)(arg1))->callback;
+    resource = ((EntryRecAtE *)pickupEntry)->resource;
+    sound = ((struct EntryRecAtE *)(pickupEntry))->sound;
+    callback = ((struct EntryRecAtE *)(pickupEntry))->callback;
     if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
-        Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
+        Gsky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -241,7 +241,7 @@ s32 Pickup_ApplyHealth(void *arg0, void *arg1) {
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
         if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
-            Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
+            Gsky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&D_80145088,
@@ -292,7 +292,7 @@ s32 Pickup_ApplyLifePoints(void *arg0, void *arg1) {
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
-        Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
+        Gsky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -391,7 +391,7 @@ s32 Pickup_ApplyPowerup(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE
     sound = arg1->unk6;
     callback = arg1->unk8;
     if (arg0->unk5DC != 0) {
-        Sky_StartFade(arg0->unk5DC,
+        Gsky_StartFade(arg0->unk5DC,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,

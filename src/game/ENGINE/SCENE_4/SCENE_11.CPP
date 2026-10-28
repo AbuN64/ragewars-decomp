@@ -19,7 +19,7 @@
 #include "ENGINE/SCENE_11.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 
-extern void Link_DispatchTriggerExit(Rec_func_8024C92C_de *arg0);
+extern void Link_DispatchTriggerExit(RecGobjinstSampleBoneTranslation *arg0);
 
 
 
@@ -29,8 +29,8 @@ extern void Link_DispatchTriggerExit(Rec_func_8024C92C_de *arg0);
 
 
 void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
-    Rec_func_8024C92C_de *trigger;
-    Rec_func_8024C92C_de *var_s1_2;
+    RecGobjinstSampleBoneTranslation *trigger;
+    RecGobjinstSampleBoneTranslation *var_s1_2;
     s32 var_s0;
     s32 var_s0_2;
 
@@ -61,7 +61,7 @@ void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
     }
 }
 
-s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *arg1) {
+s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *trigger) {
     void *rec;
     f32 val;
     s32 flag;
@@ -70,15 +70,15 @@ s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *arg1) {
     if (rec != 0) {
         func_80255ED8_de(&arg0->listB, rec);
         func_80255CB8_de(&arg0->listA, rec);
-        ((CActiveLink *)(rec))->object = arg1;
+        ((CActiveLink *)(rec))->object = trigger;
     } else {
         rec = arg0->listA.tail;
         Link_DispatchTrigger(((CActiveLink *)(rec))->object);
-        ((CActiveLink *)(rec))->object = arg1;
+        ((CActiveLink *)(rec))->object = trigger;
     }
-    val = recordValue((s32) arg1->lifetime);
+    val = recordValue((s32) trigger->lifetime);
     ((CActiveLink *)(rec))->remaining = val;
-    flag = arg1->flags & 2;
+    flag = trigger->flags & 2;
     if (flag != 0) {
         ((CActiveLink *)(rec))->remaining = val * D_800C52E8_de;
     }
@@ -195,7 +195,7 @@ EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *wor
 
 
 
-extern Player *Player_GetFirstPlayer(void *list);
+extern Player *Playerai_GetFirstPlayer(void *list);
 #ifdef VERSION_EU
 #endif
 
@@ -209,9 +209,9 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     s32 i;
 
 #ifdef VERSION_EU
-    player = Player_GetFirstPlayer(&D_80145040);
+    player = Playerai_GetFirstPlayer(&D_80145040);
 #else
-    player = Player_GetFirstPlayer(&D_80145040);
+    player = Playerai_GetFirstPlayer(&D_80145040);
 #endif
     best = 9999999;
     nearest = 0;
@@ -339,7 +339,7 @@ ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActo
     return best;
 }
 
-/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Player_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
+/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Playerai_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
 
 
 

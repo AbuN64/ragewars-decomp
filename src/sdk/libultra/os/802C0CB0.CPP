@@ -8,7 +8,7 @@
 
 extern s32 func_802BD080_de(void);
 
-s32 func_802BBBC0_de(s32 virtualAddress) {
+s32 osVirtualToPhysical(s32 virtualAddress) {
     if (virtualAddress < 0 && (u32)virtualAddress <= 0x9FFFFFFFU) {
         return virtualAddress & 0x1FFFFFFF;
     }

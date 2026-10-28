@@ -55,7 +55,7 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
     return bestNode;
 }
 
-void Player_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *direction) {
+void Playerai_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *direction) {
     Shared_ActorView *actor = (Shared_ActorView *)actorView;
     Matrix matrix;
     CVector3 offset;

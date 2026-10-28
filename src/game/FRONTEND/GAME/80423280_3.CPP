@@ -23,17 +23,17 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
-   0x1C4 send codes -1, 13, 12 and 14 to Frontend_SetMenuChoiceResult; a handled message then runs Menu_CommitCompactOptionsPage
-   and Smos_ReturnToPreviousScreen. Returns zero. */
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
+   0x1C4 send codes -1, 13, 12 and 14 to Random_SetMenuChoiceResult; a handled message then runs Menu_CommitCompactOptionsPage
+   and Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
-extern void Smos_ReturnToPreviousScreen(void);
+extern void Menu_ReturnToPreviousScreen(void);
 
-/* Calls MarkMenuEventHandled, Frontend_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and Smos_ReturnToPreviousScreen, and returns zero. */
+/* Calls MarkMenuEventHandled, Random_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and Menu_ReturnToPreviousScreen, and returns zero. */
 
-extern void Smos_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen();
 
 typedef s32 (*Handler80423930)(void *, s32, s32, s32, s32);
 
@@ -49,11 +49,11 @@ extern Handler80423930 D_800E456C;
 
 extern void Cinema_ReleaseSequenceContext();
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
    refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries ScenarioSetup_StartRandomCupStage
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
-   others pass codes 0x17, 13, 12 and 14 to Frontend_SetMenuChoiceResult. Any handled message then runs
+   others pass codes 0x17, 13, 12 and 14 to Random_SetMenuChoiceResult. Any handled message then runs
    Menu_CommitTabOptionsPage. Returns zero. */
 /* The first message this handles and how many it takes: eu-x numbers the messages 4 higher, de 4
    lower and takes only 8, as each cartridge's own bytes show; us, us-rev1 and eu share 0x377 and 10. */
@@ -103,7 +103,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
     s32 handled;
     MarkMenuEventHandled();
     handled = 1;
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x1BF:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -111,7 +111,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
 #elif defined(VERSION_EU_X)
     case 0x1C7:
 #endif
-        Frontend_SetMenuChoiceResult(-1);
+        Random_SetMenuChoiceResult(-1);
         break;
 #if defined(VERSION_DE)
     case 0x1B9:
@@ -120,7 +120,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
 #elif defined(VERSION_EU_X)
     case 0x1C1:
 #endif
-        Frontend_SetMenuChoiceResult(13);
+        Random_SetMenuChoiceResult(13);
         break;
 #if defined(VERSION_DE)
     case 0x1BE:
@@ -129,7 +129,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
 #elif defined(VERSION_EU_X)
     case 0x1C6:
 #endif
-        Frontend_SetMenuChoiceResult(12);
+        Random_SetMenuChoiceResult(12);
         break;
 #if defined(VERSION_DE)
     case 0x1C0:
@@ -138,7 +138,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
 #elif defined(VERSION_EU_X)
     case 0x1C8:
 #endif
-        Frontend_SetMenuChoiceResult(14);
+        Random_SetMenuChoiceResult(14);
         break;
     default:
         handled = 0;
@@ -146,16 +146,16 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
     }
     if (handled == 1) {
         Menu_CommitCompactOptionsPage();
-        Smos_ReturnToPreviousScreen();
+        Menu_ReturnToPreviousScreen();
     }
     return 0;
 }
 
 s32 Frontend_CloseCompactOptionsPage(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(-1);
+    Random_SetMenuChoiceResult(-1);
     Menu_CommitCompactOptionsPage();
-    Smos_ReturnToPreviousScreen();
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 
@@ -200,7 +200,7 @@ s32 Frontend_HandleTabOptionsShortcut(void) {
     u32 message;
     MarkMenuEventHandled();
     handled = 1;
-    message = Smos_GetFocusedElementId() -
+    message = Menu_GetFocusedElementId() -
 #if defined(VERSION_DE)
         0x373;
 #elif defined(VERSION_EU_X)
@@ -250,7 +250,7 @@ reopen:
     Cinema_ReleaseSequenceContext();
     goto done;
 code_17:
-    Frontend_SetMenuChoiceResult(0x17);
+    Random_SetMenuChoiceResult(0x17);
     goto done;
 retry:
     Tsmos_DeactivateControllerState();
@@ -265,13 +265,13 @@ retry:
     }
     goto done;
 code_13:
-    Frontend_SetMenuChoiceResult(13);
+    Random_SetMenuChoiceResult(13);
     goto done;
 code_12:
-    Frontend_SetMenuChoiceResult(12);
+    Random_SetMenuChoiceResult(12);
     goto done;
 code_14:
-    Frontend_SetMenuChoiceResult(14);
+    Random_SetMenuChoiceResult(14);
     goto done;
 other:
     handled = 0;

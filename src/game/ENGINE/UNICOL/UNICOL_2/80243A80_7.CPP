@@ -5,7 +5,7 @@
 #include "COMMON/EXTERNS_7.H"
 #include "COMMON/OBJRECAT4V6.H"
 
-void func_802453D4_de(void)
+void CCinema_DrawMessages(void)
 {
   f32 messageScaleY;
   f32 screenScaleX;
@@ -70,10 +70,10 @@ void func_802453D4_de(void)
   }
 }
 
-s32 func_80245618_de(s32 requestId, ContextCallback requestContextCallback, VoidCallback completionCallback) {
+s32 CCinema_RequestTrackWithCallbacks(s32 requestId, ContextCallback requestContextCallback, VoidCallback completionCallback) {
     s32 result;
 
-    result = Menu_RequestTrackByKey(requestId);
+    result = Track_RequestTrackByKey(requestId);
     if (D_800E2830->requestE0 == requestId) {
         D_800E2830->callbackE4 = requestContextCallback;
         D_800E2830->callbackE8 = completionCallback;

@@ -20,7 +20,7 @@ extern s32 D_800E4680;
 
 extern void MarkMenuEventHandled(void);
 
-extern s32 Smos_GetFocusedElementId(void);
+extern s32 Menu_GetFocusedElementId(void);
 
 extern void Player_InitializeProfile(char *);
 
@@ -48,20 +48,20 @@ extern OptionsScreen *D_800E4600;
 extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
 extern void ScenarioSetup_SetCupCategory(int);
-extern void Frontend_SetSelectedStage(s32, s32);
+extern void Random_SetSelectedStage(s32, s32);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_ActivateControllerState(void);
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_TestBit(u8 *, s32);
-extern void Frontend_SetWidgetFlag100(void *, s32);
+extern void Widget_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void SmpButton_WrapButtonWidget(s32);
-extern void Frontend_AdvanceActiveSlot(int *);
+extern void Focus_AdvanceActiveSlot(int *);
 extern s32 Control_IsControllerConnected(s32);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
-extern u32 Smos_GetBlockedScreenOwner(void);
+extern u32 Menu_GetBlockedScreenOwner(void);
 #if defined(VERSION_EU_X)
 #define WID_42 0x44
 #define WID_43 0x45
@@ -103,7 +103,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     s32 mode;
 
     ScenarioSetup_SetCupCategory(-1);
-    Frontend_SetSelectedStage(0, 0);
+    Random_SetSelectedStage(0, 0);
     counters->humanWon = 0;
     Tsmos_SetIdleTimer(0.0f);
     D_801462C8.local = 1;
@@ -148,7 +148,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     case 2:
         SmpButton_WrapButtonWidget(WID_48);
         widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
-        Frontend_SetWidgetFlag100(widget, 1);
+        Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
         title->height = 0x78;
@@ -161,23 +161,23 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         break;
     default:
         widget = Frontend_FindWidgetByResourceId(menu, WID_48);
-        Frontend_SetWidgetFlag100(widget, 1);
+        Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
-        Frontend_SetWidgetFlag100(widget, 1);
+        Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
         title->height = 0x68;
         break;
     }
     i = -1;
-    Frontend_AdvanceActiveSlot(&i);
+    Focus_AdvanceActiveSlot(&i);
     if (i < 0) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_4C), 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_4C), 1);
     }
     mode = Control_IsControllerConnected(0);
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_49), 1);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_49), 1);
     }
     D_800E4600->music = SmpFade_CreateFadeWidget(WID_42, 0x24);
     SmpSlider_DisableTransition(D_800E4600->music);
@@ -190,7 +190,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     D_800E4600->title = Frontend_FindWidgetByResourceId(menu, WID_43);
     D_800E4600->title->alpha = 0xF;
     D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(WID_44, 0x6E);
-    if (Smos_GetBlockedScreenOwner() == 2) {
+    if (Menu_GetBlockedScreenOwner() == 2) {
         D_800E4600->mode = 9;
     } else {
         D_800E4600->mode = 1;
@@ -207,7 +207,7 @@ s32 Frontend_ApplyModeChoice(void) {
     s32 i;
 
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
     #if defined(VERSION_EU_X)
     case 0x47:
 #else

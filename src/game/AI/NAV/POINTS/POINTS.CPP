@@ -7,9 +7,9 @@
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "TYPES.H"
 
-extern void *Nav_FindSearchNode(char *, s32);
+extern void *Portal_FindSearchNode(char *, s32);
 
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 
 /** Find the first of an object's four nodes that starts a type-6 link, record it and return 0; return 1 when none does. */
 
@@ -20,7 +20,7 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
-extern Link *Nav_GetStridedTableEntry(CNavData *, int);
+extern Link *Portal_GetStridedTableEntry(CNavData *, int);
 extern CNavData D_8013B364;
 
 s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
@@ -45,11 +45,11 @@ s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
     sum.x *= scale;
     sum.y *= scale;
     sum.z *= scale;
-    info = Nav_FindSearchNode(global, obj->infoIndex);
+    info = Portal_FindSearchNode(global, obj->infoIndex);
     sum.x *= info->scale;
     sum.y *= info->scale;
     sum.z *= info->scale;
-    base = Nav_GetGraphPoint(global, obj->infoIndex);
+    base = Portal_GetGraphPoint(global, obj->infoIndex);
     obj->result.x = base->x + sum.x;
     obj->result.y = base->y + sum.y;
     obj->result.z = base->z + sum.z;
@@ -66,7 +66,7 @@ int Nav_FindSpecialLinkedCandidate(ObjNavFindSpecialLinkedCandidate *obj) {
     obj->pending = 0;
     for (j = 0; j < 4; j++) {
         for (i = 0; i < graph->m_nNavLinks; i++) {
-            link = Nav_GetStridedTableEntry(graph, i);
+            link = Portal_GetStridedTableEntry(graph, i);
             if (link->from == obj->nodes[j] && link->type == 6) {
                 obj->hits++;
                 obj->node = obj->nodes[j];

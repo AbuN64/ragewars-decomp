@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Pak_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Pak_NeedsIdRepair. */
+/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Pak_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
 
 
 
@@ -27,10 +27,10 @@ extern char D_0044EA2C[];
 extern char D_0044E9C0[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
-extern s32 Pak_IsChannelReady(s32 ch);
-extern s32 Pak_NeedsIdRepair(s32 ch);
-extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
-void Pak_BeginBlockLoad(Shared_PakMenu *menu)
+extern s32 Note_IsChannelReady(s32 ch);
+extern s32 Note_NeedsIdRepair(s32 ch);
+extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
 {
   Shared_PakMenu *new_var3;
   int new_var;
@@ -48,7 +48,7 @@ void Pak_BeginBlockLoad(Shared_PakMenu *menu)
   if (D_800E28C0 != 0)
   {
     D_80153784 = 1;
-    Pak_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
+    Menu_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
     return;
   }
   menu->items[20].flags &= ~0x01000000;
@@ -60,21 +60,21 @@ void Pak_BeginBlockLoad(Shared_PakMenu *menu)
     return;
   }
   D_80153784 = 1;
-  if (Pak_IsChannelReady(ch) != new_var)
+  if (Note_IsChannelReady(ch) != new_var)
   {
     new_var2 = D_0044EA2C;
-    Pak_OpenDialog(D_8014561C, new_var2, menu->player, menu->slot, (char *) 1);
+    Menu_OpenDialog(D_8014561C, new_var2, menu->player, menu->slot, (char *) 1);
   }
   else
   {
     new_var3 = menu;
-    if (Pak_NeedsIdRepair(ch) != 0)
+    if (Note_NeedsIdRepair(ch) != 0)
     {
-      Pak_OpenDialog(D_8014561C, D_0044ED44, new_var3->player, menu->slot, D_0044E4B0);
+      Menu_OpenDialog(D_8014561C, D_0044ED44, new_var3->player, menu->slot, D_0044E4B0);
     }
     else
     {
-      Pak_OpenDialog(D_8014561C, D_0044E9C0, new_var3->player, new_var3->slot, D_0044FFA4);
+      Menu_OpenDialog(D_8014561C, D_0044E9C0, new_var3->player, new_var3->slot, D_0044FFA4);
     }
   }
 }
@@ -92,11 +92,11 @@ extern char D_00450BF0_de[];
 extern char D_00450C14_de[];
 extern char D_00450C38_de[];
 extern char D_00450C5C_de[];
-extern s32 Pak_BytesToPakPages(s32);
-extern s32 Pak_GetFreePages(s32, s32 *);
-extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 Pak_FindFreeNoteExtension(s32, char *);
-extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
+extern s32 Note_BytesToPakPages(s32);
+extern s32 Note_GetFreePages(s32, s32 *);
+extern s32 Note_CountFreeNotes(s32, s32 *);
+extern s32 Note_FindFreeNoteExtension(s32, char *);
+extern s32 Note_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_80253908_de(s32);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
@@ -119,7 +119,7 @@ static inline char *pakRecordChannelLabel(s32 channel) {
     }
 }
 
-s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
+s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
 {
     ObjRecAt5DC *player, *selectedPlayer;
     char extension[8];
@@ -129,23 +129,23 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
     if (D_8014D4C0_de != 0) {
-        required = Pak_BytesToPakPages(0x18);
-        status = Pak_GetFreePages(channel, &freeBytes);
+        required = Note_BytesToPakPages(0x18);
+        status = Note_GetFreePages(channel, &freeBytes);
         if (status == 0) {
             if (required <= freeBytes) {
-                status = Pak_CountFreeNotes(channel, &slots);
+                status = Note_CountFreeNotes(channel, &slots);
                 if (status == 0 && slots != 0) {
                     insufficient = 0;
-                    status = Pak_FindFreeNoteExtension(channel, extension);
+                    status = Note_FindFreeNoteExtension(channel, extension);
                     if (status == 0) {
                         attempted = 1;
-                        status = Pak_SaveNote(channel, 0x18, D_80153738,
+                        status = Note_SaveNote(channel, 0x18, D_80153738,
                                               RW_PAK_RECORD_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
             if (insufficient != 0) {
-                Pak_OpenDialog(D_8014561C, rw_pak_no_space_dialog(), player,
+                Menu_OpenDialog(D_8014561C, rw_pak_no_space_dialog(), player,
                                 (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }
@@ -160,10 +160,10 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
     D_800E28BC = 0;
     if (!attempted) return 1;
     if (status == 0) {
-        Pak_OpenDialog(D_8014561C, rw_pak_save_success_dialog(), player,
+        Menu_OpenDialog(D_8014561C, rw_pak_save_success_dialog(), player,
                         (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
     } else {
-        Pak_OpenDialog(D_8014561C, rw_pak_save_error_dialog(), player,
+        Menu_OpenDialog(D_8014561C, rw_pak_save_error_dialog(), player,
                         (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
     }
     return 1;
@@ -188,7 +188,7 @@ static inline char *pakSnapshotCapacityPrompt(void) { return D_0044EEAC; }
 #endif
 /* Save the snapshot only when both page and note capacity are available;
  * retain pending resources while showing the insufficient-capacity prompt. */
-s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
+s32 Snapshot_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     ObjRecAt5DC *player, *selectedPlayer;
     char extension[8];
     s32 channel, freePages, freeNotes;
@@ -198,20 +198,20 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     player = selectedPlayer;
     snapshotBytes = D_8011FECC + sizeof(SaveSnapshot);
     if (D_8014D4C0_de != 0) {
-        required = Pak_BytesToPakPages(snapshotBytes);
-        status = Pak_GetFreePages(channel, &freePages);
+        required = Note_BytesToPakPages(snapshotBytes);
+        status = Note_GetFreePages(channel, &freePages);
         if (status == 0) {
             if (required <= freePages) {
-                if (Pak_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
+                if (Note_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
                     showPrompt = 0;
-                    if (Pak_FindFreeNoteExtension(channel, extension) == 0) {
-                        Pak_SaveNote(channel, snapshotBytes, D_800DE868,
+                    if (Note_FindFreeNoteExtension(channel, extension) == 0) {
+                        Note_SaveNote(channel, snapshotBytes, D_800DE868,
                                      RW_PAK_SNAPSHOT_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
             if (showPrompt != 0) {
-                Pak_OpenDialog(D_8014561C, pakSnapshotCapacityPrompt(), player,
+                Menu_OpenDialog(D_8014561C, pakSnapshotCapacityPrompt(), player,
                                 (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }

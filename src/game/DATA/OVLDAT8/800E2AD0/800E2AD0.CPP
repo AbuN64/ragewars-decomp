@@ -21,7 +21,7 @@ unsigned int D_blob_2679d55fce8b917bbd2b[2] = {
 
 /* 800E2B18_2.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_pixel_formats_us_rev1[468] = {
+unsigned int g_pixelFormatDescriptors[468] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0xFFFFFFF8, 0xFFFFFFF8, 0xFFFFFFF8, 0xFFFFFFF8, 0x00000001, 0x00000000, 0x00000010,
     0x00000010, 0x00000010, 0x0000F800, 0x000007E0, 0x0000001F, 0x00000000, 0x00000008, 0x00000003,

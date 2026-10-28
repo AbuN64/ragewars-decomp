@@ -15,9 +15,9 @@ extern void SmpButton_WrapButtonWidget(int id);
 int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
 #endif
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3DA waits through
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3DA waits through
    SmXlate_SwitchScreen for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
-   3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen.
+   3 for any other setting); 0x3DB sends code -1 to Random_SetMenuChoiceResult and calls Menu_ReturnToPreviousScreen.
    Returns zero. */
 extern void SmXlate_SwitchScreen(s32);
 
@@ -33,7 +33,7 @@ s32 Frontend_UpdateTimedTransition(void) {
     s32 time;
 
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
     case MENU_80439F38_986:
         switch (D_801462C8.controllerMode) {
         case 0:
@@ -54,19 +54,19 @@ s32 Frontend_UpdateTimedTransition(void) {
         SmXlate_SwitchScreen(time);
         return 0;
     case MENU_80439F38_987:
-        Frontend_SetMenuChoiceResult(-1);
-        Smos_ReturnToPreviousScreen();
+        Random_SetMenuChoiceResult(-1);
+        Menu_ReturnToPreviousScreen();
         return 0;
     }
     return 0;
 }
 
-/* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then Smos_ReturnToPreviousScreen, and returns zero. */
+/* Calls MarkMenuEventHandled, then Random_SetMenuChoiceResult with -1, then Menu_ReturnToPreviousScreen, and returns zero. */
 
 s32 Frontend_CancelNodePairMenu(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(-1);
-    Smos_ReturnToPreviousScreen();
+    Random_SetMenuChoiceResult(-1);
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 

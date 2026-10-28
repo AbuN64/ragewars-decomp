@@ -20,7 +20,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral);
 
 extern World *D_80103FCC;
 
-extern s32 func_802444A4_de(InstanceHdr *arg0, CVector3 current, CVector3 desired,
+extern s32 CCollision_SweepPoint(InstanceHdr *arg0, CVector3 current, CVector3 desired,
                           void *collisionInfo);
 
 /* Refine a launch angle by testing a ballistic arc against the destination.
@@ -174,7 +174,7 @@ block_43:
                     temp_s0_2 = D_8013D534;
                     temp_v0_2 = (void *)SetN64_GetPackSection(temp_s0_2, 1);
                     keyCount = temp_v0_2->count;
-                    if (func_80265550_de(temp_v0_2->keys, keyCount, var_s2, &first, &last) == 0) {
+                    if (Defs_FindSortedGroupRange(temp_v0_2->keys, keyCount, var_s2, &first, &last) == 0) {
                         actor->field270 = 0;
                         actor->field274 = 0;
                         actor->field268 = 0;
@@ -362,7 +362,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
 
     elapsed = segment;
 
-    if (func_802444A4_de(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
+    if (CCollision_SweepPoint(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
         (unsigned)(D_80103FCC->state - 7) >= 2) {
         return 1;
     }
@@ -379,7 +379,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
         desired.y = current.y + delta.y * elapsed + accelY;
         desired.z = current.z + delta.z * elapsed + accelZ;
 
-        if (func_802444A4_de(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
+        if (CCollision_SweepPoint(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
             (unsigned)(D_80103FCC->state - 7) >= 2) {
             return 1;
         }

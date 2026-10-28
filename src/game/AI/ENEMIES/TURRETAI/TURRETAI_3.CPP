@@ -22,7 +22,7 @@
 
 void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
 
-void GraphU64_TransformDirectionTranspose(void *arg0, void *arg1, void *arg2);
+void Graphu64_TransformDirectionTranspose(void *arg0, void *arg1, void *arg2);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
@@ -39,7 +39,7 @@ static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
-static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); GraphU64_TransformDirectionTranspose(matrix,local,out); }
+static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); Graphu64_TransformDirectionTranspose(matrix,local,out); }
 
 
 typedef struct NavWork {
@@ -90,7 +90,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     inFireCone = 0;
     turret = &actor->player.views18.navigationTrack->segment;
     work.heading = actor->player.views1C.view6C_4.unk6C - riderState->nav.heading;
-    GraphU64_WrapPeriodicValue(&work.heading);
+    Graphu64_WrapPeriodicValue(&work.heading);
     actorKind = actor->player.views1C.viewE4_6.unkE4;
     switch (actorKind) {                              /* irregular */
     case 0x40B:
@@ -118,7 +118,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
         GraphU64_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
         GraphU64_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
-        desiredSpeed = GraphU64_GetVerticalAngle(&work.relative.v.x);
+        desiredSpeed = Graphu64_GetVerticalAngle(&work.relative.v.x);
         aimError = Barrel_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;
         if (work.result.result.distance <= turret->range) {

@@ -21,8 +21,8 @@ void func_802550F0_de(ResourceLoadWorker *worker, s32 id) {
     osStartThread(worker);
 }
 
-extern s32 func_802BB5F0_de(void *, s32);
-extern s32 func_802BB160_de(OSMesgQueue *queue, void *message, s32 block);
+extern s32 Scene_SetThreadPriority(void *, s32);
+extern s32 osJamMesg(OSMesgQueue *queue, void *message, s32 block);
 
 
 
@@ -40,8 +40,8 @@ s32 func_80255170_de(ResourceLoadWorker *worker, ResourceLoadRequest *message) {
     temp = D_800CD8B8_de;
     message->replyQueue = &completionQueue;
     D_800CD704 = 2;
-    func_802BB5F0_de(worker, temp);
-    func_802BB160_de(&worker->requests, message, 1);
+    Scene_SetThreadPriority(worker, temp);
+    osJamMesg(&worker->requests, message, 1);
     osRecvMesg(&completionQueue, &completedRequest, 1);
     return 1;
 }
@@ -59,10 +59,10 @@ s32 func_802551FC_de(ResourceLoadWorker *worker, ResourceRequest *request, void 
 s32 func_80255228_de(ResourceLoadWorker *resourceLoadWorker) {
     if (resourceLoadWorker->requests.validCount != 0) {
         do {
-            func_802BB5F0_de(resourceLoadWorker, D_800CD8B8_de);
+            Scene_SetThreadPriority(resourceLoadWorker, D_800CD8B8_de);
         } while (resourceLoadWorker->requests.validCount != 0);
     }
-    return func_802BB5F0_de(resourceLoadWorker, D_800CD8AC_de);
+    return Scene_SetThreadPriority(resourceLoadWorker, D_800CD8AC_de);
 }
 
 #if defined(VERSION_US)

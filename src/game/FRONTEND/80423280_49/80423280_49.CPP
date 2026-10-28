@@ -66,7 +66,7 @@
 #define ID_35D 0x35D
 #endif
 
-s32 func_80429A24_de(void *window) {
+s32 CScenarioSetup_OpenScenarioSetupScreen(void *window) {
     SetupModelVector scale;
     SetupModelVector position;
     SetupModelVector rotation;

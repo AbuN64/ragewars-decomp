@@ -12,11 +12,11 @@
 #include "SYSTEM/80255C40_3.H"
 
 
-extern void func_80254DD0_de(void *arg0, struct IntrusiveList *arg1);
+extern void Cache_DetachResourceRequest(void *arg0, struct IntrusiveList *arg1);
 
 extern void func_80255B2C_de(void *arg0, s32 arg1);
 
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
 
 extern s32 D_80100570;
@@ -28,7 +28,7 @@ extern void *func_80255920_de(void *, s32);
 
 extern void func_80255D70_de(void *, s32, s32);
 
-void func_80254990_de(void *unused, struct IntrusiveList *resource) {
+void Cache_ReleaseResourceCompletely(void *unused, struct IntrusiveList *resource) {
     s32 remainingReferences;
 
     resource->nextOffset = resource->nextOffset & ~2;
@@ -44,13 +44,13 @@ void func_80254990_de(void *unused, struct IntrusiveList *resource) {
         } while (resource->prevOffset != 0);
     }
     if (!(resource->nextOffset & 0x702)) {
-        func_80254DD0_de(0, resource);
+        Cache_DetachResourceRequest(0, resource);
         func_80255B2C_de(&D_801051A0, *(s32 *) resource);
-        func_80254AD0_de(0, resource);
+        Cache_ReleasePendingResourceEntry(0, resource);
     }
 }
 
-void *func_80254A28_de(s32 unused0, s32 requestFlags) {
+void *Cache_AcquirePendingResourceEntry(s32 unused0, s32 requestFlags) {
     extern void **D_80100564;
     struct CMemEntry *cacheEntry;
     struct Pool *pool = (struct Pool *)&D_8010513C;
@@ -72,7 +72,7 @@ void *func_80254A28_de(s32 unused0, s32 requestFlags) {
     return cacheEntry;
 }
 
-void func_80254AD0_de(s32 unused0, s32 arg1) {
+void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1) {
     extern void **D_80100564;
     func_80255ED8_de((void *)&D_80100570, arg1);
     if (((CachedResource *)arg1)->flags & 0x1000) {
@@ -86,15 +86,15 @@ void func_80254AD0_de(s32 unused0, s32 arg1) {
     *(&D_80100570 + 0x2F3) += 1;
 }
 
-int func_80254B58_de(int unused, int keepRecent, int allocationFlags) {
+int Cache_SelectAllocationCandidate(int unused, int keepRecent, int allocationFlags) {
     int effectiveKeepRecent = keepRecent;
     if (allocationFlags & 0x10) {
         effectiveKeepRecent = 0;
     }
-    return func_80251328_de(0, 2, effectiveKeepRecent);
+    return Cache_EvictResource(0, 2, effectiveKeepRecent);
 }
 
-void *func_80254B8C_de(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evictionFlags)
+void *Cache_AllocateHeapWithEviction(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evictionFlags)
 {
   void *result;
   s32 value;
@@ -116,7 +116,7 @@ void *func_80254B8C_de(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evic
     evictionFlags &= 0x10;
     do
     {
-      value = func_80251328_de(0, 2, evictionFlags == 0);
+      value = Cache_EvictResource(0, 2, evictionFlags == 0);
     }
     while ((value != 0) && (value < byteCount));
     if (value >= byteCount)
@@ -134,7 +134,7 @@ void *func_80254B8C_de(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evic
   return result;
 }
 
-void func_80254C70_de(s32 unused, void *object) {
+void Cache_InsertResourceByAddress(s32 unused, void *object) {
     Node80254C10 *node = object;
     Node80254C10 *scan;
 
@@ -152,8 +152,8 @@ void func_80254C70_de(s32 unused, void *object) {
     node->flags |= 0x1000;
 }
 
-void func_80254D00_de(void) {
+void Cache_ClearCurrentResourceSlot(void) {
     s32 *p = &D_801005A8;
-    func_80254D44_de(0, *p);
+    Cache_ClearResourceSlotProtection(0, *p);
     D_80100598[*p] = 0;
 }

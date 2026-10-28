@@ -32,11 +32,11 @@ extern int Scene_GetModelIdAtIndex(void *arg0, int arg1);
 struct Context;
 extern s32 func_8022A8F0_de(struct Context *arg0);
 
-extern int Player_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *arg0);
 
 extern void Lists_ClearWeightedTable(WeightedTable *object);
 
-extern SceneEffect *AnimPool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
+extern SceneEffect *Animpool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
 
@@ -168,7 +168,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
 
 static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatchOwner *owner,
         CVector3 position, CVector3 velocity, s32 type, s32 *entry, void *world) {
-    if (AnimPool_SpawnSceneEffect(&D_80131150, type, 0, (s32)entry, (s32)world, position,
+    if (Animpool_SpawnSceneEffect(&D_80131150, type, 0, (s32)entry, (s32)world, position,
             object->scale, object->rotation, velocity, &owner->spawn)) {
         owner->remaining--;
     }
@@ -261,7 +261,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = Player_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
+            context = Playerai_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
             if (!context) {
                 return;
             }

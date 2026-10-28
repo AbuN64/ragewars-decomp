@@ -13,7 +13,7 @@
 #include "include_asm.h"
 
 /* 8027451C_2.CPP */
-/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in D_80115DEC and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of Region_TestPolygonSlopeFlag replacing GraphU64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
+/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in D_80115DEC and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of Region_TestPolygonSlopeFlag replacing Graphu64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
 
 extern Triangle *D_800CD3E8;
 
@@ -21,7 +21,7 @@ extern Triangle *D_800CD3EC;
 
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
@@ -36,7 +36,7 @@ static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     GraphU64_NormalizeVec3(out);
 }
 
-extern void GraphU64_GetCachedSurfaceNormal(CVector3 *);
+extern void Graphu64_GetCachedSurfaceNormal(CVector3 *);
 
 CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     CVector3 normal;
@@ -62,7 +62,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            GraphU64_CrossVectors(&D_80115E10, &edge0, &edge1);
+            Graphu64_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);
@@ -73,7 +73,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     up.x = 0.0f;
     up.y = one;
     up.z = 0.0f;
-    GraphU64_CrossVectors(&axis, &up, &normal);
+    Graphu64_CrossVectors(&axis, &up, &normal);
     len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0.0f) {
         result.z = 0.0f;
@@ -105,12 +105,12 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     float scale;
     float one;
 
-    GraphU64_GetCachedSurfaceNormal(&a);
+    Graphu64_GetCachedSurfaceNormal(&a);
     one = D_800C49D8_de[1];
     up.x = 0;
     up.y = one;
     up.z = 0;
-    GraphU64_CrossVectors(&axis, &up, &a);
+    Graphu64_CrossVectors(&axis, &up, &a);
     len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0) {
         result.z = 0;
@@ -158,7 +158,7 @@ s32 Region_TestPolygonSlopeFlag(Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            GraphU64_CrossVectors(&D_80115E10, &edge0, &edge1);
+            Graphu64_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);
@@ -252,7 +252,7 @@ bounds_loop:
 /* 8027451C_4.CPP */
 
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
-   Adapted from GraphU64_GetCachedSurfaceNormal with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
+   Adapted from Graphu64_GetCachedSurfaceNormal with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     CVector3 a;
@@ -265,7 +265,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     } else if ((Triangle *)node != D_800CD3E8) {
         GraphU64_SubtractVectors(&a, node->cur, node->prev);
         GraphU64_SubtractVectors(&b, node->next, node->cur);
-        GraphU64_CrossVectors(&D_80115E10, &a, &b);
+        Graphu64_CrossVectors(&D_80115E10, &a, &b);
     }
     D_800CD3E8 = (Triangle *)node;
     *out = D_80115E10;
@@ -340,7 +340,7 @@ CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
         GraphU64_SubtractVectors(&a, node->cur, node->prev);
         b_ptr = &b;
         GraphU64_SubtractVectors(b_ptr, node->next, node->cur);
-        GraphU64_CrossVectors(&D_80115E10, &a, b_ptr);
+        Graphu64_CrossVectors(&D_80115E10, &a, b_ptr);
     }
     *out = D_80115E10;
     D_800CD3E8 = (Triangle *)node;
@@ -371,12 +371,12 @@ static inline void cross_node_edges(Node75 *node) {
 
     GraphU64_SubtractVectors(&a, node->cur, node->prev);
     GraphU64_SubtractVectors(&b, node->next, node->cur);
-    GraphU64_CrossVectors(&D_80115E10, &a, &b);
+    Graphu64_CrossVectors(&D_80115E10, &a, &b);
 }
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *arg0, s32 arg1);
 
-extern void Region_ExpandHorizontalBounds(void *arg0, s32 arg1, void *arg2);
+extern void Gregion_ExpandHorizontalBounds(void *arg0, s32 arg1, void *arg2);
 
 f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
@@ -428,7 +428,7 @@ CVector3 *Region_GetCachedCeilingNormal(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = p->z - q->z;
-        GraphU64_CrossVectors(&D_80111D30, &b, &a);
+        Graphu64_CrossVectors(&D_80111D30, &b, &a);
     }
     *out = D_80111D30;
     D_800CD3E0 = (int)node;
@@ -645,7 +645,7 @@ void Region_ComputeHorizontalBounds(void *arg0, s32 arg1, void *arg2) {
         temp_f0_2 = points->z;
         bounds[3] = temp_f0_2;
         bounds[1] = temp_f0_2;
-        Region_ExpandHorizontalBounds(arg0, arg1 - 1, points + 1);
+        Gregion_ExpandHorizontalBounds(arg0, arg1 - 1, points + 1);
     }
 }
 

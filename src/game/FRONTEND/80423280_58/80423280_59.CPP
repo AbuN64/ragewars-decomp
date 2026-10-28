@@ -20,7 +20,7 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
    otherwise it calls Tsmos_ActivateControllerState and, while its menu reports 3, counts the delay at 0xC down and
    on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
    restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves through
-   SmXlate_SwitchScreen with the stored target or Smos_ReturnToPreviousScreen when that is -1. Returns zero. Written
+   SmXlate_SwitchScreen with the stored target or Menu_ReturnToPreviousScreen when that is -1. Returns zero. Written
    from the assembly as a switch on the menu result, matching on the first trial. */
 
 
@@ -119,7 +119,7 @@ s32 Frontend_UpdatePlayerCountScreen(void) {
             SmXlate_SwitchScreen(D_800E5430->head.target);
             return 0;
         }
-        Smos_ReturnToPreviousScreen();
+        Menu_ReturnToPreviousScreen();
         break;
     default:
         return 0;

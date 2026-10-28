@@ -27,9 +27,9 @@ extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
 
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
+extern f32 Graphu64_GetPointDistance(f32 *a, f32 *b);
 
-void Player_ApplyLinkedProjectileStatus(void *arg0, s32 arg1, s32 arg2) {
+void Playerai_ApplyLinkedProjectileStatus(void *arg0, s32 arg1, s32 arg2) {
     func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
 }
 
@@ -76,7 +76,7 @@ void func_8022E290_de(void *player) {
     object->sway[1] = 0;
     object->sway[2] = 0;
     object->sideOffset = 0;
-    object->baseHeight = Player_GetObjectOwnerHeight(object);
+    object->baseHeight = Playerai_GetObjectOwnerHeight(object);
     object->forwardOffset = 0;
     zero = object->forwardOffset;
     (&object->velocity)->x = (&object->velocity)->y = (&object->velocity)->z = zero;
@@ -87,7 +87,7 @@ void func_8022E290_de(void *player) {
     object->previousTarget = object->pos;
 }
 
-s32 Player_HasWeaponClassType(Player *player, s32 arg1, s32 arg2) {
+s32 Playerai_HasWeaponClassType(Player *player, s32 arg1, s32 arg2) {
     s16 **entry;
     s16 **scan;
     WeaponInfo *resource;
@@ -128,7 +128,7 @@ mismatch:
     return 0;
 }
 
-s32 Player_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1) {
+s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1) {
     Instance8020CD74 saved;
     s32 moved;
 
@@ -146,7 +146,7 @@ s32 Player_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1
     return moved;
 }
 
-f32 Player_SumActivePlayerDistances(void *arg0, f32 *arg1) {
+f32 Playerai_SumActivePlayerDistances(void *arg0, f32 *arg1) {
     f32 result;
     Round *round = arg0;
     Shared_ActorView *var_s0;
@@ -156,7 +156,7 @@ f32 Player_SumActivePlayerDistances(void *arg0, f32 *arg1) {
     if (var_s0 != 0) {
         do {
             if (var_s0->message != 0) {
-                result += GraphU64_GetPointDistance(arg1, &var_s0->position.vector.x);
+                result += Graphu64_GetPointDistance(arg1, &var_s0->position.vector.x);
             }
             var_s0 = (Shared_ActorView *)var_s0->next;
         } while (var_s0 != 0);
@@ -166,7 +166,7 @@ f32 Player_SumActivePlayerDistances(void *arg0, f32 *arg1) {
 
 /* Returns whether a record in state 3 carries type 0x5E2A or 0x5E5A, or a type in the range 0x7DF to 0x7E3. */
 
-s32 Player_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player) {
+s32 Playerai_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player) {
     s32 type;
 
     if (player->views5E8.view650_15.unk650 == 3) {
@@ -178,9 +178,9 @@ s32 Player_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DF && player->views5E8.view86C_125.unk86C < 0x7E4;
 }
 
-/* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from Player_IsStateThreeUpperAnimationGroup with the type constants changed. */
+/* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from Playerai_IsStateThreeUpperAnimationGroup with the type constants changed. */
 
-s32 Player_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player) {
+s32 Playerai_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player) {
     s32 type;
 
     if (player->views5E8.view650_15.unk650 == 3) {
@@ -192,6 +192,6 @@ s32 Player_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DA && player->views5E8.view86C_125.unk86C < 0x7DF;
 }
 
-int Player_IsStateFifteen(struct SharedPlayer *player) {
+int Playerai_IsStateFifteen(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 0xF;
 }

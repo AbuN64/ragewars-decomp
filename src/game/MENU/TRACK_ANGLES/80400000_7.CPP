@@ -7,7 +7,7 @@
 /* Releases the current record's track-2 timed items whose time has come (or all live ones once the
    record's end time has passed): special items (kind and subkind 1 and 5, 9 and 4, 10 and 3) go to
    func_80402FB4_de and clear the record's pending flag, others to Link_ActivateTrigger, then each entry is
-   marked spent and its item is flagged and refreshed through Scene_SetTriggerStateBit. Adapted from Menu_HasNoTrackRequestItems: indexed entry
+   marked spent and its item is flagged and refreshed through Scene_SetTriggerStateBit. Adapted from Track_HasNoTrackRequestItems: indexed entry
    access and the table base taken inside the loop. */
 
 
@@ -21,7 +21,7 @@
 extern RecordMenuProcessTrackItemEvents *D_800E2830;
 
 extern s32 Cinema_IsSequenceActive(void);
-extern void Menu_RequestTrackByIds(s32 mode, ItemRecAt12 *item);
+extern void Track_RequestTrackByIds(s32 mode, ItemRecAt12 *item);
 extern void Link_ActivateTrigger(ItemRecAt12 *item);
 extern void Scene_SetTriggerStateBit(Shared_World *world, ItemRecAt12 *item, s32 mode);
 
@@ -88,7 +88,7 @@ void Menu_ProcessTrackItemEvents(void) {
                 break;
         }
         if (hit) {
-            Menu_RequestTrackByIds(0, item);
+            Track_RequestTrackByIds(0, item);
             D_800E2830->pending = 0;
         } else {
             Link_ActivateTrigger(item);

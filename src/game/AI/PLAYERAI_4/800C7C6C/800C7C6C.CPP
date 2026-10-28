@@ -47,7 +47,7 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
    through ContPad_BuildControllerState (restoring the frame time D_800D2988 it may change), its team logic through
    func_8022C490_de when either team rule is set, its controls through func_80220ED4_de unless input is
    frozen by D_80146894, and its camera through func_80220A80_de; a second pass opens the pause menu
-   through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
+   through Cinema_RequestSequenceFade for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
    one (unless the match forbids it), before the match end check func_802283B8_de and the world updates
    Player_UpdateFragTagSelection and Player_ReleaseWaitingPlayer run and the frame time is restored. */
@@ -62,7 +62,7 @@ extern void Player_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 extern s32 Control_IsStartPressed(Shared_Effect *);
 
 extern s32 Tsmos_IsFrontendActive(void);
-extern s32 Pak_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
+extern s32 Menu_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
 extern void func_80218464_de(char *);
 
 extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);
@@ -94,11 +94,11 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
         }
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
             if (Cinema_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {
-                func_8024570C_de();
+                Cinema_RequestSequenceFade();
             } else if (Control_IsStartPressed(player->views5E8.view698_36.controller) != 0) {
-                if (Cinema_IsSequenceActive() != 0 || func_8024576C_de() != 0) {
-                    func_8024570C_de();
-                } else if (Tsmos_IsFrontendActive() == 0 && Pak_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
+                if (Cinema_IsSequenceActive() != 0 || Cinema_HasSequenceResource() != 0) {
+                    Cinema_RequestSequenceFade();
+                } else if (Tsmos_IsFrontendActive() == 0 && Menu_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
                            && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
                            && ((&D_8014561C.rules)->locked == 0 || D_8014561C.allowed == 0)) {
                     D_8014561C.open = 1;

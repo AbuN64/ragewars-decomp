@@ -32,7 +32,7 @@ extern void SwapMatrixUpForward(void *);
 
 s32 Rumble_TestActorStateBit(void *, void *);
 
-void Device_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
+void Triggered_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 
 void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
@@ -67,7 +67,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
         rider->hooks->onStep(mover, rider);
     }
     rider->progress += body->progressScale * D_800D2988;
-    Device_UpdateTriggeredMotion(mover, rider);
+    Triggered_UpdateTriggeredMotion(mover, rider);
     if (rider->mode != 4) {
         func_80206DD4_de((void *)mover, (void *)rider);
     }

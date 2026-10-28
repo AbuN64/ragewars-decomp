@@ -87,7 +87,7 @@ extern void func_8024BE3C_de(void *arg0);
 extern void func_80246E44_de(char *);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Player_UpdateWorldPlayers(void *arg0);
-extern s32 Player_BeginRoundEnd(void *arg0);
+extern s32 Playerai_BeginRoundEnd(void *arg0);
 
 
 
@@ -149,7 +149,7 @@ first_pass_done:
     if (SetN64_IsModeThirteen()) {
         Player_UpdateWorldPlayers(&D_80145040);
     }
-    if (Player_BeginRoundEnd(&D_80145040)) {
+    if (Playerai_BeginRoundEnd(&D_80145040)) {
         func_8025E2D4_de(0x34);
         {
         s32 sw_mode_value = ((GlobalMode *)&D_80145040)->mode;
@@ -199,10 +199,10 @@ first_pass_done:
 extern Gfx *g_displayListCursor;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
-extern void Sky_GetObjectPositionAt260(void *, void *);
+extern void Gsky_GetObjectPositionAt260(void *, void *);
 extern void PpDecom_QuickSortRecords(void *, s32, s32, void *, void *);
-extern void StaticInstance_DrawForGameMode(void *, void *);
-extern void func_8024EB90_de(void *);
+extern void Statinst_DrawForGameMode(void *, void *);
+extern void Simple_DrawCachedModel(void *);
 extern void func_80249E28_de(void *, void *);
 /* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
  * measures each object's squared distance to the camera (offset by a jittered vector from func_802390D0_de),
@@ -235,11 +235,11 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
-    Sky_GetObjectPositionAt260(&jitter, camera);
+    Gsky_GetObjectPositionAt260(&jitter, camera);
     ox = jitter.x * -2.0f;
-    Sky_GetObjectPositionAt260(&jitter, camera);
+    Gsky_GetObjectPositionAt260(&jitter, camera);
     oy = jitter.y * -2.0f;
-    Sky_GetObjectPositionAt260(&jitter, camera);
+    Gsky_GetObjectPositionAt260(&jitter, camera);
     oz = jitter.z * -2.0f;
     for (i = 0; i < count; i++) {
         f32 x;
@@ -269,10 +269,10 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
         object = entries[i].object;
         switch (object->kind) {
         case 0:
-            StaticInstance_DrawForGameMode(object, camera);
+            Statinst_DrawForGameMode(object, camera);
             break;
         case 3:
-            func_8024EB90_de(object);
+            Simple_DrawCachedModel(object);
             break;
         case 1:
             func_80249E28_de(object, camera);

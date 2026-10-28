@@ -205,7 +205,7 @@ struct ContextCode8025A3EC {
 };
 
 struct ContextCode8025A3EC;
-struct View_func_8025AE1C_de;
+struct ViewChannelUpdateVoicePlayback;
 
 
 
@@ -291,8 +291,8 @@ typedef struct IntegerStateB4 IntegerStateB4;
 struct ContextCode8025A3EC;
 typedef struct ContextCode8025A3EC ContextCode8025A3EC;
 
-struct View_func_8025AE1C_de;
-typedef struct View_func_8025AE1C_de View_func_8025AE1C_de;
+struct ViewChannelUpdateVoicePlayback;
+typedef struct ViewChannelUpdateVoicePlayback ViewChannelUpdateVoicePlayback;
 
 extern float D_800C9048;
 

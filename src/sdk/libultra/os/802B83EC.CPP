@@ -12,7 +12,7 @@
 extern u32 __osPfsGetStatus(s32 arg0, s32 arg1);
 
 
-u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outputData) {
+u32 __osContRamRead(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outputData) {
     Block40 saved;
     u8 *source;
     s32 i;
@@ -21,7 +21,7 @@ u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *out
 
     source = (u8 *)&D_80154110;
     retries = 2;
-    func_802B9C14_de();
+    __osSiGetAccess();
     D_8014D4B0 = 2;
     __osPackRamReadData(channel, blockAddress & 0xFFFF);
     __osSiRawStartDma(1, (u8 *)&D_80154110);
@@ -42,7 +42,7 @@ u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *out
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
         if (result == 0) {
-            if ((func_802B8C88_de(&saved.bytes[6]) & 0xFF) != saved.bytes[0x26]) {
+            if ((__osContDataCrc(&saved.bytes[6]) & 0xFF) != saved.bytes[0x26]) {
                 result = __osPfsGetStatus(completionQueue, channel);
                 if (result != 0) {
                     break;
@@ -62,6 +62,6 @@ u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *out
             break;
         }
     } while (retries-- >= 0);
-    func_802B9C80_de();
+    __osSiRelAccess();
     return result;
 }

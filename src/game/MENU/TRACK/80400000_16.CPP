@@ -13,7 +13,7 @@
    their values with the smoothstep weight 3u^2 - 2u^3; an empty track yields D_800E0B60[1]. */
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-f32 Menu_EvaluateTrackScalar(f32 t) {
+f32 Track_EvaluateTrackScalar(f32 t) {
     s32 *track;
     D_800C7470_Pair *key;
     s32 count;
@@ -44,17 +44,17 @@ f32 Menu_EvaluateTrackScalar(f32 t) {
 #include "COMMON/WORLD.H"
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
-extern void func_802453D4_de(void);
-extern CVector3 Menu_GetTrackEyePosition(f32);
-extern CVector3 Menu_GetTrackTargetPosition(f32);
+extern void CCinema_DrawMessages(void);
+extern CVector3 Track_GetTrackEyePosition(f32);
+extern CVector3 Track_GetTrackTargetPosition(f32);
 extern void GraphU64_IdentityMatrix(void *);
-extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
+extern void Graphu64_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
-extern f32 GraphU64_GetVerticalAngle(CVector3 *);
+extern f32 Graphu64_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
-void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
+void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
     CVector3 eye;
     CVector3 target;
     CVector3 delta;
@@ -77,10 +77,10 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         return;
     }
     if (D_800E2830->messageCount > 0) {
-        func_802453D4_de();
+        CCinema_DrawMessages();
     }
-    eye = Menu_GetTrackEyePosition(D_800E2830->time);
-    target = Menu_GetTrackTargetPosition(D_800E2830->time);
+    eye = Track_GetTrackEyePosition(D_800E2830->time);
+    target = Track_GetTrackTargetPosition(D_800E2830->time);
     scale = D_800DCB40[0];
     GraphU64_ScaleVector(&eye, &eye, scale);
     GraphU64_ScaleVector(&target, &target, scale);
@@ -104,7 +104,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
             }
         }
         GraphU64_IdentityMatrix(matrix);
-        GraphU64_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
+        Graphu64_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
         GraphU64_TransformPoint(matrix, &target, &rotated);
         target = rotated;
         GraphU64_TransformPoint(matrix, &eye, &rotated);
@@ -125,7 +125,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         }
     }
     yaw = GraphU64_GetHorizontalAngle(&delta);
-    pitch = GraphU64_GetVerticalAngle(&delta);
+    pitch = Graphu64_GetVerticalAngle(&delta);
     camera->distance += yaw;
     camera->pitch = -pitch;
     camera->position = eye;

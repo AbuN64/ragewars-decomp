@@ -18,12 +18,12 @@ extern ResourceHashEntry *D_80101194;
 extern struct CartridgeReadWorker D_801011B8;
 extern s32 D_80105180;
 extern void func_80255FB8_de(void *, s32);
-extern void *func_80254ED0_de(s32, s32);
-extern void *func_802514A8_de(s32, s32);
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
-extern void func_80254C70_de(s32 unused, void *object);
+extern void *Cache_AcquireLoadRequestWithEviction(s32, s32);
+extern void *Cache_AcquireResourceNodeWithEviction(s32, s32);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 extern s32 func_80255170_de(s32 *, ResourceLoadRequest *);
-extern ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference);
+extern ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 extern void func_8025637C_de(struct CartridgeReadWorker *, u32, s32, void *);
 extern void func_80256454_de(struct CartridgeReadWorker *, u32, s32, void *, struct Queue *, s32, s32);
 
@@ -71,17 +71,17 @@ static inline void stamp(CachedResource *node) {
     func_80255FB8_de(&D_80100570,(s32)node);
 }
 static inline CachedResource *allocate(u32 size, u32 flags) {
-    CachedResource *node=func_802514A8_de(0,flags);
+    CachedResource *node=Cache_AcquireResourceNodeWithEviction(0,flags);
     if (node!=0) {
         addref(node);
-        node->data=func_80254B8C_de(0,size,(flags>>5)&1,flags);
+        node->data=Cache_AllocateHeapWithEviction(0,size,(flags>>5)&1,flags);
         if (node->data!=0) {
             node->unk04=size;
             node->flags |= flags;
-            func_80254C70_de(0,node);
+            Cache_InsertResourceByAddress(0,node);
         } else {
             if (--node->count==0) node->flags &= ~0x100;
-            func_80254AD0_de(0,(s32)node);
+            Cache_ReleasePendingResourceEntry(0,(s32)node);
             node=0;
         }
     }
@@ -108,7 +108,7 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
     }
     direct |= D_801047E0.mask;
     busy=0;
-    if(direct!=0) allocated=func_80254ED0_de(0,mode);
+    if(direct!=0) allocated=Cache_AcquireLoadRequestWithEviction(0,mode);
     else {
         scan=D_801047E0.active.head;
         while(scan!=0) {
@@ -117,7 +117,7 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
         }
 
         if(direct==0 && busy) goto failed;
-        allocated=func_80254ED0_de(0,mode);
+        allocated=Cache_AcquireLoadRequestWithEviction(0,mode);
     }
     request=allocated;
     if(request!=0) {
@@ -142,7 +142,7 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
                 if(tag!=0) func_80255170_de(&D_80106248,request);
                 acquire();
                 if(tag!=0) request->flags &= ~4;
-                resolved=func_80252774_de(0,request,0);
+                resolved=Cache_FinalizeResourceLoad(0,request,0);
                 if(resolved!=0 && resolved!=request) addref(resolved->node);
                 release();
                 if(resolved!=0) return resolved->node;
@@ -159,7 +159,7 @@ void *Cache_RequestResource(s32 unused, u32 key, u32 source, u32 size,
                 return 0;
             }
         }
-        func_80254E88_de(0,request);
+        Cache_RecycleLoadRequest(0,request);
     }
 failed:
     release();

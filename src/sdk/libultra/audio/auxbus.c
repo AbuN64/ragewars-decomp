@@ -77,7 +77,7 @@ Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset
 }
 #endif
 
-s32 func_802B3EDC_de(Obj_func_802B3EDC_de *bus, s32 operation, s32 source) {
+s32 alAuxBusParam(ObjalAuxBusParam *bus, s32 operation, s32 source) {
     int new_var;
     s32 *base;
     s32 count;

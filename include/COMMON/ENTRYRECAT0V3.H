@@ -56,7 +56,7 @@ struct PakDirectory;
 
 
 
-extern void Pak_FreeScratchBuffer(void);
+extern void Note_FreeScratchBuffer(void);
 
 void Pak_AllocateScratchBuffer(void);
 #endif

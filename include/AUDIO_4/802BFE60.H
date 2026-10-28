@@ -5,6 +5,6 @@ struct func_80205494_S3 {
     char pad0[0x14];
     unsigned int unk14;
 };
-extern unsigned int func_802BAD80_de(void *object);
-extern int func_802BAD70_de(void);
+extern unsigned int Audio_GetThreadIdentifier(void *object);
+extern int Audio_GetInterruptMask(void);
 #endif

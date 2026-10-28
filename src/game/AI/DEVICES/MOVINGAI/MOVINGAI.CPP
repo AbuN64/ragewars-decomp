@@ -122,7 +122,7 @@ extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned shor
 
 extern SpawnDispatchActor *SetN64_SpawnModelEffect(char *, void *, s32, CVector3, Triple, s32, f32);
 
-extern s32 AnimPool_SpawnSceneEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern s32 Animpool_SpawnSceneEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                          s32 arg4, Triple arg5, f32 arg6, CVector3 arg7,
                          Triple arg8, void *arg9);
 
@@ -178,7 +178,7 @@ void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params,
 
 void func_802063EC_de(LevelActor *actor, ActorMotionState *spawnState, Triple spawnPosition, Triple spawnColor,
                    s32 spawnOwner, s32 spawnId, s32 spawnCount) {
-    if (AnimPool_SpawnSceneEffect(&D_80131150, spawnId, 0, spawnCount,
+    if (Animpool_SpawnSceneEffect(&D_80131150, spawnId, 0, spawnCount,
                       spawnOwner, spawnPosition,
                       actor->yaw,
                       actor->position1, spawnColor,

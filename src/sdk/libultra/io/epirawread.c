@@ -9,7 +9,7 @@
 
 extern OSPiHandle_s *D_800D4380[];
 
-s32 func_802B9590_de(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
+s32 osEPiRawReadIo(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
     OSPiHandle_s *previous;
     s32 index;
 

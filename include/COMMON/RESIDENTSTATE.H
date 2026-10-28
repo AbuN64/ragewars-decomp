@@ -31,7 +31,7 @@ struct SelectionTextLoadApplyArtsendTextureOverride;
 
 
 
-extern void TEngine_UpdateArtsendTexturePreview();
+extern void Tengine_UpdateArtsendTexturePreview();
 
 
 extern ResidentState D_8014AEB8;
@@ -53,7 +53,7 @@ struct AnimationInfo;
 
 
 struct ResourceData80295B84;
-extern void TextLoad_PrepareTextureVariation(s32 index, struct ResourceData80295B84 *resource);
+extern void Textload_PrepareTextureVariation(s32 index, struct ResourceData80295B84 *resource);
 
 extern s32 D_auto_800D2AE8;
 
@@ -63,7 +63,7 @@ extern s32 D_auto_800D2AF4;
 
 extern s32 D_auto_800D2AF8;
 
-extern void TEngine_LoadSelectedTexture(void);
+extern void Tengine_LoadSelectedTexture(void);
 extern u8 s_artsendActivatedText[0x14];
 extern u8 s_artsendDeactivatedText[0x14];
 extern f32 D_auto_800CA634;

@@ -60,10 +60,10 @@ INCLUDE_ASM("ovl_80400000", Items_SelectOptionRowLabel);
 #if defined(VERSION_EU_X)
 #include "TYPES.H"
 extern s32 D_8013B2BC;
-extern s32 func_802B2378(s32);
+extern s32 Menu_ClassifyResourceRange(s32);
 
 void Items_PrepareMenuReturnEuX(void) {
-    D_801540F4 = func_802B2378(D_8013B2BC);
+    D_801540F4 = Menu_ClassifyResourceRange(D_8013B2BC);
     D_801540F0 = 1;
 }
 #endif

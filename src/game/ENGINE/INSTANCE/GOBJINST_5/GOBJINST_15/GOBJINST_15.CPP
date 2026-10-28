@@ -38,7 +38,7 @@ extern CROMEventEntry *func_80262598_de(void *);
 extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
 extern void Cache_UnlockResource(s32 arg0, s32 arg1);
-extern void PolyTrak_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);
+extern void Polytrak2_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);
 
 void *func_8024C104_de(Triple *outOffset, void *actor, CGameAnimateState_t *anim) {
     char *o1 = (char *) actor;
@@ -47,7 +47,7 @@ void *func_8024C104_de(Triple *outOffset, void *actor, CGameAnimateState_t *anim
     f32 inVec[3];
     f32 outVec[3];
 
-    PolyTrak_SampleVectorTrack(anim, 0, anim->time, spVec);
+    Polytrak2_SampleVectorTrack(anim, 0, anim->time, spVec);
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
@@ -105,8 +105,8 @@ void func_8024C34C_de(LevelActor *actor, CGameAnimateState_t *animation) {
     f32 zero;
 
     zero = 0.0f;
-    PolyTrak_SampleVectorTrack(animation, 0, zero, scratch.first);
-    PolyTrak_SampleVectorTrack(animation, 0, animation->time, scratch.second);
+    Polytrak2_SampleVectorTrack(animation, 0, zero, scratch.first);
+    Polytrak2_SampleVectorTrack(animation, 0, animation->time, scratch.second);
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];

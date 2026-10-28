@@ -7,7 +7,7 @@
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-f32 Items_ReadBoundValue(ItemRecAt14 *arg0) {
+f32 Bound_ReadBoundValue(ItemRecAt14 *arg0) {
  Binding *v = arg0->binding;
  void *p = v->storage();
  switch(v->type) {
@@ -24,7 +24,7 @@ f32 Items_ReadBoundValue(ItemRecAt14 *arg0) {
 
 /* Writes a numeric menu value through its bound storage callback using the selected scalar type. */
 
-void Items_WriteBoundValue(ItemRecAt14 *item,float value) {
+void Bound_WriteBoundValue(ItemRecAt14 *item,float value) {
  float *storage;
  struct Binding *binding;
  unsigned int *word;
@@ -42,15 +42,15 @@ void Items_WriteBoundValue(ItemRecAt14 *item,float value) {
  }
 }
 
-/* Calls func_8024B990_de with its three arguments and the table D_800D0EF8 as the fourth. */
-extern void func_8024B990_de(void *, void *, void *, void *);
+/* Calls Gobjinst_DrawMaskedModelWithLighting with its three arguments and the table D_800D0EF8 as the fourth. */
+extern void Gobjinst_DrawMaskedModelWithLighting(void *, void *, void *, void *);
 
-void Items_DrawActorWithMenuLighting(void *first, void *second, void *third) {
-    func_8024B990_de(first, second, third, &D_800D0EF8);
+void Bound_DrawActorWithMenuLighting(void *first, void *second, void *third) {
+    Gobjinst_DrawMaskedModelWithLighting(first, second, third, &D_800D0EF8);
 }
 
 extern void func_8024A1D0_de(ObjectItemsDrawActorWithRedMenuEffect *, void *, void *);
-void Items_DrawActorWithRedMenuEffect(ObjectItemsDrawActorWithRedMenuEffect *object, void *context, void *lookup) {
+void Bound_DrawActorWithRedMenuEffect(ObjectItemsDrawActorWithRedMenuEffect *object, void *context, void *lookup) {
  D_800D15E0=3;
  object->view[D_800D297C]=D_800D0EF8;
  D_800D15E4[0]=(255.0f);

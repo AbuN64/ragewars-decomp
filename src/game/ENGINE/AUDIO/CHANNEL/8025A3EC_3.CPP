@@ -20,17 +20,17 @@
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 struct ALSndPlayer;
-extern void func_802B2ED0_de(struct ALSndPlayer *player, short index, unsigned char value);
+extern void alSndpSetPriority(struct ALSndPlayer *player, short index, unsigned char value);
 #include "TEXTURE/80256220_16.H"
 #include "COMMON/LISTNODE.H"
 
 
-extern s32 Sky_FindNearestCamera(MenuMatchGlobals *, Triple *);
+extern s32 Gsky_FindNearestCamera(MenuMatchGlobals *, Triple *);
 extern void alSndpPlay(char *);
-extern void func_802B25D0_de(char *, s32);
-extern void Channel_UpdateVoiceVolume(View_func_8025AE1C_de *);
-extern void func_8025A844_de(View_func_8025AE1C_de *);
-extern void func_8025AB94_de(View_func_8025AE1C_de *);
+extern void alSndpDeallocate(char *, s32);
+extern void Channel_UpdateVoiceVolume(ViewChannelUpdateVoicePlayback *);
+extern void Channel_UpdateVoicePan(ViewChannelUpdateVoicePlayback *);
+extern void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePlayback *);
 
 
 
@@ -40,13 +40,13 @@ static inline char *selectChannel(ContextCode8025A3EC *context, s32 slot) {
     return ((OwnerCode8025A3EC *)context)->sound;
 }
 
-void func_8025AE1C_de(View_func_8025AE1C_de *view) {
+void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
     char *channel;
     ContextCode8025A3EC *context;
     Slots *slots;
     s32 playing;
 
-    view->context->result = Sky_FindNearestCamera(&D_80145088, &view->position);
+    view->context->result = Gsky_FindNearestCamera(&D_80145088, &view->position);
     playing = func_802B2620_de(selectChannel(view->context, view->slot));
     if (view->time <= D_800C3F68_de || ((view->flags & 4) && view->finished == 0)) {
         view->done = 1;
@@ -81,7 +81,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     if (playing == 0) {
         context = view->context;
         slots = &context->slots;
-        func_802B25D0_de(((OwnerCode8025A3EC *)context)->sound, slots->ids[view->slot]);
+        alSndpDeallocate(((OwnerCode8025A3EC *)context)->sound, slots->ids[view->slot]);
         slots->ids[view->slot] = -1;
         view->field38 = 0;
         view->fieldC = -1;
@@ -95,8 +95,8 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
         view->position = *view->tracked;
     }
     Channel_UpdateVoiceVolume(view);
-    func_8025A844_de(view);
-    func_8025AB94_de(view);
+    Channel_UpdateVoicePan(view);
+    Channel_UpdateVoicePitch(view);
 }
 
 /* Picks the voice slot for a new sound of the given priority: the first of the sixteen slots with no sound, else the
@@ -216,7 +216,7 @@ extern s32 func_8025E518_de(void *);
 extern s32 func_8025E524_de(void *);
 extern s32 func_8025E548_de(void *);
 extern s32 func_8025E578_de(void *);
-extern s16 func_802B2510_de(void *, s32);
+extern s16 alSndpAllocate(void *, s32);
 /* Starts a note on a free voice: picks the voice with Channel_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */
@@ -244,9 +244,9 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *
     if (player->engine->state.bank->instArray[0]->soundCount < count) {
         return 0;
     }
-    func_80258740_de((s32 *)engine);
+    Sound_AcquireContextLock((s32 *)engine);
     if ((s8)func_8025E524_de(note) != 100) {
-        roll = GraphU64_NextRandomValue();
+        roll = Graphu64_NextRandomValue();
         roll %= 100;
         roll = roll < (s8)func_8025E524_de(note);
         if (!roll) {
@@ -266,7 +266,7 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *
         player->engine->state.current = index;
         state = &player->engine->state;
         pool = state->pool;
-        slot = func_802B2510_de(pool, (s32)state->bank->instArray[0]->soundArray[count]);
+        slot = alSndpAllocate(pool, (s32)state->bank->instArray[0]->soundArray[count]);
         slots[index] = slot;
         if (slot == -1) {
             voice->serial = -1;
@@ -274,7 +274,7 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *
             voice->parameters.priority = 0;
             player->engine->state.current = -1;
 fail:
-            func_802587A4_de((s32 *)player->engine);
+            Sound_ReleaseContextLock((s32 *)player->engine);
             return 0;
         }
         pitch = (f32)priority * 1.27f;
@@ -284,7 +284,7 @@ fail:
         voice->slot = slots[index];
         voice->noteLength = note->sample;
         pitchByte = (u32)pitch;
-        func_802B2ED0_de(pool, slots[index], pitchByte & 0xFF);
+        alSndpSetPriority(pool, slots[index], pitchByte & 0xFF);
     }
     voice->f_A8 = player->engine->priorityTable;
     voice->f_C0 = player->engine->f2BAC;
@@ -320,6 +320,6 @@ fail:
     parameters->mode = func_8025E548_de(note);
     voice->noteWord = (s16)func_8025E578_de(note);
     parameters->zero50 = 0;
-    func_802587A4_de((s32 *)player->engine);
+    Sound_ReleaseContextLock((s32 *)player->engine);
     return voice;
 }

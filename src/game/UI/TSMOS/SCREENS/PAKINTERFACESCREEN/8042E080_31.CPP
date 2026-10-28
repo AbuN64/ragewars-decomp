@@ -6,7 +6,7 @@
 
 /* Updates the four player control rows, their visibility, and the selected player label. */
 extern s32 Control_IsControllerConnected(s32);
-extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
+extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct Shared_Item *SmpOverlay_GetSlotValue(void *, s32);
 void PAKInterface_UpdatePlayerControlRows(s32 player) {
     struct Shared_Item *item;
@@ -65,9 +65,9 @@ void PAKInterface_UpdatePlayerControlRows(s32 player) {
     row_done:
         item = Frontend_FindWidgetByResourceId(D_800E54A4->window, id);
         if (Control_IsControllerConnected(i) == 1) {
-            Frontend_SetWidgetFlag100(item, 0);
+            Widget_SetWidgetFlag100(item, 0);
         } else {
-            Frontend_SetWidgetFlag100(item, 1);
+            Widget_SetWidgetFlag100(item, 1);
         }
         label = item->label;
         if (player != -1 && item == SmpOverlay_GetSlotValue(D_800E54A4->list, player)) {

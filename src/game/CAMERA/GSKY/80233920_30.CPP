@@ -83,7 +83,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
 
 extern void *D_80140FE8_de;
 
-extern void Items_InitEntryPool(int a);
+extern void Pool_InitEntryPool(int a);
 
 extern u32 Weapon_UpdateShakeAxis(s32);
 
@@ -105,9 +105,9 @@ CCameraText *Sky_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s3
     return pending;
 }
 
-void func_80239AF4_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
-    Node_func_80239AF4_de *message;
-    Node_func_80239AF4_de *nextMessage;
+void Gsky_ActivateMessagePool(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
+    NodeGskyActivateMessagePool *message;
+    NodeGskyActivateMessagePool *nextMessage;
     void *freeList;
 
     if (pool != 0) {
@@ -125,11 +125,11 @@ void func_80239AF4_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool
     }
 }
 
-void func_80239B64_de(s32 messageOwner) {
-    Node_func_80239AF4_de *next;
-    Node_func_80239AF4_de *nextPooledMessage;
-    Node_func_80239AF4_de *embeddedMessage;
-    Node_func_80239AF4_de *pooledMessage;
+void Gsky_ActivateAllMessagePools(s32 messageOwner) {
+    NodeGskyActivateMessagePool *next;
+    NodeGskyActivateMessagePool *nextPooledMessage;
+    NodeGskyActivateMessagePool *embeddedMessage;
+    NodeGskyActivateMessagePool *pooledMessage;
     void *embeddedPool;
     void *poolCursor;
 
@@ -164,11 +164,11 @@ void func_80239B64_de(s32 messageOwner) {
 }
 
 /** Thin wrapper forwarding an offset argument to func_8044A7D0_de. */
-void func_80239C20_de(int viewAddress) {
-    Items_InitEntryPool(viewAddress + 0x570);
+void Gsky_InitializeMessageEntryPool(int viewAddress) {
+    Pool_InitEntryPool(viewAddress + 0x570);
 }
 
-void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {
+void *Gsky_RecycleFirstScreenMessage(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {
     struct ScreenMessageOwner *owner = screenMessageOwner;
     struct ScreenMessagePool *pool = screenMessagePool;
     void *message;
@@ -182,7 +182,7 @@ void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *scree
     return message;
 }
 
-void func_80239C9C_de(s32 destinationOwner, s32 sourcePool, s32 messageNode) {
+void Gsky_ActivateScreenMessage(s32 destinationOwner, s32 sourcePool, s32 messageNode) {
     func_80255ED8_de(sourcePool + 0xE40, messageNode);
     func_80255CB8_de(destinationOwner + 0xF24, messageNode);
 }
@@ -194,7 +194,7 @@ void func_80239CE0_de(void *arg0) {
 }
 
 /** Clear four consecutive object words beginning at offset 4. */
-void func_80239CEC_de(void *channelStorage) {
+void Gsky_InitializeShakeChannel(void *channelStorage) {
     struct Channel *channel = channelStorage;
     channel->level = 0.0f;
     channel->state[0] = 0;
@@ -207,7 +207,7 @@ void func_80239CEC_de(void *channelStorage) {
 
 
 
-void func_80239D00_de(struct Channel *channel, float inputLevel, int waveMode) {
+void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMode) {
     channel->level = inputLevel * (D_800C8658);
     channel->mode = waveMode;
 }
@@ -221,7 +221,7 @@ void func_80239D00_de(struct Channel *channel, float inputLevel, int waveMode) {
 
 
 
-f32 func_80239D1C_de(struct Wave *wave) {
+f32 Gsky_SampleShakeWave(struct Wave *wave) {
     switch (wave->kind) {
     case 1:
         return Math_Sinf(wave->phase * D_800C865C) * wave->amplitude;
@@ -232,7 +232,7 @@ f32 func_80239D1C_de(struct Wave *wave) {
 }
 
 /** Zero the object's vector fields and reset the scale field to the default. */
-void func_80239D90_de(void *channelRecord) {
+void Gsky_InitializeShakeRecord(void *channelRecord) {
     struct RecordRecAt18 *o = channelRecord;
     struct Channel *channel0;
     struct Channel *channel1;
@@ -272,7 +272,7 @@ void func_80239D90_de(void *channelRecord) {
 
 
 
-void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
+void Gsky_SetShakeRecord(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
                    Triple triple) {
     record->triple = triple;
     record->value = value;
@@ -284,7 +284,7 @@ void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 t
     record->channels[2].level = third * D_800C8664;
 }
 
-s32 func_80239E48_de(s32 waveRecord) {
+s32 Gsky_UpdateShakeRecord(s32 waveRecord) {
     s32 result;
     u32 secondChannelDone;
     u32 firstChannelDone;

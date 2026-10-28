@@ -44,7 +44,7 @@ struct Shared_Game {
             f32 speedFactor; /* 0x20 */
             s8 laps; /* +0x24 */
             s8 players; /* +0x25 */
-            s8 trialOther; /* +0x26: Frontend_StartFragTagMatch */
+            s8 trialOther; /* +0x26: Random_StartFragTagMatch */
             s8 trialScore; /* +0x27 */
             u8 unknown28[3];
             u8 bonusIcon; /* +0x2B: shows the 0x2DA HUD icon */

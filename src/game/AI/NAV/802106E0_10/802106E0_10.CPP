@@ -31,16 +31,16 @@ extern s32 D_800D297C;
 extern char D_8013B364[];
 
 extern void Nav_RunBehaviorHandler(Brain *arg0);
-extern s32 Nav_HasLineOfSight(Brain *, Actor *);
-extern void Nav_SetBehaviourState(Brain *, s32);
+extern s32 Scaled_HasLineOfSight(Brain *, Actor *);
+extern void Scaled_SetBehaviourState(Brain *, s32);
 extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
-extern f32 Nav_ScaleCharacterSettingByDifficulty(Brain *arg0);
+extern f32 Scaled_ScaleCharacterSettingByDifficulty(Brain *arg0);
 extern s32 GraphU64_NextRandom(void);
-extern f32 Nav_UpdateDifficultyAimJitter(Brain *arg0);
+extern f32 Scaled_UpdateDifficultyAimJitter(Brain *arg0);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
-extern s32 Nav_GetDirectionSector(f32);
-extern void Nav_MeasureWheelClearance(Actor *, s32);
-extern void Nav_DispatchActorBehavior(Brain *arg0);
+extern s32 Wheel_GetDirectionSector(f32);
+extern void Wheel_MeasureWheelClearance(Actor *, s32);
+extern void Portal_DispatchActorBehavior(Brain *arg0);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
@@ -58,24 +58,24 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
     player = brain->target;
     if (player != 0) {
         if (!(brain->frames & 3)) {
-            brain->visible = Nav_HasLineOfSight(brain, player);
+            brain->visible = Scaled_HasLineOfSight(brain, player);
         }
         brain->frames += 1;
         target = brain->target->self;
         mine = ((Actor *)brain->player)->flags & 0x3000;
         theirs = (target->flags & 0x3000) != 0;
         if (mine && !theirs) {
-            Nav_SetBehaviourState(brain, 12);
+            Scaled_SetBehaviourState(brain, 12);
             return;
         }
         route = target->brain->start;
         if (brain->visible != 0) {
             if (GraphU64_GetSquaredDistance(&target->pos, &((Actor *)brain->player)->pos) < 360000.0f) {
                 brain->combat = 3;
-                Nav_SetBehaviourState(brain, 7);
+                Scaled_SetBehaviourState(brain, 7);
                 return;
             }
-            speed = Nav_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
+            speed = Scaled_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
             if (--brain->timer <= 0) {
                 brain->timer = GraphU64_NextRandom() % 4 + 12;
                 brain->pattern = GraphU64_NextRandom() % 2;
@@ -83,13 +83,13 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
                     brain->pattern = 2;
                 }
             }
-            Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
+            Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
             pattern = brain->pattern;
             if (pattern == 0) {
-                dir = Nav_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) - 1.5707964f);
+                dir = Wheel_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) - 1.5707964f);
                 player = ((Actor *)brain->player);
                 if ((player->slot % 2) == D_800D297C) {
-                    Nav_MeasureWheelClearance(player, dir);
+                    Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->clearance[dir] < 100.0f)) {
                     ((Actor *)brain->player)->strafe = -speed;
@@ -97,10 +97,10 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
                     goto halt;
                 }
             } else if (pattern == 1) {
-                dir = Nav_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) + 1.5707964f);
+                dir = Wheel_GetDirectionSector((((Actor *)brain->player)->yaw - 3.1415927f) + 1.5707964f);
                 player = ((Actor *)brain->player);
                 if ((player->slot % 2) == D_800D297C) {
-                    Nav_MeasureWheelClearance(player, dir);
+                    Wheel_MeasureWheelClearance(player, dir);
                 }
                 if (brain->clearance[dir] < 100.0f) {
 halt:
@@ -113,7 +113,7 @@ halt:
                 ((Actor *)brain->player)->strafe = 0.0f;
             }
             brain->w14 = -1;
-            Nav_DispatchActorBehavior(brain);
+            Portal_DispatchActorBehavior(brain);
         } else {
             brain->destination = route;
             Nav_SteerAlongRoute(brain);
@@ -122,7 +122,7 @@ halt:
         if (route != brain->node) {
             brain->node = route;
             if (Nav_GetRouteRelation(D_8013B364, brain->start, route) == 0) {
-                Nav_SetBehaviourState(brain, 1);
+                Scaled_SetBehaviourState(brain, 1);
             }
         }
     }

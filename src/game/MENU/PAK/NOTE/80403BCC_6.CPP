@@ -14,7 +14,7 @@
    takes the controller lock and, when the pak has no pending error, converts the extension and
    game name to pak font codes, allocates the note rounded up to whole 256-byte blocks through
    osPfsAllocateFile (osPfsAllocateFile), writes the data through osPfsReadWriteFile (Pfs_ReadWriteFile),
-   deletes the note again if the write fails, refreshes the pak state through Pak_UpdateStatus and
+   deletes the note again if the write fails, refreshes the pak state through Note_UpdateStatus and
    returns 0 or -1. */
 
 
@@ -27,7 +27,7 @@ extern PakDirectory *D_800E2854;
 
 extern u8 D_8010BBB8;
 
-extern u8 D_800DE80C[0x42];
+extern u8 g_controllerPakFilenameAlphabet[0x42];
 
 extern void Control_ReadControllerStates(void);
 
@@ -37,7 +37,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
-/* Inline copy of Pak_DecodeNoteText: decodes the n pak font codes at src into dst as text (codes from
+/* Inline copy of Note_DecodeNoteText: decodes the n pak font codes at src into dst as text (codes from
    0x42 up become '~', leading zero codes blanks), trims trailing blanks and terminates dst. */
 static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
     s32 i;
@@ -53,7 +53,7 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
             if (src[i] == 0 && !started) {
                 dst[i] = ' ';
             } else {
-                dst[i] = D_800DE80C[src[i]];
+                dst[i] = g_controllerPakFilenameAlphabet[src[i]];
                 started = 1;
             }
         } else {
@@ -70,9 +70,9 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
 }
 
 /* Saves data as a Controller Pak note on channel ch and verifies it: refuses with -2 unless the pak
-   is ready, then up to four times writes the note through Pak_CreateAndWriteNote with the D_800D36DC
+   is ready, then up to four times writes the note through Note_CreateAndWriteNote with the D_800D36DC
    company code, reads it back into a temporary buffer through an inlined note read, and stops when
-   the bytes compare equal or deletes the note through Pak_DeleteNote and retries, returning the
+   the bytes compare equal or deletes the note through Note_DeleteNote and retries, returning the
    write result. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 *D_800E25C4[], *D_800E25C4[];
@@ -91,10 +91,10 @@ extern void func_8025476C_de(s32);
 
 extern s32 Defs_CompareMemory(void *a, void *b, s32 size);
 
-extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+extern s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
-extern s32 Pak_DeleteNote(s32 ch, s32 index);
+extern s32 Note_DeleteNote(s32 ch, s32 index);
 
 static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     s32 result;
@@ -131,13 +131,13 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     return result;
 }
 
-extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
+extern s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
 
 /* Reports note index of the Controller Pak on channel ch from the cached directory: refuses with -2
    unless the pak is ready, clears the exists flag for an empty slot, and otherwise returns its size
    in 256-byte blocks, its company and game codes as terminated byte strings, and its game name and
    extension decoded from pak font codes with trailing blanks trimmed. */
-s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
+s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
                   u8 *code) {
     if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
@@ -157,9 +157,9 @@ s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *siz
     return 0;
 }
 
-s32 Pak_DeleteNote(s32 ch, s32 index) {
+s32 Note_DeleteNote(s32 ch, s32 index) {
     extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
-    extern void Pak_UpdateStatus(s32 ch);
+    extern void Note_UpdateStatus(s32 ch);
     s32 result;
 
     if (g_controllerPakChannelStates[ch] != 3) {
@@ -177,13 +177,13 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
         if (result != 0) {
             result = -1;
         }
-        Pak_UpdateStatus(ch);
+        Note_UpdateStatus(ch);
     }
     Control_ReleasePakLock();
     return result;
 }
 
-s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
+s32 Note_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     s32 result;
     s32 file_no;
     void **handle;
@@ -198,14 +198,14 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
-        result = Pak_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
+        result = Note_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
         if (result != 0) {
             break;
         }
         if (func_80404958_read(ch, file_no, buf, blocks) == 0 && Defs_CompareMemory(buf, data, size) == 0) {
             break;
         }
-        if (Pak_DeleteNote(ch, file_no) != 0) {
+        if (Note_DeleteNote(ch, file_no) != 0) {
             break;
         }
     }
@@ -217,7 +217,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
 }
 
 
-/* Inline copy of Pak_GetNoteGameName: points *gameName at note's encoded game name in the cached
+/* Inline copy of Note_GetNoteGameName: points *gameName at note's encoded game name in the cached
    directory of channel's pak and returns 0, or returns -2 (leaving *gameName untouched) unless that
    pak is ready. */
 static inline s32 Pak_PeekNoteGameName(s32 channel, s32 note, u8 **gameName) {

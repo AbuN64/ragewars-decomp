@@ -23,7 +23,7 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 
 extern s32 D_8013B2BC;
 
-extern void *Player_GetFirstPlayer(void *);
+extern void *Playerai_GetFirstPlayer(void *);
 
 /** Return the global word at D_8010FC4C. */
 
@@ -135,11 +135,11 @@ void Control_RestoreControllerSetup(void) {
     }
 }
 
-void func_802649FC_de(void) {
+void Control_ClearMenuControlFlag(void) {
     D_800CBC20 = 0;
 }
 
-void func_80264A0C_de(void) {
+void Control_SetMenuControlFlag(void) {
     D_800CBC20 = 1;
 }
 
@@ -174,7 +174,7 @@ void Control_CycleActorSnapshotMode(void) {
         snapshot->savedActorId = D_8013B2BC;
         options = &D_80145040.game;
         if (options->local == 0) {
-            player = Player_GetFirstPlayer(&D_80145040);
+            player = Playerai_GetFirstPlayer(&D_80145040);
             if (player != 0) {
                 if (snapshot->mode == 1 &&
                     (D_8013B2BC != ((Shared_ActorView *)player)->spawn ||

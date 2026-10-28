@@ -31,14 +31,14 @@ s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
 
     var_s2 = 0;
     var_s0 = 3;
-    func_802B9C14_de();
+    __osSiGetAccess();
     do {
         __osPfsRequestData(0U);
         __osSiRawStartDma(1, (u8 *)&D_80154110);
         osRecvMesg(arg0, &sp20, 1);
         temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);
         osRecvMesg(arg0, &sp20, 1);
-        Pfs_DecodeControllerStatusReplies(&sp24, &sp10);
+        Items_DecodeControllerStatusReplies(&sp24, &sp10);
         var_a0 = 0;
         if (D_8014D46C[0] != 0) {
             var_v1 = &sp10;
@@ -68,7 +68,7 @@ loop_3:
             var_v1_2 += 4;
         } while (var_a0_2 < (s32) D_8014D46C[0]);
     }
-    func_802B9C80_de();
+    __osSiRelAccess();
     *arg1 = var_s2;
     return temp_s6;
 }
@@ -80,7 +80,7 @@ INCLUDE_ASM("ovl_80400000", Items_QueryControllerPresence);
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern void __osPfsRequestData(u8);
 
-s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
+s32 Items_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     EntryRecAt3 data[4];
     void *dummy;
     u8 bitpattern;
@@ -89,14 +89,14 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     s32 ret;
     s32 patternmask = 0;
     s32 retry = 3;
-    func_802B9C14_de();
+    __osSiGetAccess();
     do {
         __osPfsRequestData(0);
         __osSiRawStartDma(1, &D_80154110);
         osRecvMesg(queue, &dummy, 1);
         ret = __osSiRawStartDma(0, &D_80154110);
         osRecvMesg(queue, &dummy, 1);
-        Pfs_DecodeControllerStatusReplies(&bitpattern, data);
+        Items_DecodeControllerStatusReplies(&bitpattern, data);
         for (i = 0; i < D_8014D46C[0]; i++) {
             if (!(data[i].team & 4)) {
                 retry--;
@@ -109,7 +109,7 @@ s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     for (i = 0; i < *count; i++) {
         if (data[i].slot == 0 && (data[i].team & 1)) patternmask |= 1 << i;
     }
-    func_802B9C80_de();
+    __osSiRelAccess();
     *pattern = patternmask;
     return ret;
 }
@@ -158,7 +158,7 @@ void __osPfsRequestData(u8 cmd) {
     *ptr = 0xFE;
 }
 
-void Pfs_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data) {
+void Items_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

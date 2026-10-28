@@ -2,7 +2,7 @@
 #define COMMON_ROUND_STATE_VARIANTS_H
 #include "TYPES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void TextLoad_ResetArtsendTextureState(void), TEngine_UpdateArtsendTexturePreview(void);
+extern void TextLoad_ResetArtsendTextureState(void), Tengine_UpdateArtsendTexturePreview(void);
 extern s32 D_800D2970;
 extern f32 D_800CA5C4, D_800C54D8_de;
 extern void InitFrontendMenus(void), Tsmos_InitializeEuropeanFrontend(void);

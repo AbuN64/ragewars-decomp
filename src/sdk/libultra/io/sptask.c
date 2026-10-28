@@ -33,13 +33,13 @@ OSTask *_VirtualToPhysicalTask(OSTask *intp)
     OSTask *task = &D_80148800;
     tp = task;
     func_802BD3A0_de(task, intp, sizeof(OSTask));
-    if (task->t.ucode != 0) { task->t.ucode = (void *)func_802BBBC0_de(task->t.ucode); } (void)0;
-    if (task->t.ucode_data != 0) { task->t.ucode_data = (void *)func_802BBBC0_de(task->t.ucode_data); } (void)0;
-    if (task->t.dram_stack != 0) { task->t.dram_stack = (void *)func_802BBBC0_de(task->t.dram_stack); } (void)0;
-    if (task->t.output_buff != 0) { task->t.output_buff = (void *)func_802BBBC0_de(task->t.output_buff); } (void)0;
-    if (task->t.output_buff_size != 0) { task->t.output_buff_size = (void *)func_802BBBC0_de(task->t.output_buff_size); } (void)0;
-    if (task->t.data_ptr != 0) { task->t.data_ptr = (void *)func_802BBBC0_de(task->t.data_ptr); } (void)0;
-    if (task->t.yield_data_ptr != 0) { task->t.yield_data_ptr = (void *)func_802BBBC0_de(task->t.yield_data_ptr); } (void)0;
+    if (task->t.ucode != 0) { task->t.ucode = (void *)osVirtualToPhysical(task->t.ucode); } (void)0;
+    if (task->t.ucode_data != 0) { task->t.ucode_data = (void *)osVirtualToPhysical(task->t.ucode_data); } (void)0;
+    if (task->t.dram_stack != 0) { task->t.dram_stack = (void *)osVirtualToPhysical(task->t.dram_stack); } (void)0;
+    if (task->t.output_buff != 0) { task->t.output_buff = (void *)osVirtualToPhysical(task->t.output_buff); } (void)0;
+    if (task->t.output_buff_size != 0) { task->t.output_buff_size = (void *)osVirtualToPhysical(task->t.output_buff_size); } (void)0;
+    if (task->t.data_ptr != 0) { task->t.data_ptr = (void *)osVirtualToPhysical(task->t.data_ptr); } (void)0;
+    if (task->t.yield_data_ptr != 0) { task->t.yield_data_ptr = (void *)osVirtualToPhysical(task->t.yield_data_ptr); } (void)0;
     return tp;
 }
 
@@ -57,7 +57,7 @@ void osSpTaskLoad(OSTask *intp) {
         }
     }
     func_802BD280_de(block, 0x40);
-    func_802BA100_de(0x2B00);
+    Audio_WriteSignalProcessorStatus(0x2B00);
     do {
         result = func_802BA0D0_de(0x04001000);
     } while (result == -1);
@@ -75,5 +75,5 @@ void osSpTaskLoad(OSTask *intp) {
 void osSpTaskStartGo(void) {
     do {
     } while (__osSpDeviceBusy() != 0);
-    func_802BA100_de(0x125U);
+    Audio_WriteSignalProcessorStatus(0x125U);
 }

@@ -10,7 +10,7 @@ extern void Audio_DecodeFrame(void *arg0);
 
 
 
-void *func_802C016C_de(void) {
+void *Audio_NextDecodedSampleBlock(void) {
     struct DecodeState *base = &D_8014BA38_de;
     unsigned short *counter;
     char *slots;
@@ -33,11 +33,11 @@ void *func_802C016C_de(void) {
 }
 
 /** Return the global state word. */
-unsigned int func_802C020C_de(void) {
+unsigned int Audio_GetDecodeFramesRemaining(void) {
     return D_8014BA38_de.count;
 }
 
 /** Clear the global word at VRAM 0x80151CD8. */
-void func_802C021C_de(void) {
+void Audio_ClearDecodeFramesRemaining(void) {
     D_8014BA38_de.count = 0;
 }

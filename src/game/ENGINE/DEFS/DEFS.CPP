@@ -51,9 +51,9 @@ extern UnitLight D_8010C0A0[];
 
 extern char D_8013B1A8;
 
-extern LightNode *DynLight_GetFirstLight(void *);
+extern LightNode *Gdynlight_GetFirstLight(void *);
 
-extern LightNode *DynLight_GetNextLight(void *, LightNode *);
+extern LightNode *Gdynlight_GetNextLight(void *, LightNode *);
 
 u32 Defs_GetMemorySize(void) {
     if (D_80000318 > 0x7FFFFFU) {
@@ -183,7 +183,7 @@ s32 Defs_FindSortedValue(void *entries, s32 arg1, s32 arg2) {
     return -1;
 }
 
-s32 func_80265550_de(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last) {
+s32 Defs_FindSortedGroupRange(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last) {
     u32 temp_v1;
     u32 var_a3;
     s32 var_t0;
@@ -388,7 +388,7 @@ void Defs_SetupPointLights(char *view) {
     s32 i;
     s32 x;
 
-    node = DynLight_GetFirstLight(&D_8013B1A8);
+    node = Gdynlight_GetFirstLight(&D_8013B1A8);
     if (node == 0) {
         Gfx *g = g_displayListCursor++;
         gSPGeometryMode(g, 0x80, 0);
@@ -418,7 +418,7 @@ void Defs_SetupPointLights(char *view) {
             D_8010C0A0[i + D_8010C4A0].falloff = -0x8000;
         }
         if (node != 0) {
-            node = DynLight_GetNextLight(&D_8013B1A8, node);
+            node = Gdynlight_GetNextLight(&D_8013B1A8, node);
         }
         {
             Gfx *g = g_displayListCursor++;

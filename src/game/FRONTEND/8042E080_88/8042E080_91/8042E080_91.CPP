@@ -24,7 +24,7 @@ s32 Frontend_AcknowledgePage67Event(void) {
 }
 
 /* 8042E080_93.CPP */
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D8 clears D_80146894, calls Tsmos_DeactivateControllerState, then calls Frontend_StartMenuImageTransition on D_800E5558 when ScenarioSetup_StartRandomCupStage reports non-zero or else func_8040C428_de with zero and SmXlate_SwitchScreen with 0x14; 0x3D9 calls SmXlate_SwitchScreen with one. Returns zero.
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D8 clears D_80146894, calls Tsmos_DeactivateControllerState, then calls Frontend_StartMenuImageTransition on D_800E5558 when ScenarioSetup_StartRandomCupStage reports non-zero or else func_8040C428_de with zero and SmXlate_SwitchScreen with 0x14; 0x3D9 calls SmXlate_SwitchScreen with one. Returns zero.
    Adapted from Frontend_ActivatePauseMenuAction with the message numbers and the arms changed. */
 extern s32 D_800E5558;
 extern void Tsmos_DeactivateControllerState(void);
@@ -42,7 +42,7 @@ enum { MENU_8043659C_984 = 984, MENU_8043659C_985 = 985 };
 
 s32 Frontend_HandlePage67Choice(void) {
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
     case MENU_8043659C_985:
         SmXlate_SwitchScreen(1);
         return 0;

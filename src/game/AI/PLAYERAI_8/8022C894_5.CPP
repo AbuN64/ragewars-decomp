@@ -63,12 +63,12 @@ extern struct EntryPlayerHasLinkedWorldFlagSix *Scene_GetModelRecordByIndexPoint
 
 
 
-f32 Player_EvaluateCubicComplement(f32 curveInput) {
+f32 Playerai_EvaluateCubicComplement(f32 curveInput) {
     f32 temp = D_800C2DD4_de - curveInput;
     return D_800C2DD4_de - (temp * temp * temp);
 }
 
-void Player_InitializeStateBlendTarget(Player *player) {
+void Playerai_InitializeStateBlendTarget(Player *player) {
     float temp = player->state708;
     float k = D_800C7EC8;
     player->state714 = 0;
@@ -76,7 +76,7 @@ void Player_InitializeStateBlendTarget(Player *player) {
     player->state710 = k;
 }
 
-void Player_InitializeStateBlendToZero(Player *player) {
+void Playerai_InitializeStateBlendToZero(Player *player) {
     float temp = player->state708;
     player->state710 = 0;
     player->state714 = 0;
@@ -96,7 +96,7 @@ void func_8022DC14_de(void) {
 
 
 
-s32 Player_IsSpeedAboveThreshold(Shared_ActorView *actor) {
+s32 Playerai_IsSpeedAboveThreshold(Shared_ActorView *actor) {
     f32 field = actor->speed;
     f32 konst = D_800C2DDC_de;
     s32 result = 1;
@@ -106,7 +106,7 @@ s32 Player_IsSpeedAboveThreshold(Shared_ActorView *actor) {
     return result;
 }
 
-void Player_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused, s32 *flags) {
+void Playerai_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused, s32 *flags) {
     s32 held;
     s32 crouch;
     f32 target;
@@ -152,7 +152,7 @@ void Player_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused,
     }
 }
 
-void Player_UpdateActionTransitionBlend(Shared_ActorView *actor) {
+void Playerai_UpdateActionTransitionBlend(Shared_ActorView *actor) {
     f32 sp10;
     f32 var_f1;
     f32 var_f2;
@@ -175,7 +175,7 @@ clamp:
     actor->transitionBlend = actor->transitionBlend + var_f2;
 }
 
-void Player_AdjustHeightForCollision(Player *player, LevelActor *actor) {
+void Playerai_AdjustHeightForCollision(Player *player, LevelActor *actor) {
     CVector3 next;
     f32 temp_f0;
     f32 temp_f1;
@@ -209,7 +209,7 @@ void Player_AdjustHeightForCollision(Player *player, LevelActor *actor) {
     player->heightDelta += var_f23;
 }
 
-void Player_UpdateWeaponEffectBlend(void *arg0) {
+void Playerai_UpdateWeaponEffectBlend(void *arg0) {
     f32 target;
     char *effect;
     s32 state;
@@ -239,7 +239,7 @@ void Player_UpdateWeaponEffectBlend(void *arg0) {
     }
 }
 
-void Player_ApplyRangedPitchToMatrix(void *matrix, void *arg1) {
+void Playerai_ApplyRangedPitchToMatrix(void *matrix, void *arg1) {
     ObjRecAt1AV1 *range;
     ObjRecAt724 *actor;
     s32 value;
@@ -266,7 +266,7 @@ void Player_ApplyRangedPitchToMatrix(void *matrix, void *arg1) {
     PitchMatrix(matrix, amount / (f32)range->unk1A);
 }
 
-s32 Player_HasLinkedWorldFlagSix(struct func_80204468_S3 *object) {
+s32 Playerai_HasLinkedWorldFlagSix(struct func_80204468_S3 *object) {
     struct EntryPlayerHasLinkedWorldFlagSix *entry;
 
     if (object->unk14 != 0) {

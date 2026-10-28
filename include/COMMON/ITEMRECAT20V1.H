@@ -106,8 +106,8 @@ struct FieldRow {
 struct FieldRow;
 typedef struct FieldRow FieldRow;
 
-struct Menu_func_8043E494_de;
-typedef struct Menu_func_8043E494_de Menu_func_8043E494_de;
+struct MenuCMenuProfileUpdateProfileModeLabel;
+typedef struct MenuCMenuProfileUpdateProfileModeLabel MenuCMenuProfileUpdateProfileModeLabel;
 
 struct Clip;
 struct Clip {
@@ -704,11 +704,11 @@ struct OwnerRecAt5D8V2 {
 struct func_8022BC04_S3;
 typedef struct func_8022BC04_S3 func_8022BC04_S3;
 
-struct Rec_func_8024C92C_de;
-typedef struct Rec_func_8024C92C_de Rec_func_8024C92C_de;
+struct RecGobjinstSampleBoneTranslation;
+typedef struct RecGobjinstSampleBoneTranslation RecGobjinstSampleBoneTranslation;
 
-struct Rec_func_8024C92C_de;
-struct Rec_func_8024C92C_de {
+struct RecGobjinstSampleBoneTranslation;
+struct RecGobjinstSampleBoneTranslation {
     s32 x;
     s32 y;
     s32 z;
@@ -873,8 +873,8 @@ struct TextBoundsText;
 struct MenuStyle;
 /* The draw style menu item callbacks receive last: alpha and fade scale the item's intensity. */
 struct MenuStyle {
-    /* The same record Pak_DrawStyledMenuText draws through as its fourth argument (func_8043FFAC_S2), and
-       Multi_DrawNameCursor reads its id at +0x1C. */
+    /* The same record Menu_DrawStyledMenuText draws through as its fourth argument (func_8043FFAC_S2), and
+       Setup_DrawNameCursor reads its id at +0x1C. */
     s16 state;
     s16 x; /* 0x02 */
     s16 y; /* 0x04 */
@@ -1035,20 +1035,20 @@ union func_8022E280_S1_U744 {
     f32 v1;
 };
 
-struct Record_func_8043E494_de;
-struct Record_func_8043E494_de {
+struct RecordCMenuProfileUpdateProfileModeLabel;
+struct RecordCMenuProfileUpdateProfileModeLabel {
     char pad[0x7B];
     s8 mode;
 };
 
-struct Owner_func_8043E494_de;
-struct Record_func_8043E494_de;
-struct Owner_func_8043E494_de {
+struct OwnerCMenuProfileUpdateProfileModeLabel;
+struct RecordCMenuProfileUpdateProfileModeLabel;
+struct OwnerCMenuProfileUpdateProfileModeLabel {
     char pad[0x5D8];
-    struct Record_func_8043E494_de *record;
+    struct RecordCMenuProfileUpdateProfileModeLabel *record;
 };
-struct Menu_func_8043E494_de;
-struct Owner_func_8043E494_de;
+struct MenuCMenuProfileUpdateProfileModeLabel;
+struct OwnerCMenuProfileUpdateProfileModeLabel;
 
 
 struct CellRecAt1A;
@@ -1119,12 +1119,12 @@ struct BufferPool {
     s32 dirty;
 };
 
-struct Node_func_80239AF4_de;
-typedef struct Node_func_80239AF4_de Node_func_80239AF4_de;
+struct NodeGskyActivateMessagePool;
+typedef struct NodeGskyActivateMessagePool NodeGskyActivateMessagePool;
 
-struct Node_func_80239AF4_de;
-struct Node_func_80239AF4_de {
-    struct Node_func_80239AF4_de *next;
+struct NodeGskyActivateMessagePool;
+struct NodeGskyActivateMessagePool {
+    struct NodeGskyActivateMessagePool *next;
 };
 
 struct ShapeCode802B54A0;
@@ -1847,8 +1847,8 @@ struct ObjRecAtDC;
 struct func_80284AF4_G2;
 typedef struct func_80284AF4_G2 func_80284AF4_G2;
 
-struct Obj_func_802B3EDC_de;
-struct Obj_func_802B3EDC_de {
+struct ObjalAuxBusParam;
+struct ObjalAuxBusParam {
     char pad14[0x14];
     s32 count;
     char pad18[0x4];
@@ -2584,8 +2584,8 @@ struct func_8024C5C4_S2 {
 };
 
 
-struct Obj_func_802B3EDC_de;
-typedef struct Obj_func_802B3EDC_de Obj_func_802B3EDC_de;
+struct ObjalAuxBusParam;
+typedef struct ObjalAuxBusParam ObjalAuxBusParam;
 
 
 struct ParamsRecAt8V1;

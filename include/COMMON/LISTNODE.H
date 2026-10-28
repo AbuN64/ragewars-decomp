@@ -99,22 +99,22 @@ struct ObjectLinks8;
 
 extern float D_800C8FF8;
 
-struct Node_func_80259918_de;
-struct Node_func_80259918_de {
-    struct Node_func_80259918_de *prev;
-    struct Node_func_80259918_de *next;
+struct NodeAudioWorldRecyclePendingSoundsExceptKey;
+struct NodeAudioWorldRecyclePendingSoundsExceptKey {
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *prev;
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *next;
     char pad08[0xB0 - 0x8];
     s32 key;
 };
 
-struct Node_func_80259918_de;
+struct NodeAudioWorldRecyclePendingSoundsExceptKey;
 struct OwnerRecAtD8;
 struct OwnerRecAtD8 {
     s32 unk00;
-    struct Node_func_80259918_de *activePrev;
-    struct Node_func_80259918_de *activeNext;
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *activePrev;
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *activeNext;
     char pad0C[0xD8 - 0xC];
-    struct Node_func_80259918_de *otherPrev;
+    struct NodeAudioWorldRecyclePendingSoundsExceptKey *otherPrev;
 };
 
 struct Glyphs;
@@ -155,10 +155,10 @@ typedef struct Cache Cache;
 
 extern float D_800C3F00_de;
 
-struct Node_func_802598B4_de;
-struct Node_func_802598B4_de {
-    struct Node_func_802598B4_de *prev;
-    struct Node_func_802598B4_de *next;
+struct NodeAudioWorldRecyclePendingSoundsByIdentifier;
+struct NodeAudioWorldRecyclePendingSoundsByIdentifier {
+    struct NodeAudioWorldRecyclePendingSoundsByIdentifier *prev;
+    struct NodeAudioWorldRecyclePendingSoundsByIdentifier *next;
     s32 unused;
     s32 value;
 };
@@ -181,16 +181,16 @@ typedef struct ObjectLinks2B50 ObjectLinks2B50;
 
 struct CellCode802591C0;
 
-struct Node_func_802598B4_de;
-typedef struct Node_func_802598B4_de Node_func_802598B4_de;
+struct NodeAudioWorldRecyclePendingSoundsByIdentifier;
+typedef struct NodeAudioWorldRecyclePendingSoundsByIdentifier NodeAudioWorldRecyclePendingSoundsByIdentifier;
 
-struct Node_func_802598B4_de;
+struct NodeAudioWorldRecyclePendingSoundsByIdentifier;
 
 
-struct Entry_func_80259440_de;
-struct Entry_func_80259440_de {
-    struct Entry_func_80259440_de *prev;
-    struct Entry_func_80259440_de *next;
+struct EntryAudioWorldDispatchPendingSounds;
+struct EntryAudioWorldDispatchPendingSounds {
+    struct EntryAudioWorldDispatchPendingSounds *prev;
+    struct EntryAudioWorldDispatchPendingSounds *next;
     char body[0x10];
     s32 frame;
     s32 delay;
@@ -236,9 +236,9 @@ struct NodeRecAtC8 {
     s32 mix;
 };
 
-struct Link_func_80259260_de;
+struct LinkAudioWorldQueuePrioritizedSound;
 struct NodeRecAtC8;
-struct Link_func_80259260_de {
+struct LinkAudioWorldQueuePrioritizedSound {
     struct NodeRecAtC8 *prev;
     struct NodeRecAtC8 *next;
 };
@@ -253,13 +253,13 @@ typedef struct ObjRecAt1E64 ObjRecAt1E64;
 
 
 
-struct Link_func_80259260_de;
-typedef struct Link_func_80259260_de Link_func_80259260_de;
+struct LinkAudioWorldQueuePrioritizedSound;
+typedef struct LinkAudioWorldQueuePrioritizedSound LinkAudioWorldQueuePrioritizedSound;
 
 struct ManagerRecAtD8V1;
 
-struct Node_func_80259918_de;
-typedef struct Node_func_80259918_de Node_func_80259918_de;
+struct NodeAudioWorldRecyclePendingSoundsExceptKey;
+typedef struct NodeAudioWorldRecyclePendingSoundsExceptKey NodeAudioWorldRecyclePendingSoundsExceptKey;
 
 struct ManagerRecAtD8V1;
 typedef struct ManagerRecAtD8V1 ManagerRecAtD8V1;
@@ -285,11 +285,11 @@ struct ChannelSet {
 struct NodeRecAtC8;
 typedef struct NodeRecAtC8 NodeRecAtC8;
 
-struct Entry_func_80259440_de;
+struct EntryAudioWorldDispatchPendingSounds;
 struct ListHead;
 struct ListHead {
-    struct Entry_func_80259440_de *prev;
-    struct Entry_func_80259440_de *next;
+    struct EntryAudioWorldDispatchPendingSounds *prev;
+    struct EntryAudioWorldDispatchPendingSounds *next;
 };
 
 struct ListHead;
@@ -310,8 +310,8 @@ struct OwnerRecAtD8;
 typedef struct OwnerRecAtD8 OwnerRecAtD8;
 
 
-struct Entry_func_80259440_de;
-typedef struct Entry_func_80259440_de Entry_func_80259440_de;
+struct EntryAudioWorldDispatchPendingSounds;
+typedef struct EntryAudioWorldDispatchPendingSounds EntryAudioWorldDispatchPendingSounds;
 
 
 struct NodeRecAt4C;

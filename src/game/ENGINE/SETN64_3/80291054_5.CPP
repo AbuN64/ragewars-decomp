@@ -28,7 +28,7 @@ static inline u32 averageFour(void) {
  { s32 adjusted=maximum-2; return ((u32)sum-(u32)adjusted)/3; }
 }
 static inline s32 idlePause(TimingWorld *world) {
- if(Pak_CountLiveNodes(&D_8014561C)==0 && Cinema_IsSequenceInWindow()!=0 && Cinema_GetSequenceRequest()==120) {
+ if(Menu_CountLiveNodes(&D_8014561C)==0 && Cinema_IsSequenceInWindow()!=0 && Cinema_GetSequenceRequest()==120) {
  if(D_801462C8.counters.first==0) {
  if(world->unk26DD4==0) { D_801462C8.counters.first=1;func_804037D4_de(); }
  goto checkFlag;
@@ -69,7 +69,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
     u64 elapsedUnits;
     u64 temp_v0;
 
-    nowTicks = func_802BADC0_de();
+    nowTicks = Audio_ReadSystemTime();
     elapsedUnits = __udivdi3((nowTicks-D_801428A0)<<6,3000);
 #if defined(VERSION_DE)
     scaledFrameTime = (f32)elapsedUnits * D_800C546C * D_800C5470;
@@ -81,7 +81,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
         if (SetN64_IsModeThirteen() == 0) {
             world->unk26DD4 = 0;
         } else {
-            world->unk26DD4 = Pak_CountLiveNodes(&world->viewport.self.messageList.head);
+            world->unk26DD4 = Menu_CountLiveNodes(&world->viewport.self.messageList.head);
         }
     }
     if (D_80154048 != 0) {
@@ -116,7 +116,7 @@ block_10:
         D_800D2988 = D_800D2988 * D_800CA560;
     }
 #endif
-    func_80253344_de(0);
+    Cache_RunCompactionPasses(0);
     D_80146CD8 = D_8011FAC0.ring.current;
     SetN64_BuildAndSubmitSessionFrame(world);
     world->unk26DB0 = world->unk26DB0 + D_800D2988;

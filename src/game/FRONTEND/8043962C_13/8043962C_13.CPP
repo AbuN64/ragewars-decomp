@@ -124,7 +124,7 @@ unsigned int rodata_unresolved_800DDF68[2] = {
 
 /* 8043962C_14.CPP */
 /* Initializes the six object parameters and clears its transient state. */
-s32 Frontend_SetPreviewModel(void *, s32);
+s32 Model_SetPreviewModel(void *, s32);
 
  /* extern */
 
@@ -138,8 +138,8 @@ s32 Frontend_InitModelPreviewTransform(StateFrontendInitModelPreviewTransform *p
     preview->unk28 = 0;
     preview->unk2C = 0;
     preview->unk30 = 0;
-    Frontend_SetPreviewModel(preview, modelId);
-    Frontend_SetPreviewRenderFlags(preview, 0);
+    Model_SetPreviewModel(preview, modelId);
+    Model_SetPreviewRenderFlags(preview, 0);
     return preview->unk34;
 }
 

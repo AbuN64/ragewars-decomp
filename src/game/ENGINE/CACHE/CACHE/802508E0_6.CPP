@@ -12,7 +12,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 
-/* Activates a load request: moves it from the pending to the active list and, when its node is set, looks its key up in the request hash table; an existing request with lower priority is removed from the table and finished, releasing its node's data and node when nothing else holds them, while an existing request with at least the same priority wins and this request's node is released and the request finished, returning the existing one; otherwise, or after replacing, the request is inserted, owns its node and optionally drops the node's pending reference. The hash lookup and node release are the inline forms of func_802517B4_de's lookup and func_80254AD0_de. */
+/* Activates a load request: moves it from the pending to the active list and, when its node is set, looks its key up in the request hash table; an existing request with lower priority is removed from the table and finished, releasing its node's data and node when nothing else holds them, while an existing request with at least the same priority wins and this request's node is released and the request finished, returning the existing one; otherwise, or after replacing, the request is inserted, owns its node and optionally drops the node's pending reference. The hash lookup and node release are the inline forms of Cache_RetainResourceByKey's lookup and Cache_ReleasePendingResourceEntry. */
 
 
 
@@ -61,7 +61,7 @@ static inline void release(s32 node) {
     *(&D_80100570 + 0x2F3) += 1;
 }
 
-ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference) {
+ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference) {
     ResourceLoadRequest *existing;
     CachedResource *node;
 
@@ -77,11 +77,11 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
                     func_80255B2C_de(&D_801051A0, existing->node->data);
                     release((s32)existing->node);
                 }
-                func_80254E88_de(0, existing);
+                Cache_RecycleLoadRequest(0, existing);
             } else {
                 func_80255B2C_de(&D_801051A0, request->node->data);
                 release((s32)request->node);
-                func_80254E88_de(0, request);
+                Cache_RecycleLoadRequest(0, request);
                 return existing;
             }
         }
@@ -95,7 +95,7 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
         }
         return request;
     }
-    func_80254E88_de(0, request);
+    Cache_RecycleLoadRequest(0, request);
     return 0;
 }
 

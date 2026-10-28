@@ -56,8 +56,8 @@ extern void Tsmos_ActivateControllerState();
    (word at D_800E0658) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. */
+   through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Results_ShowTrialPreviewBanner and
+   Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. */
 
 
 
@@ -74,8 +74,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E065C) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Results_ShowTrialPreviewBanner and
+   Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -87,8 +87,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E0654) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Results_ShowTrialPreviewBanner and
+   Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -100,8 +100,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E0650) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Results_ShowTrialPreviewBanner and
+   Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -110,9 +110,9 @@ extern s32 Defs_TestBit(u8 *, s32);
 
 
 
-/* Calls MarkMenuEventHandled and Frontend_HideTrialCatalogueWidgets, passes the two words after the identifier in the
-   28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to Frontend_SetSelectedStage, then
-   calls Frontend_SetMenuChoiceResult with 0x19. Returns zero. */
+/* Calls MarkMenuEventHandled and Results_HideTrialCatalogueWidgets, passes the two words after the identifier in the
+   28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to Random_SetSelectedStage, then
+   calls Random_SetMenuChoiceResult with 0x19. Returns zero. */
 
 
 
@@ -124,7 +124,7 @@ extern struct EntryRecAt8V3 D_800E4694[];
    word+2 (the table symbol D_800E0646_de) is only its low half on big-endian MIPS. */
 #define entryWindowKey(index) ((u16)D_800E4694[index].id)
 
-extern void Frontend_SetSelectedStage(s32, s32);
+extern void Random_SetSelectedStage(s32, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4D84, an actor kind at D_800E4D88 and a handler at D_800E4D8C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -138,7 +138,7 @@ typedef s32 (*Handler804290E8)(void *, s32, s32, s32, s32);
 
 extern Handler804290E8 D_800E4E28;
 
-void func_80428700_de(void) {
+void CTrialCatalogue_ShowTrialOptionChildren(void) {
     s32 id = 0;
     s32 option;
 
@@ -164,7 +164,7 @@ void func_80428700_de(void) {
     }
 }
 
-s32 func_804287B8_de(void) {
+s32 CTrialCatalogue_CloseTrialOptionsScreen(void) {
     Cache_FreeMemory(D_800E4690);
     Tsmos_ActivateControllerState();
     D_800E4690 = 0;
@@ -172,7 +172,7 @@ s32 func_804287B8_de(void) {
     return 0;
 }
 
-s32 func_804287F8_de(void *first, void *second, u32 event, s32 value) {
+s32 CTrialCatalogue_HandleTrialOptionRelease(void *first, void *second, u32 event, s32 value) {
     ResultsOptionsScreen *state;
 
     if ((event >> 16) == 3 && value == 0) {
@@ -210,15 +210,15 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    Frontend_RefreshTrialSelectionLabel();
+    Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        Frontend_ShowTrialPreviewBanner();
+        Results_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        Frontend_UpdateResultsHeading();
+        Results_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
-        Frontend_RefreshTrialCharacterPreview();
+        Results_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -248,15 +248,15 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    Frontend_RefreshTrialSelectionLabel();
+    Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        Frontend_ShowTrialPreviewBanner();
+        Results_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        Frontend_UpdateResultsHeading();
+        Results_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
-        Frontend_RefreshTrialCharacterPreview();
+        Results_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -286,15 +286,15 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    Frontend_RefreshTrialSelectionLabel();
+    Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        Frontend_ShowTrialPreviewBanner();
+        Results_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        Frontend_UpdateResultsHeading();
+        Results_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
-        Frontend_RefreshTrialCharacterPreview();
+        Results_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -324,34 +324,34 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    Frontend_RefreshTrialSelectionLabel();
+    Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        Frontend_ShowTrialPreviewBanner();
+        Results_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        Frontend_UpdateResultsHeading();
+        Results_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
-        Frontend_RefreshTrialCharacterPreview();
+        Results_RefreshTrialCharacterPreview();
     }
     return 0;
 }
 
-s32 func_80428DE0_de(void) {
+s32 CTrialCatalogue_ExitTrialCatalogue(void) {
     MarkMenuEventHandled();
-    Frontend_HideTrialCatalogueWidgets();
-    Frontend_SetMenuChoiceResult(0xE);
+    Results_HideTrialCatalogueWidgets();
+    Random_SetMenuChoiceResult(0xE);
     return 0;
 }
 
-s32 func_80428E10_de(void) {
+s32 CTrialCatalogue_ConfirmTrialStage(void) {
     s32 selection;
 
     MarkMenuEventHandled();
-    Frontend_HideTrialCatalogueWidgets();
+    Results_HideTrialCatalogueWidgets();
     selection = D_800E4690->selection;
-    Frontend_SetSelectedStage(D_800E4694[selection].first, D_800E4694[selection].second);
-    Frontend_SetMenuChoiceResult(0x19);
+    Random_SetSelectedStage(D_800E4694[selection].first, D_800E4694[selection].second);
+    Random_SetMenuChoiceResult(0x19);
     return 0;
 }
 

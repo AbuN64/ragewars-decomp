@@ -31,7 +31,7 @@ INCLUDE_ASM("span_1000", func_80204030_eu);
 #if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
-extern u8 *Player_FindTransientPlayer(u8 *);
+extern u8 *Playerai_FindTransientPlayer(u8 *);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
 /* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
@@ -51,7 +51,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     u32 t1;
     switch (kind) {
     case 0x64E:
-        player = Player_FindTransientPlayer((u8 *)&D_80145040);
+        player = Playerai_FindTransientPlayer((u8 *)&D_80145040);
         if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
             table = (u8 *)&D_80145040 + 0x1860;
             if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
@@ -72,7 +72,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
         if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
             return;
         }
-        player = Player_FindTransientPlayer((u8 *)&D_80145040);
+        player = Playerai_FindTransientPlayer((u8 *)&D_80145040);
         if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
             return;
         }

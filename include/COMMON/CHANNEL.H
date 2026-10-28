@@ -19,12 +19,12 @@ extern float D_800C8658;
 
 extern float D_800C3598_de;
 
-extern void func_80239D00_de(struct Channel *arg0, float arg1, int arg2);
+extern void Gsky_SetShakeChannel(struct Channel *arg0, float arg1, int arg2);
 
 
 
 
-extern void func_8023940C_de(char *object);
+extern void Gsky_StartFadeModeOne(char *object);
 
 
 struct Channel;
@@ -44,7 +44,7 @@ struct RecordRecAt18 {
 };
 
 
-extern void func_80239D90_de(void *arg0);
+extern void Gsky_InitializeShakeRecord(void *arg0);
 
 
 struct IntegerStateF24;
@@ -56,16 +56,16 @@ extern float D_800C3548_de;
 
 extern float D_800C3570_de;
 
-extern int func_8023941C_de(void *arg0);
+extern int Gsky_StartFadeModeTwo(void *arg0);
 
 
 
 struct ScreenMessagePool;
-extern void func_80239AF4_de(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1);
+extern void Gsky_ActivateMessagePool(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1);
 
 extern void func_8023A24C_de(void *arg0);
 
-extern s32 func_80239E48_de(s32 arg0);
+extern s32 Gsky_UpdateShakeRecord(s32 arg0);
 
 
 
@@ -99,16 +99,16 @@ extern double D_800C3550_de;
 extern void func_80239FCC_de(void);
 
 
-extern void func_80239CEC_de(void *arg0);
+extern void Gsky_InitializeShakeChannel(void *arg0);
 
 
 extern float D_800C865C;
 
 
 struct Wave;
-extern f32 func_80239D1C_de(struct Wave *wave);
+extern f32 Gsky_SampleShakeWave(struct Wave *wave);
 
-struct Node_func_80239AF4_de;
+struct NodeGskyActivateMessagePool;
 
 extern float D_800C8668;
 
@@ -118,7 +118,7 @@ extern void func_8023A114_de(void *arg0, s32 arg1);
 
 
 struct RecordRecAt18;
-extern void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode, Triple triple);
+extern void Gsky_SetShakeRecord(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode, Triple triple);
 
 
 extern void func_8023A190_de(void *arg0, int arg1);

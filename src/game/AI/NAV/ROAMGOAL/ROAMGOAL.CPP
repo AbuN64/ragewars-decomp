@@ -7,7 +7,7 @@
 extern s32 D_8013B364;
 
 
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 
 
 
@@ -38,7 +38,7 @@ void Nav_SelectFlaggedRoamingGoal(void *arg0)
         index = 0;
         if (table[1] > 0) {
             do {
-                if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, index)) & 0x800) {
+                if (navigation_point_flags((NavigationPoint *)Portal_GetGraphPoint(table, index)) & 0x800) {
                     choices[count] = index;
                     count++;
                 }
@@ -58,7 +58,7 @@ void Nav_SelectFlaggedRoamingGoal(void *arg0)
 loop:
             if (tries < 10) {
                 candidate = GraphU64_NextRandom() % table[1];
-                if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, candidate)) & 0x400) {
+                if (navigation_point_flags((NavigationPoint *)Portal_GetGraphPoint(table, candidate)) & 0x400) {
                     candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
                 }
                 tries++;

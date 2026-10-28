@@ -14,7 +14,7 @@ s32 osContStartQuery(s32 completionQueue) {
     s32 result;
     u8 *p;
 
-    func_802B9C14_de();
+    __osSiGetAccess();
     p = &D_8014D4B0;
     if (*p != 0) {
         __osPackRequestData(0);
@@ -23,7 +23,7 @@ s32 osContStartQuery(s32 completionQueue) {
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     *p = 0;
-    func_802B9C80_de();
+    __osSiRelAccess();
     return result;
 }
 

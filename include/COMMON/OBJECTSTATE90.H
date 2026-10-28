@@ -131,7 +131,7 @@ typedef struct ObjRecAtB8 {
     int unkB8;
 } ObjRecAtB8;
 
-extern void Player_ApplyDamageOverTime(struct Shared_ActorView *player, void *source);
+extern void Playerai_ApplyDamageOverTime(struct Shared_ActorView *player, void *source);
 
 extern s32 func_8022C460_de(void *);
 

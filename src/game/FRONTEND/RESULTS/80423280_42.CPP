@@ -32,8 +32,8 @@ extern void XPlus_CopyString(void *, s32);
 
 extern struct EntryRecAt0V1 D_800E4694[];
 
-/* Returns one when the two arguments are equal or when any of the sixty-four 12-byte pairs of D_800E4A84 holds exactly that ordered pair, zero otherwise.
-   Adapted from func_8041F1D8_de with the single-key slot scan changed to an ordered-pair lookup over 64 twelve-byte entries. */
+/* Returns one when the two arguments are equal or when any of the sixty-four 12-byte pairs of g_arenaCompatibilityTable holds exactly that ordered pair, zero otherwise.
+   Adapted from Key_GetCharacterPreviewModel with the single-key slot scan changed to an ordered-pair lookup over 64 twelve-byte entries. */
 
 
 
@@ -57,11 +57,11 @@ extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidge
 
 
 
-extern void Frontend_SetTrialWeaponRow(s32, s32, s32);
+extern void Results_SetTrialWeaponRow(s32, s32, s32);
 
-/* Rebuilds the item list for the player D_800E4690 selects: clears it through func_80428700_de, looks
+/* Rebuilds the item list for the player D_800E4690 selects: clears it through CTrialCatalogue_ShowTrialOptionChildren, looks
    up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
-   at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through Frontend_SetTrialWeaponRow when
+   at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through Results_SetTrialWeaponRow when
    Player_HasProfileUnlockFlag accepts it for the player's 400-byte record in D_80102B00. */
 
 
@@ -77,9 +77,9 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
-/* Rebuilds the weapon menu for the player D_800E4690 selects: clears it through func_80428700_de, then
+/* Rebuilds the weapon menu for the player D_800E4690 selects: clears it through CTrialCatalogue_ShowTrialOptionChildren, then
    for each of the 0x16 weapon ids (excluding id 0) whose owned flag in D_801462C8 (offset 0x11C,
-   player stride 0x96) is set, appends a row through Frontend_SetTrialWeaponRow. */
+   player stride 0x96) is set, appends a row through Results_SetTrialWeaponRow. */
 
 
 
@@ -87,9 +87,9 @@ extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 
 
-extern void Frontend_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
+extern void Results_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
 
-/* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through Frontend_SetTrialWeaponRow, translated by 0x4C3 and numbered in order. */
+/* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through Results_SetTrialWeaponRow, translated by 0x4C3 and numbered in order. */
 
 
 
@@ -97,9 +97,9 @@ extern void Frontend_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
 
 extern RecordFrontendFillTrialPresetWeaponRows *Scene_GetBlLevelData(void *table, s32 key);
 
-extern void Frontend_SetTrialWeaponRow(s32 slot, s32 item, s32 arg2);
+extern void Results_SetTrialWeaponRow(s32 slot, s32 item, s32 arg2);
 
-void Frontend_RefreshTrialSelectionLabel(void) {
+void Results_RefreshTrialSelectionLabel(void) {
     char buffer[0x40];
 
     Scene_CopyLevelName(&g_world, D_800E4690->selection, buffer, 0x3F);
@@ -107,7 +107,7 @@ void Frontend_RefreshTrialSelectionLabel(void) {
     D_800E4690->owner->unk38 = D_800E4690->text;
 }
 
-s32 Frontend_FindTrialValueIndex(s32 id) {
+s32 Results_FindTrialValueIndex(s32 id) {
     s32 i;
 
     for (i = 0; i < 0x24; i++) {
@@ -118,21 +118,21 @@ s32 Frontend_FindTrialValueIndex(s32 id) {
     return 0;
 }
 
-s32 Frontend_IsUnlockLinked(s32 a, s32 b) {
+s32 Results_IsUnlockLinked(s32 a, s32 b) {
     s32 i;
 
     if (a == b) {
         return 1;
     }
     for (i = 0; i < 64; i++) {
-        if (D_800E4A84[i].a == a && D_800E4A84[i].b == b) {
+        if (g_arenaCompatibilityTable[i].a == a && g_arenaCompatibilityTable[i].b == b) {
             return 1;
         }
     }
     return 0;
 }
 
-void Frontend_ShowTrialPreviewBanner(void) {
+void Results_ShowTrialPreviewBanner(void) {
     (D_800E4690->banner)->alpha = 0xFF;
     (D_800E4690->bannerShadow)->alpha = 0xFF;
     Frontend_SetWidgetFlag08(D_800E4690->bannerShadow, 1);
@@ -140,7 +140,7 @@ void Frontend_ShowTrialPreviewBanner(void) {
     D_800E4690->blinking = 0;
 }
 
-void Frontend_FillTwoPlayerWeaponRows(void) {
+void Results_FillTwoPlayerWeaponRows(void) {
     Shared_Game *st;
     s32 n;
     s32 k;
@@ -155,7 +155,7 @@ void Frontend_FillTwoPlayerWeaponRows(void) {
             j = 0;
             for (i = 0; i < 0x16; i++) {
                 if (((base = &D_801462C8)->playerSettings[n].weapons[i] == 1) && (i != 0)) {
-                    Frontend_SetTrialWeaponRow(j, i, k);
+                    Results_SetTrialWeaponRow(j, i, k);
                     j++;
                 }
             }
@@ -167,14 +167,14 @@ void Frontend_FillTwoPlayerWeaponRows(void) {
     }
 }
 
-void Frontend_FillProfileWeaponRows(void) {
+void Results_FillProfileWeaponRows(void) {
     struct Model *model;
     s32 player;
     s32 id;
     s32 row;
     s32 i;
 
-    func_80428700_de();
+    CTrialCatalogue_ShowTrialOptionChildren();
     player = D_800E4690->player;
     model = Scene_FindActorDefinition(&g_world, 0xB, D_801462C8.playerSettings[player].character);
     row = 0;
@@ -183,38 +183,38 @@ void Frontend_FillProfileWeaponRows(void) {
         if (id >= 0x4C3) {
             id -= 0x4C3;
             if (Player_HasProfileUnlockFlag(&D_80102B00[player * 400], id) == 1 && id != 0) {
-                Frontend_SetTrialWeaponRow(row, id, 0);
+                Results_SetTrialWeaponRow(row, id, 0);
                 row++;
             }
         }
     }
 }
 
-void Frontend_FillSelectedPlayerWeaponRows(void) {
+void Results_FillSelectedPlayerWeaponRows(void) {
     s32 count;
     s32 weapon;
     s32 base;
 
-    func_80428700_de();
+    CTrialCatalogue_ShowTrialOptionChildren();
     count = 0;
     base = D_800E4690->player * 0x96;
     for (weapon = 0; weapon < 0x16; weapon++) {
         if (((EntryRecAt11C *)(weapon + base + (u8 *)&D_801462C8))->owned == 1) {
             if (weapon != 0) {
-                Frontend_SetTrialWeaponRow(count, weapon, 0);
+                Results_SetTrialWeaponRow(count, weapon, 0);
                 count += 1;
             }
         }
     }
 }
 
-void Frontend_FillTrialPresetWeaponRows(s32 key) {
+void Results_FillTrialPresetWeaponRows(s32 key) {
     RecordFrontendFillTrialPresetWeaponRows *record;
     s32 count;
     s32 i;
     s32 item;
 
-    func_80428700_de();
+    CTrialCatalogue_ShowTrialOptionChildren();
     record = Scene_GetBlLevelData(&g_world, key);
     count = 0;
     for (i = 0; i < 8; i++) {
@@ -222,7 +222,7 @@ void Frontend_FillTrialPresetWeaponRows(s32 key) {
         if (item >= 0x4C3) {
             item -= 0x4C3;
             if (item != 0) {
-                Frontend_SetTrialWeaponRow(count, item, 0);
+                Results_SetTrialWeaponRow(count, item, 0);
                 count++;
             }
         }

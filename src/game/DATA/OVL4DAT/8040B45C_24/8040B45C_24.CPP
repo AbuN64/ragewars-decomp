@@ -29,7 +29,7 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
 
     item = Frontend_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
-    if (Smos_GetPreviousScreenOwner(0) == 22) {
+    if (Menu_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
     }
 
@@ -41,10 +41,10 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     D_800E39C0->rows[1] = item;
     item = Frontend_FindWidgetByResourceId(root, 0x396);
     D_800E39C0->rows[2] = item;
-    D_800E39C0->step = Frontend_CountUsedSlots();
+    D_800E39C0->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
-        Frontend_UpdateJoinRequestDisplay(row);
+        Join_UpdateJoinRequestDisplay(row);
         item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }

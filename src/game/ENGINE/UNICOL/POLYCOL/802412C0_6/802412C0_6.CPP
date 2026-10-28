@@ -89,10 +89,10 @@ void PolyCol_TraceMeshDisplayList(ContextB0 *context, void *resource) {
 }
 
 /* 80241940_5.CPP */
-extern void GraphU64_CrossVectors(CVector3*,CVector3*,CVector3*);
+extern void Graphu64_CrossVectors(CVector3*,CVector3*,CVector3*);
 
 void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
-    extern s32 func_8023E8D4_de(CapsuleSweep*,Polygon_func_8023E8D4_de*,s32);
+    extern s32 CCollision_TestSegmentPolygon(CapsuleSweep*,PolygonCCollisionTestSegmentPolygon*,s32);
     CVector3 vertex;
     CVector3 edgeA;
     CVector3 edgeB;
@@ -129,7 +129,7 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     } while(i<3);
     GraphU64_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
     GraphU64_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
-    GraphU64_CrossVectors(&polygon.normal,&edgeB,&edgeA);
+    Graphu64_CrossVectors(&polygon.normal,&edgeB,&edgeA);
     GraphU64_NormalizeVec3(&polygon.normal);
     surface=ray->surface;
     polygon.input=mesh->element;
@@ -143,7 +143,7 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
         polygon.type=6;
         polygon.response=surface->WaterFriction;
         polygon.kind=7;
-        func_8023E8D4_de(ray,&polygon,1);
+        CCollision_TestSegmentPolygon(ray,&polygon,1);
         polygon.type=5;
         polygon.kind=(surface->dwFlags&0x100000)?7:surface->GroundBehavior;
         if(polygon.normal.y!=0.0f) shift=ray->height;
@@ -175,9 +175,9 @@ flatFace:
     }
 dispatch:
     if((u32)(polygon.type-5)<2) {
-        func_8023DF70_de(ray,0,ray->radius,&polygon,1);
+        CCollision_TestOffsetPolygon(ray,0,ray->radius,&polygon,1);
     } else if(ray->radius==0.0f && ray->secondaryRadius==0.0f) {
-        func_8023E8D4_de(ray,&polygon,1);
+        CCollision_TestSegmentPolygon(ray,&polygon,1);
     } else {
         offset.x=0.0f;
         offset.y=ray->radius;
@@ -192,7 +192,7 @@ dispatch:
                 goto sweep;
             } else if((u32)(polygon.type-1)>=2) {
 sweep:
-                func_8023DF70_de(ray,&offset,ray->radius,&polygon,1);
+                CCollision_TestOffsetPolygon(ray,&offset,ray->radius,&polygon,1);
             }
 skipSweep:
             offset.y+=mesh->step;

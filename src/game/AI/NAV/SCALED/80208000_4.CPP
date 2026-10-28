@@ -17,19 +17,19 @@ extern void func_8022B144_de(void *, f32 *);
 
 extern void Nav_ResetPlayerState(s32 *state);
 
-f32 GraphU64_GetPointDistance(f32 *, f32 *);
+f32 Graphu64_GetPointDistance(f32 *, f32 *);
 
-extern void *Nav_GetGraphPoint(void *, s32);
+extern void *Portal_GetGraphPoint(void *, s32);
 
 extern CNavData D_8013B364;
 
 
 extern void **D_80103FCC;
 
-extern s32 func_802444A4_de(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3);
+extern s32 CCollision_SweepPoint(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3);
 
 /* Revives a player whose down timer at 0x1340 has run past its limit (30 ticks, or 900 in
-   control modes 12 and 15 while D_80146938 asks): clears the timer and calls Ovlgame_PlacePlayerForRound
+   control modes 12 and 15 while D_80146938 asks): clears the timer and calls Player_PlacePlayerForRound
    unless the session at 0x98 is running and the player's team membership at 0x94 and control
    mode disagree, or it is teamless and active outside session mode 3. */
 
@@ -41,9 +41,9 @@ extern s32 func_802444A4_de(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3
 
 
 
-extern void Ovlgame_PlacePlayerForRound(SharedPlayer *);
+extern void Player_PlacePlayerForRound(SharedPlayer *);
 
-void Nav_UpdateTargetPitch(Brain *object) {
+void Scaled_UpdateTargetPitch(Brain *object) {
     void *memory = object;
     PitchBrain *brain = memory;
     CVector3 origin, delta;
@@ -80,12 +80,12 @@ void Nav_UpdateTargetPitch(Brain *object) {
 }
 
 /* Stores the player, then resets its AI state using the same pointer. */
-void Nav_InitPlayerState(int *state, int player) {
+void Scaled_InitPlayerState(int *state, int player) {
     *state = player;
     Nav_ResetPlayerState(state);
 }
 
-void Nav_ClearNodeQueue(AiController *arg0)
+void Scaled_ClearNodeQueue(AiController *arg0)
 {
     s32 i;
     s32 empty;
@@ -100,7 +100,7 @@ void Nav_ClearNodeQueue(AiController *arg0)
 /* Pops the front of a four-entry queue at offset 0x14 of a record: shifts the entries down one,
    marks the last empty with -1 and returns whether an entry remains at the front. */
 
-s32 Nav_AdvanceNodeQueue(AiController *queue) {
+s32 Scaled_AdvanceNodeQueue(AiController *queue) {
     s32 i;
 
     for (i = 1; i < 4; i++) {
@@ -111,11 +111,11 @@ s32 Nav_AdvanceNodeQueue(AiController *queue) {
 }
 
 /** Store the second argument at byte offset 0x214 in the first argument. */
-void Nav_SetBehaviorTable(AiController *object, AiBehaviourTable *value) {
+void Scaled_SetBehaviorTable(AiController *object, AiBehaviourTable *value) {
     object->table = value;
 }
 
-s32 Nav_SetBehaviourState(AiController *controller, s32 behaviourId) {
+s32 Scaled_SetBehaviourState(AiController *controller, s32 behaviourId) {
     AiBehaviourTable *node;
     AiBehaviourEntry *entry;
     AiBehaviourEntry *found;
@@ -145,23 +145,23 @@ s32 Nav_SetBehaviourState(AiController *controller, s32 behaviourId) {
     return 1;
 }
 
-void Nav_SetPitchFromAngle(AiController *controller, float amount) {
+void Scaled_SetPitchFromAngle(AiController *controller, float amount) {
     float result = amount * D_800C1C88_de;
     if (controller != 0) {
         controller->player->pitch = -result;
     }
 }
 
-CVector3 *Nav_GetControllerPosition(AiController *controller) {
+CVector3 *Scaled_GetControllerPosition(AiController *controller) {
     return &controller->player->pos;
 }
 
-f32 Nav_DistanceToNode(AiController *controller, s32 nodeId) {
-    return GraphU64_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, nodeId));
+f32 Scaled_DistanceToNode(AiController *controller, s32 nodeId) {
+    return Graphu64_GetPointDistance(&controller->player->pos.x, Portal_GetGraphPoint(&D_8013B364, nodeId));
 }
 
 /** Reset three state words and set the final state to one. */
-void Nav_ResetBehaviorState(void *object) {
+void Scaled_ResetBehaviorState(void *object) {
     AiController *controller = object;
     controller->unk2F4 = 0;
     controller->unk2F8 = 0;
@@ -169,7 +169,7 @@ void Nav_ResetBehaviorState(void *object) {
 }
 
 /** Clear five consecutive object words beginning at offset 0x300. */
-void Nav_ClearAuxiliaryBehaviorState(AiController *controller) {
+void Scaled_ClearAuxiliaryBehaviorState(AiController *controller) {
     controller->unk300 = 0;
     controller->unk304 = 0;
     controller->unk308 = 0;
@@ -177,7 +177,7 @@ void Nav_ClearAuxiliaryBehaviorState(AiController *controller) {
     controller->unk310 = 0;
 }
 
-s32 Nav_HasLineOfSight(Player **fromRef, Player *target) {
+s32 Scaled_HasLineOfSight(Player **fromRef, Player *target) {
     CVector3 first;
     CVector3 second;
 
@@ -189,13 +189,13 @@ s32 Nav_HasLineOfSight(Player **fromRef, Player *target) {
     second = target->pos;
     first.y += D_800C1C8C_de;
     second.y += D_800C1C8C_de;
-    if (func_802444A4_de(*fromRef, first, second, &D_80103FD0) != 0) {
+    if (CCollision_SweepPoint(*fromRef, first, second, &D_80103FD0) != 0) {
         return *D_80103FCC == target;
     }
     return 1;
 }
 
-s32 Nav_MatchesBehaviorStateFilter(AiController *controller) {
+s32 Scaled_MatchesBehaviorStateFilter(AiController *controller) {
     s32 state;
 
     state = controller->state;
@@ -224,7 +224,7 @@ int func_80209AD8_de(AiController *object) {
     return object->state == 8;
 }
 
-f32 Nav_GetDifficultyEngagementAdjustment(AiController *arg0)
+f32 Scaled_GetDifficultyEngagementAdjustment(AiController *arg0)
 {
   Player *object;
     AiCharacterDefinition *definition;
@@ -260,7 +260,7 @@ f32 Nav_GetDifficultyEngagementAdjustment(AiController *arg0)
 
 }
 
-f32 Nav_GetScaledAggression(AiController *controller) {
+f32 Scaled_GetScaledAggression(AiController *controller) {
     f32 value;
     u8 difficulty;
     Player *player;
@@ -286,7 +286,7 @@ f32 Nav_GetScaledAggression(AiController *controller) {
     return value;
 }
 
-f32 Nav_ScaleCharacterSettingByDifficulty(AiController *controller) {
+f32 Scaled_ScaleCharacterSettingByDifficulty(AiController *controller) {
     f32 difficultyScale;
     f32 value;
     u8 difficulty;
@@ -315,7 +315,7 @@ done:
     return value;
 }
 
-f32 Nav_GetScaledAttackRange(AiController *controller) {
+f32 Scaled_GetScaledAttackRange(AiController *controller) {
     f32 difficultyScale;
     f32 value;
     u8 difficulty;
@@ -344,7 +344,7 @@ multiply:
     return value;
 }
 
-void Nav_HandlePlayerTimeout(SharedPlayer **brain) {
+void Scaled_HandlePlayerTimeout(SharedPlayer **brain) {
     s32 limit;
     Controls *controls;
     CGameStatus *session;
@@ -369,21 +369,21 @@ void Nav_HandlePlayerTimeout(SharedPlayer **brain) {
             controls = (*brain)->views5D8.view5D8_2.controls;
             if (controls->team == 0) {
                 if (controls->active == 0 || session->m_nTalsetLives == 3) {
-                    Ovlgame_PlacePlayerForRound(*brain);
+                    Player_PlacePlayerForRound(*brain);
                 }
             } else {
                 mode = controls->mode;
                 if (mode == 0xC || mode == 0xF) {
-                    Ovlgame_PlacePlayerForRound(*brain);
+                    Player_PlacePlayerForRound(*brain);
                 }
             }
         } else {
-            Ovlgame_PlacePlayerForRound(*brain);
+            Player_PlacePlayerForRound(*brain);
         }
     }
 }
 
-f32 Nav_UpdateDifficultyAimJitter(void *aiController) {
+f32 Scaled_UpdateDifficultyAimJitter(void *aiController) {
     AiController *brain = aiController;
     f32 aim;
     f32 aimLimit;

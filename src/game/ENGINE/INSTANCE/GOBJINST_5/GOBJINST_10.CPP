@@ -12,7 +12,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 /* Finds the hit box of an object nearest a point: with the object's bone matrices (0xB4, else 0xB8) and its
- * hit-box resource from func_8024BFD4_de, each box whose mask matches the object's mask 0x17C has the average
+ * hit-box resource from Gobjinst_RequestAnimatedModelVariant, each box whose mask matches the object's mask 0x17C has the average
  * of its eight corners carried through its bone matrix, and the box whose center lies nearest the point is
  * copied out, taking weight 1 for a controlled actor unless the global option D_801462E5 is set. The
  * resource is released afterwards; returns whether a box was found. */
@@ -24,7 +24,7 @@
 
 
 
-extern s32 *func_8024BFD4_de(char *, s8);
+extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
 
 
@@ -50,7 +50,7 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 extern void func_802466A0_de(void *, u16, u16, s32, void *, s32, s32, f32,
                           CVector3, u8, CVector3, CVector3, s32);
 
-s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
+s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     CVector3 center;
     CVector3 diff;
     f32 matrix[16];
@@ -72,7 +72,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
             return 0;
         }
     }
-    resource = func_8024BFD4_de(obj, ((struct ObjectLinks180_2 *) obj)->unk_1);
+    resource = Gobjinst_RequestAnimatedModelVariant(obj, ((struct ObjectLinks180_2 *) obj)->unk_1);
     if (resource == 0) {
         return 0;
     }
@@ -157,7 +157,7 @@ selected:
     }
 }
 
-void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32 index) {
+void Gobjinst_InitializePlacedActor(void *actorStorage, InputRecAt27 *placement, s32 mode, s32 index) {
     void *resource0;
     s32 resource1;
     s32 lookup;
@@ -183,9 +183,9 @@ void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32
                   *(CVector3 *)placement->vec10, zero, lookup);
 }
 
-void func_8024B4F4_de(void *actorStorage, int model) {
+void Gobjinst_UpdateModelBounds(void *actorStorage, int model) {
     Actor36 *actor = actorStorage;
     func_8024B4E4_de_FuncPtr fn = actor->update;
     fn(actorStorage, actor->state);
-    GraphU64_TransformBoundingBox(actor->matrix, model, &actor->box);
+    Graphu64_TransformBoundingBox(actor->matrix, model, &actor->box);
 }

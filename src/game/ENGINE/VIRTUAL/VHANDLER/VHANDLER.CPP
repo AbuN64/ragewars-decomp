@@ -40,7 +40,7 @@ static inline void fill(void *dst, u8 value, s32 n) {
     }
 }
 
-void Virtual_InitializePagerEuroExtended(void) {
+void Vhandler_InitializePagerEuroExtended(void) {
     u32 extra;
     u32 i;
 

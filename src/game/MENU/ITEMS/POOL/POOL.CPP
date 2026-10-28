@@ -10,7 +10,7 @@
 
 
 
-void Items_InitEntryPool(ObjRecAt8C8 *pool) {
+void Pool_InitEntryPool(ObjRecAt8C8 *pool) {
     s32 i;
     struct EntryCode8044ACCC *entry;
 

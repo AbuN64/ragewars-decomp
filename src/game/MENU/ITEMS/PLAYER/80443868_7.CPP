@@ -29,7 +29,7 @@ s32 Player_GetPlayerIndex(int *, s32);
  /* const */
 extern void Control_EnableControllerPak(s32 kind);
 extern s32 D_800E28C0[];
-void Items_ConfigureAndProbeControllerPak(ArgRecAt1C *arg0) {
+void Player_ConfigureAndProbeControllerPak(ArgRecAt1C *arg0) {
     s32 temp_a1;
     s32 var_s0;
     ActorRecAt260 *temp_a0;
@@ -69,7 +69,7 @@ void Items_ConfigureAndProbeControllerPak(ArgRecAt1C *arg0) {
 
                           /* const */
 
-void Items_ConfigureControllerPakMenu(ArgRecAt1C *arg0) {
+void Player_ConfigureControllerPakMenu(ArgRecAt1C *arg0) {
     s32 temp_a1;
     s32 var_v0;
     ActorRecAt260 *temp_a0;

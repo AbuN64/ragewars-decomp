@@ -24,7 +24,7 @@ extern s32 D_80142C38;
 
 extern void osSetEventMesg(s32 slot, char *row, s32 text);
 
-extern void func_802BA650_de(char *row, s32 text, s32 style);
+extern void System_SetVideoEvent(char *row, s32 text, s32 style);
 
 extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
 
@@ -38,25 +38,25 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
     s32 temp_s5;
     s32 temp_v0_2;
     s32 state;
-    s32 var_s1;
+    s32 availableProcessors;
 
-    var_s1 = arg3;
+    availableProcessors = arg3;
     gfxListHead = arg0->gfxListHead;
     audioListHead = arg0->audioListHead;
-    temp_s5 = var_s1;
-    if ((arg0->doAudio != 0) && (var_s1 & 2)) {
+    temp_s5 = availableProcessors;
+    if ((arg0->doAudio != 0) && (availableProcessors & 2)) {
         if ((gfxListHead == 0) || !(gfxListHead->flags & 0x10)) {
             *arg1 = audioListHead;
             arg0->doAudio = 0;
             next = arg0->audioListHead->next;
-            var_s1 &= ~2;
+            availableProcessors &= ~2;
             arg0->audioListHead = next;
             if (next == 0) {
                 arg0->audioListTail = 0;
             }
         } else {
             *arg1 = gfxListHead;
-            var_s1 &= ~2;
+            availableProcessors &= ~2;
         }
     } else {
         if (gfxListHead == 0) {
@@ -79,23 +79,23 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
                 break;
             case 3:
                 if (gfxListHead->state & 0x20) {
-                    if (var_s1 & 2) {
+                    if (availableProcessors & 2) {
                         *arg1 = gfxListHead;
-                        var_s1 &= ~2;
+                        availableProcessors &= ~2;
                         if (gfxListHead->state & 1) {
                             *arg2 = gfxListHead;
-                            var_s1 &= ~1;
+                            availableProcessors &= ~1;
                         }
                         arg0->gfxListHead = arg0->gfxListHead->next;
                         if (arg0->gfxListHead == 0) {
                             arg0->gfxListTail = 0;
                         }
                     }
-                } else if (var_s1 == 3) {
+                } else if (availableProcessors == 3) {
                     *arg2 = gfxListHead;
                     *arg1 = gfxListHead;
                     arg0->gfxListHead = arg0->gfxListHead->next;
-                    var_s1 = 0;
+                    availableProcessors = 0;
                     if (arg0->gfxListHead == 0) {
                         arg0->gfxListTail = 0;
                     }
@@ -106,14 +106,14 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
             case 7:
                 state = gfxListHead->state;
                 if (state & 2) {
-                    if (var_s1 & 2) {
+                    if (availableProcessors & 2) {
                         *arg1 = gfxListHead;
-                        var_s1 &= ~2;
+                        availableProcessors &= ~2;
                     }
-                } else if ((state & 1) && (var_s1 & 1)) {
+                } else if ((state & 1) && (availableProcessors & 1)) {
                     *arg2 = gfxListHead;
                     arg0->gfxListHead = arg0->gfxListHead->next;
-                    var_s1 &= ~1;
+                    availableProcessors &= ~1;
                     if (arg0->gfxListHead == 0) {
                         arg0->gfxListTail = 0;
                     }
@@ -122,13 +122,13 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
             }
         }
     }
-    if (var_s1 != temp_s5) {
-        var_s1 = Sched_SelectRunnableTasks(arg0, arg1, arg2, var_s1);
+    if (availableProcessors != temp_s5) {
+        availableProcessors = Sched_SelectRunnableTasks(arg0, arg1, arg2, availableProcessors);
     }
-    return var_s1;
+    return availableProcessors;
 }
 
-void Sched_InitializeSchedulerThread(Panel *panel, s32 arg1, s32 priority, s32 arg3, unsigned char style) {
+void Sched_InitializeSchedulerThread(Panel *panel, s32 threadStack, s32 priority, s32 arg3, unsigned char style) {
     panel->active = 1;
     panel->field2F4 = 0;
     panel->field2F8 = 0;
@@ -145,7 +145,7 @@ void Sched_InitializeSchedulerThread(Panel *panel, s32 arg1, s32 priority, s32 a
     osSetEventMesg(4, panel->row0, 0x29B);
     osSetEventMesg(9, panel->row0, 0x29C);
     osSetEventMesg(0xE, panel->row0, 0x29D);
-    func_802BA650_de(panel->row0, 0x29A, style);
-    osCreateThread(panel->elements, 7, &D_0028E930, panel, arg1, priority);
+    System_SetVideoEvent(panel->row0, 0x29A, style);
+    osCreateThread(panel->elements, 7, &D_0028E930, panel, threadStack, priority);
     osStartThread(panel->elements);
 }

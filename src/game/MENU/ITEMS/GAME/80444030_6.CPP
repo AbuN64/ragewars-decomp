@@ -32,7 +32,7 @@ extern char D_8010B0E0;
 
 
 
-/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from Items_AdjustPlayerOption7E with the settings byte made the signed byte at 0x7B. */
+/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from Items_AdjustPlayerOption7E with the settings byte made the signed byte at 0x7B. */
 
 
 
@@ -42,7 +42,7 @@ extern char D_8010B0E0;
 
 
 
-extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
+extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 /* Points an option field at the text D_800D75E0 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75E4 when it is one, returning zero. Adapted from Items_SelectPlayerOption7EText with the settings byte made the signed byte at 0x7B and the texts changed. */
 
@@ -58,7 +58,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7C of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. */
+/* Replaces the byte at offset 0x7C of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. */
 
 
 
@@ -81,7 +81,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7D changed. */
+/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7D changed. */
 
 
 
@@ -105,7 +105,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7E changed. */
+/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7E changed. */
 
 
 
@@ -129,13 +129,13 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the option byte D_801462E3 with what Pak_AdjustValue returns for the second argument, that
+/* Replaces the option byte D_801462E3 with what Menu_AdjustValue returns for the second argument, that
    byte, 1, 0, 2 and 1, and returns zero. */
 
 
 
 
-/* Replaces the option byte D_801462E7 with what Pak_AdjustValue returns for the second argument, that
+/* Replaces the option byte D_801462E7 with what Menu_AdjustValue returns for the second argument, that
    byte, 1, 0, 1 and 1, and returns zero. */
 
 /* Updates the menu item visibility and text for the current configuration. */
@@ -202,7 +202,7 @@ s32 Items_AdjustPlayerOption7B(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7B = Pak_AdjustValue(holder, settings->option7B, 1, 0, 1, 1);
+    settings->option7B = Menu_AdjustValue(holder, settings->option7B, 1, 0, 1, 1);
     return 0;
 }
 
@@ -229,7 +229,7 @@ s32 Items_AdjustPlayerOption7C(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7C = Pak_AdjustValue(holder, settings->option7C, 1, 0, 1, 1);
+    settings->option7C = Menu_AdjustValue(holder, settings->option7C, 1, 0, 1, 1);
     return 0;
 }
 
@@ -256,7 +256,7 @@ s32 Items_AdjustPlayerOption7D(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7D = Pak_AdjustValue(holder, settings->option7D, 1, 0, 1, 1);
+    settings->option7D = Menu_AdjustValue(holder, settings->option7D, 1, 0, 1, 1);
     return 0;
 }
 
@@ -283,7 +283,7 @@ s32 Items_AdjustPlayerOption7E(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7E = Pak_AdjustValue(holder, settings->option7E, 1, 0, 1, 1);
+    settings->option7E = Menu_AdjustValue(holder, settings->option7E, 1, 0, 1, 1);
     return 0;
 }
 
@@ -307,7 +307,7 @@ s32 Items_SelectPlayerOption7EText(struct Field *field, struct ActorRecAt1C *hol
 s32 Items_AdjustFirstListMode(void *first, void *second) {
     u8 *option = &D_801462C8.firstListMode;
 
-    *option = Pak_AdjustValue(second, *option, 1, 0, 2, 1);
+    *option = Menu_AdjustValue(second, *option, 1, 0, 2, 1);
     return 0;
 }
 
@@ -331,7 +331,7 @@ s32 Items_SelectFirstListModeText(struct FieldRecAt14 *field) {
 s32 Items_AdjustGameOption1F(void *first, void *second) {
     u8 *option = &D_801462C8.unknown1F;
 
-    *option = Pak_AdjustValue(second, *option, 1, 0, 1, 1);
+    *option = Menu_AdjustValue(second, *option, 1, 0, 1, 1);
     return 0;
 }
 

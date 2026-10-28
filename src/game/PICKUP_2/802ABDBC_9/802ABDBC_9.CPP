@@ -163,7 +163,7 @@ struct Shared_FullPlayerMenuGlobals {
 void Player_IncrementLevelProgress(void *, int);
 
 s32 XPlus_NextRandomInteger(void);
-s32 Menu_RequestTrackByKey(s32);
+s32 Track_RequestTrackByKey(s32);
 typedef CPersistentPlayerData PlayerMenuData;
 extern PlayerMenuData D_80102B00[];
 typedef Shared_MenuBonusColumn MenuBonusColumn;
@@ -229,13 +229,13 @@ typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
    (0x1398..0x13C1). A handled pickup then flashes the view, posts the row text, plays its sound and raises its
    event. Returns 1 when handled. */
 
-s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
+s32 Pickup_ApplySpecialPickup(ObjRecV4 *recipientActor, ObjRecV9 *arg1) {
     f32 temp_f20;
     f32 loopBonus; 
     f32 old_unk11E4;
     f32 temp_alpha; 
     f32 temp_duration; 
-    s32 temp_s1;
+    s32 soundId;
     s32 temp_s3;
     s16 temp_v1;
     s32 temp_fp; 
@@ -246,22 +246,22 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     s32 temp_v0_5;
     s32 temp_v1_3;
     s32 temp_v1_4;
-    register s32 var_s1;
+    register s32 playerIndex;
     s32 var_s3;
-    s32 var_s4;
+    s32 handled;
     u8 **temp_s0_2;
     u8 temp_a0;
-    void *temp_a1;
-    void *temp_a1_10;
+    void *messageCamera;
+    void *messageCamera10;
     void *temp_a1_11; 
-    void *temp_a1_2;
-    void *temp_a1_3;
-    void *temp_a1_4;
-    void *temp_a1_5;
-    void *temp_a1_6;
-    void *temp_a1_7;
-    void *temp_a1_8;
-    void *temp_a1_9;
+    void *messageCamera2;
+    void *messageCamera3;
+    void *messageCamera4;
+    void *messageCamera5;
+    void *messageCamera6;
+    void *messageCamera7;
+    void *messageCamera8;
+    void *messageCamera9;
     ObjRecV3 *temp_s0;
     ObjRecV3 **loopEntries;
     FullPlayerMenuGlobals *menuGlobals;
@@ -269,8 +269,8 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     ObjRecV12 *commandMenuData;
     ObjRecV13 *temp_v1_2;
 
-    var_s4 = 0;
-    if (arg0->unk5E4 > 0) {
+    handled = 0;
+    if (recipientActor->unk5E4 > 0) {
         temp_v1 = arg1->unk4;
         {
             if (temp_v1 < 0x139F) {
@@ -287,25 +287,25 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
                         goto command_done;
                     }
                     if (temp_v1 < 0x1398) {
-                        var_s4 = 1;
+                        handled = 1;
                         if (temp_v1 >= 0x138B) goto mark_handled;
                         goto block_126;
                     }
                     goto case_1398;
                 }
-                var_s4 = 1;
+                handled = 1;
                 goto command_done;
             }
             if (temp_v1 < 0x13AB) {
                 if (temp_v1 < 0x13A9) {
                     if (temp_v1 == 0x13A0) goto case_13A0;
                     if (temp_v1 < 0x13A0) goto case_139F;
-                    if (temp_v1 < 0x13A8) var_s4 = 1;
+                    if (temp_v1 < 0x13A8) handled = 1;
                     goto command_done;
                 }
                 goto mark_handled;
             }
-            if (temp_v1 == 0x13BC) { var_s4 = 1; goto command_done; }
+            if (temp_v1 == 0x13BC) { handled = 1; goto command_done; }
             if (temp_v1 < 0x13BD) {
                 if (temp_v1 == 0x13AD) goto mark_handled;
                 goto command_done;
@@ -314,17 +314,17 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
             if (temp_v1 == 0x13C1) goto case_13C1;
             goto command_done;
 case_BD6:
-                temp_v1_2 = arg0->unk5D8;
+                temp_v1_2 = recipientActor->unk5D8;
                 temp_a0 = temp_v1_2->unk8F;
                 if ((temp_a0 == 1) && ((commandMenuData = &D_80140F84.game.view.modes)->unk54 != 0)) {
                     temp_v1_2->unk8F = 0U;
-                    arg0->unk5D8->unk90 = temp_a0;
+                    recipientActor->unk5D8->unk90 = temp_a0;
                     commandMenuData->unk74 = 2;
                     D_800C91B8_de = func_8025E2C4_de();
                     if (func_8025E2C4_de() != 0) {
                         func_8025E2D4_de(0x3D);
                     }
-                    var_s4 = 1;
+                    handled = 1;
                 }
                 goto command_done;
 case_BD7:
@@ -336,22 +336,22 @@ case_BD7:
 #endif
                 listMenuData->unk84 = 0;
                 listMenuData->unk80 = 1;
-                arg0->unk5D8->unk8F = 1U;
+                recipientActor->unk5D8->unk8F = 1U;
                 temp_s0 = D_80140F84.players;
-                var_s4 = 1;
+                handled = 1;
                 if (temp_s0 != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                     game = PICKUP_CONTEXT;
                     settings = &game->settings;
 #endif
                     do {
-                    if (temp_s0 != arg0) {
-                        temp_a1 = temp_s0->unk5DC;
-                        if (temp_a1 != 0) {
+                    if (temp_s0 != recipientActor) {
+                        messageCamera = temp_s0->unk5DC;
+                        if (messageCamera != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                            Camera_PostScreenMessage(game, temp_a1, D_800D30AC[settings->language]);
+                            Camera_PostScreenMessage(game, messageCamera, D_800D30AC[settings->language]);
 #else
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1, PICKUP_TEXT(D_800D30AC));
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera, PICKUP_TEXT(D_800D30AC));
 #endif
                         }
                     }
@@ -361,261 +361,261 @@ case_BD7:
                 goto command_done;
             }
 case_BD8:
-                old_unk11E4 = arg0->unk11E4;
-                arg0->unk1240 = 0.0f;
-                temp_f20 = arg0->unk1240;
-                var_s4 = 1;
-                arg0->unk123C = 0;
-                arg0->unk123D = 0;
-                arg0->unk123E = 0;
+                old_unk11E4 = recipientActor->unk11E4;
+                recipientActor->unk1240 = 0.0f;
+                temp_f20 = recipientActor->unk1240;
+                handled = 1;
+                recipientActor->unk123C = 0;
+                recipientActor->unk123D = 0;
+                recipientActor->unk123E = 0;
                 if (old_unk11E4 != temp_f20) {
-                    temp_a1_2 = arg0->unk5DC;
-                    arg0->unk11E4 = temp_f20;
-                    arg0->unk13E0 = 0;
-                    if (temp_a1_2 != 0) {
-                        Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_2, PICKUP_TEXT(D_800D31B8));
+                    messageCamera2 = recipientActor->unk5DC;
+                    recipientActor->unk11E4 = temp_f20;
+                    recipientActor->unk13E0 = 0;
+                    if (messageCamera2 != 0) {
+                        Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera2, PICKUP_TEXT(D_800D31B8));
                     }
                 } else {
-                    temp_fp = arg0->unk122C & 0x6000;
+                    temp_fp = recipientActor->unk122C & 0x6000;
                     temp_v0 = 1 << (XPlus_NextRandomInteger() % 13);
-                    arg0->unk122C = temp_v0;
+                    recipientActor->unk122C = temp_v0;
                     if (temp_v0 & 0x20) {
-                        arg0->unk1238 = -1;
-                        arg0->unk1230 = temp_f20;
+                        recipientActor->unk1238 = -1;
+                        recipientActor->unk1230 = temp_f20;
                     } else {
-                        arg0->unk1230 = 105.0f;
+                        recipientActor->unk1230 = 105.0f;
                     }
-                    temp_v1_3 = arg0->unk122C;
+                    temp_v1_3 = recipientActor->unk122C;
                     switch (temp_v1_3) {            /* switch 3; irregular */
                     case 0x1:                       /* switch 3 */
                         func_8025E11C_de(0x15E);
-                        var_s1 = 0;
-                        if (var_s1 < D_80140F84.count) {
+                        playerIndex = 0;
+                        if (playerIndex < D_80140F84.count) {
                             menuGlobals = &D_80140F84;
                             loopEntries = &menuGlobals->entries;
                             loopMenuData = &menuGlobals->game.view.modes;
                             loopBonus = 195.0f;
                             do {
-                                temp_s0 = &(*loopEntries)[var_s1];
-                                if ((temp_s0 != 0) && (temp_s0 != arg0) && (((loopMenuData->unk24) == 0) || (temp_s0->unk5D8->unk92 != arg0->unk5D8->unk92))) {
+                                temp_s0 = &(*loopEntries)[playerIndex];
+                                if ((temp_s0 != 0) && (temp_s0 != recipientActor) && (((loopMenuData->unk24) == 0) || (temp_s0->unk5D8->unk92 != recipientActor->unk5D8->unk92))) {
                                     temp_s0->unk122C = (s32) (temp_s0->unk122C | 0x2000);
                                     temp_s0->unk11DC = (f32) (temp_s0->unk11DC + loopBonus);
                                 }
-                                temp_a1_3 = temp_s0->unk5DC;
-                                if (temp_a1_3 != 0) {
-                                    Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_3, PICKUP_TEXT(D_800D3128));
+                                messageCamera3 = temp_s0->unk5DC;
+                                if (messageCamera3 != 0) {
+                                    Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera3, PICKUP_TEXT(D_800D3128));
                                 }
-                            } while (++var_s1 < D_80140F84.count);
+                            } while (++playerIndex < D_80140F84.count);
                         }
                         break;
                     case 0x2:                       /* switch 3 */
-                        arg0->unk1230 = 300.0f;
+                        recipientActor->unk1230 = 300.0f;
                         func_8025E11C_de(0x164);
-                        temp_a1_4 = arg0->unk5DC;
-                        if (temp_a1_4 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_4, PICKUP_TEXT(D_800D312C));
+                        messageCamera4 = recipientActor->unk5DC;
+                        if (messageCamera4 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera4, PICKUP_TEXT(D_800D312C));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123C = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123C = 0xFF;
                         goto block_115;
                     case 0x4:                       /* switch 3 */
-                        arg0->unk1230 = 225.0f;
+                        recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x15F);
-                        temp_a1_11 = arg0->unk5DC;
+                        temp_a1_11 = recipientActor->unk5DC;
                         if (temp_a1_11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3130));
                         }
                         break;
                     case 0x8:                       /* switch 3 */
-                        arg0->unk1230 = 150.0f;
+                        recipientActor->unk1230 = 150.0f;
                         func_8025E11C_de(0x165);
-                        temp_a1_5 = arg0->unk5DC;
-                        if (temp_a1_5 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_5, PICKUP_TEXT(D_800D3134));
+                        messageCamera5 = recipientActor->unk5DC;
+                        if (messageCamera5 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera5, PICKUP_TEXT(D_800D3134));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123C = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123C = 0xFF;
 block_114:
-                        arg0->unk123D = 0xFF;
+                        recipientActor->unk123D = 0xFF;
                         goto block_115;
                     case 0x10:                      /* switch 3 */
-                        arg0->unk1230 = 150.0f;
+                        recipientActor->unk1230 = 150.0f;
                         func_8025E11C_de(0x160);
-                        temp_a1_6 = arg0->unk5DC;
-                        if (temp_a1_6 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_6, PICKUP_TEXT(D_800D3138));
+                        messageCamera6 = recipientActor->unk5DC;
+                        if (messageCamera6 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera6, PICKUP_TEXT(D_800D3138));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123C = 0xFF;
-                        arg0->unk123E = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123C = 0xFF;
+                        recipientActor->unk123E = 0xFF;
                         goto block_115;
                     case 0x20:                      /* switch 3 */
-                        arg0->unk1230 = 180.0f;
+                        recipientActor->unk1230 = 180.0f;
                         func_8025E11C_de(0x166);
-                        temp_a1_11 = arg0->unk5DC;
+                        temp_a1_11 = recipientActor->unk5DC;
                         if (temp_a1_11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D313C));
                         }
                         break;
                     case 0x40:                      /* switch 3 */
-                        arg0->unk1230 = 225.0f;
+                        recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x161);
-                        temp_a1_11 = arg0->unk5DC;
+                        temp_a1_11 = recipientActor->unk5DC;
                         if (temp_a1_11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3140_de));
                         }
                         break;
                     case 0x80:                      /* switch 3 */
-                        arg0->unk1230 = 225.0f;
+                        recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x169);
-                        temp_a1_11 = arg0->unk5DC;
+                        temp_a1_11 = recipientActor->unk5DC;
                         if (temp_a1_11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3144));
                         }
                         break;
                     case 0x100:                     /* switch 3 */
-                        arg0->unk1230 = 450.0f;
+                        recipientActor->unk1230 = 450.0f;
                         func_8025E11C_de(0x162);
-                        temp_a1_11 = arg0->unk5DC;
+                        temp_a1_11 = recipientActor->unk5DC;
                         if (temp_a1_11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3148));
                         }
                         break;
                     case 0x200:                     /* switch 3 */
-                        arg0->unk1230 = 270.0f;
+                        recipientActor->unk1230 = 270.0f;
                         func_8025E11C_de(0x16A);
-                        temp_a1_7 = arg0->unk5DC;
-                        if (temp_a1_7 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_7, PICKUP_TEXT(D_800D3150));
+                        messageCamera7 = recipientActor->unk5DC;
+                        if (messageCamera7 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera7, PICKUP_TEXT(D_800D3150));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk1240 = temp_alpha;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk1240 = temp_alpha;
                         goto block_116;
                     case 0x400:                     /* switch 3 */
-                        arg0->unk1230 = 180.0f;
+                        recipientActor->unk1230 = 180.0f;
                         func_8025E11C_de(0x163);
-                        temp_a1_8 = arg0->unk5DC;
-                        if (temp_a1_8 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_8, PICKUP_TEXT(D_800D3154));
+                        messageCamera8 = recipientActor->unk5DC;
+                        if (messageCamera8 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera8, PICKUP_TEXT(D_800D3154));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123C = 0xFF;
-                        arg0->unk123D = 0xFF;
-                        arg0->unk123E = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123C = 0xFF;
+                        recipientActor->unk123D = 0xFF;
+                        recipientActor->unk123E = 0xFF;
                         goto block_115;
                     case 0x800:                     /* switch 3 */
-                        arg0->unk1230 = 300.0f;
+                        recipientActor->unk1230 = 300.0f;
                         func_8025E11C_de(0x168);
-                        temp_a1_9 = arg0->unk5DC;
-                        if (temp_a1_9 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_9, PICKUP_TEXT(D_800D3158));
+                        messageCamera9 = recipientActor->unk5DC;
+                        if (messageCamera9 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera9, PICKUP_TEXT(D_800D3158));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123E = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123E = 0xFF;
                         goto block_115;
                     case 0x1000:                    /* switch 3 */
-                        arg0->unk1230 = 300.0f;
+                        recipientActor->unk1230 = 300.0f;
                         func_8025E11C_de(0x15F);
-                        temp_a1_10 = arg0->unk5DC;
-                        if (temp_a1_10 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_10, PICKUP_TEXT(D_800D315C));
+                        messageCamera10 = recipientActor->unk5DC;
+                        if (messageCamera10 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera10, PICKUP_TEXT(D_800D315C));
                         }
                         temp_alpha = 255.0f;
-                        temp_duration = arg0->unk1230;
-                        arg0->unk123D = 0xFF;
+                        temp_duration = recipientActor->unk1230;
+                        recipientActor->unk123D = 0xFF;
                         goto block_115;
                     default:                        /* switch 3 */
                         goto block_default;
                     }
                     goto block_after_alpha;
 block_115:
-                    arg0->unk1240 = temp_alpha;
+                    recipientActor->unk1240 = temp_alpha;
 block_116:
-                    arg0->rightAxisValue = (f32) (temp_alpha / temp_duration);
+                    recipientActor->rightAxisValue = (f32) (temp_alpha / temp_duration);
                     goto block_after_alpha;
 block_default:
-                    temp_a1_11 = arg0->unk5DC;
+                    temp_a1_11 = recipientActor->unk5DC;
                     if (temp_a1_11 != 0) {
                         Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3160));
                     }
 block_after_alpha:
-                    arg0->unk122C = (s32) (arg0->unk122C | temp_fp);
+                    recipientActor->unk122C = (s32) (recipientActor->unk122C | temp_fp);
                 }
                 goto command_done;
 case_1398:
-                temp_v0_2 = arg0->unk5D4 * 0x190;
-                var_s4 = 1;
-                D_80102B14[arg0->unk5D4].value += 0xA;
-                arg0->unk5F8 = (u16) (arg0->unk5F8 + 0xA);
-                Menu_RequestTrackByKey(0x1F5);
+                temp_v0_2 = recipientActor->unk5D4 * 0x190;
+                handled = 1;
+                D_80102B14[recipientActor->unk5D4].value += 0xA;
+                recipientActor->unk5F8 = (u16) (recipientActor->unk5F8 + 0xA);
+                Track_RequestTrackByKey(0x1F5);
                 goto command_done;
 case_13A0:
-            temp_v0_4 = arg0->unk5D4 * 0x190;
-            var_s4 = 1;
-            D_800FEB15[arg0->unk5D4].value += 0x32;
-            arg0->unk5F4 = (u16) (arg0->unk5F4 + 0x32);
-            Menu_RequestTrackByKey(0x1F7);
+            temp_v0_4 = recipientActor->unk5D4 * 0x190;
+            handled = 1;
+            D_800FEB15[recipientActor->unk5D4].value += 0x32;
+            recipientActor->unk5F4 = (u16) (recipientActor->unk5F4 + 0x32);
+            Track_RequestTrackByKey(0x1F7);
             goto command_done;
 case_139F:
-            var_s4 = 1;
-            temp_v0_3 = arg0->unk5D4 * 0x190;
-            D_800FEB16[arg0->unk5D4].value += 0x32;
-            arg0->unk5F6 = (u16) (arg0->unk5F6 + 0x32);
-            Menu_RequestTrackByKey(0x1F6);
+            handled = 1;
+            temp_v0_3 = recipientActor->unk5D4 * 0x190;
+            D_800FEB16[recipientActor->unk5D4].value += 0x32;
+            recipientActor->unk5F6 = (u16) (recipientActor->unk5F6 + 0x32);
+            Track_RequestTrackByKey(0x1F6);
             goto command_done;
 case_13C1:
-            var_s4 = 1;
-            temp_v0_5 = arg0->unk5D4 * 0x190;
-            D_800FEB10[arg0->unk5D4].value += 0x500;
-            arg0->unk5E4 = (s32) (arg0->unk5E4 + 0x500);
-            Menu_RequestTrackByKey(0x1F8);
+            handled = 1;
+            temp_v0_5 = recipientActor->unk5D4 * 0x190;
+            D_800FEB10[recipientActor->unk5D4].value += 0x500;
+            recipientActor->unk5E4 = (s32) (recipientActor->unk5E4 + 0x500);
+            Track_RequestTrackByKey(0x1F8);
             goto command_done;
 case_1389:
-                Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
+                Player_IncrementLevelProgress(&D_80102B00[recipientActor->unk5D4], (s32) recipientActor->unk18->unkC);
 block_126:
-                var_s4 = 1;
-                Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
-                Menu_RequestTrackByKey(0x1F4);
+                handled = 1;
+                Player_IncrementLevelProgress(&D_80102B00[recipientActor->unk5D4], (s32) recipientActor->unk18->unkC);
+                Track_RequestTrackByKey(0x1F4);
                 goto command_done;
 case_13BD:
-            temp_v1_4 = arg0->unk5D4 * 0x190;
-            var_s4 = 1;
-            D_800FEB17[arg0->unk5D4].value += 1;
+            temp_v1_4 = recipientActor->unk5D4 * 0x190;
+            handled = 1;
+            D_800FEB17[recipientActor->unk5D4].value += 1;
             goto command_done;
 mark_handled:
-            var_s4 = 1;
+            handled = 1;
             goto command_done;
         }
 command_done:
         ;
     }
-    if (var_s4 != 0) {
+    if (handled != 0) {
         temp_s0_2 = arg1->unk0;
-        temp_s1 = arg1->unk6;
+        soundId = arg1->unk6;
         temp_s3 = arg1->unk8;
-        if (arg0->unk5DC != 0) {
-            Sky_StartFade(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (recipientActor->unk5DC != 0) {
+            Gsky_StartFade(recipientActor->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (temp_s0_2 != 0) {
-                Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, temp_s0_2[MENU_LANGUAGE]);
+                Camera_PostScreenMessage(&D_80145088, recipientActor->unk5DC, temp_s0_2[MENU_LANGUAGE]);
             }
         }
-        if (temp_s1 != 0) {
-            SoundElement_PlaySoundAtPosition(temp_s1, arg0->position, 0, -1);
+        if (soundId != 0) {
+            SoundElement_PlaySoundAtPosition(soundId, recipientActor->position, 0, -1);
         }
         if (temp_s3 != 0) {
             func_8025E11C_de((s32) temp_s3);
         }
     }
-    return var_s4;
+    return handled;
 }
 
-/* A D_800D31D0 powerup row (0x18 bytes, three rows): the item entry head shared with the other item tables,
+/* A g_pickupPowerupDefinitions powerup row (0x18 bytes, three rows): the item entry head shared with the other item tables,
    the action slot the powerup fills, the ammunition it grants and its pickup handler. */
 typedef struct PowerupEntry {
     u8 **text; /* 0x0: pickup message, one per language */
@@ -639,13 +639,13 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
     s32 sound = entry->sound;
     s32 event = entry->event;
     if (player->camera) {
-        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, text[MENU_LANGUAGE]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
 }
-/* Powerup pickup handler (D_800D31D0 rows). A powerup the player already holds, or any pickup in a tag match by a
+/* Powerup pickup handler (g_pickupPowerupDefinitions rows). A powerup the player already holds, or any pickup in a tag match by a
    player not on one of the D_800CE474 teams, only gives the pickup feedback. Otherwise the powerup takes weapon key
    3 or 7, whichever no action slot uses yet (none free: refused, returns 0); outside tag matches it becomes the
    pending weapon. Then the feedback plays and the entry's ammunition is added. Returns 1 when taken. */
@@ -698,7 +698,7 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
     case 3: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
@@ -731,7 +731,7 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
     case 3: ItemMenu_SetEntry((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Gsky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);

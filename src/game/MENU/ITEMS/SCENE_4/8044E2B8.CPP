@@ -11,7 +11,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "ENGINE/SCENE_2.H"
 
-/* Spawns the pickups of a level: between func_802458D8_de and func_802458C4_de it passes every item of both item tables whose kind is 1, 2, 4 or 10 to Scene_DispatchEnabledEntityTrigger. */
+/* Spawns the pickups of a level: between Cinema_ClearPlaybackFlag and Cinema_SetPlaybackFlag it passes every item of both item tables whose kind is 1, 2, 4 or 10 to Scene_DispatchEnabledEntityTrigger. */
 
 
 
@@ -21,12 +21,12 @@
 
 extern s32 Scene_GetIndexedModelResource(s32, s32);
 
-void OvlScene_DispatchSelectedEntityKinds(Level *level) {
+void Scene_DispatchSelectedEntityKinds(Level *level) {
     s32 i;
     s32 n;
     ItemOvlSceneDispatchSelectedEntityKinds *item;
 
-    func_802458D8_de();
+    Cinema_ClearPlaybackFlag();
     n = level->counts[0];
     for (i = 0; i < n; i++) {
         item = &level->items[0][i];
@@ -41,7 +41,7 @@ void OvlScene_DispatchSelectedEntityKinds(Level *level) {
             Scene_DispatchEnabledEntityTrigger(level, item);
         }
     }
-    func_802458C4_de();
+    Cinema_SetPlaybackFlag();
 }
 
 void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
@@ -58,7 +58,7 @@ void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
     }
 }
 
-void OvlScene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
+void Scene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     void *obj;
     GroupCode8044E2B8 *group;
     Piece *piece;
@@ -66,7 +66,7 @@ void OvlScene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     s32 count;
     s32 i;
 
-    if (PpDecom_UnpackResource(arg1, 0) != 0) {
+    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         group = SetN64_GetPackSection(obj, 2);
         count = group->count;
@@ -95,7 +95,7 @@ void OvlScene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     }
 }
 
-void OvlScene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
+void Scene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     f32 scale;
     void *obj;
     Ent *ent;
@@ -103,7 +103,7 @@ void OvlScene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     s32 i;
 
     scale = D_800C5304_de;
-    if (PpDecom_UnpackResource(arg1, 0) != 0) {
+    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
@@ -137,7 +137,7 @@ void OvlScene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     }
 }
 
-void OvlScene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) {
+void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) {
     void *obj;
     FrameCode8044E2B8 *frame;
     BankCode8044E2B8 *bank;
@@ -150,7 +150,7 @@ void OvlScene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) 
     s32 j;
     s32 index;
 
-    if (PpDecom_UnpackResource(arg1, 0) != 0) {
+    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {

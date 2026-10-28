@@ -31,14 +31,14 @@ extern s32 D_801462C8;
 
 extern char D_8011AF78;
 
-void *TextLoad_RequestTextureVariation(s32 *, s32);
-void TextLoad_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
+void *Textload_RequestTextureVariation(s32 *, s32);
+void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)
-void TextLoad_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
-void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrame(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-Shared_ParticleInstance *Sky_FindScreenMessage(GameplayCamera *);
+Shared_ParticleInstance *Gsky_FindScreenMessage(GameplayCamera *);
 s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 void *Map_ReserveEntries(void *, s32);
 void Geometry_SetCombineMode(s32);
@@ -50,7 +50,7 @@ static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, GameplayC
     Shared_ParticleInstance *inst;
     s32 hit;
 
-    inst = Sky_FindScreenMessage(view);
+    inst = Gsky_FindScreenMessage(view);
     if (inst != 0 && view->unk24 == 0) {
         Shared_ParticleInstance saved;
         saved = *inst;
@@ -119,7 +119,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     if (particle->time < 0.0f) {
         return;
     }
-    model = TextLoad_RequestTextureVariation(&particle->model, -1);
+    model = Textload_RequestTextureVariation(&particle->model, -1);
     if (model == 0) {
         return;
     }
@@ -171,7 +171,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     }
 
     mode = func_8027ED6C_de_mode(particle);
-    TextLoad_ReadTextureAnimationInfo(model, &info);
+    Textload_ReadTextureAnimationInfo(model, &info);
     frame = particle->frame;
     time = particle->time;
     switch (desc->playback) {
@@ -249,9 +249,9 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     shiftS = 1 << (((desc->flags & 0x100) ? 7 : 6) + info.frame->shiftS);
     shiftT = 1 << (((desc->flags & 0x200) ? 7 : 6) + info.frame->shiftT);
 #if defined(VERSION_US_REV1)
-    TextLoad_LoadTextureFrameTiles(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
+    Textload_LoadTextureFrameTiles(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
 #else
-    func_802950B4_de(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
+    Textload_LoadTextureFrame(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
 #endif
     switch (info.frame->kind) {
         case 0:

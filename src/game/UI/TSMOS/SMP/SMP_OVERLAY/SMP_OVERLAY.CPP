@@ -30,9 +30,9 @@
 
 /* SMP_OVERLAY.CPP */
 /* 804196C0_24.CPP */
-/* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through Frontend_InsertWidgetBefore and records it as the owner's overlay. */
+/* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through Node_InsertWidgetBefore and records it as the owner's overlay. */
 
-extern void Frontend_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
+extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
 
 /* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Frontend_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
 
@@ -47,15 +47,15 @@ extern void Frontend_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeM
 #elif defined(VERSION_US_REV1)
 #endif
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
-extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
-extern void Frontend_DrawVisibleSiblings(void *, Args);
+extern void Widget_DrawVisibleSiblings(void *, Args);
 
 void SmpOverlay_RegisterOverlayClass(void) {
     SmSmngr_RegisterElementHandlers(0x7D5, D_0041B970, D_0041BA00, 3);
@@ -73,7 +73,7 @@ NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32
     node->owner = owner;
     node->tag = 0x7A51;
     node->field_6C = 0;
-    Frontend_InsertWidgetBefore(owner->root, node);
+    Node_InsertWidgetBefore(owner->root, node);
     return owner->overlay = node;
 }
 
@@ -85,10 +85,10 @@ void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
     context = owner->context;
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            Smos_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
+            Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
         node = (NodeMenuShowSlotById *)Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        Smos_RouteElementEvent(node->id, 0xF, 0, 0, 0);
+        Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -142,10 +142,10 @@ void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
 
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            Smos_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
+            Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
         node = (NodeMenuShowSlotById *)Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        Smos_RouteElementEvent(node->id, 0xF, 0, 0, 0);
+        Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -161,9 +161,9 @@ void SmpOverlay_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlo
 
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            Frontend_SetWidgetFlag40(context->shown[index], 0);
+            Widget_SetWidgetFlag40(context->shown[index], 0);
         }
-        Frontend_SetWidgetFlag40(node, 1);
+        Widget_SetWidgetFlag40(node, 1);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -239,16 +239,16 @@ void SmpOverlay_DrawOverlayWidget(Shared_Item *widget, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((widget->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            Frontend_ClampRectToClip(&transformed, &basis);
+            Node_ClampRectToClip(&transformed, &basis);
             N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(widget->label, args);
+        Widget_DrawVisibleSiblings(widget->label, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
@@ -264,7 +264,7 @@ s32 SmpOverlay_ReturnUnhandledEvent(void) {
 /* 804196C0_25.CPP */
 /* Calls MarkMenuEventHandled and, for an event of kind one on a slot with no word at 0x5C whose child at 0x4C has flag 0x10 of its halfword at 0x12 set and a target at 0x34, passes the owner, the slot and the target to func_8041B8DC_de, returning zero. */
 
-/* After MarkMenuEventHandled, forwards an event for a channel to Smos_RouteElementEvent with the channel's handler id
+/* After MarkMenuEventHandled, forwards an event for a channel to Menu_RouteElementEvent with the channel's handler id
    (short at 0xC of the handler at 0x4C) when the channel is not muted (word at 0x5C) and has a handler;
    returns 0. */
 
@@ -377,7 +377,7 @@ int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value
     if (h == 0) {
         return 0;
     }
-    Smos_RouteElementEvent(h->unkC, 1, channel, value, extra);
+    Menu_RouteElementEvent(h->unkC, 1, channel, value, extra);
     return 0;
 }
 
@@ -491,7 +491,7 @@ int SmpOverlay_SetListWidgetFlag40(ListRecAt4C *list) {
     int i;
 
     for (i = 0; i < list->count; i++) {
-        Frontend_SetWidgetFlag40(list->items[i], 1);
+        Widget_SetWidgetFlag40(list->items[i], 1);
     }
     return 0;
 }
@@ -731,12 +731,12 @@ s32 SmpOverlay_ConsumePakDialogEvent(void) {
     return 0;
 }
 
-/* The dialog-event codes Smos_GetFocusedElementId reports differ per cartridge family: the European
+/* The dialog-event codes Menu_GetFocusedElementId reports differ per cartridge family: the European
    eu-x cart numbers them 0x3C9..0x3CF, the de cart 0x3C1..0x3C5, and eu/us/us-rev1 0x3C6..0x3CB.
    Each case below carries the same work in every family, only its label changes. */
 s32 SmpOverlay_HandlePakDialogChoice(void) {
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
 #if defined(VERSION_EU_X)
     case 0x3CF:
 #elif defined(VERSION_DE)

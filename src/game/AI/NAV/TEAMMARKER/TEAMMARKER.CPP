@@ -12,7 +12,7 @@
 #include "AI/NAV/80208000_24.H"
 #include "include_asm.h"
 
-extern f32 Nav_GetScaledAggression(void *arg0);
+extern f32 Scaled_GetScaledAggression(void *arg0);
 
 extern s32 D_801468A0;
 
@@ -27,10 +27,10 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     if (((Shared_ActorView *)*controller)->controls->transientFlag != 0) {
         return 0;
     }
-    if (Player_FindPlayerWithMarker(base - 0x1860) != 0) {
+    if (Playerai_FindPlayerWithMarker(base - 0x1860) != 0) {
         return 0;
     }
-    temp_f20 = Nav_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;
+    temp_f20 = Scaled_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;
     if (temp_f20 < GraphU64_RandomBetween(0.0f, D_800C1E58_de)) {
         return 1;
     }
@@ -38,9 +38,9 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
 }
 
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller);
-s32 Nav_EvaluateCaptureFlagMarkerSearch(void **arg0) {
+s32 Nav_EvaluateCaptureFlagMarkerSearch(void **controller) {
     if (D_801462C8.counters.m_bCTFOn != 0) {
-        Nav_ShouldSeekUnclaimedTeamMarker(arg0);
+        Nav_ShouldSeekUnclaimedTeamMarker(controller);
     }
     return 1;
 }

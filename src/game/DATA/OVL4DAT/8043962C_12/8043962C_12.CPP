@@ -14,7 +14,7 @@ unsigned int D_auto_rodata_unresolved_8044A9B8[2] = {
     0x00086D5F, 0x41637469,
 };
 
-/* The collision setup table func_8023EE00_de hands to func_8023EE60_de (through its KUSEG alias
+/* The collision setup table func_8023EE00_de hands to CCollision_ApplySetupTable (through its KUSEG alias
  * D_0044A850): one row per collision info, ended by an empty row. */
 CCollisionSetup_t D_8044A850[36] = {
     { (CCollisionInfo2_t *)0x800FE458, 0x3C5729, 5, 2, 2, -2303.9998f, 0.0f, 0.7f, 0.0f, 0.0f },

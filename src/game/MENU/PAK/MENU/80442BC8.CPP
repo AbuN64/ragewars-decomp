@@ -66,11 +66,11 @@ extern char D_800E1E24_de[];
 
 /* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
    get back the start of the structure whose member at offset 0x554 it addresses. */
-void *Pak_GetListContext(s8 *member) {
+void *Menu_GetListContext(s8 *member) {
     return member - 0x554;
 }
 
-void Pak_ClearMenuItemList(struct ListPakClearMenuItemList *list) {
+void Menu_ClearMenuItemList(struct ListPakClearMenuItemList *list) {
     struct ItemRecAt20V2 *item;
 
 loop:
@@ -81,7 +81,7 @@ loop:
     }
 }
 
-void Pak_MeasureMenuItemText(struct ObjectRecAt14 *object, f32 scale) {
+void Menu_MeasureMenuItemText(struct ObjectRecAt14 *object, f32 scale) {
     void *target;
 
     if (object->kind == 5) {
@@ -107,7 +107,7 @@ func_8043F114_de
    tests the word at 0x1CC. */
 
 
-void Pak_StopMenuPulse(struct Object1C8 *object) {
+void Menu_StopMenuPulse(struct Object1C8 *object) {
     object->second = 0;
     object->first = 0;
 }
@@ -116,7 +116,7 @@ void Pak_StopMenuPulse(struct Object1C8 *object) {
    at 0x1C8; func_80442B34_de clears both. */
 
 
-void Pak_StartMenuPulse(struct Object1C8 *object) {
+void Menu_StartMenuPulse(struct Object1C8 *object) {
     if (object->second == 0) {
         object->second = 1;
         object->first = 0;
@@ -127,7 +127,7 @@ void Pak_StartMenuPulse(struct Object1C8 *object) {
    the counter reaches 0x30. */
 
 
-void Pak_StepSpriteFrame(struct Object1C8 *object) {
+void Menu_StepSpriteFrame(struct Object1C8 *object) {
     object->first += object->second;
     if (object->first >= 0x30) {
         object->first = 0;
@@ -139,7 +139,7 @@ void Pak_StepSpriteFrame(struct Object1C8 *object) {
    returned as they are and the rest as 0x2F less the value. */
 
 
-s32 Pak_GetMirroredMenuFrame(struct ObjectRecAt1C8 *object) {
+s32 Menu_GetMirroredMenuFrame(struct ObjectRecAt1C8 *object) {
     s32 count = object->count;
 
     if (count < 0x18) {
@@ -148,7 +148,7 @@ s32 Pak_GetMirroredMenuFrame(struct ObjectRecAt1C8 *object) {
     return 0x2F - count;
 }
 
-void Pak_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
+void Menu_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
     s32 frame;
     Gfx *gfx;
     Shared_HudView *o;
@@ -176,7 +176,7 @@ void Pak_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
 }
 
 /* Returns 0x480 when the halfword a record starts with is 3, otherwise zero. */
-s32 Pak_GetMenuItemExtraSize(s16 *record) {
+s32 Menu_GetMenuItemExtraSize(s16 *record) {
     if (*record == 3) {
         return 0x480;
     }
@@ -187,7 +187,7 @@ s32 Pak_GetMenuItemExtraSize(s16 *record) {
    is 3. */
 
 
-void Pak_EnableMenuItemExtra(s16 *record, struct ObjectRecAt478 *object) {
+void Menu_EnableMenuItemExtra(s16 *record, struct ObjectRecAt478 *object) {
     if (*record == 3) {
         object->flag = 1;
     }
@@ -199,7 +199,7 @@ void Pak_EnableMenuItemExtra(s16 *record, struct ObjectRecAt478 *object) {
 
 
 
-void Pak_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, int arg) {
+void Menu_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, int arg) {
  int size; char *extra;
  w->id=id; w->type=d->type; w->flags=d->flags|0x1800000;
  w->x=d->x; w->y=d->y; w->r=d->r; w->g=d->g; w->b=d->b; w->a=d->a;
@@ -213,7 +213,7 @@ void Pak_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **ar
  }
 }
 
-void *Pak_GetWidgetStyle(ObjRecAt8V4 *widget) {
+void *Menu_GetWidgetStyle(ObjRecAt8V4 *widget) {
  s32 index=0;
  switch(widget->flags & 0x3fe0) {
  case 0x20: break;

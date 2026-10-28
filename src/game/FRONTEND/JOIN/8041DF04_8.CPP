@@ -5,7 +5,7 @@
 #include "FRONTEND/8041DF04_8.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
+void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     Shared_Game *game;
     char *name;
     s32 points[3];
@@ -28,7 +28,7 @@ void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
     if (count <= 0) {
         budget = 0;
     } else {
-        budget = D_800E37B8[level * 5 + last];
+        budget = g_rewardScoreBudgets[level * 5 + last];
     }
     for (i = 0; i < count; i++) {
         points[i] = 5;
@@ -53,13 +53,13 @@ void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
         D_80153F80[i].variantC = tier;
         do {
             pick = GraphU64_NextRandom() % 17;
-            D_80153F80[i].id = D_800E381C[tier][pick].field_0;
+            D_80153F80[i].id = g_rewardItemTiers[tier][pick].field_0;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             name = D_80153F80[i].name;
             game = &D_801462C8;
-            XPlus_CopyString(name, ((char **)D_800E381C[tier][pick].field_4)[game->language]);
+            XPlus_CopyString(name, ((char **)g_rewardItemTiers[tier][pick].field_4)[game->language]);
 #else
-            XPlus_CopyString(D_80153F80[i].name, *(char **)D_800E381C[tier][pick].field_4);
+            XPlus_CopyString(D_80153F80[i].name, *(char **)g_rewardItemTiers[tier][pick].field_4);
 #endif
         } while (D_80153F80[i].id == -1);
     }
@@ -68,10 +68,10 @@ void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /* Deals out random rewards for count entries at difficulty level: starts every entry at 5 points
-   from the level's budget in D_800E37B8, then for up to 10001 random picks doubles an entry below
+   from the level's budget in g_rewardScoreBudgets, then for up to 10001 random picks doubles an entry below
    20 points while the budget covers it; each entry then records mode 4 and its tier (points / 10)
    in D_80153F80's 0x1C-byte records and draws random tier items from the seventeen per tier in
-   D_800E381C, copying the item's name, until it gets one that exists. */
+   g_rewardItemTiers, copying the item's name, until it gets one that exists. */
 #include "TYPES.H"
 
 typedef struct {
@@ -87,13 +87,13 @@ typedef struct {
     char name[12];
 } Reward;
 
-extern s32 D_800E37B8[];
-extern Prize D_800E381C[][17];
+extern s32 g_rewardScoreBudgets[];
+extern Prize g_rewardItemTiers[][17];
 extern Reward D_80153F80[];
 
 extern void XPlus_CopyString(char *dst, char *src);
 
-void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
+void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     s32 points[3];
     s32 *p;
     s32 budget;
@@ -114,7 +114,7 @@ void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
     if (count <= 0) {
         budget = 0;
     } else {
-        budget = D_800E37B8[level * 5 + last];
+        budget = g_rewardScoreBudgets[level * 5 + last];
     }
     for (i = 0; i < count; i++) {
         points[i] = 5;
@@ -139,8 +139,8 @@ void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
         D_80153F80[i].shown = tier;
         do {
             pick = GraphU64_NextRandom() % 17;
-            D_80153F80[i].id = D_800E381C[tier][pick].id;
-            XPlus_CopyString(D_80153F80[i].name, *D_800E381C[tier][pick].name);
+            D_80153F80[i].id = g_rewardItemTiers[tier][pick].id;
+            XPlus_CopyString(D_80153F80[i].name, *g_rewardItemTiers[tier][pick].name);
         } while (D_80153F80[i].id == -1);
     }
 }

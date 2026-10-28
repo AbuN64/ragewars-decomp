@@ -30,7 +30,7 @@ void __osViSwapContext(void)
     vc = D_800D4414;
     vm = vc->modep;
     field = (*(volatile u32 *)(0xA4400010)) & 1;
-    origin = func_802BBBC0_de(vc->framep) + (vm->fldRegs[field].origin);
+    origin = osVirtualToPhysical(vc->framep) + (vm->fldRegs[field].origin);
     if (vc->state & 2) {
         vc->x.scale |= (vm->comRegs.xScale & ~0xFFF);
     } else {
@@ -64,11 +64,11 @@ void __osViSwapContext(void)
     }
     if (vc->state & 0x40) {
         vc->y.scale = 0;
-        origin = func_802BBBC0_de(vc->framep);
+        origin = osVirtualToPhysical(vc->framep);
     }
     if (vc->state & 0x80) {
         vc->y.scale = (vc->y.offset << 16) & (0x3FF << 16);
-        origin = func_802BBBC0_de(vc->framep);
+        origin = osVirtualToPhysical(vc->framep);
     }
     IO_WRITE(0xA4400004, origin);
     IO_WRITE(0xA4400008, vm->comRegs.width);

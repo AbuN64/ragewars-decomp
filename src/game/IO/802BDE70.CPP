@@ -4,7 +4,7 @@
 #include "COMMON/UNUSED.H"
 #include "IO/802BDE70.H"
 
-s32 func_802B8DA0_de(void)
+s32 Io_GetPeripheralCommandQueue(void)
 {
   int new_var;
   s32 *new_var2;

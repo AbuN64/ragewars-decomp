@@ -6,7 +6,7 @@
 /* Tears down the match display: calls func_80245B28_de, stops the objects at D_80145088 and 0x48 bytes
    before it through Items_ResetActorPools and Ovlgame_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
    Scene_LoadLevelResources, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
-   func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
+   func_80245A10_de, Cinema_SetLoopMode with zero and Cinema_ResetViewport. */
 
 void Menu_ReleaseOptionsScene(void) {
     char *object;
@@ -20,8 +20,8 @@ void Menu_ReleaseOptionsScene(void) {
         func_8025476C_de(1);
     }
     Cinema_ClearResponse();
-    func_80245A20_de(0);
-    func_80245A30_de();
+    Cinema_SetLoopMode(0);
+    Cinema_ResetViewport();
 }
 
 void Menu_SetOptionsSceneSelection(int key) {
@@ -33,7 +33,7 @@ void Menu_SetOptionsSceneSelection(int key) {
  int selection;
  o->fovY = width; o->aspect = height;
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
- selection = Menu_RequestTrackByKey(key);
+ selection = Track_RequestTrackByKey(key);
  if (!func_8025477C_de()) func_8025476C_de(1);
  OvlScene_SetSelection(&g_world, ~selection, 0);
  g->width = width; width = height; g->height = width;

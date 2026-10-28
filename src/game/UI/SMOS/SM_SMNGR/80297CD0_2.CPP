@@ -80,16 +80,16 @@ s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 contex
                     break;
                 case 2:
                     result=value;
-                    if(D_8014D080->current>0) Smos_ReturnToPreviousScreen();
+                    if(D_8014D080->current>0) Menu_ReturnToPreviousScreen();
                     break;
                 case 15:
                     value=0;
-                    Frontend_SetWidgetFlag40(element,1);
+                    Widget_SetWidgetFlag40(element,1);
                     result=value;
                     break;
                 case 16:
                     value=0;
-                    Frontend_SetWidgetFlag40(element,value);
+                    Widget_SetWidgetFlag40(element,value);
                     result=value;
                     break;
                 case 3: case 4: case 9: case 10: case 11: case 12: case 13: case 14:

@@ -30,7 +30,7 @@ InitFrontendMenus
 /* Allocates menu state, selects the language-dependent title and enables the appropriate menu item. */
 extern s32 *D_800E5550;
 extern s32 *Cache_AllocateMemory(s32);
-extern void Tsmos_ActivateControllerState(void); extern void Frontend_SetWidgetFlag100(s32, s32);
+extern void Tsmos_ActivateControllerState(void); extern void Widget_SetWidgetFlag100(s32, s32);
 extern s32 Frontend_GetScreenMode(void),ScenarioSetup_IsCupSelected(void);
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 enum { MENU_80435D14_62 = 62 };
@@ -52,7 +52,7 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     }
     Tsmos_ActivateControllerState();
     if ((D_801462C8.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {
-        Frontend_SetWidgetFlag100((s32)Frontend_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
+        Widget_SetWidgetFlag100((s32)Frontend_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
     }
     D_8011FAC0.clockPaused = 1;
     return 0;

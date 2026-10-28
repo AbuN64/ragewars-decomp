@@ -58,14 +58,14 @@ void PAKInterface_ScrollNoteList(s32 player, s32 direction) {
 #include "COMMON/NAME.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
 #include "MENU/PAK/pak_note_search.H"
-extern s32 Pak_DeleteNote(s32, s32);
-extern s32 Pak_GetFreePages(s32, s32 *);
-extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 Pak_BytesToPakPages(s32);
-extern s32 Pak_FindFreeNoteExtension(s32, char *);
-extern u32 Pak_Crc32(void *, u32, u32);
+extern s32 Note_DeleteNote(s32, s32);
+extern s32 Note_GetFreePages(s32, s32 *);
+extern s32 Note_CountFreeNotes(s32, s32 *);
+extern s32 Note_BytesToPakPages(s32);
+extern s32 Note_FindFreeNoteExtension(s32, char *);
+extern u32 Note_Crc32(void *, u32, u32);
 extern char *XPlus_CopyString(char *, char *);
-extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
+extern s32 Note_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 /* The save view of the menu block: the four player records staged at 0x2E28, then the profile and
  * checksum stored behind them, written to the pak as one 0x648-byte note. */
@@ -92,14 +92,14 @@ s32 PAKInterface_SavePlayerRecords(s32 channel)
     u32 checksum;
     s32 success = 0;
     if (Pak_FindNoteByName(rw_pak_save_name(), channel, &space.note) == 1) {
-        success = Pak_DeleteNote(channel, space.note) == 0;
+        success = Note_DeleteNote(channel, space.note) == 0;
     } else {
         space.fits = 0;
-        status = Pak_GetFreePages(channel, &space.freePages);
+        status = Note_GetFreePages(channel, &space.freePages);
         if (status == 0) {
-            status = Pak_CountFreeNotes(channel, &space.freeNotes);
+            status = Note_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
-                required = Pak_BytesToPakPages(PAKInterface_GetRecordsNoteSize());
+                required = Note_BytesToPakPages(PAKInterface_GetRecordsNoteSize());
                 if (space.freeNotes == 0 || space.freePages < required) space.fits = 0;
                 else space.fits = 1;
             }
@@ -111,16 +111,16 @@ s32 PAKInterface_SavePlayerRecords(s32 channel)
     }
     if (success == 1) {
         success = 0;
-        if (Pak_FindFreeNoteExtension(channel, extension) == 0) {
+        if (Note_FindFreeNoteExtension(channel, extension) == 0) {
             staged = pakRecordSave()->packet.saved;
             XPlus_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
             pakRecordSave()->packet.savedProfile = pakRecordSave()->players[channel].profile;
-            checksum = Pak_Crc32(staged, 0x640, 7);
+            checksum = Note_Crc32(staged, 0x640, 7);
             pakRecordSave()->packet.checksum = checksum;
             data = pakRecordSave()->packet.saved;
             for (i = 0; i < 16; i++) name[i] = 0;
             XPlus_CopyString(name, RW_PAK_RECORD_TITLE);
-            if (Pak_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
+            if (Note_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
         }
     }
     if (!success) {

@@ -158,15 +158,15 @@ void SetN64_RecycleEffectNode(void *, void *);
 
 extern s32 D_800CD764_de[];
 
-void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 initialLifetime)
+void *SetN64_SpawnModelEffect(char *arg0, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime)
 {
   CVector3 center;
-  s32 temp_v0;
+  s32 type;
   f32 far_z;
-  s32 temp_v1_2;
-  char *temp_s0;
+  s32 modelResource;
+  char *effectActor;
   char *previousActiveHead;
-  if (((*D_800CD764_de) == 0) || ((temp_v0 = Scene_FindModelIdIndex(&g_world, arg2), temp_v0 == (-1))))
+  if (((*D_800CD764_de) == 0) || ((type = Scene_FindModelIdIndex(&g_world, arg2), type == (-1))))
   {
     return 0;
   }
@@ -174,69 +174,69 @@ void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation
   {
     SetN64_RecycleEffectNode(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
   }
-  temp_s0 = ((WorldRecAt3C08 *)(arg0))->free;
+  effectActor = ((WorldRecAt3C08 *)(arg0))->free;
   previousActiveHead = ((WorldRecAt3C08 *)(arg0))->head;
-  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((SceneEffect *)(temp_s0))->next);
+  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((SceneEffect *)(effectActor))->next);
   if (previousActiveHead != 0)
   {
-    ((SceneEffect *)(previousActiveHead))->prev = temp_s0;
+    ((SceneEffect *)(previousActiveHead))->prev = effectActor;
   }
   { char *next = ((WorldRecAt3C08 *)(arg0))->head;
-  ((SceneEffect *)(temp_s0))->prev = 0;
-  ((SceneEffect *)(temp_s0))->next = next; }
-  ((WorldRecAt3C08 *)(arg0))->head = temp_s0;
+  ((SceneEffect *)(effectActor))->prev = 0;
+  ((SceneEffect *)(effectActor))->next = next; }
+  ((WorldRecAt3C08 *)(arg0))->head = effectActor;
   if ((((WorldRecAt3C08 *)(arg0))->tail) == 0)
   {
-    ((WorldRecAt3C08 *)(arg0))->tail = temp_s0;
+    ((WorldRecAt3C08 *)(arg0))->tail = effectActor;
   }
-  ((SceneEffect *)(temp_s0))->state = (s32) ((((SceneEffect *)(temp_s0))->state) | 1);
-  GameObject_ResetActorMotion(temp_s0);
-  ((SceneEffect *)(temp_s0))->lifetime = 0;
-  temp_v1_2 = Scene_GetIndexedModelResource(&g_world, temp_v0);
-  ((SceneEffect *)(temp_s0))->counter = arg1;
-  if (arg1 != 0)
+  ((SceneEffect *)(effectActor))->state = (s32) ((((SceneEffect *)(effectActor))->state) | 1);
+  GameObject_ResetActorMotion(effectActor);
+  ((SceneEffect *)(effectActor))->lifetime = 0;
+  modelResource = Scene_GetIndexedModelResource(&g_world, type);
+  ((SceneEffect *)(effectActor))->counter = referenceCounter;
+  if (referenceCounter != 0)
   {
-    *arg1 += 1;
+    *referenceCounter += 1;
   }
   if (D_801462C8.local != 0)
   {
-    ((SceneEffect *)(temp_s0))->definition = &g_boundedEffectDefinition.header;
+    ((SceneEffect *)(effectActor))->definition = &g_boundedEffectDefinition.header;
   }
   else
   {
-    ((SceneEffect *)(temp_s0))->definition = &g_defaultEffectDefinition;
+    ((SceneEffect *)(effectActor))->definition = &g_defaultEffectDefinition;
   }
-  ((SceneEffect *)(temp_s0))->lifetime = initialLifetime;
-  ((SceneEffect *)(temp_s0))->lifetimeState = 0;
-  ((SceneEffect *)(temp_s0))->model = temp_v0;
+  ((SceneEffect *)(effectActor))->lifetime = initialLifetime;
+  ((SceneEffect *)(effectActor))->lifetimeState = 0;
+  ((SceneEffect *)(effectActor))->model = type;
   position.y += 10.24f;
-  ((SceneEffect *)(temp_s0))->position = position;
-  ((SceneEffect *)(temp_s0))->angle = 0;
-  ((SceneEffect *)(temp_s0))->angleState = 0;
-  ((SceneEffect *)(temp_s0))->collisionState = 0;
-  ((SceneEffect *)(temp_s0))->collisionScale = 1.0f;
-  ((SceneEffect *)(temp_s0))->collisionFlags = 0;
-  ((SceneEffect *)(temp_s0))->minX = (f32) (position.x - 81.92f);
-  ((SceneEffect *)(temp_s0))->minY = (f32) (position.y - 81.92f);
-  ((SceneEffect *)(temp_s0))->minZ = (f32) (position.z - 81.92f);
-  ((SceneEffect *)(temp_s0))->maxX = (f32) (position.x + 81.92f);
-  ((SceneEffect *)(temp_s0))->maxY = (f32) (position.y + 81.92f);
+  ((SceneEffect *)(effectActor))->position = position;
+  ((SceneEffect *)(effectActor))->angle = 0;
+  ((SceneEffect *)(effectActor))->angleState = 0;
+  ((SceneEffect *)(effectActor))->collisionState = 0;
+  ((SceneEffect *)(effectActor))->collisionScale = 1.0f;
+  ((SceneEffect *)(effectActor))->collisionFlags = 0;
+  ((SceneEffect *)(effectActor))->minX = (f32) (position.x - 81.92f);
+  ((SceneEffect *)(effectActor))->minY = (f32) (position.y - 81.92f);
+  ((SceneEffect *)(effectActor))->minZ = (f32) (position.z - 81.92f);
+  ((SceneEffect *)(effectActor))->maxX = (f32) (position.x + 81.92f);
+  ((SceneEffect *)(effectActor))->maxY = (f32) (position.y + 81.92f);
   far_z = position.z;
-  ((SceneEffect *)(temp_s0))->resource = temp_v1_2;
-  ((SceneEffect *)(temp_s0))->animation = -1;
-  ((SceneEffect *)(temp_s0))->frame = 0;
-  ((SceneEffect *)(temp_s0))->frameState = 0;
-  ((SceneEffect *)(temp_s0))->owner = arg9;
-  ((SceneEffect *)(temp_s0))->boundsState = 0;
-  ((SceneEffect *)(temp_s0))->flags = 0x1A;
-  ((SceneEffect *)(temp_s0))->maxZ = (f32) (far_z + 81.92f);
-  ((SceneEffect *)(temp_s0))->rotation = rotation;
-  ((SceneEffect *)(temp_s0))->effectState = 0;
-  center.x = ((SceneEffect *)(temp_s0))->position.x;
-  center.y = (((SceneEffect *)(temp_s0))->position.y) + (GameObject_GetActorHeight(temp_s0) * 0.5f);
-  center.z = ((SceneEffect *)(temp_s0))->position.z;
-  Scene_SampleWorldLighting(&g_world, &center, (char *)temp_s0 + 0x1A8);
-  return temp_s0;
+  ((SceneEffect *)(effectActor))->resource = modelResource;
+  ((SceneEffect *)(effectActor))->animation = -1;
+  ((SceneEffect *)(effectActor))->frame = 0;
+  ((SceneEffect *)(effectActor))->frameState = 0;
+  ((SceneEffect *)(effectActor))->owner = effectOwner;
+  ((SceneEffect *)(effectActor))->boundsState = 0;
+  ((SceneEffect *)(effectActor))->flags = 0x1A;
+  ((SceneEffect *)(effectActor))->maxZ = (f32) (far_z + 81.92f);
+  ((SceneEffect *)(effectActor))->rotation = rotation;
+  ((SceneEffect *)(effectActor))->effectState = 0;
+  center.x = ((SceneEffect *)(effectActor))->position.x;
+  center.y = (((SceneEffect *)(effectActor))->position.y) + (GameObject_GetActorHeight(effectActor) * 0.5f);
+  center.z = ((SceneEffect *)(effectActor))->position.z;
+  Scene_SampleWorldLighting(&g_world, &center, (char *)effectActor + 0x1A8);
+  return effectActor;
 }
 
 /* Updates a world's active actors: counts each actor's lifetime down by the frame time and expires it when the lifetime runs out or when its bounds leave the world box D_801031F0 (unless it is flagged 0x200); an expired active actor loses its active bit, decrements its owner's counter and moves from the active list to the free list, and every other actor is updated through SetN64_UpdateEffectMotionAndBounds. */
@@ -352,9 +352,9 @@ void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
 }
 
 /* 8028FD2C_12.CPP */
-extern s32 VisData_TestBoxAgainstFrustum(void *arg0, void *arg1);
+extern s32 Visdata_TestBoxAgainstFrustum(void *arg0, void *arg1);
 
-extern void func_8024EB90_de(void *arg0);
+extern void Simple_DrawCachedModel(void *arg0);
 
 extern f32 D_801031F8[];
 
@@ -410,14 +410,14 @@ void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
                 (camera->clipBounds[0].z < entry->maxZ) &&
                 (camera->clipBounds[1].y > entry->minY) &&
                 (camera->clipBounds[0].y < entry->maxY) &&
-                (VisData_TestBoxAgainstFrustum(camera->clipPlanes, &entry->minX) != 0)) {
+                (Visdata_TestBoxAgainstFrustum(camera->clipPlanes, &entry->minX) != 0)) {
                 value = entry->lifetime;
                 D_800D15E0 = 0;
                 if ((value > zero) && (value <= upper)) {
                     D_800D15E0 = 1;
                     D_800D15E4[3] = value * scale;
                 }
-                func_8024EB90_de(entry);
+                Simple_DrawCachedModel(entry);
                 D_800D15E0 = 0;
             }
             entry = entry->next;
@@ -466,29 +466,29 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *r
     }
 }
 
-void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *arg0)
+void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *container)
 {
   void *new_var;
   void *node;
   struct ListNode80290528 *next;
-  if ((arg0->unk_3C00) == 0)
+  if ((container->unk_3C00) == 0)
   {
-    SetN64_RecycleEffectNode(arg0, arg0->unk_3C08);
+    SetN64_RecycleEffectNode(container, container->unk_3C08);
   }
-  node = arg0->unk_3C00;
-  next = arg0->next;
-  arg0->unk_3C00 = ((ObjectLinks1E0 *)(node))->unk_1DC;
+  node = container->unk_3C00;
+  next = container->next;
+  container->unk_3C00 = ((ObjectLinks1E0 *)(node))->unk_1DC;
   if (next != 0)
   {
     next->previous = node;
   }
-  new_var = arg0->next;
+  new_var = container->next;
   ((ObjectLinks1E0 *)(node))->unk_1D8 = 0;
   ((ObjectLinks1E0 *)(node))->unk_1DC = new_var;
-  arg0->next = node;
-  if ((arg0->unk_3C08) == 0)
+  container->next = node;
+  if ((container->unk_3C08) == 0)
   {
-    arg0->unk_3C08 = node;
+    container->unk_3C08 = node;
   }
   ((ObjectLinks1E0 *)(node))->unk_1D0 |= 1;
   GameObject_ResetActorMotion(node);

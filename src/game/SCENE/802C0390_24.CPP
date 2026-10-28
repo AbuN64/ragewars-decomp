@@ -9,11 +9,11 @@
 
 extern OSThread_s *D_800D5268_de;
 extern OSThread_s *D_800D5270;
-extern void func_802BB870_de(OSThread_s **queue, OSThread_s *t);
+extern void Audio_DequeueThread(OSThread_s **queue, OSThread_s *t);
 extern void __osEnqueueThread(OSThread_s **queue, OSThread_s *t);
 extern void func_802BC36C_de(OSThread_s **queue);
 
-void func_802BB5F0_de(OSThread_s *t, s32 pri)
+void Scene_SetThreadPriority(OSThread_s *t, s32 pri)
 {
     register u32 saveMask;
     OSThread_s **runQueue;
@@ -28,7 +28,7 @@ void func_802BB5F0_de(OSThread_s *t, s32 pri)
         t->priority = pri;
 
         if (t != D_800D5270 && t->state != 1) {
-            func_802BB870_de(t->queue, t);
+            Audio_DequeueThread(t->queue, t);
             __osEnqueueThread(t->queue, t);
         }
 

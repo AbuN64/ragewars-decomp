@@ -38,14 +38,14 @@ extern void SmXlate_SwitchScreen(s32);
 
 /* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls SmXlate_SwitchScreen with 0x14
    unless func_8042AF28_de and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
-   Frontend_StartConfiguredMatch. */
+   Stage_StartConfiguredMatch. */
 
 
 
 
 extern s32 ScenarioSetup_StartRandomCupStage();
 
-extern void Frontend_StartConfiguredMatch();
+extern void Stage_StartConfiguredMatch();
 
 /* Reports why a match ended: time running out on a timed match, the score limit (Player_CheckScoreLimit),
    the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
@@ -126,7 +126,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
    calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition and,
    once Frontend_GetMenuImageState reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
-   D_801462D5 is set, otherwise through Frontend_StartConfiguredMatch when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
+   D_801462D5 is set, otherwise through Stage_StartConfiguredMatch when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
    at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the word at
    0x17F0 of D_80145088 to 8. Returns zero. */
@@ -168,7 +168,7 @@ extern void MarkMenuEventHandled();
 
 extern s32 D_80154020[];
 
-extern s32 Frontend_ListHasFlag100(void *);
+extern s32 Widget_ListHasFlag100(void *);
 
 extern void Smos_SetFocusedElement(s32);
 
@@ -202,7 +202,7 @@ void Frontend_ContinueCupOrOpenResults(void) {
     if (ScenarioSetup_IsCupSelected() == 0 || ScenarioSetup_StartRandomCupStage() == 0) {
         SmXlate_SwitchScreen(0x14);
     } else {
-        Frontend_StartConfiguredMatch();
+        Stage_StartConfiguredMatch();
     }
 }
 
@@ -439,7 +439,7 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
                 D_80146918 = 0;
                 D_801468F4 = 0;
                 if (ScenarioSetup_IsCupSelected() != 0 && ScenarioSetup_StartRandomCupStage() != 0) {
-                    Frontend_StartConfiguredMatch();
+                    Stage_StartConfiguredMatch();
                     return 0;
                 }
                 next = 0x14;
@@ -465,7 +465,7 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
     if (D_800E28E0 <= 0) {
         if (D_800E53C0->phase == 0) {
             D_800E53C0->phase = 1;
-            if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(context, CONFIRM_MESSAGE)) == 0) {
+            if (Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(context, CONFIRM_MESSAGE)) == 0) {
                 message = CONFIRM_MESSAGE;
             } else {
                 message = FALLBACK_MESSAGE;

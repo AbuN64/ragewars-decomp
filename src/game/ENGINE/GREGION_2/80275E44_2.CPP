@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 /** Expand the four-float X/Z bounds in arg0 over arg1 packed vectors. */
-void Region_ExpandHorizontalBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Gregion_ExpandHorizontalBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
 {
     f32 value;
     f32 bound;
@@ -40,8 +40,8 @@ void Region_ExpandHorizontalBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
         } while (i < arg1);
     }
 }
-/** Empty adjacent entry point included in Region_ExpandHorizontalBounds's Splat span. */
-void Region_NoOperation(void)
+/** Empty adjacent entry point included in Gregion_ExpandHorizontalBounds's Splat span. */
+void Gregion_NoOperation(void)
 {
 }
 

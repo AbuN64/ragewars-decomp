@@ -2,5 +2,5 @@
 #define SYSTEM_802609CC_5_H
 #include "COMMON/LOCALDECODERANGE.H"
 extern unsigned int func_8026160C_de(unsigned int value);
-extern u32 func_80261614_de(s32 arg0);
+extern u32 Bitarray_GetRequiredBitCount(s32 arg0);
 #endif

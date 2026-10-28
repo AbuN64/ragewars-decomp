@@ -682,7 +682,7 @@ extern double D_800C7858_de;
 
 extern const float D_800C74C0_de;
 
-extern char D_800D77CC[];
+extern char g_pakNoteLabelSlots[];
 
 
 extern f32 D_800CD984[3];
@@ -955,7 +955,7 @@ extern char D_00204C34;
 
 extern s16 D_B2000000;
 
-extern char D_800D3390;
+extern char g_pickupSpecialDefinitions;
 
 extern s32 D_80142898;
 
@@ -1086,7 +1086,7 @@ extern f32 D_800C7590[2];
 /* Character IDs: movement also reads the third word at D_800CE47C. */
 extern s32 D_800CE474[];
 
-extern char D_800D32A8;
+extern char g_pickupHealthDefinitions;
 
 extern s32 D_800E2B40[][13];
 
@@ -1254,7 +1254,7 @@ extern const float D_800CCB18;
 
 extern NodeGeometryGroupModelInstances D_801144D0[];
 
-extern char *D_800D34D4_de[];
+extern char *g_matchOptionLabelSlots[];
 
 extern s32 D_800D5260;
 
@@ -1696,7 +1696,7 @@ extern s32 D_80153780;
 
 extern char D_00450AF4;
 
-extern char D_800D3230;
+extern char g_pickupWeaponDefinitions;
 
 extern char *D_800D3510;
 
@@ -2137,7 +2137,7 @@ extern char D_800D3B50[];
 
 extern char D_8010EEB8[];
 
-extern CVector3 D_800C88A0_de[8];
+extern CVector3 g_actorRadialDirections[8];
 
 extern FieldRow D_800E4EF8[];
 
@@ -2175,7 +2175,7 @@ extern char D_800D3898[];
 
 extern char D_800D3B24[];
 
-extern Rec_func_8024C92C_de D_800DE9C0[];
+extern RecGobjinstSampleBoneTranslation D_800DE9C0[];
 
 extern char D_800D3894[];
 
@@ -2251,7 +2251,7 @@ extern s8 D_8010B30B;
 
 extern s32 D_800C2BD8_de;
 
-extern char D_800D31D0;
+extern char g_pickupPowerupDefinitions;
 
 extern f32 D_800C4970_de[2];
 
@@ -2580,8 +2580,8 @@ typedef struct ALADPCMloop ALADPCMloop;
 
 
 
-struct ALDelay_func_802B5B94_de;
-typedef struct ALDelay_func_802B5B94_de ALDelay_func_802B5B94_de;
+struct ALDelayAudioSetEffectParameter;
+typedef struct ALDelayAudioSetEffectParameter ALDelayAudioSetEffectParameter;
 
 struct ALEnvMixer_s;
 typedef struct ALEnvMixer_s ALEnvMixer_s;
@@ -3253,11 +3253,11 @@ typedef struct ViewRecAt54D ViewRecAt54D;
 struct ViewRecAtB0;
 typedef struct ViewRecAtB0 ViewRecAtB0;
 
-struct View_func_8025AB94_de;
-typedef struct View_func_8025AB94_de View_func_8025AB94_de;
+struct ViewChannelUpdateVoicePitch;
+typedef struct ViewChannelUpdateVoicePitch ViewChannelUpdateVoicePitch;
 
-struct Voice_func_8025A844_de;
-typedef struct Voice_func_8025A844_de Voice_func_8025A844_de;
+struct VoiceChannelUpdateVoicePan;
+typedef struct VoiceChannelUpdateVoicePan VoiceChannelUpdateVoicePan;
 
 union Vtx10;
 typedef union Vtx10 Vtx10;
@@ -3364,8 +3364,8 @@ struct ALADPCMWaveInfo {
     ALADPCMloop *loop;
     ALADPCMBook *book;
 };
-struct ALDelay_func_802B5B94_de;
-struct ALDelay_func_802B5B94_de {
+struct ALDelayAudioSetEffectParameter;
+struct ALDelayAudioSetEffectParameter {
     u32 input;
     u32 output;
     s16 ffcoef;
@@ -3402,7 +3402,7 @@ struct ALEnvMixer_s {
     ALFilter_s14_2 **sources;
     s32 motion;
 };
-struct ALDelay_func_802B5B94_de;
+struct ALDelayAudioSetEffectParameter;
 struct ALFxCode802BAC64;
 struct ALRAWWaveInfo;
 struct ALRAWWaveInfo {
@@ -3573,7 +3573,7 @@ struct CallbackState114 {
 };
 typedef void ( *ContextCallback)(void *);
 struct CameraEventsSpawnAttachedEffect;
-struct Rec_func_8024C92C_de;
+struct RecGobjinstSampleBoneTranslation;
 struct ContextRecAt2BC0;
 
 struct ContextRecAt104;
@@ -3676,7 +3676,7 @@ struct Dest {
     void *draw; /* 0x10C */
     void *hit; /* 0x110 */
     u8 pad114[8];
-    void *callback11C; /* address stored by Nav_InitSpawnedActor */
+    void *callback11C; /* address stored by Actor_InitSpawnedActor */
     u8 reserved120[4];
     s32 field124;
     f32 charge; /* 0x128 */
@@ -4673,9 +4673,9 @@ struct TextBoundsText {
 struct ItemDef;
 struct ViewRecAtB0;
 struct ContextRecAt104;
-struct View_func_8025AB94_de;
+struct ViewChannelUpdateVoicePitch;
 struct OwnerCode8025A3EC;
-struct Voice_func_8025A844_de;
+struct VoiceChannelUpdateVoicePan;
 struct Vtx_t;
 struct Vtx_t {
     s16 ob[3];
@@ -4791,8 +4791,8 @@ struct Other8043E458;
 typedef struct Other8043E458 Other8043E458;
 struct OwnerPakBeginProfileLoad;
 typedef struct OwnerPakBeginProfileLoad OwnerPakBeginProfileLoad;
-struct Owner_func_8043E494_de;
-typedef struct Owner_func_8043E494_de Owner_func_8043E494_de;
+struct OwnerCMenuProfileUpdateProfileModeLabel;
+typedef struct OwnerCMenuProfileUpdateProfileModeLabel OwnerCMenuProfileUpdateProfileModeLabel;
 struct PlayerCode80225D1080229FA0;
 typedef struct PlayerCode80225D1080229FA0 PlayerCode80225D1080229FA0;
 struct SceneCode802591C0;

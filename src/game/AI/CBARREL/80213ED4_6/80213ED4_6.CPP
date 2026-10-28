@@ -86,7 +86,7 @@ void Barrel_FillDamagePacket(void *packet, s32 damageSource, s32 damage, s32 rad
 /* 80213ED4_8.CPP */
 extern void Barrel_StopActorLoopingSound(void);
 extern void Nav_ApplySupportingPlatformMotion(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
-extern void Nav_UpdateActorStateAnimation(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
+extern void Actor_UpdateActorStateAnimation(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
 
 void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBarrelUpdateActorController *dst) {
     if ((dst->aux != 0) && (dst->aux->unkC == -1)) {
@@ -110,7 +110,7 @@ void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBa
         if (dst->callback != 0) {
             dst->callback(src, dst);
         }
-        Nav_UpdateActorStateAnimation(src, dst);
+        Actor_UpdateActorStateAnimation(src, dst);
         if (*src->kind != 2) {
             dst->old_position = src->position;
             dst->height = src->height;

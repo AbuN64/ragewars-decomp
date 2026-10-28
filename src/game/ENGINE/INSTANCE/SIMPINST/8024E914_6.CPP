@@ -35,7 +35,7 @@ extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor)
  * Geometry_DrawIntensityMask. */
 
 
-extern CQuatern InstHdr_BuildActorGroundRotation(void *);
+extern CQuatern Insthdr_BuildActorGroundRotation(void *);
 
 extern void GraphU64_LimitVectorLength(CVector3 *, f32);
 
@@ -51,7 +51,7 @@ extern void Geometry_DrawIntensityMask(void *, s32, s32);
 
 
 
-extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
+extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
 
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 
@@ -64,7 +64,7 @@ extern char D_0026D7F4;
 
 
 
-void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void **resource) {
+void Simpinst_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void **resource) {
     CVector3 position;
     CQuatern rotation;
     EffectRecAt154 *effect;
@@ -91,7 +91,7 @@ void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor,
     }
 }
 
-void SimpleInstance_DrawGroundShadow(void *actor) {
+void Simpinst_DrawGroundShadow(void *actor) {
     f32 matrix[16];
     CVector3 position;
     CQuatern rotation;
@@ -105,7 +105,7 @@ void SimpleInstance_DrawGroundShadow(void *actor) {
     } else {
         size = 0.0f;
     }
-    rotation = InstHdr_BuildActorGroundRotation(actor);
+    rotation = Insthdr_BuildActorGroundRotation(actor);
     position.x = ((Shared_Func80243A80Actor *)actor)->x;
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
@@ -117,7 +117,7 @@ void SimpleInstance_DrawGroundShadow(void *actor) {
     Geometry_DrawIntensityMask((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
-void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
+void Simpinst_RefreshModelResourceUsage(StaticObject *staticObject) {
     void *variantDirectory;
     void **resource;
     s32 key;
@@ -132,7 +132,7 @@ void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
         if (resource != 0) {
             key = SetN64_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
             Cache_ReleaseResource(0, resource);
-            found = func_802540F4_de(0, &variantDirectory, key, g_simpModelsIndexText, 1);
+            found = Cache_RequestWordCountedResource(0, &variantDirectory, key, g_simpModelsIndexText, 1);
             if (found != 0) {
                 staticObject->resource = SetN64_LocatePackSection((s32)variantDirectory, key,
                                                     index % *(s32 *)variantDirectory,

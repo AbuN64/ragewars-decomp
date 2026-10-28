@@ -73,7 +73,7 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
    Frontend_FindWidgetByResourceId, allocates and clears a 0x64-byte animation, sets its type fields, widget and
    -1-terminated frame list, counts the frames, initialises its playback state through
    SmpFrameAnim_AddSequenceFlags, SmpFrameAnim_SetSequenceFrame, SmpFrameAnim_SetSequenceDuration and SmpFrameAnim_SetLoopCount, attaches it to the widget through
-   Frontend_InsertWidgetBefore and returns it. */
+   Node_InsertWidgetBefore and returns it. */
 
 
 
@@ -89,7 +89,7 @@ void SmpFrameAnim_SetSequenceDuration(struct FrameSequence *sequence, s32 durati
 
 void SmpFrameAnim_SetLoopCount(struct FrameSequence *sequence, s32 loops);
 
-extern void Frontend_InsertWidgetBefore(s32 widget, Animation *anim);
+extern void Node_InsertWidgetBefore(s32 widget, Animation *anim);
 
 void SmpFrameAnim_RegisterFrameAnimClass(void) {
     SmSmngr_RegisterElementHandlers(0xB5F, D_00419A4C, D_00419ADC, 3);
@@ -118,7 +118,7 @@ Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
     SmpFrameAnim_SetSequenceFrame(anim, 0);
     SmpFrameAnim_SetSequenceDuration(anim, 0);
     SmpFrameAnim_SetLoopCount(anim, 0);
-    Frontend_InsertWidgetBefore(widget, anim);
+    Node_InsertWidgetBefore(widget, anim);
     return anim;
 }
 

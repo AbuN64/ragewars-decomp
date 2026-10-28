@@ -11,7 +11,7 @@
 #if defined(VERSION_EU_X)
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EC0, an actor kind at D_800E4EC4 and a handler at D_800E4EC8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from Menu_DispatchOptionsTransitionEvent. */
 
-s32 Frontend_DispatchEuxMatchMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Match_DispatchEuxMatchMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -54,7 +54,7 @@ unsigned int data_unresolved_800DDA24[3] = {
 #if defined(VERSION_DE)
 #include "COMMON/OWNERRECAT8V1.H"
 
-s32 Frontend_ClearGermanLoadingHints(void) {
+s32 Match_ClearGermanLoadingHints(void) {
     SmpButton_WrapButtonWidget(0x1D5);
     SmpButton_WrapButtonWidget(0x1D6);
     return 0;
@@ -68,26 +68,26 @@ s32 Frontend_ClearGermanLoadingHints(void) {
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/REQUESTRECAT10.H"
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D5: when
-   Smos_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
+/* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D5: when
+   Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
-   and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
-   it sends 3. 0x1D6 sends 11 when Smos_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
-   Smos_ReturnToPreviousScreen. Returns zero. */
+   and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
+   it sends 3. 0x1D6 sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
+   Menu_ReturnToPreviousScreen. Returns zero. */
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void Smos_ReturnToPreviousScreen(void);
+extern void Menu_ReturnToPreviousScreen(void);
 
-s32 Frontend_HandleMatchMessage(void) {
+s32 Match_HandleMatchMessage(void) {
     MarkMenuEventHandled();
-    switch (Smos_GetFocusedElementId()) {
+    switch (Menu_GetFocusedElementId()) {
     default:
         return 0;
     case MENU_804291A8_473:
-        if (Smos_GetPreviousScreenOwner(0) == 0x16) {
+        if (Menu_GetPreviousScreenOwner(0) == 0x16) {
             Items_ResetActorPools(&D_80145040.object, 0);
             Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
@@ -97,35 +97,35 @@ s32 Frontend_HandleMatchMessage(void) {
             D_80145040.stage = 8;
             switch (D_80145040.game.controllerMode) {
             case 0:
-                Frontend_SetMenuChoiceResult(20);
+                Random_SetMenuChoiceResult(20);
                 break;
             case 1:
-                Frontend_SetMenuChoiceResult(10);
+                Random_SetMenuChoiceResult(10);
                 break;
             case 2:
-                Frontend_SetMenuChoiceResult(15);
+                Random_SetMenuChoiceResult(15);
                 break;
             case 3:
             case 4:
-                Frontend_SetMenuChoiceResult(10);
+                Random_SetMenuChoiceResult(10);
                 break;
             default:
-                Frontend_SetMenuChoiceResult(3);
+                Random_SetMenuChoiceResult(3);
                 break;
             }
         } else {
-            Frontend_SetMenuChoiceResult(3);
+            Random_SetMenuChoiceResult(3);
         }
         break;
     case MENU_804291A8_474:
-        if (Smos_GetPreviousScreenOwner(0) == 11) {
-            Frontend_SetMenuChoiceResult(11);
+        if (Menu_GetPreviousScreenOwner(0) == 11) {
+            Random_SetMenuChoiceResult(11);
         } else {
-            Frontend_SetMenuChoiceResult(-1);
+            Random_SetMenuChoiceResult(-1);
         }
         break;
     }
-    Smos_ReturnToPreviousScreen();
+    Menu_ReturnToPreviousScreen();
     return 0;
 }
 #endif

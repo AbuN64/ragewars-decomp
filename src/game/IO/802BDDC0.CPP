@@ -7,12 +7,12 @@
 
 typedef struct Queue Queue;
 
-extern s32 func_802BB160_de(Queue *, void *, s32);
+extern s32 osJamMesg(Queue *, void *, s32);
 
 
 
 
-s32 func_802B8CF0_de(OSIoMesg *entry, s32 subtype, s32 direction, s32 deviceAddress,
+s32 Io_StartPeripheralDma(OSIoMesg *entry, s32 subtype, s32 direction, s32 deviceAddress,
                    s32 dramAddress, s32 transferSize, Opaque_OSMesgQueue *completionQueue) {
     s16 type;
 
@@ -31,7 +31,7 @@ s32 func_802B8CF0_de(OSIoMesg *entry, s32 subtype, s32 direction, s32 deviceAddr
     entry->size = transferSize;
     entry->piHandle = 0;
     if (subtype != 1) {
-        return osSendMesg(func_802B8DA0_de(), (s32)entry, 0);
+        return osSendMesg(Io_GetPeripheralCommandQueue(), (s32)entry, 0);
     }
-    return func_802BB160_de(func_802B8DA0_de(), entry, 0);
+    return osJamMesg(Io_GetPeripheralCommandQueue(), entry, 0);
 }

@@ -60,7 +60,7 @@ extern char D_0026D7F4;
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 
 
-extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
+extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
@@ -69,7 +69,7 @@ extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s3
 extern void Cache_UnlockResource(s32, void *);
 extern void *Map_ReserveEntries(void *, s32);
 
-void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
+void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
     f32 matrix[16];
     CVector3 point;
     CQuatern rotation;
@@ -183,7 +183,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
             key = SetN64_GetDirectoryEntry(*resource,
                                 particle->desc->renderModel, 1);
             Cache_ReleaseResource(0, resource);
-            found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
+            found = Cache_RequestWordCountedResource(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
                 particle->resource = SetN64_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,

@@ -38,11 +38,11 @@ extern signed char D_800D1610[3];
 
 extern char D_80145040;
 
-extern void GraphU64_UnpackFixedMatrix(f32 *matrix, void *model);
+extern void Graphu64_UnpackFixedMatrix(f32 *matrix, void *model);
 
 extern void GraphU64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
 
-extern char *Player_GetFirstPlayer(void *players);
+extern char *Playerai_GetFirstPlayer(void *players);
 
 extern void GraphU64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
@@ -102,7 +102,7 @@ void Geometry_ExpandModelCommands(s32 unused, struct Shape_typemap_165 **res, s3
     s32 materialBytes = 32;
     void *dstData;
     void *copySource4, *copySource5, *copySource3, *copySource2, *copySource1, *copySource0;
-    if (PpDecom_UnpackResource(res, 1) != 0) {
+    if (Ppdecom_UnpackResource(res, 1) != 0) {
         parts = 6;
         if (extra == 0) {
             parts = 3;
@@ -306,9 +306,9 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     f32 matrix[4][4];
 
     if (g_geometryViewEffect != 0 && (material->flagWord & 0x8000)) {
-        GraphU64_UnpackFixedMatrix((f32 *)matrix, model);
+        Graphu64_UnpackFixedMatrix((f32 *)matrix, model);
         GraphU64_GetMatrixTranslation((f32 *)matrix, &position);
-        GraphU64_SubtractVectors(&direction, Player_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
+        GraphU64_SubtractVectors(&direction, Playerai_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
         GraphU64_NormalizeVec3(&direction);
         {
             Gfx *cmd;

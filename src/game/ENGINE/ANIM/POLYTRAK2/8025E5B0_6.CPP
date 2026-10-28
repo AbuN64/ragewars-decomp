@@ -32,7 +32,7 @@ static inline f32 round_up(f32 x, f32 floor) {
 
 
 
-f32 func_8025F434_de(f32 amount, f32 period) {
+f32 Polytrak2_ChooseQuantizedTrackRate(f32 amount, f32 period) {
     f32 rate;
 
     rate = 0.0f;

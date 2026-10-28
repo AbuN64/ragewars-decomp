@@ -9,7 +9,7 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58[6] = {
 
 /* 800D7070.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_pickup_label_directory_us_rev1[103] = {
+unsigned int g_pickupLabelDirectory[103] = {
     0x800D3690, 0x800D369C, 0x800D36A8, 0x800D36B4, 0x800D36C0, 0x800D36CC, 0x800D36D8, 0x800D36E8,
     0x800D36F8, 0x800D3708, 0x800D3718, 0x800D3728, 0x800D3734, 0x800D3748, 0x800D375C, 0x800D376C,
     0x800D377C, 0x800D378C, 0x800D3798, 0x800D37A8, 0x800D37BC, 0x800D37D0, 0x800D37E4, 0x800D37FC,
@@ -28,7 +28,7 @@ unsigned int D_auto_src_ragewars_pickup_label_directory_us_rev1[103] = {
 
 /* 800D720C.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_item_label_slots_us_rev1[187] = {
+unsigned int g_itemLabelSlots[187] = {
     0x800D3BEC, 0x800D3BF4, 0x800D3C04, 0x800D3C14, 0x800D3C24, 0x800D3C30, 0x800D3C40, 0x800D3C4C,
     0x800D3D84, 0x800D3D8C, 0x800D3D98, 0x800D3DA0, 0x800D3DA8, 0x800D3DB0, 0x800D3DB8, 0x800D3DC0,
     0x800D3DC8, 0x800D3DD4, 0x800D3DDC, 0x800D3DE8, 0x800D3DF0, 0x800D3DF8, 0x800D3E04, 0x800D3E10,
@@ -66,7 +66,7 @@ unsigned int D_blob_phase2_b549ecb9aa43027b8d75[2] = {
 
 /* 800D7500.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_match_option_label_slots_us_rev1[88] = {
+unsigned int g_matchOptionLabelSlots[88] = {
     0x800D4890, 0x800D489C, 0x800D48A8, 0x800D48B4, 0x800D48C0, 0x800D48E0, 0x800D4914, 0x800D4944,
     0x800D4970, 0x800D499C, 0x800D49C8, 0x800D49F4, 0x800D4A14, 0x800D4A2C, 0x800D4A44, 0x800D4A70,
     0x800D4A94, 0x800D4AB0, 0x800D4AD4, 0x800D4AEC, 0x800D4B08, 0x800D4B24, 0x800D4B40, 0x800D4B60,
@@ -160,7 +160,7 @@ unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_uncla
 
 /* 800D77CC.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_pak_note_label_slots_us_rev1[22] = {
+unsigned int g_pakNoteLabelSlots[22] = {
     0x800D53C0, 0x800D53CC, 0x800D53D8, 0x800D53EC, 0x800D5400, 0x800D5414, 0x800D5428, 0x800D543C,
     0x800D544C, 0x800D5458, 0x800D5464, 0x800D5470, 0x800D5488, 0x800D54A0, 0x800D54B4, 0x800D54C8,
     0x800D54DC, 0x800D54F0, 0x800D54F8, 0x800D5500, 0x800D5508, 0x800D5510,
@@ -218,7 +218,7 @@ unsigned int D_blob_phase2_06827b5890e84d0b30ef[1] = {
 
 /* 800D7A98.CPP */
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_src_ragewars_option_label_slots_us_rev1[224] = {
+unsigned int g_optionLabelSlots[224] = {
     0x800D5834, 0x800D583C, 0x800D5844, 0x800D584C, 0x800D5858, 0x800D5864, 0x800D5870, 0x800D587C,
     0x800D5884, 0x800D5890, 0x800D589C, 0x800D58A8, 0x800D58B0, 0x800D58C4, 0x800D58DC, 0x800D58F8,
     0x800D5910, 0x800D592C, 0x800D5940, 0x800D5958, 0x800D596C, 0x800D5984, 0x800D59A8, 0x800D59C4,

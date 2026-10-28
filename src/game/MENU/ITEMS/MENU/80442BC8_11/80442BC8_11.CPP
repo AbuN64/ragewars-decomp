@@ -25,7 +25,7 @@ void Items_InvokeHandlerAndClearItemState(struct ObjectRecAt20 *object) {
     state->c = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
 
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 extern char g_menuText[];
@@ -51,7 +51,7 @@ void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
     if (first == 0) {
         return 0;
     }
-    Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
+    Menu_InitializeMenu(first, block, list, a, b, c, d, owner);
     func_80255CB8_de(owner, first);
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;

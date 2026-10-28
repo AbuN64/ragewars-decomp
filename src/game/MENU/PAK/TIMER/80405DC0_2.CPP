@@ -13,19 +13,19 @@
 
 extern s32 D_8015375C;
 
-extern s32 Pak_CheckStatusPrompt(MenuPakBeginProfileLoad *, s32, s32);
+extern s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *, s32, s32);
 
-extern void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
+extern void *Menu_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 
 static __inline__ void pakShow(MenuPakBeginProfileLoad *menu) {
     s32 channel;
     if (D_8015375C) channel = D_800E28C8;
     else channel = menu->slot->unk4;
-    if (Pak_CheckStatusPrompt(menu, channel, 1)) {
+    if (Snapshot_CheckStatusPrompt(menu, channel, 1)) {
         D_80153784 = 1;
-        Pak_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Menu_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     } else {
-        Pak_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Menu_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     }
 }
 
@@ -68,7 +68,7 @@ extern s32 D_800E28C0;
 
 /* Dialog resources are opaque ROM addresses. The list-builder ABI carries
  * player, slot, and optional formatting data as three raw 32-bit words. */
-s32 Pak_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
+s32 Timer_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
     s32 channel;
     void *prompt;
     void *owner;
@@ -90,16 +90,16 @@ s32 Pak_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
         if (!prompt) prompt = menu->prompt;
         if (menu->player) owner = menu->player->unk5DC + 0x554;
         else owner = &D_80145040.dialogOwner;
-        Pak_OpenDialog(owner, prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Menu_OpenDialog(owner, prompt, (s32)menu->player, (s32)menu->slot, 0);
         return 1;
     default: return 1;
     }
-    Pak_OpenDialog(owner, prompt, (s32)player, (s32)slot, 0);
+    Menu_OpenDialog(owner, prompt, (s32)player, (s32)slot, 0);
     return 1;
 }
 
  /* extern */
-void Pak_SelectAvailableChannel(void) {
+void Timer_SelectAvailableChannel(void) {
     s32 channel;
     s32 attempts;
     s32 unavailable;
@@ -127,11 +127,11 @@ loop_2:
 }
 
 /* Returns whether D_800E28C8 holds anything other than -1. */
-s32 Pak_HasSelectedChannel(void) {
+s32 Timer_HasSelectedChannel(void) {
     return D_800E28C8 != -1;
 }
 
-void Pak_ClearTimerFlag(void) {
+void Timer_ClearTimerFlag(void) {
     D_800E28C0 = 0;
 }
 

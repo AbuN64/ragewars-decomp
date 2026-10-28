@@ -17,7 +17,7 @@ struct Node802C07B0 {
     void *field1C;
 };
 
-extern void func_802BB9F8_de();
+extern void Util_InitializeTimerServices();
 
 
 

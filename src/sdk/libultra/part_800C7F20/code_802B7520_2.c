@@ -6,7 +6,7 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_2.H"
 
-s16 func_802B2510_de(PoolRecAt44 *pool, void *owner) {
+s16 alSndpAllocate(PoolRecAt44 *pool, void *owner) {
     s32 count = pool->count;
     SlotRecAt2F *slots = pool->slots;
 

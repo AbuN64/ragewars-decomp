@@ -38,17 +38,17 @@ extern void Audio_StopVoicesBySecondaryValue(void *, s32);
 
 extern void Audio_StopVoicesByFlags(void *arg0, s32 arg1);
 
-extern void func_80259A50_de(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsByFlags(void *arg0, s32 arg1);
 
 extern f32 D_800C3EE0_de[];
 
 extern s32 SetN64_IsModeThirteen(void);
 
-extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Gsky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 extern void Audio_StopVoicesExceptKey(void *arg0, s32 arg1);
 
-extern void func_80259918_de(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsExceptKey(void *arg0, s32 arg1);
 
 extern void Audio_FadeOutMusic(int a);
 
@@ -56,7 +56,7 @@ extern void Audio_EnableMusicGainOverride(Track *a);
 
 extern void Audio_DisableMusicGainOverride(Track *a);
 
-/* Picks a weighted random entry from the range func_80265550_de finds for an id in a scene's table: -1 when
+/* Picks a weighted random entry from the range Defs_FindSortedGroupRange finds for an id in a scene's table: -1 when
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs
  * ten times its table value, a random draw selects one, and when avoidance is requested and it equals the
  * scene's last pick at 0x130 it steps to the next entry (or back from the last). Adapted from
@@ -80,7 +80,7 @@ void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
         }
     }
     Audio_StopVoicesByKey(&context->menu[0], matchValue);
-    func_80259988_de(&context->view[0], matchValue);
+    AudioWorld_RecyclePendingSoundsByKey(&context->view[0], matchValue);
     {
         s32 *contextLock;
         s32 lockClaimCount;
@@ -119,7 +119,7 @@ void Audio_StopAudioBySecondaryValue(ContextRecAt2BC0 *context, s32 matchValue) 
         record = &context->menu[0];
     }
     Audio_StopVoicesBySecondaryValue(record, matchValue);
-    func_802599EC_de(&context->view[0], matchValue);
+    AudioWorld_RecyclePendingSoundsByTrack(&context->view[0], matchValue);
     contextLock = &context->lock;
     releaseInterruptMask = __osDisableInt();
     lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
@@ -152,7 +152,7 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
         record = &context->menu[0];
     }
     Audio_StopVoicesByFlags(record, matchMask);
-    func_80259A50_de(&context->view[0], matchMask);
+    AudioWorld_RecyclePendingSoundsByFlags(&context->view[0], matchMask);
     contextLock = &context->lock;
     releaseInterruptMask = __osDisableInt();
     lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
@@ -169,7 +169,7 @@ s32 Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVecto
     s32 handle;
 
     arg0->alpha = arg5;
-    handle = Audio_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
+    handle = Sound_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
     return handle;
 }
@@ -190,10 +190,10 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
             zero.y = value;
             zero.x = value;
         }
-        result = Sky_FindNearestCamera(&D_80145088, &zero);
+        result = Gsky_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((arg0->frame & 3) == 0) {
-            Audio_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
+            Sound_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
         }
     }
 }
@@ -247,7 +247,7 @@ void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
         }
     }
     Audio_StopVoicesExceptKey(&((ContextRecAt2BC0 *)(context))->menu[0], matchValue);
-    func_80259918_de(&((ContextRecAt2BC0 *)(context))->view[0], matchValue);
+    AudioWorld_RecyclePendingSoundsExceptKey(&((ContextRecAt2BC0 *)(context))->view[0], matchValue);
     {
         s32 *contextLock;
         s32 lockClaimCount;
@@ -455,7 +455,7 @@ s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
 
     total = 0;
     if (scene->count != 0) {
-        if (func_80265550_de(scene->ids, scene->count, id, &first, &last) == 0) {
+        if (Defs_FindSortedGroupRange(scene->ids, scene->count, id, &first, &last) == 0) {
             return -1;
         }
         entry = first;

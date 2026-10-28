@@ -70,7 +70,7 @@ static inline s32 can_fire(char *player, f32 *scale) {
     return ammo;
 }
 
-void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attack) {
+void Weaponai_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attack) {
     char *player;
     s32 action;
 
@@ -86,7 +86,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 0);
 #else
-            Player_ToggleForceMarker(player, 0);
+            Playerai_ToggleForceMarker(player, 0);
 #endif
 
             attack->alternate = 1;
@@ -97,7 +97,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 1);
 #else
-            Player_ToggleForceMarker(player, 1);
+            Playerai_ToggleForceMarker(player, 1);
 #endif
 
         } else {
@@ -128,7 +128,7 @@ typedef struct HeldPlayerState {
     s32 handled78C;
 } HeldPlayerState;
 
-void Weapon_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
+void Weaponai_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
     HeldPlayerState *state;
     s32 finished;
     state = actor->entity;

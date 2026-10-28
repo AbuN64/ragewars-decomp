@@ -125,7 +125,7 @@ extern void Weapon_DrawWeaponLookupModel(void *arg0, struct Dest *arg1, struct L
 
 extern float D_800C2FC8_de;
 
-extern void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *arg1);
+extern void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *arg1);
 
 
 extern void YawMatrixLocal(void *, float);

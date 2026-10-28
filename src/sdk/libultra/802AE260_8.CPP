@@ -60,7 +60,7 @@ void Libultra_RunDebugLinkCommands(void) {
     Libultra_InitDebugLink();
     enabledControl = D_8014D3E2 | 0x40;
     D_8014D3E2 = enabledControl;
-    while (func_802BDEA0_us_rev1() & 3) {
+    while (osPiGetStatus() & 3) {
     }
     D_B2000008 = enabledControl;
 
@@ -198,7 +198,7 @@ u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -207,7 +207,7 @@ u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -274,7 +274,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -282,7 +282,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -297,7 +297,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return response.output;
@@ -321,7 +321,7 @@ s32 Libultra_SendDebugLinkCommand81(s32 arg0) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -330,7 +330,7 @@ s32 Libultra_SendDebugLinkCommand81(s32 arg0) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -369,7 +369,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -377,7 +377,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -392,7 +392,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return 0;
@@ -419,7 +419,7 @@ s32 Libultra_RequestDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -428,7 +428,7 @@ s32 Libultra_RequestDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -483,7 +483,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -491,7 +491,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -506,7 +506,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return arg2;
@@ -533,7 +533,7 @@ s32 Libultra_SubmitDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -542,7 +542,7 @@ s32 Libultra_SubmitDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -597,7 +597,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -605,7 +605,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -620,7 +620,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return arg2;
@@ -650,7 +650,7 @@ u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -659,7 +659,7 @@ u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -740,7 +740,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -748,7 +748,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -763,7 +763,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return response.output;
@@ -793,7 +793,7 @@ u32 Libultra_ExchangeDebugLinkWord(u32 arg0) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -802,7 +802,7 @@ u32 Libultra_ExchangeDebugLinkWord(u32 arg0) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -867,7 +867,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -875,7 +875,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -890,7 +890,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return response.output;
@@ -914,7 +914,7 @@ s32 Libultra_SendDebugLinkControlWord(s32 arg0) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -923,7 +923,7 @@ s32 Libultra_SendDebugLinkControlWord(s32 arg0) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -962,7 +962,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -970,7 +970,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -985,7 +985,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return 0;
@@ -1011,7 +1011,7 @@ s32 Libultra_SendDebugLinkControlString(u8 *arg0) {
     initial_control = D_8014D3E1 | 4;
     D_8014D3E1 = initial_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
 
     mask = 2;
     timeout = 0x4E20;
@@ -1020,7 +1020,7 @@ s32 Libultra_SendDebugLinkControlString(u8 *arg0) {
     D_B2000004 = initial_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & mask) == expected) {
             goto ready;
         }
@@ -1057,7 +1057,7 @@ ready:
     final_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = final_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     final_mask = 0;
     final_expected = 2;
     timeout = 0x4E20;
@@ -1065,7 +1065,7 @@ ready:
     D_B2000004 = final_control;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((D_B2000015 & final_expected) == final_mask) {
             goto cleanup;
         }
@@ -1080,7 +1080,7 @@ cleanup:
     cleanup_control = D_8014D3E1 & 0xFB;
     D_8014D3E1 = cleanup_control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = cleanup_control;
     D_800D3650 = 1;
     return 0;

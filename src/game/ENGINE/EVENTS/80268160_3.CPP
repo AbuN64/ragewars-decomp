@@ -75,10 +75,10 @@ void Events_SetActorEffectMode(LevelActor *actor, int arg1, int arg2, Blast blas
     actor->effectMode = (u8)blast.radius;
 }
 
-/* Calls Barrel_StopActorLoopingSound on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls AnimPool_ReleaseSceneEffect when flag 0x80000 remains set. Adapted from Link_DeactivateActorState with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */
+/* Calls Barrel_StopActorLoopingSound on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls Animpool_ReleaseSceneEffect when flag 0x80000 remains set. Adapted from Link_DeactivateActorState with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */
 
 
-extern void AnimPool_ReleaseSceneEffect(void *arg0);
+extern void Animpool_ReleaseSceneEffect(void *arg0);
 
 
 
@@ -90,6 +90,6 @@ void Events_DeactivateActor(u8 *object, s32 second, s32 third, struct IntPair pa
     ((LevelActor *)object)->flags &= ~0x2000;
     ((LevelActor *)object)->flags &= ~0x100;
     if (((LevelActor *)object)->flags & 0x80000) {
-        AnimPool_ReleaseSceneEffect(object);
+        Animpool_ReleaseSceneEffect(object);
     }
 }

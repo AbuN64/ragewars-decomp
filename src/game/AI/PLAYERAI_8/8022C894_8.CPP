@@ -19,7 +19,7 @@
 
 extern f32 D_800C7F08[];
 
-extern Marker *DynLight_AllocateLightNode(char *, s32);
+extern Marker *Gdynlight_AllocateLightNode(char *, s32);
 
 #include "ENGINE/INSTANCE/GOBJINST_13.H"
 
@@ -34,7 +34,7 @@ extern f32 GameObject_GetActorHeight(void *);
 
 extern func_80204468_S3 *D_800D052C[];
 
-u8 Player_GetImpactSoundEnabled(s32 unused0, s32 arg1) {
+u8 Playerai_GetImpactSoundEnabled(s32 unused0, s32 arg1) {
     u8 *ptr;
 
     if (arg1 == 0x2DA) {
@@ -46,14 +46,14 @@ u8 Player_GetImpactSoundEnabled(s32 unused0, s32 arg1) {
     return 1;
 }
 
-void Player_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 distance) {
+void Playerai_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 distance) {
     Marker *marker;
     CVector3 offset;
     CVector3 pos;
 
     marker = *slot;
     if (marker == 0) {
-        marker = DynLight_AllocateLightNode(&D_8013B1A8, kind);
+        marker = Gdynlight_AllocateLightNode(&D_8013B1A8, kind);
         if (marker == 0) {
             return;
         }
@@ -71,7 +71,7 @@ void Player_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 dista
     marker->scale = D_800C7F10;
 }
 
-void Player_ReleaseMarkerSlot(void *unused0, s32 *arg1) {
+void Playerai_ReleaseMarkerSlot(void *unused0, s32 *arg1) {
     s32 temp;
 
     temp = *arg1;
@@ -81,7 +81,7 @@ void Player_ReleaseMarkerSlot(void *unused0, s32 *arg1) {
     }
 }
 
-int Player_HasWeaponModeFlag(short id, int mode) {
+int Playerai_HasWeaponModeFlag(short id, int mode) {
     switch (mode) {
     case 0:
         if (!(D_800D052C[id]->unk14 & 1)) {

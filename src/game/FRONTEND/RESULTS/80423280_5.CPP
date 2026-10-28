@@ -75,7 +75,7 @@ extern s32 SmpFlicker_IsFlickerIdle(void *);
 
 extern void SmpFlicker_RestoreFlickerValue(void *);
 
-s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta) {
+s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta) {
     s32 clock;
 
     if (D_80154020[1] == 1) {
@@ -136,20 +136,20 @@ s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta
         case 1:
         case 3:
         case 4:
-            Frontend_ShowTrialPreviewBanner();
+            Results_ShowTrialPreviewBanner();
         }
-        Frontend_HideTrialCatalogueWidgets();
+        Results_HideTrialCatalogueWidgets();
         D_800E4690->state = 2;
         D_800E4690->timer = 4;
         break;
     case 8:
         D_800E4690->state = 3;
-        Frontend_HideTrialCatalogueWidgets();
-        Frontend_SetMenuChoiceResult(0xB);
+        Results_HideTrialCatalogueWidgets();
+        Random_SetMenuChoiceResult(0xB);
         return 0;
     case 9:
         D_800E4690->state = 3;
-        Frontend_LoadTrialCompletionFlags();
+        Results_LoadTrialCompletionFlags();
         break;
     }
     if (D_800E4690->state == 3) {

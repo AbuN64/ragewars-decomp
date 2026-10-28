@@ -23,7 +23,7 @@ void Cache_LockResource(void *, void *);
 
 void Cache_UnlockResource(void *, void *);
 
-void **func_802540F4_de(s32, void **, s32, void *, s32);
+void **Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);
 
 void Geometry_GroupModelInstances(void);
 
@@ -131,7 +131,7 @@ void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg
         if (temp_v0 != 0) {
                 temp_s1 = SetN64_GetDirectoryEntry(*temp_v0, arg0, 1);
                 Cache_UnlockResource(0, temp_v0);
-                temp_v0_2 = func_802540F4_de(0, (void **) &sp28, temp_s1, &s_simpModelsIndexText, 1);
+                temp_v0_2 = Cache_RequestWordCountedResource(0, (void **) &sp28, temp_s1, &s_simpModelsIndexText, 1);
                 if (temp_v0_2 != 0) {
                         temp_v0_3 = *sp28;
                         temp_s0 = SetN64_LocatePackSection((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);

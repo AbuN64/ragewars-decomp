@@ -76,7 +76,7 @@ struct StateMenuSelectPlayerSettingsEntry {
 extern s32 D_800D34C0_de;
 
 
-extern void Frontend_SetMenuChoiceResult(s32);
+extern void Random_SetMenuChoiceResult(s32);
 
 extern FieldRow D_800F1DA8[];
 extern FieldRow D_800F1DAC[];

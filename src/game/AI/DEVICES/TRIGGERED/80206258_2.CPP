@@ -25,11 +25,11 @@ extern int Cinema_IsSequenceInWindow(void);
 /** For each of the object's child slots, attach the child to the record and spawn its effect. */
 extern int D_800D297C;
 
-extern void *func_8024BFD4_de(void *, int);
+extern void *Gobjinst_RequestAnimatedModelVariant(void *, int);
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 
-extern void Menu_RequestTrackByIds(s32, void *);
+extern void Track_RequestTrackByIds(s32, void *);
 
 void func_8020676C_de(void *actor, void *motionState, Trigger *trigger) {
     extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
@@ -48,7 +48,7 @@ void func_802067BC_de(Shared_Actor *actor) {
     Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 
-void func_802067FC_de(Trigger *trigger) {
+void Triggered_EnableTriggeredActorState(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
@@ -62,19 +62,19 @@ void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
     Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
-void func_80206898_de(Trigger *trigger) {
+void Triggered_DisableTriggeredActorState(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 trackRequest) {
     extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
-    Menu_RequestTrackByIds((s32)actor, (void *)trackRequest);
+    Track_RequestTrackByIds((s32)actor, (void *)trackRequest);
     actor->weaponFlags |= 0x2100;
     Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
-void func_80206910_de(s32 trackRequest) {
-    Menu_RequestTrackByIds(0, (void *)trackRequest);
+void Triggered_RequestTrackById(s32 trackRequest) {
+    Track_RequestTrackByIds(0, (void *)trackRequest);
 }
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */
@@ -92,7 +92,7 @@ void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
 
     n = (s8)((LevelActor *)actor)->stateE7;
     for (i = 0; i < n; i++) {
-        child = func_8024BFD4_de(actor, i);
+        child = Gobjinst_RequestAnimatedModelVariant(actor, i);
         if (child != 0) {
             info->a = child;
             info->b = child;
@@ -106,7 +106,7 @@ extern f32 D_800D2988;
 
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
-void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
+void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
     CPlatformIntelligence *segment;
     s32 oldState;
     s32 release;
@@ -214,9 +214,9 @@ void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
     }
 }
 
-/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through GraphU64_InterpolateVector, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and Region_SetNodeGroupHeight. */
+/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through Graphu64_InterpolateVector, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and Region_SetNodeGroupHeight. */
 
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
@@ -233,7 +233,7 @@ extern void Region_SetNodeGroupHeight(s32, f32);
  * 0x800C6C30 = 0.5 (float, D_800C6C30 in this cartridge's tables)
  * 0x800C6C34 = 0.3 (float, D_800C6C34 in this cartridge's tables)
  * 0x800C6C38 = 15.0 (float, D_800C6C38 in this cartridge's tables)
- * 0x800D2988 = 1.0 (float, D_800D2988 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800D2988: `swc1` at %lo(D_800D2988) in Nav_UpdateActorStateAnimation.s)
+ * 0x800D2988 = 1.0 (float, D_800D2988 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800D2988: `swc1` at %lo(D_800D2988) in Actor_UpdateActorStateAnimation.s)
  * 0x800C6C3C = 1.0 (float, D_800C6C3C in this cartridge's tables)
  * 0x800C6C40 = 3.1415927 (float, D_800C6C40 in this cartridge's tables)
  * 0x800C6C44 = 0.5 (float, D_800C6C44 in this cartridge's tables)
@@ -309,7 +309,7 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
         point.x += segment->radius * Math_Sinf(segment->angle);
         point.z += segment->radius * Math_Cosf(segment->angle);
     }
-    GraphU64_InterpolateVector(&rider->pos, t, base, &point);
+    Graphu64_InterpolateVector(&rider->pos, t, base, &point);
     switch (segment->bobMode) {
     case 0:
         rider->pos.y += segment->bob * Math_Sinf(rider->phase);
@@ -541,7 +541,7 @@ s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
 }
 
 extern s32 Rumble_TestActorStateBit(void *, void *);
-void func_802077CC_de(int actorHandle) {
+void Triggered_TestActorStateCallback(int actorHandle) {
     Rumble_TestActorStateBit(&g_world, (void *)actorHandle);
 }
 

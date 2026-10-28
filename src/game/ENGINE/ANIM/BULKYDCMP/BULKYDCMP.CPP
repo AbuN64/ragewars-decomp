@@ -101,20 +101,20 @@ void func_8025E468_de(void) {
 }
 
 void func_8025E48C_de(void) {
-    func_80258740_de(&D_8010C080);
+    Sound_AcquireContextLock(&D_8010C080);
 }
 
 /* 8025E280_3.CPP */
-s32 func_802585F4_de(struct ContextRecAt2BC0 *, s32);
+s32 Sound_HasActiveOrPendingSound(struct ContextRecAt2BC0 *, s32);
 
 void func_8025E4B0_de(void) {
-    func_802587A4_de(&D_8010C080);
+    Sound_ReleaseContextLock(&D_8010C080);
 }
 
 struct ContextRecAt2BC0;
 
 s32 func_8025E4D4_de(s32 wantedKey) {
-    return func_802585F4_de(&D_8010C080, wantedKey);
+    return Sound_HasActiveOrPendingSound(&D_8010C080, wantedKey);
 }
 
 #if defined(VERSION_US)

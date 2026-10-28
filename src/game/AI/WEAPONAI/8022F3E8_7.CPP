@@ -74,14 +74,14 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-extern s32 Player_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Playerai_GetWeaponAmmo(void *arg0, s16 arg1);
 
-/* Advances a player's second charging action: when the trigger is released (as in Weapon_UpdateSpinAndRepeatCue) or the
+/* Advances a player's second charging action: when the trigger is released (as in Weaponai_UpdateSpinAndRepeatCue) or the
  * cooldown is past D_800C8008, it switches to action 2, runs func_8022AF40_de and func_8022B00C_de, plays sound
  * 0x794 at the player's target or position and pushes the charge at 0x128 by the release amount; otherwise
  * it grows the charge by the charge rate and each time the cue timer at 0x64 runs out adds the cue period
  * back and plays the charge cue (0x3F9 in a multiplayer match without controller, 0x4CB otherwise).
- * Adapted from Weapon_UpdateSpinAndRepeatCue. */
+ * Adapted from Weaponai_UpdateSpinAndRepeatCue. */
 
 
 
@@ -114,7 +114,7 @@ static inline s32 released(void *actor, char *player) {
     return Player_HasAmmoForMode(player, ((Shared_ActorView *)player)->selectedAction) == 0;
 }
 
-void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fire) {
+void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fire) {
     char *player;
     s32 action;
     char *model;
@@ -159,7 +159,7 @@ void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fir
     }
 }
 
-void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
+void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
     s16 temp_a1;
     s32 temp_v1;
     void *value;
@@ -190,7 +190,7 @@ check_height:
         }
         goto done;
 check_state:
-        if (Player_GetWeaponAmmo(value, temp_a1) == 1) {
+        if (Playerai_GetWeaponAmmo(value, temp_a1) == 1) {
             Nav_RequestActorState(arg0, arg1, 7);
         } else {
             Nav_RequestActorState(arg0, arg1, 5);
@@ -200,7 +200,7 @@ done:
     }
 }
 
-void Weapon_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
+void Weaponai_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
     char *player;
     CVector3 *position;
     char *target;

@@ -22,7 +22,7 @@ extern RecordN64EngCreateNumericWidget *Cache_AllocateMemory(s32);
 void N64Eng_SetNumericWidgetValue(RecordN64EngCreateNumericWidget *widget, s32 arg1);
 
 
-extern void Frontend_ReplaceNodeRefs(s32 arg0, RecordN64EngCreateNumericWidget *arg1, RecordN64EngCreateNumericWidget *arg2);
+extern void Node_ReplaceNodeRefs(s32 arg0, RecordN64EngCreateNumericWidget *arg1, RecordN64EngCreateNumericWidget *arg2);
 
 RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     RecordN64EngCreateNumericWidget *source;
@@ -47,9 +47,9 @@ RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 arg0, s32 arg1, 
     result->field_54 = arg4;
     N64Eng_SetNumericWidgetValue(result, arg2);
     result->field_5C = 2;
-    Frontend_WrapNodeInParent(source, result);
+    Node_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    Frontend_ReplaceNodeRefs(context, source, result);
+    Node_ReplaceNodeRefs(context, source, result);
     return result;
 }
 

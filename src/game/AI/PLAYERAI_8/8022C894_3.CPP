@@ -10,7 +10,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJB.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-extern void Ovlgame_ReleaseObjectHandles(ResourceHandleOwner *object);
+extern void Player_ReleaseObjectHandles(ResourceHandleOwner *object);
 
 extern s32 D_800CED30;
 
@@ -30,7 +30,7 @@ extern void Player_UpdateViewAngles(s32, s32, void *);
 
 extern void ContPad_ClearControllerInput(void *arg0);
 
-s32 func_80245618_de(s32, s32, s32 *);
+s32 CCinema_RequestTrackWithCallbacks(s32, s32, s32 *);
 
 
 
@@ -39,7 +39,7 @@ void func_8022D290_de(Shared_ActorView *widget) {
     s32 clearedActorFlags;
 
     widget->unk_0x0860 = 0;
-    Ovlgame_ReleaseObjectHandles((s32) widget);
+    Player_ReleaseObjectHandles((s32) widget);
     clearedActorFlags = widget->flags & 0xFF7FFFFF;
     widget->flags = clearedActorFlags;
     widget->unk_0x001C = 0;
@@ -111,7 +111,7 @@ void func_8022D428_de(void *player) {
             GraphU64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
         if (actor->actionTimer > D_800C2DB8_de) {
-            Ovlgame_UpdateRunEndPlayer(player);
+            Player_UpdateRunEndPlayer(player);
         }
     }
 }
@@ -137,7 +137,7 @@ void func_8022D4BC_de(void *runEndPlayer)
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_1238 = -1;
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_1230 = 0;
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_122C = (((ObjectLinks1458_2 *)(runEndPlayer))->unk_122C) & (~0x20);
-    Ovlgame_UpdateRunEndPlayer(runEndPlayer);
+    Player_UpdateRunEndPlayer(runEndPlayer);
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_50 = D_800C2DC0_de;
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_54 = D_800C2DC0_de;
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_58 = D_800C2DC0_de;
@@ -150,7 +150,7 @@ void func_8022D4BC_de(void *runEndPlayer)
 
 void func_8022D54C_de(s32 requestValue) {
     D_80102A48 = requestValue;
-    func_80245618_de(0x50, 0, &D_0022ED24);
+    CCinema_RequestTrackWithCallbacks(0x50, 0, &D_0022ED24);
 }
 
 void func_8022D57C_de(void *player) {
@@ -165,8 +165,8 @@ void func_8022D57C_de(void *player) {
     }
     value = actor->actionTimer;
     if (D_800C2DC4_de < value) {
-        Ovlgame_UpdateRunEndPlayer(player);
+        Player_UpdateRunEndPlayer(player);
     }
 }
 
-void func_8022D5F0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xA); }
+void func_8022D5F0_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xA); }

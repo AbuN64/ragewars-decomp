@@ -30,7 +30,7 @@ extern s8 D_80102B0D[];
 
 extern s32 Achieve_CountEarnedAchievements(s32);
 
-extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
+extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 #if defined(VERSION_DE)
 enum { MENU_804212A4_941 = 935, MENU_804212A4_943 = 937, MENU_804212A4_945 = 939, MENU_804212A4_948 = 942 };
@@ -95,21 +95,21 @@ void Menu_RefreshExtraOptionLocks(void) {
     if (D_800E4400->full == 1) {
         total = 40;
     }
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
     if (total >= 10) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
     }
     if (total >= 6) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
     }
     if (total >= 12) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
     }
     if (total >= 14) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
     }
 }
 

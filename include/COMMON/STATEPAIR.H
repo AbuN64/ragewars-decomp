@@ -58,5 +58,5 @@ struct CommandListMenu {
 struct Widget;
 void Tsmos_ScaleWidgetTree(struct Widget *, struct Widget *);
 
-extern void Frontend_StartConfiguredMatch(void);
+extern void Stage_StartConfiguredMatch(void);
 #endif

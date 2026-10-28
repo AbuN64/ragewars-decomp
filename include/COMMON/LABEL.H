@@ -25,9 +25,9 @@ struct ObjRecAt480 {
 struct ProfileStatisticsScreen;
 typedef struct ProfileStatisticsScreen ProfileStatisticsScreen;
 
-extern void Frontend_RefreshUnlockedFocusLabel();
+extern void Focus_RefreshUnlockedFocusLabel();
 
-extern void Frontend_RefreshProfileStatistics();
+extern void Focus_RefreshProfileStatistics();
 
 struct Object49C;
 struct Object49C {
@@ -157,10 +157,10 @@ struct MenuRecAt108 {
     s32 clock;
 };
 
-extern void Frontend_UpdateFocusCaption();
+extern void Focus_UpdateFocusCaption();
 
 extern void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value);
-extern void Frontend_ShowUnlockedEntries(s32 style);
+extern void Focus_ShowUnlockedEntries(s32 style);
 
-extern void Frontend_SetPreviewRenderFlags(struct ObjectB8 *, s32);
+extern void Model_SetPreviewRenderFlags(struct ObjectB8 *, s32);
 #endif

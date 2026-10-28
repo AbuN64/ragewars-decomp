@@ -17,7 +17,7 @@ extern f32 D_800C4460_de;
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
 
-extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
+extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
 /* Plays an effect at a position through func_8025DEC0_de unless the global D_80146894 is set, selecting the target from the given object's type and team masks and choosing the scale from the global option flags. Adapted from Events_PlayClipEvent with the null object test and case 2 removed, a team test for case 0, a mask test for case 1, and the scale constants changed. */
 
@@ -64,7 +64,7 @@ void Events_StartActorEmitter(func_8024E8F0_S1 *arg0, ContextEventsStartActorEmi
         resource = &D_8010EC90;
     }
 
-    func_8028CE94_de(&g_world, resource, arg6.value, arg3,
+    CScene_StartEventClips(&g_world, resource, arg6.value, arg3,
                   arg6.angle * *(&D_800C4458_de + 1), arg6.scale * D_800C4460_de);
 }
 

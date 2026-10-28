@@ -26,88 +26,88 @@ extern void func_80225F44_de(void *, void *);
 
 void func_8022D60C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D628_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x32); }
+void func_8022D628_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x32); }
 
 void func_8022D644_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D660_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x1E); }
+void func_8022D660_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x1E); }
 
 void func_8022D67C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D698_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x28); }
+void func_8022D698_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x28); }
 
 void func_8022D6B4_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D6D0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xB); }
+void func_8022D6D0_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xB); }
 
 void func_8022D6EC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D708_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xC); }
+void func_8022D708_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xC); }
 
 void func_8022D724_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D740_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xD); }
+void func_8022D740_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xD); }
 
 void func_8022D75C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D778_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xE); }
+void func_8022D778_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xE); }
 
 void func_8022D794_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D7B0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xF); }
+void func_8022D7B0_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0xF); }
 
 void func_8022D7CC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D7E8_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x14); }
+void func_8022D7E8_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x14); }
 
 void func_8022D804_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D820_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x46); }
+void func_8022D820_de(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x46); }
 
 void func_8022D83C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void Player_StartPlayerSequence60(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x3C); }
+void Playerai_StartPlayerSequence60(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x3C); }
 
-void Player_UpdateSequence60RunEndPose(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
+void Playerai_UpdateSequence60RunEndPose(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void Player_StartPlayerSequence71(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x47); }
+void Playerai_StartPlayerSequence71(void *a, void *b) { Playerai_TryStartPlayerSequence(a, b, 0x47); }
 
 /** Thin wrapper around func_8022D57C_de. */
-void Player_UpdateSequence71RunEndPose(void *sequencePlayer) {
+void Playerai_UpdateSequence71RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
-void Player_StartPlayerSequence72(void *a, void *b) {
-    Player_TryStartPlayerSequence(a, b, 0x48);
+/** Thin wrapper around Playerai_TryStartPlayerSequence with a fixed third argument. */
+void Playerai_StartPlayerSequence72(void *a, void *b) {
+    Playerai_TryStartPlayerSequence(a, b, 0x48);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void Player_UpdateSequence72RunEndPose(void *sequencePlayer) {
+void Playerai_UpdateSequence72RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
-void Player_StartPlayerSequence73(void *a, void *b) {
-    Player_TryStartPlayerSequence(a, b, 0x49);
+/** Thin wrapper around Playerai_TryStartPlayerSequence with a fixed third argument. */
+void Playerai_StartPlayerSequence73(void *a, void *b) {
+    Playerai_TryStartPlayerSequence(a, b, 0x49);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void Player_UpdateSequence73RunEndPose(void *sequencePlayer) {
+void Playerai_UpdateSequence73RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
-void Player_StartPlayerSequence74(void *a, void *b) {
-    Player_TryStartPlayerSequence(a, b, 0x4A);
+/** Thin wrapper around Playerai_TryStartPlayerSequence with a fixed third argument. */
+void Playerai_StartPlayerSequence74(void *a, void *b) {
+    Playerai_TryStartPlayerSequence(a, b, 0x4A);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void Player_UpdateSequence74RunEndPose(void *sequencePlayer) {
+void Playerai_UpdateSequence74RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-void Player_InitializeActorModelEffect(void *effectPlayerState, void *sourceActor) {
+void Playerai_InitializeActorModelEffect(void *effectPlayerState, void *sourceActor) {
     char *o = (char *)effectPlayerState;
     char *a1 = (char *)sourceActor;
     s32 actorModelEntry;
@@ -130,13 +130,13 @@ void Player_InitializeActorModelEffect(void *effectPlayerState, void *sourceActo
     }
 }
 
-void Player_ClearPlayerWeaponLock(void *lockedPlayerState) {
+void Playerai_ClearPlayerWeaponLock(void *lockedPlayerState) {
     struct Player *player = lockedPlayerState;
     func_80218464_de(&player->weaponBusy);
     player->locked = 0;
 }
 
-void Player_EnterMovingSequenceState(void *player, void *body) {
+void Playerai_EnterMovingSequenceState(void *player, void *body) {
     struct SharedPlayer *a0 = player;
     void *a1 = body;
 
@@ -146,13 +146,13 @@ void Player_EnterMovingSequenceState(void *player, void *body) {
     }
 }
 
-void Player_ResetPlayerWeaponLock(void *lockedPlayerState) {
+void Playerai_ResetPlayerWeaponLock(void *lockedPlayerState) {
     struct Player *player = lockedPlayerState;
     func_80218464_de(&player->weaponBusy);
     player->locked = 0;
 }
 
-void Player_EnterStoppedSequenceState(void *player, void *body) {
+void Playerai_EnterStoppedSequenceState(void *player, void *body) {
     struct SharedPlayer *a0 = player;
     void *a1 = body;
 
@@ -162,7 +162,7 @@ void Player_EnterStoppedSequenceState(void *player, void *body) {
     }
 }
 
-void Player_OffsetActorForState15(Actor126 *actor, Object126 *positionedObject) {
+void Playerai_OffsetActorForState15(Actor126 *actor, Object126 *positionedObject) {
     Object126 *object;
     f32 angle;
     f32 object_angle;

@@ -26,7 +26,7 @@ extern char g_fmtDec4Pad[];
 extern s32 Player_GetPlayerIndex(void *, unsigned int);
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 Items_FormatPlayerResultHalfword(LayeredText *field, struct MenuRules *holder) {
+s32 Player_FormatPlayerResultHalfword(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;

@@ -28,20 +28,20 @@ s32 Libultra_ReadDebugLinkBlock(u8 *dst, s32 count, u32 *checksum) {
     control = D_8014D3E1 | 8;
     D_8014D3E1 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = control;
     control = D_8014D3E3 & 0xF8;
     D_8014D3E3 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = control;
     control = D_8014D3E2 | 2;
     D_8014D3E2 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000008 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000018 = 0;
 
     if (count-- != 0) {
@@ -52,7 +52,7 @@ next:
         timeout = 0x4E20;
         do {
             do {
-            } while (func_802BDEA0_us_rev1() & 3);
+            } while (osPiGetStatus() & 3);
             if ((D_B2000015 & mask) == expected) {
                 goto ready;
             }
@@ -67,7 +67,7 @@ ready:
             goto release;
         }
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         sum = (sum << 1) | (sum >> 31);
         value = D_B2000021;
         *dst++ = value;
@@ -82,17 +82,17 @@ release:
     control = D_8014D3E2 & 0xFD;
     D_8014D3E2 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000008 = control;
     control = D_8014D3E1 & 0xF7;
     D_8014D3E1 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = control;
     control = D_8014D3E3 & 0xF8;
     D_8014D3E3 = control;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = control;
     return result;
 }
@@ -107,7 +107,7 @@ static inline void waitPort(u8 *port, u8 mask, u8 expected)
     s32 timeout = 0x4E20;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         if ((*port & mask) == expected)
             return;
         if (timeout-- == 0) {
@@ -128,24 +128,24 @@ s32 Libultra_WriteDebugLinkBlock(u8 *stream, s32 count)
     if (D_8014D3E8 == 0) {
         control = (D_8014D3E3 & 0xF8) | 1;
         D_8014D3E3 = control;
-        do {} while (func_802BDEA0_us_rev1() & 3);
+        do {} while (osPiGetStatus() & 3);
         D_B200000C = control;
         control = D_8014D3E2 | 2;
         D_8014D3E2 = control;
-        do {} while (func_802BDEA0_us_rev1() & 3);
+        do {} while (osPiGetStatus() & 3);
         D_B2000008 = control;
         control = D_8014D3E1 | 1;
         D_8014D3E1 = control;
-        do {} while (func_802BDEA0_us_rev1() & 3);
+        do {} while (osPiGetStatus() & 3);
         D_B2000004 = control;
-        do {} while (func_802BDEA0_us_rev1() & 3);
+        do {} while (osPiGetStatus() & 3);
         D_auto_B2000014 = 0;
         while (count-- != 0) {
             waitPort(&D_B2000015, 0x40, 0x40);
             if (D_8014D3E8 != 0)
                 goto cleanup;
             data = *stream++;
-            do {} while (func_802BDEA0_us_rev1() & 3);
+            do {} while (osPiGetStatus() & 3);
             D_auto_B2000020 = data;
         }
         waitPort(&D_B2000015, 0x40, 0x40);
@@ -155,7 +155,7 @@ s32 Libultra_WriteDebugLinkBlock(u8 *stream, s32 count)
             s32 retries = D_800D3650;
             s32 expected = 0;
             do {
-                do {} while (func_802BDEA0_us_rev1() & 3);
+                do {} while (osPiGetStatus() & 3);
                 if ((D_B2000011 & mask) == expected)
                     goto close_ready;
                 if (timeout-- == 0) {
@@ -173,15 +173,15 @@ close_ready:
 cleanup:
     control = D_8014D3E1 & 0xFE;
     D_8014D3E1 = control;
-    do {} while (func_802BDEA0_us_rev1() & 3);
+    do {} while (osPiGetStatus() & 3);
     D_B2000004 = control;
     control = D_8014D3E2 & 0xFD;
     D_8014D3E2 = control;
-    do {} while (func_802BDEA0_us_rev1() & 3);
+    do {} while (osPiGetStatus() & 3);
     D_B2000008 = control;
     control = D_8014D3E3 & 0xF8;
     D_8014D3E3 = control;
-    do {} while (func_802BDEA0_us_rev1() & 3);
+    do {} while (osPiGetStatus() & 3);
     D_B200000C = control;
     return result;
 }

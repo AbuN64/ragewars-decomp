@@ -9,14 +9,14 @@ typedef struct Work80244494 Work80244494;
 
 struct Group;
 
-extern void func_802458D8_de();
+extern void Cinema_ClearPlaybackFlag();
 
-extern void func_8024570C_de();
+extern void Cinema_RequestSequenceFade();
 
 
-extern void func_802458F8_de(void);
+extern void Cinema_ClearPlaybackPauseState(void);
 
-extern int func_8024576C_de();
+extern int Cinema_HasSequenceResource();
 
 
 
@@ -50,7 +50,7 @@ struct Work80244494;
 
 struct CCollisionInfo2_t;
 
-extern s32 func_802457E0_de(void);
+extern s32 Cinema_HasSequenceEnded(void);
 
 
 
@@ -61,14 +61,14 @@ struct GameState {
     s32 paused;
 };
 
-extern int func_80245908_de();
+extern int Cinema_IsSequenceFlagTwoSet();
 
 
 struct GameState;
 typedef struct GameState GameState;
 
 
-extern int func_80245764_de();
+extern int Cinema_IsFadeAllowed();
 
 extern void Cinema_EndSequence();
 
@@ -77,7 +77,7 @@ extern void Cinema_EndSequence();
 extern int D_800CB420_de;
 
 
-extern void func_802458C4_de();
+extern void Cinema_SetPlaybackFlag();
 
 extern int D_800CB41C_de;
 

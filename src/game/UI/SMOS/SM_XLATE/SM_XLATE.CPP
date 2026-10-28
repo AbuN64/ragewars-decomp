@@ -20,11 +20,11 @@ struct Shared_MenuDefinition {
     Shared_MenuDefinition *unk44;
 };
 void SmSmngr_InitializeCurrentScreen(void);
-void Smos_PopScreen(void);
+void Menu_PopScreen(void);
 void StreamBufferFree(StreamBuffer *);
-void Smos_DrainResourceWork(void);
-void Frontend_AcquireArchiveEntry(s32);
-void Frontend_ReleaseReferencedBuffer(s32);
+void Stream_DrainResourceWork(void);
+void Node_AcquireArchiveEntry(s32);
+void Node_ReleaseReferencedBuffer(s32);
 
  
 
@@ -100,7 +100,7 @@ void SmXlate_SwitchScreen(s32 index) {
     ScreenEntry *var_v1;
     ScreenEntry *var_v1_2;
 
-    Smos_DrainResourceWork();
+    Stream_DrainResourceWork();
     var_s2 = 0;
     var_s5 = 1;
     if (D_8014D080->current >= 0) {
@@ -144,7 +144,7 @@ block_search_check:
         if (((ScreenEntry *)screens)[temp_a0->current].owner != index) {
             do {
                 temp_a0->field530 = 1;
-                Smos_PopScreen();
+                Menu_PopScreen();
                 
                 temp_a0 = D_8014D080;
             } while (((ScreenEntry *)screens)[D_8014D080->current].owner != index);
@@ -152,7 +152,7 @@ block_search_check:
         D_8014D080->cacheCount = 0;
         D_8014D080->focus = temp_s4;
         if (var_s2 == 0) {
-            Frontend_AcquireArchiveEntry(index);
+            Node_AcquireArchiveEntry(index);
             temp_v0 = Frontend_GetScreenData(index);
             temp_a0_2 = ((void *)&D_8014D080->screens[D_8014D080->current]);
             temp_a0_2->primary = temp_v0;
@@ -171,7 +171,7 @@ loop_18:
                     D_8014D080->lowIndex = temp_v0_2;
                     
                     var_a0 = D_8014D080->current;
-                    Frontend_AcquireArchiveEntry(D_8014D080->screens[var_a0].owner);
+                    Node_AcquireArchiveEntry(D_8014D080->screens[var_a0].owner);
                     owner = D_8014D080->screens[D_8014D080->current].owner;
                     temp_v0_3 = Frontend_GetScreenData(owner);
                     temp_a0_3 = ((void *)&D_8014D080->screens[D_8014D080->current]);
@@ -218,7 +218,7 @@ after_found_callback:
         goto block_78;
     }
 block_not_found:
-    Frontend_AcquireArchiveEntry(index);
+    Node_AcquireArchiveEntry(index);
     if (((u16) (((Shared_MenuDefinition *)(Frontend_GetScreenData(index)))->unk12) >> 0xC) & 1) {
         focus = D_8014D080->screens[D_8014D080->current].focus;
         if ((focus != 0) && ((temp_s1 = focus->unkC, (Frontend_IsValidScreenIndex((s32) temp_s1) == 0)) || (temp_s1 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index = D_8014D080->current), (temp_s1 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index != temp_a1))) {
@@ -305,7 +305,7 @@ after_e06:
         SmSmngr_DispatchPrimaryScreenEvent(0xE01, 0, 0, 0);
     }
 after_e01:
-    Smos_DrainResourceWork();
+    Stream_DrainResourceWork();
     e03_arg_copy = index;
     if (D_8014D080->current != -1) {
         temp_v0_11 = D_8014D080->callback;
@@ -331,7 +331,7 @@ after_e03:
             var_s0 = var_s1_2;
             do {
                 var_s1_2 += 1;
-                Frontend_ReleaseReferencedBuffer(temp_v1_2->screens[var_s0].owner);
+                Node_ReleaseReferencedBuffer(temp_v1_2->screens[var_s0].owner);
                 temp_v1_2 = D_8014D080;
                 D_8014D080->screens[var_s0].primary = 0;
                 D_8014D080->screens[var_s0].focus = 0;

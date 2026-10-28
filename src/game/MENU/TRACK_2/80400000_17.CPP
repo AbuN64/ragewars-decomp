@@ -21,7 +21,7 @@ extern void SetN64_DrawColorRectangle(void *,u8 *,s32,s32,s32,s32);
 static inline u32 toUnsigned(f32 v,f32 limit) { u32 result; if(!(limit<=v)) result=(u32)(s32)v; else { v-=limit; result=(u32)(s32)v; result|=0x80000000; } return result; }
 static inline f32 unsignedWidth(u32 v) { f64 d=(s32)v; if((s32)v<0)d+=D_800DCC30; return (f32)d; }
 static inline f32 unsignedHeight(u32 v) { f64 d=(s32)v; if((s32)v<0)d+=D_800DCC40_de; return (f32)d; }
-void Menu_DrawTrackOverlay(ScreenRectangle *rectangle) {
+void Track_DrawTrackOverlay(ScreenRectangle *rectangle) {
     CVector3 color,baseColor;
     u8 rgba[4];
     u32 width,height,right,bottom;
@@ -39,8 +39,8 @@ void Menu_DrawTrackOverlay(ScreenRectangle *rectangle) {
         value=unsignedHeight(height)+rectangle->y;
         if(!(D_800DCC48_de<=value)) bottom=(u32)(s32)value;
         else {value-=D_800DCC48_de; bottom=(u32)(s32)value; bottom|=0x80000000;}
-        baseColor=Menu_EvaluateTrackColor(D_800E2830->time);
-        alpha=Menu_EvaluateTrackOpacity(D_800E2830->time);
+        baseColor=Track_EvaluateTrackColor(D_800E2830->time);
+        alpha=Track_EvaluateTrackOpacity(D_800E2830->time);
         color=baseColor;
         if(D_800E2830->unknown60) {
             scale=D_800E2830->fade;
@@ -69,7 +69,7 @@ void Menu_DrawTrackOverlay(ScreenRectangle *rectangle) {
         value=0.0f;
         SetN64_DrawColorRectangle(&D_8011FAC0,rgba,width,height,right,bottom);
     }
-    if(D_800DE7F4_de)Menu_DrawLetterboxBands();
+    if(D_800DE7F4_de)Track_DrawLetterboxBands();
 }
 
 /* When the entry table is available, loads it through SetN64_LocatePackSection and Cache_RequestResource, finds the
@@ -108,7 +108,7 @@ extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
 
-void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *obj) {
+void Track_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *obj) {
     s32 size;
     s32 **table;
     s32 key;
@@ -146,7 +146,7 @@ void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *o
     }
 }
 
-s32 Menu_RequestTrackByKey(s32 key) {
+s32 Track_RequestTrackByKey(s32 key) {
     s32 size;
     s32 **table;
     s32 loaded;
@@ -182,7 +182,7 @@ s32 Menu_RequestTrackByKey(s32 key) {
     return D_800E2830->targetD8;
 }
 
-void Menu_RequestTrackByName(char *name) {
+void Track_RequestTrackByName(char *name) {
     s32 size;
     s32 **table;
     s32 loaded;
@@ -215,7 +215,7 @@ void Menu_RequestTrackByName(char *name) {
     }
 }
 
-s32 Menu_HasNoTrackRequestItems(void) {
+s32 Track_HasNoTrackRequestItems(void) {
     s32 found;
     s32 *track;
     Triple *refs;

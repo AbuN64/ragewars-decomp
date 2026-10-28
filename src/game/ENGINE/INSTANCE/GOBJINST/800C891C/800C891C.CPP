@@ -17,7 +17,7 @@ unsigned int D_blob_d7792239ca6928912830[1] = {
 #endif
 
 /* CODE_80245D20.CPP */
-extern void InstHdr_ResetInstanceRenderIndices(signed char *arg0);
+extern void Insthdr_ResetInstanceRenderIndices(signed char *arg0);
 
 extern f32 D_800CB430_de[];
 extern f32 D_800D2988[];
@@ -28,7 +28,7 @@ extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
- extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+ extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     if (actor->flags & 0x3000) return 1;
@@ -102,8 +102,8 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
             currentTargetYaw = currentHeading;
             blendedYaw = actorYaw;
             if (currentHeading != actorYaw) {
-                GraphU64_WrapPeriodicValue(&blendedYaw);
-                GraphU64_WrapPeriodicValue(&currentTargetYaw);
+                Graphu64_WrapPeriodicValue(&blendedYaw);
+                Graphu64_WrapPeriodicValue(&currentTargetYaw);
                 if (blendedYaw > currentTargetYaw) {
                     wrappedTargetYaw=currentTargetYaw+6.2831855f;
                     if ((wrappedTargetYaw-blendedYaw)<(blendedYaw-currentTargetYaw)) currentTargetYaw=wrappedTargetYaw;
@@ -119,7 +119,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
                     blendedYaw=oldAngle-((f32)material->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
                     if (blendedYaw<targetAngle) blendedYaw=targetAngle;
                 }
-                GraphU64_WrapPeriodicValue(&blendedYaw);
+                Graphu64_WrapPeriodicValue(&blendedYaw);
             }
             rider->yaw = blendedYaw;
         }
@@ -131,7 +131,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
     currentBlend = (f32) material->strength * D_800CB430_de[0] * D_800D2988[0];
     currentBlend = ((currentBlend < 0.0f ? 0.0f : currentBlend) > 1.0f ? 1.0f : (currentBlend < 0.0f ? 0.0f : currentBlend));
     actorCurrent=&actor->current;
-    GraphU64_InterpolateVector(actorCurrent, currentBlend, actorCurrent, &v10);
+    Graphu64_InterpolateVector(actorCurrent, currentBlend, actorCurrent, &v10);
     movement->x = (f32) (movement->x + actor->current.x);
     movement->z = (f32) (movement->z + actor->current.z);
     if (material->flags & 0x100) {
@@ -147,13 +147,13 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
     actor->current.y += (v10.y-actor->current.y)*0.2f;
 }
 
-/* Resets an object through InstHdr_ResetInstanceRenderIndices, then clears its words from 0x1C to 0x38 and at 0x40, 0x44
+/* Resets an object through Insthdr_ResetInstanceRenderIndices, then clears its words from 0x1C to 0x38 and at 0x40, 0x44
    and 0x4C, sets the word at 0x3C to -1 and stores D_800C8914 in the float at 0x48. */
 
 void GameObject_ResetActorMotion(void *levelActor) {
     float k;
 
-    InstHdr_ResetInstanceRenderIndices(levelActor);
+    Insthdr_ResetInstanceRenderIndices(levelActor);
     k = D_800C8914;
     ((LevelActor *)levelActor)->position1.x = 0;
     ((LevelActor *)levelActor)->position1.y = 0;

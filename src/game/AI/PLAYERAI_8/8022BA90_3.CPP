@@ -72,7 +72,7 @@ static inline float getYaw(void) {
     return D_80140FC0 * D_800C2D40_de.first;
 }
 
-extern void Player_InitializePlayerHealth(void *arg0);
+extern void Playerai_InitializePlayerHealth(void *arg0);
 
 void func_8022C060_de(s32 player, s32 arg1) {
     func_8022BF04_de(player, arg1, 5, 0x1B);
@@ -279,7 +279,7 @@ void func_8022C5DC_de(void *object) {
     if (record != 0) {
         do {
             record->controls->transientFlag = 0;
-            Player_InitializePlayerHealth(record);
+            Playerai_InitializePlayerHealth(record);
             record = record->next;
         } while (record != 0);
     }

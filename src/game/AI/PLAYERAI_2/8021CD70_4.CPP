@@ -14,7 +14,7 @@
 
 
 
-extern void Sky_ProjectToScreen(View *, CVector3 *, f32 *, f32 *);
+extern void Gsky_ProjectToScreen(View *, CVector3 *, f32 *, f32 *);
 
 void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {
     f32 x;
@@ -30,7 +30,7 @@ void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scal
               <= view->distance)) {
             return;
         }
-        Sky_ProjectToScreen(view, point, &x, &y);
+        Gsky_ProjectToScreen(view, point, &x, &y);
         if (x < -64.0f || (f32) (D_800E28D0 + 0x40) < x || y < -64.0f
             || (f32) (*(&D_800E28D0 + 1) + 0x40) < y) {
             return;

@@ -72,7 +72,7 @@ struct FourPlayerResultsScreen;
 
 
 
-extern void Frontend_ApplySelectedPlayerLoadouts(void);
+extern void Equip_ApplySelectedPlayerLoadouts(void);
 
 struct Entry42 {
     MenuWidget *window;

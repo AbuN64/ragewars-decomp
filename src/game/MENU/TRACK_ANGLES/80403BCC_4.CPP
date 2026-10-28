@@ -74,7 +74,7 @@ void *Menu_GetTrackTargetClip(s32 key) {
     return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 1);
 }
 
-void func_80403DE8_de(void) {
+void CTrackResource_AccessResourceSection(void) {
     SetN64_GetPackSection(D_800E2830->resource, 3);
 }
 

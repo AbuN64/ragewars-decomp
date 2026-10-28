@@ -166,7 +166,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                     break;
                 }
                 if (particleLifeRange != 0) {
-                    actorParticleScale = func_8024BF24_de(actor);
+                    actorParticleScale = Gobjinst_GetModelParticleScale(actor);
                     params.fields.lifeRange = particleLifeRange << 8;
                     params.fields.countRange = 0;
                     params.fields.countBase = 0;

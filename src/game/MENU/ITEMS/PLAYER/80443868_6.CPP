@@ -20,7 +20,7 @@
 
 
 
-s32 Items_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
+s32 Player_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
     s32 player = Player_GetPlayerIndex(&D_80145040, holder->owner);
     /* D_80146398 is the hub's func_8041F2A0_Config array (0x96-byte records); index player*150 then reads the record's first halfword */
     s32 value = *(s16 *) &g_playerSettings[player];
@@ -40,7 +40,7 @@ s32 Items_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandle
 void func_80443BCC_de(void) {
 }
 
-void Items_SetFragTagItemFlag(struct RecordRecAtCV3 *record) {
+void Player_SetFragTagItemFlag(struct RecordRecAtCV3 *record) {
     if (D_801462C8.counters.m_bFragTagOn != 0) {
         record->target->flags |= 0x01000000;
     } else {
@@ -48,7 +48,7 @@ void Items_SetFragTagItemFlag(struct RecordRecAtCV3 *record) {
     }
 }
 
-void Items_ConfigurePlayerMenuFlags(ObjectRecAt1C *object) {
+void Player_ConfigurePlayerMenuFlags(ObjectRecAt1C *object) {
  if(object->parent) object->parent->unk85C=1;
  object->actor->flags1c0 |= 0x01800000;
  object->actor->flags1c0 &= 0xFEFFFFFF;

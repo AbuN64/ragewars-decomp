@@ -58,7 +58,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
     }
 }
 
-void GameObject_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void *arg4, s32 *arg5)
+void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void *arg4, s32 *arg5)
 {
     CVector3 turned;
     CVector3 target;
@@ -89,7 +89,7 @@ extern void MatrixFromQuaternion(void *arg0, void *arg1);
 
 extern void Barrel_UpdateActorController(void *a, void *b);
 
-extern void **func_8024BFD4_de(void *arg0, s32 arg1);
+extern void **Gobjinst_RequestAnimatedModelVariant(void *arg0, s32 arg1);
 
 extern void Cache_UnlockResource(void *arg0, void *arg1);
 
@@ -181,7 +181,7 @@ s32 func_8024BE80_de(void *typedActor) {
     s32 result;
 
     result = -1;
-    modelResource = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
+    modelResource = Gobjinst_RequestAnimatedModelVariant(typedActor, ((LevelActor *)typedActor)->team);
     if (modelResource != 0) {
         modelMetadata = SetN64_GetPackSection((int *)*modelResource, 5);
         result = ((struct ActorFrameMetadata *)modelMetadata)->renderMode;

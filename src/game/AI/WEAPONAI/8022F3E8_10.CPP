@@ -69,7 +69,7 @@ static inline s32 released(void *actor, Player *player) {
     return Player_HasAmmoForMode(player, player->selectedAction) == 0;
 }
 
-void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack) {
+void Weaponai_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack) {
     Player *player;
     CVector3 *position;
     SharedRecAt564V1 *target;
@@ -102,7 +102,7 @@ void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack)
 
 
 
-void Weapon_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weaponai_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireState) {
     f32 spin;
     f32 temp_f1;
     f32 temp_f2;
@@ -192,7 +192,7 @@ static inline s32 can_fire(Player *player) {
     }
     return ammo;
 }
-void Weapon_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weaponai_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireState) {
     Player *player;
     s32 action;
     s32 single;

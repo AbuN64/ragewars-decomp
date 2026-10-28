@@ -15,10 +15,10 @@
  /* extern */
 s32 Scene_GetModelRecordByIndexPointer(Shared_World *, s32); /* extern */
 s32 Pak_CountLineChars(void *); /* extern */
-s32 Pak_TryCreateMenu(void *, void *, s32); /* extern */
-s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
+s32 Menu_TryCreateMenu(void *, void *, s32); /* extern */
+s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
 
-s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7) {
+s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 wrap, s32 arg4, s32 step, s32 maximum, f32 arg7) {
     s32 temp_a1_2;
     s32 temp_a1_3;
     s32 temp_s0_2;
@@ -32,7 +32,7 @@ s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2,
     char *var_a0;
     var_s1 = 0;
     if (Control_IsStartPressed(arg1->unk_20) != 0) {
-        return Pak_TryCreateMenu(arg0, arg1, arg2);
+        return Menu_TryCreateMenu(arg0, arg1, arg2);
     }
     temp_v0 = arg1->unk_1C;
     if (temp_v0 != NULL) {
@@ -41,21 +41,21 @@ s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2,
             temp_a1_2 = temp_a1->unk_58;
             if (temp_a1_2 != 0) {
                 temp_s0 = Scene_GetModelRecordByIndexPointer(&g_world, temp_a1_2) + arg4;
-                switch (arg3) { /* irregular */
+                switch (wrap) { /* irregular */
                 case 0:
                     var_s1 = *temp_s0;
-                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, arg6, 1);
+                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, maximum, 1);
                     *temp_s0 = var_s1;
                     break;
                 case 1:
                     var_s1 = *(s32 *)temp_s0;
-                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, arg6, arg3);
+                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, maximum, wrap);
                     *(s32 *)temp_s0 = var_s1;
                     break;
                 case 2:
                     var_s1 = (s32)*(f32 *)temp_s0;
-                    var_v1 = arg6;
-                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, var_v1, 1);
+                    var_v1 = maximum;
+                    var_s1 = Menu_AdjustValue(arg1, var_s1, step, 0, var_v1, 1);
                     *(f32 *)temp_s0 = var_s1;
                     break;
                 }
@@ -72,7 +72,7 @@ s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2,
                         do {
                             var_a0 = (char *)temp_v0_2 + var_v1 * 100;
                             temp_s0 = var_a0 + arg4;
-                            switch(arg3) {
+                            switch(wrap) {
                             case 0: *temp_s0=var_s1;break;
                             case 1: *(s32 *)temp_s0=var_s1;break;
                             case 2: *(f32 *)temp_s0=var_s1;break;
@@ -89,17 +89,17 @@ s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2,
 #endif
 
 #if !(defined(VERSION_US))
-/* Calls func_8025E2D4_de with -1, func_8025E384_de, func_8025E33C_de and Ovlgame_ResetMatchControllerState on D_8011FAC0, and
+/* Calls func_8025E2D4_de with -1, func_8025E384_de, func_8025E33C_de and Match_ResetMatchControllerState on D_8011FAC0, and
    returns one. */
 #include "COMMON/GAME_SESSION.H"
 
-extern void Ovlgame_ResetMatchControllerState(void *);
+extern void Match_ResetMatchControllerState(void *);
 
 s32 Pak_StopMusicAndResetMatch(void) {
     func_8025E2D4_de(-1);
     func_8025E384_de();
     func_8025E33C_de();
-    Ovlgame_ResetMatchControllerState(&D_8011FAC0);
+    Match_ResetMatchControllerState(&D_8011FAC0);
     return 1;
 }
 

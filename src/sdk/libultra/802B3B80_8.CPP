@@ -30,7 +30,7 @@ void alCSPSetVol(s32 player, s16 arg1) {
 }
 
 
-void func_802AFF90_de(s32 player) {
+void alCSPStop(s32 player) {
     s16 stopEvent[8];
 
     stopEvent[0] = 0x11;

@@ -104,7 +104,7 @@ extern char D_8011D8D0;
 
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8022B550_de(void *, f32, f32, void *, s32);
-extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
+extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
 extern void Particle_SpawnChildEffect(void *, s32, s8, s32);
@@ -143,7 +143,7 @@ void func_80282E98_de(void *particle, void *player) {
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);
         func_8022B550_de(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
-        func_8028CE94_de(&g_world,
+        CScene_StartEventClips(&g_world,
                       (char *)((Shared_ActorView *)player)->controller + 0x140,
                       0x14, scratch, D_800C4E58_de[1], D_800C4E60_de);
         ((Shared_ActorView *)player)->impactTimer = (&D_800C4E60_de)[1];

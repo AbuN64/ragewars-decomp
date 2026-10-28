@@ -16,7 +16,7 @@ struct ArgsCode80296014 {
     s32 word20;
     s32 word24;
 };
-extern s32 Smos_RouteElementEvent(s32 value, s32 event, s32 source, s32 active, s32 amount);
+extern s32 Menu_RouteElementEvent(s32 value, s32 event, s32 source, s32 active, s32 amount);
 
-extern void Smos_GetScreenDrawOrigin(s32 *arg0, s32 *arg1);
+extern void Menu_GetScreenDrawOrigin(s32 *arg0, s32 *arg1);
 #endif

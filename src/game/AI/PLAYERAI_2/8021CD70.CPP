@@ -15,7 +15,7 @@
 #include "COMMON/TRIPLE.H"
 #include "FX_2/80271B18.H"
 
-s32 Barrel_TestTargetEyeObstruction(void *, void *, void *);
+s32 Cbarrel_TestTargetEyeObstruction(void *, void *, void *);
 /* Whether the target's view reports an active shield. */
 static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
     View *view = target->unk5DC;
@@ -25,7 +25,7 @@ static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
     return view->unk564 != 0;
 }
 /* Checks whether the player's current weapon can lock onto the target. Kind 0 and 7 targets never lock. */
-s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
+s32 Playerai_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
     s16 weapon;
     s8 mode;
     s32 canLock;
@@ -41,7 +41,7 @@ s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
                 return 0;
             }
             if (!Weapons_TargetShielded(target)) {
-                return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
             }
             return 0;
         }
@@ -54,7 +54,7 @@ s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
                 return 0;
             }
             if (target->unk174 != 0) {
-                return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+                return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
             }
             return 0;
         }
@@ -62,7 +62,7 @@ s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
     switch (target->unk18->unk0) {
     case 4:
         if (target->unk174 != 0) {
-            return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
+            return Cbarrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
         }
         return 0;
     case 0:
@@ -83,12 +83,12 @@ s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
 #include "ENGINE/INSTANCE/GOBJINST_13.H"
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
-extern s32 Player_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern s32 Playerai_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
 extern void MultiplyQuaternions(void *, void *, void *);
 
-CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
+CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
                             CVector3 *targetPosition)
 {
     CVector3 candidate, direction, origin;
@@ -121,7 +121,7 @@ CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **targ
         unit.z = D_800C2390_de;
         func_8024BC94_de(&forward, player, unit);
         origin = player->position;
-        origin.y += Player_GetObjectOwnerHeight(player);
+        origin.y += Playerai_GetObjectOwnerHeight(player);
         enable = &D_80145088.settings.local;
         if (*enable) {
             other = ((AimGlobals *)(enable - 0x1285))->head;
@@ -129,7 +129,7 @@ CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **targ
                 firstSpecial = 0x12;
                 scale = D_800C2394_de;
                 do {
-                if (Player_CanLockTarget((void *)player, (void *)other) && other != player) {
+                if (Playerai_CanLockTarget((void *)player, (void *)other) && other != player) {
                     if (player->weapon == firstSpecial) candidate = other->specialAim;
                     else {
                         candidate = other->position;
@@ -156,7 +156,7 @@ CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **targ
             scale = D_800C2398_de;
             do {
             other = (void *)D_8011CA18[i];
-            if (Player_CanLockTarget((void *)player, (void *)other)) {
+            if (Playerai_CanLockTarget((void *)player, (void *)other)) {
                 if (player->weapon == secondSpecial) candidate = other->specialAim;
                 else {
                     candidate = other->position;
@@ -181,7 +181,7 @@ CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **targ
     *target = best;
     *targetPosition = bestPosition;
     if (best) {
-        GraphU64_CrossVectors(&axis, &forward, &bestDirection);
+        Graphu64_CrossVectors(&axis, &forward, &bestDirection);
         GraphU64_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
         threshold = GraphU64_ArcCos(threshold);

@@ -32,7 +32,7 @@ extern u32 D_800CB710;
 
 
 
-extern void func_80256FC0_de(Work56EC8 *arg0);
+extern void Sound_RetireCompletedSampleWindows(Work56EC8 *arg0);
 
 
 extern void *alAudioFrame(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
@@ -54,9 +54,9 @@ void func_80256C90_de(void) {
     previous = 0;
     osScAddClient(&D_80142928, &client, &D_80107E00);
     do {
-        D_800CB710 = ((func_802BADC0_de() - previous) << 6) / 3000ULL;
+        D_800CB710 = ((Audio_ReadSystemTime() - previous) << 6) / 3000ULL;
         osRecvMesg(&D_80107E00, &event.message, 1);
-        previous = func_802BADC0_de();
+        previous = Audio_ReadSystemTime();
         switch (event.words[0]) {
         case 1:
             frame++;
@@ -64,7 +64,7 @@ void func_80256C90_de(void) {
             frame = 0;
         case 7:
             D_800CB70C_de++;
-            while (!(func_802B72C0_de() & 0x80000000)) {
+            while (!(osAiGetStatus() & 0x80000000)) {
                 func_80256EA8_de(D_80107E28[D_800CB700_de % 3], argument);
             }
             entryObject = D_80107DFC;
@@ -95,8 +95,8 @@ s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
   s32 event;
   s32 value;
   void *item;
-  func_80256FC0_de(audioTask);
-  value = func_802BBBC0_de(audioTask->owner);
+  Sound_RetireCompletedSampleWindows(audioTask);
+  value = osVirtualToPhysical(audioTask->owner);
   audioTask->id = (u16)D_80107E98;
   func_8025E48C_de();
   item = alAudioFrame(D_80107E20[D_800CB708], &completed, value, audioTask->id);

@@ -15,8 +15,8 @@
 void Tsmos_ShutdownFrontend(void) {
     extern struct Triple D_800D2C90;
     s32 *selected;
-    Smos_DestroyScreenManager();
-    Frontend_CloseResourceArchive();
+    Menu_DestroyScreenManager();
+    Node_CloseResourceArchive();
     ESmem_FreeFrameHeaps();
     Gfx_ShutdownFrontendServices();
     selected = &D_800D2C90.z;

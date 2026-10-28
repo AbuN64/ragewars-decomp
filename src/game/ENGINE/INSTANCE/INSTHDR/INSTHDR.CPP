@@ -15,9 +15,9 @@
 
 /* Returns a player's body lean on the ground: a controlled player on an accepted floor (Region_TestPolygonSlopeFlag) that
  * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by
- * three eighths of its slope (at most 25 degrees), which the body tilt from GameObject_BuildActorDirectionTilt then replaces,
- * and leans along its heading by three quarters of the ground slope ahead from func_80240A98_de (at most 25),
- * blending lean and tilt halfway through GraphU64_InterpolateQuaternionWithLinearFallback; other players take GameObject_BuildActorDirectionTilt's tilt, and
+ * three eighths of its slope (at most 25 degrees), which the body tilt from Gobjinst_BuildActorDirectionTilt then replaces,
+ * and leans along its heading by three quarters of the ground slope ahead from CPlane_GetSlopeAngle (at most 25),
+ * blending lean and tilt halfway through GraphU64_InterpolateQuaternionWithLinearFallback; other players take Gobjinst_BuildActorDirectionTilt's tilt, and
  * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
 
 
@@ -25,12 +25,12 @@ extern s32 Region_TestPolygonSlopeFlag(s32);
 
 extern void Region_GetNodeNormal(CVector3 *, s32);
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern CQuatern GameObject_BuildActorDirectionTilt(char *);
+extern CQuatern Gobjinst_BuildActorDirectionTilt(char *);
 
-extern f32 func_80240A98_de(Probe *, f32, f32, f32, f32);
+extern f32 CPlane_GetSlopeAngle(Probe *, f32, f32, f32, f32);
 
 extern void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *, f32, CQuatern *, CQuatern *);
 
@@ -53,9 +53,9 @@ static inline s32 is_held(char *obj) {
 extern char D_8013B364;
 
 
-extern s32 Nav_FindNearestPointIndex(void *, void *);
+extern s32 Portal_FindNearestPointIndex(void *, void *);
 
-extern CVector3 *Nav_GetGraphPoint(void *, s32);
+extern CVector3 *Portal_GetGraphPoint(void *, s32);
 
 extern void GraphU64_ScaleVector(void *, void *, f32);
 
@@ -64,7 +64,7 @@ extern s32 SetN64_SpawnModelEffect(s32, s32, s32, CVector3, CVector3, s32, f32);
 
 /* Callers write the lean through a pointer (the MIPS hidden result pointer); a native host cannot call a
  * struct-returning function that way, so the host entry takes the pointer and the body stays by value. */
-CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
+CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
     CVector3 normal;
     CVector3 up;
     CVector3 axis;
@@ -93,7 +93,7 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 up.x = 0.0f;
                 up.y = 1.0f;
                 up.z = 0.0f;
-                GraphU64_CrossVectors(&axis, &up, &normal);
+                Graphu64_CrossVectors(&axis, &up, &normal);
                 GraphU64_NormalizeVec3(&axis);
                 slope = GraphU64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = Math_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
@@ -101,14 +101,14 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 tilt.y = axis.y * D_80115DEC;
                 tilt.z = axis.z * D_80115DEC;
                 tilt.w = Math_Cosf(RW_MIN(slope, 0.43633235f) * 0.375f);
-                tilt = GameObject_BuildActorDirectionTilt(obj);
+                tilt = Gobjinst_BuildActorDirectionTilt(obj);
                 sine = Math_Sinf(((LevelActor *)(self))->yaw);
                 cosine = Math_Cosf(((LevelActor *)(self))->yaw);
                 probe.dir = ((LevelActor *)(self))->floorDirection;
                 probe.start.x = ((LevelActor *)(self))->position0.x;
                 probe.start.y = ((LevelActor *)(self))->floorHeight;
                 probe.start.z = ((LevelActor *)(self))->position0.z;
-                slope = func_80240A98_de(&probe, ((LevelActor *)(obj))->position0.x, ((LevelActor *)(obj))->position0.z, ((LevelActor *)(obj))->position0.x - sine,
+                slope = CPlane_GetSlopeAngle(&probe, ((LevelActor *)(obj))->position0.x, ((LevelActor *)(obj))->position0.z, ((LevelActor *)(obj))->position0.x - sine,
                                       ((LevelActor *)(obj))->position0.z - cosine);
                 slope = RW_MIN(slope, 25.0f) * 0.75f;
                 half = 0.5f;
@@ -122,7 +122,7 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 return result;
             }
         }
-        return GameObject_BuildActorDirectionTilt(obj);
+        return Gobjinst_BuildActorDirectionTilt(obj);
     }
 identity:
     tilt.x = tilt.y = tilt.z = 0.0f;
@@ -130,7 +130,7 @@ identity:
     return tilt;
 }
 
-void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volume) {
+void Insthdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volume) {
     CVector3 up;
     CVector3 dir;
     CVector3 velocity;
@@ -138,7 +138,7 @@ void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     SoundRequest request;
     CVector3 *emitter;
 
-    emitter = Nav_GetGraphPoint(&D_8013B364, Nav_FindNearestPointIndex(&D_8013B364, &pos));
+    emitter = Portal_GetGraphPoint(&D_8013B364, Portal_FindNearestPointIndex(&D_8013B364, &pos));
     request.position = pos;
     at = request.position;
     request.owner = ((struct Actor_func_80214DD4_de *)actor)->room;
@@ -157,13 +157,13 @@ void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
 }
 
 /** Reset three byte-sized fields. */
-void InstHdr_ResetInstanceRenderIndices(signed char *prop) {
+void Insthdr_ResetInstanceRenderIndices(signed char *prop) {
     prop[3] = -1;
     prop[1] = 0;
     prop[2] = 0;
 }
 
-s32 func_8024DD24_de(void *actorStorage)
+s32 Insthdr_GetSharedModelFlag20(void *actorStorage)
 {
     struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
@@ -177,7 +177,7 @@ s32 func_8024DD24_de(void *actorStorage)
     return 0;
 }
 
-s32 func_8024DD58_de(void *actorStorage)
+s32 Insthdr_GetSharedModelFlag40(void *actorStorage)
 {
     struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
@@ -195,7 +195,7 @@ s32 func_8024DD58_de(void *actorStorage)
     return 0;
 }
 
-int func_8024DD8C_de(void *other) {
+int Insthdr_GetModelPropertyFlag1(void *other) {
     Actor_u1 *actor = other;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -209,7 +209,7 @@ int func_8024DD8C_de(void *other) {
     }
 }
 
-int func_8024DDB4_de(void *actorStorage) {
+int Insthdr_GetModelPropertyFlag2(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -223,7 +223,7 @@ int func_8024DDB4_de(void *actorStorage) {
     }
 }
 
-s32 func_8024DDDC_de(void *actorStorage)
+s32 Insthdr_GetSharedModelFlag80(void *actorStorage)
 {
     struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
@@ -241,7 +241,7 @@ s32 func_8024DDDC_de(void *actorStorage)
     return 0;
 }
 
-s32 func_8024DE10_de(void *actorStorage)
+s32 Insthdr_GetSharedModelFlag100(void *actorStorage)
 {
     struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
@@ -255,7 +255,7 @@ s32 func_8024DE10_de(void *actorStorage)
     return 0;
 }
 
-int func_8024DE44_de(void *actorStorage) {
+int Insthdr_GetModelPropertyFlag200(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -269,7 +269,7 @@ int func_8024DE44_de(void *actorStorage) {
     }
 }
 
-s32 InstHdr_HasActorTerritory(void *actorStorage)
+s32 Insthdr_HasActorTerritory(void *actorStorage)
 {
     struct EffectOwnerObject *object = actorStorage;
     struct Model *model;
@@ -287,7 +287,7 @@ s32 InstHdr_HasActorTerritory(void *actorStorage)
     return 0;
 }
 
-s32 func_8024DEA0_de(void *actorStorage) {
+s32 Insthdr_IsKindElevenEnabledForLocalMode(void *actorStorage) {
     void *actorDefinition;
     actorDefinition = (((struct ObjRecAt18V5 *) ((s8 *) actorStorage))->unk18);
     if ((((struct ObjRecAt14V3 *) ((s8 *) actorDefinition))->unk0) == 0xB) {
@@ -299,7 +299,7 @@ s32 func_8024DEA0_de(void *actorStorage) {
     return 0;
 }
 
-int func_8024DEE0_de(void *actorStorage) {
+int Insthdr_GetModelCollisionFlag1(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -313,7 +313,7 @@ int func_8024DEE0_de(void *actorStorage) {
     }
 }
 
-s32 func_8024DF08_de(LevelActor *actor) {
+s32 Insthdr_IsInactiveOrCollisionOption2(LevelActor *actor) {
     void *definition = actor->definition;
     s32 actorKind = ((ModelBlend *)definition)->kind;
 
@@ -334,7 +334,7 @@ ret0:
     return 0;
 }
 
-s32 func_8024DF5C_de(void *actor) {
+s32 Insthdr_IsInactiveOrCollisionOption4(void *actor) {
     ModelBlend *modelBlend;
     s32 result;
 
@@ -349,7 +349,7 @@ s32 func_8024DF5C_de(void *actor) {
     return 0;
 }
 
-int func_8024DFA0_de(void *actorStorage) {
+int Insthdr_GetModelCollisionFlag8(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -363,7 +363,7 @@ int func_8024DFA0_de(void *actorStorage) {
     }
 }
 
-s32 func_8024DFC8_de(LevelActor *actor) {
+s32 Insthdr_IsInactiveOrCollisionOption800(LevelActor *actor) {
     ModelBlend *definition;
     s32 result;
 
@@ -378,7 +378,7 @@ s32 func_8024DFC8_de(LevelActor *actor) {
     return 0;
 }
 
-s32 func_8024E00C_de(void *actorStorage)
+s32 Insthdr_GetModelCollisionFlag1000(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
   unsigned int new_var;
@@ -399,7 +399,7 @@ s32 func_8024E00C_de(void *actorStorage)
   }
 }
 
-s32 func_8024E034_de(LevelActor *actor) {
+s32 Insthdr_IsInactiveOrCollisionOption10(LevelActor *actor) {
     ModelBlend *definition;
     s32 result;
 
@@ -414,7 +414,7 @@ s32 func_8024E034_de(LevelActor *actor) {
     return 0;
 }
 
-int func_8024E078_de(void *actorStorage) {
+int Insthdr_GetModelCollisionFlag20(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -428,7 +428,7 @@ int func_8024E078_de(void *actorStorage) {
     }
 }
 
-s32 func_8024E0A0_de(void *actorStorage)
+s32 Insthdr_GetModelCollisionFlag200(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
   Resource_u1 *actorDefinition;
@@ -445,7 +445,7 @@ s32 func_8024E0A0_de(void *actorStorage)
   }
 }
 
-int func_8024E0C8_de(void *actorStorage) {
+int Insthdr_GetModelCollisionFlag400(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
@@ -459,7 +459,7 @@ int func_8024E0C8_de(void *actorStorage) {
     }
 }
 
-s32 func_8024E0F0_de(void *actorStorage)
+s32 Insthdr_GetModelCollisionFlag2000(void *actorStorage)
 {
     Actor_u1 *actor = actorStorage;
   Resource_u1 *new_var2;
@@ -482,7 +482,7 @@ s32 func_8024E0F0_de(void *actorStorage)
   return (actorDefinition->flags4C) & 0x2000;
 }
 
-int func_8024E118_de(void *actorStorage) {
+int Insthdr_GetModelCollisionFlag4000(void *actorStorage) {
     Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;

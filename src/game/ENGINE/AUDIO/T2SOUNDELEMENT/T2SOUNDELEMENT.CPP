@@ -13,21 +13,21 @@
 #include "TEXTURE/80256220_16.H"
 
 /* 8025DE50_5.CPP */
-/** Calls func_80257360_de with &D_8010C080 as its argument. */
+/** Calls Sound_InitializeContext with &D_8010C080 as its argument. */
 
 struct ContextRecAt2BC0;
 extern s32 Audio_PlayPositionedSoundWithScale(struct ContextRecAt2BC0 *arg0, s32 arg1, CVector3 arg2,
                          s32 arg3, s32 arg4, f32 arg5);
 
 void func_8025DE30_de(void) {
-    func_80257360_de(&D_8010C080);
+    Sound_InitializeContext(&D_8010C080);
 }
 
 s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 soundPosition, s32 position, s32 ownerId) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return Audio_PlaySoundAtPosition(&D_8010C080, track, soundPosition, position, ownerId);
+    return Sound_PlaySoundAtPosition(&D_8010C080, track, soundPosition, position, ownerId);
 }
 
 s32 func_8025DEC0_de(s32 trackId, CVector3 soundPosition, s32 spatialMode, s32 ownerId, f32 playbackScale) {
@@ -53,7 +53,7 @@ s32 SoundElement_PlayFlatSound(s32 track) {
         vec.x = zero;
         previousMixValue = Audio_GetVoiceMixValue(&D_8010C080);
         Audio_SetVoiceMixValue(&D_8010C080, 1);
-        playbackResult = Audio_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
+        playbackResult = Sound_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
         Audio_SetVoiceMixValue(&D_8010C080, previousMixValue);
     }
     return playbackResult;
@@ -63,7 +63,7 @@ s32 func_8025DFE8_de(s32 index, CVector3 position, s32 voiceParameter) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return Audio_PlayInstrumentAtPosition(&D_8010C080, index, position, voiceParameter);
+    return Sound_PlayInstrumentAtPosition(&D_8010C080, index, position, voiceParameter);
 }
 
 int func_8025E04C_de(int index) {
@@ -82,7 +82,7 @@ int func_8025E04C_de(int index) {
         vec.x = zero;
         previousMixValue = Audio_GetVoiceMixValue(&D_8010C080);
         Audio_SetVoiceMixValue(&D_8010C080, 1);
-        playbackResult = Audio_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
+        playbackResult = Sound_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
         Audio_SetVoiceMixValue(&D_8010C080, previousMixValue);
     }
     return playbackResult;
@@ -107,7 +107,7 @@ void func_8025E150_de(void) {
 }
 
 void func_8025E174_de(s32 soundId) {
-    func_80257A14_de(&D_8010C080, soundId);
+    Sound_StopSoundsByIdentifier(&D_8010C080, soundId);
 }
 
 void func_8025E19C_de(s32 matchingKey) {
@@ -127,5 +127,5 @@ void func_8025E214_de(s32 retainedKey) {
 }
 
 void func_8025E23C_de(void) {
-    func_8025842C_de(&D_8010C080);
+    Sound_UpdateAudioContext(&D_8010C080);
 }

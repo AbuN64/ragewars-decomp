@@ -94,7 +94,7 @@ extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(Matrix *);
 extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
-/* Copy of Player_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
+/* Copy of Playerai_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
  * pushed 5.12 units off the surface and packs it into the player's marker transform. */
 static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
     Matrix matrix;
@@ -109,7 +109,7 @@ static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attra
 /* Toggles the player's attract/repulse marker while the aim ray hits something: a live marker is removed
  * ("ATTRACT REMOVED"); otherwise a new one is placed at the aim point for 150 frames, pulling when
  * attract is set ("ATTRACT MARKED") and pushing otherwise ("REPULSE MARKED"). */
-void Player_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
+void Playerai_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
     void *screen;
     u8 *text;
     if (player->aimTarget != 0) {

@@ -40,10 +40,10 @@ void Pak_RestoreControllerSetup(void) {
     Control_RestoreControllerSetup();
 }
 
-/* Calls Pak_DrawMenuEntries and nothing else. */
+/* Calls Menu_DrawMenuEntries and nothing else. */
 
 void Pak_RenderMenuEntryCallback(struct MenuStyle *menu, s8 *member) {
-    Pak_DrawMenuEntries(menu, member);
+    Menu_DrawMenuEntries(menu, member);
 }
 #endif
 

@@ -79,7 +79,7 @@ extern void func_802BD280_de(void *addr, s32 size);
 extern void func_802BD010_de(void *addr, s32 size);
 
 
-void func_802BAE40_de(void)
+void Audio_InitializeOperatingSystem(void)
 {
     u32 pifdata;
     u32 clock = 0;
@@ -100,10 +100,10 @@ func_802BD200_eu_x
 
 () | 0x20000000);
     func_802BD160_de(0x01000800);
-    while (func_802BB060_de(0x1FC007FC, &pifdata)) {
+    while (Audio_ReadSerialInterfaceWord(0x1FC007FC, &pifdata)) {
         ;
     }
-    while (func_802BB0F0_de(0x1FC007FC, pifdata | 8)) {
+    while (Audio_WriteSerialInterfaceWord(0x1FC007FC, pifdata | 8)) {
         ;
     }
     *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *D_002BBC70;
@@ -112,8 +112,8 @@ func_802BD200_eu_x
     *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *D_002BBC70;
     func_802BD280_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
     func_802BD010_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
-    Virtual_MapBootstrapAddressRange();
-    func_802B9B20_de(4, &clock);
+    Vhandler_MapBootstrapAddressRange();
+    osPiRawReadIo(4, &clock);
     clock &= ~0xf;
     if (clock != 0) {
         D_80149B00 = clock;
@@ -135,25 +135,25 @@ func_802BD200_eu_x
 }
 
 
-int func_802BB060_de(u32 deviceAddress, u32 *data) {
+int Audio_ReadSerialInterfaceWord(u32 deviceAddress, u32 *data) {
     if (deviceAddress & 3) {
         Audio_Assert(D_800CCC30, &s_sirawreadText, 0x33);
     }
     if (data == 0) {
         Audio_Assert(D_800CCC30, &s_sirawreadText, 0x34);
     }
-    if (func_802B9D70_de() != 0) {
+    if (Audio_IsSerialInterfaceBusy() != 0) {
         return -1;
     }
     *data = *(u32 *)(deviceAddress | 0xA0000000);
     return 0;
 }
 
-int func_802BB0F0_de(u32 deviceAddress, u32 data) {
+int Audio_WriteSerialInterfaceWord(u32 deviceAddress, u32 data) {
     if (deviceAddress & 3) {
         Audio_Assert(&D_800C7A00_de, &D_800C7A04_de, 0x34);
     }
-    if (func_802B9D70_de() != 0) {
+    if (Audio_IsSerialInterfaceBusy() != 0) {
         return -1;
     }
     *(u32 *)(deviceAddress | 0xA0000000) = data;

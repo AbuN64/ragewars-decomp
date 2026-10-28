@@ -20,7 +20,7 @@ extern f32 D_800C7F08;
 
 
 
-void Player_RecoverOutOfBoundsActor(Shared_ActorView *player, LevelActor *actor) {
+void Playerai_RecoverOutOfBoundsActor(Shared_ActorView *player, LevelActor *actor) {
     void *temp_v0;
 
     temp_v0 = InstHdr_FindActorModelEntry(actor);

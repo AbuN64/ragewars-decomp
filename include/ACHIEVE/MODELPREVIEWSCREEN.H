@@ -11,7 +11,7 @@
 
 extern ModelPreviewScreen *D_800E5830;
 
-extern s32 Frontend_SetPreviewModel(void *,s32);
+extern s32 Model_SetPreviewModel(void *,s32);
 
 
 #if defined(VERSION_DE)

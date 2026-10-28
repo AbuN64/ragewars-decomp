@@ -26,7 +26,7 @@ void Sched_HandleRspCompletion(void *object) {
  scheduler->curRSPTask=0;
  taskState=task->state;
  nextRsp=0;nextRdp=0;
- if((taskState&0x10)&&func_802BA140_de(&task->list)) {
+ if((taskState&0x10)&&Audio_CheckSignalProcessorTaskYield(&task->list)) {
   task->state|=0x20;
   if((task->flags&7)==3) {
    task->next=scheduler->gfxListHead;
@@ -34,7 +34,7 @@ void Sched_HandleRspCompletion(void *object) {
    if(!scheduler->gfxListTail) scheduler->gfxListTail=task;
   }
   if(task->flags&0x20) {
-   elapsed=((func_802BADC0_de()-D_8011B1E0)<<6)/3;
+   elapsed=((Audio_ReadSystemTime()-D_8011B1E0)<<6)/3;
    duration1=(f32)elapsed;
    D_8011B1D8+=duration1*D_800C5354_de;
   }
@@ -43,11 +43,11 @@ void Sched_HandleRspCompletion(void *object) {
   if(task->list.type==1) {
    D_800CD700=0;
    if(task->flags&0x20) {
-    elapsed=((func_802BADC0_de()-D_8011B1E0)<<6)/3;
+    elapsed=((Audio_ReadSystemTime()-D_8011B1E0)<<6)/3;
     duration2=(f32)elapsed;
     D_8011B1D8=D_8011B1D8+duration2*D_800C5358_de;
     D_800CD750=D_8011B1D8;
-    elapsed=((func_802BADC0_de()-D_8011B1D0)<<6)/3;
+    elapsed=((Audio_ReadSystemTime()-D_8011B1D0)<<6)/3;
     duration3=(f32)elapsed;
     D_800CD74C=duration3*D_800C535C_de;
     frame=D_8011FAC0.ring.frames;
@@ -55,11 +55,11 @@ void Sched_HandleRspCompletion(void *object) {
      if(task->framebuffer==frame[1].colorImage) frame+=1;
      else if(task->framebuffer==frame[2].colorImage) frame+=2;
     }
-    func_80253CEC_de(0,frame->commands==D_8014D464);
+    Cache_SendCompletionMessage(0,frame->commands==D_8014D464);
     if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
    }
   } else {
-   elapsed=((func_802BADC0_de()-D_8011B1D0)<<6)/3;
+   elapsed=((Audio_ReadSystemTime()-D_8011B1D0)<<6)/3;
    duration4=(f32)elapsed;
    D_800CD74C=duration4*D_800C5360_de;
    if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
@@ -101,7 +101,7 @@ void Sched_HandleRdpCompletion(OSSched *sc)
     task->state &= ~1;
     if (task->list.type == 1) {
         if ((task->flags & 0x20) != 0) {
-            D_800CD754 = (f32)(((func_802BADC0_de() - D_8011B1E8) << 6) / 3) * D_800C5364_de;
+            D_800CD754 = (f32)(((Audio_ReadSystemTime() - D_8011B1E8) << 6) / 3) * D_800C5364_de;
         }
         sc->curRDPTask = 0;
         if ((task->flags & 0x20) != 0) {

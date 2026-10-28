@@ -12,19 +12,19 @@
 s32 Frontend_FindPixelFormat(Format *format) {
     s32 i;
     for (i = 0; i < 36; i++) {
-        if (D_800E2B20[i].flags == format->flags &&
-            D_800E2B20[i].type == format->type &&
-            D_800E2B20[i].mask[0] == format->mask[0] &&
-            D_800E2B20[i].mask[1] == format->mask[1] &&
-            D_800E2B20[i].mask[2] == format->mask[2] &&
-            D_800E2B20[i].mask[3] == format->mask[3]) {
+        if (g_pixelFormatDescriptors[i].flags == format->flags &&
+            g_pixelFormatDescriptors[i].type == format->type &&
+            g_pixelFormatDescriptors[i].mask[0] == format->mask[0] &&
+            g_pixelFormatDescriptors[i].mask[1] == format->mask[1] &&
+            g_pixelFormatDescriptors[i].mask[2] == format->mask[2] &&
+            g_pixelFormatDescriptors[i].mask[3] == format->mask[3]) {
             return i;
         }
     }
     return 0;
 }
 
-/* Converts a packed pixel value from format `from` to format `to` of the format table D_800E2B20:
+/* Converts a packed pixel value from format `from` to format `to` of the format table g_pixelFormatDescriptors:
    decodes the value to 0xAARRGGBB with the source format's channel masks and signed shifts, splits
    it into channels and re-encodes them with the destination format's shifts and masks. */
 
@@ -125,7 +125,7 @@ extern void *Cache_AllocateMemory(s32 size);
 /* Returns the word in the 52-byte record D_800E2B2C selected by the first byte of a record. */
 
 u32 Frontend_ConvertPixelFormat(u32 value, s32 from, s32 to) {
-    return encode(decode(value, &D_800E2B20[from]), &D_800E2B20[to]);
+    return encode(decode(value, &g_pixelFormatDescriptors[from]), &g_pixelFormatDescriptors[to]);
 }
 
 void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescriptor *source) {
@@ -146,7 +146,7 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
     g_conversionSourceImage=0;
     if(destination) {
         g_conversionDestinationImage=(void *)destination;
-        dst=D_800E2B20[destination->format];
+        dst=g_pixelFormatDescriptors[destination->format];
         g_destinationPixelFormat=dst;
         if(dst.flags) g_destinationColorBuffer=destination->pixels;
         else g_destinationColorBuffer=destination->palette;
@@ -168,7 +168,7 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
     }
     if(source) {
         g_conversionSourceImage=(void *)source;
-        src=D_800E2B20[source->format];
+        src=g_pixelFormatDescriptors[source->format];
         g_sourcePixelFormat=src;
         if(src.flags) g_sourceColorBuffer=source->pixels;
         else g_sourceColorBuffer=source->palette;

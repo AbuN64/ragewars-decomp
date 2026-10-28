@@ -15,9 +15,9 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
-extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *Achieve_CopyPreset(), *Achieve_GetResultText();
-extern s32 Defs_TestBit(), Achieve_ApplyLevelCompletionReward(), Achieve_AwardCharacterCompletionUnlock(), Frontend_FindKeyIndex();
-extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), Frontend_InitMenuImage(), Frontend_StartMenuImageTransition(), func_80438A88_de(), Achieve_MarkLevelPlayed();
+extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *Achieve_CopyPreset(), *Match_GetResultText();
+extern s32 Defs_TestBit(), Match_ApplyLevelCompletionReward(), Achieve_AwardCharacterCompletionUnlock(), Key_FindKeyIndex();
+extern void Frontend_SetWidgetFlag08(), Widget_SetWidgetFlag100(), Frontend_InitMenuImage(), Frontend_StartMenuImageTransition(), CPlayerPreview_ResetSelectionMessageState(), Achieve_MarkLevelPlayed();
 extern void Defs_SetBitValue(), XPlus_FillMemory(), Achieve_UpdateUnlockTiers(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), Achieve_ConfigureResultModelPreview();
 extern void SmpButton_WrapButtonWidget(), Scene_CopyLevelName(), Tsmos_DeactivateControllerState();
 extern char *XPlus_UppercaseString();
@@ -52,7 +52,7 @@ s32 Achieve_CreateExtendedLocalizedResultsScreen(void *root) {
             break;
         }
     }
-    func_80438A88_de();
+    CPlayerPreview_ResetSelectionMessageState();
     SG(g, s32, 0x98) = -1;
     lang = D_801462C8_raw[0x581];
     mode = D_801462C8_raw[0xD];
@@ -66,9 +66,9 @@ s32 Achieve_CreateExtendedLocalizedResultsScreen(void *root) {
                 SG(it, u8, 0x10) = 0xAF;
                 SG(it, char *, 0x38) = D_auto_800E2054[lang];
             } else {
-                v = Achieve_ApplyLevelCompletionReward(SG(g, s32, 0x94));
+                v = Match_ApplyLevelCompletionReward(SG(g, s32, 0x94));
                 SG(g, s32, 0x9C) = v;
-                SG(g, void *, 0xAC) = Achieve_GetResultText(v);
+                SG(g, void *, 0xAC) = Match_GetResultText(v);
                 SG(g, s32, 0x98) = -1;
                 switch (D_8015402C) {
                 case 4: label = 0x2D; break;
@@ -93,7 +93,7 @@ s32 Achieve_CreateExtendedLocalizedResultsScreen(void *root) {
                     XPlus_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
                     v = Achieve_AwardCharacterCompletionUnlock(SG(g, s32, 0x94));
                     if (v >= 0) {
-                        i = Frontend_FindKeyIndex(v);
+                        i = Key_FindKeyIndex(v);
                         XStdio_FormatBuffer(g + 0x18C, D_auto_800E2034[lang], ((char **)SG(D_800F00DC_raw, char *, i * 0x70))[lang]);
                     }
                 }
@@ -122,7 +122,7 @@ s32 Achieve_CreateExtendedLocalizedResultsScreen(void *root) {
             }
         }
     } else {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, CS(0x273)), 0);
+        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, CS(0x273)), 0);
         goto tail;
     }
     XPlus_CopyString(g + 0x18C, D_800E2044_eu[lang]);
@@ -137,7 +137,7 @@ tail:
     SmpButton_WrapButtonWidget(CS(0x272));
     SmpButton_WrapButtonWidget(CS(0x273));
     SmpButton_WrapButtonWidget(CS(0x277));
-    Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, CS(0x273)), 1);
+    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, CS(0x273)), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B0D[i * 0x190] >= 0 && D_800FEB0E[i * 0x190] == 0) {
             break;

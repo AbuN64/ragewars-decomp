@@ -56,17 +56,17 @@ extern char D_80145040[];
 
 extern void Rumble_FreeAllPoolNodes(void *);
 struct Context;
-extern void Player_ResetPlayerControllers(struct Context *);
+extern void Playerai_ResetPlayerControllers(struct Context *);
 
 
 
 
-void Ovlgame_ResetMatchControllerState(char *match) {
+void Match_ResetMatchControllerState(char *match) {
     CGameStatus *state;
 
     Control_SetControllerMode(0);
     Rumble_FreeAllPoolNodes(D_8010EC90);
-    Player_ResetPlayerControllers(D_80145040);
+    Playerai_ResetPlayerControllers(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;
     state->m_bFragTagOn = 0;
@@ -85,7 +85,7 @@ void Ovlgame_ResetMatchControllerState(char *match) {
 
 
 
-void Ovlgame_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
+void Match_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
     Shared_Placed spawn;
     s32 var_s0;
 
@@ -107,7 +107,7 @@ void Ovlgame_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
 /* Starts the fade out of the session into the match: keeps key as the session selector when
    OvlScene_FindPlacedObjectsByKey finds a placed object for it (else 0), restarts the game clock and targets mode 13
    when the local player has a transition pending, otherwise mode 12. */
-void Ovlgame_StartMatchTransition(GameSession *session, s32 key) {
+void Match_StartMatchTransition(GameSession *session, s32 key) {
     Shared_Placed spawn;
     if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, key, &spawn, 1) == 0) {
         key = 0;

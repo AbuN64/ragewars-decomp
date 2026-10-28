@@ -116,9 +116,9 @@ s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1)
 
 }
 
-int Scene_GetModelIdAtIndex(void *world, int arg1) {
+int Scene_GetModelIdAtIndex(void *world, int modelIndex) {
     unsigned short *base = (unsigned short *)((char *)((struct Shared_World *)(world))->modelIds + 8);
-    return base[arg1];
+    return base[modelIndex];
 }
 
 /* Changes an object's model when the requested model id is present in the resource bank, then rebuilds its model data. */
@@ -131,11 +131,11 @@ static inline s32 find(TableRecAt8 *table,u16 id) {
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
  return -1;
 }
-void Scene_ChangeInstanceModel(BankRecAt94 *arg0,ObjectSceneChangeInstanceModel *draw,s32 arg2,s32 arg3) {
+void Scene_ChangeInstanceModel(BankRecAt94 *arg0,ObjectSceneChangeInstanceModel *draw,s32 modelId,s32 extra) {
  s32 index=0;
- if(draw->id!=arg2) {
- index=find(arg0->table,arg2);
- if(index!=-1){draw->index=index;draw->id=arg2;GameObject_LoadModel(draw,arg0->field54,arg0->field24,arg3);}
+ if(draw->id!=modelId) {
+ index=find(arg0->table,modelId);
+ if(index!=-1){draw->index=index;draw->id=modelId;GameObject_LoadModel(draw,arg0->field54,arg0->field24,extra);}
  }
 }
 

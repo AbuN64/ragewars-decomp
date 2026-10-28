@@ -71,7 +71,7 @@ void OnScreen_SetSecondBarTarget(void *object, int value) {
     hud->bars[1].target = value;
 }
 
-void OnScreen_DrawStatusBars(void *arg0) {
+void OnScreen_DrawStatusBars(void *playerHud) {
     char pad[256];
     (void)pad;
 
@@ -85,11 +85,11 @@ void OnScreen_DrawStatusBars(void *arg0) {
     OnScreen_SetTextScale(D_800C61F0_de, D_800C61F0_de);
     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     OnScreen_SetupSpriteMode(D_801462C8.hudFade);
-    if (((Hud *)arg0)->bars[0].enabled != 0) {
-        OnScreen_DrawStatusBar(arg0, 1);
+    if (((Hud *)playerHud)->bars[0].enabled != 0) {
+        OnScreen_DrawStatusBar(playerHud, 1);
     }
-    if (((Hud *)arg0)->bars[1].enabled != 0) {
-        OnScreen_DrawStatusBar(arg0, 2);
+    if (((Hud *)playerHud)->bars[1].enabled != 0) {
+        OnScreen_DrawStatusBar(playerHud, 2);
     }
 }
 
@@ -242,10 +242,10 @@ void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
-void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
+void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *outWidth, s32 *outHeight)
 {
-  void *sp10;
-  s32 sp14;
+  void *image;
+  s32 imageTag;
   void *new_var;
   s32 temp_v0;
   if (D_800CD764_de != 0)
@@ -253,10 +253,10 @@ void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
     temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
-      OnScreen_GetImageEntry(temp_v0, arg1, &sp10, &sp14);
-      new_var = sp10;
-      *arg2 = ((ImageSet *)sp10)->width;
-      *arg3 = ((ImageSet *)new_var)->height;
+      OnScreen_GetImageEntry(temp_v0, arg1, &image, &imageTag);
+      new_var = image;
+      *outWidth = ((ImageSet *)image)->width;
+      *outHeight = ((ImageSet *)new_var)->height;
       Cache_UnlockResource(0, temp_v0);
     }
   }
@@ -282,41 +282,41 @@ void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 }
 
 /** Store six words into the global record. */
-void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-    D_801376F8.envR = arg0;
-    D_801376F8.envG = arg1;
-    D_801376F8.envB = arg2;
-    D_801376F8.primR = arg3;
-    D_801376F8.primG = arg4;
-    D_801376F8.primB = arg5;
+void OnScreen_SetTextColors(int environmentRed, int environmentGreen, int environmentBlue, int primitiveRed, int primitiveGreen, int primitiveBlue) {
+    D_801376F8.envR = environmentRed;
+    D_801376F8.envG = environmentGreen;
+    D_801376F8.envB = environmentBlue;
+    D_801376F8.primR = primitiveRed;
+    D_801376F8.primG = primitiveGreen;
+    D_801376F8.primB = primitiveBlue;
 }
 
-void OnScreen_SetTextScale(float arg0, float arg1) {
-    D_801376F8.width = arg0;
-    D_801376F8.height = arg1;
+void OnScreen_SetTextScale(float horizontalScale, float verticalScale) {
+    D_801376F8.width = horizontalScale;
+    D_801376F8.height = verticalScale;
 }
 
-void OnScreen_DrawTextWithShadow(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void OnScreen_DrawTextWithShadow(s32 arg0, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 arg6, s32 language) {
     if (arg5 != 0) {
-        OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 1, arg6, arg7);
+        OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 1, arg6, language);
     }
-    OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 0, arg6, arg7);
+    OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 0, arg6, language);
 }
 
 #endif
 
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
-s32 OnScreen_DrawSpriteResource(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6) {
+s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 arg2, s16 y, f32 scaleX, f32 scaleY, s32 arg6) {
 
-    s32 temp_v0;
+    s32 resourceHandle;
 
     if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1), temp_v0 == 0)) {
+        || (resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1), resourceHandle == 0)) {
         return 0;
     }
-    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
-    Cache_UnlockResource(0, temp_v0);
+    Text_DrawTileGrid(resourceHandle, index, arg2, y, scaleX, scaleY, arg6);
+    Cache_UnlockResource(0, resourceHandle);
     return 1;
 }
 

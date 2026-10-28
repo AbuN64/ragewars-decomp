@@ -9,11 +9,11 @@
 
 extern s32 Defs_IsAddressInCodeRanges(StateCallback);
 extern s32 Defs_IsAddressInStaticRanges(u32);
-extern void *func_8024B738_de(void *, void *, s32);
+extern void *Gobjinst_ChooseAvailableAnimationKind(void *, void *, s32);
 extern s32 func_80246A08_de(void *, s32, s32);
 
 
-void Nav_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
+void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
     StateEntry *entry;
     StateCallback callback;
     f32 factor;
@@ -32,7 +32,7 @@ void Nav_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
                 if (Defs_IsAddressInCodeRanges(callback) != 0) {
                     callback = callback(src, dst);
                 } else if (Defs_IsAddressInStaticRanges((u32)callback) != 0) {
-                    callback = (StateCallback)func_8024B738_de(src, callback, dst->state_result);
+                    callback = (StateCallback)Gobjinst_ChooseAvailableAnimationKind(src, callback, dst->state_result);
                 }
                 if (callback != 0) {
                     if (callback != (StateCallback)-1) {

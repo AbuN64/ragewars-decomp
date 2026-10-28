@@ -9,7 +9,7 @@ extern f32 Math_Sqrtf(float arg0);
 
 
 
-f32 Sky_GetDistanceTo(void *gameplayCamera, CVector3 *targetPosition) {
+f32 Gsky_GetDistanceTo(void *gameplayCamera, CVector3 *targetPosition) {
     CVector3 delta;
     GameplayCamera *camera = gameplayCamera;
     GraphU64_SubtractVectors(&delta, &camera->position, targetPosition);

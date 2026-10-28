@@ -20,7 +20,7 @@ extern char D_800F41F0[];
 extern int Control_IsSnapshotActive(void);
 extern void *func_802BD3A0_de(void *, const void *, int);
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
-void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
+void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
  if(Control_IsSnapshotActive()==0) {
@@ -35,7 +35,7 @@ void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 
 
-void OvlScene_ChangePreviewSelection(ItemsPreviewStateB *state,int selection) {
+void Scene_ChangePreviewSelection(ItemsPreviewStateB *state,int selection) {
  if(selection!=state->selection) {
   state->changed=0;
   OvlScene_SetSelection(state,~selection,0);
@@ -44,7 +44,7 @@ void OvlScene_ChangePreviewSelection(ItemsPreviewStateB *state,int selection) {
 
 /* Resets part of a large state block: sets its word at offset 0x1B410 to 2 and clears the words
    at 0x1B414 to 0x1B41C and 0x1B434 to 0x1B440. */
-void OvlScene_ResetSelectionState(char *state) {
+void Scene_ResetSelectionState(char *state) {
     ((Shared_World *)state)->selectionState = 2;
     ((Shared_World *)state)->frozen = 0;
     ((Shared_World *)state)->selectionTimer = 0;
@@ -55,7 +55,7 @@ void OvlScene_ResetSelectionState(char *state) {
     ((Shared_World *)state)->selectionValues[3] = 0;
 }
 
-/* Copies up to max of a track's placed objects whose key matches into out: finds the key's index range in the track's sorted key table through func_80265550_de, queues each object in that range of the given kind (any kind for -1) on a local list through func_80255CA0_de and func_80255CB8_de, then takes them back off through func_80256190_de and func_80255ED8_de, copying each 20-byte object, and returns how many were copied. */
+/* Copies up to max of a track's placed objects whose key matches into out: finds the key's index range in the track's sorted key table through Defs_FindSortedGroupRange, queues each object in that range of the given kind (any kind for -1) on a local list through func_80255CA0_de and func_80255CB8_de, then takes them back off through func_80256190_de and func_80255ED8_de, copying each 20-byte object, and returns how many were copied. */
 
 
 
@@ -86,7 +86,7 @@ s32 OvlScene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Place
     keys += 2;
     objectTable = SetN64_GetPackSection(track->placedObjectTable, 1);
     objects = (Shared_Placed *)(objectTable + 2);
-    if (func_80265550_de(keys, count, key, &first, &last) != 0) {
+    if (Defs_FindSortedGroupRange(keys, count, key, &first, &last) != 0) {
         func_80255CA0_de(&list, 4, 8);
         node = nodes;
         for (i = first; i <= last; i++) {
@@ -124,10 +124,10 @@ typedef struct PlacedObjectList {
     s32 count;
     Shared_Placed objects[1];
 } PlacedObjectList;
-extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
+extern f32 Graphu64_GetPointDistance(f32 *a, f32 *b);
 /* Finds the placed object of the given kind nearest to position, copies it to out and returns its key; returns 0
    when none is found or the nearest is object 0 (index 0 doubles as "none"). */
-s32 OvlScene_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, Shared_Placed *out) {
+s32 Scene_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, Shared_Placed *out) {
     s32 i;
     s32 nearest;
     PlacedObjectKeys *keys;
@@ -146,7 +146,7 @@ s32 OvlScene_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kin
     nearest = 0;
     for (i = 0; i < count; i++) {
         if (objects[i].kind == kind) {
-            distance = GraphU64_GetPointDistance(&objects[i].pos.x, position);
+            distance = Graphu64_GetPointDistance(&objects[i].pos.x, position);
             if (distance < nearestDistance) {
                 nearestDistance = distance;
                 nearest = i;

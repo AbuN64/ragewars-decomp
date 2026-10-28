@@ -40,7 +40,7 @@ extern char *D_800D3D50;
 #include "MENU/OPTION_TEXT_TYPE.H"
 
 
-s32 Ovlgame_SelectToggleRowText(func_8043DD30_S1 *arg0) {
+s32 Confirming_SelectToggleRowText(func_8043DD30_S1 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk0;
@@ -159,7 +159,7 @@ extern void Control_DisableControllerPak(s32 arg);
 
 
 
-void Ovlgame_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
+void Confirming_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
     s32 val;
     MenuRecAt20V2 *menu = arg0;
 
@@ -174,7 +174,7 @@ void Ovlgame_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
 #include "COMMON/SESSIONHANDLERROW.H"
 extern f32 D_800DE324_de;
 
-void Ovlgame_InitMatchCounters(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
+void Confirming_InitMatchCounters(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
     s32 i;
     CGameStatus *state = &D_801462C8.counters;
     CGameStatus *result;

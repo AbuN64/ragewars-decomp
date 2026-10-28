@@ -32,7 +32,7 @@
  /* extern */
 
  /* extern */
-int Smos_DrainResourceWork();
+int Stream_DrainResourceWork();
 
  /* extern */
 
@@ -81,9 +81,9 @@ int SmSmngr_DeactivateCurrentScreen(int arg0) {
  index=D_8014D080->current;
  if(index>=0 && D_8014D080->field530) {
  item=(ObjRecAtCV1 *)D_8014D080->screens[index].focus;
- if(item) Smos_RouteElementEvent(item->unkC,0x10,0,0,0);
+ if(item) Menu_RouteElementEvent(item->unkC,0x10,0,0,0);
  event=arg0;
- Smos_DrainResourceWork();
+ Stream_DrainResourceWork();
  if(D_8014D080->current != -1) {
  callback=D_8014D080->callback;
  if(callback) {
@@ -108,9 +108,9 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
 
     g_dispatchingScreenOwner = -1;
     N64Eng_GetScreenSize(&g_screenDrawWidth, &g_screenDrawHeight);
-    Frontend_InitializeResourceState();
-    Frontend_SetDisplayClipBounds(g_screenDrawWidth, g_screenDrawHeight);
-    Smos_AllocateControllerContext();
+    Node_InitializeResourceState();
+    Node_SetDisplayClipBounds(g_screenDrawWidth, g_screenDrawHeight);
+    Controller_AllocateControllerContext();
     g_menuEventCount = 0;
     D_8014D080 = Cache_AllocateMemory(0x544);
     XPlus_FillBytes(D_8014D080, 0, 0x544);

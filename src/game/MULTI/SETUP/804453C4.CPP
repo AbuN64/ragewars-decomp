@@ -18,7 +18,7 @@ extern s32 Player_GetPlayerIndex(char *, s32);
 
 
 
-s32 Multi_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
+s32 Setup_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 
@@ -57,7 +57,7 @@ extern u8 *D_800D3C44;
 /* Highlights the name slot func_8022A5A0_de finds for the menu (display flags 0x1800000 on its model part,
    cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
    dropped, none when it starts like the default name) into the spinner; value and max = its length. */
-void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
+void Setup_SetupNameSpinner(MenuRecAt20V1 *menu) {
     s32 index;
     s32 trailing;
     s32 i;
@@ -132,7 +132,7 @@ void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
 #endif
 
 #if defined(VERSION_US_REV1)
-s32 Multi_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
+s32 Setup_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 

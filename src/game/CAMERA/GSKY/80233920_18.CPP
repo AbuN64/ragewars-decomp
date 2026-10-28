@@ -5,16 +5,16 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
-extern void GraphU64_ProjectPoint(void *, void *, CVector3 *);
+extern void Graphu64_ProjectPoint(void *, void *, CVector3 *);
 
 
 
 
-void Sky_ProjectToScreen(s32 view, s32 point, f32 *screenX, f32 *screenY) {
+void Gsky_ProjectToScreen(s32 view, s32 point, f32 *screenX, f32 *screenY) {
     CVector3 value;
     f32 half;
 
-    GraphU64_ProjectPoint(view + 0x1E0, point, &value);
+    Graphu64_ProjectPoint(view + 0x1E0, point, &value);
     half = (f32)(D_800E28D0 / 2);
     *screenX = value.x * half + half;
     *screenY = value.y * (f32)(-D_800E28D4 / 2) +

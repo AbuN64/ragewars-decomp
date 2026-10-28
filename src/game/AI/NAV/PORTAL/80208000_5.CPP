@@ -17,8 +17,8 @@ extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
    the whole wait) and either flags waiting at 0x23C while fewer than the wait or starts pursuit with
    the countdown at -1 and a wait from the config's 0x24 and 0x28 (scale D_800C6E04); during pursuit
    the wait runs down, ends early once the player is within D_800C6E08 of its target on the target's
-   height, and when it reaches zero flags 0x240 and acts through Nav_InitializeRandomActionSettings. Written in the style of
-   Nav_UpdateMeterGatedActionBurst with the random scale loaded into a local first. */
+   height, and when it reaches zero flags 0x240 and acts through Portal_InitializeRandomActionSettings. Written in the style of
+   Portal_UpdateMeterGatedActionBurst with the random scale loaded into a local first. */
 
 
 
@@ -37,12 +37,12 @@ extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 struct LevelActor;
 extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
 
-extern f32 Nav_GetEngagementDistance(void *arg0);
+extern f32 Portal_GetEngagementDistance(void *arg0);
 
 
 extern f32 Barrel_GetSignedAngleToPoint(Player *arg0, CVector3 point);
 
-void Nav_DispatchActorBehavior(void *arg0)
+void Portal_DispatchActorBehavior(void *arg0)
 {
     /* Dispatch the current actor mode through its per-type behavior table. */
     void *state;
@@ -80,22 +80,22 @@ void Nav_DispatchActorBehavior(void *arg0)
         }
     }
 case_0:
-        Nav_UpdateTimedActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Portal_UpdateTimedActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_1:
-        Nav_UpdateHeldActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Portal_UpdateHeldActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_2:
         ((ObjectLinks2EC *)state)->unk_240 = 1;
         goto dispatched;
 case_3:
-        Nav_UpdateAlternatingActionBursts(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateAlternatingActionBursts(state, &D_800F3D20 + type * 0x38);
         goto dispatched;
 case_4:
-        Nav_UpdateCountedEffectAction(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateCountedEffectAction(state, &D_800F3D20 + type * 0x38);
         goto dispatched;
 case_5:
-        Nav_UpdateMeterGatedActionBurst(state, &D_800F3D20 + type * 0x38);
+        Portal_UpdateMeterGatedActionBurst(state, &D_800F3D20 + type * 0x38);
 case_6:
 case_7:
 case_8:
@@ -108,7 +108,7 @@ dispatched:
     }
 }
 
-void Nav_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
+void Portal_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
 {
     s32 v0;
     f32 f20;
@@ -185,7 +185,7 @@ void Nav_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
     }
 }
 
-void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config) {
+void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config) {
     s32 count;
     char *target;
     CVector3 pos;
@@ -228,11 +228,11 @@ void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config)
     }
     if (arg0->unk_2E8 == 0) {
         arg0->unk_240 = 1;
-        Nav_InitializeRandomActionSettings(arg0, config);
+        Portal_InitializeRandomActionSettings(arg0, config);
     }
 }
 
-void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
+void Portal_UpdateMeterGatedActionBurst(void *object, void *settings) {
     AiController *controller = object;
     AiConfig *arg1 = settings;
     s32 timer;
@@ -281,7 +281,7 @@ void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
         record = controller->target->player;
         distance = Barrel_GetSignedAngleToPoint(controller->player,
                                  record->pos);
-        if (Nav_GetEngagementDistance(controller) < distance) {
+        if (Portal_GetEngagementDistance(controller) < distance) {
             return;
         }
         controller->unk23C = 1;
@@ -289,11 +289,11 @@ void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
     }
     if (controller->unk2E8 == 0) {
         controller->unk23C = 0;
-        Nav_InitializeRandomActionSettings(controller, arg1);
+        Portal_InitializeRandomActionSettings(controller, arg1);
     }
 }
 
-void Nav_LoadCollisionTable(void *resourcePack) {
+void Portal_LoadCollisionTable(void *resourcePack) {
     s32 s0;
     s32 s1;
     s32 s2;
@@ -322,7 +322,7 @@ void Nav_LoadCollisionTable(void *resourcePack) {
     } while (s2 < 0x16);
 }
 
-void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
+void Portal_UpdateTimedActionBurst(void *controller, void *settings) {
     s32 timer;
     s32 minus_one;
     Player *record;
@@ -331,7 +331,7 @@ void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
     if (controller == 0) {
         return;
     }
-    Nav_UpdateRandomActionPulse(controller, settings);
+    Portal_UpdateRandomActionPulse(controller, settings);
     timer = ((AiController *)controller)->unk2E4;
     if (timer > 0) {
         ((AiController *)controller)->unk2E4 = timer - 1;
@@ -344,7 +344,7 @@ void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
     } else {
         record = ((AiController *)controller)->target->player;
         distance = Barrel_GetSignedAngleToPoint(((AiController *)controller)->player, record->pos);
-        if (Nav_GetEngagementDistance(controller) < distance) {
+        if (Portal_GetEngagementDistance(controller) < distance) {
             return;
         }
         ((AiController *)controller)->unk23C = 1;
@@ -352,11 +352,11 @@ void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
     }
     if (((AiController *)controller)->unk2E8 == 0) {
         ((AiController *)controller)->unk23C = 0;
-        Nav_InitializeRandomActionSettings(controller, settings);
+        Portal_InitializeRandomActionSettings(controller, settings);
     }
 }
 
-void Nav_UpdateHeldActionBurst(void *controller, void *settings) {
+void Portal_UpdateHeldActionBurst(void *controller, void *settings) {
     AiController *brain = controller;
     s32 timer;
     Player *record;
@@ -365,7 +365,7 @@ void Nav_UpdateHeldActionBurst(void *controller, void *settings) {
     if (controller == 0) {
         return;
     }
-    Nav_UpdateRandomActionPulse(controller, settings);
+    Portal_UpdateRandomActionPulse(controller, settings);
     timer = brain->unk2E4;
     if (timer > 0) {
         brain->unk2E4 = timer - 1;
@@ -381,15 +381,15 @@ void Nav_UpdateHeldActionBurst(void *controller, void *settings) {
     brain->unk2E4 = -1;
     record = brain->target->player;
     distance = Barrel_GetSignedAngleToPoint(brain->player, record->pos);
-    if (Nav_GetEngagementDistance(controller) < distance) {
+    if (Portal_GetEngagementDistance(controller) < distance) {
         brain->unk23C = 1;
         return;
     }
     brain->unk23C = 0;
-    Nav_InitializeRandomActionSettings(controller, settings);
+    Portal_InitializeRandomActionSettings(controller, settings);
 }
 
-void Nav_UpdateRandomActionPulse(void *arg0, void *settings) {
+void Portal_UpdateRandomActionPulse(void *arg0, void *settings) {
     AiController *o = arg0;
     AiConfig *i = settings;
     s32 timer = o->unk2EC;
@@ -401,7 +401,7 @@ void Nav_UpdateRandomActionPulse(void *arg0, void *settings) {
 
             if ((f32) i->unk18 < threshold) {
                 o->unk240 = 1;
-                Nav_InitializeRandomActionSettings(arg0, settings);
+                Portal_InitializeRandomActionSettings(arg0, settings);
             }
             o->unk2EC = i->unk10;
             o->unk2EC =
@@ -413,7 +413,7 @@ void Nav_UpdateRandomActionPulse(void *arg0, void *settings) {
     }
 }
 
-void Nav_InitializeRandomActionSettings(void *object, void *settings) {
+void Portal_InitializeRandomActionSettings(void *object, void *settings) {
     AiController *controller = object;
     AiConfig *aiConfig = settings;
     f32 k = D_800C6E20;

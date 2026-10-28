@@ -9,7 +9,7 @@ typedef struct Output8025EF54 Output8025EF54;
 
 struct Output8025EF54;
 
-extern void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count);
+extern void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count);
 
 
 

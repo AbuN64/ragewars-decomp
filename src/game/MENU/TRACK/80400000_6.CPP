@@ -10,7 +10,7 @@
 void Geometry_InvalidateMaterialKeys(void);
 extern Gfx *g_displayListCursor;
 
-void Menu_DrawLetterboxBorder(s32 inset) {
+void Track_DrawLetterboxBorder(s32 inset) {
     f32 left;
     f32 top;
     f32 width;
@@ -52,7 +52,7 @@ void Menu_DrawLetterboxBorder(s32 inset) {
     ({ f32 edge = (value); if (!(edge >= 0.0f)) edge = 0.0f; edge; })
 
 /* Fade letterbox bands around the active track and draw the viewport border. */
-void Menu_DrawLetterboxBands(void) {
+void Track_DrawLetterboxBands(void) {
     f32 fade = 1.0f;
     f32 height, span;
     height = ((f32)D_800E28D4 - (f32)D_800E28D0 / D_800E2830->spec.aspectRatio) * 0.5f;
@@ -77,7 +77,7 @@ void Menu_DrawLetterboxBands(void) {
     gDPSetPrimColor(g_displayListCursor++, 255, 255, 0, 0, 0, 255);
     gDPFillRectangle(g_displayListCursor++, 0, 0, MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL((s32)height));
     gDPFillRectangle(g_displayListCursor++, 0, (u32)MENU_CLAMP_HEIGHT((f32)D_800E28D4 - height), MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL(D_800E28D4));
-    Menu_DrawLetterboxBorder((s32)height);
+    Track_DrawLetterboxBorder((s32)height);
 }
 
 #undef MENU_CLAMP_PIXEL

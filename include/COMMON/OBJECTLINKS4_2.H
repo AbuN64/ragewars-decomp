@@ -7,7 +7,7 @@ struct ModelTreeNode;
 #include "COMMON/SHAREDPLAYER.H"
 extern void Region_UnmarkMatchingNodes(struct ModelTreeNode *arg0, u16 arg1);
 
-extern void Region_NoOperation(void);
+extern void Gregion_NoOperation(void);
 
 extern void Region_ClearNodeGroupFlag(void *arg0);
 

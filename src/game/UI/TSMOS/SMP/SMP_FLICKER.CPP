@@ -190,7 +190,7 @@ extern MenuResourceWidget *Cache_AllocateMemory(int);
 
 
 
-extern void Frontend_InsertWidgetBefore(ResourceSmpFlickerCreateFlickerWidget *, MenuResourceWidget *);
+extern void Node_InsertWidgetBefore(ResourceSmpFlickerCreateFlickerWidget *, MenuResourceWidget *);
 
 
 void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount);
@@ -243,7 +243,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
 #endif
   SmpFlicker_InitFlicker(p, -1);
   SmpFlicker_EnableFlicker(p);
-  Frontend_InsertWidgetBefore(r, p);
+  Node_InsertWidgetBefore(r, p);
   return p;
 }
 

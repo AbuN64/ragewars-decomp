@@ -54,5 +54,5 @@ struct TextEntryRecAtC {
     s32 count;
     char text[12];
 };
-extern void Multi_SetupNameSpinner(MenuRecAt20V1 *menu);
+extern void Setup_SetupNameSpinner(MenuRecAt20V1 *menu);
 #endif

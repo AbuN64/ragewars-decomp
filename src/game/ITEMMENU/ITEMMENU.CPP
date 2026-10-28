@@ -107,7 +107,7 @@ static inline void clear_entry(CItem *e) {
     e->unk1C = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and SetN64_StartSessionThreads. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
 
 extern char D_800F41F0;
 
@@ -287,31 +287,31 @@ void ItemMenu_ResetEntries(CItemMenu *rec) {
 
 /* Finds or allocates one of four records and updates its parameters. */
 s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, s32 arg6, s32 arg7, s32 arg8) {
-    s32 var_a1;
+    s32 entryIndex;
     u32 key;
     char *temp_v1;
     CItem *var_v1;
     CItem *var_v1_2;
-    var_a1 = 0;
+    entryIndex = 0;
     key = arg2 & 0xFFFF;
-    for (var_a1 = 0; var_a1 < 4; var_a1++) {
-        if (((CItemMenu *)arg0)->entries[var_a1].unk0 != 0 &&
-            ((CItemMenu *)arg0)->entries[var_a1].unkC == key) {
+    for (entryIndex = 0; entryIndex < 4; entryIndex++) {
+        if (((CItemMenu *)arg0)->entries[entryIndex].unk0 != 0 &&
+            ((CItemMenu *)arg0)->entries[entryIndex].unkC == key) {
             break;
         }
     }
-    if (var_a1 == 4) {
-        for (var_a1 = 0; var_a1 < 4; var_a1++) {
-            if (((CItemMenu *)arg0)->entries[var_a1].unk0 == 0) {
+    if (entryIndex == 4) {
+        for (entryIndex = 0; entryIndex < 4; entryIndex++) {
+            if (((CItemMenu *)arg0)->entries[entryIndex].unk0 == 0) {
                 break;
             }
         }
-        if (var_a1 == 4) {
+        if (entryIndex == 4) {
             return 0;
         }
     }
-    temp_v1 = arg0 + ((var_a1 * 0x38) + 4);
-    ((CItemMenu *)arg0)->m_LastItemPos = var_a1;
+    temp_v1 = arg0 + ((entryIndex * 0x38) + 4);
+    ((CItemMenu *)arg0)->m_LastItemPos = entryIndex;
     ((CItem *)(temp_v1))->unk0 = 1;
     ((CItem *)(temp_v1))->unk8 = arg1;
     ((CItem *)(temp_v1))->unkC = arg2;
@@ -423,7 +423,7 @@ s32 ItemMenu_RestoreBootMemory(void) {
             *dst = 0;
         }
     }
-    func_802BAE40_de();
+    Audio_InitializeOperatingSystem();
     SetN64_StartSessionThreads();
     return 0;
 }

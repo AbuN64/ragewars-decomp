@@ -11,17 +11,17 @@
 
 /* 802508E0_10.CPP */
 extern s32 D_801047E0;
-void func_80253CEC_de(s32 arg0, s32 message)
+void Cache_SendCompletionMessage(s32 arg0, s32 message)
 {
   osSendMesg(&D_801047E0, message, 1);
 }
 
 /* 802508E0_11.CPP */
-extern void func_80254DD0_de(void *arg0, void *arg1);
+extern void Cache_DetachResourceRequest(void *arg0, void *arg1);
 
 extern void func_80255B2C_de(void *arg0, s32 arg1);
 
-extern void func_80254AD0_de(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
 extern s32 D_80100570;
 
@@ -33,11 +33,11 @@ extern s32 D_80101194;
 
 extern void func_80255FB8_de(void *, s32);
 
-extern void func_80254990_de(void *, void *);
+extern void Cache_ReleaseResourceCompletely(void *, void *);
 
 extern char s_headerText;
 
-/* Allocates a four-byte probe from Cache_RequestResource to read a count, frees it under the D_8010515C lock, then allocates count*4+15 rounded to eight bytes and stores its first word through arg1, returning the allocation. Adapted from func_802540F4_de with the null checks removed, tag 0x1B and flag 1 passed as the fifth and ninth arguments, and the constant 1 held in a local changed. */
+/* Allocates a four-byte probe from Cache_RequestResource to read a count, frees it under the D_8010515C lock, then allocates count*4+15 rounded to eight bytes and stores its first word through arg1, returning the allocation. Adapted from Cache_RequestWordCountedResource with the null checks removed, tag 0x1B and flag 1 passed as the fifth and ninth arguments, and the constant 1 held in a local changed. */
 
 extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
@@ -74,9 +74,9 @@ void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
         } while (node->field_8 != 0);
     }
     if (!(node->field_C & 0x702)) {
-        func_80254DD0_de(0, node);
+        Cache_DetachResourceRequest(0, node);
         func_80255B2C_de(&D_801051A0, node->field_0);
-        func_80254AD0_de(0, node);
+        Cache_ReleasePendingResourceEntry(0, node);
     }
     *handle = replacement;
 
@@ -91,7 +91,7 @@ void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     __osRestoreInt(token2);
 }
 
-void func_80253E64_de(s32 arg0, NodePair80253E04 *resourcePair, Node80253610 *replacementResource) {
+void Cache_ReplaceResourcePairFirst(s32 arg0, NodePair80253E04 *resourcePair, Node80253610 *replacementResource) {
     extern OSMesgQueue D_80101140;
     s32 lockClaimCount;
     s32 lockReleaseCount;
@@ -140,7 +140,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *resourcePair, Node80253610 *re
     __osRestoreInt(releaseInterruptMask);
 }
 
-void func_80253F8C_de(s32 arg0, s32 resourceKey) {
+void Cache_TouchResourceByKey(s32 arg0, s32 resourceKey) {
     extern OSMesgQueue D_80101140;
     s32 lockClaimCount;
     s32 lockReleaseCount;
@@ -204,7 +204,7 @@ found:
     __osRestoreInt(releaseInterruptMask);
 }
 
-void **func_802540F4_de(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s32 direct) {
+void **Cache_RequestWordCountedResource(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s32 direct) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -225,7 +225,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s
         } else {
             __osRestoreInt(token);
         }
-        func_80254990_de(0, resource);
+        Cache_ReleaseResourceCompletely(0, resource);
         token2 = __osDisableInt();
         counter2 = D_8010515C - 1;
         D_8010515C = counter2;
@@ -245,7 +245,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s
     return 0;
 }
 
-s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *loadTag) {
+s32 Cache_RequestWordCountedResourcePinned(s32 arg0, void **handle, s32 tempv0, void *loadTag) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -266,7 +266,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *loadTag) {
     } else {
         __osRestoreInt(token);
     }
-    func_80254990_de(0, resource);
+    Cache_ReleaseResourceCompletely(0, resource);
     token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
@@ -281,7 +281,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *loadTag) {
     return (s32)resource;
 }
 
-void **func_80254408_de(s32 arg0, void *handle, s32 sectionSelector, s32 tempv0, void *world, void *resourceTag, void *loadTag) {
+void **Cache_RequestPackSection(s32 arg0, void *handle, s32 sectionSelector, s32 tempv0, void *world, void *resourceTag, void *loadTag) {
     s32 sectionByteCount;
     s32 sectionSource;
 

@@ -74,10 +74,10 @@ typedef struct FrameCallback {
  void (*auxiliary1)(TimingWorld *);
 } FrameCallback;
 extern FrameCallback D_800CD790[];
-extern u64 func_802BADC0_de(void);
+extern u64 Audio_ReadSystemTime(void);
 extern s32 Cinema_GetSequenceRequest(void);
 extern u32 func_80245850_de(void);
-extern s32 Pak_CountLiveNodes(Node_Pak_CountLiveNodes **);
+extern s32 Menu_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;
 extern void SetN64_AdvanceGameClock(struct GameSession *);
 extern void func_804037D4_de(void);
@@ -91,12 +91,12 @@ extern TimingQueue *D_8014561C;
 extern u32 D_800CD884;
 extern f32 rwFrameBuildSeconds;
 extern f32 D_800C5468;
-extern void func_802539EC_de(s32,s32);
+extern void Cache_SelectResourceSlot(s32,s32);
 extern void SetN64_CommitSessionInputs(void *);
 
 extern int Control_IsSnapshotActive(void);
 
-extern s32 func_802BCF10_de(void);
+extern s32 __osGetFpcCsr(void);
 extern char D_80146CE8[];
 extern char D_800C5400_de[];
 extern char D_800C5408_de[];

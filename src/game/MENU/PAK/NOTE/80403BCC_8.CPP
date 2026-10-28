@@ -49,7 +49,7 @@ void Control_ReadControllerStates();
 void Control_ReleasePakLock();
 
  /* extern */
-void Pak_UpdateStatus(s32);
+void Note_UpdateStatus(s32);
 
  /* extern */
 s32 osPfsRepairId(void *);
@@ -72,7 +72,7 @@ s32 osPfsRepairId(void *);
 
 
 
-/* Reports through the third argument the size in 256-byte units, per Pak_BytesToPakPages, of entry j of
+/* Reports through the third argument the size in 256-byte units, per Note_BytesToPakPages, of entry j of
    record i in the table D_800E2854 points to, returning zero, or returns -2 when record i's state in
    g_controllerPakChannelStates is not 3. */
 
@@ -82,13 +82,13 @@ s32 osPfsRepairId(void *);
 
 
 
-extern s32 Pak_BytesToPakPages(s32);
+extern s32 Note_BytesToPakPages(s32);
 
 extern PakDirectory *D_800E2854;
 
 extern Device D_8014D280[];
 
-s32 Pak_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
+s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
 {
   s32 size;
   s32 *buf;
@@ -135,7 +135,7 @@ s32 Pak_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
 }
 
 /* Counts empty Controller Pak note slots on channel ch when the pak is ready and returns its error status, or -2 when not ready. */
-s32 Pak_CountFreeNotes(s32 ch, s32 *count) {
+s32 Note_CountFreeNotes(s32 ch, s32 *count) {
     s32 i;
 
     if (g_controllerPakChannelStates[ch] != 3) {
@@ -152,7 +152,7 @@ s32 Pak_CountFreeNotes(s32 ch, s32 *count) {
     return g_controllerPakChannelStatuses[ch];
 }
 
-int Pak_GetFreePages(int slot, int *score) {
+int Note_GetFreePages(int slot, int *score) {
     if (g_controllerPakChannelStates[slot] != 3) {
         return -2;
     }
@@ -164,7 +164,7 @@ int Pak_GetFreePages(int slot, int *score) {
     return g_controllerPakChannelStatuses[slot];
 }
 
-s32 Pak_RepairIdIfNeeded(s32 channel) {
+s32 Note_RepairIdIfNeeded(s32 channel) {
     s32 channelOffset;
     s32 result;
     channelOffset = channel * 4;
@@ -180,13 +180,13 @@ s32 Pak_RepairIdIfNeeded(s32 channel) {
         if (result != 0) {
             result = -1;
         }
-        Pak_UpdateStatus(channel);
+        Note_UpdateStatus(channel);
     }
     Control_ReleasePakLock();
     return result;
 }
 
-s32 Pak_RepairId(s32 channel) {
+s32 Note_RepairId(s32 channel) {
     s32 result;
     if (g_controllerPakChannelStates[channel] != 3) {
         return -2;
@@ -198,12 +198,12 @@ s32 Pak_RepairId(s32 channel) {
     if (result != 0) {
         result = -1;
     }
-    Pak_UpdateStatus(channel);
+    Note_UpdateStatus(channel);
     Control_ReleasePakLock();
     return result;
 }
 
-s32 Pak_GetNoteGameName(s32 index, s32 entry, char **out) {
+s32 Note_GetNoteGameName(s32 index, s32 entry, char **out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
@@ -211,7 +211,7 @@ s32 Pak_GetNoteGameName(s32 index, s32 entry, char **out) {
     return 0;
 }
 
-s32 Pak_GetNoteExtension(s32 index, s32 entry, char **out) {
+s32 Note_GetNoteExtension(s32 index, s32 entry, char **out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
@@ -219,10 +219,10 @@ s32 Pak_GetNoteExtension(s32 index, s32 entry, char **out) {
     return 0;
 }
 
-s32 Pak_GetNotePageCount(s32 index, s32 entry, s32 *out) {
+s32 Note_GetNotePageCount(s32 index, s32 entry, s32 *out) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
-    *out = Pak_BytesToPakPages(D_800E2854[index].notes[entry].file_size);
+    *out = Note_BytesToPakPages(D_800E2854[index].notes[entry].file_size);
     return 0;
 }

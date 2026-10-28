@@ -38,7 +38,7 @@ extern s32 SmpSlider_GetSliderItem(void *);
 
 /* Acts on the mode of the menu held first in the block D_800E5690 points to: in mode 4 it calls
    MarkMenuEventHandled and then either SmXlate_SwitchScreen with the block's word at 0x20, when that is not -1,
-   or Smos_ReturnToPreviousScreen. Returns zero. */
+   or Menu_ReturnToPreviousScreen. Returns zero. */
 
 
 
@@ -48,13 +48,13 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 
 
-/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x60, passes the word at offset 0x28 of the object
+/* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x60, passes the word at offset 0x28 of the object
    D_800E5690 points to to Menu_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
    on its first word with 2. Returns zero. */
 
 
 
-void Menu_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
+void Player_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
@@ -65,7 +65,7 @@ void Menu_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
     SmpButton_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
-void Menu_StoreAlternatePlayerSettingsEntry(s32 arg0) {
+void Player_StoreAlternatePlayerSettingsEntry(s32 arg0) {
     u8 *config;
 
     config = g_playerSettings + arg0 * 0x96;
@@ -83,7 +83,7 @@ void Menu_StoreAlternatePlayerSettingsEntry(s32 arg0) {
     config[0x82] = D_800FEC8D[arg0 * 0x190];
 }
 
-s32 Menu_FreePlayerSettingsScreen(void) {
+s32 Player_FreePlayerSettingsScreen(void) {
     Cache_FreeMemory(D_800E5690);
     D_800E5690 = 0;
     return 0;
@@ -95,7 +95,7 @@ s32 func_80436B68_de(void) {
     return 0;
 }
 
-s32 Menu_UpdatePlayerSettingsExit(void) {
+s32 Player_UpdatePlayerSettingsExit(void) {
     switch (SmpSlider_GetTransitionMode(D_800E5690->menu)) {
     case 3:
         break;
@@ -104,7 +104,7 @@ s32 Menu_UpdatePlayerSettingsExit(void) {
         if (D_800E5690->value != -1) {
             SmXlate_SwitchScreen(D_800E5690->value);
         } else {
-            Smos_ReturnToPreviousScreen();
+            Menu_ReturnToPreviousScreen();
         }
         break;
     }
@@ -117,15 +117,15 @@ s32 func_80436BEC_de(void) {
     return 0;
 }
 
-s32 Menu_ConfirmPlayerSettingsEntry(void) {
+s32 Player_ConfirmPlayerSettingsEntry(void) {
     struct MenuStepState *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (Smos_GetFocusedElementId() == 0x5E) {
+    if (Menu_GetFocusedElementId() == 0x5E) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (Smos_GetFocusedElementId() == 0x60) {
+    if (Menu_GetFocusedElementId() == 0x60) {
 #elif defined(VERSION_EU_X)
-    if (Smos_GetFocusedElementId() == 0x64) {
+    if (Menu_GetFocusedElementId() == 0x64) {
 #endif
         Menu_StorePlayerSettingsEntry(D_800E5690->item);
         state = D_800E5690;

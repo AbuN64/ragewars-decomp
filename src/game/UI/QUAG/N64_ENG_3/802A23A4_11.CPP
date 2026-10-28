@@ -14,13 +14,13 @@
 #include "include_asm.h"
 #include "SCENE/802508E0_13.H"
 
-extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
 extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
-extern void Frontend_DrawVisibleSiblings(void *, Args);
+extern void Widget_DrawVisibleSiblings(void *, Args);
 
 s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
@@ -56,16 +56,16 @@ void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+    if (Widget_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((((Widget *)widget)->flags & 0x200) != 0) {
             N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            Frontend_ClampRectToClip(&transformed, &basis);
+            Node_ClampRectToClip(&transformed, &basis);
             N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        Frontend_DrawVisibleSiblings(((struct Tree *)widget)->child, args);
+        Widget_DrawVisibleSiblings(((struct Tree *)widget)->child, args);
         if (changed != 0) {
             N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
@@ -206,11 +206,11 @@ s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3
     return 0;
 }
 
-s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 fifth) {
     RecordN64EngCreateNumericWidget *object = arg0;
     s32 temp_s0;
 
-    temp_s0 = XMath_AbsoluteInteger(arg4);
+    temp_s0 = XMath_AbsoluteInteger(fifth);
     if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;

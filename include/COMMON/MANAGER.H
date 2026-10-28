@@ -13,8 +13,8 @@ typedef struct CachedResource CachedResource;
 
 struct Manager;
 
-struct Node_func_802524B0_de;
-typedef struct Node_func_802524B0_de Node_func_802524B0_de;
+struct NodeCacheRunResourceCompletionWorker;
+typedef struct NodeCacheRunResourceCompletionWorker NodeCacheRunResourceCompletionWorker;
 
 
 struct ObjectState13;
@@ -77,25 +77,25 @@ typedef struct Manager Manager;
 
 
 
-struct Request_func_802524B0_de;
-typedef struct Request_func_802524B0_de Request_func_802524B0_de;
+struct RequestCacheRunResourceCompletionWorker;
+typedef struct RequestCacheRunResourceCompletionWorker RequestCacheRunResourceCompletionWorker;
 
 struct ObjectState13;
 
 struct Manager;
 
-struct Node_func_802524B0_de;
-struct Node_func_802524B0_de {
+struct NodeCacheRunResourceCompletionWorker;
+struct NodeCacheRunResourceCompletionWorker {
     void *data;
     s32 pad4;
     s32 count;
     s32 flags;
 };
 
-struct Node_func_802524B0_de;
-struct Request_func_802524B0_de;
-struct Request_func_802524B0_de {
-    struct Node_func_802524B0_de *node;
+struct NodeCacheRunResourceCompletionWorker;
+struct RequestCacheRunResourceCompletionWorker;
+struct RequestCacheRunResourceCompletionWorker {
+    struct NodeCacheRunResourceCompletionWorker *node;
     s32 pad4[3];
     s32 flags;
 };
@@ -113,7 +113,7 @@ struct CachedResource;
 
 
 
-extern int StaticInstance_AdvanceResourceKey();
+extern int Statinst_AdvanceResourceKey();
 
 
 

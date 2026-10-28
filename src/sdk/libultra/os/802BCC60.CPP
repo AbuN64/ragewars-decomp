@@ -16,7 +16,7 @@ s32 osDpSetNextBuffer(void *bufPtr, u64 size) {
     IO_WRITE_WORD(RDP_DMA_STATUS_REG, 1);
     do {
     } while (IO_READ_WORD(RDP_DMA_STATUS_REG) & 1);
-    IO_WRITE_WORD(RDP_DMA_START_REG, func_802BBBC0_de(bufPtr));
-    IO_WRITE_WORD(RDP_DMA_END_REG, func_802BBBC0_de(bufPtr) + size);
+    IO_WRITE_WORD(RDP_DMA_START_REG, osVirtualToPhysical(bufPtr));
+    IO_WRITE_WORD(RDP_DMA_END_REG, osVirtualToPhysical(bufPtr) + size);
     return 0;
 }

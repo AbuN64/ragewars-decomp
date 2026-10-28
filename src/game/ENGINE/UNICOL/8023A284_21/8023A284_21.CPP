@@ -11,7 +11,7 @@
 #include "ANIM/8023F740.H"
 
 /* 8023A284_21.CPP */
-void func_8023CFE0_de(ActorMotion *motion) {
+void CCollision_IntegrateGravityAndDrag(ActorMotion *motion) {
     CVector3 acceleration;
     f32 limit;
     f32 drag;
@@ -55,11 +55,11 @@ void func_8023CFE0_de(ActorMotion *motion) {
 }
 
 /* 8023CFD0.CPP */
-extern void func_8023F43C_de(void *arg0);
+extern void CInstanceCollision_TraceInteractiveActors(void *arg0);
 extern void func_80242BF0_de(void *arg0);
-extern void func_80243920_de(void *arg0);
+extern void CPolyCollision_TraceCeilingTriangle(void *arg0);
 
-s32 func_8023D158_de(ActorMotion *object) {
+s32 CCollision_TraceActorMotion(ActorMotion *object) {
     u32 *flags = &object->surface->dwFlags;
     f32 magnitude;
     f32 minimumX;
@@ -69,7 +69,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     f32 minimumZ;
     f32 maximumZ;
 
-    func_80240C8C_de(&object->collisionState);
+    CPlane_ResetContact(&object->collisionState);
     GraphU64_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
@@ -129,7 +129,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     object->horizontalBounds[1] = object->boundsMin.z;
 
     if (*flags & 0x200000) {
-        func_8023F43C_de(object);
+        CInstanceCollision_TraceInteractiveActors(object);
     }
     if (object->distance != 0.0f) {
         if (*flags & 0x10000) {
@@ -139,7 +139,7 @@ s32 func_8023D158_de(ActorMotion *object) {
             func_80242BF0_de(object);
         }
         if (*flags & 0x80000) {
-            func_80243920_de(object);
+            CPolyCollision_TraceCeilingTriangle(object);
         }
     }
     return object->collisionState != 0;

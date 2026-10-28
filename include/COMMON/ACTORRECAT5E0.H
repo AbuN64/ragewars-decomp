@@ -73,7 +73,7 @@ extern void Control_TickSnapshotCountdown();
 struct ActorRecAt5E0;
 typedef struct ActorRecAt5E0 ActorRecAt5E0;
 
-extern void func_802649FC_de();
+extern void Control_ClearMenuControlFlag();
 
 extern void Control_EnableAllControllerPaks();
 
@@ -96,5 +96,5 @@ extern s32 Control_AdvanceEffectCurve(void *arg0);
 struct SampledCurve;
 typedef struct SampledCurve SampledCurve;
 
-extern void func_80264A0C_de();
+extern void Control_SetMenuControlFlag();
 #endif

@@ -15,7 +15,7 @@ extern s16 D_auto_800E1DAA[][2];
 extern u8 D_auto_800C9237[][4];
 extern u8 D_auto_800C9233[][4];
 extern s32 Control_IsAButtonPressed(struct ControllerProfile *object);
-extern void Ovlgame_StartPlayerAnimation(void *rec, s32 choice);
+extern void Player_StartPlayerAnimation(void *rec, s32 choice);
 extern void SoundElement_PlayFlatSound(s32 id);
 extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Pak_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
@@ -25,7 +25,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 arg0, Func_8043DB50_Obj *arg
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
     if (Control_IsAButtonPressed(arg1->player) != 0) {
-        Ovlgame_StartPlayerAnimation(rec, slot->choice);
+        Player_StartPlayerAnimation(rec, slot->choice);
         SoundElement_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
         Pak_AllocateMenu(arg2, arg1, D_0044FA6C);
         return 1;
@@ -37,7 +37,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 arg0, Func_8043DB50_Obj *arg
     if (Control_IsRightPressed(arg1->player) != 0 || Control_IsAButtonPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9233[slot->choice][0];
     }
-    Ovlgame_StartPlayerAnimation(rec, slot->choice);
+    Player_StartPlayerAnimation(rec, slot->choice);
     Pak_SelectPreviewModel(arg0, 0xB, slot->choice);
     return 0;
 }

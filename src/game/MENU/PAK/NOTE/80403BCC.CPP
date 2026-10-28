@@ -35,11 +35,11 @@ extern u8 D_8010BBB8;
 
 extern PakRecord D_80153330[];
 
-s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel);
+s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel);
 
-extern s32 Pak_UpdateStatus(s32);
+extern s32 Note_UpdateStatus(s32);
 
-extern u8 D_800DE80C[];
+extern u8 g_controllerPakFilenameAlphabet[];
 
 
 
@@ -59,7 +59,7 @@ static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
     for (i = 0; i < n; i++) {
         src[i] = XPlus_UppercaseCharacter(src[i]);
         for (j = 0; j < 0x42; j++) {
-            if (src[i] == D_800DE80C[j]) {
+            if (src[i] == g_controllerPakFilenameAlphabet[j]) {
                 dst[i] = j;
                 break;
             }
@@ -70,10 +70,10 @@ static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
     }
 }
 
-extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+extern s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
-s32 Pak_RefreshNotes(s32 ch) {
+s32 Note_RefreshNotes(s32 ch) {
     s32 i;
     s32 result;
     s32 free;
@@ -100,7 +100,7 @@ s32 Pak_RefreshNotes(s32 ch) {
     return result;
 }
 
-s32 Pak_UpdateStatus(s32 ch) {
+s32 Note_UpdateStatus(s32 ch) {
     s32 tries;
     s32 result;
     void *pfs;
@@ -134,13 +134,13 @@ s32 Pak_UpdateStatus(s32 ch) {
     goto finish;
 ready:
     g_controllerPakChannelStates[ch]=3;
-    if(Pak_RefreshNotes(ch)!=0) g_controllerPakChannelStatuses[ch]=-4;
+    if(Note_RefreshNotes(ch)!=0) g_controllerPakChannelStatuses[ch]=-4;
     else g_controllerPakChannelStatuses[ch]=0;
 finish:
     return g_controllerPakChannelStatuses[ch]==0 || g_controllerPakChannelStatuses[ch]==-4;
 }
 
-void Pak_ProbeAllChannels(void) {
+void Note_ProbeAllChannels(void) {
     s32 channel;
     s32 present;
     PakRecord *record;
@@ -153,22 +153,22 @@ void Pak_ProbeAllChannels(void) {
             present = 0;
             record->present = 0;
         } else {
-            record->present = func_802B7FD8_de(D_8010FC00, record->pak, channel) == 0;
+            record->present = osMotorInit(D_8010FC00, record->pak, channel) == 0;
             present = record->present;
         }
         if (present) g_controllerPakChannelStates[channel] = 2;
-        else if (Pak_UpdateStatus(channel) != 0) g_controllerPakChannelStates[channel] = 3;
+        else if (Note_UpdateStatus(channel) != 0) g_controllerPakChannelStates[channel] = 3;
         else g_controllerPakChannelStates[channel] = 1;
     }
     Control_ReleasePakLock();
 }
 
-s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
+s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
 
-s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+s32 Note_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                   u8 *company, u8 *code) {
     extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name);
-    extern s32 Pak_UpdateStatus(s32 ch);
+    extern s32 Note_UpdateStatus(s32 ch);
     s32 result;
     u8 name[16];
     u8 ext[4];
@@ -204,7 +204,7 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
                 result = -1;
             }
         }
-        Pak_UpdateStatus(ch);
+        Note_UpdateStatus(ch);
     }
     Control_ReleasePakLock();
     return result;

@@ -154,9 +154,9 @@ extern void func_8022D3EC_de(void);
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void func_8022CE78_de(s32 arg0, s32 arg1);
 
-extern void Ovlgame_UpdateRunEndPlayer(void *);
+extern void Player_UpdateRunEndPlayer(void *);
 struct ObjectLinks854;
-extern void Player_TryStartPlayerSequence(struct ObjectLinks854 *a, void *b, int c);
+extern void Playerai_TryStartPlayerSequence(struct ObjectLinks854 *a, void *b, int c);
 
 s32 func_8021C45C_de(s32, void *, s32, s32);
 

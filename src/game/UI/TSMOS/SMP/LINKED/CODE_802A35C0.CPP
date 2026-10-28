@@ -22,7 +22,7 @@ extern void *Fx_AllocateRibbonSegment(void *arg0, s32 arg1);
 
 extern void GraphU64_GetMatrixTranslation(char *object, f32 *output);
 
-extern void GraphU64_GetMatrixScale(void *arg0, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
 
 extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
@@ -89,17 +89,17 @@ extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_TransformDirection(void *, void *, void *);
 
-extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_IdentityMatrix(void *);
 
 extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
 
-extern void Smp_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
+extern void Linked_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void GraphU64_ConvertMatrixToFixed(void *, f32 *);
 
-void *Smp_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
+void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
     f32 temp_f0;
     f32 temp_f0_2;
@@ -116,7 +116,7 @@ void *Smp_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
         ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
         GraphU64_GetMatrixTranslation(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
-            GraphU64_GetMatrixScale(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
+            Graphu64_GetMatrixScale(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
             GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
             GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
@@ -203,7 +203,7 @@ void Smp_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx
     }
 }
 
-void Smp_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph *morph) {
+void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;
@@ -258,7 +258,7 @@ void Smp_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vt
     }
 }
 
-s32 Smp_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) {
+s32 Linked_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) {
     LevelActor *object;
     Nodes *node;
     Nodes *next;
@@ -338,7 +338,7 @@ s32 Smp_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) {
     return 1;
 }
 
-void Smp_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
+void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
     f32 setup[4];
     CVector3 first;
     CVector3 basis;
@@ -362,7 +362,7 @@ void Smp_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera
                   basis.x * first.x + neg_y * first.y + neg_z * first.z);
     GraphU64_SubtractVectors(&cross, &first, &cross);
     GraphU64_NormalizeVec3(&cross);
-    GraphU64_CrossVectors(&result, &basis, &cross);
+    Graphu64_CrossVectors(&result, &basis, &cross);
     GraphU64_NormalizeVec3(&result);
     GraphU64_ScaleVector(&result, &result, arg0->a);
     GraphU64_ScaleVector(&cross, &cross, arg0->b);
@@ -384,7 +384,7 @@ void Smp_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera
 
 struct GameplayCamera;
 
-void Smp_UpdateRibbonMatrices(void *arg0, void *camera) {
+void Linked_UpdateRibbonMatrices(void *arg0, void *camera) {
     f32 matrix[16];
     Node438C *first;
     Node438C *next;
@@ -432,7 +432,7 @@ z_test:
         goto z_test;
 boundary:
         if (a != 0 && b != 0) {
-            Smp_BuildRibbonSegmentMatrix(a, b, camera, matrix);
+            Linked_BuildRibbonSegmentMatrix(a, b, camera, matrix);
             goto apply;
         }
 no_pair:
@@ -492,12 +492,12 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     GraphU64_ClampMatrixToFixedRange(matrix);
     GraphU64_GetMatrixTranslation((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
-        GraphU64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
+        Graphu64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
     } else {
         GraphU64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
     }
 }
-void Smp_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
+void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
     LinkNode802A *node;
     LinkNode802A *parent;
     void *source;
@@ -532,19 +532,19 @@ void Smp_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
 
 extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
 
-void *TextLoad_RequestTextureVariation(s32 *, s32);
-void TextLoad_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
+void *Textload_RequestTextureVariation(s32 *, s32);
+void Textload_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)
-void TextLoad_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
-void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void Textload_LoadTextureFrame(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 void Cache_UnlockResource(s32, void *);
 s32 Fx_SelectAnimationFrame(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count);
 /* Draws a textured ribbon: spaces the texture along the tail by length, picks the animation frame, sets the
  * combiner and colours (greyscale on a monochrome camera), then emits two vertex rows per clock node and the
  * triangle strip between them. */
-void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
+void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     struct Shared_AnimInfo info;
     Morph storage;
     struct Shared_AnimInfo *anim;
@@ -566,9 +566,9 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
             offset += node->length;
         }
     }
-    model = TextLoad_RequestTextureVariation(&actor->model, -1);
+    model = Textload_RequestTextureVariation(&actor->model, -1);
     if (model == 0) return;
-    TextLoad_ReadTextureAnimationInfo(model, &info);
+    Textload_ReadTextureAnimationInfo(model, &info);
     anim = &info;
     storage.blends = actor->track->blends;
     storage.count = actor->track->count;
@@ -609,9 +609,9 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
     next = clock->next;
     frame = Fx_SelectAnimationFrame((AnimationFrameState *)actor, (AnimationFrameDefinition *)track, &info.count);
 #if defined(VERSION_US_REV1)
-    TextLoad_LoadTextureFrameTiles(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
+    Textload_LoadTextureFrameTiles(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #else
-    func_802950B4_de(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
+    Textload_LoadTextureFrame(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #endif
     edges = count - 1;
     gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
@@ -619,7 +619,7 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
         f32 scale;
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
-        Smp_BuildTexturedRibbonVertices(actor, clock, vertices, clock->offset, &storage);
+        Linked_BuildTexturedRibbonVertices(actor, clock, vertices, clock->offset, &storage);
         used += count;
         gSPVertex(g_displayListCursor++, vertices, count, 0);
         gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
@@ -627,7 +627,7 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
         if (vertices == 0) break;
         scale = next->offset;
         while (clock->offset < scale) scale -= period;
-        Smp_BuildTexturedRibbonVertices(actor, next, vertices, scale, &storage);
+        Linked_BuildTexturedRibbonVertices(actor, next, vertices, scale, &storage);
         used += count;
         gSPVertex(g_displayListCursor++, vertices, count, count);
         for (i = 0; i < edges; i++) {

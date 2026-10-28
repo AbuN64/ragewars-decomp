@@ -97,7 +97,7 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2910, once the resource has been loaded by func_80285180_de. */
 
-extern s32 PpDecom_UnpackResource(void *resource, s32 flags);
+extern s32 Ppdecom_UnpackResource(void *resource, s32 flags);
 
 void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
     s32 i;
@@ -117,7 +117,7 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = PpDecom_UnpackResource(resource, 0) == 0;
+    end = Ppdecom_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }
@@ -182,7 +182,7 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = PpDecom_UnpackResource(resource, 0) == 0;
+    end = Ppdecom_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }

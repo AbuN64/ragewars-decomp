@@ -32,7 +32,7 @@ extern s32 PAKInterface_CheckRecordsNoteCapacity(s32, s32 *);
 extern s32 PAKInterface_SavePlayerRecords(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
-extern s32 Pak_DeleteNote(s32, s32);
+extern s32 Note_DeleteNote(s32, s32);
 
 extern void Player_InitializeProfile(void *);
 extern void Pak_ProbeStatus(s32);
@@ -40,7 +40,7 @@ extern void PAKInterface_ResolvePlayerPakState(s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 
 
-extern s32 Pak_RepairId(s32);
+extern s32 Note_RepairId(s32);
 
 s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
     s32 answer;
@@ -403,7 +403,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x2D0:
 #endif
-            if (Pak_DeleteNote(p, D_800E54A4->players[p].slot) == 0) {
+            if (Note_DeleteNote(p, D_800E54A4->players[p].slot) == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                 if (XPlus_CompareStringsIgnoreCase((u8 *)D_800E25A4[g_languageIndex],
 #else
@@ -993,7 +993,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
             break;
         case 0x2E0:
 #endif
-            if (Pak_RepairId(p) != 0) {
+            if (Note_RepairId(p) != 0) {
                 D_800E54A4->players[p].state = 0x1D;
                 PAKInterface_RefreshPlayerPanel(p);
             } else {

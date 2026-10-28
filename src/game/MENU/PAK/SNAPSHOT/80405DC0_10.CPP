@@ -15,19 +15,19 @@
 extern u8 *D_800E28BC;
 extern s32 D_8011FECC;
 extern s32 D_8015375C;
-s32 Pak_ReadNoteInfo(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
+s32 Note_ReadNoteInfo(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
 s32 XPlus_StringLength(u8 *);
-s32 Pak_ReadNoteData(s32, s32, s32, s32);
-u32 Pak_Crc32(u8 *, u32, u32);
-s32 Pak_ContainsInvalidNameByte(u8 *, s32);
+s32 Note_ReadNoteData(s32, s32, s32, s32);
+u32 Note_Crc32(u8 *, u32, u32);
+s32 Note_ContainsInvalidNameByte(u8 *, s32);
 u8 *XPlus_CopyString(u8 *, u8 *);
-void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
-s32 Pak_CheckStatusPrompt(void *, s32, s32);
+void *Menu_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
+s32 Snapshot_CheckStatusPrompt(void *, s32, s32);
 static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((XPlus_StringLength(code) == 4) && (XPlus_StringLength(company) == 2) && (XPlus_CompareStrings(code, rw_pak_game_code(&D_80145040.game)) == 0) && (XPlus_CompareStrings(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
 /* Load a Controller Pak note, validate its profile or save-block
  * checksum, and open the corresponding selection or error dialog. */
-s32 Pak_SelectNote(s32 *selection, Shared_PakMenu *menu) {
+s32 Snapshot_SelectNote(s32 *selection, Shared_PakMenu *menu) {
     u8 extension[8];
     u8 company[8];
     u8 code[8];
@@ -64,12 +64,12 @@ s32 Pak_SelectNote(s32 *selection, Shared_PakMenu *menu) {
     } else {
         channel = menu->slot->unk4;
     }
-    if (Pak_CheckStatusPrompt(menu, channel, 0) != 0) {
+    if (Snapshot_CheckStatusPrompt(menu, channel, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
     if (D_8014D4DC != 0) {
-        status = Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code);
+        status = Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code);
         if ((status == 0) && (exists == 0)) {
             menu->state = 0x14;
             Pak_MarkSaveNotes(menu);
@@ -86,17 +86,17 @@ s32 Pak_SelectNote(s32 *selection, Shared_PakMenu *menu) {
         }
         if ((status == 0) && (exists != 0)) {
             if (profileMatches != 0) {
-                if (Pak_ReadNoteData(channel, noteIndex, (s32)&D_80153738, 0x18)!=0) {
+                if (Note_ReadNoteData(channel, noteIndex, (s32)&D_80153738, 0x18)!=0) {
                     profileMatches=0;
                     goto profile_failed;
                 }
-                if (Pak_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Note_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     profileMatches=0;
                     goto profile_failed;
                 }
                     *rw_pak_loaded_profile() =D_80153738;
                     D_8014D4FC=noteIndex;
-                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_profile_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Menu_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_profile_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                     return 1;
 profile_failed:
                 readError=1;
@@ -116,12 +116,12 @@ profile_failed:
                 D_800DE864_de = handle;
                 D_800E28BC = payload;
                 XPlus_FillMemory(payload, 0, (u32) blockState);
-                if (Pak_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8)==0 &&
+                if (Note_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8)==0 &&
                     pak_block_has_size(D_800E28BC,expectedSize) &&
-                    Pak_Crc32(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
+                    Note_Crc32(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
                     D_8011FECC==((s32 *)D_800E28BC)[1]) {
                     D_8014D4FC=noteIndex;
-                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Menu_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                     return 1;
                 }
                 blockState=0;
@@ -133,7 +133,7 @@ profile_failed:
                     current = 0;
                     text = rw_pak_note_text(settings);
                     D_8014D4FC = noteIndex;
-                    if (Pak_ContainsInvalidNameByte(name, 0x10) != 0) {
+                    if (Note_ContainsInvalidNameByte(name, 0x10) != 0) {
                         XPlus_CopyString(name, (u8 *)rw_pak_invalid_name(settings));
                     }
                     copying = 1;
@@ -165,7 +165,7 @@ profile_failed:
                         i += 1;
                         text += 1;
                     } while (i < 4);
-                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_other_note_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Menu_OpenDialog(&D_80145040.dialogOwner, rw_pak_other_note_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                         return 1;
                 }
             }
@@ -176,19 +176,19 @@ profile_failed:
     }
     if (D_80153760 != 0) {
         if ((D_8014D4EC_de != 0) && (readError == 0)) {
-            if (((status=Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0)) {
+            if (((status=Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0)) {
                 Shared_Game *settings = &D_80145040.game;
                 if (XPlus_CompareStrings(name,rw_pak_profile_name(settings)) == 0) {
-                if (Pak_ReadNoteData(channel, noteIndex, (s32)&D_80153738, 0x18)!=0) {
+                if (Note_ReadNoteData(channel, noteIndex, (s32)&D_80153738, 0x18)!=0) {
                     readError=1;
                     goto done;
                 }
-                if (Pak_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Note_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     readError=1;
                     goto done;
                 }
                     *rw_pak_loaded_profile() =D_80153738;
-                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_profile_dialog(), (s32)menu->player, (s32)menu->slot, 0);
+                    Menu_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_profile_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                     return 1;
                 }
             }
@@ -197,7 +197,7 @@ profile_failed:
         if ((D_80153760 != 0) && (D_8014D4EC_de == 0)) {
             if (readError != 0) goto show_error;
             {
-                if (((status=Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (XPlus_CompareStrings(name, rw_pak_block_name(&D_80145040.game)) == 0)) {
+                if (((status=Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (XPlus_CompareStrings(name, rw_pak_block_name(&D_80145040.game)) == 0)) {
                     allocationSize = pages;
                     if (D_800DE864_de != 0) {
                         func_80253908_de(0);
@@ -212,10 +212,10 @@ profile_failed:
                     D_800DE864_de = handle2;
                     D_800E28BC = payload2;
                     XPlus_FillMemory(payload2, 0, (u32) allocationSize);
-                    if (Pak_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
+                    if (Note_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
                         length = *(s32 *)D_800E28BC;
-                        if ((length == expectedSize) && (Pak_Crc32(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
-                            Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
+                        if ((length == expectedSize) && (Note_Crc32(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
+                            Menu_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                         return 1;
                         }
                     }
@@ -249,7 +249,7 @@ show_error:
         else messageExtra = D_0044E4B0;
         dialog = rw_pak_load_error_dialog();
         D_8014D4C4 = noteIndex;
-        Pak_OpenDialog(&D_80145040.dialogOwner, dialog, (s32)menu->player, (s32)menu->slot, (s32)messageExtra);
+        Menu_OpenDialog(&D_80145040.dialogOwner, dialog, (s32)menu->player, (s32)menu->slot, (s32)messageExtra);
         result = 1;
     }
     return result;

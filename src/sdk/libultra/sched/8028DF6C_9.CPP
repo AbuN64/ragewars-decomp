@@ -18,40 +18,40 @@
 #include "sdk/os.h"
 
 extern s32 D_800CD704;
-extern void func_802BB5F0_de(void *arg0, s32 arg1);
+extern void Scene_SetThreadPriority(void *arg0, s32 arg1);
 void __scYield(void *scheduler) {
     void *currentRspTask;
     currentRspTask = (((struct ObjectLinks2F8 *) ((s8 *) scheduler))->unk_2F4);
     if ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_10) == 1) {
         (((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) = (s32) ((((struct IntegerState14 *) ((s8 *) currentRspTask))->unk_4) | 0x10);
-        func_802BA120_de();
+        osSpTaskYield();
     }
 }
 
-void Sched_HandleTaskCommands(void *arg0) {
+void Sched_HandleTaskCommands(void *scheduler) {
     NodeSchedHandleTaskCommands *node = 0;
     s32 value1 = 0;
     s32 value2 = 0;
     s32 flags;
 
-    while (osRecvMesg(&((OSSched *)arg0)->commandQueue, &node, 0) != -1) {
+    while (osRecvMesg(&((OSSched *)scheduler)->commandQueue, &node, 0) != -1) {
         if (node->type == 1 && (node->flags & 0x20) && D_800CD704 == 0) {
             D_800CD704 = 2;
-            func_802BB5F0_de(&D_80106248, D_800CD8B8_de);
+            Scene_SetThreadPriority(&D_80106248, D_800CD8B8_de);
         }
-        __scAppendList(arg0, node);
+        __scAppendList(scheduler, node);
     }
 
-    if (((OSSched *)arg0)->doAudio != 0 &&
-        ((OSSched *)arg0)->curRSPTask != 0) {
-        __scYield(arg0);
+    if (((OSSched *)scheduler)->doAudio != 0 &&
+        ((OSSched *)scheduler)->curRSPTask != 0) {
+        __scYield(scheduler);
         return;
     }
 
-    flags = (((OSSched *)arg0)->curRSPTask == 0) * 2 |
-            (((OSSched *)arg0)->curRDPTask == 0);
-    if (((s32 (*)(void *, s32 *, s32 *, s32))Sched_SelectRunnableTasks)(arg0, &value1, &value2, flags) != flags) {
-        ((void (*)(void *, s32, s32))Sched_StartSelectedTasks)(arg0, value1, value2);
+    flags = (((OSSched *)scheduler)->curRSPTask == 0) * 2 |
+            (((OSSched *)scheduler)->curRDPTask == 0);
+    if (((s32 (*)(void *, s32 *, s32 *, s32))Sched_SelectRunnableTasks)(scheduler, &value1, &value2, flags) != flags) {
+        ((void (*)(void *, s32, s32))Sched_StartSelectedTasks)(scheduler, value1, value2);
     }
 }
 

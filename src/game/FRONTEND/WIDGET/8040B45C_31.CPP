@@ -22,11 +22,11 @@
 
 extern BatchRec g_textBatches[];
 extern struct Shape_typemap_165 D_8014D580;
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *widget, sm_dldc *);
+extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *widget, sm_dldc *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
-   once through Frontend_GetBankTileTexture and Gfx_BindImageTexture (stopping the page when it cannot load) and drawing
+   once through Node_GetBankTileTexture and Combine_BindImageTexture (stopping the page when it cannot load) and drawing
    every batch's run of sprites on that page at depth 10 through Gfx_DrawRect; finally it restores
    the clip rectangle and empties the queue. */
 
@@ -43,15 +43,15 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
 
 
 
-extern s32 Frontend_GetBankTileTexture(s32 page, s32 a, s32 b);
+extern s32 Node_GetBankTileTexture(s32 page, s32 a, s32 b);
 
-extern void Gfx_BindImageTexture(s32 texture);
+extern void Combine_BindImageTexture(s32 texture);
 
 static inline void func_8040CB30_restore(struct Shape_typemap_165 *clip) {
     N64Eng_SetClipBounds(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
 }
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Node_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
 static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
@@ -69,7 +69,7 @@ static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
     return 0;
 }
 
-extern void Gfx_DrawGradientRectangle(f32 x, f32 y, f32 z, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
+extern void Rect_DrawGradientRectangle(f32 x, f32 y, f32 z, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
 
 static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
     BatchRec *batch;
@@ -88,7 +88,7 @@ static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
 
 s32 XPlus_StringLength(u8 *);
 
-GlyphBuffer *Frontend_GetGlyphBuffer(s32);
+GlyphBuffer *Node_GetGlyphBuffer(s32);
 
 void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 
@@ -97,10 +97,10 @@ static inline void textBegin(u8 font, u8 style) {
                    &D_8014D580.field_4, &D_8014D580.field_C);
     g_textBatchFontId = (s8)font;
     g_textBatchStyle = (s8)style;
-    g_textGlyphBuffer = Frontend_GetGlyphBuffer((s8)font);
-    g_textGlyphSpacing = Frontend_GetFontLetterSpacing((s8)font);
-    g_textLineHeight = Frontend_GetFontMetricAtC((s8)font);
-    g_textVerticalOffset = Frontend_GetFontMetricAtA((s8)font);
+    g_textGlyphBuffer = Node_GetGlyphBuffer((s8)font);
+    g_textGlyphSpacing = Node_GetFontLetterSpacing((s8)font);
+    g_textLineHeight = Node_GetFontMetricAtC((s8)font);
+    g_textVerticalOffset = Node_GetFontMetricAtA((s8)font);
 }
 
 static inline s32 textOverlaps(BatchRec *next) {
@@ -122,7 +122,7 @@ static inline s32 textClipChanged(struct Shape_typemap_165 *current) {
     return current->field_C != g_textClipBottom;
 }
 
-void Frontend_FlushTextBatches(void) {
+void Widget_FlushTextBatches(void) {
     u16 first;
     u16 last;
     u16 page;
@@ -166,12 +166,12 @@ void Frontend_FlushTextBatches(void) {
             while (current == batch->cursor->glyph && batch->count > 0) {
                 sprite = batch->cursor;
                 if (!loaded) {
-                    texture = Frontend_GetBankTileTexture(current & 0xFF, g_textBatchFontId, g_textBatchStyle);
+                    texture = Node_GetBankTileTexture(current & 0xFF, g_textBatchFontId, g_textBatchStyle);
                     if (texture == 0) {
                         i = g_textBatchCount;
                         break;
                     }
-                    Gfx_BindImageTexture(texture);
+                    Combine_BindImageTexture(texture);
                     loaded = 1;
                 }
                 Gfx_DrawRect(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
@@ -184,7 +184,7 @@ void Frontend_FlushTextBatches(void) {
     g_textBatchCount = 0;
 }
 
-void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args) {
+void Widget_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -194,36 +194,36 @@ void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc arg
     s32 color;
 
     clipped = 0;
-    if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
+    if (Widget_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
         return;
     }
     if (widget->flags & 0x200) {
         N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (Frontend_ClampRectToClip(&clip, &box) == 0) {
+        if (Node_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
         N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040CDD0_overlaps(&area)) {
-        Frontend_FlushTextBatches();
+        Widget_FlushTextBatches();
     }
-    texture = Frontend_GetImageTexture(widget->image, 1);
+    texture = Node_GetImageTexture(widget->image, 1);
     color = (args.alpha << 24) | 0xFFFFFF;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
         Gfx_ConfigurePrimitiveRenderFlags(0x53333);
         D_800E2AB8 = 1;
     }
-    Gfx_BindImageTexture(texture);
+    Combine_BindImageTexture(texture);
     Gfx_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
     if (clipped) {
         N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     }
 }
 
-void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
+void Widget_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -231,7 +231,7 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     s32 clipped;
 
     clipped = 0;
-    if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
+    if (Widget_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
         return;
     }
     if (((u8)(widget->colors[0] >> 24) | (u8)(widget->colors[1] >> 24) | (u8)(widget->colors[2] >> 24) |
@@ -241,22 +241,22 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     if (widget->flags & 0x200) {
         N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (Frontend_ClampRectToClip(&clip, &box) == 0) {
+        if (Node_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
         N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040D00C_overlaps(&area)) {
-        Frontend_FlushTextBatches();
+        Widget_FlushTextBatches();
     }
     if (D_800DEA6C != 0x53533 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53533;
         Gfx_ConfigurePrimitiveRenderFlags(0x53533);
         D_800E2AB8 = 1;
     }
-    Gfx_BindImageTexture(0);
-    Gfx_DrawGradientRectangle(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1,
+    Combine_BindImageTexture(0);
+    Rect_DrawGradientRectangle(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1,
                   (widget->colors[0] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[0] >> 24) / 255) << 24),
                   (widget->colors[1] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[1] >> 24) / 255) << 24),
                   (widget->colors[2] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[2] >> 24) / 255) << 24),
@@ -266,7 +266,7 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     }
 }
 
-void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
+void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     struct Shape_typemap_165 box, saved, clip, area, current;
     s32 clipped, length, width, mismatch, count, i, tempX, tempY;
     u8 font, style;
@@ -283,11 +283,11 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         resolved = (u8 *)Frontend_GetStringByIndex(widget->stringId);
     }
     text=resolved;
-    if (!Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) return;
+    if (!Widget_ComputeWidgetBounds(&area, &box, widget, &args)) return;
     if (widget->flags & 0x200) {
         N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (!Frontend_ClampRectToClip(&clip, &box)) return;
+        if (!Node_ClampRectToClip(&clip, &box)) return;
         clipped = 1;
         N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
@@ -301,11 +301,11 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         N64Eng_GetClipBounds(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
         mismatch = textClipChanged(&current);
         if (mismatch || g_textBatchFontId != (s8)font || g_textBatchStyle != (s8)style) {
-            if (g_textBatchCount) Frontend_FlushTextBatches();
+            if (g_textBatchCount) Widget_FlushTextBatches();
             textBegin(font, style);
         }
     } else textBegin(font, style);
-    width = Frontend_MeasureTextPrefix((s8)font, text, length) * args.XScale;
+    width = Node_MeasureTextPrefix((s8)font, text, length) * args.XScale;
     x = 0.0f;
     switch (widget->align & 3) {
         case 0: x=area.field_0; break;
@@ -327,7 +327,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(g_textLineHeight*args.YScale);
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
     if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
-    if (textOverlaps(batch)) { Frontend_FlushTextBatches(); textBegin(font, style); }
+    if (textOverlaps(batch)) { Widget_FlushTextBatches(); textBegin(font, style); }
     sprite=ESmem_AllocateFrameHeapHigh(length*sizeof(TextSprite));
     sprites=sprite;
     g_textBatches[g_textBatchCount].cursor=sprites;
@@ -352,7 +352,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         g_textBatches[g_textBatchCount].count=count;
         XPlus_SortArray((char *)g_textBatches[g_textBatchCount].cursor, count, sizeof(TextSprite), D_0040F570);
         g_textBatchCount++;
-        if (g_textBatchCount>=16) Frontend_FlushTextBatches();
+        if (g_textBatchCount>=16) Widget_FlushTextBatches();
     }
 }
 
@@ -378,22 +378,22 @@ typedef struct DraftWidget {
     struct DraftWidget *disabled;
 } DraftWidget;
 
-extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
-extern s32 Smos_GetElementHandlerFlags(s32);
+extern void Widget_DrawVisibleSiblings(void *, sm_dldc);
+extern s32 Menu_GetElementHandlerFlags(s32);
 
-void Frontend_DrawWidget(DraftWidget *, sm_dldc);
+void Widget_DrawWidget(DraftWidget *, sm_dldc);
 static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
         struct Shape_typemap_165 area;
         struct Shape_typemap_165 box;
         DraftWidget *child;
-        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
+        if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (args.flags & 0x100) child = widget->disabled;
             else if (args.flags & 0x40) child = widget->selected;
             else child = widget->normal;
             if (child) {
                 args.x -= (s32)(child->x * args.XScale);
                 args.y -= (s32)(child->y * args.YScale);
-                Frontend_DrawWidget(child, args);
+                Widget_DrawWidget(child, args);
             }
         }
 }
@@ -406,15 +406,15 @@ static inline void drawWidgetResetGroup(DraftWidget *widget, sm_dldc args) {
         s32 clipped;
         clipped = 0;
         D_800E2AB8 = 0;
-        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
+        if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
                 N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (!Frontend_ClampRectToClip(&clip, &box)) return;
+                if (!Node_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
                 N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            Frontend_DrawVisibleSiblings(widget->child, args);
+            Widget_DrawVisibleSiblings(widget->child, args);
             if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }
@@ -426,29 +426,29 @@ static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
         struct Shape_typemap_165 clip;
         s32 clipped;
         clipped = 0;
-        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
+        if (Widget_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
                 N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (!Frontend_ClampRectToClip(&clip, &box)) return;
+                if (!Node_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
                 N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            Frontend_DrawVisibleSiblings(widget->child, args);
+            Widget_DrawVisibleSiblings(widget->child, args);
             if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }
 
-void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
+void Widget_DrawWidget(DraftWidget *widget, sm_dldc args) {
     switch (widget->type) {
     case 3:
-        Frontend_DrawImageWidget((void *)widget, args);
+        Widget_DrawImageWidget((void *)widget, args);
         break;
     case 4:
-        Frontend_DrawTextWidget((void *)widget, args);
+        Widget_DrawTextWidget((void *)widget, args);
         break;
     case 6:
-        Frontend_DrawGradientWidget((void *)widget, args);
+        Widget_DrawGradientWidget((void *)widget, args);
         break;
     case 8:
         drawWidgetChoice(widget, args);
@@ -461,7 +461,7 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
         break;
     default: {
         s32 flags;
-        flags = Smos_GetElementHandlerFlags(widget->type);
+        flags = Menu_GetElementHandlerFlags(widget->type);
         if (!(flags & 1)) {
             N64Eng_ResetRenderState();
             D_800E2AB8 = 0;
@@ -479,7 +479,7 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
    (scaled about its centre when any scale is not 1) and its hit box, and clips the hit box to the
    screen. Returns 1 when the widget is visible, and then moves the context origin and clip to the
    draw rectangle. */
-s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, WidgetLayout *widget, sm_dldc *ctx) {
+s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, WidgetLayout *widget, sm_dldc *ctx) {
     u16 flags = widget->flags;
     s32 parentFlags = ctx->flags;
     f32 parentScaleX = ctx->XScale;

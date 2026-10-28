@@ -6,7 +6,7 @@
 extern s32 D_801462C8;
 
 
-void func_802391F8_de(ThreeChannels *threeChannels, s8 *red, s8 *green, s8 *blue) {
+void Gsky_GetMaskedEffectColor(ThreeChannels *threeChannels, s8 *red, s8 *green, s8 *blue) {
     if (D_801462C8 & 0x4000) {
         *red = 0;
         *green = 0;

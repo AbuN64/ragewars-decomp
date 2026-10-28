@@ -5,7 +5,7 @@ struct {
     unsigned int w0;
     unsigned short h1[6];
     unsigned int w2;
-} D_auto_src_ragewars_pickup_weapons_us_rev1[6] = {
+} g_pickupWeaponDefinitions[6] = {
     { 0x800D71F0, { 0x0BC4, 0x0DB6, 0x0000, 0x0000, 0x0001, 0x0064 }, (unsigned int)D_002ADB08 },
     { 0x800D71F4, { 0x0BC5, 0x0DB6, 0x0000, 0x0000, 0x0001, 0x0064 }, (unsigned int)D_002ADB08 },
     { 0x800D71F8, { 0x0BC6, 0x0DAC, 0x0000, 0x0000, 0x0000, 0x0032 }, (unsigned int)D_002ADB08 },

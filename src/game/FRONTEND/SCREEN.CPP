@@ -20,7 +20,7 @@ extern s32 D_800E28D0;
 extern s32 D_800E28D8;
 extern ModeRecAt8 D_800DE8A8[2][5];
 extern struct ShapeRecAt18V2 D_800DE934[];
-extern Rec_func_8024C92C_de D_800DE9C0[];
+extern RecGobjinstSampleBoneTranslation D_800DE9C0[];
 extern u8 D_80146848;
 static inline void set_config(int a,int b,int c,int d,int e) {
         D_800DE898 = a;
@@ -36,7 +36,7 @@ static inline void set_mode(s32 *var_s0) {
 }
 void Frontend_ApplyVideoMode(void) {
     char *var_v0;
-    s32 var_a0;
+    s32 featureCommands;
     s32 temp_v0;
     s32 var_v1;
     struct ShapeRecAt18V2 *var_s0;
@@ -55,16 +55,16 @@ void Frontend_ApplyVideoMode(void) {
     case 0:case 2:var_s0=&D_800DE934[D_800E28D8];break;
     }
     if (var_s0 != NULL) {
-        Rec_func_8024C92C_de config=D_800DE9C0[D_800E28D8];
+        RecGobjinstSampleBoneTranslation config=D_800DE9C0[D_800E28D8];
         set_config(config.x,config.y,config.z,config.pad0,config.pad1);
         set_mode((s32 *)var_s0);
-        var_a0 = 0x80;
+        featureCommands = 0x80;
         if (D_800DE898 != 0) {
-            var_a0 = 0x40;
+            featureCommands = 0x40;
         }
-        func_802BA700_de(var_a0);
-        func_802BA700_de(0x20);
-        func_802BA700_de(2);
+        osViSetSpecialFeatures(featureCommands);
+        osViSetSpecialFeatures(0x20);
+        osViSetSpecialFeatures(2);
     }
 }
 

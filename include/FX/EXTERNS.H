@@ -12,5 +12,5 @@ extern void ContPad_BuildControllerState(struct ControllerInput *input, struct P
 extern f32 D_800C46B0;
 extern f32 D_800C46B4;
 extern f32 D_800C46B8;
-extern f32 func_8024BF24_de(void *);
+extern f32 Gobjinst_GetModelParticleScale(void *);
 #endif

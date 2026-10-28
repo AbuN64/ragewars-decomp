@@ -124,7 +124,7 @@ void Geometry_ExpandExtendedModel(s32 arg0, s32 arg1) {
     Geometry_ExpandModelCommands(arg0, arg1, 1, 0);
 }
 
-void func_8026D834_de(void) {
+void Geometry_AlternateNoOperation(void) {
 }
 /* An empty function. */
 void Geometry_NoOperation(void) {
@@ -153,7 +153,7 @@ extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, 
 
 extern void Geometry_SetModePreset(s32 mode);
 
-extern void **TextLoad_RequestTextureVariationSync(void *arg0, s32 arg1);
+extern void **Textload_RequestTextureVariationSync(void *arg0, s32 arg1);
 
 void Geometry_InitializeModelRenderState(void) {
     char local[64];
@@ -396,7 +396,7 @@ void Geometry_UnlockMaterialResources(void **arg0) {
         if (((ResourceSectionReference *)rec)->resource == 0) {
             continue;
         }
-        result = TextLoad_RequestTextureVariationSync(&((ResourceSectionReference *)rec)->resource, -1);
+        result = Textload_RequestTextureVariationSync(&((ResourceSectionReference *)rec)->resource, -1);
         if (result == 0) {
             continue;
         }
@@ -408,7 +408,7 @@ void Geometry_UnlockMaterialResources(void **arg0) {
 
 
 /* 8026E1F8.CPP */
-extern void func_80253F8C_de(s32 arg0, s32 arg1);
+extern void Cache_TouchResourceByKey(s32 arg0, s32 arg1);
 
 void Geometry_RefreshMaterialResources(void **resource) {
     void *temp_v0;
@@ -423,7 +423,7 @@ void Geometry_RefreshMaterialResources(void **resource) {
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        func_80253F8C_de(0, ((struct ResourceSectionReference *)(rec))->resource);
+        Cache_TouchResourceByKey(0, ((struct ResourceSectionReference *)(rec))->resource);
     }
 }
 
@@ -443,7 +443,7 @@ s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        result = TextLoad_RequestTextureVariationSync(&((struct ResourceSectionReference *)(rec))->resource, variation);
+        result = Textload_RequestTextureVariationSync(&((struct ResourceSectionReference *)(rec))->resource, variation);
         if (result != 0) {
             *out = result;
             out += 1;

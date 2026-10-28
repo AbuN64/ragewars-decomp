@@ -123,10 +123,10 @@ struct MenuRenderFill {
 
 
 extern s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-extern s32 D_800E51E4[];
-extern s32 D_800E51F8[];
-extern s32 D_800E5214[];
-extern s32 D_800E5240[];
+extern s32 g_cupCategoryZeroArenaControls[];
+extern s32 g_cupCategoryOneArenaControls[];
+extern s32 g_cupCategoryThreeArenaControls[];
+extern s32 g_cupCategoryTwoArenaControls[];
 
 
 

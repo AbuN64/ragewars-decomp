@@ -5,7 +5,7 @@ struct {
     unsigned int w0;
     unsigned short h1[4];
     unsigned int w2[3];
-} D_auto_src_ragewars_pickup_health_us_rev1[8] = {
+} g_pickupHealthDefinitions[8] = {
     { 0x800D7070, { 0x06A5, 0x0001, 0x0000, 0x0000 }, { 0x00000002, 0x000000C8, (unsigned int)D_002ADBF4 } },
     { 0x800D7074, { 0x06A6, 0x0001, 0x0000, 0x0000 }, { 0x0000000A, 0x00000064, (unsigned int)D_002ADBF4 } },
     { 0x800D7084, { 0x06A7, 0x0001, 0x012B, 0x0000 }, { 0x00000064, 0x00000064, (unsigned int)D_002ADBF4 } },

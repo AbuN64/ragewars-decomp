@@ -10,14 +10,14 @@
 
 f32 GraphU64_GetSquaredDistance(void *a, void *b);
 
-extern void Nav_ClearGoalList(void *);
+extern void Route_ClearGoalList(void *);
 
 
 extern void Nav_AddGoalNode(void *, s32);
 
-extern void Nav_SearchPath(CNavData *, NavigationSearchNode *);
+extern void Portal_SearchPath(CNavData *, NavigationSearchNode *);
 
-s32 Nav_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+s32 Portal_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *point;
     NavigationBuffer *points;
     NavigationBuffer *temp_v1_2;
@@ -144,7 +144,7 @@ block_32:
     return var_s4;
 }
 
-s32 Nav_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
+s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
     Node8020BC50 *node;
     s32 found;
 
@@ -168,7 +168,7 @@ s32 Nav_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *ow
 
     obj->selected = -1;
     obj->value = D_800C1D6C_de;
-    Nav_ClearGoalList(obj);
+    Route_ClearGoalList(obj);
     found = 0;
     Nav_SetPickupGoalWeights(owner);
     Nav_AddGoalNode(obj, requested);
@@ -234,12 +234,12 @@ s32 Nav_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *ow
 not_found:
     node = 0;
 search_done:
-    Nav_SearchPath(obj, node);
+    Portal_SearchPath(obj, node);
     return obj->selected = obj->result;
 }
 
 extern f32 D_800C1D70_de;
-s32 Nav_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
+s32 Portal_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
 /* Collects the nodes linked to key, with the link index of each, into out/edges; returns how many. */
 static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
     s32 i;
@@ -261,7 +261,7 @@ static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s3
 }
 /* Returns startNode when one of its own links has portalKind, else the portal node the nearest
  * neighbor route reaches within maxDepth links (-1 when none). */
-s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDepth) {
+s32 Portal_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDepth) {
     s32 neighborNodes[64];
     s32 neighborLinks[64];
     f32 distance;
@@ -283,7 +283,7 @@ s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDe
     neighborCount = navigationNeighbors(graph, startNode, neighborNodes, neighborLinks);
     for (index = 0; index < neighborCount; index++) {
         distance = GraphU64_GetSquaredDistance(origin, navigationRecord(graph->points, neighborNodes[index]));
-        foundNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], portalKind, maxDepth - 1, &distance, bestDistance);
+        foundNode = Portal_SearchPortalRoute(graph, startNode, neighborNodes[index], portalKind, maxDepth - 1, &distance, bestDistance);
         if (foundNode != -1) {
             bestDistance = distance;
             result = foundNode;
@@ -296,7 +296,7 @@ extern f32 D_800C1D74_de;
 /* Depth-limited search from currentNode (entered from previousNode): returns currentNode when one of its links
  * has portalKind, else the portal node of the shortest route under distanceLimit (-1 when none); stores that
  * route's length in *routeDistance. */
-s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8 portalKind, s32 remainingDepth, f32 *routeDistance, f32 distanceLimit) {
+s32 Portal_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8 portalKind, s32 remainingDepth, f32 *routeDistance, f32 distanceLimit) {
     s32 neighborNodes[64];
     s32 neighborLinks[64];
     f32 candidateDistance;
@@ -322,7 +322,7 @@ s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8
         if (point != previousPosition) {
             candidateDistance = *routeDistance + GraphU64_GetSquaredDistance(previousPosition, point);
             if (candidateDistance < distanceLimit) {
-                portalNode = Nav_SearchPortalRoute(graph, currentNode, neighborNodes[index], portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
+                portalNode = Portal_SearchPortalRoute(graph, currentNode, neighborNodes[index], portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
             } else {
                 portalNode = -1;
             }
@@ -340,9 +340,9 @@ s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8
 
 extern f32 D_800C1D78_de;
 extern const f32 D_800C1D7C_de;
-extern f32 GraphU64_GetPointDistance(f32 *, f32 *);
+extern f32 Graphu64_GetPointDistance(f32 *, f32 *);
 
-f32 Nav_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
+f32 Portal_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
 {
     s32 neighbors[64];
     s32 portalIds[64];
@@ -373,7 +373,7 @@ f32 Nav_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
             continue;
         }
         goalPoints = graph->points;
-        distance = GraphU64_GetPointDistance(&origin->position.x, navigationRecord(goalPoints, goal));
+        distance = Graphu64_GetPointDistance(&origin->position.x, navigationRecord(goalPoints, goal));
         if ((distance < best) || (best == empty))
         {
             best = distance;
@@ -443,7 +443,7 @@ f32 Nav_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
                         continue;
                     }
                     exitGoalPoints = graph->points;
-                    exitDistance = GraphU64_GetPointDistance(&exitPoint->position.x, navigationRecord(exitGoalPoints, exitGoal));
+                    exitDistance = Graphu64_GetPointDistance(&exitPoint->position.x, navigationRecord(exitGoalPoints, exitGoal));
                     if ((exitDistance < best) || (best == D_800C1D7C_de))
                     {
                         best = exitDistance;
@@ -479,7 +479,7 @@ static inline NavigationSearchNode *navFindNode(CNavData *graph, s32 key) {
 }
 /* A* search from start over the link graph: repeatedly closes the open node with the lowest total, stores its
  * key in graph->result once it is a goal, otherwise relaxes the cost of every node it links to. */
-void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
+void Portal_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     s32 neighbors[64];
     s32 portals[64];
     NavigationPoint *origin;
@@ -504,7 +504,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     NavigationSearchNode *next;
 
     start->cost = 0.0f;
-    initialEstimate = Nav_EstimateGoalDistance(graph, start);
+    initialEstimate = Portal_EstimateGoalDistance(graph, start);
     start->estimate = initialEstimate;
     start->parent = 0;
     start->open = open;
@@ -560,7 +560,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             if (edgeKind == 9) {
                 distance = 0.0f;
             } else {
-                distance = GraphU64_GetPointDistance(&destination->position.x, &origin->position.x);
+                distance = Graphu64_GetPointDistance(&destination->position.x, &origin->position.x);
             }
             edgeCost = distance + next->extra;
             if (navigation_point_flags(destination) & 0x400) {
@@ -579,7 +579,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
 update_neighbor:
                 next->parent = current;
                 next->cost = cost;
-                estimate = Nav_EstimateGoalDistance(graph, next);
+                estimate = Portal_EstimateGoalDistance(graph, next);
                 next->estimate = estimate;
                 next->total = next->cost + estimate;
                 if ((next->open ^ 2) == 0) {

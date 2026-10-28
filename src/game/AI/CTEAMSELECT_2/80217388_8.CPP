@@ -22,7 +22,7 @@ extern s32 D_800E28D0;
 
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
-void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
+void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;
     s32 height;
     f32 fade;
@@ -83,7 +83,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
 }
 
 /* Returns the cardinal team-menu slot, or -1 inside the deadzone/diagonals. */
-s32 func_80218988_de(void *object) {
+s32 Cteamselect_GetFourWayStickSlot(void *object) {
     StickPlayer *player = object;
     StickInput *input = player->input;
     s8 x = input->x;

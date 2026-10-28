@@ -485,7 +485,7 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
-extern Instance8020CD74 *Sky_FindScreenMessage(Arg1 *arg0);
+extern Instance8020CD74 *Gsky_FindScreenMessage(Arg1 *arg0);
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
 s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *arg1) {
@@ -493,7 +493,7 @@ s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *arg1) {
     Instance8020CD74 *instance;
     s32 collisions;
 
-    instance = Sky_FindScreenMessage(arg1);
+    instance = Gsky_FindScreenMessage(arg1);
     if (instance != 0 && arg1->field24 == 0) {
         saved = *instance;
         instance->position = arg1->position128;
@@ -532,14 +532,14 @@ static inline void nearby(s32 unused, ObjParticleMarkNearbyObjects *center, ObjP
   }
  }
 }
-extern void func_80281A9C_de(int,ObjParticleMarkNearbyObjects *,ObjParticleMarkNearbyObjects **,int);
+extern void Particle_MarkCrowdedActor(int,ObjParticleMarkNearbyObjects *,ObjParticleMarkNearbyObjects **,int);
 void Particle_UpdateNearbyObjectFlags(int context,ObjParticleMarkNearbyObjects **objects,int count) {
  int i; ObjParticleMarkNearbyObjects *obj;
  for(i=0;i<count;i++) {
   obj=objects[i];
   switch(obj->unk4) {
    case 0xC: break;
-   case 0x22: func_80281A9C_de(context,obj,objects,count); break;
+   case 0x22: Particle_MarkCrowdedActor(context,obj,objects,count); break;
    case 0x57: nearby(context,obj,objects,count); break;
   }
  }

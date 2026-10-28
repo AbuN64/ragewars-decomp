@@ -69,24 +69,24 @@ const unsigned int D_blob_bfa68451c3e10a33f992[1] = {
 };
 
 /* 80208000_6.CPP */
-/** Returns the difference between the constant after D_800C6E20 and Nav_GetDifficultyEngagementAdjustment's result, scaled by D_800C6E28. */
+/** Returns the difference between the constant after D_800C6E20 and Scaled_GetDifficultyEngagementAdjustment's result, scaled by D_800C6E28. */
 
-extern f32 Nav_GetDifficultyEngagementAdjustment(AiController *controller);
+extern f32 Scaled_GetDifficultyEngagementAdjustment(AiController *controller);
 
 extern f32 D_800C1D34_de;
 
 /* Find the nearest world object matching each active target ID, clearing its active flag when no object is close enough. */
 
-f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
+f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
 
 s32 Scene_GetModelIdAtIndex(void *arg0, s16 arg1);
 
 /* Preserve the owning controller passed in a0 by the original MIPS. */
-f32 Nav_GetEngagementDistance(AiController *controller) {
-    return (D_800C1D34_de - Nav_GetDifficultyEngagementAdjustment(controller)) * D_800C6E28;
+f32 Portal_GetEngagementDistance(AiController *controller) {
+    return (D_800C1D34_de - Scaled_GetDifficultyEngagementAdjustment(controller)) * D_800C6E28;
 }
 
-void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
+void Portal_LinkNavigationObjects(Shared_Arg0 *arg0)
 {
   f32 temp_f0;
   f32 var_f20;
@@ -138,7 +138,7 @@ void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
               compare:
               if (var_v0 == compare_id)
               {
-                temp_f0 = GraphU64_GetPointDistance(temp_s1, &temp_s0->unk8);
+                temp_f0 = Graphu64_GetPointDistance(temp_s1, &temp_s0->unk8);
                 if ((temp_f0 < var_f20) || (var_f20 == var_f21))
                 {
                   if (temp_s1)
@@ -186,7 +186,7 @@ extern CVector3 *Scene_GetPlatformRoutePoint(void *, s32, s32);
  * nearest point on it: a route platform (mode 4) offers each of its route points, any other platform
  * its base and its top (base + height, pushed out by radius along heading when radial). A node with
  * no platform loses its 0x200 flag. */
-void Nav_AssignPlatformEndpoints(CNavData *graph) {
+void Portal_AssignPlatformEndpoints(CNavData *graph) {
     NavigationPlatform *platforms[30];
     CVector3 chosenPosition, start, end;
     NavigationSearchNode *node;
@@ -226,7 +226,7 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                     if (route != 0) {
                         for (j = 0; j < route->count; j++) {
                             position = Scene_GetPlatformRoutePoint(&g_world, motion->route, j);
-                            distance = GraphU64_GetPointDistance(point, position);
+                            distance = Graphu64_GetPointDistance(point, position);
                             if (distance < best || best == -1.0f) {
                                 chosen = platforms[i];
                                 best = distance;
@@ -242,13 +242,13 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                         end.x += definition->radius * Math_Sinf(definition->heading);
                         end.z += definition->radius * Math_Cosf(definition->heading);
                     }
-                    distance = GraphU64_GetPointDistance(point, &start);
+                    distance = Graphu64_GetPointDistance(point, &start);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;
                         chosenPosition = start;
                     }
-                    distance = GraphU64_GetPointDistance(point, &end);
+                    distance = Graphu64_GetPointDistance(point, &end);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;
@@ -270,9 +270,9 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
 typedef struct NavigationCollisionQuery { s32 flags, word4, word8, wordC, word10, word14, word18; } NavigationCollisionQuery;
 extern NavigationCollisionQuery D_80103FF0, D_80104050, D_80104070, D_801040D0;
 s32 InstHdr_GetActorMotionState(Player *);
-s32 func_8024DEE0_de(Player *);
-s32 func_8024DF5C_de(Player *);
-s32 func_8024DFA0_de(Player *);
+s32 Insthdr_GetModelCollisionFlag1(Player *);
+s32 Insthdr_IsInactiveOrCollisionOption4(Player *);
+s32 Insthdr_GetModelCollisionFlag8(Player *);
 s32 Unicol_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
 void GraphU64_SubtractVectors(CVector3 *, void *, CVector3 *);
 
@@ -288,11 +288,11 @@ static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 inde
     if (actor->kind == 1 && (actor->weaponFlags & 0x300000)) {
         query = D_801040D0;
     } else {
-        mode = func_8024DEE0_de(actor);
-        if (func_8024DF5C_de(actor) == 0) {
+        mode = Insthdr_GetModelCollisionFlag1(actor);
+        if (Insthdr_IsInactiveOrCollisionOption4(actor) == 0) {
             if (mode != 0) query = D_80104050;
             else query = D_801040D0;
-        } else if (func_8024DFA0_de(actor) == 0) query = D_80104070;
+        } else if (Insthdr_GetModelCollisionFlag8(actor) == 0) query = D_80104070;
         else query = D_80103FF0;
     }
     query.flags = 0x4000;

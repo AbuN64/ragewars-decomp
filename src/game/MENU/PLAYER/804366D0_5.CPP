@@ -5,7 +5,7 @@
 #include "MENU_2/804366D0_3.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* Builds screen state D_800E5694 under a parent window: allocates its 0x50 bytes, opens lists 0x1C9, 0x1D1 and 0x1CB filled with the entries in D_800D74xx at 0x0C, 0x08 and 0x10, opens panels 0x1CF and 0x1CD at 0x0 and 0x4, opens window 0x1C7 at 0x18, clears the word at 0x14, resets through Menu_SelectAlternatePlayerSettingsEntry(0) and returns zero.
+/* Builds screen state D_800E5694 under a parent window: allocates its 0x50 bytes, opens lists 0x1C9, 0x1D1 and 0x1CB filled with the entries in D_800D74xx at 0x0C, 0x08 and 0x10, opens panels 0x1CF and 0x1CD at 0x0 and 0x4, opens window 0x1C7 at 0x18, clears the word at 0x14, resets through Player_SelectAlternatePlayerSettingsEntry(0) and returns zero.
    Adapted from SmpOverlay_CreatePakDialog with the window openings changed to the list, panel and window calls of this screen and the list entry words declared as arrays. */
 
 extern MenuListScreen *D_800E5694;
@@ -22,7 +22,7 @@ enum { MENU_80437074_454 = 450, MENU_80437074_455 = 451, MENU_80437074_456 = 452
 enum { MENU_80437074_454 = 454, MENU_80437074_455 = 455, MENU_80437074_456 = 456, MENU_80437074_457 = 457, MENU_80437074_458 = 458, MENU_80437074_459 = 459, MENU_80437074_460 = 460, MENU_80437074_461 = 461, MENU_80437074_462 = 462, MENU_80437074_463 = 463, MENU_80437074_464 = 464, MENU_80437074_465 = 465, MENU_80437074_466 = 466 };
 #endif
 
-s32 Menu_BuildItemLabelList(void *parent) {
+s32 Player_BuildItemLabelList(void *parent) {
     void *list;
 
     D_800E5694 = Cache_AllocateMemory(0x50);
@@ -45,7 +45,7 @@ s32 Menu_BuildItemLabelList(void *parent) {
     SmpButton_WrapButtonWidget(MENU_80437074_456);
     D_800E5694->window = Frontend_FindWidgetByResourceId(parent, MENU_80437074_455);
     D_800E5694->selection = 0;
-    Menu_SelectAlternatePlayerSettingsEntry(0);
+    Player_SelectAlternatePlayerSettingsEntry(0);
     return 0;
 }
 #endif

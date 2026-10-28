@@ -7,16 +7,16 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
 
-/* Replaces the word at offset 0x10 of the option block D_801462C8 with what Pak_AdjustValue returns
+/* Replaces the word at offset 0x10 of the option block D_801462C8 with what Menu_AdjustValue returns
    for the second argument, that word, 0x10, 0, 0x80 and 0, and returns zero. */
 
 
-extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
+extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
     struct OptionsPakAdjustPackedButtonOption *options = &D_801462C8;
 
-    options->value = Pak_AdjustValue(second, options->value, 0x10, 0, 0x80, 0);
+    options->value = Menu_AdjustValue(second, options->value, 0x10, 0, 0x80, 0);
     return 0;
 }
 

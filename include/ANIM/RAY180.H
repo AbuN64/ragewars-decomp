@@ -71,8 +71,8 @@ struct OwnerRecAt18 {
     u8 *entries;
 };
 
-struct Actor_func_80242288_de;
-struct Actor_func_80242288_de {
+struct ActorCPlatformCollisionTraceShape;
+struct ActorCPlatformCollisionTraceShape {
     OwnerRecAt18 *owner;
     u8 pad04[8];
     f32 fieldC;
@@ -84,8 +84,8 @@ struct Actor_func_80242288_de {
     f32 field64;
 };
 
-struct Input_func_802426CC_de;
-typedef struct Input_func_802426CC_de Input_func_802426CC_de;
+struct InputCPlatformCollisionLiftActorToSurface;
+typedef struct InputCPlatformCollisionLiftActorToSurface InputCPlatformCollisionLiftActorToSurface;
 
 struct ContextB0;
 typedef struct ContextB0 ContextB0;
@@ -131,8 +131,8 @@ struct QueryRecAt58 {
     u8 pad5C[0x84];
 };
 
-struct Actor_func_80242288_de;
-typedef struct Actor_func_80242288_de Actor_func_80242288_de;
+struct ActorCPlatformCollisionTraceShape;
+typedef struct ActorCPlatformCollisionTraceShape ActorCPlatformCollisionTraceShape;
 
 struct Footprint;
 typedef struct Footprint Footprint;
@@ -312,8 +312,8 @@ struct QueryE0 {
     u8 pad5C[0x84];
 };
 
-struct Actor_func_80241BAC_de;
-struct Actor_func_80241BAC_de {
+struct ActorCPlatformCollisionPushActorFromBox;
+struct ActorCPlatformCollisionPushActorFromBox {
     u8 pad00[0x3C];
     s32 flags;
     u8 pad40[0x1C];
@@ -330,8 +330,8 @@ struct ObjRecAt34 {
     f32 unk34;
 };
 
-struct Actor_func_80242550_de;
-struct Actor_func_80242550_de {
+struct ActorCPlatformCollisionProcessRiderMotion;
+struct ActorCPlatformCollisionProcessRiderMotion {
     OwnerRecAt18 *owner;
     u8 pad04[0x3C];
     s32 *flags;
@@ -340,14 +340,14 @@ struct Actor_func_80242550_de {
     Triple delta;
 };
 
-struct Actor_func_80242550_de;
-typedef struct Actor_func_80242550_de Actor_func_80242550_de;
+struct ActorCPlatformCollisionProcessRiderMotion;
+typedef struct ActorCPlatformCollisionProcessRiderMotion ActorCPlatformCollisionProcessRiderMotion;
 
 struct CollisionProbe;
 typedef struct CollisionProbe CollisionProbe;
 
-struct Input_func_802426CC_de;
-struct Input_func_802426CC_de {
+struct InputCPlatformCollisionLiftActorToSurface;
+struct InputCPlatformCollisionLiftActorToSurface {
     u8 kind;
     u8 pad01[7];
     f32 x;
@@ -365,8 +365,8 @@ struct Input_func_802426CC_de {
 struct FloatState20;
 typedef struct FloatState20 FloatState20;
 
-struct Actor_func_80241BAC_de;
-typedef struct Actor_func_80241BAC_de Actor_func_80241BAC_de;
+struct ActorCPlatformCollisionPushActorFromBox;
+typedef struct ActorCPlatformCollisionPushActorFromBox ActorCPlatformCollisionPushActorFromBox;
 
 
 struct RayCornerBounds;
@@ -397,5 +397,5 @@ extern void PolyCol_TraceMeshDisplayList(ContextB0 *context, void *resource);
 
 extern void D_00243814();
 extern void D_00243850();
-extern void func_8026F368_de(MatrixF *, CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_ComputeViewMatrix(MatrixF *, CVector3 *, CVector3 *, CVector3 *);
 #endif

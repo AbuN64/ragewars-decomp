@@ -25,7 +25,7 @@ extern double D_800C4170_de;
 
 
 
-struct Track_func_80261180_de;
+struct TrackBitarrayExpandCurveSamples;
 
 
 struct DecodeArray;
@@ -41,7 +41,7 @@ typedef struct DecodeArray DecodeArray;
 
 
 
-extern void func_80261180_de(char **stream, f32 *out, s32 frames);
+extern void Bitarray_ExpandCurveSamples(char **stream, f32 *out, s32 frames);
 
 
 extern double D_800C4188_de;
@@ -88,8 +88,8 @@ typedef struct Entry802612C8 Entry802612C8;
 
 extern float D_800C41A4_de;
 
-struct Track_func_80261180_de;
-typedef struct Track_func_80261180_de Track_func_80261180_de;
+struct TrackBitarrayExpandCurveSamples;
+typedef struct TrackBitarrayExpandCurveSamples TrackBitarrayExpandCurveSamples;
 
 
 
@@ -104,6 +104,6 @@ typedef struct CGameAnimateState_t {
     u8 active,blending;
     char padc[4]; void *resource;
 } CGameAnimateState_t;
-extern f32 GraphU64_InterpolateWrappedValue(f32,f32,f32);
+extern f32 Graphu64_InterpolateWrappedValue(f32,f32,f32);
 extern s32 func_802625C4_de(void *);
 #endif

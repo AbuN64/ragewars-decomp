@@ -59,7 +59,7 @@ extern volatile s32 D_800C8140_de;
 struct OSIoMesg;
 extern struct OSIoMesg D_800F2CE0;
 extern OSMesgQueue D_800F2CC0;
-extern s32 func_802B8CF0_de(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
+extern s32 Io_StartPeripheralDma(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */
@@ -71,7 +71,7 @@ void Libsn_WritePortBufferWithDma(u32 address, u8 *source, u32 remaining) {
     }
     while (remaining >= 4) {
         if (remaining >= 16 && ((((u32)source & 15) == 0) & (dmaResult != -1))) {
-            dmaResult = func_802B8CF0_de(&D_800F2CE0, 1, 1, address,
+            dmaResult = Io_StartPeripheralDma(&D_800F2CE0, 1, 1, address,
                 source, remaining, &D_800F2CC0);
             if (dmaResult != -1) {
                 osRecvMesg(&D_800F2CC0, 0, 1);

@@ -23,7 +23,7 @@ s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 siz
         return -1;
     }
     IO_READ_WORD(0xA4040000U) = deviceAddress;
-    IO_READ_WORD(0xA4040004U) = func_802BBBC0_de(dramAddress);
+    IO_READ_WORD(0xA4040004U) = osVirtualToPhysical(dramAddress);
     if (direction == 0) {
         IO_READ_WORD(0xA404000CU) = size - 1;
     } else {

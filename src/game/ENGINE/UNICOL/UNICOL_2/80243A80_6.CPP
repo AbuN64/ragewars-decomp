@@ -15,7 +15,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
- * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from Menu_HasNoTrackRequestItems, marks the round started with
+ * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from Track_HasNoTrackRequestItems, marks the round started with
  * no pending target and copies the viewport rectangle into the active camera as floats. */
 
 
@@ -46,26 +46,26 @@ extern struct Shape_func_8021A2D4_de_2 D_8013B2BC;
 
 extern void func_8022E290_de(void *);
 
-extern void func_80239B64_de(void *);
+extern void Gsky_ActivateAllMessagePools(void *);
 
 extern void Rumble_FreeAllPoolNodes(void *);
 
-extern s32 OvlScene_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
+extern s32 Scene_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
-extern s32 Menu_HasNoTrackRequestItems(void);
+extern s32 Track_HasNoTrackRequestItems(void);
 
 
 extern u32 func_80245850_de(void);
 
 extern f32 D_800D2988;
 
-/* Advances the current audio cue once per new frame: when func_80244FB4_de has no resource to release, the
- * cue's position steps by the frame time (as func_80245C38_de, stopping the round via func_80244E58_de past its
+/* Advances the current audio cue once per new frame: when CCinema_ProcessPendingTrack has no resource to release, the
+ * cue's position steps by the frame time (as Cinema_AdvanceSequenceTime, stopping the round via CCinema_EnterSequenceScene past its
  * threshold and looping or holding at its length) and Menu_ProcessTrackItemEvents runs; a fading cue loses twice the
  * frame's fade step and, once below -0.5, stops fading and, if playing, runs its start and stop callbacks
- * (func_80245B74_de, func_80245BC0_de) and releases its sound; otherwise a playing, unpaused, non-looping cue with
+ * (Cinema_InitializeSequenceOnce, Cinema_CloseSequenceOnce) and releases its sound; otherwise a playing, unpaused, non-looping cue with
  * no pending game event fires its cue callback past its cue point and, past its length, releases its sound
  * and fires its end callback; a still-playing cue then refreshes channel 10 through func_8025476C_de. */
 typedef void (*FuncPtr)(void);
@@ -74,12 +74,12 @@ extern s32 D_800D2978;
 
 extern GameState D_80140FB4;
 
-extern void func_80245BC0_de(void);
+extern void Cinema_CloseSequenceOnce(void);
 
 
 extern void func_8025476C_de(s32);
 
-void func_80244E58_de(void) {
+void CCinema_EnterSequenceScene(void) {
     Vec3Words origin;
     struct GameplayCamera *camera;
     Player *player;
@@ -101,7 +101,7 @@ void func_80244E58_de(void) {
             player->weaponSpin = 0.0f;
             player->weaponReset = 0;
         }
-        func_80239B64_de(group->members);
+        Gsky_ActivateAllMessagePools(group->members);
         Rumble_FreeAllPoolNodes(&D_8010EC90);
     }
     if (target != -1) {
@@ -110,13 +110,13 @@ void func_80244E58_de(void) {
             origin.w[0] = 0;
             origin.w[1] = 0;
             origin.w[2] = 0;
-            found = OvlScene_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
+            found = Scene_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
             D_8013B2BC.field_0 = found;
             D_801371E4.field_0 = found != 0;
             Scene_LoadLevelResources(table, target, found != 0);
         }
     }
-    D_800E2830->unknown5C = Menu_HasNoTrackRequestItems();
+    D_800E2830->unknown5C = Track_HasNoTrackRequestItems();
     D_800E2830->field50 = 1;
     D_800E2830->targetD8 = -1;
     D_800E2830->unknown40 = 1;
@@ -129,7 +129,7 @@ void func_80244E58_de(void) {
     }
 }
 
-s32 func_80244FB4_de(void) {
+s32 CCinema_ProcessPendingTrack(void) {
     s32 none;
     f32 value;
     f32 limit;
@@ -139,7 +139,7 @@ s32 func_80244FB4_de(void) {
     if (D_800E2830->resourceDC == none) {
         return 0;
     }
-    Menu_LoadTrackSequence(D_800E2830->resourceDC);
+    Track_LoadTrackSequence(D_800E2830->resourceDC);
     D_800E2830->resourceDC = none;
     if (Cinema_IsSequenceActive() != 0) {
         if (func_80245850_de() != 0) {
@@ -149,7 +149,7 @@ s32 func_80244FB4_de(void) {
             record->time20 = *(volatile f32 *)&record->time;
             record->time += D_800D2988 * D_800C37B0_de;
             if (record->start <= record->time) {
-                func_80244E58_de();
+                CCinema_EnterSequenceScene();
             }
             value = D_800E2830->time;
             limit = D_800E2830->clipEnd;
@@ -170,7 +170,7 @@ s32 func_80244FB4_de(void) {
     return 1;
 }
 
-void func_802450CC_de(void) {
+void CCinema_UpdateSequence(void) {
     Shared_MenuContext *record;
     f32 value;
     f32 limit;
@@ -179,7 +179,7 @@ void func_802450CC_de(void) {
         return;
     }
     D_800CB420_de = D_800D2978;
-    if (func_80244FB4_de() == 0) {
+    if (CCinema_ProcessPendingTrack() == 0) {
         if (Cinema_IsSequenceActive() != 0) {
             if (func_80245850_de() != 0) {
                 D_800E2830->time20 = D_800E2830->time;
@@ -188,7 +188,7 @@ void func_802450CC_de(void) {
                 record->time20 = *(volatile f32 *)&record->time;
                 record->time += D_800D2988 * 0.06666667f;
                 if (record->start <= record->time) {
-                    func_80244E58_de();
+                    CCinema_EnterSequenceScene();
                 }
                 value = D_800E2830->time;
                 limit = D_800E2830->clipEnd;
@@ -207,13 +207,13 @@ void func_802450CC_de(void) {
         }
         Menu_ProcessTrackItemEvents();
     }
-    func_80244FB4_de();
+    CCinema_ProcessPendingTrack();
     if (D_800E2830->unknown60 != 0 && (D_800E2830->fade -= 2.0f * (D_800D2988 * 0.06666667f)) < -0.5f) {
         D_800E2830->unknown60 = 0;
         D_800E2830->fade = 0.0f;
         if (Cinema_IsSequenceActive() != 0) {
-            func_80245B74_de(1);
-            func_80245BC0_de();
+            Cinema_InitializeSequenceOnce(1);
+            Cinema_CloseSequenceOnce();
             if (D_800E2830->owner != 0) {
                 Cache_ReleaseResource(0, D_800E2830->owner);
             }
@@ -225,7 +225,7 @@ void func_802450CC_de(void) {
         }
         return;
     }
-    func_80244FB4_de();
+    CCinema_ProcessPendingTrack();
     if (Cinema_IsSequenceActive() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
         D_800E2830->unknown104[0] == 0) {
         if (D_800E2830->time >= D_800E2830->end && D_800E2830->initialized44 == 0) {
@@ -257,7 +257,7 @@ void func_802450CC_de(void) {
             D_800E2830->closed = 1;
         }
     }
-    func_80244FB4_de();
+    CCinema_ProcessPendingTrack();
     if (D_800E2830->active != 0) {
         func_8025476C_de(0xA);
     }

@@ -32,7 +32,7 @@ static __inline__ void writeLink(ResourcePageMapping **where, ResourcePageMappin
 
 
 
-int Virtual_RecycleTlbSlot(void) {
+int Vhandler_RecycleTlbSlot(void) {
     u16 previous;
     s16 index;
     previous = D_800FFFA0[0];
@@ -52,7 +52,7 @@ int Virtual_RecycleTlbSlot(void) {
     return index;
 }
 
-void Virtual_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out) {
+void Vhandler_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out) {
     extern void func_802AD370_de(s32, s32, s32, u32, s32, s32);
     u8 *pair;
     s32 mapped;
@@ -69,7 +69,7 @@ void Virtual_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u
         slot = D_800FFB5B.marks[pair[1] * 16];
         D_80103F28[(s16)slot].team = item->index;
     } else {
-        slot = Virtual_RecycleTlbSlot();
+        slot = Vhandler_RecycleTlbSlot();
         if (flags & 1) {
             D_80103F28[(s16)slot].slot = item->index;
             if (pair[0] != 0xFF) {
@@ -117,7 +117,7 @@ void Virtual_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u
         D_80103F28[(s16)slot].slot != 0xFF ? ((u32)&D_8014E000 & 0x3FFFFFF) + (D_80103F28[(s16)slot].slot << 12) : -1, 7);
 }
 
-void Virtual_UnmapResourcePage(ResourcePageMapping *mapping) {
+void Vhandler_UnmapResourcePage(ResourcePageMapping *mapping) {
     extern void func_802AD370_de(s32, s32, s32, u32, s32, s32);
     s32 slot;
 
@@ -153,7 +153,7 @@ extern f32 D_800C3610_de;
 extern f32 D_800C3614_de;
 extern f32 D_800C3618_de;
 extern f32 D_800C361C_de;
-u64 func_802BADC0_de(void);
+u64 Audio_ReadSystemTime(void);
 void *Virtual_FindRegionForPage(u16);
 void osWritebackDCacheAll(void);
 void func_802BD170_de(s32);
@@ -193,7 +193,7 @@ static __inline__ Region *findPageRegion(u32 page) {
     }
     return region;
 }
-void Virtual_HandleResourcePageRequest(void) {
+void Vhandler_HandleResourcePageRequest(void) {
     ResourcePageThread *thread;
     Region *region;
     ResourcePageMapping *mapping;
@@ -204,7 +204,7 @@ void Virtual_HandleResourcePageRequest(void) {
     f32 duration;
     f32 scale;
     f32 limit;
-    thread = func_802BAD70_de();
+    thread = Audio_GetInterruptMask();
     kind = thread->message & 0x7C;
     if (kind == 4 || kind == 8) {
         D_800FF230.counters.requests++;
@@ -217,7 +217,7 @@ void Virtual_HandleResourcePageRequest(void) {
                 mapping = &D_800FF230.slots[*slot].chain;
                 if (mapping->slot == 0xFF) {
                     detachPage(mapping);
-                    Virtual_MapResourcePage(page, mapping, thread->slot, slot);
+                    Vhandler_MapResourcePage(page, mapping, thread->slot, slot);
                     appendPage((Field_void_4 *)&D_800FFE20, mapping);
                 }
                 thread->state = 2;
@@ -230,7 +230,7 @@ void Virtual_HandleResourcePageRequest(void) {
             job->size = 4096;
             mapping = oldestPage((PageList *)&D_800FFE20);
             detachPage(mapping);
-            Virtual_UnmapResourcePage(mapping);
+            Vhandler_UnmapResourcePage(mapping);
             if (mapping->id != 0xFFFF) {
                 Region *previousRegion = Virtual_FindRegionForPage(mapping->id);
                 previousRegion->map[mapping->id - previousRegion->start] = 0xFF;
@@ -244,19 +244,19 @@ void Virtual_HandleResourcePageRequest(void) {
             osSendMesg(&D_800FF230.pending, job, 1);
             return;
         }
-        start = func_802BADC0_de();
+        start = Audio_ReadSystemTime();
         scale = D_800C3610_de;
         limit = D_800C3614_de;
         do {
-            elapsed = ((func_802BADC0_de() - start) << 6) / 3000;
+            elapsed = ((Audio_ReadSystemTime() - start) << 6) / 3000;
             duration = elapsed;
         } while (duration * scale < limit);
     } else {
-        start = func_802BADC0_de();
+        start = Audio_ReadSystemTime();
         scale = D_800C3618_de;
         limit = D_800C361C_de;
         do {
-            elapsed = ((func_802BADC0_de() - start) << 6) / 3000;
+            elapsed = ((Audio_ReadSystemTime() - start) << 6) / 3000;
             duration = elapsed;
         } while (duration * scale < limit);
     }

@@ -45,7 +45,7 @@ extern char D_801011B8;
 
 extern void func_80256454_de(void *, u32, s32, s32, void *, s32, s32);
 
-void func_80256FC0_de(void) {
+void Sound_RetireCompletedSampleWindows(void) {
     u32 i;
     s32 value;
     Window *node;
@@ -81,7 +81,7 @@ void func_80256FC0_de(void) {
     D_800CB700_de++;
 }
 
-u32 func_802570C0_de(void *block, s32 size) {
+u32 Sound_GetCachedAudioBlockAddress(void *block, s32 size) {
     CacheEntry *entry;
     CacheEntry *unused;
 
@@ -94,7 +94,7 @@ u32 func_802570C0_de(void *block, s32 size) {
                 func_802BD3A0_de(entry->data, block, size);
                 func_802BD280_de(entry->data, size);
             }
-            return func_802BBBC0_de(entry->data);
+            return osVirtualToPhysical(entry->data);
         }
         if (entry->state == 0) {
             unused = entry;
@@ -110,10 +110,10 @@ u32 func_802570C0_de(void *block, s32 size) {
     unused->state = 3;
     unused->size = size;
     func_802BD3A0_de(unused->data, block, size);
-    return func_802BBBC0_de(unused->data);
+    return osVirtualToPhysical(unused->data);
 }
 
-u32 func_802571F0_de(s32 offset, s32 length) {
+u32 Sound_GetSampleDmaWindowAddress(s32 offset, s32 length) {
     Window *window;
     Window *after;
     Window **pool;
@@ -135,7 +135,7 @@ u32 func_802571F0_de(s32 offset, s32 length) {
         after = window;
         if (top >= end) {
             window->frame = D_800CB700_de;
-            return func_802BBBC0_de(window->buffer + address - window->base);
+            return osVirtualToPhysical(window->buffer + address - window->base);
         }
     }
     pool = &D_80107DF0.firstFree;
@@ -162,7 +162,7 @@ u32 func_802571F0_de(s32 offset, s32 length) {
     word = window->buffer;
     D_800CB704_de++;
     func_80256454_de(&D_801011B8, address, 0x300, word, &D_80107DD8, 0, 1);
-    return func_802BBBC0_de(word) + odd;
+    return osVirtualToPhysical(word) + odd;
 }
 
 extern u8 *D_8014D420_de;
@@ -175,15 +175,15 @@ typedef struct AudioBankHeader {
     ALBankFile *bankFile;
 } AudioBankHeader;
 extern void func_802567A4_de(MenuRules *lock);
-extern void AudioMgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
+extern void Audiomgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void alSndpNew(void *, void *);
 extern void Audio_InitializeMusicPlayer(void *, void *);
-extern void func_802596B4_de(void *, void *);
+extern void AudioWorld_InitializePendingSoundPool(void *, void *);
 extern void Audio_InitializeVoicePool(void *, void *);
 extern void Audio_InitializeDialogPlayer(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
-void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
+void *Vhandler_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {
     u32 mask = __osDisableInt();
     if (++lock->locked != 1) {
@@ -206,7 +206,7 @@ static inline void LockLeave(MenuRules *lock) {
 /* Initialises the audio context: creates and takes its lock, sets up the frame heap and the synthesizer,
  * loads the sound bank and sorts the first instrument sounds by address, creates the sound player, clears the
  * voice handles and seeds the mix volumes from the saved settings bytes, then releases the lock. */
-void func_80257360_de(ContextRecAt2BC0 *ctx) {
+void Sound_InitializeContext(ContextRecAt2BC0 *ctx) {
     ALSynConfig config;
     AudioInitializeTiming timing;
     AudioBankHeader *loaded;
@@ -230,14 +230,14 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     config.dmaproc = 0;
     config.heap = ctx->frames;
     timing.samples = 0x800;
-    AudioMgr_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
+    Audiomgr_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
     D_801076A0 = Defs_ReadResourceWord(8);
     size = Defs_ReadResourceWord(4) - Defs_ReadResourceWord(0);
-    loaded = Virtual_AllocateVirtualRegion(size, 0, Defs_ReadResourceWord(0));
+    loaded = Vhandler_AllocateVirtualRegion(size, 0, Defs_ReadResourceWord(0));
     ctx->field1D6C = loaded->table;
     ctx->resource = loaded->bankFile;
     ctx->font = ctx->resource->bankArray[0];
-    func_8025768C_de(ctx);
+    Sound_LoadSoundAndSequenceTables(ctx);
     Audio_InitializeMusicPlayer(ctx->panel, ctx);
     instrument = ctx->font->instArray[0];
     for (i = 0; i < instrument->soundCount; i++) {
@@ -269,7 +269,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->field2B98 = 0;
     ctx->field2BB8 = 0;
     ctx->field2B9C = 0;
-    func_802596B4_de(ctx->view, ctx);
+    AudioWorld_InitializePendingSoundPool(ctx->view, ctx);
     Audio_InitializeVoicePool(ctx->menu, ctx);
     ctx->red = D_801462C8.volume[1] * D_800C3ED0_de;
     ctx->green = D_801462C8.volume[0] * D_800C3ED0_de;
@@ -283,7 +283,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     LockLeave(&ctx->lock);
 }
 
-void func_8025768C_de(ContextRecAt2BC0 *ctx) {
+void Sound_LoadSoundAndSequenceTables(ContextRecAt2BC0 *ctx) {
     s32 total;
     s32 *index;
     s32 *rest;
@@ -296,7 +296,7 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     void *section;
 
     total = Defs_ReadResourceWord(0x14) - Defs_ReadResourceWord(0x10);
-    ctx->soundData = Virtual_AllocateVirtualRegion(total, 0, Defs_ReadResourceWord(0x10));
+    ctx->soundData = Vhandler_AllocateVirtualRegion(total, 0, Defs_ReadResourceWord(0x10));
     section = SetN64_GetPackSection(ctx->soundData, 0);
     SetN64_GetPackSection(ctx->soundData, 1);
     tables = SetN64_GetPackSection(section, 0);
@@ -352,7 +352,7 @@ static inline s32 findVoiceById(ContextRecAt2BC0 *context, s32 id) {
     }
     return -1;
 }
-s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector3 *position) {
+s32 Sound_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector3 *position) {
     s16 index;
     VoiceMix *mix;
     ALSndPlayer *player;
@@ -401,7 +401,7 @@ s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector
 
 /* 80256220_15.CPP */
 /* Stops every voice playing a sound id while holding the manager's recursive lock at 0x110: tells
- * func_802598B4_de about the id, then for each of the 17 voice records whose sound matches it counts the voice
+ * AudioWorld_RecyclePendingSoundsByIdentifier about the id, then for each of the 17 voice records whose sound matches it counts the voice
  * and either resets the spare record 16 or clears the voice's pending flag and stops its channel through
  * Audio_StopVoiceSlot when it has a handle; returns the number of voices found (0 for id -1). Lock handling
  * adapted from Audio_StopAudioBySecondaryValue; the voice records are addressed by offset from the manager.
@@ -409,7 +409,7 @@ s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector
 
 extern void Audio_StopVoiceSlot(void *, s16);
 
-s32 func_80257A14_de(void *context, s32 id) {
+s32 Sound_StopSoundsByIdentifier(void *context, s32 id) {
     void *contextLock;
     void *channelSet;
     s32 lockClaimCount;
@@ -435,7 +435,7 @@ s32 func_80257A14_de(void *context, s32 id) {
         __osRestoreInt(mask);
         channelSet = &((ContextRecAt2BC0 *)(context))->view[0];
     }
-    func_802598B4_de(channelSet, id);
+    AudioWorld_RecyclePendingSoundsByIdentifier(channelSet, id);
     for (i = 0; i < 17; i++) {
         if (((ContextRecAt2BC0 *)context)->voices[i].sound == id) {
             found++;
@@ -470,22 +470,22 @@ s32 func_80257A14_de(void *context, s32 id) {
     return found;
 }
 
-extern void *Sky_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
+extern void *Gsky_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
 extern s32 Audio_HasVoiceWithKey(void *, s32);
 extern f32 Audio_ComputeDistanceAttenuation(CVector3 *, void *);
 extern s32 Audio_FindVoiceByKeyPair(void *, s32, s32);
-extern s32 func_80259260_de(void *, Item57BD4 *, CVector3 *, s32, s32);
+extern s32 AudioWorld_QueuePrioritizedSound(void *, Item57BD4 *, CVector3 *, s32, s32);
 
 extern void *Channel_StartNoteVoice(void *, Item57BD4 *, s32, s32);
 extern void Audio_SetVoicePositionTracking(void *, CVector3 *, s32);
 
 extern void Audio_InitializeVoiceParameters(void *, Item57BD4 *, s32);
 
-s32 Audio_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
+s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
                   s32 voiceUserData, s32 arg5, s32 trackedPosition) {
     void *node;
 
-    ((ContextRecAt2BC0 *)(context))->field2B98 = Sky_FindNearestCamera(&D_80145088, position);
+    ((ContextRecAt2BC0 *)(context))->field2B98 = Gsky_FindNearestCamera(&D_80145088, position);
     if (soundRecord->flags & 1) {
         if (Audio_HasVoiceWithKey(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound) != 0) {
             return -1;
@@ -501,7 +501,7 @@ s32 Audio_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
         }
     }
     if (soundRecord->field2 != 0) {
-        return func_80259260_de(&((ContextRecAt2BC0 *)(context))->view[0], soundRecord, position, playbackValue, arg5);
+        return AudioWorld_QueuePrioritizedSound(&((ContextRecAt2BC0 *)(context))->view[0], soundRecord, position, playbackValue, arg5);
     }
     if (soundRecord->flags & 0x40) {
         Audio_ReleaseMatchingExclusiveVoice(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound, soundRecord->field0);
@@ -526,7 +526,7 @@ s32 Audio_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
             __osRestoreInt(token);
         }
     }
-    Audio_UpdateSoundSlot(context, ((Draw *)(node))->model, 0, position);
+    Sound_UpdateSoundSlot(context, ((Draw *)(node))->model, 0, position);
     {
         char *queue = &((ContextRecAt2BC0 *)(context))->lock;
         u32 token = __osDisableInt();
@@ -581,7 +581,7 @@ static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, s16 a
     s32 threshold;
     total = 0;
     if (context->instrumentCount != 0) {
-        if (!func_80265550_de((u32 *)context->instrumentData, context->instrumentCount, (s16)sound, &first, &last)) {
+        if (!Defs_FindSortedGroupRange((u32 *)context->instrumentData, context->instrumentCount, (s16)sound, &first, &last)) {
             return -1;
         }
         index = first;
@@ -634,7 +634,7 @@ static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
  * 0x100 avoid repeating the previous variant and get a random pan), records the entry, sound and owner as
  * the current selection, hands out a play id under the recursive lock and starts every voice record of the
  * variant; returns the play id, or -1 when nothing was started. */
-s32 Audio_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
+s32 Sound_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
     SoundVoiceGroup *group;
     u32 count;
     u32 i;
@@ -667,7 +667,7 @@ s32 Audio_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 pos
             playId = -1;
         }
         for (i = 0; i < count; i++) {
-            Audio_StartSoundRecord(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index,
+            Sound_StartSoundRecord(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index,
                                      playId, 0, spatialMode);
         }
         context->selectedOwner = -1;
@@ -678,9 +678,9 @@ s32 Audio_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 pos
 
 /* Starts a sound-bank entry: looks up the entry's record in the bank table at 0x2B4C, resets the current
  * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
- * at 0x10C), then starts every voice record of the entry through Audio_StartSoundRecord at the given position;
+ * at 0x10C), then starts every voice record of the entry through Sound_StartSoundRecord at the given position;
  * returns the play id, or -1 for an out-of-range index or an empty entry. */
-s32 Audio_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
+s32 Sound_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
     SoundVoiceGroup *group;
     u32 count;
     u32 i;
@@ -701,7 +701,7 @@ s32 Audio_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 p
         playId = -1;
     }
     for (i = 0; i < count; i++) {
-        Audio_StartSoundRecord(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
+        Sound_StartSoundRecord(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
     }
     return playId;
 }

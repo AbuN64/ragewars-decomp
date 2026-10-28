@@ -54,43 +54,43 @@ void DispatchControllerButtonEvent(input_event *event) {
     }
     switch (control) {
     case 11:
-        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 1, source, control, 0);
+        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 1, source, control, 0);
         break;
     case 12:
-        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 2, source, control, 0);
+        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 2, source, control, 0);
         break;
     case 4:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 5, source, 1, 10000);
-            Smos_RouteElementEvent(manager, 5, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 5, source, 1, 10000);
+            Menu_RouteElementEvent(manager, 5, source, 0, 10000);
         }
         break;
     case 5:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 6, source, 1, 10000);
-            Smos_RouteElementEvent(manager, 6, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 6, source, 1, 10000);
+            Menu_RouteElementEvent(manager, 6, source, 0, 10000);
         }
         break;
     case 6:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 7, source, 1, 10000);
-            Smos_RouteElementEvent(manager, 7, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 7, source, 1, 10000);
+            Menu_RouteElementEvent(manager, 7, source, 0, 10000);
         }
         break;
     case 7:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 8, source, 1, 10000);
-            Smos_RouteElementEvent(manager, 8, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Menu_RouteElementEvent(manager, 8, source, 1, 10000);
+            Menu_RouteElementEvent(manager, 8, source, 0, 10000);
         }
         break;
     }
     if (pressed == 1) {
         if (!ControllerButtonIsHeld((u16)event->device, control)) {
-            Smos_RouteElementEvent(manager, 10, source, control, 0);
+            Menu_RouteElementEvent(manager, 10, source, control, 0);
         }
-        Smos_RouteElementEvent(manager, 9, source, control, 0);
+        Menu_RouteElementEvent(manager, 9, source, control, 0);
     } else {
-        Smos_RouteElementEvent(manager, 11, source, control, 0);
+        Menu_RouteElementEvent(manager, 11, source, control, 0);
     }
     ControllerButtonSetHeld((u16)event->device, control, pressed);
 }
@@ -139,8 +139,8 @@ void DispatchControllerAxisEvents(input_event *event) {
         if (-threshold < state->oldX && state->x < -threshold) xCross = 1;
         xCode = 7; xValue = state->x;
     }
-    if (yCode != 0) Smos_RouteElementEvent(GetMenuScreenOwner(), yCode, id, yCross, yValue);
-    if (xCode != 0) Smos_RouteElementEvent(GetMenuScreenOwner(), xCode, id, xCross, xValue);
+    if (yCode != 0) Menu_RouteElementEvent(GetMenuScreenOwner(), yCode, id, yCross, yValue);
+    if (xCode != 0) Menu_RouteElementEvent(GetMenuScreenOwner(), xCode, id, xCross, xValue);
     state->oldX = state->x;
     state->oldY = state->y;
 }
@@ -151,7 +151,7 @@ void DispatchControllerAxisEvents(input_event *event) {
 
 
 
-void Smos_DispatchControllerEvent(input_event *event) {
+void Controller_DispatchControllerEvent(input_event *event) {
 
     s32 source;
 
@@ -162,7 +162,7 @@ void Smos_DispatchControllerEvent(input_event *event) {
     switch (event->kind) {
     case 0:
         source = ((u16)event->source << 16) | (u16)event->device;
-        Smos_RouteElementEvent(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
+        Menu_RouteElementEvent(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
         break;
     case 1:
         if (event->source == 4) {
@@ -190,9 +190,9 @@ void Smos_DispatchControllerEvent(input_event *event) {
  *             the current and previous button bitfields; 0xC4 and 0xC5 are
  *             the current analog-stick X and Y samples.
  *
- * The analog-stick sample is posted first through Smos_SendControllerStickEvent. If the
+ * The analog-stick sample is posted first through Controller_SendControllerStickEvent. If the
  * digital button bitfields differ, the masks are then tested in priority
- * order. The first 0-to-1 transition calls Smos_SendControllerButtonEvent(port, event, 1) for
+ * order. The first 0-to-1 transition calls Controller_SendControllerButtonEvent(port, event, 1) for
  * a press, while the first 1-to-0 transition calls it with 0 for a release;
  * the function returns after dispatching that one digital edge.
  *
@@ -205,37 +205,37 @@ void Smos_DispatchControllerEvent(input_event *event) {
  * Game role: Converts raw controller state into the press/release events used
  * by firing, jumping, weapon switching, menu navigation, and pausing.
  */
-void Smos_DispatchControllerProfileChanges(char *controllerProfile) {
+void Controller_DispatchControllerProfileChanges(char *controllerProfile) {
     s32 current;
     s32 previous;
     current = ((struct ControllerProfile *)(controllerProfile))->buttons;
     previous = ((struct ControllerProfile *)(controllerProfile))->previousButtons;
-    Smos_SendControllerStickEvent(((struct ControllerProfile *)(controllerProfile))->port, ((struct ControllerProfile *)(controllerProfile))->stickX,
+    Controller_SendControllerStickEvent(((struct ControllerProfile *)(controllerProfile))->port, ((struct ControllerProfile *)(controllerProfile))->stickX,
                   ((struct ControllerProfile *)(controllerProfile))->stickY);
     if (current == previous) {
         return;
     }
-    if (!(current & (0x1000))) goto release_start; if (previous & (0x1000)) goto select_start; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (13), 1); return; release_start: if (!(previous & (0x1000))) goto next_start; select_start: if (current & (0x1000)) goto next_start; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (13), 0); return; next_start: /* Start */
-    if (!(current & (0x8000))) goto release_a; if (previous & (0x8000)) goto select_a; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (11), 1); return; release_a: if (!(previous & (0x8000))) goto next_a; select_a: if (current & (0x8000)) goto next_a; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (11), 0); return; next_a: /* A */
-    if (!(current & (0x4000))) goto release_b; if (previous & (0x4000)) goto select_b; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (12), 1); return; release_b: if (!(previous & (0x4000))) goto next_b; select_b: if (current & (0x4000)) goto next_b; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (12), 0); return; next_b: /* B */
-    if (!(current & (0x20))) goto release_l; if (previous & (0x20)) goto select_l; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (9), 1); return; release_l: if (!(previous & (0x20))) goto next_l; select_l: if (current & (0x20)) goto next_l; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (9), 0); return; next_l: /* L */
-    if (!(current & (0x10))) goto release_r; if (previous & (0x10)) goto select_r; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (8), 1); return; release_r: if (!(previous & (0x10))) goto next_r; select_r: if (current & (0x10)) goto next_r; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (8), 0); return; next_r: /* R */
-    if (!(current & (0x2000))) goto release_z; if (previous & (0x2000)) goto select_z; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (10), 1); return; release_z: if (!(previous & (0x2000))) goto next_z; select_z: if (current & (0x2000)) goto next_z; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (10), 0); return; next_z: /* Z */
-    if (!(current & (0x800))) goto release_d_up; if (previous & (0x800)) goto select_d_up; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (4), 1); return; release_d_up: if (!(previous & (0x800))) goto next_d_up; select_d_up: if (current & (0x800)) goto next_d_up; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (4), 0); return; next_d_up: /* D-Up */
-    if (!(current & (0x200))) goto release_d_left; if (previous & (0x200)) goto select_d_left; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (6), 1); return; release_d_left: if (!(previous & (0x200))) goto next_d_left; select_d_left: if (current & (0x200)) goto next_d_left; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (6), 0); return; next_d_left: /* D-Left */
-    if (!(current & (0x100))) goto release_d_right; if (previous & (0x100)) goto select_d_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (7), 1); return; release_d_right: if (!(previous & (0x100))) goto next_d_right; select_d_right: if (current & (0x100)) goto next_d_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (7), 0); return; next_d_right: /* D-Right */
-    if (!(current & (0x400))) goto release_d_down; if (previous & (0x400)) goto select_d_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (5), 1); return; release_d_down: if (!(previous & (0x400))) goto next_d_down; select_d_down: if (current & (0x400)) goto next_d_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (5), 0); return; next_d_down: /* D-Down */
-    if (!(current & (8))) goto release_c_up; if (previous & (8)) goto select_c_up; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (0), 1); return; release_c_up: if (!(previous & (8))) goto next_c_up; select_c_up: if (current & (8)) goto next_c_up; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (0), 0); return; next_c_up: /* C-Up */
-    if (!(current & (2))) goto release_c_left; if (previous & (2)) goto select_c_left; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (2), 1); return; release_c_left: if (!(previous & (2))) goto next_c_left; select_c_left: if (current & (2)) goto next_c_left; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (2), 0); return; next_c_left: /* C-Left */
-    if (!(current & (1))) goto release_c_right; if (previous & (1)) goto select_c_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 1); return; release_c_right: if (!(previous & (1))) goto next_c_right; select_c_right: if (current & (1)) goto next_c_right; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 0); return; next_c_right: /* C-Right */
-    if (!(current & (4))) goto release_c_down; if (previous & (4)) goto select_c_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 1); return; release_c_down: if (!(previous & (4))) goto next_c_down; select_c_down: if (current & (4)) goto next_c_down; Smos_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 0); return; next_c_down: /* C-Down */
+    if (!(current & (0x1000))) goto release_start; if (previous & (0x1000)) goto select_start; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (13), 1); return; release_start: if (!(previous & (0x1000))) goto next_start; select_start: if (current & (0x1000)) goto next_start; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (13), 0); return; next_start: /* Start */
+    if (!(current & (0x8000))) goto release_a; if (previous & (0x8000)) goto select_a; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (11), 1); return; release_a: if (!(previous & (0x8000))) goto next_a; select_a: if (current & (0x8000)) goto next_a; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (11), 0); return; next_a: /* A */
+    if (!(current & (0x4000))) goto release_b; if (previous & (0x4000)) goto select_b; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (12), 1); return; release_b: if (!(previous & (0x4000))) goto next_b; select_b: if (current & (0x4000)) goto next_b; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (12), 0); return; next_b: /* B */
+    if (!(current & (0x20))) goto release_l; if (previous & (0x20)) goto select_l; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (9), 1); return; release_l: if (!(previous & (0x20))) goto next_l; select_l: if (current & (0x20)) goto next_l; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (9), 0); return; next_l: /* L */
+    if (!(current & (0x10))) goto release_r; if (previous & (0x10)) goto select_r; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (8), 1); return; release_r: if (!(previous & (0x10))) goto next_r; select_r: if (current & (0x10)) goto next_r; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (8), 0); return; next_r: /* R */
+    if (!(current & (0x2000))) goto release_z; if (previous & (0x2000)) goto select_z; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (10), 1); return; release_z: if (!(previous & (0x2000))) goto next_z; select_z: if (current & (0x2000)) goto next_z; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (10), 0); return; next_z: /* Z */
+    if (!(current & (0x800))) goto release_d_up; if (previous & (0x800)) goto select_d_up; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (4), 1); return; release_d_up: if (!(previous & (0x800))) goto next_d_up; select_d_up: if (current & (0x800)) goto next_d_up; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (4), 0); return; next_d_up: /* D-Up */
+    if (!(current & (0x200))) goto release_d_left; if (previous & (0x200)) goto select_d_left; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (6), 1); return; release_d_left: if (!(previous & (0x200))) goto next_d_left; select_d_left: if (current & (0x200)) goto next_d_left; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (6), 0); return; next_d_left: /* D-Left */
+    if (!(current & (0x100))) goto release_d_right; if (previous & (0x100)) goto select_d_right; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (7), 1); return; release_d_right: if (!(previous & (0x100))) goto next_d_right; select_d_right: if (current & (0x100)) goto next_d_right; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (7), 0); return; next_d_right: /* D-Right */
+    if (!(current & (0x400))) goto release_d_down; if (previous & (0x400)) goto select_d_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (5), 1); return; release_d_down: if (!(previous & (0x400))) goto next_d_down; select_d_down: if (current & (0x400)) goto next_d_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (5), 0); return; next_d_down: /* D-Down */
+    if (!(current & (8))) goto release_c_up; if (previous & (8)) goto select_c_up; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (0), 1); return; release_c_up: if (!(previous & (8))) goto next_c_up; select_c_up: if (current & (8)) goto next_c_up; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (0), 0); return; next_c_up: /* C-Up */
+    if (!(current & (2))) goto release_c_left; if (previous & (2)) goto select_c_left; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (2), 1); return; release_c_left: if (!(previous & (2))) goto next_c_left; select_c_left: if (current & (2)) goto next_c_left; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (2), 0); return; next_c_left: /* C-Left */
+    if (!(current & (1))) goto release_c_right; if (previous & (1)) goto select_c_right; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 1); return; release_c_right: if (!(previous & (1))) goto next_c_right; select_c_right: if (current & (1)) goto next_c_right; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (3), 0); return; next_c_right: /* C-Right */
+    if (!(current & (4))) goto release_c_down; if (previous & (4)) goto select_c_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 1); return; release_c_down: if (!(previous & (4))) goto next_c_down; select_c_down: if (current & (4)) goto next_c_down; Controller_SendControllerButtonEvent(((struct ControllerProfile *)(controllerProfile))->port, (1), 0); return; next_c_down: /* C-Down */
 }
 
-void Smos_SetControllerEventFilter(s32 (*arg0)(void)) {
+void Controller_SetControllerEventFilter(s32 (*arg0)(void)) {
     D_8014D0B0->callback = arg0;
 }
 
-void Smos_ClearControllerFlags(void) {
+void Controller_ClearControllerFlags(void) {
     s32 idx;
     s32 i;
     s32 j;
@@ -261,19 +261,19 @@ void *Cache_AllocateMemory(s32);
 
 
 
-void Smos_AllocateControllerContext(void) {
+void Controller_AllocateControllerContext(void) {
     Callback *callback;
     callback = Cache_AllocateMemory(0xC44);
     D_8014D0B0 = callback;
     XPlus_FillBytes(callback, 0, 0xC44);
 }
 
-void Smos_FreeControllerContext(void) {
+void Controller_FreeControllerContext(void) {
     Cache_FreeMemory(D_8014D0B0);
     D_8014D0B0 = 0;
 }
 
-void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
+void Controller_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
     input_event m;
 
     m.source = 4;
@@ -285,10 +285,10 @@ void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
     m.x = 0;
     m.y = 0;
     m.z = 0;
-    Smos_DispatchControllerEvent(&m);
+    Controller_DispatchControllerEvent(&m);
 }
 
-void Smos_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
+void Controller_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
     input_event m;
 
     m.source = 4;
@@ -300,7 +300,7 @@ void Smos_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
     m.pressed = 0;
     m.y = arg2 * 0x64;
     m.z = 0;
-    Smos_DispatchControllerEvent(&m);
+    Controller_DispatchControllerEvent(&m);
 }
 
 #if defined(VERSION_US)

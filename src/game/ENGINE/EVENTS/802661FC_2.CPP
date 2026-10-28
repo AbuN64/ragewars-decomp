@@ -13,7 +13,7 @@
 #include "SYSTEM_2/802661FC_2.H"
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
-/* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield D_801041F0 of the actor for an object target other than the two 0x402/0x404 types, otherwise func_8024B06C_de's shield in D_80110570), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */
+/* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield D_801041F0 of the actor for an object target other than the two 0x402/0x404 types, otherwise Gobjinst_FindNearestBoneBounds's shield in D_80110570), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */
 
 
 
@@ -35,13 +35,13 @@ extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s3
 extern Carrier D_801041F0;
 
 
-extern s32 func_8024B06C_de(ActorEventsComputeDamageScale *, CVector3, Shield *);
+extern s32 Gobjinst_FindNearestBoneBounds(ActorEventsComputeDamageScale *, CVector3, Shield *);
 
 extern f32 GameObject_GetActorHeight(ActorEventsComputeDamageScale *);
 
 extern f32 GameObject_GetActorRadius(ActorEventsComputeDamageScale *);
 
-extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
+extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 
 /* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
@@ -68,7 +68,7 @@ extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32
 
 #include "particle/8027A0F4_8.H"
 
-extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
+extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
 /* Forwards a position and extent to Events_ApplyDamageEvent with zero flags and priority 0x80, but only when
    the first byte of the given object is 1. Adapted from the matched twin Events_ApplyRadialDamage with the object
@@ -84,7 +84,7 @@ extern void Events_UpdateNodeAtPosition(s32 arg0, s32 arg1, s32 arg2, s32 arg3, 
 
 extern void *D_80140FE8_de;
 
-extern s32 func_802393AC_de(NodeEventsStartCameraFadeAtPoint *arg0, Triple arg1);
+extern s32 Gsky_ContainsVisiblePoint(NodeEventsStartCameraFadeAtPoint *arg0, Triple arg1);
 
 
 f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *target, CVector3 position, f32 radius, s32 falloff, s32 flags, Shield **found) {
@@ -121,7 +121,7 @@ f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *targe
             goto have;
         }
     }
-    shield = func_8024B06C_de(self, position, &D_80110570) ? &D_80110570 : 0;
+    shield = Gobjinst_FindNearestBoneBounds(self, position, &D_80110570) ? &D_80110570 : 0;
 have:
     *found = shield;
     if (shielded && shield != 0) {
@@ -142,7 +142,7 @@ have:
                 body.y = position.y;
             }
             reach = radius + GameObject_GetActorRadius(self);
-            distance = GraphU64_GetPointDistance(&position, &body);
+            distance = Graphu64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }
@@ -184,7 +184,7 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     point.x = 0;
     point.y = 0;
     point.z = 0;
-    func_8028CE94_de(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
+    CScene_StartEventClips(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
 }
 
 void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
@@ -229,8 +229,8 @@ void Events_StartCameraFadeAtPoint(s32 unused0, s32 unused1, s32 unused2, Triple
 
     node = D_80140FE8_de;
     while (node != 0) {
-        if (func_802393AC_de(node, arg3) != 0) {
-            Sky_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
+        if (Gsky_ContainsVisiblePoint(node, arg3) != 0) {
+            Gsky_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
                           arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
         }
         node = node->next;

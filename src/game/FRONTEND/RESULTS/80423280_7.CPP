@@ -5,13 +5,13 @@
 #include "FRONTEND/80423280_7.H"
 
 /* Finds a menu item identifier in three selection tables, falling back to the first item of the second table. */
-extern int D_800E5B44[];
+extern int g_loadoutWeaponItems[];
 
 extern int D_800E5BC4[];
 
 extern int D_800E5B14[];
 
-void Frontend_SetTrialWeaponRow(u32 arg0, s32 arg1, s32 arg2) {
+void Results_SetTrialWeaponRow(u32 arg0, s32 arg1, s32 arg2) {
     s32 id;
     MenuWidget *element;
     MenuWidget *field;
@@ -55,15 +55,15 @@ void Frontend_SetTrialWeaponRow(u32 arg0, s32 arg1, s32 arg2) {
     /* the hub's Item view shares the MenuWidget prefix; this unit reads alpha and value through it */
     element = (MenuWidget *) Frontend_FindWidgetByResourceId(D_800E4690->root, id);
     Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(element, 0x14B + OPTION_SHIFT), 0);
-    value = Frontend_GetWeaponIconValue(arg1);
+    value = Results_GetWeaponIconValue(arg1);
     field = (MenuWidget *) Frontend_FindWidgetByResourceId(element, 0x14A + OPTION_SHIFT);
     field->alpha = 0x64;
     field->value = value;
 }
 
-int Frontend_GetWeaponIconValue(int id) {
+int Results_GetWeaponIconValue(int id) {
  int i;
- for(i=0;i<8;i++) if(D_800E1AFC_de[i*4]==id) return D_800E5B44[i*4];
+ for(i=0;i<8;i++) if(D_800E1AFC_de[i*4]==id) return g_loadoutWeaponItems[i*4];
  for(i=0;i<4;i++) if(D_800E1B7C[i*4]==id) return D_800E5BC4[i*4];
  for(i=0;i<3;i++) if(D_800E1ACC_de[i*4]==id) return D_800E5B14[i*4];
  return D_800E5BC4[0];

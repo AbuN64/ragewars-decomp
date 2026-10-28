@@ -27,7 +27,7 @@ extern void alAuxBusNew(ALAuxBus_s *, void *, s32);
 extern void alMainBusNew(ALMainBus_s *, void *, s32);
 
              /* alMainBusNew */
-extern void *func_802B64C0_de(ALSynth *, s16, ALSynConfig *, ALHeap *);
+extern void *Audio_AllocateSynthesizerEffect(ALSynth *, s16, ALSynConfig *, ALHeap *);
 
  /* alSynAllocFX */
 extern s32 alMainBusParam(void *, s32, void *);
@@ -52,10 +52,10 @@ extern void alEnvmixerNew(ALEnvMixer4C *, ALHeap *);
                /* alEnvmixerNew */
 
                    /* alEnvmixerParam */
-extern s32 func_802B3EDC_de(void *, s32, void *);
+extern s32 alAuxBusParam(void *, s32, void *);
 
                    /* alAuxBusParam */
-extern s32 func_802B6480_de(void *, s32, ALFilter_s14 *);
+extern s32 alSaveParam(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 
@@ -100,7 +100,7 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
     alMainBusNew(drvr->mainBus, sources, c->maxPVoices);
 
     if (c->fxType != 0) {
-        func_802B64C0_de(drvr, 0, c, hp);
+        Audio_AllocateSynthesizerEffect(drvr, 0, c, hp);
     } else
         alMainBusParam(drvr->mainBus, 2, &drvr->auxBus[0]); /* AL_FILTER_ADD_SOURCE */
 
@@ -126,12 +126,12 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
         alEnvmixerNew(&pv->envmixer, hp);
         alEnvmixerParam(&pv->envmixer, 1, &pv->resampler);
 
-        func_802B3EDC_de(drvr->auxBus, 2, &pv->envmixer);
+        alAuxBusParam(drvr->auxBus, 2, &pv->envmixer);
 
         pv->channelKnob = (ALFilter_s14 *)&pv->envmixer;
     }
 
-    func_802B6480_de(save, 1, drvr->mainBus);
+    alSaveParam(save, 1, drvr->mainBus);
 
     params = func_802B0340_de(0, 0, hp, c->maxUpdates, sizeof(ALParam_s1C));
     drvr->paramList = 0;

@@ -36,17 +36,17 @@ s32 Libultra_SendDebugLinkString(u8 *arg0) {
 
 u8 Libultra_ReadPortStatusByte(void *arg0) {
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     return (((struct ObjectState2 *) ((s8 *) arg0))->unk_1);
 }
 
 void Libultra_WritePortByteValue(s16 *arg0, s32 arg1) {
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     *arg0 = arg1 & 0xFF;
 }
 
-/* Waits for the masked byte at offset 1 of a status block to equal a given value, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of the given poll count each, setting D_8014D3E8 and returning 0. Adapted from Libultra_CheckDebugLinkAcknowledgement with the status address, mask, expected value and timeout reload taken from the arguments. */
+/* Waits for the masked byte at offset 1 of a status block to equal a given value, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after D_800D3650 retries of the given poll count each, setting D_8014D3E8 and returning 0. Adapted from Libultra_CheckDebugLinkAcknowledgement with the status address, mask, expected value and timeout reload taken from the arguments. */
 
 
 
@@ -65,7 +65,7 @@ s32 Libultra_WaitPortStatus(u8 *status, u8 mask, u32 arg2, s32 reload) {
     expected = arg2 & 0xFF;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = mask & status[1];
         if (value == expected) {
             result = 1;
@@ -99,7 +99,7 @@ s32 Libultra_WaitDebugLinkAcknowledgement(u32 arg0) {
     expected = arg0 & 0xFF;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = D_B2000015 & mask;
         if (value == expected) {
             result = 1;
@@ -115,7 +115,7 @@ done:
     return result;
 }
 
-/* Waits for bit 0 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of two polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
+/* Waits for bit 0 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after D_800D3650 retries of two polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
 
 
 
@@ -136,7 +136,7 @@ s32 Libultra_CheckDebugLinkAcknowledgement(u32 arg0) {
     expected = arg0 & 0xFF;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = D_B2000015 & mask;
         if (value == expected) {
             result = 1;
@@ -152,7 +152,7 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
@@ -173,7 +173,7 @@ s32 Libultra_WaitDebugLinkReceiveReady(u32 arg0) {
     timeout = 0x4E20;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = D_B2000015 & mask;
         if (value == expected) {
             result = 1;
@@ -189,7 +189,7 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte D_B2000011 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte D_B2000011 to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
@@ -210,7 +210,7 @@ s32 Libultra_WaitDebugLinkTransmitReady(u32 arg0) {
     timeout = 0x4E20;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = D_B2000011 & mask;
         if (value == expected) {
             result = 1;
@@ -226,7 +226,7 @@ done:
     return result;
 }
 
-/* Waits for bit 1 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 1 and the expected value held as a byte. */
+/* Waits for bit 1 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits osPiGetStatus reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 1 and the expected value held as a byte. */
 
 
 
@@ -247,7 +247,7 @@ s32 Libultra_WaitDebugLinkRequestAcknowledgement(u32 arg0) {
     timeout = 0x4E20;
     do {
         do {
-        } while (func_802BDEA0_us_rev1() & 3);
+        } while (osPiGetStatus() & 3);
         value = D_B2000015 & mask;
         if (value == expected) {
             result = 1;
@@ -271,7 +271,7 @@ void Libultra_SetDebugLinkEnable(s32 arg0) {
     temp_v0 = (D_8014D3E2 & 0xBF) | (arg0 << 6);
     D_8014D3E2 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000008 = temp_v0 & 0xFF;
 }
 
@@ -280,7 +280,7 @@ void Libultra_SetDebugLinkMode(s32 arg0) {
     temp_a0 = arg0 | (D_8014D3E3 & 0xF8);
     D_8014D3E3 = temp_a0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = temp_a0 & 0xFF;
 }
 
@@ -292,7 +292,7 @@ void Libultra_SetDebugLinkByteRequest(s32 arg0) {
     temp_v0 = (D_8014D3E3 & 0xF7) | (arg0 << 3);
     D_8014D3E3 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B200000C = temp_v0 & 0xFF;
 }
 
@@ -304,7 +304,7 @@ void Libultra_SetDebugLinkReceiveEnable(s32 arg0) {
     temp_v0 = (D_8014D3E1 & 0xF7) | (arg0 << 3);
     D_8014D3E1 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = temp_v0 & 0xFF;
 }
 
@@ -316,7 +316,7 @@ void Libultra_SetDebugLinkHostRequest(s32 arg0) {
     temp_v0 = (D_8014D3E1 & 0xFB) | (arg0 << 2);
     D_8014D3E1 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = temp_v0 & 0xFF;
 }
 
@@ -328,7 +328,7 @@ void Libultra_SetDebugLinkHandshakeBit(s32 arg0) {
     temp_v0 = (D_8014D3E1 & 0xFD) | (arg0 << 1);
     D_8014D3E1 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = temp_v0 & 0xFF;
 }
 
@@ -337,7 +337,7 @@ void Libultra_SetDebugLinkTransmitStrobe(s32 arg0) {
     temp_a0 = arg0 | (D_8014D3E1 & 0xFE);
     D_8014D3E1 = temp_a0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000004 = temp_a0 & 0xFF;
 }
 
@@ -349,7 +349,7 @@ void Libultra_SetDebugLinkBlockTransfer(s32 arg0) {
     temp_v0 = (D_8014D3E2 & 0xFD) | (arg0 << 1);
     D_8014D3E2 = temp_v0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000008 = temp_v0 & 0xFF;
 }
 
@@ -357,13 +357,13 @@ extern s8 D_8014D3E0;
 void Libultra_WriteDebugLinkDataPort(s8 arg0) {
     D_8014D3E0 = arg0;
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     D_B2000000 = arg0 & 0xFF;
 }
 
 s32 Libultra_GetDebugLinkRequestAcknowledgement(void) {
     do {
-    } while (func_802BDEA0_us_rev1() & 3);
+    } while (osPiGetStatus() & 3);
     return ((u8) D_B2000015 >> 1) & 1;
 }
 

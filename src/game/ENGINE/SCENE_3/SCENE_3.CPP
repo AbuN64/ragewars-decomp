@@ -27,7 +27,7 @@ const char D_800C5210_de[] = "grid section";
 extern DraftStreamPair D_801031F8;
 extern char D_00285160[];
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
-extern void **func_80254408_de(s32, void *, s32, s32, void *, void *, void *);
+extern void **Cache_RequestPackSection(s32, void *, s32, s32, void *, void *, void *);
 extern void Cache_LockResource(void *, Node80253610 *);
 
 void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
@@ -74,10 +74,10 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
         if (focusX < 0 || focusX >= xCount || focusZ < 0 || focusZ >= zCount) world->specialPresent = 0;
         else {
             world->specialPresent = 1;
-            world->special = (void *)func_80254408_de(0, world->specialTable, focusX + focusZ * xCount + 1,
+            world->special = (void *)Cache_RequestPackSection(0, world->specialTable, focusX + focusZ * xCount + 1,
                 world->resourceKey, world, D_00285160, "Vis Info");
             Cache_LockResource(0, (void *)world->special);
-            VisData_DecodeRegionGrid(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
+            Visdata_DecodeRegionGrid(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
         }
         }
         z = firstZ;
@@ -125,11 +125,11 @@ finished:
 typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
 extern Gfx *g_displayListCursor;
 extern struct Shape_typemap_165 *Cache_AllocateResource(s32, s32, u32, void *);
-extern s32 StaticInstance_GetPropModelIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
-extern s32 StaticInstance_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
-extern DraftStreamHandle **StaticInstance_CollectPropResources(ObjectSceneDrawCachedOpaqueGeometry *object, s32 model, s32 index, DraftStreamHandle **nextResource);
-extern void StaticInstance_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
-extern DraftStreamHandle *StaticInstance_AcquireGeometry(ObjectSceneDrawCachedOpaqueGeometry *object, s32 index);
+extern s32 Statinst_GetPropModelIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
+extern s32 Statinst_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
+extern DraftStreamHandle **Statinst_CollectPropResources(ObjectSceneDrawCachedOpaqueGeometry *object, s32 model, s32 index, DraftStreamHandle **nextResource);
+extern void Statinst_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
+extern DraftStreamHandle *Statinst_AcquireGeometry(ObjectSceneDrawCachedOpaqueGeometry *object, s32 index);
 extern void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
@@ -215,14 +215,14 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                                 prop = &objects[p];
                                 if (!(prop->flags & 0x40)) {
                                     prop->resource = resource;
-                                    if ((prop->flags & 4) || StaticInstance_GetPropModelIndex(prop) < 0) {
+                                    if ((prop->flags & 4) || Statinst_GetPropModelIndex(prop) < 0) {
                                         *nextProp++ = prop;
                                     } else {
-                                        model = StaticInstance_GetPropModelIndex(prop);
-                                        nextResource = StaticInstance_CollectPropResources(prop, model, StaticInstance_GetPropGeometryIndex(prop), nextResource);
-                                        StaticInstance_DrawModel(prop, 0);
+                                        model = Statinst_GetPropModelIndex(prop);
+                                        nextResource = Statinst_CollectPropResources(prop, model, Statinst_GetPropGeometryIndex(prop), nextResource);
+                                        Statinst_DrawModel(prop, 0);
                                     }
-                                    geometry = StaticInstance_AcquireGeometry(prop, StaticInstance_GetPropGeometryIndex(prop));
+                                    geometry = Statinst_AcquireGeometry(prop, Statinst_GetPropGeometryIndex(prop));
                                     if (geometry != 0) {
                                         points = SetN64_GetPackSection(geometry->data, 0);
                                         count = points->count;
@@ -279,7 +279,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
 }
 
 /* SCENE_4.CPP */
-/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through StaticInstance_DrawModel inside a Geometry_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
+/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through Statinst_DrawModel inside a Geometry_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
 
 void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, void *camera) {
     ObjectSceneDrawCachedOpaqueGeometry **objects;
@@ -306,12 +306,12 @@ void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, v
                 switch (pass) {
                 case 0:
                     if (!(object->flags & 4)) {
-                        StaticInstance_DrawModel(object, camera);
+                        Statinst_DrawModel(object, camera);
                     }
                     break;
                 case 1:
                     if (object->flags & 4) {
-                        StaticInstance_DrawModel(object, camera);
+                        Statinst_DrawModel(object, camera);
                     }
                     break;
                 }
@@ -399,14 +399,14 @@ typedef struct CScene_t {
 
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
-extern Shared_func_80234FDC_S1 *Sky_FindScreenMessage(GameplayCamera *camera);
-extern s32 VisData_TestVisibilityGridBit(void *grid, s32 x, s32 z, s32 index);
-extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
-extern void StaticInstance_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern s32 StaticInstance_UpdateDistanceFade(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern void StaticInstance_DrawDistanceFadedModel(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern void SimpleInstance_RegisterModelVariantResources(CGameSimpleInstance_t *object, GameplayCamera *camera);
-extern void func_8024EB90_de(CGameSimpleInstance_t *object);
+extern Shared_func_80234FDC_S1 *Gsky_FindScreenMessage(GameplayCamera *camera);
+extern s32 Visdata_TestVisibilityGridBit(void *grid, s32 x, s32 z, s32 index);
+extern s32 Visdata_TestBoxAgainstFrustum(void *planes, void *bounds);
+extern void Statinst_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern s32 Statinst_UpdateDistanceFade(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern void Statinst_DrawDistanceFadedModel(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern void Simpinst_RegisterModelVariantResources(CGameSimpleInstance_t *object, GameplayCamera *camera);
+extern void Simple_DrawCachedModel(CGameSimpleInstance_t *object);
 
 static __inline__ s32 SceneFindShip(TableRecAt8 *table) {
     s32 i;
@@ -452,7 +452,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         Scene_DrawCachedOpaqueGeometry(world, camera);
         return;
     }
-    player = Sky_FindScreenMessage(camera);
+    player = Gsky_FindScreenMessage(camera);
     shipModel = SceneFindShip(world->m_pusObjectTypes);
     showShip = 0;
     if (player != NULL && shipModel != -1) {
@@ -496,7 +496,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
             }
             prop->m_pmeGridSection = sector->m_pmeGridSection;
             if (D_800CD730 == 0) {
-                StaticInstance_RegisterGeometryResources(prop, camera);
+                Statinst_RegisterGeometryResources(prop, camera);
             }
             if ((prop->m_wFlags & 8) && (prop->m_pI->flags & 4)) {
                 queued = 1;
@@ -509,25 +509,25 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                 }
             }
             if (scene->m_bVisibilityValid != 0 &&
-                VisData_TestVisibilityGridBit(scene->m_VisData, sector->gridSectionX, sector->gridSectionZ, i) == 0) {
+                Visdata_TestVisibilityGridBit(scene->m_VisData, sector->gridSectionX, sector->gridSectionZ, i) == 0) {
                 continue;
             }
             if (camera->clipBounds[1].x > prop->m_Bounds.min.x && camera->clipBounds[0].x < prop->m_Bounds.max.x &&
                 camera->clipBounds[1].z > prop->m_Bounds.min.z && camera->clipBounds[0].z < prop->m_Bounds.max.z &&
                 camera->clipBounds[1].y > prop->m_Bounds.min.y && camera->clipBounds[0].y < prop->m_Bounds.max.y &&
-                VisData_TestBoxAgainstFrustum(camera->clipPlanes, &prop->m_Bounds)) {
+                Visdata_TestBoxAgainstFrustum(camera->clipPlanes, &prop->m_Bounds)) {
                 if ((prop->m_wFlags & 8) && !queued && (prop->m_nObjType != shipModel || showShip)) {
                     if (scene->m_nStaticEventsInstances != 64) {
                         scene->m_pStaticEventsInstances[scene->m_nStaticEventsInstances++] = prop;
                     }
                 }
-                if (StaticInstance_UpdateDistanceFade(prop, camera)) {
+                if (Statinst_UpdateDistanceFade(prop, camera)) {
                     if (prop->m_wFlags & 4) {
                         if (scene->m_nTransparentInstances != 64) {
                             scene->m_pTransparentInstances[scene->m_nTransparentInstances++] = prop;
                         }
                     } else {
-                        StaticInstance_DrawDistanceFadedModel(prop, camera);
+                        Statinst_DrawDistanceFadedModel(prop, camera);
                     }
                 }
                 prop->m_wFlags &= ~0x200;
@@ -541,19 +541,19 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         for (i = 0; i < staticCount; i++) {
             statics[i].m_pmeGridSection = sector->m_pmeGridSection;
             if (D_800CD730 == 0) {
-                SimpleInstance_RegisterModelVariantResources(&statics[i], camera);
+                Simpinst_RegisterModelVariantResources(&statics[i], camera);
             }
             if ((statics[i].m_pI->gate & mask) && !(statics[i].m_wFlags & 1) && (viewMask & statics[i].m_VisBits) &&
                 camera->clipBounds[1].x > statics[i].m_Bounds.min.x && camera->clipBounds[0].x < statics[i].m_Bounds.max.x &&
                 camera->clipBounds[1].z > statics[i].m_Bounds.min.z && camera->clipBounds[0].z < statics[i].m_Bounds.max.z &&
                 camera->clipBounds[1].y > statics[i].m_Bounds.min.y && camera->clipBounds[0].y < statics[i].m_Bounds.max.y &&
-                (statics[i].m_wFlags & 2) && VisData_TestBoxAgainstFrustum(camera->clipPlanes, &statics[i].m_Bounds)) {
+                (statics[i].m_wFlags & 2) && Visdata_TestBoxAgainstFrustum(camera->clipPlanes, &statics[i].m_Bounds)) {
                 if (statics[i].m_wFlags & 0x20) {
                     if (scene->m_nTransparentInstances != 64) {
                         scene->m_pTransparentInstances[scene->m_nTransparentInstances++] = &statics[i];
                     }
                 } else {
-                    func_8024EB90_de(&statics[i]);
+                    Simple_DrawCachedModel(&statics[i]);
                 }
             }
         }

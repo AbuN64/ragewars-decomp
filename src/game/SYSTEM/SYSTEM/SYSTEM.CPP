@@ -9,7 +9,7 @@
 #if !(defined(VERSION_US))
 extern OSPiHandle_s *D_800D437C;
 
-OSPiHandle_s *func_802B8F48_de(void)
+OSPiHandle_s *System_InitializeCartridgeHandle(void)
 {
     u32 domain = 0;
     u32 saveMask;
@@ -21,7 +21,7 @@ OSPiHandle_s *func_802B8F48_de(void)
 
     h->type = 0;
     h->baseAddress = 0xB0000000;
-    func_802B9B20_de(0, &domain);
+    osPiRawReadIo(0, &domain);
     h->latency = domain & 0xff;
     h->pulse = (domain >> 8) & 0xff;
     h->pageSize = (domain >> 0x10) & 0xf;
@@ -67,10 +67,10 @@ typedef struct PiManager {
     s32 (*dma)(s32, u32, void *, u32);
     s32 (*extendedDma)(OSPiHandle_s *, s32, u32, void *, u32);
 } PiManager;
-extern void func_802BB3D0_de(s32);
-extern void func_802BB850_eu(s32);
-extern s32 func_802B9730_de(OSPiHandle_s *, u32, u32);
-extern s32 func_802B9590_de(OSPiHandle_s *, u32, u32 *);
+extern void __osResetGlobalIntMask(s32);
+extern void Scene_SetGlobalInterruptMask(s32);
+extern s32 Gamecore_WritePeripheralHandleWord(OSPiHandle_s *, u32, u32);
+extern s32 osEPiRawReadIo(OSPiHandle_s *, u32, u32 *);
 extern void osYieldThread(void);
 
 /* The PI manager thread: serves DMA and 64DD disk requests from the command queue for ever. */
@@ -99,8 +99,8 @@ void System_RunPiManager(void *argument) {
                 twoBlocks = ((PiDiskTransfer *)request->handle->transferInfo.bytes)->command == 0;
             }
             osRecvMesg(manager->accessQueue, &access, 1);
-            func_802BB3D0_de(0x100401);
-            func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x80000000);
+            __osResetGlobalIntMask(0x100401);
+            Gamecore_WritePeripheralHandleWord(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x80000000);
             diskEvent:
             {
                 osRecvMesg(manager->eventQueue, &event, 1);
@@ -108,15 +108,15 @@ void System_RunPiManager(void *argument) {
                 transfer = &handle->transferInfo.transfer;
                 block = &transfer->blocks[handle->transferInfo.transfer.blockNumber];
                 if (block->error == 29) {
-                    func_802B9730_de((OSPiHandle_s *)handle, 0x05000510, handle->transferInfo.transfer.control | 0x10000000);
-                    func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control);
-                    func_802B9590_de(request->handle, 0x05000508, &status);
+                    Gamecore_WritePeripheralHandleWord((OSPiHandle_s *)handle, 0x05000510, handle->transferInfo.transfer.control | 0x10000000);
+                    Gamecore_WritePeripheralHandleWord(request->handle, 0x05000510, handle->transferInfo.transfer.control);
+                    osEPiRawReadIo(request->handle, 0x05000508, &status);
                     if (status & 0x02000000) {
-                        func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x01000000);
+                        Gamecore_WritePeripheralHandleWord(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x01000000);
                     }
                     block->error = 4;
                     *(volatile u32 *)0xA4600010 = 2;
-                    func_802BB850_eu(0x100C01);
+                    Scene_SetGlobalInterruptMask(0x100C01);
                 }
                 osSendMesg(request->replyQueue, request, 0);
                 if (twoBlocks == 1 &&

@@ -7,7 +7,7 @@ struct LocalDecodeRange {
     u32 unused;
     Func802608ECResult range;
 };
-struct Track_func_80261180_de {
+struct TrackBitarrayExpandCurveSamples {
     s32 keys;
     char pad4[0x2C - 4];
     s32 stride;

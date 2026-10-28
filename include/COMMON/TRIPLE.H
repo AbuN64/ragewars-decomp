@@ -558,7 +558,7 @@ extern int D_800CB410_de;
 extern int D_800CB414_de;
 extern int D_800CB6E0;
 extern unsigned int D_800CB710;
-extern float D_800CB8EC[];
+extern float g_audioPitchRatioCurve[];
 extern float D_800D0DA0;
 extern int D_800CBC30[];
 extern int D_800CBC40[];

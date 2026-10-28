@@ -15,7 +15,7 @@
 
 
 
-extern struct Shape_typemap_165 D_800E41C0[];
+extern struct Shape_typemap_165 g_menuPlayerScissorRects[];
 
 extern s32 D_800E28D0;
 
@@ -50,12 +50,12 @@ extern s32 Defs_TestBit(u8 *bits, s32 index);
 
 extern void Defs_SetBitValue(u8 *bits, s32 index, s32 value);
 
-extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
+extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 /* Cycles player p's choice on the screen D_800E42D0: dims the item for the current choice at 0x18
    of p's 0x4C8-byte entry (from p's 36-byte layout row D_800E42D4, cells from 0xC) to alpha 0x50
    through func_8040E928_de(0), advances the choice modulo the count byte (at least one) found at
-   0x57 plus the index func_8041F1D8_de gives for the entry's word at 0x10 in p's 400-byte record of
+   0x57 plus the index Key_GetCharacterPreviewModel gives for the entry's word at 0x10 in p's 400-byte record of
    D_80102B00, highlights the new choice's item with alpha 0x96 and stores it. Written from the
    assembly with the entries as an array member of the screen. */
 
@@ -93,7 +93,7 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
    option cells from 0x18 of p's 36-byte layout row D_800E42D4, dims the item of the current choice at 0x18 of
    p's 0x4C8-byte entry to alpha 0x50 through func_8040E928_de(0) and resets the choice to 0; unless
    the entry's kind at 0x10 is -1 it then calls func_8040E8D8_de(0) on as many of those cells as the
-   count byte (at least one) at 0x57 plus the index func_8041F1D8_de gives for the kind in p's
+   count byte (at least one) at 0x57 plus the index Key_GetCharacterPreviewModel gives for the kind in p's
    400-byte record of D_80102B00, and highlights the item of the choice with alpha 0x96. Adapted
    from Menu_CyclePlayerCharacterVariant. */
 
@@ -145,7 +145,7 @@ extern void SmXlate_SwitchScreen(int);
 extern s_CharacterData D_800E3A50[];
 
 
-extern s32 Frontend_ListHasFlag100(void *widget);
+extern s32 Widget_ListHasFlag100(void *widget);
 
 
 /* Counts how many of the four 0x4C8-byte entries D_800E42D0 points to are in state 1 or 2. */
@@ -153,7 +153,7 @@ extern s32 Frontend_ListHasFlag100(void *widget);
 
 
 
-/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in D_800E41C0 and draws that panel through Frontend_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
+/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in g_menuPlayerScissorRects and draws that panel through Frontend_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
 s32 Menu_RenderPlayerCharacterPreviews(void *arg0, void *arg1, s32 event)
 {
     s32 i;
@@ -166,7 +166,7 @@ s32 Menu_RenderPlayerCharacterPreviews(void *arg0, void *arg1, s32 event)
         for (i = 0; i < 4; i++) {
             if (D_800E42D0->players[i].unkC == 1 || D_800E42D0->players[i].unkC == 3) {
                 if (D_800E42D0->players[i].kind != -1) {
-                    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
+                    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].field_0, g_menuPlayerScissorRects[i].field_4, g_menuPlayerScissorRects[i].field_8, g_menuPlayerScissorRects[i].field_C);
                     if (D_800E42D0->players[i].unk4C0 > 0) {
                         D_800D15E4[0] = 150.0f;
                         D_800D15E4[1] = 0.0f;
@@ -229,10 +229,10 @@ void Menu_RefreshCharacterUnlocks(void) {
     }
     for (i = 0; i < 17; i++) {
         widget = Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E3A50[i].id);
-        Frontend_SetWidgetFlag100(widget, 0);
+        Widget_SetWidgetFlag100(widget, 0);
         if (!Defs_TestBit(bits, i)) {
             if (widget) {
-                Frontend_SetWidgetFlag100(widget, 1);
+                Widget_SetWidgetFlag100(widget, 1);
                 Frontend_SetWidgetFlag08(widget, 0);
             }
         } else if (D_801462C8->trialKind == 1 && Defs_TestBit(D_800FEB54, D_800E3A54[i][0]) == 1) {
@@ -250,15 +250,15 @@ void Menu_CyclePlayerCharacterVariant(s32 player) {
 
     choice = D_800E42D0->players[player].choice;
     item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
-    Frontend_SetWidgetFlag40(item, 0);
+    Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
-    count = D_800FEB57[player][func_8041F1D8_de(D_800E42D0->players[player].kind)];
+    count = D_800FEB57[player][Key_GetCharacterPreviewModel(D_800E42D0->players[player].kind)];
     if (count <= 0) {
         count = 1;
     }
     choice = (choice + 1) % count;
     item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
-    Frontend_SetWidgetFlag40(item, 1);
+    Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
     D_800E42D0->players[player].choice = choice;
 }
@@ -287,13 +287,13 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     }
     item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
-    Frontend_SetWidgetFlag40(item, 0);
+    Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
     D_800E42D0->players[player].choice = 0;
     if (D_800E42D0->players[player].kind == -1) {
         return;
     }
-    count = D_800FEB57[player][func_8041F1D8_de(D_800E42D0->players[player].kind)];
+    count = D_800FEB57[player][Key_GetCharacterPreviewModel(D_800E42D0->players[player].kind)];
     if (count <= 0) {
         count = 1;
     }
@@ -302,7 +302,7 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     }
     item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
-    Frontend_SetWidgetFlag40(item, 1);
+    Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
 }
 
@@ -320,7 +320,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
     }
     D_800E42D0->players[player].kind = choice;
-    func_8041F18C_de(choice);
+    Key_FindCharacterPreviewRow(choice);
     Frontend_SetPreviewTransformUpdate(D_800E42D0->players[player].model, 0);
 
     count = 0;
@@ -340,7 +340,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
             slot[i].m_IsBot = 0;
             slot[i].active = 1;
             slot[i].m_nController = i;
-            kind = func_8041F1D8_de(D_800E42D0->players[i].kind);
+            kind = Key_GetCharacterPreviewModel(D_800E42D0->players[i].kind);
             slot[i].m_nCharacter = kind;
             if (D_801462C8->trialKind == 1) {
                 D_800FEB0F[i * 0x190] = kind;
@@ -363,7 +363,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     done = 0;
     do {
         id = D_800E3A50[GraphU64_NextRandom() % 17].id;
-        if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
+        if (Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
 #if defined(VERSION_DE)
@@ -377,8 +377,8 @@ void Menu_RandomizeCharacterPreview(s32 player) {
         }
     } while (!done);
     D_800E42D0->players[player].kind = id;
-    kind = func_8041F1D8_de(id);
-    index = func_8041F18C_de(D_800E42D0->players[player].kind);
+    kind = Key_GetCharacterPreviewModel(id);
+    index = Key_FindCharacterPreviewRow(D_800E42D0->players[player].kind);
     {
         CVector3 scale;
         scale.x = D_800E3A50[index].scale[player];

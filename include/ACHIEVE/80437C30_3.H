@@ -5,5 +5,5 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
-extern void func_80438A88_de();
+extern void CPlayerPreview_ResetSelectionMessageState();
 #endif

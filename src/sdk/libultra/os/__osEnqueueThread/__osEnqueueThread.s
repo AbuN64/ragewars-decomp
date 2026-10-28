@@ -17,14 +17,14 @@ func_802BBF08_eu:
 .globl func_802BBF48_eu_x
 func_802BBF48_eu_x:
     sw $v0, 0x0($s0)
-    jal func_802BCC90_de
+    jal Audio_AbortDiskTransfer
     lui $k0, %hi(D_002BBF60_eu_x)
     addiu $k0, $k0, %lo(D_002BBF60_eu_x)
 .elseif VERSION_US_REV1
 .globl func_802C0D58_us_rev1
 func_802C0D58_us_rev1:
     sw $v0, 0x0($s0)
-    jal func_802BCC90_de
+    jal Audio_AbortDiskTransfer
     lui $k0, %hi(D_002C0D70_us_rev1)
     addiu $k0, $k0, %lo(D_002C0D70_us_rev1)
 .elseif VERSION_US

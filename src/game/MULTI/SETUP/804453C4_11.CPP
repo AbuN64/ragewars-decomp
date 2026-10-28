@@ -24,9 +24,9 @@ extern TextEntryRecAtC D_800E63C0[];
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void Pak_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_CopyDefaultLocalizedPlayerName(void *);
+extern void Menu_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_CopyDefaultLocalizedPlayerName(void *);
 #else
-extern void Pak_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
+extern void Menu_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
 #endif
 
 extern s32 Player_GetPlayerIndex(void *table, void *player);
@@ -36,7 +36,7 @@ extern u8 D_80145040[];
 
 
 
-s32 Multi_DeleteNameCharacter(s32 unused, EntryRecAt1C *arg1) {
+s32 Setup_DeleteNameCharacter(s32 unused, EntryRecAt1C *arg1) {
     s32 i;
     s32 count;
 
@@ -52,7 +52,7 @@ s32 Multi_DeleteNameCharacter(s32 unused, EntryRecAt1C *arg1) {
     return 0;
 }
 
-s32 Multi_CommitPlayerName(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
+s32 Setup_CommitPlayerName(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
     s32 temp_v0;
     s32 var_a0;
     s32 var_a1;
@@ -89,11 +89,11 @@ Items_SetDefaultPlayerName
 #endif
 (temp_s1->unk5D8);
     }
-    Pak_TryCreateMenu(arg0, arg1, arg2);
+    Menu_TryCreateMenu(arg0, arg1, arg2);
     return 1;
 }
 
-s32 Multi_HasActiveGameCounters(void) {
+s32 Setup_HasActiveGameCounters(void) {
     CGameStatus *s = &D_801462C8.counters;
     s32 ret;
 

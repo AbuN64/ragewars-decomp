@@ -187,13 +187,13 @@ void Vector3Normalize(f32 *vector) {
 
 void Vector3RotatePitch(CVector3 *destination, CVector3 *source, f32 arg2) {
     CVector3 tmp;
-    f32 sp20;
-    f32 sp24;
+    f32 sinOut;
+    f32 cosOut;
 
-    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg2, &sinOut, &cosOut);
     tmp.x = source->x;
-    tmp.y = (sp24 * source->y) - (sp20 * source->z);
-    tmp.z = (sp24 * source->z) + (sp20 * source->y);
+    tmp.y = (cosOut * source->y) - (sinOut * source->z);
+    tmp.z = (cosOut * source->z) + (sinOut * source->y);
     *destination = tmp;
 }
 

@@ -17,7 +17,7 @@ extern void osStartThread(s32 arg0);
 
 extern OSThread_s *D_800D5270;
 
-s32 func_802BB160_de(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
+s32 osJamMesg(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
     u32 saved;
     s32 index;
 

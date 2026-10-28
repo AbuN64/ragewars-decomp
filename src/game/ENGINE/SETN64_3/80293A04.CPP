@@ -10,13 +10,13 @@
 #include "COMMON/ROUND_STATE_VARIANTS.H"
 #include "SCENE/80286050.H"
 
-/* Requests a switch of the session into mode 0x14: when the pending 0x1000 flag is set outside modes 0xB and 0xC and a target is given it records that target with phase 2 and clears the flags; otherwise, once func_80245814_de accepts the flags, it saves the current mode, enters mode 0x14 with the given argument at phase 1, and sets the timer when func_80264B6C_de allows. */
+/* Requests a switch of the session into mode 0x14: when the pending 0x1000 flag is set outside modes 0xB and 0xC and a target is given it records that target with phase 2 and clears the flags; otherwise, once Cinema_IsSequenceIdle accepts the flags, it saves the current mode, enters mode 0x14 with the given argument at phase 1, and sets the timer when func_80264B6C_de allows. */
 
 
 
-extern s32 func_80245814_de(s32 *flags);
+extern s32 Cinema_IsSequenceIdle(s32 *flags);
 
-void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 target) {
+void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget, s32 target) {
     s32 pending;
     s32 *flags;
 
@@ -31,13 +31,13 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 tar
         *flags = 0;
         return;
     }
-    if (func_80245814_de(flags) != 0) {
+    if (Cinema_IsSequenceIdle(flags) != 0) {
         s32 mode = session->mode;
 
         session->phase = 1;
         session->timer = 0;
         session->mode = 0x14;
-        session->target = arg1;
+        session->target = cancelTarget;
         session->previousMode = mode;
         if (Control_IsSnapshotActive() != 0) {
             session->timer = (1.0f);
@@ -52,7 +52,7 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 tar
 
 extern void SmXlate_SwitchScreen(s32 arg0);
 extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
-extern void func_802394B4_de(void *arg0);
+extern void Gsky_DrawPlayerListNoOp(void *arg0);
 extern void SetN64_DrawSessionFade(struct GameSession *arg0);
 
 
@@ -96,12 +96,12 @@ InitFrontendMenus
         }
     }
     Scene_UpdateAndDrawWorld(&state->world);
-    func_802394B4_de(state->players);
+    Gsky_DrawPlayerListNoOp(state->players);
     OnScreen_DrawStatusBars(&state->hud);
     /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to SetN64_DrawSessionFade, two
        instructions shorter, as each cartridge's own bytes show. */
 #ifdef VERSION_US_REV1
-    TEngine_UpdateArtsendTexturePreview();
+    Tengine_UpdateArtsendTexturePreview();
 #endif
     SetN64_DrawSessionFade(state);
 }
@@ -142,7 +142,7 @@ void SetN64_AdvanceGameClock(GameSession *world) {
 
 #include "COMMON/SESSIONHANDLERROW.H"
 extern f32 D_800C54B8_de, D_800C54BC_de;
-extern void func_802394B4_de(void *);
+extern void Gsky_DrawPlayerListNoOp(void *);
 extern void SmXlate_SwitchScreen(s32);
 extern void SetN64_BeginModeTransition(GameSession *, s32);
 extern void SetN64_DrawSessionFade(GameSession *);
@@ -170,10 +170,10 @@ void SetN64_DrawSessionWithRoundTimeout(GameSession *session) {
         }
     }
     Scene_UpdateAndDrawWorld(&session->world);
-    func_802394B4_de(session->players);
+    Gsky_DrawPlayerListNoOp(session->players);
     OnScreen_DrawStatusBars(&session->hud);
 #ifdef VERSION_US_REV1
-    TEngine_UpdateArtsendTexturePreview();
+    Tengine_UpdateArtsendTexturePreview();
 #endif
     SetN64_DrawSessionFade(session);
 }

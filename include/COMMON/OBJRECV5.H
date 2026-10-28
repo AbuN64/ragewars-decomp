@@ -617,11 +617,11 @@ extern f32 D_800C2BB8_de;
 extern f32 D_800C2BBC_de;
 extern s32 D_800C91B8_de;
 
-extern void func_8024B4F4_de(void *arg0, s32 arg1);
+extern void Gobjinst_UpdateModelBounds(void *arg0, s32 arg1);
 
 extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
 
 extern void func_8022BC94_de(void *arg0, s32 arg1);
-extern s32 func_8024B7E4_de(void *arg0, s32 arg1);
+extern s32 Gobjinst_BuildAnimatedPose(void *arg0, s32 arg1);
 struct WeaponMenuView;
 #endif

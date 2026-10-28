@@ -19,7 +19,7 @@
 extern CVector3 D_800C46C0_de[2];
 
 
-extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 
@@ -29,7 +29,7 @@ extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 
-/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner D_800C99F8. Adapted from GraphU64_CopySwappedMatrixBasis with the row swap replaced by a column swap and the corner taken from D_800C99F8. */
+/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner D_800C99F8. Adapted from Graphu64_CopySwappedMatrixBasis with the row swap replaced by a column swap and the corner taken from D_800C99F8. */
 
 
 
@@ -56,7 +56,7 @@ void CopyMatrix(float *destinationMatrix, float *sourceMatrix) {
     destinationMatrix[15] = sourceMatrix[15];
 }
 
-void GraphU64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
+void Graphu64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
     char *a0;
     char *a2;
     char *v1;
@@ -145,9 +145,9 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
         m->right.z = 0;
         m->right.x = D_800C48EC_de;
     } else {
-        GraphU64_CrossVectors(&m->right, &up, direction);
+        Graphu64_CrossVectors(&m->right, &up, direction);
     }
-    GraphU64_CrossVectors(&m->up, &m->right, direction);
+    Graphu64_CrossVectors(&m->up, &m->right, direction);
     m->forward = *direction;
     GraphU64_NormalizeVec3(&m->right);
     GraphU64_NormalizeVec3(&m->up);
@@ -164,7 +164,7 @@ void GraphU64_GetMatrixTranslation(char *object, float *output) {
     output[2] = matrix->m[14];
 }
 
-void GraphU64_GetMatrixScale(void *matrix, f32 *arg1) {
+void Graphu64_GetMatrixScale(void *matrix, f32 *arg1) {
     Matrix *m = matrix;
     CVector3 tmp;
 
@@ -215,7 +215,7 @@ void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz) {
     o->m[10] = o->m[10] * sz;
 }
 
-void GraphU64_CopyScaledMatrix(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
+void Graphu64_CopyScaledMatrix(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
     arg0[0] = arg1[0] * sx;
     arg0[1] = arg1[1] * sx;
     arg0[2] = arg1[2] * sx;
@@ -509,7 +509,7 @@ void SwapMatrixUpForward(struct Mtx *object) {
     object->forward.z = t;
 }
 
-void GraphU64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
+void Graphu64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
     dst[0] = src[0];
     dst[1] = src[1];
     dst[2] = src[2];
@@ -527,7 +527,7 @@ void GraphU64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
 }
 
 /** Swap the two floats within each of the object's four 0x10-byte records. */
-void GraphU64_SwapMatrixCoordinates(struct Mtx *object) {
+void Graphu64_SwapMatrixCoordinates(struct Mtx *object) {
     float t;
     t = object->right.y;
     object->right.y = object->right.z;
@@ -546,7 +546,7 @@ void GraphU64_SwapMatrixCoordinates(struct Mtx *object) {
     object->m32 = t;
 }
 
-void GraphU64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src) {
+void Graphu64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src) {
     dst[0] = src[0];
     dst[1] = src[2];
     dst[2] = src[1];
@@ -563,12 +563,12 @@ void GraphU64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src) {
     dst[15] = D_800C99F8[0];
 }
 
-f32 GraphU64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
+f32 Graphu64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
     f32 var_f3;
     f32 result;
 
-    GraphU64_WrapPeriodicValue(&first);
-    GraphU64_WrapPeriodicValue(&second);
+    Graphu64_WrapPeriodicValue(&first);
+    Graphu64_WrapPeriodicValue(&second);
     if (first > second) {
         var_f3 = second + D_800C99F8[1];
         if ((var_f3 - first) < (first - second)) {
@@ -581,15 +581,15 @@ f32 GraphU64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
         }
     }
     result = first + (fraction * (second - first));
-    GraphU64_WrapPeriodicValue(&result);
+    Graphu64_WrapPeriodicValue(&result);
     return result;
 }
 
-f32 GraphU64_GetWrappedDifference(f32 arg0, f32 arg1) {
+f32 Graphu64_GetWrappedDifference(f32 arg0, f32 arg1) {
     f32 var_f3;
 
-    GraphU64_WrapPeriodicValue(&arg0);
-    GraphU64_WrapPeriodicValue(&arg1);
+    Graphu64_WrapPeriodicValue(&arg0);
+    Graphu64_WrapPeriodicValue(&arg1);
     if (arg0 > arg1) {
         var_f3 = arg1 + D_800C4914_de;
         if ((var_f3 - arg0) < (arg0 - arg1)) {
@@ -604,7 +604,7 @@ f32 GraphU64_GetWrappedDifference(f32 arg0, f32 arg1) {
     return arg0 - arg1;
 }
 
-void GraphU64_WrapPeriodicValue(f32 *value)
+void Graphu64_WrapPeriodicValue(f32 *value)
 {
     {
         f32 val;
@@ -653,7 +653,7 @@ void MultiplyQuaternions(void *productQuaternion, void *leftQuaternion, void *ri
              - (b[2] * a[2]) + (b[3] * a[3]);
 }
 
-void GraphU64_NormalizeQuaternion(f32 *rotation) {
+void Graphu64_NormalizeQuaternion(f32 *rotation) {
     f32 mag;
     f32 scale;
 
@@ -715,7 +715,7 @@ void MatrixFromQuaternion(f32 *q, f32 *m)
 }
 
 /** Lerp a 4-component vector: out = a + t * (b - a). */
-void GraphU64_InterpolateQuaternionComponents(void *cQuatern, f32 t, void *a, void *b) {
+void Graphu64_InterpolateQuaternionComponents(void *cQuatern, f32 t, void *a, void *b) {
     CQuatern *out = cQuatern;
     CQuatern *left = a;
     CQuatern *right = b;
@@ -726,7 +726,7 @@ void GraphU64_InterpolateQuaternionComponents(void *cQuatern, f32 t, void *a, vo
     out->w = left->w + (t * (right->w - left->w));
 }
 
-void GraphU64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
+void Graphu64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
     CQuatern result;
     f32 angle;
     f32 blend;

@@ -252,7 +252,7 @@ void OnScreen_DrawBevelBox(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32
     rectangle(x0,y0,x0+border,y1,darkR,darkG,darkB,a);
 }
 
-void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s32 rightAlign, s32 minDigits) {
+void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 scaled, s32 rightAlign, s32 minDigits) {
     s32 sprites;
     s32 negative;
     s32 thousands;
@@ -296,7 +296,7 @@ void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s3
         last = minDigits - 1;
     }
     if (negative) {
-        OnScreen_DrawSpriteResource(4, 10, x, y, size, scaleY, arg5);
+        OnScreen_DrawSpriteResource(4, 10, x, y, size, scaleY, scaled);
         x += size * 13.0f;
     }
     for (i = last; i >= 0; i--) {
@@ -328,7 +328,7 @@ void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s3
             x -= width;
         }
         if ((u32)digit < 10) {
-            Text_DrawTileGrid(sprites, digit, x, y, size, scaleY, arg5);
+            Text_DrawTileGrid(sprites, digit, x, y, size, scaleY, scaled);
         }
         if (!rightAlign) {
             x += width;

@@ -7,13 +7,13 @@
 /** Returns D_800D8440. */
 extern void *D_800D8440;
 
-void *func_802BA640_de(void) {
+void *System_GetCurrentVideoContext(void) {
     return D_800D8440;
 }
 
 extern void *D_800D4414;
 
-void func_802BA650_de(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
+void System_SetVideoEvent(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
     u32 savedInterruptMask;
     RecCode802BA23C *rec;
 

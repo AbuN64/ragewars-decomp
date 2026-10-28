@@ -9,7 +9,7 @@ extern void func_80219460_de(void *definition);
 /* Initialises the pool of 32 effect slots in a world record: threads them into a free list (slot 0 has no
  * predecessor, slot 31 no successor), empties the live list, sets up the two shared effect definitions
  * and points every slot at the default definition through SetN64_InitializeEffectSlot. */
-void Ovlgame_InitEffectPool(WorldRecAt3C08 *world) {
+void Effect_InitEffectPool(WorldRecAt3C08 *world) {
     s32 i;
 
     world->free = world->slots;

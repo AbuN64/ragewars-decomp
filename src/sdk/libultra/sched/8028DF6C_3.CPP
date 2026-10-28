@@ -73,7 +73,7 @@ event_29a:
             }
             osViSetMode(resource);
             osViBlack(1);
-            func_802BA700_de(2);
+            osViSetSpecialFeatures(2);
             for (;;) {
             }
         }

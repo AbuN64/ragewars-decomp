@@ -8,13 +8,13 @@
 #include "sdk/lib_802BB630/802BBC50.H"
 #include "COMMON/EXTERNS_2.H"
 
-void func_802B6CBC_de(f32 *arg0, s32 *arg1);
+void guMtxF2L(f32 *arg0, s32 *arg1);
 void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];
     f32 (*matrixPointer)[4] = matrix;
     f32 x, y, z, rx, ry, rz, vx, vy, vz, scale, one;
-    func_802B6C6C_de(matrixPointer);
+    guMtxIdentF(matrixPointer);
     x = ax - ex; y = ay - ey; z = az - ez;
     scale = D_800C7870_de / Math_Sqrtf((x*x + y*y) + z*z);
     x *= scale; z *= scale; y *= scale;
@@ -37,7 +37,7 @@ void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux,
     matrix[3][1] = -((ex*vx + ey*vy) + ez*vz);
     matrix[3][2] = -((ex*x + ey*y) + ez*z);
     matrix[3][3] = one;
-    func_802B6CBC_de(matrixPointer, out);
+    guMtxF2L(matrixPointer, out);
 }
 
 
@@ -47,7 +47,7 @@ void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
     f32 lookX, lookY, lookZ;
     f32 rightX, rightY, rightZ;
     f32 scale, one;
-    func_802B6C6C_de(matrix);
+    guMtxIdentF(matrix);
     lookX = atX - eyeX;
     lookY = atY - eyeY;
     lookZ = atZ - eyeZ;

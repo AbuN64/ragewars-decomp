@@ -12,9 +12,9 @@ extern f32 *Cache_AllocateMemory(s32 size);
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern void Menu_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out);
+extern void Track_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out);
 
-void Menu_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out) {
+void Track_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out) {
     f32 *diagonal;
     f32 *rhs;
     f32 *width;
@@ -63,7 +63,7 @@ void Menu_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out) {
     Cache_FreeMemory(width);
 }
 
-void Menu_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline *spline) {
+void Track_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline *spline) {
     CVector3 delta;
     f32 *ys;
     f32 *xs;
@@ -108,7 +108,7 @@ void Menu_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline 
         ys[i] = nodes[i].p.x;
         xs[i] = nodes[i].s;
     }
-    Menu_SolveSplineSecondDerivatives(count, ys, xs, d2);
+    Track_SolveSplineSecondDerivatives(count, ys, xs, d2);
     for (i = 0; i < count; i++) {
         nodes[i].d2p.x = d2[i];
     }
@@ -116,7 +116,7 @@ void Menu_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline 
         ys[i] = nodes[i].p.y;
         xs[i] = nodes[i].s;
     }
-    Menu_SolveSplineSecondDerivatives(count, ys, xs, d2);
+    Track_SolveSplineSecondDerivatives(count, ys, xs, d2);
     for (i = 0; i < count; i++) {
         nodes[i].d2p.y = d2[i];
     }
@@ -124,7 +124,7 @@ void Menu_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline 
         ys[i] = nodes[i].p.z;
         xs[i] = nodes[i].s;
     }
-    Menu_SolveSplineSecondDerivatives(count, ys, xs, d2);
+    Track_SolveSplineSecondDerivatives(count, ys, xs, d2);
     for (i = 0; i < count; i++) {
         nodes[i].d2p.z = d2[i];
     }
@@ -132,7 +132,7 @@ void Menu_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline 
         ys[i] = nodes[i].s;
         xs[i] = nodes[i].w;
     }
-    Menu_SolveSplineSecondDerivatives(count, ys, xs, d2);
+    Track_SolveSplineSecondDerivatives(count, ys, xs, d2);
     for (i = 0; i < count; i++) {
         nodes[i].d2s = d2[i];
     }

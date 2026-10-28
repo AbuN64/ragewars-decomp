@@ -13,11 +13,11 @@
 #include "ANIM/8023DF60_4.H"
 
 /* Tests a ray against a polygon with a radius: intersects the ray from 0x44 to 0x50 with the polygon's plane
- * through func_802412D0_de and accepts a parameter nearer than the ray's nearest hit, also allowing a slightly
+ * through CCollision_IntersectFrontPlaneFraction and accepts a parameter nearer than the ray's nearest hit, also allowing a slightly
  * negative one (above -D_800D0648 * D_800C87C0[1] scaled by the ray's 0x80 factor) except for kind 7 and
- * types 5 and 6; the hit point is then placed with GraphU64_InterpolateVector and tested against the polygon with the
- * given point and radius through func_80241614_de. On a hit the polygon record is optionally kept as the ray's
- * nearest hit. Adapted from func_8023E8D4_de with the radius test and the slack constant. */
+ * types 5 and 6; the hit point is then placed with Graphu64_InterpolateVector and tested against the polygon with the
+ * given point and radius through CCollision_IsPointInsideDisk. On a hit the polygon record is optionally kept as the ray's
+ * nearest hit. Adapted from CCollision_TestSegmentPolygon with the radius test and the slack constant. */
 
 
 
@@ -27,13 +27,13 @@
 
 
 
-extern s32 func_802412D0_de(Polygon_func_8023E8D4_de *, CVector3 *, CVector3 *, f32 *);
+extern s32 CCollision_IntersectFrontPlaneFraction(PolygonCCollisionTestSegmentPolygon *, CVector3 *, CVector3 *, f32 *);
 
-extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-extern s32 func_80241614_de(Polygon_func_8023E8D4_de *, CVector3 *, f32, CVector3 *);
+extern s32 CCollision_IsPointInsideDisk(PolygonCCollisionTestSegmentPolygon *, CVector3 *, f32, CVector3 *);
 
-static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly) {
+static inline s32 accepts(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon *poly) {
     if (poly->t <= 0.0f) {
         if (poly->kind == 7) {
             return 0;
@@ -55,15 +55,15 @@ extern World *D_80103FCC;
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
-s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, CVector3 *point, f32 radius, s32 keep) {
-    if (func_802412D0_de(poly, &ray->start, &ray->end, &poly->t) == 0) {
+s32 CCollision_TestSegmentDisk(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon *poly, CVector3 *point, f32 radius, s32 keep) {
+    if (CCollision_IntersectFrontPlaneFraction(poly, &ray->start, &ray->end, &poly->t) == 0) {
         return 0;
     }
     if (accepts(ray, poly) == 0) {
         return 0;
     }
-    GraphU64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
-    if (func_80241614_de(poly, point, radius, &poly->hit) == 0) {
+    Graphu64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
+    if (CCollision_IsPointInsideDisk(poly, point, radius, &poly->hit) == 0) {
         return 0;
     }
     if (keep != 0) {
@@ -72,12 +72,12 @@ s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, CVector3
     return 1;
 }
 
-void func_8023EBD4_de(void)
+void CCollision_ClearResultFlags(void)
 {
   D_80103FCC->unk100 = (D_80103FCC->state = (D_80103FCC->unkC4 = (D_80103FCC->unkB0 = (D_80103FCC->unk9C = (D_80103FCC->unk88 = (D_80103FCC->unk0 = 0))))));
 }
 
-void func_8023EBFC_de(ActorMotion *motion, MotionContactResult *contact) {
+void CCollision_UpdateSurfaceResponseFlags(ActorMotion *motion, MotionContactResult *contact) {
     s32 contactFlags;
     s32 clearedFlags;
 
@@ -97,7 +97,7 @@ void func_8023EBFC_de(ActorMotion *motion, MotionContactResult *contact) {
     }
 }
 
-void func_8023EC54_de(ActorMotion *motion, MotionContactResult *contact) {
+void CCollision_UpdateMaterialFlags(ActorMotion *motion, MotionContactResult *contact) {
     s32 material;
     s32 currentMotionFlags;
     s32 flags;
@@ -123,7 +123,7 @@ void func_8023EC54_de(ActorMotion *motion, MotionContactResult *contact) {
     }
 }
 
-void func_8023ECBC_de(void *motionStorage, u16 *surfaceKey)
+void CCollision_UpdateModelSurfaceFlags(void *motionStorage, u16 *surfaceKey)
 {
   char *o = (char *) motionStorage;
   s32 initialMotionFlags;
@@ -157,7 +157,7 @@ void func_8023ECBC_de(void *motionStorage, u16 *surfaceKey)
   }
 }
 
-s32 func_8023ED64_de(BoxContactRay *ray, BoxContactPolygon *polygon) {
+s32 CCollision_IsNearerContact(BoxContactRay *ray, BoxContactPolygon *polygon) {
     f32 hitT;
     s32 isNearer;
 

@@ -37,7 +37,7 @@ static inline s32 resultsRes(s32 id) {
 #include "RENDER_2/8025DE50_5.H"
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
-void Frontend_SelectSuggestedTrial(void);
+void Results_SelectSuggestedTrial(void);
 void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
 
@@ -53,7 +53,7 @@ extern struct GameOptions D_801462D0;
 /* Builds the results options screen into D_800E4690: slides its two side panels in over four frames,
    finds the first active player, clears the pending flags of the eight status records, and runs the
    per-mode setup selected by the option byte. Returns zero. */
-s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
+s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
     ResultsOptionsScreen *screen;
     s32 i;
     s32 d;
@@ -107,10 +107,10 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
             ((struct Status *)g_playerSettings)[i].pendingClear = 0;
         }
     }
-    Frontend_LoadTrialCompletionFlags();
-    Frontend_SelectSuggestedTrial();
+    Results_LoadTrialCompletionFlags();
+    Results_SelectSuggestedTrial();
     D_800E4690->window = Frontend_FindWidgetByResourceId(arg0, (u16)D_800E4694[D_800E4690->selection].id);
-    Frontend_RefreshTrialSelectionLabel();
+    Results_RefreshTrialSelectionLabel();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     Frontend_InitMenuImage((s32 *)D_800E4690, 0x67, 0, 0, 0);
@@ -122,7 +122,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     if (mode < 5) {
         if (mode >= 3) {
             D_800E4690->modeFlag = 1;
-            Frontend_RefreshTrialCharacterPreview(D_800E4690);
+            Results_RefreshTrialCharacterPreview(D_800E4690);
         }
     }
     D_800E4690->blinking = 0;
@@ -142,17 +142,17 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     switch (D_801462D0.mode) {
     case 1:
-        Frontend_FillProfileWeaponRows();
+        Results_FillProfileWeaponRows();
         break;
     case 3:
-        Frontend_FillSelectedPlayerWeaponRows();
+        Results_FillSelectedPlayerWeaponRows();
         break;
     case 2:
-        Frontend_FillTwoPlayerWeaponRows();
+        Results_FillTwoPlayerWeaponRows();
         break;
     }
     if (D_801462D0.mode != 2) {
-        Frontend_UpdateResultsHeading();
+        Results_UpdateResultsHeading();
     }
     SoundElement_PlayFlatSound(0xE78);
     return 0;
@@ -177,7 +177,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
 
 
 
-s32 Frontend_ShowResultsPlayerModels(void) {
+s32 Results_ShowResultsPlayerModels(void) {
     s32 shown;
     s32 layout;
     s32 view;
@@ -199,7 +199,7 @@ next:
     status = (struct Status *)((char *)g_playerSettings + offset);
     if (status->active == 1) {
         shown++;
-        row = Frontend_FindKeyIndex(status->kind);
+        row = Key_FindKeyIndex(status->kind);
         scale.x = D_800E3A58[row].scale[layout];
         scale.y = D_800E3A58[row].scale[layout];
         scale.z = D_800E3A58[row].scale[layout];

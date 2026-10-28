@@ -25,7 +25,7 @@
 /* 80213ED4_19.CPP */
 void Barrel_AddActorYaw(void *arg0, f32 arg1) {
     (((struct func_80203908_S4 *) ((s8 *) arg0))->unk6C) = (f32) ((((struct func_80203908_S4 *) ((s8 *) arg0))->unk6C) + arg1);
-    ((s32 (*)(void *))GraphU64_WrapPeriodicValue)(arg0 + 0x6C);
+    ((s32 (*)(void *))Graphu64_WrapPeriodicValue)(arg0 + 0x6C);
 }
 
 /* 80213ED4_20.CPP */
@@ -41,7 +41,7 @@ void Barrel_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFl
     if (entry[0] != 0) {
         do {
             if ((primaryEffectMask & entry[0]) != 0) {
-                InstHdr_PlayActorGraphSound(actor,
+                Insthdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
                               GraphU64_RandomBetween(D_800C21D8_de, D_800C21DC_de));
@@ -54,7 +54,7 @@ void Barrel_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFl
     if (entry[0] != 0) {
         do {
             if ((secondaryEffectMask & entry[0]) != 0) {
-                InstHdr_PlayActorGraphSound(actor,
+                Insthdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
                               GraphU64_RandomBetween(D_800C21E0_de, D_800C21E4_de));
@@ -230,7 +230,7 @@ void Barrel_SpawnEffectsFromMask(Player *arg0, s32 unused1, s32 arg2, s32 *entry
     if (entry[0] != 0) {
         do {
             if ((arg2 & entry[0]) != 0) {
-                InstHdr_PlayActorGraphSound(arg0,
+                Insthdr_PlayActorGraphSound(arg0,
                               arg0->pos,
                               entry[1],
                               GraphU64_RandomBetween(D_800C21EC_de, D_800C21F0_de));

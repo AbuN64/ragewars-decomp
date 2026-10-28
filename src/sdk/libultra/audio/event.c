@@ -107,8 +107,8 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
 
 void alEvtqFlush(void *arg0) {
     ALEventQueue *queue = arg0;
-    Node_func_80239AF4_de *cur;
-    Node_func_80239AF4_de *next;
+    NodeGskyActivateMessagePool *cur;
+    NodeGskyActivateMessagePool *next;
     s32 saved;
 
     saved = func_802BD170_de(1);

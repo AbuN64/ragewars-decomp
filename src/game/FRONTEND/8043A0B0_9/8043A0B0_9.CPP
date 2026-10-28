@@ -30,12 +30,12 @@ s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 arg2) {
         for (i = 0; i < 6; i++) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
         }
-        Frontend_FindKeyIndex(D_801462C8.playerSettings[player].character);
+        Key_FindKeyIndex(D_801462C8.playerSettings[player].character);
         settings = (u8 *)D_800E59E0 + (player * sizeof(struct Entry42) + 8);
         { void *panel = settings; settings = (u8 *)g_playerSettings; Frontend_SetPreviewTransformUpdate(panel, 0); }
         if (Frontend_CountActiveEquipmentPanels() != 0) return 0;
         {
-            Frontend_ApplySelectedPlayerLoadouts();
+            Equip_ApplySelectedPlayerLoadouts();
             screen = D_800E59E0;
             screen->state = 5;
             screen->next = 4;

@@ -5,7 +5,7 @@ unsigned int D_blob_e67cb8f9f48e076798ff[1] = {
     0x800D7374,
 };
 
-unsigned int D_auto_src_rw_menu_player_scissor_rects_us_rev1[16] = {
+unsigned int g_menuPlayerScissorRects[16] = {
     0x00000012, 0x0000000F, 0x00000034, 0x0000005E, 0x000000E8, 0x0000000F, 0x0000010B, 0x0000005E,
     0x00000012, 0x00000080, 0x00000034, 0x000000CE, 0x000000E8, 0x00000080, 0x0000010B, 0x000000CE,
 };

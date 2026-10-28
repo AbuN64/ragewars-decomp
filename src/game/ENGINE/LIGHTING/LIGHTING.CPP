@@ -23,7 +23,7 @@
 
 extern void GraphU64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
-extern void GraphU64_ProjectPoint(void *, void *, void *);
+extern void Graphu64_ProjectPoint(void *, void *, void *);
 extern void GraphU64_ScaleMatrixWorld(void *, f32, f32, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void GraphU64_InvertAffineMatrix(void *, void *);
@@ -61,7 +61,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         GraphU64_IdentityMatrix(matrix);
         RollMatrix(matrix, tilt.x);
         YawMatrix(matrix, tilt.y);
-        GraphU64_ProjectPoint(matrix, &up, self + 0x14);
+        Graphu64_ProjectPoint(matrix, &up, self + 0x14);
         rotation.x = 0;
         rotation.y = 0;
         rotation.z = 0;
@@ -121,7 +121,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         probe.x = x;
         probe.y = y;
         probe.z = z;
-        GraphU64_ProjectPoint(self + 0x60, &probe, &corners[i]);
+        Graphu64_ProjectPoint(self + 0x60, &probe, &corners[i]);
     }
     Region_ComputePointBounds(self + 0xA0, 8, corners);
 }
@@ -540,12 +540,12 @@ s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
 /* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
    (six floats at record offset 0xA0) intersects the given bounds, and which either have no
    byte set at record offset 0xBD, are paired with arg4, or list the key that
-   StaticInstance_FindPlacedPropIndex(arg4, arg1) finds inside the id list at slot arg1-table index of the list
+   Statinst_FindPlacedPropIndex(arg4, arg1) finds inside the id list at slot arg1-table index of the list
    table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
    reports their number through arg3, and returns 1 when any accepted record has its byte at
    record offset 0xBA set. With no table (arg1 null) it defers to Lighting_QueryWorldLightVolumes. */
 
-extern s32 StaticInstance_FindPlacedPropIndex(void *wanted, void *table);
+extern s32 Statinst_FindPlacedPropIndex(void *wanted, void *table);
 
 typedef struct IdList {
     u16 count;
@@ -591,7 +591,7 @@ s32 Lighting_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *cou
                         ids = (s16 *)list;
                         len = list->count;
                         ids++;
-                        key = StaticInstance_FindPlacedPropIndex(wanted, table);
+                        key = Statinst_FindPlacedPropIndex(wanted, table);
                         for (n = 0; n < len; n++) {
                             id = *ids;
                             if (id >= 0x1770) {

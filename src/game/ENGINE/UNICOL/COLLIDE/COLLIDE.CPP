@@ -18,11 +18,11 @@ extern CCollisionSetup_t D_0044A850[];
 
 void func_8023EE00_de(void) {
     D_80103FCC = D_801041F0;
-    func_8023EE60_de(D_0044A850);
+    CCollision_ApplySetupTable(D_0044A850);
 }
 
 /** Reset the selected fields of the current global record. */
-void func_8023EE34_de(void) {
+void CCollision_ResetResult(void) {
     Reusable *record = D_80103FCC;
     record->unk0 = 0;
     record->unk14 = -1;
@@ -36,7 +36,7 @@ void func_8023EE34_de(void) {
 /* 8023A284_32.CPP */
 /* Fills every collision info named by a collision setup table from its row, resetting the
  * active collision state D_80103FCC before each one; the table ends at a row without info. */
-void func_8023EE60_de(CCollisionSetup_t *setupTable)
+void CCollision_ApplySetupTable(CCollisionSetup_t *setupTable)
 {
     CCollisionSetup_t *setup = setupTable;
     s32 counter = -1;

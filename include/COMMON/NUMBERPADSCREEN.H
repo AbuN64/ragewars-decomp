@@ -61,5 +61,5 @@ struct CellRecAt1A;
 
 struct Triple;
 
-struct Rec_func_8024C92C_de;
+struct RecGobjinstSampleBoneTranslation;
 #endif

@@ -21,7 +21,7 @@ extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
 extern f32 Math_Sqrtf(f32);
 extern void GraphU64_ScaleVector(f32 *, f32 *, f32);
-void OvlScene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
+void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     s32 i;
     u8 c;
     f32 v[3];
@@ -48,13 +48,13 @@ void OvlScene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
         scene->dir[2] = v[2];
     }
 }
-int Player_GetFirstPlayer(void *);
+int Playerai_GetFirstPlayer(void *);
 void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
 void Scene_ReleaseCachedGeometry(void *);
-void Ovlgame_ReleaseObjectHandles(void *);
+void Player_ReleaseObjectHandles(void *);
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
-void OvlScene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
+void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
     s32 firstPlayer;
     void *firstOptionalResource;
     void *secondOptionalResource;
@@ -62,9 +62,9 @@ void OvlScene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
     void *nextAllocationNode;
     void *allocationBase;
     func_8020D0CC_S2 *allocationNode;
-    firstPlayer = Player_GetFirstPlayer(&D_80145040);
+    firstPlayer = Playerai_GetFirstPlayer(&D_80145040);
     if (firstPlayer != 0) {
-        Ovlgame_ReleaseObjectHandles((void *) firstPlayer);
+        Player_ReleaseObjectHandles((void *) firstPlayer);
     }
     func_8025CBEC_de(func_8025CC6C_de());
     func_8025E468_de();
@@ -108,7 +108,7 @@ void OvlScene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
    node's four chunks with their counts, resets the two bucket lists and files the 48 buckets into
    the second, then for every face of both lists clears the solid bit when it is hidden and marks it
    0xF0 when its group bit is set in the current group's bitmap. */
-extern s32 PpDecom_UnpackResource(void ***handle, s32 arg1);
+extern s32 Ppdecom_UnpackResource(void ***handle, s32 arg1);
 extern void SetN64_GetPackSectionSize(void *node, s32 arg1);
 static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     s32 index;
@@ -123,7 +123,7 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;
 }
-void OvlScene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
+void Scene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
     void *node;
     struct IntPair *l0;
     struct IntPair *l1;
@@ -134,7 +134,7 @@ void OvlScene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
     s32 n;
     s32 count;
     Face *face;
-    if (PpDecom_UnpackResource(handle, 0) != 0) {
+    if (Ppdecom_UnpackResource(handle, 0) != 0) {
         node = **handle;
         l0 = SetN64_GetPackSection(node, 0);
         l1 = SetN64_GetPackSection(node, 1);

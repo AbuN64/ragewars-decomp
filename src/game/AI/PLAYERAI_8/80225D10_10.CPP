@@ -55,7 +55,7 @@ extern void func_80246E44_de(char *);
 extern f32 GameObject_GetActorHeight(void);
 
 
-void *Player_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
+void *Playerai_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
     f32 nearestDistanceSquared;
     func_8022A470_S2 *candidatePlayer;
     void *result;
@@ -86,7 +86,7 @@ void *Player_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 point
     return result;
 }
 
-void *Player_FindNearestLivePlayer(struct Context *context, CVector3 position, void *excludedPlayer) {
+void *Playerai_FindNearestLivePlayer(struct Context *context, CVector3 position, void *excludedPlayer) {
     f32 nearestDistanceSquared;
     Shared_ActorView *actor;
     void *nearestPlayer;
@@ -122,7 +122,7 @@ s32 Player_GetPlayerIndex(void *world, unsigned int playerAddress)
   return (playerAddress - (arg0_record->unk4)) / 5864;
 }
 
-void *Player_FindPlayerByController(char *object, s32 controllerAddress) {
+void *Playerai_FindPlayerByController(char *object, s32 controllerAddress) {
     Round *round = (Round *)object;
     Shared_ActorView *record = (Shared_ActorView *)round->players;
     if (record != 0) {
@@ -136,7 +136,7 @@ void *Player_FindPlayerByController(char *object, s32 controllerAddress) {
     return 0;
 }
 
-void *Player_GetPlayerByIndex(void *world, u32 playerIndex) {
+void *Playerai_GetPlayerByIndex(void *world, u32 playerIndex) {
     Shared_ActorView *actor;
     s32 currentPlayerIndex;
 
@@ -182,7 +182,7 @@ void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex) {
     return result;
 }
 
-int Player_BeginRoundEnd(char *forcePlayerList) {
+int Playerai_BeginRoundEnd(char *forcePlayerList) {
     Shared_ActorView *p;
     int count;
     CGameStatus *s;
@@ -210,7 +210,7 @@ int Player_BeginRoundEnd(char *forcePlayerList) {
     return 1;
 }
 
-void Player_EndRound(void *roundContext) {
+void Playerai_EndRound(void *roundContext) {
     CGameStatus *state;
     Round *round = roundContext;
     Node_Weapons_EndRound *node;
@@ -249,7 +249,7 @@ void Player_EndRound(void *roundContext) {
 }
 
 /** Find the first linked record whose nested flags include either type marker. */
-void *Player_FindPlayerWithMarker(char *object) {
+void *Playerai_FindPlayerWithMarker(char *object) {
     Shared_ActorView *record = (void *)((struct Context *)object)->head;
     while (record != 0) {
         Shared_ControlView *nested = record->controls;
@@ -262,7 +262,7 @@ void *Player_FindPlayerWithMarker(char *object) {
     return record;
 }
 
-void Player_ResetPlayerControllers(struct Context *object) {
+void Playerai_ResetPlayerControllers(struct Context *object) {
     Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
@@ -364,7 +364,7 @@ s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 weaponId) {
     return ((GlobalState *)p)->field24;
 }
 
-s16 Player_GetWeaponClassId(Player *player, s32 weaponId) {
+s16 Playerai_GetWeaponClassId(Player *player, s32 weaponId) {
     s16 *selectedClassEntry;
     WeaponInfo *weaponDefinition;
 
@@ -380,7 +380,7 @@ s16 Player_GetWeaponClassId(Player *player, s32 weaponId) {
     return -1;
 }
 
-s16 Player_GetWeaponAmmo(void *actor, s32 weaponId) {
+s16 Playerai_GetWeaponAmmo(void *actor, s32 weaponId) {
     s16 *selectedClassEntry;
     s32 ammoSlot;
     WeaponInfo *weapon;
@@ -482,7 +482,7 @@ int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
     return object->views5E4.view5E4_0.unk5E4 < 0x6400;
 }
 
-f32 Player_GetObjectOwnerHeight(void *actorObject) {
+f32 Playerai_GetObjectOwnerHeight(void *actorObject) {
     struct EffectOwnerObject *object = actorObject;
     struct ModelBlend *owner;
 
