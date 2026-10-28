@@ -208,7 +208,7 @@ s32 Note_HasScratchBuffer(void) {
 
 #include "stddef.h"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/EXTERNS_12.H"
+#include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/DISPLAY.H"

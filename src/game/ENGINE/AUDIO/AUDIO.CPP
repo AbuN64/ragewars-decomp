@@ -4,7 +4,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "AUDIO/8025CCB0.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/AUDIO/audio_nextdecodedsampleblock.H"

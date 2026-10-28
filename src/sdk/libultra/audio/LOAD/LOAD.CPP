@@ -3,7 +3,7 @@
 #include "acmd.h"
 #include "COMMON/MATH_HELPERS.H"
 #include "sdk/ACMD.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "include_asm.h"
 #include "COMMON/AUDIO_CALLBACKS.H"

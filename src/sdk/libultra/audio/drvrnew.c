@@ -4,7 +4,7 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "COMMON/TRIPLE.H"
 #include "sdk/libgultra_inferred/ALFILTERNEW.H"
 #include "COMMON/OSPIHANDLE_S.H"

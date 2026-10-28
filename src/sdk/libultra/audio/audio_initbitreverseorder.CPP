@@ -1,7 +1,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "sdk/AUDIO/audio_initbitreverseorder.H"
 

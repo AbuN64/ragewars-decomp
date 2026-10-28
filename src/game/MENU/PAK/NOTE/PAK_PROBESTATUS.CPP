@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "COMMON/LONE/D_8010FC00.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_12.H"
+#include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

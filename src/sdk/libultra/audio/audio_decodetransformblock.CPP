@@ -3,7 +3,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/AUDIO/audio_decodetransformblock.H"

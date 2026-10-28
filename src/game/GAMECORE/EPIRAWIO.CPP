@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_11.H"
-#include "COMMON/EXTERNS_12.H"
+#include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 

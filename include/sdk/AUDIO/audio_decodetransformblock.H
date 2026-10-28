@@ -1,7 +1,7 @@
 #ifndef SDK_AUDIO_802C3EA4_2_H
 #define SDK_AUDIO_802C3EA4_2_H
 #include "COMMON/LLDIVRESULT.H"
-#include "COMMON/ALLOADFILTER48_2.H"
+#include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 extern void Audio_InitTransformTables();
 extern s32 Audio_DequantizeTransformCoefficients(f32 *out, s16 *in);
 extern FftTables *Audio_InitFftTables(s32 n);
