@@ -46,7 +46,7 @@ struct Shared_func_80261EB8_S1 {
     s32 ** unk10;
 };
 extern void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
-extern int func_80260E4C_de(BitFieldSource *arg0, int arg1);
+extern int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *arg0, int arg1);
 extern f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *arg0, s32 arg1);
 extern int Polytrak2_GetUnsignedArrayElement(BitFieldSource *arg0, int arg1);
 extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 arg0, Func802608ECResult range, f32 arg4);

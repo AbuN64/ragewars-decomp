@@ -241,7 +241,7 @@ void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult 
     array->count = elementCount;
 }
 
-int func_80260E4C_de(BitFieldSource *packedArray, int elementIndex) {
+int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int elementIndex) {
     int bitAddress;
     int shift;
     int *word;
