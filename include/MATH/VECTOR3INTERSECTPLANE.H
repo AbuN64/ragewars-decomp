@@ -1,5 +1,5 @@
-#ifndef MATH_8029BBA0_7_H
-#define MATH_8029BBA0_7_H
+#ifndef MATH_VECTOR3INTERSECTPLANE_H
+#define MATH_VECTOR3INTERSECTPLANE_H
 #include "MATH/DOUBLEBITS.H"
 extern void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2);
 extern void Vector3ProjectArray(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy, f32 sy);

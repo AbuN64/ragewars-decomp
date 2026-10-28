@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
-#include "MENU/80408AC4_26.H"
+#include "MENU/MENU_CREATESETTINGSPAGE.H"
 
 #if defined(VERSION_DE)
 #include "SYSTEM/8025E280.H"

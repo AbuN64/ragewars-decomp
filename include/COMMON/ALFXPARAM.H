@@ -1,5 +1,5 @@
-#ifndef COMMON_EXTERNS_2_H
-#define COMMON_EXTERNS_2_H
+#ifndef COMMON_ALFXPARAM_H
+#define COMMON_ALFXPARAM_H
 #include "TYPES.H"
 
 #include "COMMON/OSTHREAD_S.H"

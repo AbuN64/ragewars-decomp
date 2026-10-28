@@ -1,5 +1,5 @@
-#ifndef RENDER_80291054_9_H
-#define RENDER_80291054_9_H
+#ifndef RENDER_SETN64_UPDATEFADETRANSITION_H
+#define RENDER_SETN64_UPDATEFADETRANSITION_H
 #include "COMMON/SESSIONHANDLERROW.H"
 extern int SetN64_IsModeThirteen();
 extern void SetN64_RunGameThread(void);

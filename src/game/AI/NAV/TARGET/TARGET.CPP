@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDCALLBACK5.H"
-#include "FX/8020F6E0.H"
+#include "FX/TARGET.H"
 #include "TYPES.H"
 #include "stddef.h"
 

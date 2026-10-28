@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVL1_J/DATA_800E5788.H"
+#include "DATA/OVL1_J/MENU_DISPATCHSETTINGSTABLEEVENT_DATA.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)

@@ -1,4 +1,4 @@
-#include "DATA/OVLTAB7/800D0510.H"
+#include "DATA/OVLTAB7/WEAPONAI_INITIALIZESWITCHANDREQUESTIDLE_DATA.H"
 
 #if defined(VERSION_US_REV1)
 unsigned int D_auto_rodata_unresolved_800CF5C0_unclaimed_D1110[7] = {

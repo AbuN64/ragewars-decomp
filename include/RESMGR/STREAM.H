@@ -1,5 +1,5 @@
-#ifndef RESMGR_8029AA48_7_H
-#define RESMGR_8029AA48_7_H
+#ifndef RESMGR_STREAM_H
+#define RESMGR_STREAM_H
 #include "COMMON/CALLBACK.H"
 
 extern void Stream_SetFloatPairToNegativeOne(float *arg0, float *arg1);

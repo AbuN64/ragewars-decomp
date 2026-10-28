@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "MENU/GFX/GFX_FORMATARGUMENTLIST.H"
 #include "include_asm.h"
-#include "COMMON/LONE/D_8014D0D0.H"
+#include "COMMON/LONE/X_STDIO.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/MANAGER.H"

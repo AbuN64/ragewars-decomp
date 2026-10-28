@@ -11,7 +11,7 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "particle/8028308C.H"
+#include "particle/PARTICLE_RELEASEOWNERLISTONEEFFECTS.H"
 #include "RSP/8026E1F8_5.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"

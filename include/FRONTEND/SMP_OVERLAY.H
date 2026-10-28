@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8041BEA8_5_H
-#define FRONTEND_8041BEA8_5_H
+#ifndef FRONTEND_SMP_OVERLAY_H
+#define FRONTEND_SMP_OVERLAY_H
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/LABEL.H"
 extern s32 SmpOverlay_HandlePakDialogChoice(void);

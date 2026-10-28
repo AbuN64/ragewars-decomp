@@ -1,4 +1,0 @@
-#ifndef DATA_COMMON_DATA_800D3368_H
-#define DATA_COMMON_DATA_800D3368_H
-extern char D_002ADD18[];
-#endif

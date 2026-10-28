@@ -1,5 +1,5 @@
-#ifndef AI_NAV_8020EAE0_7_H
-#define AI_NAV_8020EAE0_7_H
+#ifndef AI_NAV_PICKUPTARGET_H
+#define AI_NAV_PICKUPTARGET_H
 #include "COMMON/OBJECTLINKS1458.H"
 extern s32 func_8020F55C_de(s32 arg0);
 extern s32 Nav_AddInactiveObjectGoals(void);

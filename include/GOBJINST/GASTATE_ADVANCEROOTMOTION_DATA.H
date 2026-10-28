@@ -1,5 +1,5 @@
-#ifndef GOBJINST_2_GOBJINST_2_H
-#define GOBJINST_2_GOBJINST_2_H
+#ifndef GOBJINST_GASTATE_ADVANCEROOTMOTION_DATA_H
+#define GOBJINST_GASTATE_ADVANCEROOTMOTION_DATA_H
 #include "COMMON/WORLD.H"
 extern void func_802472F0_de(void *actor);
 extern void func_802476C8_de(char *obj, void *anim, f32 from, f32 to);

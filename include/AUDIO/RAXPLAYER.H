@@ -1,5 +1,5 @@
-#ifndef AUDIO_2_8025CCB0_2_H
-#define AUDIO_2_8025CCB0_2_H
+#ifndef AUDIO_RAXPLAYER_H
+#define AUDIO_RAXPLAYER_H
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "AUDIO/8025CCB0.H"
 #include "TYPES.H"

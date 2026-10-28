@@ -1,5 +1,5 @@
-#ifndef RENDER_4_8026AC38_5_H
-#define RENDER_4_8026AC38_5_H
+#ifndef RENDER_GEOMETRY_ALTERNATENOOPERATION_H
+#define RENDER_GEOMETRY_ALTERNATENOOPERATION_H
 #include "COMMON/OBJECTSTATE18.H"
 extern void Geometry_AlternateNoOperation(void);
 #endif

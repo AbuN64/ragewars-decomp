@@ -1,5 +1,5 @@
-#ifndef ENGINE_SCENE_6_H
-#define ENGINE_SCENE_6_H
+#ifndef ENGINE_SCENE_DRAWOPAQUEACTORS_H
+#define ENGINE_SCENE_DRAWOPAQUEACTORS_H
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SCENERECAT10C0.H"
 extern void Scene_ChangeInstanceModel(struct BankRecAt94 *, struct ObjectSceneChangeInstanceModel *, s32, s32);

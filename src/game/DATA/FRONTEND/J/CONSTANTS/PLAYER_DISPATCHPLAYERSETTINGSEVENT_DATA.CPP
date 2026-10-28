@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVL1_J/DATA_800E5698.H"
+#include "DATA/OVL1_J/PLAYER_DISPATCHPLAYERSETTINGSEVENT_DATA.H"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)

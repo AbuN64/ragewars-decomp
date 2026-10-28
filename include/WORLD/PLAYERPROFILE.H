@@ -1,5 +1,5 @@
-#ifndef WORLD_8022E938_5_H
-#define WORLD_8022E938_5_H
+#ifndef WORLD_PLAYERPROFILE_H
+#define WORLD_PLAYERPROFILE_H
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WORLD/8022E938.H"
 extern unsigned char Player_GetProfileValue16(struct ObjCode8022E938 *object);

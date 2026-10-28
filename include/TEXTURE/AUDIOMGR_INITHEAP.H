@@ -1,5 +1,5 @@
-#ifndef TEXTURE_80256220_12_H
-#define TEXTURE_80256220_12_H
+#ifndef TEXTURE_AUDIOMGR_INITHEAP_H
+#define TEXTURE_AUDIOMGR_INITHEAP_H
 #include "COMMON/CARTRIDGEREADWORKER.H"
 extern void Audiomgr_InitHeap();
 #endif

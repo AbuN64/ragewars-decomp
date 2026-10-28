@@ -1,4 +1,4 @@
-#include "DATA/COMMON/DATA_800D3230.H"
+#include "DATA/COMMON/G_PICKUPWEAPONDEFINITIONS.H"
 
 #if defined(VERSION_US_REV1)
 struct {

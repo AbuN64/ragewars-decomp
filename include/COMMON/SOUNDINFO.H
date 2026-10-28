@@ -1,5 +1,5 @@
-#ifndef COMMON_S1_2_H
-#define COMMON_S1_2_H
+#ifndef COMMON_SOUNDINFO_H
+#define COMMON_SOUNDINFO_H
 #include "TYPES.H"
 
 

@@ -1,5 +1,5 @@
-#ifndef FX_2_80271B18_3_H
-#define FX_2_80271B18_3_H
+#ifndef PARTICLE_GRAPHU64_MATRIXFROMEULERXYZ_H
+#define PARTICLE_GRAPHU64_MATRIXFROMEULERXYZ_H
 #include "COMMON/S1_3.H"
 extern void Graphu64_RunCountdown(void);
 extern void Graphu64_NoOperation(void);

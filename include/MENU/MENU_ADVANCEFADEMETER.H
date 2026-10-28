@@ -1,5 +1,5 @@
-#ifndef MENU_2_80420E90_3_H
-#define MENU_2_80420E90_3_H
+#ifndef MENU_MENU_ADVANCEFADEMETER_H
+#define MENU_MENU_ADVANCEFADEMETER_H
 #include "COMMON/NUMBERPADSCREEN.H"
 extern s32 Menu_GetFadeMeterDone(s32 *record);
 extern s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step);

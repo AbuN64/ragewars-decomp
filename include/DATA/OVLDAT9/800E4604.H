@@ -1,4 +1,0 @@
-#ifndef DATA_OVLDAT9_800E4604_H
-#define DATA_OVLDAT9_800E4604_H
-extern char D_0042439C[];
-#endif

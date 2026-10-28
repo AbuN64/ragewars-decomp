@@ -1,4 +1,4 @@
-#include "DATA/OVLTBL/800E4564.H"
+#include "DATA/OVLTBL/FRONTEND_DISPATCHCOMPACTOPTIONSEVENT_DATA.H"
 
 #if defined(VERSION_US_REV1)
 unsigned int D_auto_src_rw_menu_event_handlers_E5164_us_rev1[18] = {

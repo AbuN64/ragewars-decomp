@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVL1_J/DATA_800E58A8.H"
+#include "DATA/OVL1_J/MENU_CREATESOUNDOPTIONSSCREEN_DATA.H"
 
 /* DATA_800E58A0.CPP */
 /* ROM-grounded data: rodata/writable/800E58A0 */

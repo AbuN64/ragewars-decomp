@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8042E080_22_H
-#define FRONTEND_8042E080_22_H
+#ifndef FRONTEND_STAGE_PLACESTAGEOPPONENTS_H
+#define FRONTEND_STAGE_PLACESTAGEOPPONENTS_H
 #include "COMMON/ACTIVE.H"
 extern void Stage_PlaceStageOpponents();
 #endif

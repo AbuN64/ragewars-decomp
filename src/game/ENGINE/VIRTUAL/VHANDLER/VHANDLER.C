@@ -6,7 +6,7 @@
 #include "sdk/libgultra/OSUNMAPTLBALL.H"
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"
-#include "ENGINE/VIRTUAL/VHANDLER_2.H"
+#include "ENGINE/VIRTUAL/VHANDLER.H"
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/ITEMRECAT20V1.H"

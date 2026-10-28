@@ -1,5 +1,5 @@
-#ifndef MENU_2_804196C0_22_H
-#define MENU_2_804196C0_22_H
+#ifndef MENU_SMPLIST_REGISTERLISTCLASS_H
+#define MENU_SMPLIST_REGISTERLISTCLASS_H
 #include "MENU/SCROLL.H"
 extern void SmpList_RegisterListClass();
 #endif

@@ -1,7 +1,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RECORD.H"
 #include "TYPES.H"
-#include "RESMGR/802A23A4_5.H"
+#include "RESMGR/E_SMEM.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "RESMGR/802A23A4_6.H"
 #include "SCENE/CACHE_FREEMEMORY.H"

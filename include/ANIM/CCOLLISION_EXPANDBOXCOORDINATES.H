@@ -1,5 +1,5 @@
-#ifndef ANIM_8023EEF0_7_H
-#define ANIM_8023EEF0_7_H
+#ifndef ANIM_CCOLLISION_EXPANDBOXCOORDINATES_H
+#define ANIM_CCOLLISION_EXPANDBOXCOORDINATES_H
 #include "COMMON/RENDERSORTRECORD.H"
 extern int CRenderSortRecord_CompareDepth(RenderSortRecord *left, RenderSortRecord *right);
 extern void CCollision_ExpandBoxCoordinates(float *s, float *d);

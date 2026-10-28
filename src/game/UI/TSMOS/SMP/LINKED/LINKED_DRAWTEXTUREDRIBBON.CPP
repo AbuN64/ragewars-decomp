@@ -1,7 +1,7 @@
 #include "ANIM/ANIMATION_FRAME.H"
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
-#include "RENDER/CODE_802A35C0.H"
+#include "RENDER/LINKED_DRAWTEXTUREDRIBBON.H"
 #include "RENDER/802A35C0.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"

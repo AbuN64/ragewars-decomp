@@ -30,7 +30,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/INTEGERSTATE244.H"
-#include "DATA/OVLDAT6/800CF230.H"
+#include "DATA/OVLDAT6/PLAYERAI_INITIALIZEPLAYERHEALTH.H"
 
 extern void Gsky_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
 extern void Barrel_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);

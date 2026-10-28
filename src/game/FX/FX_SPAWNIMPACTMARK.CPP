@@ -14,7 +14,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
-#include "SYSTEM/802A6AC0_2.H"
+#include "SYSTEM/FX_SPAWNIMPACTMARK.H"
 #include "include_asm.h"
 
 /* 802A6AC0.CPP */

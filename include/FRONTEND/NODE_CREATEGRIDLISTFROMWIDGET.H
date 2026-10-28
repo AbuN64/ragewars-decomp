@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_40_H
-#define FRONTEND_8040B45C_40_H
+#ifndef FRONTEND_NODE_CREATEGRIDLISTFROMWIDGET_H
+#define FRONTEND_NODE_CREATEGRIDLISTFROMWIDGET_H
 #include "FRONTEND/LAYOUT.H"
 extern void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third);
 extern void Node_GetGridSelection(s32 identifier, s32 *first, s32 *second);

@@ -1,4 +1,4 @@
-#include "DATA/OVLTBL/800F3470_2.H"
+#include "DATA/OVLTBL/ITEMS_COPYLOCALIZEDPLAYERNAMESUFFIX.H"
 #include "TYPES.H"
 #include "include_asm.h"
 

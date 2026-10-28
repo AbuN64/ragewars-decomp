@@ -1,5 +1,5 @@
-#ifndef AUDIO_8025A3EC_4_H
-#define AUDIO_8025A3EC_4_H
+#ifndef AUDIO_VOICE_H
+#define AUDIO_VOICE_H
 #include "COMMON/OBJRECAT4V6.H"
 extern f32 Audio_InterpolatePitchTable(f32 arg0);
 extern f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1);

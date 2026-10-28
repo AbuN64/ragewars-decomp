@@ -1,5 +1,5 @@
-#ifndef MENU_2_80400000_6_H
-#define MENU_2_80400000_6_H
+#ifndef MENU_TRACK_DRAWLETTERBOXBANDS_H
+#define MENU_TRACK_DRAWLETTERBOXBANDS_H
 #include "COMMON/ENTRYRECAT8V4.H"
 extern void Track_DrawLetterboxBands(void);
 #endif

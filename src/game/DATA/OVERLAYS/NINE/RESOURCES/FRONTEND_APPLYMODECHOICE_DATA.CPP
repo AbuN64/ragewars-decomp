@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVLDAT9/800E4604.H"
+#include "DATA/OVLDAT9/FRONTEND_APPLYMODECHOICE_DATA.H"
 
 /* 800E4600.CPP */
 /* ROM-grounded data: rodata/writable/800E4600 */

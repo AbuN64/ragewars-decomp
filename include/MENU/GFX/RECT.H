@@ -1,5 +1,5 @@
-#ifndef MENU_GFX_80414430_21_H
-#define MENU_GFX_80414430_21_H
+#ifndef MENU_GFX_RECT_H
+#define MENU_GFX_RECT_H
 #include "COMMON/TEXTURE.H"
 
 extern void Rect_ResetRenderState();

@@ -11,7 +11,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "FRONTEND/MENUIMAGE.H"
 #include "COMMON/NUMBERPADSCREEN.H"
-#include "MENU/804221A0_10.H"
+#include "MENU/OPTIONTRANSITION.H"
 extern s32 Frontend_GetMenuImageState(s32 *record);
 extern void *Cache_AllocateMemory(s32 size);
 extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);

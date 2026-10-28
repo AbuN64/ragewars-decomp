@@ -1,5 +1,5 @@
-#ifndef SCENE_802508E0_8_H
-#define SCENE_802508E0_8_H
+#ifndef SCENE_CACHE_RUNCOMPACTIONPASSES_H
+#define SCENE_CACHE_RUNCOMPACTIONPASSES_H
 #include "COMMON/SESSIONHANDLERROW.H"
 extern void Cache_RunCompactionPasses(s32);
 #endif

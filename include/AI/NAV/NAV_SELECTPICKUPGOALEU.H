@@ -1,5 +1,5 @@
-#ifndef AI_NAV_8020EAE0_5_H
-#define AI_NAV_8020EAE0_5_H
+#ifndef AI_NAV_NAV_SELECTPICKUPGOALEU_H
+#define AI_NAV_NAV_SELECTPICKUPGOALEU_H
 #include "COMMON/OBJECTLINKS1458.H"
 extern int Nav_SelectPickupGoalEu(void * arg0);
 #endif

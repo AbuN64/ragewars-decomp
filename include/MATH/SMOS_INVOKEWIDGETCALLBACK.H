@@ -1,5 +1,5 @@
-#ifndef MATH_80299ECC_3_H
-#define MATH_80299ECC_3_H
+#ifndef MATH_SMOS_INVOKEWIDGETCALLBACK_H
+#define MATH_SMOS_INVOKEWIDGETCALLBACK_H
 #include "TYPES.H"
 
 struct Shared_WidgetIdE;

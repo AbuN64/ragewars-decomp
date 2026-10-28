@@ -1,5 +1,5 @@
-#ifndef SOUND_8022C894_4_H
-#define SOUND_8022C894_4_H
+#ifndef SOUND_PLAYERAI_OFFSETACTORFORSTATE15_H
+#define SOUND_PLAYERAI_OFFSETACTORFORSTATE15_H
 extern void func_8022D794_de(void *);
 extern void Playerai_UpdateSequence72RunEndPose(void *);
 extern void func_8022D7CC_de(void *);

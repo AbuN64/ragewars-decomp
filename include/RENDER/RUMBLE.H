@@ -1,5 +1,5 @@
-#ifndef RENDER_8028469C_17_H
-#define RENDER_8028469C_17_H
+#ifndef RENDER_RUMBLE_H
+#define RENDER_RUMBLE_H
 #include "RENDER/POOLRECAT28V1.H"
 
 extern void Rumble_InitEffectNode(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2, f32 arg5, f32 arg6, void **arg7);

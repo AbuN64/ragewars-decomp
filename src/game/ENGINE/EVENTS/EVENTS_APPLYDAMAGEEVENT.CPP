@@ -10,7 +10,7 @@
 #include "COMMON/OBJECTLINKS4_2.H"
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
-#include "SYSTEM/CODE_802661FC.H"
+#include "SYSTEM/EVENTS_APPLYDAMAGEEVENT.H"
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {

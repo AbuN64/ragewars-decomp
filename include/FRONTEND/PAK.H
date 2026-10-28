@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_2_H
-#define FRONTEND_8040B45C_2_H
+#ifndef FRONTEND_PAK_H
+#define FRONTEND_PAK_H
 #include "COMMON/NODERECAT2A8.H"
 extern void Pak_SelectPakOperationZero(void);
 extern void Pak_SelectPakOperationThree(void);

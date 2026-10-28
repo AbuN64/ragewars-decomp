@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVL1_J/DATA_800E5834.H"
+#include "DATA/OVL1_J/ACHIEVE_CREATERESULTSSCREEN_DATA.H"
 
 /* DATA_800E5830.CPP */
 /* ROM-grounded data: rodata/writable/800E5830 */

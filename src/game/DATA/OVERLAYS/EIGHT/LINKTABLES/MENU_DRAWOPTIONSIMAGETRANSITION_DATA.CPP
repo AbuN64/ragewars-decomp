@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVLTBL/800E44A4.H"
+#include "DATA/OVLTBL/MENU_DRAWOPTIONSIMAGETRANSITION_DATA.H"
 
 /* 800E449C_2.CPP */
 /* ROM-grounded data: rodata/writable/800E44A0 */

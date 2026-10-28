@@ -1,0 +1,6 @@
+#ifndef MENU_MENU_CREATESETTINGSPAGE_H
+#define MENU_MENU_CREATESETTINGSPAGE_H
+#include "TYPES.H"
+extern u8*D_auto_800D3480[1];
+extern u8*D_auto_800D3484;
+#endif

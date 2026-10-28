@@ -1,5 +1,5 @@
-#ifndef GFX_TEXT_802A8A94_6_H
-#define GFX_TEXT_802A8A94_6_H
+#ifndef GFX_TEXT_ONSCREEN_GETFONTTEXTURE_H
+#define GFX_TEXT_ONSCREEN_GETFONTTEXTURE_H
 #include "TYPES.H"
 /* Packed intensity font pixels installed by the resource loader. */
 extern u8 *g_onScreenFontTexture;

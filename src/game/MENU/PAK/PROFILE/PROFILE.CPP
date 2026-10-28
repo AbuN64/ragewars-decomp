@@ -9,7 +9,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "MENU/ITEMRECAT24.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "MENU/PAK/80409A88.H"
+#include "MENU/PAK/PROFILE.H"
 #include "SYSTEM/80265370.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "include_asm.h"

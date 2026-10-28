@@ -6,7 +6,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "sdk/OS/siaccess.H"
 #include "sdk/os.h"
-#include "COMMON/LONE/D_800D83D0.H"
+#include "COMMON/LONE/siaccess.H"
 
 /* 802BECB0.CPP */
 void __osSiCreateAccessQueue(void) {

@@ -9,7 +9,7 @@
 #include "SYSTEM/802609CC_3.H"
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "SYSTEM/802609CC_5.H"
+#include "SYSTEM/BITARRAY.H"
 
 /* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */
 const unsigned int D_blob_d39bcb9851fad48bdbd2[1] = {

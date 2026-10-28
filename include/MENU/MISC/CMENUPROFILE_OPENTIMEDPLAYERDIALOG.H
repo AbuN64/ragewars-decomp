@@ -1,5 +1,5 @@
-#ifndef MENU_MISC_8043DF84_5_H
-#define MENU_MISC_8043DF84_5_H
+#ifndef MENU_MISC_CMENUPROFILE_OPENTIMEDPLAYERDIALOG_H
+#define MENU_MISC_CMENUPROFILE_OPENTIMEDPLAYERDIALOG_H
 #include "MENU/PLAYERSETTINGS.H"
 extern s32 CMenuProfile_OpenTimedPlayerDialog(void *arg0, Arg1Struct *arg1);
 extern void CMenuProfile_EnableControllerPakAndClearState(struct Shared_PakMenu *arg0);

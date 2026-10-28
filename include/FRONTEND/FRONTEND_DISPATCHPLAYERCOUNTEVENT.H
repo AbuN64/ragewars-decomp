@@ -1,5 +1,5 @@
-#ifndef FRONTEND_80423280_59_H
-#define FRONTEND_80423280_59_H
+#ifndef FRONTEND_FRONTEND_DISPATCHPLAYERCOUNTEVENT_H
+#define FRONTEND_FRONTEND_DISPATCHPLAYERCOUNTEVENT_H
 #include "COMMON/SETTINGSRECAT24.H"
 /* The one object D_800E5430 points to; the settings screens each read their own fields of it. */
 typedef struct SettingsScreenState {

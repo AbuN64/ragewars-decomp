@@ -1,5 +1,5 @@
-#ifndef MENU_2_80420E90_9_H
-#define MENU_2_80420E90_9_H
+#ifndef MENU_MENU_SCROLLOPTIONSKEYPAD_H
+#define MENU_MENU_SCROLLOPTIONSKEYPAD_H
 #include "COMMON/NUMBERPADSCREEN.H"
 extern void Menu_ScrollOptionsKeypad();
 #endif

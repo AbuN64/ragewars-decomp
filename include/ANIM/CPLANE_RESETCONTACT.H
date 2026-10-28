@@ -1,5 +1,5 @@
-#ifndef ANIM_8023EEF0_16_H
-#define ANIM_8023EEF0_16_H
+#ifndef ANIM_CPLANE_RESETCONTACT_H
+#define ANIM_CPLANE_RESETCONTACT_H
 #include "COMMON/RENDERSORTRECORD.H"
 extern void CPlane_ResetContact(void *arg0);
 #endif

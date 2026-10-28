@@ -1,5 +1,5 @@
-#ifndef MENU_2_80400000_15_H
-#define MENU_2_80400000_15_H
+#ifndef MENU_TRACK_EVALUATETRACKOPACITY_H
+#define MENU_TRACK_EVALUATETRACKOPACITY_H
 #include "COMMON/ENTRYRECAT8V4.H"
 extern f32 Track_EvaluateTrackOpacity(f32);
 #endif

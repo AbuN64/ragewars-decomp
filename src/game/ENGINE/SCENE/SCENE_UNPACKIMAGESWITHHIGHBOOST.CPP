@@ -11,7 +11,7 @@
 #include "sdk/SCHED/sched_runeventloopus.H"
 #include "sdk/os.h"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "WORLD/8028E6FC.H"
+#include "WORLD/SCENE_UNPACKIMAGESWITHHIGHBOOST.H"
 #include "COMMON/UNUSED.H"
 
 /* Collects platform actors, records the special actor and selects one of three random states. */

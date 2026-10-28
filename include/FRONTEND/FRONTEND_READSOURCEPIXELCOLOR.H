@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_44_H
-#define FRONTEND_8040B45C_44_H
+#ifndef FRONTEND_FRONTEND_READSOURCEPIXELCOLOR_H
+#define FRONTEND_FRONTEND_READSOURCEPIXELCOLOR_H
 #include "COMMON/FORMAT.H"
 extern void Frontend_WriteDestinationNibbleIndex(void);
 extern void Frontend_ReadSourceWordPixel(void);

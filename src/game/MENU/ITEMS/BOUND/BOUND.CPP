@@ -1,7 +1,7 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "MENU/80442BC8.H"
+#include "MENU/BOUND.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "include_asm.h"
 #include "RENDER/8026AC38.H"

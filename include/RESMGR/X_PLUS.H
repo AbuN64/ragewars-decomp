@@ -1,5 +1,5 @@
-#ifndef RESMGR_802A0888_H
-#define RESMGR_802A0888_H
+#ifndef RESMGR_X_PLUS_H
+#define RESMGR_X_PLUS_H
 #include "COMMON/MESSAGESEMAPHORE.H"
 extern void XPlus_PartitionSortRange(char *base, char *max);
 extern void XPlus_SortArray(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *b));

@@ -1,5 +1,5 @@
-#ifndef CAMERA_80243A80_3_H
-#define CAMERA_80243A80_3_H
+#ifndef CAMERA_CCINEMA_RESETSEQUENCECONTEXT_H
+#define CAMERA_CCINEMA_RESETSEQUENCECONTEXT_H
 #include "COMMON/GROUP.H"
 extern void CCinema_ResetSequenceContext();
 #endif

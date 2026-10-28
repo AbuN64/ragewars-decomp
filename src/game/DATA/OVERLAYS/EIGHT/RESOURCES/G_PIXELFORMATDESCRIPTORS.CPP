@@ -1,6 +1,6 @@
 #include "DATA/GFXDATA/DATA_800DD730.H"
 #include "include_asm.h"
-#include "DATA/OVLDAT8/800E3270.H"
+#include "DATA/OVLDAT8/G_PIXELFORMATDESCRIPTORS.H"
 
 /* 800E2AD0.CPP */
 #if defined(VERSION_US_REV1)

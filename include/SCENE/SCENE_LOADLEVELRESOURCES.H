@@ -1,5 +1,5 @@
-#ifndef SCENE_2_SCENE_2_H
-#define SCENE_2_SCENE_2_H
+#ifndef SCENE_SCENE_LOADLEVELRESOURCES_H
+#define SCENE_SCENE_LOADLEVELRESOURCES_H
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 extern void Scene_CollectLevelSwitches(WorldRecAt1B660 *world);

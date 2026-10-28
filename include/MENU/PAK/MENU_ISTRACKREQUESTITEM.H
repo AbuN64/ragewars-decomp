@@ -1,5 +1,5 @@
-#ifndef MENU_PAK_80403BCC_4_H
-#define MENU_PAK_80403BCC_4_H
+#ifndef MENU_PAK_MENU_ISTRACKREQUESTITEM_H
+#define MENU_PAK_MENU_ISTRACKREQUESTITEM_H
 #include "COMMON/ENTRYRECAT0V3.H"
 extern int Menu_RequestTrackBundle();
 extern f32 Menu_BlendCubic(f32 from, f32 to, f32 t);

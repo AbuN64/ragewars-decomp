@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVLTBL/800E451C.H"
+#include "DATA/OVLTBL/OPTIONS_CREATEOPTIONSPAGE_DATA.H"
 
 /* 800E4504_2.CPP */
 /* ROM-grounded data: rodata/writable/800E4510 */

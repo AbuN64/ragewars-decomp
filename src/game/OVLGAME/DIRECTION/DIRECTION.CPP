@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "sdk/PFS/OVLGAME_INITIALIZERENDERDIRECTION.H"
-#include "OVLGAME/8044E8B0.H"
+#include "OVLGAME/DIRECTION.H"
 
 
 extern const f32 D_800C53B0_de;

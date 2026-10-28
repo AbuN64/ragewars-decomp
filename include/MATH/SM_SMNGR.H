@@ -1,5 +1,5 @@
-#ifndef MATH_80297CD0_H
-#define MATH_80297CD0_H
+#ifndef MATH_SM_SMNGR_H
+#define MATH_SM_SMNGR_H
 #include "COMMON/INTEGERSTATE530.H"
 extern void MoveMenuFocus(s32 direction);
 extern s32 DispatchScreenRangeEvent(s32,s32,s32,void *,s32);

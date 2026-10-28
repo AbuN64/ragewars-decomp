@@ -1,5 +1,5 @@
-#ifndef LEVEL_8020402C_3_H
-#define LEVEL_8020402C_3_H
+#ifndef LEVEL_ACTIONHIT_H
+#define LEVEL_ACTIONHIT_H
 #include "COMMON/OBJRECAT30.H"
 
 extern void func_80204DFC_de(struct Trigger *arg0);

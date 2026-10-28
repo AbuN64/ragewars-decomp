@@ -1,5 +1,5 @@
-#ifndef GAME_8027302C_H
-#define GAME_8027302C_H
+#ifndef GAME_BUILDDIRECTIONMATRIX_H
+#define GAME_BUILDDIRECTIONMATRIX_H
 #include "COMMON/MTX.H"
 extern void TranslateMatrixLocal(void *matrix, f32 x, f32 y, f32 z);
 extern void BuildYawMatrix(void *matrix, f32 angle);

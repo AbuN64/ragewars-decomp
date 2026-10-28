@@ -1,5 +1,5 @@
-#ifndef RESMGR_8029FA7C_4_H
-#define RESMGR_8029FA7C_4_H
+#ifndef RESMGR_XMATH_BUILDAXISANGLEMATRIX_H
+#define RESMGR_XMATH_BUILDAXISANGLEMATRIX_H
 #include "COMMON/MATRIXRECORD.H"
 #include "RESMGR/8029FA7C.H"
 extern void XMath_GetMatrixTranslation(char *object, float *output);

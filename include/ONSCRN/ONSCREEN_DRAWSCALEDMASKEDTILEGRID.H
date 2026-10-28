@@ -1,5 +1,5 @@
-#ifndef ONSCRN_4_ONSCRN_4_H
-#define ONSCRN_4_ONSCRN_4_H
+#ifndef ONSCRN_ONSCREEN_DRAWSCALEDMASKEDTILEGRID_H
+#define ONSCRN_ONSCREEN_DRAWSCALEDMASKEDTILEGRID_H
 #include "COMMON/EXTERNS_6.H"
 extern s32 OnScreen_StartMoverScript(void *widget, s32 *);
 extern void OnScreen_SetFirstBarTarget(char *object, int value);

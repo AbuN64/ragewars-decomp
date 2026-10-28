@@ -1,5 +1,5 @@
-#ifndef GSKY_2_GSKY_2_H
-#define GSKY_2_GSKY_2_H
+#ifndef GSKY_SKY_H
+#define GSKY_SKY_H
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "SCHED/8023A284.H"
 extern void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view);

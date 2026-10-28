@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVLTBL/800E4404.H"
+#include "DATA/OVLTBL/MENU_OPENOPTIONSKEYPAD_DATA.H"
 
 /* 800E4400.CPP */
 /* ROM-grounded data: rodata/writable/800E4400 */

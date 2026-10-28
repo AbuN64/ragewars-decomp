@@ -1,5 +1,5 @@
-#ifndef AI_NAV_80212C90_9_H
-#define AI_NAV_80212C90_9_H
+#ifndef AI_NAV_NAV_RESETOBJECTARRIVALCHASE_H
+#define AI_NAV_NAV_RESETOBJECTARRIVALCHASE_H
 #include "AI/SOURCE.H"
 extern void Nav_ResetObjectArrivalChase(void *arg0);
 #endif

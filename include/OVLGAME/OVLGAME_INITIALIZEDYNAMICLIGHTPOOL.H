@@ -1,5 +1,5 @@
-#ifndef OVLGAME_8044BD30_H
-#define OVLGAME_8044BD30_H
+#ifndef OVLGAME_OVLGAME_INITIALIZEDYNAMICLIGHTPOOL_H
+#define OVLGAME_OVLGAME_INITIALIZEDYNAMICLIGHTPOOL_H
 #include "TYPES.H"
 #include "COMMON/OBJB.H"
 /* The dynamic-light pool: the active list, the free list holding all eight records, and the records. */

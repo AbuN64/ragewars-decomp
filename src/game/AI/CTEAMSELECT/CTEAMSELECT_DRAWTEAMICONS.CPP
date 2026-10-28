@@ -2,7 +2,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/UNUSED.H"
-#include "MENU/80217388.H"
+#include "MENU/CTEAMSELECT_DRAWTEAMICONS.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"

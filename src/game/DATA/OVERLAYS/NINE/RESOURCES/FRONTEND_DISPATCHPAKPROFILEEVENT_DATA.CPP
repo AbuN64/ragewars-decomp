@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVLDAT9/800E54A8.H"
+#include "DATA/OVLDAT9/FRONTEND_DISPATCHPAKPROFILEEVENT_DATA.H"
 
 /* 800E5494_2.CPP */
 /* ROM-grounded data: rodata/writable/800E54A0 */

@@ -1,4 +1,4 @@
-#include "DATA/COMMON/DATA_800D34C0.H"
+#include "DATA/COMMON/G_PICKUPAMMODEFINITIONS.H"
 
 #if defined(VERSION_US_REV1)
 struct {

@@ -1,5 +1,5 @@
-#ifndef COMMON_EXTERNS_16_H
-#define COMMON_EXTERNS_16_H
+#ifndef COMMON_GUMTXL2F_H
+#define COMMON_GUMTXL2F_H
 #include "TYPES.H"
 
 

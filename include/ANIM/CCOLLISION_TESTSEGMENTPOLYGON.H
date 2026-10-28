@@ -1,5 +1,5 @@
-#ifndef ANIM_8023DF60_3_H
-#define ANIM_8023DF60_3_H
+#ifndef ANIM_CCOLLISION_TESTSEGMENTPOLYGON_H
+#define ANIM_CCOLLISION_TESTSEGMENTPOLYGON_H
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/OUTPUT.H"
 extern void CCollision_ClearContactNormal(void *arg0);

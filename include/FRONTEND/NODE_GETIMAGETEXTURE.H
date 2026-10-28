@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_36_H
-#define FRONTEND_8040B45C_36_H
+#ifndef FRONTEND_NODE_GETIMAGETEXTURE_H
+#define FRONTEND_NODE_GETIMAGETEXTURE_H
 #include "COMMON/SLOTRECATCV1.H"
 extern void Node_CloseResourceArchive();
 extern void Node_EvictExpiredImages();

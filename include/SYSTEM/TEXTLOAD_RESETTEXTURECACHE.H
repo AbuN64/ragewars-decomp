@@ -1,5 +1,5 @@
-#ifndef SYSTEM_80296FF8_6_H
-#define SYSTEM_80296FF8_6_H
+#ifndef SYSTEM_TEXTLOAD_RESETTEXTURECACHE_H
+#define SYSTEM_TEXTLOAD_RESETTEXTURECACHE_H
 #include "COMMON/FRUSTUM.H"
 extern void TextLoad_ResetTextureCache();
 #endif

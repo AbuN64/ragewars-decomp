@@ -3,7 +3,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/STATERECAT34.H"
-#include "AUDIO/8025DA30.H"
+#include "AUDIO/AUDIO_LOADMUSICSEQUENCE.H"
 #include "TYPES.H"
 #include "sdk/OS/AUDIO_STOPMUSIC.H"
 

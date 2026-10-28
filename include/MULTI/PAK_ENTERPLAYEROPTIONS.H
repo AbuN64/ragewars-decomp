@@ -1,5 +1,5 @@
-#ifndef MULTI_804453C4_9_H
-#define MULTI_804453C4_9_H
+#ifndef MULTI_PAK_ENTERPLAYEROPTIONS_H
+#define MULTI_PAK_ENTERPLAYEROPTIONS_H
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 extern void Pak_EnterPlayerOptions(PlayerRecAtC *player);

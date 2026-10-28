@@ -1,5 +1,5 @@
-#ifndef SYSTEM_2_802661FC_2_H
-#define SYSTEM_2_802661FC_2_H
+#ifndef SYSTEM_EVENTS_COMPUTEDAMAGESCALE_H
+#define SYSTEM_EVENTS_COMPUTEDAMAGESCALE_H
 #include "COMMON/TARGET.H"
 #include "SYSTEM/802661FC.H"
 extern void Events_RequestActorPosition(s32 source, void *target, s32 kind, CVector3 position, struct IntPair arg6);

@@ -1,5 +1,5 @@
-#ifndef SCENE_802508E0_13_H
-#define SCENE_802508E0_13_H
+#ifndef SCENE_CACHE_FREEMEMORY_H
+#define SCENE_CACHE_FREEMEMORY_H
 #include "TYPES.H"
 void Cache_FreeMemory(void *arg0);
 #endif

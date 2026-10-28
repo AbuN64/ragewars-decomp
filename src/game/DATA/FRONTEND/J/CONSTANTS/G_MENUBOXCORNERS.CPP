@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "MENU/MENU_BOX.H"
-#include "DATA/OVL1_J/DATA_800E5E74.H"
+#include "DATA/OVL1_J/G_MENUBOXCORNERS.H"
 
 /* DATA_800E5E48.CPP */
 /* ROM-grounded data: rodata/writable/800E5E48 */

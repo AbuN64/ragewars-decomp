@@ -19,7 +19,7 @@
 #include "SCENE/802508E0_9.H"
 #include "include_asm.h"
 #include "COMMON/GFX.H"
-#include "RSP/8026E1F8.H"
+#include "RSP/GEOMETRY_DRAWBLENDPARTS.H"
 
 /* 8026AC38_5.CPP */
 /* Draws the parts of a model resource tinted by an RGBA colour through the shared material D_8013B2D8: sets the tint mode D_800D15E0 to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from Geometry_DrawBlendParts with the tint setup, the render mode and blend commands and the trailing clear added. */

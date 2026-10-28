@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "UTIL/80279A00.H"
+#include "UTIL/MAP.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "COMMON/S1.H"
 #include "COMMON/VECTOR4F.H"

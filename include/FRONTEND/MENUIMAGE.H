@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8043A0B0_12_H
-#define FRONTEND_8043A0B0_12_H
+#ifndef FRONTEND_MENUIMAGE_H
+#define FRONTEND_MENUIMAGE_H
 #include "FRONTEND/ENTRYRECAT4D4.H"
 extern s32 Frontend_GetMenuImageFrame(s32 *record);
 extern s32 Frontend_IsMenuImageTransitionComplete(s32 *record);

@@ -1,4 +1,4 @@
-#include "DATA/COMMON/DATA_800D32A8.H"
+#include "DATA/COMMON/G_PICKUPHEALTHDEFINITIONS.H"
 
 #if defined(VERSION_US_REV1)
 struct {

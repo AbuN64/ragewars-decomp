@@ -4,7 +4,7 @@
 #if defined(VERSION_US_REV1)
 /* Maps an id from 1 to 33 to the address of its data block, returning 0 for any other id. */
 #include "TYPES.H"
-#include "MENU/EXTERNS_2.H"
+#include "MENU/EVENT.H"
 
 
 void *Level_GetScreenEventTable(s32 id) {

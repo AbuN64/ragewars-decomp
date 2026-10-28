@@ -1,4 +1,4 @@
-#include "DATA/COMMON/DATA_800D3368.H"
+#include "DATA/COMMON/PICKUP_DISPATCHHANDLER_DATA.H"
 
 #if defined(VERSION_US_REV1)
 struct {

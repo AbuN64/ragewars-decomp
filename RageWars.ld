@@ -345,7 +345,7 @@ SECTIONS
         . = MAX(., 0x181D0);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.text);
         . = MAX(., 0x18784);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.text);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.text);
         . = MAX(., 0x18A98);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.text);
         . = MAX(., 0x18B9C);
@@ -387,7 +387,7 @@ SECTIONS
         . = MAX(., 0x1B068);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.text);
         . = MAX(., 0x1C298);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.text);
         . = MAX(., 0x1C5D8);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.text);
         . = MAX(., 0x1C994);
@@ -441,9 +441,9 @@ SECTIONS
         . = MAX(., 0x2484C);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.text);
         . = MAX(., 0x24B5C);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.text);
         . = MAX(., 0x24DDC);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.text);
         . = MAX(., 0x25540);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.text);
         . = MAX(., 0x25934);
@@ -481,7 +481,7 @@ SECTIONS
         . = MAX(., 0x2B35C);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3F8);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.text);
         . = MAX(., 0x2B4E0);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B57C);
@@ -599,7 +599,7 @@ SECTIONS
         . = MAX(., 0x38AB8);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.text.func_80238EB8_de);
         . = MAX(., 0x38B24);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.text);
         . = MAX(., 0x38CD0);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.text);
         . = MAX(., 0x38CF4);
@@ -1737,7 +1737,7 @@ SECTIONS
         . = MAX(., 0xB60C0);
         src/game/REVERB/SYNALLOCFX.CPP.o(.text);
         . = MAX(., 0xB6154);
-        src/game/DATA/AUDIO/AUDIO/AUDIO_2.CPP.o(.data);
+        src/game/DATA/AUDIO/AUDIO/ALSAVEPULL.CPP.o(.data);
         . = MAX(., 0xB6160);
         src/sdk/MATH/cosf.CPP.o(.text);
         . = MAX(., 0xB6264);
@@ -2468,7 +2468,7 @@ SECTIONS
         . = MAX(., 0x181F0);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.text);
         . = MAX(., 0x187A4);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.text);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.text);
         . = MAX(., 0x18AE8);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.text);
         . = MAX(., 0x18BEC);
@@ -2510,7 +2510,7 @@ SECTIONS
         . = MAX(., 0x1B100);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.text);
         . = MAX(., 0x1C334);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.text);
         . = MAX(., 0x1C674);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.text);
         . = MAX(., 0x1CA30);
@@ -2564,9 +2564,9 @@ SECTIONS
         . = MAX(., 0x248E8);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.text);
         . = MAX(., 0x24BF8);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.text);
         . = MAX(., 0x24E78);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.text);
         . = MAX(., 0x255DC);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.text);
         . = MAX(., 0x259D0);
@@ -2604,7 +2604,7 @@ SECTIONS
         . = MAX(., 0x2B424);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B4C0);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.text);
         . = MAX(., 0x2B5D8);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B674);
@@ -2714,7 +2714,7 @@ SECTIONS
         . = MAX(., 0x38AC8);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.text.func_80238EB8_de);
         . = MAX(., 0x38B34);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.text);
         . = MAX(., 0x38CE0);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.text);
         . = MAX(., 0x38D04);
@@ -3846,7 +3846,7 @@ SECTIONS
         . = MAX(., 0xB621C);
         src/game/DATA/AUDIO/VISETMODE/VISETMODE.CPP.o(.data);
         . = MAX(., 0xB6220);
-        src/game/DATA/AUDIO/AUDIO/AUDIO_2.CPP.o(.text);
+        src/game/DATA/AUDIO/AUDIO/ALSAVEPULL.CPP.o(.text);
         . = MAX(., 0xB6320);
         src/sdk/libultra/audio/save/save.c.o(.text);
         . = MAX(., 0xB6354);
@@ -4587,7 +4587,7 @@ SECTIONS
         . = MAX(., 0x181F0);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.text);
         . = MAX(., 0x187A4);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.text);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.text);
         . = MAX(., 0x18AE8);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.text);
         . = MAX(., 0x18BEC);
@@ -4629,7 +4629,7 @@ SECTIONS
         . = MAX(., 0x1B100);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.text);
         . = MAX(., 0x1C358);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.text);
         . = MAX(., 0x1C698);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.text);
         . = MAX(., 0x1CA54);
@@ -4683,9 +4683,9 @@ SECTIONS
         . = MAX(., 0x2490C);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.text);
         . = MAX(., 0x24C1C);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.text);
         . = MAX(., 0x24E9C);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.text);
         . = MAX(., 0x25600);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.text);
         . = MAX(., 0x259F4);
@@ -4723,7 +4723,7 @@ SECTIONS
         . = MAX(., 0x2B450);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B4EC);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.text);
         . = MAX(., 0x2B604);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B6A0);
@@ -4833,7 +4833,7 @@ SECTIONS
         . = MAX(., 0x38AF8);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.text.func_80238EB8_de);
         . = MAX(., 0x38B64);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.text);
         . = MAX(., 0x38D10);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.text);
         . = MAX(., 0x38D34);
@@ -6712,7 +6712,7 @@ SECTIONS
         . = MAX(., 0x181D0);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.text);
         . = MAX(., 0x18784);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.text);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.text);
         . = MAX(., 0x18A98);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.text);
         . = MAX(., 0x18B9C);
@@ -6754,7 +6754,7 @@ SECTIONS
         . = MAX(., 0x1B068);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.text);
         . = MAX(., 0x1C274);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.text);
         . = MAX(., 0x1C5B4);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.text);
         . = MAX(., 0x1C970);
@@ -6808,9 +6808,9 @@ SECTIONS
         . = MAX(., 0x24828);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.text);
         . = MAX(., 0x24B38);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.text);
         . = MAX(., 0x24DB8);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.text);
         . = MAX(., 0x2551C);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.text);
         . = MAX(., 0x25910);
@@ -6848,7 +6848,7 @@ SECTIONS
         . = MAX(., 0x2B330);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3CC);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.text);
         . = MAX(., 0x2B4B4);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B550);
@@ -6968,7 +6968,7 @@ SECTIONS
         . = MAX(., 0x38A98);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.text.func_80238EB8_de);
         . = MAX(., 0x38B04);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.text);
         . = MAX(., 0x38CB0);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.text);
         . = MAX(., 0x38CD4);
@@ -8402,7 +8402,7 @@ SECTIONS
         . = MAX(., 0xBCA40);
         src/sdk/libultra/os/__osGetFpcCsr.s.o(.text);
         . = MAX(., 0xBCA4C);
-        src/sdk/libultra/libasm_802BBC68_13.c.o(.data);
+        src/sdk/libultra/__OSGETFPCCSR.c.o(.data);
         . = MAX(., 0xBCA50);
         src/sdk/libultra/os/func_802BCF20.s.o(.text);
         . = MAX(., 0xBCA5C);
@@ -8845,7 +8845,7 @@ SECTIONS
         . = MAX(., 0x181D0);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.text);
         . = MAX(., 0x18784);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.text);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.text);
         . = MAX(., 0x18A98);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.text);
         . = MAX(., 0x18B9C);
@@ -8887,7 +8887,7 @@ SECTIONS
         . = MAX(., 0x1B068);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.text);
         . = MAX(., 0x1C274);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.text);
         . = MAX(., 0x1C5B4);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.text);
         . = MAX(., 0x1C970);
@@ -8941,9 +8941,9 @@ SECTIONS
         . = MAX(., 0x24828);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.text);
         . = MAX(., 0x24B38);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.text);
         . = MAX(., 0x24DB8);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.text);
         . = MAX(., 0x2551C);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.text);
         . = MAX(., 0x25910);
@@ -8981,7 +8981,7 @@ SECTIONS
         . = MAX(., 0x2B34C);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3E8);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.text);
         . = MAX(., 0x2B4D0);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B56C);
@@ -9099,7 +9099,7 @@ SECTIONS
         . = MAX(., 0x38AA8);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.text.func_80238EB8_de);
         . = MAX(., 0x38B14);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.text);
         . = MAX(., 0x38CC0);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.text);
         . = MAX(., 0x38CE4);
@@ -10763,7 +10763,7 @@ SECTIONS
         src/game/AI/CBARREL/BARREL/BARREL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES.CPP.o(.bss .sbss COMMON);
@@ -10771,7 +10771,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYERAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_COMPUTEAIMROTATION.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_10.CPP.o(.bss .sbss COMMON);
@@ -10783,8 +10783,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_ENTERMOVINGSEQUENCESTATE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -10800,7 +10800,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
@@ -10837,7 +10837,7 @@ SECTIONS
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/CAMERA/CAMERA.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_SETGAMEPLAYMODE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_RESETHEADBOB.CPP.o(.bss .sbss COMMON);
@@ -11277,7 +11277,7 @@ SECTIONS
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/save/save.c.o(.bss .sbss COMMON);
         src/game/REVERB/SYNALLOCFX.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/AUDIO/AUDIO_2.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AUDIO/ALSAVEPULL.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/cosf.CPP.o(.bss .sbss COMMON);
         src/sdk/MATH/lookat.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/gu/cosf/cosf.c.o(.bss .sbss COMMON);
@@ -11557,7 +11557,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES.CPP.o(.bss .sbss COMMON);
@@ -11565,7 +11565,7 @@ SECTIONS
         src/game/AI/NAV/NAV_FOLLOWMARKERCARRIERROUTE/NAV_FOLLOWMARKERCARRIERROUTE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYERAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_COMPUTEAIMROTATION.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_10.CPP.o(.bss .sbss COMMON);
@@ -11577,8 +11577,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_ENTERMOVINGSEQUENCESTATE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -11594,7 +11594,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
@@ -11631,7 +11631,7 @@ SECTIONS
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/CAMERA/CAMERA.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_SETGAMEPLAYMODE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_RESETHEADBOB.CPP.o(.bss .sbss COMMON);
@@ -12072,7 +12072,7 @@ SECTIONS
         src/sdk/libultra/audio/reverb/reverb.c.o(.bss .sbss COMMON);
         src/game/REVERB/REVERB.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/VISETMODE/VISETMODE.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/AUDIO/AUDIO/AUDIO_2.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/AUDIO/AUDIO/ALSAVEPULL.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/save/save.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/SAVE/SAVE.CPP.o(.bss .sbss COMMON);
         src/game/REVERB/SYNALLOCFX.CPP.o(.bss .sbss COMMON);
@@ -12363,7 +12363,7 @@ SECTIONS
         src/game/AI/CBARREL/BARREL/BARREL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES.CPP.o(.bss .sbss COMMON);
@@ -12371,7 +12371,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYERAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_COMPUTEAIMROTATION.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_10.CPP.o(.bss .sbss COMMON);
@@ -12383,8 +12383,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_ENTERMOVINGSEQUENCESTATE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -12400,7 +12400,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
@@ -12437,7 +12437,7 @@ SECTIONS
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/CAMERA/CAMERA.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_SETGAMEPLAYMODE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_RESETHEADBOB.CPP.o(.bss .sbss COMMON);
@@ -13176,7 +13176,7 @@ SECTIONS
         src/game/AI/BARREL/BARREL_SPAWNFLAGGEDEFFECTS.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES.CPP.o(.bss .sbss COMMON);
@@ -13184,7 +13184,7 @@ SECTIONS
         src/game/ENGINE/ANIMPOOL/ANIMPOOL_1.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYERAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_COMPUTEAIMROTATION.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_10.CPP.o(.bss .sbss COMMON);
@@ -13196,8 +13196,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_ENTERMOVINGSEQUENCESTATE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -13213,7 +13213,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
@@ -13250,7 +13250,7 @@ SECTIONS
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/CAMERA/CAMERA.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_SETGAMEPLAYMODE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_RESETHEADBOB.CPP.o(.bss .sbss COMMON);
@@ -13766,7 +13766,7 @@ SECTIONS
         src/sdk/libultra/os/func_802BCF00_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/libasm_802BBC68_12.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osGetFpcCsr.s.o(.bss .sbss COMMON);
-        src/sdk/libultra/libasm_802BBC68_13.c.o(.bss .sbss COMMON);
+        src/sdk/libultra/__OSGETFPCCSR.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BCF20.s.o(.bss .sbss COMMON);
         src/sdk/libultra/libasm_802BBC68_6.c.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osDisableInt.s.o(.bss .sbss COMMON);
@@ -13922,7 +13922,7 @@ SECTIONS
         src/game/AI/CBARREL/BARREL/BARREL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/PLAYER_RESETPLAYERFORROUND_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES.CPP.o(.bss .sbss COMMON);
@@ -13930,7 +13930,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/PLAYERAI.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DEATH.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_7.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_DRAWREDMARKERPRISM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_8.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_COMPUTEAIMROTATION.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_10.CPP.o(.bss .sbss COMMON);
@@ -13942,8 +13942,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_24.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATESWIMMINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_RESETPLAYERAFTERDEATH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_ENTERMOVINGSEQUENCESTATE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -13959,7 +13959,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_STARTSOURCEEFFECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
@@ -13996,7 +13996,7 @@ SECTIONS
         src/game/AI/WEAPONSHAKE/WEAPONSHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/CAMERA/CAMERA.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_DRAWLENSFLARE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_10.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_SETPLAYERVIEWINPUTS.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_GETOBJECTPOSITIONAT260.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_SETGAMEPLAYMODE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/GSKY_RESETHEADBOB.CPP.o(.bss .sbss COMMON);
@@ -14808,7 +14808,7 @@ SECTIONS
         . = MAX(., 0x37C);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.data);
         . = MAX(., 0x380);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x38C);
         . = DEFINED(__align8_literals_Portal_AssignPlatformEndpoints) ? ALIGN(8) : .;
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.rodata.literals_Portal_AssignPlatformEndpoints .rdata.literals_Portal_AssignPlatformEndpoints);
@@ -15045,8 +15045,8 @@ SECTIONS
         . = MAX(., 0x8AC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.rodata .rdata);
         . = MAX(., 0x8D8);
-        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o */;
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o */;
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x8EC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x8F0);
@@ -15176,8 +15176,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_22.CPP.o */;
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.rodata .rdata);
         . = MAX(., 0x1070);
-        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_23.CPP.o */;
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o */;
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1098);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.rodata .rdata);
         . = MAX(., 0x1120);
@@ -15897,7 +15897,7 @@ SECTIONS
         . = DEFINED(__align8_literals_Graphu64_ProjectVectorOntoPlane) ? ALIGN(8) : .;
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.rodata.literals_Graphu64_ProjectVectorOntoPlane .rdata.literals_Graphu64_ProjectVectorOntoPlane);
         . = MAX(., 0x2EEC);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF0);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF4);
@@ -15905,7 +15905,7 @@ SECTIONS
         . = MAX(., 0x2F00);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F04);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F0C);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F10);
@@ -16131,7 +16131,7 @@ SECTIONS
         . = MAX(., 0x37B4);
         src/game/ENGINE/SCENE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x37C0);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.rodata .rdata);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.rodata .rdata);
         . = MAX(., 0x37E0);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_12.CPP.o(.rodata .rdata);
         . = MAX(., 0x37F4);
@@ -17294,7 +17294,7 @@ SECTIONS
         . = MAX(., 0x1C714);
         src/game/MENU/ENCODED/ENCODED_1.CPP.o(.data);
         . = MAX(., 0x1C7C8);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.rodata .rdata);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1C7F8);
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1C884);
@@ -17683,7 +17683,7 @@ SECTIONS
         . = MAX(., 0x37C);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.data);
         . = MAX(., 0x380);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x38C);
         . = DEFINED(__align8_literals_Portal_AssignPlatformEndpoints) ? ALIGN(8) : .;
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.rodata.literals_Portal_AssignPlatformEndpoints .rdata.literals_Portal_AssignPlatformEndpoints);
@@ -17916,8 +17916,8 @@ SECTIONS
         . = MAX(., 0x8AC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.rodata .rdata);
         . = MAX(., 0x8D8);
-        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o */;
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o */;
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x8EC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x8F0);
@@ -18047,8 +18047,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_22.CPP.o */;
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.rodata .rdata);
         . = MAX(., 0x1070);
-        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_23.CPP.o */;
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o */;
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1098);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.rodata .rdata);
         . = MAX(., 0x1120);
@@ -18767,7 +18767,7 @@ SECTIONS
         . = DEFINED(__align8_literals_Graphu64_ProjectVectorOntoPlane) ? ALIGN(8) : .;
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.rodata.literals_Graphu64_ProjectVectorOntoPlane .rdata.literals_Graphu64_ProjectVectorOntoPlane);
         . = MAX(., 0x2EFC);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F00);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F04);
@@ -18775,7 +18775,7 @@ SECTIONS
         . = MAX(., 0x2F10);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F14);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F1C);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F20);
@@ -19003,7 +19003,7 @@ SECTIONS
         . = MAX(., 0x37C4);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x37D0);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.rodata .rdata);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.rodata .rdata);
         . = MAX(., 0x37F0);
         src/game/ENGINE/RUMBLE/DISTANCETONODE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x3804);
@@ -20142,7 +20142,7 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o */;
         src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2CA6C);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.data);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.data);
         . = MAX(., 0x2CBD8);
         . = ALIGN(8) /* src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o */;
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.rodata .rdata);
@@ -20503,7 +20503,7 @@ SECTIONS
         . = MAX(., 0x37C);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.data);
         . = MAX(., 0x380);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x38C);
         . = DEFINED(__align8_literals_Portal_AssignPlatformEndpoints) ? ALIGN(8) : .;
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.rodata.literals_Portal_AssignPlatformEndpoints .rdata.literals_Portal_AssignPlatformEndpoints);
@@ -20740,8 +20740,8 @@ SECTIONS
         . = MAX(., 0x8AC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.rodata .rdata);
         . = MAX(., 0x8D8);
-        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o */;
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o */;
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x8EC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x8F0);
@@ -20871,8 +20871,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_22.CPP.o */;
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.rodata .rdata);
         . = MAX(., 0x1070);
-        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_23.CPP.o */;
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o */;
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1098);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.rodata .rdata);
         . = MAX(., 0x1120);
@@ -21592,7 +21592,7 @@ SECTIONS
         . = DEFINED(__align8_literals_Graphu64_ProjectVectorOntoPlane) ? ALIGN(8) : .;
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.rodata.literals_Graphu64_ProjectVectorOntoPlane .rdata.literals_Graphu64_ProjectVectorOntoPlane);
         . = MAX(., 0x2EFC);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F00);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F04);
@@ -21600,7 +21600,7 @@ SECTIONS
         . = MAX(., 0x2F10);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F14);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F1C);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F20);
@@ -21826,7 +21826,7 @@ SECTIONS
         . = MAX(., 0x37C4);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x37D0);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.rodata .rdata);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.rodata .rdata);
         . = MAX(., 0x37F0);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x3804);
@@ -23323,7 +23323,7 @@ SECTIONS
         . = MAX(., 0x37C);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.data);
         . = MAX(., 0x380);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x38C);
         . = DEFINED(__align8_literals_Portal_AssignPlatformEndpoints) ? ALIGN(8) : .;
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.rodata.literals_Portal_AssignPlatformEndpoints .rdata.literals_Portal_AssignPlatformEndpoints);
@@ -23549,8 +23549,8 @@ SECTIONS
         . = MAX(., 0x8AC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.rodata .rdata);
         . = MAX(., 0x8D8);
-        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o */;
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o */;
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x8EC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x8F0);
@@ -23680,8 +23680,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_22.CPP.o */;
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.rodata .rdata);
         . = MAX(., 0x1070);
-        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_23.CPP.o */;
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o */;
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1098);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.rodata .rdata);
         . = MAX(., 0x1120);
@@ -24410,7 +24410,7 @@ SECTIONS
         . = DEFINED(__align8_literals_Graphu64_ProjectVectorOntoPlane) ? ALIGN(8) : .;
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.rodata.literals_Graphu64_ProjectVectorOntoPlane .rdata.literals_Graphu64_ProjectVectorOntoPlane);
         . = MAX(., 0x2EEC);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF0);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF4);
@@ -24418,7 +24418,7 @@ SECTIONS
         . = MAX(., 0x2F00);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F04);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F0C);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F10);
@@ -24644,7 +24644,7 @@ SECTIONS
         . = MAX(., 0x37B4);
         src/game/ENGINE/RUMBLE/DISTANCETONODE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x37C0);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.rodata .rdata);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.rodata .rdata);
         . = MAX(., 0x37E0);
         src/game/DATA/OVLTAB2/OVLTAB2.CPP.o(.rodata .rdata);
         . = MAX(., 0x37F4);
@@ -25794,7 +25794,7 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o */;
         src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1B40C);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.data);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.data);
         . = MAX(., 0x1B578);
         . = ALIGN(8) /* src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o */;
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.rodata .rdata);
@@ -26190,7 +26190,7 @@ SECTIONS
         . = MAX(., 0x37C);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.data);
         . = MAX(., 0x380);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x38C);
         . = DEFINED(__align8_literals_Portal_AssignPlatformEndpoints) ? ALIGN(8) : .;
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.rodata.literals_Portal_AssignPlatformEndpoints .rdata.literals_Portal_AssignPlatformEndpoints);
@@ -26382,7 +26382,7 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/BARREL/BARREL_GETSIGNEDANGLETOPOINT.CPP.o */;
         src/game/AI/BARREL/BARREL_GETSIGNEDANGLETOPOINT.CPP.o(.rodata .rdata);
         . = MAX(., 0x818);
-        src/game/AI/BARREL/BARREL_3.CPP.o(.rodata .rdata);
+        src/game/AI/BARREL/G_BARRELFLAGGEDEFFECTRANDOMRANGES.CPP.o(.rodata .rdata);
         . = MAX(., 0x828);
         src/game/AI/BARREL/BARREL_FINDOFFSETAPPROACHPOSITION_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x82C);
@@ -26427,8 +26427,8 @@ SECTIONS
         . = MAX(., 0x8AC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.rodata .rdata);
         . = MAX(., 0x8D8);
-        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o */;
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o */;
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x8EC);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.rodata .rdata);
         . = MAX(., 0x8F0);
@@ -26560,10 +26560,10 @@ SECTIONS
         . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_22.CPP.o */;
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.rodata .rdata);
         . = MAX(., 0x1070);
-        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_23.CPP.o */;
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o */;
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.rodata .rdata);
         . = MAX(., 0x1098);
-        src/game/AI/PLAYER/PLAYER_17.CPP.o(.rodata .rdata);
+        src/game/AI/PLAYER/G_PLAYERSWIMCONSTANTS.CPP.o(.rodata .rdata);
         . = MAX(., 0x1120);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.rodata .rdata);
         . = MAX(., 0x1174);
@@ -27283,7 +27283,7 @@ SECTIONS
         . = DEFINED(__align8_literals_Graphu64_ProjectVectorOntoPlane) ? ALIGN(8) : .;
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.rodata.literals_Graphu64_ProjectVectorOntoPlane .rdata.literals_Graphu64_ProjectVectorOntoPlane);
         . = MAX(., 0x2EEC);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF0);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2EF4);
@@ -27291,7 +27291,7 @@ SECTIONS
         . = MAX(., 0x2F00);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F04);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.rodata .rdata);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F0C);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.rodata .rdata);
         . = MAX(., 0x2F10);
@@ -27523,7 +27523,7 @@ SECTIONS
         . = MAX(., 0x37B4);
         src/game/ENGINE/SCENE/S_LEVELINFOTEXT.CPP.o(.rodata .rdata);
         . = MAX(., 0x37C0);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.rodata .rdata);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.rodata .rdata);
         . = MAX(., 0x37E0);
         src/game/ENGINE/SCENE/S_LEVELNAVVISIONTEXT.CPP.o(.rodata .rdata);
         . = MAX(., 0x37F4);
@@ -27876,9 +27876,9 @@ SECTIONS
         . = MAX(., 0x4AB4);
         src/game/DATA/DEBUGLINK/DEBUGLINK/DEBUGLINK.CPP.o(.data);
         . = MAX(., 0x4F9C);
-        src/game/DATA/OVERLAYS/TWO/LINKTABLES/LINKTABLES_16.CPP.o(.data);
+        src/game/DATA/OVERLAYS/TWO/LINKTABLES/G_TECHNICIANSCREDITSTEXT.CPP.o(.data);
         . = MAX(., 0x4FA8);
-        src/game/DATA/OVERLAYS/TWO/LINKTABLES/LINKTABLES_17.CPP.o(.data);
+        src/game/DATA/OVERLAYS/TWO/LINKTABLES/G_TURNOVERCREDITSTEXTPOOL.CPP.o(.data);
         . = MAX(., 0x51E8);
         src/game/DATA/OVERLAYS/TWO/LINKTABLES/S_PRODUCERTEXT.CPP.o(.data);
         . = MAX(., 0x51F4);
@@ -27886,7 +27886,7 @@ SECTIONS
         . = MAX(., 0x5610);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/S_TESTERSTEXT.CPP.o(.data);
         . = MAX(., 0x563C);
-        src/game/DATA/OVERLAYS/THREE/RESOURCES/RESOURCES_7.CPP.o(.data);
+        src/game/DATA/OVERLAYS/THREE/RESOURCES/G_PROJECTLEADQACREDITSTEXTPOOL.CPP.o(.data);
         . = MAX(., 0x5A58);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/S_RAGEWARSTEAMTEXT.CPP.o(.data);
         . = MAX(., 0x5A82);
@@ -29321,17 +29321,17 @@ SECTIONS
         . = MAX(., 0xDD30);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_4.CPP.o(.data);
         . = MAX(., 0xDD34);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_5.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_COLORORIENTATIONRESOLUTIONTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xDD74);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_6.CPP.o(.data);
         . = MAX(., 0xDD78);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_7.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_DIFFICULTYCONTROLLERMENUTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xDDD8);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_8.CPP.o(.data);
         . = MAX(., 0xDDE0);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_9.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_MATCHMODEANDREWARDTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xE748);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_11.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_BLOODSCOREMENUTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xE828);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_13.CPP.o(.data);
         . = MAX(., 0xE82C);
@@ -29343,11 +29343,11 @@ SECTIONS
         . = MAX(., 0xE8C4);
         src/game/DATA/FRONTEND/H/CONSTANTS/S_OTHERGAMETEXT.CPP.o(.data);
         . = MAX(., 0xE910);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_20.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_NOTEDIFFICULTYMENUTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xEA6C);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_21.CPP.o(.data);
         . = MAX(., 0xEC58);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_23.CPP.o(.data);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_SAVELOADHEALTHAMMOMENUTEXTPOOL.CPP.o(.data);
         . = MAX(., 0xECA8);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_25.CPP.o(.data);
         . = MAX(., 0xECE0);
@@ -29463,7 +29463,7 @@ SECTIONS
         src/game/AI/NAV/PORTAL/PORTAL_UPDATERANDOMACTIONPULSE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_INITIALIZERANDOMACTIONSETTINGS_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_ISNODEMOVEMENTBLOCKED.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/SEARCHNODE/SEARCHNODE.CPP.o(.bss .sbss COMMON);
@@ -29508,7 +29508,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/S_SELECTTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES_DATA.CPP.o(.bss .sbss COMMON);
@@ -29536,7 +29536,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -29744,11 +29744,11 @@ SECTIONS
         src/game/ENGINE/GRAPHU64/GRAPHU64_35.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_INTERPOLATEQUATERNIONWITHLINEARFALLBACK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_5.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_BUILDTRANSLATIONMATRIX_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_10.CPP.o(.bss .sbss COMMON);
@@ -29831,7 +29831,7 @@ SECTIONS
         src/game/ENGINE/SCENE/S_LINKSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELPATHSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_12.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_SKYLAYERSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_ANIMATEDINSTANCESTEXT.CPP.o(.bss .sbss COMMON);
@@ -30242,7 +30242,7 @@ SECTIONS
         src/game/FRONTEND/MENU_IMAGE/FRONTEND/FRONTEND.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ITEMS/SESSION/ITEMS_HANDLESESSIONOPTIONPAGE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_1.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_DRAWTEXTENTRYCURSOR.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_FINDUNLOCKEDLEVEL.CPP.o(.bss .sbss COMMON);
@@ -30378,7 +30378,7 @@ SECTIONS
         src/game/AI/NAV/PORTAL/PORTAL_UPDATERANDOMACTIONPULSE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_INITIALIZERANDOMACTIONSETTINGS_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_ISNODEMOVEMENTBLOCKED.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/SEARCHNODE/SEARCHNODE.CPP.o(.bss .sbss COMMON);
@@ -30424,7 +30424,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/S_SELECTTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES_DATA.CPP.o(.bss .sbss COMMON);
@@ -30452,7 +30452,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -30664,11 +30664,11 @@ SECTIONS
         src/game/ENGINE/GRAPHU64/GRAPHU64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_INTERPOLATEQUATERNIONWITHLINEARFALLBACK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_5.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_BUILDTRANSLATIONMATRIX_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_10.CPP.o(.bss .sbss COMMON);
@@ -30752,7 +30752,7 @@ SECTIONS
         src/game/ENGINE/SCENE/S_LINKSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELPATHSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_2.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/RUMBLE/DISTANCETONODE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_SKYLAYERSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_ANIMATEDINSTANCESTEXT.CPP.o(.bss .sbss COMMON);
@@ -31160,7 +31160,7 @@ SECTIONS
         src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/EQUIP/G_EQUIPMENTSELECTIONRETAINEDDATA.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_DRAWTEXTENTRYCURSOR.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_FINDUNLOCKEDLEVEL.CPP.o(.bss .sbss COMMON);
@@ -31281,7 +31281,7 @@ SECTIONS
         src/game/AI/NAV/PORTAL/PORTAL_UPDATERANDOMACTIONPULSE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_INITIALIZERANDOMACTIONSETTINGS_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_ISNODEMOVEMENTBLOCKED.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/SEARCHNODE/SEARCHNODE.CPP.o(.bss .sbss COMMON);
@@ -31325,7 +31325,7 @@ SECTIONS
         src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/S_SELECTTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES_DATA.CPP.o(.bss .sbss COMMON);
@@ -31353,7 +31353,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -31565,11 +31565,11 @@ SECTIONS
         src/game/ENGINE/GRAPHU64/GRAPHU64_CONVERTMATRIXTOFIXED_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_INTERPOLATEQUATERNIONWITHLINEARFALLBACK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_5.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_BUILDTRANSLATIONMATRIX_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_10.CPP.o(.bss .sbss COMMON);
@@ -31652,7 +31652,7 @@ SECTIONS
         src/game/ENGINE/SCENE/S_LINKSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELPATHSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_2.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_SKYLAYERSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_ANIMATEDINSTANCESTEXT.CPP.o(.bss .sbss COMMON);
@@ -32190,7 +32190,7 @@ SECTIONS
         src/game/AI/NAV/PORTAL/PORTAL_UPDATERANDOMACTIONPULSE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_INITIALIZERANDOMACTIONSETTINGS_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_ISNODEMOVEMENTBLOCKED.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/SEARCHNODE/SEARCHNODE.CPP.o(.bss .sbss COMMON);
@@ -32234,7 +32234,7 @@ SECTIONS
         src/game/AI/NAV/PICKUP_GOAL/NAV/NAV.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/S_SELECTTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES_DATA.CPP.o(.bss .sbss COMMON);
@@ -32263,7 +32263,7 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_26.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
@@ -32477,11 +32477,11 @@ SECTIONS
         src/game/ENGINE/GRAPHU64/GRAPHU64_35.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_INTERPOLATEQUATERNIONWITHLINEARFALLBACK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_5.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_BUILDTRANSLATIONMATRIX_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_10.CPP.o(.bss .sbss COMMON);
@@ -32566,7 +32566,7 @@ SECTIONS
         src/game/ENGINE/SCENE/S_LINKSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELPATHSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/RUMBLE/DISTANCETONODE/SCENE_LOADLEVELRESOURCES_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB2/OVLTAB2.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_SKYLAYERSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_ANIMATEDINSTANCESTEXT.CPP.o(.bss .sbss COMMON);
@@ -32991,7 +32991,7 @@ SECTIONS
         src/game/FRONTEND/EQUIP/EQUIP_ACTIVATEEQUIPMENTPANEL.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/EQUIP/G_EQUIPMENTSELECTIONRETAINEDDATA.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/ENCODED/ENCODED_6.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/ENCODED/G_LEVELUNLOCKBITJUMPTABLE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_DRAWTEXTENTRYCURSOR.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ENCODED/ENCODED_FINDUNLOCKEDLEVEL.CPP.o(.bss .sbss COMMON);
@@ -33132,7 +33132,7 @@ SECTIONS
         src/game/AI/NAV/PORTAL/PORTAL_UPDATERANDOMACTIONPULSE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_INITIALIZERANDOMACTIONSETTINGS_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_4.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/PORTAL/PORTAL_5.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/PORTAL/G_NAVIGATIONOBJECTLINKDISTANCELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/PORTAL/PORTAL_ISNODEMOVEMENTBLOCKED.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/SEARCHNODE/SEARCHNODE.CPP.o(.bss .sbss COMMON);
@@ -33177,7 +33177,7 @@ SECTIONS
         src/game/AI/BARREL/CBARREL_RESOLVETRACKGOAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/BARREL/BARREL_GETFACINGSIDE.CPP.o(.bss .sbss COMMON);
         src/game/AI/BARREL/BARREL_GETSIGNEDANGLETOPOINT.CPP.o(.bss .sbss COMMON);
-        src/game/AI/BARREL/BARREL_3.CPP.o(.bss .sbss COMMON);
+        src/game/AI/BARREL/G_BARRELFLAGGEDEFFECTRANDOMRANGES.CPP.o(.bss .sbss COMMON);
         src/game/AI/BARREL/BARREL_FINDOFFSETAPPROACHPOSITION_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/ONE/CONSTANTS/BARREL_SPAWNEFFECTSFROMMASK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/ONE/CONSTANTS/CONSTANTS_10.CPP.o(.bss .sbss COMMON);
@@ -33185,7 +33185,7 @@ SECTIONS
         src/game/DATA/OVERLAYS/ONE/CONSTANTS/CONSTANTS_11.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/S_SELECTTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMICONS.CPP.o(.bss .sbss COMMON);
-        src/game/AI/CTEAMSELECT/CTEAMSELECT_10.CPP.o(.bss .sbss COMMON);
+        src/game/AI/CTEAMSELECT/CTEAMSELECT_UPDATETEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_DRAWTEAMWHEEL.CPP.o(.bss .sbss COMMON);
         src/game/AI/CTEAMSELECT/CTEAMSELECT_INITTEAMCHOICES_DATA.CPP.o(.bss .sbss COMMON);
@@ -33215,8 +33215,8 @@ SECTIONS
         src/game/AI/PLAYER/PLAYER_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_UPDATEWALKINGMOVEMENT_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_22.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_23.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_17.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_UPDATEFLOATINGSTATE.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/G_PLAYERSWIMCONSTANTS.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_INITIALIZEPLAYERHEALTH.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYERAI/OPTIONENABLED/OPTIONENABLED_2.CPP.o(.bss .sbss COMMON);
@@ -33441,11 +33441,11 @@ SECTIONS
         src/game/ENGINE/GRAPHU64/GRAPHU64.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_INTERPOLATEQUATERNIONWITHLINEARFALLBACK_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_GETANGLEDISTANCE.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_3.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_VECTORNORMALIZEUNITSCALE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_PROJECTONTOCROSSNORMAL_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_5.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_IDENTITYMATRIX_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/GRAPHU64/GRAPHU64_7.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/GRAPHU64/G_MATRIXFIXEDRANGELIMITS.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_8.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_BUILDTRANSLATIONMATRIX_DATA.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/GRAPHU64/GRAPHU64_10.CPP.o(.bss .sbss COMMON);
@@ -33538,7 +33538,7 @@ SECTIONS
         src/game/ENGINE/SCENE/S_LINKSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELPATHSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELINFOTEXT.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/CONSTANTS/G_LEVELNAVIGATIONRESOURCENAMES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_LEVELNAVVISIONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_SKYLAYERSTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/SCENE/S_ANIMATEDINSTANCESTEXT.CPP.o(.bss .sbss COMMON);
@@ -33671,12 +33671,12 @@ SECTIONS
         src/game/DATA/DEBUGLINK/800CB550/DEBUGLINK.CPP.o(.bss .sbss COMMON);
         src/game/DATA/DEBUGLINK/800CB560/DEBUGLINK.CPP.o(.bss .sbss COMMON);
         src/game/DATA/DEBUGLINK/DEBUGLINK/DEBUGLINK.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/LINKTABLES/LINKTABLES_16.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/TWO/LINKTABLES/LINKTABLES_17.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/LINKTABLES/G_TECHNICIANSCREDITSTEXT.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/TWO/LINKTABLES/G_TURNOVERCREDITSTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/LINKTABLES/S_PRODUCERTEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/TWO/LINKTABLES/LINKTABLES_21.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/S_TESTERSTEXT.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVERLAYS/THREE/RESOURCES/RESOURCES_7.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVERLAYS/THREE/RESOURCES/G_PROJECTLEADQACREDITSTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/S_RAGEWARSTEAMTEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/RESOURCES_10.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVERLAYS/THREE/RESOURCES/RESOURCES_11.CPP.o(.bss .sbss COMMON);
@@ -34371,20 +34371,20 @@ SECTIONS
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_1.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_2.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_4.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_5.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_COLORORIENTATIONRESOLUTIONTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_6.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_7.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_DIFFICULTYCONTROLLERMENUTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_8.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_9.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_11.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_MATCHMODEANDREWARDTEXTPOOL.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_BLOODSCOREMENUTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_13.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_14.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_15.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/S_NRWETEXT.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/S_OTHERGAMETEXT.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_20.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_NOTEDIFFICULTYMENUTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_21.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_23.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/FRONTEND/H/CONSTANTS/G_SAVELOADHEALTHAMMOMENUTEXTPOOL.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_25.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_26.CPP.o(.bss .sbss COMMON);
         src/game/DATA/FRONTEND/H/CONSTANTS/CONSTANTS_27.CPP.o(.bss .sbss COMMON);

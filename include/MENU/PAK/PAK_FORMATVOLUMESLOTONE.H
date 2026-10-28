@@ -1,5 +1,5 @@
-#ifndef MENU_PAK_80444EC0_13_H
-#define MENU_PAK_80444EC0_13_H
+#ifndef MENU_PAK_PAK_FORMATVOLUMESLOTONE_H
+#define MENU_PAK_PAK_FORMATVOLUMESLOTONE_H
 #include "COMMON/MENURECAT20V1.H"
 extern s32 Pak_FormatVolumeSlotOne(struct Field *field);
 #include "COMMON/SHARED_GAMESLOT.H"

@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_42_H
-#define FRONTEND_8040B45C_42_H
+#ifndef FRONTEND_FRONTEND_CONFIGUREIMAGECONVERSION_H
+#define FRONTEND_FRONTEND_CONFIGUREIMAGECONVERSION_H
 #include "FRONTEND/LAYOUT.H"
 extern s16 Frontend_GetOwnedImageRowCount(s16 *record);
 extern s16 Frontend_GetOwnedImageHeight(s16 *record);

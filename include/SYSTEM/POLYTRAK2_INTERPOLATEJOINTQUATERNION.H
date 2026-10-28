@@ -1,5 +1,5 @@
-#ifndef SYSTEM_8025E5B0_9_H
-#define SYSTEM_8025E5B0_9_H
+#ifndef SYSTEM_POLYTRAK2_INTERPOLATEJOINTQUATERNION_H
+#define SYSTEM_POLYTRAK2_INTERPOLATEJOINTQUATERNION_H
 #include "COMMON/STREAM.H"
 extern unsigned int Polytrak2_BitAddressToByteAddress(unsigned int value);
 extern float Polytrak2_UnpackUnitValue(float value, int bits);

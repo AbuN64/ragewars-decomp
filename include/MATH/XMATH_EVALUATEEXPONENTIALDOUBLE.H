@@ -1,5 +1,5 @@
-#ifndef MATH_8029BBA0_5_H
-#define MATH_8029BBA0_5_H
+#ifndef MATH_XMATH_EVALUATEEXPONENTIALDOUBLE_H
+#define MATH_XMATH_EVALUATEEXPONENTIALDOUBLE_H
 #include "COMMON/OBJRECAT3CV2.H"
 extern f32 XMath_SquareFloat(f32 arg0);
 extern f64 XMath_FloorDouble(f64 arg0);

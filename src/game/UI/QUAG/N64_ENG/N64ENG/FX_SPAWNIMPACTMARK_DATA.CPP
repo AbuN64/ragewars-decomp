@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/COMMON/DATA_800D2E40.H"
+#include "DATA/COMMON/FX_SPAWNIMPACTMARK_DATA.H"
 
 /* DATA_800D2E40.CPP */
 #if !(defined(VERSION_US_REV1))

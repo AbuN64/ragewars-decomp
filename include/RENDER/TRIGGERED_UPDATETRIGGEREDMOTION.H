@@ -1,5 +1,5 @@
-#ifndef RENDER_80206258_2_H
-#define RENDER_80206258_2_H
+#ifndef RENDER_TRIGGERED_UPDATETRIGGEREDMOTION_H
+#define RENDER_TRIGGERED_UPDATETRIGGEREDMOTION_H
 #include "COMMON/REC.H"
 
 extern void func_80206930_de(struct LevelActor *arg0, int arg1, struct Trigger *arg2);

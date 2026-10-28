@@ -1,5 +1,5 @@
-#ifndef MENU_GFX_804143E0_H
-#define MENU_GFX_804143E0_H
+#ifndef MENU_GFX_GFX_SHUTDOWNFRONTENDSERVICES_H
+#define MENU_GFX_GFX_SHUTDOWNFRONTENDSERVICES_H
 #include "COMMON/TEXTURE.H"
 extern void Gfx_ShutdownFrontendServices();
 #endif

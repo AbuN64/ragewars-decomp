@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8040B45C_32_H
-#define FRONTEND_8040B45C_32_H
+#ifndef FRONTEND_WIDGET_FINDWIDGETATPOINT_H
+#define FRONTEND_WIDGET_FINDWIDGETATPOINT_H
 #include "COMMON/WIDGETRECAT1A.H"
 extern s32 Widget_AnySiblingFlag40(struct WidgetNode *node);
 extern s32 Widget_CollectSiblingFlags(struct WidgetNode *node);

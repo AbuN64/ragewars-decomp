@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8043A0B0_11_H
-#define FRONTEND_8043A0B0_11_H
+#ifndef FRONTEND_MENU_IMAGE_H
+#define FRONTEND_MENU_IMAGE_H
 #include "FRONTEND/ENTRYRECAT4D4.H"
 
 extern void Frontend_ResetEquipmentFromCharacter();

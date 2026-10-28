@@ -1,5 +1,5 @@
-#ifndef AI_NAV_802106E0_20_H
-#define AI_NAV_802106E0_20_H
+#ifndef AI_NAV_FARTHEST_H
+#define AI_NAV_FARTHEST_H
 #include "COMMON/SELF.H"
 extern void Nav_UpdateRetreatMovement(void *arg0);
 extern void func_802127F4_de(void *arg0);

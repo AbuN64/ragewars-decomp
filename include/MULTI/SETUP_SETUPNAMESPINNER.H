@@ -1,5 +1,5 @@
-#ifndef MULTI_804453C4_H
-#define MULTI_804453C4_H
+#ifndef MULTI_SETUP_SETUPNAMESPINNER_H
+#define MULTI_SETUP_SETUPNAMESPINNER_H
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 /* Name-slot model a spinner menu points at: four 0x28-byte part records from +0x30, each with

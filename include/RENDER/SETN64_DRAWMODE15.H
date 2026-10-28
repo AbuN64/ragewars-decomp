@@ -1,5 +1,5 @@
-#ifndef RENDER_802944E8_2_H
-#define RENDER_802944E8_2_H
+#ifndef RENDER_SETN64_DRAWMODE15_H
+#define RENDER_SETN64_DRAWMODE15_H
 #include "COMMON/OBJRECAT26DD8.H"
 extern void SetN64_UpdateActiveSession(void);
 extern void SetN64_DrawMode15Revision1(void);
