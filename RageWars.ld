@@ -37522,8 +37522,6 @@ SECTIONS
         . = MAX(., 0x4691C);
         src/game/MENU/PAK/VOLUME/VOLUME_13.CPP.o(.data);
         . = MAX(., 0x46920);
-        src/game/MULTI/SETUP/SETUP_2.CPP.o(.text);
-        . = MAX(., 0x46BB4);
         src/game/MULTI/SETUP/SETUP_4.CPP.o(.text);
         . = MAX(., 0x46D04);
         src/game/MULTI/SETUP/SETUP_5.CPP.o(.text);
@@ -38443,8 +38441,6 @@ SECTIONS
         . = MAX(., 0x46A4C);
         src/game/MENU/PAK/VOLUME/VOLUME_13.CPP.o(.data);
         . = MAX(., 0x46A50);
-        src/game/MULTI/SETUP/SETUP_2.CPP.o(.text);
-        . = MAX(., 0x46CE4);
         src/game/MULTI/SETUP/SETUP_4.CPP.o(.text);
         . = MAX(., 0x46E34);
         src/game/MULTI/SETUP/SETUP_5.CPP.o(.text);
@@ -41047,7 +41043,6 @@ SECTIONS
         src/game/MENU/PAK/VOLUME/VOLUME_7.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/VOLUME/VOLUME_12.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/VOLUME/VOLUME_13.CPP.o(.bss .sbss COMMON);
-        src/game/MULTI/SETUP/SETUP_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_4.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_5.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_7.CPP.o(.bss .sbss COMMON);
@@ -41457,7 +41452,6 @@ SECTIONS
         src/game/MENU/PAK/VOLUME/VOLUME_7.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/VOLUME/VOLUME_12.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/VOLUME/VOLUME_13.CPP.o(.bss .sbss COMMON);
-        src/game/MULTI/SETUP/SETUP_2.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_4.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_5.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_7.CPP.o(.bss .sbss COMMON);

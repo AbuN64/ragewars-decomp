@@ -73,7 +73,7 @@ extern int D_800E3244[];
 extern int D_800E3294[];
 extern int D_800E32B4_eu[];
 extern int D_800E32C4_eu[];
-extern int D_800E3B64[];
+extern char *D_800E3B64[];
 extern int D_800E3B74[];
 extern int D_800E3B84[];
 extern int D_800E3B94[];
