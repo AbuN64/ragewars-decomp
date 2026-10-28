@@ -19,7 +19,7 @@
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 
 /* GOBJINST_2.CPP */
-extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern void func_80262480_de(void *);
 extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
@@ -108,11 +108,11 @@ extern CollisionInfo D_801003D8;
 
 extern func_80237E70_G1 D_801041F0;
 
-extern s32 Unicol_MoveActorWithCollision(void *arg0, CVector3 arg1, CollisionInfo *arg2);
+extern s32 Unicol_MoveActorWithCollision(void *actor, CVector3 pos, CollisionInfo *motionSettings);
 
-extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
+extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *actor);
 
-extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
 
 void func_80246E44_de(Actor36 *actor) {
     CVector3 before, after;

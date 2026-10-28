@@ -24,7 +24,7 @@
 #if defined(VERSION_EU)
 #include "TYPES.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
-#include "COMMON/OBJECTSTATE10_2.H"
+#include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "sdk/al_globals.h"
 extern void *alHeapDBAlloc(s32, s32, void *, s32, s32);
 extern void __initChanState(void *);
@@ -142,7 +142,7 @@ extern void Seqplayer_AdvanceSequenceEvent(struct ALSequencePlayer *);          
 extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
 extern ALMicroTime alEvtqNextEvent(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void alEvtqFlushType(ALEventQueue *, s16);                 /* alEvtqFlushType */
-extern void alSynStopVoice(struct Shape_typemap_71 *, ALVoice_s *);                   /* alSynStopVoice */
+extern void alSynStopVoice(struct AudioSynthParamSamplesView *, ALVoice_s *);                   /* alSynStopVoice */
 extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void alSynSetVol(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void alSynSetPitch(void *, ALVoice_s *, f32);              /* alSynSetPitch */

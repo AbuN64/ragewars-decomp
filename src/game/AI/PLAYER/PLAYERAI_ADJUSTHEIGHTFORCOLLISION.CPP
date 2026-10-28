@@ -26,7 +26,7 @@
 
 
 
-extern f32 InstHdr_GetActorReach(void *arg0);
+extern f32 InstHdr_GetActorReach(void *object);
 
 
 
@@ -209,33 +209,33 @@ void Playerai_AdjustHeightForCollision(Player *player, LevelActor *actor) {
     player->heightDelta += var_f23;
 }
 
-void Playerai_UpdateWeaponEffectBlend(void *arg0) {
+void Playerai_UpdateWeaponEffectBlend(void *player) {
     f32 target;
     char *effect;
     s32 state;
 
     target = 0.0f;
-    effect = &((ObjectLinks87C *)(arg0))->unk_878;
-    if (((struct Shape_typemap_14 *)(D_800D052C[((ObjectLinks87C *)(arg0))->unk_62E]))->field_8 <= 0
-        || ((ObjectLinks87C *)(arg0))->unk_7E8 == 0
-        || (D_801462C8.counters.m_bFragTagOn != 0 && ((struct ObjRecAt8F *) ((ObjectLinks87C *) arg0)->unk_5D8)->unk8F != 0)) {
+    effect = &((ObjectLinks87C *)(player))->unk_878;
+    if (((struct Shape_typemap_14 *)(D_800D052C[((ObjectLinks87C *)(player))->unk_62E]))->field_8 <= 0
+        || ((ObjectLinks87C *)(player))->unk_7E8 == 0
+        || (D_801462C8.counters.m_bFragTagOn != 0 && ((struct ObjRecAt8F *) ((ObjectLinks87C *) player)->unk_5D8)->unk8F != 0)) {
         do {
-            ((ObjectLinks87C *)(arg0))->unk_7E8 = 0;
+            ((ObjectLinks87C *)(player))->unk_7E8 = 0;
             state = ((Shared_Effect *)(effect))->state;
         } while (0);
         if (state != 0 && state != 3) {
             ((Shared_Effect *)(effect))->state = 3;
         }
     }
-    if (((ObjectLinks87C *)(arg0))->unk_5E4 != 0 && ((ObjectLinks87C *)(arg0))->unk_7E8 != 0) {
+    if (((ObjectLinks87C *)(player))->unk_5E4 != 0 && ((ObjectLinks87C *)(player))->unk_7E8 != 0) {
         target = D_800C7EF4;
-        ((ObjectLinks87C *)(arg0))->unk_7E8 = 1;
+        ((ObjectLinks87C *)(player))->unk_7E8 = 1;
     }
-    ((ObjectLinks87C *)(arg0))->unk_7F0 = target;
-    func_80219480_de(&((ObjectLinks87C *)(arg0))->unk_878, arg0);
-    Graphu64_EaseValueToward(&((ObjectLinks87C *)(arg0))->unk_7EC, target, 0.5f);
-    if (target == 0.0f && ((ObjectLinks87C *)(arg0))->unk_7EC < D_800C7EF8) {
-        ((ObjectLinks87C *)(arg0))->unk_7EC = 0.0f;
+    ((ObjectLinks87C *)(player))->unk_7F0 = target;
+    func_80219480_de(&((ObjectLinks87C *)(player))->unk_878, player);
+    Graphu64_EaseValueToward(&((ObjectLinks87C *)(player))->unk_7EC, target, 0.5f);
+    if (target == 0.0f && ((ObjectLinks87C *)(player))->unk_7EC < D_800C7EF8) {
+        ((ObjectLinks87C *)(player))->unk_7EC = 0.0f;
     }
 }
 

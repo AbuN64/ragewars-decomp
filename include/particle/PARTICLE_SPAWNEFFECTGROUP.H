@@ -5,6 +5,6 @@
 struct EffectActor;
 struct EffectSystem;
 extern s32 Particle_SpawnEffectGroup(struct EffectSystem *sys, struct EffectActor *source, struct EffectActor *owner,
-                            s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos,
-                            CVector3 *aim, s32 arg10, s32 arg11);
+                            s32 *refCount, s32 followTarget, s32 kind, CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos,
+                            CVector3 *aim, s32 requestedMode, s32 spawnFlags);
 #endif

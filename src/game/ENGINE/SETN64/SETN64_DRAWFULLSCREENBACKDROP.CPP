@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/GAME_SESSION.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/GFX.H"
 #include "abi.h"
 #include "COMMON/AIPROFILE.H"
@@ -102,14 +102,14 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 #if !(defined(VERSION_US))
 /* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
 #include "COMMON/DISPLAY.H"
-extern void SetN64_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
+extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void Onscrn_SetupSpriteMode(s32 alpha);
-void SetN64_DrawFullscreenBackdrop(void *arg0) {
+void SetN64_DrawFullscreenBackdrop(void *unused) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 width;
     s32 height;
-    SetN64_ClearDepthRect(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);
+    SetN64_ClearDepthRect(unused, 0, SCREEN_WD, 0, SCREEN_HT, 0);
     width = 0;
     height = 0;
     gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);

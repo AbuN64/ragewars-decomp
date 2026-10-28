@@ -18,8 +18,8 @@
 #include "WEAPONS/BARREL_GETEYEDISTANCESQUARED.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "ENGINE/SCENE_3.H"
-extern void Cache_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
+#include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
+extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 size);
 
@@ -45,7 +45,7 @@ extern s32 Scene_FindNearestPlacedObject(World *world, void *data, s32 group, vo
 
 
 
-extern void Simpinst_RegisterModelVariantResources(ObjB *obj, s32 arg1);
+extern void Simpinst_RegisterModelVariantResources(ObjB *obj, s32 unused);
 
 extern void *func_8024F6EC_de(ObjB *obj, s32 type);
 
@@ -264,7 +264,7 @@ void Scene_LoadGridCells(Level_func_8044CD8C_de *level) {
                 continue;
             }
             key = SetN64_LocatePackSection(level->file, level->key, col + row * width, &size);
-            block = Cache_RequestResource(0, key, key, size, 4, level, D_0028798C, D_800C5210_de, 1);
+            block = Cache_RequestResource(0, key, key, size, 4, level, D_0028798C, s_gridSectionText, 1);
             if (block == 0) {
                 continue;
             }

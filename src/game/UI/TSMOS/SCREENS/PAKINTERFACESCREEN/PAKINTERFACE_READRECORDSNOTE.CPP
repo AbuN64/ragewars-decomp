@@ -19,7 +19,7 @@
 
 extern s32 Note_ReadNoteData(s32, s32, PakSavePacket *, s32);
 extern s32 Note_Crc32(PakSavePacket *, s32, s32);
-extern void Note_DeleteNote(s32, s32);
+extern s32 Note_DeleteNote(s32, s32);
 
 s32 PAKInterface_ReadRecordsNote(s32 player, s32 channel) {
     PakSavePacket *packet;

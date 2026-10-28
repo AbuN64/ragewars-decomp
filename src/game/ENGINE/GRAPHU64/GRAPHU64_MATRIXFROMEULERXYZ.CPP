@@ -1,4 +1,4 @@
-#include "COMMON/S1_3.H"
+#include "COMMON/GRAPHICS_MATRIX_AND_VECTOR_MATH.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
@@ -18,7 +18,7 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
     return projected;
 }
 
-extern f32 Gu_Sqrtf(f32 arg0);
+extern f32 Gu_Sqrtf(f32 value);
 
 CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;

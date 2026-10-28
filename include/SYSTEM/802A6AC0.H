@@ -103,7 +103,7 @@ struct CallbackState1C {
     unsigned char padding_0[24];
     void (*callback)(void *);
 };
-extern void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *arg0);
-extern void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4);
-extern void Fx_ClampScalarRange(f32 *arg0);
+extern void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *contribution);
+extern void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 remainingCalls, f32 interval);
+extern void Fx_ClampScalarRange(f32 *scalarPointer);
 #endif

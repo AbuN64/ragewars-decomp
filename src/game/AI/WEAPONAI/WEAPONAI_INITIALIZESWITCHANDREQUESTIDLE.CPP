@@ -18,13 +18,13 @@ extern s32 D_800CD730;
 
 
 
-void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
+void Weaponai_InitializeSwitchAndRequestIdle(void *actor, void *weaponFireState) {
     s16 index;
     u16 unsigned_index;
     void *owner;
     void *state;
 
-    state = ((Shared_ActorView *)arg0)->self;
+    state = ((Shared_ActorView *)actor)->self;
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
     if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
@@ -45,10 +45,10 @@ void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) 
         }
         ((WeaponFireState *)weaponFireState)->spinStep = 0;
         ((WeaponFireState *)weaponFireState)->spin = 0;
-        ((Shared_Actor *)arg0)->color = 0;
+        ((Shared_Actor *)actor)->color = 0;
         ((WeaponFireState *)weaponFireState)->charge = 0;
     }
-    Actor_RequestActorState(arg0, weaponFireState, 0);
+    Actor_RequestActorState(actor, weaponFireState, 0);
 }
 
 void Weaponai_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {

@@ -374,9 +374,9 @@ struct ObjCode8022E938 {
 };
 extern void Playerai_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0);
 extern void Playerai_SelectMovementAnimation(ActorRecAt16E0 *object);
-extern void Playerai_ReleasePlayerResource(ResourceLoadState *arg0);
+extern void Playerai_ReleasePlayerResource(ResourceLoadState *resourceLoadState);
 extern void func_8022ECC4_de(void);
-extern void Playerai_ToggleActionFlagMode(Player *arg0);
+extern void Playerai_ToggleActionFlagMode(Player *player);
 extern void Playerai_AdvanceCurrentRunEndState(void);
 extern void func_8022EDF4_de(void);
 extern void func_8022EB04_de(void);

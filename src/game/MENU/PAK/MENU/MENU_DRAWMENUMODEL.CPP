@@ -6,7 +6,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "MENU/8043F69C.H"
+#include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
@@ -130,8 +130,8 @@ extern u8 *Scene_FindActorDefinition(void *, s32, s32);
 extern void Graphu64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Gobjinst_InitializeActor(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void Gobjinst_DispatchActorTypeUpdate(u8 *);
-extern s32 func_8025477C_de(void);
-extern void Cache_SetResourceActivityState(s32);
+extern s32 Cache_GetResourceActivityState(void);
+extern void Cache_SetResourceActivityState(unsigned int);
 extern void Scene_ChangeInstanceModel(void *, u8 *, s32, s32);
 extern void Gobjinst_RotatePoseMatrixBuffers(u8 *);
 extern void func_80246E44_de(u8 *);
@@ -211,7 +211,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     } else {
         draw->update = D_00443104;
     }
-    if (func_8025477C_de() == 0) {
+    if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
     if (widget->selection == 0xB) {

@@ -54,12 +54,12 @@ unsigned int D_blob_2dcaa653845d51211766[1] = {
 
 /* 800CA258_5.CPP */
 #if defined(VERSION_EU)
-const char rodata_unresolved_800C5424[12] =
+const char g_overlayLevelInfoText[12] =
     "level info\000\000";
 #endif
 
 /* 800CA270_6.CPP */
 #if defined(VERSION_EU_X)
-const char rodata_unresolved_800C5490[20] =
+const char g_overlayLevelNavVisionLabelText[20] =
     "level nav vision\000\000\000\000";
 #endif

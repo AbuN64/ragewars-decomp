@@ -1,9 +1,9 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/LONE/D_800E28D4.H"
-#include "MENU/8043F69C.H"
+#include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
@@ -45,7 +45,7 @@ void OnScreen_SetupFillMode(void);
 
 /* unable to generate initializer: unknown type */
 
-void Menu_DrawStyledMenuText(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {
+void Menu_DrawStyledMenuText(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2, func_8043FFAC_S2 *menu, void *text, s32 arg5) {
     f32 var_f1;
     s32 temp_f3;
     s32 temp_f3_2;
@@ -74,17 +74,17 @@ void Menu_DrawStyledMenuText(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s3
         }
     } else {
 block_5:
-        arg3->unk38 = 0;
+        menu->unk38 = 0;
     }
     if (arg0->unk8 & 0x08000000) {
-        if (arg3->unk3C != 0) {
-            arg3->unk38 = 0;
+        if (menu->unk3C != 0) {
+            menu->unk38 = 0;
         }
-        Menu_DrawMenuPanel(arg3, (TextBoundsText *)arg0, 1);
-        Menu_DrawMenuPanel(arg3, (TextBoundsText *)arg0, 0);
+        Menu_DrawMenuPanel(menu, (TextBoundsText *)arg0, 1);
+        Menu_DrawMenuPanel(menu, (TextBoundsText *)arg0, 0);
         var_s5 = 0;
     }
-    if (arg3->unk38 == 0) {
+    if (menu->unk38 == 0) {
         var_s5 = 0;
     }
     temp_v1 = arg0->unk8 & 0x3FE0;
@@ -130,7 +130,7 @@ block_5:
         }
         D_800E1E20 = var_s0;
     }
-    if (entry->unk0 == arg3->unk0) {
+    if (entry->unk0 == menu->unk0) {
         var_f1 = 1.25f;
     } else if (!(arg0->unk8 & 0x01000000)) {
         var_f1 = 0.25f;
@@ -166,7 +166,7 @@ block_5:
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;
     }
-    Onscrn_DrawText(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
+    Onscrn_DrawText(text, entry->unk14, entry->unk1C, (s32) (menu->alpha * (menu->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
 void Menu_DrawMenuOptionSprite(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {

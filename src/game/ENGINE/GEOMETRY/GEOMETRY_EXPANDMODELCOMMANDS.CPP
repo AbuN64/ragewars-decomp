@@ -25,11 +25,11 @@ extern u32 D_800CC384;
 
 extern s32 Geometry_SetModePreset(s32);
 
-s32 SetN64_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2);
+s32 SetN64_GetSizedPackSection(s32 packAddress, s32 sectionIndex, s32 *sectionSizeOut);
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32, void *, s32);
 
-void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement);
 
 
 

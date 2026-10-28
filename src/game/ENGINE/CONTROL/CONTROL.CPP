@@ -18,7 +18,7 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 
 #if defined(VERSION_EU)
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern unsigned int func_802B80F4_eu_x(void *arg0);
+extern unsigned int func_802B80F4_eu_x(void *motorContext);
 #elif defined(VERSION_US)
 extern unsigned int osMotorStart(void *arg0);
 #else
@@ -127,7 +127,7 @@ extern s32 osMotorInit(void *, void *, s32);
 
 #endif
 
-extern void Controller_DispatchControllerProfileChanges(void *arg0);
+extern void Controller_DispatchControllerProfileChanges(void *controllerProfile);
 
 void Control_ResetControllerPak(ControllerProfile *pakProfile) {
 
@@ -306,11 +306,11 @@ void Control_CommitProfileInput(void *controllerProfile) {
     o->buttonState = t_28;
 }
 
-s32 Control_AcquireControllerLock(s32 arg0) {
+s32 Control_AcquireControllerLock(s32 block) {
 
     s32 result;
 
-    result = osRecvMesg(&D_8010FBC0, 0, arg0) == 0;
+    result = osRecvMesg(&D_8010FBC0, 0, block) == 0;
     if (result != 0) {
         D_800CBC1C = Audio_GetThreadIdentifier(0);
     }

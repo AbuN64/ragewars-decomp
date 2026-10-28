@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
-#include "WORLD/8024E914.H"
+#include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/FRUSTUM.H"
@@ -23,7 +23,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-void *Scene_GetActorDefinition(void *arg0, s32 arg1);
+void *Scene_GetActorDefinition(void *world, s32 index);
 typedef struct SimpleInstanceOut {
     s8 kind;
     u8 pad1[3];

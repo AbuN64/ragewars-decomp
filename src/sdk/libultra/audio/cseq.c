@@ -2,7 +2,7 @@
 #include "sdk/AUDIO_EVENTS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTSTATE10_2.H"
+#include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra_inferred/cseq.H"

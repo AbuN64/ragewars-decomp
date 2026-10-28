@@ -122,16 +122,16 @@ extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned shor
 
 extern SpawnDispatchActor *SetN64_SpawnModelEffect(char *, void *, s32, CVector3, Triple, s32, f32);
 
-extern s32 Animpool_SpawnSceneEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
-                         s32 arg4, Triple arg5, f32 arg6, CVector3 arg7,
-                         Triple arg8, void *arg9);
+extern s32 Animpool_SpawnSceneEffect(void *scene, s32 arg1, s32 variant, s32 count,
+                         s32 owner, Triple position, f32 scale, CVector3 direction,
+                         Triple color, void *ref);
 
 extern char D_8011D8D0;
 
 extern char D_80145040;
 
 struct Context;
-extern void *func_8022A8F0_de(struct Context *arg0);
+extern void *func_8022A8F0_de(struct Context *context);
 
 extern s32 Gobjinst_RequestAnimationKind(void *a, s32 c, s32 flag);
 

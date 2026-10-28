@@ -4,7 +4,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "CINEMA/CINEMA.H"
 
 extern f32 D_800C73E4;
@@ -494,7 +494,7 @@ void Player_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->field13E4 = 0;
     player->field13D4 = 0;
     if (SetN64_IsModeThirteen() != 0 && D_80145088.settings.local == 0 && D_800CD730 > 10 && player->state < 11) {
-        func_8025E11C_de(D_800CF198[player->state]);
+        SoundElement_PlayDialogGroup(D_800CF198[player->state]);
     }
     if (isOnline()) {
         Player_ResetPlayerWeapons(player);

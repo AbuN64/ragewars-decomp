@@ -3,8 +3,8 @@
 #include "RENDER/WEAPON_INITIALIZECHARGEANDSTARTUPCUES_DATA.H"
 #include "TYPES.H"
 
-extern void Barrel_FillDamagePacket(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
-extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
+extern void Barrel_FillDamagePacket(void *packet, s32 damageSource, s32 damage, f32 radius, s32 damageFlags, s32 shield);
+extern void func_80219A40_de(void *attacker, void *arg1, void *packet);
 extern f32 D_800D2988;
 extern s32 D_801462C8;
 

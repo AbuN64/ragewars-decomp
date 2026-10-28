@@ -16,10 +16,10 @@ enum { START_MATCH = 0x40, RETURN_MENU = 0x3C, WAIT_SHORT = 0x41, WAIT_LONG = 0x
 #endif
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x40 clears D_80146894 and
-   calls Tsmos_RequestFrontendShutdown and func_8025E384_de; 0x3C clears D_80146894 and calls Menu_RequestOptionsScreen22; 0x41 and
+   calls Tsmos_RequestFrontendShutdown and SoundElement_DisableMusicGainOverride; 0x3C clears D_80146894 and calls Menu_RequestOptionsScreen22; 0x41 and
    0x3E wait 0x1F and 0x20 through SmXlate_SwitchScreen. Returns zero. */
 extern void Tsmos_RequestFrontendShutdown(void);
-extern void func_8025E384_de(void);
+extern void SoundElement_DisableMusicGainOverride(void);
 
 extern void SmXlate_SwitchScreen(s32);
 
@@ -31,7 +31,7 @@ s32 Frontend_ActivatePauseMenuAction(void) {
     case START_MATCH:
         D_8011FAC0.clockPaused = 0;
         Tsmos_RequestFrontendShutdown();
-        func_8025E384_de();
+        SoundElement_DisableMusicGainOverride();
         return 0;
     case RETURN_MENU:
         D_8011FAC0.clockPaused = 0;

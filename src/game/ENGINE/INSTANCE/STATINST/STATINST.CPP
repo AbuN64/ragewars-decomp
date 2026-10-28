@@ -1,14 +1,14 @@
 #include "COMMON/MODEL_RENDER.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/PROPGEOMETRY.H"
-#include "WORLD/8024E914.H"
+#include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "include_asm.h"
@@ -68,7 +68,7 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
     s32 var_v1;
     s8 temp_v0;
     s32 var_v1_2;
-    u16 temp_v1;
+    u16 flagsD8Value;
     u16 var_v0;
     u8 next_timer;
     DescriptorRecAt24 *descriptor;
@@ -97,9 +97,9 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
                 owner->flagsD8 | 4;
             return 0;
         }
-        temp_v1 = owner->flagsD8;
-        if (temp_v1 & 0x200) {
-            owner->flagsD8 = temp_v1 | 4;
+        flagsD8Value = owner->flagsD8;
+        if (flagsD8Value & 0x200) {
+            owner->flagsD8 = flagsD8Value | 4;
             owner->fade = 0;
             return 0;
         }

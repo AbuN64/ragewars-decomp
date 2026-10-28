@@ -1,7 +1,7 @@
 #ifndef GREGION_GREGION_H
 #define GREGION_GREGION_H
 #include "COMMON/PACKED.H"
-#include "COMMON/OBJECTLINKS4_2.H"
+#include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 extern CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon);
 extern CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon);
 extern void Region_ScaleWordsToFloats(void *wordStorage);

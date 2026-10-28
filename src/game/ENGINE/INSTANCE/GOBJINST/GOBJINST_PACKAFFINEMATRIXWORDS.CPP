@@ -20,7 +20,7 @@ extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
 extern f32 Gobjinst_GetActorRadius(Actor_func_8024A1D0_de *actor);
 
-extern void Ghot_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
+extern void Ghot_DispatchAttachmentEffects(void *effectAttachments, s32 attachmentsRemaining, s32 attachmentMatrices, void *actor, void *attachmentNodes);
 
 
 extern void *D_800CB440_de[];
@@ -49,7 +49,7 @@ extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void Graphu64_MultiplyAffineMatrices(BodyGobjinstApplyBoneTwistImpulse *, f32 *, f32 *);
 
-extern void Graphu64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *arg2, void *arg3);
 
 void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     CVector3 position;

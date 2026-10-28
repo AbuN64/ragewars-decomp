@@ -18,7 +18,7 @@
 #include "sdk/os.h"
 
 extern s32 D_800CD704;
-extern void Scene_SetThreadPriority(void *arg0, s32 arg1);
+extern void Scene_SetThreadPriority(void *arg0, s32 pri);
 void __scYield(void *scheduler) {
     void *currentRspTask;
     currentRspTask = (((struct ObjectLinks2F8 *) ((s8 *) scheduler))->unk_2F4);

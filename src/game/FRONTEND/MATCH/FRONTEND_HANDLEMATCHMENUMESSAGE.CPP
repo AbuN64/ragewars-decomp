@@ -16,7 +16,7 @@
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D9: when
    Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
-   D_8011FE88, restarts Cache_SetResourceActivityState when func_8025477C_de reports it idle, sets the menu stage to 8
+   D_8011FE88, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
    and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1DA sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Menu_ReturnToPreviousScreen. Returns zero. */
@@ -25,8 +25,8 @@
 extern void Pools_ResetActorPools(void *, s32);
 extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
-extern s32 func_8025477C_de(void);
-extern void Cache_SetResourceActivityState(s32);
+extern s32 Cache_GetResourceActivityState(void);
+extern void Cache_SetResourceActivityState(unsigned int);
 
 s32 Frontend_HandleMatchMenuMessage(void) {
     MarkMenuEventHandled();
@@ -38,7 +38,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
             Pools_ResetActorPools(&D_80145040.object, 0);
             Player_InitializePlayerPool(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
-            if (func_8025477C_de() == 0) {
+            if (Cache_GetResourceActivityState() == 0) {
                 Cache_SetResourceActivityState(1);
             }
             D_80145040.stage = 8;

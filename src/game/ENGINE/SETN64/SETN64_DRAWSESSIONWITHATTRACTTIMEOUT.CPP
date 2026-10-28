@@ -50,10 +50,10 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 cancelTarget,
 
 
 
-extern void SmXlate_SwitchScreen(s32 arg0);
-extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
+extern void SmXlate_SwitchScreen(s32 index);
+extern void SetN64_BeginModeTransition(GameSession *session, s32 targetMode);
 extern void Gsky_DrawPlayerListNoOp(void *arg0);
-extern void SetN64_DrawSessionFade(struct GameSession *arg0);
+extern void SetN64_DrawSessionFade(struct GameSession *session);
 
 
 

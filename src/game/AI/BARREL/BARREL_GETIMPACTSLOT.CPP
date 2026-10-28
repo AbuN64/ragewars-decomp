@@ -4,7 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
-extern s32 InstHdr_GetActorType(void *arg0);
+extern s32 InstHdr_GetActorType(void *prop);
 
 
 

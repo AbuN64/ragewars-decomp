@@ -2,12 +2,12 @@
 #define COMMON_STATERECAT91_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct StateRecAt91;
-struct StateRecAt91 {
+struct WeaponUnlockProfileView;
+struct WeaponUnlockProfileView {
     char p[0x78];
     u8 unk78;
     char p2[6];
-    s8 unk7F;
+    s8 profileIndex;
     char p3[17];
     u8 unk91;
 };
@@ -30,16 +30,16 @@ struct PresetRow {
 
 struct PresetTable;
 
-struct Arg;
-struct StateRecAt91;
+struct WeaponUnlockPlayerView;
+struct WeaponUnlockProfileView;
 
 
 
 struct PresetTable;
 typedef struct PresetTable PresetTable;
 
-struct StateRecAt91;
-typedef struct StateRecAt91 StateRecAt91;
+struct WeaponUnlockProfileView;
+typedef struct WeaponUnlockProfileView WeaponUnlockProfileView;
 
 struct InfoCode80423280;
 struct InfoCode80423280 {
@@ -53,8 +53,8 @@ struct InfoCode80423280 {
 struct InfoCode80423280;
 struct PlayerRecAt602;
 
-struct Arg;
-typedef struct Arg Arg;
+struct WeaponUnlockPlayerView;
+typedef struct WeaponUnlockPlayerView WeaponUnlockPlayerView;
 
 struct PlayerRecAt602;
 typedef struct PlayerRecAt602 PlayerRecAt602;

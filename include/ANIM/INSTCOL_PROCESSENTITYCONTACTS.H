@@ -1,5 +1,5 @@
 #ifndef ANIM_INSTCOL_PROCESSENTITYCONTACTS_H
 #define ANIM_INSTCOL_PROCESSENTITYCONTACTS_H
 #include "COMMON/DESCRIPTORRECAT29.H"
-extern void InstCol_ProcessEntityContacts(void *arg0);
+extern void InstCol_ProcessEntityContacts(void *self);
 #endif

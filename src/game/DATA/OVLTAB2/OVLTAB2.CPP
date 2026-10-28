@@ -7,7 +7,7 @@ const char g_cartridgeIndex[16] = "cartridge index";
 
 /* 800CA270.CPP */
 #if defined(VERSION_US)
-const char rodata_unresolved_800C50D0[20] =
+const char g_levelNavVisionText[20] =
     "level nav vision\000\000\000\000";
 #endif
 

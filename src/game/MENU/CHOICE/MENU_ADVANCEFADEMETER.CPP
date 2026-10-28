@@ -130,7 +130,7 @@ s32 Menu_DestroySixChoiceMenu(void) {
                      
 
 s32 Menu_UpdateSixChoiceMenu(void) {
-    s32 temp_v0;
+    s32 transitionModeResult;
     s32 temp_v0_2;
     s32 var_a0;
     CellRecAt1A *temp_a0;
@@ -141,8 +141,8 @@ s32 Menu_UpdateSixChoiceMenu(void) {
         return 0;
     }
     Tsmos_ActivateControllerState();
-    temp_v0 = SmpSlider_GetTransitionMode(D_800E4450->unk0);
-    switch (temp_v0) {                              /* irregular */
+    transitionModeResult = SmpSlider_GetTransitionMode(D_800E4450->unk0);
+    switch (transitionModeResult) {                              /* irregular */
     case 3:
         temp_v0_2 = D_800E4450->unkC - 1;
         D_800E4450->unkC = temp_v0_2;
@@ -153,7 +153,7 @@ s32 Menu_UpdateSixChoiceMenu(void) {
             if (((s16) temp_a0->unk16 + temp_a0->unk1A) < 0) {
                 temp_a0->unk16 = (u16) D_800E4450->unk0->unk44->unk1A;
             }
-            D_800E4450->unkC = temp_v0;
+            D_800E4450->unkC = transitionModeResult;
         }
 block_12:
         return 0;

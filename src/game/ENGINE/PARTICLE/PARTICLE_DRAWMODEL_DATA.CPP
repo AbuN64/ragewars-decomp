@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8027EB2C_CAA28[23] =
+const char s_simpleParticleObjectIndexText[23] =
     "simp part object index\000";
 #endif
 

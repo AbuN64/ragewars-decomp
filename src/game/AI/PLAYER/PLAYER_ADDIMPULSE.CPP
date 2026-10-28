@@ -8,8 +8,8 @@
 
 /* Decreases a float field at offset 0x12C0 by the given amount, clamps it from below at a floor, and when it reaches the floor builds and dispatches an event. Adapted from func_8022B60C_de, with the add, the clamp direction, the constant, the third argument (a field plus 0x1900), and a duplicated clamp assignment (which keeps the constant reloaded rather than held in a register) changed. */
 
-extern void Barrel_FillDamagePacket(void *arg0, void *arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
-extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
+extern void Barrel_FillDamagePacket(void *packet, void *damageSource, s32 damage, f32 radius, s32 damageFlags, s32 shield);
+extern void func_80219A40_de(void *attacker, void *arg1, void *packet);
 
 
 

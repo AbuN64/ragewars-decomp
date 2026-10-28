@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "RSP/800C97E0.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */
 

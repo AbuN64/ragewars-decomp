@@ -20,7 +20,7 @@ extern void Portal_SearchPath(CNavData *, NavigationSearchNode *);
 s32 Portal_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *point;
     NavigationBuffer *points;
-    NavigationBuffer *temp_v1_2;
+    NavigationBuffer *m_pusNavLinksValue;
     s32 *var_a3;
     s32 i;
     s32 var_s4;
@@ -48,8 +48,8 @@ s32 Portal_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *ar
         s32 forwardExcludedKind = 6;
         var_a3 = arg3;
         do {
-            temp_v1_2 = graph->m_pusNavLinks;
-            temp_v1_3 = navigationRecord(temp_v1_2, k);
+            m_pusNavLinksValue = graph->m_pusNavLinks;
+            temp_v1_3 = navigationRecord(m_pusNavLinksValue, k);
             if (arg4 != 0) {
                 if (temp_v1_3->second == arg1) {
                     var_s4 += 1;

@@ -21,8 +21,8 @@ void Scene_LoadSelectionLighting(ItemsSelectionState *state) {
 
 /* Processes both pending object lists between update barriers. */
 
-void Cinema_SetPlaybackFlag();                                  /* extern */
-void Cinema_ClearPlaybackFlag();                                  /* extern */
+void Cinema_SetPlaybackFlag(void);                                  /* extern */
+void Cinema_ClearPlaybackFlag(void);                                  /* extern */
 void Scene_DispatchEnabledEntityTrigger(void *, s32);                       /* extern */
 
 void Scene_UpdatePendingObjects(ItemsPendingState *pendingWorld) {

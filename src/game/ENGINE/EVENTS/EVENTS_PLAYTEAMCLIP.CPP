@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "RENDER/80268160.H"
+#include "RENDER/EFFECT_SPAWN_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
@@ -19,7 +19,7 @@ extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s3
 
 extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
-/* Plays an effect at a position through func_8025DEC0_de unless the global D_80146894 is set, selecting the target from the given object's type and team masks and choosing the scale from the global option flags. Adapted from Events_PlayClipEvent with the null object test and case 2 removed, a team test for case 0, a mask test for case 1, and the scale constants changed. */
+/* Plays an effect at a position through SoundElement_PlayPositionedSoundWithScale unless the global D_80146894 is set, selecting the target from the given object's type and team masks and choosing the scale from the global option flags. Adapted from Events_PlayClipEvent with the null object test and case 2 removed, a team test for case 0, a mask test for case 1, and the scale constants changed. */
 
 
 
@@ -43,13 +43,13 @@ extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 
 
 
-static inline void fire(char *arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6)
+static inline void fire(char *arg0, s32 target, s32 kind, Triple position, struct IntPair params)
 {
-    Events_ApplyDamageEvent((void *)arg0, arg1, arg2, arg3, arg6, 1, 0, 0x200);
+    Events_ApplyDamageEvent((void *)arg0, target, kind, position, params, 1, 0, 0x200);
 }
 
-void Events_ApplyFlag400RadialKnockback(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
-    Events_ApplyDamageEvent((void *)source, target, kind, position, arg6, 1, 1, 0x400);
+void Events_ApplyFlag400RadialKnockback(s32 source, s32 target, s32 kind, Triple position, struct IntPair params) {
+    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 1, 0x400);
 }
 
 void Events_StartActorEmitter(func_8024E8F0_S1 *arg0, ContextEventsStartActorEmitter *arg1, s32 unused2, Triple arg3, ParamsEventsStartActorEmitter arg6) {
@@ -79,7 +79,7 @@ void Events_IgnoreEvent(int arg0, int arg1, int arg2, int arg3, ...)
   }
 }
 
-void Events_PlayTeamClip(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, CVector3 arg3,
+void Events_PlayTeamClip(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, CVector3 soundPosition,
                    ParamsRecAt4 arg6) {
     s32 *global = &D_8011FAC0.clockPaused;
     s32 selected;
@@ -112,7 +112,7 @@ void Events_PlayTeamClip(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, C
         break;
     }
 
-    func_8025DEC0_de(arg6.value, arg3, 0, selected, scale);
+    SoundElement_PlayPositionedSoundWithScale(arg6.value, soundPosition, 0, selected, scale);
 }
 
 void Events_SpawnFilteredActorEffect(void *actor, Filter *filter, s32 arg2, Triple position, struct IntPair arg6) {
@@ -132,13 +132,13 @@ void Events_SpawnFilteredActorEffect(void *actor, Filter *filter, s32 arg2, Trip
     Barrel_SpawnActorEffect(actor, arg6.field_0, position, 0);
 }
 
-void Events_FireWithinHeightRange(char *arg0, s32 arg1, s32 arg2, TripleEventsFireWithinHeightRange arg3, struct IntPair arg6)
+void Events_FireWithinHeightRange(char *arg0, s32 target, s32 kind, TripleEventsFireWithinHeightRange arg3, struct IntPair params)
 {
     LevelActor *actor = (LevelActor *)arg0;
     f32 d = actor->position0.y - arg3.y;
 
     if (d < 0.0f ? -d <= D_800C9560 : d <= D_800C9564) {
-        fire(arg0, arg1, arg2, *(Triple *)&arg3, arg6);
+        fire(arg0, target, kind, *(Triple *)&arg3, params);
     }
 }
 

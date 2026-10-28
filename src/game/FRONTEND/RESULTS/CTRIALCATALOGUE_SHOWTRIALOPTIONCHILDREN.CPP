@@ -39,7 +39,7 @@ enum { RESULTS_OPTION_329 = 329, RESULTS_OPTION_331 = 331, RESULTS_OPTION_332 = 
 
 
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, sets the word at offset 0x988 of the object
    D_800E4690 points to to 8 and the byte at 0x10 of its item at 0xA50 to 0x5A, and plays sound

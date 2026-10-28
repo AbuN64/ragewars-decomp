@@ -84,9 +84,9 @@ extern void Nav_AddGoalNode(void *, s32);
 
 
 
-extern void Nav_UpdatePlayerSteering(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *controller);
 
-extern void Nav_SelectPlayerState(void *arg0);
+extern void Nav_SelectPlayerState(void *controller);
 
 extern f32 Scaled_DistanceToNode(s32 *, s32);
 
@@ -192,7 +192,7 @@ void func_80212A40_de(LevelActor *actor) {
     inner->reset2FC = 0;
 }
 
-void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *arg0)
+void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *actor)
 {
     AiController *state;
     CNavData *table;
@@ -202,7 +202,7 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *arg0)
     s32 value;
     u32 flags;
 
-    state = ((Player *)arg0->entity)->controller;
+    state = ((Player *)actor->entity)->controller;
     table = &D_8013B364;
     if (state->mode == -1) {
         Portal_ResetSearchState(table);

@@ -15,24 +15,24 @@ s32 _allocatePVoice(void *synth, void **selectedVoice, s16 requestedPriority) {
     void *candidateVoice;
 
     lowestPriority = requestedPriority;
-    candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pLameList.next;
+    candidateVoice = ((AudioSynthVoiceAllocatorView *)synth)->pLameList.next;
     voiceStolen = 0;
-    if ((candidateVoice != 0) || (candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pFreeList.next, (candidateVoice != 0))) {
+    if ((candidateVoice != 0) || (candidateVoice = ((AudioSynthVoiceAllocatorView *)synth)->pFreeList.next, (candidateVoice != 0))) {
         *selectedVoice = candidateVoice;
         alUnlink(candidateVoice);
-        alLink(candidateVoice, &((ALSynthalSynAllocVoice *)synth)->pAllocList.next);
+        alLink(candidateVoice, &((AudioSynthVoiceAllocatorView *)synth)->pAllocList.next);
     } else {
-        candidateVoice = ((ALSynthalSynAllocVoice *)synth)->pAllocList.next;
+        candidateVoice = ((AudioSynthVoiceAllocatorView *)synth)->pAllocList.next;
         stolenResultCopy = voiceStolen;
         if (candidateVoice != 0) {
             do {
-                if ((lowestPriority >= ((NodeallocatePVoice *)candidateVoice)->limit->limit) &&
-                    (((NodeallocatePVoice *)candidateVoice)->flags == 0)) {
+                if ((lowestPriority >= ((AudioPhysicalVoiceStealView *)candidateVoice)->vvoice->limit) &&
+                    (((AudioPhysicalVoiceStealView *)candidateVoice)->offset == 0)) {
                     *selectedVoice = candidateVoice;
                     voiceStolen = 1;
-                    lowestPriority = (s16)(u16)((NodeallocatePVoice *)candidateVoice)->limit->limit;
+                    lowestPriority = (s16)(u16)((AudioPhysicalVoiceStealView *)candidateVoice)->vvoice->limit;
                 }
-                candidateVoice = ((NodeallocatePVoice *)candidateVoice)->next;
+                candidateVoice = ((AudioPhysicalVoiceStealView *)candidateVoice)->next;
                 stolenResultCopy = voiceStolen;
             } while (candidateVoice != 0);
         }

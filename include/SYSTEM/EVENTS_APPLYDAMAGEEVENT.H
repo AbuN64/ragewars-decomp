@@ -10,11 +10,11 @@ typedef struct Shared_DamageParameters {
         struct { s8 impulse; u8 reserved[3]; };
     };
 } Shared_DamageParameters;
-struct CallbackEntryRecAt4V1 {
+struct EventCallbackEntry {
     EventsDispatchCallbackCallback callback;
     s32 unused;
 };
-struct ObjectRecAtD0 {
+struct ClipEventTargetView {
     u8 type;
     u8 pad1[0x17];
     s32 *kind;

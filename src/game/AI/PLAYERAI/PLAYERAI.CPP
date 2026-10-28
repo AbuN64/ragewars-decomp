@@ -18,8 +18,8 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "RENDER/8026AC38.H"
-#include "COMMON/EXTERNS_9.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/UNUSED.H"
@@ -30,7 +30,7 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/OBJRECV5.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/INTEGERSTATE2C.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
@@ -128,14 +128,14 @@ void func_80219480_de(void *effect, void *player) {
     char pad[0x10];
 }
 
-extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
-                          s32 arg4, s32 arg5);
+extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly,
+                          s32 lry, s32 interlaced);
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
-extern void CopyMatrix(f32 *arg0, f32 *arg1);
-extern void Graphu64_ScaleMatrixWorld(void *arg0, s32 arg1, f32 arg2, f32 arg3);
-extern void Graphu64_ConvertMatrixToFixed(void *arg0, void *arg1);
-extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void CopyMatrix(f32 *destinationMatrix, f32 *sourceMatrix);
+extern void Graphu64_ScaleMatrixWorld(void *matrix, s32 arg1, f32 arg2, f32 arg3);
+extern void Graphu64_ConvertMatrixToFixed(void *src, void *dst);
+extern void Geometry_QueueDirectModel(s32 model, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 void func_80219490_de(char *object, char *camera) {
     f32 first[16];
@@ -842,9 +842,9 @@ void func_8021A78C_de(void *playerObject) {
 
 extern s32 D_80140FF8;
 CQuatern func_8024796C_de(void *actor);
-s16 *func_8022AA9C_de(AimPlayer *arg0, s32 arg1);
-void Player_GetPlayerViewTranslation(void *arg0, f32 *arg1);
-s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
+s16 *func_8022AA9C_de(AimPlayer *aimPlayer, s32 weaponId);
+void Player_GetPlayerViewTranslation(void *player, f32 *origin);
+s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind, CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags);
 
 static __inline__ s32 containsFire(s16 **entries,s32 effect) {
  s32 i=0; s16 **p=entries;

@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/UNSIGNED_QUOTIENT.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/SESSIONHANDLERROW.H"

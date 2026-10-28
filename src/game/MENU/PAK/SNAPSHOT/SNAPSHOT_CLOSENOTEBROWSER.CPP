@@ -4,10 +4,10 @@
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "TYPES.H"
 #include "MENU/PAK/SNAPSHOT_CLOSENOTEBROWSER.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Releases temporary profile buffers and opens the controller-pak prompt for the selected player and channel, labelling the port prompt by channel. */
 

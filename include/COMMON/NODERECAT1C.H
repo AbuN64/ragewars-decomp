@@ -1,7 +1,7 @@
 #ifndef COMMON_NODERECAT1C_H
 #define COMMON_NODERECAT1C_H
 #include "TYPES.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 struct Node802C07B0;
 typedef struct Node802C07B0 Node802C07B0;
 
@@ -17,7 +17,7 @@ struct Node802C07B0 {
     void *field1C;
 };
 
-extern void Util_InitializeTimerServices();
+extern void Util_InitializeTimerServices(void);
 
 
 

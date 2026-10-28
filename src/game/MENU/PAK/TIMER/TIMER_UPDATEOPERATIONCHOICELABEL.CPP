@@ -1,6 +1,6 @@
 #include "COMMON/RECORDRECATCV1.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
-#include "MENU/80409A88.H"
+#include "MENU/PAK_PREVIEW_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 extern PakPreview *D_800E28BC;

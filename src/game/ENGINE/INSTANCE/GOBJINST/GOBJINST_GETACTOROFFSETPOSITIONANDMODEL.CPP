@@ -30,7 +30,7 @@ extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
 extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
+extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 unused6, s32 unused7);
 
 void Gobjinst_DrawModelWithProjection(void *actor, Camera *camera, f32 *transform, u8 layer) {
     struct LevelActor *object = actor;
@@ -89,9 +89,9 @@ extern void MatrixFromQuaternion(void *arg0, void *arg1);
 
 extern void Barrel_UpdateActorController(void *a, void *b);
 
-extern void **Gobjinst_RequestAnimatedModelVariant(void *arg0, s32 arg1);
+extern void **Gobjinst_RequestAnimatedModelVariant(void *actor, s32 variantIndex);
 
-extern void Cache_UnlockResource(void *arg0, void *arg1);
+extern void Cache_UnlockResource(void *arg0, void *resource);
 
 CVector3 *func_8024BC94_de(CVector3 *outVector, void *actor, CVector3 localVector) {
     CQuatern aimOrientation;

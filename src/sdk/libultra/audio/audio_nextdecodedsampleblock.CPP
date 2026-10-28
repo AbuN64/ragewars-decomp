@@ -4,7 +4,7 @@
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "sdk/AUDIO/audio_nextdecodedsampleblock.H"
 
-extern void Audio_DecodeFrame(void *arg0);
+extern void Audio_DecodeFrame(void *stream);
 
 
 

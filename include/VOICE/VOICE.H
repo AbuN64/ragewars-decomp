@@ -1,7 +1,7 @@
 #ifndef VOICE_VOICE_H
 #define VOICE_VOICE_H
 #include "COMMON/OBJRECAT4V6.H"
-#include "AUDIO/8025A3EC.H"
+#include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 extern void Audio_InitializeVoiceRecord(void *, int owner, int);
 extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex);
 extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);

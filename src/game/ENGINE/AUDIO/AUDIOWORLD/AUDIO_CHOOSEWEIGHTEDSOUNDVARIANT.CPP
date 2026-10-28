@@ -20,7 +20,7 @@
 #include "sdk/os.h"
 #include "SYSTEM/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 /* ROM-grounded data: src/rw_pool_80258B94_C9BD8_us_rev1.c */
 const unsigned int D_blob_5ba0e1e9862d81f4542d[2] = {
@@ -32,23 +32,23 @@ const unsigned int D_blob_a66da9ca903522cb6da3[2] = {
     0x3F800000, 0x42200000,
 };
 
-extern void Audio_StopVoicesByKey(void *arg0, s32 arg1);
+extern void Audio_StopVoicesByKey(void *record, s32 value);
 
 extern void Audio_StopVoicesBySecondaryValue(void *, s32);
 
-extern void Audio_StopVoicesByFlags(void *arg0, s32 arg1);
+extern void Audio_StopVoicesByFlags(void *record, s32 value);
 
-extern void AudioWorld_RecyclePendingSoundsByFlags(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsByFlags(void *lists, s32 matchingFlags);
 
 extern f32 D_800C3EE0_de[];
 
 extern s32 SetN64_IsModeThirteen(void);
 
-extern void *Gsky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero);
 
-extern void Audio_StopVoicesExceptKey(void *arg0, s32 arg1);
+extern void Audio_StopVoicesExceptKey(void *record, s32 value);
 
-extern void AudioWorld_RecyclePendingSoundsExceptKey(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsExceptKey(void *channelOwner, s32 retainedKey);
 
 extern void Audio_FadeOutMusic(int a);
 
@@ -165,24 +165,24 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
     __osRestoreInt(releaseInterruptMask);
 }
 
-s32 Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+s32 Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *context, s32 track, CVector3 position, s32 spatialMode, s32 owner, f32 arg5) {
     s32 handle;
 
-    arg0->alpha = arg5;
-    handle = Sound_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
-    arg0->alpha = D_800C3EE0_de[1];
+    context->alpha = arg5;
+    handle = Sound_PlaySoundAtPosition(context, track, position, spatialMode, owner);
+    context->alpha = D_800C3EE0_de[1];
     return handle;
 }
 
-void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
+void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *context) {
     CVector3 zero;
     void *result;
     CVector3 *vec;
 
     if (D_800CB720 != 0 &&
-        arg0->field2BB4 != 0 &&
+        context->field2BB4 != 0 &&
         SetN64_IsModeThirteen() != 0 &&
-        arg0->track > 0) {
+        context->track > 0) {
         {
             register f32 value = 0.0f;
 
@@ -192,8 +192,8 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
         }
         result = Gsky_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
-        if ((arg0->frame & 3) == 0) {
-            Sound_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
+        if ((context->frame & 3) == 0) {
+            Sound_PlaySoundAtPosition(context, context->track, *vec, 0, -1);
         }
     }
 }

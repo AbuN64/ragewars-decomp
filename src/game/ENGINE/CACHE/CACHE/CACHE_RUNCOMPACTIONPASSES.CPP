@@ -4,9 +4,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/MANAGER.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "sdk/os.h"
 
@@ -26,21 +26,21 @@ void Cache_RunCompactionPasses(s32 unused) {
     u32 mask;
     u32 temp_v0;
     s32 var_s0;
-    ResourceManagerState *temp_s1;
+    ResourceManagerState *resourceManager;
     void *queueAddress;
     OSMesgQueue *receive;
     OSMesgQueue *send;
 
-    temp_s1 = &D_8010117C;
+    resourceManager = &D_8010117C;
     var_s0 = 1;
-    temp_s1->active = var_s0;
-    temp_s1->count += var_s0;
+    resourceManager->active = var_s0;
+    resourceManager->count += var_s0;
     mask = __osDisableInt();
     temp_v1 = D_8010515C + var_s0;
     D_8010515C = temp_v1;
     if (temp_v1 != var_s0) {
         __osRestoreInt(mask);
-        queueAddress = (char *)temp_s1 - 0x3C;
+        queueAddress = (char *)resourceManager - 0x3C;
         receive = queueAddress;
         osRecvMesg(receive, 0, var_s0);
         var_s0 = 0;

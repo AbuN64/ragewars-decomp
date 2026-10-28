@@ -8,11 +8,11 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/RESULTS.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "SYSTEM/LIST.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
 extern u8 D_800CBC90[];
@@ -67,8 +67,8 @@ void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
         Player_ReleaseObjectHandles((void *) firstPlayer);
     }
     func_8025CBEC_de(func_8025CC6C_de());
-    func_8025E468_de();
-    func_8025E1EC_de(0x1000);
+    SoundElement_ClearVoiceFlags();
+    SoundElement_StopAudioByMask(0x1000);
     Cache_ReleaseResource(NULL, sceneToFree->unk100);
     Cache_ReleaseResource(NULL, sceneToFree->unkB8);
     Cache_ReleaseResource(NULL, sceneToFree->unkBC);
@@ -108,8 +108,8 @@ void Scene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
    node's four chunks with their counts, resets the two bucket lists and files the 48 buckets into
    the second, then for every face of both lists clears the solid bit when it is hidden and marks it
    0xF0 when its group bit is set in the current group's bitmap. */
-extern s32 Ppdecom_UnpackResource(void ***handle, s32 arg1);
-extern void SetN64_GetPackSectionSize(void *node, s32 arg1);
+extern s32 Ppdecom_UnpackResource(void ***handle, s32 retainUncompressed);
+extern void SetN64_GetPackSectionSize(void *node, s32 index);
 static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     s32 index;
     void *g;

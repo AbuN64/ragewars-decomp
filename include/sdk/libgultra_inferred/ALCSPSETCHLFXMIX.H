@@ -1,5 +1,5 @@
-#ifndef SDK_LIBGULTRA_INFERRED_802B3B80_7_H
-#define SDK_LIBGULTRA_INFERRED_802B3B80_7_H
+#ifndef SDK_LIBGULTRA_INFERRED_ALCSPSETCHLFXMIX_H
+#define SDK_LIBGULTRA_INFERRED_ALCSPSETCHLFXMIX_H
 #include "COMMON/STATERECAT34.H"
-extern void alCSPSetChlFXMix(s32 arg0, s32 arg1, s8 arg2);
+extern void alCSPSetChlFXMix(s32 player, s32 channel, s8 effectMix);
 #endif

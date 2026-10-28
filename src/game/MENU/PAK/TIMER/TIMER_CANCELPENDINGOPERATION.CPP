@@ -5,7 +5,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/RECORDRECAT1C.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/EXTERNS_20.H"
 #include "stddef.h"
 #include "TYPES.H"

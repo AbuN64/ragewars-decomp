@@ -22,7 +22,7 @@ extern RecordN64EngCreateNumericWidget *Cache_AllocateMemory(s32);
 void N64Eng_SetNumericWidgetValue(RecordN64EngCreateNumericWidget *widget, s32 arg1);
 
 
-extern void Node_ReplaceNodeRefs(s32 arg0, RecordN64EngCreateNumericWidget *arg1, RecordN64EngCreateNumericWidget *arg2);
+extern void Node_ReplaceNodeRefs(s32 node, RecordN64EngCreateNumericWidget *from, RecordN64EngCreateNumericWidget *arg2);
 
 RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     RecordN64EngCreateNumericWidget *source;

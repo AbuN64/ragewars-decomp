@@ -29,13 +29,13 @@ struct MenuRecAt14 {
     char pad[0x14];
     struct Variable *unk14;
 };
-extern s32 Initial_RequestTransitionWithPakDisabled(void *arg0, Outer8043E56C *arg1);
-extern s32 Initial_OpenDialogAfterTimerReset(void *arg0, Arg1Struct *arg1);
+extern s32 Initial_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *arg1);
+extern s32 Initial_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *arg1);
 extern void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *arg0);
-extern s32 Initial_OpenDialogWithControllerPak(void *arg0, Obj8043EB20 *arg1);
+extern s32 Initial_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *arg1);
 extern void Initial_EnableMenuControllerPak(void *arg0);
 
 extern s32 func_8043ED48_de(void);
-extern void Initial_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu);
+extern void Initial_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu);
 extern s32 Initial_RequestSessionTransition(void);
 #endif

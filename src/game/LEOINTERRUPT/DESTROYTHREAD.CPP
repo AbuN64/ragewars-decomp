@@ -4,12 +4,12 @@
 #include "COMMON/CTX.H"
 #include "TYPES.H"
 #include "COMMON/VERSION_CALLS.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
 extern Func802C1F10Node *D_800D526C;
 extern void *D_800D5270;
-extern void Audio_DequeueThread(void *arg0, Func802C1F10Node *arg1);
+extern void Audio_DequeueThread(void *listHead, Func802C1F10Node *node);
 
 void Audio_DestroyThread(Func802C1F10Node *thread) {
     Func802C1F10Node *node;

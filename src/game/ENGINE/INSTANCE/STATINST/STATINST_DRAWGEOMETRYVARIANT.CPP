@@ -1,6 +1,6 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -9,7 +9,7 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"
 #include "ACTORS/LIGHTING_BUILDLITMODEL.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern s32 D_800D2978;
 
@@ -19,7 +19,7 @@ extern void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 extern void Geometry_UnlockMaterialResources(void **arg0);
 
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
 
 extern s32 D_800CD3F0;
 
@@ -32,7 +32,7 @@ void Statinst_DrawDistanceFadedModel(void *);
 void Statinst_DrawModel(void *);
 
 
-extern void Cache_TouchResourceByKey(s32 arg0, s32 arg1);
+extern void Cache_TouchResourceByKey(s32 arg0, s32 resourceKey);
 
 extern s32 *Geometry_CollectMaterialResources(void **arg0, s32 arg1, s32 *arg2);
 
@@ -131,12 +131,12 @@ int Statinst_AdvanceResourceKey(void) {
     return D_800D0910;
 }
 
-void Statinst_BuildLitGeometryResource(void *arg0, s32 **arg1)
+void Statinst_BuildLitGeometryResource(void *wanted, s32 **resourcePair)
 {
-  struct ResourceBinding *binding = arg0;
+  struct ResourceBinding *binding = wanted;
   s32 new_var;
-  new_var = *(*arg1);
-  Cache_ReplaceResourcePairFirst(0, arg1, Lighting_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
+  new_var = *(*resourcePair);
+  Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, wanted));
 }
 
 void Statinst_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner, s32 unused, s32 remaining, s32 key) {

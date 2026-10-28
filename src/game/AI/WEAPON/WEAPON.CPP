@@ -20,11 +20,11 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "RENDER/PLAYERAI_TOGGLEFORCEMARKER.H"
-#include "WEAPONS/80231F5C_10.H"
+#include "WEAPONS/CHARGE_AND_LINKED_ACTOR_HANDLES.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "WEAPONS/MEASUREDRECAT1D8V2.H"
 #include "COMMON/EXTERNS_6.H"
-#include "WEAPONS/80231F5C_11.H"
+#include "WEAPONS/STARTUP_CUES_AND_SIDE_YAW.H"
 #include "COMMON/OBJB.H"
 #include "WEAPONS/MEASUREDRECAT1D8V3.H"
 #include "COMMON/LEVEL_ACTOR.H"
@@ -34,15 +34,15 @@
 #include "COMMON/MTX.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
-#include "WEAPONS/80231F5C_12.H"
+#include "WEAPONS/PITCH_TRANSLATION_AND_SPIN_ACTIONS.H"
 
 extern void Player_ReleaseObjectHandles(void *);
 extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
 
 /* 80231F5C_5.CPP */
-void Weapon_SpawnTargetPlayerFireEffect(void *aiTarget, s32 unused1, s32 arg2) {
+void Weapon_SpawnTargetPlayerFireEffect(void *aiTarget, s32 unused1, s32 effect) {
     AiTarget *target = aiTarget;
-    func_8021A9A4_de(target->player, arg2);
+    func_8021A9A4_de(target->player, effect);
 }
 
 /** Return the value pointed to by the indexed pointer table entry. */
@@ -188,7 +188,7 @@ int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
 #endif
 
 /* 80231F5C_7.CPP */
-extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
+extern void func_8022AF74_de(Shared_ActorView *actor, s32 soundId);
 
 void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireState *fireState) {
     Shared_ActorView *temp_a0;
@@ -203,8 +203,8 @@ void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireStat
 }
 
 /* 80231F5C_8.CPP */
-extern s32 Menu_CountLiveNodes(void *arg0);
-extern s32 Playerai_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Menu_CountLiveNodes(void *head);
+extern s32 Playerai_GetWeaponAmmo(void *actor, s16 weaponId);
 
 void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
@@ -272,7 +272,7 @@ Weaponai_InitializeSwitchAndRequestIdle
 (arg0, arg1);
 }
 
-extern s32 Playerai_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Playerai_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType);
 
 s32 Weapon_PickRandomArmedWeapon(void *player) {
     s32 weapon;
@@ -296,10 +296,10 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
 
 /* 80231F5C_9.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-void Weapon_ApplySwitchAndSetSingleRound(void *arg0, func_80232A38_S1 *arg1) {
-    Weaponai_ApplyWeaponSwitch(arg0, arg1);
-    arg1->unk13C = 1;
-    arg1->unk144 = 1;
+void Weapon_ApplySwitchAndSetSingleRound(void *part, func_80232A38_S1 *body) {
+    Weaponai_ApplyWeaponSwitch(part, body);
+    body->unk13C = 1;
+    body->unk144 = 1;
 }
 #endif
 
@@ -320,27 +320,27 @@ void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState
     }
 }
 
-s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
+s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_ActorView *actorView) {
     s32 temp_v0;
     void *owner;
 
     {
-        f32 field = arg2->stun;
+        f32 field = actorView->stun;
         if (D_800C301C_de < field) {
             return 1;
         }
     }
-    if ((actor->flags & 0x300000) && (arg2->remote != 0)) {
-        owner = arg2->owner;
+    if ((actor->flags & 0x300000) && (actorView->remote != 0)) {
+        owner = actorView->owner;
         temp_v0 = ((LevelActor *)owner)->actionReady;
         ((LevelActor *)owner)->actionReady = 0;
         return temp_v0 == 0;
     }
-    if (arg2->actionFlags & 0x2000) {
-        if (arg2->actionState != 0) {
+    if (actorView->actionFlags & 0x2000) {
+        if (actorView->actionState != 0) {
             return 1;
         }
-        return Player_HasAmmoForMode(arg2, arg2->selectedAction) == 0;
+        return Player_HasAmmoForMode(actorView, actorView->selectedAction) == 0;
     }
     return 1;
 }
@@ -349,11 +349,11 @@ void Weapon_ReleaseLinkedActorHandles(void *arg0) {
     Player_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
-void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *actorView, WeaponFireState *fireState) {
     void *temp_a0;
     s16 idx;
 
-    temp_a0 = arg0->self;
+    temp_a0 = actorView->self;
     idx = ((Shared_ActorView *)temp_a0)->selectedAction;
     fireState->charge = ((WeaponInfo *)D_800D052C[idx])->chargeRate * D_800C3020_de;
     if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) && (((Shared_ActorView *)temp_a0)->field11C0 == 0)) {
@@ -532,9 +532,9 @@ void Weapon_ApplySideDependentYaw(void *object, Event *event) {
 
 /* 80231F5C_12.CPP */
 
-extern s32 func_8022B184_de(void *arg0);
+extern s32 func_8022B184_de(void *object);
 
-extern void func_8022B984_de(void *arg0);
+extern void func_8022B984_de(void *actor);
 
 extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
@@ -542,27 +542,27 @@ extern char D_8011D8D0;
 
 extern f32 Graphu64_ApproachValue(f32, f32, s32);
 
-void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_EnterChargeStateWithCues(Shared_ActorView *actor, WeaponFireState *fireState) {
     void *player;
     void *temp_a0;
     s16 index;
 
-    player = arg0->self;
+    player = actor->self;
     if (fireState->mode == 2) {
         Player_SetPlayerState(player, player, 2);
     } else {
         fireState->cueTimer = D_800C3048_de[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&
             (D_80140FF8.field_0 == 1)) {
-            func_8021A9A4_de(arg0->self, 0x3FB);
+            func_8021A9A4_de(actor->self, 0x3FB);
         } else {
-            func_8021A9A4_de(arg0->self, 0x4CD);
+            func_8021A9A4_de(actor->self, 0x4CD);
         }
-        Actor_RequestActorState(arg0, fireState, 4);
+        Actor_RequestActorState(actor, fireState, 4);
         func_8022AEA0_de(player, 0x977);
         func_8022AF74_de(player, 0x974);
 
-        temp_a0 = arg0->self;
+        temp_a0 = actor->self;
         index = ((Shared_ActorView *)temp_a0)->selectedAction;
         fireState->charge =
             ((WeaponInfo *)D_800D052C[index])->chargeRate *
@@ -577,9 +577,9 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fi
 void func_80233314_de(void) {
 }
 
-void Weapon_SetDelayAndRequestStateEight(void *arg0, struct Shared_Particle *particle) {
+void Weapon_SetDelayAndRequestStateEight(void *actor, struct Shared_Particle *particle) {
     particle->unk148 = D_800C3050_de;
-    Actor_RequestActorState(arg0, particle, 8);
+    Actor_RequestActorState(actor, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
@@ -696,7 +696,7 @@ void Weapon_EaseSpinForActionFive(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
     ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) D_800C3074_de;
 }
 
-void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fireState) {
+void Weapon_ApproachSpinPhaseAndRelease(void *actor, struct WeaponFireState *fireState) {
     f32 temp_f0;
     f32 target;
 
@@ -704,7 +704,7 @@ void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fire
     temp_f0 = Graphu64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
-        Actor_RequestActorState(arg0, fireState, 2);
+        Actor_RequestActorState(actor, fireState, 2);
     }
 }
 

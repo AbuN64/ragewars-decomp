@@ -2,7 +2,7 @@
 #include "acmd.h"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/AUDIO/visetmode.H"
 #include "sdk/os.h"
 

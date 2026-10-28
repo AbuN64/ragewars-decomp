@@ -33,17 +33,17 @@ extern s32 D_800CED30;
 extern s32 D_8013B2BC;
 
 
-extern u8 *func_8024E6A0_de(void *arg0);
+extern u8 *func_8024E6A0_de(void *item);
 
-extern void InstHdr_GetActorTargetOffset(u8 *arg0, CVector3 *arg1);
+extern void InstHdr_GetActorTargetOffset(u8 *player, CVector3 *vector);
 
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 
 
 
-extern s32 InstHdr_GetActorMotionState(void *arg0);
+extern s32 InstHdr_GetActorMotionState(void *levelActor);
 
-extern f32 InstHdr_GetShadowGroundHeight(void *arg0, s32 arg1);
+extern f32 InstHdr_GetShadowGroundHeight(void *object, s32 mode);
 
 
 

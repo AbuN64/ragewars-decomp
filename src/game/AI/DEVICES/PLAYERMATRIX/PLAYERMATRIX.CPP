@@ -16,15 +16,15 @@
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "RENDER/OBJECTSTATE8E.H"
 
-extern void BuildRollMatrix(void *arg0, f32 arg1);
+extern void BuildRollMatrix(void *matrix, f32 rollAngle);
 
 
 
-extern void CopyMatrix(float *arg0, float *arg1);
+extern void CopyMatrix(float *destinationMatrix, float *sourceMatrix);
 
-extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
-extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
@@ -79,7 +79,7 @@ void func_80207A90_de(void *actor, s32 *stateFlags) {
     }
 }
 
-extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
 
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);

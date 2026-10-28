@@ -2,7 +2,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/OS/__OSRESETGLOBALINTMASK.H"
 #include "sdk/os.h"
 

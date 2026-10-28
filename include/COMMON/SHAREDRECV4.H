@@ -4,40 +4,40 @@
 #include "COMMON/ITEMRECAT20V1.H"
 typedef void ( *SharedRecV4)(void *, signed int, void *);
 
-struct NodeallocatePVoice;
-typedef struct NodeallocatePVoice NodeallocatePVoice;
+struct AudioPhysicalVoiceStealView;
+typedef struct AudioPhysicalVoiceStealView AudioPhysicalVoiceStealView;
 
-struct ObjectLinks10_2;
-typedef struct ObjectLinks10_2 ObjectLinks10_2;
+struct AudioFreeVoiceUpdateView;
+typedef struct AudioFreeVoiceUpdateView AudioFreeVoiceUpdateView;
 
-struct ALParam_s_func_802B3000_de;
-typedef struct ALParam_s_func_802B3000_de ALParam_s_func_802B3000_de;
+struct AudioVoiceAllocationUpdate;
+typedef struct AudioVoiceAllocationUpdate AudioVoiceAllocationUpdate;
 
-struct ObjectState10_3;
-typedef struct ObjectState10_3 ObjectState10_3;
+struct AudioIntegerControlUpdate;
+typedef struct AudioIntegerControlUpdate AudioIntegerControlUpdate;
 
-struct ObjectLinks10_2;
-struct ObjectLinks10_2 {
+struct AudioFreeVoiceUpdateView;
+struct AudioFreeVoiceUpdateView {
     char pad0[0x4];
-    s32 unk_4;
+    s32 delta;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    s16 unk_8;
+    s16 type;
     char pad8[0xC - 0x8 - sizeof(s16)];
-    void * unk_C;
+    void * pvoice;
 };
 
 
-struct ObjectState10_4;
-typedef struct ObjectState10_4 ObjectState10_4;
+struct AudioPitchControlUpdate;
+typedef struct AudioPitchControlUpdate AudioPitchControlUpdate;
 
 typedef void ( *SharedRecV7)(void *, signed int, void *);
 
-struct PVoice_s_func_802B3000_de;
-typedef struct PVoice_s_func_802B3000_de PVoice_s_func_802B3000_de;
+struct AudioAllocatedPhysicalVoiceView;
+typedef struct AudioAllocatedPhysicalVoiceView AudioAllocatedPhysicalVoiceView;
 
-struct ALParam_s_func_802B3000_de;
-struct ALParam_s_func_802B3000_de {
-    struct ALParam_s_func_802B3000_de *next;
+struct AudioVoiceAllocationUpdate;
+struct AudioVoiceAllocationUpdate {
+    struct AudioVoiceAllocationUpdate *next;
     s32 delta;
     s16 type;
     union {
@@ -62,38 +62,38 @@ struct ObjRecAt40V2 {
 };
 
 
-struct ObjectState10_3;
-struct ObjectState10_3 {
-    s32 unk_0;
+struct AudioIntegerControlUpdate;
+struct AudioIntegerControlUpdate {
+    s32 next;
     char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk_4;
+    s32 delta;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    s16 unk_8;
+    s16 type;
     char pad8[0xC - 0x8 - sizeof(s16)];
-    s32 unk_C;
+    s32 value;
 };
 
 struct Limit;
-struct NodeallocatePVoice;
-struct NodeallocatePVoice {
-    struct NodeallocatePVoice *next;
+struct AudioPhysicalVoiceStealView;
+struct AudioPhysicalVoiceStealView {
+    struct AudioPhysicalVoiceStealView *next;
     char pad4[4];
-    struct Limit *limit;
+    struct Limit *vvoice;
     char padC[0xCC];
-    s32 flags;
+    s32 offset;
 };
 
 typedef void ( *SharedRecV8)(void *, signed int, void *);
 
-struct ObjectState10_4;
-struct ObjectState10_4 {
-    s32 unk_0;
+struct AudioPitchControlUpdate;
+struct AudioPitchControlUpdate {
+    s32 next;
     char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk_4;
+    s32 delta;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    s16 unk_8;
+    s16 type;
     char pad8[0xC - 0x8 - sizeof(s16)];
-    f32 unk_C;
+    f32 pitch;
 };
 
 struct ObjRecAt40V2;

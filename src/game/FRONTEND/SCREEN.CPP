@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_3.H"
 #include "FRONTEND/SCREEN.H"
 #include "sdk/AUDIO/visetmode.H"
-#include "FRONTEND/8040B45C_22.H"
+#include "FRONTEND/SCREEN_VIDEO_MODE.H"
 
 /* 8040B45C_21.CPP */
 /* Selects the video mode and applies framebuffer and display configuration; the mode-to-word-array cast preserves configuration-store and mode-load scheduling. */

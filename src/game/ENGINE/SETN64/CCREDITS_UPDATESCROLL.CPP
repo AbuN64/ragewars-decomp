@@ -60,7 +60,7 @@ advance:
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern int Playerai_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *world);
 
 
 void CCredits_UpdateScroll(void *arg0) {

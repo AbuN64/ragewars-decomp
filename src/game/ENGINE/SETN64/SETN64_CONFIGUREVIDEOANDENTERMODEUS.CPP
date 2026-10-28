@@ -41,7 +41,7 @@ void SetN64_ConfigureVideoAndEnterModeUs(char *state) {
         SCR_W(state, 0x26DB0) = 0;
         SCR_W(state, 0x26DB8) = mode;
         Cinema_EndSequence();
-        func_8025E214_de(-1);
+        SoundElement_StopAudioExceptKey(-1);
         Control_SetControllerMode(0);
         handler = (void (*)(char *))D_auto_rodata_unresolved_800CD698[SCR_W(state, 0x26DB8) * 3];
         if (handler != 0) {
@@ -65,7 +65,7 @@ void SetN64_EnterPendingSessionMode(void *gameSession) {
         ((struct GameSession *)gameSession)->transitionTime = 0;
         ((struct GameSession *)gameSession)->mode = index;
         Cinema_EndSequence();
-        func_8025E214_de(-1);
+        SoundElement_StopAudioExceptKey(-1);
         Control_SetControllerMode(0);
         callback = D_800CD788[((struct GameSession *)gameSession)->mode].callback;
         if (callback != 0) {

@@ -1,12 +1,12 @@
 #include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "COMMON/UNUSED.H"
-#include "MENU/80403BCC.H"
+#include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "MENU/PAK/NOTE_GETNOTEPAGECOUNT.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Loads a page-aligned resource into the selected device slot and reports the result. */
 
@@ -23,9 +23,9 @@ extern s32 *Cache_AllocateResource(s32, s32, s32, void *);
 
 extern void Cache_DrainAndCompactResources(s32);
 
-extern void Cache_SetResourceActivityState(s32);
+extern void Cache_SetResourceActivityState(unsigned int);
 
-extern s32 func_8025477C_de(void);
+extern s32 Cache_GetResourceActivityState(void);
 
 extern void Control_ReadControllerStates(void);
 
@@ -43,14 +43,14 @@ extern s32 Pfs_ReadWriteFile(Device *, s32, s32, s32, s32, s32);
 
 
 /* Refreshes a controller slot and resolves its pending device state. */
-void Control_ReadControllerStates();
+void Control_ReadControllerStates(void);
 
  /* extern */
  /* extern */
-void Control_ReleasePakLock();
+void Control_ReleasePakLock(void);
 
  /* extern */
-void Note_UpdateStatus(s32);
+s32 Note_UpdateStatus(s32);
 
  /* extern */
 s32 osPfsRepairId(void *);
@@ -83,7 +83,7 @@ s32 osPfsRepairId(void *);
 
 
 
-extern s32 Note_BytesToPakPages(s32);
+extern u32 Note_BytesToPakPages(u32);
 
 extern PakDirectory *D_800E2854;
 
@@ -104,7 +104,7 @@ s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
   {
     return -2;
   }
-  if (func_8025477C_de() == 0)
+  if (Cache_GetResourceActivityState() == 0)
   {
     Cache_SetResourceActivityState(one);
   }

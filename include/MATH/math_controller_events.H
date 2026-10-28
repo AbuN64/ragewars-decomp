@@ -11,6 +11,6 @@ extern void Controller_SendControllerStickEvent(s16 port, s32 stick_x, s32 stick
 
 extern void Controller_SetControllerEventFilter(s32 (*arg0)(void));
 
-extern void Controller_AllocateControllerContext();
-extern void Controller_FreeControllerContext();
+extern void Controller_AllocateControllerContext(void);
+extern void Controller_FreeControllerContext(void);
 #endif

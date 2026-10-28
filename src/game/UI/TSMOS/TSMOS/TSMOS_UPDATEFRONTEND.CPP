@@ -13,7 +13,7 @@
 #include "RESMGR/TSMOS_SETIDLETIMER.H"
 #include "RESMGR/TSMOS_SHUTDOWNFRONTEND.H"
 #include "MATH/N64_ENG.H"
-#include "RESMGR/802A23A4_7.H"
+#include "RESMGR/FRAME_HEAP_MARKS.H"
 #include "MATH/MENU.H"
 
 extern s32 D_800D2C90;
@@ -67,11 +67,11 @@ mode_done:
     }
 }
 #if defined(VERSION_EU)
-s32 Tsmos_InitializeEuropeanFrontend();
+void Tsmos_InitializeEuropeanFrontend(void);
 #else
-s32 InitFrontendMenus();
+void InitFrontendMenus(void);
 #endif
-s32 Join_ResetJoinRequestEntries();
+void Join_ResetJoinRequestEntries(void);
 void Tsmos_InitFrontendOnce(void) {
     if (D_800D2C98 == 0) {
         Join_ResetJoinRequestEntries();

@@ -38,7 +38,7 @@ typedef struct Chaser {
     s32 dist[10];
 } Chaser;
 
-Racer *Playerai_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
+Racer *Playerai_GetPlayerByIndex(MatchWorld *world, u32 playerIndex);
 f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 

@@ -10,9 +10,9 @@
 
 /* Calls InitFrontendMenus and then SmXlate_SwitchScreen with 1. */
 #if defined(VERSION_EU)
-extern void Tsmos_InitializeEuropeanFrontend();
+extern void Tsmos_InitializeEuropeanFrontend(void);
 #else
-extern void InitFrontendMenus();
+extern void InitFrontendMenus(void);
 #endif
 extern void SmXlate_SwitchScreen(int);
 
@@ -42,7 +42,7 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     temp_v0 = Cache_AllocateMemory(0x14);
     D_800E5550 = temp_v0;
     *temp_v0 = 0;
-    func_8025E214_de(-1);
+    SoundElement_StopAudioExceptKey(-1);
     Control_SaveControllerSetup();
     if (Frontend_GetScreenMode() == 1) {
         root->x = 0x62;

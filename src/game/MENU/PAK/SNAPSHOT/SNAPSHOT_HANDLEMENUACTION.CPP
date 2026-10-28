@@ -2,7 +2,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/MENURECAT24.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/PAK_MENU.H"
 #include "TYPES.H"
@@ -56,7 +56,7 @@ extern u8 *D_800D7E14;
 
 extern s32 Note_GetFreePages(s32 ch, s32 *freeSpace);
 
-extern s32 Note_BytesToPakPages(s32 size);
+extern u32 Note_BytesToPakPages(u32 size);
 
 static inline int space_required(int size) {size += 0x610; return Note_BytesToPakPages(size);}
 
@@ -71,7 +71,7 @@ extern char D_0044EEF4[];
 
 extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
 
-extern s32 Snapshot_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern s32 Snapshot_SaveControllerRecord(s32 unused, Shared_PakMenu *menu, s32 unusedEvent);
 
 extern void Snapshot_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
@@ -263,7 +263,7 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     return 0;
 }
 
-s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
+s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
 {
     s32 ch = 0;
     s32 use;
@@ -286,7 +286,7 @@ s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     }
     if (D_8014D4EC_de != 0) {
         if (D_8014D4C0_de != 0) {
-            Snapshot_SaveControllerRecord(arg0, menu, arg2);
+            Snapshot_SaveControllerRecord(unused, menu, unusedEvent);
             return 1;
         }
     } else if (D_8014D4C0_de != 0) {
@@ -295,7 +295,7 @@ s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             Menu_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
-        Snapshot_SaveSnapshotAndClose(arg0, menu, arg2);
+        Snapshot_SaveSnapshotAndClose(unused, menu, unusedEvent);
         return 1;
     }
     if (D_8015375C != 0) {

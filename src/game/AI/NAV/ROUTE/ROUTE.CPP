@@ -5,7 +5,7 @@
 #include "COMMON/OBJECTLINKS14.H"
 #include "TYPES.H"
 
-extern void Portal_ResetSearchState(void *arg0);
+extern void Portal_ResetSearchState(void *graph);
 
 extern void Route_ClearGoalList(s32);
 
@@ -13,7 +13,7 @@ extern void Nav_AddGoalNode(void *, s32);
 
 extern void Route_SearchPathByKey(void *arg0, s32 arg1);
 
-extern void Portal_SearchPath(void *arg0, void *node);
+extern void Portal_SearchPath(void *graph, void *node);
 
 void Route_SearchSingleGoalPath(void *graph, s32 arg1, s32 arg2) {
     Portal_ResetSearchState(graph);

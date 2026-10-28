@@ -4,10 +4,10 @@
 
 /* Reads two values and reports whether the first reaches the rounded object size when the second is nonzero. */
 
-extern s32 Note_GetFreePages(void *a0, s32 *a1);
-extern s32 Note_CountFreeNotes(void *a0, s32 *a1);
+extern s32 Note_GetFreePages(void *slot, s32 *score);
+extern s32 Note_CountFreeNotes(void *a0, s32 *count);
 
-extern s32 Note_BytesToPakPages(s32 a0);
+extern u32 Note_BytesToPakPages(u32 bytes);
 
 s32 PAKInterface_CheckRecordsNoteCapacity(void *slot, s32 *out)
 {

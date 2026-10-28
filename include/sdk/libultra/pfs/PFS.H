@@ -1,5 +1,5 @@
-#ifndef SDK_LIBULTRA_PFS_80447BB0_17_H
-#define SDK_LIBULTRA_PFS_80447BB0_17_H
+#ifndef SDK_LIBULTRA_PFS_PFS_H
+#define SDK_LIBULTRA_PFS_PFS_H
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
 extern s32 __osCheckPackId(OSPfs*pfs, __OSPackId*temp);

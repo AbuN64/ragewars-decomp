@@ -234,8 +234,8 @@ s32 SmpFrameAnim_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg
 void SmpFrameAnim_IgnoreEvent(s32 unused0, struct Triple unused1) {
 }
 
-s32 SmpFrameAnim_DestroyController(void *arg0) {
-    Cache_FreeMemory(arg0);
+s32 SmpFrameAnim_DestroyController(void *allocation) {
+    Cache_FreeMemory(allocation);
     return 0;
 }
 

@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "RENDER/80293A04_2.H"
+#include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "RENDER/SETN64_DRAWMODE4BACKDROP.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
@@ -28,13 +28,13 @@ extern s32 D_800E28D0;
 
 
 
-extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 session, s32 cancelTarget, s32 target);
 
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 extern void Scene_LoadLevelResources(void *, void *, void *);
 
-extern void SmXlate_SwitchScreen(s32 arg0);
+extern void SmXlate_SwitchScreen(s32 index);
 
 
 /* func_80245A00_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
@@ -104,8 +104,8 @@ void SetN64_HandleMode7Transition(struct GameSession *session) {
     SetN64_CheckTimedSessionTransition(session, 20.0f, 9, 8);
 }
 
-void SetN64_InitializeMode8Scene(void *arg0) {
-    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
+void SetN64_InitializeMode8Scene(void *owner) {
+    SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     D_801462C8.counters.transitionActive = 0;
     SmXlate_SwitchScreen(0x18);
@@ -125,11 +125,11 @@ void SetN64_DrawMode8Session(GameSession *session) {
 
                                                   /* size = 0x18 */
 
-void SetN64_ResetMode9Items(s32 arg0) {
+void SetN64_ResetMode9Items(s32 sessionAddress) {
     D_800CD770 += 1;
     Scene_ResetTransitionViewport();
     Cinema_SetResponse(0.5f);
-    SetN64_ResetPlayerItems(arg0, 0x6F);
+    SetN64_ResetPlayerItems(sessionAddress, 0x6F);
 }
 
 void SetN64_HandleMode9Input(s32 session) {

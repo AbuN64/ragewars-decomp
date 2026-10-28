@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_0044E4B0.H"
 #include "COMMON/MENURECAT24.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "TYPES.H"
-#include "MENU/PAK/80405DC0.H"
+#include "MENU/PAK/PROMPT_OPERATIONS.H"
 #include "MENU/PAK/MENU_CREATEMENUFROMTEMPLATE.H"
 
 /* Confirms the selected pak menu entry: marks the menu busy and returns when Snapshot_CheckStatusPrompt takes

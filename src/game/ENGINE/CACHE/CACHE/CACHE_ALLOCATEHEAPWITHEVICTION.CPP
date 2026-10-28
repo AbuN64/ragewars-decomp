@@ -12,9 +12,9 @@
 #include "SYSTEM/LIST.H"
 
 
-extern void Cache_DetachResourceRequest(void *arg0, struct IntrusiveList *arg1);
+extern void Cache_DetachResourceRequest(void *unused0, struct IntrusiveList *resourceCacheEntry);
 
-extern void func_80255B2C_de(void *arg0, s32 arg1);
+extern void func_80255B2C_de(void *arena, s32 dataToFree);
 
 extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 
@@ -22,7 +22,7 @@ extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
 extern s32 D_80100570;
 
 
-extern void *func_80255A34_de(void *arg0, s32 arg1);
+extern void *func_80255A34_de(void *heap, s32 request);
 
 extern void *func_80255920_de(void *, s32);
 

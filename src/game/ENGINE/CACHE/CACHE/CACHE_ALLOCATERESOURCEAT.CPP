@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
@@ -22,7 +22,7 @@ extern s32 func_80255630_de(s8 *, void *, s32);
 
 extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
-extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
 
 extern void Cache_TouchResource(void *, Node80253610 *);
 

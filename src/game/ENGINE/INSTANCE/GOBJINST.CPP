@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -108,9 +108,9 @@ void GameObject_DrawActorShadow(char *obj, s32 unused, char *info) {
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 float InstHdr_GetShadowGroundHeight(void *object, s32 mode);
-f32 InstHdr_GetActorShadowRadius(Actor_u1 *arg0);
-s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
-void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor);
+s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
+void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
 void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha);

@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern double Gfx_GetConvertedCounterRatio();
+extern double Gfx_GetConvertedCounterRatio(void);
 #endif

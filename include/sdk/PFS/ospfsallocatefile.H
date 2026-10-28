@@ -1,5 +1,5 @@
-#ifndef SDK_PFS_80446BD0_4_H
-#define SDK_PFS_80446BD0_4_H
+#ifndef SDK_PFS_OSPFSALLOCATEFILE_H
+#define SDK_PFS_OSPFSALLOCATEFILE_H
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 extern s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank,
                          int *decleared, int *last_page);

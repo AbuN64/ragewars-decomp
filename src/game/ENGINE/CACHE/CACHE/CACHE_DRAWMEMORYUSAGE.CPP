@@ -26,7 +26,7 @@ extern u32 D_80101190;
 
 
 extern void func_80255B2C_de(void *, void *);
-extern void func_802553B4_de(s32, ResourceLoadRequest *);
+extern void HashTable_SetResourceByKey(s32, ResourceLoadRequest *);
 
 static inline void find(s32 key, ResourceLoadRequest **out) {
     EntryRecAtCV1 *node = D_80101194 + (((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^ ((u32)key >> 17)) & D_80101190);
@@ -71,7 +71,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
         find(request->key, &existing);
         if (existing != 0) {
             if (existing->priority < request->priority) {
-                func_80255488_de(existing->key);
+                HashTable_RemoveResourceByKey(existing->key);
                 existing->node->owner = 0;
                 if (!(existing->node->flags & 0x702)) {
                     func_80255B2C_de(&D_801051A0, existing->node->data);
@@ -85,7 +85,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
                 return existing;
             }
         }
-        func_802553B4_de(request->key, request);
+        HashTable_SetResourceByKey(request->key, request);
         request->node->owner = request;
         if (dropReference != 0) {
             node = request->node;
@@ -101,13 +101,13 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
 
 #include "gbi.h"
 #include "UTIL/HEAP.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 
 extern Gfx *g_displayListCursor;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
-extern void Geometry_SetCombineMode(s32);
-extern void Geometry_SetModePreset(s32);
+extern void Geometry_SetCombineMode(u32);
+extern s32 Geometry_SetModePreset(s32);
 
 /* The main heap (its other users declare D_801051A0 as a plain byte); its block list is read through this view. */
 static inline struct Heap *mainHeap(void) {

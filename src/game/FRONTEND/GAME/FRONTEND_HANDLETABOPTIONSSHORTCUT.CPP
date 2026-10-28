@@ -15,7 +15,7 @@
 
 
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 /* Sets the word at offset 0xC of the object D_800E4514 points to and calls Tsmos_ActivateControllerState, once:
    nothing happens when the word is already set. Returns zero. */
@@ -33,7 +33,7 @@ extern void Menu_ReturnToPreviousScreen(void);
 
 /* Calls MarkMenuEventHandled, Random_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and Menu_ReturnToPreviousScreen, and returns zero. */
 
-extern void Menu_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen(void);
 
 typedef s32 (*Handler80423930)(void *, s32, s32, s32, s32);
 
@@ -47,7 +47,7 @@ extern Handler80423930 D_800E456C;
    func_80245B28_de and returns zero. */
 
 
-extern void Cinema_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext(void);
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and

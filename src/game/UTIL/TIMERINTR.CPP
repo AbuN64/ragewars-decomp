@@ -1,6 +1,6 @@
 #include "COMMON/NODERECAT1C.H"
 #include "UTIL/TIMERINTR.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "TYPES.H"
 #include "sdk/libgultra/libasm_802BBC68_19.h"
 #include "sdk/os.h"

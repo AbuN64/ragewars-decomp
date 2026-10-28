@@ -211,7 +211,7 @@ void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
 
 extern s16 D_800CE8DC[];
 extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
 
 
 
@@ -225,13 +225,13 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /* The PAL copy of Weapon_UpdateIdleWeaponSelection: the weapon switch and the idle request are two calls here. */
-void func_80230610_eu(LevelActor *arg0, void *arg1) {
+void func_80230610_eu(LevelActor *levelActor, void *arg1) {
     s32 state;
     void *actor;
     CGameStatus *audio;
     s32 mode;
 
-    actor = arg0->controller;
+    actor = levelActor->controller;
     state = *(s16 *)((char *)D_800CE8DC +
                      (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)arg1)->count != 0) {
@@ -274,8 +274,8 @@ void func_80230610_eu(LevelActor *arg0, void *arg1) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
-        Weaponai_ApplyWeaponSwitch(arg0, arg1);
-        Actor_RequestActorState(arg0, arg1, 0);
+        Weaponai_ApplyWeaponSwitch(levelActor, arg1);
+        Actor_RequestActorState(levelActor, arg1, 0);
     }
 }
 #endif

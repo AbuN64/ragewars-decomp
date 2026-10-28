@@ -243,5 +243,5 @@ struct TeamWeaponPlayer;
 typedef struct TeamWeaponPlayer TeamWeaponPlayer;
 extern void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player);
 
-extern void func_8025E1C4_de(s32);
+extern void SoundElement_StopAudioBySecondaryValue(s32);
 #endif

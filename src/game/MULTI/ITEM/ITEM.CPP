@@ -102,11 +102,11 @@ s32 Multi_IsPlayerItemAvailable(struct ItemRecAt18V2 *item, struct HolderMultiIs
     return result;
 }
 
-/* Calls func_8025E384_de and then returns what Menu_TryCreateMenu gives for the same three arguments. */
-extern void func_8025E384_de();
+/* Calls SoundElement_DisableMusicGainOverride and then returns what Menu_TryCreateMenu gives for the same three arguments. */
+extern void SoundElement_DisableMusicGainOverride(void);
 extern s32 Menu_TryCreateMenu(void *, void *, void *);
 
 s32 Multi_CreateMenuWithDefaultMusicGain(void *first, void *second, void *third) {
-    func_8025E384_de();
+    SoundElement_DisableMusicGainOverride();
     return Menu_TryCreateMenu(first, second, third);
 }

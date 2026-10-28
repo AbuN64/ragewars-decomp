@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
-#include "RENDER/80268160.H"
+#include "RENDER/EFFECT_SPAWN_VIEWS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
@@ -131,6 +131,6 @@ void Events_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
             }
             break;
         }
-        func_8025DEC0_de(params.value, position, 0, owner, gain);
+        SoundElement_PlayPositionedSoundWithScale(params.value, position, 0, owner, gain);
     }
 }

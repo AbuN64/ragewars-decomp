@@ -24,23 +24,23 @@ struct ALFilter_s {
 
 /* Filter parameter / control-update types (libultra AL_FILTER_*). */
 enum {
-    AL_FILTER_FREE_VOICE,
-    AL_FILTER_SET_SOURCE,
-    AL_FILTER_ADD_SOURCE,
-    AL_FILTER_ADD_UPDATE,
-    AL_FILTER_RESET,
-    AL_FILTER_SET_WAVETABLE,
-    AL_FILTER_SET_DRAM,
-    AL_FILTER_SET_PITCH,
-    AL_FILTER_SET_UNITY_PITCH,
-    AL_FILTER_START,
-    AL_FILTER_SET_STATE,
-    AL_FILTER_SET_VOLUME,
-    AL_FILTER_SET_PAN,
-    AL_FILTER_START_VOICE_ALT,
-    AL_FILTER_START_VOICE,
-    AL_FILTER_STOP_VOICE,
-    AL_FILTER_SET_FXAMT
+    AL_FILTER_FREE_VOICE = 0,
+    AL_FILTER_SET_SOURCE = 1,
+    AL_FILTER_ADD_SOURCE = 2,
+    AL_FILTER_ADD_UPDATE = 3,
+    AL_FILTER_RESET = 4,
+    AL_FILTER_SET_WAVETABLE = 5,
+    AL_FILTER_SET_DRAM = 6,
+    AL_FILTER_SET_PITCH = 7,
+    AL_FILTER_SET_UNITY_PITCH = 8,
+    AL_FILTER_START = 9,
+    AL_FILTER_SET_STATE = 10,
+    AL_FILTER_SET_VOLUME = 11,
+    AL_FILTER_SET_PAN = 12,
+    AL_FILTER_START_VOICE_ALT = 13,
+    AL_FILTER_START_VOICE = 14,
+    AL_FILTER_STOP_VOICE = 15,
+    AL_FILTER_SET_FXAMT = 16
 };
 struct ALParam_s;
 struct ALParam_s {
@@ -138,7 +138,7 @@ extern s16 _getRate(f64 vol, f64 tgt, s32 count, u16 *ratel);
 struct ALEnvMixer;
 typedef struct ALEnvMixer ALEnvMixer;
 
-extern f64 _ldexpf(f64 arg0, s32 arg1);
+extern f64 _ldexpf(f64 value, s32 shift);
 
 extern f64 frexp(f64 arg0, s32 *arg2);
 
@@ -146,6 +146,6 @@ extern float D_800C770C_de;
 
 
 
-extern f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern f32 Audio_GetEnvelopeVolume(f32 initialVolume, s32 sampleCount, s32 rateInteger, s32 rateFraction);
 
 #endif

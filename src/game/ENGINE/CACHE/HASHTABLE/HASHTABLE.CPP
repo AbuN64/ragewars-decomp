@@ -12,7 +12,7 @@
 extern s32 D_80101190;
 extern EntryRecAtCV1 *func_80255920_de(void *, s32);
 
-void func_802552E0_de(s32 capacity)
+void HashTable_InitializeResourceTable(s32 capacity)
 {
     s32 bits = 0;
     s32 top = 0;
@@ -58,7 +58,7 @@ struct Shared_HashLink {
 };
 
 
-void func_802553B4_de(u32 key, struct ResourceLoadRequest *value) {
+void HashTable_SetResourceByKey(u32 key, struct ResourceLoadRequest *value) {
  EntryRecAtCV1 *entry = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17)) & D_80101190);
  EntryRecAtCV1 *tail;
  EntryRecAtCV1 *slot;
@@ -77,7 +77,7 @@ void func_802553B4_de(u32 key, struct ResourceLoadRequest *value) {
  slot->key=key;slot->value=value;tail->next=slot;
 }
 
-void func_80255488_de(s32 resourceKey) {
+void HashTable_RemoveResourceByKey(s32 resourceKey) {
     s32 key;
     EntryRecAtCV1 *preservedEntry;
     EntryRecAtCV1 *successorEntry;
@@ -123,7 +123,7 @@ found:
 
 /* Rounds a value up to a power of two by locating its highest set bit and bumping it unless exactly one bit is set. Adapted from Bitarray_GetRequiredBitCount, with a signed loop counter, an exactly-one-bit test, and 1 << bit returned instead of the bit index. */
 
-s32 func_80255540_de(s32 mask) {
+s32 HashTable_RoundCapacityToPowerOfTwo(s32 mask) {
     s32 bitCount;
     s32 highestBit;
     s32 bit;

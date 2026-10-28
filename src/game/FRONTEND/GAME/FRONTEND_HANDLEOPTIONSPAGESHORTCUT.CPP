@@ -18,7 +18,7 @@ extern void MarkMenuEventHandled();
 
 extern void SmXlate_SwitchScreen(s32);
 
-extern void Menu_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen(void);
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 enum { SHORTCUT_RESET = 0x50, SHORTCUT_SIX = 0x57, SHORTCUT_FIVE = 0x58 };
@@ -50,12 +50,12 @@ s32 Frontend_UpdateOptionsPageExit(void) {
 }
 
 s32 Frontend_HandleOptionsPageShortcut(void) {
-    s32 temp_v0;
+    s32 focusedElementIdResult;
     s32 var_s0;
     MarkMenuEventHandled();
     var_s0 = 1;
-    temp_v0 = Menu_GetFocusedElementId();
-    switch(temp_v0) {
+    focusedElementIdResult = Menu_GetFocusedElementId();
+    switch(focusedElementIdResult) {
     case SHORTCUT_RESET:g_optionsPage->value=-1;break;
     case SHORTCUT_SIX:g_optionsPage->value=6;break;
     case SHORTCUT_FIVE:g_optionsPage->value=5;break;

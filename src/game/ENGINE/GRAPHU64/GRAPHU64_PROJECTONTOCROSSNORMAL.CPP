@@ -1,6 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BALLISTICPARAMS.H"
-#include "COMMON/S1_3.H"
+#include "COMMON/GRAPHICS_MATRIX_AND_VECTOR_MATH.H"
 #include "particle/GRAPHU64_PROJECTONTOCROSSNORMAL.H"
 
 static inline void normalizeProjectionNormal(CVector3 *normal) {

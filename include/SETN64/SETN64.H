@@ -1,7 +1,7 @@
 #ifndef SETN64_SETN64_H
 #define SETN64_SETN64_H
 #include "COMMON/RESULTS.H"
-#include "RENDER/8028FD2C.H"
+#include "RENDER/VISIBLE_EFFECT_NODE_VIEWS.H"
 extern void *SetN64_GetPackSection(void *table, s32 index);
 extern s32 SetN64_GetPackSectionOffsetAndSize(s32 directoryAddress, s32 sectionIndex, s32 *sectionSizeOut);
 extern void SetN64_GetPackBaseAndSize(int *directory, int * *packBaseOut, int *packSizeOut);

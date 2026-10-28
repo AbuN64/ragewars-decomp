@@ -452,7 +452,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   void *particleDescriptor;
   func_8027ADBC_S3 *attractionTarget;
   void *temp_s0_2; 
-  func_8027ADBC_S3 *temp_s0_4;
+  func_8027ADBC_S3 *targetValue;
   void *temp_s0_5;
   void *temp_s2; 
   void *var_a0;
@@ -619,15 +619,15 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   Particle_UpdateSineMotion(arg0, 1.0f);
   return;
   block_common:
-  temp_s0_4 = arg0->target;
+  targetValue = arg0->target;
 
   particleDescriptor = arg0->desc;
-  if (((temp_s0_4 != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
+  if (((targetValue != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
   {
-    temp_f0_6 = InstHdr_GetActorBaseOffset(temp_s0_4);
-    sp20 = temp_s0_4->pos;
+    temp_f0_6 = InstHdr_GetActorBaseOffset(targetValue);
+    sp20 = targetValue->pos;
     sp20.y += temp_f0_6;
-    sp20.y += Gobjinst_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
+    sp20.y += Gobjinst_GetActorHeight(targetValue) * D_800C4BE8_de;
     Graphu64_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
     Graphu64_NormalizeVec3(&sp40);
     sp70 = Graphu64_BuildDirectionQuaternion(&sp40);

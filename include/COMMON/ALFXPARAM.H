@@ -10,7 +10,7 @@ extern const unsigned char D_800C7784_de[];
 extern const char D_800C7784_de[];
 #endif
 
-extern int alFxParam(int *arg0, int arg1, int arg2);
+extern int alFxParam(int *filter, int paramId, int param);
 
 extern s32 s_sirawreadText;
 extern s32 D_800C7A00_de;

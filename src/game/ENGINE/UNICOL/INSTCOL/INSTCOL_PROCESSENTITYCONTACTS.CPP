@@ -123,15 +123,15 @@ s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContact
 
 s32 CCollision_IntersectSegmentBox(Ray *ray, Box *box, f32 *out);
 
-void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *arg0, s32 arg1);
+void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *actor, s32 variantIndex);
 
 void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
-void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
 void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
-void Cache_UnlockResource(void *arg0, Node80253610 *arg1);
+void Cache_UnlockResource(void *arg0, Node80253610 *resource);
 
 void CInstanceCollision_TraceActorBounds(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];

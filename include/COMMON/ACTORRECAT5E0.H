@@ -46,7 +46,7 @@ struct PlayerRecAt8 {
     float value;
 };
 
-extern void Control_DeactivateActorSnapshot();
+extern void Control_DeactivateActorSnapshot(void);
 
 
 struct PlayerRecAt8;
@@ -58,24 +58,24 @@ extern Snapshot D_8010BC40;
 
 struct Snapshot;
 
-extern void Control_SaveActorSnapshot();
+extern void Control_SaveActorSnapshot(void);
 
 struct Snapshot;
 
 extern s32 Control_FindConnectedControllerPort(s32 arg0);
 
 
-extern void Control_RestoreActorSnapshot();
+extern void Control_RestoreActorSnapshot(void);
 
 
-extern void Control_TickSnapshotCountdown();
+extern void Control_TickSnapshotCountdown(void);
 
 struct ActorRecAt5E0;
 typedef struct ActorRecAt5E0 ActorRecAt5E0;
 
-extern void Control_ClearMenuControlFlag();
+extern void Control_ClearMenuControlFlag(void);
 
-extern void Control_EnableAllControllerPaks();
+extern void Control_EnableAllControllerPaks(void);
 
 
 extern void Control_CycleActorSnapshotMode(void);
@@ -83,12 +83,12 @@ extern void Control_CycleActorSnapshotMode(void);
 struct ActorList;
 typedef struct ActorList ActorList;
 
-extern void Control_ResetControllerProfiles();
+extern void Control_ResetControllerProfiles(void);
 
-extern void Control_ResetActorSnapshot();
+extern void Control_ResetActorSnapshot(void);
 
 
-extern void Control_RestoreControllerSetup();
+extern void Control_RestoreControllerSetup(void);
 
 
 extern s32 Control_AdvanceEffectCurve(void *arg0);
@@ -96,5 +96,5 @@ extern s32 Control_AdvanceEffectCurve(void *arg0);
 struct SampledCurve;
 typedef struct SampledCurve SampledCurve;
 
-extern void Control_SetMenuControlFlag();
+extern void Control_SetMenuControlFlag(void);
 #endif

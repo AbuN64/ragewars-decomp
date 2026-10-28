@@ -9,7 +9,7 @@
 #include "sdk/os_pif.h"
 
 /* 802B83EC.CPP */
-extern u32 __osPfsGetStatus(s32 arg0, s32 arg1);
+extern u32 __osPfsGetStatus(s32 queue, s32 channel);
 
 u32 __osContRamRead(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outputData) {
     Block40 saved;
@@ -68,7 +68,7 @@ u32 __osContRamRead(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outp
 /* 802B83EC_2.CPP */
 /* Packs one controller-pak read command for a given address into the PIF RAM block D_80154110 after skipping one zero byte per preceding channel, with its data bytes set to 0xFF and the end marker after it (libultra __osPackRamReadData). Adapted from __osPackRamWriteData with the command bytes changed to a read and the data bytes filled with 0xFF instead of copied. */
 
-extern u32 __osContAddressCrc(u32 arg0);
+extern u32 __osContAddressCrc(u32 blockAddress);
 
 void __osPackRamReadData(s32 channel, s32 blockAddress) {
     Block40 packet;

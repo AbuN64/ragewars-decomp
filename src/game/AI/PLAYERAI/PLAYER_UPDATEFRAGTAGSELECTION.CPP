@@ -16,13 +16,13 @@
 #include "COMMON/SELF.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJECTSTATE18.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "WEAPONS/WEAPONAI_DRAWREDMARKERQUAD.H"
 #include "COMMON/GAME_SESSION.H"
@@ -713,13 +713,13 @@ extern void *func_8025CC6C_de(void);
 
 extern s32 func_8025CA24_de(void *, void *);
 
-extern void func_8024BE3C_de(void *arg0);
+extern void func_8024BE3C_de(void *base);
 
 extern void func_80246E44_de(char *);
 
-extern void GameObject_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
+extern void GameObject_DrawBlobShadow(void *actor, CVector3 *offset, s32 raised);
 
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
 
 /* Draws the per-player overlays for one view between Geometry_BeginModelBatch and Geometry_FlushModelBatch: for each player
    in the list from 0x20 it draws the scope model 0xC84 or 0xC85 (by the zoom mode at 0x120C) at the
@@ -1099,7 +1099,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
-extern void SoundElement_PlayFlatSound(s32);
+extern s32 SoundElement_PlayFlatSound(s32);
 extern void BuildDirectionMatrix(void *, void *);
 extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), Graphu64_ConvertMatrixToFixed(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
@@ -1200,4 +1200,4 @@ const unsigned int D_auto_src_rw_tail_80227038_C8890_us_rev1[8] = {
 };
 
 /* 800C7CB0.CPP */
-const char D_auto_src_ragewars_resident_strings_C88B0_us_rev1[24] = "player anim object info";
+const char s_playerAnimObjectInfoText[24] = "player anim object info";

@@ -128,21 +128,21 @@ extern void func_8024BE3C_de(void *);
 extern struct Shape_typemap_165 * Cache_AllocateResource();
 extern void Cache_DrainAndCompactResources(s32);
 extern s32 Cache_RequestWordCountedResourcePinned(s32, void *, s32, void *);
-extern void **Cache_RequestPackSection(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
+extern void **Cache_RequestPackSection(s32 arg0, void *handle, s32 sectionSelector, s32 tempv0, void *world, void *resourceTag, void *loadTag);
 extern s32 func_80255228_de(void *);
 extern void func_8025C8D8_de(void *, void *, s32);
-extern void Scene_ShowResultsGoal();
+extern void Scene_ShowResultsGoal(void);
 extern s32 Scene_GetModelIdAtIndex();
 extern void Scene_CopyLevelName();
 extern void Scene_ClearSceneObjectCounts();
 extern void Scene_UnlockActiveSectionResources();
-extern void Scene_ResetTransitionViewport();
+extern void Scene_ResetTransitionViewport(void);
 extern void Scene_ReleaseCachedLevelData();
 extern int SetN64_GetDirectoryEntry();
 extern s32 XPlus_NextRandomInteger();
 extern s32 OnScreen_StartFirstStatusBar();
 extern void OnScreen_StartSecondStatusBar();
-extern void Menu_TriggerTrackEvent();
+extern void Menu_TriggerTrackEvent(int event);
 extern void Player_RefreshActivePlayerSceneState();
 extern void Pools_InitGroupPools();
 extern void Ovlgame_InitializeSceneEffectPool();
@@ -193,7 +193,7 @@ extern struct Shared_SceneActorTables D_800F3CD0; /* const */
 /* Initializes scene resources, actors, and game mode state. */
 void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     s32 *temp_a0;
-    struct Shape_typemap_165 *temp_v0_4;
+    struct Shape_typemap_165 *resourceResult;
     s32 temp_s4;
     s32 temp_s4_2;
     s32 temp_v0;
@@ -439,9 +439,9 @@ scene_size_done:
         count += 0x200;
     }
     Cache_DrainAndCompactResources(0);
-    temp_v0_4 = Cache_AllocateResource(0, count << 6, 3, &s_matricesText);
-    (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
-    Batch_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
+    resourceResult = Cache_AllocateResource(0, count << 6, 3, &s_matricesText);
+    (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)resourceResult;
+    Batch_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, resourceResult->field_0, count);
     resourceKey = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), levelSelection);
     (((struct SharedRecAt1B92C *)(table))->unkB8) = Cache_RequestWordCountedResourcePinned(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, g_levelIndexText);
     temp_v0_6 = Cache_RequestPackSection(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &s_collisionText);

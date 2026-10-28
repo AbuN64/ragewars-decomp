@@ -79,7 +79,7 @@ extern f32 D_800C1D34_de;
 
 f32 Graphu64_GetPointDistance(void *arg0, void *arg1);
 
-s32 Scene_GetModelIdAtIndex(void *arg0, s16 arg1);
+s32 Scene_GetModelIdAtIndex(void *world, s16 modelIndex);
 
 /* Preserve the owning controller passed in a0 by the original MIPS. */
 f32 Portal_GetEngagementDistance(AiController *controller) {

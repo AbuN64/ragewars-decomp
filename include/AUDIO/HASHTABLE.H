@@ -7,8 +7,8 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/VECTOR4F.H"
 
-extern void func_802552E0_de(s32 capacity);
+extern void HashTable_InitializeResourceTable(s32 capacity);
 
-extern void func_80255488_de(s32 arg0);
-extern s32 func_80255540_de(s32 arg0);
+extern void HashTable_RemoveResourceByKey(s32 resourceKey);
+extern s32 HashTable_RoundCapacityToPowerOfTwo(s32 mask);
 #endif

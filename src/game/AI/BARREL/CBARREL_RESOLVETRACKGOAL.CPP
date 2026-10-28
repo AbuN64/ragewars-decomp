@@ -1,4 +1,4 @@
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/FIELD_VEC_B0.H"
@@ -7,18 +7,18 @@
 #include "WEAPONS/CBARREL_RESOLVETRACKGOAL.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
-extern s32 Cbarrel_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
-extern Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
-extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
-extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
+extern s32 Cbarrel_UpdateTrackerAim(Actor_func_80214DD4_de *actor, Tracker *tracker, Actor_func_80214DD4_de *target);
+extern Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight, s32 combat);
+extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *actor, CVector3 pos, Actor_func_80214DD4_de *target, f32 distance);
+extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *actor, CVector3 pos);
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
-extern f32 Gobjinst_GetActorHeight(Actor_func_80214DD4_de *arg0);
-extern f32 Gobjinst_GetActorRadius(Actor_func_80214DD4_de *arg0);
-extern f32 InstHdr_GetActorReach(Actor_func_80214DD4_de *arg0);
-extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
-extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
-extern f32 Graphu64_GetHorizontalAngle(CVector3 *arg0);
+extern f32 Gobjinst_GetActorHeight(Actor_func_80214DD4_de *actor);
+extern f32 Gobjinst_GetActorRadius(Actor_func_80214DD4_de *actor);
+extern f32 InstHdr_GetActorReach(Actor_func_80214DD4_de *object);
+extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *levelActor, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 unused6, s32 unused7);
+extern f32 func_8024E80C_de(Actor_func_80214DD4_de *object);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *direction);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Graphu64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Graphu64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
@@ -37,7 +37,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    Graphu64_ScaleVector(&dir, &dir, Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor) + D_800C216C_de);
+    Graphu64_ScaleVector(&dir, &dir, Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor) + g_goalBesideActorClearance);
     Graphu64_AddVec3(&goal, &target->pos, &dir);
     InstHdr_CopyActorPositionAndModel(target, goal, outPos, outRoom, 0, 0);
 }
@@ -102,7 +102,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
             pos = target->pos;
             room = target->room;
             if (mode == 1) {
-                pos.y += target->height + Gobjinst_GetActorHeight(target) * D_800C2170_de;
+                pos.y += target->height + Gobjinst_GetActorHeight(target) * g_trackGoalTargetHeightFactor;
             }
         }
         gap = Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor);

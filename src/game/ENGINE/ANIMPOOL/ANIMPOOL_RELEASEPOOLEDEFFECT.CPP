@@ -7,7 +7,7 @@
 
 
 
-void AnimPool_ReleasePooledEffect(struct CAnimPool *arg0, struct SceneEffect *effectNode) {
+void AnimPool_ReleasePooledEffect(struct CAnimPool *animationPool, struct SceneEffect *effectNode) {
     s32 *temp_v1;
 
     temp_v1 = effectNode->ref;
@@ -15,6 +15,6 @@ void AnimPool_ReleasePooledEffect(struct CAnimPool *arg0, struct SceneEffect *ef
     if (temp_v1 != 0) {
         *temp_v1 -= 1;
     }
-    func_80255ED8_de(&arg0->UsedList, effectNode);
-    func_80255D14_de(&arg0->FreeList, effectNode);
+    func_80255ED8_de(&animationPool->UsedList, effectNode);
+    func_80255D14_de(&animationPool->FreeList, effectNode);
 }

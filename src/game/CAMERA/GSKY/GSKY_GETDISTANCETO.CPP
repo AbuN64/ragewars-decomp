@@ -4,7 +4,7 @@
 #include "COMMON/CHANNEL.H"
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 Gu_Sqrtf(float arg0);
+extern f32 Gu_Sqrtf(float value);
 
 
 

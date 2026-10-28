@@ -32,15 +32,15 @@ const unsigned int D_auto_rodata_func_80230058_de_800C3188[18] = {
 extern char D_800CE8DC;
 
 extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
 
-void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *weaponFireState) {
+void Weapon_UpdateIdleWeaponSelection(LevelActor *levelActor, void *weaponFireState) {
     s32 state;
     void *actor;
     CGameStatus *audio;
     s32 mode;
 
-    actor = arg0->controller;
+    actor = levelActor->controller;
     state = *(s16 *)(&D_800CE8DC +
                      (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)weaponFireState)->count != 0) {
@@ -83,7 +83,7 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *weaponFireState) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)weaponFireState)->count != 0)) {
-        Weaponai_InitializeSwitchAndRequestIdle(arg0, weaponFireState);
+        Weaponai_InitializeSwitchAndRequestIdle(levelActor, weaponFireState);
     }
 }
 #endif

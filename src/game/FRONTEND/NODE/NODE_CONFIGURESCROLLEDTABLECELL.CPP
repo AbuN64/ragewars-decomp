@@ -121,7 +121,7 @@ extern s32 D_800E2AC0;
 
 extern void Node_AcquireArchiveEntry(s32 index);
 
-extern void Node_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
+extern void Node_GetBankTileTexture(s32 which, s32 index, s32 pass);
 
 /* A stride of 1180 bytes. The debugger showed the global holding 0x80696F50 and the two observed
    indices, 0 and 1, returning 0x80696F50 and 0x806973EC, which differ by exactly 1180. */

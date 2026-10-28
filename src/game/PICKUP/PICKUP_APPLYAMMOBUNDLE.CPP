@@ -51,7 +51,7 @@ s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *player, MultiChannelItemEffect
                       player->position, 0, -1);
     }
     if (callback != 0) {
-        func_8025E11C_de(callback);
+        SoundElement_PlayDialogGroup(callback);
     }
     return 1;
 }
@@ -95,21 +95,21 @@ void Pickup_ShowFeedback(void *arg0, void *resource, s32 sound, s32 callback) {
                       ((LevelActor *)arg0)->position0, 0, -1);
     }
     if (callback != 0) {
-        func_8025E11C_de(callback);
+        SoundElement_PlayDialogGroup(callback);
     }
 }
 
-s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *arg0) {
+s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *actorView) {
     f32 value;
     f32 input;
     f32 threshold;
     u32 converted;
 
-    arg0->field16D4 =
-        arg0->field16D4 == 0;
-    if (arg0->message != 0) {
+    actorView->field16D4 =
+        actorView->field16D4 == 0;
+    if (actorView->message != 0) {
         input = D_800C62E0;
-        ((RacerViewport *)arg0->message)->pad124 = 0;
+        ((RacerViewport *)actorView->message)->pad124 = 0;
         value = Graphu64_RandomFloat(input);
         threshold = (&D_800C62E0)[1];
         if (!(threshold <= value)) {
@@ -117,7 +117,7 @@ s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *arg0) {
         } else {
             converted = (s32)(value - threshold) | 0x80000000;
         }
-        Gsky_StartFade(arg0->message, 0xFF, 0xFF, 0xFF,
+        Gsky_StartFade(actorView->message, 0xFF, 0xFF, 0xFF,
                       0xFF, (u8)converted, 1, 0);
     }
     return 1;

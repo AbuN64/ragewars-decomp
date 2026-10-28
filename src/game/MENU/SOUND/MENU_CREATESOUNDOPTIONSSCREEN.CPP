@@ -63,7 +63,7 @@ s32 Menu_CreateSoundOptionsScreen(void) {
 
 
 
-extern s32 SmpFade_CreateFadeWidget(s32 a0, s32 a1);
+extern s32 SmpFade_CreateFadeWidget(s32 frameId, s32 itemId);
 extern s32 SmpSlider_CreateSliderWidget(s32 a0, s32 a1, s32 a2);
 extern void SmpSlider_SetSliderItem(s32 cue, s32 volume);
 extern s32 SmpFlicker_CreateFlickerWidget(s32 a0, s32 a1);

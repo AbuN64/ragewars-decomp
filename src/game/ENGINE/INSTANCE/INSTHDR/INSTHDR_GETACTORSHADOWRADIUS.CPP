@@ -162,7 +162,7 @@ void InstHdr_CopyActorPositionAndModel(void *arg0, Triple t, void *arg4, s32 *ar
 
 extern f32 Region_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
 
-extern void Barrel_ComputeTargetOffset(void *arg0, void *arg1, void *arg2);
+extern void Barrel_ComputeTargetOffset(void *player, void *motionState, void *result);
 
 /** Return a nested float field when the nested record type is one, else zero. */
 float func_8024E544_de(void *object) {
@@ -246,11 +246,11 @@ void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
     return 0;
 }
 
-void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
+void InstHdr_GetActorTargetOffset(u8 *player, void *vector) {
     CAIMovementInfo offset;
 
-    if (*arg0 == 1) {
-        Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+    if (*player == 1) {
+        Barrel_ComputeTargetOffset(player, player + 0x170, &offset);
         *(CVector3 *)vector = offset.first;
         return;
     }
@@ -259,10 +259,10 @@ void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
     ((Triple *)vector)->z = 0;
 }
 
-f32 InstHdr_GetActorTargetHeight(u8 *arg0) {
+f32 InstHdr_GetActorTargetHeight(u8 *player) {
     CAIMovementInfo offset;
-    if (*arg0 == 1) {
-        Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+    if (*player == 1) {
+        Barrel_ComputeTargetOffset(player, player + 0x170, &offset);
         return offset.height;
     }
     return 0.0f;
@@ -368,7 +368,7 @@ s32 func_8024E900_de(void *actorStorage)
 }
 
 /* 8024E914.CPP */
-extern int Scene_GetModelIdAtIndex(void *arg0, int arg1);
+extern int Scene_GetModelIdAtIndex(void *world, int modelIndex);
 
 int InstHdr_GetActorType(void *prop) {
     if (((LevelActor *)prop)->kind == 1) {

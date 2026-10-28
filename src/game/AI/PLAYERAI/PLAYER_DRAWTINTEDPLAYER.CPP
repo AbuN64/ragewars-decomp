@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/GFX.H"
 #include "COMMON/OBJRECV5.H"
@@ -44,7 +44,7 @@ const unsigned int D_auto_src_rw_pool_80228DC4_C8904_us_rev1[4] = {
 extern Gfx *g_displayListCursor;
 extern RulesWeaponsDrawTintedPlayer D_801468A0[];
 extern s32 D_800D297C;
-extern void Geometry_SetCombineMode(s32);
+extern void Geometry_SetCombineMode(u32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
 void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw) {
@@ -95,8 +95,8 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw
     }
 }
 
-extern void Barrel_FillDamagePacket(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
-extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
+extern void Barrel_FillDamagePacket(void *packet, s32 damageSource, s32 damage, f32 radius, s32 damageFlags, s32 shield);
+extern void func_80219A40_de(void *attacker, void *arg1, void *packet);
 
 extern func_8020CA10_G1 D_800D2988;
 void func_802292B8_de(void *actor) {
@@ -156,7 +156,7 @@ void func_802292B8_de(void *actor) {
 
 /* Transfers a randomly selected inventory quantity into an empty recipient slot. */
 
-s32 Graphu64_NextRandom(); /* extern */
+s32 Graphu64_NextRandom(void); /* extern */
 
 void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receiver) {
  s32 amount;

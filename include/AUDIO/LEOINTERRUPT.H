@@ -12,6 +12,6 @@ typedef struct DiskTransferInfo {
     u32 deviceAddress;
     u32 bmControl;
 } DiskTransferInfo;
-extern void Audio_AbortDiskTransfer();
-extern void Audio_PostDiskEventMessage();
+extern void Audio_AbortDiskTransfer(void);
+extern void Audio_PostDiskEventMessage(void);
 #endif

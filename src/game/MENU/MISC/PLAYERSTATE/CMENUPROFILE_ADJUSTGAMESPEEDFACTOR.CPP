@@ -31,7 +31,7 @@ s32 CMenuProfile_HasDialogRoundProgress(void) {
 
 /* Clears arg1->unk1C's unk858 flag and its unk5D8's unk80, then forwards to Menu_OpenDialog. */
 
-extern void Menu_OpenDialog(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4);
+extern void Menu_OpenDialog(s32 parent, void *list, void *player, s32 controller, s32 arg4);
 extern s32 D_0044FB2C;
 
 

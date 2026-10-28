@@ -1,5 +1,5 @@
 #ifndef FRONTEND_PAKINTERFACE_LOADLINKEDPLAYERPROFILE_H
 #define FRONTEND_PAKINTERFACE_LOADLINKEDPLAYERPROFILE_H
 #include "COMMON/ENTRYRECAT6C.H"
-extern void PAKInterface_LoadLinkedPlayerProfile(s32 arg0);
+extern void PAKInterface_LoadLinkedPlayerProfile(s32 linkIndex);
 #endif

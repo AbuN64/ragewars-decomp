@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern s32 Join_CountOpenPlayerSlots();
+extern s32 Join_CountOpenPlayerSlots(void);
 
 struct PlayerFrontendCountOpenPlayerSlots;
 typedef struct PlayerFrontendCountOpenPlayerSlots PlayerFrontendCountOpenPlayerSlots;

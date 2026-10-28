@@ -12,7 +12,7 @@
 #include "AI/ENEMIES/TURRETAI.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
-extern s32 Rumble_TestActorStateBit(void *arg0, void *arg1);
+extern s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer);
 
 extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
@@ -35,7 +35,7 @@ static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     MatrixFromQuaternion(&rotation.x, matrix);
 }
 
-extern void RollMatrix(void *arg0, f32 arg1);
+extern void RollMatrix(void *matrixStorage, f32 rollAngle);
 
 /* Returns whether a player may act on a target: never on its own linked object or an inactive
    target, always when the team rule D_801468C4 is off, otherwise only across different teams. */

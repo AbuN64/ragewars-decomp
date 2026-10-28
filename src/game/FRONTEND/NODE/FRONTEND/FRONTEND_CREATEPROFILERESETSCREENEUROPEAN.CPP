@@ -69,7 +69,7 @@ extern Pulse *D_800E5950;
 extern void Pools_ResetActorPools(void *, s32);
 extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
-extern s32 func_8025477C_de(void);
+extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(u32);
 extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
@@ -86,7 +86,7 @@ s32 Frontend_CreateProfileResetScreenEuropean(MenuWidget *tree) {
     Pools_ResetActorPools(object, 0);
     Player_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    if (func_8025477C_de() == 0) {
+    if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
     Frontend_RequestScreenMode(0);

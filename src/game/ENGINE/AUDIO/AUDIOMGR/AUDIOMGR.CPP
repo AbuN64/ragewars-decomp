@@ -1,5 +1,6 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
-#include "TEXTURE/80256220.H"
+#include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TYPES.H"
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
@@ -75,7 +76,6 @@ void alInit(void *, void *);
 void *alHeapDBAlloc(s32, s32, void *, s32, u32);
 void osSetEventMesg(s32, void *, s32);
 void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
-void osStartThread(void *);
 
 /* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
 void Audiomgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {

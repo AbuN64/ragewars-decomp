@@ -9,7 +9,7 @@ extern float D_800C37E0_de;
 
 
 
-extern void Cinema_SetLetterboxState(void *arg0);
+extern void Cinema_SetLetterboxState(void *letterboxEnabled);
 
 
 
@@ -28,7 +28,7 @@ struct Access_s32_C4;
 typedef struct Access_s32_C4 Access_s32_C4;
 
 
-extern void Cinema_ClearMessageCount();
+extern void Cinema_ClearMessageCount(void);
 
 struct CollisionInfoCode80243A80;
 
@@ -40,7 +40,7 @@ extern float D_800C37D8_de;
 
 
 
-extern float Cinema_GetScaledSequenceValue();
+extern float Cinema_GetScaledSequenceValue(void);
 
 
 extern float D_800C3828_de;
@@ -53,7 +53,7 @@ extern float D_800C3828_de;
 
 extern float D_800C37D4_de;
 
-extern void Cinema_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext(void);
 
 
 
@@ -69,7 +69,7 @@ typedef struct Actor_func_80245D30_de Actor_func_80245D30_de;
 
 extern void * D_800DE7F4_de;
 
-extern void Cinema_ResetViewport();
+extern void Cinema_ResetViewport(void);
 
 struct Access_s32_C4;
 
@@ -92,7 +92,7 @@ struct Material_func_80245D30_de;
 
 
 
-extern unsigned int Cinema_GetSequenceProperty();
+extern unsigned int Cinema_GetSequenceProperty(void);
 
 
 

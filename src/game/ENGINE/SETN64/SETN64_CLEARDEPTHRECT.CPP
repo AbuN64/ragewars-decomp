@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/GFX.H"
 #include "COMMON/AIPROFILE.H"
@@ -14,7 +14,7 @@
 
 
 
-extern void Geometry_SetModePreset(s32 mode);
+extern s32 Geometry_SetModePreset(s32 mode);
 
 
 

@@ -93,7 +93,7 @@ SceneEffect *Animpool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 vari
     return effect;
 }
 
-void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
+void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 world) {
     EffectAnimPoolUpdateSceneEffects *effect;
     EffectAnimPoolUpdateSceneEffects *next;
     f32 *max;
@@ -107,7 +107,7 @@ void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
     next_effect:
         next = effect->next;
         if (overlaps(effect, max)) {
-            Scene_RegisterActorInSceneLists(arg1, effect);
+            Scene_RegisterActorInSceneLists(world, effect);
             if (effect->ref != 0 && effect->busy == 0) {
                 *effect->ref -= 1;
                 effect->ref = 0;

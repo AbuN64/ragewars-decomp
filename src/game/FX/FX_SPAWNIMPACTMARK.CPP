@@ -1,5 +1,5 @@
 #include "COMMON/VECTOR4F.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "TYPES.H"
@@ -98,13 +98,13 @@ done:
 }
 
 /* 802A6AC0_2.CPP */
-extern s32 Linked_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);
+extern s32 Linked_UpdateRibbonLifetime(s32 owner, State802A6DF8 *state);
 
 extern f32 D_800D2988;
 
-extern void Textload_LocateTextureResource(s32 *arg0, s32 arg1);
+extern void Textload_LocateTextureResource(s32 *arg0, s32 sectionIndex);
 
-extern void Particle_EncodeRenderLayer(void *arg0, s32 *arg1);
+extern void Particle_EncodeRenderLayer(void *actor, s32 *arg1);
 
 typedef struct Image Image;
 
@@ -112,15 +112,15 @@ extern s32 D_800D297C;
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, s32);
 
-extern void Graphu64_ClampMatrixToFixedRange(f32 *arg0);
+extern void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents);
 
 extern void Graphu64_GetMatrixTranslation(char *object, float *output);
 
-extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *matrix, f32 *arg1);
 
 
 
-extern void Linked_UpdateLinkedNodeTransforms(void *arg0);
+extern void Linked_UpdateLinkedNodeTransforms(void *owner);
 
 extern void Linked_UpdateRibbonMatrices(void *, void *);
 
@@ -128,7 +128,7 @@ extern void Linked_DrawTexturedRibbon(s32, void *, s32);
 
 extern void Fx_DrawColoredRibbon(s32, void *, s32);
 
-extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
+extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *local);
 
 void Fx_RecycleOwnerParticles(SceneRecAt95A8 *arg0, s32 arg1) {
     s32 count;

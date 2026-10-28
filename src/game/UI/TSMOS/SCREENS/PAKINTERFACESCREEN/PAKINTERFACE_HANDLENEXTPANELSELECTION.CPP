@@ -67,7 +67,7 @@ void PAKInterface_UpdatePlayerControlRows(s32);                               /*
 void PAKInterface_ScrollNoteList(s32, s32);                            /* extern */
 void PAKInterface_DecrementNameCharacter(s32);                               /* extern */
 
-s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 fifth) {
     s32 temp_s0;
     s32 player;
     s32 playerState;
@@ -79,7 +79,7 @@ s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     playerState = D_800E54A4->players[player].state;
     switch (playerState) {
     case 12:
-        temp_s0 = XMath_AbsoluteInteger(arg4);
+        temp_s0 = XMath_AbsoluteInteger(fifth);
         if (temp_s0 < Smos_GetControlRepeatLimit()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
@@ -147,14 +147,14 @@ block_24:
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern void PAKInterface_IncrementNameCharacter(s32);
-s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayerEvent, s32 pressState, s32 arg4) {
+s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayerEvent, s32 pressState, s32 fifth) {
     NodeRecAt44 *node;
     s32 player;
 
     player = packedPlayerEvent & 0xFFFF;
     switch (D_800E54A4->players[player].state) {
     case 12:
-        if (XMath_AbsoluteInteger(arg4) < Smos_GetControlRepeatLimit()) {
+        if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
         }

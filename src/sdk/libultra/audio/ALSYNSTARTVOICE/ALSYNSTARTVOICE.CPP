@@ -1,7 +1,8 @@
+#include "COMMON/ALPARAM_S.H"
 #include "include_asm.h"
 #include "sdk/libgultra.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "sdk/OBJECTSTATE10_5.H"
+#include "sdk/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/libgultra/ALSYNSTARTVOICE.H"
 #include "sdk/libultra/audio/synthesizer.h"
@@ -13,18 +14,18 @@ void alSynStartVoice(void *synth, void *voice, s32 waveTable) {
     void *voiceFilter;
     SharedRecV3 fn;
 
-    if ((((ObjectState1C *)(voice))->unk_8.v0) != 0) {
+    if ((((AudioVoiceStartView *)(voice))->pvoice.v0) != 0) {
         Shared_func_802B3540_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3540_de_v0 != 0) {
-            new_var = (((struct Shape_typemap_71 *)(synth))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectState1C *) voice)->unk_8.v1)->state);
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_8 = 0xE;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_C = waveTable;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_0 = 0;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_4 = new_var;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_A = ((ObjectState1C *)(voice))->unk_1A;
-            voiceFilter = ((struct Draw *) ((ObjectState1C *) voice)->unk_8.v1)->model;
+            new_var = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoiceStartView *) voice)->pvoice.v1)->offset);
+            ((AudioStartVoiceUpdate *)(Shared_func_802B3540_de_v0))->type = AL_FILTER_START_VOICE;
+            ((AudioStartVoiceUpdate *)(Shared_func_802B3540_de_v0))->wave = waveTable;
+            ((AudioStartVoiceUpdate *)(Shared_func_802B3540_de_v0))->next = 0;
+            ((AudioStartVoiceUpdate *)(Shared_func_802B3540_de_v0))->delta = new_var;
+            ((AudioStartVoiceUpdate *)(Shared_func_802B3540_de_v0))->unity = ((AudioVoiceStartView *)(voice))->unityPitch;
+            voiceFilter = ((struct Draw *) ((AudioVoiceStartView *) voice)->pvoice.v1)->model;
             fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-            fn(voiceFilter, 3, Shared_func_802B3540_de_v0);
+            fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B3540_de_v0);
         }
     }
 }

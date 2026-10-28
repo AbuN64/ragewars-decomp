@@ -84,7 +84,7 @@ extern void Events_UpdateNodeAtPosition(s32 arg0, s32 arg1, s32 arg2, s32 arg3, 
 
 extern void *D_80140FE8_de;
 
-extern s32 Gsky_ContainsVisiblePoint(NodeEventsStartCameraFadeAtPoint *arg0, Triple arg1);
+extern s32 Gsky_ContainsVisiblePoint(NodeEventsStartCameraFadeAtPoint *cameraAddress, Triple testPoint);
 
 
 f32 Events_ComputeDamageScale(ActorEventsComputeDamageScale *self, Target *target, CVector3 position, f32 radius, s32 falloff, s32 flags, Shield **found) {
@@ -187,18 +187,18 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     CScene_StartEventClips(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
 }
 
-void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
+void Events_ApplyDirectDamage(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair params) {
     if (*source == 1) {
-        Events_ApplyDamageEvent(source, target, kind, position, arg6, 0, 0, 0x80);
+        Events_ApplyDamageEvent(source, target, kind, position, params, 0, 0, 0x80);
     }
 }
 
-void Events_ApplyRadialDamage(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
-    Events_ApplyDamageEvent((void *)source, target, kind, position, arg6, 1, 0, 0x80);
+void Events_ApplyRadialDamage(s32 source, s32 target, s32 kind, Triple position, struct IntPair params) {
+    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 0, 0x80);
 }
 
-void Events_ApplyRadialDamageWithKnockback(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
-    Events_ApplyDamageEvent((void *)source, target, kind, position, arg6, 1, 1, 0x80);
+void Events_ApplyRadialDamageWithKnockback(s32 source, s32 target, s32 kind, Triple position, struct IntPair params) {
+    Events_ApplyDamageEvent((void *)source, target, kind, position, params, 1, 1, 0x80);
 }
 
 void Events_PreserveEventArgument(int unused0, int unused1, int unused2, int arg3) {
@@ -224,12 +224,12 @@ void Events_RunSecondNodeOperation(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 a
   Events_UpdateNodeAtPosition(arg0, *new_var2, arg4, arg5, new_var);
 }
 
-void Events_StartCameraFadeAtPoint(s32 unused0, s32 unused1, s32 unused2, Triple arg3, CEventValueFormat7a arg6) {
+void Events_StartCameraFadeAtPoint(s32 unused0, s32 unused1, s32 unused2, Triple testPoint, CEventValueFormat7a arg6) {
     NodeEventsStartCameraFadeAtPoint *node;
 
     node = D_80140FE8_de;
     while (node != 0) {
-        if (Gsky_ContainsVisiblePoint(node, arg3) != 0) {
+        if (Gsky_ContainsVisiblePoint(node, testPoint) != 0) {
             Gsky_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
                           arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
         }

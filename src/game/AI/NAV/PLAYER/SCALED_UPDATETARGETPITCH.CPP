@@ -26,7 +26,7 @@ extern CNavData D_8013B364;
 
 extern void **D_80103FCC;
 
-extern s32 CCollision_SweepPoint(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3);
+extern s32 CCollision_SweepPoint(void *actorStorage, CVector3 startPosition, CVector3 desired, void *motionSettings);
 
 /* Revives a player whose down timer at 0x1340 has run past its limit (30 ticks, or 900 in
    control modes 12 and 15 while D_80146938 asks): clears the timer and calls Player_PlacePlayerForRound
@@ -85,14 +85,14 @@ void Scaled_InitPlayerState(int *state, int player) {
     Nav_ResetPlayerState(state);
 }
 
-void Scaled_ClearNodeQueue(AiController *arg0)
+void Scaled_ClearNodeQueue(AiController *controller)
 {
     s32 i;
     s32 empty;
     empty = -1;
     i = 3;
     do {
-        arg0->queue[i] = empty;
+        controller->queue[i] = empty;
         i -= 1;
     } while (i >= 0);
 }
@@ -224,14 +224,14 @@ int func_80209AD8_de(AiController *object) {
     return object->state == 8;
 }
 
-f32 Scaled_GetDifficultyEngagementAdjustment(AiController *arg0)
+f32 Scaled_GetDifficultyEngagementAdjustment(AiController *controller)
 {
   Player *object;
     AiCharacterDefinition *definition;
   u8 state;
   f32 var_f0;
   f32 var_f1;
-  object = arg0->player;
+  object = controller->player;
     definition = object->definition;
   state = object->profile->difficulty;
   var_f1 = definition->unk2C;
@@ -242,7 +242,7 @@ f32 Scaled_GetDifficultyEngagementAdjustment(AiController *arg0)
       goto done;
 
     default:
-      arg0->player->profile->difficulty = 0;
+      controller->player->profile->difficulty = 0;
 
     case 0:
       var_f0 = D_800C1C94_de;

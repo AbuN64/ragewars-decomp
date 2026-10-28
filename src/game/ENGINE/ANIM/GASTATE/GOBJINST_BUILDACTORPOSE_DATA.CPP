@@ -60,7 +60,7 @@ s32 func_802625C4_de(void *animationState) {
 }
 
 /* GASTATE_5.CPP */
-extern s32 SetN64_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(s32 directory, s32 bankOffset, s32 sectionIndex, s32 *sectionSizeOut);
 
 extern ResourceEntry g_animationText[];
 

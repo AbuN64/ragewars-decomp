@@ -32,7 +32,7 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     s32 length;
     Shared_Game *game = &D_801462C8;
     code = (u32)game->buttons >> 4;
-    Cache_SetResourceActivityState((u32)func_8025477C_de() + 2U);
+    Cache_SetResourceActivityState((u32)Cache_GetResourceActivityState() + 2U);
     if (code == 0) item->text = D_800E22E4_eu;
     else {
         item->text = D_800E22F4;
@@ -51,7 +51,7 @@ extern u8 *D_800E22F4[];
 #else
 extern u8 *D_800D3628;
 #endif
-extern s32 func_8025477C_de(void);
+extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(u32);
 extern s32 Menu_CountLineChars(LayeredText *);
 
@@ -61,7 +61,7 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     s32 length;
 
     code = D_801462C8.buttons >> 4;
-    Cache_SetResourceActivityState((u32)func_8025477C_de() + 2U);
+    Cache_SetResourceActivityState((u32)Cache_GetResourceActivityState() + 2U);
     if (code == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         item->text = D_800E22E4_eu;

@@ -33,7 +33,7 @@ s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
     Pools_ResetActorPools(object, 0);
     Player_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
-    if (func_8025477C_de() == 0) {
+    if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
     Frontend_RequestScreenMode(0);

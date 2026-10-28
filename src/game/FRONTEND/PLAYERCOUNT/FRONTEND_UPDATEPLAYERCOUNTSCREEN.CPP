@@ -30,9 +30,9 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
 
 
 
-extern void Tsmos_DeactivateControllerState();
+extern void Tsmos_DeactivateControllerState(void);
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 

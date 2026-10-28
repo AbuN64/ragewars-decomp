@@ -9,7 +9,7 @@
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ENTRYRECATE.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/CHANNEL.H"
 
 /* 802ABDBC_9.CPP */
@@ -388,7 +388,7 @@ case_BD8:
                     temp_v1_3 = recipientActor->unk122C;
                     switch (temp_v1_3) {            /* switch 3; irregular */
                     case 0x1:                       /* switch 3 */
-                        func_8025E11C_de(0x15E);
+                        SoundElement_PlayDialogGroup(0x15E);
                         playerIndex = 0;
                         if (playerIndex < D_80140F84.count) {
                             menuGlobals = &D_80140F84;
@@ -410,7 +410,7 @@ case_BD8:
                         break;
                     case 0x2:                       /* switch 3 */
                         recipientActor->unk1230 = 300.0f;
-                        func_8025E11C_de(0x164);
+                        SoundElement_PlayDialogGroup(0x164);
                         messageCamera4 = recipientActor->unk5DC;
                         if (messageCamera4 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera4, PICKUP_TEXT(D_800D312C));
@@ -421,7 +421,7 @@ case_BD8:
                         goto block_115;
                     case 0x4:                       /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
-                        func_8025E11C_de(0x15F);
+                        SoundElement_PlayDialogGroup(0x15F);
                         messageCamera11 = recipientActor->unk5DC;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3130));
@@ -429,7 +429,7 @@ case_BD8:
                         break;
                     case 0x8:                       /* switch 3 */
                         recipientActor->unk1230 = 150.0f;
-                        func_8025E11C_de(0x165);
+                        SoundElement_PlayDialogGroup(0x165);
                         messageCamera5 = recipientActor->unk5DC;
                         if (messageCamera5 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera5, PICKUP_TEXT(D_800D3134));
@@ -442,7 +442,7 @@ block_114:
                         goto block_115;
                     case 0x10:                      /* switch 3 */
                         recipientActor->unk1230 = 150.0f;
-                        func_8025E11C_de(0x160);
+                        SoundElement_PlayDialogGroup(0x160);
                         messageCamera6 = recipientActor->unk5DC;
                         if (messageCamera6 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera6, PICKUP_TEXT(D_800D3138));
@@ -454,7 +454,7 @@ block_114:
                         goto block_115;
                     case 0x20:                      /* switch 3 */
                         recipientActor->unk1230 = 180.0f;
-                        func_8025E11C_de(0x166);
+                        SoundElement_PlayDialogGroup(0x166);
                         messageCamera11 = recipientActor->unk5DC;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D313C));
@@ -462,7 +462,7 @@ block_114:
                         break;
                     case 0x40:                      /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
-                        func_8025E11C_de(0x161);
+                        SoundElement_PlayDialogGroup(0x161);
                         messageCamera11 = recipientActor->unk5DC;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3140_de));
@@ -470,7 +470,7 @@ block_114:
                         break;
                     case 0x80:                      /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
-                        func_8025E11C_de(0x169);
+                        SoundElement_PlayDialogGroup(0x169);
                         messageCamera11 = recipientActor->unk5DC;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3144));
@@ -478,7 +478,7 @@ block_114:
                         break;
                     case 0x100:                     /* switch 3 */
                         recipientActor->unk1230 = 450.0f;
-                        func_8025E11C_de(0x162);
+                        SoundElement_PlayDialogGroup(0x162);
                         messageCamera11 = recipientActor->unk5DC;
                         if (messageCamera11 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3148));
@@ -486,7 +486,7 @@ block_114:
                         break;
                     case 0x200:                     /* switch 3 */
                         recipientActor->unk1230 = 270.0f;
-                        func_8025E11C_de(0x16A);
+                        SoundElement_PlayDialogGroup(0x16A);
                         messageCamera7 = recipientActor->unk5DC;
                         if (messageCamera7 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera7, PICKUP_TEXT(D_800D3150));
@@ -497,7 +497,7 @@ block_114:
                         goto block_116;
                     case 0x400:                     /* switch 3 */
                         recipientActor->unk1230 = 180.0f;
-                        func_8025E11C_de(0x163);
+                        SoundElement_PlayDialogGroup(0x163);
                         messageCamera8 = recipientActor->unk5DC;
                         if (messageCamera8 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera8, PICKUP_TEXT(D_800D3154));
@@ -510,7 +510,7 @@ block_114:
                         goto block_115;
                     case 0x800:                     /* switch 3 */
                         recipientActor->unk1230 = 300.0f;
-                        func_8025E11C_de(0x168);
+                        SoundElement_PlayDialogGroup(0x168);
                         messageCamera9 = recipientActor->unk5DC;
                         if (messageCamera9 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera9, PICKUP_TEXT(D_800D3158));
@@ -521,7 +521,7 @@ block_114:
                         goto block_115;
                     case 0x1000:                    /* switch 3 */
                         recipientActor->unk1230 = 300.0f;
-                        func_8025E11C_de(0x15F);
+                        SoundElement_PlayDialogGroup(0x15F);
                         messageCamera10 = recipientActor->unk5DC;
                         if (messageCamera10 != 0) {
                             Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera10, PICKUP_TEXT(D_800D315C));
@@ -609,7 +609,7 @@ command_done:
             SoundElement_PlaySoundAtPosition(soundId, recipientActor->position, 0, -1);
         }
         if (temp_s3 != 0) {
-            func_8025E11C_de((s32) temp_s3);
+            SoundElement_PlayDialogGroup((s32) temp_s3);
         }
     }
     return handled;
@@ -643,7 +643,7 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, text[MENU_LANGUAGE]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
-    if (event) func_8025E11C_de(event);
+    if (event) SoundElement_PlayDialogGroup(event);
 }
 /* Powerup pickup handler (g_pickupPowerupDefinitions rows). A powerup the player already holds, or any pickup in a tag match by a
    player not on one of the D_800CE474 teams, only gives the pickup feedback. Otherwise the powerup takes weapon key
@@ -702,7 +702,7 @@ s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pic
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
-    if (event) func_8025E11C_de(event);
+    if (event) SoundElement_PlayDialogGroup(event);
     return 1;
 }
 #else
@@ -735,7 +735,7 @@ s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, voi
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
-    if (event) func_8025E11C_de(event);
+    if (event) SoundElement_PlayDialogGroup(event);
     return 1;
 }
 #else

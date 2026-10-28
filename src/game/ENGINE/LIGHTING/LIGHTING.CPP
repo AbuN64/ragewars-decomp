@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS4_2.H"
+#include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/UNUSED.H"
@@ -14,7 +14,7 @@
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "ACTORS/80277444.H"
+#include "ACTORS/VERTEX_LIGHT_AND_ACTOR_VIEWS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "stddef.h"
@@ -128,21 +128,21 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
 }
 
 s32 Lighting_EvaluateLocalVolume(ObjectRecAtBC *arg0, CVector3 arg1,
-                  CVector3 *arg4, f32 *arg5) {
+                  CVector3 *vectorComponents, f32 *arg5) {
     f32 temp_f0;
     f32 var_f0;
     f32 var_f1;
     f32 var_f20;
     f32 var_f3;
-    u8 temp_v1;
+    u8 shapeValue;
 
     var_f3 = arg1.x;
     var_f20 = 0.0f;
     if (!(D_800C4AC0_de <= var_f3) && !(var_f3 <= D_800C4AC4_de) &&
         !(D_800C4AC0_de <= arg1.y) && !(arg1.y <= D_800C4AC4_de) &&
         !(D_800C4AC0_de <= arg1.z) && !(arg1.z <= D_800C4AC4_de)) {
-        temp_v1 = arg0->shape;
-        switch (temp_v1) {
+        shapeValue = arg0->shape;
+        switch (shapeValue) {
         case 0:
             var_f20 = (var_f3 * var_f3) + (arg1.y * arg1.y) +
                       (arg1.z * arg1.z);
@@ -197,18 +197,18 @@ shared:
             var_f20 = D_800C4AD0_de;
         }
         if (arg0->shape == 1) {
-            *arg4 = arg0->axis;
+            *vectorComponents = arg0->axis;
         } else {
-            *arg4 = arg1;
+            *vectorComponents = arg1;
         }
-        Graphu64_NormalizeVec3(arg4);
+        Graphu64_NormalizeVec3(vectorComponents);
         *arg5 = var_f20;
         return 1;
     } else {
 fail:
-        arg4->y = 0.0f;
-        arg4->z = 0.0f;
-        arg4->x = D_800C4AD4_de;
+        vectorComponents->y = 0.0f;
+        vectorComponents->z = 0.0f;
+        vectorComponents->x = D_800C4AD4_de;
         *arg5 = 0.0f;
         return 0;
     }
@@ -220,7 +220,7 @@ const unsigned int D_auto_src_rw_pool_80277128_CA7B0_us_rev1[6] = {
 };
 
 /* 80277444_2.CPP */
-extern void Graphu64_TransformDirection(void *arg0, void *arg1, void *arg2);
+extern void Graphu64_TransformDirection(void *matrix, void *inputDirection, void *transformedDirection);
 
 s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint, CVector3 surfaceNormal, f32 *lightTransform,
                   CVector3 *lightContribution, f32 *contributionWeight) {

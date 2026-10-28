@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D5 waits 1 through
    SmXlate_SwitchScreen; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,

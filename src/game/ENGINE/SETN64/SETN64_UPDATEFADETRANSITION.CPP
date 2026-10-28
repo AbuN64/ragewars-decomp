@@ -10,8 +10,8 @@
 #include "RENDER/SETN64_UPDATEFADETRANSITION.H"
 #include "sdk/AUDIO/sprintf.H"
 
-extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
-                          s32 arg4, s32 arg5);
+extern void SetN64_DrawColorRectangle(void *unused, s8 *color, s32 left, s32 top,
+                          s32 right, s32 bottom);
 
 
 s32 SetN64_StartGameThreadAndIdle(s32 *, s32);
@@ -91,8 +91,8 @@ int SetN64_IsModeThirteen(void) {
     return D_8011FAC0.mode == 0xD;
 }
 
-void SetN64_RunBootstrapThread(s32 arg0) {
-    SetN64_StartGameThreadAndIdle(&D_8011FAC0, arg0);
+void SetN64_RunBootstrapThread(s32 threadArgument) {
+    SetN64_StartGameThreadAndIdle(&D_8011FAC0, threadArgument);
 }
 
 void SetN64_RunGameThread(void) {

@@ -1,6 +1,6 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/GROUP.H"
-#include "CAMERA/80243A80.H"
+#include "CAMERA/COLLISION_SWEEP_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -11,7 +11,7 @@
 #include "CAMERA/CCINEMA_UPDATESEQUENCE.H"
 #include "MENU/TRACK_LOADTRACKSEQUENCE.H"
 #include "MENU/MENU_PROCESSTRACKITEMEVENTS.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
@@ -77,7 +77,7 @@ extern GameState D_80140FB4;
 extern void Cinema_CloseSequenceOnce(void);
 
 
-extern void Cache_SetResourceActivityState(s32);
+extern void Cache_SetResourceActivityState(unsigned int);
 
 void CCinema_EnterSequenceScene(void) {
     Vec3Words origin;

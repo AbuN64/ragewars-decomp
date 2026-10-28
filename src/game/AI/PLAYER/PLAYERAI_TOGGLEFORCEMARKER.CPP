@@ -17,7 +17,7 @@ extern void Graphu64_GetMatrixTranslation(char *, f32 *);
 
 extern char D_8011D8D0;
 
-extern void Particle_ReleaseOwnerEmitters(void *arg0, s32 arg1);
+extern void Particle_ReleaseOwnerEmitters(void *world, s32 owner);
 
 void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition)
 {

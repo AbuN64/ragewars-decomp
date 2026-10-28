@@ -78,19 +78,19 @@ struct NodeGeometryGroupModelInstances {
     struct NodeGeometryGroupModelInstances *right;
 };
 
-extern void Geometry_BeginModelBatch();
+extern void Geometry_BeginModelBatch(void);
 
 struct Material;
 typedef struct Material Material;
 
-extern void Geometry_InvalidateMaterialKeys();
+extern void Geometry_InvalidateMaterialKeys(void);
 
 struct ItemRecAt1C;
 typedef struct ItemRecAt1C ItemRecAt1C;
 
 extern u32 D_800CC360;
 
-extern void Geometry_SelectEffectModes();
+extern void Geometry_SelectEffectModes(void);
 
 extern float D_800C4668_de;
 
@@ -118,9 +118,9 @@ typedef struct Group18 Group18;
 
 extern void Geometry_NoOperation(void);
 
-extern void Geometry_InitializeModelRenderState();
+extern void Geometry_InitializeModelRenderState(void);
 
-extern void Geometry_FlushModelBatch();
+extern void Geometry_FlushModelBatch(void);
 
 struct ObjectState18;
 

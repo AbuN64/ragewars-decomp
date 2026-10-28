@@ -33,7 +33,7 @@ extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 extern void Rumble_FreeAllPoolNodes(s32 *);
 
 
-extern void func_8024BE3C_de(void *arg0);
+extern void func_8024BE3C_de(void *base);
 
 extern void func_80246E44_de(char *);
 

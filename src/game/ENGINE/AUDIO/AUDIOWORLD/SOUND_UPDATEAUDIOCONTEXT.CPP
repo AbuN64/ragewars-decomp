@@ -19,14 +19,14 @@ extern f32 D_800C3EE0_de;
 #include "AUDIO/VOICE.H"
 #include "AUDIO/AUDIO_UPDATEMUSICFADE.H"
 
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
-extern void AudioWorld_DispatchPendingSounds(void *arg0);
-extern void Audio_UpdateDialogPlayer(void *arg0);
+extern void AudioWorld_DispatchPendingSounds(void *cache);
+extern void Audio_UpdateDialogPlayer(void *player);
 
-extern void Audio_UpdateMusicPlayback(void *arg0);
+extern void Audio_UpdateMusicPlayback(void *queue);
 extern s32 SetN64_IsModeThirteen(void);
-extern void *Gsky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero);
 
 
 
@@ -100,8 +100,8 @@ s32 Sound_UpdateAudioContext(void *context) {
     return ++((struct ContextRecAt2BC0 *)(object))->frame;
 }
 
-extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *arg0, s32 arg1);
-extern s32 AudioWorld_HasPendingSoundWithKey(void *arg0, s32 arg1);
+extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *record, s32 value);
+extern s32 AudioWorld_HasPendingSoundWithKey(void *channelOwner, s32 wantedKey);
 
 
 

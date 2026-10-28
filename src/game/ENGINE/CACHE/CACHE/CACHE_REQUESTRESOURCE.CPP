@@ -1,11 +1,11 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/LONE/D_80106248.H"
 #include "COMMON/MANAGER.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/EXTERNS_10.H"
 #include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/S1.H"
 #include "sdk/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
@@ -20,7 +20,7 @@ extern s32 D_80105180;
 extern void func_80255FB8_de(void *, s32);
 extern void *Cache_AcquireLoadRequestWithEviction(s32, s32);
 extern void *Cache_AcquireResourceNodeWithEviction(s32, s32);
-extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
 extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 extern s32 func_80255170_de(s32 *, ResourceLoadRequest *);
 extern ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest *request, s32 dropReference);

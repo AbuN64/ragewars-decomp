@@ -8,7 +8,7 @@
 #include "sdk/MATH/GUMTXIDENTF.H"
 #include "COMMON/ALFXPARAM.H"
 
-void guMtxF2L(f32 *arg0, s32 *arg1);
+void guMtxF2L(f32 *floatMatrix, s32 *fixedMatrix);
 void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];

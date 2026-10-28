@@ -10,11 +10,11 @@
 #include "COMMON/ACTOR_DEFINITION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
-#include "RENDER/8028FD2C_11.H"
+#include "RENDER/EFFECT_POOL_OPERATIONS.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/TRIPLE.H"
-#include "RENDER/8026AC38.H"
-#include "RENDER/8028FD2C.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
+#include "RENDER/VISIBLE_EFFECT_NODE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -159,7 +159,7 @@ void SetN64_RecycleEffectNode(void *, void *);
 
 extern s32 D_800CD764_de[];
 
-void *SetN64_SpawnModelEffect(char *arg0, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime)
+void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime)
 {
   CVector3 center;
   s32 type;
@@ -171,24 +171,24 @@ void *SetN64_SpawnModelEffect(char *arg0, s32 *referenceCounter, s32 arg2, CVect
   {
     return 0;
   }
-  if ((((WorldRecAt3C08 *)(arg0))->free) == 0)
+  if ((((WorldRecAt3C08 *)(container))->free) == 0)
   {
-    SetN64_RecycleEffectNode(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
+    SetN64_RecycleEffectNode(container, ((WorldRecAt3C08 *)(container))->tail);
   }
-  effectActor = ((WorldRecAt3C08 *)(arg0))->free;
-  previousActiveHead = ((WorldRecAt3C08 *)(arg0))->head;
-  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((SceneEffect *)(effectActor))->next);
+  effectActor = ((WorldRecAt3C08 *)(container))->free;
+  previousActiveHead = ((WorldRecAt3C08 *)(container))->head;
+  ((WorldRecAt3C08 *)(container))->free = (void *) (((SceneEffect *)(effectActor))->next);
   if (previousActiveHead != 0)
   {
     ((SceneEffect *)(previousActiveHead))->prev = effectActor;
   }
-  { char *next = ((WorldRecAt3C08 *)(arg0))->head;
+  { char *next = ((WorldRecAt3C08 *)(container))->head;
   ((SceneEffect *)(effectActor))->prev = 0;
   ((SceneEffect *)(effectActor))->next = next; }
-  ((WorldRecAt3C08 *)(arg0))->head = effectActor;
-  if ((((WorldRecAt3C08 *)(arg0))->tail) == 0)
+  ((WorldRecAt3C08 *)(container))->head = effectActor;
+  if ((((WorldRecAt3C08 *)(container))->tail) == 0)
   {
-    ((WorldRecAt3C08 *)(arg0))->tail = effectActor;
+    ((WorldRecAt3C08 *)(container))->tail = effectActor;
   }
   ((SceneEffect *)(effectActor))->state = (s32) ((((SceneEffect *)(effectActor))->state) | 1);
   GameObject_ResetActorMotion(effectActor);
@@ -355,11 +355,11 @@ void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
 /* 8028FD2C_12.CPP */
 extern s32 Visdata_TestBoxAgainstFrustum(void *arg0, void *arg1);
 
-extern void Simple_DrawCachedModel(void *arg0);
+extern void Simple_DrawCachedModel(void *obj);
 
 extern f32 D_801031F8[];
 
-extern s32 func_8024D160_de(void *arg0);
+extern s32 func_8024D160_de(void *actor);
 
 /** Unlink an active node and return it to the global free list. */
 void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {

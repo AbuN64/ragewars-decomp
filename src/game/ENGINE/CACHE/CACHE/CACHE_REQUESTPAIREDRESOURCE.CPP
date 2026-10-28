@@ -1,7 +1,7 @@
 #include "COMMON/MANAGER.H"
 #include "COMMON/LONE/D_80106248.H"
 #include "COMMON/LONE/D_801051A0.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
 #include "COMMON/EXTERNS_18.H"
@@ -116,7 +116,7 @@ extern void Cache_DetachResourceRequest(s32, NodeCacheRunResourceCompletionWorke
 
 extern void func_80255B2C_de(void *, void *);
 
-extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
 
 static inline void lock(void) {
     extern Manager D_801047E0;

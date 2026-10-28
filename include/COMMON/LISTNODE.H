@@ -34,7 +34,7 @@ struct Lists;
 struct VoiceRecAt8;
 typedef struct VoiceRecAt8 VoiceRecAt8;
 
-extern void Audio_ResolveInstrumentSectionOne(void *arg0, s16 arg1);
+extern void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index);
 
 struct ManagerRecAtD8V2;
 typedef struct ManagerRecAtD8V2 ManagerRecAtD8V2;

@@ -7,7 +7,7 @@ const char g_constructMapSimpModelsIndex[40] = "CScene__ConstructMap: simp model
 
 /* 8044ACCC.CPP */
 #if defined(VERSION_US)
-const char data_func_8044B600_de_800C4E34[75] =
+const char g_sceneConstructMapModelTextPool[75] =
     "CScene__ConstructMap: simp models index\0"
     "CScene__ConstructMap: simple model\0";
 #endif

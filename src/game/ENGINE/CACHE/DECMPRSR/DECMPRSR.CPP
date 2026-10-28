@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/MANAGER.H"
@@ -11,7 +12,6 @@
 #include "RESMGR/X_PLUS.H"
 
 extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
-extern void osStartThread(void *thread);
 
 void func_802550F0_de(ResourceLoadWorker *worker, s32 id) {
     osCreateMesgQueue(&worker->requests, worker->messages, 0x80);

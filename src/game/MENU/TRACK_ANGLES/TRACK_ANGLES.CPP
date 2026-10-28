@@ -72,7 +72,7 @@ extern int D_800DE7E8;
 
 extern unsigned char *D_80145060;
 
-extern void Track_RequestTrackByKey(int);
+extern s32 Track_RequestTrackByKey(int);
 
 static inline int test_bit(unsigned char *bits, int index) {
     int offset = index >> 3;

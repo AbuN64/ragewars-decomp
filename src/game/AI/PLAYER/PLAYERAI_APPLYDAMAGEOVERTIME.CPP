@@ -24,7 +24,7 @@
 #include "GFX/TEXT/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.H"
 
 
-extern void *Scene_FindActorDefinition(Shared_World *arg0, s32 arg1, s32 arg2);
+extern void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKind);
 
 
 extern s32 D_80140FF8;
@@ -35,11 +35,11 @@ extern s32 D_80140FF8;
 
 
 
-extern void GameObject_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
+extern void GameObject_DrawBlobShadow(void *actor, CVector3 *offset, s32 raised);
 
 
 
-extern void func_8022C060_de(void *arg0, void *arg1);
+extern void func_8022C060_de(void *player, void *unused);
 
 /** Report whether the nested pointer's word at 0x564 is nonzero. */
 int func_8022BAA0_de(void *object) {
@@ -166,7 +166,7 @@ void func_8022BD94_de(void *player, void *source, s32 enabled) {
     }
 }
 
-extern void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind);
+extern void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 damageFlags, s32 kind);
 /* Damage over time while the source's effect flag 0x1000 is set (func_8022BD94_de): advances the player's
  * effect timer by the frame step; past 300 it marks the player and deals max(1, (150 - health / 256) / 15)
  * points (8.8 fixed) of kind 0x1F, then winds the timer back by 22.5 so the next tick follows sooner.

@@ -1,5 +1,5 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
-#include "MENU/8043F69C.H"
+#include "MENU/OPTION_AND_TEXT_LAYER_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/S1.H"
@@ -8,7 +8,7 @@
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */

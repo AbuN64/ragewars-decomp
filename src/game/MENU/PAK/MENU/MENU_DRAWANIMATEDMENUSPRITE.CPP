@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -56,7 +56,7 @@ extern void Menu_MeasureLine(void *, f32, f32);
 
 
 
-extern void Geometry_SetModePreset(s32);
+extern s32 Geometry_SetModePreset(s32);
 
 /* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
    additionally offset by nine descriptors per local player, read from the byte after D_80146848. */

@@ -52,8 +52,8 @@ s32 Setup_DeleteNameCharacter(s32 unused, EntryRecAt1C *arg1) {
     return 0;
 }
 
-s32 Setup_CommitPlayerName(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
-    s32 temp_v0;
+s32 Setup_CommitPlayerName(s32 first, EntryRecAt1C *second, s32 third) {
+    s32 playerIndexResult;
     s32 var_a0;
     s32 var_a1;
     u8 *var_a2;
@@ -61,10 +61,10 @@ s32 Setup_CommitPlayerName(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
     u8 var_v0;
     ObjRecAt5D8 *temp_s1;
 
-    temp_s1 = arg1->unk1C;
-    temp_v0 = Player_GetPlayerIndex(D_80145040, temp_s1);
-    var_a2 = (temp_v0 * 0x18) + D_800E20AC;
-    var_v1 = (temp_v0 * 0x96) + (D_80145040 + 0x13DC);
+    temp_s1 = second->unk1C;
+    playerIndexResult = Player_GetPlayerIndex(D_80145040, temp_s1);
+    var_a2 = (playerIndexResult * 0x18) + D_800E20AC;
+    var_v1 = (playerIndexResult * 0x96) + (D_80145040 + 0x13DC);
     var_a1 = 0;
     var_a0 = 0;
     do {
@@ -89,7 +89,7 @@ Items_SetDefaultPlayerName
 #endif
 (temp_s1->unk5D8);
     }
-    Menu_TryCreateMenu(arg0, arg1, arg2);
+    Menu_TryCreateMenu(first, second, third);
     return 1;
 }
 

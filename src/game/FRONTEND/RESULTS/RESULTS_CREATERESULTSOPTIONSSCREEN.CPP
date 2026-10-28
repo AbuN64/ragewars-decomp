@@ -36,7 +36,7 @@ static inline s32 resultsRes(s32 id) {
 #include "TYPES.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 extern struct EntryRecAt8V3 D_800E4694[];
-void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
+void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 found);
 void Results_SelectSuggestedTrial(void);
 void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 

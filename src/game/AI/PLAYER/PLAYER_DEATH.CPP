@@ -19,7 +19,7 @@
 #include "SYSTEM/LIST.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 /* Apply player transitions, regional control gates, and localized linked-actor notifications. */
 
 
@@ -607,7 +607,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
             s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
-            if (func_8025E4D4_de(id) == 0) {
+            if (SoundElement_HasActiveOrPendingSound(id) == 0) {
                 SoundElement_PlaySoundAtPosition((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
             }
         }
@@ -665,12 +665,12 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
 #include "TYPES.H"
 
 
-extern s32 func_8022C460_de(void *arg0);
-extern void Player_DrainReserveAndDamage(void *arg0, f32 arg1, void *arg2);
-extern void func_8022B550_de(void *arg0, f32 arg1, f32 arg2, void *arg3,
-                          s32 arg4);
-extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
-extern void Player_StartSourceEffect(void *arg0, void *arg1);
+extern s32 func_8022C460_de(void *actorObject);
+extern void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource);
+extern void func_8022B550_de(void *obj, f32 target, f32 rate, void *kind,
+                          s32 tag);
+extern void func_8022B60C_de(void *actor, f32 amount, void *source);
+extern void Player_StartSourceEffect(void *actor, void *effectSource);
 
 void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *projectileEvent) {
     Player *actor = playerObject;

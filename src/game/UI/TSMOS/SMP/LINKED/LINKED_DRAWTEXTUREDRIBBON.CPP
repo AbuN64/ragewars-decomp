@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "RENDER/LINKED_DRAWTEXTUREDRIBBON.H"
-#include "RENDER/802A35C0.H"
+#include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -22,9 +22,9 @@ extern void *Fx_AllocateRibbonSegment(void *arg0, s32 arg1);
 
 extern void Graphu64_GetMatrixTranslation(char *object, f32 *output);
 
-extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
+extern void Graphu64_GetMatrixScale(void *matrix, f32 *arg1);
 
-extern void Graphu64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector);
 
 extern f32 Gu_Sqrtf(f32);
 
@@ -106,11 +106,11 @@ void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
     f32 var_f1;
     void *temp_s1;
     char *var_s0;
-    char *temp_s2;
+    char *ribbonSegmentResult;
 
-    temp_s2 = Fx_AllocateRibbonSegment(arg0, (s32)arg1);
-    var_s0 = temp_s2;
-    if (temp_s2 != 0) {
+    ribbonSegmentResult = Fx_AllocateRibbonSegment(arg0, (s32)arg1);
+    var_s0 = ribbonSegmentResult;
+    if (ribbonSegmentResult != 0) {
         ((ObjectLinks54 *)(arg1))->unk_50 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_8 = ((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_8;
         ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
@@ -150,7 +150,7 @@ void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
             ((ObjectLinksB4 *)(var_s0))->unk_A8 = ((ObjectLinks54 *)(arg1))->unk_28;
         }
     }
-    return temp_s2;
+    return ribbonSegmentResult;
 }
 
 void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {

@@ -132,17 +132,17 @@ void *Pickup_FindSpecialEntry(s32 arg0) {
     return 0;
 }
 
-extern int InstHdr_GetActorType(void *arg0);
-extern s32 Pickup_DispatchHandler(void *arg0, void *arg1, s32 arg2);
-extern void SetN64_RecycleGlobalEffectNode(void *arg0);
-extern void Scene_SetLevelRecordStateBit(void *arg0, void *arg1, s32 arg2);
-extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
+extern int InstHdr_GetActorType(void *prop);
+extern s32 Pickup_DispatchHandler(void *actor, void *target, s32 arg2);
+extern void SetN64_RecycleGlobalEffectNode(void *node);
+extern void Scene_SetLevelRecordStateBit(void *arg0, void *levelBitRecord, s32 arg2);
+extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *actor);
 
 
 
 
 
-void Pickup_TryCollectActor(void *arg0, void *pickup) {
+void Pickup_TryCollectActor(void *actor, void *pickup) {
     u16 collectedFlags;
     u16 pickupFlags;
 
@@ -153,7 +153,7 @@ void Pickup_TryCollectActor(void *arg0, void *pickup) {
         }
     } else if (!(pickupFlags & 1)) {
 block_4:
-        if (Pickup_DispatchHandler(arg0, pickup, InstHdr_GetActorType(pickup)) != 0) {
+        if (Pickup_DispatchHandler(actor, pickup, InstHdr_GetActorType(pickup)) != 0) {
             collectedFlags = ((struct Shared_ProjectileView *)(pickup))->flags | 1;
             ((struct Shared_ProjectileView *)(pickup))->flags = collectedFlags;
             if (collectedFlags & 8) {
@@ -161,7 +161,7 @@ block_4:
                 return;
             }
             Scene_SetLevelRecordStateBit(&g_world, pickup, 1);
-            Link_DispatchObjectLinks(((struct Shared_ProjectileView *)(pickup))->source, 0x400, arg0);
+            Link_DispatchObjectLinks(((struct Shared_ProjectileView *)(pickup))->source, 0x400, actor);
         }
     }
 }
@@ -170,7 +170,7 @@ block_4:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 extern void Player_AddAmmo(void *, s16, s16);
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
@@ -204,48 +204,48 @@ s32 Pickup_ApplyAmmo(void *player, void *pickupEntry) {
                       ((ActorPickupCanCollect *)player)->position, 0, -1);
     }
     if (callback != 0) {
-        func_8025E11C_de(callback);
+        SoundElement_PlayDialogGroup(callback);
     }
     return 1;
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 Player_GetMaxHealth(void *arg0);
+extern s32 Player_GetMaxHealth(void *player);
 
 
 /** Advance a timed effect and apply its optional resource, sound, and callback. */
-s32 Pickup_ApplyHealth(void *arg0, void *arg1) {
+s32 Pickup_ApplyHealth(void *player, void *arg1) {
     s32 result;
     void *resource;
     s32 sound;
     s32 callback;
 
     result = 0;
-    if (((struct ActorPickupCanCollect *)(arg0))->count > 0) {
+    if (((struct ActorPickupCanCollect *)(player))->count > 0) {
         s32 limit;
 
-        ((struct ActorPickupCanCollect *)(arg0))->count +=
+        ((struct ActorPickupCanCollect *)(player))->count +=
             ((struct TimedItemEffect *)(arg1))->amount << 8;
-        limit = Player_GetMaxHealth(arg0);
-        if (((struct ActorPickupCanCollect *)(arg0))->count < limit) {
-            limit = ((struct ActorPickupCanCollect *)(arg0))->count;
+        limit = Player_GetMaxHealth(player);
+        if (((struct ActorPickupCanCollect *)(player))->count < limit) {
+            limit = ((struct ActorPickupCanCollect *)(player))->count;
         }
         result = 1;
-        ((struct ActorPickupCanCollect *)(arg0))->count = limit;
-        ((struct ActorPickupCanCollect *)(arg0))->active = limit;
+        ((struct ActorPickupCanCollect *)(player))->count = limit;
+        ((struct ActorPickupCanCollect *)(player))->active = limit;
     }
 
     if (result != 0) {
         resource = ((EntryRecAtE *)arg1)->resource;
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
-        if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
-            Gsky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
+        if (((struct ActorPickupCanCollect *)(player))->owner != 0) {
+            Gsky_StartFade(((struct ActorPickupCanCollect *)(player))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&D_80145088,
-                              ((struct ActorPickupCanCollect *)(arg0))->owner,
+                              ((struct ActorPickupCanCollect *)(player))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
 #else
@@ -255,10 +255,10 @@ s32 Pickup_ApplyHealth(void *arg0, void *arg1) {
         }
         if (sound != 0) {
             SoundElement_PlaySoundAtPosition(sound,
-                          ((ActorPickupCanCollect *)arg0)->position, 0, -1);
+                          ((ActorPickupCanCollect *)player)->position, 0, -1);
         }
         if (callback != 0) {
-            func_8025E11C_de(callback);
+            SoundElement_PlayDialogGroup(callback);
         }
     }
     return result;
@@ -309,7 +309,7 @@ s32 Pickup_ApplyLifePoints(void *arg0, void *arg1) {
                       ((ActorPickupCanCollect *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
-        func_8025E11C_de(callback);
+        SoundElement_PlayDialogGroup(callback);
     }
     return 1;
 }
@@ -404,7 +404,7 @@ s32 Pickup_ApplyPowerup(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE
                       *(CVector3 *)&arg0->unk8, 0, -1);
     }
     if (callback != 0) {
-        func_8025E11C_de(callback);
+        SoundElement_PlayDialogGroup(callback);
     }
     return 1;
 }

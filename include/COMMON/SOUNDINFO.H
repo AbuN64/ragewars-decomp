@@ -13,7 +13,7 @@ extern signed char func_8025E560_de(void *object);
 
 
 
-extern short func_8025E53C_de(void *arg0);
+extern short func_8025E53C_de(void *soundDescriptor);
 
 
 extern int func_8025E530_de(char *object);

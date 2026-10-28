@@ -122,7 +122,7 @@ struct ContextRecAt2BB8 {
 struct QueueRec;
 typedef struct QueueRec QueueRec;
 
-extern void func_8025C8C0_de(void *arg0);
+extern void func_8025C8C0_de(void *cLoopingSoundData);
 
 struct CLoopingSoundData_t;
 typedef struct CLoopingSoundData_t CLoopingSoundData;

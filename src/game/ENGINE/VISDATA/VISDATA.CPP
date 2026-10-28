@@ -100,19 +100,19 @@ static inline s32 func_80297AD4_anyInside(CVector3 *points, s32 count, f32 *plan
 }
 
 /* Reports what occupies the board cell at the given coordinates, or nothing when it is out of reach. */
-s32 Visdata_GetVisibilityCellState(ResourceBitGrid *arg0, s32 arg1, s32 arg2) {
+s32 Visdata_GetVisibilityCellState(ResourceBitGrid *resourceGrid, s32 arg1, s32 arg2) {
     s32 col;
     s32 row;
     s16 cell;
-    if ((((f32) (arg1 - arg0->originX) < 0.0f) ? -(arg1 - arg0->originX) : (arg1 - arg0->originX)) >= 9) {
+    if ((((f32) (arg1 - resourceGrid->originX) < 0.0f) ? -(arg1 - resourceGrid->originX) : (arg1 - resourceGrid->originX)) >= 9) {
         return 0;
     }
-    if ((((f32) (arg2 - arg0->originY) < 0.0f) ? -(arg2 - arg0->originY) : (arg2 - arg0->originY)) >= 9) {
+    if ((((f32) (arg2 - resourceGrid->originY) < 0.0f) ? -(arg2 - resourceGrid->originY) : (arg2 - resourceGrid->originY)) >= 9) {
         return 0;
     }
-    col = (arg1 - arg0->originX) + 8;
-    row = (arg2 - arg0->originY) + 8;
-    cell = arg0->cells[col + (row * 17)];
+    col = (arg1 - resourceGrid->originX) + 8;
+    row = (arg2 - resourceGrid->originY) + 8;
+    cell = resourceGrid->cells[col + (row * 17)];
     if (cell == -2) {
         return 1;
     }
@@ -128,46 +128,46 @@ s32 Visdata_GetVisibilityCellState(ResourceBitGrid *arg0, s32 arg1, s32 arg2) {
 int Visdata_TestVisibilityGridBit(ResourceBitGrid *g,int x,int y,int z){
     int v; unsigned int adjusted;if(!(RW_ABS(x-g->originX)<9 && RW_ABS(y-g->originY)<9))return 0;v=g->cells[(x-g->originX)+8+((y-g->originY)+8)*17];if(v==-2)return 1;if(v==-3)return 0;adjusted=z+9;g->reader.bitPos=v+adjusted;return CBitReader_ReadBits(&g->reader,1)!=0;}
 
-void Visdata_SelectVisibilityCell(ResourceBitGrid *arg0, s32 x, s32 y)
+void Visdata_SelectVisibilityCell(ResourceBitGrid *resourceGrid, s32 x, s32 y)
 {
-    if (RW_ABS(x - arg0->originX) >= 9) {
+    if (RW_ABS(x - resourceGrid->originX) >= 9) {
         return;
     }
-    if (RW_ABS(y - arg0->originY) >= 9) {
+    if (RW_ABS(y - resourceGrid->originY) >= 9) {
         return;
     }
     {
-        s32 ddx = x - arg0->originX;
-        s32 ddy = y - arg0->originY;
+        s32 ddx = x - resourceGrid->originX;
+        s32 ddy = y - resourceGrid->originY;
         s32 t = (ddy + 8) * 17 + 8;
         s16 val;
         ddx = ddx + t;
-        val = arg0->cells[ddx];
+        val = resourceGrid->cells[ddx];
         if (val == -2) {
-            arg0->cellState = 1;
+            resourceGrid->cellState = 1;
             return;
         }
         if (val == -3) {
-            arg0->cellState = 0;
+            resourceGrid->cellState = 0;
             return;
         }
         if (val == -1) {
-            arg0->cellState = 3;
+            resourceGrid->cellState = 3;
             return;
         }
-        arg0->cellState = 2;
-        arg0->reader.bitPos = val;
-        arg0->cellValue = CBitReader_ReadBits(&arg0->reader, 9);
+        resourceGrid->cellState = 2;
+        resourceGrid->reader.bitPos = val;
+        resourceGrid->cellValue = CBitReader_ReadBits(&resourceGrid->reader, 9);
     }
 }
 
-s32 Visdata_ReadNextVisibilityBit(ResourceBitGrid *arg0) {
+s32 Visdata_ReadNextVisibilityBit(ResourceBitGrid *resourceGrid) {
     s32 field;
-    field = arg0->cellState;
+    field = resourceGrid->cellState;
     if (field != 2) {
         return field == 1;
     }
-    return CBitReader_ReadBits(&arg0->reader, 1) != 0;
+    return CBitReader_ReadBits(&resourceGrid->reader, 1) != 0;
 }
 
 void Visdata_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVector3 *c1, CVector3 *c2, CVector3 *c3) {
@@ -182,13 +182,13 @@ void Visdata_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *
     planes[5].distance = planes[5].normal.x * eye->x + planes[5].normal.y * eye->y + planes[5].normal.z * eye->z;
 }
 
-void Visdata_BuildPlaneFromPoints(void *planeEquation, void *arg1, void *arg2, void *arg3) {
+void Visdata_BuildPlaneFromPoints(void *planeEquation, void *rightVector, void *arg2, void *leftVector) {
     PlaneEquation *plane = planeEquation;
-    CVector3 *point = arg1;
+    CVector3 *point = rightVector;
     CVector3 sp10;
     CVector3 sp20;
-    Graphu64_SubtractVectors(&sp10, arg2, arg1);
-    Graphu64_SubtractVectors(&sp20, arg3, arg2);
+    Graphu64_SubtractVectors(&sp10, arg2, rightVector);
+    Graphu64_SubtractVectors(&sp20, leftVector, arg2);
     Graphu64_CrossVectors(planeEquation, &sp20, &sp10);
     Graphu64_NormalizeVec3(planeEquation);
     plane->distance = (plane->normal.x * point->x)

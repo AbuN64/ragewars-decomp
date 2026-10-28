@@ -8,7 +8,7 @@
 
 
 
-extern void Menu_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen(void);
 
 
 typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, s32 arg4);
@@ -40,7 +40,7 @@ typedef struct Element Element;
 
 
 
-extern void Menu_PopScreen();
+extern void Menu_PopScreen(void);
 
 /* Draw providers use several existing aggregate declarations. Registration
  * stores these functions; this type does not prescribe a call signature. */
@@ -68,7 +68,7 @@ struct Entry_func_80298170_de {
 };
 struct Entry_func_80298170_de;
 
-extern void Menu_DestroyScreenManager();
+extern void Menu_DestroyScreenManager(void);
 
 struct Widget;
 struct Widget {
@@ -154,7 +154,7 @@ extern int g_menuElementLoadPeak;
 extern void Menu_SetKindHandlerFlags(s32 arg0, s32 arg1);
 
 
-extern void Menu_DrawScreenStack();
+extern void Menu_DrawScreenStack(void);
 
 struct ScreenManager;
 struct ScreenManager {

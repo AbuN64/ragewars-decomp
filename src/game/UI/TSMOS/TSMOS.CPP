@@ -11,7 +11,7 @@
 /** Set D_800D2C90 to one. */
 
 
-s32 GetMenuScreenOwner();
+s32 GetMenuScreenOwner(void);
 
 
 void Tsmos_RequestFrontendShutdown(void) {

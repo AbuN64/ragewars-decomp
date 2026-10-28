@@ -1,7 +1,7 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKSC_2.H"
-#include "GFX/802A8A94.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
+#include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
@@ -102,8 +102,8 @@ void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shad
    colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
    and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
 
-extern void Geometry_SetCombineMode(s32 arg0);
-extern void Geometry_SetModePreset(s32 arg0);
+extern void Geometry_SetCombineMode(u32 mode);
+extern s32 Geometry_SetModePreset(s32 tailEnum);
 
 void Onscrn_SetupSpriteMode(s32 color) {
     gDPPipeSync(g_displayListCursor++);

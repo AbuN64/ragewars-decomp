@@ -10,7 +10,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "FRONTEND/FRONTEND_OPENGAMEPLAYFRONTEND.H"
 #include "RESMGR/X_PLUS.H"
-#include "BULKYDCMP/BULKYDCMP.H"
+#include "ENGINE/AUDIO/T2SOUNDELEMENT/SOUND_CONTEXT_CONTROL.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -102,8 +102,8 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
                            && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
                            && ((&D_8014561C.rules)->locked == 0 || D_8014561C.allowed == 0)) {
                     D_8014561C.open = 1;
-                    func_8025E360_de();
-                    func_8025E3A8_de();
+                    SoundElement_EnableMusicGainOverride();
+                    SoundElement_DisablePeriodicSound();
                     func_80218464_de(player->views5E8.view938_130.strokes);
                     player->views5E8.viewF54_132.selection = -1;
                     player->views5E8.viewF90_134.choice = -1;

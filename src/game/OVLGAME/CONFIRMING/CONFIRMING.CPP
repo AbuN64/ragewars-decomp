@@ -108,7 +108,7 @@ s32 Confirming_SelectToggleRowText(func_8043DD30_S1 *arg0) {
 #endif
 
 /* note: Clears eight status bytes and selects the first available profile. */
-void func_8025E384_de(void);
+void SoundElement_DisableMusicGainOverride(void);
 unsigned int Control_IsAButtonPressed(void *);
 extern s32 D_8010F328;
 extern s32 D_80146302;
@@ -146,7 +146,7 @@ void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
             break;
         }
     }
-    func_8025E384_de();
+    SoundElement_DisableMusicGainOverride();
 }
 
 /** Dispatches to func_80264770_de or func_80264788_de with a byte read from arg0->unk20->unk4, chosen by arg1. */

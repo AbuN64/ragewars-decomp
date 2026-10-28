@@ -1,6 +1,6 @@
 #ifndef CAMERA_GSKY_GETMASKEDEFFECTCOLOR_H
 #define CAMERA_GSKY_GETMASKEDEFFECTCOLOR_H
 #include "COMMON/VIEWFLAGS.H"
-#include "CAMERA/80233920.H"
-extern void Gsky_GetMaskedEffectColor(ThreeChannels *arg0, s8 *arg1, s8 *arg2, s8 *arg3);
+#include "CAMERA/FADE_AND_COLOR_BLEND_VIEWS.H"
+extern void Gsky_GetMaskedEffectColor(ThreeChannels *threeChannels, s8 *red, s8 *green, s8 *blue);
 #endif

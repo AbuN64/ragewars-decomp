@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
-#include "COMMON/OBJECTLINKS4_2.H"
+#include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "SYSTEM/EVENTS_APPLYDAMAGEEVENT.H"
@@ -512,7 +512,7 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
 }
 
 
-extern f32 Gobjinst_GetRootMeanSquareScale(void *arg0);
+extern f32 Gobjinst_GetRootMeanSquareScale(void *target);
 
 
 
@@ -525,7 +525,7 @@ extern f32 Gobjinst_GetRootMeanSquareScale(void *arg0);
 
 
 
-extern CallbackEntryRecAt4V1 g_effectCallbackFlags[];
+extern EventCallbackEntry g_effectCallbackFlags[];
 void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
     if (g_effectCallbackFlags[arg2].callback != 0) {
         g_effectCallbackFlags[arg2].callback(arg0, arg1, arg2, arg3, arg6);
@@ -558,7 +558,7 @@ f32 Events_GetActorSizeScale(u8 *other) {
     }
 }
 
-void Events_PlayClipEvent(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
+void Events_PlayClipEvent(s32 arg0, ClipEventTargetView *arg1, s32 arg2, CVector3 soundPosition,
                    Clip arg6) {
     s32 *global = &D_8011FAC0.clockPaused;
     s32 selected;
@@ -591,12 +591,12 @@ void Events_PlayClipEvent(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3
         }
     }
 
-    func_8025DEC0_de(arg6.frames, arg3, 0, selected, scale);
+    SoundElement_PlayPositionedSoundWithScale(arg6.frames, soundPosition, 0, selected, scale);
 }
 
 void Events_StopClipEvent(s32 unused0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     s32 *p = &arg3;
-    func_8025E11C_de(p[3]);
+    SoundElement_PlayDialogGroup(p[3]);
 }
 
 void Events_SpawnActorEffect(void *actor,int unused1,int unused2,Triple input,int event) {

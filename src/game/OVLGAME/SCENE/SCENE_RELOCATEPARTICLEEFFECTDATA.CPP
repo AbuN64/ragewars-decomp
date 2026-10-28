@@ -58,7 +58,7 @@ void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
     }
 }
 
-void Scene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
+void Scene_RelocateParticleEffectData(s32 world, void ***handle) {
     void *obj;
     GroupCode8044E2B8 *group;
     Piece *piece;
@@ -66,8 +66,8 @@ void Scene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     s32 count;
     s32 i;
 
-    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
-        obj = **arg1;
+    if (Ppdecom_UnpackResource(handle, 0) != 0) {
+        obj = **handle;
         group = SetN64_GetPackSection(obj, 2);
         count = group->count;
         piece = group->pieces;
@@ -78,7 +78,7 @@ void Scene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
                 if (piece[i].tag == -1) {
                     piece[i].tag = 0;
                 } else {
-                    piece[i].tag = Scene_GetIndexedModelResource(arg0, piece[i].tag);
+                    piece[i].tag = Scene_GetIndexedModelResource(world, piece[i].tag);
                 }
                 piece[i].unk18 = base + piece[i].unk18;
                 piece[i].unk1C = base + piece[i].unk1C;
@@ -95,7 +95,7 @@ void Scene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     }
 }
 
-void Scene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
+void Scene_ScaleDefinitionFields(s32 unused0, void ***handle) {
     f32 scale;
     void *obj;
     Ent *ent;
@@ -103,8 +103,8 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     s32 i;
 
     scale = D_800C5304_de;
-    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
-        obj = **arg1;
+    if (Ppdecom_UnpackResource(handle, 0) != 0) {
+        obj = **handle;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
             ent = SetN64_GetPackSection(obj, i);
@@ -137,7 +137,7 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     }
 }
 
-void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) {
+void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***handle) {
     void *obj;
     FrameCode8044E2B8 *frame;
     BankCode8044E2B8 *bank;
@@ -150,8 +150,8 @@ void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) {
     s32 j;
     s32 index;
 
-    if (Ppdecom_UnpackResource(arg1, 0) != 0) {
-        obj = **arg1;
+    if (Ppdecom_UnpackResource(handle, 0) != 0) {
+        obj = **handle;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
             frame = SetN64_GetPackSection(SetN64_GetPackSection(obj, i), 1);

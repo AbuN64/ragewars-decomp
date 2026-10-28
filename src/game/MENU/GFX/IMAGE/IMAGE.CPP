@@ -1,6 +1,6 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/TEXTURE.H"
-#include "MENU/80414430.H"
+#include "MENU/IMAGE_AND_DISPLAY_COMMAND_VIEWS.H"
 #include "TYPES.H"
 #include "MENU/GFX/IMAGE.H"
 

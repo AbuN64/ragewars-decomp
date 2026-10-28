@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/OBJECTLINKS4_2.H"
+#include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJB.H"
@@ -374,7 +374,7 @@ static inline void cross_node_edges(Node75 *node) {
     Graphu64_CrossVectors(&D_80115E10, &a, &b);
 }
 
-extern void *Scene_GetModelRecordByIndexPointer(Shared_World *arg0, s32 arg1);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *world, s32 arg1);
 
 extern void Gregion_ExpandHorizontalBounds(void *arg0, s32 arg1, void *arg2);
 

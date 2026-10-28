@@ -34,7 +34,7 @@ extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
    and 0x15 otherwise, then calls Menu_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled();
 
-extern void Menu_ReturnToPreviousScreen();
+extern void Menu_ReturnToPreviousScreen(void);
 
 /* Steps the selected menu item backwards and updates its display state. */
 

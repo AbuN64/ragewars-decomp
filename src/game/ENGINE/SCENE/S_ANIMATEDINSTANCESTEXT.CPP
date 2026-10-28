@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80286AA8_CAEB0[19] =
+const char s_animatedInstancesText[19] =
     "animated instances\000";
 #endif
 

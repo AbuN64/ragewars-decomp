@@ -154,7 +154,7 @@ static __inline__ char *pakPrompt(s32 *channel) {
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_800E28C8;
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];

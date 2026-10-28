@@ -1,5 +1,5 @@
 #include "COMMON/PROPGEOMETRY.H"
-#include "WORLD/8024E914.H"
+#include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -22,7 +22,7 @@ extern char D_8011D8D0;
 extern f32 Gobjinst_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 

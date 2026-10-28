@@ -4,9 +4,9 @@
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/80291054.H"
+#include "RENDER/SESSION_HANDLER_AND_RENDER_STATE.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GROUP.H"
@@ -72,7 +72,7 @@ void SetN64_InitFrameRing(RenderState *state) {
 
     } while (i < count);
     SetN64_AdvanceDisplayFrame(&state->ring.display);
-    func_8025DE30_de();
+    SoundElement_InitializeContext();
 }
 
 #include "COMMON/GAME_SESSION.H"
@@ -103,9 +103,9 @@ extern void Player_ResetMenuPool(void *menu);
 extern void CCollision_Initialize(void);
 extern s32 Defs_ReadResourceWord(s32 size);
 extern void Scene_LoadSceneResources(Shared_World *world, s32 resource);
-extern void Ovlgame_InitializeControllerSession(void);
+extern s16 Ovlgame_InitializeControllerSession(void);
 extern void Hud_ResetHudCharTables(void *hud);
-extern void SetN64_BeginModeTransition(GameSession *session, s32 arg1);
+extern void SetN64_BeginModeTransition(GameSession *session, s32 targetMode);
 extern void SetN64_UpdateGameMode(void *session);
 extern void SetN64_UpdateFrameTiming(void *session);
 /* The game settings record and its round counters. */

@@ -6,7 +6,7 @@
    Tsmos_SetModeOneFlag with 2 and func_8026495C_de, and returns zero. */
 extern void *D_800E5550;
 
-extern void Control_RestoreControllerSetup();
+extern void Control_RestoreControllerSetup(void);
 
 s32 Frontend_DestroyPauseMenu(void) {
     Cache_FreeMemory(D_800E5550);

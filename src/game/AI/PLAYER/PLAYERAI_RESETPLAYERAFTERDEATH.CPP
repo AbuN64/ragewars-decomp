@@ -111,8 +111,8 @@ extern u8 D_800FEAD8[];
 extern char D_0022ECCC;
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
-extern s32 CCinema_RequestTrackWithCallbacks(s32 arg0, void *arg1, VoidCallback arg2);
-extern void *Scene_FindActorDefinition(Shared_World *arg0, s32 arg1, s32 arg2);
+extern s32 CCinema_RequestTrackWithCallbacks(s32 requestId, void *requestContextCallback, VoidCallback completionCallback);
+extern void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKind);
 
 
 

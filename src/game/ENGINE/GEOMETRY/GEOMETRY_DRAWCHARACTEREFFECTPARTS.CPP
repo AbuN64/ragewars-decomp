@@ -5,7 +5,7 @@
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTSTATE18.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "abi.h"
 #include "gbi.h"
 #include "TYPES.H"
@@ -21,7 +21,7 @@ extern Gfx *g_displayListCursor;
 extern char D_8013B2D8;
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
-extern void Geometry_SetCombineMode(s32 mode);
+extern void Geometry_SetCombineMode(u32 mode);
 
 void Geometry_DrawSharedMaterialModel(void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
@@ -77,7 +77,7 @@ void Geometry_DrawSharedMaterialModel(void **resource, s32 matrix, s32 segment, 
 
 #include "COMMON/DISPLAY.H"
 
-extern void XPlus_NextRandomInteger(void);
+extern s32 XPlus_NextRandomInteger(void);
 
 
 

@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "IO/libsn_disableinterrupts.H"
 
-extern void Libsn_SpinDelay(int arg0);
+extern void Libsn_SpinDelay(int iterationCount);
 #endif

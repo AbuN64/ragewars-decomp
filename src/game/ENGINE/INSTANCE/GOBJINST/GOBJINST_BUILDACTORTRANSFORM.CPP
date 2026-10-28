@@ -1,5 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
@@ -12,13 +12,13 @@
 #include "LISTS/LISTS.H"
 
 extern s32 Cinema_IsSequenceInWindow(void);
-extern CQuatern Gobjinst_BuildActorDirectionTilt(void *arg1);
+extern CQuatern Gobjinst_BuildActorDirectionTilt(void *input);
 
 
-extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
+extern void MultiplyQuaternions(CQuatern *productQuaternion, CQuatern *leftQuaternion, CQuatern *rightQuaternion);
 extern void MatrixFromQuaternion(void *, void *);
-extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
+extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
@@ -106,8 +106,8 @@ s32 Gobjinst_RequestAnimationIndex(void *levelActor, s32 animationIndex, s32 all
     return 1;
 }
 
-extern void Lists_ClearWeightedTable(WeightedTable *arg0);
-extern s32 Gobjinst_ChooseAnimationVariant(void *arg0, s32 arg1, s32 arg2);
+extern void Lists_ClearWeightedTable(WeightedTable *object);
+extern s32 Gobjinst_ChooseAnimationVariant(void *owner, s32 animationKind, s32 excludedEntry);
 
 s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 excludedAnimation) {
     WeightedTable eligibleKinds;
@@ -127,9 +127,9 @@ s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 exclud
     return Lists_ChooseWeightedTableEntry(&eligibleKinds);
 }
 
-extern s32 *Gobjinst_RequestAnimatedModelVariant(void *arg0, s8 arg1);
-extern s32 Gobjinst_BuildActorPose(void *arg0, s32 arg1, void *arg2);
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern s32 *Gobjinst_RequestAnimatedModelVariant(void *actor, s8 variantIndex);
+extern s32 Gobjinst_BuildActorPose(void *actor, s32 modelPack, void *model);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
 
 s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
 {
@@ -176,7 +176,7 @@ void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState) {
 
 extern s32 D_800D297C;
 extern void GameObject_DrawActorShadow(char *obj, s32 unused, char *info);
-extern void Gobjinst_SpawnAnimatedModelViewEffect(void *arg0, void *arg1);
+extern void Gobjinst_SpawnAnimatedModelViewEffect(void *actor, void *lookup);
 
 void Gobjinst_DrawMaskedModel(void *actor, void *unusedShadowContext, void *renderSettings) {
     s8 index;

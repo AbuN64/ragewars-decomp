@@ -5,10 +5,10 @@
 
 
 
-extern void Menu_InitializeOptionsScene();
+extern void Menu_InitializeOptionsScene(void);
 
 
-extern void Menu_ConfigureOptionsCamera();
+extern void Menu_ConfigureOptionsCamera(void);
 
 struct ScreenMenuFinishTabOptionsTransition;
 struct ScreenMenuFinishTabOptionsTransition {

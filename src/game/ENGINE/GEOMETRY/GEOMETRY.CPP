@@ -25,7 +25,7 @@ const unsigned int D_blob_783cd81bc6754e540ed2[1] = {
 
 /* GEOMETRY_4.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_8026C484_CA35C[18] =
+const char s_simpleObjectIndexText[18] =
     "simp object index\000";
 #endif
 
@@ -45,7 +45,7 @@ const char s_simpModelsIndexText[18] = "simp models index";
 
 /* GEOMETRY_6.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_8026C484_CA384[11] =
+const char s_simpleModelText[11] =
     "simp model\000";
 #endif
 

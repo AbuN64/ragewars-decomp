@@ -7,7 +7,7 @@
 #include "COMMON/MOTION_STEP.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "CAMERA/80243A80.H"
+#include "CAMERA/COLLISION_SWEEP_VIEWS.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 
 /* 80243A80.CPP */
@@ -59,7 +59,7 @@ typedef Shared_Func80243A80Frame Func80243A80Frame;
 
 typedef CVector3 Func80243A80Vec3;
 
-extern void CCollision_SetUniformSweepExtent(void *arg0, f32 arg1);
+extern void CCollision_SetUniformSweepExtent(void *actorMotion, f32 extent);
 
 s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
     s32 func_8023D380_de();

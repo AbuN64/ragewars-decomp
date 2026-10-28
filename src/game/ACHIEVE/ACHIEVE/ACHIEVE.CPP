@@ -356,19 +356,19 @@ s32 Achieve_CountEarnedAchievements(s32 index) {
     return count;
 }
 
-void Achieve_ApplyProfileWeaponUnlocks(Arg *arg0) {
+void Achieve_ApplyProfileWeaponUnlocks(WeaponUnlockPlayerView *arg0) {
     s32 item;
     s32 temp_v0;
     s32 i;
-    StateRecAt91 *temp_a0;
+    WeaponUnlockProfileView *temp_a0;
     Model *model;
     s32 temp_s3;
-    temp_a0 = arg0->unk5D8;
+    temp_a0 = arg0->profile;
     if (temp_a0->unk91 != 1) {
         i = 0;
         if (temp_a0->unk78 != 0) {
-            model = (Model *)arg0->unk18;
-            temp_s3 = temp_a0->unk7F * 0x190;
+            model = (Model *)arg0->model;
+            temp_s3 = temp_a0->profileIndex * 0x190;
                         do {
                 item = model->slots[i];
                 if (item >= 0x4C3) {

@@ -29,8 +29,8 @@ extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, Collision
 
 extern f32 Graphu64_GetPointDistance(f32 *a, f32 *b);
 
-void Playerai_ApplyLinkedProjectileStatus(void *arg0, s32 arg1, s32 arg2) {
-    func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
+void Playerai_ApplyLinkedProjectileStatus(void *unused1, s32 unused2, s32 projectileEvent) {
+    func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) unused1))->link), unused1, unused2, projectileEvent);
 }
 
 void func_8022E290_de(void *player) {
@@ -128,20 +128,20 @@ mismatch:
     return 0;
 }
 
-s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1) {
+s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *actor, CVector3 *arg1) {
     Instance8020CD74 saved;
     s32 moved;
 
-    saved = *arg0;
-    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += Gobjinst_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
-    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((struct Actor_func_80214DD4_de *)arg0)->height;
-    Unicol_MoveActorWithCollision(arg0, *arg1, &D_80100030);
+    saved = *actor;
+    ((struct Actor_func_80214DD4_de *)actor)->pos.y += Gobjinst_GetActorHeight(actor) * (&D_800C2E10_de)[1];
+    ((struct Actor_func_80214DD4_de *)actor)->pos.y += ((struct Actor_func_80214DD4_de *)actor)->height;
+    Unicol_MoveActorWithCollision(actor, *arg1, &D_80100030);
 
-    moved = (arg1->x != ((struct Actor_func_80214DD4_de *)arg0)->pos.x) ||
-            (arg1->y != ((struct Actor_func_80214DD4_de *)arg0)->pos.y) ||
-            (arg1->z != ((struct Actor_func_80214DD4_de *)arg0)->pos.z);
-    *arg1 = ((struct Actor_func_80214DD4_de *)arg0)->pos;
-    *arg0 = saved;
+    moved = (arg1->x != ((struct Actor_func_80214DD4_de *)actor)->pos.x) ||
+            (arg1->y != ((struct Actor_func_80214DD4_de *)actor)->pos.y) ||
+            (arg1->z != ((struct Actor_func_80214DD4_de *)actor)->pos.z);
+    *arg1 = ((struct Actor_func_80214DD4_de *)actor)->pos;
+    *actor = saved;
 
     return moved;
 }
@@ -149,17 +149,17 @@ s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *ar
 f32 Playerai_SumActivePlayerDistances(void *arg0, f32 *arg1) {
     f32 result;
     Round *round = arg0;
-    Shared_ActorView *var_s0;
+    Shared_ActorView *actorView;
 
-    var_s0 = round->players;
+    actorView = round->players;
     result = 0.0f;
-    if (var_s0 != 0) {
+    if (actorView != 0) {
         do {
-            if (var_s0->message != 0) {
-                result += Graphu64_GetPointDistance(arg1, &var_s0->position.vector.x);
+            if (actorView->message != 0) {
+                result += Graphu64_GetPointDistance(arg1, &actorView->position.vector.x);
             }
-            var_s0 = (Shared_ActorView *)var_s0->next;
-        } while (var_s0 != 0);
+            actorView = (Shared_ActorView *)actorView->next;
+        } while (actorView != 0);
     }
     return result;
 }

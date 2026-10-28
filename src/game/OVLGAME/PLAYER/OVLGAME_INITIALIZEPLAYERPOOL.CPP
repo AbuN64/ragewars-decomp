@@ -1,4 +1,4 @@
-#include "MENU/ITEMS/80444030_4.H"
+#include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/OVLGAME_INITIALIZEPLAYERPOOL.H"
@@ -10,14 +10,14 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "AI/NAV/SCALED_INITPLAYERSTATE.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "FX/CONTPAD_INITCONTROLLERINPUT.H"
 #include "RESMGR/X_PLUS.H"
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "CINEMA/CINEMA.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 extern char D_8010F328[];
 
@@ -250,9 +250,9 @@ void Player_ResetMenuPool(struct RecordCode80447BB0 *record) {
 
 void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
     void *message;
-    s32 temp_v0;
+    s32 floorPolygonResult;
     struct IntPair *model;
-    struct IntPair *temp_v1_2;
+    struct IntPair *modelValue;
     Shared_ActorView *actor;
     if ((SetN64_IsModeThirteen() != 0) && (Control_IsSnapshotActive() != 0)) {
         Control_RestoreActorSnapshot();
@@ -262,9 +262,9 @@ void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
     if (actor != 0) {
         do {
             Player_InitActorHudState(actor);
-            temp_v0 = Scene_FindFloorPolygon(&g_world, &actor->position);
-            actor->weapon.model = temp_v0;
-            actor->modelId = temp_v0;
+            floorPolygonResult = Scene_FindFloorPolygon(&g_world, &actor->position);
+            actor->weapon.model = floorPolygonResult;
+            actor->modelId = floorPolygonResult;
             Player_UpdatePlayerCamera(actor, actor);
             message = actor->message;
             if (message != 0) {
@@ -272,8 +272,8 @@ void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
             }
             model = actor->model;
             model->field_4 = model->field_4 & ~4;
-            temp_v1_2 = actor->model;
-            temp_v1_2->field_4 = temp_v1_2->field_4 & ~4;
+            modelValue = actor->model;
+            modelValue->field_4 = modelValue->field_4 & ~4;
             actor = actor->next;
         } while (actor != 0);
     }

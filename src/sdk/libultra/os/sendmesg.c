@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -7,9 +8,7 @@ extern OSThread_s *D_800D5270;
 
 extern void func_802BC36C_de(void *queue_data);
 
-extern void *__osPopThread(OSMesgQueue *queue);
 
-extern void osStartThread(void *value);
 
 s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
     s32 saved;
@@ -26,7 +25,7 @@ s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;
     queue->validCount++;
     if (*queue->mtqueue != 0) {
-        osStartThread(__osPopThread(queue));
+        osStartThread(__osPopThread(&queue->mtqueue));
     }
     __osRestoreInt(saved);
     return 0;

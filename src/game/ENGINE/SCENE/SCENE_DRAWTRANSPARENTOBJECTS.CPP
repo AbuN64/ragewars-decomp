@@ -2,7 +2,7 @@
 #include "COMMON/LONE/D_800CD764_de.H"
 #include "include_asm.h"
 #include "COMMON/SCENERECAT10C0.H"
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SETTINGSRECAT24.H"
 #include "COMMON/MENUSELECTIONMESSAGE.H"
@@ -13,10 +13,10 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "ACHIEVE/ACHIEVE_OPENRESULTSFRONTEND.H"
-#include "RENDER/8028FD2C_11.H"
+#include "RENDER/EFFECT_POOL_OPERATIONS.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "ENGINE/SCENE_LOADLEVELRESOURCES.H"
-#include "ENGINE/SCENE_3.H"
+#include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
 #include "WEAPONS/PLAYER_UPDATEFRAGTAGSELECTION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "VOICE/VOICE.H"
@@ -83,11 +83,11 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
 
 
 
-extern void func_8024BE3C_de(void *arg0);
+extern void func_8024BE3C_de(void *base);
 extern void func_80246E44_de(char *);
 extern s32 SetN64_IsModeThirteen(void);
-extern void Player_UpdateWorldPlayers(void *arg0);
-extern s32 Playerai_BeginRoundEnd(void *arg0);
+extern void Player_UpdateWorldPlayers(void *world);
+extern s32 Playerai_BeginRoundEnd(void *forcePlayerList);
 
 
 

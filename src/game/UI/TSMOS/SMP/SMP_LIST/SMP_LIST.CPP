@@ -105,8 +105,8 @@ s32 SmpList_UpdateSliderMotion(struct func_8022FD9C_Record *menu)
     return 0;
 }
 
-s32 SmpList_DestroyController(void *arg0) {
-    Cache_FreeMemory(arg0);
+s32 SmpList_DestroyController(void *allocation) {
+    Cache_FreeMemory(allocation);
     return 0;
 }
 

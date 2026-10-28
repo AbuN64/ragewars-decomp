@@ -32,10 +32,10 @@ struct Game_func_8042D060_de {
 };
 
 
-extern void ScenarioSetup_HideResultCatalogueWidgets();
+extern void ScenarioSetup_HideResultCatalogueWidgets(void);
 
 
-extern void Frontend_AwardResultMilestones();
+extern void Frontend_AwardResultMilestones(void);
 
 struct Shared_Rec3;
 struct Shared_Rec3 {
@@ -97,7 +97,7 @@ struct MatchScoreScreen {
 struct Shared_Rec3;
 typedef struct Shared_Rec3 Shared_Rec3;
 
-extern void Frontend_AwardResultAchievements();
+extern void Frontend_AwardResultAchievements(void);
 
 
 
@@ -112,7 +112,7 @@ typedef struct Game_func_8042D060_de Game_func_8042D060_de;
 extern void Frontend_HideResultBadgeGroup(s32 arg0);
 
 
-extern s32 Frontend_GetMatchEndReason();
+extern s32 Frontend_GetMatchEndReason(void);
 
 struct SlotRecAt7F;
 struct SlotRecAt7F {

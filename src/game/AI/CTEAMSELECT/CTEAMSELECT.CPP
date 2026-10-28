@@ -22,7 +22,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "MENU/TEAM/80217388_4.H"
-#include "MENU/TEAM/80217388_7.H"
+#include "MENU/TEAM/WEAPON_WHEEL_RESET_AND_ANGLE_STEP.H"
 
 extern s32 Playerai_PlayerHasAmmoForWeapon(void *, s32);
 
@@ -283,7 +283,7 @@ typedef struct DraftState17F4C {
 
 s16 Weaponai_NextAvailableWeapon(void *);
 s32 Rumble_SetEffectOwnerSlot(s32, s32);
-void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
+void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 unused2)
 {
     if ((u32)(player->type - 17) < 2) return;
     if (player->blocked) return;
@@ -296,7 +296,7 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
     } else if ((player->input->held & 0x8000) && player->config->mode) {
         player->choice = Weaponai_NextAvailableWeapon(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
-        func_80217D74_de(&state->state, player, arg2);
+        func_80217D74_de(&state->state, player, unused2);
     }
     if (player->choice != player->oldChoice) {
         if (player->effect) {
@@ -437,7 +437,7 @@ s32 func_8021846C_de(void *resetTimerStorage, void *resetOwnerStorage) {
     return 1;
 }
 
-f32 func_802184C0_de(f32 currentAngle, f32 targetAngle, s32 turnDirection, f32 approachRate) {
+f32 CTeamSelect_ComputeDirectedAngleStep(f32 currentAngle, f32 targetAngle, s32 turnDirection, f32 approachRate) {
     f32 f0;
     f32 f1;
     f32 f2;

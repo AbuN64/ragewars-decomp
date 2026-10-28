@@ -17,7 +17,7 @@ unsigned int D_blob_d7792239ca6928912830[1] = {
 #endif
 
 /* CODE_80245D20.CPP */
-extern void Insthdr_ResetInstanceRenderIndices(signed char *arg0);
+extern void Insthdr_ResetInstanceRenderIndices(signed char *prop);
 
 extern f32 D_800CB430_de[];
 extern f32 D_800D2988[];

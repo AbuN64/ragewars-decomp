@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/LONE/D_800D5268_de.H"
 #include "TYPES.H"
@@ -34,27 +35,25 @@ void Audio_AbortDiskTransfer(void) {
     }
 }
 
-extern void *__osPopThread(OSMesgQueue *arg0, OSMesgQueue *arg1, Ctx *arg2);
-extern void __osEnqueueThread(void *arg0, void *arg1);
 
 void Audio_PostDiskEventMessage(void) {
     OSMesgQueue *node;
-    s32 a0;
+    s32 validCountValue;
     s32 v1;
     s32 v0;
     s32 rem;
 
     node = D_80149B50.cur;
     if (node != 0) {
-        a0 = node->validCount;
+        validCountValue = node->validCount;
         v1 = node->msgCount;
-        if (a0 < v1) {
-            v0 = node->first + a0;
+        if (validCountValue < v1) {
+            v0 = node->first + validCountValue;
             rem = v0 % v1;
             node->msg[rem] = D_80149B50.f4;
             node->validCount = node->validCount + 1;
             if (*node->mtqueue != 0) {
-                __osEnqueueThread(&D_800D5268_de, __osPopThread(node, node, &D_80149B50));
+                __osEnqueueThread(&D_800D5268_de, __osPopThread(&node->mtqueue));
             }
         }
     }

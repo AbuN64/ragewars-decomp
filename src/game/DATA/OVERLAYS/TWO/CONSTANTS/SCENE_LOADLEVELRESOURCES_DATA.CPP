@@ -190,6 +190,6 @@ unsigned int D_auto_rodata_unresolved_800CA0FC[662] = {
 
 /* 800CA258_7.CPP */
 #if defined(VERSION_EU_X)
-const char rodata_unresolved_800C5464[12] =
+const char g_levelInfoText[12] =
     "level info\000\000";
 #endif

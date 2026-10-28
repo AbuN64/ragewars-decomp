@@ -1,4 +1,4 @@
-#include "RENDER/80293A04_2.H"
+#include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "include_asm.h"
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/VECTOR4F.H"
@@ -14,18 +14,18 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 
-extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 session, s32 cancelTarget, s32 target);
 
 
 /* Resets the menu viewport and selects the row identified by the owner's current index. */
 
 
-extern void SetN64_CommitSessionInputs(void *arg0);
+extern void SetN64_CommitSessionInputs(void *unused);
 
 extern void CCollision_Initialize(void);
 
 
-extern void Scene_SetSelection(void *arg0, s32 arg1, s32 arg2);
+extern void Scene_SetSelection(void *state, s32 selection, s32 mode);
 
 
 extern s32 D_800CD730;
@@ -49,9 +49,9 @@ void SetN64_HandleMode10Input(s32 session) {
 
 void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-void SetN64_ResetMode12Items(int arg0) {
+void SetN64_ResetMode12Items(int sessionAddress) {
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
+    SetN64_ResetPlayerItems(sessionAddress, ((ObjRecAt26DD8 *)sessionAddress)->unk26DD8 + 0x259);
 }
 
 void SetN64_HandleMode12Input(s32 session) {
@@ -60,14 +60,14 @@ void SetN64_HandleMode12Input(s32 session) {
 
 void SetN64_DrawMode12Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-void SetN64_ResumeSelectedSession(GameSession *arg0) {
+void SetN64_ResumeSelectedSession(GameSession *unused) {
     void *dst;
     s32 field;
     f32 f;
 
     D_801462C8.counters.first = 0;
     D_800CD730 = 0;
-    SetN64_CommitSessionInputs(arg0);
+    SetN64_CommitSessionInputs(unused);
     CCollision_Initialize();
 #if defined(VERSION_US_REV1)
     TextLoad_ResetArtsendTextureState();
@@ -78,7 +78,7 @@ void SetN64_ResumeSelectedSession(GameSession *arg0) {
 #else
     f = (1.0f);
 #endif
-    field = arg0->selector;
+    field = unused->selector;
 #if defined(VERSION_US_REV1)
     D_800D2970 = 0;
 #endif
@@ -86,7 +86,7 @@ void SetN64_ResumeSelectedSession(GameSession *arg0) {
     D_800D298C = f;
     D_800CD740_de = f;
     Scene_SetSelection(dst, field, 0);
-    arg0->mode = 0xD;
+    unused->mode = 0xD;
     D_80154048 = 0;
 }
 

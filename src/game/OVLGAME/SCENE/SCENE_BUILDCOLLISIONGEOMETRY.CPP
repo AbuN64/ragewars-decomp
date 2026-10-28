@@ -14,8 +14,8 @@
 #include "MENU/8044ACCC.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 struct Shape_typemap_165;
-extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *arg1, s32 arg2);
-extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 total);
+extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement);
 
 
 
@@ -30,7 +30,7 @@ extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **ar
 
 
 extern s32 SetN64_GetSizedPackSection(s32 node, s32 index, s32 *size);
-extern s32 SetN64_GetPackSectionSize(s32 *node, s32 arg1);
+extern s32 SetN64_GetPackSectionSize(s32 *node, s32 index);
 
 static inline s32 testBit(s32 n, u8 *bits) {
     s32 mask = 1 << (n & 7);

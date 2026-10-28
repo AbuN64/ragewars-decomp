@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
@@ -10,7 +11,6 @@
 extern OSThread_s *D_800D5268_de;
 extern OSThread_s *D_800D5270;
 extern void Audio_DequeueThread(OSThread_s **queue, OSThread_s *t);
-extern void __osEnqueueThread(OSThread_s **queue, OSThread_s *t);
 extern void func_802BC36C_de(OSThread_s **queue);
 
 void Scene_SetThreadPriority(OSThread_s *t, s32 pri)

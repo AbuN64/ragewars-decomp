@@ -70,17 +70,17 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
 }
 
 
-extern void Portal_ResetSearchState(void *arg0);
+extern void Portal_ResetSearchState(void *graph);
 
 extern void Route_ClearGoalList(s32);
 
 s32 Nav_AddPickupGoalsByObjectIds(s32 *ids);
 
-extern void Route_SearchPathByKey(void *arg0, s32 arg1);
+extern void Route_SearchPathByKey(void *graph, s32 key);
 
 extern void *Portal_FindSearchNode(char *, s32);
 
-extern void Route_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
+extern void Route_ReconstructSearchPath(void *owner, void *output, s32 count);
 
 
 
@@ -233,12 +233,12 @@ int func_8020F59C_de(void) {
 }
 
 s32 Nav_GetWeaponPickupGoalClass(void **arg0) {
-    s32 temp_v0;
+    s32 weaponClassIdResult;
     void *temp_a0;
 
     temp_a0 = *arg0;
-    temp_v0 = Playerai_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
-    switch (temp_v0) {
+    weaponClassIdResult = Playerai_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
+    switch (weaponClassIdResult) {
         case 0:
             return 5;
         case 1:

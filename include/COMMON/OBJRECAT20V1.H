@@ -9,14 +9,14 @@ typedef struct ObjRecAt20V1 ObjRecAt20V1;
 
 
 
-extern void SetN64_SetFrameDirection(void *arg0, void *arg1);
+extern void SetN64_SetFrameDirection(void *frame, void *arg1);
 
 
 struct ObjRecAt20V1;
 
 extern void SetN64_OnFrameComplete(void *schedule);
 
-extern void SetN64_ClearFrameDirection(void *arg0);
+extern void SetN64_ClearFrameDirection(void *frame);
 
 
 #endif

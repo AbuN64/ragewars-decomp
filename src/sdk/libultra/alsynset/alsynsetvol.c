@@ -1,7 +1,8 @@
+#include "COMMON/ALPARAM_S.H"
 #include "include_asm.h"
 #include "sdk/libgultra.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "sdk/OBJECTSTATE10_5.H"
+#include "sdk/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/libultra/audio/synthesizer.h"
 
@@ -22,18 +23,18 @@ void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
     void *voiceFilter;
     SharedRecV10 fn;
 
-    if ((((ObjectStateC_2 *)(voice))->unk_8.v0) != 0) {
+    if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0) {
         Shared_func_802B3480_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3480_de_v0 != 0) {
-            new_var = (((struct Shape_typemap_71 *)(synth))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) voice)->unk_8.v1)->state);
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_8 = 0xB;
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_C = (s32) targetVolume;
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_4 = new_var;
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_10 = _timeToSamples(synth, rampTime);
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_0 = 0;
-            voiceFilter = ((struct Draw *) ((ObjectStateC_2 *) voice)->unk_8.v1)->model;
+            new_var = (((struct AudioSynthParamSamplesView *)(synth))->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
+            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->type = AL_FILTER_SET_VOLUME;
+            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->volume = (s32) targetVolume;
+            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->delta = new_var;
+            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->samples = _timeToSamples(synth, rampTime);
+            ((AudioVolumeControlUpdate *)(Shared_func_802B3480_de_v0))->next = 0;
+            voiceFilter = ((struct Draw *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->model;
             fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-            fn(voiceFilter, 3, Shared_func_802B3480_de_v0);
+            fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B3480_de_v0);
         }
     }
 }

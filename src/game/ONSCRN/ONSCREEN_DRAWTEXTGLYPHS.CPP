@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"

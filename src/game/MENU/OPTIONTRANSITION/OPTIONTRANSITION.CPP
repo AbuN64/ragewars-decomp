@@ -55,12 +55,12 @@ extern void Stage_StartConfiguredMatch(void);
 
 
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
-extern void Tsmos_DeactivateControllerState();
+extern void Tsmos_DeactivateControllerState(void);
 
 
-extern void ScenarioSetup_ResetSelectionIndicators();
+extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 extern void Frontend_StartMenuImageTransition(s32 *record);
 

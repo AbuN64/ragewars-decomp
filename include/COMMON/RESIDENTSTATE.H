@@ -31,7 +31,7 @@ struct SelectionTextLoadApplyArtsendTextureOverride;
 
 
 
-extern void Tengine_UpdateArtsendTexturePreview();
+extern void Tengine_UpdateArtsendTexturePreview(void);
 
 
 extern ResidentState D_8014AEB8;

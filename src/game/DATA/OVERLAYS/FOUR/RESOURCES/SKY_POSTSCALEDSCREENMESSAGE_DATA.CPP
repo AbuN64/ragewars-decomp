@@ -6294,7 +6294,7 @@ char data_unresolved_800D3C50[52880] =
 
 /* 800D7028_2.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_src_3e6e0646[36] =
+const char s_fadeOutCinemaTextHint[36] =
     "<use this to fade out cinema text>\000\000";
 #endif
 

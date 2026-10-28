@@ -16,7 +16,7 @@
 #include "gbi.h"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/OBJECTSTATE18.H"
-#include "ENGINE/SCENE_3.H"
+#include "ENGINE/SCENE_GRID_AND_GEOMETRY_OPERATIONS.H"
 #include "stddef.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -24,7 +24,7 @@
 
 /* SCENE_3.CPP */
 /* Tag of the cell grid packs (the first .rodata of this unit; the items overlay reads it too). */
-const char D_800C5210_de[] = "grid section";
+const char s_gridSectionText[] = "grid section";
 extern DraftStreamPair D_801031F8;
 extern char D_00285160[];
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
@@ -99,7 +99,7 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
                 if (visible) {
                     loaded = SetN64_LocatePackSection(world->table, world->key, slot, &size);
                     resource = Cache_RequestResource(0, loaded, loaded, size, 8, world,
-                                              D_0028798C, D_800C5210_de, 0);
+                                              D_0028798C, s_gridSectionText, 0);
                     if (resource) {
                         if (resource->data->count) {
                             entry->resource = resource;
@@ -203,7 +203,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                 cell = &cells[slot];
                 if (cell->occupied == 0) {
                     key = SetN64_LocatePackSection(world->table, world->key, slot, &resourceSize);
-                    resource = Cache_RequestResource(0, key, key, resourceSize, 4, (s32)world, D_0028798C, D_800C5210_de, 1);
+                    resource = Cache_RequestResource(0, key, key, resourceSize, 4, (s32)world, D_0028798C, s_gridSectionText, 1);
                     if (resource != 0) {
                         resourceData = resource->data;
                         if (resourceData->count != 0) {
@@ -325,7 +325,7 @@ void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, v
     gSPDisplayList(g_displayListCursor++, (unsigned int)scene->lists[0]);
 }
 
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* One sector of the world: its model resource, its x/z extent and its cell in the streaming grid. */
 /* Views of the SN debug records this pass reads, with their original member names: CScene_t (0x1B930 bytes),

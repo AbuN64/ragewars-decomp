@@ -61,9 +61,9 @@ struct Lists18 {
     List802795C0 inactive;
 };
 
-extern void Link_SetTriggerTrackCallback(int arg0, int arg1, void *arg2);
+extern void Link_SetTriggerTrackCallback(int unused0, int unused1, void *arg2);
 
-extern void Link_ClearActorStateBit(struct Shared_Actor *arg0);
+extern void Link_ClearActorStateBit(struct Shared_Actor *actor);
 
 struct WeightedTable;
 struct WeightedTable {
@@ -173,7 +173,7 @@ struct ActorMotionState;
 struct Player;
 extern s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, struct ActorMotionState *guard, struct Player *actor);
 
-extern void func_8025E1C4_de(s32);
+extern void SoundElement_StopAudioBySecondaryValue(s32);
 extern CVector3 D_801042C8;
 
 #endif

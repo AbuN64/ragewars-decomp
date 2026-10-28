@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/RESULTS.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "RENDER/8028FD2C_11.H"
+#include "RENDER/EFFECT_POOL_OPERATIONS.H"
 #include "COMMON/TRIPLE.H"
 
 extern void func_80219460_de(void *definition);

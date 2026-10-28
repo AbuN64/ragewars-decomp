@@ -14,7 +14,7 @@ extern s32 D_8015375C;
 
 
 
-extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 arg2);
+extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 quiet);
 
 /* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if Snapshot_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
 extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
@@ -77,7 +77,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 
 
 
-extern void Menu_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
+extern void Menu_OpenDialog(void *dst, void *text, void *player, void *controller, void *arg4);
 extern char D_8014561C[];
 extern s32 D_80153778;
 /* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */

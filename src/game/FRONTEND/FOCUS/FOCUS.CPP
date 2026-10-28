@@ -8,7 +8,7 @@
 #include "COMMON/LABEL.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 extern void Cache_SetResourceActivityState(unsigned int value);
-extern int func_8025477C_de(void);
+extern int Cache_GetResourceActivityState(void);
 extern PlayerRecord D_800FEB4A[];
 extern s32 Defs_TestBit(void *bits, s32 bit);
 
@@ -89,7 +89,7 @@ void Focus_UpdateFocusCaption(void) {
                 }
                 Model_SetPreviewModel(record32(), text);
                 Model_SetPreviewRenderFlags(record32(), count);
-                if (func_8025477C_de() == 0) Cache_SetResourceActivityState(1);
+                if (Cache_GetResourceActivityState() == 0) Cache_SetResourceActivityState(1);
             } else {
                 Model_SetPreviewModel(record32(), 0);
             }

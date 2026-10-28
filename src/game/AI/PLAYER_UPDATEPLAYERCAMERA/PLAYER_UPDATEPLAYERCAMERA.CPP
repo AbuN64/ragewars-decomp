@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/GFX.H"
@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
@@ -16,7 +16,7 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 #include "GFX/TEXT/8022BA90_4.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/UNUSED.H"
@@ -39,7 +39,7 @@ extern f32 D_800C7948[];
 #include "COMMON/PLAYERPROFILES.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "AI/PLAYER_DRAWTINTEDPLAYER.H"
-#include "BULKYDCMP/BULKYDCMP.H"
+#include "ENGINE/AUDIO/T2SOUNDELEMENT/SOUND_CONTEXT_CONTROL.H"
 
 extern s32 func_80222EA4_de(void *, void *);
 extern s32 func_80222FE0_de(void *, void *, s32 *);
@@ -822,7 +822,7 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     enable = (game - 1)->flags == 0;
   }
-  func_8025E418_de(enable);
+  SoundElement_SetMusicGainScalingEnabled(enable);
   if (D_80145088.settings.local == 0)
   {
     if ((!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20))) && (player->views5E8.view688_43.input.pressed & 0x800))
@@ -907,11 +907,11 @@ void func_80220ED4_de(SharedPlayer *player)
         amount = (f32) ((s32) (Graphu64_GetTrianglePlaneHeight(model, pos->x, pos->z) - Region_GetPolygonHeight(model, pos->x, pos->z)));
         if (amount < 1024.0f)
         {
-          func_8025E440_de(1.0f - (amount * 0.0009765625f));
+          SoundElement_SetClampedAudioLevel(1.0f - (amount * 0.0009765625f));
           goto rumbled;
         }
       }
-      func_8025E440_de(0.0f);
+      SoundElement_SetClampedAudioLevel(0.0f);
       rumbled:
       ;
 

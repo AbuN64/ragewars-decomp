@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_800E28D4.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/LABEL.H"
@@ -19,7 +19,7 @@
 
 /* The hub spells D_800E3590 as the padded menu block; this unit reaches the model name at +0x08
  * through its own view, so each use casts back to it. */
-extern void Frontend_InitModelPreviewTransform(char *model, s32 arg1, CVector3 scale, CVector3 position);
+extern void Frontend_InitModelPreviewTransform(char *model, s32 modelId, CVector3 scale, CVector3 position);
 extern void Frontend_SetPreviewRotation(char *model, CVector3 rotation);
 extern void Frontend_SetPreviewRotationSpeed(char *model, CVector3 offset);
 

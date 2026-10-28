@@ -15,11 +15,11 @@
 extern s32 D_8010AC80;
 
 
-extern void Polytrak2_DecodeCubicSegment(Curve *arg0);
+extern void Polytrak2_DecodeCubicSegment(Curve *compressedCurve);
 
-extern u32 Polytrak2_ReadBitsAtAddress(s32,s32);
+extern int Polytrak2_ReadBitsAtAddress(s32, unsigned int);
 
-static inline void seek(Stream *arg0, u32 arg1) {
+static inline void seek(Stream *compressedCurve, u32 arg1) {
     u32 sp10[64];
     s32 temp_a0;
     s32 temp_lo;
@@ -33,13 +33,13 @@ static inline void seek(Stream *arg0, u32 arg1) {
     u32 var_s0;
     u32 var_s4;
 
-    temp_s6 = (arg0->unk0 * 4) + 6;
-    temp_v1 = arg0->unk24;
-    if (arg1 < temp_v1 || arg1 >= temp_v1 + arg0->unk20) {
-        var_s2 = arg0->unk28;
+    temp_s6 = (compressedCurve->unk0 * 4) + 6;
+    temp_v1 = compressedCurve->unk24;
+    if (arg1 < temp_v1 || arg1 >= temp_v1 + compressedCurve->unk20) {
+        var_s2 = compressedCurve->unk28;
         var_s4 = temp_v1;
-        var_s0 = var_s4 + arg0->unk20;
-        var_s1 = arg0->unkC;
+        var_s0 = var_s4 + compressedCurve->unk20;
+        var_s1 = compressedCurve->unkC;
         temp_s1=var_s1;
         var_s1 += var_s2 * temp_s6;
         if(arg1 < temp_v1) {
@@ -48,8 +48,8 @@ static inline void seek(Stream *arg0, u32 arg1) {
         }
         for (;;) {
             if(arg1>=var_s4 && arg1<var_s0) {
-                if(var_s2!=arg0->unk28) {
-                    arg0->unk24=var_s4;arg0->unk28=var_s2;Polytrak2_DecodeCubicSegment(arg0);
+                if(var_s2!=compressedCurve->unk28) {
+                    compressedCurve->unk24=var_s4;compressedCurve->unk28=var_s2;Polytrak2_DecodeCubicSegment(compressedCurve);
                 }
                 break;
             }

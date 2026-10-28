@@ -127,7 +127,7 @@ void Preview_DrawModelPreview(Obj8041CAD8 *self) {
         }
         local10 = self->unk48C;
         Graphu64_TransformPoint(&view->camera, &local10, &local20);
-        if (func_8025477C_de() == 0) {
+        if (Cache_GetResourceActivityState() == 0) {
             Cache_SetResourceActivityState(1);
         }
         Combine_ConfigurePrimitiveRenderFlags(0x33335);

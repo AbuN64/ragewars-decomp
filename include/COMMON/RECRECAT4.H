@@ -108,7 +108,7 @@ extern int D_800E1ACC_de[];
 
 extern void func_8042201C_de();
 
-extern s32 ScenarioSetup_IsCupSelected();
+extern s32 ScenarioSetup_IsCupSelected(void);
 enum MatchEnd {
     MATCH_END_TIME_UP,
     MATCH_END_SCORE_LIMIT,
@@ -117,7 +117,7 @@ enum MatchEnd {
 };
 extern f32 D_800DDB08_de[];
 extern f32 D_800DDB10;
-extern void Frontend_DrawResultSelectionPreview();
+extern void Frontend_DrawResultSelectionPreview(void);
 
 extern void Menu_SetOptionsSceneSelection(s32);
 

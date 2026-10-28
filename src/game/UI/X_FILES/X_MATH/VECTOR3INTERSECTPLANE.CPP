@@ -185,36 +185,36 @@ void Vector3Normalize(f32 *vector) {
     vector[2] = vector[2] * scale;
 }
 
-void Vector3RotatePitch(CVector3 *destination, CVector3 *source, f32 arg2) {
+void Vector3RotatePitch(CVector3 *destination, CVector3 *source, f32 angle) {
     CVector3 tmp;
     f32 sinOut;
     f32 cosOut;
 
-    XMath_EvaluateSineCosine(arg2, &sinOut, &cosOut);
+    XMath_EvaluateSineCosine(angle, &sinOut, &cosOut);
     tmp.x = source->x;
     tmp.y = (cosOut * source->y) - (sinOut * source->z);
     tmp.z = (cosOut * source->z) + (sinOut * source->y);
     *destination = tmp;
 }
 
-void Vector3RotateYaw(CVector3 *destination, CVector3 *source, f32 arg2) {
+void Vector3RotateYaw(CVector3 *destination, CVector3 *source, f32 angle) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
 
-    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(angle, &sp20, &sp24);
     tmp.x = (sp24 * source->x) + (sp20 * source->z);
     tmp.y = source->y;
     tmp.z = (sp24 * source->z) - (sp20 * source->x);
     *destination = tmp;
 }
 
-void Vector3RotateRoll(CVector3 *destination, CVector3 *source, f32 arg2) {
+void Vector3RotateRoll(CVector3 *destination, CVector3 *source, f32 angle) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
 
-    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(angle, &sp20, &sp24);
     tmp.x = (sp24 * source->x) - (sp20 * source->y);
     tmp.y = (sp24 * source->y) + (sp20 * source->x);
     tmp.z = source->z;

@@ -168,7 +168,7 @@ void Barrel_StopActorLoopingSound(void *arg0, void *arg1) {
     }
 
     if (((Dest *)arg1)->sound != 0) {
-        func_8025E1C4_de(owner);
+        SoundElement_StopAudioBySecondaryValue(owner);
         if (((Dest *)arg1)->sound != 0) {
             func_8025CA24_de(func_8025CC6C_de(), ((Dest *)arg1)->sound);
             ((Dest *)arg1)->sound = 0;
@@ -176,21 +176,21 @@ void Barrel_StopActorLoopingSound(void *arg0, void *arg1) {
     }
 }
 
-extern f32 Gobjinst_GetActorRadius(void *arg0);
+extern f32 Gobjinst_GetActorRadius(void *actor);
 extern void Graphu64_ScaleVector(void *result, void *vector, f32 scale);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void InstHdr_CopyActorPositionAndModel(void *arg0, CVector3 value, void *arg4, s32 *arg5,
-                          s32 arg6, s32 arg7);
+extern void InstHdr_CopyActorPositionAndModel(void *levelActor, CVector3 value, void *arg4, s32 *arg5,
+                          s32 unused6, s32 unused7);
 
-void Barrel_FindOffsetApproachPosition(void *arg0, s32 unused, void *arg2, Player *arg3,
+void Barrel_FindOffsetApproachPosition(void *actor, s32 unused, void *arg2, Player *player,
                    void *arg4, s32 *arg5) {
     CVector3 offset;
     CVector3 position;
     f32 distance;
 
-    if (arg3 != 0) {
+    if (player != 0) {
         Graphu64_SubtractVectors(&offset, &((Player *)(arg2))->pos,
-                       &arg3->pos);
+                       &player->pos);
         offset.y = 0.0f;
         Graphu64_NormalizeVec3(&offset.x);
     } else {
@@ -199,17 +199,17 @@ void Barrel_FindOffsetApproachPosition(void *arg0, s32 unused, void *arg2, Playe
         offset.z = 0.0f;
     }
 
-    distance = Gobjinst_GetActorRadius(arg2) + Gobjinst_GetActorRadius(arg0) + D_800C21E8_de;
+    distance = Gobjinst_GetActorRadius(arg2) + Gobjinst_GetActorRadius(actor) + D_800C21E8_de;
     Graphu64_ScaleVector(&offset, &offset, distance);
     Graphu64_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
     InstHdr_CopyActorPositionAndModel(arg2, position, arg4, arg5, 0, 0);
 }
 
-void Barrel_ClearTargetInfo(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2) {
+void Barrel_ClearTargetInfo(Shared_ActorView *actorView, void *unused1, Output80216D3C *arg2) {
     Triple local1;
     Triple local2;
 
-    local1 = arg0->position.words;
+    local1 = actorView->position.words;
     local2.x = 0;
     local2.y = 0;
     local2.z = 0;
@@ -226,12 +226,12 @@ void Barrel_ClearTargetInfo(Shared_ActorView *arg0, void *unused1, Output80216D3
     arg2->unk40 = 0;
 }
 
-void Barrel_SpawnEffectsFromMask(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
+void Barrel_SpawnEffectsFromMask(Player *actor, s32 unused1, s32 arg2, s32 *entry) {
     if (entry[0] != 0) {
         do {
             if ((arg2 & entry[0]) != 0) {
-                Insthdr_PlayActorGraphSound(arg0,
-                              arg0->pos,
+                Insthdr_PlayActorGraphSound(actor,
+                              actor->pos,
                               entry[1],
                               Graphu64_RandomBetween(D_800C21EC_de, D_800C21F0_de));
             }

@@ -1,5 +1,5 @@
 #ifndef TEXTURE_TEXTLOAD_RESETARTSENDTEXTURESTATE_H
 #define TEXTURE_TEXTLOAD_RESETARTSENDTEXTURESTATE_H
 #include "COMMON/RESIDENTSTATE.H"
-extern void TextLoad_ResetArtsendTextureState();
+extern void TextLoad_ResetArtsendTextureState(void);
 #endif

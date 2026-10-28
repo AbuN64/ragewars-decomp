@@ -2,13 +2,13 @@
 #include "TYPES.H"
 #include "COMMON/SOUNDINFO.H"
 #include "MENU/PAK/PAK_RESUMEMENUAUDIO.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_21.H"
 
 /* 80444EC0_6.CPP */
 #if !(defined(VERSION_US))
-/* Passes what func_8025CC6C_de returns to func_8025CB0C_de, then calls func_8025E384_de and func_8025E3CC_de,
+/* Passes what func_8025CC6C_de returns to func_8025CB0C_de, then calls SoundElement_DisableMusicGainOverride and SoundElement_EnablePeriodicSound,
    and returns one. */
 extern s32 func_8025CC6C_de();
 struct SoundVoicePool;
@@ -16,8 +16,8 @@ extern void func_8025CB0C_de(struct SoundVoicePool *);
 
 s32 Pak_ResumeMenuAudio(void) {
     func_8025CB0C_de(func_8025CC6C_de());
-    func_8025E384_de();
-    func_8025E3CC_de();
+    SoundElement_DisableMusicGainOverride();
+    SoundElement_EnablePeriodicSound();
     return 1;
 }
 

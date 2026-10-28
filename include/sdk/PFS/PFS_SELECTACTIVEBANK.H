@@ -1,5 +1,5 @@
-#ifndef SDK_PFS_80447BB0_21_H
-#define SDK_PFS_80447BB0_21_H
+#ifndef SDK_PFS_PFS_SELECTACTIVEBANK_H
+#define SDK_PFS_PFS_SELECTACTIVEBANK_H
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 extern s32 Pfs_SelectActiveBank(OSPfs *pfs);
 #endif

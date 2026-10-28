@@ -21,5 +21,5 @@ struct ResourceRequest {
     u8 reserved1C[4];
     void *replyQueue;
 };
-extern void Cache_RecycleLoadRequest(s32 arg0, void *arg1);
+extern void Cache_RecycleLoadRequest(s32 unused0, void *request);
 #endif

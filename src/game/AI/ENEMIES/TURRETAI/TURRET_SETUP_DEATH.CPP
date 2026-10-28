@@ -10,11 +10,11 @@
 extern s32 Turret_TrackTarget(void *arg0);
 
 
-extern s32 Barrel_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Barrel_SpawnFlaggedEffects(void *actor, void *emittedFlags, s32 emissionFlag, s32 primaryEffectMask, s32 secondaryEffectMask);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
 
 s32 Animpool_ReleaseSceneEffect(void *);
 

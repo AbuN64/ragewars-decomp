@@ -12,7 +12,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "particle/PARTICLE_RELEASEOWNERLISTONEEFFECTS.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
@@ -25,7 +25,7 @@ extern void Particle_UpdateMatrix(void *);
 
 extern void Particle_FinishActorEffects(void *arg0);
 
-extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
 
 
@@ -419,24 +419,24 @@ void Particle_DispatchActorContactEvents(void *actor) {
     s32 temp_a2;
     s32 model;
     s32 temp_s3;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *particleDescription;
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)actor)->desc;
+    particleDescription = ((Shared_Particle *)actor)->desc;
     if (Particle_HasSurfaceFlag(actor) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
     }
     temp_a1 = var_a0 * 2;
-    events = temp_s1->events;
+    events = particleDescription->events;
     temp_v1 = (char *)events + temp_a1;
     model = events->particles[var_a0];
     temp_a2 = events->effects[var_a0];
     temp_v0_2 = (char *)events + (var_a0 * 8);
     pair = events->parameters[var_a0];
-    temp_s3 = temp_s1->events->sounds[var_a0];
+    temp_s3 = particleDescription->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
         Events_DeliverContactEffect(actor, actor, temp_a2, -1,
                      ((Shared_Particle *)actor)->inst.pos, pair);
@@ -458,24 +458,24 @@ void Particle_DispatchSpatialContactEvents(void *particle) {
     s32 temp_a2;
     s32 temp_s2;
     s32 temp_s3;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *particleDescription;
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)particle)->desc;
+    particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
         var_a0 = 0xD;
     } else {
         var_a0 = 0xB;
     }
     temp_a1 = var_a0 * 2;
-    events = temp_s1->events;
+    events = particleDescription->events;
     temp_v1 = (char *)events + temp_a1;
     temp_s2 = events->particles[var_a0];
     temp_a2 = events->effects[var_a0];
     temp_v0_2 = (char *)events + (var_a0 * 8);
     pair = events->parameters[var_a0];
-    temp_s3 = temp_s1->events->sounds[var_a0];
+    temp_s3 = particleDescription->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
         Events_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
@@ -498,24 +498,24 @@ void Particle_DispatchParticleContactEvents(void *particle) {
     s32 temp_a2;
     s32 temp_s2;
     s32 temp_s3;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *particleDescription;
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)particle)->desc;
+    particleDescription = ((Shared_Particle *)particle)->desc;
     if (Particle_HasSurfaceFlag(particle) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
     }
     temp_a1 = var_a0 * 2;
-    events = temp_s1->events;
+    events = particleDescription->events;
     temp_v1 = (char *)events + temp_a1;
     temp_s2 = events->particles[var_a0];
     temp_a2 = events->effects[var_a0];
     temp_v0_2 = (char *)events + (var_a0 * 8);
     pair = events->parameters[var_a0];
-    temp_s3 = temp_s1->events->sounds[var_a0];
+    temp_s3 = particleDescription->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
         Events_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);

@@ -13,7 +13,7 @@ typedef struct SharedRecAt148 SharedRecAt148;
 struct Shared_func_8043DEDC_S3;
 typedef struct Shared_func_8043DEDC_S3 Shared_func_8043DEDC_S3;
 
-extern void Confirming_SelectConfirmingController(func_80250BD4_S1 *arg0);
+extern void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner);
 
 struct SharedRecAt148;
 struct SharedRecAt148 {
@@ -29,5 +29,5 @@ struct Shared_func_8043DEDC_S3 {
     s8 unk7F;
 };
 
-extern s32 Player_PlacePlayerForRound(s32 arg0);
+extern s32 Player_PlacePlayerForRound(s32 player);
 #endif

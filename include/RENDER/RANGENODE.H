@@ -54,7 +54,7 @@ struct Blast {
     s32 damage;
 };
 
-extern void Events_IncrementNearbyPlayerCounter(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast);
+extern void Events_IncrementNearbyPlayerCounter(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast);
 
 struct ParamsEventsStartActorEmitter;
 struct ParamsEventsStartActorEmitter {
@@ -98,7 +98,7 @@ struct ParamsRecAt4 {
     s32 team;
 };
 
-extern void Events_SetActorEventBit(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+extern void Events_SetActorEventBit(void *sourceActor, s32 unused1, s32 unused2, s32 eventPositionBase, s32 unused4, s32 unused5, s32 unused6);
 
 struct Kind;
 struct Kind {
@@ -147,9 +147,9 @@ struct ContextEventsStartActorEmitter {
 
 extern float D_800C4494_de;
 
-extern void Events_ClearActorEventBit(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+extern void Events_ClearActorEventBit(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6);
 
-extern void Events_SetActorEffectMode(LevelActor *arg0, int arg1, int arg2, Blast blast);
+extern void Events_SetActorEffectMode(LevelActor *actor, int arg1, int arg2, Blast blast);
 
 typedef CVector3 Vec3f;
 extern struct SceneEffect *Animpool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,

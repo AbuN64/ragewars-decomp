@@ -1,7 +1,7 @@
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAME_SESSION.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "abi.h"
 #include "COMMON/GFX.H"

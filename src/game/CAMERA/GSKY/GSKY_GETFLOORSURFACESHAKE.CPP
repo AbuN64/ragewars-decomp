@@ -21,11 +21,11 @@
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
-extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
+extern f32 Region_GetPolygonHeight(s32 node, f32 arg1, f32 arg2);
 
 extern void *Cache_AllocateResource(int a, int b, int c, void *d);
 
-extern void func_8025E3F0_de(s32 arg0);
+extern void SoundElement_SetListenerCamera(s32 arg0);
 
 extern void Cache_DrainAndCompactResources(s32 a);
 
@@ -133,7 +133,7 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
     s32 allocation;
 
     owner->state = 1;
-    func_8025E3F0_de((s32)&owner->rendering);
+    SoundElement_SetListenerCamera((s32)&owner->rendering);
     Cache_DrainAndCompactResources(0);
     allocation = owner->allocation;
     if (allocation != 0) {

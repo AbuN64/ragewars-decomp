@@ -8,7 +8,7 @@ struct Channel;
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 struct ScreenMessageOwner;
-extern void func_8023A1F4_de(struct ScreenMessageOwner *arg0);
+extern void func_8023A1F4_de(struct ScreenMessageOwner *owner);
 
 
 extern float D_800C8664;
@@ -19,7 +19,7 @@ extern float D_800C8658;
 
 extern float D_800C3598_de;
 
-extern void Gsky_SetShakeChannel(struct Channel *arg0, float arg1, int arg2);
+extern void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMode);
 
 
 
@@ -44,7 +44,7 @@ struct RecordRecAt18 {
 };
 
 
-extern void Gsky_InitializeShakeRecord(void *arg0);
+extern void Gsky_InitializeShakeRecord(void *channelRecord);
 
 
 struct IntegerStateF24;
@@ -56,16 +56,16 @@ extern float D_800C3548_de;
 
 extern float D_800C3570_de;
 
-extern int Gsky_StartFadeModeTwo(void *arg0);
+extern int Gsky_StartFadeModeTwo(void *outputStorage);
 
 
 
 struct ScreenMessagePool;
-extern void Gsky_ActivateMessagePool(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1);
+extern void Gsky_ActivateMessagePool(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 
-extern void func_8023A24C_de(void *arg0);
+extern void func_8023A24C_de(void *bufferOwner);
 
-extern s32 Gsky_UpdateShakeRecord(s32 arg0);
+extern s32 Gsky_UpdateShakeRecord(s32 waveRecord);
 
 
 
@@ -99,7 +99,7 @@ extern double D_800C3550_de;
 extern void func_80239FCC_de(void);
 
 
-extern void Gsky_InitializeShakeChannel(void *arg0);
+extern void Gsky_InitializeShakeChannel(void *channelStorage);
 
 
 extern float D_800C865C;
@@ -112,7 +112,7 @@ struct NodeGskyActivateMessagePool;
 
 extern float D_800C8668;
 
-extern void func_8023A114_de(void *arg0, s32 arg1);
+extern void func_8023A114_de(void *messageBuffer, s32 count);
 
 
 
@@ -121,11 +121,11 @@ struct RecordRecAt18;
 extern void Gsky_SetShakeRecord(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode, Triple triple);
 
 
-extern void func_8023A190_de(void *arg0, int arg1);
+extern void func_8023A190_de(void *screenMessageOwner, int count);
 
 extern float D_800C3594_de;
 
-extern void Gsky_UpdateFloorSurface(void *arg0);
+extern void Gsky_UpdateFloorSurface(void *gameplayCamera);
 
 extern void func_80239404_de(void);
 

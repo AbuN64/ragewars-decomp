@@ -7,16 +7,16 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SOUNDINFO.H"
 #include "TYPES.H"
 #include "WORLD/PLAYERAI_RESPAWNFRAGTAGPLAYER.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "RENDER/802192C0_3.H"
+#include "RENDER/PLAYER_SPAWN_PLACEMENT.H"
 
-extern f32 Graphu64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 Graphu64_GetTrianglePlaneHeight(void *node, f32 arg1, f32 arg2);
 
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
@@ -24,7 +24,7 @@ extern char D_8011D8D0;
 
 extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
-extern s32 InstHdr_GetActorMotionState(void *arg0);
+extern s32 InstHdr_GetActorMotionState(void *levelActor);
 
 
 
@@ -40,13 +40,13 @@ extern void Cache_DrainAndCompactResources(s32 a);
 
 
 
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
 
 extern void func_80218464_de(void *arg0);
 
 
 
-extern void Playerai_InitializePlayerHealth(void *arg0);
+extern void Playerai_InitializePlayerHealth(void *player);
 
 void Playerai_ToggleActionFlagMode(Player *player) {
     u8 *ptr;
@@ -115,11 +115,11 @@ void Playerai_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
         amount = (f32)(s32)(first - Region_GetPolygonHeight(surface,
             arg1->x, arg1->z));
         if (amount < D_800C2E24_de) {
-            func_8025E440_de(D_800C2E2C_de - (amount * D_800C2E28_de));
+            SoundElement_SetClampedAudioLevel(D_800C2E2C_de - (amount * D_800C2E28_de));
             return;
         }
     }
-    func_8025E440_de(0.0f);
+    SoundElement_SetClampedAudioLevel(0.0f);
 }
 
 /** Perform no work for callers at VRAM 0x8022EAF4. */

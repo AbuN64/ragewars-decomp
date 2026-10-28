@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_MENUREPLY.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -12,7 +12,7 @@
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/CONTROL.H"
 #include "TYPES.H"
-#include "FRONTEND/80423280_53.H"
+#include "FRONTEND/SCENARIO_RESULT_ROWS.H"
 #include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
 
 /* Draw callback of the versus results screen D_800E4F60: on draw event 1 in states 3, 8 or 9 it

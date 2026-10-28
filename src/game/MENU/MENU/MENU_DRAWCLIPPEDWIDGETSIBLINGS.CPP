@@ -17,8 +17,8 @@ unsigned char D_auto_func_8040C6FC_de_padding_1726FC[4] = { 0xD0, 0x14, 0x9C, 0x
 extern void Node_LoadLanguageStringsIfAny(int);
 extern void *g_optionsPage;
 
-int Menu_DestroyEuxOptionsAndReloadLanguage(void *arg0) {
-    Cache_FreeMemory(arg0);
+int Menu_DestroyEuxOptionsAndReloadLanguage(void *allocation) {
+    Cache_FreeMemory(allocation);
     g_optionsPage = 0;
     Node_LoadLanguageStringsIfAny(g_languageIndex);
     return 0;

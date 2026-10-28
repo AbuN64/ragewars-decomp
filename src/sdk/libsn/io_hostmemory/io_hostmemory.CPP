@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -327,7 +328,6 @@ extern void *D_800F2F58;
 extern OSThread_s D_800F2F60; /* host request thread */
 extern OSMesgQueue D_800F3110;
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
-void osStartThread(OSThread_s *thread); /* osStartThread */
 extern void Libsn_ReadPortBufferWithDma(u32, u8 *, u32);
 /* Create the host request queues and start the request thread once (thread id FS). */
 void Libsn_InitializeHostRequestThread(s32 threadPriority) {

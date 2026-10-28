@@ -8,12 +8,12 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100338;
 
-extern u8 *func_8024E6A0_de(Source *arg0);
-extern void InstHdr_GetActorTargetOffset(u8 *arg0, CVector3 *arg1);
+extern u8 *func_8024E6A0_de(Source *item);
+extern void InstHdr_GetActorTargetOffset(u8 *player, CVector3 *vector);
 extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Graphu64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void Graphu64_TransformPoints(MatrixF *arg0, CVector3 *arg1, CVector3 *arg2, s32 count);
-extern void Unicol_MoveActorWithCollision(Source *arg0, CVector3 arg1, CollisionInfo *arg2);
+extern void Graphu64_TransformPoints(MatrixF *arg0, CVector3 *arg1, CVector3 *out, s32 count);
+extern void Unicol_MoveActorWithCollision(Source *actor, CVector3 pos, CollisionInfo *motionSettings);
 extern void func_80207730_de(u8 *arg0, Source *arg1);
 
 

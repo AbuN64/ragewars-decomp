@@ -13,7 +13,7 @@ s32 Cteamselect_TryConfirmTeamChoice(void *menu, void *player) {
     return 0;
 }
 extern void Cteamselect_InitTeamChoices(void *arg0, s32 arg1, void *arg2);
-extern s32 Cteamselect_GetFourWayStickSlot(void *arg0);
+extern s32 Cteamselect_GetFourWayStickSlot(void *object);
 void Cteamselect_UpdateTeamChoiceInput(char *menu, void *player) {
     s32 flags;
     s32 state;

@@ -7,17 +7,17 @@ typedef struct MessageSemaphore {
     s32 message;
 } MessageSemaphore;
 extern s32 XPlus_CompareStringsIgnoreCase(u8 *arg0, u8 *arg1);
-extern u8 *XPlus_CopyStringBounded(u8 *arg0, u8 *arg1, s32 arg2);
-extern void XPlus_SeedRandomGenerator(int arg0);
+extern u8 *XPlus_CopyStringBounded(u8 *destination, u8 *source, s32 count);
+extern void XPlus_SeedRandomGenerator(int seed);
 extern int XPlus_LowercaseCharacter(int arg0);
-extern u8 *XPlus_FindByte(u8 *arg0, s32 arg1, s32 arg2);
-extern void XPlus_BuildPath(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4);
-extern u32 XPlus_UpdateCrc32(u8 *arg0, u32 arg1, u32 arg2);
+extern u8 *XPlus_FindByte(u8 *buffer, s32 value, s32 length);
+extern void XPlus_BuildPath(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensionArg);
+extern u32 XPlus_UpdateCrc32(u8 *data, u32 length, u32 crc);
 extern u8 *XPlus_AppendStringBounded(u8 *destination, u8 *source, s32 count);
 extern void XPlus_FormatDecimalInteger(s32 n, char *s);
 extern u8 *XPlus_FindLastCharacter(u8 *s, int c);
-extern s32 XPlus_CompareMemory(u8 *arg0, u8 *arg1, s32 arg2);
-extern void *XPlus_FillBytes(void *arg0, int arg1, u32 arg2);
+extern s32 XPlus_CompareMemory(u8 *arg0, u8 *arg1, s32 count);
+extern void *XPlus_FillBytes(void *destination, int value, u32 count);
 extern void *XPlus_CopyBytes(void *destination, const void *source, s32 bytes);
 extern s32 XPlus_CompareStrings(const void *a, const void *b);
 #endif

@@ -364,7 +364,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
 
 extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
-extern void Textload_LocateTextureResource(s32 *arg0, s32 arg1);
+extern void Textload_LocateTextureResource(s32 *arg0, s32 sectionIndex);
 
 /* Updates a rotor: while the control mask bit is held its throttle at 0x208 rises by the descriptor rate up
  * to D_800C86E0, otherwise it falls to zero (returning 1 once idle); the value phase advances, the two wrap

@@ -4,7 +4,7 @@
 #include "COMMON/UNUSED.H"
 #include "MATH/math_double.H"
 #include "MATH/XMATH_EVALUATEEXPONENTIALDOUBLE.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 
 /* Rounds a double up to the next integer by the 2^52 add-and-subtract trick, handling negative values through an inlined round-down that recurses back into this function. Adapted from XMath_FloorDouble with the rounding direction reversed, the negative case routed through an inline copy of the round-down and the constants changed. */
 

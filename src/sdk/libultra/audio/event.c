@@ -105,8 +105,8 @@ void alEvtqPostEvent(ALEventQueue *evtq, ALEvent *evt, s32 delta)
     func_802BD170_de(mask);
 }
 
-void alEvtqFlush(void *arg0) {
-    ALEventQueue *queue = arg0;
+void alEvtqFlush(void *previousNode) {
+    ALEventQueue *queue = previousNode;
     NodeGskyActivateMessagePool *cur;
     NodeGskyActivateMessagePool *next;
     s32 saved;
@@ -117,7 +117,7 @@ void alEvtqFlush(void *arg0) {
         do {
             next = cur->next;
             alUnlink((ListLink *)cur);
-            alLink(cur, arg0);
+            alLink(cur, previousNode);
             cur = next;
         } while (cur != 0);
     }
@@ -125,13 +125,13 @@ void alEvtqFlush(void *arg0) {
 }
 
 
-void alEvtqFlushType(void *arg0, s16 arg1) {
+void alEvtqFlushType(void *previousNode, s16 arg1) {
     s32 saved;
     char *cur;
     char *next;
 
     saved = func_802BD170_de(1);
-    cur = ((ALEventQueue *)arg0)->allocList.next;
+    cur = ((ALEventQueue *)previousNode)->allocList.next;
     if (cur != 0) {
         do {
             next = ((ALEventListItem *)cur)->node.next;
@@ -140,7 +140,7 @@ void alEvtqFlushType(void *arg0, s16 arg1) {
                     ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + ((ALEventListItem *)cur)->delta;
                 }
                 alUnlink((ListLink *)cur);
-                alLink(cur, arg0);
+                alLink(cur, previousNode);
             }
             cur = next;
         } while (cur != 0);

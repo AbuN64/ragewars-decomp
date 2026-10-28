@@ -131,7 +131,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 extern void Menu_ReturnToPreviousScreen(void);
 
 extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
-extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
+extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 index);
 
 /* Focus_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 

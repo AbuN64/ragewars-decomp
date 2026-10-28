@@ -45,13 +45,13 @@ struct Shared_func_80261EB8_S1 {
     s32 unkC;
     s32 ** unk10;
 };
-extern void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
-extern int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *arg0, int arg1);
-extern f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *arg0, s32 arg1);
-extern int Polytrak2_GetUnsignedArrayElement(BitFieldSource *arg0, int arg1);
-extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 arg0, Func802608ECResult range, f32 arg4);
-extern void func_80260E1C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
-extern void Polytrak2_StoreWordAndTriple(void *arg0, int arg1, Triple t);
+extern void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
+extern int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int elementIndex);
+extern f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementIndex);
+extern int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIndex);
+extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range, f32 sourceValue);
+extern void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
+extern void Polytrak2_StoreWordAndTriple(void *destination, int wordValue, Triple t);
 extern f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range);
-extern void func_80260D78_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
+extern void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
 #endif

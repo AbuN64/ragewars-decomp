@@ -6,7 +6,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "TYPES.H"
 
-extern s32 Gsky_StartEmitter(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, Triple arg6);
+extern s32 Gsky_StartEmitter(void *obj, f32 arg1, f32 arg2, f32 arg3, f32 scale, s32 value, Triple pos);
 
 extern f32 D_800C4450_de[2];
 
@@ -41,6 +41,6 @@ void Events_PostGameplayMessage(void *owner, LevelActor *actor, s32 event, Tripl
 #endif
     }
     if (gameplaySoundHook(params.active) != 0) {
-        func_8025E11C_de(gameplaySoundHook(params.active));
+        SoundElement_PlayDialogGroup(gameplaySoundHook(params.active));
     }
 }

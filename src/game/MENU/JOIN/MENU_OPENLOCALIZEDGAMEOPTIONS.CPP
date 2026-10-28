@@ -2,7 +2,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "MENU/80406A88_6.H"
 
@@ -177,8 +177,8 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     D_800E4518 = Cache_AllocateMemory(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
-    func_8025E384_de();
-    func_8025E214_de(-1);
+    SoundElement_DisableMusicGainOverride();
+    SoundElement_StopAudioExceptKey(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
     D_800E4518->leftTab = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x381));

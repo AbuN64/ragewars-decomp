@@ -137,7 +137,7 @@ struct RecordMenuProcessTrackItemEvents {
     s32 pending;
 };
 
-extern s32 Menu_GetTrackClipCount();
+extern s32 Menu_GetTrackClipCount(void);
 
 
 

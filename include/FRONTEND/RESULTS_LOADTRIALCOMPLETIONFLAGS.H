@@ -1,5 +1,5 @@
 #ifndef FRONTEND_RESULTS_LOADTRIALCOMPLETIONFLAGS_H
 #define FRONTEND_RESULTS_LOADTRIALCOMPLETIONFLAGS_H
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-extern void Results_LoadTrialCompletionFlags();
+extern void Results_LoadTrialCompletionFlags(void);
 #endif

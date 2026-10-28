@@ -53,7 +53,7 @@ extern char *Audio_GetMetadataSectionThreeEntry(char *object, int index);
 
 extern void Audio_SetSpatialPanMode(struct ContextRecAt2BC0 *arg0, int arg1);
 
-extern int Audio_FindVoiceSlotById(char *arg0, int id);
+extern int Audio_FindVoiceSlotById(char *context, int id);
 
 extern void *Audio_GetMetadataSectionFourEntry(struct ContextRecAt2BC0 *arg0, int arg1);
 

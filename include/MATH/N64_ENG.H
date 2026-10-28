@@ -19,10 +19,10 @@ extern void N64Eng_SetClipBounds(unsigned int a0, unsigned int a1, unsigned int 
 /* Elapsed game time in seconds; callers must preserve the floating return ABI. */
 extern f64 N64Eng_GetTimeSeconds(void);
 
-extern void N64Eng_RenderNoop();
-extern void N64Eng_ResetRenderState();
+extern void N64Eng_RenderNoop(void);
+extern void N64Eng_ResetRenderState(void);
 
-extern void N64Eng_AdvanceFrameCounter();
-extern void N64Eng_RegisterNumericWidgetClass();
-extern int N64Eng_GetFrameCounter();
+extern void N64Eng_AdvanceFrameCounter(void);
+extern void N64Eng_RegisterNumericWidgetClass(void);
+extern int N64Eng_GetFrameCounter(void);
 #endif

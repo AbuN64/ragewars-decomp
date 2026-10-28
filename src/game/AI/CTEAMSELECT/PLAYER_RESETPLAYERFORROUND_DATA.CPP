@@ -29,14 +29,14 @@ void func_80218E98_de(TeamMenu *menu) {
 }
 
 /* 80217388_11.CPP */
-extern void Cteamselect_DrawTeamWheel(s32 arg0, s32 arg1, s32 arg2);
+extern void Cteamselect_DrawTeamWheel(s32 menu, s32 unused1, s32 player);
 
-void func_80218F08_de(s32 menu, s32 arg1, s32 player) {
+void func_80218F08_de(s32 menu, s32 unused1, s32 player) {
     Gfx *cmd;
 
     Onscrn_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
-    Cteamselect_DrawTeamWheel(menu, arg1, player);
+    Cteamselect_DrawTeamWheel(menu, unused1, player);
 }
 
 /** Reset a record and mark its word at offset 0x6C as invalid. */

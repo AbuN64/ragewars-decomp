@@ -17,7 +17,7 @@
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
-extern s32 Playerai_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Playerai_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType);
 
 
 
@@ -195,7 +195,7 @@ s32 Weaponai_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     return result;
 }
 
-void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
+void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *stateController) {
     void *actor;
     s16 index;
     s32 value;
@@ -222,38 +222,38 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
         D_800D2988 = old_delta;
     }
 
-    timer = ((ObjectLinks14C *)(arg1))->unk_148;
+    timer = ((ObjectLinks14C *)(stateController))->unk_148;
     zero = 0.0f;
     if (zero < timer) {
-        ((ObjectLinks14C *)(arg1))->unk_148 = timer - D_800D2988;
+        ((ObjectLinks14C *)(stateController))->unk_148 = timer - D_800D2988;
         ((ObjectLinks1DC_2 *)(arg0))->unk_1 = 0;
     } else {
         ((ObjectLinks1DC_2 *)(arg0))->unk_1 = 0;
     }
 
-    if (zero < ((ObjectLinks14C *)(arg1))->unk_130) {
-        ((ObjectLinks14C *)(arg1))->unk_130 -= D_800D2988;
+    if (zero < ((ObjectLinks14C *)(stateController))->unk_130) {
+        ((ObjectLinks14C *)(stateController))->unk_130 -= D_800D2988;
     }
 
     if (value == 1) {
-        Actor_RequestActorState(arg0, arg1, 1);
+        Actor_RequestActorState(arg0, stateController, 1);
     }
     if (((ObjectState1230 *)(actor))->unk_770 != ((ObjectState1230 *)(actor))->unk_62E) {
         ((ObjectState1230 *)(actor))->unk_7E8 = 0;
-        Actor_RequestActorState(arg0, arg1, 1);
+        Actor_RequestActorState(arg0, stateController, 1);
     }
 
-    callback_owner = ((ObjectLinks14C *)(arg1))->callback_owner;
+    callback_owner = ((ObjectLinks14C *)(stateController))->callback_owner;
     if (callback_owner != 0) {
         callback = ((struct Hook *) ((char *) callback_owner))->fn;
         if (callback != 0) {
-            callback(arg0, arg1);
+            callback(arg0, stateController);
         }
     }
 
     callback = ((struct CallbackState60 *) ((char *) D_800D052C[((ObjectState1230 *) actor)->unk_62E]))->callback;
     if (callback != 0) {
-        callback(arg0, arg1);
+        callback(arg0, stateController);
     }
     func_8022BC14_de(actor);
     D_800D2988 = old_delta;

@@ -62,28 +62,28 @@ extern s32 alEvtqNextEvent(ALEventQueue *, ALEvent *);
 /* _sndpVoiceHandler (_sndpVoiceHandler); the cartridge stores the handler by its 0x002B7C8C address. */
 
 
-extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_s *);
+extern s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, ALVoiceConfig_s *);
 
  /* alSynAllocVoice */
-extern void alSynStartVoice(ALSynthalSynAllocVoice *, ALVoice_s *, void *);
+extern void alSynStartVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, void *);
 
          /* alSynStartVoice */
-extern void alSynSetPan(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
+extern void alSynSetPan(AudioSynthVoiceAllocatorView *, ALVoice_s *, u8);
 
              /* alSynSetPan */
-extern void alSynSetVol(ALSynthalSynAllocVoice *, ALVoice_s *, s16, s32);
+extern void alSynSetVol(AudioSynthVoiceAllocatorView *, ALVoice_s *, s16, s32);
 
        /* alSynSetVol */
-extern void alSynSetPitch(ALSynthalSynAllocVoice *, ALVoice_s *, f32);
+extern void alSynSetPitch(AudioSynthVoiceAllocatorView *, ALVoice_s *, f32);
 
             /* alSynSetPitch */
-extern void alSynSetFXMix(ALSynthalSynAllocVoice *, ALVoice_s *, u8);
+extern void alSynSetFXMix(AudioSynthVoiceAllocatorView *, ALVoice_s *, u8);
 
              /* alSynSetFXMix */
-extern void alSynStopVoice(ALSynthalSynAllocVoice *, ALVoice_s *);
+extern void alSynStopVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
 
                  /* alSynStopVoice */
-extern void alSynFreeVoice(ALSynthalSynAllocVoice *, ALVoice_s *);
+extern void alSynFreeVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *);
 
        /* alEvtqPostEvent */
 void _removeEvents(ALEventQueue *arg0, void *arg1);

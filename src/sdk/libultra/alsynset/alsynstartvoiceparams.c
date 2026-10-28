@@ -1,7 +1,8 @@
+#include "COMMON/ALPARAM_S.H"
 #include "sdk/libgultra.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "sdk/OBJECTSTATE10_5.H"
+#include "sdk/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "TYPES.H"
 #include "sdk/libultra/audio/synthesizer.h"
 
@@ -25,10 +26,10 @@
 
 
 
-void alSynStartVoiceParams(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
+void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *s, ALVoice_s *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
 {
     ALStartParamAlt *update;
-    ALFilter_s_func_802B3000_de *f;
+    AudioVoiceChannelFilterView *f;
 
     if (v->pvoice) {
         update = (ALStartParamAlt *)Audio_AllocParam();
@@ -40,7 +41,7 @@ void alSynStartVoiceParams(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32
 
         update->delta = s->paramSamples + v->pvoice->offset;
         update->next = 0;
-        update->type = 13; /* AL_FILTER_START_VOICE_ALT */
+        update->type = AL_FILTER_START_VOICE_ALT; /* AL_FILTER_START_VOICE_ALT */
         update->unity = v->unityPitch;
         update->pan = pan;
         update->volume = vol;
@@ -50,6 +51,6 @@ void alSynStartVoiceParams(ALSynthalSynAllocVoice *s, ALVoice_s *v, void *w, f32
         update->wave = w;
 
         f = v->pvoice->channelKnob;
-        (*f->setParam)(f, 3, update); /* AL_FILTER_ADD_UPDATE */
+        (*f->setParam)(f, AL_FILTER_ADD_UPDATE, update); /* AL_FILTER_ADD_UPDATE */
     }
 }

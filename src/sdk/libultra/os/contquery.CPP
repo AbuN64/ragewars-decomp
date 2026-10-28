@@ -7,7 +7,7 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 
-extern void __osPackRequestData(s32 arg0);
+extern void __osPackRequestData(s32 cmd);
 
 
 s32 osContStartQuery(s32 completionQueue) {

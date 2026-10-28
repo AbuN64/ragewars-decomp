@@ -72,7 +72,7 @@ void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
     }
 }
 
-extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *widget, s32 arg1);
 
 void N64Eng_DecrementNumericWidget(void *arg0)
 {
@@ -188,11 +188,11 @@ s32 N64Eng_SetLinkedCommand100WithSound(struct CommandListController *commandLis
     return 0;
 }
 
-s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 fifth) {
     RecordN64EngCreateNumericWidget *object = arg0;
     s32 temp_s0;
 
-    temp_s0 = XMath_AbsoluteInteger(arg4);
+    temp_s0 = XMath_AbsoluteInteger(fifth);
     if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;
@@ -255,8 +255,8 @@ s32 TickSelectionRepeat(void *widget) {
     return 0;
 }
 
-s32 N64Eng_FreeNumericWidget(void *arg0) {
-    Cache_FreeMemory(arg0);
+s32 N64Eng_FreeNumericWidget(void *allocation) {
+    Cache_FreeMemory(allocation);
     return 0;
 }
 

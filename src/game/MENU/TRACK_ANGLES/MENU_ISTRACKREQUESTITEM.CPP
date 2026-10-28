@@ -2,7 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT0V3.H"
-#include "MENU/80403BCC.H"
+#include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"

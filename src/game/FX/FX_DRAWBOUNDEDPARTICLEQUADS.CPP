@@ -1,7 +1,7 @@
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/GAME_SESSION.H"
-#include "RENDER/802A35C0.H"
+#include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "abi.h"
 #include "RENDER/DRAW_MATRIX_SCRATCH.H"
 #include "COMMON/VECTOR4F.H"
@@ -57,13 +57,13 @@ extern s32 D_800CDBE8;
 
 extern u32 D_800D297C;
 
-extern void CopyMatrix(f32 *arg0, f32 *arg1);
+extern void CopyMatrix(f32 *destinationMatrix, f32 *sourceMatrix);
 
-extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
-extern void Graphu64_ClampMatrixToFixedRange(f32 *arg0);
+extern void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents);
 
-extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
+extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *local);
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 

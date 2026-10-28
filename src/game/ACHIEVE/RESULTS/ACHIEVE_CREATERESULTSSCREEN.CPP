@@ -1,7 +1,7 @@
 #include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "ACHIEVE/ACHIEVE.H"
 #include "ACHIEVE/MATCH_GETRESULTTEXT.H"
 #include "COMMON/PLAYERPROFILES.H"
@@ -32,7 +32,7 @@ extern f32 D_800E1F40;
 extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_800D3590, *D_800D3594, *D_800D3598;
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(void *);
-extern void CPlayerPreview_ResetSelectionMessageState();
+extern void CPlayerPreview_ResetSelectionMessageState(void);
 extern void Achieve_MarkLevelPlayed(s32);
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);

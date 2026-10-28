@@ -1,12 +1,12 @@
 #include "COMMON/RECORDRECATCV1.H"
 #include "COMMON/LONE/D_0044E4B0.H"
-#include "MENU/80409A88.H"
+#include "MENU/PAK_PREVIEW_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 extern PakPreview *D_800E28BC;
-#include "MENU/PAK/80409A88_9.H"
+#include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 #include "SYSTEM/DEFS.H"
 #include "MENU/PAK/TIMER.H"
 
@@ -17,9 +17,9 @@ extern PakPreview *D_800E28BC;
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void Menu_ClassifyResourceRange(s32);
+extern s32 Menu_ClassifyResourceRange(s32);
 #else
-extern void Pickup_ClassifyMenuCode(s32);
+extern s32 Pickup_ClassifyMenuCode(s32);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

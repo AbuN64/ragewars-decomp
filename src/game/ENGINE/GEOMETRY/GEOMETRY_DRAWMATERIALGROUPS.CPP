@@ -3,7 +3,7 @@
 #include "COMMON/OBJECTSTATE18.H"
 #include "abi.h"
 #include "COMMON/UNUSED.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER/GEOMETRY_GROUPMODELINSTANCES.H"
@@ -121,24 +121,24 @@ void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg
         s32 **temp_v0;
         s32 **resource;
         s32 temp_s0;
-        s32 temp_s1;
+        s32 directoryEntryResult;
         s32 temp_v0_2;
         s32 temp_v0_3;
         s32 temp_v1;
-        s8 *temp_s1_2;
+        s8 *packSectionResult;
         ObjRecAtCV2 *temp_v1_2;
         temp_v0 = Cache_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
         if (temp_v0 != 0) {
-                temp_s1 = SetN64_GetDirectoryEntry(*temp_v0, arg0, 1);
+                directoryEntryResult = SetN64_GetDirectoryEntry(*temp_v0, arg0, 1);
                 Cache_UnlockResource(0, temp_v0);
-                temp_v0_2 = Cache_RequestWordCountedResource(0, (void **) &sp28, temp_s1, &s_simpModelsIndexText, 1);
+                temp_v0_2 = Cache_RequestWordCountedResource(0, (void **) &sp28, directoryEntryResult, &s_simpModelsIndexText, 1);
                 if (temp_v0_2 != 0) {
                         temp_v0_3 = *sp28;
-                        temp_s0 = SetN64_LocatePackSection((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);
+                        temp_s0 = SetN64_LocatePackSection((s32) sp28, directoryEntryResult, arg3 % temp_v0_3, &sp2C);
                         Cache_UnlockResource(0, (void *) temp_v0_2);
                         resource = Cache_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &s_simpModelText, direct);
                         if (resource != 0) {
-                                temp_s1_2 = SetN64_GetPackSection(*resource, 0);
+                                packSectionResult = SetN64_GetPackSection(*resource, 0);
                                 if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {
                                         Geometry_GroupModelInstances();
                                         if (D_80111310 != 0x100) {
@@ -158,7 +158,7 @@ void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg
                                         temp_v1_2->unk0 = arg1;
                                         temp_v1_2->unkC = 0;
                                         temp_v1_2->unk4 = arg2;
-                                        temp_v1_2->unk8 = temp_s1_2;
+                                        temp_v1_2->unk8 = packSectionResult;
                                 }
                                 Cache_UnlockResource(0, resource);
                         }

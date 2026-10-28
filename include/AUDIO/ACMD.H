@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "acmd.h"
-extern void *func_802B625C_de(void *arg0, s32 arg1, s32 arg2, void *arg3);
+extern void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords);
 
 #include "COMMON/ALDELAY28.H"
 extern f32 func_802B6300_de(ALDelay28 *d, s32 count);

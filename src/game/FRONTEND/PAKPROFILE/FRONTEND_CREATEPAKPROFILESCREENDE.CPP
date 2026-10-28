@@ -370,16 +370,16 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
 
 
 
-extern void Tsmos_DeactivateControllerState();
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_DeactivateControllerState(void);
+extern void Tsmos_ActivateControllerState(void);
 extern void Note_ProbeStatus(s32);
 extern void PAKInterface_ResolvePlayerPakState(s32);
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
 extern void MarkMenuEventHandled();
-extern void Frontend_ContinueCupOrOpenResults();
-extern void Frontend_OpenControllerModeResults();
-extern void Achieve_SelectPostResultScreen();
+extern void Frontend_ContinueCupOrOpenResults(void);
+extern void Frontend_OpenControllerModeResults(void);
+extern void Achieve_SelectPostResultScreen(void);
 
 s32 Frontend_UpdatePakScreenExit(void *unused0, void *unused1, s32 event) {
     s32 i;

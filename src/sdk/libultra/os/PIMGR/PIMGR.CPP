@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "sdk/OSINT/CREATE.H"
 #include "sdk/libultra/os/802BDEA0.h"
@@ -13,7 +14,6 @@ extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void Scene_SetThreadPriority(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
-extern void osStartThread(struct OSThread_s *);
 
 void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 {
@@ -75,7 +75,6 @@ extern void osSetEventMesg(s32, OSMesgQueue *, s32);
 extern s32 osGetThreadPri(struct OSThread_s *);
 extern void Scene_SetThreadPriority(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
-extern void osStartThread(struct OSThread_s *);
 
 void osCreatePiManager(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 {

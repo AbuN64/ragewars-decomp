@@ -9,7 +9,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 
 void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     LevelActor *entry;

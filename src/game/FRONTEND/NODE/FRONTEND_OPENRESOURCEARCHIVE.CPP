@@ -127,7 +127,7 @@ extern s16 g_frontendResourceTextureCount;
 
 
 
-extern void Node_AcquireArchiveEntry(u32 index);
+extern void Node_AcquireArchiveEntry(s32 index);
 
 static inline void func_8040F75C_resolve(UiWidget *widget) {
     UiWidget *w;
@@ -532,7 +532,7 @@ void *Cache_AllocateMemory(s32 size);
 u8 *XPlus_CopyString(u8 *dst, u8 *src);
 void XStdio_CloseStream(s32 handle);
 void Node_LoadLanguageStrings(s32 index);
-void Cache_FreeMemory(void *arg0);
+void Cache_FreeMemory(void *allocation);
 
 /* Loads the string table of resource archive section index: frees the previous string buffer and
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the

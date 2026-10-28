@@ -4,7 +4,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "sdk/AUDIO/sprintf.H"
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
@@ -49,7 +49,7 @@ s32 func_8044345C_de(void) {
     return 0;
 }
 
-/* Calls func_8025E384_de and passes what func_8025CC6C_de returns to func_8025CB0C_de; then, when D_801540F0
+/* Calls SoundElement_DisableMusicGainOverride and passes what func_8025CC6C_de returns to func_8025CB0C_de; then, when D_801540F0
    is set, calls Menu_TryCreateMenu with the three arguments, otherwise func_8026495C_de. Returns one. */
 extern s32 func_8025CC6C_de();
 struct SoundVoicePool;
@@ -57,7 +57,7 @@ extern void func_8025CB0C_de(struct SoundVoicePool *);
 extern void Menu_TryCreateMenu(void *, void *, void *);
 
 s32 Player_RestoreControlsOrCreateMenu(void *first, void *second, void *third) {
-    func_8025E384_de();
+    SoundElement_DisableMusicGainOverride();
     func_8025CB0C_de(func_8025CC6C_de());
     if (D_801540F0 == 0) {
         Control_RestoreControllerSetup();

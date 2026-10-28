@@ -4,6 +4,6 @@
 
 
 /** Thin wrapper around func_80214178_de. */
-void Weaponai_ForwardActorStateRequest(void *arg0, void *arg1, s32 arg2) {
-    Actor_RequestActorState(arg0, arg1, arg2);
+void Weaponai_ForwardActorStateRequest(void *actor, void *stateController, s32 action) {
+    Actor_RequestActorState(actor, stateController, action);
 }

@@ -10,7 +10,7 @@
 #include "FRONTEND/NODE_GETIMAGETEXTURE.H"
 #include "MENU/GFX/GFX_SHUTDOWNFRONTENDSERVICES.H"
 #include "RESMGR/TSMOS_SHUTDOWNFRONTEND.H"
-#include "RESMGR/802A23A4_6.H"
+#include "RESMGR/FRAME_HEAP_LIFETIME.H"
 
 void Tsmos_ShutdownFrontend(void) {
     extern struct Triple D_800D2C90;

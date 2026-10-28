@@ -1,7 +1,7 @@
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "AUDIO/8025A3EC.H"
+#include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
@@ -27,21 +27,21 @@
 
 extern void alSndpPlay(void *);
 
-extern void Channel_InitializeVoicePitchMotion(void *arg0, void *arg1, s32 arg2);
+extern void Channel_InitializeVoicePitchMotion(void *view, void *controller, s32 flags);
 
 extern void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, s32 arg1);
 
-extern s32 Audio_GetSpatialPanMode(void *arg0);
+extern s32 Audio_GetSpatialPanMode(void *object);
 
-extern s16 Channel_ComputeListenerRelativePan(void *arg0, GameplayCamera *arg1);
+extern s16 Channel_ComputeListenerRelativePan(void *position, GameplayCamera *listener);
 
-extern void Channel_UpdateVoicePlayback(void *arg0);
+extern void Channel_UpdateVoicePlayback(void *view);
 
 /* Returns how strongly a listener at 0x128 hears a source at 0x34: one minus the squared distance over the squared range D_800D0D10 (zero beyond it), shaped by the source's curve at 0x44 as the eighth power, the square or the plain value. */
 
-extern void alSndpSetVol(void *arg0, s16 arg1);
+extern void alSndpSetVol(void *soundPlayer, s16 eventVolume);
 
-extern void alSndpSetPitch(void *arg0, f32 arg1);
+extern void alSndpSetPitch(void *soundPlayer, f32 pitchBits);
 
 void Audio_StopVoicesExceptKey(RecordRecAt4V6 *record, s32 value)
 {
@@ -527,11 +527,11 @@ f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener)
 void Audio_SetScaledVoiceVolume(void *arg0, s32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
-    s32 temp_s0;
+    s32 ownerValue;
     void *sound;
 
-    temp_s0 = slot->owner;
-    owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
+    ownerValue = slot->owner;
+    owner = (OwnerCode8025A3EC8025B5F0 *)ownerValue;
     sound = owner->sound;
     alSndpSetSound(sound, owner->samples[slot->index]);
     alSndpSetVol(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
@@ -540,12 +540,12 @@ void Audio_SetScaledVoiceVolume(void *arg0, s32 arg1) {
 void Audio_SetScaledVoicePitch(void *arg0, f32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
-    s32 temp_s0;
+    s32 ownerValue;
     void *sound;
     f32 scaled;
 
-    temp_s0 = slot->owner;
-    owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
+    ownerValue = slot->owner;
+    owner = (OwnerCode8025A3EC8025B5F0 *)ownerValue;
     sound = owner->sound;
     alSndpSetSound(sound, owner->samples[slot->index]);
     scaled = arg1 * (slot->f34);
@@ -588,17 +588,17 @@ void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord) {
 }
 
 void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {
-    s32 a0;
+    s32 ownerValue;
     void *s1;
 
-    a0 = voiceRecord->owner;
+    ownerValue = voiceRecord->owner;
     voiceRecord->active = 1;
     voiceRecord->flag = 0;
-    s1 = (void *)(a0 + 0x84);
-    if (voiceRecord->key != ((OwnerCode8025A3EC8025B5F0 *)a0)->key) {
+    s1 = (void *)(ownerValue + 0x84);
+    if (voiceRecord->key != ((OwnerCode8025A3EC8025B5F0 *)ownerValue)->key) {
         s32 idx = voiceRecord->index;
-        s32 addr = a0 + idx * 2;
-        alSndpSetSound(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
+        s32 addr = ownerValue + idx * 2;
+        alSndpSetSound(s1, ((OwnerCode8025A3EC8025B5F0 *)ownerValue)->samples[idx]);
         if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
@@ -713,7 +713,7 @@ static inline short slot_id(Slots *slots, int index) {
     return slots->ids[index];
 }
 
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 arg4, s32 ownerId);
 
 int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
     SlotRecAtB4V2 *entry;
@@ -795,7 +795,7 @@ s32 func_8025CA24_de(void *work, void *wantedNode) {
     if (playingNode != 0) {
         do {
             if (playingNode == wantedNode) {
-                func_8025E174_de(((CLoopingSoundData *)playingNode)->value);
+                SoundElement_StopSoundsByIdentifier(((CLoopingSoundData *)playingNode)->value);
                 D_800CBB14 = ((CLoopingSoundData *)playingNode)->value;
                 func_80255ED8_de(&((SoundVoicePool *)work)->playing, playingNode);
                 func_80255D14_de(work, playingNode);
@@ -815,7 +815,7 @@ void func_8025CAB0_de(void *voicePool) {
     playingNode = pool->playing.head;
     if (playingNode != 0) {
         do {
-            func_8025E174_de(playingNode->value);
+            SoundElement_StopSoundsByIdentifier(playingNode->value);
             value = playingNode->value;
             playingNode = playingNode->next;
             D_800CBB18 = value;
@@ -851,7 +851,7 @@ void func_8025CB88_de(void *soundVoicePool) {
         playingNode = pool->playing.head;
         if (playingNode != 0) {
             do {
-                if (func_8025E0F4_de(playingNode->value) == 0) {
+                if (SoundElement_CountOwnerVoices(playingNode->value) == 0) {
                     playingNode->state = -1;
                     playingNode->value = -1;
                 }
@@ -872,7 +872,7 @@ void func_8025CBEC_de(void *soundVoicePool) {
         do {
             value = cur->value;
             next = cur->next;
-            func_8025E174_de(value);
+            SoundElement_StopSoundsByIdentifier(value);
             cur->state = -1;
             cur->value = -1;
             func_80255ED8_de(&pool->playing, cur);

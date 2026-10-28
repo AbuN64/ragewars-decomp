@@ -71,5 +71,5 @@ typedef struct MenuPakConfirmProfileOrDeleteNote MenuPakConfirmProfileOrDeleteNo
 struct PakRecord;
 typedef struct PakRecord PakRecord;
 
-extern int Note_AllocateRenderBuffers(struct RecordRecAt1C * arg0);
+extern int Note_AllocateRenderBuffers(struct RecordRecAt1C * record);
 #endif

@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 struct StateRecAt34;
 
-extern void func_8025E19C_de(s32 arg0);
+extern void SoundElement_StopAudioByKey(s32 matchingKey);
 
 
 struct ObjectState40;
@@ -27,11 +27,11 @@ struct ObjectState40 {
     f32 targetGain; /* 0x40 */
 };
 
-extern void func_8025E174_de(s32 arg0);
+extern void SoundElement_StopSoundsByIdentifier(s32 soundId);
 
 struct IntegerState2C_2;
 
-extern void func_8025E23C_de();
+extern void SoundElement_UpdateContext(void);
 
 
 extern float D_800C9108;
@@ -54,7 +54,7 @@ typedef struct IntegerState2C_2 IntegerState2C_2;
 
 
 
-extern void func_8025DE30_de();
+extern void SoundElement_InitializeContext(void);
 
 
 
@@ -71,13 +71,13 @@ extern float D_800C4020_de;
 extern float D_800C4024_de;
 
 
-extern int func_8025E04C_de(int arg0);
+extern int SoundElement_PlayFlatInstrument(int index);
 
 
 
-extern void func_8025E150_de(void);
+extern void SoundElement_StopDialog(void);
 
-extern void func_8025E1EC_de(s32 arg0);
+extern void SoundElement_StopAudioByMask(s32 matchingFlags);
 
 struct ALWaveTable_s;
 extern s32 alLoadParam(void *, s32, struct ALWaveTable_s *);

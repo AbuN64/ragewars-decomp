@@ -3,9 +3,9 @@
 #include "TYPES.H"
 #include "RESMGR/E_SMEM.H"
 #include "COMMON/OBJRECAT3CV2.H"
-#include "RESMGR/802A23A4_6.H"
+#include "RESMGR/FRAME_HEAP_LIFETIME.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "RESMGR/802A23A4_7.H"
+#include "RESMGR/FRAME_HEAP_MARKS.H"
 #include "include_asm.h"
 
 /* Sets one heap usage stat {current, lowest, highest}: current = value clamped to +-1e8, then widens the range. */
@@ -143,7 +143,7 @@ s32 ESmem_AllocateFrameHeapHigh(s32 arg0) {
     return result;
 }
 
-extern s32 Cache_AllocateMemory(s32 arg0);
+extern s32 Cache_AllocateMemory(s32 size);
 
 
 void ESmem_InitializeFrameHeaps(s32 arg0) {

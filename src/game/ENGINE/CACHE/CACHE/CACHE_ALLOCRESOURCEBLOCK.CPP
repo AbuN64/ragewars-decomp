@@ -14,7 +14,7 @@ extern struct Shape_typemap_165 *Cache_AcquireResourceNodeWithEviction(s32, u32)
 
 extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
-extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
 
 /** Read the global word at VRAM 0x8010517C. */
 
@@ -124,7 +124,7 @@ void Cache_SetResourceActivityState(unsigned int value) {
     D_8010117C = value;
 }
 
-int func_8025477C_de(void) {
+int Cache_GetResourceActivityState(void) {
     extern unsigned int D_8010117C;
     return D_8010117C;
 }

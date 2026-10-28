@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/UNUSED.H"
-#include "AUDIO/8025A3EC.H"
+#include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON.H"
@@ -17,8 +17,8 @@
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
 int Cinema_IsSequenceActive(void);
-f32 Graphu64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
-void alSndpSetVol(void *arg0, s16 arg1);
+f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate);
+void alSndpSetVol(void *soundPlayer, s16 eventVolume);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 #include "AUDIO/VOLUME_MIX.H"
 

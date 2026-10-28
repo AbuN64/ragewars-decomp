@@ -32,7 +32,7 @@ static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32
     node->z.value = c;
 }
 
-extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 
 extern f32 Gu_Sqrtf(f32);
 

@@ -1,6 +1,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VIEWFLAGS.H"
-#include "CAMERA/80233920.H"
+#include "CAMERA/FADE_AND_COLOR_BLEND_VIEWS.H"
 #include "TYPES.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_800E28D4.H"
@@ -131,7 +131,7 @@ struct FlareSource {
 typedef struct FlareSourceList { FlareSource *first; } FlareSourceList;
 extern FlareSourceList D_8012D4E4;
 extern void Onscrn_SetupSpriteMode(s32);
-extern void Geometry_SetModePreset(s32);
+extern s32 Geometry_SetModePreset(s32);
 extern void Graphu64_ProjectPoint(void *, void *, CVector3 *);
 
 /* Same body as Gsky_ProjectToScreen: project a world point through the view matrix to screen pixels. */

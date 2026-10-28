@@ -6,9 +6,9 @@
 #include "sdk/libgultra/__POSTNEXTSEQEVENT.H"
 #include "sdk/libgultra/alunlink.h"
 
-extern void alSynSetPriority(void *arg0, void *arg1, s16 arg2);
+extern void alSynSetPriority(void *unused, void *object, s16 value);
 
-extern void alSynSetVol(void *arg0, void *arg1, s16 arg2, s32 arg3);
+extern void alSynSetVol(void *synth, void *voice, s16 targetVolume, s32 rampTime);
 
 extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
@@ -17,7 +17,7 @@ static inline ALVoice_s *event_voice(ALEvent *event) {
     return (ALVoice_s *)event->msg.note.voice;
 }
 
-extern s32 __alSeqNextDelta(void *arg0, s32 *arg1);
+extern s32 __alSeqNextDelta(void *sequence, s32 *deltaTicks);
 
 extern s32 alSeqGetTicks(void *arg0);
 
@@ -132,14 +132,14 @@ void __postNextSeqEvent(void *seqPlayer) {
     }
 }
 
-extern void func_802B1E50_de(void *arg0, f32 arg1);
+extern void func_802B1E50_de(void *player, f32 tempo);
 
-void __handleMetaMsg(void *arg0, void *arg1) {
+void __handleMetaMsg(void *player, void *arg1) {
     u8 *p = (u8 *)arg1;
     int pad[4];
 
     (void)pad;
     if (p[8] == 0xFF && p[9] == 0x51) {
-        func_802B1E50_de(arg0, (f32)((p[0xB] << 0x10) | (p[0xC] << 8) | p[0xD]));
+        func_802B1E50_de(player, (f32)((p[0xB] << 0x10) | (p[0xC] << 8) | p[0xD]));
     }
 }

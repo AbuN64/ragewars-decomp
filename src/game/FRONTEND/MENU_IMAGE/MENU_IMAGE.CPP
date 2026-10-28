@@ -61,7 +61,7 @@ extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget 
 
 
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 /* Handles an input event for the 0x4D0-byte entry of D_800E59E0 the low half of the third argument
    selects: when that entry is active, the high half is 3 and the fourth argument is zero, it calls

@@ -3,7 +3,7 @@
 #include "COMMON/OWNERRECAT8V2.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "ENGINE/VIRTUAL/VHANDLER_5.H"
-extern int Vhandler_RecycleTlbSlot();
+extern int Vhandler_RecycleTlbSlot(void);
 extern void Vhandler_HandleResourcePageRequest(void);
 extern void Vhandler_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out);
 extern void Vhandler_UnmapResourcePage(ResourcePageMapping *mapping);

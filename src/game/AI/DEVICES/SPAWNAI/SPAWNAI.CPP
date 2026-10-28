@@ -25,22 +25,22 @@
 
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 
-extern void *Scene_GetActorDefinition(void *arg0, s32 arg1);
+extern void *Scene_GetActorDefinition(void *world, s32 index);
 
-extern int Scene_GetModelIdAtIndex(void *arg0, int arg1);
+extern int Scene_GetModelIdAtIndex(void *world, int modelIndex);
 
 struct Context;
-extern s32 func_8022A8F0_de(struct Context *arg0);
+extern s32 func_8022A8F0_de(struct Context *context);
 
-extern int Playerai_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *world);
 
 extern void Lists_ClearWeightedTable(WeightedTable *object);
 
 extern SceneEffect *Animpool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 
-extern s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
+extern s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind, CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags);
 
-extern void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10);
+extern void *SetN64_SpawnModelEffect(char *container, s32 *referenceCounter, s32 arg2, CVector3 rotation, CVector3 position, s32 effectOwner, f32 initialLifetime);
 
 extern char D_8011D8D0[];
 

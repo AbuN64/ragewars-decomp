@@ -36,7 +36,7 @@ char *Gfx_GetDiagnosticMessage(void) {
 
 /* 800E10F0.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_804142AC_E1CF0[13] =
+const char s_gfxDebugLocationFormat[13] =
     "[ %s : %d ]\012\000";
 #endif
 
@@ -49,7 +49,7 @@ const unsigned char D_blob_e943468e2786e751deb0[13] = {
 
 /* 800E1100.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_804142AC_E1D00[8] =
+const char s_gfxDebugUnknownText[8] =
     "UNKNOWN\000";
 #endif
 
@@ -73,5 +73,5 @@ unsigned int rodata_unresolved_800DD0D8[4] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_804142AC_E1D00_us_rev1.c */
-const char D_blob_4b08887938ba46bf6f70[8] = "UNKNOWN";
+const char s_gfxDebugUnknownTextRev1[8] = "UNKNOWN";
 #endif

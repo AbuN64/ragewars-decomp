@@ -6,7 +6,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "SYSTEM/802609CC_3.H"
+#include "SYSTEM/BITARRAY_SAMPLE_EVALUATION.H"
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SYSTEM/BITARRAY.H"
@@ -40,9 +40,9 @@ extern s32 D_8010AC74;
 
 /* Seeks the containing frame in a variable-length stream and reloads it when the frame changes. */
 
-extern void Polytrak2_DecodeCubicSegment(Curve *arg0);
+extern void Polytrak2_DecodeCubicSegment(Curve *compressedCurve);
 
-extern u32 Polytrak2_ReadBitsAtAddress(s32,s32);
+extern int Polytrak2_ReadBitsAtAddress(s32, unsigned int);
 
 extern f32 D_800C41A8_de[2];
 
@@ -145,7 +145,7 @@ int func_8026140C_de(char *object) {
     return stream->unkC;
 }
 
-void Bitarray_SeekCurveSegment(Stream *arg0, u32 sampleIndex) {
+void Bitarray_SeekCurveSegment(Stream *compressedCurve, u32 sampleIndex) {
     u32 segmentSampleCounts[64];
     s32 temp_a0;
     s32 temp_lo;
@@ -159,13 +159,13 @@ void Bitarray_SeekCurveSegment(Stream *arg0, u32 sampleIndex) {
     u32 segmentEndSample;
     u32 segmentStartSample;
 
-    temp_s6 = (arg0->unk0 * 4) + 6;
-    activeSegmentStart = arg0->unk24;
-    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + arg0->unk20) {
-        segmentIndex = arg0->unk28;
+    temp_s6 = (compressedCurve->unk0 * 4) + 6;
+    activeSegmentStart = compressedCurve->unk24;
+    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + compressedCurve->unk20) {
+        segmentIndex = compressedCurve->unk28;
         segmentStartSample = activeSegmentStart;
-        segmentEndSample = segmentStartSample + arg0->unk20;
-        segmentBitCursor = arg0->unkC;
+        segmentEndSample = segmentStartSample + compressedCurve->unk20;
+        segmentBitCursor = compressedCurve->unkC;
         firstSegmentBitAddress=segmentBitCursor;
         segmentBitCursor += segmentIndex * temp_s6;
         if(sampleIndex < activeSegmentStart) {
@@ -175,8 +175,8 @@ void Bitarray_SeekCurveSegment(Stream *arg0, u32 sampleIndex) {
         for (;;) {
             segmentBitCursor += temp_s6;
             if(sampleIndex>=segmentStartSample && sampleIndex<segmentEndSample) {
-                if(segmentIndex!=arg0->unk28) {
-                    arg0->unk24=segmentStartSample;arg0->unk28=segmentIndex;Polytrak2_DecodeCubicSegment(arg0);
+                if(segmentIndex!=compressedCurve->unk28) {
+                    compressedCurve->unk24=segmentStartSample;compressedCurve->unk28=segmentIndex;Polytrak2_DecodeCubicSegment(compressedCurve);
                 }
                 break;
             }

@@ -37,7 +37,7 @@ void StreamBufferAppend(StreamBuffer *streamBuffer, const void *sourceData, s32 
 extern struct Record *Cache_AllocateMemory(s32 size);
 
 
-s32 Cache_DrainAndCompactResources(s32);
+void Cache_DrainAndCompactResources(s32);
 
 s32 func_80255228_de(s32 *);
 

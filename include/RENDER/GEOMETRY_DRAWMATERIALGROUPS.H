@@ -1,5 +1,5 @@
 #ifndef RENDER_GEOMETRY_DRAWMATERIALGROUPS_H
 #define RENDER_GEOMETRY_DRAWMATERIALGROUPS_H
 #include "COMMON/OBJECTSTATE18.H"
-extern void Geometry_DrawMaterialGroups();
+extern void Geometry_DrawMaterialGroups(void);
 #endif

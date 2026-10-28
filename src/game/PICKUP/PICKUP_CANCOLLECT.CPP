@@ -7,7 +7,7 @@
 #include "COMMON/EXTERNS_6.H"
 
 /* Returns whether a player actor can use the item picked up through InstHdr_GetActorType: never for non-players or disabled actors, always during a team round when the model says so, and otherwise by the item's table: a g_pickupPowerupDefinitions power-up when the actor's team matches a D_800CE474 entry or its slot is free while not both states 3 and 7 are in use, a g_pickupWeaponDefinitions weapon when on those teams or below the level from func_8022ACB8_de, a g_pickupHealthDefinitions item when func_8022AC00_de exceeds the actor's count at 0x5E4, any g_pickupAmmoDefinitions item, and a g_pickupSpecialDefinitions item unless it is item 0xBD6. */
-extern s32 InstHdr_GetActorType(s32 arg0);
+extern s32 InstHdr_GetActorType(s32 prop);
 extern s32 Player_GetAmmoCapacity(ActorPickupCanCollect *actor, s16 index, s32 arg2);
 extern s32 Player_GetMaxHealth(ActorPickupCanCollect *actor, s32 id);
 static inline EntryRecAtE *find_entry(char *table, s32 count, s32 size, s32 id) {
@@ -218,7 +218,7 @@ s32 Pickup_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
         if (label != 0) Camera_PostScreenMessage(&D_80145088, player->ui, label[MENU_LANGUAGE]);
     }
     if (sound) SoundElement_PlaySoundAtPosition(sound, player->position, 0, -1);
-    if (event) func_8025E11C_de(event);
+    if (event) SoundElement_PlayDialogGroup(event);
     if (!changed) Player_AddAmmo(player, pickup->arg1, pickup->arg2);
     return 1;
 }

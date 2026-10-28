@@ -1,7 +1,7 @@
 #include "sdk/OBJECTSTATE2.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/OBJECTSTATE10_2.H"
+#include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "sdk/libgultra_inferred/cseq.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/TRIPLE.H"
@@ -34,7 +34,7 @@ extern s32 alEvtqNextEvent(void *, s16 *);
 
 extern void alEvtqFlushType(void *, s16);
 
-extern void alSynStopVoice(struct Shape_typemap_71 *, void *);
+extern void alSynStopVoice(struct AudioSynthParamSamplesView *, void *);
 
 extern void alSynFreeVoice(void *, void *);
 
@@ -51,8 +51,8 @@ extern void __seqpReleaseVoice(void *, void *, s32);
 
 extern void __initFromBank(void *, void *);
 
-void alCSPNew(void *arg0, InitParams *config) {
-    ALSeqPlayer *obj = arg0;
+void alCSPNew(void *sequencePlayer, InitParams *config) {
+    ALSeqPlayer *obj = sequencePlayer;
     InitParams *params = config;
     s32 context = params->context;
     s32 global = (s32)D_800D4070;
@@ -265,13 +265,13 @@ extern void *__mapVoice(void *, u8, u8, u8);
 
 extern ALVoiceState *__lookupVoice(ALSeqPlayer *, u8, u8);
 
-extern s32 alSynAllocVoice(ALSynthalSynAllocVoice *, ALVoice_s *, ALVoiceConfig_s *);
+extern s32 alSynAllocVoice(AudioSynthVoiceAllocatorView *, ALVoice_s *, ALVoiceConfig_s *);
 
 extern s32 __vsPan(void *, void *);
 
 
 
-extern void alSynStartVoiceParams(ALSynthalSynAllocVoice *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
+extern void alSynStartVoiceParams(AudioSynthVoiceAllocatorView *, ALVoice_s *, void *, f32, s16, u8, u8, s32);
 
 
 
@@ -284,7 +284,7 @@ extern void __setInstChanState(void *, void *, s32);
 
 /** Dispatch the current object message and forward any resulting value. */
 void __CSPHandleNextSeqEvent(void *rawPlayer) {
-    struct ALSeqPlayer *arg0 = rawPlayer;
+    struct ALSeqPlayer *sequencePlayer = rawPlayer;
     ALEvent message;
     ALEvent output;
     s32 value1;
@@ -292,7 +292,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
     s32 value3;
     ALCSeq_s *sequence;
     s32 value;
-    sequence = arg0->target;
+    sequence = sequencePlayer->target;
     if (sequence != 0) {
         alCSeqNextEvent(sequence, &message);
         {
@@ -325,9 +325,9 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
     }
     do {
         sw_message_0:
-            __CSPHandleMIDIMsg(arg0, &message);
-            if (arg0->state == 1) {
-                sequence = arg0->target;
+            __CSPHandleMIDIMsg(sequencePlayer, &message);
+            if (sequencePlayer->state == 1) {
+                sequence = sequencePlayer->target;
                 if (sequence != 0 && (__alCSeqNextDelta(sequence, &value1) & 0xFF)) {
                     output.type = 0;
                     value = value1;
@@ -336,9 +336,9 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
             }
             break;
         sw_message_2:
-            __CSPHandleMetaMsg(arg0, &message);
-            if (arg0->state == 1) {
-                sequence = arg0->target;
+            __CSPHandleMetaMsg(sequencePlayer, &message);
+            if (sequencePlayer->state == 1) {
+                sequence = sequencePlayer->target;
                 if (sequence != 0 && (__alCSeqNextDelta(sequence, &value2) & 0xFF)) {
                     output.type = 0;
                     value = value2;
@@ -347,21 +347,21 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
             }
             break;
         sw_message_3:
-            arg0->state = 2;
+            sequencePlayer->state = 2;
             message.type = 0x10;
-            alEvtqPostEvent(&arg0->evtq, &message, 0x7FFFFFFF);
+            alEvtqPostEvent(&sequencePlayer->evtq, &message, 0x7FFFFFFF);
             break;
         sw_message_17:
         sw_message_18:
         sw_message_19:
-            if (arg0->state == 1) {
-                sequence = arg0->target;
+            if (sequencePlayer->state == 1) {
+                sequence = sequencePlayer->target;
                 if (sequence != 0 && (__alCSeqNextDelta(sequence, &value3) & 0xFF)) {
                     output.type = 0;
                     value = value3;
 send_value:
-                    alEvtqPostEvent(&arg0->evtq, &output,
-                                  value * arg0->uspt);
+                    alEvtqPostEvent(&sequencePlayer->evtq, &output,
+                                  value * sequencePlayer->uspt);
                 }
             }
             break;
@@ -710,11 +710,11 @@ done:
 
 void __setUsptFromTempo(void *arg0, f32 arg1) {
     ALSeqPlayer *player = arg0;
-    ALCSeq_s *temp_v0;
+    ALCSeq_s *targetValue;
 
-    temp_v0 = player->target;
-    if (temp_v0 != 0) {
-        player->uspt = (s32)(arg1 * temp_v0->qnpt);
+    targetValue = player->target;
+    if (targetValue != 0) {
+        player->uspt = (s32)(arg1 * targetValue->qnpt);
         return;
     }
     player->uspt = 0x1E8;

@@ -64,7 +64,7 @@ void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
 }
 
 
-extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
+extern void Particle_DrawRenderList(s32 world, s32 view);
 
 
 void Scene_DrawWorldParticles(s32 world, s32 view) {
@@ -83,14 +83,14 @@ void Scene_DrawWorldParticles(s32 world, s32 view) {
     Geometry_FlushModelBatch();
 }
 
-s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1)
+s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 arg1)
 {
   s32 count;
   s32 i;
   u16 *ptr;
   void *base;
   s32 masked;
-  base = arg0->modelIds;
+  base = world->modelIds;
   count = ((struct TableRecAt8 *)(base))->count;
   ptr = &((struct TableRecAt8 *)(base))->entries[0];
   i = 0;
@@ -183,7 +183,7 @@ s32 Scene_GetModelSectionTwoRecord(void *world, s32 arg1) {
     return base + (arg1 << 5);
 }
 
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 
 
 

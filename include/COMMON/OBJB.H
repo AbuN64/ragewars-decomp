@@ -250,7 +250,7 @@ typedef union CollisionBuildTriangle { struct {
     s32 mask;
 } fields; CGameRegion canonical; s32 words[8]; } CollisionBuildTriangle;
 typedef Packed CollisionBuildFace;
-extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
+extern void SetN64_TransposeRecords(void *src, void *dst, s32 copyBack);
 
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 g_spawnReferenceFloorPolygon;

@@ -74,7 +74,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-extern s32 Playerai_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Playerai_GetWeaponAmmo(void *actor, s16 weaponId);
 
 /* Advances a player's second charging action: when the trigger is released (as in Weaponai_UpdateSpinAndRepeatCue) or the
  * cooldown is past D_800C8008, it switches to action 2, runs func_8022AF40_de and func_8022B00C_de, plays sound
@@ -159,21 +159,21 @@ void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *f
     }
 }
 
-void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
+void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *actor, void *stateController) {
     s16 temp_a1;
     s32 temp_v1;
     void *value;
 
-    value = arg0->value;
+    value = actor->value;
     if (!(((struct MeasuredRecAt6AC *)(value))->value & 0x2000)) {
         temp_a1 = ((struct MeasuredRecAt62EV1 *)(value))->value;
         if (temp_a1 != 0) {
             if (temp_a1 == 2) {
-                temp_v1 = ((struct MeasuredRecAt13CV1 *)(arg1))->value;
+                temp_v1 = ((struct MeasuredRecAt13CV1 *)(stateController))->value;
                 if (temp_v1 == 1) {
-                    Actor_RequestActorState(arg0, arg1, 5);
+                    Actor_RequestActorState(actor, stateController, 5);
                 } else if (temp_v1 == temp_a1) {
-                    Actor_RequestActorState(arg0, arg1, 9);
+                    Actor_RequestActorState(actor, stateController, 9);
                 } else {
                     goto check_height;
                 }
@@ -182,18 +182,18 @@ void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg
             }
         } else {
 check_height:
-            if (!(((struct MeasuredRecAt40 *)(arg1))->value > D_800C2F14_de)) {
-                Actor_RequestActorState(arg0, arg1, 9);
+            if (!(((struct MeasuredRecAt40 *)(stateController))->value > D_800C2F14_de)) {
+                Actor_RequestActorState(actor, stateController, 9);
             } else {
-                Actor_RequestActorState(arg0, arg1, 5);
+                Actor_RequestActorState(actor, stateController, 5);
             }
         }
         goto done;
 check_state:
         if (Playerai_GetWeaponAmmo(value, temp_a1) == 1) {
-            Actor_RequestActorState(arg0, arg1, 7);
+            Actor_RequestActorState(actor, stateController, 7);
         } else {
-            Actor_RequestActorState(arg0, arg1, 5);
+            Actor_RequestActorState(actor, stateController, 5);
         }
 done:
         ;

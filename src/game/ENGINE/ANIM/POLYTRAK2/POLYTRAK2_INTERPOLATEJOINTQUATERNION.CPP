@@ -11,7 +11,7 @@
 
 extern void Graphu64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
 
-extern void Graphu64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void Graphu64_InterpolateQuaternionArc(void *out, s32 amount, void *arg2, void *arg3);
 
 /** Return the first word of the object referenced at offset 0x10. */
 void *Polytrak2_GetResidentResource(void *object) {

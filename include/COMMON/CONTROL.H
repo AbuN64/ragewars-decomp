@@ -21,7 +21,7 @@ struct ScreenScenarioSetupSelectPreviousCatalogueCategory {
     s32 word464;
 };
 
-extern void ScenarioSetup_ClearFlagBits();
+extern void ScenarioSetup_ClearFlagBits(void);
 
 struct Label;
 
@@ -113,7 +113,7 @@ struct ScreenScenarioSetupRefreshSelectedArenaLabel {
     void *widgetE;
 };
 
-extern void ScenarioSetup_ResetSelectionIndicators();
+extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 struct MenuRenderFill;
 struct MenuRenderFill {

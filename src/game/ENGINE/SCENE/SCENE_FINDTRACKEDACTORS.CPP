@@ -24,11 +24,11 @@
 
 /* SCENE_14.CPP */
 
-extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 
-extern s32 Cache_RequestWordCountedResourcePinned(s32 arg0, s32 *arg1, s32 arg2, void *arg3);
+extern s32 Cache_RequestWordCountedResourcePinned(s32 arg0, s32 *handle, s32 tempv0, void *loadTag);
 
-extern void **Cache_RequestPackSection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
+extern void **Cache_RequestPackSection(s32 arg0, s32 handle, s32 sectionSelector, s32 tempv0, s32 world, s32 resourceTag, void *loadTag);
 
 
 
@@ -38,7 +38,7 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern s32 D_00285160;
 
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
 
 s32 SetN64_CollectVisibleEffectNodes(s32, s32);
 
@@ -343,7 +343,7 @@ unsigned int rodata_unresolved_800CD64C[3] = {
 #endif
 
 /* 8028B64C_9.CPP */
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 
 void Scene_ReleaseCachedLevelData(Shared_World *world) {
     void *handle;
@@ -505,10 +505,10 @@ s32 Scene_TestTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2) {
 
 /* world_actorscan.CPP */
 s32 Scene_GetTriggerCounterAddress(Shared_World *world, s32 arg1) {
-    void *temp_v0;
-    temp_v0 = SetN64_GetPackSection(world->bitSections, 1);
-    SetN64_GetPackSection(temp_v0, 0);
-    return SetN64_GetPackSection(temp_v0, 1) + arg1;
+    void *packSectionResult;
+    packSectionResult = SetN64_GetPackSection(world->bitSections, 1);
+    SetN64_GetPackSection(packSectionResult, 0);
+    return SetN64_GetPackSection(packSectionResult, 1) + arg1;
 }
 
 void Scene_SwapDistanceSortEntries(WorldSortEntry *arg0, WorldSortEntry *arg1) {

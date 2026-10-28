@@ -18,10 +18,10 @@
 /* 802A0888_6.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 
-u8 *XStdio_FormatScratchBuffer(u8 *arg0, ...) {
+u8 *XStdio_FormatScratchBuffer(u8 *fmt0, ...) {
     va_list args;
-    va_start(args, arg0);
-    D_800CD918 = Gfx_FormatArgumentList((u8 *)&D_8014D0D0, arg0, args);
+    va_start(args, fmt0);
+    D_800CD918 = Gfx_FormatArgumentList((u8 *)&D_8014D0D0, fmt0, args);
     va_end(args);
     return (u8 *)&D_8014D0D0;
 }
@@ -42,22 +42,22 @@ int *XStdio_FormatGermanScratchBuffer(int format, ...) {
 
 #if !(defined(VERSION_US))
 
-s32 XStdio_PrintText(s32 arg0, ...) {
+s32 XStdio_PrintText(s32 fmt0, ...) {
     char *args;
 
-    args = __builtin_next_arg(arg0);
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg0, (s32) args);
+    args = __builtin_next_arg(fmt0);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, (s32) args);
     if (D_800CD91C != 0) {
         ((s32 (*)(s32 *)) D_800CD91C)(&D_8014D0D0);
     }
     return D_800CD918;
 }
 
-s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 arg2, ...) {
+s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 fmt0, ...) {
     char *args;
 
-    args = __builtin_next_arg(arg2);
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg2, (s32) args);
+    args = __builtin_next_arg(fmt0);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, (s32) args);
     ((s32 (*)(s32 *, s32, s32)) D_800CD920_de)(&D_8014D0D0, arg0, arg1);
     return D_800CD918;
 }
@@ -119,12 +119,12 @@ extern FuncPtr D_800CD928_de;
 extern ResourceReadCallback D_800CD92C_de;
 
 /** Pass the variadic tail address to the formatter and retain its result. */
-s32 XStdio_FormatBuffer(void *goal, s32 arg1, ...) {
+s32 XStdio_FormatBuffer(void *goal, s32 fmt0, ...) {
     s32 result;
     char *args;
 
-    args = __builtin_next_arg(arg1);
-    result = Gfx_FormatArgumentList(goal, arg1, (s32)args);
+    args = __builtin_next_arg(fmt0);
+    result = Gfx_FormatArgumentList(goal, fmt0, (s32)args);
     D_800CD918 = result;
     return result;
 }
@@ -265,8 +265,8 @@ int func_802A1004_de(void) {
     return 0;
 }
 
-s32 *XStdio_FormatScratchArgumentList(s32 arg0, s32 arg1) {
-    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg0, arg1);
+s32 *XStdio_FormatScratchArgumentList(s32 fmt0, s32 arg1) {
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, fmt0, arg1);
     return &D_8014D0D0;
 }
 

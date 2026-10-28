@@ -2,7 +2,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
 

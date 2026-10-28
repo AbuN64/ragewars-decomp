@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "TEXTURE/80256220.H"
+#include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "sdk/libgultra/alunlink.h"
@@ -21,7 +21,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LISTNODE.H"
 #include "SYSTEM/DEFS.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/SELF.H"
 
@@ -483,7 +483,7 @@ extern void Audio_SetVoicePositionTracking(void *, CVector3 *, s32);
 extern void Audio_InitializeVoiceParameters(void *, Item57BD4 *, s32);
 
 s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
-                  s32 voiceUserData, s32 arg5, s32 trackedPosition) {
+                  s32 voiceUserData, s32 extra, s32 trackedPosition) {
     void *node;
 
     ((ContextRecAt2BC0 *)(context))->field2B98 = Gsky_FindNearestCamera(&D_80145088, position);
@@ -502,7 +502,7 @@ s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
         }
     }
     if (soundRecord->field2 != 0) {
-        return AudioWorld_QueuePrioritizedSound(&((ContextRecAt2BC0 *)(context))->view[0], soundRecord, position, playbackValue, arg5);
+        return AudioWorld_QueuePrioritizedSound(&((ContextRecAt2BC0 *)(context))->view[0], soundRecord, position, playbackValue, extra);
     }
     if (soundRecord->flags & 0x40) {
         Audio_ReleaseMatchingExclusiveVoice(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound, soundRecord->field0);
@@ -513,7 +513,7 @@ s32 Sound_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *posi
     }
     Audio_SetVoicePositionTracking(node, position, trackedPosition);
     Audio_SetVoiceTrackId(node, ((ContextRecAt2BC0 *)(context))->selectedSound);
-    Audio_InitializeVoiceParameters(node, soundRecord, arg5);
+    Audio_InitializeVoiceParameters(node, soundRecord, extra);
 
     {
         char *queue = &((ContextRecAt2BC0 *)(context))->lock;

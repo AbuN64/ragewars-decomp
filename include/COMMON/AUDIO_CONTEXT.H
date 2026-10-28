@@ -63,7 +63,7 @@ struct ContextRecAt2BC0 {
     f32 alpha;
     char dialog[1];
 };
-/* The game's audio context: func_8025DE30_de initialises it through Sound_InitializeContext. */
+/* The game's audio context: SoundElement_InitializeContext initialises it through Sound_InitializeContext. */
 extern struct ContextRecAt2BC0 D_8010C080;
 
 #endif

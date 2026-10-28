@@ -3,7 +3,7 @@
 #include "COMMON/OBJRECAT26DD8.H"
 #include "RENDER/802944E8.H"
 #include "TYPES.H"
-#include "RENDER/802944E8_10.H"
+#include "RENDER/RESIDENT_TEXTURE_MENU_VIEWS.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_8010EC90.H"
 #include "COMMON/RESIDENTSTATE.H"
@@ -12,23 +12,23 @@
 
 
 s32 Cinema_IsSequenceInWindow();                                /* extern */
-s32 Cinema_GetPlaybackPauseState();                                /* extern */
-s32 Cinema_GetSequenceRequest();                                /* extern */
+unsigned int Cinema_GetPlaybackPauseState(void);                                /* extern */
+s32 Cinema_GetSequenceRequest(void);                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
 s32 Menu_CountLiveNodes(void *);                             
 
 
-extern func_80294BB0_S1 D_8014561C;
+extern SequencePromptStateView D_8014561C;
 
-s32 Simppool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0) {
+s32 Simppool_CheckSequencePromptRequest(SequencePromptRequestView *arg0) {
     s32 var_v0;
     Prompt *prompt;
 
     if ((Menu_CountLiveNodes(&D_8014561C) == 0) && (Cinema_IsSequenceInWindow() != 0)) {
         if (Cinema_GetSequenceRequest() == 0x78) {
-            prompt = &D_8014561C.unk1284;
+            prompt = &D_8014561C.prompt;
             if (prompt->unk88 == 0) {
-                if (arg0->unk26DD4 == 0) {
+                if (arg0->suppressPrompt == 0) {
                     prompt->unk88 = 1;
                     func_804037D4_de(prompt);
                 }

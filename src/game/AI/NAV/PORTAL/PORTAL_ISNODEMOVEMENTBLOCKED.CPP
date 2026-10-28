@@ -14,7 +14,7 @@
 extern struct {s32 *unk0;} D_8013B364;
 
 
-extern void Graphu64_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
+extern void Graphu64_SubtractVectors(CVector3 *out, void *leftVector, void *rightVector);
 
 /** Return the index of the link joining two nodes, accepting reversed links of two-way types, or -1. */
 

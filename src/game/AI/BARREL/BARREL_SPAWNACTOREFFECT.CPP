@@ -119,7 +119,7 @@ void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBa
 }
 
 /* 80213ED4_9.CPP */
-extern void Graphu64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector);
 extern f32 Gu_Sqrtf(f32);
 
 void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, CAIMovementInfo *result) {

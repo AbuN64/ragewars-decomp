@@ -1,10 +1,10 @@
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E28D4.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
-#include "GFX/802A8A94.H"
+#include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
 #include "abi.h"
 #include "gbi.h"
 #include "COMMON/GFX.H"
@@ -130,11 +130,11 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
 
 /* Draws a signed integer of up to four digits with the font sprite set from Scene_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through OnScreen_DrawSpriteResource when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
-extern s32 Scene_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern s32 Scene_StartWorldEffect(void *world, s32 arg1, s32 flags, s32 extra);
 
-extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern void Text_DrawTileGrid(s32 handle, s32 index, s16 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled);
 
-extern void Geometry_SetCombineMode(s32 arg0);
+extern void Geometry_SetCombineMode(u32 mode);
 
 extern s32 Geometry_SetModePreset(s32);
 

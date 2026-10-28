@@ -3,7 +3,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"

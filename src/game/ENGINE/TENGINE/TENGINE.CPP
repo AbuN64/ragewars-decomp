@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "include_asm.h"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "RENDER/802944E8_10.H"
+#include "RENDER/RESIDENT_TEXTURE_MENU_VIEWS.H"
 #include "ENGINE/TENGINE.H"
 
 #if defined(VERSION_US_REV1)
@@ -91,8 +91,8 @@ void Tengine_LoadSelectedTexture(void) {
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-#include "COMMON/EXTERNS_9.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/TEXTURE_REQUEST.H"
 #include "COMMON/CHANNEL.H"
 

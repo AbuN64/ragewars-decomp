@@ -34,7 +34,7 @@ extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
 
 
 
-void Playerai_EndRound(void *arg0);
+void Playerai_EndRound(void *roundContext);
 
 /* Sets arg0's unk14 field to the address of D_800D76C8 and returns 0. */
 
@@ -67,7 +67,7 @@ extern void Control_SetProfileMode(PakMenuSlot *, s32);
 
 /** Runs Menu_AdjustValue on a byte in arg1->unk1C->unk5D8[0x83] and writes the result back into that byte. */
 
-extern s32 Menu_AdjustValue(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+extern s32 Menu_AdjustValue(void *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap);
 
 void CMenuProfile_ActivateFirstConfirmingPlayer(void) {
     StatusStep *status;

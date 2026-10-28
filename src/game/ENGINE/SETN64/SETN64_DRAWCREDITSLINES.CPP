@@ -1,6 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT20V1.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "TYPES.H"
 
 /* Draws the scrolling text lines from the current line index, fading each in with alpha sixteen times its distance below the top edge (capped at 255) and spacing lines ten 222ths of the screen height apart until past the bottom; the top edge is a zero-valued local, which keeps 0.0f in one saved register as the cartridge does. */

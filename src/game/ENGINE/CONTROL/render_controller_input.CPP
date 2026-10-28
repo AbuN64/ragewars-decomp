@@ -168,7 +168,7 @@ void Control_TrackControllerPakChanges(void)
     }
 }
 
-extern s32 Rumble_InitPoolNodes(void *arg0, void *arg1, s32 arg2);
+extern s32 Rumble_InitPoolNodes(void *effectPool, void *nodeStorage, s32 nodeCount);
 
 
 

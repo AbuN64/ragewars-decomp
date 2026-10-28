@@ -345,10 +345,10 @@ struct ALVoice_s;
 typedef struct ALVoice_s ALVoice_s;
 
 struct ALVoice_s;
-struct PVoice_s_func_802B3000_de;
+struct AudioAllocatedPhysicalVoiceView;
 struct ALVoice_s {
     ListLink node;
-    struct PVoice_s_func_802B3000_de *pvoice;
+    struct AudioAllocatedPhysicalVoiceView *pvoice;
     void *table;
     void *clientPrivate;
     s16 state;
@@ -357,8 +357,8 @@ struct ALVoice_s {
     s16 unityPitch;
 };
 
-struct ALSynthalSynAllocVoice;
-typedef struct ALSynthalSynAllocVoice ALSynthalSynAllocVoice;
+struct AudioSynthVoiceAllocatorView;
+typedef struct AudioSynthVoiceAllocatorView AudioSynthVoiceAllocatorView;
 
 
 
@@ -509,10 +509,10 @@ union ObjectLinks4_3 {
     char * v1;
 };
 
-struct ObjectStateC_2;
-struct ObjectStateC_2 {
+struct AudioVoicePhysicalLinkView;
+struct AudioVoicePhysicalLinkView {
     char pad0[0x8];
-    ObjectLinks4_3 unk_8;
+    ObjectLinks4_3 pvoice;
 };
 
 struct ALHeap;
@@ -963,8 +963,8 @@ typedef struct MenuRules MenuRules;
 struct Extra;
 typedef struct Extra Extra;
 
-struct ALSynthalSynAllocVoice;
-struct ALSynthalSynAllocVoice {
+struct AudioSynthVoiceAllocatorView;
+struct AudioSynthVoiceAllocatorView {
     void *head;
     ListLink pFreeList;
     ListLink pAllocList;
@@ -1551,10 +1551,10 @@ struct Instance8020CD74 {
     s32 remaining[15];
 };
 
-struct ObjRecAt26DD4;
-typedef struct ObjRecAt26DD4 ObjRecAt26DD4;
+struct SequencePromptRequestView;
+typedef struct SequencePromptRequestView SequencePromptRequestView;
 
-struct ObjRecAt26DD4;
+struct SequencePromptRequestView;
 
 
 struct func_802A2BE0_S1;
@@ -1774,9 +1774,9 @@ struct Request {
 struct ControllerRecAtC7;
 typedef struct ControllerRecAtC7 ControllerRecAtC7;
 
-struct ALFilter_s_func_802B3000_de;
-struct ALFilter_s_func_802B3000_de {
-    struct ALFilter_s_func_802B3000_de *source;
+struct AudioVoiceChannelFilterView;
+struct AudioVoiceChannelFilterView {
+    struct AudioVoiceChannelFilterView *source;
     void *handler;
     ALSetParam setParam;
 };
@@ -1786,12 +1786,12 @@ struct Field_u16_14;
 typedef struct Field_u16_14 Field_u16_14;
 
 
-struct ALFilter_s_func_802B3000_de;
-struct PVoice_s_func_802B3000_de;
-struct PVoice_s_func_802B3000_de {
+struct AudioVoiceChannelFilterView;
+struct AudioAllocatedPhysicalVoiceView;
+struct AudioAllocatedPhysicalVoiceView {
     ListLink node;
     struct ALVoice_s *vvoice;
-    struct ALFilter_s_func_802B3000_de *channelKnob;
+    struct AudioVoiceChannelFilterView *channelKnob;
     char pad10[0xD8 - 0x10];
     s32 offset;
 };
@@ -1980,10 +1980,10 @@ typedef struct Record Record;
 extern float D_80146CB8;
 
 
-struct Shape_typemap_71;
-struct Shape_typemap_71 {
+struct AudioSynthParamSamplesView;
+struct AudioSynthParamSamplesView {
     unsigned char padding_0[28];
-    int field_1C;
+    int paramSamples;
 };
 
 
@@ -2167,8 +2167,8 @@ struct ALVoiceConfig_s {
     u8 unityPitch;
 };
 
-struct IntegerStateDC_2;
-typedef struct IntegerStateDC_2 IntegerStateDC_2;
+struct AudioPhysicalVoiceOffsetView;
+typedef struct AudioPhysicalVoiceOffsetView AudioPhysicalVoiceOffsetView;
 
 
 struct List;
@@ -2445,11 +2445,11 @@ typedef struct ObjRecAtDC ObjRecAtDC;
 
 
 
-struct ALFilter_s_func_802B3000_de;
-typedef struct ALFilter_s_func_802B3000_de ALFilter_s_func_802B3000_de;
+struct AudioVoiceChannelFilterView;
+typedef struct AudioVoiceChannelFilterView AudioVoiceChannelFilterView;
 
-struct ObjectStateC_2;
-typedef struct ObjectStateC_2 ObjectStateC_2;
+struct AudioVoicePhysicalLinkView;
+typedef struct AudioVoicePhysicalLinkView AudioVoicePhysicalLinkView;
 
 
 
@@ -2564,10 +2564,10 @@ struct MenuSettings {
 
 
 
-struct IntegerStateDC_2;
-struct IntegerStateDC_2 {
+struct AudioPhysicalVoiceOffsetView;
+struct AudioPhysicalVoiceOffsetView {
     unsigned char padding[216];
-    s32 state;
+    s32 offset;
 };
 
 

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
-const char D_auto_src_ragewars_resident_strings_C96D4_us_rev1[60] = "CGameObjectInstance__CalculateMatrixStack: anim object info";
+const char s_calculateMatrixStackAnimInfoText[60] = "CGameObjectInstance__CalculateMatrixStack: anim object info";
 
-const char D_auto_src_ragewars_resident_strings_C9710_us_rev1[44] = "CGameObjectInstance__Draw: anim object info";
+const char s_drawAnimObjectInfoText[44] = "CGameObjectInstance__Draw: anim object info";
 
 /* ROM-grounded data: src/rw_pool_8024A1D0_C973C_us_rev1.c */
 const unsigned int D_blob_03a78ff7f33b4e58b857[2] = {

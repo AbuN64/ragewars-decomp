@@ -30,9 +30,9 @@ s32 osContStartReadData(s32 completionQueue) {
     return result;
 }
 
-extern void __osPackRequestData(s32 arg0);
+extern void __osPackRequestData(s32 cmd);
 
-extern void __osContGetInitData(s32 *arg0, s32 arg1);
+extern void __osContGetInitData(s32 *valid, s32 data);
 
 void __osPackResetData(void);
 
@@ -83,7 +83,7 @@ void __osPackReadData(void) {
     *ptr = 0xFE;
 }
 
-s32 osContReset(s32 arg0, s32 controllerStatus) {
+s32 osContReset(s32 queue, s32 controllerStatus) {
     s32 output;
     s32 result;
     u8 *state;
@@ -98,16 +98,16 @@ s32 osContReset(s32 arg0, s32 controllerStatus) {
         __osPackResetData();
         data = &D_8014D470;
         __osSiRawStartDma(1, data);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(queue, 0, 1);
         __osSiRawStartDma(0, data);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(queue, 0, 1);
         __osPackRequestData(sentinel);
         __osSiRawStartDma(1, data);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(queue, 0, 1);
         *state = sentinel;
     }
     result = __osSiRawStartDma(0, &D_8014D470);
-    osRecvMesg(arg0, 0, 1);
+    osRecvMesg(queue, 0, 1);
     __osContGetInitData(&output, controllerStatus);
     __osSiRelAccess();
     return result;
@@ -115,7 +115,7 @@ s32 osContReset(s32 arg0, s32 controllerStatus) {
 
 
 
-extern void osSetTimer(void *arg0, u64 arg1, u64 arg2, void *arg3, void *arg4);
+extern void osSetTimer(void *node, u64 initialDelay, u64 repeatInterval, void *messageQueue, void *message);
 
 
 void __osPackResetData(void) {
@@ -136,7 +136,7 @@ void __osPackResetData(void) {
     *var_v1 = 0xFE;
 }
 
-s32 osContInit(s32 arg0, s32 *valid, s32 arg2) {
+s32 osContInit(s32 queue, s32 *valid, s32 arg2) {
     s32 node[8];
     s32 sp40[6];
     s32 message[2];
@@ -157,9 +157,9 @@ s32 osContInit(s32 arg0, s32 *valid, s32 arg2) {
     D_8014D46C[0] = 4;
     __osPackRequestData(0);
     __osSiRawStartDma(1, &D_8014D470);
-    osRecvMesg(arg0, (s32)message, 1);
+    osRecvMesg(queue, (s32)message, 1);
     result = __osSiRawStartDma(0, &D_8014D470);
-    osRecvMesg(arg0, (s32)message, 1);
+    osRecvMesg(queue, (s32)message, 1);
     __osContGetInitData(valid, arg2);
     D_8014D4B0 = 0;
     __osSiCreateAccessQueue();

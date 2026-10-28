@@ -1,5 +1,5 @@
 #ifndef RENDER_GEOMETRY_GROUPMODELINSTANCES_H
 #define RENDER_GEOMETRY_GROUPMODELINSTANCES_H
 #include "COMMON/OBJECTSTATE18.H"
-extern void Geometry_GroupModelInstances();
+extern void Geometry_GroupModelInstances(void);
 #endif

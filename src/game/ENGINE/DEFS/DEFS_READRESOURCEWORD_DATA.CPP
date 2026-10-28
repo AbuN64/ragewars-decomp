@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80265964_CA078[15] =
+const char s_romLookupTableText[15] =
     "ROMLookupTable\000";
 #endif
 

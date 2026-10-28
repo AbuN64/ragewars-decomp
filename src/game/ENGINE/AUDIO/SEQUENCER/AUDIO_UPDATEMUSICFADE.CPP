@@ -4,9 +4,9 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
-#include "AUDIO/8025D470.H"
+#include "AUDIO/PLAYER_STATE_AND_PARAMETERS.H"
 #include "COMMON/STATERECAT34.H"
-#include "COMMON/OBJECTSTATE10_2.H"
+#include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "AUDIO/AUDIO_UPDATEMUSICFADE.H"
 #include "include_asm.h"
@@ -14,9 +14,9 @@
 /* 8025D470_2.CPP */
 s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
-void alCSPNew(void *arg0, InitParams *arg1);
+void alCSPNew(void *sequencePlayer, InitParams *config);
 
-extern void alCSPStop(s32 arg0);
+extern void alCSPStop(s32 player);
 
 void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD844 *root) {
     struct AudioParamsD844 params;

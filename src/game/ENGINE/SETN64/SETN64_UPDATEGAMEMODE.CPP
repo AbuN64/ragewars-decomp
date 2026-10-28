@@ -4,7 +4,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/80291054.H"
+#include "RENDER/SESSION_HANDLER_AND_RENDER_STATE.H"
 #include "RENDER/802909E0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -34,7 +34,7 @@ void SetN64_SetTransitionTarget(GameSession *object, int value) {
 typedef void (*Handler8029382C)(void *);
 
 
-extern void SetN64_UpdateFrameTiming(void *arg0);
+extern void SetN64_UpdateFrameTiming(void *world);
 
 
 

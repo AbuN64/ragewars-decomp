@@ -57,7 +57,7 @@ extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget 
 
 
 
-extern void Results_SetTrialWeaponRow(s32, s32, s32);
+extern void Results_SetTrialWeaponRow(u32, s32, s32);
 
 /* Rebuilds the item list for the player D_800E4690 selects: clears it through CTrialCatalogue_ShowTrialOptionChildren, looks
    up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
@@ -87,7 +87,7 @@ extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 
 
-extern void Results_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
+extern void Results_SetTrialWeaponRow(u32 arg0, s32 arg1, s32 arg2);
 
 /* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through Results_SetTrialWeaponRow, translated by 0x4C3 and numbered in order. */
 
@@ -97,7 +97,7 @@ extern void Results_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
 
 extern RecordFrontendFillTrialPresetWeaponRows *Scene_GetBlLevelData(void *table, s32 key);
 
-extern void Results_SetTrialWeaponRow(s32 slot, s32 item, s32 arg2);
+extern void Results_SetTrialWeaponRow(u32 slot, s32 item, s32 arg2);
 
 void Results_RefreshTrialSelectionLabel(void) {
     char buffer[0x40];

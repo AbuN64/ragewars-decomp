@@ -20,5 +20,5 @@ extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 
 
 
-extern int func_8025477C_de(void);
+extern int Cache_GetResourceActivityState(void);
 #endif

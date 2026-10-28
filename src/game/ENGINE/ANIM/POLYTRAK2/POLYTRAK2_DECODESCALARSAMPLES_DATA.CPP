@@ -9,41 +9,41 @@
 /* 802609CC.CPP */
 /* Quantizes a float into a range's bit width and writes the value into the packed bit words at an address. */
 
-inline static void write_bits(u32 arg2, u32 arg0, u32 arg1)
+inline static void write_bits(u32 value, u32 bitAddress, u32 bitWidth)
 {
-  u32 temp_a0;
-  s32 temp_v0;
-  s32 temp_v0_2;
-  u32 temp_a1;
-  u32 temp_a2;
-  u32 temp_shift;
-  u32 var_a2;
-  u32 var_a3;
-  u32 var_v1;
+  u32 wordAddress;
+  s32 bitOffset;
+  s32 highWordShift;
+  u32 fieldMask;
+  u32 maskedValue;
+  u32 bitShift;
+  u32 highWordValue;
+  u32 lowWordValue;
+  u32 lowWordMask;
   PackedBitWords *words;
-  temp_a1 = (1 << arg1) - 1;
-  var_v1 = temp_a1;
-  temp_v0 = arg0 & 0x1F;
-  temp_shift = temp_v0;
-  temp_a2 = arg2 & temp_a1;
-  if (temp_v0 == 0)
+  fieldMask = (1 << bitWidth) - 1;
+  lowWordMask = fieldMask;
+  bitOffset = bitAddress & 0x1F;
+  bitShift = bitOffset;
+  maskedValue = value & fieldMask;
+  if (bitOffset == 0)
   {
-    var_a3 = temp_a2;
-    temp_a1 = 0;
-    var_a2 = 0;
+    lowWordValue = maskedValue;
+    fieldMask = 0;
+    highWordValue = 0;
   }
   else
   {
-    var_v1 = temp_a1 << temp_shift;
-    temp_v0_2 = 0x20 - temp_shift;
-    temp_a1 >>= temp_v0_2;
-    var_a3 = temp_a2 << temp_shift;
-    var_a2 = temp_a2 >> temp_v0_2;
+    lowWordMask = fieldMask << bitShift;
+    highWordShift = 0x20 - bitShift;
+    fieldMask >>= highWordShift;
+    lowWordValue = maskedValue << bitShift;
+    highWordValue = maskedValue >> highWordShift;
   }
-  temp_a0 = (arg0 & 0xF0000000) | (((u32) (arg0 & 0x0FFFFFE0)) >> 3);
-  words = (PackedBitWords *) temp_a0;
-  words->low = (words->low & (~var_v1)) | var_a3;
-  words->high = (words->high & (~temp_a1)) | var_a2;
+  wordAddress = (bitAddress & 0xF0000000) | (((u32) (bitAddress & 0x0FFFFFE0)) >> 3);
+  words = (PackedBitWords *) wordAddress;
+  words->low = (words->low & (~lowWordMask)) | lowWordValue;
+  words->high = (words->high & (~fieldMask)) | highWordValue;
 }
 
 /* Decodes element arg1 of a packed bit-field float array into a float scaled into its range. Adapted from Polytrak2_ReadQuantizedFloatAtAddress, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
@@ -116,12 +116,12 @@ f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult ran
 
 void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
 {
-  f32 arg4_2;
+  f32 unscaledValue;
   f32 roundedScaledValue;
   s32 truncatedScaledValue;
   s32 quantizedValue;
-  arg4_2 = sourceValue;
-  roundedScaledValue = (arg4_2 - range.start) / range.delta * (f32) ((1 << range.value) - 1) + 0.5f;
+  unscaledValue = sourceValue;
+  roundedScaledValue = (unscaledValue - range.start) / range.delta * (f32) ((1 << range.value) - 1) + 0.5f;
   if (roundedScaledValue >= 0.0f)
   {
     quantizedValue = (s32) roundedScaledValue;
@@ -188,10 +188,10 @@ f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
+void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
-    array->range = t;
+    array->range = valueRange;
     array->count = elementCount;
 }
 
@@ -200,10 +200,10 @@ f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementInde
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
+void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
-    array->range = t;
+    array->range = valueRange;
     array->count = elementCount;
 }
 
@@ -234,10 +234,10 @@ int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIn
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
+void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
-    array->range = t;
+    array->range = valueRange;
     array->count = elementCount;
 }
 
@@ -268,10 +268,10 @@ int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int eleme
 }
 
 /** Store a scalar word plus a three-word record by value. */
-void Polytrak2_StoreWordAndTriple(void *arg0, int arg1, Triple t) {
-    ObjRecAt4V4 *arg0_record = arg0;
-    arg0_record->unk0 = arg1;
-    arg0_record->unk4 = t;
+void Polytrak2_StoreWordAndTriple(void *destination, int wordValue, Triple tripleValue) {
+    ObjRecAt4V4 *record = destination;
+    record->unk0 = wordValue;
+    record->unk4 = tripleValue;
 }
 
 /* DATA_800C926C.CPP */

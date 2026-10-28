@@ -6,13 +6,13 @@ struct ScreenRectangle;
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECV5.H"
-extern void *func_8022C454_de(void *arg0);
+extern void *func_8022C454_de(void *actorObject);
 
 
 extern float D_800C2D30_de;
 
 struct Shared_ActorView;
-extern int func_8022BEDC_de(struct Shared_ActorView *arg0);
+extern int func_8022BEDC_de(struct Shared_ActorView *actor);
 
 struct Rules_func_8022C110_de;
 typedef struct Rules_func_8022C110_de Rules_func_8022C110_de;
@@ -25,11 +25,11 @@ extern float D_800C2D34_de;
 
 
 
-extern void *func_8022C55C_de(void *arg0, u32 arg1);
+extern void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex);
 
-extern void func_8022C0D0_de(void *arg0);
+extern void func_8022C0D0_de(void *player);
 
-extern void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1);
+extern void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport);
 
 
 struct Rules_func_8022C110_de;
@@ -100,7 +100,7 @@ struct PlayerRecAt1450V2 {
 
 
 struct Player;
-extern void func_8022BC14_de(struct Player *arg0);
+extern void func_8022BC14_de(struct Player *actor);
 
 
 
@@ -111,7 +111,7 @@ extern void func_8022C110_de(PlayerRecAt1450V2 *player);
 extern float D_800C2D2C_de;
 
 
-extern void Player_InitRecordDefaults(void * arg0);
+extern void Player_InitRecordDefaults(void * record);
 
 typedef struct ObjRecAtB8 {
     int unk0;

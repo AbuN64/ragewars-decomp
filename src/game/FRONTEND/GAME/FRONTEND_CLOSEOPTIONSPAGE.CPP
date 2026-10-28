@@ -9,7 +9,7 @@
 extern struct StateFrontendUpdateOptionsPageExit *g_optionsPage;
 extern void MarkMenuEventHandled();
 extern void SmpSlider_SetTransitionMode(void *, s32);
-extern void Menu_CommitOptionsPage();
+extern void Menu_CommitOptionsPage(void);
 
 s32 Frontend_CloseOptionsPage(void) {
     struct StateFrontendUpdateOptionsPageExit *state;

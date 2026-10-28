@@ -5,7 +5,7 @@
 
 
 
-extern s32 func_80428F08_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 func_80428F08_de(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra);
 
 struct MatchOptionsScreen;
 struct MatchOptionsScreen {

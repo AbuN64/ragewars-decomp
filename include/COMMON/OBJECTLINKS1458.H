@@ -146,5 +146,5 @@ struct ObjectLinks40 {
 
 
 
-extern s32 Weapon_PickRandomArmedWeapon(void *arg0);
+extern s32 Weapon_PickRandomArmedWeapon(void *player);
 #endif

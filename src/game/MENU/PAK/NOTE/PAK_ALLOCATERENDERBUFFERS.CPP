@@ -120,7 +120,7 @@ void Note_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
     noteText[arg2 - 1] = 0;
 }
 
-extern u8 XPlus_UppercaseCharacter(u8);
+extern int XPlus_UppercaseCharacter(int);
 extern u8 g_controllerPakFilenameAlphabet[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */

@@ -144,7 +144,7 @@ typedef struct DraftOwnerA370 {
 extern f32 D_800C32EC_de;
 extern char g_camerasText[];
 extern char D_800C32DC_de[];
-extern void func_8025E3F0_de(void *);
+extern void SoundElement_SetListenerCamera(void *);
 extern void Cache_DrainAndCompactResources(s32);
 extern void Cache_ReleaseResource(s32, void *);
 extern void *Cache_AllocateResource(s32, s32, s32, char *);
@@ -184,7 +184,7 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     func_80255CA0_de(&owner->free, 0, 4);
     func_80255CA0_de(&owner->smallList, 0, 4);
     owner->empty = 1;
-    func_8025E3F0_de(owner->parts);
+    SoundElement_SetListenerCamera(owner->parts);
     Cache_DrainAndCompactResources(0);
     if (owner->handle) {
         Cache_ReleaseResource(0, owner->handle);
@@ -204,7 +204,7 @@ void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
             owner->actors[i].index = i;
             func_80255D14_de(&owner->active, &owner->actors[i]);
         }
-        func_8025E3F0_de(owner->actors);
+        SoundElement_SetListenerCamera(owner->actors);
         owner->empty = 0;
     }
     owner->smallCount = 16;

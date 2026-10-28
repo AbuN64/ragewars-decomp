@@ -7,9 +7,9 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/CMENUPROFILE_OPENTIMEDPLAYERDIALOG.H"
 
-extern s8 Menu_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+extern s8 Menu_AdjustValue(Outer8043E458 *menu, s8 value, s32 step, s32 minimum, s32 maximum, s32 wrap);
 
-extern void Menu_AllocateMenu(void *arg0, void *arg1, void *arg2);
+extern void Menu_AllocateMenu(void *owner, void *params, void *list);
 
 /* Points arg0's unk14 field at D_800D7688 or D_800D768C when the mode byte at 0x7B of the owner's record is 0 or 1, and returns 0. */
 
@@ -36,7 +36,7 @@ extern void Control_EnableControllerPak(s32 kind);
 
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
-   func_804097E8_de, cancels the active countdown sound through func_8025E214_de, then reallocates a
+   func_804097E8_de, cancels the active countdown sound through SoundElement_StopAudioExceptKey, then reallocates a
    fresh scoreboard entry via Menu_OpenDialog using arg1's fields at 0x1C and 0x20, and always
    reports success. */
 
@@ -107,7 +107,7 @@ s32 CMenuProfile_OpenTimedPlayerDialog(void *unused0, Arg1Struct *menuContext) {
 
     val1C = menuContext->unk1C;
     Timer_ClearTimerFlag();
-    ((s32 (*)(s32))func_8025E214_de)(-1);
+    ((s32 (*)(s32))SoundElement_StopAudioExceptKey)(-1);
     Menu_OpenDialog(&D_8014561C, &D_0044E468, val1C, menuContext->unk20, 0);
     return 1;
 }

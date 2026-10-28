@@ -82,7 +82,7 @@ extern float D_800C2FC4_de;
 
 extern float D_800C301C_de;
 
-extern void Weaponai_ApplyWeaponSwitch(void *arg0, void *arg1);
+extern void Weaponai_ApplyWeaponSwitch(void *part, void *body);
 
 
 
@@ -121,14 +121,14 @@ extern s32 Weapon_IsPrimarySwitchGroup(s32 arg0);
 
 struct Dest;
 struct Lookup;
-extern void Weapon_DrawWeaponLookupModel(void *arg0, struct Dest *arg1, struct Lookup *arg2);
+extern void Weapon_DrawWeaponLookupModel(void *arg0, struct Dest *arg1, struct Lookup *lookup);
 
 extern float D_800C2FC8_de;
 
-extern void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *arg1);
+extern void Weaponai_InitializeSwitchAndRequestIdle(void *actor, void *weaponFireState);
 
 
 extern void YawMatrixLocal(void *, float);
-extern void func_8022AEA0_de(struct Shared_ActorView *arg0, s32 arg1);
+extern void func_8022AEA0_de(struct Shared_ActorView *actor, s32 soundId);
 extern void YawMatrixLocal(void *, f32);
 #endif

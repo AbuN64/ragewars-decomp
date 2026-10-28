@@ -1,5 +1,5 @@
 #ifndef FRONTEND_FRONTEND_CHECKOWNEDPROFILEIDS_H
 #define FRONTEND_FRONTEND_CHECKOWNEDPROFILEIDS_H
 #include "COMMON/ENTRYRECAT6C.H"
-extern s32 Frontend_CheckOwnedProfileIds(s32 arg0);
+extern s32 Frontend_CheckOwnedProfileIds(s32 player);
 #endif

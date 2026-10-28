@@ -1,7 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
-#include "RENDER/802A35C0.H"
+#include "RENDER/ANIMATION_FRAME_AND_RIBBON_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"

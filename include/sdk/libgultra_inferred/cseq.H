@@ -1,8 +1,8 @@
-#ifndef SDK_LIBGULTRA_INFERRED_802AD870_8_H
-#define SDK_LIBGULTRA_INFERRED_802AD870_8_H
-#include "COMMON/OBJECTSTATE10_2.H"
-extern f32 alCSeqTicksToSec(void **arg0, s32 arg1, s32 arg2);
-extern u32 alCSeqSecToTicks(void **arg0, f32 arg1, s32 arg2);
+#ifndef SDK_LIBGULTRA_INFERRED_CSEQ_H
+#define SDK_LIBGULTRA_INFERRED_CSEQ_H
+#include "COMMON/COMPRESSED_SEQUENCE_AND_EVENT_VIEWS.H"
+extern f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter);
+extern u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter);
 extern int alCSeqGetTicks(void *arg0);
 extern void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst);
 extern void alCSeqSetLoc(ALCSeq_s *dst, ALCSeqMarker *src);

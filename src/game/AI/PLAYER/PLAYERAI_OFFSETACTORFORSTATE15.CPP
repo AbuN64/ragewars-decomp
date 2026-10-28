@@ -17,7 +17,7 @@ extern s32 InstHdr_FindActorModelEntry(void *);
 
 extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 Graphu64_GetHorizontalAngle(CVector3 *arg0);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *direction);
 
 extern void func_80218464_de();
 

@@ -9,14 +9,14 @@ typedef struct Work80244494 Work80244494;
 
 struct Group;
 
-extern void Cinema_ClearPlaybackFlag();
+extern void Cinema_ClearPlaybackFlag(void);
 
-extern void Cinema_RequestSequenceFade();
+extern void Cinema_RequestSequenceFade(void);
 
 
 extern void Cinema_ClearPlaybackPauseState(void);
 
-extern int Cinema_HasSequenceResource();
+extern int Cinema_HasSequenceResource(void);
 
 
 
@@ -61,23 +61,23 @@ struct GameState {
     s32 paused;
 };
 
-extern int Cinema_IsSequenceFlagTwoSet();
+extern int Cinema_IsSequenceFlagTwoSet(void);
 
 
 struct GameState;
 typedef struct GameState GameState;
 
 
-extern int Cinema_IsFadeAllowed();
+extern int Cinema_IsFadeAllowed(void);
 
-extern void Cinema_EndSequence();
+extern void Cinema_EndSequence(void);
 
 
 
 extern int D_800CB420_de;
 
 
-extern void Cinema_SetPlaybackFlag();
+extern void Cinema_SetPlaybackFlag(void);
 
 extern int D_800CB41C_de;
 

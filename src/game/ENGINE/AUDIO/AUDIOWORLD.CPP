@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "COMMON/LISTNODE.H"
-#include "AUDIO/80259280.H"
+#include "AUDIO/LIST_AND_CHANNEL_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"

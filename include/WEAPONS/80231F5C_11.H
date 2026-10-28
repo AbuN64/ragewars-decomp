@@ -1,9 +1,0 @@
-#ifndef WEAPONS_80231F5C_11_H
-#define WEAPONS_80231F5C_11_H
-#include "WEAPONS/PLAYERRECAT1450V1.H"
-extern void Weapon_ReleaseHandlesAndExitState39(void *arg0);
-extern void Weapon_ApplySideDependentYaw(void *object, Event *event);
-extern void Weapon_ApplyScaledSideYaw(void *obj, Event *event);
-extern void Weapon_PlayStartupCue9E2(void *arg0);
-extern void Weapon_InitializeChargeAndStartupCues(struct Shared_ActorView *arg0, struct WeaponFireState *arg1);
-#endif

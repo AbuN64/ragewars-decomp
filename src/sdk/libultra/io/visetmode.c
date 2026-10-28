@@ -2,7 +2,7 @@
 #include "acmd.h"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
 /* With interrupts disabled, stores a video mode pointer in the next video context, marks the mode updated and copies the mode's control word (libultra osViSetMode). Adapted from __osResetGlobalIntMask with the body changed to the libultra osViSetMode shape. */

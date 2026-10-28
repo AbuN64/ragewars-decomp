@@ -21,11 +21,11 @@ void Nav_InitTimedJumpRoute(Root802131E0 *arg0) {
     inner->unk2FC = 0;
 }
 
-extern void Scaled_SetBehaviourState(void *arg0, s32 arg1);
-extern void Nav_RunBehaviorHandler(void *arg0);
-extern f32 Scaled_DistanceToNode(void *arg0, s32 arg1);
+extern void Scaled_SetBehaviourState(void *controller, s32 behaviourId);
+extern void Nav_RunBehaviorHandler(void *aiController);
+extern f32 Scaled_DistanceToNode(void *controller, s32 nodeId);
 extern void Nav_SteerAlongRoute(void *);
-extern void Nav_UpdatePlayerSteering(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *controller);
 
 void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
 {

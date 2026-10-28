@@ -3,7 +3,7 @@
 #include "COMMON/STREAM.H"
 #include "TYPES.H"
 
-extern int func_8025E59C_de(void *arg0);
+extern int func_8025E59C_de(void *soundDescriptor);
 
 struct Output8025EF54 {
     f32 value;

@@ -1,6 +1,7 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/MANAGER.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -26,7 +27,7 @@ extern s32 func_80255B2C_de(void *, s32);
 extern s32 D_801051A0[3];
 extern char D_80100570;
 extern CMemEntry *D_80100568;
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
@@ -73,8 +74,7 @@ extern s32 func_80255920_de(void *, s32);
 extern s32 func_802567A4_de(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
 extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
-extern s32 osStartThread(void *);
-extern void func_802552E0_de(s32);
+extern void HashTable_InitializeResourceTable(s32);
 extern s32 D_002524B0;
 extern s32 D_800CD8BC;
 extern s32 D_801008F8;
@@ -134,7 +134,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
         link->owner = 0;
         func_80255D14_de(&D_80100560.freeLinks, link);
     }
-    func_802552E0_de(D_800CB6E0);
+    HashTable_InitializeResourceTable(D_800CB6E0);
     osCreateMesgQueue((OSMesgQueue *)D_801047E0.queue, (OSMesg *)(D_801047E0.queue + 0x18), 0x40);
     unlockMask = __osDisableInt();
     D_8010515C -= 1;

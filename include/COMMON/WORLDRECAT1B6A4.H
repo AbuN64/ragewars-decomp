@@ -12,7 +12,7 @@ struct LevelBitRecord;
 
 
 
-extern void Scene_ClearActorLinksById(void *arg0, s32 arg1);
+extern void Scene_ClearActorLinksById(void *scene, s32 linkId);
 
 
 
@@ -43,7 +43,7 @@ struct WorldRecAt1B6A4 {
 struct ObjectRecAtB0;
 typedef struct ObjectRecAtB0 ObjectRecAtB0;
 
-extern s32 Scene_TestLevelRecordStateBit(void *arg0, struct LevelBitRecord *arg1);
+extern s32 Scene_TestLevelRecordStateBit(void *world, struct LevelBitRecord *levelBitRecord);
 
 
 struct World;
@@ -205,7 +205,7 @@ struct ObjectRecAtB0 {
     Table *list;
 };
 
-extern s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *arg0, s32 arg1);
+extern s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *counterOwner, s32 counterId);
 
 
 struct WorldRecAt10B8;

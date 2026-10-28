@@ -3,7 +3,7 @@
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "MENU/80409A88.H"
+#include "MENU/PAK_PREVIEW_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/PAKQUEUESTATE.H"
@@ -46,7 +46,7 @@ extern s32 Snapshot_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void SetN64_CommitSessionInputs(void *arg0);
+extern void SetN64_CommitSessionInputs(void *unused);
 
 
 /* Calls func_80264788_de on its second argument, then func_8044D528_de on D_8011FE88 with D_8013B2C8
@@ -155,14 +155,14 @@ void Timer_ReturnToWorldMenu(void *unused, void *object) {
     Scene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
-s32 Timer_FindNoteByGameName(void *unused, void *arg1, s32 arg2, s32 *arg3) {
+s32 Timer_FindNoteByGameName(void *unused, void *rightString, s32 index, s32 *arg3) {
     char game_name[16];
     s32 game_ref;
     s32 note_index;
     for(note_index=0;note_index<16;note_index++) {
-        Note_GetNoteGameName(arg2,note_index,&game_ref);
+        Note_GetNoteGameName(index,note_index,&game_ref);
         Note_DecodeNoteText(game_ref,&game_name,16);
-        if(XPlus_CompareStrings(&game_name,arg1)==0) {
+        if(XPlus_CompareStrings(&game_name,rightString)==0) {
             if(arg3) *arg3=note_index;
             return 1;
         }

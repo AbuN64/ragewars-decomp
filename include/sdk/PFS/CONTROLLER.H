@@ -1,5 +1,5 @@
-#ifndef SDK_PFS_8044BAC0_H
-#define SDK_PFS_8044BAC0_H
+#ifndef SDK_PFS_CONTROLLER_H
+#define SDK_PFS_CONTROLLER_H
 #include "TYPES.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -9,6 +9,6 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
-extern s16 Ovlgame_InitializeControllerSession();
+extern s16 Ovlgame_InitializeControllerSession(void);
 extern s32 Ovlgame_ResetControllerProfile(ControllerProfile *, s32);
 #endif

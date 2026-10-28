@@ -22,7 +22,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
     s32 temp_a2;
     s32 temp_s0;
     s32 temp_v0;
-    s32 temp_v0_3;
+    s32 sortedValueResult;
     s32 temp_v1;
     s32 i;
     s32 var_v0;
@@ -64,8 +64,8 @@ void Audio_UpdateMusicPlayback(Track *queue) {
         var_v0 = 0x10;
         if (temp_a2 != -1) {
             temp_v0_2 = queue->unk0;
-            temp_v0_3 = Defs_FindSortedValue(temp_v0_2->unk2B60, temp_v0_2->unk2B64, temp_a2);
-            temp_s0 = temp_v0_3;
+            sortedValueResult = Defs_FindSortedValue(temp_v0_2->unk2B60, temp_v0_2->unk2B64, temp_a2);
+            temp_s0 = sortedValueResult;
             if (temp_s0 != -1) {
                 temp_s0 *= 2;
                 temp_s0_2 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);

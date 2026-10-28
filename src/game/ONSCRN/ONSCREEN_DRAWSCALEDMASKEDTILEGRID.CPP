@@ -1,9 +1,9 @@
 #include "sdk/LIBC.H"
 #include "COMMON/EXTERNS_6.H"
 #include "include_asm.h"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "GFX/802A8A94.H"
+#include "GFX/OVERLAY_SCRIPT_AND_TEXT_TABLE_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/FRUSTUM.H"
@@ -30,7 +30,7 @@
 /* 802A8A94_4.CPP */
 s32 OnScreen_UpdateMoverScript(void *);
 
-extern void OnScreen_DrawStatusBar(void *arg0, int arg1);
+extern void OnScreen_DrawStatusBar(void *hud, int which);
 
 void OnScreen_InitMover(void *arg0, s16 arg1, s16 arg2)
 {
@@ -48,11 +48,11 @@ s32 OnScreen_StartMoverScript(void *widget, s32 *arg1) {
     return OnScreen_UpdateMoverScript(widget);
 }
 
-s32 OnScreen_StartFirstStatusBar(void *arg0, s32 arg1, s32 arg2) {
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_40) = arg1;
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_3C) = arg2;
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_44) = 0x64;
-    return OnScreen_StartMoverScript(arg0, &D_800CDEB4);
+s32 OnScreen_StartFirstStatusBar(void *widget, s32 arg1, s32 arg2) {
+    (((struct IntegerState48 *) ((s8 *) widget))->unk_40) = arg1;
+    (((struct IntegerState48 *) ((s8 *) widget))->unk_3C) = arg2;
+    (((struct IntegerState48 *) ((s8 *) widget))->unk_44) = 0x64;
+    return OnScreen_StartMoverScript(widget, &D_800CDEB4);
 }
 
 void OnScreen_StartSecondStatusBar(void *arg0, s32 arg1, s32 arg2) {
@@ -154,9 +154,9 @@ void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *t
 
 extern Gfx *g_displayListCursor;
 
-extern s32 Scene_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
-extern void Geometry_SetModePreset(u32);
+extern s32 Scene_StartWorldEffect(void *world, s32 arg1, s32 flags, s32 extra);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
+extern s32 Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(u32);
 
 #if defined(VERSION_EU_X)
@@ -241,7 +241,7 @@ void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
 /* Emits pipe sync, primitive color and a rectangle with nonnegative coordinates. */
 
-extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern void Text_DrawTileGrid(s32 handle, s32 index, s16 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled);
 
 void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *outWidth, s32 *outHeight)
 {
@@ -306,8 +306,8 @@ void OnScreen_DrawTextWithShadow(s32 text, f32 x, f32 arg2, f32 width, f32 heigh
 
 #endif
 
-extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
-s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 arg6) {
+extern void Text_DrawTileGrid(s32 handle, s32 index, s16 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled);
+s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 scaled) {
 
     s32 resourceHandle;
 
@@ -316,7 +316,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 sca
         || (resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1), resourceHandle == 0)) {
         return 0;
     }
-    Text_DrawTileGrid(resourceHandle, index, x, y, scaleX, scaleY, arg6);
+    Text_DrawTileGrid(resourceHandle, index, x, y, scaleX, scaleY, scaled);
     Cache_UnlockResource(0, resourceHandle);
     return 1;
 }

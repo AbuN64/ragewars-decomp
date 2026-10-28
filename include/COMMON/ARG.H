@@ -17,6 +17,6 @@ extern s32 D_800D8380[];
 extern u8 D_8014D4C0[];
 
 extern void __osSiGetAccess(void);
-extern u32 __osContDataCrc(void *arg0);
+extern u32 __osContDataCrc(void *data);
 extern void __osSiRelAccess(void);
 #endif

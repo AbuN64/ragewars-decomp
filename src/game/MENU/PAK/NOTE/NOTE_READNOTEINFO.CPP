@@ -6,7 +6,7 @@
 #include "include_asm.h"
 #include "stddef.h"
 #include "COMMON/ENTRYRECAT0V3.H"
-#include "MENU/80403BCC.H"
+#include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -86,9 +86,9 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 extern void Cache_DrainAndCompactResources(s32);
 
 
-extern s32 func_8025477C_de(void);
+extern s32 Cache_GetResourceActivityState(void);
 
-extern void Cache_SetResourceActivityState(s32);
+extern void Cache_SetResourceActivityState(unsigned int);
 
 extern s32 Defs_CompareMemory(void *a, void *b, s32 size);
 
@@ -107,7 +107,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
-    if (func_8025477C_de() == 0) {
+    if (Cache_GetResourceActivityState() == 0) {
         Cache_SetResourceActivityState(1);
     }
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
@@ -160,7 +160,7 @@ s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *si
 
 s32 Note_DeleteNote(s32 ch, s32 index) {
     extern s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
-    extern void Note_UpdateStatus(s32 ch);
+    extern s32 Note_UpdateStatus(s32 ch);
     s32 result;
 
     if (g_controllerPakChannelStates[ch] != 3) {

@@ -1,4 +1,4 @@
-#include "RENDER/80293A04_2.H"
+#include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECAT26DD8.H"
@@ -19,10 +19,10 @@ extern s32 D_800E28D0;
 
 
 
-extern int Playerai_GetFirstPlayer(void *arg0);
+extern int Playerai_GetFirstPlayer(void *world);
 
 
-extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 session, s32 cancelTarget, s32 target);
 
 
 s32 SetN64_DrawCreditsLines(s32);
@@ -78,7 +78,7 @@ void SetN64_DrawMode16Credits(s32 session) {
 }
 
 /* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
-void SetN64_InitializeMode17Credits(s32 arg0) {
+void SetN64_InitializeMode17Credits(s32 sessionAddress) {
     Shared_Game *game = &D_80145040.game;
 
     game->local = 0;
@@ -89,7 +89,7 @@ void SetN64_InitializeMode17Credits(s32 arg0) {
     Playerai_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     Scene_ResetTransitionViewport();
-    SetN64_ResetPlayerItems(arg0, 0x82);
+    SetN64_ResetPlayerItems(sessionAddress, 0x82);
     D_800CD780 = 1;
     D_800CD784_de = 0;
 }

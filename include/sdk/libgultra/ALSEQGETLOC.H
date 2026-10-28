@@ -1,5 +1,5 @@
 #ifndef SDK_LIBGULTRA_ALSEQGETLOC_H
 #define SDK_LIBGULTRA_ALSEQGETLOC_H
 #include "COMMON/OBJRECAT18V1.H"
-extern void alSeqGetLoc(void *arg0, void *arg1);
+extern void alSeqGetLoc(void *arg0, void *markerObject);
 #endif

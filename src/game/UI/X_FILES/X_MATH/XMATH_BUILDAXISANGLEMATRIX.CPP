@@ -1,5 +1,5 @@
 #include "COMMON/MATRIXRECORD.H"
-#include "RESMGR/8029FA7C.H"
+#include "RESMGR/MATRIX_RECORD_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TRIPLE.H"
@@ -31,8 +31,8 @@ void XMath_SetMatrixElements(MatrixRecord *arg0, float arg1, float arg2, float a
     arg0->matrix.m[15] = arg16;
 }
 
-void XMath_ClearMatrix(s32 arg0) {
-    XPlus_FillBytes(arg0, 0, 0x40);
+void XMath_ClearMatrix(s32 destination) {
+    XPlus_FillBytes(destination, 0, 0x40);
 }
 
 void XMath_SetIdentityMatrix(s32 matrixAddress)
@@ -134,14 +134,14 @@ void XMath_PremultiplyEulerRotation(s32 matrix, f32 *angles) {
     XMath_MultiplyMatrices(matrix, buf, matrix);
 }
 
-void XMath_PremultiplyPitchRotation(s32 arg0, f32 arg1) {
+void XMath_PremultiplyPitchRotation(s32 arg0, f32 angle) {
     Matrix matrix;
     f32 sp50;
     f32 sp54;
     Matrix *p;
 
-    if (arg1 != 0.0f) {
-        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
+    if (angle != 0.0f) {
+        XMath_EvaluateSineCosine(angle, &sp50, &sp54);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC0_de;

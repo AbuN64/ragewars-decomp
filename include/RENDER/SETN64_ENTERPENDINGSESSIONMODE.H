@@ -1,5 +1,5 @@
 #ifndef RENDER_SETN64_ENTERPENDINGSESSIONMODE_H
 #define RENDER_SETN64_ENTERPENDINGSESSIONMODE_H
 #include "COMMON/OBJRECAT26DD8.H"
-extern void SetN64_EnterPendingSessionMode(void *arg0);
+extern void SetN64_EnterPendingSessionMode(void *gameSession);
 #endif

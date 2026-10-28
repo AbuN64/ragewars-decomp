@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/libgultra/viblack.h"
 #include "sdk/os.h"
 

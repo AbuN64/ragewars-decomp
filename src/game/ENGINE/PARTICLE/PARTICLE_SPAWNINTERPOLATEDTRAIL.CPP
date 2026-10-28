@@ -20,7 +20,7 @@
 #include "PARTICLE/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 
 /* CODE_8028414C.CPP */
-extern s32 func_8025CA24_de(void *arg0, void *arg1);
+extern s32 func_8025CA24_de(void *work, void *wantedNode);
 
 extern s32 D_80140FF8[];
 extern s32 D_800D297C;
@@ -80,18 +80,18 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
 
 extern void *func_8025CC6C_de(void);
 
-void Particle_PlayAttachedSound(void *soundParticle, s32 arg1) {
+void Particle_PlayAttachedSound(void *soundParticle, s32 soundId) {
     void *node;
 
     node = ((SoundParticle *)soundParticle)->sound;
     if (node != 0) {
-        if (((Node80253610 *)node)->flags == arg1 && ((Node80253610 *)node)->references != -1) {
+        if (((Node80253610 *)node)->flags == soundId && ((Node80253610 *)node)->references != -1) {
             return;
         }
         Particle_StopSound(soundParticle);
     }
     ((SoundParticle *)soundParticle)->sound =
-        func_8025C95C_de(func_8025CC6C_de(), arg1, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
+        func_8025C95C_de(func_8025CC6C_de(), soundId, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
 }
 
 void Particle_StopSound(void *a) {
@@ -154,7 +154,7 @@ PoolNode84478 *Particle_AllocPoolNode(PoolOwner84478 *owner, s32 index) {
 
 /* 8028308C_3.CPP */
 extern void Particle_FinishActorEffects(void *arg0);
-extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
 void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
     s32 *releaseReferenceCount;
@@ -235,14 +235,14 @@ void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 arg1, EffectEntry 
 
 extern void func_80255D70_de(void *, s32, s32);
 
-void Particle_InsertEntryGroup(EffectSystem *arg0, ParticleEffect *arg1)
+void Particle_InsertEntryGroup(EffectSystem *effectSystem, ParticleEffect *particleEffect)
 {
     void *current;
     s32 key;
 
-    current = arg0->groups.head;
+    current = effectSystem->groups.head;
     if (current != 0) {
-        key = (s32)arg1->entry;
+        key = (s32)particleEffect->entry;
 loop:
         if (((ParticleEffect *)current)->entry != key) {
             current = ((ParticleEffect *)current)->groupNext;
@@ -253,14 +253,14 @@ loop:
     }
 
     if (current != 0) {
-        func_80255D70_de(&arg0->groups, current, arg1);
-    } else if (arg1->entry->flags & 0x2000) {
-        func_80255CB8_de(&arg0->groups, arg1);
+        func_80255D70_de(&effectSystem->groups, current, particleEffect);
+    } else if (particleEffect->entry->flags & 0x2000) {
+        func_80255CB8_de(&effectSystem->groups, particleEffect);
     } else {
-        func_80255D14_de(&arg0->groups, arg1);
+        func_80255D14_de(&effectSystem->groups, particleEffect);
     }
 
-    arg1->flags |= 0x01000000;
+    particleEffect->flags |= 0x01000000;
 }
 
 s32 Particle_RandomInclusiveCount(s32 arg0) {
@@ -432,7 +432,7 @@ finished:
 /* 8028469C_2.CPP */
 
 extern f32 Graphu64_GetSquaredDistance(f32 *arg0, f32 *arg1);
-extern void Particle_HandlePlayerContact(void *arg0, void *arg1);
+extern void Particle_HandlePlayerContact(void *particle, void *player);
 
 const unsigned int D_blob_35af2254633920324f03[2] = {
     0x4123D70A, 0x3F000000,
@@ -485,23 +485,23 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
-extern Instance8020CD74 *Gsky_FindScreenMessage(Arg1 *arg0);
+extern Instance8020CD74 *Gsky_FindScreenMessage(Arg1 *messageId);
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *arg1) {
+s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *messageId) {
     Instance8020CD74 saved;
     Instance8020CD74 *instance;
     s32 collisions;
 
-    instance = Gsky_FindScreenMessage(arg1);
-    if (instance != 0 && arg1->field24 == 0) {
+    instance = Gsky_FindScreenMessage(messageId);
+    if (instance != 0 && messageId->field24 == 0) {
         saved = *instance;
-        instance->position = arg1->position128;
+        instance->position = messageId->position128;
         collisions = Unicol_MoveActorWithCollision(instance, arg0->position, &D_80100030);
         *instance = saved;
     } else {
         saved = *arg0;
-        saved.position = arg1->position128;
+        saved.position = messageId->position128;
         collisions = Unicol_MoveActorWithCollision(&saved, arg0->position, &D_80100030);
     }
     return collisions == 0;
@@ -578,12 +578,12 @@ void Particle_AverageOwnerEffectPositions(EffectSystem *effectSystem, s32 arg1, 
     }
 }
 
-void Particle_FindNearestForeignEffectDistance(EffectSystem *arg0, LevelActor *actor, f32 *arg2) {
+void Particle_FindNearestForeignEffectDistance(EffectSystem *effectSystem, LevelActor *actor, f32 *arg2) {
     f32 temp;
     void *node;
 
     *arg2 = D_800C4EA0_de;
-    node = arg0->groups.head;
+    node = effectSystem->groups.head;
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != actor && (((ParticleEffect *)node)->flags & 0x100)) {

@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/LONE/D_800D5268_de.H"
 #include "COMMON/NODERECAT1C.H"
@@ -14,11 +15,10 @@ unsigned char D_auto_func_802BB864_de_padding_BC464[12] = { 0x10, 0x40, 0x00, 0x
 
 /* startthread.c */
 extern ThreadNode *D_800D5270;
-extern void __osEnqueueThread(ThreadNode **queue, ThreadNode *node);
-extern ThreadNode *__osPopThread(ThreadNode **queue);
 
 extern void func_802BC36C_de(ThreadNode **queue, ThreadNode *node);
-void osStartThread(ThreadNode *arg0) {
+void osStartThread(void *thread) {
+    ThreadNode *arg0 = (ThreadNode *)thread;
     ThreadNode **sentinel;
     u32 token;
     token = __osDisableInt();

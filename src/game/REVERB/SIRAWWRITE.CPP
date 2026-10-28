@@ -60,7 +60,7 @@
 #include "sdk/libultra/io/pirawread.H"
 #include "AUDIO/SIRAW.H"
 #include "AUDIO/SIRAWWRITE.H"
-#include "ENGINE/VIRTUAL/VHANDLER_3.H"
+#include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
 #include "sdk/libgultra/libasm_802BBC68_14.h"
 #include "sdk/libgultra/libasm_802BBC68_21.h"
 #include "sdk/libgultra/libasm_802BBC68_6.h"
@@ -166,4 +166,4 @@ unsigned int rodata_unresolved_802BB08C[1] = {
 };
 #endif
 
-const char D_d1_1d7305bb329aa011[16] = "io/sirawwrite.c";
+const char s_siRawWriteSourcePath[16] = "io/sirawwrite.c";

@@ -2,7 +2,7 @@
 #define COMMON_WIDGETRECAT34_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern void Node_InitializeResourceState();
+extern void Node_InitializeResourceState(void);
 
 struct WidgetRecAt34;
 typedef struct WidgetRecAt34 WidgetRecAt34;
@@ -12,7 +12,7 @@ extern s16 Node_GetResourceLanguageCount(void);
 
 extern void Node_ReleaseUnretainedTextureEntries(void);
 
-extern void Node_ClearResourceInitializationFlag();
+extern void Node_ClearResourceInitializationFlag(void);
 
 
 extern short Node_GetFontMetricAtA(int index);

@@ -14,7 +14,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-#include "UTIL/8025DBA0.H"
+#include "UTIL/TRACK_SEQUENCE_AND_VOLUME.H"
 #include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "stddef.h"

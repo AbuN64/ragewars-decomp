@@ -1,5 +1,5 @@
 #ifndef MENU_MENU_REFRESHEXTRAOPTIONLOCKS_H
 #define MENU_MENU_REFRESHEXTRAOPTIONLOCKS_H
 #include "COMMON/NUMBERPADSCREEN.H"
-extern void Menu_RefreshExtraOptionLocks();
+extern void Menu_RefreshExtraOptionLocks(void);
 #endif

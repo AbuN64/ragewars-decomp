@@ -10,8 +10,8 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/OBJRECV5.H"
 #include "GAME/BUILDDIRECTIONMATRIX.H"
-extern s32 Actor_RequestActorState(void *arg0, void *arg1, s32 arg2);
-extern void Graphu64_TransformPoint(void *arg0, void *arg1, void *arg2);
+extern s32 Actor_RequestActorState(void *actor, void *stateController, s32 action);
+extern void Graphu64_TransformPoint(void *matrix, void *inputPoint, void *transformedPoint);
 
 #include "TYPES.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"

@@ -128,11 +128,11 @@ s32 Menu_CancelScrollingChoiceScreen(void) {
 }
 
 s32 Menu_HandleScrollingChoice(void) {
-    s32 temp_v0;
+    s32 focusedElementIdResult;
     s32 var_v0;
     MarkMenuEventHandled();
-    temp_v0 = Menu_GetFocusedElementId();
-    switch (temp_v0) { /* irregular */
+    focusedElementIdResult = Menu_GetFocusedElementId();
+    switch (focusedElementIdResult) { /* irregular */
 #if defined(VERSION_DE)
     case 0x138 + 2:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)

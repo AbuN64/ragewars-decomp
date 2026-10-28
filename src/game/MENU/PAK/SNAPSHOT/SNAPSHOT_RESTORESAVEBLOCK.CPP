@@ -1,7 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
 #include "COMMON/MENURECAT24.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/ITEMRECAT20V1.H"

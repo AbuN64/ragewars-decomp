@@ -252,7 +252,7 @@ extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);
 
 
 
-extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1);
+extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex);
 
 
 

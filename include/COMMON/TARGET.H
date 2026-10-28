@@ -67,15 +67,15 @@ struct ResourceManagerState;
 struct Triple;
 typedef void ( *EventsDispatchCallbackCallback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
 
-struct CallbackEntryRecAt4V1;
+struct EventCallbackEntry;
 
 extern float D_800C4424_de;
 
 
 
 
-struct ObjectRecAtD0;
-typedef struct ObjectRecAtD0 ObjectRecAtD0;
+struct ClipEventTargetView;
+typedef struct ClipEventTargetView ClipEventTargetView;
 
 
 
@@ -93,8 +93,8 @@ struct ActorEventsComputeDamageScale;
 struct Carrier;
 
 
-struct CallbackEntryRecAt4V1;
-typedef struct CallbackEntryRecAt4V1 CallbackEntryRecAt4V1;
+struct EventCallbackEntry;
+typedef struct EventCallbackEntry EventCallbackEntry;
 
 struct Carrier;
 typedef struct Carrier Carrier;
@@ -102,7 +102,7 @@ typedef struct Carrier Carrier;
 struct ActorEventsComputeDamageScale;
 typedef struct ActorEventsComputeDamageScale ActorEventsComputeDamageScale;
 
-struct ObjectRecAtD0;
+struct ClipEventTargetView;
 
 struct Vec4s;
 
@@ -132,8 +132,8 @@ struct Target;
 typedef struct Target Target;
 
 
-extern s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5,
-                         f32 arg6);
+extern s32 SoundElement_PlayPositionedSoundWithScale(s32 trackId, CVector3 soundPosition, s32 spatialMode, s32 ownerId,
+                         f32 playbackScale);
 
-extern void Weapon_SpawnTargetPlayerFireEffect(void *arg0, s32 arg1, s32 arg2);
+extern void Weapon_SpawnTargetPlayerFireEffect(void *aiTarget, s32 unused1, s32 effect);
 #endif

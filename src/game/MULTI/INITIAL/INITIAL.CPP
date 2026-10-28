@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "MULTI/INITIAL.H"
 #include "COMMON/AIPROFILE.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 
 struct func_8025E5B0_S1;
 struct ParamsPakAllocateMenu;
@@ -32,12 +32,12 @@ extern s32 D_800E28C0;
 
 extern struct List D_0044EB04;
 
-extern void Control_EnableControllerPak(int arg0);
+extern void Control_EnableControllerPak(int controllerPort);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
    func_804097E8_de, then reallocates a fresh scoreboard entry via Menu_OpenDialog using arg1's fields
    at 0x1C and 0x20 against the D_44F100 list, and always reports success. Sibling of
-   CMenuProfile_OpenTimedPlayerDialog, which also fires func_8025E214_de(-1) and uses the D_44F0B8 list instead. */
+   CMenuProfile_OpenTimedPlayerDialog, which also fires SoundElement_StopAudioExceptKey(-1) and uses the D_44F0B8 list instead. */
 
 
 
@@ -45,7 +45,7 @@ extern s32 D_0044E4B0;
 
 void Timer_ClearTimerFlag(void);
 
-extern void Control_DisableControllerPak(s32 arg0);
+extern void Control_DisableControllerPak(s32 controllerPort);
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -143,7 +143,7 @@ const unsigned int rodata_unresolved_800DD010[8] = {
 };
 #endif
 
-/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of D_801462C8, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of D_8010F328 that func_8026437C_de reports active, marking the settings D_80146302 at 0x78 and recording its index in D_801422C1, before calling func_8025E384_de, resetting D_8011FAC0 through func_8044DE7C_de and setting D_80154048. */
+/* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of D_801462C8, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of D_8010F328 that func_8026437C_de reports active, marking the settings D_80146302 at 0x78 and recording its index in D_801422C1, before calling SoundElement_DisableMusicGainOverride, resetting D_8011FAC0 through func_8044DE7C_de and setting D_80154048. */
 
 extern struct Part D_80146302;
 
@@ -177,15 +177,15 @@ struct Dialog;
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
    and returns one. */
 
-/* Restarts sound: calls func_8025E214_de with -1, records what func_8025E2C4_de returns in D_800E63B0,
-   passes D_800E63B8 to func_8025E2D4_de, calls func_8025E29C_de with 1, clears D_800E63B4, calls
+/* Restarts sound: calls SoundElement_StopAudioExceptKey with -1, records what func_8025E2C4_de returns in D_800E63B0,
+   passes D_800E63B8 to func_8025E2D4_de, calls SoundElement_SetVoiceMixValue with 1, clears D_800E63B4, calls
    Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 
 
 
-extern void Control_ClearMenuControlFlag();
+extern void Control_ClearMenuControlFlag(void);
 
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
@@ -213,7 +213,7 @@ void Initial_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
             break;
         }
     }
-    func_8025E384_de();
+    SoundElement_DisableMusicGainOverride();
     Match_StartMatchTransition(&D_8011FAC0, -1);
     D_80154048 = 1;
 }
@@ -260,10 +260,10 @@ s32 func_8043EC98_de(void *first, void *second, void *third) {
 }
 
 s32 Initial_OpenTrackPreviewMenu(void *first, void *second, void *third) {
-    func_8025E214_de(-1);
+    SoundElement_StopAudioExceptKey(-1);
     D_800E63B0 = func_8025E2C4_de();
     func_8025E2D4_de(D_800E63B8);
-    func_8025E29C_de(1);
+    SoundElement_SetVoiceMixValue(1);
     D_800E63B4 = 0;
     Control_ClearMenuControlFlag();
     Menu_AllocateMenu(third, second, D_00451094);

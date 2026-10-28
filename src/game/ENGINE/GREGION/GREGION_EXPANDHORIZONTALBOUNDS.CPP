@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/OBJECTLINKS4_2.H"
+#include "COMMON/MODEL_TREE_REGION_OPERATIONS.H"
 #include "TYPES.H"
 
 /** Expand the four-float X/Z bounds in arg0 over arg1 packed vectors. */

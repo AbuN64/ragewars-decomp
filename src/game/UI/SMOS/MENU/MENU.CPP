@@ -22,9 +22,9 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "include_asm.h"
 
-extern void SmSmngr_DeactivateCurrentScreen(s32 arg0);
+extern int SmSmngr_DeactivateCurrentScreen(s32 arg0);
 
-extern void Node_ReleaseReferencedBuffer(s16 arg0);
+extern void Node_ReleaseReferencedBuffer(s32 arg0);
 
 extern void Widget_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
@@ -207,7 +207,7 @@ void func_802995C4_de(int arg0) {
     D_80146E14 = arg0;
 }
 
-s32 Menu_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
+s32 Menu_RouteElementEvent(s32 value, s32 event, s32 arg2, s32 control, s32 extra) {
     ScreenManager *manager;
     s32 blockedValue;
     s32 index;
@@ -231,7 +231,7 @@ s32 Menu_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra
     if (D_8014D080->callback != 0) {
         saved = D_8014D080->handled;
         D_8014D080->handled = 0;
-        result = D_8014D080->callback(arg1, arg2, control, extra);
+        result = D_8014D080->callback(event, arg2, control, extra);
         if (D_8014D080->handled == 1) {
             D_8014D080->handled = saved;
             return result;
@@ -240,9 +240,9 @@ s32 Menu_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra
     }
     element = D_8014D080->screens[D_8014D080->current].primary;
     if (value == element->id) {
-        result = SmSmngr_DispatchPrimaryScreenEvent(arg1, arg2, control, extra);
+        result = SmSmngr_DispatchPrimaryScreenEvent(event, arg2, control, extra);
     } else {
-        result = DispatchElementEvent(value, arg1, arg2, control, extra);
+        result = DispatchElementEvent(value, event, arg2, control, extra);
     }
     return result;
 }

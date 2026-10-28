@@ -7,10 +7,10 @@ struct SharedPlayer;
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-extern f32 Playerai_EvaluateCubicComplement(f32 arg0);
+extern f32 Playerai_EvaluateCubicComplement(f32 curveInput);
 
 struct Shared_ActorView;
-extern s32 Playerai_IsSpeedAboveThreshold(struct Shared_ActorView *arg0);
+extern s32 Playerai_IsSpeedAboveThreshold(struct Shared_ActorView *actor);
 
 
 struct Shape_typemap_14;
@@ -23,7 +23,7 @@ struct Marker;
 typedef struct Marker Marker;
 
 
-extern void Playerai_ApplyRangedPitchToMatrix(void *arg0, void *arg1);
+extern void Playerai_ApplyRangedPitchToMatrix(void *matrix, void *arg1);
 
 struct EntryPlayerHasLinkedWorldFlagSix;
 struct EntryPlayerHasLinkedWorldFlagSix {
@@ -38,7 +38,7 @@ typedef struct Object126 Object126;
 
 
 
-extern int Playerai_IsStateFifteen(struct SharedPlayer *arg0);
+extern int Playerai_IsStateFifteen(struct SharedPlayer *player);
 
 extern float Playerai_SumActivePlayerDistances(void * arg0, float * arg1);
 
@@ -52,7 +52,7 @@ extern void func_8022DC14_de(void);
 
 extern float D_800C7EF8;
 
-extern u8 Playerai_GetImpactSoundEnabled(s32 arg0, s32 arg1);
+extern u8 Playerai_GetImpactSoundEnabled(s32 unused0, s32 arg1);
 
 struct Actor126;
 typedef struct Actor126 Actor126;
@@ -68,7 +68,7 @@ extern float D_801370C4;
 struct ObjRecAt1AV1;
 typedef struct ObjRecAt1AV1 ObjRecAt1AV1;
 
-extern void Playerai_ResetPlayerWeaponLock(void *arg0);
+extern void Playerai_ResetPlayerWeaponLock(void *lockedPlayerState);
 
 extern float D_800C7F10;
 
@@ -83,7 +83,7 @@ struct ObjRecAt724 {
 
 
 struct Player;
-extern void Playerai_InitializeStateBlendToZero(struct Player *arg0);
+extern void Playerai_InitializeStateBlendToZero(struct Player *player);
 
 
 struct ObjRecAt1AV1;
@@ -119,9 +119,9 @@ extern void func_8022E940_de(void);
 
 extern float D_800C7EE0;
 
-extern void Playerai_ClearPlayerWeaponLock(void *arg0);
+extern void Playerai_ClearPlayerWeaponLock(void *lockedPlayerState);
 
-extern void Playerai_InitializeStateBlendTarget(struct Player *arg0);
+extern void Playerai_InitializeStateBlendTarget(struct Player *player);
 
 
 struct Marker;
@@ -176,9 +176,9 @@ struct ObjectLinks87C {
 
 extern float D_800C2DC8_de;
 
-extern s32 Playerai_IsStateThreeLowerAnimationGroup(struct SharedPlayer *arg0);
+extern s32 Playerai_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player);
 
-extern void Playerai_ApplyLinkedProjectileStatus(void * arg0, int arg1, int arg2);
+extern void Playerai_ApplyLinkedProjectileStatus(void * unused1, int unused2, int projectileEvent);
 
 struct Object126;
 struct Object126 {
@@ -190,7 +190,7 @@ struct Object126 {
     f32 angle;
 };
 
-extern void Playerai_OffsetActorForState15(Actor126 *actor, Object126 *arg1);
+extern void Playerai_OffsetActorForState15(Actor126 *actor, Object126 *positionedObject);
 
 
 
@@ -206,17 +206,17 @@ extern void Playerai_ReleaseMarkerSlot(void *unused0, s32 *arg1);
 
 
 
-extern s32 Playerai_IsStateThreeUpperAnimationGroup(struct SharedPlayer *arg0);
+extern s32 Playerai_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player);
 
 struct ObjRecAt1CV2;
 typedef struct ObjRecAt1CV2 ObjRecAt1CV2;
 
-extern void Playerai_UpdateActionTransitionBlend(struct Shared_ActorView *arg0);
+extern void Playerai_UpdateActionTransitionBlend(struct Shared_ActorView *actor);
 
 extern float D_800C7EF4;
 
 
-extern void Playerai_UpdateWeaponEffectBlend(void *arg0);
+extern void Playerai_UpdateWeaponEffectBlend(void *player);
 
 #endif
 #endif

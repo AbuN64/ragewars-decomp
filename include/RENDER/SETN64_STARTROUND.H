@@ -11,5 +11,5 @@ extern void SetN64_ResetMode10Items(s32 arg0);
 extern void SetN64_DrawMode11Session(void *session);
 extern void SetN64_DrawMode10Session(void *session);
 extern void SetN64_DrawMode12Session(void *session);
-extern void SetN64_ResetMode12Items(int arg0);
+extern void SetN64_ResetMode12Items(int sessionAddress);
 #endif

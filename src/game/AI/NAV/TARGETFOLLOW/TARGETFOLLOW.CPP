@@ -33,7 +33,7 @@ void Nav_ResetTargetFollowStateDe(void *object) {
 #if !(defined(VERSION_EU))
 extern void Nav_RunBehaviorHandler(void *);
 extern void Nav_SteerAlongRoute(void *);
-extern void Nav_UpdatePlayerSteering(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *controller);
 
 void Nav_UpdateTargetRouteFollow(void *arg0)
 {

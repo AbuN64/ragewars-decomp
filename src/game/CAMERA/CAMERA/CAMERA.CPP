@@ -5,7 +5,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/LIGHTDATA.H"
 #include "TYPES.H"
-#include "CAMERA/80233920.H"
+#include "CAMERA/FADE_AND_COLOR_BLEND_VIEWS.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -1046,7 +1046,7 @@ extern s32 D_800E28D0;
 extern Gfx *g_displayListCursor;
 extern Shared_func_80234FDC_S4 D_80140FF8;
 extern void Geometry_SetViewEffect(s32);
-extern void Textload_SetTextureEffect(s32);
+extern void Textload_SetTextureEffect(unsigned int);
 extern void Geometry_SelectEffectModes(void);
 extern void TextLoad_ResetTextureCache(void);
 extern s32 Tsmos_IsFrontendActive(void);
@@ -1850,7 +1850,7 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
     return post_lines(owner, pool, text, kind, 1.0f, -1);
 }
 
-extern void Onscrn_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
+extern void Onscrn_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY);
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;
     f32 fade;

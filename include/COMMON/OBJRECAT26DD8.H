@@ -20,8 +20,8 @@ typedef struct Entry80294AC4 Entry80294AC4;
 
 
 
-struct func_80294BB0_S1;
-typedef struct func_80294BB0_S1 func_80294BB0_S1;
+struct SequencePromptStateView;
+typedef struct SequencePromptStateView SequencePromptStateView;
 
 
 struct Prompt;
@@ -29,7 +29,7 @@ typedef struct Prompt Prompt;
 
 struct Prompt;
 
-struct func_80294BB0_S1;
+struct SequencePromptStateView;
 
 
 

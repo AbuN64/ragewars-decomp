@@ -92,7 +92,7 @@ extern char D_00450BF0_de[];
 extern char D_00450C14_de[];
 extern char D_00450C38_de[];
 extern char D_00450C5C_de[];
-extern s32 Note_BytesToPakPages(s32);
+extern u32 Note_BytesToPakPages(u32);
 extern s32 Note_GetFreePages(s32, s32 *);
 extern s32 Note_CountFreeNotes(s32, s32 *);
 extern s32 Note_FindFreeNoteExtension(s32, char *);

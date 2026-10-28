@@ -1,12 +1,12 @@
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/S1_6.H"
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
 
 /* 8042E080_76.CPP */
-/* On event 3 with value 0xD, clears D_80146894 and calls Tsmos_RequestFrontendShutdown and func_8025E384_de. Returns
+/* On event 3 with value 0xD, clears D_80146894 and calls Tsmos_RequestFrontendShutdown and SoundElement_DisableMusicGainOverride. Returns
    zero. */
-extern void Tsmos_RequestFrontendShutdown();
+extern void Tsmos_RequestFrontendShutdown(void);
 
 s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3) {
@@ -15,7 +15,7 @@ s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value)
         }
         D_8011FAC0.clockPaused = 0;
         Tsmos_RequestFrontendShutdown();
-        func_8025E384_de();
+        SoundElement_DisableMusicGainOverride();
     }
     return 0;
 }

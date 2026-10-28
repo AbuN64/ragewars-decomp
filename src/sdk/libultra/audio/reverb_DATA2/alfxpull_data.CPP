@@ -2,7 +2,7 @@
 #include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802B57F0_CD5D4[15] =
+const char s_audioReverbSourcePath[15] =
     "audio/reverb.c\000";
 #endif
 

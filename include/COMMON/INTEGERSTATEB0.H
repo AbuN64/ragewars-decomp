@@ -59,7 +59,7 @@ extern float D_800C54B4_de;
 
 
 
-extern void Frontend_RequestScreenMode(s32 arg0);
+extern void Frontend_RequestScreenMode(s32 value);
 extern void Textload_SetTextureEffect(unsigned int value);
 extern s32 D_800CD77C;
 
@@ -67,5 +67,5 @@ extern s32 D_800CD77C;
 extern s32 D_800CC380;
 
 extern s32 Control_IsSnapshotActive(void);
-extern void OnScreen_DrawStatusBars(void *arg0);
+extern void OnScreen_DrawStatusBars(void *playerHud);
 #endif

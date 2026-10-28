@@ -41,8 +41,8 @@ void Textload_LoadTextureFrame(s32 *, void *, s32, s32, s32, s32, s32, s32, s32)
 Shared_ParticleInstance *Gsky_FindScreenMessage(GameplayCamera *);
 s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 void *Map_ReserveEntries(void *, s32);
-void Geometry_SetCombineMode(s32);
-void Geometry_SetModePreset(s32);
+void Geometry_SetCombineMode(u32);
+s32 Geometry_SetModePreset(s32);
 void Cache_UnlockResource(s32, void *);
 s32 Graphu64_NextRandom(void);
 

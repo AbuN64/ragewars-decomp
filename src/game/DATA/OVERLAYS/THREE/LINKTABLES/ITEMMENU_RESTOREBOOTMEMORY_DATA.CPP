@@ -15,7 +15,7 @@ unsigned int D_auto_rodata_unresolved_800CDBF0[72] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-char rodata_writable_800CDD10[12] =
+char s_sexySteveText[12] =
     "sexysteve\000\000\000";
 #endif
 

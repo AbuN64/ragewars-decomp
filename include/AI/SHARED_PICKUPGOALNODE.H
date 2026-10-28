@@ -18,7 +18,7 @@ struct Shared_PickupGoalNode {
 
 extern PickupGoalNodeList D_8013B364;
 
-extern void Portal_ResetSearchState(struct Obj8020BC50 *arg0);
+extern void Portal_ResetSearchState(struct Obj8020BC50 *graph);
 extern void Route_ClearGoalList(PickupGoalNodeList *list);
 extern s32 Nav_AddPickupGoalsByObjectIds(s32 *ids);
 extern void Route_SearchPathByKey(PickupGoalNodeList *list, s32 key);

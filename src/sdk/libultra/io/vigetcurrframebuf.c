@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/AUDIO/OSVIGETCURRENTFRAMEBUFFER.H"
 #include "sdk/os.h"
 

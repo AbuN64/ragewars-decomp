@@ -9,5 +9,5 @@ extern void D_00203E78();
 extern void D_00202E4C();
 extern void D_00203DF0();
 
-extern void PitchMatrix(void *arg0, f32 arg1);
+extern void PitchMatrix(void *matrixStorage, f32 pitchAngle);
 #endif

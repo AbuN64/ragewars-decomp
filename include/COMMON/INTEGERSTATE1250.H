@@ -72,7 +72,7 @@ struct ObjectState13E4;
 struct ObjRecAt120C;
 
 
-extern void func_8022B484_de(char *arg0);
+extern void func_8022B484_de(char *player);
 
 struct ObjectState16DA;
 typedef struct ObjectState16DA ObjectState16DA;

@@ -4,7 +4,7 @@
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "TYPES.H"
 #include "RESMGR/X_PLUS.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Releases the save buffer and clears its global state. */
 extern void Cache_DrainAndCompactResources(int);
@@ -21,7 +21,7 @@ extern u8 D_8010BBB8;
 extern u8 D_80153330[];
 
 
-extern s32 osMotorInit(u8 *a0, u8 *a1, s32 a2);
+extern s32 osMotorInit(u8 *a0, u8 *pfs, s32 channel);
 
 extern s32 Note_UpdateStatus(s32 a0);
 

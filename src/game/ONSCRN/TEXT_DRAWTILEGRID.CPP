@@ -1,7 +1,7 @@
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include <stddef.h>
 #include "TYPES.H"
-#include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/FONT_STYLE_AND_GLYPH_OPERATIONS.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "GFX/TEXTURE_TILE_TYPES.H"

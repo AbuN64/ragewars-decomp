@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-const char D_8040A614_E19B4[14] =
+const char s_snapshotThreePartNumberFormatVariant[14] =
     "%3d.%02d.%02d\000";
 #endif
 

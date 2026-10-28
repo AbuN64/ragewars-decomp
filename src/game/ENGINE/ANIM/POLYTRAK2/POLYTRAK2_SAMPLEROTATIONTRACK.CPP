@@ -16,7 +16,7 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
 }
 
 #include "TYPES.H"
-#include "SYSTEM/802609CC_3.H"
+#include "SYSTEM/BITARRAY_SAMPLE_EVALUATION.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 
@@ -217,7 +217,7 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) 
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
-void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *table, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -236,20 +236,20 @@ void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *arg1, s32 arg2, s32
         callback = (void (*)(void *, void *, s32))D_00261238_de;
         break;
     }
-    arg1[0] = arg2;
-    arg1[1] = (arg2 * 4 + 15) & ~7;
+    table[0] = arg2;
+    table[1] = (arg2 * 4 + 15) & ~7;
     for (i = 1; i <= arg2; i++) {
-        arg1[i + 1] = 0xDEADBEEF;
+        table[i + 1] = 0xDEADBEEF;
     }
     for (i = 0; i < arg2; i++) {
-        for (a = 0; a <= arg1[0] && (u32)arg1[a + 1] != 0xDEADBEEF; a++) {
+        for (a = 0; a <= table[0] && (u32)table[a + 1] != 0xDEADBEEF; a++) {
         }
         a--;
-        arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
+        table[a + 2] = table[a + 1] + D_8010AC88 * 16;
     }
     state[0] = Polytrak2_ByteAddressToBitAddress(0);
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)SetN64_GetPackSection(arg1, i);
+        row = (f32 *)SetN64_GetPackSection(table, i);
         for (j = 0; j < arg3; j++) {
             Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
@@ -257,7 +257,7 @@ void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *arg1, s32 arg2, s32
         }
     }
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)SetN64_GetPackSection(arg1, i);
+        row = (f32 *)SetN64_GetPackSection(table, i);
         if (arg3 == 4 && arg4 != 0) {
             for (j = 0; j < arg3; j++) {
                 for (k = 0; k < D_8010AC88; k++) {
@@ -274,7 +274,7 @@ void Polytrak2_DecodeAndSmoothSampleTracks(s32 unused0, s32 *arg1, s32 arg2, s32
     }
     if (arg3 == 4) {
         for (i = 0; i < arg2; i++) {
-            row = (f32 *)SetN64_GetPackSection(arg1, i);
+            row = (f32 *)SetN64_GetPackSection(table, i);
             for (k = 0; k < D_8010AC88; k++) {
                 Graphu64_NormalizeQuaternion(row);
                 row += 4;
@@ -309,7 +309,7 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through Graphu64_NormalizeQuaternion. */
-void Polytrak2_DecodeTrackSections(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void Polytrak2_DecodeTrackSections(s32 unused0, s32 *table, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -328,20 +328,20 @@ void Polytrak2_DecodeTrackSections(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s
         callback = (void (*)(void *, void *, s32))D_00261238_de;
         break;
     }
-    arg1[0] = arg2;
-    arg1[1] = (arg2 * 4 + 15) & ~7;
+    table[0] = arg2;
+    table[1] = (arg2 * 4 + 15) & ~7;
     for (i = 1; i <= arg2; i++) {
-        arg1[i + 1] = 0xDEADBEEF;
+        table[i + 1] = 0xDEADBEEF;
     }
     for (i = 0; i < arg2; i++) {
-        for (a = 0; a <= arg1[0] && (u32)arg1[a + 1] != 0xDEADBEEF; a++) {
+        for (a = 0; a <= table[0] && (u32)table[a + 1] != 0xDEADBEEF; a++) {
         }
         a--;
-        arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
+        table[a + 2] = table[a + 1] + D_8010AC88 * 16;
     }
     state[0] = Polytrak2_ByteAddressToBitAddress(0);
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)SetN64_GetPackSection(arg1, i);
+        row = (f32 *)SetN64_GetPackSection(table, i);
         for (j = 0; j < arg3; j++) {
             Polytrak2_ReadBitsAndAdvance((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
@@ -349,7 +349,7 @@ void Polytrak2_DecodeTrackSections(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s
         }
     }
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)SetN64_GetPackSection(arg1, i);
+        row = (f32 *)SetN64_GetPackSection(table, i);
         if (arg3 == 4 && arg4 != 0) {
             for (j = 0; j < arg3; j++) {
                 for (k = 0; k < D_8010AC88; k++) {
@@ -366,7 +366,7 @@ void Polytrak2_DecodeTrackSections(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s
     }
     if (arg3 == 4) {
         for (i = 0; i < arg2; i++) {
-            row = (f32 *)SetN64_GetPackSection(arg1, i);
+            row = (f32 *)SetN64_GetPackSection(table, i);
             for (k = 0; k < D_8010AC88; k++) {
                 Graphu64_NormalizeQuaternion(row);
                 row += 4;
@@ -383,7 +383,7 @@ INCLUDE_ASM("span_1000", Polytrak2_DecodeTrackSections);
 #include "TYPES.H"
 
 #include "COMMON/STREAM.H"
-#include "SYSTEM/802609CC_3.H"
+#include "SYSTEM/BITARRAY_SAMPLE_EVALUATION.H"
 
 /* Expand each encoded track, optionally smooth its four channels in place,
  * then normalize quaternion samples. */

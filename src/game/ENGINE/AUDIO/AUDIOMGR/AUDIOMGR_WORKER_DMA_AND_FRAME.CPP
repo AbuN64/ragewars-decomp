@@ -1,5 +1,5 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "TEXTURE/80256220.H"
+#include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -12,8 +12,8 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "SYSTEM/8025E280.H"
-#include "SYSTEM/8025E280_3.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
+#include "SYSTEM/SOUND_CONTEXT_LOCK_AND_ACTIVITY.H"
 #include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
 #include "sdk/MATH/aigetlen.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
@@ -98,9 +98,9 @@ s32 Audiomgr_RenderAudioFrame(Work56EC8 *audioTask, u32 unused)
   Sound_RetireCompletedSampleWindows(audioTask);
   value = osVirtualToPhysical(audioTask->owner);
   audioTask->id = (u16)D_80107E98;
-  func_8025E48C_de();
+  SoundElement_AcquireContextLock();
   item = alAudioFrame(D_80107E20[D_800CB708], &completed, value, audioTask->id);
-  func_8025E4B0_de();
+  SoundElement_ReleaseContextLock();
   if (completed != 0)
   {
     audioTask->base = D_80107E20[D_800CB708];
@@ -108,7 +108,7 @@ s32 Audiomgr_RenderAudioFrame(Work56EC8 *audioTask, u32 unused)
     osWritebackDCacheAll();
     Sched_SendSchedulerTask(&D_80142928, audioTask->payload);
     D_800CB708 ^= 1;
-    func_8025E23C_de();
+    SoundElement_UpdateContext();
     osRecvMesg(&D_80107E80, &event, 1);
     osAiSetNextBuffer(audioTask->owner, audioTask->id << 2);
     return 1;

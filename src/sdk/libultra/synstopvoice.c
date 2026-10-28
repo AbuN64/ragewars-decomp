@@ -1,3 +1,4 @@
+#include "COMMON/ALPARAM_S.H"
 #include "sdk/libgultra.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
@@ -14,24 +15,24 @@
 
 
 
-void alSynStopVoice(struct Shape_typemap_71 *synth, void *voice)
+void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice)
 {
   int new_var;
   void *Shared_func_802B36F0_de_v0;
   void *voiceFilter;
   SharedRecV12 fn;
-  if ((((ObjectStateC_2 *)(voice))->unk_8.v0) != 0)
+  if ((((AudioVoicePhysicalLinkView *)(voice))->pvoice.v0) != 0)
   {
     Shared_func_802B36F0_de_v0 = Audio_AllocParam();
     if (Shared_func_802B36F0_de_v0 != 0)
     {
-      new_var = (synth->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) voice)->unk_8.v1)->state);
-      ((ObjectStateC_3 *)(Shared_func_802B36F0_de_v0))->unk_8 = 0xF;
-      ((ObjectStateC_3 *)(Shared_func_802B36F0_de_v0))->unk_0 = 0;
-      ((ObjectStateC_3 *)(Shared_func_802B36F0_de_v0))->unk_4 = new_var;
-      voiceFilter = ((struct Draw *) ((ObjectStateC_2 *) voice)->unk_8.v1)->model;
+      new_var = (synth->paramSamples) + (((struct AudioPhysicalVoiceOffsetView *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->offset);
+      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->type = AL_FILTER_STOP_VOICE;
+      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->next = 0;
+      ((AudioStopVoiceUpdate *)(Shared_func_802B36F0_de_v0))->delta = new_var;
+      voiceFilter = ((struct Draw *) ((AudioVoicePhysicalLinkView *) voice)->pvoice.v1)->model;
       fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
-      fn(voiceFilter, 3, Shared_func_802B36F0_de_v0);
+      fn(voiceFilter, AL_FILTER_ADD_UPDATE, Shared_func_802B36F0_de_v0);
     }
   }
 }

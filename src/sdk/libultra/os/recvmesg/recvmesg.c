@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
@@ -11,8 +12,6 @@ unsigned char D_auto_func_802BB3C4_de_padding_BBFC4[12] = { 0xAF, 0xB0, 0x00, 0x
 /* recvmesg.c */
 extern OSThread_s *D_800D5270;
 extern void func_802BC36C_de(void *);
-extern void *__osPopThread(void *);
-extern void osStartThread(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
 {

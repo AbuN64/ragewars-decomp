@@ -142,7 +142,7 @@ struct Location {
 
 
 
-extern void func_802172C4_de(void *arg0, void *arg1, Func802172C4Value arg2);
+extern void func_802172C4_de(void *unused0, void *unused1, Func802172C4Value unused2);
 
 
 struct Tracker;

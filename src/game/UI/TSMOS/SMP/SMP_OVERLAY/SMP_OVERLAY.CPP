@@ -381,8 +381,8 @@ int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value
     return 0;
 }
 
-s32 SmpOverlay_FreeEventObject(void *arg0) {
-    Cache_FreeMemory(arg0);
+s32 SmpOverlay_FreeEventObject(void *allocation) {
+    Cache_FreeMemory(allocation);
     return 0;
 }
 

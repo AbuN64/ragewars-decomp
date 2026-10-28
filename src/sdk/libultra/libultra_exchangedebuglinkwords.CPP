@@ -512,7 +512,7 @@ cleanup:
     return arg2;
 }
 
-s32 Libultra_SubmitDebugLinkBlock(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 Libultra_SubmitDebugLinkBlock(void *stream, s32 arg1, s32 arg2, s32 arg3) {
     TransferScratch scratch;
     s32 timeout;
     s32 retries;
@@ -586,7 +586,7 @@ ready:
     if (D_8014D3E8 != 0) goto cleanup;
     Libultra_WriteDebugLinkByte(product & 0xFF);
     if (D_8014D3E8 != 0) goto cleanup;
-    Libultra_WriteDebugLinkBlock(arg0, product);
+    Libultra_WriteDebugLinkBlock(stream, product);
 
     do {
         D_8014D3E8 = 0;

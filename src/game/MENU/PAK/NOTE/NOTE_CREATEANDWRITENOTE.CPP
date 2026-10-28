@@ -1,7 +1,7 @@
 #include "sdk/LIBC.H"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "COMMON/LONE/D_8010FC00.H"
-#include "MENU/80403BCC.H"
+#include "MENU/PAK_DIRECTORY_VIEWS.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"

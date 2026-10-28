@@ -6,7 +6,7 @@
 
 
 #include "COMMON/SHAREDPLAYER.H"
-extern void Audio_ResolveInstrumentSectionZero(void *arg0, s16 arg1);
+extern void Audio_ResolveInstrumentSectionZero(void *arg0, s16 index);
 
 #include "COMMON/LISTNODE.H"
 extern int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id);
@@ -16,7 +16,7 @@ extern int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id);
 
 
 
-extern void AudioWorld_RecyclePendingSoundsByKey(void *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsByKey(void *channelOwner, s32 matchingKey);
 extern void AudioWorld_RecyclePendingSoundsByTrack(struct OwnerRecAtD8 *, s32);
 
 extern void alSndpSetPriority(char *, s32, s32);

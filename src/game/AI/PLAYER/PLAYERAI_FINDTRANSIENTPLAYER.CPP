@@ -28,9 +28,9 @@ extern Gfx *g_displayListCursor;
 extern s32 Tsmos_IsFrontendActive(void);
 
 
-extern void Geometry_SetModePreset(s32);
+extern s32 Geometry_SetModePreset(s32);
 
-extern void Geometry_SetCombineMode(s32);
+extern void Geometry_SetCombineMode(u32);
 
 /* Scales damage by ownership and player state and suppresses friendly damage when configured. */
 
@@ -39,13 +39,13 @@ extern void Geometry_SetCombineMode(s32);
 extern f32 D_800C2CC4_de, D_800C7DB8, D_800C2CCC_de, D_800C7DC0, D_800C2CD4_de, D_800C7DC8, D_800C2CDC_de, D_800C2CE0_de;
 
 
-extern void Cache_MarkResourceInUse(s32 arg0, void *arg1);
+extern void Cache_MarkResourceInUse(s32 unused0, void *resource);
 
-extern void Gobjinst_RotatePoseMatrixBuffers(void *arg0);
+extern void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState);
 
 
 
-extern s32 func_8024D160_de(void *arg0);
+extern s32 func_8024D160_de(void *actor);
 
 
 
@@ -53,9 +53,9 @@ extern s32 func_8024D160_de(void *arg0);
 #if defined(VERSION_US_REV1)
 #endif
 
-extern void Gsky_LoadProjectionMatrix(void *arg0);
+extern void Gsky_LoadProjectionMatrix(void *cameraAddress);
 
-extern void func_8021EEFC_de(void *arg0, void *arg1);
+extern void func_8021EEFC_de(void *player, void *view);
 
 
 extern void Player_DrawMatchCountdown(void *, void *);

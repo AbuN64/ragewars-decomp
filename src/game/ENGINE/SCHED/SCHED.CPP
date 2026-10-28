@@ -28,7 +28,7 @@
 
 
 
-extern s64 Audio_ReadSystemTime(void);
+extern u64 Audio_ReadSystemTime(void);
 
 extern void osSpTaskLoad(s32 *mode);
 

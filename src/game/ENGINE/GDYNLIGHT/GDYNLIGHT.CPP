@@ -17,7 +17,7 @@ extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index)
 void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1);
 
 void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
-                   CVector3 *arg4, f32 *arg5) {
+                   CVector3 *left, f32 *arg5) {
     CVector3 delta;
     f32 temp_f0;
     f32 temp_f1;
@@ -60,7 +60,7 @@ void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u
                     Graphu64_NormalizeVec3(&delta);
                     temp_f20_2 = temp_f20 * D_800C4494_de;
                     Graphu64_ScaleVector(&delta, &delta, temp_f20_2);
-                    Graphu64_AddVec3(arg4, arg4, &delta);
+                    Graphu64_AddVec3(left, left, &delta);
                     *arg5 -= temp_f20_2;
                 }
             }
@@ -69,8 +69,8 @@ void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u
     }
 }
 
-void *Gdynlight_AllocateWorldLight(s32 arg0, s32 index) {
-    return Gdynlight_AllocateLightNode(arg0, Scene_GetStridedWorldRecord(&g_world, index));
+void *Gdynlight_AllocateWorldLight(s32 intrusiveList, s32 index) {
+    return Gdynlight_AllocateLightNode(intrusiveList, Scene_GetStridedWorldRecord(&g_world, index));
 }
 
 void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1) {

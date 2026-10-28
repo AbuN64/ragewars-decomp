@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "MENU/OPTIONS.H"
 
@@ -130,8 +130,8 @@ s32 Options_OpenOptionsScreen(void *node) {
     D_800E4518 = Cache_AllocateMemory(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
-    func_8025E384_de();
-    func_8025E214_de(-1);
+    SoundElement_DisableMusicGainOverride();
+    SoundElement_StopAudioExceptKey(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
     D_800E4518->leftTab = Node_FindWidgetByResourceId(node, 0x381);
@@ -228,7 +228,7 @@ s32 Options_OpenOptionsScreen(void *node) {
 
 /* 80408AC4_24.CPP */
 #if defined(VERSION_DE)
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "MENU/SCROLL.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
@@ -271,8 +271,8 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     D_800E4518 = Cache_AllocateMemory(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
-    func_8025E384_de();
-    func_8025E214_de(-1);
+    SoundElement_DisableMusicGainOverride();
+    SoundElement_StopAudioExceptKey(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
     D_800E4518->leftTab = Node_FindWidgetByResourceId(node, 0x37B);

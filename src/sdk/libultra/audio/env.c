@@ -8,7 +8,7 @@
 #include "AUDIO/AUDIO_ASSERT.H"
 #include "acmd.h"
 #include "sdk/al_globals.h"
-#include "sdk/OBJECTSTATE10_5.H"
+#include "sdk/VOICE_START_AND_PARAMETER_UPDATE_VIEWS.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "sdk/libultra/audio/synthesizer.h"
 

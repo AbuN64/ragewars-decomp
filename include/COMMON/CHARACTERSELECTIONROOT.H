@@ -18,7 +18,7 @@ struct CharacterSelectionRoot {
     s32 phase;
 };
 
-extern void Menu_RefreshCharacterUnlocks();
+extern void Menu_RefreshCharacterUnlocks(void);
 
 struct PanelRecord;
 struct PanelRecord {

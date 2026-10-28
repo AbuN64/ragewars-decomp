@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/S1_3.H"
+#include "COMMON/GRAPHICS_MATRIX_AND_VECTOR_MATH.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

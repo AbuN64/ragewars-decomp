@@ -10,10 +10,10 @@
 #include "COMMON/GFX.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/MENURECAT24.H"
-#include "RENDER/80293A04_2.H"
+#include "RENDER/TIMED_SESSION_TRANSITIONS.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-s32 Control_DisableAllControllerPaks();
+void Control_DisableAllControllerPaks(void);
 
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
@@ -67,7 +67,7 @@ void SetN64_DrawRoundTimeoutSession(GameSession *session) {
     SetN64_DrawSessionWithRoundTimeout(session);
 }
 
-void SetN64_ResetSceneForIntro(void *arg0) {
+void SetN64_ResetSceneForIntro(void *owner) {
     s8 *p1;
     s8 *p2;
     int new_var;
@@ -80,7 +80,7 @@ void SetN64_ResetSceneForIntro(void *arg0) {
     p1[0xB2] = 1;
     p1[0x1D] = 0;
     p1[0x1E] = 1;
-    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
+    SetN64_ResetSessionPlayerPools(owner, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Pools_ResetActorPools(p2, 1);
@@ -126,8 +126,8 @@ void SetN64_DrawIntroBackdrop(void) {
     }
 }
 
-void SetN64_ClearSessionPlayerPools(void *arg0) {
-    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
+void SetN64_ClearSessionPlayerPools(void *owner) {
+    SetN64_ResetSessionPlayerPools(owner, 0, 0);
 }
 
 void SetN64_AdvanceToModeFour(struct GameSession *value) {

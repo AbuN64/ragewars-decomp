@@ -98,11 +98,11 @@ struct Actor_func_80206DD4_de {
     char pad70[0x90];
     u32 flags;
 };
-extern int func_80206758_de(void *arg0, struct Dest *arg1);
-extern void func_802062B0_de(struct Trigger *arg0);
-extern void func_80206604_de(struct LevelActor *arg0, struct ActorMotionState *arg1);
+extern int func_80206758_de(void *unused0, struct Dest *deviceState);
+extern void func_802062B0_de(struct Trigger *trigger);
+extern void func_80206604_de(struct LevelActor *actor, struct ActorMotionState *motionState);
 extern void func_80206764_de(void);
-extern s32 func_8020655C_de(s32 arg0);
-extern void func_80206258_de(struct Trigger *arg0);
+extern s32 func_8020655C_de(s32 actorKind);
+extern void func_80206258_de(struct Trigger *trigger);
 extern void func_802065C0_de(void *a, struct ActorMotionState *b, s32 c);
 #endif

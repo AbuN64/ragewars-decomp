@@ -17,7 +17,7 @@
 #include "sdk/os_pif.h"
 void __osPfsRequestData(u8 cmd);
 
-s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
+s32 Items_QueryControllerPresence(OSMesgQueue *queue, s8 *arg1) {
     EntryRecAt3 sp10;
     void *sp20;
     u8 sp24;
@@ -35,9 +35,9 @@ s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
     do {
         __osPfsRequestData(0U);
         __osSiRawStartDma(1, (u8 *)&D_80154110);
-        osRecvMesg(arg0, &sp20, 1);
+        osRecvMesg(queue, &sp20, 1);
         temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(arg0, &sp20, 1);
+        osRecvMesg(queue, &sp20, 1);
         Items_DecodeControllerStatusReplies(&sp24, &sp10);
         var_a0 = 0;
         if (D_8014D46C[0] != 0) {

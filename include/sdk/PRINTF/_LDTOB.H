@@ -1,5 +1,5 @@
-#ifndef SDK_PRINTF_802C31B0_H
-#define SDK_PRINTF_802C31B0_H
+#ifndef SDK_PRINTF_LDTOB_H
+#define SDK_PRINTF_LDTOB_H
 #include "TYPES.H"
 void _Ldtob(void *unused_state, unsigned char unused_code);
 #endif

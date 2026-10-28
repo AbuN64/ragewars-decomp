@@ -1,9 +1,9 @@
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "TYPES.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "FRONTEND/MENUIMAGE.H"
 #include "FRONTEND/SCREEN.H"
 
@@ -29,7 +29,7 @@ extern struct LevelActor *D_800E2830;
 extern s32 Frontend_GetMenuImageState(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Widget_SetWidgetFlag08(void *, s32);
-extern void Track_RequestTrackByKey(s32);
+extern s32 Track_RequestTrackByKey(s32);
 extern void MarkMenuEventHandled(void);
 
 extern void Tsmos_RequestFrontendShutdown(void);

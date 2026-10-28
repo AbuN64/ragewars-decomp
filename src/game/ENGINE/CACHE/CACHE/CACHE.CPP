@@ -5,7 +5,7 @@
 #include "COMMON/LONE/D_801051A0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "SCENE/802508E0.H"
+#include "SCENE/RESOURCE_BINDING_AND_FADE_VIEWS.H"
 #include "COMMON/EXTERNS_18.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 
@@ -17,11 +17,11 @@ void Cache_SendCompletionMessage(s32 arg0, s32 message)
 }
 
 /* 802508E0_11.CPP */
-extern void Cache_DetachResourceRequest(void *arg0, void *arg1);
+extern void Cache_DetachResourceRequest(void *unused0, void *resourceCacheEntry);
 
-extern void func_80255B2C_de(void *arg0, s32 arg1);
+extern void func_80255B2C_de(void *arena, s32 dataToFree);
 
-extern void Cache_ReleasePendingResourceEntry(s32 arg0, s32 arg1);
+extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 arg1);
 
 extern s32 D_80100570;
 
@@ -39,7 +39,7 @@ extern char s_headerText;
 
 /* Allocates a four-byte probe from Cache_RequestResource to read a count, frees it under the D_8010515C lock, then allocates count*4+15 rounded to eight bytes and stores its first word through arg1, returning the allocation. Adapted from Cache_RequestWordCountedResource with the null checks removed, tag 0x1B and flag 1 passed as the fifth and ninth arguments, and the constant 1 held in a local changed. */
 
-extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(void *directory, s32 bankOffset, s32 sectionIndex, s32 *sectionSizeOut);
 
 void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement) {
     extern OSMesgQueue D_80101140;

@@ -3,7 +3,7 @@
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "TYPES.H"
-#include "AI/NAV/80208000_10.H"
+#include "AI/NAV/SEARCH_NODE_STATE.H"
 
 /* Stores an id in the first free (-1) of the object's 64 id slots at 0x38 and flags the node with that
    id in the object's list at 0x24 as active. */

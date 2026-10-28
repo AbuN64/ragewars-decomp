@@ -1,4 +1,4 @@
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/WORLD.H"
@@ -97,7 +97,7 @@ extern f32 Graphu64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void Fx_AddActorRibbonSamples(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 static inline CVector3 randVec(void) {
     CVector3 v;

@@ -5,5 +5,5 @@ unsigned int D_blob_7888b9ce7cb96cb7db59[1] = {
     0x800E62E0,
 };
 
-char D_d0_2b885afb2ba0cd8d[16] = "send all links";
+char s_sendAllLinksText[16] = "send all links";
 #endif

@@ -12,7 +12,7 @@
 #include "AI/NAV/NAV_EVALUATECAPTUREFLAGMARKERSEARCH.H"
 #include "include_asm.h"
 
-extern f32 Scaled_GetScaledAggression(void *arg0);
+extern f32 Scaled_GetScaledAggression(void *controller);
 
 extern s32 D_801468A0;
 

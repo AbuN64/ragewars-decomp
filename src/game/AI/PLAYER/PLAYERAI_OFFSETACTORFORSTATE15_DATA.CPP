@@ -28,7 +28,7 @@ extern void Player_UpdateViewAngles(s32, s32, void *);
 
 
 
-extern void ContPad_ClearControllerInput(void *arg0);
+extern void ContPad_ClearControllerInput(void *object);
 
 s32 CCinema_RequestTrackWithCallbacks(s32, s32, s32 *);
 

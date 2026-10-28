@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
@@ -28,9 +29,8 @@ extern void System_SetVideoEvent(char *row, s32 text, s32 style);
 
 extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
 
-extern void osStartThread(char *list);
 
-s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
+s32 Sched_SelectRunnableTasks(OSSched *scheduler, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
     OSScTask_s *gfxListHead;
     OSScTask_s *audioListHead;
     OSScTask_s *next;
@@ -41,18 +41,18 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
     s32 availableProcessors;
 
     availableProcessors = arg3;
-    gfxListHead = arg0->gfxListHead;
-    audioListHead = arg0->audioListHead;
+    gfxListHead = scheduler->gfxListHead;
+    audioListHead = scheduler->audioListHead;
     temp_s5 = availableProcessors;
-    if ((arg0->doAudio != 0) && (availableProcessors & 2)) {
+    if ((scheduler->doAudio != 0) && (availableProcessors & 2)) {
         if ((gfxListHead == 0) || !(gfxListHead->flags & 0x10)) {
             *arg1 = audioListHead;
-            arg0->doAudio = 0;
-            next = arg0->audioListHead->next;
+            scheduler->doAudio = 0;
+            next = scheduler->audioListHead->next;
             availableProcessors &= ~2;
-            arg0->audioListHead = next;
+            scheduler->audioListHead = next;
             if (next == 0) {
-                arg0->audioListTail = 0;
+                scheduler->audioListTail = 0;
             }
         } else {
             *arg1 = gfxListHead;
@@ -86,18 +86,18 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
                             *arg2 = gfxListHead;
                             availableProcessors &= ~1;
                         }
-                        arg0->gfxListHead = arg0->gfxListHead->next;
-                        if (arg0->gfxListHead == 0) {
-                            arg0->gfxListTail = 0;
+                        scheduler->gfxListHead = scheduler->gfxListHead->next;
+                        if (scheduler->gfxListHead == 0) {
+                            scheduler->gfxListTail = 0;
                         }
                     }
                 } else if (availableProcessors == 3) {
                     *arg2 = gfxListHead;
                     *arg1 = gfxListHead;
-                    arg0->gfxListHead = arg0->gfxListHead->next;
+                    scheduler->gfxListHead = scheduler->gfxListHead->next;
                     availableProcessors = 0;
-                    if (arg0->gfxListHead == 0) {
-                        arg0->gfxListTail = 0;
+                    if (scheduler->gfxListHead == 0) {
+                        scheduler->gfxListTail = 0;
                     }
                 }
                 break;
@@ -112,10 +112,10 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
                     }
                 } else if ((state & 1) && (availableProcessors & 1)) {
                     *arg2 = gfxListHead;
-                    arg0->gfxListHead = arg0->gfxListHead->next;
+                    scheduler->gfxListHead = scheduler->gfxListHead->next;
                     availableProcessors &= ~1;
-                    if (arg0->gfxListHead == 0) {
-                        arg0->gfxListTail = 0;
+                    if (scheduler->gfxListHead == 0) {
+                        scheduler->gfxListTail = 0;
                     }
                 }
                 break;
@@ -123,7 +123,7 @@ s32 Sched_SelectRunnableTasks(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg
         }
     }
     if (availableProcessors != temp_s5) {
-        availableProcessors = Sched_SelectRunnableTasks(arg0, arg1, arg2, availableProcessors);
+        availableProcessors = Sched_SelectRunnableTasks(scheduler, arg1, arg2, availableProcessors);
     }
     return availableProcessors;
 }

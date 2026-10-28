@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "COMMON/LLDIVRESULT.H"
@@ -15,7 +16,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
-#include "ENGINE/VIRTUAL/VHANDLER_3.H"
+#include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
 #include "ENGINE/VIRTUAL/VHANDLER_5.H"
 
 /* VHANDLER.CPP */
@@ -29,9 +30,8 @@ extern char D_801011B8[];
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 Defs_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
-extern void osCreateThread(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
+extern void osCreateThread(void *queue, s32 count, void *entry, s32 arg, void *data, s32 arg5);
 extern void osSetEventMesg(s32 count, void *list, s16 *arg2);
-extern void osStartThread(void *queue);
 
 static inline void fill(void *dst, u8 value, s32 n) {
     u8 *p = dst;
@@ -341,7 +341,7 @@ void Vhandler_HandleResourcePageRequest(void) {
 extern Region D_80103F88;
 
 
-void **Cache_AllocateResource(s32 arg0, s32 arg1, s32 arg2, void *arg3);
+void **Cache_AllocateResource(s32 arg0, s32 byteCount, s32 allocationFlags, void *arg3);
 
 void Vhandler_UpdatePagerStatistics(void) {
     u32 var_a2;
@@ -351,7 +351,7 @@ void Vhandler_UpdatePagerStatistics(void) {
     u32 temp_v1;
     Region *var_v1;
     s32 var_a0_2;
-    u16 temp_v0;
+    u16 pagesValue;
     s32 *out;
     s32 *ordered;
 
@@ -376,9 +376,9 @@ void Vhandler_UpdatePagerStatistics(void) {
     var_a0_2 = 0;
     if (&D_80103F88 != 0) {
         do {
-            temp_v0 = var_v1->pages;
+            pagesValue = var_v1->pages;
             var_v1 = var_v1->next;
-            var_a0_2 += temp_v0 << 0xC;
+            var_a0_2 += pagesValue << 0xC;
         } while (var_v1 != 0);
     }
 
@@ -403,7 +403,7 @@ void *Vhandler_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2)
   u32 temp_s1;
   void *sp3C;
   u32 rounded;
-  void **temp_v0;
+  void **resourceResult;
   Draw *temp_v1;
   int new_var;
   temp_s1 = ((u32) (arg0 + 0xFFF)) >> 0xC;
@@ -416,10 +416,10 @@ void *Vhandler_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2)
     blk.f34 = (void **) sp10;
     new_var2 = temp_s1 * 4;
     rounded = new_var + 0x18;
-    temp_v0 = Cache_AllocateResource(0, new_var2 + rounded, 3, &s_virtualRegionText);
-    temp_v1 = *temp_v0;
+    resourceResult = Cache_AllocateResource(0, new_var2 + rounded, 3, &s_virtualRegionText);
+    temp_v1 = *resourceResult;
     blk.f30 = temp_v1;
-    temp_v1->model = temp_v0;
+    temp_v1->model = resourceResult;
   }
   ((Draw *)blk.f30)->allocationMode = arg2;
   osSendMesg(&D_800FF230.completion, &blk.f28, 1);

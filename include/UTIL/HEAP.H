@@ -28,6 +28,6 @@ struct HeapRecAtC {
     struct BlockRecAt20 *head;
     struct BlockRecAt20 *tail;
 };
-extern void func_80255780_de(Pool80255720 *arg0);
-extern void func_80255C4C_de(struct Pool80255ACC *arg0, s32 *arg1, u32 *arg2);
+extern void func_80255780_de(Pool80255720 *arena);
+extern void func_80255C4C_de(struct Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut);
 #endif

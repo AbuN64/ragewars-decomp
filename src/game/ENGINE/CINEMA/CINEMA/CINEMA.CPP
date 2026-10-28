@@ -107,7 +107,7 @@ extern f32 Track_EvaluateTrackScalar(f32 arg0);
 
 /** Clear the word at offset 0x100 in the active object. */
 
-extern void XPlus_CopyString(void *arg0, int arg1);
+extern void XPlus_CopyString(void *destination, int source);
 
 /* Returns the globally selected record's float at 0xA0 scaled by D_800C88CC. */
 

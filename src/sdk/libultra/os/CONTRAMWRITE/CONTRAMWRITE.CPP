@@ -12,7 +12,7 @@
 /* 802BD950.CPP */
 /* Writes a 32-byte block to a controller pak address through the PIF RAM, re-reading the reply up to three times until the data CRC matches, and returns 0, 1 for no pak, 4 for a CRC failure or the pak status error (libultra __osContRamWrite). Adapted from __osContRamRead with the read command 2 changed to the write command 3 packed by __osPackRamWriteData, a guard returning 0 for label-area addresses below 7 unless forced, the CRC taken over the caller's buffer with no copy back, and the DMA results assigned to the result as libultra does. */
 
-extern u32 __osPfsGetStatus(s32 arg0, s32 arg1);
+extern u32 __osPfsGetStatus(s32 queue, s32 channel);
 
 u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite) {
     Block40 saved;
@@ -65,7 +65,7 @@ u32 __osContRamWrite(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inp
 }
 
 /* 802BD950_2.CPP */
-extern u32 __osContAddressCrc(u32 arg0);
+extern u32 __osContAddressCrc(u32 blockAddress);
 
 void __osPackRamWriteData(s32 channel, s32 blockAddress, u8 *inputData) {
     Block40 packet;

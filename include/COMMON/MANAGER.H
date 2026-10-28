@@ -113,7 +113,7 @@ struct CachedResource;
 
 
 
-extern int Statinst_AdvanceResourceKey();
+extern int Statinst_AdvanceResourceKey(void);
 
 
 

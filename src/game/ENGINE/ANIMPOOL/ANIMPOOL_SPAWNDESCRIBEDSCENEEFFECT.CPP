@@ -83,14 +83,14 @@ SceneEffect *Animpool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectD
                         desc->direction, desc->color, 0);
 }
 
-s32 Animpool_ReleaseSceneEffect(struct SceneEffect *arg0) {
+s32 Animpool_ReleaseSceneEffect(struct SceneEffect *node) {
     s32 *counter;
 
-    counter = arg0->ref;
-    arg0->angle = 0;
+    counter = node->ref;
+    node->angle = 0;
     if (counter != 0) {
         *counter -= 1;
     }
-    func_80255ED8_de(&D_80137064, arg0);
-    return func_80255D14_de(&D_80137050, arg0);
+    func_80255ED8_de(&D_80137064, node);
+    return func_80255D14_de(&D_80137050, node);
 }

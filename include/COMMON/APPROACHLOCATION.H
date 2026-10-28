@@ -21,7 +21,7 @@ extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214624_de *,CVector3,
 extern void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 extern void Graphu64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 extern void Graphu64_ScaleVector(CVector3 *,CVector3 *,f32);
-static inline void approach(Actor_func_80214624_de *arg0,Actor_func_80214624_de *arg2,Actor_func_80214624_de *temp_a2,CVector3 *posp,s32 *roomp) {
+static inline void approach(Actor_func_80214624_de *actor,Actor_func_80214624_de *arg2,Actor_func_80214624_de *temp_a2,CVector3 *posp,s32 *roomp) {
  CVector3 delta,offset; f32 temp_f20;
         if (temp_a2 != 0) {
             Graphu64_SubtractVectors(&delta, &arg2->pos, &temp_a2->pos);
@@ -33,7 +33,7 @@ static inline void approach(Actor_func_80214624_de *arg0,Actor_func_80214624_de 
             delta.z = 0;
         }
         temp_f20 = Gobjinst_GetActorRadius(arg2);
-        Graphu64_ScaleVector(&delta, &delta, temp_f20 + Gobjinst_GetActorRadius(arg0) + D_800C215C_de);
+        Graphu64_ScaleVector(&delta, &delta, temp_f20 + Gobjinst_GetActorRadius(actor) + D_800C215C_de);
         Graphu64_AddVec3(&offset, &arg2->pos, &delta);
         InstHdr_CopyActorPositionAndModel(arg2, offset, posp, roomp, 0, 0);
 }

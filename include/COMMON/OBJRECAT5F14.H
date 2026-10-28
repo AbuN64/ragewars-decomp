@@ -35,7 +35,7 @@ struct EffectDesc {
 
 extern SceneEffect *Animpool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc);
 
-extern void *Animpool_AcquireSceneEffect(s32 arg0, s32 *arg1);
+extern void *Animpool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount);
 
 struct RecordAnimPoolSpawnAnimationObject;
 struct RecordAnimPoolSpawnAnimationObject {
@@ -103,7 +103,7 @@ struct RecordAnimPoolSpawnAnimationObject;
 typedef struct RecordAnimPoolSpawnAnimationObject RecordAnimPoolSpawnAnimationObject;
 
 
-extern void func_802624A8_de(void *arg0);
+extern void func_802624A8_de(void *animationState);
 
 
 

@@ -13,19 +13,19 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 extern struct CourseOptionsScreen *D_800E39C0;
 
-s32 Join_CreateUsJoinOptionsMenu(void *arg0) {
+s32 Join_CreateUsJoinOptionsMenu(void *root) {
     MenuWidget *item;
     s32 row;
 
     { void *memory = Cache_AllocateMemory(0x20); D_800E39C0 = memory; }
-    D_800E39C0->handle = arg0;
-    D_800E39C0->mode = SmpOverlay_CreateOverlayNode((s32) arg0, 4);
-    SmpOverlay_ShowSlotById((s32) arg0, 0, 0x389);
-    SmpOverlay_ShowSlotById((s32) arg0, 1, 0x389);
-    SmpOverlay_ShowSlotById((s32) arg0, 2, 0x389);
-    SmpOverlay_ShowSlotById((s32) arg0, 3, 0x389);
+    D_800E39C0->handle = root;
+    D_800E39C0->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
+    SmpOverlay_ShowSlotById((s32) root, 0, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 1, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
 
-    item = Node_FindWidgetByResourceId(arg0, 0x38B);
+    item = Node_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
         Widget_SetWidgetFlag08(item, 0);
@@ -33,11 +33,11 @@ s32 Join_CreateUsJoinOptionsMenu(void *arg0) {
 
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    item = Node_FindWidgetByResourceId(arg0, 0x38C);
+    item = Node_FindWidgetByResourceId(root, 0x38C);
     D_800E39C0->rows[0] = item;
-    item = Node_FindWidgetByResourceId(arg0, 0x395);
+    item = Node_FindWidgetByResourceId(root, 0x395);
     D_800E39C0->rows[1] = item;
-    item = Node_FindWidgetByResourceId(arg0, 0x396);
+    item = Node_FindWidgetByResourceId(root, 0x396);
     D_800E39C0->rows[2] = item;
     D_800E39C0->step = Join_CountUsedSlots();
 

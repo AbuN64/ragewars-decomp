@@ -300,10 +300,10 @@ extern Gfx *g_displayListCursor;
 extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
-extern void Geometry_SetColorDither(s32 arg0);
+extern void Geometry_SetColorDither(s32 ditherMode);
 extern s32 Visdata_TestBoxAgainstFrustum(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
-extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
+extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     Box box;
     CVector3 transformed;

@@ -15,7 +15,7 @@ extern s32 D_80100560;
 #include "SYSTEM/LIST.H"
 #include "SYSTEM/LIST.H"
 
-extern void func_80255FB8_de(void *arg0, s32 arg1);
+extern void func_80255FB8_de(void *list, s32 nodeToMove);
 extern s32 D_80105180[];
 
 
@@ -81,7 +81,7 @@ void Cache_DetachResourceRequest(void *unused0, void *resourceCacheEntry) {
 
     ownerRequest = ((CMemEntry *)resourceCacheEntry)->owner;
     if (ownerRequest != 0) {
-        func_80255488_de(((ResourceLoadRequest *)ownerRequest)->key);
+        HashTable_RemoveResourceByKey(((ResourceLoadRequest *)ownerRequest)->key);
         requestToRecycle = ((CMemEntry *)resourceCacheEntry)->owner;
         func_80255ED8_de(&D_8010110C, requestToRecycle);
         ((ResourceLoadRequest *)requestToRecycle)->flags = 0;

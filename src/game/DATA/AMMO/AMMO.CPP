@@ -41,7 +41,7 @@ unsigned int D_blob_af54990f76d301f08e14[2] = {
 
 /* DATA_800EEDE0.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const char rodata_shared_800EEDE0[8] =
+const char s_ammoCountFormat[8] =
     " %03d\000\000\000";
 #endif
 

@@ -95,7 +95,7 @@ struct Transform {
 
 extern void Fx_RibbonNoop(void);
 
-extern void Fx_ResetEffectContribution(EffectContribution *arg0, s32 arg1);
+extern void Fx_ResetEffectContribution(EffectContribution *arg0, s32 effectId);
 
 
 struct Entity1DC;

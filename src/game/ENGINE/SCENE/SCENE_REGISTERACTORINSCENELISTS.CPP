@@ -19,7 +19,7 @@
 #include "ENGINE/SCENE_SAMPLEWORLDLIGHTING.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 
-extern void Link_DispatchTriggerExit(RecGobjinstSampleBoneTranslation *arg0);
+extern void Link_DispatchTriggerExit(RecGobjinstSampleBoneTranslation *trigger);
 
 
 

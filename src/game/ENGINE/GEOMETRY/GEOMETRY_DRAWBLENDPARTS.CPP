@@ -1,7 +1,7 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTSTATE18.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER/GEOMETRY_ALTERNATENOOPERATION.H"
@@ -40,7 +40,7 @@ extern ObjectState18 D_8013B2D8;
 
 extern s32 Geometry_ApplyMaterialLighting(void *matrix, void *lights, void *material);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
-extern void Geometry_SetCombineMode(s32 mode);
+extern void Geometry_SetCombineMode(u32 mode);
 
 void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, s32 segment, void *lights, void *textures, s32 pass, u8 r, u8 g, u8 b, u8 a) {
     void *header;
@@ -110,18 +110,18 @@ void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, 
     D_800D15E0 = 0;
 }
 
-extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void Geometry_ExpandModelCommands(s32 unused, s32 res, s32 extra, s32 sentinel);
 
-void Geometry_ExpandBasicModel(s32 arg0, s32 arg1) {
-    Geometry_ExpandModelCommands(arg0, arg1, 0, 0);
+void Geometry_ExpandBasicModel(s32 unused, s32 arg1) {
+    Geometry_ExpandModelCommands(unused, arg1, 0, 0);
 }
 
-void Geometry_ExpandModelWithSentinel(s32 arg0, s32 arg1) {
-    Geometry_ExpandModelCommands(arg0, arg1, 0, 1);
+void Geometry_ExpandModelWithSentinel(s32 unused, s32 arg1) {
+    Geometry_ExpandModelCommands(unused, arg1, 0, 1);
 }
 
-void Geometry_ExpandExtendedModel(s32 arg0, s32 arg1) {
-    Geometry_ExpandModelCommands(arg0, arg1, 1, 0);
+void Geometry_ExpandExtendedModel(s32 unused, s32 arg1) {
+    Geometry_ExpandModelCommands(unused, arg1, 1, 0);
 }
 
 void Geometry_AlternateNoOperation(void) {
@@ -149,11 +149,11 @@ extern ObjRecAtCV2 D_801157D8[];
 
 extern void Cache_LockResource(s32, s32);
 
-extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
+extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct);
 
-extern void Geometry_SetModePreset(s32 mode);
+extern s32 Geometry_SetModePreset(s32 mode);
 
-extern void **Textload_RequestTextureVariationSync(void *arg0, s32 arg1);
+extern void **Textload_RequestTextureVariationSync(void *resource, s32 variation);
 
 void Geometry_InitializeModelRenderState(void) {
     char local[64];
@@ -383,16 +383,16 @@ void Geometry_DrawWithMaterialOverride(void *shared, s32 mode, void **resource, 
 }
 
 void Geometry_UnlockMaterialResources(void **arg0) {
-    void *temp_v0;
+    void *packSectionResult;
     s32 count;
     s32 i;
     void *rec;
     s32 result;
 
-    temp_v0 = SetN64_GetPackSection(*arg0, 2);
-    count = *(s32 *)temp_v0;
+    packSectionResult = SetN64_GetPackSection(*arg0, 2);
+    count = *(s32 *)packSectionResult;
     for (i = 0; i < count; i++) {
-        rec = SetN64_GetPackSection(SetN64_GetPackSection(temp_v0, i), 0);
+        rec = SetN64_GetPackSection(SetN64_GetPackSection(packSectionResult, i), 0);
         if (((ResourceSectionReference *)rec)->resource == 0) {
             continue;
         }
@@ -408,18 +408,18 @@ void Geometry_UnlockMaterialResources(void **arg0) {
 
 
 /* 8026E1F8.CPP */
-extern void Cache_TouchResourceByKey(s32 arg0, s32 arg1);
+extern void Cache_TouchResourceByKey(s32 arg0, s32 resourceKey);
 
 void Geometry_RefreshMaterialResources(void **resource) {
-    void *temp_v0;
+    void *packSectionResult;
     s32 count;
     s32 i;
     void *rec;
 
-    temp_v0 = SetN64_GetPackSection(*resource, 2);
-    count = *(s32 *)temp_v0;
+    packSectionResult = SetN64_GetPackSection(*resource, 2);
+    count = *(s32 *)packSectionResult;
     for (i = 0; i < count; i++) {
-        rec = SetN64_GetPackSection(SetN64_GetPackSection(temp_v0, i), 0);
+        rec = SetN64_GetPackSection(SetN64_GetPackSection(packSectionResult, i), 0);
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
@@ -428,7 +428,7 @@ void Geometry_RefreshMaterialResources(void **resource) {
 }
 
 s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
-    void *temp_v0;
+    void *packSectionResult;
     s32 count;
     s32 i;
     s32 *out;
@@ -436,10 +436,10 @@ s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
     s32 result;
 
     out = arg2;
-    temp_v0 = SetN64_GetPackSection(*arg0, 2);
-    count = *(s32 *)temp_v0;
+    packSectionResult = SetN64_GetPackSection(*arg0, 2);
+    count = *(s32 *)packSectionResult;
     for (i = 0; i < count; i++) {
-        rec = SetN64_GetPackSection(SetN64_GetPackSection(temp_v0, i), 0);
+        rec = SetN64_GetPackSection(SetN64_GetPackSection(packSectionResult, i), 0);
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }

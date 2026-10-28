@@ -3,9 +3,9 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LISTNODE.H"
-#include "AUDIO/80259280.H"
+#include "AUDIO/LIST_AND_CHANNEL_VIEWS.H"
 
-extern void AudioWorld_RecyclePendingSoundsByIdentifier(struct ChannelSet *arg0, s32 arg1);
+extern void AudioWorld_RecyclePendingSoundsByIdentifier(struct ChannelSet *channelSet, s32 soundId);
 extern void AudioWorld_StartSpatialVoice(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CVector3 *position);
 extern void AudioWorld_InitializeVoiceListSentinel(void *sentinel, s32 owner);
 extern void *AudioWorld_UnlinkChannelNode(LinkPair *channelNode);

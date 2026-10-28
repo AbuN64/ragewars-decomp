@@ -4,9 +4,9 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "COMMON/OBJRECAT4V6.H"
-#include "AUDIO/8025A3EC.H"
+#include "AUDIO/VOICE_AND_SPATIAL_SOURCE_VIEWS.H"
 #include "COMMON/UNUSED.H"
-#include "AUDIO/80259280.H"
+#include "AUDIO/LIST_AND_CHANNEL_VIEWS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -58,7 +58,7 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
 
 /* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from Graphu64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table g_audioPitchRatioCurve with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
 extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
-extern s16 Menu_GetFloatHighWord(f32);
+extern unsigned short Menu_GetFloatHighWord(f32);
 
 extern s32 func_8025E584_de(ControllerCode802591C0 *);
 extern s32 func_8025E590_de(ControllerCode802591C0 *);

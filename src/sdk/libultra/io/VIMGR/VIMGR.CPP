@@ -1,3 +1,4 @@
+#include "sdk/thread_queue.h"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
@@ -8,8 +9,8 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_11.H"
-#include "SYSTEM/802BA5F0.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
+#include "SYSTEM/VIDEO_CONTEXT_VIEWS.H"
 #include "sdk/AUDIO/__OSVISWAPCONTEXT.H"
 
 /* 802BA5F0_22.CPP */
@@ -26,7 +27,6 @@ extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
 extern s32 osGetThreadPri(OSThread *t);
 extern void Scene_SetThreadPriority(OSThread *t, s32 pri);
 
-extern void osStartThread(OSThread *t);
 
 void func_802BA350_de(s32 pri)
 {
@@ -82,7 +82,6 @@ void func_802BA350_de(s32 pri)
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 osGetThreadPri(OSThread_s *thread);
 void Scene_SetThreadPriority(OSThread_s *thread, s32 priority);
-void osStartThread(OSThread_s *thread);
 extern OSThread_s D_80148850;
 extern struct OSMesgQueue D_80149A80;
 extern void *D_80149AA0[5];

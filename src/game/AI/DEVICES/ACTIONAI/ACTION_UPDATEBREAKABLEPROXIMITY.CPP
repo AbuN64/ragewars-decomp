@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/OBJRECAT30.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -160,7 +160,7 @@ s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionStat
     Gsky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
     index = record->soundIndex;
     callback = gameplaySoundHook(index);
-    if (callback != 0) func_8025E11C_de(callback);
+    if (callback != 0) SoundElement_PlayDialogGroup(callback);
     return 0;
 }
 #else
@@ -173,7 +173,7 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *actor, s32 arg1, void *arg2);
 
 struct SceneRecAt95A8;
 extern void Fx_RecycleOwnerParticles(struct SceneRecAt95A8 *, s32);
@@ -260,10 +260,10 @@ s32 Actionai_UpdateTriggerFlag(LevelActor *actor) {
     return val;
 }
 
-void Action_ClearBreakableState(void *arg0, void *actorMotionState) {
+void Action_ClearBreakableState(void *actor, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
-    Rumble_SetActorStateBit(&g_world, arg0, 0);
-    Link_DispatchActorLinks(arg0, 0x200000, arg0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
+    Link_DispatchActorLinks(actor, 0x200000, actor);
     state->unk12C = 0;
 }
 
@@ -281,29 +281,29 @@ s32 Actionai_UpdateHealthFlag(LevelActor *actor) {
     return val;
 }
 
-void Action_SetBreakableState(void *arg0) {
+void Action_SetBreakableState(void *actor) {
     BreakableDefinition *breakableDefinition;
     s32 hitFlags;
     s32 masked;
     Shared_World *pFlag;
 
-    breakableDefinition = (BreakableDefinition *)((LevelActor *)arg0)->definition;
+    breakableDefinition = (BreakableDefinition *)((LevelActor *)actor)->definition;
     pFlag = &g_world;
-    Rumble_SetActorStateBit(pFlag, arg0, 1);
+    Rumble_SetActorStateBit(pFlag, actor, 1);
     if (D_800C8270_de == 0) {
-        Link_DispatchActorLinks(arg0, 0x80000, arg0);
+        Link_DispatchActorLinks(actor, 0x80000, actor);
     }
-    Fx_RecycleOwnerParticles(&D_801379C0, arg0);
+    Fx_RecycleOwnerParticles(&D_801379C0, actor);
     if (pFlag->mode != 4) {
-        hitFlags = ((LevelActor *)arg0)->flags | 0x08000000;
-        ((LevelActor *)arg0)->flags = hitFlags;
+        hitFlags = ((LevelActor *)actor)->flags | 0x08000000;
+        ((LevelActor *)actor)->flags = hitFlags;
         if (breakableDefinition->flags & 2) {
             masked = hitFlags & ~0x2000;
             masked = masked & ~0x100;
-            ((LevelActor *)arg0)->flags = masked;
+            ((LevelActor *)actor)->flags = masked;
         }
-        if (((BreakableDefinition *)((LevelActor *)arg0)->definition)->health == 0) {
-            ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags & ~0x100;
+        if (((BreakableDefinition *)((LevelActor *)actor)->definition)->health == 0) {
+            ((LevelActor *)actor)->flags = ((LevelActor *)actor)->flags & ~0x100;
         }
     }
 }

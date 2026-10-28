@@ -1,8 +1,9 @@
+#include "sdk/thread_queue.h"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
-#include "COMMON/EXTERNS_11.H"
+#include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
 /* 802C0390_2.CPP */
@@ -12,8 +13,6 @@ unsigned char D_auto_func_802BB294_de_padding_BBE94[12] = { 0xAF, 0xB0, 0x00, 0x
 
 /* 802C0250.CPP */
 extern void func_802BC36C_de(void *arg0);
-extern s32 __osPopThread(OSMesgQueue *arg0);
-extern void osStartThread(s32 arg0);
 
 extern OSThread_s *D_800D5270;
 
@@ -36,7 +35,7 @@ s32 osJamMesg(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
     messageQueue->msg[index] = message;
     messageQueue->validCount++;
     if (*messageQueue->mtqueue != 0) {
-        osStartThread(__osPopThread(messageQueue));
+        osStartThread(__osPopThread(&messageQueue->mtqueue));
     }
     __osRestoreInt(saved);
     return 0;

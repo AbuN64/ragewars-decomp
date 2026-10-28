@@ -8,22 +8,22 @@
 #include "TYPES.H"
 #include "sdk/libgultra.h"
 #include "COMMON/EXTERNS_3.H"
-#include "FRONTEND/8040B45C_22.H"
+#include "FRONTEND/SCREEN_VIDEO_MODE.H"
 #include "sdk/AUDIO/visetmode.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "sdk/os.h"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 extern void Sched_HandleRetrace(void *arg0);
 
 extern void Sched_HandleRdpCompletion(void *arg0);
-extern void Sched_HandleTaskCommands(void *arg0);
+extern void Sched_HandleTaskCommands(void *scheduler);
 
 
 extern void *func_8025CC6C_de(void);
-extern void func_8025CBEC_de(void *arg0);
+extern void func_8025CBEC_de(void *soundVoicePool);
 
-extern void osViSetMode(void *arg0);
+extern void osViSetMode(void *modep);
 
 
 
@@ -91,8 +91,8 @@ event_29c:
     goto loop_1;
 
 event_29d:
-    func_8025E318_de();
-    func_8025E214_de(-1);
+    SoundElement_FadeOutMusic();
+    SoundElement_StopAudioExceptKey(-1);
     func_8025CBEC_de(func_8025CC6C_de());
     node = scheduler->clientList;
     D_800CD708 = 1;

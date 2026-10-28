@@ -20,7 +20,7 @@ const unsigned int rodata_func_8040A58C_de_800ED400[1] = {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const char rodata_func_8040A614_de_800ED404[14] =
+const char s_snapshotThreePartNumberFormat[14] =
     "%3d.%02d.%02d\000";
 #endif
 

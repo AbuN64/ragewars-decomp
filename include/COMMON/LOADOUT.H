@@ -71,7 +71,7 @@ struct SharedRecAt848 {
     s32 override;
 };
 
-extern f32 func_8022AA44_de(SharedRecAt848 *arg0);
+extern f32 func_8022AA44_de(SharedRecAt848 *rampState);
 
 struct func_8022A274_S2;
 struct func_8022A274_S2 {
@@ -120,12 +120,12 @@ struct func_8022A8B8_S2 {
     char * unk16E0;
 };
 
-extern int func_8022AE28_de(void *arg0, void *arg1);
+extern int func_8022AE28_de(void *player, void *newPosition);
 
 struct Context;
-extern void *func_8022A634_de(struct Context *arg0, u32 arg1);
+extern void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex);
 
-extern void func_8022A95C_de(void *arg0);
+extern void func_8022A95C_de(void *player);
 
 
 
@@ -137,12 +137,12 @@ extern float D_800C2CE8_de;
 
 
 
-extern void func_8022A940_de(Shared_Effect *arg0);
+extern void func_8022A940_de(Shared_Effect *effect);
 
 
 extern void func_8022A8C8_de(char *object, f32 arg1);
 
-extern void func_8022A928_de(ObjRecAtB4 *arg0, int arg1);
+extern void func_8022A928_de(ObjRecAtB4 *record, int newValue);
 
 
 

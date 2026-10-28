@@ -69,7 +69,7 @@ static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
     return 0;
 }
 
-extern void Rect_DrawGradientRectangle(f32 x, f32 y, f32 z, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
+extern void Rect_DrawGradientRectangle(f32 x, f32 y, s32 z, f32 width, f32 height, s32 c0, s32 c1, s32 c2, s32 c3);
 
 static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
     BatchRec *batch;

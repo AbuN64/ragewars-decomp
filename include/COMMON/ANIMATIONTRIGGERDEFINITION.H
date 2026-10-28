@@ -31,7 +31,7 @@ typedef struct AnimationTriggerResource {
 
 extern unsigned int func_80205700_de(void *object);
 
-extern void func_80206080_de(void *arg0, void *arg1);
+extern void func_80206080_de(void *levelActor, void *actorMotionState);
 
 
 struct ActionInfo;
@@ -72,14 +72,14 @@ struct Health {
 };
 
 struct Trigger;
-extern void func_802056D0_de(struct Trigger *arg0);
+extern void func_802056D0_de(struct Trigger *trigger);
 
 extern void func_80204F78_de(void *unused, char *object, float value);
 
 struct CallbackHolder;
 typedef struct CallbackHolder CallbackHolder;
 
-extern int func_802052F8_de(void *arg0);
+extern int func_802052F8_de(void *owner);
 
 struct Access_s32_40;
 typedef struct Access_s32_40 Access_s32_40;
@@ -117,7 +117,7 @@ typedef struct EventRecAt30 EventRecAt30;
 
 struct BreakableHitContext;
 struct ObjectStateCC;
-extern void func_80205494_de(struct BreakableHitContext *arg0, struct ObjectStateCC *arg1);
+extern void func_80205494_de(struct BreakableHitContext *breakableHitContext, struct ObjectStateCC *hitState);
 
 
 
@@ -125,9 +125,9 @@ extern void func_80205494_de(struct BreakableHitContext *arg0, struct ObjectStat
 
 extern float D_800C1ACC_de;
 
-extern void func_80205628_de(void *arg0, void *arg1, void *arg2);
+extern void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *modelLookup);
 
-extern void func_80205EC4_de(void *arg0, void *arg1);
+extern void func_80205EC4_de(void *levelActor, void *actorMotionState);
 
 extern float D_800C1AD0_de;
 
@@ -181,7 +181,7 @@ struct Damageable {
     struct Descriptor *desc;
 };
 
-extern void func_802055EC_de(void *arg0, void *arg1);
+extern void func_802055EC_de(void *levelActor, void *hitState);
 
 struct Cell;
 struct Cell {
@@ -196,7 +196,7 @@ struct Access_s32_40 {
     int field;
 };
 
-extern int func_8020570C_de(struct Hit *arg0);
+extern int func_8020570C_de(struct Hit *hitRecord);
 
 struct Hit;
 typedef struct Hit Hit;
@@ -211,7 +211,7 @@ typedef struct Actor_func_80205F18_de Actor_func_80205F18_de;
 struct LevelActor;
 extern void func_8020520C_de(struct LevelActor *source, void *dest);
 
-extern int func_80205314_de(void *arg0);
+extern int func_80205314_de(void *actor);
 
 struct DescriptorCode80204E78;
 struct DescriptorCode80204E78 {
@@ -266,7 +266,7 @@ typedef struct {
 } Obj5324;
 struct Shared_World;
 extern void Rumble_SetActorStateBit(struct Shared_World *, void *, s32);
-extern void Link_DispatchActorLinks(struct Shared_Actor *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 arg1, void *arg2);
 extern void Barrel_SpawnActorEffect(void *, s32, Triple, s32);
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 struct Player;
@@ -330,8 +330,8 @@ typedef struct {
     s32 spawn, remaining;
 } SpawnDispatchOwner;
 typedef struct { u8 unused0[0x1D]; u8 enabled; } SpawnDispatchConfig;
-extern s32 func_80222D64_de(void *arg0, s32 arg1);
-extern int func_8022ADB0_de(struct SharedPlayer *object, s32 arg1);
+extern s32 func_80222D64_de(void *context, s32 pickupType);
+extern int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1);
 
 #endif
 #endif

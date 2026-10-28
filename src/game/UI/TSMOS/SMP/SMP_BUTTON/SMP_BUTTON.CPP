@@ -276,8 +276,8 @@ s32 SmpButton_SelectPreviousListEntry(struct MenuRecAt114 *menu, void *second, v
     return 0;
 }
 
-s32 SmpButton_DestroyListController(void *arg0) {
-    Cache_FreeMemory(arg0);
+s32 SmpButton_DestroyListController(void *allocation) {
+    Cache_FreeMemory(allocation);
     return 0;
 }
 

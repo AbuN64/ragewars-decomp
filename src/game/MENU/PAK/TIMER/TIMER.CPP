@@ -5,10 +5,10 @@
 #include "TYPES.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
-#include "MENU/80405DC0.H"
+#include "MENU/PAK_PROFILE_PROMPT_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
-#include "MENU/PAK/80405DC0_16.H"
+#include "MENU/PAK/PROFILE_SAVE_BLOCKS.H"
 #include "RESMGR/X_PLUS.H"
 
 /* 80405DC0_15.CPP */
@@ -47,7 +47,7 @@ s32 Timer_MatchesGameIdentity(char *code, char *name) {
 #endif
 
 /* 80405DC0_16.CPP */
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /* Returns the address of block n, n times 256; block zero is the area 0x610 bytes into the
    buffer D_8011FECC points to. */

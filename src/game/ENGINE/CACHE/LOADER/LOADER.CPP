@@ -1,5 +1,6 @@
+#include "sdk/thread_queue.h"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "TEXTURE/80256220.H"
+#include "TEXTURE/CARTRIDGE_DMA_AND_AUDIO_TIMING_VIEWS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/S1.H"
@@ -14,15 +15,14 @@
 extern void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2);
 
 
-extern void osCreateThread(s32 arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
+extern void osCreateThread(s32 arg0, s32 arg1, void *entry, s32 arg, s32 arg4, s32 arg5);
 
-extern void osStartThread(s32 arg0);
 
 extern char D_0025657C;
 
 void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker);
 
-extern s32 osJamMesg(void *arg0, void *arg1, s32 arg2);
+extern s32 osJamMesg(void *messageQueue, void *message, s32 waitMode);
 
 typedef struct Queue Queue;
 
@@ -49,7 +49,7 @@ void func_80256280_de(s32 workerAddress, s32 count) {
     } while (s1 < 0x210);
     XPlus_FillMemory(workerAddress + 0xA68, count, 0x400);
     osCreateThread(workerAddress, count, &D_0025657C, workerAddress, workerAddress + 0xE68, D_800CD8C4_de);
-    osStartThread(workerAddress);
+    osStartThread((void *)workerAddress);
 }
 
 void func_8025637C_de(struct CartridgeReadWorker *cartridgeReadWorker, u32 sourceAddress, s32 byteCount, void *extra) {

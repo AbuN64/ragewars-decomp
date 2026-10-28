@@ -27,8 +27,8 @@ struct Arg1 {
     char pad28[0x100];
     CVector3 position128;
 };
-extern float Particle_GetConditionalFirstValue(struct ParticleEffect *arg0);
+extern float Particle_GetConditionalFirstValue(struct ParticleEffect *effect);
 extern s32 Particle_RandomInclusiveCount(s32 arg0);
-extern f32 Particle_GetConditionalSecondValue(struct ParticleEffect *arg0);
+extern f32 Particle_GetConditionalSecondValue(struct ParticleEffect *effect);
 extern void Particle_AdvanceRandomWhenNonzero(f32 arg0);
 #endif

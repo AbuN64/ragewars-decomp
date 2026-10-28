@@ -32,5 +32,5 @@ extern s32 D_800DE7E8;
 
 void OnScreen_SetupTextRendering(void);
 
-void Onscrn_DrawText(void * arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7);
+void Onscrn_DrawText(void * text, s32 arg1, s32 arg2, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY);
 #endif

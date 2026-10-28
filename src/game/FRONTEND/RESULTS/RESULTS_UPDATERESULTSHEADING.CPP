@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"

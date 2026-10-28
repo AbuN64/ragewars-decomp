@@ -32,7 +32,7 @@
  /* extern */
 
  /* extern */
-int Stream_DrainResourceWork();
+void Stream_DrainResourceWork(void);
 
  /* extern */
 
@@ -59,14 +59,14 @@ extern void *Cache_AllocateMemory(s32 size);
 
 
 void SmSmngr_InitializeCurrentScreen(void) {
-    s32 (*temp_v0)(s32);
+    s32 (*callback2Value)(s32);
     s32 current;
     s32 value, param;
     current = D_8014D080->current;
-    temp_v0 = D_8014D080->callback2;
+    callback2Value = D_8014D080->callback2;
     param = D_8014D080->screens[current].owner;
-    if (temp_v0 != NULL) {
-        value = temp_v0(param);
+    if (callback2Value != NULL) {
+        value = callback2Value(param);
         ((struct ObjRecAt40V1 *)D_8014D080->screens[current].primary)->unk40 = value;
     }
     DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);

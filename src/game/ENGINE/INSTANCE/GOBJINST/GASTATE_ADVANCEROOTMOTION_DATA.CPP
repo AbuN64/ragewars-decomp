@@ -1,5 +1,5 @@
 #include "COMMON/WORLD.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"

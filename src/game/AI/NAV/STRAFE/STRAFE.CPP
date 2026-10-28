@@ -30,13 +30,13 @@ typedef struct Actor {
 extern s32 D_800D297C;
 extern char D_8013B364[];
 
-extern void Nav_RunBehaviorHandler(Brain *arg0);
+extern void Nav_RunBehaviorHandler(Brain *aiController);
 extern s32 Scaled_HasLineOfSight(Brain *, Actor *);
 extern void Scaled_SetBehaviourState(Brain *, s32);
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
-extern f32 Scaled_ScaleCharacterSettingByDifficulty(Brain *arg0);
+extern f32 Scaled_ScaleCharacterSettingByDifficulty(Brain *controller);
 extern s32 Graphu64_NextRandom(void);
-extern f32 Scaled_UpdateDifficultyAimJitter(Brain *arg0);
+extern f32 Scaled_UpdateDifficultyAimJitter(Brain *aiController);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 Wheel_GetDirectionSector(f32);
 extern void Wheel_MeasureWheelClearance(Actor *, s32);

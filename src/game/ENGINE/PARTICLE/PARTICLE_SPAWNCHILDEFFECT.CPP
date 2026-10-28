@@ -10,8 +10,8 @@
 typedef struct Owner Owner;
 
 extern void *Particle_GetEffectResource(void *arg0);
-extern s32 func_8022B178_de(void *arg0);
-extern void Player_GiveAmmoWithMessage(void *arg0, s32 arg1, s32 arg2);
+extern s32 func_8022B178_de(void *player);
+extern void Player_GiveAmmoWithMessage(void *player, s32 type, s32 amount);
 
 
 
@@ -60,10 +60,10 @@ reset_state:
     Particle_StopSound(actor);
     owner = ((ObjectLinks1BC *)(actor))->unk_118;
     if (((struct ObjectStateC4 *) ((Owner *) owner)->track)->unk_BE != 0xFFFF) {
-        func_8025E1C4_de((s32)actor);
+        SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
     if (((struct ObjectStateC4 *) ((Owner *) owner)->track)->unk_C2 != 0xFFFF) {
-        func_8025E1C4_de((s32)actor);
+        SoundElement_StopAudioBySecondaryValue((s32)actor);
     }
 }
 

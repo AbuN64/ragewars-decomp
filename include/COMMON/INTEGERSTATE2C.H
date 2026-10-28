@@ -158,9 +158,9 @@ struct Shared_WeaponSlot;
 
 struct AiController;
 struct AiConfig;
-extern void Portal_UpdateAlternatingActionBursts(struct AiController *arg0, struct AiConfig *arg1);
+extern void Portal_UpdateAlternatingActionBursts(struct AiController *controller, struct AiConfig *aiConfig);
 
-extern void Portal_InitializeRandomActionSettings(void *arg0, void *arg1);
+extern void Portal_InitializeRandomActionSettings(void *object, void *settings);
 
 
 extern float D_800C1C90_de;
@@ -186,7 +186,7 @@ extern float D_800C1CB4_de;
 
 
 
-extern void Portal_UpdateMeterGatedActionBurst(void *arg0, void *arg1);
+extern void Portal_UpdateMeterGatedActionBurst(void *object, void *settings);
 
 
 
@@ -195,14 +195,14 @@ extern void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2
 extern float D_800C6E08;
 
 
-extern void Portal_UpdateRandomActionPulse(void *arg0, void *arg1);
+extern void Portal_UpdateRandomActionPulse(void *arg0, void *settings);
 
 
 
-extern void Portal_UpdateTimedActionBurst(void *arg0, void *arg1);
+extern void Portal_UpdateTimedActionBurst(void *controller, void *settings);
 
 
-extern void Portal_UpdateHeldActionBurst(void *arg0, void *arg1);
+extern void Portal_UpdateHeldActionBurst(void *controller, void *settings);
 
 extern float D_800C1D0C_de;
 

@@ -60,50 +60,50 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     }
     return 0;
 }
-void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
+void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
     CVector3 pos;
     CVector3 delta;
     f32 height;
     s32 kind;
     Actor_func_80214DD4_de *target;
     Location *point;
-    if ((tracker->team == g_world.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
-        tracker->anchor = Cbarrel_SelectCombatTarget(arg0, tracker, 1, 0);
+    if ((tracker->team == g_world.kind1Cursor) && !(actor->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
+        tracker->anchor = Cbarrel_SelectCombatTarget(actor, tracker, 1, 0);
     }
-    if ((*arg0->kind == 1) && (tracker->mode == 0xB)
-        && func_80215410_kind(arg0, tracker, tracker->target) == 4) {
+    if ((*actor->kind == 1) && (tracker->mode == 0xB)
+        && func_80215410_kind(actor, tracker, tracker->target) == 4) {
         target = tracker->target;
         kind = 4;
     } else {
         target = tracker->anchor;
-        kind = func_80215410_kind(arg0, tracker, target);
+        kind = func_80215410_kind(actor, tracker, target);
     }
     if (target != NULL) {
         pos = target->pos;
-        height = Barrel_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
+        height = Barrel_GetSignedAngleToPoint(actor, pos.x, pos.y, pos.z);
     } else {
         switch (kind) {
             case 4:
                 point = func_80219408_de(&tracker->slot);
                 pos = point->pos;
                 if (point->flags & 1) {
-                    height = point->heading * 0.0174532942f - arg0->heading;
+                    height = point->heading * 0.0174532942f - actor->heading;
                 } else {
-                    height = Barrel_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
+                    height = Barrel_GetSignedAngleToPoint(actor, pos.x, pos.y, pos.z);
                 }
                 break;
             case 3:
                 pos = tracker->homePos;
-                height = tracker->homeYaw - arg0->heading;
+                height = tracker->homeYaw - actor->heading;
                 break;
             case 6:
-                pos = arg0->pos;
+                pos = actor->pos;
                 height = 0.0f;
                 break;
         }
     }
     Graphu64_WrapPeriodicValue(&height);
-    Graphu64_SubtractVectors(&delta, &pos, &arg0->pos);
+    Graphu64_SubtractVectors(&delta, &pos, &actor->pos);
     arg3->m_DeltaAngle = height;
     arg3->kind = kind;
     arg3->target = target;

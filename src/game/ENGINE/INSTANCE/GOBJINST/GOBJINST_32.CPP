@@ -37,7 +37,7 @@ extern CROMEventEntry *func_80262598_de(void *);
 
 extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
-extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 resource);
 extern void Polytrak2_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);
 
 void *func_8024C104_de(Triple *outOffset, void *actor, CGameAnimateState_t *anim) {

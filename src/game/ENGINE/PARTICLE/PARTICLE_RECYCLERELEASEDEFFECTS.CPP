@@ -10,7 +10,7 @@
 
 extern void Particle_FinishActorEffects(void *arg0);
 extern void Particle_UpdateMatrix(void *);
-extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *effectWorld, void *detachedEntity);
 
 
 

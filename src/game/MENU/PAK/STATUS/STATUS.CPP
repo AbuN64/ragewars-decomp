@@ -4,7 +4,7 @@
 #include "MENU/ITEMRECAT24.H"
 #include "stddef.h"
 #include "MENU/80408CB0_10.H"
-#include "MENU/PAK/80409A88_9.H"
+#include "MENU/PAK/PROFILE_PREVIEW_AND_LINE_TEXT.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 
@@ -14,7 +14,7 @@
 #include "COMMON/UNUSED.H"
  /* const */
  /* const */
-s32 Status_FormatRightAlignedPreviewName(struct Field *arg0) {
+s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
     s8 *temp_s0;
     s8 *temp_s0_2;
     s32 var_s1;
@@ -28,20 +28,20 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *arg0) {
     var_s1 = 8;
     if (D_80153774 != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        arg0->text = D_800E2984_eu;
+        item->text = D_800E2984_eu;
 #else
-        arg0->text = &D_800D2478;
+        item->text = &D_800D2478;
 #endif
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        arg0->text = D_800E29A4;
+        item->text = D_800E29A4;
 #else
-        arg0->text = &D_800D2480;
+        item->text = &D_800D2480;
 #endif
         var_a1 = &D_8014B49B;
         while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
-        temp_s0 = RW_LOCALIZED_TEXT(*arg0->text, arg0->text, arg0->text, g_languageIndex);
-        temp_s0 = temp_s0 + (Menu_CountLineChars(arg0) - 8);
+        temp_s0 = RW_LOCALIZED_TEXT(*item->text, item->text, item->text, g_languageIndex);
+        temp_s0 = temp_s0 + (Menu_CountLineChars(item) - 8);
         space = 0x20;
         var_v1 = 7;
         var_v0 = temp_s0 + 7;
@@ -72,14 +72,14 @@ typedef struct { s8 value; } PakModeByte;
 extern char *D_800D2484, *D_800D37D0;
 extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
 /* Select the pak status label and right-align its eleven characters. */
-s32 Status_UpdateStatusText(struct Field *arg0) {
+s32 Status_UpdateStatusText(struct Field *item) {
     char *src;
     char *dst;
     s32 i;
     if (D_80153774 != 0) {
-        arg0->text = &D_800D37D0;
+        item->text = &D_800D37D0;
     } else {
-        arg0->text = &D_800D2484;
+        item->text = &D_800D2484;
         i = ((PakModeByte *)&D_8014D490)->value;
         switch (i) {
         case 0:
@@ -101,8 +101,8 @@ s32 Status_UpdateStatusText(struct Field *arg0) {
             src = D_800D26C8;
             break;
         }
-        dst = *arg0->text;
-        dst += Menu_CountLineChars(arg0) - 11;
+        dst = *item->text;
+        dst += Menu_CountLineChars(item) - 11;
         for (i = 0; i < 11; i++) {
             *dst++ = *src++;
         }

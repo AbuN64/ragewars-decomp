@@ -68,7 +68,7 @@ void SmXlate_SwitchScreen(s32 index) {
     s32 current;
     s32 load_flag;
     s32 *transition_state;
-    s32 temp_s4;
+    s32 menuScreenOwnerResult;
     s32 temp_v0_2;
     Shared_MenuDefinition *priorDefaultFocus; 
     s32 temp_v1;
@@ -128,7 +128,7 @@ block_search_check:
         goto block_not_found;
     }
     {
-        temp_s4 = GetMenuScreenOwner();
+        menuScreenOwnerResult = GetMenuScreenOwner();
         var_a0_2 = D_8014D080->lowIndex;
         temp_a1 = D_8014D080->current;
         if (temp_a1 >= var_a0_2) {
@@ -150,7 +150,7 @@ block_search_check:
             } while (((ScreenEntry *)screens)[D_8014D080->current].owner != index);
         }
         D_8014D080->cacheCount = 0;
-        D_8014D080->focus = temp_s4;
+        D_8014D080->focus = menuScreenOwnerResult;
         if (var_s2 == 0) {
             Node_AcquireArchiveEntry(index);
             temp_v0 = Node_GetScreenData(index);

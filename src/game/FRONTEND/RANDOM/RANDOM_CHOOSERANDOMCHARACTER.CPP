@@ -1,4 +1,4 @@
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"

@@ -5,7 +5,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "RSP/8026E1F8_5.H"
+#include "RSP/RANDOM_DIRECTION_AND_AFFINE_MATH.H"
 #include "SYSTEM/DEFS.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/LIST.H"

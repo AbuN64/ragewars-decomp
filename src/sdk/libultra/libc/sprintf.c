@@ -18,8 +18,8 @@ s32 func_802BD320_de(char *buffer, const char *format, ...) {
 
 
 /* _Printf output routine: copy a span and return the next output position. */
-void *proutSprintf(void *arg0, const void *arg1, s32 arg2) {
-    return (char *)func_802BD3A0_de(arg0, arg1, arg2) + arg2;
+void *proutSprintf(void *destination, const void *source, s32 count) {
+    return (char *)func_802BD3A0_de(destination, source, count) + count;
 }
 
 /** Copy a byte span and return its destination. */

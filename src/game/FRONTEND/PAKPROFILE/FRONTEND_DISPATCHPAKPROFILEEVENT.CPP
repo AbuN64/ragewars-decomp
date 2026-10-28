@@ -28,7 +28,7 @@ s32 Frontend_ReturnProfileEventZero(void) {
 /* 8042E080_66.CPP */
 /* Releases the object D_800E54A4 holds through Cache_FreeMemory, clears D_800E54A4, calls
    Tsmos_ActivateControllerState and Tsmos_SetTimerState with 1, and returns zero. */
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 extern void Tsmos_SetTimerState(s32);
 
 s32 Frontend_DestroyPakProfileScreen(void) {

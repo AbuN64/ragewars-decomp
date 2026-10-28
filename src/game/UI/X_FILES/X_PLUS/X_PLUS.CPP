@@ -1056,12 +1056,12 @@ void XPlus_InitializeSemaphore(void *messageSemaphore) {
     osSendMesg(messageSemaphore, 1, 1);
 }
 
-void XPlus_AcquireSemaphore(s32 arg0) {
-    osRecvMesg(arg0, arg0 + 0x18, 1);
+void XPlus_AcquireSemaphore(s32 queue) {
+    osRecvMesg(queue, queue + 0x18, 1);
 }
 
-void XPlus_ReleaseSemaphore(s32 *arg0) {
-    osSendMesg(arg0, 1, 1);
+void XPlus_ReleaseSemaphore(s32 *queue) {
+    osSendMesg(queue, 1, 1);
 }
 
 #if defined(VERSION_US)

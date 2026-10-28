@@ -20,7 +20,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral);
 
 extern World *D_80103FCC;
 
-extern s32 CCollision_SweepPoint(InstanceHdr *arg0, CVector3 current, CVector3 desired,
+extern s32 CCollision_SweepPoint(InstanceHdr *actorStorage, CVector3 current, CVector3 desired,
                           void *collisionInfo);
 
 /* Refine a launch angle by testing a ballistic arc against the destination.

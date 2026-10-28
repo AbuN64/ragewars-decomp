@@ -1,5 +1,5 @@
 #ifndef FRONTEND_PAKINTERFACE_FINDEMPTYPLAYERLINK_H
 #define FRONTEND_PAKINTERFACE_FINDEMPTYPLAYERLINK_H
 #include "COMMON/ENTRYRECAT6C.H"
-extern int PAKInterface_FindEmptyPlayerLink();
+extern int PAKInterface_FindEmptyPlayerLink(void);
 #endif

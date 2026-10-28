@@ -7,11 +7,11 @@ struct PresetTable {
     char pad0[0x16];
     PresetRow rows[1];
 };
-struct Arg {
+struct WeaponUnlockPlayerView {
     char p[0x18];
-    func_8024DED0_S2 *unk18;
+    func_8024DED0_S2 *model;
     char p2[0x5bc];
-    struct StateRecAt91 *unk5D8;
+    struct WeaponUnlockProfileView *profile;
     char p3[0x26];
     InventorySlot slots[8];
 };

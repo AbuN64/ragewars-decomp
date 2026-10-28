@@ -1,5 +1,5 @@
 #ifndef FRONTEND_PAKINTERFACE_BEGINSCREENEXIT_H
 #define FRONTEND_PAKINTERFACE_BEGINSCREENEXIT_H
 #include "COMMON/ENTRYRECAT6C.H"
-extern void PAKInterface_BeginScreenExit(int arg0);
+extern void PAKInterface_BeginScreenExit(int focusEntry);
 #endif

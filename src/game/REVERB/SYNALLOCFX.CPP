@@ -6,7 +6,7 @@
 #include "TYPES.H"
 
 extern void alFxNew(s32 arg0, s32 arg1, s32 arg2);
-extern s32 alMainBusParam(void *arg0, s32 arg1, s32 arg2);
+extern s32 alMainBusParam(void *bus, s32 param, s32 source);
 
 
 

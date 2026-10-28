@@ -9,18 +9,18 @@
 #include "TYPES.H"
 #include "SYSTEM/DEFS.H"
 #include "COMMON/APPROACHLOCATION.H"
-extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(void *directory, s32 bankOffset, s32 sectionIndex, s32 *sectionSizeOut);
 
 extern void SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
 
 extern f32 Region_GetPolygonHeight(void *, f32, f32);
 
-extern f32 Graphu64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 Graphu64_GetTrianglePlaneHeight(void *node, f32 arg1, f32 arg2);
 
-extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bankOffset, s32 level);
 
-extern void Link_ActivateTrigger(void *arg0);
+extern void Link_ActivateTrigger(void *trigger);
 
 void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, s32 modelId, f32 lifetime) {
     Triple zero;
@@ -75,8 +75,8 @@ EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
     return found;
 }
 
-void Scene_LocateTextureResource(void *arg0, s32 arg1, s32 *arg2, s32 *sectionSizeOut) {
-    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, sectionSizeOut);
+void Scene_LocateTextureResource(void *arg0, s32 sectionIndex, s32 *arg2, s32 *sectionSizeOut) {
+    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), sectionIndex, sectionSizeOut);
 }
 
 s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
@@ -115,7 +115,7 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *
     s32 index;
     u32 first;
     s32 lastOffset;
-    s32 temp_v0;
+    s32 sortedGroupRangeResult;
     s32 field_c8;
     s32 field_c0;
 
@@ -136,10 +136,10 @@ void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *
         *arg3 = 0;
         return;
     }
-    temp_v0 = Defs_FindSortedGroupRange(field_c8, field_c0, index,
+    sortedGroupRangeResult = Defs_FindSortedGroupRange(field_c8, field_c0, index,
         (field_c8 = (s32)((Shared_World *)world)->recordIndex,
          field_c0 = ((Shared_World *)world)->recordCount, &sp18), &last);
-    if (temp_v0 != 0) {
+    if (sortedGroupRangeResult != 0) {
         *arg2 = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
         *arg3 = (last - sp18) + 1;
     } else {

@@ -22,8 +22,8 @@ unsigned int rodata_unresolved_800C2224[3] = {
 extern char D_8013B364[];
 
 extern s32 Scaled_HasLineOfSight(Brain *, void *);
-extern void UpdateCloseAttack(Brain *arg0);
-extern void *Scaled_GetControllerPosition(Brain *arg0);
+extern void UpdateCloseAttack(Brain *brainAddress);
+extern void *Scaled_GetControllerPosition(Brain *controller);
 extern void *Portal_GetGraphPoint(char *, s32);
 extern f32 Graphu64_GetPointDistance(void *, void *);
 

@@ -7,7 +7,7 @@
 /* Releases the object D_800E42D0 holds through Cache_FreeMemory, clears D_800E42D0, calls
    Tsmos_ActivateControllerState and Tsmos_SetModeOneFlag with 2, and returns zero. */
 extern void *D_800E42D0;
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 
 s32 Selection_DestroyCharacterSelectionMenu(void) {

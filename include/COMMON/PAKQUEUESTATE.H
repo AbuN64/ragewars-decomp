@@ -47,7 +47,7 @@ struct Obj80264124 {
 
 extern void Control_RefreshControllerConnection(void *arg0);
 
-extern int Control_IsStartButtonSet(Shared_Effect *arg0);
+extern int Control_IsStartButtonSet(Shared_Effect *effect);
 
 
 
@@ -55,16 +55,16 @@ extern int Control_IsStartButtonSet(Shared_Effect *arg0);
 struct ObjectState224;
 typedef struct ObjectState224 ObjectState224;
 
-extern int Control_CountConnectedControllers();
+extern int Control_CountConnectedControllers(void);
 
 
-extern void Control_ReleasePakLock();
+extern void Control_ReleasePakLock(void);
 
 
 
 
 
-extern int Control_IsButtonBSet(Shared_Effect *arg0);
+extern int Control_IsButtonBSet(Shared_Effect *effect);
 
 extern float D_800C4308_de;
 
@@ -78,19 +78,19 @@ struct ObjectState30 {
     s8 unk_2F;
 };
 
-extern void Control_TrackControllerPakChanges();
+extern void Control_TrackControllerPakChanges(void);
 
 
 
 
-extern void Control_PollControllerPaks();
+extern void Control_PollControllerPaks(void);
 
 
 
 
 
-extern int Control_IsButtonAPressed(struct ControllerProfile *arg0);
-extern void Control_ResetControllerPak(struct ControllerProfile *arg0);
+extern int Control_IsButtonAPressed(struct ControllerProfile *controllerProfile);
+extern void Control_ResetControllerPak(struct ControllerProfile *pakProfile);
 
 extern int Control_IsControllerPakPresent(int arg0);
 
@@ -140,12 +140,12 @@ struct ObjectState224 {
     s32 unk_220;
 };
 
-extern void Control_CommitControllerInputs();
+extern void Control_CommitControllerInputs(void);
 
 extern f32 Rumble_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void Control_ReadControllerStates(void);
-extern void Control_CommitProfileInput(void *arg0);
+extern void Control_CommitProfileInput(void *controllerProfile);
 extern s32 Tsmos_IsControllerStateActive(void);
 
 extern s32 Control_IsAnyControllerPakEnabled(void);

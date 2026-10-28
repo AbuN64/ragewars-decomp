@@ -2,12 +2,12 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned short D_80286AA8_CAE50[3] = {
+const unsigned short g_sceneLinksText[3] = {
     0x6C69, 0x6E6B, 0x7300,
 };
 #endif
 #if defined(VERSION_EU)
-const char D_80286AA8_CAE50[8] =
+const char g_sceneLinksText[8] =
     "links\000\000\000";
 #endif
 #endif

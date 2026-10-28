@@ -1,6 +1,6 @@
-#ifndef SDK_OS_802C04C0_H
-#define SDK_OS_802C04C0_H
+#ifndef SDK_OS_OSRESETGLOBALINTMASK_H
+#define SDK_OS_OSRESETGLOBALINTMASK_H
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
-extern void __osResetGlobalIntMask(s32 arg0);
+extern void __osResetGlobalIntMask(s32 interruptMask);
 #endif

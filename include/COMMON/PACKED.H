@@ -45,11 +45,11 @@ extern void Graphu64_ReturnWithoutWork(void);
 
 
 
-extern void Region_ScaleWordsToFloats(void *arg0);
+extern void Region_ScaleWordsToFloats(void *wordStorage);
 
 extern float D_800C4978_de;
 
-extern s32 Graphu64_NextRandomValue();
+extern s32 Graphu64_NextRandomValue(void);
 
 extern float D_800C49C0_de;
 
@@ -77,7 +77,7 @@ extern void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, f
 
 extern float D_800C49C4_de;
 
-extern f32 Graphu64_GetNegatedWrappedDifference(f32 arg0, f32 arg1);
+extern f32 Graphu64_GetNegatedWrappedDifference(f32 angleA, f32 angleB);
 
 struct Triangle;
 struct Triangle {
@@ -86,7 +86,7 @@ struct Triangle {
     CVector3 *vertices[3];
 };
 
-extern s32 Graphu64_IsPointOnPositiveEdgeSide(void *arg0, void *arg1);
+extern s32 Graphu64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1);
 
 
 struct Triangle;
@@ -107,7 +107,7 @@ extern float D_800C4998_de;
 
 extern double D_800C4940_de;
 
-extern void Graphu64_InitializeEdge(void *arg0, void *arg1, void *arg2);
+extern void Graphu64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2);
 
 extern s32 Graphu64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2);
 

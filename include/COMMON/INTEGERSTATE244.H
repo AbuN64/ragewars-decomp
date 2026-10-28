@@ -14,12 +14,12 @@ typedef struct IntegerState244 IntegerState244;
 
 extern void func_8022D420_de(void);
 
-extern void func_8022D4AC_de(struct SharedPlayer *arg0);
+extern void func_8022D4AC_de(struct SharedPlayer *player);
 
 struct ObjectLinks1458_2;
 typedef struct ObjectLinks1458_2 ObjectLinks1458_2;
 
-extern void Player_AimPreviousPositionAtReset(void *arg0);
+extern void Player_AimPreviousPositionAtReset(void *aimPlayerState);
 
 extern void func_8022D254_de(void);
 
@@ -96,7 +96,7 @@ typedef struct FloatState6C8 FloatState6C8;
 
 extern void func_8022C8F4_de(void);
 
-extern void Player_ResetStunFlags(void *arg0);
+extern void Player_ResetStunFlags(void *actorState);
 
 
 
@@ -152,7 +152,7 @@ extern void func_8022D198_de(void);
 extern void func_8022D3EC_de(void);
 
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern void Player_UpdateLeapMotion(s32 arg0, s32 arg1);
+extern void Player_UpdateLeapMotion(s32 player, s32 body);
 
 extern void Player_UpdateRunEndPlayer(void *);
 struct ObjectLinks854;

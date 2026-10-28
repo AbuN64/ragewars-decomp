@@ -22,11 +22,11 @@ extern void SwapMatrixUpForward(Matrix *object);
 
 extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
 
-extern s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *world, s32 arg1);
 
-extern s32 Scene_GetIndexedModelResource(void *arg0, s32 arg1);
+extern s32 Scene_GetIndexedModelResource(void *world, s32 type);
 
-extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Geometry_QueueDirectModel(s32 model, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
     CVector3 markerDelta;

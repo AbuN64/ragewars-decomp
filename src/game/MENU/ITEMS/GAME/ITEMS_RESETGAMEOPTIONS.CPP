@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "MENU/HOLDERRECAT1CV2.H"
 #include "TYPES.H"
-#include "MENU/ITEMS/80444030_4.H"
+#include "MENU/ITEMS/GAME_AND_PLAYER_OPTIONS.H"
 
 #if defined(VERSION_DE)
 /* Resets the options record D_801462C8 (COptions_t) to its defaults: sound, opacity, cheats, battle

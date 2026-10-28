@@ -47,7 +47,7 @@ struct GameSession;
 extern void SetN64_SelectSpawnAndStartSession(struct GameSession *menu, s32 target);
 extern s32 SetN64_IsModeThirteen(void);
 
-extern void Scene_SetSelection(void *menu, s32 target, s32 arg2);
+extern void Scene_SetSelection(void *menu, s32 target, s32 mode);
 
 static inline s32 levelBit(s32 level) {
     s32 bit;

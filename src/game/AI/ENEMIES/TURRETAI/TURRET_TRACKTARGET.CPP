@@ -11,7 +11,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJ.H"
 #include "COMMON/REC.H"
-#include "COMMON/S1_3.H"
+#include "COMMON/GRAPHICS_MATRIX_AND_VECTOR_MATH.H"
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
 #include "TYPES.H"
@@ -22,15 +22,15 @@
 
 void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
 
-void Graphu64_TransformDirectionTranspose(void *arg0, void *arg1, void *arg2);
+void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
-void Barrel_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
+void Barrel_SetLoopingSound(void *actor, void *stateController, s32 sixth);
 
 void Barrel_StopActorLoopingSound(void *arg0, void *arg1);
 
-f32 Graphu64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
+f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate);
 
 typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 

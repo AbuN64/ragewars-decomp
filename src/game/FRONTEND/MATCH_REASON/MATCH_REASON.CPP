@@ -1,7 +1,7 @@
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
-#include "RENDER/8026AC38.H"
+#include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -27,12 +27,12 @@ extern void Widget_SetWidgetFlag08(void *, s32);
 
 /* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x11. */
 #if defined(VERSION_EU)
-extern void Tsmos_InitializeEuropeanFrontend();
+extern void Tsmos_InitializeEuropeanFrontend(void);
 #else
-extern void InitFrontendMenus();
+extern void InitFrontendMenus(void);
 #endif
 
-extern void Tsmos_DeactivateControllerState();
+extern void Tsmos_DeactivateControllerState(void);
 
 extern void SmXlate_SwitchScreen(s32);
 
@@ -43,9 +43,9 @@ extern void SmXlate_SwitchScreen(s32);
 
 
 
-extern s32 ScenarioSetup_StartRandomCupStage();
+extern s32 ScenarioSetup_StartRandomCupStage(void);
 
-extern void Stage_StartConfiguredMatch();
+extern void Stage_StartConfiguredMatch(void);
 
 /* Reports why a match ended: time running out on a timed match, the score limit (Player_CheckScoreLimit),
    the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
@@ -172,7 +172,7 @@ extern s32 Widget_ListHasFlag100(void *);
 
 extern void Menu_SetFocusedElement(s32);
 
-extern void Tsmos_ActivateControllerState();
+extern void Tsmos_ActivateControllerState(void);
 
 #if defined(VERSION_DE)
 enum { CONFIRM_MESSAGE = 0x234, FALLBACK_MESSAGE = 0x233 };

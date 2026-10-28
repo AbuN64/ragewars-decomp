@@ -1,7 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "WORLD/8024E914.H"
+#include "WORLD/STATIC_MODEL_INSTANCE_VIEWS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"
@@ -12,7 +12,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "include_asm.h"
 
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *resource);
 
 /** Clear the word at object offset 0x1C4. */
 void func_8024F470_de(void *staticObject) {
@@ -34,13 +34,13 @@ extern f32 D_800D2988;
 extern struct Shape_func_8021A2D4_de_2 D_800CD8D0;
 extern GlobalStateRecAt1C D_80146894;
 
-void func_8024F4A0_de(void *arg0) {
-    char *o = (char *) arg0;
+void func_8024F4A0_de(void *staticObject) {
+    char *o = (char *) staticObject;
     f32 temp_f1;
     f32 threshold;
     f32 final_value;
 
-    ((StaticObject *)(o))->model = func_8024F858_de(arg0);
+    ((StaticObject *)(o))->model = func_8024F858_de(staticObject);
     ((StaticObject *)(o))->material = ((PropGeometry *)(((StaticObject *)(o))->type))->material;
 
     if (D_80146894.field0 == 0) {
@@ -96,11 +96,11 @@ void func_8024F618_de(StaticObject *staticObject) {
     staticObject->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
-extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
+extern s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength);
 extern void TranslateMatrix(char *object, float x, float y, float z);
 extern void SwapMatrixUpForward(void *object);
-extern void Graphu64_ConvertMatrixToFixed(void *arg0, void *arg1);
+extern void Graphu64_ConvertMatrixToFixed(void *src, void *dst);
 
 
 void func_8024F634_de(void *arg0) {
@@ -163,7 +163,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
 
 
 extern s32 D_801462C8;
-extern s32 Scene_GetModelIdAtIndex(void *arg0, s32 arg1);
+extern s32 Scene_GetModelIdAtIndex(void *world, s32 modelIndex);
 
 s32 func_8024F858_de(StaticObject *staticObject) {
     void *obj;
@@ -193,10 +193,10 @@ s32 func_8024F858_de(StaticObject *staticObject) {
 
 extern void Cache_ReplaceResourcePairFirst(s32 a, s32 **b, s32 c);
 
-void func_8024F8DC_de(void *arg0, s32 **arg1) {
+void func_8024F8DC_de(void *wanted, s32 **resourcePair) {
     s32 new_var;
-    new_var = **arg1;
-    Cache_ReplaceResourcePairFirst(0, arg1, Lighting_BuildLitModel(new_var, *((StaticObject *)(arg0))->renderResource, &((StaticObject *)(arg0))->effect[0], (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
+    new_var = **resourcePair;
+    Cache_ReplaceResourcePairFirst(0, resourcePair, Lighting_BuildLitModel(new_var, *((StaticObject *)(wanted))->renderResource, &((StaticObject *)(wanted))->effect[0], (s32)((char *)wanted + ((D_800D297C << 6) + 0x68)), 0, wanted));
 }
 
 #if !(defined(VERSION_US_REV1))

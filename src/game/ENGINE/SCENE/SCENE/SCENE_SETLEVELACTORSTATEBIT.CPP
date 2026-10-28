@@ -14,7 +14,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 
 /* SCENE_7.CPP */
-extern void SetN64_GetPackSectionSize(s32 arg0, s32 arg1);
+extern void SetN64_GetPackSectionSize(s32 table, s32 index);
 
 void Scene_SetLevelActorStateBit(void *arg0, s32 index, s32 arg2, s32 arg3) {
     void *entry;
@@ -263,19 +263,19 @@ void Scene_DecrementTriggerCounter(void *world, s32 arg1) {
 }
 
 /* SCENE_9.CPP */
-extern s32 Defs_FindSortedValue(void *arg0, s32 arg1, s32 arg2);
+extern s32 Defs_FindSortedValue(void *entries, s32 arg1, s32 arg2);
 
-extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(void *directory, s32 bankOffset, s32 sectionIndex, s32 *sectionSizeOut);
 
 extern s32 D_00285160;
 
 s32 Scene_TestTriggerCounterZero(void *world, s32 arg1) {
-    void *temp_v0;
+    void *packSectionResult;
     u8 *result;
 
-    temp_v0 = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
-    SetN64_GetPackSection(temp_v0, 0);
-    result = (u8 *)((char *)SetN64_GetPackSection(temp_v0, 1)) + arg1;
+    packSectionResult = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
+    SetN64_GetPackSection(packSectionResult, 0);
+    result = (u8 *)((char *)SetN64_GetPackSection(packSectionResult, 1)) + arg1;
     return *result == 0;
 }
 

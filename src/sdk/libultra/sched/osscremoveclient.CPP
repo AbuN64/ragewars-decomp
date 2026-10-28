@@ -27,20 +27,20 @@ void osScAddClient(OSSched *scheduler, OSScClientWork *client, OSMesgQueue *mess
     func_802BD170_de(savedInterruptMask);
 }
 
-void osScRemoveClient(OSSched *arg0, void *arg1) {
+void osScRemoveClient(OSSched *scheduler, void *arg1) {
     s32 saved;
     OSScClientWork *cur;
     OSScClientWork *prev;
 
     prev = 0;
-    cur = arg0->clientList;
+    cur = scheduler->clientList;
     saved = func_802BD170_de(1);
     while (cur != 0) {
         if (cur == arg1) {
             if (prev != 0) {
                 prev->next = cur->next;
             } else {
-                arg0->clientList = cur->next;
+                scheduler->clientList = cur->next;
             }
             break;
         }

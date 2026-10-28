@@ -4,5 +4,5 @@
 
 extern void Stream_SetFloatPairToNegativeOne(float *arg0, float *arg1);
 
-extern void StreamBufferFree(struct StreamBuffer *arg0);
+extern void StreamBufferFree(struct StreamBuffer *streamBuffer);
 #endif

@@ -21,7 +21,7 @@ extern s32 Note_ContainsInvalidNameByte(char *, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern s32 Note_GetFreePages(s32, s32 *);
-extern s32 Note_BytesToPakPages(s32);
+extern u32 Note_BytesToPakPages(u32);
 extern void PAKInterface_RefreshPlayerPanel(s32, s32);
 extern void PAKInterface_ScrollNoteList(s32, s32);
 

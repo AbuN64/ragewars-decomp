@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS150C.H"
-#include "ACTORS/80277444.H"
+#include "ACTORS/VERTEX_LIGHT_AND_ACTOR_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LEVEL_ACTOR.H"
@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "LINK/LINK_DISPATCHMATCHINGTRIGGERS.H"
 #include "COMMON/EXTERNS_10.H"
-#include "SYSTEM/8025E280.H"
+#include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/OBJECTLINKS14.H"
 
 /* 80277444_8.CPP */
@@ -57,7 +57,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
 #endif
                                              D_800CD730, triggerSoundWeight());
                 callback = gameplaySoundHook(trigger->sound);
-                if (callback != 0) func_8025E11C_de(callback);
+                if (callback != 0) SoundElement_PlayDialogGroup(callback);
             }
             if (trigger->action >= 2) Track_RequestTrackByKey(trigger->action);
         }
@@ -77,9 +77,9 @@ void Link_DispatchTrigger(Trigger *trigger) {
 }
 
 
-extern s32 Scene_FindActorTriggerRange(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
+extern s32 Scene_FindActorTriggerRange(s8 *world, void *levelActor, s32 *arg2, s32 *arg3);
 
-extern s32 Scene_FindAlternateTriggerRange(s8 *arg0, s32 arg1, s32 *arg2, s32 *arg3);
+extern s32 Scene_FindAlternateTriggerRange(s8 *world, s32 arg1, s32 *arg2, s32 *arg3);
 
 extern void Scene_ResetTransitionViewport(void);
 
@@ -87,7 +87,7 @@ extern void Track_RequestTrackByIds(s32, s32);
 
 extern void Barrel_StopActorLoopingSound(void);
 
-extern void Animpool_ReleaseSceneEffect(struct Shared_Actor *arg0);
+extern void Animpool_ReleaseSceneEffect(struct Shared_Actor *node);
 
 void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 arg1, void *arg2) {
     s32 sp20;
@@ -150,10 +150,10 @@ void Link_SetActorFlagMask(LevelActor *actor) {
     actor->flags = (s32) (actor->flags | 0x2100);
 }
 
-void Link_RequestOwnerTrack(s32 arg0, s32 unused1, s32 arg2) {
+void Link_RequestOwnerTrack(s32 owner, s32 unused1, s32 arg2) {
     if (g_world.mode == 4) {
         Scene_ResetTransitionViewport();
-        Track_RequestTrackByIds(arg0, arg2);
+        Track_RequestTrackByIds(owner, arg2);
     }
 }
 
@@ -174,7 +174,7 @@ void Link_CaptureActorTransform(void *arg0, void *arg1) {
 
 void Link_DispatchTriggerAudio(s32 arg0, s32 arg1, Trigger *trigger) {
     if (trigger->unk6 >= 0x100) {
-        func_8025E11C_de(trigger->unk6);
+        SoundElement_PlayDialogGroup(trigger->unk6);
         return;
     }
     func_8025E2D4_de(trigger->unk6);
@@ -226,11 +226,11 @@ extern void Scene_ActivateTriggersOfKind(Shared_World *world, s32 id);
 
 void Link_SetTriggerTrackCallback(int unused0, int unused1, void *arg2) {
     ObjRecAt6V1 *arg2_record = arg2;
-    func_8025E260_de(arg2_record->unk6);
+    SoundElement_SetTrackAndPeriodicPlayback(arg2_record->unk6);
 }
 
 void Link_SetTriggerTrack(void *arg0) {
-    func_8025E260_de((((struct ObjRecAt6V1 *) ((s8 *) arg0))->unk6));
+    SoundElement_SetTrackAndPeriodicPlayback((((struct ObjRecAt6V1 *) ((s8 *) arg0))->unk6));
 }
 
 void Link_ClearActorStateBit(struct Shared_Actor *actor) {

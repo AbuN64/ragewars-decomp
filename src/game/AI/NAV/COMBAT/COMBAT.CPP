@@ -35,7 +35,7 @@ void Nav_UpdateRangedCombat(CloseAttackActor *actor) {
  char *routes;int mine,theirs,dir; CloseAttackActor *player;
     CloseAttackActor *target;
     CloseAttackActor *temp_s0;
-    CloseAttackActor *temp_v1_3;
+    CloseAttackActor *playerValue;
     CloseAttackBrain *brain;
     CVector3 *temp_s0_2;
     f32 temp_f0;
@@ -168,8 +168,8 @@ block_41:
             temp_v0_6 = brain->fireTimer - 1;
             brain->fireTimer = temp_v0_6;
             if ((temp_v0_6 == 0) && ((Graphu64_NextRandom() % 100) < (s32) temp_f21)) {
-                temp_v1_3 = brain->player;
-                temp_v1_3->buttons |= 0x10;
+                playerValue = brain->player;
+                playerValue->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
                 brain->fireTimer = ((Graphu64_NextRandom() % 2) + 2) * 0xF;

@@ -150,5 +150,5 @@ static inline s32 strideSound(s32 index) {
 #endif
 }
 
-#include "COMMON/EXTERNS_9.H"
+#include "COMMON/SCENE_FRAME_AND_EFFECT_UPDATES.H"
 #endif

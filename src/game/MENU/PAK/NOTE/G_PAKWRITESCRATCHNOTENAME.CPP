@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80404958_E1918[23] =
+const char s_mempakWriteTempDataText[23] =
     "Mempak write temp data\000";
 #endif
 

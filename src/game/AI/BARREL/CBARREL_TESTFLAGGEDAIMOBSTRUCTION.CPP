@@ -10,7 +10,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80103FD0;
 extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
-extern s32 CCollision_SweepPoint(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
+extern s32 CCollision_SweepPoint(Instance8020CD74 *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
 
 s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
     Instance8020CD74 saved;

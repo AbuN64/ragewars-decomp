@@ -12,7 +12,7 @@
 
 extern s32 Cinema_IsSequenceInWindow(void);
 
-extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
+extern f32 Region_GetPolygonHeight(s32 node, f32 arg1, f32 arg2);
 
 
 

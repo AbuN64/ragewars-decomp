@@ -12,12 +12,12 @@
 
 /* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x12. */
 #if defined(VERSION_EU)
-extern void Tsmos_InitializeEuropeanFrontend();
+extern void Tsmos_InitializeEuropeanFrontend(void);
 #else
-extern void InitFrontendMenus();
+extern void InitFrontendMenus(void);
 #endif
 
-extern void Tsmos_DeactivateControllerState();
+extern void Tsmos_DeactivateControllerState(void);
 
 void Achieve_OpenResultsFrontend(void) {
     

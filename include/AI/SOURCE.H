@@ -120,5 +120,5 @@ typedef struct Source Source;
 
 
 
-extern f32 InstHdr_GetActorTargetHeight(u8 *arg0);
+extern f32 InstHdr_GetActorTargetHeight(u8 *player);
 #endif

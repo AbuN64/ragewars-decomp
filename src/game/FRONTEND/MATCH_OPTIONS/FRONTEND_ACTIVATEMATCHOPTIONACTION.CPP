@@ -40,9 +40,9 @@ extern s32 Frontend_GetMenuImageState(void *);
 
 
 
-extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *widget, s32 arg1);
 
-extern void SmpButton_SelectListEntry(void *arg0, s32 arg1);
+extern void SmpButton_SelectListEntry(void *menu, s32 index);
 
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through

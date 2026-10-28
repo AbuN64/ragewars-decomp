@@ -20,7 +20,7 @@ struct ALParam_s1C {
     s32 yetstillmoredata;
 };
 
-extern void alSynStopVoice(struct Shape_typemap_71 *arg0, void *arg1);
+extern void alSynStopVoice(struct AudioSynthParamSamplesView *synth, void *voice);
 
 struct ALResampler;
 typedef struct ALResampler ALResampler;
@@ -134,17 +134,17 @@ struct PVoice_s;
 struct ALMainBus_s;
 typedef struct ALMainBus_s ALMainBus_s;
 
-struct ObjectStateC_3;
-typedef struct ObjectStateC_3 ObjectStateC_3;
+struct AudioStopVoiceUpdate;
+typedef struct AudioStopVoiceUpdate AudioStopVoiceUpdate;
 
 
-struct ObjectStateC_3;
-struct ObjectStateC_3 {
-    s32 unk_0;
+struct AudioStopVoiceUpdate;
+struct AudioStopVoiceUpdate {
+    s32 next;
     char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk_4;
+    s32 delta;
     char pad4[0x8 - 0x4 - sizeof(s32)];
-    s16 unk_8;
+    s16 type;
 };
 
 struct ALGlobals;

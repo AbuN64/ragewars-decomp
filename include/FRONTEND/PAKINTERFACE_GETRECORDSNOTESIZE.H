@@ -1,5 +1,5 @@
 #ifndef FRONTEND_PAKINTERFACE_GETRECORDSNOTESIZE_H
 #define FRONTEND_PAKINTERFACE_GETRECORDSNOTESIZE_H
 #include "COMMON/ENTRYRECAT6C.H"
-extern int PAKInterface_GetRecordsNoteSize();
+extern int PAKInterface_GetRecordsNoteSize(void);
 #endif

@@ -17,7 +17,7 @@ struct ItemCode8024E130 {
     unsigned flags;
 };
 
-extern int func_8024E610_de(void *arg0);
+extern int func_8024E610_de(void *actorStorage);
 
 
 struct ObjectLinks18;
@@ -30,7 +30,7 @@ struct ObjectLinks18 {
 
 
 struct LevelActor;
-extern int func_8024E2B0_de(struct LevelActor *arg0);
+extern int func_8024E2B0_de(struct LevelActor *actor);
 
 struct TripleRecAt8;
 struct TripleRecAt8 {

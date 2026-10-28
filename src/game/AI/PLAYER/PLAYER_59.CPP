@@ -16,7 +16,7 @@ extern const f32 D_800C2D9C_de;
 
 extern void func_80218464_de();
 
-extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 soundPosition, s32 position, s32 ownerId);
 
 /* Runs a player's landing state: sets state 0xD when the value at 0x6C8 is zero or 0xE otherwise,
    applies the movement tables D_800CE88C and D_800CE8A4, picks animation 0x8A2 for the model
@@ -40,7 +40,7 @@ extern void Graphu64_ScaleVector(void *, void *, f32);
 
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Player_ReleaseObjectHandles(s32 arg0);
+extern void Player_ReleaseObjectHandles(s32 object);
 
 void Player_AbsorbImpact(void *player, LevelActor *actor) {
     f32 value;

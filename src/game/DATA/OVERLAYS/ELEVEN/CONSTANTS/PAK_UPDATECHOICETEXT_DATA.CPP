@@ -5,5 +5,5 @@ unsigned int D_blob_7fabded9ccf9f73c6c0b[1] = {
     0x800E62D0,
 };
 
-char D_d1_0f2c3d106ed1d104[16] = "single region";
+char g_singleRegionText[16] = "single region";
 #endif

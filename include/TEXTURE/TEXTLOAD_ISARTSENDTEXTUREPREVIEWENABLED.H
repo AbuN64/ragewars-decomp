@@ -1,5 +1,5 @@
 #ifndef TEXTURE_TEXTLOAD_ISARTSENDTEXTUREPREVIEWENABLED_H
 #define TEXTURE_TEXTLOAD_ISARTSENDTEXTUREPREVIEWENABLED_H
 #include "COMMON/RESIDENTSTATE.H"
-extern int TextLoad_IsArtsendTexturePreviewEnabled();
+extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
 #endif

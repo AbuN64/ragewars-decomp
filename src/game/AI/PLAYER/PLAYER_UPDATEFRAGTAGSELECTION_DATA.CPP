@@ -13,7 +13,7 @@
 #include "GAME/BUILDDIRECTIONMATRIX.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-extern void func_8022BF04_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void func_8022BF04_de(s32 player, s32 unused, s32 period, s32 kind);
 
 extern s32 InstHdr_FindActorModelEntry(void *);
 
@@ -41,7 +41,7 @@ extern u8 D_801462DE;
 extern s32 D_800E28D0;
 
 
-void Onscrn_SetupSpriteMode(u8 arg0);
+void Onscrn_SetupSpriteMode(s32 color);
 
 extern const struct D_800C7470_Pair D_800C2D40_de;
 
@@ -72,10 +72,10 @@ static inline float getYaw(void) {
     return D_80140FC0 * D_800C2D40_de.first;
 }
 
-extern void Playerai_InitializePlayerHealth(void *arg0);
+extern void Playerai_InitializePlayerHealth(void *player);
 
-void func_8022C060_de(s32 player, s32 arg1) {
-    func_8022BF04_de(player, arg1, 5, 0x1B);
+void func_8022C060_de(s32 player, s32 unused) {
+    func_8022BF04_de(player, unused, 5, 0x1B);
 }
 
 void func_8022C080_de(void *actorView, void *bodyActor) {

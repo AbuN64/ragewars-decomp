@@ -6,7 +6,7 @@ extern void Node_SwapWidgetTreePositions(WidgetRecAtE *a, WidgetRecAtE *b);
 extern void Node_SetObjectWordAt2C(void *object, int value);
 extern void Node_AssignObjectWordAt2C(void *object, int value);
 extern int Node_CompareRecordShortValues(struct Field_u16_14 *a, struct Field_u16_14 *b);
-extern void Node_NoOperation();
+extern void Node_NoOperation(void);
 extern s32 Node_MeasureTextPrefix(s32 font, u8 *text, s32 length);
 extern void Node_SetRecordBytePair(struct Pair2C *record, u8 first, u8 second);
 extern void Node_SetDisplayClipBounds(s32 width, s32 height);
