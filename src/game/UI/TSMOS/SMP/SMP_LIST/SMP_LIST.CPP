@@ -4,11 +4,11 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "COMMON/STATEPAIR.H"
-#include "MENU_2/SCROLL.H"
+#include "MENU/SCROLL.H"
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
-#include "MENU_2/804196C0_22.H"
-#include "RENDER_2/8025DE50_5.H"
+#include "MENU/804196C0_22.H"
+#include "RENDER/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
 /* Sets the word at 0x54 of arg0 to 2, calls SoundElement_PlayFlatSound with 0xE74, and sets the byte at 0x10 of every child in the list at 0x8 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from N64Eng_SetLinkedCommand100WithSound with the two stores to 0x5C and 0x48 replaced by a single store of 2 to 0x54. */

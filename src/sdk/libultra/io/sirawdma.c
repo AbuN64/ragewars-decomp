@@ -5,10 +5,10 @@
 #include "COMMON/DEVICE_IO.H"
 #include "TYPES.H"
 #include "sdk/libgultra.h"
-#include "AUDIO_3/802BEE60.H"
+#include "AUDIO/802BEE60.H"
 #include "sdk/os.h"
 #include "sdk/OSINT/802C0CB0.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 extern void func_802BD280_de(void *addr, s32 size);
 extern void func_802BCF70_de(void *addr, s32 size);

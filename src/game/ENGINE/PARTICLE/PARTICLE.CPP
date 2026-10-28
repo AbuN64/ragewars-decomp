@@ -6,10 +6,10 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "FX_2/80271B18.H"
+#include "FX/80271B18.H"
 #include "particle/80271B18_3.H"
-#include "FX_2/PARTICLE_ATTACHMENT.H"
-#include "SYSTEM_3/CONTACT_EFFECT.H"
+#include "FX/PARTICLE_ATTACHMENT.H"
+#include "SYSTEM/CONTACT_EFFECT.H"
 
 /* Updates a particle for one frame: halves the frame step for particles owned by a slowed object, measures its bounding
  * box, kills it or bounces it off its target when its type's rule says so (the German cartridge has a gentler rule
@@ -645,7 +645,7 @@ extern s32 Barrel_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
-#include "FX_2/PARTICLE_LIFECYCLE.H"
+#include "FX/PARTICLE_LIFECYCLE.H"
 extern LiveParticle *D_8013D538;
 
 s32 func_8024E2C4_de(void *);

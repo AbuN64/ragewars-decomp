@@ -1,6 +1,6 @@
 #include "TYPES.H"
 #include "COMMON/ARG.H"
-#include "AUDIO_3/802BEE60.H"
+#include "AUDIO/802BEE60.H"
 
 /** Report whether either low bit of the VI current register is set. */
 int Audio_IsSerialInterfaceBusy(void) {

@@ -11,7 +11,7 @@
 #include "sdk/libgultra/part_800C7F20/code_802B66A0_3.h"
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 #include "sdk/libgultra_inferred/802B3B80_4.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 #include "sdk/al_globals.h"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/SHAREDPLAYER.H"

@@ -5,7 +5,7 @@
 #include "COMMON/OBJ.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "FX_2/80271B18.H"
+#include "FX/80271B18.H"
 #include "AI/ENEMIES/TURRETAI.H"
 #include "include_asm.h"
 

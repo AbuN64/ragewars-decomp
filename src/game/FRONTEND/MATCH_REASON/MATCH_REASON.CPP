@@ -1,7 +1,7 @@
 #include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
-#include "RENDER_4/8026AC38.H"
+#include "RENDER/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"

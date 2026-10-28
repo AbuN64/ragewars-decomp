@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/S2.H"
-#include "GAME_2/8020FDB0.H"
+#include "GAME/8020FDB0.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 

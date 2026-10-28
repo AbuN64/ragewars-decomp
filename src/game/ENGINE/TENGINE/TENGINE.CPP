@@ -8,7 +8,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/WORLD.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 #include "SCENE/802508E0_4.H"
 #include "SCENE/802508E0_9.H"
 #include "sdk/AUDIO/802BD1A8_19.H"

@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 #include "COMMON/ALDELAY28.H"
 
 /* seqplayer_4.c */

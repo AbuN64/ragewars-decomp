@@ -8,7 +8,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/EXTERNS_17.H"
 #include "COMMON/TRIPLE.H"
-#include "AUDIO_4/802BF230.H"
+#include "AUDIO/802BF230.H"
 #include "SCENE/802508E0_10.H"
 #include "sdk/SCHED/8028DF6C_7.H"
 #include "sdk/os.h"

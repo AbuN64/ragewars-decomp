@@ -3,7 +3,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
-#include "sdk/AUDIO_2/802BF7F0.H"
+#include "sdk/AUDIO/802BF7F0.H"
 #include "sdk/os.h"
 
 extern StateosViSetSpecialFeatures *D_800D4414;

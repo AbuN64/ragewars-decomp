@@ -1,0 +1,57 @@
+#include "include_asm.h"
+#include "sdk/libgultra.h"
+#include "COMMON/OBJRECAT18V1.H"
+#include "TYPES.H"
+
+/* code_802B6F50_2.c */
+/** Consume and return one byte from the stream pointer at offset 8. */
+int read8(struct ALSeq_s *stream) {
+    unsigned char *cursor = stream->curPtr;
+    int value = *cursor;
+    stream->curPtr = cursor + 1;
+    return value;
+}
+
+/** Consume and return two big-endian bytes from the stream pointer at offset 8. */
+s16 read16(ALSeq_s *sequenceObject) {
+    struct ALSeq_s *stream = sequenceObject;
+    unsigned char *p;
+    u32 b0;
+    u32 b1;
+
+    p = stream->curPtr;
+    b0 = p[0];
+    p = p + 1;
+    stream->curPtr = p;
+    b1 = p[0];
+    stream->curPtr = p + 1;
+    return (s16)((b0 << 8) | b1);
+}
+
+s32 read32(ALSeq_s *sequenceObject) {
+    struct ALSeq_s *stream = sequenceObject;
+    unsigned char *p;
+    unsigned int b0, b1, b2, b3;
+
+    p = stream->curPtr;
+    b0 = p[0];
+    p = p + 1;
+    stream->curPtr = p;
+    b1 = p[0];
+    stream->curPtr = p + 1;
+    b2 = p[1];
+    stream->curPtr = p + 2;
+    b3 = p[2];
+    stream->curPtr = p + 3;
+    return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
+}
+
+#if defined(VERSION_US)
+char rodata_unresolved_802B2374[12] =
+    "MemEndT\000\000\010\000\000";
+#endif
+
+/* 802B243C_2.CPP */
+#if defined(VERSION_DE)
+unsigned char D_auto_func_802B2444_de_padding_B3044[12] = { 0x10, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x8C, 0x82, 0x00, 0x04 };
+#endif

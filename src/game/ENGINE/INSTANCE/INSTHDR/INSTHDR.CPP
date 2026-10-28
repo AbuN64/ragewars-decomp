@@ -11,7 +11,7 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
 #include "particle/8024D018_4.H"
-#include "FX_2/80271B18.H"
+#include "FX/80271B18.H"
 
 /* Returns a player's body lean on the ground: a controlled player on an accepted floor (Region_TestPolygonSlopeFlag) that
  * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by

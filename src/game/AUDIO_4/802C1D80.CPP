@@ -5,7 +5,7 @@
 #include "COMMON/CTX.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "AUDIO_4/802C1D80.H"
+#include "AUDIO/802C1D80.H"
 
 void Audio_AbortDiskTransfer(void) {
     DiskTransferInfo *diskTransferInfo;

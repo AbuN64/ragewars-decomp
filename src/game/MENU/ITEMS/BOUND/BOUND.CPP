@@ -4,7 +4,7 @@
 #include "MENU/80442BC8.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "include_asm.h"
-#include "RENDER_4/8026AC38.H"
+#include "RENDER/8026AC38.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
 f32 Bound_ReadBoundValue(ItemRecAt14 *arg0) {

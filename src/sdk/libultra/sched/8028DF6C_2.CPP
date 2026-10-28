@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "sdk/SCHED/8028DF6C_2.H"
 #include "sdk/os.h"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 #if defined(VERSION_US)
 #include "COMMON/EXTERNS_18.H"
 extern s32 D_800CD70C;

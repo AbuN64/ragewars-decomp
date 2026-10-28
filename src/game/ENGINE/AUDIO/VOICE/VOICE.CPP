@@ -17,7 +17,7 @@
 #include "VOICE/VOICE.H"
 #include "COMMON/S1.H"
 #include "COMMON/STATERECAT34.H"
-#include "RENDER_2/8025DE50_6.H"
+#include "RENDER/8025DE50_6.H"
 #include "SYSTEM/80255C40_3.H"
 
 /* 8025A3EC_4.CPP */

@@ -11,7 +11,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "GAMECORE/80278900.H"
 #include "GAMECORE/80278900_2.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 
 extern s32 D_800D2978;
 

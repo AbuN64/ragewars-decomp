@@ -6,7 +6,7 @@
 #include "sdk/libultra/io/sprawdma.H"
 #include "sdk/libgultra/sp.h"
 #include "sdk/OSINT/802C0CB0.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 
 s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {

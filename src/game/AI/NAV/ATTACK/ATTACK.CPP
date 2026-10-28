@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BOX_CONTACT.H"
-#include "GAME_2/8020DC10.H"
+#include "GAME/8020DC10.H"
 
 extern void ReselectCloseAttack(void *);
 

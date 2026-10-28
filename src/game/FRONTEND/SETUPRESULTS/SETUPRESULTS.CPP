@@ -1,0 +1,126 @@
+#include "include_asm.h"
+#include "COMMON/SHARED_MENUREPLY.H"
+#include "RENDER/8026AC38.H"
+#include "COMMON/RECRECAT4.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/UNUSED.H"
+#include "gbi.h"
+#include "COMMON/GFX.H"
+#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
+#include "COMMON/SESSIONHANDLERROW.H"
+#include "COMMON/INTEGERSTATE530.H"
+#include "COMMON/CHEATCODE.H"
+#include "COMMON/CONTROL.H"
+#include "TYPES.H"
+#include "FRONTEND/80423280_53.H"
+#include "SCENARIOSETUPSCREEN/SCENARIOSETUPSCREEN.H"
+
+/* Draw callback of the versus results screen D_800E4F60: on draw event 1 in states 3, 8 or 9 it
+   sets the fill D_800D15E0 to blended white, restores the full-screen clip, and at alpha 210 draws
+   the four player panels (on screen 0x14 with no pending pause) and the tie panel at 0x308 unless a
+   winner is set, then resets the fill. On update event 0 (unless GetMenuScreenOwner reports 0x19) it
+   plays the winner's voice on the twentieth frame, raises the banner blink six frames later, and
+   fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
+
+extern struct VersusResultsScreen *D_800E4F60;
+
+
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+extern void func_804399D0(char *);
+#else
+#endif
+
+#if defined(VERSION_DE)
+extern void func_804399D0(char *);
+#else
+#endif
+
+
+extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
+
+s32 Frontend_DrawSetupResultPanels(void *unused0, void *unused1, s32 event) {
+    s32 i;
+    s32 alpha;
+
+    if (event == 1 && (D_800E4F60->state == 3 || D_800E4F60->state == 8 || D_800E4F60->state == 9)) {
+        /* MIXED: the ROM keeps both stores, so the first is an in-struct store of the same word (data typing open). */
+        ((struct MenuRenderFill *)&D_800D15E0)->mode = 0;
+        D_800D15E0 = 1;
+        D_800D15E4[0] = 255.0f;
+        D_800D15E4[1] = 255.0f;
+        D_800D15E4[2] = 255.0f;
+        D_800D15E4[3] = 255.0f;
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
+        D_800D15E4[3] = 210.0f;
+        if (GetMenuScreenOwner() == 0x14 && D_80154020.ready == 0) {
+            for (i = 0; i < 4; i++) {
+#if defined(VERSION_DE)
+                
+#if defined(VERSION_DE)
+func_804399D0
+#else
+func_804397F0_auto
+#endif
+(D_800E4F60->panels[i]);
+#else
+                
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+func_804399D0
+#else
+func_804397E8_de
+#endif
+(D_800E4F60->panels[i]);
+#endif
+            }
+        }
+        if (D_800E4F60->winner == 0) {
+#if defined(VERSION_DE)
+            
+#if defined(VERSION_DE)
+func_804399D0
+#else
+func_804397F0_auto
+#endif
+(D_800E4F60->tie);
+#else
+            
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+func_804399D0
+#else
+func_804397E8_de
+#endif
+(D_800E4F60->tie);
+#endif
+        }
+        D_800D15E0 = 0;
+        D_800D15E4[3] = 255.0f;
+    }
+    if (event == 0 && GetMenuScreenOwner() != 0x19) {
+        if (D_800E4F60->frames < 20) {
+            if (++D_800E4F60->frames == 20 && D_800E4F60->winner > 0) {
+                Menu_SetOptionsSceneSelection(ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
+                D_800E4F60->blinkDelay = 0;
+            }
+        }
+        if (D_800E4F60->blinkDelay != -1) {
+            if (++D_800E4F60->blinkDelay >= 6) {
+                D_800E4F60->blinking = 1;
+                D_800E4F60->blinkDelay = -1;
+            }
+        }
+        if (D_800E4F60->blinking == 1) {
+            alpha = D_800E4F60->banner->value;
+            alpha -= 30;
+            if (alpha <= 0) {
+                D_800E4F60->blinking = 0;
+                Frontend_SetWidgetFlag08(D_800E4F60->bannerShadow, 0);
+                Frontend_SetWidgetFlag08(D_800E4F60->banner, 0);
+                alpha = 0xFF;
+            }
+            D_800E4F60->banner->value = alpha;
+            D_800E4F60->bannerShadow->value = alpha;
+        }
+    }
+    return 0;
+}

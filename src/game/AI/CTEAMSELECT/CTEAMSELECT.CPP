@@ -15,7 +15,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJECTSTATE90.H"
 #include "COMMON/RESOURCELOADSTATE.H"
-#include "RENDER_2/8025DE50_5.H"
+#include "RENDER/8025DE50_5.H"
 #include "COMMON/GFX.H"
 #include "abi.h"
 #include "MENU/RESET_STORAGE.H"

@@ -3,7 +3,7 @@
 #include "COMMON/DEVICE_IO.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "sdk/AUDIO_2/802BFA00.H"
+#include "sdk/AUDIO/802BFA00.H"
 #include "sdk/OSINT/802C0CB0.H"
 
 /* __osViSwapContext, drafted from ultralib src/io/viswapcontext.c (2.0I: vStart straight from the

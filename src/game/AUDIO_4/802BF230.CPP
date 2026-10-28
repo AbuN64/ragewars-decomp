@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_17.H"
 #include "COMMON/AIPROFILE.H"
-#include "AUDIO_4/802BF230.H"
-#include "AUDIO_4/802BF280.H"
+#include "AUDIO/802BF230.H"
+#include "AUDIO/802BF280.H"
 
 
 s32 Audio_CheckSignalProcessorTaskYield(void *arg0)

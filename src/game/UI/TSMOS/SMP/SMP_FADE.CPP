@@ -3,7 +3,7 @@
 #include "COMMON/ANIMATION.H"
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
-#include "MENU_2/804196C0_20.H"
+#include "MENU/804196C0_20.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"

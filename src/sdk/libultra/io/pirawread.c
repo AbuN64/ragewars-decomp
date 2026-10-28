@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_2.H"
 #include "sdk/libultra/io/pirawread.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 
 

@@ -1,5 +1,0 @@
-#if defined(VERSION_DE)
-const unsigned int D_auto_rodata_func_80219A40_de_800C22D4[4] = {
-    0x3D4CCCCD, 0x3E99999A, 0xBF350481, 0x3F350481,
-};
-#endif

@@ -3,7 +3,7 @@
 #include "abi.h"
 #include "acmd.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
-#include "AUDIO_3/ACMD.H"
+#include "AUDIO/ACMD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ALDELAY28.H"
@@ -12,7 +12,7 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "sdk/OSINT/802C0CB0.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 /* DATA_800CC9C4.CPP */
 

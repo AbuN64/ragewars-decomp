@@ -11,7 +11,7 @@
 #include "sdk/EXTERNS.H"
 #include "COMMON/TRIPLE.H"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,
    allocating the sound states and event items from the heap, registers its voice handler with the

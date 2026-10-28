@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
-#include "RENDER_4/8026AC38.H"
+#include "RENDER/8026AC38.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

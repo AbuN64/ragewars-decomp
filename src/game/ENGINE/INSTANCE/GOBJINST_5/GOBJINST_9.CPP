@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "RENDER_4/8026AC38.H"
+#include "RENDER/8026AC38.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "FX_2/80271B18.H"
+#include "FX/80271B18.H"
 
 /* Draws an object's cast shadow: objects without shadow flag 0x10000000 get the blob shadow of
  * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from Map_ReserveEntries is built for an object above

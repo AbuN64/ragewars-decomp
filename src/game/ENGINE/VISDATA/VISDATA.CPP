@@ -9,8 +9,8 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/SCENERECAT10C0.H"
-#include "FX_2/80271B18.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "FX/80271B18.H"
+#include "RENDER/8028FD2C_6.H"
 #include "COMMON/OBJRECAT3CV2.H"
 
 s32 CBitReader_ReadBits(BitReader *, s32);

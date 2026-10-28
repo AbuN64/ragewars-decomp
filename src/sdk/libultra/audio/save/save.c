@@ -6,7 +6,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "sdk/libultra/audio/save.H"
 #include "TYPES.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
 

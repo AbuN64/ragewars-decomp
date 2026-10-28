@@ -4,7 +4,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
-#include "sdk/OS_2/802BECB0.H"
+#include "sdk/OS/802BECB0.H"
 #include "sdk/os.h"
 #include "COMMON/LONE/D_800D83D0.H"
 

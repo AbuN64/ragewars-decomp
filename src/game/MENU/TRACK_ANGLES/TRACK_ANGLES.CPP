@@ -6,7 +6,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 extern CVector3 Track_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 Graphu64_GetVerticalAngle(CVector3 *direction);

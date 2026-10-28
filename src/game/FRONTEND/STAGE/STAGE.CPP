@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "FRONTEND/8042E080_22.H"
-#include "SYSTEM_2/8025E280.H"
+#include "SYSTEM/8025E280.H"
 #include "ACHIEVE/80424E30_3.H"
 #include "FRONTEND/SCREEN.H"
 

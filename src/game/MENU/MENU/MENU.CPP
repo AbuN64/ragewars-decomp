@@ -2,7 +2,7 @@
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "MENU_2/STATE.H"
+#include "MENU/STATE.H"
 #include "TYPES.H"
 
 /* 80406A88_5.CPP */

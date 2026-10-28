@@ -3,11 +3,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SYSTEM_2/8025E280.H"
+#include "SYSTEM/8025E280.H"
 #include "TEXTURE/80256220_16.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "include_asm.h"
-#include "SYSTEM_2/8025E280_3.H"
+#include "SYSTEM/8025E280_3.H"
 
 /* 8025E280.CPP */
 extern void Audio_SetVoiceMixValue(ContextRecAt2BC0 *arg0, int arg1);

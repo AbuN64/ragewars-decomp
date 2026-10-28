@@ -13,7 +13,7 @@
 #include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
 

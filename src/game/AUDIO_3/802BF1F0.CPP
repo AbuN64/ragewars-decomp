@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OSTASK_T.H"
-#include "AUDIO_3/802BF1F0.H"
+#include "AUDIO/802BF1F0.H"
 
 /** Write a word to the SP status register. */
 void Audio_WriteSignalProcessorStatus(unsigned int statusCommand) {

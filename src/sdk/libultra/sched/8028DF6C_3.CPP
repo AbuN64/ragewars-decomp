@@ -9,8 +9,8 @@
 #include "sdk/libgultra.h"
 #include "COMMON/EXTERNS_3.H"
 #include "FRONTEND/8040B45C_22.H"
-#include "sdk/AUDIO_2/802BF7F0.H"
-#include "SYSTEM_2/8025E280.H"
+#include "sdk/AUDIO/802BF7F0.H"
+#include "SYSTEM/8025E280.H"
 #include "sdk/os.h"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))

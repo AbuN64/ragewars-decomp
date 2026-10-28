@@ -2,13 +2,13 @@
 #include "COMMON/LOCALDECODERANGE.H"
 #include "COMMON/LONE/D_8010AC80.H"
 #include "SYSTEM/802609CC.H"
-#include "GAME_2/8025E520.H"
+#include "GAME/8025E520.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 #include "SYSTEM/802609CC_5.H"
 
 /* ROM-grounded data: src/rw_pool_802612A8_C9E88_us_rev1.c */

@@ -4,7 +4,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "FX_2/80271B18.H"
+#include "FX/80271B18.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTLINKS4_2.H"
 #include "COMMON/AIPROFILE.H"

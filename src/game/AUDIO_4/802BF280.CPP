@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_17.H"
-#include "AUDIO_4/802BF280.H"
+#include "AUDIO/802BF280.H"
 
 /** Read the SP status register. */
 unsigned int Audio_ReadSignalProcessorStatus(void) {

@@ -12,7 +12,7 @@
 #include "GAME/CODE_8027302C.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM/8025E5B0_9.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 
 /* Switches an animation track to its pending clip when asked and the clip differs: keeps a copy of the track, loads the pending clip's resource and, when it is ready, reads its frame count and length, hands the old state to the previous track slot, restarts the track on the new clip and reports the switch; otherwise, or when not switching, it reloads the current clip and reports no switch. */
 

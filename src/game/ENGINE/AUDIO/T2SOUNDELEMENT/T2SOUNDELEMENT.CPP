@@ -3,13 +3,13 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "AUDIO_2/802591C0.H"
+#include "AUDIO/802591C0.H"
 #include "TEXTURE/80256220_15.H"
-#include "RENDER_2/8025DE50_5.H"
+#include "RENDER/8025DE50_5.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "TEXTURE/80256220_14.H"
 #include "include_asm.h"
-#include "RENDER_2/8025DE50_6.H"
+#include "RENDER/8025DE50_6.H"
 #include "TEXTURE/80256220_16.H"
 
 /* 8025DE50_5.CPP */

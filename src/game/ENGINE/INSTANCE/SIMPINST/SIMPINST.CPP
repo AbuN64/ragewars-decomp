@@ -6,7 +6,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/EXTERNS_8.H"
 #include "COMMON/PROPGEOMETRY.H"
-#include "WORLD_2/8024E914.H"
+#include "WORLD/8024E914.H"
 #include "COMMON/OBJB.H"
 #include "SCENE/802508E0_4.H"
 

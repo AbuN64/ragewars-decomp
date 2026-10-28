@@ -13,7 +13,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/OBJRECAT4V6.H"

@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "MULTI/8043E9A8.H"
 #include "COMMON/AIPROFILE.H"
-#include "SYSTEM_2/8025E280.H"
+#include "SYSTEM/8025E280.H"
 
 struct func_8025E5B0_S1;
 struct ParamsPakAllocateMenu;

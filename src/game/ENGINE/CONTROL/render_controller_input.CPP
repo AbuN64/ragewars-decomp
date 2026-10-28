@@ -6,10 +6,10 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "AUDIO_4/802BFE60.H"
+#include "AUDIO/802BFE60.H"
 #include "sdk/os.h"
 
-#include "sdk/OS_2/802BC630_2.H"
+#include "sdk/OS/802BC630_2.H"
 /* Reads the four controllers once per frame and folds them into the combined input record D_8010B0E0.
  * State 0 starts a read through the message queue, converts the pads to the four per-player input
  * records (Control_UpdateControllerInput), ORs their button words into the combined record, adds the stick

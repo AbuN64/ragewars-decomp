@@ -202,52 +202,52 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE_3/8027A0F4_6.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_3/8027A0F4_7.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_3/8027A0F4_8.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_3/CODE_80281A70.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_3/8027A0F4_10.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_2/8027A0F4_4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE_4/8028308C.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
-[file."src/game/ENGINE/PARTICLE/8027A0F4/8027A0F4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-ffast-math"]
-omit = []
-
 [file."src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
 omit = []
 
 [file."src/game/ENGINE/PARTICLE/PARTICLE.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_17.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_18.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_19.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_20.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_16.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_9.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_22.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+
+[file."src/game/ENGINE/PARTICLE/PARTICLE_8.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []

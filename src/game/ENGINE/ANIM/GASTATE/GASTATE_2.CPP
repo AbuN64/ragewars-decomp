@@ -5,7 +5,7 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/LOCALDECODERANGE.H"
 #include "SCENE/802508E0_7.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "RENDER/8028FD2C_6.H"
 
 typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef StridedTable ObjRecV1;

@@ -7,8 +7,8 @@
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
-#include "SYSTEM_3/80265370.H"
-#include "RENDER_4/8028FD2C_6.H"
+#include "SYSTEM/80265370.H"
+#include "RENDER/8028FD2C_6.H"
 #include "MATH/DOUBLEBITS.H"
 
 

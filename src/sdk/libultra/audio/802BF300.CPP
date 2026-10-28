@@ -4,8 +4,8 @@
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "sdk/AUDIO_2/802BF300.H"
-#include "sdk/AUDIO_2/802BFA00.H"
+#include "sdk/AUDIO/802BF300.H"
+#include "sdk/AUDIO/802BFA00.H"
 #include "RESMGR/802A0888.H"
 #include "sdk/libultra/audio/802BF300.h"
 

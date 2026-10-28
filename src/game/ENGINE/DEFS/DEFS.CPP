@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "SYSTEM_3/80265370.H"
+#include "SYSTEM/80265370.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "COMMON/LIGHTDATA.H"
 #include "COMMON/VECTOR4F.H"

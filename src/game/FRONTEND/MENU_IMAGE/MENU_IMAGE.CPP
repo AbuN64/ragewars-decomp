@@ -11,7 +11,7 @@
 #include "FRONTEND/8043A0B0_11.H"
 #include "FRONTEND/CODE_8043AED0.H"
 #include "FRONTEND/8040B45C_32.H"
-#include "RENDER_2/8025DE50_5.H"
+#include "RENDER/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
 extern FourPlayerResultsScreen *D_800E59E0;

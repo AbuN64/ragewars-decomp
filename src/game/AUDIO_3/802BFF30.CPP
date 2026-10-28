@@ -58,8 +58,8 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/EXTERNS_3.H"
 #include "sdk/libultra/io/pirawread.H"
-#include "AUDIO_3/802BEE60.H"
-#include "AUDIO_3/802BFF30.H"
+#include "AUDIO/802BEE60.H"
+#include "AUDIO/802BFF30.H"
 #include "ENGINE/VIRTUAL/VHANDLER_3.H"
 #include "sdk/libgultra/libasm_802BBC68_14.h"
 #include "sdk/libgultra/libasm_802BBC68_21.h"
@@ -67,7 +67,7 @@
 #include "sdk/libgultra/libasm_802BBC68_7.h"
 #include "sdk/libgultra/libasm_802BBC68_8.h"
 #include "RESMGR/802A0888.H"
-#include "AUDIO_3/802BFD40.H"
+#include "AUDIO/802BFD40.H"
 
 /* osInitialize, drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock
    rate comes from the ROM header through osPiRawReadIo. */
