@@ -294,7 +294,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
     s32 value;
     sequence = arg0->target;
     if (sequence != 0) {
-        func_802AE6BC_de(sequence, &message);
+        alCSeqNextEvent(sequence, &message);
         {
         s32 sw_message_value = (s16)((u16)message.type - 1);
         if ((unsigned int)sw_message_value > 19) {

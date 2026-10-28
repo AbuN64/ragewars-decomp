@@ -4478,7 +4478,7 @@ segments:
       - [0xDEC4C, data, data_800C/rodata_unresolved_800DE04C]
       - [0xDEC50, rodata, data_800C/data_func_8043C324_de_800DE050]
       - [0xDECD4, data, data_800C/D_auto_rodata_unresolved_800DE0D4]
-      - [0xDED88, rodata, data_800C/D_auto_rodata_func_8043C54C_de_800DE188]
+      - [0xDED88, rodata, data_800C/g_levelUnlockBitJumpTable]
       - [0xDEDB8, rodata, data_800C/rodata_func_8043C688_de_800E21E8]
       - [0xDEE44, rodata, data_800C/literals_Encoded_DrawTextEntryCursor]
       - [0xDEE54, rodata, data_800C/rodata_func_8043CB30_de_800DCF04]

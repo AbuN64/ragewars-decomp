@@ -147,7 +147,7 @@ u8 __getTrackByte(ALCSeq_s *seq, u32 track)
     return theByte;
 }
 
-void func_802AE5B8_de(ALCSeq_s *state, ALCMidiHdr *base) {
+void alCSeqNew(ALCSeq_s *state, ALCMidiHdr *base) {
     f64 converted;
     s32 count;
     u32 entry;
@@ -181,7 +181,7 @@ void func_802AE5B8_de(ALCSeq_s *state, ALCMidiHdr *base) {
     state->qnpt = D_800C7308_de / (f32)converted;
 }
 
-void func_802AE6BC_de(ALCSeq_s *state, ALEvent *result) {
+void alCSeqNextEvent(ALCSeq_s *state, ALEvent *result) {
     u32 minimum;
     u32 index;
     u32 selected;

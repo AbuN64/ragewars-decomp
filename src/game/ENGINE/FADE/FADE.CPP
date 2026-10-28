@@ -91,7 +91,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             queue->unk4 = 1;
         case 0x80:
             i = 0;
-            func_802AE5B8_de(queue->unk10, queue->unkC);
+            alCSeqNew(queue->unk10, queue->unkC);
             alCSPSetSeq(queue->unk14, queue->unk10);
             alCSPSetBank(queue->unk14, queue->unk8->field_4);
             do {

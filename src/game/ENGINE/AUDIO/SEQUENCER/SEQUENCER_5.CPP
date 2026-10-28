@@ -97,7 +97,7 @@ void Sequencer_AttachTrackSequence(Track *track) {
     f32 scaled;
 
     i = 0;
-    func_802AE5B8_de(track->unk10, track->unkC);
+    alCSeqNew(track->unk10, track->unkC);
     alCSPSetSeq(track->unk14, track->unk10);
     alCSPSetBank(track->unk14,
                   track->unk8->field_4);
