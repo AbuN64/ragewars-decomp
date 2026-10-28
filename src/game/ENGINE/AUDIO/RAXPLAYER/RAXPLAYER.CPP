@@ -11,8 +11,8 @@
 #include "COMMON/SELF.H"
 #include "AUDIO/RAXPLAYER.H"
 #include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
-#include "AUDIO/802591C0.H"
-#include "SYSTEM/80265370.H"
+#include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
+#include "SYSTEM/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 /* Starts a random song from a group on a music player: picks one of the group's songs with equal weight, returning -1 when the group has none, records the group and song and takes the next request id, repeats the pick for the queued group, sets the volume to 0x40 and the speed from the given scale, then either stops the current song so it restarts (while starting or playing) or requests a start, and returns the request id. The picker and restart are inline helpers; the pick for the queued group is repeated with its result unused, as in the cartridge. */

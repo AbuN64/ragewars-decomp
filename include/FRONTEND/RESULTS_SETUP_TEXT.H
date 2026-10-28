@@ -1,7 +1,7 @@
 #ifndef FRONTEND_RESULTS_SETUP_TEXT_H
 #define FRONTEND_RESULTS_SETUP_TEXT_H
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern ResultsHeadingCharacter D_800F00DC[];
 extern char *D_auto_800E2034[], *D_auto_800E2054[], *D_auto_800E20A4[], *D_auto_800E20B4[];

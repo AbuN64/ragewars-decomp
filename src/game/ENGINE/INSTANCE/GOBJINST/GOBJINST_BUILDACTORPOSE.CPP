@@ -5,7 +5,7 @@
 #include "COMMON/UNSIGNED_QUOTIENT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ACTORRESOURCEHEADER.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 
 /* Builds and packs the animated part matrices of an actor, then updates the
  * frame timing totals. */

@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/OBJECTSTATE10_5.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/ALSYNSTARTVOICE.H"
+#include "sdk/libgultra/ALSYNSTARTVOICE.H"
 #include "sdk/libultra/audio/synthesizer.h"
 
 /* code_802B8370_4.c */

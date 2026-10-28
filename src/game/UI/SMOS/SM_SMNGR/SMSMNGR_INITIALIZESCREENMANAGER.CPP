@@ -1,4 +1,4 @@
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -10,13 +10,13 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/8040B45C_35.H"
+#include "FRONTEND/FRONTEND_OPENRESOURCEARCHIVE.H"
 #include "MATH/SMSMNGR_INITIALIZESCREENMANAGER.H"
 #include "RESMGR/STREAM.H"
 #include "MATH/math_controller_events.H"
 #include "MATH/SM_SMNGR.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "MATH/80299ECC.H"
+#include "MATH/MENU.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
 /* Refreshes the selected entry and updates its interface state. */

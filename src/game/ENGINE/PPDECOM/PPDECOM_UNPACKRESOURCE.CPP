@@ -1,11 +1,11 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
-#include "RENDER/8028469C.H"
+#include "RENDER/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "sdk/libgultra_inferred/RNC_UNPACKMETHOD2.H"
-#include "sdk/libgultra/part_800C7F20/RNC_UNPACKMETHOD1.H"
+#include "sdk/libgultra/RNC_UNPACKMETHOD1.H"
 
 void Cache_ReplaceResourceBlock(s32, void **, void *);
 void * Cache_AllocResourceBlock(s32, void *, s32);

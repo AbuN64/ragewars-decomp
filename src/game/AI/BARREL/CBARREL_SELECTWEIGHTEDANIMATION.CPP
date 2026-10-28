@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
-#include "LISTS/80279520.H"
+#include "LISTS/LISTS.H"
 
 /* Picks a random entry from a table of mask and id records ending in -1: every id whose mask shares
    a bit with flags and that Gobjinst_ChooseAnimationVariant finds for the owner is added to a weighted picker with

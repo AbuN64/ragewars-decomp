@@ -1,7 +1,7 @@
 #ifndef FRONTEND_PREVIEW_MODEL_IMAGE_H
 #define FRONTEND_PREVIEW_MODEL_IMAGE_H
 #include "TYPES.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/UNUSED.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #else

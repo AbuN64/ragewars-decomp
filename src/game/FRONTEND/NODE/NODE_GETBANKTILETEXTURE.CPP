@@ -1,5 +1,5 @@
-#include "MENU/GFX/80414430_24.H"
-#include "MATH/802A2870.H"
+#include "MENU/GFX/IMAGE.H"
+#include "MATH/N64_ENG.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"

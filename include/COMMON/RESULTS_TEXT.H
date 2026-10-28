@@ -2,7 +2,7 @@
 #define COMMON_RESULTS_TEXT_H
 /* Results-screen texts: one per language in PAL builds, chosen by the game settings. */
 #include "TYPES.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENU_TEXT.H"
 /* The game settings record. */

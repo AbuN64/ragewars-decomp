@@ -15,7 +15,7 @@ void func_8022B5C0_de(void *player) {
 }
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"
-#include "RENDER/802192C0.H"
+#include "RENDER/SHARED_REACTIONINTERACTION.H"
 extern void Barrel_FillDamagePacket(Shared_ReactionInteraction *, s32, s32, f32, s32, s32);
 
 void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {

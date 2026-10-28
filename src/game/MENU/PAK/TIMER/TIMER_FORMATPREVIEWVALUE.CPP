@@ -1,10 +1,10 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECATCV1.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "MENU/PAK/TIMER.H"
 
 /* Formats the halfword at offset 0x22 of the structure D_800E28BC points to into a field's text

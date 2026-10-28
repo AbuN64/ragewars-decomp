@@ -1,5 +1,0 @@
-#ifndef SDK_LIBGULTRA_PART_800C7F20_SEQPLAYER_802B6BE4_H
-#define SDK_LIBGULTRA_PART_800C7F20_SEQPLAYER_802B6BE4_H
-#include "COMMON/ALBANK_S.H"
-extern void __postNextSeqEvent(void *arg0);
-#endif

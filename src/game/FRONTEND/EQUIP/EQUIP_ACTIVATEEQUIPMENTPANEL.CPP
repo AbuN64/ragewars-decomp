@@ -1,6 +1,6 @@
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"

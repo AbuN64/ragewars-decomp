@@ -14,11 +14,11 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/EXTERNS_18.H"
 #include "AUDIO/VOICE.H"
-#include "AUDIO/802591C0.H"
+#include "AUDIO/AUDIO_CHOOSEWEIGHTEDSOUNDVARIANT.H"
 #include "AUDIO/RAXPLAYER.H"
 #include "sdk/OS/AUDIO_STOPMUSIC.H"
 #include "sdk/os.h"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/EXTERNS_11.H"
 

@@ -5,7 +5,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "sdk/libgultra/part_800C7F20/ALSEQGETLOC.H"
+#include "sdk/libgultra/ALSEQGETLOC.H"
 #include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 

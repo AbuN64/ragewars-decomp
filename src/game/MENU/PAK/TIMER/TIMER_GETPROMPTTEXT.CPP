@@ -1,7 +1,7 @@
 #include "COMMON/RECORDRECATCV1.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E4F8.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/80409A88.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -13,7 +13,7 @@
 #include "COMMON/GLOBALS.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_GETPROMPTTEXT.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 /* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns D_80153784. Adapted from Timer_CheckMenuPakChange with nothing changed (identical code). */
 

@@ -1,5 +1,4 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_17.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
 #include "sdk/libgultra/viblack.h"

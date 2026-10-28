@@ -2,7 +2,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/LONE/D_0044ED44.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/WORLD.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"

@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 #include "sdk/al_globals.h"
 
 void alUnlink(ListLink *node) {

@@ -13,7 +13,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER/LINKED_BUILDCOLOREDRIBBONVERTICES.H"
-#include "LISTS/80279520.H"
+#include "LISTS/LISTS.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
 extern void Graphu64_ConvertMatrixToFixed(void *,void *),Graphu64_ConvertMatrixToFloat(void *,void *),Graphu64_ClampMatrixToFixedRange(void *),Graphu64_GetMatrixTranslation(void *,void *),Graphu64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),Linked_AppendRibbonSegment(void *,Node44 *,void *);

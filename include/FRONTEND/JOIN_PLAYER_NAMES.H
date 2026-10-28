@@ -1,7 +1,7 @@
 #ifndef FRONTEND_JOIN_PLAYER_NAMES_H
 #define FRONTEND_JOIN_PLAYER_NAMES_H
 #include "TYPES.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 typedef struct JoinNameEntry { u8 **names; s32 pad; } JoinNameEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 *D_800E1664_eu[], *D_800E1564_eu[];

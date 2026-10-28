@@ -9,13 +9,13 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/ACCESS_S8_10F.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/LISTHEADER.H"
 #include "CAMERA/80243A80.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "LISTS/80279520.H"
+#include "LISTS/LISTS.H"
 
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object
  * (D_801040D0 for flagged players; otherwise by Insthdr_IsInactiveOrCollisionOption4 and then Insthdr_GetModelCollisionFlag8 or Insthdr_GetModelCollisionFlag1 among

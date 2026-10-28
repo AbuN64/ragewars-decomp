@@ -8,7 +8,7 @@
 /* Spawns the effect of an item variant: resolves the variant's effect id, loads its descriptor and first record, takes the effect count from the record's model and turns the colour vector by the record's angle, then spawns the effect through the inline spawner of Animpool_SpawnDescribedSceneEffect with the given owner, position, scale, direction and counted reference, releasing both resources. Adapted from Animpool_SpawnDescribedSceneEffect with the descriptor loading added. */
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"

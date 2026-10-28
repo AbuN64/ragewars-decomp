@@ -3,8 +3,8 @@
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/__POSTNEXTSEQEVENT.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/__POSTNEXTSEQEVENT.H"
+#include "sdk/libgultra/alunlink.h"
 
 extern void alSynSetPriority(void *arg0, void *arg1, s16 arg2);
 

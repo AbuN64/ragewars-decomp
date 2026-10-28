@@ -6,7 +6,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD/8024E914.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/FRUSTUM.H"
 #include "gbi.h"

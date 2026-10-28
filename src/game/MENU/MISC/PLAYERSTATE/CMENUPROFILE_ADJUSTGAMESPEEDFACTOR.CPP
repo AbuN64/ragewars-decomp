@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/CMENUPROFILE_ADJUSTGAMESPEEDFACTOR.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 /** Always returns 0. */
 s32 func_8043E5D0_de(void) {

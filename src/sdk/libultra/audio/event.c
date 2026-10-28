@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/BUF16B.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 #include "include_asm.h"
 
 extern s32 func_802BD170_de(s32);

@@ -1,4 +1,4 @@
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "GFX/802A8A94.H"

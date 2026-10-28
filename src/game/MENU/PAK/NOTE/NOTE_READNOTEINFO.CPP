@@ -1,7 +1,7 @@
 #include "MENU/PAK/pak_note_search.H"
 #include "COMMON/UNUSED.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "include_asm.h"
 #include "stddef.h"
 #include "COMMON/ENTRYRECAT0V3.H"

@@ -9,7 +9,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "sdk/lib_802BB630/GUMTXIDENTF.H"
+#include "sdk/MATH/GUMTXIDENTF.H"
 extern u32 g_secondaryRandomSeed;
 extern f32 D_800C4960_de[2];
 

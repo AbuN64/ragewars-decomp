@@ -17,7 +17,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
-#include "particle/8027A0F4_4.H"
+#include "particle/PARTICLE_BUILDMATRIX.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "particle/CAMERA_SCALE.H"

@@ -10,7 +10,7 @@
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "GFX/TEXT/ONSCREEN_GETFONTTEXTURE.H"
 #include "include_asm.h"
 

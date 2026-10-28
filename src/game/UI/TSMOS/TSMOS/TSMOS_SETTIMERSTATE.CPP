@@ -5,7 +5,7 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
-#include "RESMGR/802A2230.H"
+#include "RESMGR/STATEPAIR.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 

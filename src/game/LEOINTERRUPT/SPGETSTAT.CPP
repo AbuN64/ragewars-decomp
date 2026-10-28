@@ -1,5 +1,4 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_17.H"
 #include "AUDIO/SPGETSTAT.H"
 
 /** Read the SP status register. */

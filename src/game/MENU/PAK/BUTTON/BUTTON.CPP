@@ -1,9 +1,9 @@
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
 
@@ -23,7 +23,7 @@ s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 extern u8 *D_800E22E4_eu[], *D_800E22F4[];
 
 s32 Pak_FormatPackedButtonOption(LayeredText *item) {

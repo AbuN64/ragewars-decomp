@@ -2,9 +2,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-#include "COMMON/S1_5.H"
+#include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "TYPES.H"
-#include "MENU_2/EXTERNS.H"
+#include "MENU/EXTERNS.H"
 #include "COMMON/SCREEN.H"
 
 /* 80406A88_12.CPP */

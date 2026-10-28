@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WIDGETRECAT1A.H"
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 extern s32 Widget_ComputeWidgetBounds(Shared_Quad *, Shared_Quad *, MenuWidget *, sm_dldc *);
 extern void N64Eng_GetClipBounds(s32 *, s32 *, s32 *, s32 *);
 extern s32 Node_ClampRectToClip(Shared_Quad *, Shared_Quad *);

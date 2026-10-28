@@ -18,7 +18,7 @@
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "LISTS/80279520.H"
+#include "LISTS/LISTS.H"
 #include "include_asm.h"
 
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */

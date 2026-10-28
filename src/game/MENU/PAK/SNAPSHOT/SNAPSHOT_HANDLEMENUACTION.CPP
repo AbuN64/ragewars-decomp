@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "RESMGR/resmgr_string_memory.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/PAK_MENU.H"
 #include "TYPES.H"
 #include "MENU/PAK/SNAPSHOT_HANDLEMENUACTION.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"

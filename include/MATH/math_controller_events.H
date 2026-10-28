@@ -1,7 +1,7 @@
 #ifndef MATH_MATH_CONTROLLER_EVENTS_H
 #define MATH_MATH_CONTROLLER_EVENTS_H
 #include "COMMON/CALLBACK.H"
-#include "MATH/8029AE80.H"
+#include "MATH/INPUT_EVENT.H"
 
 extern void DispatchControllerAxisEvents(input_event *event);
 extern void Controller_DispatchControllerEvent(input_event *event);

@@ -5,7 +5,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
-#include "sdk/lib_802BB630/GUMTXIDENTF.H"
+#include "sdk/MATH/GUMTXIDENTF.H"
 #include "COMMON/ALFXPARAM.H"
 
 void guMtxF2L(f32 *arg0, s32 *arg1);

@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SCENE/802508E0.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "include_asm.h"
 

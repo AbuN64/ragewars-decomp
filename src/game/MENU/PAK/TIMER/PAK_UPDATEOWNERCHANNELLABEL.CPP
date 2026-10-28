@@ -1,6 +1,6 @@
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -10,7 +10,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 extern s32 D_8015375C;
 extern char *D_800D7E14[];
 extern s32 Menu_CountLineChars(struct Field *);

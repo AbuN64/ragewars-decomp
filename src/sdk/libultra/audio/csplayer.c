@@ -8,14 +8,14 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/BUF16B.H"
-#include "sdk/libgultra/part_800C7F20/__INITCHANSTATE.H"
-#include "sdk/libgultra/part_800C7F20/seqplayer.h"
+#include "sdk/libgultra/__INITCHANSTATE.H"
+#include "sdk/libgultra/seqplayer.h"
 #include "sdk/libgultra_inferred/__CSPHANDLEMIDIMSG.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 #include "sdk/al_globals.h"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 #include "include_asm.h"
 
 extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);

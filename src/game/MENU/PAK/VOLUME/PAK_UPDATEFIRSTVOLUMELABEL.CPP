@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
@@ -8,7 +8,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

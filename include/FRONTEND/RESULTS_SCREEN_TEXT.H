@@ -1,7 +1,7 @@
 #ifndef FRONTEND_RESULTS_SCREEN_TEXT_H
 #define FRONTEND_RESULTS_SCREEN_TEXT_H
 #include "TYPES.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/EFFECTRENDER.H"
 /* PAL resources provide a string per selected language. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

@@ -2,7 +2,7 @@
 #include "COMMON/TEXTURE.H"
 #include "MENU/80414430.H"
 #include "TYPES.H"
-#include "MENU/GFX/80414430_24.H"
+#include "MENU/GFX/IMAGE.H"
 
 extern void *ESmem_AllocateFrameHeapHigh(int);
 extern void guMtxF2L(void *, void *);

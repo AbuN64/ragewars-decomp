@@ -1,5 +1,5 @@
 #include "COMMON/SCREEN.H"
-#include "COMMON/S1_5.H"
+#include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"

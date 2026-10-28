@@ -12,7 +12,7 @@ extern s32 Player_GetPlayerIndex(char *, s32);
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern u8 *D_800D3C44;
 #endif
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/EFFECTRENDER.H"
 #endif

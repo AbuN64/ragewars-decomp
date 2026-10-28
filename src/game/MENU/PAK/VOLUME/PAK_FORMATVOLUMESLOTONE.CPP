@@ -1,4 +1,4 @@
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
@@ -10,7 +10,7 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 s32 Pak_FormatVolumeSlotOne(struct Field *field) {
     s32 step = (D_801462C8.volume[1] - 0x80) / 8;

@@ -1,3 +1,0 @@
-#ifndef COMMON_EXTERNS_17_H
-#define COMMON_EXTERNS_17_H
-#endif

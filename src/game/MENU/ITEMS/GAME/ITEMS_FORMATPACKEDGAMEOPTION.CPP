@@ -1,4 +1,4 @@
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "MENU/HOLDERRECAT1CV2.H"
@@ -10,7 +10,7 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 s32 Items_FormatPackedGameOption(LayeredText *field) {
     char *text;

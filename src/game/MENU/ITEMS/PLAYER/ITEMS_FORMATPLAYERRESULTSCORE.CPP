@@ -1,7 +1,7 @@
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
@@ -11,7 +11,7 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 extern Shared_MenuData D_80145040;
 extern s16 g_playerResultScoreFields[];
 

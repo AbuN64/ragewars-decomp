@@ -7,7 +7,7 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/OBJECTLINKS150C.H"
 #include "TYPES.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "COMMON/APPROACHLOCATION.H"
 extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 

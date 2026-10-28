@@ -9,7 +9,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
 #include "ENGINE/PARTICLE.H"
-#include "particle/8027A0F4_4.H"
+#include "particle/PARTICLE_BUILDMATRIX.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/80408CB0_10.H"
 #include "MENU/PAK/80409A88_9.H"
 

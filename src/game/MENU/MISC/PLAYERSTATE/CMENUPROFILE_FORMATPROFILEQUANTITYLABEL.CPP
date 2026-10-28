@@ -1,7 +1,7 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "TYPES.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 
 #include "COMMON/SHARED_MENUSELECTION.H"

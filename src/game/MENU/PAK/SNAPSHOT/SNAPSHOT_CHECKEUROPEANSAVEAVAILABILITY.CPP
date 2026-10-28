@@ -63,7 +63,7 @@ extern s32 D_0044FE74_eu_x, D_0044FEBC_eu_x, D_0045017C, D_004502D0_eu_x;
 #endif
 /* The game's two Controller Pak note names (PAL: per language). */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 extern char *D_800E25A4[];
 extern char *D_800E25B4[];
 #define PAK_NOTE_NAME_1 D_800E25A4[g_languageIndex]

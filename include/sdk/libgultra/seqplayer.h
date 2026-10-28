@@ -1,0 +1,5 @@
+#ifndef SDK_LIBGULTRA_SEQPLAYER_H
+#define SDK_LIBGULTRA_SEQPLAYER_H
+#include "COMMON/ALBANK_S.H"
+extern void Seqplayer_ReleaseSequenceVoice(List802B663C *arg0, void *arg1);
+#endif

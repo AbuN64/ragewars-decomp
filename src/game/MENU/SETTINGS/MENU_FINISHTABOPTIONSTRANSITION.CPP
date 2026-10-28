@@ -1,7 +1,7 @@
 #include "RSP/8026E1F8_5.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/WORLD.H"
-#include "COMMON/S1_5.H"
+#include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E280.H"
 #include "FRONTEND/MENUIMAGE.H"

@@ -1,5 +1,4 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_17.H"
 #include "COMMON/AIPROFILE.H"
 #include "AUDIO/SPTASKYIELDED.H"
 #include "AUDIO/SPGETSTAT.H"

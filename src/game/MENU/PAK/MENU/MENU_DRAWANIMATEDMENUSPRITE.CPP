@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/OBJECT1C8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "gbi.h"

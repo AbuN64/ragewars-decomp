@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"

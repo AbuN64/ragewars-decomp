@@ -1,4 +1,4 @@
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include <stddef.h>
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKSC_2.H"

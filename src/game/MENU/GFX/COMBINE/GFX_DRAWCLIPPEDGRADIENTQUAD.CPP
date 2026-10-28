@@ -10,7 +10,7 @@
 #include "MENU/80414430.H"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "MENU/GFX/RECT.H"
-#include "MENU/GFX/80414430_24.H"
+#include "MENU/GFX/IMAGE.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern Gfx *g_displayListCursor;

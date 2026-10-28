@@ -6,7 +6,7 @@
 #include "TEXTURE/80256220_13.H"
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 
 /* Clears and sizes the 0x8016E000 heap region against the detected RAM size, then initialises the
    five dependent subsystems over it. */

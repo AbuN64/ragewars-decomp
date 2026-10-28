@@ -1,4 +1,4 @@
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 #include "COMMON/CALLBACK.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_INITIALIZE.H"

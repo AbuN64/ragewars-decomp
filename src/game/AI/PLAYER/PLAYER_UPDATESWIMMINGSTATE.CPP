@@ -6,7 +6,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "DATA/OVLTAB2/800C9FA8.H"
-#include "WEAPONS/800C7B48.H"
+#include "WEAPONS/G_PLAYERSWIMCONSTANTS.H"
 
 extern char D_800CED30;
 s32 InstHdr_GetActorMotionState(void *);

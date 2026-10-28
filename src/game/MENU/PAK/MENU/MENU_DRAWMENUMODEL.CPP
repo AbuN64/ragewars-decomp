@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_800CD8D0.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/LONE/D_8014DE50.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/VECTOR4F.H"

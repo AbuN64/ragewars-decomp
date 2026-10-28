@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/REQUESTRECAT10.H"
 #include "TYPES.H"

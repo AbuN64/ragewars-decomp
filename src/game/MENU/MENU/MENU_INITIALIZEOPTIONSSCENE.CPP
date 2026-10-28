@@ -1,5 +1,5 @@
 #include "COMMON/WORLD.H"
-#include "COMMON/S1_5.H"
+#include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "TYPES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 

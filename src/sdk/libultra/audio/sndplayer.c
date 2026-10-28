@@ -6,11 +6,11 @@
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/_DIVS32BYF32.H"
+#include "sdk/libgultra/_DIVS32BYF32.H"
 #include "include_asm.h"
 #include "sdk/EXTERNS.H"
 #include "COMMON/TRIPLE.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 #include "AUDIO/AUDIO_ASSERT.H"
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,

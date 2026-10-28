@@ -1,4 +1,4 @@
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 #include "MATH/SHARED_WIDGETIDE.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"

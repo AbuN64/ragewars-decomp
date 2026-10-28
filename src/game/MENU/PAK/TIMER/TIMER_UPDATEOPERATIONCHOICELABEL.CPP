@@ -1,5 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/80409A88.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -7,7 +7,7 @@ extern PakPreview *D_800E28BC;
 #include "COMMON/UNUSED.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/PAK/TIMER_UPDATEOPERATIONCHOICELABEL.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 extern s32 D_8015375C;
 

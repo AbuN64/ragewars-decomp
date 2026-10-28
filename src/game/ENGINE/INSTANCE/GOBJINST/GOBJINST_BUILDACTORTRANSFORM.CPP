@@ -9,7 +9,7 @@
 #include "ENGINE/INSTANCE/GOBJINST_BUILDACTORTRANSFORM.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "LISTS/80279520.H"
+#include "LISTS/LISTS.H"
 
 extern s32 Cinema_IsSequenceInWindow(void);
 extern CQuatern Gobjinst_BuildActorDirectionTilt(void *arg1);

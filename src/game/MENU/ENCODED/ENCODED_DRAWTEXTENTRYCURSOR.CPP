@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_6.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"

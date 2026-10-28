@@ -4,7 +4,6 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/UNUSED.H"
-#include "MENU_2/EXTERNS_2.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"

@@ -2,7 +2,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "TYPES.H"
-#include "MENU/804366D0_2.H"
+#include "MENU/PLAYER_INITPLAYERSETTINGSSCREEN.H"
 
 #if defined(NON_MATCHING) || (!defined(VERSION_EU) && !defined(VERSION_EU_X))
 #if defined(VERSION_DE)

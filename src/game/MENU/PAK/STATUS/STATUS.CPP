@@ -6,7 +6,7 @@
 #include "MENU/80408CB0_10.H"
 #include "MENU/PAK/80409A88_9.H"
 #include "COMMON/MENU_TEXT.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 
 #if !defined(VERSION_DE)
 /* Select the status text and right-align its nonblank characters. */

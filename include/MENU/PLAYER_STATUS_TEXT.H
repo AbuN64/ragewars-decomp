@@ -1,7 +1,7 @@
 #ifndef MENU_PLAYER_STATUS_TEXT_H
 #define MENU_PLAYER_STATUS_TEXT_H
 #include "TYPES.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *D_800E1034_eu[];
 extern char *D_800E1044[];

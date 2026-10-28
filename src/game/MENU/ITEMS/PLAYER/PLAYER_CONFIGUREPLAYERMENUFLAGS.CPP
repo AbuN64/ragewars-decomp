@@ -4,7 +4,7 @@
 #include "COMMON/PLAYER_GETPLAYERINDEX.H"
 #include "TYPES.H"
 #include "sdk/PFS/PLAYER_CONFIGUREPLAYERMENUFLAGS.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 /* Sets bit 24 of the flag word at offset 0x120 of the object at offset 0xC of a record when
    D_801468F4 is set, and clears it otherwise. */

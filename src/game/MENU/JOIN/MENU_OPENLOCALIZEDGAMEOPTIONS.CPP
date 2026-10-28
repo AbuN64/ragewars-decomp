@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "SYSTEM/8025E280.H"
-#include "COMMON/S1_5.H"
+#include "COMMON/MENU_INITIALIZEOPTIONSSCENE.H"
 #include "MENU/80406A88_6.H"
 
 /* 80408AC4_21.CPP */

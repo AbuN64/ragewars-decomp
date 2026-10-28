@@ -13,7 +13,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "ENGINE/SCENE_3.H"
 #include "stddef.h"

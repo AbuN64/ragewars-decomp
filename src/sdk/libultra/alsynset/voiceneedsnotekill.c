@@ -3,7 +3,7 @@
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/libgultra/alunlink.h"
 
 
 

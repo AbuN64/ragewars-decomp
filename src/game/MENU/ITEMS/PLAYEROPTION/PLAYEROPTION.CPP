@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "FRONTEND/8040B45C_22.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 
 /* Replaces the option halfword g_gamePackedOptions with what Menu_AdjustValue returns for the second argument,
    that halfword, 0x10, 0, 0x100 and 0, then stores its low byte in the byte after it, or 0xFF when

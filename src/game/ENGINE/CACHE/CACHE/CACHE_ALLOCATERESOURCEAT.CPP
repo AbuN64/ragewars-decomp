@@ -7,7 +7,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
-#include "SCENE/802508E0_9.H"
+#include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
 #include "sdk/os.h"
 
 

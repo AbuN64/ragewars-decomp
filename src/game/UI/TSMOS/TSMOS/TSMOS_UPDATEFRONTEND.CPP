@@ -2,7 +2,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
-#include "RESMGR/802A2230.H"
+#include "RESMGR/STATEPAIR.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -12,9 +12,9 @@
 #include "RESMGR/TSMOS_UPDATEFRONTEND.H"
 #include "RESMGR/TSMOS_SETIDLETIMER.H"
 #include "RESMGR/TSMOS_SHUTDOWNFRONTEND.H"
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 #include "RESMGR/802A23A4_7.H"
-#include "MATH/80299ECC.H"
+#include "MATH/MENU.H"
 
 extern s32 D_800D2C90;
 extern s8 D_8010BBB8;

@@ -4,7 +4,7 @@
 #include "FX/PARTICLE_SOUND.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
-#include "RENDER/8028469C.H"
+#include "RENDER/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 extern void Particle_StopSound(void *a);
 extern void Particle_ReleaseFirstHandle(char *obj, unsigned char count);
 extern void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32, EffectEntry *effectEntry);

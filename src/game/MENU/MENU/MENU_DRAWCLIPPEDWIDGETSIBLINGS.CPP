@@ -1,11 +1,11 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/STATE.H"
 #include "TYPES.H"
-#include "MATH/802A2870.H"
+#include "MATH/N64_ENG.H"
 
 /* 80408AC4_14.CPP */
 #if defined(VERSION_DE)

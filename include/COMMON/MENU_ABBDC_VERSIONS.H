@@ -1,6 +1,6 @@
 #ifndef COMMON_MENU_ABBDC_VERSIONS_H
 #define COMMON_MENU_ABBDC_VERSIONS_H
-#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/G_LANGUAGEINDEX.H"
 /* PAL menu text tables select the current language; constant and table bases follow each cartridge. */
 #if defined(VERSION_EU)
 #elif defined(VERSION_EU_X)

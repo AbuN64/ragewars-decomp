@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
-#include "MATH/80299ECC.H"
+#include "MATH/MENU.H"
 #include "include_asm.h"
 
 void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 event, s32 arg2, s32 arg3, s32 arg4,

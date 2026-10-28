@@ -7,7 +7,7 @@
 #include "TYPES.H"
 extern PakPreview *D_800E28BC;
 #include "MENU/PAK/80409A88_9.H"
-#include "SYSTEM/80265370.H"
+#include "SYSTEM/DEFS.H"
 #include "MENU/PAK/TIMER.H"
 
 /* Calls Menu_ClassifyResourceRange on the word at offset 0x24 of the structure D_800E28BC points to and

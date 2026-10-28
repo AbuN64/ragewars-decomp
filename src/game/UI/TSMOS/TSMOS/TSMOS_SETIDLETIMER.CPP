@@ -1,6 +1,6 @@
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/GAME_SESSION.H"
-#include "RESMGR/802A2230.H"
+#include "RESMGR/STATEPAIR.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
