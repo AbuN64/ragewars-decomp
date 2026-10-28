@@ -14,7 +14,7 @@
 
 /* 80277444_8.CPP */
 
-#if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
 #include "RENDER/8025DE50_5.H"
@@ -49,7 +49,13 @@ void Link_DispatchTrigger(Trigger *trigger) {
         if (g_world.mode == 4) {
             index = trigger->sound;
             if (index != 0) {
-                Sky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
+                Sky_PostTargetedScreenMessage(&D_80145088, fallback,
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                                             D_800E45D4[trigger->sound].sound[g_languageIndex],
+#else
+                                             gameplaySoundValue(index),
+#endif
+                                             D_800CD730, triggerSoundWeight());
                 callback = gameplaySoundHook(trigger->sound);
                 if (callback != 0) func_8025E11C_de(callback);
             }
@@ -69,9 +75,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Link_DispatchTrigger);
-#endif
+
 
 extern s32 Scene_FindActorTriggerRange(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
 
