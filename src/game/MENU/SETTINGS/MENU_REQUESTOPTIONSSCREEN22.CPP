@@ -1,5 +1,5 @@
 #include "COMMON/S1_5.H"
-#include "MENU/804221A0_13.H"
+#include "MENU/MENU_REQUESTOPTIONSSCREEN22.H"
 
 /* Calls Tsmos_DeactivateControllerState and then SmXlate_SwitchScreen with 0x16. */
 extern void Tsmos_DeactivateControllerState();

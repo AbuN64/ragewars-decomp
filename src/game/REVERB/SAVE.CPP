@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US))
 /* ROM-grounded data: src/rw_formats_802B6658_eu_x_CD640_us_rev1.c */

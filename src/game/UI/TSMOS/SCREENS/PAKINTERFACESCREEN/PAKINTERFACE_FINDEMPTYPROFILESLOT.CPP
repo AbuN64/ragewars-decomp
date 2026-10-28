@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/8042E080_45.H"
+#include "FRONTEND/PAKINTERFACE_FINDEMPTYPROFILESLOT.H"
 
 /* Returns the index of the first of a player's four 400-byte entries in the game D_800E54A4 whose
    state byte at 0x7D is -1, or -1 when all are in use. */

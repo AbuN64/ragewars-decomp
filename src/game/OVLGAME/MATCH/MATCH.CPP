@@ -5,7 +5,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/UNUSED.H"
-#include "OVLGAME/8044E2B8_5.H"
+#include "OVLGAME/MATCH_INITPARTICLEQUAD.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "include_asm.h"
 #include "COMMON/SESSIONHANDLERROW.H"

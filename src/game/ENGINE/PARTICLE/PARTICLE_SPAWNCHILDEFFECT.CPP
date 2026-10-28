@@ -82,7 +82,7 @@ extern char D_801041F0;
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
 extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 
 static inline f32 offset_x(Actor_func_80279B40_de *actor) {
     if (actor->def->unk14 != 0) {

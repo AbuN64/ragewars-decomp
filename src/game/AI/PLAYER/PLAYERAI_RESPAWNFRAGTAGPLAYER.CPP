@@ -1,5 +1,5 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-#include "COMMON/EXTERNS_8.H"
+#include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RESOURCELOADSTATE.H"
@@ -13,7 +13,7 @@
 #include "COMMON/S1_2.H"
 #include "TYPES.H"
 #include "WORLD/8022E938.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "RENDER/802192C0_3.H"
 
 extern f32 Graphu64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);

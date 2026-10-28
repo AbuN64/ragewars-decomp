@@ -36,7 +36,7 @@ INCLUDE_ASM("span_1000", func_80290BA0_eu);
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
  * draws the backdrop through SetN64_DrawTextLines with half the video height. */
-#include "RENDER/80291054_3.H"
+#include "RENDER/SETN64_DRAWTEXTLINES.H"
 extern s32 D_800D297C;
 extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8;
 extern char D_80141008;

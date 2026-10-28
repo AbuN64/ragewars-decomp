@@ -1,7 +1,7 @@
 #include "COMMON/GROUP.H"
 #include "COMMON/ACCESS_S8_10F.H"
 #include "TYPES.H"
-#include "CAMERA/80243A80_3.H"
+#include "CAMERA/CCINEMA_RESETSEQUENCECONTEXT.H"
 
 /* Zeroes the resident game-state block, sets its four persistent-slot markers to -1, then runs the two state-machine resets that depend on it. */
 

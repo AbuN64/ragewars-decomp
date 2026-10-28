@@ -5,7 +5,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "RENDER/80291054_7.H"
+#include "RENDER/SETN64_ADVANCEDISPLAYFRAME.H"
 #include "RESMGR/802A0888.H"
 
 

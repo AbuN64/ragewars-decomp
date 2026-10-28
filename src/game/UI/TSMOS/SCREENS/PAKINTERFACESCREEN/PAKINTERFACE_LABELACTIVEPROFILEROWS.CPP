@@ -1,7 +1,7 @@
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_38.H"
+#include "FRONTEND/PAKINTERFACE_LABELACTIVEPROFILEROWS.H"
 
 /* Labels player p's roster rows: for each of the four 400-byte records of D_80102B00 whose byte
    0xE is clear and whose owner byte 0xD is p, when the matching 150-byte status record at 0xD0 of

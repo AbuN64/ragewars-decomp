@@ -2,7 +2,7 @@
 #include "SCENE/802508E0_4.H"
 #include "RENDER/8028FD2C_6.H"
 #include "COMMON/OBJB.H"
-#include "COMMON/EXTERNS_8.H"
+#include "COMMON/CACHE_RELEASERESOURCE.H"
 
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 extern s32 Scene_GetIndexedModelResource(void *, s32);

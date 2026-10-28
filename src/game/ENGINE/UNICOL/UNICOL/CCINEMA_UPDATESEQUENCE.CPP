@@ -9,8 +9,8 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "CAMERA/80243A80_6.H"
-#include "MENU/80400000_4.H"
-#include "MENU/80400000_7.H"
+#include "MENU/TRACK_LOADTRACKSEQUENCE.H"
+#include "MENU/MENU_PROCESSTRACKITEMEVENTS.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its

@@ -7,7 +7,7 @@
 #include "MENU/PAK/8043F69C_6.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "MENU/PAK/8043F69C_11.H"
+#include "MENU/PAK/MENU_INITIALIZEMENU.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the

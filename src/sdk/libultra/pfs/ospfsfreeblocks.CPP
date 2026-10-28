@@ -3,8 +3,8 @@
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "TYPES.H"
 #include "sdk/PFS/ospfsfreeblocks.H"
-#include "sdk/PFS/80447BB0_19.H"
-#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/PFS_READWRITEINODE.H"
+#include "sdk/PFS/__OSCHECKID.H"
 
 /* osPfsFreeBlocks, drafted from ultralib src/io/pfsfreeblocks.c (2.0I branch): count the unused pages
    in every bank's inode table and report them as bytes. */

@@ -8,7 +8,7 @@
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
-#include "RESMGR/802A2230_8.H"
+#include "RESMGR/TSMOS_SETIDLETIMER.H"
 
 /** Return the global word at D_800D2C98. */
 

@@ -9,8 +9,8 @@
 #include "TYPES.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a weapon's two-shot alternate fire for its holder at 0x1D8: when the holder cannot use the
    alternate mode of its weapon (Player_HasAmmoForMode) a pending switch at 0x13C is cancelled and, if still

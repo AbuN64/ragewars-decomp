@@ -10,7 +10,7 @@
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/8025E280.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RENDER/8028FD2C_6.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

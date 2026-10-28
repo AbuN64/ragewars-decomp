@@ -8,7 +8,7 @@
 #include "COMMON/LEVEL_SPAWN.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"
-#include "ACTORS/80277444_2.H"
+#include "ACTORS/LIGHTING_BUILDLITMODEL.H"
 #include "SCENE/802508E0.H"
 #include "RENDER/8028FD2C_6.H"
 extern s32 D_800D2978;

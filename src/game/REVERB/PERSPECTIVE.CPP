@@ -1,10 +1,10 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "COMMON/TRIPLE.H"
-#include "sdk/lib_802BB630/802BBC50.H"
+#include "sdk/lib_802BB630/GUMTXIDENTF.H"
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 const unsigned int D_auto_src_rw_constants_802B6DEC_CD6F0_us_rev1[5] = {

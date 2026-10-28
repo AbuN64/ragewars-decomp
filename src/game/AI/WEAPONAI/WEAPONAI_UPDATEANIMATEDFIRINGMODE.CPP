@@ -14,11 +14,11 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/EXTERNS_6.H"
-#include "COMMON/EXTERNS_13.H"
+#include "COMMON/PLAYER_GETPLAYERINDEX.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "RENDER/8022AE90.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Advances a player's charging action: when the trigger is released (controller latch for a controlled
  * player, otherwise flag 0x2000 with no hold and a disallowed action) or the cooldown is past D_800C2F5C_de, it

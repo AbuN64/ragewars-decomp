@@ -7,9 +7,9 @@
 #include "ENGINE/PARTICLE.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "particle/80271B18_3.H"
-#include "SYSTEM/80265370_6.H"
+#include "SYSTEM/EVENTS_DELIVERCONTACTEFFECT.H"
 extern char D_801379C0, D_8013B1A8;
 
 /* Sets an actor's field 0x14C to 1 when something is near it: a world object from D_8011FE88 whose field 0x174 is positive within 256 units, a player from the D_80145060 list other than the actor's owner whose field 0x5E4 is positive within 256 units, or another actor of type 0xC or 0x22 from the given list within 512 units (all compared as squared distances). */

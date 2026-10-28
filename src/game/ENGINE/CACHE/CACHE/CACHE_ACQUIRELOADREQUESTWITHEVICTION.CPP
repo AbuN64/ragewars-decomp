@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT18V3.H"
 extern s32 D_80100560;
-#include "TEXTURE/80254CE4.H"
+#include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"

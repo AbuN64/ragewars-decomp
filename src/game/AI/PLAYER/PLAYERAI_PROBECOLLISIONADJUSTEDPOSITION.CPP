@@ -9,7 +9,7 @@
 #include "COMMON/SHAPE_TYPEMAP_14.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "TYPES.H"
-#include "FX/802631D0.H"
+#include "FX/CONTPAD_INITCONTROLLERINPUT.H"
 extern f32 D_800C2E10_de;
 
 extern char D_8010F328[];

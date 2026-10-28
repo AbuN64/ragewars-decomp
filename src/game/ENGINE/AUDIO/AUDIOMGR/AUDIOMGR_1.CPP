@@ -7,7 +7,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/S1_2.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"

@@ -8,9 +8,9 @@
 #include "FRONTEND/LAYOUT.H"
 #include "TYPES.H"
 #include "FRONTEND/ARCHIVEDATA.H"
-#include "FRONTEND/CODE_80411598.H"
+#include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "FRONTEND/8040B45C_36.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 extern BufferPool g_frontendResourceScreenCount;

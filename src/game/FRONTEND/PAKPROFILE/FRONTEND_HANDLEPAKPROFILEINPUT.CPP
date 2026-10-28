@@ -2,7 +2,7 @@
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_34.H"
+#include "FRONTEND/PAKINTERFACE_FINDREADYTRANSFERPLAYER.H"
 
 extern void PAKInterface_RefreshPlayerPanel(s32 player);
 

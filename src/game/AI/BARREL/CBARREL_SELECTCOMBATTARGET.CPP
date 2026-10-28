@@ -6,9 +6,9 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
-#include "GAME/80240650.H"
+#include "GAME/CCOLLISION_COPYPOSITIONANDGETMODELFLAGS.H"
 
 /* Tests target visibility against range and horizontal and vertical angles; volatile zero accesses and identical normalization branches preserve scheduling and register allocation. */
 

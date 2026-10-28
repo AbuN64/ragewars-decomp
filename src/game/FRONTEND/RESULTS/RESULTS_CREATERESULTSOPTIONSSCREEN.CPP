@@ -6,9 +6,9 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "FRONTEND/80423280_38.H"
-#include "FRONTEND/80423280_39.H"
+#include "FRONTEND/RESULTS_UPDATERESULTSHEADING.H"
 #include "FRONTEND/80423280_42.H"
-#include "FRONTEND/CODE_80426EC4.H"
+#include "FRONTEND/RESULTS_LOADTRIALCOMPLETIONFLAGS.H"
 #include "FRONTEND/FRONTEND_DRAWMODELPREVIEW.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 
@@ -34,7 +34,7 @@ static inline s32 resultsRes(s32 id) {
 #include "COMMON/S1_5.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void Results_SelectSuggestedTrial(void);

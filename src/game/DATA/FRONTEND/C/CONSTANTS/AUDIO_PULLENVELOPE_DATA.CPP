@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded data: rodata/shared/800CC850 */
 const unsigned char D_blob_phase2_f422b875d2f19de41a54[3] = {

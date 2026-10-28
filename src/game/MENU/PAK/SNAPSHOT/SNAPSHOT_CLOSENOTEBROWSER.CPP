@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
 #include "TYPES.H"
-#include "MENU/PAK/80405DC0_12.H"
+#include "MENU/PAK/SNAPSHOT_CLOSENOTEBROWSER.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Releases temporary profile buffers and opens the controller-pak prompt for the selected player and channel, labelling the port prompt by channel. */

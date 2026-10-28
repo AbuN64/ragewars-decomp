@@ -8,7 +8,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/OBJECTSTATE10_2.H"
 #include "COMMON/TRIPLE.H"
-#include "AUDIO/8025D470_2.H"
+#include "AUDIO/AUDIO_UPDATEMUSICFADE.H"
 #include "include_asm.h"
 
 /* 8025D470_2.CPP */

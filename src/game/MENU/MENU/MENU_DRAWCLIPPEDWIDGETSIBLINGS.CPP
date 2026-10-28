@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/STATE.H"

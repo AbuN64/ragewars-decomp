@@ -10,7 +10,7 @@
 #include "abi.h"
 #include "TYPES.H"
 #include "gbi.h"
-#include "MENU/GFX/80414430_19.H"
+#include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "particle/80271B18_3.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"

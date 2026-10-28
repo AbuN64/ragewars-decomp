@@ -11,7 +11,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "ANIM/8023DF60_4.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* 8023A284_26.CPP */
 extern void Graphu64_InterpolateVector(CVector3 *,f32,void *,void *);

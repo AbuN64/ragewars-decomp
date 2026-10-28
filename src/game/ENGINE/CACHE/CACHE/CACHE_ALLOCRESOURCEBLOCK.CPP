@@ -5,7 +5,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "sdk/os.h"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* 802508E0_12.CPP */
 extern OSMesgQueue D_80101140;

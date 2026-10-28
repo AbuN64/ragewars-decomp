@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/MEASURED.H"
 #include "COMMON/MEASUREDRECAT14V4.H"
@@ -67,7 +67,7 @@
 #include "sdk/libgultra/libasm_802BBC68_7.h"
 #include "sdk/libgultra/libasm_802BBC68_8.h"
 #include "RESMGR/802A0888.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 /* osInitialize, drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock
    rate comes from the ROM header through osPiRawReadIo. */

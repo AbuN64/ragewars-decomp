@@ -1,4 +1,4 @@
-#include "FRONTEND/8041DF04_8.H"
+#include "FRONTEND/JOIN_RANDOMIZEJOINREQUESTENTRIES.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -6,8 +6,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Resets the three 28-byte entries of D_80153F80: -1 in the first word and zero in the next
    three. */

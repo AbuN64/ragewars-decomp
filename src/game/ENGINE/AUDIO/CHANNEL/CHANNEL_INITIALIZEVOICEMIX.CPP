@@ -10,10 +10,10 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "AUDIO/80259280_11.H"
+#include "AUDIO/CHANNEL_INITIALIZEVOICEMIX.H"
 
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction

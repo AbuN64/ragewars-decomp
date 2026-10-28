@@ -2,7 +2,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#include "FRONTEND/8041DF04_8.H"
+#include "FRONTEND/JOIN_RANDOMIZEJOINREQUESTENTRIES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
 void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {

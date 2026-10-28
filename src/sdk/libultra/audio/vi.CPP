@@ -5,7 +5,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "sdk/AUDIO/vi.H"
-#include "sdk/AUDIO/802BFA00.H"
+#include "sdk/AUDIO/__OSVISWAPCONTEXT.H"
 #include "RESMGR/802A0888.H"
 #include "sdk/libultra/audio/vi.h"
 

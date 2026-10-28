@@ -6,7 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "ENGINE/INSTANCE/GOBJINST_10.H"
+#include "ENGINE/INSTANCE/GOBJINST_INITIALIZEPLACEDACTOR.H"
 #include "SCENE/802508E0_9.H"
 #include "particle/80271B18_3.H"
 #include "RENDER/8028FD2C_6.H"

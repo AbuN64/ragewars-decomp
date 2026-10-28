@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/MENU_SCREEN_SETUP.H"
 #include "COMMON/UNUSED.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and

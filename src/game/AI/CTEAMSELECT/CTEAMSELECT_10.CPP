@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a player's team selection menu each frame unless a menu is paused (Cinema_IsSequenceActive): while the
    game is ending (D_8014561C) an open menu is closed through func_80218F84_de; a closed menu opens through

@@ -3,7 +3,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
-#include "MENU/80408AC4_34.H"
+#include "MENU/MENU_DISPATCHSETTINGSCOLUMNEVENT.H"
 
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)

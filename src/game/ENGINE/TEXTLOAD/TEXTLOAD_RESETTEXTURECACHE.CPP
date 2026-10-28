@@ -1,6 +1,6 @@
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/UNUSED.H"
-#include "SYSTEM/80296FF8_6.H"
+#include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 
 /** Clear the global word at VRAM 0x800D2B00. */
 

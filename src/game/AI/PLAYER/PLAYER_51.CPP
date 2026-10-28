@@ -6,7 +6,7 @@
 #include "COMMON/INTEGERSTATE1250.H"
 #include "TYPES.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/CHANNEL.H"
 
 /** Start the actor effect and attach optional source-specific resources; the European cartridges pick

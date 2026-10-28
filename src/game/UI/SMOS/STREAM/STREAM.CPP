@@ -6,7 +6,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "COMMON/LONE/D_80106248.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /** Copy the same global float to two destinations. */
 void Stream_SetFloatPairToNegativeOne(float *arg0, float *arg1) {

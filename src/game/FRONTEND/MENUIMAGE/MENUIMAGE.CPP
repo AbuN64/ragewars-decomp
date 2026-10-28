@@ -3,7 +3,7 @@
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "TYPES.H"
 #include "FRONTEND/8043A0B0_12.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Clears the words at offsets 0x10 to 0x18 of a record, then stores the first value through
    Frontend_SetMenuImageResource and the next three through Frontend_SetMenuImageColor. */

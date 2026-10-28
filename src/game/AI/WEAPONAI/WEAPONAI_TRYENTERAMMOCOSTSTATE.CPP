@@ -7,8 +7,8 @@
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Starts a player's secondary action: sets the request type to 1, refreshes the idle state when the current
  * action is not allowed, and when the player is flagged 0x4000, may fire and holds a charge either releases

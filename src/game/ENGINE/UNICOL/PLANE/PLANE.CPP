@@ -7,8 +7,8 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/RENDERSORTRECORD.H"
 #include "ANIM/RAY180.H"
-#include "ANIM/8023EEF0_16.H"
-#include "FX/80271B18.H"
+#include "ANIM/CPLANE_RESETCONTACT.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* 8023EEF0_13.CPP */
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);

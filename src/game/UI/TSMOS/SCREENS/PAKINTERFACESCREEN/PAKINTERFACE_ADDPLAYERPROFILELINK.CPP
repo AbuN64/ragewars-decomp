@@ -1,8 +1,8 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_47.H"
-#include "FRONTEND/8042E080_50.H"
+#include "FRONTEND/PAKINTERFACE_FINDEMPTYPLAYERLINK.H"
+#include "FRONTEND/PAKINTERFACE_ADDPLAYERPROFILELINK.H"
 
 /* Takes a free slot from PAKInterface_FindEmptyPlayerLink and fills it with two values, marking it set, as
    Frontend_SetPlayerProfileLink does for an index; returns one, or zero when no slot is free. */

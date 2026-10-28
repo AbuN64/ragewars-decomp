@@ -56,7 +56,7 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_62.H"
+#include "FRONTEND/FRONTEND_FINDPROFILEOWNER.H"
 
 /* Initializes four player-menu slots and selects the first available child node. */
 

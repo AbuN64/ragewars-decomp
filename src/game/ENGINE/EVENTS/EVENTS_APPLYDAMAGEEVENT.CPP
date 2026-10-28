@@ -23,7 +23,7 @@ typedef struct DamageActor {
 } DamageActor;
 
 #include "TYPES.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 
 extern s32 func_8024D160_de(void *);
@@ -103,7 +103,7 @@ void CScene_StartEventClips(Shared_World *, s32, s32, CVector3, f32, f32);
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 typedef struct ReactionDisplay {
     char pad000[0x128];
     CVector3 origin;

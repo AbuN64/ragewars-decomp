@@ -5,10 +5,10 @@
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
-#include "FRONTEND/CODE_80411598.H"
+#include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "FRONTEND/ARCHIVEDATA.H"
 #include "RESMGR/resmgr_stream_io.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Unloads entry index of the pool at g_frontendResourceFontCount: releases the data of every loaded slot (flag 1) in
    each of the entry's slot ns (the n count comes from the entry's definition) through

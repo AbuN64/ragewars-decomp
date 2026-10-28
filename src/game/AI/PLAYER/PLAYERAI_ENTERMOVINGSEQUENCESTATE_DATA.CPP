@@ -14,7 +14,7 @@ extern s32 Actor_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void Graphu64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #include "TYPES.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "particle/80271B18_3.H"
 
 typedef struct { f32 x, y, z; } Position;

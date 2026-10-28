@@ -19,7 +19,7 @@ extern void Link_AnimateVertexColors(void *object, void *colors);
 
 extern void Cache_UnlockResource(s32, s32);
 extern s32 Geometry_GetViewEffect(void);
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
 static inline void spawn(LevelActor *actor) {

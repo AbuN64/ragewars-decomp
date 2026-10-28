@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"

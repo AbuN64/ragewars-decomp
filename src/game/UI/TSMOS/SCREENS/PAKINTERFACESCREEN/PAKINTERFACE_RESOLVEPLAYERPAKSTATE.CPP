@@ -4,9 +4,9 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_45.H"
-#include "FRONTEND/8042E080_46.H"
-#include "FRONTEND/8042E080_63.H"
+#include "FRONTEND/PAKINTERFACE_FINDEMPTYPROFILESLOT.H"
+#include "FRONTEND/PAKINTERFACE_AREPROFILESLOTSEMPTY.H"
+#include "FRONTEND/FRONTEND_CHECKOWNEDPROFILEIDS.H"
 
 /* Updates a player menu state from controller status, available saves, and the current menu phase. */
 

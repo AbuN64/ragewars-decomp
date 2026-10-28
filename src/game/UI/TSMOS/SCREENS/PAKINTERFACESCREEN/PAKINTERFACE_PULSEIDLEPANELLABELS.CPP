@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_43.H"
+#include "FRONTEND/PAKINTERFACE_PULSEIDLEPANELLABELS.H"
 
 /* Pulses entry i of the 2920-byte records D_800E54A4 points to: takes the sine of i plus the
    entry's phase word at 0x2C + 4i scaled by D_800E1EF8, maps it through the next two constants,

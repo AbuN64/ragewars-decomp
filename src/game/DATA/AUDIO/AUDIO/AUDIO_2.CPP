@@ -8,14 +8,14 @@ unsigned char D_auto_func_802B6554_de_padding_B7154[12] = { 0x8F, 0xA2, 0x00, 0x
 /* save_3.c */
 #if defined(VERSION_EU)
 #define alSavePull func_802B661C_eu
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "abi.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"
 #include "sdk/libultra/audio/save.H"
 #include "TYPES.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;

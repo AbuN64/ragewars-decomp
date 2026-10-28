@@ -1,5 +1,5 @@
 #include "sdk/libgultra.h"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "TYPES.H"
 #include "sdk/libgultra/ai.h"
 

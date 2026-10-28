@@ -14,7 +14,7 @@ extern char D_8011D8D0;
 
 extern f32 Gobjinst_GetActorHeight(Actor_func_8024A1D0_de *actor);
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 

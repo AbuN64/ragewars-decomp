@@ -10,9 +10,9 @@
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "COMMON/SHARED_MENUREPLY.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "include_asm.h"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 

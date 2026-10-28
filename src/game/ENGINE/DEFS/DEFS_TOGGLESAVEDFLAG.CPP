@@ -2,7 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/LIGHTDATA.H"
 #include "TYPES.H"
-#include "SYSTEM/80265370_3.H"
+#include "SYSTEM/DEFS_TOGGLESAVEDFLAG.H"
 
 void Defs_ToggleSavedFlag(void) {
     D_8010C4A0 = D_800CBC80;

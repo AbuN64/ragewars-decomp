@@ -9,8 +9,8 @@
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/CONTROL.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/8042E080_23.H"
-#include "FRONTEND/8042E080_25.H"
+#include "FRONTEND/RANDOM_SETUPRANDOMTEAMS.H"
+#include "FRONTEND/RANDOM_CHOOSERANDOMCHARACTER.H"
 
 extern u8 *XPlus_CopyString(u8 *dst, u8 *name);
 

@@ -7,9 +7,9 @@
 #include "COMMON/ACTIVE.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_25.H"
+#include "FRONTEND/RANDOM_CHOOSERANDOMCHARACTER.H"
 #include "RESMGR/802A0888.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Returns 0xBC2 plus ten times either the halfword at offset 2 of what Scene_GetBlLevelData finds for
    D_8015402C in D_8011FE88, when the option byte D_801462D5 is one, or D_8015402C itself. */

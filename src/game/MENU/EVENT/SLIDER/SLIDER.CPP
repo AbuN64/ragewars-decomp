@@ -3,7 +3,7 @@
 
 #if defined(VERSION_US)
 #include "COMMON/WIDGETRECAT1A.H"
-#include "FRONTEND/8040B45C_29.H"
+#include "FRONTEND/FRONTEND_UPDATESLIDERGEOMETRY.H"
 #include "MATH/80299ECC.H"
 
 /* Clamp the slider and handle range, value, step and parent notifications. */

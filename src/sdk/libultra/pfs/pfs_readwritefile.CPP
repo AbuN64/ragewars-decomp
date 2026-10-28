@@ -2,9 +2,9 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
-#include "sdk/PFS/80447BB0_19.H"
-#include "sdk/PFS/80447BB0_20.H"
-#include "sdk/PFS/80447BB0_21.H"
+#include "sdk/PFS/PFS_READWRITEINODE.H"
+#include "sdk/PFS/__OSCHECKID.H"
+#include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
 
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
 extern s32 __osContRamRead(void *queue, int channel, u16 address, u8 *buffer);

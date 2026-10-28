@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "MENU/80420E90.H"
+#include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
 extern NumberPadScreen *D_800E4400;
 
 /* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word

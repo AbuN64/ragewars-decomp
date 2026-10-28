@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US))
 /* ROM-grounded data: src/rw_text_802B6658_eu_x_CD644_us_rev1.c */

@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "MENU/PAK/80403BCC_8.H"
+#include "MENU/PAK/NOTE_GETNOTEPAGECOUNT.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Loads a page-aligned resource into the selected device slot and reports the result. */

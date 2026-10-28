@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/PROBE.H"
 #include "TYPES.H"
-#include "particle/8024D018.H"
+#include "particle/GAMEOBJECT_BUILDQUATERNIONTRANSLATIONMATRIX.H"
 #include "INSTHDR/INSTHDR_2.H"
 
 /* 8024D018.CPP */

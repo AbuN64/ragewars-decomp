@@ -3,8 +3,8 @@
 #include "COMMON/NAME.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_12.H"
-#include "FRONTEND/8042E080_43.H"
+#include "FRONTEND/PAKINTERFACE_UPDATEPLAYERPANELANIMATIONS.H"
+#include "FRONTEND/PAKINTERFACE_PULSEIDLEPANELLABELS.H"
 
 /* Steps each channel's fade timer and writes the level its curve currently reaches. */
 

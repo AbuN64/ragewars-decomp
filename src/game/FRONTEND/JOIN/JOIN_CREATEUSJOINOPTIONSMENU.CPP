@@ -10,7 +10,7 @@
 #include "COMMON/REQUESTRECAT10.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_MENUREPLY.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 extern struct CourseOptionsScreen *D_800E39C0;
 
 s32 Join_CreateUsJoinOptionsMenu(void *arg0) {

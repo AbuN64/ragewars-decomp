@@ -6,7 +6,7 @@
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_42.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 s32 Frontend_FindPixelFormat(Format *format) {

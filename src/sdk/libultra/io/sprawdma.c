@@ -1,12 +1,12 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSTASK_T.H"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "sdk/libultra/io/sprawdma.H"
 #include "sdk/libgultra/sp.h"
 #include "sdk/OSINT/osyieldthread.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 
 s32 __osSpRawStartDma(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {

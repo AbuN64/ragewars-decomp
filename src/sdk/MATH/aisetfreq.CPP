@@ -2,9 +2,9 @@
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "sdk/MATH/aisetfreq.H"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
  /* 0.5, followed by 2^31 */
 

@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_42.H"
+#include "FRONTEND/PAKINTERFACE_SETSCREENPHASE.H"
 
 /* Stores its argument in D_800E54A0. */
 

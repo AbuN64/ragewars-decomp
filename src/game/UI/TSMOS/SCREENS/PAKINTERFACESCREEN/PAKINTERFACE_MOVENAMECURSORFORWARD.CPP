@@ -4,7 +4,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Marks a player's record as ready for the next round: clears its pending counters, and on mode 1 advances its tier, gives the newly reached tier its default entry and flags the acquired handle for the notice sent to 0xE74. */
 

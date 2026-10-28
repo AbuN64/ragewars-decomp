@@ -10,7 +10,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_11.H"
 #include "SYSTEM/802BA5F0.H"
-#include "sdk/AUDIO/802BFA00.H"
+#include "sdk/AUDIO/__OSVISWAPCONTEXT.H"
 
 /* 802BA5F0_22.CPP */
 #if !(defined(VERSION_EU))

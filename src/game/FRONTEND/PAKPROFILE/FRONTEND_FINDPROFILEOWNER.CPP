@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_62.H"
+#include "FRONTEND/FRONTEND_FINDPROFILEOWNER.H"
 
 /* Returns the index of the first of four 400-byte records in D_80102B08 whose byte at offset 4
    equals the second argument and whose first word equals the first, or -1 when none does. */

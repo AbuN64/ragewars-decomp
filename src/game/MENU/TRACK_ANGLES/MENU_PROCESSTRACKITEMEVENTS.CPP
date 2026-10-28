@@ -1,7 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
-#include "MENU/80400000_7.H"
+#include "MENU/MENU_PROCESSTRACKITEMEVENTS.H"
 #include "RENDER/8028FD2C_6.H"
 
 /* Releases the current record's track-2 timed items whose time has come (or all live ones once the

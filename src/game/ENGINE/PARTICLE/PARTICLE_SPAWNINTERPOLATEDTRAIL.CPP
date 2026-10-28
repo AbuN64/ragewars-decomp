@@ -8,7 +8,7 @@
 #include "particle/80271B18_3.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/8027A0F4_4.H"
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/S1.H"

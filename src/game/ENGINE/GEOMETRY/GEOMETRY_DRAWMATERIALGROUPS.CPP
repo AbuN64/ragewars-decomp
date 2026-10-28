@@ -6,8 +6,8 @@
 #include "RENDER/8026AC38.H"
 #include "gbi.h"
 #include "TYPES.H"
-#include "RENDER/8026AC38_2.H"
-#include "RENDER/8026AC38_3.H"
+#include "RENDER/GEOMETRY_GROUPMODELINSTANCES.H"
+#include "RENDER/GEOMETRY_DRAWMATERIALGROUPS.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER/8028FD2C_6.H"
 

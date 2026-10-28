@@ -1,7 +1,7 @@
 #include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PLAYERPROFILES.H"
 #include "RESMGR/802A0888.H"

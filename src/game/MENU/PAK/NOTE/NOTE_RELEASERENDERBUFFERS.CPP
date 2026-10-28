@@ -3,7 +3,7 @@
 #include "OVLGAME/80405454.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "COMMON/EXTERNS_8.H"
+#include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "OVLGAME/80405454_4.H"
 
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC

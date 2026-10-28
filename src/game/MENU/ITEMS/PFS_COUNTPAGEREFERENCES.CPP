@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
-#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/PFS_READWRITEINODE.H"
 /* Counts (up to 2) the inode-table slots of every bank holding the page key fpage, reading banks through the cache; returns the count, a read error, or 2 once two slots hold it. 6/88 words: bank value copy register only. */
 s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
     s32 j;

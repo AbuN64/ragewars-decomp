@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "MULTI/8043E9A8_6.H"
+#include "MULTI/MULTI_COMPLETEGAMEOVERDELAY.H"
 #include "COMMON/GAME_SESSION.H"
 #include "include_asm.h"
 

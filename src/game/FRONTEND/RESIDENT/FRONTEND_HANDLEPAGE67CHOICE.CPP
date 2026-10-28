@@ -6,7 +6,7 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-#include "FRONTEND/8042E080_94.H"
+#include "FRONTEND/FRONTEND_DISPATCHRESIDENTACTOREVENT.H"
 
 /* 8042E080_91.CPP */
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is

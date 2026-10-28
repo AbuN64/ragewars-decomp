@@ -4,7 +4,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 
 extern s32 Defs_IsAddressInCodeRanges(StateCallback);

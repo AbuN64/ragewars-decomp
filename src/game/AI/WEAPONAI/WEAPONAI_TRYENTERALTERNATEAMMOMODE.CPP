@@ -7,8 +7,8 @@
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Continues a player's secondary action: refreshes the idle state when the current action is not allowed;
  * a player flagged 0x4000 that may fire with a type 1 request takes action 5 and marks the request type 2,

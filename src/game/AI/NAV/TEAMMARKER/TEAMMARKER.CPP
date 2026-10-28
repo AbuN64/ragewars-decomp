@@ -9,7 +9,7 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "AI/NAV/80208000_24.H"
+#include "AI/NAV/NAV_EVALUATECAPTUREFLAGMARKERSEARCH.H"
 #include "include_asm.h"
 
 extern f32 Scaled_GetScaledAggression(void *arg0);

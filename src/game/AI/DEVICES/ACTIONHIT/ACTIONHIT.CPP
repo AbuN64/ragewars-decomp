@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "LEVEL/8020402C_3.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
 extern void Events_DispatchCallback(void *, void *, s32, CVector3, ResourceManagerState);

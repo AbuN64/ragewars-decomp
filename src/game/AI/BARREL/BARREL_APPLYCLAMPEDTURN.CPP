@@ -1,7 +1,7 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
-#include "WEAPONS/80213ED4_19.H"
+#include "WEAPONS/BARREL_ADDACTORYAW.H"
 
 void Barrel_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desiredTurn) {
     f32 f0;

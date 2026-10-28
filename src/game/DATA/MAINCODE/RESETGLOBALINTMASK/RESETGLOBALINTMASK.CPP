@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/EXTERNS_11.H"
-#include "sdk/OS/802C04C0.H"
+#include "sdk/OS/__OSRESETGLOBALINTMASK.H"
 #include "sdk/os.h"
 
 /* 802C0390_6.CPP */

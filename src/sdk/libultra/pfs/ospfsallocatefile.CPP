@@ -5,9 +5,9 @@
 #include "sdk/PFS/ospfsallocatefile.H"
 #include "sdk/PFS/ospfsfreeblocks.H"
 #include "sdk/PFS/ospfsrepairid.H"
-#include "sdk/PFS/80447BB0_19.H"
-#include "sdk/PFS/80447BB0_20.H"
-#include "sdk/PFS/80447BB0_21.H"
+#include "sdk/PFS/PFS_READWRITEINODE.H"
+#include "sdk/PFS/__OSCHECKID.H"
+#include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
 
 /* osPfsAllocateFile, drafted from ultralib src/io/pfsallocatefile.c (2.0I branch): create a
    controller pak file by finding a free directory entry, chaining enough free pages across the

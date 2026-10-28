@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "sdk/libultra/io/pirawread.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"

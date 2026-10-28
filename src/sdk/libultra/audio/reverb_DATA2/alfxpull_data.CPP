@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 #if !(defined(VERSION_US_REV1))
 const char D_802B57F0_CD5D4[15] =

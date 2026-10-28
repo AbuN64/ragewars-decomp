@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_35.H"
+#include "FRONTEND/PAKINTERFACE_REASSIGNLOCALPROFILES.H"
 
 /* Reorders the four 400-byte player records D_80102B00 by the players' choices: copies all four to
    the buffer at 0x2E28 of the block D_800E54A4 points to and resets each through Player_InitializeProfile,

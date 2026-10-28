@@ -8,8 +8,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "RENDER/8022AE90_2.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a player's aiming action: refreshes the idle state when the action is not allowed; while the aim
  * flag 0x4000 is held and the weapon may fire (as in Weaponai_TryEnterAlternateStateEight) the attack enters aiming and, for scoped

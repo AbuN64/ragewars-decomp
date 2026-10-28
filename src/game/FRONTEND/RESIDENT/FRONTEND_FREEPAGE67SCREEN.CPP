@@ -1,7 +1,7 @@
 #include "COMMON/S1_6.H"
 #include "COMMON/LONE/D_800E5558.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object D_800E5558 holds through Cache_FreeMemory, clears D_800E5558, calls Tsmos_SetModeOneFlag with 2
    and returns zero. */

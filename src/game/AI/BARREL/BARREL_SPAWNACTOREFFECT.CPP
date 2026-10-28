@@ -3,12 +3,12 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/REC.H"
 #include "COMMON/AIPROFILE.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* 80213ED4_6.CPP */
 /* The call sites in Events_SpawnFilteredActorEffect, Ghot_DispatchAttachmentEffects and Events_SpawnActorEffect

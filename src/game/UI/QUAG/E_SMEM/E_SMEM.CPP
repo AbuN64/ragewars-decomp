@@ -4,7 +4,7 @@
 #include "RESMGR/802A23A4_5.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "RESMGR/802A23A4_6.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/802A23A4_7.H"
 #include "include_asm.h"
 

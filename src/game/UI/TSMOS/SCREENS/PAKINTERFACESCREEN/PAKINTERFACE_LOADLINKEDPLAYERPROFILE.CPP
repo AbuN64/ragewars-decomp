@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_59.H"
+#include "FRONTEND/PAKINTERFACE_LOADLINKEDPLAYERPROFILE.H"
 
 /* Copies the block's chosen 400-byte record for the place at slot arg0 into D_80102B00[arg0]: when
    the place is claimed (id != -1), copies the owning player's chosen slot into the record and marks

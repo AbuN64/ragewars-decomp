@@ -6,9 +6,9 @@
 #include "COMMON/S1.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_5.H"
+#include "SCENE/CACHE_RUNRESOURCECOMPLETIONWORKER.H"
 #include "sdk/os.h"
-#include "TEXTURE/80254CE4.H"
+#include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 

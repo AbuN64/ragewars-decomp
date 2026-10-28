@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENULISTSCREEN.H"
-#include "MENU/804379C8_5.H"
+#include "MENU/MENU_CREATESOUNDOPTIONSSCREEN.H"
 
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
 extern s32 SmpFade_CreateFadeWidget(s32, s32);

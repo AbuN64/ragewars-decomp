@@ -2,7 +2,7 @@
 #include "COMMON/OBJECTLINKS1458.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDCALLBACK5.H"
-#include "AI/NAV/8020EAE0.H"
+#include "AI/NAV/NAV_SETPICKUPGOALWEIGHTS.H"
 
 /* 8020EAE0.CPP */
 /* Commits a pending selection to the controller D_8013B364: returns at once when nothing is

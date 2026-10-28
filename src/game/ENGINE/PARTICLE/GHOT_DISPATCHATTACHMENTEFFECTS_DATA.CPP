@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "RSP/8026E1F8_5.H"
 #include "SYSTEM/80265370.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "particle/80271B18_3.H"

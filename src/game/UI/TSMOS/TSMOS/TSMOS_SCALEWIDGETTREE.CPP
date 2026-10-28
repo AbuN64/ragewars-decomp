@@ -8,8 +8,8 @@
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
 #include "FRONTEND/8040B45C_36.H"
-#include "MENU/GFX/804143E0.H"
-#include "RESMGR/802A2230_9.H"
+#include "MENU/GFX/GFX_SHUTDOWNFRONTENDSERVICES.H"
+#include "RESMGR/TSMOS_SHUTDOWNFRONTEND.H"
 #include "RESMGR/802A23A4_6.H"
 
 void Tsmos_ShutdownFrontend(void) {

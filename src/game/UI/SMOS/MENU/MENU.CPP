@@ -17,7 +17,7 @@
 #include "RESMGR/8029AA48_7.H"
 #include "MATH/math_controller_events.H"
 #include "MATH/802A2870.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "MATH/80299ECC.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "include_asm.h"

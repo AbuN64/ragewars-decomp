@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/RESULTS.H"
-#include "RENDER/8028FD2C_15.H"
+#include "RENDER/SETN64_ONWORLDVIEWDRAW.H"
 
 /** Perform the no-op callback at VRAM 0x802909D0. */
 void SetN64_OnWorldViewDraw(void) {

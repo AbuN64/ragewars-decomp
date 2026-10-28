@@ -4,7 +4,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
-#include "FRONTEND/80423280_30.H"
+#include "FRONTEND/FRONTEND_DISPATCHOPTIONSPAGEEVENT.H"
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E451C, an actor kind at D_800E4520 and a handler at D_800E4524: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 

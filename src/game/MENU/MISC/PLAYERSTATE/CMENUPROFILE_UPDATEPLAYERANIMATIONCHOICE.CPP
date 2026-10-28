@@ -2,7 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "MENU/PLAYERSETTINGS.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 #if !(defined(VERSION_DE))
 /* Handles the team option of a menu: unless func_8026437C_de reports the confirm input, it steps the owner's team byte at 0x80 through Menu_StepValue between 1 and 18, applies it with func_8044A0C4_de and redraws it with Menu_SelectPreviewModel, returning zero; on confirm it applies the team, plays the sound D_800E5DFA gives for the player's slot at 0x5E0 and shows the resource D_450698 through Menu_AllocateMenu, returning one. */

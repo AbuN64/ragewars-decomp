@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "abi.h"
 #include "acmd.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
@@ -12,7 +12,7 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "sdk/OSINT/osyieldthread.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 /* DATA_800CC9C4.CPP */
 

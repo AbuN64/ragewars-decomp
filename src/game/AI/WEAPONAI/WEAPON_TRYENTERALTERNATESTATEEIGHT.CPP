@@ -7,9 +7,9 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
-#include "COMMON/EXTERNS_13.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "COMMON/PLAYER_GETPLAYERINDEX.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Starts a player's action: when the current action is not allowed the idle state is refreshed; a player
  * flagged 0x4000 with no cooldown, no lock and the ammo option enabled checks its weapon's ammo, playing sound

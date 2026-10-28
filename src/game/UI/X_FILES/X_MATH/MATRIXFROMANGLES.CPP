@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
-#include "MATH/8029BBA0_3.H"
+#include "MATH/XMATH_CLIPPOLYGONTOPLANE.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 /* Clips a polygon of n vertices against the plane a*x + b*y + c*z + d >= 0 (Sutherland-Hodgman): walks each edge from the previous vertex, copies inside vertices to the output, and where an edge crosses the plane emits the intersection point (the edge midpoint when the edge is nearly parallel to the plane), storing the output count and returning whether any intersection was emitted. */

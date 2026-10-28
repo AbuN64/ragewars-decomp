@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "WEAPONS/80213ED4_27.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 extern s32 Cbarrel_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
 extern Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJB.H"
-#include "OVLGAME/8044BD30.H"
+#include "OVLGAME/OVLGAME_INITIALIZEDYNAMICLIGHTPOOL.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 

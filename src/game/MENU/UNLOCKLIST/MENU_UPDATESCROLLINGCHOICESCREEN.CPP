@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OWNERRECAT8V1.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 extern struct StateMenuUpdateScrollingChoiceScreen *D_800E5780;
 extern void SmpSlider_SetTransitionMode(void *, s32);
 extern s32 Defs_TestBit(void *, s32);

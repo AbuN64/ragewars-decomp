@@ -4,7 +4,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include <stdarg.h>
 #include "TYPES.H"
-#include "sdk/PRINTF/802C31B0.H"
+#include "sdk/PRINTF/_LDTOB.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"

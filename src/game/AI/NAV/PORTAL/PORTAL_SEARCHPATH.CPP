@@ -5,7 +5,7 @@
 #include "COMMON/OBJECTLINKS14.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "AI/NAV/8020EAE0.H"
+#include "AI/NAV/NAV_SETPICKUPGOALWEIGHTS.H"
 #include "AI/NAV/PORTAL.H"
 
 f32 Graphu64_GetSquaredDistance(void *a, void *b);

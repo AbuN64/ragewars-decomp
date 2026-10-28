@@ -16,7 +16,7 @@
 #include "RENDER/8028FD2C_6.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
-#include "ENGINE/SCENE_11.H"
+#include "ENGINE/SCENE_SAMPLEWORLDLIGHTING.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 
 extern void Link_DispatchTriggerExit(RecGobjinstSampleBoneTranslation *arg0);

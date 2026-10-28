@@ -7,7 +7,7 @@
 #include "COMMON/OBJ.H"
 #include "COMMON/REC.H"
 #include "TYPES.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "COMMON/LONE/D_800E4680.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
@@ -17,7 +17,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "RENDER/80206258.H"
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "include_asm.h"
 
 /* 80204E78_7.CPP */

@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "MENU_2/EXTERNS.H"
 #include "COMMON/CHEATCODE.H"
-#include "MENU/80408AC4_36.H"
+#include "MENU/MENU_DISPATCHTITLEBUTTONCOLUMNEVENT.H"
 
 /* 80406A88_17.CPP */
 #if defined(VERSION_EU_X)

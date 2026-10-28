@@ -5,9 +5,9 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "sdk/libgultra/part_800C7F20/code_802B6F50.h"
+#include "sdk/libgultra/part_800C7F20/ALSEQGETLOC.H"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* alSeqNextEvent, drafted from ultralib src/audio/seq.c: read the next MIDI file event into an
    ALEvent, decoding tempo and end-of-track meta events and applying running status to channel

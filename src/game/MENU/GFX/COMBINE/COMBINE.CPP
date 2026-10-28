@@ -5,7 +5,7 @@
 #include "COMMON/TEXTURE.H"
 #include "gbi.h"
 #include "TYPES.H"
-#include "MENU/GFX/80414430_19.H"
+#include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "MENU/GFX/80414430_21.H"
 
 /* Emits the display-list state for the requested flag groups: records which of five two-bit flag pairs are fully set, clears the pending-sync flag and emits one pipe sync through the shared inline helper, then the other-mode and geometry-mode commands (adding the lighting bit for the fifth group) and the render mode chosen by the fourth and fifth groups, then stores the flag record. */

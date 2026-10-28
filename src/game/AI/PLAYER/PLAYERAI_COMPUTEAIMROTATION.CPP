@@ -13,7 +13,7 @@
 #include "COMMON/OBJ.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/TRIPLE.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 s32 Cbarrel_TestTargetEyeObstruction(void *, void *, void *);
 /* Whether the target's view reports an active shield. */

@@ -1,7 +1,7 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "COMMON/CTX.H"
 
 /* sinf, drafted from ultralib src/gu/sinf.c in the single-precision form this library carries: x,

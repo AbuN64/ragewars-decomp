@@ -7,7 +7,7 @@
 #include "ANIM/RAY180.H"
 #include "stddef.h"
 #include "COMMON/BALLISTICPARAMS.H"
-#include "ANIM/802412C0.H"
+#include "ANIM/CCOLLISION_GETCONTACTYAW.H"
 
 /* 80241170_2.CPP */
 s32 Graphu64_InterpolateVector(CVector3 *, u32, void *, void *);

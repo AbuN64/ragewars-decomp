@@ -12,7 +12,7 @@
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
-#include "RENDER/802A35C0_3.H"
+#include "RENDER/LINKED_BUILDCOLOREDRIBBONVERTICES.H"
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */

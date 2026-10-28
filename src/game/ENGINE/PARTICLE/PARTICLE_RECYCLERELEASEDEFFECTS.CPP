@@ -3,7 +3,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
-#include "particle/8027A0F4_7.H"
+#include "particle/PARTICLE_RECYCLERELEASEDEFFECTS.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 

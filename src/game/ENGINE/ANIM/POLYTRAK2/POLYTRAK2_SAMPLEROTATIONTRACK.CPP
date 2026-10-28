@@ -4,7 +4,7 @@
 #include "GAME/8025E520.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_14.H"
+#include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"

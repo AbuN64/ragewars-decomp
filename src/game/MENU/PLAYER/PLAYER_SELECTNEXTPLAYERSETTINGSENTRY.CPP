@@ -8,7 +8,7 @@
 extern struct MenuStepState *D_800E5690;
 #include "MENU/804366D0_2.H"
 #include "MENU/804366D0_4.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x20 of the object D_800E5690 points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */

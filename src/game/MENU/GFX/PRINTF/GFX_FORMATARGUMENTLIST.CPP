@@ -3,8 +3,8 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_4.H"
-#include "MENU/GFX/80414480_8.H"
+#include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
+#include "MENU/GFX/GFX_FORMATFLOATINGPOINT.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 extern s32 XPlus_StringLength(u8 *arg0);

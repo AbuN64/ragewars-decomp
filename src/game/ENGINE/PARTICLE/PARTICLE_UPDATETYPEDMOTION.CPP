@@ -9,7 +9,7 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/TRIPLE.H"
 #include "particle/8027A0F4.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 #include "COMMON/APPROACHLOCATION.H"
 

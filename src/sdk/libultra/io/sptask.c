@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/HARDWARE_IO.H"

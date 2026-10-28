@@ -1,7 +1,7 @@
 #include "COMMON/MTX.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* Builds a player's aiming marker matrices for the current view D_800D297C and turns the marker on at
    0x1214: a beam from the eye (the view position at 0x128, or Player_GetPlayerViewTranslation without a view) toward the

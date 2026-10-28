@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "GAMECORE/EXTERNS.H"
 #include "sdk/libultra/io/epirawread.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 extern OSPiHandle_s *D_800D4380[];
 

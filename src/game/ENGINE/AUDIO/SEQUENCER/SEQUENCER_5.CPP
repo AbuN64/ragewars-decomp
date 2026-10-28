@@ -11,7 +11,7 @@
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "UTIL/8025DBA0.H"
 #include "sdk/libgultra_inferred/802AD870_8.H"
-#include "sdk/libgultra_inferred/802B3B80_7.H"
+#include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "RENDER/8028FD2C_6.H"
 

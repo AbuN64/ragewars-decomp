@@ -4,7 +4,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
-#include "MENU/80400000_5.H"
+#include "MENU/TRACK_EVALUATETRACKCOLOR.H"
 #include "RENDER/8028FD2C_6.H"
 
 /* Evaluates the position keyframe track 1 of the current record's resource at time t: holds the

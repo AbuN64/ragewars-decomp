@@ -2,7 +2,7 @@
 #if defined(VERSION_DE)
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 /* German Menu_DestroyOptionsPage: releases the object g_optionsPage holds through Cache_FreeMemory, clears
    g_optionsPage, reloads the default language strings and returns zero. */
 extern void *g_optionsPage;

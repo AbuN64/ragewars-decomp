@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
-#include "FRONTEND/8042E080_34.H"
+#include "FRONTEND/PAKINTERFACE_FINDREADYTRANSFERPLAYER.H"
 
 /* Returns the first of the four players in D_800E54A4 whose state at 0x58 is 14, provided every player
    is idle (0), finished (17) or in state 14; otherwise, or when none is in state 14, returns -1. */

@@ -11,7 +11,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "AUDIO/8025A3EC_4.H"
-#include "AUDIO/80259280_11.H"
+#include "AUDIO/CHANNEL_INITIALIZEVOICEMIX.H"
 #include "include_asm.h"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "VOICE/VOICE.H"

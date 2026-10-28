@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/ALDELAY28.H"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 
 void guMtxIdent(s32 *fixedMatrix) {
     f32 matrix[16];

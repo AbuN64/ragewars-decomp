@@ -7,7 +7,7 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
 #include "GAME/CODE_8027302C.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -160,7 +160,7 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "particle/CAMERA_SCALE.H"
-#include "ENGINE/SCENE_11.H"
+#include "ENGINE/SCENE_SAMPLEWORLDLIGHTING.H"
 
 void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);

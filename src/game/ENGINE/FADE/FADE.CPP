@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
 #include "sdk/libgultra_inferred/802B3B80_6.H"
-#include "sdk/libgultra_inferred/802B3AFC.H"
-#include "sdk/libgultra_inferred/802B3B80_7.H"
+#include "sdk/libgultra_inferred/ALCSPGETSTATE.H"
+#include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "RENDER/8028FD2C_6.H"
 #include "sdk/libgultra_inferred/802AD870_8.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);

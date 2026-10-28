@@ -9,7 +9,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "TYPES.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "COMMON/CHANNEL.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))

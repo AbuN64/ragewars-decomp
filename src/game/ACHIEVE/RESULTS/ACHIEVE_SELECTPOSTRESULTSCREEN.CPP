@@ -8,7 +8,7 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENUSELECTIONMESSAGE.H"
-#include "ACHIEVE/80437C30_2.H"
+#include "ACHIEVE/ACHIEVE_OPENRESULTSFRONTEND.H"
 
 /* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x12. */
 #if defined(VERSION_EU)

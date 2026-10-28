@@ -2,7 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "TYPES.H"
-#include "MENU/80420E90.H"
+#include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", Menu_OpenRuleToggleScreen);

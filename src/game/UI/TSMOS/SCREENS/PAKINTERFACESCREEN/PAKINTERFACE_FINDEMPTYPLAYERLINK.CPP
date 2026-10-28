@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_47.H"
+#include "FRONTEND/PAKINTERFACE_FINDEMPTYPLAYERLINK.H"
 
 /* Returns the index of the first of the four 12-byte slots at offset 0x2DF8 of the table D_800E54A4
    points to whose first word is -1, meaning free, or -1 when none is. */

@@ -7,8 +7,8 @@
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/PLAYERPROFILES.H"
 
 /* Handles a player's attack trigger: nothing while cooling down past D_800C2EE0_de; the trigger is the
@@ -19,7 +19,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/EXTERNS_13.H"
+#include "COMMON/PLAYER_GETPLAYERINDEX.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/VECTOR4F.H"
 /* func_802301E4_S* are unresolved canonical player/actor/control/attack types. */

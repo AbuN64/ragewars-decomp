@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
-#include "FRONTEND/8042E080_12.H"
-#include "RENDER/8025DE50_5.H"
+#include "FRONTEND/PAKINTERFACE_UPDATEPLAYERPANELANIMATIONS.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Animates the two menu panels through open, close and countdown states and updates the active team menu. */
 

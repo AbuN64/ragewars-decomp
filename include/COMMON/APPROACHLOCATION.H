@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RENDERSORTRECORD.H"
 #include "COMMON/PROBE.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 typedef struct { CVector3 pos; s32 unkC; } ApproachLocation;
 extern f32 D_800C2160_de[],D_800C215C_de;

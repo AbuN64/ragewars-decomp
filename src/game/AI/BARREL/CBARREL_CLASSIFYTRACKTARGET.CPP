@@ -5,7 +5,7 @@
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "WEAPONS/80213ED4_13.H"
+#include "WEAPONS/CBARREL_CLASSIFYTRACKTARGET.H"
 
 s32 Cbarrel_ClassifyTrackTarget(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *arg2) {
     void *controller;

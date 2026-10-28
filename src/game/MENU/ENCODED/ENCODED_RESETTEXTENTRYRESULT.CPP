@@ -1,6 +1,6 @@
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
-#include "MENU/80408AC4_40.H"
+#include "MENU/ENCODED_RESETTEXTENTRYRESULT.H"
 
 /* Resets D_80154030 to -1. */
 

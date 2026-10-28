@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* 800CC694_36.CPP */
 /* ROM-grounded data: src/rw_formats_802B9590_CD7A0_us_rev1.c */

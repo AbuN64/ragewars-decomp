@@ -5,8 +5,8 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
-#include "sdk/lib_802BB630/802BBC50.H"
-#include "COMMON/EXTERNS_2.H"
+#include "sdk/lib_802BB630/GUMTXIDENTF.H"
+#include "COMMON/ALFXPARAM.H"
 
 void guMtxF2L(f32 *arg0, s32 *arg1);
 void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)

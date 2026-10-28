@@ -1,6 +1,6 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
-#include "RENDER/80291054_6.H"
+#include "RENDER/SETN64_STARTSESSIONTHREADS.H"
 
 s32 SetN64_StartBootstrapThread(s32 *);
 #include "COMMON/GAME_SESSION.H"

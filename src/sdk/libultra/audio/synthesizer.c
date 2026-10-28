@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "abi.h"
 #include "acmd.h"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -6,14 +6,14 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "sdk/libultra/audio/synthesizer.h"
 #include "TYPES.H"
-#include "sdk/libgultra_inferred/802B8DE0_2.H"
+#include "sdk/libgultra_inferred/__NEXTSAMPLETIME.H"
 #include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "sdk/al_globals.h"
 #include "sdk/libgultra.h"
 #include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/OSPIHANDLE_S.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 

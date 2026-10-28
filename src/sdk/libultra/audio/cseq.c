@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra_inferred/802AD870_8.H"
 #include "include_asm.h"
-#include "sdk/libgultra_inferred/802B3AFC.H"
+#include "sdk/libgultra_inferred/ALCSPGETSTATE.H"
 
 s32 __readVarLen(ALCSeq_s *seq, s32 track);
 extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);

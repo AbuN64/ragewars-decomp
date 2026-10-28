@@ -1,11 +1,11 @@
 #include "COMMON/MENURECAT20V1.H"
-#include "MULTI/804453C4.H"
+#include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "MULTI/804453C4_11.H"
+#include "MULTI/SETUP_HASACTIVEGAMECOUNTERS.H"
 
 #if !(defined(VERSION_US))
 /* Deletes the final character of the selected player's text entry: resets its cursor and, when the entry holds characters, decrements the count and length and clears the character at the new end. */

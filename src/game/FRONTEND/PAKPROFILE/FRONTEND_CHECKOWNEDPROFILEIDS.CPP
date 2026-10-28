@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "FRONTEND/8042E080_63.H"
+#include "FRONTEND/FRONTEND_CHECKOWNEDPROFILEIDS.H"
 
 /* Checks that every active player on the selected team has the configured value. */
 extern s32 D_80102B08[]; extern s8 D_80102B0D[];

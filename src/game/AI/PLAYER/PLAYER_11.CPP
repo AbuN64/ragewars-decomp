@@ -2,7 +2,7 @@
 #include "COMMON/LONE/D_80103FD0.H"
 #include "COMMON/VECTOR4F.H"
 #include "stddef.h"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 
 #include "WEAPONS/AIM_TYPES.H"

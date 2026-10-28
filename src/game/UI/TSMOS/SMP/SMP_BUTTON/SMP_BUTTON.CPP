@@ -13,8 +13,8 @@
 #include "MATH/80297CD0_3.H"
 #include "MATH/802A2870.H"
 #include "FRONTEND/8040B45C_35.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 /* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */

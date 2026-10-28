@@ -12,7 +12,7 @@
 #include "ENGINE/INSTANCE/GOBJINST_4.H"
 #include "GAME/CODE_8027302C.H"
 #include "SCENE/802508E0_4.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 #include "RENDER/8028FD2C_6.H"
 #include "SCENE/802508E0_9.H"

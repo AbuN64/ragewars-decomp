@@ -2,7 +2,7 @@
 
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "TYPES.H"
-#include "RENDER/8028469C_3.H"
+#include "RENDER/CRESOURCE_UNPACKREQUEST.H"
 
 s32 Ppdecom_UnpackResource(s32, s32);
 /* A resource request's dispatch callback: unpacks the loaded request, its second argument. */

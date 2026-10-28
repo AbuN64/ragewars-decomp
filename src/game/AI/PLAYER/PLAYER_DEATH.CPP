@@ -17,8 +17,8 @@
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "RENDER/802192C0_3.H"
 /* Apply player transitions, regional control gates, and localized linked-actor notifications. */
 

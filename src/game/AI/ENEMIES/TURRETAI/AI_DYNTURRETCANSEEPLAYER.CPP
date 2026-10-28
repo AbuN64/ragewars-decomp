@@ -10,7 +10,7 @@
 #include "COMMON/OBJ.H"
 #include "COMMON/OBJRECAT30.H"
 #include "AI/ENEMIES/TURRETAI.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 extern s32 Rumble_TestActorStateBit(void *arg0, void *arg1);
 

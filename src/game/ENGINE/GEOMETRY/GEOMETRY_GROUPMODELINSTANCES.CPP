@@ -7,7 +7,7 @@
 #include "COMMON/GFX.H"
 #include "TYPES.H"
 #include "gbi.h"
-#include "RENDER/8026AC38_2.H"
+#include "RENDER/GEOMETRY_GROUPMODELINSTANCES.H"
 #include "RENDER/8028FD2C_6.H"
 
 /* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Geometry_SetupMaterial accepts the material and its display list is emitted. Adapted from Geometry_DrawModelResource with the owner argument and the per-material flag switch added. */

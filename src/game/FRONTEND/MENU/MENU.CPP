@@ -5,11 +5,11 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/LABEL.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/REQUESTRECAT10.H"
-#include "FRONTEND/8041DF04_3.H"
+#include "FRONTEND/MENU_DISPATCHSELECTIONMENUEVENT.H"
 
 /* Enables mode 1 through Tsmos_SetModeOneFlag, places the menu model at (17, -10, -50) with uniform scale 0.14, zero rotation and a (0, 5, 0) offset, then issues request 0xE78 through SoundElement_PlayFlatSound; returns zero. */
 

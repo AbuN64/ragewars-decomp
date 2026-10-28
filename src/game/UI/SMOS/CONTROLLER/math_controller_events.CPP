@@ -6,7 +6,7 @@
 #include "MATH/8029AE80.H"
 #include "MATH/80299ECC.H"
 #include "MATH/math_controller_events.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
 #if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)

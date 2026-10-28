@@ -13,7 +13,7 @@
 #include "TYPES.H"
 #include "particle/8028308C.H"
 #include "RSP/8026E1F8_5.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "particle/80271B18_3.H"
@@ -225,7 +225,7 @@ void Particle_ReleaseObjectAndSound(void *object) {
     Particle_StopSound(object);
 }
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern Triple D_801002A8;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);

@@ -3,7 +3,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
-#include "MULTI/804453C4.H"
+#include "MULTI/SETUP_SETUPNAMESPINNER.H"
 
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_80145040[];

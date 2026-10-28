@@ -11,10 +11,10 @@
 #include "COMMON/WIDGETRECAT1A.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "FRONTEND/8040B45C_35.H"
-#include "FRONTEND/CODE_80411598.H"
+#include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "RESMGR/resmgr_stream_io.H"
 #include "MATH/802A2870.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, sm_dldc *);
 #include "RESMGR/resmgr_string_memory.H"
 

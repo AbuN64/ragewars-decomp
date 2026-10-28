@@ -12,7 +12,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
 #include "COMMON/SCREEN.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/LABEL.H"
@@ -24,7 +24,7 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "FRONTEND/8041BEA8_5.H"
-#include "FRONTEND/8042E080_42.H"
+#include "FRONTEND/PAKINTERFACE_SETSCREENPHASE.H"
 #include "COMMON/GAME_SESSION.H"
 #include "FRONTEND/SCREEN.H"
 

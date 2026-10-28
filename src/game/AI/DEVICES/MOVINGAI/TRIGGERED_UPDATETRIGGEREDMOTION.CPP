@@ -14,8 +14,8 @@
 #include "RENDER/80206258.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
-#include "FX/80271B18.H"
-#include "WEAPONS/80213ED4.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "GOBJINST/GOBJINST_2.H"
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);

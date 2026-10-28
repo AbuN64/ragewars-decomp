@@ -1,9 +1,9 @@
 #include "COMMON/MENURECAT20V1.H"
-#include "MULTI/804453C4.H"
+#include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "MULTI/804453C4_10.H"
+#include "MULTI/SETUP_COMPAREBYTESEQUENCE.H"
 
 #if !(defined(VERSION_US))
 /* Append one selected character to an eight-character entry buffer. */

@@ -6,9 +6,9 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/INTEGERSTATE530.H"
-#include "FRONTEND/80423280_59.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "FRONTEND/FRONTEND_DISPATCHPLAYERCOUNTEVENT.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 extern SettingsScreenState *D_800E5430;
 extern void SmpSlider_SetTransitionMode(void *, s32);
 

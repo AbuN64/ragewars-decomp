@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Checks the entered code D_800E5CAC against the twelve cheat codes of D_0044FB90 (each stored with
    every character xored with its index): for each one that matches, ors its flags into the cheat word of D_801462C8,

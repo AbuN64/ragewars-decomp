@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 
 /* Returns the rotation that turns an actor's aim toward a target point: a player's forward axis is its

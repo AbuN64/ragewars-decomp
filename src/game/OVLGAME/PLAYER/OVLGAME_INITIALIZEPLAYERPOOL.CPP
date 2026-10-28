@@ -9,13 +9,13 @@
 #include "COMMON/ACTORRECAT5E0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "AI/NAV/80208000_4.H"
+#include "AI/NAV/SCALED_INITPLAYERSTATE.H"
 #include "RENDER/802192C0_3.H"
-#include "FX/802631D0.H"
+#include "FX/CONTPAD_INITCONTROLLERINPUT.H"
 #include "RESMGR/802A0888.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "CINEMA/CINEMA.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

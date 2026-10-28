@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra/ai.h"
 #include "sdk/OSINT/osyieldthread.H"

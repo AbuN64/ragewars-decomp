@@ -5,7 +5,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "AUDIO/8025DA30.H"
 #include "TYPES.H"
-#include "sdk/OS/8025DA30.H"
+#include "sdk/OS/AUDIO_STOPMUSIC.H"
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT18V3.H"
@@ -15,7 +15,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
 #include "UTIL/8025DBA0.H"
-#include "sdk/libgultra_inferred/802B3B80_7.H"
+#include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "stddef.h"
 #include "RENDER/8028FD2C_6.H"

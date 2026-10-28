@@ -7,7 +7,7 @@
 #include "COMMON/OBJECTRECAT28.H"
 #include "TYPES.H"
 #include "COMMON/MENULISTSCREEN.H"
-#include "FRONTEND/8043962C_3.H"
+#include "FRONTEND/FRONTEND_DISPATCHNODEPAIRMENUEVENT.H"
 
 #if defined(VERSION_EU_X)
 extern void SmpButton_WrapButtonWidget(int id);

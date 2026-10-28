@@ -8,7 +8,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "FRONTEND/80423280_25.H"
 #include "FRONTEND/80423280_3.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object D_800E4514 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears
    D_800E4514 and returns zero. */

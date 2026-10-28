@@ -7,10 +7,10 @@
 extern struct SoundOptionsScreen *D_800E58A0;
 extern void **D_800E58A4;
 #include "COMMON/UNUSED.H"
-#include "MENU/804379C8_7.H"
+#include "MENU/MENU_DISPATCHSOUNDOPTIONSEVENT.H"
 #include "SYSTEM/8025E280.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x14 of the object D_800E58A0 points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */

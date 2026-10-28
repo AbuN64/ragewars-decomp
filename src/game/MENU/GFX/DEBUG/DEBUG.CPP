@@ -1,10 +1,10 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_4.H"
+#include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
 #include "COMMON/FORMAT.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "stdarg.h"
-#include "MENU/GFX/80414480_3.H"
+#include "MENU/GFX/GFX_FORMATARGUMENTLIST.H"
 
 /* 80414330.CPP */
 extern char D_800DD0C0[];

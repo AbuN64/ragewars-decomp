@@ -17,7 +17,7 @@
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "T2SOUNDELEMENT/T2SOUNDELEMENT.H"
 typedef void (*NavPrimaryFn)(NavigationPlatform *, void *, Trigger *);

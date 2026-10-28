@@ -26,10 +26,10 @@
 #include "CAMERA/80243A80_6.H"
 #include "FRONTEND/8040B45C_22.H"
 #include "RENDER/SETN64.H"
-#include "RENDER/80291054_4.H"
+#include "RENDER/SETN64_BUILDANDSUBMITSESSIONFRAME.H"
 #include "SCENE/802508E0_9.H"
-#include "SYSTEM/80296FF8_6.H"
-#include "SYSTEM/80265370_3.H"
+#include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
+#include "SYSTEM/DEFS_TOGGLESAVEDFLAG.H"
 #include "sdk/os.h"
 extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
 extern void SetN64_DrawColorRectangle(void *, u8 *, s32,s32,s32,s32);

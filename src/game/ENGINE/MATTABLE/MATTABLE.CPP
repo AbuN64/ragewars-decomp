@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "include_asm.h"
-#include "RENDER/8028469C_11.H"
+#include "RENDER/RUMBLE_EXPANDMESHMATERIAL.H"
 
 extern void Textload_LocateTextureResource(s32 *arg0, s32 arg1);
 

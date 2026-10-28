@@ -2,13 +2,13 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELF.H"
 #include "TYPES.H"
-#include "AI/NAV/802106E0_11.H"
-#include "AI/NAV/802106E0_12.H"
+#include "AI/NAV/NAV_UPDATERANGEDCOMBAT.H"
+#include "AI/NAV/NAV_UPDATECLOSECOMBAT.H"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "AI/NAV/802106E0_13.H"
+#include "AI/NAV/NAV_UPDATEVISIBLEPURSUIT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "AI/NAV/802106E0_14.H"
+#include "AI/NAV/NAV_INITPURSUITSTRAFE.H"
 
 extern void Nav_RunBehaviorHandler(void *);
 extern s32 Scaled_HasLineOfSight(void *, void *);

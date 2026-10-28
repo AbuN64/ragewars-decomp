@@ -5,8 +5,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
-#include "MENU/8041F1FC_6.H"
-#include "RENDER/8025DE50_5.H"
+#include "MENU/SELECTION_DISPATCHCHARACTERSELECTIONEVENT.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Handles a packed message whose high half is type 3 with no extra argument: when the entry named by
    its low half in the 0x4C8-byte table D_800E42D0 is active and has a target, runs Menu_CyclePlayerCharacterVariant on it

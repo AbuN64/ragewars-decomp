@@ -2,7 +2,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "MENU/8044ACCC.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Sets the resource transition state and sound, while its adjacent helper refreshes the controller-option bit. */
 

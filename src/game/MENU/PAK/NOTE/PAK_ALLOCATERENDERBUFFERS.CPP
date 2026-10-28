@@ -4,7 +4,7 @@
 #include "OVLGAME/80405454.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "OVLGAME/80405454_3.H"
+#include "OVLGAME/NOTE_ENCODENOTETEXT.H"
 #include "RESMGR/802A0888.H"
 
 /* Chooses a free extension letter for a new note on the Controller Pak on channel ch: refuses with

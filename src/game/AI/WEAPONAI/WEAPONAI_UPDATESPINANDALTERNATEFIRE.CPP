@@ -16,8 +16,8 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "TYPES.H"
 #include "RENDER/8022AE90.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a charge weapon's fire for its holder at 0x1D8: picks the holder's next weapon at 0x770 through
    Weaponai_FindNextUsableWeapon when the current one cannot be used; while the fire input 0x4000 is held on a weapon

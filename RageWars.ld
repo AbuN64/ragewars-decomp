@@ -477,7 +477,7 @@ SECTIONS
         . = MAX(., 0x2B1C0);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.text);
         . = MAX(., 0x2B29C);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.text);
         . = MAX(., 0x2B35C);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3F8);
@@ -485,7 +485,7 @@ SECTIONS
         . = MAX(., 0x2B4E0);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B57C);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.text);
         . = MAX(., 0x2B584);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.text);
         . = MAX(., 0x2B6A0);
@@ -639,7 +639,7 @@ SECTIONS
         . = MAX(., 0x39508);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x39AA4);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.text);
         . = MAX(., 0x39E94);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x3A0DC);
@@ -737,7 +737,7 @@ SECTIONS
         . = MAX(., 0x44964);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_8.CPP.o(.data);
         . = MAX(., 0x44970);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.text);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.text);
         . = MAX(., 0x44A58);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.text);
         . = MAX(., 0x44FD4);
@@ -2600,7 +2600,7 @@ SECTIONS
         . = MAX(., 0x2B288);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.text);
         . = MAX(., 0x2B364);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.text);
         . = MAX(., 0x2B424);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B4C0);
@@ -2608,7 +2608,7 @@ SECTIONS
         . = MAX(., 0x2B5D8);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B674);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.text);
         . = MAX(., 0x2B67C);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.text);
         . = MAX(., 0x2B798);
@@ -2754,7 +2754,7 @@ SECTIONS
         . = MAX(., 0x39518);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x39AB4);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.text);
         . = MAX(., 0x39EA4);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x3A0EC);
@@ -2852,7 +2852,7 @@ SECTIONS
         . = MAX(., 0x44974);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.data);
         . = MAX(., 0x44980);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.text);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.text);
         . = MAX(., 0x44A68);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.text);
         . = MAX(., 0x44FE4);
@@ -4719,7 +4719,7 @@ SECTIONS
         . = MAX(., 0x2B2B4);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.text);
         . = MAX(., 0x2B390);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.text);
         . = MAX(., 0x2B450);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B4EC);
@@ -4727,7 +4727,7 @@ SECTIONS
         . = MAX(., 0x2B604);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B6A0);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.text);
         . = MAX(., 0x2B6A8);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.text);
         . = MAX(., 0x2B7C4);
@@ -4873,7 +4873,7 @@ SECTIONS
         . = MAX(., 0x39548);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x39AE4);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.text);
         . = MAX(., 0x39ED4);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x3A11C);
@@ -4971,7 +4971,7 @@ SECTIONS
         . = MAX(., 0x449A4);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.data);
         . = MAX(., 0x449B0);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.text);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.text);
         . = MAX(., 0x44A98);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.text);
         . = MAX(., 0x45014);
@@ -6844,7 +6844,7 @@ SECTIONS
         . = MAX(., 0x2B194);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.text);
         . = MAX(., 0x2B270);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.text);
         . = MAX(., 0x2B330);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3CC);
@@ -6852,7 +6852,7 @@ SECTIONS
         . = MAX(., 0x2B4B4);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B550);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.text);
         . = MAX(., 0x2B558);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.text);
         . = MAX(., 0x2B674);
@@ -7008,7 +7008,7 @@ SECTIONS
         . = MAX(., 0x394E8);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x39A84);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.text);
         . = MAX(., 0x39E74);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x3A0BC);
@@ -7106,7 +7106,7 @@ SECTIONS
         . = MAX(., 0x44944);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.data);
         . = MAX(., 0x44950);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.text);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.text);
         . = MAX(., 0x44A38);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.text);
         . = MAX(., 0x44FB4);
@@ -8977,7 +8977,7 @@ SECTIONS
         . = MAX(., 0x2B1B0);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.text);
         . = MAX(., 0x2B28C);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.text);
         . = MAX(., 0x2B34C);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.text);
         . = MAX(., 0x2B3E8);
@@ -8985,7 +8985,7 @@ SECTIONS
         . = MAX(., 0x2B4D0);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.text);
         . = MAX(., 0x2B56C);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.text);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.text);
         . = MAX(., 0x2B574);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.text);
         . = MAX(., 0x2B690);
@@ -9139,7 +9139,7 @@ SECTIONS
         . = MAX(., 0x394F8);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x39A94);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.text);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.text);
         . = MAX(., 0x39E84);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.text);
         . = MAX(., 0x3A0CC);
@@ -9237,7 +9237,7 @@ SECTIONS
         . = MAX(., 0x44954);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.data);
         . = MAX(., 0x44960);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.text);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.text);
         . = MAX(., 0x44A48);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.text);
         . = MAX(., 0x44FC4);
@@ -10798,11 +10798,11 @@ SECTIONS
         src/game/AI/PLAYER/PLAYERAI_TOGGLEFORCEMARKER.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_BUILDFORCEMARKERTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.CPP.o(.bss .sbss COMMON);
@@ -10857,7 +10857,7 @@ SECTIONS
         src/game/CAMERA/GSKY/GSKY_DRAWPLAYERLISTNOOP.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTSCALEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/RECYCLE_2.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
@@ -10892,7 +10892,7 @@ SECTIONS
         src/game/ENGINE/UNICOL/POLYCOL/POLYCOL/POLYCOL_2.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_8.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_DRAWMESSAGES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP.o(.bss .sbss COMMON);
@@ -11592,11 +11592,11 @@ SECTIONS
         src/game/AI/PLAYER/PLAYERAI_TOGGLEFORCEMARKER.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_BUILDFORCEMARKERTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.CPP.o(.bss .sbss COMMON);
@@ -11651,7 +11651,7 @@ SECTIONS
         src/game/CAMERA/GSKY/GSKY_DRAWPLAYERLISTNOOP.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTSCALEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/RECYCLE_1.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
@@ -11687,7 +11687,7 @@ SECTIONS
         src/game/ENGINE/UNICOL/POLYCOL/POLYCOL/POLYCOL_3.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_DRAWMESSAGES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP.o(.bss .sbss COMMON);
@@ -12398,11 +12398,11 @@ SECTIONS
         src/game/AI/PLAYER/PLAYERAI_TOGGLEFORCEMARKER.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_BUILDFORCEMARKERTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.CPP.o(.bss .sbss COMMON);
@@ -12457,7 +12457,7 @@ SECTIONS
         src/game/CAMERA/GSKY/GSKY_DRAWPLAYERLISTNOOP.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTSCALEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/RECYCLE_1.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
@@ -12492,7 +12492,7 @@ SECTIONS
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_6.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_DRAWMESSAGES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP.o(.bss .sbss COMMON);
@@ -13211,11 +13211,11 @@ SECTIONS
         src/game/AI/PLAYER/PLAYERAI_TOGGLEFORCEMARKER.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_BUILDFORCEMARKERTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.CPP.o(.bss .sbss COMMON);
@@ -13270,7 +13270,7 @@ SECTIONS
         src/game/CAMERA/GSKY/GSKY_DRAWPLAYERLISTNOOP.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTSCALEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/ATTACK_TARGET/NAV/NAV_1.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
@@ -13302,7 +13302,7 @@ SECTIONS
         src/game/ENGINE/UNICOL/POLYCOL/CPOLYCOLLISION_TRACECEILINGTRIANGLE.CPP.o(.bss .sbss COMMON);
         src/game/AI/CBARREL/BARREL/BARREL.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_DRAWMESSAGES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP.o(.bss .sbss COMMON);
@@ -13957,11 +13957,11 @@ SECTIONS
         src/game/AI/PLAYER/PLAYERAI_TOGGLEFORCEMARKER.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_BUILDFORCEMARKERTRANSFORM.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_DRAWTINTEDPLAYER_DATA.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_49.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_ADDIMPULSE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_GIVEAMMOWITHMESSAGE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_51.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYER_52.CPP.o(.bss .sbss COMMON);
-        src/game/AI/PLAYER/PLAYER_53.CPP.o(.bss .sbss COMMON);
+        src/game/AI/PLAYER/PLAYER_RETURNONE.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/WEAPON_UPDATEHELDALTERNATEFIRE_DATA.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME.CPP.o(.bss .sbss COMMON);
         src/game/AI/PLAYER/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.CPP.o(.bss .sbss COMMON);
@@ -14016,7 +14016,7 @@ SECTIONS
         src/game/CAMERA/GSKY/GSKY_DRAWPLAYERLISTNOOP.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTSCALEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/SKY_POSTTARGETEDSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
-        src/game/CAMERA/GSKY/GSKY_30.CPP.o(.bss .sbss COMMON);
+        src/game/CAMERA/GSKY/GSKY_GETFLOORSURFACESHAKE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/SKY_POSTSCREENMESSAGE.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/GSKY/RECYCLE/RECYCLE_1.CPP.o(.bss .sbss COMMON);
         src/game/CAMERA/SKY/SKY.CPP.o(.bss .sbss COMMON);
@@ -14053,7 +14053,7 @@ SECTIONS
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_6.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/UNICOL_7.CPP.o(.bss .sbss COMMON);
-        src/game/ENGINE/UNICOL/UNICOL/UNICOL_13.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/UNICOL/UNICOL/CCINEMA_RESETSEQUENCECONTEXT.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_UPDATESEQUENCE.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/UNICOL/UNICOL/CCINEMA_DRAWMESSAGES.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/CINEMA/CINEMA/CINEMA.CPP.o(.bss .sbss COMMON);

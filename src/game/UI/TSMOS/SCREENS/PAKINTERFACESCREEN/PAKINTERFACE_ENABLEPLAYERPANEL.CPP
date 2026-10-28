@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_44.H"
+#include "FRONTEND/PAKINTERFACE_ENABLEPLAYERPANEL.H"
 
 /* Marks entry i of the 150-byte records D_80146410 and sets the words at offsets 0x6C and 0x58
    of entry i of the 2920-byte records D_800E54A4 points to to 2. */

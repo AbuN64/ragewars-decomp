@@ -2,7 +2,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Computes the second derivatives of a natural cubic spline through n points (ys over xs) into out: builds the tridiagonal diagonal, interval widths and right-hand side in three scratch arrays from Cache_AllocateMemory, eliminates forward, zeroes out and back-substitutes unless a zero diagonal or width was replaced by one, then frees the arrays through Cache_FreeMemory. */
 

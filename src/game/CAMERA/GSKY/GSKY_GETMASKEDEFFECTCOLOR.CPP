@@ -1,7 +1,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "CAMERA/80233920.H"
 #include "TYPES.H"
-#include "CAMERA/80233920_17.H"
+#include "CAMERA/GSKY_GETMASKEDEFFECTCOLOR.H"
 
 extern s32 D_801462C8;
 

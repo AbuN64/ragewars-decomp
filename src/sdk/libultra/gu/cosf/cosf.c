@@ -1,4 +1,4 @@
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* 800CC694_28.CPP */
 #if defined(VERSION_US_REV1)

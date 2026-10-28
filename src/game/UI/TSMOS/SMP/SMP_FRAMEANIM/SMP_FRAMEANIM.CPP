@@ -3,7 +3,7 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
-#include "MENU/804196C0_13.H"
+#include "MENU/SMPFRAMEANIM_REGISTERFRAMEANIMCLASS.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_33.H"
 #include "include_asm.h"
@@ -11,7 +11,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "MENU/804196C0_14.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Advances a frame sequence after its duration expires, honoring pause, forward/reverse, ping-pong and finite/infinite loop modes, and publishes the selected frame to its target. Reuses the matched FrameSequence contract from SmpFrameAnim_HasSequenceFlags. */
 #include "TYPES.H"

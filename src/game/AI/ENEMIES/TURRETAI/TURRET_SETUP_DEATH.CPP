@@ -5,7 +5,7 @@
 #include "COMMON/OBJ.H"
 #include "COMMON/REC.H"
 #include "TYPES.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 extern s32 Turret_TrackTarget(void *arg0);
 

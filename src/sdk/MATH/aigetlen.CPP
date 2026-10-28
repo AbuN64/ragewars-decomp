@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_16.H"
+#include "COMMON/GUMTXL2F.H"
 #include "sdk/MATH/aigetlen.H"
 
 /** Read the hardware register at 0xA450000C. */

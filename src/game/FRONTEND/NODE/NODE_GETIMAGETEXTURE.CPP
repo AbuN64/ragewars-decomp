@@ -7,9 +7,9 @@
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_36.H"
-#include "FRONTEND/CODE_80411598.H"
+#include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "RESMGR/resmgr_stream_io.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_42.H"
 extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;

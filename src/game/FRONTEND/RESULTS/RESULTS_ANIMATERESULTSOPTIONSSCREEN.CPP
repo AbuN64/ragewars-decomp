@@ -57,8 +57,8 @@
 #include "TYPES.H"
 #include "FRONTEND/80423280_38.H"
 #include "FRONTEND/80423280_42.H"
-#include "FRONTEND/CODE_80426EC4.H"
-#include "RENDER/8025DE50_5.H"
+#include "FRONTEND/RESULTS_LOADTRIALCOMPLETIONFLAGS.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 extern struct ScreenFrontendAnimateResultsOptionsScreen *D_800E4690;
 

@@ -4,7 +4,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 s16 alSndpAllocate(PoolRecAt44 *pool, void *owner) {
     s32 count = pool->count;

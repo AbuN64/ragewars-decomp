@@ -4,7 +4,7 @@
 #include "FRONTEND/LAYOUT.H"
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_40.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_31.H"
 #include "FRONTEND/8040B45C_33.H"

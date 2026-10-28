@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/RECORDRECAT1C.H"
-#include "MENU/PAK/80403BCC.H"
+#include "MENU/PAK/NOTE_REFRESHNOTES.H"
 #include "sdk/PFS/ospfschecker.H"
 
 /* Refreshes the cached directory of the Controller Pak on channel ch: when the directory buffer

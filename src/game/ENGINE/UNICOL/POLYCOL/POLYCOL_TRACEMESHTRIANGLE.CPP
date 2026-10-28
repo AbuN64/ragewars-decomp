@@ -15,8 +15,8 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
-#include "ANIM/8023DF60.H"
-#include "FX/80271B18.H"
+#include "ANIM/CCOLLISION_TESTOFFSETPOLYGON.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 
 /* 802412C0_6.CPP */

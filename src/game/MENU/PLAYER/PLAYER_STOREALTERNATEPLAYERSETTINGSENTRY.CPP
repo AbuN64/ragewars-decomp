@@ -9,7 +9,7 @@ extern struct MenuStepState *D_800E5690;
 #include "COMMON/INTEGERSTATE530.H"
 #include "MENU/804366D0_2.H"
 #include "MENU/804366D0_3.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5694 holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with D_800E5690 changed to D_800E5694 and the object fields moved down by eight bytes. */
 

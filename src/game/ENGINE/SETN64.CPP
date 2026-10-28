@@ -15,17 +15,17 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/OBJRECAT20V1.H"
 #include "COMMON/LEVEL.H"
-#include "CAMERA/80243A80_3.H"
-#include "OVLGAME/8044E2B8_5.H"
+#include "CAMERA/CCINEMA_RESETSEQUENCECONTEXT.H"
+#include "OVLGAME/MATCH_INITPARTICLEQUAD.H"
 #include "RENDER/SETN64.H"
-#include "RENDER/80291054_7.H"
+#include "RENDER/SETN64_ADVANCEDISPLAYFRAME.H"
 #include "RENDER/80291054_9.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 #include "OVLGAME/80405454_4.H"
 #include "RESMGR/802A2230_6.H"
-#include "TEXTURE/80256220_12.H"
+#include "TEXTURE/AUDIOMGR_INITHEAP.H"
 
 void SetN64_InitFrameRing(RenderState *state) {
     u32 i, count, previous, next;

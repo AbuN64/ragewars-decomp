@@ -1,7 +1,7 @@
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 #if !(defined(VERSION_US))
 /* Releases the object D_800E42D0 holds through Cache_FreeMemory, clears D_800E42D0, calls

@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/MENURECAT24.H"
-#include "MENU/ITEMS/80442BC8_16.H"
+#include "MENU/ITEMS/PLAYER_OPENPLAYERDIALOG.H"
 #include "MENU/PAK/80405DC0_2.H"
 
 /* Loads the owner at offset 0x1C of the second argument into D_80145040 through func_8022A5A0_de,

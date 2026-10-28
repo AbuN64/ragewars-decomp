@@ -1,7 +1,7 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_39.H"
+#include "FRONTEND/PAKINTERFACE_BEGINLINKEDPROFILETRANSFER.H"
 
 /* Resets the selected player menu record, updates the initiating player state and refreshes the team labels. */
 

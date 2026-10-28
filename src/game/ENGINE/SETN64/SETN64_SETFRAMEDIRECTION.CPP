@@ -1,7 +1,7 @@
 #include "COMMON/OBJRECAT20V1.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "include_asm.h"
 #include "RENDER/802909E0.H"
 #include "RENDER/802909E0_5.H"

@@ -8,7 +8,7 @@
 #include "sdk/OS/802BC630_2.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
-#include "sdk/OS/802BC630_3.H"
+#include "sdk/OS/__OSPACKRESETDATA.H"
 #include "sdk/OS/siaccess.H"
 
 void __osPackReadData(void);

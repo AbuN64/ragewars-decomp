@@ -8,7 +8,7 @@
 #include "AUDIO/SIRAW.H"
 #include "sdk/os.h"
 #include "sdk/OSINT/osyieldthread.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 extern void func_802BD280_de(void *addr, s32 size);
 extern void func_802BCF70_de(void *addr, s32 size);

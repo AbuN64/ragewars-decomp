@@ -12,8 +12,8 @@
 #include "MENU/804196C0_21.H"
 #include "MATH/802A2870.H"
 #include "FRONTEND/8040B45C_35.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_33.H"
 

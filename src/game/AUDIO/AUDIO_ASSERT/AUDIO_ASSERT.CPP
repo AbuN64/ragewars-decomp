@@ -1,7 +1,7 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "COMMON/OSTHREAD_S.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 /* 802BFD80.CPP */
 #if defined(VERSION_DE)

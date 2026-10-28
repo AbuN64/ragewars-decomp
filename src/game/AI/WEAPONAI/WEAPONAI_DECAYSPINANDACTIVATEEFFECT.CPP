@@ -9,7 +9,7 @@
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Runs a spinning weapon's barrel for its holder at 0x1D8: unless the weapon is in state 4 the spin
    speed at 0x128 decays, the spin angle at 0x124 advances by twice the speed per frame, and the
@@ -27,7 +27,7 @@ extern char D_80102B00[];
 extern s32 D_800D30BC;
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "WEAPONS/8022F3E8_8.H"
+#include "WEAPONS/WEAPONAI_DECAYSPINANDACTIVATEEFFECT.H"
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);

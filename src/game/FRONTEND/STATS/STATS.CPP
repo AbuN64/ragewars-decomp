@@ -1,7 +1,7 @@
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/80423280_35.H"
+#include "FRONTEND/FRONTEND_ACCUMULATEPLAYERSTATISTICS.H"
 
 extern s8 D_80102B0D[][400];
 extern RecRecAt4 g_playerSettings[];

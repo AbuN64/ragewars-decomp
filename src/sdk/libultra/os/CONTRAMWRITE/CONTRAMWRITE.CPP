@@ -4,7 +4,7 @@
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
-#include "sdk/OS/802BD950_2.H"
+#include "sdk/OS/__OSPACKRAMWRITEDATA.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 #include "include_asm.h"

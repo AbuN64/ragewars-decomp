@@ -5,7 +5,7 @@
 #include "COMMON/BOX_CONTACT.H"
 #include "TYPES.H"
 #include "COMMON/RENDERSORTRECORD.H"
-#include "GAME/80240650.H"
+#include "GAME/CCOLLISION_COPYPOSITIONANDGETMODELFLAGS.H"
 
 s32 CCollision_CopyProbePosition(void *arg0, Triple t, s32 room, s32 arg5, void *outputPoint) {
     char unused[0xB60];

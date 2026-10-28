@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/80423280_33.H"
+#include "FRONTEND/FRONTEND_DISPATCHPLAYMODEEVENT.H"
 
 /* On event 3 with value 0xA, calls MarkMenuEventHandled, sets the word at offset 0x18 of the object
    D_800E4600 points to to 0x1C and calls SmpSlider_SetTransitionMode on its first word with 2. Returns zero. */

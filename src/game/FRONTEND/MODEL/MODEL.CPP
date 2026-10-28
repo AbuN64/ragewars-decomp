@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "FRONTEND/8043962C_15.H"
+#include "FRONTEND/MODEL_SETMODELPREVIEWPOSITION.H"
 
 /* Stores a count in a record and, when it is positive, the handle Scene_FindModelIdIndex returns for
    D_8011FE88 and that count at offset 0x34; otherwise the handle is -1. Returns the handle. */

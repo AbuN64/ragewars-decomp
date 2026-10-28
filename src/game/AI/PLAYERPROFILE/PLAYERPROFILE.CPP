@@ -12,7 +12,7 @@
 #include "COMMON/GFX.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "WEAPONS/8022F3E8_2.H"
+#include "WEAPONS/PLAYER_BUILDWEAPONHANDTRANSFORM.H"
 
 void Player_SetProfileValue14(void *arg0, unsigned char arg1);
 void Player_SetProfileValue15(void *object, unsigned char value);

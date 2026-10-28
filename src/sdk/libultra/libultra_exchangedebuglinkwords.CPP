@@ -1,4 +1,4 @@
-#include "sdk/libgultra_inferred/802AE260_5.H"
+#include "sdk/libgultra_inferred/LIBULTRA_WRITEDEBUGLINKBYTE.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"

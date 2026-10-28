@@ -1,6 +1,6 @@
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_13.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X))
 /* Releases the object g_optionsPage holds through Cache_FreeMemory, clears g_optionsPage and returns zero. */

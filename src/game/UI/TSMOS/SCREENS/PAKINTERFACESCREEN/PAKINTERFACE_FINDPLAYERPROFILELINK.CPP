@@ -1,6 +1,6 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "FRONTEND/PAKMENU.H"
-#include "FRONTEND/8042E080_48.H"
+#include "FRONTEND/PAKINTERFACE_FINDPLAYERPROFILELINK.H"
 
 /* Returns the index of the first of the four twelve-byte slots at offset 0x2DF8 of D_800E54A4 whose
    id and value words match the arguments, or -1 when none does. */

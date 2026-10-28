@@ -3,7 +3,7 @@
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
 #include "include_asm.h"
-#include "GAME/8020DC10.H"
+#include "GAME/ATTACK_SELECTWEIGHTEDATTACKBEHAVIOR.H"
 
 s32 Reselect_ChooseWeightedAttackBehavior(WeightSource *weights);
 extern s32 Scaled_SetBehaviourState(void *, s32);

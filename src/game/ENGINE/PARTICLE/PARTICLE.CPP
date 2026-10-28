@@ -6,7 +6,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "particle/80271B18_3.H"
 #include "FX/PARTICLE_ATTACHMENT.H"
 #include "SYSTEM/CONTACT_EFFECT.H"
@@ -82,7 +82,7 @@ extern s32 Region_GetModelBlendByte59(s32);
 extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
 extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "ENGINE/PARTICLE.H"
 
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);

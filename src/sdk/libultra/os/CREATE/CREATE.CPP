@@ -6,7 +6,7 @@
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 #include "include_asm.h"
-#include "sdk/OSINT/802BEA40_2.H"
+#include "sdk/OSINT/__OSPIRELACCESS.H"
 
 /* 802BEA40.CPP */
 /* Takes the access token from the message queue D_8014EA58, first creating that one-message queue

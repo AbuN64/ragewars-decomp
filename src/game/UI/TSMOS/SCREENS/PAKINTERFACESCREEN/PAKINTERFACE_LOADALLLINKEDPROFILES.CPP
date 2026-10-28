@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_58.H"
+#include "FRONTEND/PAKINTERFACE_COUNTACTIVEPLAYERPANELS.H"
 
 /* Counts how many of the four 2920-byte entries D_800E54A4 points to have a non-zero word at
    offset 0x58. */

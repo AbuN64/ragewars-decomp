@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* ROM-grounded data: src/rw_pool_802B5570_CD590_us_rev1.c */
 const unsigned int D_blob_b3674e9ebfb193e144c8[3] = {

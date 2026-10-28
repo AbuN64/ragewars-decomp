@@ -2,7 +2,7 @@
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_56.H"
+#include "FRONTEND/PAKINTERFACE_COUNTPENDINGPLAYERPANELS.H"
 
 /* Counts how many of the four 2920-byte entries D_800E54A4 points to have a word at offset 0x58 that is not zero, 0xE or 0x11.
    Adapted from PAKInterface_CountActivePlayerPanels with the extra 0xE and 0x11 exclusions changed. */

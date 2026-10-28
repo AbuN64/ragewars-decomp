@@ -2,7 +2,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/STREAM.H"
 #include "TYPES.H"
-#include "SYSTEM/8025E5B0_6.H"
+#include "SYSTEM/POLYTRAK2_CHOOSEQUANTIZEDTRACKRATE.H"
 
 /* Converts an amount over a period into a whole rate: returns D_800C410C_de for an amount
  * equal to it or a period not above D_800C9200; otherwise the ratio scaled by D_800C9200 + 4 and rounded up

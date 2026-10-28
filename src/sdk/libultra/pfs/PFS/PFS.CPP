@@ -3,11 +3,11 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
-#include "sdk/PFS/80447BB0_21.H"
-#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
+#include "sdk/PFS/PFS_READWRITEINODE.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
-#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/__OSCHECKID.H"
 #include "sdk/libultra/pfs/80447BB0_17.h"
 
 /* 80447BB0_17.CPP */

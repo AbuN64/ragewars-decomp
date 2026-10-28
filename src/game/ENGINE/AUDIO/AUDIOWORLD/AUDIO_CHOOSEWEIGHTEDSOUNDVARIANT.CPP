@@ -16,7 +16,7 @@
 #include "AUDIO/8025A3EC_4.H"
 #include "AUDIO/802591C0.H"
 #include "AUDIO/8025CCB0_2.H"
-#include "sdk/OS/8025DA30.H"
+#include "sdk/OS/AUDIO_STOPMUSIC.H"
 #include "sdk/os.h"
 #include "SYSTEM/80265370.H"
 #include "RENDER/8028FD2C_6.H"

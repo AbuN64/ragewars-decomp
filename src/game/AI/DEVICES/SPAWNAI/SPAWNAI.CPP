@@ -17,7 +17,7 @@
 #include "COMMON/RESULTS.H"
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATE1250.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "LISTS/80279520.H"
 #include "include_asm.h"
 

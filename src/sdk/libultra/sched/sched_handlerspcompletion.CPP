@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_17.H"
 #include "COMMON/TRIPLE.H"
 #include "AUDIO/SPTASKYIELDED.H"
-#include "SCENE/802508E0_10.H"
+#include "SCENE/CACHE_SENDCOMPLETIONMESSAGE.H"
 #include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/os.h"
 

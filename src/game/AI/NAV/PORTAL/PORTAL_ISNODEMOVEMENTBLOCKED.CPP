@@ -8,7 +8,7 @@
 #include "COMMON/OBJECTLINKS14.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
-#include "AI/NAV/80208000_8.H"
+#include "AI/NAV/PORTAL_INITSEARCHNODE.H"
 #include "COMMON/POOLED_FLOATS.H"
 
 extern struct {s32 *unk0;} D_8013B364;

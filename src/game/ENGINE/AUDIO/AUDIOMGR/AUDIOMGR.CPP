@@ -2,7 +2,7 @@
 #include "TEXTURE/80256220.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TYPES.H"
-#include "TEXTURE/80256220_12.H"
+#include "TEXTURE/AUDIOMGR_INITHEAP.H"
 #include "TEXTURE/80256220_13.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"

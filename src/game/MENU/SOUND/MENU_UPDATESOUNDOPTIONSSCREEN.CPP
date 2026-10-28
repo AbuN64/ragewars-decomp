@@ -5,8 +5,8 @@
 extern struct SoundOptionsScreen *D_800E58A0;
 #include "COMMON/INTEGERSTATE530.H"
 #include "SYSTEM/8025E280.H"
-#include "RENDER/8025DE50_5.H"
-#include "SCENE/802508E0_13.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object D_800E58A0 holds through Cache_FreeMemory, clears D_800E58A0 and returns zero. */
 

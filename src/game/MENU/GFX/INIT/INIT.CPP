@@ -2,9 +2,9 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "COMMON/INTEGERSTATE14_2.H"
 #include "COMMON/TEXTURE.H"
-#include "COMMON/EXTERNS_4.H"
+#include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
 #include "MATH/8029BBA0_5.H"
-#include "MENU/GFX/804143E0.H"
+#include "MENU/GFX/GFX_SHUTDOWNFRONTENDSERVICES.H"
 #include "RESMGR/resmgr_stream_io.H"
 
 void Gfx_InitializeFrontendServices(void) {

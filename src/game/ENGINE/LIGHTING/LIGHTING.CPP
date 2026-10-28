@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/UNUSED.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "COMMON/EXTERNS_15.H"
 #include "RENDER/OBJECTSTATE8E.H"
 #include "COMMON/WORLD.H"

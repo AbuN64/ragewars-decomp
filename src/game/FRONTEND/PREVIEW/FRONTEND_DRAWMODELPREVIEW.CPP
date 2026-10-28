@@ -98,7 +98,7 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/TRIPLE.H"
-#include "MENU/GFX/80414430_19.H"
+#include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "TYPES.H"
 #include "gbi.h"
 #include "particle/80271B18_3.H"

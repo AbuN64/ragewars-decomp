@@ -3,7 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "MATH/math_double.H"
-#include "MATH/8029BBA0_6.H"
+#include "MATH/XMATH_WRAPANGLEPOSITIVE.H"
 
 inline static f32 wrap(f32 arg0)
 {

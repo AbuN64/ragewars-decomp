@@ -8,7 +8,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/EXTERNS_10.H"
 #include "SYSTEM/802A6AC0.H"
-#include "FX/80271B18.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "LISTS/80279520.H"
 #include "COMMON/SHAREDPLAYER.H"

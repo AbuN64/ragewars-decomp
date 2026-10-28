@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OPTIONEDITSTATE.H"
-#include "MENU/PAK/80444EC0_13.H"
+#include "MENU/PAK/PAK_FORMATVOLUMESLOTONE.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"

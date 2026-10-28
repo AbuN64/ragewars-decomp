@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 
 /* 800CC694_6.CPP */
 const unsigned int D_d0_72e36120e48cd4ab[3] = {

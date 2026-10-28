@@ -16,7 +16,7 @@ extern char D_8011D8D0;
 extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(Triple *);
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
 void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 attachmentsRemaining, struct MatrixF *attachmentMatrices, func_8026E5E0_S3 *actor, AttachmentTable *attachmentNodes) {

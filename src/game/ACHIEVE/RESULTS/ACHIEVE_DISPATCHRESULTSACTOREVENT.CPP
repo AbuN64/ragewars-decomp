@@ -9,7 +9,7 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/MENUSELECTIONMESSAGE.H"
 #include "TYPES.H"
-#include "ACHIEVE/80437C30_4.H"
+#include "ACHIEVE/ACHIEVE_DISPATCHRESULTSACTOREVENT.H"
 
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 extern void MarkMenuEventHandled();

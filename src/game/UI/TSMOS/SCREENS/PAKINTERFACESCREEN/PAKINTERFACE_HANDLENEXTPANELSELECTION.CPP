@@ -4,10 +4,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "RENDER/8025DE50_5.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/WIDGETRECAT1A.H"
-#include "FRONTEND/8042E080_15.H"
-#include "FRONTEND/8042E080_58.H"
+#include "FRONTEND/PAKINTERFACE_BEGINSCREENEXIT.H"
+#include "FRONTEND/PAKINTERFACE_COUNTACTIVEPLAYERPANELS.H"
 
 /* 8042E080_27.CPP */
 /* Cancels player arg2's pickup when the state at 0x58 of its 2920-byte record is 12 and arg3 asks:

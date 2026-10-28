@@ -1,7 +1,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
-#include "FRONTEND/80423280_40.H"
+#include "FRONTEND/RESULTS_MARKLINKEDTRIALSAVAILABLE.H"
 #include "ACHIEVE/80424E30_3.H"
 
 /* Grants unowned unlocks for the completed game using its mode and player kind; an unsigned local carries the globals address before the category value to preserve register scheduling, and the default kind calls the table selector directly. */

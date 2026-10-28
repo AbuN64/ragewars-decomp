@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "AI/SOURCE.H"
 #include "TYPES.H"
-#include "AI/NAV/80212C90_9.H"
+#include "AI/NAV/NAV_RESETOBJECTARRIVALCHASE.H"
 
 /* 80212C90_8.CPP */
 #if !defined(VERSION_DE)

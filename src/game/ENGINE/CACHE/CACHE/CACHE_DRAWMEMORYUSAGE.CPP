@@ -8,7 +8,7 @@
 #include "COMMON/EXTERNS.H"
 #include "AUDIO/80255280.H"
 #include "sdk/os.h"
-#include "TEXTURE/80254CE4.H"
+#include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 

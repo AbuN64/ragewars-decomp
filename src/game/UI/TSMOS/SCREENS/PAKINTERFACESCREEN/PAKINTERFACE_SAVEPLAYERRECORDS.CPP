@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/8042E080_53.H"
+#include "FRONTEND/PAKINTERFACE_GETRECORDSNOTESIZE.H"
 
 #if defined(VERSION_DE)
 enum { PAK_LIST_FIELD = 748 };

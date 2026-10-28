@@ -7,8 +7,8 @@
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "TYPES.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "WEAPONS/80213ED4.H"
-#include "RENDER/8025DE50_5.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Handles a player's charged secondary action: refreshes the idle state when the action is not allowed and
  * picks the effect position (the weapon's at 0x128, else the player's); a player flagged 0x4000 that may

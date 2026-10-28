@@ -8,8 +8,8 @@
 #include "COMMON/OBJRECAT4V7.H"
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "SOUND/8024E130_2.H"
-#include "WORLD/8024E914_6.H"
+#include "SOUND/INSTHDR_GETACTORSHADOWRADIUS.H"
+#include "WORLD/SIMPINST_REFRESHMODELRESOURCEUSAGE.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER/8028FD2C_6.H"
 
@@ -21,7 +21,7 @@ extern char D_8011D8D0;
 
 extern f32 Gobjinst_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);

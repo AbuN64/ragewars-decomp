@@ -2,7 +2,7 @@
 #include "sdk/EXTERNS.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
-#include "sdk/PRINTF/802C31B0.H"
+#include "sdk/PRINTF/_LDTOB.H"
 
 /* 802C31B0.CPP */
 /* This hook intentionally ignores both supplied words. */

@@ -2,7 +2,7 @@
 #include "COMMON/RECRECAT4.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "FRONTEND/80423280_7.H"
+#include "FRONTEND/RESULTS_GETWEAPONICONVALUE.H"
 
 /* Finds a menu item identifier in three selection tables, falling back to the first item of the second table. */
 extern int g_loadoutWeaponItems[];

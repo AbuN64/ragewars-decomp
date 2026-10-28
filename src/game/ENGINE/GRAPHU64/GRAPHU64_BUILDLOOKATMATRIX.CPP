@@ -8,8 +8,8 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "FX/80271B18.H"
-#include "sdk/lib_802BB630/802BBC50.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
+#include "sdk/lib_802BB630/GUMTXIDENTF.H"
 extern u32 g_secondaryRandomSeed;
 extern f32 D_800C4960_de[2];
 

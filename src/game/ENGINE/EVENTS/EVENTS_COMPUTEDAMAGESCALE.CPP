@@ -66,7 +66,7 @@ extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 
-#include "particle/8027A0F4_8.H"
+#include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 
 extern void CScene_StartEventClips(void *, void *, s32, Triple, f32, f32);
 

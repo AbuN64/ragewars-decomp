@@ -15,7 +15,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "WEAPONS/80213ED4.H"
+#include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 
 extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 

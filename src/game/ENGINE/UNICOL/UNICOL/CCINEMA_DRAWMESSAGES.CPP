@@ -2,7 +2,7 @@
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-#include "COMMON/EXTERNS_7.H"
+#include "COMMON/TRACK_REQUESTTRACKBYKEY.H"
 #include "COMMON/OBJRECAT4V6.H"
 
 void CCinema_DrawMessages(void)

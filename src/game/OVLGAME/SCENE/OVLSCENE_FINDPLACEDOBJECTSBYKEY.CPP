@@ -4,7 +4,7 @@
 #include "MENU/8044ACCC.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_14.H"
+#include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "MENU/ITEMS/SCENE/SCENE_7.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM/80265370.H"

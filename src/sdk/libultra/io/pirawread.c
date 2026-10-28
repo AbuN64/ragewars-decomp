@@ -2,9 +2,9 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-#include "COMMON/EXTERNS_2.H"
+#include "COMMON/ALFXPARAM.H"
 #include "sdk/libultra/io/pirawread.H"
-#include "AUDIO/802BFD40.H"
+#include "AUDIO/AUDIO_ASSERT.H"
 
 
 

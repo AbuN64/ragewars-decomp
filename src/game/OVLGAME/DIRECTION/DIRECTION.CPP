@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #include "TYPES.H"
-#include "FX/80271B18.H"
-#include "sdk/PFS/8044E8B0.H"
+#include "FX/GRAPHU64_NORMALIZEVEC3.H"
+#include "sdk/PFS/OVLGAME_INITIALIZERENDERDIRECTION.H"
 #include "OVLGAME/8044E8B0.H"
 
 

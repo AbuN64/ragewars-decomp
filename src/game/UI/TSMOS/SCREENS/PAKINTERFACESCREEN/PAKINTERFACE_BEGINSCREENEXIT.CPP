@@ -4,8 +4,8 @@
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/8042E080_15.H"
-#include "FRONTEND/8042E080_60.H"
+#include "FRONTEND/PAKINTERFACE_BEGINSCREENEXIT.H"
+#include "FRONTEND/PAKINTERFACE_RETURNWITHOUTACTION.H"
 
 /* 8042E080_15.CPP */
 /* Enters the selected menu state and resolves the default destination from the game mode. */

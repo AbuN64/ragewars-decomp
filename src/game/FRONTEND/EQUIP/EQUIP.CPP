@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "TYPES.H"
-#include "FRONTEND/8043A0B0_10.H"
+#include "FRONTEND/EQUIP_LOADEQUIPMENTSELECTIONS.H"
 
 /* Fills player p's column values on the screen D_800E59E0 from what the player owns: unless the
    entry's mode word (0x4D4) is 0, it scans the 4 rows of D_800E5BC4 for column 1, the 3 rows of

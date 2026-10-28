@@ -8,7 +8,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "MENU/PLAYERSETTINGS.H"
-#include "MENU/MISC/8043DF84_3.H"
+#include "MENU/MISC/CONFIRMING_SETMENUCONTROLLERPAKENABLED.H"
 
 #if defined(VERSION_EU)
 unsigned int D_auto_rodata_unresolved_800EE97C[9] = {

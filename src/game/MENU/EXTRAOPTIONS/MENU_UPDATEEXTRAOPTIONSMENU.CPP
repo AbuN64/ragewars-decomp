@@ -4,9 +4,9 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "MENU/80420E90.H"
-#include "MENU/80420E90_9.H"
-#include "SCENE/802508E0_13.H"
+#include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
+#include "MENU/MENU_SCROLLOPTIONSKEYPAD.H"
+#include "SCENE/CACHE_FREEMEMORY.H"
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
 /* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points

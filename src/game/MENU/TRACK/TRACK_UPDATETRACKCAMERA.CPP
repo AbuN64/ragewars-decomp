@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
-#include "MENU/80400000_16.H"
+#include "MENU/TRACK_UPDATETRACKCAMERA.H"
 #include "RENDER/8028FD2C_6.H"
 
 /* Evaluates keyframe track 3 of the current record's resource at time t: before the first key or

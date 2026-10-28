@@ -17,7 +17,7 @@ extern f32 D_800C3EE0_de;
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "AUDIO/8025A3EC_4.H"
-#include "AUDIO/8025D470_2.H"
+#include "AUDIO/AUDIO_UPDATEMUSICFADE.H"
 
 #include "COMMON/EXTERNS_11.H"
 
