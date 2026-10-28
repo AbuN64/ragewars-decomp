@@ -98,7 +98,7 @@ INCLUDE_ASM("ovl_80400000", Encoded_UpdateLevelSelectionAvailability);
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void Menu_HandleUnlockedLevelSelection(void) {
+void Encoded_HandleUnlockedLevelSelection(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -321,6 +321,6 @@ void Menu_HandleUnlockedLevelSelection(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_HandleUnlockedLevelSelection);
+INCLUDE_ASM("ovl_80400000", Encoded_HandleUnlockedLevelSelection);
 #endif
 #endif

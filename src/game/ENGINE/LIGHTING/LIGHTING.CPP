@@ -856,7 +856,7 @@ unsigned char rodata_unresolved_800C4B29[7] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802784C0_CA80C_us_rev1.c */
-const unsigned char D_blob_0351673e4abfd2bdc73f[] = {
+const unsigned char g_litVerticesText[] = {
     0x4C, 0x69, 0x74, 0x20, 0x56, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
 #if defined(VERSION_US_REV1)
     0x83, 0x12, 0x6F,

@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_804456E0_de(void) {
+void Setup_LoadNameEditBuffer(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -184,6 +184,6 @@ void func_804456E0_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804456E0_de);
+INCLUDE_ASM("ovl_80400000", Setup_LoadNameEditBuffer);
 #endif
 #endif

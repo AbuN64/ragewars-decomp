@@ -24,7 +24,7 @@ const char D_802B57F0_CD5D4[15] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802B57F0_CD5D4_us_rev1.c */
-const unsigned char D_blob_8072adc129d2def05359[15] = {
+const unsigned char g_audioReverbText[15] = {
     0x61, 0x75, 0x64, 0x69, 0x6F, 0x2F, 0x72, 0x65, 0x76, 0x65, 0x72, 0x62, 0x2E, 0x63, 0x00,
 };
 #endif

@@ -27379,8 +27379,8 @@ SECTIONS
         . = DEFINED(__align8_literals_Lighting_BuildLitModel) ? ALIGN(8) : .;
         src/game/ENGINE/LIGHTING/LIGHTING.CPP.o(.rodata.literals_Lighting_BuildLitModel .rdata.literals_Lighting_BuildLitModel);
         . = MAX(., 0x315C);
-        . = DEFINED(__align8_D_blob_0351673e4abfd2bdc73f) ? ALIGN(8) : .;
-        src/game/ENGINE/LIGHTING/LIGHTING.CPP.o(.rodata.D_blob_0351673e4abfd2bdc73f .rdata.D_blob_0351673e4abfd2bdc73f);
+        . = DEFINED(__align8_g_litVerticesText) ? ALIGN(8) : .;
+        src/game/ENGINE/LIGHTING/LIGHTING.CPP.o(.rodata.g_litVerticesText .rdata.g_litVerticesText);
         . = MAX(., 0x316C);
         src/game/ENGINE/LIGHTING/LIGHTING_1.CPP.o(.data);
         . = MAX(., 0x3170);

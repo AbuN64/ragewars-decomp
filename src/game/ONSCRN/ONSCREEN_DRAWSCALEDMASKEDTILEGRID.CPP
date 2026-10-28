@@ -296,17 +296,17 @@ void OnScreen_SetTextScale(float horizontalScale, float verticalScale) {
     D_801376F8.height = verticalScale;
 }
 
-void OnScreen_DrawTextWithShadow(s32 arg0, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 alpha, s32 language) {
+void OnScreen_DrawTextWithShadow(s32 text, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 alpha, s32 language) {
     if (arg5 != 0) {
-        OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 1, alpha, language);
+        OnScreen_DrawTextGlyphs(text, x, arg2, width, height, 1, alpha, language);
     }
-    OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 0, alpha, language);
+    OnScreen_DrawTextGlyphs(text, x, arg2, width, height, 0, alpha, language);
 }
 
 #endif
 
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
-s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 arg2, s16 y, f32 scaleX, f32 scaleY, s32 arg6) {
+s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 arg6) {
 
     s32 resourceHandle;
 
@@ -315,7 +315,7 @@ s32 OnScreen_DrawSpriteResource(s32 resourceId, s32 index, s16 arg2, s16 y, f32 
         || (resourceHandle = Scene_StartWorldEffect(&g_world, resourceId, 0, 1), resourceHandle == 0)) {
         return 0;
     }
-    Text_DrawTileGrid(resourceHandle, index, arg2, y, scaleX, scaleY, arg6);
+    Text_DrawTileGrid(resourceHandle, index, x, y, scaleX, scaleY, arg6);
     Cache_UnlockResource(0, resourceHandle);
     return 1;
 }

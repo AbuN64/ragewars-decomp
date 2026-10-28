@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80250624_C9B60[14] =
+const char g_staticEventsText[14] =
     "static events\000";
 #endif
 

@@ -108,7 +108,7 @@ static inline s32 findUnlocked(s32 level, s32 step) {
     return -1;
 }
 
-s32 Menu_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
+s32 Encoded_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
     s32 target;
     Shared_Game *rules;
 
