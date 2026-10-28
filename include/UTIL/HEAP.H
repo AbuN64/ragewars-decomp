@@ -1,5 +1,5 @@
-#ifndef UTIL_802555D0_H
-#define UTIL_802555D0_H
+#ifndef UTIL_HEAP_H
+#define UTIL_HEAP_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT18V3.H"

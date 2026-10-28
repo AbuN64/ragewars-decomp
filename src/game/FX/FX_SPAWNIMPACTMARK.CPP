@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_10.H"
 #include "SYSTEM/802A6AC0.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "LISTS/LISTS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"

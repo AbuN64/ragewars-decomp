@@ -1,7 +1,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 
 
 

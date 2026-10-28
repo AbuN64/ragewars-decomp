@@ -9,8 +9,8 @@
 #include "RESMGR/X_PLUS.H"
 #include "MENU/8044ACCC.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 /* Initializes camera transforms, viewport state, clipping records, and resource lists. */
 

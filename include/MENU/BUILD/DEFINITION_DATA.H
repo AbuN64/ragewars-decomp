@@ -1,5 +1,5 @@
-#ifndef MENU_BUILD_DATA_H
-#define MENU_BUILD_DATA_H
+#ifndef MENU_BUILD_DEFINITION_DATA_H
+#define MENU_BUILD_DEFINITION_DATA_H
 
 /* ROM menu records consumed by Menu_InitializeMenu through the cartridge window.
  * Keep halfwords and color bytes at their load widths; callback words retain

@@ -1,5 +1,5 @@
-#ifndef FX_2_PARTICLE_ATTACHMENT_H
-#define FX_2_PARTICLE_ATTACHMENT_H
+#ifndef FX_PARTICLE_ATTACHMENT_H
+#define FX_PARTICLE_ATTACHMENT_H
 #include "TYPES.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 /* Attachment view of the existing collision state: ROM pointer at0,

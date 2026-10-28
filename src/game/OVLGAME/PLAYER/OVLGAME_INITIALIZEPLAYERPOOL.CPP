@@ -13,8 +13,8 @@
 #include "RENDER/802192C0_3.H"
 #include "FX/CONTPAD_INITCONTROLLERINPUT.H"
 #include "RESMGR/X_PLUS.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
 #include "CINEMA/CINEMA.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

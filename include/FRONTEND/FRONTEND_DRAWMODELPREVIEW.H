@@ -1,5 +1,5 @@
-#ifndef FRONTEND_8041BEA8_6_H
-#define FRONTEND_8041BEA8_6_H
+#ifndef FRONTEND_FRONTEND_DRAWMODELPREVIEW_H
+#define FRONTEND_FRONTEND_DRAWMODELPREVIEW_H
 #include "COMMON/LABEL.H"
 extern void Preview_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v);
 struct Obj8041CAD8;

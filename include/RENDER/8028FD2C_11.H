@@ -1,5 +1,5 @@
-#ifndef RENDER_4_8028FD2C_11_H
-#define RENDER_4_8028FD2C_11_H
+#ifndef RENDER_8028FD2C_11_H
+#define RENDER_8028FD2C_11_H
 #include "COMMON/RESULTS.H"
 extern void *SetN64_GetChunkPayload(int *arg0, int *arg1);
 extern void SetN64_InitializeEffectSlot(struct EffectSlot *arg0);

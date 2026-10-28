@@ -1,7 +1,7 @@
 #ifndef SYSTEM_POLYTRAK2_READQUANTIZEDSTREAMVALUE_H
 #define SYSTEM_POLYTRAK2_READQUANTIZEDSTREAMVALUE_H
 #include "COMMON/LOCALDECODERANGE.H"
-#include "SYSTEM/802609CC.H"
+#include "SYSTEM/POLYTRAK2_DECODESCALARSAMPLES_DATA.H"
 extern f32 Polytrak2_ReadQuantizedStreamValue(LocalDecodeRange *arg0);
 extern unsigned int Polytrak2_ReadCursorBits(unsigned int *arg0, unsigned int arg1);
 extern void Polytrak2_SeekArrayElement(unsigned int *record, int index);

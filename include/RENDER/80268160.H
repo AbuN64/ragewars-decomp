@@ -1,5 +1,5 @@
-#ifndef RENDER_3_80268160_H
-#define RENDER_3_80268160_H
+#ifndef RENDER_80268160_H
+#define RENDER_80268160_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 struct Field_s32_2E0 {

@@ -9,7 +9,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
 #include "RENDER/80293A04_2.H"
-#include "RENDER/80293A04_4.H"
+#include "RENDER/SETN64_DRAWMODE4BACKDROP.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Clears the map-view-active flag, emits a set-color-image display list command for the current frame

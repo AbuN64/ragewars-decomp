@@ -1,5 +1,5 @@
-#ifndef RESMGR_802A0888_4_H
-#define RESMGR_802A0888_4_H
+#ifndef RESMGR_RESMGR_STRING_MEMORY_H
+#define RESMGR_RESMGR_STRING_MEMORY_H
 #include "COMMON/MESSAGESEMAPHORE.H"
 /* Single-message queue used by the acquire/release helpers. */
 typedef struct MessageSemaphore {

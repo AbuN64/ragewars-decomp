@@ -8,7 +8,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/STREAM.H"
-#include "GAME/8025E520.H"
+#include "GAME/SOUNDINFO.H"
 
 short func_8025E500_de(void *soundDescriptor) {
     return ((ControllerCode802591C0 *)soundDescriptor)->group;

@@ -1,5 +1,5 @@
-#ifndef SYSTEM_3_CONTACT_EFFECT_H
-#define SYSTEM_3_CONTACT_EFFECT_H
+#ifndef SYSTEM_CONTACT_EFFECT_H
+#define SYSTEM_CONTACT_EFFECT_H
 #include "TYPES.H"
 #include "COMMON/BOX_CONTACT.H"
 /* Contact effect table indexed by effect id: the handler and its delivery flags (0x10 delivers outside scene

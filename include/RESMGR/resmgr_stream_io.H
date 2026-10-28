@@ -1,5 +1,5 @@
-#ifndef RESMGR_802A0888_8_H
-#define RESMGR_802A0888_8_H
+#ifndef RESMGR_RESMGR_STREAM_IO_H
+#define RESMGR_RESMGR_STREAM_IO_H
 #include "COMMON/INTEGERSTATE14_2.H"
 
 /* An open callback consumes the name and mode byte strings and returns a stream handle. */

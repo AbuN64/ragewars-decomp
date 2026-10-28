@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "SYSTEM/802609CC.H"
+#include "SYSTEM/POLYTRAK2_DECODESCALARSAMPLES_DATA.H"
 
 /* 802609CC.CPP */
 /* Quantizes a float into a range's bit width and writes the value into the packed bit words at an address. */

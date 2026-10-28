@@ -1,5 +1,5 @@
-#ifndef WORLD_2_8024E914_H
-#define WORLD_2_8024E914_H
+#ifndef WORLD_8024E914_H
+#define WORLD_8024E914_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GFX.H"

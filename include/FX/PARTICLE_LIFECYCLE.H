@@ -1,5 +1,5 @@
-#ifndef FX_2_PARTICLE_LIFECYCLE_H
-#define FX_2_PARTICLE_LIFECYCLE_H
+#ifndef FX_PARTICLE_LIFECYCLE_H
+#define FX_PARTICLE_LIFECYCLE_H
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "FX/PARTICLE_ATTACHMENT.H"
 /* The common particle remains 0x1DC bytes; sound and list state follow it. */

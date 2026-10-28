@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/STREAM.H"
-#include "GAME/8025E520.H"
+#include "GAME/SOUNDINFO.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"

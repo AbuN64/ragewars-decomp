@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_8010AC80.H"
 #include "COMMON/STREAM.H"
-#include "GAME/8025E520.H"
+#include "GAME/SOUNDINFO.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"

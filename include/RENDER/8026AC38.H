@@ -1,5 +1,5 @@
-#ifndef RENDER_4_8026AC38_H
-#define RENDER_4_8026AC38_H
+#ifndef RENDER_8026AC38_H
+#define RENDER_8026AC38_H
 #include "TYPES.H"
 struct Material {
     u8 pad[6];

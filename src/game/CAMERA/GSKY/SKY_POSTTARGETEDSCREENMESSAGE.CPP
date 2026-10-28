@@ -6,8 +6,8 @@
 #include "COMMON/CHANNEL.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
 
 /* Posts a text as on-screen messages for a target: the target's messages still in the pool's list at 0xE40

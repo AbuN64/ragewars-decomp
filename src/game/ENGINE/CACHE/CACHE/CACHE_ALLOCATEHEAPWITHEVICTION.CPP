@@ -8,8 +8,8 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_ALLOCATEHEAPWITHEVICTION.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 
 extern void Cache_DetachResourceRequest(void *arg0, struct IntrusiveList *arg1);

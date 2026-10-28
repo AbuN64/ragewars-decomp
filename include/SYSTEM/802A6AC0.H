@@ -1,5 +1,5 @@
-#ifndef SYSTEM_3_802A6AC0_H
-#define SYSTEM_3_802A6AC0_H
+#ifndef SYSTEM_802A6AC0_H
+#define SYSTEM_802A6AC0_H
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct StateFrontendScrollResultsBackward {

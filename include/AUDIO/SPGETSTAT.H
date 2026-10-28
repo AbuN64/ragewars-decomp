@@ -1,4 +1,4 @@
-#ifndef AUDIO_4_802BF280_H
-#define AUDIO_4_802BF280_H
+#ifndef AUDIO_SPGETSTAT_H
+#define AUDIO_SPGETSTAT_H
 extern unsigned int Audio_ReadSignalProcessorStatus();
 #endif

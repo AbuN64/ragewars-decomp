@@ -4,8 +4,8 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
 #include "particle/PARTICLE_RECYCLERELEASEDEFFECTS.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 
 extern void Particle_FinishActorEffects(void *arg0);

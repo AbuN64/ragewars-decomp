@@ -12,8 +12,8 @@ extern s32 D_80100560;
 #include "COMMON/EXTERNS.H"
 #include "AUDIO/HASHTABLE.H"
 #include "sdk/os.h"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 extern void func_80255FB8_de(void *arg0, s32 arg1);
 extern s32 D_80105180[];

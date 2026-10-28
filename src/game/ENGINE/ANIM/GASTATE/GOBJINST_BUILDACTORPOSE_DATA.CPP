@@ -9,7 +9,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "include_asm.h"
 #include "COMMON/STREAM.H"
-#include "GAME/8025E520.H"
+#include "GAME/SOUNDINFO.H"
 #include "COMMON/RESULTS.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 

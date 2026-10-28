@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "UTIL/MEASUREDRECAT8V2.H"
 #include "stddef.h"
-#include "UTIL/802555D0.H"
+#include "UTIL/HEAP.H"
 
 s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
     s32 alignedBlockBytes;

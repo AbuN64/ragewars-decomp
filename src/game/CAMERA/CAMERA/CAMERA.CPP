@@ -39,7 +39,7 @@
 #include "COMMON/EXTERNS_10.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/OBJB.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "abi.h"

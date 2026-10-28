@@ -1,5 +1,5 @@
-#ifndef RENDER_80293A04_4_H
-#define RENDER_80293A04_4_H
+#ifndef RENDER_SETN64_DRAWMODE4BACKDROP_H
+#define RENDER_SETN64_DRAWMODE4BACKDROP_H
 #include "COMMON/INTEGERSTATEB0.H"
 struct GameSession;
 extern void SetN64_DrawMode6(void);

@@ -1,5 +1,5 @@
-#ifndef AUDIO_3_ACMD_H
-#define AUDIO_3_ACMD_H
+#ifndef AUDIO_ACMD_H
+#define AUDIO_ACMD_H
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"

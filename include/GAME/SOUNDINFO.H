@@ -1,5 +1,5 @@
-#ifndef GAME_2_8025E520_H
-#define GAME_2_8025E520_H
+#ifndef GAME_SOUNDINFO_H
+#define GAME_SOUNDINFO_H
 #include "COMMON/STREAM.H"
 #include "TYPES.H"
 

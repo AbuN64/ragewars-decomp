@@ -1,5 +1,5 @@
-#ifndef AUDIO_2_8025D470_H
-#define AUDIO_2_8025D470_H
+#ifndef AUDIO_8025D470_H
+#define AUDIO_8025D470_H
 #include "TYPES.H"
 struct AudioParamsD844 {
     s32 count38, count1C;

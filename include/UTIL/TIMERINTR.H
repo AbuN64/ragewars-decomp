@@ -1,5 +1,5 @@
-#ifndef UTIL_802C09A0_H
-#define UTIL_802C09A0_H
+#ifndef UTIL_TIMERINTR_H
+#define UTIL_TIMERINTR_H
 #include "TYPES.H"
 struct NodeRecAt1C {
     void *next;

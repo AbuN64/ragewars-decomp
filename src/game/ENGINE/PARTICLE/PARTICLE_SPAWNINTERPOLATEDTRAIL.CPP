@@ -4,7 +4,7 @@
 #include "COMMON/OBJECTLINKS1E8.H"
 #include "TYPES.H"
 #include "FX/PARTICLE_SOUND.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/PARTICLE_BUILDMATRIX.H"

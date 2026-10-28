@@ -9,7 +9,7 @@
 #include "COMMON/S1.H"
 #include "sdk/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 
 extern Manager D_801047E0;
 extern s32 D_80100570;

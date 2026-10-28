@@ -1,5 +1,5 @@
-#ifndef RENDER_4_8028FD2C_H
-#define RENDER_4_8028FD2C_H
+#ifndef RENDER_8028FD2C_H
+#define RENDER_8028FD2C_H
 #include "TYPES.H"
 struct ObjectLinks3C0C {
     char pad0[0x3C00];

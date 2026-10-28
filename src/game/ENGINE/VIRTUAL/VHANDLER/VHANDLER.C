@@ -1,5 +1,5 @@
 #include "COMMON/OWNERRECAT8V2.H"
-#include "SCHED/8023A284.H"
+#include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"

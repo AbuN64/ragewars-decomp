@@ -1,5 +1,5 @@
-#ifndef AUDIO_4_802C1D80_H
-#define AUDIO_4_802C1D80_H
+#ifndef AUDIO_LEOINTERRUPT_H
+#define AUDIO_LEOINTERRUPT_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CTX.H"

@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "MULTI/8043E9A8.H"
+#include "MULTI/INITIAL.H"
 #include "COMMON/AIPROFILE.H"
 #include "SYSTEM/8025E280.H"
 

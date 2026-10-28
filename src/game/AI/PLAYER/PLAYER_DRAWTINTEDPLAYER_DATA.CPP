@@ -3,7 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/INTEGERSTATE1250.H"
-#include "RENDER/8022AE90.H"
+#include "RENDER/WEAPON_INITIALIZECHARGEANDSTARTUPCUES_DATA.H"
 #include "TYPES.H"
 
 f32 Graphu64_ApproachValue(f32, f32, s32);

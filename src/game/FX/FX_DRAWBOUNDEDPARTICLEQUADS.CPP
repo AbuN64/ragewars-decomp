@@ -17,7 +17,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SYSTEM/TEXTLOAD_RESETTEXTURECACHE.H"
 #include "LISTS/LISTS.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 
 
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);

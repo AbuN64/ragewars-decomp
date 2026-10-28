@@ -1,5 +1,5 @@
-#ifndef AUDIO_4_802BFE60_H
-#define AUDIO_4_802BFE60_H
+#ifndef AUDIO_GETTHREADID_H
+#define AUDIO_GETTHREADID_H
 #include "TYPES.H"
 struct func_80205494_S3 {
     char pad0[0x14];

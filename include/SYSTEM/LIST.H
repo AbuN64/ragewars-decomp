@@ -1,5 +1,5 @@
-#ifndef SYSTEM_80255C40_3_H
-#define SYSTEM_80255C40_3_H
+#ifndef SYSTEM_LIST_H
+#define SYSTEM_LIST_H
 #include "TYPES.H"
 #include "COMMON/S1.H"
 

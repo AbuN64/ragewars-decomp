@@ -1,5 +1,5 @@
-#ifndef MENU_2_TRACK_TABLES_H
-#define MENU_2_TRACK_TABLES_H
+#ifndef MENU_TRACK_TABLES_H
+#define MENU_TRACK_TABLES_H
 #include "COMMON/KEYRECAT1C.H"
 typedef struct Shared_TrackClip {
     s32 stride, count;

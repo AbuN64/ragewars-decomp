@@ -11,7 +11,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "RENDER/TRIGGERED_UPDATETRIGGEREDMOTION.H"
-#include "RENDER/80206258.H"
+#include "RENDER/MOVINGAI.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"

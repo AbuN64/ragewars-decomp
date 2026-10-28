@@ -1,5 +1,5 @@
-#ifndef RENDER_80291054_2_H
-#define RENDER_80291054_2_H
+#ifndef RENDER_SETN64_H
+#define RENDER_SETN64_H
 #include "COMMON/SESSIONHANDLERROW.H"
 extern void SetN64_BeginFrameDisplayList(void *world);
 struct GameSession;

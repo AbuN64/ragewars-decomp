@@ -36504,7 +36504,7 @@ SECTIONS
         . = MAX(., 0x456D4);
         src/game/MENU/PAK/PAK/PAK_5.CPP.o(.data);
         . = MAX(., 0x456E0);
-        src/game/MULTI/SETUP/SETUP_3.CPP.o(.text);
+        src/game/MULTI/SETUP/SETUP_LOADNAMEEDITBUFFER.CPP.o(.text);
         . = MAX(., 0x45964);
         src/game/MULTI/SETUP/SETUP_SETUPNAMESPINNER.CPP.o(.text);
         . = MAX(., 0x45AB4);
@@ -40534,7 +40534,7 @@ SECTIONS
         src/game/MENU/PAK/VOLUME/PAK_UPDATESCREENMODEAVAILABILITY.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/VOLUME/PAK_ENTERPLAYEROPTIONS.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/PAK/PAK_5.CPP.o(.bss .sbss COMMON);
-        src/game/MULTI/SETUP/SETUP_3.CPP.o(.bss .sbss COMMON);
+        src/game/MULTI/SETUP/SETUP_LOADNAMEEDITBUFFER.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_SETUPNAMESPINNER.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_APPENDNAMECHARACTER.CPP.o(.bss .sbss COMMON);
         src/game/MULTI/SETUP/SETUP_DRAWNAMECURSOR.CPP.o(.bss .sbss COMMON);

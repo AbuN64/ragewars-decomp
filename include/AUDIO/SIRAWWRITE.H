@@ -1,5 +1,5 @@
-#ifndef AUDIO_3_802BFF30_H
-#define AUDIO_3_802BFF30_H
+#ifndef AUDIO_SIRAWWRITE_H
+#define AUDIO_SIRAWWRITE_H
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/EXTERNS_18.H"

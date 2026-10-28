@@ -12,8 +12,8 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "sdk/os.h"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "RESMGR/X_PLUS.H"
 

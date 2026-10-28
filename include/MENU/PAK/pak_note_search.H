@@ -1,5 +1,5 @@
-#ifndef MENU_PAK_NOTE_SEARCH_H
-#define MENU_PAK_NOTE_SEARCH_H
+#ifndef MENU_PAK_PAK_NOTE_SEARCH_H
+#define MENU_PAK_PAK_NOTE_SEARCH_H
 
 #include "TYPES.H"
 

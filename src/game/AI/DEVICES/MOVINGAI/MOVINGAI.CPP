@@ -16,7 +16,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "RENDER/80206258.H"
+#include "RENDER/MOVINGAI.H"
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
 #include "include_asm.h"
 

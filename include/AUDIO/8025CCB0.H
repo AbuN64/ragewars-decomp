@@ -1,5 +1,5 @@
-#ifndef AUDIO_2_8025CCB0_H
-#define AUDIO_2_8025CCB0_H
+#ifndef AUDIO_8025CCB0_H
+#define AUDIO_8025CCB0_H
 #include "TYPES.H"
 struct SongHeader {
     u32 tempo;

@@ -1,5 +1,5 @@
-#ifndef MENU_ITEMS_SCENE_7_H
-#define MENU_ITEMS_SCENE_7_H
+#ifndef MENU_ITEMS_SCENE_SCENE_7_H
+#define MENU_ITEMS_SCENE_SCENE_7_H
 #include "COMMON/OBJB.H"
 #include "COMMON/WORLD.H"
 #include "MENU/8044ACCC.H"

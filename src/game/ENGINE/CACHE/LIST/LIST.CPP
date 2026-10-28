@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "RSP/8026E1F8_5.H"
 #include "COMMON/VECTOR4F.H"
 

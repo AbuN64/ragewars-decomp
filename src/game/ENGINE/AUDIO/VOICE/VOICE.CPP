@@ -18,7 +18,7 @@
 #include "COMMON/S1.H"
 #include "COMMON/STATERECAT34.H"
 #include "RENDER/T2SOUNDELEMENT.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 
 /* 8025A3EC_4.CPP */
 /* Releases occupied nonlocal slots unless their value equals the exclusion. */

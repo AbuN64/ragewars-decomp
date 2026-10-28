@@ -9,7 +9,7 @@
 #include "stddef.h"
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/8025E280.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

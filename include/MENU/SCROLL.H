@@ -1,5 +1,5 @@
-#ifndef MENU_2_SCROLL_H
-#define MENU_2_SCROLL_H
+#ifndef MENU_SCROLL_H
+#define MENU_SCROLL_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 

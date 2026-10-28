@@ -9,8 +9,8 @@
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SCENE/CACHE_ALLOCATERESOURCEAT.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern s32 SetN64_GetDirectoryEntry(s32, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);

@@ -1,5 +1,5 @@
 #include "COMMON/STREAM.H"
-#include "GAME/8025E520.H"
+#include "GAME/SOUNDINFO.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

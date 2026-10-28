@@ -4,7 +4,7 @@
 #include "COMMON/PROBE.H"
 #include "TYPES.H"
 #include "particle/GAMEOBJECT_BUILDQUATERNIONTRANSLATIONMATRIX.H"
-#include "INSTHDR/INSTHDR_2.H"
+#include "INSTHDR/INSTHDR_GETACTORSHADOWRADIUS.H"
 
 /* 8024D018.CPP */
 /* Builds a 4x4 transform from a rotation quaternion (x, y, z, w) and a translation, with a zero fourth column and the corner set to the constant at D_800C8CA0. */

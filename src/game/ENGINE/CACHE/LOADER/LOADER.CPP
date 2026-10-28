@@ -8,8 +8,8 @@
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"
 #include "include_asm.h"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 extern void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2);
 

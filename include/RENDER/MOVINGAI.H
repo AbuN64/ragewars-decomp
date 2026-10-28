@@ -1,5 +1,5 @@
-#ifndef RENDER_80206258_H
-#define RENDER_80206258_H
+#ifndef RENDER_MOVINGAI_H
+#define RENDER_MOVINGAI_H
 #include "COMMON/REC.H"
 #include "COMMON/SHAREDPLAYER.H"
 struct RiderCode80206258 {

@@ -5,8 +5,8 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "MENU/PAK/MENU_CREATEMENUFROMTEMPLATE.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

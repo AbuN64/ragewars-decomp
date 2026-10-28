@@ -15,7 +15,7 @@
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
 #include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
 
 static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {

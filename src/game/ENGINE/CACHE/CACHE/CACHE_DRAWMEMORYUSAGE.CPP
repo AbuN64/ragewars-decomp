@@ -9,8 +9,8 @@
 #include "AUDIO/HASHTABLE.H"
 #include "sdk/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
-#include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
+#include "SYSTEM/LIST.H"
 
 /* Activates a load request: moves it from the pending to the active list and, when its node is set, looks its key up in the request hash table; an existing request with lower priority is removed from the table and finished, releasing its node's data and node when nothing else holds them, while an existing request with at least the same priority wins and this request's node is released and the request finished, returning the existing one; otherwise, or after replacing, the request is inserted, owns its node and optionally drops the node's pending reference. The hash lookup and node release are the inline forms of Cache_RetainResourceByKey's lookup and Cache_ReleasePendingResourceEntry. */
 
@@ -100,7 +100,7 @@ ResourceLoadRequest *Cache_FinalizeResourceLoad(s32 unused, ResourceLoadRequest 
 }
 
 #include "gbi.h"
-#include "UTIL/802555D0.H"
+#include "UTIL/HEAP.H"
 #include "SCENE/802508E0.H"
 
 extern Gfx *g_displayListCursor;

@@ -3,7 +3,7 @@
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "COMMON/PLAYERRECAT64E.H"
-#include "MULTI/8043E9A8.H"
+#include "MULTI/INITIAL.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/EXTERNS_6.H"

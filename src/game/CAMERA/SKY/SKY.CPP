@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
-#include "SCHED/8023A284.H"
+#include "SCHED/SKY_POSTSCREENMESSAGE.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
@@ -20,7 +20,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
-#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/LIST.H"
 #include "GSKY/SKY.H"
 
 /* 8023A284_4.CPP */

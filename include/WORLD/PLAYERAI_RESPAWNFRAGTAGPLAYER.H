@@ -1,5 +1,5 @@
-#ifndef WORLD_8022E938_H
-#define WORLD_8022E938_H
+#ifndef WORLD_PLAYERAI_RESPAWNFRAGTAGPLAYER_H
+#define WORLD_PLAYERAI_RESPAWNFRAGTAGPLAYER_H
 #include "COMMON/RESOURCELOADSTATE.H"
 /* Handle and bookkeeping words cleared together when releasing this resource. */
 typedef struct ResourceLoadState {
