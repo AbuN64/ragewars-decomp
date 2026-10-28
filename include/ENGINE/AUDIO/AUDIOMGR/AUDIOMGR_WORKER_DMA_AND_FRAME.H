@@ -1,5 +1,5 @@
-#ifndef TEXTURE_80256220_13_H
-#define TEXTURE_80256220_13_H
+#ifndef ENGINE_AUDIO_AUDIOMGR_AUDIOMGR_WORKER_DMA_AND_FRAME_H
+#define ENGINE_AUDIO_AUDIOMGR_AUDIOMGR_WORKER_DMA_AND_FRAME_H
 #include "COMMON/CARTRIDGEREADWORKER.H"
 extern s32 * Audiomgr_InitializeDmaState(s32 * * arg0);
 extern s32 Audiomgr_RenderAudioFrame(Work56EC8 *arg0, u32 unused);

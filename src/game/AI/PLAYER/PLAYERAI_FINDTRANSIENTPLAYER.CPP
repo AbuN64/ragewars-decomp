@@ -13,7 +13,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
-#include "RENDER/802192C0_6.H"
+#include "AI/PLAYER/PLAYER_MODEL_AND_HELD_WEAPON_RENDERING.H"
 
 /* Draws the marker over a player that is alive at 0x5E4: loads the player's matrix from its table at
    0x1640 (the first entry while Tsmos_IsFrontendActive reports a shared view, otherwise the entry for the current

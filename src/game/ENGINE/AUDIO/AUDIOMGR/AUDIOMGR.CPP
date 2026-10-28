@@ -3,7 +3,7 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TYPES.H"
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
-#include "TEXTURE/80256220_13.H"
+#include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
 #include "sdk/os.h"
 #include "RESMGR/X_PLUS.H"
 #include "sdk/libgultra/alunlink.h"

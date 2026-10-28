@@ -14,7 +14,7 @@
 #include "TYPES.H"
 #include "SYSTEM/8025E280.H"
 #include "SYSTEM/8025E280_3.H"
-#include "TEXTURE/80256220_13.H"
+#include "ENGINE/AUDIO/AUDIOMGR/AUDIOMGR_WORKER_DMA_AND_FRAME.H"
 #include "sdk/MATH/aigetlen.H"
 #include "sdk/libgultra/OSWRITEBACKDCACHEALL.H"
 #include "sdk/libgultra/alunlink.h"
