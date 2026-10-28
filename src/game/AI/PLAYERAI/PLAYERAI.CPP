@@ -133,8 +133,8 @@ extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *arg0, f32 *arg1);
-extern void GraphU64_ScaleMatrixWorld(void *arg0, s32 arg1, f32 arg2, f32 arg3);
-extern void GraphU64_ConvertMatrixToFixed(void *arg0, void *arg1);
+extern void Graphu64_ScaleMatrixWorld(void *arg0, s32 arg1, f32 arg2, f32 arg3);
+extern void Graphu64_ConvertMatrixToFixed(void *arg0, void *arg1);
 extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 void func_80219490_de(char *object, char *camera) {
@@ -168,7 +168,7 @@ void func_80219490_de(char *object, char *camera) {
     w = ((GameplayCamera *)(camera))->viewWidth + x;
     SetN64_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
-    GraphU64_BuildScaleMatrix(first, ((AnimationSprite *)(object))->scaleX,
+    Graphu64_BuildScaleMatrix(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
     YawMatrix(first, ((AnimationSprite *)(object))->yaw);
     PitchMatrix(first, ((AnimationSprite *)(object))->pitch);
@@ -179,13 +179,13 @@ void func_80219490_de(char *object, char *camera) {
     matrix = (char *)second;
     CopyMatrix(second, first);
     if (D_800E28D8 == 2) {
-        GraphU64_ScaleMatrixWorld(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
+        Graphu64_ScaleMatrixWorld(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
     }
     {
         s32 offset = (D_800D297C << 6) + 0x10;
-        GraphU64_ConvertMatrixToFixed(matrix, object + offset);
+        Graphu64_ConvertMatrixToFixed(matrix, object + offset);
     }
-    GraphU64_TransformPoint(first, object + 0xA8, output);
+    Graphu64_TransformPoint(first, object + 0xA8, output);
     {
         s32 offset = (D_800D297C << 6) + 0x10;
         Geometry_QueueDirectModel(((AnimationSprite *)(object))->model, (s32)(object + offset),
@@ -204,7 +204,7 @@ extern char *D_800D3A40, *D_800D3A44, *D_800D3A48, *D_800D3A54;
 static inline char *reactionText(void *text, MenuSettings *settings) { return *(char **)text; }
 #endif
 extern void SetN64_CopyString(char *,const char *);
-extern void Sky_PostScaledScreenMessage(void *,void *,char *,f32);
+extern void Gsky_PostScaledScreenMessage(void *,void *,char *,f32);
 static inline void nextMessage(s32 *next) {
     (*next)++;
     *next %= 4;
@@ -220,26 +220,26 @@ void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
         if (modes->tag) {
             SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A40, settings));
             SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
             SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A44, settings));
             SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         } else {
             if (!modes->captureFlag) return;
             SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A48, settings));
             SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
             SetN64_CopyString(a->messages[a->messageNext], reactionText(&D_800D3A54, settings));
-            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            if (a->owner) Gsky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
             SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A44, settings));
             SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
             nextMessage(&b->messageNext);
             SetN64_CopyString(b->messages[b->messageNext], reactionText(&D_800D3A58, settings));
-            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            if (b->owner) Gsky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         }
     }
     nextMessage(&b->messageNext);
@@ -708,7 +708,7 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Dra
             Geometry_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
                            &actor->lighting[D_800D297C], 0, actor->field3);
             if (0.0f < player->opacity) {
-                func_8026D4F0_de(context->model, player, actor->fieldB4, 1,
+                Geometry_DrawTintedModelParts(context->model, player, actor->fieldB4, 1,
                     &actor->lighting[D_800D297C], 0, actor->field3, player->red,
                     player->green, player->blue, (s32)player->opacity & 255);
             }
@@ -843,8 +843,8 @@ void func_8021A78C_de(void *playerObject) {
 extern s32 D_80140FF8;
 CQuatern func_8024796C_de(void *actor);
 s16 *func_8022AA9C_de(AimPlayer *arg0, s32 arg1);
-void func_8022B144_de(void *arg0, f32 *arg1);
-s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
+void Player_GetPlayerViewTranslation(void *arg0, f32 *arg1);
+s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
 
 static __inline__ s32 containsFire(s16 **entries,s32 effect) {
  s32 i=0; s16 **p=entries;
@@ -939,11 +939,11 @@ clear:
     aimPlayer->firing = 0;
 spawn:
     if (weapon && weapon->mode != 1) direction = weapon->origin;
-    else func_8022B144_de(aimPlayer, &direction.x);
+    else Player_GetPlayerViewTranslation(aimPlayer, &direction.x);
     position = aimPlayer->position;
     extra = 0;
     if (aimPlayer->unk788 == 2) extra = aimPlayer->unk794;
-    func_802800C0_de(&D_8011D8D0, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
+    Particle_SpawnEffectGroup(&D_8011D8D0, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
                      direction, &aimPlayer->aim, -1, (aimPlayer->movementFlags&0x1000)?5:1);
     if (effect == 0x414 || effect == 0x42D) {
         s32 shots = aimPlayer->shots - 1;
@@ -1087,7 +1087,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->field868 = 0;
     }
     if (D_80145088.settings.local) {
-        count = OvlScene_FindPlacedObjectsByKey(world, -1, model, points, 32);
+        count = Scene_FindPlacedObjectsByKey(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
@@ -1110,7 +1110,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         if (model != 0 && player != 0) {
             floor = 0;
         }
-        if (OvlScene_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
+        if (Scene_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
             goto fallback;
         }
         if (single.kind != D_801371D4) {

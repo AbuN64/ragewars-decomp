@@ -139,10 +139,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[0] & 0xFFFF0000) >> 16;
     offset = w->words[0] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = Frontend_GetScreenData(index);
+        data = Node_GetScreenData(index);
         if (data == 0) {
             Node_AcquireArchiveEntry(index);
-            data = Frontend_GetScreenData(index);
+            data = Node_GetScreenData(index);
             g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[0] = data + offset;
@@ -150,10 +150,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[1] & 0xFFFF0000) >> 16;
     offset = w->words[1] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = Frontend_GetScreenData(index);
+        data = Node_GetScreenData(index);
         if (data == 0) {
             Node_AcquireArchiveEntry(index);
-            data = Frontend_GetScreenData(index);
+            data = Node_GetScreenData(index);
             g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[1] = data + offset;
@@ -161,10 +161,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[2] & 0xFFFF0000) >> 16;
     offset = w->words[2] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = Frontend_GetScreenData(index);
+        data = Node_GetScreenData(index);
         if (data == 0) {
             Node_AcquireArchiveEntry(index);
-            data = Frontend_GetScreenData(index);
+            data = Node_GetScreenData(index);
             g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[2] = data + offset;

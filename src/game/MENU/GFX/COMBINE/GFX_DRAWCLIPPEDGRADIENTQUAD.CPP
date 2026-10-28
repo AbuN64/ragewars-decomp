@@ -168,7 +168,7 @@ void Gfx_SetPrimitiveVertexMode(s32 mode) {
         point.x = 0.0f;
         point.y = 0.0f;
         point.z = D_800DD3FC;
-        GraphU64_TransformPoint(&g_uiPointTransform, &point, &projected);
+        Graphu64_TransformPoint(&g_uiPointTransform, &point, &projected);
         count = 4;
         vertices = ESmem_AllocateFrameHeapHigh(0x40);
         for (i = 0; i < count; i++) {

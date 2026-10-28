@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LABEL.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
-extern void func_8025476C_de(unsigned int value);
+extern void Cache_SetResourceActivityState(unsigned int value);
 extern int func_8025477C_de(void);
 extern PlayerRecord D_800FEB4A[];
 extern s32 Defs_TestBit(void *bits, s32 bit);
@@ -89,7 +89,7 @@ void Focus_UpdateFocusCaption(void) {
                 }
                 Model_SetPreviewModel(record32(), text);
                 Model_SetPreviewRenderFlags(record32(), count);
-                if (func_8025477C_de() == 0) func_8025476C_de(1);
+                if (func_8025477C_de() == 0) Cache_SetResourceActivityState(1);
             } else {
                 Model_SetPreviewModel(record32(), 0);
             }
@@ -107,30 +107,30 @@ void Focus_RefreshProfileStatistics(void) {
     func_8041F2A0_Item *item;
     s32 score;
 
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
     Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
     Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = Match_UpdateRankText(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = Achieve_CountEarnedAchievements(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
-    item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
+    item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
@@ -165,7 +165,7 @@ void Focus_ShowUnlockedEntries(s32 style) {
     MenuWidget *node;
     s32 i;
     for (i = 0; i < 50; i++) {
-        node = Frontend_FindWidgetByResourceId(D_800E3590->root, (u16)D_800DF544[i].id);
+        node = Node_FindWidgetByResourceId(D_800E3590->root, (u16)D_800DF544[i].id);
         if (Defs_TestBit(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
             Frontend_SetWidgetFlag08(node, 1);
             node->alpha = style;

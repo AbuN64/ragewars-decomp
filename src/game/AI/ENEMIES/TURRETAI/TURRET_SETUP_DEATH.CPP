@@ -22,13 +22,13 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 void Turret_Code_IDLE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) != 0) {
-        Nav_RequestActorState(actor, state, 0x3F);
+        Actor_RequestActorState(actor, state, 0x3F);
     }
 }
 
 void Turret_Code_FIRE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) == 0) {
-        Nav_RequestActorState(actor, state, 0x3E);
+        Actor_RequestActorState(actor, state, 0x3E);
     }
 }
 

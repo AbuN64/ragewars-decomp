@@ -66,7 +66,7 @@ void Scene_ResetSelectionState(char *state) {
 
 extern Node_Items_FindPlacedObjectsByKey *func_80256190_de(ListRec *);
 
-s32 OvlScene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
+s32 Scene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
     Shared_World *track = world;
     ListRec list;
     Node_Items_FindPlacedObjectsByKey nodes[64];

@@ -584,9 +584,9 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
    looks from the player's eye (the body position plus the eye offset at 0x73C, raised at least 40.96)
    along the body heading with the player's angles and sway and the aim zoom at 0x7EC, and mode 2 orbits the player at the angle
    D_800C9FA0_de and distance D_800CAB88_eu, which input bits 0x200 and 0x100 turn and 0x800 and 0x400 pull
-   in and push out; the camera is set through func_80238F24_de and the view refreshed through
+   in and push out; the camera is set through Gsky_SetPlayerViewInputs and the view refreshed through
    Camera_UpdateViewProjectionAndEffects before the player is updated through func_8021D774_de. */
-extern void func_80238F24_de(void *, s32, f32, f32, f32, f32, f32, f32, f32, f32, Shared_Quad, s32, f32, f32);
+extern void Gsky_SetPlayerViewInputs(void *, s32, f32, f32, f32, f32, f32, f32, f32, f32, Shared_Quad, s32, f32, f32);
 extern void Camera_UpdateViewProjectionAndEffects(void *);
 extern void func_8021D774_de(PlayerWeaponsUpdatePlayerCamera *);
 
@@ -597,7 +597,7 @@ void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeap
     view = player->view;
     if (view != 0) {
         if (player->cameraMode == 1) {
-            func_80238F24_de(view, 0, body->heading, player->angles[0] + player->sway[0] - player->pitchBase,
+            Gsky_SetPlayerViewInputs(view, 0, body->heading, player->angles[0] + player->sway[0] - player->pitchBase,
                           player->angles[1] + player->sway[1], player->angles[2] + player->sway[2],
                           body->x + player->eye[0], body->y, body->z + player->eye[2],
                           ((player->eye[1] + player->eyeOffset - player->crouch - player->duck) < (40.96f) ? (40.96f) : (player->eye[1] + player->eyeOffset - player->crouch - player->duck)), body->rotation, body->room, player->zoom,
@@ -614,7 +614,7 @@ void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeap
             }
             angle = body->heading + D_800C9FA0_de;
             x = body->x + D_800CAB88_eu * Math_Sinf(angle);
-            func_80238F24_de(view, 1, angle, 0.0f, 0.0f, 0.0f, x, body->y + 81.92f,
+            Gsky_SetPlayerViewInputs(view, 1, angle, 0.0f, 0.0f, 0.0f, x, body->y + 81.92f,
                           body->z + D_800CAB88_eu * Math_Cosf(angle), 0.0f, body->rotation, body->room,
                           0.0f, 3.0f);
         }
@@ -661,7 +661,7 @@ extern struct Shared_Floor *D_80103FCC;
 extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
 extern void Nav_UpdateActorCurrentNode(void *, void *);
-extern void Nav_ApplySupportingPlatformMotion(void *, void *);
+extern void Actor_ApplySupportingPlatformMotion(void *, void *);
 extern void Barrel_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void TeamSelect_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
@@ -679,18 +679,18 @@ extern s32 Unicol_MoveActorWithCollision(void *, CVector3, s32 *);
 struct CCollisionInfo2_t;
 extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollisionInfo2_t *, f32, f32, f32, f32);
 extern void func_80245D30_de(void *, void *, void *, s32);
-extern void GameObject_ReadActorMotionIndex(void *);
-extern s32 func_80246A08_de(void *, s32, s32);
+extern void Gobjinst_ReadActorMotionIndex(void *);
+extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
 extern void func_80246E44_de(void *);
 extern void func_80247004_de(void *);
-extern s32 func_8024B6A0_de(void *, s32, s32);
+extern s32 Gobjinst_RequestAnimationKind(void *, s32, s32);
 
 extern f32 InstHdr_GetActorReach(void *);
 extern s32 InstHdr_GetActorMotionState(void *);
 extern struct Shared_Surface *InstHdr_FindActorModelEntry(void *);
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
-extern f32 GraphU64_GetTrianglePlaneHeight(struct Shared_Model *, f32, f32);
+extern f32 Graphu64_GetTrianglePlaneHeight(struct Shared_Model *, f32, f32);
 extern f32 Region_GetPolygonHeight(struct Shared_Model *, f32, f32);
 extern void Link_DispatchActorLinks(void *, s32, void *);
 extern void Link_DispatchObjectLinks(struct Shared_Model *, s32, void *);
@@ -813,7 +813,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   if (game->local != 0)
   {
-    func_8025476C_de(8);
+    Cache_SetResourceActivityState(8);
   }
   enable = 0;
   player->views1C.view1D8_32.unk1D8 = player;
@@ -861,7 +861,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   if (((u16) player->views5E8.view650_16.state) >= 2)
   {
-    Nav_ApplySupportingPlatformMotion(actor, &actor->views1C.view170_23.unk170);
+    Actor_ApplySupportingPlatformMotion(actor, &actor->views1C.view170_23.unk170);
   }
   net = &D_801462C8.counters;
   if (((net->m_bFragTagOn != 0) && (net->m_FragTagFlipTimer == 0)) && (player->views5D8.view5D8_9.profile->remote == 1))
@@ -904,7 +904,7 @@ void func_80220ED4_de(SharedPlayer *player)
       pos = &player->views0.view8_3.pos;
       if (((model != 0) && (pos != 0)) && (model->flags & 0x40))
       {
-        amount = (f32) ((s32) (GraphU64_GetTrianglePlaneHeight(model, pos->x, pos->z) - Region_GetPolygonHeight(model, pos->x, pos->z)));
+        amount = (f32) ((s32) (Graphu64_GetTrianglePlaneHeight(model, pos->x, pos->z) - Region_GetPolygonHeight(model, pos->x, pos->z)));
         if (amount < 1024.0f)
         {
           func_8025E440_de(1.0f - (amount * 0.0009765625f));
@@ -920,7 +920,7 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     player->views5E8.view66C_29.unk66C = D_800D2988 * player->views5E8.view784_117.unk784;
     func_8022C080_de(player, actor);
-    player->views5E8.view6C8_57.speed = Math_Sqrtf((player->views5E8.view6C0_64.velX * player->views5E8.view6C0_64.velX) + (player->views5E8.view6C4_67.velZ * player->views5E8.view6C4_67.velZ));
+    player->views5E8.view6C8_57.speed = Gu_Sqrtf((player->views5E8.view6C0_64.velX * player->views5E8.view6C0_64.velX) + (player->views5E8.view6C4_67.velZ * player->views5E8.view6C4_67.velZ));
     player->views5E8.view75C_89.unk75C += player->views5E8.view6C8_57.speed * 0.021000001579523087f;
     player->views5E8.view758_87.unk758 += player->views5E8.view6C8_57.speed * 0.00010000000474974513f;
     player->views5E8.view6E8_79.unk6E8 = actor->views0.view8_3.pos;
@@ -928,7 +928,7 @@ void func_80220ED4_de(SharedPlayer *player)
     ground = InstHdr_GetActorMotionState(actor);
     if (((ground != 0) && (player->views5E8.view6D0_71.onGround == 0)) && (player->views5E8.view6CC_70.lastVelY < (-51.19999694824219f)))
     {
-      GameObject_ReadActorMotionIndex(actor);
+      Gobjinst_ReadActorMotionIndex(actor);
     }
     player->views5E8.view6D0_71.onGround = ground;
     player->views5E8.view6CC_70.lastVelY = actor->views1C.view20_2.velY;
@@ -971,7 +971,7 @@ void func_80220ED4_de(SharedPlayer *player)
       }
       player->views5E8.view7F0_133.unk7F0 = target;
       func_80219480_de(&player->views5E8.view878_158.effect, player);
-      GraphU64_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
+      Graphu64_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
       if ((target == 0.0f) && (player->views5E8.view7EC_132.unk7EC < 0.01f))
       {
         player->views5E8.view7EC_132.unk7EC = 0.0f;
@@ -1027,7 +1027,7 @@ void func_80220ED4_de(SharedPlayer *player)
       goal = 40.96f;
     }
     depth = player->views5E8.view718_70.crouch;
-    GraphU64_EaseValueToward(&depth, goal, 0.25f);
+    Graphu64_EaseValueToward(&depth, goal, 0.25f);
     do
     {
       change = depth - player->views5E8.view718_70.crouch;
@@ -1067,7 +1067,7 @@ void func_80220ED4_de(SharedPlayer *player)
         target = 66.56f;
       }
       swim = player->views5E8.view720_90.swim;
-      GraphU64_EaseValueToward(&swim, target, 0.25f);
+      Graphu64_EaseValueToward(&swim, target, 0.25f);
       step = swim - player->views5E8.view720_90.swim;
       if (step < 0.0f)
       {
@@ -1196,9 +1196,9 @@ void func_80220ED4_de(SharedPlayer *player)
           diff.x = player->views0.view8_3.pos.x - entry->pos.x;
           diff.y = player->views0.view8_3.pos.y - entry->pos.y;
           diff.z = player->views0.view8_3.pos.z - entry->pos.z;
-          if (((f32) ((s32) Math_Sqrtf(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
+          if (((f32) ((s32) Gu_Sqrtf(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
           {
-            if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, def->item, &found, 1) != 0)
+            if (Scene_FindPlacedObjectsByKey(&g_world, -1, def->item, &found, 1) != 0)
             {
               world->offset.x = player->views0.view8_3.pos.x - found.pos.x;
               world->offset.y = player->views0.view8_3.pos.y - found.pos.y;
@@ -1276,13 +1276,13 @@ void func_80220ED4_de(SharedPlayer *player)
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
     if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
     {
-      if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
+      if ((Gobjinst_RequestAnimationKind(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
       {
-        func_8024B6A0_de(actor, 7000, 0);
+        Gobjinst_RequestAnimationKind(actor, 7000, 0);
       }
     }
-    first = func_80246A08_de(actor, player->views5E8.view86C_125.unk86C, -1);
-    second = func_80246A08_de(actor, player->views5E8.view86C_125.unk86C, first);
+    first = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.unk86C, -1);
+    second = Gobjinst_ChooseAnimationVariant(actor, player->views5E8.view86C_125.unk86C, first);
     low = second;
     if (second > first)
     {
@@ -1297,15 +1297,15 @@ void func_80220ED4_de(SharedPlayer *player)
     {
       if (actor->views1C.view108_16.anim == low)
       {
-        if (GraphU64_RandomFloat(100.0f) < 0.4f)
+        if (Graphu64_RandomFloat(100.0f) < 0.4f)
         {
-          func_8024B6F4_de(actor, flag, 0);
+          Gobjinst_RequestAnimationIndex(actor, flag, 0);
           actor->views1C.view10E_20.animPending = 0;
         }
       }
       else
       {
-        func_8024B6F4_de(actor, low, 0);
+        Gobjinst_RequestAnimationIndex(actor, low, 0);
         actor->views1C.view10E_20.animPending = 0;
       }
     }
@@ -1868,12 +1868,12 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
         actor->vy = player->speed * D_800C2868_de;
         actor->vz = player->speed * Math_Cosf(position->angle + offset) * scale;
         if (player->effect)
-            Sky_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
+            Gsky_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
         actor->state.timer = -1;
-        Nav_RequestActorState(actor, &actor->state, 0x34);
+        Actor_RequestActorState(actor, &actor->state, 0x34);
     } else if (player->effect)
-        Sky_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
+        Gsky_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
     return 1;
 invalid:
     return 0;
@@ -1958,14 +1958,14 @@ void Player_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
             yawDelta *= 80.0f;
             yawDelta = yawDelta * tuning->yawScale;
             yawDelta = yawDelta * 0.017453294f;
-            GraphU64_EaseValueToward(&body->heading, body->heading + yawDelta, yawRate);
+            Graphu64_EaseValueToward(&body->heading, body->heading + yawDelta, yawRate);
         }
     }
     input = -player->pitch * 80.0f;
     if (input < 0.0f) value = input * -0.71619713f * tuning->downScale;
     else value = input * 0.71619713f * tuning->upScale;
     value = value * 0.017453294f;
-    GraphU64_EaseValueToward(&player->pitchOffset, value, pitchRate);
+    Graphu64_EaseValueToward(&player->pitchOffset, value, pitchRate);
 }
 
 /* 8021CD70_11.CPP */
@@ -2012,11 +2012,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             forwardSpeed=player->views5E8.view6C0_51.unk6C0; forwardSpeedLimit=movementProfile->unk4;
             if (forwardSpeed < 0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
-                player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
+                player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
             } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f && player->views5E8.view7E8_105.unk7E8 != 2) {
-                player->views5E8.view6C0_51.unk6C0=GraphU64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+                player->views5E8.view6C0_51.unk6C0=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
             } else {
-                player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
+                player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
             }
             forwardMotionX = player->views5E8.view6C0_51.unk6C0 * Math_Sinf(body->unk6C + 3.1415927f);
             motion.y = 0;
@@ -2024,11 +2024,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             motion.z = player->views5E8.view6C0_51.unk6C0 * Math_Cosf(body->unk6C + 3.1415927f);
             strafeSpeed=player->views5E8.view6C4_54.unk6C4; strafeSpeedLimit=movementProfile->unk10;
             if (strafeSpeed < 0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
-                player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
+                player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
             } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-                player->views5E8.view6C4_54.unk6C4=GraphU64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
+                player->views5E8.view6C4_54.unk6C4=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
             } else {
-                player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
+                player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
             }
             motion.x += player->views5E8.view6C4_54.unk6C4 * Math_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6C4_54.unk6C4 * Math_Cosf(body->unk6C - 1.5707964f);
@@ -2045,10 +2045,10 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             if (updatedForwardSpeed < strafeSpeedMagnitude) {
 block_35:
-                GraphU64_ClampMotionLength(&motion,movementProfile->unk10);
+                Graphu64_ClampMotionLength(&motion,movementProfile->unk10);
             } else {
 block_36:
-                GraphU64_ClampMotionLength(&motion,movementProfile->unk4);
+                Graphu64_ClampMotionLength(&motion,movementProfile->unk4);
             }
             if (boostReady != 0) {
                 boostButtons = player->views5E8.view6B0_46.unk6B0;
@@ -2063,7 +2063,7 @@ block_36:
                 }
             } else {
 block_42:
-                forwardBoostSpeed = GraphU64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
+                forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
             }
             player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
             motion.x += player->views5E8.view6D4_58.unk6D4 * Math_Sinf(body->unk6C + 3.1415927f);
@@ -2076,7 +2076,7 @@ block_42:
                 player->views5E8.view6D8_59.unk6D8 = -movementProfile->unk18*0.75f;
                 boostApplied=1;
             } else {
-                player->views5E8.view6D8_59.unk6D8=GraphU64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
+                player->views5E8.view6D8_59.unk6D8=Graphu64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
             }
             motion.x += player->views5E8.view6D8_59.unk6D8 * Math_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
@@ -2096,7 +2096,7 @@ block_42:
 
 
 extern CQuatern func_8024796C_de(Actor_func_802238E0_de *);
-extern void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),GraphU64_EaseValueToward(f32 *,f32,f32);
+extern void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_EaseValueToward(f32 *,f32,f32);
 void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *movementProfile) {
     CVector3 v18,v28,v38,v48,v58;
     MatrixF rotationMatrix;
@@ -2133,19 +2133,19 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
     }
     forwardSpeed=player->views5E8.view6C0_51.unk6C0; forwardSpeedLimit=movementProfile->unk4;
     if (forwardSpeed<0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
-        player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
+        player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
     } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f) {
-        player->views5E8.view6C0_51.unk6C0=GraphU64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+        player->views5E8.view6C0_51.unk6C0=Graphu64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
     } else {
-        player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
+        player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
     }
     strafeSpeed=player->views5E8.view6C4_54.unk6C4; strafeSpeedLimit=movementProfile->unk4;
     if (strafeSpeed<0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
-        player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8*0.5f);
+        player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8*0.5f);
     } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-        player->views5E8.view6C4_54.unk6C4=GraphU64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk4*0.75f);
+        player->views5E8.view6C4_54.unk6C4=Graphu64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk4*0.75f);
     } else {
-        player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8);
+        player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8);
     }
     if (boostReady != 0) {
         boostButtons = player->views5E8.view6B0_46.unk6B0;
@@ -2160,7 +2160,7 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
         }
     } else {
 block_31:
-        forwardBoostSpeed = GraphU64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk10);
+        forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk10);
     }
     player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
     if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 1)) {
@@ -2171,7 +2171,7 @@ block_31:
         player->views5E8.view6D8_59.unk6D8=-movementProfile->unkC*0.75f;
         boostApplied=1;
     } else {
-        player->views5E8.view6D8_59.unk6D8=GraphU64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk10*0.75f);
+        player->views5E8.view6D8_59.unk6D8=Graphu64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk10*0.75f);
     }
     if ((boostReady != 0) && (player->views5E8.view6B0_46.unk6B0 & 0x10)) {
         boostApplied = 1;
@@ -2181,7 +2181,7 @@ block_31:
         verticalSpeed = body->unk20;
         upwardSpeedLimit = movementProfile->unk18;
         if (verticalSpeed < upwardSpeedLimit) {
-            body->unk20 = GraphU64_IntegrateBoundedValue(verticalSpeed, movementProfile->unk14, upwardSpeedLimit);
+            body->unk20 = Graphu64_IntegrateBoundedValue(verticalSpeed, movementProfile->unk14, upwardSpeedLimit);
         }
     }
     v18.x = 0.0f;
@@ -2192,16 +2192,16 @@ block_31:
     v28.z = 0;
     bodyRotation = func_8024796C_de(body);
     MatrixFromQuaternion(&bodyRotation, &rotationMatrix);
-    GraphU64_TransformPoint(&rotationMatrix, &v18, &v38);
-    GraphU64_TransformPoint(&rotationMatrix, &v28, &v48);
+    Graphu64_TransformPoint(&rotationMatrix, &v18, &v38);
+    Graphu64_TransformPoint(&rotationMatrix, &v28, &v48);
     player->views5E8.view6E8_63.unk6E8 = (f32) (player->views5E8.view6E8_63.unk6E8 + ((v38.x + v48.x) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));
     if (body->unk20 < 0.0f) {
         GraphU64_AddVec3(&v58, &v38, &v48);
-        body->unk20 = (f32) (body->unk20 - (player->views13B4.view13B4_2.unk13B4[player->views5E8.view650_15.unk650].physics->unk8 * (Math_Sqrtf((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (movementProfile->unk4 * 4.0f)) * player->views5E8.view66C_29.unk66C));
+        body->unk20 = (f32) (body->unk20 - (player->views13B4.view13B4_2.unk13B4[player->views5E8.view650_15.unk650].physics->unk8 * (Gu_Sqrtf((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (movementProfile->unk4 * 4.0f)) * player->views5E8.view66C_29.unk66C));
     }
-    GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, ((player->views5E8.view6C4_54.unk6C4 * 1.8f) + (player->views5E8.view69C_39.unk69C * 16.0f)) * 0.01745329424738884f, 0.04f);
+    Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, ((player->views5E8.view6C4_54.unk6C4 * 1.8f) + (player->views5E8.view69C_39.unk69C * 16.0f)) * 0.01745329424738884f, 0.04f);
     if (boostApplied != 0) {
         player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
         SoundElement_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
@@ -2224,20 +2224,20 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
     f32 amount;
 
     if (!(player->views5E8.view11D8_148.recoil > 0.0f)) {
-        GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
-        GraphU64_EaseValueToward(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
+        Graphu64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
+        Graphu64_EaseValueToward(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
         step = 0.08726647496f;
-        player->views5E8.view730_79.sway[0] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[0], step);
-        player->views5E8.view730_79.sway[1] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[1], step);
-        player->views5E8.view730_79.sway[2] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[2], step);
+        player->views5E8.view730_79.sway[0] = Graphu64_DecayToZero(player->views5E8.view730_79.sway[0], step);
+        player->views5E8.view730_79.sway[1] = Graphu64_DecayToZero(player->views5E8.view730_79.sway[1], step);
+        player->views5E8.view730_79.sway[2] = Graphu64_DecayToZero(player->views5E8.view730_79.sway[2], step);
         if (21.0f < player->views5E8.view75C_90.bobSpeed) {
             player->views5E8.view75C_90.bobSpeed = 21.0f;
         }
         if (0.1f < player->views5E8.view758_88.bobStrength) {
             player->views5E8.view758_88.bobStrength = 0.1f;
         }
-        player->views5E8.view75C_90.bobSpeed = GraphU64_DecayToZero(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
-        player->views5E8.view758_88.bobStrength = GraphU64_DecayToZero(player->views5E8.view758_88.bobStrength, 0.00055555557f);
+        player->views5E8.view75C_90.bobSpeed = Graphu64_DecayToZero(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
+        player->views5E8.view758_88.bobStrength = Graphu64_DecayToZero(player->views5E8.view758_88.bobStrength, 0.00055555557f);
         if (player->views5E8.view758_88.bobStrength < 0.06f) {
             player->views5E8.view75C_90.bobSpeed = player->views5E8.view758_88.bobStrength = 0.0f;
         }
@@ -2248,15 +2248,15 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
             height = 82.94399261f;
         }
         rate = 0.5f;
-        GraphU64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
+        Graphu64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
         amount = player->views5E8.view758_88.bobStrength * (Math_Cosf(phase) * 8.192f);
-        GraphU64_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
-        GraphU64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
+        Graphu64_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
+        Graphu64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
     }
 }
 
 /* 8021CD70_14.CPP */
-/* Starts the effect at offset 0x740 of an object through GraphU64_EaseValueToward at half intensity, with a
+/* Starts the effect at offset 0x740 of an object through Graphu64_EaseValueToward at half intensity, with a
    level taken from the owner at offset 0x18 scaled by D_800C7A38[0], or D_800C7A38[1] without an
    owner. */
 
@@ -2268,7 +2268,7 @@ void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
     } else {
         level = D_800C7A38[1];
     }
-    GraphU64_EaseValueToward(&object->effect740, level, 0.5f);
+    Graphu64_EaseValueToward(&object->effect740, level, 0.5f);
 }
 
 /* 800C78B4.CPP */

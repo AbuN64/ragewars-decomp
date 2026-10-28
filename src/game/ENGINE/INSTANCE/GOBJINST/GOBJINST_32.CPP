@@ -52,7 +52,7 @@ void *func_8024C104_de(Triple *outOffset, void *actor, CGameAnimateState_t *anim
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
     BuildYawMatrix(mtx, ((LevelActor *)o1)->yaw);
-    GraphU64_TransformPoint(mtx, inVec, outVec);
+    Graphu64_TransformPoint(mtx, inVec, outVec);
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
     outVec[2] *= ((LevelActor *)o1)->scale.z;
@@ -73,7 +73,7 @@ void func_8024C1C4_de(char *obj, void *anim)
         switch (e[i].effect) {
         case 6:
         case 7:
-            GraphU64_TransformPoint(obj + 0x74, &e[i].local, &pos);
+            Graphu64_TransformPoint(obj + 0x74, &e[i].local, &pos);
             Events_DeliverContactEffect(obj, obj, e[i].effect, -1, pos, e[i].params);
         }
     }
@@ -111,7 +111,7 @@ void func_8024C34C_de(LevelActor *actor, CGameAnimateState_t *animation) {
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
     BuildYawMatrix(scratch.matrix, actor->yaw);
-    GraphU64_TransformPoint(scratch.matrix, scratch.in, scratch.out);
+    Graphu64_TransformPoint(scratch.matrix, scratch.in, scratch.out);
     scratch.position.x = actor->position0.x +
                           (scratch.out[0] * actor->scale.x);
     scratch.position.y = actor->position0.y;

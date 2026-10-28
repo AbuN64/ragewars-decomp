@@ -61,11 +61,11 @@ extern void CopyMatrix(f32 *arg0, f32 *arg1);
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
+extern void Graphu64_ClampMatrixToFixedRange(f32 *arg0);
 
 extern void Linked_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
+extern void Graphu64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
 extern f32 D_800C5EA0_de;
 
@@ -84,7 +84,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
     axis.z = 0.0f;
     Graphu64_CrossVectors(&cross, &axis, (CVector3 *)&bx);
 
-    magnitude = Math_Sqrtf((cross.x * cross.x) +
+    magnitude = Gu_Sqrtf((cross.x * cross.x) +
                               (cross.y * cross.y) +
                               (cross.z * cross.z));
     if (magnitude == 0.0f) {
@@ -94,7 +94,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
         result.w = one;
     } else {
         GraphU64_ScaleVector(&cross, &cross, one / magnitude);
-        angle = GraphU64_ArcCos((axis.x * *(f32 *)&bx) +
+        angle = Graphu64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
         angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;
@@ -268,7 +268,7 @@ void Fx_AddActorRibbonSamples(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
             if ((s32)node->object == actor && node->value > zero) {
                 CopyMatrix(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 ScaleMatrixLocal(sp10, temp, temp, temp);
-                GraphU64_ClampMatrixToFixedRange(sp10);
+                Graphu64_ClampMatrixToFixedRange(sp10);
                 Linked_AppendRibbonSegment(arg0, node, sp10);
             }
             node = node->next;
@@ -289,13 +289,13 @@ void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, 
             if (node->unk1C == particle &&
                 node->unk24 > zero &&
                 node->unk24 > zero) {
-                GraphU64_ConvertMatrixToFloat(local, packedMatrixWords);
+                Graphu64_ConvertMatrixToFloat(local, packedMatrixWords);
                 scale = D_800C5E98_de;
                 if (particle->desc->renderModel != 0) {
                     scale = D_800C5E9C_de;
                 }
                 ScaleMatrixLocal(local, scale, scale, scale);
-                GraphU64_ClampMatrixToFixedRange(local);
+                Graphu64_ClampMatrixToFixedRange(local);
                 Linked_AppendRibbonSegment(arg0, node, local);
             }
             node = node->unk4;

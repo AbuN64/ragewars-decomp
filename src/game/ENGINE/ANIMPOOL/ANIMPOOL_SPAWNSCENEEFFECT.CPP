@@ -13,8 +13,8 @@
  * from the variant (Scene_FindModelIdIndex, giving up when unknown) and a default variant from the id
  * (Scene_GetModelIdAtIndex), takes a node from the scene's free list when allowed (always with D_8013B290, otherwise
  * while fewer than three are active), moves it to the active list and attaches the counted reference, then
- * initialises it through func_802466A0_de with the position, scale, direction and colour vectors and starts it
- * with func_8024B2D0_de. Returns the effect or 0. */
+ * initialises it through Gobjinst_InitializeActor with the position, scale, direction and colour vectors and starts it
+ * with Gobjinst_DispatchActorTypeUpdate. Returns the effect or 0. */
 
 
 
@@ -27,9 +27,9 @@ extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
 extern s32 Scene_GetModelIdAtIndex(void *, s32);
 
-extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void Gobjinst_InitializeActor(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 
-extern void func_8024B2D0_de(SceneEffect *);
+extern void Gobjinst_DispatchActorTypeUpdate(SceneEffect *);
 
 static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     SceneEffect *effect;
@@ -88,8 +88,8 @@ SceneEffect *Animpool_SpawnSceneEffect(struct CAnimPool *scene, s32 id, s32 vari
     if (effect == 0) {
         return 0;
     }
-    func_802466A0_de(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
-    func_8024B2D0_de(effect);
+    Gobjinst_InitializeActor(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    Gobjinst_DispatchActorTypeUpdate(effect);
     return effect;
 }
 

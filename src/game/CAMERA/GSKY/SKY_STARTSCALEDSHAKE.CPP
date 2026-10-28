@@ -24,7 +24,7 @@ static inline void set_emitter(ObjRecAtE4V1 *obj, f32 a, f32 b, f32 c, f32 scale
     obj->unkE4 = c;
 }
 
-void Sky_StartScaledShake(ObjRecAtE4V1 *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
+void Gsky_StartScaledShake(ObjRecAtE4V1 *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
     if (obj != 0) {
         f32 k = D_800C8628[1];

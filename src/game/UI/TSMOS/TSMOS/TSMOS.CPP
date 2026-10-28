@@ -20,7 +20,7 @@
 extern s32 D_800CBC14;
 extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 extern void Frontend_OpenResourceArchive(char *);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_SetTimerState(s32);
@@ -29,7 +29,7 @@ extern void Frontend_LoadLanguageStringsIfAny(s32);
 
 void InitFrontendMenus(void) {
     func_80255228_de(&D_80106248);
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
     SmSmngr_InitializeScreenManager(0x23, (s32)D_0043C500);

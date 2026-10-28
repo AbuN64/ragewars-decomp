@@ -13,14 +13,14 @@
 extern void *SetN64_GetDirectoryEntry(void *, void *, s32);
 extern void *SetN64_LocatePackSection(void *, void *, s32, s32 *);
 extern void *Scene_GetActorDefinition(void *, u16);
-extern void GameObject_LoadModel(void *, void *, void *, s32);
+extern void Gobjinst_LoadModel(void *, void *, void *, s32);
 typedef struct FrontendModelHeader {
     u8 prefix[0x1C];
     u16 definitionIndex;
 } FrontendModelHeader;
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
  * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
- * the preview (GameObject_LoadModel with extra) and stops. */
+ * the preview (Gobjinst_LoadModel with extra) and stops. */
 void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     Obj8041CAD8At190 *previewState = &preview->sub190;
     Shared_World *scene = &g_world;
@@ -50,7 +50,7 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
                     if (definition->character == expected && definition->kind == preview->unk0) {
                         previewState->modelIndex = i;
                         previewState->type = id;
-                        GameObject_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
+                        Gobjinst_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
                     Cache_UnlockResource(0, (struct Node80253610 *)modelResource);
@@ -103,8 +103,8 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
 #include "gbi.h"
 #include "particle/80271B18_3.H"
 s32 func_80246E44_de(void *);
-s32 func_80249E28_de(void *, void *);
-s32 func_8024B8C4_de(void *);
+s32 Gobjinst_DrawVisibleCachedActor(void *, void *);
+s32 Gobjinst_RotatePoseMatrixBuffers(void *);
 s32 PitchMatrixLocal(void *, f32);
 extern MenuModelScreen D_80141008[];
 void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
@@ -126,9 +126,9 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }
         local10 = self->unk48C;
-        GraphU64_TransformPoint(&view->camera, &local10, &local20);
+        Graphu64_TransformPoint(&view->camera, &local10, &local20);
         if (func_8025477C_de() == 0) {
-            func_8025476C_de(1);
+            Cache_SetResourceActivityState(1);
         }
         Gfx_ConfigurePrimitiveRenderFlags(0x33335);
         gDPPipeSync(g_displayListCursor++);
@@ -138,7 +138,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         Geometry_InitializeModelRenderState();
         draw->unk8 = local20;
         draw->unk1C4 = local20;
-        func_8024B8C4_de(draw);
+        Gobjinst_RotatePoseMatrixBuffers(draw);
         draw->unk8 = local20;
         draw->unk1C4 = local20;
         if (self->unk49C != 0 || draw->unk10E == 0) {
@@ -151,7 +151,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         draw->unk8 = local20;
         draw->unk1C4 = local20;
         Geometry_BeginModelBatch();
-        func_80249E28_de(draw, view);
+        Gobjinst_DrawVisibleCachedActor(draw, view);
         draw->unk140 = D_800DF520;
         draw->unk158 = D_800DF520;
         Geometry_FlushModelBatch();
@@ -162,8 +162,8 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
 #include "COMMON/WORLD.H"
 #include "RESMGR/802A0888.H"
 extern void *Scene_FindActorDefinition(void *, s32, s32, void *);
-extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
-extern void func_8024B2D0_de();
+extern void Gobjinst_InitializeActor(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void Gobjinst_DispatchActorTypeUpdate();
 /* Starts a menu model preview: loads the projection, spawns the model through Scene_FindActorDefinition, keeps a copy
  * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
 void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 previewModelId, s32 extra, CVector3 position, CVector3 facing,
@@ -207,10 +207,10 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 pr
     scales.y = self->unk480.y * (view->height / (f32)D_800E28D4);
     draw->unk50 = scales;
     local70 = self->unk48C;
-    GraphU64_TransformPoint(&view->camera, &local70, &local80);
-    func_802466A0_de(draw, -1, previewModelId, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
+    Graphu64_TransformPoint(&view->camera, &local70, &local80);
+    Gobjinst_InitializeActor(draw, -1, previewModelId, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
                      self->unk480, local60, 0);
-    func_8024B2D0_de(draw);
+    Gobjinst_DispatchActorTypeUpdate(draw);
     if (self->unk0 == 9) {
         Frontend_SelectPreviewModel(self, previewModelId, extra, modelKind);
     }

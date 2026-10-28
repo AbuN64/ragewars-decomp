@@ -53,7 +53,7 @@
 
 /* 80233920.CPP */
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 
 
@@ -64,7 +64,7 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
     AxisWave *wave;
 
     GraphU64_SubtractVectors(&position, &position, &shake->m_vPos);
-    distance = Math_Sqrtf((position.x * position.x) +
+    distance = Gu_Sqrtf((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));
     if (distance < shake->m_Radius) {
@@ -76,7 +76,7 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
         value = Math_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
         goto x_done;
 x_sine:
-        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto x_done;
 x_zero:
         value = 0.0f;
@@ -89,7 +89,7 @@ x_done:
         value = Math_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
         goto y_done;
 y_sine:
-        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto y_done;
 y_zero:
         value = 0.0f;
@@ -102,7 +102,7 @@ y_done:
         value = Math_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
         goto z_done;
 z_sine:
-        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto z_done;
 z_zero:
         value = 0.0f;
@@ -447,7 +447,7 @@ found:
 extern s32 D_80141008;
 extern void MultiplyQuaternions(void*,void*,void*);
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis*);
-extern void GraphU64_MultiplyAffineMatrices(f32*,f32*,f32*);
+extern void Graphu64_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */
 
 /* Actor transform and camera-effect subobjects. */
@@ -499,7 +499,7 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
         adjustedPitch = actor->pitch;
         adjustedRoll = actor->roll;
         if (Cinema_IsSequenceInWindow() == 0) {
-            func_80239EA4_de(cameraTransform, &viewMotionOffsets);
+            Gsky_GetFloorSurfaceShake(cameraTransform, &viewMotionOffsets);
             adjustedRoll += viewMotionOffsets.z;
             gameplayAngleScale = D_800C31F8_de;
             rollHalfAngle = adjustedRoll * gameplayAngleScale;
@@ -532,7 +532,7 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             MultiplyQuaternions(q58.f, q38.f, q48.f);
             MatrixFromQuaternion(q58.f, m68);
             zero=0.0f;
-            GraphU64_BuildTranslationMatrix(mA8, zero, actor->height, zero);
+            Graphu64_BuildTranslationMatrix(mA8, zero, actor->height, zero);
             MatrixFromQuaternion(baseQuaternion, mE8);
             result.x = zero;
             result.y = zero;
@@ -550,16 +550,16 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
                     } while (effect != 0);
                 }
             }
-            GraphU64_MultiplyAffineMatrices(m168, m68, mE8);
-            GraphU64_TransformPoint(m168, &result, &transformed);
-            GraphU64_MultiplyAffineMatrices(m168, m68, mA8);
+            Graphu64_MultiplyAffineMatrices(m168, m68, mE8);
+            Graphu64_TransformPoint(m168, &result, &transformed);
+            Graphu64_MultiplyAffineMatrices(m168, m68, mA8);
             matrix = m1A8;
-            GraphU64_MultiplyAffineMatrices(matrix, m168, mE8);
-            GraphU64_BuildTranslationMatrix(m128,
+            Graphu64_MultiplyAffineMatrices(matrix, m168, mE8);
+            Graphu64_BuildTranslationMatrix(m128,
                 actor->position.value.x + transformed.x,
                 actor->position.value.y + viewMotionOffsets.y + transformed.y,
                 actor->position.value.z + transformed.z);
-            GraphU64_MultiplyAffineMatrices(actor->matrix, matrix, m128);
+            Graphu64_MultiplyAffineMatrices(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
             sequenceAngleScale = D_800C31FC_de;
@@ -588,8 +588,8 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             actor->combined=q48;
             MultiplyQuaternions(actor->rotation.f, q38.f, actor->combined.f);
             MatrixFromQuaternion(q48.f, m68);
-            GraphU64_BuildTranslationMatrix(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
-            GraphU64_MultiplyAffineMatrices(actor->matrix, m68, m128);
+            Graphu64_BuildTranslationMatrix(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
+            Graphu64_MultiplyAffineMatrices(actor->matrix, m68, m128);
         }
 
         actor->cached.x = adjustedPitch;
@@ -624,9 +624,9 @@ const unsigned int D_blob_996b819445e4357a0cbb[2] = {
 
 
 
-extern f32 Math_Sqrtf(f32);
-extern void GraphU64_TransformPoints(void *, CVector3 *, CVector3 *, s32);
-extern void VisData_BuildFrustumPlanes(void *, CVector3 *, CVector3 *, CVector3 *, CVector3 *, CVector3 *);
+extern f32 Gu_Sqrtf(f32);
+extern void Graphu64_TransformPoints(void *, CVector3 *, CVector3 *, s32);
+extern void Visdata_BuildFrustumPlanes(void *, CVector3 *, CVector3 *, CVector3 *, CVector3 *, CVector3 *);
 extern void Region_ComputePointBounds(void *, s32, CVector3 *);
 
 
@@ -678,11 +678,11 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
         pts[4].x = -pts[1].x;
         pts[4].y = -pts[1].y;
         pts[4].z = pts[1].z;
-        radius = Math_Sqrtf(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
+        radius = Gu_Sqrtf(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
     }
     out = &camera->corners[0];
-    GraphU64_TransformPoints(camera->viewOrient, pts, out, 5);
-    VisData_BuildFrustumPlanes(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
+    Graphu64_TransformPoints(camera->viewOrient, pts, out, 5);
+    Visdata_BuildFrustumPlanes(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
     Region_ComputePointBounds(camera->clipBounds, 5, out);
     height = radius * D_800C3208_de;
     camera->volumeBounds[0].x = camera->corners[0].x - radius;
@@ -712,33 +712,33 @@ struct CShakeAxis_t;
 extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 int Cinema_IsSequenceInWindow(void);
-f32 func_802459A0_de(void *);
-void GraphU64_InvertAffineMatrix(f32 *, f32 *);
-void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
-void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
+f32 Cinema_GetSequenceResponse(void *);
+void Graphu64_InvertAffineMatrix(f32 *, f32 *);
+void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+void Graphu64_MultiplyMatrices(f32 *, f32 *, f32 *);
 void GraphU64_PackFixedMatrix(f32 *, void *);
-void GraphU64_IdentityMatrix(void *);
-void GraphU64_ClampMatrixToFixedRange(f32 *);
-void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
+void Graphu64_IdentityMatrix(void *);
+void Graphu64_ClampMatrixToFixedRange(f32 *);
+void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 void CopyMatrix(float *, float *);
-void GraphU64_GetMatrixTranslation(char *, float *);
+void Graphu64_GetMatrixTranslation(char *, float *);
 void BuildYawMatrix(void *, f32);
 void PitchMatrix(void *, f32);
 void YawMatrix(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 f32 Region_GetPolygonHeight(void *, f32, f32);
 int Tsmos_IsFrontendActive(void);
 int Tsmos_GetModeOneFlag(void);
 
 void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
-f32 Math_Sqrtf(f32);
+f32 Gu_Sqrtf(f32);
 void Pak_UpdateDialogList(void *);
 void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
-s32 func_802B6900_de(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
+s32 guLookAtF(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
 
 extern s32 D_80141008;
 extern s32 D_800D297C;
@@ -839,7 +839,7 @@ actor_found:
         }
     }
     frameLights = &camera->lights[D_800D297C];
-    func_802B6900_de(referenceViewMatrix, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+    guLookAtF(referenceViewMatrix, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
     if ((Cinema_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
         Cinema_UpdateSequenceTrack(camera);
     }
@@ -852,12 +852,12 @@ actor_found:
         Weapon_UpdateShakeAxis(camera->unkE0);
     }
     viewOrientationMatrix = (s8 *)camera->viewOrient;
-    GraphU64_GetMatrixTranslation(viewOrientationMatrix, &camera->position.x);
-    GraphU64_InvertAffineMatrix(camera->inverseViewOrient, (f32 *) viewOrientationMatrix);
+    Graphu64_GetMatrixTranslation(viewOrientationMatrix, &camera->position.x);
+    Graphu64_InvertAffineMatrix(camera->inverseViewOrient, (f32 *) viewOrientationMatrix);
     BuildYawMatrix(halfTurnMatrix, 3.1415927f);
-    GraphU64_MultiplyAffineMatrices(composedViewMatrix, halfTurnMatrix, (f32 *) viewOrientationMatrix);
-    GraphU64_InvertAffineMatrix(inverseRotatedView, composedViewMatrix);
-    GraphU64_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
+    Graphu64_MultiplyAffineMatrices(composedViewMatrix, halfTurnMatrix, (f32 *) viewOrientationMatrix);
+    Graphu64_InvertAffineMatrix(inverseRotatedView, composedViewMatrix);
+    Graphu64_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
     CopyMatrix(camera->worldToView, worldToViewMatrix);
     if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Cinema_IsSequenceInWindow() == 0)) {
         f32 inverseBobRateBlend; 
@@ -872,11 +872,11 @@ actor_found:
         if ((bobRateBlend < 0.0f) || (bobBlendLimit = 1.0f, (bobRateBlend > 1.0f))) {
             bobRateBlend = bobBlendLimit;
         }
-        GraphU64_EaseValueToward(&camera->bobAmplitudeX, 0.1f, 0.5f);
-        GraphU64_EaseValueToward(&camera->bobAmplitudeY, 0.05f, 0.5f);
+        Graphu64_EaseValueToward(&camera->bobAmplitudeX, 0.1f, 0.5f);
+        Graphu64_EaseValueToward(&camera->bobAmplitudeY, 0.05f, 0.5f);
         inverseBobRateBlend = 1.0f - bobRateBlend;
-        GraphU64_EaseValueToward(&camera->bobRateX, (bobRateBlend * 0.104719765f) + (inverseBobRateBlend * 0.06981318f), 0.16666667f);
-        GraphU64_EaseValueToward(&camera->bobRateY, (bobRateBlend * 0.087266475f) + (inverseBobRateBlend * 0.03490659f), 0.16666667f);
+        Graphu64_EaseValueToward(&camera->bobRateX, (bobRateBlend * 0.104719765f) + (inverseBobRateBlend * 0.06981318f), 0.16666667f);
+        Graphu64_EaseValueToward(&camera->bobRateY, (bobRateBlend * 0.087266475f) + (inverseBobRateBlend * 0.03490659f), 0.16666667f);
     } else {
         camera->stretchY = 1.0f;
         camera->stretchX = 1.0f;
@@ -900,7 +900,7 @@ actor_found:
         camera->kickStep = clampedKickStep;
     }
     if (Cinema_IsSequenceInWindow() != 0) {
-        fovy = func_802459A0_de(camera);
+        fovy = Cinema_GetSequenceResponse(camera);
     } else {
         fovOverrideState = Tsmos_IsFrontendActive();
         if ((fovOverrideState == 1) && (Tsmos_GetModeOneFlag() == fovOverrideState)) {
@@ -929,7 +929,7 @@ actor_found:
     verticalSlope = verticalSlope / camera->stretchY;
     horizontalSlope = baseHorizontalSlope / camera->stretchX;
     projectionOrFloorScale = 1.0f; 
-    fovy = GraphU64_ArcCos(Math_Sqrtf(projectionOrFloorScale / ((verticalSlope * verticalSlope) + 1.0f)));
+    fovy = Graphu64_ArcCos(Gu_Sqrtf(projectionOrFloorScale / ((verticalSlope * verticalSlope) + 1.0f)));
     fovy = fovy * 57.295776f; 
     farPlaneDistance = camera->farPlane;
     aspect = horizontalSlope / verticalSlope;
@@ -938,17 +938,17 @@ actor_found:
     camera->farHalfWidth = (f32) (farPlaneDistance * horizontalSlope);
     camera->farHalfHeight = (f32) (farPlaneDistance * verticalSlope);
     if (Cinema_IsSequenceInWindow() != 0) {
-        sequenceFarPlane = (s32) func_80245AD8_de();
+        sequenceFarPlane = (s32) Cinema_GetScaledSequenceValue();
         if (sequenceFarPlane > 0) {
             camera->farPlane = (f32) sequenceFarPlane;
         }
     }
     func_802B6F9C_de(right, &camera->perspNorm, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
-    GraphU64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
-    GraphU64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
+    Graphu64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
+    Graphu64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
     viewProjectionMatrix = (s8 *)camera->viewProjection;
-    GraphU64_MultiplyMatrices((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
-    GraphU64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
+    Graphu64_MultiplyMatrices((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
+    Graphu64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
     GraphU64_PackFixedMatrix((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
     CopyMatrix(matrix, worldToViewMatrix);
     state = &D_80140FF8.state;
@@ -956,7 +956,7 @@ actor_found:
         PitchMatrix(matrix, camera->elapsed * 0.010908309f);
         YawMatrix(matrix, camera->elapsed * 0.008726647f);
     }
-    GraphU64_ClampMatrixToFixedRange(matrix);
+    Graphu64_ClampMatrixToFixedRange(matrix);
     lightZeroDirectionX = matrix[0] * 128.0f;
     if (!(lightZeroDirectionX <= 127.0f)) {
         lightZeroDirectionX = 127.0f;
@@ -1008,11 +1008,11 @@ actor_found:
     BuildYawMatrix(camera->faceScreenUpright, camera->roll);
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
-        GraphU64_IdentityMatrix(worldToViewMatrix);
-        GraphU64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
-        GraphU64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
-        GraphU64_MultiplyMatrices(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
-        GraphU64_ClampMatrixToFixedRange(hudProjectionMatrix);
+        Graphu64_IdentityMatrix(worldToViewMatrix);
+        Graphu64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
+        Graphu64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
+        Graphu64_MultiplyMatrices(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
+        Graphu64_ClampMatrixToFixedRange(hudProjectionMatrix);
         GraphU64_PackFixedMatrix(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
     }
     Sky_UpdateSceneEffects(&camera->sceneEffects, camera);
@@ -1046,14 +1046,14 @@ extern s32 D_800E28D0;
 extern Gfx *g_displayListCursor;
 extern Shared_func_80234FDC_S4 D_80140FF8;
 extern void Geometry_SetViewEffect(s32);
-extern void TextLoad_SetTextureEffect(s32);
+extern void Textload_SetTextureEffect(s32);
 extern void Geometry_SelectEffectModes(void);
 extern void TextLoad_ResetTextureCache(void);
 extern s32 Tsmos_IsFrontendActive(void);
 extern s32 GetMenuScreenOwner(void);
 extern void SetN64_ClearDepthRect(void *, s32, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
-extern u32 func_80245AF8_de(void);
+extern u32 Cinema_GetSequenceProperty(void);
 extern void Geometry_SetColorDither(s32);
 extern void Defs_SetupPointLights(void *);
 /* Splits a 0x00BBGGRR fade color into its three fog/fill channels. */
@@ -1121,7 +1121,7 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     gSPLookAtY((*gfx)++, &view->lights[frame][4]);
     Geometry_SetViewEffect(view->effect);
     if (view != &D_80140FF8.view) {
-        TextLoad_SetTextureEffect(view->effect);
+        Textload_SetTextureEffect(view->effect);
     }
     Geometry_SelectEffectModes();
     TextLoad_ResetTextureCache();
@@ -1145,7 +1145,7 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
             blue = view->spin & 0xF8;
         }
         if (Cinema_IsSequenceInWindow() != 0) {
-            color = func_80245AF8_de();
+            color = Cinema_GetSequenceProperty();
             if (color != 0xFF00) {
                 Camera_UnpackColor(color, &red, &green, &blue);
             }
@@ -1213,7 +1213,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     f32 right;
 
     SetN64_OnWorldViewDraw();
-    func_80289084_de(world, view);
+    Scene_DrawVisibleInstances(world, view);
     if (Cinema_IsSequenceInWindow() == 0) {
         func_80228798_de(&D_80145040, view);
     }
@@ -1518,7 +1518,7 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
     Camera_UpdateViewProjectionAndEffects(&state->self);
     view = state->header.views.head;
     if (view != 0) {
-        if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
+        if ((D_80145088.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
             Camera_UpdateViewProjectionAndEffects(view);
         }
         if ((Cinema_IsSequenceInWindow() != 0) || (Cinema_IsSequenceActive() != 0)) {
@@ -1534,7 +1534,7 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
             bounds = &D_801031F0;
             flags = &D_80103220;
             do {
-                if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
+                if ((D_80145088.status[7] != 0) || (Cinema_GetPlaybackPauseState() != 0)) {
                     Camera_UpdateViewProjectionAndEffects(view);
                 }
                 clipMinX = view->clipBounds[0].x;
@@ -1636,7 +1636,7 @@ extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Cache_MarkResourceInUse(s32, s32);
-extern void func_80239FD4_de(RacerViewport *, s32);
+extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
 extern void Pak_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, RacerViewport *);
@@ -1684,7 +1684,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         Camera_SetupViewportAndFog(racer);
         Camera_DrawWorldViewLayers((char *) racer, (char *) world);
         if (racer->effect != 0) {
-            func_80239FD4_de(racer, racer->effectArg);
+            Gsky_DrawViewportEffectNoOp(racer, racer->effectArg);
         }
         Camera_DrawViewportOverlays((View *) racer);
         Camera_DrawAndAdvanceMessages(race, racer);
@@ -1779,7 +1779,7 @@ static inline CCameraText *recycle(struct ScreenMessageOwner *owner, struct Scre
 
     oldest = owner->activeMessages.head;
     if (oldest != 0) {
-        func_80239CE0_de(oldest);
+        Gsky_ClearScreenMessage(oldest);
         func_80255ED8_de(&owner->activeMessages, oldest);
         func_80255D14_de(&pool->freeMessages, oldest);
     }

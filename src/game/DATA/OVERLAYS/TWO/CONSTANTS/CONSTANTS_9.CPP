@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CAD3C[14] =
+const char g_cinemasIndexText[14] =
     "Cinemas index\000";
 #endif
 

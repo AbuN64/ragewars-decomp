@@ -55,7 +55,7 @@ struct FloatState67C {
 
 extern float D_800C2D5C_de;
 
-extern int func_8022BAC0_de(void);
+extern int Player_IsClockPaused(void);
 
 extern float D_800C2D28_de;
 
@@ -111,7 +111,7 @@ extern void func_8022C110_de(PlayerRecAt1450V2 *player);
 extern float D_800C2D2C_de;
 
 
-extern void func_8022C67C_de(void * arg0);
+extern void Player_InitRecordDefaults(void * arg0);
 
 typedef struct ObjRecAtB8 {
     int unk0;

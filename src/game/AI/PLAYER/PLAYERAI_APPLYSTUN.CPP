@@ -35,7 +35,7 @@ void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
             stun = 75.0f;
         }
         player->views5E8.view11D8_149.stun = stun;
-        Nav_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
+        Actor_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
         if (player->views5E8.view1210_153.marker != 0) {
             if (player->views5E4.view5E4_4.holding != 0) {
                 Player_SetPlayerState(player, player, 2);
@@ -46,7 +46,7 @@ void Playerai_ApplyStun(SharedPlayer *player, f32 amount) {
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
             if (((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash == 0) {
-                Gsky_StartFade((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) GraphU64_RandomFloat(7.5f), 0,
+                Gsky_StartFade((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) Graphu64_RandomFloat(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
                 ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash = 3;

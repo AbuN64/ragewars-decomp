@@ -55,7 +55,7 @@ extern s32 D_800DF264_de;
 extern s32 D_800DF26C_de;
 extern s32 Frontend_HasImageFormatMaskComponent(u8 *);
 
-extern const u8 D_800DD1C8[];
+extern const u8 g_printfLowercaseHexDigits[];
 extern const u8 D_800DD1DC[];
 extern const u8 D_800DD1F0[];
 extern const u8 D_800DF230_de[];

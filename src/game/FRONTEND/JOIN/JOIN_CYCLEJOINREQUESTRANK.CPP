@@ -62,7 +62,7 @@ extern unsigned char D_8014DCFB[];
 
 extern void MarkMenuEventHandled(void);
 extern struct CourseOptionsScreen *D_800E39C0;
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
 void Join_ResetJoinRequestEntries(void) {
     s32 i;
@@ -171,11 +171,11 @@ s32 Join_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
     D_800E39C0->timer += delta;
 #if defined(VERSION_DE)
-    node = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x38C);
+    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    node = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
 #elif defined(VERSION_EU_X)
-    node = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x396);
+    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x396);
 #endif
     node->alpha = (u32)(Math_Cosf(D_800E39C0->timer * 0.0033333334f) * 100.0f + 150.0f);
     return 0;
@@ -204,11 +204,11 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) 
         MarkMenuEventHandled();
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
-        oldItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
+        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        oldItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
+        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        oldItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
+        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
 #endif
         oldItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(oldItem, 0);
@@ -219,11 +219,11 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) 
         }
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
-        newItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
+        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        newItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
+        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        newItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
+        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
 #endif
         newItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(newItem, 1);
@@ -243,14 +243,14 @@ s32 Join_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     if (arg3 == 1) {
         MarkMenuEventHandled();
-        oldItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
+        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
         oldItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(oldItem, 0);
         rowCount = D_800E39C0->step;
         temp_v0_2 = D_800E39C0->selection + 1;
         nextSelection = temp_v0_2 % rowCount;
         D_800E39C0->selection = nextSelection;
-        newItem = Frontend_FindWidgetByResourceId(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
+        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
         newItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;

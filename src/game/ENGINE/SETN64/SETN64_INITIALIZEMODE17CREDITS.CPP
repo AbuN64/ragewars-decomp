@@ -36,7 +36,7 @@ void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1) {
     s32 selectionValues;
 
     selectionValues = arg1;
-    if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
+    if (Scene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     object->phase = 2;

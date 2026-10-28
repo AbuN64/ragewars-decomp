@@ -79,7 +79,7 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
         d.x = LV_FIELD(player, f32, 8) - LV_FIELD(self, f32, 8);
         d.y = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
         d.z = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
-        distance = Math_Sqrtf(d.x * d.x + d.y * d.y + d.z * d.z);
+        distance = Gu_Sqrtf(d.x * d.x + d.y * d.y + d.z * d.z);
         if ((f32)(s32)distance < 122.88f) {
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
@@ -121,10 +121,10 @@ void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
             LV_FIELD(self, u32, 0x100) = t1 & ~0x100;
         }
         if (LV_FIELD(hit, s32, 0x128) != 0) {
-            Nav_RequestActorState(self, hit, 0);
+            Actor_RequestActorState(self, hit, 0);
         }
         if (LV_FIELD(self, u16, 0xE4) == 0x64C) {
-            Nav_RequestActorState(self, hit, 2);
+            Actor_RequestActorState(self, hit, 2);
         }
     }
 }
@@ -136,7 +136,7 @@ typedef struct SoundActor {
     char pad104[0x1D8 - 0x104]; SoundParent *parent;
 } SoundActor;
 extern char D_80141008;
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
 #if (!defined(VERSION_EU) && !defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -157,7 +157,7 @@ s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionStat
     emitter = parent->emitter;
     fallback = &D_80141008;
     if (emitter != 0) fallback = emitter;
-    Sky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
+    Gsky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
     index = record->soundIndex;
     callback = gameplaySoundHook(index);
     if (callback != 0) func_8025E11C_de(callback);
@@ -191,7 +191,7 @@ extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
 /** Run the object's optional update hook, then copy one of two byte pairs into the record header. */
 
-void Action_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
+void Actionai_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     Owner *owner = (void *)ownerRecord;
     ObjRecAt30 *event = (void *)eventRecord;
     char *base = owner->track + 0x14;
@@ -209,7 +209,7 @@ void Action_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     }
 }
 
-void Action_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
+void Actionai_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
     motionState->table = &D_800C8274;
     motionState->update = &D_002043E0;
     motionState->unk124 = 0;
@@ -227,7 +227,7 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
     s32 flags;
 
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
-        Nav_RequestActorState(actor, state, 1);
+        Actor_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
             flags = actor->views1C.view100_9.flags & ~0x2000;
@@ -240,13 +240,13 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
         }
     } else {
         D_800C8270_de = 1;
-        Nav_RequestActorState(actor, state, 0);
+        Actor_RequestActorState(actor, state, 0);
         D_800C8270_de = 0;
     }
 }
 
 /* The kind-10 actor initializer installs the state table containing this callback. */
-s32 Action_UpdateTriggerFlag(LevelActor *actor) {
+s32 Actionai_UpdateTriggerFlag(LevelActor *actor) {
     void *resource = actor->definition;
     BreakableDefinition *definition = resource;
     s32 val;
@@ -267,7 +267,7 @@ void Action_ClearBreakableState(void *arg0, void *actorMotionState) {
     state->unk12C = 0;
 }
 
-s32 Action_UpdateHealthFlag(LevelActor *actor) {
+s32 Actionai_UpdateHealthFlag(LevelActor *actor) {
     s32 val;
 
     val = ((BreakableDefinition *)actor->definition)->health;
@@ -308,13 +308,13 @@ void Action_SetBreakableState(void *arg0) {
     }
 }
 
-void Action_SetDrawHandler(void *unused0, void *motionState) {
+void Actionai_SetDrawHandler(void *unused0, void *motionState) {
     Dest *state = motionState;
     state->draw = &D_00204808;
 }
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
-void Action_ClearMotionFlags(LevelActor *object) {
+void Actionai_ClearMotionFlags(LevelActor *object) {
     if (object->motionThreshold > D_800C1A70_de) {
         int flags = object->flags;
         flags &= ~0x2000;
@@ -324,20 +324,20 @@ void Action_ClearMotionFlags(LevelActor *object) {
 }
 
 void Action_RequestStateOn(void *a, void *b) {
-    Nav_RequestActorState(a, b, 0x1); }
+    Actor_RequestActorState(a, b, 0x1); }
 
-void Action_EnableTrigger(Trigger *trigger) {
+void Actionai_EnableTrigger(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void Action_RequestStateOff(void *a, void *b) {
-    Nav_RequestActorState(a, b, 0x0); }
+    Actor_RequestActorState(a, b, 0x0); }
 
-void Action_DisableTrigger(Trigger *trigger) {
+void Actionai_DisableTrigger(Trigger *trigger) {
     Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void Action_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
+void Actionai_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
     f32 remaining = D_800C1A78_de - input->strength * D_800C1A74_de;
     D_800D15E0 = 1;
     if (remaining < 0.0f) {

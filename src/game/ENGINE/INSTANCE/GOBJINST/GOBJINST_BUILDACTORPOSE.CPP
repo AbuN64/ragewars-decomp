@@ -85,15 +85,15 @@ extern void Gastate_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
-extern void GraphU64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
-extern void GraphU64_ConvertMatrixToFloat(PoseMatrix, u8 *);
+extern void Graphu64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
+extern void Graphu64_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void Graphu64_InterpolateQuaternionArc(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Graphu64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
-extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
+extern f32 Graphu64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void Fx_AddActorRibbonSamples(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
@@ -102,9 +102,9 @@ extern void Fx_AddActorRibbonSamples(Owner802A6DF8 *, Shared_PoseActor *, PoseMa
 static inline CVector3 randVec(void) {
     CVector3 v;
 
-    v.x = GraphU64_NextRandom() % 100;
-    v.y = GraphU64_NextRandom() % 100;
-    v.z = GraphU64_NextRandom() % 100;
+    v.x = Graphu64_NextRandom() % 100;
+    v.y = Graphu64_NextRandom() % 100;
+    v.z = Graphu64_NextRandom() % 100;
     return v;
 }
 
@@ -127,7 +127,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
         Graphu64_BuildAxisAngleMatrix(rotm, angle, axis.x, axis.y, axis.z);
-        GraphU64_MultiplyAffineMatrices(cur, inv, rotm);
+        Graphu64_MultiplyAffineMatrices(cur, inv, rotm);
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
@@ -441,7 +441,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                 if (actor->callback != 0) {
                     ((PoseCallback)actor->callback)(m, &ctx);
                 }
-                GraphU64_MultiplyAffineMatrices(*cur, m, *parent);
+                Graphu64_MultiplyAffineMatrices(*cur, m, *parent);
                 if (actor->part.unk_12) {
                     s32 n = 0;
                     if (actor->part.unk_14[0] == i) {
@@ -465,7 +465,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                         PoseMatrix bone;
                         CVector3 r = randVec();
 
-                        GraphU64_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
+                        Graphu64_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
                         func_80247F18_de(actor, &actor->part, bone, actor->pos, r, i);
                     }
                     world->unk_1218 = 0;
@@ -528,7 +528,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                         actor->unk_70 = 0.0f;
                     }
                     if ((actor->flags & 0x20000000) && actor->surface != 0 && (actor->surface->flags & 0x40)) {
-                        f32 ground = GraphU64_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
+                        f32 ground = Graphu64_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
                         f32 d = actor->pos.y + actor->unk_70 + h;
 
                         d -= ground;
@@ -626,7 +626,7 @@ extern void TextLoad_ResetTextureCache(void);
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is
  * patched at the end) or replays the cached list.
  * Byte-exact for us-rev1. */
-void func_80249E28_de(SceneObject *object, struct RacerViewport *camera) {
+void Gobjinst_DrawVisibleCachedActor(SceneObject *object, struct RacerViewport *camera) {
     void **mem;
     void *model;
     void *first;

@@ -244,7 +244,7 @@ void *func_80256190_de(void *intrusiveList) {
     if (node == 0) {
         return 0;
     }
-    index = GraphU64_NextRandom() % (u32)((IntrusiveList *)intrusiveList)->count;
+    index = Graphu64_NextRandom() % (u32)((IntrusiveList *)intrusiveList)->count;
     index--;
     if (index != -1) {
         offset = ((IntrusiveList *)intrusiveList)->nextOffset;

@@ -20,7 +20,7 @@ extern void TranslateMatrix(Matrix *object, f32 x, f32 y, f32 z);
 
 extern void SwapMatrixUpForward(Matrix *object);
 
-extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
+extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
 
 extern s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1);
 
@@ -65,7 +65,7 @@ void Playerai_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *
     GraphU64_AddVec3(&offset, &offset, &actor->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
-    GraphU64_ConvertMatrixToFixed(&matrix, actor->transform1600);
+    Graphu64_ConvertMatrixToFixed(&matrix, actor->transform1600);
 }
 
 /** Report whether the floating field at offset 0x11FC is positive. */

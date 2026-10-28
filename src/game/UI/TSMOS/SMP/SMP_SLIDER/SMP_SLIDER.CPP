@@ -31,7 +31,7 @@
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
-/* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
+/* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
    Adapted from N64Eng_CreateNumericWidget with the record size, tag 0xB63, the tail fields and the dropped N64Eng_SetNumericWidgetValue call changed. */
 
 
@@ -165,14 +165,14 @@ MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 arg0, s32 arg1, s32 arg2) {
     MenuSliderWidget *result;
     MenuSliderWidget *child;
 
-    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x58);
     XPlus_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = Frontend_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
+    child = Node_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
     result->field_44 = child;
     result->field_48 = child->field_18;
     result->field_4C = arg2;

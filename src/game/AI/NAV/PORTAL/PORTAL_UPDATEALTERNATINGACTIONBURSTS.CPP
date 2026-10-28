@@ -32,7 +32,7 @@ extern s32 Particle_CountOwnerListOneEffects(char *, void *);
 struct EffectSystem;
 extern void Particle_AverageOwnerEffectPositions(struct EffectSystem *, void *, CVector3 *);
 
-extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
+extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 struct LevelActor;
 extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
@@ -122,18 +122,18 @@ void Portal_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
         arg0->unk2EC = v0;
         if (v0 == 0) {
             f20 = D_800C1CF4_de;
-            if (GraphU64_RandomFloat(f20) < D_800C1CF8_de) {
+            if (Graphu64_RandomFloat(f20) < D_800C1CF8_de) {
                 arg0->unk2EC = -1;
                 arg0->unk2E4 = arg1->unk1C;
                 arg0->unk2E4 = (s32) ((f32) arg0->unk2E4
-                    + (GraphU64_RandomFloat(f20) * (f32) arg1->unk20));
+                    + (Graphu64_RandomFloat(f20) * (f32) arg1->unk20));
                 arg0->unk2E8 = arg1->unk24;
                 arg0->unk2E8 = (s32) ((f32) arg0->unk2E8
-                    + (GraphU64_RandomFloat(f20) * (f32) arg1->unk28));
+                    + (Graphu64_RandomFloat(f20) * (f32) arg1->unk28));
             } else {
                 arg0->unk2EC = arg1->unk10;
                 arg0->unk2EC = (s32) ((f32) arg0->unk2EC
-                    + (GraphU64_RandomFloat(f20) * (f32) arg1->unk14));
+                    + (Graphu64_RandomFloat(f20) * (f32) arg1->unk14));
             }
         }
     }
@@ -144,13 +144,13 @@ void Portal_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
             f20 = D_800C1CFC_de;
             arg0->unk2EC = arg1->unk10;
             arg0->unk2EC = (s32) ((f32) arg0->unk2EC
-                + (GraphU64_RandomFloat(f20) * (f32) arg1->unk14));
+                + (Graphu64_RandomFloat(f20) * (f32) arg1->unk14));
             arg0->unk2E4 = arg1->unk0;
             arg0->unk2E4 = (s32) ((f32) arg0->unk2E4
-                + (GraphU64_RandomFloat(f20) * (f32) arg1->unk4));
+                + (Graphu64_RandomFloat(f20) * (f32) arg1->unk4));
             arg0->unk2E8 = arg1->unk8;
             f1 = (f32) arg0->unk2E8
-                + (GraphU64_RandomFloat(f20) * (f32) arg1->unkC);
+                + (Graphu64_RandomFloat(f20) * (f32) arg1->unkC);
             arg0->unk240 = 0;
             arg0->unk2E8 = (s32) f1;
         } else {
@@ -164,14 +164,14 @@ void Portal_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
     }
     if (arg0->unk240 > 0) {
         s1 = arg1->unk1C;
-        new_var = GraphU64_RandomFloat(D_800C1D00_de);
+        new_var = Graphu64_RandomFloat(D_800C1D00_de);
         if (1) {
             f20 = D_800C1D04_de;
             s1 = (s32) ((f32) s1 + (new_var * (f32) arg1->unk20));
         }
     } else {
         s1 = arg1->unk0;
-        s1 = (s32) ((f32) s1 + (GraphU64_RandomFloat(D_800C1D08_de) * (f32) arg1->unk4));
+        s1 = (s32) ((f32) s1 + (Graphu64_RandomFloat(D_800C1D08_de) * (f32) arg1->unk4));
         f20 = D_800C1D0C_de;
     }
     {
@@ -197,7 +197,7 @@ void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *conf
         arg0->unk_2E8 = config->unk_8;
         arg0->unk_2E8 =
             (f32) arg0->unk_2E8
-            + GraphU64_RandomFloat(scale) * (f32) config->unk_C;
+            + Graphu64_RandomFloat(scale) * (f32) config->unk_C;
         arg0->unk_2E4 -= 1;
         return;
     }
@@ -215,7 +215,7 @@ void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *conf
         arg0->unk_2E8 = config->unk_24;
         arg0->unk_2E8 =
             (f32) arg0->unk_2E8
-            + GraphU64_RandomFloat(scale) * (f32) config->unk_28;
+            + Graphu64_RandomFloat(scale) * (f32) config->unk_28;
         return;
     }
     arg0->unk_2E8 -= 1;
@@ -223,7 +223,7 @@ void Portal_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *conf
     Particle_AverageOwnerEffectPositions(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
     pos.y = ((Player *)target)->pos.y;
-    if (GraphU64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
+    if (Graphu64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
         arg0->unk_2E8 = 0;
     }
     if (arg0->unk_2E8 == 0) {
@@ -251,17 +251,17 @@ void Portal_UpdateMeterGatedActionBurst(void *object, void *settings) {
         Particle_FindNearestForeignEffectDistance(&D_8011D8D0, controller->player, &value);
         if (value < D_800C1D1C_de) {
             f32 k = D_800C1D24_de;
-            f32 threshold = GraphU64_RandomFloat(D_800C1D20_de) + k;
+            f32 threshold = Graphu64_RandomFloat(D_800C1D20_de) + k;
 
             if ((f32) arg1->unk34 < threshold) {
                 s32 base = arg1->unk24;
                 controller->unk240 =
-                    (s32) ((f32) base + GraphU64_RandomFloat(k) * (f32) arg1->unk28);
+                    (s32) ((f32) base + Graphu64_RandomFloat(k) * (f32) arg1->unk28);
             }
             controller->unk2EC = arg1->unk2C;
             controller->unk2EC =
                 (s32) ((f32) controller->unk2EC +
-                       GraphU64_RandomFloat(k) * (f32) arg1->unk30);
+                       Graphu64_RandomFloat(k) * (f32) arg1->unk30);
             controller->unk2EC += controller->unk240;
         }
     } else {
@@ -397,7 +397,7 @@ void Portal_UpdateRandomActionPulse(void *arg0, void *settings) {
     if (timer == 0) {
         if (o->unk23C == 0 && o->unk240 <= 0) {
             f32 k = D_800C1D2C_de;
-            f32 threshold = GraphU64_RandomFloat(D_800C1D28_de) + k;
+            f32 threshold = Graphu64_RandomFloat(D_800C1D28_de) + k;
 
             if ((f32) i->unk18 < threshold) {
                 o->unk240 = 1;
@@ -406,7 +406,7 @@ void Portal_UpdateRandomActionPulse(void *arg0, void *settings) {
             o->unk2EC = i->unk10;
             o->unk2EC =
                 (s32) ((f32) o->unk2EC +
-                       GraphU64_RandomFloat(k) * (f32) i->unk14);
+                       Graphu64_RandomFloat(k) * (f32) i->unk14);
         }
     } else {
         o->unk2EC = timer - 1;
@@ -419,9 +419,9 @@ void Portal_InitializeRandomActionSettings(void *object, void *settings) {
     f32 k = D_800C6E20;
 
     controller->unk2E4 = aiConfig->unk0;
-    controller->unk2E4 = (s32) ((f32) controller->unk2E4 + (GraphU64_RandomFloat(k) * (f32) aiConfig->unk4));
+    controller->unk2E4 = (s32) ((f32) controller->unk2E4 + (Graphu64_RandomFloat(k) * (f32) aiConfig->unk4));
     controller->unk2E8 = aiConfig->unk8;
-    controller->unk2E8 = (s32) ((f32) controller->unk2E8 + (GraphU64_RandomFloat(k) * (f32) aiConfig->unkC));
+    controller->unk2E8 = (s32) ((f32) controller->unk2E8 + (Graphu64_RandomFloat(k) * (f32) aiConfig->unkC));
     if (aiConfig->unk18 == 0x64) {
         controller->unk240 = 1;
     }

@@ -61,7 +61,7 @@ void Nav_UpdateRoamingWithJumps(Shared_Actor *arg0) {
                 candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
-                    candidate = GraphU64_NextRandom() % table[1];
+                    candidate = Graphu64_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
@@ -93,7 +93,7 @@ store_c:
         }
     }
     if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
-        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (GraphU64_NextRandom() % 7 + 3) * 15;
+        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (Graphu64_NextRandom() % 7 + 3) * 15;
     }
     Nav_RunBehaviorHandler(actor);
     Nav_SteerAlongRoute(actor);
@@ -137,7 +137,7 @@ void Nav_InitRoamingWithJumps(Shared_Actor *arg0)
                 candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
-                    candidate = GraphU64_NextRandom() % table[1];
+                    candidate = Graphu64_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
@@ -180,7 +180,7 @@ void Nav_ChooseNewRoamingGoal(void *arg0)
         candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
 loop:
         if (tries < 10) {
-            candidate = GraphU64_NextRandom() % table[1];
+            candidate = Graphu64_NextRandom() % table[1];
             if (navigation_point_flags((NavigationPoint *)(Portal_GetGraphPoint(table, candidate))) & 0x400) {
                 candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }

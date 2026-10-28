@@ -70,7 +70,7 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
    assembly; the conditional tests the zero case first. */
 
 
-extern void *Frontend_FindWidgetByResourceId(void *, s32);
+extern void *Node_FindWidgetByResourceId(void *, s32);
 
 extern s32 Widget_ListHasFlag100(void *);
 
@@ -162,11 +162,11 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
     if (D_800E5830->started == 0) {
         D_800E5830->started = 1;
 #if defined(VERSION_DE)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
 #elif defined(VERSION_EU_X)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
+        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
         if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80427B08_E25EC[27] =
+const char g_characterAndTimeFormatText[27] =
     "[CHARACTER]\000%d:%02d\000[TIME]\000";
 #endif
 

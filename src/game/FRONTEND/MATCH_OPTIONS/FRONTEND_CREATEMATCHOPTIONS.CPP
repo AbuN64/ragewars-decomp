@@ -33,7 +33,7 @@ extern char *D_800D3494, *D_800D3498, *D_800D349C, *D_800D34A0, *D_800D34A4, *D_
 extern void *Cache_AllocateMemory(s32 size);
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern s32 Join_CountOpenPlayerSlots(void);
-extern void *Frontend_FindWidgetByResourceId(void *root, s32 identifier);
+extern void *Node_FindWidgetByResourceId(void *root, s32 identifier);
 extern void Widget_SetWidgetFlag100(void *record, s32 enable);
 extern void *N64Eng_CreateNumericWidget(s32, s32, s32, s32, s32);
 extern void *SmpButton_CreateListWidget(s32, s32);
@@ -52,17 +52,17 @@ s32 Frontend_CreateMatchOptions(void *root) {
     D_800E4EF0->countCap = Join_CountOpenPlayerSlots();
     switch (D_8014DD98.kind) {
     case 1:
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 0), 1);
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 4), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 0), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 4), 1);
         break;
     case 0:
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 6), 1);
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 4), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 6), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 4), 1);
         break;
     case 2:
     case 3:
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 0), 1);
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 6), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 0), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(root, OPTIONS_TEXT + 6), 1);
         break;
     }
     D_800E4EF0->widget24 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 4, OPTIONS_TEXT + 5, 0, 100, 1);

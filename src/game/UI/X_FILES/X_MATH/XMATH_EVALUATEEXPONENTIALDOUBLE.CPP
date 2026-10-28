@@ -86,7 +86,7 @@ f32 XMath_SquareFloat(f32 arg0) {
 
 void XMath_EvaluatePositiveSquareRoot(f32 arg0) {
     if (!(arg0 <= 0.0f)) {
-        Math_Sqrtf(arg0);
+        Gu_Sqrtf(arg0);
     }
 }
 
@@ -96,7 +96,7 @@ f32 XMath_EvaluateReciprocalSquareRoot(f32 arg0) {
     if (arg0 <= 0.0f) {
         var_f0 = 0.0f;
     } else {
-        var_f0 = Math_Sqrtf(arg0);
+        var_f0 = Gu_Sqrtf(arg0);
     }
     return D_800C5B0C_de / var_f0;
 }
@@ -306,7 +306,7 @@ f32 XMath_EvaluateArcSine(f32 x) {
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
-            root = Math_Sqrtf(x);
+            root = Gu_Sqrtf(x);
         }
     } while (0);
     result = D_800C5C20_de - root * poly;
@@ -340,7 +340,7 @@ f32 XMath_EvaluateArcCosine(f32 x) {
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
-            root = Math_Sqrtf(x);
+            root = Gu_Sqrtf(x);
         }
     } while (0);
     result = *(&D_800C5C40_de + 1) - root * poly;

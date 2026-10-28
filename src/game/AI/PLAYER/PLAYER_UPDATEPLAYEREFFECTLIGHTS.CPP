@@ -183,7 +183,7 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
     if (D_801462C8.flags & 0x4000) {
         player->rangeTimer = 0.0f;
     } else if (player->rangeNodes[2] != 0) {
-        DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
+        Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
         player->rangeNodes[2] = 0;
     }
     if (player->rangeTimer != 0.0f) {
@@ -206,9 +206,9 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
         if (player->rangeTimer < D_800C25B4_de) {
             flicker = 1;
             if (player->rangeTimer < D_800C25B8_de) {
-                flicker ^= (GraphU64_NextRandom() % 100) < 50;
+                flicker ^= (Graphu64_NextRandom() % 100) < 50;
             } else {
-                if ((GraphU64_NextRandom() % 100) < 15) {
+                if ((Graphu64_NextRandom() % 100) < 15) {
                     flicker = 0;
                 }
             }
@@ -221,11 +221,11 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
         }
     } else {
         if (player->rangeNodes[0] != 0) {
-            DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
+            Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
             player->rangeNodes[0] = 0;
         }
         if (player->rangeNodes[1] != 0) {
-            DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
+            Gdynlight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
             player->rangeNodes[1] = 0;
         }
     }

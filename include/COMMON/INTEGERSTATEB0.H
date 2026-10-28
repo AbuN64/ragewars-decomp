@@ -60,7 +60,7 @@ extern float D_800C54B4_de;
 
 
 extern void Frontend_RequestScreenMode(s32 arg0);
-extern void TextLoad_SetTextureEffect(unsigned int value);
+extern void Textload_SetTextureEffect(unsigned int value);
 extern s32 D_800CD77C;
 
 

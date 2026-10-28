@@ -18,7 +18,7 @@
 /* Draws the marker over a player that is alive at 0x5E4: loads the player's matrix from its table at
    0x1640 (the first entry while Tsmos_IsFrontendActive reports a shared view, otherwise the entry for the current
    view D_800D297C), sets the render and geometry modes, fills the five vertices of a green pyramid in
-   D_800FE9F8 and emits them with its four triangles. Adapted from func_8021C698_de with the pyramid, the
+   D_800FE9F8 and emits them with its four triangles. Adapted from Player_DrawRedMarkerPrism with the pyramid, the
    colour and the matrix selection changed. */
 extern s32 D_800D297C;
 
@@ -41,7 +41,7 @@ extern f32 D_800C2CC4_de, D_800C7DB8, D_800C2CCC_de, D_800C7DC0, D_800C2CD4_de, 
 
 extern void Cache_MarkResourceInUse(s32 arg0, void *arg1);
 
-extern void func_8024B8C4_de(void *arg0);
+extern void Gobjinst_RotatePoseMatrixBuffers(void *arg0);
 
 
 
@@ -369,8 +369,8 @@ void func_8022A170_de(struct CPlayerPool_t *playerPool) {
         u8 *base = (u8 *)&D_801462C8;
 
         do {
-            func_8024B8C4_de(node);
-            func_8024B8C4_de(&((struct Shared_ActorView *)(node))->weapon);
+            Gobjinst_RotatePoseMatrixBuffers(node);
+            Gobjinst_RotatePoseMatrixBuffers(&((struct Shared_ActorView *)(node))->weapon);
             func_8022BC94_de(node, 0);
             if (base[0x1D] != 0) {
                 Gobjinst_BuildAnimatedPose(node, 1);
@@ -429,7 +429,7 @@ void func_8022A2A0_de(void *world, void *view) {
             if (cur->unk5DC != view ||
                 argument->unk24 == 1 ||
                 Cinema_IsSequenceFlagTwoSet() != 0) {
-                func_8021C9D8_de(cur, view);
+                Player_DrawPlayerModel(cur, view);
             }
             cur = cur->unk16E0;
         } while (cur != 0);
@@ -454,7 +454,7 @@ void func_8022A328_de(void *world, void *view) {
                 if (viewPlayer->unk5DC == view &&
                     argument->unk24 == 0 &&
                     viewPlayer->unkE4 != D_800CE47C) {
-                    func_8021CBD0_de(viewPlayer, view);
+                    Player_DrawHeldWeapon(viewPlayer, view);
                 }
                 viewPlayer = viewPlayer->unk16E0;
             } while (viewPlayer != 0);
@@ -469,7 +469,7 @@ void func_8022A328_de(void *world, void *view) {
             if (viewPlayer->unk5DC == view &&
                 argument->unk24 == 0 &&
                 viewPlayer->unkE4 != D_800CE47C) {
-                func_8021CBD0_de(viewPlayer, view);
+                Player_DrawHeldWeapon(viewPlayer, view);
             }
             viewPlayer = viewPlayer->unk16E0;
         } while (viewPlayer != 0);

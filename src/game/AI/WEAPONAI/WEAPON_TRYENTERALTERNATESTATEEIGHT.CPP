@@ -29,7 +29,7 @@ extern s32 D_800D30BC;
 
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 static inline s32 can_fire(char *player) {
@@ -49,11 +49,11 @@ static inline s32 can_fire(char *player) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #else
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), Player_GetPlayerIndex(&D_80145040, player),
 #endif
                           D_800C2FB8_de);
         }
@@ -61,7 +61,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void Weapon_TryEnterAlternateStateEight(Shared_Actor *actor, void *attack) {
+void Weaponai_TryEnterAlternateStateEight(Shared_Actor *actor, void *attack) {
     char *player;
     s32 action;
 
@@ -72,10 +72,10 @@ void Weapon_TryEnterAlternateStateEight(Shared_Actor *actor, void *attack) {
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {
-        Nav_RequestActorState(actor, attack, 8);
+        Actor_RequestActorState(actor, attack, 8);
         return;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        Nav_RequestActorState(actor, attack, action);
+        Actor_RequestActorState(actor, attack, action);
     }
 }

@@ -17,7 +17,7 @@
    the float at 0xA0. */
 
 
-void func_8022C67C_de(void *record) {
+void Player_InitRecordDefaults(void *record) {
     ObjRecAtB8 *obj = record;
     float f1 = D_800C2D48_de;
     float f2 = *(float *)((char *)&D_800C2D48_de + 4);
@@ -98,7 +98,7 @@ fire:
     return 1;
 }
 
-s32 func_8022C7F8_de(void *player, LevelActor *actor) {
+s32 Player_TryStartJump(void *player, LevelActor *actor) {
     f32 field6E4;
 
     if (((Shared_ActorView *)player)->unk_0x07E8 == 0) {
@@ -122,7 +122,7 @@ int func_8022C88C_de(void *unused0, void *unused1, s32 *unused2) {
     return 0;
 }
 
-void func_8022C894_de(void *arg0, LevelActor *actor) {
+void Player_ZeroBodyVelocity(void *arg0, LevelActor *actor) {
     actor->position1.x = 0;
     actor->position1.y = 0;
     actor->position1.z = 0;

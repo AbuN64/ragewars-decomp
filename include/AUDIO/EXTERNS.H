@@ -14,7 +14,7 @@
 
 
 
-extern s32 func_802B2620_de(void *sound);
+extern s32 alSndpGetState(void *sound);
 
 static __inline__ void release(SlotCC *slot) {
     OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
@@ -25,7 +25,7 @@ static __inline__ void release(SlotCC *slot) {
     if (slot->key != owner->key) {
         sound = owner->sound;
         func_802B2F00_de(sound, owner->samples[slot->index]);
-        if (func_802B2620_de(sound) != 0) {
+        if (alSndpGetState(sound) != 0) {
             alSndpStop(sound);
         }
         slot->state = -1;

@@ -1339,7 +1339,7 @@ extern CheatCode D_0044FB90[];
 
 extern s32 g_sourcePixelOffset;
 
-extern char D_800C38C4_de;
+extern char g_gameObjectResetAnimInfoText;
 
 extern char D_800D4530;
 
@@ -1748,7 +1748,7 @@ extern char D_800D3924[];
 
 extern f32 D_800C3CD0_de[];
 
-extern char D_800C389C_de;
+extern char g_gameObjectAnimIndexText;
 
 extern void *D_801372C8;
 
@@ -1873,7 +1873,7 @@ extern char D_800D38B4[];
 
 extern int D_800E12F4[];
 
-extern char D_800C4D50_de;
+extern char g_simpPartModelsIndexText;
 
 extern QueueRec D_80108064[];
 

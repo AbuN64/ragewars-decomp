@@ -64,7 +64,7 @@ void Audio_StopVoicesExceptKey(RecordRecAt4V6 *record, s32 value)
       {
         sound = owner->sound;
         func_802B2F00_de(sound, owner->samples[slot->index]);
-        if (func_802B2620_de(sound) != 0)
+        if (alSndpGetState(sound) != 0)
         {
           if (active)
           {
@@ -183,7 +183,7 @@ s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex)
   owner = (OwnerCode8025A3EC8025B5F0 *)ownerAddress;
   soundPlayer = owner->sound;
   func_802B2F00_de(soundPlayer, owner->samples[slot->index]);
-  return func_802B2620_de(soundPlayer);
+  return alSndpGetState(soundPlayer);
 }
 
 void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
@@ -241,7 +241,7 @@ void Audio_StopVoiceSlot(s32 arg0, s16 arg1) {
         s32 idx = ((struct IntegerStateB4 *) base)->unk_0;
         s32 addr = a0 + idx * 2;
         func_802B2F00_de(s1, ((struct ObjRecAtDC *) addr)->unkDC);
-        if (func_802B2620_de(s1) != 0) {
+        if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
         ((struct IntegerStateB4 *) base)->unk_4 = -1;
@@ -362,7 +362,7 @@ void Audio_StopVoicesByKey(RecordRecAt4V6 *record, s32 value) {
             if (slot->key != owner->key) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
-                if (func_802B2620_de(sound) != 0) {
+                if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
                 slot->state = -1;
@@ -385,7 +385,7 @@ void Audio_StopVoicesBySecondaryValue(RecordRecAt4V5 *record, s32 value) {
             if (slot->key != owner->key) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
-                if (func_802B2620_de(sound) != 0) {
+                if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
                 slot->state = -1;
@@ -408,7 +408,7 @@ void Audio_StopVoicesByFlags(RecordRecAt4V4 *record, s32 value) {
             if (slot->key != owner->key) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
-                if (func_802B2620_de(sound) != 0) {
+                if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
                 slot->state = -1;
@@ -468,9 +468,9 @@ s16 Audio_RandomizeSignedRange(s16 arg0, s16 arg1) {
     f32 temp_f21;
     temp_f21 = (f32)arg1;
     temp_f20 = (f32)arg0;
-    return (s16)(s32)(GraphU64_RandomBetween(temp_f21, temp_f20) < 0.0f
-                          ? temp_f20 - GraphU64_RandomBetween(temp_f21, temp_f20)
-                          : temp_f20 + GraphU64_RandomBetween(temp_f21, temp_f20));
+    return (s16)(s32)(Graphu64_RandomBetween(temp_f21, temp_f20) < 0.0f
+                          ? temp_f20 - Graphu64_RandomBetween(temp_f21, temp_f20)
+                          : temp_f20 + Graphu64_RandomBetween(temp_f21, temp_f20));
 }
 
 f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1) {
@@ -485,7 +485,7 @@ f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1) {
     if (second == first) {
         return first;
     }
-    return first + GraphU64_RandomFloat(second - first);
+    return first + Graphu64_RandomFloat(second - first);
 }
 
 f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener)
@@ -580,7 +580,7 @@ void func_8025C578_de(SlotRecAtB4V2 *voiceRecord)
   ownerAddress = (s32)voiceRecord->owner;
   soundPlayer = ownerAddress + 0x84;
   func_802B2F00_de(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[voiceRecord->index]);
-  func_802B2620_de(soundPlayer);
+  alSndpGetState(soundPlayer);
 }
 
 void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord) {
@@ -599,7 +599,7 @@ void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {
         s32 idx = voiceRecord->index;
         s32 addr = a0 + idx * 2;
         func_802B2F00_de(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
-        if (func_802B2620_de(s1) != 0) {
+        if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
         voiceRecord->state = -1;

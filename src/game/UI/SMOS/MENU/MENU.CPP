@@ -41,7 +41,7 @@ static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 con
     s32 saved;
     s32 result;
 
-    if (Frontend_IsValidScreenIndex(value) != 0) {
+    if (Node_IsValidScreenIndex(value) != 0) {
         if (value != D_8014D080->screens[D_8014D080->current].owner) {
             return 0;
         }
@@ -216,7 +216,7 @@ s32 Menu_RouteElementEvent(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra
     s32 result;
     Element *element;
 
-    if (Frontend_IsValidScreenIndex(value) != 0) {
+    if (Node_IsValidScreenIndex(value) != 0) {
         if (value != D_8014D080->screens[D_8014D080->current].owner) {
             return 0;
         }

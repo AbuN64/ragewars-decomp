@@ -18,11 +18,11 @@ void MultiplyQuaternions(void *, void *, void *);
 
 void ScaleMatrixLocal(void *, f32, f32, f32);
 
-s32 GraphU64_LimitVectorLength(f32 *, f32);
+s32 Graphu64_LimitVectorLength(f32 *, f32);
 
 void TranslateMatrix(char *, f32, f32, f32);
 
-void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
 void SwapMatrixUpForward(struct Mtx *);
 
@@ -55,7 +55,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         q.z = 0.0f;
         q.w = Math_Cosf(angle);
     } else {
-        turn = GraphU64_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
+        turn = Graphu64_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
         Graphu64_CrossVectors(&axis, &up, dir);
         GraphU64_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
@@ -99,9 +99,9 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     MultiplyQuaternions(&combined, &rotation, &owner->orientation);
     MatrixFromQuaternion(&combined, model);
     ScaleMatrixLocal(model, owner->scale.x, owner->scale.y, owner->scale.z);
-    GraphU64_LimitVectorLength(&owner->position.x, 20000.0f);
+    Graphu64_LimitVectorLength(&owner->position.x, 20000.0f);
     TranslateMatrix((char *)model, owner->position.x, owner->position.y, owner->position.z);
-    GraphU64_MultiplyAffineMatrices(&owner->transform.right.x, alignment, model);
+    Graphu64_MultiplyAffineMatrices(&owner->transform.right.x, alignment, model);
     SwapMatrixUpForward(&owner->transform);
 }
 

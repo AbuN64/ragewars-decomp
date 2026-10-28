@@ -61,7 +61,7 @@ void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 remainingCalls, f32 i
 void PitchMatrixLocal(void *, f32);
 void TranslateMatrix(char *, f32, f32, f32);
 void ScaleMatrixLocal(void *, f32, f32, f32);
-void GraphU64_ConvertMatrixToFixed(f32 *, PackedMatrixWords *);
+void Graphu64_ConvertMatrixToFixed(f32 *, PackedMatrixWords *);
 
 Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
     f32 matrix[16];
@@ -69,7 +69,7 @@ Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 
     Particle *node;
     IntrusiveList *list;
 
-    rotation = GraphU64_BuildDirectionQuaternion(&normal.x);
+    rotation = Graphu64_BuildDirectionQuaternion(&normal.x);
     if (D_800CDBE8 != 0) return 0;
     D_800CDBE8 = 1;
     list = &scene->lists[surface];
@@ -91,7 +91,7 @@ Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 
         GraphU64_AddVec3(&position, &position, &normal);
         TranslateMatrix((char *)matrix, position.x, position.y, position.z);
         ScaleMatrixLocal(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
-        GraphU64_ConvertMatrixToFixed(matrix, &node->transform.matrix);
+        Graphu64_ConvertMatrixToFixed(matrix, &node->transform.matrix);
     }
 done:
     return node;
@@ -110,11 +110,11 @@ typedef struct Image Image;
 
 extern s32 D_800D297C;
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, s32);
+extern void Graphu64_ConvertMatrixToFloat(f32 *, s32);
 
-extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
+extern void Graphu64_ClampMatrixToFixedRange(f32 *arg0);
 
-extern void GraphU64_GetMatrixTranslation(char *object, float *output);
+extern void Graphu64_GetMatrixTranslation(char *object, float *output);
 
 extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
 
@@ -310,18 +310,18 @@ void Fx_UpdateChildTransform(Node44 *arg0, void *arg1) {
             ((ChildB4 *)arg1)->mat[D_800D297C] = ((ChildB4 *)arg1)->mat[D_800D297C ^ 1];
             ((ChildB4 *)arg1)->unk_B0 = 0;
         } else {
-            GraphU64_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
+            Graphu64_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
             scale = D_800C5EB8_de;
             if (((ParticleEffect *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
             }
             ScaleMatrixLocal(local, scale, scale, scale);
-            GraphU64_ClampMatrixToFixedRange(local);
-            GraphU64_GetMatrixTranslation((char *)local, &((ChildB4 *)arg1)->pos[0]);
+            Graphu64_ClampMatrixToFixedRange(local);
+            Graphu64_GetMatrixTranslation((char *)local, &((ChildB4 *)arg1)->pos[0]);
             if (arg0->unk_3C & 4) {
                 Graphu64_GetMatrixScale(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
-                GraphU64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(arg1 + ((D_800D297C << 6) + 0x28)));
+                Graphu64_ConvertMatrixToFixed(local, (PackedMatrixWords *)(arg1 + ((D_800D297C << 6) + 0x28)));
             }
         }
         ((ChildB4 *)arg1)->unk_8 = arg0->unk_8->unk_8;
@@ -373,13 +373,13 @@ void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 sourceMa
 
     entry = state->object;
     if (entry == arg2 && state->value > 0.0f) {
-        GraphU64_ConvertMatrixToFloat(local, sourceMatrix);
+        Graphu64_ConvertMatrixToFloat(local, sourceMatrix);
         scale = D_800C5EC0_de;
         if (entry->desc->renderModel != 0) {
             scale = D_800C5EC4_de;
         }
         ScaleMatrixLocal(local, scale, scale, scale);
-        GraphU64_ClampMatrixToFixedRange(local);
+        Graphu64_ClampMatrixToFixedRange(local);
         Linked_AppendRibbonSegment(arg0, state, local);
     }
 }

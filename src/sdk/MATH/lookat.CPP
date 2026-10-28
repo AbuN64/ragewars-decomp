@@ -16,18 +16,18 @@ void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux,
     f32 x, y, z, rx, ry, rz, vx, vy, vz, scale, one;
     guMtxIdentF(matrixPointer);
     x = ax - ex; y = ay - ey; z = az - ez;
-    scale = D_800C7870_de / Math_Sqrtf((x*x + y*y) + z*z);
+    scale = D_800C7870_de / Gu_Sqrtf((x*x + y*y) + z*z);
     x *= scale; z *= scale; y *= scale;
     rx = uy*z - uz*y;
     ry = uz*x - ux*z;
     rz = ux*y - uy*x;
     one = D_800C7874_de;
-    scale = one / Math_Sqrtf((rx*rx + ry*ry) + rz*rz);
+    scale = one / Gu_Sqrtf((rx*rx + ry*ry) + rz*rz);
     rx *= scale; rz *= scale; ry *= scale;
     vx = y*rz - z*ry;
     vy = z*rx - x*rz;
     vz = x*ry - y*rx;
-    scale = one / Math_Sqrtf((vx*vx + vy*vy) + vz*vz);
+    scale = one / Gu_Sqrtf((vx*vx + vy*vy) + vz*vz);
     vx *= scale; vy *= scale; vz *= scale;
     matrix[0][0] = rx; matrix[1][0] = ry; matrix[2][0] = rz;
     matrix[0][1] = vx; matrix[1][1] = vy; matrix[2][1] = vz;
@@ -42,7 +42,7 @@ void guLookAt(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux,
 
 
 
-void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
+void guLookAtF(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
                       f32 atX, f32 atY, f32 atZ, f32 upX, f32 upY, f32 upZ) {
     f32 lookX, lookY, lookZ;
     f32 rightX, rightY, rightZ;
@@ -51,7 +51,7 @@ void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
     lookX = atX - eyeX;
     lookY = atY - eyeY;
     lookZ = atZ - eyeZ;
-    scale = D_800C7878_de / Math_Sqrtf(lookX * lookX + lookY * lookY + lookZ * lookZ);
+    scale = D_800C7878_de / Gu_Sqrtf(lookX * lookX + lookY * lookY + lookZ * lookZ);
     lookX *= scale;
     lookZ *= scale;
     lookY *= scale;
@@ -59,14 +59,14 @@ void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
     rightY = upZ * lookX - upX * lookZ;
     rightZ = upX * lookY - upY * lookX;
     one = D_800C787C_de;
-    scale = one / Math_Sqrtf(rightX * rightX + rightY * rightY + rightZ * rightZ);
+    scale = one / Gu_Sqrtf(rightX * rightX + rightY * rightY + rightZ * rightZ);
     rightX *= scale;
     rightZ *= scale;
     rightY *= scale;
     upX = lookY * rightZ - lookZ * rightY;
     upY = lookZ * rightX - lookX * rightZ;
     upZ = lookX * rightY - lookY * rightX;
-    scale = one / Math_Sqrtf(upX * upX + upY * upY + upZ * upZ);
+    scale = one / Gu_Sqrtf(upX * upX + upY * upY + upZ * upZ);
     upX *= scale;
     upY *= scale;
     upZ *= scale;

@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "AI/NAV/8020EAE0_7.H"
 
-extern s32 Nav_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
+extern s32 Route_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 Portal_SearchRelatedGoalPath(void *arg0, s32 arg1, s32 arg2, void *arg3);
 
@@ -30,7 +30,7 @@ s32 Nav_UpdateRouteIntermediateGoal(Func8020ED50Arg *owner) {
         if (owner->field4 == owner->field10) {
             return 1;
         }
-        if (Nav_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
+        if (Route_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
             owner->fieldC = Portal_SearchRelatedGoalPath(base, owner->field4, owner->field10, owner);
         }
     }

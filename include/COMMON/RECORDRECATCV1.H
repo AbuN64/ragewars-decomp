@@ -51,7 +51,7 @@ extern s32 Control_PeekPakChange(s32);
 
 extern void Pak_ProbeStatus(s32);
 void Pak_ProbeStatus(s32);
-s32 Pak_GetStatus(s32);
+s32 Note_GetStatus(s32);
 
 extern char D_800DCD80[];
 

@@ -24,9 +24,9 @@ extern void Portal_DispatchActorBehavior(void *);
 
 extern char D_8013B364[];
 
-extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
+extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 extern s32 Wheel_GetDirectionSector(f32);
-extern s32 Nav_GetRouteRelation(char *, s32, s32);
+extern s32 Route_GetRouteRelation(char *, s32, s32);
 
 extern void Nav_SteerAlongRoute(CloseAttackBrain *),Nav_UpdatePlayerSteering(CloseAttackBrain *),Nav_SelectPlayerState(CloseAttackBrain *);
 extern struct {char pad[0xC];unsigned short flags;} *Portal_GetGraphPoint(char *,int);
@@ -82,13 +82,13 @@ void Nav_UpdateRangedCombat(CloseAttackActor *actor) {
             temp_f20 = temp_f21 * 0.6f;
             brain->timer = temp_v0;
             if (temp_v0 <= 0) {
-                brain->timer=GraphU64_NextRandom()%4+12;
-                brain->pattern = GraphU64_NextRandom() % 2;
-                brain->distance = (GraphU64_NextRandom() % 250000) + 0x57E40;
+                brain->timer=Graphu64_NextRandom()%4+12;
+                brain->pattern = Graphu64_NextRandom() % 2;
+                brain->distance = (Graphu64_NextRandom() % 250000) + 0x57E40;
             }
             temp_s0_2 = &temp_s0->pos;
             Nav_SteerTowardPoint(brain, temp_s0_2, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
-            temp_f0 = GraphU64_GetSquaredDistance(temp_s0_2, &brain->player->pos);
+            temp_f0 = Graphu64_GetSquaredDistance(temp_s0_2, &brain->player->pos);
             temp_f1 = temp_f0 + 10000.0f;
             distance = (f32) brain->distance;
             if (temp_f1 < 0.0f) {
@@ -167,12 +167,12 @@ block_41:
             brain->routeNodes[0] = -1;
             temp_v0_6 = brain->fireTimer - 1;
             brain->fireTimer = temp_v0_6;
-            if ((temp_v0_6 == 0) && ((GraphU64_NextRandom() % 100) < (s32) temp_f21)) {
+            if ((temp_v0_6 == 0) && ((Graphu64_NextRandom() % 100) < (s32) temp_f21)) {
                 temp_v1_3 = brain->player;
                 temp_v1_3->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((GraphU64_NextRandom() % 2) + 2) * 0xF;
+                brain->fireTimer = ((Graphu64_NextRandom() % 2) + 2) * 0xF;
             }
             Portal_DispatchActorBehavior(brain);
         } else {
@@ -182,7 +182,7 @@ block_41:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (Nav_GetRouteRelation(routes, brain->route, route) == 0) {
+            if (Route_GetRouteRelation(routes, brain->route, route) == 0) {
                 Scaled_SetBehaviourState(brain,1);
             }
         }
@@ -228,13 +228,13 @@ void Nav_UpdateCloseCombat(CloseAttackActor *actor) {
             speed = Scaled_ScaleCharacterSettingByDifficulty(brain);
             strafe = speed;
             if (--brain->timer <= 0) {
-                brain->timer = GraphU64_NextRandom() % 4 + 2;
-                brain->pattern = GraphU64_NextRandom() % 2;
-                brain->distance = GraphU64_NextRandom() % 32400 + 10000;
+                brain->timer = Graphu64_NextRandom() % 4 + 2;
+                brain->pattern = Graphu64_NextRandom() % 2;
+                brain->distance = Graphu64_NextRandom() % 32400 + 10000;
             }
             pos = &target->pos;
             Nav_SteerTowardPoint(brain, pos, 2.0f, Scaled_UpdateDifficultyAimJitter(brain));
-            dist = GraphU64_GetSquaredDistance(pos, &brain->player->pos);
+            dist = Graphu64_GetSquaredDistance(pos, &brain->player->pos);
             if (dist > 377487.3f) {
                 brain->combat = 5;
                 Scaled_SetBehaviourState(brain, 6);
@@ -316,11 +316,11 @@ halt:
                 brain->player->strafe = 0.0f;
             }
             brain->routeNodes[0] = -1;
-            if (--brain->fireTimer == 0 && (GraphU64_NextRandom() % 100) < (s32)speed) {
+            if (--brain->fireTimer == 0 && (Graphu64_NextRandom() % 100) < (s32)speed) {
                 brain->player->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((GraphU64_NextRandom() % 1) + 2) * 0xF;
+                brain->fireTimer = ((Graphu64_NextRandom() % 1) + 2) * 0xF;
             }
             Portal_DispatchActorBehavior(brain);
         } else {
@@ -330,7 +330,7 @@ halt:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (Nav_GetRouteRelation(routes, brain->route, route) == 0) {
+            if (Route_GetRouteRelation(routes, brain->route, route) == 0) {
                 Scaled_SetBehaviourState(brain, 1);
             }
         }
@@ -338,7 +338,7 @@ halt:
 }
 
 /* 802106E0_13.CPP */
-/* Runs a computer player's chase state: refreshes its view through Nav_RunBehaviorHandler and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Wheel_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through Portal_DispatchActorBehavior; losing sight of the target or failing to re-route to the target's new node through Nav_GetRouteRelation also returns it to roaming. */
+/* Runs a computer player's chase state: refreshes its view through Nav_RunBehaviorHandler and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Wheel_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through Portal_DispatchActorBehavior; losing sight of the target or failing to re-route to the target's new node through Route_GetRouteRelation also returns it to roaming. */
 
 
 void Nav_UpdateVisiblePursuit(Self *actor) {
@@ -371,16 +371,16 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
     }
     node = target->brain->route;
     if (brain->visible != 0) {
-        if (GraphU64_GetSquaredDistance(&target->pos, &brain->player->pos) < 360000.0f) {
+        if (Graphu64_GetSquaredDistance(&target->pos, &brain->player->pos) < 360000.0f) {
             brain->combat = 13;
             Scaled_SetBehaviourState(brain, 7);
             return;
         }
         speed = Scaled_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
         if (--brain->timer <= 0) {
-            brain->timer = GraphU64_NextRandom() % 4 + 12;
-            brain->pattern = GraphU64_NextRandom() % 2;
-            roll = GraphU64_NextRandom();
+            brain->timer = Graphu64_NextRandom() % 4 + 12;
+            brain->pattern = Graphu64_NextRandom() % 2;
+            roll = Graphu64_NextRandom();
             if (roll / 2 * 2 == roll - 1) {
                 brain->pattern = 2;
             }
@@ -418,7 +418,7 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
     }
     if (node != brain->node) {
         brain->node = node;
-        if (Nav_GetRouteRelation(D_8013B364, brain->route, node) == 0) {
+        if (Route_GetRouteRelation(D_8013B364, brain->route, node) == 0) {
             brain->target = 0;
             Scaled_SetBehaviourState(brain, 2);
         }
@@ -436,10 +436,10 @@ void Nav_InitPursuitStrafe(void *closeAttackActor) {
     inner->state = 0;
     Scaled_ResetBehaviorState(inner);
 
-    r1 = GraphU64_NextRandom();
+    r1 = Graphu64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
 
-    r2 = GraphU64_NextRandom();
+    r2 = Graphu64_NextRandom();
     inner->pattern = r2 % 2;
 }
 #endif

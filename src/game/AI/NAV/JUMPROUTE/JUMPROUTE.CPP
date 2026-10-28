@@ -52,7 +52,7 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
     }
 
     if (((Brain_func_80212D78_eu_x *)state)->jumpTimer < 0) {
-        random = GraphU64_NextRandom();
+        random = Graphu64_NextRandom();
         ((Brain_func_80212D78_eu_x *)state)->jumpTimer = ((random % 5) + 3) * 15;
     }
 

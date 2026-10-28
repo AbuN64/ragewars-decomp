@@ -82,7 +82,7 @@ void Graphu64_ResetRandomSeeds(void) {
     g_secondaryRandomSeed = 0xE3F635E3;
 }
 
-s32 GraphU64_NextRandom(void) {
+s32 Graphu64_NextRandom(void) {
     u32 seed;
 
     seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
@@ -99,7 +99,7 @@ s32 Graphu64_NextRandomValue(void) {
 }
 
 /** LCG PRNG step scaled into [0, arg0 * D_800C9A38) as a float. */
-f32 GraphU64_RandomFloat(f32 range) {
+f32 Graphu64_RandomFloat(f32 range) {
     f64 value;
     s32 randomBits;
     u32 seed;
@@ -114,7 +114,7 @@ f32 GraphU64_RandomFloat(f32 range) {
     return (f32)value * range * D_800C9A38;
 }
 
-f32 GraphU64_ArcCos(f32 cosineValue) {
+f32 Graphu64_ArcCos(f32 cosineValue) {
     f32 tableCoordinate;
     f32 interpolatedAngle;
     f32 lowerSample;
@@ -144,7 +144,7 @@ f32 GraphU64_ArcCos(f32 cosineValue) {
     return D_800CD3D8;
 }
 
-f32 GraphU64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
+f32 Graphu64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
     if (velocity < 0.0f) {
         if (value <= -limit) {
             return value;
@@ -170,7 +170,7 @@ f32 GraphU64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
     return value;
 }
 
-f32 GraphU64_DecayToZero(f32 value, f32 rate) {
+f32 Graphu64_DecayToZero(f32 value, f32 rate) {
     f32 zero;
 
     zero = 0.0f;
@@ -188,7 +188,7 @@ f32 GraphU64_DecayToZero(f32 value, f32 rate) {
     return value;
 }
 
-f32 GraphU64_ApproachValue(f32 current, f32 target, f32 rate) {
+f32 Graphu64_ApproachValue(f32 current, f32 target, f32 rate) {
     f32 value;
     value = current;
     if (value < target) {
@@ -206,7 +206,7 @@ f32 GraphU64_ApproachValue(f32 current, f32 target, f32 rate) {
     return value;
 }
 
-void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate) {
+void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     f32 current;
     f32 next;
 
@@ -314,7 +314,7 @@ f32 Graphu64_GetNegatedWrappedDifference(f32 angleA, f32 angleB) {
     return -difference;
 }
 
-f32 GraphU64_RandomBetween(f32 shakeMin, f32 shakeMax) {
+f32 Graphu64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     f32 blend;
     u32 seed;
     s32 randomValue;
@@ -384,7 +384,7 @@ void Graphu64_NormalizeEdgeHorizontal(void *arg0)
             (o->unk20 * o->unk20);
     zOut = 0.0f;
     if (magSq != 0.0f) {
-        mag = Math_Sqrtf(magSq);
+        mag = Gu_Sqrtf(magSq);
         magSq = *(f32 *)&D_800C49A0_de / mag;
         o->unk24 = o->unk18 * magSq;
         o->unk28 = o->unk1C * magSq;
@@ -408,7 +408,7 @@ void Graphu64_NormalizeEdgeDirection(void *arg0)
             (o->unk20 * o->unk20);
     zOut = 0.0f;
     if (magSq != 0.0f) {
-        mag = Math_Sqrtf(magSq);
+        mag = Gu_Sqrtf(magSq);
         magSq = D_800C49A4_de / mag;
         o->unk24 = o->unk18 * magSq;
         o->unk28 = o->unk1C * magSq;
@@ -466,7 +466,7 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
     yLook = yAt - yEye;
     zLook = zAt - zEye;
 
-    len = D_800C49A8_de / Math_Sqrtf(xLook * xLook + yLook * yLook + zLook * zLook);
+    len = D_800C49A8_de / Gu_Sqrtf(xLook * xLook + yLook * yLook + zLook * zLook);
     xLook *= len;
     yLook *= len;
     zLook *= len;
@@ -478,7 +478,7 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
         xRight = (&D_800C49A8_de)[1];
     }
     one = D_800C49B0_de;
-    len = one / Math_Sqrtf(xRight * xRight + yRight * yRight + zRight * zRight);
+    len = one / Gu_Sqrtf(xRight * xRight + yRight * yRight + zRight * zRight);
     xRight *= len;
     yRight *= len;
     zRight *= len;
@@ -486,7 +486,7 @@ void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zE
     xUp = yLook * zRight - zLook * yRight;
     yUp = zLook * xRight - xLook * zRight;
     zUp = xLook * yRight - yLook * xRight;
-    len = one / Math_Sqrtf(xUp * xUp + yUp * yUp + zUp * zUp);
+    len = one / Gu_Sqrtf(xUp * xUp + yUp * yUp + zUp * zUp);
     xUp *= len;
     yUp *= len;
     zUp *= len;
@@ -526,7 +526,7 @@ CVector3 *Graphu64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
     return out;
 }
 
-f32 GraphU64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
+f32 Graphu64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
     CVector3 a;

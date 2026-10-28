@@ -32,7 +32,7 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, char *);
+extern void Graphu64_ConvertMatrixToFloat(f32 *, char *);
 
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
@@ -47,7 +47,7 @@ extern void *Scene_GetActorDefinition(void *, s32);
 
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
-extern void func_802466A0_de(void *, u16, u16, s32, void *, s32, s32, f32,
+extern void Gobjinst_InitializeActor(void *, u16, u16, s32, void *, s32, s32, f32,
                           CVector3, u8, CVector3, CVector3, s32);
 
 s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
@@ -88,8 +88,8 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
                 GraphU64_AddVec3(&center, &center, &box->corners[j]);
             }
             GraphU64_ScaleVector(&center, &center, 0.125f);
-            GraphU64_ConvertMatrixToFloat(matrix, bones + i * 0x40);
-            GraphU64_TransformPoint(matrix, &center, &diff);
+            Graphu64_ConvertMatrixToFloat(matrix, bones + i * 0x40);
+            Graphu64_TransformPoint(matrix, &center, &diff);
             GraphU64_SubtractVectors(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
             if (dist < bestDist) {
@@ -108,7 +108,7 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
     return best != 0;
 }
 
-void func_8024B2D0_de(char *actor)
+void Gobjinst_DispatchActorTypeUpdate(char *actor)
 {
     s32 type;
     s32 i;
@@ -177,7 +177,7 @@ void Gobjinst_InitializePlacedActor(void *actorStorage, InputRecAt27 *placement,
     amount = amountRaw * D_800C3B48_de[1];
     zero.x = zero.y = zero.z = fzero;
     lookup = Rumble_TestActorStateBit(&g_world, actorStorage);
-    func_802466A0_de(actorStorage, placement->unk1C, placement->unk1E, placement->unk0,
+    Gobjinst_InitializeActor(actorStorage, placement->unk1C, placement->unk1E, placement->unk0,
                   resource0, placement->unk27 == 0xFF ? -1 : placement->unk27,
                   resource1, amount, *(CVector3 *)placement->vec4, placement->unk26,
                   *(CVector3 *)placement->vec10, zero, lookup);

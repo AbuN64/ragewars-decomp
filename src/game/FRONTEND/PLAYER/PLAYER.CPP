@@ -39,7 +39,7 @@ extern f32 D_800DDF90_de;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Key_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
@@ -86,11 +86,11 @@ s32 Player_CreateFourPlayerResults(void *window) {
         Shared_PlayerSettingsRecord *config;
         D_800E59E0->panels[player].state = 0;
         D_800E59E0->panels[player].selection = 5;
-        bar = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][1].value);
+        bar = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][1].value);
         D_800E59E0->panels[player].item = bar;
         bar->alpha = 0x64;
         Frontend_SetWidgetFlag08(bar, 0);
-        widget = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value);
+        widget = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value);
         widget->alpha = 0x6E;
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
@@ -103,19 +103,19 @@ s32 Player_CreateFourPlayerResults(void *window) {
     }
     D_800E59E0->state = 1;
     D_800E59E0->timer = 4;
-    D_800E59E0->leftArrow = Frontend_FindWidgetByResourceId(window, leftResource);
+    D_800E59E0->leftArrow = Node_FindWidgetByResourceId(window, leftResource);
     D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x - (u16)D_800E59E0->leftArrow->width;
     D_800E59E0->leftStep = D_800E59E0->leftArrow->width / 4;
     delta = D_800E59E0->leftArrow->width - D_800E59E0->leftStep * 4;
     D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x + delta;
-    D_800E59E0->rightArrow = Frontend_FindWidgetByResourceId(window, rightResource);
+    D_800E59E0->rightArrow = Node_FindWidgetByResourceId(window, rightResource);
     D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x + (u16)D_800E59E0->rightArrow->width;
     D_800E59E0->rightStep = D_800E59E0->rightArrow->width / 4;
     delta = D_800E59E0->rightArrow->width - D_800E59E0->rightStep * 4;
     D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - delta;
-    Frontend_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
+    Node_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
     D_800E59E0->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
-    widget = Frontend_FindWidgetByResourceId(window, messageResource);
+    widget = Node_FindWidgetByResourceId(window, messageResource);
     D_800E59E0->message = widget;
     Frontend_SetWidgetFlag08(widget, 0);
     screen = D_800E59E0;
@@ -202,7 +202,7 @@ s32 Player_StartFourPlayerResults(void) {
             position.y = D_800DDFAC_de;
             break;
         }
-        rotation.y = (f32)(baseAngle + GraphU64_NextRandom() % 10);
+        rotation.y = (f32)(baseAngle + Graphu64_NextRandom() % 10);
         baseAngle += 0x2D;
         Frontend_InitModelPreviewTransform((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
         Frontend_SetPreviewRotation((u8 *)D_800E59E0 + badgeOffset, rotation);
@@ -212,7 +212,7 @@ s32 Player_StartFourPlayerResults(void) {
     for (i = 0; i < 4; i++) {
         config = &g_playerSettings[i];
         if (config->enabled == 1) {
-            widget = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E19DE[i * 0x26]);
+            widget = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E19DE[i * 0x26]);
             Widget_SetWidgetFlag40(widget, 0);
             widget->alpha = 0x23;
             screen = D_800E59E0;
@@ -293,7 +293,7 @@ s32 Player_UpdateFourPlayerResults(void) {
         Frontend_SetWidgetFlag08(D_800E59E0->message, 0);
         for (player = 0; player < 4; player++) {
             for (i = 0; i < 5; i++) {
-                Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+                Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
             }
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
         }

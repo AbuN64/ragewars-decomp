@@ -45,14 +45,14 @@ s32 Player_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
-void *Sky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
+void *Gsky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
 void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
 void Control_SetProfileMode(void *, s32);
 void Link_DispatchActorLinks(void *, s32, void *);
 void Link_DispatchObjectLinks(s32, s32, void *);
-s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
+s32 Particle_SpawnEffectGroup(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
 void Particle_ReleaseOwnerListTwoEffects(void *, s32);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 void Scene_SetLevelRecordStateBit(void *, void *, s32);
@@ -183,7 +183,7 @@ settings_loop:
                     Player_ResetPlayerForRound(roundPlayer, playerSettingsRecord->character, 1);
                     roundPlayerModel = ((struct Shared_ActorView *)roundPlayer)->model;
                     ((struct Shared_ModelView *)roundPlayerModel)->flags = (s32) (((struct Shared_ModelView *)roundPlayerModel)->flags & ~4);
-                    Nav_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
+                    Actor_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
                     Player_PlacePlayerAtSpawnPoint(roundPlayer, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, roundPlayer);
                     func_80255CB8_de(&playersGlobal->effects, roundPlayer);
@@ -351,7 +351,7 @@ case 7:
             }
             if ((((struct Shared_ActorView *)player)->controls->transientFlag != 0) && (laterFlow = &D_80145060.flow, laterFlow->transition != 0)) {
                 if (D_800F3D08 != 0) {
-                    Nav_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
+                    Actor_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
                     ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
                     laterFlow->reset = 0;
                     SoundElement_PlayFlatSound(0x2D0);
@@ -381,7 +381,7 @@ case 7:
                         ((struct Shared_ActorView *)childActor)->pending = 0;
                         ((struct Shared_ActorView *)childActor)->parent = 0;
                         if (releaseMessageTarget != 0) {
-                            Sky_PostScaledScreenMessage(gameplayMessageContext(messageContext), releaseMessageTarget, gameplayReleaseMessage(localization->language), 1.0f);
+                            Gsky_PostScaledScreenMessage(gameplayMessageContext(messageContext), releaseMessageTarget, gameplayReleaseMessage(localization->language), 1.0f);
                         }
                     }
                     childActor = ((struct Shared_ActorView *)childActor)->next;
@@ -436,7 +436,7 @@ case 7:
             if (func_8024BE80_de(player) == 5) {
                 deathEffectFlags = 3;
             }
-            func_802800C0_de(&D_8011D8D0, player, player, 0, deathEffectFrame, 0x64, motionVector, motionOutput, spawnVector, 0, -1, deathEffectFlags);
+            Particle_SpawnEffectGroup(&D_8011D8D0, player, player, 0, deathEffectFrame, 0x64, motionVector, motionOutput, spawnVector, 0, -1, deathEffectFlags);
         }
         if (state != -1) {
             Player_SetPlayerState(player, attacker, state);
@@ -603,7 +603,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         remaining = 0;
     }
     FIELD(s32, player, 0x5E4) = remaining;
-    roll = GraphU64_NextRandom();
+    roll = Graphu64_NextRandom();
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
             s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
@@ -666,11 +666,11 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
 
 
 extern s32 func_8022C460_de(void *arg0);
-extern void func_8022B69C_de(void *arg0, f32 arg1, void *arg2);
+extern void Player_DrainReserveAndDamage(void *arg0, f32 arg1, void *arg2);
 extern void func_8022B550_de(void *arg0, f32 arg1, f32 arg2, void *arg3,
                           s32 arg4);
 extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
-extern void func_8022B7F8_de(void *arg0, void *arg1);
+extern void Player_StartSourceEffect(void *arg0, void *arg1);
 
 void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *projectileEvent) {
     Player *actor = playerObject;
@@ -704,15 +704,15 @@ void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *proj
     switch (type) {
     case 0x3FB:
     case 0x4CD:
-        func_8022B69C_de(actor, 0.1f, event->owner);
+        Player_DrainReserveAndDamage(actor, 0.1f, event->owner);
         return;
     case 0x3FD:
     case 0x4CF:
-        func_8022B69C_de(actor, 0.125f, event->owner);
+        Player_DrainReserveAndDamage(actor, 0.125f, event->owner);
         return;
     case 0x3FE:
     case 0x4D0:
-        func_8022B69C_de(actor, 0.3f, event->owner);
+        Player_DrainReserveAndDamage(actor, 0.3f, event->owner);
         return;
     case 0x432:
     case 0x4E3:
@@ -724,7 +724,7 @@ void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *proj
         return;
     case 0x419:
     case 0x4D3:
-        func_8022B7F8_de(actor, event->owner);
+        Player_StartSourceEffect(actor, event->owner);
         return;
     case 0x129:
         actor->cooldown = 0;

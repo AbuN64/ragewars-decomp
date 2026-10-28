@@ -314,7 +314,7 @@ void Textload_LoadTextureFrame(s32 *, void *, s32, s32, s32, s32, s32, s32, s32)
 void Geometry_SetCombineMode(u32);
 s32 Geometry_SetModePreset(s32);
 void Cache_UnlockResource(s32, void *);
-s32 GraphU64_NextRandom(void);
+s32 Graphu64_NextRandom(void);
 
 s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     struct Shared_AnimInfo info;
@@ -353,7 +353,7 @@ s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
                 }
                 idx = (u8)(D_800CD730 / info.frame->unknown1);
                 if (mat->unk7 != idx) {
-a = GraphU64_NextRandom() % info.count;
+a = Graphu64_NextRandom() % info.count;
  if (info.unk4 != 0) { b = a; if (b >= info.unk4) { b = 0; } } else { b = 0; }
                     mat->unk7 = idx;
                 } else {

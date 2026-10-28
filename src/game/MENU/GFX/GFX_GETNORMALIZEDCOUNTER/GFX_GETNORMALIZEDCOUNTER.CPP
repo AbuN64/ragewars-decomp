@@ -34,7 +34,7 @@ s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
     Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
-        func_8025476C_de(1);
+        Cache_SetResourceActivityState(1);
     }
     Frontend_RequestScreenMode(0);
     i = 7;
@@ -45,7 +45,7 @@ s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
         i--;
         record--;
     } while (i >= 0);
-    D_800E5950->widget = Frontend_FindWidgetByResourceId(tree, 0x397);
+    D_800E5950->widget = Node_FindWidgetByResourceId(tree, 0x397);
     D_800E5950->phase = 0;
     settings = &D_801462C8;
     settings->laps = 10;

@@ -31,7 +31,7 @@ static inline CCameraText *recycle(void *owner, void *pool) {
 
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
-        func_80239CE0_de(oldest);
+        Gsky_ClearScreenMessage(oldest);
         func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
         func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
@@ -87,7 +87,7 @@ extern void Pool_InitEntryPool(int a);
 
 extern u32 Weapon_UpdateShakeAxis(s32);
 
-CCameraText *Sky_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
+CCameraText *Gsky_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
     CCameraText *pending;
     CCameraText *next;
 
@@ -175,7 +175,7 @@ void *Gsky_RecycleFirstScreenMessage(void *screenMessageOwner, struct ScreenMess
 
     message = owner->activeMessages.head;
     if (message != 0) {
-        func_80239CE0_de(message);
+        Gsky_ClearScreenMessage(message);
         func_80255ED8_de(&owner->activeMessages, message);
         func_80255D14_de(&pool->freeMessages, message);
     }
@@ -187,7 +187,7 @@ void Gsky_ActivateScreenMessage(s32 destinationOwner, s32 sourcePool, s32 messag
     func_80255CB8_de(destinationOwner + 0xF24, messageNode);
 }
 
-void func_80239CE0_de(void *arg0) {
+void Gsky_ClearScreenMessage(void *arg0) {
     struct CCameraText_t *message = arg0;
     message->kind = 0;
     message->target = 0;
@@ -213,7 +213,7 @@ void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMod
 }
 
 /* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by D_800C865C, times
-   the amplitude at 0xC; kind 0 returns GraphU64_RandomBetween over minus to plus the amplitude; any other
+   the amplitude at 0xC; kind 0 returns Graphu64_RandomBetween over minus to plus the amplitude; any other
    kind returns zero. */
 
 
@@ -226,7 +226,7 @@ f32 Gsky_SampleShakeWave(struct Wave *wave) {
     case 1:
         return Math_Sinf(wave->phase * D_800C865C) * wave->amplitude;
     case 0:
-        return GraphU64_RandomBetween(-wave->amplitude, wave->amplitude);
+        return Graphu64_RandomBetween(-wave->amplitude, wave->amplitude);
     }
     return 0.0f;
 }

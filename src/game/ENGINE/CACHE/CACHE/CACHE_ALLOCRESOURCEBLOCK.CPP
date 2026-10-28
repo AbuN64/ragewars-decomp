@@ -119,7 +119,7 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 byteCou
 }
 
 /** Replace the global object word. */
-void func_8025476C_de(unsigned int value) {
+void Cache_SetResourceActivityState(unsigned int value) {
     extern unsigned int D_8010117C;
     D_8010117C = value;
 }

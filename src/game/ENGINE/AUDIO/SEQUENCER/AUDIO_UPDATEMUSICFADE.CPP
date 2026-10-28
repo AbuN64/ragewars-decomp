@@ -12,7 +12,7 @@
 #include "include_asm.h"
 
 /* 8025D470_2.CPP */
-s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
+s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
 void func_802AEAB0_de(void *arg0, InitParams *arg1);
 
@@ -32,10 +32,10 @@ void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD
     params.value10 = 0;
     params.value14 = 0;
     params.value18 = 0;
-    player = func_802B0340_de(0, 0, &state->root->heap, 1, 0x7C);
+    player = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0x7C);
     state->player = player;
     func_802AEAB0_de(player, &params);
-    state->allocation = func_802B0340_de(0, 0, &state->root->heap, 1, 0xF8);
+    state->allocation = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0xF8);
     state->timer = 50;
     state->counter = 0;
     state->first = D_800C3FF8_de;

@@ -37,7 +37,7 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += GameObject_GetActorHeight(actor) * D_800C8B38[1];
-            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
@@ -54,7 +54,7 @@ static inline void spawn(LevelActor *actor) {
 
     position = actor->position0;
     position.y += GameObject_GetActorHeight(actor) * *(&D_800C3A50_de + 1);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
@@ -113,7 +113,7 @@ static inline void spawn_blend_effect(Actor_func_8024A3B0_de *actor) {
 
     position = actor->position0;
     position.y += GameObject_GetActorHeight(actor) * *(&D_800C8B48 + 1);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 

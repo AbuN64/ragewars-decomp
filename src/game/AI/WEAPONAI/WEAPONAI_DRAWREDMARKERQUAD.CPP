@@ -236,11 +236,11 @@ void Weaponai_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
     }
 
     if (value == 1) {
-        Nav_RequestActorState(arg0, arg1, 1);
+        Actor_RequestActorState(arg0, arg1, 1);
     }
     if (((ObjectState1230 *)(actor))->unk_770 != ((ObjectState1230 *)(actor))->unk_62E) {
         ((ObjectState1230 *)(actor))->unk_7E8 = 0;
-        Nav_RequestActorState(arg0, arg1, 1);
+        Actor_RequestActorState(arg0, arg1, 1);
     }
 
     callback_owner = ((ObjectLinks14C *)(arg1))->callback_owner;

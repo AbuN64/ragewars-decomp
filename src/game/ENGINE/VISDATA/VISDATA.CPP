@@ -170,7 +170,7 @@ s32 Visdata_ReadNextVisibilityBit(ResourceBitGrid *arg0) {
     return CBitReader_ReadBits(&arg0->reader, 1) != 0;
 }
 
-void VisData_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVector3 *c1, CVector3 *c2, CVector3 *c3) {
+void Visdata_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVector3 *c1, CVector3 *c2, CVector3 *c3) {
     make_plane(&planes[2], c0, c1, c3, c0);
     make_plane(&planes[0], eye, c0, c2, eye);
     make_plane(&planes[1], eye, c3, c1, eye);
@@ -214,7 +214,7 @@ f32 VisData_GetPlaneSegmentFraction(f32 *arg0, f32 *arg1, f32 *arg2) {
     return (arg0[3] - dot1) / (dot2 - dot1);
 }
 
-f32 VisData_EvaluatePlaneAtPoint(f32 *a, f32 *b) {
+f32 Visdata_EvaluatePlaneAtPoint(f32 *a, f32 *b) {
     return (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) - a[3];
 }
 

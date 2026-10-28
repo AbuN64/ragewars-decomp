@@ -15,7 +15,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "AUDIO/802BFD40.H"
 
-extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
+extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
        /* alHeapDBAlloc */
 extern void alSaveNew(ALSave *);
@@ -86,17 +86,17 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
     drvr->maxOutSamples = 160;
     drvr->dma = (ALDMANew)c->dmaproc;
 
-    save = func_802B0340_de(0, 0, hp, 1, sizeof(ALSave));
+    save = alHeapDBAlloc(0, 0, hp, 1, sizeof(ALSave));
     alSaveNew(save);
     drvr->outputFilter = (ALFilter_s14 *)save;
 
-    drvr->auxBus = func_802B0340_de(0, 0, hp, 1, sizeof(ALAuxBus_s));
+    drvr->auxBus = alHeapDBAlloc(0, 0, hp, 1, sizeof(ALAuxBus_s));
     drvr->maxAuxBusses = 1;
-    sources = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
+    sources = alHeapDBAlloc(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
     alAuxBusNew(drvr->auxBus, sources, c->maxPVoices);
 
-    drvr->mainBus = func_802B0340_de(0, 0, hp, 1, sizeof(ALMainBus_s));
-    sources = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
+    drvr->mainBus = alHeapDBAlloc(0, 0, hp, 1, sizeof(ALMainBus_s));
+    sources = alHeapDBAlloc(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
     alMainBusNew(drvr->mainBus, sources, c->maxPVoices);
 
     if (c->fxType != 0) {
@@ -111,7 +111,7 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
     drvr->pAllocList.next = 0;
     drvr->pAllocList.prev = 0;
 
-    pvoices = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(PVoice_s));
+    pvoices = alHeapDBAlloc(0, 0, hp, c->maxPVoices, sizeof(PVoice_s));
     for (i = 0; i < c->maxPVoices; i++) {
         pv = &pvoices[i];
         alLink((ListLink *)pv, &drvr->pFreeList);
@@ -133,7 +133,7 @@ void alSynNew(ALSynth *drvr, ALSynConfig *c)
 
     alSaveParam(save, 1, drvr->mainBus);
 
-    params = func_802B0340_de(0, 0, hp, c->maxUpdates, sizeof(ALParam_s1C));
+    params = alHeapDBAlloc(0, 0, hp, c->maxUpdates, sizeof(ALParam_s1C));
     drvr->paramList = 0;
     for (i = 0; i < c->maxUpdates; i++) {
         paramPtr = &params[i];

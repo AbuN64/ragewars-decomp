@@ -21,12 +21,12 @@
 /* 80275E44_12.CPP */
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 
-extern void GraphU64_IdentityMatrix(void *);
+extern void Graphu64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
 extern void Graphu64_ProjectPoint(void *, void *, void *);
-extern void GraphU64_ScaleMatrixWorld(void *, f32, f32, f32);
+extern void Graphu64_ScaleMatrixWorld(void *, f32, f32, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
-extern void GraphU64_InvertAffineMatrix(void *, void *);
+extern void Graphu64_InvertAffineMatrix(void *, void *);
 extern void Region_ComputePointBounds(void *, s32, void *);
 void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     CVector3 translation;
@@ -58,7 +58,7 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
         tilt.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
         tilt.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
         matrix = self + 0x60;
-        GraphU64_IdentityMatrix(matrix);
+        Graphu64_IdentityMatrix(matrix);
         RollMatrix(matrix, tilt.x);
         YawMatrix(matrix, tilt.y);
         Graphu64_ProjectPoint(matrix, &up, self + 0x14);
@@ -98,13 +98,13 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     SK_FIELD(self, u8, 0xB8) = SK_FIELD(src, u8, 0x37);
     SK_FIELD(self, u8, 0xBA) = SK_FIELD(src, u8, 0x3B);
     SK_FIELD(self, u8, 0xBD) = SK_FIELD(src, u8, 0x4B);
-    GraphU64_IdentityMatrix(matrix);
-    GraphU64_ScaleMatrixWorld(matrix, scale.x, scale.y, scale.z);
+    Graphu64_IdentityMatrix(matrix);
+    Graphu64_ScaleMatrixWorld(matrix, scale.x, scale.y, scale.z);
     RollMatrix(matrix, rotation.z);
     YawMatrix(matrix, rotation.y);
     PitchMatrix(matrix, rotation.x);
     TranslateMatrix(matrix, translation.x, translation.y, translation.z);
-    GraphU64_InvertAffineMatrix(self + 0x20, matrix);
+    Graphu64_InvertAffineMatrix(self + 0x20, matrix);
     for (i = 0; i < 8; i++) {
         x = 1.0f;
         y = 1.0f;
@@ -219,7 +219,7 @@ const unsigned int D_auto_src_rw_pool_80277128_CA7B0_us_rev1[6] = {
 };
 
 /* 80277444_2.CPP */
-extern void GraphU64_TransformDirection(void *arg0, void *arg1, void *arg2);
+extern void Graphu64_TransformDirection(void *arg0, void *arg1, void *arg2);
 
 s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint, CVector3 surfaceNormal, f32 *lightTransform,
                   CVector3 *lightContribution, f32 *contributionWeight) {
@@ -242,8 +242,8 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint
         second.y = surfaceNormal.y * lightTransform[5];
         second.z = surfaceNormal.z * lightTransform[10];
     } else {
-        GraphU64_TransformPoint(lightTransform, &worldPoint.x, &first);
-        GraphU64_TransformDirection(lightTransform, &surfaceNormal.x, &second);
+        Graphu64_TransformPoint(lightTransform, &worldPoint.x, &first);
+        Graphu64_TransformDirection(lightTransform, &surfaceNormal.x, &second);
     }
     GraphU64_NormalizeVec3(&second.x);
     if (Lighting_EvaluateLocalVolume(lightVolume, first, &normal, &amount) == 0) {
@@ -273,7 +273,7 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint
     return 1;
 }
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
+extern void Graphu64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
                      PackedMatrixWords *matrices, CVector3 *output, s32 multiple)
 {
@@ -288,7 +288,7 @@ void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, V
 
     count = mesh->count;
     base = mesh->vertices;
-    GraphU64_ConvertMatrixToFloat(matrix, matrices);
+    Graphu64_ConvertMatrixToFloat(matrix, matrices);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];
@@ -300,16 +300,16 @@ void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, V
             continue;
         }
         if (multiple) {
-            GraphU64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
+            Graphu64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
         }
         position.x = vertex->px;
         position.y = vertex->py;
         position.z = vertex->pz;
-        GraphU64_TransformPoint(matrix, &position, &worldPosition);
+        Graphu64_TransformPoint(matrix, &position, &worldPosition);
         normal.x = vertex->x;
         normal.y = vertex->y;
         normal.z = vertex->z;
-        GraphU64_TransformDirection(matrix, &normal, &worldNormal);
+        Graphu64_TransformDirection(matrix, &normal, &worldNormal);
         sum.x = 0.0f;
         sum.y = 0.0f;
         sum.z = 0.0f;
@@ -375,7 +375,7 @@ void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords 
     f32 dot, intensity;
     count = data->count;
     base = data->vertices;
-    GraphU64_ConvertMatrixToFloat(matrix, matrices);
+    Graphu64_ConvertMatrixToFloat(matrix, matrices);
     source = D_80137078;
     light.x = source->x;
     light.y = source->y;
@@ -387,11 +387,11 @@ void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords 
         dest = &output[drawn];
         if (!(vertex->flags & 0x80)) {
             f32 red, green, blue;
-            if (skin) GraphU64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
+            if (skin) Graphu64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
             normal.x = vertex->x;
             normal.y = vertex->y;
             normal.z = vertex->z;
-            GraphU64_TransformDirection(matrix, &normal, &transformed);
+            Graphu64_TransformDirection(matrix, &normal, &transformed);
             dot = transformed.x * light.x + transformed.y * light.y + transformed.z * light.z;
             intensity = ((dot < 0.0f) ? 0.2196078598f : (dot + 0.2196078598f)) * 255.0f;
             dot = intensity;

@@ -43,7 +43,7 @@ extern s32 Player_GetProfileAchievementFlag(void *, s16);
 
 extern s32 Player_GetPlayerIndex(void *, void *);
 
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 extern s32 func_802301F4_de(void *, void *);
 
@@ -67,7 +67,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -125,12 +125,12 @@ void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *f
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
-            Nav_RequestActorState(actor, fire, 5);
+            Actor_RequestActorState(actor, fire, 5);
             fire->mode = 2;
         } else {
             SoundElement_PlayFlatSound(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                Sky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+                Gsky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               Player_GetPlayerIndex(D_80145040, player), 1.0f);
             }
             fire->mode = 1;
@@ -139,7 +139,7 @@ void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *f
     }
     if (func_802301F4_de(actor, fire) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            Nav_RequestActorState(actor, fire, action);
+            Actor_RequestActorState(actor, fire, action);
         }
     } else {
         fire->spin += fire->spin * D_800D2988 * 2.0f;
@@ -171,9 +171,9 @@ void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg
             if (temp_a1 == 2) {
                 temp_v1 = ((struct MeasuredRecAt13CV1 *)(arg1))->value;
                 if (temp_v1 == 1) {
-                    Nav_RequestActorState(arg0, arg1, 5);
+                    Actor_RequestActorState(arg0, arg1, 5);
                 } else if (temp_v1 == temp_a1) {
-                    Nav_RequestActorState(arg0, arg1, 9);
+                    Actor_RequestActorState(arg0, arg1, 9);
                 } else {
                     goto check_height;
                 }
@@ -183,17 +183,17 @@ void Weaponai_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg
         } else {
 check_height:
             if (!(((struct MeasuredRecAt40 *)(arg1))->value > D_800C2F14_de)) {
-                Nav_RequestActorState(arg0, arg1, 9);
+                Actor_RequestActorState(arg0, arg1, 9);
             } else {
-                Nav_RequestActorState(arg0, arg1, 5);
+                Actor_RequestActorState(arg0, arg1, 5);
             }
         }
         goto done;
 check_state:
         if (Playerai_GetWeaponAmmo(value, temp_a1) == 1) {
-            Nav_RequestActorState(arg0, arg1, 7);
+            Actor_RequestActorState(arg0, arg1, 7);
         } else {
-            Nav_RequestActorState(arg0, arg1, 5);
+            Actor_RequestActorState(arg0, arg1, 5);
         }
 done:
         ;
@@ -213,14 +213,14 @@ void Weaponai_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
         position = &((Shared_ActorView *)player)->position.vector;
     }
     if (released(actor, player)) {
-        Nav_RequestActorState(actor, attack, 2);
+        Actor_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
         SoundElement_PlaySoundAtPosition(0x794, *position, position, -1);
-        GraphU64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
+        Graphu64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }
-    GraphU64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
+    Graphu64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer += D_800C2F24_de;

@@ -17,7 +17,7 @@
 extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
 extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 extern void MatrixFromQuaternion(void *quaternion, f32 *matrix);
-extern void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
+extern void Graphu64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
 
 
 
@@ -57,7 +57,7 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
             Region_GetPolygonUpQuat(&up, 0);
             MatrixFromQuaternion(&up, tilt);
             matrix = D_8011AD70;
-            GraphU64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+            Graphu64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
             return matrix;
         }
         /* off the floor it lies flat */
@@ -67,7 +67,7 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
         Region_GetCachedUpQuat(&up, 0);
         MatrixFromQuaternion(&up, tilt);
         matrix = D_8011AD70;
-        GraphU64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+        Graphu64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
         return matrix;
     case PARTICLE_ALIGN_EDGE_0:
     case PARTICLE_ALIGN_EDGE_1:
@@ -85,8 +85,8 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
  * matrices) and clears its region; a particle carried by its owner (flag 0x400000) places its local position through
  * the owner's orientation, or for a player owner (flags 0x300000) through its camera's view orientation, or the
  * player view transform when the player has no camera. */
-extern void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
-extern void GraphU64_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
+extern void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
+extern void Graphu64_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
 extern void Player_BuildPlayerViewTransform(Player *player, f32 out[4][4]);
 void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 *outDirection) {
     f32 matrix[16];
@@ -115,9 +115,9 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
             case 0x41E:
                 drawMatrices = target->drawMatrices;
                 if (drawMatrices != 0) {
-                    GraphU64_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
-                    GraphU64_TransformPoint(matrix, &particle->attachmentPosition, &position);
-                    GraphU64_TransformDirection(matrix, &particle->inst.velocity, &direction);
+                    Graphu64_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
+                    Graphu64_TransformPoint(matrix, &particle->attachmentPosition, &position);
+                    Graphu64_TransformDirection(matrix, &particle->inst.velocity, &direction);
                     particle->inst.pos = position;
                     particle->direction = direction;
                 } else {
@@ -140,7 +140,7 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
         } else {
             transform = owner->orient;
         }
-        GraphU64_TransformPoint(transform, &particle->attachmentPosition, &position);
+        Graphu64_TransformPoint(transform, &particle->attachmentPosition, &position);
         particle->inst.pos = position;
     }
     if (outPosition != 0) {
@@ -164,19 +164,19 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 
 void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
-void GraphU64_IdentityMatrix(void *matrix);
+void Graphu64_IdentityMatrix(void *matrix);
 void BuildRollMatrix(void *matrix, f32 angle);
 void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
-f32 GraphU64_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
-s32 GraphU64_LimitVectorLength(f32 *vector, f32 limit);
+f32 Graphu64_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
+s32 Graphu64_LimitVectorLength(f32 *vector, f32 limit);
 void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 void SwapMatrixUpForward(void *matrix);
 void CopyMatrix(f32 *dst, f32 *src);
-void GraphU64_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
+void Graphu64_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
 void YawMatrix(void *matrix, f32 angle);
 void PitchMatrix(void *matrix, f32 angle);
-void GraphU64_ClampMatrixToFixedRange(f32 *matrix);
-void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
+void Graphu64_ClampMatrixToFixedRange(f32 *matrix);
+void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
 
@@ -294,7 +294,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             up.y = 1.0f;
             Graphu64_CrossVectors(&axisX, &up, &axisZ);
             Graphu64_CrossVectors(&axisY, &axisX, &axisZ);
-            GraphU64_IdentityMatrix(basis);
+            Graphu64_IdentityMatrix(basis);
             GraphU64_NormalizeVec3(&axisX.x);
             GraphU64_NormalizeVec3(&axisY.x);
             GraphU64_NormalizeVec3(&axisZ.x);
@@ -307,7 +307,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[8] = axisZ.x;
             basis[9] = axisZ.y;
             basis[10] = axisZ.z;
-            GraphU64_MultiplyAffineMatrices(local, orientation, basis);
+            Graphu64_MultiplyAffineMatrices(local, orientation, basis);
         } else {
             Graphu64_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
@@ -360,7 +360,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         break;
     case PARTICLE_ALIGN_CEILING:
         if (desc->wallBehavior != 0) {
-            position.y = RW_MIN_LT(position.y, GraphU64_GetTrianglePlaneHeight(0, position.x, position.z) - PARTICLE_SURFACE_GAP);
+            position.y = RW_MIN_LT(position.y, Graphu64_GetTrianglePlaneHeight(0, position.x, position.z) - PARTICLE_SURFACE_GAP);
         }
         break;
     case PARTICLE_ALIGN_BILLBOARD_UPRIGHT:
@@ -374,7 +374,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     case PARTICLE_ALIGN_EDGE_2:
         break;
     }
-    GraphU64_LimitVectorLength(&position.x, PARTICLE_MAX_DISTANCE);
+    Graphu64_LimitVectorLength(&position.x, PARTICLE_MAX_DISTANCE);
     if ((desc->flags & PARTICLE_EFFECT_OPACITY_SIZE) && (desc->playback == 1)) {
         scale = scale * ((f32)particle->opacity / 255.0f);
     }
@@ -393,7 +393,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     parent = Particle_ParentTransform(particle, camera);
     if (parent != 0) {
-        GraphU64_MultiplyAffineMatrices(world, local, parent);
+        Graphu64_MultiplyAffineMatrices(world, local, parent);
     } else {
         CopyMatrix(world, local);
     }
@@ -404,17 +404,17 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         strength = (f32)quiver * (1.0f / PARTICLE_QUIVER_STRENGTH_MAX);
         strengthSq = strength * strength;
         swing = strengthSq * PARTICLE_QUIVER_SWING;
-        GraphU64_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
+        Graphu64_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
         yawWave = Math_Sinf(strengthSq * (6 * RW_PI_F6)) * 0.25f;
         YawMatrix(quivering, swing * yawWave);
         PitchMatrix(quivering, swing * Math_Sinf(strengthSq * (14 * RW_PI_F6)));
         TranslateMatrix(quivering, 0.0f, 0.0f, PARTICLE_QUIVER_PIVOT);
-        GraphU64_MultiplyAffineMatrices(orientation, quivering, world);
-        GraphU64_ClampMatrixToFixedRange(orientation);
+        Graphu64_MultiplyAffineMatrices(orientation, quivering, world);
+        Graphu64_ClampMatrixToFixedRange(orientation);
         final = orientation;
     } else {
-        GraphU64_ClampMatrixToFixedRange(world);
+        Graphu64_ClampMatrixToFixedRange(world);
         final = world;
     }
-    GraphU64_ConvertMatrixToFixed(final, out);
+    Graphu64_ConvertMatrixToFixed(final, out);
 }

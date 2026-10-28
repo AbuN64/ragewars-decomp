@@ -101,7 +101,7 @@ extern void Match_ResetGameClockAndSelectSpawn(struct GameSession *);
 
 extern void Pak_ProbeStatus(s32 ch);
 
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 
 extern s32 Control_TakePakChange(s32 ch);
 
@@ -198,7 +198,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
         Pak_ProbeStatus(ch);
-        status = Pak_GetStatus(ch);
+        status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
             Menu_OpenDialog(D_8014561C, D_0044E4B0, menu->player, menu->slot, 0);
@@ -207,7 +207,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
         }
     } else if (D_80153788 == 3 && g_pakAlternatePromptEnabled != 0) {
         Pak_ProbeStatus(ch);
-        status = Pak_GetStatus(ch);
+        status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
             Menu_OpenDialog(D_8014561C, D_0044E4D4, menu->player, menu->slot, 0);

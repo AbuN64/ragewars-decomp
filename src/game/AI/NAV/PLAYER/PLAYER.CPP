@@ -178,7 +178,7 @@ void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 f32 Nav_SteerTowardPoint(Brain_func_80209308_de *, CVector3 *, f32, f32);
 void Scaled_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
 void Portal_DispatchActorBehavior(AiController *);
-float Math_Sqrtf(float);
+float Gu_Sqrtf(float);
 NavigationPoint *Portal_GetGraphPoint(CNavData *,s32);
 NavigationPortal *Portal_GetStridedTableEntry(CNavData *,s32);
 NavigationSearchNode *Portal_FindSearchNode(CNavData *,s32);
@@ -249,7 +249,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         if (controller->unk314 == 0) {
                             start = Portal_GetGraphPoint(graph, controller->current);
                             GraphU64_SubtractVectors(&delta, pos, &start->position);
-                            if (!(Math_Sqrtf(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
+                            if (!(Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
                                 return;
                             }
@@ -324,7 +324,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                                 riding = ground->resource->kind == 2;
                             }
                             GraphU64_SubtractVectors(&delta, pos, &Portal_FindSearchNode(graph, controller->current)->platform->pos);
-                            gap = Math_Sqrtf(delta.x * delta.x + delta.z * delta.z);
+                            gap = Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
                             } else {
@@ -434,7 +434,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
         GraphU64_SubtractVectors(&delta, destination, position);
-        distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
             if (D_800C1BDC_de < distance) {
@@ -444,7 +444,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1BEC_de;
                 }
             }
@@ -478,7 +478,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1BF4_de;
         }
         if (controller->player->pose == 0xF) {
@@ -539,7 +539,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
         GraphU64_SubtractVectors(&delta, destination, position);
-        distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
             if (D_800C1C00 < distance) {
@@ -549,7 +549,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1C10;
                 }
             }
@@ -584,7 +584,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Scaled_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1C18;
         }
         if (controller->player->pose == 0xF) {

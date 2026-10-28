@@ -17,7 +17,7 @@
 
 /* Eases a player's crouch depth at 0x718: the target is D_800C7ED0[0] while input bits 0xC0000 are
    held or crouching is forced at 0x71C (which also enters state 4 unless already in it) and zero
-   otherwise; the depth moves a quarter of the way through GraphU64_EaseValueToward, steps smaller than
+   otherwise; the depth moves a quarter of the way through Graphu64_EaseValueToward, steps smaller than
    D_800C7ED0[1] downward or D_800C7ED8[0] upward are dropped, and bit 0x80 of the flags is set while
    D_800C7ED8[1] less the depth lies within D_800C7EE0 to (&D_800C7EE0)[1], cleared otherwise. */
 
@@ -40,7 +40,7 @@ extern char D_80103FCC[];
    current weapon's entry in D_800D052C has no ammunition, the charge is off, or D_801468F4 is set with
    the player's controller flag at 0x8F; while the button at 0x5E4 is held and charging it targets
    D_800C7EF4, then runs the effect through func_80219480_de, eases the level toward the target by half
-   through GraphU64_EaseValueToward and clears a level below D_800C7EF8 once the target is zero. */
+   through Graphu64_EaseValueToward and clears a level below D_800C7EF8 once the target is zero. */
 
 
 
@@ -129,7 +129,7 @@ void Playerai_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unuse
         target = D_800C7ED0[0];
     }
     depth = player->crouchDepth;
-    GraphU64_EaseValueToward(&depth, target, 0.25f);
+    Graphu64_EaseValueToward(&depth, target, 0.25f);
     do {
         step = depth - player->crouchDepth;
         if (step < 0.0f) {
@@ -162,7 +162,7 @@ void Playerai_UpdateActionTransitionBlend(Shared_ActorView *actor) {
         var_f1 = D_800C2DF8_de[0];
     }
     sp10 = actor->transitionBlend;
-    GraphU64_EaseValueToward(&sp10, var_f1, 0.25f);
+    Graphu64_EaseValueToward(&sp10, var_f1, 0.25f);
     var_f2 = sp10 - actor->transitionBlend;
     if (var_f2 < 0.0f) {
         if (-var_f2 < D_800C2DF8_de[1]) {
@@ -233,7 +233,7 @@ void Playerai_UpdateWeaponEffectBlend(void *arg0) {
     }
     ((ObjectLinks87C *)(arg0))->unk_7F0 = target;
     func_80219480_de(&((ObjectLinks87C *)(arg0))->unk_878, arg0);
-    GraphU64_EaseValueToward(&((ObjectLinks87C *)(arg0))->unk_7EC, target, 0.5f);
+    Graphu64_EaseValueToward(&((ObjectLinks87C *)(arg0))->unk_7EC, target, 0.5f);
     if (target == 0.0f && ((ObjectLinks87C *)(arg0))->unk_7EC < D_800C7EF8) {
         ((ObjectLinks87C *)(arg0))->unk_7EC = 0.0f;
     }

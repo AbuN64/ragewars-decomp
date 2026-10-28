@@ -45,7 +45,7 @@ static inline s32 characterAvailable(s32 character, s32 firstUniqueCharacter, s3
 s32 Random_ChooseRandomCharacter(void) {
     s32 character;
     do {
-        character = GraphU64_NextRandom() % 11;
+        character = Graphu64_NextRandom() % 11;
     } while (!characterAvailable(character, 0, 5));
     return character;
 }

@@ -19,7 +19,7 @@ extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 extern void GraphU64_ScaleVector(f32 *, f32 *, f32);
 void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     s32 i;
@@ -40,7 +40,7 @@ void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     v[0] = scene->light->m_Direction[0];
     v[1] = scene->light->m_Direction[1];
     v[2] = scene->light->m_Direction[2];
-    length = Math_Sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    length = Gu_Sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     if (length != 0.0f) {
         GraphU64_ScaleVector(v, v, g_lightDirectionLength / length);
         scene->dir[0] = v[0];

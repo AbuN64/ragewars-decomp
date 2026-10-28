@@ -27,7 +27,7 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
     SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
 
-    item = Frontend_FindWidgetByResourceId(root, 0x38B);
+    item = Node_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
@@ -35,23 +35,23 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
 
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    item = Frontend_FindWidgetByResourceId(root, 0x38C);
+    item = Node_FindWidgetByResourceId(root, 0x38C);
     D_800E39C0->rows[0] = item;
-    item = Frontend_FindWidgetByResourceId(root, 0x395);
+    item = Node_FindWidgetByResourceId(root, 0x395);
     D_800E39C0->rows[1] = item;
-    item = Frontend_FindWidgetByResourceId(root, 0x396);
+    item = Node_FindWidgetByResourceId(root, 0x396);
     D_800E39C0->rows[2] = item;
     D_800E39C0->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
-        item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
+        item = Node_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
-    item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    item = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
     Frontend_SetWidgetFlag08(item, 1);
     return 0;
 }
@@ -69,7 +69,7 @@ extern void Tsmos_ActivateControllerState(void);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(void *);
 extern void SmpButton_WrapButtonWidget(s32);
-extern void *Frontend_FindWidgetByResourceId(void *, s32);
+extern void *Node_FindWidgetByResourceId(void *, s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state D_800E5430: title/list from the ids at 0x39C, the numeric
@@ -84,12 +84,12 @@ s32 Frontend_CreatePlayerCountScreenEux(void *window) {
     D_800E5430->list = title;
     SmpSlider_EnableTransition(title);
     SmpButton_WrapButtonWidget(0x3A0);
-    item = Frontend_FindWidgetByResourceId(window, 0x39E);
+    item = Node_FindWidgetByResourceId(window, 0x39E);
     D_800E5430->item = item;
     item->alpha = 0xF;
     D_800E5430->resourceWidget = SmpFlicker_CreateFlickerWidget(0x39F, 0x6E);
     D_800E5430->unkC = 3;
-    item = Frontend_FindWidgetByResourceId(window, 0x3A1);
+    item = Node_FindWidgetByResourceId(window, 0x3A1);
     item->text = D_800E5430->text14;
     D_800E5430->unk20 = 1;
     XStdio_FormatBuffer(D_800E5430->text14, D_800E1B60, 1);

@@ -41,7 +41,7 @@ extern void Sched_SendSchedulerTask(void *arg0, void *arg1);
 
 extern void osAiSetNextBuffer(void *arg0, s32 arg1);
 
-void func_80256C90_de(void) {
+void Audiomgr_RunAudioWorker(void) {
     u32 stop, argument, frame;
     u64 previous;
     OSScClientWork client;
@@ -65,7 +65,7 @@ void func_80256C90_de(void) {
         case 7:
             D_800CB70C_de++;
             while (!(osAiGetStatus() & 0x80000000)) {
-                func_80256EA8_de(D_80107E28[D_800CB700_de % 3], argument);
+                Audiomgr_RenderAudioFrame(D_80107E28[D_800CB700_de % 3], argument);
             }
             entryObject = D_80107DFC;
             for (entry = entryObject; entry; entry = entry->next) {
@@ -79,7 +79,7 @@ void func_80256C90_de(void) {
     alClose(&D_80107E34);
 }
 
-s32 *func_80256E6C_de(s32 **arg0) {
+s32 *Audiomgr_InitializeDmaState(s32 **arg0) {
     if (D_80107DF0.initialized == 0) {
         D_80107DF0.firstFree = (struct Window *)&D_80107928;
         D_80107DF0.firstUsed = 0;
@@ -89,7 +89,7 @@ s32 *func_80256E6C_de(s32 **arg0) {
     return &D_002571F0;
 }
 
-s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
+s32 Audiomgr_RenderAudioFrame(Work56EC8 *audioTask, u32 unused)
 {
   s32 completed;
   s32 event;

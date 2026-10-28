@@ -178,7 +178,7 @@ s16 Lists_ChooseWeightedEntry(s16 *arg0) {
             entry += 2;
         } while (*entry != -1);
     }
-    random = GraphU64_NextRandom();
+    random = Graphu64_NextRandom();
     entry = start;
     value = random % total;
     total = 0;
@@ -227,7 +227,7 @@ s16 Lists_ChooseWeightedTableEntry(WeightedTable *weightedTable) {
             entry += 2;
         } while (*entry != -1);
     }
-    random = GraphU64_NextRandom();
+    random = Graphu64_NextRandom();
     entry = start;
     value = random % total;
     total = 0;

@@ -47,7 +47,7 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
     s32 playing;
 
     view->context->result = Gsky_FindNearestCamera(&D_80145088, &view->position);
-    playing = func_802B2620_de(selectChannel(view->context, view->slot));
+    playing = alSndpGetState(selectChannel(view->context, view->slot));
     if (view->time <= D_800C3F68_de || ((view->flags & 4) && view->finished == 0)) {
         view->done = 1;
     }
@@ -62,7 +62,7 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
             if (view->frame != context->frame) {
                 channel = ((OwnerCode8025A3EC *)context)->sound;
                 func_802B2F00_de(channel, context->slots.ids[view->slot]);
-                if (func_802B2620_de(channel) != 0) {
+                if (alSndpGetState(channel) != 0) {
                     alSndpStop(channel);
                 }
                 view->handle = -1;

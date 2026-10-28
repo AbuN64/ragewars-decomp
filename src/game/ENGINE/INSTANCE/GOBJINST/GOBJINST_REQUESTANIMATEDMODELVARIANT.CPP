@@ -22,7 +22,7 @@ f32 Gobjinst_GetRootMeanSquareScale(void *target) {
     float scaleX = ((LevelActor *)target)->scale.x;
     float scaleY = ((LevelActor *)target)->scale.y;
     float scaleZ = ((LevelActor *)target)->scale.z;
-    return Math_Sqrtf(((scaleX * scaleX) + (scaleY * scaleY) + (scaleZ * scaleZ)) * (0.3333333432674408f));
+    return Gu_Sqrtf(((scaleX * scaleX) + (scaleY * scaleY) + (scaleZ * scaleZ)) * (0.3333333432674408f));
 }
 
 f32 Gobjinst_GetModelParticleScale(void *actor) {
@@ -31,7 +31,7 @@ f32 Gobjinst_GetModelParticleScale(void *actor) {
 
     result = D_800C3B5C;
     if (((LevelActor *)actor)->flags & 0x40000) {
-        modelResource = Cache_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
+        modelResource = Cache_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &g_unitScaleMultiplierAnimObjectInfoRev1Text, 1);
         if (modelResource != 0) {
             result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)SetN64_GetPackSection(*modelResource, 0))->particleScale);
             Cache_UnlockResource(0, modelResource);

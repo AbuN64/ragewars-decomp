@@ -297,7 +297,7 @@ s32 Control_AdvanceEffectCurve(void *arg0) {
         if (temp_f1_2 <= 0.0f) {
             player->time =
                 temp_f1_2 + random->period;
-            player->value = GraphU64_RandomBetween(
+            player->value = Graphu64_RandomBetween(
                 (f32)random->minimum * D_800C4318_de.unk0,
                 (f32)random->maximum * D_800C4318_de.unk0);
         }

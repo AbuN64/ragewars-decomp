@@ -75,12 +75,12 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                     lengthSquared = edge.x * edge.x + edge.y * edge.y + edge.z * edge.z;
                     projection /= lengthSquared;
                     if (projection < 0.0f) {
-                        limit = -radius / Math_Sqrtf(lengthSquared);
+                        limit = -radius / Gu_Sqrtf(lengthSquared);
                         if (projection < limit) {
                             return 0;
                         }
                     } else if (1.0f < projection) {
-                        limit = 1.0f + radius / Math_Sqrtf(lengthSquared);
+                        limit = 1.0f + radius / Gu_Sqrtf(lengthSquared);
                         if (limit < projection) {
                             return 0;
                         }
@@ -114,7 +114,7 @@ f32 CPlane_GetSlopeAngle(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
  dx=x1-x0;dz=z1-z0;dy=y1-y0;
  h=dx*dx+dz*dz;v=h+dy*dy;
  r=0.0f;
- if(v!=0){r=Math_Sqrtf(h/v);r=GraphU64_ArcCos(RW_MAX_GT(-1.0f,RW_MIN_LT(1.0f,r)));if(!(y0<y1))r=-r;}
+ if(v!=0){r=Gu_Sqrtf(h/v);r=Graphu64_ArcCos(RW_MAX_GT(-1.0f,RW_MIN_LT(1.0f,r)));if(!(y0<y1))r=-r;}
  return r;
 }
 

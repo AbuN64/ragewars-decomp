@@ -23,10 +23,10 @@ unsigned int D_auto_rodata_unresolved_800C7C68[22] = {
 /* 802C2520.CPP */
 /* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */
 unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value);
-extern u8 D_800C7AF0_de;
+extern u8 g_printfFlagCharactersText;
 extern u8 D_800C7B10_de;
 extern const char D_800D52B0[];
-extern const char D_800D52D4[];
+extern const char g_libcZeroPaddingText[];
 
 /* va_arg(ap, int) as this SDK expands it: load at the aligned cursor, then advance it. */
 #define PRINTF_VA_INT(ap) ({ int _v = *(int *)((((unsigned int)(ap) + 3) & -4)); ap = (va_list)((((unsigned int)(ap) + 3) & -4) + 4); _v; })
@@ -66,7 +66,7 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             return x.nchar;
         }
         ++s;
-        for (x.flags = 0, fchar = &D_800C7AF0_de, fbit = D_auto_data_unresolved_800CCD48; (t = func_802BD3C8_de(fchar, *s)) != 0; ++s) {
+        for (x.flags = 0, fchar = &g_printfFlagCharactersText, fbit = D_auto_data_unresolved_800CCD48; (t = func_802BD3C8_de(fchar, *s)) != 0; ++s) {
             x.flags |= fbit[t - fchar];
         }
         if (*s == 0x2A) {
@@ -106,11 +106,11 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
             PRINTF_PAD(32, D_800D52B0, x.width);
         }
         PRINTF_PUT(ac, x.n0);
-        PRINTF_PAD(32, D_800D52D4, x.nz0);
+        PRINTF_PAD(32, g_libcZeroPaddingText, x.nz0);
         PRINTF_PUT(x.s, x.n1);
-        PRINTF_PAD(32, D_800D52D4, x.nz1);
+        PRINTF_PAD(32, g_libcZeroPaddingText, x.nz1);
         PRINTF_PUT(x.s + x.n1, x.n2);
-        PRINTF_PAD(32, D_800D52D4, x.nz2);
+        PRINTF_PAD(32, g_libcZeroPaddingText, x.nz2);
         if (x.flags & 4) {
             PRINTF_PAD(32, D_800D52B0, x.width);
         }
@@ -239,7 +239,7 @@ case_default:
 
 /* EU enters __umoddi3 one word before its symbol (data_unresolved_802C15D0), so EU keeps the ROM body. */
 
-extern u8 D_800D5300[];
+extern u8 g_lowercaseHexDigitsText[];
 extern u8 D_800D5314[];
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
@@ -257,7 +257,7 @@ void Libc_FormatInteger(_Pft *px, unsigned char code) {
     s32 base;
     s32 i;
     u64 value;
-    table = D_800D5300;
+    table = g_lowercaseHexDigitsText;
     if (code == 0x58) {
         table = D_800D5314;
     }

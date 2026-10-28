@@ -57,7 +57,7 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 Track_HasNoTrackRequestItems(void);
 
 
-extern u32 func_80245850_de(void);
+extern u32 Cinema_GetPlaybackPauseState(void);
 
 extern f32 D_800D2988;
 
@@ -67,7 +67,7 @@ extern f32 D_800D2988;
  * frame's fade step and, once below -0.5, stops fading and, if playing, runs its start and stop callbacks
  * (Cinema_InitializeSequenceOnce, Cinema_CloseSequenceOnce) and releases its sound; otherwise a playing, unpaused, non-looping cue with
  * no pending game event fires its cue callback past its cue point and, past its length, releases its sound
- * and fires its end callback; a still-playing cue then refreshes channel 10 through func_8025476C_de. */
+ * and fires its end callback; a still-playing cue then refreshes channel 10 through Cache_SetResourceActivityState. */
 typedef void (*FuncPtr)(void);
 
 extern s32 D_800D2978;
@@ -77,7 +77,7 @@ extern GameState D_80140FB4;
 extern void Cinema_CloseSequenceOnce(void);
 
 
-extern void func_8025476C_de(s32);
+extern void Cache_SetResourceActivityState(s32);
 
 void CCinema_EnterSequenceScene(void) {
     Vec3Words origin;
@@ -142,7 +142,7 @@ s32 CCinema_ProcessPendingTrack(void) {
     Track_LoadTrackSequence(D_800E2830->resourceDC);
     D_800E2830->resourceDC = none;
     if (Cinema_IsSequenceActive() != 0) {
-        if (func_80245850_de() != 0) {
+        if (Cinema_GetPlaybackPauseState() != 0) {
             D_800E2830->time20 = D_800E2830->time;
         } else {
             record = D_800E2830;
@@ -181,7 +181,7 @@ void CCinema_UpdateSequence(void) {
     D_800CB420_de = D_800D2978;
     if (CCinema_ProcessPendingTrack() == 0) {
         if (Cinema_IsSequenceActive() != 0) {
-            if (func_80245850_de() != 0) {
+            if (Cinema_GetPlaybackPauseState() != 0) {
                 D_800E2830->time20 = D_800E2830->time;
             } else {
                 record = D_800E2830;
@@ -226,7 +226,7 @@ void CCinema_UpdateSequence(void) {
         return;
     }
     CCinema_ProcessPendingTrack();
-    if (Cinema_IsSequenceActive() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
+    if (Cinema_IsSequenceActive() != 0 && Cinema_GetPlaybackPauseState() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
         D_800E2830->unknown104[0] == 0) {
         if (D_800E2830->time >= D_800E2830->end && D_800E2830->initialized44 == 0) {
             FuncPtr cue = D_800E2830->callback10;
@@ -259,6 +259,6 @@ void CCinema_UpdateSequence(void) {
     }
     CCinema_ProcessPendingTrack();
     if (D_800E2830->active != 0) {
-        func_8025476C_de(0xA);
+        Cache_SetResourceActivityState(0xA);
     }
 }

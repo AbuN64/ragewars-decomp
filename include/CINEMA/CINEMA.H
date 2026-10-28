@@ -19,7 +19,7 @@ extern void Cinema_SetLoopMode(int loopMode);
 extern void Cinema_ResetViewport(void);
 extern void Cinema_SetViewport(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop);
 extern void Cinema_ClearMessageCount(void);
-extern float func_80245AD8_de(void);
+extern float Cinema_GetScaledSequenceValue(void);
 extern void Cinema_InitializeSequenceOnce(s32 unused);
 extern void Cinema_CloseSequenceOnce(void);
 extern void Cinema_AdvanceSequenceTime(void);

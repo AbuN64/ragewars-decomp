@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8027EB2C_CAA40[23] =
+const char g_simpPartModelsIndexText[23] =
     "simp part models index\000";
 #endif
 

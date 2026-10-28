@@ -52,10 +52,10 @@ extern f32 D_auto_800C5678[2];
 extern s32 Scene_FindModelIdIndex(void *, s32);
 extern s32 Scene_GetIndexedModelResource(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
-extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
+extern void Graphu64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void YawMatrixLocal(void *, f32);
 extern void SwapMatrixUpForward(void *);
-extern void GraphU64_ConvertMatrixToFixed(void *, void *);
+extern void Graphu64_ConvertMatrixToFixed(void *, void *);
 extern void Geometry_QueueDirectModel(s32, void *, void *, s32, s32);
 #undef LOAD_SETUP
 #if defined(VERSION_EU)
@@ -80,10 +80,10 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     D_800D15E4[3] = D_800CA4B0;
     if (handle != -1) {
         Camera_SetupViewportAndFog(&D_80141008);
-        GraphU64_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
+        Graphu64_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
         YawMatrixLocal(matrix, state->unk26DB0 * D_800CA4B4);
         SwapMatrixUpForward(matrix);
-        GraphU64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
+        Graphu64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
         h2 = Scene_GetIndexedModelResource(&g_world, handle);
         Geometry_BeginModelBatch();
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);

@@ -248,7 +248,7 @@ s32 Timer_FindNextAvailableChannel(s32 currentChannel) {
     attempts = 0;
     do {
         Pak_ProbeStatus(channel);
-        if (Pak_GetStatus(channel) != -2) {
+        if (Note_GetStatus(channel) != -2) {
             break;
         }
         channel++;

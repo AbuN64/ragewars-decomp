@@ -73,7 +73,7 @@ void Nav_UpdatePatrolRoute(PatrolActor *actor)
     }
     if (bot->goal == -1) {
         if (bot->route == -2) {
-            bot->goal = GraphU64_NextRandom() % nodes->count;
+            bot->goal = Graphu64_NextRandom() % nodes->count;
         } else {
             bot->goal = Portal_FindNearestPointIndex(nodes, Scene_GetPlatformRoutePoint(&g_world, bot->route, bot->routePos));
         }

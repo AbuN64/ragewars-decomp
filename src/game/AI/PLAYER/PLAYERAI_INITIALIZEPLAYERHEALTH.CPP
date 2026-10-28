@@ -43,9 +43,9 @@ void func_80226340_de(SharedPlayer *player) {
     f32 alpha;
     s32 level;
 
-    if (player->views5DC.view5DC_2.view != 0 && 80.0f < GraphU64_RandomFloat(100.0f)) {
+    if (player->views5DC.view5DC_2.view != 0 && 80.0f < Graphu64_RandomFloat(100.0f)) {
         view = player->views5DC.view5DC_2.view;
-        alpha = GraphU64_RandomFloat(7.5f);
+        alpha = Graphu64_RandomFloat(7.5f);
         level = (u32) alpha;
         Gsky_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
         Gsky_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
@@ -133,7 +133,7 @@ positive:
                                 ((LevelActor *)body)->yaw + D_800C2B64_de;
                         }
                     }
-                    GraphU64_EaseValueToward(&((LevelActor *)body)->yaw, targetAngle, D_800C9FEC);
+                    Graphu64_EaseValueToward(&((LevelActor *)body)->yaw, targetAngle, D_800C9FEC);
                 }
             }
         }

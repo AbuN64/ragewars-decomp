@@ -9,5 +9,5 @@ typedef struct RouteRelationBytes {
     u8 entries[0];
 } RouteRelationBytes;
 /* The result is transported as a complete integer register; entries are bytes. */
-s32 Nav_GetRouteRelation(void *table, s32 row, s32 column);
+s32 Route_GetRouteRelation(void *table, s32 row, s32 column);
 #endif

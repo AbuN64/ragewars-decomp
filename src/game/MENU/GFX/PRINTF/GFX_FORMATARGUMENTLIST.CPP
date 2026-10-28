@@ -294,7 +294,7 @@ reswitch:
             goto nosign;
         case 'p':
             base = 16;
-            xdigs = D_800DD1C8;
+            xdigs = g_printfLowercaseHexDigits;
             flags &= ~4;
             ulval = (u32)VA(ap, void *);
             ch = 'x';
@@ -346,7 +346,7 @@ reswitch:
             xdigs = D_800DD1DC;
             goto hex;
         case 'x':
-            xdigs = D_800DD1C8;
+            xdigs = g_printfLowercaseHexDigits;
 hex:
             if (flags & 4) {
                 uqval = VA(ap, int);

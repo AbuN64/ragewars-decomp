@@ -25,7 +25,7 @@ extern void Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(s32);
 extern void Fx_DrawRedParticleQuad(UnitMtx *, s32, s32, s32);
 
-void func_8021C698_de(PlayerCode802192C0 *player) {
+void Player_DrawRedMarkerPrism(PlayerCode802192C0 *player) {
     s32 red;
     s32 low;
     s32 high;

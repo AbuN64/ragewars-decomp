@@ -30,14 +30,14 @@ RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 arg0, s32 arg1, 
     RecordN64EngCreateNumericWidget *result;
     RecordN64EngCreateNumericWidget *child;
 
-    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x6C);
     XPlus_FillBytes(result, 0, 0x6C);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB65;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = Frontend_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
+    child = Node_FindWidgetByResourceId((void*)context, arg1 & 0xFFFF);
     result->field_44 = child;
     child->fields_2C[3] = (s32)&result->field_60;
     result->field_4C = arg3;

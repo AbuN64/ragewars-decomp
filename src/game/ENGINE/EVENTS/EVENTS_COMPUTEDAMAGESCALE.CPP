@@ -43,7 +43,7 @@ extern f32 GameObject_GetActorRadius(ActorEventsComputeDamageScale *);
 
 extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 
-/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
+/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through Player_TransformPointByViewOrOwnerMatrix, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
 
 
@@ -60,9 +60,9 @@ extern f32 D_800C4450_de;
 
 extern char D_8011D8D0;
 
-extern void func_8022B09C_de(SharedPlayer *, CVector3 *);
+extern void Player_TransformPointByViewOrOwnerMatrix(SharedPlayer *, CVector3 *);
 
-extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 
@@ -169,18 +169,18 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     v.x = -direction.x;
     v.y = direction.y;
     v.z = direction.z;
-    func_8022B09C_de(player, &v);
+    Player_TransformPointByViewOrOwnerMatrix(player, &v);
     v.x -= player->views5DC.view5DC_5.rider->unk128.x;
     v.y -= player->views5DC.view5DC_5.rider->unk128.y;
     v.z -= player->views5DC.view5DC_5.rider->unk128.z;
-    rotation = GraphU64_BuildDirectionQuaternion(&v);
+    rotation = Graphu64_BuildDirectionQuaternion(&v);
     InstHdr_CopyActorPositionAndModel(actor, position, &point, &unused, 0, 1);
     point = position;
     ((CVector3 *)&point)->y += D_800C9538;
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
     point.x = 0;
     point.y = 0;
     point.z = 0;

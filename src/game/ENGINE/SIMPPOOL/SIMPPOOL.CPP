@@ -12,7 +12,7 @@
 
 
 s32 Cinema_IsSequenceInWindow();                                /* extern */
-s32 func_80245850_de();                                /* extern */
+s32 Cinema_GetPlaybackPauseState();                                /* extern */
 s32 Cinema_GetSequenceRequest();                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
 s32 Menu_CountLiveNodes(void *);                             
@@ -40,7 +40,7 @@ s32 Simppool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0) {
 block_6:
     if (D_801462C8.counters.first != 0) {
 block_7:
-        if (func_80245850_de() != 0) return 1;
+        if (Cinema_GetPlaybackPauseState() != 0) return 1;
     }
     return 0;
 }

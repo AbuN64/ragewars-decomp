@@ -29,7 +29,7 @@ extern char D_80145040[];
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU)
@@ -50,7 +50,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -78,7 +78,7 @@ void Weaponai_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState
             if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                    Sky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+                    Gsky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                                   Player_GetPlayerIndex(D_80145040, player), 1.0f);
                 }
                 fireState->mode = 1;
@@ -88,6 +88,6 @@ void Weaponai_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState
         }
     }
     if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
-        Nav_RequestActorState(actor, fireState, action);
+        Actor_RequestActorState(actor, fireState, action);
     }
 }

@@ -64,7 +64,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
         local.x = 0.0f;
         local.y = 0.0f;
         local.z = 1.0f;
-        GraphU64_TransformPoint(matrix, &local, &forward);
+        Graphu64_TransformPoint(matrix, &local, &forward);
     } else {
         forward.x = 0.0f;
         forward.y = 0.0f;
@@ -88,7 +88,7 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     GraphU64_NormalizeVec3(&dir);
     Graphu64_CrossVectors(&axis, &forward, &dir);
     GraphU64_NormalizeVec3(&axis);
-    angle = GraphU64_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
+    angle = Graphu64_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = Math_Sinf(angle);
     turn.x = axis.x * scale;
     turn.y = axis.y * scale;
@@ -137,7 +137,7 @@ source_ready:
     Graphu64_CrossVectors(&axis, &up, &source);
     GraphU64_NormalizeVec3(&axis);
 
-    angle = GraphU64_ArcCos((up.x * source.x) +
+    angle = Graphu64_ArcCos((up.x * source.x) +
                           (up.y * source.y) +
                           (up.z * source.z));
     angle *= D_800C3CA0_de;

@@ -29,7 +29,7 @@ extern void Vhandler_InitializePagerEuroExtended(s32, s32);
 #endif
 extern void Cache_InitializeResourceCache(s32, s32);
 
-void AudioMgr_InitHeap(void) {
+void Audiomgr_InitHeap(void) {
     u8 *heapStart;
     s32 heapEnd;
     s32 size;
@@ -72,7 +72,7 @@ extern u8 D_800D8CE0[];
 extern char D_00256E6C, D_00256C90;
 s32 osAiSetFrequency(u32);
 void alInit(void *, void *);
-void *func_802B0340_de(s32, s32, void *, s32, u32);
+void *alHeapDBAlloc(s32, s32, void *, s32, u32);
 void osSetEventMesg(s32, void *, s32);
 void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
 void osStartThread(void *);
@@ -93,14 +93,14 @@ void Audiomgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInit
     D_80107928[0].next = 0;
     for (i = 0; i < 59; i++) {
         alLink(&D_80107928[i+1], &D_80107928[i]);
-        D_80107928[i].buffer = func_802B0340_de(0, 0, config->heap, 1, 0x300);
+        D_80107928[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 0x300);
     }
-    D_80107928[i].buffer = func_802B0340_de(0, 0, config->heap, 1, 0x300);
-    for (i = 0; i < 2; i++) D_80107E20[i] = func_802B0340_de(0, 0, config->heap, 1, timing->samples * 8);
+    D_80107928[i].buffer = alHeapDBAlloc(0, 0, config->heap, 1, 0x300);
+    for (i = 0; i < 2; i++) D_80107E20[i] = alHeapDBAlloc(0, 0, config->heap, 1, timing->samples * 8);
     D_80107E9C = timing->samples;
     for (i = 0; i < 3; i++) {
-        D_80107E28[i] = func_802B0340_de(0, 0, config->heap, 1, sizeof(AudioWork));
-        D_80107E28[i]->samples = func_802B0340_de(0, 0, config->heap, 1, D_80107E98 * 4);
+        D_80107E28[i] = alHeapDBAlloc(0, 0, config->heap, 1, sizeof(AudioWork));
+        D_80107E28[i]->samples = alHeapDBAlloc(0, 0, config->heap, 1, D_80107E98 * 4);
         D_80107E28[i]->queue = &D_80107E80;
         D_80107E28[i]->message = D_80107E28[i];
         D_80107E28[i]->task.type = 2;

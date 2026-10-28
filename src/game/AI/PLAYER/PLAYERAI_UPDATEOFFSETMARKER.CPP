@@ -76,7 +76,7 @@ void Playerai_ReleaseMarkerSlot(void *unused0, s32 *arg1) {
 
     temp = *arg1;
     if (temp != 0) {
-        DynLight_ReleaseLight(&D_8013B1A8, temp);
+        Gdynlight_ReleaseLight(&D_8013B1A8, temp);
         *arg1 = 0;
     }
 }

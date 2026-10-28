@@ -3,7 +3,7 @@
 #include "TYPES.H"
 
 extern u8 *XPlus_CopyString(u8 *, u8 *);
-extern void Sky_PostScaledScreenMessage(void *, s32, void *, f32);
+extern void Gsky_PostScaledScreenMessage(void *, s32, void *, f32);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 
@@ -21,7 +21,7 @@ void func_8022B75C_de(void *player, u8 *message, f32 size) {
     XPlus_CopyString(((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex], message);
     temp = (s32)((Shared_ActorView *)player)->message;
     if (temp != 0) {
-        Sky_PostScaledScreenMessage(&D_80145088, temp,
+        Gsky_PostScaledScreenMessage(&D_80145088, temp,
                       ((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex],
                       size);
     }

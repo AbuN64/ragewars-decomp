@@ -7,5 +7,5 @@ const char s_audioSndplayerText[18] =
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_802B2CF0_CD39C_us_rev1[18] = "audio/sndplayer.c";
+const char g_audioSndplayerSourceText[18] = "audio/sndplayer.c";
 #endif

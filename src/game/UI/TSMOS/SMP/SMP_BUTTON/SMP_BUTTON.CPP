@@ -17,7 +17,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
+/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 
 
 
@@ -106,14 +106,14 @@ MenuListWidget *SmpButton_CreateListWidget(s32 arg0, s32 arg1) {
     MenuListWidget *result;
     void *child;
 
-    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x118);
     XPlus_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = Frontend_FindWidgetByResourceId(context, arg1 & 0xFFFF);
+    child = Node_FindWidgetByResourceId(context, arg1 & 0xFFFF);
     result->owner = child;
     result->index = 0;
     result->count = 0;
@@ -290,8 +290,8 @@ void SmpButton_WrapButtonWidget(s32 arg0) {
     void *context;
     RecordSmpButtonWrapButtonWidget *result;
 
-    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
@@ -309,7 +309,7 @@ void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     if (source->field_0E == 0xB61) {
         return;
     }
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x44);
     XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;

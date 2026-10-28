@@ -59,7 +59,7 @@ void *func_8025DB80_de(Track *state, s32 index) {
     return NULL;
 }
 
-void func_8025DC34_de(void *arg0, f32 arg1) {
+void Sequencer_SetTrackVolume(void *arg0, f32 arg1) {
     Track *track = arg0;
     f32 f20 = arg1;
     f32 f0 = f20 * D_800C4020_de;
@@ -67,7 +67,7 @@ void func_8025DC34_de(void *arg0, f32 arg1) {
     track->unk2C = f20;
 }
 
-void func_8025DC88_de(void *arg0) {
+void Sequencer_UpdateTrackVolume(void *arg0) {
     ObjectState40 *o = arg0;
     f32 var_f20;
     ContextRecAt2BC0 *context;

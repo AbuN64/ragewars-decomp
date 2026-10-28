@@ -272,7 +272,7 @@ void Statinst_DispatchAttachmentEvents(void *object, s32 all) {
         for (i = 0; i < count; i++) {
             attachment = &entries[i];
             if (all != 0 || attachment->type == 8) {
-                GraphU64_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
+                Graphu64_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
                 Events_DeliverContactEffect(object, object, attachment->type, -1, position, attachment->params);
             }
         }

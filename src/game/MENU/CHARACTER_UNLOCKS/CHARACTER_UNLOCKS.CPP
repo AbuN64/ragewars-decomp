@@ -228,7 +228,7 @@ void Menu_RefreshCharacterUnlocks(void) {
         Defs_SetBitValue(bits, 1, 1);
     }
     for (i = 0; i < 17; i++) {
-        widget = Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E3A50[i].id);
+        widget = Node_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E3A50[i].id);
         Widget_SetWidgetFlag100(widget, 0);
         if (!Defs_TestBit(bits, i)) {
             if (widget) {
@@ -236,7 +236,7 @@ void Menu_RefreshCharacterUnlocks(void) {
                 Frontend_SetWidgetFlag08(widget, 0);
             }
         } else if (D_801462C8->trialKind == 1 && Defs_TestBit(D_800FEB54, D_800E3A54[i][0]) == 1) {
-            mark = Frontend_FindWidgetByResourceId(widget, UNLOCK_MARK);
+            mark = Node_FindWidgetByResourceId(widget, UNLOCK_MARK);
             Frontend_SetWidgetFlag08(mark, 1);
             mark->alpha = 50;
         }
@@ -249,7 +249,7 @@ void Menu_CyclePlayerCharacterVariant(s32 player) {
     s32 count;
 
     choice = D_800E42D0->players[player].choice;
-    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
+    item = Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
     Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
     count = D_800FEB57[player][Key_GetCharacterPreviewModel(D_800E42D0->players[player].kind)];
@@ -257,7 +257,7 @@ void Menu_CyclePlayerCharacterVariant(s32 player) {
         count = 1;
     }
     choice = (choice + 1) % count;
-    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
+    item = Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cells[choice].id);
     Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
     D_800E42D0->players[player].choice = choice;
@@ -267,14 +267,14 @@ void Menu_ShowPlayerCharacterSelection(s32 player) {
     MenuWidget *frame;
 
     SmpOverlay_ShowSlotById(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
-    D_800E42D0->players[player].highlight = Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cursor);
-    frame = Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
+    D_800E42D0->players[player].highlight = Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].cursor);
+    frame = Node_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight->x = frame->x - 2;
     D_800E42D0->players[player].highlight->y = frame->y - 2;
     Frontend_SetWidgetFlag08(D_800E42D0->players[player].highlight, 1);
     D_800E42D0->players[player].unkC = 1;
     Menu_RefreshPlayerCharacterVariants(player);
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].title), 0);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].title), 0);
 }
 
 void Menu_RefreshPlayerCharacterVariants(s32 player) {
@@ -283,9 +283,9 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
     }
-    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
+    item = Node_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
     Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x50;
@@ -298,9 +298,9 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
         count = 1;
     }
     for (i = 0; i < count; i++) {
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
     }
-    item = Frontend_FindWidgetByResourceId(D_800E42D0->screen,
+    item = Node_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
     Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
@@ -317,7 +317,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     SmpOverlay_SetSlotValue(D_800E42D0->unk4, player, 1);
     D_800E42D0->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
     }
     D_800E42D0->players[player].kind = choice;
     Key_FindCharacterPreviewRow(choice);
@@ -362,8 +362,8 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     tries = 0;
     done = 0;
     do {
-        id = D_800E3A50[GraphU64_NextRandom() % 17].id;
-        if (Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
+        id = D_800E3A50[Graphu64_NextRandom() % 17].id;
+        if (Widget_ListHasFlag100(Node_FindWidgetByResourceId(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
 #if defined(VERSION_DE)
@@ -392,7 +392,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     if (costumes <= 0) {
         costumes = 1;
     }
-    D_800E42D0->players[player].choice = GraphU64_NextRandom() % costumes;
+    D_800E42D0->players[player].choice = Graphu64_NextRandom() % costumes;
 }
 
 s32 Menu_CountPendingCharacterSelections(void) {

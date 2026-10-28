@@ -9,7 +9,7 @@
    and stores the unsigned result as the alpha byte at 0x10 of items 0x2C2 and 0x2C3 of the
    entry's window. */
 
-extern struct ResourceSmpFlickerCreateFlickerWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId(void *, s32);
 void PAKInterface_PulseIdlePanelLabels(s32 index) {
     float f;
     u32 alpha;
@@ -27,18 +27,18 @@ large:
 converted:
     entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)D_800E54A4 + index * 0xB68);
 #if defined(VERSION_DE)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2E4)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2E4)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2C2)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2C2)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2D5)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2D5)->value = alpha;
 #endif
     entry = (struct EntryPAKInterfacePulseIdlePanelLabels *)((char *)D_800E54A4 + index * 0xB68);
 #if defined(VERSION_DE)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2E5)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2E5)->value = alpha;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2C3)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2C3)->value = alpha;
 #elif defined(VERSION_EU_X)
-    Frontend_FindWidgetByResourceId(entry->window, 0x2D4)->value = alpha;
+    Node_FindWidgetByResourceId(entry->window, 0x2D4)->value = alpha;
 #endif
 }

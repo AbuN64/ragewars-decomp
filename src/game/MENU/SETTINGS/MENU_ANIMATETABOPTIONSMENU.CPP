@@ -96,7 +96,7 @@ block_11:
                 Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
                 Scene_LoadLevelResources(&g_world, 0, 0);
                 if (func_8025477C_de() == 0) {
-                    func_8025476C_de(1U);
+                    Cache_SetResourceActivityState(1U);
                 }
                 D_80145040.stage = 8;
                 MarkMenuEventHandled();

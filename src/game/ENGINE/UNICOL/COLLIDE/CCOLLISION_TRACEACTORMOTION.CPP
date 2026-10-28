@@ -73,7 +73,7 @@ s32 CCollision_TraceActorMotion(ActorMotion *object) {
     GraphU64_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
-    magnitude = Math_Sqrtf(
+    magnitude = Gu_Sqrtf(
         (object->velocity.x * object->velocity.x) +
         (object->velocity.y * object->velocity.y) +
         (object->velocity.z * object->velocity.z));

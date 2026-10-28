@@ -15,7 +15,7 @@
  * controller latch at 0x23C (cleared when read) for a flagged controlled player, else flag 0x2000; when it
  * fires and func_80230058_de accepts the attack, a ranged attack (type 2) that may fire takes action 8 and
  * returns 2, otherwise action 4 starts with the combo byte cleared and returns 1. Adapted from
- * Weapon_TryEnterAlternateStateEight with the fire check as the same static helper. */
+ * Weaponai_TryEnterAlternateStateEight with the fire check as the same static helper. */
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -31,7 +31,7 @@
 
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 
 
@@ -96,7 +96,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145040.object, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+            Gsky_PostTargetedScreenMessage(&D_80145040.object, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
                           Player_GetPlayerIndex(&D_80145040, player), D_800C2EE4_de);
         }
     }
@@ -121,10 +121,10 @@ s32 func_802301F4_de(void *actor, void *attack) {
     }
     if (trigger != 0 && func_80230058_de(actor, attack) != 0) {
         if (((AttackTriggerAction *)(attack))->unk13C == 2 && can_fire(player)) {
-            Nav_RequestActorState(actor, attack, 8);
+            Actor_RequestActorState(actor, attack, 8);
             return 2;
         }
-        Nav_RequestActorState(actor, attack, 4);
+        Actor_RequestActorState(actor, attack, 4);
         ((AttackTriggerAction *)(attack))->unkCB = 0;
         return 1;
     }
@@ -150,13 +150,13 @@ static inline s32 can_toggle_mode(Player *player) {
     if (allowed == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->camera) {
-            Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+            Gsky_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
                                              Player_GetPlayerIndex(&D_80145040, player), 1.0f);
         }
     }
     return allowed;
 }
-void Weapon_UpdateAlternateFire(void *actor, void *attack) {
+void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
     Player *player = (Player *)((AttackTriggerActor *)actor)->unk1D8;
     s32 action = D_800CE8DC[player->pose * 12];
     AlternateModeInfo *info = (AlternateModeInfo *)D_800D052C[player->selectedAction];
@@ -178,7 +178,7 @@ void Weapon_UpdateAlternateFire(void *actor, void *attack) {
             if (!Player_HasAmmoForMode(player, player->selectedAction)) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera) {
-                    Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera,
+                    Gsky_PostTargetedScreenMessage(&D_80145040.object, player->camera,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
                                                      Player_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
@@ -192,7 +192,7 @@ void Weapon_UpdateAlternateFire(void *actor, void *attack) {
         }
     }
     if (func_802301F4_de(actor, attack) == 0 && !(((AttackTriggerActor *)actor)->unk100 & 0x400)) {
-        Nav_RequestActorState(actor, attack, action);
+        Actor_RequestActorState(actor, attack, action);
     }
 }
 
@@ -275,7 +275,7 @@ void func_80230610_eu(LevelActor *arg0, void *arg1) {
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
         Weapon_ApplyWeaponSwitch(arg0, arg1);
-        Nav_RequestActorState(arg0, arg1, 0);
+        Actor_RequestActorState(arg0, arg1, 0);
     }
 }
 #endif

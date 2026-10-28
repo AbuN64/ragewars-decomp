@@ -151,12 +151,12 @@ f32 CCollision_GetContactYaw(f32 *contactRecord) {
     f32 result;
     f32 zero;
 
-    magnitude = Math_Sqrtf((contactRecord[18] * contactRecord[18]) + (contactRecord[20] * contactRecord[20]));
+    magnitude = Gu_Sqrtf((contactRecord[18] * contactRecord[18]) + (contactRecord[20] * contactRecord[20]));
     zero = 0.0f;
     if (magnitude == zero) {
         return zero;
     }
-    result = GraphU64_ArcCos(contactRecord[20] / magnitude);
+    result = Graphu64_ArcCos(contactRecord[20] / magnitude);
     if (!(zero < contactRecord[18])) {
         result = -result;
     }

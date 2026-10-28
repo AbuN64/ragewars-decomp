@@ -44,7 +44,7 @@ void *Map_ReserveEntries(void *, s32);
 void Geometry_SetCombineMode(s32);
 void Geometry_SetModePreset(s32);
 void Cache_UnlockResource(s32, void *);
-s32 GraphU64_NextRandom(void);
+s32 Graphu64_NextRandom(void);
 
 static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, GameplayCamera *view) {
     Shared_ParticleInstance *inst;
@@ -201,11 +201,11 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             }
             break;
         case 4:
-            frame = GraphU64_NextRandom() % info.count;
+            frame = Graphu64_NextRandom() % info.count;
             break;
         case 5:
             if (particle->unk14F == -1) {
-                particle->unk14F = GraphU64_NextRandom() % info.count;
+                particle->unk14F = Graphu64_NextRandom() % info.count;
             }
             frame = particle->unk14F;
             break;
@@ -216,7 +216,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             GameplayCamera *camera = D_80140FE8_de.camera;
             CVector3 local;
             f32 depth;
-            GraphU64_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
+            Graphu64_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
             depth = local.z;
             if (depth < 0.0f) {
                 depth = -depth;
@@ -228,7 +228,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         particle->unk14E = frame;
         particle->flags |= 0x100000;
     }
-    GraphU64_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
+    Graphu64_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
     dist = viewPos.z;
     if (dist < 0.0f) {
         dist = -dist;

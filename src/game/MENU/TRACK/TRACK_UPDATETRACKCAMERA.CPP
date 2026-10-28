@@ -47,9 +47,9 @@ extern u8 D_80100030[];
 extern void CCinema_DrawMessages(void);
 extern CVector3 Track_GetTrackEyePosition(f32);
 extern CVector3 Track_GetTrackTargetPosition(f32);
-extern void GraphU64_IdentityMatrix(void *);
+extern void Graphu64_IdentityMatrix(void *);
 extern void Graphu64_MatrixFromEulerXYZ(void *, f32, f32, f32);
-extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
+extern void Graphu64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
 extern f32 Graphu64_GetVerticalAngle(CVector3 *);
@@ -103,11 +103,11 @@ void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
                 D_800E2830->yaw = 0.0f;
             }
         }
-        GraphU64_IdentityMatrix(matrix);
+        Graphu64_IdentityMatrix(matrix);
         Graphu64_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
-        GraphU64_TransformPoint(matrix, &target, &rotated);
+        Graphu64_TransformPoint(matrix, &target, &rotated);
         target = rotated;
-        GraphU64_TransformPoint(matrix, &eye, &rotated);
+        Graphu64_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
         GraphU64_AddVec3(&target, &target, &D_800E2830->position);
         GraphU64_AddVec3(&eye, &eye, &D_800E2830->position);

@@ -12,14 +12,14 @@ extern u8 *func_8024E6A0_de(Source *arg0);
 extern void InstHdr_GetActorTargetOffset(u8 *arg0, CVector3 *arg1);
 extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void GraphU64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void GraphU64_TransformPoints(MatrixF *arg0, CVector3 *arg1, CVector3 *arg2, s32 count);
+extern void Graphu64_TransformPoints(MatrixF *arg0, CVector3 *arg1, CVector3 *arg2, s32 count);
 extern void Unicol_MoveActorWithCollision(Source *arg0, CVector3 arg1, CollisionInfo *arg2);
 extern void func_80207730_de(u8 *arg0, Source *arg1);
 
 
 
 
-void Nav_ApplySupportingPlatformMotion(Source *player, void *unused1) {
+void Actor_ApplySupportingPlatformMotion(Source *player, void *unused1) {
     CVector3 saved_velocity;
     CVector3 position;
     CVector3 transformed;
@@ -41,7 +41,7 @@ void Nav_ApplySupportingPlatformMotion(Source *player, void *unused1) {
         GraphU64_SubtractVectors(&transformed, &position, &((Source *)object)->position);
         amount = InstHdr_GetActorTargetHeight(object);
         BuildYawMatrix(&matrix, amount);
-        GraphU64_TransformPoints(&matrix, &transformed, &transformed, 1);
+        Graphu64_TransformPoints(&matrix, &transformed, &transformed, 1);
         GraphU64_AddVec3(&transformed, &transformed, &((Source *)object)->position);
         GraphU64_SubtractVectors(&transformed, &transformed, &position);
         player->height += amount;

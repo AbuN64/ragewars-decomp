@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80286AA8_CADF4[9] =
+const char g_matricesText[9] =
     "Matrices\000";
 #endif
 

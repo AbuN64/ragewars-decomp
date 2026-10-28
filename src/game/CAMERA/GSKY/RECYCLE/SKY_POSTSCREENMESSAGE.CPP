@@ -42,7 +42,7 @@ f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step) {
 
 /* Posts a text as on-screen messages, one per line, with the given kind, target and size: the text (or
  * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
- * of the owner's list at 0xF24 is recycled (cleared through func_80239CE0_de, unlinked, and pushed onto the free
+ * of the owner's list at 0xF24 is recycled (cleared through Gsky_ClearScreenMessage, unlinked, and pushed onto the free
  * list at 0xE40 of the pool) and set up as a message centred horizontally 80 pixels above the bottom of the
  * screen, scaled by the given size. Returns the last message node. */
 
@@ -57,7 +57,7 @@ static inline CCameraText *recycle(void *owner, void *pool) {
 
     oldest = messageOwner->activeMessages.head;
     if (oldest != 0) {
-        func_80239CE0_de(oldest);
+        Gsky_ClearScreenMessage(oldest);
         func_80255ED8_de(&messageOwner->activeMessages, oldest);
         func_80255D14_de(&messagePool->freeMessages, oldest);
     }

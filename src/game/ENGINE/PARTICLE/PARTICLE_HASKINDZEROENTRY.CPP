@@ -124,7 +124,7 @@ extern void Particle_Release(void *, void *);
 
 
 
-void func_80282E98_de(void *particle, void *player) {
+void Particle_HandlePlayerContact(void *particle, void *player) {
     Triple scratch;
     struct IntPair pair;
     s32 eventHalfwordOffset;

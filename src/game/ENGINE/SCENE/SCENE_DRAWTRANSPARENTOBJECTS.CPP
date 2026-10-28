@@ -38,7 +38,7 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
     }
     if (old_flags != D_800CD3F0) {
         D_800CD3F4 = 1;
-        func_8025476C_de(8);
+        Cache_SetResourceActivityState(8);
     } else {
         D_800CD3F4 = 0;
     }
@@ -203,7 +203,7 @@ extern void Gsky_GetObjectPositionAt260(void *, void *);
 extern void PpDecom_QuickSortRecords(void *, s32, s32, void *, void *);
 extern void Statinst_DrawForGameMode(void *, void *);
 extern void Simple_DrawCachedModel(void *);
-extern void func_80249E28_de(void *, void *);
+extern void Gobjinst_DrawVisibleCachedActor(void *, void *);
 /* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
  * measures each object's squared distance to the camera (offset by a jittered vector from func_802390D0_de),
  * sorts the list with PpDecom_QuickSortRecords and draws each object by its kind (0 actor, 1 prop, 3 effect). */
@@ -275,7 +275,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
             Simple_DrawCachedModel(object);
             break;
         case 1:
-            func_80249E28_de(object, camera);
+            Gobjinst_DrawVisibleCachedActor(object, camera);
             break;
         }
     }
@@ -287,7 +287,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
 #include "COMMON/WORLD.H"
 #include "stddef.h"
 f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-f32 GraphU64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
+f32 Graphu64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
 
 /* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
 /* Finds the containing solid volume, or the nearest floor polygon, as a legacy 32-bit handle. */
@@ -336,7 +336,7 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
                     if (Region_IsPointInTriangleXZ(poly, pos->x, pos->z) != 0) {
                         floor = Region_GetPolygonHeight(poly, pos->x, pos->z);
                         if (poly->flags & 0x40) {
-                            ceiling = GraphU64_GetTrianglePlaneHeight(poly, pos->x, pos->z);
+                            ceiling = Graphu64_GetTrianglePlaneHeight(poly, pos->x, pos->z);
                             if (floor <= pos->y && pos->y <= ceiling) {
                                 return (s32)poly;
                             }

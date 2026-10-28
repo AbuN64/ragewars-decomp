@@ -123,7 +123,7 @@ s32 Cinema_IsSequenceIdle(void) {
 }
 
 /** Return the word at offset 0x3C of the current global object. */
-unsigned int func_80245850_de(void) {
+unsigned int Cinema_GetPlaybackPauseState(void) {
     return D_800E2830->state3C;
 }
 
@@ -201,7 +201,7 @@ void Cinema_SetLetterboxState(void *letterboxEnabled) {
     D_800DE7F4_de = letterboxEnabled;
 }
 
-f32 func_802459A0_de(void) {
+f32 Cinema_GetSequenceResponse(void) {
     Shared_MenuContext *record = D_800E2830;
     f32 response;
 
@@ -259,13 +259,13 @@ void Cinema_ClearMessageCount(void) {
     D_800E2830->messageCount = 0;
 }
 
-float func_80245AD8_de(void) {
+float Cinema_GetScaledSequenceValue(void) {
     Shared_MenuContext *record = D_800E2830;
     return (record->spec.scaleA0) * (D_800C88CC);
 }
 
 /** Return the word at offset 0xB0 of the current global object. */
-unsigned int func_80245AF8_de(void) {
+unsigned int Cinema_GetSequenceProperty(void) {
     return D_800E2830->spec.unknown48;
 }
 
@@ -347,7 +347,7 @@ void Cinema_AdvanceSequenceTime(void) {
     Shared_MenuContext *record;
 
     if (Cinema_IsSequenceActive() != 0) {
-        if (func_80245850_de() != 0) {
+        if (Cinema_GetPlaybackPauseState() != 0) {
             D_800E2830->time20 = D_800E2830->time;
             return;
         }

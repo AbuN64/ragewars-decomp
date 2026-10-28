@@ -125,7 +125,7 @@ extern void func_8023A190_de(void *arg0, int arg1);
 
 extern float D_800C3594_de;
 
-extern void func_80239FDC_de(void *arg0);
+extern void Gsky_UpdateFloorSurface(void *arg0);
 
 extern void func_80239404_de(void);
 

@@ -21,6 +21,6 @@ void Tsmos_RequestFrontendShutdown(void) {
 
 void Tsmos_ScaleCurrentScreen(void) {
     if (D_800E28D8 == 1) {
-        Tsmos_ScaleWidgetTree(Frontend_GetScreenData(GetMenuScreenOwner()), 0);
+        Tsmos_ScaleWidgetTree(Node_GetScreenData(GetMenuScreenOwner()), 0);
     }
 }

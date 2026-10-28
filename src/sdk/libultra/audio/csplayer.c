@@ -18,7 +18,7 @@
 #include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "include_asm.h"
 
-extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
+extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 
 extern void func_802AFFC0_de(void *, void *, s32);
@@ -74,10 +74,10 @@ void func_802AEAB0_de(void *arg0, InitParams *config) {
     obj->stopOsc = params->value18;
     obj->nextEvent.type = 9;
     obj->maxChannels = params->kind;
-    obj->chanState = func_802B0340_de(0, 0, (void *)context, params->kind, 0x10);
+    obj->chanState = alHeapDBAlloc(0, 0, (void *)context, params->kind, 0x10);
     __initChanState(obj);
 
-    allocation = func_802B0340_de(0, 0, (void *)context, params->count38, 0x38);
+    allocation = alHeapDBAlloc(0, 0, (void *)context, params->count38, 0x38);
     obj->vFreeList = 0;
     i = 0;
     if (params->count38 > 0) {
@@ -94,7 +94,7 @@ void func_802AEAB0_de(void *arg0, InitParams *config) {
 
     obj->vAllocHead = 0;
     obj->vAllocTail = 0;
-    allocation = func_802B0340_de(0, 0, (void *)context, params->count1C, 0x1C);
+    allocation = alHeapDBAlloc(0, 0, (void *)context, params->count1C, 0x1C);
     func_802AFFC0_de(&obj->evtq, (void *)allocation, params->count1C);
     {
         ALPlayer_s *node = &obj->node;

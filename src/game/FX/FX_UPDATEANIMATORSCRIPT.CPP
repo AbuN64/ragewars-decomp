@@ -71,7 +71,7 @@ void Fx_UpdateAnimatorScript(Animator *a) {
             op0 = *a->script++;
             op1 = *a->script++;
             a->mode = 1;
-            a->time = GraphU64_RandomBetween(op0, op1);
+            a->time = Graphu64_RandomBetween(op0, op1);
             break;
         case 3:
             next = 1;

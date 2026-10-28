@@ -10,7 +10,7 @@ extern s32 *D_800E2830;
 
 
 
-void func_80244D70_de(void)
+void CCinema_ResetSequenceContext(void)
 {
     s32 *p = D_800E2830;
 

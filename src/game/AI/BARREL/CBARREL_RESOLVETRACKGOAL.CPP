@@ -170,10 +170,10 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     out->m_DeltaAngle = range;
     out->m_vTargetPos = pos;
     out->m_vDeltaTargetPos = delta;
-    out->m_DistFrom = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->m_DistFrom = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     delta.y = 0.0f;
     pos.y = 0.0f;
     out->m_vXZTargetPos = pos;
     out->m_vXZDeltaTargetPos = delta;
-    out->m_XZDistFrom = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->m_XZDistFrom = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
 }

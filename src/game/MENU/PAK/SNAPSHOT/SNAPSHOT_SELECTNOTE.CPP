@@ -104,7 +104,7 @@ profile_failed:
             if ((blockState != 0) && (readError == 0)) {
                 blockState = pages;
                 if (D_800DE864_de != 0) {
-                    func_80253908_de(0);
+                    Cache_DrainAndCompactResources(0);
                     Cache_ReleaseResource(0, D_800DE864_de);
                 }
                 if (blockState != 0) blockState <<= 8;
@@ -200,7 +200,7 @@ profile_failed:
                 if (((status=Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (XPlus_CompareStrings(name, rw_pak_block_name(&D_80145040.game)) == 0)) {
                     allocationSize = pages;
                     if (D_800DE864_de != 0) {
-                        func_80253908_de(0);
+                        Cache_DrainAndCompactResources(0);
                         Cache_ReleaseResource(0, D_800DE864_de);
                     }
                     if (allocationSize != 0) allocationSize <<= 8;
@@ -221,7 +221,7 @@ profile_failed:
                     }
                     readError = 1;
                     if ((D_800DE860_de != 0) || (D_800DE864_de != 0)) {
-                        func_80253908_de(0);
+                        Cache_DrainAndCompactResources(0);
                     }
                     if (D_800DE860_de != 0) {
                         Cache_ReleaseResource(0, D_800DE860_de);

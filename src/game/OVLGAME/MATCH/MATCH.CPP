@@ -90,7 +90,7 @@ void Match_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
     s32 var_s0;
 
     var_s0 = -1;
-    if (OvlScene_FindPlacedObjectsByKey(&g_world, var_s0, var_s0, &spawn, 1) == 0) {
+    if (Scene_FindPlacedObjectsByKey(&g_world, var_s0, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;
@@ -105,11 +105,11 @@ void Match_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
 }
 
 /* Starts the fade out of the session into the match: keeps key as the session selector when
-   OvlScene_FindPlacedObjectsByKey finds a placed object for it (else 0), restarts the game clock and targets mode 13
+   Scene_FindPlacedObjectsByKey finds a placed object for it (else 0), restarts the game clock and targets mode 13
    when the local player has a transition pending, otherwise mode 12. */
 void Match_StartMatchTransition(GameSession *session, s32 key) {
     Shared_Placed spawn;
-    if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, key, &spawn, 1) == 0) {
+    if (Scene_FindPlacedObjectsByKey(&g_world, -1, key, &spawn, 1) == 0) {
         key = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;

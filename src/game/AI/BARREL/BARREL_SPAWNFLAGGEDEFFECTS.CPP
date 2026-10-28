@@ -44,7 +44,7 @@ void Barrel_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFl
                 Insthdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
-                              GraphU64_RandomBetween(D_800C21D8_de, D_800C21DC_de));
+                              Graphu64_RandomBetween(g_barrelFlaggedEffectRandomRanges, D_800C21DC_de));
             }
             entry += 2;
         } while (entry[0] != 0);
@@ -57,7 +57,7 @@ void Barrel_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFl
                 Insthdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
-                              GraphU64_RandomBetween(D_800C21E0_de, D_800C21E4_de));
+                              Graphu64_RandomBetween(D_800C21E0_de, D_800C21E4_de));
             }
             entry += 2;
         } while (entry[0] != 0);
@@ -233,7 +233,7 @@ void Barrel_SpawnEffectsFromMask(Player *arg0, s32 unused1, s32 arg2, s32 *entry
                 Insthdr_PlayActorGraphSound(arg0,
                               arg0->pos,
                               entry[1],
-                              GraphU64_RandomBetween(D_800C21EC_de, D_800C21F0_de));
+                              Graphu64_RandomBetween(D_800C21EC_de, D_800C21F0_de));
             }
             entry += 2;
         } while (entry[0] != 0);

@@ -312,7 +312,7 @@ void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
     s32 id;
     s32 frame;
     record = &g_playerSettings[player];
-    parent = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, group);
+    parent = Node_FindWidgetByResourceId(D_800E53C0->unkE0, group);
     switch (kind) {
     case 0:
     default:
@@ -352,7 +352,7 @@ void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
 #endif
         break;
     }
-    item = Frontend_FindWidgetByResourceId(parent, id);
+    item = Node_FindWidgetByResourceId(parent, id);
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     rank = record->rank;
@@ -385,7 +385,7 @@ void Frontend_HideResultBadgeGroup(s32 arg0) {
     s32 var_a1;
     s32 var_s0;
 
-    root = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, arg0 & 0xFFFF);
+    root = Node_FindWidgetByResourceId(D_800E53C0->unkE0, arg0 & 0xFFFF);
     var_s0 = 0;
     do {
         switch(var_s0) {
@@ -395,7 +395,7 @@ void Frontend_HideResultBadgeGroup(s32 arg0) {
         case 3: var_a1=ITEM3; break;
         default: var_a1=ITEM0; break;
         }
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(root, var_a1), 0);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(root, var_a1), 0);
         var_s0 += 1;
     } while (var_s0 < 4);
 }
@@ -465,7 +465,7 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
     if (D_800E28E0 <= 0) {
         if (D_800E53C0->phase == 0) {
             D_800E53C0->phase = 1;
-            if (Widget_ListHasFlag100(Frontend_FindWidgetByResourceId(context, CONFIRM_MESSAGE)) == 0) {
+            if (Widget_ListHasFlag100(Node_FindWidgetByResourceId(context, CONFIRM_MESSAGE)) == 0) {
                 message = CONFIRM_MESSAGE;
             } else {
                 message = FALLBACK_MESSAGE;

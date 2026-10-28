@@ -20,9 +20,9 @@ extern s8 D_8010BBB8;
 extern s32 *Cache_AllocateResource(s32, s32, s32, void *);
 
 
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 
-extern void func_8025476C_de(s32);
+extern void Cache_SetResourceActivityState(s32);
 
 extern s32 func_8025477C_de(void);
 
@@ -105,7 +105,7 @@ s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
   }
   if (func_8025477C_de() == 0)
   {
-    func_8025476C_de(one);
+    Cache_SetResourceActivityState(one);
   }
   buf = Cache_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
   addr = *buf;
@@ -126,7 +126,7 @@ s32 Note_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
     }
   }
   Control_ReleasePakLock();
-  func_80253908_de(zero);
+  Cache_DrainAndCompactResources(zero);
   if (buf != ((void *) 0))
   {
     Cache_ReleaseResource(0, buf);

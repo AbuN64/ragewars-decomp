@@ -14,7 +14,7 @@ extern f32 GameObject_GetActorRadius(Actor_u1 *);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 struct Cursor;
 extern ApproachLocation *func_80219408_de(struct Cursor *);
-extern s32 func_80240660_de(Actor_func_80214624_de *,CVector3,s32,s32,CVector3 *);
+extern s32 CCollision_CopyProbePosition(Actor_func_80214624_de *,CVector3,s32,s32,CVector3 *);
 struct Node75;
 extern s32 Region_IsPointInTriangleXZ(struct Node75 *,f32,f32);
 extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214624_de *,CVector3,CVector3 *,s32 *,s32,s32);

@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),GraphU64_GetMatrixTranslation(void *,void *),Graphu64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),Linked_AppendRibbonSegment(void *,Node44 *,void *);
+extern void Graphu64_ConvertMatrixToFixed(void *,void *),Graphu64_ConvertMatrixToFloat(void *,void *),Graphu64_ClampMatrixToFixedRange(void *),Graphu64_GetMatrixTranslation(void *,void *),Graphu64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),Linked_AppendRibbonSegment(void *,Node44 *,void *);
 
 void Fx_DrawColoredRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -111,11 +111,11 @@ s32 Fx_SelectAnimationFrame(AnimationFrameState *state,
         }
         break;
     case 4:
-        *selected = GraphU64_NextRandom() % *frame_count;
+        *selected = Graphu64_NextRandom() % *frame_count;
         break;
     case 5:
         if (state->cached_frame == -1) {
-            state->cached_frame = GraphU64_NextRandom() % *frame_count;
+            state->cached_frame = Graphu64_NextRandom() % *frame_count;
         }
         *selected = state->cached_frame;
         break;
@@ -152,18 +152,18 @@ loop_4:
                                 ((struct ObjectState68 *) (((char *) segment) + (D_800D297C << 6)))->unk_28=((struct ObjectState68 *) (((char *) segment) + ((D_800D297C ^ 1) << 6)))->unk_28;
                                 segment->unk_B0 = 0;
                             } else {
-                                GraphU64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((D_800D297C << 6) + 0x60));
+                                Graphu64_ConvertMatrixToFloat(&localMatrix, (char *)detachedEntity + ((D_800D297C << 6) + 0x60));
                                 scale = D_800C5E28_de;
                                 if (detachedEntity->unk_118->unk14 != 0) {
                                     scale = D_800C5E2C_de;
                                 }
                                 ScaleMatrixLocal(&localMatrix, scale, scale, scale);
-                                GraphU64_ClampMatrixToFixedRange(&localMatrix);
-                                GraphU64_GetMatrixTranslation(&localMatrix, segment->pos);
+                                Graphu64_ClampMatrixToFixedRange(&localMatrix);
+                                Graphu64_GetMatrixTranslation(&localMatrix, segment->pos);
                                 if (ribbon->unk_3C & 4) {
                                     Graphu64_GetMatrixScale(&localMatrix, segment->rot);
                                 } else {
-                                    GraphU64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((D_800D297C << 6) + 0x28));
+                                    Graphu64_ConvertMatrixToFixed(&localMatrix, (char *)segment + ((D_800D297C << 6) + 0x28));
                                 }
                             }
                             segment->unk_8 = (f32) ribbon->unk_8->unk_8;
@@ -182,13 +182,13 @@ loop_4:
                     matrix += (unsigned int)detachedEntity;
                     matrix += 0x60;
                     if (ribbon->unk_24 > 0.0f) {
-                    GraphU64_ConvertMatrixToFloat(&localMatrix, matrix);
+                    Graphu64_ConvertMatrixToFloat(&localMatrix, matrix);
                     entityScale = D_800C5E30_de;
                     if (detachedEntity->unk_118->unk14 != 0) {
                         entityScale = D_800C5E34_de;
                     }
                     ScaleMatrixLocal(&localMatrix, entityScale, entityScale, entityScale);
-                    GraphU64_ClampMatrixToFixedRange(&localMatrix);
+                    Graphu64_ClampMatrixToFixedRange(&localMatrix);
                     Linked_AppendRibbonSegment(&D_801379C0, ribbon, &localMatrix);
                 }
                 }
@@ -242,7 +242,7 @@ extern EffectResource *Scene_GetLinkedResourceSection(void *, s32);
 extern void Lists_ClearHeader(void *);
 extern void Textload_LocateTextureResource(void *, s32);
 extern void Particle_EncodeRenderLayer(void *, void *);
-extern void GraphU64_IdentityMatrix(void *);
+extern void Graphu64_IdentityMatrix(void *);
 
 static inline EffectNode *FX_FIND_NODE(EffectWorld *world, FxActor *actor) {
     EffectNode *it;
@@ -300,7 +300,7 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
     if (node) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
-        GraphU64_IdentityMatrix(matrix);
+        Graphu64_IdentityMatrix(matrix);
         instance = ((EffectInstance *(*)(void *, void *, void *))Linked_AppendRibbonSegment)(world, node, matrix);
         if (instance) instance->actor = actor;
     }

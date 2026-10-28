@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CAC74[13] =
+const char g_objectTypesText[13] =
     "object types\000";
 #endif
 

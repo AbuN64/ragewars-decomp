@@ -27,11 +27,11 @@ extern Gfx *g_displayListCursor;
 
 extern s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 
-extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
-extern s32 GraphU64_LimitVectorLength(CVector3 *, f32);
+extern s32 Graphu64_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
@@ -39,7 +39,7 @@ extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
+extern void Graphu64_ConvertMatrixToFixed(f32 *, void *);
 
 extern void Geometry_DrawIntensityMask(void *model, s32 pass, u8 alpha);
 
@@ -48,7 +48,7 @@ extern s32 D_80140FF8;
 
 extern char D_800C4D38_de;
 
-extern char D_800C4D50_de;
+extern char g_simpPartModelsIndexText;
 
 extern char s_simpPartModelText;
 
@@ -104,7 +104,7 @@ void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
         return;
     }
     angle = 0.78539824f;
-    tilt = GraphU64_BuildDirectionQuaternion(&ground->normal);
+    tilt = Graphu64_BuildDirectionQuaternion(&ground->normal);
     roll.x = D_80115DEC = Math_Sinf(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;
@@ -129,11 +129,11 @@ void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
     point.x = actor->inst.pos.x;
     point.z = actor->inst.pos.z;
     point.y = floor;
-    GraphU64_LimitVectorLength(&point, 20000.0f);
+    Graphu64_LimitVectorLength(&point, 20000.0f);
     MatrixFromQuaternion(&rotation, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, point.x, point.y, point.z);
-    GraphU64_ConvertMatrixToFixed(matrix, model);
+    Graphu64_ConvertMatrixToFixed(matrix, model);
     {
         Gfx *cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
@@ -167,7 +167,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
         if (matrix == 0) {
             return;
         }
-        GraphU64_TransformPoint(view->worldToView, &particle->inst.pos, &delta);
+        Graphu64_TransformPoint(view->worldToView, &particle->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -183,7 +183,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
             key = SetN64_GetDirectoryEntry(*resource,
                                 particle->desc->renderModel, 1);
             Cache_ReleaseResource(0, resource);
-            found = Cache_RequestWordCountedResource(0, &modelTable, key, &D_800C4D50_de, 1);
+            found = Cache_RequestWordCountedResource(0, &modelTable, key, &g_simpPartModelsIndexText, 1);
             if (found != 0) {
                 particle->resource = SetN64_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,

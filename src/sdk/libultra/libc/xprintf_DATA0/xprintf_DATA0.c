@@ -3,7 +3,7 @@
 
 /* 800CCD40.CPP */
 #if !(defined(VERSION_US_REV1))
-const char D_802BD430_CD940[8] =
+const char g_printfFlagCharactersText[8] =
     " +-#0\000\000\000";
 #endif
 

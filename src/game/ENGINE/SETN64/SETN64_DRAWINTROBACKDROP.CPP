@@ -85,7 +85,7 @@ void SetN64_ResetSceneForIntro(void *arg0) {
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
-    TextLoad_SetTextureEffect(0);
+    Textload_SetTextureEffect(0);
 }
 
 void SetN64_AdvanceIntroForMemorySize(GameSession *session) {

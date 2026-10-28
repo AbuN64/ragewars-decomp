@@ -32,13 +32,13 @@ static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32
     node->z.value = c;
 }
 
-extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 /* Posts a text as on-screen messages, one per line: the text (or D_800D7028 when given D_800D7034) is split
  * at newlines and for each non-empty line the oldest message node of the owner's list at 0xF24 is recycled
- * (cleared through func_80239CE0_de, unlinked, and pushed onto the free list at 0xE40 of the pool) and set up
+ * (cleared through Gsky_ClearScreenMessage, unlinked, and pushed onto the free list at 0xE40 of the pool) and set up
  * as a kind 2 message centred horizontally 80 pixels above the bottom of the screen, scaled by the given
  * size. Returns the last message node. */
 
@@ -57,7 +57,7 @@ static inline CCameraText *recycle(void *owner, void *pool) {
 
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
-        func_80239CE0_de(oldest);
+        Gsky_ClearScreenMessage(oldest);
         func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
         func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
@@ -131,7 +131,7 @@ void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero)
     f32 bestDist;
     f32 distSq;
 
-    GraphU64_LimitVectorLength(&zero->x, 20000.0f);
+    Graphu64_LimitVectorLength(&zero->x, 20000.0f);
     if (menuMatchGlobals->useFallbackCamera != 0) {
         return &menuMatchGlobals->fallbackCamera;
     }
@@ -172,7 +172,7 @@ f32 Gsky_GetMeanViewDistance(Race *viewOwner, void *targetPosition) {
     if (node != 0) {
         do {
             GraphU64_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
-            sum += Math_Sqrtf(
+            sum += Gu_Sqrtf(
                 (position.x * position.x) +
                 (position.y * position.y) +
                 (position.z * position.z));
@@ -195,6 +195,6 @@ void *Gsky_PostFlaggedScreenMessage(struct ScreenMessageOwner *owner, struct Scr
     return message;
 }
 
-CCameraText *Sky_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
+CCameraText *Gsky_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
     return post_lines(owner, pool, text, 2, size, -1);
 }

@@ -50,7 +50,7 @@ extern f32 InstHdr_GetShadowGroundHeight(void *arg0, s32 arg1);
 
 extern int D_80104418;
 
-void func_8022C8A4_de(struct SharedPlayer *player, void *bodyActor) {
+void Player_StartMovingOnStickInput(struct SharedPlayer *player, void *bodyActor) {
     if ((player->views5E8.view6C0_51.unk6C0 != 0.0f) || (player->views5E8.view6C4_54.unk6C4 != 0.0f)) {
         Player_SetPlayerState(player, bodyActor, 3);
     }
@@ -62,14 +62,14 @@ void func_8022C8EC_de(void) {
 void func_8022C8F4_de(void) {
 }
 
-void func_8022C8FC_de(struct SharedPlayer *player, void *bodyActor) {
+void Player_UpdateGroundMoveState(struct SharedPlayer *player, void *bodyActor) {
     f32 x;
     f32 y;
     f32 zero;
 
     Player_EaseOwnerHeightEffect(player, bodyActor);
     zero = 0.0f;
-    GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
+    Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
     Player_UpdateViewAngles(player, bodyActor, &D_800CE7FC);
     func_802233F0_de(player, bodyActor, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
@@ -100,7 +100,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *bodyActor) {
     }
 }
 
-void func_8022CA14_de(Player *player, void *bodyActor) {
+void Player_BeginJump(Player *player, void *bodyActor) {
     CVector3 vector;
     f32 scale;
     u8 *result;
@@ -147,7 +147,7 @@ void func_8022CA14_de(Player *player, void *bodyActor) {
     }
 }
 
-void func_8022CB5C_de(void *player, LevelActor *actor) {
+void Player_UpdateJumpAscent(void *player, LevelActor *actor) {
     f32 scale;
 
     scale = D_800C2D68_de;
@@ -180,13 +180,13 @@ scale_value:
     actor->position1.y =
         scale * ((Resource_u1 *)actor->definition)->value20;
 finish:
-    func_8022CC34_de(player, actor);
+    Player_UpdateJumpAirMotion(player, actor);
 }
 
-void func_8022CC34_de(void *player, void *body) {
+void Player_UpdateJumpAirMotion(void *player, void *body) {
     s32 value;
 
-    GraphU64_EaseValueToward(&((Player *)player)->lean, 0.0f, 0.25f);
+    Graphu64_EaseValueToward(&((Player *)player)->lean, 0.0f, 0.25f);
     Player_UpdateViewAngles(player, body, &D_800CE7E4);
     if (!(((Player *)player)->flags660 & 0x8000)) {
         func_802233F0_de(player, body, &D_800C94EC_de);
@@ -212,7 +212,7 @@ set_value:
     }
 }
 
-void func_8022CD78_de(void *movementState, void *actorMotion) {
+void Player_BeginLateralLeap(void *movementState, void *actorMotion) {
     if ((((struct FloatState6C8 *) ((s8 *) movementState))->unk_6A4) < 0.0f) {
         (((struct FloatState6C8 *) ((s8 *) movementState))->unk_6C4) = (f32) D_800C2D80_de;
     } else {
@@ -221,7 +221,7 @@ void func_8022CD78_de(void *movementState, void *actorMotion) {
     (((struct func_8022CA04_S3 *) ((s8 *) actorMotion))->unk20) = (f32) D_800C2D88_de;
 }
 
-void func_8022CDBC_de(void *player, LevelActor *actor) {
+void Player_UpdateLateralLeap(void *player, LevelActor *actor) {
     f32 currentLateralSpeed;
 
     currentLateralSpeed = ((Shared_ActorView *)player)->lateralSpeed;
@@ -232,11 +232,11 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
     } else {
         actor->position1.y = D_800C2D90_de;
     }
-    func_8022CE78_de((s32)player, (s32)actor);
+    Player_UpdateLeapMotion((s32)player, (s32)actor);
 }
 
-void func_8022CE78_de(s32 player, s32 body) {
-    GraphU64_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
+void Player_UpdateLeapMotion(s32 player, s32 body) {
+    Graphu64_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
     Player_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {
@@ -246,7 +246,7 @@ void func_8022CE78_de(s32 player, s32 body) {
     }
 }
 
-void func_8022CF18_de(void) {
+void Player_ClearGlobalFlagBit(void) {
     int *p = &D_80104418;
     *p &= 0xFFEFFFFF;
 }

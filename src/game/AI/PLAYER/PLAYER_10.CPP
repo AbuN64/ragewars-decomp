@@ -4,7 +4,7 @@
 #include "FX/80271B18.H"
 
 /* Builds a player's aiming marker matrices for the current view D_800D297C and turns the marker on at
-   0x1214: a beam from the eye (the view position at 0x128, or func_8022B144_de without a view) toward the
+   0x1214: a beam from the eye (the view position at 0x128, or Player_GetPlayerViewTranslation without a view) toward the
    target point, pitched straight up or down when nearly vertical, is stored in the table at 0x1480; the
    laser from the weapon muzzle at 0x260 to the aim point at 0x1464 (lowered by the view's height above
    the muzzle) in the table at 0x1500; and with a surface normal given, a dot flattened against the
@@ -22,22 +22,22 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 
 
 extern f32 D_800C9F70_de;
-extern void func_8022B144_de(SharedPlayer *, CVector3 *);
+extern void Player_GetPlayerViewTranslation(SharedPlayer *, CVector3 *);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern void GraphU64_IdentityMatrix(Matrix *);
+extern void Graphu64_IdentityMatrix(Matrix *);
 extern void Graphu64_MatrixFromEulerXYZ(Matrix *, f32, f32, f32);
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 extern void TranslateMatrix(Matrix *, CVector3);
 extern void ScaleMatrixLocal(Matrix *, f32, f32, f32);
 extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
-extern void GraphU64_ConvertMatrixToFixed(Matrix *, Matrix *);
-extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern void Graphu64_ConvertMatrixToFixed(Matrix *, Matrix *);
+extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 extern void PitchMatrixLocal(Matrix *, f32);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) {
+void Player_BuildAimMarkerMatrices(SharedPlayer *player, CVector3 *target, CVector3 *normal) {
     CVector3 to;
     CVector3 eye;
     CVector3 lift;
@@ -53,13 +53,13 @@ void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) 
     if (player->views5DC.view5DC_2.view != 0) {
         origin = player->views5DC.view5DC_2.view->unk128;
     } else {
-        func_8022B144_de(player, &origin);
+        Player_GetPlayerViewTranslation(player, &origin);
     }
     eye = origin;
     to = *target;
     GraphU64_SubtractVectors(&direction, &to, &eye);
     GraphU64_NormalizeVec3(&direction);
-    GraphU64_IdentityMatrix(&matrix);
+    Graphu64_IdentityMatrix(&matrix);
     if (0.99999899f <= direction.y) {
         Graphu64_MatrixFromEulerXYZ(&matrix, -1.57079649f, player->views1C.view6C_5.heading, 0.0f);
     } else if (direction.y <= -0.99999899f) {
@@ -70,7 +70,7 @@ void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) 
     TranslateMatrix(&matrix, eye);
     TranslateMatrixLocal(&matrix, 0.0f, 0.0f, D_800C9F70_de);
     ScaleMatrixLocal(&matrix, 0.05f, 1.0f, D_800C9F70_de - Graphu64_GetPointDistance(&eye, &to));
-    GraphU64_ConvertMatrixToFixed(&matrix, &player->views1480.view1480_1.beams[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(&matrix, &player->views1480.view1480_1.beams[D_800D297C]);
 
     aim = player->views1464.view1464_1.aim;
     if (player->views5DC.view5DC_2.view != 0) {
@@ -81,16 +81,16 @@ void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) 
     }
     GraphU64_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
     GraphU64_NormalizeVec3(&direction);
-    GraphU64_IdentityMatrix(&matrix);
+    Graphu64_IdentityMatrix(&matrix);
     BuildDirectionMatrix(&matrix, &direction);
     TranslateMatrix(&matrix, player->views1C.view260_26.muzzle);
     scale = 1.0f;
     ScaleMatrixLocal(&matrix, scale, scale, -Graphu64_GetPointDistance(&origin, &player->views1464.view1464_1.aim));
-    GraphU64_ConvertMatrixToFixed(&matrix, &player->views1500.view1500_1.lasers[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(&matrix, &player->views1500.view1500_1.lasers[D_800D297C]);
 
     if (normal != 0) {
         lift = *normal;
-        turn = GraphU64_BuildDirectionQuaternion(&lift);
+        turn = Graphu64_BuildDirectionQuaternion(&lift);
         MatrixFromQuaternion(&turn, &matrix);
         PitchMatrixLocal(&matrix, 1.57079649f);
         GraphU64_NormalizeVec3(&lift);
@@ -98,7 +98,7 @@ void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) 
         GraphU64_AddVec3(&eye, &eye, &lift);
         TranslateMatrix(&matrix, to);
         ScaleMatrixLocal(&matrix, 1.536f, scale, 1.536f);
-        GraphU64_ConvertMatrixToFixed(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);
+        Graphu64_ConvertMatrixToFixed(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);
     }
     player->views5E8.view1214_155.marker = 1;
 }

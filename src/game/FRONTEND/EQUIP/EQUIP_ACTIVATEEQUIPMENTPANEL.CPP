@@ -70,11 +70,11 @@ void Equip_MoveEquipmentColumn(s32 player, s32 direction) {
     s32 column;
 
     column = D_800E59E0->panels[player].selection;
-    item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
+    item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
     Widget_SetWidgetFlag40(item, 0);
     item->alpha = 0x23;
     if (column != 5) {
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][column].value), 0);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][column].value), 0);
     }
     if (direction == 1) {
         if (column == 0) {
@@ -171,24 +171,24 @@ void Equip_ActivateEquipmentPanel(s32 player) {
     s32 i;
 
     D_800E59E0->panels[player].state = 1;
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value), 0);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value), 0);
     switch (D_800E59E0->panels[player].mode) {
     case 0:
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][5].value), 0);
-        item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][5].value);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][5].value), 0);
+        item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][5].value);
         Frontend_SetWidgetFlag08(item, 1);
         item->alpha = 0x23;
         break;
     case 1:
         for (i = 0; i < 3; i++) {
-            Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][i].value), 0);
-            item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
+            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][i].value), 0);
+            item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
             Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
             Equip_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
         }
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][5].value), 0);
-        item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][5].value);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][5].value), 0);
+        item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][5].value);
         Frontend_SetWidgetFlag08(item, 1);
         item->alpha = 0x23;
         Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
@@ -196,8 +196,8 @@ void Equip_ActivateEquipmentPanel(s32 player) {
     case 2:
     default:
         for (i = 0; i < 6; i++) {
-            Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][i].value), 0);
-            item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
+            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59EE[player][i].value), 0);
+            item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][i].value);
             Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
             Equip_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
@@ -205,11 +205,11 @@ void Equip_ActivateEquipmentPanel(s32 player) {
         break;
     }
     for (i = 0; i < 5; i++) {
-        item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value);
+        item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value);
         Frontend_SetWidgetFlag08(item, 0);
         item->alpha = 0x37;
     }
-    item = Frontend_FindWidgetByResourceId(D_800E59E0->window,
+    item = Node_FindWidgetByResourceId(D_800E59E0->window,
                          D_800E5A1A[player][D_800E59E0->panels[player].selection].value);
     Widget_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
@@ -271,7 +271,7 @@ void Equip_ShowEquipChoice(s32 player, s32 category, s32 choice)
         }
     }
     if (table) {
-        node = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][category].value)->child;
+        node = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][category].value)->child;
         found = 0;
         do {
             if (node->kind == 3) {

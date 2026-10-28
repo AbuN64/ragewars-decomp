@@ -29,7 +29,7 @@ extern void SmpButton_AppendListText(struct MenuListWidget *, u8 *);
 extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(Scroll *, s32);
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 /* eu-x Options_CreateOptionsPage: the PAL options page with its own resource ids, plus the caption widget
    0x5E whose text is set from the per-language table D_auto_800DDB08. */
 s32 Menu_CreateLocalizedSettingsPage(void *node) {
@@ -67,7 +67,7 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
     g_optionsPage->unk_8 = slider;
     SmpSlider_SetSliderItem(slider, settings->buttons);
     SmpButton_WrapButtonWidget(0x5D);
-    Frontend_FindWidgetByResourceId(node, 0x5E)->text = D_auto_800DDB08[settings->language];
+    Node_FindWidgetByResourceId(node, 0x5E)->text = D_auto_800DDB08[settings->language];
     SmpButton_WrapButtonWidget(0x5C);
     title = SmpFlicker_CreateFlickerWidget(0x51, 0x6E);
     g_optionsPage->state = 3;
@@ -127,23 +127,23 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     SmpOverlay_ShowSlotById(handle, 1, 0x389);
     SmpOverlay_ShowSlotById(handle, 2, 0x389);
     SmpOverlay_ShowSlotById(handle, 3, 0x389);
-    widget = Frontend_FindWidgetByResourceId(handle, 0x38B);
+    widget = Node_FindWidgetByResourceId(handle, 0x38B);
     widget->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    D_800E39C0->rows[0] = Frontend_FindWidgetByResourceId(handle, 0x38C);
-    D_800E39C0->rows[1] = Frontend_FindWidgetByResourceId(handle, 0x395);
-    D_800E39C0->rows[2] = Frontend_FindWidgetByResourceId(handle, 0x396);
+    D_800E39C0->rows[0] = Node_FindWidgetByResourceId(handle, 0x38C);
+    D_800E39C0->rows[1] = Node_FindWidgetByResourceId(handle, 0x395);
+    D_800E39C0->rows[2] = Node_FindWidgetByResourceId(handle, 0x396);
     D_800E39C0->step = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
     }
     Tsmos_ActivateControllerState();
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
     return 0;
 }
 #endif

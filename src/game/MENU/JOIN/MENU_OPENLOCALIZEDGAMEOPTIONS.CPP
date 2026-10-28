@@ -154,7 +154,7 @@ s32 Menu_CreateSessionSettingsControls(void) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
@@ -181,30 +181,30 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     func_8025E214_de(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
-    D_800E4518->leftTab = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x381));
+    D_800E4518->leftTab = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x381));
     D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
     D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
     rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
     D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x388));
+    D_800E4518->rightTab = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x388));
     D_800E4518->rightTab->x += D_800E4518->rightTab->width;
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
     D_800E4518->title = SmpFlicker_CreateFlickerWidget(MENU_RESOURCE_ID(0x373), 0x6E);
-    marker = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x372));
+    marker = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x372));
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
-    (Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x386)))->alpha = 0x6E;
-    header = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x387));
+    (Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x386)))->alpha = 0x6E;
+    header = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x387));
     D_800E4518->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x370));
-    rumble = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x384));
+    D_800E4518->footer = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x370));
+    rumble = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x384));
     D_800E4518->rumbleIcon = rumble;
     Frontend_SetWidgetFlag08(rumble, 1);
-    (Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x385)))->alpha = 0x6E;
-    pak = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x374));
+    (Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x385)))->alpha = 0x6E;
+    pak = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x374));
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
     SmpButton_WrapButtonWidget(MENU_RESOURCE_ID(0x377));
@@ -231,9 +231,9 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
-            Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
+            Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
         }
-        handle = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
+        handle = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
         Widget_SetWidgetFlag100(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
@@ -246,9 +246,9 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     case 2:
     case 3:
     case 4:
-        handle = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
+        handle = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x380));
         Widget_SetWidgetFlag100(handle, 1);
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x37E)), 1);
         break;
     }
     SmpButton_WrapButtonWidget(MENU_RESOURCE_ID(0x380));
@@ -266,7 +266,7 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     D_80154020.ready = 0;
     D_80154020.value = -1;
     Menu_ConfigureOptionsCamera();
-    prompt = Frontend_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x371));
+    prompt = Node_FindWidgetByResourceId(node, MENU_RESOURCE_ID(0x371));
     D_800E4518->prompt = prompt;
     Frontend_SetWidgetFlag08(prompt, 1);
     return 0;

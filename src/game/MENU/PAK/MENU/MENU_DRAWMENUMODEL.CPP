@@ -127,15 +127,15 @@ extern f32 literals_Scene_GetPlatformRoutePoint;
 extern u8 D_00443128[], D_00443104[];
 extern void XPlus_FillMemory(void *, s32, s32);
 extern u8 *Scene_FindActorDefinition(void *, s32, s32);
-extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
-extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
-extern void func_8024B2D0_de(u8 *);
+extern void Graphu64_TransformPoint(void *, CVector3 *, CVector3 *);
+extern void Gobjinst_InitializeActor(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void Gobjinst_DispatchActorTypeUpdate(u8 *);
 extern s32 func_8025477C_de(void);
-extern void func_8025476C_de(s32);
+extern void Cache_SetResourceActivityState(s32);
 extern void Scene_ChangeInstanceModel(void *, u8 *, s32, s32);
-extern void func_8024B8C4_de(u8 *);
+extern void Gobjinst_RotatePoseMatrixBuffers(u8 *);
 extern void func_80246E44_de(u8 *);
-extern void func_80249E28_de(void *object, void *camera);
+extern void Gobjinst_DrawVisibleCachedActor(void *object, void *camera);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)Scene_FindActorDefinition(&g_world, id, variant);
@@ -195,12 +195,12 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     }
     offset = def->offset;
     offset.y = offset.y - widget->size * scaled.y * 0.8f;
-    GraphU64_TransformPoint(&context->screen->camera, &offset, &placed);
+    Graphu64_TransformPoint(&context->screen->camera, &offset, &placed);
     if (link != 0 && !(entry->flags & 0x2000000)) {
-        func_802466A0_de(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
+        Gobjinst_InitializeActor(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
                          context->screen->heading + RW_PI_F6, placed, 0,
                          def->scale, zero, 0);
-        func_8024B2D0_de(draw);
+        Gobjinst_DispatchActorTypeUpdate(draw);
         entry->flags |= 0x2000000;
     }
     wobble = Math_Sinf((f32)(u32)((u32)D_800CD730 * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
@@ -212,7 +212,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
         draw->update = D_00443104;
     }
     if (func_8025477C_de() == 0) {
-        func_8025476C_de(1);
+        Cache_SetResourceActivityState(1);
     }
     if (widget->selection == 0xB) {
         Scene_ChangeInstanceModel(&g_world, draw, D_800CE430[draw->definition->character], 1);
@@ -227,7 +227,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     draw->scale = scaled;
     draw->position0 = placed;
     draw->referencePosition = placed;
-    func_8024B8C4_de(draw);
+    Gobjinst_RotatePoseMatrixBuffers(draw);
     draw->position0 = placed;
     draw->referencePosition = placed;
     func_80246E44_de(draw);
@@ -235,7 +235,7 @@ void Menu_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unuse
     draw->position0 = placed;
     draw->referencePosition = placed;
     Geometry_BeginModelBatch();
-    func_80249E28_de(draw, context->screen);
+    Gobjinst_DrawVisibleCachedActor(draw, context->screen);
     Geometry_FlushModelBatch();
 }
 

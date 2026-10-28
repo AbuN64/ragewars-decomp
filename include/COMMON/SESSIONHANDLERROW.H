@@ -76,7 +76,7 @@ typedef struct FrameCallback {
 extern FrameCallback D_800CD790[];
 extern u64 Audio_ReadSystemTime(void);
 extern s32 Cinema_GetSequenceRequest(void);
-extern u32 func_80245850_de(void);
+extern u32 Cinema_GetPlaybackPauseState(void);
 extern s32 Menu_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;
 extern void SetN64_AdvanceGameClock(struct GameSession *);
@@ -99,7 +99,7 @@ extern int Control_IsSnapshotActive(void);
 extern s32 __osGetFpcCsr(void);
 extern char D_80146CE8[];
 extern char D_800C5400_de[];
-extern char D_800C5408_de[];
+extern char g_buildDateTimeTextRev1[];
 extern char D_800C5414_de[];
 
 extern void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1);

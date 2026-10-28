@@ -19,7 +19,7 @@
 s32 Control_AnyControllerConnected(void);
 void SetN64_CommitSessionInputs(s32);
 void Pak_ProbeStatus(s32);
-s32 Pak_GetStatus(s32);
+s32 Note_GetStatus(s32);
 s32 Note_CountFreeNotes(s32, s32 *);
 int Note_GetFreePages(int, int *);
 s32 Note_GetNoteGameName(s32, s32, char **);
@@ -89,7 +89,7 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
     attempts = 0;
     do {
         Pak_ProbeStatus(channel);
-        if (Pak_GetStatus(channel) != -2) {
+        if (Note_GetStatus(channel) != -2) {
             break;
         }
         channel++;
@@ -165,7 +165,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
         D_800E28CC = 1;
         if ((D_80142CAC != 0) || (D_80146D60 != 0)) {
             Pak_ProbeStatus(D_800E28C8);
-            if (Pak_GetStatus(D_800E28C8) == -2) {
+            if (Note_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
                 Menu_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
@@ -191,7 +191,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
         if (status == 0) {
             D_800E28C8 = firstChannel;
             Pak_ProbeStatus(firstChannel);
-            if (Pak_GetStatus(D_800E28C8) == -2) {
+            if (Note_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
                 Menu_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
@@ -248,7 +248,7 @@ extern s32 D_8015375C, D_800E28C0;
 extern s32 D_8014561C, D_0044ED44, D_8011FECC;
 extern char D_0044EA08[];
 extern void Pak_ProbeStatus(s32 ch);
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
 extern void Snapshot_CreateSaveSnapshot(ObjRecAt5DC *);
@@ -292,7 +292,7 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     } else {
         Pak_ProbeStatus(menu->slot->unk4);
     }
-    if (!Pak_GetStatus(channel)) {
+    if (!Note_GetStatus(channel)) {
         Snapshot_CreateSaveSnapshot(player);
         pakSetChecksum((s32)D_800DE868, Note_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
         Pak_MarkSaveNotes(menu);

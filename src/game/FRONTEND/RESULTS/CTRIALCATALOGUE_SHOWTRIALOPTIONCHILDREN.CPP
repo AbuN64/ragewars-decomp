@@ -160,7 +160,7 @@ void CTrialCatalogue_ShowTrialOptionChildren(void) {
             id = RESULTS_OPTION_335;
             break;
         }
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(Frontend_FindWidgetByResourceId(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(Node_FindWidgetByResourceId(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
     }
 }
 
@@ -209,7 +209,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
+    D_800E4690->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -247,7 +247,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
+    D_800E4690->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -285,7 +285,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
+    D_800E4690->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -323,7 +323,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
+    D_800E4690->window = Node_FindWidgetByResourceId(parent, entryWindowKey(next));
     Results_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {

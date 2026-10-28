@@ -31,7 +31,7 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
         return 0;
     }
     temp_f20 = Scaled_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;
-    if (temp_f20 < GraphU64_RandomBetween(0.0f, D_800C1E58_de)) {
+    if (temp_f20 < Graphu64_RandomBetween(0.0f, D_800C1E58_de)) {
         return 1;
     }
     return 0;

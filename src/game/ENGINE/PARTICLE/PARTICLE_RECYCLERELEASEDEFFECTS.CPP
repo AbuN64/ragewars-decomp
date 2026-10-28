@@ -56,7 +56,7 @@ void Particle_RecycleReleasedEffects(void *recycleSystem) {
                     }
                     lightHandle = effect->unk138;
                     if (lightHandle != 0) {
-                        DynLight_ReleaseLight(&D_8013B1A8, lightHandle);
+                        Gdynlight_ReleaseLight(&D_8013B1A8, lightHandle);
                         effect->unk138 = 0;
                     }
                     referenceCount = effect->refCount;

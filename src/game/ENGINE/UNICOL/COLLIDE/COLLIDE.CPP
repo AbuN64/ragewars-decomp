@@ -16,7 +16,7 @@ extern u8 D_801041F0[];
 
 extern CCollisionSetup_t D_0044A850[];
 
-void func_8023EE00_de(void) {
+void CCollision_Initialize(void) {
     D_80103FCC = D_801041F0;
     CCollision_ApplySetupTable(D_0044A850);
 }

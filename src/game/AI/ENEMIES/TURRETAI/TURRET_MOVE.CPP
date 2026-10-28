@@ -17,14 +17,14 @@ typedef struct Owner Owner;
 
 
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
-extern f32 GraphU64_ApproachValue(f32, f32, f32);
+extern f32 Graphu64_ApproachValue(f32, f32, f32);
 
 
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-/* Picks a rider's nearest target: walks the player list D_80145060 for players within the segment's range at 0x54 (squared distance through GraphU64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (D_801468C4), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
+/* Picks a rider's nearest target: walks the player list D_80145060 for players within the segment's range at 0x54 (squared distance through Graphu64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (D_801468C4), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
 
 
 
@@ -40,7 +40,7 @@ extern SharedPlayer **D_80103FCC;
 
 extern char D_80103FD0[];
 
-extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
+extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 extern f32 GameObject_GetActorHeight(SharedPlayer *);
 
@@ -61,7 +61,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     segment = (Segment *)(owner->track + 0x14);
     throttle = rider->throttle;
     if (segment->radius != 0.0f || segment->rise != 0.0f) {
-        limit = segment->length / Math_Sqrtf(segment->radius * segment->radius + segment->rise * segment->rise);
+        limit = segment->length / Gu_Sqrtf(segment->radius * segment->radius + segment->rise * segment->rise);
     } else {
         limit = 0.0f;
     }
@@ -73,7 +73,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
         if (rider->direction == mode) {
             step = -step;
         }
-        rider->change = GraphU64_ApproachValue(rider->change, step, 0.25f);
+        rider->change = Graphu64_ApproachValue(rider->change, step, 0.25f);
         throttle += rider->change;
         if (rider->direction == 0) {
             if (throttle > 1.0f) {
@@ -90,7 +90,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
             if (segment->angle != 0.0f) {
                 GraphU64_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
                 BuildYawMatrix(matrix, -segment->angle);
-                GraphU64_TransformPoint(matrix, &offset, &local);
+                Graphu64_TransformPoint(matrix, &offset, &local);
                 goal = local.z / segment->radius;
             } else {
                 goal = 0.0f;
@@ -101,7 +101,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
             } else if (step < -limit) {
                 step = -limit;
             }
-            rider->change = GraphU64_ApproachValue(rider->change, step, 0.25f);
+            rider->change = Graphu64_ApproachValue(rider->change, step, 0.25f);
             throttle += rider->change;
         }
         break;
@@ -139,7 +139,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
     if (other != 0) {
         lift = (0.5f);
         do {
-            distance = GraphU64_GetSquaredDistance(&player->views0.view8_3.pos, &other->views0.view8_3.pos);
+            distance = Graphu64_GetSquaredDistance(&player->views0.view8_3.pos, &other->views0.view8_3.pos);
             if (distance < segment->range * segment->range) {
                 enemy = 0;
                 if (player->views1C.view1D8_23.self != other && other->views5E4.view5E4_1.active != 0) {
@@ -173,7 +173,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
     }
     if (best != 0) {
         rider->target = best;
-        result->distance = Math_Sqrtf(nearest);
+        result->distance = Gu_Sqrtf(nearest);
         result->target = best;
     } else {
         result->target = 0;

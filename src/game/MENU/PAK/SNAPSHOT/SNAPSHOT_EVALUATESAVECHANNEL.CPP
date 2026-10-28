@@ -12,7 +12,7 @@
 /* Enters pak menu mode 1: sets the mode flags, clears the owner's 0x01000000 flag and, when a
    message is pending (D_800E28C0), shows the player's message at 0x554 through Menu_OpenDialog;
    otherwise probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when
-   Pak_GetStatus reports none, and shows the D_44F67C, D_44F994 or D_44F610 prompt according to
+   Note_GetStatus reports none, and shows the D_44F67C, D_44F994 or D_44F610 prompt according to
    func_80404F3C_de and Note_NeedsIdRepair. */
 
 
@@ -34,7 +34,7 @@ extern s32 D_800E28C0;
 extern char D_8014561C[];
 
 extern void Pak_ProbeStatus(s32 ch);
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
 extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
@@ -57,7 +57,7 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
         return;
     }
     Pak_ProbeStatus(ch);
-    if (Pak_GetStatus(ch) == 0) {
+    if (Note_GetStatus(ch) == 0) {
         Pak_MarkSaveNotes(menu);
         return;
     }

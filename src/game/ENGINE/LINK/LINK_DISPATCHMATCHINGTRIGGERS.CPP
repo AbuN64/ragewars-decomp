@@ -31,7 +31,7 @@ extern void *D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern s32 D_801371D4;
 
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 extern s32 Track_RequestTrackByKey(s32);
 void Link_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
@@ -49,7 +49,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
         if (g_world.mode == 4) {
             index = trigger->sound;
             if (index != 0) {
-                Sky_PostTargetedScreenMessage(&D_80145088, fallback,
+                Gsky_PostTargetedScreenMessage(&D_80145088, fallback,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                                              D_800E45D4[trigger->sound].sound[g_languageIndex],
 #else

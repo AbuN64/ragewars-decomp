@@ -70,7 +70,7 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
 }
 
 /* Creates a frame animation for widget id of the current screen: finds the widget through
-   Frontend_FindWidgetByResourceId, allocates and clears a 0x64-byte animation, sets its type fields, widget and
+   Node_FindWidgetByResourceId, allocates and clears a 0x64-byte animation, sets its type fields, widget and
    -1-terminated frame list, counts the frames, initialises its playback state through
    SmpFrameAnim_AddSequenceFlags, SmpFrameAnim_SetSequenceFrame, SmpFrameAnim_SetSequenceDuration and SmpFrameAnim_SetLoopCount, attaches it to the widget through
    Node_InsertWidgetBefore and returns it. */
@@ -99,8 +99,8 @@ Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
     s32 widget;
     Animation *anim;
 
-    widget = (s32)Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)id);
-    Frontend_GetScreenData(GetMenuScreenOwner());
+    widget = (s32)Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)id);
+    Node_GetScreenData(GetMenuScreenOwner());
     anim = Cache_AllocateMemory(0x64);
     XPlus_FillBytes(anim, 0, 0x64);
     anim->kindB = 0xB5F;

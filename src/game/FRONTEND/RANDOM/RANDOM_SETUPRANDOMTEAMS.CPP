@@ -44,7 +44,7 @@ s32 Random_AddStageOpponent(u8 *request) {
         }
         team = request[1];
         if (team == 3) {
-            player->team = GraphU64_NextRandom() % 3;
+            player->team = Graphu64_NextRandom() % 3;
         } else {
             player->team = team;
         }
@@ -91,14 +91,14 @@ void Random_SetupRandomTeams(void) {
     arenas[2] = 0x1B;
     arenas[3] = 1;
     for (i = 0; i < 100; i++) {
-        firstIndex = GraphU64_NextRandom() % 4;
-        secondIndex = GraphU64_NextRandom() % 4;
+        firstIndex = Graphu64_NextRandom() % 4;
+        secondIndex = Graphu64_NextRandom() % 4;
         swappedCharacter = characters[firstIndex];
         characters[firstIndex] = characters[secondIndex];
         characters[secondIndex] = swappedCharacter;
     }
-    playerCount = GraphU64_NextRandom() % 3 + 2;
-    unlockedCount = GraphU64_NextRandom() % playerCount + 1;
+    playerCount = Graphu64_NextRandom() % 3 + 2;
+    unlockedCount = Graphu64_NextRandom() % playerCount + 1;
     if (unlockedCount == 3) {
         unlockedCount = 2;
     }
@@ -116,7 +116,7 @@ void Random_SetupRandomTeams(void) {
         player->character = characters[i];
         player->locked = 0;
         player->team = 2;
-        player->variant = GraphU64_NextRandom() % 3;
+        player->variant = Graphu64_NextRandom() % 3;
         XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Key_FindKeyIndex(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
@@ -125,7 +125,7 @@ void Random_SetupRandomTeams(void) {
         player->character = characters[i + unlockedCount];
         player->locked = 1;
         player->team = 2;
-        player->variant = GraphU64_NextRandom() % 3;
+        player->variant = Graphu64_NextRandom() % 3;
         XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Key_FindKeyIndex(player->character)));
     }
     for (i = 0; i < 8; i++) {
@@ -142,5 +142,5 @@ void Random_SetupRandomTeams(void) {
     game->players = 0;
     levelGoal = &D_8014DD98;
     levelGoal->kind = 2;
-    levelGoal->goal = arenas[GraphU64_NextRandom() % 4];
+    levelGoal->goal = arenas[Graphu64_NextRandom() % 4];
 }

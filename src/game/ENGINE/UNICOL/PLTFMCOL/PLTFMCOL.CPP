@@ -25,9 +25,9 @@ extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollision
 extern void BuildPitchMatrix(f32 *, f32);
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
-extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+extern void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 extern void TranslateMatrix(f32 *, f32, f32, f32);
-extern void GraphU64_TransformPoints(f32 *, CVector3 *, CVector3 *, s32);
+extern void Graphu64_TransformPoints(f32 *, CVector3 *, CVector3 *, s32);
 
 void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *floor, s32 attachment) {
     f32 matrix[16];
@@ -114,9 +114,9 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     yaw.w = Math_Cosf(angle);
     MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
     MatrixFromQuaternion(&orient, turn);
-    GraphU64_MultiplyAffineMatrices(matrix, rest, turn);
+    Graphu64_MultiplyAffineMatrices(matrix, rest, turn);
     TranslateMatrix(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
-    GraphU64_TransformPoints(matrix, corners, corners, 8);
+    Graphu64_TransformPoints(matrix, corners, corners, 8);
     if (shape->flags & 1) {
         bottom = ((ActorMotion *)floor)->end.y - ((ActorMotion *)floor)->height;
         lift = bottom;

@@ -102,7 +102,7 @@ void Track_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline
             break;
         }
         GraphU64_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
-        length += Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        length += Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
     for (i = 0; i < count; i++) {
         ys[i] = nodes[i].p.x;

@@ -14,7 +14,7 @@ extern u8 g_pakSingleSaveBlockName[];
 #include "COMMON/SHARED_GAMESLOT.H"
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 extern SaveSnapshot **Cache_AllocateResource(s32, s32, s32, void *);
 extern void XPlus_FillMemory(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
@@ -26,7 +26,7 @@ void Snapshot_CreateSaveSnapshot(u8 *player) {
     SaveSnapshot **snapshotHandle;
     SaveSnapshot *snapshot;
     if (D_800DE860_de != 0) {
-        func_80253908_de(0);
+        Cache_DrainAndCompactResources(0);
         Cache_ReleaseResource(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
@@ -158,7 +158,7 @@ extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_8
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
+extern s32 Note_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
 extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
 {
@@ -166,7 +166,7 @@ s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 q
     char *prompt, *sel;
     char *message;
     Pak_ProbeStatus(channel);
-    result = Pak_GetStatus(channel);
+    result = Note_GetStatus(channel);
     sel = 0;
     if (D_8014D4C0_de) {
         if (D_8014D4EC_de) {
@@ -215,7 +215,7 @@ extern u8 D_8014D4B4[];
 extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
 extern void Pak_ProbeStatus(s32 ch);
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
 extern u32 Note_Crc32(void *data, u32 size, u32 seed);
@@ -253,7 +253,7 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
     } else {
         Pak_ProbeStatus(menu->slot->unk4);
     }
-    if (!Pak_GetStatus(channel)) {
+    if (!Note_GetStatus(channel)) {
         profile = player->profile;
         D_8014D4B0_de.value = profile->flags;
         D_80153738.values[0] = profile->words[0];

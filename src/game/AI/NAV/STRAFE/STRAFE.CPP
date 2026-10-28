@@ -33,15 +33,15 @@ extern char D_8013B364[];
 extern void Nav_RunBehaviorHandler(Brain *arg0);
 extern s32 Scaled_HasLineOfSight(Brain *, Actor *);
 extern void Scaled_SetBehaviourState(Brain *, s32);
-extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
+extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 extern f32 Scaled_ScaleCharacterSettingByDifficulty(Brain *arg0);
-extern s32 GraphU64_NextRandom(void);
+extern s32 Graphu64_NextRandom(void);
 extern f32 Scaled_UpdateDifficultyAimJitter(Brain *arg0);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 Wheel_GetDirectionSector(f32);
 extern void Wheel_MeasureWheelClearance(Actor *, s32);
 extern void Portal_DispatchActorBehavior(Brain *arg0);
-extern s32 Nav_GetRouteRelation(char *, s32, s32);
+extern s32 Route_GetRouteRelation(char *, s32, s32);
 
 
 extern void Nav_SteerAlongRoute(Brain *arg0), Nav_UpdatePlayerSteering(Brain *arg0);
@@ -70,16 +70,16 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
         }
         route = target->brain->start;
         if (brain->visible != 0) {
-            if (GraphU64_GetSquaredDistance(&target->pos, &((Actor *)brain->player)->pos) < 360000.0f) {
+            if (Graphu64_GetSquaredDistance(&target->pos, &((Actor *)brain->player)->pos) < 360000.0f) {
                 brain->combat = 3;
                 Scaled_SetBehaviourState(brain, 7);
                 return;
             }
             speed = Scaled_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
             if (--brain->timer <= 0) {
-                brain->timer = GraphU64_NextRandom() % 4 + 12;
-                brain->pattern = GraphU64_NextRandom() % 2;
-                if (GraphU64_NextRandom() % 2 == 1) {
+                brain->timer = Graphu64_NextRandom() % 4 + 12;
+                brain->pattern = Graphu64_NextRandom() % 2;
+                if (Graphu64_NextRandom() % 2 == 1) {
                     brain->pattern = 2;
                 }
             }
@@ -121,7 +121,7 @@ halt:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (Nav_GetRouteRelation(D_8013B364, brain->start, route) == 0) {
+            if (Route_GetRouteRelation(D_8013B364, brain->start, route) == 0) {
                 Scaled_SetBehaviourState(brain, 1);
             }
         }

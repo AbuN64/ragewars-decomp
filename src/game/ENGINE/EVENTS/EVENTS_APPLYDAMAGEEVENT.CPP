@@ -98,7 +98,7 @@ extern float D_800C43D0_de;
 extern float D_800C43D4_de;
 extern float D_800C43DC_de;
 
-void func_8022B09C_de(s32, f32 *);
+void Player_TransformPointByViewOrOwnerMatrix(s32, f32 *);
 void CScene_StartEventClips(Shared_World *, s32, s32, CVector3, f32, f32);
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;
@@ -154,17 +154,17 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
         localImpulse.x = -impulse.x;
         localImpulse.y = impulse.y;
         localImpulse.z = impulse.z;
-        func_8022B09C_de((s32)player, &localImpulse.x);
+        Player_TransformPointByViewOrOwnerMatrix((s32)player, &localImpulse.x);
         localImpulse.x -= player->display->origin.x;
         localImpulse.y -= player->display->origin.y;
         localImpulse.z -= player->display->origin.z;
-        rotation = GraphU64_BuildDirectionQuaternion(&localImpulse.x);
+        rotation = Graphu64_BuildDirectionQuaternion(&localImpulse.x);
         InstHdr_CopyActorPositionAndModel((Actor_func_80214624_de *)target, position,
                          &effectPosition, hit, 0, 1);
         effectPosition = position;
         effectPosition.y += D_800C43D0_de;
         zero.x = 0.0f; zero.y = 0.0f; zero.z = 0.0f;
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0,
+        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0,
                          (struct EffectActor *)target, (struct EffectActor *)target,
                          0, 0, 0xE9, zero, rotation, effectPosition, 0, -1,
                          effectKind == 5 ? 3 : 1);
@@ -188,10 +188,10 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         target->eventFlags |= 0x8000;
         if ((source->flags & 0x300000) && source->player->display) {
             if (target->effectFlags & 0x4000) {
-                Sky_StartScaledShake((char *)source->player->display, D_800C43C4_de,
+                Gsky_StartScaledShake((char *)source->player->display, D_800C43C4_de,
                                  100.0f, D_800C43C4_de, D_800C43C0_de, 1, position);
             } else if (target->effectFlags & 0x2000) {
-                Sky_StartScaledShake((char *)source->player->display, D_800C43CC_de,
+                Gsky_StartScaledShake((char *)source->player->display, D_800C43CC_de,
                                  50.0f, D_800C43CC_de, D_800C43C8_de, 1, position);
             }
         }
@@ -297,7 +297,7 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
 #endif
         target->category == 2) {
         GraphU64_SubtractVectors(&direction, &source->position, &target->position);
-        distance = Math_Sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+        distance = Gu_Sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
         GraphU64_NormalizeVec3(&direction);
         if (!(radius <= distance)) {
             GraphU64_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
@@ -525,16 +525,16 @@ extern f32 Gobjinst_GetRootMeanSquareScale(void *arg0);
 
 
 
-extern CallbackEntryRecAt4V1 D_800CC130[];
+extern CallbackEntryRecAt4V1 g_effectCallbackFlags[];
 void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
-    if (D_800CC130[arg2].callback != 0) {
-        D_800CC130[arg2].callback(arg0, arg1, arg2, arg3, arg6);
+    if (g_effectCallbackFlags[arg2].callback != 0) {
+        g_effectCallbackFlags[arg2].callback(arg0, arg1, arg2, arg3, arg6);
     }
 }
 
 void Events_ForwardCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
-    if (D_800CC130[arg2].callback != 0) {
-        D_800CC130[arg2].callback(arg0, arg1, arg2, arg3, arg6);
+    if (g_effectCallbackFlags[arg2].callback != 0) {
+        g_effectCallbackFlags[arg2].callback(arg0, arg1, arg2, arg3, arg6);
     }
 }
 
@@ -678,7 +678,7 @@ void Events_ComputeRadialImpulse(struct Player *actor, u8 *other, PushStrength s
     if (*other == 2) {
 #endif
         GraphU64_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
-        distance = Math_Sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
+        distance = Gu_Sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
         GraphU64_NormalizeVec3(&offset.x);
         if (!(radius <= distance)) {
             GraphU64_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));

@@ -37,7 +37,7 @@ extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor)
 
 extern CQuatern Insthdr_BuildActorGroundRotation(void *);
 
-extern void GraphU64_LimitVectorLength(CVector3 *, f32);
+extern void Graphu64_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
@@ -45,7 +45,7 @@ extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
+extern void Graphu64_ConvertMatrixToFixed(f32 *, void *);
 
 extern void Geometry_DrawIntensityMask(void *, s32, s32);
 
@@ -79,7 +79,7 @@ void Simpinst_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void 
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += GameObject_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
-            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
@@ -109,11 +109,11 @@ void Simpinst_DrawGroundShadow(void *actor) {
     position.x = ((Shared_Func80243A80Actor *)actor)->x;
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
-    GraphU64_LimitVectorLength(&position, 20000.0f);
+    Graphu64_LimitVectorLength(&position, 20000.0f);
     MatrixFromQuaternion(&rotation.x, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
-    GraphU64_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
+    Graphu64_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
     Geometry_DrawIntensityMask((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 

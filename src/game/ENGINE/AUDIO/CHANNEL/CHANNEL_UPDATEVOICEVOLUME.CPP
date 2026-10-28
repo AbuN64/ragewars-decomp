@@ -17,7 +17,7 @@
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
 int Cinema_IsSequenceActive(void);
-f32 GraphU64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
+f32 Graphu64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 void alSndpSetVol(void *arg0, s16 arg1);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 #include "AUDIO/VOLUME_MIX.H"
@@ -126,7 +126,7 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             break;
         }
         if (Cinema_IsSequenceActive() != 0) {
-            mix->attenuation = GraphU64_ApproachValue(mix->attenuation, level, 0.017f);
+            mix->attenuation = Graphu64_ApproachValue(mix->attenuation, level, 0.017f);
         } else {
             mix->attenuation = level;
         }
@@ -160,7 +160,7 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
                         stoppedSound = stopContext->list;
                         if (voice->mix.frame != stopContext->frame) {
                             func_802B2F00_de(stoppedSound, stopContext->handles[voice->unk0]);
-                            if (func_802B2620_de(stoppedSound)) {
+                            if (alSndpGetState(stoppedSound)) {
                                 alSndpStop(stoppedSound);
                             }
                             voice->sound = -1;

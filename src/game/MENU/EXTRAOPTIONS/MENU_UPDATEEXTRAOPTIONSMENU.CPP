@@ -7,10 +7,10 @@
 #include "MENU/80420E90.H"
 #include "MENU/80420E90_9.H"
 #include "SCENE/802508E0_13.H"
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
 /* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points
-   to, and with one on the entry 0x3AB that Frontend_FindWidgetByResourceId finds in the list at offset 8, then sets
+   to, and with one on the entry 0x3AB that Node_FindWidgetByResourceId finds in the list at offset 8, then sets
    the word at offset 0x34. */
 
 
@@ -46,11 +46,11 @@ extern void SmXlate_SwitchScreen(s32);
 void Menu_ShowExtraOptionsPanel(void) {
     Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
 #if defined(VERSION_DE)
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
 #elif defined(VERSION_EU_X)
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
 #endif
     D_800E4400->open = 1;
 }
@@ -64,11 +64,11 @@ void Menu_ScrollOptionsKeypad(void) {
     D_800E4400->mode = currentMode;
     if (currentMode <= 0) {
 #if defined(VERSION_DE)
-        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3B2);
+        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3B2);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3B8);
+        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3B8);
 #elif defined(VERSION_EU_X)
-        temp_v0_2 = Frontend_FindWidgetByResourceId(D_800E4400->window, 0x3BC);
+        temp_v0_2 = Node_FindWidgetByResourceId(D_800E4400->window, 0x3BC);
 #endif
         temp_a0 = D_800E4400->pad;
         temp_a0->y = (u16) (temp_a0->y - 1);

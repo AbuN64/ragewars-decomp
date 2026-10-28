@@ -67,7 +67,7 @@ reset_state:
     }
 }
 
-/* Spawns an effect for an actor through func_802800C0_de: the rotation comes from the fixed direction D_801042C8 or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from Particle_HandleInitialMaterialContact with the offset reads as static inline getters and a stack state briefly made current in D_80103FCC. */
+/* Spawns an effect for an actor through Particle_SpawnEffectGroup: the rotation comes from the fixed direction D_801042C8 or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from Particle_HandleInitialMaterialContact with the offset reads as static inline getters and a stack state briefly made current in D_80103FCC. */
 
 
 
@@ -79,7 +79,7 @@ reset_state:
 
 extern char D_8011D8D0;
 extern char D_801041F0;
-extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
@@ -115,7 +115,7 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
     } else {
         direction = actor->facing;
     }
-    rotation = GraphU64_BuildDirectionQuaternion(&direction);
+    rotation = Graphu64_BuildDirectionQuaternion(&direction);
     if (offset_x(actor) == 0.0f && offset_y(actor) == 0.0f) {
         point = actor->position;
     } else {
@@ -123,10 +123,10 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
         offset.y = -offset_y(actor);
         offset.z = 0.0f;
         BuildRollMatrix(matrix, actor->angle);
-        GraphU64_TransformPoint(matrix, &offset, &turned);
+        Graphu64_TransformPoint(matrix, &offset, &turned);
         parent = Particle_ParentTransform((struct Shared_Particle *)actor, 0);
         if (parent != 0) {
-            GraphU64_TransformPoint(parent, &turned, &carried);
+            Graphu64_TransformPoint(parent, &turned, &carried);
         } else {
             carried = turned;
         }
@@ -135,6 +135,6 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
         point = moved;
         D_80103FCC = &D_801041F0;
     }
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->unk130, actor->unk134, model,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->unk130, actor->unk134, model,
                   direction, rotation, point, 0, spawnMode, flags | (actor->flags & 0x200006));
 }

@@ -145,7 +145,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
     if (event != 0xE09) g_menuEventCount++;
     handled = &D_8014D080->handled;
     category = eventCategory(event);
-    owner = Frontend_GetScreenData(GetMenuScreenOwner());
+    owner = Node_GetScreenData(GetMenuScreenOwner());
     if (id == -1) {
         direct = 1;
         element = owner;

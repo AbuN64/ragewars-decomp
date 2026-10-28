@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80246BE8_C95B4[45] =
+const char g_gameObjectResetAnimInfoText[45] =
     "CGameObjectInstance__Reset: anim object info\000";
 #endif
 

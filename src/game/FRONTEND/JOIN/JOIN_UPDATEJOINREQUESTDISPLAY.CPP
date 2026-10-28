@@ -36,12 +36,12 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
     if (screen->count < index || D_80153F80[index].id < 0) {
         Frontend_SetWidgetFlag08(window, 0);
     } else {
-        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_ICON);
+        widgetObject = Node_FindWidgetByResourceId(window, DRAW_ICON);
         widget = widgetObject;
         widget->alpha = 125;
         model = Key_FindKeyIndex(D_80153F80[index].id);
         widget->value = D_800E3A58[model].portrait;
-        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_NAME);
+        widgetObject = Node_FindWidgetByResourceId(window, DRAW_NAME);
         widget = widgetObject;
         widget->alpha = 125;
         model = Join_FindJoinModelIndex(D_80153F80[index].variant, D_80153F80[index].id);
@@ -50,17 +50,17 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
           (u8 *)*g_rewardItemTiers[D_80153F80[index].variant][model].text
         );
         widget->text = name;
-        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_VARIANT);
+        widgetObject = Node_FindWidgetByResourceId(window, DRAW_VARIANT);
         widget = widgetObject;
         widget->alpha = 125;
         variantObject = &D_800DF964[D_80153F80[index].variant];
         variantSlot = variantObject;
         widget->text = **variantSlot;
-        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_FIRST);
+        widgetObject = Node_FindWidgetByResourceId(window, DRAW_FIRST);
         widget = widgetObject;
         widget->alpha = 125;
         widget->value = D_800DF740[D_80153F80[index].word8].first;
-        widgetObject = Frontend_FindWidgetByResourceId(window, DRAW_SECOND);
+        widgetObject = Node_FindWidgetByResourceId(window, DRAW_SECOND);
         widget = widgetObject;
         widget->alpha = 125;
         widget->value = D_800DF740[D_80153F80[index].word8].second;

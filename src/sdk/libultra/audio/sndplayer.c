@@ -45,7 +45,7 @@ extern ALGlobalsalSndpNew *D_800D4070;
 
  /* alGlobals */
 
-extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
+extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
           /* alHeapDBAlloc */
 extern void func_802AFFC0_de(ALEventQueue *, ALEventListItem *, s32);
@@ -98,13 +98,13 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
     sndp->maxSounds = c->maxSounds;
     sndp->target = -1;
     sndp->frameTime = 16000;
-    sState = (ALSoundState *)func_802B0340_de(0, 0, c->heap, 1, c->maxSounds * sizeof(ALSoundState));
+    sState = (ALSoundState *)alHeapDBAlloc(0, 0, c->heap, 1, c->maxSounds * sizeof(ALSoundState));
     sndp->sndState = sState;
 
     for (i = 0; i < c->maxSounds; i++)
         sState[i].sound = 0;
 
-    ptr = func_802B0340_de(0, 0, c->heap, 1, c->maxEvents * sizeof(ALEventListItem));
+    ptr = alHeapDBAlloc(0, 0, c->heap, 1, c->maxEvents * sizeof(ALEventListItem));
     func_802AFFC0_de(&sndp->evtq, (ALEventListItem *)ptr, c->maxEvents);
 
     sndp->drvr = &D_800D4070->drvr;

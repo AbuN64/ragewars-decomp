@@ -56,7 +56,7 @@ struct Model;
 struct Model {
     s32 kind; /* 0x00: definition class */
     char pad4[0x10];
-    u32 flags; /* +0x14: func_802251DC_de */
+    u32 flags; /* +0x14: Player_UpdateSwimmingState */
     char pad18[0x34];
     s32 slots[8];
     char pad6C[0xF4 - 0x6C];

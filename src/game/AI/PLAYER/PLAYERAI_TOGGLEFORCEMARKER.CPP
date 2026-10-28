@@ -13,7 +13,7 @@
 
 
 
-extern void GraphU64_GetMatrixTranslation(char *, f32 *);
+extern void Graphu64_GetMatrixTranslation(char *, f32 *);
 
 extern char D_8011D8D0;
 
@@ -29,7 +29,7 @@ void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition
 }
 
 extern void Player_BuildPlayerViewTransform(void *, MatrixF *);
-void func_8022B09C_de(void *player, CVector3 *point) {
+void Player_TransformPointByViewOrOwnerMatrix(void *player, CVector3 *point) {
     CVector3 input;
     MatrixF matrix;
     CVector3 *input_ptr;
@@ -49,7 +49,7 @@ void func_8022B09C_de(void *player, CVector3 *point) {
         Player_BuildPlayerViewTransform(player, &matrix);
         matrix_ptr = &matrix;
     }
-    GraphU64_TransformPoint(matrix_ptr, input_ptr, point);
+    Graphu64_TransformPoint(matrix_ptr, input_ptr, point);
 }
 
 void func_8022B11C_de(void *player, s32 increment) {
@@ -64,10 +64,10 @@ void func_8022B11C_de(void *player, s32 increment) {
     (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) = cappedCounter;
 }
 
-void func_8022B144_de(void *player, f32 *origin) {
+void Player_GetPlayerViewTranslation(void *player, f32 *origin) {
     MatrixF viewTransform;
     Player_BuildPlayerViewTransform(player, &viewTransform);
-    GraphU64_GetMatrixTranslation((char *)&viewTransform, origin);
+    Graphu64_GetMatrixTranslation((char *)&viewTransform, origin);
 }
 
 /** Report whether the word at offset 0x5E4 is zero. */
@@ -80,7 +80,7 @@ int func_8022B184_de(struct SharedPlayer *object) {
     return object->views5E8.view1210_152.unk1210;
 }
 
-void func_8022B190_de(s32 actor) {
+void Player_ReleasePlayerParticleEmitters(s32 actor) {
     Particle_ReleaseOwnerEmitters(&D_8011D8D0, actor);
 }
 
@@ -93,7 +93,7 @@ extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(Matrix *);
-extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
+extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
 /* Copy of Playerai_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
  * pushed 5.12 units off the surface and packs it into the player's marker transform. */
 static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
@@ -104,7 +104,7 @@ static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attra
     GraphU64_AddVec3(&offset, &offset, &player->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
-    GraphU64_ConvertMatrixToFixed(&matrix, player->transform1600);
+    Graphu64_ConvertMatrixToFixed(&matrix, player->transform1600);
 }
 /* Toggles the player's attract/repulse marker while the aim ray hits something: a live marker is removed
  * ("ATTRACT REMOVED"); otherwise a new one is placed at the aim point for 150 frames, pulling when

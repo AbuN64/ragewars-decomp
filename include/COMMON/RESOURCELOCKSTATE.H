@@ -2,7 +2,7 @@
 #define COMMON_RESOURCELOCKSTATE_H
 #include "TYPES.H"
 /* The resource API retains an unused arena selector. */
-void func_80253908_de(s32 unusedHeap);
+void Cache_DrainAndCompactResources(s32 unusedHeap);
 #include "COMMON/ITEMRECAT20V1.H"
 extern int func_802547CC_de(void);
 

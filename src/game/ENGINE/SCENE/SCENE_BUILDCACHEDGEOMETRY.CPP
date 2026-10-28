@@ -130,7 +130,7 @@ extern s32 Statinst_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *ob
 extern DraftStreamHandle **Statinst_CollectPropResources(ObjectSceneDrawCachedOpaqueGeometry *object, s32 model, s32 index, DraftStreamHandle **nextResource);
 extern void Statinst_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
 extern DraftStreamHandle *Statinst_AcquireGeometry(ObjectSceneDrawCachedOpaqueGeometry *object, s32 index);
-extern void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
+extern void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     f32 matrix[16];
@@ -226,13 +226,13 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                                     if (geometry != 0) {
                                         points = SetN64_GetPackSection(geometry->data, 0);
                                         count = points->count;
-                                        GraphU64_ConvertMatrixToFloat(matrix, &prop->transform);
+                                        Graphu64_ConvertMatrixToFloat(matrix, &prop->transform);
                                         for (i = 0; i < count; i++) {
                                             point = (ScenePoint *)(points->data.bytes + i * points->stride);
                                             position.x = (f32)point->x;
                                             position.y = (f32)point->y;
                                             position.z = (f32)point->z;
-                                            GraphU64_TransformPoint(matrix, &position, &transformed);
+                                            Graphu64_TransformPoint(matrix, &position, &transformed);
                                             height = transformed.y;
                                             maximum = world->maximumHeight;
                                             if (!(height <= maximum)) height = maximum;
@@ -288,7 +288,7 @@ void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, v
     s32 pass;
 
     if (scene->loaded == 0) {
-        func_80253908_de(0);
+        Cache_DrainAndCompactResources(0);
         Scene_BuildCachedGeometry(scene);
         if (scene->loaded == 0) {
             return;
@@ -419,7 +419,7 @@ static __inline__ s32 SceneFindShip(TableRecAt8 *table) {
     }
     return -1;
 }
-void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
+void Scene_DrawVisibleInstances(CScene_t *world, GameplayCamera *camera) {
     CScene_t *scene;
     CGameStaticInstance_t *props;
     CGameStaticInstance_t *prop;

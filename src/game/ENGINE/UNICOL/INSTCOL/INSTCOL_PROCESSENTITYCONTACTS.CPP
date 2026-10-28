@@ -110,7 +110,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         Events_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
         if (*actor->kind == 11 && ray->projectile->kind == 0x42D) {
             Particle_GetEffectResource(ray->projectile);
-            func_8022B730_de(actor, 2.0f);
+            Player_AddImpulse(actor, 2.0f);
         }
     }
     return found;
@@ -125,11 +125,11 @@ s32 CCollision_IntersectSegmentBox(Ray *ray, Box *box, f32 *out);
 
 void **Gobjinst_RequestAnimatedModelVariant(MenuPanelRoot *arg0, s32 arg1);
 
-void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
+void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-void GraphU64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
+void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
 void Cache_UnlockResource(void *arg0, Node80253610 *arg1);
 
@@ -209,11 +209,11 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
             if (bounds->min.x < box.max.x && box.min.x < bounds->max.x && bounds->min.z < box.max.z &&
                 box.min.z < bounds->max.z && bounds->min.y < box.max.y && box.min.y < bounds->max.y &&
                 CCollision_IntersectSegmentBox(ray, &box, &t)) {
-                GraphU64_ConvertMatrixToFloat(matrix, &actor->bones[i]);
+                Graphu64_ConvertMatrixToFloat(matrix, &actor->bones[i]);
                 if (soft) {
                     ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
                 }
-                GraphU64_TransformPoints(matrix, part->corners, vertices, 8);
+                Graphu64_TransformPoints(matrix, part->corners, vertices, 8);
                 func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);
             }
         }
@@ -247,7 +247,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         corners[7].x = extent[0];
         corners[7].y = extent[4];
         corners[7].z = extent[5];
-        GraphU64_TransformPoints(actor->transform, corners, vertices, 8);
+        Graphu64_TransformPoints(actor->transform, corners, vertices, 8);
         Cache_UnlockResource(0, shape);
     } else {
         own = &actor->box;

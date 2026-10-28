@@ -29,7 +29,7 @@ extern void Audio_GetDecodeFramesRemaining(void);
 
 extern s32 Audio_InitDecodeStream(void *, s32, s32 *);
 
-extern s32 func_802B2620_de(char *);
+extern s32 alSndpGetState(char *);
 
 extern void alSndpSetPitch(char *, f32);
 
@@ -60,7 +60,7 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             break;
         case 2:
             func_802B2F00_de(channel, player->id);
-            if (func_802B2620_de(channel) == 0) {
+            if (alSndpGetState(channel) == 0) {
                 Audio_ClearDecodeFramesRemaining();
                 if (player->loop >= 0) {
                     player->state = 1;

@@ -38,7 +38,7 @@ extern void Lists_ClearWeightedTable(WeightedTable *object);
 
 extern SceneEffect *Animpool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 
-extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
+extern s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
 
 extern void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10);
 
@@ -176,7 +176,7 @@ static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatch
 
 static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwner *owner,
         CVector3 position, s32 count) {
-    owner->remaining -= func_802800C0_de((EffectSystem *)D_8011D8D0, (EffectActor *)object, (EffectActor *)object, &owner->spawn,
+    owner->remaining -= Particle_SpawnEffectGroup((EffectSystem *)D_8011D8D0, (EffectActor *)object, (EffectActor *)object, &owner->spawn,
             0, count, object->rotation, object->motion, position, 0, -1, 0);
 }
 
@@ -333,11 +333,11 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
         actor->flags &= ~0x100;
         return;
     }
-    action->delay = GraphU64_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
+    action->delay = Graphu64_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
-    Nav_RequestActorState(actor, action, 0);
+    Actor_RequestActorState(actor, action, 0);
     if (!(info->flags & 0x10) || D_801462C8.mode1E == 1) return;
     actor->flags &= ~0x100;
 }

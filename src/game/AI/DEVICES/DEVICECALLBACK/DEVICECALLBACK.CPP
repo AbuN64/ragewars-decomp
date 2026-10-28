@@ -74,7 +74,7 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *modelLoo
 }
 
 void func_80205694_de(void *actor, void *requestContext) {
-    Nav_RequestActorState(actor, requestContext, 1);
+    Actor_RequestActorState(actor, requestContext, 1);
     Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 

@@ -54,17 +54,17 @@ extern f32 D_800C4BE0_de;
 
 
 
-void Player_ApplyPlayerForces(void *, void *);
+void Playerai_ApplyPlayerForces(void *, void *);
 f32 GameObject_GetActorHeight(void *);
 f32 InstHdr_GetActorBaseOffset(void *);
-void GraphU64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, void *);
-void GraphU64_ClampMotionLength(void *, f32);
+void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, void *);
+void Graphu64_ClampMotionLength(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
 
 void Particle_UpdateSineMotion(void *, f32);
-f32 Math_Sqrtf(f32);
-CQuatern GraphU64_BuildDirectionQuaternion(f32 *);            /* extern */
+f32 Gu_Sqrtf(f32);
+CQuatern Graphu64_BuildDirectionQuaternion(f32 *);            /* extern */
 extern Shared_MenuData D_80145040;
 extern Shared_GlobalRuntimeState D_80145060;
 #endif

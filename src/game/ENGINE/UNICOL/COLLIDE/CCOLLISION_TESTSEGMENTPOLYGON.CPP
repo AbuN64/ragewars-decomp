@@ -8,7 +8,7 @@
 
 extern f32 CCollision_GetSurfaceHeight(struct Query *, f32, f32);
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 extern void GraphU64_ScaleVector(void *, void *, f32);
 
@@ -84,7 +84,7 @@ void CCollision_ProjectSegmentOntoSurface(SegmentCode8023A284 *segment, struct Q
         segment->height = start;
         return;
     }
-    share = Math_Sqrtf(flat / total);
+    share = Gu_Sqrtf(flat / total);
     node = segment->node;
     nx = segment->x0 + (share * (segment->x1 - segment->x0));
     segment->height = start + (share * span);

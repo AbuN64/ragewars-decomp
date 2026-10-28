@@ -13,7 +13,7 @@ extern void Cinema_SetLetterboxState(void *arg0);
 
 
 
-extern f32 func_802459A0_de();
+extern f32 Cinema_GetSequenceResponse();
 
 struct CollisionState;
 
@@ -40,7 +40,7 @@ extern float D_800C37D8_de;
 
 
 
-extern float func_80245AD8_de();
+extern float Cinema_GetScaledSequenceValue();
 
 
 extern float D_800C3828_de;
@@ -92,7 +92,7 @@ struct Material_func_80245D30_de;
 
 
 
-extern unsigned int func_80245AF8_de();
+extern unsigned int Cinema_GetSequenceProperty();
 
 
 

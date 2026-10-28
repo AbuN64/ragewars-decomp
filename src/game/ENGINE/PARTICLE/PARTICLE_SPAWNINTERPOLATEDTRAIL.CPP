@@ -34,7 +34,7 @@ void Particle_UpdateMatrix(Shared_Particle *particle) {
     state = D_80140FF8;
     if (state[0] == 1) {
         camera = (GameplayCamera *)state[-4];
-        GraphU64_TransformPoint(camera->worldToView, &particle->inst.pos, &delta);
+        Graphu64_TransformPoint(camera->worldToView, &particle->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -64,7 +64,7 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         count = actor->node->state->count;
         if (count > 0) {
                 position = actor->position;
-                rotation = GraphU64_BuildDirectionQuaternion((f32 *)&position);
+                rotation = Graphu64_BuildDirectionQuaternion((f32 *)&position);
                 GraphU64_SubtractVectors(&delta, &actor->origin, &actor->end);
                 system = &D_8011D8D0;
                 i = 1;
@@ -72,7 +72,7 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
                 if (temp) {
                         divisor = (f32) count + (&D_800C4E88_de)[1];
                         do {
-    do { GraphU64_ScaleVector(&step, &delta, (f32) i / divisor); GraphU64_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
+    do { GraphU64_ScaleVector(&step, &delta, (f32) i / divisor); GraphU64_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; Particle_SpawnEffectGroup((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
                 }
         }
@@ -171,7 +171,7 @@ void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
             }
             releasedLight = releasedEffect->unk138;
             if (releasedLight != 0) {
-                DynLight_ReleaseLight(&D_8013B1A8, releasedLight);
+                Gdynlight_ReleaseLight(&D_8013B1A8, releasedLight);
                 releasedEffect->unk138 = 0;
             }
             releaseReferenceCount = releasedEffect->refCount;
@@ -265,14 +265,14 @@ loop:
 
 s32 Particle_RandomInclusiveCount(s32 arg0) {
     if (arg0 != 0) {
-        return GraphU64_NextRandom() % (arg0 + 1);
+        return Graphu64_NextRandom() % (arg0 + 1);
     }
     return 0;
 }
 
 void Particle_AdvanceRandomWhenNonzero(f32 arg0) {
     if (arg0 != 0.0f) {
-        ((s32 (*)())GraphU64_RandomFloat)();
+        ((s32 (*)())Graphu64_RandomFloat)();
     }
 }
 
@@ -405,7 +405,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
     f32 x, y, z;
     CVector3 *velocity;
 
-    Player_ApplyPlayerForces(&D_80145040, effect);
+    Playerai_ApplyPlayerForces(&D_80145040, effect);
     acceleration = Menu_ExpandFloatHighWord(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
@@ -415,7 +415,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
         x = effect->velocity.x;
         y = effect->velocity.y;
         z = effect->velocity.z;
-        speed = Math_Sqrtf(x * x + y * y + z * z);
+        speed = Gu_Sqrtf(x * x + y * y + z * z);
         limit = Menu_ExpandFloatHighWord(effect->entry->motion->speedLimit);
         if (acceleration > 0.0f) {
             if (!(limit < speed)) goto finished;
@@ -431,8 +431,8 @@ finished:
 
 /* 8028469C_2.CPP */
 
-extern f32 GraphU64_GetSquaredDistance(f32 *arg0, f32 *arg1);
-extern void func_80282E98_de(void *arg0, void *arg1);
+extern f32 Graphu64_GetSquaredDistance(f32 *arg0, f32 *arg1);
+extern void Particle_HandlePlayerContact(void *arg0, void *arg1);
 
 const unsigned int D_blob_35af2254633920324f03[2] = {
     0x4123D70A, 0x3F000000,
@@ -468,8 +468,8 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
         if (particle->inst.type != actor_id) {
             point.y += GameObject_GetActorHeight(node) * height_scale;
         }
-        if (GraphU64_GetSquaredDistance(&particle->inst.pos.x, point_ptr) < radius_sq) {
-            func_80282E98_de(particle, node);
+        if (Graphu64_GetSquaredDistance(&particle->inst.pos.x, point_ptr) < radius_sq) {
+            Particle_HandlePlayerContact(particle, node);
             if (particle->inst.type == actor_id) {
                 stop = 1;
             }
@@ -587,7 +587,7 @@ void Particle_FindNearestForeignEffectDistance(EffectSystem *arg0, LevelActor *a
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != actor && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = GraphU64_GetSquaredDistance(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
+                temp = Graphu64_GetSquaredDistance(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }

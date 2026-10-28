@@ -16,7 +16,7 @@
 #include "MENU/PAK/80403BCC_4.H"
 
 extern void Player_RefreshActivePlayerSceneState(CPlayerPool *);
-extern void func_80253908_de(s32 unusedHeap);
+extern void Cache_DrainAndCompactResources(s32 unusedHeap);
 extern s32 Cache_RequestWordCountedResourcePinned(s32,void **,s32,void *);
 extern void **Cache_RequestPackSection(s32,s32,s32,s32,s32,s32,void *);
 extern int SetN64_GetDirectoryEntry(int *,int,int);
@@ -55,7 +55,7 @@ void OvlScene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBa
     /* The global is the holder storage; its canonical scalar declaration is incomplete. */
     ((void (*)(void *))Player_RefreshActivePlayerSceneState)(&D_80145040);
     /* The original resource API passes the unused arena argument. */
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     Cache_RequestWordCountedResourcePinned(0, (void **)&cartridgeDirectory, cartridgeBankKey, &g_cartridgeIndex);
     levelDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 5);
     sceneToLoad->unk1C = levelDirectoryKey;
@@ -63,16 +63,16 @@ void OvlScene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBa
     textureDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 3);
     sceneToLoad->unk20 = textureDirectoryKey;
     Cache_RequestWordCountedResourcePinned(0, (void **)(sceneToLoad->pad40 + 0x10), textureDirectoryKey, &g_textureSetsIndex);
-    sceneToLoad->unk94 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 2, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4F84_de);
+    sceneToLoad->unk94 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 2, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_objectTypesText);
     objectDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0);
     sceneToLoad->unk24 = objectDirectoryKey;
     Cache_RequestWordCountedResourcePinned(0, (void **)(sceneToLoad->pad40 + 0x14), objectDirectoryKey, &g_objectsIndex);
     sceneToLoad->unk78 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 1, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_0044D934, &D_800C4FA4_de);
     sceneToLoad->unkB4 = Cache_RequestPackSection(0, (s32)cartridgeDirectory, 4, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_0044D804, &g_particleEffects);
-    sceneToLoad->unk98 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0xA, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4F84_de);
+    sceneToLoad->unk98 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0xA, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_objectTypesText);
     binaryDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 9);
     sceneToLoad->unk28 = binaryDirectoryKey;
-    Cache_RequestWordCountedResourcePinned(0, (void **)(sceneToLoad->pad40 + 0x18), binaryDirectoryKey, &D_800C4FC8_de);
+    Cache_RequestWordCountedResourcePinned(0, (void **)(sceneToLoad->pad40 + 0x18), binaryDirectoryKey, &g_binariesIndexText);
     sceneToLoad->unk70 = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0xB, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_particleSwooshes);
     sectionTwelveData = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0xC, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4FEC_de);
     sceneToLoad->unk80 = &D_800F91F0;
@@ -92,7 +92,7 @@ void OvlScene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBa
     Cache_RequestWordCountedResourcePinned(0, (void **)(sceneToLoad->pad40 + 0x1C), graphicsetDirectoryKey, &g_graphicsetIndex);
     sectionEighteenKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0x12);
     sceneToLoad->unk34 = sectionEighteenKey;
-    Cache_RequestWordCountedResourcePinned(0, (void **)sceneToLoad->pad74, sectionEighteenKey, &D_800C504C_de);
+    Cache_RequestWordCountedResourcePinned(0, (void **)sceneToLoad->pad74, sectionEighteenKey, &g_cinemasIndexText);
     Menu_RequestTrackBundle();
     linkGroupTypeData = (s32) *Cache_RequestPackSection(0, (s32)cartridgeDirectory, 0x13, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_linkGroupTypes);
     sceneToLoad->unkC = 0;

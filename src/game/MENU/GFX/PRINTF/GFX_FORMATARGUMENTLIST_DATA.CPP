@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80414CCC_E1DF8[17] =
+const char g_printfLowercaseHexDigits[17] =
     "0123456789abcdef\000";
 #endif
 

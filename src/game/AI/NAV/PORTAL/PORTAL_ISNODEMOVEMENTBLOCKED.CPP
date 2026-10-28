@@ -119,12 +119,12 @@ void Portal_InitSearchNode(void *searchNode, s32 nodeKey)
   flags = navigation_point_flags(entry);
   if (flags & 0x40)
   {
-    node->ticks = (GraphU64_NextRandom() % 5) + 5;
+    node->ticks = (Graphu64_NextRandom() % 5) + 5;
   }
   flags = navigation_point_flags(entry);
   if (flags & 0x80)
   {
-    node->delay = (GraphU64_NextRandom() % 5) + 5;
+    node->delay = (Graphu64_NextRandom() % 5) + 5;
   }
 }
 

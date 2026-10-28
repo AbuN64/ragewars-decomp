@@ -9,5 +9,5 @@ typedef struct ContactEffectEntry {
     ContactEffectHandler handler;
     u32 flags;
 } ContactEffectEntry;
-extern ContactEffectEntry D_800CC130[];
+extern ContactEffectEntry g_effectCallbackFlags[];
 #endif

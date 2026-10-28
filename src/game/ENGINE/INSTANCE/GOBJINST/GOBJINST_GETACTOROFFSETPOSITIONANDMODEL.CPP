@@ -16,13 +16,13 @@
 
 /* GOBJINST_12.CPP */
 /* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,
- * fills it with the given transform multiplied by the camera matrix (GraphU64_MultiplyMatrices, GraphU64_ClampMatrixToFixedRange,
+ * fills it with the given transform multiplied by the camera matrix (Graphu64_MultiplyMatrices, Graphu64_ClampMatrixToFixedRange,
  * GraphU64_PackFixedMatrix), loads it into the display list, draws the model through Geometry_DrawResourceModel with the
  * actor's per-frame state for the current frame, then reloads the camera's per-frame matrix. */
 
 extern s32 Map_ReserveEntries(void *, s32);
 
-extern void GraphU64_ClampMatrixToFixedRange(f32 *);
+extern void Graphu64_ClampMatrixToFixedRange(f32 *);
 
 extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
@@ -32,7 +32,7 @@ extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
-void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
+void Gobjinst_DrawModelWithProjection(void *actor, Camera *camera, f32 *transform, u8 layer) {
     struct LevelActor *object = actor;
     f32 mf[16];
     s32 mtx;
@@ -45,8 +45,8 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
         mtx = Map_ReserveEntries(&D_8011FFB0, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
-            GraphU64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
-            GraphU64_ClampMatrixToFixedRange(mf);
+            Graphu64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
+            Graphu64_ClampMatrixToFixedRange(mf);
             GraphU64_PackFixedMatrix(mf, mtx);
             gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
             Geometry_DrawResourceModel(layer, camera->style, object->fieldB4, 1,
@@ -70,7 +70,7 @@ void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void 
         offset.z = -offset.z;
         parent = ((struct ObjRecAt5DC *) ((ObjectLinks1DC_3 *) actor)->unk_1D8)->unk5DC;
         if (parent != 0) {
-            GraphU64_TransformPoint(parent + 0x160, &offset, &target);
+            Graphu64_TransformPoint(parent + 0x160, &offset, &target);
         } else {
             func_8024BC94_de(&turned, actor, offset);
             GraphU64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
@@ -100,7 +100,7 @@ CVector3 *func_8024BC94_de(CVector3 *outVector, void *actor, CVector3 localVecto
 
     aimOrientation = func_8024796C_de(actor);
     MatrixFromQuaternion(&aimOrientation, aimMatrix);
-    GraphU64_TransformPoint(aimMatrix, &localVector, &transformedVector);
+    Graphu64_TransformPoint(aimMatrix, &localVector, &transformedVector);
     *outVector = transformedVector;
     return outVector;
 }

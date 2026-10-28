@@ -70,10 +70,10 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     Frontend_InitMenuImage(D_800E5830, 0x67, 0, 0, 0);
     Frontend_StartMenuImageTransition(D_800E5830);
     D_800E5830->cursor = 1;
-    Frontend_FindWidgetByResourceId(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
-    Frontend_FindWidgetByResourceId(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
-    Frontend_FindWidgetByResourceId(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
-    Frontend_FindWidgetByResourceId(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
+    Node_FindWidgetByResourceId(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
+    Node_FindWidgetByResourceId(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
+    Node_FindWidgetByResourceId(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
+    Node_FindWidgetByResourceId(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
     config = g_playerSettings;
     D_800E5830->player = 0;
     for (i = 0; i < 4; i++) {
@@ -93,7 +93,7 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
             if (D_800E4680->recorded != 0) {
                 slot = D_80102B00[D_800E5830->player].slot;
                 if (Defs_TestBit(D_80102B00[D_800E5830->player].slotLevels[slot], D_8015402C) == 1) {
-                    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
+                    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
                     Frontend_SetWidgetFlag08(item, 1);
                     item->alpha = 0xAF;
                     item->text = RW_LOCALIZED_TEXT(D_800D3580, D_auto_800E2054, D_auto_800E2054, Results_CurrentGame()->language);
@@ -140,7 +140,7 @@ done:
                 if (character >= 0) {
                     character = Key_FindKeyIndex(character);
                     XStdio_FormatBuffer(D_800E5830->resultText, RW_LOCALIZED_TEXT(D_800D3578, D_auto_800E2034, D_auto_800E2034, nameGame->language), RW_LOCALIZED_TEXT(D_800DFA6C[character].name[0], D_800F00DC[character].name, D_800F00DC[character].name, nameGame->language));
-                    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                     item->alpha = 0xAF;
                     Frontend_SetWidgetFlag08(item, 1);
                     item->text = D_800E5830->resultText;
@@ -149,7 +149,7 @@ done:
         } else {
             nameGame = Results_CurrentGame();
             XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -172,7 +172,7 @@ done:
                 D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
             }
             if (D_8015402C == 0x23) {
-                item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -184,7 +184,7 @@ done:
         } else {
             nameGame = Results_CurrentGame();
             XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -194,7 +194,7 @@ done:
         if (game->humanWon == 1) {
             Achieve_MarkLevelPlayed(D_800E5830->player);
             if (D_8015402C == 0x23) {
-                item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+                item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
                 Frontend_SetWidgetFlag08(item, 1);
                 item->text = RW_LOCALIZED_TEXT(D_800D3594, D_auto_800E20A4, D_auto_800E20A4, Results_CurrentGame()->language);
@@ -202,7 +202,7 @@ done:
         } else {
             nameGame = Results_CurrentGame();
             XPlus_CopyString(D_800E5830->resultText, resultsUnavailable(nameGame));
-            item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
+            item = Node_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
             item->text = D_800E5830->resultText;
@@ -214,15 +214,15 @@ done:
     SmpButton_WrapButtonWidget(0x26E + PREVIEW_ID_SHIFT);
     SmpButton_WrapButtonWidget(0x26F + PREVIEW_ID_SHIFT);
     SmpButton_WrapButtonWidget(0x273 + PREVIEW_ID_SHIFT);
-    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B00[i].player >= 0 && D_80102B00[i].fresh == 0) {
-            Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 0);
+            Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 0);
             break;
         }
     }
-    Frontend_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = RW_LOCALIZED_TEXT(D_800D3588, D_800E2074_eu, D_800E2074_eu, Results_CurrentGame()->language);
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
+    Node_FindWidgetByResourceId(D_800E5830->window, 0x271 + PREVIEW_ID_SHIFT)->text = RW_LOCALIZED_TEXT(D_800D3588, D_800E2074_eu, D_800E2074_eu, Results_CurrentGame()->language);
+    item = Node_FindWidgetByResourceId(D_800E5830->window, 0x272 + PREVIEW_ID_SHIFT);
     switch (D_8014DD98.kind) {
     case 0:
         item->text = RW_LOCALIZED_TEXT(D_800D3590, D_800E2094_eu, D_800E2094_eu, Results_CurrentGame()->language);
@@ -234,11 +234,11 @@ done:
         item->text = RW_LOCALIZED_TEXT(D_800D358C, D_800E2084, D_800E2084, g_languageIndex);
         break;
     }
-    item = Frontend_FindWidgetByResourceId(menu, 0x26C + PREVIEW_ID_SHIFT);
+    item = Node_FindWidgetByResourceId(menu, 0x26C + PREVIEW_ID_SHIFT);
     Scene_CopyLevelName(&g_world, D_8015402C, levelName, 0x3F);
     XPlus_CopyString(D_800E5830->nameText, XPlus_UppercaseString(levelName));
     item->text = D_800E5830->nameText;
-    D_800E5830->item24 = Frontend_FindWidgetByResourceId(menu, 0x274 + PREVIEW_ID_SHIFT);
+    D_800E5830->item24 = Node_FindWidgetByResourceId(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;
     D_80145088.status[7] = 1;
     D_800E5830->started = 0;
@@ -287,29 +287,29 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     player = D_800E5830->player;
     statIndex = player;
     record = &g_playerSettings[player];
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     item->value = D_800E3A58[Key_FindKeyIndex((s32) record->kind)].portrait;
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     item->text = D_80102B00[player].name;
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x73;
     item->text = Match_UpdateRankText(player);
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     XStdio_FormatBuffer(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
     item->text = D_800E5830->killsText;
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     XStdio_FormatBuffer(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
     item->text = D_800E5830->scoreText;
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     denominator = D_800FF140_de[statIndex];
@@ -319,7 +319,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     }
     XStdio_FormatBuffer(D_800E5830->ratioText, D_800E1F48, percent);
     item->text = D_800E5830->ratioText;
-    item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
+    item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     lastItem=item;
@@ -330,7 +330,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     }
     lastItem->text = D_800E5830->otherText;
     if (D_800E5830->badge != -1) {
-        item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
+        item = Node_FindWidgetByResourceId(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
         item->alpha = 0x96;
         Frontend_SetWidgetFlag08(item, 1);
         item->value = D_800E01B0_de[D_800E5830->badge];
@@ -354,7 +354,7 @@ void Achieve_ConfigureResultModelPreview(void) {
  model=D_800E5830->rows[index].unk0;
  if(model>=0) {
   /* the hub's Item view shares the MenuWidget prefix; this unit writes alpha and image through its own view */
-  item=(MenuWidget *)Frontend_FindWidgetByResourceId(D_800E5830->window,MENU_804387F4_642);
+  item=(MenuWidget *)Node_FindWidgetByResourceId(D_800E5830->window,MENU_804387F4_642);
   Frontend_SetWidgetFlag08(item,1);
   item->alpha=0xAF;
   item->image=D_800E5830->rows[index].unk10;

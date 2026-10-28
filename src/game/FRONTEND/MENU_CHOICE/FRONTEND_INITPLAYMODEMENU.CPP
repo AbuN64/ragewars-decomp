@@ -143,11 +143,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     } else if (groupB == 1) {
         layout = 2;
     }
-    title = Frontend_FindWidgetByResourceId(menu, WID_42);
+    title = Node_FindWidgetByResourceId(menu, WID_42);
     switch (layout) {
     case 2:
         SmpButton_WrapButtonWidget(WID_48);
-        widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
+        widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
@@ -160,10 +160,10 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         title->height = 0x88;
         break;
     default:
-        widget = Frontend_FindWidgetByResourceId(menu, WID_48);
+        widget = Node_FindWidgetByResourceId(menu, WID_48);
         Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
-        widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
+        widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
@@ -173,11 +173,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     i = -1;
     Focus_AdvanceActiveSlot(&i);
     if (i < 0) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_4C), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, WID_4C), 1);
     }
     mode = Control_IsControllerConnected(0);
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_49), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(menu, WID_49), 1);
     }
     D_800E4600->music = SmpFade_CreateFadeWidget(WID_42, 0x24);
     SmpSlider_DisableTransition(D_800E4600->music);
@@ -187,7 +187,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     SmpButton_WrapButtonWidget(WID_4B);
     SmpButton_WrapButtonWidget(WID_4C);
     SmpButton_WrapButtonWidget(WID_47);
-    D_800E4600->title = Frontend_FindWidgetByResourceId(menu, WID_43);
+    D_800E4600->title = Node_FindWidgetByResourceId(menu, WID_43);
     D_800E4600->title->alpha = 0xF;
     D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(WID_44, 0x6E);
     if (Menu_GetBlockedScreenOwner() == 2) {

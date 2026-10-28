@@ -10,7 +10,7 @@
 #include "SYSTEM/80255C40_3.H"
 
 /* Spawns the effect a description asks for: the spawn of Animpool_SpawnSceneEffect (id resolution, free node, init
- * through func_802466A0_de and start) inlined with the id, variant, count, owner, position, scale, direction
+ * through Gobjinst_InitializeActor and start) inlined with the id, variant, count, owner, position, scale, direction
  * and colour taken from the description record and no counted reference. Adapted from Animpool_SpawnSceneEffect with
  * the enabled and count tests as separate early returns. */
 
@@ -28,9 +28,9 @@ extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 extern s32 Scene_GetModelIdAtIndex(void *, s32);
 
 
-extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void Gobjinst_InitializeActor(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 
-extern void func_8024B2D0_de(SceneEffect *);
+extern void Gobjinst_DispatchActorTypeUpdate(SceneEffect *);
 
 static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     SceneEffect *effect;
@@ -73,8 +73,8 @@ static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 var
     if (effect == 0) {
         return 0;
     }
-    func_802466A0_de(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
-    func_8024B2D0_de(effect);
+    Gobjinst_InitializeActor(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    Gobjinst_DispatchActorTypeUpdate(effect);
     return effect;
 }
 

@@ -156,7 +156,7 @@ void func_802292B8_de(void *actor) {
 
 /* Transfers a randomly selected inventory quantity into an empty recipient slot. */
 
-s32 GraphU64_NextRandom(); /* extern */
+s32 Graphu64_NextRandom(); /* extern */
 
 void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receiver) {
  s32 amount;
@@ -165,11 +165,11 @@ void Player_TransferRandomInventoryItems(Inventory *inventory, Receiver *receive
  void *scan;
  if (receiver->amount == 0) {
   amount=15;
-  index=GraphU64_NextRandom()%3;
+  index=Graphu64_NextRandom()%3;
   value=inventory->items[index];
   if(value<16) amount=value;
   if(amount==0) {
-   GraphU64_NextRandom();
+   Graphu64_NextRandom();
    scan=inventory;
    for(index=0;index<3;index++) {
     s16 item=inventory->items[index];

@@ -25,7 +25,7 @@ s32 Join_CreateUsJoinOptionsMenu(void *arg0) {
     SmpOverlay_ShowSlotById((s32) arg0, 2, 0x389);
     SmpOverlay_ShowSlotById((s32) arg0, 3, 0x389);
 
-    item = Frontend_FindWidgetByResourceId(arg0, 0x38B);
+    item = Node_FindWidgetByResourceId(arg0, 0x38B);
     item->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
@@ -33,23 +33,23 @@ s32 Join_CreateUsJoinOptionsMenu(void *arg0) {
 
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
-    item = Frontend_FindWidgetByResourceId(arg0, 0x38C);
+    item = Node_FindWidgetByResourceId(arg0, 0x38C);
     D_800E39C0->rows[0] = item;
-    item = Frontend_FindWidgetByResourceId(arg0, 0x395);
+    item = Node_FindWidgetByResourceId(arg0, 0x395);
     D_800E39C0->rows[1] = item;
-    item = Frontend_FindWidgetByResourceId(arg0, 0x396);
+    item = Node_FindWidgetByResourceId(arg0, 0x396);
     D_800E39C0->rows[2] = item;
     D_800E39C0->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
-        item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
+        item = Node_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
         Frontend_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
-    item = Frontend_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    item = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
     Frontend_SetWidgetFlag08(item, 1);
     return 0;
 }

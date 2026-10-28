@@ -108,10 +108,10 @@ void Simple_InitSimpleInstance(SimpleInstanceOut *inst, CROMSimpleInstance *rec,
 
 extern void **func_8024F6EC_de(StaticObject *, s32);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
-extern s32 GraphU64_LimitVectorLength(CVector3 *, f32);
+extern s32 Graphu64_LimitVectorLength(CVector3 *, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void SwapMatrixUpForward(MatrixF *);
-extern void GraphU64_ConvertMatrixToFixed(MatrixF *, char *);
+extern void Graphu64_ConvertMatrixToFixed(MatrixF *, char *);
 
 extern void Simpinst_SpawnModelEffect(StaticObject *, void **);
 
@@ -138,10 +138,10 @@ void Simple_DrawCachedModel(StaticObject *obj) {
         BuildYawMatrix(&matrix, obj->angle);
     }
     ScaleMatrixLocal(&matrix, obj->scale, obj->scale, obj->scale);
-    GraphU64_LimitVectorLength(&obj->position, 20000.0f);
+    Graphu64_LimitVectorLength(&obj->position, 20000.0f);
     TranslateMatrix(&matrix, obj->position.x, obj->position.y + obj->height, obj->position.z);
     SwapMatrixUpForward(&matrix);
-    GraphU64_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
     if (*obj->type != 12) {
         Geometry_DrawModelResource(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
         Simpinst_SpawnModelEffect(obj, resource);

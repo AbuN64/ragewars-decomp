@@ -69,7 +69,7 @@ s32 Menu_CreateSixChoiceMenu(s32 root) {
     SmpButton_WrapButtonWidget(ID_ROW3);
     SmpButton_WrapButtonWidget(ID_ROW4);
     SmpButton_WrapButtonWidget(ID_ROW5);
-    window = Frontend_FindWidgetByResourceId(root, ID_WINDOW);
+    window = Node_FindWidgetByResourceId(root, ID_WINDOW);
     D_800E4450->unk8 = (struct CellRecAt1A *) window;
     window->alpha = 0xF;
     D_800E4450->unk4 = SmpFlicker_CreateFlickerWidget(ID_LABEL, 0x6E);

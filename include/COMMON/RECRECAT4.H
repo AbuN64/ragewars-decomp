@@ -121,7 +121,7 @@ extern void Frontend_DrawResultSelectionPreview();
 
 extern void Menu_SetOptionsSceneSelection(s32);
 
-extern char D_800DD9BC[];
+extern char g_characterAndTimeFormatText[];
 extern char D_800DD9C8[];
 extern char D_800DD9D0_de[];
 extern void Random_ReplaceTextOccurrences(char *, char *, char *);

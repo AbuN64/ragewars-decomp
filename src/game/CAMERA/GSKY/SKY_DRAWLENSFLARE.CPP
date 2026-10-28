@@ -43,7 +43,7 @@ void func_80238EB8_de(State44 *effectState) {
 typedef struct ClipView FlareActor;
 extern s32 D_800E28D0;
 extern Gfx *g_displayListCursor;
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 void Sky_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
     FlareRadii radii = D_800C344C_de;
     FlareAlphas alphas = D_800C3468_de;
@@ -57,9 +57,9 @@ void Sky_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 speci
     dy = D_800E28D4 / 2 - y;
     gfx = g_displayListCursor++;
     gDPSetTextureFilter(gfx, G_TF_BILERP);
-    distance = Math_Sqrtf(dx * dx + dy * dy);
+    distance = Gu_Sqrtf(dx * dx + dy * dy);
     if (!special) {
-        edge = distance / Math_Sqrtf((f32)(D_800E28D0 * D_800E28D0) * 0.25f + (f32)(D_800E28D4 * D_800E28D4) * 0.25f);
+        edge = distance / Gu_Sqrtf((f32)(D_800E28D0 * D_800E28D0) * 0.25f + (f32)(D_800E28D4 * D_800E28D4) * 0.25f);
         if (edge > 1.0f) intensity = 0.0f;
         else intensity *= 1.0f - edge;
     }

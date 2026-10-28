@@ -8,7 +8,7 @@
 #include "ANIM/RAY180.H"
 #include "stddef.h"
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 /* Returns the distance from point p to the segment from a to b: the offset of p from a is reduced by
  * its projection onto the segment direction, clamped to the segment ends, before taking the length. */
@@ -37,7 +37,7 @@ f32 CCollision_DistanceToSegment(CVector3 *a, CVector3 *b, CVector3 *p) {
         GraphU64_SubtractVectors(&offset, &offset, &dir);
     }
     value = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
-    return Math_Sqrtf(value);
+    return Gu_Sqrtf(value);
 }
 
 #if defined(VERSION_US)

@@ -137,7 +137,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
         do {
             sampleDirection = directions + sampleIndex * 3;
             volume = volumes[sampleIndex];
-            GraphU64_TransformPoint(volume->inverse, position, &transformed);
+            Graphu64_TransformPoint(volume->inverse, position, &transformed);
             if (Lighting_EvaluateLocalVolume(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 GraphU64_AddVec3(&translatedDirection, &localDirection, &transformed);
                 Graphu64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
@@ -414,7 +414,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                         hit = Action_ShowTriggerMessage(trigger, &trigger->behaviorFlags, actor);
                     }
                     if (hit) {
-                        Nav_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
+                        Actor_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
                     }
                 }
             }
@@ -432,7 +432,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                     }
                 }
                 if (hit) {
-                    Nav_RequestActorState(trigger, &trigger->behaviorFlags, exitMode);
+                    Actor_RequestActorState(trigger, &trigger->behaviorFlags, exitMode);
                 }
             }
         }
@@ -454,7 +454,7 @@ extern u8 *D_800D3A9C;
 extern void func_804037D4_de(void), Track_RequestTrackByKey(s32);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Scene_LoadLevelResources(void *, s32, s32);
-extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
+extern struct CCameraText_t *Gsky_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
     if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
     return scene->selectionValues[1];
@@ -473,16 +473,16 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
-            else scene->selectionFlags = OvlScene_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
+            else scene->selectionFlags = Scene_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
             scene->selectionValues[0] = scene->selectionValues[1];
             id = transitionId(scene);
             Scene_LoadLevelResources(scene, id, scene->selectionFlags);
             settings = &D_80145088.settings;
             if (scene->previewStart != settings->optionFlags && SetN64_IsModeThirteen()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Sky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+                Gsky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
 #else
-                Sky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
+                Gsky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
 #endif
                 scene->previewStart = settings->optionFlags;
             }

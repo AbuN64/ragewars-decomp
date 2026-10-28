@@ -39,7 +39,7 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
     screen->window = window;
     screen->full = 0;
     /* the hub's item type carries no color; this unit's options view names the byte at +0x1A */
-    ((OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3A8)))->color = COLOR;
+    ((OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(0x3A8)))->color = COLOR;
     D_800E4400->title = SmpFade_CreateFadeWidget(ID(0x3A8), ID(0x3A9));
     SmpButton_WrapButtonWidget(ID(0x3B6));
 
@@ -84,7 +84,7 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
     }
 
     SmpButton_WrapButtonWidget(ID(0x3AC));
-    D_800E4400->cursor = (OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3B7));
+    D_800E4400->cursor = (OptionsOpenItem *) Node_FindWidgetByResourceId(window, ID(0x3B7));
     D_800E4400->unk_28 = 0;
     D_800E4400->unk_2C = 0;
     D_800E4400->unk_34 = 1;

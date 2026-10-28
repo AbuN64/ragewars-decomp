@@ -62,7 +62,7 @@ void Barrel_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) {
         break;
     }
 
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, kind,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, kind,
                   position, rotation, *(CVector3 *)&copiedInput, 0, -1, mode);
 
     if ((((CActor_t *)actor)->type == 1) && (typedActor->objectId == 0x40C)) {
@@ -85,7 +85,7 @@ void Barrel_FillDamagePacket(void *packet, s32 damageSource, s32 damage, s32 rad
 
 /* 80213ED4_8.CPP */
 extern void Barrel_StopActorLoopingSound(void);
-extern void Nav_ApplySupportingPlatformMotion(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
+extern void Actor_ApplySupportingPlatformMotion(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
 extern void Actor_UpdateActorStateAnimation(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
 
 void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBarrelUpdateActorController *dst) {
@@ -105,7 +105,7 @@ void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBa
         dst->position = src->position;
         dst->value += D_800D2988;
         if (src->flags & 0x10000) {
-            Nav_ApplySupportingPlatformMotion(src, dst);
+            Actor_ApplySupportingPlatformMotion(src, dst);
         }
         if (dst->callback != 0) {
             dst->callback(src, dst);
@@ -120,14 +120,14 @@ void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBa
 
 /* 80213ED4_9.CPP */
 extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, CAIMovementInfo *result) {
     GraphU64_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;
     GraphU64_NormalizeVec3(&result->first_normalized.x);
-    result->first_length = Math_Sqrtf(
+    result->first_length = Gu_Sqrtf(
         result->first.x * result->first.x +
         result->first.y * result->first.y +
         result->first.z * result->first.z);
@@ -136,7 +136,7 @@ void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, C
     result->flat.z = result->first.z;
     result->flat_normalized = result->flat;
     GraphU64_NormalizeVec3(&result->flat_normalized.x);
-    result->flat_length = Math_Sqrtf(
+    result->flat_length = Gu_Sqrtf(
         result->flat.x * result->flat.x +
         result->flat.y * result->flat.y +
         result->flat.z * result->flat.z);

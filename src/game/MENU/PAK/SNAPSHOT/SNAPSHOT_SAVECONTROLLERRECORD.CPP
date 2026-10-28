@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Pak_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
+/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Note_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
 
 
 
@@ -26,7 +26,7 @@ extern unsigned char D_0044E4B0[];
 extern char D_0044EA2C[];
 extern char D_0044E9C0[];
 extern void Pak_ProbeStatus(s32 ch);
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
 extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
@@ -54,7 +54,7 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
   menu->items[20].flags &= ~0x01000000;
   Pak_ProbeStatus(menu->slot->unk4);
   new_var = 0;
-  if (Pak_GetStatus(ch) == new_var)
+  if (Note_GetStatus(ch) == new_var)
   {
     Pak_MarkSaveNotes(menu);
     return;
@@ -97,7 +97,7 @@ extern s32 Note_GetFreePages(s32, s32 *);
 extern s32 Note_CountFreeNotes(s32, s32 *);
 extern s32 Note_FindFreeNoteExtension(s32, char *);
 extern s32 Note_SaveNote(s32, s32, void *, char *, char *, char *);
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
 static inline ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
@@ -151,7 +151,7 @@ s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 u
             }
         }
     }
-    if (D_800DE860_de != 0 || D_800DE864_de != 0) func_80253908_de(0);
+    if (D_800DE860_de != 0 || D_800DE864_de != 0) Cache_DrainAndCompactResources(0);
     if (D_800DE860_de != 0) Cache_ReleaseResource(0, D_800DE860_de);
     if (D_800DE864_de != 0) Cache_ReleaseResource(0, D_800DE864_de);
     D_800DE860_de = 0;
@@ -217,7 +217,7 @@ s32 Snapshot_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
             }
         }
     }
-    if (D_800DE860_de != 0 || D_800DE864_de != 0) func_80253908_de(0);
+    if (D_800DE860_de != 0 || D_800DE864_de != 0) Cache_DrainAndCompactResources(0);
     if (D_800DE860_de != 0) Cache_ReleaseResource(0, D_800DE860_de);
     if (D_800DE864_de != 0) Cache_ReleaseResource(0, D_800DE864_de);
     D_800DE860_de = 0;

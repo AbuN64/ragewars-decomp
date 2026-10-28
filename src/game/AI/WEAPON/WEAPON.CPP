@@ -110,7 +110,7 @@ extern char *D_800E0D44[];
 extern char *D_800DCC68[];
 extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
 extern s32 Player_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
-extern void Sky_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
 s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
     s32 result;
@@ -130,7 +130,7 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
         SoundElement_PlayFlatSound(0xD4D);
         if (pThis->hud != 0) {
             s32 player = Player_GetPlayerIndex(&D_80145040, pThis);
-            Sky_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,
+            Gsky_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,
 
 #if defined(VERSION_EU_X)
                             D_800DCC68[settings->language],
@@ -148,7 +148,7 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
 
 void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
     Weapon_ApplyWeaponSwitch(arg0, arg1);
-    Nav_RequestActorState(arg0, arg1, 0);
+    Actor_RequestActorState(arg0, arg1, 0);
 }
 #endif
 
@@ -159,7 +159,7 @@ void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
 extern int D_800D30BC;
 extern int Player_GetProfileAchievementFlag(char *, int);
 extern int Player_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
-extern void Sky_PostTargetedScreenMessage(void *, void *, int, int, float);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, int, int, float);
 
 int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
     SettingsE *rules;
@@ -179,7 +179,7 @@ int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
     if (result == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->hud != 0) {
-            Sky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, D_800D30BC,
+            Gsky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, D_800D30BC,
                           Player_GetPlayerIndex((char *)rules - 0x1288, player), D_800C8100);
         }
     }
@@ -279,7 +279,7 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
     s32 remainingArmedSteps;
 
     weapon = ((Shared_ActorView *)player)->selectedAction;
-    remainingArmedSteps = GraphU64_NextRandom() % 22;
+    remainingArmedSteps = Graphu64_NextRandom() % 22;
     if (remainingArmedSteps >= 0) {
         do {
             weapon += 1;
@@ -316,7 +316,7 @@ void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState
     fireState->spinStep = 0;
     fireState->spin = 0;
     if ((fireState->triggerMode != 0) && (func_802301F4_de(actor, fireState) == 0)) {
-        Nav_RequestActorState(actor, fireState, 2);
+        Actor_RequestActorState(actor, fireState, 2);
     }
 }
 
@@ -377,10 +377,10 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
             case 0:
             case 14:
                 func_8022B00C_de(state);
-                Nav_RequestActorState(actor, attack, 2);
+                Actor_RequestActorState(actor, attack, 2);
                 break;
             default:
-                Nav_RequestActorState(actor, attack, 2);
+                Actor_RequestActorState(actor, attack, 2);
                 break;
             }
         }
@@ -388,7 +388,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
         state->controllerTimer = 0;
     } else if ((state->selectedAction == 12) &&
                ((state->inputFlags & 0x4000) != 0)) {
-        func_8022B190_de((s32)state);
+        Player_ReleasePlayerParticleEmitters((s32)state);
     }
 }
 
@@ -478,7 +478,7 @@ void Weapon_UpdateNormalFireAction(void *actor, ObjectState140 *attack) {
     } else {
         attack->unk_13C = 1;
         if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
-            Nav_RequestActorState(actor, attack, action);
+            Actor_RequestActorState(actor, attack, action);
         }
     }
 }
@@ -540,7 +540,7 @@ extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
 extern char D_8011D8D0;
 
-extern f32 GraphU64_ApproachValue(f32, f32, s32);
+extern f32 Graphu64_ApproachValue(f32, f32, s32);
 
 void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
     void *player;
@@ -558,7 +558,7 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fi
         } else {
             func_8021A9A4_de(arg0->self, 0x4CD);
         }
-        Nav_RequestActorState(arg0, fireState, 4);
+        Actor_RequestActorState(arg0, fireState, 4);
         func_8022AEA0_de(player, 0x977);
         func_8022AF74_de(player, 0x974);
 
@@ -579,7 +579,7 @@ void func_80233314_de(void) {
 
 void Weapon_SetDelayAndRequestStateEight(void *arg0, struct Shared_Particle *particle) {
     particle->unk148 = D_800C3050_de;
-    Nav_RequestActorState(arg0, particle, 8);
+    Actor_RequestActorState(arg0, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
@@ -604,7 +604,7 @@ void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
 
     if (!((((Shared_ActorView *)actor)->actionFlags & 0x4000) &&
           (((Shared_ActorView *)actor)->health != 0))) {
-        Nav_RequestActorState(arg0, attack, 2);
+        Actor_RequestActorState(arg0, attack, 2);
         func_8022B9C4_de(actor);
         ((WeaponFireState *)attack)->mode = 1;
     }
@@ -627,7 +627,7 @@ void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
         if ((((struct Ctrl *) ((ObjectLinks11DC *) actor)->unk_5D8)->flag == 0 ||
              D_801462C8.counters.m_bFragTagOn == 0) &&
             (((ObjectLinks11DC *)(actor))->unk_6AC & 0x4000)) {
-            func_8022B190_de(actor);
+            Player_ReleasePlayerParticleEmitters(actor);
         }
     }
 
@@ -637,13 +637,13 @@ void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
-        Nav_RequestActorState(arg0, attack, value);
+        Actor_RequestActorState(arg0, attack, value);
     }
 }
 
 void Weapon_RequestReleaseOnEnabledEvent(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Nav_RequestActorState(a, b, 2);
+        Actor_RequestActorState(a, b, 2);
     }
 }
 
@@ -676,9 +676,9 @@ void Weapon_EaseSpinForActionFive(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
 
     value = arg0->value;
     if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
-        GraphU64_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
+        Graphu64_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
     } else {
-        GraphU64_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
+        Graphu64_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
     }
     temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
     temp_v0 = ((struct MeasuredRecAt698V2 *)(value))->value;
@@ -701,10 +701,10 @@ void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fire
     f32 target;
 
     target = D_800C3078_de;
-    temp_f0 = GraphU64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
+    temp_f0 = Graphu64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
-        Nav_RequestActorState(arg0, fireState, 2);
+        Actor_RequestActorState(arg0, fireState, 2);
     }
 }
 

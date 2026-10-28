@@ -19,7 +19,7 @@
    (sound 0xD4D) and shows the empty message on the holder's view; with ammunition and a loaded
    weapon at 0x5F6 it plays the wind-up sound 0x7BC unless already firing, sets the firing flags
    0x18400 and restarts the firing timer at 0x1230 at 25. Written with the fire check as the static
-   helper shared with Weapon_TryEnterAlternateStateEight. */
+   helper shared with Weaponai_TryEnterAlternateStateEight. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
@@ -31,7 +31,7 @@ extern char D_80145040[];
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 static inline s32 can_fire(char *player) {
     s32 ammo;
@@ -48,7 +48,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -59,7 +59,7 @@ void Weaponai_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *w
     char *model;
     player = actor->entity;
     if (weapon->variant != 4) {
-        weapon->spin = GraphU64_DecayToZero(weapon->spin, 0.013613569f);
+        weapon->spin = Graphu64_DecayToZero(weapon->spin, 0.013613569f);
     }
     weapon->spinStep += weapon->spin * D_800D2988 * 2.0f;
     model = ((SharedPlayer *)(player))->views5E8.view698_37.emitter;

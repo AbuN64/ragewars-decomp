@@ -18,7 +18,7 @@ struct ObjectRecAtBC {
     f32 value;
     CVector3 direction; /* 0x08 */
     CVector3 axis; /* 0x14 */
-    f32 inverse[16]; /* 0x20: world to volume, GraphU64_InvertAffineMatrix(inverse, transform) */
+    f32 inverse[16]; /* 0x20: world to volume, Graphu64_InvertAffineMatrix(inverse, transform) */
     f32 transform[16]; /* 0x60: volume to world */
     Box bounds; /* 0xA0: func_80275954_de over the 8 corners */
     u8 flagB8;

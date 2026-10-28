@@ -71,7 +71,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
         } else {
             MarkMenuEventHandled();
             if (D_800E4518->arena == 0 && func_8025E2C4_de() != 0) {
-                func_8025E2D4_de(GraphU64_NextRandom() % 4 + 0x38);
+                func_8025E2D4_de(Graphu64_NextRandom() % 4 + 0x38);
             } else {
                 func_8025E2D4_de(D_800E4518->arena);
             }

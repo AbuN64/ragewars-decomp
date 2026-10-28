@@ -68,7 +68,7 @@ extern char D_002688AC[];
 extern char D_002688E4[];
 extern char D_002689BC[];
 extern char D_002689CC[];
-unsigned int D_auto_src_ragewars_effect_callback_flags_us_rev1[74] = {
+unsigned int g_effectCallbackFlags[74] = {
     (unsigned int)D_00267324, 0x00000000, (unsigned int)D_00267424, 0x00000000, (unsigned int)D_00267B78, 0x00000004, (unsigned int)D_00267BD8, 0x00000006,
     (unsigned int)D_00267C30, 0x00000006, (unsigned int)D_00267C88, 0x0000000A, (unsigned int)D_00267C90, 0x00000010, (unsigned int)D_00267CC4, 0x00000010,
     (unsigned int)D_00267424, 0x00000000, (unsigned int)D_00267CF4, 0x00000000, (unsigned int)D_00267D78, 0x00000000, (unsigned int)D_00267D80, 0x00000000,

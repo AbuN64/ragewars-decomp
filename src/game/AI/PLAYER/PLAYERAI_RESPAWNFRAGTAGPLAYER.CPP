@@ -16,7 +16,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "RENDER/802192C0_3.H"
 
-extern f32 GraphU64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 Graphu64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
@@ -36,7 +36,7 @@ extern void Player_UpdateRunEndPlayer(void *);
 
 extern s32 D_800CED30;
 
-extern void func_80253908_de(s32 a);
+extern void Cache_DrainAndCompactResources(s32 a);
 
 
 
@@ -110,7 +110,7 @@ void Playerai_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
 
     if (surface != 0 && arg1 != 0 &&
         (((Shared_Func80243A80Collision *)surface)->flags & 0x40)) {
-        first = GraphU64_GetTrianglePlaneHeight(surface,
+        first = Graphu64_GetTrianglePlaneHeight(surface,
             arg1->x, arg1->z);
         amount = (f32)(s32)(first - Region_GetPolygonHeight(surface,
             arg1->x, arg1->z));
@@ -292,7 +292,7 @@ void Playerai_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
     s32 handle;
 
     Control_SetControllerMode(0);
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     handle = resourceLoadState->handle;
     if (handle != 0) {
         Cache_ReleaseResource(0, handle);
@@ -330,7 +330,7 @@ void Playerai_RespawnFragTagPlayer(void *player) {
     }
     func_80218464_de((char *)player + 0x938);
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
-    Nav_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
+    Actor_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Player_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
     Playerai_InitializePlayerHealth(player);
 }

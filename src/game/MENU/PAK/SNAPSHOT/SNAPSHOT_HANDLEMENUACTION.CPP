@@ -84,7 +84,7 @@ extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *
 
 extern void Pak_ProbeStatus(s32 ch);
 
-extern s32 Pak_GetStatus(s32 ch);
+extern s32 Note_GetStatus(s32 ch);
 
 static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)
 {
@@ -308,7 +308,7 @@ s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
         }
         for (tries = 0; tries < 4; tries++) {
             Pak_ProbeStatus(next);
-            if (Pak_GetStatus(next) != -2) {
+            if (Note_GetStatus(next) != -2) {
                 break;
             }
             next++;

@@ -32,7 +32,7 @@ static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
         for (i = first; i <= last; i++) {
             total += 100;
         }
-        roll = GraphU64_NextRandom() % total;
+        roll = Graphu64_NextRandom() % total;
         total = 0;
         for (i = first; i < last; i++) {
             total += 100;
@@ -133,7 +133,7 @@ s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
         for (entry = first; entry <= last; entry++) {
             total += 100;
         }
-        draw = GraphU64_NextRandom() % total;
+        draw = Graphu64_NextRandom() % total;
         total = 0;
         for (entry = first; entry < last; entry++) {
             total += 100;

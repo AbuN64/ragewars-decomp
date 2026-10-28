@@ -37,7 +37,7 @@ extern float D_800DDF58;
 #endif
 extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
-extern s32 N64Eng_GetFrameCounter(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
+extern s32 N64Eng_GetFrameCounter(void); extern void Graphu64_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 Scene_GetIndexedModelResource(void *,s32);
 extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
 #if !(defined(VERSION_US_REV1))
@@ -61,8 +61,8 @@ void func_804399D0(MenuModelItem *item) {
   Geometry_InitializeModelRenderState();
   {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
-  GraphU64_TransformPoint(&D_80141008[0].camera,&position,&transformed);
-  GraphU64_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
+  Graphu64_TransformPoint(&D_80141008[0].camera,&position,&transformed);
+  Graphu64_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
   time=N64Eng_GetFrameCounter();
   if(item->speed.x!=0.0f)PitchMatrixLocal(&matrix,time*item->speed.x*D_800DDF50_de);
 #if defined(VERSION_DE)
@@ -85,7 +85,7 @@ void func_804399D0(MenuModelItem *item) {
   scale.z=item->scale.z*ratio;
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
   ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
-  GraphU64_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
+  Graphu64_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
   model=Scene_GetIndexedModelResource(&g_world,item->model);Geometry_BeginModelBatch();
   Geometry_QueueDirectModel(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
   Geometry_FlushModelBatch();

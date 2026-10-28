@@ -29,11 +29,11 @@ extern s32 D_80140FF8;
 
 extern f32 D_800CD6B0;
 
-extern void GraphU64_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
-extern void GraphU64_IdentityMatrix(MatrixF *);
+extern void Graphu64_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
+extern void Graphu64_IdentityMatrix(MatrixF *);
 extern CQuatern Gobjinst_BuildTargetAimOrientation(EffectActor *, CVector3);
 extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
-extern void GraphU64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
+extern void Graphu64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
@@ -57,7 +57,7 @@ extern void Gregion_ShiftColorHue(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 extern void Gregion_DarkenColor(u8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 static inline s32 effect_spawn_random_count(s32 range) {
-    return range != 0 ? GraphU64_NextRandom() % (range + 1) : 0;
+    return range != 0 ? Graphu64_NextRandom() % (range + 1) : 0;
 }
 
 static inline ParticleEffect *effect_spawn_find_owned(IntrusiveList *list, void *ownerId, EffectEntry *entry) {
@@ -118,12 +118,12 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         effect->mode = -4;
         targetActor = D_801041F0.actor;
         targetTeam = aimTarget->victimTeam;
-        GraphU64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
-        GraphU64_InvertAffineMatrix(targetInv.m[0], targetMtx.m[0]);
-        GraphU64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
+        Graphu64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
+        Graphu64_InvertAffineMatrix(targetInv.m[0], targetMtx.m[0]);
+        Graphu64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
         GraphU64_NormalizeVec3(&up.x);
-        GraphU64_TransformDirection(&targetInv, &up, vel);
+        Graphu64_TransformDirection(&targetInv, &up, vel);
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
         effect->boundMatrixIndex = D_801041F0.matrixIndex;
@@ -133,7 +133,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
     }
 }
 
-s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind,
+s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind,
                   CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags) {
     MatrixF mtx;
     CVector3 dir;
@@ -290,7 +290,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
             }
             if (entry->params->chance != 100) {
-                if (GraphU64_NextRandom() % 1000 + 1 > entry->params->chance * 10) {
+                if (Graphu64_NextRandom() % 1000 + 1 > entry->params->chance * 10) {
                     ok = 0;
                 }
             }
@@ -304,7 +304,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         if (!(source->flags & 0x100000)) {
                             if (D_80140FF8 == 1) {
                                 camera = D_80140FE8_de.camera;
-                                GraphU64_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
+                                Graphu64_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;
@@ -315,7 +315,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                             }
                             source->flags |= 0x100000;
                         }
-                        GraphU64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
+                        Graphu64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
                         scale = 0.09765625f;
                         if (source->model->unk14 != 0) {
                             scale = 2.857143f;
@@ -327,14 +327,14 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         break;
                     case 1:
                         extra = 0x400000;
-                        GraphU64_BuildScaleMatrix(&mtx, -1.0f, 1.0f, -1.0f);
+                        Graphu64_BuildScaleMatrix(&mtx, -1.0f, 1.0f, -1.0f);
                         break;
                     default:
-                        GraphU64_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);
+                        Graphu64_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);
                         break;
                 }
             } else if (entry->flags & 0x1000000) {
-                GraphU64_IdentityMatrix(&mtx);
+                Graphu64_IdentityMatrix(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
                     quat = Gobjinst_BuildTargetAimOrientation(owner, pos);
@@ -413,7 +413,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
                     GraphU64_NormalizeVec3(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                        GraphU64_TransformPoint(&mtx, &dir, &dirOut);
+                        Graphu64_TransformPoint(&mtx, &dir, &dirOut);
                     } else {
                         dirOut = dir;
                     }
@@ -458,7 +458,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 offset.y = Rumble_SamplePackedFloatRange(entry->offset[1]);
                 offset.z = Rumble_SamplePackedFloatRange(entry->offset[2]);
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
-                    GraphU64_TransformPoint(&mtx, &offset, &offsetOut);
+                    Graphu64_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
                         GraphU64_AddVec3(&offsetOut, &pos, &offsetOut);
                     }
@@ -477,7 +477,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
                         GraphU64_NormalizeVec3(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                            GraphU64_TransformPoint(&mtx, &dir, &dirOut);
+                            Graphu64_TransformPoint(&mtx, &dir, &dirOut);
                         } else {
                             dirOut = dir;
                         }
@@ -492,10 +492,10 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
-                    hue = GraphU64_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
+                    hue = Graphu64_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
                 }
-                sat = entry->color->m_RandomizeSaturation != 0 ? GraphU64_NextRandom() % entry->color->m_RandomizeSaturation : 0;
-                val = entry->color->unkE != 0 ? GraphU64_NextRandom() % entry->color->unkE : 0;
+                sat = entry->color->m_RandomizeSaturation != 0 ? Graphu64_NextRandom() % entry->color->m_RandomizeSaturation : 0;
+                val = entry->color->unkE != 0 ? Graphu64_NextRandom() % entry->color->unkE : 0;
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];
@@ -565,7 +565,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                     effect->flags |= 0x1000000;
                 }
-                if ((D_800CC130[entry->model->unk94].flags & 1) || kind == 0x68) {
+                if ((g_effectCallbackFlags[entry->model->unk94].flags & 1) || kind == 0x68) {
                     render->dwFlags |= 0x20000;
                 }
                 vel = &effect->velocity;

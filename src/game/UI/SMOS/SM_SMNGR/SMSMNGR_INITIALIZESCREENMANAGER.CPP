@@ -50,7 +50,7 @@ int Stream_DrainResourceWork();
 extern void *Cache_AllocateMemory(s32 size);
 
 
-/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through Frontend_FindWidgetByResourceId, counts the load in g_menuElementLoadCount with its high-water mark in g_menuElementLoadPeak, and records it while the cache holds fewer than 75 entries. */
+/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through Node_FindWidgetByResourceId, counts the load in g_menuElementLoadCount with its high-water mark in g_menuElementLoadPeak, and records it while the cache holds fewer than 75 entries. */
 
 
 
@@ -149,14 +149,14 @@ Element *FindMenuElement(s32 id) {
     s32 context;
     s32 i;
 
-    context = (s32)Frontend_GetScreenData(GetMenuScreenOwner());
+    context = (s32)Node_GetScreenData(GetMenuScreenOwner());
     for (i = 0; i < D_8014D080->cacheCount; i++) {
         if (D_8014D080->cache[i].context == context && D_8014D080->cache[i].id == id
             && D_8014D080->cache[i].object != 0 && D_8014D080->cache[i].object->id == id) {
             return D_8014D080->cache[i].object;
         }
     }
-    object = (Element *)Frontend_FindWidgetByResourceId((struct Tree *)context, id & 0xFFFF);
+    object = (Element *)Node_FindWidgetByResourceId((struct Tree *)context, id & 0xFFFF);
     g_menuElementLoadCount++;
     if (g_menuElementLoadPeak < g_menuElementLoadCount) {
         g_menuElementLoadPeak = g_menuElementLoadCount;

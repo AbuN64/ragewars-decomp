@@ -31,7 +31,7 @@ s32 Frontend_CreatePlayerCountScreen(s32 arg0) {
     SmpSlider_EnableTransition(handle);
     SmpButton_WrapButtonWidget(0x39C);
     /* the MenuWidget view names the alpha byte at +0x10 and the text pointer at +0x34 that the hub's Item omits */
-    node = (struct MenuWidget *) Frontend_FindWidgetByResourceId((void *) arg0, 0x39A);
+    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) arg0, 0x39A);
     state = D_800E5430;
     state->window = node;
     node->alpha = 0xF;
@@ -39,7 +39,7 @@ s32 Frontend_CreatePlayerCountScreen(s32 arg0) {
     state = D_800E5430;
     state->button = handle;
     state->delay = 3;
-    node = (struct MenuWidget *) Frontend_FindWidgetByResourceId((void *) arg0, 0x39D);
+    node = (struct MenuWidget *) Node_FindWidgetByResourceId((void *) arg0, 0x39D);
     state = D_800E5430;
     text = &state->text;
     node->text = text;

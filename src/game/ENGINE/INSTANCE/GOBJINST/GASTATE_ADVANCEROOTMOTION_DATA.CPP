@@ -45,7 +45,7 @@ extern CROMEventEntry *func_80262598_de(void *);
 
 extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, char *);
+extern void Graphu64_ConvertMatrixToFloat(f32 *, char *);
 
 extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
@@ -90,7 +90,7 @@ extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
-extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+extern void Graphu64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
 const unsigned int D_blob_7feea27188c6a4b3e2db[2] = {
     0xC0000000, 0x40400000,
@@ -180,7 +180,7 @@ void func_802472F0_de(void *actor) {
             saved.z = saved.y;
             saved.y = 0.0f;
             BuildYawMatrix(&matrix, ((Actor36 *)actor)->heading);
-            GraphU64_TransformPoint(&matrix, &saved, &moved);
+            Graphu64_TransformPoint(&matrix, &saved, &moved);
             ((Actor36 *)actor)->position.x += moved.x * ((Actor36 *)actor)->scaleX;
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
         } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
@@ -227,7 +227,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                 local.x = events[i].local.x;
                 local.y = events[i].local.z;
                 local.z = events[i].local.y;
-                GraphU64_TransformPoint(obj + 0x74, &local, &pos);
+                Graphu64_TransformPoint(obj + 0x74, &local, &pos);
             } else {
                 if (checkMask && (D_800CC134[events[i].effect].offset & 4)) {
                     if (resource == 0) {
@@ -244,8 +244,8 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                     continue;
                 }
                 if (((struct ObjectLinks180 *) obj)->unk_B8 != 0) {
-                    GraphU64_ConvertMatrixToFloat(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
-                    GraphU64_TransformPoint(matrix, &events[i].local, &pos);
+                    Graphu64_ConvertMatrixToFloat(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
+                    Graphu64_TransformPoint(matrix, &events[i].local, &pos);
                 } else {
                     pos = ((struct ObjectLinks180 *) obj)->unk_8;
                 }
@@ -356,7 +356,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         return base;
     }
     MatrixFromQuaternion(&base, matrix);
-    GraphU64_TransformPoint(matrix, &local, &aim);
+    Graphu64_TransformPoint(matrix, &local, &aim);
     i = 0;
     target = 0;
     bestDot = Math_Cosf(cone * 0.008726647f);
@@ -381,8 +381,8 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     if (target != 0) {
         Graphu64_CrossVectors(&axis, &aim, &best);
         GraphU64_NormalizeVec3(&axis);
-        angle = GraphU64_ArcCos(bestDot);
-        angle *= Math_Sqrtf(Math_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
+        angle = Graphu64_ArcCos(bestDot);
+        angle *= Gu_Sqrtf(Gu_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
         D_80115DEC = Math_Sinf(angle);
         turn.x = axis.x * D_80115DEC;
@@ -506,7 +506,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(inverse, origin.x, origin.y, origin.z);
     Graphu64_BuildAxisAngleMatrix(rotation, angle, axis.x, axis.y, axis.z);
-    GraphU64_MultiplyAffineMatrices(matrix, inverse, rotation);
+    Graphu64_MultiplyAffineMatrices(matrix, inverse, rotation);
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(matrix, origin.x, origin.y, origin.z);
 }

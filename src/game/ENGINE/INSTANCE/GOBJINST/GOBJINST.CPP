@@ -78,13 +78,13 @@ extern void func_80262480_de(char *);
 
 extern void Gobjinst_QueueAnimation(char *, s32);
 
-extern void GraphU64_IdentityMatrix(char *);
+extern void Graphu64_IdentityMatrix(char *);
 
 extern void Actor_InitSpawnedActor(char *, char *, void *);
 
 extern void func_802193C8_de(char *, s32, char *);
 
-extern void GameObject_LoadModel(char *, s32, s32, s32);
+extern void Gobjinst_LoadModel(char *, s32, s32, s32);
 
 
 static inline void *body_setup(char *obj) {
@@ -110,7 +110,7 @@ static inline void *body_setup(char *obj) {
     return D_800CB440_de[kind];
 }
 
-extern s32 D_800C3864_de[];
+extern s32 g_lookupAIAnimTypeAnimObjectInfoText[];
 
 
 
@@ -186,11 +186,11 @@ s32 Gobjinst_HasClearInstancePath(Instance8020CD74 *actorState, CVector3 positio
 }
 
 /** Thin wrapper around InstHdr_GetActorMotionIndex, discarding its result. */
-void GameObject_ReadActorMotionIndex(void *record) {
+void Gobjinst_ReadActorMotionIndex(void *record) {
     InstHdr_GetActorMotionIndex(record);
 }
 
-void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s32 effect, s32 owner, f32 heading,
+void Gobjinst_InitializeActor(char *obj, s32 model, s32 kind, s32 unused, void *info, s32 effect, s32 owner, f32 heading,
                    CVector3 pos, s32 flags, CVector3 extent, CVector3 offset) {
     s32 lean;
     s32 delay;
@@ -225,7 +225,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     func_80262480_de((char *)obj + 0x118);
     Gobjinst_QueueAnimation(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
-    GraphU64_IdentityMatrix((char *)obj + 0x74);
+    Graphu64_IdentityMatrix((char *)obj + 0x74);
     ((LevelActor *)obj)->fieldB4 = 0;
     ((LevelActor *)obj)->fieldB8 = 0;
     ((LevelActor *)obj)->shadow = 0;
@@ -248,7 +248,7 @@ Actor_InitSpawnedActor
         func_802193C8_de(obj + 0x204, effect, (char *)obj + 0x8);
     }
     world = &g_world;
-    GameObject_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
+    Gobjinst_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
     if (delay != 0) {
         ((LevelActor *)obj)->animationTime = delay;
         ((LevelActor *)obj)->flags &= ~0x400;
@@ -261,7 +261,7 @@ Actor_InitSpawnedActor
     }
 }
 
-s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
+s32 Gobjinst_ChooseAnimationVariant(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
     WeightedTable table;
     void **resource;
     s32 *entries;
@@ -275,7 +275,7 @@ s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
     }
     resource = Cache_RequestResource(0, ((struct Access_s32_C4 *)(owner))->field,
                              ((struct Access_s32_C4 *)(owner))->field, ((struct Access_s32_D0 *)(owner))->field,
-                             0, 0, 0, D_800C3864_de, 1);
+                             0, 0, 0, g_lookupAIAnimTypeAnimObjectInfoText, 1);
     if (resource == 0) {
         goto fail;
     }

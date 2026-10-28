@@ -135,7 +135,7 @@ static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
         Fx_DetachParticleSwooshes(&D_801379C0, p);
     }
     if (p->m_pDLight) {
-        DynLight_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
+        Gdynlight_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
         p->m_pDLight = 0;
     }
     if (p->m_pOwnerCount) {
@@ -358,7 +358,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (!built) {
                         if (D_80140FF8 == 1) {
                             camera = D_80140FE8_de.camera;
-                            GraphU64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
+                            Graphu64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                             depth = transformed.z;
                             if (depth < 0.0f) depth = -depth;
                             Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -378,7 +378,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (!node->particle.drawWhenHidden || built) break;
                     if (D_80140FF8 == 1) {
                         camera = D_80140FE8_de.camera;
-                        GraphU64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
+                        Graphu64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                         depth = transformed.z;
                         if (depth < 0.0f) depth = -depth;
                         Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -467,7 +467,7 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
         }
         if (actor->effect)
         {
-          DynLight_ReleaseLight(&D_8013B1A8, actor->effect);
+          Gdynlight_ReleaseLight(&D_8013B1A8, actor->effect);
           actor->effect = 0;
         }
         if (actor->refs)
@@ -556,7 +556,7 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
                         Fx_DetachParticleSwooshes(&D_801379C0, actor);
                     }
                     if (actor->handle) {
-                        DynLight_ReleaseLight(&D_8013B1A8, actor->handle);
+                        Gdynlight_ReleaseLight(&D_8013B1A8, actor->handle);
                         actor->handle = 0;
                     }
                     if (actor->counter) --*actor->counter;

@@ -2,11 +2,11 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE) || defined(VERSION_EU)
-const char D_80286AA8_CAEA4[12] =
+const char g_skyLayersText[12] =
     "sky layers\000\000";
 #endif
 #if defined(VERSION_EU_X) || defined(VERSION_US)
-const char D_80286AA8_CAEA4[11] =
+const char g_skyLayersText[11] =
     "sky layers\000";
 #endif
 #endif

@@ -9,5 +9,5 @@
 #include "COMMON/SHARED_DEBUGFIELD.H"
 #include "COMMON/MENU_SETUP_VERSIONS.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
-extern float D_800C2A58_de;
+extern float g_playerSwimConstants;
 #endif

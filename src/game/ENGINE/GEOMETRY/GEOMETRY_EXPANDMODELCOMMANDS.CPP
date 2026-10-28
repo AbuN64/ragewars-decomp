@@ -40,7 +40,7 @@ extern char D_80145040;
 
 extern void Graphu64_UnpackFixedMatrix(f32 *matrix, void *model);
 
-extern void GraphU64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
+extern void Graphu64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
 
 extern char *Playerai_GetFirstPlayer(void *players);
 
@@ -307,7 +307,7 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
 
     if (g_geometryViewEffect != 0 && (material->flagWord & 0x8000)) {
         Graphu64_UnpackFixedMatrix((f32 *)matrix, model);
-        GraphU64_GetMatrixTranslation((f32 *)matrix, &position);
+        Graphu64_GetMatrixTranslation((f32 *)matrix, &position);
         GraphU64_SubtractVectors(&direction, Playerai_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
         GraphU64_NormalizeVec3(&direction);
         {

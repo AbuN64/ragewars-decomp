@@ -48,7 +48,7 @@ extern void *D_800D31C0;
 
 
 
-void func_8022B7F8_de(void *actor, void *effectSource) {
+void Player_StartSourceEffect(void *actor, void *effectSource) {
     Shared_ActorView *state = actor;
     Shared_ActorView *source = effectSource;
     void *owner;

@@ -28,7 +28,7 @@ const unsigned int D_blob_950cbb3daf442f25a64a[1] = {
 /* 80213ED4_4.CPP */
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Cbarrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Cbarrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
-extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
+extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Gu_Sqrtf(f32);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
@@ -109,12 +109,12 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
     arg3->target = target;
     arg3->m_vTargetPos = pos;
     arg3->m_vDeltaTargetPos = delta;
-    arg3->m_DistFrom = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->m_DistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
     delta.y = 0.0f;
     pos.y = 0;
     arg3->m_vXZTargetPos = pos;
     arg3->m_vXZDeltaTargetPos = delta;
-    arg3->m_XZDistFrom = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->m_XZDistFrom = Gu_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }
 
 extern s32 D_801041F0;
@@ -134,7 +134,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
 
     dx = point.x - actor->position.x;
     dz = point.z - actor->position.z;
-    dist = Math_Sqrtf(dx * dx + dz * dz);
+    dist = Gu_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
@@ -144,7 +144,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     c = -Math_Cosf(actor->yaw);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < (-1.0f) ? (-1.0f) : (RW_MIN(dot, 1.0f)));
-    angle = GraphU64_ArcCos(dot);
+    angle = Graphu64_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -201,7 +201,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
 
     dx = point.x - actor->pos.x;
     dz = point.z - actor->pos.z;
-    dist = Math_Sqrtf(dx * dx + dz * dz);
+    dist = Gu_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
@@ -211,7 +211,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
     c = -Math_Cosf(actor->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < ((-1.0f)) ? ((-1.0f)) : (RW_MIN(dot, 1.0f)));
-    angle = GraphU64_ArcCos(dot);
+    angle = Graphu64_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -287,7 +287,7 @@ s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_
     forward.y = 0.0f;
     forward.z = 1.0f;
     func_8024BC94_de(&facing, target, forward);
-    if (GraphU64_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
+    if (Graphu64_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
         if (dir.x * -facing.z + dir.z * facing.x < 0.0f) {
             return -1;
         }

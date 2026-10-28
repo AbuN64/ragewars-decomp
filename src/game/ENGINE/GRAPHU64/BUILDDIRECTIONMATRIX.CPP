@@ -101,7 +101,7 @@ void Graphu64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
     } while (col < 3);
 }
 
-void GraphU64_BuildPlaneProjectionMatrix(void *projection, void *arg1, f32 plane) {
+void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *arg1, f32 plane) {
     CVector3 *direction = arg1;
     Matrix *o = projection;
     f32 zero = 0.0f;
@@ -157,7 +157,7 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
 }
 
 /** Copy the three floating components at offset 0x30. */
-void GraphU64_GetMatrixTranslation(char *object, float *output) {
+void Graphu64_GetMatrixTranslation(char *object, float *output) {
     Matrix *matrix = (void *)object;
     output[0] = matrix->m[12];
     output[1] = matrix->m[13];
@@ -171,17 +171,17 @@ void Graphu64_GetMatrixScale(void *matrix, f32 *arg1) {
     tmp.x = m->m[0];
     tmp.y = m->m[1];
     tmp.z = m->m[2];
-    arg1[0] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[0] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[4];
     tmp.y = m->m[5];
     tmp.z = m->m[6];
-    arg1[1] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[1] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[8];
     tmp.y = m->m[9];
     tmp.z = m->m[10];
-    arg1[2] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[2] = Gu_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
 void TranslateMatrixLocal(void *matrix, f32 tiltX, f32 lift, f32 translationZ) {
@@ -233,7 +233,7 @@ void Graphu64_CopyScaledMatrix(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
 }
 
 /** Scale the xyz columns of a 4-row matrix by sx, sy, sz. */
-void GraphU64_ScaleMatrixWorld(void *matrix, f32 sx, f32 sy, f32 sz) {
+void Graphu64_ScaleMatrixWorld(void *matrix, f32 sx, f32 sy, f32 sz) {
     Matrix *o = matrix;
 
     o->m[0] = o->m[0] * sx;
@@ -657,7 +657,7 @@ void Graphu64_NormalizeQuaternion(f32 *rotation) {
     f32 mag;
     f32 scale;
 
-    mag = Math_Sqrtf((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
+    mag = Gu_Sqrtf((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
     if (mag != 0.0f) {
         scale = D_800C492C_de / mag;
         rotation[0] = rotation[0] * scale;
@@ -732,7 +732,7 @@ void Graphu64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
     f32 blend;
     f32 t;
 
-    angle = GraphU64_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
+    angle = Graphu64_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
     if (angle != 0.0f) {
         t = 1.0f - ((angle - (((angle * 0.1388889f) + 1.7453293e-4f) * D_800D2988)) / angle);
         if ((1.0f < t) || !(t < 0.0f)) {
@@ -743,7 +743,7 @@ void Graphu64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
         } else {
             blend = 0.0f;
         }
-        GraphU64_InterpolateQuaternionWithLinearFallback(&result, blend, rotation, target);
+        Graphu64_InterpolateQuaternionWithLinearFallback(&result, blend, rotation, target);
         *rotation = result;
     }
 }

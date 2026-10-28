@@ -18,7 +18,7 @@ extern CQuatern Gobjinst_BuildActorDirectionTilt(void *arg1);
 extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
 extern void MatrixFromQuaternion(void *, void *);
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
@@ -57,7 +57,7 @@ void Gobjinst_BuildActorTransform(void *levelActor) {
     ScaleMatrixLocal(transform, ((struct LevelActor *)(levelActor))->scale.x,
                     ((struct LevelActor *)(levelActor))->scale.y,
                     ((struct LevelActor *)(levelActor))->scale.z);
-    GraphU64_LimitVectorLength(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
+    Graphu64_LimitVectorLength(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
     TranslateMatrix(transform, ((struct LevelActor *)(levelActor))->position0.x,
                    ((struct LevelActor *)(levelActor))->position0.y,
                    ((struct LevelActor *)(levelActor))->position0.z);
@@ -84,21 +84,21 @@ void Gobjinst_RestartAnimation(void *actorAnimationState) {
     (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) = (s32) ((((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) & ~0x400);
 }
 
-extern s32 func_80246A08_de(void *, s32, s32);
+extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
 
 
-s32 func_8024B6A0_de(void *a, s32 c, s32 flag) {
-    s32 selectedAnimation = func_80246A08_de(a, c, -1);
+s32 Gobjinst_RequestAnimationKind(void *a, s32 c, s32 flag) {
+    s32 selectedAnimation = Gobjinst_ChooseAnimationVariant(a, c, -1);
 
     if (selectedAnimation != -1) {
-        return func_8024B6F4_de(a, selectedAnimation, flag);
+        return Gobjinst_RequestAnimationIndex(a, selectedAnimation, flag);
     }
     return 0;
 }
 
 extern void Gobjinst_QueueAnimation(void *arg0, u32 arg1);
 
-s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend) {
+s32 Gobjinst_RequestAnimationIndex(void *levelActor, s32 animationIndex, s32 allowDuringBlend) {
     if (animationIndex < 0 || (allowDuringBlend == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
         return 0;
     }
@@ -107,7 +107,7 @@ s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend)
 }
 
 extern void Lists_ClearWeightedTable(WeightedTable *arg0);
-extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
+extern s32 Gobjinst_ChooseAnimationVariant(void *arg0, s32 arg1, s32 arg2);
 
 s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 excludedAnimation) {
     WeightedTable eligibleKinds;
@@ -117,7 +117,7 @@ s16 Gobjinst_ChooseAvailableAnimationKind(void *actor, s16 *callback, s32 exclud
     animationKind = *(u16 *) callback;
     if (*callback != -1) {
         do {
-            if (func_80246A08_de(actor, (s32) (s16) animationKind, excludedAnimation) != -1) {
+            if (Gobjinst_ChooseAnimationVariant(actor, (s32) (s16) animationKind, excludedAnimation) != -1) {
                 Lists_AppendWeightedEntry(&eligibleKinds, callback[0], callback[1]);
             }
             callback += 2;
@@ -164,7 +164,7 @@ s32 Gobjinst_BuildAnimatedPose(void *actorStorage, s32 resourceRequestMode)
   return result;
 }
 
-void func_8024B8C4_de(void *actorRenderState) {
+void Gobjinst_RotatePoseMatrixBuffers(void *actorRenderState) {
     s32 previousPoseMatrices;
     previousPoseMatrices = (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4);
     (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4) = 0;

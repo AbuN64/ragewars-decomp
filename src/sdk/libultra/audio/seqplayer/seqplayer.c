@@ -26,7 +26,7 @@
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/OBJECTSTATE10_2.H"
 #include "sdk/al_globals.h"
-extern void *func_802B0340_de(s32, s32, void *, s32, s32);
+extern void *alHeapDBAlloc(s32, s32, void *, s32, s32);
 extern void __initChanState(void *);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
@@ -57,9 +57,9 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
     seqp->loopCount = 0;
     seqp->base.nextEvent.type = 9;
     seqp->base.maxChannels = c->kind;
-    seqp->base.chanState = func_802B0340_de(0, 0, heap, c->kind, sizeof(ALChanState));
+    seqp->base.chanState = alHeapDBAlloc(0, 0, heap, c->kind, sizeof(ALChanState));
     __initChanState(seqp);
-    voices = func_802B0340_de(0, 0, heap, c->count38, sizeof(ALVoiceState));
+    voices = alHeapDBAlloc(0, 0, heap, c->count38, sizeof(ALVoiceState));
     seqp->base.vFreeList = 0;
     for (i = 0; i < c->count38; i++) {
         vs = &voices[i];
@@ -68,7 +68,7 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
     }
     seqp->base.vAllocHead = 0;
     seqp->base.vAllocTail = 0;
-    items = func_802B0340_de(0, 0, heap, c->count1C, sizeof(ALEventListItem));
+    items = alHeapDBAlloc(0, 0, heap, c->count1C, sizeof(ALEventListItem));
     func_802AFFC0_de(&seqp->base.evtq, items, c->count1C);
     seqp->base.node.next = 0;
     seqp->base.node.handler = &D_002B0554;
@@ -79,7 +79,7 @@ void Seqplayer_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c
 
 /* 802B54A0.CPP */
 #if !(defined(VERSION_EU))
-s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
+s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
@@ -108,10 +108,10 @@ void alCSPNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     p->loopCount = 0;
     p->eventType = 9;
     p->channels = c->channels;
-    p->channelState = func_802B0340_de(0, 0, heap, c->channels, 16);
+    p->channelState = alHeapDBAlloc(0, 0, heap, c->channels, 16);
     __initChanState(p);
     {
-        SeqFreeVoice *base = func_802B0340_de(0, 0, heap, c->voices, 56);
+        SeqFreeVoice *base = alHeapDBAlloc(0, 0, heap, c->voices, 56);
         p->freeList = 0;
         i = 0;
         if (c->voices > 0) {
@@ -126,7 +126,7 @@ void alCSPNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     }
     p->allocHead = 0;
     p->allocTail = 0;
-    events = func_802B0340_de(0, 0, heap, c->events, 28);
+    events = alHeapDBAlloc(0, 0, heap, c->events, 28);
     func_802AFFC0_de(p->queue, events, c->events);
     p->next = 0;
     p->callback = &D_002B0554;

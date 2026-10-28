@@ -66,7 +66,7 @@ void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedA
     if ((Rumble_TestActorStateBit(&g_world, actor) == 0) &&
         (state->variant == 0)) {
         Turret_LinkEffect_MakeVisible(actor, state, unusedArg);
-        Nav_RequestActorState(actor, state, 1);
+        Actor_RequestActorState(actor, state, 1);
     }
 }
 
@@ -121,7 +121,7 @@ void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
     }
     state->health = health;
     if (health == 0) {
-        Nav_RequestActorState(actor, state, 0x40);
+        Actor_RequestActorState(actor, state, 0x40);
     }
 }
 

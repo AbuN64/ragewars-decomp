@@ -12,24 +12,24 @@
 /* Draws an object's cast shadow: objects without shadow flag 0x10000000 get the blob shadow of
  * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from Map_ReserveEntries is built for an object above
  * the ground: the light of the current view (direction from its signed bytes, strength from its colour)
- * is sampled at the object through DynLight_AccumulateLightDirections, the shadow alpha is 128 plus 56 per unit of light (faded
+ * is sampled at the object through Gdynlight_AccumulateLightDirections, the shadow alpha is 128 plus 56 per unit of light (faded
  * by D_800D15F0 during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
  * is projected along it onto a plane just below the object (0.9 of its height up to 512), grown by 0.003
  * per unit of height, turned by the object's orientation and placed on the ground; the shadow is then
- * submitted through func_8024BA7C_de. */
+ * submitted through Gobjinst_DrawModelWithProjection. */
 extern s32 InstHdr_CanActorCastShadow(void *);
 extern f32 InstHdr_GetActorGroundHeight(char *, s32);
 extern void *Map_ReserveEntries(void *, s32);
-extern f32 Math_Sqrtf(f32);
-extern void DynLight_AccumulateLightDirections(void *, CVector3, CVector3 *, f32 *);
-extern void GraphU64_BuildPlaneProjectionMatrix(f32 *, CVector3 *, f32);
+extern f32 Gu_Sqrtf(f32);
+extern void Gdynlight_AccumulateLightDirections(void *, CVector3, CVector3 *, f32 *);
+extern void Graphu64_BuildPlaneProjectionMatrix(f32 *, CVector3 *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
-extern void GraphU64_ScaleMatrixWorld(f32 *, f32, f32, f32);
+extern void Graphu64_ScaleMatrixWorld(f32 *, f32, f32, f32);
 #ifndef NON_MATCHING
 extern void MatrixFromQuaternion(f32 *, f32 *);
 #endif
-extern void GraphU64_MultiplyAffineMatrices(void *, f32 *, f32 *);
-extern void func_8024BA7C_de(char *, char *, void *, u8);
+extern void Graphu64_MultiplyAffineMatrices(void *, f32 *, f32 *);
+extern void Gobjinst_DrawModelWithProjection(char *, char *, void *, u8);
 extern void GameObject_DrawBlobShadow(struct LevelActor *, CVector3 *, s32);
 void func_8024AA18_de(char *obj, s32 unused, char *info) {
     CVector3 dir;
@@ -61,11 +61,11 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             dir.x = ((struct Shared_ParticleLighting *)(light))->direction[0] * 0.007874016f;
             dir.y = ((struct Shared_ParticleLighting *)(light))->direction[1] * 0.007874016f;
             dir.z = ((struct Shared_ParticleLighting *)(light))->direction[2] * 0.007874016f;
-            strength = Math_Sqrtf((f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] +
+            strength = Gu_Sqrtf((f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1]) *
                        -0.00090497744f;
-            DynLight_AccumulateLightDirections(&D_8013B1A8, ((Player *)(obj))->pos, &dir, &strength);
+            Gdynlight_AccumulateLightDirections(&D_8013B1A8, ((Player *)(obj))->pos, &dir, &strength);
             if (strength < -1.0f) {
                 strength = -1.0f;
             }
@@ -85,18 +85,18 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
                 GraphU64_NormalizeVec3(&dir);
             }
             plane = ground + height * 0.9f;
-            GraphU64_BuildPlaneProjectionMatrix(projection, &dir, plane);
+            Graphu64_BuildPlaneProjectionMatrix(projection, &dir, plane);
             TranslateMatrix(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
-            GraphU64_ScaleMatrixWorld(projection, scale, scale, scale);
+            Graphu64_ScaleMatrixWorld(projection, scale, scale, scale);
             MatrixFromQuaternion((f32 *)(obj + 0x5C), turn);
-            GraphU64_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
+            Graphu64_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
             TranslateMatrix(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
             if (((struct LevelActor *)(obj))->shadow == 0) {
                 return;
             }
         }
-        func_8024BA7C_de(obj, info, ((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->shadowAlpha);
+        Gobjinst_DrawModelWithProjection(obj, info, ((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->shadowAlpha);
     } else {
         GameObject_DrawBlobShadow((struct LevelActor *)obj, ((struct ActorRenderSettings *)(info))->shadowOffset, 0);
     }
@@ -109,10 +109,10 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
 #include "TYPES.H"
 float InstHdr_GetShadowGroundHeight(void *object, s32 mode);
 f32 InstHdr_GetActorShadowRadius(Actor_u1 *arg0);
-s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
+s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
+void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha);
 void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 raised) {
     f32 matrix[16];
@@ -159,11 +159,11 @@ void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 r
         position.x = actor->position0.x + offset->x;
         position.z = actor->position0.z + offset->z;
         position.y = groundHeight + lift + offset->y;
-        GraphU64_LimitVectorLength((f32 *)&position, 20000.0f);
+        Graphu64_LimitVectorLength((f32 *)&position, 20000.0f);
         MatrixFromQuaternion(&actor->rotation, matrix);
         ScaleMatrixLocal(matrix, scale, 1.0f, scale);
         TranslateMatrix((s8 *) matrix, position.x, position.y, position.z);
-        GraphU64_ConvertMatrixToFixed(matrix, (PackedMatrixWords *) packed);
+        Graphu64_ConvertMatrixToFixed(matrix, (PackedMatrixWords *) packed);
         opacity = 200.0f - (height * 1.2207031f);
         targetAlpha = 0xFF;
         if (!(255.0f < opacity)) {

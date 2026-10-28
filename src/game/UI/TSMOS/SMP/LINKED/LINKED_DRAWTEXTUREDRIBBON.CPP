@@ -20,13 +20,13 @@
 
 extern void *Fx_AllocateRibbonSegment(void *arg0, s32 arg1);
 
-extern void GraphU64_GetMatrixTranslation(char *object, f32 *output);
+extern void Graphu64_GetMatrixTranslation(char *object, f32 *output);
 
 extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
 
 extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 /* Interpolates morph vertex positions and shades between two key frames. */
 
@@ -87,17 +87,17 @@ extern void Fx_DetachEffectObject(StateSmpUpdateRibbonLifetime *);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void GraphU64_TransformDirection(void *, void *, void *);
+extern void Graphu64_TransformDirection(void *, void *, void *);
 
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_IdentityMatrix(void *);
+extern void Graphu64_IdentityMatrix(void *);
 
-extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
+extern void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 
 extern void Linked_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void GraphU64_ScaleVector(void *, void *, f32);
-extern void GraphU64_ConvertMatrixToFixed(void *, f32 *);
+extern void Graphu64_ConvertMatrixToFixed(void *, f32 *);
 
 void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
@@ -114,19 +114,19 @@ void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
         ((ObjectLinks54 *)(arg1))->unk_50 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_8 = ((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_8;
         ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
-        GraphU64_GetMatrixTranslation(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
+        Graphu64_GetMatrixTranslation(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
             Graphu64_GetMatrixScale(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
-            GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
-            GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
+            Graphu64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
+            Graphu64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
         }
         temp_s1 = *(void **)var_s0;
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
         if (temp_s1 != 0) {
             GraphU64_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
-            temp_f0 = Math_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
+            temp_f0 = Gu_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
             ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
             ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
         }
@@ -353,7 +353,7 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    GraphU64_TransformDirection(camera->inverseViewOrient, setup, &basis);
+    Graphu64_TransformDirection(camera->inverseViewOrient, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;
@@ -367,7 +367,7 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     GraphU64_ScaleVector(&result, &result, arg0->a);
     GraphU64_ScaleVector(&cross, &cross, arg0->b);
     GraphU64_ScaleVector(&basis, &basis, arg0->c);
-    GraphU64_IdentityMatrix(matrix);
+    Graphu64_IdentityMatrix(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
     ((Matrix *)matrix)->m[2] = result.z;
@@ -397,9 +397,9 @@ void Linked_UpdateRibbonMatrices(void *arg0, void *camera) {
     first = state->vertices;
     next = first->next;
     if (first != 0) {
-        GraphU64_BuildScaleMatrix(matrix, first->a, first->b, first->c);
+        Graphu64_BuildScaleMatrix(matrix, first->a, first->b, first->c);
     } else {
-        GraphU64_IdentityMatrix(matrix);
+        Graphu64_IdentityMatrix(matrix);
     }
 
     while (first != 0) {
@@ -442,7 +442,7 @@ no_pair:
             matrix[14] = first->position.z;
         }
 apply:
-        GraphU64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+        Graphu64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
         first = next;
         next = first->next;
     }
@@ -450,13 +450,13 @@ apply:
     matrix[12] = first->position.x;
     matrix[13] = first->position.y;
     matrix[14] = first->position.z;
-    GraphU64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
 }
 
 extern f32 D_800C5DF0_de, D_800C5DF4_de;
-extern void GraphU64_ConvertMatrixToFloat(void *, void *);
+extern void Graphu64_ConvertMatrixToFloat(void *, void *);
 extern void ScaleMatrixLocal(void *, f32, f32, f32);
-extern void GraphU64_ClampMatrixToFixedRange(void *);
+extern void Graphu64_ClampMatrixToFixedRange(void *);
 typedef struct LinkNode802A {
     struct LinkNode802A *parent; /* 0x00 */
     struct LinkNode802A *next;   /* 0x04 */
@@ -483,18 +483,18 @@ typedef struct LinkOwner802A {
 static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
     f32 matrix[16];
     f32 scale;
-    GraphU64_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
+    Graphu64_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
     scale = D_800C5DF0_de;
     if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
         scale = D_800C5DF4_de;
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);
-    GraphU64_ClampMatrixToFixedRange(matrix);
-    GraphU64_GetMatrixTranslation((char *)matrix, &node->pos.x);
+    Graphu64_ClampMatrixToFixedRange(matrix);
+    Graphu64_GetMatrixTranslation((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
         Graphu64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
     } else {
-        GraphU64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
+        Graphu64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
     }
 }
 void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
@@ -520,7 +520,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         if (parent != 0) {
             f32 length;
             GraphU64_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
-            length = Math_Sqrtf(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
+            length = Gu_Sqrtf(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
             parent->length = length;
             owner->totalLength += length;
         }

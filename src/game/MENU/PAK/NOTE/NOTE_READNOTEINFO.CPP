@@ -82,12 +82,12 @@ extern u8 *D_800E25C4[], *D_800E25C4[];
 
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 
 
 extern s32 func_8025477C_de(void);
 
-extern void func_8025476C_de(s32);
+extern void Cache_SetResourceActivityState(s32);
 
 extern s32 Defs_CompareMemory(void *a, void *b, s32 size);
 
@@ -107,7 +107,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
         return -2;
     }
     if (func_8025477C_de() == 0) {
-        func_8025476C_de(1);
+        Cache_SetResourceActivityState(1);
     }
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
     buf = *handle;
@@ -124,7 +124,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
         }
     }
     Control_ReleasePakLock();
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     if (handle != 0) {
         Cache_ReleaseResource(0, handle);
     }
@@ -209,7 +209,7 @@ s32 Note_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
             break;
         }
     }
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     if (handle != 0) {
         Cache_ReleaseResource(0, handle);
     }
@@ -230,7 +230,7 @@ static inline s32 Pak_PeekNoteGameName(s32 channel, s32 note, u8 **gameName) {
 
 /* Searches the 16 notes of the Controller Pak on channel for one whose decoded game name equals name:
    stores its index in *noteIndex (when given) and returns 1, or returns 0 when none matches. */
-s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
+s32 Note_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
     u8 decodedName[16];
     u8 *encodedName;
     s32 note;

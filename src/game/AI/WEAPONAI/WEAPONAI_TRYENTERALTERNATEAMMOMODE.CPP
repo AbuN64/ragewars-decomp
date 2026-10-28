@@ -14,7 +14,7 @@
  * a player flagged 0x4000 that may fire with a type 1 request takes action 5 and marks the request type 2,
  * unless it is in state 4 with a charge under 48, which reports the empty weapon; otherwise a request
  * func_802301F4_de handles is marked type 1 and the default action for the player's state is started unless
- * the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the same static fire check. */
+ * the actor is flagged 0x400. Adapted from Weaponai_TryEnterAlternateStateEight with the same static fire check. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
@@ -28,7 +28,7 @@ extern char D_80145040[];
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);
-extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 static inline s32 can_fire(char *player) {
@@ -47,7 +47,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           D_800C2FBC_de);
         }
     }
@@ -65,13 +65,13 @@ void Weaponai_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fi
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fireState->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.unk5F4[0] >= 0x30 || ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E != 4) {
-            Nav_RequestActorState(actor, fireState, 5);
+            Actor_RequestActorState(actor, fireState, 5);
             fireState->mode = 2;
             return;
         } else {
             SoundElement_PlayFlatSound(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                Sky_PostTargetedScreenMessage(D_80145040 + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+                Gsky_PostTargetedScreenMessage(D_80145040 + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               Player_GetPlayerIndex(D_80145040, player), D_800C2FC0_de);
             }
         }
@@ -79,7 +79,7 @@ void Weaponai_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fi
     }
     if (func_802301F4_de(actor, fireState) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            Nav_RequestActorState(actor, fireState, action);
+            Actor_RequestActorState(actor, fireState, action);
         }
         return;
     }

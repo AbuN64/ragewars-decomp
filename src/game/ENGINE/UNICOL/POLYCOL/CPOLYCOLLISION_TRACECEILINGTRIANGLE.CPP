@@ -16,7 +16,7 @@
 #include "ANIM/802412C0_7.H"
 #include "RENDER/8028FD2C_6.H"
 
-extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
+extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);
 
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
@@ -50,7 +50,7 @@ void CPolyCollision_TraceElementMesh(void *contextAddress) {
     collisionElement = ((ContextB0 *)contextAddress)->element;
     temp_s0 = ((ElementE8 *)collisionElement)->resource;
     if (temp_s0 != 0) {
-        GraphU64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
+        Graphu64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
         meshData = *temp_s0;
         ((ContextB0 *)contextAddress)->vertices = SetN64_GetPackSection(meshData, 0);
         displayListTable = SetN64_GetPackSection(meshData, 2);

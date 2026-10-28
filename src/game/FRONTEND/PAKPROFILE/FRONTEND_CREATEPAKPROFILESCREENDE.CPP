@@ -158,7 +158,7 @@ extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void Control_EnableControllerPak(s32);
 extern void Player_InitializeProfile(Profile *);
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32);
+extern s32 Note_GetStatus(s32);
 extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Tsmos_SetTimerState(s32);
@@ -186,24 +186,24 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     }
     D_800E54A4->ready = 1;
     D_800E54A4->timer = 4;
-    D_800E54A4->top = Frontend_FindWidgetByResourceId(screen, SPRITE_2FB);
+    D_800E54A4->top = Node_FindWidgetByResourceId(screen, SPRITE_2FB);
     D_800E54A4->top->x -= D_800E54A4->top->w;
     D_800E54A4->topStep = D_800E54A4->top->w / 4;
     rest = D_800E54A4->top->w - D_800E54A4->topStep * 4;
     D_800E54A4->top->x += rest;
-    D_800E54A4->bottom = Frontend_FindWidgetByResourceId(screen, SPRITE_2A2);
+    D_800E54A4->bottom = Node_FindWidgetByResourceId(screen, SPRITE_2A2);
     D_800E54A4->bottom->x += D_800E54A4->bottom->w;
     D_800E54A4->bottomStep = D_800E54A4->bottom->w / 4;
     rest = D_800E54A4->bottom->w - D_800E54A4->bottomStep * 4;
     D_800E54A4->bottom->x -= rest;
-    Frontend_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
+    Node_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
     D_800E54A4->music = SmpFlicker_CreateFlickerWidget(SPRITE_287, 0xFF);
-    D_800E54A4->title = Frontend_FindWidgetByResourceId(screen, SPRITE_287);
+    D_800E54A4->title = Node_FindWidgetByResourceId(screen, SPRITE_287);
     Frontend_SetWidgetFlag08(D_800E54A4->title, 0);
-    D_800E54A4->players[0].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FC);
-    D_800E54A4->players[1].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2A3);
-    D_800E54A4->players[2].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FD);
-    D_800E54A4->players[3].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FA);
+    D_800E54A4->players[0].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2FC);
+    D_800E54A4->players[1].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2A3);
+    D_800E54A4->players[2].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2FD);
+    D_800E54A4->players[3].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2FA);
     D_800E54A4->phase = D_800E54A0;
     for (i = 0; i < 4; i++) {
         D_800E54A4->links[i].player = -1;
@@ -212,32 +212,32 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     }
     switch (D_800E54A4->phase) {
     case 5:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_293);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_293);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 6:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_296);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_296);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 4:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_288);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_288);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 0:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2A1);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_2A1);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 3:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_295);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_295);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 1:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_289);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_289);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
@@ -258,7 +258,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     case 7:
         break;
     case 2:
-        sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_297);
+        sprite = Node_FindWidgetByResourceId(screen, SPRITE_297);
         Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
@@ -315,7 +315,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
         if (D_800DF4C4 == 0) {
             for (i = 0; i < 4; i++) {
                 Pak_ProbeStatus(i);
-                switch (Pak_GetStatus(i)) {
+                switch (Note_GetStatus(i)) {
                 case -4:
                 case -3:
                 case -1:
@@ -329,7 +329,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
             }
         } else {
             Pak_ProbeStatus(D_800DF4C0);
-            switch (Pak_GetStatus(D_800DF4C0)) {
+            switch (Note_GetStatus(D_800DF4C0)) {
             case -4:
             case -3:
             case -1:

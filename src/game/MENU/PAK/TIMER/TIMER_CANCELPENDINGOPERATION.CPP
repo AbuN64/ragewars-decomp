@@ -61,7 +61,7 @@ static __inline__ void *menuPrompt(MenuPakBeginProfileLoad *menu) {
 void Pak_ProbeStatus(s32);
 
  /* extern */
-s32 Pak_GetStatus(s32);
+s32 Note_GetStatus(s32);
 
 /* Clears the word held in D_800E28C0. */
 extern s32 D_800E28C0;
@@ -109,7 +109,7 @@ void Timer_SelectAvailableChannel(void) {
     unavailable = -2;
 loop_2:
         Pak_ProbeStatus(channel);
-        if (Pak_GetStatus(channel) == unavailable) {
+        if (Note_GetStatus(channel) == unavailable) {
             channel += 1;
             if (channel >= 4) {
                 channel = 0;

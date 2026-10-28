@@ -5,7 +5,7 @@
 #include "particle/80271B18_3.H"
 #include "COMMON/POOLED_FLOATS.H"
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
     CVector3 projected;
@@ -18,7 +18,7 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
     return projected;
 }
 
-extern f32 Math_Sqrtf(f32 arg0);
+extern f32 Gu_Sqrtf(f32 arg0);
 
 CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;
@@ -27,11 +27,11 @@ CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *a
 
     projected = project(remaining, arg1);
 
-    projectedMagnitude = Math_Sqrtf((projected.x * projected.x) +
+    projectedMagnitude = Gu_Sqrtf((projected.x * projected.x) +
                                        (projected.y * projected.y) +
                                        (projected.z * projected.z));
     if (projectedMagnitude != 0.0f) {
-        magnitudeRatio = Math_Sqrtf((remaining->x * remaining->x) +
+        magnitudeRatio = Gu_Sqrtf((remaining->x * remaining->x) +
                                        (remaining->y * remaining->y) +
                                        (remaining->z * remaining->z)) / projectedMagnitude;
 
@@ -43,14 +43,14 @@ CVector3 Graphu64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *a
     return projected;
 }
 
-s32 GraphU64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength) {
+s32 Graphu64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength) {
     f32 magSq;
     f32 mag;
     f32 scale;
 
     magSq = (vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]);
     if ((maximumLength * maximumLength) < magSq) {
-        mag = Math_Sqrtf(magSq);
+        mag = Gu_Sqrtf(magSq);
         if (mag == 0.0f) {
             return 0;
         }
@@ -85,20 +85,20 @@ f32 Graphu64_GetVerticalAngle(f32 *delta) {
     if (magnitude_squared == zero) {
         return zero;
     }
-    ratio = y / Math_Sqrtf(magnitude_squared);
+    ratio = y / Gu_Sqrtf(magnitude_squared);
     if (ratio < *(&D_800C48B0_de + 1)) {
         return zero;
     }
     if (D_800C48B8_de < ratio) {
         goto return_zero;
     }
-    return GraphU64_ArcCos(ratio) - *(&D_800C48B8_de + 1);
+    return Graphu64_ArcCos(ratio) - *(&D_800C48B8_de + 1);
 
 return_zero:
     return zero;
 }
 
-f32 GraphU64_GetSquaredDistance(f32 *a, f32 *b) {
+f32 Graphu64_GetSquaredDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -109,17 +109,17 @@ f32 Graphu64_GetPointDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
-    return Math_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
+    return Gu_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-void GraphU64_ClampMotionLength(CVector3 *motion, f32 arg1) {
+void Graphu64_ClampMotionLength(CVector3 *motion, f32 arg1) {
     f32 magSq;
     f32 mag;
     f32 scale;
 
     magSq = (motion->x * motion->x) + (motion->y * motion->y) + (motion->z * motion->z);
     if ((arg1 * arg1) < magSq) {
-        mag = Math_Sqrtf(magSq);
+        mag = Gu_Sqrtf(magSq);
         scale = arg1 / mag;
         motion->x = motion->x * scale;
         motion->y = motion->y * scale;
@@ -128,7 +128,7 @@ void GraphU64_ClampMotionLength(CVector3 *motion, f32 arg1) {
 }
 
 /** Reset the matrix to identity-diagonal * D_800C99B0, zeroing the rest. */
-void GraphU64_IdentityMatrix(void *matrixStorage) {
+void Graphu64_IdentityMatrix(void *matrixStorage) {
     Matrix *matrix = matrixStorage;
     f32 zero = 0.0f;
 
@@ -150,7 +150,7 @@ void GraphU64_IdentityMatrix(void *matrixStorage) {
     matrix->m[1] = zero;
 }
 
-void GraphU64_ClampMatrixToFixedRange(f32 *matrixComponents) {
+void Graphu64_ClampMatrixToFixedRange(f32 *matrixComponents) {
     f32 *rowCursor;
     f32 *elementCursor;
     f32 elementValue;
@@ -181,7 +181,7 @@ void GraphU64_ClampMatrixToFixedRange(f32 *matrixComponents) {
     } while (j < 4);
 }
 
-void GraphU64_TransformPoint(void *matrix, void *inputPoint, void *transformedPoint) {
+void Graphu64_TransformPoint(void *matrix, void *inputPoint, void *transformedPoint) {
     Matrix *m = matrix;
     CVector3 *v = inputPoint;
     CVector3 *out = transformedPoint;
@@ -201,7 +201,7 @@ void GraphU64_TransformPoint(void *matrix, void *inputPoint, void *transformedPo
 }
 
 /* Transforms a count of points by the affine part of a 4x4 matrix, writing each transformed point to an output array. Adapted from XMath_TransformPointArray with the input and output arguments swapped and the indexed loop replaced by a loop counting down an unsigned count while advancing an input and an output pointer. */
-void GraphU64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count) {
+void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count) {
     f32 vx, vy, vz;
 
     while (count-- != 0) {
@@ -246,7 +246,7 @@ void Graphu64_ProjectPoint(void *matrix, void *inputPoint, CVector3 *localDirect
     }
 }
 
-void GraphU64_TransformDirection(void *matrix, void *inputDirection, void *transformedDirection) {
+void Graphu64_TransformDirection(void *matrix, void *inputDirection, void *transformedDirection) {
     Matrix *m = matrix;
     CVector3 *v = inputDirection;
     CVector3 *out = transformedDirection;
@@ -278,7 +278,7 @@ void Graphu64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) 
                        + (m->m[10] * v->z);
 }
 
-void GraphU64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 translationY, f32 translationZ) {
+void Graphu64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 translationY, f32 translationZ) {
     Matrix *o = matrix;
     f32 val = D_800C48D0_de;
     f32 zero = 0.0f;
@@ -301,7 +301,7 @@ void GraphU64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 transla
     o->m[1] = zero;
 }
 
-void GraphU64_BuildScaleMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void Graphu64_BuildScaleMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     Matrix *o = matrix;
     f32 val = *(&D_800C48D0_de + 1);
     f32 zero = 0.0f;

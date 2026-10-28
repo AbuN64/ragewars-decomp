@@ -6,7 +6,7 @@
 #include "TYPES.H"
 
 #include "COMMON/MATH_HELPERS.H"
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 /** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
 f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
@@ -17,14 +17,14 @@ f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     if (length == 0.0f) {
         return 0.0f;
     }
-    length = Math_Sqrtf(length);
+    length = Gu_Sqrtf(length);
     if (length == 0.0f) {
         return 0.0f;
     }
     if (RW_ABS(x) < RW_ABS(z)) {
         x /= length;
         x = RW_MAX_GT(-1.0f, RW_MIN(x, 1.0f));
-        a = GraphU64_ArcCos(x);
+        a = Graphu64_ArcCos(x);
         angle = -a;
         if (z < 0.0f) {
             angle = a;
@@ -33,7 +33,7 @@ f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     } else {
         z /= length;
         z = RW_MAX_GT(-1.0f, RW_MIN(z, 1.0f));
-        a = GraphU64_ArcCos(-z);
+        a = Graphu64_ArcCos(-z);
         angle = -a;
         if (x < 0.0f) {
             angle = a;
@@ -107,7 +107,7 @@ void GraphU64_NormalizeVec3(f32 *vectorComponents) {
     f32 mag;
     f32 scale;
 
-    mag = Math_Sqrtf((vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]));
+    mag = Gu_Sqrtf((vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]));
     if (mag != 0.0f) {
         scale = D_800C48AC_de / mag;
         vectorComponents[0] = vectorComponents[0] * scale;

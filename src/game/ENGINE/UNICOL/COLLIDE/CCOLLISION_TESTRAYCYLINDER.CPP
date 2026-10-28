@@ -58,7 +58,7 @@ s32 CCollision_TestRayCylinder(RayCCollisionTestRayCylinder *ray, CVector3 *cent
     if (delta.x * ray->dir.x + delta.z * ray->dir.z < 0.0f) {
         return 0;
     }
-    len = Math_Sqrtf(ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z);
+    len = Gu_Sqrtf(ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z);
     if (len == 0.0f) {
         return 0;
     }
@@ -72,7 +72,7 @@ s32 CCollision_TestRayCylinder(RayCCollisionTestRayCylinder *ray, CVector3 *cent
     if (!(disc > 0.0f)) {
         return 0;
     }
-    poly->t = (along - Math_Sqrtf(disc)) * inv;
+    poly->t = (along - Gu_Sqrtf(disc)) * inv;
     if (accepts(ray, poly) != 0) {
         Graphu64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
         if (clip != 0 && (poly->hit.y > top || poly->hit.y < bottom)) {

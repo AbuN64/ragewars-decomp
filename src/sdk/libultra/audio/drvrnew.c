@@ -22,7 +22,7 @@
 
 
         /* alFilterNew */
-extern s32 func_802B0340_de(s32 file, s32 line, void *hp, s32 num, s32 size);
+extern s32 alHeapDBAlloc(s32 file, s32 line, void *hp, s32 num, s32 size);
 
  /* alHeapDBAlloc */
 
@@ -65,7 +65,7 @@ extern const f32 D_800CC820;
 
 typedef s32 (*FuncPtr)(void *);
 
-extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
+extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 
 
@@ -101,8 +101,8 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
     r->section_count = param[j++];
     r->length = param[j++];
 
-    r->delay = (void *)func_802B0340_de(0, 0, hp, r->section_count, sizeof(ALDelay28));
-    r->base = (void *)func_802B0340_de(0, 0, hp, r->length, sizeof(s16));
+    r->delay = (void *)alHeapDBAlloc(0, 0, hp, r->section_count, sizeof(ALDelay28));
+    r->base = (void *)alHeapDBAlloc(0, 0, hp, r->length, sizeof(s16));
     r->input = r->base;
 
     for (k = 0; k < r->length; k++)
@@ -133,8 +133,8 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
             d->rsgain = depth * ((f32)flength * D_800CC820);
             d->rsval = D_800C75D4;
             d->rsdelta = 0;
-            d->rs = (void *)func_802B0340_de(0, 0, hp, 1, sizeof(struct ALResampler_s));
-            ((struct ALResampler_s *)d->rs)->state = (void *)func_802B0340_de(0, 0, hp, 1, 32);
+            d->rs = (void *)alHeapDBAlloc(0, 0, hp, 1, sizeof(struct ALResampler_s));
+            ((struct ALResampler_s *)d->rs)->state = (void *)alHeapDBAlloc(0, 0, hp, 1, 32);
             ((struct ALResampler_s *)d->rs)->delta = 0;
             ((struct ALResampler_s *)d->rs)->first = 1;
         } else {
@@ -144,8 +144,8 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
         }
 
         if (param[j]) {
-            d->lp = (void *)func_802B0340_de(0, 0, hp, 1, sizeof(struct AudioLowPassFilter));
-            ((struct AudioLowPassFilter *)d->lp)->state = (void *)func_802B0340_de(0, 0, hp, 1, sizeof(AudioPoleFilterState));
+            d->lp = (void *)alHeapDBAlloc(0, 0, hp, 1, sizeof(struct AudioLowPassFilter));
+            ((struct AudioLowPassFilter *)d->lp)->state = (void *)alHeapDBAlloc(0, 0, hp, 1, sizeof(AudioPoleFilterState));
             ((struct AudioLowPassFilter *)d->lp)->cutoff = param[j++];
             {
                 struct AudioLowPassFilter *lp = d->lp;
@@ -178,8 +178,8 @@ void alFxNew(ALFx *r, ALSynConfig *c, ALHeap *hp)
 
 void alLoadNew(void *arg0, FuncPtr arg1, s32 arg2) {
     alFilterNew(arg0, &D_002BE0D0, &D_002BEAA4, 0);
-    ((ALLoadFilter48_2 *)arg0)->state = func_802B0340_de(0, 0, arg2, 1, 0x20);
-    ((ALLoadFilter48_2 *)arg0)->lstate = func_802B0340_de(0, 0, arg2, 1, 0x20);
+    ((ALLoadFilter48_2 *)arg0)->state = alHeapDBAlloc(0, 0, arg2, 1, 0x20);
+    ((ALLoadFilter48_2 *)arg0)->lstate = alHeapDBAlloc(0, 0, arg2, 1, 0x20);
     ((ALLoadFilter48_2 *)arg0)->dma = arg1(&((ALLoadFilter48_2 *)arg0)->dmaState);
     ((ALLoadFilter48_2 *)arg0)->lastsam = 0;
     ((ALLoadFilter48_2 *)arg0)->first = 1;
@@ -200,14 +200,14 @@ void alAuxBusNew(void *arg0, s32 arg1, s32 arg2) {
     (((struct TextLayerRect *) ((s8 *) arg0))->y) = arg1;
 }
 
-s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
+s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
 void alResampleNew(ALResampler_s *arg0, s32 arg1) {
     s32 result;
     f32 k;
 
     alFilterNew(arg0, &D_002B5570, &D_002B5730, 1);
-    result = func_802B0340_de(0, 0, arg1, 1, 0x20);
+    result = alHeapDBAlloc(0, 0, arg1, 1, 0x20);
     k = D_800C75E0_de;
     arg0->state = (void *)result;
     arg0->delta = 0;
@@ -232,7 +232,7 @@ void alEnvmixerNew(ALEnvMixer *arg0, ALHeap *arg1) {
     ALEnvMixer *mixer = arg0;
 
     alFilterNew(arg0, &D_002B4730, &D_002B51B8, 4);
-    result = func_802B0340_de(0, 0, arg1, 1, 0x50);
+    result = alHeapDBAlloc(0, 0, arg1, 1, 0x50);
     mixer->state = (void *)result;
     mixer->first = 1;
     mixer->motion = 0;

@@ -38,7 +38,7 @@ static inline s32 idlePause(TimingWorld *world) {
  checkFlag:
  if(D_801462C8.counters.first!=0) {
  active:
- if(func_80245850_de()!=0) return 1;
+ if(Cinema_GetPlaybackPauseState()!=0) return 1;
  }
  return 0;
 }

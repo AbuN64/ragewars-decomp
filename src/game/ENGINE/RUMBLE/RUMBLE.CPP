@@ -22,7 +22,7 @@ static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
     f32 x = from.x - node->position.x;
     f32 y = from.y - node->position.y;
     f32 z = from.z - node->position.z;
-    return Math_Sqrtf(x * x + y * y + z * z);
+    return Gu_Sqrtf(x * x + y * y + z * z);
 }
 /* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
  * source's two curves), clamped to 0..1; the pool is read with interrupts disabled. */
@@ -143,7 +143,7 @@ f32 Rumble_EvaluateSpatialEffectNode(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     dx = *(f32 *)&arg1 - arg0[3];
     dy = *(f32 *)&arg2 - arg0[4];
     dz = *(f32 *)&arg3 - arg0[5];
-    magnitude = Math_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
+    magnitude = Gu_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
     if ((magnitude == 0.0f) || ((limit = arg0[6]) == 0.0f)) {
         factor = D_800C4ECC_de;
     } else {

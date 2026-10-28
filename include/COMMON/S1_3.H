@@ -2,8 +2,8 @@
 #define COMMON_S1_3_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern void GraphU64_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
-extern void GraphU64_BuildScaleMatrix(void *matrix, f32 x, f32 y, f32 z);
+extern void Graphu64_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
+extern void Graphu64_BuildScaleMatrix(void *matrix, f32 x, f32 y, f32 z);
 extern float D_800C48D8_de;
 
 

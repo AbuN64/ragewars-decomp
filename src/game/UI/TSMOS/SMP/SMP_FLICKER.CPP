@@ -27,7 +27,7 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
   if(flicker->unk44==0) {
    timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
    widgetOwner->unk7C=timer;
-   if(timer<=0 && GraphU64_NextRandom()%100<2) {
+   if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
     SoundElement_PlayFlatSound(0xe75);
@@ -75,7 +75,7 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
   if(flicker->unk44==0) {
    timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
    widgetOwner->unk7C=timer;
-   if(timer<=0 && GraphU64_NextRandom()%100<2) {
+   if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
     SoundElement_PlayFlatSound(0xe75);
@@ -114,7 +114,7 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
   if(flicker->unk44==0) {
    timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
    widgetOwner->unk7C=timer;
-   if(timer<=0 && GraphU64_NextRandom()%100<2) {
+   if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
     SoundElement_PlayFlatSound(0xe75);
@@ -153,7 +153,7 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
   if(flicker->unk44==0) {
    timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
    widgetOwner->unk7C=timer;
-   if(timer<=0 && GraphU64_NextRandom()%100<2) {
+   if(timer<=0 && Graphu64_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
     SoundElement_PlayFlatSound(0xe75);
@@ -179,7 +179,7 @@ s32 SmpFlicker_UpdateFlicker(func_80419D04_S1 *flicker) {
 }
 #endif
 
-s32 GraphU64_NextRandom(void);
+s32 Graphu64_NextRandom(void);
 
 /* Allocates and initializes an object, attaches its resource and owner value, then registers it with the resource. */
 
@@ -208,11 +208,11 @@ void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount) {
     if (sampleCount > 0) {
         flicker->unk48 = sampleCount;
     } else {
-        flicker->unk48 = (s32) (GraphU64_NextRandom() % 5 + 1);
+        flicker->unk48 = (s32) (Graphu64_NextRandom() % 5 + 1);
     }
     for (i = 0; i < flicker->unk48; i++) {
-        flicker->unk60[i] = (s32) (GraphU64_NextRandom() % 3 + 1);
-        sampleValue = (offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset));
+        flicker->unk60[i] = (s32) (Graphu64_NextRandom() % 3 + 1);
+        sampleValue = (offset = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = Graphu64_NextRandom() % 40 + 30, flicker->unk80 - offset));
         flicker->unk4C[i] = sampleValue;
     }
 }
@@ -226,8 +226,8 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
   ResourceSmpFlickerCreateFlickerWidget *r;
   MenuResourceWidget *p;
   int kind;
-  r = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
-  Frontend_GetScreenData(GetMenuScreenOwner());
+  r = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
+  Node_GetScreenData(GetMenuScreenOwner());
   p = Cache_AllocateMemory(0x88);
   XPlus_FillBytes(p, 0, 0x88);
   p->b = (kind = 0xB62);

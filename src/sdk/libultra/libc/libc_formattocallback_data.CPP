@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802BD430_D9F04[33] =
+const char g_libcZeroPaddingText[33] =
     "00000000000000000000000000000000\000";
 #endif
 

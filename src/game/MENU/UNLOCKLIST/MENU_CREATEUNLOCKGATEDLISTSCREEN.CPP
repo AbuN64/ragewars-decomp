@@ -33,12 +33,12 @@ s32 Menu_CreateUnlockGatedListScreen(void *window) {
     D_800E5780->unk14 = 0;
 
     if (Defs_TestBit(D_80102B7E, 0) == 0) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(window, unlockRes(0x13A)), 1);
     }
 
     D_800E5780->resourceWidget = SmpFlicker_CreateFlickerWidget(unlockRes(0x139), 0x6E);
 
-    obj = Frontend_FindWidgetByResourceId(window, unlockRes(0x138));
+    obj = Node_FindWidgetByResourceId(window, unlockRes(0x138));
     D_800E5780->item = obj;
     ((ListScreenItem *)obj)->alpha = 0xF;
 

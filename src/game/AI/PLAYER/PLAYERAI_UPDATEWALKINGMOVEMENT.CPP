@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
 
-extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Player_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
 extern char D_800CED30;
 extern f32 D_800D2988;
@@ -30,7 +30,7 @@ void Playerai_UpdateWalkingMovement(void *playerContext, void *bodyContext) {
     s32 nextAnimation;
 
     Player_EaseOwnerHeightEffect(playerContext);
-    GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
+    Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
     crouchingView = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C0_de)) {
         crouchingView = 0;

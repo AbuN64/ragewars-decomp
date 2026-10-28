@@ -10,8 +10,8 @@
 
 /* 804196C0_20.CPP */
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
-   the item the second names in the current context through GetMenuScreenOwner, Frontend_GetScreenData and
-   Frontend_FindWidgetByResourceId, allocates and zeroes the widget, tags it 0xB60 with kind 8, links the frame at
+   the item the second names in the current context through GetMenuScreenOwner, Node_GetScreenData and
+   Node_FindWidgetByResourceId, allocates and zeroes the widget, tags it 0xB60 with kind 8, links the frame at
    0x44 (clearing its word at 0x20 and setting 0x24 to D_800E1474) and the item at 0x48, sets both
    scales at 0x4C and 0x50 to D_800E1470, copies the item's two colours at 0x2C and 0x30 to 0x60,
    stores the green and red differences between them over 75 steps at 0x70 and 0x74, marks it
@@ -28,15 +28,15 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     s32 context;
     MenuFadeWidget *result;
 
-    frame = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    frame = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x7C);
     XPlus_FillBytes(result, 0, 0x7C);
     result->field_0E = 0xB60;
     result->field_12 = 8;
     result->field_0C = 0xB60;
     result->frame = frame;
-    result->item = Frontend_FindWidgetByResourceId((void*)context, itemId & 0xFFFF);
+    result->item = Node_FindWidgetByResourceId((void*)context, itemId & 0xFFFF);
     result->scaleX = D_800E1470;
     result->scaleY = D_800E1470;
     result->frame->field_20 = 0;

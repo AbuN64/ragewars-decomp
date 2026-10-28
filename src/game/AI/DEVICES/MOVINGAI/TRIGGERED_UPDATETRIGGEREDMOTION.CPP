@@ -143,9 +143,9 @@ void Triggered_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802
     case 3:
         shakeMin = -0.512f;
         shakeMax = 0.512f;
-        motion->shake.x = GraphU64_RandomBetween(shakeMin, shakeMax);
-        motion->shake.y = GraphU64_RandomBetween(shakeMin, shakeMax);
-        motion->shake.z = GraphU64_RandomBetween(shakeMin, shakeMax);
+        motion->shake.x = Graphu64_RandomBetween(shakeMin, shakeMax);
+        motion->shake.y = Graphu64_RandomBetween(shakeMin, shakeMax);
+        motion->shake.z = Graphu64_RandomBetween(shakeMin, shakeMax);
         motion->timer += D_800D2988;
         if (45.0f < motion->timer) {
             motion->timer = 0.0f;
@@ -260,7 +260,7 @@ void *func_80219434_de(struct Cursor *);
 
 void GraphU64_SubtractVectors(void *, void *, void *);
 
-f32 Math_Sqrtf(f32);
+f32 Gu_Sqrtf(f32);
 
 f32 Barrel_GetSignedAngleToPoint(void *, CVector3);
 
@@ -382,7 +382,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     initial = targetNode->pos;
     GraphU64_SubtractVectors(&vec0, &initial, &actor->unk8);
     segmentNode = func_80219434_de(pathCursor);
-    targetDistance = Math_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
+    targetDistance = Gu_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
     arrivalRadius = targetNode->unk1C;
     blendRate = segmentNode->unk20;
     if (arrivalRadius < 3.0f) {
@@ -587,10 +587,10 @@ void func_80207890_de(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     motionState->state = 0;
-    Nav_RequestActorState(player, motionState, 0);
+    Actor_RequestActorState(player, motionState, 0);
     if (motionState->routeMode == 1) {
         motionState->destination = motionState->start;
-        Nav_RequestActorState(player, motionState, 4);
+        Actor_RequestActorState(player, motionState, 4);
     }
     if (Rumble_TestActorStateBit(&g_world, player) == 0) {
         player->weaponFlags &= ~0x100;

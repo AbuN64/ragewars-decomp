@@ -6,7 +6,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
-/* Stores its parameters into the object at arg0 offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from func_80239FDC_de with the parameter block stores added and the D_800C8610 thresholds changed. */
+/* Stores its parameters into the object at arg0 offsets 0x24 through 0x60, then refreshes the object's ground reference and picks its surface value at 0x64 from the ground under it. Adapted from Gsky_UpdateFloorSurface with the parameter block stores added and the D_800C8610 thresholds changed. */
 
 
 
@@ -23,7 +23,7 @@ extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 
 
-void func_80238F24_de(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 floorSampleX,
+void Gsky_SetPlayerViewInputs(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 floorSampleX,
                    f32 floorSampleY, f32 floorSampleZ, f32 floorHeightOffset, Shared_Quad arg10, s32 floorPolygon, f32 requestedZoomBlend,
                    f32 requestedZoomFov) {
     s32 object;

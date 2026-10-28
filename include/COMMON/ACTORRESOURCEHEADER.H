@@ -192,12 +192,12 @@ struct ActorFrameMetadata {
     u8 renderMode; /* 0x6E */
 };
 
-extern void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
+extern void Graphu64_MultiplyMatrices(f32 *, f32 *, f32 *);
 extern void Geometry_DrawResourceModel(s32, s32, void *, s32, void *, s32, s32);
 
 extern CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node);
 
-extern char D_800C3AE8_de;
+extern char g_unitScaleMultiplierAnimObjectInfoRev1Text;
 extern char D_0026D814;
 extern char s_animModelIndexText;
 extern char s_animatedModelText;

@@ -17,7 +17,7 @@
 
 
 extern f32 GameObject_GetActorHeight(ActorBarrelIsTargetInViewCone *);
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 extern CQuatern func_8024796C_de(ActorBarrelIsTargetInViewCone *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 
@@ -46,7 +46,7 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   to.y += target->eye;
   to.y += GameObject_GetActorHeight(target) * 0.9f;
   GraphU64_SubtractVectors(&dir, &to, &from);
-  distance = Math_Sqrtf(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
+  distance = Gu_Sqrtf(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
   if (range < distance)
   {
     return 0;
@@ -56,14 +56,14 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   ahead.x = 0.0f;
   ahead.y = 0.0f;
   ahead.z = distance;
-  GraphU64_TransformPoint(&matrix, &ahead, &forward);
+  Graphu64_TransformPoint(&matrix, &ahead, &forward);
   across *= 0.5f;
   up *= 0.5f;
   flatDir.x = dir.x;
   flatDir.y = 0.0f;
   zero = *((volatile f32 *) (&flatDir.y));
   flatDir.z = dir.z;
-  dirLength = Math_Sqrtf((flatDir.x * flatDir.x) + (flatDir.z * flatDir.z));
+  dirLength = Gu_Sqrtf((flatDir.x * flatDir.x) + (flatDir.z * flatDir.z));
   if (dirLength != zero)
   {
     if (across)
@@ -80,13 +80,13 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   flatForward.x = forward.x;
   flatForward.y = zero;
   flatForward.z = forward.z;
-  forwardLength = Math_Sqrtf((flatForward.x * flatForward.x) + (flatForward.z * flatForward.z));
+  forwardLength = Gu_Sqrtf((flatForward.x * flatForward.x) + (flatForward.z * flatForward.z));
   if (forwardLength != zero)
   {
     flatForward.x /= forwardLength;
     flatForward.z /= forwardLength;
   }
-  angle = GraphU64_ArcCos(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
+  angle = Graphu64_ArcCos(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
   if (angle < zero)
   {
     angle = -angle;
@@ -103,7 +103,7 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   pitchForward.z = forwardLength;
   pitchForward.y = forward.y;
   GraphU64_NormalizeVec3(&pitchForward);
-  angle = GraphU64_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
+  angle = Graphu64_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
   if (up < ((angle < 0.0f) ? (-angle) : (angle)))
   {
     return 0;
@@ -169,7 +169,7 @@ s32 Cbarrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         }
         break;
     }
-    if (func_80240660_de(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
+    if (CCollision_CopyProbePosition(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
         if (Region_IsPointInTriangleXZ(actor->unk14, hit.x, hit.z) != 0) {
             tracker->unk90 = hit.y;
         } else {

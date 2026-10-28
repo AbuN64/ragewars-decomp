@@ -132,7 +132,7 @@ void Stage_StartConfiguredMatch(void) {
         Frontend_RequestScreenMode(config[0x580]);
     }
     if (func_8025E2C4_de() != 0) {
-        func_8025E2D4_de(GraphU64_NextRandom() % 4 + 0x38);
+        func_8025E2D4_de(Graphu64_NextRandom() % 4 + 0x38);
     }
 }
 

@@ -25,7 +25,7 @@ extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-extern f32 Math_Sqrtf(f32);
+extern f32 Gu_Sqrtf(f32);
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
     GraphU64_SubtractVectors(out, a, b);
@@ -74,7 +74,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     up.y = one;
     up.z = 0.0f;
     Graphu64_CrossVectors(&axis, &up, &normal);
-    len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+    len = Gu_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0.0f) {
         result.z = 0.0f;
         result.y = 0.0f;
@@ -82,7 +82,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         result.w = one;
     } else {
         GraphU64_ScaleVector(&axis, &axis, one / len);
-        angle = GraphU64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
+        angle = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
         scale = Math_Sinf(angle);
         result.x = axis.x * scale;
@@ -111,7 +111,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     up.y = one;
     up.z = 0;
     Graphu64_CrossVectors(&axis, &up, &a);
-    len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+    len = Gu_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0) {
         result.z = 0;
         result.y = 0;
@@ -119,7 +119,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
         result.w = one;
     } else {
         GraphU64_ScaleVector(&axis, &axis, one / len);
-        angle = GraphU64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
+        angle = Graphu64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
         scale = Math_Sinf(angle);
         result.x = axis.x * scale;
@@ -463,11 +463,11 @@ f32 Region_GetTriangleEdgeAngle(void *triangle, s32 edgeIndex) {
     v0 = polygon->vertices[(edgeIndex + 1) % 3];
     dx = v0->x - v1->x;
     dz = v0->z - v1->z;
-    mag = Math_Sqrtf((dx * dx) + (dz * dz));
+    mag = Gu_Sqrtf((dx * dx) + (dz * dz));
     if (mag == 0.0f) {
         return 0.0f;
     }
-    result = GraphU64_ArcCos(dx / mag);
+    result = Graphu64_ArcCos(dx / mag);
     if (!(dz < 0.0f)) {
         result = -result;
     }

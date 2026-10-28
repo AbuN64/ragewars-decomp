@@ -159,7 +159,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                 if (eligiblePlayerCount > 0) {
                     selectionMode = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
                     if (selectionMode == 3) {
-                        ruleOrRandomValue = GraphU64_NextRandom();
+                        ruleOrRandomValue = Graphu64_NextRandom();
                         randomPlayerQuotient = ruleOrRandomValue / eligiblePlayerCount;
                         if (eligiblePlayerCount == 0) {
 
@@ -231,7 +231,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 }
                                 func_80218464_de(&player->unk938);
                                 player->unk11B4 = 0;
-                                Nav_RequestActorState(&player->unk2E8, &player->unk458, 1);
+                                Actor_RequestActorState(&player->unk2E8, &player->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
                                 Playerai_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
@@ -305,7 +305,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     }
                     func_80218464_de(&rotatingPlayer->unk938);
                     rotatingPlayer->unk11B4 = 0;
-                    Nav_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
+                    Actor_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
                     Playerai_InitializePlayerHealth(rotatingPlayer);
                 }
@@ -386,7 +386,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     }
                     func_80218464_de(&chosenPlayer->unk938);
                     chosenPlayer->unk11B4 = 0;
-                    Nav_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
+                    Actor_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
                     Playerai_InitializePlayerHealth(chosenPlayer);
                 }
@@ -469,7 +469,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 }
                                 func_80218464_de(&flippedPlayer->unk938);
                                 flippedPlayer->unk11B4 = 0;
-                                Nav_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
+                                Actor_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
                                 Playerai_InitializePlayerHealth(flippedPlayer);
                             } else {
@@ -1101,7 +1101,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern void SoundElement_PlayFlatSound(s32);
 extern void BuildDirectionMatrix(void *, void *);
-extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), GraphU64_ConvertMatrixToFixed(void *, void *);
+extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), Graphu64_ConvertMatrixToFixed(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
    active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
 void func_80228E60_eu(u8 *player, s32 flag) {
@@ -1132,7 +1132,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         GraphU64_AddVec3((CVector3 *)vec, (CVector3 *)vec, (CVector3 *)(player + 0x1200));
         TranslateMatrix(mtx, vec[0], vec[1], vec[2]);
         SwapMatrixUpForward(mtx);
-        GraphU64_ConvertMatrixToFixed(mtx, player + 0x1600);
+        Graphu64_ConvertMatrixToFixed(mtx, player + 0x1600);
         SoundElement_PlayFlatSound(0x578);
         ui = EUF(player, void *, 0x5DC);
         if (ui == 0) {
@@ -1149,7 +1149,7 @@ INCLUDE_ASM("span_1000", func_80228E60_eu);
 
 /* 80225D10_6.CPP */
 static inline s32 playerHasForce(ForcePlayer *player, f32 zero) { s32 value = 0; if (zero < player->strength) value = 1; return value; }
-void Player_ApplyPlayerForces(void *listObject, void *bodyObject) {
+void Playerai_ApplyPlayerForces(void *listObject, void *bodyObject) {
     ForcePlayerList *list = listObject;
     ForceBody *body = bodyObject;
     ForcePlayer *player;

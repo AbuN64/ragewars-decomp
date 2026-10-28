@@ -86,7 +86,7 @@ found:
     }
 }
 
-s32 Nav_GetRouteRelation(void *relationTable, s32 sourceNode, s32 destinationNode) {
+s32 Route_GetRouteRelation(void *relationTable, s32 sourceNode, s32 destinationNode) {
     ObjectLinks14 *table = relationTable;
     RouteRelationBytes *bytes = (RouteRelationBytes *)table->unk_10;
     s32 index = (sourceNode * table->unk_4 + destinationNode) * bytes->stride;

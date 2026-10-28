@@ -120,7 +120,7 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
             spawnIndex = 0;
             nspawns = 0;
             if (world->unk1B41C != 0) {
-                nspawns = OvlScene_FindPlacedObjectsByKey(world, world->unk1B40C, world->unk1B434, spawns, 8);
+                nspawns = Scene_FindPlacedObjectsByKey(world, world->unk1B40C, world->unk1B434, spawns, 8);
             }
             world->unk138 = objects;
             world->unk140 = n;
@@ -158,7 +158,7 @@ void Scene_BuildPlacedActors(World *world, struct Shape_typemap_165 **handle) {
                         player = &D_80140F84[playerIndex];
                         if (nspawns != 0) {
                             if (slot->kind == 0xC && player->views1450.view1450_1.computer != 0 && world->unk1B40C == 9) {
-                                OvlScene_FindPlacedObjectsByKey(world, 9, specialSet, &extra, 1);
+                                Scene_FindPlacedObjectsByKey(world, 9, specialSet, &extra, 1);
                                 spawn = &extra;
                             } else {
                                 spawn = &spawns[spawnIndex];

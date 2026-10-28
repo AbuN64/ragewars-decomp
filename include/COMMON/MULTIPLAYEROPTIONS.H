@@ -21,8 +21,8 @@ struct Actor_func_802238E0_de {
 extern float D_800C78BC;
 
 
-struct Body_func_80224408_de;
-struct Body_func_80224408_de {
+struct BodyPlayerUpdateStandingState;
+struct BodyPlayerUpdateStandingState {
     char pad0[8];
     s32 x;
     s32 y;
@@ -55,8 +55,8 @@ struct ObjectLinks854 {
     s32 unk_850;
 };
 
-struct Body_func_80224C4C_de;
-struct Body_func_80224C4C_de {
+struct BodyPlayerUpdateWadingState;
+struct BodyPlayerUpdateWadingState {
     char pad0[8];
     s32 x;
     s32 y;
@@ -69,7 +69,7 @@ struct Body_func_80224C4C_de {
     s32 flags;
 };
 
-struct Body_func_80224C4C_de;
+struct BodyPlayerUpdateWadingState;
 struct Character;
 struct Controller;
 struct Controls;
@@ -181,8 +181,8 @@ struct TeamInfo;
 struct View;
 /* Movement and transition share the canonical player record. */
 
-struct Body_func_80224F5C_de;
-struct Body_func_80224F5C_de {
+struct BodyPlayerUpdateFloatingState;
+struct BodyPlayerUpdateFloatingState {
     char pad0[8];
     s32 x;
     s32 y;
@@ -193,7 +193,7 @@ struct Body_func_80224F5C_de {
     s32 flags;
 };
 
-struct Body_func_80224F5C_de;
+struct BodyPlayerUpdateFloatingState;
 struct Character;
 struct Controller;
 struct Controls;
@@ -511,7 +511,7 @@ typedef struct ObjectLinks854 ObjectLinks854;
 extern float D_800C2968_de;
 
 
-struct Body_func_80224408_de;
+struct BodyPlayerUpdateStandingState;
 struct Character;
 struct Controller;
 struct Controls;
@@ -559,8 +559,8 @@ extern float D_800CAB88_eu;
 
 extern float D_800CAB78_eu[];
 
-struct Body_func_80224F5C_de;
-typedef struct Body_func_80224F5C_de Body_func_80224F5C_de;
+struct BodyPlayerUpdateFloatingState;
+typedef struct BodyPlayerUpdateFloatingState BodyPlayerUpdateFloatingState;
 
 struct Body;
 struct Character;
@@ -680,11 +680,11 @@ struct SharedPlayer;
 struct Actor_func_802238E0_de;
 typedef struct Actor_func_802238E0_de Actor_func_802238E0_de;
 
-struct Body_func_80224408_de;
-typedef struct Body_func_80224408_de Body_func_80224408_de;
+struct BodyPlayerUpdateStandingState;
+typedef struct BodyPlayerUpdateStandingState BodyPlayerUpdateStandingState;
 
-struct Body_func_80224C4C_de;
-typedef struct Body_func_80224C4C_de Body_func_80224C4C_de;
+struct BodyPlayerUpdateWadingState;
+typedef struct BodyPlayerUpdateWadingState BodyPlayerUpdateWadingState;
 
 struct ModelBlend;
 struct Object;
@@ -731,7 +731,7 @@ typedef struct ThrowPosition {
 } ThrowPosition;
 extern f32 D_800C2870_de;
 extern f32 D_800C2878_de;
-extern void Sky_StartScaledShake(char *, f32, f32, f32, f32, s32, CVector3);
+extern void Gsky_StartScaledShake(char *, f32, f32, f32, f32, s32, CVector3);
 
 typedef struct PowerHudAnimation {
     void *object; s32 pad4, state; f32 padC, x, y;

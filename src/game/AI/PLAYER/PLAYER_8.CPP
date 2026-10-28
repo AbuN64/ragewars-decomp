@@ -24,9 +24,9 @@ extern f32 GameObject_GetActorHeight(void *arg0);
 
 extern void Scene_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
 
-extern void func_80249E28_de(void *arg0, void *arg1);
+extern void Gobjinst_DrawVisibleCachedActor(void *arg0, void *arg1);
 
-extern void func_8021C698_de(void *arg0, void *arg1);
+extern void Player_DrawRedMarkerPrism(void *arg0, void *arg1);
 
 
 #include "COMMON/GAME_SESSION.H"
@@ -34,7 +34,7 @@ extern void func_8021C698_de(void *arg0, void *arg1);
 extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-void func_8021C9D8_de(void *player, void *camera) {
+void Player_DrawPlayerModel(void *player, void *camera) {
     CVector3 pos;
     s32 value;
     Gfx *cmd;
@@ -74,13 +74,13 @@ void func_8021C9D8_de(void *player, void *camera) {
     cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
 
-    func_80249E28_de(player, camera);
+    Gobjinst_DrawVisibleCachedActor(player, camera);
     if (((Shared_ActorView *)player)->targeting != 0) {
-        func_8021C698_de(player, camera);
+        Player_DrawRedMarkerPrism(player, camera);
     }
 }
 
-void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
+void Player_DrawHeldWeapon(void *player, WeaponMenuView *camera) {
     WeaponInfo *entry;
     f32 *rect;
     f32 x;
@@ -113,7 +113,7 @@ void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
         Geometry_BeginModelBatch();
-        func_80249E28_de(&((Shared_ActorView *)player)->weapon, camera);
+        Gobjinst_DrawVisibleCachedActor(&((Shared_ActorView *)player)->weapon, camera);
         Geometry_FlushModelBatch();
     }
 }

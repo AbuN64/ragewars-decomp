@@ -11,7 +11,7 @@
 extern f32 D_800D2988;
 
 
-extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
@@ -39,11 +39,11 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern char D_800CED30;
 
-extern void func_80223E34_de(SharedPlayer *, Body_func_80224408_de *);
+extern void func_80223E34_de(SharedPlayer *, BodyPlayerUpdateStandingState *);
 
-extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224408_de *, char *);
+extern void Player_UpdateViewAngles(SharedPlayer *, BodyPlayerUpdateStandingState *, char *);
 
-static inline s32 try_jump(SharedPlayer *player, Body_func_80224408_de *body) {
+static inline s32 try_jump(SharedPlayer *player, BodyPlayerUpdateStandingState *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
         Player_SetPlayerState(player, body, 5);
@@ -52,7 +52,7 @@ static inline s32 try_jump(SharedPlayer *player, Body_func_80224408_de *body) {
     return 0;
 }
 
-void func_8022409C_de(void *player, void *bodyActor) {
+void Player_UpdateFlyMode(void *player, void *bodyActor) {
     CVector3 direction;
     f32 held;
     f32 value;
@@ -67,11 +67,11 @@ void func_8022409C_de(void *player, void *bodyActor) {
     ((func_80224078_Arg0 *)player)->unk72C = 0;
 
     held = (&D_800C2960_de)[1];
-    GraphU64_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
+    Graphu64_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
                   ((func_80224078_Arg1 *)bodyActor)->unk6C +
                       (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
                   held);
-    GraphU64_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
+    Graphu64_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
                   ((func_80224078_Arg0 *)player)->unk724 +
                       (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->y * D_800C2968_de,
                   held);
@@ -87,10 +87,10 @@ void func_8022409C_de(void *player, void *bodyActor) {
             limit = value * D_800C2974_de;
         }
         ((func_80224078_Arg0 *)player)->unk6C0 =
-            GraphU64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
+            Graphu64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C0 =
-            GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
+            Graphu64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
     }
 
     value = ((func_80224078_Arg0 *)player)->unk6A4;
@@ -104,22 +104,22 @@ void func_8022409C_de(void *player, void *bodyActor) {
             limit = value * D_800C2984_de;
         }
         ((func_80224078_Arg0 *)player)->unk6C4 =
-            GraphU64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
+            Graphu64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C4 =
-            GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
+            Graphu64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
     }
 
     flags = ((func_80224078_Arg0 *)player)->unk6AC;
     if (flags & 0x10) {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            GraphU64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
+            Graphu64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
     } else if (flags & 0x2020) {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            GraphU64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
+            Graphu64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
     } else {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            GraphU64_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
+            Graphu64_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
     }
 
     {
@@ -156,7 +156,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
     }
 }
 
-void func_80224408_de(SharedPlayer *player, Body_func_80224408_de *body) {
+void Player_UpdateStandingState(SharedPlayer *player, BodyPlayerUpdateStandingState *body) {
     f32 heading;
     s32 crouching;
     s32 animate;

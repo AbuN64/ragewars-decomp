@@ -63,7 +63,7 @@
 #include "FRONTEND/RESULTS.H"
 
 /* Hides every model named by the sixty-four 12-byte entries of g_arenaCompatibilityTable: for each entry it looks
-   up the first and second identifier in the current screen's context at 0x970 through Frontend_FindWidgetByResourceId
+   up the first and second identifier in the current screen's context at 0x970 through Node_FindWidgetByResourceId
    and disables the object with func_8040E8D8_de, and does the same for the third identifier unless it
    is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
    so the table address is not hoisted. */
@@ -76,10 +76,10 @@ void Results_HideTrialCatalogueWidgets(void) {
     absentResource = -1;
     byteOffset = index;
 loop:
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
     if (((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->c.id != absentResource) {
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
     }
     index += 1;
     byteOffset += 0xC;
@@ -132,7 +132,7 @@ void Results_RefreshTrialCatalogueWidgets(void) {
         unlockIndex = 0;
 found1:;
         if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-            widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
+            widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
             Frontend_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
             resourceKey = g_arenaCompatibilityTable[entryIndex].b;
@@ -142,11 +142,11 @@ found1:;
             unlockIndex = 0;
 found2:;
             if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
-                widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
+                widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
                 Frontend_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
                 if (g_arenaCompatibilityTable[entryIndex].c.id != -1) {
-                    widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
+                    widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
                     Frontend_SetWidgetFlag08(widget, 1);
                     widget->alpha = 20;
                 }
@@ -168,7 +168,7 @@ found2:;
         unlockIndex = 0;
 found3:;
         if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-            widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
+            widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
             if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
             else widget->alpha = 170;
             resourceKey = g_arenaCompatibilityTable[entryIndex].b;
@@ -178,11 +178,11 @@ found3:;
             unlockIndex = 0;
 found4:;
             if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
-                widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
+                widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
                 if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
                 else widget->alpha = 170;
                 if (g_arenaCompatibilityTable[entryIndex].c.id != -1) {
-                    widget = Frontend_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
+                    widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
                     widget->alpha = opacity;
                 }
             }

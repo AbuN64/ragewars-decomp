@@ -81,7 +81,7 @@ static inline f32 safe_sqrt(f32 x) {
     if (x <= 0.0f) {
         return 0.0f;
     }
-    return Math_Sqrtf(x);
+    return Gu_Sqrtf(x);
 }
 
 f32 XMath_SubtractAnglesCentered(f32 a, f32 b) { return centered(a - b); }
@@ -145,7 +145,7 @@ void Vector3Distance(f32 *a, f32 *b) {
     sum = ((dx * dx) + (dy * dy)) + (dz * dz);
     if (!(((dx * dx) + (dy * dy)) + (dz * dz) <= 0.0f)) {
         sum = dz;
-        Math_Sqrtf(((dx * dx) + (dy * dy)) + (sum * sum));
+        Gu_Sqrtf(((dx * dx) + (dy * dy)) + (sum * sum));
     }
 }
 
@@ -170,7 +170,7 @@ void XMath_EvaluateVectorLength(CVector3 *arg0)
   if (!((((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (arg0->z * arg0->z)) <= 0.0f))
   {
     sum = arg0->z;
-    Math_Sqrtf(((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (sum * sum));
+    Gu_Sqrtf(((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (sum * sum));
   }
 }
 
@@ -236,7 +236,7 @@ void Vector3Angles(f32 *vector, f32 *pitchOut, f32 *yawOut) {
     if (magnitude_squared <= 0.0f) {
         magnitude = 0.0f;
     } else {
-        magnitude = Math_Sqrtf(magnitude_squared);
+        magnitude = Gu_Sqrtf(magnitude_squared);
     }
     *yawOut = XMath_EvaluateArcTangentTwo(vector[0], vector[2]);
     *pitchOut = -XMath_EvaluateArcTangentTwo(vector[1], magnitude);
@@ -257,7 +257,7 @@ void Vector3AnglesInverse(f32 *vector, f32 *pitchOut, f32 *yawOut) {
     if (magnitude_squared <= 0.0f) {
         magnitude = 0.0f;
     } else {
-        magnitude = Math_Sqrtf(magnitude_squared);
+        magnitude = Gu_Sqrtf(magnitude_squared);
     }
     *yawOut = XMath_EvaluateArcTangentTwo(vector[0], vector[2]);
     *pitchOut = XMath_EvaluateArcTangentTwo(vector[1], magnitude);

@@ -16,7 +16,7 @@ extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
 
-void func_8022B69C_de(void *actor, f32 amount, void *damageSource) {
+void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource) {
     Slot damage;
     f32 reserveValue;
     f32 clampedReserve;
@@ -45,7 +45,7 @@ void func_8022B69C_de(void *actor, f32 amount, void *damageSource) {
 
 
 
-void func_8022B730_de(void *actorView, f32 amount) {
+void Player_AddImpulse(void *actorView, f32 amount) {
     ((Shared_ActorView *)actorView)->impulse = ((Shared_ActorView *)actorView)->impulse + amount * D_800C7E08;
     ((Shared_ActorView *)actorView)->field122C = ((Shared_ActorView *)actorView)->field122C | 0x2000;
 }

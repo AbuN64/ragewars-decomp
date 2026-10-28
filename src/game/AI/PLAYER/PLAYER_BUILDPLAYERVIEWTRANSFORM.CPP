@@ -160,8 +160,8 @@ void Player_BuildPlayerOrientation(Player *player, CQuatern *output)
 }
 
 extern void MatrixFromQuaternion(CQuatern *rotation, f32 matrix[4][4]);
-extern void GraphU64_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
-extern void GraphU64_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
+extern void Graphu64_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
+extern void Graphu64_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
 /* Builds a player view matrix: the eye height (base height plus camera offset less the crouch depth,
    at least 40.96) and the view pitch, yaw and roll (each with its kick and sway, the pitch less the
    head bob) become one half-angle quaternion per axis, combined roll * (pitch * yaw), then the
@@ -215,10 +215,10 @@ void Player_BuildPlayerViewTransform(Player *player, f32 out[4][4])
     MultiplyQuaternions(&pitchYaw, &pitchRotation, &yawRotation);
     MultiplyQuaternions(&rotation, &rollRotation, &pitchYaw);
     MatrixFromQuaternion(&rotation, viewRotation);
-    GraphU64_BuildTranslationMatrix(lift, 0.0f, height, 0.0f);
+    Graphu64_BuildTranslationMatrix(lift, 0.0f, height, 0.0f);
     MatrixFromQuaternion(&orientation, bodyRotation);
-    GraphU64_MultiplyAffineMatrices(lifted, viewRotation, lift);
-    GraphU64_MultiplyAffineMatrices(oriented, lifted, bodyRotation);
-    GraphU64_BuildTranslationMatrix(placement, x, y, z);
-    GraphU64_MultiplyAffineMatrices(out, oriented, placement);
+    Graphu64_MultiplyAffineMatrices(lifted, viewRotation, lift);
+    Graphu64_MultiplyAffineMatrices(oriented, lifted, bodyRotation);
+    Graphu64_BuildTranslationMatrix(placement, x, y, z);
+    Graphu64_MultiplyAffineMatrices(out, oriented, placement);
 }

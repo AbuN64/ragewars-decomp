@@ -10,7 +10,7 @@
 #include "COMMON/ANIMATION.H"
 
 int Cinema_IsSequenceInWindow(void);
-void func_8025476C_de(unsigned int);
+void Cache_SetResourceActivityState(unsigned int);
 void Smos_SetFocusedElement(s32);
 void Tsmos_ActivateControllerState(void);
 void SmpFlicker_StartFlicker(void *, int);

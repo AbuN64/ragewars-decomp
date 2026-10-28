@@ -82,9 +82,9 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
    weapon's icon from D_800D052C (no icon for weapons outside 0 to 21), then passes the list to
    TeamSelect_DrawWeaponIcons. */
 
-extern f32 GraphU64_ApproachValue(f32, f32, f32);
+extern f32 Graphu64_ApproachValue(f32, f32, f32);
 
-extern void GraphU64_IdentityMatrix(Matrix *);
+extern void Graphu64_IdentityMatrix(Matrix *);
 
 extern void RollMatrix(Matrix *, f32);
 
@@ -116,10 +116,10 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
                     target = *(&D_800C9138_de + 1);
                 }
                 size = 1.0f;
-                slot->m_Scale = GraphU64_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
-                GraphU64_IdentityMatrix(&matrix);
+                slot->m_Scale = Graphu64_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
+                Graphu64_IdentityMatrix(&matrix);
                 RollMatrix(&matrix, slot->m_Rot);
-                GraphU64_TransformPoint(&matrix, &offset, &position);
+                Graphu64_TransformPoint(&matrix, &offset, &position);
                 weapon = menu->m_WeaponList[i].m_Weapon;
                 if (weapon < 0) {
                     goto no_icon;

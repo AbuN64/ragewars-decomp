@@ -38,7 +38,7 @@ extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
-extern void GraphU64_ConvertMatrixToFixed(char *, char *);
+extern void Graphu64_ConvertMatrixToFixed(char *, char *);
 
 #if defined(VERSION_DE)
 extern s32 InstHdr_GetActorType(void *);
@@ -124,7 +124,7 @@ void Statinst_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 
         prop->fieldD4 = record->value;
     }
     CopyMatrix(prop->matrix, matrix);
-    GraphU64_ConvertMatrixToFixed(matrix, prop->transform);
+    Graphu64_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = position;
     if (record->segment == 0xFFFF) {
         prop->segment = 0;

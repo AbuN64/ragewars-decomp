@@ -34,7 +34,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 extern void func_802BD280_de(void *, s32);
 
-extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
+extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 /* Returns the physical address of a ROM offset through the 0x300-byte ROM window cache: a cached window
  * covering the offset and length is stamped with the current frame; otherwise a free window node is
@@ -101,7 +101,7 @@ u32 Sound_GetCachedAudioBlockAddress(void *block, s32 size) {
         }
     }
     if (unused == 0) {
-        unused = (CacheEntry *)func_802B0340_de(0, 0, D_80107EA0, 1, 0x90);
+        unused = (CacheEntry *)alHeapDBAlloc(0, 0, D_80107EA0, 1, 0x90);
         unused->next = D_80107DFC;
         D_80107DFC = unused;
         D_800CB714++;
@@ -589,7 +589,7 @@ static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, s16 a
             for (i = first; i <= last; i++) {
                 total += context->envelopeData[i] * 10;
             }
-            threshold = GraphU64_NextRandom() % total;
+            threshold = Graphu64_NextRandom() % total;
             total = 0;
             for (index = first; index < last; index++) {
                 total += context->envelopeData[index] * 10;
@@ -646,7 +646,7 @@ s32 Sound_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 pos
     }
     if (sound < 0x100) {
         index = selectSoundVariant(context, sound, context->lastInstrument);
-        context->randomPan = (s32)GraphU64_RandomFloat(127.0f);
+        context->randomPan = (s32)Graphu64_RandomFloat(127.0f);
     } else {
         index = selectSoundVariant(context, sound, 0);
     }

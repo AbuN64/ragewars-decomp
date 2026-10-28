@@ -7,7 +7,7 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "GAME/80240650.H"
 
-s32 func_80240660_de(void *arg0, Triple t, s32 room, s32 arg5, void *outputPoint) {
+s32 CCollision_CopyProbePosition(void *arg0, Triple t, s32 room, s32 arg5, void *outputPoint) {
     char unused[0xB60];
     *(Triple *)outputPoint = t;
     return 1;

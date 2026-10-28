@@ -95,21 +95,21 @@ void Menu_RefreshExtraOptionLocks(void) {
     if (D_800E4400->full == 1) {
         total = 40;
     }
-    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
-    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
-    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
-    Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 1);
     if (total >= 10) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_945), 0);
     }
     if (total >= 6) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_948), 0);
     }
     if (total >= 12) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_941), 0);
     }
     if (total >= 14) {
-        Widget_SetWidgetFlag100(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(D_800E4400->window, MENU_804212A4_943), 0);
     }
 }
 
@@ -118,7 +118,7 @@ void Menu_OpenOptionsKeypad(void) {
     s32 key;
 
     Frontend_SetWidgetFlag08(D_800E4400->pad, 1);
-    Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
+    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
     D_800E4400->mode = 1;
     D_800E4400->length = 8;
     D_800E4400->value = 0;
@@ -126,35 +126,35 @@ void Menu_OpenOptionsKeypad(void) {
     for (key = 0; key < 10; key++) {
         switch (key) {
         case 1:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_953);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_953);
             break;
         case 2:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_954);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_954);
             break;
         case 3:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_955);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_955);
             break;
         case 4:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_956);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_956);
             break;
         case 5:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_957);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_957);
             break;
         case 6:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_958);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_958);
             break;
         case 7:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_959);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_959);
             break;
         case 8:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_960);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_960);
             break;
         case 9:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_961);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_961);
             break;
         case 0:
         default:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_952);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_952);
             break;
         }
         item->alpha = 0x96;

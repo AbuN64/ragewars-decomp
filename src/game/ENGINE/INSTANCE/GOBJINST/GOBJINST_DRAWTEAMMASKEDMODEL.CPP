@@ -27,7 +27,7 @@ static inline void spawn(LevelActor *actor) {
 
     position = actor->position0;
     position.y += GameObject_GetActorHeight(actor) * D_800C3A74_de;
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 

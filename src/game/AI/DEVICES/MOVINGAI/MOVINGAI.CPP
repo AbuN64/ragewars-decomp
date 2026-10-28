@@ -39,7 +39,7 @@ void func_80206080_de(void *levelActor, void *actorMotionState) {
 
     resource = (void *)actor->definition;
     base = &resource->trigger;
-    result = GraphU64_RandomBetween(base->delayMinimum, base->delayMaximum);
+    result = Graphu64_RandomBetween(base->delayMinimum, base->delayMaximum);
     motion->speed = result;
     ctx = (char *) &D_801462C8;
     if (((ObjectState1E_2 *)(ctx))->unk_1D != 0) {
@@ -93,13 +93,13 @@ void func_8020612C_de(LevelActor *actor, ActorMotionState *motionState) {
         }
     }
     if (motionState->timer >= motionState->speed) {
-        Nav_RequestActorState(actor, motionState, 1);
+        Actor_RequestActorState(actor, motionState, 1);
     }
 }
 
 void func_802061D8_de(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Nav_RequestActorState(a, b, 0x0);
+        Actor_RequestActorState(a, b, 0x0);
     }
 }
 
@@ -133,7 +133,7 @@ extern char D_80145040;
 struct Context;
 extern void *func_8022A8F0_de(struct Context *arg0);
 
-extern s32 func_8024B6A0_de(void *a, s32 c, s32 flag);
+extern s32 Gobjinst_RequestAnimationKind(void *a, s32 c, s32 flag);
 
 extern s32 Cinema_GetSequenceRequest(void);
 
@@ -191,7 +191,7 @@ void func_802064A0_de(void *actor, ActorMotionState *spawnState, Triple effectPo
                    s32 unused5, s32 effectKind) {
     s32 result;
 
-    result = func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor,
+    result = Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor,
                            (s32 *)&spawnState->unk124, 0, effectKind,
                            ((LevelActor *)actor)->position1,
                            ((LevelActor *)actor)->rotation,
@@ -219,7 +219,7 @@ void func_802065C0_de(void *a, ActorMotionState *b, s32 c) {
     b->action = -1;
     b->actionPending = 0;
     b->unk124 = c;
-    func_8024B6A0_de(a, c, 1);
+    Gobjinst_RequestAnimationKind(a, c, 1);
     func_802472F0_de(a);
 }
 
@@ -244,7 +244,7 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
 
 void func_802066A4_de(LevelActor *actor, Dest *deviceState) {
     deviceState->field124 = ((ActorHealthDefinition *)actor->definition)->health;
-    Nav_RequestActorState(actor, deviceState, 0);
+    Actor_RequestActorState(actor, deviceState, 0);
     deviceState->charge = D_800C1AE0_de;
     deviceState->field12C = D_800C1AE0_de;
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {

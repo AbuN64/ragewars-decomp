@@ -402,7 +402,7 @@ void Defs_SetupPointLights(char *view) {
             position[0] = node->position[0];
             position[1] = node->position[1];
             position[2] = node->position[2];
-            GraphU64_TransformPoint(view + 0x220, position, out);
+            Graphu64_TransformPoint(view + 0x220, position, out);
             x = out[0];
             D_8010C0A0[i + D_8010C4A0].dir[0] = -x;
             D_8010C0A0[i + D_8010C4A0].dir[1] = out[1];

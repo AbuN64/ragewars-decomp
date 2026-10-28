@@ -51,7 +51,7 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 extern struct StateFlags D_800E5A06[];
 
-extern struct ResourceSmpFlickerCreateFlickerWidget *Frontend_FindWidgetByResourceId(void *, s32);
+extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId(void *, s32);
 
 extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
@@ -163,10 +163,10 @@ void Frontend_SelectEquipmentColumn(s32 player, s32 column) {
     struct ResourceSmpFlickerCreateFlickerWidget *item;
 
     if (column != 5) {
-        item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
+        item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
         Frontend_SetWidgetFlag08(item, 1);
     }
-    item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
+    item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
     Widget_SetWidgetFlag40(item, 1);
     item->value = 0x96;
     D_800E59E0->panels[player].selection = column;

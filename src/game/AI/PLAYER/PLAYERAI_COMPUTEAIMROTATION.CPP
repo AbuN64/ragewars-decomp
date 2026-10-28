@@ -184,9 +184,9 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         Graphu64_CrossVectors(&axis, &forward, &bestDirection);
         GraphU64_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
-        threshold = GraphU64_ArcCos(threshold);
-        amount = Math_Sqrtf(D_800C23A0_de - threshold / (angle * scale));
-        amount = Math_Sqrtf(amount);
+        threshold = Graphu64_ArcCos(threshold);
+        amount = Gu_Sqrtf(D_800C23A0_de - threshold / (angle * scale));
+        amount = Gu_Sqrtf(amount);
         threshold *= amount;
         threshold *= scale;
         amount = Math_Sinf(threshold);

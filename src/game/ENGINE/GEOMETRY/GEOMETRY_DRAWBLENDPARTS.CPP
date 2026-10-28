@@ -42,7 +42,7 @@ extern s32 Geometry_ApplyMaterialLighting(void *matrix, void *lights, void *mate
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 extern void Geometry_SetCombineMode(s32 mode);
 
-void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, void *lights, void *textures, s32 pass, u8 r, u8 g, u8 b, u8 a) {
+void Geometry_DrawTintedModelParts(void **resource, void *unused, void *matrix, s32 segment, void *lights, void *textures, s32 pass, u8 r, u8 g, u8 b, u8 a) {
     void *header;
     void *base;
     void **parts;
@@ -131,7 +131,7 @@ void Geometry_NoOperation(void) {
 }
 
 /* CODE_8026D844.CPP */
-extern void GraphU64_BuildScaleMatrix(void *, float, float, float);
+extern void Graphu64_BuildScaleMatrix(void *, float, float, float);
 
 extern void GraphU64_PackFixedMatrix(void *, void *);
 
@@ -159,7 +159,7 @@ void Geometry_InitializeModelRenderState(void) {
     char local[64];
 
     Geometry_InvalidateMaterialKeys();
-    GraphU64_BuildScaleMatrix(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
+    Graphu64_BuildScaleMatrix(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
     GraphU64_PackFixedMatrix(local, &D_8010C520);
 }
 

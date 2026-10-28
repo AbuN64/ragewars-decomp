@@ -51,7 +51,7 @@ void PAKInterface_ScrollNoteList(s32 player, s32 direction) {
             D_800E54A4->players[player].displayNames[D_800E54A4->players[player].scroll + i].text;
     }
     cursor = D_800E54A4->players[player].slot;
-    Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_LIST_FIELD)->text =
+    Node_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_LIST_FIELD)->text =
         D_800E54A4->players[player].displayNames[cursor].code;
 }
 
@@ -91,7 +91,7 @@ s32 PAKInterface_SavePlayerRecords(s32 channel)
     s32 i;
     u32 checksum;
     s32 success = 0;
-    if (Pak_FindNoteByName(rw_pak_save_name(), channel, &space.note) == 1) {
+    if (Note_FindNoteByName(rw_pak_save_name(), channel, &space.note) == 1) {
         success = Note_DeleteNote(channel, space.note) == 0;
     } else {
         space.fits = 0;

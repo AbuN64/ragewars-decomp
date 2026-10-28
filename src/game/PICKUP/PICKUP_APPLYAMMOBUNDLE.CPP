@@ -110,7 +110,7 @@ s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *arg0) {
     if (arg0->message != 0) {
         input = D_800C62E0;
         ((RacerViewport *)arg0->message)->pad124 = 0;
-        value = GraphU64_RandomFloat(input);
+        value = Graphu64_RandomFloat(input);
         threshold = (&D_800C62E0)[1];
         if (!(threshold <= value)) {
             converted = (s32)value;

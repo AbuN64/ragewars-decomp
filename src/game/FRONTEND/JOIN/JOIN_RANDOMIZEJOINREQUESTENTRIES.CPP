@@ -36,7 +36,7 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[GraphU64_NextRandom() % count];
+        entry = &points[Graphu64_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -52,7 +52,7 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
         D_80153F80[i].variant = tier;
         D_80153F80[i].variantC = tier;
         do {
-            pick = GraphU64_NextRandom() % 17;
+            pick = Graphu64_NextRandom() % 17;
             D_80153F80[i].id = g_rewardItemTiers[tier][pick].field_0;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             name = D_80153F80[i].name;
@@ -122,7 +122,7 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[GraphU64_NextRandom() % count];
+        entry = &points[Graphu64_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -138,7 +138,7 @@ void Join_RandomizeJoinRequestEntries(s32 count, s32 level) {
         D_80153F80[i].tier = tier;
         D_80153F80[i].shown = tier;
         do {
-            pick = GraphU64_NextRandom() % 17;
+            pick = Graphu64_NextRandom() % 17;
             D_80153F80[i].id = g_rewardItemTiers[tier][pick].id;
             XPlus_CopyString(D_80153F80[i].name, *g_rewardItemTiers[tier][pick].name);
         } while (D_80153F80[i].id == -1);

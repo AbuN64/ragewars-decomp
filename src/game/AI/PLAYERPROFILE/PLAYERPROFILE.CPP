@@ -287,9 +287,9 @@ load:
 
 extern void GraphU64_ScaleVector(void *, void *, f32);
 
-extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
+extern void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 
-extern void GraphU64_GetMatrixTranslation(char *, f32 *);
+extern void Graphu64_GetMatrixTranslation(char *, f32 *);
 
 extern void Player_BuildPlayerViewTransform(char *, Matrix *);
 
@@ -301,7 +301,7 @@ extern void TranslateMatrix(char *, f32, f32, f32);
 
 extern void SwapMatrixUpForward(void *);
 
-extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
+extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);
 
 extern s32 Defs_TestBit(void *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
@@ -401,21 +401,21 @@ void Player_BuildWeaponHandTransform(char *arg0) {
         handOffset.z = -handOffset.z;
     }
     GraphU64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
-    GraphU64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
+    Graphu64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
     GraphU64_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
-        GraphU64_GetMatrixTranslation(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
+        Graphu64_GetMatrixTranslation(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &worldMatrix);
     } else {
         Player_BuildPlayerViewTransform(object, &viewMatrix);
         Player_BuildPlayerOrientation(object, &viewOrientation);
-        GraphU64_GetMatrixTranslation((char *)&viewMatrix, &position);
+        Graphu64_GetMatrixTranslation((char *)&viewMatrix, &position);
         MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
     orientation = arg0 + 0x74;
     TranslateMatrix(&offsetMatrix, handOffset.x, handOffset.y, handOffset.z);
     SwapMatrixUpForward(&offsetMatrix);
-    GraphU64_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);
+    Graphu64_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);
     TranslateMatrix((Matrix *)orientation, position.x, position.y, position.z);
 }

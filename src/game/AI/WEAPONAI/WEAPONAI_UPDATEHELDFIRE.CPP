@@ -12,10 +12,10 @@
 #include "RENDER/8025DE50_5.H"
 
 /* Runs a player's aiming action: refreshes the idle state when the action is not allowed; while the aim
- * flag 0x4000 is held and the weapon may fire (as in Weapon_TryEnterAlternateStateEight) the attack enters aiming and, for scoped
+ * flag 0x4000 is held and the weapon may fire (as in Weaponai_TryEnterAlternateStateEight) the attack enters aiming and, for scoped
  * weapons, zooms in through func_8022B1A8; when aiming stops it zooms back out unless the zoom was already
  * cancelled; then the default action for the player's state starts unless func_802301F4_de handled the
- * request or the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the aiming state.
+ * request or the actor is flagged 0x400. Adapted from Weaponai_TryEnterAlternateStateEight with the aiming state.
  */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -33,7 +33,7 @@ extern u8 *D_800D30BC[];
 extern s32 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s32);
 extern s32 Player_GetPlayerIndex(void *, void *);
-extern CCameraText *Sky_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
+extern CCameraText *Gsky_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 #if defined(VERSION_EU_X)
@@ -58,11 +58,11 @@ static inline s32 can_fire(char *player, f32 *scale) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #else
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Player_GetPlayerIndex(&D_80145040, player),
+            Gsky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Player_GetPlayerIndex(&D_80145040, player),
 #endif
                           *scale);
         }
@@ -106,7 +106,7 @@ void Weaponai_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *att
         attack->triggered = 0;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        Nav_RequestActorState(actor, attack, action);
+        Actor_RequestActorState(actor, attack, action);
     }
 }
 /* D_800C2FCC_de and D_800C2FD0_de are the two message-duration floats of this unit's literal pool. */
@@ -162,10 +162,10 @@ void Weaponai_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
                 SoundElement_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
             }
             if (state->mode == 3 && can_fire((char *)state, &D_800C2FD0_de) != 0 && state->mode594 == 2) {
-                Nav_RequestActorState(actor, attack, 0xB);
+                Actor_RequestActorState(actor, attack, 0xB);
                 func_8022B984_de(state);
             } else {
-                Nav_RequestActorState(actor, attack, 2);
+                Actor_RequestActorState(actor, attack, 2);
             }
         }
         state->handled788 = 1;

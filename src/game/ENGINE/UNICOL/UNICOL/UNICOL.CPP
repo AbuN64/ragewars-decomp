@@ -29,9 +29,9 @@ f32 CCollision_GetContactYaw(f32 *);
 
 f32 InstHdr_GetActorReach(void *);
 
-extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
-f32 GraphU64_GetTrianglePlaneHeight(void *, f32, f32);
+f32 Graphu64_GetTrianglePlaneHeight(void *, f32, f32);
 
 f32 Region_GetPolygonHeight(void *, f32, f32);
 
@@ -309,7 +309,7 @@ block_71:
                     frame.sp54 |= 0x100;
                     CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
                     if (actor->type == 1) {
-                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - Graphu64_GetWrappedDifference(frame.sp2C8, CCollision_GetContactYaw((f32 *) &frame.spC8)), 0.9f);
+                        Graphu64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - Graphu64_GetWrappedDifference(frame.sp2C8, CCollision_GetContactYaw((f32 *) &frame.spC8)), 0.9f);
                         actor->angle = frame.sp2C8;
                     }
                 }
@@ -321,7 +321,7 @@ block_71:
             surface = Scene_ResolveFloorPolygon(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
             if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
-                surfaceCeilingHeight = GraphU64_GetTrianglePlaneHeight(surface, actor->x, actor->z);
+                surfaceCeilingHeight = Graphu64_GetTrianglePlaneHeight(surface, actor->x, actor->z);
                 if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x4000;
                 }

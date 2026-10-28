@@ -57,17 +57,17 @@ void Results_UpdateResultsHeading(void) {
     char buffer[32];
 
     /* the hub lookup returns its Item view; the Label view names the text pointer this unit writes */
-    ((struct Label *) Frontend_FindWidgetByResourceId(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
+    ((struct Label *) Node_FindWidgetByResourceId(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
     settings = &D_801462C8;
     switch (settings->controllerMode) {
     case 1:
         XPlus_CopyString(D_800E4690->heading, Frontend_GetStringByIndex(NAME_PHRASE));
-        Random_ReplaceTextOccurrences(D_800E4690->heading, D_800DD9BC,
+        Random_ReplaceTextOccurrences(D_800E4690->heading, g_characterAndTimeFormatText,
                       RES_NAME(Key_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
         XPlus_CopyString(D_800E4690->time, Frontend_GetStringByIndex(TIME_PHRASE));
-        item = (struct Label *) Frontend_FindWidgetByResourceId(D_800E4690->window, TIME_ITEM);
+        item = (struct Label *) Node_FindWidgetByResourceId(D_800E4690->window, TIME_ITEM);
         Frontend_SetWidgetFlag08(item, 1);
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];

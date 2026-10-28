@@ -53,7 +53,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
    buffer D_8011FECC points to. */
 extern char *D_8011FECC;
 
-extern void func_80253908_de(s32 a);
+extern void Cache_DrainAndCompactResources(s32 a);
 
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
@@ -92,7 +92,7 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     void *first;
 
     if (*handle != 0) {
-        func_80253908_de(0);
+        Cache_DrainAndCompactResources(0);
         Cache_ReleaseResource(0, *handle);
     }
     if (units != 0) {
@@ -109,7 +109,7 @@ void Timer_AllocateSaveBlock(void ***handle, void **data, s32 units) {
 
 void Timer_ReleaseSaveBlocks(void) {
     if ((D_800DE860_de != 0) || (D_800DE864_de != 0)) {
-        func_80253908_de(0);
+        Cache_DrainAndCompactResources(0);
     }
     if (D_800DE860_de != 0) {
         Cache_ReleaseResource(0, D_800DE860_de);

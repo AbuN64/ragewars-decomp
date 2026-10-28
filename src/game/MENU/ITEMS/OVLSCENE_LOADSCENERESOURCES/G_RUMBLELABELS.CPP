@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CAD00[21] =
+const char g_rumbleResourceLabelsTextPool[21] =
     "rumbles\000rumble types\000";
 #endif
 

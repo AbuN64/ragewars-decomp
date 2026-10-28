@@ -56,7 +56,7 @@ void Fx_AttachActorRibbon(void *, void *, s8);
 
 /* Adds acceleration along a direction and clamps the resulting speed to its configured limit. */
 
-f32 Math_Sqrtf(f32);
+f32 Gu_Sqrtf(f32);
 
 void GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
 
@@ -65,12 +65,12 @@ void GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
 /* Transform the measured attachment position and direction into the target frame. */
 extern ParticleAttachmentState D_801041F0;
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *out, void *in);
+extern void Graphu64_ConvertMatrixToFloat(f32 *out, void *in);
 
 
 
 
-extern void GraphU64_TransformDirection(void *matrix, void *input, void *output);
+extern void Graphu64_TransformDirection(void *matrix, void *input, void *output);
 
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
 
@@ -104,7 +104,7 @@ void Particle_ReleaseOwnerListOneEffects(struct EffectSystem *effectSystem, s32 
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
+                        Gdynlight_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -169,7 +169,7 @@ void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
+                        Gdynlight_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -226,7 +226,7 @@ void Particle_ReleaseObjectAndSound(void *object) {
 }
 
 #include "particle/8027A0F4_8.H"
-extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern Triple D_801002A8;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 void Particle_SpawnAtSharedContactPoint(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
@@ -238,8 +238,8 @@ void Particle_SpawnAtSharedContactPoint(ObjParticleInitializeAttachmentsAndSound
     } else {
         pos = source->rotation;
     }
-    q = GraphU64_BuildDirectionQuaternion(&pos);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    q = Graphu64_BuildDirectionQuaternion(&pos);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
@@ -256,8 +256,8 @@ void Particle_SpawnWithModeMinusThree(ObjParticleInitializeAttachmentsAndSound *
     } else {
         position = source->rotation;
     }
-    rotation = GraphU64_BuildDirectionQuaternion(&position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    rotation = Graphu64_BuildDirectionQuaternion(&position);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
@@ -274,8 +274,8 @@ void Particle_SpawnWithModeMinusTwo(ObjParticleInitializeAttachmentsAndSound *so
     } else {
         position = source->rotation;
     }
-    rotation = GraphU64_BuildDirectionQuaternion(&position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    rotation = Graphu64_BuildDirectionQuaternion(&position);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
@@ -292,8 +292,8 @@ void Particle_SpawnWithModeMinusFive(ObjParticleInitializeAttachmentsAndSound *s
     } else {
         position = source->rotation;
     }
-    rotation = GraphU64_BuildDirectionQuaternion(&position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+    rotation = Graphu64_BuildDirectionQuaternion(&position);
+    Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
                   source->effectCount, kind,
@@ -332,7 +332,7 @@ void Particle_ReleaseAttachments(void *arg0) {
     }
     temp = ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138;
     if (temp != 0) {
-        DynLight_ReleaseLight(&D_8013B1A8, temp);
+        Gdynlight_ReleaseLight(&D_8013B1A8, temp);
         ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138 = 0;
     }
 }
@@ -349,7 +349,7 @@ void Particle_ApplyDirectionalAcceleration(ObjRecAt174 *arg0) {
  GraphU64_ScaleVector(&delta,dir,accel);
  velocity=&arg0->velocity;
  GraphU64_AddVec3(velocity,velocity,&delta);
- length=Math_Sqrtf(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
+ length=Gu_Sqrtf(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
  limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
  if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } GraphU64_ScaleVector(velocity,dir,limit); done:;
  }
@@ -382,19 +382,19 @@ void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
     mode = arg2;
     current = D_801041F0.current;
     if (arg1 != 0) {
-        GraphU64_InvertAffineMatrix(matrix, arg1);
+        Graphu64_InvertAffineMatrix(matrix, arg1);
     } else {
-        GraphU64_ConvertMatrixToFloat(source,
+        Graphu64_ConvertMatrixToFloat(source,
             &current->drawMatrices[D_801041F0.frame]);
-        GraphU64_InvertAffineMatrix(matrix, source);
+        Graphu64_InvertAffineMatrix(matrix, source);
     }
     matrix_ptr = matrix;
     scene = &D_801001F8;
-    GraphU64_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
+    Graphu64_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
     GraphU64_NormalizeVec3((f32 *)direction_ptr);
-    GraphU64_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
+    Graphu64_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
     ((Shared_Particle *)actor)->collisionNode = scene->actor_byte;

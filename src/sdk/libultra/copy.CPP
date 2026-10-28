@@ -3,7 +3,7 @@
 #include "sdk/BUF16B.H"
 #include "TYPES.H"
 
-s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e) {
+s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e) {
     ALHeap *heap = c;
     u32 allocationStart;
     u32 allocationEnd;

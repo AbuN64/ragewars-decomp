@@ -44,7 +44,7 @@ extern void SmXlate_SwitchScreen(s32 arg0);
 
 void SetN64_ResetMode4Effects(void) {
     D_80141128 = 0;
-    TextLoad_SetTextureEffect(0U);
+    Textload_SetTextureEffect(0U);
 }
 
 void SetN64_AdvanceToModeEight(struct GameSession *session) {

@@ -49,13 +49,13 @@ extern const struct D_800C7470_Pair D_800C2D40_de;
 
 extern void Player_BuildPlayerViewTransform(Player1680 *, Matrix *);
 
-extern void GraphU64_GetMatrixTranslation(Matrix *, CVector3 *);
+extern void Graphu64_GetMatrixTranslation(Matrix *, CVector3 *);
 
-extern void GraphU64_IdentityMatrix(Matrix *);
+extern void Graphu64_IdentityMatrix(Matrix *);
 
 extern void TranslateMatrix(Matrix *, float, float, float);
 
-extern void GraphU64_ConvertMatrixToFixed(Matrix *, void *);
+extern void Graphu64_ConvertMatrixToFixed(Matrix *, void *);
 
 static inline void getEye(Player1680 *player, CVector3 *pos) {
     Matrix frame;
@@ -64,7 +64,7 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
         *pos = player->mount->unk128;
     } else {
         Player_BuildPlayerViewTransform(player, &frame);
-        GraphU64_GetMatrixTranslation(&frame, pos);
+        Graphu64_GetMatrixTranslation(&frame, pos);
     }
 }
 
@@ -231,10 +231,10 @@ void func_8022C490_de(Player1680 *player) {
     CVector3 pos;
 
     getEye(player, &pos);
-    GraphU64_IdentityMatrix(&mtx);
+    Graphu64_IdentityMatrix(&mtx);
     BuildYawMatrix(&mtx, getYaw());
     TranslateMatrix(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
-    GraphU64_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
+    Graphu64_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
 }
 
 void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {

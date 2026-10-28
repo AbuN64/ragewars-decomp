@@ -22,7 +22,7 @@ void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index) {
     return base + (index * stride + 8);
 }
 
-/* Draws a scene's object list inside a Geometry_BeginModelBatch and Geometry_FlushModelBatch pass: writes four G_MOVEWORD commands setting the words at 4, 0xC, 0x14 and 0x1C to 5, 5, 0xFFFB and 0xFFFB, then draws each object through func_80249E28_de unless its flag 4 is set, in which case it is deferred to the scene's 64-entry late list. */
+/* Draws a scene's object list inside a Geometry_BeginModelBatch and Geometry_FlushModelBatch pass: writes four G_MOVEWORD commands setting the words at 4, 0xC, 0x14 and 0x1C to 5, 5, 0xFFFB and 0xFFFB, then draws each object through Gobjinst_DrawVisibleCachedActor unless its flag 4 is set, in which case it is deferred to the scene's 64-entry late list. */
 
 
 
@@ -32,7 +32,7 @@ void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index) {
 extern Gfx *g_displayListCursor;
 
 
-extern void func_80249E28_de(LevelActor *object, void *camera);
+extern void Gobjinst_DrawVisibleCachedActor(LevelActor *object, void *camera);
 
 void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
     LevelActor *object;
@@ -57,7 +57,7 @@ void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
                 scene->lateCount = late + 1;
             }
         } else {
-            func_80249E28_de(object, camera);
+            Gobjinst_DrawVisibleCachedActor(object, camera);
         }
     }
     Geometry_FlushModelBatch();
@@ -125,7 +125,7 @@ int Scene_GetModelIdAtIndex(void *world, int modelIndex) {
 
 
 
-extern void GameObject_LoadModel(ObjectSceneChangeInstanceModel *,s32,s32,s32);
+extern void Gobjinst_LoadModel(ObjectSceneChangeInstanceModel *,s32,s32,s32);
 static inline s32 find(TableRecAt8 *table,u16 id) {
  s32 index=0,count; u16 *entry;entry=table->entries;count=table->count;
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
@@ -135,7 +135,7 @@ void Scene_ChangeInstanceModel(BankRecAt94 *arg0,ObjectSceneChangeInstanceModel 
  s32 index=0;
  if(draw->id!=modelId) {
  index=find(arg0->table,modelId);
- if(index!=-1){draw->index=index;draw->id=modelId;GameObject_LoadModel(draw,arg0->field54,arg0->field24,extra);}
+ if(index!=-1){draw->index=index;draw->id=modelId;Gobjinst_LoadModel(draw,arg0->field54,arg0->field24,extra);}
  }
 }
 

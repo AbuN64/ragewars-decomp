@@ -48,7 +48,7 @@ void Weaponai_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) 
         ((Shared_Actor *)arg0)->color = 0;
         ((WeaponFireState *)weaponFireState)->charge = 0;
     }
-    Nav_RequestActorState(arg0, weaponFireState, 0);
+    Actor_RequestActorState(arg0, weaponFireState, 0);
 }
 
 void Weaponai_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {

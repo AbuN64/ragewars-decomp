@@ -29,7 +29,7 @@ extern void *D_800CB440_de[];
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
  * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
  * the body's reversed velocity is placed in its offset transform, an impulse at the source position is
- * built by Graphu64_BuildAxisAngleMatrix and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
+ * built by Graphu64_BuildAxisAngleMatrix and applied through Graphu64_MultiplyAffineMatrices, the velocity is restored onto the body, and
  * the source spends a charge when its owner matches. */
 
 
@@ -47,7 +47,7 @@ extern void TranslateMatrix(void *, f32, f32, f32);
 
 extern void Graphu64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
-extern void GraphU64_MultiplyAffineMatrices(BodyGobjinstApplyBoneTwistImpulse *, f32 *, f32 *);
+extern void Graphu64_MultiplyAffineMatrices(BodyGobjinstApplyBoneTwistImpulse *, f32 *, f32 *);
 
 extern void Graphu64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
 
@@ -63,7 +63,7 @@ void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, Lookup
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += GameObject_GetActorHeight(actor) * D_800C3B60_de;
-            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
+            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
@@ -159,7 +159,7 @@ void Gobjinst_ApplyBoneTwistImpulse(s32 unused, SourceRecAt18 *source, BodyGobji
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
     Graphu64_BuildAxisAngleMatrix(impulse, strength, position.x, position.y, position.z);
-    GraphU64_MultiplyAffineMatrices(body, transform, impulse);
+    Graphu64_MultiplyAffineMatrices(body, transform, impulse);
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
     if (source->owner == owner) {
@@ -272,7 +272,7 @@ void Gobjinst_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, CQ
                     (char *)base + o->unk_14 * 4);
 }
 
-/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from GraphU64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
+/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Graphu64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
 void Gobjinst_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;

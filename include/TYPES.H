@@ -66,19 +66,19 @@ extern void func_8022B00C_de(void *arg0);
 
 struct LevelActor;
 
-extern void func_8022C894_de(void *arg0, struct LevelActor *arg1);
+extern void Player_ZeroBodyVelocity(void *arg0, struct LevelActor *arg1);
 
-extern void func_8022CC34_de(void *arg0, void *arg1);
+extern void Player_UpdateJumpAirMotion(void *arg0, void *arg1);
 
-extern void func_8022CD78_de(void *arg0, void *arg1);
+extern void Player_BeginLateralLeap(void *arg0, void *arg1);
 
-extern void func_8022CF38_de(void *arg0, struct LevelActor *arg1);
+extern void Player_AbsorbImpact(void *arg0, struct LevelActor *arg1);
 
-extern void func_8022D010_de(void *arg0, void *arg1);
+extern void Player_DampMotion(void *arg0, void *arg1);
 
-extern void func_8022D164_de(void *arg0, struct LevelActor *arg1);
+extern void Player_ResetMovementInput(void *arg0, struct LevelActor *arg1);
 
-extern void func_8022D188_de(void *unused, void *object);
+extern void Player_ResetObjectVelocity(void *unused, void *object);
 
 extern void Player_InitializeProfileSlot(s32 arg0);
 
@@ -90,7 +90,7 @@ extern void Cinema_SetViewport(int arg0, int arg1, int arg2, int arg3);
 
 extern void Cinema_InitializeSequenceOnce(s32 unused);
 
-extern s32 func_8024B6F4_de(void *arg0, s32 arg1, s32 arg2);
+extern s32 Gobjinst_RequestAnimationIndex(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 Cache_EvictResource(s32 unused0, s32 unused1, s32 keep_recent);
 
@@ -124,21 +124,21 @@ extern int Control_IsControllerPakEnabled(int arg0);
 
 extern void Control_SetControllerMode(s32 a);
 
-extern void DynLight_ReleaseLight(void *a, s32 b);
+extern void Gdynlight_ReleaseLight(void *a, s32 b);
 
 extern void Graphu64_WrapPeriodicValue(f32 *value);
 
 extern void Graphu64_NormalizeQuaternion(f32 *arg0);
 
-extern f32 GraphU64_RandomFloat(f32 arg0);
+extern f32 Graphu64_RandomFloat(f32 arg0);
 
-extern f32 GraphU64_ArcCos(f32 arg0);
+extern f32 Graphu64_ArcCos(f32 arg0);
 
-extern f32 GraphU64_IntegrateBoundedValue(f32 arg0, f32 arg1, f32 arg2);
+extern f32 Graphu64_IntegrateBoundedValue(f32 arg0, f32 arg1, f32 arg2);
 
-extern f32 GraphU64_DecayToZero(f32 arg0, f32 arg1);
+extern f32 Graphu64_DecayToZero(f32 arg0, f32 arg1);
 
-extern f32 GraphU64_RandomBetween(f32 arg0, f32 arg1);
+extern f32 Graphu64_RandomBetween(f32 arg0, f32 arg1);
 
 extern void Gregion_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
 

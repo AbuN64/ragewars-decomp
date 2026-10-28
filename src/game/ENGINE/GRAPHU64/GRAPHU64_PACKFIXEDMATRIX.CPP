@@ -68,7 +68,7 @@ void Graphu64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) 
  * moved from world space into object-local or view space for spatial and
  * rendering calculations.
  */
-void GraphU64_InvertAffineMatrix(f32 *out, f32 *m) {
+void Graphu64_InvertAffineMatrix(f32 *out, f32 *m) {
     f32 determinant;
     f32 reciprocalDeterminant;
     f32 m01TimesM22;
@@ -152,7 +152,7 @@ void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, C
     f32 length;
 
     GraphU64_SubtractVectors(&forward, target, eye);
-    length = Math_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
+    length = Gu_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
         forward.x *= length;
@@ -165,7 +165,7 @@ void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, C
     }
 
     Graphu64_CrossVectors(&right, up, &forward);
-    length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
+    length = Gu_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
         right.x *= length;
@@ -178,7 +178,7 @@ void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, C
     }
 
     Graphu64_CrossVectors(&upward, &forward, &right);
-    length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
+    length = 1.0f / Gu_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
     upward.z *= length;
@@ -202,7 +202,7 @@ void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, C
 }
 
 /** Multiply two affine 4x4 matrices into the output matrix. */
-void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
+void Graphu64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[(0) * 4 + (0)] = (left[(0) * 4] * right[(0)]) + (left[(0) * 4 + 1] * right[4 + (0)]) + (left[(0) * 4 + 2] * right[8 + (0)]);
     out[(0) * 4 + (1)] = (left[(0) * 4] * right[(1)]) + (left[(0) * 4 + 1] * right[4 + (1)]) + (left[(0) * 4 + 2] * right[8 + (1)]);
@@ -223,7 +223,7 @@ void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
     out[15] = D_800C46EC_de;
 }
 /** Multiply two column-addressed 4x4 matrices into the output matrix. */
-void GraphU64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
+void Graphu64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[(0) * 4 + (0)] = (left[(0) * 4] * right[(0)]) + (left[(0) * 4 + 1] * right[4 + (0)]) + (left[(0) * 4 + 2] * right[8 + (0)]) + (left[(0) * 4 + 3] * right[12 + (0)]);
     out[(0) * 4 + (1)] = (left[(0) * 4] * right[(1)]) + (left[(0) * 4 + 1] * right[4 + (1)]) + (left[(0) * 4 + 2] * right[8 + (1)]) + (left[(0) * 4 + 3] * right[12 + (1)]);
@@ -259,7 +259,7 @@ void GraphU64_PackFixedMatrix(f32 *src, PackedMatrixWords *dst) {
     value = (src[(7) * 2]) * (D_800C4760_de); if (!(*(&(D_800C4760_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4760_de) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (D_800C4768_de); if (!(*(&(D_800C4768_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4768_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
 }
 
-void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
+void Graphu64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;
@@ -333,7 +333,7 @@ void Graphu64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
 
 /* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from Graphu64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
-void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
+void Graphu64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C98C4;
@@ -383,7 +383,7 @@ void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, C
         other = &negative;
     }
 
-    angle = GraphU64_ArcCos(dot);
+    angle = Graphu64_ArcCos(dot);
     sine = Math_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
@@ -406,7 +406,7 @@ void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, C
 
 
 
-void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void Graphu64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -440,7 +440,7 @@ void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
         out->y = a->y + amount * (other->y - a->y);
         out->z = a->z + amount * (other->z - a->z);
         out->w = a->w + amount * (other->w - a->w);
-        magnitude = Math_Sqrtf((out->x * out->x) + (out->y * out->y) +
+        magnitude = Gu_Sqrtf((out->x * out->x) + (out->y * out->y) +
                                   (out->z * out->z) + (out->w * out->w));
         if (magnitude != 0.0f) {
             scale = *(&D_800C47E0_de + 1) / magnitude;
@@ -450,7 +450,7 @@ void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
             out->w *= scale;
         }
     } else {
-        angle = GraphU64_ArcCos(dot);
+        angle = Graphu64_ArcCos(dot);
         sine = Math_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
@@ -481,12 +481,12 @@ CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
-    random.y = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
-    random.z = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
+    random.x = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
+    random.y = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
+    random.z = (f32)((Graphu64_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
-    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Gu_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -496,7 +496,7 @@ CVector3 Graphu64_BlendRandomDirection(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = Math_Sqrtf((in->x * in->x) +
+    inputMagnitude = Gu_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -522,13 +522,13 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710) *
+    random.x = (f32)((Graphu64_NextRandom() % 20000) - 0x2710) *
                *(&D_800C47F0_de + 1);
     random.y = in->y;
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Gu_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -538,7 +538,7 @@ CVector3 Graphu64_BlendRandomXDirection(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = Math_Sqrtf((in->x * in->x) +
+    inputMagnitude = Gu_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -565,11 +565,11 @@ CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
+    random.y = ((f32)(Graphu64_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Gu_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -579,7 +579,7 @@ CVector3 Graphu64_BlendRandomYDirection(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = Math_Sqrtf((in->x * in->x) +
+    inputMagnitude = Gu_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -603,7 +603,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4810_de) *
+    random.z = ((f32)(Graphu64_NextRandom() % 20000) - D_800C4810_de) *
                *(&D_800C4810_de + 1);
 
     randomPtr = &random;
@@ -611,7 +611,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
         f32 magnitude;
         f32 scale;
 
-        magnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
+        magnitude = Gu_Sqrtf((randomPtr->x * randomPtr->x) +
                                   (randomPtr->y * randomPtr->y) +
                                   (randomPtr->z * randomPtr->z));
         if (magnitude != 0.0f) {
@@ -625,7 +625,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
         f32 magnitude;
         f32 scale;
 
-        magnitude = Math_Sqrtf((in->x * in->x) +
+        magnitude = Gu_Sqrtf((in->x * in->x) +
                                   (in->y * in->y) +
                                   (in->z * in->z));
         if (magnitude != 0.0f) {
@@ -648,7 +648,7 @@ CVector3 *Graphu64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount
 
 
 
-CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *input) {
+CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *input) {
     CQuatern result;
     CVector3 normalized;
     CVector3 basis;
@@ -657,7 +657,7 @@ CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *input) {
     f32 angle;
     f32 axisMagnitude;
 
-    magnitude = Math_Sqrtf((input->x * input->x) +
+    magnitude = Gu_Sqrtf((input->x * input->x) +
                               (input->y * input->y) +
                               (input->z * input->z));
     if (magnitude == 0.0f) {
@@ -703,14 +703,14 @@ general:
             f32 halfAngle;
             f32 scale;
 
-            angle = GraphU64_ArcCos((normalized.x * basis.x) +
+            angle = Graphu64_ArcCos((normalized.x * basis.x) +
                                   (normalized.y * basis.y) +
                                   (normalized.z * basis.z));
             axis.x = (basis.y * normalized.z) - (basis.z * normalized.y);
             axis.y = (basis.z * normalized.x) - (basis.x * normalized.z);
             axis.z = (basis.x * normalized.y) - (basis.y * normalized.x);
 
-            axisMagnitude = Math_Sqrtf((axis.x * axis.x) +
+            axisMagnitude = Gu_Sqrtf((axis.x * axis.x) +
                                           (axis.y * axis.y) +
                                           (axis.z * axis.z));
             if (axisMagnitude != 0.0f) {

@@ -39,37 +39,37 @@ void Menu_AdvanceTextRows(void) {
         if (text != 0) {
             index++;
         }
-        item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
+        item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
         switch (line) {
         case 0:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0);
             break;
         case 1:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 1);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 1);
             break;
         case 2:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 2);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 2);
             break;
         case 3:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 3);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 3);
             break;
         case 4:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 4);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 4);
             break;
         case 5:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 5);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 5);
             break;
         case 6:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 6);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 6);
             break;
         case 7:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 7);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 7);
             break;
         case 8:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 8);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 8);
             break;
         case 9:
-            item = Frontend_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 9);
+            item = Node_FindWidgetByResourceId(D_800E4400->window, ID_ROW0 + 9);
             break;
         }
         item->text = text;
@@ -83,7 +83,7 @@ void Menu_AdvanceTextRows(void) {
         }
     } else {
         Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
-        Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4400->window, ID_CLOSE), 1);
+        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, ID_CLOSE), 1);
         D_800E4400->cursor = 1;
     }
     if (D_800E4400->length > 0) {

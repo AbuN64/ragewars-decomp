@@ -24,7 +24,7 @@ extern void CopyMatrix(float *arg0, float *arg1);
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
@@ -48,7 +48,7 @@ void Device_BuildPlayerMatrix(void *object, void *state) {
     matrix = player->matrix;
     CopyMatrix(matrix, orientationMatrix);
     ScaleMatrixLocal(matrix, player->scale.x, player->scale.y, player->scale.z);
-    GraphU64_LimitVectorLength(&player->pos.x, 20000.0f);
+    Graphu64_LimitVectorLength(&player->pos.x, 20000.0f);
     TranslateMatrix(matrix, player->pos.x, player->pos.y, player->pos.z);
     SwapMatrixUpForward(matrix);
 }
@@ -111,7 +111,7 @@ void func_80207ABC_de(void *object, void *state) {
     }
     if (transitionAllowed != 0) {
         if (motionState->timer >= motionDefinition->openThreshold) {
-            Nav_RequestActorState(player, motionState, 1);
+            Actor_RequestActorState(player, motionState, 1);
         }
     } else {
         motionState->timer = 0.0f;
@@ -156,7 +156,7 @@ void func_80207BB8_de(void *object, void *state) {
         motionState->speed = motionState->speed + (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed >= D_800C1BA0_de) {
-        Nav_RequestActorState(player, motionState, 2);
+        Actor_RequestActorState(player, motionState, 2);
     }
 }
 
@@ -191,7 +191,7 @@ void func_80207C94_de(void *object, void *state) {
     }
     if (transitionAllowed != 0) {
         if (motionState->timer >= motionDefinition->closeThreshold) {
-            Nav_RequestActorState(player, motionState, 3);
+            Actor_RequestActorState(player, motionState, 3);
         }
     } else {
         motionState->timer = 0.0f;
@@ -236,20 +236,20 @@ void func_80207D90_de(void *object, void *state) {
         motionState->speed = motionState->speed - (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed <= 0.0f) {
-        Nav_RequestActorState(player, motionState, 0);
+        Actor_RequestActorState(player, motionState, 0);
     }
 }
 
 void func_80207E3C_de(struct Shared_Actor *actor, int *motionFlags) {
     actor->weaponFlags |= 0x2100;
     *motionFlags |= 0x10000;
-    Nav_RequestActorState(actor, motionFlags, 1);
+    Actor_RequestActorState(actor, motionFlags, 1);
 }
 
 void func_80207E74_de(struct Shared_Actor *actor, int *motionFlags) {
     actor->weaponFlags |= 0x2100;
     *motionFlags |= 0x20000;
-    Nav_RequestActorState(actor, motionFlags, 3);
+    Actor_RequestActorState(actor, motionFlags, 3);
 }
 
 void func_80207EAC_de(struct Shared_Actor *actor) {

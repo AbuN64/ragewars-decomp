@@ -21,5 +21,5 @@ const char D_80293534_CB0F8[21] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-const char D_blob_0bf5bb915a923121e978[21] = "Oct 13 1999\0" "14:57:39";
+const char g_buildDateTimeTextRev1[21] = "Oct 13 1999\0" "14:57:39";
 #endif

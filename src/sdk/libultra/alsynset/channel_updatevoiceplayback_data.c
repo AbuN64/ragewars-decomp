@@ -5,7 +5,7 @@
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "TYPES.H"
 
-s32 func_802B2620_de(void *soundPlayer) {
+s32 alSndpGetState(void *soundPlayer) {
     return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk40)))->unk28);
 }
 

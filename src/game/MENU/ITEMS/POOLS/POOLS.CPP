@@ -19,7 +19,7 @@ void func_80238EB8_de(void *);                               /* extern */
 void Gsky_SetGameplayMode(void *, s32);                         /* extern */
 void Gsky_ResetFadeState(void *);                            /* extern */
 void Gsky_InitializeMessageEntryPool(void *);                            /* extern */
-void GraphU64_IdentityMatrix(void *);                            /* extern */
+void Graphu64_IdentityMatrix(void *);                            /* extern */
 void Menu_InitMenuMessageList(void *);                    /* extern */
 
 
@@ -44,8 +44,8 @@ void Pools_InitializeGameplayCamera(GameplayCamera *arg0) {
     Floats *temp_v0_5;
 
     func_80238EB8_de(((void *)&((GameplayCamera *)arg0)->unk24));
-    GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->viewOrient);
-    GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->viewProjection);
+    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->viewOrient);
+    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->viewProjection);
     zero = 0.0f;
     temp_f21 = 1.0f;
     temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
@@ -53,7 +53,7 @@ void Pools_InitializeGameplayCamera(GameplayCamera *arg0) {
     temp_v0->unk4 = zero;
     arg0->orientation.x = zero;
     arg0->orientation.w = temp_f21;
-    GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->inverseViewOrient);
+    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->inverseViewOrient);
     arg0->viewWidth = (f32) D_800E28D0;
     arg0->viewHeight = (f32) D_800E28D4;
     arg0->unk518 = -1;
@@ -114,8 +114,8 @@ void Pools_InitializeGameplayCamera(GameplayCamera *arg0) {
         ((RacerViewport *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
     Menu_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
-    GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
-    GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
+    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
+    Graphu64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
     arg0->fadeEnabled = 0;
     arg0->monochrome = 0;
     arg0->kickStep = 0x32;
@@ -145,7 +145,7 @@ extern f32 D_800C32EC_de;
 extern char g_camerasText[];
 extern char D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 extern void Cache_ReleaseResource(s32, void *);
 extern void *Cache_AllocateResource(s32, s32, s32, char *);
 static inline void resetDraftList(DraftListA370 *list) {
@@ -185,12 +185,12 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     func_80255CA0_de(&owner->smallList, 0, 4);
     owner->empty = 1;
     func_8025E3F0_de(owner->parts);
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     if (owner->handle) {
         Cache_ReleaseResource(0, owner->handle);
         owner->handle = 0; owner->actors = 0; owner->count = 0;
     }
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     if (owner->smallHandle) {
         Cache_ReleaseResource(0, owner->smallHandle);
         owner->smallHandle = 0; owner->small = 0; owner->smallCount = 0;

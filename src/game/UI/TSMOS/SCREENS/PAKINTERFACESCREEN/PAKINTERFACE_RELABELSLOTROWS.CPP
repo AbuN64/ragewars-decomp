@@ -13,7 +13,7 @@
    own bytes show; us, us-rev1 and eu share 0x28B. */
 extern char D_80102B00[];
 extern s8 D_80102B0D[];
-extern struct ItemFrontendRelabelSlotRows *Frontend_FindWidgetByResourceId(void *, s32);
+extern struct ItemFrontendRelabelSlotRows *Node_FindWidgetByResourceId(void *, s32);
 extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct ItemFrontendRelabelSlotRows *SmpOverlay_GetSlotValue(void *, s32);
 void PAKInterface_RelabelSlotRows(s32 player) {
@@ -60,7 +60,7 @@ void PAKInterface_RelabelSlotRows(s32 player) {
 #endif
             break;
         }
-        item = Frontend_FindWidgetByResourceId(D_800E54A4->window, id);
+        item = Node_FindWidgetByResourceId(D_800E54A4->window, id);
         Widget_SetWidgetFlag100(item, 0);
         label = item->label;
         if (player != -1 && item == SmpOverlay_GetSlotValue(D_800E54A4->list, player)) {

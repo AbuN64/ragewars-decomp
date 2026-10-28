@@ -3,6 +3,6 @@
 
 #include "TYPES.H"
 
-s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex);
+s32 Note_FindNoteByName(void *name, s32 channel, s32 *noteIndex);
 
 #endif

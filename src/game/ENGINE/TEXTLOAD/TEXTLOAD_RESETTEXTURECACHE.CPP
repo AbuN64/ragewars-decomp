@@ -10,6 +10,6 @@ void TextLoad_ResetTextureCache(void) {
 
 
 /** Replace the global state word. */
-void TextLoad_SetTextureEffect(unsigned int value) {
+void Textload_SetTextureEffect(unsigned int value) {
     D_800CD894_de = value;
 }

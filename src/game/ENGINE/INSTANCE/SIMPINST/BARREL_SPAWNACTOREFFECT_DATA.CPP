@@ -97,10 +97,10 @@ void func_8024F618_de(StaticObject *staticObject) {
 }
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 Graphu64_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *object, float x, float y, float z);
 extern void SwapMatrixUpForward(void *object);
-extern void GraphU64_ConvertMatrixToFixed(void *arg0, void *arg1);
+extern void Graphu64_ConvertMatrixToFixed(void *arg0, void *arg1);
 
 
 void func_8024F634_de(void *arg0) {
@@ -115,13 +115,13 @@ void func_8024F634_de(void *arg0) {
 
     ScaleMatrixLocal(matrix, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale);
 
-    GraphU64_LimitVectorLength(&((StaticObject *)(o))->position.x, 20000.0f);
+    Graphu64_LimitVectorLength(&((StaticObject *)(o))->position.x, 20000.0f);
 
     TranslateMatrix((char *) matrix, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
 
     SwapMatrixUpForward(matrix);
 
-    GraphU64_ConvertMatrixToFixed(matrix, (D_800D297C << 6) + 0x68 + o);
+    Graphu64_ConvertMatrixToFixed(matrix, (D_800D297C << 6) + 0x68 + o);
 }
 
 extern s32 Cache_RequestWordCountedResource(s32, void **, s32, void *, s32);

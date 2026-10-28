@@ -16,7 +16,7 @@ extern void SetN64_SpawnModelEffect(s32, s32, s32, Triple, Triple, s32, f32);
 
 extern f32 Region_GetPolygonHeight(void *, f32, f32);
 
-extern f32 GraphU64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 Graphu64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
@@ -44,7 +44,7 @@ void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *position) {
         }
         lower = Region_GetPolygonHeight(triangle,
             position->x, position->z);
-        upper = GraphU64_GetTrianglePlaneHeight(triangle,
+        upper = Graphu64_GetTrianglePlaneHeight(triangle,
             position->x, position->z);
         value = position->y;
         if (lower <= value && value <= upper) {

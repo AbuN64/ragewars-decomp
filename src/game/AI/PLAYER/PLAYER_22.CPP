@@ -12,7 +12,7 @@
    (cleared otherwise), the weapon sways on three sine waves of the state time at 0x658, a jump input
    0x10 in shallow enough ground that allows it releases the player into mode 5, and otherwise the
    animation at 0x86C follows the vertical speed and a moving player plays the tuning's step sound
-   whenever the step timer at 0x11C4 passes 11.25. Adapted from func_80224F5C_de with the jump check as
+   whenever the step timer at 0x11C4 passes 11.25. Adapted from Player_UpdateFloatingState with the jump check as
    an inline function and the D_80104418 flags read as an array. */
 
 
@@ -25,13 +25,13 @@
 
 
 extern s32 D_80104418[];
-extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224C4C_de *, char *);
+extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void Player_UpdateViewAngles(SharedPlayer *, BodyPlayerUpdateWadingState *, char *);
 
 extern void func_80218464_de(char *);
 extern s32 SoundElement_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
 
-static inline s32 try_jump(SharedPlayer *player, Body_func_80224C4C_de *body) {
+static inline s32 try_jump(SharedPlayer *player, BodyPlayerUpdateWadingState *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
         Player_SetPlayerState(player, body, 5);
@@ -40,7 +40,7 @@ static inline s32 try_jump(SharedPlayer *player, Body_func_80224C4C_de *body) {
     return 0;
 }
 
-void func_80224C4C_de(SharedPlayer *player, Body_func_80224C4C_de *body) {
+void Player_UpdateWadingState(SharedPlayer *player, BodyPlayerUpdateWadingState *body) {
     s32 idle;
 
     if (player->views5E8.view6C8_57.speed == 0.0f) {
@@ -48,7 +48,7 @@ void func_80224C4C_de(SharedPlayer *player, Body_func_80224C4C_de *body) {
     } else {
         player->views5E8.view650_18.mode = 0xA;
     }
-    GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
+    Graphu64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
     Player_UpdateViewAngles(player, body, &D_800CE7E4);
     func_802233F0_de(player, body, &D_800CE82C);
     if (!(body->flags & 0x2000)) {

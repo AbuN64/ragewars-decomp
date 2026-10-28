@@ -60,7 +60,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 
     D_800E3590->unk216 = 1;
     D_800E3590->unk220 = 4;
-    D_800E3590->item492 = Frontend_FindWidgetByResourceId(arg0, slotRes(492));
+    D_800E3590->item492 = Node_FindWidgetByResourceId(arg0, slotRes(492));
     D_800E3590->item492->x = D_800E3590->item492->x - D_800E3590->item492->w;
     shift = D_800E3590->item492->w;
     if (shift < 0) {
@@ -70,7 +70,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     adjust = D_800E3590->item492->w - ((shift >> 2) << 2);
     D_800E3590->item492->x = D_800E3590->item492->x + adjust;
 
-    D_800E3590->item491 = Frontend_FindWidgetByResourceId(arg0, slotRes(491));
+    D_800E3590->item491 = Node_FindWidgetByResourceId(arg0, slotRes(491));
     D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
     shift = D_800E3590->item491->w;
     if (shift < 0) {
@@ -80,33 +80,33 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     adjust = D_800E3590->item491->w - ((shift >> 2) << 2);
     D_800E3590->item491->x = D_800E3590->item491->x - adjust;
 
-    Frontend_FindWidgetByResourceId(arg0, slotRes(488))->alpha = 110;
+    Node_FindWidgetByResourceId(arg0, slotRes(488))->alpha = 110;
     D_800E3590->lookup486 = SmpFlicker_CreateFlickerWidget((s32)slotRes(486), 255);
 
-    item = Frontend_FindWidgetByResourceId(arg0, slotRes(486));
+    item = Node_FindWidgetByResourceId(arg0, slotRes(486));
     D_800E3590->item486 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
-    item = Frontend_FindWidgetByResourceId(arg0, slotRes(563));
+    item = Node_FindWidgetByResourceId(arg0, slotRes(563));
     D_800E3590->item563 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
-    Frontend_FindWidgetByResourceId(arg0, slotRes(496))->alpha = 110;
-    Frontend_FindWidgetByResourceId(arg0, slotRes(497))->alpha = 120;
+    Node_FindWidgetByResourceId(arg0, slotRes(496))->alpha = 110;
+    Node_FindWidgetByResourceId(arg0, slotRes(497))->alpha = 120;
 
-    item = Frontend_FindWidgetByResourceId(arg0, slotRes(512));
+    item = Node_FindWidgetByResourceId(arg0, slotRes(512));
     D_800E3590->item512 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->style = 0;
     D_800E3590->unk248 = 27;
-    item = Frontend_FindWidgetByResourceId(arg0, slotRes(511));
+    item = Node_FindWidgetByResourceId(arg0, slotRes(511));
     D_800E3590->item511 = item;
     Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->item511->alpha = 0;
     D_800E3590->unk260 = 25;
-    item = Frontend_FindWidgetByResourceId(arg0, slotRes(510));
+    item = Node_FindWidgetByResourceId(arg0, slotRes(510));
     D_800E3590->item510 = item;
 
     D_800E3590->player = 0;
@@ -114,7 +114,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     Focus_AdvanceActiveSlot(&D_800E3590->unk268);
     Focus_RefreshProfileStatistics();
     Focus_ShowUnlockedEntries(D_800E3590->style);
-    Frontend_FindWidgetByResourceId(arg0, slotRes(493))->alpha = 110;
+    Node_FindWidgetByResourceId(arg0, slotRes(493))->alpha = 110;
     D_800E3590->focus = 0;
     return 0;
 }

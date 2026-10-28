@@ -78,7 +78,7 @@ extern CNavData D_8013B364;
 extern f32 Scaled_GetScaledAttackRange(AiController *controller);
 extern f32 Scaled_GetScaledAggression(AiController *controller);
 extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
-extern s32 Nav_GetRouteRelation(void *table, s32 from, s32 to);
+extern s32 Route_GetRouteRelation(void *table, s32 from, s32 to);
 
 /* Scores one attack candidate of a computer player. Its weighted distance (candidateDistances) is compared
    with a near, middle or far cutoff picked by the angle off the heading (cutoffs scale with the difficulty
@@ -120,7 +120,7 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;
         if (target->computer == 0)
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;
-        if (Nav_GetRouteRelation(&D_8013B364, brain->current, target->controller->current)) return 1;
+        if (Route_GetRouteRelation(&D_8013B364, brain->current, target->controller->current)) return 1;
     }
     if (brain->lastAttacker != target || brain->attackedTimer < 451) return 0;
     if (brain->candidateDistances[index] < nearLimit * 2) {

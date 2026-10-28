@@ -11,8 +11,8 @@
 /* Updates a player menu state from controller status, available saves, and the current menu phase. */
 
 
-extern s32 Pak_GetStatus(s32);
-extern s32 Pak_FindNoteByName(void *, s32, s32 *);
+extern s32 Note_GetStatus(s32);
+extern s32 Note_FindNoteByName(void *, s32, s32 *);
 extern s32 PAKInterface_ReadRecordsNote(s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 void PAKInterface_ResolvePlayerPakState(s32 player)
@@ -20,7 +20,7 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
   s32 random;
   s32 done = 1;
   s32 result;
-  s32 status = Pak_GetStatus(player);
+  s32 status = Note_GetStatus(player);
   short one = done;
   do
   {
@@ -41,9 +41,9 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
       }
       else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        if (Pak_FindNoteByName(((D_800E25A4)[g_languageIndex]), player, &result) == one)
+        if (Note_FindNoteByName(((D_800E25A4)[g_languageIndex]), player, &result) == one)
 #else
-        if (Pak_FindNoteByName((D_800D36D4), player, &result) == one)
+        if (Note_FindNoteByName((D_800D36D4), player, &result) == one)
 #endif
       {
         if (PAKInterface_ReadRecordsNote(player, result) == one)
@@ -97,7 +97,7 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
           case 1:
 
           case 7:
-            random = GraphU64_NextRandom();
+            random = Graphu64_NextRandom();
             D_800E54A4->players[player].state = 15;
             D_800E54A4->players[player].profile = (random % 9999999) + 1;
             break;

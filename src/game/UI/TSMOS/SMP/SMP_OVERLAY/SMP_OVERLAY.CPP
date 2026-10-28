@@ -34,7 +34,7 @@
 
 extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
 
-/* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Frontend_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
+/* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Node_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
 
@@ -87,7 +87,7 @@ void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
         if (context->shown[index] != 0) {
             Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
-        node = (NodeMenuShowSlotById *)Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
+        node = (NodeMenuShowSlotById *)Node_FindWidgetByResourceId(context->root, id & 0xFFFF);
         Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
@@ -144,7 +144,7 @@ void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
         if (context->shown[index] != 0) {
             Menu_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
-        node = (NodeMenuShowSlotById *)Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
+        node = (NodeMenuShowSlotById *)Node_FindWidgetByResourceId(context->root, id & 0xFFFF);
         Menu_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
@@ -420,7 +420,7 @@ extern void Tsmos_ActivateControllerState(void);
 
 extern s32 XStdio_FormatBuffer(void *, const char *, ...);
 
-extern s32 Pak_FindNoteByName(s32, s32, s32 *);
+extern s32 Note_FindNoteByName(s32, s32, s32 *);
 
 extern s32 PAKInterface_CheckRecordsNoteCapacity(s32,u32 *);
 
@@ -450,7 +450,7 @@ extern s32 D_800E3514;
 /* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
    one. */
 
-/* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
+/* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
@@ -517,13 +517,13 @@ void SmpOverlay_RefreshPakDialog(void) {
         SmpOverlay_ProbePakDialogPorts();
         if (D_800E3518->ready == 1) {
             Pak_ProbeStatus(D_800DF4C0);
-            temp_v0_2 = Pak_GetStatus(D_800DF4C0);
+            temp_v0_2 = Note_GetStatus(D_800DF4C0);
             switch (temp_v0_2) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if ((Pak_FindNoteByName(((D_800E25A4)[g_languageIndex]), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Note_FindNoteByName(((D_800E25A4)[g_languageIndex]), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
 #else
-                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Note_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
 #endif
                     var_s1 = hasRoom > 0U;
                 }
@@ -589,7 +589,7 @@ void SmpOverlay_RefreshPakDialog(void) {
         SmpOverlay_AdvancePakDialogPort();
         return;
     }
-    temp_s0 = Frontend_FindWidgetByResourceId(D_800E3518->root, SLOT_RESOURCE_968);
+    temp_s0 = Node_FindWidgetByResourceId(D_800E3518->root, SLOT_RESOURCE_968);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     XStdio_FormatBuffer(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
 #else
@@ -621,7 +621,7 @@ void SmpOverlay_ProbePakDialogPorts(void) {
     D_800E3518->ready = 0;
     for (port = 0; port < 4; port++) {
         Pak_ProbeStatus(port);
-        switch (Pak_GetStatus(port)) {
+        switch (Note_GetStatus(port)) {
         case 0:
             D_800E3518->ready = 1;
             return;
@@ -652,38 +652,38 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     D_800E3518 = Cache_AllocateMemory(0x2C);
     D_800E3518->root = parent;
 #if defined(VERSION_DE)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3BE);
+    window = Node_FindWidgetByResourceId(parent, 0x3BE);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C3);
+    window = Node_FindWidgetByResourceId(parent, 0x3C3);
 #elif defined(VERSION_EU_X)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3CC);
+    window = Node_FindWidgetByResourceId(parent, 0x3CC);
 #endif
     D_800E3518->main = window;
     Frontend_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C3);
+    window = Node_FindWidgetByResourceId(parent, 0x3C3);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C9);
+    window = Node_FindWidgetByResourceId(parent, 0x3C9);
 #elif defined(VERSION_EU_X)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3CD);
+    window = Node_FindWidgetByResourceId(parent, 0x3CD);
 #endif
     D_800E3518->absent = window;
     Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3BD);
+    window = Node_FindWidgetByResourceId(parent, 0x3BD);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C4);
+    window = Node_FindWidgetByResourceId(parent, 0x3C4);
 #elif defined(VERSION_EU_X)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C6);
+    window = Node_FindWidgetByResourceId(parent, 0x3C6);
 #endif
     D_800E3518->unavailable = window;
     Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3BF);
+    window = Node_FindWidgetByResourceId(parent, 0x3BF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C5);
+    window = Node_FindWidgetByResourceId(parent, 0x3C5);
 #elif defined(VERSION_EU_X)
-    window = Frontend_FindWidgetByResourceId(parent, 0x3C8);
+    window = Node_FindWidgetByResourceId(parent, 0x3C8);
 #endif
     D_800E3518->prompt = window;
     Frontend_SetWidgetFlag08(window, 0);

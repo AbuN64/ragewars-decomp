@@ -289,11 +289,11 @@ void Frontend_LoadLanguageStringsIfAny(s32 languageIndex) {
     }
 }
 
-void *Frontend_GetScreenData(s32 index) {
+void *Node_GetScreenData(s32 index) {
     return g_frontendResourceState.Screen[index].data;
 }
 
-s32 Frontend_IsValidScreenIndex(s32 index) {
+s32 Node_IsValidScreenIndex(s32 index) {
     if (index >= 0 && index < g_frontendResourceState.NScreens) {
         return 1;
     }

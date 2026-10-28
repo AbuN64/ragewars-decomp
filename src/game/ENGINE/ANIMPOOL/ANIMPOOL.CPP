@@ -20,8 +20,8 @@ extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 struct Shared_World;
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 extern s32 Scene_GetModelIdAtIndex(void *, s32);
-extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
-extern void func_8024B2D0_de(SceneEffect *);
+extern void Gobjinst_InitializeActor(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void Gobjinst_DispatchActorTypeUpdate(SceneEffect *);
 static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     SceneEffect *effect;
     if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
@@ -60,8 +60,8 @@ static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 var
     if (effect == 0) {
         return 0;
     }
-    func_802466A0_de(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
-    func_8024B2D0_de(effect);
+    Gobjinst_InitializeActor(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    Gobjinst_DispatchActorTypeUpdate(effect);
     return effect;
 }
 SceneEffect *Animpool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,

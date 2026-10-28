@@ -25,7 +25,7 @@ extern char D_801462C8[];
 
 extern char D_801468A0[];
 
-extern void func_80253908_de(s32);
+extern void Cache_DrainAndCompactResources(s32);
 
 
 extern void Player_AllocPlayerList(CPlayerPool *, s32);
@@ -86,7 +86,7 @@ void Ovlgame_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active
     func_80255CA0_de(&pool->m_FreeList, 0x16DC, 0x16E0);
     func_80255CA0_de(&pool->m_ActiveList, 0x16DC, 0x16E0);
     Control_SetControllerMode(0);
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     global = D_801462C8;
 
     if (pool->m_pmePlayers != 0) {
@@ -330,6 +330,6 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB
 void Player_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Player_ResetPlayerForRound(actor, character, 1);
-    Nav_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
+    Actor_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
     Player_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
 }

@@ -12,12 +12,12 @@ struct ContactNode {
 };
 extern ContactNode *D_80145060;
 static inline void dispatchEffect(void *object, void *source, s32 effect, CVector3 position, ContactEffectStyle style) {
-    if (D_800CC130[effect].handler != 0) {
-        D_800CC130[effect].handler(object, source, effect, position, style);
+    if (g_effectCallbackFlags[effect].handler != 0) {
+        g_effectCallbackFlags[effect].handler(object, source, effect, position, style);
     }
 }
 /* Delivers a contact effect to objects: when the scene is in mode 4 or the effect's flags allow it, the effect's
- * handler (D_800CC130 table, flags in the second word: 2 = broadcast, 8 = scene object array) is called either
+ * handler (g_effectCallbackFlags table, flags in the second word: 2 = broadcast, 8 = scene object array) is called either
  * on the target alone or on every other object -- the scene's object array or its registered list
  * and then the player list chained at 0x16E0 -- skipping the target.
  * Byte-exact for us-rev1 (index-addressed actor loop). */
@@ -29,14 +29,14 @@ void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
     void *other;
     ContactNode *node;
     Shared_World *world = &g_world;
-    if (world->mode != 4 && (D_800CC130[effect].flags & 0x10) == 0) {
+    if (world->mode != 4 && (g_effectCallbackFlags[effect].flags & 0x10) == 0) {
         return;
     }
-    if ((D_800CC130[effect].flags & 2) == 0) {
+    if ((g_effectCallbackFlags[effect].flags & 2) == 0) {
         dispatchEffect(target, source, effect, position, style);
         return;
     }
-    if ((D_800CC130[effect].flags & 8) != 0) {
+    if ((g_effectCallbackFlags[effect].flags & 8) != 0) {
         count = world->actorCount;
         objects = world->actors;
         for (i = 0; i < count; i++) {

@@ -202,7 +202,7 @@ extern float D_800C70F0;
 
 
 
-extern s32 GraphU64_NextRandom(void);
+extern s32 Graphu64_NextRandom(void);
 
 extern s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *, s32, s32 *, s32 *);
 #endif

@@ -15,7 +15,7 @@
 extern char D_8011D8D0;
 extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
-extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(Triple *);
+extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(Triple *);
 #include "particle/8027A0F4_8.H"
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
@@ -44,7 +44,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                 attachmentNodeIndex = effectBinding->unk4;
                 node = attachmentNodes->bytes + attachmentNodeIndex * attachmentNodes->stride;
                 attachmentEffectFlags = (*node == 5) * 2;
-                GraphU64_TransformPoint(&attachmentMatrices[attachmentNodeIndex], effectAttachments, &pos);
+                Graphu64_TransformPoint(&attachmentMatrices[attachmentNodeIndex], effectAttachments, &pos);
                 GraphU64_ScaleVector(&pos, &pos, 0.000015258789f);
                 particleLifeRange = 0;
                 attachmentMask = effectBinding->unk0;
@@ -67,7 +67,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                     actorDefinitionKind = *actor->unk18;
                     if (((actorDefinitionKind == 1) && (actor->unk1A4 == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
                         InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
-                        rotation = GraphU64_BuildDirectionQuaternion(&actor->unk254);
+                        rotation = Graphu64_BuildDirectionQuaternion(&actor->unk254);
                         zero.x = 0;
                         zero.y = 0;
                         zero.z = 0;
@@ -84,9 +84,9 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                             D_800C4960_eu
 #endif
                         ) {
-                            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                         }
-                        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
+                        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                     }
                     break;
                 case 0x80:

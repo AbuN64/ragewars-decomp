@@ -13,7 +13,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
-extern void func_8022B144_de(void *, f32 *);
+extern void Player_GetPlayerViewTranslation(void *, f32 *);
 
 extern void Nav_ResetPlayerState(s32 *state);
 
@@ -51,11 +51,11 @@ void Scaled_UpdateTargetPitch(Brain *object) {
     PitchPlayer *target;
     if (brain->target) {
         origin = brain->player->position;
-        func_8022B144_de(brain->player, &delta.x);
+        Player_GetPlayerViewTranslation(brain->player, &delta.x);
         ownHeight = delta.y - brain->player->position.y;
         target = brain->target->player;
         if (target->transformed) {
-            func_8022B144_de(target, &delta.x);
+            Player_GetPlayerViewTranslation(target, &delta.x);
             targetHeight = delta.y - target->position.y;
         } else targetHeight = target->model->height - target->position.y;
         targetHeight *= D_800C1C74_de;
@@ -65,12 +65,12 @@ void Scaled_UpdateTargetPitch(Brain *object) {
         delta.y -= origin.y;
         delta.z -= origin.z;
         correction = targetHeight - ownHeight;
-        brain->distance = Math_Sqrtf(delta.x*delta.x + delta.y*delta.y + delta.z*delta.z);
+        brain->distance = Gu_Sqrtf(delta.x*delta.x + delta.y*delta.y + delta.z*delta.z);
         vertical = delta.y;
         delta.y = 0.0f;
         vertical += correction;
         zero = delta.y;
-        horizontal = Math_Sqrtf(delta.x*delta.x + delta.z*delta.z);
+        horizontal = Gu_Sqrtf(delta.x*delta.x + delta.z*delta.z);
         if (horizontal == zero) {
             if (vertical < zero) brain->angle = D_800C1C7C_de;
             else brain->angle = D_800C1C80_de;
@@ -404,7 +404,7 @@ f32 Scaled_UpdateDifficultyAimJitter(void *aiController) {
         break;
     }
     aim = brain->aim;
-    if (aim < GraphU64_RandomBetween(-aimLimit, aimLimit)) {
+    if (aim < Graphu64_RandomBetween(-aimLimit, aimLimit)) {
         aim += D_800C1CC0_de;
     } else {
         aim -= D_800C1CC4_de;

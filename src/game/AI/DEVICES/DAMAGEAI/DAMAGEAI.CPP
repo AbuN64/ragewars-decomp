@@ -73,7 +73,7 @@ void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Nav_RequestActorState(obj, health, kind);
+            Actor_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -147,7 +147,7 @@ void func_802050C0_eu(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Nav_RequestActorState(obj, health, kind);
+            Actor_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -198,7 +198,7 @@ void func_802050A0_de(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Nav_RequestActorState(obj, health, kind);
+            Actor_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -227,9 +227,9 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 
 void func_8020524C_de(LevelActor *actor, void *requestContext) {
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
-        Nav_RequestActorState(actor, requestContext, 1);
+        Actor_RequestActorState(actor, requestContext, 1);
     } else {
-        Nav_RequestActorState(actor, requestContext, 0);
+        Actor_RequestActorState(actor, requestContext, 0);
         actor->flags |= 0x10000;
     }
 }

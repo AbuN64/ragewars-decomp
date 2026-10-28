@@ -22,9 +22,9 @@
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern void func_80262480_de(void *);
-extern s32 func_80246A08_de(void *, s32, s32);
+extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
 
-void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBank, s32 extra) {
+void Gobjinst_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directoryBank, s32 extra) {
     s32 *animationMetadata;
     void **resource1;
     void **resource2;
@@ -39,7 +39,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
     ((LevelActor *)actorStorage)->resourceWindow = 0;
     ((LevelActor *)actorStorage)->flags &= 0xFFFBFFFF;
     key = SetN64_GetDirectoryEntry(modelDirectory, directoryBank, (u16)((LevelActor *)actorStorage)->modelIndex);
-    resource1 = Cache_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C389C_de, 1);
+    resource1 = Cache_RequestResource(0, key, key, 0x18, 0, 0, 0, &g_gameObjectAnimIndexText, 1);
     if (resource1 != 0) {
         entry = *resource1;
         ((LevelActor *)actorStorage)->animationKey = SetN64_GetDirectoryEntry(entry, key, 1);
@@ -53,7 +53,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
         ((LevelActor *)actorStorage)->resourceKey = SetN64_GetDirectoryEntry(entry, key, 2);
         resource2 = Cache_RequestResource(0, ((LevelActor *)actorStorage)->resource,
                                  ((LevelActor *)actorStorage)->resource, ((LevelActor *)actorStorage)->resourceFlags,
-                                 0, 0, 0, &D_800C38C4_de, 1);
+                                 0, 0, 0, &g_gameObjectResetAnimInfoText, 1);
         if (resource2 != 0) {
             node = *resource2;
             temp = SetN64_GetPackSection(node, 0);
@@ -64,7 +64,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;
             ((LevelActor *)actorStorage)->flags |= 0x40000;
             if (extra > 0) {
-                extra = func_80246A08_de(actorStorage, extra, -1);
+                extra = Gobjinst_ChooseAnimationVariant(actorStorage, extra, -1);
             } else {
                 extra = -extra;
             }
@@ -95,7 +95,7 @@ s32 InstHdr_UsesGroundRotation(void *);
 s32 InstHdr_GetActorMotionState(void *);
 
  /* extern */
-void GraphU64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, f32 *);
+void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, f32 *);
 
  /* extern */
 
@@ -177,7 +177,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
             if (rotationBlend > D_800C3930_de[0]) {
                 rotationBlend = D_800C3930_de[0];
             }
-            GraphU64_InterpolateQuaternionWithLinearFallback(rotation, rotationBlend, rotation, &vec);
+            Graphu64_InterpolateQuaternionWithLinearFallback(rotation, rotationBlend, rotation, &vec);
         }
     }
 }

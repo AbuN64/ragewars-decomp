@@ -63,7 +63,7 @@ void PAKInterface_UpdatePlayerControlRows(s32 player) {
         id = 0x29F + 4;
 #endif
     row_done:
-        item = Frontend_FindWidgetByResourceId(D_800E54A4->window, id);
+        item = Node_FindWidgetByResourceId(D_800E54A4->window, id);
         if (Control_IsControllerConnected(i) == 1) {
             Widget_SetWidgetFlag100(item, 0);
         } else {

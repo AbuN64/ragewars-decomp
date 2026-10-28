@@ -19,7 +19,7 @@ s32 Frontend_ClearPage67ModeFlag(void) {
    1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
    state 2 it calls MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects
    at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24
-   of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, and calls
+   of D_8011FE88, restarts Cache_SetResourceActivityState when func_8025477C_de reports it idle, and calls
    func_8025E384_de and Stage_StartConfiguredMatch. Returns zero. */
 
 extern s32 Frontend_GetMenuImageState(void *);
@@ -28,7 +28,7 @@ extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
-extern void func_8025476C_de(s32);
+extern void Cache_SetResourceActivityState(s32);
 extern void func_8025E384_de(void);
 extern void Stage_StartConfiguredMatch(void);
 
@@ -50,7 +50,7 @@ s32 Frontend_UpdatePage67Exit(s32 unused0, s32 unused1, s32 event) {
         Ovlgame_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
         Scene_LoadLevelResources(&g_world, 0x24, 0);
         if (func_8025477C_de() == 0) {
-            func_8025476C_de(1);
+            Cache_SetResourceActivityState(1);
         }
         func_8025E384_de();
         Stage_StartConfiguredMatch();

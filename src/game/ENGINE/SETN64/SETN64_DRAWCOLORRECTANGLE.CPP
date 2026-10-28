@@ -53,7 +53,7 @@ void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
     s32 selectionValues;
 
     selectionValues = target;
-    if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
+    if (Scene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;

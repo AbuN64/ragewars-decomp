@@ -108,7 +108,7 @@ void func_8022D428_de(void *player) {
     Shared_ActorView *actor = player;
     if (actor->unk_0x0850 == 0) {
         if ((actor->unk_0x0664 & 0x8000) == 0) {
-            GraphU64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
+            Graphu64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
         if (actor->actionTimer > D_800C2DB8_de) {
             Player_UpdateRunEndPlayer(player);
@@ -161,7 +161,7 @@ void func_8022D57C_de(void *player) {
         return;
     }
     if ((actor->unk_0x0664 & 0x8000) == 0) {
-        GraphU64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
+        Graphu64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
     }
     value = actor->actionTimer;
     if (D_800C2DC4_de < value) {

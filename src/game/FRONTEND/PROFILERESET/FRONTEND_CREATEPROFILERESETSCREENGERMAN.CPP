@@ -21,7 +21,7 @@ extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
-extern void func_8025476C_de(u32);
+extern void Cache_SetResourceActivityState(u32);
 extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Tsmos_SetIdleTimer(f32);
@@ -38,7 +38,7 @@ s32 Frontend_CreateProfileResetScreenGerman(MenuWidget *tree) {
     Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
-        func_8025476C_de(1);
+        Cache_SetResourceActivityState(1);
     }
     Frontend_RequestScreenMode(0);
     i = 7;
@@ -49,7 +49,7 @@ s32 Frontend_CreateProfileResetScreenGerman(MenuWidget *tree) {
         i--;
         record--;
     } while (i >= 0);
-    D_800E5950->widget = Frontend_FindWidgetByResourceId(tree, 0x391);
+    D_800E5950->widget = Node_FindWidgetByResourceId(tree, 0x391);
     D_800E5950->phase = 0;
     settings = &D_801462C8;
     settings->laps = 10;

@@ -22,7 +22,7 @@ extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 
 extern void SetN64_CommitSessionInputs(void *arg0);
 
-extern void func_8023EE00_de(void);
+extern void CCollision_Initialize(void);
 
 
 extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
@@ -68,7 +68,7 @@ void SetN64_ResumeSelectedSession(GameSession *arg0) {
     D_801462C8.counters.first = 0;
     D_800CD730 = 0;
     SetN64_CommitSessionInputs(arg0);
-    func_8023EE00_de();
+    CCollision_Initialize();
 #if defined(VERSION_US_REV1)
     TextLoad_ResetArtsendTextureState();
 #endif
@@ -110,7 +110,7 @@ void SetN64_StartRound(GameSession *session) {
     if (Control_IsSnapshotActive() != 0) {
         Control_RestoreActorSnapshot();
     }
-    func_8023EE00_de();
+    CCollision_Initialize();
     resetRoundExtra();
     clearRoundExtra();
     D_800CD744_de = roundTimerConstant();

@@ -42,7 +42,7 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Player_ReleaseObjectHandles(s32 arg0);
 
-void func_8022CF38_de(void *player, LevelActor *actor) {
+void Player_AbsorbImpact(void *player, LevelActor *actor) {
     f32 value;
     f32 minimum;
     ((Shared_ActorView *)player)->forwardSpeed *= D_800C2D94_de;
@@ -75,7 +75,7 @@ void func_8022CF38_de(void *player, LevelActor *actor) {
 
 
 
-void func_8022D010_de(void *actorState, void *levelActor) {
+void Player_DampMotion(void *actorState, void *levelActor) {
     Shared_ActorView *actor = actorState;
     LevelActor *other = levelActor;
     actor->forwardSpeed = actor->forwardSpeed * (D_800C7E90);
@@ -83,7 +83,7 @@ void func_8022D010_de(void *actorState, void *levelActor) {
     other->position1.y = other->position1.y * (D_800C7E90);
 }
 
-void func_8022D040_de(void *playerState, LevelActor *actor) {
+void Player_UpdateFloatPose(void *playerState, LevelActor *actor) {
     Player *player;
     s32 busy;
     f32 x;
@@ -117,7 +117,7 @@ void func_8022D040_de(void *playerState, LevelActor *actor) {
     }
 }
 
-void func_8022D164_de(void *motionPlayerState, LevelActor *actor)
+void Player_ResetMovementInput(void *motionPlayerState, LevelActor *actor)
 {
   f32 new_var3;
   f32 *new_var;
@@ -133,7 +133,7 @@ void func_8022D164_de(void *motionPlayerState, LevelActor *actor)
   actor->position1.z = 0;
 }
 
-void func_8022D188_de(void *unused, void *object) {
+void Player_ResetObjectVelocity(void *unused, void *object) {
     LevelActor *actor = object;
     actor->position1.x = 0.0f;
     actor->position1.y = 0.0f;
@@ -148,7 +148,7 @@ void func_8022D198_de(void) {
 void func_8022D1A0_de(void) {
 }
 
-void func_8022D1A8_de(void *aimPlayerState) {
+void Player_AimPreviousPositionAtReset(void *aimPlayerState) {
     CVector3 vector;
     CVector3 *weaponAimPositionPtr;
 
@@ -162,7 +162,7 @@ void func_8022D1A8_de(void *aimPlayerState) {
 void func_8022D20C_de(void) {
 }
 
-void func_8022D214_de(void *widget) {
+void Player_ResetStunAndReleaseHandles(void *widget) {
     LevelActor *actor = widget;
     Shared_ActorView *player = widget;
     actor->flags &= 0xFF7FFFFF;
@@ -176,7 +176,7 @@ void func_8022D254_de(void) {
 }
 
 /** Reset two object fields and replace the control word's mode bit. */
-void func_8022D25C_de(void *actorState) {
+void Player_ResetStunFlags(void *actorState) {
     Shared_ActorView *actor = actorState;
     actor->flags &= 0xFF7FFFFF;
     actor->stun = 0;

@@ -44,7 +44,7 @@ void SetN64_InitFrameRing(RenderState *state) {
         Items_ResetGameOptions(&D_801462C8);
     }
     i = 0;
-    func_80244D70_de();
+    CCinema_ResetSequenceContext();
     Ovlgame_InitParticleQuad();
     Ovlgame_InitializeRenderDirection(&state->settings);
     count = D_800DE850;
@@ -100,7 +100,7 @@ extern void Libultra_SetDebugLinkCallback(void *segment);
 extern void osViBlack(s32 active);
 extern void Items_ResetPlayers(void *players);
 extern void Ovlgame_ResetMenuPool(void *menu);
-extern void func_8023EE00_de(void);
+extern void CCollision_Initialize(void);
 extern s32 Defs_ReadResourceWord(s32 size);
 extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
 extern void Ovlgame_InitializeControllerSession(void);
@@ -120,7 +120,7 @@ static inline CGameStatus *gameStatus(void) {
 void SetN64_RunGameLoop(GameSession *session) {
     u32 i;
     s16 *msg;
-    AudioMgr_InitHeap();
+    Audiomgr_InitHeap();
 #if defined(VERSION_EU)
     func_802BA5F0_eu(0xFE);
 #else
@@ -167,7 +167,7 @@ void SetN64_RunGameLoop(GameSession *session) {
     }
     Items_ResetPlayers(session->players);
     Ovlgame_ResetMenuPool(session->menu);
-    func_8023EE00_de();
+    CCollision_Initialize();
     session->resource = Defs_ReadResourceWord(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
     Ovlgame_InitializePlayerPool(session->menu, 0, 0);

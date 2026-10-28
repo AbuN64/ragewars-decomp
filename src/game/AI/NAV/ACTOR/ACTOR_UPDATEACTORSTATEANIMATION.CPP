@@ -10,7 +10,7 @@
 extern s32 Defs_IsAddressInCodeRanges(StateCallback);
 extern s32 Defs_IsAddressInStaticRanges(u32);
 extern void *Gobjinst_ChooseAvailableAnimationKind(void *, void *, s32);
-extern s32 func_80246A08_de(void *, s32, s32);
+extern s32 Gobjinst_ChooseAnimationVariant(void *, s32, s32);
 
 
 void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
@@ -36,7 +36,7 @@ void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
                 }
                 if (callback != 0) {
                     if (callback != (StateCallback)-1) {
-                        dst->state_result = func_80246A08_de(src, (s32)callback, dst->state_result);
+                        dst->state_result = Gobjinst_ChooseAnimationVariant(src, (s32)callback, dst->state_result);
                         dst->result = (s16)callback;
                         if (src->current_state == dst->state_result) {
                             src->limit = 0.0f;
@@ -77,7 +77,7 @@ void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
             factor = dst->scale * dst->entry_scale;
         }
         D_800D2988 *= factor;
-        func_8024B6F4_de(src, dst->state_result, (dst->entry_flags >> 5) & 1);
+        Gobjinst_RequestAnimationIndex(src, dst->state_result, (dst->entry_flags >> 5) & 1);
         if ((dst->state_result != -1) && (src->previous_state != dst->state_result)) {
             dst->count = 0;
             dst->flags &= ~1U;
@@ -93,7 +93,7 @@ void Actor_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
 #include "COMMON/WORLD.H"
 extern void Barrel_StopActorLoopingSound(void *, void *);
 
-s32 Nav_RequestActorState(void *actor, void *stateController, s32 action) {
+s32 Actor_RequestActorState(void *actor, void *stateController, s32 action) {
     struct ActorStateTable *node;
     StateEntry *entry;
     StateEntry *scan;

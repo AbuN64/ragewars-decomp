@@ -52,7 +52,7 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     }
     Tsmos_ActivateControllerState();
     if ((D_801462C8.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {
-        Widget_SetWidgetFlag100((s32)Frontend_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
+        Widget_SetWidgetFlag100((s32)Node_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
     }
     D_8011FAC0.clockPaused = 1;
     return 0;

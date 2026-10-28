@@ -20,7 +20,7 @@
 extern void Node_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u32 column, u32 row);
 
 
-/* Allocates and zeroes a 0x60-byte record, copies the header of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through Node_ReplaceWidgetLinks.
+/* Allocates and zeroes a 0x60-byte record, copies the header of the record Node_FindWidgetByResourceId finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through Node_ReplaceWidgetLinks.
    Adapted from SmpSlider_CreateSliderWidget with the record size, tag 0xB, the byte fields, the cell table and the Node_ReplaceWidgetLinks registration changed. */
 
 
@@ -36,7 +36,7 @@ extern void *Cache_AllocateMemory(s32);
 
 extern void Node_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
 
-/* Looks up the entry with the given identifier among the list Frontend_GetScreenData returns for what GetMenuScreenOwner returns, through Frontend_FindWidgetByResourceId, and stores two words into the eight-byte cell at the given row and column of its cell table at 0x44, whose row width is the byte at 0x4B.
+/* Looks up the entry with the given identifier among the list Node_GetScreenData returns for what GetMenuScreenOwner returns, through Node_FindWidgetByResourceId, and stores two words into the eight-byte cell at the given row and column of its cell table at 0x44, whose row width is the byte at 0x4B.
    Adapted from Node_SetGridBackgroundColors with the three byte stores replaced by the two cell-word stores changed. */
 
 
@@ -76,8 +76,8 @@ s32 Node_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, 
     s32 size;
     void *cells;
 
-    source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = Frontend_GetScreenData(GetMenuScreenOwner());
+    source = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Node_GetScreenData(GetMenuScreenOwner());
     result = Cache_AllocateMemory(0x60);
     XPlus_FillBytes(result, 0, 0x60);
     *(Header44 *)result = *(Header44 *)source;
@@ -101,21 +101,21 @@ s32 Node_CreateGridListFromWidget(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, 
 }
 
 void Node_SetGridCellValues(s32 identifier, s32 row, s32 column, s32 first, s32 second) {
-    EntryFrontendSetGridCellValues *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    EntryFrontendSetGridCellValues *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry->cells[row * entry->width + column].field_0 = first;
     entry->cells[row * entry->width + column].field_4 = second;
 }
 
 void Node_GetGridCellValues(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {
-    EntryFrontendSetGridCellValues *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    EntryFrontendSetGridCellValues *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     *first = entry->cells[row * entry->width + column].field_0;
     *second = entry->cells[row * entry->width + column].field_4;
 }
 
 void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 third) {
-    u8 *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    u8 *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry[0x54] = second;
     entry[0x56] = third;
@@ -123,7 +123,7 @@ void Node_SetGridForegroundColors(s32 identifier, s32 first, s32 second, s32 thi
 }
 
 void Node_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32 third) {
-    u8 *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    u8 *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry[0x55] = second;
     entry[0x57] = third;
@@ -131,14 +131,14 @@ void Node_SetGridBackgroundColors(s32 identifier, s32 first, s32 second, s32 thi
 }
 
 void Node_SetGridDimensionArrays(s32 identifier, s32 first, s32 second) {
-    struct EntryFrontendSetGridDimensionArrays *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    struct EntryFrontendSetGridDimensionArrays *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     entry->second = second;
     entry->first = first;
 }
 
 void Node_GetGridSelection(s32 identifier, s32 *first, s32 *second) {
-    struct MenuWidget *entry = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
+    struct MenuWidget *entry = Node_FindWidgetByResourceId(Node_GetScreenData(GetMenuScreenOwner()), (u16)identifier);
 
     *first = entry->field_4C;
     *second = entry->field_4D;

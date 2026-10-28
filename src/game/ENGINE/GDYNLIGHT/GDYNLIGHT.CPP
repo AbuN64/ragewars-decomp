@@ -16,7 +16,7 @@ extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index)
 
 void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1);
 
-void DynLight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
+void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                    CVector3 *arg4, f32 *arg5) {
     CVector3 delta;
     f32 temp_f0;
@@ -86,7 +86,7 @@ void *Gdynlight_AllocateLightNode(void *intrusiveList, void *arg1) {
     return temp_s0;
 }
 
-void DynLight_ReleaseLight(void *a, s32 b) {
+void Gdynlight_ReleaseLight(void *a, s32 b) {
     (((struct Limit *) ((s8 *) b))->limit) = 0;
     func_80255ED8_de(a, b);
     func_80255CB8_de(a + 0x14, b);

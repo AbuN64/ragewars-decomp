@@ -27,9 +27,9 @@ extern void *Cache_AllocateResource(int a, int b, int c, void *d);
 
 extern void func_8025E3F0_de(s32 arg0);
 
-extern void func_80253908_de(s32 a);
+extern void Cache_DrainAndCompactResources(s32 a);
 
-void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
+void Gsky_GetFloorSurfaceShake(void *gameplayCamera, CVector3 *out) {
     GameplayCamera *o = gameplayCamera;
     f32 value;
     Shared_Surface *entry;
@@ -54,20 +54,20 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
     scale = D_800C3584_de.unk0;
     o->shakeHorizontal = value;
     o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
-    out->x = GraphU64_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
-    out->y = GraphU64_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    out->x = Graphu64_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
+    out->y = Graphu64_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
     value = -o->shakeHorizontal * scale;
-    out->z = GraphU64_RandomBetween(value, o->shakeHorizontal * scale);
+    out->z = Graphu64_RandomBetween(value, o->shakeHorizontal * scale);
 }
 
 /** Preserve the empty hook at VRAM 0x80239FBC. */
 void func_80239FCC_de(void) {
 }
 
-void func_80239FD4_de(void) {
+void Gsky_DrawViewportEffectNoOp(void) {
 }
 
-void func_80239FDC_de(void *gameplayCamera) {
+void Gsky_UpdateFloorSurface(void *gameplayCamera) {
     s32 object;
     GameplayCamera *camera = gameplayCamera;
     f32 value;
@@ -134,7 +134,7 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
 
     owner->state = 1;
     func_8025E3F0_de((s32)&owner->rendering);
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     allocation = owner->allocation;
     if (allocation != 0) {
         Cache_ReleaseResource(0, allocation);
@@ -147,7 +147,7 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
 /* 80233920_32.CPP */
 void func_8023A24C_de(void *bufferOwner) {
     s32 allocationHandle;
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     allocationHandle = (((struct IntegerStateF24 *) ((s8 *) bufferOwner))->unk_F18);
     if (allocationHandle != 0) {
         Cache_ReleaseResource(0, allocationHandle);

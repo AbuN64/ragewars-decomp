@@ -79,10 +79,10 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
             delta.x = temp_fv1f;
             delta.y = temp_fv1;
             delta.z = deltaZ;
-            actor->field264 = Math_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (deltaZ * deltaZ));
+            actor->field264 = Gu_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (deltaZ * deltaZ));
             heightDelta = delta.y;
             delta.y = 0;
-            horizontalDistance = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
+            horizontalDistance = Gu_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
             {
                 switch (trajectoryMode) {
                 case 10:
@@ -198,10 +198,10 @@ block_43:
                     delta.x = deltaX;
                     delta.y = temp_fv1f_2;
                     delta.z = temp_fv1_4;
-                    actor->field264 = Math_Sqrtf((deltaX * deltaX) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
+                    actor->field264 = Gu_Sqrtf((deltaX * deltaX) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
                     heightDelta = delta.y;
                     delta.y = 0;
-                    horizontalDistance = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
+                    horizontalDistance = Gu_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
                     temp_fv0_4 = Math_Cosf(actor->field278 * 0.0174532942f);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
                     temp_fv0f_2 = (XMath_EvaluateTangent(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));

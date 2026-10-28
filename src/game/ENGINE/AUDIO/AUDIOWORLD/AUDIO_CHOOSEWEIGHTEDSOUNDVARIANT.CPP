@@ -463,7 +463,7 @@ s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
             for (i = first; i <= last; i++) {
                 total += scene->weights[i] * 10;
             }
-            draw = GraphU64_NextRandom() % total;
+            draw = Graphu64_NextRandom() % total;
             total = 0;
             for (entry = first; entry < last; entry++) {
                 total += scene->weights[entry] * 10;

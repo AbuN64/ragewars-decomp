@@ -146,5 +146,5 @@ extern void D_0023B94C();
 extern void D_0023B978_de();
 
 
-extern void func_80239CE0_de(void *arg0);
+extern void Gsky_ClearScreenMessage(void *arg0);
 #endif

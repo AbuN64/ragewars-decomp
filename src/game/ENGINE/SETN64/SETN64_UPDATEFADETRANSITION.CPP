@@ -96,7 +96,7 @@ void SetN64_RunBootstrapThread(s32 arg0) {
 }
 
 void SetN64_RunGameThread(void) {
-    func_802BD320_de(D_80146CE8, D_800C5400_de, D_800C5408_de, D_800C5414_de);
+    func_802BD320_de(D_80146CE8, D_800C5400_de, g_buildDateTimeTextRev1, D_800C5414_de);
     func_802BD160_de(__osGetFpcCsr() | 0x400);
     SetN64_RunGameLoop(&D_8011FAC0);
 }

@@ -13,7 +13,7 @@ void ReselectCloseAttack(void *brainAddress) {
     CloseAttackBrain *brain = brainAddress;
     WeightSource *weights;
     s32 selectedState;
-    if (GraphU64_NextRandom() % 4 == 1) {
+    if (Graphu64_NextRandom() % 4 == 1) {
         weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
         selectedState = Reselect_ChooseWeightedAttackBehavior(weights);
         brain->combat = selectedState;
@@ -45,7 +45,7 @@ s32 Reselect_ChooseWeightedAttackBehavior(WeightSource *weights) {
     if (total == 0) {
         return 3;
     }
-    value = (GraphU64_NextRandom() % total) + 1;
+    value = (Graphu64_NextRandom() % total) + 1;
     if (first_end < value) {
         if (second_end >= value) {
             return 4;

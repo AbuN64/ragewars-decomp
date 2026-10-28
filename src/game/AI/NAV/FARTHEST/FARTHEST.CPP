@@ -18,7 +18,7 @@
 /* 802106E0_17.CPP */
 void *Portal_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index);
 extern void *Portal_GetGraphPoint(void *, s32);
-extern f32 GraphU64_GetSquaredDistance(f32 *, f32 *);
+extern f32 Graphu64_GetSquaredDistance(f32 *, f32 *);
 
 /* Choose the farthest reachable neighbor linked by kinds 1, 2 or 7
  * from the actor that this state is following. */
@@ -54,8 +54,8 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
         link = Portal_GetStridedTableEntry(graph, links[i]);
         if ((link->type >= 1 && link->type <= 2) || link->type == 7) {
             point = Portal_GetGraphPoint(graph, neighbors[i]);
-            if (Nav_GetRouteRelation(graph, actor_node, neighbors[i])) {
-                distance = GraphU64_GetSquaredDistance(&position.x, point);
+            if (Route_GetRouteRelation(graph, actor_node, neighbors[i])) {
+                distance = Graphu64_GetSquaredDistance(&position.x, point);
                 if (farthest < distance) {
                     farthest = distance;
                     best = i;
@@ -119,7 +119,7 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     state->destination = value;
     if (value != state->node) {
         state->node = value;
-        if (!Nav_GetRouteRelation(&D_8013B364, state->route, value)) {
+        if (!Route_GetRouteRelation(&D_8013B364, state->route, value)) {
             Scaled_SetBehaviourState(state, 1);
             return;
         }
@@ -128,7 +128,7 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     Nav_RunBehaviorHandler(state);
     Nav_SteerAlongRoute(state);
     Nav_UpdateTargetSteering(state);
-    if (GraphU64_GetSquaredDistance(&peer_actor->pos.x,
+    if (Graphu64_GetSquaredDistance(&peer_actor->pos.x,
                        &state->player->pos.x) < D_800C20C0_de[1] ||
         state->route == state->destination) {
         Scaled_SetBehaviourState(state, state->combat);
@@ -167,7 +167,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
         }
     }
 
-    if (D_800C20C8_de < GraphU64_GetSquaredDistance(
+    if (D_800C20C8_de < Graphu64_GetSquaredDistance(
             &brain->target->self->pos.x,
             &brain->player->pos.x)) {
         Scaled_SetBehaviourState(brain, brain->combat);
@@ -212,7 +212,7 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *arg0)
         if (table->m_nNavNodes > 0) {
             do {
                 entry = Portal_GetGraphPoint(table, index);
-                if (GraphU64_GetSquaredDistance(&state->player->pos.x, entry) < threshold &&
+                if (Graphu64_GetSquaredDistance(&state->player->pos.x, entry) < threshold &&
                     !(navigation_attributes(entry) & 0x04300000)) {
                     Nav_AddGoalNode(table, index);
                 }

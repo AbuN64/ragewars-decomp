@@ -52,7 +52,7 @@ int func_8022BAA0_de(void *object) {
 }
 
 /** Report whether the global state word is nonzero. */
-int func_8022BAC0_de(void) {
+int Player_IsClockPaused(void) {
     return D_8011FAC0.clockPaused != 0;
 }
 

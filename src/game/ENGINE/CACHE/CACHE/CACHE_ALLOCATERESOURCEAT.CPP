@@ -208,7 +208,7 @@ void Cache_ReleaseResource(void *arg0, void *resource) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void func_80253908_de(s32 unusedHeap) {
+void Cache_DrainAndCompactResources(s32 unusedHeap) {
     extern OSMesgQueue D_80101140;
     s32 lockUsers;
     s32 remainingLockUsers;

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: src/rw_text_804058B0_E1984_us_rev1.c */
-const char D_blob_43b0ba6b1ac402bbd480[11] = "audio heap";
+const char g_audioHeapText[11] = "audio heap";
 
 #if defined(VERSION_EU_X)
 unsigned char rodata_unresolved_800E859F[1] = {

@@ -11,7 +11,7 @@ extern void Tsmos_ActivateControllerState(void);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(void *);
 extern void SmpButton_WrapButtonWidget(s32);
-extern void *Frontend_FindWidgetByResourceId(void *, s32);
+extern void *Node_FindWidgetByResourceId(void *, s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state D_800E5430: title/list from the ids at 0x398, the numeric
@@ -26,12 +26,12 @@ s32 Frontend_CreatePlayerCountScreenEu(void *window) {
     D_800E5430->list = title;
     SmpSlider_EnableTransition(title);
     SmpButton_WrapButtonWidget(0x39C);
-    item = Frontend_FindWidgetByResourceId(window, 0x39A);
+    item = Node_FindWidgetByResourceId(window, 0x39A);
     D_800E5430->item = item;
     item->alpha = 0xF;
     D_800E5430->resourceWidget = SmpFlicker_CreateFlickerWidget(0x39B, 0x6E);
     D_800E5430->unkC = 3;
-    item = Frontend_FindWidgetByResourceId(window, 0x39D);
+    item = Node_FindWidgetByResourceId(window, 0x39D);
     item->text = D_800E5430->text14;
     D_800E5430->unk20 = 1;
     XStdio_FormatBuffer(D_800E5430->text14, D_800E1B60, 1);

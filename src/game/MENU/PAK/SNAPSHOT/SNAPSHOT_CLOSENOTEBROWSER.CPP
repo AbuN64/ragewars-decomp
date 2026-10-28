@@ -31,7 +31,7 @@ extern s32 D_8015375C;
 extern s32 D_800E28BC;
 
 extern SharedPlayer *Playerai_FindPlayerByController(void *profiles, PakMenuSlot *slot);
-extern void func_80253908_de(s32 heap);
+extern void Cache_DrainAndCompactResources(s32 heap);
 extern void Menu_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
 static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
@@ -50,7 +50,7 @@ s32 Snapshot_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
     SharedPlayer *player;
 
     if (D_800DE860_de != 0 || D_800DE864_de != 0) {
-        func_80253908_de(0);
+        Cache_DrainAndCompactResources(0);
     }
     if (D_800DE860_de != 0) {
         Cache_ReleaseResource(0, D_800DE860_de);

@@ -218,7 +218,7 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     for (i = 0; i < world->count; i++) {
         object = world->objects[i];
         GraphU64_SubtractVectors(&delta, &object->pos, &player->pos);
-        distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         if (distance <= best) {
             nearest = object;
             best = distance;
@@ -227,7 +227,7 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     return nearest;
 }
 
-/* Registers an object with a world after preparing it with func_8024B8C4_de: adds it to the lists of objects accepted by func_8024D160_de and func_8024E1B4_de, to the list of all objects, to the type 1 list (storing its slot in the object), to the list of objects flagged 2, to the type 5 list, and to the lists of model 0x64F and model 0x64D objects, each while that list has room. */
+/* Registers an object with a world after preparing it with Gobjinst_RotatePoseMatrixBuffers: adds it to the lists of objects accepted by func_8024D160_de and func_8024E1B4_de, to the list of all objects, to the type 1 list (storing its slot in the object), to the list of objects flagged 2, to the type 5 list, and to the lists of model 0x64F and model 0x64D objects, each while that list has room. */
 
 
 
@@ -235,12 +235,12 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
 
 
 
-extern void func_8024B8C4_de(ObjectSceneRegisterActorInSceneLists *object);
+extern void Gobjinst_RotatePoseMatrixBuffers(ObjectSceneRegisterActorInSceneLists *object);
 extern s32 func_8024D160_de(ObjectSceneRegisterActorInSceneLists *object);
 extern s32 func_8024E1B4_de(ObjectSceneRegisterActorInSceneLists *object);
 
 void Scene_RegisterActorInSceneLists(WorldRecAt10B8 *world, ObjectSceneRegisterActorInSceneLists *object) {
-    func_8024B8C4_de(object);
+    Gobjinst_RotatePoseMatrixBuffers(object);
     if (func_8024D160_de(object) != 0) {
         s32 n = world->countA;
         if (n != 512) {

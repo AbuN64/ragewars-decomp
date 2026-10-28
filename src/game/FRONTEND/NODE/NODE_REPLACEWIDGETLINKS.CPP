@@ -4,7 +4,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 
-MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 identifier) {
+MenuWidget *Node_FindWidgetByResourceId(void *root, s32 identifier) {
     MenuWidget *node = root;
     u16 id = identifier;
     MenuWidget *found = 0;
@@ -14,14 +14,14 @@ MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 identifier) {
             found = node;
         }
         if (found == 0 && node->child != 0) {
-            found = Frontend_FindWidgetByResourceId(node->child, id);
+            found = Node_FindWidgetByResourceId(node->child, id);
         }
         node = node->sibling;
     }
     return found;
 }
 
-/* Searches the sibling list starting at node, descending depth first into each node's child list, for the first node whose next sibling carries the given id, and returns that predecessor or null. Adapted from Frontend_FindWidgetByResourceId with the id test moved from the node to its next sibling and the id taken as an int narrowed to unsigned short at each use, the recursive call reading a copy of it taken after the result is cleared. */
+/* Searches the sibling list starting at node, descending depth first into each node's child list, for the first node whose next sibling carries the given id, and returns that predecessor or null. Adapted from Node_FindWidgetByResourceId with the id test moved from the node to its next sibling and the id taken as an int narrowed to unsigned short at each use, the recursive call reading a copy of it taken after the result is cleared. */
 
 
 

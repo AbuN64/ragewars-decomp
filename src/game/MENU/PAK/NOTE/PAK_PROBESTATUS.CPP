@@ -7,7 +7,7 @@
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Releases the save buffer and clears its global state. */
-extern void func_80253908_de(int);
+extern void Cache_DrainAndCompactResources(int);
 
 
 
@@ -40,7 +40,7 @@ void Pak_AllocateScratchBuffer(void) {
 }
 
 void Note_FreeScratchBuffer(void) {
-    func_80253908_de(0);
+    Cache_DrainAndCompactResources(0);
     if (D_800DE808) {
         Cache_ReleaseResource(0, D_800DE808);
         D_800DE808 = 0;
@@ -82,7 +82,7 @@ void Pak_ProbeStatus(s32 kind)
 
 
 
-s32 Pak_GetStatus(s32 index) {
+s32 Note_GetStatus(s32 index) {
     if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }

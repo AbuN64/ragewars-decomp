@@ -122,7 +122,7 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
         vertex.x=(f32)position[0];
         vertex.y=(f32)position[1];
         vertex.z=(f32)position[2];
-        GraphU64_TransformPoint(&mesh->element->transform,&vertex,(char *)base+byteOffset);
+        Graphu64_TransformPoint(&mesh->element->transform,&vertex,(char *)base+byteOffset);
         byteOffset+=(s32)sizeof(polygon.vertices[0]);
         cursor++;
         i++;

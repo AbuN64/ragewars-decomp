@@ -2,7 +2,7 @@
 #define COMMON_FRUSTUM_H
 #include "TYPES.H"
 
-extern f32 VisData_EvaluatePlaneAtPoint(f32 *a, f32 *b);
+extern f32 Visdata_EvaluatePlaneAtPoint(f32 *a, f32 *b);
 
 struct Frustum;
 
@@ -15,7 +15,7 @@ extern float D_800C5510_de;
 
 extern s32 VisData_TestBoxAgainstPlane(f32 *arg0, f32 *arg1);
 
-extern void *Frontend_GetScreenData(s32 index);
+extern void *Node_GetScreenData(s32 index);
 
-s32 Frontend_IsValidScreenIndex(s32);
+s32 Node_IsValidScreenIndex(s32);
 #endif

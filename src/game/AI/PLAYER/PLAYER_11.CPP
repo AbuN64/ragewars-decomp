@@ -26,13 +26,13 @@ extern char D_801000F0;
 extern void *D_800D052C[];
 void CopyMatrix(f32 *, f32 *);
 void Player_BuildPlayerViewTransform(void *, f32 *);
-void func_8022B144_de(void *, f32 *);
+void Player_GetPlayerViewTranslation(void *, f32 *);
 s32 CCollision_SweepPoint(char *, CVector3, CVector3, s32);
 void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
-f32 Math_Sqrtf(f32);
-void func_8021D408_de(struct SharedPlayer *, CVector3 *, CVector3 *);
+f32 Gu_Sqrtf(f32);
+void Player_BuildAimMarkerMatrices(struct SharedPlayer *, CVector3 *, CVector3 *);
 CQuatern Playerai_ComputeAimRotation(void *, AimActor **, void *);
 CQuatern func_8024796C_de(char *);
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
@@ -63,11 +63,11 @@ void func_8021D774_de(AimPlayer *player) {
     view = player->view;
     temp_fs1f = D_800C23B4_de;
     temp_fs2 = D_800C23B8_de;
-    if (view) { switch (view->mode) { case 1: Player_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); break; default: CopyMatrix(matrix, view->matrix); current = view->origin; break; } } else { Player_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); }
+    if (view) { switch (view->mode) { case 1: Player_BuildPlayerViewTransform(player, matrix); Player_GetPlayerViewTranslation(player, &current.x); break; default: CopyMatrix(matrix, view->matrix); current = view->origin; break; } } else { Player_BuildPlayerViewTransform(player, matrix); Player_GetPlayerViewTranslation(player, &current.x); }
     localForward.x = 0.0f;
     localForward.y = 0;
     localForward.z = D_800C23BC_de;
-    GraphU64_TransformPoint(matrix, &localForward, &desired);
+    Graphu64_TransformPoint(matrix, &localForward, &desired);
     if (CCollision_SweepPoint((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
         player->aim = D_80103FCC->point;
         player->normal = D_80103FCC->normal;
@@ -79,19 +79,19 @@ void func_8021D774_de(AimPlayer *player) {
     localForward.x = 0.0f;
     localForward.y = 0;
     localForward.z = D_800C23C0_de;
-    GraphU64_TransformPoint(matrix, &localForward, &desired);
+    Graphu64_TransformPoint(matrix, &localForward, &desired);
     if (player->enabled != 0) {
         if ((CCollision_SweepPoint((char *)player, current, desired, (s32) &D_801000F0) != 0) && (rayHitActor = D_80103FCC->actor, (rayHitActor != NULL))) {
             if (rayHitActor->kind == 1) {
                 if (rayHitActor->flags & 0x300000) {
                     GraphU64_SubtractVectors((CVector3 *)&aimRotation, &rayHitActor->pos, &player->unk8);
-                    temp_fv0 = Math_Sqrtf((aimRotation.x * aimRotation.x) + (aimRotation.y * aimRotation.y) + (aimRotation.z * aimRotation.z));
+                    temp_fv0 = Gu_Sqrtf((aimRotation.x * aimRotation.x) + (aimRotation.y * aimRotation.y) + (aimRotation.z * aimRotation.z));
                     direction = localForward;
                     GraphU64_NormalizeVec3(&direction);
                     GraphU64_ScaleVector(&probeLow.xyz, &direction, temp_fv0);
-                    GraphU64_TransformPoint(matrix, &probeLow.xyz, (CVector3 *)&probeHigh);
+                    Graphu64_TransformPoint(matrix, &probeLow.xyz, (CVector3 *)&probeHigh);
                     player->aim2 = (*(CVector3 *)&probeHigh);
-                    func_8021D408_de((void *)player, (CVector3 *)&probeHigh, &D_80103FCC->normal);
+                    Player_BuildAimMarkerMatrices((void *)player, (CVector3 *)&probeHigh, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -102,7 +102,7 @@ void func_8021D774_de(AimPlayer *player) {
 block_14:
 block_15:
             player->aim2 = player->aim;
-            func_8021D408_de((void *)player, &player->aim, &D_80103FCC->normal);
+            Player_BuildAimMarkerMatrices((void *)player, &player->aim, &D_80103FCC->normal);
         }
     } else {
         player->aim2 = desired;

@@ -34,9 +34,9 @@ f32 GameObject_GetActorHeight(SharedPlayer *player);
 void GraphU64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 
-f32 GraphU64_GetSquaredDistance(CVector3 *a, CVector3 *b);
+f32 Graphu64_GetSquaredDistance(CVector3 *a, CVector3 *b);
 
-s32 GraphU64_NextRandom(void);
+s32 Graphu64_NextRandom(void);
 
 void Particle_UpdateTypedMotion(Shared_Particle *particle);
 
@@ -54,7 +54,7 @@ void Particle_HitTarget(void *particle);
 
 void Particle_ApplyImpactResponse(Shared_Particle *particle);
 
-void func_80282E98_de(Shared_Particle *particle, SharedPlayer *player);
+void Particle_HandlePlayerContact(Shared_Particle *particle, SharedPlayer *player);
 
 void Particle_DispatchSpatialContactEvents(Shared_Particle *particle);
 
@@ -70,7 +70,7 @@ static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer
     if (particle->inst.type != 0x40F) {
         pos.y += GameObject_GetActorHeight(player) * 0.5f;
     }
-    return GraphU64_GetSquaredDistance(&particle->inst.pos, &pos);
+    return Graphu64_GetSquaredDistance(&particle->inst.pos, &pos);
 }
 
 extern CVector3 D_80100290;
@@ -80,7 +80,7 @@ extern CVector3 D_801042C8;
 extern s32 Region_GetModelBlendByte59(s32);
 
 extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
-extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
+extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 #include "particle/8027A0F4_8.H"
 #include "ENGINE/PARTICLE.H"
@@ -247,7 +247,7 @@ void Particle_Update(Shared_Particle *particle) {
             particle->time = 0.0f;
             particle->space = -7;
             particle->flags = (particle->flags & ~0x30000) | 0x40000;
-            particle->rot.z = (f32)(GraphU64_NextRandom() % 360) * 0.017453294f;
+            particle->rot.z = (f32)(Graphu64_NextRandom() % 360) * 0.017453294f;
             particle->inst.velocity.y = 0.0f;
             if (particle->flags & 0x4000000) {
                 particle->inst.velocity.x = -particle->direction.x;
@@ -313,7 +313,7 @@ void Particle_Update(Shared_Particle *particle) {
         for (player = D_80145060; player != NULL;) {
             done = 0;
             if (func_8027B790_distance(particle, player) < influenceRange) {
-                func_80282E98_de(particle, player);
+                Particle_HandlePlayerContact(particle, player);
                 if (particle->inst.type == 0x40F) {
                     done = 1;
                 }
@@ -440,8 +440,8 @@ void Particle_HandleInitialMaterialContact(Shared_Particle *particle) {
             } else {
                 position = particle->inst.velocity;
             }
-            rotation = GraphU64_BuildDirectionQuaternion(&position);
-            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+            rotation = Graphu64_BuildDirectionQuaternion(&position);
+            Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                           (struct EffectActor *)particle->owner,
                           (s32 *)particle->ownerId,
                           (s32)particle->target, kind,
@@ -505,8 +505,8 @@ void Particle_HandleTypedContact(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = GraphU64_BuildDirectionQuaternion(&position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        rotation = Graphu64_BuildDirectionQuaternion(&position);
+        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
@@ -562,8 +562,8 @@ void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = GraphU64_BuildDirectionQuaternion(&position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        rotation = Graphu64_BuildDirectionQuaternion(&position);
+        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
@@ -617,8 +617,8 @@ void Particle_HandleMaterialContact(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = GraphU64_BuildDirectionQuaternion(&position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+        rotation = Graphu64_BuildDirectionQuaternion(&position);
+        Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
                       (s32)particle->target, kind,
@@ -649,10 +649,10 @@ extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 extern LiveParticle *D_8013D538;
 
 s32 func_8024E2C4_de(void *);
-void GraphU64_ConvertMatrixToFloat(f32 *, void *);
+void Graphu64_ConvertMatrixToFloat(f32 *, void *);
 void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
-void GraphU64_InvertAffineMatrix(f32 *, f32 *);
-void GraphU64_TransformDirection(f32 *, CVector3 *, CVector3 *);
+void Graphu64_InvertAffineMatrix(f32 *, f32 *);
+void Graphu64_TransformDirection(f32 *, CVector3 *, CVector3 *);
 s32 func_8024E140_de(void *);
 void PitchMatrixLocal(f32 *, f32);
 static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform, s32 action) {
@@ -662,16 +662,16 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     Shared_ParticleTarget *attached;
     ParticleAttachmentState *scene;
     attached=D_801041F0.current;
-    if (transform) GraphU64_InvertAffineMatrix(inverse, transform);
+    if (transform) Graphu64_InvertAffineMatrix(inverse, transform);
     else {
-        GraphU64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
-        GraphU64_InvertAffineMatrix(inverse, localTransform);
+        Graphu64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
+        Graphu64_InvertAffineMatrix(inverse, localTransform);
     }
     scene=&D_801041F0;
-    GraphU64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
+    Graphu64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
     GraphU64_NormalizeVec3(&direction);
-    GraphU64_TransformDirection(inverse, &direction, &particle->inst.velocity);
+    Graphu64_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
     particle->collisionNode=D_801041F0.frame;
@@ -723,7 +723,7 @@ void Particle_HitTarget(void *particle) {
             if (actor->particle.inst.type==13) action=4;
             owner=D_801041F0.current;
             if (owner->flags&0x3000000) {
-                GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+                Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hasMatrix=1;
                 if (owner->flags&0x1000000) {
                     func_80247F18_de(owner, &owner->unk170, boneMatrix, D_801041F0.origin, D_801041F0.direction, D_801041F0.frame);
@@ -744,7 +744,7 @@ void Particle_HitTarget(void *particle) {
                             Fx_DetachParticleSwooshes(&D_801379C0, actor);
                         }
                         handle=actor->particle.handle;
-                        if (handle) { DynLight_ReleaseLight(&D_8013B1A8, handle); actor->particle.handle=0; }
+                        if (handle) { Gdynlight_ReleaseLight(&D_8013B1A8, handle); actor->particle.handle=0; }
                     }
                 }
             }
@@ -763,11 +763,11 @@ void Particle_HitTarget(void *particle) {
         if (owner->unk170&2) enabled=0;
     }
     if (effect!=0xffff) {
-        if (D_800CC130[effect].flags&4) {
+        if (g_effectCallbackFlags[effect].flags&4) {
             if (actor->particle.inst.type==0x56) primary.control.lower=primary.control.lower*actor->scale;
         }
         other=source;
-        if (D_800CC130[effect].flags&2) other=actor;
+        if (g_effectCallbackFlags[effect].flags&2) other=actor;
         Events_DeliverContactEffect(other, actor, effect, -1, D_801001F8.position, primary.words);
     }
     if (action!=4) {
@@ -781,9 +781,9 @@ void Particle_HitTarget(void *particle) {
             extraEffect=extraActions->effects[4];
             if (extraEffect!=0xffff) {
                 secondary.words=extraActions->parameters[4];
-                if (D_800CC130[extraEffect].flags&4) {
+                if (g_effectCallbackFlags[extraEffect].flags&4) {
                     other=source;
-                    if (D_800CC130[extraEffect].flags&2) other=actor;
+                    if (g_effectCallbackFlags[extraEffect].flags&2) other=actor;
                     Events_DeliverContactEffect(other, actor, extraEffect, -1, D_801001F8.position, secondary.words);
                 }
             }
@@ -802,17 +802,17 @@ void Particle_HitTarget(void *particle) {
     if (!(actor->particle.flags&0x30000)) {
         if (actor->particle.inst.type==0x3ef && D_8013D538 && owner->bones && D_8013D538->particle.inst.type==0x41e && action!=9) {
             D_8013D538->particle.rot=D_80103FCC->point;
-            if (!hasMatrix) GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+            if (!hasMatrix) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
             PitchMatrixLocal(boneMatrix, 3.141593f);
             if (D_80103FCC->current->kind==1) {
-                if (*D_80103FCC->current->category==2) GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+                if (*D_80103FCC->current->category==2) Graphu64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hit=D_80103FCC->current;
                 if (hit->kind==1 && (hit->flags&0x300000 || *hit->category==2)) {
                     attachParticle(&D_8013D538->particle, boneMatrix, action);
                 }
             }
         }
-        if (mode==1 || (effect!=0xffff && D_800CC130[effect].flags&1)) {
+        if (mode==1 || (effect!=0xffff && g_effectCallbackFlags[effect].flags&1)) {
             Particle_Release(&D_8011D8D0, actor);
             Particle_StopSound(actor);
         }
@@ -897,7 +897,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
                 Fx_DetachParticleSwooshes(&D_801379C0, particle);
             }
             if (particle->handle) {
-                DynLight_ReleaseLight(&D_8013B1A8, particle->handle);
+                Gdynlight_ReleaseLight(&D_8013B1A8, particle->handle);
                 particle->handle = 0;
             }
         }
@@ -911,7 +911,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         sound = desc->events->sounds[hit];
         if (effect != 0xFFFF) {
             eventSource = target;
-            if (D_800CC130[effect].flags & 2) {
+            if (g_effectCallbackFlags[effect].flags & 2) {
                 eventSource = particle;
             }
             Events_DeliverContactEffect(eventSource, particle, effect, -1, D_801001F8.position, params);

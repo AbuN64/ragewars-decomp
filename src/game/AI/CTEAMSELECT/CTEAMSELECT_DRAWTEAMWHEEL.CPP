@@ -9,8 +9,8 @@
 
 
 
-extern f32 GraphU64_ApproachValue(f32, f32, f32);
-extern void GraphU64_IdentityMatrix(Matrix *);
+extern f32 Graphu64_ApproachValue(f32, f32, f32);
+extern void Graphu64_IdentityMatrix(Matrix *);
 extern void RollMatrix(Matrix *, f32);
 extern void Cteamselect_DrawTeamIcons(MenuCteamselectDrawTeamWheel *, ItemRecAt18V1 *, s32, void *);
 
@@ -36,10 +36,10 @@ void Cteamselect_DrawTeamWheel(MenuCteamselectDrawTeamWheel *menu, s32 unused1, 
             } else {
                 target = *(&D_800C9178_de + 1);
             }
-            slot->scale = GraphU64_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
-            GraphU64_IdentityMatrix(&matrix);
+            slot->scale = Graphu64_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
+            Graphu64_IdentityMatrix(&matrix);
             RollMatrix(&matrix, slot->angle);
-            GraphU64_TransformPoint(&matrix, &offset, &position);
+            Graphu64_TransformPoint(&matrix, &offset, &position);
             item->slot = i;
             item->position = position;
             item->icon = i + 0xC1C;
