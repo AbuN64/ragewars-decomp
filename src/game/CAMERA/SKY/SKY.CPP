@@ -130,8 +130,8 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 triangle[0] = points[first];
                 triangle[1] = points[second];
                 triangle[2] = points[third];
-                GraphU64_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
-                GraphU64_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
+                Graphu64_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
+                Graphu64_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
                 Graphu64_CrossVectors(&normal, &edge0, &edge1);
                 if (normal.y <= 0.0f) {
                     if (below != 1) goto draw_face;

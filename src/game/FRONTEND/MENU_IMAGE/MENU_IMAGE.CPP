@@ -109,7 +109,7 @@ extern void Tsmos_ActivateControllerState();
 
 extern void SmpOverlay_SetSlotValue(void *, int, int);
 
-extern void Frontend_SetPreviewTransformUpdate(void *, int);
+extern void Preview_SetPreviewTransformUpdate(void *, int);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5C04, an actor kind at D_800E5C08 and a handler at D_800E5C0C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -270,7 +270,7 @@ int Frontend_CancelEquipmentSelection(int a,int b,unsigned int player) {
  MarkMenuEventHandled();player &= 0xFFFF;
  switch(D_800E59E0->panels[player].state) {
  case 1:D_800E59E0->state=5;D_800E59E0->timer=4;D_800E59E0->next=7;break;
- case 2:D_800E59E0->panels[player].state=0;SmpOverlay_SetSlotValue(D_800E59E0->menu,player,0);Frontend_SetPreviewTransformUpdate(D_800E59E0->panels[player].pad0,1);Equip_ActivateEquipmentPanel(player);break;
+ case 2:D_800E59E0->panels[player].state=0;SmpOverlay_SetSlotValue(D_800E59E0->menu,player,0);Preview_SetPreviewTransformUpdate(D_800E59E0->panels[player].pad0,1);Equip_ActivateEquipmentPanel(player);break;
  }
  return 0;
 }

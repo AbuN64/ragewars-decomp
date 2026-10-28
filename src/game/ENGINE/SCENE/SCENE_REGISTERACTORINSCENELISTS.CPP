@@ -217,7 +217,7 @@ Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     nearest = 0;
     for (i = 0; i < world->count; i++) {
         object = world->objects[i];
-        GraphU64_SubtractVectors(&delta, &object->pos, &player->pos);
+        Graphu64_SubtractVectors(&delta, &object->pos, &player->pos);
         distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         if (distance <= best) {
             nearest = object;

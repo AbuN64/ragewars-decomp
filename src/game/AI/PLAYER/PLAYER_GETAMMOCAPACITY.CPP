@@ -52,7 +52,7 @@ extern void func_80246E44_de(char *);
 
 
 
-extern f32 GameObject_GetActorHeight(void);
+extern f32 Gobjinst_GetActorHeight(void);
 
 
 void *Playerai_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
@@ -495,7 +495,7 @@ f32 Playerai_GetObjectOwnerHeight(void *actorObject) {
 
 f32 func_8022ADF0_de(LevelActor *actor) {
     if (actor->definition != 0) {
-        return GameObject_GetActorHeight();
+        return Gobjinst_GetActorHeight();
     } else {
         return D_800C2D08_de;
     }

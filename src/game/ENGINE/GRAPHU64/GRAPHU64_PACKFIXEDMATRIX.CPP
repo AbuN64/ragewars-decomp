@@ -142,7 +142,7 @@ void Graphu64_InvertAffineMatrix(f32 *out, f32 *m) {
 
 /* Builds a look-at view matrix from an eye position, a target and an up vector: the forward axis is the normalised direction from the target back to the eye, the right axis the normalised cross product of up and forward, the true up axis their normalised cross product, each written as a matrix column with the negated eye projections as the translation row, falling back to the x axis when forward or right degenerate. */
 
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
@@ -151,7 +151,7 @@ void Graphu64_ComputeViewMatrix(MatrixF *mtx, CVector3 *eye, CVector3 *target, C
     CVector3 right;
     f32 length;
 
-    GraphU64_SubtractVectors(&forward, target, eye);
+    Graphu64_SubtractVectors(&forward, target, eye);
     length = Gu_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;

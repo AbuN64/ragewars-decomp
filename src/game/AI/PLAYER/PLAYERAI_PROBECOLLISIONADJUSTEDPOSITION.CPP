@@ -23,7 +23,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
 
-extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
+extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
 
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
@@ -133,7 +133,7 @@ s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *ar
     s32 moved;
 
     saved = *arg0;
-    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += GameObject_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += Gobjinst_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
     ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((struct Actor_func_80214DD4_de *)arg0)->height;
     Unicol_MoveActorWithCollision(arg0, *arg1, &D_80100030);
 

@@ -19,7 +19,7 @@ void SetN64_SetFrameDirection(void *frame, void *arg1) {
     Frame *view = frame;
     CVector3 *direction = arg1;
     view->direction = *direction;
-    GraphU64_NormalizeVec3(&view->direction.x);
+    Graphu64_NormalizeVec3(&view->direction.x);
 }
 
 /** Copy four scalar fields from the source into output pointers. */

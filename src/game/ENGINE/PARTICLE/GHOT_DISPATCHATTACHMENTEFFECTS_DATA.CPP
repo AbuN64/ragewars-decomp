@@ -122,7 +122,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         Graphu64_InvertAffineMatrix(targetInv.m[0], targetMtx.m[0]);
         Graphu64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
-        GraphU64_NormalizeVec3(&up.x);
+        Graphu64_NormalizeVec3(&up.x);
         Graphu64_TransformDirection(&targetInv, &up, vel);
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
@@ -224,7 +224,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 }
             }
             if (anchor != 0) {
-                GraphU64_SubtractVectors(&delta, &pos, &anchor->pos);
+                Graphu64_SubtractVectors(&delta, &pos, &anchor->pos);
             } else {
                 delta.x = delta.y = delta.z = 0.0f;
             }
@@ -411,7 +411,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
                     dir.y = Rumble_SamplePackedFloatRange(entry->direction[1]);
                     dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
-                    GraphU64_NormalizeVec3(&dir.x);
+                    Graphu64_NormalizeVec3(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                         Graphu64_TransformPoint(&mtx, &dir, &dirOut);
                     } else {
@@ -419,7 +419,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     }
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        GraphU64_NormalizeVec3(&effect->direction.x);
+                        Graphu64_NormalizeVec3(&effect->direction.x);
                     } else {
                         effect->direction = dirOut;
                     }
@@ -460,22 +460,22 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
                     Graphu64_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
-                        GraphU64_AddVec3(&offsetOut, &pos, &offsetOut);
+                        Graphu64_AddVec3(&offsetOut, &pos, &offsetOut);
                     }
                     effect->pos = offsetOut;
                 }
                 if (aim != 0) {
-                    GraphU64_SubtractVectors(&aimDelta, aim, &effect->pos);
-                    GraphU64_NormalizeVec3(&aimDelta.x);
+                    Graphu64_SubtractVectors(&aimDelta, aim, &effect->pos);
+                    Graphu64_NormalizeVec3(&aimDelta.x);
                     BuildDirectionMatrix(&mtx, &aimDelta);
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        GraphU64_NormalizeVec3(&effect->direction.x);
+                        Graphu64_NormalizeVec3(&effect->direction.x);
                     } else {
                         dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
                         dir.y = Rumble_SamplePackedFloatRange(entry->direction[1]);
                         dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
-                        GraphU64_NormalizeVec3(&dir.x);
+                        Graphu64_NormalizeVec3(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                             Graphu64_TransformPoint(&mtx, &dir, &dirOut);
                         } else {
@@ -486,9 +486,9 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 }
                 effect->unk168 = effect->pos;
                 effect->startPosition = effect->pos;
-                GraphU64_ScaleVector(&effect->velocity, &dirOut, Rumble_SamplePackedFloatRange(entry->motion->speed));
+                Graphu64_ScaleVector(&effect->velocity, &dirOut, Rumble_SamplePackedFloatRange(entry->motion->speed));
                 if (entry->flags & 0x20) {
-                    GraphU64_AddVec3(&effect->velocity, &effect->velocity, &inheritedVelocity);
+                    Graphu64_AddVec3(&effect->velocity, &effect->velocity, &inheritedVelocity);
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
@@ -569,7 +569,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                     render->dwFlags |= 0x20000;
                 }
                 vel = &effect->velocity;
-                GraphU64_ScaleVector(vel, vel, D_800CD6B0);
+                Graphu64_ScaleVector(vel, vel, D_800CD6B0);
                 if ((kind == 0x2D || kind == 0x4F) && (sourceType = source->type) == 2) {
                     aimTarget = &D_801041F0;
                     if (aimTarget->actor != 0) {

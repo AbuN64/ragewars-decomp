@@ -29,7 +29,7 @@ const unsigned int D_blob_950cbb3daf442f25a64a[1] = {
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Cbarrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Cbarrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
 extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Gu_Sqrtf(f32);
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
         return 6;
@@ -103,7 +103,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
         }
     }
     Graphu64_WrapPeriodicValue(&height);
-    GraphU64_SubtractVectors(&delta, &pos, &arg0->pos);
+    Graphu64_SubtractVectors(&delta, &pos, &arg0->pos);
     arg3->m_DeltaAngle = height;
     arg3->kind = kind;
     arg3->target = target;
@@ -122,7 +122,7 @@ extern s32 Gobjinst_ProbeActorMovement(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
  * directions and choose the first clear probe. */
-extern f32 GameObject_GetActorRadius(Actor_u1 *);
+extern f32 Gobjinst_GetActorRadius(Actor_u1 *);
 static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     f32 dx;
     f32 dz;
@@ -172,9 +172,9 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
                     bias = (-RW_PI_F6 / 12.0f);
                 }
                 cosine = Gu_Sinf(actor->yaw + 3.1415927f + angle);
-                probe.x = actor->position.x + cosine * (distance * GameObject_GetActorRadius(actor));
+                probe.x = actor->position.x + cosine * (distance * Gobjinst_GetActorRadius(actor));
                 sine = Math_Cosf(actor->yaw + 3.1415927f + angle);
-                probe.z = actor->position.z + sine * (distance * GameObject_GetActorRadius(actor));
+                probe.z = actor->position.z + sine * (distance * Gobjinst_GetActorRadius(actor));
                 if (!Gobjinst_ProbeActorMovement(actor, probe, 0)) {
                     angle += bias;
                     Graphu64_WrapPeriodicValue(&angle);
@@ -186,8 +186,8 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
     return heading;
 }
 
-extern void GraphU64_NormalizeVec3(CVector3 *);
-extern f32 GameObject_GetActorHeight(void *);
+extern void Graphu64_NormalizeVec3(CVector3 *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 /* Barrel_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
 static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
@@ -264,9 +264,9 @@ s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_
         }
     }
     low = self->pos.y + self->height;
-    high = low + GameObject_GetActorHeight(self);
+    high = low + Gobjinst_GetActorHeight(self);
     to.x = target->pos.x;
-    to.y = target->pos.y + target->height + GameObject_GetActorHeight(target) * 0.9f;
+    to.y = target->pos.y + target->height + Gobjinst_GetActorHeight(target) * 0.9f;
     to.z = target->pos.z;
     from.x = self->pos.x;
     from.z = self->pos.z;
@@ -281,8 +281,8 @@ s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_
     if (angle > 70.0f * RW_PI_F6 / 180.0f && angle < 110.0f * RW_PI_F6 / 180.0f) {
         return 0;
     }
-    GraphU64_SubtractVectors(&dir, &from, &to);
-    GraphU64_NormalizeVec3(&dir);
+    Graphu64_SubtractVectors(&dir, &from, &to);
+    Graphu64_NormalizeVec3(&dir);
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;

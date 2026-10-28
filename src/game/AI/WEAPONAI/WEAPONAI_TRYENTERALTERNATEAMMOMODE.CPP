@@ -25,7 +25,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
+extern s16 Weaponai_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);
 extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
@@ -61,7 +61,7 @@ void Weaponai_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fi
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weaponai_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fireState->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.unk5F4[0] >= 0x30 || ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E != 4) {

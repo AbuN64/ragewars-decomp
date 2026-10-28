@@ -8,13 +8,13 @@
 #include "COMMON/OBJRECV5.H"
 #include "TYPES.H"
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 
 extern void TranslateMatrix(Matrix *object, f32 x, f32 y, f32 z);
 
@@ -42,7 +42,7 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
         do {
             if (node->actorState != 0 &&
                 node->marker.time != 0.0f) {
-                GraphU64_SubtractVectors(&markerDelta, position, &node->targetPosition);
+                Graphu64_SubtractVectors(&markerDelta, position, &node->targetPosition);
                 distSq = markerDelta.x * markerDelta.x + markerDelta.y * markerDelta.y + markerDelta.z * markerDelta.z;
                 if (bestNode == 0 || distSq < bestDist) {
                     bestNode = node;
@@ -61,8 +61,8 @@ void Playerai_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *
     CVector3 offset;
 
     BuildDirectionMatrix(&matrix, direction);
-    GraphU64_ScaleVector(&offset, direction, 5.12f);
-    GraphU64_AddVec3(&offset, &offset, &actor->targetPosition);
+    Graphu64_ScaleVector(&offset, direction, 5.12f);
+    Graphu64_AddVec3(&offset, &offset, &actor->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
     Graphu64_ConvertMatrixToFixed(&matrix, actor->transform1600);

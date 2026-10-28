@@ -4,9 +4,9 @@
 
 struct AiController;
 
-s32 Fx_UpdateTargetSelection(void *object);
-s32 Fx_IsPreferredTargetAccepted(struct AiController *controller);
-s32 Fx_CountAcceptedTargets(struct AiController *controller);
-s32 Fx_FindNearestFlaggedTarget(struct AiController *controller);
+s32 Target_UpdateTargetSelection(void *object);
+s32 Target_IsPreferredTargetAccepted(struct AiController *controller);
+s32 Target_CountAcceptedTargets(struct AiController *controller);
+s32 Target_FindNearestFlaggedTarget(struct AiController *controller);
 
 #endif

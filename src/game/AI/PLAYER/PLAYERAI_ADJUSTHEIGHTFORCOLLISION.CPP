@@ -191,8 +191,8 @@ void Playerai_AdjustHeightForCollision(Player *player, LevelActor *actor) {
                  player->heightDelta;
     if (var_f23 > 0.0f) {
         temp_f22 = InstHdr_GetActorReach(actor);
-        temp_f21 = GameObject_GetActorRadius(actor);
-        temp_f20 = GameObject_GetActorHeight(actor);
+        temp_f21 = Gobjinst_GetActorRadius(actor);
+        temp_f20 = Gobjinst_GetActorHeight(actor);
         temp_f0 = InstHdr_GetActorBaseOffset(actor);
         next.x = actor->position0.x;
         next.y = actor->position0.y + var_f23;

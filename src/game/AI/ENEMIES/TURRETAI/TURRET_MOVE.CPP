@@ -42,11 +42,11 @@ extern char D_80103FD0[];
 
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);
 
-extern f32 GameObject_GetActorHeight(SharedPlayer *);
+extern f32 Gobjinst_GetActorHeight(SharedPlayer *);
 
 extern s32 CCollision_SweepPoint(SharedPlayer *, CVector3, CVector3, char *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     Segment *segment;
     f32 throttle;
@@ -88,7 +88,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     case 2:
         if (target != 0) {
             if (segment->angle != 0.0f) {
-                GraphU64_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
+                Graphu64_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
                 BuildYawMatrix(matrix, -segment->angle);
                 Graphu64_TransformPoint(matrix, &offset, &local);
                 goal = local.z / segment->radius;
@@ -149,14 +149,14 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                     }
                 }
                 if (enemy) {
-                    GraphU64_SubtractVectors(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
+                    Graphu64_SubtractVectors(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
                     from.x = rider->aim.x;
                     from.y = rider->aim.y;
                     from.z = rider->aim.z;
                     from = player->views0.view8_3.pos;
-                    from.y += GameObject_GetActorHeight(player) * lift;
+                    from.y += Gobjinst_GetActorHeight(player) * lift;
                     to = other->views0.view8_3.pos;
-                    to.y += GameObject_GetActorHeight(other) * lift;
+                    to.y += Gobjinst_GetActorHeight(other) * lift;
                     blocked = CCollision_SweepPoint(player, from, to, D_80103FD0);
                     valid = 1;
                     if (blocked != 0) {

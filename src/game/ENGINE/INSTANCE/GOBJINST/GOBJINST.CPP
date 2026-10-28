@@ -42,7 +42,7 @@ extern s32 Insthdr_IsInactiveOrCollisionOption4(Instance8020CD74 *);
 extern s32 Insthdr_GetModelCollisionFlag8(Instance8020CD74 *);
 
 
-extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
+extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
 
 extern CollisionState D_801041F0;
 
@@ -160,9 +160,9 @@ s32 Gobjinst_HasClearPathToActor(Instance8020CD74 *from, Instance8020CD74 *to) {
 
     savedFrom = *from;
     scale = D_800C3828_de;
-    ((struct Actor_func_80214DD4_de *)from)->pos.y += GameObject_GetActorHeight(from) * scale;
+    ((struct Actor_func_80214DD4_de *)from)->pos.y += Gobjinst_GetActorHeight(from) * scale;
     desired = ((struct Actor_func_80214DD4_de *)to)->pos;
-    desired.y += GameObject_GetActorHeight(to) * scale;
+    desired.y += Gobjinst_GetActorHeight(to) * scale;
     collisions = Unicol_MoveActorWithCollision(from, desired, &D_80103FD0);
     *from = savedFrom;
 

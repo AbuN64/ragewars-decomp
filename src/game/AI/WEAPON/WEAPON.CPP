@@ -147,7 +147,7 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
 void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
-    Weapon_ApplyWeaponSwitch(arg0, arg1);
+    Weaponai_ApplyWeaponSwitch(arg0, arg1);
     Actor_RequestActorState(arg0, arg1, 0);
 }
 #endif
@@ -297,7 +297,7 @@ s32 Weapon_PickRandomArmedWeapon(void *player) {
 /* 80231F5C_9.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 void Weapon_ApplySwitchAndSetSingleRound(void *arg0, func_80232A38_S1 *arg1) {
-    Weapon_ApplyWeaponSwitch(arg0, arg1);
+    Weaponai_ApplyWeaponSwitch(arg0, arg1);
     arg1->unk13C = 1;
     arg1->unk144 = 1;
 }
@@ -398,7 +398,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
    object through YawMatrixLocal when the event side at 0x4 matches the mode: side 2 in mode 1, side 0
    otherwise. */
 
-extern s16 Weapon_FindNextUsableWeapon(void *arg0);
+extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
 
 extern WeaponActionRecord D_800CE8DC[];
 
@@ -474,7 +474,7 @@ void Weapon_UpdateNormalFireAction(void *actor, ObjectState140 *attack) {
     action = D_800CE8DC[idx].action;
 
     if (Player_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
-        ((Shared_ActorView *)temp_s0)->nextWeapon = Weapon_FindNextUsableWeapon(temp_s0);
+        ((Shared_ActorView *)temp_s0)->nextWeapon = Weaponai_FindNextUsableWeapon(temp_s0);
     } else {
         attack->unk_13C = 1;
         if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
@@ -592,7 +592,7 @@ void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
     actor = ((LevelActor *)arg0)->controller;
     ((WeaponFireState *)attack)->mode = 2;
     if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-        ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
+        ((Shared_ActorView *)actor)->nextWeapon = Weaponai_FindNextUsableWeapon(actor);
         return;
     }
 
@@ -633,7 +633,7 @@ void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
 
     if (Player_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
         if (Particle_CountOwnerListOneEffects(&D_8011D8D0, actor) == 0) {
-            ((ObjectLinks11DC *)(actor))->unk_770 = Weapon_FindNextUsableWeapon(actor);
+            ((ObjectLinks11DC *)(actor))->unk_770 = Weaponai_FindNextUsableWeapon(actor);
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {

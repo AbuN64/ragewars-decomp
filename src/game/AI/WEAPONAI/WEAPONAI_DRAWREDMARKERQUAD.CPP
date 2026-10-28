@@ -86,7 +86,7 @@ void Weaponai_DrawRedMarkerQuad(void *object, void *unused) {
     }
 }
 
-s32 Weapon_FindNextUsableWeapon(void *arg0)
+s32 Weaponai_FindNextUsableWeapon(void *arg0)
 {
     s32 slot;
     s32 category;
@@ -286,7 +286,7 @@ extern s32 D_800CD730;
 
 
 
-void Weapon_ApplyWeaponSwitch(void *part, void *body) {
+void Weaponai_ApplyWeaponSwitch(void *part, void *body) {
     s16 index;
     u16 unsigned_index;
     void *owner;

@@ -23,7 +23,7 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 
 extern f32 D_800C9F70_de;
 extern void Player_GetPlayerViewTranslation(SharedPlayer *, CVector3 *);
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void Graphu64_IdentityMatrix(Matrix *);
 extern void Graphu64_MatrixFromEulerXYZ(Matrix *, f32, f32, f32);
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
@@ -34,8 +34,8 @@ extern void Graphu64_ConvertMatrixToFixed(Matrix *, Matrix *);
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 extern void PitchMatrixLocal(Matrix *, f32);
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 void Player_BuildAimMarkerMatrices(SharedPlayer *player, CVector3 *target, CVector3 *normal) {
     CVector3 to;
@@ -57,8 +57,8 @@ void Player_BuildAimMarkerMatrices(SharedPlayer *player, CVector3 *target, CVect
     }
     eye = origin;
     to = *target;
-    GraphU64_SubtractVectors(&direction, &to, &eye);
-    GraphU64_NormalizeVec3(&direction);
+    Graphu64_SubtractVectors(&direction, &to, &eye);
+    Graphu64_NormalizeVec3(&direction);
     Graphu64_IdentityMatrix(&matrix);
     if (0.99999899f <= direction.y) {
         Graphu64_MatrixFromEulerXYZ(&matrix, -1.57079649f, player->views1C.view6C_5.heading, 0.0f);
@@ -79,8 +79,8 @@ void Player_BuildAimMarkerMatrices(SharedPlayer *player, CVector3 *target, CVect
         height = height < 0.0f ? aimHeight + height : aimHeight - height;
         aim.y = height;
     }
-    GraphU64_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
-    GraphU64_NormalizeVec3(&direction);
+    Graphu64_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
+    Graphu64_NormalizeVec3(&direction);
     Graphu64_IdentityMatrix(&matrix);
     BuildDirectionMatrix(&matrix, &direction);
     TranslateMatrix(&matrix, player->views1C.view260_26.muzzle);
@@ -93,9 +93,9 @@ void Player_BuildAimMarkerMatrices(SharedPlayer *player, CVector3 *target, CVect
         turn = Graphu64_BuildDirectionQuaternion(&lift);
         MatrixFromQuaternion(&turn, &matrix);
         PitchMatrixLocal(&matrix, 1.57079649f);
-        GraphU64_NormalizeVec3(&lift);
-        GraphU64_ScaleVector(&lift, &lift, 2.048f);
-        GraphU64_AddVec3(&eye, &eye, &lift);
+        Graphu64_NormalizeVec3(&lift);
+        Graphu64_ScaleVector(&lift, &lift, 2.048f);
+        Graphu64_AddVec3(&eye, &eye, &lift);
         TranslateMatrix(&matrix, to);
         ScaleMatrixLocal(&matrix, 1.536f, scale, 1.536f);
         Graphu64_ConvertMatrixToFixed(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);

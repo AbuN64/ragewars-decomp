@@ -12,8 +12,8 @@
    blends the surrounding keys' positions linearly with the vector scale and add helpers. Vector
    counterpart of Track_EvaluateTrackOpacity. */
 
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
-extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 CVector3 Track_EvaluateTrackColor(f32 t) {
     s32 *track;
@@ -53,9 +53,9 @@ CVector3 Track_EvaluateTrackColor(f32 t) {
         b.x = key->x;
         b.y = key->y;
         b.z = key->z;
-        GraphU64_ScaleVector(&a, &a, (1.0f) - u);
-        GraphU64_ScaleVector(&b, &b, u);
-        GraphU64_AddVec3(&result, &a, &b);
+        Graphu64_ScaleVector(&a, &a, (1.0f) - u);
+        Graphu64_ScaleVector(&b, &b, u);
+        Graphu64_AddVec3(&result, &a, &b);
     }
     return result;
 }

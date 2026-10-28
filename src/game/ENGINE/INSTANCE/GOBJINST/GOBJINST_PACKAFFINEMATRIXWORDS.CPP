@@ -12,13 +12,13 @@
 
 extern char D_8011D8D0;
 
-extern f32 GameObject_GetActorHeight(Actor_func_8024A1D0_de *actor);
+extern f32 Gobjinst_GetActorHeight(Actor_func_8024A1D0_de *actor);
 
 #include "particle/8027A0F4_8.H"
 
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
-extern f32 GameObject_GetActorRadius(Actor_func_8024A1D0_de *actor);
+extern f32 Gobjinst_GetActorRadius(Actor_func_8024A1D0_de *actor);
 
 extern void Ghot_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
 
@@ -41,7 +41,7 @@ extern void *D_800CB440_de[];
 
 extern void CopyMatrix(f32 *, BodyGobjinstApplyBoneTwistImpulse *);
 
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void TranslateMatrix(void *, f32, f32, f32);
 
@@ -62,14 +62,14 @@ void Gobjinst_SpawnAnimatedModelViewEffect(Actor_func_8024A1D0_de *actor, Lookup
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += GameObject_GetActorHeight(actor) * D_800C3B60_de;
+            position.y += Gobjinst_GetActorHeight(actor) * D_800C3B60_de;
             Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = *(&D_800C3B60_de + 1);
-                effect->field150 = GameObject_GetActorRadius(actor) * scale;
-                effect->field154 = GameObject_GetActorHeight(actor) * scale;
+                effect->field150 = Gobjinst_GetActorRadius(actor) * scale;
+                effect->field154 = Gobjinst_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -156,11 +156,11 @@ void Gobjinst_ApplyBoneTwistImpulse(s32 unused, SourceRecAt18 *source, BodyGobji
     }
     CopyMatrix(transform, body);
     reverse = -1.0f;
-    GraphU64_ScaleVector(&velocity, &velocity, reverse);
+    Graphu64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
     Graphu64_BuildAxisAngleMatrix(impulse, strength, position.x, position.y, position.z);
     Graphu64_MultiplyAffineMatrices(body, transform, impulse);
-    GraphU64_ScaleVector(&velocity, &velocity, reverse);
+    Graphu64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
     if (source->owner == owner) {
         source->charges--;

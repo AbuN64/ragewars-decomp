@@ -9,7 +9,7 @@
 extern f32 *Cache_AllocateMemory(s32 size);
 
 
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 extern void Track_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out);
@@ -101,7 +101,7 @@ void Track_BuildWeightedSpline(s32 count, CVector3 *points, f32 *weights, Spline
         if (i == count - 1) {
             break;
         }
-        GraphU64_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
+        Graphu64_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
         length += Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
     for (i = 0; i < count; i++) {

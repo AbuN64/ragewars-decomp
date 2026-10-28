@@ -33,7 +33,7 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     if (listener == 0) {
         return 0x40;
     }
-    GraphU64_SubtractVectors(&offset, &listener->position, position);
+    Graphu64_SubtractVectors(&offset, &listener->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
@@ -41,7 +41,7 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
-    GraphU64_NormalizeVec3(&local.x);
+    Graphu64_NormalizeVec3(&local.x);
     pan = Gu_Sinf(Graphu64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
         return 0x40;

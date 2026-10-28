@@ -117,7 +117,7 @@ void Player_BeginJump(Player *player, void *bodyActor) {
     result = func_8024E6A0_de(bodyActor);
     if (result != 0) {
         InstHdr_GetActorTargetOffset(result, &vector);
-        GraphU64_AddVec3(&((LevelActor *)bodyActor)->position1,
+        Graphu64_AddVec3(&((LevelActor *)bodyActor)->position1,
                       &((LevelActor *)bodyActor)->position1, &vector);
     }
 

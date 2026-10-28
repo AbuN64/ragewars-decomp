@@ -20,8 +20,8 @@ extern f32 D_800C3690_de;
 
 extern s32 CCollision_IntersectFrontPlaneFraction(Polygon *, CVector3 *, CVector3 *, f32 *);
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 static inline s32 accepts(CapsuleSweep *ray, Polygon *poly) {
     if (poly->t <= 0.0f) {
@@ -48,15 +48,15 @@ s32 CCollision_TestOffsetPolygon(CapsuleSweep *ray, CVector3 *offset, f32 radius
     CVector3 hit;
 
     if (offset != 0) {
-        GraphU64_ScaleVector(&shift, &poly->normal, -radius);
-        GraphU64_AddVec3(&shift, &shift, offset);
+        Graphu64_ScaleVector(&shift, &poly->normal, -radius);
+        Graphu64_AddVec3(&shift, &shift, offset);
     } else {
         shift.x = 0.0f;
         shift.y = 0.0f;
         shift.z = 0.0f;
     }
-    GraphU64_AddVec3(&start, &ray->start, &shift);
-    GraphU64_AddVec3(&end, &ray->end, &shift);
+    Graphu64_AddVec3(&start, &ray->start, &shift);
+    Graphu64_AddVec3(&end, &ray->end, &shift);
     if (CCollision_IntersectFrontPlaneFraction(poly, &start, &end, &poly->t) == 0) {
         return 0;
     }

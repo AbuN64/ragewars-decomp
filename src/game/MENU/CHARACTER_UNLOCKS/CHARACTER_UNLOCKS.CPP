@@ -22,7 +22,7 @@ extern s32 D_800E28D0;
 
 extern Gfx *g_displayListCursor;
 
-extern void Frontend_DrawModelPreview(void *);
+extern void Preview_DrawModelPreview(void *);
 extern u8 D_800FEB57[][0x190];
 extern HudStatusShared_Settings D_801462C8[];
 
@@ -126,7 +126,7 @@ extern unsigned char D_800FEB0F[];
 
 extern void SmpOverlay_SetSlotValue(void *, int, int);
 
-extern void Frontend_SetPreviewTransformUpdate(void *, int);
+extern void Preview_SetPreviewTransformUpdate(void *, int);
 
 extern void SmXlate_SwitchScreen(int);
 
@@ -153,7 +153,7 @@ extern s32 Widget_ListHasFlag100(void *widget);
 
 
 
-/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in g_menuPlayerScissorRects and draws that panel through Frontend_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
+/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in g_menuPlayerScissorRects and draws that panel through Preview_DrawModelPreview, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
 s32 Menu_RenderPlayerCharacterPreviews(void *arg0, void *arg1, s32 event)
 {
     s32 i;
@@ -182,7 +182,7 @@ s32 Menu_RenderPlayerCharacterPreviews(void *arg0, void *arg1, s32 event)
                         D_800D15E4[2] = 255.0f;
                         D_800D15E4[3] = 255.0f;
                     }
-                    Frontend_DrawModelPreview(D_800E42D0->players[i].model);
+                    Preview_DrawModelPreview(D_800E42D0->players[i].model);
                 }
             }
         }
@@ -321,7 +321,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     }
     D_800E42D0->players[player].kind = choice;
     Key_FindCharacterPreviewRow(choice);
-    Frontend_SetPreviewTransformUpdate(D_800E42D0->players[player].model, 0);
+    Preview_SetPreviewTransformUpdate(D_800E42D0->players[player].model, 0);
 
     count = 0;
     for (j = 0; j < 4; j++) {
@@ -384,7 +384,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
         scale.x = D_800E3A50[index].scale[player];
         scale.y = D_800E3A50[index].scale[player];
         scale.z = D_800E3A50[index].scale[player];
-        Frontend_InitModelPreview(D_800E42D0->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
+        Preview_InitModelPreview(D_800E42D0->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
                       D_800E3A50[index].m_vPos[player], D_800E3A50[index].m_fRotY[player],
                       D_800E3A50[index].flags[player]);
     }

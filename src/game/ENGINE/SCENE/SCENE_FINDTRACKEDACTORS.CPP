@@ -77,7 +77,7 @@ s32 Scene_FindNearestRouteFrame(void *arg0, s32 routeIndex, void *queryPosition)
     item = list->frames;
     if (count > 0) {
         do {
-            GraphU64_SubtractVectors(&position, queryPosition, item);
+            Graphu64_SubtractVectors(&position, queryPosition, item);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);

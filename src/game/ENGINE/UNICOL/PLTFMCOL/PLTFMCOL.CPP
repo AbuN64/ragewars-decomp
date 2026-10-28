@@ -8,8 +8,8 @@
 #include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-extern f32 GameObject_GetActorRadius(void *);
-extern f32 GameObject_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorRadius(void *);
+extern f32 Gobjinst_GetActorHeight(void *);
 extern f32 InstHdr_GetActorBaseOffset(void *);
 extern f32 InstHdr_GetActorReach(void *);
 extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollisionInfo2_t *, f32, f32, f32, f32);
@@ -17,7 +17,7 @@ extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollision
 /* 80241940.CPP */
 /* Builds the eight world-space corners of an object's collision box: the extents come from the shape at
  * 0x18 + 0x14 (half width and depth, or the radius for a cylinder of kind 1), grown by the optional
- * attachment's sizes from GameObject_GetActorRadius, GameObject_GetActorHeight and func_8024E420_de; the box is turned by the object's
+ * attachment's sizes from Gobjinst_GetActorRadius, Gobjinst_GetActorHeight and func_8024E420_de; the box is turned by the object's
  * rest matrix from 0x2A4 and its heading 0x6C composed with its orientation at 0x5C, moved to its position
  * and, for shapes flagged 1, its bottom corners are dropped to the ground height of the given floor. */
 
@@ -56,8 +56,8 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     anim = obj + 0x170;
     shape = (ShapeRecAt18V1 *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
-        grow = GameObject_GetActorRadius(attachment);
-        lift = GameObject_GetActorHeight(attachment);
+        grow = Gobjinst_GetActorRadius(attachment);
+        lift = Gobjinst_GetActorHeight(attachment);
         extra = InstHdr_GetActorBaseOffset(attachment);
     } else {
         lift = 0.0f;
@@ -136,7 +136,7 @@ extern f32 CCollision_GetSurfaceHeight(SurfaceHit *, f32, f32);
 
 struct CCollisionInfo2_t;
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern char D_80100338;
 
@@ -169,8 +169,8 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
             hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
-            extent1 = GameObject_GetActorRadius(input);
-            extent2 = GameObject_GetActorHeight(input);
+            extent1 = Gobjinst_GetActorRadius(input);
+            extent2 = Gobjinst_GetActorHeight(input);
             extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[0];
@@ -214,7 +214,7 @@ void CPlatformCollision_PushActorFromBox(ActorCPlatformCollisionPushActorFromBox
         hit |= CCollision_TestSegmentPolygon(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
-            GraphU64_AddVec3(&((LevelActor *)input)->position1,
+            Graphu64_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }
@@ -236,7 +236,7 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
 
     owner_data = &((LevelActor *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((ShapeRecAt18V1 *)entry)->radius + GameObject_GetActorRadius(input);
+    height = ((ShapeRecAt18V1 *)entry)->radius + Gobjinst_GetActorRadius(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         Plane_BuildBoxFace0(query, bounds);
@@ -246,8 +246,8 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
             hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
             input->owner = owner;
             extent0 = InstHdr_GetActorReach(input);
-            extent1 = GameObject_GetActorRadius(input);
-            extent2 = GameObject_GetActorHeight(input);
+            extent1 = Gobjinst_GetActorRadius(input);
+            extent2 = Gobjinst_GetActorHeight(input);
             extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[1];
@@ -285,7 +285,7 @@ void CPlatformCollision_PushActorFromCylinder(ActorCPlatformCollisionPushActorFr
                           bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
-            GraphU64_AddVec3(&((LevelActor *)input)->position1,
+            Graphu64_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }
@@ -369,7 +369,7 @@ void CPlatformCollision_TraceShape(ActorCPlatformCollisionTraceShape *actor, Own
 }
 
 /* 80241940_3.CPP */
-extern void GraphU64_SubtractVectors(Triple *, Triple *, Triple *);
+extern void Graphu64_SubtractVectors(Triple *, Triple *, Triple *);
 
 
 
@@ -391,7 +391,7 @@ void CPlatformCollision_ProcessRiderMotion(ActorCPlatformCollisionProcessRiderMo
         saved_previous = actor->previous;
         saved_position = actor->position;
         actor->previous = input->position;
-        GraphU64_SubtractVectors(&actor->position, &input->position, &actor->delta);
+        Graphu64_SubtractVectors(&actor->position, &input->position, &actor->delta);
         query.word4 = 0;
         query.word8 = 1;
         query.wordC = 0;
@@ -429,8 +429,8 @@ void CPlatformCollision_LiftActorToSurface(ActorRecAtB0 *actor, void *owner, Inp
     hit_y = CCollision_GetSurfaceHeight(query, input->x, input->z);
     input->owner = owner;
     extent0 = InstHdr_GetActorReach(input);
-    extent1 = GameObject_GetActorRadius(input);
-    extent2 = GameObject_GetActorHeight(input);
+    extent1 = Gobjinst_GetActorRadius(input);
+    extent2 = Gobjinst_GetActorHeight(input);
     extent3 = InstHdr_GetActorBaseOffset(input);
     next.x = input->x;
     next.y = hit_y + D_800C3760_de;

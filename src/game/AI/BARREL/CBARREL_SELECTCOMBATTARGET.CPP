@@ -16,7 +16,7 @@
 
 
 
-extern f32 GameObject_GetActorHeight(ActorBarrelIsTargetInViewCone *);
+extern f32 Gobjinst_GetActorHeight(ActorBarrelIsTargetInViewCone *);
 extern f32 Gu_Sqrtf(f32);
 extern CQuatern func_8024796C_de(ActorBarrelIsTargetInViewCone *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
@@ -41,11 +41,11 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   f32 zero;
   from = viewer->position;
   from.y += viewer->eye;
-  from.y += GameObject_GetActorHeight(viewer) * 0.9f;
+  from.y += Gobjinst_GetActorHeight(viewer) * 0.9f;
   to = target->position;
   to.y += target->eye;
-  to.y += GameObject_GetActorHeight(target) * 0.9f;
-  GraphU64_SubtractVectors(&dir, &to, &from);
+  to.y += Gobjinst_GetActorHeight(target) * 0.9f;
+  Graphu64_SubtractVectors(&dir, &to, &from);
   distance = Gu_Sqrtf(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
   if (range < distance)
   {
@@ -98,11 +98,11 @@ s32 Cbarrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarre
   *((volatile f32 *) (&pitchDir.x)) = 0.0f;
   pitchDir.z = dirLength;
   pitchDir.y = dir.y;
-  GraphU64_NormalizeVec3(&pitchDir);
+  Graphu64_NormalizeVec3(&pitchDir);
   *((volatile f32 *) (&pitchForward.x)) = 0.0f;
   pitchForward.z = forwardLength;
   pitchForward.y = forward.y;
-  GraphU64_NormalizeVec3(&pitchForward);
+  Graphu64_NormalizeVec3(&pitchForward);
   angle = Graphu64_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
   if (up < ((angle < 0.0f) ? (-angle) : (angle)))
   {
@@ -175,8 +175,8 @@ s32 Cbarrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         } else {
             tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
         }
-        GraphU64_SubtractVectors(&hit, &hit, &actor->pos);
-        tracker->unk8C = (f32) (GraphU64_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
+        Graphu64_SubtractVectors(&hit, &hit, &actor->pos);
+        tracker->unk8C = (f32) (Graphu64_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
         return 1;
     }
     if (targetKind == 1) {
@@ -300,10 +300,10 @@ Actor_func_80214DD4_de *Cbarrel_SelectCombatTarget(Actor_func_80214DD4_de *actor
             }
             if (lineOfSight != 0) {
                 saved = *(Instance8020CD74 *)actor;
-                actor->pos.y += GameObject_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
+                actor->pos.y += Gobjinst_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
                 actor->pos.y += candidate->height;
                 target = candidate->pos;
-                target.y += GameObject_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
+                target.y += Gobjinst_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
                 target.y += candidate->height;
                 blocked = CCollision_SweepPoint(actor, actor->pos, target, &D_80100030);
                 if (D_801041F0 == (Instance8020CD74 *)candidate) {

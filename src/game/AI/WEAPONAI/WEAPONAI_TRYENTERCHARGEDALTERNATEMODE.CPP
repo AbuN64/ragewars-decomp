@@ -26,7 +26,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
+extern s16 Weaponai_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 SoundElement_PlaySoundAtPosition(s32, s32, s32, s32, void *, void *);
 extern s32 Player_GetPlayerIndex(void *, void *);
@@ -65,7 +65,7 @@ void Weaponai_TryEnterChargedAlternateMode(Shared_Actor *actor, WeaponFireState 
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weaponai_FindNextUsableWeapon(player);
     }
     if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
         pos = (s32 *)(((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC + 0x128);

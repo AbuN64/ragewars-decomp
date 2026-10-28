@@ -37,9 +37,9 @@ extern Carrier D_801041F0;
 
 extern s32 Gobjinst_FindNearestBoneBounds(ActorEventsComputeDamageScale *, CVector3, Shield *);
 
-extern f32 GameObject_GetActorHeight(ActorEventsComputeDamageScale *);
+extern f32 Gobjinst_GetActorHeight(ActorEventsComputeDamageScale *);
 
-extern f32 GameObject_GetActorRadius(ActorEventsComputeDamageScale *);
+extern f32 Gobjinst_GetActorRadius(ActorEventsComputeDamageScale *);
 
 extern f32 Graphu64_GetPointDistance(CVector3 *, CVector3 *);
 
@@ -133,7 +133,7 @@ have:
         } else {
             body = self->position;
             bottom = self->position.y + self->height;
-            top = bottom + GameObject_GetActorHeight(self);
+            top = bottom + Gobjinst_GetActorHeight(self);
             if (top < position.y) {
                 body.y = top;
             } else if (position.y < bottom) {
@@ -141,7 +141,7 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + GameObject_GetActorRadius(self);
+            reach = radius + Gobjinst_GetActorRadius(self);
             distance = Graphu64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;

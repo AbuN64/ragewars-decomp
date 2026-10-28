@@ -86,9 +86,9 @@ Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 
         node->owner = owner;
         MatrixFromQuaternion(&rotation.x, matrix);
         PitchMatrixLocal(matrix, 1.5707965f);
-        GraphU64_NormalizeVec3(&normal);
-        GraphU64_ScaleVector(&normal, &normal, 2.048f);
-        GraphU64_AddVec3(&position, &position, &normal);
+        Graphu64_NormalizeVec3(&normal);
+        Graphu64_ScaleVector(&normal, &normal, 2.048f);
+        Graphu64_AddVec3(&position, &position, &normal);
         TranslateMatrix((char *)matrix, position.x, position.y, position.z);
         ScaleMatrixLocal(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
         Graphu64_ConvertMatrixToFixed(matrix, &node->transform.matrix);

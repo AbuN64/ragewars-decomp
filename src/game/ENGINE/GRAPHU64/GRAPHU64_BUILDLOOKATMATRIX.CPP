@@ -519,7 +519,7 @@ CVector3 *Graphu64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
         ((CVector3 *)&D_80115E00)->y = D_800C49C0_de;
     } else if ((int)node != D_800CD3E4) {
         cross_edges((CVector3 *)&D_80115E00, node);
-        GraphU64_NormalizeVec3((CVector3 *)&D_80115E00);
+        Graphu64_NormalizeVec3((CVector3 *)&D_80115E00);
     }
     *out = *(CVector3 *)&D_80115E00;
     D_800CD3E4 = (int)node;

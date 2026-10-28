@@ -33,12 +33,12 @@ extern void func_802238E0_de(void *, void *, void *);
 
 extern f32 D_800C2DB0_de;
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Player_ReleaseObjectHandles(s32 arg0);
 
@@ -153,10 +153,10 @@ void Player_AimPreviousPositionAtReset(void *aimPlayerState) {
     CVector3 *weaponAimPositionPtr;
 
     weaponAimPositionPtr = &((Shared_ActorView *)aimPlayerState)->weapon.aimPosition;
-    GraphU64_SubtractVectors(&vector, &((Shared_ActorView *)aimPlayerState)->resetPosition, weaponAimPositionPtr);
-    GraphU64_NormalizeVec3(&vector);
-    GraphU64_ScaleVector(&vector, &vector, 30.0f);
-    GraphU64_AddVec3(&((Player *)aimPlayerState)->previousPosition, weaponAimPositionPtr, &vector);
+    Graphu64_SubtractVectors(&vector, &((Shared_ActorView *)aimPlayerState)->resetPosition, weaponAimPositionPtr);
+    Graphu64_NormalizeVec3(&vector);
+    Graphu64_ScaleVector(&vector, &vector, 30.0f);
+    Graphu64_AddVec3(&((Player *)aimPlayerState)->previousPosition, weaponAimPositionPtr, &vector);
 }
 
 void func_8022D20C_de(void) {

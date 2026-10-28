@@ -264,8 +264,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.z = 0;
                 up.y = 1.0f;
                 Graphu64_CrossVectors(&side, &up, &travel);
-                GraphU64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
-                GraphU64_AddVec3(&position, &position, &offset);
+                Graphu64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
+                Graphu64_AddVec3(&position, &position, &offset);
             }
             if (particle->sineAmplitudeY < 0.0f) {
                 up.x = 0;
@@ -273,8 +273,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.y = 1.0f;
                 Graphu64_CrossVectors(&across, &up, &travel);
                 Graphu64_CrossVectors(&side, &across, &travel);
-                GraphU64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
-                GraphU64_AddVec3(&position, &position, &offset);
+                Graphu64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
+                Graphu64_AddVec3(&position, &position, &offset);
             }
         }
     }
@@ -288,16 +288,16 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             } else {
                 axisZ = attachedDirection;
             }
-            GraphU64_NormalizeVec3(&axisZ.x);
+            Graphu64_NormalizeVec3(&axisZ.x);
             up.x = 0;
             up.z = 0;
             up.y = 1.0f;
             Graphu64_CrossVectors(&axisX, &up, &axisZ);
             Graphu64_CrossVectors(&axisY, &axisX, &axisZ);
             Graphu64_IdentityMatrix(basis);
-            GraphU64_NormalizeVec3(&axisX.x);
-            GraphU64_NormalizeVec3(&axisY.x);
-            GraphU64_NormalizeVec3(&axisZ.x);
+            Graphu64_NormalizeVec3(&axisX.x);
+            Graphu64_NormalizeVec3(&axisY.x);
+            Graphu64_NormalizeVec3(&axisZ.x);
             basis[0] = axisX.x;
             basis[1] = axisX.y;
             basis[2] = axisX.z;

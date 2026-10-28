@@ -258,7 +258,7 @@ void * func_80219408_de(struct Cursor *);
 
 void *func_80219434_de(struct Cursor *);
 
-void GraphU64_SubtractVectors(void *, void *, void *);
+void Graphu64_SubtractVectors(void *, void *, void *);
 
 f32 Gu_Sqrtf(f32);
 
@@ -380,7 +380,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     pathCursor = (void *) &pathState->unk94;
     targetNode = func_80219408_de(pathCursor);
     initial = targetNode->pos;
-    GraphU64_SubtractVectors(&vec0, &initial, &actor->unk8);
+    Graphu64_SubtractVectors(&vec0, &initial, &actor->unk8);
     segmentNode = func_80219434_de(pathCursor);
     targetDistance = Gu_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
     arrivalRadius = targetNode->unk1C;
@@ -413,30 +413,30 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
             }
         }
         if (segmentNode == targetNode) {
-            GraphU64_SubtractVectors(&vec1, segmentNode, &actor->unk8);
+            Graphu64_SubtractVectors(&vec1, segmentNode, &actor->unk8);
         } else {
-            GraphU64_SubtractVectors(&vec1, targetNode, segmentNode);
+            Graphu64_SubtractVectors(&vec1, targetNode, segmentNode);
         }
-        GraphU64_NormalizeVec3(&vec1);
+        Graphu64_NormalizeVec3(&vec1);
         ;
         vec1.x = pathState->unk140 + pathState->unk14C * (vec1.x - pathState->unk140);
         segmentDirectionY = pathState->unk144;
         vec1.y = segmentDirectionY + pathState->unk14C * (vec1.y - segmentDirectionY);
         segmentDirectionZ = pathState->unk148;
         vec1.z = segmentDirectionZ + pathState->unk14C * (vec1.z - segmentDirectionZ);
-        GraphU64_NormalizeVec3(&vec1);
+        Graphu64_NormalizeVec3(&vec1);
         if (pathState->unk14C >= 1.0f) {
             goto block_17;
         }
     } else {
-        GraphU64_NormalizeVec3(&vec0);
+        Graphu64_NormalizeVec3(&vec0);
         ;
         vec1.x = pathState->unk140 + blendRate * (vec0.x - pathState->unk140);
         previousDirectionY = pathState->unk144;
         vec1.y = previousDirectionY + blendRate * (vec0.y - previousDirectionY);
         previousDirectionZ = pathState->unk148;
         vec1.z = previousDirectionZ + blendRate * (vec0.z - previousDirectionZ);
-        GraphU64_NormalizeVec3(&vec1);
+        Graphu64_NormalizeVec3(&vec1);
         block_17:
         pathState->unk140 = vec1.x;
         pathState->unk144 = vec1.y;

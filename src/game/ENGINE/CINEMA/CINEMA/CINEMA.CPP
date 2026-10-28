@@ -134,7 +134,7 @@ void Cinema_UpdateSequenceTrack(void *camera) {
     }
 }
 
-void func_80245894_de(void) {
+void Cinema_DrawSequenceOverlay(void) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
         Track_DrawTrackOverlay();

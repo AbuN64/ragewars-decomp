@@ -285,7 +285,7 @@ load:
     return obj->levelProgress[index];
 }
 
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
 extern void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 
@@ -400,9 +400,9 @@ void Player_BuildWeaponHandTransform(char *arg0) {
     if (D_800CA048 != 0) {
         handOffset.z = -handOffset.z;
     }
-    GraphU64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
+    Graphu64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
     Graphu64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
-    GraphU64_ScaleVector(&handOffset, &handOffset, -10.24f);
+    Graphu64_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
         Graphu64_GetMatrixTranslation(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),

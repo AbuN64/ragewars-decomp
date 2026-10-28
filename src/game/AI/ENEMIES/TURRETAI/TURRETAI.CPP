@@ -44,7 +44,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     f32 turn;
 
     up = D_800C19F0;
-    GraphU64_NormalizeVec3(dir);
+    Graphu64_NormalizeVec3(dir);
     if (dir->y > D_800C19FC_de) {
         q.x = q.y = q.z = 0.0f;
         q.w = D_800C1A00_de;
@@ -57,7 +57,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     } else {
         turn = Graphu64_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
         Graphu64_CrossVectors(&axis, &up, dir);
-        GraphU64_NormalizeVec3(&axis);
+        Graphu64_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
         D_80115DEC = Gu_Sinf(angle);
         q.x = axis.x * D_80115DEC;

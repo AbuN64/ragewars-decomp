@@ -162,13 +162,13 @@ void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
     AlternateModeInfo *info = (AlternateModeInfo *)D_800D052C[player->selectedAction];
     if (!Player_HasAmmoForMode(player, player->selectedAction)) {
         if (((AttackTriggerAction *)attack)->unk13C != 2) {
-            player->weapon = Weapon_FindNextUsableWeapon(player);
+            player->weapon = Weaponai_FindNextUsableWeapon(player);
             return;
         }
         ((AttackTriggerAction *)attack)->unk13C = 1;
         if (info->flags & 0x20) player->state7E8 = 0;
         if (!Player_HasAmmoForMode(player, player->selectedAction)) {
-            player->weapon = Weapon_FindNextUsableWeapon(player);
+            player->weapon = Weaponai_FindNextUsableWeapon(player);
             return;
         }
     }
@@ -210,7 +210,7 @@ void Weaponai_UpdateAlternateFire(void *actor, void *attack) {
 
 
 extern s16 D_800CE8DC[];
-extern s16 Weapon_FindNextUsableWeapon(void *arg0);
+extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -239,7 +239,7 @@ void func_80230610_eu(LevelActor *arg0, void *arg1) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
                 if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-                    ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
+                    ((Shared_ActorView *)actor)->nextWeapon = Weaponai_FindNextUsableWeapon(actor);
                 }
             }
         }
@@ -274,7 +274,7 @@ void func_80230610_eu(LevelActor *arg0, void *arg1) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
-        Weapon_ApplyWeaponSwitch(arg0, arg1);
+        Weaponai_ApplyWeaponSwitch(arg0, arg1);
         Actor_RequestActorState(arg0, arg1, 0);
     }
 }

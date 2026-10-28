@@ -28,14 +28,14 @@ extern s32 *Gobjinst_RequestAnimatedModelVariant(char *, s8);
 
 
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void Graphu64_ConvertMatrixToFloat(f32 *, char *);
 
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern TypeEntry *D_800CB440_de[];
@@ -85,12 +85,12 @@ s32 Gobjinst_FindNearestBoneBounds(char *obj, CVector3 point, Box70 *out) {
         if (box->mask & ((struct ObjectLinks180_2 *) obj)->unk_17C) {
             center = box->corners[0];
             for (j = 1; j < 8; j++) {
-                GraphU64_AddVec3(&center, &center, &box->corners[j]);
+                Graphu64_AddVec3(&center, &center, &box->corners[j]);
             }
-            GraphU64_ScaleVector(&center, &center, 0.125f);
+            Graphu64_ScaleVector(&center, &center, 0.125f);
             Graphu64_ConvertMatrixToFloat(matrix, bones + i * 0x40);
             Graphu64_TransformPoint(matrix, &center, &diff);
-            GraphU64_SubtractVectors(&diff, &diff, &point);
+            Graphu64_SubtractVectors(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
             if (dist < bestDist) {
                 best = box;

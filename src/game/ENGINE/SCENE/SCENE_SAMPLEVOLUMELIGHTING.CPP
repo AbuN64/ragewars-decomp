@@ -139,37 +139,37 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
             volume = volumes[sampleIndex];
             Graphu64_TransformPoint(volume->inverse, position, &transformed);
             if (Lighting_EvaluateLocalVolume(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
-                GraphU64_AddVec3(&translatedDirection, &localDirection, &transformed);
+                Graphu64_AddVec3(&translatedDirection, &localDirection, &transformed);
                 Graphu64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
-                GraphU64_SubtractVectors(sampleDirection, position, &localDirection);
-                GraphU64_NormalizeVec3(sampleDirection);
+                Graphu64_SubtractVectors(sampleDirection, position, &localDirection);
+                Graphu64_NormalizeVec3(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
                     level = Link_GetLightAnimationOffset(volume);
                     animationColor.x = level;
                     animationColor.y = level;
                     animationColor.z = level;
-                    GraphU64_ScaleVector(&contribution, &animationColor, weights[sampleIndex] * volume->value);
+                    Graphu64_ScaleVector(&contribution, &animationColor, weights[sampleIndex] * volume->value);
                     animatedVolume = volume;
                     if (volume->flagB8 != 0) {
-                        GraphU64_ScaleVector(&contribution, &contribution, -1.0f);
+                        Graphu64_ScaleVector(&contribution, &contribution, -1.0f);
                     }
-                    GraphU64_AddVec3(&ambient, &ambient, &contribution);
+                    Graphu64_AddVec3(&ambient, &ambient, &contribution);
                 }
                 amount = volume->value * 0.5f;
                 scale = 1.0f - amount;
-                GraphU64_ScaleVector(&contribution, &color, weights[sampleIndex] * amount);
+                Graphu64_ScaleVector(&contribution, &color, weights[sampleIndex] * amount);
                 if (volume->flagB8 != 0) {
-                    GraphU64_ScaleVector(&contribution, &contribution, -1.0f);
+                    Graphu64_ScaleVector(&contribution, &contribution, -1.0f);
                 }
-                GraphU64_AddVec3(&ambient, &ambient, &contribution);
+                Graphu64_AddVec3(&ambient, &ambient, &contribution);
                 weights[sampleIndex] *= scale;
                 amount = color.x; if (amount < 0.0f) amount = -amount;
                 if (color.y < 0.0f) amount = amount - color.y; else amount = amount + color.y;
                 if (color.z < 0.0f) scale = amount - color.z; else scale = amount + color.z;
-                GraphU64_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
-                GraphU64_ScaleVector(&contribution, &contribution, scale);
-                GraphU64_AddVec3(&combinedDirection, &combinedDirection, &contribution);
+                Graphu64_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
+                Graphu64_ScaleVector(&contribution, &contribution, scale);
+                Graphu64_AddVec3(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
                 }
@@ -185,7 +185,7 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
 
         } while (sampleIndex < count);
     }
-    GraphU64_NormalizeVec3(&combinedDirection);
+    Graphu64_NormalizeVec3(&combinedDirection);
     sampleIndex = 0;
     if (sampleIndex < count) {
         one = 1.0f;
@@ -202,22 +202,22 @@ void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *po
                 animationColor.x = pulse;
                 animationColor.y = pulse;
                 animationColor.z = pulse;
-                GraphU64_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
-                GraphU64_AddVec3(&diffuse, &diffuse, &animatedContribution);
-                GraphU64_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
-                GraphU64_AddVec3(&backLight, &backLight, &animatedContribution);
+                Graphu64_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
+                Graphu64_AddVec3(&diffuse, &diffuse, &animatedContribution);
+                Graphu64_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
+                Graphu64_AddVec3(&backLight, &backLight, &animatedContribution);
             }
-            GraphU64_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
-            GraphU64_AddVec3(&diffuse, &diffuse, &contribution);
+            Graphu64_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
+            Graphu64_AddVec3(&diffuse, &diffuse, &contribution);
 
 
-            GraphU64_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
-            GraphU64_AddVec3(&backLight, &backLight, &contribution);
+            Graphu64_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
+            Graphu64_AddVec3(&backLight, &backLight, &contribution);
             sampleIndex++;
         } while (sampleIndex < count);
     }
-    GraphU64_ScaleVector(&backLight, &backLight, 0.5f);
-    GraphU64_AddVec3(&ambient, &ambient, &backLight);
+    Graphu64_ScaleVector(&backLight, &backLight, 0.5f);
+    Graphu64_AddVec3(&ambient, &ambient, &backLight);
     if (ambient.x < 0.0f) {
         diffuse.x += ambient.x;
     }
@@ -319,7 +319,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
     isKindB = kind == 0xB;
     isKind1 = kind == 1;
     bottom = actor->position0.y + InstHdr_GetActorBaseOffset(actor);
-    top = bottom + GameObject_GetActorHeight(actor);
+    top = bottom + Gobjinst_GetActorHeight(actor);
     for (i = 0; i < world->flaggedCount; i++) {
         trigger = world->flagged[i];
         if (trigger == actor) {
@@ -328,7 +328,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
         ring = 0;
         checkHeight = 0;
         triggerBottom = trigger->position0.y + InstHdr_GetActorBaseOffset(trigger);
-        triggerTop = triggerBottom + GameObject_GetActorHeight(trigger);
+        triggerTop = triggerBottom + Gobjinst_GetActorHeight(trigger);
         definition = (SceneTriggerDefinition *)trigger->definition;
         switch (definition->header.kind) {
         case 6:

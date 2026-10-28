@@ -24,7 +24,7 @@ extern void Graphu64_GetMatrixTranslation(char *object, f32 *output);
 
 extern void Graphu64_GetMatrixScale(void *arg0, f32 *arg1);
 
-extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Graphu64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 extern f32 Gu_Sqrtf(f32);
 
@@ -84,7 +84,7 @@ extern void Fx_FreeRibbonSegment(s32, StateSmpUpdateRibbonLifetime *, Nodes *);
 
 extern void Fx_DetachEffectObject(StateSmpUpdateRibbonLifetime *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern void Graphu64_TransformDirection(void *, void *, void *);
@@ -96,7 +96,7 @@ extern void Graphu64_IdentityMatrix(void *);
 extern void Graphu64_BuildScaleMatrix(void *, f32, f32, f32);
 
 extern void Linked_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void Graphu64_ConvertMatrixToFixed(void *, f32 *);
 
 void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
@@ -125,7 +125,7 @@ void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
         if (temp_s1 != 0) {
-            GraphU64_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
+            Graphu64_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
             temp_f0 = Gu_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
             ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
             ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
@@ -176,8 +176,8 @@ void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, 
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        GraphU64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
-        GraphU64_ScaleVector(b, key, morph->secondFrame);
+        Graphu64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        Graphu64_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -228,8 +228,8 @@ void Linked_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock,
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        GraphU64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
-        GraphU64_ScaleVector(b, key, morph->secondFrame);
+        Graphu64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        Graphu64_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -347,9 +347,9 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     f32 neg_y;
     f32 neg_z;
 
-    GraphU64_SubtractVectors(&first, &arg0->position,
+    Graphu64_SubtractVectors(&first, &arg0->position,
                   &arg1->position);
-    GraphU64_NormalizeVec3(&first);
+    Graphu64_NormalizeVec3(&first);
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
@@ -358,15 +358,15 @@ void Linked_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCam
     neg_z = -basis.z;
     basis.y = neg_y;
     basis.z = neg_z;
-    GraphU64_ScaleVector(&cross, &basis,
+    Graphu64_ScaleVector(&cross, &basis,
                   basis.x * first.x + neg_y * first.y + neg_z * first.z);
-    GraphU64_SubtractVectors(&cross, &first, &cross);
-    GraphU64_NormalizeVec3(&cross);
+    Graphu64_SubtractVectors(&cross, &first, &cross);
+    Graphu64_NormalizeVec3(&cross);
     Graphu64_CrossVectors(&result, &basis, &cross);
-    GraphU64_NormalizeVec3(&result);
-    GraphU64_ScaleVector(&result, &result, arg0->a);
-    GraphU64_ScaleVector(&cross, &cross, arg0->b);
-    GraphU64_ScaleVector(&basis, &basis, arg0->c);
+    Graphu64_NormalizeVec3(&result);
+    Graphu64_ScaleVector(&result, &result, arg0->a);
+    Graphu64_ScaleVector(&cross, &cross, arg0->b);
+    Graphu64_ScaleVector(&basis, &basis, arg0->c);
     Graphu64_IdentityMatrix(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
@@ -519,7 +519,7 @@ void Linked_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         parent = node->parent;
         if (parent != 0) {
             f32 length;
-            GraphU64_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
+            Graphu64_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
             length = Gu_Sqrtf(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
             parent->length = length;
             owner->totalLength += length;

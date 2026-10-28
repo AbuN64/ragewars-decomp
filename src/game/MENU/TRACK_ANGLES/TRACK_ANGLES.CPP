@@ -8,9 +8,9 @@
 
 #include "RENDER/8028FD2C_6.H"
 extern CVector3 Track_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 Graphu64_GetVerticalAngle(CVector3 *direction);
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *direction);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *direction);
 
 /* First point of the current track's camera path (pack section 0 of section 0 of the resource), or the origin with no track. */
 static inline CVector3 TrackStartEye(void) {
@@ -55,9 +55,9 @@ CVector3 Menu_GetTrackStartAngles(void) {
     } else {
         eye = TrackStartEye();
         target = TrackStartTarget();
-        GraphU64_SubtractVectors(&direction, &target, &eye);
+        Graphu64_SubtractVectors(&direction, &target, &eye);
         angles.x = -Graphu64_GetVerticalAngle(&direction);
-        angles.y = GraphU64_GetHorizontalAngle(&direction);
+        angles.y = Graphu64_GetHorizontalAngle(&direction);
         angles.z = 0.0f;
         return angles;
     }

@@ -30,7 +30,7 @@ extern MatchRewardsRecord D_80102B00[];
 extern u8 *D_800D30BC[];
 
 
-extern s32 Weapon_FindNextUsableWeapon(void *);
+extern s32 Weaponai_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s32);
 extern s32 Player_GetPlayerIndex(void *, void *);
 extern CCameraText *Gsky_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
@@ -77,7 +77,7 @@ void Weaponai_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *att
     player = (char *)actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weaponai_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player, &D_800C2FCC_de)) {
         attack->triggered = 1;

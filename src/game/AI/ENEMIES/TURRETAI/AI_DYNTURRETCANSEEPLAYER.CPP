@@ -18,11 +18,11 @@ extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Graphu64_TransformDirectionTranspose(f32 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     CQuatern rotation;
@@ -58,7 +58,7 @@ extern Player **D_80103FCC;
 
 extern char D_80103FD0[];
 
-extern f32 GameObject_GetActorHeight(Player *);
+extern f32 Gobjinst_GetActorHeight(Player *);
 
 extern s32 CCollision_SweepPoint(Player *, CVector3, CVector3, char *);
 
@@ -86,9 +86,9 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     CVector3 offset;
 
     build_rotation(object, matrix);
-    GraphU64_SubtractVectors(&offset, point, pivot);
+    Graphu64_SubtractVectors(&offset, point, pivot);
     Graphu64_TransformDirectionTranspose(matrix, &offset, point);
-    GraphU64_AddVec3(point, point, pivot);
+    Graphu64_AddVec3(point, point, pivot);
 }
 
 void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
@@ -139,15 +139,15 @@ s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *oth
     f32 lift;
     s32 blocked;
 
-    GraphU64_SubtractVectors(&to, &other->pos, &player->pos);
+    Graphu64_SubtractVectors(&to, &other->pos, &player->pos);
     lift = 0.5f;
     from.x = rider->aim.x;
     from.y = rider->aim.y;
     from.z = rider->aim.z;
     from = player->pos;
-    from.y += GameObject_GetActorHeight(player) * lift;
+    from.y += Gobjinst_GetActorHeight(player) * lift;
     to = other->pos;
-    to.y += GameObject_GetActorHeight(other) * lift;
+    to.y += Gobjinst_GetActorHeight(other) * lift;
     blocked = CCollision_SweepPoint(player, from, to, D_80103FD0);
     if (blocked != 0 && *D_80103FCC != other) {
         return 0;

@@ -14,7 +14,7 @@
 extern struct {s32 *unk0;} D_8013B364;
 
 
-extern void GraphU64_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
+extern void Graphu64_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
 /** Return the index of the link joining two nodes, accepting reversed links of two-way types, or -1. */
 
@@ -144,7 +144,7 @@ s32 Portal_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
         do {
             items = pointSet->records;
             stride = *(s32 *)items;
-            GraphU64_SubtractVectors(&offset, point, (char *)items + (index * stride + 8));
+            Graphu64_SubtractVectors(&offset, point, (char *)items + (index * stride + 8));
             distanceSq = (offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z);
             if ((bestIndex < 0) || (distanceSq < bestDistanceSq)) {
                 bestIndex = index;

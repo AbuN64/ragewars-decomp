@@ -1128,8 +1128,8 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, s32, 0x120C) = flag;
         EUF(player, f32, 0x11FC) = 150.0f;
         BuildDirectionMatrix(mtx, player + 0x1470);
-        GraphU64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
-        GraphU64_AddVec3((CVector3 *)vec, (CVector3 *)vec, (CVector3 *)(player + 0x1200));
+        Graphu64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
+        Graphu64_AddVec3((CVector3 *)vec, (CVector3 *)vec, (CVector3 *)(player + 0x1200));
         TranslateMatrix(mtx, vec[0], vec[1], vec[2]);
         SwapMatrixUpForward(mtx);
         Graphu64_ConvertMatrixToFixed(mtx, player + 0x1600);
@@ -1164,32 +1164,32 @@ void Playerai_ApplyPlayerForces(void *listObject, void *bodyObject) {
         one = D_800C2C14_de;
     do {
         if (player->active != 0 && playerHasForce(player, zero)) {
-            GraphU64_SubtractVectors(&delta, &player->origin, &body->position);
+            Graphu64_SubtractVectors(&delta, &player->origin, &body->position);
             distance = (delta.x * delta.x + delta.y * delta.y) + delta.z * delta.z;
-            GraphU64_NormalizeVec3(&delta);
+            Graphu64_NormalizeVec3(&delta);
             changed = 1;
             if (D_800C2C18_de < distance) {
                 force = D_800C2C1C_de / distance;
                 if (D_800D2988 < one) force *= D_800D2988;
                 if (player->attract == 0) force = -force;
                 direction = body->velocity;
-                GraphU64_NormalizeVec3(&direction);
+                Graphu64_NormalizeVec3(&direction);
                 dot = delta.x * direction.x + delta.y * direction.y;
                 dot += delta.z * direction.z;
                 if (dot < zero) dot = -dot;
                 dot += one;
                 dot *= D_800C2C20_de;
                 force *= dot;
-                GraphU64_ScaleVector(&delta, &delta, force);
+                Graphu64_ScaleVector(&delta, &delta, force);
             }
-            GraphU64_AddVec3(&body->velocity, &body->velocity, &delta);
+            Graphu64_AddVec3(&body->velocity, &body->velocity, &delta);
         }
         player = player->next;
     } while (player != 0);
     }
     if (changed != 0) {
         delta = body->velocity;
-        GraphU64_NormalizeVec3(&delta);
+        Graphu64_NormalizeVec3(&delta);
         body->direction = delta;
     }
 }

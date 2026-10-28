@@ -105,14 +105,14 @@ void Portal_LinkNavigationObjects(Shared_Arg0 *arg0)
   ww = &g_world;
   if (var_s5 != 0)
   {
-    var_f21 = D_800C1D40[0];
+    var_f21 = g_navigationObjectLinkDistanceLimits[0];
     do
     {
       temp_a0 = arg0->unk0;
       temp_s1 = (NavigationPoint *) (&((SharedRecAt0V1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
       if (navigation_point_flags(temp_s1) & 1)
       {
-        var_f20 = D_800C1D40[1];
+        var_f20 = g_navigationObjectLinkDistanceLimits[1];
         var_s3 = 0;
         if (navigation_point_object_id(temp_s1) != 0x653)
         {
@@ -162,7 +162,7 @@ void Portal_LinkNavigationObjects(Shared_Arg0 *arg0)
           }
           if (var_s3 != 0)
           {
-            if (var_f20 < D_800C1D40[2])
+            if (var_f20 < g_navigationObjectLinkDistanceLimits[2])
             {
               var_s5->unk34 = var_s3;
               goto next_node;
@@ -274,7 +274,7 @@ s32 Insthdr_GetModelCollisionFlag1(Player *);
 s32 Insthdr_IsInactiveOrCollisionOption4(Player *);
 s32 Insthdr_GetModelCollisionFlag8(Player *);
 s32 Unicol_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
-void GraphU64_SubtractVectors(CVector3 *, void *, CVector3 *);
+void Graphu64_SubtractVectors(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
  * restored around the trial move. */
@@ -323,7 +323,7 @@ static __inline__ s32 navigationNeighbours(CNavData *graph, s32 current, s32 *ta
 }
 /* Picks the controller's next point: follows a queued point when the actor may take it, otherwise the nearest reachable neighbour
  * (special portals and drops first while within the starting height). */
-void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
+void Portal_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
     s32 targets[64];
     s32 portalIds[64];
     CVector3 delta;
@@ -343,7 +343,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
     found = 0;
     climbing = actor->movementFlags & 0x2000;
     swimming = actor->movementFlags & 0x1000;
-    GraphU64_SubtractVectors(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
+    Graphu64_SubtractVectors(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
     if (climbing || swimming) {
         dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
     } else {
@@ -366,7 +366,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
                     target = actor->controller->mode;
                 }
                 point = navigationRecord(graph->points, target);
-                GraphU64_SubtractVectors(&delta, &point->position, &actor->pos);
+                Graphu64_SubtractVectors(&delta, &point->position, &actor->pos);
                 if (climbing || swimming || (navigation_point_flags(point) & 0x200)) {
                     dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
                 } else {
@@ -390,7 +390,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
         point = navigationRecord(graph->points, target);
         portal = navigationRecord(graph->m_pusNavLinks, portalIds[i]);
         if (!(navigation_attributes(point) & 0x300000) || swimming || climbing) {
-            GraphU64_SubtractVectors(&delta, &point->position, &actor->pos);
+            Graphu64_SubtractVectors(&delta, &point->position, &actor->pos);
             if (climbing || swimming) {
                 dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
             } else {

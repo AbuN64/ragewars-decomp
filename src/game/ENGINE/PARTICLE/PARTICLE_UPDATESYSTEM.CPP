@@ -22,7 +22,7 @@ extern char D_801379C0, D_8013B1A8;
 
 
 extern SharedPlayer *D_80145060;
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor, ActorParticleMarkCrowdedActor **others, s32 count) {
     CVector3 delta;
@@ -35,7 +35,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
     objectCount = world->kind1Count;
     for (i = 0; i < objectCount; i++) {
         if (world->kind1[i]->active > 0) {
-            GraphU64_SubtractVectors(&delta, &world->kind1[i]->position0, &actor->position);
+            Graphu64_SubtractVectors(&delta, &world->kind1[i]->position0, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -44,7 +44,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
     }
     for (player = D_80145060; player != 0; player = player->views16E0.view16E0_1.next) {
         if (actor->owner != player && player->views5E4.view5E4_2.health > 0) {
-            GraphU64_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
+            Graphu64_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -53,7 +53,7 @@ void Particle_MarkCrowdedActor(s32 unused, ActorParticleMarkCrowdedActor *actor,
     }
     for (i = 0; i < count; i++) {
         if (others[i] != actor && (others[i]->type == 0xC || others[i]->type == 0x22)) {
-            GraphU64_SubtractVectors(&delta, &others[i]->position, &actor->position);
+            Graphu64_SubtractVectors(&delta, &others[i]->position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 262144.0f) {
                 actor->crowded = 1;
                 return;
@@ -124,7 +124,7 @@ extern void Particle_Update(void *),Particle_FinishActorEffects(void *),Particle
 extern void Fx_DetachParticleSwooshes(void *,void *);
 extern void Particle_SpawnChildEffect(void *,s32,s32,s32);
 extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32);
-extern void GraphU64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 /* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
  * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
  * draw list. */
@@ -263,7 +263,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
                 for (j = 0; j < pairCount; j++) {
                     p = begin[j];
                     if (p->m_nObjType != 87) {
-                        GraphU64_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
+                        Graphu64_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
                         if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= D_800C4E50_de) {
                             p->m_nFrames = 1;
                         }

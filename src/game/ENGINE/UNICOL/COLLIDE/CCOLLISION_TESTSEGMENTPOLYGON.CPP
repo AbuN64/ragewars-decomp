@@ -10,7 +10,7 @@ extern f32 CCollision_GetSurfaceHeight(struct Query *, f32, f32);
 
 extern f32 Gu_Sqrtf(f32);
 
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
 
 /* Tests a ray against a polygon: intersects the ray from 0x44 to 0x50 with the polygon's plane through
@@ -97,7 +97,7 @@ void CCollision_ProjectSegmentOntoSurface(SegmentCode8023A284 *segment, struct Q
     } else {
         fade = 1.0f - limit;
     }
-    GraphU64_ScaleVector(target, node, fade);
+    Graphu64_ScaleVector(target, node, fade);
 }
 
 /** Thin wrapper around CCollision_ClearContactNormal. */

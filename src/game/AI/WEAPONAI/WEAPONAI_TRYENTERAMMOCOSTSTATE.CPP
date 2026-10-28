@@ -25,7 +25,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
+extern s16 Weaponai_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 SoundElement_PlaySoundAtPosition(s32, s32, s32, s32, void *, s32);
 extern s32 Player_GetPlayerIndex(void *, void *);
@@ -63,7 +63,7 @@ void Weaponai_TryEnterAmmoCostState(Shared_Actor *actor, WeaponFireState *fireSt
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     fireState->mode = 1;
     if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weaponai_FindNextUsableWeapon(player);
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E4.view5E4_0.unk5E4 != 0) {

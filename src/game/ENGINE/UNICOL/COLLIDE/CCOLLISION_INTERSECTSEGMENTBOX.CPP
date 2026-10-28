@@ -31,7 +31,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     s32 i, active, type, timer;
     settings=a->surface;
     if (a->collisionState!=0) {
-    GraphU64_NormalizeVec3(&a->normal.x);
+    Graphu64_NormalizeVec3(&a->normal.x);
     step=D_800CB404_de*D_800C3634_de;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
@@ -98,17 +98,17 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             Graphu64_ReflectVector(&rotation,&a->orientation,&a->normal,settings->BounceReturnEnergy);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3674_de;
         remainingFraction=scale-remainingFraction;
-        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
         Graphu64_ReflectVector(delta,&remaining,&a->normal,settings->BounceReturnEnergy);
-        GraphU64_ScaleVector(delta,delta,scale-a->damping);
-        GraphU64_AddVec3(&a->position,&a->interpolated,delta);
+        Graphu64_ScaleVector(delta,delta,scale-a->damping);
+        Graphu64_AddVec3(&a->position,&a->interpolated,delta);
         return 1;
     }
     case 2: {
@@ -117,18 +117,18 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             Graphu64_ProjectVectorOntoPlane(&rotation,&a->orientation,&a->normal);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C367C_de;
         remainingFraction=scale-remainingFraction;
-        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         Graphu64_ProjectVectorOntoPlane(&bounce,&remaining,&a->normal);
-        GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
-    GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
-    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    GraphU64_AddVec3(&a->position,&a->position,&gravity);
+        Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
+    Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }
@@ -136,11 +136,11 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         if(a->orientationActive!=0) {rotation=Graphu64_ProjectVectorPreservingLength(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
         if(active==0)return 1;
         fraction=a->blend;
-        GraphU64_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
+        Graphu64_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
         bounce=Graphu64_ProjectVectorPreservingLength(&remaining,&a->normal);
-        GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
-    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    GraphU64_AddVec3(&a->position,&a->position,&gravity);
+        Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     case 5: {
@@ -150,20 +150,20 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             projected=Graphu64_ProjectVectorPreservingLength(&a->orientation,&a->normal);
             Graphu64_InterpolateVector(&a->projectedOrientation,0.25f,&reflection,&projected);
             damping=a->damping;
-            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
+            Graphu64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3688_de;
         remainingFraction=scale-remainingFraction;
-        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        Graphu64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         Graphu64_ProjectVectorOntoPlane(&reflection,&remaining,&a->normal);
         projected=Graphu64_ProjectVectorPreservingLength(&remaining,&a->normal);
         Graphu64_InterpolateVector(&bounce,0.25f,&reflection,&projected);
-        GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
-    GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
-    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    GraphU64_AddVec3(&a->position,&a->position,&gravity);
+        Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
+    Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
+    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }

@@ -28,9 +28,9 @@ void CopyMatrix(f32 *, f32 *);
 void Player_BuildPlayerViewTransform(void *, f32 *);
 void Player_GetPlayerViewTranslation(void *, f32 *);
 s32 CCollision_SweepPoint(char *, CVector3, CVector3, s32);
-void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
-void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 f32 Gu_Sqrtf(f32);
 void Player_BuildAimMarkerMatrices(struct SharedPlayer *, CVector3 *, CVector3 *);
 CQuatern Playerai_ComputeAimRotation(void *, AimActor **, void *);
@@ -38,7 +38,7 @@ CQuatern func_8024796C_de(char *);
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
 s32 Playerai_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
-f32 GameObject_GetActorHeight(void *);
+f32 Gobjinst_GetActorHeight(void *);
 void func_8021D774_de(AimPlayer *player) {
     AimOutput aimResult;
     CVector3 localForward;
@@ -84,11 +84,11 @@ void func_8021D774_de(AimPlayer *player) {
         if ((CCollision_SweepPoint((char *)player, current, desired, (s32) &D_801000F0) != 0) && (rayHitActor = D_80103FCC->actor, (rayHitActor != NULL))) {
             if (rayHitActor->kind == 1) {
                 if (rayHitActor->flags & 0x300000) {
-                    GraphU64_SubtractVectors((CVector3 *)&aimRotation, &rayHitActor->pos, &player->unk8);
+                    Graphu64_SubtractVectors((CVector3 *)&aimRotation, &rayHitActor->pos, &player->unk8);
                     temp_fv0 = Gu_Sqrtf((aimRotation.x * aimRotation.x) + (aimRotation.y * aimRotation.y) + (aimRotation.z * aimRotation.z));
                     direction = localForward;
-                    GraphU64_NormalizeVec3(&direction);
-                    GraphU64_ScaleVector(&probeLow.xyz, &direction, temp_fv0);
+                    Graphu64_NormalizeVec3(&direction);
+                    Graphu64_ScaleVector(&probeLow.xyz, &direction, temp_fv0);
                     Graphu64_TransformPoint(matrix, &probeLow.xyz, (CVector3 *)&probeHigh);
                     player->aim2 = (*(CVector3 *)&probeHigh);
                     Player_BuildAimMarkerMatrices((void *)player, (CVector3 *)&probeHigh, &D_80103FCC->normal);
@@ -185,12 +185,12 @@ block_15:
     }
     temp_s2 = &player->smooth;
     smoothingFactor = D_800C23CC_de;
-    GraphU64_SubtractVectors(&smoothOffset, &aimResult.xyz, temp_s2);
-    GraphU64_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f * smoothingFactor);
+    Graphu64_SubtractVectors(&smoothOffset, &aimResult.xyz, temp_s2);
+    Graphu64_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f * smoothingFactor);
     temp_s0_2 = &player->smoothVelocity;
-    GraphU64_AddVec3(temp_s0_2, temp_s0_2, &smoothOffset);
-    GraphU64_AddVec3(temp_s2, temp_s2, temp_s0_2);
-    GraphU64_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * smoothingFactor);
+    Graphu64_AddVec3(temp_s0_2, temp_s0_2, &smoothOffset);
+    Graphu64_AddVec3(temp_s2, temp_s2, temp_s0_2);
+    Graphu64_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * smoothingFactor);
     if (lockedTarget != NULL) {
         weapon=D_800D052C[player->unk62E]; player->unk7B8=weapon->locked+0x64;
     } else {
@@ -232,7 +232,7 @@ block_15:
                 } else {
                     aimResult.xyz = lockedTarget->pos;
                     aimResult.xyz.y = aimResult.xyz.y + lockedTarget->height;
-                    aimResult.xyz.y += GameObject_GetActorHeight(lockedTarget) * D_800C23D0_de;
+                    aimResult.xyz.y += Gobjinst_GetActorHeight(lockedTarget) * D_800C23D0_de;
                 }
                 if (player->unk62E == 1 && player->unk594 == 2) {
                     var_s4 = 0x2C7;
@@ -252,11 +252,11 @@ reset_position:
     }
     aimOffsetOutput = &smoothOffset;
     temp_s2_2 = &player->out;
-    GraphU64_SubtractVectors(aimOffsetOutput, &aimResult.xyz, temp_s2_2);
-    GraphU64_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f);
+    Graphu64_SubtractVectors(aimOffsetOutput, &aimResult.xyz, temp_s2_2);
+    Graphu64_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f);
     temp_s1 = &player->velocity;
-    GraphU64_AddVec3(temp_s1, temp_s1, &smoothOffset);
-    GraphU64_AddVec3(temp_s2_2, temp_s2_2, temp_s1);
-    GraphU64_ScaleVector(temp_s1, temp_s1, temp_fs2);
+    Graphu64_AddVec3(temp_s1, temp_s1, &smoothOffset);
+    Graphu64_AddVec3(temp_s2_2, temp_s2_2, temp_s1);
+    Graphu64_ScaleVector(temp_s1, temp_s1, temp_fs2);
     player->unk798 = (s32) var_s4;
 }

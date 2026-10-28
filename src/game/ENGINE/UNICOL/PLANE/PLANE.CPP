@@ -40,9 +40,9 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
     remaining = polygon->vertexCount;
     if (polygon->type == 3 || polygon->type == 4) {
         for (; --remaining != -1; previousVertex = vertex++) {
-            GraphU64_SubtractVectors(&edge, vertex, previousVertex);
+            Graphu64_SubtractVectors(&edge, vertex, previousVertex);
             Graphu64_CrossVectors(&outward, &polygon->normal, &edge);
-            GraphU64_SubtractVectors(&delta, point, previousVertex);
+            Graphu64_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
                 if (radius > 0.0f) {
@@ -50,10 +50,10 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                     if (projection > 0.0f) {
                         lengthSquared = edge.x * edge.x + edge.y * edge.y + edge.z * edge.z;
                         if (lengthSquared <= projection) {
-                            GraphU64_SubtractVectors(&delta, &delta, &edge);
+                            Graphu64_SubtractVectors(&delta, &delta, &edge);
                         } else {
-                            GraphU64_ScaleVector(&edge, &edge, projection / lengthSquared);
-                            GraphU64_SubtractVectors(&delta, &delta, &edge);
+                            Graphu64_ScaleVector(&edge, &edge, projection / lengthSquared);
+                            Graphu64_SubtractVectors(&delta, &delta, &edge);
                         }
                     }
                     if (!(radiusSquared < delta.x * delta.x + delta.y * delta.y + delta.z * delta.z)) {
@@ -65,9 +65,9 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
         }
     } else {
         for (; --remaining != -1; previousVertex = vertex++) {
-            GraphU64_SubtractVectors(&edge, vertex, previousVertex);
+            Graphu64_SubtractVectors(&edge, vertex, previousVertex);
             Graphu64_CrossVectors(&outward, &polygon->normal, &edge);
-            GraphU64_SubtractVectors(&delta, point, previousVertex);
+            Graphu64_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
                 if (radius > 0.0f) {
@@ -85,8 +85,8 @@ s32 Plane_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                             return 0;
                         }
                     }
-                    GraphU64_ScaleVector(&edge, &edge, projection);
-                    GraphU64_SubtractVectors(&delta, &delta, &edge);
+                    Graphu64_ScaleVector(&edge, &edge, projection);
+                    Graphu64_SubtractVectors(&delta, &delta, &edge);
                     if (!(radiusSquared < delta.x * delta.x + delta.y * delta.y + delta.z * delta.z)) {
                         continue;
                     }
@@ -135,7 +135,7 @@ void CPlane_ResetContact(void *contactStorage)
 /* 802406C0_2.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 1, 2 and 3 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -144,10 +144,10 @@ static inline void quad_normal(struct Quad *quad) {
     CVector3 first;
     CVector3 second;
 
-    GraphU64_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
-    GraphU64_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
+    Graphu64_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
+    Graphu64_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
     Graphu64_CrossVectors(&quad->normal, &second, &first);
-    GraphU64_NormalizeVec3(&quad->normal);
+    Graphu64_NormalizeVec3(&quad->normal);
 }
 
 void CPlane_BuildTriangleNormal(void *query) {
@@ -158,11 +158,11 @@ void CPlane_BuildTriangleNormal(void *query) {
     CVector3 *outputNormal;
 
     middleVertex = &object->vectors[1];
-    GraphU64_SubtractVectors(&firstEdge, middleVertex, &object->vectors[0]);
-    GraphU64_SubtractVectors(&secondEdge, &object->vectors[2], middleVertex);
+    Graphu64_SubtractVectors(&firstEdge, middleVertex, &object->vectors[0]);
+    Graphu64_SubtractVectors(&secondEdge, &object->vectors[2], middleVertex);
     outputNormal = &object->result;
     Graphu64_CrossVectors(outputNormal, &secondEdge, &firstEdge);
-    GraphU64_NormalizeVec3(outputNormal);
+    Graphu64_NormalizeVec3(outputNormal);
 }
 
 void Plane_BuildBoxFace0(struct Quad *quad, CVector3 *points) {
@@ -177,7 +177,7 @@ void Plane_BuildBoxFace0(struct Quad *quad, CVector3 *points) {
 /* 80240DF0.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 7, 6, 5 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -196,7 +196,7 @@ void Plane_BuildBoxFace1(struct Quad *quad, CVector3 *points) {
 /* 80240ED0.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 3, 2, 6 and 7 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -215,7 +215,7 @@ void Plane_BuildBoxFace2(struct Quad *quad, CVector3 *points) {
 /* 80240FB0.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 4, 5, 1 and 0 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -234,7 +234,7 @@ void Plane_BuildBoxFace3(struct Quad *quad, CVector3 *points) {
 /* 80241090.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 3, 7 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -253,7 +253,7 @@ void Plane_BuildBoxFace4(struct Quad *quad, CVector3 *points) {
 /* 80241170.CPP */
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 2, 1, 5 and 6 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through GraphU64_SubtractVectors, their cross product through
+   corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
    Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -274,7 +274,7 @@ s32 CPlane_IsPointBehind(void *plane, CVector3 *testPoint) {
     CVector3 offset;
     s32 outside;
 
-    GraphU64_SubtractVectors(&offset, testPoint, &object->pos);
+    Graphu64_SubtractVectors(&offset, testPoint, &object->pos);
     outside = 0;
     if (!((object->normal.x * offset.x) + (object->normal.y * offset.y) + (object->normal.z * offset.z) >= 0.0f)) {
         outside = 1;

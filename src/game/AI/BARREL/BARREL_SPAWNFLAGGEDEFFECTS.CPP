@@ -96,13 +96,13 @@ void Barrel_RunDamageHook(void *actor, struct CallbackState114 *callbackState, v
     }
 }
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-/** Subtract obj->y from arg2 in-place via GraphU64_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
+/** Subtract obj->y from arg2 in-place via Graphu64_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
 f32 Barrel_GetEyeDistanceSquared(void *candidate, CVector3 v) {
     f32 eyeDeltaY;
 
-    GraphU64_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
+    Graphu64_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
     eyeDeltaY = v.y - ((ActorBarrelIsTargetInViewCone *)(candidate))->eye;
     v.y = eyeDeltaY;
     return (v.x * v.x) + (eyeDeltaY * eyeDeltaY) + (v.z * v.z);
@@ -176,9 +176,9 @@ void Barrel_StopActorLoopingSound(void *arg0, void *arg1) {
     }
 }
 
-extern f32 GameObject_GetActorRadius(void *arg0);
-extern void GraphU64_ScaleVector(void *result, void *vector, f32 scale);
-extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern f32 Gobjinst_GetActorRadius(void *arg0);
+extern void Graphu64_ScaleVector(void *result, void *vector, f32 scale);
+extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void InstHdr_CopyActorPositionAndModel(void *arg0, CVector3 value, void *arg4, s32 *arg5,
                           s32 arg6, s32 arg7);
 
@@ -189,19 +189,19 @@ void Barrel_FindOffsetApproachPosition(void *arg0, s32 unused, void *arg2, Playe
     f32 distance;
 
     if (arg3 != 0) {
-        GraphU64_SubtractVectors(&offset, &((Player *)(arg2))->pos,
+        Graphu64_SubtractVectors(&offset, &((Player *)(arg2))->pos,
                        &arg3->pos);
         offset.y = 0.0f;
-        GraphU64_NormalizeVec3(&offset.x);
+        Graphu64_NormalizeVec3(&offset.x);
     } else {
         offset.x = 0.0f;
         offset.y = 0.0f;
         offset.z = 0.0f;
     }
 
-    distance = GameObject_GetActorRadius(arg2) + GameObject_GetActorRadius(arg0) + D_800C21E8_de;
-    GraphU64_ScaleVector(&offset, &offset, distance);
-    GraphU64_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
+    distance = Gobjinst_GetActorRadius(arg2) + Gobjinst_GetActorRadius(arg0) + D_800C21E8_de;
+    Graphu64_ScaleVector(&offset, &offset, distance);
+    Graphu64_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
     InstHdr_CopyActorPositionAndModel(arg2, position, arg4, arg5, 0, 0);
 }
 

@@ -13,7 +13,7 @@
 #include "particle/80271B18_3.H"
 
 extern char D_8011D8D0;
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(Triple *);
 #include "particle/8027A0F4_8.H"
@@ -45,7 +45,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                 node = attachmentNodes->bytes + attachmentNodeIndex * attachmentNodes->stride;
                 attachmentEffectFlags = (*node == 5) * 2;
                 Graphu64_TransformPoint(&attachmentMatrices[attachmentNodeIndex], effectAttachments, &pos);
-                GraphU64_ScaleVector(&pos, &pos, 0.000015258789f);
+                Graphu64_ScaleVector(&pos, &pos, 0.000015258789f);
                 particleLifeRange = 0;
                 attachmentMask = effectBinding->unk0;
                 switch (attachmentMask) {                  /* irregular */

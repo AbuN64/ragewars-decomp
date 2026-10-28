@@ -16,7 +16,7 @@ extern s32 SetN64_GetDirectoryEntry(s32, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern s32 Scene_GetActorDefinition(void *, s32);
 #include "COMMON.H"
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 struct Shared_World;
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 extern s32 Scene_GetModelIdAtIndex(void *, s32);
@@ -86,7 +86,7 @@ SceneEffect *Animpool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant,
             if (resource != 0) {
                 record = SetN64_GetPackSection(*resource, 0);
                 count = Scene_GetActorDefinition(&g_world, record->count);
-                GraphU64_ScaleVector(&color, &color, Menu_ExpandFloatHighWord(record->angle));
+                Graphu64_ScaleVector(&color, &color, Menu_ExpandFloatHighWord(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
                 Cache_UnlockResource(0, resource);
             }

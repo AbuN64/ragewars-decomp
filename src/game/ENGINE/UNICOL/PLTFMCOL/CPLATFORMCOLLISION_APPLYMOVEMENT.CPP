@@ -3,7 +3,7 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "ANIM/802412C0_5.H"
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /** Set flag 8 in the first object and flag 0x10 in the second. */
 void CPlatformCollision_MarkBlocked(void *first, void *second) {
@@ -18,5 +18,5 @@ void CPlatformCollision_ApplyMovement(void *platformMotion, void *levelActor) {
     LevelActor *target = levelActor;
     CVector3 *position = &target->position1;
     actor->flags |= 8;
-    GraphU64_AddVec3(position, position, &actor->movement);
+    Graphu64_AddVec3(position, position, &actor->movement);
 }

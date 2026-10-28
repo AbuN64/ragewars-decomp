@@ -16,8 +16,8 @@
 /* 8027A0F4.CPP */
 extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *,void *);
-static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){GraphU64_ScaleVector(out,input,scale);}
-static inline void addImpulse(CVector3 *v,CVector3 *impulse){GraphU64_AddVec3(v,v,impulse);}
+static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){Graphu64_ScaleVector(out,input,scale);}
+static inline void addImpulse(CVector3 *v,CVector3 *impulse){Graphu64_AddVec3(v,v,impulse);}
 void Particle_SteerSoundTrackingParticle(void *particle) {
     SteeringParticle *arg0=particle;
     CVector3 sp18;
@@ -77,7 +77,7 @@ block_7:
             temp_fv0_2 = Gu_Sqrtf((temp_fv0f * temp_fv0f) + (temp_fv0 * temp_fv0) + (temp_fa0 * temp_fa0));
             
             sp18 = target->position;
-            GraphU64_SubtractVectors(&sp28, &sp18, &arg0->position);
+            Graphu64_SubtractVectors(&sp28, &sp18, &arg0->position);
             amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
                 sp68 = Graphu64_BuildDirectionQuaternion(&sp28);
@@ -86,15 +86,15 @@ block_7:
                 sp38.y = 0;
                 sp38.z = D_800C4B54_de;
                 Graphu64_TransformPoint(&sp78, &sp38, temp_s2);
-                GraphU64_ScaleVector(&arg0->velocity, temp_s2, temp_fv0_2);
+                Graphu64_ScaleVector(&arg0->velocity, temp_s2, temp_fv0_2);
                 return;
             }
             if (D_800C4B58_de < amount) {
                 sp18.y += D_800C4B50_de;
-                GraphU64_SubtractVectors(&sp28, &sp18, &arg0->position);
+                Graphu64_SubtractVectors(&sp28, &sp18, &arg0->position);
                 amount = Gu_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
-            GraphU64_NormalizeVec3(&sp28.x);
+            Graphu64_NormalizeVec3(&sp28.x);
             sp58 = Graphu64_BuildDirectionQuaternion(&sp28);
             if (amount < D_800C4B5C_de) {
                 temp_fv0f_2 = amount - D_800C4B60_de;
@@ -116,7 +116,7 @@ block_7:
             sp38.y = 0;
             sp38.z = D_800C4B74_de;
             Graphu64_TransformPoint(&sp78, &sp38, temp_s0_2);
-            GraphU64_ScaleVector(&arg0->velocity, temp_s0_2, temp_fv0_2);
+            Graphu64_ScaleVector(&arg0->velocity, temp_s0_2, temp_fv0_2);
             goto block_21;
         }
 block_21:
@@ -132,7 +132,7 @@ block_21:
             temp_fs0 = Gu_Sqrtf((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
             temp_fv0_5 = Menu_ExpandFloatHighWord((s32) arg0->descriptor->motion->speed);
             if (scale > 0.0f) {if (!(temp_fv0_5 < temp_fs0)) goto after_clamp;} else {if (!(temp_fs0 < temp_fv0_5)) goto after_clamp;}
-            GraphU64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
+            Graphu64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
             after_clamp:;
         }
         Particle_UpdateSineMotion(arg0, 1.0f);
@@ -202,7 +202,7 @@ create_sound:
         v58.y = 0;
         v58.z = D_800C4B7C_de;
         Player_TransformPointByViewOrOwnerMatrix(owner, &v58);
-        GraphU64_SubtractVectors(&v68, &v58, &homingParticle->position);
+        Graphu64_SubtractVectors(&v68, &v58, &homingParticle->position);
         distance = Gu_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
         if (distance < D_800C4B80_de && homingParticle->time > D_800C4B84_de) {
             Particle_DispatchActorContactEvents(homingParticle);
@@ -212,17 +212,17 @@ create_sound:
         }
     } else {
         v18 = FIELD(CVector3, FIELD(void *, homingParticle, 0x134), 0x8);
-        v18.y += GameObject_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * D_800C4B88_de;
-        GraphU64_SubtractVectors(&v68, &v18, &homingParticle->position);
+        v18.y += Gobjinst_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * D_800C4B88_de;
+        Graphu64_SubtractVectors(&v68, &v18, &homingParticle->position);
     }
     v28 = v68;
-    GraphU64_NormalizeVec3(&v28);
+    Graphu64_NormalizeVec3(&v28);
     q88 = Graphu64_BuildDirectionQuaternion(&v28);
     Graphu64_NormalizeQuaternion(&q88);
     Graphu64_NormalizeQuaternion(&q78);
-    GraphU64_NormalizeVec3(&v28);
+    Graphu64_NormalizeVec3(&v28);
     v38 = homingParticle->direction;
-    GraphU64_NormalizeVec3(&v38);
+    Graphu64_NormalizeVec3(&v38);
     angle = Graphu64_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
     if (!(homingParticle->time < D_800C4B8C_de)) {
@@ -239,7 +239,7 @@ create_sound:
     v48.z = D_800C4BA0_de;
     Graphu64_TransformPoint(&mA8, &v48, direction);
     velocity = &homingParticle->velocity;
-    GraphU64_ScaleVector(velocity, direction, speed);
+    Graphu64_ScaleVector(velocity, direction, speed);
     if (homingParticle->time >= D_800C4BA4_de) {
         FIELD(s8, homingParticle, 0x1B9) = 0;
         FIELD(s8, homingParticle, 0x1BA) = 0;
@@ -257,7 +257,7 @@ create_sound:
         } else {
             if (!(speed2 < limit)) goto after_clamp;
         }
-        GraphU64_ScaleVector(velocity, &vF8, limit);
+        Graphu64_ScaleVector(velocity, &vF8, limit);
     after_clamp:;
     }
     Particle_UpdateSineMotion(homingParticle, 1.0f);
@@ -283,13 +283,13 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     f32 limit;
     AccelSteeringVec *vel;
 
-    GraphU64_SubtractVectors(&offset, goal, &particle->position);
+    Graphu64_SubtractVectors(&offset, goal, &particle->position);
     distance = Gu_Sqrtf((offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z));
     if (distance <= 51.199997f) {
         particle->position = *goal;
         return;
     }
-    GraphU64_NormalizeVec3(&offset.x);
+    Graphu64_NormalizeVec3(&offset.x);
     wanted = Graphu64_BuildDirectionQuaternion(&offset.x);
     current = Graphu64_BuildDirectionQuaternion(&particle->direction.x);
     speed = Gu_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
@@ -310,7 +310,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     forward.y = 0.0f;
     forward.z = 1.0f;
     Graphu64_TransformPoint(rotation, &forward, &particle->direction);
-    GraphU64_ScaleVector(&particle->velocity, &particle->direction, speed);
+    Graphu64_ScaleVector(&particle->velocity, &particle->direction, speed);
     acceleration = Menu_ExpandFloatHighWord(particle->link->params->accel);
     vel = &particle->velocity;
     if (acceleration != 0.0f) {
@@ -322,7 +322,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         if (acceleration > 0.0f) {
             if (!(limit < newSpeed)) goto skip;
         } else if (!(newSpeed < limit)) goto skip;
-        GraphU64_ScaleVector(vel, &heading, limit);
+        Graphu64_ScaleVector(vel, &heading, limit);
     skip:;
     }
     Particle_UpdateSineMotion(particle, 1.0f);
@@ -385,9 +385,9 @@ void Particle_UpdateTargetedAcceleration(AccelSteeringObj *particle) {
     if (accel != 0.0f) {
         do {
             direction = particle->direction;
-            GraphU64_ScaleVector(&delta, &direction, accel);
+            Graphu64_ScaleVector(&delta, &direction, accel);
             velocity = &particle->velocity;
-            GraphU64_AddVec3(velocity, velocity, &delta);
+            Graphu64_AddVec3(velocity, velocity, &delta);
         } while (0);
         length = Gu_Sqrtf(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
         limit = Menu_ExpandFloatHighWord(particle->link->params->limit);
@@ -396,7 +396,7 @@ void Particle_UpdateTargetedAcceleration(AccelSteeringObj *particle) {
         } else {
             if (!(length < limit)) goto done;
         }
-        GraphU64_ScaleVector(velocity, &direction, limit);
+        Graphu64_ScaleVector(velocity, &direction, limit);
 done:;
     }
     Particle_UpdateSineMotion(particle, 1.0f);
@@ -532,8 +532,8 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
       nearby_height = nearbyActor->unk70;
       sp20 = nearbyActor->pos;
       sp20.y += nearby_height;
-      sp20.y += GameObject_GetActorHeight(var_a0) * nearby_scale;
-      GraphU64_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
+      sp20.y += Gobjinst_GetActorHeight(var_a0) * nearby_scale;
+      Graphu64_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
       neighborInfluence = Gu_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
       if (neighborInfluence < D_800C4BD4_de)
       {
@@ -541,7 +541,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
         sp10.x *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
         sp10.y *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
         sp10.z *= neighborInfluence * Graphu64_RandomBetween(nearby_scale, nearby_random_max);
-        GraphU64_SubtractVectors(temp_s2, temp_s2, &sp10);
+        Graphu64_SubtractVectors(temp_s2, temp_s2, &sp10);
       }
       var_a0 = nearbyActor->unk16E0;
       nearbyActor = var_a0;
@@ -552,14 +552,14 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   temp_f0_2 = InstHdr_GetActorBaseOffset(attractionTarget);
   sp20 = attractionTarget->pos;
   sp20.y += temp_f0_2;
-  GraphU64_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
+  Graphu64_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
   tracking_min = D_800C4BE0_de;
   tracking_max = D_800C4BE4_de;
   sp10.x *= Graphu64_RandomBetween(tracking_min, tracking_max);
   sp10.y *= Graphu64_RandomBetween(tracking_min, tracking_max);
   sp10.z *= Graphu64_RandomBetween(tracking_min, tracking_max);
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-  GraphU64_AddVec3(temp_s0_2, temp_s0_2, &sp10);
+  Graphu64_AddVec3(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)
   Graphu64_ClampMotionLength(temp_s0_2, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #else
@@ -586,9 +586,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   {
     temp_s0_2 = &spD0; 
     spE0 = arg0->direction;
-    GraphU64_ScaleVector(temp_s0_2, &spE0, temp_f0_3);
+    Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_3);
     temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-    GraphU64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
+    Graphu64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
     temp_f1 = arg0->inst.velocity.x;
     temp_f0_4 = arg0->inst.velocity.y;
     temp_f12 = arg0->inst.velocity.z;
@@ -610,7 +610,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     {
       goto after_special_clamp;
     }
-    GraphU64_ScaleVector(temp_s0_2, &spE0, temp_f0_5);
+    Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_5);
     after_special_clamp:
     ;
 
@@ -627,14 +627,14 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     temp_f0_6 = InstHdr_GetActorBaseOffset(temp_s0_4);
     sp20 = temp_s0_4->pos;
     sp20.y += temp_f0_6;
-    sp20.y += GameObject_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
-    GraphU64_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
-    GraphU64_NormalizeVec3(&sp40);
+    sp20.y += Gobjinst_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
+    Graphu64_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
+    Graphu64_NormalizeVec3(&sp40);
     sp70 = Graphu64_BuildDirectionQuaternion(&sp40);
     temp_s2_2 = &arg0->direction;
     sp60 = Graphu64_BuildDirectionQuaternion(temp_s2_2);
     sp30 = arg0->direction;
-    GraphU64_NormalizeVec3(&sp30);
+    Graphu64_NormalizeVec3(&sp30);
     temp_f1_3 = arg0->inst.velocity.x;
     temp_f0_7 = arg0->inst.velocity.y;
     temp_f12_2 = arg0->inst.velocity.z;
@@ -653,7 +653,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     sp50.z = D_800C4BF4_de;
     new_var = temp_s2_2;
     Graphu64_TransformPoint(&sp90, &sp50, new_var);
-    GraphU64_ScaleVector(&arg0->inst.velocity.x, new_var, temp_f20_3);
+    Graphu64_ScaleVector(&arg0->inst.velocity.x, new_var, temp_f20_3);
   }
   if (!(arg0->flags & 0x70000))
   {
@@ -666,9 +666,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     {
       temp_s0_2 = &spD0; 
     spE0 = arg0->direction;
-      GraphU64_ScaleVector(temp_s0_2, &spE0, temp_f0_9);
+      Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_9);
       temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-      GraphU64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
+      Graphu64_AddVec3(temp_s0_2, temp_s0_2, &spD0);
       temp_f1_5 = arg0->inst.velocity.x;
       temp_f0_10 = arg0->inst.velocity.y;
       temp_f12_3 = arg0->inst.velocity.z;
@@ -690,7 +690,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
       {
         goto after_normal_clamp;
       }
-      GraphU64_ScaleVector(temp_s0_2, &spE0, temp_f0_11);
+      Graphu64_ScaleVector(temp_s0_2, &spE0, temp_f0_11);
       after_normal_clamp:
       ;
 

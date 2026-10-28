@@ -79,7 +79,7 @@ extern s32 D_801462C8;
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
-extern f32 GameObject_GetActorHeight(Shared_PoseActor *);
+extern f32 Gobjinst_GetActorHeight(Shared_PoseActor *);
 extern void Gastate_SwitchRequestedAnimation(Shared_AnimState *, s32, s32, s32, s32, s32);
 extern void Gastate_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
@@ -88,7 +88,7 @@ extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseA
 extern void Graphu64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void Graphu64_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void Graphu64_InterpolateQuaternionArc(CQuatern *, f32, CQuatern *, CQuatern *);
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Graphu64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
@@ -124,11 +124,11 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         CopyMatrix(inv, cur);
-        GraphU64_ScaleVector(&turn, &turn, -1.0f);
+        Graphu64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
         Graphu64_BuildAxisAngleMatrix(rotm, angle, axis.x, axis.y, axis.z);
         Graphu64_MultiplyAffineMatrices(cur, inv, rotm);
-        GraphU64_ScaleVector(&turn, &turn, -1.0f);
+        Graphu64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
             part->unk_12--;
@@ -380,7 +380,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                 }
                 if (D_801462C8 & 0x80) {
                     scaled = 1;
-                    GraphU64_ScaleVector(&scale, &scale, 0.5f);
+                    Graphu64_ScaleVector(&scale, &scale, 0.5f);
                 }
             } else {
                 id0 = -1;
@@ -521,7 +521,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     break;
                 case 1:
                 case 11: {
-                    f32 h = GameObject_GetActorHeight(actor);
+                    f32 h = Gobjinst_GetActorHeight(actor);
 
                     actor->unk_70 = mtx[1][3][1] * (1.0f / 65536.0f) - actor->pos.y - h * 0.5f;
                     if (actor->unk_70 < 0.0f) {
@@ -564,7 +564,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             if (!(actor->flags & 8)) {
                 pos = actor->pos;
                 pos.y += actor->unk_70;
-                pos.y += GameObject_GetActorHeight(actor) * 0.5f;
+                pos.y += Gobjinst_GetActorHeight(actor) * 0.5f;
                 Scene_SampleWorldLighting(&g_world, &pos, actor->unk_140[D_800D297C]);
             }
             ret = 1;

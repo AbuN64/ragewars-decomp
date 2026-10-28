@@ -1,12 +1,12 @@
 #ifndef FRONTEND_8041BEA8_6_H
 #define FRONTEND_8041BEA8_6_H
 #include "COMMON/LABEL.H"
-extern void Frontend_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v);
+extern void Preview_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v);
 struct Obj8041CAD8;
-extern void Frontend_SelectPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
-extern void Frontend_SelectMatchingPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
-extern void Frontend_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1);
-extern void Frontend_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v);
+extern void Preview_SelectPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
+extern void Preview_SelectMatchingPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
+extern void Preview_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1);
+extern void Preview_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v);
 typedef struct Ret8028CFA0 {
     s32 unk0;
     s32 unk4;
@@ -114,5 +114,5 @@ typedef struct Obj8041CAD8 {
     s32 unk49C;
     s32 unk4A0;
 } Obj8041CAD8;
-extern void *Frontend_InitModelPreview(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
+extern void *Preview_InitModelPreview(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 #endif

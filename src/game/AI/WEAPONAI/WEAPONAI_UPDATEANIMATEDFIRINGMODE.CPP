@@ -163,7 +163,7 @@ void Weaponai_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireSt
 extern WeaponActionRecord D_800CE8DC[];
 extern char D_80102B00[];
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
+extern s16 Weaponai_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
@@ -205,7 +205,7 @@ void Weaponai_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fir
         fireState->mode = 1;
         if (Player_HasAmmoForMode(player, player->selectedAction) == 0) {
         idle:
-            player->weapon = Weapon_FindNextUsableWeapon(player);
+            player->weapon = Weaponai_FindNextUsableWeapon(player);
             return;
         }
     }

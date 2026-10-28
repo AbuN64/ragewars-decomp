@@ -20,7 +20,7 @@
 #include "RENDER/8025DE50_5.H"
 
 /* Runs a charge weapon's fire for its holder at 0x1D8: picks the holder's next weapon at 0x770 through
-   Weapon_FindNextUsableWeapon when the current one cannot be used; while the fire input 0x4000 is held on a weapon
+   Weaponai_FindNextUsableWeapon when the current one cannot be used; while the fire input 0x4000 is held on a weapon
    that can fire (not stunned, with ammunition, clicking and showing the empty message otherwise) in
    ready state 1 at 0x13C, a full charge of at least 50 at 0x5F6 fires action 5 and enters state 2,
    while a partial charge clicks and shows the not-ready message; otherwise it fires the state's action
@@ -36,7 +36,7 @@ extern char D_80102B00[];
 
 extern char D_80145040[];
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
+extern s16 Weaponai_FindNextUsableWeapon(void *);
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 
@@ -121,7 +121,7 @@ void Weaponai_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *f
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weaponai_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {

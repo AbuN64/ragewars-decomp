@@ -74,15 +74,15 @@ static inline int offset(int v){return v+9;}
 /* Builds six clipping planes from an eye point and four corner points: each of the first five planes takes as its normal the normalised cross product of two edges between the points and as its distance the normal's projection of a point on it (the third plane through the corners, the others through the eye), and the sixth plane is the third plane with its normal reversed, its distance projected through the eye. */
 
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 static inline void make_plane(PlaneEquation *plane, CVector3 *from, CVector3 *through, CVector3 *to, CVector3 *point) {
     CVector3 a;
     CVector3 b;
 
-    GraphU64_SubtractVectors(&a, through, from);
-    GraphU64_SubtractVectors(&b, to, through);
+    Graphu64_SubtractVectors(&a, through, from);
+    Graphu64_SubtractVectors(&b, to, through);
     Graphu64_CrossVectors(&plane->normal, &b, &a);
-    GraphU64_NormalizeVec3(&plane->normal);
+    Graphu64_NormalizeVec3(&plane->normal);
     plane->distance = plane->normal.x * point->x + plane->normal.y * point->y + plane->normal.z * point->z;
 }
 
@@ -187,10 +187,10 @@ void Visdata_BuildPlaneFromPoints(void *planeEquation, void *arg1, void *arg2, v
     CVector3 *point = arg1;
     CVector3 sp10;
     CVector3 sp20;
-    GraphU64_SubtractVectors(&sp10, arg2, arg1);
-    GraphU64_SubtractVectors(&sp20, arg3, arg2);
+    Graphu64_SubtractVectors(&sp10, arg2, arg1);
+    Graphu64_SubtractVectors(&sp20, arg3, arg2);
     Graphu64_CrossVectors(planeEquation, &sp20, &sp10);
-    GraphU64_NormalizeVec3(planeEquation);
+    Graphu64_NormalizeVec3(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)
                                   + (plane->normal.z * point->z);

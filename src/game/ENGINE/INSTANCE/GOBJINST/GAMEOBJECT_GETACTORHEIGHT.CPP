@@ -99,7 +99,7 @@ s32 func_8024D160_de(InteractionActor *actor) {
     return 0;
 }
 
-f32 GameObject_GetActorHeight(Actor_u1 *actor) {
+f32 Gobjinst_GetActorHeight(Actor_u1 *actor) {
     Resource_u1 *resource;
 
     if (actor->kind == 1 && actor->active <= 0) {
@@ -136,7 +136,7 @@ f32 GameObject_GetActorHeight(Actor_u1 *actor) {
 }
 
 /* 8024D018_2.CPP */
-f32 GameObject_GetActorRadius(Actor_u1 *actor)
+f32 Gobjinst_GetActorRadius(Actor_u1 *actor)
 {
     Resource_u1 *resource;
     f32 a;

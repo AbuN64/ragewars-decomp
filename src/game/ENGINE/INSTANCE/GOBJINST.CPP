@@ -75,14 +75,14 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             ((struct LevelActor *)(obj))->shadowAlpha = alpha;
             dir.y = 1.0f;
-            GraphU64_NormalizeVec3(&dir);
+            Graphu64_NormalizeVec3(&dir);
             if (RW_ABS(dir.y) < 0.15f) {
                 if (dir.y >= 0.0f) {
                     dir.y = 0.15f;
                 } else {
                     dir.y = -0.15f;
                 }
-                GraphU64_NormalizeVec3(&dir);
+                Graphu64_NormalizeVec3(&dir);
             }
             plane = ground + height * 0.9f;
             Graphu64_BuildPlaneProjectionMatrix(projection, &dir, plane);

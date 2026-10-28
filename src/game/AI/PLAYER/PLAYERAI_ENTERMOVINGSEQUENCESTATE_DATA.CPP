@@ -134,6 +134,6 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     if(offset) {
         BuildYawMatrix(&rotation,body->unk6C);
         Graphu64_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
-        GraphU64_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
+        Graphu64_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
     }
 }

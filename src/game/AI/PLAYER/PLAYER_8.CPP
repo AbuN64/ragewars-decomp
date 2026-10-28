@@ -20,7 +20,7 @@
 
 
 
-extern f32 GameObject_GetActorHeight(void *arg0);
+extern f32 Gobjinst_GetActorHeight(void *arg0);
 
 extern void Scene_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
 
@@ -41,7 +41,7 @@ void Player_DrawPlayerModel(void *player, void *camera) {
 
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
-    pos.y += GameObject_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
+    pos.y += Gobjinst_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
     Scene_SampleWorldLighting(&g_world, &pos,
                   &((LevelActor *)player)->lighting[D_800D297C]);
 

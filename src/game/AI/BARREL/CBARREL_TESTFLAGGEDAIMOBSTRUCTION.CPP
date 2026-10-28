@@ -9,7 +9,7 @@
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80103FD0;
-extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
+extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
 extern s32 CCollision_SweepPoint(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
 
 s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
@@ -19,11 +19,11 @@ s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Inst
 
     saved = *arg0;
     scale = D_800C21CC_de;
-    ((DraftAimPlayer *)arg0)->position.y += GameObject_GetActorHeight(arg0) * scale;
+    ((DraftAimPlayer *)arg0)->position.y += Gobjinst_GetActorHeight(arg0) * scale;
     ((DraftAimPlayer *)arg0)->position.y += ((DraftAimPlayer *)arg0)->height;
 
     desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
-    desired.y += GameObject_GetActorHeight(target) * scale;
+    desired.y += Gobjinst_GetActorHeight(target) * scale;
     desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     CCollision_SweepPoint(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);

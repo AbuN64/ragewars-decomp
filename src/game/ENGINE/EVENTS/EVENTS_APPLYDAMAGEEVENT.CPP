@@ -207,7 +207,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         }
     }
     if (source->definition->kind == 1 || source->definition->kind == 11) {
-        GraphU64_AddVec3(&source->velocity, &source->velocity, &impulse);
+        Graphu64_AddVec3(&source->velocity, &source->velocity, &impulse);
         if (applyTurn) {
             angle = Barrel_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
             source->turn += angle * D_800C43DC_de;
@@ -269,7 +269,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
                 body = (*position);
                 origin = owner->position;
                 Graphu64_InterpolateVector(&(*position), 0.75f, &body, &origin);
-                (*position).y += GameObject_GetActorHeight(owner) * D_800C43E0_de[0];
+                (*position).y += Gobjinst_GetActorHeight(owner) * D_800C43E0_de[0];
                 adjusted = 1;
             }
         }
@@ -296,11 +296,11 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
         source->unk174 != 0 &&
 #endif
         target->category == 2) {
-        GraphU64_SubtractVectors(&direction, &source->position, &target->position);
+        Graphu64_SubtractVectors(&direction, &source->position, &target->position);
         distance = Gu_Sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-        GraphU64_NormalizeVec3(&direction);
+        Graphu64_NormalizeVec3(&direction);
         if (!(radius <= distance)) {
-            GraphU64_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
+            Graphu64_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
         }
     }
 }
@@ -350,7 +350,7 @@ have:
         } else {
             body = self->position;
             bottom = self->position.y + self->height;
-            top = bottom + GameObject_GetActorHeight(self);
+            top = bottom + Gobjinst_GetActorHeight(self);
             if (top < position.y) {
                 body.y = top;
             } else if (position.y < bottom) {
@@ -358,7 +358,7 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + GameObject_GetActorRadius(self);
+            reach = radius + Gobjinst_GetActorRadius(self);
             distance = Graphu64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
@@ -621,7 +621,7 @@ s32 Events_AdjustWeaponHitPosition(void *levelActor, CVector3 *arg1) {
                 first = *arg1;
                 second = ((LevelActor *)actor)->position0;
                 Graphu64_InterpolateVector(arg1, 0.75f, &first, &second);
-                arg1->y += GameObject_GetActorHeight(actor) * D_800C4430_de;
+                arg1->y += Gobjinst_GetActorHeight(actor) * D_800C4430_de;
                 result = 1;
             }
         }
@@ -677,11 +677,11 @@ void Events_ComputeRadialImpulse(struct Player *actor, u8 *other, PushStrength s
 #else
     if (*other == 2) {
 #endif
-        GraphU64_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
+        Graphu64_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
         distance = Gu_Sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
-        GraphU64_NormalizeVec3(&offset.x);
+        Graphu64_NormalizeVec3(&offset.x);
         if (!(radius <= distance)) {
-            GraphU64_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
+            Graphu64_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
         }
     }
 }

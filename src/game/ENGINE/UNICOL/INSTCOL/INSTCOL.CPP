@@ -8,9 +8,9 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-extern f32 GameObject_GetActorRadius(void *);
+extern f32 Gobjinst_GetActorRadius(void *);
 extern f32 InstHdr_GetActorBaseOffset(void *);
-extern f32 GameObject_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(void *);
 extern void CPlatformCollision_ProcessRiderMotion(void *, void *);
 extern void CPlatformCollision_TraceShape(void *, void *);
 extern s32 Pickup_CanCollect(void *, void *);
@@ -51,7 +51,7 @@ void Instcol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
 
     entityX = entity->position0.x;
     entityZ = entity->position0.z;
-    radius = GameObject_GetActorRadius(entity);
+    radius = Gobjinst_GetActorRadius(entity);
     bounds[0] = entityX - radius;
     bounds[2] = entityX + radius;
     bounds[1] = entityZ - radius;
@@ -89,7 +89,7 @@ void Instcol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
     contact.actor = (BoxContactActor *)entity;
     contact.index = -1;
     bottom = entity->position0.y + InstHdr_GetActorBaseOffset(entity);
-    top = GameObject_GetActorHeight(entity) + bottom;
+    top = Gobjinst_GetActorHeight(entity) + bottom;
     if (sweep->flag != 0) {
         normal.x = normal.z = 0.0f;
     }

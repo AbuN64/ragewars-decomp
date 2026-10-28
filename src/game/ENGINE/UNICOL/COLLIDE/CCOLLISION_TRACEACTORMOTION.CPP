@@ -70,7 +70,7 @@ s32 CCollision_TraceActorMotion(ActorMotion *object) {
     f32 maximumZ;
 
     CPlane_ResetContact(&object->collisionState);
-    GraphU64_SubtractVectors(&object->velocity,
+    Graphu64_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
     magnitude = Gu_Sqrtf(
@@ -83,7 +83,7 @@ s32 CCollision_TraceActorMotion(ActorMotion *object) {
     }
 
     if (object->distance != 0.0f) {
-        GraphU64_ScaleVector(&object->direction,
+        Graphu64_ScaleVector(&object->direction,
                       &object->velocity,
                       D_800C3630_de / object->distance);
     } else {

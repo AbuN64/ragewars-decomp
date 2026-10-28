@@ -8,7 +8,7 @@
 #include "COMMON/MATH_HELPERS.H"
 extern f32 Gu_Sqrtf(f32);
 /** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
-f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
+f32 Graphu64_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
@@ -43,7 +43,7 @@ f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
 }
 
 
-extern f32 D_800C48AC_de;
+extern f32 g_vectorNormalizeUnitScale;
 
 /** Wrap an angle into [-pi, pi]. */
 static inline f32 WrapAngle(f32 angle) {
@@ -69,21 +69,21 @@ void Graphu64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector
 }
 
 /** Add two three-component vectors. */
-void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
+void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
     result->x = left->x + right->x;
     result->y = left->y + right->y;
     result->z = left->z + right->z;
 }
 
 /** Subtract the right vector from the left vector. */
-void GraphU64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector) {
+void Graphu64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector) {
     difference->x = leftVector->x - rightVector->x;
     difference->y = leftVector->y - rightVector->y;
     difference->z = leftVector->z - rightVector->z;
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void GraphU64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor) {
+void Graphu64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor) {
     ((CVector3 *)(scaledVector))->x = ((CVector3 *)(inputVector))->x * scaleFactor;
     ((CVector3 *)(scaledVector))->y = ((CVector3 *)(inputVector))->y * scaleFactor;
     ((CVector3 *)(scaledVector))->z = ((CVector3 *)(inputVector))->z * scaleFactor;
@@ -103,13 +103,13 @@ void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->z = (a->x * b->y) - (a->y * b->x);
 }
 
-void GraphU64_NormalizeVec3(f32 *vectorComponents) {
+void Graphu64_NormalizeVec3(f32 *vectorComponents) {
     f32 mag;
     f32 scale;
 
     mag = Gu_Sqrtf((vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]));
     if (mag != 0.0f) {
-        scale = D_800C48AC_de / mag;
+        scale = g_vectorNormalizeUnitScale / mag;
         vectorComponents[0] = vectorComponents[0] * scale;
         vectorComponents[1] = vectorComponents[1] * scale;
         vectorComponents[2] = vectorComponents[2] * scale;

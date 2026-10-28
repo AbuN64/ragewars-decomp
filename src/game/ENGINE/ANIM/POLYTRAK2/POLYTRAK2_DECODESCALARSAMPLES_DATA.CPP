@@ -46,7 +46,7 @@ inline static void write_bits(u32 arg2, u32 arg0, u32 arg1)
   words->high = (words->high & (~temp_a1)) | var_a2;
 }
 
-/* Decodes element arg1 of a packed bit-field float array into a float scaled into its range. Adapted from func_802609AC_de, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
+/* Decodes element arg1 of a packed bit-field float array into a float scaled into its range. Adapted from Polytrak2_ReadQuantizedFloatAtAddress, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
 
 static inline f32 decode(s32 bitAddress, Func802608ECResult range) {
     s32 shift;
@@ -82,7 +82,7 @@ static inline f32 decode(s32 bitAddress, Func802608ECResult range) {
     return result;
 }
 
-f32 func_802609AC_de(s32 bitAddress, Func802608ECResult range) {
+f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range) {
     s32 shift;
     u32 *word;
     u32 value;
@@ -114,7 +114,7 @@ f32 func_802609AC_de(s32 bitAddress, Func802608ECResult range) {
     return result;
 }
 
-void func_80260A5C_de(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
+void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
 {
   f32 arg4_2;
   f32 roundedScaledValue;
@@ -146,7 +146,7 @@ void func_80260A5C_de(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
   write_bits(quantizedValue, bitAddress, range.value);
 }
 
-f32 func_80260B80_de(u32 *stream, Func802608ECResult range) {
+f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range) {
     u32 bitAddress;
     u32 *streamPtr;
     s32 shift;
@@ -207,7 +207,7 @@ void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult 
     array->count = elementCount;
 }
 
-int func_80260DA8_de(BitFieldSource *packedArray, int elementIndex) {
+int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIndex) {
     int bitAddress;
     int shift;
     int *word;

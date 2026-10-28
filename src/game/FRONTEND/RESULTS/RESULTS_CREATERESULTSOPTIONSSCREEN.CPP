@@ -163,7 +163,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
    Tsmos_SetModeOneFlag(1) and Tsmos_DeactivateControllerState, clears the word at 0xA58, and for each player whose 150-byte
    status record in D_80146398 has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
    row of D_800E3A58 through func_8041F140_de and shows object 0x38F plus the kind through
-   Frontend_InitModelPreview in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
+   Preview_InitModelPreview in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
    (uniform scale, position, float and word) for the first model and layout 2 for the second.
    Returns zero. */
 
@@ -203,7 +203,7 @@ next:
         scale.x = D_800E3A58[row].scale[layout];
         scale.y = D_800E3A58[row].scale[layout];
         scale.z = D_800E3A58[row].scale[layout];
-        Frontend_InitModelPreview((char *)D_800E4690 + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
+        Preview_InitModelPreview((char *)D_800E4690 + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
                       D_800E3A58[row].position[layout], D_800E3A58[row].distance[layout],
                       D_800E3A58[row].light[layout]);
         view += 0x4A8;

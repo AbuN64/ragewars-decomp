@@ -58,9 +58,9 @@ void Fx_AttachActorRibbon(void *, void *, s8);
 
 f32 Gu_Sqrtf(f32);
 
-void GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
+void Graphu64_ScaleVector(CVector3 *,CVector3 *,f32);
 
- void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
+ void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 
 /* Transform the measured attachment position and direction into the target frame. */
 extern ParticleAttachmentState D_801041F0;
@@ -346,12 +346,12 @@ void Particle_ApplyDirectionalAcceleration(ObjRecAt174 *arg0) {
  if(accel != 0.0f) {
  dir=&direction;
  direction=arg0->direction;
- GraphU64_ScaleVector(&delta,dir,accel);
+ Graphu64_ScaleVector(&delta,dir,accel);
  velocity=&arg0->velocity;
- GraphU64_AddVec3(velocity,velocity,&delta);
+ Graphu64_AddVec3(velocity,velocity,&delta);
  length=Gu_Sqrtf(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
  limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
- if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } GraphU64_ScaleVector(velocity,dir,limit); done:;
+ if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } Graphu64_ScaleVector(velocity,dir,limit); done:;
  }
 }
 
@@ -393,7 +393,7 @@ void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
     Graphu64_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
-    GraphU64_NormalizeVec3((f32 *)direction_ptr);
+    Graphu64_NormalizeVec3((f32 *)direction_ptr);
     Graphu64_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;

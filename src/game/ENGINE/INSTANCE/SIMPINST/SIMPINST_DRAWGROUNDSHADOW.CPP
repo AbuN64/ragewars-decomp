@@ -19,14 +19,14 @@ extern char D_8011D8D0;
 
 
 
-extern f32 GameObject_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
+extern f32 Gobjinst_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
 #include "particle/8027A0F4_8.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
-extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
+extern f32 Gobjinst_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
 /* Places an actor's ground shadow: the shadow size is the smaller of half the vertical offset from
  * InstHdr_GetActorShadowRadius and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
@@ -78,14 +78,14 @@ void Simpinst_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void 
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += GameObject_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
+            position.y += Gobjinst_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
             Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, rotation, position, 0, -1, 0);
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3D98_de;
-                effect->field150 = GameObject_GetActorRadius(actor) * scale;
-                effect->field154 = GameObject_GetActorHeight(actor) * scale;
+                effect->field150 = Gobjinst_GetActorRadius(actor) * scale;
+                effect->field154 = Gobjinst_GetActorHeight(actor) * scale;
             }
         }
     }

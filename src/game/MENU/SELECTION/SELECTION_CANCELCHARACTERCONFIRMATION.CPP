@@ -30,7 +30,7 @@ void MarkMenuEventHandled(void);
 void SmpOverlay_SetSlotValue(s32, s32, s32, StateMenuCancelCharacterConfirmation *);
 
          /* extern */
-void Frontend_SetPreviewTransformUpdate(void *, s32);
+void Preview_SetPreviewTransformUpdate(void *, s32);
 
                     /* extern */
 void Menu_RefreshPlayerCharacterVariants(s32);
@@ -137,7 +137,7 @@ s32 Selection_CancelCharacterConfirmation(s32 unused0, s32 unused1, s32 arg2) {
     case 3:
         temp_a3->unk14 = 1;
         SmpOverlay_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
-        Frontend_SetPreviewTransformUpdate(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
+        Preview_SetPreviewTransformUpdate(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
         Menu_RefreshPlayerCharacterVariants(entryIndex);
         break;
     }

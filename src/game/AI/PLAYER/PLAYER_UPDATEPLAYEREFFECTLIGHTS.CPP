@@ -169,10 +169,10 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
     offset.y = 0.0f;
     offset.z = offsetZ;
     func_8024BC94_de(&position, player, offset);
-    GraphU64_AddVec3(&position, &position, &player->pos);
+    Graphu64_AddVec3(&position, &position, &player->pos);
     light->active = 1;
     light->x = (s16)position.x;
-    light->y = (s16)(position.y + GameObject_GetActorHeight(player) * *heightScale);
+    light->y = (s16)(position.y + Gobjinst_GetActorHeight(player) * *heightScale);
     light->z = (s16)position.z;
     light->radius = *radius;
 }

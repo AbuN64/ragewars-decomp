@@ -212,7 +212,7 @@ s32 Bitarray_GetQuantizationBitCount(f32 arg0)
   return bitCount;
 }
 
-f32 func_802615B4_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused4, f32 arg5) {
+f32 Bitarray_EvaluateCubicPolynomial(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused4, f32 arg5) {
     f32 bits = *(f32 *)&arg0;
     f32 v1 = *(f32 *)&arg1;
     f32 v2 = *(f32 *)&arg2;

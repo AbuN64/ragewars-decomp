@@ -65,14 +65,14 @@ void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         if (count > 0) {
                 position = actor->position;
                 rotation = Graphu64_BuildDirectionQuaternion((f32 *)&position);
-                GraphU64_SubtractVectors(&delta, &actor->origin, &actor->end);
+                Graphu64_SubtractVectors(&delta, &actor->origin, &actor->end);
                 system = &D_8011D8D0;
                 i = 1;
                 temp = i <= count;
                 if (temp) {
                         divisor = (f32) count + (&D_800C4E88_de)[1];
                         do {
-    do { GraphU64_ScaleVector(&step, &delta, (f32) i / divisor); GraphU64_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; Particle_SpawnEffectGroup((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
+    do { Graphu64_ScaleVector(&step, &delta, (f32) i / divisor); Graphu64_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; Particle_SpawnEffectGroup((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
                 }
         }
@@ -409,8 +409,8 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
     acceleration = Menu_ExpandFloatHighWord(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
-        GraphU64_ScaleVector(&delta, &direction, acceleration);
-        GraphU64_AddVec3(&effect->velocity, &effect->velocity, &delta);
+        Graphu64_ScaleVector(&delta, &direction, acceleration);
+        Graphu64_AddVec3(&effect->velocity, &effect->velocity, &delta);
         velocity = &effect->velocity;
         x = effect->velocity.x;
         y = effect->velocity.y;
@@ -422,7 +422,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
         } else {
             if (!(speed < limit)) goto finished;
         }
-        GraphU64_ScaleVector(velocity, &direction, limit);
+        Graphu64_ScaleVector(velocity, &direction, limit);
 finished:
         ;
     }
@@ -466,7 +466,7 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
         point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
         if (particle->inst.type != actor_id) {
-            point.y += GameObject_GetActorHeight(node) * height_scale;
+            point.y += Gobjinst_GetActorHeight(node) * height_scale;
         }
         if (Graphu64_GetSquaredDistance(&particle->inst.pos.x, point_ptr) < radius_sq) {
             Particle_HandlePlayerContact(particle, node);
@@ -514,7 +514,7 @@ void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
-   GraphU64_SubtractVectors(d,o->pos,center->pos);
+   Graphu64_SubtractVectors(d,o->pos,center->pos);
    if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
   }
  }
@@ -527,7 +527,7 @@ static inline void nearby(s32 unused, ObjParticleMarkNearbyObjects *center, ObjP
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
-   GraphU64_SubtractVectors(d,o->pos,center->pos);
+   Graphu64_SubtractVectors(d,o->pos,center->pos);
    if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
   }
  }

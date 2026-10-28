@@ -8,9 +8,9 @@
 #include "SYSTEM/80255C40_3.H"
 #include "include_asm.h"
 
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index);
 
@@ -57,10 +57,10 @@ void Gdynlight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u
                     delta.y = (f32)node->y - *(f32 *)&arg2;
                     delta.z = (f32)node->z - *(f32 *)&arg3;
                     temp_f20 = D_800C4490_de - (var_f2_3 / temp_f3);
-                    GraphU64_NormalizeVec3(&delta);
+                    Graphu64_NormalizeVec3(&delta);
                     temp_f20_2 = temp_f20 * D_800C4494_de;
-                    GraphU64_ScaleVector(&delta, &delta, temp_f20_2);
-                    GraphU64_AddVec3(arg4, arg4, &delta);
+                    Graphu64_ScaleVector(&delta, &delta, temp_f20_2);
+                    Graphu64_AddVec3(arg4, arg4, &delta);
                     *arg5 -= temp_f20_2;
                 }
             }

@@ -16,7 +16,7 @@ static inline AiTarget *setSelectedTarget(AiController *controller, AiTarget *ta
 
 /* Drops the current target when its player is dead, stunned or (in team play) on our team, then picks the
    preferred candidate, the nearest candidate or keeps the current one, and copies its position. */
-s32 Fx_UpdateTargetSelection(void *object) {
+s32 Target_UpdateTargetSelection(void *object) {
     AiController *controller = object;
     CVector3 *position;
     Player *linked;
@@ -59,16 +59,16 @@ s32 Fx_UpdateTargetSelection(void *object) {
         alternateDistance = 0.0f;
     }
     if (Scaled_MatchesBehaviorStateFilter(controller) == 0 || linked == NULL) {
-        if (Fx_CountAcceptedTargets(controller) == 0) {
+        if (Target_CountAcceptedTargets(controller) == 0) {
             controller->target = NULL;
             return 1;
         }
-        if (alternate != NULL && Fx_IsPreferredTargetAccepted(controller) != 0) {
+        if (alternate != NULL && Target_IsPreferredTargetAccepted(controller) != 0) {
             controller->target = (AiTarget *)alternate;
             controller->targetPosition.x = alternate->pos.x;
             target = (AiTarget *)alternate;
         } else {
-            index = Fx_FindNearestFlaggedTarget(controller);
+            index = Target_FindNearestFlaggedTarget(controller);
             target = setSelectedTarget(controller, controller->candidates[index]);
             controller->targetPosition.x = target->position.x;
         }
@@ -77,7 +77,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         controller->targetPosition.x = alternate->pos.x;
         target = (AiTarget *)alternate;
     } else {
-        index = Fx_FindNearestFlaggedTarget(controller);
+        index = Target_FindNearestFlaggedTarget(controller);
         if (index != -1 && (f32)controller->candidateDistances[index] < linkedDistance) {
             target = setSelectedTarget(controller, controller->candidates[index]);
             controller->targetPosition.x = target->position.x;
@@ -95,7 +95,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
 }
 
 /* Returns 1 when the preferred target is one of the accepted candidates. */
-s32 Fx_IsPreferredTargetAccepted(AiController *controller) {
+s32 Target_IsPreferredTargetAccepted(AiController *controller) {
     s32 i;
 
     if (controller->preferred == NULL) {
@@ -110,7 +110,7 @@ s32 Fx_IsPreferredTargetAccepted(AiController *controller) {
 }
 
 /* Counts the candidate slots that hold a target and are accepted. */
-s32 Fx_CountAcceptedTargets(AiController *controller) {
+s32 Target_CountAcceptedTargets(AiController *controller) {
     s32 count;
     s32 i;
 
@@ -129,7 +129,7 @@ s32 Fx_CountAcceptedTargets(AiController *controller) {
 }
 
 /* Returns the index of the nearest accepted candidate whose flags allow targeting, or -1. */
-s32 Fx_FindNearestFlaggedTarget(AiController *controller) {
+s32 Target_FindNearestFlaggedTarget(AiController *controller) {
     f32 distance;
     f32 unset;
     f32 nearest;

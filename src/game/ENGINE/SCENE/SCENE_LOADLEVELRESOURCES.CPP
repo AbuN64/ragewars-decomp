@@ -950,7 +950,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
             }
             for (k = 0; k < simpleCount; k++) {
                 position.x = simples[k].position.x;
-                position.y = simples[k].position.y + GameObject_GetActorHeight(&simples[k]) * 0.5f;
+                position.y = simples[k].position.y + Gobjinst_GetActorHeight(&simples[k]) * 0.5f;
                 position.z = simples[k].position.z;
                 Scene_SampleVolumeLighting(volumeList, volumeCount, &position, &simples[k].light);
             }

@@ -1397,7 +1397,7 @@ extern int D_800D37A8;
 
 extern char s_simpPartModelText;
 
-extern f32 D_800C1D40[];
+extern f32 g_navigationObjectLinkDistanceLimits[];
 
 extern s32 D_800DCE78[];
 

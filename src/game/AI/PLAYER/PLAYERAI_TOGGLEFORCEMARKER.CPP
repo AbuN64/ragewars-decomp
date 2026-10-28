@@ -89,8 +89,8 @@ void Player_ReleasePlayerParticleEmitters(s32 actor) {
 #include "COMMON/CHANNEL.H"
 extern u8 *D_800D311C, *D_800D3120, *D_800D3124;
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
-extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(Matrix *);
 extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
@@ -100,8 +100,8 @@ static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attra
     Matrix matrix;
     CVector3 offset;
     BuildDirectionMatrix(&matrix, normal);
-    GraphU64_ScaleVector(&offset, normal, 5.12f);
-    GraphU64_AddVec3(&offset, &offset, &player->targetPosition);
+    Graphu64_ScaleVector(&offset, normal, 5.12f);
+    Graphu64_AddVec3(&offset, &offset, &player->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
     Graphu64_ConvertMatrixToFixed(&matrix, player->transform1600);

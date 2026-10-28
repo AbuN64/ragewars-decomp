@@ -13,15 +13,15 @@ extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, 
 extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
-extern f32 GameObject_GetActorHeight(Actor_func_80214DD4_de *arg0);
-extern f32 GameObject_GetActorRadius(Actor_func_80214DD4_de *arg0);
+extern f32 Gobjinst_GetActorHeight(Actor_func_80214DD4_de *arg0);
+extern f32 Gobjinst_GetActorRadius(Actor_func_80214DD4_de *arg0);
 extern f32 InstHdr_GetActorReach(Actor_func_80214DD4_de *arg0);
 extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *arg0);
-extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void GraphU64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void GraphU64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *arg0);
+extern void Graphu64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Graphu64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Graphu64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
 /* Places the goal beside kind-7 targets: pushed away from the anchor by both extents. */
@@ -29,16 +29,16 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
     CVector3 dir;
     CVector3 goal;
     if (anchor != 0) {
-        GraphU64_SubtractVectors(&dir, &target->pos, &anchor->pos);
+        Graphu64_SubtractVectors(&dir, &target->pos, &anchor->pos);
         dir.y = 0.0f;
-        GraphU64_NormalizeVec3(&dir);
+        Graphu64_NormalizeVec3(&dir);
     } else {
         dir.x = 0.0f;
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    GraphU64_ScaleVector(&dir, &dir, GameObject_GetActorRadius(target) + GameObject_GetActorRadius(actor) + D_800C216C_de);
-    GraphU64_AddVec3(&goal, &target->pos, &dir);
+    Graphu64_ScaleVector(&dir, &dir, Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor) + D_800C216C_de);
+    Graphu64_AddVec3(&goal, &target->pos, &dir);
     InstHdr_CopyActorPositionAndModel(target, goal, outPos, outRoom, 0, 0);
 }
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
@@ -102,10 +102,10 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
             pos = target->pos;
             room = target->room;
             if (mode == 1) {
-                pos.y += target->height + GameObject_GetActorHeight(target) * D_800C2170_de;
+                pos.y += target->height + Gobjinst_GetActorHeight(target) * D_800C2170_de;
             }
         }
-        gap = GameObject_GetActorRadius(target) + GameObject_GetActorRadius(actor);
+        gap = Gobjinst_GetActorRadius(target) + Gobjinst_GetActorRadius(actor);
         switch (kind) {
             case 2:
                 gap += D_800C2174_de;
@@ -119,7 +119,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     } else {
-        gap = GameObject_GetActorRadius(actor);
+        gap = Gobjinst_GetActorRadius(actor);
         switch (kind) {
             case 4:
                 loc = func_80219408_de(&tracker->slot);
@@ -144,10 +144,10 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     }
-    GraphU64_AddVec3(&pos, &pos, &tracker->offset);
+    Graphu64_AddVec3(&pos, &pos, &tracker->offset);
     if (gap > 0.0f) {
-        GraphU64_SubtractVectors(&away, &actor->pos, &pos);
-        angle = GraphU64_GetHorizontalAngle(&away);
+        Graphu64_SubtractVectors(&away, &actor->pos, &pos);
+        angle = Graphu64_GetHorizontalAngle(&away);
         pos.x -= gap * Gu_Sinf(angle);
         pos.z -= gap * Math_Cosf(angle);
     }
@@ -164,7 +164,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     } else {
         range = Barrel_GetSignedAngleToPoint(actor, pos);
     }
-    GraphU64_SubtractVectors(&delta, &pos, &actor->pos);
+    Graphu64_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;
     out->target = target;
     out->m_DeltaAngle = range;

@@ -11,7 +11,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "COMMON/DESCRIPTORRECAT29.H"
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 /* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by D_800C8630. */
 
@@ -140,7 +140,7 @@ void *Gsky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero)
     bestNode = 0;
     if (node != 0) {
         do {
-            GraphU64_SubtractVectors(&position, zero, &node->position);
+            Graphu64_SubtractVectors(&position, zero, &node->position);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -171,7 +171,7 @@ f32 Gsky_GetMeanViewDistance(Race *viewOwner, void *targetPosition) {
     sum = 0.0f;
     if (node != 0) {
         do {
-            GraphU64_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
+            Graphu64_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
             sum += Gu_Sqrtf(
                 (position.x * position.x) +
                 (position.y * position.y) +

@@ -23,9 +23,9 @@ extern Marker *Gdynlight_AllocateLightNode(char *, s32);
 
 #include "ENGINE/INSTANCE/GOBJINST_13.H"
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 GameObject_GetActorHeight(void *);
+extern f32 Gobjinst_GetActorHeight(void *);
 
 /* Returns whether the entity registered under an id in D_800D052C has flag 1 (mode 0) or flag 2
    (mode 1) set in its word at 0x14; other modes give 0. The interval also holds the empty function
@@ -63,10 +63,10 @@ void Playerai_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 dis
     offset.y = 0.0f;
     offset.z = distance;
     func_8024BC94_de(&pos, actor, offset);
-    GraphU64_AddVec3(&pos, &pos, &actor->pos);
+    Graphu64_AddVec3(&pos, &pos, &actor->pos);
     marker->active = 1;
     marker->x = pos.x;
-    marker->y = pos.y + GameObject_GetActorHeight(actor) * D_800C7F08[1];
+    marker->y = pos.y + Gobjinst_GetActorHeight(actor) * D_800C7F08[1];
     marker->z = pos.z;
     marker->scale = D_800C7F10;
 }

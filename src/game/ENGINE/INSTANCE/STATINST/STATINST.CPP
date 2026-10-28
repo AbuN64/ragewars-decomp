@@ -16,7 +16,7 @@
 /* STATINST.CPP */
 extern s32 D_800D2978;
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 D_800C3E50_de[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
@@ -73,7 +73,7 @@ s32 Statinst_UpdateDistanceFade(void *prop, s32 arg1) {
     u8 next_timer;
     DescriptorRecAt24 *descriptor;
 
-    GraphU64_SubtractVectors(&sp10, &camera->position,
+    Graphu64_SubtractVectors(&sp10, &camera->position,
                   &owner->position);
     temp_f0 = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
     threshold = D_800C3E50_de[0];

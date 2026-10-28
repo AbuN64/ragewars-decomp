@@ -55,7 +55,7 @@ extern f32 D_800C4BE0_de;
 
 
 void Playerai_ApplyPlayerForces(void *, void *);
-f32 GameObject_GetActorHeight(void *);
+f32 Gobjinst_GetActorHeight(void *);
 f32 InstHdr_GetActorBaseOffset(void *);
 void Graphu64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, void *);
 void Graphu64_ClampMotionLength(void *, f32);

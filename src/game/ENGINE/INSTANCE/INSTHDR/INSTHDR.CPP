@@ -57,7 +57,7 @@ extern s32 Portal_FindNearestPointIndex(void *, void *);
 
 extern CVector3 *Portal_GetGraphPoint(void *, s32);
 
-extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void Graphu64_ScaleVector(void *, void *, f32);
 
 extern s32 SetN64_SpawnModelEffect(s32, s32, s32, CVector3, CVector3, s32, f32);
 
@@ -94,7 +94,7 @@ CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
                 up.y = 1.0f;
                 up.z = 0.0f;
                 Graphu64_CrossVectors(&axis, &up, &normal);
-                GraphU64_NormalizeVec3(&axis);
+                Graphu64_NormalizeVec3(&axis);
                 slope = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = Gu_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
@@ -149,9 +149,9 @@ void Insthdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     up.y = D_800C3CD0_de[1];
     up.z = 0.0f;
     dir.x = dir.y = dir.z = up.x;
-    GraphU64_NormalizeVec3(&dir);
+    Graphu64_NormalizeVec3(&dir);
     if (sound != 0xBD7) {
-        GraphU64_ScaleVector(&velocity, &dir, 409.59998f);
+        Graphu64_ScaleVector(&velocity, &dir, 409.59998f);
     }
     SetN64_SpawnModelEffect((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
 }

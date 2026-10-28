@@ -13,9 +13,9 @@ extern f32 D_800D2988;
 
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
    func_80223E34_de, turns the view through Player_UpdateViewAngles with the crouching tuning D_800CE7FC while the
@@ -137,8 +137,8 @@ void Player_UpdateFlyMode(void *player, void *bodyActor) {
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
                    Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
 
-    GraphU64_ScaleVector(&direction, &direction, D_800D2988);
-    GraphU64_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
+    Graphu64_ScaleVector(&direction, &direction, D_800D2988);
+    Graphu64_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
     result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)bodyActor)->unk8);
     if (result != 0) {

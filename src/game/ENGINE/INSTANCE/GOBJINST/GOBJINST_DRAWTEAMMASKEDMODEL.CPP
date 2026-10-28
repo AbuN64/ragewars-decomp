@@ -26,7 +26,7 @@ static inline void spawn(LevelActor *actor) {
     CVector3 position;
 
     position = actor->position0;
-    position.y += GameObject_GetActorHeight(actor) * D_800C3A74_de;
+    position.y += Gobjinst_GetActorHeight(actor) * D_800C3A74_de;
     Particle_SpawnEffectGroup((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
@@ -70,8 +70,8 @@ void Gobjinst_DrawTeamMaskedModel(LevelActor *actor, s32 unusedShadowContext, Lo
             effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A78_de;
-                effect->field150 = GameObject_GetActorRadius(actor) * scale;
-                effect->field154 = GameObject_GetActorHeight(actor) * scale;
+                effect->field150 = Gobjinst_GetActorRadius(actor) * scale;
+                effect->field154 = Gobjinst_GetActorHeight(actor) * scale;
             }
         }
     }

@@ -39,7 +39,7 @@ static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
-static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); Graphu64_TransformDirectionTranspose(matrix,local,out); }
+static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { Graphu64_SubtractVectors(local,to,from); Graphu64_TransformDirectionTranspose(matrix,local,out); }
 
 
 typedef struct NavWork {
@@ -104,10 +104,10 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     if ((target != NULL) && (work.result.result.distance <= turret->m_SightRadius)) {
         heightScale = D_800C1A28;
         work.origin.v=actor->player.views0.view8_2.unk8;
-        desiredSpeed=GameObject_GetActorHeight(&actor->player);
+        desiredSpeed=Gobjinst_GetActorHeight(&actor->player);
         work.origin.v.y+=desiredSpeed*heightScale;
         work.destination.v=target->views0.view8_2.unk8;
-        desiredSpeed=GameObject_GetActorHeight(target);
+        desiredSpeed=Gobjinst_GetActorHeight(target);
         work.destination.v.y+=desiredSpeed*heightScale;
         work.aim.v.x = riderState->nav.aim.x;
         work.aim.v.y = riderState->nav.aim.y;
@@ -116,8 +116,8 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         navRotation(&work.rotation,&work.aim.v);
         MatrixFromQuaternion(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
-        GraphU64_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
-        GraphU64_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
+        Graphu64_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
+        Graphu64_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
         desiredSpeed = Graphu64_GetVerticalAngle(&work.relative.v.x);
         aimError = Barrel_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;

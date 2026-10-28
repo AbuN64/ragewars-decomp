@@ -200,7 +200,7 @@ shared:
         } else {
             *arg4 = arg1;
         }
-        GraphU64_NormalizeVec3(arg4);
+        Graphu64_NormalizeVec3(arg4);
         *arg5 = var_f20;
         return 1;
     } else {
@@ -245,7 +245,7 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint
         Graphu64_TransformPoint(lightTransform, &worldPoint.x, &first);
         Graphu64_TransformDirection(lightTransform, &surfaceNormal.x, &second);
     }
-    GraphU64_NormalizeVec3(&second.x);
+    Graphu64_NormalizeVec3(&second.x);
     if (Lighting_EvaluateLocalVolume(lightVolume, first, &normal, &amount) == 0) {
         return 0;
     }
@@ -268,7 +268,7 @@ s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *lightVolume, CVector3 worldPoint
         if (contributionWeight != 0) {
             *contributionWeight = amount;
         }
-        GraphU64_ScaleVector(lightContribution, &lightVolume->direction, amount);
+        Graphu64_ScaleVector(lightContribution, &lightVolume->direction, amount);
     }
     return 1;
 }
@@ -331,7 +331,7 @@ void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, V
                     colour = light->animationSeed;
                     selectedAmount = amount;
                 }
-                GraphU64_AddVec3(&sum, &sum, &contribution);
+                Graphu64_AddVec3(&sum, &sum, &contribution);
             }
         }
         if (mode) {
@@ -380,7 +380,7 @@ void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords 
     light.x = source->x;
     light.y = source->y;
     light.z = source->z;
-    GraphU64_NormalizeVec3(&light);
+    Graphu64_NormalizeVec3(&light);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];

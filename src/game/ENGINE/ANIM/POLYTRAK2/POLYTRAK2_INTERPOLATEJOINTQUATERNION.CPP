@@ -87,7 +87,7 @@ unsigned int Polytrak2_BitAddressToWordAddress(unsigned int bitAddress) {
     return (bitAddress & 0xF0000000) | ((bitAddress & 0x0FFFFFE0) >> 3);
 }
 
-/* Reads a width-bit field starting at a packed bit address, returning it right-aligned. Adapted from func_80260DA8_de, with the bit address and width passed directly instead of computed from a base/width record. */
+/* Reads a width-bit field starting at a packed bit address, returning it right-aligned. Adapted from Polytrak2_GetUnsignedArrayElement, with the bit address and width passed directly instead of computed from a base/width record. */
 
 int Polytrak2_ReadBitsAtAddress(int bitAddress, unsigned int width) {
     int shift;

@@ -25,7 +25,7 @@ void Graphu64_InterpolateVector(CVector3 *, f32, void *, void *);
 void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
 s32 Particle_GetEffectResource(void *);
 
-s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,
+s32 CInstanceCollision_TestBoxFaces(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,
                     CVector3 *vertices, BoxContactTransform *transform, s32 index) {
     CVector3 *corners[4], *current;
     CVector3 normal, delta, hit, edge, offset;
@@ -41,31 +41,31 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         case 0:
             corners[0] = &vertices[7]; corners[1] = &vertices[6];
             corners[2] = &vertices[5]; corners[3] = &vertices[4];
-            GraphU64_SubtractVectors(&normal, &vertices[4], &vertices[0]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[4], &vertices[0]); break;
         case 1:
             corners[0] = &vertices[4]; corners[1] = &vertices[5];
             corners[2] = &vertices[1]; corners[3] = &vertices[0];
-            GraphU64_SubtractVectors(&normal, &vertices[0], &vertices[3]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[0], &vertices[3]); break;
         case 2:
             corners[0] = &vertices[7]; corners[1] = &vertices[4];
             corners[2] = &vertices[0]; corners[3] = &vertices[3];
-            GraphU64_SubtractVectors(&normal, &vertices[3], &vertices[2]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[3], &vertices[2]); break;
         case 3:
             corners[0] = &vertices[6]; corners[1] = &vertices[7];
             corners[2] = &vertices[3]; corners[3] = &vertices[2];
-            GraphU64_SubtractVectors(&normal, &vertices[2], &vertices[1]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[2], &vertices[1]); break;
         case 4:
             corners[0] = &vertices[5]; corners[1] = &vertices[6];
             corners[2] = &vertices[2]; corners[3] = &vertices[1];
-            GraphU64_SubtractVectors(&normal, &vertices[1], &vertices[0]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[1], &vertices[0]); break;
         case 5:
             corners[0] = &vertices[0]; corners[1] = &vertices[1];
             corners[2] = &vertices[2]; corners[3] = &vertices[3];
-            GraphU64_SubtractVectors(&normal, &vertices[3], &vertices[7]); break;
+            Graphu64_SubtractVectors(&normal, &vertices[3], &vertices[7]); break;
         }
         denominator = (normal.x * ray->direction.x + normal.y * ray->direction.y + normal.z * ray->direction.z);
         if (denominator == 0.0f) continue;
-        GraphU64_SubtractVectors(&delta, origin, corners[0]);
+        Graphu64_SubtractVectors(&delta, origin, corners[0]);
         distance = (delta.x * normal.x + delta.y * normal.y + delta.z * normal.z);
         if (distance == 0.0f) continue;
         fraction = -distance / denominator;
@@ -77,8 +77,8 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         for (i = 0; i < 4; i++) {
             next = i == 3 ? 0 : i + 1;
             current = corners[i];
-            GraphU64_SubtractVectors(&edge, corners[next], current);
-            GraphU64_SubtractVectors(&offset, &hit, current);
+            Graphu64_SubtractVectors(&edge, corners[next], current);
+            Graphu64_SubtractVectors(&offset, &hit, current);
             if ((edge.x * offset.x + edge.y * offset.y + edge.z * offset.z) < 0.0f) { inside = 0; break; }
         }
         if (!inside) continue;
@@ -133,7 +133,7 @@ void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
 void Cache_UnlockResource(void *arg0, Node80253610 *arg1);
 
-void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
+void CInstanceCollision_TraceActorBounds(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];
     CVector3 corners[8];
     CVector3 center;
@@ -214,7 +214,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
                     ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
                 }
                 Graphu64_TransformPoints(matrix, part->corners, vertices, 8);
-                func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);
+                CInstanceCollision_TestBoxFaces(ray, bounds, actor, origin, vertices, part, i);
             }
         }
         Cache_UnlockResource(0, resource);
@@ -277,7 +277,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         corner[7].y = own->max.y;
         corner[7].z = own->max.z;
     }
-    func_8023F750_de(ray, bounds, actor, origin, vertices, 0, -1);
+    CInstanceCollision_TestBoxFaces(ray, bounds, actor, origin, vertices, 0, -1);
 }
 
 /* Collect overlapping actors, sort their contact distances, and dispatch each contact within range. */
@@ -378,7 +378,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
             CInstanceCollision_BuildSweepQuery(self, scratch);
             Instcol_TestEntityContact(self, scratch, candidate);
         } else {
-            func_8023FD18_de(self, candidate, ownerPosition, &self->box);
+            CInstanceCollision_TraceActorBounds(self, candidate, ownerPosition, &self->box);
         }
     }
 }

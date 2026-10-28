@@ -35,7 +35,7 @@ extern s32 Defs_FindSortedValue(s32, s32, s32);
 #include "COMMON.H"
 extern f32 D_800C401C_de;
 
-void *func_8025DB80_de(Track *state, s32 index) {
+void *Sequencer_SelectTrackSequence(Track *state, s32 index) {
     s32 selection;
 
     void *result;
@@ -92,7 +92,7 @@ do_update:
     }
 }
 
-void func_8025DD60_de(Track *track) {
+void Sequencer_AttachTrackSequence(Track *track) {
     s32 i;
     f32 scaled;
 
@@ -118,7 +118,7 @@ const unsigned int D_blob_97655e5ead2f6b44a8c7[1] = {
 };
 
 /* ROM-grounded data: src/rw_pool_8025DD60_C9D24_us_rev1.c */
-const unsigned int D_blob_4d5302c2d0e80d970cfa[2] = {
+const unsigned int g_trackSequenceVolumeFactors[2] = {
     0x3C23D70A, 0x46FFFE00,
 };
 

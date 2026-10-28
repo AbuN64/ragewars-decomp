@@ -29,9 +29,9 @@ extern SharedPlayer *D_80145060;
 
 s32 Unicol_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
-f32 GameObject_GetActorHeight(SharedPlayer *player);
+f32 Gobjinst_GetActorHeight(SharedPlayer *player);
 
-void GraphU64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
+void Graphu64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 
 f32 Graphu64_GetSquaredDistance(CVector3 *a, CVector3 *b);
@@ -68,7 +68,7 @@ static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer
     CVector3 pos;
     pos = player->views0.view8_3.pos;
     if (particle->inst.type != 0x40F) {
-        pos.y += GameObject_GetActorHeight(player) * 0.5f;
+        pos.y += Gobjinst_GetActorHeight(player) * 0.5f;
     }
     return Graphu64_GetSquaredDistance(&particle->inst.pos, &pos);
 }
@@ -87,9 +87,9 @@ extern struct Shape_typemap_165 Graphu64_BuildDirectionQuaternion(CVector3 *);
 
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Particle_Release(void *, void *);
-/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from Particle_HandleMaterialContact, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped GraphU64_ScaleVector call, and the final test changed. */
+/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from Particle_HandleMaterialContact, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped Graphu64_ScaleVector call, and the final test changed. */
 
 
 
@@ -345,20 +345,20 @@ void Particle_Update(Shared_Particle *particle) {
         }
         if (die) {
             if (D_801041F0.current != NULL) {
-                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
             } else if (D_801041F0.unk88 != 0) {
-                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
             } else if (D_801041F0.unk9C != 0) {
-                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
             } else if (D_801041F0.unkB4 != 0) {
-                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
                 if (particle->space == -7) {
                     particle->space = -3;
                 }
             } else if (D_801041F0.unkC4 != 0) {
-                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
+                Graphu64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
             }
-            GraphU64_NormalizeVec3(&particle->direction);
+            Graphu64_NormalizeVec3(&particle->direction);
         }
         Particle_DispatchOwnerContactLinks(particle);
         if (D_801041F0.unkC4 != 0) {
@@ -454,7 +454,7 @@ void Particle_HandleInitialMaterialContact(Shared_Particle *particle) {
         }
     }
 skip_effects:
-    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x400;
     if (particle->unk1B9 == 1) {
@@ -574,7 +574,7 @@ void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle) {
     if (sound != 0xFFFF) {
         SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
     }
-    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -629,7 +629,7 @@ void Particle_HandleMaterialContact(Shared_Particle *particle) {
     if (sound != 0xFFFF) {
         SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
     }
-    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    Graphu64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -670,7 +670,7 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     scene=&D_801041F0;
     Graphu64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
-    GraphU64_NormalizeVec3(&direction);
+    Graphu64_NormalizeVec3(&direction);
     Graphu64_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
@@ -822,7 +822,7 @@ void Particle_HitTarget(void *particle) {
 extern u32 D_801002F0;
 extern void Fx_SpawnImpactMark(void *, CVector3, CVector3, s32, s32);
 extern void Player_SetPlayerResetPosition(void *, CVector3 *);
-extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Reacts to a particle striking the current attachment target. The target picks the impact slot (slot 5 becomes slot 4
  * and sets flag 2). Under the controlled-impact mode (D_801462E5) descriptor slot 12 or 10 fires its event, particle
@@ -902,9 +902,9 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             }
         }
         normal = D_801001F8.normal;
-        GraphU64_NormalizeVec3(&normal.x);
-        GraphU64_ScaleVector(&normal, &normal, 1.024f);
-        GraphU64_AddVec3(&particle->inst.pos, &particle->inst.pos, &normal);
+        Graphu64_NormalizeVec3(&normal.x);
+        Graphu64_ScaleVector(&normal, &normal, 1.024f);
+        Graphu64_AddVec3(&particle->inst.pos, &particle->inst.pos, &normal);
         model = desc->events->particles[hit];
         effect = desc->events->effects[hit];
         params = desc->events->parameters[hit];

@@ -134,10 +134,10 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
                     else {
                         candidate = other->position;
                         candidate.y += other->height;
-                        candidate.y += GameObject_GetActorHeight(other) * scale;
+                        candidate.y += Gobjinst_GetActorHeight(other) * scale;
                     }
-                    GraphU64_SubtractVectors(&direction, &candidate, &origin);
-                    GraphU64_NormalizeVec3(&direction.x);
+                    Graphu64_SubtractVectors(&direction, &candidate, &origin);
+                    Graphu64_NormalizeVec3(&direction.x);
                     dot = forward.x * direction.x + forward.y * direction.y +
                           forward.z * direction.z;
                     if (threshold < dot) {
@@ -161,10 +161,10 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
                 else {
                     candidate = other->position;
                     candidate.y += other->height;
-                    candidate.y += GameObject_GetActorHeight(other) * scale;
+                    candidate.y += Gobjinst_GetActorHeight(other) * scale;
                 }
-                GraphU64_SubtractVectors(&direction, &candidate, &origin);
-                GraphU64_NormalizeVec3(&direction.x);
+                Graphu64_SubtractVectors(&direction, &candidate, &origin);
+                Graphu64_NormalizeVec3(&direction.x);
                 dot = forward.x * direction.x + forward.y * direction.y +
                       forward.z * direction.z;
                 if (threshold < dot) {
@@ -182,7 +182,7 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
     *targetPosition = bestPosition;
     if (best) {
         Graphu64_CrossVectors(&axis, &forward, &bestDirection);
-        GraphU64_NormalizeVec3(&axis.x);
+        Graphu64_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
         threshold = Graphu64_ArcCos(threshold);
         amount = Gu_Sqrtf(D_800C23A0_de - threshold / (angle * scale));

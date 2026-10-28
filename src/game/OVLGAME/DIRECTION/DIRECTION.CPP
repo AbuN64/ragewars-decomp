@@ -16,7 +16,7 @@ void Ovlgame_InitializeRenderDirection(RenderSettings *state) {
     state->direction.x = D_800C53B0_de;
     state->direction.y = D_800C53B4_de;
     state->direction.z = D_800C53B8_de;
-    GraphU64_NormalizeVec3(&state->direction.x);
+    Graphu64_NormalizeVec3(&state->direction.x);
     state->ready = 1;
 }
 

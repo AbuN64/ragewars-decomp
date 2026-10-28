@@ -98,7 +98,7 @@ extern void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *fr
 
 
 
-extern f32 func_80260B80_de(u32 *stream, s32 bits, f32 base, f32 range);
+extern f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, s32 bits, f32 base, f32 range);
 
 /* Fills a four-float keyframe sample for an animation track: either the stored constant pose or an
  * interpolation between the two keys around the time. */
@@ -204,7 +204,7 @@ void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) 
     i = 0;
     if (count > 0) {
         do {
-            out->value = func_80260B80_de(&decode.stream, decode.bits,
+            out->value = Polytrak2_ReadQuantizedFloatAndAdvance(&decode.stream, decode.bits,
                                        decode.base, decode.range);
             i++;
             out++;

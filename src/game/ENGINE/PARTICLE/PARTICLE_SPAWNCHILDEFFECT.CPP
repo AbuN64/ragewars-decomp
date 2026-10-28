@@ -81,7 +81,7 @@ extern char D_8011D8D0;
 extern char D_801041F0;
 extern CQuatern Graphu64_BuildDirectionQuaternion(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
-extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
 
 static inline f32 offset_x(Actor_func_80279B40_de *actor) {
@@ -130,7 +130,7 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spa
         } else {
             carried = turned;
         }
-        GraphU64_AddVec3(&moved, &carried, &actor->position);
+        Graphu64_AddVec3(&moved, &carried, &actor->position);
         D_80103FCC = scratch;
         point = moved;
         D_80103FCC = &D_801041F0;

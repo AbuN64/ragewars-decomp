@@ -29,9 +29,9 @@ extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern char *Playerai_FindNearestPlayer(void *, CVector3);
 
-extern f32 GameObject_GetActorHeight(char *);
+extern f32 Gobjinst_GetActorHeight(char *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
@@ -83,11 +83,11 @@ CQuatern Gobjinst_BuildTargetAimOrientation(char *actor, CVector3 point) {
     }
     origin = ((ActorBarrelIsTargetInViewCone *)(target))->position;
     origin.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
-    origin.y += GameObject_GetActorHeight(target) * 0.75f;
-    GraphU64_SubtractVectors(&dir, &origin, &point);
-    GraphU64_NormalizeVec3(&dir);
+    origin.y += Gobjinst_GetActorHeight(target) * 0.75f;
+    Graphu64_SubtractVectors(&dir, &origin, &point);
+    Graphu64_NormalizeVec3(&dir);
     Graphu64_CrossVectors(&axis, &forward, &dir);
-    GraphU64_NormalizeVec3(&axis);
+    Graphu64_NormalizeVec3(&axis);
     angle = Graphu64_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = Gu_Sinf(angle);
     turn.x = axis.x * scale;
@@ -135,7 +135,7 @@ source_ready:
     up.y = D_800C3C9C_de;
     up.z = 0.0f;
     Graphu64_CrossVectors(&axis, &up, &source);
-    GraphU64_NormalizeVec3(&axis);
+    Graphu64_NormalizeVec3(&axis);
 
     angle = Graphu64_ArcCos((up.x * source.x) +
                           (up.y * source.y) +

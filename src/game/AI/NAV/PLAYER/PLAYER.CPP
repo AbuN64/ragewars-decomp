@@ -174,7 +174,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
 
 extern CNavData D_8013B364;
 float Graphu64_GetPointDistance(void *, void *);
-void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 f32 Nav_SteerTowardPoint(Brain_func_80209308_de *, CVector3 *, f32, f32);
 void Scaled_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
 void Portal_DispatchActorBehavior(AiController *);
@@ -248,7 +248,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                         if (controller->unk314 == 0) {
                             start = Portal_GetGraphPoint(graph, controller->current);
-                            GraphU64_SubtractVectors(&delta, pos, &start->position);
+                            Graphu64_SubtractVectors(&delta, pos, &start->position);
                             if (!(Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
                                 return;
@@ -323,7 +323,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            GraphU64_SubtractVectors(&delta, pos, &Portal_FindSearchNode(graph, controller->current)->platform->pos);
+                            Graphu64_SubtractVectors(&delta, pos, &Portal_FindSearchNode(graph, controller->current)->platform->pos);
                             gap = Gu_Sqrtf(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
@@ -433,7 +433,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         player = controller->player;
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
-        GraphU64_SubtractVectors(&delta, destination, position);
+        Graphu64_SubtractVectors(&delta, destination, position);
         distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
@@ -538,7 +538,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         player = controller->player;
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
-        GraphU64_SubtractVectors(&delta, destination, position);
+        Graphu64_SubtractVectors(&delta, destination, position);
         distance = Gu_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
@@ -577,7 +577,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             steer.x = desired.x + tangent.x;
             steer.y = 0.0f;
             steer.z = desired.z + tangent.z;
-            GraphU64_NormalizeVec3(&steer);
+            Graphu64_NormalizeVec3(&steer);
             player->forward = steer.x * facing.x + steer.y * facing.y + steer.z * facing.z;
             navigationTurnRight(&facing);
             player->strafe = steer.x * facing.x + steer.z * facing.z;

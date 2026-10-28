@@ -660,11 +660,11 @@ extern struct Shared_Floor *D_80103FCC;
 
 extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
-extern void Nav_UpdateActorCurrentNode(void *, void *);
+extern void Portal_UpdateActorCurrentNode(void *, void *);
 extern void Actor_ApplySupportingPlatformMotion(void *, void *);
 extern void Barrel_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void TeamSelect_UpdateDraftPanel(void *, void *, void *);
-extern void func_80218B84_de(void *, void *, void *);
+extern void Cteamselect_UpdateTeamWheel(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
 extern void Player_UpdatePlayerEffectLights(void *, void *);
@@ -806,7 +806,7 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     human = 1;
   }
-  Nav_UpdateActorCurrentNode(&D_8013B364, player);
+  Portal_UpdateActorCurrentNode(&D_8013B364, player);
   if (player->views1450.view1450_0.unk1450 != 0)
   {
     Nav_UpdateComputerPlayerStatus((struct Brain *)player->views1454.view1454_0.unk1454);
@@ -1089,8 +1089,8 @@ void func_80220ED4_de(SharedPlayer *player)
     if (rise > 0.0f)
     {
       f22 = InstHdr_GetActorReach(actor);
-      f21 = GameObject_GetActorRadius(actor);
-      f20 = GameObject_GetActorHeight(actor);
+      f21 = Gobjinst_GetActorRadius(actor);
+      f20 = Gobjinst_GetActorHeight(actor);
       f0 = InstHdr_GetActorBaseOffset(actor);
       scratch.views0.view0_1.to.x = actor->views0.view8_3.pos.x;
       scratch.views0.view0_1.to.y = actor->views0.view8_3.pos.y + rise;
@@ -1357,7 +1357,7 @@ void func_80220ED4_de(SharedPlayer *player)
     }
   }
   TeamSelect_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
-  func_80218B84_de(&player->views5E8.viewCCC_164.unkCCC, player, &player->views1C.view458_40.unk458);
+  Cteamselect_UpdateTeamWheel(&player->views5E8.viewCCC_164.unkCCC, player, &player->views1C.view458_40.unk458);
   if (player->views5E8.view62E_17.character == 0)
   {
     player->views13B4.view13B4_5.states = D_800CED30;
@@ -1972,7 +1972,7 @@ void Player_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
 /* Updates player forward, strafe and impulse velocities, accumulates movement and plays the impulse sound. */
 
 
-extern void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
+extern void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_ScaleVector(CVector3 *,CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *movementProfile) {
     CVector3 motion;
@@ -2080,9 +2080,9 @@ block_42:
             }
             motion.x += player->views5E8.view6D8_59.unk6D8 * Gu_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
-            GraphU64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
+            Graphu64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             movementOutput = &player->views5E8.view6E8_63.unk6E8;
-            GraphU64_AddVec3(movementOutput, movementOutput, &motion);
+            Graphu64_AddVec3(movementOutput, movementOutput, &motion);
             if (boostApplied != 0) {
                 player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
                 SoundElement_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
@@ -2096,7 +2096,7 @@ block_42:
 
 
 extern CQuatern func_8024796C_de(Actor_func_802238E0_de *);
-extern void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_EaseValueToward(f32 *,f32,f32);
+extern void Graphu64_AddVec3(CVector3 *,CVector3 *,CVector3 *),Graphu64_EaseValueToward(f32 *,f32,f32);
 void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *movementProfile) {
     CVector3 v18,v28,v38,v48,v58;
     MatrixF rotationMatrix;
@@ -2198,7 +2198,7 @@ block_31:
     player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));
     if (body->unk20 < 0.0f) {
-        GraphU64_AddVec3(&v58, &v38, &v48);
+        Graphu64_AddVec3(&v58, &v38, &v48);
         body->unk20 = (f32) (body->unk20 - (player->views13B4.view13B4_2.unk13B4[player->views5E8.view650_15.unk650].physics->unk8 * (Gu_Sqrtf((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (movementProfile->unk4 * 4.0f)) * player->views5E8.view66C_29.unk66C));
     }
     Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, ((player->views5E8.view6C4_54.unk6C4 * 1.8f) + (player->views5E8.view69C_39.unk69C * 16.0f)) * 0.01745329424738884f, 0.04f);

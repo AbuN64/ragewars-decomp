@@ -233,7 +233,7 @@ void *SetN64_SpawnModelEffect(char *arg0, s32 *referenceCounter, s32 arg2, CVect
   ((SceneEffect *)(effectActor))->rotation = rotation;
   ((SceneEffect *)(effectActor))->effectState = 0;
   center.x = ((SceneEffect *)(effectActor))->position.x;
-  center.y = (((SceneEffect *)(effectActor))->position.y) + (GameObject_GetActorHeight(effectActor) * 0.5f);
+  center.y = (((SceneEffect *)(effectActor))->position.y) + (Gobjinst_GetActorHeight(effectActor) * 0.5f);
   center.z = ((SceneEffect *)(effectActor))->position.z;
   Scene_SampleWorldLighting(&g_world, &center, (char *)effectActor + 0x1A8);
   return effectActor;

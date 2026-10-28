@@ -23,7 +23,7 @@
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 /* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
 
@@ -93,7 +93,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        GraphU64_ScaleVector(&cross, &cross, one / magnitude);
+        Graphu64_ScaleVector(&cross, &cross, one / magnitude);
         angle = Graphu64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));

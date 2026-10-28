@@ -52,7 +52,7 @@
 #include "ONSCRN/ONSCRN.H"
 
 /* 80233920.CPP */
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Gu_Sqrtf(f32);
 
 
@@ -63,7 +63,7 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
     f32 value;
     AxisWave *wave;
 
-    GraphU64_SubtractVectors(&position, &position, &shake->m_vPos);
+    Graphu64_SubtractVectors(&position, &position, &shake->m_vPos);
     distance = Gu_Sqrtf((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));
@@ -157,7 +157,7 @@ void Camera_AdvanceOverlayFade(Overlay *overlay) {
  * through SetN64_DrawColorRectangle if that player shows outlines (flag 0x1000), using the entity's colour (or the
  * override colour D_800FEAD8 when D_800C9FE4 is set, darkened when option 0x4000 is set); it then
  * notifies the player list through func_8022A398_de when Cinema_IsSequenceInWindow is clear and SetN64_IsModeThirteen is set,
- * and finishes the entity through func_80245894_de. */
+ * and finishes the entity through Cinema_DrawSequenceOverlay. */
 
 
 
@@ -168,7 +168,7 @@ extern void SetN64_DrawColorRectangle(void *, u8 *, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 SetN64_IsModeThirteen(void);
 extern void func_8022A398_de(void *, View *);
-extern void func_80245894_de(View *);
+extern void Cinema_DrawSequenceOverlay(View *);
 
 static inline SharedPlayer *find_owner(View *entity) {
     SharedPlayer *player;
@@ -211,7 +211,7 @@ void Camera_DrawViewportOverlays(View *entity) {
     if (Cinema_IsSequenceInWindow() == 0 && SetN64_IsModeThirteen() != 0) {
         func_8022A398_de(&D_80145040, entity);
     }
-    func_80245894_de(entity);
+    Cinema_DrawSequenceOverlay(entity);
 }
 
 #if defined(VERSION_US)
@@ -278,7 +278,7 @@ void Camera_AnimateViewColorsAndLight(View *actor) {
     direction.x = Gu_Sinf((f32) (D_800CD730 * 6) * 0.01745329424738884f);
     direction.y = Gu_Sinf((f32) (D_800CD730 * 8) * 0.01745329424738884f);
     direction.z = Math_Cosf((f32) (D_800CD730 * 10) * 0.01745329424738884f);
-    GraphU64_NormalizeVec3(&direction);
+    Graphu64_NormalizeVec3(&direction);
     direction.x *= 120.0f;
     direction.y *= 120.0f;
     direction.z *= 120.0f;
@@ -1200,7 +1200,7 @@ extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
 extern void Scene_DrawWorldParticles(char *, char *);
 extern void Fx_DrawLinkedGeometry(void *, char *);
-extern void Sky_DrawObjectFlares(char *);
+extern void Gsky_DrawObjectFlares(char *);
 extern void func_8022A328_de(void *, char *);
 
 
@@ -1230,7 +1230,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     func_8023B3F8_de(view + 0x570, view);
     Scene_DrawWorldParticles(world, view);
     Fx_DrawLinkedGeometry(&D_801379C0, view);
-    Sky_DrawObjectFlares(view);
+    Gsky_DrawObjectFlares(view);
     if (Cinema_IsSequenceInWindow() == 0 && SetN64_IsModeThirteen() != 0) {
         func_8022A328_de(&D_80145040, view);
     }

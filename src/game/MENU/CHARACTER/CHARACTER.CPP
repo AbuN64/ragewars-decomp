@@ -51,7 +51,7 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
-    Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
+    Preview_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
     Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].title)->alpha = 0x6E;
     for (j = 0; j < 3; j++)
     {
@@ -144,7 +144,7 @@ s32 func_8041F2A0_us(void *screen)
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
-    Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
+    Preview_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
     Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].title)->alpha = 0x6E;
     for (j = 0; j < 3; j++)
     {
@@ -237,7 +237,7 @@ s32 func_8041F6E0_eu(void *screen)
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
-    Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
+    Preview_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
     Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].title)->alpha = 0x6E;
     for (j = 0; j < 3; j++)
     {
@@ -330,7 +330,7 @@ s32 func_8041F6E0_eu_x(void *screen)
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
-    Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
+    Preview_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
     Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].title)->alpha = 0x6E;
     for (j = 0; j < 3; j++)
     {
@@ -423,7 +423,7 @@ s32 func_8041F230_de(void *screen)
     scale.x = D_800E3A58[row].scale[i];
     scale.y = D_800E3A58[row].scale[i];
     scale.z = D_800E3A58[row].scale[i];
-    Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
+    Preview_InitModelPreview(D_800E42D0->players[i].model, 9, model + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[i], D_800E3A58[row].distance[i], D_800E3A58[row].light[i]);
     Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].title)->alpha = 0x6E;
     for (j = 0; j < 3; j++)
     {
@@ -584,7 +584,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
                                 scale.x = D_800E3A58[entryIndex].scale[i];
                                 scale.y = D_800E3A58[entryIndex].scale[i];
                                 scale.z = D_800E3A58[entryIndex].scale[i];
-                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, previewModelOffset + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[entryIndex].position[i], D_800E3A58[entryIndex].distance[i], D_800E3A58[entryIndex].light[i]);
+                                Preview_InitModelPreview(D_800E42D0->players[i].model, 9, previewModelOffset + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[entryIndex].position[i], D_800E3A58[entryIndex].distance[i], D_800E3A58[entryIndex].light[i]);
                             } else {
                                 Menu_RandomizeCharacterPreview(i);
                             }

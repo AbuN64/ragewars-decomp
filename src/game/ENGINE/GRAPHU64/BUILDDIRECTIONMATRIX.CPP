@@ -149,9 +149,9 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
     }
     Graphu64_CrossVectors(&m->up, &m->right, direction);
     m->forward = *direction;
-    GraphU64_NormalizeVec3(&m->right);
-    GraphU64_NormalizeVec3(&m->up);
-    GraphU64_NormalizeVec3(&m->forward);
+    Graphu64_NormalizeVec3(&m->right);
+    Graphu64_NormalizeVec3(&m->up);
+    Graphu64_NormalizeVec3(&m->forward);
     m->m03 = m->m13 = m->m23 = m->m30 = m->m31 = m->m32 = 0.0f;
     m->m33 = D_800C48F0_de;
 }

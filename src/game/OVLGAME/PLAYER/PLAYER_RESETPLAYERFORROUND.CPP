@@ -77,7 +77,7 @@ extern u8 D_0022F710_eu_x[];
 #endif
 extern void Gobjinst_InitializePlacedActor(void *, void *, void *, s32);
 extern void Actor_RequestActorState(void *, void *, s32);
-extern void Weapon_ApplyWeaponSwitch(void *, void *);
+extern void Weaponai_ApplyWeaponSwitch(void *, void *);
 extern void Player_UpdatePlayerCamera(void *, void *);
 #include "MENU/INITVIEW.H"
 #include "ACHIEVE/80424E30_3.H"
@@ -136,7 +136,7 @@ void Player_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
     Actor_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
-    Weapon_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
+    Weaponai_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
     Player_UpdatePlayerCamera(actor, actor);
     if (record->auxiliary != 0) {
         Cinema_UpdateSequenceTrack(record->auxiliary);

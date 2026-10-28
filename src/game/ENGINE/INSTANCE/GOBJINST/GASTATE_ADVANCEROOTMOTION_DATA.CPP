@@ -68,13 +68,13 @@ extern void Player_BuildPlayerOrientation(void *, CQuatern *);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
-extern f32 GameObject_GetActorHeight(char *);
+extern f32 Gobjinst_GetActorHeight(char *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 /* Sways a model part: from the frame count D_800D2978, a per-part phase ((flags & 0x38) * 50, plus 40
  * unless flag 4 is set) and the part's time divided by 113, it reads a 120-step sine table at D_800D0720 to
@@ -368,9 +368,9 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         }
         center = ((LevelActor *)(entity))->position0;
         center.y += ((LevelActor *)(entity))->eyeHeight;
-        center.y += GameObject_GetActorHeight(entity) * 0.5f;
-        GraphU64_SubtractVectors(&dir, &center, &point);
-        GraphU64_NormalizeVec3(&dir);
+        center.y += Gobjinst_GetActorHeight(entity) * 0.5f;
+        Graphu64_SubtractVectors(&dir, &center, &point);
+        Graphu64_NormalizeVec3(&dir);
         dot = aim.x * dir.x + aim.y * dir.y + aim.z * dir.z;
         if (bestDot < dot) {
             bestDot = dot;
@@ -380,7 +380,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     }
     if (target != 0) {
         Graphu64_CrossVectors(&axis, &aim, &best);
-        GraphU64_NormalizeVec3(&axis);
+        Graphu64_NormalizeVec3(&axis);
         angle = Graphu64_ArcCos(bestDot);
         angle *= Gu_Sqrtf(Gu_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
@@ -438,16 +438,16 @@ void func_80247F18_de(char *actor, char *twistState, char *boneMatrix, CVector3 
         boneOrigin.x = ((Matrix *)boneMatrix)->m[12];
         boneOrigin.y = ((Matrix *)boneMatrix)->m[13];
         boneOrigin.z = ((Matrix *)boneMatrix)->m[14];
-        GraphU64_SubtractVectors(&impactPosition, &impactPosition, &boneOrigin);
+        Graphu64_SubtractVectors(&impactPosition, &impactPosition, &boneOrigin);
         Graphu64_CrossVectors(&twistAxis, &impactPosition, &impactDirection);
-        GraphU64_NormalizeVec3(&twistAxis);
-        GraphU64_NormalizeVec3(&impactPosition);
-        GraphU64_NormalizeVec3(&impactDirection);
+        Graphu64_NormalizeVec3(&twistAxis);
+        Graphu64_NormalizeVec3(&impactPosition);
+        Graphu64_NormalizeVec3(&impactDirection);
         Graphu64_CrossVectors(&perpendicularDirection, &twistAxis, &impactPosition);
-        GraphU64_ScaleVector(&twistAxis, &twistAxis,
+        Graphu64_ScaleVector(&twistAxis, &twistAxis,
                       (perpendicularDirection.x * impactDirection.x) + (perpendicularDirection.y * impactDirection.y) +
                           (perpendicularDirection.z * impactDirection.z));
-        GraphU64_NormalizeVec3(&twistAxis);
+        Graphu64_NormalizeVec3(&twistAxis);
         ((Field_Vec_18 *)(twistState))->value = twistAxis;
        }
       }
@@ -497,17 +497,17 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     } else {
         return;
     }
-    GraphU64_NormalizeVec3(&axis);
+    Graphu64_NormalizeVec3(&axis);
     origin.x = matrix[12];
     origin.y = matrix[13];
     origin.z = matrix[14];
     CopyMatrix(inverse, matrix);
     flip = -1.0f;
-    GraphU64_ScaleVector(&origin, &origin, flip);
+    Graphu64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(inverse, origin.x, origin.y, origin.z);
     Graphu64_BuildAxisAngleMatrix(rotation, angle, axis.x, axis.y, axis.z);
     Graphu64_MultiplyAffineMatrices(matrix, inverse, rotation);
-    GraphU64_ScaleVector(&origin, &origin, flip);
+    Graphu64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(matrix, origin.x, origin.y, origin.z);
 }
 

@@ -145,7 +145,7 @@ static inline void ProjectToScreen(FlareActor *view, CVector3 *point, f32 *scree
 }
 
 /* Draws the lens flares of every lit flare source the view can see. */
-void Sky_DrawObjectFlares(FlareActor *view) {
+void Gsky_DrawObjectFlares(FlareActor *view) {
     Gfx **gfx = &g_displayListCursor;
     Gfx *g;
     FlareSource *source;

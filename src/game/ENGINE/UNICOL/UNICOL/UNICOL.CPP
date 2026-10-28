@@ -105,8 +105,8 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     }
     frame.sp1C = motionContinuation;
     actorReach = InstHdr_GetActorReach(actor);
-    count = GameObject_GetActorRadius(actor);
-    high = GameObject_GetActorHeight(actor);
+    count = Gobjinst_GetActorRadius(actor);
+    high = Gobjinst_GetActorHeight(actor);
     CCollision_SetSweepRange(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
     *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);

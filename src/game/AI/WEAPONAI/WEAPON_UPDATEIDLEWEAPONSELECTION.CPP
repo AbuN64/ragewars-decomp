@@ -31,7 +31,7 @@ const unsigned int D_auto_rodata_func_80230058_de_800C3188[18] = {
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern char D_800CE8DC;
 
-extern s16 Weapon_FindNextUsableWeapon(void *arg0);
+extern s16 Weaponai_FindNextUsableWeapon(void *arg0);
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *weaponFireState) {
@@ -48,7 +48,7 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *weaponFireState) {
             if (((Dest *)weaponFireState)->field13C == 2) {
                 ((Dest *)weaponFireState)->field13C = 1;
                 if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-                    ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
+                    ((Shared_ActorView *)actor)->nextWeapon = Weaponai_FindNextUsableWeapon(actor);
                 }
             }
         }

@@ -14,13 +14,13 @@
 #include "RENDER/8028FD2C_6.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-/* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and GraphU64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
+/* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
 extern f32 Gu_Sqrtf(f32);
-extern void GraphU64_ScaleVector(f32 *, f32 *, f32);
+extern void Graphu64_ScaleVector(f32 *, f32 *, f32);
 void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     s32 i;
     u8 c;
@@ -42,7 +42,7 @@ void Scene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     v[2] = scene->light->m_Direction[2];
     length = Gu_Sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     if (length != 0.0f) {
-        GraphU64_ScaleVector(v, v, g_lightDirectionLength / length);
+        Graphu64_ScaleVector(v, v, g_lightDirectionLength / length);
         scene->dir[0] = v[0];
         scene->dir[1] = v[1];
         scene->dir[2] = v[2];

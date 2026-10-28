@@ -19,21 +19,21 @@ extern Triangle *D_800CD3E8;
 
 extern Triangle *D_800CD3EC;
 
-extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern f32 Gu_Sqrtf(f32);
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
-    GraphU64_SubtractVectors(out, a, b);
+    Graphu64_SubtractVectors(out, a, b);
 }
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     *out = *in;
-    GraphU64_NormalizeVec3(out);
+    Graphu64_NormalizeVec3(out);
 }
 
 extern void Graphu64_GetCachedSurfaceNormal(CVector3 *);
@@ -81,7 +81,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        GraphU64_ScaleVector(&axis, &axis, one / len);
+        Graphu64_ScaleVector(&axis, &axis, one / len);
         angle = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
         scale = Gu_Sinf(angle);
@@ -118,7 +118,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
         result.x = 0;
         result.w = one;
     } else {
-        GraphU64_ScaleVector(&axis, &axis, one / len);
+        Graphu64_ScaleVector(&axis, &axis, one / len);
         angle = Graphu64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
         scale = Gu_Sinf(angle);
@@ -252,7 +252,7 @@ bounds_loop:
 /* 8027451C_4.CPP */
 
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
-   Adapted from Graphu64_GetCachedSurfaceNormal with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
+   Adapted from Graphu64_GetCachedSurfaceNormal with the edge vectors computed through the Graphu64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     CVector3 a;
@@ -263,8 +263,8 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         D_80115E10.z = 0;
         D_80115E10.y = D_800C49F8_de;
     } else if ((Triangle *)node != D_800CD3E8) {
-        GraphU64_SubtractVectors(&a, node->cur, node->prev);
-        GraphU64_SubtractVectors(&b, node->next, node->cur);
+        Graphu64_SubtractVectors(&a, node->cur, node->prev);
+        Graphu64_SubtractVectors(&b, node->next, node->cur);
         Graphu64_CrossVectors(&D_80115E10, &a, &b);
     }
     D_800CD3E8 = (Triangle *)node;
@@ -337,9 +337,9 @@ CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
         D_80115E10.z = 0;
         D_80115E10.y = D_800C49F0_de;
     } else if ((Triangle *)node != D_800CD3E8) {
-        GraphU64_SubtractVectors(&a, node->cur, node->prev);
+        Graphu64_SubtractVectors(&a, node->cur, node->prev);
         b_ptr = &b;
-        GraphU64_SubtractVectors(b_ptr, node->next, node->cur);
+        Graphu64_SubtractVectors(b_ptr, node->next, node->cur);
         Graphu64_CrossVectors(&D_80115E10, &a, b_ptr);
     }
     *out = D_80115E10;
@@ -354,7 +354,7 @@ CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
         D_80115E20.y = D_800C49F4_de;
     } else if ((Triangle *)node != D_800CD3EC) {
         cross_edges(&D_80115E20, node);
-        GraphU64_NormalizeVec3(&D_80115E20);
+        Graphu64_NormalizeVec3(&D_80115E20);
     }
     *out = D_80115E20;
     D_800CD3EC = (Triangle *)node;
@@ -363,14 +363,14 @@ CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
 
 /* 80275E44.CPP */
 /* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in D_80115E10, or the mean vertex height when the plane is vertical.
-   Adapted from func_8027525C_de with the edge vectors computed through the GraphU64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
+   Adapted from func_8027525C_de with the edge vectors computed through the Graphu64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
 
 static inline void cross_node_edges(Node75 *node) {
     CVector3 a;
     CVector3 b;
 
-    GraphU64_SubtractVectors(&a, node->cur, node->prev);
-    GraphU64_SubtractVectors(&b, node->next, node->cur);
+    Graphu64_SubtractVectors(&a, node->cur, node->prev);
+    Graphu64_SubtractVectors(&b, node->next, node->cur);
     Graphu64_CrossVectors(&D_80115E10, &a, &b);
 }
 

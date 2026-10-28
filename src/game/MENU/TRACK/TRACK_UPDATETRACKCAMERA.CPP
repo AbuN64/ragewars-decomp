@@ -82,10 +82,10 @@ void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
     eye = Track_GetTrackEyePosition(D_800E2830->time);
     target = Track_GetTrackTargetPosition(D_800E2830->time);
     scale = D_800DCB40[0];
-    GraphU64_ScaleVector(&eye, &eye, scale);
-    GraphU64_ScaleVector(&target, &target, scale);
+    Graphu64_ScaleVector(&eye, &eye, scale);
+    Graphu64_ScaleVector(&target, &target, scale);
     camera->distance = 0.0f;
-    GraphU64_SubtractVectors(&delta, &target, &eye);
+    Graphu64_SubtractVectors(&delta, &target, &eye);
     if (((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) || (D_800E2830->spec.flags & 2)) {
         actor = D_80145060.actorList;
         if ((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) {
@@ -109,9 +109,9 @@ void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
         target = rotated;
         Graphu64_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
-        GraphU64_AddVec3(&target, &target, &D_800E2830->position);
-        GraphU64_AddVec3(&eye, &eye, &D_800E2830->position);
-        GraphU64_SubtractVectors(&delta, &target, &eye);
+        Graphu64_AddVec3(&target, &target, &D_800E2830->position);
+        Graphu64_AddVec3(&eye, &eye, &D_800E2830->position);
+        Graphu64_SubtractVectors(&delta, &target, &eye);
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;
@@ -124,7 +124,7 @@ void Track_UpdateTrackCamera(SharedTrackCamera *camera) {
             }
         }
     }
-    yaw = GraphU64_GetHorizontalAngle(&delta);
+    yaw = Graphu64_GetHorizontalAngle(&delta);
     pitch = Graphu64_GetVerticalAngle(&delta);
     camera->distance += yaw;
     camera->pitch = -pitch;

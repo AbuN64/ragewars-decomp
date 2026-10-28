@@ -82,7 +82,7 @@ extern float D_800C2FC4_de;
 
 extern float D_800C301C_de;
 
-extern void Weapon_ApplyWeaponSwitch(void *arg0, void *arg1);
+extern void Weaponai_ApplyWeaponSwitch(void *arg0, void *arg1);
 
 
 

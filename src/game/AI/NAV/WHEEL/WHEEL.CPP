@@ -14,8 +14,8 @@ extern CVector3 g_actorRadialDirections[8];
 extern SweepHit *D_80103FCC;
 extern CCollisionInfo2_t D_80103FD0;
 extern f32 InstHdr_GetActorReach(Player *);
-extern f32 GameObject_GetActorRadius(Player *);
-extern f32 GameObject_GetActorHeight(Player *);
+extern f32 Gobjinst_GetActorRadius(Player *);
+extern f32 Gobjinst_GetActorHeight(Player *);
 extern f32 InstHdr_GetActorBaseOffset(Player *);
 extern s32 Unicol_SweepActorMotion(Player *, CVector3, CVector3, CCollisionInfo2_t *, f32, f32, f32, f32);
 void Wheel_MeasureWheelReach(Player *player, s32 wheel) {
@@ -35,8 +35,8 @@ void Wheel_MeasureWheelReach(Player *player, s32 wheel) {
     to.z += from.z;
     from.y += 61.44f;
     a = InstHdr_GetActorReach(player);
-    b = GameObject_GetActorRadius(player);
-    c = GameObject_GetActorHeight(player);
+    b = Gobjinst_GetActorRadius(player);
+    c = Gobjinst_GetActorHeight(player);
     if (Unicol_SweepActorMotion(player, from, to, &D_80103FD0, a, b, c, InstHdr_GetActorBaseOffset(player))) {
         delta = D_80103FCC->pos;
         delta.x -= from.x;
@@ -87,8 +87,8 @@ void Wheel_MeasureWheelClearance(Player *player, s32 wheel) {
     step.x = step.x * 2.25f * reach;
     step.z = step.z * 2.25f * reach;
     i = 0;
-    radius = GameObject_GetActorRadius(player);
-    height = GameObject_GetActorHeight(player);
+    radius = Gobjinst_GetActorRadius(player);
+    height = Gobjinst_GetActorHeight(player);
     base = InstHdr_GetActorBaseOffset(player);
     position = player->pos;
     surface.dwFlags = 0xC008;

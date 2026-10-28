@@ -15,9 +15,9 @@ extern void func_8022D57C_de(void *);
 
 extern s32 InstHdr_FindActorModelEntry(void *);
 
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *arg0);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *arg0);
 
 extern void func_80218464_de();
 
@@ -124,9 +124,9 @@ void Playerai_InitializeActorModelEffect(void *effectPlayerState, void *sourceAc
         modelEffectOffset.x = ((ModelBlend *)actorModelEntry)->effectOffset.x;
         modelEffectOffset.y = ((ModelBlend *)actorModelEntry)->effectOffset.y;
         modelEffectOffset.z = ((ModelBlend *)actorModelEntry)->effectOffset.z;
-        GraphU64_SubtractVectors(&effectDisplacement, &modelEffectOffset, &((Shared_ActorView *)o)->effectPosition);
+        Graphu64_SubtractVectors(&effectDisplacement, &modelEffectOffset, &((Shared_ActorView *)o)->effectPosition);
         effectDisplacement.y = 0.0f;
-        ((Shared_ActorView *)o)->modelDistance = GraphU64_GetHorizontalAngle(&effectDisplacement);
+        ((Shared_ActorView *)o)->modelDistance = Graphu64_GetHorizontalAngle(&effectDisplacement);
     }
 }
 

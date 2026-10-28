@@ -28,7 +28,7 @@ extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
 /* Moves an actor toward a point given relative to it: the offset is turned by the actor's facing and added to its position (or, for a mirrored actor with a parent, negated in x and z and transformed by the parent's matrix at 0x160), then passed to InstHdr_CopyActorPositionAndModel with both final flags set. */
 
-extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Graphu64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
@@ -73,11 +73,11 @@ void Gobjinst_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void 
             Graphu64_TransformPoint(parent + 0x160, &offset, &target);
         } else {
             func_8024BC94_de(&turned, actor, offset);
-            GraphU64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+            Graphu64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
         }
     } else {
         func_8024BC94_de(&turned, actor, offset);
-        GraphU64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+        Graphu64_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
     }
     InstHdr_CopyActorPositionAndModel(actor, target, arg4, arg5, 1, 1);
 }

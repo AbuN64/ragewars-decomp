@@ -194,8 +194,8 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
             nextEndAngleFrame = followingEndAngleFrame;
         }
         angleSample = Graphu64_InterpolateWrappedValue(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
-        GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
-        GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
+        Graphu64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
+        Graphu64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
         *angleDeltaOut += Graphu64_GetWrappedDifference(angleSample, startRootAngle);
         loopStartFrame = rootMotionClip->loopStart;
         restartFrame = 0;
@@ -229,7 +229,7 @@ void Gastate_AdvanceRootMotion(CGameAnimateState_t *animationChannel, CVector3 *
         nextCurrentAngleFrame = followingCurrentAngleFrame;
     }
     angleSample = Graphu64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
-    GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
-    GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
+    Graphu64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
+    Graphu64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
     *angleDeltaOut += Graphu64_GetWrappedDifference(angleSample, startRootAngle);
 }

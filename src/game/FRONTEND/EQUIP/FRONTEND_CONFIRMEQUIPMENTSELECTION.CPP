@@ -13,7 +13,7 @@
 
 extern struct Screen42 *D_800E59E0;
 extern void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *, s32, s32);
-extern void Frontend_SetPreviewTransformUpdate(struct Object49C *, s32);
+extern void Preview_SetPreviewTransformUpdate(struct Object49C *, s32);
 s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 arg2) {
     s32 player;
     s32 i;
@@ -32,7 +32,7 @@ s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 arg2) {
         }
         Key_FindKeyIndex(D_801462C8.playerSettings[player].character);
         settings = (u8 *)D_800E59E0 + (player * sizeof(struct Entry42) + 8);
-        { void *panel = settings; settings = (u8 *)g_playerSettings; Frontend_SetPreviewTransformUpdate(panel, 0); }
+        { void *panel = settings; settings = (u8 *)g_playerSettings; Preview_SetPreviewTransformUpdate(panel, 0); }
         if (Frontend_CountActiveEquipmentPanels() != 0) return 0;
         {
             Equip_ApplySelectedPlayerLoadouts();

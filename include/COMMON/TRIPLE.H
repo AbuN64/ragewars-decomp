@@ -391,7 +391,7 @@ extern float D_800C4804_de;
 extern float D_800C480C_de;
 extern float D_800C4814_de;
 extern float D_800C481C_de;
-extern float D_800C48AC_de;
+extern float g_vectorNormalizeUnitScale;
 extern float D_800C492C_de;
 extern float D_800C494C_de;
 extern float D_800C4950_de;

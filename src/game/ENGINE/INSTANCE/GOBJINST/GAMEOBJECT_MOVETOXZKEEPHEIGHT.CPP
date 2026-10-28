@@ -24,9 +24,9 @@ extern f32 D_800D2988[];
 
 extern s32 InstHdr_GetActorMotionState(Actor_func_80245D30_de *);
 
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *);
 
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void Graphu64_ScaleVector(CVector3 *, CVector3 *, f32);
 
  extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
@@ -83,7 +83,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
         strength = (f32) material->strength;
         speed=strength * 3.0f;
         currentYawStep = (strength + 1.0f) * 0.00872664712369442f;
-        GraphU64_ScaleVector(&v10,&v10,speed);
+        Graphu64_ScaleVector(&v10,&v10,speed);
         flags = material->flags;
         if (flags & 0x600) {
             if (flags & 0x400) {
@@ -97,7 +97,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
             rider=actor;
             v20=v10;
             v20.y = 0.0f;
-            currentHeading = GraphU64_GetHorizontalAngle(&v20);
+            currentHeading = Graphu64_GetHorizontalAngle(&v20);
             actorYaw = actor->yaw;
             currentTargetYaw = currentHeading;
             blendedYaw = actorYaw;

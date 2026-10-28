@@ -36,7 +36,7 @@ extern void Cteamselect_InitTeamChoices(TeamMenu *, s32, SharedPlayer *);
 extern s32 Cteamselect_GetFourWayStickSlot(SharedPlayer *);
 extern s32 Cteamselect_TryConfirmTeamChoice(TeamMenu *, SharedPlayer *);
 
-void func_80218B84_de(TeamMenu *menu, SharedPlayer *player, void *unused) {
+void Cteamselect_UpdateTeamWheel(TeamMenu *menu, SharedPlayer *player, void *unused) {
     s32 held;
     s32 slot;
     Entry *entry;

@@ -81,8 +81,8 @@ extern void Player_UpdateViewAngles(void *, void *, void *);
 extern Shared_Quad Playerai_ComputeAimRotation(void *, void **, Shared_Quad *);
 extern f32 Graphu64_GetPointDistance(f32 *, f32 *);
 extern s32 CCollision_SweepPoint(void *, CVector3, CVector3, void *);
-extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
+extern void Graphu64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern f32 Graphu64_GetHorizontalAngle(CVector3 *);
 
 
 
@@ -113,8 +113,8 @@ void func_80226548_de(void *player, void *body) {
                                      ((Shared_ActorView *)aimTarget)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == aimTarget) {
-                    GraphU64_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
-                    targetAngle = GraphU64_GetHorizontalAngle(&toTarget);
+                    Graphu64_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
+                    targetAngle = Graphu64_GetHorizontalAngle(&toTarget);
                     Graphu64_WrapPeriodicValue(&targetAngle);
                     Graphu64_WrapPeriodicValue(&((LevelActor *)body)->yaw);
                     comparisonAngle = ((LevelActor *)body)->yaw;

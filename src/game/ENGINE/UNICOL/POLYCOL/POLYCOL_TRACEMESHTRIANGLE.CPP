@@ -127,10 +127,10 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
         cursor++;
         i++;
     } while(i<3);
-    GraphU64_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
-    GraphU64_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
+    Graphu64_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
+    Graphu64_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
     Graphu64_CrossVectors(&polygon.normal,&edgeB,&edgeA);
-    GraphU64_NormalizeVec3(&polygon.normal);
+    Graphu64_NormalizeVec3(&polygon.normal);
     surface=ray->surface;
     polygon.input=mesh->element;
     polygon.index=-1;

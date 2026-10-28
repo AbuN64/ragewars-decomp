@@ -128,8 +128,8 @@ void func_80246E44_de(Actor36 *actor) {
     after = actor->position;
     actor->position = before;
     if (mode == 0 && *actor->kind != 0) {
-        GraphU64_SubtractVectors(&after, &after, &before);
-        GraphU64_AddVec3(&after, &after, &actor->displacement);
+        Graphu64_SubtractVectors(&after, &after, &before);
+        Graphu64_AddVec3(&after, &after, &actor->displacement);
         func_8024715C_de((void *)actor, &after);
         if (*actor->kind == 1) {
             Scene_UpdateMovementTriggers(&g_world, actor, &before, &actor->position);

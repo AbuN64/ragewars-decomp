@@ -87,7 +87,7 @@ void Simple_InitSimpleInstance(SimpleInstanceOut *inst, CROMSimpleInstance *rec,
     inst->f1A4 = 0;
     inst->id = rec->id;
     v.x = inst->position.x;
-    v.y = inst->position.y + GameObject_GetActorHeight(inst) * 0.5f;
+    v.y = inst->position.y + Gobjinst_GetActorHeight(inst) * 0.5f;
     v.z = inst->position.z;
     inst->light = D_800CBC90[0];
     inst->f1C4 = 0;
