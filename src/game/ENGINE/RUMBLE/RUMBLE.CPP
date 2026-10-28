@@ -18,7 +18,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "ENGINE/SCENE_12.H"
 
-#if !defined(VERSION_US)
 static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
     f32 x = from.x - node->position.x;
     f32 y = from.y - node->position.y;
@@ -59,9 +58,6 @@ f32 Rumble_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     }
     return limit < value ? limit : value;
 }
-#else
-INCLUDE_ASM("span_1000", Rumble_GetSpatialEffectLevel);
-#endif
 
 #include "sdk/os.h"
 #include "RENDER/80263760_8.H"
@@ -247,11 +243,6 @@ void Rumble_FreeAllPoolNodes(void *effectPool) {
     __osRestoreInt(saved);
 }
 
-#if defined(VERSION_US)
-const unsigned int D_802856E0_CABB0[3] = {
-    0x3F800000, 0x3F800000, 0x3F800000,
-};
-#endif
 
 /* ROM-grounded data: src/rw_pool_802859D0_CABBC_us_rev1.c */
 const unsigned int D_blob_4faf23a8416908d6583f[2] = {
