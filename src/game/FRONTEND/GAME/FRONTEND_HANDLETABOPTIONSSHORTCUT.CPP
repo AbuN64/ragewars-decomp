@@ -6,8 +6,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
 #include "COMMON/MENULISTSCREEN.H"
-#include "FRONTEND/80423280_25.H"
-#include "FRONTEND/80423280_3.H"
+#include "FRONTEND/MENU_COMMITOPTIONSPAGE.H"
+#include "FRONTEND/FRONTEND_HANDLETABOPTIONSSHORTCUT.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object D_800E4514 holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears

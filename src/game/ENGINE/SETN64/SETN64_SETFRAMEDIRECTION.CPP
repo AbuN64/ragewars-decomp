@@ -4,7 +4,7 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "include_asm.h"
 #include "RENDER/802909E0.H"
-#include "RENDER/802909E0_5.H"
+#include "RENDER/SETN64_SETFRAMEDIRECTION.H"
 
 void SetN64_ClearFrameDirection(void *frame) {
     Frame *view = frame;

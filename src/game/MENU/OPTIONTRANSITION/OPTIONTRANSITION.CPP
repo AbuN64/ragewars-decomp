@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "MENU_2/MENU_DISPATCHOPTIONSTRANSITIONEVENT.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "MENU/804221A0_10.H"
 extern s32 Frontend_GetMenuImageState(s32 *record);

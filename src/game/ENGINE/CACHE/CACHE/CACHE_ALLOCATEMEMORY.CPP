@@ -5,8 +5,8 @@
 #include "COMMON/MANAGER.H"
 #include "SCENE/802508E0.H"
 #include "TYPES.H"
-#include "SCENE/802508E0_2.H"
-#include "SCENE/802508E0_7.H"
+#include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
+#include "SCENE/CACHE_ALLOCATEMEMORY.H"
 #include "sdk/os.h"
 
 extern OSMesgQueue D_80101140;

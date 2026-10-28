@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "sdk/BUF16B.H"
 #include "TYPES.H"
-#include "sdk/libgultra_inferred/802AD870_8.H"
+#include "sdk/libgultra_inferred/cseq.H"
 struct SeqpSetSeqEvent {
     s16 count;
     s16 _pad2;

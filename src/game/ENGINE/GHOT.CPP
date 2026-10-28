@@ -10,7 +10,7 @@
 #include "ENGINE/GHOT.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "TYPES.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern char D_8011D8D0;
 extern void Graphu64_ScaleVector(void *, void *, f32);

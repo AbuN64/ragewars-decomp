@@ -11,7 +11,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "CAMERA/GSKY_GETFLOORSURFACESHAKE.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 /* 80233920_31.CPP */
 /* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and

@@ -159,7 +159,7 @@ extern f32 PLAYER_SECOND_LIGHT_RADIUS;
 #endif
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *Gdynlight_AllocateLightNode(void *, void *);
-#include "ENGINE/INSTANCE/GOBJINST_13.H"
+#include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 /* Position one effect light, reading its scale and radius at their use sites. */
 static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,
                                     f32 offsetZ, const f32 *heightScale, const f32 *radius) {

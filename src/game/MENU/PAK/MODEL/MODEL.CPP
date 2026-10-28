@@ -4,10 +4,10 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/UNUSED.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/sprintf.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "COMMON/S1_2.H"
-#include "MENU/PAK/80444EC0_5.H"
+#include "COMMON/SOUNDINFO.H"
+#include "MENU/PAK/MODEL.H"
 #include "SYSTEM/8025E280.H"
 
 #if defined(VERSION_US_REV1)

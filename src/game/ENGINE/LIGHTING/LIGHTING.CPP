@@ -15,7 +15,7 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "ACTORS/80277444.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "stddef.h"
 
 /* 80275E44_12.CPP */

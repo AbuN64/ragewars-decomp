@@ -6,7 +6,7 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "MENU/8044ACCC.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "SYSTEM/80255C40_3.H"

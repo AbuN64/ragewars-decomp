@@ -1,7 +1,7 @@
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
-#include "FRONTEND/80423280_25.H"
+#include "FRONTEND/MENU_COMMITOPTIONSPAGE.H"
 
 /* Refreshes the option block D_801462C8 from the menu g_optionsPage points to: the bytes at 0x1B, 0x1F
    and 0x580 from the selections SmpButton_GetListSelection reports for its items at 0xC, 0x10 and 0x14, and the

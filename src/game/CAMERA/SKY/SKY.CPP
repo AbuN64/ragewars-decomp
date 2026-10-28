@@ -21,7 +21,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 #include "SYSTEM/80255C40_3.H"
-#include "GSKY/GSKY_2.H"
+#include "GSKY/SKY.H"
 
 /* 8023A284_4.CPP */
 extern void Cache_UnlockResource(void *, Node80253610 *);

@@ -6,7 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/PAK_MENU.H"
 #include "TYPES.H"
-#include "MENU/PAK/80405DC0_11.H"
+#include "MENU/PAK/SNAPSHOT_HANDLEMENUACTION.H"
 #include "SYSTEM/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

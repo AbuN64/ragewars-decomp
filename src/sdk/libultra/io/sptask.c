@@ -5,7 +5,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/OSTASK_T.H"
 #include "sdk/libultra/io/sprawdma.H"
-#include "AUDIO/802BF1C0.H"
+#include "AUDIO/SPSETPC.H"
 #include "AUDIO/SPSETSTAT.H"
 #include "sdk/libgultra/sp.h"
 #include "sdk/OSINT/osyieldthread.H"

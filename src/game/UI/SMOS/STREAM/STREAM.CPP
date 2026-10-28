@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "RESMGR/8029AA48_7.H"
+#include "RESMGR/STREAM.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "COMMON/LONE/D_80106248.H"

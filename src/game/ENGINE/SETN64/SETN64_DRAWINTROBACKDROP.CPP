@@ -11,7 +11,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/MENURECAT24.H"
 #include "RENDER/80293A04_2.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 s32 Control_DisableAllControllerPaks();
 

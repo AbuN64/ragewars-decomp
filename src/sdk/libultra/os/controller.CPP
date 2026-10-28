@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
-#include "sdk/OS/802BC630_2.H"
+#include "sdk/OS/controller.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 #include "sdk/OS/__OSPACKRESETDATA.H"

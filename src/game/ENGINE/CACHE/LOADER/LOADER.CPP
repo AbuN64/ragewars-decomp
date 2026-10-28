@@ -6,7 +6,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "include_asm.h"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"

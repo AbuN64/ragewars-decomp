@@ -8,7 +8,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "CAMERA/80243A80.H"
-#include "GAME/CODE_8027302C.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 
 /* 80243A80.CPP */
 void CCollision_StoreContactResult(void *);

@@ -10,7 +10,7 @@ extern s32 D_80100560;
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "AUDIO/80255280.H"
+#include "AUDIO/HASHTABLE.H"
 #include "sdk/os.h"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"

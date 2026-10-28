@@ -10,7 +10,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SYSTEM/802661FC_2.H"
+#include "SYSTEM/EVENTS_COMPUTEDAMAGESCALE.H"
 extern void Events_ApplyDamageEvent(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
 /* Returns how strongly a blast at a position with a radius affects an actor: finds the shield covering the position (the held carrier shield D_801041F0 of the actor for an object target other than the two 0x402/0x404 types, otherwise Gobjinst_FindNearestBoneBounds's shield in D_80110570), reports it, scales by the shield factor unless friendly fire is off for team damage, and when falloff is asked returns zero for an invulnerable player's untouched full hit, zero beyond the radius plus the actor's width, or the scale times one minus the distance to the actor's body over that reach. */

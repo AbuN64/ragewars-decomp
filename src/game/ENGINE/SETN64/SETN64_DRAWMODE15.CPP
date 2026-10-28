@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT26DD8.H"
-#include "RENDER/802944E8_2.H"
+#include "RENDER/SETN64_DRAWMODE15.H"
 
 void SetN64_UpdateActiveSession(void) {
 }

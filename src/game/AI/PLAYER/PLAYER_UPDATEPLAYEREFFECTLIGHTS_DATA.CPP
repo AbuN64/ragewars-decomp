@@ -3,7 +3,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Draws an icon sprite for a view: icons 0x2DA, 0x2E4, 0x2BC and 0x2EF to 0x2F2 sit at the centre of
    the view's viewport, any other icon is placed at a world point projected through func_80239244_de when

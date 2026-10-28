@@ -1,6 +1,6 @@
 #include "AI/SOURCE.H"
 #include "COMMON/SHAREDCALLBACK5.H"
-#include "AI/NAV/80212C90_3.H"
+#include "AI/NAV/TARGETFOLLOW.H"
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"

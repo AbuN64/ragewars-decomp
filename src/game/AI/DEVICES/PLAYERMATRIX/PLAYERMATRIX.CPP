@@ -7,7 +7,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
-#include "RENDER/80206258_4.H"
+#include "RENDER/PLAYERMATRIX.H"
 #include "include_asm.h"
 #include "WORLD/INTEGERSTATE170.H"
 #include "COMMON/AUDIO_CALLBACKS.H"

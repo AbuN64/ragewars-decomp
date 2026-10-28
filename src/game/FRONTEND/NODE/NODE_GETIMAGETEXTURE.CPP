@@ -6,12 +6,12 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_36.H"
+#include "FRONTEND/NODE_GETIMAGETEXTURE.H"
 #include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
 #include "RESMGR/resmgr_stream_io.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "FRONTEND/8040B45C_42.H"
+#include "FRONTEND/FRONTEND_CONFIGUREIMAGECONVERSION.H"
 extern struct ResourceRecAt6 *g_frontendResourceTextureTimers;
 extern EntryRecAt18V1 *g_frontendResourceTextures;
 extern FileState g_frontendResourceState;

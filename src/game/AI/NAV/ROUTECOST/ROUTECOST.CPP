@@ -5,7 +5,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "TYPES.H"
-#include "AI/NAV/8020EAE0_7.H"
+#include "AI/NAV/PICKUPTARGET.H"
 
 extern s32 Route_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
 

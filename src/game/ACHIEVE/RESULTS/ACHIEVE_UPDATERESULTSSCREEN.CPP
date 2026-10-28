@@ -16,7 +16,7 @@
 #include "ACHIEVE/ACHIEVE_ADVANCERESULTMODELPREVIEW.H"
 #include "ACHIEVE/CPLAYERPREVIEW_RESETSELECTIONMESSAGESTATE.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 
 /* Resets three words of the object D_800E5830 points to: the words at 0x9C and 0xB0 to -1 and
    the word at 0x188 to zero. */

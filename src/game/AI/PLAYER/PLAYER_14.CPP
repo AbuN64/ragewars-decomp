@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/TRIPLE.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
     f32 sx,sy,numberScale,offset,halfWidth,x,y;

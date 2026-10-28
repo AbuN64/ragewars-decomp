@@ -2,7 +2,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/sprintf.H"
 
 #if !(defined(VERSION_US_REV1))
 extern s32 D_801462C8;

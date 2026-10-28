@@ -5,7 +5,7 @@
 #include "sdk/PFS/ospfsrepairid.H"
 #include "sdk/PFS/__OSCHECKID.H"
 #include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
-#include "sdk/libultra/pfs/80447BB0_17.h"
+#include "sdk/libultra/pfs/PFS.H"
 
 /* 80447BB0_15.CPP */
 /* osPfsRepairId, drafted from ultralib src/io/pfsrepairid.c (2.0I branch): reread a controller pak's

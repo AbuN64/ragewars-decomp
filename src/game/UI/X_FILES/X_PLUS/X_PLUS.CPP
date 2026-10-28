@@ -4,7 +4,7 @@
 #include "MATH/math_double.H"
 #include "X_PLUS/X_PLUS.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "stddef.h"

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/CCOLLISIONSETUP_T.H"
-#include "SCHED/8023A284_29.H"
+#include "SCHED/COLLIDE.H"
 #include "include_asm.h"
 
 /* 8023A284_29.CPP */

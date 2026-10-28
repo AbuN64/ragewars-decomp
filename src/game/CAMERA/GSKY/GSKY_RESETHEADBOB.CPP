@@ -3,7 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
-#include "CAMERA/80233920_14.H"
+#include "CAMERA/GSKY_RESETHEADBOB.H"
 
 extern f32 D_800C8628;
 

@@ -10,13 +10,13 @@
 #include "RENDER/POOLRECAT28V1.H"
 #include "TYPES.H"
 #include "COMMON/BALLISTICPARAMS.H"
-#include "RENDER/8028469C_17.H"
+#include "RENDER/RUMBLE.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
-#include "RENDER/80263760_8.H"
+#include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
 #include "SYSTEM/80255C40_3.H"
-#include "ENGINE/SCENE_12.H"
+#include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
 
 static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
     f32 x = from.x - node->position.x;
@@ -60,8 +60,8 @@ f32 Rumble_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
 }
 
 #include "sdk/os.h"
-#include "RENDER/80263760_8.H"
-#include "ENGINE/SCENE_12.H"
+#include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
+#include "ENGINE/SCENE_DRAWTRANSITIONCOLOROVERLAY.H"
 
 /* With interrupts masked, takes the first node of a pool's free list, moves it onto the pool's active list and initialises it with its key, position, two values and owner slot (storing the node there), then binds the two handles named by the key's identifiers, returning the node or null. */
 

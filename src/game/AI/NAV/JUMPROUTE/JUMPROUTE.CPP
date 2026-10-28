@@ -7,7 +7,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/SELF.H"
-#include "AI/NAV/80212C90_10.H"
+#include "AI/NAV/JUMPROUTE.H"
 #include "include_asm.h"
 
 /* 80212C90_10.CPP */

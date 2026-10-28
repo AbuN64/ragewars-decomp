@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_44.H"
+#include "FRONTEND/FRONTEND_READSOURCEPIXELCOLOR.H"
 #include "COMMON/UNUSED.H"
 
 /* Reads the pixel at (x, y) of the current image g_conversionSourceImage as a 0xAARRGGBB colour: seeks to

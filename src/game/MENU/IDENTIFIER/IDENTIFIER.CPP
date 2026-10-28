@@ -1,4 +1,4 @@
-#include "sdk/libgultra_inferred/802AE260_12.H"
+#include "sdk/libgultra_inferred/IDENTIFIER.H"
 #include "include_asm.h"
 #include "sdk/OBJECTSTATE2.H"
 #include "TYPES.H"

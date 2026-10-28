@@ -19,12 +19,12 @@
 #include "OVLGAME/MATCH_INITPARTICLEQUAD.H"
 #include "RENDER/SETN64.H"
 #include "RENDER/SETN64_ADVANCEDISPLAYFRAME.H"
-#include "RENDER/80291054_9.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "RENDER/SETN64_UPDATEFADETRANSITION.H"
+#include "sdk/AUDIO/sprintf.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
-#include "OVLGAME/80405454_4.H"
-#include "RESMGR/802A2230_6.H"
+#include "RESMGR/X_PLUS.H"
+#include "OVLGAME/NOTE_RELEASERENDERBUFFERS.H"
+#include "RESMGR/TSMOS_UPDATEFRONTEND.H"
 #include "TEXTURE/AUDIOMGR_INITHEAP.H"
 
 void SetN64_InitFrameRing(RenderState *state) {
@@ -79,7 +79,7 @@ void SetN64_InitFrameRing(RenderState *state) {
 #include "COMMON/DISPLAY.H"
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/EXTERNS_3.H"
-#include "SYSTEM/802BA5F0_22.H"
+#include "SYSTEM/VIMGR.H"
 #if defined(VERSION_EU)
 extern void func_802BA5F0_eu(s32 pri);
 #endif

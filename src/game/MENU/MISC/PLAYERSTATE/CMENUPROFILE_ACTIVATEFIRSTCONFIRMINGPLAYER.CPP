@@ -8,7 +8,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#include "MENU/MISC/8043DF84.H"
+#include "MENU/MISC/CMENUPROFILE_ACTIVATEFIRSTCONFIRMINGPLAYER.H"
 
 /* Clears eight player active flags, then marks the first settings slot whose controller profile is active. */
 extern StatusStep D_80142622[];

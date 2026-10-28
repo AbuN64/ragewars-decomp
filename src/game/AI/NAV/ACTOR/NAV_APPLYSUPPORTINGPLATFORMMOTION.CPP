@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "AI/SOURCE.H"
 #include "TYPES.H"
-#include "GAME/CODE_8027302C.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 
 typedef struct CollisionInfo CollisionInfo;
 

@@ -61,8 +61,8 @@
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
 extern StyleNextState *D_800E5694;
-#include "MENU/804366D0_3.H"
-#include "MENU/804366D0_6.H"
+#include "MENU/PLAYER_STOREALTERNATEPLAYERSETTINGSENTRY.H"
+#include "MENU/PLAYER_SELECTNEXTALTERNATEPLAYERSETTINGSENTRY.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object D_800E5694 holds through Cache_FreeMemory, clears D_800E5694 and returns zero. */

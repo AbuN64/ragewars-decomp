@@ -10,14 +10,14 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "AUDIO/8025A3EC_4.H"
+#include "AUDIO/VOICE.H"
 #include "AUDIO/CHANNEL_INITIALIZEVOICEMIX.H"
 #include "include_asm.h"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "VOICE/VOICE.H"
 #include "COMMON/S1.H"
 #include "COMMON/STATERECAT34.H"
-#include "RENDER/8025DE50_6.H"
+#include "RENDER/T2SOUNDELEMENT.H"
 #include "SYSTEM/80255C40_3.H"
 
 /* 8025A3EC_4.CPP */

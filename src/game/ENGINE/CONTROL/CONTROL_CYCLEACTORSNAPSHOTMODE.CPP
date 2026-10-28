@@ -10,8 +10,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "RENDER/80291054_9.H"
-#include "RENDER/80263760_8.H"
+#include "RENDER/SETN64_UPDATEFADETRANSITION.H"
+#include "RENDER/CONTROL_CYCLEACTORSNAPSHOTMODE.H"
 
 /* 80263760_8.CPP */
 extern void Rumble_FreeAllPoolNodes(s32 *);

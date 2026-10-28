@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/ITEMS/PLAYER_OPENPLAYERDIALOG.H"
-#include "MENU/PAK/80405DC0_2.H"
+#include "MENU/PAK/TIMER_CANCELPENDINGOPERATION.H"
 
 /* Loads the owner at offset 0x1C of the second argument into D_80145040 through func_8022A5A0_de,
    calls func_804097E8_de, and hands the owner, its word at 0x698 and a zero with the resource

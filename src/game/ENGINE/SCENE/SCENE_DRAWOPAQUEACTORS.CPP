@@ -8,7 +8,7 @@
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "TYPES.H"
 #include "gbi.h"
-#include "ENGINE/SCENE_6.H"
+#include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 char *Scene_GetLinkedResourceSection(void *arg0, s32 resourceId) {

@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "sdk/OSINT/802BEA40.H"
+#include "sdk/OSINT/CREATE.H"
 #include "sdk/libultra/os/802BDEA0.h"
 
 /* 802BDEA0.CPP */

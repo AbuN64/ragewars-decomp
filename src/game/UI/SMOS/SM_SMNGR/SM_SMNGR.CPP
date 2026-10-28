@@ -3,8 +3,8 @@
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
-#include "MATH/80297CD0.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "MATH/SM_SMNGR.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/CALLBACK.H"
 

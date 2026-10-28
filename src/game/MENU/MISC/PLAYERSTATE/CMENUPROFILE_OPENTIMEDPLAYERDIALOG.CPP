@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "MENU/MISC/8043DF84_5.H"
+#include "MENU/MISC/CMENUPROFILE_OPENTIMEDPLAYERDIALOG.H"
 
 extern s8 Menu_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 

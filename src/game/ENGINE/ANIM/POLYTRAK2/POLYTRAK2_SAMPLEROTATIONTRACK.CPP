@@ -7,7 +7,7 @@
 #include "COMMON/PPDECOM_UNPACKRESOURCE.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "SYSTEM/8025E5B0_9.H"
+#include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 
 static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
     f64 result=(f64)(s32)value;

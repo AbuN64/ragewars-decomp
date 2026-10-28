@@ -6,7 +6,7 @@
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "TYPES.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Chooses a text style, updates its colours and scale, then draws the text. */
 /* The values Menu_DrawStyledMenuText loads by address:

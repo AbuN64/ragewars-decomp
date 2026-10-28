@@ -7,8 +7,8 @@
 #include "TYPES.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "RENDER/SETN64.H"
-#include "RENDER/80291054_9.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "RENDER/SETN64_UPDATEFADETRANSITION.H"
+#include "sdk/AUDIO/sprintf.H"
 
 extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);

@@ -10,7 +10,7 @@
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "FRONTEND/FRONTEND_DRAWMODELPREVIEW.H"
 
 

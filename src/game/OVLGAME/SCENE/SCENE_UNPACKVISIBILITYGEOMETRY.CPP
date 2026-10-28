@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/STATERECAT34.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/OBJB.H"
 #include "MENU/8044ACCC.H"
 #include "COMMON/S1.H"

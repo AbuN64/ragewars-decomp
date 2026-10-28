@@ -21,7 +21,7 @@ extern f32 D_800C7F08[];
 
 extern Marker *Gdynlight_AllocateLightNode(char *, s32);
 
-#include "ENGINE/INSTANCE/GOBJINST_13.H"
+#include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 
 extern void Graphu64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 

@@ -3,7 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "AI/NAV/802106E0_15.H"
+#include "AI/NAV/COMBATINIT.H"
 #include "RSP/8026E1F8_5.H"
 
 /* 802106E0_15.CPP */

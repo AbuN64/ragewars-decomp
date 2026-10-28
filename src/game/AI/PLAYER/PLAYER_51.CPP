@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "TYPES.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/sprintf.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/CHANNEL.H"
 

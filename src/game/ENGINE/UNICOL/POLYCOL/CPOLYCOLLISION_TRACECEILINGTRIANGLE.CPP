@@ -13,7 +13,7 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
-#include "ANIM/802412C0_7.H"
+#include "ANIM/CPOLYCOLLISION_TRACECEILINGTRIANGLE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern void Graphu64_MultiplyAffineMatrices(void *, void *, void *);

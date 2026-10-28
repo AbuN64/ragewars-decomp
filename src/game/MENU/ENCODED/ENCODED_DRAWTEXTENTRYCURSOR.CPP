@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 extern Shared_Entry D_800E5CA0;
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
 

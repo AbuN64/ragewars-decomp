@@ -6,7 +6,7 @@
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "AUDIO/80255280.H"
+#include "AUDIO/HASHTABLE.H"
 #include "sdk/os.h"
 #include "TEXTURE/CACHE_RECYCLELOADREQUEST.H"
 #include "SYSTEM/80255C40_3.H"

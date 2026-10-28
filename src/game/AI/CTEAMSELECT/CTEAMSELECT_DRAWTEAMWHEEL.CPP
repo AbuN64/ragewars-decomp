@@ -1,7 +1,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/TEAMMENU.H"
 #include "COMMON/UNUSED.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* Lays out the four team choices around the open menu and draws their icons. */
 

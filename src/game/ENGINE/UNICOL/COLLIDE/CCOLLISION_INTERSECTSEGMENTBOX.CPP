@@ -10,7 +10,7 @@
 #include "COMMON/S1_3.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "ANIM/8023DF60_4.H"
+#include "ANIM/CCOLLISION_TESTSEGMENTDISK.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* 8023A284_26.CPP */

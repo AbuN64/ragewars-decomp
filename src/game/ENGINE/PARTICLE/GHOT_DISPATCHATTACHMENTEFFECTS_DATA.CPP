@@ -10,7 +10,7 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "SYSTEM/CONTACT_EFFECT.H"
 #include "particle/8027A0F4_4.H"

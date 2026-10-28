@@ -101,7 +101,7 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
 #include "TYPES.H"
 #include "gbi.h"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 s32 func_80246E44_de(void *);
 s32 Gobjinst_DrawVisibleCachedActor(void *, void *);
 s32 Gobjinst_RotatePoseMatrixBuffers(void *);
@@ -160,7 +160,7 @@ void Preview_DrawModelPreview(Obj8041CAD8 *self) {
 }
 
 #include "COMMON/WORLD.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 extern void *Scene_FindActorDefinition(void *, s32, s32, void *);
 extern void Gobjinst_InitializeActor(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void Gobjinst_DispatchActorTypeUpdate();

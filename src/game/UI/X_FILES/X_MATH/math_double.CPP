@@ -2,7 +2,7 @@
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
 #include "MATH/math_double.H"
-#include "MATH/8029BBA0_5.H"
+#include "MATH/XMATH_EVALUATEEXPONENTIALDOUBLE.H"
 
 #include "MATH/DOUBLEBITS.H"
 

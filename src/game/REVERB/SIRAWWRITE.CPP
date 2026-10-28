@@ -66,7 +66,7 @@
 #include "sdk/libgultra/libasm_802BBC68_6.h"
 #include "sdk/libgultra/libasm_802BBC68_7.h"
 #include "sdk/libgultra/libasm_802BBC68_8.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 
 /* osInitialize, drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock

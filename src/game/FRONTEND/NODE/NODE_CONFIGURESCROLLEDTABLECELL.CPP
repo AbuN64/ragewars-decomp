@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "FRONTEND/ARCHIVEDATA.H"
 #include "FRONTEND/NODE_RELEASECHUNKIMAGES.H"
-#include "FRONTEND/8040B45C_36.H"
+#include "FRONTEND/NODE_GETIMAGETEXTURE.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 

@@ -4,7 +4,7 @@
 #include "COMMON/S1_5.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E280.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 #include "FRONTEND/SCREEN.H"
 
 /* Event callback for the match setup screen D_800E4518: on event 1 with the screen in state 1 it

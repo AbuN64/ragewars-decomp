@@ -9,9 +9,9 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "MENU/GFX/80414430_20.H"
-#include "MENU/GFX/80414430_21.H"
-#include "MENU/GFX/80414430_3.H"
+#include "MENU/GFX/GFX_DRAWTEXTURERECTANGLECHUNKS.H"
+#include "MENU/GFX/RECT.H"
+#include "MENU/GFX/GFX_DRAWCLIPPEDGRADIENTQUAD.H"
 
 /* Makes palette the current texture lookup table for a texture of the given bit depth: returns 1
    when it already is (D_800E32D8); otherwise records it, emits one pipeline sync if none is pending

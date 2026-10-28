@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
 extern void osStartThread(void *thread);

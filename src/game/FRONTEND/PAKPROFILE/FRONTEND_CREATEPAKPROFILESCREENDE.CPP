@@ -4,7 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)

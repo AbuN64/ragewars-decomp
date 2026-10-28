@@ -6,8 +6,8 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "sdk/PFS/80443868_2.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "sdk/PFS/PLAYER_DRAWPULSINGMENUSPRITE.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 extern void Player_PlacePlayerForRound(void *player);
 /* Forwards arg1's word at 0x1C to Player_PlacePlayerForRound and always reports success. */

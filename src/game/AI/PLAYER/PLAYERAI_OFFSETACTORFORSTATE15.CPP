@@ -8,7 +8,7 @@
 #include "SOUND/EXTERNS.H"
 #include "COMMON/SHAPE_TYPEMAP_14.H"
 #include "TYPES.H"
-#include "SOUND/8022C894_4.H"
+#include "SOUND/PLAYERAI_OFFSETACTORFORSTATE15.H"
 
 extern void func_8022D57C_de(void *);
 

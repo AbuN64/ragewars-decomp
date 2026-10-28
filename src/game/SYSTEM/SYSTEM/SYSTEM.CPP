@@ -4,7 +4,7 @@
 #include "COMMON/ALFXPARAM.H"
 #include "sdk/libultra/io/pirawread.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 #if !(defined(VERSION_US))
 extern OSPiHandle_s *D_800D437C;

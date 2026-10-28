@@ -2,7 +2,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "MENU/804366D0_3.H"
+#include "MENU/PLAYER_STOREALTERNATEPLAYERSETTINGSENTRY.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /* Builds screen state D_800E5694 under a parent window: allocates its 0x50 bytes, opens lists 0x1C9, 0x1D1 and 0x1CB filled with the entries in D_800D74xx at 0x0C, 0x08 and 0x10, opens panels 0x1CF and 0x1CD at 0x0 and 0x4, opens window 0x1C7 at 0x18, clears the word at 0x14, resets through Player_SelectAlternatePlayerSettingsEntry(0) and returns zero.

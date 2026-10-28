@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "MENU/ITEMS/80444030_6.H"
-#include "RENDER/80291054_9.H"
+#include "MENU/ITEMS/ITEMS_CYCLESCENEMASK.H"
+#include "RENDER/SETN64_UPDATEFADETRANSITION.H"
 
 /* Clears the word held in D_80154100. */
 extern s32 D_80154100;

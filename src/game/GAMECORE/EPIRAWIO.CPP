@@ -6,7 +6,7 @@
 #include "COMMON/EXTERNS_11.H"
 #include "COMMON/CACHE_ALLOCATERESOURCE.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 extern OSPiHandle_s *D_800D4380[];
 

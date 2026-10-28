@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_20.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "MENU/PAK/80405DC0_2.H"
+#include "MENU/PAK/TIMER_CANCELPENDINGOPERATION.H"
 
 extern s32 D_8015375C;
 

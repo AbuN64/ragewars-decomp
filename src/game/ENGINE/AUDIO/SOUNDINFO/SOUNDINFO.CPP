@@ -6,7 +6,7 @@
 #include "COMMON/BOX_CONTACT.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/STREAM.H"
 #include "GAME/8025E520.H"
 

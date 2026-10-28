@@ -15,7 +15,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "AI/PLAYERAI_7.H"
+#include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 #include "COMMON/PLAYERPROFILES.H"
 
 const unsigned int D_auto_src_rw_pool_80228AF4_C88CC_us_rev1[14] = {

@@ -10,8 +10,8 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS14C.H"
-#include "GAME/CODE_8027302C.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 extern void func_8022BF04_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 

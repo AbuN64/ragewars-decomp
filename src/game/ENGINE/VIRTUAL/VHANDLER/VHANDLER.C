@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra/OSUNMAPTLBALL.H"
 #include "sdk/os.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "ENGINE/VIRTUAL/VHANDLER_2.H"
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"

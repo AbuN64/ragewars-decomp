@@ -8,7 +8,7 @@
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "sdk/PFS/__OSCHECKID.H"
-#include "sdk/libultra/pfs/80447BB0_17.h"
+#include "sdk/libultra/pfs/PFS.H"
 
 /* 80447BB0_17.CPP */
 /* __osRepairPackId, drafted from ultralib src/io/contpfs.c (2.0I branch): probe how many banks the

@@ -6,8 +6,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/TRIPLE.H"
-#include "MATH/80297CD0.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "MATH/SM_SMNGR.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 
 static inline s32 menuCategory(s32 event) {
     s32 category;

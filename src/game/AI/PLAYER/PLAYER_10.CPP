@@ -13,7 +13,7 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJ.H"
-#include "GAME/CODE_8027302C.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 
 
 

@@ -6,9 +6,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
-#include "FRONTEND/8043A0B0_11.H"
-#include "FRONTEND/CODE_8043AED0.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "FRONTEND/MENU_IMAGE.H"
+#include "FRONTEND/EQUIP_ACTIVATEEQUIPMENTPANEL.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "COMMON/PLAYERPROFILES.H"
 
 /* Moves player p's column cursor on the screen D_800E59E0: fades the shown item of the current

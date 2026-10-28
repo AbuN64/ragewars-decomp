@@ -5,11 +5,11 @@
 /* Advances streamed music through fade, retry, loading and playback states while updating volume. */
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "sdk/libgultra_inferred/802B3B80_6.H"
+#include "sdk/libgultra_inferred/EVENT.H"
 #include "sdk/libgultra_inferred/ALCSPGETSTATE.H"
 #include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "sdk/libgultra_inferred/802AD870_8.H"
+#include "sdk/libgultra_inferred/cseq.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
 extern f32 Menu_ExpandFloatHighWord(u16);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}

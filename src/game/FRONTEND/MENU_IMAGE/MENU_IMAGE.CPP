@@ -8,9 +8,9 @@
 #include "COMMON/SCREEN.H"
 #include "COMMON/WORLD.H"
 #include "FRONTEND/EQUIP_LOADEQUIPMENTSELECTIONS.H"
-#include "FRONTEND/8043A0B0_11.H"
-#include "FRONTEND/CODE_8043AED0.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "FRONTEND/MENU_IMAGE.H"
+#include "FRONTEND/EQUIP_ACTIVATEEQUIPMENTPANEL.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
@@ -308,7 +308,7 @@ s32 Frontend_DispatchEquipmentEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s3
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 extern float D_80141008[];
 /* A menu's title image: image id, RGB tint words, animation frame and a shown flag. */
 typedef struct MenuImage {

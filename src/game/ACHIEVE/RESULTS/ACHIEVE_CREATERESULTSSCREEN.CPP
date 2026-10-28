@@ -2,10 +2,10 @@
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "RENDER/8026AC38.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "ACHIEVE/MATCH_GETRESULTTEXT.H"
 #include "COMMON/PLAYERPROFILES.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 const unsigned int rodata_func_80438614_de_800E1F50[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,

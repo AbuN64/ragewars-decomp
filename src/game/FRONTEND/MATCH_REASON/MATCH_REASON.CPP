@@ -17,9 +17,9 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];

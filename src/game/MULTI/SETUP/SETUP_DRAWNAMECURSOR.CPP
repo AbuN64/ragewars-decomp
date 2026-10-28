@@ -4,7 +4,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/SETUP_SETUPNAMESPINNER.H"
 #include "TYPES.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 #if !(defined(VERSION_US))
 /* Draws a menu spinner: during the first half of its blink period (the timer of its D_800E63C0 entry up to the float after D_800E2810) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */

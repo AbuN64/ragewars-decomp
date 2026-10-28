@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/VIEWFLAGS.H"
-#include "GFX/TEXT/8022BA90_2.H"
+#include "GFX/TEXT/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.H"
 
 /* Drains a player's ammunition over time: unless Cinema_IsSequenceActive reports a pause, func_8022C460_de blocks
    the player, D_801371DC is set, bit 1 of D_801462C8 is set or the player's state is below 2, it

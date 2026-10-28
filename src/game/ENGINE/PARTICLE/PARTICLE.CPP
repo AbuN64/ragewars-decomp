@@ -7,7 +7,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "FX/PARTICLE_ATTACHMENT.H"
 #include "SYSTEM/CONTACT_EFFECT.H"
 

@@ -5,7 +5,7 @@
 #include "MENU/PLAYERSETTINGS.H"
 #include "TYPES.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "MENU/MISC/8043DF84_2.H"
+#include "MENU/MISC/CMENUPROFILE_ADJUSTGAMESPEEDFACTOR.H"
 #include "SYSTEM/80265370.H"
 
 /** Always returns 0. */

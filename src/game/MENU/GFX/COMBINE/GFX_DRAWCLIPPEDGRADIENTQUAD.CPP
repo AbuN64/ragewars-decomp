@@ -9,9 +9,9 @@
 #include "COMMON/UNUSED.H"
 #include "MENU/80414430.H"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
-#include "MENU/GFX/80414430_21.H"
+#include "MENU/GFX/RECT.H"
 #include "MENU/GFX/80414430_24.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern Gfx *g_displayListCursor;
 extern Triple D_80153F60;

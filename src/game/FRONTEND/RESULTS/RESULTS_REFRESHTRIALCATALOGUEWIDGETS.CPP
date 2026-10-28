@@ -57,9 +57,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/EXTERNS_9.H"
-#include "FRONTEND/80423280_38.H"
+#include "FRONTEND/RESULTS_REFRESHTRIALCATALOGUEWIDGETS.H"
 #include "FRONTEND/RESULTS_MARKLINKEDTRIALSAVAILABLE.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "FRONTEND/RESULTS.H"
 
 /* Hides every model named by the sixty-four 12-byte entries of g_arenaCompatibilityTable: for each entry it looks

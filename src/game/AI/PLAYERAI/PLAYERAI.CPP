@@ -11,7 +11,7 @@
 #include "COMMON/EXTERNS_15.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 #include "RENDER/802192C0.H"
@@ -37,11 +37,11 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "FX/CONTPAD_INITCONTROLLERINPUT.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/SHAREDCALLBACK5.H"
-#include "AI/PLAYERAI_7.H"
+#include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 
 /* 802192C0.CPP */
 /* Steps an animation cursor one frame: looks up the clip in D_8011FE88, keeps the previous frame,

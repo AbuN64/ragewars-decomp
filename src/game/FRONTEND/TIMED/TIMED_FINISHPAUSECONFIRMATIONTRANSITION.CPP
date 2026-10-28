@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 #include "FRONTEND/SCREEN.H"
 
 /* Event callback for screen D_800E5554: on event 1 while Frontend_GetMenuImageState reports the screen in state 1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in state 2 it calls func_8040C428_de(0) and MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24 of D_8011FE88, restarts Cache_SetResourceActivityState when func_8025477C_de reports it idle, stores 8 at 0x17F0 past the match objects, passes the screen's word at 0x1C to SmXlate_SwitchScreen and calls func_8025E384_de, returning zero. Adapted from Frontend_UpdatePage67Exit with the screen D_800E5558 changed to D_800E5554, a func_8040C428_de(0) call added, and the trailing Stage_StartConfiguredMatch call replaced by the store of 8 and the SmXlate_SwitchScreen call before func_8025E384_de. */

@@ -1,7 +1,7 @@
-#include "MENU/802ABDBC_6.H"
+#include "MENU/PICKUP_DRAWSCALEDINTENSITYTILEGRID.H"
 #include "include_asm.h"
 #include "TYPES.H"
-#include "ONSCRN/ONSCRN_4.H"
+#include "ONSCRN/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 extern void Hud_EmptyCallback(void);
 
 extern void Lists_InitFromPool(void *lists, void *pool, s32 stride, s32 count);

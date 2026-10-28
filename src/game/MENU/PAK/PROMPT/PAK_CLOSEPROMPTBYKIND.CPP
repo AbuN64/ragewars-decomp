@@ -8,7 +8,7 @@
 #include "COMMON/RECORDRECAT1C.H"
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0.H"
-#include "MENU/PAK/8043F69C_6.H"
+#include "MENU/PAK/MENU_CREATEMENUFROMTEMPLATE.H"
 
 /* Confirms the selected pak menu entry: marks the menu busy and returns when Snapshot_CheckStatusPrompt takes
    over the selected channel; with a profile loaded (D_80153730) it creates the player through

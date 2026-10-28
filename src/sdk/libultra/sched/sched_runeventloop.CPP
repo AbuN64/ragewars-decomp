@@ -1,7 +1,7 @@
 #include "sdk/libgultra/viblack.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT2A8.H"

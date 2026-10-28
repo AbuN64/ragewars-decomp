@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "AI/SOURCE.H"
 #include "TYPES.H"
-#include "AI/NAV/80212C90.H"
+#include "AI/NAV/CARRIER.H"
 
 void func_80212C90_de(AiTarget *aiTarget) {
     AiController *controller;

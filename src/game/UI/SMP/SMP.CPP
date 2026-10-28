@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ANIMATION.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_42.H"
+#include "FRONTEND/FRONTEND_CONFIGUREIMAGECONVERSION.H"
 
 /* Copies image src into dst when they differ, then fixes dst's pixel rows through Image_SwizzleImage when a paletted image has more than 0x800 bytes of pixels or a true-color image more than 0x1000; returns zero. */
 

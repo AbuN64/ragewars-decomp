@@ -80,7 +80,7 @@ extern void Actor_RequestActorState(void *, void *, s32);
 extern void Weaponai_ApplyWeaponSwitch(void *, void *);
 extern void Player_UpdatePlayerCamera(void *, void *);
 #include "MENU/INITVIEW.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 typedef struct ActorInitPart {

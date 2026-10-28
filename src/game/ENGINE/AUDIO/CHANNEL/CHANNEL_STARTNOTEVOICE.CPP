@@ -21,7 +21,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 struct ALSndPlayer;
 extern void alSndpSetPriority(struct ALSndPlayer *player, short index, unsigned char value);
-#include "TEXTURE/80256220_16.H"
+#include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 #include "COMMON/LISTNODE.H"
 
 

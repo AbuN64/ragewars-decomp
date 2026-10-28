@@ -12,7 +12,7 @@
 #include "COMMON/REC.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/SELF.H"
-#include "AI/NAV/8020EAE0_7.H"
+#include "AI/NAV/PICKUPTARGET.H"
 
 /* Selects the nodes of D_8013B364's list whose flagged record matches one of thirty ids: every match
    whose owner at 0x34 is active at 0x294 is selected through Nav_AddGoalNode, and when none was, every

@@ -10,13 +10,13 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "RENDER/80206258_2.H"
+#include "RENDER/TRIGGERED_UPDATETRIGGEREDMOTION.H"
 #include "RENDER/80206258.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "GOBJINST/GOBJINST_2.H"
+#include "GOBJINST/GASTATE_ADVANCEROOTMOTION_DATA.H"
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 

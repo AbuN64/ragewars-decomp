@@ -80,7 +80,7 @@ s32 Playerai_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target)
 }
 
 /* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
-#include "ENGINE/INSTANCE/GOBJINST_13.H"
+#include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
 extern s32 Playerai_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);

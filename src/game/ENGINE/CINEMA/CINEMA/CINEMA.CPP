@@ -13,7 +13,7 @@
 #include "COMMON/CACHE_RELEASERESOURCE.H"
 #include "CINEMA/CINEMA.H"
 #include "include_asm.h"
-#include "CAMERA/80243A80_6.H"
+#include "CAMERA/CCINEMA_UPDATESEQUENCE.H"
 
 /* 80243A80_8.CPP */
 /** Read the word at offset 0x38 from the globally selected record. */

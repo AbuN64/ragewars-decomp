@@ -9,7 +9,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "MENU/PAK/80405DC0_16.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 /* 80405DC0_15.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

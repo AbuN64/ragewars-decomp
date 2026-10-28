@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "RESMGR/8029FA7C_4.H"
+#include "RESMGR/XMATH_BUILDAXISANGLEMATRIX.H"
 #include "RESMGR/resmgr_string_memory.H"
 extern void MatrixFromAngles(f32 *matrix, f32 *angles);
 

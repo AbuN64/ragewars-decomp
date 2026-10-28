@@ -1,7 +1,7 @@
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/ENTRYRECATE.H"
 #include "TYPES.H"
-#include "MENU/802ABDBC_6.H"
+#include "MENU/PICKUP_DRAWSCALEDINTENSITYTILEGRID.H"
 
 /* Draws a grid of 4-bit image tiles: the header holds the column and row counts, each tile holds
    its width, height and packed nibble data, and every tile goes to OnScreen_DrawIntensityTexture at the running

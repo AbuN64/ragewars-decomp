@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
-#include "sdk/OSINT/802BEA40.H"
+#include "sdk/OSINT/CREATE.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 #include "include_asm.h"

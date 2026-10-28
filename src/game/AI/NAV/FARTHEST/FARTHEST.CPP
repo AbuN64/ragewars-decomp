@@ -12,7 +12,7 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
-#include "AI/NAV/802106E0_20.H"
+#include "AI/NAV/FARTHEST.H"
 #include "include_asm.h"
 
 /* 802106E0_17.CPP */

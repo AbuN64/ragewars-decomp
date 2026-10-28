@@ -2,10 +2,10 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "SYSTEM/8025E280.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/sprintf.H"
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */

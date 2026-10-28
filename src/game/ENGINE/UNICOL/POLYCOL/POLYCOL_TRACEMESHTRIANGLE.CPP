@@ -17,7 +17,7 @@
 #include "COMMON/TRIPLE.H"
 #include "ANIM/CCOLLISION_TESTOFFSETPOLYGON.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* 802412C0_6.CPP */
 /* Walks one mesh display list of the element being traced: VTX commands transform their model vertices

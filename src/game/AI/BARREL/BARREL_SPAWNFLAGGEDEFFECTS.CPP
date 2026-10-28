@@ -5,7 +5,7 @@
 #include "COMMON/PROBE.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-#include "particle/8024D018_4.H"
+#include "particle/INSTHDR.H"
 #include "WEAPONS/80213ED4_23.H"
 #include "WEAPONS/BARREL_FILLWORDPAIR.H"
 #include "COMMON/FUNCPTR.H"

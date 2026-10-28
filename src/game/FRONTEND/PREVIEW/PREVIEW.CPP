@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "gbi.h"
 #include "MENU/GFX/COMBINE_CONFIGUREPRIMITIVERENDERFLAGS.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 

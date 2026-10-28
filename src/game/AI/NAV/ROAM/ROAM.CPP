@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/SELF.H"
-#include "AI/NAV/80212C90_15.H"
+#include "AI/NAV/ROAM.H"
 
 /* Runs a computer player's think step: when it has reached its goal node or the goal at 0x22C is past
    the node count D_8013B368, it picks a new goal as Nav_InitRoamingWithJumps does (Nav_SelectFlaggedRoamingGoal for a player

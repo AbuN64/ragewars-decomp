@@ -6,7 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* Returns the rotation that turns an actor's aim toward a target point: a player's forward axis is its
  * aiming orientation from func_8024796C_de applied to +z, anyone else looks along +z; the target is the

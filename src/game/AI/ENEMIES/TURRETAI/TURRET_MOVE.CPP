@@ -3,8 +3,8 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJ.H"
-#include "GAME/CODE_8027302C.H"
-#include "particle/80271B18_3.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 typedef struct Owner Owner;
 

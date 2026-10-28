@@ -10,7 +10,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "UTIL/8025DBA0.H"
-#include "sdk/libgultra_inferred/802AD870_8.H"
+#include "sdk/libgultra_inferred/cseq.H"
 #include "sdk/libgultra_inferred/ALCSPSETCHLFXMIX.H"
 #include "stddef.h"
 #include "RENDER/SETN64_GETPACKSECTION.H"

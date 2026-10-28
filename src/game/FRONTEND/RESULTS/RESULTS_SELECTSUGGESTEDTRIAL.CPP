@@ -6,7 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 
 extern s32 Defs_TestBit(void *, s32);
 void Results_SelectSuggestedTrial(void) {

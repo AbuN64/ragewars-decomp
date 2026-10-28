@@ -4,7 +4,7 @@
 #include "GAME/8025E520.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "SYSTEM/8025E5B0_9.H"
+#include "SYSTEM/POLYTRAK2_INTERPOLATEJOINTQUATERNION.H"
 
 /* Reads one envelope segment from a bitstream, either as raw floats or as scaled table values. */
 

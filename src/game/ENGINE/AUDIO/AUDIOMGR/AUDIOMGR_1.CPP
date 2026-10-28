@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/ARG.H"
 #include "COMMON/STATERECAT34.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/GUMTXL2F.H"
 #include "COMMON/EXTERNS_18.H"

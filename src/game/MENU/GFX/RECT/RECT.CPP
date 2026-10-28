@@ -3,7 +3,7 @@
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
-#include "MENU/GFX/80414430_21.H"
+#include "MENU/GFX/RECT.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "include_asm.h"
 #include "abi.h"

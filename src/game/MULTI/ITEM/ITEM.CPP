@@ -7,8 +7,8 @@
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/EXTERNS_6.H"
-#include "GFX/TEXT/802A8A94_5.H"
-#include "MULTI/8043E9A8_9.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
+#include "MULTI/ITEM.H"
 
 #if (!(defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", Multi_DrawPlayerItemAvailability);

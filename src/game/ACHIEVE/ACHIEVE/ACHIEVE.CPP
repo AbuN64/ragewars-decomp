@@ -11,7 +11,7 @@
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/80424E30.H"
 #include "stddef.h"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "COMMON/PLAYERPROFILES.H"
 
 extern s32 Defs_TestBit(void *, s32);

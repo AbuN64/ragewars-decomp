@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/TEXTURE.H"
 #include "COMMON/GFX_INITIALIZEFRONTENDSERVICES.H"
-#include "MATH/8029BBA0_5.H"
+#include "MATH/XMATH_EVALUATEEXPONENTIALDOUBLE.H"
 #include "MENU/GFX/GFX_FORMATFLOATINGPOINT.H"
 
 s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {

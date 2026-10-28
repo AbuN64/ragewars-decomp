@@ -9,7 +9,7 @@
 #include "COMMON/SCREEN.H"
 #include "COMMON/REQUESTRECAT10.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
-#include "FRONTEND/8043A0B0_11.H"
+#include "FRONTEND/MENU_IMAGE.H"
 
 extern struct Screen42 *D_800E59E0;
 extern void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *, s32, s32);

@@ -10,7 +10,7 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "ANIM/8023DF60_4.H"
+#include "ANIM/CCOLLISION_TESTSEGMENTDISK.H"
 
 /* Tests a ray against a polygon with a radius: intersects the ray from 0x44 to 0x50 with the polygon's plane
  * through CCollision_IntersectFrontPlaneFraction and accepts a parameter nearer than the ray's nearest hit, also allowing a slightly

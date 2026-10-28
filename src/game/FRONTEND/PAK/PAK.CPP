@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_2.H"
+#include "FRONTEND/PAK.H"
 
 extern s32 D_8015375C;
 

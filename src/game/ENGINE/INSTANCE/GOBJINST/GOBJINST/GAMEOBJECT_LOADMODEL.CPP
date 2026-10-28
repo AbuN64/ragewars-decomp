@@ -15,8 +15,8 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECAT4V7.H"
 #include "stddef.h"
-#include "ENGINE/INSTANCE/GOBJINST_3.H"
-#include "GAME/CODE_8027302C.H"
+#include "ENGINE/INSTANCE/GAMEOBJECT_LOADMODEL.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 
 /* GOBJINST_2.CPP */
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);

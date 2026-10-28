@@ -7,7 +7,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "FX/80246E34_10.H"
-#include "particle/8024BA6C_6.H"
+#include "particle/GOBJINST_PACKAFFINEMATRIXWORDS.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
 extern char D_8011D8D0;

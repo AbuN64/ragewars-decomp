@@ -9,13 +9,13 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/OBJRECV5.H"
-#include "GAME/CODE_8027302C.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 extern s32 Actor_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void Graphu64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #include "TYPES.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 typedef struct { f32 x, y, z; } Position;
 typedef struct { u8 pad0[0x34]; Position pos; f32 height; u8 pad44[0x1A]; u8 duration; } TravelTarget;

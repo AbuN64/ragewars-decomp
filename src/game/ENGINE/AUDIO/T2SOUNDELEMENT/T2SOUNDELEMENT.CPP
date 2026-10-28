@@ -4,13 +4,13 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "AUDIO/802591C0.H"
-#include "TEXTURE/80256220_15.H"
+#include "TEXTURE/SOUND.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "TEXTURE/SOUND_INITIALIZECONTEXT.H"
 #include "include_asm.h"
-#include "RENDER/8025DE50_6.H"
-#include "TEXTURE/80256220_16.H"
+#include "RENDER/T2SOUNDELEMENT.H"
+#include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 
 /* 8025DE50_5.CPP */
 /** Calls Sound_InitializeContext with &D_8010C080 as its argument. */

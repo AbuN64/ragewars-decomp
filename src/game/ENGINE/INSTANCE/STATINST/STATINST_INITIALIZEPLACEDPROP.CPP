@@ -4,7 +4,7 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "COMMON/MANAGER.H"
 #include "TYPES.H"
-#include "GAME/CODE_8027302C.H"
+#include "GAME/BUILDDIRECTIONMATRIX.H"
 extern s32 D_800D2978;
 
 /* Initialises a placed prop from its compact record: resets its state and owner, loads its model and

@@ -3,7 +3,7 @@
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "SYSTEM/8025E280.H"
 

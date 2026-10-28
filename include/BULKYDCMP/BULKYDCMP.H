@@ -1,6 +1,6 @@
 #ifndef BULKYDCMP_BULKYDCMP_H
 #define BULKYDCMP_BULKYDCMP_H
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 extern void func_8025E260_de(int trackId);
 extern void func_8025E29C_de(s32 mixValue);
 extern int func_8025E2C4_de(void);

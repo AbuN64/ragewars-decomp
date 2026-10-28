@@ -18,10 +18,10 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESOURCELOADSTATE.H"
-#include "ENGINE/SCENE_6.H"
+#include "ENGINE/SCENE_DRAWOPAQUEACTORS.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "GFX/TEXT/8022BA90_2.H"
+#include "GFX/TEXT/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.H"
 
 
 extern void *Scene_FindActorDefinition(Shared_World *arg0, s32 arg1, s32 arg2);

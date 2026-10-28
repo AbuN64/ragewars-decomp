@@ -9,7 +9,7 @@
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"

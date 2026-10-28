@@ -5,7 +5,7 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
 #include "TYPES.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/8027A0F4_4.H"
 

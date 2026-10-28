@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "MENU/8043F69C.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Moves a menu cursor through its entry table in one direction (16 to 19, reading the step byte at that offset of the current entry), wrapping at either end, recording the reverse step on the new entry when its flag allows, until it reaches an entry flagged 0x1800000 whose descriptor word at 0x1C is set. */
 

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "MATH/math_double.H"
-#include "MATH/8029BBA0_2.H"
+#include "MATH/XMATH_EVALUATEHYPERBOLICTANGENT.H"
 
 /* Converts an array of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from XMath_ConvertYxzToZyxAngles, with the clamped product, branch products, fallback call, and result order changed. */
 

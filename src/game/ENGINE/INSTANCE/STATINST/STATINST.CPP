@@ -10,7 +10,7 @@
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
 #include "SCENE/802508E0.H"
 #include "SCENE/802508E0_9.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "include_asm.h"
 
 /* STATINST.CPP */

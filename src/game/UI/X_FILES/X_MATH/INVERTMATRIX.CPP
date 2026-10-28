@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
-#include "MATH/8029BBA0_4.H"
+#include "MATH/INVERTMATRIX.H"
 
 /* The values XMath_BuildYxzRotationMatrix loads by address:
  * 0x800CAC34 = 1.0 (float, D_800CAC34 in this cartridge's tables)

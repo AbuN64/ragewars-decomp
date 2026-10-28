@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER/SETN64_ADVANCEDISPLAYFRAME.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 
 extern void osCreateThread(s32 arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);

@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "TYPES.H"
-#include "AUDIO/80255280.H"
+#include "AUDIO/HASHTABLE.H"
 
 /* Creates the address hash table: rounds the requested capacity up to a power of two, allocates twice that many 16-byte slots from pool D_801051A0 (keeping the half size, slot count and both index masks in globals), and clears every slot, numbering each with its index. */
 

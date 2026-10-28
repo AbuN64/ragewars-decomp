@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "SYSTEM/80265370.H"
-#include "sdk/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/sprintf.H"
 #include "COMMON/LIGHTDATA.H"
 #include "COMMON/VECTOR4F.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
 #include "SCENE/CACHE_REQUESTRESOURCE.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 /* 80265370.CPP */
 extern u32 D_80000318;

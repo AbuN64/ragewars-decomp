@@ -5,7 +5,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
-#include "AI/NAV/802106E0_2.H"
+#include "AI/NAV/WHEEL.H"
 
 /* Probes one of a vehicle's eight wheel rays: casts from the vehicle position to its scaled wheel offset
  * through Unicol_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals

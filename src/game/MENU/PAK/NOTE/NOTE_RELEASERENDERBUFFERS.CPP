@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
-#include "OVLGAME/80405454_4.H"
+#include "OVLGAME/NOTE_RELEASERENDERBUFFERS.H"
 
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC
    from its last entry down. */

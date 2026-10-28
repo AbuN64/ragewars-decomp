@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "sdk/AUDIO/vi.H"
 #include "sdk/AUDIO/__OSVISWAPCONTEXT.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 #include "sdk/libultra/audio/vi.h"
 
 extern __OSViContext_func_802BA910_de *D_800D8440;

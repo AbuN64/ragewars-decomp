@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 /* Returns whether any of the 22 records in D_800D052C holds, in either of its two three-entry lists, an entry of kind 1 whose id matches the given object's id. */
 

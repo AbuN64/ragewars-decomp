@@ -13,7 +13,7 @@
 #include "AI/NAV/PORTAL_LOADCOLLISIONTABLE.H"
 #include "MENU/ITEMS/SCENE/SCENE.H"
 #include "MENU/ITEMS/SCENE/SCENE_7.H"
-#include "MENU/PAK/80403BCC_4.H"
+#include "MENU/PAK/MENU_ISTRACKREQUESTITEM.H"
 
 extern void Player_RefreshActivePlayerSceneState(CPlayerPool *);
 extern void Cache_DrainAndCompactResources(s32 unusedHeap);

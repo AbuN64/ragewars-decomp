@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "particle/8027A0F4_4.H"
 
 typedef struct Owner Owner;

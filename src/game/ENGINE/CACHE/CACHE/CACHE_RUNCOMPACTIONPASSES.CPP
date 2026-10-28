@@ -7,7 +7,7 @@
 #include "COMMON/EXTERNS_11.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/802508E0.H"
-#include "SCENE/802508E0_2.H"
+#include "SCENE/CACHE_INITIALIZERESOURCECACHE.H"
 #include "sdk/os.h"
 
 #if (defined(VERSION_US)) && !defined(NON_MATCHING)

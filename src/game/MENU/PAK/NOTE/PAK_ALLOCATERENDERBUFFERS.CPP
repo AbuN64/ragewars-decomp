@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "OVLGAME/NOTE_ENCODENOTETEXT.H"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 /* Chooses a free extension letter for a new note on the Controller Pak on channel ch: refuses with
    -2 unless the pak is ready, queries each of the 16 notes through Note_ReadNoteInfo (failing with -1

@@ -5,7 +5,7 @@
 #include "COMMON/OBJECTSTATE10_2.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "sdk/libgultra_inferred/802AD870_8.H"
+#include "sdk/libgultra_inferred/cseq.H"
 #include "include_asm.h"
 #include "sdk/libgultra_inferred/ALCSPGETSTATE.H"
 
@@ -26,7 +26,7 @@ extern u32 __alCSeqGetTrackEvent(ALCSeq_s *, u32, ALEvent *);
  /* 4294967296.0 */
 
  /* 1.0f */
-static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
+static inline void alCSeqNewMarkerInitSequence(ALCSeq_s *seq, u8 *ptr)
 {
     u32 i, tmpOff, flagTmp;
     f64 t;
@@ -59,7 +59,7 @@ static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
     seq->qnpt = D_800C72F8_de / (f32)t;
 }
 
-static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
+static inline void alCSeqNewMarkerNextEvent(ALCSeq_s *seq, ALEvent *evt)
 {
     u32 i;
     u32 firstTime = 0xFFFFFFFF;
@@ -91,7 +91,7 @@ void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
     ALEvent evt;
     ALCSeq_s tempSeq;
     s32 i;
-    alCSeqNew(&tempSeq, (u8 *)seq->base);
+    alCSeqNewMarkerInitSequence(&tempSeq, (u8 *)seq->base);
     do {
         m->validTracks = tempSeq.validTracks;
         m->lastTicks = tempSeq.lastTicks;
@@ -103,7 +103,7 @@ void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
             m->lastStatus[i] = tempSeq.lastStatus[i];
             m->evtDeltaTicks[i] = tempSeq.evtDeltaTicks[i];
         }
-        alCSeqNextEvent(&tempSeq, &evt);
+        alCSeqNewMarkerNextEvent(&tempSeq, &evt);
         if (evt.type == AL_SEQ_END_EVT)
             break;
     } while (tempSeq.lastTicks < ticks);

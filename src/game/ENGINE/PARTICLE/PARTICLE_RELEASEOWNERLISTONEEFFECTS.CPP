@@ -16,7 +16,7 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"

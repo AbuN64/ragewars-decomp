@@ -7,7 +7,7 @@
 #include "MENU/ITEMS/ITEMS_INVOKEHANDLERANDCLEARITEMSTATE.H"
 #include "MENU/PAK/MENU_INITIALIZEMENU.H"
 #include "SYSTEM/80255C40_3.H"
-#include "MENU/ITEMS/80442BC8_12.H"
+#include "MENU/ITEMS/ITEMS_CREATEMENU.H"
 
 /* 80442BC8_11.CPP */
 /* Runs the optional callback at offset 0xC of an object's handler table at 0x14, then clears the

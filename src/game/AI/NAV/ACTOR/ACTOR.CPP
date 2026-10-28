@@ -5,7 +5,7 @@
 #include "AI/ACTOR_SETUP_VERSIONS.H"
 #include "TYPES.H"
 #include "stddef.h"
-#include "RESMGR/802A0888.H"
+#include "RESMGR/X_PLUS.H"
 
 /* 80212C90_18.CPP */
 /* Seeds an actor record from its definition: clears the sound handle, pending flag and channel, copies the

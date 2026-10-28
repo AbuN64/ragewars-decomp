@@ -8,7 +8,7 @@
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
-#include "CAMERA/80243A80_6.H"
+#include "CAMERA/CCINEMA_UPDATESEQUENCE.H"
 #include "MENU/TRACK_LOADTRACKSEQUENCE.H"
 #include "MENU/MENU_PROCESSTRACKITEMEVENTS.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

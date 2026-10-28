@@ -7,7 +7,7 @@
 #include "TYPES.H"
 extern struct MenuStepState *D_800E5690;
 #include "MENU/804366D0_2.H"
-#include "MENU/804366D0_4.H"
+#include "MENU/PLAYER_SELECTNEXTPLAYERSETTINGSENTRY.H"
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x20 of the object D_800E5690 points to to -1 and

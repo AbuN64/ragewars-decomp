@@ -10,7 +10,7 @@
 #include "sdk/PFS/PFS_SELECTACTIVEBANK.H"
 #include "sdk/PFS/ospfschecker.H"
 #include "sdk/libultra/pfs/PFS_COUNTPAGEREFERENCES.H"
-#include "sdk/libultra/pfs/80447BB0_17.h"
+#include "sdk/libultra/pfs/PFS.H"
 #include "sdk/libultra/pfs/ospfschecker.h"
 
 /* osPfsInitPak, drafted from ultralib src/io/pfsinitpak.c (2.0I branch): confirm a controller pak is

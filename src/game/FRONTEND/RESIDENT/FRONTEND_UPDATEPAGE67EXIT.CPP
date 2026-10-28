@@ -4,7 +4,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/LONE/D_800E5558.H"
 #include "COMMON/WORLD.H"
-#include "FRONTEND/8043A0B0_12.H"
+#include "FRONTEND/MENUIMAGE.H"
 
 /* 8042E080_89.CPP */
 /* Calls Tsmos_SetModeOneFlag with 2 and returns zero. */

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "FX/PARTICLE_SOUND.H"
 #include "SYSTEM/80255C40_3.H"
-#include "particle/80271B18_3.H"
+#include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/8027A0F4_4.H"
 #include "particle/PARTICLE_SPAWNEFFECTGROUP.H"
@@ -17,7 +17,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-#include "PARTICLE/PARTICLE_5.H"
+#include "PARTICLE/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 
 /* CODE_8028414C.CPP */
 extern s32 func_8025CA24_de(void *arg0, void *arg1);

@@ -3,7 +3,7 @@
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "TYPES.H"
-#include "GFX/TEXT/802A8A94_5.H"
+#include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "GFX/802A8A94.H"
 #include "abi.h"
 #include "gbi.h"

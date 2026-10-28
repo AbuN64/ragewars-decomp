@@ -9,7 +9,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_3.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
-#include "ENGINE/SCENE_2.H"
+#include "ENGINE/SCENE_LOADLEVELRESOURCES.H"
 
 /* Spawns the pickups of a level: between Cinema_ClearPlaybackFlag and Cinema_SetPlaybackFlag it passes every item of both item tables whose kind is 1, 2, 4 or 10 to Scene_DispatchEnabledEntityTrigger. */
 

@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/AUDIO/audio_nextdecodedsampleblock.H"
-#include "TEXTURE/80256220_16.H"
+#include "TEXTURE/SOUND_UPDATEAUDIOCONTEXT.H"
 #include "AUDIO/802591C0.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 

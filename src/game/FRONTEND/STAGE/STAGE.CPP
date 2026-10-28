@@ -6,7 +6,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "FRONTEND/STAGE_PLACESTAGEOPPONENTS.H"
 #include "SYSTEM/8025E280.H"
-#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/ACHIEVE.H"
 #include "FRONTEND/SCREEN.H"
 
 /* Prepares a match: stops the current screen, starts screen 2, resets the eight player status

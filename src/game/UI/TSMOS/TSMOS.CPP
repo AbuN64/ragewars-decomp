@@ -6,7 +6,7 @@
 #include "COMMON/RECORD.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "COMMON/TEXTURE.H"
-#include "RESMGR/802A2230_7.H"
+#include "RESMGR/TSMOS.H"
 
 /** Set D_800D2C90 to one. */
 

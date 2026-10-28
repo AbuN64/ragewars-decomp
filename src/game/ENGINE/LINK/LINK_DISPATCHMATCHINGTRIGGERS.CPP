@@ -7,7 +7,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
-#include "LINK/LINK_2.H"
+#include "LINK/LINK_DISPATCHMATCHINGTRIGGERS.H"
 #include "COMMON/EXTERNS_10.H"
 #include "SYSTEM/8025E280.H"
 #include "COMMON/OBJECTLINKS14.H"

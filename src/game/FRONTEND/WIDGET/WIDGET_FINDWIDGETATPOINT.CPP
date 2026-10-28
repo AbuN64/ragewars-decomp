@@ -6,8 +6,8 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_31.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "FRONTEND/WIDGET_DRAWTEXTWIDGET.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 #include "MATH/802A2870.H"
 
 /* Draws a visible widget (flag 8): when Widget_ComputeWidgetBounds places it, and its draw flags ask for

@@ -1,6 +1,6 @@
 #ifndef SYSTEM_2_8025E280_H
 #define SYSTEM_2_8025E280_H
-#include "COMMON/S1_2.H"
+#include "COMMON/SOUNDINFO.H"
 extern void func_8025E260_de(int arg0);
 extern void func_8025E360_de();
 extern void func_8025E318_de();

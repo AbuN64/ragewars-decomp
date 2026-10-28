@@ -5,7 +5,7 @@
 #include "FRONTEND/LAYOUT.H"
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
-#include "FRONTEND/8040B45C_42.H"
+#include "FRONTEND/FRONTEND_CONFIGUREIMAGECONVERSION.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 

@@ -9,7 +9,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "CAMERA/80233920_14.H"
+#include "CAMERA/GSKY_RESETHEADBOB.H"
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 extern const f32 D_800C2D9C_de;

@@ -4,7 +4,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/RECORDRECATCV1.H"
-#include "sdk/PFS/80443868_7.H"
+#include "sdk/PFS/PLAYER_CONFIGUREANDPROBECONTROLLERPAK.H"
 
 /* Updates display flags and activates the selected resource. */
 s32 Player_GetPlayerIndex(s32 *, s32);

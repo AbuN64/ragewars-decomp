@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/MENU_SETUP_VERSIONS.H"
-#include "FRONTEND/8040B45C_32.H"
+#include "FRONTEND/WIDGET_FINDWIDGETATPOINT.H"
 /* menu_setup_versions.h declares this scalar only cart-guarded; the slot-error scalar is real in every cart */
 extern s32 D_800DF4C4;
 #include "COMMON/UNUSED.H"

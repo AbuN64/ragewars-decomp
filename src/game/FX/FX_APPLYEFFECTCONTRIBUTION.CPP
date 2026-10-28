@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-#include "RENDER/802A35C0_7.H"
+#include "RENDER/FX_APPLYEFFECTCONTRIBUTION.H"
 
 
 

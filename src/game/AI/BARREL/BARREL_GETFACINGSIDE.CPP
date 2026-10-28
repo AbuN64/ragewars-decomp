@@ -9,7 +9,7 @@
 #include "stddef.h"
 #include "COMMON/PROBE.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "ENGINE/INSTANCE/GOBJINST_13.H"
+#include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 
 /* 800C6E84_25.CPP */
 /* ROM-grounded data: src/rw_pool_80216288_C7EB4_us_rev1.c */
