@@ -51,7 +51,7 @@ extern f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *arg0, s32 arg1);
 extern int Polytrak2_GetUnsignedArrayElement(BitFieldSource *arg0, int arg1);
 extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 arg0, Func802608ECResult range, f32 arg4);
 extern void func_80260E1C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
-extern void Polytrak2_InitializeQuantizedStream(void *arg0, int arg1, Triple t);
+extern void Polytrak2_StoreWordAndTriple(void *arg0, int arg1, Triple t);
 extern f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range);
 extern void func_80260D78_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 #endif

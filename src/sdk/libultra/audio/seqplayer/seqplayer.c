@@ -83,7 +83,7 @@ s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void alEvtqNew(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
-void alCSPNew(SeqInitPlayer *p, ALSeqpConfig *c) {
+void alSeqpNew(SeqInitPlayer *p, ALSeqpConfig *c) {
     void *heap = c->heap;
     void *driver = D_800D4070;
     SeqFreeVoice *voice;

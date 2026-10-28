@@ -268,7 +268,7 @@ int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int eleme
 }
 
 /** Store a scalar word plus a three-word record by value. */
-void Polytrak2_InitializeQuantizedStream(void *arg0, int arg1, Triple t) {
+void Polytrak2_StoreWordAndTriple(void *arg0, int arg1, Triple t) {
     ObjRecAt4V4 *arg0_record = arg0;
     arg0_record->unk0 = arg1;
     arg0_record->unk4 = t;
