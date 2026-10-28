@@ -21,14 +21,14 @@
 extern s32 alHeapDBAlloc(s32, s32, void *, s32, s32);
 
 
-extern void func_802AFFC0_de(void *, void *, s32);
+extern void alEvtqNew(void *, void *, s32);
 
 extern void alSynAddPlayer(s32, void *);
 
 
 void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1);
 
-extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
+extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, s32);
 
 extern s32 alEvtqNextEvent(void *, s16 *);
 
@@ -95,7 +95,7 @@ void func_802AEAB0_de(void *arg0, InitParams *config) {
     obj->vAllocHead = 0;
     obj->vAllocTail = 0;
     allocation = alHeapDBAlloc(0, 0, (void *)context, params->count1C, 0x1C);
-    func_802AFFC0_de(&obj->evtq, (void *)allocation, params->count1C);
+    alEvtqNew(&obj->evtq, (void *)allocation, params->count1C);
     {
         ALPlayer_s *node = &obj->node;
         node->next = 0;
@@ -128,7 +128,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
-            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, seqp->frameTime);
+            alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, seqp->frameTime);
             break;
         case 5: /* AL_NOTE_END_EVT */
             voice = seqp->nextEvent.msg.note.voice;
@@ -137,7 +137,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 __seqpStopOsc(seqp, vs);
-            Audio_ReleaseSequenceVoice((List802B663C *)seqp, voice);
+            Seqplayer_ReleaseSequenceVoice((List802B663C *)seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
             voice = seqp->nextEvent.msg.vol.voice;
@@ -161,7 +161,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             evt.type = 22;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
-            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, delta);
+            alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, delta);
             break;
         case 23: /* AL_VIB_OSC_EVT */
             vs = seqp->nextEvent.msg.osc.vs;
@@ -175,7 +175,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
             evt.msg.osc.chan = chan;
-            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, delta);
+            alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, delta);
             break;
         case 2:  /* AL_SEQP_MIDI_EVT */
         case 21: /* AL_CSP_NOTEOFF_EVT */
@@ -204,7 +204,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                     alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
                         __seqpStopOsc(seqp, vs);
-                    Audio_ReleaseSequenceVoice((List802B663C *)seqp, &vs->voice);
+                    Seqplayer_ReleaseSequenceVoice((List802B663C *)seqp, &vs->voice);
                 }
                 seqp->state = 0;
             }
@@ -220,7 +220,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                 }
                 seqp->state = 2;
                 evt.type = 16;
-                func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, 0x7fffffff);
+                alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, 0x7fffffff);
             }
             break;
         case 12: /* AL_SEQP_PRIORITY_EVT */
@@ -259,7 +259,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
 
 
 
-extern void *func_802B16E0_de(void *, s32, s32, s32);
+extern void *__lookupSoundQuick(void *, s32, s32, s32);
 
 extern void *__mapVoice(void *, u8, u8, u8);
 
@@ -349,7 +349,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
         sw_message_3:
             arg0->state = 2;
             message.type = 0x10;
-            func_802B00D4_de(&arg0->evtq, &message, 0x7FFFFFFF);
+            alEvtqPostEvent(&arg0->evtq, &message, 0x7FFFFFFF);
             break;
         sw_message_17:
         sw_message_18:
@@ -360,7 +360,7 @@ void __CSPHandleNextSeqEvent(void *rawPlayer) {
                     output.type = 0;
                     value = value3;
 send_value:
-                    func_802B00D4_de(&arg0->evtq, &output,
+                    alEvtqPostEvent(&arg0->evtq, &output,
                                   value * arg0->uspt);
                 }
             }
@@ -414,7 +414,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
 
             if (seqp->state != 1)
                 break;
-            sound = func_802B16E0_de(seqp, key, vel, chan);
+            sound = __lookupSoundQuick(seqp, key, vel, chan);
             if (!sound)
                 return;
             config.priority = seqp->chanState[chan].priority;
@@ -447,7 +447,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
                         evt.type = 22; /* AL_TREM_OSC_EVT */
                         evt.msg.osc.vs = vstate;
                         evt.msg.osc.oscState = oscState;
-                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+                        alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, deltaTime);
                         vstate->flags |= 0x01;
                     }
                 }
@@ -471,7 +471,7 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
                         evt.msg.osc.vs = vstate;
                         evt.msg.osc.oscState = oscState;
                         evt.msg.osc.chan = chan;
-                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+                        alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, deltaTime);
                         vstate->flags |= 0x02;
                     }
                 }
@@ -487,14 +487,14 @@ void __CSPHandleMIDIMsg(void *object, ALEvent *message)
             evt.msg.vol.voice = voice;
             evt.msg.vol.vol = sound->envelope->decayVolume;
             evt.msg.vol.delta = sound->envelope->decayTime;
-            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+            alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, deltaTime);
             if (midi->duration) {
                 evt.type = 21; /* AL_CSP_NOTEOFF_EVT */
                 evt.msg.midi.status = chan | 0x80;
                 evt.msg.midi.byte1 = key;
                 evt.msg.midi.byte2 = 0;
                 deltaTime = seqp->uspt * midi->duration;
-                func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+                alEvtqPostEvent(&seqp->evtq, (ALEvent *)&evt, deltaTime);
             }
             break;
         }
@@ -662,14 +662,14 @@ void __CSPHandleMetaMsg(void *arg0, ObjectState10_2 *arg1) {
 void __CSPPostNextSeqEvent(void *arg0) {
     struct ALSeqPlayer *player = arg0;
     ALEvent sp10;
-    s32 sp20;
+    s32 result;
     ALCSeq_s *sequence;
 
     if (player->state == 1) {
         sequence = player->target;
-        if (sequence != 0 && (__alCSeqNextDelta(sequence, &sp20) & 0xFF)) {
+        if (sequence != 0 && (__alCSeqNextDelta(sequence, &result) & 0xFF)) {
             sp10.type = 0;
-            func_802B00D4_de(&player->evtq, &sp10, sp20 * player->uspt);
+            alEvtqPostEvent(&player->evtq, &sp10, result * player->uspt);
         }
     }
 }

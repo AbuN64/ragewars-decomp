@@ -130,7 +130,7 @@ struct FlareSource {
 };
 typedef struct FlareSourceList { FlareSource *first; } FlareSourceList;
 extern FlareSourceList D_8012D4E4;
-extern void OnScreen_SetupSpriteMode(s32);
+extern void Onscrn_SetupSpriteMode(s32);
 extern void Geometry_SetModePreset(s32);
 extern void Graphu64_ProjectPoint(void *, void *, CVector3 *);
 
@@ -152,7 +152,7 @@ void Sky_DrawObjectFlares(FlareActor *view) {
     f32 x, y;
     s32 mask = 8 << view->index;
 
-    OnScreen_SetupSpriteMode(100);
+    Onscrn_SetupSpriteMode(100);
     Geometry_SetModePreset(0x1A);
     g = *gfx;
     gDPSetTextureFilter(g++, G_TF_BILERP);

@@ -54,7 +54,7 @@ extern u32 D_800DE850;
 extern void *D_8014D468_de[];
 extern void Sched_InitializeSchedulerThread(Panel *, s32, s32, s32, u8);
 #include "sdk/SCHED/osscremoveclient.H"
-extern void func_802B6B80_de(s32 *);
+extern void guMtxIdent(s32 *);
 extern void Items_ResetGameOptions(void *);
 
 typedef Node_Pak_CountLiveNodes TimingQueue;

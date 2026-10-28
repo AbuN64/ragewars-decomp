@@ -70,7 +70,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void Menu_UpdateLevelSelectionAvailability(LevelSelectOwner *owner) {
+void Encoded_UpdateLevelSelectionAvailability(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {
@@ -84,16 +84,16 @@ void Menu_UpdateLevelSelectionAvailability(LevelSelectOwner *owner) {
 }
 #endif
 #if VERSION_DE
-INCLUDE_ASM("ovl_80400000", Menu_UpdateLevelSelectionAvailability);
+INCLUDE_ASM("ovl_80400000", Encoded_UpdateLevelSelectionAvailability);
 #endif
 #if VERSION_EU
-INCLUDE_ASM("ovl_80400000", Menu_UpdateLevelSelectionAvailability);
+INCLUDE_ASM("ovl_80400000", Encoded_UpdateLevelSelectionAvailability);
 #endif
 #if VERSION_EU_X
-INCLUDE_ASM("ovl_80400000", Menu_UpdateLevelSelectionAvailability);
+INCLUDE_ASM("ovl_80400000", Encoded_UpdateLevelSelectionAvailability);
 #endif
 #if VERSION_US
-INCLUDE_ASM("ovl_80400000", Menu_UpdateLevelSelectionAvailability);
+INCLUDE_ASM("ovl_80400000", Encoded_UpdateLevelSelectionAvailability);
 #endif
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
@@ -149,7 +149,7 @@ void Menu_HandleUnlockedLevelSelection(void) {
         "addiu     $v0, $zero, 0x1\n"
         "lui        $at, %hi(D_80142226)\n"
         "sb         $v0, %lo(D_80142226)($at)\n"
-        "jal        Ovlgame_SelectConfirmingController\n"
+        "jal        Confirming_SelectConfirmingController\n"
         "addu      $a0, $s1, $zero\n"
         "lui        $a0, %hi(D_8011FAC0)\n"
         "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
@@ -164,7 +164,7 @@ void Menu_HandleUnlockedLevelSelection(void) {
         "addu      $a1, $s0, $zero\n"
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
-        "jal        OvlScene_SetSelection\n"
+        "jal        Scene_SetSelection\n"
         "addiu     $a2, $zero, 0x2\n"
         "j          .Lauto_8043C984\n"
         "addu      $v0, $zero, $zero\n"
@@ -174,7 +174,7 @@ void Menu_HandleUnlockedLevelSelection(void) {
         "addiu      $v1, $v1, %lo(D_801462C8)\n"
         "addiu      $v0, $zero, 0x1\n"
         "sb         $zero, 0x1D($v1)\n"
-        "jal        Ovlgame_SelectConfirmingController\n"
+        "jal        Confirming_SelectConfirmingController\n"
         "sb        $v0, 0x1E($v1)\n"
         "lui        $a0, %hi(D_8011FAC0)\n"
         "addiu      $a0, $a0, %lo(D_8011FAC0)\n"

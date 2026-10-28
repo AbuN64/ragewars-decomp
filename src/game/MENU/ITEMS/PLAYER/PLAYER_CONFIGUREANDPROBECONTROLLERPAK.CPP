@@ -64,7 +64,7 @@ void Player_ConfigureAndProbeControllerPak(ArgRecAt1C *arg0) {
         var_s0 = Player_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
     Control_EnableControllerPak(var_s0);
-    Pak_ProbeStatus(var_s0);
+    Note_ProbeStatus(var_s0);
 }
 
                           /* const */

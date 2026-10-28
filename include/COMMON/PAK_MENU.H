@@ -23,5 +23,5 @@ typedef struct Shared_PakMenu {
     };
     void *unk24;
 } Shared_PakMenu;
-void Pak_MarkSaveNotes(Shared_PakMenu *menu);
+void Snapshot_MarkSaveNotes(Shared_PakMenu *menu);
 #endif

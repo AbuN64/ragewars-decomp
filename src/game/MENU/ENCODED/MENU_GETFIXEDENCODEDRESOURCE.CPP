@@ -47,7 +47,7 @@ struct GameSession;
 extern void SetN64_SelectSpawnAndStartSession(struct GameSession *menu, s32 target);
 extern s32 SetN64_IsModeThirteen(void);
 
-extern void OvlScene_SetSelection(void *menu, s32 target, s32 arg2);
+extern void Scene_SetSelection(void *menu, s32 target, s32 arg2);
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -152,18 +152,18 @@ s32 Menu_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
     if (Control_IsAButtonPressed(pad->buttons) != 0) {
         if (target == 8000) {
             D_801462C8.mode1E = 1;
-            Ovlgame_SelectConfirmingController(pad);
+            Confirming_SelectConfirmingController(pad);
             SetN64_SetTransitionTarget(&D_8011FAC0, 0x11);
             return 1;
         }
         if (SetN64_IsModeThirteen() != 0) {
-            OvlScene_SetSelection(&g_world, target, 2);
+            Scene_SetSelection(&g_world, target, 2);
             return 0;
         }
         rules = &D_801462C8;
         rules->local = 0;
         rules->mode1E = 1;
-        Ovlgame_SelectConfirmingController(pad);
+        Confirming_SelectConfirmingController(pad);
         SetN64_SelectSpawnAndStartSession(&D_8011FAC0, target);
         return 1;
     }

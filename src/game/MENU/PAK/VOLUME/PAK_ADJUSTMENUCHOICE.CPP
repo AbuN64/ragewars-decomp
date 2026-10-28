@@ -42,19 +42,19 @@ s32 Pak_UpdateMenuChoiceText(struct FieldRecAt14 *field) {
     return 0;
 }
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451D18,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451D18,
    and returns one. */
 
 s32 func_80446140_us_rev1(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_00451D18);
+    Menu_AllocateMenu(third, second, D_00451D18);
     return 1;
 }
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451E38,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451E38,
    and returns one. */
 
 s32 func_8044616C_us_rev1(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_00451E38);
+    Menu_AllocateMenu(third, second, D_00451E38);
     return 1;
 }
 #endif

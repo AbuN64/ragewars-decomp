@@ -84,7 +84,7 @@ void OnScreen_DrawStatusBars(void *playerHud) {
     OnScreen_LoadTextTileModeOne();
     OnScreen_SetTextScale(D_800C61F0_de, D_800C61F0_de);
     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    OnScreen_SetupSpriteMode(D_801462C8.hudFade);
+    Onscrn_SetupSpriteMode(D_801462C8.hudFade);
     if (((Hud *)playerHud)->bars[0].enabled != 0) {
         OnScreen_DrawStatusBar(playerHud, 1);
     }
@@ -296,11 +296,11 @@ void OnScreen_SetTextScale(float horizontalScale, float verticalScale) {
     D_801376F8.height = verticalScale;
 }
 
-void OnScreen_DrawTextWithShadow(s32 arg0, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 arg6, s32 language) {
+void OnScreen_DrawTextWithShadow(s32 arg0, f32 x, f32 arg2, f32 width, f32 height, s32 arg5, s32 alpha, s32 language) {
     if (arg5 != 0) {
-        OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 1, arg6, language);
+        OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 1, alpha, language);
     }
-    OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 0, arg6, language);
+    OnScreen_DrawTextGlyphs(arg0, x, arg2, width, height, 0, alpha, language);
 }
 
 #endif

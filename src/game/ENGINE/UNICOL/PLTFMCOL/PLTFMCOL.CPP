@@ -105,7 +105,7 @@ void CPlatformCollision_BuildWorldBounds(char *obj, CVector3 *corners, char *flo
     corners[7].y = bottom;
     corners[7].z = minZ;
     BuildPitchMatrix(rest, ((Dest *)anim)->restPitch);
-    sine = Math_Sinf(((LevelActor *)obj)->yaw * 0.5f);
+    sine = Gu_Sinf(((LevelActor *)obj)->yaw * 0.5f);
     yaw.x = 0.0f;
     yaw.y = sine;
     yaw.z = 0.0f;

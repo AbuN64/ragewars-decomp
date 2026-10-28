@@ -45,7 +45,7 @@ void Audio_BuildPerspectiveMatrix(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, 
     guMtxIdentF((u8 *)row);
     fovy *= D_800C78A0_de;
     fovy *= D_800C78A4_de;
-    cot = Math_Cosf(fovy) / Math_Sinf(fovy);
+    cot = Math_Cosf(fovy) / Gu_Sinf(fovy);
 
     mf[0][0] = cot / aspect;
     mf[1][1] = cot;
@@ -89,7 +89,7 @@ void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, 
     guMtxIdentF(mf);
     fovy *= D_800CCB08;
     fovy *= D_800C78BC_de;
-    cot = Math_Cosf(fovy) / Math_Sinf(fovy);
+    cot = Math_Cosf(fovy) / Gu_Sinf(fovy);
     mf[0][0] = cot / aspect;
     mf[1][1] = cot;
     mf[2][2] = (near + far) / (near - far);

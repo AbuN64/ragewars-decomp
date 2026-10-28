@@ -76,10 +76,10 @@ void Results_HideTrialCatalogueWidgets(void) {
     absentResource = -1;
     byteOffset = index;
 loop:
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->a & 0xFFFF), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, ((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->b & 0xFFFF), 0);
     if (((struct Pair *)((u8 *)g_arenaCompatibilityTable + (byteOffset)))->c.id != absentResource) {
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4690->root, (u16)*(u32 *)((u8 *)g_arenaCompatibilityTable + byteOffset + 8)), 0);
     }
     index += 1;
     byteOffset += 0xC;
@@ -133,7 +133,7 @@ void Results_RefreshTrialCatalogueWidgets(void) {
 found1:;
         if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
             widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].a);
-            Frontend_SetWidgetFlag08(widget, 1);
+            Widget_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
             resourceKey = g_arenaCompatibilityTable[entryIndex].b;
             for (searchIndex = 0; searchIndex < 36; searchIndex++) {
@@ -143,11 +143,11 @@ found1:;
 found2:;
             if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
                 widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].b);
-                Frontend_SetWidgetFlag08(widget, 1);
+                Widget_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
                 if (g_arenaCompatibilityTable[entryIndex].c.id != -1) {
                     widget = Node_FindWidgetByResourceId(D_800E4690->parent, (u16)g_arenaCompatibilityTable[entryIndex].c.id);
-                    Frontend_SetWidgetFlag08(widget, 1);
+                    Widget_SetWidgetFlag08(widget, 1);
                     widget->alpha = 20;
                 }
             }

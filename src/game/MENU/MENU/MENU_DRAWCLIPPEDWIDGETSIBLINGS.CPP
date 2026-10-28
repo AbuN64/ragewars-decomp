@@ -14,13 +14,13 @@ unsigned char D_auto_func_8040C6FC_de_padding_1726FC[4] = { 0xD0, 0x14, 0x9C, 0x
 
 /* 80406A88_8.CPP */
 #if defined(VERSION_EU_X)
-extern void Frontend_LoadLanguageStringsIfAny(int);
+extern void Node_LoadLanguageStringsIfAny(int);
 extern void *g_optionsPage;
 
 int Menu_DestroyEuxOptionsAndReloadLanguage(void *arg0) {
     Cache_FreeMemory(arg0);
     g_optionsPage = 0;
-    Frontend_LoadLanguageStringsIfAny(g_languageIndex);
+    Node_LoadLanguageStringsIfAny(g_languageIndex);
     return 0;
 }
 #endif

@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Note_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
+/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when Note_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
 
 
 
@@ -25,7 +25,7 @@ extern char D_0044FFA4[];
 extern unsigned char D_0044E4B0[];
 extern char D_0044EA2C[];
 extern char D_0044E9C0[];
-extern void Pak_ProbeStatus(s32 ch);
+extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
@@ -52,11 +52,11 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
     return;
   }
   menu->items[20].flags &= ~0x01000000;
-  Pak_ProbeStatus(menu->slot->unk4);
+  Note_ProbeStatus(menu->slot->unk4);
   new_var = 0;
   if (Note_GetStatus(ch) == new_var)
   {
-    Pak_MarkSaveNotes(menu);
+    Snapshot_MarkSaveNotes(menu);
     return;
   }
   D_80153784 = 1;

@@ -39,12 +39,12 @@ void Fx_DrawColoredRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera 
     while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8) {
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
-        Smp_BuildColoredRibbonVertices(actor, clock, vertices, &storage);
+        Linked_BuildColoredRibbonVertices(actor, clock, vertices, &storage);
         gSPVertex(g_displayListCursor++, vertices, count, 0);
         gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
         vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) return;
-        Smp_BuildColoredRibbonVertices(actor, next, vertices, &storage);
+        Linked_BuildColoredRibbonVertices(actor, next, vertices, &storage);
         gSPVertex(g_displayListCursor++, vertices, count, count);
         i = 0;
         while ((s32)i < edges) {

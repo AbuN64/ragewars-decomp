@@ -384,15 +384,15 @@ void Graphu64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, C
     }
 
     angle = Graphu64_ArcCos(dot);
-    sine = Math_Sinf(angle);
+    sine = Gu_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
         return;
     }
 
     inverseSine = *(&D_800C98C8 + 1) / sine;
-    scaleA = Math_Sinf((*(&D_800C98C8 + 1) - amount) * angle) * inverseSine;
-    scaleB = Math_Sinf(amount * angle) * inverseSine;
+    scaleA = Gu_Sinf((*(&D_800C98C8 + 1) - amount) * angle) * inverseSine;
+    scaleB = Gu_Sinf(amount * angle) * inverseSine;
     if (dot < negativeDot) {
         other = &negative;
     }
@@ -451,15 +451,15 @@ void Graphu64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
         }
     } else {
         angle = Graphu64_ArcCos(dot);
-        sine = Math_Sinf(angle);
+        sine = Gu_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
             return;
         }
 
         inverseSine = D_800C47E8_de / sine;
-        scaleA = Math_Sinf((D_800C47E8_de - amount) * angle) * inverseSine;
-        scaleB = Math_Sinf(amount * angle) * inverseSine;
+        scaleA = Gu_Sinf((D_800C47E8_de - amount) * angle) * inverseSine;
+        scaleB = Gu_Sinf(amount * angle) * inverseSine;
         if (dot < negativeDot) {
             other = &negative;
         }
@@ -690,7 +690,7 @@ pole:
             f32 scale;
 
             halfAngle = 0.0f;
-            scale = Math_Sinf(halfAngle);
+            scale = Gu_Sinf(halfAngle);
             result.z = normalized.z * scale;
             D_80115DEC = scale;
             result.x = halfAngle;
@@ -723,7 +723,7 @@ general:
             }
 
             halfAngle = angle * D_800C4834_de;
-            scale = Math_Sinf(halfAngle);
+            scale = Gu_Sinf(halfAngle);
             result.x = axis.x * scale;
             result.y = axis.y * scale;
             result.z = axis.z * scale;

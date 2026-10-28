@@ -42,7 +42,7 @@ extern void alSndpSetPan(char *, s32);
 extern void alSndpPlay(char *);
 
 void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
-    extern void func_802B2F00_de(char *, s32);
+    extern void alSndpSetSound(char *, s32);
     extern func_80203E78_S1 *D_800D0D78;
     s32 rate;
     char *channel;
@@ -59,7 +59,7 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             Audio_GetDecodeFramesRemaining();
             break;
         case 2:
-            func_802B2F00_de(channel, player->id);
+            alSndpSetSound(channel, player->id);
             if (alSndpGetState(channel) == 0) {
                 Audio_ClearDecodeFramesRemaining();
                 if (player->loop >= 0) {
@@ -81,7 +81,7 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             ((void **)D_80108064)[-1] = sequence;
             D_800D0D78->unk4 = Audio_InitDecodeStream(sequence, 0x5622, &rate);
             player->state = 3;
-            func_802B2F00_de(channel, player->id);
+            alSndpSetSound(channel, player->id);
             alSndpSetPitch(channel, rate * 4.5351473e-05f);
             alSndpSetVol(channel, (s16)(player->speed * player->tempoScale));
             alSndpSetPan(channel, player->priority);

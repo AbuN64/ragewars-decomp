@@ -72,7 +72,7 @@ s32 Snapshot_SelectNote(s32 *selection, Shared_PakMenu *menu) {
         status = Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code);
         if ((status == 0) && (exists == 0)) {
             menu->state = 0x14;
-            Pak_MarkSaveNotes(menu);
+            Snapshot_MarkSaveNotes(menu);
             return 0;
         }
         gameNote = pak_note_has_game_id(company,code);

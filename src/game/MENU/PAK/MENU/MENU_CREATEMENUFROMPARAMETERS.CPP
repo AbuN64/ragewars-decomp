@@ -7,7 +7,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "MENU/PAK/8043F69C_11.H"
 
-/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
+/* Allocates a block sized for the entries of the list the parameters point at through Cache_AllocateResource, builds it with Menu_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
 
 
 
@@ -98,7 +98,7 @@ void *Menu_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct Param
 
 extern u8 *func_8043F290(LayeredText *item);
 extern void Menu_DrawStyledMenuText(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
-int Pak_CountLineChars(LayeredText *item) {
+int Menu_CountLineChars(LayeredText *item) {
     u8 *p;
     int len;
 
@@ -163,7 +163,7 @@ func_8043F114_de
 #endif
 }
 
-PreviewWidget *Pak_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
+PreviewWidget *Menu_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
  StateRecAt47C *state=widget->state;
  PreviewWidget *model=Scene_FindActorDefinition(&g_world,selection,kind);
  if(!model){state->active=0;return 0;}

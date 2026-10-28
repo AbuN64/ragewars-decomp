@@ -37,7 +37,7 @@ s32 Menu_FormatLocalizedPakStatus(struct Field *entry) {
     }
     src = table[g_languageIndex];
     dst = entry->text[g_languageIndex];
-    dst += Pak_CountLineChars(entry) - 11;
+    dst += Menu_CountLineChars(entry) - 11;
     for (i = 0; i < 11; i++) {
         *dst++ = *src++;
     }

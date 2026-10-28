@@ -54,7 +54,7 @@ extern void Tsmos_ActivateControllerState(void);
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern void SmpButton_WrapButtonWidget(s32);
 extern void Focus_AdvanceActiveSlot(int *);
 extern s32 Control_IsControllerConnected(s32);
@@ -149,7 +149,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         SmpButton_WrapButtonWidget(WID_48);
         widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
         title->height = 0x78;
         break;
@@ -162,10 +162,10 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     default:
         widget = Node_FindWidgetByResourceId(menu, WID_48);
         Widget_SetWidgetFlag100(widget, 1);
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
         widget = Node_FindWidgetByResourceId(menu, WID_4A);
         Widget_SetWidgetFlag100(widget, 1);
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
         title->height = 0x68;
         break;

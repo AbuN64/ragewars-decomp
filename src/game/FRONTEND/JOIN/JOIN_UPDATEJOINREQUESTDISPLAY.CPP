@@ -34,7 +34,7 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
     screen = D_800E39C0;
     window = screen->roots[index];
     if (screen->count < index || D_80153F80[index].id < 0) {
-        Frontend_SetWidgetFlag08(window, 0);
+        Widget_SetWidgetFlag08(window, 0);
     } else {
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_ICON);
         widget = widgetObject;

@@ -108,7 +108,7 @@ void Link_CaptureVertexColors(ObjectRecAt8 *object, u8 *colors) {
 }
 
 /* Sums the size field of the record SetN64_GetPackSection returns for each entry of the D_8011FE88 table and returns the total.
-   Adapted from func_802AFFC0_de with the loop over the global entry table and the accumulated return changed. */
+   Adapted from alEvtqNew with the loop over the global entry table and the accumulated return changed. */
 
 
 

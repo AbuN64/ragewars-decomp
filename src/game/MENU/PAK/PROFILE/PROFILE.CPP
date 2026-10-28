@@ -26,7 +26,7 @@ extern char D_800ED414[];
 #else
 #endif
 
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 
 /* Draws an item's label at its position into the text layer D_8014561C through Menu_OpenDialog, using
@@ -173,12 +173,12 @@ s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
     s32 value = g_pakPreviewNumber;
     char *text = (char *)field->text[g_languageIndex];
 
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800ED414, value);
 #else
     s32 value = D_8014D488.values[2];
     char *text = (char *)*field->text;
 
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_pakFormatInt04, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatInt04, value);
 #endif
     return 0;
 }
@@ -800,7 +800,7 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
         strings = D_800E2FB4;
         field->text = strings;
         text = strings[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800ED41C, value + 1);
     }
     return 0;
 }
@@ -810,8 +810,8 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #else
 #endif
-/* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Pak_CountLineChars reports, returning zero.
-   Adapted from Pak_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
+/* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Menu_CountLineChars reports, returning zero.
+   Adapted from Timer_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
 
 
 extern u8 *D_800D394C[];
@@ -847,9 +847,9 @@ s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *h
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800ED41C, value + 1);
 #else
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
 #endif
     }
     return 0;

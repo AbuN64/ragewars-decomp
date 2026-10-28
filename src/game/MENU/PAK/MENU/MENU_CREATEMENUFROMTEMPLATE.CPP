@@ -69,7 +69,7 @@ f32 Menu_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
 
 /* Sums the glyph advances that Menu_GetGlyphAdvance returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
 
-f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
+f32 Menu_MeasureLine(u8 *p, f32 sx, f32 sy) {
     f32 total;
     u8 c;
 
@@ -121,7 +121,7 @@ s32 Menu_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 m
  /* extern */
  /* extern */
 
-s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
+s32 Menu_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
     s32 stepped;
     s32 current;
     s32 result;
@@ -157,7 +157,7 @@ void Menu_InitMenuMessageList(void *object) {
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char g_menuText[];
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
@@ -230,7 +230,7 @@ void *Menu_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsR
 
 /* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
 
-void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
+void *Menu_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -272,7 +272,7 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
 extern MessageList D_8014561C;
 extern s32 Menu_UpdateMenuEntries(CMenu *, MessageList *);
 
-void Pak_UpdateDialogList(MessageList *list) {
+void Menu_UpdateDialogList(MessageList *list) {
     CMenu *node;
     CMenu *next;
     StateRecAtBCV1 *state;
@@ -297,7 +297,7 @@ void Pak_UpdateDialogList(MessageList *list) {
     }
 }
 
-void Pak_DispatchMenuListCallback(struct OwnerRecAt4 *owner) {
+void Menu_DispatchMenuListCallback(struct OwnerRecAt4 *owner) {
     struct NodeRecAt1D0 *node = owner->head;
 
     while (node != 0) {

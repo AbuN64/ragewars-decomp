@@ -39,7 +39,7 @@ void Menu_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relati
 
 extern CMenuFontInfo D_800E1E24_de[];
 
-void OnScreen_SetupSpriteMode(s32);
+void Onscrn_SetupSpriteMode(s32);
 
 void OnScreen_SetupFillMode(void);
 
@@ -166,7 +166,7 @@ block_5:
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;
     }
-    OnScreen_DrawText(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
+    Onscrn_DrawText(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
 void Menu_DrawMenuOptionSprite(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {
@@ -206,7 +206,7 @@ void Menu_DrawMenuOptionSprite(MenuOption *arg0, MenuOptionBox *box, s32 dir, Me
     }
     if (D_800E1E20 != 3) {
         D_800E1E20 = 3;
-        OnScreen_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
+        Onscrn_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
     }
     OnScreen_DrawSpriteResource(arg0->resource, 0, (s16)box->left, (s16)box->top, box->scaleX, box->scaleY, 1);
 }

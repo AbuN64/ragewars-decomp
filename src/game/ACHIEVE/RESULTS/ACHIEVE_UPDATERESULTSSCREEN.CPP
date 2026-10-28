@@ -54,7 +54,7 @@ extern void Frontend_DrawMenuImage(struct MenuRules *);
 
 
 
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 
 
@@ -62,7 +62,7 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 
 
 /* Runs the screen D_800E5830 each frame until stage 1 of D_800E28E0: on its first frame it marks
-   the word at 0x90, passes 0x272 to Smos_SetFocusedElement, or 0x273 when func_8040EBD0_de
+   the word at 0x90, passes 0x272 to Menu_SetFocusedElement, or 0x273 when func_8040EBD0_de
    reports zero for item 0x273 of the window argument, also 0x272 when D_80146948 is clear, and calls Tsmos_ActivateControllerState; then, once the
    reply pair ending at D_80154024 is marked, it clears the mark and either hides the item at 0x24,
    clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the reply,
@@ -116,10 +116,10 @@ s32 Achieve_UpdateResultsScreen(void *window, void *unused1, s32 event) {
                 return 0;
             }
             Frontend_RequestScreenMode(0);
-            Frontend_SetWidgetFlag08(window, 1);
+            Widget_SetWidgetFlag08(window, 1);
             object = &D_80145088;
-            Items_ResetActorPools(object, 0);
-            Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
+            Pools_ResetActorPools(object, 0);
+            Player_InitializePlayerPool(object - 0x48, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
@@ -162,19 +162,19 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
     if (D_800E5830->started == 0) {
         D_800E5830->started = 1;
 #if defined(VERSION_DE)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
 #elif defined(VERSION_EU_X)
-        Smos_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
+        Menu_SetFocusedElement(Widget_ListHasFlag100(Node_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
         if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)
-            Smos_SetFocusedElement(0x26E);
+            Menu_SetFocusedElement(0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            Smos_SetFocusedElement(0x272);
+            Menu_SetFocusedElement(0x272);
 #elif defined(VERSION_EU_X)
-            Smos_SetFocusedElement(0x277);
+            Menu_SetFocusedElement(0x277);
 #endif
         }
         Tsmos_ActivateControllerState();
@@ -184,13 +184,13 @@ s32 Achieve_UpdateResultSelectionMessage(void *window) {
     if (marked == 1) {
         pair[0] = 0;
         if (pair[-1] != -1) {
-            Frontend_SetWidgetFlag08(D_800E5830->item, 0);
+            Widget_SetWidgetFlag08(D_800E5830->item, 0);
             D_800E5830->busy = 0;
             MarkMenuEventHandled();
             SmXlate_SwitchScreen(pair[-1]);
             return 0;
         }
-        Frontend_SetWidgetFlag08(D_800E5830->item, 1);
+        Widget_SetWidgetFlag08(D_800E5830->item, 1);
         D_800E5830->busy = marked;
     }
     return 0;

@@ -74,8 +74,8 @@ s32 Match_ClearGermanLoadingHints(void) {
    and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Menu_ReturnToPreviousScreen. Returns zero. */
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void Cache_SetResourceActivityState(s32);
@@ -88,8 +88,8 @@ s32 Match_HandleMatchMessage(void) {
         return 0;
     case MENU_804291A8_473:
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-            Items_ResetActorPools(&D_80145040.object, 0);
-            Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
+            Pools_ResetActorPools(&D_80145040.object, 0);
+            Player_InitializePlayerPool(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 Cache_SetResourceActivityState(1);

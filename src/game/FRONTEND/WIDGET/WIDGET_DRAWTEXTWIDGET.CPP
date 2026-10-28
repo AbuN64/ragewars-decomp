@@ -27,7 +27,7 @@ extern s32 Widget_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_t
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
    once through Node_GetBankTileTexture and Combine_BindImageTexture (stopping the page when it cannot load) and drawing
-   every batch's run of sprites on that page at depth 10 through Gfx_DrawRect; finally it restores
+   every batch's run of sprites on that page at depth 10 through Rect_DrawRect; finally it restores
    the clip rectangle and empties the queue. */
 
 
@@ -141,7 +141,7 @@ void Widget_FlushTextBatches(void) {
     last = 0;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
-        Gfx_ConfigurePrimitiveRenderFlags(0x53333);
+        Combine_ConfigurePrimitiveRenderFlags(0x53333);
         D_800E2AB8 = 1;
     }
     N64Eng_GetClipBounds(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
@@ -174,7 +174,7 @@ void Widget_FlushTextBatches(void) {
                     Combine_BindImageTexture(texture);
                     loaded = 1;
                 }
-                Gfx_DrawRect(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
+                Rect_DrawRect(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
                 batch->cursor++;
                 batch->count--;
             }
@@ -213,11 +213,11 @@ void Widget_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args)
     color = (args.alpha << 24) | 0xFFFFFF;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
-        Gfx_ConfigurePrimitiveRenderFlags(0x53333);
+        Combine_ConfigurePrimitiveRenderFlags(0x53333);
         D_800E2AB8 = 1;
     }
     Combine_BindImageTexture(texture);
-    Gfx_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
+    Rect_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
     if (clipped) {
         N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     }
@@ -252,7 +252,7 @@ void Widget_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     }
     if (D_800DEA6C != 0x53533 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53533;
-        Gfx_ConfigurePrimitiveRenderFlags(0x53533);
+        Combine_ConfigurePrimitiveRenderFlags(0x53533);
         D_800E2AB8 = 1;
     }
     Combine_BindImageTexture(0);
@@ -280,7 +280,7 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     clipped = 0;
     if (!resolved) {
         if (widget->stringId == -1) return;
-        resolved = (u8 *)Frontend_GetStringByIndex(widget->stringId);
+        resolved = (u8 *)Node_GetStringByIndex(widget->stringId);
     }
     text=resolved;
     if (!Widget_ComputeWidgetBounds(&area, &box, widget, &args)) return;

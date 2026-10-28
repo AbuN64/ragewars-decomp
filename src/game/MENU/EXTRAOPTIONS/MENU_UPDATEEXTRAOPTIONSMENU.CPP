@@ -14,7 +14,7 @@ extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
    the word at offset 0x34. */
 
 
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 /* Advances the animation frame countdown and wraps exhausted frames. */
 
@@ -44,13 +44,13 @@ extern s32 SmpSlider_GetTransitionMode(s32);
 extern void SmXlate_SwitchScreen(s32);
 
 void Menu_ShowExtraOptionsPanel(void) {
-    Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
+    Widget_SetWidgetFlag08(D_800E4400->pad, 0);
 #if defined(VERSION_DE)
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3A5), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AB), 1);
 #elif defined(VERSION_EU_X)
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, 0x3AF), 1);
 #endif
     D_800E4400->open = 1;
 }

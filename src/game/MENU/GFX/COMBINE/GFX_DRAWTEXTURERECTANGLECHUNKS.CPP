@@ -69,7 +69,7 @@ static __inline__ void rectangleSync(void) {
 
 static inline f32 scaleClip(f32 delta, f32 ratio) { return ratio * delta; }
 
-s32 Gfx_LoadPalette(s32 bits, void *palette) {
+s32 Combine_LoadPalette(s32 bits, void *palette) {
     s32 result;
 
     result = 1;
@@ -113,7 +113,7 @@ void Combine_BindImageTexture(Texture *arg0) {
  D_800DF260_de=0;
  if(flags>0 && size>2048) D_800DF260_de=1;
  if(flags==0 && size>4096) D_800DF260_de=1;
- paletteSame=Gfx_LoadPalette(D_800DF268_de,D_800DF254->palette);
+ paletteSame=Combine_LoadPalette(D_800DF268_de,D_800DF254->palette);
  if(D_800DF260_de==0) {
   if(D_800DF268_de==4) {
    gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
@@ -148,7 +148,7 @@ void Combine_BindImageTexture(Texture *arg0) {
  }
 }
 
-void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
+void Combine_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
     s32 sp20;
     s32 sp24;
     s32 sp28;
@@ -197,8 +197,8 @@ void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     if ((D_80153F60.z == 0) || (D_80153F60.y == 0)) {
         D_800DF290 = 0;
         D_800E32E4 = 0;
-        Gfx_SetRenderMode(0xC);
-        Gfx_SetCombineMode(5);
+        Combine_SetRenderMode(0xC);
+        Combine_SetCombineMode(5);
         if (D_800DF274 != 7) {
             D_800DF274 = 7;
             rectangleSync();
@@ -212,12 +212,12 @@ void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
             
         }
         if (D_80153F60.x == 0) {
-            Gfx_SetPrimitiveVertexMode(9);
-            Gfx_DrawClippedGradientQuad(temp_fs3, temp_fs3f, var_fs2f, var_fs2, (u32) arg9, (u32) arg9, (u32) arg9, (u32) arg9);
+            Combine_SetPrimitiveVertexMode(9);
+            Combine_DrawClippedGradientQuad(temp_fs3, temp_fs3f, var_fs2f, var_fs2, (u32) arg9, (u32) arg9, (u32) arg9, (u32) arg9);
         }
     } else if (D_80153F60.x == 0) {
         D_800E32E4 = 0;
-        Gfx_SetRenderMode(0xC);
+        Combine_SetRenderMode(0xC);
         defaultMode = 0xD;
         var_a0 = defaultMode;
         if (D_80153F68 == 0) {
@@ -245,7 +245,7 @@ void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
         if (D_800DF26C_de != 0) {
             mode = 1;
         }
-        Gfx_SetCombineMode(mode);
+        Combine_SetCombineMode(mode);
         var_s0 = (s32) temp_fs3;
         var_s1 = (s32) temp_fs3f;
         D_800DF290 = 0x13;
@@ -301,7 +301,7 @@ void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
         } else {
 block_51:
             if ((var_fs1 < var_fs0) || (var_fs1f < var_fs0f) || (D_800DF260_de != 0)) {
-                Gfx_DrawTextureRectangleChunks(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
+                Combine_DrawTextureRectangleChunks(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             } else {
                 Rect_EmitTextureRect(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             }
@@ -309,7 +309,7 @@ block_51:
     }
 }
 
-void Gfx_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f32 v1) {
+void Combine_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f32 v1) {
     s32 scale;
     s32 dsdx;
     s32 dtdy;

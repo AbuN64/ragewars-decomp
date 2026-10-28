@@ -41,7 +41,7 @@ extern u8 D_801462DE;
 extern s32 D_800E28D0;
 
 
-void OnScreen_SetupSpriteMode(u8 arg0);
+void Onscrn_SetupSpriteMode(u8 arg0);
 
 extern const struct D_800C7470_Pair D_800C2D40_de;
 
@@ -133,7 +133,7 @@ void func_8022C1E8_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    OnScreen_SetupSpriteMode(D_801462DE);
+    Onscrn_SetupSpriteMode(D_801462DE);
 
     x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;
@@ -165,7 +165,7 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
   f32 by;
   f32 screenX;
   f32 screenY;
-  OnScreen_SetupSpriteMode(D_801462DE);
+  Onscrn_SetupSpriteMode(D_801462DE);
   x = viewport->x;
   ax = x * D_800C2D30_de;
   y = viewport->y;
@@ -187,7 +187,7 @@ void func_8022C37C_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    OnScreen_SetupSpriteMode(D_801462DE);
+    Onscrn_SetupSpriteMode(D_801462DE);
 
     x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;

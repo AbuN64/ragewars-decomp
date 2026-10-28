@@ -17,20 +17,20 @@ extern u8 D_auto_800C9233[][4];
 extern s32 Control_IsAButtonPressed(struct ControllerProfile *object);
 extern void Player_StartPlayerAnimation(void *rec, s32 choice);
 extern void SoundElement_PlayFlatSound(s32 id);
-extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
-extern s32 Pak_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
-extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
-/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Pak_StepValue moves the choice and the remapping tables D_auto_800C9237 (Control_IsLeftPressed) and D_auto_800C9233 (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
+extern void Menu_AllocateMenu(s32 a, void *obj, void *res);
+extern s32 Menu_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
+extern void Menu_SelectPreviewModel(s32 a, s32 b, s32 c);
+/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Menu_StepValue moves the choice and the remapping tables D_auto_800C9237 (Control_IsLeftPressed) and D_auto_800C9233 (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
 s32 Items_HandleCharacterPreviewSelectionGerman(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
     if (Control_IsAButtonPressed(arg1->player) != 0) {
         Player_StartPlayerAnimation(rec, slot->choice);
         SoundElement_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
-        Pak_AllocateMenu(arg2, arg1, D_0044FA6C);
+        Menu_AllocateMenu(arg2, arg1, D_0044FA6C);
         return 1;
     }
-    slot->choice = Pak_StepValue(arg1, slot->choice, 1, 0, 0x12, 1);
+    slot->choice = Menu_StepValue(arg1, slot->choice, 1, 0, 0x12, 1);
     if (Control_IsLeftPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9237[slot->choice][0];
     }
@@ -38,7 +38,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 arg0, Func_8043DB50_Obj *arg
         slot->choice = D_auto_800C9233[slot->choice][0];
     }
     Player_StartPlayerAnimation(rec, slot->choice);
-    Pak_SelectPreviewModel(arg0, 0xB, slot->choice);
+    Menu_SelectPreviewModel(arg0, 0xB, slot->choice);
     return 0;
 }
 #endif

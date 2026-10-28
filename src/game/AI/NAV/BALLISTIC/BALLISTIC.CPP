@@ -334,7 +334,7 @@ s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
     delta.x *= scale * Math_Cosf(actor->field278);
     delta.z = (actor->field260 - actor->instance->header.spatial.position.z) * invDuration;
     delta.z *= scale * Math_Cosf(actor->field278);
-    delta.y = scale * Math_Sinf(actor->field278);
+    delta.y = scale * Gu_Sinf(actor->field278);
 
     acceleration.x = 0.0f;
     acceleration.y = lateral;

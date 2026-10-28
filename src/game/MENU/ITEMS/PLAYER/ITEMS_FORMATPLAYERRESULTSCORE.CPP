@@ -15,12 +15,12 @@
 extern Shared_MenuData D_80145040;
 extern s16 g_playerResultScoreFields[];
 
-s32 Items_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
+s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
     Shared_MenuData *players = &D_80145040;
     s32 player = Player_GetPlayerIndex(players, holder->locked);
     s32 value = g_playerResultScoreFields[player * 75];
     char *text = (char *)field->text[players->game.language];
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
     return 0;
 }
 #endif
@@ -32,7 +32,7 @@ s32 Items_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) 
 #endif
 /* Formats the halfword g_playerResultScoreFieldsDe holds for the player func_8022A5A0_de identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
-   format D_800DE700 four bytes before the length Pak_CountLineChars reports. Returns zero. */
+   format D_800DE700 four bytes before the length Menu_CountLineChars reports. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct LocalizedInputState D_80145040;
@@ -42,10 +42,10 @@ extern char D_80145040[];
 
 extern char g_fmtDec4Pad[];
 extern s32 Player_GetPlayerIndex(void *, unsigned int);
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 Items_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
+s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;
@@ -64,9 +64,9 @@ s32 Items_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) 
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
 #else
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

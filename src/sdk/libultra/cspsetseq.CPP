@@ -10,14 +10,14 @@ struct SeqpSetSeqEvent {
     s32 _padC;
 };
 
-extern void func_802B00D4_de(void *, s16 *, s32);
+extern void alEvtqPostEvent(void *, s16 *, s32);
 
 void alCSPSetSeq(s32 player, ALCSeq_s *sequence) {
     struct SeqpSetSeqEvent sp10;
 
     sp10.sequence = sequence;
     sp10.count = 0xD;
-    func_802B00D4_de(player + 0x48, &sp10, 0);
+    alEvtqPostEvent(player + 0x48, &sp10, 0);
 }
 
 
@@ -26,7 +26,7 @@ void alCSPSetVol(s32 player, s16 arg1) {
 
     volumeEvent.value = arg1;
     volumeEvent.count = 0xA;
-    func_802B00D4_de(player + 0x48, &volumeEvent, 0);
+    alEvtqPostEvent(player + 0x48, &volumeEvent, 0);
 }
 
 
@@ -34,5 +34,5 @@ void alCSPStop(s32 player) {
     s16 stopEvent[8];
 
     stopEvent[0] = 0x11;
-    func_802B00D4_de(player + 0x48, stopEvent, 0);
+    alEvtqPostEvent(player + 0x48, stopEvent, 0);
 }

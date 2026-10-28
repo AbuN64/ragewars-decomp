@@ -11,12 +11,12 @@
 
 int Cinema_IsSequenceInWindow(void);
 void Cache_SetResourceActivityState(unsigned int);
-void Smos_SetFocusedElement(s32);
+void Menu_SetFocusedElement(s32);
 void Tsmos_ActivateControllerState(void);
 void SmpFlicker_StartFlicker(void *, int);
 s32 Frontend_GetMenuImageState(Shared_OptionsScreen *);
-void Ovlgame_InitializePlayerPool(void *, s32, s32);
-void Items_ResetActorPools(void *, s32);
+void Player_InitializePlayerPool(void *, s32, s32);
+void Pools_ResetActorPools(void *, s32);
 void Scene_LoadLevelResources(void *, s32, s32);
 void SmXlate_SwitchScreen(s32);
 

@@ -41,7 +41,7 @@ extern char *D_800D7E14[];
 #endif
 
 /* Formats the word at offset 0x1C of the structure D_800E28BC points to, shifted down eight bits,
-   into a field's text with the format D_800E0DA4, three bytes before the length Pak_CountLineChars
+   into a field's text with the format D_800E0DA4, three bytes before the length Menu_CountLineChars
    reports, and returns zero. */
 
 
@@ -50,7 +50,7 @@ extern char *D_800D7E14[];
 
 
 
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 
 /* Selects a menu field's label table from the connection mode and the option index. */
@@ -138,6 +138,6 @@ s32 Timer_FormatPreviewPageCount(struct Field *field) {
         *field->text;
 #endif
 
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 3), g_pakFormatInt3, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 3), g_pakFormatInt3, value);
     return 0;
 }

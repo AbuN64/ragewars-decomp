@@ -19,7 +19,7 @@ extern char g_gamePersistentData[];
 extern char D_800F41F0[];
 extern int Control_IsSnapshotActive(void);
 extern void *func_802BD3A0_de(void *, const void *, int);
-extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
+extern void Scene_SetSelection(ItemsPreviewStateB *,int,int);
 void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
@@ -32,13 +32,13 @@ void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
+extern void Scene_SetSelection(ItemsPreviewStateB *,int,int);
 
 
 void Scene_ChangePreviewSelection(ItemsPreviewStateB *state,int selection) {
  if(selection!=state->selection) {
   state->changed=0;
-  OvlScene_SetSelection(state,~selection,0);
+  Scene_SetSelection(state,~selection,0);
  }
 }
 

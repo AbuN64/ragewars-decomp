@@ -42,7 +42,7 @@ void Gobjinst_BuildActorTransform(void *levelActor) {
 
     angle = ((struct LevelActor *)(levelActor))->yaw;
     scale = (0.5f);
-    sine = Math_Sinf(angle * scale);
+    sine = Gu_Sinf(angle * scale);
     trig.x = 0.0f;
     trig.y = sine;
     trig.z = 0.0f;

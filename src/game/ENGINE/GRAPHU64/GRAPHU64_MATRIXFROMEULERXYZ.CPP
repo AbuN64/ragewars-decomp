@@ -329,7 +329,7 @@ void Graphu64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f3
     f32 cosine;
     f32 ab, bc, ca, t, one;
 
-    sine = Math_Sinf(Theta);
+    sine = Gu_Sinf(Theta);
     cosine = Math_Cosf(Theta);
 
     one = D_800C48D8_de;
@@ -364,12 +364,12 @@ void Graphu64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f3
 void Graphu64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 {
   f32 zero;
-  f32 ax = Math_Sinf(x);
+  f32 ax = Gu_Sinf(x);
   f32 bx = Math_Cosf(x);
-  f32 ay = Math_Sinf(y);
+  f32 ay = Gu_Sinf(y);
   f32 by = Math_Cosf(y);
   int new_var;
-  f32 az = Math_Sinf(z);
+  f32 az = Gu_Sinf(z);
   f32 bz = Math_Cosf(z);
   new_var = 0;
   m[new_var] = by * bz;

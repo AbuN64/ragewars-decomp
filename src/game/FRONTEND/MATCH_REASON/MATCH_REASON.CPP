@@ -23,7 +23,7 @@
 
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 /* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x11. */
 #if defined(VERSION_EU)
@@ -145,16 +145,16 @@ extern void Frontend_DrawMenuImage(void *);
 
 
 
-extern void Items_ResetActorPools(void *, s32);
+extern void Pools_ResetActorPools(void *, s32);
 
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern void MarkMenuEventHandled();
 
 /* Runs one frame of the screen D_800E53C0's confirmation prompt while D_800E28E0 is not positive:
-   on the first frame it marks the prompt open at 0x320 and asks Smos_SetFocusedElement for message 0x238,
+   on the first frame it marks the prompt open at 0x320 and asks Menu_SetFocusedElement for message 0x238,
    or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls Tsmos_ActivateControllerState. Once
    the choice word D_80154020[1] reads one it clears it and either enables the prompt's object at
    0xE4 and records the choice at 0x328, when the pending action D_80154020[0] is -1, or disables
@@ -170,7 +170,7 @@ extern s32 D_80154020[];
 
 extern s32 Widget_ListHasFlag100(void *);
 
-extern void Smos_SetFocusedElement(s32);
+extern void Menu_SetFocusedElement(s32);
 
 extern void Tsmos_ActivateControllerState();
 
@@ -353,7 +353,7 @@ void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
         break;
     }
     item = Node_FindWidgetByResourceId(parent, id);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     rank = record->rank;
     switch (rank) {
@@ -373,7 +373,7 @@ void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
         frame = 0x60;
         break;
     default:
-        Frontend_SetWidgetFlag08(item, 0);
+        Widget_SetWidgetFlag08(item, 0);
         frame = 0x60;
         break;
     }
@@ -395,7 +395,7 @@ void Frontend_HideResultBadgeGroup(s32 arg0) {
         case 3: var_a1=ITEM3; break;
         default: var_a1=ITEM0; break;
         }
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(root, var_a1), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(root, var_a1), 0);
         var_s0 += 1;
     } while (var_s0 < 4);
 }
@@ -426,14 +426,14 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
                 return 0;
             }
             Frontend_RequestScreenMode(0);
-            Frontend_SetWidgetFlag08(window, 1);
+            Widget_SetWidgetFlag08(window, 1);
             object = &D_80145088;
-            Items_ResetActorPools(object, 0);
-            Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
+            Pools_ResetActorPools(object, 0);
+            Player_InitializePlayerPool(object - 0x48, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
-            Frontend_SetWidgetFlag08(window, 0);
+            Widget_SetWidgetFlag08(window, 0);
             MarkMenuEventHandled();
             if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
@@ -470,7 +470,7 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
             } else {
                 message = FALLBACK_MESSAGE;
             }
-            Smos_SetFocusedElement(message);
+            Menu_SetFocusedElement(message);
             Tsmos_ActivateControllerState();
         }
         choice = &D_80154020[1];
@@ -478,13 +478,13 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
         if (taken == 1) {
             choice[0] = 0;
             if (choice[-1] != -1) {
-                Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 0);
+                Widget_SetWidgetFlag08(D_800E53C0->buttonAddress, 0);
                 D_800E53C0->dirty = 0;
                 MarkMenuEventHandled();
                 SmXlate_SwitchScreen(choice[-1]);
                 return 0;
             }
-            Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 1);
+            Widget_SetWidgetFlag08(D_800E53C0->buttonAddress, 1);
             D_800E53C0->dirty = taken;
         }
     }

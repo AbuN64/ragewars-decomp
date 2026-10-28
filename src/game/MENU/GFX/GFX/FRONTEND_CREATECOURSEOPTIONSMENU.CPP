@@ -30,7 +30,7 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     item = Node_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 22) {
-        Frontend_SetWidgetFlag08(item, 0);
+        Widget_SetWidgetFlag08(item, 0);
     }
 
     D_800E39C0->timer = 0;
@@ -46,13 +46,13 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
         item = Node_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
-        Frontend_SetWidgetFlag08(item, 0);
+        Widget_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
     item = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     return 0;
 }
 #endif

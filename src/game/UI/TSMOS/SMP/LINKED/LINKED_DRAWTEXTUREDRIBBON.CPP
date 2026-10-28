@@ -153,7 +153,7 @@ void *Linked_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
     return temp_s2;
 }
 
-void Smp_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
+void Linked_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;

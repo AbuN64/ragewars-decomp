@@ -236,6 +236,6 @@ struct BatchRec {
     s32 count;
 };
 
-char *Frontend_GetStringByIndex(s32);
+char *Node_GetStringByIndex(s32);
 s32 D_0040F570(char *, char *);
 #endif

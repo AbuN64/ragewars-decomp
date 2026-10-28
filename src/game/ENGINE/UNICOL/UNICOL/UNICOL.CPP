@@ -148,7 +148,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         } else {
             frame.sp2C8 = 0.0f;
         }
-        headingSine = Math_Sinf(frame.sp2C8);
+        headingSine = Gu_Sinf(frame.sp2C8);
         headingCosine = Math_Cosf(frame.sp2C8);
         frame.sp54 &= ~0x2000;
         settingsFlags = *motionSettings;

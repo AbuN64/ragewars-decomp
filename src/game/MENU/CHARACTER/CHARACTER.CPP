@@ -56,7 +56,7 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
     for (j = 0; j < 3; j++)
     {
       Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -78,9 +78,9 @@ s32 CCharacterSelection_OpenCharacterSelectionScreen(s32 screen)
   D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Node_FindWidgetByResourceId((void *) screen, 0x74);
   D_800E42D0->promptItem = item;
-  Frontend_SetWidgetFlag08(item, 0);
+  Widget_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = Node_FindWidgetByResourceId((void *) screen, 0x7B);
-  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+  Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
@@ -149,7 +149,7 @@ s32 func_8041F2A0_us(void *screen)
     for (j = 0; j < 3; j++)
     {
       Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -171,9 +171,9 @@ s32 func_8041F2A0_us(void *screen)
   D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Node_FindWidgetByResourceId(screen, 0x74);
   D_800E42D0->promptItem = item;
-  Frontend_SetWidgetFlag08(item, 0);
+  Widget_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = Node_FindWidgetByResourceId(screen, 0x7b);
-  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+  Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
@@ -242,7 +242,7 @@ s32 func_8041F6E0_eu(void *screen)
     for (j = 0; j < 3; j++)
     {
       Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -264,9 +264,9 @@ s32 func_8041F6E0_eu(void *screen)
   D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Node_FindWidgetByResourceId(screen, 0x74);
   D_800E42D0->promptItem = item;
-  Frontend_SetWidgetFlag08(item, 0);
+  Widget_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = Node_FindWidgetByResourceId(screen, 0x7b);
-  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+  Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
@@ -335,7 +335,7 @@ s32 func_8041F6E0_eu_x(void *screen)
     for (j = 0; j < 3; j++)
     {
       Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -357,9 +357,9 @@ s32 func_8041F6E0_eu_x(void *screen)
   D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x78, 0xFF);
   item = Node_FindWidgetByResourceId(screen, 0x78);
   D_800E42D0->promptItem = item;
-  Frontend_SetWidgetFlag08(item, 0);
+  Widget_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = Node_FindWidgetByResourceId(screen, 0x7f);
-  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+  Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
@@ -428,7 +428,7 @@ s32 func_8041F230_de(void *screen)
     for (j = 0; j < 3; j++)
     {
       Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -450,9 +450,9 @@ s32 func_8041F230_de(void *screen)
   D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x72, 0xFF);
   item = Node_FindWidgetByResourceId(screen, 0x72);
   D_800E42D0->promptItem = item;
-  Frontend_SetWidgetFlag08(item, 0);
+  Widget_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = Node_FindWidgetByResourceId(screen, 0x79);
-  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+  Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
@@ -508,7 +508,7 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
         D_800E42D0->timer = enterTicksRemaining;
         if (enterTicksRemaining <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 1);
+            Widget_SetWidgetFlag08(D_800E42D0->promptItem, 1);
             SmpFlicker_StartFlicker(D_800E42D0->prompt, 4);
             D_800E42D0->phase = 4;
             D_800E42D0->timer = 4;
@@ -538,15 +538,15 @@ s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapse
             SmpFlicker_RestoreFlickerValue(D_800E42D0->prompt);
             D_800E42D0->phase = 6;
             D_800E42D0->timer = 4;
-            Frontend_SetWidgetFlag08(D_800E42D0->pulse, 1);
+            Widget_SetWidgetFlag08(D_800E42D0->pulse, 1);
         }
         break;
     case 5:
         SoundElement_PlayFlatSound(0xE78);
         D_800E42D0->phase = 2;
         D_800E42D0->timer = 4;
-        Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 0);
-        Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
+        Widget_SetWidgetFlag08(D_800E42D0->promptItem, 0);
+        Widget_SetWidgetFlag08(D_800E42D0->pulse, 0);
         break;
     case 7: break;
     case 6:

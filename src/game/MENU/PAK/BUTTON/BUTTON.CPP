@@ -37,7 +37,7 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     else {
         item->text = D_800E22F4;
         text = item->text[game->language];
-        length = Pak_CountLineChars(item);
+        length = Menu_CountLineChars(item);
         Defs_FormatIntegerValue((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;
@@ -53,7 +53,7 @@ extern u8 *D_800D3628;
 #endif
 extern s32 func_8025477C_de(void);
 extern void Cache_SetResourceActivityState(u32);
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     u32 code;
@@ -76,7 +76,7 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
         item->text = &D_800D3628;
         text = *item->text;
 #endif
-        length = Pak_CountLineChars(item);
+        length = Menu_CountLineChars(item);
         Defs_FormatIntegerValue((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;

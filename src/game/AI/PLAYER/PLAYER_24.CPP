@@ -51,7 +51,7 @@ void Player_UpdateSwimmingState(SharedPlayer *player, SharedPlayer *body) {
         player->turnAccumulator = 0.0f;
         if (InstHdr_GetActorMotionState(body) == 0) {
             detachDistance = g_playerSwimConstants;
-            player->views5E8.view6E8_79.unk6E8.x -= Math_Sinf(body->views1C.view6C_5.heading) * detachDistance;
+            player->views5E8.view6E8_79.unk6E8.x -= Gu_Sinf(body->views1C.view6C_5.heading) * detachDistance;
             player->views5E8.view6E8_79.unk6E8.z -= Math_Cosf(body->views1C.view6C_5.heading) * detachDistance;
         }
         Player_SetPlayerState(player, body, 5);
@@ -88,7 +88,7 @@ block_25:
         }
         movementHeading = body->views1C.view6C_5.heading;
         jumpHeadingOffset = D_800C2A94_de;
-        motionSine = Math_Sinf(movementHeading + jumpHeadingOffset);
+        motionSine = Gu_Sinf(movementHeading + jumpHeadingOffset);
         motionIntermediate = Math_Cosf(body->views1C.view6C_5.heading + jumpHeadingOffset);
         body->views1C.view1C_0.localDisplacement.x += motionSine * D_800C2A98_de;
         body->views1C.view1C_0.localDisplacement.z += motionIntermediate * D_800C2A98_de;
@@ -102,7 +102,7 @@ block_25:
         player->turnAccumulator = 0.0f;
         return;
     }
-    strideRoll = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * Math_Sinf(player->views5E8.view658_23.stride * D_800C2AAC_de);
+    strideRoll = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * Gu_Sinf(player->views5E8.view658_23.stride * D_800C2AAC_de);
     rollInput = player->views5E8.view6A8_44.lift;
     if (rollInput > 0.0f || rollInput < 0.0f)
         Graphu64_EaseValueToward(&player->views5E8.view72C_75.unk72C, strideRoll, 0.25f);
@@ -166,7 +166,7 @@ block_25:
     eyez = &player->views5E8.view6E8_79.unk6E8.z;
     movementHeading = body->views1C.view6C_5.heading;
     strafeHeadingOffset = D_800C2AD8_de;
-    motionSine = Math_Sinf(movementHeading - strafeHeadingOffset);
+    motionSine = Gu_Sinf(movementHeading - strafeHeadingOffset);
     motionIntermediate = Math_Cosf(body->views1C.view6C_5.heading - strafeHeadingOffset);
     {
     f32 horizontal = *eyex + motionSine * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;

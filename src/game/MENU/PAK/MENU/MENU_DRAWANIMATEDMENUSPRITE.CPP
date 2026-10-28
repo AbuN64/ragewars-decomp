@@ -40,7 +40,7 @@ static inline void remove_item(struct ListPakClearMenuItemList *list, struct Ite
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Hands Pak_MeasureLine a target and the scale twice: the target is what func_8043F290 returns for
+/* Hands Menu_MeasureLine a target and the scale twice: the target is what func_8043F290 returns for
    an object of kind 5, otherwise the word the pointer at offset 0x14 addresses. */
 
 
@@ -50,7 +50,7 @@ extern void * func_8043F290(struct ObjectRecAt14 *);
 extern void * func_8043F114_de(struct ObjectRecAt14 *);
 #endif
 
-extern void Pak_MeasureLine(void *, f32, f32);
+extern void Menu_MeasureLine(void *, f32, f32);
 
 /* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through OnScreen_SetupTextRendering and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through OnScreen_DrawSpriteResource. Adapted from func_8022C2B4_de. */
 
@@ -100,7 +100,7 @@ func_8043F114_de
         target = *object->target;
 #endif
     }
-    Pak_MeasureLine(target, scale, scale);
+    Menu_MeasureLine(target, scale, scale);
 }
 
 /* Clears the two words at offsets 0x1C8 and 0x1CC of an object; func_80442B40_de, which follows it,

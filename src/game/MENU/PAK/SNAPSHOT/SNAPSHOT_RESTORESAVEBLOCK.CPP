@@ -112,7 +112,7 @@ s32 Snapshot_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
 /* Writes the 11-character rank title for the score D_8014D48C into the end of the item's text:
    the title comes from the band the score falls in (below 50, 150, 300, 500, 800, 1300, 2000,
    3000, 4500, 6500 and 9999 and above), and the text position is the text length from
-   Pak_CountLineChars minus 11; returns 0. */
+   Menu_CountLineChars minus 11; returns 0. */
 #include "TYPES.H"
 
 
@@ -143,7 +143,7 @@ extern u16 D_8014D48C;
 
 
 
-extern s32 Pak_CountLineChars(void);
+extern s32 Menu_CountLineChars(void);
 
 s32 Snapshot_UpdateScoreTitle(PakNoteTextEntry *item) {
     char *title;
@@ -179,7 +179,7 @@ s32 Snapshot_UpdateScoreTitle(PakNoteTextEntry *item) {
         title = D_800D2448;
     }
     dest = *item->text;
-    dest += Pak_CountLineChars() - 11;
+    dest += Menu_CountLineChars() - 11;
     if (title != 0) {
         for (i = 0; i < 11; i++) {
             *dest++ = *title++;

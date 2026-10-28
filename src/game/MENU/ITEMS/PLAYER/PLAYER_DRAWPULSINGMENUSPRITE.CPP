@@ -80,7 +80,7 @@ void Player_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 ar
     } else {
         amount = (s32) ((f32) phase * arg3->alpha * arg3->fade);
     }
-    OnScreen_SetupSpriteMode(amount);
+    Onscrn_SetupSpriteMode(amount);
     drop = 0x50;
     half = arg1->width >> 1;
     if (D_800E28D8 == 0) {

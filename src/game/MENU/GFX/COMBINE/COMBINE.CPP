@@ -28,7 +28,7 @@ static inline void sync(void) {
     }
 }
 
-void Gfx_ConfigurePrimitiveRenderFlags(s32 flags) {
+void Combine_ConfigurePrimitiveRenderFlags(s32 flags) {
     s32 plain;
     RecGobjinstSampleBoneTranslation groups;
     s32 mode;

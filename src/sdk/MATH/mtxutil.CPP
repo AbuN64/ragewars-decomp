@@ -3,7 +3,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/EXTERNS_16.H"
 
-void func_802B6B80_de(s32 *fixedMatrix) {
+void guMtxIdent(s32 *fixedMatrix) {
     f32 matrix[16];
     u8 *diagBase;
     u8 *diag;

@@ -53,7 +53,7 @@ void func_804399D0(MenuModelItem *item) {
  f32 time, ratio;
  saved=D_800CC380; D_800CC380=0;
  if (item->model != -1) {
-  Gfx_ConfigurePrimitiveRenderFlags(0x33335);
+  Combine_ConfigurePrimitiveRenderFlags(0x33335);
   gDPPipeSync(g_displayListCursor++);
   gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
   gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);

@@ -12,7 +12,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-s32 Ovlgame_InitParticleQuad(void) {
+s32 Match_InitParticleQuad(void) {
     Vtx *vertices = (Vtx *)&g_particleQuadVertices;
     s32 i = 0;
     s32 more;

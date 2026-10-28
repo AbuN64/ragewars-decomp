@@ -27,7 +27,7 @@ extern s32 Note_UpdateStatus(s32 a0);
 
 extern void Control_ReleasePakLock(void);
 
-void Pak_AllocateScratchBuffer(void) {
+void Note_AllocateScratchBuffer(void) {
     struct Shape_typemap_165 *block;
     s32 buffer;
 
@@ -50,7 +50,7 @@ void Note_FreeScratchBuffer(void) {
 }
 
 /* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on Note_UpdateStatus. */
-void Pak_ProbeStatus(s32 kind)
+void Note_ProbeStatus(s32 kind)
 {
     u8 *cur;
     s32 ready;

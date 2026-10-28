@@ -48,7 +48,7 @@ extern ALGlobalsalSndpNew *D_800D4070;
 extern void *alHeapDBAlloc(u8 *, s32, ALHeap *, s32, s32);
 
           /* alHeapDBAlloc */
-extern void func_802AFFC0_de(ALEventQueue *, ALEventListItem *, s32);
+extern void alEvtqNew(ALEventQueue *, ALEventListItem *, s32);
 
   /* alEvtqNew */
 extern void alSynAddPlayer(ALSynthalSndpNew *, ALPlayer_s14 *);
@@ -105,7 +105,7 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
         sState[i].sound = 0;
 
     ptr = alHeapDBAlloc(0, 0, c->heap, 1, c->maxEvents * sizeof(ALEventListItem));
-    func_802AFFC0_de(&sndp->evtq, (ALEventListItem *)ptr, c->maxEvents);
+    alEvtqNew(&sndp->evtq, (ALEventListItem *)ptr, c->maxEvents);
 
     sndp->drvr = &D_800D4070->drvr;
 
@@ -115,7 +115,7 @@ void alSndpNew(ALSndPlayeralSndpNew *sndp, ALSndpConfig *c)
     alSynAddPlayer(sndp->drvr, &sndp->node);
 
     evt.type = 5; /* AL_SNDP_API_EVT */
-    func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
+    alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
     sndp->nextDelta = alEvtqNextEvent(&sndp->evtq, &sndp->nextEvent);
 }
 
@@ -164,7 +164,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
             evt.common.state = state;
             delta = (s32)_DivS32ByF32(snd->envelope->attackTime, state->pitch);
-            func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
+            alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, delta);
             break;
 
         case 1: /* AL_SNDP_STOP_EVT */
@@ -175,7 +175,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
             if (delta) {
                 evt.common.type = 7; /* AL_SNDP_END_EVT */
                 evt.common.state = state;
-                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
+                alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, delta);
                 state->state = 2;
             } else {
                 alSynStopVoice(sndp->drvr, &state->voice);
@@ -227,7 +227,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
                 alSynSetVol(sndp->drvr, &state->voice, (s16)vtmp, delta);
                 evt.common.type = 1; /* AL_SNDP_STOP_EVT */
                 evt.common.state = state;
-                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
+                alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, delta);
             }
             break;
 
@@ -273,7 +273,7 @@ s32 _sndpVoiceHandler(void *node)
         switch (sndp->nextEvent.type) {
             case 5: /* AL_SNDP_API_EVT */
                 evt.common.type = 5;
-                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
+                alEvtqPostEvent(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
                 break;
             default:
                 _handleEvent(sndp, next);

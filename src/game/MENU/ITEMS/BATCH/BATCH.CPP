@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/LONE/D_8011AF38.H"
 
-extern void func_802B6B80_de(s32 *);
+extern void guMtxIdent(s32 *);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
 extern void func_80219460_de(void *definition);
@@ -49,14 +49,14 @@ typedef struct SlotPool {
 } SlotPool;
 
 /* Sets up a batch of count 0x40-byte entries starting at entries: remembers the block and half its count, runs
- * func_802B6B80_de on every entry, then hands the batch to Map_ResetFramePool. */
+ * guMtxIdent on every entry, then hands the batch to Map_ResetFramePool. */
 void Batch_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     s32 i;
 
     batch->entries = entries;
     batch->half = count / 2;
     for (i = 0; i < count; i++) {
-        func_802B6B80_de(&entries[i * 0x10]);
+        guMtxIdent(&entries[i * 0x10]);
     }
     Map_ResetFramePool(batch);
 }

@@ -143,7 +143,7 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *actor) {
         if (actor->y < lowerNext) {
             return 0;
         }
-        sine = Math_Sinf(actor->angle);
+        sine = Gu_Sinf(actor->angle);
         cosine = Math_Cosf(actor->angle);
         Region_GetNodeEdgeCross(&direction, node);
         if (direction.x * -sine + direction.z * -cosine < 0.0f) {

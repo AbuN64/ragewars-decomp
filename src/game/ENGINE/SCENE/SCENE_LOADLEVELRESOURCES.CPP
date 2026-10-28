@@ -282,7 +282,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     (((struct SharedRecAt1B92C *)(table))->unk1B2FC) = D_800C51D4;
     var_s5 = arg2;
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
-        OvlScene_DispatchAndRecycleQueuedTriggers(table);
+        Scene_DispatchAndRecycleQueuedTriggers(table);
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
     if ((Cinema_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {

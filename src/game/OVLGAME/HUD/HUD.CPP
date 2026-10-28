@@ -75,7 +75,7 @@ void Hud_InitializeWorldActorPools(ActorWorld *world) {
 
 /* Resets the hud: clears the four words at 0x90, runs Hud_EmptyCallback and OnScreen_LoadFontTexture, then fills the two
  * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists D_800D3080 and D_800D2F94 (0x75 pairs each, 0x5C in de). */
-void Ovlgame_ResetHudCharTables(HudTables *hud) {
+void Hud_ResetHudCharTables(HudTables *hud) {
 #if defined(VERSION_DE)
     s32 pairs = 0x5C;
 #else

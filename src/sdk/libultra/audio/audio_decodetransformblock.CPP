@@ -37,7 +37,7 @@ void Audio_InitTransformTables(void) {
     for (; i < 128; i++) {
         angle = (i * step + offset) * scale;
         sines[i] = Math_Cosf(angle);
-        cosines[i] = Math_Sinf(angle);
+        cosines[i] = Gu_Sinf(angle);
         zeros[i] = 0.0f;
     }
     i = 0;
@@ -47,7 +47,7 @@ void Audio_InitTransformTables(void) {
     for (; i < 128; i++) {
         angle = i * scale;
         s = Math_Cosf(angle);
-        c = Math_Sinf(angle);
+        c = Gu_Sinf(angle);
         sums[i] = s + c;
         differences[i] = c - s;
     }
@@ -79,7 +79,7 @@ FftTables *Audio_InitFftTables(s32 n) {
         do {
             angle = i * scale / count;
             tables->sines[i] = Math_Cosf(angle);
-            tables->cosines[i] = -Math_Sinf(angle);
+            tables->cosines[i] = -Gu_Sinf(angle);
             i++;
         } while (i < half);
     }

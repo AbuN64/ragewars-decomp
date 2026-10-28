@@ -8,12 +8,12 @@
 #include "abi.h"
 
 /* 802A8A94_3.CPP */
-/* Draws a text string in the current font style D_801376F8: when centring, measures it through Pak_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through OnScreen_DrawTextGlyphs, first as a shadow when requested. */
+/* Draws a text string in the current font style D_801376F8: when centring, measures it through Menu_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through OnScreen_DrawTextGlyphs, first as a shadow when requested. */
 
 extern Gfx *g_displayListCursor;
-extern f32 Pak_MeasureLine(u8 *text, f32 size, f32 spacing);
+extern f32 Menu_MeasureLine(u8 *text, f32 size, f32 spacing);
 
-void OnScreen_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY) {
+void Onscrn_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY) {
     FontStyle *style;
     f32 sizeFactor;
     f32 spacing;
@@ -74,7 +74,7 @@ void OnScreen_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sh
             spacing = 1.0f;
             break;
         }
-        width = Pak_MeasureLine(text, size, spacing);
+        width = Menu_MeasureLine(text, size, spacing);
         limit = D_800E28D0 - 0x2C;
         if (limit < width) {
             ratio = limit / width;
@@ -105,7 +105,7 @@ void OnScreen_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sh
 extern void Geometry_SetCombineMode(s32 arg0);
 extern void Geometry_SetModePreset(s32 arg0);
 
-void OnScreen_SetupSpriteMode(s32 color) {
+void Onscrn_SetupSpriteMode(s32 color) {
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     Geometry_SetCombineMode(0x1B);

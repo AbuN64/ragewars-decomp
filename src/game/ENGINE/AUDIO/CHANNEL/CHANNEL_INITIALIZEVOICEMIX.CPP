@@ -42,7 +42,7 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
     GraphU64_NormalizeVec3(&local.x);
-    pan = Math_Sinf(Graphu64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
+    pan = Gu_Sinf(Graphu64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
         return 0x40;
     }

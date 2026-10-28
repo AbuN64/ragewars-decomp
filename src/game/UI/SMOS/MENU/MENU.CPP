@@ -145,7 +145,7 @@ void Menu_DrawScreenStack(void) {
     g_menuElementLoadCount = 0;
 }
 
-void Smos_SetFocusedElement(s32 id) {
+void Menu_SetFocusedElement(s32 id) {
     Element *previous;
 
     if (FindKindHandler(FindMenuElement(id)->kind) == 0) {

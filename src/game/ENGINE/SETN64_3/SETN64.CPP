@@ -38,14 +38,14 @@ void SetN64_InitFrameRing(RenderState *state) {
     state->handle = -1;
     SetN64_BeginSessionFadeIn(state);
     g_displayListCursor = 0;
-    func_802B6B80_de((void *)&D_80142C60);
+    guMtxIdent((void *)&D_80142C60);
     if (D_801470B0) {
         Control_ResetActorSnapshot();
         Items_ResetGameOptions(&D_801462C8);
     }
     i = 0;
     CCinema_ResetSequenceContext();
-    Ovlgame_InitParticleQuad();
+    Match_InitParticleQuad();
     Ovlgame_InitializeRenderDirection(&state->settings);
     count = D_800DE850;
     state->field26DD0 = 0;
@@ -98,13 +98,13 @@ extern char D_801053E8_us_rev1[];
 extern void Libultra_SetDebugLinkCallback(void *segment);
 #endif
 extern void osViBlack(s32 active);
-extern void Items_ResetPlayers(void *players);
-extern void Ovlgame_ResetMenuPool(void *menu);
+extern void Pools_ResetPlayers(void *players);
+extern void Player_ResetMenuPool(void *menu);
 extern void CCollision_Initialize(void);
 extern s32 Defs_ReadResourceWord(s32 size);
-extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
+extern void Scene_LoadSceneResources(Shared_World *world, s32 resource);
 extern void Ovlgame_InitializeControllerSession(void);
-extern void Ovlgame_ResetHudCharTables(void *hud);
+extern void Hud_ResetHudCharTables(void *hud);
 extern void SetN64_BeginModeTransition(GameSession *session, s32 arg1);
 extern void SetN64_UpdateGameMode(void *session);
 extern void SetN64_UpdateFrameTiming(void *session);
@@ -135,8 +135,8 @@ void SetN64_RunGameLoop(GameSession *session) {
         for (;;) {
         }
     }
-    Pak_ClearRenderRecord(&D_8014D438);
-    Pak_AllocateRenderBuffers(&D_8014D438);
+    Note_ClearRenderRecord(&D_8014D438);
+    Note_AllocateRenderBuffers(&D_8014D438);
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
     if (D_80000300 == 0) {
@@ -165,18 +165,18 @@ void SetN64_RunGameLoop(GameSession *session) {
     for (i = 0; i < D_800DE850; i++) {
         XPlus_FillMemory(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
     }
-    Items_ResetPlayers(session->players);
-    Ovlgame_ResetMenuPool(session->menu);
+    Pools_ResetPlayers(session->players);
+    Player_ResetMenuPool(session->menu);
     CCollision_Initialize();
     session->resource = Defs_ReadResourceWord(0x18) & 0x3FFFFFFF;
-    Items_ResetActorPools(session->players, 0);
-    Ovlgame_InitializePlayerPool(session->menu, 0, 0);
-    OvlScene_LoadSceneResources(&g_world, session->resource);
+    Pools_ResetActorPools(session->players, 0);
+    Player_InitializePlayerPool(session->menu, 0, 0);
+    Scene_LoadSceneResources(&g_world, session->resource);
     if (D_800CBC11[0] == 0) {
         Ovlgame_InitializeControllerSession();
     }
-    Ovlgame_ResetHudCharTables(&session->hud);
-    Pak_AllocateScratchBuffer();
+    Hud_ResetHudCharTables(&session->hud);
+    Note_AllocateScratchBuffer();
     Tsmos_InitFrontendOnce();
     SmXlate_SwitchScreen(2);
     D_801428D8 = 3;

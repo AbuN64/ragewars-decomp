@@ -451,13 +451,13 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         } else {
             Nav_SteerTowardPoint(controller, destination, 2.0f, 0.0f);
             angle = controller->player->heading + D_800C1BF0_de;
-            facing.x = Math_Sinf(angle);
+            facing.x = Gu_Sinf(angle);
             facing.y = 0.0f;
             facing.z = Math_Cosf(angle);
             angle = XMath_EvaluateArcTangentTwo(controller->destination.z - position->z, controller->destination.x - position->x);
             desired.x = Math_Cosf(angle);
             desired.y = 0.0f;
-            desired.z = Math_Sinf(angle);
+            desired.z = Gu_Sinf(angle);
             player->forward = desired.x * facing.x + desired.y * facing.y + desired.z * facing.z;
             if (graph != 0 && controller->current != -1) {
                 angle = 0.0f;
@@ -468,7 +468,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             navigationTurnLeft(&tangent);
             value = XMath_EvaluateArcTangentTwo(tangent.z, tangent.x);
             tangent.x = Math_Cosf(value);
-            tangent.z = Math_Sinf(value);
+            tangent.z = Gu_Sinf(value);
             projection = desired.x * tangent.x + desired.y * tangent.y + desired.z * tangent.z;
             tangent.x *= projection;
             tangent.z *= projection;
@@ -555,7 +555,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             }
         } else {
             angle = controller->player->heading + D_800C1C14;
-            facing.x = Math_Sinf(angle);
+            facing.x = Gu_Sinf(angle);
             facing.y = 0.0f;
             facing.z = Math_Cosf(angle);
             desired.x = controller->destination.x - position->x;
@@ -570,7 +570,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             navigationTurnLeft(&tangent);
             value = XMath_EvaluateArcTangentTwo(tangent.z, tangent.x);
             tangent.x = Math_Cosf(value);
-            tangent.z = Math_Sinf(value);
+            tangent.z = Gu_Sinf(value);
             projection = desired.x * tangent.x + desired.y * tangent.y + desired.z * tangent.z;
             tangent.x *= projection;
             tangent.z *= projection;

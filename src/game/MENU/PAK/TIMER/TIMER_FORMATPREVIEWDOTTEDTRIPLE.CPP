@@ -28,7 +28,7 @@ extern void func_802AD2A8(s32);
 #endif
 
 
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 
 /* Points a field's text at D_800D7810 when the option D_80153780 is set and at D_800D7814 otherwise, and returns
@@ -62,7 +62,7 @@ func_802AD2A8
 
 /* Formats the three floats at offsets 0xC, 0x10 and 0x14 of the structure D_800E28BC points to,
    truncated to integers, into a field's text with the format D_800DCD84, nine bytes before the
-   length Pak_CountLineChars reports. Returns zero. */
+   length Menu_CountLineChars reports. Returns zero. */
 
 s32 Timer_FormatPreviewDottedTriple(struct Field *field) {
     s32 x = D_800E28BC->x;
@@ -77,9 +77,9 @@ s32 Timer_FormatPreviewDottedTriple(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Defs_FormatThreeIntegers(text + (Pak_CountLineChars(field) - 9), D_800ED404_eu, z, y, x);
+    Defs_FormatThreeIntegers(text + (Menu_CountLineChars(field) - 9), D_800ED404_eu, z, y, x);
 #else
-    Defs_FormatThreeIntegers(text + (Pak_CountLineChars(field) - 9), g_pakFormatDottedTriple, z, y, x);
+    Defs_FormatThreeIntegers(text + (Menu_CountLineChars(field) - 9), g_pakFormatDottedTriple, z, y, x);
 #endif
     return 0;
 }
@@ -93,7 +93,7 @@ s32 Timer_UpdateAlternateActionLabel(struct FieldRecAt14 *field) {
     return 0;
 }
 
-s32 Pak_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record) {
+s32 Timer_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record) {
     do {
         if (D_80153780 != 0) {
             Menu_OpenDialog(D_8014561C, D_0044E4B0, record->first, record->second, 0);
@@ -104,17 +104,17 @@ s32 Pak_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record) {
     return 1;
 }
 
-void Pak_EnableProfilePreview(void) {
+void Timer_EnableProfilePreview(void) {
     D_80153730 = 1;
     D_80153774 = 0;
 }
 
-void Pak_ClearProfilePreview(void) {
+void Timer_ClearProfilePreview(void) {
     D_80153730 = 0;
     D_80153774 = 0;
 }
 
-void Pak_DisablePreviewSelection(struct RecordRecAtCV1 *record) {
+void Timer_DisablePreviewSelection(struct RecordRecAtCV1 *record) {
     record->target->first &= ~0x01800000;
     D_80153730 = 0;
     D_80153774 = 1;

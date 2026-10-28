@@ -264,7 +264,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.z = 0;
                 up.y = 1.0f;
                 Graphu64_CrossVectors(&side, &up, &travel);
-                GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
+                GraphU64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
                 GraphU64_AddVec3(&position, &position, &offset);
             }
             if (particle->sineAmplitudeY < 0.0f) {
@@ -273,7 +273,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.y = 1.0f;
                 Graphu64_CrossVectors(&across, &up, &travel);
                 Graphu64_CrossVectors(&side, &across, &travel);
-                GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
+                GraphU64_ScaleVector(&offset, &side, Gu_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
                 GraphU64_AddVec3(&position, &position, &offset);
             }
         }
@@ -405,9 +405,9 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         strengthSq = strength * strength;
         swing = strengthSq * PARTICLE_QUIVER_SWING;
         Graphu64_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
-        yawWave = Math_Sinf(strengthSq * (6 * RW_PI_F6)) * 0.25f;
+        yawWave = Gu_Sinf(strengthSq * (6 * RW_PI_F6)) * 0.25f;
         YawMatrix(quivering, swing * yawWave);
-        PitchMatrix(quivering, swing * Math_Sinf(strengthSq * (14 * RW_PI_F6)));
+        PitchMatrix(quivering, swing * Gu_Sinf(strengthSq * (14 * RW_PI_F6)));
         TranslateMatrix(quivering, 0.0f, 0.0f, PARTICLE_QUIVER_PIVOT);
         Graphu64_MultiplyAffineMatrices(orientation, quivering, world);
         Graphu64_ClampMatrixToFixedRange(orientation);

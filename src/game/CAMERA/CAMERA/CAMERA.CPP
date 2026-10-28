@@ -73,7 +73,7 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
         wave = &shake->x;
         if (wave->mode == 0) goto x_sine;
         if (wave->mode != 1) goto x_zero;
-        value = Math_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
         goto x_done;
 x_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -86,7 +86,7 @@ x_done:
         wave = &shake->y;
         if (wave->mode == 0) goto y_sine;
         if (wave->mode != 1) goto y_zero;
-        value = Math_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
         goto y_done;
 y_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -99,7 +99,7 @@ y_done:
         wave = &shake->z;
         if (wave->mode == 0) goto z_sine;
         if (wave->mode != 1) goto z_zero;
-        value = Math_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
+        value = Gu_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
         goto z_done;
 z_sine:
         value = Graphu64_RandomBetween(-wave->m_Amp, wave->m_Amp);
@@ -265,18 +265,18 @@ void Camera_AnimateViewColorsAndLight(View *actor) {
     channel = 0;
     ambientScale = phaseScale;
     do {
-        ambient = (ambientScale * (Math_Sinf(
+        ambient = (ambientScale * (Gu_Sinf(
             phaseScale * (f32) D_800CD730 * ((f32) (channel + 2) * 4.0f) *
             0.01745329424738884f) * 16.0f)) + 16.0f + 48.0f;
         D_800CBC90[0].ambientCopy[channel] = D_800CBC90[0].ambient[channel] = (u32)ambient;
-        diffuse = (((Math_Sinf(
+        diffuse = (((Gu_Sinf(
             phaseScale * (f32) D_800CD730 * ((f32) (channel + 2) * 4.0f) *
             0.01745329424738884f) * 64.0f) + 255.0f) - 64.0f) - 1.0f;
         D_800CBC90[0].diffuseCopy[channel] = D_800CBC90[0].diffuse[channel] = (u32)diffuse;
         channel += 1;
     } while (channel < 3);
-    direction.x = Math_Sinf((f32) (D_800CD730 * 6) * 0.01745329424738884f);
-    direction.y = Math_Sinf((f32) (D_800CD730 * 8) * 0.01745329424738884f);
+    direction.x = Gu_Sinf((f32) (D_800CD730 * 6) * 0.01745329424738884f);
+    direction.y = Gu_Sinf((f32) (D_800CD730 * 8) * 0.01745329424738884f);
     direction.z = Math_Cosf((f32) (D_800CD730 * 10) * 0.01745329424738884f);
     GraphU64_NormalizeVec3(&direction);
     direction.x *= 120.0f;
@@ -285,15 +285,15 @@ void Camera_AnimateViewColorsAndLight(View *actor) {
     D_800CBC90[0].direction[0] = (u32)direction.x;
     D_800CBC90[0].direction[1] = (u32)direction.y;
     D_800CBC90[0].direction[2] = (u32)direction.z;
-    red = (Math_Sinf(2.0f * (phaseScale * (f32) D_800CD730) * 0.06981317698955536f) * 64.0f) + 128.0f;
+    red = (Gu_Sinf(2.0f * (phaseScale * (f32) D_800CD730) * 0.06981317698955536f) * 64.0f) + 128.0f;
     redByte = (u32)red & 0xF8;
     actor->color[0] = redByte;
     actor->secondaryColor[0] = redByte;
-    green = (Math_Sinf(phaseScale * (f32) D_800CD730 * 0.20943953096866608f) * 64.0f) + 128.0f;
+    green = (Gu_Sinf(phaseScale * (f32) D_800CD730 * 0.20943953096866608f) * 64.0f) + 128.0f;
     greenByte = (u32)green & 0xF8;
     actor->color[1] = greenByte;
     actor->secondaryColor[1] = greenByte;
-    blue = (Math_Sinf(phaseScale * (f32) D_800CD730 * 0.27925270795822144f) * 64.0f) + 128.0f;
+    blue = (Gu_Sinf(phaseScale * (f32) D_800CD730 * 0.27925270795822144f) * 64.0f) + 128.0f;
     blueByte = (u32)blue & 0xF8;
     actor->color[2] = blueByte;
     actor->secondaryColor[2] = blueByte;
@@ -504,21 +504,21 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             gameplayAngleScale = D_800C31F8_de;
             rollHalfAngle = adjustedRoll * gameplayAngleScale;
             adjustedPitch += viewMotionOffsets.x;
-            rollHalfSine = Math_Sinf(rollHalfAngle);
+            rollHalfSine = Gu_Sinf(rollHalfAngle);
             pitchHalfAngle = adjustedPitch * gameplayAngleScale;
             D_80115DEC = rollHalfSine;
             q38.word[0] = 0;
             q38.word[1] = 0;
             q38.f[2] = rollHalfSine;
             q38.f[3] = Math_Cosf(rollHalfAngle);
-            pitchHalfSine = Math_Sinf(pitchHalfAngle);
+            pitchHalfSine = Gu_Sinf(pitchHalfAngle);
             D_80115DEC = pitchHalfSine;
             q18.f[0] = pitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
             q18.f[3] = Math_Cosf(pitchHalfAngle);
             combinedQuaternion = actor->combined.f;
-            yawHalfSine = Math_Sinf((actor->yaw + actor->extraYaw) * gameplayAngleScale);
+            yawHalfSine = Gu_Sinf((actor->yaw + actor->extraYaw) * gameplayAngleScale);
             q28.word[0] = 0;
             q28.f[1] = yawHalfSine;
             q28.word[2] = 0;
@@ -563,21 +563,21 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
         } else {
             cosineInput = actor->roll;
             sequenceAngleScale = D_800C31FC_de;
-            sequenceRollHalfSine = Math_Sinf(cosineInput * sequenceAngleScale);
+            sequenceRollHalfSine = Gu_Sinf(cosineInput * sequenceAngleScale);
             q38.word[0] = 0;
             q38.word[1] = 0;
             q38.f[2] = sequenceRollHalfSine;
             cosineInput = (actor->roll * sequenceAngleScale);
             D_80115DEC = sequenceRollHalfSine;
             q38.f[3] = Math_Cosf(cosineInput);
-            sequencePitchHalfSine = Math_Sinf(actor->pitch * sequenceAngleScale);
+            sequencePitchHalfSine = Gu_Sinf(actor->pitch * sequenceAngleScale);
             q18.f[0] = sequencePitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
             cosineInput = (actor->pitch * sequenceAngleScale);
             D_80115DEC = sequencePitchHalfSine;
             q18.f[3] = Math_Cosf(cosineInput);
-            sequenceYawHalfSine = Math_Sinf((actor->yaw + actor->extraYaw) * sequenceAngleScale);
+            sequenceYawHalfSine = Gu_Sinf((actor->yaw + actor->extraYaw) * sequenceAngleScale);
             q28.word[0] = 0;
             q28.f[1] = sequenceYawHalfSine;
             q28.word[2] = 0;
@@ -650,7 +650,7 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = radius * Math_Sinf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
+        pts[1].x = radius * Gu_Sinf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[1].y = pts[1].x / camera->aspect;
         pts[1].z = -camera->farPlane;
         pts[2].x = -pts[1].x;
@@ -735,7 +735,7 @@ int Tsmos_GetModeOneFlag(void);
 void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
 f32 Gu_Sqrtf(f32);
-void Pak_UpdateDialogList(void *);
+void Menu_UpdateDialogList(void *);
 void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
 s32 guLookAtF(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
@@ -861,9 +861,9 @@ actor_found:
     CopyMatrix(camera->worldToView, worldToViewMatrix);
     if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Cinema_IsSequenceInWindow() == 0)) {
         f32 inverseBobRateBlend; 
-        horizontalStretch = (((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
+        horizontalStretch = (((camera->bobAmplitudeX * 0.5f * (Gu_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Gu_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
         camera->stretchX = horizontalStretch;
-        verticalStretch = (((camera->bobAmplitudeY * 0.5f * (Math_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeY * 0.5f * (Math_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f);
+        verticalStretch = (((camera->bobAmplitudeY * 0.5f * (Gu_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeY * 0.5f * (Gu_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f);
         camera->stretchY = verticalStretch;
         camera->bobPhaseX = (f32) (camera->bobPhaseX + (D_800D2988 * camera->bobRateX));
         camera->bobPhaseY = (f32) (camera->bobPhaseY + (D_800D2988 * camera->bobRateY));
@@ -922,7 +922,7 @@ actor_found:
         aspect = 1.333333f;
     }
     fovy = fovy * 0.017453294f;
-    fovSine = Math_Sinf(fovy);
+    fovSine = Gu_Sinf(fovy);
     verticalSlope = fovSine / Math_Cosf(fovy);
     baseHorizontalSlope = verticalSlope * 1.2792794f;
     verticalSlope = baseHorizontalSlope / aspect;
@@ -1016,7 +1016,7 @@ actor_found:
         GraphU64_PackFixedMatrix(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
     }
     Sky_UpdateSceneEffects(&camera->sceneEffects, camera);
-    Pak_UpdateDialogList(&camera->messageList);
+    Menu_UpdateDialogList(&camera->messageList);
     if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&g_world, &camera->unk38);
     }
@@ -1637,10 +1637,10 @@ extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Cache_MarkResourceInUse(s32, s32);
 extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
-extern void Pak_DispatchMenuListCallback(void *);
+extern void Menu_DispatchMenuListCallback(void *);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, RacerViewport *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to Pak_DispatchMenuListCallback. */
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to Menu_DispatchMenuListCallback. */
 void Camera_DrawActiveViews(Race *race, s32 world)
 {
     RacerViewport *racer;
@@ -1688,7 +1688,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         }
         Camera_DrawViewportOverlays((View *) racer);
         Camera_DrawAndAdvanceMessages(race, racer);
-        Pak_DispatchMenuListCallback(racer->sound);
+        Menu_DispatchMenuListCallback(racer->sound);
         Camera_DrawViewportBorder(racer);
         if (Cinema_IsSequenceActive() != 0 || Cinema_IsSequenceInWindow() != 0) {
             racer = 0;
@@ -1707,7 +1707,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
             func_8022A3F8_de(&D_80145040, racer);
         }
     }
-    Pak_DispatchMenuListCallback(race->self.sound);
+    Menu_DispatchMenuListCallback(race->self.sound);
 }
 
 
@@ -1850,7 +1850,7 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
     return post_lines(owner, pool, text, kind, 1.0f, -1);
 }
 
-extern void OnScreen_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
+extern void Onscrn_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;
     f32 fade;
@@ -1871,14 +1871,14 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
             }
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
-            OnScreen_DrawText(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
+            Onscrn_DrawText(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
             fade = D_800D2988 * 0.06666667f;
             node = msg;
             switch (msg->kind) {
             case 2:
-                msg->m_nAlpha = (s32)(Math_Sinf(msg->m_ModeTime * 1.5707964f) * 255.0f);
+                msg->m_nAlpha = (s32)(Gu_Sinf(msg->m_ModeTime * 1.5707964f) * 255.0f);
                 msg->m_ModeTime += fade;
                 if (msg->m_ModeTime > 1.0f) {
                     msg->kind = 3;
@@ -1936,7 +1936,7 @@ extern float D_800C3440_de;
 extern float D_800C3444_de;
 extern float D_800C3448_de;
 extern s32 D_800E28D8;
-extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
+extern void Onscrn_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
 void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
@@ -1988,7 +1988,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
                 scale = D_800C3430_de;
                 centered = 1;
             }
-            OnScreen_DrawText(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
+            Onscrn_DrawText(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
                              message->alpha * scaleX * scale, message->alpha * scaleY * scale);
             switch (message->kind) {
             case 2:
@@ -1998,7 +1998,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
                     message->kind = 3;
                     message->m_Time = message->m_DisplayTime;
                 }
-                message->alpha = Math_Sinf((f32)message->m_nAlpha * D_800C3434_de);
+                message->alpha = Gu_Sinf((f32)message->m_nAlpha * D_800C3434_de);
                 break;
             case 3:
                 message->m_Time -= D_800D2988;
@@ -2011,7 +2011,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, RacerViewport *racer) {
                 }
                 break;
             case 4:
-                message->alpha -= Math_Sinf(D_800C3440_de - (f32)message->m_nAlpha * D_800C343C_de) * D_800C3444_de;
+                message->alpha -= Gu_Sinf(D_800C3440_de - (f32)message->m_nAlpha * D_800C343C_de) * D_800C3444_de;
                 if (message->alpha < 0.0f) {
                     message->alpha = 0.0f;
                 }

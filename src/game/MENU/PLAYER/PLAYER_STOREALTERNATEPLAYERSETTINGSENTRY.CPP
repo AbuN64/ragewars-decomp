@@ -49,7 +49,7 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 
 /* Calls MarkMenuEventHandled; when Menu_GetFocusedElementId reports 0x60, passes the word at offset 0x28 of the object
-   D_800E5690 points to to Menu_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
+   D_800E5690 points to to Player_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
    on its first word with 2. Returns zero. */
 
 
@@ -127,7 +127,7 @@ s32 Player_ConfirmPlayerSettingsEntry(void) {
 #elif defined(VERSION_EU_X)
     if (Menu_GetFocusedElementId() == 0x64) {
 #endif
-        Menu_StorePlayerSettingsEntry(D_800E5690->item);
+        Player_StorePlayerSettingsEntry(D_800E5690->item);
         state = D_800E5690;
         state->value = -1;
         SmpSlider_SetTransitionMode(state->menu, 2);

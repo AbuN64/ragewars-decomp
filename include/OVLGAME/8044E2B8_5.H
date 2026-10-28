@@ -2,5 +2,5 @@
 #define OVLGAME_8044E2B8_5_H
 #include "COMMON/LEVEL.H"
 
-extern int Ovlgame_InitParticleQuad();
+extern int Match_InitParticleQuad();
 #endif

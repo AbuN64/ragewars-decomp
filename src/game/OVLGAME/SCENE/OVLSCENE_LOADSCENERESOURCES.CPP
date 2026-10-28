@@ -23,7 +23,7 @@ extern int SetN64_GetDirectoryEntry(int *,int,int);
 extern s32 SetN64_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
 extern char D_800F41F0;
-void OvlScene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBankKey) {
+void Scene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBankKey) {
     s32 *cartridgeDirectory;
     s32 *bloodlustLevelDirectory;
     void **bloodlustWeaponResource;

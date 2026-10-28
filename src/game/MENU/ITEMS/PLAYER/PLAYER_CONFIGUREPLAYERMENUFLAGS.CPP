@@ -28,10 +28,10 @@ s32 Player_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandl
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     text = field->inner->text[D_80145040.object.language];
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
 #else
     text = *field->inner->text;
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

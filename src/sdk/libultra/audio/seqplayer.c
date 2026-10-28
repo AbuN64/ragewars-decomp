@@ -10,7 +10,7 @@ extern void alSynSetPriority(void *arg0, void *arg1, s16 arg2);
 
 extern void alSynSetVol(void *arg0, void *arg1, s16 arg2, s32 arg3);
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
+extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 /* Voice events serialize the voice pointer in the first four payload bytes. */
 static inline ALVoice_s *event_voice(ALEvent *event) {
@@ -69,7 +69,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     alSynSetVol(((ALSeqPlayer *)seqPlayer)->drvr, releasedVoice, 0, releaseDuration);
     entry.type = 5;
     entry.object = releasedVoice;
-    func_802B00D4_de(&((ALSeqPlayer *)seqPlayer)->evtq, &entry, releaseDuration);
+    alEvtqPostEvent(&((ALSeqPlayer *)seqPlayer)->evtq, &entry, releaseDuration);
 }
 
 void __seqpStopOsc(void *seqPlayer, void *voiceState) {
@@ -127,7 +127,7 @@ void __postNextSeqEvent(void *seqPlayer) {
             }
         }
         referenceEvent.type = 0;
-        func_802B00D4_de(&((ObjectLinks88 *)(seqPlayer))->unk_48, &referenceEvent,
+        alEvtqPostEvent(&((ObjectLinks88 *)(seqPlayer))->unk_48, &referenceEvent,
                       deltaTicks * ((ObjectLinks88 *)(seqPlayer))->unk_24);
     }
 }

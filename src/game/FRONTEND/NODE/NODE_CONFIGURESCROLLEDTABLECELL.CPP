@@ -272,7 +272,7 @@ void Node_ReleaseAllChunkImages(void) {
     }
 }
 
-char *Frontend_GetStringByIndex(s32 index) {
+char *Node_GetStringByIndex(s32 index) {
     return g_frontendResourceState.StringTable[index];
 }
 
@@ -283,7 +283,7 @@ s16 Node_GetResourceLanguageCount(void) {
     return g_frontendResourceState.NLanguages;
 }
 
-void Frontend_LoadLanguageStringsIfAny(s32 languageIndex) {
+void Node_LoadLanguageStringsIfAny(s32 languageIndex) {
     if (g_frontendResourceState.NLanguages != 0) {
         Node_LoadLanguageStrings(languageIndex);
     }

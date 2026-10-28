@@ -98,7 +98,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
         angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;
-        trig = Math_Sinf(angle);
+        trig = Gu_Sinf(angle);
         result.x = cross.x * trig;
         result.y = cross.y * trig;
         result.z = cross.z * trig;

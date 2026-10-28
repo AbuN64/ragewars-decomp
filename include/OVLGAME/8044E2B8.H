@@ -53,5 +53,5 @@ struct OwnerCode8044E2B8 {
     struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *spare;
 };
 /** Release every active entry of arg0 and move it onto the spare list. */
-void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *owner);
+void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *owner);
 #endif

@@ -4,7 +4,7 @@
 #include "COMMON/GLOBALS.H"
 
 /* Tears down the match display: calls func_80245B28_de, stops the objects at D_80145088 and 0x48 bytes
-   before it through Items_ResetActorPools and Ovlgame_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
+   before it through Pools_ResetActorPools and Player_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
    Scene_LoadLevelResources, calls Cache_SetResourceActivityState with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, Cinema_SetLoopMode with zero and Cinema_ResetViewport. */
 
@@ -13,8 +13,8 @@ void Menu_ReleaseOptionsScene(void) {
 
     Cinema_ReleaseSequenceContext();
     object = &D_80145088;
-    Items_ResetActorPools(object, 0);
-    Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
+    Pools_ResetActorPools(object, 0);
+    Player_InitializePlayerPool(object - 0x48, 0, 0);
     Scene_LoadLevelResources(&g_world, 0x24, 0);
     if (func_8025477C_de() == 0) {
         Cache_SetResourceActivityState(1);
@@ -35,7 +35,7 @@ void Menu_SetOptionsSceneSelection(int key) {
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
  selection = Track_RequestTrackByKey(key);
  if (!func_8025477C_de()) Cache_SetResourceActivityState(1);
- OvlScene_SetSelection(&g_world, ~selection, 0);
+ Scene_SetSelection(&g_world, ~selection, 0);
  g->width = width; width = height; g->height = width;
 }
 

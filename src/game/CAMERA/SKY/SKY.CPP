@@ -113,7 +113,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 alpha[i] = i == 0 ? fade : 0.0f;
             }
             for (i = 1; i < 5; i++) {
-                t = VisData_GetPlaneSegmentFraction(view->clipPlane, &points[0].x, &points[i].x);
+                t = Visdata_GetPlaneSegmentFraction(view->clipPlane, &points[0].x, &points[i].x);
                 if (t >= 0.0f && t < 1.0f) {
                     points[i].x = points[0].x + t * (points[i].x - points[0].x);
                     points[i].z = points[0].z + t * (points[i].z - points[0].z);

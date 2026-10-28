@@ -582,7 +582,7 @@ void Node_LoadLanguageStrings(s32 languageIndex) {
    and load state per entry), its text index (loading section 0), its resource map (with copies when
    D_800E2AC4 is set) and its fonts with their bitmap pages and glyph rows; records the name and closes
    the file. */
-void Frontend_OpenResourceArchive(u8 *name) {
+void Node_OpenResourceArchive(u8 *name) {
     t_resource *res;
     s32 handle;
     _sm_texture_element *texture;

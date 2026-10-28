@@ -123,7 +123,7 @@ extern void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *, s32, s32);
 extern void Random_SetSelectedStage(s32, s32);
 extern s32 Key_FindCharacterPreviewRow(s32);
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
-extern void Frontend_SetWidgetFlag08(func_8041F2A0_Item *, s32);
+extern void Widget_SetWidgetFlag08(func_8041F2A0_Item *, s32);
 extern void Menu_ShowPlayerCharacterSelection(s32);
 extern void Tsmos_DeactivateControllerState(void);
 #endif

@@ -50,7 +50,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         q.w = D_800C1A00_de;
     } else if (dir->y < D_800C1A04_de) {
         angle = D_800C1A08_de;
-        q.x = D_80115DEC = Math_Sinf(angle);
+        q.x = D_80115DEC = Gu_Sinf(angle);
         q.y = 0.0f;
         q.z = 0.0f;
         q.w = Math_Cosf(angle);
@@ -59,7 +59,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         Graphu64_CrossVectors(&axis, &up, dir);
         GraphU64_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
-        D_80115DEC = Math_Sinf(angle);
+        D_80115DEC = Gu_Sinf(angle);
         q.x = axis.x * D_80115DEC;
         q.y = axis.y * D_80115DEC;
         q.z = axis.z * D_80115DEC;
@@ -83,14 +83,14 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     if (segment->m_RotNode == -1) {
         angle = owner->heading;
         angleScale = D_800C1A10_de;
-        sine = Math_Sinf(angle * angleScale);
+        sine = Gu_Sinf(angle * angleScale);
         rotation.x = 0.0f;
         rotation.y = sine;
         D_80115DEC = sine;
         rotation.z = 0.0f;
         rotation.w = Math_Cosf(owner->heading * angleScale);
     } else {
-        D_80115DEC = Math_Sinf(rider->heading * D_800C1A14_de);
+        D_80115DEC = Gu_Sinf(rider->heading * D_800C1A14_de);
     }
     rotation.x = 0.0f;
     rotation.z = 0.0f;

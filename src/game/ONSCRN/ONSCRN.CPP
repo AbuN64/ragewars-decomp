@@ -15,7 +15,7 @@
 #include "include_asm.h"
 
 /* 802A6AC0_9.CPP */
-extern void OnScreen_SetupSpriteMode(s32 color);
+extern void Onscrn_SetupSpriteMode(s32 color);
 
 /* Draws one of the two gauges of the head-up panel, the first at hud->bars[0] and the second at
    hud->bars[1]: steps the gauge's scripted mover, walks its shown amount toward the gauge's target
@@ -104,7 +104,7 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
                   left + ((right - left) * bar->fill) / 100,
                   (s32) ((f32) y + scale * 15.0f), red, green, blue,
                   (u8) (*fade * 180 / 255));
-    OnScreen_SetupSpriteMode(*fade);
+    Onscrn_SetupSpriteMode(*fade);
     if (which == 1) {
         shift = scale * 27.0f;
         OnScreen_DrawSpriteResource(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
@@ -112,12 +112,12 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
         OnScreen_SetupTextRendering();
         OnScreen_SetTextScale(0.4f, scale * 0.4f);
         OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        OnScreen_DrawText(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
+        Onscrn_DrawText(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     } else {
         OnScreen_SetupTextRendering();
         OnScreen_SetTextScale(0.4f, scale * 0.4f);
         OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        OnScreen_DrawText(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
+        Onscrn_DrawText(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     }
 }
 

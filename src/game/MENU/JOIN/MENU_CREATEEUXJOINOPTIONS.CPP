@@ -9,7 +9,7 @@ extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern void *Node_FindWidgetByResourceId(void *, s32);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern s32 Menu_GetPreviousScreenOwner(s32);
 extern s32 Join_CountUsedSlots(void);
 extern void Join_UpdateJoinRequestDisplay(s32);
@@ -33,7 +33,7 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     item = Node_FindWidgetByResourceId(window, 0x38F);
     item->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-        Frontend_SetWidgetFlag08(item, 0);
+        Widget_SetWidgetFlag08(item, 0);
     }
     D_800E39C0->unk18 = 0;
     D_800E39C0->unk14 = 0;
@@ -43,10 +43,10 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     D_800E39C0->count = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[i], 0x396), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[i], 0x396), 0);
     }
     Tsmos_ActivateControllerState();
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
     return 0;
 }
 #endif

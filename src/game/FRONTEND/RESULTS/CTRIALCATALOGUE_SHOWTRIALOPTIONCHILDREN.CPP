@@ -24,7 +24,7 @@ extern ResultsOptionsScreen *D_800E4690;
    its own pointer, as the cartridge's strength-reduced dispatch does. */
 
 
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 #if defined(VERSION_DE)
 enum { RESULTS_OPTION_329 = 327, RESULTS_OPTION_331 = 329, RESULTS_OPTION_332 = 330, RESULTS_OPTION_333 = 331, RESULTS_OPTION_334 = 332, RESULTS_OPTION_335 = 333 };
@@ -160,7 +160,7 @@ void CTrialCatalogue_ShowTrialOptionChildren(void) {
             id = RESULTS_OPTION_335;
             break;
         }
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(Node_FindWidgetByResourceId(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(Node_FindWidgetByResourceId(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
     }
 }
 

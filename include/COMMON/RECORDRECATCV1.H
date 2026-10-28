@@ -44,13 +44,13 @@ struct Shared_PakMenu;
 
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 Pak_UpdateOwnerChannelLabel(struct LayeredText *field, struct Shared_PakMenu *holder);
+s32 Timer_UpdateOwnerChannelLabel(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
 extern s32 Control_PeekPakChange(s32);
 
-extern void Pak_ProbeStatus(s32);
-void Pak_ProbeStatus(s32);
+extern void Note_ProbeStatus(s32);
+void Note_ProbeStatus(s32);
 s32 Note_GetStatus(s32);
 
 extern char D_800DCD80[];

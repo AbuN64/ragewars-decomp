@@ -26,7 +26,7 @@ f32 Barrel_GetSignedAngleToPoint(void *actor, CVector3 point) {
         return 0.0f;
     }
     do {
-        s = Math_Sinf(((struct Actor_func_80214DD4_de *)actor)->heading);
+        s = Gu_Sinf(((struct Actor_func_80214DD4_de *)actor)->heading);
     } while (0);
     c = -Math_Cosf(((struct Actor_func_80214DD4_de *)actor)->heading);
     dot = (dx * -s + dz * c) / dist;

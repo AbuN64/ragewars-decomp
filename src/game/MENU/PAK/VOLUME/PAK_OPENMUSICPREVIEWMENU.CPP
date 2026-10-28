@@ -17,7 +17,7 @@
  * formats its current value into the alternate text (the current menu
  * language's line in the EU builds), two bytes before the line length
  * reported by the text item helper. */
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The menu language byte; read as an array element, which keeps the read after the text store. */
@@ -41,7 +41,7 @@ s32 Pak_FormatMusicPreview(LayeredText *field) {
 #else
         text = (char *)*VALUE_TEXT;
 #endif
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2),
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2),
                         VALUE_FORMAT, D_800E63B8);
     }
     return 0;
@@ -59,7 +59,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E29C_de(1);
     D_800E63B4 = 1;
     Control_ClearMenuControlFlag();
-    Pak_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, D_00451094);
     return 1;
 }
 #endif
@@ -67,7 +67,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Restarts sound: calls func_8025E3A8_de, records what func_8025E2C4_de returns in D_800E63B0, passes
    D_800E63B8 to func_8025E2D4_de, calls func_8025E384_de and func_8025E29C_de with 1, sets D_800E63B4,
-   calls Control_ClearMenuControlFlag and then Pak_AllocateMenu with the third argument, the second and D_451F58.
+   calls Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
@@ -78,7 +78,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E29C_de(1);
     D_800E63B4 = 1;
     Control_ClearMenuControlFlag();
-    Pak_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, D_00451094);
     return 1;
 }
 #endif

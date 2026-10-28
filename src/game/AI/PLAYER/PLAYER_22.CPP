@@ -62,9 +62,9 @@ void Player_UpdateWadingState(SharedPlayer *player, BodyPlayerUpdateWadingState 
     } else {
         D_80104418[0] &= ~0x100000;
     }
-    player->views5E8.view730_79.sway[0] = Math_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.043633237f;
-    player->views5E8.view730_79.sway[1] = Math_Sinf(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.043633237f;
-    player->views5E8.view730_79.sway[2] = Math_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.043633237f;
+    player->views5E8.view730_79.sway[0] = Gu_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.043633237f;
+    player->views5E8.view730_79.sway[1] = Gu_Sinf(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.043633237f;
+    player->views5E8.view730_79.sway[2] = Gu_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.043633237f;
     if (!try_jump(player, body)) {
         idle = 0;
         if (player->views5E8.view86C_127.animation == 0x1144) {

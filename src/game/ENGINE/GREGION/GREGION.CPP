@@ -84,7 +84,7 @@ CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         GraphU64_ScaleVector(&axis, &axis, one / len);
         angle = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
-        scale = Math_Sinf(angle);
+        scale = Gu_Sinf(angle);
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;
@@ -121,7 +121,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
         GraphU64_ScaleVector(&axis, &axis, one / len);
         angle = Graphu64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
-        scale = Math_Sinf(angle);
+        scale = Gu_Sinf(angle);
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;

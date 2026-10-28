@@ -64,7 +64,7 @@ void SetN64_DrawMode4Backdrop(void) {
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     OnScreen_GetImageDimensions(0x389, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        OnScreen_SetupSpriteMode(0xFA);
+        Onscrn_SetupSpriteMode(0xFA);
         OnScreen_DrawSpriteResource(0x389, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
     }
 }

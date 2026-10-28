@@ -253,7 +253,7 @@ s32 Pickup_ApplySpecialPickup(ObjRecV4 *recipientActor, ObjRecV9 *arg1) {
     u8 temp_a0;
     void *messageCamera;
     void *messageCamera10;
-    void *temp_a1_11; 
+    void *messageCamera11; 
     void *messageCamera2;
     void *messageCamera3;
     void *messageCamera4;
@@ -422,9 +422,9 @@ case_BD8:
                     case 0x4:                       /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x15F);
-                        temp_a1_11 = recipientActor->unk5DC;
-                        if (temp_a1_11 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3130));
+                        messageCamera11 = recipientActor->unk5DC;
+                        if (messageCamera11 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3130));
                         }
                         break;
                     case 0x8:                       /* switch 3 */
@@ -455,33 +455,33 @@ block_114:
                     case 0x20:                      /* switch 3 */
                         recipientActor->unk1230 = 180.0f;
                         func_8025E11C_de(0x166);
-                        temp_a1_11 = recipientActor->unk5DC;
-                        if (temp_a1_11 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D313C));
+                        messageCamera11 = recipientActor->unk5DC;
+                        if (messageCamera11 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D313C));
                         }
                         break;
                     case 0x40:                      /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x161);
-                        temp_a1_11 = recipientActor->unk5DC;
-                        if (temp_a1_11 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3140_de));
+                        messageCamera11 = recipientActor->unk5DC;
+                        if (messageCamera11 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3140_de));
                         }
                         break;
                     case 0x80:                      /* switch 3 */
                         recipientActor->unk1230 = 225.0f;
                         func_8025E11C_de(0x169);
-                        temp_a1_11 = recipientActor->unk5DC;
-                        if (temp_a1_11 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3144));
+                        messageCamera11 = recipientActor->unk5DC;
+                        if (messageCamera11 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3144));
                         }
                         break;
                     case 0x100:                     /* switch 3 */
                         recipientActor->unk1230 = 450.0f;
                         func_8025E11C_de(0x162);
-                        temp_a1_11 = recipientActor->unk5DC;
-                        if (temp_a1_11 != 0) {
-                            Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3148));
+                        messageCamera11 = recipientActor->unk5DC;
+                        if (messageCamera11 != 0) {
+                            Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3148));
                         }
                         break;
                     case 0x200:                     /* switch 3 */
@@ -540,9 +540,9 @@ block_116:
                     recipientActor->rightAxisValue = (f32) (temp_alpha / temp_duration);
                     goto block_after_alpha;
 block_default:
-                    temp_a1_11 = recipientActor->unk5DC;
-                    if (temp_a1_11 != 0) {
-                        Camera_PostScreenMessage(PICKUP_CONTEXT, temp_a1_11, PICKUP_TEXT(D_800D3160));
+                    messageCamera11 = recipientActor->unk5DC;
+                    if (messageCamera11 != 0) {
+                        Camera_PostScreenMessage(PICKUP_CONTEXT, messageCamera11, PICKUP_TEXT(D_800D3160));
                     }
 block_after_alpha:
                     recipientActor->unk122C = (s32) (recipientActor->unk122C | temp_fp);

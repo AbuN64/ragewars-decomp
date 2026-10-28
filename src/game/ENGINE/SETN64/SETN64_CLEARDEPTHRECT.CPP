@@ -93,7 +93,7 @@ void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
     D_801376F8.shadowY = 1;
     for (i = 0; lines[i] != 0; i++) {
         text = lines[i];
-        OnScreen_DrawText(text, x, y, 0xFF, 1, 1, 1.0f, 1.0f);
+        Onscrn_DrawText(text, x, y, 0xFF, 1, 1, 1.0f, 1.0f);
         y = y + lineStep * scaleY;
     }
 }

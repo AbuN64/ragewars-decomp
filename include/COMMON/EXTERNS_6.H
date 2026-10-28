@@ -10,6 +10,6 @@ extern f32 D_800D2988;
 
 extern s32 D_801468F4;
 extern s32 Tsmos_IsFrontendActive(void);
-extern void OnScreen_SetupSpriteMode(s32);
+extern void Onscrn_SetupSpriteMode(s32);
 extern void func_8021E08C_de(void *, CVector3 *, s32, f32, f32, f32);
 #endif

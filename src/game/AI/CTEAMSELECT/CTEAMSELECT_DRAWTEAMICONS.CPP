@@ -20,7 +20,7 @@ extern s32 D_800E28D0;
 
 
 
-extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
+extern void Onscrn_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;
@@ -79,7 +79,7 @@ void Cteamselect_DrawTeamIcons(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 
     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     x = viewport[2] + viewport[0] * 0.5f;
     y = viewport[3] + viewport[1] * 0.5f;
-    OnScreen_DrawText(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
+    Onscrn_DrawText(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
 }
 
 /* Returns the cardinal team-menu slot, or -1 inside the deadzone/diagonals. */

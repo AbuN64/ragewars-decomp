@@ -108,30 +108,30 @@ void Focus_RefreshProfileStatistics(void) {
     s32 score;
 
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = Match_UpdateRankText(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = Achieve_CountEarnedAchievements(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
     item = Node_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
-    Frontend_SetWidgetFlag08(item, 1);
+    Widget_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
 }
@@ -167,10 +167,10 @@ void Focus_ShowUnlockedEntries(s32 style) {
     for (i = 0; i < 50; i++) {
         node = Node_FindWidgetByResourceId(D_800E3590->root, (u16)D_800DF544[i].id);
         if (Defs_TestBit(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
-            Frontend_SetWidgetFlag08(node, 1);
+            Widget_SetWidgetFlag08(node, 1);
             node->alpha = style;
         } else {
-            Frontend_SetWidgetFlag08(node, 0);
+            Widget_SetWidgetFlag08(node, 0);
         }
     }
 }

@@ -3,15 +3,15 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-/* Five cached flag groups written together by Gfx_ConfigurePrimitiveRenderFlags. */
+/* Five cached flag groups written together by Combine_ConfigurePrimitiveRenderFlags. */
 extern RecGobjinstSampleBoneTranslation D_80153F60;
 extern s32 D_800DF274;
 extern s32 D_800DF280;
 extern s32 D_800DF28C;
 extern s32 D_800DF290;
 
-void Gfx_DrawClippedGradientQuad(f32 x, f32 y, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
+void Combine_DrawClippedGradientQuad(f32 x, f32 y, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
 void N64Eng_GetClipBounds(s32 *left, s32 *top, s32 *right, s32 *bottom);
-void Gfx_DrawClippedImageRectangle(f32 x, f32 y, f32 unused, f32 width, f32 height, f32 u0, f32 v0, f32 u1, f32 v1, u32 color);
-void Gfx_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color);
+void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unused, f32 width, f32 height, f32 u0, f32 v0, f32 u1, f32 v1, u32 color);
+void Rect_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color);
 #endif

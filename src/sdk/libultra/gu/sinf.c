@@ -17,7 +17,7 @@ extern const f32 D_800C7910_de;    /* zero */
 extern const float D_800C7914_de; /* 0.5 */
 extern const float D_800C7918_de; /* 0.5 */
 
-float Math_Sinf(float x)
+float Gu_Sinf(float x)
 {
     float dx, xsq, poly;
     float dn;

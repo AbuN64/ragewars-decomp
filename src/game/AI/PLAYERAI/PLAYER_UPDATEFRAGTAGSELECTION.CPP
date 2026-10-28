@@ -208,7 +208,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                             if (playerProfile->unk90 == 0) {
                                 allPlayersView = player->unk5DC;
                                 if ((allPlayersView != 0) && (allPlayersView->unk564 == 0)) {
-                                    OnScreen_SetupSpriteMode((s32) D_801462DE);
+                                    Onscrn_SetupSpriteMode((s32) D_801462DE);
                                     allPlayersViewWidth = allPlayersView->unk29C;
                                     allPlayersViewHeight = allPlayersView->unk2A0;
                                     scaled5x = allPlayersViewWidth * banner_half;
@@ -277,7 +277,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                 rotatingPlayer = func_8022C55C_de(world, (u32) ((s32) case3_entry->m_FragTagPlayerPos % eligiblePlayerCount));
                 rotatingView = rotatingPlayer->unk5DC;
                 if ((rotatingView != 0) && (rotatingView->unk564 == 0)) {
-                    OnScreen_SetupSpriteMode((s32) D_801462DE);
+                    Onscrn_SetupSpriteMode((s32) D_801462DE);
                     rotatingViewWidth = rotatingView->unk29C;
                     rotatingViewHeight = rotatingView->unk2A0;
                     scaled_x = rotatingViewWidth * D_800C2BA8_de;
@@ -358,7 +358,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                 chosenPlayer = func_8022C55C_de(world, (u32) ((s32) case4_entry->m_FragTagPlayerPos % eligiblePlayerCount));
                 chosenView = chosenPlayer->unk5DC;
                 if ((chosenView != 0) && (chosenView->unk564 == 0)) {
-                    OnScreen_SetupSpriteMode((s32) D_801462DE);
+                    Onscrn_SetupSpriteMode((s32) D_801462DE);
                     chosenViewWidth = chosenView->unk29C;
                     chosenViewHeight = chosenView->unk2A0;
                     scaled_x4 = chosenViewWidth * D_800C2BB0_de;
@@ -446,7 +446,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                             if (priorFlipProfile->unk8F == 0) {
                                 flippedView = flippedPlayer->unk5DC;
                                 if ((flippedView != 0) && (flippedView->unk564 == 0)) {
-                                    OnScreen_SetupSpriteMode((s32) D_801462DE);
+                                    Onscrn_SetupSpriteMode((s32) D_801462DE);
                                     flippedViewWidth = flippedView->unk29C;
                                     flippedViewHeight = flippedView->unk2A0;
                                     scaled6x = flippedViewWidth * banner_half;
@@ -1055,7 +1055,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
         return;
     }
     hud = (HudGlobals *)&D_801462DE;
-    OnScreen_SetupSpriteMode(hud->fade);
+    Onscrn_SetupSpriteMode(hud->fade);
     if (((HudState *)&hud->state)->timer <= 0.0f) {
         return;
     }
@@ -1090,7 +1090,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
     OnScreen_DrawSpriteNumber((s32)position, center_x + (2.0f * scale_x),
                    center_y, scale_x, scale_y, 1, 0, 2);
     OnScreen_SetupTextRendering();
-    OnScreen_DrawText(&D_800C2BD8_de,
+    Onscrn_DrawText(&D_800C2BD8_de,
                   (s32)(center_x - (scale_x * ((D_800C7470_Pair *)&D_800C2C08_de)->second)),
                   (s32)(center_y - (scale_y * D_800C2C10_de[0])),
                   0xFF, 0, 0, scale_x, scale_y);

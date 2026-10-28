@@ -239,7 +239,7 @@ void Portal_AssignPlatformEndpoints(CNavData *graph) {
                     end = motion->base;
                     end.y += definition->height;
                     if (definition->radial != 0) {
-                        end.x += definition->radius * Math_Sinf(definition->heading);
+                        end.x += definition->radius * Gu_Sinf(definition->heading);
                         end.z += definition->radius * Math_Cosf(definition->heading);
                     }
                     distance = Graphu64_GetPointDistance(point, &start);

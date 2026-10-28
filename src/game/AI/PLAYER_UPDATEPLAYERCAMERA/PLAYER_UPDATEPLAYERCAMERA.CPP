@@ -69,7 +69,7 @@ s16 **Scene_StartWorldEffect(void *, s32, s32, s32);
 void ItemMenu_DrawEntries(void *, Shared_HudPlayer *);
 void OnScreen_UpdateMoverScript(void *);
 
-f32 Pak_MeasureLine(char *, f32, f32);
+f32 Menu_MeasureLine(char *, f32, f32);
 static inline CGameStatus *hudRules(void) {
     return &D_801462C8.counters;
 }
@@ -130,7 +130,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         func_802183E8_de(player->strokes, view, player);
         func_80218F08_de(player->trails, view, player);
         ItemMenu_DrawEntries(player->marks, player);
-        OnScreen_SetupSpriteMode(D_801462C8.hudFade);
+        Onscrn_SetupSpriteMode(D_801462C8.hudFade);
         sx = view->width / (f32) D_800E28D0;
         sy = view->height / (f32) D_800E28D4;
         if (D_800E28D8 == 0) {
@@ -194,7 +194,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             y = view->x + view->width * 0.5f;
             x = view->y + view->height * 0.5f;
-            OnScreen_SetupSpriteMode(0xFA);
+            Onscrn_SetupSpriteMode(0xFA);
             gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
                 OnScreen_DrawSpriteResource(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
@@ -248,7 +248,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             x = player->livesX * scaleX + view->x;
             y = player->livesY * scaleY + view->y;
-            OnScreen_SetupSpriteMode(player->alpha);
+            Onscrn_SetupSpriteMode(player->alpha);
             OnScreen_DrawSpriteNumber(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             OnScreen_DrawSpriteResource(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
             if (D_801462C8.counters.enabled != 0) {
@@ -294,7 +294,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 if (x > 200.0f) {
                     x -= 12.0f;
                 }
-                OnScreen_SetupSpriteMode(player->alpha);
+                Onscrn_SetupSpriteMode(player->alpha);
                 OnScreen_DrawSpriteNumber(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
                 if (player->scoreState < 2) {
                     if (hudRules()->enabled != 0) {
@@ -350,7 +350,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                 OnScreen_SetTextColors(0, 0, 0, 1, 1, 1);
                                 textScale = D_801376F8.width * 0.5f * scaleX * OnScreen_GetGlyphWidth();
                                 scaleY *= nameZoom;
-                                w = Pak_MeasureLine(text, textScale, OnScreen_GetGlyphWidth());
+                                w = Menu_MeasureLine(text, textScale, OnScreen_GetGlyphWidth());
                                 player->nameWidths[i] = w;
                                 width = w;
                                 for (j = player->nameHead; i < j; j--) {
@@ -358,14 +358,14 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                 }
                                 left = (x - 12.0f) + indent;
                                 top = y + 4.0f;
-                                OnScreen_DrawText(text, left - width + 2, (top + 2) + scaleY * 16.0f,
+                                Onscrn_DrawText(text, left - width + 2, (top + 2) + scaleY * 16.0f,
                                               player->nameFades[i], 0, 0, scaleX * 0.5f, scaleY);
                                 if (player->names[i] == player) {
                                     OnScreen_SetTextColors(0xFF, 0, 0, 1, 1, 1);
                                 } else {
                                     OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 1, 1, 1);
                                 }
-                                OnScreen_DrawText(text, left - width, top + scaleY * 16.0f, player->nameFades[i], 0, 0,
+                                Onscrn_DrawText(text, left - width, top + scaleY * 16.0f, player->nameFades[i], 0, 0,
                                               scaleX * 0.5f, scaleY);
                                 player->nameFades[i] -= 6;
                                 if (player->nameFades[i] < 0) {
@@ -406,7 +406,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    OnScreen_SetupSpriteMode(player->alpha);
+                    Onscrn_SetupSpriteMode(player->alpha);
                     OnScreen_DrawSpriteNumber(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
                                   0, 0);
                     if (player->countState < 2) {
@@ -451,7 +451,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    OnScreen_SetupSpriteMode(player->alpha);
+                    Onscrn_SetupSpriteMode(player->alpha);
                     OnScreen_DrawSpriteNumber(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
                     if (player->squadState < 2) {
                         OnScreen_DrawSpriteResource(0x201, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
@@ -479,7 +479,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 if (icon > 0.0f) {
                     x = view->x + view->width * 0.5f;
                     y = view->y + view->height * 0.5f;
-                    OnScreen_SetupSpriteMode(icon);
+                    Onscrn_SetupSpriteMode(icon);
                     OnScreen_DrawSpriteResource(0x209, 0, x - scaleX * 31.0f, y - scaleY * 32.0f, scaleX, scaleY, 1);
                 } else {
                     player->iconState = 0;
@@ -517,7 +517,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (player->boost > 0.0f) {
                         level = 1;
                     }
-                    OnScreen_SetupSpriteMode(player->statusAlpha);
+                    Onscrn_SetupSpriteMode(player->statusAlpha);
                     OnScreen_DrawSpriteResource(0x20C, level, x - scaleX * 70.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
                 } else {
                     /* Clears the icon state, not the status state. */
@@ -540,7 +540,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            OnScreen_SetupSpriteMode(0xFF);
+            Onscrn_SetupSpriteMode(0xFF);
             OnScreen_DrawSpriteResource(0x20B, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         } else if (zoom > 1.0f) {
             stepOut = (D_800C9190_de[0] - 1.0f) * 0.25f;
@@ -555,7 +555,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            OnScreen_SetupSpriteMode(0xFF);
+            Onscrn_SetupSpriteMode(0xFF);
             OnScreen_DrawSpriteResource(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
         if (player->weapon == 0xC && player->kind != D_800CE47C) {
@@ -566,7 +566,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             x = view->x + view->width * 0.5f;
             y = view->y + view->height * 0.5f;
             for (i = 0; i < 3; i++, ammo--) {
-                OnScreen_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
+                Onscrn_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
                 OnScreen_DrawSpriteResource(0x2F4, 0, x + D_800CAB78_eu[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
             }
         }
@@ -613,7 +613,7 @@ void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeap
                 D_800CAB88_eu += 4.096f;
             }
             angle = body->heading + D_800C9FA0_de;
-            x = body->x + D_800CAB88_eu * Math_Sinf(angle);
+            x = body->x + D_800CAB88_eu * Gu_Sinf(angle);
             Gsky_SetPlayerViewInputs(view, 1, angle, 0.0f, 0.0f, 0.0f, x, body->y + 81.92f,
                           body->z + D_800CAB88_eu * Math_Cosf(angle), 0.0f, body->rotation, body->room,
                           0.0f, 3.0f);
@@ -1862,7 +1862,7 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
     if (actor->state.active) {
         angle = position->angle;
         offset = D_800C2860_de;
-        xSpeed = player->speed * Math_Sinf(angle + offset);
+        xSpeed = player->speed * Gu_Sinf(angle + offset);
         scale = D_800C2864_de;
         actor->vx = xSpeed * scale;
         actor->vy = player->speed * D_800C2868_de;
@@ -2018,7 +2018,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             } else {
                 player->views5E8.view6C0_51.unk6C0=Graphu64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
             }
-            forwardMotionX = player->views5E8.view6C0_51.unk6C0 * Math_Sinf(body->unk6C + 3.1415927f);
+            forwardMotionX = player->views5E8.view6C0_51.unk6C0 * Gu_Sinf(body->unk6C + 3.1415927f);
             motion.y = 0;
             motion.x = forwardMotionX;
             motion.z = player->views5E8.view6C0_51.unk6C0 * Math_Cosf(body->unk6C + 3.1415927f);
@@ -2030,7 +2030,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             } else {
                 player->views5E8.view6C4_54.unk6C4=Graphu64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
             }
-            motion.x += player->views5E8.view6C4_54.unk6C4 * Math_Sinf(body->unk6C - 1.5707964f);
+            motion.x += player->views5E8.view6C4_54.unk6C4 * Gu_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6C4_54.unk6C4 * Math_Cosf(body->unk6C - 1.5707964f);
             strafeSpeedMagnitude = player->views5E8.view6C4_54.unk6C4;
             if (strafeSpeedMagnitude < 0.0f) {
@@ -2066,7 +2066,7 @@ block_42:
                 forwardBoostSpeed = Graphu64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
             }
             player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
-            motion.x += player->views5E8.view6D4_58.unk6D4 * Math_Sinf(body->unk6C + 3.1415927f);
+            motion.x += player->views5E8.view6D4_58.unk6D4 * Gu_Sinf(body->unk6C + 3.1415927f);
             motion.z += player->views5E8.view6D4_58.unk6D4 * Math_Cosf(body->unk6C + 3.1415927f);
             if (boostReady && (player->views5E8.view6B8_49.unk6B8 & 1)) {
                 player->views5E8.view6D8_59.unk6D8 = movementProfile->unk18;
@@ -2078,7 +2078,7 @@ block_42:
             } else {
                 player->views5E8.view6D8_59.unk6D8=Graphu64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
             }
-            motion.x += player->views5E8.view6D8_59.unk6D8 * Math_Sinf(body->unk6C - 1.5707964f);
+            motion.x += player->views5E8.view6D8_59.unk6D8 * Gu_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
             GraphU64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             movementOutput = &player->views5E8.view6E8_63.unk6E8;
@@ -2248,9 +2248,9 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
             height = 82.94399261f;
         }
         rate = 0.5f;
-        Graphu64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
+        Graphu64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Gu_Sinf(phase) * 10.24f), rate);
         amount = player->views5E8.view758_88.bobStrength * (Math_Cosf(phase) * 8.192f);
-        Graphu64_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
+        Graphu64_EaseValueToward(&player->views5E8.view73C_81.side, -Gu_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
         Graphu64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
     }
 }

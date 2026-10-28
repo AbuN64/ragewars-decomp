@@ -4,7 +4,7 @@
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
+extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
@@ -16,7 +16,7 @@ void alSndpPlay(ALSndPlayer *soundPlayer) {
         ParamsRecAt8V1 p;
         p.f0 = 0;
         p.f4 = base + soundPlayer->target * 0x30;
-        func_802B00D4_de(&soundPlayer->evtq, (s16 *)&p, 0);
+        alEvtqPostEvent(&soundPlayer->evtq, (s16 *)&p, 0);
     }
 }
 
@@ -33,5 +33,5 @@ void alSndpSetFXMix(ALSndPlayer *soundPlayer, s8 effectMix) {
     acc += soundPlayer->target * 0x30;
     p.f8 = effectMix;
     p.f4 = acc;
-    func_802B00D4_de(&soundPlayer->evtq, (s16 *)&p, 0);
+    alEvtqPostEvent(&soundPlayer->evtq, (s16 *)&p, 0);
 }

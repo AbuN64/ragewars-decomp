@@ -57,7 +57,7 @@ void CCinema_DrawMessages(void)
       followingMessageScale = D_800C37CC_de;
       do
       {
-        OnScreen_DrawText(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
+        Onscrn_DrawText(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
         messageLineAdvance = ((f32) messageLineHeight) * messageScaleY;
         screenScaleX = (f32) (D_800E28D0 / 284);
         messageScaleY = ((f32) (D_800E28D4 / 222)) * followingMessageScale;

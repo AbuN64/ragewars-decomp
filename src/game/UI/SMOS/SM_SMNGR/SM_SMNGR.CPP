@@ -15,9 +15,9 @@ const unsigned int D_blob_a8b599cb23bc51b717e6[2] = {
 };
 
 /* 80297CD0.CPP */
-/* Moves the focus of the current screen's selected widget in a direction (5 to 8 following its first, second, third or fourth link) past linked widgets flagged 0x100, and selects the first unflagged one through Smos_SetFocusedElement. */
+/* Moves the focus of the current screen's selected widget in a direction (5 to 8 following its first, second, third or fourth link) past linked widgets flagged 0x100, and selects the first unflagged one through Menu_SetFocusedElement. */
 
-extern void Smos_SetFocusedElement(s32 id, Widget **links, s32 direction);
+extern void Menu_SetFocusedElement(s32 id, Widget **links, s32 direction);
 
 void MoveMenuFocus(s32 direction) {
     Widget *widget;
@@ -72,7 +72,7 @@ void MoveMenuFocus(s32 direction) {
         break;
     }
     if (id >= 0) {
-        Smos_SetFocusedElement(id, links, direction);
+        Menu_SetFocusedElement(id, links, direction);
     }
 }
 

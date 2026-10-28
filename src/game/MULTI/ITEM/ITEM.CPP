@@ -43,7 +43,7 @@ void Multi_DrawPlayerItemAvailability(struct ItemRecAt18V2 *item, MenuOptionBox 
     }
     if (D_800E1E20 != 5) {
         D_800E1E20 = 5;
-        OnScreen_SetupSpriteMode((s32)(context->fade * (context->alpha * D_800E23A0[0])));
+        Onscrn_SetupSpriteMode((s32)(context->fade * (context->alpha * D_800E23A0[0])));
     }
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);

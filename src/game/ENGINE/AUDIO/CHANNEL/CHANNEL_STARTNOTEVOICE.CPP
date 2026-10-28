@@ -36,7 +36,7 @@ extern void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePlayback *);
 
 
 static inline char *selectChannel(ContextCode8025A3EC *context, s32 slot) {
-    func_802B2F00_de(((OwnerCode8025A3EC *)context)->sound, context->slots.ids[slot]);
+    alSndpSetSound(((OwnerCode8025A3EC *)context)->sound, context->slots.ids[slot]);
     return ((OwnerCode8025A3EC *)context)->sound;
 }
 
@@ -61,7 +61,7 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
             context = view->context;
             if (view->frame != context->frame) {
                 channel = ((OwnerCode8025A3EC *)context)->sound;
-                func_802B2F00_de(channel, context->slots.ids[view->slot]);
+                alSndpSetSound(channel, context->slots.ids[view->slot]);
                 if (alSndpGetState(channel) != 0) {
                     alSndpStop(channel);
                 }

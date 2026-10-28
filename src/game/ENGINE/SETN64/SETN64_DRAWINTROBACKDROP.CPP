@@ -83,7 +83,7 @@ void SetN64_ResetSceneForIntro(void *arg0) {
     SetN64_ResetSessionPlayerPools(arg0, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
-    Items_ResetActorPools(p2, 1);
+    Pools_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
     Textload_SetTextureEffect(0);
 }
@@ -121,7 +121,7 @@ void SetN64_DrawIntroBackdrop(void) {
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     OnScreen_GetImageDimensions(0x388, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        OnScreen_SetupSpriteMode(0xFA);
+        Onscrn_SetupSpriteMode(0xFA);
         OnScreen_DrawSpriteResource(0x388, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
     }
 }

@@ -14,7 +14,7 @@
    over the selected channel; with a profile loaded (D_80153730) it creates the player through
    func_8022A5C0_de, copies the loaded profile (flags, four words and eight name bytes) into the
    player's profile, applies the loaded team through func_8044A0C4_de and shows the player's message
-   through Pak_AllocateMenu; otherwise it deletes the chosen note through Note_DeleteNote and shows the
+   through Menu_AllocateMenu; otherwise it deletes the chosen note through Note_DeleteNote and shows the
    D_44F7C0 or D_44F82C result prompt. Returns 1. */
 
 
@@ -53,7 +53,7 @@ extern SharedPlayer *Playerai_FindPlayerByController(char *pool, PakMenuSlot *sl
 
 extern void Player_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
-extern void Pak_AllocateMenu(char *text, MenuPakConfirmProfileOrDeleteNote *menu, char *format);
+extern void Menu_AllocateMenu(char *text, MenuPakConfirmProfileOrDeleteNote *menu, char *format);
 
 extern s32 Note_DeleteNote(s32 ch, s32 index);
 
@@ -94,12 +94,12 @@ extern void Control_SetProfileMode(PakMenuSlot *slot, s32 mode);
 
 extern void Control_DisableControllerPak(s32 ch);
 
-extern void OvlScene_SetSelection(char *, s32, s32);
+extern void Scene_SetSelection(char *, s32, s32);
 
 struct GameSession;
 extern void Match_ResetGameClockAndSelectSpawn(struct GameSession *);
 
-extern void Pak_ProbeStatus(s32 ch);
+extern void Note_ProbeStatus(s32 ch);
 
 extern s32 Note_GetStatus(s32 ch);
 
@@ -146,7 +146,7 @@ s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNo
             profile->name[i] = D_8014D4B4[i];
         }
         Player_StartPlayerAnimation(player, D_8014D490);
-        Pak_AllocateMenu(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
+        Menu_AllocateMenu(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
         return 1;
     }
     if (Note_DeleteNote(ch, D_8014D4FC) == 0) {
@@ -178,7 +178,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
                 ch = menu->slot->unk4;
             }
             Control_DisableControllerPak(ch);
-            OvlScene_SetSelection(&g_world, menu->player->menu, 2);
+            Scene_SetSelection(&g_world, menu->player->menu, 2);
             return 1;
         }
         Match_ResetGameClockAndSelectSpawn(&D_8011FAC0);
@@ -191,13 +191,13 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 5) {
         Control_DisableControllerPak(ch);
-        OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
+        Scene_SetSelection(&g_world, g_world.selectionValues[3], 2);
     }
     if (D_8015375C != 0 && D_80153788 == 6) {
         D_8014ADA0 = 1;
     }
     if (D_80153788 == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
-        Pak_ProbeStatus(ch);
+        Note_ProbeStatus(ch);
         status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
@@ -206,7 +206,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
             Menu_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
         }
     } else if (D_80153788 == 3 && g_pakAlternatePromptEnabled != 0) {
-        Pak_ProbeStatus(ch);
+        Note_ProbeStatus(ch);
         status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
@@ -241,7 +241,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
                 Menu_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            Pak_ProbeStatus(ch);
+            Note_ProbeStatus(ch);
             if (Note_DeleteNote(ch, D_8014D4C4) == 0) {
                 Menu_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
             } else {
@@ -259,7 +259,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
                 Menu_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            Pak_ProbeStatus(ch);
+            Note_ProbeStatus(ch);
             if (Note_DeleteNote(ch, D_8014D4FC) == 0) {
                 Snapshot_SaveSnapshotAndClose(owner, menu, arg);
                 return 1;
@@ -277,7 +277,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
                 Menu_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            Pak_ProbeStatus(ch);
+            Note_ProbeStatus(ch);
             if (Note_RepairIdIfNeeded(ch) == 0) {
                 Menu_OpenDialog(D_8014561C, D_0044EB94, menu->player, menu->slot, menu->prompt);
             } else {

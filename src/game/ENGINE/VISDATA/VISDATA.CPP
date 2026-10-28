@@ -196,7 +196,7 @@ void Visdata_BuildPlaneFromPoints(void *planeEquation, void *arg1, void *arg2, v
                                   + (plane->normal.z * point->z);
 }
 
-f32 VisData_GetPlaneSegmentFraction(f32 *arg0, f32 *arg1, f32 *arg2) {
+f32 Visdata_GetPlaneSegmentFraction(f32 *arg0, f32 *arg1, f32 *arg2) {
     f32 x;
     f32 y;
     f32 z;
@@ -271,7 +271,7 @@ s32 Visdata_TestPointsAgainstFivePlanes(Frustum *frustum, s32 count, CVector3 *p
     return 1;
 }
 
-/* Tests a box against six planes, returning 1 when for every plane the sum of the per-axis minimum products does not exceed the plane distance, else 0. Adapted from VisData_TestBoxAgainstPlane, with its body inlined into a loop over six four-float planes and the loop-invariant product computed first. */
+/* Tests a box against six planes, returning 1 when for every plane the sum of the per-axis minimum products does not exceed the plane distance, else 0. Adapted from Visdata_TestBoxAgainstPlane, with its body inlined into a loop over six four-float planes and the loop-invariant product computed first. */
 
 s32 Visdata_TestBoxAgainstFrustum(f32 (*arg0)[4], f32 *arg1) {
     s32 i;
@@ -319,7 +319,7 @@ s32 Visdata_TestBoxAgainstFrustum(f32 (*arg0)[4], f32 *arg1) {
     return 1;
 }
 
-s32 VisData_TestBoxAgainstPlane(f32 *arg0, f32 *arg1) {
+s32 Visdata_TestBoxAgainstPlane(f32 *arg0, f32 *arg1) {
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f0_3;

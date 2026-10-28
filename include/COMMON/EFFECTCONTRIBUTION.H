@@ -345,7 +345,7 @@ struct Vtx {
     u8 a;
 };
 
-/* Shared four-vertex particle quad initialized by Ovlgame_InitParticleQuad. */
+/* Shared four-vertex particle quad initialized by Match_InitParticleQuad. */
 extern Vtx g_particleQuadVertices[4];
 
 

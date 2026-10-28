@@ -82,7 +82,7 @@ extern void Note_DecodeNoteText(s32 state, char *name, s32 size);
 
 extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
-extern void Pak_ProbeStatus(s32 ch);
+extern void Note_ProbeStatus(s32 ch);
 
 extern s32 Note_GetStatus(s32 ch);
 
@@ -307,7 +307,7 @@ s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             }
         }
         for (tries = 0; tries < 4; tries++) {
-            Pak_ProbeStatus(next);
+            Note_ProbeStatus(next);
             if (Note_GetStatus(next) != -2) {
                 break;
             }
@@ -334,7 +334,7 @@ s32 Snapshot_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             D_80153784 = 1;
             return 1;
         }
-        Pak_MarkSaveNotes(menu);
+        Snapshot_MarkSaveNotes(menu);
     }
     return 0;
 }

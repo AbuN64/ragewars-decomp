@@ -148,7 +148,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     if (gap > 0.0f) {
         GraphU64_SubtractVectors(&away, &actor->pos, &pos);
         angle = GraphU64_GetHorizontalAngle(&away);
-        pos.x -= gap * Math_Sinf(angle);
+        pos.x -= gap * Gu_Sinf(angle);
         pos.z -= gap * Math_Cosf(angle);
     }
     if (mode == 2) {
@@ -156,7 +156,7 @@ void Cbarrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     }
     if (boost) {
         reach = InstHdr_GetActorReach(actor);
-        probe.x = actor->pos.x + reach * Math_Sinf(tracker->angle);
+        probe.x = actor->pos.x + reach * Gu_Sinf(tracker->angle);
         probe.y = tracker->height;
         probe.z = actor->pos.z + reach * Math_Cosf(tracker->angle);
         range = Barrel_FindClearAimAngle(actor, probe, target, D_800C2178_de);

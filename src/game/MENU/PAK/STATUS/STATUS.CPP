@@ -14,7 +14,7 @@
 #include "COMMON/UNUSED.H"
  /* const */
  /* const */
-s32 Pak_FormatRightAlignedPreviewName(struct Field *arg0) {
+s32 Status_FormatRightAlignedPreviewName(struct Field *arg0) {
     s8 *temp_s0;
     s8 *temp_s0_2;
     s32 var_s1;
@@ -41,7 +41,7 @@ s32 Pak_FormatRightAlignedPreviewName(struct Field *arg0) {
         var_a1 = &D_8014B49B;
         while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
         temp_s0 = RW_LOCALIZED_TEXT(*arg0->text, arg0->text, arg0->text, g_languageIndex);
-        temp_s0 = temp_s0 + (Pak_CountLineChars(arg0) - 8);
+        temp_s0 = temp_s0 + (Menu_CountLineChars(arg0) - 8);
         space = 0x20;
         var_v1 = 7;
         var_v0 = temp_s0 + 7;
@@ -72,7 +72,7 @@ typedef struct { s8 value; } PakModeByte;
 extern char *D_800D2484, *D_800D37D0;
 extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
 /* Select the pak status label and right-align its eleven characters. */
-s32 Pak_UpdateStatusText(struct Field *arg0) {
+s32 Status_UpdateStatusText(struct Field *arg0) {
     char *src;
     char *dst;
     s32 i;
@@ -102,7 +102,7 @@ s32 Pak_UpdateStatusText(struct Field *arg0) {
             break;
         }
         dst = *arg0->text;
-        dst += Pak_CountLineChars(arg0) - 11;
+        dst += Menu_CountLineChars(arg0) - 11;
         for (i = 0; i < 11; i++) {
             *dst++ = *src++;
         }
@@ -110,6 +110,6 @@ s32 Pak_UpdateStatusText(struct Field *arg0) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Pak_UpdateStatusText);
+INCLUDE_ASM("ovl_80400000", Status_UpdateStatusText);
 #endif
 #endif

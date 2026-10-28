@@ -52,7 +52,7 @@ static inline void restart(PlayerRecAt1E *player) {
     if (player->state != 2 && player->state != 0) {
         player->state = 2;
         channel = Audio_GetSoundPlayer(player->bank);
-        func_802B2F00_de(channel, player->id);
+        alSndpSetSound(channel, player->id);
         alSndpStop(channel);
     }
 }
@@ -108,7 +108,7 @@ void Audio_StopDialogPlayer(void *arg0) {
     if (state != 2 && state != 0) {
         player->state = 2;
         soundPlayer = Audio_GetSoundPlayer(player->bank);
-        func_802B2F00_de(soundPlayer, player->id);
+        alSndpSetSound(soundPlayer, player->id);
         alSndpStop(soundPlayer);
     }
     Sound_ReleaseContextLock((s32 *)player->bank);
@@ -180,7 +180,7 @@ void Audio_StopDialogPlayerUnlocked(void *arg0) {
     if (state != 2 && state != 0) {
         player->state = 2;
         soundPlayer = Audio_GetSoundPlayer(player->bank);
-        func_802B2F00_de(soundPlayer, player->id);
+        alSndpSetSound(soundPlayer, player->id);
         alSndpStop(soundPlayer);
     }
 }

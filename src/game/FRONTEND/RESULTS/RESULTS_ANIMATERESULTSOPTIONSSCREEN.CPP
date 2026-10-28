@@ -97,7 +97,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
             break;
         }
         SoundElement_PlayFlatSound(0xE79);
-        Frontend_SetWidgetFlag08(D_800E4690->button, 1);
+        Widget_SetWidgetFlag08(D_800E4690->button, 1);
         SmpFlicker_StartFlicker(D_800E4690->prompt, 4);
         D_800E4690->state = 4;
         D_800E4690->timer = 4;
@@ -131,7 +131,7 @@ s32 Results_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta)
         break;
     case 5:
         SoundElement_PlayFlatSound(0xE78);
-        Frontend_SetWidgetFlag08(D_800E4690->button, 0);
+        Widget_SetWidgetFlag08(D_800E4690->button, 0);
         switch (D_801462C8.controllerMode) {
         case 1:
         case 3:

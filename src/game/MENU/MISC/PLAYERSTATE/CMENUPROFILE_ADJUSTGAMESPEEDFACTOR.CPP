@@ -113,7 +113,7 @@ s32 CMenuProfile_AdjustGameSpeedFactor(void *arg0, struct Shape_typemap_114 *obj
 extern f32 D_800DE338;
 extern char *D_800D3DD8[], *D_800D3DDC[];
 extern char D_800DE2F8[];
-extern s32 Pak_CountLineChars(void *);
+extern s32 Menu_CountLineChars(void *);
 
 s32 CMenuProfile_UpdateGameSpeedLabel(Shared_DebugWidget *widget) {
     char *text;
@@ -133,7 +133,7 @@ s32 CMenuProfile_UpdateGameSpeedLabel(Shared_DebugWidget *widget) {
 #else
         text = *widget->text;
 #endif
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
     }
     return 0;
 }

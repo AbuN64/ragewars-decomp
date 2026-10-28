@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
+extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
@@ -18,5 +18,5 @@ void alSndpSetPitch(struct ObjRecAt40V2 *soundPlayer, s32 pitchBits) {
     acc += soundPlayer->field3C * 0x30;
     p.f8 = pitchBits;
     p.f4 = acc;
-    func_802B00D4_de(&soundPlayer->events, (s16 *)&p, 0);
+    alEvtqPostEvent(&soundPlayer->events, (s16 *)&p, 0);
 }

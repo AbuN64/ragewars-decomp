@@ -30,8 +30,8 @@ s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
 
     D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
-    Items_ResetActorPools(object, 0);
-    Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
+    Pools_ResetActorPools(object, 0);
+    Player_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
         Cache_SetResourceActivityState(1);

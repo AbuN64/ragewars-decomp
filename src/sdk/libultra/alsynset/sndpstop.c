@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern void func_802B00D4_de(ALEventQueue *, void *, s32);
+extern void alEvtqPostEvent(ALEventQueue *, void *, s32);
 
 
 
@@ -17,7 +17,7 @@ void alSndpStop(ObjRecAt40V2 *soundPlayer) {
     new_var = soundPlayer->field40;
     stopEvent.count = 1;
     stopEvent.value = new_var + (soundPlayer->field3C * 0x30);
-    func_802B00D4_de(&soundPlayer->events, &stopEvent, 0);
+    alEvtqPostEvent(&soundPlayer->events, &stopEvent, 0);
 }
 
 #if defined(VERSION_US)

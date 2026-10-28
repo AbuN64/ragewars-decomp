@@ -85,7 +85,7 @@ void Widget_ResetTextClipBounds(void) {
     state->field_C = D_800E2AB4_de;
 }
 
-void Frontend_SetWidgetFlag08(void *object, int enabled) {
+void Widget_SetWidgetFlag08(void *object, int enabled) {
     u16 *flags = &((Widget *)(object))->flags;
     if (enabled) {
         *flags |= 8;

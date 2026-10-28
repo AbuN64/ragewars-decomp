@@ -42,7 +42,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
             if (openFramesLeft <= 0) {
                 SoundElement_PlayFlatSound(0xE79);
                 /* unk28 is the panel's item handle, kept untyped in the animation state */
-                Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
+                Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
                 SmpFlicker_StartFlicker(D_800E54A4->music, 4);
                 D_800E54A4->ready = 4;
                 D_800E54A4->timer = 4;
@@ -76,7 +76,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
             SoundElement_PlayFlatSound(0xE78);
             D_800E54A4->ready = 2;
             D_800E54A4->timer = 4;
-            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 0);
+            Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 0);
             break;
         }
         if (D_800E54A4->ready == 3) PAKInterface_UpdatePlayerPanelAnimations(arg2);

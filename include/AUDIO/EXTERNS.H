@@ -24,7 +24,7 @@ static __inline__ void release(SlotCC *slot) {
     slot->flag = 0;
     if (slot->key != owner->key) {
         sound = owner->sound;
-        func_802B2F00_de(sound, owner->samples[slot->index]);
+        alSndpSetSound(sound, owner->samples[slot->index]);
         if (alSndpGetState(sound) != 0) {
             alSndpStop(sound);
         }

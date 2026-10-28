@@ -233,11 +233,11 @@ void Menu_RefreshCharacterUnlocks(void) {
         if (!Defs_TestBit(bits, i)) {
             if (widget) {
                 Widget_SetWidgetFlag100(widget, 1);
-                Frontend_SetWidgetFlag08(widget, 0);
+                Widget_SetWidgetFlag08(widget, 0);
             }
         } else if (D_801462C8->trialKind == 1 && Defs_TestBit(D_800FEB54, D_800E3A54[i][0]) == 1) {
             mark = Node_FindWidgetByResourceId(widget, UNLOCK_MARK);
-            Frontend_SetWidgetFlag08(mark, 1);
+            Widget_SetWidgetFlag08(mark, 1);
             mark->alpha = 50;
         }
     }
@@ -271,10 +271,10 @@ void Menu_ShowPlayerCharacterSelection(s32 player) {
     frame = Node_FindWidgetByResourceId(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight->x = frame->x - 2;
     D_800E42D0->players[player].highlight->y = frame->y - 2;
-    Frontend_SetWidgetFlag08(D_800E42D0->players[player].highlight, 1);
+    Widget_SetWidgetFlag08(D_800E42D0->players[player].highlight, 1);
     D_800E42D0->players[player].unkC = 1;
     Menu_RefreshPlayerCharacterVariants(player);
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].title), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].title), 0);
 }
 
 void Menu_RefreshPlayerCharacterVariants(s32 player) {
@@ -283,7 +283,7 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 1);
     }
     item = Node_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
@@ -298,7 +298,7 @@ void Menu_RefreshPlayerCharacterVariants(s32 player) {
         count = 1;
     }
     for (i = 0; i < count; i++) {
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E42D4[player].options[i].id), 0);
     }
     item = Node_FindWidgetByResourceId(D_800E42D0->screen,
                          D_800E42D4[player].cells[D_800E42D0->players[player].choice].id);
@@ -317,7 +317,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     SmpOverlay_SetSlotValue(D_800E42D0->unk4, player, 1);
     D_800E42D0->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E42D0->screen, D_800E029E[player][i].id), 1);
     }
     D_800E42D0->players[player].kind = choice;
     Key_FindCharacterPreviewRow(choice);

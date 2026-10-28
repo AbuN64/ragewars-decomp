@@ -96,13 +96,13 @@ CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
                 Graphu64_CrossVectors(&axis, &up, &normal);
                 GraphU64_NormalizeVec3(&axis);
                 slope = Graphu64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
-                D_80115DEC = Math_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
+                D_80115DEC = Gu_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
                 tilt.y = axis.y * D_80115DEC;
                 tilt.z = axis.z * D_80115DEC;
                 tilt.w = Math_Cosf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt = Gobjinst_BuildActorDirectionTilt(obj);
-                sine = Math_Sinf(((LevelActor *)(self))->yaw);
+                sine = Gu_Sinf(((LevelActor *)(self))->yaw);
                 cosine = Math_Cosf(((LevelActor *)(self))->yaw);
                 probe.dir = ((LevelActor *)(self))->floorDirection;
                 probe.start.x = ((LevelActor *)(self))->position0.x;
@@ -113,7 +113,7 @@ CQuatern Insthdr_BuildActorGroundRotation(char *obj) {
                 slope = RW_MIN(slope, 25.0f) * 0.75f;
                 half = 0.5f;
                 angle = slope * half;
-                D_80115DEC = Math_Sinf(angle);
+                D_80115DEC = Gu_Sinf(angle);
                 lean.y = 0.0f;
                 lean.x = cosine * D_80115DEC;
                 lean.z = -sine * D_80115DEC;

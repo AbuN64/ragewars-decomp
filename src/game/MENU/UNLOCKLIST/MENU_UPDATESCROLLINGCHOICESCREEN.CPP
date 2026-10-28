@@ -22,7 +22,7 @@ enum { MENU_RESOURCE = 0x13b };
 
 /* Runs the screen D_800E5780 each frame: when its menu reports 1 for the first time it marks the
    word at 0x14 and, unless bit 0 of the flag set at 0x7E of the first 400-byte record of
-   D_80102B00 is set, passes 0x13B to Smos_SetFocusedElement; while the menu reports 3 it counts the delay
+   D_80102B00 is set, passes 0x13B to Menu_SetFocusedElement; while the menu reports 3 it counts the delay
    at 0xC down and on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row
    count, and restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves
    through SmXlate_SwitchScreen with the target at 0x10, or 3 when that is -1. Returns zero. Adapted from
@@ -32,7 +32,7 @@ extern u8 D_80102B00[];
 
 extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 
-extern void Smos_SetFocusedElement(s32);
+extern void Menu_SetFocusedElement(s32);
 
 extern void MarkMenuEventHandled();
 
@@ -92,7 +92,7 @@ s32 Menu_UpdateScrollingChoiceScreen(void) {
         if (Defs_TestBit(D_80102B00 + 0x7E, 0) != 0) {
             return 0;
         }
-        Smos_SetFocusedElement(MENU_RESOURCE);
+        Menu_SetFocusedElement(MENU_RESOURCE);
         return 0;
     case 3:
         if (--D_800E5780->delay <= 0) {

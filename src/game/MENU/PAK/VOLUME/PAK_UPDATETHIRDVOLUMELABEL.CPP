@@ -23,7 +23,7 @@
 
 
 
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 s32 Pak_UpdateThirdVolumeLabel(LayeredText *field) {
     s32 step = (VOLUME_BYTE - 0x80) / 8;
@@ -39,19 +39,19 @@ s32 Pak_UpdateThirdVolumeLabel(LayeredText *field) {
         field->text = (u8 **)&D_800D7DE4;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = (char *)field->text[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEE10, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEE10, step);
 #else
         text = (char *)*field->text;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_pakFormatSpacedInt2, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatSpacedInt2, step);
 #endif
     } else {
         field->text = (u8 **)&D_800D7DE4;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = (char *)field->text[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEE18, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEE18, step);
 #else
         text = (char *)*field->text;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_pakFormatSpacedInt3, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatSpacedInt3, step);
 #endif
     }
     return 0;

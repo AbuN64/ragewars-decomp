@@ -8,7 +8,7 @@ extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
 extern u8 *Node_FindWidgetByResourceId(s32, s32);
 extern s32 Menu_GetPreviousScreenOwner(s32);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern void *Join_CountUsedSlots(void);
 extern void Tsmos_ActivateControllerState(void);
 extern void Join_UpdateJoinRequestDisplay(s32);
@@ -26,7 +26,7 @@ s32 Menu_CreateGermanCourseOptions(s32 owner) {
     widget = Node_FindWidgetByResourceId(owner, 0x385);
     widget[0x10] = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->sel = 0;
     D_800E39C0->w14 = 0;
@@ -36,11 +36,11 @@ s32 Menu_CreateGermanCourseOptions(s32 owner) {
     D_800E39C0->unk1C = (s32)Join_CountUsedSlots();
     for (i = 0; i < 3; ) {
         Join_UpdateJoinRequestDisplay(i);
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId((s32)D_800E39C0->w8[i], 0x38C), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((s32)D_800E39C0->w8[i], 0x38C), 0);
         i++;
     }
     Tsmos_ActivateControllerState();
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
     return 0;
 }
 #endif

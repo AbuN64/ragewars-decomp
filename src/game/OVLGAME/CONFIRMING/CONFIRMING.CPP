@@ -123,7 +123,7 @@ extern struct SharedRecAt148 D_80142622[];
 
 
 
-void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
+void Confirming_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
     Shared_func_8043DEDC_S3 *settings;
     s8 *status;
     s32 *profile;

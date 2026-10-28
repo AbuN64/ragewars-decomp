@@ -63,7 +63,7 @@ void Audio_StopVoicesExceptKey(RecordRecAt4V6 *record, s32 value)
       if (slot->key != owner->key)
       {
         sound = owner->sound;
-        func_802B2F00_de(sound, owner->samples[slot->index]);
+        alSndpSetSound(sound, owner->samples[slot->index]);
         if (alSndpGetState(sound) != 0)
         {
           if (active)
@@ -182,7 +182,7 @@ s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex)
   ownerAddress = slot->owner;
   owner = (OwnerCode8025A3EC8025B5F0 *)ownerAddress;
   soundPlayer = owner->sound;
-  func_802B2F00_de(soundPlayer, owner->samples[slot->index]);
+  alSndpSetSound(soundPlayer, owner->samples[slot->index]);
   return alSndpGetState(soundPlayer);
 }
 
@@ -240,7 +240,7 @@ void Audio_StopVoiceSlot(s32 arg0, s16 arg1) {
     if (((struct IntegerStateB4 *) base)->unk_10 != ((struct func_80245A10_S1 *) a0)->unk104) {
         s32 idx = ((struct IntegerStateB4 *) base)->unk_0;
         s32 addr = a0 + idx * 2;
-        func_802B2F00_de(s1, ((struct ObjRecAtDC *) addr)->unkDC);
+        alSndpSetSound(s1, ((struct ObjRecAtDC *) addr)->unkDC);
         if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
@@ -361,7 +361,7 @@ void Audio_StopVoicesByKey(RecordRecAt4V6 *record, s32 value) {
             slot->flag = 0;
             if (slot->key != owner->key) {
                 sound = owner->sound;
-                func_802B2F00_de(sound, owner->samples[slot->index]);
+                alSndpSetSound(sound, owner->samples[slot->index]);
                 if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
@@ -384,7 +384,7 @@ void Audio_StopVoicesBySecondaryValue(RecordRecAt4V5 *record, s32 value) {
             slot->flag = 0;
             if (slot->key != owner->key) {
                 sound = owner->sound;
-                func_802B2F00_de(sound, owner->samples[slot->index]);
+                alSndpSetSound(sound, owner->samples[slot->index]);
                 if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
@@ -407,7 +407,7 @@ void Audio_StopVoicesByFlags(RecordRecAt4V4 *record, s32 value) {
             slot->flag = 0;
             if (slot->key != owner->key) {
                 sound = owner->sound;
-                func_802B2F00_de(sound, owner->samples[slot->index]);
+                alSndpSetSound(sound, owner->samples[slot->index]);
                 if (alSndpGetState(sound) != 0) {
                     alSndpStop(sound);
                 }
@@ -533,7 +533,7 @@ void Audio_SetScaledVoiceVolume(void *arg0, s32 arg1) {
     temp_s0 = slot->owner;
     owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
     sound = owner->sound;
-    func_802B2F00_de(sound, owner->samples[slot->index]);
+    alSndpSetSound(sound, owner->samples[slot->index]);
     alSndpSetVol(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }
 
@@ -547,7 +547,7 @@ void Audio_SetScaledVoicePitch(void *arg0, f32 arg1) {
     temp_s0 = slot->owner;
     owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
     sound = owner->sound;
-    func_802B2F00_de(sound, owner->samples[slot->index]);
+    alSndpSetSound(sound, owner->samples[slot->index]);
     scaled = arg1 * (slot->f34);
     scaled = scaled * (slot->fB8);
     alSndpSetPitch(sound, scaled);
@@ -568,7 +568,7 @@ void func_8025C524_de(SlotRecAtB4V2 *voiceRecord, s32 panValue)
   soundPlayer = ownerAddress + 0x84;
   new_var2 = 2;
   new_var = &voiceRecord->index;
-  func_802B2F00_de(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[*new_var]);
+  alSndpSetSound(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[*new_var]);
   alSndpSetPan(soundPlayer, panValue & 0xFF);
 }
 
@@ -579,7 +579,7 @@ void func_8025C578_de(SlotRecAtB4V2 *voiceRecord)
   void *soundPlayer;
   ownerAddress = (s32)voiceRecord->owner;
   soundPlayer = ownerAddress + 0x84;
-  func_802B2F00_de(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[voiceRecord->index]);
+  alSndpSetSound(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[voiceRecord->index]);
   alSndpGetState(soundPlayer);
 }
 
@@ -598,7 +598,7 @@ void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {
     if (voiceRecord->key != ((OwnerCode8025A3EC8025B5F0 *)a0)->key) {
         s32 idx = voiceRecord->index;
         s32 addr = a0 + idx * 2;
-        func_802B2F00_de(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
+        alSndpSetSound(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
         if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }

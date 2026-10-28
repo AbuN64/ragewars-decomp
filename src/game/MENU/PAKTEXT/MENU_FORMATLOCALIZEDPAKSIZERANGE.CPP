@@ -18,7 +18,7 @@ extern char *D_800E2894[];
 extern char *D_800E28A4_eu[];
 extern char *D_800E28B4_eu[];
 extern char *D_800E28C4_eu[];
-extern s32 Pak_CountLineChars();
+extern s32 Menu_CountLineChars();
 /* Pak size line: picks the 11-character text for the value range D_8014D48C falls in (the bands end at 0x32, 0x96, 0x12C, 0x1F4,
    0x320, 0x514, 0x7D0, 0xBB8, 0x1194, 0x1964, 0x270F) in the current language and copies it onto the entry's line. */
 s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
@@ -40,7 +40,7 @@ s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     else if (v - 0x1964 < 0xDAB) src = D_800E28B4_eu[g_languageIndex];
     else if (v >= 0x270F) src = D_800E28C4_eu[g_languageIndex];
     dst = entry->text[g_languageIndex];
-    dst += Pak_CountLineChars(entry) - 11;
+    dst += Menu_CountLineChars(entry) - 11;
     if (src != 0) {
         for (i = 0; i < 11; i++) {
             *dst++ = *src++;

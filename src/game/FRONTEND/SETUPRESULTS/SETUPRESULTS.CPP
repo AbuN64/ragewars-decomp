@@ -37,7 +37,7 @@ extern void func_804399D0(char *);
 #endif
 
 
-extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
+extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 s32 Frontend_DrawSetupResultPanels(void *unused0, void *unused1, s32 event) {
     s32 i;
@@ -114,8 +114,8 @@ func_804397E8_de
             alpha -= 30;
             if (alpha <= 0) {
                 D_800E4F60->blinking = 0;
-                Frontend_SetWidgetFlag08(D_800E4F60->bannerShadow, 0);
-                Frontend_SetWidgetFlag08(D_800E4F60->banner, 0);
+                Widget_SetWidgetFlag08(D_800E4F60->bannerShadow, 0);
+                Widget_SetWidgetFlag08(D_800E4F60->banner, 0);
                 alpha = 0xFF;
             }
             D_800E4F60->banner->value = alpha;

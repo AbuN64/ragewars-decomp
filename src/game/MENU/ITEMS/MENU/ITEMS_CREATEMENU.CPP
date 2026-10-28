@@ -25,7 +25,7 @@ void Items_InvokeHandlerAndClearItemState(struct ObjectRecAt20 *object) {
     state->c = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Menu_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Menu_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
 
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 extern char g_menuText[];

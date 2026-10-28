@@ -105,7 +105,7 @@ void Particle_DrawGroundShadow(Shared_Particle *actor, GameplayCamera *view) {
     }
     angle = 0.78539824f;
     tilt = Graphu64_BuildDirectionQuaternion(&ground->normal);
-    roll.x = D_80115DEC = Math_Sinf(angle);
+    roll.x = D_80115DEC = Gu_Sinf(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;
     roll.w = Math_Cosf(angle);

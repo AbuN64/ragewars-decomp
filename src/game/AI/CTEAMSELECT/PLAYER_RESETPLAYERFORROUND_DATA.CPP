@@ -34,7 +34,7 @@ extern void Cteamselect_DrawTeamWheel(s32 arg0, s32 arg1, s32 arg2);
 void func_80218F08_de(s32 menu, s32 arg1, s32 player) {
     Gfx *cmd;
 
-    OnScreen_SetupSpriteMode(0xFF);
+    Onscrn_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     Cteamselect_DrawTeamWheel(menu, arg1, player);
 }

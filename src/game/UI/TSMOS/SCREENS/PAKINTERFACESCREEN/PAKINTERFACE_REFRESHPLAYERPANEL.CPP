@@ -59,7 +59,7 @@ struct SetupRosterRecord {
 
 int Control_IsControllerConnected(int);
 u8 * XPlus_CopyString(u8 *, u8 *);
-char * Frontend_GetStringByIndex(s32);
+char * Node_GetStringByIndex(s32);
 void SmpOverlay_SetSlotValue(void *, s32, s32);
 s32 SmpOverlay_GetSlotValue(void *, s32);
 void SmpOverlay_ShowSlotNode(void *, s32, void *);
@@ -161,7 +161,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
 
     previousPanel = D_800E54A4->players[playerIndex].menuWidget;
     if (previousPanel != 0) {
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) previousPanel, 0);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) previousPanel, 0);
     }
     Widget_SetWidgetFlag40(SmpOverlay_GetSlotValue(D_800E54A4->root, playerIndex), 0);
     /* the published B6E8 takes the controller handle as a plain scalar */
@@ -172,7 +172,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
 
         idlePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, PANEL_ROOT_ID);
         D_800E54A4->players[playerIndex].menuWidget = idlePanel;
-        Frontend_SetWidgetFlag08(idlePanel, 1);
+        Widget_SetWidgetFlag08(idlePanel, 1);
         text_node = (s32)Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, PANEL_TEXT_ID);
         ((SetupTextNode *)text_node)->unk38 = D_800E54A4->players[playerIndex].nameText;
         screenPhase = D_800E54A4->phase;
@@ -180,30 +180,30 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
         switch (screenPhase) {                        /* switch 2 */
         case 1:                                     /* switch 2 */
         case 7:                                     /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_17_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_17_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 2:                                     /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_2_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_2_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 3:                                     /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_3_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_3_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 4:                                     /* switch 2 */
         case 6:                                     /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_46_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_46_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 5:                                     /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_5_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_5_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         case 0:                                     /* switch 2 */
         default:                                    /* switch 2 */
-            replacement = Frontend_GetStringByIndex(MODE_DEFAULT_ID);
-            panelTemplate = Frontend_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
+            replacement = Node_GetStringByIndex(MODE_DEFAULT_ID);
+            panelTemplate = Node_GetStringByIndex(((SetupTextNode *)text_node)->unk34);
             break;
         }
 
@@ -212,7 +212,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
         Random_ReplaceTextOccurrences((&D_800E54A4->players[playerIndex])->nameText, g_modeToken, replacement);
         playerLinkOffset = playerIndex * 8;
         if (D_800E54A4->phase == 6) {
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, MODE_HIDE_ID), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, MODE_HIDE_ID), 0);
             playerLinkOffset = playerIndex * 8;
         }
         break;
@@ -220,7 +220,7 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
 
         pakErrorPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_1_2EC);
         D_800E54A4->players[playerIndex].menuWidget = pakErrorPanel;
-        Frontend_SetWidgetFlag08(pakErrorPanel, 1);
+        Widget_SetWidgetFlag08(pakErrorPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_1_2EE));
         playerLinkOffset = playerIndex * 8;
         break;
@@ -231,28 +231,28 @@ void PAKInterface_RefreshPlayerPanel(s32 playerIndex) {
 block_36:
         statusPanel = Node_FindWidgetByResourceId(var_a0_3, var_a1_2);
         D_800E54A4->players[playerIndex].menuWidget = statusPanel;
-        Frontend_SetWidgetFlag08(statusPanel, 1);
+        Widget_SetWidgetFlag08(statusPanel, 1);
         playerLinkOffset = playerIndex * 8;
         break;
     case 3:                                         /* switch 1 */
 
         pakUnavailablePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_3_2BB);
         D_800E54A4->players[playerIndex].menuWidget = pakUnavailablePanel;
-        Frontend_SetWidgetFlag08(pakUnavailablePanel, 1);
+        Widget_SetWidgetFlag08(pakUnavailablePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_3_2BC));
         break;
     case 4:                                         /* switch 1 */
 
         noteListPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_4_2D5);
         D_800E54A4->players[playerIndex].menuWidget = noteListPanel;
-        Frontend_SetWidgetFlag08(noteListPanel, 1);
+        Widget_SetWidgetFlag08(noteListPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_4_2DA));
         PAKInterface_LoadNoteList(playerIndex);
         playerLinkOffset = playerIndex * 8;
         break;
     case 22:                                        /* switch 1 */
         /* the panel slot is untyped storage; the hub types the E8D8 argument as the item */
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->players[playerIndex].menuWidget, 1);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->players[playerIndex].menuWidget, 1);
         linkScan = D_800E54A4;
         selectionOrLabel = 0;
         if (linkScan->links[0].state == 0) {
@@ -300,7 +300,7 @@ case22_selected:
 
         activeProfilesPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_6_2E4);
         D_800E54A4->players[playerIndex].menuWidget = activeProfilesPanel;
-        Frontend_SetWidgetFlag08(activeProfilesPanel, 1);
+        Widget_SetWidgetFlag08(activeProfilesPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_6_2E8));
         PAKInterface_LabelActiveProfileRows(playerIndex);
         playerLinkOffset = playerIndex * 8;
@@ -309,7 +309,7 @@ case22_selected:
 
         chosenProfilePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_7_2CA);
         D_800E54A4->players[playerIndex].menuWidget = chosenProfilePanel;
-        Frontend_SetWidgetFlag08(chosenProfilePanel, 1);
+        Widget_SetWidgetFlag08(chosenProfilePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_7_2CC));
 
         var_a0_4 = D_800E54A4->players[playerIndex].menuWidget;
@@ -322,7 +322,7 @@ case22_selected:
 
         notePanelOrLabel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_8_2CE);
         D_800E54A4->players[playerIndex].menuWidget = notePanelOrLabel;
-        Frontend_SetWidgetFlag08(notePanelOrLabel, 1);
+        Widget_SetWidgetFlag08(notePanelOrLabel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_8_2CF));
 
         selectionOrLabel = D_800E54A4->players[playerIndex].slot;
@@ -334,7 +334,7 @@ case22_selected:
 
         linkedProfilePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_9_2C6);
         D_800E54A4->players[playerIndex].menuWidget = linkedProfilePanel;
-        Frontend_SetWidgetFlag08(linkedProfilePanel, 1);
+        Widget_SetWidgetFlag08(linkedProfilePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_9_2C8));
         ((MenuWidget *)Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_9_2C7))->text = D_800E54A4->players[D_800E54A4->links[0].player].slots[D_800E54A4->links[0].entry];
         goto block_84;
@@ -342,21 +342,21 @@ case22_selected:
 
         statusPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_10_2A4);
         D_800E54A4->players[playerIndex].menuWidget = statusPanel;
-        Frontend_SetWidgetFlag08(statusPanel, 1);
+        Widget_SetWidgetFlag08(statusPanel, 1);
         playerLinkOffset = playerIndex * 8;
         break;
     case 11:                                        /* switch 1 */
 
         stateElevenPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_11_2D1);
         D_800E54A4->players[playerIndex].menuWidget = stateElevenPanel;
-        Frontend_SetWidgetFlag08(stateElevenPanel, 1);
+        Widget_SetWidgetFlag08(stateElevenPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_11_2D2));
         break;
     case 12:                                        /* switch 1 */
 
         nameEntryPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_12_2F2);
         D_800E54A4->players[playerIndex].menuWidget = nameEntryPanel;
-        Frontend_SetWidgetFlag08(nameEntryPanel, 1);
+        Widget_SetWidgetFlag08(nameEntryPanel, 1);
         itemIndex = 0;
         selectionOrLabel = (s32)Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_12_2F3);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, (void *)selectionOrLabel);
@@ -390,7 +390,7 @@ case22_selected:
 
         profileListPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_13_2AF);
         D_800E54A4->players[playerIndex].menuWidget = profileListPanel;
-        Frontend_SetWidgetFlag08(profileListPanel, 1);
+        Widget_SetWidgetFlag08(profileListPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_13_2B6));
         PAKInterface_BuildProfileSlotList(playerIndex);
         playerLinkOffset = playerIndex * 8;
@@ -402,7 +402,7 @@ case22_selected:
 
         readyPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_17_2A5);
         D_800E54A4->players[playerIndex].menuWidget = readyPanel;
-        Frontend_SetWidgetFlag08(readyPanel, 1);
+        Widget_SetWidgetFlag08(readyPanel, 1);
         if (PAKInterface_CountPendingPlayerPanels() == 0) {
             exitPhase = D_800E54A4->phase;
             if (exitPhase == 4) {
@@ -443,14 +443,14 @@ mode_end:;
 
         createProfilePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_15_2EF);
         D_800E54A4->players[playerIndex].menuWidget = createProfilePanel;
-        Frontend_SetWidgetFlag08(createProfilePanel, 1);
+        Widget_SetWidgetFlag08(createProfilePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_15_2F1));
         break;
     case 16:                                        /* switch 1 */
 
         recordPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_16_2B7);
         D_800E54A4->players[playerIndex].menuWidget = recordPanel;
-        Frontend_SetWidgetFlag08(recordPanel, 1);
+        Widget_SetWidgetFlag08(recordPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_16_2B9));
         var_a1_3 = UI_CASE_16_2BA;
 
@@ -464,42 +464,42 @@ block_61:
 
         missingSavePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_21_2E1);
         D_800E54A4->players[playerIndex].menuWidget = missingSavePanel;
-        Frontend_SetWidgetFlag08(missingSavePanel, 1);
+        Widget_SetWidgetFlag08(missingSavePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_21_2E2));
         break;
     case 23:                                        /* switch 1 */
 
         stateTwentyThreePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_23_2AC);
         D_800E54A4->players[playerIndex].menuWidget = stateTwentyThreePanel;
-        Frontend_SetWidgetFlag08(stateTwentyThreePanel, 1);
+        Widget_SetWidgetFlag08(stateTwentyThreePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_23_2AE));
         break;
     case 24:                                        /* switch 1 */
 
         fullProfilesPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_24_2A9);
         D_800E54A4->players[playerIndex].menuWidget = fullProfilesPanel;
-        Frontend_SetWidgetFlag08(fullProfilesPanel, 1);
+        Widget_SetWidgetFlag08(fullProfilesPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_24_2AA));
         break;
     case 25:                                        /* switch 1 */
 
         unavailableProfilesPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_25_2EA);
         D_800E54A4->players[playerIndex].menuWidget = unavailableProfilesPanel;
-        Frontend_SetWidgetFlag08(unavailableProfilesPanel, 1);
+        Widget_SetWidgetFlag08(unavailableProfilesPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_25_2EB));
         break;
     case 26:                                        /* switch 1 */
 
         stateTwentySixPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_26_2A6);
         D_800E54A4->players[playerIndex].menuWidget = stateTwentySixPanel;
-        Frontend_SetWidgetFlag08(stateTwentySixPanel, 1);
+        Widget_SetWidgetFlag08(stateTwentySixPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_26_2A7));
         break;
 case27_found:
         SmpOverlay_ShowSlotById((s32) D_800E54A4->field0, playerIndex, slotLabelId);
         goto case27_done;
     case 27:                                        /* switch 1 */
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->players[playerIndex].menuWidget, 1);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->players[playerIndex].menuWidget, 1);
         itemIndex = 0;
 
         SmpOverlay_ShowSlotById((s32) D_800E54A4->field0, playerIndex, CHECK_0_ID);
@@ -545,14 +545,14 @@ case27_done:
 
         stateTwentyEightPanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_28_2DE);
         D_800E54A4->players[playerIndex].menuWidget = stateTwentyEightPanel;
-        Frontend_SetWidgetFlag08(stateTwentyEightPanel, 1);
+        Widget_SetWidgetFlag08(stateTwentyEightPanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_28_2DF));
         break;
     case 29:                                        /* switch 1 */
 
         stateTwentyNinePanel = Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].sprite, UI_CASE_29_2BF);
         D_800E54A4->players[playerIndex].menuWidget = stateTwentyNinePanel;
-        Frontend_SetWidgetFlag08(stateTwentyNinePanel, 1);
+        Widget_SetWidgetFlag08(stateTwentyNinePanel, 1);
         SmpOverlay_ShowSlotNode(D_800E54A4->root, playerIndex, Node_FindWidgetByResourceId(D_800E54A4->players[playerIndex].menuWidget, UI_CASE_29_2C0));
         playerLinkOffset = playerIndex * 8;
         break;

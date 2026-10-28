@@ -19,7 +19,7 @@ s32 Player_FormatPlayerRewardScore(LayeredText *field, struct MenuRules *holder)
     s32 player = Player_GetPlayerIndex(players, holder->locked);
     s32 value = g_playerRewardScoreFields[player * 75];
     char *text = (char *)field->text[players->game.language];
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EED80, value);
     return 0;
 }
 #endif
@@ -27,19 +27,19 @@ s32 Player_FormatPlayerRewardScore(LayeredText *field, struct MenuRules *holder)
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 /* Formats the halfword g_playerRewardScoreFieldsDe holds for the player func_8022A5A0_de identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
-   format D_800DE700 four bytes before the length Pak_CountLineChars reports. Returns zero. */
+   format D_800DE700 four bytes before the length Menu_CountLineChars reports. Returns zero. */
 
 extern char D_80145040[];
 extern char g_fmtDec4Pad[];
 extern s32 Player_GetPlayerIndex(void *, unsigned int);
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 s32 Player_FormatPlayerRewardScore(LayeredText *field, struct Holder *holder) {
     s32 player = Player_GetPlayerIndex(D_80145040, (u32)holder->owner);
     s32 value = D_801462C8.playerSettings[player].score;
     char *text = (char *)*field->text;
 
-    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtDec4Pad, value);
     return 0;
 }
 #endif

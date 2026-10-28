@@ -28,7 +28,7 @@ s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 arg2) {
         D_800E59E0->entries[player].state = 2;
         SmpOverlay_SetSlotValue(D_800E59E0->entries[0].slots, player, 1);
         for (i = 0; i < 6; i++) {
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
         }
         Key_FindKeyIndex(D_801462C8.playerSettings[player].character);
         settings = (u8 *)D_800E59E0 + (player * sizeof(struct Entry42) + 8);

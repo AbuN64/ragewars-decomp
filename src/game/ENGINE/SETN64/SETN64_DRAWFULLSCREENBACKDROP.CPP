@@ -104,7 +104,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 #include "COMMON/DISPLAY.H"
 extern void SetN64_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
-extern void OnScreen_SetupSpriteMode(s32 alpha);
+extern void Onscrn_SetupSpriteMode(s32 alpha);
 void SetN64_DrawFullscreenBackdrop(void *arg0) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 width;
@@ -121,7 +121,7 @@ void SetN64_DrawFullscreenBackdrop(void *arg0) {
     gDPFillRectangle(g_displayListCursor++, 0, 0, (SCREEN_WD), (SCREEN_HT));
     OnScreen_GetImageDimensions(0x386, 0, &width, &height);
     if (width != 0 && height != 0) {
-        OnScreen_SetupSpriteMode(0xFF);
+        Onscrn_SetupSpriteMode(0xFF);
         OnScreen_DrawSpriteResource(0x386, 0, 0, 0, (f32)SCREEN_WD / (f32)width, (f32)SCREEN_HT / (f32)height, 1);
     }
 }

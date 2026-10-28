@@ -97,14 +97,14 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
         D_800E4F60->unk44C->alpha = 0xFF;
         D_800E4F60->unk3DC = 9;
         if (D_800E4F60->selection == 0) {
-            Frontend_SetWidgetFlag08(D_800E4F60->unk440, 1);
+            Widget_SetWidgetFlag08(D_800E4F60->unk440, 1);
             var_a0 = D_800E4F60->unk448;
         } else {
             var_a0 = D_800E4F60->unk444;
         }
-        Frontend_SetWidgetFlag08(var_a0, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->label, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
+        Widget_SetWidgetFlag08(var_a0, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->label, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
         goto block_7;
     }
 block_7:
@@ -119,7 +119,7 @@ block_7:
         D_800E4F60->unk3E0 = temp_v0_2;
         if (temp_v0_2 <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
+            Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
             SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk3DC = 4;
             D_800E4F60->unk3E0 = 4;
@@ -145,7 +145,7 @@ block_7:
             enabled = 0;
             var_a0_3 = D_800E4F60->unk458;
             D_800E4F60->unk460 = 1;
-            Frontend_SetWidgetFlag08(var_a0_3, enabled);
+            Widget_SetWidgetFlag08(var_a0_3, enabled);
         }
         break;
     case 4:
@@ -166,13 +166,13 @@ block_7:
         }
         break;
     case 5:
-        Frontend_SetWidgetFlag08(D_800E4F60->unk458, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
+        Widget_SetWidgetFlag08(D_800E4F60->unk458, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
         D_800E4F60->unk3DC = 2;
         D_800E4F60->unk3E0 = 4;
-        Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
+        Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 8:
@@ -196,7 +196,7 @@ block_7:
         enabled = 1;
         if (D_800E4F60->selection == 0) {
             var_a0_3 = D_800E4F60->unk448;
-            Frontend_SetWidgetFlag08(var_a0_3, enabled);
+            Widget_SetWidgetFlag08(var_a0_3, enabled);
         }
         break;
     default:
@@ -251,12 +251,12 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         D_800E4F60->unk44C->alpha = 0xFF;
         D_800E4F60->unk3DC = 9;
         if (D_800E4F60->selection == 0) {
-            Frontend_SetWidgetFlag08(D_800E4F60->unk440, 1);
+            Widget_SetWidgetFlag08(D_800E4F60->unk440, 1);
             item = D_800E4F60->unk448;
         } else item = D_800E4F60->unk444;
-        Frontend_SetWidgetFlag08(item, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->label, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
+        Widget_SetWidgetFlag08(item, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->label, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 1);
     }
     switch (D_800E4F60->unk3DC) {
     case 1:
@@ -264,7 +264,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         D_800E4F60->right->x -= (u16)D_800E4F60->rightCount;
         if (--D_800E4F60->unk3E0 <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
+            Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
             SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk3DC = 4;
             D_800E4F60->unk3E0 = 4;
@@ -284,7 +284,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         if (D_800E4F60->unk460 == 0) {
             Tsmos_ActivateControllerState();
             D_800E4F60->unk460 = 1;
-            Frontend_SetWidgetFlag08(D_800E4F60->unk458, 0);
+            Widget_SetWidgetFlag08(D_800E4F60->unk458, 0);
         }
         break;
     case 4:
@@ -303,13 +303,13 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         }
         break;
     case 5:
-        Frontend_SetWidgetFlag08(D_800E4F60->unk458, 1);
-        Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
+        Widget_SetWidgetFlag08(D_800E4F60->unk458, 1);
+        Widget_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
         ScenarioSetup_ResetSelectionIndicators();
         ScenarioSetup_SetCatalogueAlpha(0);
         D_800E4F60->unk3DC = 2;
         D_800E4F60->unk3E0 = 4;
-        Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
+        Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 6: case 7: break;
@@ -328,7 +328,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         fade = (fade + 1) * 2;
         if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
         ScenarioSetup_SetCatalogueAlpha(fade);
-        if (D_800E4F60->selection == 0) Frontend_SetWidgetFlag08(D_800E4F60->unk448, 1);
+        if (D_800E4F60->selection == 0) Widget_SetWidgetFlag08(D_800E4F60->unk448, 1);
         break;
     }
     if (D_800E4F60->unk3DC == 3) {
@@ -458,11 +458,11 @@ void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
             scan:
                 if (table[i] == D_800E4F64[j].key) {
                     item = Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].key);
-                    Frontend_SetWidgetFlag08(item, visible);
+                    Widget_SetWidgetFlag08(item, visible);
                     item->alpha = alpha;
                     if (D_800E4F64[j].other != -1) {
                         item = Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[j].other);
-                        Frontend_SetWidgetFlag08(item, visible);
+                        Widget_SetWidgetFlag08(item, visible);
                         item->alpha = alpha;
                     }
                     found = 1;
@@ -520,18 +520,18 @@ void ScenarioSetup_StartSelectedScenario(void) {
     category = map_category(D_800E4F60->category);
     list = ScenarioSetup_ResolveArenaFromSelection(category, D_800E4F60->selection);
     for (i = 0; i < 40; i++) {
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
         if (D_800E4F64[i].other != -1) {
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
         }
     }
     Random_SetSelectedStage(category, list);
     Random_SetMenuChoiceResult(0x15);
-    Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetC, 0);
-    Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetE, 0);
-    Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetD, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->label, 0);
-    Frontend_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetB, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetC, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetE, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetD, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->label, 0);
+    Widget_SetWidgetFlag08(((struct ScreenScenarioSetupRefreshSelectedArenaLabel *)D_800E4F60)->widgetB, 0);
     ScenarioSetup_ClearFlagBits();
     if (D_800E4F60->selection == 0) {
         ScenarioSetup_SetCupCategory(category);
@@ -724,9 +724,9 @@ void ScenarioSetup_HideArenaCatalogueWidgets(void) {
     index = 0;
     do {
         offset = index * 0x10;
-        Frontend_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
+        Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
         if (*(s32 *)(&D_800E0F18 + offset) != -1) {
-            Frontend_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
+            Widget_SetWidgetFlag08((void *)Node_FindWidgetByResourceId((void*)D_800E4F60->window, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
         }
             index += 1;
     } while (index < 0x28);
@@ -821,8 +821,8 @@ s32 ScenarioSetup_ReturnSetupEventZero(void) {
 void ScenarioSetup_ResetSelectionIndicators(void) {
     D_800E4F60->unk454->alpha = 0xFF;
     D_800E4F60->unk450->alpha = 0xFF;
-    Frontend_SetWidgetFlag08(D_800E4F60->unk450, 1);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk454, 1);
+    Widget_SetWidgetFlag08(D_800E4F60->unk450, 1);
+    Widget_SetWidgetFlag08(D_800E4F60->unk454, 1);
     D_800E4F60->unk46C = 0;
 }
 
@@ -875,11 +875,11 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     D_800E4F60->unk3DC = 8;
     ScenarioSetup_SetCatalogueAlpha(0x41);
 
-    Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk444, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->label, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk3F0, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk440, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk444, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->label, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk3F0, 0);
 
     D_800E4F60->unk44C->alpha = 0x5A;
     SoundElement_PlayFlatSound(0xE7C);
@@ -924,10 +924,10 @@ s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void
     if (SCR4D4->selection != 0) {
         return 0;
     }
-    Frontend_SetWidgetFlag08(SCR4D4->left, 1);
-    Frontend_SetWidgetFlag08(SCR4D4->marker, 1);
+    Widget_SetWidgetFlag08(SCR4D4->left, 1);
+    Widget_SetWidgetFlag08(SCR4D4->marker, 1);
     SCR4D4->marker->x = SCR4D4->category * 34 + 0x7C;
-    Frontend_SetWidgetFlag08(SCR4D4->right, 0);
+    Widget_SetWidgetFlag08(SCR4D4->right, 0);
     Model_SetPreviewModel(SCR4D4->view, SCR4D4->category + 0xEA6);
     return 0;
 }
@@ -982,9 +982,9 @@ moved:
     D_800E4F60->unk464 = 0;
     D_800E4F60->item->alpha = 0x41;
     ScenarioSetup_RefreshSelectedArenaLabel();
-    Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk444, 1);
-    Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk440, 0);
+    Widget_SetWidgetFlag08(D_800E4F60->unk444, 1);
+    Widget_SetWidgetFlag08(D_800E4F60->unk448, 0);
     return 0;
 }
 
@@ -1024,7 +1024,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, 
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR78C->selection == 0) {
         Model_SetPreviewModel(SCR78C->view, SCR78C->category + 0xEA6);
-        Frontend_SetWidgetFlag08(SCR78C->marker, 1);
+        Widget_SetWidgetFlag08(SCR78C->marker, 1);
         SCR78C->marker->x = SCR78C->category * 34 + 0x7C;
     }
     return 0;
@@ -1070,7 +1070,7 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR904->selection == 0) {
         Model_SetPreviewModel(SCR904->view, SCR904->category + 0xEA6);
-        Frontend_SetWidgetFlag08(SCR904->marker, 1);
+        Widget_SetWidgetFlag08(SCR904->marker, 1);
         SCR904->marker->x = SCR904->category * 34 + 0x7C;
     }
     return 0;
@@ -1153,7 +1153,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
 
     D_800E53C0 = (void *)Cache_AllocateMemory(0x330);
     D_800E53C0->unkE0 = root;
-    Frontend_SetWidgetFlag08(root, 0);
+    Widget_SetWidgetFlag08(root, 0);
     Frontend_InitMenuImage(D_800E53C0->transition, 0x67, 0, 0, 0);
     Frontend_StartMenuImageTransition(D_800E53C0->transition);
     D_800E53C0->active = 1;
@@ -1198,15 +1198,15 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
             screen->count = 0;
             ScenarioSetup_HideResultCatalogueWidgets();
             item = Node_FindWidgetByResourceId(root, 0x266 + RESULTS_MENU_SHIFT);
-            Frontend_SetWidgetFlag08(item, 1);
+            Widget_SetWidgetFlag08(item, 1);
             item->alpha = 115;
             item->text = resultsUnavailable(slot);
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(root, RESULTS_RIGHT_ITEM), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(root, RESULTS_RIGHT_ITEM), 0);
         } else if (screen->selection != -1) {
             screen->first = 0;
             screen->count = 0;
             ScenarioSetup_HideResultCatalogueWidgets();
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(root, RESULTS_RIGHT_ITEM), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(root, RESULTS_RIGHT_ITEM), 0);
             ScenarioSetup_InitResultModelPreview();
         } else {
             ScenarioSetup_FillResultRows();
@@ -1271,18 +1271,18 @@ void ScenarioSetup_FillResultRows(void) {
         record = &g_playerSettings[player];
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[0]);
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x96;
         pending = widget;
         pending->value = D_800E3A58[Key_FindKeyIndex(record->kind)].portrait;
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[2]);
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x19;
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[4]);
         widget->alpha = 0xAF;
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) {
             widget->text = D_80102B00[player].name;
         } else {
@@ -1293,29 +1293,29 @@ void ScenarioSetup_FillResultRows(void) {
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[6]);
         widget->alpha = 0x73;
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         if (record->out == 0) widget->text = Match_UpdateRankText(player);
         else widget->text = resultsRankText(record->rank);
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);
         widget->alpha = 0xAF;
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         XStdio_FormatBuffer(D_800E53C0->killText[row], resultsNumberFormat(), record->kills);
         widget->text = D_800E53C0->killText[row];
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[10]);
         widget->alpha = 0xAF;
-        Frontend_SetWidgetFlag08(widget, 1);
+        Widget_SetWidgetFlag08(widget, 1);
         XStdio_FormatBuffer(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
         *&widget->text = D_800E53C0->scoreText[row];
 
         if (D_8014DD98.kind == 0) {
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
             Frontend_ShowResultRankBadge(player, row, RESULTS_RANK_GROUP);
         } else {
             widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]);
             widget->alpha = 0xAF;
-            Frontend_SetWidgetFlag08(widget, 1);
+            Widget_SetWidgetFlag08(widget, 1);
             attempts = D_800FF140_de[player];
             percent = 0;
             if (attempts > 0) percent = D_800FEAE0[player] * 100 / attempts;
@@ -1324,12 +1324,12 @@ void ScenarioSetup_FillResultRows(void) {
         }
 
         if (D_8014DD98.kind == 3) {
-            Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
+            Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
             Frontend_ShowResultRankBadge(player, row, RESULTS_SECONDARY_GROUP);
         } else {
             widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]);
             widget->alpha = 0xAF;
-            Frontend_SetWidgetFlag08(widget, 1);
+            Widget_SetWidgetFlag08(widget, 1);
             pending = widget;
             switch (D_8014DD98.kind) {
             case 0:
@@ -1346,20 +1346,20 @@ void ScenarioSetup_FillResultRows(void) {
         }
 
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
         widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
         if (record->out == 0) {
             if (D_800E53C0->icons[player][0] != -1) {
                 widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
-                Frontend_SetWidgetFlag08(widget, 1);
+                Widget_SetWidgetFlag08(widget, 1);
                 widget->value = D_800E01B0_de[D_800E53C0->icons[player][0]];
             }
             if (D_800E53C0->icons[player][1] != -1) {
                 widget = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
-                Frontend_SetWidgetFlag08(widget, 1);
+                Widget_SetWidgetFlag08(widget, 1);
                 widget->value = D_800E01B0_de[D_800E53C0->icons[player][1]];
             }
         }
@@ -1549,25 +1549,25 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
     offset = 0;
     do {
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[0]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[2]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[4]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[6]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[8]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[10]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[12]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[14]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[16]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         resource = Node_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[bank].ids[18]);
-        Frontend_SetWidgetFlag08(resource, 0);
+        Widget_SetWidgetFlag08(resource, 0);
         offset += 0x28;
         bank++;
     } while (bank < 4);
@@ -1613,7 +1613,7 @@ void ScenarioSetup_InitResultModelPreview(void) {
 #else
         item = Node_FindWidgetByResourceId(PREVIEW_SCREEN->window, 0x268);
 #endif
-        Frontend_SetWidgetFlag08(item, 1);
+        Widget_SetWidgetFlag08(item, 1);
         item->alpha = 0xAF;
         item->image = previewModelImage();
         scale.x = D_800DDAFC_de;

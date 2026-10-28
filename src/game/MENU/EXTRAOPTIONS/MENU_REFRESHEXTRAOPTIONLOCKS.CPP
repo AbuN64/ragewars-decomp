@@ -47,7 +47,7 @@ enum { MENU_804212A4_941 = 941, MENU_804212A4_943 = 943, MENU_804212A4_945 = 945
 
 
 
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 extern void Menu_AdvanceTextRows();
 
@@ -117,8 +117,8 @@ void Menu_OpenOptionsKeypad(void) {
     MenuWidget *item;
     s32 key;
 
-    Frontend_SetWidgetFlag08(D_800E4400->pad, 1);
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
+    Widget_SetWidgetFlag08(D_800E4400->pad, 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, MENU_8042144C_939), 0);
     D_800E4400->mode = 1;
     D_800E4400->length = 8;
     D_800E4400->value = 0;

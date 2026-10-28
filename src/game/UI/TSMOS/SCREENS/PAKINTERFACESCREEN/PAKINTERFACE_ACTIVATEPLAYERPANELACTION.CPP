@@ -30,12 +30,12 @@ extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 extern s32 PAKInterface_CheckRecordsNoteCapacity(s32, s32 *);
 extern s32 PAKInterface_SavePlayerRecords(s32);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 
 extern s32 Note_DeleteNote(s32, s32);
 
 extern void Player_InitializeProfile(void *);
-extern void Pak_ProbeStatus(s32);
+extern void Note_ProbeStatus(s32);
 extern void PAKInterface_ResolvePlayerPakState(s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 
@@ -420,7 +420,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].state = 4;
                 PAKInterface_RefreshPlayerPanel(p);
             } else {
-                Pak_ProbeStatus(p);
+                Note_ProbeStatus(p);
                 PAKInterface_ResolvePlayerPakState(p);
             }
             break;
@@ -733,11 +733,11 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
         Frontend_SetPlayerProfileLink(p, D_800E54A4->players[p].choice, i);
         PAKInterface_LoadLinkedPlayerProfile(i);
 #if defined(VERSION_DE)
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
 #elif defined(VERSION_EU_X)
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
 #else
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
 #endif
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
         D_800E54A4->links[i].state = 0;

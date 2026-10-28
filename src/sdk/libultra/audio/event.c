@@ -13,7 +13,7 @@ extern s32 func_802BD170_de(s32);
             /* alUnlink */
 
 
-void func_802AFFC0_de(void *eventQueue, void *eventStorage, s32 eventCapacity) {
+void alEvtqNew(void *eventQueue, void *eventStorage, s32 eventCapacity) {
     ALEventQueue *queue = eventQueue;
     s32 i;
     char *p;
@@ -57,7 +57,7 @@ s32 alEvtqNextEvent(void *eventQueue, s16 *outputEvent) {
   /* alLink */
  /* alCopy */
 
-void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
+void alEvtqPostEvent(ALEventQueue *evtq, ALEvent *evt, s32 delta)
 {
     ALEventListItem *item;
     ALEventListItem *nextItem;

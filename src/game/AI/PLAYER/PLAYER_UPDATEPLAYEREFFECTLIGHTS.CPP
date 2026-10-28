@@ -60,7 +60,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
             player->views5E8.view7BC_102.timer = 0.0f;
         }
     }
-    OnScreen_SetupSpriteMode(0xFF);
+    Onscrn_SetupSpriteMode(0xFF);
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;

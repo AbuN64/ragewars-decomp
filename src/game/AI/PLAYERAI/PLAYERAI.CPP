@@ -448,7 +448,7 @@ block_47:
                                 specialHitStatistics = (void *)creditedPlayer->unk5D8;
                                 specialHitStatistics->special_hits = (u16) (specialHitStatistics->special_hits + 1);
                             }
-                            facingSine = Math_Sinf(attacker->unk6C);
+                            facingSine = Gu_Sinf(attacker->unk6C);
                             sourceForwardProjection = ((damagedPlayer->unk8 - reaction_source->unk8) * -facingSine) + ((damagedPlayer->unk10 - reaction_source->unk10) * -Math_Cosf(attacker->unk6C));
                             if (sourceForwardProjection < D_800C22DC_de) {
 
@@ -1057,7 +1057,7 @@ void Player_ResetPlayerWeapons(struct Player *player) {
 
 extern s32 D_801371D4;
 extern void Player_ReleaseObjectHandles(void *);
-extern void OvlScene_SetSelection(void *, s32, s32);
+extern void Scene_SetSelection(void *, s32, s32);
 extern f32 Graphu64_GetPointDistance(void *, void *);
 extern s32 Portal_FindNearestPointIndex(void *, void *);
 extern void Control_SetProfileMode(void *, s32);
@@ -1114,7 +1114,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
             goto fallback;
         }
         if (single.kind != D_801371D4) {
-            OvlScene_SetSelection(world, model, scale);
+            Scene_SetSelection(world, model, scale);
             goto done;
         }
         ((Shared_ActorView *)player)->weapon.position0 = single.pos;
@@ -1127,7 +1127,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Player_InitActorHudState(player);
     goto done;
 fallback:
-    OvlScene_SetSelection(&g_world, model, scale);
+    Scene_SetSelection(&g_world, model, scale);
 done:
     cell = Portal_FindNearestPointIndex(&D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;

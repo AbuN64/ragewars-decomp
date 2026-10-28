@@ -114,7 +114,7 @@ extern struct CourseOptionsScreen *D_800E39C0;
 extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
+extern void Widget_SetWidgetFlag08(MenuWidget *, s32);
 extern void Tsmos_ActivateControllerState(void);
 
 s32 Menu_CreateEuJoinOptions(void *handle) {
@@ -130,7 +130,7 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     widget = Node_FindWidgetByResourceId(handle, 0x38B);
     widget->alpha = 0x8C;
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-        Frontend_SetWidgetFlag08(widget, 0);
+        Widget_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
@@ -140,10 +140,10 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     D_800E39C0->step = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
     }
     Tsmos_ActivateControllerState();
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
     return 0;
 }
 #endif

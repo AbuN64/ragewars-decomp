@@ -58,7 +58,7 @@ static __inline__ void *menuPrompt(MenuPakBeginProfileLoad *menu) {
 }
 
 /* Finds the first available controller slot and caches its index. */
-void Pak_ProbeStatus(s32);
+void Note_ProbeStatus(s32);
 
  /* extern */
 s32 Note_GetStatus(s32);
@@ -108,7 +108,7 @@ void Timer_SelectAvailableChannel(void) {
         attempts = 0;
     unavailable = -2;
 loop_2:
-        Pak_ProbeStatus(channel);
+        Note_ProbeStatus(channel);
         if (Note_GetStatus(channel) == unavailable) {
             channel += 1;
             if (channel >= 4) {

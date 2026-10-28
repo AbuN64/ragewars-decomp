@@ -26,11 +26,11 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 extern struct MenuSettings D_801462C8;
 
 #if defined(VERSION_EU)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800E2244 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Pak_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800E2244 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #elif defined(VERSION_EU_X)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800DDC28 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Pak_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800DDC28 formatted with D_800DE758_de for a positive or D_800EEDE0 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #else
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800D35FC_de formatted with D_800DE758_de for a positive or D_800DE760 for a negative step four bytes before the length Pak_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults D_80146302) as a signed offset from 128 in steps of eight, using the text D_800D35F8 for zero and otherwise the text D_800D35FC_de formatted with D_800DE758_de for a positive or D_800DE760 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #endif
 
 
@@ -46,7 +46,7 @@ extern char *D_800DDC28;
 #else
 #endif
 
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 
 /* Replaces the byte at offset 0x7A of the second argument's owner settings (or the defaults D_80146302) with what Menu_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. Adapted from Items_AdjustPlayerOption79 with the settings byte 0x7A changed. */
@@ -153,7 +153,7 @@ field->text[D_801462C8.language]
 *field->text
 #endif
 ;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800DE758_de, step);
     } else {
 #if defined(VERSION_EU)
         field->text = &D_800E2244;
@@ -170,9 +170,9 @@ field->text[D_801462C8.language]
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEDE0, step);
 #else
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;
@@ -214,7 +214,7 @@ field->text[D_801462C8.language]
 *field->text
 #endif
 ;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800DE758_de, step);
     } else {
 #if defined(VERSION_EU)
         field->text = &D_800E2264;
@@ -231,9 +231,9 @@ field->text[D_801462C8.language]
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), D_800EEDE0, step);
 #else
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;

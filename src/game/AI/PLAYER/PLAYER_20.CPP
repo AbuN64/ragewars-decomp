@@ -126,14 +126,14 @@ void Player_UpdateFlyMode(void *player, void *bodyActor) {
         f32 angle;
         angle = ((func_80224078_Arg1 *)bodyActor)->unk6C;
         angle += (held = D_800C2998_de);
-        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * Math_Sinf(angle);
+        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * Gu_Sinf(angle);
     }
     direction.y = ((func_80224078_Arg1 *)bodyActor)->unk20;
     direction.z = ((func_80224078_Arg0 *)player)->unk6C0 *
                   Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C + held);
     held = D_800C299C_de;
     direction.x += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   Math_Sinf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
+                   Gu_Sinf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
                    Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
 

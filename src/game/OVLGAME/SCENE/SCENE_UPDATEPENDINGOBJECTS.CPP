@@ -8,7 +8,7 @@
 
 
 extern void Scene_LoadSceneLight(void);
-void OvlScene_SetSelection(ItemsSelectionState *state,int selection,int mode) {
+void Scene_SetSelection(ItemsSelectionState *state,int selection,int mode) {
  state->active=1;
  state->mode=mode;
  state->selection=selection;

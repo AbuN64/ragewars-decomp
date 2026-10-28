@@ -224,7 +224,7 @@ void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMod
 f32 Gsky_SampleShakeWave(struct Wave *wave) {
     switch (wave->kind) {
     case 1:
-        return Math_Sinf(wave->phase * D_800C865C) * wave->amplitude;
+        return Gu_Sinf(wave->phase * D_800C865C) * wave->amplitude;
     case 0:
         return Graphu64_RandomBetween(-wave->amplitude, wave->amplitude);
     }

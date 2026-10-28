@@ -306,21 +306,21 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
     base = &rider->base;
     point.y += segment->rise;
     if (segment->moving != 0) {
-        point.x += segment->radius * Math_Sinf(segment->angle);
+        point.x += segment->radius * Gu_Sinf(segment->angle);
         point.z += segment->radius * Math_Cosf(segment->angle);
     }
     Graphu64_InterpolateVector(&rider->pos, t, base, &point);
     switch (segment->bobMode) {
     case 0:
-        rider->pos.y += segment->bob * Math_Sinf(rider->phase);
+        rider->pos.y += segment->bob * Gu_Sinf(rider->phase);
         break;
     case 1:
         phase = rider->phase;
         amp = 0.25f;
-        rider->pos.y += segment->bob * (Math_Sinf(phase) * amp);
-        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.1f) * amp);
-        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.2f) * amp);
-        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.3f) * amp);
+        rider->pos.y += segment->bob * (Gu_Sinf(phase) * amp);
+        rider->pos.y += segment->bob * (Gu_Sinf(phase * 1.1f) * amp);
+        rider->pos.y += segment->bob * (Gu_Sinf(phase * 1.2f) * amp);
+        rider->pos.y += segment->bob * (Gu_Sinf(phase * 1.3f) * amp);
         break;
     }
     rider->pos.x += rider->shake.x;

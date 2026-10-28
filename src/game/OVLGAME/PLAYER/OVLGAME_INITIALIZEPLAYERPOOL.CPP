@@ -67,7 +67,7 @@ void Player_InitActorHudState(Shared_ActorView *);
 
 
 
-void Ovlgame_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active) {
+void Player_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active) {
     extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 j;
@@ -233,7 +233,7 @@ initialized:
     ((IntegerState88 *)(state))->unk_84 = 3;
 }
 
-void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
+void Player_ResetMenuPool(struct RecordCode80447BB0 *record) {
     XPlus_FillMemory(record, 0, 0x44);
     func_80255CA0_de(&record->m_FreeList, 0x16DC, 0x16E0);
     func_80255CA0_de(&record->m_ActiveList, 0x16DC, 0x16E0);

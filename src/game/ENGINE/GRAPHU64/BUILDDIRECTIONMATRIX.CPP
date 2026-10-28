@@ -257,7 +257,7 @@ void BuildPitchMatrix(void *rest, f32 pitchAngle) {
     f32 zero;
     f32 identity;
 
-    sin_v = Math_Sinf(pitchAngle);
+    sin_v = Gu_Sinf(pitchAngle);
     zero = 0;
     identity = D_800C48F8_de[0];
     m->forward.y = -sin_v;
@@ -287,7 +287,7 @@ void BuildYawMatrix(void *matrixStorage, f32 yawAngle)
   f32 zero;
   f32 identity;
   zero = 0;
-  sin_v = Math_Sinf(yawAngle);
+  sin_v = Gu_Sinf(yawAngle);
   identity = D_800C48F8_de[1];
   m->forward.x = sin_v;
   m->right.y = zero;
@@ -315,7 +315,7 @@ void BuildRollMatrix(void *matrix, f32 rollAngle) {
     f32 zero;
     f32 one;
 
-    sin_v = Math_Sinf(rollAngle);
+    sin_v = Gu_Sinf(rollAngle);
     zero = (f32) 0;
     one = D_800C99F0[0];
     m->right.z = zero;
@@ -344,7 +344,7 @@ void PitchMatrixLocal(void *matrixStorage, f32 pitchAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(pitchAngle);
+    sin_v = Gu_Sinf(pitchAngle);
     cos_v = Math_Cosf(pitchAngle);
     neg_sin = -sin_v;
 
@@ -368,7 +368,7 @@ void PitchMatrix(void *matrixStorage, f32 pitchAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(pitchAngle);
+    sin_v = Gu_Sinf(pitchAngle);
     cos_v = Math_Cosf(pitchAngle);
     neg_sin = -sin_v;
 
@@ -396,7 +396,7 @@ void YawMatrixLocal(void *matrix, f32 yawAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(yawAngle);
+    sin_v = Gu_Sinf(yawAngle);
     cos_v = Math_Cosf(yawAngle);
     neg_sin = -sin_v;
 
@@ -420,7 +420,7 @@ void YawMatrix(void *matrix, f32 yawAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(yawAngle);
+    sin_v = Gu_Sinf(yawAngle);
     cos_v = Math_Cosf(yawAngle);
     neg_sin = -sin_v;
 
@@ -448,7 +448,7 @@ void RollMatrixLocal(void *matrix, f32 rollAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(rollAngle);
+    sin_v = Gu_Sinf(rollAngle);
     cos_v = Math_Cosf(rollAngle);
     neg_sin = -sin_v;
 
@@ -472,7 +472,7 @@ void RollMatrix(void *matrixStorage, f32 rollAngle) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(rollAngle);
+    sin_v = Gu_Sinf(rollAngle);
     cos_v = Math_Cosf(rollAngle);
     neg_sin = -sin_v;
 

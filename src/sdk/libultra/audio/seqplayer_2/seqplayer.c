@@ -9,7 +9,7 @@
 extern char D_800C7440;
 extern char g_audioSeqplayerText;
 
-void *func_802B16E0_de(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 channelNumber) {
+void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 channelNumber) {
     s32 high;
     s32 low;
     s32 middle;

@@ -82,8 +82,8 @@ void Menu_AdvanceTextRows(void) {
             D_800E4400->value++;
         }
     } else {
-        Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
-        Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, ID_CLOSE), 1);
+        Widget_SetWidgetFlag08(D_800E4400->pad, 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E4400->window, ID_CLOSE), 1);
         D_800E4400->cursor = 1;
     }
     if (D_800E4400->length > 0) {

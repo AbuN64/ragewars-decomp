@@ -52,7 +52,7 @@ static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
     outputContext = voice->context;
     outputSound = outputContext->list;
     volume = (s32)level;
-    func_802B2F00_de(outputSound, outputContext->handles[voice->unk0]);
+    alSndpSetSound(outputSound, outputContext->handles[voice->unk0]);
     alSndpSetVol(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
 }
 
@@ -159,7 +159,7 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
                         voice->mix.tracked = 0;
                         stoppedSound = stopContext->list;
                         if (voice->mix.frame != stopContext->frame) {
-                            func_802B2F00_de(stoppedSound, stopContext->handles[voice->unk0]);
+                            alSndpSetSound(stoppedSound, stopContext->handles[voice->unk0]);
                             if (alSndpGetState(stoppedSound)) {
                                 alSndpStop(stoppedSound);
                             }
@@ -195,7 +195,7 @@ static inline void apply_pan(VoiceChannelUpdateVoicePan *voice, u8 pan) {
     OwnerCode8025A3EC *owner = voice->owner;
     char *sound = owner->sound;
 
-    func_802B2F00_de(sound, owner->samples[voice->index]);
+    alSndpSetSound(sound, owner->samples[voice->index]);
     alSndpSetPan(sound, pan);
 }
 

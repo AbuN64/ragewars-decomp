@@ -414,7 +414,7 @@ extern s32 Control_IsControllerConnected(s32);
 
 extern void SmXlate_SwitchScreen(s32);
 
-extern void Smos_SetFocusedElement(s32);
+extern void Menu_SetFocusedElement(s32);
 
 extern void Tsmos_ActivateControllerState(void);
 
@@ -450,7 +450,7 @@ extern s32 D_800E3514;
 /* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
    one. */
 
-/* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
+/* Refreshes each of the four ports through Note_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
@@ -506,17 +506,17 @@ void SmpOverlay_RefreshPakDialog(void) {
     s32 var_s2;
     Label *temp_s0;
 
-    Smos_SetFocusedElement(SLOT_RESOURCE_962);
-    Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
+    Menu_SetFocusedElement(SLOT_RESOURCE_962);
+    Widget_SetWidgetFlag08(D_800E3518->absent, 0);
     var_s2 = 0;
-    Frontend_SetWidgetFlag08(D_800E3518->unavailable, 0);
+    Widget_SetWidgetFlag08(D_800E3518->unavailable, 0);
     var_s1 = 1;
-    Frontend_SetWidgetFlag08(D_800E3518->prompt, 0);
+    Widget_SetWidgetFlag08(D_800E3518->prompt, 0);
     temp_v0 = Control_IsControllerConnected(0);
     if (temp_v0 == 1) {
         SmpOverlay_ProbePakDialogPorts();
         if (D_800E3518->ready == 1) {
-            Pak_ProbeStatus(D_800DF4C0);
+            Note_ProbeStatus(D_800DF4C0);
             temp_v0_2 = Note_GetStatus(D_800DF4C0);
             switch (temp_v0_2) { /* irregular */
             case 0:
@@ -539,15 +539,15 @@ void SmpOverlay_RefreshPakDialog(void) {
     if (temp_v0 == 0) {
         D_800E3518->state = 1;
         D_800E3518->elapsed = 0;
-        Frontend_SetWidgetFlag08(D_800E3518->main, 0);
-        Frontend_SetWidgetFlag08(D_800E3518->unavailable, 1);
+        Widget_SetWidgetFlag08(D_800E3518->main, 0);
+        Widget_SetWidgetFlag08(D_800E3518->unavailable, 1);
         goto block_25;
     }
     if (D_800E3518->ready == 0) {
         D_800E3518->state = 2;
         D_800E3518->elapsed = 0;
-        Frontend_SetWidgetFlag08(D_800E3518->main, 0);
-        Frontend_SetWidgetFlag08(D_800E3518->absent, 1);
+        Widget_SetWidgetFlag08(D_800E3518->main, 0);
+        Widget_SetWidgetFlag08(D_800E3518->absent, 1);
         var_a0 = SLOT_RESOURCE_971;
         goto block_24;
     }
@@ -598,11 +598,11 @@ void SmpOverlay_RefreshPakDialog(void) {
     temp_s0->text = D_800E3518->text;
     D_800E3518->state = 3;
     D_800E3518->elapsed = 0;
-    Frontend_SetWidgetFlag08(D_800E3518->main, 0);
-    Frontend_SetWidgetFlag08(D_800E3518->prompt, 1);
+    Widget_SetWidgetFlag08(D_800E3518->main, 0);
+    Widget_SetWidgetFlag08(D_800E3518->prompt, 1);
     var_a0 = SLOT_RESOURCE_966;
 block_24:
-    Smos_SetFocusedElement(var_a0);
+    Menu_SetFocusedElement(var_a0);
 block_25:
     Tsmos_ActivateControllerState();
 }
@@ -620,7 +620,7 @@ void SmpOverlay_ProbePakDialogPorts(void) {
 
     D_800E3518->ready = 0;
     for (port = 0; port < 4; port++) {
-        Pak_ProbeStatus(port);
+        Note_ProbeStatus(port);
         switch (Note_GetStatus(port)) {
         case 0:
             D_800E3518->ready = 1;
@@ -659,7 +659,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     window = Node_FindWidgetByResourceId(parent, 0x3CC);
 #endif
     D_800E3518->main = window;
-    Frontend_SetWidgetFlag08(window, 1);
+    Widget_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3C3);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -668,7 +668,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     window = Node_FindWidgetByResourceId(parent, 0x3CD);
 #endif
     D_800E3518->absent = window;
-    Frontend_SetWidgetFlag08(window, 0);
+    Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3BD);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -677,7 +677,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     window = Node_FindWidgetByResourceId(parent, 0x3C6);
 #endif
     D_800E3518->unavailable = window;
-    Frontend_SetWidgetFlag08(window, 0);
+    Widget_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = Node_FindWidgetByResourceId(parent, 0x3BF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -686,7 +686,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     window = Node_FindWidgetByResourceId(parent, 0x3C8);
 #endif
     D_800E3518->prompt = window;
-    Frontend_SetWidgetFlag08(window, 0);
+    Widget_SetWidgetFlag08(window, 0);
     D_800E3518->elapsed = 0;
     D_800E3518->state = 0;
     Frontend_RequestScreenMode(0);
@@ -744,7 +744,7 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
 #else
     case 0x3CB:
 #endif
-        Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
+        Widget_SetWidgetFlag08(D_800E3518->absent, 0);
         SmpOverlay_RefreshPakDialog();
         break;
 #if defined(VERSION_EU_X)

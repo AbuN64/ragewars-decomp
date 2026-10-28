@@ -101,19 +101,19 @@ void PAKInterface_BuildProfileSlotList(s32 player) {
    value->text=D_800E54A4->players[player].records[i].name;
    D_800E54A4->players[player].used[i]=1;
    if(D_800E54A4->phase==1) {
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
     if(Frontend_FindProfileOwner(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
      D_800E54A4->players[player].used[i]=0;
      Widget_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
-     Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
+     Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
     }
    }
 #if defined(VERSION_EU)
-  } else {value->text=((D_800E1394)[g_languageIndex]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800E1394)[g_languageIndex]);Widget_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #elif defined(VERSION_EU_X)
-  } else {value->text=((D_800DD124)[g_languageIndex]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800DD124)[g_languageIndex]);Widget_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #else
-  } else {value->text=(D_800D3250[0]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
+  } else {value->text=(D_800D3250[0]);Widget_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #endif
  }
  label=SmpOverlay_GetSlotValue(D_800E54A4->root,player);

@@ -108,7 +108,7 @@ s32 Options_CreateOptionsPage(void) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
@@ -147,7 +147,7 @@ s32 Options_OpenOptionsScreen(void *node) {
     D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x373, 0x6E);
     marker = Node_FindWidgetByResourceId(node, 0x372);
     D_800E4518->marker = marker;
-    Frontend_SetWidgetFlag08(marker, 0);
+    Widget_SetWidgetFlag08(marker, 0);
     (Node_FindWidgetByResourceId(node, 0x386))->alpha = 0x6E;
     header = Node_FindWidgetByResourceId(node, 0x387);
     D_800E4518->header = header;
@@ -155,11 +155,11 @@ s32 Options_OpenOptionsScreen(void *node) {
     D_800E4518->footer = Node_FindWidgetByResourceId(node, 0x370);
     rumble = Node_FindWidgetByResourceId(node, 0x384);
     D_800E4518->rumbleIcon = rumble;
-    Frontend_SetWidgetFlag08(rumble, 1);
+    Widget_SetWidgetFlag08(rumble, 1);
     (Node_FindWidgetByResourceId(node, 0x385))->alpha = 0x6E;
     pak = Node_FindWidgetByResourceId(node, 0x374);
     D_800E4518->pakIcon = pak;
-    Frontend_SetWidgetFlag08(pak, 0);
+    Widget_SetWidgetFlag08(pak, 0);
     SmpButton_WrapButtonWidget(0x377);
     SmpButton_WrapButtonWidget(0x37C);
     firstListHandle = SmpButton_CreateListWidget(0x375, 0x376);
@@ -213,14 +213,14 @@ s32 Options_OpenOptionsScreen(void *node) {
     Frontend_StartMenuImageTransition(D_800E4518);
     D_800E4518->cursor = 0;
     D_800E4518->selection = -1;
-    Frontend_SetWidgetFlag08(node, 0);
+    Widget_SetWidgetFlag08(node, 0);
     D_8011FAC0.clockPaused = 1;
     D_80154020.ready = 0;
     D_80154020.value = -1;
     Menu_ConfigureOptionsCamera();
     prompt = Node_FindWidgetByResourceId(node, 0x371);
     D_800E4518->prompt = prompt;
-    Frontend_SetWidgetFlag08(prompt, 1);
+    Widget_SetWidgetFlag08(prompt, 1);
     return 0;
 }
 
@@ -241,7 +241,7 @@ extern u8 *D_auto_800D3488[1];
 extern u8 *D_auto_800D348C;
 extern u8 *D_auto_800D3490;
 extern void *Cache_AllocateMemory(s32);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Widget_SetWidgetFlag100(void *, s32);
 extern s32 Defs_GetMemorySize(void);
 extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
@@ -288,7 +288,7 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x36F, 0x6E);
     marker = Node_FindWidgetByResourceId(node, 0x36E);
     D_800E4518->marker = marker;
-    Frontend_SetWidgetFlag08(marker, 0);
+    Widget_SetWidgetFlag08(marker, 0);
     (Node_FindWidgetByResourceId(node, 0x380))->alpha = 0x6E;
     header = Node_FindWidgetByResourceId(node, 0x381);
     D_800E4518->header = header;
@@ -296,11 +296,11 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     D_800E4518->footer = Node_FindWidgetByResourceId(node, 0x36C);
     rumble = Node_FindWidgetByResourceId(node, 0x37E);
     D_800E4518->rumbleIcon = rumble;
-    Frontend_SetWidgetFlag08(rumble, 1);
+    Widget_SetWidgetFlag08(rumble, 1);
     (Node_FindWidgetByResourceId(node, 0x37F))->alpha = 0x6E;
     pak = Node_FindWidgetByResourceId(node, 0x370);
     D_800E4518->pakIcon = pak;
-    Frontend_SetWidgetFlag08(pak, 0);
+    Widget_SetWidgetFlag08(pak, 0);
     SmpButton_WrapButtonWidget(0x379);
     SmpButton_WrapButtonWidget(0x37A);
     secondListHandle = SmpButton_CreateListWidget(0x377, 0x378);
@@ -348,14 +348,14 @@ s32 Menu_OpenGameOptionsScreen(void *node) {
     Frontend_StartMenuImageTransition(D_800E4518);
     D_800E4518->cursor = 0;
     D_800E4518->selection = -1;
-    Frontend_SetWidgetFlag08(node, 0);
+    Widget_SetWidgetFlag08(node, 0);
     D_8011FAC0.clockPaused = 1;
     D_80154020.ready = 0;
     D_80154020.value = -1;
     Menu_ConfigureOptionsCamera();
     prompt = Node_FindWidgetByResourceId(node, 0x36D);
     D_800E4518->prompt = prompt;
-    Frontend_SetWidgetFlag08(prompt, 1);
+    Widget_SetWidgetFlag08(prompt, 1);
     return 0;
 }
 #endif

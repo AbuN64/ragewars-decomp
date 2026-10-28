@@ -174,24 +174,24 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
-s32 Pickup_ApplyAmmo(void *arg0, void *pickupEntry) {
+s32 Pickup_ApplyAmmo(void *player, void *pickupEntry) {
     void *resource;
     s32 sound;
     s32 callback;
     if (((struct EntryRecAtE *)(pickupEntry))->index != -1) {
-        Player_AddAmmo(arg0, ((struct EntryRecAtE *)(pickupEntry))->index,
+        Player_AddAmmo(player, ((struct EntryRecAtE *)(pickupEntry))->index,
                       ((struct EntryRecAtE *)(pickupEntry))->argument);
     }
 
     resource = ((EntryRecAtE *)pickupEntry)->resource;
     sound = ((struct EntryRecAtE *)(pickupEntry))->sound;
     callback = ((struct EntryRecAtE *)(pickupEntry))->callback;
-    if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
-        Gsky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
+    if (((struct ActorPickupCanCollect *)(player))->owner != 0) {
+        Gsky_StartFade(((struct ActorPickupCanCollect *)(player))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
-                          ((struct ActorPickupCanCollect *)(arg0))->owner,
+                          ((struct ActorPickupCanCollect *)(player))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
 #else
@@ -201,7 +201,7 @@ s32 Pickup_ApplyAmmo(void *arg0, void *pickupEntry) {
     }
     if (sound != 0) {
         SoundElement_PlaySoundAtPosition(sound,
-                      ((ActorPickupCanCollect *)arg0)->position, 0, -1);
+                      ((ActorPickupCanCollect *)player)->position, 0, -1);
     }
     if (callback != 0) {
         func_8025E11C_de(callback);

@@ -43,7 +43,7 @@ extern s32 D_800E28D0;
 
 extern void Frontend_DrawModelPreview(char *);
 
-extern void Frontend_SetWidgetFlag08(struct Shape_typemap_21 *, s32);
+extern void Widget_SetWidgetFlag08(struct Shape_typemap_21 *, s32);
 
 /* Loads the stage list of the results screen D_800E4690: clears its two 36-bit sets at 0xA74 and
    0xA79, copies into the first the 36 cleared-stage bits that the player record D_80102B00[index at
@@ -102,8 +102,8 @@ s32 Results_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event)
                 alpha -= 30;
                 if (alpha <= 0) {
                     D_800E4690->blinking = 0;
-                    Frontend_SetWidgetFlag08(D_800E4690->bannerShadow, 0);
-                    Frontend_SetWidgetFlag08(D_800E4690->banner, 0);
+                    Widget_SetWidgetFlag08(D_800E4690->bannerShadow, 0);
+                    Widget_SetWidgetFlag08(D_800E4690->banner, 0);
                     alpha = 0xFF;
                 }
                 D_800E4690->banner->alpha = alpha;

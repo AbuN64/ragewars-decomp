@@ -11,9 +11,9 @@
 #include "TYPES.H"
 
 
-void Items_ResetActorPools(void *owner, s32 count);
+void Pools_ResetActorPools(void *owner, s32 count);
 
-void Ovlgame_InitializePlayerPool(void *pool, s32 count, s32 force_active);
+void Player_InitializePlayerPool(void *pool, s32 count, s32 force_active);
 
 void SetN64_DrawColorRectangle(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {
@@ -69,6 +69,6 @@ void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
 
 void SetN64_ResetSessionPlayerPools(void *owner, s32 count, s32 force_active) {
     GameSession *session = owner;
-    Items_ResetActorPools(session->players, count);
-    Ovlgame_InitializePlayerPool(session->menu, count, force_active);
+    Pools_ResetActorPools(session->players, count);
+    Player_InitializePlayerPool(session->menu, count, force_active);
 }

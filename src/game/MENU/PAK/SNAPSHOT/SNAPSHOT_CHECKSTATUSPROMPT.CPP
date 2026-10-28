@@ -78,7 +78,7 @@ static __inline__ Shared_Game *getSettings(void) {
     return &D_801462C8;
 }
 
-void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
+void Snapshot_MarkSaveNotes(Shared_PakMenu *menu) {
     s32 ch;
     s32 i;
     s32 other;
@@ -157,7 +157,7 @@ static __inline__ char *pakPrompt(s32 *channel) {
 extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_800E28C8;
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
-extern void Pak_ProbeStatus(s32);
+extern void Note_ProbeStatus(s32);
 extern s32 Note_GetStatus(s32), Note_IsChannelReady(s32), Note_NeedsIdRepair(s32), Control_TakePakChange(s32);
 extern void Menu_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 quiet)
@@ -165,7 +165,7 @@ s32 Snapshot_CheckStatusPrompt(MenuPakBeginProfileLoad *menu, s32 channel, s32 q
     s32 result, busy, slot;
     char *prompt, *sel;
     char *message;
-    Pak_ProbeStatus(channel);
+    Note_ProbeStatus(channel);
     result = Note_GetStatus(channel);
     sel = 0;
     if (D_8014D4C0_de) {
@@ -214,7 +214,7 @@ extern u8 D_8014D4B1, D_8014D4B2, D_8014D4B3;
 extern u8 D_8014D4B4[];
 extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
-extern void Pak_ProbeStatus(s32 ch);
+extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
@@ -223,7 +223,7 @@ extern u32 Note_Crc32(void *data, u32 size, u32 seed);
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
    prompt, else probes the Controller Pak; with no pak data it saves the player's profile (flags, four words
-   and eight name bytes) with its checksum and opens the note list through Pak_MarkSaveNotes, otherwise it
+   and eight name bytes) with its checksum and opens the note list through Snapshot_MarkSaveNotes, otherwise it
    shows the D_0044EA08, D_0044ED44 or D_0044E9C0 prompt. */
 void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
@@ -249,9 +249,9 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
         return;
     }
     if (D_8015375C) {
-        Pak_ProbeStatus(D_800E28C8);
+        Note_ProbeStatus(D_800E28C8);
     } else {
-        Pak_ProbeStatus(menu->slot->unk4);
+        Note_ProbeStatus(menu->slot->unk4);
     }
     if (!Note_GetStatus(channel)) {
         profile = player->profile;
@@ -267,7 +267,7 @@ void Snapshot_BeginProfileSave(Shared_PakMenu *menu) {
             D_8014D4B4[i] = profile->name[i];
         }
         D_80153738.checksum = Note_Crc32(&D_80153738, 0x14, 4);
-        Pak_MarkSaveNotes(menu);
+        Snapshot_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;

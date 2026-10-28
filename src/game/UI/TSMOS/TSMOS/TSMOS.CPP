@@ -21,11 +21,11 @@ extern s32 D_800CBC14;
 extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
 extern void Cache_DrainAndCompactResources(s32);
-extern void Frontend_OpenResourceArchive(char *);
+extern void Node_OpenResourceArchive(char *);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_SetTimerState(s32);
 extern void Tsmos_ActivateControllerState(void);
-extern void Frontend_LoadLanguageStringsIfAny(s32);
+extern void Node_LoadLanguageStringsIfAny(s32);
 
 void InitFrontendMenus(void) {
     func_80255228_de(&D_80106248);
@@ -33,7 +33,7 @@ void InitFrontendMenus(void) {
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
     SmSmngr_InitializeScreenManager(0x23, (s32)D_0043C500);
-    Frontend_OpenResourceArchive(D_800C6080_eu_x);
+    Node_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();
     SmpFade_RegisterFadeClass();
@@ -50,9 +50,9 @@ void InitFrontendMenus(void) {
     D_800D2C90.x = 0;
     Tsmos_SetModeOneFlag(2);
 #if defined(VERSION_DE)
-    Frontend_LoadLanguageStringsIfAny(0);
+    Node_LoadLanguageStringsIfAny(0);
 #elif defined(VERSION_EU_X)
-    Frontend_LoadLanguageStringsIfAny(g_languageIndex);
+    Node_LoadLanguageStringsIfAny(g_languageIndex);
 #endif
 }
 #endif

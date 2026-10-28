@@ -28,13 +28,13 @@ extern struct LevelActor *D_800E2830;
 
 extern s32 Frontend_GetMenuImageState(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
-extern void Frontend_SetWidgetFlag08(void *, s32);
+extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Track_RequestTrackByKey(s32);
 extern void MarkMenuEventHandled(void);
 
 extern void Tsmos_RequestFrontendShutdown(void);
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern void Stage_StartConfiguredMatch(void);
 
@@ -64,7 +64,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
         }
         if (D_800E4518->choice == 0) {
             Frontend_RequestScreenMode(0);
-            Frontend_SetWidgetFlag08(item, 1);
+            Widget_SetWidgetFlag08(item, 1);
             Track_RequestTrackByKey(D_8015402C + 0x259);
             D_800E2830->resourceHandle = -1;
             D_800E2830->motionIndex = state;
@@ -96,8 +96,8 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
                 Tsmos_RequestFrontendShutdown();
                 return 0;
             }
-            Items_ResetActorPools((u8 *)pause - 0x180C, 0);
-            Ovlgame_InitializePlayerPool((u8 *)pause - 0x1854, 0, 0);
+            Pools_ResetActorPools((u8 *)pause - 0x180C, 0);
+            Player_InitializePlayerPool((u8 *)pause - 0x1854, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             Stage_StartConfiguredMatch();
         }

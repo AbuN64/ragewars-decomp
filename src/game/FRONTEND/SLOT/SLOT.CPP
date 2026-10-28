@@ -85,24 +85,24 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
 
     item = Node_FindWidgetByResourceId(arg0, slotRes(486));
     D_800E3590->item486 = item;
-    Frontend_SetWidgetFlag08(item, 0);
+    Widget_SetWidgetFlag08(item, 0);
 
     item = Node_FindWidgetByResourceId(arg0, slotRes(563));
     D_800E3590->item563 = item;
-    Frontend_SetWidgetFlag08(item, 0);
+    Widget_SetWidgetFlag08(item, 0);
 
     Node_FindWidgetByResourceId(arg0, slotRes(496))->alpha = 110;
     Node_FindWidgetByResourceId(arg0, slotRes(497))->alpha = 120;
 
     item = Node_FindWidgetByResourceId(arg0, slotRes(512));
     D_800E3590->item512 = item;
-    Frontend_SetWidgetFlag08(item, 0);
+    Widget_SetWidgetFlag08(item, 0);
 
     D_800E3590->style = 0;
     D_800E3590->unk248 = 27;
     item = Node_FindWidgetByResourceId(arg0, slotRes(511));
     D_800E3590->item511 = item;
-    Frontend_SetWidgetFlag08(item, 0);
+    Widget_SetWidgetFlag08(item, 0);
 
     D_800E3590->item511->alpha = 0;
     D_800E3590->unk260 = 25;
@@ -146,7 +146,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
             SoundElement_PlayFlatSound(0xE79);
             /* NodeFrontendAnimateSlotSelectionMenu is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
-            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
+            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
             SmpFlicker_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);
             ((MenuRecAt108 *) D_800E3590)->state = 4;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
@@ -167,17 +167,17 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
             SmpFlicker_RestoreFlickerValue(((MenuRecAt108 *) D_800E3590)->fade);
             ((MenuRecAt108 *) D_800E3590)->state = 6;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
-            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
-            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
+            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
+            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
         }
         break;
     case 5:
         SoundElement_PlayFlatSound(0xE78);
         ((MenuRecAt108 *) D_800E3590)->state = 2;
         ((MenuRecAt108 *) D_800E3590)->timer = 4;
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
-        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
+        Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
         break;
     case 6:
         ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
@@ -187,7 +187,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
             ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
             Focus_ShowUnlockedEntries(0x6E);
             ((MenuRecAt108 *) D_800E3590)->state = 3;
-            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
+            Widget_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
         }
         break;
     case 7:

@@ -28,7 +28,7 @@ extern void __handleMetaMsg(ALSeqPlayer *, ALEvent *);           /* __handleMeta
 extern u8 __alSeqNextDelta(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
 extern int alSeqGetTicks(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
 extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
+extern void alEvtqPostEvent(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
                 /* __assert */
 
 static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
@@ -52,7 +52,7 @@ static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
     }
 
     evt.type = 0;   /* AL_SEQ_REF_EVT */
-    func_802B00D4_de(&seqp->base.evtq, &evt, deltaTicks * seqp->base.uspt);
+    alEvtqPostEvent(&seqp->base.evtq, &evt, deltaTicks * seqp->base.uspt);
 }
 
 

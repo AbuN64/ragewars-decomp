@@ -12,7 +12,7 @@
 struct func_8025E5B0_S1;
 struct ParamsPakAllocateMenu;
 struct Dialog;
-extern void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list);
+extern void *Menu_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list);
 
 
 /* Reads an object's sub-record kind byte and forwards it to two per-kind setup routines. */
@@ -23,7 +23,7 @@ extern void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAl
 
 extern void Control_EnableControllerPak(s32 kind);
 
-extern void Pak_ProbeStatus(s32 kind);
+extern void Note_ProbeStatus(s32 kind);
 
 /* Marks the selected record's byte tag and clears the active menu state. */
 extern void Control_EnableControllerPak(int);
@@ -92,7 +92,7 @@ s32 Initial_ToggleMenuRowOption(s32 *arg0) {
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_450A20 record. */
 s32 func_8043E91C_de(void *unused0, void *menuOwner, void *menuContext) {
-    Pak_AllocateMenu(menuContext, menuOwner, &D_0044FDF4);
+    Menu_AllocateMenu(menuContext, menuOwner, &D_0044FDF4);
     return 1;
 }
 
@@ -101,7 +101,7 @@ void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *arg0)
     s32 kind = arg0->owner->unk4;
 
     Control_EnableControllerPak(kind);
-    Pak_ProbeStatus(kind);
+    Note_ProbeStatus(kind);
 }
 
 void Initial_EnableMenuControllerPak(void *arg0) {
@@ -160,7 +160,7 @@ extern void Match_StartMatchTransition(GameSession *, s32);
 extern s32 Control_CountConnectedControllers(void);
 
 /* Sets the option bytes at 0x1D and 0x1E of D_801462C8 to 1 and 4, clears the first byte of each
-   of the eight 150-byte player records at 0x148, then calls Pak_AllocateMenu with the third argument,
+   of the eight 150-byte player records at 0x148, then calls Menu_AllocateMenu with the third argument,
    the second and the resource D_0044FEA8, and returns one. */
 
 
@@ -168,18 +168,18 @@ struct func_8025E5B0_S1;
 struct ParamsPakAllocateMenu;
 struct Dialog;
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
    and returns one. */
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
    and returns one. */
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
    and returns one. */
 
 /* Restarts sound: calls func_8025E214_de with -1, records what func_8025E2C4_de returns in D_800E63B0,
    passes D_800E63B8 to func_8025E2D4_de, calls func_8025E29C_de with 1, clears D_800E63B4, calls
-   Control_ClearMenuControlFlag and then Pak_AllocateMenu with the third argument, the second and D_451F58.
+   Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
 
 
@@ -187,7 +187,7 @@ struct Dialog;
 
 extern void Control_ClearMenuControlFlag();
 
-/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_450C18,
+/* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
 
 void Initial_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
@@ -240,22 +240,22 @@ s32 Initial_OpenLocalPlayerSetup(void *first, void *second, void *third) {
     for (i = 0; i < 8; i++) {
         options->playerSettings[i].enabled = 0;
     }
-    Pak_AllocateMenu(third, second, D_0044FEA8);
+    Menu_AllocateMenu(third, second, D_0044FEA8);
     return 1;
 }
 
 s32 func_8043EC40_de(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_00450E9C);
+    Menu_AllocateMenu(third, second, D_00450E9C);
     return 1;
 }
 
 s32 func_8043EC6C_de(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_0044F4A4);
+    Menu_AllocateMenu(third, second, D_0044F4A4);
     return 1;
 }
 
 s32 func_8043EC98_de(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_0044F798);
+    Menu_AllocateMenu(third, second, D_0044F798);
     return 1;
 }
 
@@ -266,7 +266,7 @@ s32 Initial_OpenTrackPreviewMenu(void *first, void *second, void *third) {
     func_8025E29C_de(1);
     D_800E63B4 = 0;
     Control_ClearMenuControlFlag();
-    Pak_AllocateMenu(third, second, D_00451094);
+    Menu_AllocateMenu(third, second, D_00451094);
     return 1;
 }
 
@@ -281,7 +281,7 @@ s32 Initial_RequestSessionTransition(void) {
 }
 
 s32 func_8043ED78_de(void *first, void *second, void *third) {
-    Pak_AllocateMenu(third, second, D_0044FFEC);
+    Menu_AllocateMenu(third, second, D_0044FFEC);
     return 1;
 }
 

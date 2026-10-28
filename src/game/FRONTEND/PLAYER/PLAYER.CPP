@@ -40,7 +40,7 @@ extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
-extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
+extern void Widget_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Key_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void Tsmos_DeactivateControllerState(void);
@@ -89,7 +89,7 @@ s32 Player_CreateFourPlayerResults(void *window) {
         bar = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][1].value);
         D_800E59E0->panels[player].item = bar;
         bar->alpha = 0x64;
-        Frontend_SetWidgetFlag08(bar, 0);
+        Widget_SetWidgetFlag08(bar, 0);
         widget = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E59E6[player][0].value);
         widget->alpha = 0x6E;
         config = &g_playerSettings[player];
@@ -117,7 +117,7 @@ s32 Player_CreateFourPlayerResults(void *window) {
     D_800E59E0->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
     widget = Node_FindWidgetByResourceId(window, messageResource);
     D_800E59E0->message = widget;
-    Frontend_SetWidgetFlag08(widget, 0);
+    Widget_SetWidgetFlag08(widget, 0);
     screen = D_800E59E0;
     for (player = 0; player < 4; player++) {
         config = &g_playerSettings[player];
@@ -249,7 +249,7 @@ s32 Player_UpdateFourPlayerResults(void) {
         D_800E59E0->timer--;
         if (D_800E59E0->timer <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            Frontend_SetWidgetFlag08(D_800E59E0->message, 1);
+            Widget_SetWidgetFlag08(D_800E59E0->message, 1);
             SmpFlicker_StartFlicker(D_800E59E0->resource, 4);
             D_800E59E0->state = 4;
             D_800E59E0->timer = 4;
@@ -290,12 +290,12 @@ s32 Player_UpdateFourPlayerResults(void) {
         SoundElement_PlayFlatSound(0xE78);
         D_800E59E0->state = 2;
         D_800E59E0->timer = 4;
-        Frontend_SetWidgetFlag08(D_800E59E0->message, 0);
+        Widget_SetWidgetFlag08(D_800E59E0->message, 0);
         for (player = 0; player < 4; player++) {
             for (i = 0; i < 5; i++) {
-                Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+                Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player][i].value), 0);
             }
-            Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
+            Widget_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
         }
         break;
     case 6:

@@ -10,14 +10,14 @@ unsigned char D_auto_func_80422228_de_padding_188228[8] = { 0x8F, 0xBF, 0x00, 0x
 
 /* 804221A0_2.CPP */
 /* Sets up the match display: calls Menu_ConfigureOptionsCamera, starts the objects at D_80145088 and 0x48 bytes
-   before it through Items_ResetActorPools and Ovlgame_InitializePlayerPool, loads the resource Track_RequestTrackByKey names for
+   before it through Pools_ResetActorPools and Player_InitializePlayerPool, loads the resource Track_RequestTrackByKey names for
    0x27D into D_8011FE88 through func_8044D528_de, and calls Cache_SetResourceActivityState with one when func_8025477C_de
    reports nothing. */
 
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern s32 Track_RequestTrackByKey(s32);
-extern void OvlScene_SetSelection(void *, s32, s32);
+extern void Scene_SetSelection(void *, s32, s32);
 extern s32 func_8025477C_de();
 extern void Cache_SetResourceActivityState(s32);
 
@@ -26,9 +26,9 @@ void Menu_InitializeOptionsScene(void) {
 
     Menu_ConfigureOptionsCamera();
     object = &D_80145088;
-    Items_ResetActorPools(object, 1);
-    Ovlgame_InitializePlayerPool(object - 0x48, 1, 0);
-    OvlScene_SetSelection(&g_world, ~Track_RequestTrackByKey(0x27D), 0);
+    Pools_ResetActorPools(object, 1);
+    Player_InitializePlayerPool(object - 0x48, 1, 0);
+    Scene_SetSelection(&g_world, ~Track_RequestTrackByKey(0x27D), 0);
     if (func_8025477C_de() == 0) {
         Cache_SetResourceActivityState(1);
     }

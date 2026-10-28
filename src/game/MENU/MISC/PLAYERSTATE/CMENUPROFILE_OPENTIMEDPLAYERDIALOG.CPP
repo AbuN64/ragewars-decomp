@@ -9,7 +9,7 @@
 
 extern s8 Menu_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
-extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
+extern void Menu_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
 /* Points arg0's unk14 field at D_800D7688 or D_800D768C when the mode byte at 0x7B of the owner's record is 0 or 1, and returns 0. */
 
@@ -59,7 +59,7 @@ s32 CMenuProfile_ToggleProfileMode(void *arg0, Outer8043E458 *menuContext) {
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_452834 record. */
 s32 func_8043E418_de(void *unused0, void *menuOwner, void *menuContext) {
-    Pak_AllocateMenu(menuContext, menuOwner, &D_004518A4);
+    Menu_AllocateMenu(menuContext, menuOwner, &D_004518A4);
     return 1;
 }
 
@@ -70,7 +70,7 @@ s32 CMenuProfile_BindSelectedDebugField(Shared_DebugWidget *widget, Shared_MenuH
 
 /* Forwards arg1 through and arg2 as the first parameter, adding the D_4505C0 record. */
 s32 func_8043E468_de(void *unused0, void *menuOwner, void *menuContext) {
-    Pak_AllocateMenu(menuContext, menuOwner, &D_0044F994_de);
+    Menu_AllocateMenu(menuContext, menuOwner, &D_0044F994_de);
     return 1;
 }
 

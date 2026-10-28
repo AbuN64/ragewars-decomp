@@ -189,7 +189,7 @@ CQuatern Playerai_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **ta
         amount = Gu_Sqrtf(amount);
         threshold *= amount;
         threshold *= scale;
-        amount = Math_Sinf(threshold);
+        amount = Gu_Sinf(threshold);
         correction.x = axis.x * amount;
         correction.y = axis.y * amount;
         correction.z = axis.z * amount;

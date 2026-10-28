@@ -151,13 +151,13 @@ extern void *Cache_AllocateMemory(s32);
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
-extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
+extern void Widget_SetWidgetFlag08(MenuWidget *, s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void Control_EnableControllerPak(s32);
 extern void Player_InitializeProfile(Profile *);
-extern void Pak_ProbeStatus(s32);
+extern void Note_ProbeStatus(s32);
 extern s32 Note_GetStatus(s32);
 extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
@@ -199,7 +199,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     Node_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
     D_800E54A4->music = SmpFlicker_CreateFlickerWidget(SPRITE_287, 0xFF);
     D_800E54A4->title = Node_FindWidgetByResourceId(screen, SPRITE_287);
-    Frontend_SetWidgetFlag08(D_800E54A4->title, 0);
+    Widget_SetWidgetFlag08(D_800E54A4->title, 0);
     D_800E54A4->players[0].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2FC);
     D_800E54A4->players[1].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2A3);
     D_800E54A4->players[2].sprite = Node_FindWidgetByResourceId(screen, SPRITE_2FD);
@@ -213,32 +213,32 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     switch (D_800E54A4->phase) {
     case 5:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_293);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 6:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_296);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 4:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_288);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 0:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_2A1);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 3:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_295);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 1:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_289);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
             if (D_80102B00[i].owner >= 0) {
@@ -259,7 +259,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
         break;
     case 2:
         sprite = Node_FindWidgetByResourceId(screen, SPRITE_297);
-        Frontend_SetWidgetFlag08(sprite, 1);
+        Widget_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     }
@@ -314,7 +314,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     case 6:
         if (D_800DF4C4 == 0) {
             for (i = 0; i < 4; i++) {
-                Pak_ProbeStatus(i);
+                Note_ProbeStatus(i);
                 switch (Note_GetStatus(i)) {
                 case -4:
                 case -3:
@@ -328,7 +328,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
                 }
             }
         } else {
-            Pak_ProbeStatus(D_800DF4C0);
+            Note_ProbeStatus(D_800DF4C0);
             switch (Note_GetStatus(D_800DF4C0)) {
             case -4:
             case -3:
@@ -360,7 +360,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
 
 /* Runs the block D_800E54A4 points to on event 1: in phase 3 at 0x4C it counts each player's timer
    at 0x14 of its 2920-byte record at 0x58 down and, when one expires, marks it -1 and resets that
-   player through Pak_ProbeStatus and PAKInterface_ResolvePlayerPakState between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
+   player through Note_ProbeStatus and PAKInterface_ResolvePlayerPakState between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
    advances the menu at 0x8 with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition while Frontend_GetMenuImageState reports 1, and
    once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through Frontend_ContinueCupOrOpenResults,
    Frontend_OpenControllerModeResults or Achieve_SelectPostResultScreen as the cartridge's jump table jtbl_800E1BB0 chooses for option
@@ -372,7 +372,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
 
 extern void Tsmos_DeactivateControllerState();
 extern void Tsmos_ActivateControllerState();
-extern void Pak_ProbeStatus(s32);
+extern void Note_ProbeStatus(s32);
 extern void PAKInterface_ResolvePlayerPakState(s32);
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
@@ -393,7 +393,7 @@ s32 Frontend_UpdatePakScreenExit(void *unused0, void *unused1, s32 event) {
             if (D_800E54A4->players[i].back > 0 && --D_800E54A4->players[i].back == 0) {
                 D_800E54A4->players[i].back = -1;
                 Tsmos_DeactivateControllerState();
-                Pak_ProbeStatus(i);
+                Note_ProbeStatus(i);
                 PAKInterface_ResolvePlayerPakState(i);
                 Tsmos_ActivateControllerState();
             }

@@ -163,7 +163,7 @@ static inline void resetDraftEntry(DraftEntryA370 *entry, f32 value) {
     resetDraftList(&entry->lists[1]);
     resetDraftList(&entry->lists[2]);
 }
-void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
+void Pools_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
 {
     s32 i;
     f32 initialValue;
@@ -231,7 +231,7 @@ extern void Camera_UpdateViewProjectionAndEffects(void *);
 
 extern void Pool_InitEntryPool(char *);
 
-void Items_ResetPlayers(func_8044B27C_S1 *actor) {
+void Pools_ResetPlayers(func_8044B27C_S1 *actor) {
     char *parts;
 
     XPlus_FillMemory(actor, 0, 0x1208);

@@ -25,7 +25,7 @@ extern void SetN64_CommitSessionInputs(void *arg0);
 extern void CCollision_Initialize(void);
 
 
-extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
+extern void Scene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
 
 extern s32 D_800CD730;
@@ -85,7 +85,7 @@ void SetN64_ResumeSelectedSession(GameSession *arg0) {
     D_800CD744_de = f;
     D_800D298C = f;
     D_800CD740_de = f;
-    OvlScene_SetSelection(dst, field, 0);
+    Scene_SetSelection(dst, field, 0);
     arg0->mode = 0xD;
     D_80154048 = 0;
 }
@@ -117,7 +117,7 @@ void SetN64_StartRound(GameSession *session) {
     D_800D298C = roundTimerConstant();
     D_800CD740_de = roundTimerConstant();
     Scene_InitPreview(&g_world, session->resource);
-    OvlScene_SetSelection(&g_world, session->selector, 0);
+    Scene_SetSelection(&g_world, session->selector, 0);
 }
 
 #if !(defined(VERSION_US_REV1))

@@ -54,7 +54,7 @@ void Results_SetTrialWeaponRow(u32 arg0, s32 arg1, s32 arg2) {
     }
     /* the hub's Item view shares the MenuWidget prefix; this unit reads alpha and value through it */
     element = (MenuWidget *) Node_FindWidgetByResourceId(D_800E4690->root, id);
-    Frontend_SetWidgetFlag08(Node_FindWidgetByResourceId(element, 0x14B + OPTION_SHIFT), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(element, 0x14B + OPTION_SHIFT), 0);
     value = Results_GetWeaponIconValue(arg1);
     field = (MenuWidget *) Node_FindWidgetByResourceId(element, 0x14A + OPTION_SHIFT);
     field->alpha = 0x64;

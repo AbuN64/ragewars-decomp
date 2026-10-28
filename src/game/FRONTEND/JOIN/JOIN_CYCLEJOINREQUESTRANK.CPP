@@ -38,7 +38,7 @@ extern void Menu_ReturnToPreviousScreen();
 
 /* Steps the selected menu item backwards and updates its display state. */
 
-extern void MarkMenuEventHandled(void),Frontend_SetWidgetFlag08(MenuWidget *,int);
+extern void MarkMenuEventHandled(void),Widget_SetWidgetFlag08(MenuWidget *,int);
 
 #if defined(VERSION_DE)
 enum { MENU_RESOURCE = 0x38c };
@@ -211,7 +211,7 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) 
         oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
 #endif
         oldItem->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(oldItem, 0);
+        Widget_SetWidgetFlag08(oldItem, 0);
         prevSelection = D_800E39C0->selection - 1;
         D_800E39C0->selection = prevSelection;
         if (prevSelection < 0) {
@@ -226,7 +226,7 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) 
         newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
 #endif
         newItem->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(newItem, 1);
+        Widget_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
         SoundElement_PlayFlatSound(0xE80);
         return 0;
@@ -245,14 +245,14 @@ s32 Join_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         MarkMenuEventHandled();
         oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
         oldItem->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(oldItem, 0);
+        Widget_SetWidgetFlag08(oldItem, 0);
         rowCount = D_800E39C0->step;
         temp_v0_2 = D_800E39C0->selection + 1;
         nextSelection = temp_v0_2 % rowCount;
         D_800E39C0->selection = nextSelection;
         newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
         newItem->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(newItem, 1);
+        Widget_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
         SoundElement_PlayFlatSound(0xE80);
         return 0;

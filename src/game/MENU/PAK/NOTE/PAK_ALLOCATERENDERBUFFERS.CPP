@@ -228,7 +228,7 @@ extern char s_audioHeapText[11];    /* "audio heap" */
    the expansion pak gives 6 MB or more; otherwise the count in D_800DE850 plus one 0x1ECC0-byte buffer,
    the extra one holding the z-buffer, below 4 MB), clears them, allocates the display lists, the RSP fifo
    and the audio heap, publishes their addresses in the render globals and marks the record ready. */
-int Pak_AllocateRenderBuffers(struct RecordRecAt1C *record) {
+int Note_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     u32 megabyte = 0x100000;
     u32 bufferBytes;
     u32 memoryEnd;

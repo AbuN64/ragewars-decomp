@@ -22,8 +22,8 @@
    Menu_ReturnToPreviousScreen. Returns zero. */
 #include "MENU/PAK_LOAD.H"
 
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void Cache_SetResourceActivityState(s32);
@@ -35,8 +35,8 @@ s32 Frontend_HandleMatchMenuMessage(void) {
         return 0;
     case MENU_804291A8_473:
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-            Items_ResetActorPools(&D_80145040.object, 0);
-            Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
+            Pools_ResetActorPools(&D_80145040.object, 0);
+            Player_InitializePlayerPool(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 Cache_SetResourceActivityState(1);

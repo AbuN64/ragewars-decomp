@@ -24,8 +24,8 @@ s32 Frontend_ClearPage67ModeFlag(void) {
 
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void Cache_SetResourceActivityState(s32);
@@ -46,8 +46,8 @@ s32 Frontend_UpdatePage67Exit(s32 unused0, s32 unused1, s32 event) {
         MarkMenuEventHandled();
         pause = &D_80145088.status[7];
         *pause = 0;
-        Items_ResetActorPools((char *)pause - 0x180C, 0);
-        Ovlgame_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
+        Pools_ResetActorPools((char *)pause - 0x180C, 0);
+        Player_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
         Scene_LoadLevelResources(&g_world, 0x24, 0);
         if (func_8025477C_de() == 0) {
             Cache_SetResourceActivityState(1);

@@ -130,7 +130,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         if (func_8025477C_de() == 0) {
             Cache_SetResourceActivityState(1);
         }
-        Gfx_ConfigurePrimitiveRenderFlags(0x33335);
+        Combine_ConfigurePrimitiveRenderFlags(0x33335);
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);

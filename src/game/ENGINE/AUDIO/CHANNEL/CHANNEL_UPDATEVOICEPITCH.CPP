@@ -9,18 +9,18 @@
 
 extern void Channel_UpdateDistancePitchFactor(ViewChannelUpdateVoicePitch *);
 
-extern void func_802B2F00_de(char *, s32);
+extern void alSndpSetSound(char *, s32);
 extern void alSndpSetPitch(char *, f32);
 
 static inline char *selectChannel(ContextRecAt104 *context, s32 slot) {
-    func_802B2F00_de(context->channels, context->slots[slot]);
+    alSndpSetSound(context->channels, context->slots[slot]);
     return context->channels;
 }
 
 static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, ViewChannelUpdateVoicePitch *view) {
     char *channel = context->channels;
 
-    func_802B2F00_de(channel, context->slots[slot]);
+    alSndpSetSound(channel, context->slots[slot]);
     value *= view->motion.factor;
     value *= view->scale;
     alSndpSetPitch(channel, value);

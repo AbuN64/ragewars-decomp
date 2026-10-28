@@ -239,7 +239,7 @@ extern void __seqpStopOsc(void *arg0, void *arg1);
 
 extern float Math_Cosf(float x);
 
-extern float Math_Sinf(float x);
+extern float Gu_Sinf(float x);
 
 extern unsigned int func_802B7EF0_eu(void *arg0);
 

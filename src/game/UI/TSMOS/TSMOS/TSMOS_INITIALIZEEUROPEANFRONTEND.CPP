@@ -19,7 +19,7 @@ extern s32 D_800CBC14;
 extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
 extern void Cache_DrainAndCompactResources(s32);
-extern void Frontend_OpenResourceArchive(char *);
+extern void Node_OpenResourceArchive(char *);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_SetTimerState(s32);
 extern void Tsmos_ActivateControllerState(void);
@@ -31,7 +31,7 @@ void Tsmos_InitializeEuropeanFrontend(void) {
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
     SmSmngr_InitializeScreenManager(0x23, (s32)D_0043C500);
-    Frontend_OpenResourceArchive(D_800C6080_eu_x);
+    Node_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();
     SmpFade_RegisterFadeClass();

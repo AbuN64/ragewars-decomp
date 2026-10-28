@@ -50,7 +50,7 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
     ((s32 *)D_800E5690)[8] = -1;
     ST[0xB] = Node_FindWidgetByResourceId(root, PLAYER_SETTINGS_ID(0x5F));
     ((s32 *)D_800E5690)[10] = 0;
-    Menu_SelectPlayerSettingsEntry(0);
+    Player_SelectPlayerSettingsEntry(0);
     return 0;
 }
 #undef ST
@@ -67,7 +67,7 @@ extern s8 D_80102C89[];
 extern void SmpButton_SelectListEntry(void *, s32);
 extern void SmpSlider_SetSliderItem(void *, s32);
 
-void Menu_SelectPlayerSettingsEntry(s32 entryIndex) {
+void Player_SelectPlayerSettingsEntry(s32 entryIndex) {
     u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
@@ -85,7 +85,7 @@ extern u8 g_playerSettings[];
 extern s32 SmpButton_GetListSelection(void *);
 extern s32 SmpSlider_GetSliderItem(void *);
 
-void Menu_StorePlayerSettingsEntry(s32 arg0) {
+void Player_StorePlayerSettingsEntry(s32 arg0) {
     u8 *config;
 
     config = g_playerSettings + arg0 * 0x96;

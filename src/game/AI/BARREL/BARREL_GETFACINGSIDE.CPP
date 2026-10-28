@@ -139,7 +139,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
         return 0.0f;
     }
     do {
-        s = Math_Sinf(actor->yaw);
+        s = Gu_Sinf(actor->yaw);
     } while (0);
     c = -Math_Cosf(actor->yaw);
     dot = (dx * -s + dz * c) / dist;
@@ -171,7 +171,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
                     angle -= offset;
                     bias = (-RW_PI_F6 / 12.0f);
                 }
-                cosine = Math_Sinf(actor->yaw + 3.1415927f + angle);
+                cosine = Gu_Sinf(actor->yaw + 3.1415927f + angle);
                 probe.x = actor->position.x + cosine * (distance * GameObject_GetActorRadius(actor));
                 sine = Math_Cosf(actor->yaw + 3.1415927f + angle);
                 probe.z = actor->position.z + sine * (distance * GameObject_GetActorRadius(actor));
@@ -206,7 +206,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
         return 0.0f;
     }
     do {
-        s = Math_Sinf(actor->heading);
+        s = Gu_Sinf(actor->heading);
     } while (0);
     c = -Math_Cosf(actor->heading);
     dot = (dx * -s + dz * c) / dist;

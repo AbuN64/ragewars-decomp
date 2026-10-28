@@ -69,13 +69,13 @@ s32 Player_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, 
 
     MarkMenuEventHandled();
     if (buttonState == 1) {
-        Menu_StorePlayerSettingsEntry(D_800E5690->item);
+        Player_StorePlayerSettingsEntry(D_800E5690->item);
         nextItem = D_800E5690->item + 1;
         D_800E5690->item = nextItem;
         if (nextItem >= 4) {
             D_800E5690->item = 0;
         }
-        Menu_SelectPlayerSettingsEntry(D_800E5690->item);
+        Player_SelectPlayerSettingsEntry(D_800E5690->item);
         XStdio_FormatBuffer(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5690->item + 1);
         D_800E5690->label->text = (void *) (D_800E5690->text);
         SoundElement_PlayFlatSound(0xE81);
@@ -89,13 +89,13 @@ s32 Player_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unuse
 
     MarkMenuEventHandled();
     if (buttonState == 1) {
-        Menu_StorePlayerSettingsEntry(D_800E5690->item);
+        Player_StorePlayerSettingsEntry(D_800E5690->item);
         previousItem = D_800E5690->item - 1;
         D_800E5690->item = previousItem;
         if (previousItem < 0) {
             D_800E5690->item = 3;
         }
-        Menu_SelectPlayerSettingsEntry(D_800E5690->item);
+        Player_SelectPlayerSettingsEntry(D_800E5690->item);
         XStdio_FormatBuffer(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5690->item + 1);
         D_800E5690->label->text = (void *) (D_800E5690->text);
         SoundElement_PlayFlatSound(0xE81);

@@ -41,24 +41,24 @@ s32 Menu_AnimateTabOptionsMenu(void) {
         }
         temp_s0 = D_800E2830->state3C;
         if ((temp_s0 == 1) && (Cinema_IsSequenceInWindow() == temp_s0)) {
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 0);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 0);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 0);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 0);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 0);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 0);
             D_800E2830->state3C = 0;
         }
         ready = &D_80154020.ready;
         if (*ready == 1) {
             *ready = 0;
             if (D_80154020.value != -1) {
-                Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
-                Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 0);
+                Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
+                Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 0);
                 MarkMenuEventHandled();
                 SmXlate_SwitchScreen(D_80154020.value);
                 return 0;
             }
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 1);
-            Smos_SetFocusedElement(tabRes(0x37D));
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 1);
+            Menu_SetFocusedElement(tabRes(0x37D));
             goto block_11;
         }
 block_11:
@@ -72,8 +72,8 @@ block_11:
             temp_v0_2 = (((Shared_OptionsScreen *)(D_800E4518))->pages) - 1;
             (((Shared_OptionsScreen *)(D_800E4518))->pages) = temp_v0_2;
             if (temp_v0_2 <= 0) {
-                Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 1);
-                Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
+                Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 1);
+                Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
                 SmpFlicker_StartFlicker((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
                 finish = (Shared_OptionsScreen *)D_800E4518;
                 finish->page = 4;
@@ -92,8 +92,8 @@ block_11:
             if (temp_v0_3 <= 0) {
                 D_80145040.pause = 0;
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;
-                Items_ResetActorPools(&D_80145040.object, 0);
-                Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
+                Pools_ResetActorPools(&D_80145040.object, 0);
+                Player_InitializePlayerPool(&D_80145040, 0, 0);
                 Scene_LoadLevelResources(&g_world, 0, 0);
                 if (func_8025477C_de() == 0) {
                     Cache_SetResourceActivityState(1U);
@@ -121,11 +121,11 @@ block_11:
             break;
         case 5:
             SoundElement_PlayFlatSound(0xE78);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 0);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 1);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 1);
-            Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 1);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 0);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 1);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 1);
+            Widget_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 1);
             finish = (Shared_OptionsScreen *)D_800E4518;
             finish->page = 2;
             finish->pages = 4;

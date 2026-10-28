@@ -47,7 +47,7 @@ extern struct EntryRecAt0V1 D_800E4694[];
 
 
 
-extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
+extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 /* Reports every set entry of each ready slot to the handler, stopping after two slots. */
 
@@ -135,8 +135,8 @@ s32 Results_IsUnlockLinked(s32 a, s32 b) {
 void Results_ShowTrialPreviewBanner(void) {
     (D_800E4690->banner)->alpha = 0xFF;
     (D_800E4690->bannerShadow)->alpha = 0xFF;
-    Frontend_SetWidgetFlag08(D_800E4690->bannerShadow, 1);
-    Frontend_SetWidgetFlag08(D_800E4690->banner, 1);
+    Widget_SetWidgetFlag08(D_800E4690->bannerShadow, 1);
+    Widget_SetWidgetFlag08(D_800E4690->banner, 1);
     D_800E4690->blinking = 0;
 }
 

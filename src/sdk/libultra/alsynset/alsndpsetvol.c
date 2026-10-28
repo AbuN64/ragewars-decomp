@@ -6,11 +6,11 @@
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
 
-void func_802B2F00_de(ALSndPlayer *soundPlayer, s16 soundId) {
+void alSndpSetSound(ALSndPlayer *soundPlayer, s16 soundId) {
     soundPlayer->target = (s32) soundId;
 }
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
+extern s32 alEvtqPostEvent(void *, s16 *, s32);
 
 
 
@@ -24,7 +24,7 @@ void alSndpSetVol(ALSndPlayer *soundPlayer, s16 eventVolume) {
     acc += soundPlayer->target * 0x30;
     p.f8 = eventVolume;
     p.f4 = acc;
-    func_802B00D4_de(&soundPlayer->evtq, (s16 *)&p, 0);
+    alEvtqPostEvent(&soundPlayer->evtq, (s16 *)&p, 0);
 }
 
 #if defined(VERSION_US)

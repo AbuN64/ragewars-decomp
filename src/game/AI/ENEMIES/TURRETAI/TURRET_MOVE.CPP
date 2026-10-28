@@ -113,7 +113,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     }
     rider->throttle = throttle;
     position = rider->base;
-    position.x += segment->radius * Math_Sinf(segment->angle);
+    position.x += segment->radius * Gu_Sinf(segment->angle);
     position.y += segment->rise;
     position.z += segment->radius * Math_Cosf(segment->angle);
     Graphu64_InterpolateVector(rider->frame, throttle, &rider->base, &position);

@@ -34,7 +34,7 @@ extern short Node_GetFontMetricAtC(int index);
 struct ManagerFrontendReleaseAllChunkImages;
 typedef struct ManagerFrontendReleaseAllChunkImages ManagerFrontendReleaseAllChunkImages;
 
-extern void Frontend_LoadLanguageStringsIfAny(s32);
+extern void Node_LoadLanguageStringsIfAny(s32);
 
 extern short Node_GetFontBitmapCount(int index);
 

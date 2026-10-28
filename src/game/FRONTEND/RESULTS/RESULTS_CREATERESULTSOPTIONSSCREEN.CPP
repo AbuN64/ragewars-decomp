@@ -91,7 +91,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_800E4690->resource = SmpFlicker_CreateFlickerWidget(resultsRes(0x141), 0x6E);
     wHead = Node_FindWidgetByResourceId(arg0, resultsRes(0x13F));
     D_800E4690->focusItem = wHead;
-    Frontend_SetWidgetFlag08(wHead, 0);
+    Widget_SetWidgetFlag08(wHead, 0);
     D_800E4690->owner = (void *)Node_FindWidgetByResourceId(arg0, resultsRes(0x154));
     D_800E4690->item155 = Node_FindWidgetByResourceId(arg0, resultsRes(0x155));
     D_800E4690->player = 0;

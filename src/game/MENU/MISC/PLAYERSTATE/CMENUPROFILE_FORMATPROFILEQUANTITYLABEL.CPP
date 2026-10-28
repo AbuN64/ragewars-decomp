@@ -32,7 +32,7 @@ extern char D_800EE970[];
 #else
 extern char D_800DE2F0[];
 #endif
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 s32 CMenuProfile_FormatProfileQuantityLabel(struct Field *field, Shared_MenuHandle *holder) {
     s32 value = holder->owner->views5D8.view5D8_9.profile->quantity;
@@ -64,10 +64,10 @@ s32 CMenuProfile_FormatProfileQuantityLabel(struct Field *field, Shared_MenuHand
         }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = field->text[g_languageIndex];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800EE970, value);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800EE970, value);
 #else
         text = *field->text;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800DE2F0, value);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), D_800DE2F0, value);
 #endif
     }
     return 0;

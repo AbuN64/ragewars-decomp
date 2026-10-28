@@ -11,7 +11,7 @@
 u32 Defs_GetMemorySize(void);
 int SetN64_IsModeThirteen(void);
 u8 *func_8043F290(TextBoundsText *);
-f32 Pak_MeasureLine(u8 *, f32, f32);
+f32 Menu_MeasureLine(u8 *, f32, f32);
 void *Menu_GetListContext(s8 *);
 extern f32 D_800DE448;
 extern f32 D_800E247C;
@@ -65,7 +65,7 @@ void Menu_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             } else {
                 string = ((u8 **)text->text)[MENU_LANGUAGE];
             }
-            w = Pak_MeasureLine(string, size, size);
+            w = Menu_MeasureLine(string, size, size);
         } else {
             count = 0;
             if (text->mode == 5) {

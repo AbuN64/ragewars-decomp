@@ -246,7 +246,7 @@ void Tengine_UpdateArtsendTexturePreview(void) {
         OnScreen_LoadTextTileModeOne();
         OnScreen_SetTextScale(scale, scale);
         OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        OnScreen_DrawText((char *)&D_8014AEB0.displayData, 0x10, D_800E28D4 - 0x30, 0xFF, 0, 0, scale, scale);
+        Onscrn_DrawText((char *)&D_8014AEB0.displayData, 0x10, D_800E28D4 - 0x30, 0xFF, 0, 0, scale, scale);
     }
 }
 #endif

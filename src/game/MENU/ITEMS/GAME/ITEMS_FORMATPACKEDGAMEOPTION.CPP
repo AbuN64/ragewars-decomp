@@ -23,19 +23,19 @@ s32 Items_FormatPackedGameOption(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)field->text[D_801462C8.language];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* Shows D_800D35EC in a field when the top twelve bits of g_gamePackedOptions are zero, D_800D35F0 when they are sixteen, and otherwise points the field at D_800D35F4 and formats their value into it with D_800DE750_de two bytes before the length Pak_CountLineChars reports, returning zero. Adapted from Pak_FormatMusicPreview with the value taken from the top twelve bits of the halfword g_gamePackedOptions, a second fixed text for sixteen, and the texts and format changed. */
+/* Shows D_800D35EC in a field when the top twelve bits of g_gamePackedOptions are zero, D_800D35F0 when they are sixteen, and otherwise points the field at D_800D35F4 and formats their value into it with D_800DE750_de two bytes before the length Menu_CountLineChars reports, returning zero. Adapted from Pak_FormatMusicPreview with the value taken from the top twelve bits of the halfword g_gamePackedOptions, a second fixed text for sixteen, and the texts and format changed. */
 
 
 
 
-extern s32 Pak_CountLineChars(LayeredText *);
+extern s32 Menu_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 Items_FormatPackedGameOption(LayeredText *field) {
@@ -49,7 +49,7 @@ s32 Items_FormatPackedGameOption(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)*(u8 **)&D_800D35F4;
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }

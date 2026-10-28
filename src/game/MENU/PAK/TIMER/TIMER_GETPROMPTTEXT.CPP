@@ -147,12 +147,12 @@ void Timer_ProbeMenuChannel(struct Shared_PakMenu *record) {
     } else {
         value = record->owner->unk4;
     }
-    Pak_ProbeStatus(value);
+    Note_ProbeStatus(value);
 }
 
 void Timer_ReturnToWorldMenu(void *unused, void *object) {
     Control_DisableControllerPak(object);
-    OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
+    Scene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
 s32 Timer_FindNoteByGameName(void *unused, void *arg1, s32 arg2, s32 *arg3) {
@@ -247,7 +247,7 @@ s32 Timer_FindNextAvailableChannel(s32 currentChannel) {
     }
     attempts = 0;
     do {
-        Pak_ProbeStatus(channel);
+        Note_ProbeStatus(channel);
         if (Note_GetStatus(channel) != -2) {
             break;
         }
@@ -265,11 +265,11 @@ s32 Timer_FindNextAvailableChannel(s32 currentChannel) {
 
 /* The EU builds compile a different original body for Timer_UpdateManagerChannelLabel; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Pak_CountLineChars reports, returning zero.
+/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Menu_CountLineChars reports, returning zero.
    Adapted from Items_FormatPackedGameOption with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
     char *text;
@@ -283,7 +283,7 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
         value = D_800E28C8;
         field->text = D_800D3764;
         text = D_800D3764[0];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
     }
     return 0;
 }
@@ -291,11 +291,11 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when D_8015375C is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with D_800ED3FC and D_800E28C8 plus one from one byte before the length Pak_CountLineChars reports; returns zero. */
+/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when D_8015375C is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with D_800ED3FC and D_800E28C8 plus one from one byte before the length Menu_CountLineChars reports; returns zero. */
 
 
 
-extern s32 Pak_CountLineChars(struct Field *);
+extern s32 Menu_CountLineChars(struct Field *);
 
 s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
     char **table;
@@ -318,7 +318,7 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
         field->text = table;
         value = D_800E28C8;
         text = table[g_languageIndex];
-        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
+        Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
 done:
     return 0;

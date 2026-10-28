@@ -53,7 +53,7 @@ extern struct StateFlags D_800E5A06[];
 
 extern struct ResourceSmpFlickerCreateFlickerWidget *Node_FindWidgetByResourceId(void *, s32);
 
-extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
+extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 
 /* Releases the object D_800E59E0 holds through Cache_FreeMemory, clears D_800E59E0, calls
@@ -164,7 +164,7 @@ void Frontend_SelectEquipmentColumn(s32 player, s32 column) {
 
     if (column != 5) {
         item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
-        Frontend_SetWidgetFlag08(item, 1);
+        Widget_SetWidgetFlag08(item, 1);
     }
     item = Node_FindWidgetByResourceId(D_800E59E0->window, D_800E5A1A[player][column].value);
     Widget_SetWidgetFlag40(item, 1);

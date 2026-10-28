@@ -44,7 +44,7 @@ void Scene_DispatchSelectedEntityKinds(Level *level) {
     Cinema_SetPlaybackFlag();
 }
 
-void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
+void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *entry;
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *next;
 

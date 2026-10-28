@@ -66,7 +66,7 @@ extern struct func_80205628_S3 *D_800E4514;
 extern struct MessageScreen *D_800E4518;
 extern void Frontend_StartMenuImageTransition(struct MessageScreen *);
 
-extern void Frontend_SetWidgetFlag08(void *object, int enabled);
+extern void Widget_SetWidgetFlag08(void *object, int enabled);
 
 extern void Cinema_ReleaseSequenceContext(void);
 
@@ -245,8 +245,8 @@ reopen:
     Frontend_StartMenuImageTransition(D_800E4518);
     D_800E4518->shown = 1;
     D_800E4518->timer = -1;
-    Frontend_SetWidgetFlag08(D_800E4518->window, 1);
-    Frontend_SetWidgetFlag08(D_800E4518->second_window, 1);
+    Widget_SetWidgetFlag08(D_800E4518->window, 1);
+    Widget_SetWidgetFlag08(D_800E4518->second_window, 1);
     Cinema_ReleaseSequenceContext();
     goto done;
 code_17:

@@ -10,11 +10,11 @@
 
 extern Gfx *g_displayListCursor;
 
-extern void Gfx_SetRenderMode(s32 mode);
+extern void Combine_SetRenderMode(s32 mode);
 
-extern void Gfx_SetCombineMode(s32 mode);
+extern void Combine_SetCombineMode(s32 mode);
 
-extern void Gfx_SetPrimitiveVertexMode(s32 mode);
+extern void Combine_SetPrimitiveVertexMode(s32 mode);
 
 static inline void sync(void) {
     Gfx *cmd;
@@ -45,15 +45,15 @@ static inline void beginFrame(void) {
     gDPPipeSync(g);
 }
 
-void Gfx_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
-    Gfx_DrawClippedImageRectangle(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
+void Rect_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
+    Combine_DrawClippedImageRectangle(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
 }
 
 void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
     D_800DF290 = 0;
     D_800E32E4 = 0;
-    Gfx_SetRenderMode(0xC);
-    Gfx_SetCombineMode(5);
+    Combine_SetRenderMode(0xC);
+    Combine_SetCombineMode(5);
     if (D_800DF274 != 7) {
         D_800DF274 = 7;
         sync();
@@ -65,8 +65,8 @@ void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5,
         emit(0xD7000000, 0x80008000);
     }
     if (D_80153F60.x == 0) {
-        Gfx_SetPrimitiveVertexMode(9);
-        Gfx_DrawClippedGradientQuad(x, y, z, a4, a5, a6, a7, a8);
+        Combine_SetPrimitiveVertexMode(9);
+        Combine_DrawClippedGradientQuad(x, y, z, a4, a5, a6, a7, a8);
     }
 }
 

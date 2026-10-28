@@ -18,7 +18,7 @@
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 Control_AnyControllerConnected(void);
 void SetN64_CommitSessionInputs(s32);
-void Pak_ProbeStatus(s32);
+void Note_ProbeStatus(s32);
 s32 Note_GetStatus(s32);
 s32 Note_CountFreeNotes(s32, s32 *);
 int Note_GetFreePages(int, int *);
@@ -88,7 +88,7 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
     }
     attempts = 0;
     do {
-        Pak_ProbeStatus(channel);
+        Note_ProbeStatus(channel);
         if (Note_GetStatus(channel) != -2) {
             break;
         }
@@ -164,7 +164,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
         }
         D_800E28CC = 1;
         if ((D_80142CAC != 0) || (D_80146D60 != 0)) {
-            Pak_ProbeStatus(D_800E28C8);
+            Note_ProbeStatus(D_800E28C8);
             if (Note_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
@@ -190,7 +190,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
         } while (++retries < 4);
         if (status == 0) {
             D_800E28C8 = firstChannel;
-            Pak_ProbeStatus(firstChannel);
+            Note_ProbeStatus(firstChannel);
             if (Note_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
@@ -237,7 +237,7 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
     }
 finish:
     if (D_80153784 == 0) {
-        Pak_MarkSaveNotes(menu);
+        Snapshot_MarkSaveNotes(menu);
     }
     D_8014AD94 = 0;
     D_800E28CC = 1;
@@ -247,7 +247,7 @@ finish:
 extern s32 D_8015375C, D_800E28C0;
 extern s32 D_8014561C, D_0044ED44, D_8011FECC;
 extern char D_0044EA08[];
-extern void Pak_ProbeStatus(s32 ch);
+extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
 extern s32 Note_NeedsIdRepair(s32 ch);
@@ -267,7 +267,7 @@ static __inline__ void pakSetChecksum(s32 offset, s32 value) {
     *(s32 *)((u8 *)(D_8011FECC + offset) + 0x60C) = value;
 }
 /* Opens the pak menu for a snapshot save: unless a message is pending (D_800E28C0), probes the channel's
-   Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (Pak_MarkSaveNotes),
+   Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (Snapshot_MarkSaveNotes),
    otherwise the damaged-pak (D_0044EA08) or D_0044ED44 prompt opens. Twin of Snapshot_BeginProfileSave. */
 void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
@@ -288,14 +288,14 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
         return;
     }
     if (D_8015375C) {
-        Pak_ProbeStatus(D_800E28C8);
+        Note_ProbeStatus(D_800E28C8);
     } else {
-        Pak_ProbeStatus(menu->slot->unk4);
+        Note_ProbeStatus(menu->slot->unk4);
     }
     if (!Note_GetStatus(channel)) {
         Snapshot_CreateSaveSnapshot(player);
         pakSetChecksum((s32)D_800DE868, Note_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
-        Pak_MarkSaveNotes(menu);
+        Snapshot_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;

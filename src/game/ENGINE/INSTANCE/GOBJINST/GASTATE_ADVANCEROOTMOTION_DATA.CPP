@@ -278,7 +278,7 @@ CQuatern func_8024796C_de(char *actor) {
         weapon = ((Shared_ActorView *)player)->message;
         if (weapon != 0) {
             angle = 1.5707964f;
-            D_80115DEC = Math_Sinf(angle);
+            D_80115DEC = Gu_Sinf(angle);
             yaw.x = 0.0f;
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
@@ -287,7 +287,7 @@ CQuatern func_8024796C_de(char *actor) {
         } else {
             angle = 1.5707964f;
             Player_BuildPlayerOrientation(player, &own);
-            D_80115DEC = Math_Sinf(angle);
+            D_80115DEC = Gu_Sinf(angle);
             yaw.x = 0.0f;
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
@@ -295,14 +295,14 @@ CQuatern func_8024796C_de(char *actor) {
             MultiplyQuaternions(&result, &yaw, &own);
         }
     } else if (((LevelActor *)actor)->definition->kind == 4) {
-        sine = Math_Sinf(((LevelActor *)actor)->pitch * 0.5f);
+        sine = Gu_Sinf(((LevelActor *)actor)->pitch * 0.5f);
         pitch.x = sine;
         pitch.y = 0.0f;
         pitch.z = 0.0f;
         angle = ((LevelActor *)actor)->pitch * 0.5f;
         D_80115DEC = sine;
         pitch.w = Math_Cosf(angle);
-        sine = Math_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
+        sine = Gu_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
@@ -313,7 +313,7 @@ CQuatern func_8024796C_de(char *actor) {
         Turret_BuildPlaneRot(&base, actor, (char *)actor + 0x170);
         MultiplyQuaternions(&result, &both, &base);
     } else {
-        sine = Math_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
+        sine = Gu_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
@@ -384,7 +384,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         angle = Graphu64_ArcCos(bestDot);
         angle *= Gu_Sqrtf(Gu_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
-        D_80115DEC = Math_Sinf(angle);
+        D_80115DEC = Gu_Sinf(angle);
         turn.x = axis.x * D_80115DEC;
         turn.y = axis.y * D_80115DEC;
         turn.z = axis.z * D_80115DEC;

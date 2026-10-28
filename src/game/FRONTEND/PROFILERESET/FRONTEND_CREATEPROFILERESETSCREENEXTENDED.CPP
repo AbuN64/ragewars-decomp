@@ -9,8 +9,8 @@
 extern void *Cache_AllocateMemory(s32);
 extern void Player_InitializeProfile(Profile *);
 extern Pulse *D_800E5950;
-extern void Items_ResetActorPools(void *, s32);
-extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
+extern void Pools_ResetActorPools(void *, s32);
+extern void Player_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void Cache_SetResourceActivityState(u32);
@@ -26,8 +26,8 @@ s32 Frontend_CreateProfileResetScreenExtended(MenuWidget *tree) {
 
     D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
-    Items_ResetActorPools(object, 0);
-    Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
+    Pools_ResetActorPools(object, 0);
+    Player_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
         Cache_SetResourceActivityState(1);

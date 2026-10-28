@@ -48,7 +48,7 @@ void SmXlate_SwitchScreen(s32 index) {
     s32 (*temp_v0_7)(s32);
     s32 temp_a1;
     Shared_MenuDefinition *temp_a1_2;
-    s32 temp_f2;
+    s32 argument;
     s32 e03_arg_copy; 
     s32 focus_index_final; 
     s32 focus_index; 
@@ -448,8 +448,8 @@ after_focus:
             }
             D_8014D080->handled = temp_s0_12;
         }
-        temp_f2 = (s32)(N64Eng_GetTimeSeconds() * 1000.0);
-        DispatchCurrentScreenEvent(1, 0xE08, temp_f2 - D_8014D080->frames, temp_f2, 0);
+        argument = (s32)(N64Eng_GetTimeSeconds() * 1000.0);
+        DispatchCurrentScreenEvent(1, 0xE08, argument - D_8014D080->frames, argument, 0);
     }
 after_e08:
 }

@@ -175,7 +175,7 @@ void Playerai_OffsetActorForState15(Actor126 *actor, Object126 *positionedObject
         object = positionedObject;
         object_angle = object->angle;
         angle = D_800C2DCC_de;
-        sine = Math_Sinf(object_angle + angle);
+        sine = Gu_Sinf(object_angle + angle);
         cosine = Math_Cosf(object->angle + angle);
         sine *= D_800C7EC0;
         cosine *= D_800C7EC0;
