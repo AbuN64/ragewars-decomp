@@ -112,93 +112,93 @@ $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/%.o): CFLAGS := -G0 -mips3 -
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_4.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200800_4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/802022E0_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/env.c.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/env.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/env.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/decode.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/decode.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/decode.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/longarith.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/longarith.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/longarith.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
 $(foreach v,$(VERSIONS),build/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -217,93 +217,93 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): CFLAGS := -G0 -m
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/env.c.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/env.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/env.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5914.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): HILO := 1
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/80447BB0_9.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/_floatdisf.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/decode.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/decode.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/decode.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_divdi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_moddi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/_umoddi3.CPP.o): HILO := 1
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/_udivdi3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/longarith.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/longarith.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/longarith.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C3EA4_4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/pfs/ospfschecker.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/UI/SMOS/SM_XLATE/SM_XLATE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_8.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_9.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_16.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_17.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_18.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_19.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_20.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_22.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_spindelay_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/libsn_writememorybyte.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/nav_isballisticarcobstructed_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_initbitreverseorder.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_decodetransformblock.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fforce-addr
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math
 # The size each object's .text has in the ROM: a compiler may pad the section past its last function, and a zero tail
 # past that size is cut from the section header before the object links.
 -include $(VERSIONS:%=versions/%/text_sizes.mk)

@@ -6,7 +6,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "AUDIO/802BFE60.H"
+#include "AUDIO/GETTHREADID.H"
 #include "sdk/os.h"
 
 #include "sdk/OS/802BC630_2.H"

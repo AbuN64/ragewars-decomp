@@ -7,7 +7,7 @@
 #include "sdk/libultra/audio/synthesizer.h"
 #include "TYPES.H"
 #include "sdk/libgultra_inferred/802B8DE0_2.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
+#include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "sdk/al_globals.h"
 #include "sdk/libgultra.h"
 #include "COMMON/UNUSED.H"

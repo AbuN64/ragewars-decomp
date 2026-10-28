@@ -2,7 +2,7 @@
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_3.H"
-#include "sdk/AUDIO/802BF300.H"
+#include "sdk/AUDIO/vi.H"
 #include "SYSTEM/802BA5F0_22.H"
 #include "sdk/os.h"
 #include "include_asm.h"

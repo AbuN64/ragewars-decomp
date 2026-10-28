@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OSTASK_T.H"
-#include "AUDIO/802BF1F0.H"
+#include "AUDIO/SPSETSTAT.H"
 #include "sdk/libgultra/sptaskyield.h"
 
 void osSpTaskYield(void) { Audio_WriteSignalProcessorStatus(0x400U); }

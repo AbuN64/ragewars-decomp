@@ -5,9 +5,9 @@
 #include "COMMON/DEVICE_IO.H"
 #include "TYPES.H"
 #include "sdk/libgultra.h"
-#include "AUDIO/802BEE60.H"
+#include "AUDIO/SIRAW.H"
 #include "sdk/os.h"
-#include "sdk/OSINT/802C0CB0.H"
+#include "sdk/OSINT/osyieldthread.H"
 #include "AUDIO/802BFD40.H"
 
 extern void func_802BD280_de(void *addr, s32 size);

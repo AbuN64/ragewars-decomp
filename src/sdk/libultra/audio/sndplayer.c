@@ -10,7 +10,7 @@
 #include "include_asm.h"
 #include "sdk/EXTERNS.H"
 #include "COMMON/TRIPLE.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
+#include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "AUDIO/802BFD40.H"
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,

@@ -15,10 +15,10 @@
 #include "SYSTEM/8025E280.H"
 #include "SYSTEM/8025E280_3.H"
 #include "TEXTURE/80256220_13.H"
-#include "sdk/MATH/802BC390.H"
+#include "sdk/MATH/aigetlen.H"
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
-#include "sdk/OSINT/802C0CB0.H"
+#include "sdk/libgultra/part_800C7F20/alunlink.h"
+#include "sdk/OSINT/osyieldthread.H"
 #include "sdk/os.h"
 
 

@@ -13,7 +13,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/EXTERNS_2.H"
-#include "AUDIO/802BFF30.H"
+#include "AUDIO/SIRAWWRITE.H"
 #include "RENDER/80291054_6.H"
 #include "ITEMMENU/ITEMMENU.H"
 #include "RESMGR/802A0888.H"

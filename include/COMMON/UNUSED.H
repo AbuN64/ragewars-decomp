@@ -858,7 +858,7 @@ extern FieldRow D_800E4EF4[];
 
 extern f32 D_800C3758_de[];
 
-extern s32 s_virtualRegionText;
+extern const unsigned char s_virtualRegionText[15];
 
 extern char *D_800D34F8;
 
@@ -1380,7 +1380,7 @@ extern f32 D_800C5D78_de;
 
 extern Handler802A2B50 D_800DE108;
 
-#include "sdk/SCHED/8028DF6C_7.H"
+#include "sdk/SCHED/osscremoveclient.H"
 
 extern ListNode80290528 *D_80131140;
 

@@ -30,5 +30,5 @@ extern Acmd *alRaw16Pull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset
 extern char D_002BE514;
 extern char D_002BE898;
 
-#include "sdk/AUDIO/802C3EA4_2.H"
+#include "sdk/AUDIO/audio_decodetransformblock.H"
 #endif

@@ -2,7 +2,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/DEVICE_IO.H"
-#include "sdk/OSINT/802C0CB0.H"
+#include "sdk/OSINT/osyieldthread.H"
 
 /* 802BE040_7.CPP */
 #if defined(VERSION_DE)

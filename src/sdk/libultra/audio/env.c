@@ -4,7 +4,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-#include "sdk/OSINT/802C0CB0.H"
+#include "sdk/OSINT/osyieldthread.H"
 #include "AUDIO/802BFD40.H"
 #include "acmd.h"
 #include "sdk/al_globals.h"

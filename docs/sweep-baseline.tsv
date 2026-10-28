@@ -141,7 +141,7 @@ ascii-words	src/game/WEAPONS/800C7938.CPP	e267132ecb33	0
 ascii-words	src/game/WORLD_2/8024E914_17.CPP	552ad081cb36	0
 ascii-words	src/game/WORLD_2/8024E914_19.CPP	6cf6ed2c52b6	0
 ascii-words	src/game/particle/80246E34_10.CPP	c3ee927ff6e5	0
-ascii-words	src/sdk/libultra/800CD394_35.CPP	2710935c3862	0
+ascii-words	src/sdk/libultra/action_initbreakablemotion_data.CPP	2710935c3862	0
 dropped-call-args	src/game/ACTORS/80277444_8.CPP	397d3bb3c426	0
 dropped-call-args	src/game/AI/ENEMIES/TURRETAI_4.CPP	236c3afec17a	0
 dropped-call-args	src/game/AI/ENEMIES/TURRETAI_4.CPP	2d89c55effa7	0
@@ -191,8 +191,8 @@ dropped-call-args	src/game/particle/80246E34_7.CPP	ecebaa3d7f28	0
 dropped-call-args	src/game/particle/8024D018_3.CPP	c805cc061eee	0
 dropped-call-args	src/game/particle/8024D018_4.CPP	4372b762e3e9	0
 dropped-call-args	src/game/particle/8024D018_4.CPP	7d8c9de96d96	0
-dropped-call-args	src/sdk/libultra/audio/802C3EA4_3.CPP	4932118ce667	0
-dropped-call-args	src/sdk/libultra/part_800C7F20/code_802B7520.c	8000ce0937a9	0
+dropped-call-args	src/sdk/libultra/audio/audio_initbitreverseorder.CPP	4932118ce667	0
+dropped-call-args	src/sdk/libultra/alsynset/alunlink.c	8000ce0937a9	0
 halfword-pair-in-word	include/COMMON/BALLISTICPARAMS.H	596d708048d5	0
 halfword-pair-in-word	include/COMMON/GAMEPLAY_TRANSITION.H	c6445451f5b5	0
 halfword-pair-in-word	include/COMMON/ITEMRECAT20V1.H	6ef7cdc916db	0
@@ -216,11 +216,11 @@ halfword-pair-in-word	include/COMMON/UNUSED.H	526d0937b1b7	0
 halfword-pair-in-word	include/COMMON/UNUSED.H	b32314d06352	0
 halfword-pair-in-word	include/COMMON/UNUSED.H	ba3ba0748bee	0
 halfword-pair-in-word	include/COMMON/UNUSED.H	bea5469f56c2	0
-halfword-pair-in-word	include/FRONTEND/8041BEA8_6.H	448f6f2e08e1	0
+halfword-pair-in-word	include/FRONTEND/FRONTEND_DRAWMODELPREVIEW.H	448f6f2e08e1	0
 halfword-pair-in-word	src/game/MENU/802ABDBC_9.CPP	44dd33836b94	0
 halfword-pair-in-word	src/game/MENU/802ABDBC_9.CPP	76fd12540c7c	0
 halfword-pair-in-word	src/game/RENDER_3/80268160_12.CPP	837d377bd1c0	0
-pointer-to-word	src/game/AUDIO_3/802BAC64_2.CPP	13bfe869df40	0
+pointer-to-word	src/game/REVERB/REVERB.CPP	13bfe869df40	0
 pointer-to-word	src/game/CAMERA/80233920_31.CPP	181002441dfb	0
 pointer-to-word	src/game/FRONTEND/80423280_12.CPP	67910e4de939	0
 pointer-to-word	src/game/FRONTEND/80423280_40.CPP	802bdaad3b55	0
@@ -358,7 +358,7 @@ word-array-byte-use	src/game/WEAPONS/80225D10_9.CPP	1a091e86ddd3	0
 word-array-byte-use	src/game/WEAPONS/CODE_802227D0.CPP	041a27806b42	0
 word-array-byte-use	src/sdk/libultra/os/802B83EC_2.CPP	4a5f49c99ac7	0
 word-array-byte-use	src/sdk/libultra/os/802BD950_2.CPP	d418e446d648	0
-word-array-byte-use	src/sdk/libultra/pfs/80446BD0_10.CPP	86d79bb81995	0
-word-array-byte-use	src/sdk/libultra/pfs/80446BD0_10.CPP	b0b470184682	0
+word-array-byte-use	src/sdk/libultra/pfs/pfs_decodechannelstatus.CPP	86d79bb81995	0
+word-array-byte-use	src/sdk/libultra/pfs/pfs_decodechannelstatus.CPP	b0b470184682	0
 word-array-byte-use	src/sdk/libultra/pfs/80447BB0_11.CPP	371a87830a65	0
 word-array-byte-use	src/sdk/libultra/pfs/80447BB0_11.CPP	371a87830a65	1

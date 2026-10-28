@@ -3,7 +3,7 @@
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/COLORENTRY.H"
-#include "ENGINE/SCENE_7.H"
+#include "ENGINE/SCENE_SETLEVELACTORSTATEBIT.H"
 #include "COMMON/UNUSED.H"
 extern void Scene_ReleaseCachedGeometry(void *);
 extern void Scene_CollectVisibleEffects(s32);

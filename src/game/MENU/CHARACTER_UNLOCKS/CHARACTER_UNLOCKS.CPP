@@ -11,7 +11,7 @@
 #include "COMMON/GFX.H"
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_32.H"
-#include "FRONTEND/8041BEA8_6.H"
+#include "FRONTEND/FRONTEND_DRAWMODELPREVIEW.H"
 
 
 

@@ -120,83 +120,15 @@ toolchain = "gcc-2.7.2-sn64"
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []
-[file."src/sdk/libultra/audio/802C3EA4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-[file."src/sdk/libultra/audio/802C3EA4_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-[file."src/sdk/libultra/audio/802C3EA4_3.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-[file."src/sdk/libultra/audio/802C3EA4_4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-[file."src/sdk/libultra/audio/802C5E90.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
-omit = []
-
-[file."src/sdk/libultra/pfs/80447BB0_9.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fforce-addr"]
-omit = []
-[file."src/sdk/libgcc/802C6A00_25.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = ["-mfp64"]
-
 [file."src/sdk/libultra/libc/802C1880_2.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []
 
-[file."src/sdk/libultra/libc/802C1880.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = []
-
-[file."src/sdk/libultra/libc/802C1B60.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = []
-
-[file."src/sdk/libsn/80200568_3.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = []
-
-[file."src/sdk/libsn/80200800_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = []
-
 [file."src/sdk/libsn/80200800_4.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
 
-[file."src/sdk/libsn/802022E0_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = []
-[file."src/sdk/libultra/libc/802C6420.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
-omit = []
-hilo_nops = true
-
-[file."src/sdk/libultra/libc/802C5320.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
-omit = []
-hilo_nops = true
-
-[file."src/sdk/libultra/libc/802C5914.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
-omit = []
-hilo_nops = true
 [file."src/sdk/libultra/audio/env.c"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
@@ -212,43 +144,117 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_17.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_DRAWSPRITE.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_18.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_RECYCLERELEASEDEFFECTS.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_19.CPP"]
+[file."src/game/ENGINE/PARTICLE/GHOT_DISPATCHATTACHMENTEFFECTS_DATA.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_20.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_UPDATESYSTEM.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_16.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_HASKINDZEROENTRY.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_9.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_BUILDMATRIX.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_22.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_RELEASEOWNERLISTONEEFFECTS.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
-[file."src/game/ENGINE/PARTICLE/PARTICLE_8.CPP"]
+[file."src/game/ENGINE/PARTICLE/PARTICLE_UPDATETYPEDMOTION.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math"]
 omit = []
 
+[file."src/sdk/libultra/audio/decode.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/sdk/libultra/audio/audio_decodetransformblock.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/sdk/libultra/audio/audio_initbitreverseorder.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/sdk/libultra/audio/audio_nextdecodedsampleblock.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/sdk/libultra/audio/_udivdi3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+
+[file."src/sdk/libultra/pfs/ospfschecker.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
+[file."src/sdk/libgcc/_floatdisf.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = ["-mfp64"]
+
+[file."src/sdk/libultra/libc/longarith.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/libultra/libc/gfx_getconvertedcounterratio_data.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/libsn/libsn_spindelay_data.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libsn/libsn_writememorybyte.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libsn/nav_isballisticarcobstructed_data.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libultra/libc/_umoddi3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+hilo_nops = true
+
+[file."src/sdk/libultra/libc/_divdi3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+hilo_nops = true
+
+[file."src/sdk/libultra/libc/_moddi3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+hilo_nops = true

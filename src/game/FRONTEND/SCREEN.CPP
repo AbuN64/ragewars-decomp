@@ -7,7 +7,7 @@
 #include "stddef.h"
 #include "COMMON/EXTERNS_3.H"
 #include "FRONTEND/SCREEN.H"
-#include "sdk/AUDIO/802BF7F0.H"
+#include "sdk/AUDIO/visetmode.H"
 #include "FRONTEND/8040B45C_22.H"
 
 /* 8040B45C_21.CPP */

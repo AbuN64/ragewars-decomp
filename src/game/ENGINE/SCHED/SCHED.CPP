@@ -12,7 +12,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_3.H"
 #include "sdk/AUDIO/802BF400.H"
-#include "sdk/SCHED/8028DF6C_7.H"
+#include "sdk/SCHED/osscremoveclient.H"
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra/sptaskyield.h"
 #include "sdk/os.h"

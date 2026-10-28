@@ -10,7 +10,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "AUDIO/802BFE60.H"
+#include "AUDIO/GETTHREADID.H"
 #include "sdk/os.h"
 
 /* 80263760_6.CPP */

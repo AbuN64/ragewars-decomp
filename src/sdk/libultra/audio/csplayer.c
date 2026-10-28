@@ -15,7 +15,7 @@
 #include "sdk/al_globals.h"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
+#include "sdk/libgultra/part_800C7F20/alunlink.h"
 #include "include_asm.h"
 
 extern s32 func_802B0340_de(s32, s32, void *, s32, s32);

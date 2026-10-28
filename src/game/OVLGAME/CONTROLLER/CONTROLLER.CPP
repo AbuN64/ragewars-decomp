@@ -14,7 +14,7 @@
 #include "sdk/PFS/8044BAC0.H"
 #include "sdk/os.h"
 #include "COMMON/PAKQUEUESTATE.H"
-#include "AUDIO/802BFE60.H"
+#include "AUDIO/GETTHREADID.H"
 
 /* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through func_80285AC4_de, osCreateMesgQueue, func_802BB550_de, osContInit, Audio_GetThreadIdentifier and func_802BB420_de, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through func_80264788_de and counts the profiles Ovlgame_ResetControllerProfile accepts in D_800D0E52, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
 
