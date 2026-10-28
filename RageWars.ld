@@ -1559,7 +1559,7 @@ SECTIONS
         . = MAX(., 0xAE6AC);
         src/game/DATA/MAINCODE/CSEQ.CPP.o(.data);
         . = MAX(., 0xAE6B0);
-        src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
+        src/sdk/libultra/audio/csplayer.c.o(.text.alCSPNew);
         . = MAX(., 0xAE820);
         src/sdk/libultra/audio/csplayer.c.o(.text.__CSPVoiceHandler);
         . = MAX(., 0xAED50);
@@ -3672,7 +3672,7 @@ SECTIONS
         . = MAX(., 0xAE94C);
         src/game/DATA/MAINCODE/CSEQ/CSEQ.CPP.o(.data);
         . = MAX(., 0xAE950);
-        src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
+        src/sdk/libultra/audio/csplayer.c.o(.text.alCSPNew);
         . = MAX(., 0xAEAC0);
         src/sdk/libultra/audio/csplayer.c.o(.text.__CSPVoiceHandler);
         . = MAX(., 0xAEFF0);
@@ -5797,7 +5797,7 @@ SECTIONS
         . = MAX(., 0xAE98C);
         src/game/FRONTEND/FRONTEND/FRONTEND_3.CPP.o(.data);
         . = MAX(., 0xAE990);
-        src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
+        src/sdk/libultra/audio/csplayer.c.o(.text.alCSPNew);
         . = MAX(., 0xAEB00);
         src/sdk/libultra/audio/csplayer.c.o(.text.__CSPVoiceHandler);
         . = MAX(., 0xAF030);
@@ -7932,7 +7932,7 @@ SECTIONS
         . = MAX(., 0xAE5DC);
         src/sdk/libultra/audio/cseq.c.o(.data);
         . = MAX(., 0xAE5E0);
-        src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
+        src/sdk/libultra/audio/csplayer.c.o(.text.alCSPNew);
         . = MAX(., 0xAE750);
         src/sdk/libultra/audio/csplayer.c.o(.text.__CSPVoiceHandler);
         . = MAX(., 0xAEC80);
@@ -10081,7 +10081,7 @@ SECTIONS
         . = MAX(., 0xB377C);
         src/game/FRONTEND/FRONTEND/FRONTEND_3.CPP.o(.data);
         . = MAX(., 0xB3780);
-        src/sdk/libultra/audio/csplayer.c.o(.text.func_802AEAB0_de);
+        src/sdk/libultra/audio/csplayer.c.o(.text.alCSPNew);
         . = MAX(., 0xB38F0);
         src/sdk/libultra/audio/csplayer.c.o(.text.__CSPVoiceHandler);
         . = MAX(., 0xB3E20);
@@ -16476,8 +16476,8 @@ SECTIONS
         . = MAX(., 0x5994);
         src/game/DATA/OVLDAT3/CSPLAYER/CSPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x59A8);
-        . = DEFINED(__align8_literals_func_802AEAB0_de) ? ALIGN(8) : .;
-        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_func_802AEAB0_de .rdata.literals_func_802AEAB0_de);
+        . = DEFINED(__align8_literals_alCSPNew) ? ALIGN(8) : .;
+        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_alCSPNew .rdata.literals_alCSPNew);
         . = DEFINED(__align8_literals___CSPVoiceHandler) ? ALIGN(8) : .;
         src/sdk/libultra/audio/csplayer.c.o(.rodata.literals___CSPVoiceHandler .rdata.literals___CSPVoiceHandler);
         . = MAX(., 0x5A10);
@@ -19340,8 +19340,8 @@ SECTIONS
         . = MAX(., 0x62E4);
         src/game/DATA/OVLDAT3/CSPLAYER/CSPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x62F8);
-        . = DEFINED(__align8_literals_func_802AEAB0_de) ? ALIGN(8) : .;
-        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_func_802AEAB0_de .rdata.literals_func_802AEAB0_de);
+        . = DEFINED(__align8_literals_alCSPNew) ? ALIGN(8) : .;
+        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_alCSPNew .rdata.literals_alCSPNew);
         . = DEFINED(__align8_literals___CSPVoiceHandler) ? ALIGN(8) : .;
         src/sdk/libultra/audio/csplayer.c.o(.rodata.literals___CSPVoiceHandler .rdata.literals___CSPVoiceHandler);
         . = MAX(., 0x6360);
@@ -22166,8 +22166,8 @@ SECTIONS
         . = MAX(., 0x6C74);
         src/game/DATA/OVLDAT3/CSPLAYER/CSPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x6C88);
-        . = DEFINED(__align8_literals_func_802AEAB0_de) ? ALIGN(8) : .;
-        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_func_802AEAB0_de .rdata.literals_func_802AEAB0_de);
+        . = DEFINED(__align8_literals_alCSPNew) ? ALIGN(8) : .;
+        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_alCSPNew .rdata.literals_alCSPNew);
         . = DEFINED(__align8_literals___CSPVoiceHandler) ? ALIGN(8) : .;
         src/sdk/libultra/audio/csplayer.c.o(.rodata.literals___CSPVoiceHandler .rdata.literals___CSPVoiceHandler);
         . = MAX(., 0x6CF0);
@@ -24975,8 +24975,8 @@ SECTIONS
         . = MAX(., 0x5984);
         src/game/DATA/OVLDAT3/CSPLAYER/CSPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x5998);
-        . = DEFINED(__align8_literals_func_802AEAB0_de) ? ALIGN(8) : .;
-        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_func_802AEAB0_de .rdata.literals_func_802AEAB0_de);
+        . = DEFINED(__align8_literals_alCSPNew) ? ALIGN(8) : .;
+        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_alCSPNew .rdata.literals_alCSPNew);
         . = DEFINED(__align8_literals___CSPVoiceHandler) ? ALIGN(8) : .;
         src/sdk/libultra/audio/csplayer.c.o(.rodata.literals___CSPVoiceHandler .rdata.literals___CSPVoiceHandler);
         . = MAX(., 0x5A00);
@@ -27910,8 +27910,8 @@ SECTIONS
         . = MAX(., 0x5AF4);
         src/game/DATA/OVLDAT3/CSPLAYER/CSPLAYER.CPP.o(.rodata .rdata);
         . = MAX(., 0x5B08);
-        . = DEFINED(__align8_literals_func_802AEAB0_de) ? ALIGN(8) : .;
-        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_func_802AEAB0_de .rdata.literals_func_802AEAB0_de);
+        . = DEFINED(__align8_literals_alCSPNew) ? ALIGN(8) : .;
+        src/sdk/libultra/audio/csplayer.c.o(.rodata.literals_alCSPNew .rdata.literals_alCSPNew);
         . = DEFINED(__align8_literals___CSPVoiceHandler) ? ALIGN(8) : .;
         src/sdk/libultra/audio/csplayer.c.o(.rodata.literals___CSPVoiceHandler .rdata.literals___CSPVoiceHandler);
         . = MAX(., 0x5B70);

@@ -4078,7 +4078,7 @@ segments:
       - [0xC9504, data, data_800C/rodata_unresolved_800C8904]
       - [0xC9510, rodata, data_800C/D_blob_phase2_96d5853c5394c1580524]
       - [0xC9514, rodata, data_800C/g_audioCsplayerText]
-      - [0xC9528, rodata, data_800C/literals_func_802AEAB0_de]
+      - [0xC9528, rodata, data_800C/literals_alCSPNew]
       - [0xC9590, rodata, data_800C/literals___CSPHandleNextSeqEvent]
       - [0xC95E0, rodata, data_800C/D_802AF2E0_CD270]
       - [0xC95EC, data, data_800C/rodata_unresolved_800C89EC]

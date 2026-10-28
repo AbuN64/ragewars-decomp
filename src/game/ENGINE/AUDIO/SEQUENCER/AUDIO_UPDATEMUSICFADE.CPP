@@ -14,7 +14,7 @@
 /* 8025D470_2.CPP */
 s32 alHeapDBAlloc(s32 a, s32 b, void *c, s32 d, s32 e);
 
-void func_802AEAB0_de(void *arg0, InitParams *arg1);
+void alCSPNew(void *arg0, InitParams *arg1);
 
 extern void alCSPStop(s32 arg0);
 
@@ -34,7 +34,7 @@ void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD
     params.value18 = 0;
     player = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0x7C);
     state->player = player;
-    func_802AEAB0_de(player, &params);
+    alCSPNew(player, &params);
     state->allocation = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0xF8);
     state->timer = 50;
     state->counter = 0;

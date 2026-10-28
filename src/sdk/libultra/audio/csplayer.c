@@ -51,7 +51,7 @@ extern void __seqpReleaseVoice(void *, void *, s32);
 
 extern void __initFromBank(void *, void *);
 
-void func_802AEAB0_de(void *arg0, InitParams *config) {
+void alCSPNew(void *arg0, InitParams *config) {
     ALSeqPlayer *obj = arg0;
     InitParams *params = config;
     s32 context = params->context;

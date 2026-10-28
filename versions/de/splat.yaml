@@ -4071,7 +4071,7 @@ segments:
       - [0xC7F44, data, data_800C/rodata_unresolved_800C7344]
       - [0xC7F50, rodata, data_800C/D_blob_phase2_96d5853c5394c1580524]
       - [0xC7F54, rodata, data_800C/g_audioCsplayerText]
-      - [0xC7F68, rodata, data_800C/literals_func_802AEAB0_de]
+      - [0xC7F68, rodata, data_800C/literals_alCSPNew]
       - [0xC7FD0, rodata, data_800C/literals___CSPHandleNextSeqEvent]
       - [0xC8020, rodata, data_800C/D_802AF2E0_CD270]
       - [0xC802C, data, data_800C/rodata_unresolved_800C742C]
