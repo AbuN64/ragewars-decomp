@@ -127,7 +127,7 @@ extern float D_800C25EC_de;
 extern float D_800C25F0_de;
 extern float D_800C25F4_de;
 extern float D_800C25F8_de;
-extern const struct Shared_HeightBonuses D_800C2608_eu;
+extern const struct Shared_HeightBonuses g_playerDeathHeightOffsets;
 extern float D_800C7780;
 extern float D_800C27D4_de;
 extern float D_800C27D8_de;

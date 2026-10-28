@@ -27,9 +27,9 @@
 
 
 
-extern const Shared_HeightBonuses D_800C2608_eu;
-extern const f32 D_800C22A0_us;
-extern const f32 D_800C22A4_us;
+extern const Shared_HeightBonuses g_playerDeathHeightOffsets;
+extern const f32 g_playerDeathMotionCenter;
+extern const f32 g_playerDeathMovingSpeed;
 extern s32 D_800C9228_de[2];
 
 
@@ -341,7 +341,7 @@ case 7:
                     spawnVector.z = 0;
                     spawnedAmmoPickup = SetN64_SpawnModelEffect(&D_80131600, 0, ammoPickupType, spawnVector, spawnPosition, 0, 0);
                     if (spawnedAmmoPickup != 0) {
-                        spawnPosition.y += D_800C2608_eu.spawn;
+                        spawnPosition.y += g_playerDeathHeightOffsets.spawn;
                         ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex] = (void *)spawnedAmmoPickup;
                     }
                 } else {
@@ -410,7 +410,7 @@ case 7:
         SoundElement_PlayFlatSound(0x212);
         if ((((struct Shared_ActorView *)player)->special != 0) || (deathEffectActorKind = ((struct Shared_ActorView *)player)->kind, (deathEffectActorKind == D_800C9228_de[0])) || (deathEffectActorKind == D_800C9228_de[1])) {
             spawnVector.x = player->position.vector.x;
-            spawnVector.y = player->position.vector.y + D_800C2608_eu.projectile;
+            spawnVector.y = player->position.vector.y + g_playerDeathHeightOffsets.projectile;
             deathEffectFlags = 1;
             spawnVector.z = player->position.vector.z;
             signedMotionRandomX = XPlus_NextRandomInteger();
@@ -418,19 +418,19 @@ case 7:
             if (motionRandomX < 0) {
                 signedMotionRandomX = motionRandomX + 0x3FF;
             }
-            motionVector.x = (f32) (motionRandomX - ((signedMotionRandomX >> 0xA) << 0xA)) - D_800C22A0_us;
+            motionVector.x = (f32) (motionRandomX - ((signedMotionRandomX >> 0xA) << 0xA)) - g_playerDeathMotionCenter;
             signedMotionRandomY = XPlus_NextRandomInteger();
             motionRandomY = signedMotionRandomY;
             if (motionRandomY < 0) {
                 signedMotionRandomY = motionRandomY + 0x3FF;
             }
-            motionVector.y = (f32) (motionRandomY - ((signedMotionRandomY >> 0xA) << 0xA)) - D_800C22A0_us;
+            motionVector.y = (f32) (motionRandomY - ((signedMotionRandomY >> 0xA) << 0xA)) - g_playerDeathMotionCenter;
             signedMotionRandomZ = XPlus_NextRandomInteger();
             motionRandomZ = signedMotionRandomZ;
             if (motionRandomZ < 0) {
                 signedMotionRandomZ = motionRandomZ + 0x3FF;
             }
-            motionVector.z = (f32) (motionRandomZ - ((signedMotionRandomZ >> 0xA) << 0xA)) - D_800C22A0_us;
+            motionVector.z = (f32) (motionRandomZ - ((signedMotionRandomZ >> 0xA) << 0xA)) - g_playerDeathMotionCenter;
             motionOutput = func_8024796C_de((char *)player);
             deathEffectFrame = ((struct Shared_ActorView *)player)->frameValue;
             if (func_8024BE80_de(player) == 5) {
@@ -453,7 +453,7 @@ case 7:
             }
         }
         movingAtDeath = 1;
-        if (!(((struct Shared_ActorView *)player)->speed > D_800C22A4_us)) {
+        if (!(((struct Shared_ActorView *)player)->speed > g_playerDeathMovingSpeed)) {
             movingAtDeath = 0;
         }
         if (movingAtDeath != 0) {
