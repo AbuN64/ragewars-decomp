@@ -170,7 +170,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 
 s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    s32 value = g_pakPreviewNumber;
+    s32 value = g_pakProfileRankScore;
     char *text = (char *)field->text[g_languageIndex];
 
     Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFourDigitValueFormat, value);

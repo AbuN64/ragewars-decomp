@@ -1,4 +1,8 @@
-#include "include_asm.h"
+/* The German fixed-resource getter leaves a0 decremented in its return delay slot; a write C would drop as dead
+   survives when a0 is a global register variable. It must precede every function definition. */
+#if defined(VERSION_DE)
+register int g_firstArgument __asm__("$4");
+#endif
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/WORLD.H"
@@ -9,19 +13,13 @@
 /* 80408AC4_6.CPP */
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-
-/* The asm is 4 words: the decrement is the jr delay slot and sits in the split-off first word of Level_GetScreenEventTable; the compiler drops it and fills the slot with the ori. */
 extern s32 g_menuFixedEncodedResource;
 
 s32 *Menu_GetFixedEncodedResource(s32 resourceId) {
-    resourceId -= 1;
-    return &g_menuFixedEncodedResource;
+    s32 *resource = &g_menuFixedEncodedResource;
+    g_firstArgument = g_firstArgument - 1;
+    return resource;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Menu_GetFixedEncodedResource);
-#endif
 #endif
 
 #if !(defined(VERSION_DE))

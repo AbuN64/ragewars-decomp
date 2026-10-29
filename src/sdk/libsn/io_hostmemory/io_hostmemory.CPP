@@ -1,5 +1,4 @@
 #include "sdk/thread_queue.h"
-#include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "IO/EXTERNS.H"
@@ -316,7 +315,7 @@ s32 Libsn_MeasureTerminatedString(u8 *string) {
     return cursor - string;
 }
 
-/* Shared declarations of the drafts below (one place, so every draft compiles together under -DNON_MATCHING). */
+/* Shared declarations of the host request code below. */
 extern void g_libsnRunHostRequestThreadEntry(void *); /* host request thread entry, as the ROM stores its address */
 extern s32 g_libsnHostTransportMode;
 extern void *g_libsnHostEventMessage;

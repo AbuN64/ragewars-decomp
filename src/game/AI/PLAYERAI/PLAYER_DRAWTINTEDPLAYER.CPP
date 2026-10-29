@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
@@ -24,9 +23,7 @@ const unsigned int k_PlayerDrawtintedplayerEncodedWords[14] = {
 };
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int k_playerDrawTintedPlayerEuropeanFloat[1] = {
-    0x43160000,
-};
+const float g_forceMarkerDurationEuropean = 150.0f;
 #endif
 
 const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock1[4] = {

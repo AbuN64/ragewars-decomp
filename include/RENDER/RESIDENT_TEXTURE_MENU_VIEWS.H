@@ -60,5 +60,4 @@ struct ArtsendTextureSelection {
     s32 changed; /* +0x8: == g_artsendTextureSelectionChanged */
 };
 extern void Simppool_ResetEffectsAndControllers(void);
-extern void Simppool_NoOp(void);
 #endif

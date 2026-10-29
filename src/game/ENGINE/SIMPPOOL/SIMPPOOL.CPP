@@ -4,7 +4,6 @@
 #include "RENDER/SEQUENCE_PROMPT_STATE_VIEWS.H"
 #include "TYPES.H"
 #include "RENDER/RESIDENT_TEXTURE_MENU_VIEWS.H"
-#include "include_asm.h"
 #include "COMMON/LONE/CONTROLLER_RUMBLE_POOL.H"
 #include "COMMON/RESIDENTSTATE.H"
 
@@ -54,31 +53,25 @@ void Simppool_ResetEffectsAndControllers(void) {
     Playerai_ResetPlayerControllers(&g_playerViewRenderContext);
 }
 
+#if defined(VERSION_DE)
+unsigned int g_simppoolTextPadding[3] = {
+    0x03E00008, 0x27BD0018, 0x00290821,
+};
+#endif
+
 #if defined(VERSION_EU_X)
-unsigned int func_80294C8C_de_padding_959D8[2] = {
+unsigned int g_simppoolTextPadding[2] = {
     0x10400005, 0x24020002,
 };
 #endif
 
-#if defined(VERSION_EU) || defined(VERSION_US)
 #if defined(VERSION_EU)
-unsigned int func_80294C8C_de_padding_959A8[2] = {
+unsigned int g_simppoolTextPadding[2] = {
     0x24846248, 0x3C01800D,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int func_80294C8C_de_padding_959A8[2] = {
+unsigned int g_simppoolTextPadding[2] = {
     0x0000003C, 0x010000AC,
-};
-#endif
-#endif
-
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", Simppool_NoOp);
-#endif
-
-#if defined(VERSION_DE)
-unsigned int func_80294C8C_de_padding_9588C[1] = {
-    0x00290821,
 };
 #endif

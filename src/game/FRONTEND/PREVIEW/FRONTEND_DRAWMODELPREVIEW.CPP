@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/LONE/g_defaultCameraSurfaceType.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
@@ -60,36 +59,6 @@ void Preview_SelectMatchingPreviewModel(ModelPreview *preview, s32 id, s32 extra
         }
     }
 }
-
-#ifdef NON_MATCHING
-/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
-#define M2C_BITWISE(type, expr) ((type)(expr))
-#define M2C_LWL(expr) (expr)
-#define M2C_FIRST3BYTES(expr) (expr)
-#define M2C_UNALIGNED32(expr) (expr)
-#define M2C_ERROR(desc) (0)
-#define M2C_TRAP_IF(cond) (0)
-#define M2C_BREAK(...) (0)
-#define M2C_SYNC(...) (0)
-#define M2C_DCACHE_CLEAN(addr) (0)
-#define M2C_DCACHE_INVALIDATE(addr) (0)
-#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
-#define M2C_ICACHE_INVALIDATE(addr) (0)
-#define M2C_PREFETCH(addr) (0)
-#define M2C_PREFETCH_STORE(addr) (0)
-#define GLUE_F64(a, b) (0.0)
-#define MULT_HI(a, b) (0)
-#define MULTU_HI(a, b) (0)
-#undef F3DEX_GBI
-#undef F3D_GBI
-#define F3DEX_GBI_2
-#endif
 #include "COMMON/GFX.H"
 #include "COMMON/GLOBALS.H"
 #include "COMMON/INTEGERSTATEB0.H"

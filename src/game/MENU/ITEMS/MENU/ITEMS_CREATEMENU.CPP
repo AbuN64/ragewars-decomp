@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
@@ -78,8 +77,8 @@ void Items_DestroyMenu(void *list, struct MenuResourceItemView *item) {
 }
 
 #if defined(VERSION_EU)
-unsigned int func_8044334C_de_padding_1BA304[1] = {
-    0x00000000,
+unsigned int g_itemsMenuTextPadding[3] = {
+    0x00000000, 0x24040001, 0x03E00008,
 };
 #endif
 

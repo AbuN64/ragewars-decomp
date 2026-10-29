@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -1097,56 +1096,45 @@ void Player_DrawMatchCountdown(void *unusedPlayer, ViewState *viewState) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-#define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
-extern s32 SoundElement_PlayFlatSound(s32);
-extern void BuildDirectionMatrix(void *, void *);
-extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), Graphu64_ConvertMatrixToFixed(void *, void *);
-/* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
-   active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
-void Playerai_ToggleForceMarkerEuropean(u8 *player, s32 flag) {
-    u8 mtx[0x40];
-    CVector3 vec;
-    void *ui;
-
-    if (EUF(player, s32, 0x147C) == 0) {
-        return;
-    }
-    if (EUF(player, f32, 0x11FC) > 0.0f) {
-        EUF(player, f32, 0x11FC) = 0.0f;
-        SoundElement_PlayFlatSound(0x578);
-        ui = EUF(player, void *, 0x5DC);
-        if (ui == 0) {
-            return;
-        }
-        Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerRemovedTextEuropean[g_frontendScreenStatus.settings.language]);
-    } else {
-        EUF(player, s32, 0x1200) = EUF(player, s32, 0x1458);
-        EUF(player, s32, 0x1204) = EUF(player, s32, 0x145C);
-        EUF(player, s32, 0x1208) = EUF(player, s32, 0x1460);
-        EUF(player, s32, 0x120C) = flag;
-        EUF(player, f32, 0x11FC) = 150.0f;
-        BuildDirectionMatrix(mtx, player + 0x1470);
-        Graphu64_ScaleVector(&vec, (CVector3 *)(player + 0x1470), 5.12f);
-        Graphu64_AddVec3(&vec, &vec, (CVector3 *)(player + 0x1200));
-        TranslateMatrix(mtx, vec.x, vec.y, vec.z);
-        SwapMatrixUpForward(mtx);
-        Graphu64_ConvertMatrixToFixed(mtx, player + 0x1600);
-        SoundElement_PlayFlatSound(0x578);
-        ui = EUF(player, void *, 0x5DC);
-        if (ui == 0) {
-            return;
-        }
-        if (flag) {
-            Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerAttractTextEuropean[g_frontendScreenStatus.settings.language]);
+#include "COMMON/GAMEPLAY_TRANSITION.H"
+#include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
+extern void BuildDirectionMatrix(Matrix *, CVector3 *);
+extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
+extern void SwapMatrixUpForward(Matrix *);
+extern void Graphu64_ConvertMatrixToFixed(Matrix *src, void *dst);
+static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
+    Matrix matrix;
+    CVector3 offset;
+    BuildDirectionMatrix(&matrix, normal);
+    Graphu64_ScaleVector(&offset, normal, 5.12f);
+    Graphu64_AddVec3(&offset, &offset, &player->targetPosition);
+    TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
+    SwapMatrixUpForward(&matrix);
+    Graphu64_ConvertMatrixToFixed(&matrix, player->transform1600);
+}
+extern const float g_forceMarkerDurationEuropean;
+void Playerai_ToggleForceMarkerEuropean(Shared_ActorView *player, s32 attract) {
+    void *screen;
+    if (player->aimTarget != 0) {
+        if (player->marker.time > 0.0f) {
+            player->marker.time = 0;
+            SoundElement_PlayFlatSound(0x578);
+            screen = player->message;
+            if (screen == 0) return;
+            Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, (u8 *)g_forceMarkerRemovedTextEuropean[g_frontendScreenStatus.settings.language]);
         } else {
-            Camera_PostScreenMessage(&g_frontendScreenStatus, ui, (char *)g_forceMarkerRepulseTextEuropean[g_frontendScreenStatus.settings.language]);
+            player->targetPosition = player->aimPoint;
+            player->attract = attract;
+            player->marker.time = g_forceMarkerDurationEuropean;
+            buildForceMarkerTransform(player, attract, &player->aimNormal);
+            SoundElement_PlayFlatSound(0x578);
+            screen = player->message;
+            if (screen == 0) return;
+            if (attract != 0) Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, (u8 *)g_forceMarkerAttractTextEuropean[g_frontendScreenStatus.settings.language]);
+            else Camera_PostScreenMessage((void *)&g_frontendScreenStatus, screen, (u8 *)g_forceMarkerRepulseTextEuropean[g_frontendScreenStatus.settings.language]);
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Playerai_ToggleForceMarkerEuropean);
-#endif
 #endif
 
 /* 80225D10_6.CPP */

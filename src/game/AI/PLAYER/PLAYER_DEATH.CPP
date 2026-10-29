@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -42,9 +41,6 @@ extern s32 g_playerDeathEffectModelIds[2];
 void *Portal_GetGraphPoint(void *, s32);
 s32 Portal_FindNearestPointIndex(void *, void *);
 s32 Player_SetPlayerState(void *, void *, s32);
-#ifndef NON_MATCHING
-void *Camera_PostScreenMessage(void *, void *, u8 *);
-#endif
 void *Gsky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern Gobjinst_BuildActorAimQuaternion(char *);
 s32 Gobjinst_GetModelRenderMode(void *);
 void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */

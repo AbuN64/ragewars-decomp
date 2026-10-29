@@ -1,4 +1,3 @@
-#include "include_asm.h"
 
 /* 800C1EE8.CPP */
 #if defined(VERSION_DE)
@@ -6,14 +5,6 @@ unsigned int k_NavEncodedWordsBlock4[2] = {
     0x0020F01C, 0x0020F028,
 };
 #endif
-
-#if defined(NON_MATCHING) && defined(VERSION_DE)
-unsigned int k_NavEncodedWords[10] = {
-    0x0020F01C, 0x0020F028, 0x0020EFC8, 0x0020F00C, 0x0020F01C, 0x0020F028, 0x0020F034, 0x0020F068,
-    0x0020F078, 0x0020F088,
-};
-#endif
-
 /* 800C6E84_4.CPP */
 #if defined(VERSION_EU) || defined(VERSION_US)
 #if defined(VERSION_EU)

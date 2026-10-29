@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
@@ -10,12 +9,16 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 #include "MULTI/ITEM.H"
 
-#if (!(defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU))) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_frontendMenu", Multi_DrawPlayerItemAvailability);
+#if defined(VERSION_DE)
+unsigned int g_multiItemTextPadding[1] = {
+    0x00008021,
+};
 #endif
-
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
+#if defined(VERSION_EU_X)
+unsigned int g_multiItemTextPadding[1] = {
+    0x8FB100B4,
+};
+#endif
 
 void Multi_DrawPlayerItemAvailability(struct MultiplayerItemAvailabilityView *item, MenuOptionBox *box, s32 unused, struct HolderMultiIsPlayerItemAvailable *context) {
     struct ItemDef *def = item->def;
@@ -54,7 +57,6 @@ void Multi_DrawPlayerItemAvailability(struct MultiplayerItemAvailabilityView *it
     }
     OnScreen_DrawSpriteResource(item->resource, 0, box->left, box->top, box->scaleX, box->scaleY, 1);
 }
-#endif
 
 /* Does nothing. Nothing in the cartridge image calls it or stores its address as a word. */
 void Multi_EmptyItemHook(void) {

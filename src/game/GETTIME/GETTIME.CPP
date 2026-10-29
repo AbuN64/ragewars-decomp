@@ -14,7 +14,7 @@ u64 Audio_ReadSystemTime(void) {
     u64 time;
 
     saved = __osDisableInt();
-    count = Util_ReadProcessorCount();
+    count = osGetCount();
     elapsed = count - __osBaseCounter;
     time = __osCurrentTime;
     __osRestoreInt(saved);

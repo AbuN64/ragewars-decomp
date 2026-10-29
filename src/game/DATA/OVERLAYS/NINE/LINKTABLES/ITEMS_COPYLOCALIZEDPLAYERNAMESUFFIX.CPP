@@ -1,6 +1,5 @@
 #include "DATA/OVLTBL/ITEMS_COPYLOCALIZEDPLAYERNAMESUFFIX.H"
 #include "TYPES.H"
-#include "include_asm.h"
 
 /* 800F2F40_2.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US)
@@ -135,17 +134,4 @@ u32 g_itemsCopylocalizedplayernamesuffixWritableWordsDe[404] = {
     0x76617465, 0x64000000, 0x800E1C80, 0xD0543EBB, 0x8014235C, 0x801423F2,
     0x80142488, 0x8014251E,
 };
-#endif
-
-/* 80444FF0.CPP */
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#include "COMMON/SHARED_GAMESLOT.H"
-extern u8 *g_localizedPlayerNameSuffixes[];
-
-void Items_CopyLocalizedPlayerNameSuffix(Shared_PlayerSettingsRecord *record, s32 i, Shared_Game *game) {
-    do {
-        record->name[i] = g_localizedPlayerNameSuffixes[game->language][i];
-        i++;
-    } while (i < 8);
-}
 #endif

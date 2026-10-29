@@ -6,14 +6,14 @@
 #include "sdk/OSINT/osyieldthread.H"
 #include "sdk/os.h"
 
-extern s32 System_TranslateTlbVirtualAddress(void);
+extern s32 __osProbeTLB(void);
 
 s32 osVirtualToPhysical(s32 virtualAddress) {
     if (virtualAddress < 0 && (u32)virtualAddress <= 0x9FFFFFFFU) {
         return virtualAddress & 0x1FFFFFFF;
     }
     if ((u32)(virtualAddress + 0x60000000) > 0x1FFFFFFFU) {
-        return System_TranslateTlbVirtualAddress();
+        return __osProbeTLB();
     }
     return virtualAddress & 0x1FFFFFFF;
 }

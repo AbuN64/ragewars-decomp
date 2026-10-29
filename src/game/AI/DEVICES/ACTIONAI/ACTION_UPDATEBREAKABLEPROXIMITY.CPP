@@ -151,9 +151,8 @@ typedef struct SoundActor {
 } SoundActor;
 extern char g_fallbackScreenMessageEmitter;
 extern void Gsky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
-/* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
- * keep their asm. */
-#if (!defined(VERSION_EU) && !defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* The early returns are gotos to one exit label: with plain early returns EU/EU-X build beqz for the flags
+ * test where the ROM has beql (delay slot annulled); this shape gives the ROM word in all five versions. */
 s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
     ActorMotionDefinition *record;
     SoundParent *parent;
@@ -161,25 +160,25 @@ s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionStat
     s16 index;
     s32 callback;
     record = &object->resource->motion;
-    if (record->soundEnabled == 0) return 1;
-    if (guard->mode != 0) return 1;
-    if (((SoundActor *)player)->kind != 1) return 1;
-    if ((((SoundActor *)player)->flags & 0x300000) == 0) return 1;
+    if (record->soundEnabled == 0) goto out1;
+    if (guard->mode != 0) goto out1;
+    if (((SoundActor *)player)->kind != 1) goto out1;
+    if ((((SoundActor *)player)->flags & 0x300000) == 0) goto out1;
     index = record->soundIndex;
     parent = ((SoundActor *)player)->parent;
-    if (index == 0) return 0;
-    emitter = parent->emitter;
-    fallback = &g_fallbackScreenMessageEmitter;
-    if (emitter != 0) fallback = emitter;
-    Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
-    index = record->soundIndex;
-    callback = gameplaySoundHook(index);
-    if (callback != 0) SoundElement_PlayDialogGroup(callback);
+    if (index != 0) {
+        emitter = parent->emitter;
+        fallback = &g_fallbackScreenMessageEmitter;
+        if (emitter != 0) fallback = emitter;
+        Gsky_PostTargetedScreenMessage(&g_frontendScreenStatus, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
+        index = record->soundIndex;
+        callback = gameplaySoundHook(index);
+        if (callback != 0) SoundElement_PlayDialogGroup(callback);
+    }
     return 0;
+out1:
+    return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Action_ShowTriggerMessage);
-#endif
 
 typedef struct Owner Owner;
 

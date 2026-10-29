@@ -1,26 +1,56 @@
-#include "include_asm.h"
-
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern char *g_playerPartnerSuffixByLanguage[];
-/* Copies the eight-byte name from the language table entry g_playerPartnerSuffixByLanguage[language] into the record at 0x84. Only the default
-   case of the original switch on the byte at 0x7F lives in this symbol (its jump table has cases 0..7); the others sit in the
-   following unsplit code, so the draft applies the default copy to every value. */
-void Items_CopyDefaultLocalizedPlayerName(u8 *record) {
-    s32 i;
-    char *table = g_playerPartnerSuffixByLanguage[g_gameSettings.language];
+extern u8 *g_playerPartnerSuffixByLanguage[];
+extern u8 *g_playerNamePrefixByLanguage[];
+extern u8 *g_localizedPlayerNameSuffixes[];
+extern u8 *g_playerNameSuffixByLanguage[];
 
-    for (i = 0; i < 8; i++) {
-        record[0x84 + i] = table[i];
+/* Fills the record's eight-byte name from the language table the record's slot selects: slots 0 (and any
+   slot out of range) to 3 pick the partner suffix, name prefix, localized suffix and name suffix tables; slots 4 to 7 leave the name alone. */
+void Items_CopyDefaultLocalizedPlayerName(Shared_PlayerSettingsRecord *record) {
+    s32 i;
+    Shared_Game *game;
+
+    switch ((s8)record->slot) {
+    default:
+    case 0:
+        i = 0;
+        game = &g_gameSettings;
+        do {
+            record->name[i] = g_playerPartnerSuffixByLanguage[game->language][i];
+            i++;
+        } while (i < 8);
+        break;
+    case 1:
+        i = 0;
+        game = &g_gameSettings;
+        do {
+            record->name[i] = g_playerNamePrefixByLanguage[game->language][i];
+            i++;
+        } while (i < 8);
+        break;
+    case 2:
+        i = 0;
+        game = &g_gameSettings;
+        do {
+            record->name[i] = g_localizedPlayerNameSuffixes[game->language][i];
+            i++;
+        } while (i < 8);
+        break;
+    case 3:
+        i = 0;
+        game = &g_gameSettings;
+        do {
+            record->name[i] = g_playerNameSuffixByLanguage[game->language][i];
+            i++;
+        } while (i < 8);
+        break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        break;
     }
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Items_CopyDefaultLocalizedPlayerName);
-#endif
-#endif
-
-#if defined(VERSION_EU)
-unsigned char g_ItemsCopydefaultlocalizedplayernameTrailingBytesBlock1[4] = { 0x00, 0x00, 0x28, 0x21 };
 #endif

@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -25,9 +24,6 @@ extern void Gdynlight_AccumulateLightDirections(void *, CVector3, CVector3 *, f3
 extern void Graphu64_BuildPlaneProjectionMatrix(f32 *, CVector3 *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void Graphu64_ScaleMatrixWorld(f32 *, f32, f32, f32);
-#ifndef NON_MATCHING
-extern void MatrixFromQuaternion(f32 *, f32 *);
-#endif
 extern void Graphu64_MultiplyAffineMatrices(void *, f32 *, f32 *);
 extern void Gobjinst_DrawModelWithProjection(char *, char *, void *, u8);
 extern void GameObject_DrawBlobShadow(struct LevelActor *, CVector3 *, s32);

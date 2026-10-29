@@ -6,71 +6,78 @@
 #include "MENU/EVENT.H"
 
 
+/* The German cartridge numbers its screens from 0, the others from 1. */
+#if defined(VERSION_DE)
+#define SCREEN_EVENT_ID(n) ((n) - 1)
+#else
+#define SCREEN_EVENT_ID(n) (n)
+#endif
+
 void *Level_GetScreenEventTable(s32 id) {
     switch (id) {
-    case 1:
+    case SCREEN_EVENT_ID(1):
         return g_Frontend_DispatchPauseMenuEventAddress;
-    case 31:
+    case SCREEN_EVENT_ID(31):
         return g_Frontend_DispatchConfirmationEventAddress;
-    case 32:
+    case SCREEN_EVENT_ID(32):
         return g_Frontend_DispatchResidentActorEventAddress;
-    case 7:
+    case SCREEN_EVENT_ID(7):
         return g_Selection_DispatchCharacterSelectionEventAddress;
-    case 8:
+    case SCREEN_EVENT_ID(8):
         return g_Frontend_DispatchEquipmentEventAddress;
-    case 10:
+    case SCREEN_EVENT_ID(10):
         return g_CTrialCatalogue_DispatchCatalogueEventAddress;
-    case 15:
+    case SCREEN_EVENT_ID(15):
         return g_CTrialCatalogue_DispatchOptionsEventAddress;
-    case 3:
+    case SCREEN_EVENT_ID(3):
         return g_Frontend_DispatchPlayModeEventAddress;
-    case 4:
+    case SCREEN_EVENT_ID(4):
         return g_Frontend_DispatchOptionsPageEventAddress;
-    case 6:
+    case SCREEN_EVENT_ID(6):
         return g_Menu_DispatchSoundOptionsEventAddress;
-    case 5:
+    case SCREEN_EVENT_ID(5):
         return g_Player_DispatchPlayerSettingsEventAddress;
-    case 11:
+    case SCREEN_EVENT_ID(11):
         return g_Frontend_DispatchCompactOptionsEventAddress;
-    case 12:
+    case SCREEN_EVENT_ID(12):
         return g_Player_DispatchAlternatePlayerSettingsEventAddress;
-    case 13:
+    case SCREEN_EVENT_ID(13):
         return g_Menu_DispatchSoundSliderEventAddress;
-    case 16:
+    case SCREEN_EVENT_ID(16):
         return g_Menu_DispatchSelectionMenuEventAddress;
-    case 17:
+    case SCREEN_EVENT_ID(17):
         return g_Frontend_DispatchResultsEventAddress;
-    case 18:
+    case SCREEN_EVENT_ID(18):
         return g_Achieve_DispatchResultsActorEventAddress;
-    case 9:
+    case SCREEN_EVENT_ID(9):
         return g_Menu_DispatchScrollingChoiceEventAddress;
-    case 30:
+    case SCREEN_EVENT_ID(30):
         return g_Menu_DispatchTitleButtonEventAddress;
-    case 20:
+    case SCREEN_EVENT_ID(20):
         return g_ScenarioSetup_DispatchCatalogueEventAddress;
-    case 21:
+    case SCREEN_EVENT_ID(21):
         return g_Frontend_DispatchMatchOptionsEventAddress;
-    case 23:
+    case SCREEN_EVENT_ID(23):
         return g_Join_DispatchJoinOptionsEventAddress;
-    case 14:
+    case SCREEN_EVENT_ID(14):
         return g_Frontend_DispatchMatchMenuEventAddress;
-    case 19:
+    case SCREEN_EVENT_ID(19):
         return g_Frontend_DispatchPakProfileEventAddress;
-    case 22:
+    case SCREEN_EVENT_ID(22):
         return g_Frontend_DispatchTabOptionsEventAddress;
-    case 24:
+    case SCREEN_EVENT_ID(24):
         return g_Frontend_DispatchProfileResetEventAddress;
-    case 25:
+    case SCREEN_EVENT_ID(25):
         return g_Menu_DispatchOptionsTransitionEventAddress;
-    case 27:
+    case SCREEN_EVENT_ID(27):
         return g_Menu_DispatchSixChoiceEventAddress;
-    case 26:
+    case SCREEN_EVENT_ID(26):
         return g_Frontend_DispatchPlayerCountEventAddress;
-    case 29:
+    case SCREEN_EVENT_ID(29):
         return g_SmpOverlay_DispatchPakDialogEventAddress;
-    case 28:
+    case SCREEN_EVENT_ID(28):
         return g_Menu_DispatchExtraOptionsEventAddress;
-    case 33:
+    case SCREEN_EVENT_ID(33):
         return g_Frontend_DispatchNodePairMenuEventAddress;
     default:
         return 0;

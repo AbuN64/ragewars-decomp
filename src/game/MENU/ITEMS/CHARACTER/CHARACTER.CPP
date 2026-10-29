@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -42,7 +41,7 @@ s32 Items_HandleCharacterPreviewSelectionGerman(s32 widget, CharacterPreviewMenu
     return 0;
 }
 #endif
-#if defined(VERSION_DE) || defined(VERSION_US) || defined(NON_MATCHING)
+#if defined(VERSION_DE) || defined(VERSION_US)
 s32 Items_SelectToggleRowTextGerman(TextBoundsText *textRow) {
     s32 toggleRow;
 

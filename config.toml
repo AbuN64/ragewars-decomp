@@ -210,6 +210,11 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
 
+[file."src/game/MENU/ITEMS/PFS_COUNTPAGEREFERENCES.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+
 [file."src/sdk/libgcc/_floatdisf.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]

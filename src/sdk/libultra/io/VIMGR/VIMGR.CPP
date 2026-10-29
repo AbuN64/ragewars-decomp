@@ -183,14 +183,14 @@ void System_RunVideoManager(struct OSDevMgr *arg)
                 (*intrCount)++;
 
                 if (first) {
-                    count = Util_ReadProcessorCount();
+                    count = osGetCount();
                     __osCurrentTime = count;
                     first = 0;
                 }
 
                 baseCounter = &__osBaseCounter;
                 count = *baseCounter;
-                *baseCounter = Util_ReadProcessorCount();
+                *baseCounter = osGetCount();
                 count = *baseCounter - count;
                 currentTime = &__osCurrentTime;
                 *currentTime = *currentTime + count;

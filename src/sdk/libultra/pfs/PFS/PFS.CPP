@@ -52,7 +52,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     }
 
     newid->repaired = -1;
-    newid->random = Util_ReadProcessorCount();
+    newid->random = osGetCount();
     newid->serial_mid = badid->serial_mid;
     newid->serial_low = badid->serial_low;
 

@@ -22,5 +22,5 @@ extern void Pak_SelectPromptKindNine(void);
 extern void Pak_SelectPromptKindTen(void);
 extern void Pak_SelectPromptKindFourteen(void);
 extern void Pak_SelectPromptKindThirteen(void);
-extern u16 g_pakPreviewNumber;
+extern u16 g_pakProfileRankScore;
 #endif

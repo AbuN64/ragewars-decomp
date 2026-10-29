@@ -1,8 +1,6 @@
-#include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct { u8 pad0[0x14]; char **text; } PakRangeTextEu;
 extern u16 g_pakProfileRankScore;
@@ -48,7 +46,4 @@ s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Menu_FormatLocalizedPakSizeRange);
-#endif
 #endif

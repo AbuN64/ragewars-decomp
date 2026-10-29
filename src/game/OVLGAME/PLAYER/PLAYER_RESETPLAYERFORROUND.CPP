@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/HUD_REFERENCE_VIEWPORT_HEIGHT.H"
 #include "COMMON/WORLD.H"
@@ -148,7 +147,6 @@ void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s3
     view->flags &= ~4;
 }
 
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 extern char g_localPlayerProfiles[];
 extern void *g_currentStagePreset;
@@ -181,6 +179,7 @@ extern u8 g_gameControllerMode; /* MIXED Player_ResetPlayerForRound */
 void Player_ResetPlayerForRound(void *actor, s32 character) {
     s32 i;
     unsigned long counterAddress;
+    unsigned long counterAddress2;
     s32 openFlag = 0;
     char *globals;
     Control_IsSnapshotActive();
@@ -203,14 +202,14 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     }
     FIELD(u8, actor, 0x602) = 1;
     FIELD(u8, actor, 0x603) = 0;
-    FIELD(u8, actor, 0x606) = 1;
-    FIELD(u8, actor, 0x607) = 5;
-    FIELD(u8, actor, 0x608) = 1;
     FIELD(u8, actor, 0x609) = 2;
     FIELD(u8, actor, 0x60A) = 1;
     FIELD(u8, actor, 0x60B) = 1;
+    FIELD(u8, actor, 0x608) = 1;
     FIELD(u8, actor, 0x616) = 1;
+    FIELD(u8, actor, 0x606) = 1;
     FIELD(u8, actor, 0x617) = 4;
+    FIELD(u8, actor, 0x607) = 5;
     FIELD(u8, actor, 0x61E) = 1;
     FIELD(u8, actor, 0x61F) = 6;
 #endif
@@ -222,10 +221,10 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
         counterAddress--;
     } while (--i >= 0);
     i = 5;
-    counterAddress = (unsigned long)actor + i;
+    counterAddress2 = (unsigned long)actor + i;
     do {
-        *(u8 *)(counterAddress + 0x64A) = 0;
-        counterAddress--;
+        *(u8 *)(counterAddress2 + 0x64A) = 0;
+        counterAddress2--;
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {
         if (g_gameControllerMode == 1 && FIELD(s32, actor, 0x1450) == 0) {
@@ -289,9 +288,6 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
     g_playerCountedShots[FIELD(s32, actor, 0x5D4)] = 0;
 
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Player_ResetPlayerForRound);
-#endif
 
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))

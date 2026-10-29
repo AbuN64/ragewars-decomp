@@ -1,28 +1,10 @@
-#include "include_asm.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "TYPES.H"
 #include "MENU/OBJECT1C8.H"
 #include "MENU/ITEMS/ITEMS_PREPARECONTROLLERRETURN.H"
 
 /* 80442BC8_13.CPP */
-#if defined(VERSION_EU)
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
-/* Stores what Menu_ClassifyResourceRange returns for g_activeActorKind in g_controllerReturnResourceRange and sets g_controllerReturnPending to 1. */
-extern s32 g_activeActorKind;
-extern s32 Menu_ClassifyResourceRange(s32);
-
-void Items_CacheIdentifierBand(void) {
-    g_controllerReturnResourceRange = Menu_ClassifyResourceRange(g_activeActorKind);
-    g_controllerReturnPending = 1;
-}
-#else
-INCLUDE_ASM("ovl_frontendMenu", Items_CacheIdentifierBand);
-#endif
-#endif
-
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_EU) || defined(VERSION_US_REV1)
 /* Stores what Menu_ClassifyResourceRange returns for g_activeActorKind in g_controllerReturnResourceRange and sets g_controllerReturnPending to 1. */
 extern s32 g_activeActorKind;
 

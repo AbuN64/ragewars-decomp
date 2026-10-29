@@ -405,7 +405,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
             mtx[0][3][3] = 65536.0f;
             out = (u32 *)actor->handle;
             i = 0;
-            g_actorPoseTiming.start = Util_ReadProcessorCount();
+            g_actorPoseTiming.start = osGetCount();
             cur = &mtx[1];
             for (; i < count; cur++, out += 16, i++) {
                 Shared_PosePartEntry *entry;
@@ -497,7 +497,7 @@ s32 Gobjinst_BuildActorPose(Shared_PoseActor *actor, void *modelPack, s32 model)
                     packMtx(out, *cur);
                 }
             }
-            dt = Util_ReadProcessorCount() - g_actorPoseTiming.start;
+            dt = osGetCount() - g_actorPoseTiming.start;
             if (g_gameFrameCounter != g_actorPoseTiming.frame) {
                 f32 last = g_actorPoseTiming.cur;
                 s32 n = g_actorPoseTiming.count;

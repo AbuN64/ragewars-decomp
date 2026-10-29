@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/VOLUME_MENU_RESOURCES.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
@@ -17,12 +16,7 @@ s32 Items_AdjustLanguage(void *first, void *second) {
 #endif
 
 #if defined(VERSION_EU)
-              /* size 0x0 */
-
-
-unsigned char g_LanguageTrailingBytes[4] = { 0x00, 0x00, 0x28, 0x21 };
-
- /* opaque address transport */
+/* opaque address transport */
 
 s32 CItemValue_BindItemValueField(struct ItemValueBindingView *field) {
     field->value = &g_languageMenuAlternateTextTable; /* types.abi.opaque_pointer: field carries an address only */

@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER/MATERIAL_COLOR_AND_FOG_VIEWS.H"
@@ -15,24 +14,7 @@
 #include "RENDER/VIEW_MATRICES.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-#if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("span_1000", SetN64_SetupLoadingBackdropEuX);
-#endif
-#endif
-
-#if defined(VERSION_EU)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("span_1000", SetN64_SetupLoadingBackdropEu);
-#endif
-#endif
-
-#if defined(VERSION_DE) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_DE)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by g_backdropYawRate, links it to the active view and
  * draws the backdrop through SetN64_DrawTextLines with half the video height. */
@@ -47,7 +29,7 @@ extern s32 g_backdropTextLinesDe;
 extern s32 g_backdropTextLines;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern f32 g_backdropTextScales;
+extern s32 *g_backdropTextLinesByLanguage[];
 #endif
 extern s32 Scene_FindModelIdIndex(void *, s32);
 extern s32 Scene_GetIndexedModelResource(void *, s32);
@@ -57,17 +39,15 @@ extern void YawMatrixLocal(void *, f32);
 extern void SwapMatrixUpForward(void *);
 extern void Graphu64_ConvertMatrixToFixed(void *, void *);
 extern void Geometry_QueueDirectModel(s32, void *, void *, s32, s32);
-#undef LOAD_SETUP
 #if defined(VERSION_EU)
-#define LOAD_SETUP SetN64_SetupLoadingBackdropEu
+void SetN64_SetupLoadingBackdropEu(TimedSessionTransitionView *state) {
 #elif defined(VERSION_EU_X)
-#define LOAD_SETUP SetN64_SetupLoadingBackdropEuX
+void SetN64_SetupLoadingBackdropEuX(TimedSessionTransitionView *state) {
 #elif defined(VERSION_DE)
-#define LOAD_SETUP SetN64_SetupLoadingBackdropDe
+void SetN64_SetupLoadingBackdropDe(TimedSessionTransitionView *state) {
 #else
-#define LOAD_SETUP SetN64_SetupLoadingBackdropRev1
+void SetN64_SetupLoadingBackdropRev1(TimedSessionTransitionView *state) {
 #endif
-void LOAD_SETUP(TimedSessionTransitionView *state) {
     s32 handle, h2;
     u8 matrix[0x40];
 
@@ -89,13 +69,12 @@ void LOAD_SETUP(TimedSessionTransitionView *state) {
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + g_lightingBufferIndex * 64, &g_defaultParticleLighting, 0, -1);
         Geometry_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&g_backdropTextScalePair)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales, (&g_backdropTextScales)[1]);
+        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLinesByLanguage[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
 #else
         SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLines, g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
 #endif
     }
 }
-#endif
 #endif
 
 

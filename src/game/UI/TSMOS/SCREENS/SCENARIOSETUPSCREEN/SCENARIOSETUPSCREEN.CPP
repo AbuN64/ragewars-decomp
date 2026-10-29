@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SCREEN.H"
@@ -1477,65 +1476,6 @@ void ScenarioSetup_SortResultsPlayers(void) {
         }
     }
 }
-
-#ifdef NON_MATCHING
-/* Looks up entry arg1 of the table chosen by gameMode and returns field 0xC of the first of the forty records at g_scenarioCatalogueWidgetPairs whose first word equals it, or zero. */
-
-/* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure g_setupScreen
-   points to to 0xFF, shows both through Widget_SetWidgetFlag08_EquipActivateequipmentpanel and clears the word at 0x46C. */
-
-/* Calls Defs_SetBitValue on g_scenarioCupPlayedBits for each index from 0 to 0x27 with zero. */
-
-/* Releases the object g_setupScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState and
-   Menu_ReleaseOptionsScene, clears g_setupScreen and returns zero. */
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-#else
-#endif
-
-/* When the global session is mode 3 with no pending state and the caller's high word and empty flag agree, resets the mode, restarts five subsystems and queues one status message. */
-
-/* Moves the selection of the screen g_setupScreen back on event 1: calls MarkMenuEventHandled and steps the
-   selection at 0x438 back while it is above 0; in category 0 the second page (11 and up) instead
-   steps forward while below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When it moved it plays sound
-   0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha
-   0x41 and refreshes through ScenarioSetup_RefreshSelectedArenaLabel, and when the selection is then 0 it shows the items at
-   0x440 and 0x448, moves the marker at 0x448 to x 0x7C plus 34 per category, hides the item at
-   0x444 and shows model 0xEA6 plus the category in the view at 0x308. Returns zero. Adapted from
-   ScenarioSetup_SelectNextSetupItem with the step direction, page handling and final item updates changed. */
-
-extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
-
-/* Moves the selection of the screen g_setupScreen on event 1: calls MarkMenuEventHandled and steps the
-   selection at 0x438 forward while it stays below the count ScenarioSetup_GetCategoryEntryCount gives for the category's
-   list; in category 0 the first page (below 11) steps forward unless it would reach the count of
-   list 0 or 11, and the second page steps back unless it would reach 10. When it moved it plays
-   sound 0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to
-   alpha 0x41, refreshes through ScenarioSetup_RefreshSelectedArenaLabel, hides the items at 0x440 and 0x448 and shows the
-   one at 0x444. Returns zero. */
-
-/* Moves the screen g_setupScreen to its previous category on event 1: calls MarkMenuEventHandled and steps
-   the category at 0x434 back unless it is 0; in category 0 a selection at 0x438 from 5 to 10 is
-   mirrored to 21 minus it when that stays below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When
-   anything changed it plays sound 0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464,
-   dims the item at 0x43C to alpha 0x41, clamps the selection below the count for the category's
-   list, refreshes through ScenarioSetup_RefreshSelectedArenaLabel and, when the selection is 0, shows model 0xEA6 plus the
-   category in the view at 0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category.
-   Returns zero. Adapted from ScenarioSetup_SelectNextCatalogueCategory with the step direction and the mirror test changed. */
-
-/* Moves the screen g_setupScreen to its next category on event 1: calls MarkMenuEventHandled and, unless the
-   category at 0x434 is already 3, advances it (from category 0 only while the selection at 0x438
-   is below 11, otherwise mirroring the selection to 21 minus it), then plays sound 0xE7D, calls
-   ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha 0x41, clamps
-   the selection below the count ScenarioSetup_GetCategoryEntryCount gives for the category's list, refreshes through
-   ScenarioSetup_RefreshSelectedArenaLabel and, when the selection is 0, shows model 0xEA6 plus the category in the view at
-   0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category. Returns zero. */
-
-/* Calls MarkMenuEventHandled; when the mode word at offset 0x3DC of the object g_setupScreen points to is 3,
-   sets it to 5 and the word at 0x3E0 to 4. Returns zero. */
-
-#endif
-
 /* 80423280_55.CPP */
 
 /** Load four banks of ten resources, then activate the two resources used by the set. */

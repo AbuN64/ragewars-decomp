@@ -61,11 +61,8 @@
 #include "AUDIO/SIRAW.H"
 #include "AUDIO/SIRAWWRITE.H"
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
-#include "sdk/libgultra/CPU_STATUS_REGISTER_EU_X.h"
 #include "sdk/libgultra/status_register_write.h"
-#include "sdk/libgultra/CPU_STATUS_REGISTER_US.h"
 #include "sdk/libgultra/OS_GET_STATUS_REGISTER.h"
-#include "sdk/libgultra/CPU_STATUS_REGISTER_EU.h"
 #include "RESMGR/X_PLUS.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 
@@ -86,19 +83,7 @@ void Audio_InitializeOperatingSystem(void)
     u64 *rate;
 
     g_osInitializationStarted = 1;
-    __osSetSR(
-
-#if defined(VERSION_DE)
-__osGetSRDe
-#elif defined(VERSION_EU)
-__osGetSREu
-#elif defined(VERSION_US)
-__osGetSRUs
-#else
-__osGetSREuX
-#endif
-
-() | 0x20000000);
+    __osSetSR(__osGetSR() | 0x20000000);
     __osSetFpcCsr(0x01000800);
     while (Audio_ReadSerialInterfaceWord(0x1FC007FC, &pifdata)) {
         ;

@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "COMMON/ALFXPARAM.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -127,12 +126,5 @@ const unsigned int g_guMtxF2LConstantWords[6] = {
 #if defined(VERSION_US)
 unsigned int k_perspectiveProjectionDataWordsUs[8] = {
     0x0B000010, 0x000B0000, 0x00000010, 0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000,
-};
-#endif
-
-#if defined(NON_MATCHING) && defined(VERSION_US)
-unsigned int k_perspectiveProjectionExtendedDataWordsUs[9] = {
-    0x0B000010, 0x000B0000, 0x00000010, 0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000,
-    0x4F000000,
 };
 #endif

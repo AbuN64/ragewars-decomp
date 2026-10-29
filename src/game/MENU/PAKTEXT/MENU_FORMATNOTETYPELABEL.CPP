@@ -1,7 +1,6 @@
-#include "include_asm.h"
+#include "TYPES.H"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
 extern s32 g_pakUseDefaultPreviewLabels;
 extern char g_pakDefaultPreviewNameLabel[];
 extern char g_pakPreviewNameLabelBuffer[];
@@ -12,8 +11,10 @@ typedef struct { char pad0[0x14]; char **text; } RightAlignedNameLabelView;
 s32 Menu_FormatRightAlignedName(RightAlignedNameLabelView *labelWidget) {
     u8 *last;
     char *dst;
+    char *fill;
     s32 n;
     s32 i;
+    s32 blank;
     n = 8;
     if (g_pakUseDefaultPreviewLabels != 0) {
         labelWidget->text = (char **)g_pakDefaultPreviewNameLabel;
@@ -22,35 +23,37 @@ s32 Menu_FormatRightAlignedName(RightAlignedNameLabelView *labelWidget) {
         labelWidget->text = (char **)g_pakPreviewNameLabelBuffer;
         if (*last == 0x20) {
             last--;
-            while (n != 0) {
-                n--;
-                if (*last-- != 0x20) {
-                    break;
+            for (;;) {
+                if (n != 0) {
+                    n--;
+                    if (*last-- == 0x20) {
+                        continue;
+                    }
                 }
+                break;
             }
         }
-        dst = *labelWidget->text + 0xC;
+        dst = (char *)*labelWidget->text;
+        dst += 0xC;
+        blank = 0x20;
+        fill = dst + 7;
         for (i = 7; i >= 0; i--) {
-            dst[i] = 0x20;
+            *fill-- = blank;
         }
-        dst = dst + 8 - n;
+        dst = &dst[8 - n];
         for (i = 0; i < n; i++) {
             *dst++ = g_pakDisplayNameBytes[i];
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Menu_FormatRightAlignedName);
-#endif
 #endif
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
 extern char g_pakDefaultPreviewTypeLabel[];
 extern char g_pakPreviewTypeLabelBuffer[];
 extern char *g_pakNoteTypeDefaultLabel, *g_pakNoteTypeFiveLabel, *g_pakNoteTypeThreeLabel, *g_pakNoteTypeTwoLabel, *g_pakNoteTypeFourteenLabel;
-extern s8 g_pakPreviewNoteType;
+extern s8 g_pakPreviewNoteType[];
 typedef struct { char pad0[0x14]; char **text; } NoteTypeLabelView;
 /* Copies the 14-byte label chosen by g_pakPreviewNoteType (default g_pakNoteTypeDefaultLabel) into the text 6 bytes in, or points the text at g_pakDefaultPreviewTypeLabel when g_pakUseDefaultPreviewLabels is set; returns zero. */
 s32 Menu_FormatNoteTypeLabel(NoteTypeLabelView *labelWidget) {
@@ -61,7 +64,7 @@ s32 Menu_FormatNoteTypeLabel(NoteTypeLabelView *labelWidget) {
         labelWidget->text = (char **)g_pakDefaultPreviewTypeLabel;
     } else {
         labelWidget->text = (char **)g_pakPreviewTypeLabelBuffer;
-        switch (g_pakPreviewNoteType) {
+        switch (g_pakPreviewNoteType[0]) {
         case 0:
         case 1:
         case 4:
@@ -89,21 +92,12 @@ s32 Menu_FormatNoteTypeLabel(NoteTypeLabelView *labelWidget) {
             src = g_pakNoteTypeFourteenLabel;
             break;
         }
-        dst = *labelWidget->text + 6;
+        dst = (char *)*labelWidget->text;
+        dst += 6;
         for (i = 0; i < 14; i++) {
             *dst++ = *src++;
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_frontendMenu", Menu_FormatNoteTypeLabel);
-#endif
-#endif
-
-#if defined(VERSION_DE)
-const unsigned int g_noteTypeLabelJumpTableGerman[15] = {
-    0x0040A924, 0x0040A924, 0x0040A954, 0x0040A944, 0x0040A924, 0x0040A934, 0x0040A924, 0x0040A924,
-    0x0040A924, 0x0040A924, 0x0040A924, 0x0040A924, 0x0040A924, 0x0040A924, 0x0040A964,
-};
 #endif

@@ -20,12 +20,12 @@ void Util_HandleTimerInterrupt(void)
         t = ((OSTimer_s *)g_timerListSentinel)->next;
 
         if (t == g_timerListSentinel) {
-            Util_WriteProcessorCompare(0);
+            __osSetCompare(0);
             g_timerLastProcessorCount = 0;
             break;
         }
 
-        count = Util_ReadProcessorCount();
+        count = osGetCount();
         elapsed_cycles = count - *counter;
         *counter = count;
 
@@ -69,15 +69,15 @@ void Util_InitializeTimerServices(void) {
 }
 
 /* Arms the CP0 timer interrupt: with interrupts disabled through __osDisableInt_Mutex, reads the Count
-   register through Util_ReadProcessorCount into g_timerLastProcessorCount, sets the Compare register through
-   Util_WriteProcessorCompare to that count plus the requested interval, then restores interrupts. */
+   register through osGetCount into g_timerLastProcessorCount, sets the Compare register through
+   __osSetCompare to that count plus the requested interval, then restores interrupts. */
 
 void Util_SetTimerInterrupt(u64 interval) {
     u64 compare;
     u32 saved = __osDisableInt();
 
-    g_timerLastProcessorCount = Util_ReadProcessorCount();
+    g_timerLastProcessorCount = osGetCount();
     compare = g_timerLastProcessorCount + interval;
-    Util_WriteProcessorCompare(compare);
+    __osSetCompare(compare);
     __osRestoreInt(saved);
 }
