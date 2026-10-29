@@ -6,9 +6,9 @@ unsigned int k_OsstartthreadEncodedWords[6] = {
 };
 #endif
 #ifdef VERSION_EU_X
-extern char g_emptyThreadQueue[];
+extern char __osThreadTail[];
 void *k_OsstartthreadEncodedWords[6] = {
-    g_emptyThreadQueue, g_emptyThreadQueue, 0, 0,
+    __osThreadTail, __osThreadTail, 0, 0,
     0, 0,
 };
 #endif
