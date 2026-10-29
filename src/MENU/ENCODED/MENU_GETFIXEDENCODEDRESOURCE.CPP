@@ -8,11 +8,6 @@
 
 /* 80408AC4_6.CPP */
 
-#if defined(VERSION_DE)
-/* The German getter leaves a0 decremented in its return delay slot, a write plain C drops as dead
-   (16 variants tried, see lanes/AUDIT-NAMES/RESULT.md), so its bytes come from the extracted asm. */
-INCLUDE_ASM("ovl_frontendMenu", Menu_GetFixedEncodedResource);
-#endif
 #if !(defined(VERSION_DE))
 #include "COMMON/SHARED_MENUSELECTION.H"
 

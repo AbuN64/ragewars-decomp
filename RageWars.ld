@@ -36453,8 +36453,8 @@ SECTIONS
         . = MAX(., 0x3C210);
         src/FRONTEND/MENUIMAGE/MENUIMAGE.CPP.o(.text);
         . = MAX(., 0x3C314);
-        src/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.text);
-        . = MAX(., 0x3C324);
+        src/FRONTEND/MENUIMAGE/MENUIMAGE.CPP.o(.data);
+        . = MAX(., 0x3C320);
         src/MENU/LEVEL/EVENT/EVENT.CPP.o(.text);
         . = MAX(., 0x3C54C);
         src/MENU/LEVEL/EVENT/EVENT.CPP.o(.data);
@@ -40611,7 +40611,6 @@ SECTIONS
         src/FRONTEND/EQUIP/EQUIP.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/MENU_IMAGE/MENU_IMAGE.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/MENUIMAGE/MENUIMAGE.CPP.o(.bss .sbss COMMON);
-        src/MENU/ENCODED/MENU_GETFIXEDENCODEDRESOURCE.CPP.o(.bss .sbss COMMON);
         src/MENU/LEVEL/EVENT/EVENT.CPP.o(.bss .sbss COMMON);
         src/MENU/ENCODED/MENU_HANDLEUNLOCKEDLEVELSELECTION.CPP.o(.bss .sbss COMMON);
         src/MENU/ENCODED/ENCODED_RESETTEXTENTRYRESULT.CPP.o(.bss .sbss COMMON);

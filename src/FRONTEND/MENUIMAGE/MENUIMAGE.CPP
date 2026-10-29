@@ -70,6 +70,9 @@ INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_eu);
 #if VERSION_EU_X
 INCLUDE_DATA("ovl_frontendMenu", Menu_GetLocalizedEncodedResource_padding_eu_x);
 #endif
+#if VERSION_DE
+INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_de);
+#endif
 #if VERSION_US
 INCLUDE_DATA("ovl_frontendMenu", Frontend_GetMenuImageState_padding_us);
 #endif
