@@ -38,7 +38,7 @@ extern char g_Nav_InitUnclaimedMarkerSearchEncodedCallback[];
 extern char Nav_SeekUnclaimedMarker_Address[];
 extern char g_Nav_InitCarrierRouteEncodedCallback[];
 extern char Nav_FollowMarkerCarrierRoute_Address[];
-extern char D_00212D80[];
+extern char Nav_InitTargetRouteFollow_Address[];
 extern char Nav_UpdateTargetRouteFollow_Address[];
 extern char Nav_UpdatePatrolRoute_Address[];
 extern char Nav_ResetPatrolRouteSelection_Address[];
@@ -100,7 +100,7 @@ unsigned int k_NavEncodedWordsBlock3[596] = {
     0x800CA140, 0x800CA190, 0x800CA1E0, 0x800CA230, 0x800CA280, 0x800CA2D0, 0x800CA320, 0x8010A3B8,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, (unsigned int)Nav_ResetPatrolRouteSelection_Address, (unsigned int)Nav_UpdatePatrolRoute_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,
-    0x00000000, 0x00000001, (unsigned int)D_00212D80, (unsigned int)Nav_UpdateTargetRouteFollow_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,
+    0x00000000, 0x00000001, (unsigned int)Nav_InitTargetRouteFollow_Address, (unsigned int)Nav_UpdateTargetRouteFollow_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,
     0x00000000, 0x00000002, (unsigned int)Nav_InitRoamingWithJumps_Address, (unsigned int)Nav_UpdateRoamingWithJumps_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,
     0x00000000, 0x00000003, (unsigned int)Nav_InitPursuitStrafe_Address, (unsigned int)Nav_UpdatePursuitStrafe_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,
     0x00000000, 0x00000004, (unsigned int)Nav_InitRangedCombat_Address, (unsigned int)Nav_UpdateRangedCombat_Address, 0x00000000, 0x00000000, 0x3F800000, 0x00000005,

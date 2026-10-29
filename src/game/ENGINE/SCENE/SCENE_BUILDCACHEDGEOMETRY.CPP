@@ -25,11 +25,11 @@
 /* SCENE_3.CPP */
 /* Tag of the cell grid packs (the first .rodata of this unit; the items overlay reads it too). */
 const char s_gridSectionText[] = "grid section";
-extern DraftStreamPair D_801031F8;
+extern DraftStreamPair g_cameraVolumeBoundsMinZ;
 extern char g_cResource_UnpackRequestEntry[];
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern void **Cache_RequestPackSection(s32, void *, s32, s32, void *, void *, void *);
-extern void Cache_LockResource(void *, Node80253610 *);
+extern void Cache_LockResource(void *, CacheResourceNode *);
 
 void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
 {
@@ -63,9 +63,9 @@ void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
         lastZ = zCount - 1;
         cells = table->data.cells;
         while (firstX < xCount && xHigh[firstX] < g_cameraVolumeBounds.min.x) firstX++;
-        while (lastX >= 0 && D_801031F8.second < xLow[lastX]) lastX--;
-        while (firstZ < zCount && zHigh[firstZ] < D_801031F8.first) firstZ++;
-        while (lastZ >= 0 && D_800FF200.second < zLow[lastZ]) lastZ--;
+        while (lastX >= 0 && g_cameraVolumeBoundsMinZ.second < xLow[lastX]) lastX--;
+        while (firstZ < zCount && zHigh[firstZ] < g_cameraVolumeBoundsMinZ.first) firstZ++;
+        while (lastZ >= 0 && g_cameraVolumeMaxYzPair.second < zLow[lastZ]) lastZ--;
         entry = world->entries;
         { s32 focusX,focusZ;
         if (world->specialEnabled == 1) {
@@ -207,7 +207,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                     if (resource != 0) {
                         resourceData = resource->data;
                         if (resourceData->count != 0) {
-                            Cache_LockResource(0, (Node80253610 *)resource);
+                            Cache_LockResource(0, (CacheResourceNode *)resource);
                             *nextResource++ = resource;
                             table = SetN64_GetPackSection(resourceData, 0);
                             propCount = table->count;
@@ -239,12 +239,12 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
                                             if (!(height <= maximum)) height = maximum;
                                             world->maximumHeight = height;
                                         }
-                                        Cache_UnlockResource(0, (Node80253610 *)geometry);
+                                        Cache_UnlockResource(0, (CacheResourceNode *)geometry);
                                     }
                                 }
                             }
                         }
-                        Cache_UnlockResource(0, (Node80253610 *)resource);
+                        Cache_UnlockResource(0, (CacheResourceNode *)resource);
                     }
                 }
             }
@@ -337,7 +337,7 @@ typedef struct CBoundsRect_t {
     f32 m_MaxZ;
 } CBoundsRect_t;
 typedef struct CActiveGridSection_t {
-    struct Node80253610 *m_pmeGridSection;
+    struct CacheResourceNode *m_pmeGridSection;
     CBoundsRect_t *m_pBoundsRect;
     u16 gridSectionX;
     u16 gridSectionZ;
@@ -348,7 +348,7 @@ typedef struct CGameStaticInstance_t {
     char pad6[0x18 - 0x6];
     ActorDefinitionHeader *m_pI; /* ih.m_pI */
     char pad1C[0x4];
-    struct Node80253610 *m_pmeGridSection;
+    struct CacheResourceNode *m_pmeGridSection;
     char pad24[0xB8 - 0x24];
     Box m_Bounds;
     char padD0[0xD8 - 0xD0];
@@ -359,7 +359,7 @@ typedef struct CGameSimpleInstance_t {
     char pad0[0x18];
     ActorDefinitionHeader *m_pI; /* ah.ih.m_pI */
     char pad1C[0x60 - 0x1C];
-    struct Node80253610 *m_pmeGridSection;
+    struct CacheResourceNode *m_pmeGridSection;
     char pad64[0x17C - 0x64];
     Box m_Bounds;
     char pad194[0x19C - 0x194];
@@ -391,7 +391,7 @@ typedef struct CScene_t {
     s32 m_nActiveGridSections;
     CActiveGridSection_t m_ActiveGridSections[128];
     char pad1B08[0x1B6B0 - 0x1B08];
-    struct Node80253610 *m_pmeVisibilityData;
+    struct CacheResourceNode *m_pmeVisibilityData;
     char m_VisData[0x25C]; /* CVisibilityData_t */
     char pad1B910[0x1B928 - 0x1B910];
     s32 m_bVisibilityValid;

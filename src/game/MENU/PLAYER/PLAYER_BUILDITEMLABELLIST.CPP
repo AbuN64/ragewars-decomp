@@ -17,33 +17,33 @@ extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void *Node_FindWidgetByResourceId(void *, s32);
 
 #if defined(VERSION_DE)
-enum { MENU_80437074_454 = 450, MENU_80437074_455 = 451, MENU_80437074_456 = 452, MENU_80437074_457 = 453, MENU_80437074_458 = 454, MENU_80437074_459 = 455, MENU_80437074_460 = 456, MENU_80437074_461 = 457, MENU_80437074_462 = 458, MENU_80437074_463 = 459, MENU_80437074_464 = 460, MENU_80437074_465 = 461, MENU_80437074_466 = 462 };
+enum { k_altPlayerSettingsButtonFirstWrapId = 450, k_altPlayerSettingsWindowWidgetId = 451, k_altPlayerSettingsButtonSecondWrapId = 452, k_altPlayerSettingsListAFirstId = 453, k_altPlayerSettingsListASecondId = 454, k_altPlayerSettingsListCFirstId = 455, k_altPlayerSettingsListCSecondId = 456, k_altPlayerSettingsSliderBFirstId = 457, k_altPlayerSettingsSliderBSecondId = 458, k_altPlayerSettingsSliderAFirstId = 459, k_altPlayerSettingsSliderASecondId = 460, k_altPlayerSettingsListBFirstId = 461, k_altPlayerSettingsListBSecondId = 462 };
 #else
-enum { MENU_80437074_454 = 454, MENU_80437074_455 = 455, MENU_80437074_456 = 456, MENU_80437074_457 = 457, MENU_80437074_458 = 458, MENU_80437074_459 = 459, MENU_80437074_460 = 460, MENU_80437074_461 = 461, MENU_80437074_462 = 462, MENU_80437074_463 = 463, MENU_80437074_464 = 464, MENU_80437074_465 = 465, MENU_80437074_466 = 466 };
+enum { k_altPlayerSettingsButtonFirstWrapId = 454, k_altPlayerSettingsWindowWidgetId = 455, k_altPlayerSettingsButtonSecondWrapId = 456, k_altPlayerSettingsListAFirstId = 457, k_altPlayerSettingsListASecondId = 458, k_altPlayerSettingsListCFirstId = 459, k_altPlayerSettingsListCSecondId = 460, k_altPlayerSettingsSliderBFirstId = 461, k_altPlayerSettingsSliderBSecondId = 462, k_altPlayerSettingsSliderAFirstId = 463, k_altPlayerSettingsSliderASecondId = 464, k_altPlayerSettingsListBFirstId = 465, k_altPlayerSettingsListBSecondId = 466 };
 #endif
 
 s32 Player_BuildItemLabelList(void *parent) {
     void *list;
 
     g_alternatePlayerSettingsScreen = Cache_AllocateMemory(0x50);
-    SmpButton_WrapButtonWidget(MENU_80437074_454);
-    list = SmpButton_CreateListWidget(MENU_80437074_457, MENU_80437074_458);
+    SmpButton_WrapButtonWidget(k_altPlayerSettingsButtonFirstWrapId);
+    list = SmpButton_CreateListWidget(k_altPlayerSettingsListAFirstId, k_altPlayerSettingsListASecondId);
     g_alternatePlayerSettingsScreen->listA = list;
-    SmpButton_AppendListText(list, D_800D34A4[0]);
+    SmpButton_AppendListText(list, g_matchOptionsCursorLabelThird[0]);
     SmpButton_AppendListText(g_alternatePlayerSettingsScreen->listA, g_playerSettingsPrimaryListLabels[0]);
-    list = SmpButton_CreateListWidget(MENU_80437074_465, MENU_80437074_466);
+    list = SmpButton_CreateListWidget(k_altPlayerSettingsListBFirstId, k_altPlayerSettingsListBSecondId);
     g_alternatePlayerSettingsScreen->listB = list;
-    SmpButton_AppendListText(list, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->listB, D_800D3474[0]);
-    g_alternatePlayerSettingsScreen->panels[0] = SmpSlider_CreateSliderWidget(MENU_80437074_463, MENU_80437074_464, 0xFF);
-    g_alternatePlayerSettingsScreen->panels[1] = SmpSlider_CreateSliderWidget(MENU_80437074_461, MENU_80437074_462, 0xFF);
-    list = SmpButton_CreateListWidget(MENU_80437074_459, MENU_80437074_460);
+    SmpButton_AppendListText(list, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->listB, g_toggleListSetLabel[0]);
+    g_alternatePlayerSettingsScreen->panels[0] = SmpSlider_CreateSliderWidget(k_altPlayerSettingsSliderAFirstId, k_altPlayerSettingsSliderASecondId, 0xFF);
+    g_alternatePlayerSettingsScreen->panels[1] = SmpSlider_CreateSliderWidget(k_altPlayerSettingsSliderBFirstId, k_altPlayerSettingsSliderBSecondId, 0xFF);
+    list = SmpButton_CreateListWidget(k_altPlayerSettingsListCFirstId, k_altPlayerSettingsListCSecondId);
     g_alternatePlayerSettingsScreen->listC = list;
     SmpButton_AppendListText(list, g_playerSettingsSecondaryListLabels[0]);
     SmpButton_AppendListText(g_alternatePlayerSettingsScreen->listC, g_playerSettingsFirstChoiceText[0]);
     SmpButton_AppendListText(g_alternatePlayerSettingsScreen->listC, g_playerSettingsSecondChoiceText[0]);
-    SmpButton_WrapButtonWidget(MENU_80437074_456);
-    g_alternatePlayerSettingsScreen->window = Node_FindWidgetByResourceId(parent, MENU_80437074_455);
+    SmpButton_WrapButtonWidget(k_altPlayerSettingsButtonSecondWrapId);
+    g_alternatePlayerSettingsScreen->window = Node_FindWidgetByResourceId(parent, k_altPlayerSettingsWindowWidgetId);
     g_alternatePlayerSettingsScreen->selection = 0;
     Player_SelectAlternatePlayerSettingsEntry(0);
     return 0;

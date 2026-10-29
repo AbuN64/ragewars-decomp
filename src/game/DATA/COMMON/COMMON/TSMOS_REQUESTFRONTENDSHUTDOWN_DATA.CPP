@@ -64,7 +64,7 @@ unsigned int g_audioGlobals[] = {
 
 /* 802A2230_12.CPP */
 #if defined(VERSION_US)
-u32 data_writable_800CD930[108] = {
+u32 g_frontendShutdownWritableWords[108] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000001,
     0x5F53544F, 0x4E456571, 0x40A00000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0xC0A00000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -86,14 +86,14 @@ u32 data_writable_800CD930[108] = {
 };
 #endif
 
-/* DATA_800D2B78.CPP */
+/* g_TsmosRequestfrontendshutdownEnergyRTextWords1_TsmosRequestfrontendshutdownData.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_TsmosRequestfrontendshutdownEnergyRTextWords1[3] = {
     0x456E6572, 0x67792072, 0x00000000,
 };
 #endif
 
-/* DATA_800D2B84.CPP */
+/* g_frontendShutdownRetainedMixedStorage_TsmosRequestfrontendshutdownData.CPP */
 #if defined(VERSION_US_REV1)
 struct {
     unsigned int w0[23];

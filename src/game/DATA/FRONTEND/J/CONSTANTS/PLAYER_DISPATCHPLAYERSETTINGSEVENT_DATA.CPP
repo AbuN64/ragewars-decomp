@@ -43,12 +43,12 @@ unsigned int D_src_638b7747[58] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 unsigned int g_PlayerDispatchplayersettingseventPointerWords1[6] = {
-    0x00000E07, 0x00000005, (unsigned int)g_packedCodeAddress24_00436D48, 0x00000E08, 0x00000005, (unsigned int)g_packedCodeAddress24_00436D50,
+    0x00000E07, 0x00000005, (unsigned int)addrLow_Player_EmptySettingsEntryHook, 0x00000E08, 0x00000005, (unsigned int)addrLow_Player_UpdatePlayerSettingsExit,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800E0310[96] = {
+unsigned int g_playerSettingsEventHandlersUs[96] = {
     0x00000E06, 0x00000005, 0x004366D0, 0x00000E03, 0x00000005, 0x00436D18, 0x0000000A, 0x00000005,
     0x00436DCC, 0x00000002, 0x00000005, 0x00436E38, 0x00000001, 0x00000005, 0x00436DD4, 0x00000008,
     0x0000005E, 0x00436E74, 0x00000007, 0x0000005E, 0x00436F2C, 0x00000000, 0x00000000, 0x00000000,

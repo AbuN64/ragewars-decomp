@@ -8,12 +8,12 @@
 /* 8041BEA8_7.CPP */
 #if defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 /* Builds the player-selection menu block at 0x800E3590 for one menu tree: it allocates the block
- * with a 528-byte window request, remembers the tree and the pool func_8041B610_de returns for it,
+ * with a 528-byte window request, remembers the tree and the pool SmpOverlay_CreateOverlayNode_Slot returns for it,
  * arms the tree's four option groups with id 513, hands the pool back to SmpOverlay_SetObjectValue, and
  * keeps the windows 492, 491, 486, 563, 510, 512, 511 and their lookup results in the block. The
  * window geometry is nudged by whole groups of four pixels so each window snaps to a 4-pixel grid;
  * the menu item window 488 and the two label windows 496/497 get fixed alpha bytes 110/120, window
- * 493 gets 110, and window 511 is cleared before the block is handed to func_8041DB30_de. */
+ * 493 gets 110, and window 511 is cleared before the block is handed to Focus_AdvanceActiveSlot_Menu. */
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/LABEL.H"
@@ -24,7 +24,7 @@
  * SlotSelectionMenuBlock, shared with the neighbouring menu units that keep their own views over
  * the same block. */
 
-/* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
+/* The hub spells Focus_AdvanceActiveSlot_Menu; these two stay here, matching how the landed units that own
  * them define them: SmpOverlay_SetObjectValue writes the word at +0x6C of the object it is handed, and
  * Focus_ShowUnlockedEntries takes the style word this block keeps at +0x0FC. */
 
@@ -53,7 +53,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *menuTree) {
     SmpOverlay_ShowSlotById((s32) menuTree, 1, slotRes(513));
     SmpOverlay_ShowSlotById((s32) menuTree, 2, slotRes(513));
     SmpOverlay_ShowSlotById((s32) menuTree, 3, slotRes(513));
-    /* func_8041B610_de is published to this unit as handing back a word while SmpOverlay_SetObjectValue is
+    /* SmpOverlay_CreateOverlayNode_Slot is published to this unit as handing back a word while SmpOverlay_SetObjectValue is
      * published as taking the pool object that word names; the cast puts that object view back on
      * the pool stored at +0x004 and carries it through unchanged. */
     SmpOverlay_SetObjectValue((struct Object6C *) g_profileStatisticsScreen->list, 1);
@@ -133,7 +133,7 @@ extern void Menu_ReturnToPreviousScreen(void);
 extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
 extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 index);
 
-/* Focus_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
+/* Focus_ShowUnlockedEntries is declared by span LABEL_Slot.h; no local extern needed. */
 
 s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 animationStep) {
     NodeFrontendAnimateSlotSelectionMenu *node;

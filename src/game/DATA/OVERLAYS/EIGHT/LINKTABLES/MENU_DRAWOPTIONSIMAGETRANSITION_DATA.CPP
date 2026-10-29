@@ -45,6 +45,6 @@ unsigned int g_MenuDrawoptionsimagetransitionEncodedWords[24] = {
 #endif
 
 #if defined(VERSION_US)
-char data_unresolved_800DF164[12] =
+char g_MenuDrawoptionsimagetransitionTrailingBytes[12] =
     "IFLEequ\004.eos";
 #endif

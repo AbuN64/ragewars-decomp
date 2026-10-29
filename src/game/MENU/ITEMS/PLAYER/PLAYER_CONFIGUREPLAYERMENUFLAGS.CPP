@@ -22,7 +22,7 @@
 
 s32 Player_FormatPlayerFirstHalfword(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
     s32 player = Player_GetPlayerIndex(&g_playerViewRenderContext, holder->owner);
-    /* D_80146398 is the hub's SlotSelectionPlayerConfig array (0x96-byte records); index player*150 then reads the record's first halfword */
+    /* g_playerSettings_Achieve is the hub's SlotSelectionPlayerConfig array (0x96-byte records); index player*150 then reads the record's first halfword */
     s32 value = *(s16 *) &g_playerSettings[player];
     char *text;
 

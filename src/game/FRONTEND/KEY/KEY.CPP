@@ -26,7 +26,7 @@ s32 Key_FindKeyIndex(s32 key) {
 
 extern s_CharacterData g_frontendKeyEntries[];
 
-/* Returns the index of the first of the seventeen 0x70-byte slots of g_frontendKeyEntries whose leading word equals the argument, or zero when none does. Adapted from func_8041F140_de with the slot word g_frontendKeyEntries changed. */
+/* Returns the index of the first of the seventeen 0x70-byte slots of g_frontendKeyEntries whose leading word equals the argument, or zero when none does. Adapted from Key_FindKeyIndex_Key with the slot word g_frontendKeyEntries changed. */
 
 
 

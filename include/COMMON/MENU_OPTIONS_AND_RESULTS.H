@@ -106,7 +106,7 @@ extern int g_trialSpecialWeaponIds[];
 
 
 
-extern void func_8042201C_de();
+extern void Menu_ReleaseOptionsScene_Optiontransition();
 
 extern s32 ScenarioSetup_IsCupSelected(void);
 enum MatchEnd {

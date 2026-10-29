@@ -72,7 +72,7 @@ extern short Node_GetFontLetterSpacing(s32 index);
 
 extern void Widget_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
-/* Draws the child at 0x8 of a window with the arguments passed by value after clearing g_frontendRenderStateInitialized once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with g_frontendRenderStateInitialized cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
+/* Draws the child at 0x8 of a window with the arguments passed by value after clearing g_frontendRenderStateInitialized once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive, giving up when it fails, and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from SmpOverlay_DrawOverlayWidget_FrontendOpenresourcearchive with g_frontendRenderStateInitialized cleared before the rectangle is resolved, the resolved basis declared first, and a failed Node_ClampRectToClip_FrontendOpenresourcearchive ending the function. */
 
 
 

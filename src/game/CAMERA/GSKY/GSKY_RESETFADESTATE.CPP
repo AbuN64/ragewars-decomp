@@ -9,8 +9,8 @@ extern float k_cameraFadeResetValue;
 void Gsky_ResetFadeState(void *cameraStorage) {
     GameplayCamera *state = cameraStorage;
     float value = k_cameraFadeResetValue;
-    state->fadeMode = 0;
-    state->fadeState = 0;
+    state->fadeParameterMode = 0;
+    state->fadeParameterState = 0;
     state->fadeParameterOne = 0;
     state->fadeParameterTwo = 0;
     state->fadeParameterThree = 0;

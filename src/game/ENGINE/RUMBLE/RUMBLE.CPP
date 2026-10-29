@@ -65,12 +65,12 @@ f32 Rumble_GetSpatialEffectLevel(RumbleSpatialPoolView *pool, CVector3 position)
 
 /* With interrupts masked, takes the first node of a pool's free list, moves it onto the pool's active list and initialises it with its key, position, two values and owner slot (storing the node there), then binds the two handles named by the key's identifiers, returning the node or null. */
 
-static inline void bind(NodeCode8028469C *node, s32 offset, s32 id) {
+static inline void bind(RumbleEffectNode *node, s32 offset, s32 id) {
 
     Control_InitializeCurvePlayer((char *)node + offset, Scene_GetEffectCurveRecord(&g_world, id));
 }
 
-static inline void init(NodeCode8028469C *node, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
+static inline void init(RumbleEffectNode *node, Clip *key, CVector3 position, f32 value0, f32 value1, RumbleEffectNode **owner) {
     node->key = key;
     node->position = position;
     node->value0 = value0;
@@ -87,7 +87,7 @@ static inline IntrusiveList *active_list(RumbleNodePoolView *pool) {
     return &pool->active;
 }
 
-void Rumble_InitEffectNode(NodeCode8028469C *effectNode, Clip *effectClip, CVector3 effectPosition,
+void Rumble_InitEffectNode(RumbleEffectNode *effectNode, Clip *effectClip, CVector3 effectPosition,
                    f32 valueStart, f32 valueEnd, void **ownerSlot) {
 
     effectNode->key = effectClip;
@@ -106,8 +106,8 @@ void Rumble_InitEffectNode(NodeCode8028469C *effectNode, Clip *effectClip, CVect
 
 /** Clear the target word when the pointer field is populated. */
 void Rumble_ClearEffectOwnerSlot(char *object) {
-    struct NodeCode8028469C *node = (void *)object;
-    struct NodeCode8028469C **target = node->owner;
+    struct RumbleEffectNode *node = (void *)object;
+    struct RumbleEffectNode **target = node->owner;
     if (target != 0) {
         *target = 0;
     }
@@ -160,7 +160,7 @@ f32 Rumble_EvaluateSpatialEffectNode(f32 *effectNode, u32 positionXBits, u32 pos
 void Rumble_InitPoolNodes(void *effectPool, void *nodeStorage, s32 nodeCount) {
 
     s32 i;
-    NodeCode8028469C *p;
+    RumbleEffectNode *p;
     u32 saved;
 
     p = nodeStorage;
@@ -179,10 +179,10 @@ void Rumble_InitPoolNodes(void *effectPool, void *nodeStorage, s32 nodeCount) {
     __osRestoreInt(saved);
 }
 
-NodeCode8028469C *Rumble_AllocatePoolNode(RumbleNodePoolView *pool, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
+RumbleEffectNode *Rumble_AllocatePoolNode(RumbleNodePoolView *pool, Clip *key, CVector3 position, f32 value0, f32 value1, RumbleEffectNode **owner) {
 
     s32 mask;
-    NodeCode8028469C *node;
+    RumbleEffectNode *node;
 
     mask = __osDisableInt();
     node = pool->free.head;
@@ -197,11 +197,11 @@ NodeCode8028469C *Rumble_AllocatePoolNode(RumbleNodePoolView *pool, Clip *key, C
 
 void Rumble_RecycleFinishedEffectNodes(void *pool) {
 
-    NodeCode8028469C *node;
-    NodeCode8028469C *next;
+    RumbleEffectNode *node;
+    RumbleEffectNode *next;
     s32 flag;
     u32 saved;
-    NodeCode8028469C **inner;
+    RumbleEffectNode **inner;
 
     saved = __osDisableInt();
     for (node = (*active_list(pool)).head; node != 0; node = next) {
@@ -233,7 +233,7 @@ void Rumble_FreeAllPoolNodes(void *effectPool) {
     node = ((RumbleNodePoolView *)effectPool)->active.head;
     if (node != 0) {
         do {
-            next = ((NodeCode8028469C *)node)->next;
+            next = ((RumbleEffectNode *)node)->next;
             List_RemoveIntrusive(&((RumbleNodePoolView *)effectPool)->active, node);
             List_AppendIntrusive(effectPool, node);
             node = next;
@@ -244,7 +244,7 @@ void Rumble_FreeAllPoolNodes(void *effectPool) {
 }
 
 
-/* ROM-grounded data: src/rw_pool_802859D0_CABBC_us_rev1.c */
+/* ROM-grounded data: src/g_rumble_EvaluateSpatialEffectNodeConstantWords_Rumble.c */
 const unsigned int g_rumble_EvaluateSpatialEffectNodeConstantWords[2] = {
     0x3F800000, 0x3F800000,
 };

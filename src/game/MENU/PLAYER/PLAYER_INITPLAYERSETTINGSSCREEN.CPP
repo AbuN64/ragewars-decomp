@@ -11,10 +11,10 @@
 #define PLAYER_SETTINGS_ID(id) (id)
 #endif
 extern struct StateMenuSelectPlayerSettingsEntry *g_playerSettingsScreen;
-extern char *D_800D34A4[1];
+extern char *g_matchOptionsCursorLabelThird[1];
 extern char *g_playerSettingsPrimaryListLabels[1];
-extern char *D_800D3470_de[1];
-extern char *D_800D3474[1];
+extern char *g_toggleListClearLabel[1];
+extern char *g_toggleListSetLabel[1];
 extern char *g_playerSettingsSecondaryListLabels[1];
 extern char *g_playerSettingsFirstChoiceText[1];
 extern char *g_playerSettingsSecondChoiceText[1];
@@ -33,11 +33,11 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
     ST[0] = SmpFade_CreateFadeWidget(PLAYER_SETTINGS_ID(0x5B), PLAYER_SETTINGS_ID(0x5C));
     SmpButton_WrapButtonWidget(PLAYER_SETTINGS_ID(0x5E));
     g_playerSettingsScreen->a = SmpButton_CreateListWidget(PLAYER_SETTINGS_ID(0x64), PLAYER_SETTINGS_ID(0x65));
-    SmpButton_AppendListText(g_playerSettingsScreen->a, D_800D34A4[0]);
+    SmpButton_AppendListText(g_playerSettingsScreen->a, g_matchOptionsCursorLabelThird[0]);
     SmpButton_AppendListText(g_playerSettingsScreen->a, g_playerSettingsPrimaryListLabels[0]);
     g_playerSettingsScreen->b = SmpButton_CreateListWidget(PLAYER_SETTINGS_ID(0x61), PLAYER_SETTINGS_ID(0x63));
-    SmpButton_AppendListText(g_playerSettingsScreen->b, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_playerSettingsScreen->b, D_800D3474[0]);
+    SmpButton_AppendListText(g_playerSettingsScreen->b, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_playerSettingsScreen->b, g_toggleListSetLabel[0]);
     g_playerSettingsScreen->c = SmpSlider_CreateSliderWidget(PLAYER_SETTINGS_ID(0x66), PLAYER_SETTINGS_ID(0x67), 0xF8);
     g_playerSettingsScreen->d = SmpSlider_CreateSliderWidget(PLAYER_SETTINGS_ID(0x6A), PLAYER_SETTINGS_ID(0x6B), 0xF8);
     g_playerSettingsScreen->e = SmpButton_CreateListWidget(PLAYER_SETTINGS_ID(0x68), PLAYER_SETTINGS_ID(0x69));
@@ -56,10 +56,10 @@ s32 Player_InitPlayerSettingsScreen(s32 root) {
 #undef ST
 #undef PLAYER_SETTINGS_ID
 #else
-INCLUDE_ASM("ovl_80400000", Player_InitPlayerSettingsScreen);
+INCLUDE_ASM("ovl_frontendMenu", Player_InitPlayerSettingsScreen);
 #endif
 
-/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_playerSettingsScreen holds through func_8041AD10_de and SmpSlider_SetSliderItem. */
+/* Stores arg0 into its own g_playerSettingsSlotByteBase entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_playerSettingsScreen holds through SmpButton_SelectListEntry_PlayerInitplayersettingsscreen and SmpSlider_SetSliderItem. */
 
 
 extern struct StateMenuSelectPlayerSettingsEntry *g_playerSettingsScreen;
@@ -78,7 +78,7 @@ void Player_SelectPlayerSettingsEntry(s32 entryIndex) {
     SmpButton_SelectListEntry(g_playerSettingsScreen->e, g_profileSlotSettingsByte82[entryIndex * 0x190]);
 }
 
-/* Reads five settings from the objects g_playerSettingsScreen holds through SmpButton_GetListSelection and SmpSlider_GetSliderItem into slot arg0 of the g_profileSlotSettingsByte7B table and copies them into the matching bytes of the arg0 entry of D_80146398. */
+/* Reads five settings from the objects g_playerSettingsScreen holds through SmpButton_GetListSelection and SmpSlider_GetSliderItem into slot arg0 of the g_profileSlotSettingsByte7B table and copies them into the matching bytes of the arg0 entry of g_playerSettings_Achieve. */
 
 
 extern u8 g_playerSettings[];

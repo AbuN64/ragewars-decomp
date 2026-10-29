@@ -109,7 +109,7 @@ void XMath_ScaleMatrixUniformly(void *matrix, f32 scale) {
     ((Matrix *)(o))->m[14] = ((Matrix *)(o))->m[14] * scale;
 }
 
-void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *matrix) {
+void XMath_ResetMatrixRotation(Matrix3x4View *matrix) {
     s32 col;
     s32 row;
 

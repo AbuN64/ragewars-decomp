@@ -2,12 +2,12 @@
 #define COMMON_CTX_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Func802C1F10Node;
-struct Func802C1F10Node {
+struct OsThreadQueueNode;
+struct OsThreadQueueNode {
     s32 runQueueNextWord;
     s32 priority;
     void *queue;
-    struct Func802C1F10Node *next;
+    struct OsThreadQueueNode *next;
     u16 state;
 };
 
@@ -26,8 +26,8 @@ struct Ctx {
 
 
 
-struct Func802C1F10Node;
-typedef struct Func802C1F10Node Func802C1F10Node;
+struct OsThreadQueueNode;
+typedef struct OsThreadQueueNode OsThreadQueueNode;
 
 
 #endif

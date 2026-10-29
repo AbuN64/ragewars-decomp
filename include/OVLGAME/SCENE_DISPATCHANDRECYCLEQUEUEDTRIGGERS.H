@@ -11,7 +11,7 @@ struct Level {
     char pad11C8[8];
     ItemOvlSceneDispatchSelectedEntityKinds *items[2];
 };
-struct BankCode8044E2B8 {
+struct SceneFrameItemBank {
     s32 unk0;
     s32 count;
     struct SceneFrameItemReference items[1];
@@ -31,18 +31,18 @@ struct Ent {
     f32 unkEC;
     f32 unkF0;
 };
-struct FrameCode8044E2B8 {
+struct ParticleEffectRelocationFrame {
     s32 unk0;
     s32 count;
     char pad8[0xC];
     ParticleEffectRelocationSlot slots[1];
 };
-struct GroupCode8044E2B8 {
+struct PieceGroup {
     s32 unk0;
     s32 count;
     Piece pieces[1];
 };
-struct OwnerCode8044E2B8 {
+struct SceneTriggerQueueOwner {
     char pad0[0x6C];
     void *modelBankData;
     char pad70[0xC];
@@ -53,5 +53,5 @@ struct OwnerCode8044E2B8 {
     struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *spare;
 };
 /** Release every active entry of arg0 and move it onto the spare list. */
-void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *owner);
+void Scene_DispatchAndRecycleQueuedTriggers(SceneTriggerQueueOwner *owner);
 #endif

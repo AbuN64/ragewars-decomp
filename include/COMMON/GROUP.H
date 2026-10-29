@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Work80244494;
-typedef struct Work80244494 Work80244494;
+struct CollisionSweepWork;
+typedef struct CollisionSweepWork CollisionSweepWork;
 
 
 struct Group;
@@ -41,7 +41,7 @@ typedef struct VectorPair VectorPair;
 
 
 
-struct Work80244494;
+struct CollisionSweepWork;
 
 
 

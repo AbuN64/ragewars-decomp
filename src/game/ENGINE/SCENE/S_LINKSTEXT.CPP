@@ -13,6 +13,6 @@ const char g_sceneLinksText[8] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80286AA8_CAE50_us_rev1.c */
+/* ROM-grounded data: src/s_linksText_SLinkstext.c */
 const char s_linksText[6] = "links";
 #endif

@@ -1,6 +1,6 @@
 
 
-/* DATA_800C9228.CPP */
+/* k_XprintfEncodedWordsBlock1_Xprintf.CPP */
 #if defined(VERSION_EU_X)
 unsigned int k_XprintfEncodedWordsBlock1[22] = {
     0x00000000, 0x00000000, 0x40240000, 0x00000000, 0x40590000, 0x00000000, 0x40C38800, 0x00000000,
@@ -9,7 +9,7 @@ unsigned int k_XprintfEncodedWordsBlock1[22] = {
 };
 #endif
 
-/* DATA_800C9375.CPP */
+/* g_XprintfEncodedBytes_Xprintf.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9375 */
 unsigned char g_XprintfEncodedBytes[3] = {
@@ -17,7 +17,7 @@ unsigned char g_XprintfEncodedBytes[3] = {
 };
 #endif
 
-/* DATA_800C9378.CPP */
+/* s_nameText_Xprintf.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800C9378 */
 char s_nameText[8] = "l name";

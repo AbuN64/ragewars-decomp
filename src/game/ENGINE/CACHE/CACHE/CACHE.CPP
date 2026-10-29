@@ -91,15 +91,15 @@ void Cache_ReplaceResourceBlock(s32 unused, struct CacheResourceBlockView **hand
     __osRestoreInt(token2);
 }
 
-void Cache_ReplaceResourcePairFirst(s32 unusedCache, NodePair80253E04 *resourcePair, Node80253610 *replacementResource) {
+void Cache_ReplaceResourcePairFirst(s32 unusedCache, ResourceNodePair *resourcePair, CacheResourceNode *replacementResource) {
     extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockClaimCount;
     s32 lockReleaseCount;
     u32 mask;
     u32 releaseInterruptMask;
-    NodePair80253E04 *pairToUpdate;
-    Node80253610 *newFirstResource;
-    Node80253610 *node;
+    ResourceNodePair *pairToUpdate;
+    CacheResourceNode *newFirstResource;
+    CacheResourceNode *node;
 
     pairToUpdate = resourcePair;
     newFirstResource = replacementResource;

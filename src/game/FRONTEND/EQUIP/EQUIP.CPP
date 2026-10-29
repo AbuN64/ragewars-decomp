@@ -7,7 +7,7 @@
 /* Fills player p's column values on the screen g_equipmentAndResultsScreen from what the player owns: unless the
    entry's mode word (0x4D4) is 0, it scans the 4 rows of g_loadoutColumnOneItems for column 1, the 3 rows of
    g_loadoutColumnFourItems for column 4 and the 8 rows of g_loadoutWeaponItems for column 5, and writes the index of each
-   row whose item is marked owned at 0x4C of the player's 150-byte record in D_80146398 into the
+   row whose item is marked owned at 0x4C of the player's 150-byte record in g_playerSettings_Achieve into the
    entry's next value slot (0x4B8 plus four per slot), starting at slot 0, 4 and 2, or at 0, 2 and
    1 in mode 1. */
 
@@ -90,7 +90,7 @@ void Equip_LoadEquipmentSelections(s32 player) {
 
 /* Rebuilds the loadout of every active player whose entry on the screen g_equipmentAndResultsScreen is in mode 2:
    clears the 22 owned bytes at 0x4C and level bytes at 0x62 of the player's 150-byte record in
-   D_80146398, then for columns 0 and 1 (16-byte table g_loadoutColumnOneItems, level column + 1), 2 and 3
+   g_playerSettings_Achieve, then for columns 0 and 1 (16-byte table g_loadoutColumnOneItems, level column + 1), 2 and 3
    (g_loadoutWeaponItems, level column + 3) and 4 (g_loadoutColumnFourItems, level 4) marks the item of the row the entry's
    value for that column selects as owned at that level, and finally marks item 0 owned at level
    0. */
@@ -137,7 +137,7 @@ void Equip_ApplySelectedPlayerLoadouts(void) {
             default:
                 continue;
             }
-            item = source[g_equipmentAndResultsScreen->entries[i].values[column]].field_8;
+            item = source[g_equipmentAndResultsScreen->entries[i].values[column]].third;
             row = source + g_equipmentAndResultsScreen->entries[i].values[column];
             (record + item)[0x4C] = 1;
             (record + row->third)[0x62] = level;
@@ -147,5 +147,5 @@ void Equip_ApplySelectedPlayerLoadouts(void) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", Equip_ApplySelectedPlayerLoadouts);
+INCLUDE_ASM("ovl_frontendMenu", Equip_ApplySelectedPlayerLoadouts);
 #endif

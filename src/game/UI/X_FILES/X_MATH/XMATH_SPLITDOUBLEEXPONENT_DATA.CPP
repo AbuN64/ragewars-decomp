@@ -11,17 +11,17 @@ const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWords[25] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8029DCB0_CB958_us_rev1.c */
+/* ROM-grounded data: src/k_xmathSplitdoubleexponentDataZeroWords_XmathSplitdoubleexponentData.c */
 const unsigned int k_xmathSplitdoubleexponentDataZeroWords[2] = {
     0x00000000, 0x00000000,
 };
 
-/* ROM-grounded data: src/rw_pool_8029DD18_CB960_us_rev1.c */
+/* ROM-grounded data: src/k_XmathSplitdoubleexponentHalfPiWords_XmathSplitdoubleexponentData.c */
 const unsigned int k_XmathSplitdoubleexponentHalfPiWords[1] = {
     0x3FC90FDB,
 };
 
-/* ROM-grounded data: src/rw_pool_8029DD3C_CB964_us_rev1.c */
+/* ROM-grounded data: src/k_XmathSplitdoubleexponentHalfPiWordsVariant1_XmathSplitdoubleexponentData.c */
 const unsigned int k_XmathSplitdoubleexponentHalfPiWordsVariant1[1] = {
     0x3FC90FDB,
 };
@@ -36,7 +36,7 @@ const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWordsBlock2[9] = {
     0x3FC90FDB,
 };
 
-/* ROM-grounded data: src/rw_pool_8029DF48_CB9B4_us_rev1.c */
+/* ROM-grounded data: src/k_xmathSplitdoubleexponentDataFloatConstantWordsBlock3_XmathSplitdoubleexponentData.c */
 const unsigned int k_xmathSplitdoubleexponentDataFloatConstantWordsBlock3[2] = {
     0x3F800000, 0xBF800000,
 };

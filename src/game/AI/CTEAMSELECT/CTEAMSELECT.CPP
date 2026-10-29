@@ -211,7 +211,7 @@ void TeamSelect_UpdateWeaponWheelInput(s32 *menu, void *player, s32 unused2) {
         held = 0;
         menu[0] = 3;
     }
-    if (held && ((struct func_802077F4_S2 *) menu)->unk4 > 0.0f) {
+    if (held && ((struct PaddedFloatView *) menu)->unk4 > 0.0f) {
         menu[0] = 3;
     }
     if (menu[0] == 0 || menu[0] == 3) {
@@ -472,17 +472,17 @@ clamp:
 /* 800C7338.CPP */
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802181FC_C7F38_us_rev1.c */
+/* ROM-grounded data: src/k_CteamselectEmptyPoolBlock.c */
 #endif
 
 /* 800C733C.CPP */
-/* ROM-grounded data: src/rw_pool_8021836C_C7F3C_us_rev1.c */
+/* ROM-grounded data: src/g_weaponWheelResetAngleStepBits_Cteamselect.c */
 const unsigned int g_weaponWheelResetAngleStepBits[1] = {
     0x3E32B8C4,
 };
 
 /* 800C7340.CPP */
-/* ROM-grounded data: src/rw_pool_802184C0_C7F40_us_rev1.c */
+/* ROM-grounded data: src/g_weaponWheelAnglePeriodBits_Cteamselect.c */
 const unsigned int g_weaponWheelAnglePeriodBits[2] = {
     0x40C90FDC, 0x40C90FDC,
 };

@@ -27,5 +27,5 @@ unsigned int func_802BEE58_us_rev1[2] = { 0xFF500098U, 0xFF5100A0U };
 unsigned char g_SinfTrailingBytes[4] = { 0xAE, 0x25, 0x00, 0x00 };
 #endif
 
-/* DATA_800CCB6C.CPP */
+/* SinfTrailingBlob.CPP */
 

@@ -5,7 +5,7 @@
 typedef struct SceneResourceFlagsView SceneResourceFlagsView;
 struct SceneResourceFlagsView {
     char pad0[0x10];
-    u8 flags; /* +0x10: src/func_80286A78.c */
+    u8 flags; /* +0x10: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char SceneResourceFlagsSizeCheck[(sizeof(SceneResourceFlagsView) == 0x11) ? 1 : -1];
 #endif

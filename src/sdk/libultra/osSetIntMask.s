@@ -16,13 +16,13 @@ osSetIntMask:
     lui $t2, %hi(MI_INTERRUPT_MASK_REGISTER)
     lw $t2, %lo(MI_INTERRUPT_MASK_REGISTER)($t2)
     nop
-    beqz $t2, .Lfunc_802BD170_de_04C
+    beqz $t2, .LosSetIntMask_storeMiBits
     srl $t1, $t3, 16
     addiu $at, $zero, -0x1
     xor $t1, $t1, $at
     andi $t1, $t1, 0x3F
     or $t2, $t2, $t1
-.Lfunc_802BD170_de_04C:
+.LosSetIntMask_storeMiBits:
     sll $t2, $t2, 16
     or $v0, $v0, $t2
     lui $at, 0x3F

@@ -111,7 +111,7 @@ const unsigned int k_turretaiFloatConstantWords[5] = {
 };
 
 /* 800C6B2C.CPP */
-/* ROM-grounded data: src/rw_pool_8020388C_C772C_us_rev1.c */
+/* ROM-grounded data: src/turretai_float_constant_words_block1_us_rev1.c */
 const unsigned int k_turretaiFloatConstantWordsBlock1[2] = {
     0x3F800000, 0xBFC90FDC,
 };

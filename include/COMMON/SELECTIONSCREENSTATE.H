@@ -8,7 +8,7 @@
 /* Selection items are menu widgets; w is the legacy width spelling. */
 typedef MenuWidget SlotSelectionWidget;
 
-struct RecCode8041F1FC {
+struct SelectionScreenPlayer {
     SlotSelectionWidget *highlight;
     s32 unk4;
     s32 kind;
@@ -19,12 +19,12 @@ struct RecCode8041F1FC {
     s32 unk4C0;
     s32 pad4C4;
 };
-typedef struct RecCode8041F1FC RecCode8041F1FC;
+typedef struct SelectionScreenPlayer SelectionScreenPlayer;
 
 struct SelectionScreenState {
     void *screen;
-    struct SlotsCode804196C0 *unk4;
-    RecCode8041F1FC players[4];
+    struct SmpOverlaySlotsView *unk4;
+    SelectionScreenPlayer players[4];
     SlotSelectionWidget *header;
     s32 headerStep;
     SlotSelectionWidget *footer;
@@ -113,7 +113,7 @@ extern SelectionScreenState *g_characterSelectionMenu;
 extern SlotSelectionLayout g_characterSelectionMenuEntries[];
 
 
-/* func_8041DB30_de advances the cursor word it is handed, the menu block's slot at +0x10C. */
+/* Focus_AdvanceActiveSlot_Menu advances the cursor word it is handed, the menu block's slot at +0x10C. */
 extern SlotSelectionMenuBlock *g_profileStatisticsScreen;
 extern void Focus_AdvanceActiveSlot(int *cursor);
 extern SlotSelectionPlayerConfig g_playerSettings[];

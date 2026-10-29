@@ -18,13 +18,13 @@
 u32 SetN64_LocatePackSection(s32, s32, s32, u32 *);
 
 /* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */
-extern struct Node80253610 *g_artsendSelectedTextureResource;
+extern struct CacheResourceNode *g_artsendSelectedTextureResource;
 /* Releases the previous texture viewer entry, loads entry g_artsendTextureViewer.selectionIndex from the resident pack,
    wraps the frame selection into its texture/palette tables and prints the "tex N frm F of C" title. */
 void Tengine_LoadSelectedTexture(void) {
     u32 size;
     u32 key;
-    struct Node80253610 *resource;
+    struct CacheResourceNode *resource;
     s32 *entries;
     s32 *textures;
     s32 *palettes;
@@ -39,9 +39,9 @@ void Tengine_LoadSelectedTexture(void) {
         Cache_UnlockResource(NULL, g_artsendSelectedTextureResource);
     }
     g_artsendSelectedTextureResource = NULL;
-    D_8014AED4 = 0;
-    D_8014AED8 = 0;
-    D_8014AED0 = 0;
+    g_artsendTextureResetWordOne = 0;
+    g_artsendTextureResetWordTwo = 0;
+    g_artsendActionMappingSelection = 0;
     key = SetN64_LocatePackSection(world->unk50, world->unk20, g_artsendTextureViewer.selectionIndex, &size);
     resource = Cache_RequestResource(0, key - 1, key, size, 9, -1, &g_artsendTextureResourceCallbackUsRev1, "Artsend Texture", 1);
     entries = (s32 *)resource->data;

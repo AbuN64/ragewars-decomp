@@ -61,7 +61,7 @@ struct PagerState {
     struct PagerCounters counters;
     s16 f20;
     char pad22[2];
-    OSMesgQueue completion; /* pager completion queue, 0x18 bytes at +0x24 (D_800FF254) */
+    OSMesgQueue completion; /* pager completion queue, 0x18 bytes at +0x24 (g_resourcePagerCompletionQueue) */
     char list0Data[0xC0 - 0x3C];
     char queue[0x2F0 - 0xC0]; /* thread 1 (osCreateThread) */
     char pool[0x4F0 - 0x2F0]; /* its stack */

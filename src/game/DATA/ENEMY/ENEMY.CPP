@@ -1,6 +1,6 @@
 
 
-/* DATA_800D0EFC.CPP */
+/* k_enemyTextBytes_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/shared/800D0EFC */
 /* Light colour bytes (r, g, b, pad): bytes so every host reads the same colour. */
@@ -9,7 +9,7 @@ const unsigned char k_enemyTextBytes[4] = {
 };
 #endif
 
-/* DATA_800D0F00.CPP */
+/* g_enemyLightingDisplayListStorage_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 /* A light (colour, colour copy, direction) read bytewise by the RSP, then the display list words that follow it. */
 struct {
@@ -22,7 +22,7 @@ struct {
 };
 #endif
 
-/* DATA_800D0F40.CPP */
+/* g_enemyConstantWords_Enemy.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWords[24] = {
     0xE3000A01, 0x00000000, 0xE3000800, 0x00000000, 0xE3000F00, 0x00000000, 0xE3001001, 0x00000000,
@@ -31,7 +31,7 @@ unsigned int g_enemyConstantWords[24] = {
 };
 #endif
 
-/* DATA_800D0FA0.CPP */
+/* g_enemyConstantWordsBlock1_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWordsBlock1[32] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00014050, 0xF2000000, 0x0007C07C,
@@ -41,7 +41,7 @@ unsigned int g_enemyConstantWordsBlock1[32] = {
 };
 #endif
 
-/* DATA_800D1020.CPP */
+/* g_enemyConstantWordsBlock2_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWordsBlock2[32] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00054150, 0xF2000000, 0x0007C07C,
@@ -51,7 +51,7 @@ unsigned int g_enemyConstantWordsBlock2[32] = {
 };
 #endif
 
-/* DATA_800D10A0.CPP */
+/* g_enemyConstantWordsBlock3_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWordsBlock3[38] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x00017C5F, 0xF2000000, 0x0007C07C,
@@ -62,7 +62,7 @@ unsigned int g_enemyConstantWordsBlock3[38] = {
 };
 #endif
 
-/* DATA_800D1138.CPP */
+/* g_enemyConstantWordsBlock4_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWordsBlock4[38] = {
     0xF5100000, 0x07000000, 0xF3000000, 0x0755C000, 0xF5101000, 0x0001785E, 0xF2000000, 0x0007C07C,
@@ -73,7 +73,7 @@ unsigned int g_enemyConstantWordsBlock4[38] = {
 };
 #endif
 
-/* DATA_800D11D0.CPP */
+/* g_enemyConstantWordsBlock5_Enemy.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_enemyConstantWordsBlock5[] = {
     0xF5900000, 0x07000000, 0xF3000000, 0x07580000, 0xF5800800, 0x00018060, 0xF2000000, 0x000FC0FC,

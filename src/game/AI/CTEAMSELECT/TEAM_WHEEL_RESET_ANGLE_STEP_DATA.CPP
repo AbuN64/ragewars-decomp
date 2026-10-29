@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80218E98_C7F9C_us_rev1.c */
+/* ROM-grounded data: src/g_teamWheelResetAngleStep_StorageWords_TeamWheelResetAngleStepData.c */
 const unsigned int g_teamWheelResetAngleStep_StorageWords[1] = {
     0x3FC90FDC,
 };

@@ -12,9 +12,9 @@
 #include "MENU/PAK/MENU_CREATEMENUFROMTEMPLATE.H"
 
 /* 802A8A94_2.CPP */
-extern Node80253610 *Scene_StartWorldEffect(Shared_World *, s32, s32, s32);
-extern void Text_DrawTileGrid(Node80253610 *, s32, s16, s16, f32, f32, s32);
-extern void Cache_UnlockResource(void *, Node80253610 *);
+extern CacheResourceNode *Scene_StartWorldEffect(Shared_World *, s32, s32, s32);
+extern void Text_DrawTileGrid(CacheResourceNode *, s32, s16, s16, f32, f32, s32);
+extern void Cache_UnlockResource(void *, CacheResourceNode *);
 
 /* The advance and kerning scale follow the currently selected font. */
 static inline f32 fontGlyphWidth(void)
@@ -34,7 +34,7 @@ static inline f32 fontGlyphWidth(void)
 void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
 {
     FontStyle *style = &g_tutorialStatusBars;
-    Node80253610 *font;
+    CacheResourceNode *font;
     s32 special = 0;
     s32 resource;
     u8 ch, next, glyph;

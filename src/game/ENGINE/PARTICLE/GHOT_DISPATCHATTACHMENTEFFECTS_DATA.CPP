@@ -515,7 +515,7 @@ s32 Particle_SpawnEffectGroup(EffectSystem *sys, EffectActor *source, EffectActo
                 effect->rgb1[1] = g1;
                 effect->rgb1[2] = b1;
                 render = &effect->render;
-                *render = D_80100090;
+                *render = g_effectRenderDefaults;
                 render->WallBehavior = entry->wallBehavior;
                 render->InstanceBehavior = entry->instanceBehavior;
                 render->GroundBehavior = entry->groundBehavior;

@@ -14,7 +14,7 @@ struct VoiceMatchingKeyView {
 };
 struct VoiceRecordHolder {
     char pad0[0x4];
-    RecordCode8025A3EC record;
+    AudioVoiceRecordView record;
 };
 struct VoiceKeyTable {
     AudioSelectedHandleView *header;
@@ -34,7 +34,7 @@ struct IntegerStateB4 {
 struct VoiceKeyPairTable {
     AudioSelectedHandleView *owner;
     char pad4[8];
-    SlotCode8025A3EC slots[16];
+    AudioVoiceKeyedSlotView slots[16];
 };
 typedef struct SoundEnvelope {
     u16 flags;
@@ -79,7 +79,7 @@ struct ViewChannelUpdateVoicePlayback {
     s32 flags;
     s32 trackId;
     s32 done;
-    struct ContextCode8025A3EC *context;
+    struct AudioVoiceContextView *context;
     s32 fieldB4;
     char padB8[4];
     s32 followTrack;
@@ -150,7 +150,7 @@ struct VoiceChannelUpdateVoicePan {
     char padA0[4];
     s32 flags;
     char padA8[8];
-    struct OwnerCode8025A3EC *owner;
+    struct AudioOwnerView *owner;
     char padB4[0xC];
     s32 fixed;
 };

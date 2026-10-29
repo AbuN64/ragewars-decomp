@@ -52,7 +52,7 @@ s32 Items_SelectOptionRowLabel(OptionRowEu *row) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_SelectOptionRowLabel);
+INCLUDE_ASM("ovl_frontendMenu", Items_SelectOptionRowLabel);
 #endif
 #endif
 

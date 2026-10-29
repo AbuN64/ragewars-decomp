@@ -38,7 +38,7 @@ INCLUDE_ASM("span_1000", SetN64_SetupLoadingBackdropEu);
  * draws the backdrop through SetN64_DrawTextLines with half the video height. */
 #include "RENDER/SETN64_DRAWTEXTLINES.H"
 extern s32 g_lightingBufferIndex;
-extern f32 g_backdropModelFillValue, g_backdropYawRate, D_800CA4B8;
+extern f32 g_backdropModelFillValue, g_backdropYawRate, g_backdropTextScalePair;
 extern char g_fallbackScreenMessageEmitter;
 #if defined(VERSION_DE)
 extern s32 g_backdropTextLinesDe;
@@ -89,9 +89,9 @@ void LOAD_SETUP(TimedSessionTransitionView *state) {
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + g_lightingBufferIndex * 64, &g_defaultParticleLighting, 0, -1);
         Geometry_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales[0], g_backdropTextScales[1]);
+        SetN64_DrawTextLines(state, 0, (void *)((s32 **)&g_backdropTextScalePair)[g_languageIndex], g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScales[0], g_backdropTextScales[1]);
 #else
-        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLines, g_hudReferenceViewportWidth / 2, 0xBE, 0xA, D_800CA4B8, (&D_800CA4B8)[1]);
+        SetN64_DrawTextLines(state, 0, (void *)g_backdropTextLines, g_hudReferenceViewportWidth / 2, 0xBE, 0xA, g_backdropTextScalePair, (&g_backdropTextScalePair)[1]);
 #endif
     }
 }
@@ -100,7 +100,7 @@ void LOAD_SETUP(TimedSessionTransitionView *state) {
 
 
 #if !(defined(VERSION_US))
-/* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from g_hudReferenceViewportWidth and g_hudReferenceViewportHeight. */
+/* Clears the screen: clears the depth buffer over the whole screen through SetN64_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through OnScreen_DrawSpriteResource after Onscrn_SetupSpriteMode_Setn64Drawfullscreenbackdrop(255). Written with libultra-style display-list macros and the screen size read from g_hudReferenceViewportWidth and g_hudReferenceViewportHeight. */
 #include "COMMON/DISPLAY.H"
 extern void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 

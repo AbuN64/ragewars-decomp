@@ -34,7 +34,7 @@ s32 Rumble_TestActorStateBit(void *, void *);
 
 void Triggered_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 
-void Triggered_PositionPlatformRider(MovingPlatformActorView *, RiderCode80206258 *);
+void Triggered_PositionPlatformRider(MovingPlatformActorView *, MovingPlatformMotionStateView *);
 
 void Device_BuildPlayerMatrix(void *object, void *state) {
     Player *player = object;

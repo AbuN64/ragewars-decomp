@@ -11,7 +11,7 @@ unsigned char g_GfxGetconvertedcounterratioTrailingBytesBlock1[4] = { 0x24, 0x42
 unsigned char s_wateText[4] = { 0x57, 0x41, 0x54, 0x45 };
 #endif
 
-/* DATA_8044C448.CPP */
+/* k_GfxGetconvertedcounterratioEncodedWords_GfxGetconvertedcounterratio.CPP */
 #if defined(VERSION_EU)
 unsigned int k_GfxGetconvertedcounterratioEncodedWords[130] = {
     0x322200FF, 0x0043102B, 0x11000354, 0x68757737, 0x65545532, 0x34589668, 0x11122588, 0x88876788,

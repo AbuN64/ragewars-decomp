@@ -199,7 +199,7 @@ void InstHdr_ProjectPositionToActorGround(void *actor, void *position, void *pos
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
 int InstHdr_GetTypeOneItemValue(void *actorStorage) {
-    struct ItemCode8024E130 *item = actorStorage;
+    struct InstanceItemValueView *item = actorStorage;
     if (item->kind == 1) {
         return (int)item->value;
     }
@@ -215,7 +215,7 @@ int InstHdr_GetActorMotionState(void *levelActor) {
     return 0;
 }
 
-f32 InstHdr_GetActorGroundHeight(Shared_Func80243A80Actor *actor)
+f32 InstHdr_GetActorGroundHeight(Shared_CollisionActor *actor)
 {
   if ((actor->type) != 1)
   {
@@ -232,14 +232,14 @@ f32 InstHdr_GetActorGroundHeight(Shared_Func80243A80Actor *actor)
 }
 
 /** Select one of two float fields according to the leading byte. */
-float InstHdr_GetShadowGroundHeight(Shared_Func80243A80Actor *object, s32 mode) {
+float InstHdr_GetShadowGroundHeight(Shared_CollisionActor *object, s32 mode) {
     if (object->type != 1) {
         return object->y;
     }
     return object->groundY;
 }
 
-void *InstHdr_GetEnabledItemValue(struct ItemCode8024E130 *item) {
+void *InstHdr_GetEnabledItemValue(struct InstanceItemValueView *item) {
     if (item->kind == 1 && item->value != 0 && (item->flags & 3) != 0) {
         return item->value;
     }
@@ -280,7 +280,7 @@ int InstHdr_GetActorMotionFlags(void *levelActor) {
 /* 8024E130_4.CPP */
 extern struct PlayerMovementScalarView *Scene_GetModelRecordByIndexPointer(Shared_World *, void *);
 
-/* Returns the float at offset 0x20 of the entry Scene_GetModelRecordByIndexPointer finds in D_8011FE88 for an object's
+/* Returns the float at offset 0x20 of the entry Scene_GetModelRecordByIndexPointer finds in g_world_AchieveUpdateresultsscreen for an object's
    key at 0x14, when the key's flag halfword at 2 has bit 0 set; zero otherwise. */
 
 void InstHdr_CopyActorPositionAndModel(void *levelActor, Triple t, void *positionOut, s32 *modelOut, s32 unused6, s32 unused7) {
@@ -322,12 +322,12 @@ f32 InstHdr_GetActorTriangleTopOffset(void *actor) {
     f32 highestVertexHeight;
     void *groundTriangle;
     groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
-    upperPairHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
-    previousVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    upperPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
+    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
     if (!(previousVertexHeight <= upperPairHeight)) {
         upperPairHeight = previousVertexHeight;
     }
-    highestVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    highestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
     if (!(upperPairHeight <= highestVertexHeight)) {
         highestVertexHeight = upperPairHeight;
     }
@@ -340,12 +340,12 @@ f32 InstHdr_GetActorTriangleBottomOffset(void *actor) {
     f32 lowestVertexHeight;
     void *groundTriangle;
     groundTriangle = (((struct ActorSurfaceHeightView *) ((s8 *) actor))->unk_14);
-    lowerPairHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
-    previousVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
+    lowerPairHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->cur))->unk4);
+    previousVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->prev))->unk4);
     if (!(lowerPairHeight <= previousVertexHeight)) {
         lowerPairHeight = previousVertexHeight;
     }
-    lowestVertexHeight = (((struct func_802077F4_S2 *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
+    lowestVertexHeight = (((struct PaddedFloatView *) ((s8 *) ((struct Node75 *) ((s8 *) groundTriangle))->next))->unk4);
     if (!(lowestVertexHeight <= lowerPairHeight)) {
         lowestVertexHeight = lowerPairHeight;
     }

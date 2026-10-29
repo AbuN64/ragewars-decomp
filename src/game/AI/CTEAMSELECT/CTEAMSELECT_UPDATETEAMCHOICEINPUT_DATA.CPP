@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802191B8_C7FB8_us_rev1.c */
+/* ROM-grounded data: src/g_teamWheelPlayerShieldDuration_StorageWords_CteamselectUpdateteamchoiceinputData.c */
 const unsigned int g_teamWheelPlayerShieldDuration_StorageWords[1] = {
     0x40000000,
 };

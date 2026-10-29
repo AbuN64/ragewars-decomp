@@ -1,6 +1,6 @@
 #ifndef DATA_OVLDAT9_FRONTEND_DISPATCHPAKPROFILEEVENT_DATA_H
 #define DATA_OVLDAT9_FRONTEND_DISPATCHPAKPROFILEEVENT_DATA_H
-extern char g_packedCodeAddress24_0042F988[];
-extern char g_packedCodeAddress24_0042FAFC[];
-extern char g_packedCodeAddress24_00435BA4[];
+extern char g_Frontend_UpdatePakScreenExitPackedAddress242[];
+extern char g_Frontend_UpdatePakScreenPanelsPackedAddress242[];
+extern char g_Frontend_ReturnProfileEventZeroPackedAddress242[];
 #endif

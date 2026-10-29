@@ -76,7 +76,7 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera) {
     camera->pixelYScale = unitValue;
     camera->farPlane = (f32) 1024.0f;
     camera->unk52C = (f32) 1024.0f;
-    camera->unk530 = (f32) 47.5f;
+    camera->verticalFieldOfView = (f32) 47.5f;
     camera->unk534 = (f32) 47.5f;
     Gsky_ResetFadeState(camera);
     transformDefaults = ((void *)&((GameplayCamera *)camera)->padA0);
@@ -226,7 +226,7 @@ void Pools_InitializeGameplayCamera(GameplayCamera *camera);
 extern void Camera_UpdateViewProjectionAndEffects(void *);
 
 /* Updates each of the group's items (count at 0x8, 0xED8-byte records from the address at 0x4) through
-   the block at 0x570 of each, then the group's own block at 0x5B0, all with func_8044A7D0_de. */
+   the block at 0x570 of each, then the group's own block at 0x5B0, all with Pool_InitEntryPool_SkyPosttargetedscreenmessage. */
 
 
 extern void Pool_InitEntryPool(char *);

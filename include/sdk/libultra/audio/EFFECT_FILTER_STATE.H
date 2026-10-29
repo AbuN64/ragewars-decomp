@@ -2,7 +2,7 @@
 #define sdk_libultra_audio_save_3_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct ALFxCode802BAC64 {
+struct EffectFilterState {
     ALFilter_s14 filter;
     s16 *base;
     s16 *input;

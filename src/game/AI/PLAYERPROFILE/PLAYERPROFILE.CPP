@@ -18,7 +18,7 @@ void Player_SetProfileValue14(void *profileStorage, unsigned char value);
 void Player_SetProfileValue15(void *object, unsigned char value);
 void Player_SetProfileValue16(void *object, unsigned char value);
 void Player_SetProfileProgress(void *profileStorage, int progress);
-void Player_SetProfileSlotValue(ObjCode8022E938 *obj, int index, char value);
+void Player_SetProfileSlotValue(PlayerProfileStorage *obj, int index, char value);
 void Player_SetAchievementFlag7(Profile *record, s32 achievementIndex);
 void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex);
 
@@ -53,13 +53,13 @@ void Player_InitializeProfile(void *profileStorage) {
     Player_SetProfileSlotValue(object, 0x12, 2);
     object[0x17] = 0;
     object[0xF] = 0;
-    ((ObjCode8022E938 *)object)->totals[2] = 0;
-    ((ObjCode8022E938 *)object)->totals[0] = 0;
-    ((ObjCode8022E938 *)object)->totals[1] = 0;
+    ((PlayerProfileStorage *)object)->totals[2] = 0;
+    ((PlayerProfileStorage *)object)->totals[0] = 0;
+    ((PlayerProfileStorage *)object)->totals[1] = 0;
     object[0x25] = 0;
-    ((ObjCode8022E938 *)object)->state = 0;
+    ((PlayerProfileStorage *)object)->state = 0;
     object[0xC] = 0;
-    ((ObjCode8022E938 *)object)->fieldD = -1;
+    ((PlayerProfileStorage *)object)->fieldD = -1;
     XPlus_FillMemory((s32)((char *)object + 0x26), 0, 0x24);
     XPlus_FillMemory((s32)((char *)object + 0x7D), 0, 1);
     XPlus_FillMemory((s32)((char *)object + 0x51), 0, 3);
@@ -84,7 +84,7 @@ void Player_InitializeProfile(void *profileStorage) {
     i = 0x23;
     cursor = object + 0x8C;
     do {
-        ((ObjCode8022E938 *)object)->counters[i] = 0;
+        ((PlayerProfileStorage *)object)->counters[i] = 0;
         i--;
         cursor -= 4;
     } while (i >= 0);
@@ -134,61 +134,61 @@ void Player_InitializeProfileSlot(s32 profileSlot) {
 }
 
 void Player_SetProfileValue14(void *profileStorage, unsigned char value) {
-    ((ObjCode8022E938 *)profileStorage)->value14 = value;
+    ((PlayerProfileStorage *)profileStorage)->value14 = value;
 }
 
 /** Advance the byte at offset 0x14 by ten. */
 void Player_AddTenToProfileValue14(void *object) {
-    ((ObjCode8022E938 *)object)->value14 += 10;
+    ((PlayerProfileStorage *)object)->value14 += 10;
 }
 
 /** Read the byte at object offset 0x14. */
-unsigned char Player_GetProfileValue14(ObjCode8022E938 *profileStorage) {
+unsigned char Player_GetProfileValue14(PlayerProfileStorage *profileStorage) {
     return profileStorage->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
 void Player_SetProfileValue15(void *object, unsigned char value) {
-    ((ObjCode8022E938 *)object)->value15 = value;
+    ((PlayerProfileStorage *)object)->value15 = value;
 }
 
 int Player_AddFiftyToProfileValue15(void *player) {
-    int v = ((ObjCode8022E938 *)player)->value15 + 0x32;
-    ((ObjCode8022E938 *)player)->value15 = (unsigned char)v;
+    int v = ((PlayerProfileStorage *)player)->value15 + 0x32;
+    ((PlayerProfileStorage *)player)->value15 = (unsigned char)v;
     return v;
 }
 
-unsigned char Player_GetProfileValue15(ObjCode8022E938 *profileStorage) {
+unsigned char Player_GetProfileValue15(PlayerProfileStorage *profileStorage) {
     return profileStorage->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
 void Player_SetProfileValue16(void *object, unsigned char value) {
-    ((ObjCode8022E938 *)object)->value16 = value;
+    ((PlayerProfileStorage *)object)->value16 = value;
 }
 
 int Player_AddFiftyToProfileValue16(void *player) {
-    int v = ((ObjCode8022E938 *)player)->value16 + 0x32;
-    ((ObjCode8022E938 *)player)->value16 = (unsigned char)v;
+    int v = ((PlayerProfileStorage *)player)->value16 + 0x32;
+    ((PlayerProfileStorage *)player)->value16 = (unsigned char)v;
     return v;
 }
 
 /** Read the object byte at offset 0x16. */
-unsigned char Player_GetProfileValue16(ObjCode8022E938 *object) {
+unsigned char Player_GetProfileValue16(PlayerProfileStorage *object) {
     return object->value16;
 }
 
 void Player_SetProfileProgress(void *profileStorage, int progress) {
-    ((ObjCode8022E938 *)profileStorage)->progress = progress;
+    ((PlayerProfileStorage *)profileStorage)->progress = progress;
 }
 
 /** Advance the word at offset 0x10 by 0x500. */
 void Player_AdvanceProfileProgress(void *object) {
-    ((ObjCode8022E938 *)object)->progress += 0x500;
+    ((PlayerProfileStorage *)object)->progress += 0x500;
 }
 
 /** Return the word stored at offset 0x10. */
-unsigned int Player_GetProfileProgress(ObjCode8022E938 *object) {
+unsigned int Player_GetProfileProgress(PlayerProfileStorage *object) {
     return object->progress;
 }
 
@@ -196,7 +196,7 @@ unsigned int Player_GetProfileProgress(ObjCode8022E938 *object) {
    slots 11 and 12, and other indices are ignored. */
 
 
-void Player_SetProfileSlotValue(ObjCode8022E938 *obj, int index, char value) {
+void Player_SetProfileSlotValue(PlayerProfileStorage *obj, int index, char value) {
     if (index == 17) {
         goto is17;
     }

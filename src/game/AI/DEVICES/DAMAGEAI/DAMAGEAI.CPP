@@ -17,7 +17,7 @@
 /* Applies a hit to a damageable object: when its descriptor at 0x18 takes the hit (flag 1 for hits
    without bit 0x200, flag 2 for hits with it) it lowers the health at 0x4 by the damage, not below
    zero, turns the remaining percentage into the damage stage with the lowest threshold above it to set
-   the model and time at 0x124 and 0x128 and the stage byte, and runs func_80214178_de (kind 2 when the
+   the model and time at 0x124 and 0x128 and the stage byte, and runs Actor_RequestActorState_Damageai (kind 2 when the
    descriptor has flag 0x40, else 1) once the health reaches zero. */
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -89,7 +89,7 @@ unsigned int k_DamageaiEncodedWordsBlock1[2] = {
 /* Applies a hit to a damageable object: when its descriptor at 0x18 takes the hit (flag 1 for hits
    without bit 0x200, flag 2 for hits with it) it lowers the health at 0x4 by the damage, not below
    zero, turns the remaining percentage into the damage stage with the lowest threshold above it to set
-   the model and time at 0x124 and 0x128 and the stage byte, and runs func_80214178_de (kind 2 when the
+   the model and time at 0x124 and 0x128 and the stage byte, and runs Actor_RequestActorState_Damageai (kind 2 when the
    descriptor has flag 0x40, else 1) once the health reaches zero. */
 
 

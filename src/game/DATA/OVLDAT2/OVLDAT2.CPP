@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "TYPES.H"
-#include "DATA/OVL1_C/DATA_800CCBF4.H"
-#include "DATA/OVL1_D/DATA_800CE204.H"
-#include "DATA/OVL1_D/DATA_800CE208.H"
+#include "DATA/OVL1_C/NAVIGATION_CALLBACK_ADDRESS.H"
+#include "DATA/OVL1_D/NAV_INITVISIBLEPURSUIT.H"
+#include "DATA/OVL1_D/NAV_UPDATEVISIBLEPURSUIT_Nav4.H"
 #include "DATA/OVLDAT2/ACTOR_STATE_CALLBACK_LABELS.H"
 
 /* 000C99C4.CPP */
@@ -20,7 +20,7 @@ unsigned int g_Ovldat2EncodedWords[5] = {
 
 /* 800C87B0.CPP */
 #if defined(VERSION_US)
-u32 data_unresolved_800C870C_0C93B0[472] = {
+u32 k_Ovldat2ConstantWords[472] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x3F800000, 0x3F3504F3, 0x00000000, 0x3F3504F3, 0x3F800000, 0x00000000,
     0x00000000, 0x3F3504F3, 0x00000000, 0xBF3504F3, 0x00000000, 0x00000000,
@@ -83,10 +83,10 @@ u32 data_unresolved_800C870C_0C93B0[472] = {
     (unsigned int)addrLow_Nav_UpdatePatrolRoute, 0x00000000, 0x00000000, 0x3F800000, 0x00000005, 0x00000000,
     0x00000001, (unsigned int)addrLow_Nav_ResetTargetFollowStateDe, (unsigned int)addrLow_Nav_UpdateTargetRouteFollow, 0x00000000, 0x00000000, 0x3F800000,
     0x00000005, 0x00000000, 0x00000002, (unsigned int)addrLow_Nav_InitRoamingWithJumps, (unsigned int)addrLow_Nav_UpdateRoamingWithJumps, 0x00000000,
-    0x00000000, 0x3F800000, 0x00000005, 0x00000000, 0x00000003, (unsigned int)D_002123DC,
+    0x00000000, 0x3F800000, 0x00000005, 0x00000000, 0x00000003, (unsigned int)addrLow_Nav_InitPursuitStrafe,
     (unsigned int)addrLow_Nav_UpdatePursuitStrafe, 0x00000000, 0x00000000, 0x3F800000, 0x00000005, 0x00000000,
-    0x00000004, (unsigned int)D_00212450, (unsigned int)addrLow_Nav_UpdateRangedCombat, 0x00000000, 0x00000000, 0x3F800000,
-    0x00000005, 0x00000000, 0x00000005, (unsigned int)D_00212524, (unsigned int)addrLow_Nav_UpdateCloseCombat, 0x00000000,
+    0x00000004, (unsigned int)addrLow_Nav_InitRangedCombat, (unsigned int)addrLow_Nav_UpdateRangedCombat, 0x00000000, 0x00000000, 0x3F800000,
+    0x00000005, 0x00000000, 0x00000005, (unsigned int)addrLow_Nav_InitCloseCombat, (unsigned int)addrLow_Nav_UpdateCloseCombat, 0x00000000,
     0x00000000, 0x3F800000, 0x00000005, 0x00000000, 0x00000006, (unsigned int)addrLow_Nav_InitCombatTargetApproach,
     (unsigned int)addrLow_Nav_ApproachCombatTargetAlongRoute, 0x00000000, 0x00000000, 0x3F800000, 0x00000005, 0x00000000,
     0x00000007, (unsigned int)addrLow_Nav_InitRetreatMovement, (unsigned int)addrLow_Nav_UpdateRetreatMovement, 0x00000000, 0x00000000, 0x3F800000,
@@ -97,7 +97,7 @@ u32 data_unresolved_800C870C_0C93B0[472] = {
     0x00000005, 0x00000000, 0x0000000B, (unsigned int)addrLow_Nav_InitTimedJumpRoute, (unsigned int)addrLow_Nav_UpdateTransientJumpRoute, 0x00000000,
     0x00000000, 0x3F800000, 0x00000005, 0x00000000, 0x0000000C, (unsigned int)addrLow_Nav_InitNearbyUnrestrictedGoal,
     (unsigned int)addrLow_Nav_SeekNearbyUnrestrictedGoal, 0x00000000, 0x00000000, 0x3F800000, 0x00000005, 0x00000000,
-    0x0000000D, (unsigned int)D_002125F0, (unsigned int)addrLow_Nav_UpdateVisiblePursuit, 0x00000000, 0x00000000, 0x3F800000,
+    0x0000000D, (unsigned int)addrLow_Nav_InitVisiblePursuit, (unsigned int)addrLow_Nav_UpdateVisiblePursuit, 0x00000000, 0x00000000, 0x3F800000,
     0x00000005, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };

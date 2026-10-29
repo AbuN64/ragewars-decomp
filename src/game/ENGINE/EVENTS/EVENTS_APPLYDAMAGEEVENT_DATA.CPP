@@ -7,7 +7,7 @@ const unsigned int k_eventsApplydamageeventDataFloatConstantWords[16] = {
 };
 
 /* 800C9510.CPP */
-/* ROM-grounded data: src/rw_pool_802672D0_CA110_us_rev1.c */
+/* ROM-grounded data: src/k_EventsApplydamageeventOneWords_EventsApplydamageeventData.c */
 const unsigned int k_EventsApplydamageeventOneWords[1] = {
     0x3F800000,
 };

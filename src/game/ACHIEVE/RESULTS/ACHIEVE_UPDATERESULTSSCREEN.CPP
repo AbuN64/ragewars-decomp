@@ -32,9 +32,9 @@
    calls Achieve_AdvanceResultModelPreview; otherwise it advances the menu with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition and,
    once Frontend_GetMenuImageState reports 2, acts on the choice at 0x1C: choice 0 calls MarkMenuEventHandled, clears
    g_resultReplayPending and g_resultExitPending and leaves through SmXlate_SwitchScreen for screen 0xA unless g_campaignCompletionMenuEnabled is 1
-   and g_selectedLevelId is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
-   and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
-   objects at g_frontendScreenStatus and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the
+   and g_selectedLevelId is at least 35, in which case it leaves for screen 7 when option g_gameControllerMode is 1
+   and screen 3 otherwise; choice 1 calls Frontend_RequestScreenMode_AchieveUpdateresultsscreen(0), shows the window argument, stops the
+   objects at g_frontendScreenStatus and 0x48 before it, releases g_world_AchieveUpdateresultsscreen through Scene_LoadLevelResources and sets the
    word at 0x17F0 of g_frontendScreenStatus to 8. Returns zero. Adapted from Frontend_UpdateMatchResultsTransition with the option cases written in the order that reproduces the
    cartridge's decision tree. */
 
@@ -62,7 +62,7 @@ extern void Widget_SetWidgetFlag08(void *, s32);
 
 
 /* Runs the screen g_resultsModelPreviewScreen each frame until stage 1 of g_selectionMessageStage: on its first frame it marks
-   the word at 0x90, passes 0x272 to Menu_SetFocusedElement, or 0x273 when func_8040EBD0_de
+   the word at 0x90, passes 0x272 to Menu_SetFocusedElement, or 0x273 when Widget_ListHasFlag100_AchieveUpdateresultsscreen
    reports zero for item 0x273 of the window argument, also 0x272 when g_campaignCompletionMenuEnabled is clear, and calls Tsmos_ActivateControllerState; then, once the
    reply pair ending at D_80154024 is marked, it clears the mark and either hides the item at 0x24,
    clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the reply,

@@ -8,7 +8,7 @@ extern char addrLow_Weaponai_SelectReleasedFireState_de_eu[];
 extern char addrLow_Weaponai_UpdateHeldFire_de[];
 extern char addrLow_Weapon_InitializeChargeForWeaponFive_de[];
 extern char addrLow_Weapon_ResetControllerAndSpin[];
-extern char D_00232C68[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4[];
 extern char addrLow_Weapon_InitializeChargeForWeaponEight_de[];
 extern char addrLow_Weapon_UpdateTriggerReleaseState_de[];
 extern char addrLow_Weapon_ReleaseHandlesAndExitState39_de[];
@@ -21,7 +21,7 @@ unsigned int g_weaponSwitchStateWordsDe[187] = {
     0x00000000, 0x00000000, 0xC0400000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, (unsigned int)addrLow_Weaponai_InitializeSwitchForSingleRound_de, (unsigned int)addrLow_Weapon_ResetControllerAndSpin, 0x00000000, 0x00004E20,
     0x3F800000, 0x00000000, 0x00000000, 0x00000001, (unsigned int)addrLow_Weapon_ReleaseHandlesAndExitState39_de, (unsigned int)addrLow_Weapon_UpdateIdleWeaponSelection_de, 0x00000000, 0x00004E2A,
-    0x3F800000, 0x00000002, 0x00000000, 0x00000002, (unsigned int)D_00232C68, (unsigned int)addrLow_Weaponai_UpdateAlternateFire_de, 0x00000000, 0x00004E84,
+    0x3F800000, 0x00000002, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4, (unsigned int)addrLow_Weaponai_UpdateAlternateFire_de, 0x00000000, 0x00004E84,
     0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)addrLow_Weaponai_UpdateAlternateFire_de, 0x00000000, 0x00004E8E,
     0x3F800000, 0x00000000, 0x00000000, 0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeForWeaponEight_de, (unsigned int)addrLow_Weapon_UpdateTriggerReleaseState_de, 0x00000000, 0x800CA004,
     0x3F800000, 0x00000003, 0x00000000, 0x00000008, (unsigned int)addrLow_Weapon_InitializeChargeForWeaponFive_de, (unsigned int)addrLow_Weaponai_UpdateHeldFire_de, 0x00000000, 0x800CA018,

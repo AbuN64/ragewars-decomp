@@ -15,10 +15,10 @@ struct MenuFadeWidget;
 struct MenuResourceWidget;
 extern OptionsCommitContext *g_optionsPage;
 /* Per-language label pointer tables, indexed by the settings language byte (0x581). */
-extern u8 *D_800E1C14[];
-extern u8 *D_800D2134[];
-extern u8 *D_800D2138[];
-extern u8 *D_800D213C[];
+extern u8 *g_optionsFirstChoiceLabels[];
+extern u8 *g_optionsResolutionFirstChoiceLabels[];
+extern u8 *g_optionsResolutionSecondChoiceLabels[];
+extern u8 *g_optionsResolutionThirdChoiceLabels[];
 extern u8 *g_optionsLocalizedShortcutText[];
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_GetMemorySize(void);
@@ -46,7 +46,7 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
     firstList = SmpButton_CreateListWidget(0x53, 0x54);
     settings = &g_gameSettings;
     g_optionsPage->bloodModeList = firstList;
-    SmpButton_AppendListText(firstList, D_800E1C14[settings->language]);
+    SmpButton_AppendListText(firstList, g_optionsFirstChoiceLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_optionsPage->bloodModeList, settings->bloodMode);
@@ -57,10 +57,10 @@ s32 Menu_CreateLocalizedSettingsPage(void *node) {
     SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
     thirdList = SmpButton_CreateListWidget(0x58, 0x59);
     g_optionsPage->resolutionList = thirdList;
-    SmpButton_AppendListText(thirdList, D_800D2134[settings->language]);
+    SmpButton_AppendListText(thirdList, g_optionsResolutionFirstChoiceLabels[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D2138[settings->language]);
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D213C[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionSecondChoiceLabels[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionThirdChoiceLabels[settings->language]);
     }
     SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(0x5A, 0x5B, 0x80);
@@ -110,7 +110,7 @@ unsigned char g_MenuCreatelocalizedsettingspageTrailingBytes[4] = { 0xD3, 0x1F, 
 /* 80408CB0_24.CPP */
 #if defined(VERSION_EU)
 #include "COMMON/REQUESTRECAT10.H"
-extern struct CourseOptionsScreen *D_800E39C0;
+extern struct CourseOptionsScreen *g_courseOptionsScreen;
 extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
@@ -120,9 +120,9 @@ extern void Tsmos_ActivateControllerState(void);
 s32 Menu_CreateEuJoinOptions(void *handle) {
     MenuWidget *widget;
     s32 i;
-    D_800E39C0 = Cache_AllocateMemory(0x20);
-    D_800E39C0->handle = handle;
-    D_800E39C0->mode = SmpOverlay_CreateOverlayNode(handle, 4);
+    g_courseOptionsScreen = Cache_AllocateMemory(0x20);
+    g_courseOptionsScreen->handle = handle;
+    g_courseOptionsScreen->mode = SmpOverlay_CreateOverlayNode(handle, 4);
     SmpOverlay_ShowSlotById(handle, 0, 0x389);
     SmpOverlay_ShowSlotById(handle, 1, 0x389);
     SmpOverlay_ShowSlotById(handle, 2, 0x389);
@@ -132,18 +132,18 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Widget_SetWidgetFlag08(widget, 0);
     }
-    D_800E39C0->timer = 0;
-    D_800E39C0->selection = 0;
-    D_800E39C0->rows[0] = Node_FindWidgetByResourceId(handle, 0x38C);
-    D_800E39C0->rows[1] = Node_FindWidgetByResourceId(handle, 0x395);
-    D_800E39C0->rows[2] = Node_FindWidgetByResourceId(handle, 0x396);
-    D_800E39C0->step = Join_CountUsedSlots();
+    g_courseOptionsScreen->timer = 0;
+    g_courseOptionsScreen->selection = 0;
+    g_courseOptionsScreen->rows[0] = Node_FindWidgetByResourceId(handle, 0x38C);
+    g_courseOptionsScreen->rows[1] = Node_FindWidgetByResourceId(handle, 0x395);
+    g_courseOptionsScreen->rows[2] = Node_FindWidgetByResourceId(handle, 0x396);
+    g_courseOptionsScreen->step = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[i], 0x392), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[i], 0x392), 0);
     }
     Tsmos_ActivateControllerState();
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392), 1);
     return 0;
 }
 #endif

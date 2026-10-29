@@ -18,7 +18,7 @@ struct MatchMenuApplySlotValueGfx {
 };
 struct PlayerLoadoutSelectionView {
     char pad[0x5D8];
-    struct InfoCode80423280 *info;
+    struct PlayerLoadoutInfo *info;
     char pad5DC[0x26];
     struct {
         unsigned char flag;

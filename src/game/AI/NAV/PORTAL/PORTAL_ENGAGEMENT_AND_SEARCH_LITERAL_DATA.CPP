@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800C6E24.CPP */
-/* ROM-grounded data: src/rw_pool_8020AA0C_C7A24_us_rev1.c */
+/* ROM-grounded data: src/Portal_GetEngagementDistanceConstantWords.c */
 const unsigned int g_Portal_GetEngagementDistanceConstantWords[2] = {
     0x3F800000, 0x3F060A93,
 };

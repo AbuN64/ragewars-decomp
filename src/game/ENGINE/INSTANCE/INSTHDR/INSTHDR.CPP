@@ -14,7 +14,7 @@
 #include "FX/GRAPHU64_NORMALIZEVEC3.H"
 
 /* Returns a player's body lean on the ground: a controlled player on an accepted floor (Region_TestPolygonSlopeFlag) that
- * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by
+ * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from Region_GetNodeNormal_Insthdr by
  * three eighths of its slope (at most 25 degrees), which the body tilt from Gobjinst_BuildActorDirectionTilt then replaces,
  * and leans along its heading by three quarters of the ground slope ahead from CPlane_GetSlopeAngle (at most 25),
  * blending lean and tilt halfway through Graphu64_InterpolateQuaternionWithLinearFallback; other players take Gobjinst_BuildActorDirectionTilt's tilt, and

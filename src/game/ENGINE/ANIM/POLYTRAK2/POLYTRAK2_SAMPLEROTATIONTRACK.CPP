@@ -68,8 +68,8 @@ void Polytrak2_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *o
             if (unsignedFloat(span,&g_rotationTrackFirstSpanTestBias)*rate <= 0.0f) {
             first = (s32)(unsignedFloat(span,&g_rotationTrackFirstSpanIndexBias)*rate);
         } else {
-            f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4050_de)*rate);
-            f32 value = unsignedFloat(span,&D_800C4058_de)*rate;
+            f32 integer = (f32)(s32)(unsignedFloat(span,&g_rotationTrackFirstWrappedIntegerSpanBias)*rate);
+            f32 value = unsignedFloat(span,&g_rotationTrackFirstWrappedValueSpanBias)*rate;
             first = (integer != value);
             first += (s32)(unsignedFloat(span,&g_rotationTrackFirstWrappedSpanBias)*rate);
         }
@@ -79,8 +79,8 @@ void Polytrak2_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *o
             if (unsignedFloat(span,&g_rotationTrackSecondSpanTestBias)*rate <= 0.0f) {
             second = (s32)(unsignedFloat(span,&g_rotationTrackSecondSpanIndexBias)*rate);
         } else {
-            f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4078_de)*rate);
-            f32 value = unsignedFloat(span,&D_800C4080_de)*rate;
+            f32 integer = (f32)(s32)(unsignedFloat(span,&g_rotationTrackSecondWrappedIntegerSpanBias)*rate);
+            f32 value = unsignedFloat(span,&g_rotationTrackSecondWrappedValueSpanBias)*rate;
             second = (integer != value);
             second += (s32)(unsignedFloat(span,&g_rotationTrackSecondWrappedSpanBias)*rate);
         }
@@ -126,7 +126,7 @@ void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern 
         u8 *table = (u8 *)SetN64_GetPackSection((s32 *)root, 2);
         s32 offset = index * *(s32 *)table + 8;
         s16 *entry = (s16 *)(table + offset);
-        f32 scale = D_800C4094_de;
+        f32 scale = g_rotationTrackQuantizedComponentScale;
 
         out->x = entry[6] * scale;
         out->y = entry[7] * scale;
@@ -148,8 +148,8 @@ void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern 
             if (length - g_rotationTrackFirstFrameEndBias <= (f32)first) {
                 if ((unsignedFloat(anim->span,&g_rotationTrackFirstEndSpanTestBias)*rate) <= 0.0f) first = (s32)(unsignedFloat(anim->span,&g_rotationTrackFirstEndSpanIndexBias)*rate);
                 else {
-                    f32 integer = (f32)(s32)(unsignedFloat(anim->span,&D_800C40B0_de)*rate);
-                    f32 value = unsignedFloat(anim->span,&D_800C40B8_de)*rate;
+                    f32 integer = (f32)(s32)(unsignedFloat(anim->span,&g_rotationTrackFirstEndWrappedIntegerSpanBias)*rate);
+                    f32 value = unsignedFloat(anim->span,&g_rotationTrackFirstEndWrappedValueSpanBias)*rate;
                     first = (integer != value);
                     first += (s32)(unsignedFloat(anim->span,&g_rotationTrackFirstEndWrappedSpanBias)*rate);
                 }
@@ -158,8 +158,8 @@ void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern 
             if (length - g_rotationTrackSecondFrameEndBias <= (f32)second) {
                 if ((unsignedFloat(anim->span,&g_rotationTrackSecondEndSpanTestBias)*rate) <= 0.0f) second = (s32)(unsignedFloat(anim->span,&g_rotationTrackSecondEndSpanIndexBias)*rate);
                 else {
-                    f32 integer = (f32)(s32)(unsignedFloat(anim->span,&D_800C40E0_de)*rate);
-                    f32 value = unsignedFloat(anim->span,&D_800C40E8_de)*rate;
+                    f32 integer = (f32)(s32)(unsignedFloat(anim->span,&g_rotationTrackSecondEndWrappedIntegerSpanBias)*rate);
+                    f32 value = unsignedFloat(anim->span,&g_rotationTrackSecondEndWrappedValueSpanBias)*rate;
                     second = (integer != value);
                     second += (s32)(unsignedFloat(anim->span,&g_rotationTrackSecondEndWrappedSpanBias)*rate);
                 }
@@ -169,8 +169,8 @@ void Polytrak2_SampleRotationTrack(AnimRef *anim, s32 index, f32 time, CQuatern 
     }
 }
 
-void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count) {
-    Decode8025EF54 decode;
+void Polytrak2_DecodeScalarSamples(u32 *stream, ScalarSampleOutput *out, s32 count) {
+    ScalarSampleDecodeState decode;
     f32 first;
     f32 second;
     s32 i;

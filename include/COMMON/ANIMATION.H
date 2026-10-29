@@ -49,9 +49,9 @@ struct MenuFadeWidget {
 struct Animation;
 typedef struct Animation Animation;
 
-struct ObjectCode804196C0;
+struct FlickerStartView;
 struct ResourceSmpFlickerCreateFlickerWidget;
-struct ObjectCode804196C0 {
+struct FlickerStartView {
     char pad0[0x44];
     s32 busy;
     char pad48[0x4C - 0x48];

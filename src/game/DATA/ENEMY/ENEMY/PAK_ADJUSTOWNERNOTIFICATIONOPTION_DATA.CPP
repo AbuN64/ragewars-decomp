@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D0EBC.CPP */
+/* g_enemyMixWordsAndLights_PakAdjustownernotificationoptionData.CPP */
 #if defined(VERSION_US_REV1)
 /* Nine words, then the ambient light, the diffuse light and its direction as bytes (read bytewise by the RSP). */
 struct {
@@ -19,7 +19,7 @@ unsigned int g_pakAdjustownernotificationoptionDataZeroWords[1] = {
 };
 #endif
 
-/* DATA_800D1CD8.CPP */
+/* g_pakAdjustownernotificationoptionDataConstantWords_PakAdjustownernotificationoptionData.CPP */
 #if defined(VERSION_US)
 /* bytes live in the preceding array */
 #endif

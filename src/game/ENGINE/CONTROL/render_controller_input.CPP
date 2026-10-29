@@ -95,7 +95,7 @@ void Control_ReadControllerStates(void) {
  * otherwise closes it through osContStartReadData; states 1 to 3 reset to 0 and close it), then releases the
  * lock. */
 
-extern u8 D_800CBC10;
+extern u8 g_controllerInputReady;
 extern char g_controllerRumblePool;
 
 
@@ -107,7 +107,7 @@ void Control_PollControllerPaks(void) {
     s32 locked;
     s32 i;
 
-    if (D_800CBC10 != 0) {
+    if (g_controllerInputReady != 0) {
         Rumble_RecycleFinishedEffectNodes(&g_controllerRumblePool);
         if ((locked = osRecvMesg(&g_controllerReadMessageQueue, 0, 0) == 0)) {
             g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);

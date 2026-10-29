@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 
-/* Returns whether a player actor can use the item picked up through InstHdr_GetActorType: never for non-players or disabled actors, always during a team round when the model says so, and otherwise by the item's table: a g_pickupPowerupDefinitions power-up when the actor's team matches a g_playerSpecialModelIds entry or its slot is free while not both states 3 and 7 are in use, a g_pickupWeaponDefinitions weapon when on those teams or below the level from func_8022ACB8_de, a g_pickupHealthDefinitions item when func_8022AC00_de exceeds the actor's count at 0x5E4, any g_pickupAmmoDefinitions item, and a g_pickupSpecialDefinitions item unless it is item 0xBD6. */
+/* Returns whether a player actor can use the item picked up through InstHdr_GetActorType: never for non-players or disabled actors, always during a team round when the model says so, and otherwise by the item's table: a g_pickupPowerupDefinitions power-up when the actor's team matches a g_playerSpecialModelIds entry or its slot is free while not both states 3 and 7 are in use, a g_pickupWeaponDefinitions weapon when on those teams or below the level from Player_GetAmmoCapacity_PickupCancollect, a g_pickupHealthDefinitions item when Player_GetMaxHealth_Player exceeds the actor's count at 0x5E4, any g_pickupAmmoDefinitions item, and a g_pickupSpecialDefinitions item unless it is item 0xBD6. */
 extern s32 InstHdr_GetActorType(s32 prop);
 extern s32 Player_GetAmmoCapacity(ActorPickupCanCollect *actor, s16 index, s32 capacityMode);
 extern s32 Player_GetMaxHealth(ActorPickupCanCollect *actor, s32 id);

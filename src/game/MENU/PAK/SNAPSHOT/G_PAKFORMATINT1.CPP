@@ -8,7 +8,7 @@ const unsigned int k_GPakformatint1EncodedWords[1] = {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int rodata_shared_800ED3FC[1] = {
+const unsigned int g_pakChannelNumberFormat_GPakformatint1[1] = {
     0x25316400,
 };
 #endif
@@ -25,7 +25,7 @@ const char s_snapshotThreePartNumberFormat[14] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80408118_E19A8_us_rev1.c */
+/* ROM-grounded data: src/s_pakThreeSpacesText.c */
 const unsigned char k_GPakformatint1EncodedBytes[4] = {
     0x20, 0x20, 0x20, 0x00,
 };

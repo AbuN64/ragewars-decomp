@@ -33,7 +33,7 @@ struct Chunk;
 extern int g_audioCommandBufferIndex;
 
 
-extern int D_800CB714;
+extern int g_audioCacheEntryAllocCount;
 
 struct CartridgeReadRequest;
 
@@ -115,7 +115,7 @@ typedef struct CartridgeReadWorker CartridgeReadWorker;
 
 extern Window *g_audioDmaUsedWindowHead[];
 extern u32 g_audioTaskFrameIndex;
-extern u32 D_800CB704_de;
+extern u32 g_audioDmaPendingReadCount;
 
 
 struct AudioDmaState;

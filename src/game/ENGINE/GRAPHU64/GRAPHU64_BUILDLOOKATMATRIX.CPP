@@ -26,7 +26,7 @@ extern f32 g_boundedIntegrationAndEaseConstants[2];
 
 
 
-/* Returns the normalised cross product of a path node's two edge vectors, cached in g_cachedSurfaceNormal for the last node seen, with a default up vector for a null node. Adapted from Region_GetCachedCeilingNormal, which it inlines to compute the raw cross product, with the result normalised through func_8027207C_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
+/* Returns the normalised cross product of a path node's two edge vectors, cached in g_cachedSurfaceNormal for the last node seen, with a default up vector for a null node. Adapted from Region_GetCachedCeilingNormal, which it inlines to compute the raw cross product, with the result normalised through Graphu64_NormalizeVector_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
 
 
 

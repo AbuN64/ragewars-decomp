@@ -7,9 +7,9 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The EU builds pick the text for the current menu language. */
-#define LINES_TEXT D_800E0B34[g_languageIndex]
+#define LINES_TEXT g_introTextLinesByLanguage[g_languageIndex]
 #else
-#define LINES_TEXT D_800D3038
+#define LINES_TEXT g_introTextLines
 #endif
 void SetN64_DrawCenteredIntroText(void *state) {
     SetN64_DrawTextLines(state, 1, LINES_TEXT, g_hudReferenceViewportWidth / 2, 5, 0xA, 0.75f, 1.0f);

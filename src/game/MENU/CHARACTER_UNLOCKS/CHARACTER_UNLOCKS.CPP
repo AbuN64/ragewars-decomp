@@ -54,7 +54,7 @@ extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 /* Cycles player p's choice on the screen g_characterSelectionMenu: dims the item for the current choice at 0x18
    of p's 0x4C8-byte entry (from p's 36-byte layout row g_characterSelectionMenuEntries, cells from 0xC) to alpha 0x50
-   through func_8040E928_de(0), advances the choice modulo the count byte (at least one) found at
+   through Widget_SetWidgetFlag40_EquipActivateequipmentpanel(0), advances the choice modulo the count byte (at least one) found at
    0x57 plus the index Key_GetCharacterPreviewModel gives for the entry's word at 0x10 in p's 400-byte record of
    g_localPlayerProfiles, highlights the new choice's item with alpha 0x96 and stores it. Written from the
    assembly with the entries as an array member of the screen. */
@@ -73,7 +73,7 @@ extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 
 /* Activates player p's panel on the screen g_characterSelectionMenu: passes p and the frame item id from p's
-   36-byte layout row g_characterSelectionMenuEntries to func_8041B6E8_de, takes the row's cursor item into the word at 0x8
+   36-byte layout row g_characterSelectionMenuEntries to SmpOverlay_ShowSlotById_CharacterUnlocks, takes the row's cursor item into the word at 0x8
    of p's 0x4C8-byte entry, places it two units up and left of the frame item, shows it, sets the
    entry's state at 0x14 to one, redraws through Menu_RefreshPlayerCharacterVariants and hides the row's prompt item. */
 
@@ -89,10 +89,10 @@ extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 
 
-/* Resets player p's choice on the screen g_characterSelectionMenu: calls func_8040E8D8_de(1) on the three items in
+/* Resets player p's choice on the screen g_characterSelectionMenu: calls Widget_SetWidgetFlag08_EquipActivateequipmentpanel(1) on the three items in
    option cells from 0x18 of p's 36-byte layout row g_characterSelectionMenuEntries, dims the item of the current choice at 0x18 of
-   p's 0x4C8-byte entry to alpha 0x50 through func_8040E928_de(0) and resets the choice to 0; unless
-   the entry's kind at 0x10 is -1 it then calls func_8040E8D8_de(0) on as many of those cells as the
+   p's 0x4C8-byte entry to alpha 0x50 through Widget_SetWidgetFlag40_EquipActivateequipmentpanel(0) and resets the choice to 0; unless
+   the entry's kind at 0x10 is -1 it then calls Widget_SetWidgetFlag08_EquipActivateequipmentpanel(0) on as many of those cells as the
    count byte (at least one) at 0x57 plus the index Key_GetCharacterPreviewModel gives for the kind in p's
    400-byte record of g_localPlayerProfiles, and highlights the item of the choice with alpha 0x96. Adapted
    from Menu_CyclePlayerCharacterVariant. */
@@ -120,7 +120,7 @@ extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 
 
-extern CharacterScreenCell D_800E029E[][9];
+extern CharacterScreenCell g_characterSelectionMenuOptionCells[][9];
 
 extern unsigned char g_profileCharacterSelections[];
 
@@ -166,7 +166,7 @@ s32 Menu_RenderPlayerCharacterPreviews(void *unusedObject, void *unusedContext, 
         for (i = 0; i < 4; i++) {
             if (g_characterSelectionMenu->players[i].unkC == 1 || g_characterSelectionMenu->players[i].unkC == 3) {
                 if (g_characterSelectionMenu->players[i].kind != -1) {
-                    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].left, g_menuPlayerScissorRects[i].top, g_menuPlayerScissorRects[i].right, g_menuPlayerScissorRects[i].bottom);
+                    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, g_menuPlayerScissorRects[i].first, g_menuPlayerScissorRects[i].second, g_menuPlayerScissorRects[i].third, g_menuPlayerScissorRects[i].fourth);
                     if (g_characterSelectionMenu->players[i].unk4C0 > 0) {
                         g_menuModelFillColor[0] = 150.0f;
                         g_menuModelFillColor[1] = 0.0f;
@@ -317,7 +317,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     SmpOverlay_SetSlotValue(g_characterSelectionMenu->unk4, player, 1);
     g_characterSelectionMenu->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, D_800E029E[player][i].id), 1);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_characterSelectionMenu->screen, g_characterSelectionMenuOptionCells[player][i].id), 1);
     }
     g_characterSelectionMenu->players[player].kind = choice;
     Key_FindCharacterPreviewRow(choice);

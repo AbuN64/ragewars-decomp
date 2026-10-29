@@ -1,4 +1,4 @@
-#include "DATA/OVL1_D/DATA_800CE354.H"
+#include "DATA/OVL1_D/WEAPON_CHARGE_FIVE_CALLBACK_ADDRESS.H"
 
 #if defined(VERSION_US_REV1)
 unsigned int g_weaponControllerAndMovementTuningUsRev1[14] = {

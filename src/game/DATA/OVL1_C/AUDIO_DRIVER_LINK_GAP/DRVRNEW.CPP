@@ -12,7 +12,7 @@ const unsigned int g_alFxNewConstantWords_us_rev1[6] = {
     0x41F00000, 0x00000000, 0x36C1D168, 0x3F800000, 0x3F100000, 0x00000000,
 };
 
-/* ROM-grounded data: src/rw_pool_802B450C_CD430_us_rev1.c */
+/* ROM-grounded data: src/k_alResampleNewConstantOne_us_rev1.c */
 const unsigned int g_alResampleNewConstantWords[1] = {
     0x3F800000,
 };

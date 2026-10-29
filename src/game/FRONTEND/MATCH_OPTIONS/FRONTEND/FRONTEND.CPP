@@ -44,7 +44,7 @@ s32 Frontend_ClearLoadingHints(void) {
 }
 #endif
 
-/* DATA_800DC718.CPP */
+/* k_FrontendEncodedWordsBlock2_Frontend.CPP */
 #if defined(VERSION_US)
 unsigned int k_FrontendEncodedWordsBlock2[9] = {
     0x5F335400, 0x00040000, 0x3C9374BC, 0x40A00000, 0x41500000, 0xC2480000, 0x3D23D70A, 0x41880000,

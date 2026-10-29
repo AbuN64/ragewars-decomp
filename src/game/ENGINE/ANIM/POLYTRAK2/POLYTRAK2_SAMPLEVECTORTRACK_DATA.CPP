@@ -11,7 +11,7 @@ const unsigned int k_Polytrak2SamplevectortrackEncodedWords[21] = {
 
 /* 8025E5B0_10.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const f32 data_func_8025E5B0_de_800C3F70[21] = {
+const f32 g_rotationTrackFirstSpanTestBias_StorageWords_Polytrak2SamplevectortrackData[21] = {
     30.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f,
     30.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f,
     30.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f,

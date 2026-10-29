@@ -338,7 +338,7 @@ halt:
 }
 
 /* 802106E0_13.CPP */
-/* Runs a computer player's chase state: refreshes its view through Nav_RunBehaviorHandler and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Wheel_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through Portal_DispatchActorBehavior; losing sight of the target or failing to re-route to the target's new node through Route_GetRouteRelation also returns it to roaming. */
+/* Runs a computer player's chase state: refreshes its view through Nav_RunBehaviorHandler and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through Nav_CheckTarget_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through Nav_RollRandom_de when its timer runs out, steers at the target through Nav_SteerAtTarget_de and strafes left or right at 0.4 of its speed while Wheel_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through Portal_DispatchActorBehavior; losing sight of the target or failing to re-route to the target's new node through Route_GetRouteRelation also returns it to roaming. */
 
 
 void Nav_UpdateVisiblePursuit(Self *actor) {

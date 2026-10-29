@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802BA910_CD820_us_rev1.c */
+/* ROM-grounded data: src/g_videoScaleUnsignedBias_StorageWords_VideoScaleUnsignedBiasData.c */
 const unsigned int g_videoScaleUnsignedBias_StorageWords[3] = {
     0x41F00000, 0x00000000, 0x4F000000,
 };

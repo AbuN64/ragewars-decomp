@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_F_OVERLAY_ONE_F_LINK_RECORD_ROM_LINK_TARGET_H
+#define DATA_OVL1_F_OVERLAY_ONE_F_LINK_RECORD_ROM_LINK_TARGET_H
+extern char addrLow_Weapon_UpdateSpecialFireAndAmmo[];
+#endif

@@ -283,7 +283,7 @@ typedef struct SceneTriggerDefinition {
 /* Fires the movement triggers an actor crosses between two positions. Only kinds 0xB and 1 trip triggers. Kind 6
  * triggers are rings (enter when moving inside enterRadius from outside it, exit when moving outside exitRadius
  * from inside it); kinds 10 and 7 fire their enter event inside their radius while the two actors overlap in height,
- * and a kind 10 trigger first asks func_80204308_de. Distances are measured in the xz plane. */
+ * and a kind 10 trigger first asks Action_ShowTriggerMessage_SceneSamplevolumelighting. Distances are measured in the xz plane. */
 void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVector3 *before, CVector3 *after) {
     s32 isKindB;
     s32 isKind1;
@@ -448,9 +448,9 @@ extern f32 g_frameElapsedTime;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *D_800D3A9C[];
+extern u8 *g_optionFlagsChangedMessageText[];
 #else
-extern u8 *D_800D3A9C;
+extern u8 *g_optionFlagsChangedMessageText;
 #endif
 extern void Track_RequestCameraRefresh(void), Track_RequestTrackByKey(s32);
 extern s32 SetN64_IsModeThirteen(void);
@@ -481,9 +481,9 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             settings = &g_frontendScreenStatus.settings;
             if (scene->previewStart != settings->optionFlags && SetN64_IsModeThirteen()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, g_optionFlagsChangedMessageText[settings->language], 4.0f);
 #else
-                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, D_800D3A9C, 4.0f);
+                Gsky_PostScaledScreenMessage(&g_frontendScreenStatus, &g_frontendScreenStatus.fallbackCamera, g_optionFlagsChangedMessageText, 4.0f);
 #endif
                 scene->previewStart = settings->optionFlags;
             }
@@ -527,9 +527,9 @@ typedef struct LevelChallenge {
     u8 reservedWord;
     u16 weapons[8];   /* 0x6: starting weapon item ids (read by the achieve loadout) */
 } LevelChallenge;
-extern ResultsCourse *D_800E4680;
+extern ResultsCourse *g_currentStagePreset;
 extern ResultsHeadingCharacter g_resultCharacterHeadings[];
-extern char g_levelNameText[], D_800C52E4_de[], g_cResource_UnpackRequestEntry[];
+extern char g_levelNameText[], g_resultsNameFormat_de[], g_cResource_UnpackRequestEntry[];
 extern char *g_characterPreviewTextReferenceShared1, *g_characterPreviewTextReferenceShared2, *g_characterPreviewTextReferenceShared3, *g_characterPreviewTextReferenceShared4, *g_characterPreviewTextReferenceShared5, *g_resultsRoundsOneFormat, *g_resultsRoundsTwoFormat,
     *g_resultsRoundsThreeFormat, *g_resultsLapsOneFormat, *g_resultsLapsTwoFormat, *g_resultsLapsThreeFormat, *g_resultsLapsFourFormat, *g_resultsLapsFiveFormat, *g_resultsGoalOneFormat,
     *g_resultsGoalTwoFormat, *g_resultsTimeLimitFormat, *g_resultsMinutesSecondsOneFormat, *g_resultsMinutesSecondsTwoFormat, *g_resultsMinutesOneFormat, *g_resultsMinutesTwoFormat, *g_resultsPlayerOrLivesOneFormat,
@@ -578,12 +578,12 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
             mode = 0x10;
             direct = 1;
             index = Cache_RequestResource(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
-                                     0, 0, D_800C5290_de, direct);
+                                     0, 0, g_sceneResourceRequestSpareDe, direct);
             if (index != 0) {
                 file = SetN64_LocatePackSection((s32)*index, world->challengeFile, level, &size);
                 Cache_ReleaseResource(0, index);
                 if ((world->resourceHandle =
-                         Cache_RequestResource(0, file, file, size, mode, 0, g_cResource_UnpackRequestEntry, D_800C52BC, direct)) == 0) {
+                         Cache_RequestResource(0, file, file, size, mode, 0, g_cResource_UnpackRequestEntry, g_sceneUnpackRequestSpare, direct)) == 0) {
                     goto missing;
                 }
                 world->resourceKey = level;
@@ -619,27 +619,27 @@ void Scene_ShowResultsGoal(void) {
     switch (levelGoal->kind) {
     case 0:
         if (currentGame()->controllerMode == 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsThreeFormat, g_resultsRoundsThreeFormatLocalized), D_800E4680->rounds);
-        } else if (D_800E4680->rounds < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsOneFormat, g_resultsRoundsOneFormatLocalized), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsThreeFormat, g_resultsRoundsThreeFormatLocalized), g_currentStagePreset->rounds);
+        } else if (g_currentStagePreset->rounds < 2) {
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsOneFormat, g_resultsRoundsOneFormatLocalized), g_currentStagePreset->rounds);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsTwoFormat, g_resultsRoundsTwoFormatLocalized), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsRoundsTwoFormat, g_resultsRoundsTwoFormatLocalized), g_currentStagePreset->rounds);
         }
         break;
     case 1:
         if (currentGame()->controllerMode == 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsThreeFormat, g_resultsLapsThreeFormatLocalized), D_800E4680->laps);
-        } else if (D_800E4680->laps < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsOneFormat, g_resultsLapsOneFormatLocalized), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsThreeFormat, g_resultsLapsThreeFormatLocalized), g_currentStagePreset->laps);
+        } else if (g_currentStagePreset->laps < 2) {
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsOneFormat, g_resultsLapsOneFormatLocalized), g_currentStagePreset->laps);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsTwoFormat, g_resultsLapsTwoFormatLocalized), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsTwoFormat, g_resultsLapsTwoFormatLocalized), g_currentStagePreset->laps);
         }
         break;
     case 2:
-        if (D_800E4680->laps < 2) {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFourFormat, g_resultsLapsFourFormatLocalized), D_800E4680->laps);
+        if (g_currentStagePreset->laps < 2) {
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFourFormat, g_resultsLapsFourFormatLocalized), g_currentStagePreset->laps);
         } else {
-            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFiveFormat, g_resultsLapsFiveFormatLocalized), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsLapsFiveFormat, g_resultsLapsFiveFormatLocalized), g_currentStagePreset->laps);
         }
         break;
     case 3:
@@ -658,12 +658,12 @@ void Scene_ShowResultsGoal(void) {
             XStdio_FormatBuffer(goal, RESULTS_TEXT(g_resultsGoalLabelFormat, g_resultsGoalLabelFormatLocalized), RESULTS_TEXT(g_characterPreviewTextReferenceShared5, g_characterPreviewTextReferenceShared8));
             break;
         default:
-            if (D_800E4680->targetCount < 2) {
+            if (g_currentStagePreset->targetCount < 2) {
                 XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(g_resultsGoalOneFormat, g_resultsGoalOneFormatLocalized, g_resultsGoalOneFormatLocalized, g_languageIndex),
-                                 D_800E4680->targetCount);
+                                 g_currentStagePreset->targetCount);
             } else {
                 XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(g_resultsGoalTwoFormat, g_resultsGoalTwoFormatLocalized, g_resultsGoalTwoFormatLocalized, g_languageIndex),
-                                 D_800E4680->targetCount);
+                                 g_currentStagePreset->targetCount);
             }
             break;
         }
@@ -683,19 +683,19 @@ void Scene_ShowResultsGoal(void) {
         break;
     case 3:
         Cinema_AddMessage(goal);
-        if (D_800E4680->timeLimit <= 60) {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsTimeLimitFormat, g_resultsTimeLimitFormatLocalized), D_800E4680->timeLimit);
+        if (g_currentStagePreset->timeLimit <= 60) {
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsTimeLimitFormat, g_resultsTimeLimitFormatLocalized), g_currentStagePreset->timeLimit);
         } else {
-            minutes = D_800E4680->timeLimit / 60;
+            minutes = g_currentStagePreset->timeLimit / 60;
             if (minutes < 2) {
-                seconds = D_800E4680->timeLimit % 60;
+                seconds = g_currentStagePreset->timeLimit % 60;
                 if (seconds == 0) {
                     XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesOneFormat, g_resultsMinutesOneFormatLocalized), minutes);
                 } else {
                     XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesSecondsOneFormat, g_resultsMinutesSecondsOneFormatLocalized), minutes, seconds);
                 }
             } else {
-                seconds = D_800E4680->timeLimit % 60;
+                seconds = g_currentStagePreset->timeLimit % 60;
                 if (seconds == 0) {
                     XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsMinutesTwoFormat, g_resultsMinutesTwoFormatLocalized), minutes);
                 } else {
@@ -711,10 +711,10 @@ void Scene_ShowResultsGoal(void) {
         XStdio_FormatBuffer(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         Cinema_AddMessage(name);
         Cinema_AddMessage(goal);
-        if (D_800E4680->lives < 2) {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsPlayerOrLivesOneFormat, g_resultsPlayerOrLivesOneFormatLocalized), D_800E4680->lives);
+        if (g_currentStagePreset->lives < 2) {
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_resultsPlayerOrLivesOneFormat, g_resultsPlayerOrLivesOneFormatLocalized), g_currentStagePreset->lives);
         } else {
-            XStdio_FormatBuffer(name, RESULTS_TEXT(g_pakDialogTextReferenceShared1, g_resultsPlayerOrLivesTwoFormatLocalized), D_800E4680->lives);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(g_pakDialogTextReferenceShared1, g_resultsPlayerOrLivesTwoFormatLocalized), g_currentStagePreset->lives);
         }
         Cinema_AddMessage(name);
         break;

@@ -11,17 +11,17 @@
 typedef struct ParticleAttractionActorView ParticleAttractionActorView;
 struct ParticleAttractionActorView {
     char pad0[0x8];
-    CVector3 pos; /* +0x8: src/func_8027ADBC.c */
+    CVector3 pos; /* +0x8: src/Particle_UpdateTypedMotion_Ballisticparams.c */
     char pad14[0x5C];
-    f32 unk70; /* +0x70: src/func_8027ADBC.c */
+    f32 unk70; /* +0x70: src/Particle_UpdateTypedMotion_Ballisticparams.c */
     char pad74[0x166C];
-    void * next; /* +0x16E0: src/func_8027ADBC.c */
+    void * next; /* +0x16E0: src/Particle_UpdateTypedMotion_Ballisticparams.c */
 };
 
 typedef struct ParticleAttractionPositionView ParticleAttractionPositionView;
 struct ParticleAttractionPositionView {
     char pad0[0x8];
-    CVector3 pos; /* +0x8: src/func_8027ADBC.c */
+    CVector3 pos; /* +0x8: src/Particle_UpdateTypedMotion_Ballisticparams.c */
 };
 
 typedef struct BallisticParams BallisticParams;

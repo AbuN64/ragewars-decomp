@@ -24,7 +24,7 @@
 #include "GSKY/SKY.H"
 
 /* 8023A284_4.CPP */
-extern void Cache_UnlockResource(void *, Node80253610 *);
+extern void Cache_UnlockResource(void *, CacheResourceNode *);
 extern void Graphu64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
@@ -196,7 +196,7 @@ draw_face:
 /* Updates the scene's effect objects for one host: spawns an object for every enabled effect
  * descriptor bit that has none yet, then fades each active object up or down, advances its phase and
  * texture scroll, sets its depth from the host, and returns objects that have faded out to the free list. */
-typedef struct HostView8023AFF0 {
+typedef struct SkyEffectHostView {
     char pad00[0x24];
     s32 stalled;
     char pad28[0x10];
@@ -207,7 +207,7 @@ typedef struct HostView8023AFF0 {
     void *resource;
     char pad5C[0xD0];
     f32 speed;
-} HostView8023AFF0;
+} SkyEffectHostView;
 extern s32 g_skyLayerDescriptorCount;
 extern f32 g_frameElapsedTime;
 extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
@@ -225,7 +225,7 @@ static inline SkyLayerRuntimeView *allocateSceneEffect(Scene *scene) {
     return object;
 }
 
-static inline s32 updateSceneEffect(SkyLayerRuntimeView *object, HostView8023AFF0 *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
+static inline s32 updateSceneEffect(SkyLayerRuntimeView *object, SkyEffectHostView *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
     CROMSkyLayer *descriptor = object->descriptor;
     f32 value, step, depth, wrapPeriod, fadeStep;
     if (object->mask & mask) {
@@ -270,7 +270,7 @@ static inline s32 updateSceneEffect(SkyLayerRuntimeView *object, HostView8023AFF
     return 0;
 }
 
-void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
+void Sky_UpdateSceneEffects(Scene *scene, SkyEffectHostView *host) {
     CVector3 anchor;
     CVector3 probe;
     Shared_ReactionFlags *entry;

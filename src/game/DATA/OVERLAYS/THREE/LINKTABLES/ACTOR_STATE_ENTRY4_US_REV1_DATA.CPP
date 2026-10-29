@@ -1,4 +1,4 @@
-#include "DATA/OVLTBL/800CD990.H"
+#include "DATA/OVLTBL/ACTOR_STATE_ENTRY4_US_REV1_DATA.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_actor_state_entry_CE590_us_rev1.c */

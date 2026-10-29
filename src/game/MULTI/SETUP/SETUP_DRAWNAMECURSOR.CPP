@@ -7,7 +7,7 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 #if !(defined(VERSION_US))
-/* Draws a menu spinner: during the first half of its blink period (the timer of its g_multiplayerNameEntryStates entry up to the float after g_multiplayerNameEntryTimingLimits) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
+/* Draws a menu spinner: during the first half of its blink period (the timer of its g_multiplayerNameEntryStates entry up to the float after g_multiplayerNameEntryTimingLimits) it fills a two-pixel white bar under the digit its value selects, placed from the item's x at 0x14 by the character width Menu_GetWidgetStyle_EncodedDrawtextentrycursor reports scaled to the screen, with the style's alpha at 0x30 and 0x34, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
 
 
 
@@ -21,7 +21,7 @@ extern Spinner g_multiplayerNameEntryStates[];
 
 
 extern s32 Player_GetPlayerIndex(char *, s32);
-extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
+extern PaddedFloatView *Menu_GetWidgetStyle(void *, s32);
 
 extern void Menu_DrawLocalizedMenuItemText(void *, MenuLocalizedTextItemView *, void *, StyleMultiDrawNameCursor *);
 

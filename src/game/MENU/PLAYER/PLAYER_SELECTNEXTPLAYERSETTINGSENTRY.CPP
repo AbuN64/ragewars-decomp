@@ -48,11 +48,11 @@ extern s32 g_playerSettingsSlotNumberTranslations[];
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_playerSettingsEventIds, an actor kind at g_playerSettingsEventActorKinds and a handler at g_playerSettingsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80436FE4)(void *, s32, s32, s32, s32);
+typedef s32 (*PlayerSettingsEventHandler)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler80436FE4 g_playerSettingsEventHandlers;
+extern PlayerSettingsEventHandler g_playerSettingsEventHandlers;
 
 s32 Player_CancelPlayerSettingsEntry(void) {
     struct MenuStepState *state;
@@ -105,7 +105,7 @@ s32 Player_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unuse
 }
 
 s32 Player_DispatchPlayerSettingsEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
-    Handler80436FE4 *entry;
+    PlayerSettingsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

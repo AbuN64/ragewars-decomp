@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800E3AAC.CPP */
+/* g_overlayOneIPreviewConstantWords_Ovl1I.CPP */
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 unsigned int g_overlayOneIPreviewConstantWords[4] = {
@@ -15,7 +15,7 @@ extern char g_characterPreviewTextReferenceShared2[];
 extern char g_characterPreviewTextReferenceShared3[];
 extern char g_characterPreviewTextReferenceShared4[];
 extern char g_characterPreviewTextReferenceShared5[];
-unsigned int data_unresolved_800DE71C[517] = {
+unsigned int g_characterPreviewRecordWordsUs[517] = {
     (unsigned int)g_characterPreviewTextReferenceShared1 + 0x4, 0x00000086, 0x00000001, 0x00000016, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE,
     0x43200000, 0x43480000, 0x43200000, 0x43520000, 0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000,
     0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000, 0xC2A00000, 0xC1F00000, 0xC2940000, 0xC2A00000,
@@ -85,7 +85,7 @@ unsigned int data_unresolved_800DE71C[517] = {
 #endif
 #endif
 
-/* DATA_800E3ABC.CPP */
+/* g_overlayOneIPreviewAddressWords_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E46AC_unclaimed_E46BC */
 unsigned int g_overlayOneIPreviewAddressWords[1] = {
@@ -93,7 +93,7 @@ unsigned int g_overlayOneIPreviewAddressWords[1] = {
 };
 #endif
 
-/* DATA_800E3AC0.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock1_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_keys_01_us_rev1.c */
 unsigned int g_overlayOneIPreviewConstantWordsBlock1[2] = {
@@ -101,7 +101,7 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock1[2] = {
 };
 #endif
 
-/* DATA_800E3AC8.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock2_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E46AC_unclaimed_E46C8 */
 unsigned int g_overlayOneIPreviewConstantWordsBlock2[1] = {
@@ -113,7 +113,7 @@ unsigned int g_overlayOneIPreviewFloatConstantWords[8] = {
 };
 #endif
 
-/* DATA_800E3AEC.CPP */
+/* g_overlayOneIPreviewFloatConstantWordsBlock1_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewFloatConstantWordsBlock1[12] = {
     0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000, 0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000,
@@ -121,14 +121,14 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock1[12] = {
 };
 #endif
 
-/* DATA_800E3B1C.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock3_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewConstantWordsBlock3[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
 #endif
 
-/* DATA_800E3B2C.CPP */
+/* g_overlayOneIPreviewAddressWordsBlock1_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E471C_unclaimed_E472C */
 unsigned int g_overlayOneIPreviewAddressWordsBlock1[1] = {
@@ -141,7 +141,7 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock4[2] = {
 };
 #endif
 
-/* DATA_800E3B38.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock5_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E471C_unclaimed_E4738 */
 unsigned int g_overlayOneIPreviewConstantWordsBlock5[1] = {
@@ -153,7 +153,7 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock2[8] = {
 };
 #endif
 
-/* DATA_800E3B5C.CPP */
+/* g_overlayOneIPreviewFloatConstantWordsBlock3_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewFloatConstantWordsBlock3[12] = {
     0x42200000, 0xC2540000, 0xC2C80000, 0xC2200000, 0xC2540000, 0xC2C80000, 0x42000000, 0xC2B60000,
@@ -161,14 +161,14 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock3[12] = {
 };
 #endif
 
-/* DATA_800E3B8C.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock6_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewConstantWordsBlock6[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
 #endif
 
-/* DATA_800E3B9C.CPP */
+/* g_overlayOneIPreviewAddressWordsBlock2_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E478C_unclaimed_E479C */
 unsigned int g_overlayOneIPreviewAddressWordsBlock2[1] = {
@@ -181,7 +181,7 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock7[2] = {
 };
 #endif
 
-/* DATA_800E3BA8.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock8_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E478C_unclaimed_E47A8 */
 unsigned int g_overlayOneIPreviewConstantWordsBlock8[1] = {
@@ -193,7 +193,7 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock4[8] = {
 };
 #endif
 
-/* DATA_800E3BCC.CPP */
+/* g_overlayOneIPreviewFloatConstantWordsBlock5_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewFloatConstantWordsBlock5[12] = {
     0x421C0000, 0xC20C0000, 0xC2C80000, 0xC21C0000, 0xC20C0000, 0xC2C80000, 0x42000000, 0xC2900000,
@@ -201,14 +201,14 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock5[12] = {
 };
 #endif
 
-/* DATA_800E3BFC.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock9_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewConstantWordsBlock9[4] = {
     0x00000014, 0x00000014, 0x00000000, 0x00000000,
 };
 #endif
 
-/* DATA_800E3C0C.CPP */
+/* g_overlayOneIPreviewAddressWordsBlock3_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E47FC_unclaimed_E480C */
 unsigned int g_overlayOneIPreviewAddressWordsBlock3[1] = {
@@ -221,7 +221,7 @@ unsigned int g_overlayOneIPreviewConstantWordsBlock10[2] = {
 };
 #endif
 
-/* DATA_800E3C18.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock11_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E47FC_unclaimed_E4818 */
 unsigned int g_overlayOneIPreviewConstantWordsBlock11[1] = {
@@ -233,7 +233,7 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock6[8] = {
 };
 #endif
 
-/* DATA_800E3C3C.CPP */
+/* g_overlayOneIPreviewFloatConstantWordsBlock7_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_overlayOneIPreviewFloatConstantWordsBlock7[12] = {
     0x42200000, 0xC20C0000, 0xC2C80000, 0xC2200000, 0xC20C0000, 0xC2C80000, 0x41F00000, 0xC2900000,
@@ -241,7 +241,7 @@ unsigned int g_overlayOneIPreviewFloatConstantWordsBlock7[12] = {
 };
 #endif
 
-/* DATA_800E3C6C.CPP */
+/* g_overlayOneIPreviewConstantWordsBlock12_Ovl1I.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_character_preview_lights_04_us_rev1.c */
 unsigned int g_overlayOneIPreviewConstantWordsBlock12[4] = {

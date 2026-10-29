@@ -53,7 +53,7 @@ void SetN64_ConfigureVideoAndEnterModeUs(char *state) {
 
 /* 802944E8_7.CPP */
 #if !(defined(VERSION_US))
-extern Entry80294AC4 g_sessionInitializeHandlers[];
+extern SessionInitializeHandler g_sessionInitializeHandlers[];
 
 void SetN64_EnterPendingSessionMode(void *gameSession) {
     void (*callback)(void *gameSession);

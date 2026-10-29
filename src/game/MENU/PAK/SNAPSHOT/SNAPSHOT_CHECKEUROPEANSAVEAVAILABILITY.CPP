@@ -28,26 +28,26 @@ void Note_DecodeNoteText(u8 *, u8 *, s32);
 u32 Note_BytesToPakPages(u32);
 s32 Snapshot_EvaluateSaveChannel(void *, s32, s32 *, s32 *);
 void * Menu_OpenDialog(void *, void *, s32, s32, s32);
-extern s32 D_0044E4F8;
-extern s32 D_0044ED44;
+extern s32 g_pakDialogPromptScannedChannel;
+extern s32 g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability;
 /* Per-version dialog scripts opened by Snapshot_CheckControllerPak. */
 #if defined(VERSION_DE)
-extern s32 D_0044EA74, D_0044EABC, g_pakSnapshotCapacityPromptDe, D_0044EED0;
-#define PAK_DIALOG_NO_CONTROLLER D_0044EABC
-#define PAK_DIALOG_NO_PAK D_0044EA74
-#define PAK_DIALOG_LOW_SPACE D_0044EED0
+extern s32 g_pakSnapshotNoPakPromptDe, g_pakSnapshotNoControllerPromptDe, g_pakSnapshotCapacityPromptDe, g_pakSnapshotLowSpacePromptDe;
+#define PAK_DIALOG_NO_CONTROLLER g_pakSnapshotNoControllerPromptDe
+#define PAK_DIALOG_NO_PAK g_pakSnapshotNoPakPromptDe
+#define PAK_DIALOG_LOW_SPACE g_pakSnapshotLowSpacePromptDe
 #define PAK_DIALOG_FULL g_pakSnapshotCapacityPromptDe
 #elif defined(VERSION_US)
-extern s32 D_0044EBE4, D_0044EC2C, g_pakSnapshotCapacityPromptUsRev1, D_0044F040;
-#define PAK_DIALOG_NO_CONTROLLER D_0044EC2C
-#define PAK_DIALOG_NO_PAK D_0044EBE4
-#define PAK_DIALOG_LOW_SPACE D_0044F040
+extern s32 g_pakSnapshotNoPakPromptUs, g_pakSnapshotNoControllerPromptUs, g_pakSnapshotCapacityPromptUsRev1, g_pakSnapshotLowSpacePromptUs;
+#define PAK_DIALOG_NO_CONTROLLER g_pakSnapshotNoControllerPromptUs
+#define PAK_DIALOG_NO_PAK g_pakSnapshotNoPakPromptUs
+#define PAK_DIALOG_LOW_SPACE g_pakSnapshotLowSpacePromptUs
 #define PAK_DIALOG_FULL g_pakSnapshotCapacityPromptUsRev1
 #elif defined(VERSION_EU)
-extern s32 D_0044FD44_eu, D_0044FD8C_eu, g_pakSnapshotCapacityPromptEu, D_004501A0_eu;
-#define PAK_DIALOG_NO_CONTROLLER D_0044FD8C_eu
-#define PAK_DIALOG_NO_PAK D_0044FD44_eu
-#define PAK_DIALOG_LOW_SPACE D_004501A0_eu
+extern s32 g_pakSnapshotNoPakPromptEu, g_pakSnapshotNoControllerPromptEu, g_pakSnapshotCapacityPromptEu, g_pakSnapshotLowSpacePromptEu;
+#define PAK_DIALOG_NO_CONTROLLER g_pakSnapshotNoControllerPromptEu
+#define PAK_DIALOG_NO_PAK g_pakSnapshotNoPakPromptEu
+#define PAK_DIALOG_LOW_SPACE g_pakSnapshotLowSpacePromptEu
 #define PAK_DIALOG_FULL g_pakSnapshotCapacityPromptEu
 #elif defined(VERSION_EU_X)
 extern s32 D_0044FE74_eu_x, D_0044FEBC_eu_x, g_pakSnapshotCapacityPromptEu, D_004502D0_eu_x;
@@ -56,9 +56,9 @@ extern s32 D_0044FE74_eu_x, D_0044FEBC_eu_x, g_pakSnapshotCapacityPromptEu, D_00
 #define PAK_DIALOG_LOW_SPACE D_004502D0_eu_x
 #define PAK_DIALOG_FULL g_pakSnapshotCapacityPromptEu
 #else
-#define PAK_DIALOG_NO_CONTROLLER D_0044F70C
-#define PAK_DIALOG_NO_PAK D_0044F6C4
-#define PAK_DIALOG_LOW_SPACE D_0044FB20
+#define PAK_DIALOG_NO_CONTROLLER g_pakSnapshotNoControllerPromptUsRev1
+#define PAK_DIALOG_NO_PAK g_pakSnapshotNoPakPromptUsRev1
+#define PAK_DIALOG_LOW_SPACE g_pakSnapshotLowSpacePromptUsRev1
 #define PAK_DIALOG_FULL g_pakSnapshotCapacityPromptEuX
 #endif
 /* The game's two Controller Pak note names (PAL: per language). */
@@ -129,48 +129,48 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
     u32 minBytes;
     u32 maxBytes;
 
-    D_8014D4C0_de = 0;
-    D_8014D4DC = 1;
-    D_80153760 = 0;
-    D_8014D4EC_de = 0;
-    D_800DE874 = 0;
-    D_80153784 = 0;
+    g_pakSaveMenuActiveDe = 0;
+    g_pakNoteSelectProbesNote = 1;
+    g_pakProfileLoadActive = 0;
+    g_pakProfileLoadMode_de = 0;
+    g_pakNoteTitleSelector = 0;
+    g_pakMenuPromptAccepted = 0;
     g_pakUseScannedChannel = 1;
     if (Control_AnyControllerConnected() == 0) {
-        D_80153784 = 1;
-        D_8014AD9C = 0;
+        g_pakMenuPromptAccepted = 1;
+        g_pakUsable = 0;
         Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_NO_CONTROLLER, (s32)menu->player, (s32) menu->slot, 0);
-        D_800E28CC = 1;
-        D_8014AD94 = 0;
+        g_pakStartButtonLatched = 1;
+        g_pakScanActive = 0;
         return;
     }
     if (g_introSelectedItem == -1) {
         g_introSelectedItem = Pak_ScanNextChannel(-1);
         if (g_introSelectedItem == -1) {
-            D_80153784 = 1;
-            D_8014AD9C = 0;
+            g_pakMenuPromptAccepted = 1;
+            g_pakUsable = 0;
             Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
-            D_8014AD94 = 0;
-            D_800E28CC = 1;
+            g_pakScanActive = 0;
+            g_pakStartButtonLatched = 1;
             return;
         }
     }
     error = Note_NeedsIdRepair(g_introSelectedItem);
     if (error == 0) {
         SetN64_CommitSessionInputs((s32) &g_gameSession);
-        if ((menu->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
-            D_80146D60 = 1;
-            D_800E28CC = 1;
+        if ((menu->slot->unkB0 & 0x1000) && (g_pakStartButtonLatched == 0)) {
+            g_pakRequestLatched = 1;
+            g_pakStartButtonLatched = 1;
         }
-        D_800E28CC = 1;
-        if ((D_80142CAC != 0) || (D_80146D60 != 0)) {
+        g_pakStartButtonLatched = 1;
+        if ((g_pakProbeRequested != 0) || (g_pakRequestLatched != 0)) {
             Note_ProbeStatus(g_introSelectedItem);
             if (Note_GetStatus(g_introSelectedItem) == -2) {
-                D_80153784 = 1;
-                D_8014AD9C = 0;
+                g_pakMenuPromptAccepted = 1;
+                g_pakUsable = 0;
                 Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
-                D_8014AD94 = 0;
-                D_800E28CC = 1;
+                g_pakScanActive = 0;
+                g_pakStartButtonLatched = 1;
                 return;
             }
             goto finish;
@@ -192,11 +192,11 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
             g_introSelectedItem = firstChannel;
             Note_ProbeStatus(firstChannel);
             if (Note_GetStatus(g_introSelectedItem) == -2) {
-                D_80153784 = 1;
-                D_8014AD9C = 0;
+                g_pakMenuPromptAccepted = 1;
+                g_pakUsable = 0;
                 Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
-                D_8014AD94 = 0;
-                D_800E28CC = 1;
+                g_pakScanActive = 0;
+                g_pakStartButtonLatched = 1;
                 return;
             }
         }
@@ -211,18 +211,18 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
                     minBytes = Note_BytesToPakPages(0x18U);
                     if (freeNotes != 0) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
-                            D_80153784 = 1;
-                            D_80146D60 = 1;
-                            Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_LOW_SPACE, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                            g_pakMenuPromptAccepted = 1;
+                            g_pakRequestLatched = 1;
+                            Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_LOW_SPACE, (s32)menu->player, (s32) menu->slot, (s32) &g_pakDialogPromptScannedChannel);
                         } else if (freeBytes < (s32)minBytes) {
-                            D_80153784 = 1;
-                            D_80146D60 = 1;
-                            Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                            g_pakMenuPromptAccepted = 1;
+                            g_pakRequestLatched = 1;
+                            Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &g_pakDialogPromptScannedChannel);
                         }
                     } else {
-                        D_80153784 = 1;
-                        D_80146D60 = 1;
-                        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                        g_pakMenuPromptAccepted = 1;
+                        g_pakRequestLatched = 1;
+                        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &g_pakDialogPromptScannedChannel);
                     }
                 }
             }
@@ -231,22 +231,22 @@ void Snapshot_CheckControllerPak(Shared_PakMenu *menu) {
         }
     }
     if (error != 0) {
-        D_80153784 = 1;
-        D_80146D60 = 1;
-        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &D_0044ED44, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+        g_pakMenuPromptAccepted = 1;
+        g_pakRequestLatched = 1;
+        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, (s32)menu->player, (s32) menu->slot, (s32) &g_pakDialogPromptScannedChannel);
     }
 finish:
-    if (D_80153784 == 0) {
+    if (g_pakMenuPromptAccepted == 0) {
         Snapshot_MarkSaveNotes(menu);
     }
-    D_8014AD94 = 0;
-    D_800E28CC = 1;
+    g_pakScanActive = 0;
+    g_pakStartButtonLatched = 1;
 }
 
 #include "TYPES.H"
-extern s32 g_pakUseScannedChannel, D_800E28C0;
-extern s32 g_matchEndingTeamWheelClose, D_0044ED44, g_worldSnapshotNoteBytes;
-extern char D_0044EA08[];
+extern s32 g_pakUseScannedChannel, g_pakPlayerMessagePending;
+extern s32 g_matchEndingTeamWheelClose, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, g_worldSnapshotNoteBytes;
+extern char g_pakDialogDamagedPak[];
 extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
@@ -266,25 +266,25 @@ static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
 static __inline__ void pakSetChecksum(s32 offset, s32 value) {
     *(s32 *)((u8 *)(g_worldSnapshotNoteBytes + offset) + 0x60C) = value;
 }
-/* Opens the pak menu for a snapshot save: unless a message is pending (D_800E28C0), probes the channel's
+/* Opens the pak menu for a snapshot save: unless a message is pending (g_pakPlayerMessagePending), probes the channel's
    Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (Snapshot_MarkSaveNotes),
-   otherwise the damaged-pak (D_0044EA08) or D_0044ED44 prompt opens. Twin of Snapshot_BeginProfileSave. */
+   otherwise the damaged-pak (g_pakDialogDamagedPak) or g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability prompt opens. Twin of Snapshot_BeginProfileSave. */
 void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
     ActorOwnerView *owner = menu->player;
     ActorOwnerView *player;
     s32 channel;
 
-    D_8014D4C0_de = 1;
-    D_8014D4DC = 1;
-    D_80153760 = 0;
-    D_8014D4EC_de = 0;
-    D_800DE874 = 0;
-    D_80153784 = 0;
+    g_pakSaveMenuActiveDe = 1;
+    g_pakNoteSelectProbesNote = 1;
+    g_pakProfileLoadActive = 0;
+    g_pakProfileLoadMode_de = 0;
+    g_pakNoteTitleSelector = 0;
+    g_pakMenuPromptAccepted = 0;
     g_pakUseScannedChannel = 0;
     pakGetChannel(menu, &channel);
     player = owner;
-    if (D_800E28C0) {
-        D_80153784 = 1;
+    if (g_pakPlayerMessagePending) {
+        g_pakMenuPromptAccepted = 1;
         return;
     }
     if (g_pakUseScannedChannel) {
@@ -298,10 +298,10 @@ void Snapshot_BeginSnapshotSave(Shared_PakMenu *menu) {
         Snapshot_MarkSaveNotes(menu);
         return;
     }
-    D_80153784 = 1;
+    g_pakMenuPromptAccepted = 1;
     if (Note_IsChannelReady(channel)) {
-        Menu_OpenDialog(player->owner + 0x554, D_0044EA08, (s32)player, (s32)player->controller, 1);
+        Menu_OpenDialog(player->owner + 0x554, g_pakDialogDamagedPak, (s32)player, (s32)player->controller, 1);
     } else if (Note_NeedsIdRepair(channel)) {
-        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &D_0044ED44, (s32)player, (s32)player->controller, (s32)D_0044E4D4);
+        Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, (s32)player, (s32)player->controller, (s32)D_0044E4D4);
     }
 }

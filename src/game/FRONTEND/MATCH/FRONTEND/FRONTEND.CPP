@@ -1,6 +1,6 @@
 
 
-/* DATA_800DC6D4.CPP */
+/* k_FrontendEncodedWordsBlock1_Frontend.CPP */
 #if defined(VERSION_US)
 unsigned int k_FrontendEncodedWordsBlock1[3] = {
     0x656F7352, 0x00000000, 0x00000F00,

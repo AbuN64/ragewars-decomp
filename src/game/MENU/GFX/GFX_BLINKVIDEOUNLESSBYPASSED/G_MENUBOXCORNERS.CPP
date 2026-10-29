@@ -5,7 +5,7 @@
 unsigned char g_GMenuboxcornersTrailingBytes[12] = { 0x86, 0x02, 0x00, 0x0E, 0x18, 0x40, 0x00, 0x28, 0x00, 0x00, 0x00, 0x00 };
 #endif
 
-/* DATA_800E5F70.CPP */
+/* menuBoxCorners.CPP */
 #if defined(VERSION_US_REV1)
 MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
@@ -22,12 +22,12 @@ unsigned int k_GMenuboxcornersEncodedWords[3] = {
 };
 #endif
 
-/* DATA_800E603C.CPP */
+/* residentStrings3_us_rev1.CPP */
 #if defined(VERSION_US_REV1)
 char g_residentStrings3_us_rev1[28] = "_SMEartsend mode  :    on";
 #endif
 
-/* DATA_800E6058.CPP */
+/* artsendModeOffText.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5E74_unclaimed_E6C58 */
 unsigned int g_residentStrings4_us_rev1[1] = {

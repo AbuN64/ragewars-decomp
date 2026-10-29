@@ -8,11 +8,11 @@
 extern const char g_resultsNumberFormat[], g_resultsPercentFormat[];
 static inline const char *resultsNumberFormat(void) { return g_resultsNumberFormat; }
 static inline const char *resultsPercentFormat(void) { return g_resultsPercentFormat; }
-static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][g_languageIndex]; }
+static inline char *resultsRankText(s32 rank) { return g_resultsRankTexts[rank][g_languageIndex]; }
 #else
 extern const char g_resultRowIntFormat[], g_resultRowPercentFormat[];
 static inline const char *resultsNumberFormat(void) { return g_resultRowIntFormat; }
 static inline const char *resultsPercentFormat(void) { return g_resultRowPercentFormat; }
-static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][0]; }
+static inline char *resultsRankText(s32 rank) { return g_resultsRankTexts[rank][0]; }
 #endif
 #endif

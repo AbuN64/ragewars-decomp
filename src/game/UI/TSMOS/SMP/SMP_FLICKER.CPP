@@ -247,7 +247,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int widgetResourceId, int own
   return p;
 }
 
-/* Calls func_80419C84_de on an object, marks it busy at offset 0x44 and copies the low byte of the
+/* Calls SmpFlicker_InitFlicker_SmpFlicker on an object, marks it busy at offset 0x44 and copies the low byte of the
    current entry of the word array at 0x4C, selected by the index at 0x74, into offset 0x10 of the
    object at 0x78. */
 
@@ -301,7 +301,7 @@ s32 SmpFlicker_IsFlickerIdle(struct FlickerActivityView *object) {
     return object->busy == 0;
 }
 
-void SmpFlicker_StartFlicker(struct ObjectCode804196C0 *object, s32 count) {
+void SmpFlicker_StartFlicker(struct FlickerStartView *object, s32 count) {
     SmpFlicker_InitFlicker(object, count);
     object->busy = 1;
     object->target->value = object->entries[object->index];
@@ -323,12 +323,12 @@ s32 SmpFlicker_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 even
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_flickerWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

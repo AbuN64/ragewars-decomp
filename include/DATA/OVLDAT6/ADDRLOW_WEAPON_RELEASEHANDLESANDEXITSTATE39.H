@@ -1,0 +1,4 @@
+#ifndef ADDRLOW_WEAPON_RELEASEHANDLESANDEXITSTATE39_H
+#define ADDRLOW_WEAPON_RELEASEHANDLESANDEXITSTATE39_H
+extern char addrLow_Weapon_ReleaseHandlesAndExitState39[];
+#endif

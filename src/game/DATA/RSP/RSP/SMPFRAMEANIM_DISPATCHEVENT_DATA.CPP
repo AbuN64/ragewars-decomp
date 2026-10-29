@@ -13,7 +13,7 @@ extern char g_smpList_HandleIncrementInputEntry[];
 extern char g_smpList_HandleDecrementInputEntry[];
 extern char g_smpList_HandleStopEventEntry[];
 extern char g_smpList_UpdateSliderMotionEntry[];
-extern char D_0041AB70[];
+extern char addrLow_SmpList_HandleStopEvent[];
 extern char g_smpButton_DimListItemsEntry[];
 extern char g_smpButton_HighlightListItemsEntry[];
 extern char g_smpButton_DimListItemsWithSoundEntry[];
@@ -39,7 +39,7 @@ unsigned int g_smpWidgetEventHandlerRecordsAndTailsUs[132] = {
     0x00000E03, 0x00007530, (unsigned int)g_smpSlider_DestroyControllerEntry, 0x00000E08, 0x00007530, (unsigned int)g_smp_UpdateFadeProgressEntry, 0x00000000, 0x00000000,
     0x00000000, 0x00007530, (unsigned int)g_smpSlider_DimSliderItemsEntry, 0x0000000F, 0x00000E07, 0x00007530, (unsigned int)g_smpSlider_DimSliderItemsEntry, 0x0000000F,
     0x00007530, (unsigned int)g_smpSlider_HighlightSliderItemsEntry, 0x00000010, 0x00007530, (unsigned int)g_smpList_ResetEntryCommandsEntry, 0x00000008, 0x00007530, (unsigned int)g_smpList_HandleIncrementInputEntry,
-    0x00000007, 0x00007530, (unsigned int)g_smpList_HandleDecrementInputEntry, 0x00000E03, 0x00007530, (unsigned int)D_0041AB70, 0x0000000B, 0x00007530,
+    0x00000007, 0x00007530, (unsigned int)g_smpList_HandleDecrementInputEntry, 0x00000E03, 0x00007530, (unsigned int)addrLow_SmpList_HandleStopEvent, 0x0000000B, 0x00007530,
     (unsigned int)g_smpList_HandleStopEventEntry, 0x00000E08, 0x00007530, (unsigned int)g_smpList_UpdateSliderMotionEntry, 0x00000000, 0x00000000, 0x00000000, 0x0000000F,
     0x00000E07, 0x00007530, (unsigned int)g_smpButton_DimListItemsEntry, 0x0000000F, 0x00007530, (unsigned int)g_smpButton_HighlightListItemsEntry, 0x00000010, 0x00007530,
     (unsigned int)g_smpButton_DimListItemsWithSoundEntry, 0x00000008, 0x00007530, (unsigned int)g_smpButton_SelectNextListEntryEntry, 0x00000007, 0x00007530, (unsigned int)g_smpButton_SelectPreviousListEntryEntry, 0x00000E03,

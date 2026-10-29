@@ -57,8 +57,8 @@ void Particle_ReleaseOwnerListTwoEffects(void *, s32);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 void Scene_SetLevelRecordStateBit(void *, void *, s32);
 void *SetN64_SpawnModelEffect(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* extern */
-struct ListNode80290528;
-void SetN64_RecycleGlobalEffectNode(struct ListNode80290528 *);
+struct EffectPoolNode;
+void SetN64_RecycleGlobalEffectNode(struct EffectPoolNode *);
 s32 XPlus_NextRandomInteger(void);
 s32 Player_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void Player_PlacePlayerForRound(void *);
@@ -139,9 +139,9 @@ void Playerai_HandlePlayerDeath(struct Shared_ActorView *player, void *attacker,
     s32 signedMotionRandomY;
     s32 signedMotionRandomZ;
     s32 movingAtDeath;
-    struct Shared_struct_D_800D34C0_0x18 *thirdAmmoDropRecord;
-    struct Shared_struct_D_800D34C0_0x18 *firstAmmoDropRecord;
-    struct Shared_struct_D_800D34C0_0x18 *secondAmmoDropRecord;
+    struct Shared_PickupAmmoDefinition *thirdAmmoDropRecord;
+    struct Shared_PickupAmmoDefinition *firstAmmoDropRecord;
+    struct Shared_PickupAmmoDefinition *secondAmmoDropRecord;
     u16 ammoDropActorKind;
     u16 deathEffectActorKind;
     u32 ammoPickupMode;
@@ -506,7 +506,7 @@ case 7:
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
 extern f32 g_playerDamageRumbleScale, g_playerDamageRumbleMaximum;
-extern s32 D_800D2A90;
+extern s32 g_playerHealthDropMessage;
 extern char g_matchRoundCounters[];
 extern s32 Playerai_IsRoundEndState(void *);
 extern s32 Player_GetMaxHealth(void *);
@@ -629,9 +629,9 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
         if (FIELD(void *, player, 0x5DC) != 0) {
             if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && g_frontendScreenStatus.settings.local == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), ((u8 **)&D_800D2A90)[*((u8 *)&g_frontendScreenStatus.settings.local + 0x564)]);
+                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), ((u8 **)&g_playerHealthDropMessage)[*((u8 *)&g_frontendScreenStatus.settings.local + 0x564)]);
 #else
-                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
+                Camera_PostScreenMessage(&g_frontendScreenStatus, FIELD(void *, player, 0x5DC), (u8 *)g_playerHealthDropMessage);
 #endif
             }
         }
@@ -642,7 +642,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 dama
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
-            CScene_StartEventClips(&g_world, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
+            CScene_StartEventClips(&g_world, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, g_playerHeightScalePair_us, strength);
         }
     }
     if (dead == 0 && FIELD(s16, player, 0x650) != 0x12 && FIELD(void *, player, 0x5DC) != 0) {

@@ -6,6 +6,6 @@ const char g_staticEventsText[14] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80250624_C9B60_us_rev1.c */
+/* ROM-grounded data: src/staticEventsTagUsRev1.c */
 const char s_staticEventsTagUsRev1[14] = "static events";
 #endif

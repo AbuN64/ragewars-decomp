@@ -22,7 +22,7 @@
 /* VHANDLER.CPP */
 /* Initializes the game state: clears the whole state block and fills its slot and lookup tables
    with 0xFF, resets the 24 player entries and queue slots, sets up the three lists and the stream
-   descriptor for the ROM data at D_16E000, loads the expansion-pak data when more memory is present,
+   descriptor for the ROM data at g_pagerCartridgeData_Vhandler, loads the expansion-pak data when more memory is present,
    and builds the eight channels, the message pool and the sprite queue. */
 
 extern char g_cartridgeReadWorker[];
@@ -447,7 +447,7 @@ void Vhandler_GetPagerCounters(struct PagerCounters *outCounters) {
 }
 
 /* Resource manager thread setup and loop: fills a 0x200-byte stack with a marker, creates and starts the
- * thread object at D_80103720 (entry g_pagerDispatcherRomEntry, stack top g_pagerPageMappings), then forever receives request
+ * thread object at g_resourcePagerDispatcherThread (entry g_pagerDispatcherRomEntry, stack top g_pagerPageMappings), then forever receives request
  * messages and dispatches on the request type to Vhandler_HandleResourcePageRequest, Virtual_FinishPageJob, Virtual_ReleaseVirtualRegion or
  * Virtual_AssignVirtualRegion. */
 extern char g_pagerDispatcherRomEntry[];
@@ -580,7 +580,7 @@ void *Virtual_FindRegionForPage(u32 virtualPage) {
  * list, frees each slot it holds through Vhandler_UnmapResourcePage and marks the slot unused, then posts the node
  * back to the handle's message queue. */
 
-/* Registers a memory region: rounds its size to whole pages, places it after the last region of the chain at g_pagerFirstRegion on an even page at or above 0x800, marks every page of its map as free, and maps it through func_802BB420_de. */
+/* Registers a memory region: rounds its size to whole pages, places it after the last region of the chain at g_pagerFirstRegion on an even page at or above 0x800, marks every page of its map as free, and maps it through osSendMesg_Mutex. */
 
 ResourcePageMapping *Virtual_AcquireRecycledPage(void) {
     ResourcePageMapping *entry;
@@ -736,7 +736,7 @@ const char g_virtualRegionText[15] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_8023C78C_C92F0_us_rev1.c */
+/* ROM-grounded data: src/s_virtualRegionText_Vhandler.c */
 const unsigned char s_virtualRegionText[15] = {
     0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6C, 0x20, 0x52, 0x65, 0x67, 0x69, 0x6F, 0x6E, 0x00,
 };

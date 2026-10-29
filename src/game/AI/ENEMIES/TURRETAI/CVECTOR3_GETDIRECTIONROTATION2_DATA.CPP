@@ -13,7 +13,7 @@ const unsigned int k_cvector3Getdirectionrotation2DataFloatConstantWords[5] = {
 };
 
 /* 800C6B00.CPP */
-/* ROM-grounded data: src/rw_pool_80202E4C_C7700_us_rev1.c */
+/* ROM-grounded data: src/k_cvector3Getdirectionrotation2DataFloatConstantWordsBlock1_Cvector3Getdirectionrotation2Data.c */
 const unsigned int k_cvector3Getdirectionrotation2DataFloatConstantWordsBlock1[3] = {
     0x3F000000, 0x3F000000, 0x3F000000,
 };

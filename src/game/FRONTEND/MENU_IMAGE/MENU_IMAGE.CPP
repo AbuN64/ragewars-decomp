@@ -17,7 +17,7 @@
 extern FourPlayerResultsScreen *g_equipmentAndResultsScreen;
 
 /* Clears the 22 owned bytes at 0x4C of each of the 4 player records (150 bytes apart) in
-   D_80146398; for each active player (byte 0x78 == 1) it looks up the player's model kind (byte
+   g_playerSettings_Achieve; for each active player (byte 0x78 == 1) it looks up the player's model kind (byte
    0x80) through Scene_FindActorDefinition and marks each of its 8 slot ids at least 0x4C3 as owned (byte 0x4C
    plus the id less 0x4C3), then refreshes the player's loadout columns through Equip_LoadEquipmentSelections. */
 
@@ -113,9 +113,9 @@ extern void Preview_SetPreviewTransformUpdate(void *, int);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_equipmentEventIds, an actor kind at g_equipmentEventActorKinds and a handler at g_equipmentEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8043C1D0)(void *, s32, s32, s32, s32);
+typedef s32 (*EquipmentEventHandler)(void *, s32, s32, s32, s32);
 
-extern Handler8043C1D0 g_equipmentEventHandlers;
+extern EquipmentEventHandler g_equipmentEventHandlers;
 
 void Frontend_ResetEquipmentFromCharacter(void) {
     u8 *record;
@@ -276,7 +276,7 @@ int Frontend_CancelEquipmentSelection(int a,int b,unsigned int player) {
 }
 
 s32 Frontend_DispatchEquipmentEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
-    Handler8043C1D0 *entry;
+    EquipmentEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

@@ -11,7 +11,7 @@ unsigned char g_SkipTrailingBytes[12] = { 0xAF, 0xA5, 0x00, 0x1C, 0xAF, 0xA6, 0x
 unsigned int func_80265334_eu_x[3] = { 0x240200CAU, 0x1462002FU, 0x24020001U };
 #endif
 
-/* DATA_80268C54.CPP */
+/* g_SkipEncodedWords_Skip.CPP */
 #if defined(VERSION_US)
 unsigned int g_SkipEncodedWords[3] = {
     0x00000E6D, 0x5F72704F, 0x626A6563,

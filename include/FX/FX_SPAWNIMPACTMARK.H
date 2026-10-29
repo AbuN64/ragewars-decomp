@@ -13,6 +13,6 @@ extern void Fx_UpdateChildTransform(Node44 *, void *);
 extern void Fx_UpdateNodeFractions(void *);
 extern void Fx_DrawEffectGeometry(s32 pool, void *, s32 camera);
 extern void Fx_AppendAttachedTransform(void *, void *, void *, s32);
-extern void *Fx_FindAttachedEffect(Owner802A6DF8 *, s32, s32);
+extern void *Fx_FindAttachedEffect(RibbonWorld *, s32, s32);
 extern void Fx_DrawEffectPasses(void *pool, void *camera);
 #endif

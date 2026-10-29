@@ -19,7 +19,7 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "PARTICLE/PARTICLE_SPAWNINTERPOLATEDTRAIL.H"
 
-/* CODE_8028414C.CPP */
+/* Particle_UpdateMatrix_ParticleSpawninterpolatedtrail.CPP */
 extern s32 SoundVoicePool_StopNode(void *work, void *wantedNode);
 
 extern s32 g_playerWeaponClassMode[];
@@ -85,7 +85,7 @@ void Particle_PlayAttachedSound(void *soundParticle, s32 soundId) {
 
     node = ((SoundParticle *)soundParticle)->sound;
     if (node != 0) {
-        if (((Node80253610 *)node)->flags == soundId && ((Node80253610 *)node)->references != -1) {
+        if (((CacheResourceNode *)node)->flags == soundId && ((CacheResourceNode *)node)->references != -1) {
             return;
         }
         Particle_StopSound(soundParticle);
@@ -192,7 +192,7 @@ void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
 
 /* 8028308C_4.CPP */
 /* Passes the first non-null handle among entries 0 to count of the object's twenty-byte table at
-   0xFC28 to func_80284570_de together with the object. */
+   0xFC28 to Particle_Release_ParticleSpawninterpolatedtrail together with the object. */
 
 void Particle_ReleaseFirstHandle(char *obj, unsigned char count) {
     int i;
@@ -485,12 +485,12 @@ void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo g_defaultProbeMotionSettings;
-extern Instance8020CD74 *Gsky_FindScreenMessage(ParticleTrailEmitterView *messageId);
-extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern ActorInstanceHeader *Gsky_FindScreenMessage(ParticleTrailEmitterView *messageId);
+extern s32 Unicol_MoveActorWithCollision(ActorInstanceHeader *, CVector3, CollisionInfo *);
 
-s32 Particle_HasClearMotionPath(Instance8020CD74 *particle, ParticleTrailEmitterView *messageId) {
-    Instance8020CD74 saved;
-    Instance8020CD74 *instance;
+s32 Particle_HasClearMotionPath(ActorInstanceHeader *particle, ParticleTrailEmitterView *messageId) {
+    ActorInstanceHeader saved;
+    ActorInstanceHeader *instance;
     s32 collisions;
 
     instance = Gsky_FindScreenMessage(messageId);
@@ -606,5 +606,5 @@ unsigned int func_8028515C_de_padding_85D5C[1] = {
 /* 800C9F80.CPP */
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80284B20_CAB80_us_rev1.c */
+/* ROM-grounded data: src/g_Particle_SpawnInterpolatedTrailConstantsUsRev1_ParticleSpawninterpolatedtrail.c */
 #endif

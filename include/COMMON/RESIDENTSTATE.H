@@ -52,8 +52,8 @@ struct AnimationInfo;
 
 
 
-struct ResourceData80295B84;
-extern void Textload_PrepareTextureVariation(s32 index, struct ResourceData80295B84 *resource);
+struct ResourceHandleView;
+extern void Textload_PrepareTextureVariation(s32 index, struct ResourceHandleView *resource);
 
 extern s32 g_artsendNextTextureHoldCount;
 

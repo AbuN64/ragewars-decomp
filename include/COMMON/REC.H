@@ -19,7 +19,7 @@ struct Dest;
 
 struct Trigger;
 
-struct RiderCode80206258;
+struct MovingPlatformMotionStateView;
 
 
 
@@ -92,8 +92,8 @@ struct PathMotionWaypoint;
 
 
 
-struct RiderCode80206258;
-typedef struct RiderCode80206258 RiderCode80206258;
+struct MovingPlatformMotionStateView;
+typedef struct MovingPlatformMotionStateView MovingPlatformMotionStateView;
 
 
 

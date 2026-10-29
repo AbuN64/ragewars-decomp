@@ -3,33 +3,33 @@
 .section .text
 .globl osWritebackDCache
 osWritebackDCache:
-    blez $a1, .Lfunc_802BD280_de_03C
+    blez $a1, .LwritebackDCacheReturn
     addiu $t3, $zero, 0x2000
     sltu $at, $a1, $t3
-    beqz $at, .Lfunc_802BD280_de_044
+    beqz $at, .LwritebackDCacheAllEntry
     addu $t0, $a0, $zero
     addu $t1, $a0, $a1
     sltu $at, $t0, $t1
-    beqz $at, .Lfunc_802BD280_de_03C
+    beqz $at, .LwritebackDCacheReturn
     addiu $t1, $t1, -0x10
     andi $t2, $t0, 0xF
     subu $t0, $t0, $t2
-.Lfunc_802BD280_de_02C:
+.LwritebackDCacheLineLoop:
     cache 0x19, 0x0($t0)
     sltu $at, $t0, $t1
-    bnez $at, .Lfunc_802BD280_de_02C
+    bnez $at, .LwritebackDCacheLineLoop
     addiu $t0, $t0, 0x10
-.Lfunc_802BD280_de_03C:
+.LwritebackDCacheReturn:
     jr $ra
     nop
-.Lfunc_802BD280_de_044:
+.LwritebackDCacheAllEntry:
     lui $t0, 0x8000
     addu $t1, $t0, $t3
     addiu $t1, $t1, -0x10
-.Lfunc_802BD280_de_050:
+.LwritebackDCacheAllLoop:
     cache 0x01, 0x0($t0)
     sltu $at, $t0, $t1
-    bnez $at, .Lfunc_802BD280_de_050
+    bnez $at, .LwritebackDCacheAllLoop
     addiu $t0, $t0, 0x10
     jr $ra
     nop

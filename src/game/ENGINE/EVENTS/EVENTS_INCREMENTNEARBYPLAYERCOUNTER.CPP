@@ -6,7 +6,7 @@
 #include "RENDER/RANGENODE.H"
 #include "TYPES.H"
 
-/* Calls func_802172D0_de on an object, its block at offset 0x170 and a stack argument when the pause word is clear, the object exists and its first byte is one. Adapted from Events_StopActorLoopingSound with the pause-word test, the callee and the extra stack argument changed, and the call wrapped in do-while(0) so the stack argument loads at entry. */
+/* Calls Barrel_SetLoopingSound_EventsIncrementnearbyplayercounter on an object, its block at offset 0x170 and a stack argument when the pause word is clear, the object exists and its first byte is one. Adapted from Events_StopActorLoopingSound with the pause-word test, the callee and the extra stack argument changed, and the call wrapped in do-while(0) so the stack argument loads at entry. */
 
 
 extern void Barrel_SetLoopingSound(u8 *, u8 *, s32);

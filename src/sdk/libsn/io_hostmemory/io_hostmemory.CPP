@@ -233,7 +233,7 @@ void Libsn_InitializeHostMemoryAccess(void) {
 
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
-extern u32 D_800F32A8;
+extern u32 g_libsnMonitorStatusFlags;
 
 /* Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */
 void Libsn_ServiceHostCommands(void) {
@@ -264,7 +264,7 @@ void Libsn_ServiceHostCommands(void) {
             keepRunning = 0;
             break;
         case 0x12:
-            D_800F32A8 &= ~1U;
+            g_libsnMonitorStatusFlags &= ~1U;
             g_libsnMonitorEnabled = 0;
             g_libsnMonitorResumeMask = 0;
             Libgultra_TrwSetSr(Libgultra_TrwGetSr() & ~1);

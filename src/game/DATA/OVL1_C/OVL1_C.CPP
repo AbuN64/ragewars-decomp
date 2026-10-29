@@ -1,6 +1,6 @@
 #include "TYPES.H"
 
-/* DATA_800D1610.CPP */
+/* g_overlayOneCFloatConstantWords_Ovl1C.CPP */
 /* ROM-grounded data: rodata/writable/800D1610 */
 #ifdef VERSION_DE
 unsigned int g_overlayOneCFloatConstantWords[4] = {

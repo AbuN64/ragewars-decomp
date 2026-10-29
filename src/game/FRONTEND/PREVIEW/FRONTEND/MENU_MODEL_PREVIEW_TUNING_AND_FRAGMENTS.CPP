@@ -25,5 +25,5 @@ unsigned int k_MenuModelPreviewTuningAndFragmentsEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8041CAD8_E20C0_us_rev1.c */
+/* ROM-grounded data: src/MENU_MODEL_PREVIEW_TUNING_AND_FRAGMENTS_US_REV1.c */
 #endif

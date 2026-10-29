@@ -6,10 +6,10 @@
 #include "COMMON/SELF.H"
 #include "include_asm.h"
 
-/* Runs a computer player's patrol step: starts its route at 0x224 on the first route of D_8011FE88,
+/* Runs a computer player's patrol step: starts its route at 0x224 on the first route of g_world_AchieveUpdateresultsscreen,
    or random roaming (-2) when there are none; once within g_patrolGoalArrivalDistance of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then
-   taken from the route through Scene_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of g_navigationGraph when
+   taken from the route through Scene_GetPlatformRoutePoint and Portal_FindNearestPointIndex_Patrol, or a random node of g_navigationGraph when
    roaming; finally runs Nav_SteerAlongRoute, Nav_RunBehaviorHandler and Nav_UpdatePlayerSteering. */
 
 

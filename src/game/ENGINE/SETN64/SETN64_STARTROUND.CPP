@@ -80,17 +80,17 @@ void SetN64_ResumeSelectedSession(GameSession *unused) {
 #endif
     field = unused->selector;
 #if defined(VERSION_US_REV1)
-    D_800D2970 = 0;
+    g_roundExtraStateUsRev1 = 0;
 #endif
     g_skyRotorSpinScale = f;
     g_roundTimerStep = f;
     g_particleSimulationTimeScale = f;
     Scene_SetSelection(dst, field, 0);
     unused->mode = 0xD;
-    D_80154048 = 0;
+    g_initialMatchStartPending = 0;
 }
 
-/* Prepares a session for a new round: clears the round flag, resets the round state, records the round seed when func_80264B6C_de allows, resets the scoreboard and player slot, restarts the arena with the session's arena setting, resets the camera timers and reloads the session's sound bank and music. */
+/* Prepares a session for a new round: clears the round flag, resets the round state, records the round seed when Control_IsSnapshotActive_Camera allows, resets the scoreboard and player slot, restarts the arena with the session's arena setting, resets the camera timers and reloads the session's sound bank and music. */
 void SetN64_StartRound(GameSession *session) {
     CGameStatus *counters;
     Shared_Game *game;

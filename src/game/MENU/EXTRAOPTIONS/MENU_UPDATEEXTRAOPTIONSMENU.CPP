@@ -9,7 +9,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
-/* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure g_extraOptionsScreen points
+/* Calls Widget_SetWidgetFlag08_EquipActivateequipmentpanel with zero on the object at offset 0x20 of the structure g_extraOptionsScreen points
    to, and with one on the entry 0x3AB that Node_FindWidgetByResourceId finds in the list at offset 8, then sets
    the word at offset 0x34. */
 

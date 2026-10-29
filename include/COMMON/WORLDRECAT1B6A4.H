@@ -1,8 +1,8 @@
 #ifndef COMMON_WORLDRECAT1B6A4_H
 #define COMMON_WORLDRECAT1B6A4_H
 struct LevelBitRecord;
-#ifndef SPAN_1000_CODE_8028B64C_H
-#define SPAN_1000_CODE_8028B64C_H
+#ifndef WORLD_SCENE_LIST_AND_LOOKUP_DECLARATIONS_H
+#define WORLD_SCENE_LIST_AND_LOOKUP_DECLARATIONS_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
@@ -20,17 +20,17 @@ extern void Scene_ClearActorLinksById(void *scene, s32 linkId);
 struct ObjectSceneRegisterActorInSceneLists;
 typedef struct ObjectSceneRegisterActorInSceneLists ObjectSceneRegisterActorInSceneLists;
 
-struct ObjCode8028B64C;
-struct ObjCode8028B64C {
+struct SceneActorLinkGroupView;
+struct SceneActorLinkGroupView {
     char pad[0xC50];
     ActorLinkedControllerView *actors[0x80];
     int count;
 };
 
-struct ObjCode8028B64C;
-typedef struct ObjCode8028B64C ObjCode8028B64C;
+struct SceneActorLinkGroupView;
+typedef struct SceneActorLinkGroupView SceneActorLinkGroupView;
 
-extern ActorLinkedControllerView *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id);
+extern ActorLinkedControllerView *Scene_ResolveActorLinkGroup(SceneActorLinkGroupView *obj, int id);
 
 
 struct ScenePlayerObjectListView;
@@ -61,8 +61,8 @@ extern int g_vertexLightingMode;
 
 
 
-struct WorldCode8028B64C;
-typedef struct WorldCode8028B64C WorldCode8028B64C;
+struct SceneTypeFourteenActorListView;
+typedef struct SceneTypeFourteenActorListView SceneTypeFourteenActorListView;
 
 struct SceneNearestActorView;
 typedef struct SceneNearestActorView SceneNearestActorView;
@@ -107,14 +107,14 @@ struct SceneDefinitionActorView {
 struct SceneDefinitionActorView;
 typedef struct SceneDefinitionActorView SceneDefinitionActorView;
 
-struct WorldCode8028B64C;
-struct WorldCode8028B64C {
+struct SceneTypeFourteenActorListView;
+struct SceneTypeFourteenActorListView {
     char pad[0x1B664];
     SceneDefinitionActorView *list[16];
     s32 count;
 };
 
-extern SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id);
+extern SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(SceneTypeFourteenActorListView *world, s32 id);
 
 struct SceneCounterPairView;
 struct SceneCounterPairView {
@@ -136,16 +136,16 @@ struct ScenePositionEntry {
 };
 
 struct ScenePositionEntry;
-struct OwnerCode8028B64C;
-struct OwnerCode8028B64C {
+struct SceneListedEntryOwnerView;
+struct SceneListedEntryOwnerView {
     char pad[0x1024];
     struct ScenePositionEntry *entries[0x20];
     s32 count;
 };
 
 struct ScenePositionEntry;
-struct OwnerCode8028B64C;
-extern struct ScenePositionEntry *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct ScenePositionEntry *pos);
+struct SceneListedEntryOwnerView;
+extern struct ScenePositionEntry *Scene_FindNearestListedEntry(struct SceneListedEntryOwnerView *owner, struct ScenePositionEntry *pos);
 
 
 

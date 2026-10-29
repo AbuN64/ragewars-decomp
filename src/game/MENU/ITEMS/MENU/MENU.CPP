@@ -6,6 +6,6 @@
 void Items_MenuUpdateNoOpEuropean(void) {
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_MenuUpdateNoOpEuropean);
+INCLUDE_ASM("ovl_frontendMenu", Items_MenuUpdateNoOpEuropean);
 #endif
 #endif

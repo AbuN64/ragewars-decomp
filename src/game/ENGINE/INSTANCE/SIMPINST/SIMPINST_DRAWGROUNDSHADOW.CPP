@@ -98,16 +98,16 @@ void Simpinst_DrawGroundShadow(void *actor) {
     f32 ground;
     f32 height;
     f32 size;
-    ground = ((Shared_Func80243A80Actor *)actor)->groundY;
-    height = ((Shared_Func80243A80Actor *)actor)->y - ground;
+    ground = ((Shared_CollisionActor *)actor)->groundY;
+    height = ((Shared_CollisionActor *)actor)->y - ground;
     if (!(RW_MIN_LT(InstHdr_GetActorShadowRadius(actor) * 0.5f, InstHdr_GetActorShadowRadius(actor) * 0.5f - height * 0.1f) < 0.0f)) {
         size = RW_MIN_LT(InstHdr_GetActorShadowRadius(actor) * 0.5f, InstHdr_GetActorShadowRadius(actor) * 0.5f - height * 0.1f);
     } else {
         size = 0.0f;
     }
     rotation = Insthdr_BuildActorGroundRotation(actor);
-    position.x = ((Shared_Func80243A80Actor *)actor)->x;
-    position.z = ((Shared_Func80243A80Actor *)actor)->z;
+    position.x = ((Shared_CollisionActor *)actor)->x;
+    position.z = ((Shared_CollisionActor *)actor)->z;
     position.y = ground;
     Graphu64_LimitVectorLength(&position, 20000.0f);
     MatrixFromQuaternion(&rotation.x, matrix);

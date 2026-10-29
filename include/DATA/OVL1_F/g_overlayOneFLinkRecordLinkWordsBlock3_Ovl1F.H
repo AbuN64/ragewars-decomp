@@ -1,0 +1,4 @@
+#ifndef DATA_OVERLAY_ONE_F_FIRST_CALLBACK_ROM_ENTRY_H
+#define DATA_OVERLAY_ONE_F_FIRST_CALLBACK_ROM_ENTRY_H
+extern char addrLow_Weapon_EnterChargeStateWithCues[];
+#endif

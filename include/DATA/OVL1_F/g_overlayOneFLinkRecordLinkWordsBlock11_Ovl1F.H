@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_F_LINK_WORDS_BLOCK11_H
+#define DATA_OVL1_F_LINK_WORDS_BLOCK11_H
+extern char addrLow_Weapon_EmptyAlternateFireHook[];
+#endif

@@ -158,7 +158,7 @@ void Playerai_SetInheritedMotionFlags(void *player, void *source, s32 enabled) {
             Playerai_ApplyDamageOverTime(player, source);
         }
         if (flag_8000) {
-            func_8022BEFC_de(player, source);
+            Playerai_NoopDamageSourceCallback_de(player, source);
         }
         if (flag_10000) {
             Playerai_ApplyPeriodicHazardDamage(player, source);

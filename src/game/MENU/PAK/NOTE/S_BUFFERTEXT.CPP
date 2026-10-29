@@ -1,4 +1,4 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_text_804058B0_E1930_us_rev1.c */
+/* ROM-grounded data: src/s_bufferText_SBuffertext.c */
 const char s_bufferText[9] = "Z-Buffer";

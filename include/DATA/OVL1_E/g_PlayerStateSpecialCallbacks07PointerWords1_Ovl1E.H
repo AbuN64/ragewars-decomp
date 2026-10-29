@@ -1,0 +1,5 @@
+#ifndef DATA_OVL1_E_OVL1_E_PACKED_CODE_ADDRESSES_H
+#define DATA_OVL1_E_OVL1_E_PACKED_CODE_ADDRESSES_H
+extern char g_Player_BeginLateralLeapPackedAddress24[];
+extern char g_Player_UpdateLateralLeapPackedAddress24[];
+#endif

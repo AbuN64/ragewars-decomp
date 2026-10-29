@@ -1,9 +1,9 @@
 #ifndef DATA_OVL1_J_MENU_DISPATCHSETTINGSTABLEEVENT_DATA_H
 #define DATA_OVL1_J_MENU_DISPATCHSETTINGSTABLEEVENT_DATA_H
-extern char g_packedCodeAddress24_004374F0[];
-extern char g_packedCodeAddress24_004375C4[];
-extern char g_packedCodeAddress24_004375F4[];
-extern char g_packedCodeAddress24_00437624[];
-extern char g_packedCodeAddress24_00437754[];
-extern char g_packedCodeAddress24_00437790[];
+extern char g_Menu_SettingsTableEvent0E06HandlerPackedAddress24[];
+extern char g_Menu_SettingsTableEvent0E03HandlerPackedAddress24[];
+extern char g_Menu_SettingsTableEvent0E07HandlerPackedAddress24[];
+extern char g_Menu_SettingsTableEvent0E08HandlerPackedAddress24[];
+extern char g_Menu_SettingsTableEvent02HandlerPackedAddress24[];
+extern char g_Menu_SettingsTableEvent01HandlerPackedAddress24[];
 #endif

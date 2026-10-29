@@ -81,7 +81,7 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
    0x108 and 0x10A and either the hit at 0xCB bypasses an object without flag 0x400 or the scaled count
    reaches its limit (the count at 0x12C against 0x134 while flagged 0x400 below three hits at 0x10C,
    otherwise the hits against 0x104), it raises event 7 at its position through Events_DispatchCallback and
-   releases it through func_80285DB0_de. Written from its own assembly with the destroy decision as an
+   releases it through Rumble_SetActorStateBit_Actionhit. Written from its own assembly with the destroy decision as an
    if/else chain on a byte-sized damage factor. */
 
 

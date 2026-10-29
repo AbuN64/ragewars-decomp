@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D2B10.CPP */
+/* k_SSmackformatEncodedWordsBlock1_SSmackformat.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int k_SSmackformatEncodedWordsBlock1[16] = {
@@ -38,7 +38,7 @@ unsigned int k_SSmackformatEncodedWords[16] = {
 };
 #endif
 
-/* DATA_800D2B50.CPP */
+/* s_smackFormat_SSmackformat.CPP */
 /* ROM-grounded data: rodata/writable/800D2B50 */
 #ifdef VERSION_DE
 unsigned int s_smackFormat[4] = {
@@ -66,7 +66,7 @@ unsigned int s_smackFormat[4] = {
 };
 #endif
 
-/* DATA_800D2B60.CPP */
+/* g_SSmackformatEncodedWords_SSmackformat.CPP */
 /* ROM-grounded data: rodata/unresolved/800D2B60 */
 unsigned int g_SSmackformatEncodedWords[4] = {
     0x00000000, 0x40490FDB, 0x00000000, 0xC0490FDB,

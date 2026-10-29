@@ -18,7 +18,7 @@
 #include "MENU/FRAME_SEQUENCE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-/* Tests whether any of the given playback mode bits are set; func_804196D8_de asks it about bit 1
+/* Tests whether any of the given playback mode bits are set; SmpFrameAnim_UpdateFrameSequence_SmpFrameanim asks it about bit 1
    (forward), 0x10 (ping-pong), 0x20 (counted loop) and 8 (loop) on every tick. */
 
 
@@ -131,7 +131,7 @@ Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
-/* func_804196D8_de advances a frame sequence: it adds elapsed time into offset 0x54 and, once that
+/* SmpFrameAnim_UpdateFrameSequence_SmpFrameanim advances a frame sequence: it adds elapsed time into offset 0x54 and, once that
    exceeds the duration at 0x58, moves the frame index at 0x4C through the -1 terminated array at
    0x48. SmpFrameAnim_CreateFrameSequence resets the index through here after counting the frames. */
 
@@ -140,7 +140,7 @@ void SmpFrameAnim_SetSequenceFrame(struct FrameSequence *sequence, s32 frame) {
     sequence->frame = frame;
 }
 
-/* Sets how long each frame of a sequence is shown; func_804196D8_de advances the frame once the
+/* Sets how long each frame of a sequence is shown; SmpFrameAnim_UpdateFrameSequence_SmpFrameanim advances the frame once the
    time accumulated at 0x54 exceeds this. SmpFrameAnim_CreateFrameSequence clears it when it builds the sequence. */
 
 
@@ -162,7 +162,7 @@ s32 SmpFrameAnim_GetFrameCount(struct FrameSequence *sequence) {
     return sequence->count;
 }
 
-/* Sets how many more times a counted-loop sequence repeats; func_804196D8_de decrements it each
+/* Sets how many more times a counted-loop sequence repeats; SmpFrameAnim_UpdateFrameSequence_SmpFrameanim decrements it each
    time the sequence wraps and stops when it reaches zero. SmpFrameAnim_CreateFrameSequence clears it on creation. */
 
 
@@ -177,7 +177,7 @@ s32 SmpFrameAnim_GetLoopCount(struct FrameSequence *sequence) {
     return sequence->loops;
 }
 
-/* Sets playback mode bits in a frame sequence; SmpFrameAnim_CreateFrameSequence sets bit 1 and func_804196D8_de sets
+/* Sets playback mode bits in a frame sequence; SmpFrameAnim_CreateFrameSequence sets bit 1 and SmpFrameAnim_UpdateFrameSequence_SmpFrameanim sets
    bit 2 when it reverses a ping-pong sequence. */
 
 
@@ -185,7 +185,7 @@ void SmpFrameAnim_AddSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     sequence->flags |= bits;
 }
 
-/* Clears playback mode bits in a frame sequence; SmpFrameAnim_AddSequenceFlags sets them and func_804196D8_de clears
+/* Clears playback mode bits in a frame sequence; SmpFrameAnim_AddSequenceFlags sets them and SmpFrameAnim_UpdateFrameSequence_SmpFrameanim clears
    bit 1 or 2 when it reverses a ping-pong sequence. */
 
 
@@ -193,7 +193,7 @@ void SmpFrameAnim_ClearSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     sequence->flags &= ~bits;
 }
 
-/* Tests whether any of the given playback mode bits are set; func_804196D8_de asks it about bit 1
+/* Tests whether any of the given playback mode bits are set; SmpFrameAnim_UpdateFrameSequence_SmpFrameanim asks it about bit 1
    (forward), 0x10 (ping-pong), 0x20 (counted loop) and 8 (loop) on every tick. */
 
 
@@ -217,12 +217,12 @@ s32 SmpFrameAnim_DispatchEvent(void *widget, s32 eventId, s32 eventData0, s32 ev
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_frameAnimationEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

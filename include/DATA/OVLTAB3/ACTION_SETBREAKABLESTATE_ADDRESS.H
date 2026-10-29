@@ -1,0 +1,4 @@
+#ifndef DATA_OVLTAB3_ACTION_SETBREAKABLESTATE_ADDRESS_H
+#define DATA_OVLTAB3_ACTION_SETBREAKABLESTATE_ADDRESS_H
+extern char addrLow_Action_SetBreakableState[];
+#endif

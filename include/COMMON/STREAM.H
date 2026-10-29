@@ -4,20 +4,20 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
-struct Output8025EF54;
-typedef struct Output8025EF54 Output8025EF54;
+struct ScalarSampleOutput;
+typedef struct ScalarSampleOutput ScalarSampleOutput;
 
-struct Output8025EF54;
+struct ScalarSampleOutput;
 
-extern void Polytrak2_DecodeScalarSamples(u32 *stream, Output8025EF54 *out, s32 count);
+extern void Polytrak2_DecodeScalarSamples(u32 *stream, ScalarSampleOutput *out, s32 count);
 
 
 
 struct Stream;
 typedef struct Stream Stream;
 
-struct Segment8025FFD0;
-typedef struct Segment8025FFD0 Segment8025FFD0;
+struct PackedCurveSegment;
+typedef struct PackedCurveSegment PackedCurveSegment;
 
 
 
@@ -28,7 +28,7 @@ extern float g_packedFloatQuantizationRoundBias;
 
 
 
-struct Segment8025FFD0;
+struct PackedCurveSegment;
 
 struct Stream;
 struct Stream {
@@ -41,7 +41,7 @@ struct Stream {
     s32 segmentIndex;
 };
 
-struct Decode8025EF54;
+struct ScalarSampleDecodeState;
 
 struct Curve;
 typedef struct Curve Curve;
@@ -55,8 +55,8 @@ extern double g_trackSectionUnsignedConversionBias;
 
 
 
-struct Decode8025EF54;
-typedef struct Decode8025EF54 Decode8025EF54;
+struct ScalarSampleDecodeState;
+typedef struct ScalarSampleDecodeState ScalarSampleDecodeState;
 
 struct Poly;
 

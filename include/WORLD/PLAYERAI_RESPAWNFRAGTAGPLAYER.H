@@ -354,7 +354,7 @@ struct PlayerRespawnHealthView {
     char pad0[0x5EA];
     s16 health;
 };
-struct ObjCode8022E938 {
+struct PlayerProfileStorage {
     char pad[8];
     s32 state; /* 0x08 */
     u8 fieldC;
@@ -375,11 +375,11 @@ struct ObjCode8022E938 {
 extern void Playerai_ResetMotionAndSelectIdleAnimation(FragTagRespawnActorView *actor);
 extern void Playerai_SelectMovementAnimation(FragTagRespawnActorView *object);
 extern void Playerai_ReleasePlayerResource(ResourceLoadState *resourceLoadState);
-extern void func_8022ECC4_de(void);
+extern void Playerai_EmptyMovementAnimationHook(void);
 extern void Playerai_ToggleActionFlagMode(Player *player);
 extern void Playerai_AdvanceCurrentRunEndState(void);
-extern void func_8022EDF4_de(void);
-extern void func_8022EB04_de(void);
+extern void Playerai_EmptyPlayerResourceHook(void);
+extern void Playerai_EmptySurfaceHeightEffectHook(void);
 extern void Playerai_UpdateStoredRunEndPlayer(void);
 extern s32 Playerai_CountTrailingSpaces(s32 textAddress, s32 lastIndex);
 #endif

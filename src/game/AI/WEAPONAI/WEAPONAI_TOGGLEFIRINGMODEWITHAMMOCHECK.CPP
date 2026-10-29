@@ -19,7 +19,7 @@
    player game, clicking and showing the empty message when out), mode 1 with a second shot available
    arms mode 2, clicking and showing the unavailable message and falling back to mode 1 when mode 2
    cannot be used, and any other state resets to mode 1; finally, unless Weaponai_TryRequestFiringState handled the
-   weapon or the actor has flag 0x400, it fires through func_80214178_de with the holder's state's fire
+   weapon or the actor has flag 0x400, it fires through Actor_RequestActorState_Damageai with the holder's state's fire
    mode from g_weaponActionRecords. */
 extern WeaponActionRecord g_weaponActionRecords[];
 extern char g_localPlayerProfiles[];

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800C90B8.CPP */
+/* PrintfFlagBitWordsEuXUnit.CPP */
 #if defined(VERSION_EU_X)
 /* bytes live in the preceding array */
 #endif

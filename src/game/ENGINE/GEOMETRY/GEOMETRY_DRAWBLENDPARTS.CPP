@@ -130,7 +130,7 @@ void Geometry_AlternateNoOperation(void) {
 void Geometry_NoOperation(void) {
 }
 
-/* CODE_8026D844.CPP */
+/* Geometry_InitializeModelRenderState_GeometryDrawblendparts.CPP */
 extern void Graphu64_BuildScaleMatrix(void *, float, float, float);
 
 extern void GraphU64_PackFixedMatrix(void *, void *);
@@ -487,9 +487,9 @@ void Geometry_LoadRenderMicrocode(void) {
     cmd = g_displayListCursor++;
     gLoadUcode(cmd, &g_primaryRenderMicrocodeText, 0x800);
     cmd = g_displayListCursor++;
-    gSPDisplayList(cmd, (u32) &D_800CBCC0);
+    gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListFirst);
     cmd = g_displayListCursor++;
-    gSPDisplayList(cmd, (u32) &D_800CBCF0_de);
+    gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListSecond_de);
 }
 
 void Geometry_SwitchRenderMicrocode(void) {
@@ -502,9 +502,9 @@ void Geometry_SwitchRenderMicrocode(void) {
     cmd = g_displayListCursor++;
     gLoadUcode(cmd, &g_alternateRenderMicrocodeText, 0x800);
     cmd = g_displayListCursor++;
-    gSPDisplayList(cmd, (u32) &D_800CBCC0);
+    gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListFirst);
     cmd = g_displayListCursor++;
-    gSPDisplayList(cmd, (u32) &D_800CBCF0_de);
+    gSPDisplayList(cmd, (u32) &g_cameraViewDisplayListSecond_de);
 }
 
 /** Initialize the two-word state to minus one and zero. */
@@ -526,11 +526,11 @@ void Geometry_ClearMaterialGroups(void) {
     g_translucentMaterialGroupTree = 0;
 }
 
-void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **root, u32 materialKey)
+void *Geometry_FindMaterialNodeOrParent(MaterialTreeNode **root, u32 materialKey)
 {
   u32 nodeKey;
-  Node8026E4F8 *parent;
-  Node8026E4F8 *node;
+  MaterialTreeNode *parent;
+  MaterialTreeNode *node;
   node = *root;
   parent = 0;
   if (node != 0)
@@ -632,7 +632,7 @@ unsigned int k_GeometryDrawblendpartsZeroWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8026D844_CA39C_us_rev1.c */
+/* ROM-grounded data: src/g_geometryInitialModelScaleUsRev1_GeometryDrawblendparts.c */
 const unsigned int g_geometryInitialModelScaleUsRev1[1] = {
     0x40000000,
 };

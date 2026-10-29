@@ -4,12 +4,12 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
 
-/* Handles a player's death: stops the body's motion at 0x1C to 0x24 and runs func_8044A07C_de; in a
+/* Handles a player's death: stops the body's motion at 0x1C to 0x24 and runs Player_ReleaseObjectHandles_PlayeraiResetplayerafterdeath; in a
    single player game (g_motionVisibilitySettings) a player with limited lives at 0x1450 gets the death menu for its
-   profile slot 0 to 3 on its view, and when D_80146938 asks and the player is out of a team game, once
+   profile slot 0 to 3 on its view, and when g_selectedProfileHealthOptionEnabled asks and the player is out of a team game, once
    every active player among the first eight is out the team is revived through Player_PlacePlayerForRound (every
    active player in mode 2 when the mode 14 leader is down, and the leader in modes below 3); in
-   multiplayer the view shows the respawn menu, D_45047C when the player has a respawn count at 0x5EA
+   multiplayer the view shows the respawn menu, g_playerRespawnCountDialog when the player has a respawn count at 0x5EA
    or D_450DA8 otherwise. */
 
 
@@ -20,12 +20,12 @@
 
 
 
-extern char D_0044F82C_de;
+extern char g_playerRespawnCountDialog_de;
 extern char D_00450178;
-extern char D_00450AD0;
-extern char D_00450AF4;
-extern char D_00450B18;
-extern char D_00450B3C;
+extern char g_playerDeathDialogSlotFirst;
+extern char g_playerDeathDialogSlotSecond;
+extern char g_playerDeathDialogSlotThird;
+extern char g_playerDeathDialogSlotFourth;
 extern char g_playerViewRenderContext;
 
 extern void Player_ReleaseObjectHandles(void *);
@@ -48,16 +48,16 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, PlayerRespawnBodyView 
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {
             case 0:
-                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450AD0, player, player->views5E8.view698_36.controller, 0);
+                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerDeathDialogSlotFirst, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 1:
-                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450AF4, player, player->views5E8.view698_36.controller, 0);
+                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerDeathDialogSlotSecond, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 2:
-                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450B18, player, player->views5E8.view698_36.controller, 0);
+                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerDeathDialogSlotThird, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 3:
-                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450B3C, player, player->views5E8.view698_36.controller, 0);
+                Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerDeathDialogSlotFourth, player, player->views5E8.view698_36.controller, 0);
                 break;
             }
         }
@@ -95,7 +95,7 @@ void Playerai_ResetPlayerAfterDeath(SharedPlayer *player, PlayerRespawnBodyView 
         }
     } else if (player->views5DC.view5DC_2.view != 0) {
         if (player->views5E8.view5EA_3.respawns != 0) {
-            Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_0044F82C_de, player, player->views5E8.view698_36.controller, 0);
+            Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &g_playerRespawnCountDialog_de, player, player->views5E8.view698_36.controller, 0);
         } else {
             Menu_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450178, player, player->views5E8.view698_36.controller, 0);
         }

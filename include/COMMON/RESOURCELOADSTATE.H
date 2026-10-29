@@ -22,7 +22,7 @@ typedef struct PlayerRespawnHealthView PlayerRespawnHealthView;
 
 
 
-struct ObjCode8022E938;
+struct PlayerProfileStorage;
 
 
 
@@ -62,11 +62,11 @@ extern float g_playerMovementReverseAnimationThreshold;
 
 
 
-struct ObjCode8022E938;
-typedef struct ObjCode8022E938 ObjCode8022E938;
+struct PlayerProfileStorage;
+typedef struct PlayerProfileStorage PlayerProfileStorage;
 
 
-struct ObjCode8022E938;
+struct PlayerProfileStorage;
 
 extern float g_playerSurfaceAudioHeightThreshold;
 

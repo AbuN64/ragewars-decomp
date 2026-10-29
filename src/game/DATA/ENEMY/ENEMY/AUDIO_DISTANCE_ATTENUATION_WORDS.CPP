@@ -21,7 +21,7 @@ extern char g_actionEnterDispatchTable[];
 extern char g_spawnActorDispatchTable[];
 extern char g_enemyDispatchLinkStorage_800C854C[];
 extern char g_enemyDispatchLinkStorage_800C8668[];
-extern char g_enemyDispatchLinkStorage_800CD604[];
+extern char g_lightAnimationOffsetTable[];
 unsigned int data_unresolved_800CD40C[110] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
     0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
@@ -34,9 +34,9 @@ unsigned int data_unresolved_800CD40C[110] = {
     0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
     0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
     0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE84841, 0x00000000, 0x00000000, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8668 + 0x40, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C8130 + 0x48,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C8370 + 0x78, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C854C + 0x2C, (unsigned int)g_enemyDispatchLinkStorage_800C81F0Us + 0x4C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, 0x00660000, 0x00040000, 0x00000021, 0x3F800000,
+    0xEBE84841, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8668 + 0x40, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C8130 + 0x48,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C8370 + 0x78, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C854C + 0x2C, (unsigned int)g_enemyDispatchLinkStorage_800C81F0Us + 0x4C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x00660000, 0x00040000, 0x00000021, 0x3F800000,
 };
 #endif
 #endif
@@ -50,7 +50,7 @@ extern char g_enemyDispatchLinkStorage_800C97B4[];
 extern char g_enemyDispatchLinkStorage_800C98C8[];
 extern char g_enemyDispatchLinkStorage_800C99B0[];
 extern char g_enemyDispatchLinkStorage_800C9A38[];
-extern char g_enemyDispatchLinkStorage_800CD604[];
+extern char g_lightAnimationOffsetTable[];
 unsigned int data_unresolved_800CEAAC[110] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
     0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
@@ -63,9 +63,9 @@ unsigned int data_unresolved_800CEAAC[110] = {
     0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
     0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
     0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE85420, 0x00000000, 0x00000000, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_triggeredMotionDispatchTable + 0xE8, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C97B4 + 0x64,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C99B0 + 0x18, (unsigned int)g_enemyDispatchLinkStorage_800C9A38 + 0x50, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_movingMotionDispatchTable + 0x68, (unsigned int)g_enemyDispatchLinkStorage_800C98C8 + 0x14, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, 0x53434F52, 0x50494F4E, 0x00000000, 0x3F800000,
+    0xEBE85420, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_triggeredMotionDispatchTable + 0xE8, (unsigned int)g_spawnActorDispatchTable + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800C97B4 + 0x64,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C99B0 + 0x18, (unsigned int)g_enemyDispatchLinkStorage_800C9A38 + 0x50, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_movingMotionDispatchTable + 0x68, (unsigned int)g_enemyDispatchLinkStorage_800C98C8 + 0x14, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x53434F52, 0x50494F4E, 0x00000000, 0x3F800000,
 };
 #endif
 #endif
@@ -79,7 +79,7 @@ extern char g_enemyDispatchLinkStorage_800C9068[];
 extern char g_enemyDispatchLinkStorage_800C9194[];
 extern char g_enemyDispatchLinkStorage_800C9208[];
 extern char g_enemyDispatchLinkStorage_800C9368[];
-extern char g_enemyDispatchLinkStorage_800CD604[];
+extern char g_lightAnimationOffsetTable[];
 unsigned int data_unresolved_800CE0DC[110] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
     0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
@@ -92,9 +92,9 @@ unsigned int data_unresolved_800CE0DC[110] = {
     0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
     0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
     0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE80000, 0x00000000, 0x00000000, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C9368 + 0x10, (unsigned int)g_enemyDispatchLinkStorage_800C9194 + 0x30, (unsigned int)g_enemyDispatchLinkStorage_800C8DB0 + 0x98,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8FF8, (unsigned int)g_enemyDispatchLinkStorage_800C9068 + 0x50, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C9208 + 0x40, (unsigned int)g_enemyDispatchLinkStorage_800C8ED0 + 0x3C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, 0x002791FC, 0x00206950, 0x00000000, 0x3F800000,
+    0xEBE80000, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C9368 + 0x10, (unsigned int)g_enemyDispatchLinkStorage_800C9194 + 0x30, (unsigned int)g_enemyDispatchLinkStorage_800C8DB0 + 0x98,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8FF8, (unsigned int)g_enemyDispatchLinkStorage_800C9068 + 0x50, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C9208 + 0x40, (unsigned int)g_enemyDispatchLinkStorage_800C8ED0 + 0x3C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x002791FC, 0x00206950, 0x00000000, 0x3F800000,
 };
 #endif
 #endif
@@ -107,8 +107,8 @@ extern char g_damageDispatchTable[];
 extern char g_enemyDispatchLinkStorage_800C85D0[];
 extern char g_enemyDispatchLinkStorage_800C8658[];
 extern char g_enemyDispatchLinkStorage_800C86E8[];
-extern char g_enemyDispatchLinkStorage_800CD604[];
-extern char data_unresolved_800C8294[];
+extern char g_lightAnimationOffsetTable[];
+extern char g_actionInitBreakableMotionRecordTable_de[];
 unsigned int data_unresolved_800CD4FC[110] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
     0x3EB504E6, 0x3EC00000, 0x3ECA62CC, 0x3ED44391, 0x3EDDB3E1, 0x3EE6C15D, 0x3EEF774B, 0x3EF7DEF8,
@@ -121,9 +121,9 @@ unsigned int data_unresolved_800CD4FC[110] = {
     0x3F800000, 0x00000001, 0xF7F9F8F5, 0x080E190C, 0x12171A0E, 0xFCEEF2E3, 0xD7E2E5E7, 0xE5DDE2EA,
     0xE1E5EFF2, 0x0002FEF3, 0xF3F70502, 0xFE09181F, 0x221D1518, 0x0A0DFDFA, 0x01131F27, 0x1D1E1414,
     0xFFF1E6EC, 0xE8E1E3E8, 0xE6F1F102, 0x11080711, 0x0E090C0C, 0x040C050A, 0x0D05FDFE, 0xF6F7F8EB,
-    0xEBE8D650, 0x00000000, 0x00000000, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C86E8 + 0xA0, (unsigned int)g_enemyDispatchLinkStorage_800C85D0 + 0x4, (unsigned int)g_enemyDispatchLinkStorage_800C81F0 + 0x68,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_damageDispatchTable + 0xA8, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8658, (unsigned int)data_unresolved_800C8294 + 0x88, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C,
-    (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800CD604 + 0x5C, 0x3F800000, 0xFCEF23B1, 0x013332D1, 0x3F800000,
+    0xEBE8D650, 0x00000000, 0x00000000, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C86E8 + 0xA0, (unsigned int)g_enemyDispatchLinkStorage_800C85D0 + 0x4, (unsigned int)g_enemyDispatchLinkStorage_800C81F0 + 0x68,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_actionEnterDispatchTable + 0x88, (unsigned int)g_damageDispatchTable + 0xA8, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_enemyDispatchLinkStorage_800C8658, (unsigned int)g_actionInitBreakableMotionRecordTable_de + 0x88, (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C,
+    (unsigned int)g_lightAnimationOffsetTable + 0x5C, (unsigned int)g_lightAnimationOffsetTable + 0x5C, 0x3F800000, 0xFCEF23B1, 0x013332D1, 0x3F800000,
 };
 #endif
 #endif

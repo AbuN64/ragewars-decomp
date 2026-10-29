@@ -14,7 +14,7 @@ const unsigned int k_GfxdataEncodedWordsBlock2[1] = {
 };
 #endif
 
-/* DATA_800D95E4.CPP */
+/* g_huffmanSingleZeroRuns_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 struct {
     unsigned char b0[16];
@@ -42,7 +42,7 @@ struct {
 };
 #endif
 
-/* DATA_800D979C.CPP */
+/* g_huffmanDeltaSingleZeroRunNodes_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_huffmanDeltaSingleZeroRunNodes[515] = {
     0x00010006, 0x00020005, 0x00030004, 0x0800FFFE, 0x08000002, 0x08000000, 0x00070200, 0x000800A7,
@@ -113,7 +113,7 @@ unsigned int g_huffmanDeltaSingleZeroRunNodes[515] = {
 };
 #endif
 
-/* DATA_800D9FA8.CPP */
+/* g_huffmanFiveZeroRuns_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 struct {
     unsigned char b0[16];
@@ -196,7 +196,7 @@ struct {
 };
 #endif
 
-/* DATA_800DA840.CPP */
+/* g_huffmanDeltaFiveZeroRunNodes_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_huffmanDeltaFiveZeroRunNodes[523] = {
     0x0001020A, 0x00020003, 0x08000001, 0x00040209, 0x00050206, 0x00060017, 0x00070016, 0x00080009,
@@ -268,7 +268,7 @@ unsigned int g_huffmanDeltaFiveZeroRunNodes[523] = {
 };
 #endif
 
-/* DATA_800DB06C.CPP */
+/* g_huffmanNineZeroRuns_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 struct {
     unsigned char b0[16];
@@ -406,7 +406,7 @@ struct {
 };
 #endif
 
-/* DATA_800DBFE4.CPP */
+/* g_huffmanDeltaNineZeroRunNodes_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_huffmanDeltaNineZeroRunNodes[531] = {
     0x00010212, 0x00020003, 0x08000001, 0x00040211, 0x0005001A, 0x00060007, 0x0800FFFE, 0x00080019,
@@ -479,7 +479,7 @@ unsigned int g_huffmanDeltaNineZeroRunNodes[531] = {
 };
 #endif
 
-/* DATA_800DC830.CPP */
+/* g_huffmanSignedSmallNodes_Gfxdata.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_huffmanSignedSmallNodes[257] = {
     0x0001001E, 0x0002001D, 0x00030004, 0x08000002, 0x00050006, 0x0800FFFD, 0x0007001C, 0x00080009,

@@ -103,7 +103,7 @@ extern char g_characterPreviewTextReferenceShared6[];
 extern char g_characterPreviewTextReferenceEu3[];
 extern char g_characterPreviewTextReferenceShared7[];
 extern char g_characterPreviewTextReferenceShared8[];
-unsigned int data_unresolved_800EB28C[521] = {
+unsigned int g_characterPreviewDefinitionsEuX[521] = {
     0x00000000, 0x00000000, 0xFFFFFFEC, 0xFFFFFFEC, (unsigned int)g_characterPreviewTextReferenceEu1 + 0xC, 0x0000008A, 0x00000001, 0x00000016,
     0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x43200000, 0x43480000, 0x43200000, 0x43520000,
     0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000, 0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000,
@@ -182,7 +182,7 @@ extern char g_characterPreviewTextReferenceShared6[];
 extern char g_characterPreviewTextReferenceEu3[];
 extern char g_characterPreviewTextReferenceShared7[];
 extern char g_characterPreviewTextReferenceShared8[];
-unsigned int data_unresolved_800F00CC[521] = {
+unsigned int g_characterPreviewDefinitionsEu[521] = {
     0x00000000, 0x00000000, 0xFFFFFFEC, 0xFFFFFFEC, (unsigned int)g_characterPreviewTextReferenceEu1 + 0x10, 0x00000086, 0x00000001, 0x00000016,
     0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x3DE147AE, 0x43200000, 0x43480000, 0x43200000, 0x43520000,
     0x42240000, 0xC2140000, 0xC2C80000, 0xC2180000, 0xC2140000, 0xC2C80000, 0x42080000, 0xC2940000,

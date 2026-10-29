@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_constants_8040170C_E3448_us_rev1.c */
+/* ROM-grounded data: src/g_trackOpacityStepWords_TrackEvaluatetrackopacityData.c */
 const unsigned int g_trackOpacityStepWords[1] = {
     0x3E4CCCCD,
 };

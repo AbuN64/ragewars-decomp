@@ -1,6 +1,6 @@
 
 
-/* DATA_800E3724.CPP */
+/* g_slotSelectionMenuEventHandlerRecordsUsRev1_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
 extern char g_Frontend_CreateSlotSelectionMenuAddress[];
 extern char g_Frontend_AnimateSlotSelectionMenuAddress[];
@@ -18,7 +18,7 @@ unsigned int g_slotSelectionMenuEventHandlerRecordsUsRev1[27] = {
 };
 #endif
 
-/* DATA_800E3790.CPP */
+/* g_rewardScoreBudgets_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_rewardItemTierPairsUsRev1[10] = {
     0x00000063, 0x0000002E, 0x00000062, 0x0000002F, 0x00000061, 0x00000029, 0x0000005F, 0x0000002A,
@@ -33,7 +33,7 @@ unsigned int g_rewardScoreBudgets[25] = {
 };
 #endif
 
-/* DATA_800E381C.CPP */
+/* g_rewardItemTiers_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_rewardItemTiers[102] = {
     0x00000000, 0x800D7284, 0x00000001, 0x800D72CC, 0x00000002, 0x800D729C, 0x00000003, 0x800D72A8,
@@ -52,7 +52,7 @@ unsigned int g_rewardItemTiers[102] = {
 };
 #endif
 
-/* DATA_800E39B4.CPP */
+/* g_rewardItemLabelPointerTailUsRev1_GRewarditemtiers.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3594_unclaimed_E4390_unclaimed_E441C_unclaimed_E45B4 */
 unsigned int g_rewardItemLabelPointerTailUsRev1[3] = {

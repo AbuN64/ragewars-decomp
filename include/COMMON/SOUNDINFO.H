@@ -7,7 +7,7 @@
 extern int SoundInfo_GetYaw(void *object);
 
 
-extern signed char func_8025E560_de(void *object);
+extern signed char SoundInfo_GetByteF_de(void *object);
 
 
 
@@ -16,7 +16,7 @@ extern signed char func_8025E560_de(void *object);
 extern short SoundInfo_GetPreset(void *soundDescriptor);
 
 
-extern int func_8025E530_de(char *object);
+extern int SoundInfo_GetPitchPresetId_de(char *object);
 
 
 

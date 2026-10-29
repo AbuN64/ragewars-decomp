@@ -48,7 +48,7 @@ extern void SmpButton_SelectListEntry(void *menu, s32 index);
 /* Refreshes the entry list of screen g_matchOptionsScreen: reads the selection of its cursor at 0x20 through
    SmpButton_GetListSelection and the entry count of its list at 0x34 through N64Eng_GetNumericWidgetValue. With no entries it
    clears the list through Join_ResetJoinRequestEntries; otherwise, when the count differs from what
-   func_8041EB50_de shows or force is 1, it clears the list and rebuilds it for the count and
+   Join_CountUsedSlots_FrontendActivatematchoptionaction shows or force is 1, it clears the list and rebuilds it for the count and
    selection through Join_RandomizeJoinRequestEntries. */
 
 
@@ -83,11 +83,11 @@ extern void Join_ResetJoinRequestEntries(void);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_matchOptionsEventCodes, an actor kind at g_matchOptionsActorKinds and a handler at g_matchOptionsEventCallbacks: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80429B74)(void *, s32, s32, s32, s32);
+typedef s32 (*MatchOptionsEventCallback)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler80429B74 g_matchOptionsEventCallbacks;
+extern MatchOptionsEventCallback g_matchOptionsEventCallbacks;
 
 void Frontend_StoreMatchOptionWidgets(void) {
     Shared_Game *options;
@@ -299,7 +299,7 @@ s32 Frontend_RefreshMatchSlotsOnZeroEventAlt(void *first, void *second, void *th
 }
 
 s32 Frontend_DispatchMatchOptionsEvent(void *object, s32 event, s32 eventData, s32 eventValue, s32 eventContext) {
-    Handler80429B74 *entry;
+    MatchOptionsEventCallback *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

@@ -11,9 +11,9 @@ typedef struct CollisionInfo CollisionInfo;
 
 
 extern CollisionInfo g_defaultProbeMotionSettings;
-extern Instance8020CD74 *g_currentActorInstance;
-extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *actor);
-extern s32 CCollision_SweepPoint(Instance8020CD74 *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
+extern ActorInstanceHeader *g_currentActorInstance;
+extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *actor);
+extern s32 CCollision_SweepPoint(ActorInstanceHeader *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
 
 
 
@@ -22,8 +22,8 @@ extern s32 CCollision_SweepPoint(Instance8020CD74 *actorStorage, CVector3 curren
 
 
 
-s32 Cbarrel_TestTargetEyeObstruction(Instance8020CD74 *attacker, void *unused, Instance8020CD74 *target) {
-    Instance8020CD74 saved;
+s32 Cbarrel_TestTargetEyeObstruction(ActorInstanceHeader *attacker, void *unused, ActorInstanceHeader *target) {
+    ActorInstanceHeader saved;
     CVector3 desired;
     s32 collisions;
 

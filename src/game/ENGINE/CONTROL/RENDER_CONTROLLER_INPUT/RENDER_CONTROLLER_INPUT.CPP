@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80264104_C9FF8_us_rev1.c */
+/* ROM-grounded data: src/k_RenderControllerInputOneWords_RenderControllerInput.c */
 const unsigned int k_RenderControllerInputOneWords[1] = {
     0x3F800000,
 };

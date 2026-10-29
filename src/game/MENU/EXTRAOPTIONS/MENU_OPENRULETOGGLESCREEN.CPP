@@ -5,7 +5,7 @@
 #include "MENU/MENU_REFRESHEXTRAOPTIONLOCKS.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Menu_OpenRuleToggleScreen);
+INCLUDE_ASM("ovl_frontendMenu", Menu_OpenRuleToggleScreen);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -45,8 +45,8 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
 
     button = SmpButton_CreateListWidget(ID(0x3B4), ID(0x3B5));
     g_extraOptionsScreen->buttons[0] = button;
-    SmpButton_AppendListText(button, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[0], D_800D3474[0]);
+    SmpButton_AppendListText(button, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[0], g_toggleListSetLabel[0]);
     if (g_gameSettings & 0x8000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[0], 1);
     } else {
@@ -55,8 +55,8 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
 
     button = SmpButton_CreateListWidget(ID(0x3B1), ID(0x3B2));
     g_extraOptionsScreen->buttons[1] = button;
-    SmpButton_AppendListText(button, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[1], D_800D3474[0]);
+    SmpButton_AppendListText(button, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[1], g_toggleListSetLabel[0]);
     if (g_gameSettings & 0x10000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[1], 1);
     } else {
@@ -65,8 +65,8 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
 
     button = SmpButton_CreateListWidget(ID(0x3AD), ID(0x3AE));
     g_extraOptionsScreen->buttons[2] = button;
-    SmpButton_AppendListText(button, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[2], D_800D3474[0]);
+    SmpButton_AppendListText(button, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[2], g_toggleListSetLabel[0]);
     if (g_gameSettings & 0x8) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[2], 1);
     } else {
@@ -75,8 +75,8 @@ s32 Menu_OpenRuleToggleScreen(void *window) {
 
     button = SmpButton_CreateListWidget(ID(0x3AF), ID(0x3B0));
     g_extraOptionsScreen->buttons[3] = button;
-    SmpButton_AppendListText(button, D_800D3470_de[0]);
-    SmpButton_AppendListText(g_extraOptionsScreen->buttons[3], D_800D3474[0]);
+    SmpButton_AppendListText(button, g_toggleListClearLabel[0]);
+    SmpButton_AppendListText(g_extraOptionsScreen->buttons[3], g_toggleListSetLabel[0]);
     if (g_gameSettings & 0x20000000) {
         SmpButton_SelectListEntry(g_extraOptionsScreen->buttons[3], 1);
     } else {

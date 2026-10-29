@@ -24,7 +24,7 @@ unsigned int k_PolycolEncodedWordsBlock2[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802433DC_C9464_us_rev1.c */
+/* ROM-grounded data: src/k_PolycolEncodedWords_Polycol.c */
 const unsigned int k_PolycolEncodedWords[2] = {
     0x3F333333, 0x3F333333,
 };

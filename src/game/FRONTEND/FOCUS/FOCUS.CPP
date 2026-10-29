@@ -102,7 +102,7 @@ void Focus_UpdateFocusCaption(void) {
    name in item 0x1F3 and its rank text from Match_UpdateRankText in item 0x1F2, and formats into the
    screen's text buffers the record's counters at 0x70, 0x6C and 0x74, the value Achieve_CountEarnedAchievements
    reports and the byte at 0x17 for items 0x1FD, 0x1F4, 0x1F6, 0x1F9 and 0x1FA, making each item
-   visible through func_8040E8D8_de. */
+   visible through Widget_SetWidgetFlag08_EquipActivateequipmentpanel. */
 void Focus_RefreshProfileStatistics(void) {
     SlotSelectionWidget *item;
     s32 score;

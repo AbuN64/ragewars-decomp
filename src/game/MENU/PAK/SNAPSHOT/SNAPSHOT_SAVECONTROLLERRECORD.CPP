@@ -1,12 +1,12 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_0044ED44.H"
+#include "COMMON/LONE/g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when Note_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Note_NeedsIdRepair. */
+/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (g_pakPlayerMessagePending), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when Note_GetStatus reports none, and shows the g_pakChannelReadyMessage_SnapshotCheckstatusprompt, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability or g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt prompt according to Note_IsChannelReady_SnapshotEvaluatesavechannel and Note_NeedsIdRepair. */
 
 
 
@@ -19,12 +19,12 @@
 
 
 extern s32 g_pakUseScannedChannel;
-extern s32 D_800E28C0;
+extern s32 g_pakPlayerMessagePending;
 extern char g_matchEndingTeamWheelClose[];
 extern char D_0044FFA4[];
 extern unsigned char g_controllerPakReadyDialogResource[];
-extern char D_0044EA2C[];
-extern char D_0044E9C0[];
+extern char g_pakChannelReadyMessage_SnapshotCheckstatusprompt[];
+extern char g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt[];
 extern void Note_ProbeStatus(s32 ch);
 extern s32 Note_GetStatus(s32 ch);
 extern s32 Note_IsChannelReady(s32 ch);
@@ -37,17 +37,17 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
   char *channelUnavailableDialog;
   s32 ch;
   statusValue = 1;
-  D_800DE874 = 2;
-  D_8014D4C0_de = 0;
-  D_8014D4DC = 0;
-  D_80153760 = statusValue;
-  D_8014D4EC_de = 0;
-  D_80153784 = 0;
+  g_pakNoteTitleSelector = 2;
+  g_pakSaveMenuActiveDe = 0;
+  g_pakNoteSelectProbesNote = 0;
+  g_pakProfileLoadActive = statusValue;
+  g_pakProfileLoadMode_de = 0;
+  g_pakMenuPromptAccepted = 0;
   g_pakUseScannedChannel = 0;
   ch = menu->slot->controllerPort;
-  if (D_800E28C0 != 0)
+  if (g_pakPlayerMessagePending != 0)
   {
-    D_80153784 = 1;
+    g_pakMenuPromptAccepted = 1;
     Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044FFA4, menu->player, menu->slot, 0);
     return;
   }
@@ -59,10 +59,10 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
     Snapshot_MarkSaveNotes(menu);
     return;
   }
-  D_80153784 = 1;
+  g_pakMenuPromptAccepted = 1;
   if (Note_IsChannelReady(ch) != statusValue)
   {
-    channelUnavailableDialog = D_0044EA2C;
+    channelUnavailableDialog = g_pakChannelReadyMessage_SnapshotCheckstatusprompt;
     Menu_OpenDialog(g_matchEndingTeamWheelClose, channelUnavailableDialog, menu->player, menu->slot, (char *) 1);
   }
   else
@@ -70,11 +70,11 @@ void Snapshot_BeginBlockLoad(Shared_PakMenu *menu)
     activeMenu = menu;
     if (Note_NeedsIdRepair(ch) != 0)
     {
-      Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, activeMenu->player, menu->slot, g_controllerPakReadyDialogResource);
+      Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, activeMenu->player, menu->slot, g_controllerPakReadyDialogResource);
     }
     else
     {
-      Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, activeMenu->player, activeMenu->slot, D_0044FFA4);
+      Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt, activeMenu->player, activeMenu->slot, D_0044FFA4);
     }
   }
 }
@@ -88,10 +88,10 @@ extern struct CacheResourceBlockView *g_pakLoadedNoteResourceHandle;
 extern s32 g_controllerPakSnapshotPayload;
 extern char g_pakControllerRecord[];
 extern char g_matchEndingTeamWheelClose[];
-extern char D_00450BF0_de[];
-extern char D_00450C14_de[];
-extern char D_00450C38_de[];
-extern char D_00450C5C_de[];
+extern char g_pakPortZeroPrompt_de[];
+extern char g_pakPortOnePrompt_de[];
+extern char g_pakPortTwoPrompt_de[];
+extern char g_pakPortThreePrompt_de[];
 extern u32 Note_BytesToPakPages(u32);
 extern s32 Note_GetFreePages(s32, s32 *);
 extern s32 Note_CountFreeNotes(s32, s32 *);
@@ -112,10 +112,10 @@ static inline ActorOwnerView *pakRecordChannel(Shared_PakMenu *menu, s32 *channe
 static inline char *pakRecordChannelLabel(s32 channel) {
     switch (channel) {
     case 0:
-    default: return D_00450BF0_de;
-    case 1: return D_00450C14_de;
-    case 2: return D_00450C38_de;
-    case 3: return D_00450C5C_de;
+    default: return g_pakPortZeroPrompt_de;
+    case 1: return g_pakPortOnePrompt_de;
+    case 2: return g_pakPortTwoPrompt_de;
+    case 3: return g_pakPortThreePrompt_de;
     }
 }
 
@@ -128,7 +128,7 @@ s32 Snapshot_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 u
     s32 attempted = 0;
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
-    if (D_8014D4C0_de != 0) {
+    if (g_pakSaveMenuActiveDe != 0) {
         required = Note_BytesToPakPages(0x18);
         status = Note_GetFreePages(channel, &freeBytes);
         if (status == 0) {
@@ -197,7 +197,7 @@ s32 Snapshot_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
     snapshotBytes = g_worldSnapshotNoteBytes + sizeof(SaveSnapshot);
-    if (D_8014D4C0_de != 0) {
+    if (g_pakSaveMenuActiveDe != 0) {
         required = Note_BytesToPakPages(snapshotBytes);
         status = Note_GetFreePages(channel, &freePages);
         if (status == 0) {

@@ -10,7 +10,7 @@
 extern char g_statObjectIndexText[];
 extern s32 SetN64_GetDirectoryEntry(s32 *,s32,s32);
 extern s32 SetN64_LocatePackSection(void *,s32,s32,s32 *);
-extern void Cache_LockResource(void *,Node80253610 *);
+extern void Cache_LockResource(void *,CacheResourceNode *);
 void *Statinst_AcquireGeometry(ResourceOwner *owner,s32 index) {
     void **block;
     void *allocation;

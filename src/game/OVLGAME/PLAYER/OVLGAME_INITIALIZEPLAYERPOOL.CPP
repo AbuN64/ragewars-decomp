@@ -58,7 +58,7 @@ s32 SetN64_IsModeThirteen(void);
 void Player_InitActorHudState(Shared_ActorView *);
 
 /* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Player_ResetPlayerForRound with the
-   actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
+   actor, its second argument and one, then Actor_RequestActorState_Damageai on offsets 0x2E8 and 0x458 with two and
    Player_PlacePlayerAtSpawnPoint with g_playerSpawnSelector, zero and one. */
 
 
@@ -233,7 +233,7 @@ initialized:
     ((PlayerPoolModeStateView *)(state))->unk_84 = 3;
 }
 
-void Player_ResetMenuPool(struct RecordCode80447BB0 *record) {
+void Player_ResetMenuPool(struct MenuPlayerPoolRecord *record) {
     XPlus_FillMemory(record, 0, 0x44);
     List_InitializeIntrusive(&record->m_FreeList, 0x16DC, 0x16E0);
     List_InitializeIntrusive(&record->m_ActiveList, 0x16DC, 0x16E0);
@@ -278,7 +278,7 @@ void Player_RefreshActivePlayerSceneState(CPlayerPool *pool) {
         } while (actor != 0);
     }
 }
-void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
+void Player_InitializePlayerFromRecord(char *player, s32 slot, PlayerSettingsRecordView *record) {
     extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 computer;
@@ -327,7 +327,7 @@ void Player_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB
     ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
 
-void Player_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character) {
+void Player_ActivatePlayerAtSpawn(struct PlayerSpawnActivationActor *actor, s32 character) {
     actor->part->active = 1;
     Player_ResetPlayerForRound(actor, character, 1);
     Actor_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);

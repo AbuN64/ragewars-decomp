@@ -145,7 +145,7 @@ typedef struct DraftStreamViewer {
     char pad134[0x234]; CVector3 minimum, maximum;
 } DraftStreamViewer;
 typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;
-extern DraftStreamPair D_800FF200;
+extern DraftStreamPair g_cameraVolumeMaxYzPair;
 struct ResourceBitGrid;
 extern void Visdata_DecodeRegionGrid(struct ResourceBitGrid *, s32, s32, DraftStreamData *, CVector3 *);
 #endif

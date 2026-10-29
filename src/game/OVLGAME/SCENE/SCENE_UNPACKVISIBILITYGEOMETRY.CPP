@@ -14,7 +14,7 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
 
-/* Loads a scene's light into the global light g_playerModelLighting: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
+/* Loads a scene's light into the global light g_playerModelLighting: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to g_lightDirectionLength_SceneUnpackvisibilitygeometry in length through Gu_Sqrtf_TurretMove and Graphu64_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
 extern u8 g_playerModelLighting[];
 extern u8 g_savedPlayerModelLighting[];
 extern u8 g_savedSecondaryMenuByteOptions[];

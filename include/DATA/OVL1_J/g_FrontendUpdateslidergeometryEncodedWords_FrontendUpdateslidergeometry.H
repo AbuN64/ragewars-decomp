@@ -1,0 +1,7 @@
+#ifndef DATA_OVL1_J_SOUND_OPTIONS_SCREEN_CALLBACK_ADDRESSES_H
+#define DATA_OVL1_J_SOUND_OPTIONS_SCREEN_CALLBACK_ADDRESSES_H
+extern char addrLow_Menu_CreateSoundOptionsScreen[];
+extern char addrLow_Menu_FreeSoundOptionsScreen[];
+extern char addrLow_Menu_ConfirmSoundOptionsScreen[];
+extern char addrLow_Menu_CancelSoundOptionsScreen[];
+#endif

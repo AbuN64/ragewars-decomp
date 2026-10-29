@@ -2,7 +2,7 @@
 
 #if defined(VERSION_DE)
 extern char ScenarioSetup_CloseSetupScreen_Address[];
-u32 data_unresolved_800F2F40[324] = {
+u32 g_scenarioSetupScreenWidgetRecords[324] = {
     0x00000003, 0x0000031B, 0x0000031D, 0x00000002, 0x00000004, 0x00000320,
     0x00000310, 0x00000002, 0x00000005, 0x00000348, 0x00000345, 0x00000001,
     0x00000006, 0x00000351, 0x00000356, 0x00000000, 0x00000007, 0x00000334,

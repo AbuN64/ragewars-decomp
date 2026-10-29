@@ -16,16 +16,16 @@ struct GameSession {
     u8 reservedWorld[0x1BCF8 - 0x3C8 - sizeof(Shared_World)];
     Hud hud; /* +0x1BCF8; probe 20261019T014445806769Z call boundary */
     u8 reservedHud[0x25580 - 0x1BCF8 - sizeof(Hud)];
-    CPlayerPool menu[1]; /* +0x25580, func_80449DB0_de */
+    CPlayerPool menu[1]; /* +0x25580, Player_ResetMenuPool_GameSession */
     u8 reserved255C4[4];
     /* g_matchEndingTeamWheelClose is this session's match state at +0x25B5C. Its
      * messages overlap the screen-message owner, and its settings overlap
      * local/arena. The pause word belongs to clockPaused only. */
     union {
         struct {
-            struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
+            struct ScreenMessageOwner players[1]; /* +0x255C8, Pools_ResetPlayers_Channel */
             u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
-            u8 local; /* +0x26825: g_gameSettings.local, the local-player input flag (func_8044DE7C_de) */
+            u8 local; /* +0x26825: g_gameSettings.local, the local-player input flag (Match_StartMatchTransition_Initial) */
             u8 arena; /* +0x26826: SetN64_StartRound */
             u8 reserved26827[0x26D8C - 0x26827];
             RenderSettings settings; /* +0x26D8C */

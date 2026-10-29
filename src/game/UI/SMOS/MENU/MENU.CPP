@@ -26,9 +26,9 @@ extern int SmSmngr_DeactivateCurrentScreen(s32 screenOwner);
 
 extern void Node_ReleaseReferencedBuffer(s32 bufferId);
 
-extern void Widget_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
+extern void Widget_DrawVisibleWidgetClipped(void *, MenuDrawEventArgs);
 
-extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, ArgsCode80296014 *);
+extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, MenuDrawEventArgs *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
@@ -99,7 +99,7 @@ void Menu_PopScreen(void) {
 }
 
 void Menu_DrawScreenStack(void) {
-    ArgsCode80296014 args;
+    MenuDrawEventArgs args;
     QuadN64EngDrawNumericWidgetChildren first;
     QuadN64EngDrawNumericWidgetChildren basis;
     s32 delta;

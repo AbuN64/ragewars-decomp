@@ -2,7 +2,7 @@
 #define COMMON_MENURECAT24_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern s32 D_8014AD94;
+extern s32 g_pakScanActive;
 
 extern char D_0044EB70[];
 
@@ -13,7 +13,7 @@ struct PakPromptContext;
 typedef struct PakPromptContext PakPromptContext;
 
 
-extern s32 D_80153760;
+extern s32 g_pakProfileLoadActive;
 
 
 struct Messages;
@@ -30,13 +30,13 @@ struct PlayerMessageMenuView {
     s32 menu;
 };
 
-extern s32 D_80153784;
+extern s32 g_pakMenuPromptAccepted;
 
-extern s32 D_8014D4C0_de;
+extern s32 g_pakSaveMenuActiveDe;
 
 extern int g_pakScoreBelow150Title;
 
-extern s32 D_80146D60;
+extern s32 g_pakRequestLatched;
 
 extern int g_pakScoreBelow300Title;
 
@@ -67,7 +67,7 @@ extern int g_pakScoreBelow1300Title;
 
 extern int g_pakScoreBelow3000Title;
 
-extern s32 D_8014D4EC_de;
+extern s32 g_pakProfileLoadMode_de;
 
 struct PakNoteBrowserContext;
 typedef struct PakNoteBrowserContext PakNoteBrowserContext;
@@ -80,9 +80,9 @@ extern int g_pakScoreBelow6500Title;
 struct PlayerMessageMenuView;
 typedef struct PlayerMessageMenuView PlayerMessageMenuView;
 
-extern s32 D_8014AD9C;
+extern s32 g_pakUsable;
 
-extern s32 D_8014D4DC;
+extern s32 g_pakNoteSelectProbesNote;
 
 extern int g_controllerPakOverwriteNoteIndex;
 
@@ -100,7 +100,7 @@ typedef struct PlayerPakTimerView PlayerPakTimerView;
 struct PlayerPakTimerView;
 
 
-extern s32 D_800DE874;
+extern s32 g_pakNoteTitleSelector;
 
 
 
@@ -112,7 +112,7 @@ extern char *g_pakProfileGameNameFixed;
 
 extern int g_pakScoreBelow4500Title;
 
-extern s32 D_80142CAC;
+extern s32 g_pakProbeRequested;
 
 
 

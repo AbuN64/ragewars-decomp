@@ -10,7 +10,7 @@
 #include "GFX/TEXT/PLAYERAI_APPLYDAMAGEOVERTIME_DATA.H"
 
 /* Drains a player's ammunition over time: unless Cinema_IsSequenceActive reports a pause, Playerai_IsRoundEndState blocks
-   the player, D_801371DC is set, bit 1 of g_gameSettings is set or the player's state is below 2, it
+   the player, g_worldFrozenFlag is set, bit 1 of g_gameSettings is set or the player's state is below 2, it
    advances the tick counter at 0x84C modulo the period (a fifth of it while 0x80C is set), counting
    only kind 0x20 while the value at 0x670 is positive, and on each wrap takes one from each of the
    three slot counts at 0x5F4 without going below zero. Written from its own assembly with early
@@ -25,7 +25,7 @@ int Playerai_SelectedWeaponUsesAmmo(Shared_ActorView *actor) {
 }
 
 /** Perform the no-op callback at VRAM 0x8022BEEC. */
-void func_8022BEFC_de(void *unused0, void *unused1) {
+void Playerai_NoopDamageSourceCallback_de(void *unused0, void *unused1) {
 }
 
 void Playerai_ApplyPeriodicDamage(void *player, s32 unused, s32 period, s32 kind) {

@@ -7,7 +7,7 @@ const unsigned int g_affinePackUnsignedThresholdsUsRev1[12] = {
 };
 
 /* 800C8CA0.CPP */
-/* ROM-grounded data: src/rw_pool_8024D028_C98A0_us_rev1.c */
+/* ROM-grounded data: src/g_GameObject_BuildQuaternionTranslationMatrixConstantsUsRev1_GobjinstPackaffinematrixwordsData.c */
 const unsigned int g_GameObject_BuildQuaternionTranslationMatrixConstantsUsRev1[1] = {
     0x3F800000,
 };

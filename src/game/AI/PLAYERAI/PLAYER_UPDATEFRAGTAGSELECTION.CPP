@@ -60,16 +60,16 @@ void * Playerai_GetPlayerByIndex(void *, u32);
 void * Playerai_GetEligiblePlayerByIndex(void *, u32);
 
  /* extern */
-/* Provider passes the position identity as a 32-bit address; see func_8025DE54_de
+/* Provider passes the position identity as a 32-bit address; see SoundElement_PlaySoundAtPosition_PlayerUpdatefragtagselection
  * and the published Weapon_UpdateIdleWeaponSelection caller. */
 
 /* Advances an elimination round when rule g_resultReplayPending is on and not paused (Cinema_IsSequenceActive,
-   Cinema_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
+   Cinema_IsSequenceInWindow): counts the players still in, clears g_ctfWaitingPlayerFlag while one is waiting, then by the
    round state at 0x84 of g_matchRoundCounters revives the first waiting player (crediting a point in state 1,
-   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Playerai_EndRound
-   when func_802282EC_de reports it over. */
+   scheduling g_ctfMode = 3 otherwise) or moves to state 2, and ends the round through Playerai_EndRound
+   when Player_CheckTeamPointWin_PlayerUpdatefragtagselection reports it over. */
 
-extern u8 D_801462D5; /* MIXED Player_UpdateFragTagSelection */
+extern u8 g_gameControllerMode; /* MIXED Player_UpdateFragTagSelection */
 extern u8 g_playerHudSpriteMode; /* MIXED Player_UpdateFragTagSelection */
 void Player_UpdateFragTagSelection(s8 *world) {
     CGameStatus *initial_rules;
@@ -146,13 +146,13 @@ void Player_UpdateFragTagSelection(s8 *world) {
         }
         eligiblePlayerCount = Playerai_CountEligiblePlayers(world);
         if (eligiblePlayerCount > 0) {
-            state = D_80146914;
+            state = g_fragTagSelectionState;
             switch (state) {
             case 0:
             default:
                 Playerai_ClearPlayerResetFlags(world);
                 Playerai_ResetAllPlayerHealth(world);
-                D_80146914 = 1;
+                g_fragTagSelectionState = 1;
                 return;
             case 1:
                 Playerai_ResetAllPlayerHealth(world);
@@ -218,7 +218,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((allPlayersView->viewportX + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->viewportY + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
                                 }
                                 player->profile->fragTagEnabled = 1;
-                                switch (D_80142850) {
+                                switch (g_fragTagSelectSoundVariant) {
                                 case 0:
                                     SoundElement_PlaySoundAtPosition(0x18A1, player->position, (s32)&player->position, -1);
                                     break;
@@ -236,7 +236,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 Playerai_InitializePlayerHealth(player);
                                 player->health = (s32) g_playerRespawnHealth;
                             } else {
-                                if ((D_80146938 != 0) && (playerProfile->selected != 0)) {
+                                if ((g_selectedProfileHealthOptionEnabled != 0) && (playerProfile->selected != 0)) {
                                     initialCharacter = playerProfile->team;
                                     if (initialCharacter == 11) {
                                     restoredHealth = 0x19000;
@@ -252,7 +252,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 } else {
                                     restoredHealth = player->model->modelId << 8;
                                 }
-                                if ((D_801462D5 == 1) && (player->computerControlled == 0)) {
+                                if ((g_gameControllerMode == 1) && (player->computerControlled == 0)) {
                                     restoredHealth += g_characterHealthBonuses[player->playerIndex].value;
                                 }
                                 player->health = restoredHealth;
@@ -263,7 +263,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     } while (eligiblePlayerCount >= (s32) playerIndex);
                 }
                 Playerai_ClearPlayerResetFlags(world);
-                D_80146914 = 6;
+                g_fragTagSelectionState = 6;
                 return;
             case 3:
                 case3_entry = &g_gameSettings.counters;
@@ -292,7 +292,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     Playerai_ClearPlayerResetFlags(world);
                     rules->m_FragTagMode = 7;
                     rotatingPlayer->profile->fragTagEnabled = 1U;
-                    switch (D_80142850) {
+                    switch (g_fragTagSelectSoundVariant) {
                     case 0:
                         SoundElement_PlaySoundAtPosition(0x18A1, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
@@ -317,7 +317,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                         if (rotatingPlayerProfile->fragTagEnabled != 0) {
                             rotatingPlayer->health = (s32) case3_loop->mask;
                         } else {
-                            ruleOrRandomValue = D_80146938;
+                            ruleOrRandomValue = g_selectedProfileHealthOptionEnabled;
                             if ((ruleOrRandomValue != 0) && (rotatingPlayerProfile->selected != 0)) {
                                 ruleOrRandomValue = rotatingPlayerProfile->team;
                                 if (ruleOrRandomValue == 11) {
@@ -334,7 +334,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                             } else {
                                 restoredHealth = rotatingPlayer->model->modelId << 8;
                             }
-                            ruleOrRandomValue = D_801462D5;
+                            ruleOrRandomValue = g_gameControllerMode;
                             if ((ruleOrRandomValue == 1) && (rotatingPlayer->computerControlled == 0)) {
                                 restoredHealth += g_characterHealthBonuses[rotatingPlayer->playerIndex].value;
                             }
@@ -373,7 +373,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                     Playerai_ClearPlayerResetFlags(world);
                     rules->m_FragTagMode = 7;
                     chosenPlayer->profile->fragTagEnabled = 1U;
-                    switch (D_80142850) {
+                    switch (g_fragTagSelectSoundVariant) {
                     case 0:
                         SoundElement_PlaySoundAtPosition(0x18A1, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
@@ -398,7 +398,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                         if (chosenPlayerProfile->fragTagEnabled != 0) {
                             chosenPlayer->health = (s32) case4_loop->mask;
                         } else {
-                            ruleOrRandomValue = D_80146938;
+                            ruleOrRandomValue = g_selectedProfileHealthOptionEnabled;
                             if ((ruleOrRandomValue != 0) && (chosenPlayerProfile->selected != 0)) {
                                 ruleOrRandomValue = chosenPlayerProfile->team;
                                 if (ruleOrRandomValue == 11) {
@@ -415,7 +415,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                             } else {
                                 restoredHealth = chosenPlayer->model->modelId << 8;
                             }
-                            ruleOrRandomValue = D_801462D5;
+                            ruleOrRandomValue = g_gameControllerMode;
                             if ((ruleOrRandomValue == 1) && (chosenPlayer->computerControlled == 0)) {
                                 restoredHealth += g_characterHealthBonuses[chosenPlayer->playerIndex].value;
                             }
@@ -456,7 +456,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                     OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((flippedView->viewportX + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->viewportY + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
                                 }
                                 flippedPlayer->profile->fragTagEnabled = 1U;
-                                switch (D_80142850) {
+                                switch (g_fragTagSelectSoundVariant) {
                                 case 0:
                                     SoundElement_PlaySoundAtPosition(0x18A1, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
@@ -483,7 +483,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 flippedPlayer->health = (s32) case6_active_rules->mask;
                                 flippedPlayer->restoredHealth = (s32) case6_active_rules->mask;
                             } else {
-                                if ((D_80146938 != 0) && (flippedProfile->selected != 0)) {
+                                if ((g_selectedProfileHealthOptionEnabled != 0) && (flippedProfile->selected != 0)) {
                                     flippedCharacter = flippedProfile->team;
                                     if (flippedCharacter == 11) {
                                     restoredHealth = 0x19000;
@@ -499,7 +499,7 @@ void Player_UpdateFragTagSelection(s8 *world) {
                                 } else {
                                     restoredHealth = flippedPlayer->model->modelId << 8;
                                 }
-                                if ((D_801462D5 == 1) && (flippedPlayer->computerControlled == 0)) {
+                                if ((g_gameControllerMode == 1) && (flippedPlayer->computerControlled == 0)) {
                                     restoredHealth += g_characterHealthBonuses[flippedPlayer->playerIndex].value;
                                 }
                                 flippedPlayer->health = restoredHealth;
@@ -508,12 +508,12 @@ void Player_UpdateFragTagSelection(s8 *world) {
                         }
                         playerIndex += 1;
                     } while ((s32) playerIndex < 8);
-                    D_80146914 = 7;
+                    g_fragTagSelectionState = 7;
                     return;
                 }
                 goto state_end;
             case 7:
-                D_80142848 = 0;
+                g_fragTagSelectionClearedFlag = 0;
                 goto state_end;
             }
 state_end:;
@@ -553,7 +553,7 @@ void Player_ReleaseWaitingPlayer(Round *round) {
         if (count > 0) {
             waiting = Weapons_FindWaitingPlayer(round) != 0;
             if (waiting) {
-                D_800F7D10 = 0;
+                g_ctfWaitingPlayerFlag = 0;
             }
             state = &g_gameSettings.counters;
             switch (state->m_CTFMode) {
@@ -575,7 +575,7 @@ void Player_ReleaseWaitingPlayer(Round *round) {
                 if (node != 0) {
                     node->scores->unk90 = 0;
                     Weapons_CountRelease(&node->scores->score);
-                    D_800F7D10 = 0;
+                    g_ctfWaitingPlayerFlag = 0;
                 }
                 break;
             case 2:
@@ -674,10 +674,10 @@ extern int Player_GetPlayerIndex(Root *,FragTagPlayerListNode *);
 
 /* Ends a match when its conditions are met, unless a menu or pause is up (Cinema_IsSequenceActive,
    Cinema_IsSequenceInWindow), the match is locked at 0x1C of the rules g_matchRoundCounters or the game g_matchEndingTeamWheelClose disallows
-   it at 0xCC9: outside a cutscene (func_80442A28_de) the time limit at 0x14 of the rules counts down by
+   it at 0xCC9: outside a cutscene (Menu_CountLiveNodes_PlayerUpdatefragtagselection) the time limit at 0x14 of the rules counts down by
    the frame time while Playerai_CountActivePlayers says the clock runs and ends the match when it expires (clearing
    humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through Player_CheckScoreLimit
-   ends it while the rules' limit at 0x18 is set and 0x54 is clear; and when D_80146938 asks, it counts
+   ends it while the rules' limit at 0x18 is set and 0x54 is clear; and when g_selectedProfileHealthOptionEnabled asks, it counts
    the active players among the first eight and how many of them are out, ending the match once all
    are out, directly or, when a mode 14 player takes part, only after the rules' round count at 0x9C
    reaches 3, marking humanWon. */

@@ -1,8 +1,8 @@
 #ifndef COMMON_PLAYER_ACTION_AND_POSE_VIEWS_H
 #define COMMON_PLAYER_ACTION_AND_POSE_VIEWS_H
 struct SharedPlayer;
-#ifndef SPAN_1000_CODE_8022D944_H
-#define SPAN_1000_CODE_8022D944_H
+#ifndef PLAYER_ACTION_AND_POSE_DECLARATIONS_H
+#define PLAYER_ACTION_AND_POSE_DECLARATIONS_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -47,7 +47,7 @@ typedef struct PlayerRangedPitchStateView PlayerRangedPitchStateView;
 
 extern float g_playerStateFifteenPitchOffset;
 
-extern void func_8022DC14_de(void);
+extern void Playerai_EmptyHandlerAfterInitializeStateBlendToZero_de(void);
 
 
 extern float g_playerWeaponChargeBlendCutoff;
@@ -115,7 +115,7 @@ extern float g_playerForceMarkerTilt;
 
 
 
-extern void func_8022E940_de(void);
+extern void Playerai_EmptyImpactSoundHook(void);
 
 extern float g_playerCrouchClearanceBounds;
 

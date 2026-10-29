@@ -32,7 +32,7 @@ s32 CCollision_ApplyMotionResponse(ActorMotion *a) {
     settings=a->surface;
     if (a->collisionState!=0) {
     Graphu64_NormalizeVec3(&a->normal.x);
-    step=D_800CB404_de*g_collisionRetreatStepScale;
+    step=k_collisionRetreatStepBase_de*g_collisionRetreatStepScale;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
     if (step<=a->distance && a->mode!=7) {
@@ -127,7 +127,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         Graphu64_ProjectVectorOntoPlane(&bounce,&remaining,&a->normal);
         Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
     Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
+    Graphu64_ScaleVector(&gravity,&a->normal,k_collisionSurfaceOffsetScales[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -139,7 +139,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         Graphu64_ScaleVector(&remaining,&a->velocity,g_collisionPreservedSlideFractionBase-fraction);
         bounce=Graphu64_ProjectVectorPreservingLength(&remaining,&a->normal);
         Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
+    Graphu64_ScaleVector(&gravity,&a->normal,k_collisionSurfaceOffsetScales[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -162,7 +162,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         Graphu64_InterpolateVector(&bounce,0.25f,&reflection,&projected);
         Graphu64_ScaleVector(&bounce,&bounce,scale-a->damping);
     Graphu64_AddVec3(&a->position,&a->interpolated,&bounce);
-    Graphu64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*g_collisionSurfaceGravityScale);
+    Graphu64_ScaleVector(&gravity,&a->normal,k_collisionSurfaceOffsetScales[0]*g_collisionSurfaceGravityScale);
     Graphu64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
@@ -308,12 +308,12 @@ const unsigned int k_CcollisionIntersectsegmentboxEncodedWords[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8023DF70_C9380_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntersectsegmentboxEncodedWordsBlock3UsRev1.c */
 const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock3[1] = {
     0x4123D70A,
 };
 
-/* ROM-grounded data: src/rw_pool_8023E178_C9384_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntersectsegmentboxEncodedWordsBlock2UsRev1.c */
 const unsigned int k_CcollisionIntersectsegmentboxEncodedWordsBlock2[2] = {
     0x3F800000, 0x4123D70A,
 };

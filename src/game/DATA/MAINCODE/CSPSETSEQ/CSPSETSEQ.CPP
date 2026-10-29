@@ -5,7 +5,7 @@
 unsigned char g_CspsetseqTrailingBytesBlock1[4] = { 0x02, 0x14, 0x00, 0x18 };
 #endif
 
-/* DATA_802B2438.CPP */
+/* g_sequencePlayerSetSequenceSplitTextEuX_Cspsetseq.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)

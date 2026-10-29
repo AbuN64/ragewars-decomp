@@ -55,10 +55,10 @@ typedef struct PlayerProfileMenuContext PlayerProfileMenuContext;
 
 
 struct PlayerProfileMenuContext;
-struct OwnerCode8043DF84;
+struct PlayerStateDirtyOwnerView;
 struct PlayerProfileMenuContext {
     char pad0[0x1C];
-    struct OwnerCode8043DF84 *owner;
+    struct PlayerStateDirtyOwnerView *owner;
     PakMenuSlot *widget;
 };
 
@@ -81,9 +81,9 @@ struct Obj1C {
     s32 unk858;
 };
 
-struct Handle8043E788;
+struct PlayerDialogMenuContext;
 struct Obj1C;
-struct Handle8043E788 {
+struct PlayerDialogMenuContext {
     char pad0[0x1C];
     struct Obj1C *unk1C;
 };
@@ -92,11 +92,11 @@ struct Handle8043E788 {
 
 extern float g_profileGameSpeedWrapLimit;
 
-struct Outer8043E458;
-typedef struct Outer8043E458 Outer8043E458;
+struct ProfileModeMenuContext;
+typedef struct ProfileModeMenuContext ProfileModeMenuContext;
 
-struct Handle8043E788;
-typedef struct Handle8043E788 Handle8043E788;
+struct PlayerDialogMenuContext;
+typedef struct PlayerDialogMenuContext PlayerDialogMenuContext;
 
 
 struct Shared_PakMenu;
@@ -108,23 +108,23 @@ struct StatusView;
 typedef struct StatusView StatusView;
 
 
-struct Target8043E458;
-struct Target8043E458 {
+struct ProfileOptions;
+struct ProfileOptions {
     u8 pad0[0x7B];
     s8 unk7B;
 };
 
-struct Other8043E458;
-struct Target8043E458;
-struct Other8043E458 {
+struct ProfileModeSelectionPlayer;
+struct ProfileOptions;
+struct ProfileModeSelectionPlayer {
     u8 pad0[0x5D8];
-    struct Target8043E458 *unk5D8;
+    struct ProfileOptions *unk5D8;
 };
-struct Other8043E458;
-struct Outer8043E458;
-struct Outer8043E458 {
+struct ProfileModeSelectionPlayer;
+struct ProfileModeMenuContext;
+struct ProfileModeMenuContext {
     u8 pad0[0x1C];
-    struct Other8043E458 *unk1C;
+    struct ProfileModeSelectionPlayer *unk1C;
 };
 
 struct StatusStep;
@@ -157,7 +157,7 @@ typedef struct MenuCMenuProfileUpdatePlayerAnimationChoice MenuCMenuProfileUpdat
 
 
 
-struct Target8043E458;
-typedef struct Target8043E458 Target8043E458;
+struct ProfileOptions;
+typedef struct ProfileOptions ProfileOptions;
 
 #endif

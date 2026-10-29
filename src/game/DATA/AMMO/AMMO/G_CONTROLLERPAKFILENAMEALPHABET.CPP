@@ -1,12 +1,12 @@
 #include "include_asm.h"
 
-/* DATA_800E2850.CPP */
+/* g_GControllerpakfilenamealphabetWords4_GControllerpakfilenamealphabet.CPP */
 /* ROM-grounded data: rodata/writable/800E2850 */
 unsigned int g_GControllerpakfilenamealphabetWords4[3] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-/* DATA_800E285C.CPP */
+/* g_controllerPakFilenameAlphabet_GControllerpakfilenamealphabet.CPP */
 unsigned short g_controllerPakFilenameAlphabet[] = {
     0x007E, 0x7E7E, 0x7E7E, 0x7E7E, 0x7E7E, 0x7E7E, 0x7E7E, 0x7E20, 0x3031, 0x3233, 0x3435, 0x3637,
     0x3839, 0x4142, 0x4344, 0x4546, 0x4748, 0x494A, 0x4B4C, 0x4D4E, 0x4F50, 0x5152, 0x5354, 0x5556,
@@ -77,7 +77,7 @@ unsigned int g_GControllerpakfilenamealphabetWords1[8] = {
 };
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-unsigned int data_unresolved_800DD530[3] = {
+unsigned int g_width320Height240MinusOneWords[3] = {
     0x00000140, 0x000000F0, 0xFFFFFFFF,
 };
 #endif

@@ -29,7 +29,7 @@ void Scene_UpdateAndDrawWorld(void *world) {
     state = world;
     input = &g_gameSettings;
     old_flags = g_litGeometryResourceKeyFlags;
-    g_litGeometryResourceKeyFlags = input->buttons;
+    g_litGeometryResourceKeyFlags = input->lightingGamma;
     if (input->flags & 0x4000) {
         g_litGeometryResourceKeyFlags |= 0x100;
     }
@@ -37,10 +37,10 @@ void Scene_UpdateAndDrawWorld(void *world) {
         g_litGeometryResourceKeyFlags |= 0x200;
     }
     if (old_flags != g_litGeometryResourceKeyFlags) {
-        D_800CD3F4 = 1;
+        g_litGeometryResourceKeysChanged = 1;
         Cache_SetResourceActivityState(8);
     } else {
-        D_800CD3F4 = 0;
+        g_litGeometryResourceKeysChanged = 0;
     }
 
     Scene_UpdateSelectionTransition(state);
@@ -63,7 +63,7 @@ void Scene_UpdateAndDrawWorld(void *world) {
             Fx_UpdateEffectLists(manager);
             Scene_UpdateActorsAndRoundState(state);
             SetN64_UpdateEffectPool(&state->system11778);
-            state->elapsed += g_frameElapsedTime * D_800C50E4_de;
+            state->elapsed += g_frameElapsedTime * g_sceneElapsedTimeScaleDe;
             Scene_UpdateTriggerTimers(state);
         }
     }
@@ -205,7 +205,7 @@ extern void Statinst_DrawForGameMode(void *, void *);
 extern void Simple_DrawCachedModel(void *);
 extern void Gobjinst_DrawVisibleCachedActor(void *, void *);
 /* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
- * measures each object's squared distance to the camera (offset by a jittered vector from func_802390D0_de),
+ * measures each object's squared distance to the camera (offset by a jittered vector from Gsky_GetObjectPositionAt260De),
  * sorts the list with PpDecom_QuickSortRecords and draws each object by its kind (0 actor, 1 prop, 3 effect). */
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"

@@ -64,7 +64,7 @@
 
 /* Hides every model named by the sixty-four 12-byte entries of g_arenaCompatibilityTable: for each entry it looks
    up the first and second identifier in the current screen's context at 0x970 through Node_FindWidgetByResourceId
-   and disables the object with func_8040E8D8_de, and does the same for the third identifier unless it
+   and disables the object with Widget_SetWidgetFlag08_EquipActivateequipmentpanel, and does the same for the third identifier unless it
    is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
    so the table address is not hoisted. */
 /* Read the optional resource as the low half of its word value on every host. */
@@ -216,7 +216,7 @@ void Results_RefreshTrialCharacterPreview(void) {
         scale.x = g_characterPortraitRecords[index].scale[0];
         scale.y = g_characterPortraitRecords[index].scale[0];
         scale.z = g_characterPortraitRecords[index].scale[0];
-        Preview_InitModelPreview((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
+        Preview_InitModelPreview((ModelPreview *)(*(ResultsOptionsScreen **)&g_trialCatalogueScreen)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
                          g_characterPortraitRecords[index].position[0], g_characterPortraitRecords[index].distance[0],
                          g_characterPortraitRecords[index].light[0]);
     }

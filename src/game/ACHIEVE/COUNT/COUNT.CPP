@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800DC62C.CPP */
+/* CountEncodedWordsBlock1.CPP */
 #if defined(VERSION_US)
 unsigned int k_CountEncodedWordsBlock1[1] = {
     0x00000010,

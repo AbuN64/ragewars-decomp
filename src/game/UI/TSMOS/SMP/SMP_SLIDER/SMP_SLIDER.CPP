@@ -31,7 +31,7 @@
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
-/* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
+/* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through Node_WrapNodeInParent_SmpButton and Node_ReplaceNodeRefs_SmpButton.
    Adapted from N64Eng_CreateNumericWidget with the record size, tag 0xB63, the tail fields and the dropped N64Eng_SetNumericWidgetValue call changed. */
 
 
@@ -58,7 +58,7 @@ extern void Node_ReplaceNodeRefs(s32 node, MenuSliderWidget *from, MenuSliderWid
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
@@ -127,12 +127,12 @@ s32 SmpSlider_DispatchTransitionEvent(void *widget, s32 eventId, s32 eventData0,
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sliderTransitionEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }
@@ -217,12 +217,12 @@ s32 SmpSlider_DispatchSliderEvent(void *widget, s32 eventId, s32 eventData0, s32
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sliderWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

@@ -39,7 +39,7 @@ char s_FrontendSelectnextjoinmodelIANIMGText[8] =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) back on event 1
+/* Steps the model of the join request the screen g_courseOptionsScreen edits (index at 0x14) back on event 1
    unless Menu_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table g_rewardItemTiers through Join_FindJoinModelIndex, walks back through its variants and, before the
    first, to the last variant of the previous model (wrapping to the last), skipping entries whose
@@ -47,7 +47,7 @@ char s_FrontendSelectnextjoinmodelIANIMGText[8] =
    g_joinRequestEntries, copies the name of the entry the found id selects in that variant row to 0x10, redraws through Join_UpdateJoinRequestDisplay and plays sound
    0xE81. Returns zero. */
 
-extern struct LinkedWorldFlagsView *D_800E39C0;
+extern struct LinkedWorldFlagsView *g_courseOptionsScreen;
 extern struct TextEntry g_rewardItemTiers[][17];
 extern void MarkMenuEventHandled();
 extern void XPlus_CopyString(char *, char *);
@@ -64,8 +64,8 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
-    variant = g_joinRequestEntries[D_800E39C0->flags].variant;
-    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[D_800E39C0->flags].id);
+    variant = g_joinRequestEntries[g_courseOptionsScreen->flags].variant;
+    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[g_courseOptionsScreen->flags].id);
     do {
         variant--;
         if (variant < 0) {
@@ -77,17 +77,17 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
         }
         id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
-    g_joinRequestEntries[D_800E39C0->flags].variant = variant;
-    g_joinRequestEntries[D_800E39C0->flags].id = id;
-    XPlus_CopyString(g_joinRequestEntries[D_800E39C0->flags].name,
+    g_joinRequestEntries[g_courseOptionsScreen->flags].variant = variant;
+    g_joinRequestEntries[g_courseOptionsScreen->flags].id = id;
+    XPlus_CopyString(g_joinRequestEntries[g_courseOptionsScreen->flags].name,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         g_rewardItemTiers[variant][id].text[g_languageIndex]
 #else
         *g_rewardItemTiers[variant][id].text
 #endif
     );
-    g_joinRequestEntries[D_800E39C0->flags].variantC = variant;
-    Join_UpdateJoinRequestDisplay(D_800E39C0->flags);
+    g_joinRequestEntries[g_courseOptionsScreen->flags].variantC = variant;
+    Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->flags);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -95,7 +95,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-/* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) forward on event 1
+/* Steps the model of the join request the screen g_courseOptionsScreen edits (index at 0x14) forward on event 1
    unless Menu_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table g_rewardItemTiers through Join_FindJoinModelIndex, walks forward through its variants and, past the
    last, to the first variant of the next model (wrapping to the first), skipping entries whose
@@ -115,8 +115,8 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
-    variant = g_joinRequestEntries[D_800E39C0->flags].variant;
-    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[D_800E39C0->flags].id);
+    variant = g_joinRequestEntries[g_courseOptionsScreen->flags].variant;
+    model = Join_FindJoinModelIndex(variant, g_joinRequestEntries[g_courseOptionsScreen->flags].id);
     do {
         variant++;
         if (variant >= 3) {
@@ -128,17 +128,17 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
         }
         id = g_rewardItemTiers[variant][model].id;
     } while (id == -1);
-    g_joinRequestEntries[D_800E39C0->flags].variant = variant;
-    g_joinRequestEntries[D_800E39C0->flags].id = id;
-    XPlus_CopyString(g_joinRequestEntries[D_800E39C0->flags].name,
+    g_joinRequestEntries[g_courseOptionsScreen->flags].variant = variant;
+    g_joinRequestEntries[g_courseOptionsScreen->flags].id = id;
+    XPlus_CopyString(g_joinRequestEntries[g_courseOptionsScreen->flags].name,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         g_rewardItemTiers[variant][id].text[g_languageIndex]
 #else
         *g_rewardItemTiers[variant][id].text
 #endif
     );
-    g_joinRequestEntries[D_800E39C0->flags].variantC = variant;
-    id = D_800E39C0->flags;
+    g_joinRequestEntries[g_courseOptionsScreen->flags].variantC = variant;
+    id = g_courseOptionsScreen->flags;
     Join_UpdateJoinRequestDisplay(id);
     SoundElement_PlayFlatSound(0xE81);
     return 0;

@@ -17,13 +17,13 @@ extern char addrLow_PlayerMatrix_DisableEventActor[];
 extern char addrLow_PlayerMatrix_EnableCollisionFlags[];
 extern char addrLow_PlayerMatrix_MarkOpenAndResetTimer[];
 extern char addrLow_PlayerMatrix_MarkCloseRequested[];
-extern char D_00207FE4[];
+extern char addrLow_PlayerMatrix_ClearCollisionBit[];
 extern char addrLow_Link_CaptureActorTransform[];
 extern char addrLow_Link_DeactivateActorState[];
 unsigned int g_ActorStateEndUsRev1EncodedWords[31] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, (unsigned int)addrLow_Triggered_InitializeMotionState,
     (unsigned int)addrLow_Triggered_ResetMotionState, 0x00000000, 0x00000000, (unsigned int)addrLow_PlayerMatrix_RequestOpen, 0x00000000, (unsigned int)addrLow_PlayerMatrix_RequestClose, 0x00000000, (unsigned int)addrLow_PlayerMatrix_DeactivateMotion,
     (unsigned int)addrLow_PlayerMatrix_DisableEventActor, (unsigned int)addrLow_PlayerMatrix_ActivateMotion, (unsigned int)addrLow_PlayerMatrix_EnableEventActor, (unsigned int)addrLow_PlayerMatrix_EnableCollisionFlags, 0x00000000, (unsigned int)addrLow_PlayerMatrix_MarkOpenAndResetTimer, 0x00000000, (unsigned int)addrLow_PlayerMatrix_MarkCloseRequested,
-    0x00000000, (unsigned int)D_00207FE4, 0x00000000, (unsigned int)addrLow_Link_CaptureActorTransform, 0x00000000, (unsigned int)addrLow_Link_DeactivateActorState, 0x00000000,
+    0x00000000, (unsigned int)addrLow_PlayerMatrix_ClearCollisionBit, 0x00000000, (unsigned int)addrLow_Link_CaptureActorTransform, 0x00000000, (unsigned int)addrLow_Link_DeactivateActorState, 0x00000000,
 };
 #endif

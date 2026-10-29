@@ -1,24 +1,24 @@
 #include "TYPES.H"
 
-/* DATA_800CC764.CPP */
+/* SndplayerShortWordBlock.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_SndplayerEncodedWords[3] = {
     0xFFFF0000, 0x06A503E8, 0x06A601F4,
 };
 #endif
 
-/* DATA_800CC890.CPP */
+/* SndplayerEventHandlerAddressTable.CPP */
 #if defined(VERSION_EU)
 extern char g_Events_PlayClipEventAddress[];
-extern char D_002673A4[];
+extern char addrLow_Events_SpawnActorEffect_SHammertext[];
 extern char g_Events_SpawnActorEffectAddress[];
 extern char g_Events_ApplyDirectDamageAddress[];
-extern char g_packedCodeAddress24_00267B78[];
+extern char g_Events_ApplyDirectDamagePackedAddress24_us_rev1[];
 extern char g_Events_ApplyRadialDamageWithKnockbackAddress[];
 extern char g_Events_PreserveEventArgumentAddress[];
-extern char g_packedCodeAddress24_00267C30[];
+extern char g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1[];
 extern char g_Events_RunSecondNodeOperationAddress[];
-extern char D_00267C94[];
+extern char addrLow_Events_RunSecondNodeOperation_eu_x[];
 extern char g_Events_ConsumeEventArgumentAddress[];
 extern char g_Events_RequestActorPositionAddress[];
 extern char g_Events_StartEnabledCameraEmitterAddress[];
@@ -36,16 +36,16 @@ extern char g_Events_PlayTeamClipAddress[];
 extern char g_Events_SpawnFilteredActorEffectAddress[];
 extern char g_Events_FireWithinHeightRangeAddress[];
 extern char g_Events_SetActorEventBitAddress[];
-extern char D_002684B0[];
+extern char addrLow_Events_SetActorEventBit_eu_x[];
 extern char g_Events_SpawnAttachedEffectAddress[];
 extern char g_Events_SpawnPositionedEffectAddress[];
 extern char g_Events_PlayTeamEffectAddress[];
 extern char g_Events_SetActorLoopingSoundAddress[];
-extern char g_packedCodeAddress24_00268864[];
+extern char g_Events_SetActorLoopingSoundPackedAddress24_us_rev1[];
 extern char g_Events_IncrementNearbyPlayerCounterAddress[];
 extern char g_Events_SetActorEffectModeAddress[];
 extern char g_Events_DeactivateActorAddress[];
-u32 data_unresolved_800CC890[428] = {
+u32 g_eventHandlerAddressTable_eu[428] = {
     0xFFFFFF00, 0xFFFFFF00, 0x00007F00, 0x00000000, 0xD9000000, 0x00000000,
     0xD9FFFFFF, 0x00000001, 0xDB020000, 0x00000018, 0xDC08060A, 0x800CC878,
     0xDC08090A, 0x800CC870, 0xDF000000, 0x00000000, 0xE3000A01, 0x00000000,
@@ -95,16 +95,16 @@ u32 data_unresolved_800CC890[428] = {
     0xDB040004, 0x00000005, 0xDB04000C, 0x00000005, 0xDB040014, 0x0000FFFB,
     0xDB04001C, 0x0000FFFB, 0xDF000000, 0x00000000, 0x524F4752, 0x414D4D41,
     (unsigned int)g_Events_PlayClipEventAddress, 0x00000000, (unsigned int)g_Events_SpawnActorEffectAddress, 0x00000000, (unsigned int)g_Events_ApplyDirectDamageAddress, 0x00000004,
-    (unsigned int)g_packedCodeAddress24_00267B78, 0x00000006, (unsigned int)g_Events_ApplyRadialDamageWithKnockbackAddress, 0x00000006, (unsigned int)g_Events_PreserveEventArgumentAddress, 0x0000000A,
-    (unsigned int)g_packedCodeAddress24_00267C30, 0x00000010, (unsigned int)g_Events_RunSecondNodeOperationAddress, 0x00000010, (unsigned int)g_Events_SpawnActorEffectAddress, 0x00000000,
-    (unsigned int)D_00267C94, 0x00000000, (unsigned int)g_Events_ConsumeEventArgumentAddress, 0x00000000, (unsigned int)g_Events_RequestActorPositionAddress, 0x00000000,
+    (unsigned int)g_Events_ApplyDirectDamagePackedAddress24_us_rev1, 0x00000006, (unsigned int)g_Events_ApplyRadialDamageWithKnockbackAddress, 0x00000006, (unsigned int)g_Events_PreserveEventArgumentAddress, 0x0000000A,
+    (unsigned int)g_Events_ApplyRadialDamageWithKnockbackPackedAddress24_us_rev1, 0x00000010, (unsigned int)g_Events_RunSecondNodeOperationAddress, 0x00000010, (unsigned int)g_Events_SpawnActorEffectAddress, 0x00000000,
+    (unsigned int)addrLow_Events_RunSecondNodeOperation_eu_x, 0x00000000, (unsigned int)g_Events_ConsumeEventArgumentAddress, 0x00000000, (unsigned int)g_Events_RequestActorPositionAddress, 0x00000000,
     (unsigned int)g_Events_StartEnabledCameraEmitterAddress, 0x00000000, (unsigned int)g_Events_StartDisabledCameraEmitterAddress, 0x00000000, (unsigned int)g_Events_PostGameplayMessageAddress, 0x00000000,
     (unsigned int)g_Events_ApplyFlag100RadialDamageAddress, 0x00000006, (unsigned int)g_Events_ApplyFlag100RadialKnockbackAddress, 0x00000006, (unsigned int)g_Events_ApplyFlag200RadialDamageAddress, 0x00000007,
     (unsigned int)g_Events_ApplyFlag200RadialKnockbackAddress, 0x00000007, (unsigned int)g_Events_ApplyFlag400RadialDamageAddress, 0x00000006, (unsigned int)g_Events_ApplyFlag400RadialKnockbackAddress, 0x00000006,
     (unsigned int)g_Events_StartActorEmitterAddress, 0x00000000, (unsigned int)g_Events_IgnoreEventAddress, 0x00000000, (unsigned int)g_Events_PlayTeamClipAddress, 0x00000000,
     (unsigned int)g_Events_SpawnFilteredActorEffectAddress, 0x00000000, (unsigned int)g_Events_FireWithinHeightRangeAddress, 0x00000007, (unsigned int)g_Events_SetActorEventBitAddress, 0x00000000,
-    (unsigned int)D_002684B0, 0x00000000, (unsigned int)g_Events_SpawnAttachedEffectAddress, 0x00000000, (unsigned int)g_Events_PlayTeamEffectAddress, 0x00000000,
-    (unsigned int)D_002673A4, 0x00000000, (unsigned int)g_Events_SetActorLoopingSoundAddress, 0x00000000, (unsigned int)g_packedCodeAddress24_00268864, 0x00000000,
+    (unsigned int)addrLow_Events_SetActorEventBit_eu_x, 0x00000000, (unsigned int)g_Events_SpawnAttachedEffectAddress, 0x00000000, (unsigned int)g_Events_PlayTeamEffectAddress, 0x00000000,
+    (unsigned int)addrLow_Events_SpawnActorEffect_SHammertext, 0x00000000, (unsigned int)g_Events_SetActorLoopingSoundAddress, 0x00000000, (unsigned int)g_Events_SetActorLoopingSoundPackedAddress24_us_rev1, 0x00000000,
     (unsigned int)g_Events_IncrementNearbyPlayerCounterAddress, 0x00000002, (unsigned int)g_Events_SpawnPositionedEffectAddress, 0x00000000, (unsigned int)g_Events_SetActorEffectModeAddress, 0x00000000,
     (unsigned int)g_Events_DeactivateActorAddress, 0x00000000, 0x43544555, 0x52204445, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00071115, 0x15110700, 0x00000000,
@@ -121,7 +121,7 @@ u32 data_unresolved_800CC890[428] = {
 };
 #endif
 
-/* DATA_800CC9E8.CPP */
+/* SndplayerPointerWordBlock.CPP */
 #if defined(VERSION_EU_X)
 unsigned int k_SndplayerEncodedWords[17] = {
     0x3FC62F13, 0x3FC60F08, 0x00000000, 0x00000000, 0x800C9D40, 0x800C9B8C, 0x800C9810, 0x00000000,

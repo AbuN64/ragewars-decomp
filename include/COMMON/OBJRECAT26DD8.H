@@ -5,18 +5,18 @@
 extern f32 g_roundTimerStep;
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct Entry80294AC4;
+struct SessionInitializeHandler;
 struct RoundSessionItemStateView;
 typedef struct RoundSessionItemStateView RoundSessionItemStateView;
 
-struct Entry80294AC4 {
+struct SessionInitializeHandler {
     void (*callback)(void *sessionContext);
     s32 field4;
     s32 field8;
 };
 
-struct Entry80294AC4;
-typedef struct Entry80294AC4 Entry80294AC4;
+struct SessionInitializeHandler;
+typedef struct SessionInitializeHandler SessionInitializeHandler;
 
 
 

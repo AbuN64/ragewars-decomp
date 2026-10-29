@@ -28,15 +28,15 @@ s32 Status_FormatRightAlignedPreviewName(struct Field *item) {
     nameLength = 8;
     if (g_pakUseDefaultPreviewLabels != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        item->text = D_800E2984_eu;
+        item->text = g_pakDefaultPreviewNameTexts_eu;
 #else
-        item->text = &D_800D2478;
+        item->text = &g_pakDefaultPreviewNameText;
 #endif
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        item->text = D_800E29A4;
+        item->text = g_pakPreviewNameTexts_eu;
 #else
-        item->text = &D_800D2480;
+        item->text = &g_pakPreviewNameText;
 #endif
         nameTail = &g_controllerPakPreviewNameLastCharacter;
         while (*nameTail-- == 0x20 && nameLength != 0) nameLength--;
@@ -110,6 +110,6 @@ s32 Status_UpdateStatusText(struct Field *item) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Status_UpdateStatusText);
+INCLUDE_ASM("ovl_frontendMenu", Status_UpdateStatusText);
 #endif
 #endif

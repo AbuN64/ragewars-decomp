@@ -19,7 +19,7 @@ s32 Frontend_ClearPage67ModeFlag(void) {
    1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
    state 2 it calls MarkMenuEventHandled, clears the pause word g_simpleObjectPauseState (0x180C past the match objects
    at g_frontendScreenStatus), stops those objects and the ones 0x48 bytes before them, releases resource 0x24
-   of D_8011FE88, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, and calls
+   of g_world_AchieveUpdateresultsscreen, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, and calls
    SoundElement_DisableMusicGainOverride and Stage_StartConfiguredMatch. Returns zero. */
 
 extern s32 Frontend_GetMenuImageState(void *);

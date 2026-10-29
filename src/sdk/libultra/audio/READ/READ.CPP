@@ -3,7 +3,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 
-/* code_802B6F50_2.c */
+/* read8_Read.c */
 /** Consume and return one byte from the stream pointer at offset 8. */
 int read8(struct ALSeq_s *stream) {
     unsigned char *cursor = stream->curPtr;

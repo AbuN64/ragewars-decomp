@@ -2,7 +2,7 @@
 
 /* 800E2774.CPP */
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_constants_80443734_E3374_us_rev1.c */
+/* ROM-grounded data: src/playerDrawPulsingMenuSpriteConstantWordsPoolUsRev1.c */
 const unsigned int g_Player_DrawPulsingMenuSpriteConstantWords_us_rev1[1] = {
     0x3F000000,
 };
@@ -31,7 +31,7 @@ unsigned int k_AmmoEncodedWordsBlock1[2] = {
 };
 #endif
 
-/* DATA_800E2778.CPP */
+/* ammoEncodedWordsBlock1UsRev1Data.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2778 */
 unsigned int g_AmmoEncodedWordsBlock1[2] = {
@@ -39,7 +39,7 @@ unsigned int g_AmmoEncodedWordsBlock1[2] = {
 };
 #endif
 
-/* DATA_800EEDE0.CPP */
+/* ammoCountFormatData.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 const char s_ammoCountFormat[8] =
     " %03d\000\000\000";

@@ -6,14 +6,14 @@
 #include "COMMON/SCREEN.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int rodata_func_80421568_de_800E15E8[10] = {
+const unsigned int k_advanceTextRowsJumpTargets_eu_eu_x[10] = {
     0x00421B24, 0x00421B38, 0x00421B4C, 0x00421B60, 0x00421B74, 0x00421B88, 0x00421B9C, 0x00421BB0,
     0x00421BC4, 0x00421BD8,
 };
 #endif
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Menu_AdvanceTextRows);
+INCLUDE_ASM("ovl_frontendMenu", Menu_AdvanceTextRows);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)

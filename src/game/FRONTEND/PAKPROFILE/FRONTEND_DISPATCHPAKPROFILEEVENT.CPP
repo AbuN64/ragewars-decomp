@@ -56,15 +56,15 @@ int Frontend_ResetNameRepeatOnEvent(int unused0, int unused1, unsigned int messa
 
 /* 8042E080_68.CPP */
 #if !(defined(VERSION_US))
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E54A8, an actor kind at g_pakProfileHandlerKinds and a handler at g_pakProfileHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_pakProfileHandlerEvents, an actor kind at g_pakProfileHandlerKinds and a handler at g_pakProfileHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80435C54)(void *, s32, s32, s32, s32);
+typedef s32 (*PakProfileEventHandler)(void *, s32, s32, s32, s32);
 
-extern FieldRow D_800E54A8[];
-extern Handler80435C54 g_pakProfileHandlers;
+extern FieldRow g_pakProfileHandlerEvents[];
+extern PakProfileEventHandler g_pakProfileHandlers;
 
 s32 Frontend_DispatchPakProfileEvent(void *eventTarget, s32 event, s32 eventValue, s32 eventData, s32 eventContext) {
-    Handler80435C54 *entry;
+    PakProfileEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
@@ -76,7 +76,7 @@ s32 Frontend_DispatchPakProfileEvent(void *eventTarget, s32 event, s32 eventValu
         entry = &g_pakProfileHandlers;
         index = 0;
         do {
-            if (D_800E54A8[index].value == event) {
+            if (g_pakProfileHandlerEvents[index].value == event) {
                 actor = eventTarget;
                 actor_kind = actor->input;
                 table_kind = g_pakProfileHandlerKinds[index].value;

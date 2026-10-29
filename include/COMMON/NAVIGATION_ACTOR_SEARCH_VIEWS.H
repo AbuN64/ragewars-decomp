@@ -99,8 +99,8 @@ struct Actor1DC {
 
 
 
-struct Func8020ED50Arg;
-struct Func8020ED50Arg {
+struct NavigationRouteControllerView;
+struct NavigationRouteControllerView {
     char pad0[4];
     s32 field4;
     char pad8[4];
@@ -118,8 +118,8 @@ struct Func8020ED50Arg {
 
 
 
-struct Func8020ED50Arg;
-typedef struct Func8020ED50Arg Func8020ED50Arg;
+struct NavigationRouteControllerView;
+typedef struct NavigationRouteControllerView NavigationRouteControllerView;
 
 
 

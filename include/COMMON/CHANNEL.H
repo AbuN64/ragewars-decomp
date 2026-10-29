@@ -1,8 +1,8 @@
 #ifndef COMMON_CHANNEL_H
 #define COMMON_CHANNEL_H
 struct Channel;
-#ifndef SPAN_1000_CODE_802393F4_H
-#define SPAN_1000_CODE_802393F4_H
+#ifndef COMMON_CHANNEL_INNER_H
+#define COMMON_CHANNEL_INNER_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -153,11 +153,11 @@ struct ScreenMessageOwner {
     IntrusiveList activeMessages; /* 0xF24 */
     u8 paddingF38[0x1200 - 0xF38];
     s32 state; /* 0x1200 */
-    s32 reservedWord; /* the owner initialized by func_8044A62C_de is0x1208 */
+    s32 reservedWord; /* the owner initialized by Pools_ResetPlayers_Channel is0x1208 */
 };
 struct ScreenMessagePool {
     u8 padding000[4];
-    struct ScreenMessagePool *next; /* 0x04, D_80140FE8 chain */
+    struct ScreenMessagePool *next; /* 0x04, g_gameplayCameraList_Channel chain */
     u8 padding008[0xE38];
     IntrusiveList freeMessages; /* 0xE40 */
 };

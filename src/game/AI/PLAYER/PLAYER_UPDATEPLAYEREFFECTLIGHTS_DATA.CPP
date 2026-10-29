@@ -6,7 +6,7 @@
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
 /* Draws an icon sprite for a view: icons 0x2DA, 0x2E4, 0x2BC and 0x2EF to 0x2F2 sit at the centre of
-   the view's viewport, any other icon is placed at a world point projected through func_80239244_de when
+   the view's viewport, any other icon is placed at a world point projected through Gsky_ProjectToScreen_PlayerUpdateplayereffectlightsData when
    the point lies in front of the view's plane and within 64 pixels of the screen g_hudReferenceViewportWidth, remapped
    into the viewport when g_motionVisibilitySettings is set; the sprite is drawn back by its scaled size less one. */
 

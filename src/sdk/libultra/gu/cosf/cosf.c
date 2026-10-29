@@ -13,5 +13,5 @@ const unsigned int k_CosfEncodedWords[15] = {
 unsigned char g_CosfTrailingBytes[8] = { 0x3C, 0x01, 0x80, 0x0C, 0xC4, 0x20, 0x78, 0x70 };
 #endif
 
-/* DATA_800CCAA4.CPP */
+/* cosf_Cosf.CPP */
 

@@ -103,7 +103,7 @@ void Graphu64_InvertAffineMatrix(f32 *out, f32 *m) {
         return;
     }
 
-    affineHomogeneousOne = D_800C46C0_de;
+    affineHomogeneousOne = g_directionMatrixUnitConstants_de;
     reciprocalDeterminant = affineHomogeneousOne / determinant;
     out[0] = (m[5] * m[10] - m[9] * m[6]) * reciprocalDeterminant;
     m01TimesM22 = m[1] * m[10];

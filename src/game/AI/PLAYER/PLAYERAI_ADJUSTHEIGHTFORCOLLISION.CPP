@@ -47,7 +47,7 @@ extern char g_collisionCurrentActor[];
 extern void Playerai_EmptyWeaponEffectHook(void *, void *);
 
 
-/* Returns whether the entry Scene_GetModelRecordByIndexPointer finds in D_8011FE88 for an object's key at 0x14 exists
+/* Returns whether the entry Scene_GetModelRecordByIndexPointer finds in g_world_AchieveUpdateresultsscreen for an object's key at 0x14 exists
    and has bit 6 of its flags at 0x52 set. */
 
 
@@ -84,7 +84,7 @@ void Playerai_InitializeStateBlendToZero(Player *player) {
 }
 
 /** Perform the no-op hook at VRAM 0x8022DC04. */
-void func_8022DC14_de(void) {
+void Playerai_EmptyHandlerAfterInitializeStateBlendToZero_de(void) {
 }
 
 /* Reports whether the object's float at 0x718 is above the constant after g_playerStateBlendTarget. */

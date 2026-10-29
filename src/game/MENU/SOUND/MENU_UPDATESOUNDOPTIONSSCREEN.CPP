@@ -15,7 +15,7 @@ extern struct SoundOptionsScreen *g_soundOptionsScreen;
 /* Runs the sound options screen g_soundOptionsScreen each frame: when its menu reports 4 it calls
    MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the stored target or Menu_ReturnToPreviousScreen when
    that is -1; otherwise it copies the effects slider into option byte g_soundEffectsVolumeOption, playing sound
-   0x460 when it changed, and the music slider into D_801462E0, stopping the music through
+   0x460 when it changed, and the music slider into g_gameSettingsVolumeBytes, stopping the music through
    SoundElement_SetMusicPlaybackEnabled(0) below 5 or starting track 0x34 when SoundElement_GetMusicPlaybackEnabled reports none playing.
    Returns zero. */
 

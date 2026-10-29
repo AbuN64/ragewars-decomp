@@ -100,9 +100,9 @@ extern u16 gPackedBitsLeft;
 extern u16 gPackedBitMasks[17];
 extern u16 gPackedSignBits[17];
 extern u16 gPackedWord;
-extern unsigned short D_800D54BA;
-extern unsigned short D_800D54BC;
-extern s16 D_800D54BE;
+extern unsigned short g_audioDecodeBitBuffer;
+extern unsigned short g_audioDecodeBitsLeft;
+extern s16 g_audioDecodeFrameHeaderRead;
 extern s16 g_audioTransformTablesInitialized;
 
 /* Dictionary decoder records, shared by the block and phrase streams. */

@@ -108,8 +108,8 @@ static inline s32 textOverlaps(BatchRec *next) {
     BatchRec *batch;
     for (i = 0; i < g_textBatchCount; i++) {
         batch = &g_textBatches[i];
-        if (next->area.field_4 < batch->area.field_0 || batch->area.field_4 < next->area.field_0 ||
-            batch->area.field_8 > next->area.field_C || batch->area.field_C < next->area.field_8) continue;
+        if (next->area.second < batch->area.first || batch->area.second < next->area.first ||
+            batch->area.third > next->area.fourth || batch->area.fourth < next->area.third) continue;
         return 1;
     }
     return 0;
@@ -285,11 +285,11 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     text=resolved;
     if (!Widget_ComputeWidgetBounds(&area, &box, widget, &args)) return;
     if (widget->flags & 0x200) {
-        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.first, &saved.third, &saved.second, &saved.fourth);
         clip = saved;
         if (!Node_ClampRectToClip(&clip, &box)) return;
         clipped = 1;
-        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.first, clip.third, clip.second, clip.fourth);
     }
     length = XPlus_StringLength(text);
     if (args.flags & 0x100) { font=widget->fontSelected; style=widget->styleSelected; }
@@ -298,7 +298,7 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     if ((s8)font == -1) font=widget->font;
     if ((s8)style == -1) style=widget->style;
     if (g_textBatchCount) {
-        N64Eng_GetClipBounds(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
+        N64Eng_GetClipBounds(&current.first, &current.third, &current.second, &current.fourth);
         mismatch = textClipChanged(&current);
         if (mismatch || g_textBatchFontId != (s8)font || g_textBatchStyle != (s8)style) {
             if (g_textBatchCount) Widget_FlushTextBatches();
@@ -308,25 +308,25 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     width = Node_MeasureTextPrefix((s8)font, text, length) * args.XScale;
     x = 0.0f;
     switch (widget->align & 3) {
-        case 0: x=area.field_0; break;
-        case 1: x=(area.field_0+area.field_4)/2-width/2; break;
-        case 2: {s32 edge=area.field_4; ++edge; x=edge-width;} break;
+        case 0: x=area.first; break;
+        case 1: x=(area.first+area.second)/2-width/2; break;
+        case 2: {s32 edge=area.second; ++edge; x=edge-width;} break;
     }
     y = 0.0f;
     switch (widget->align & 12) {
-        case 0: y=area.field_8; y-=g_textVerticalOffset*args.YScale; break;
+        case 0: y=area.third; y-=g_textVerticalOffset*args.YScale; break;
         case 4:
-            y=(area.field_8+area.field_C)/2; y-=g_textVerticalOffset*args.YScale; y-=(g_textLineHeight/2)*args.YScale; break;
+            y=(area.third+area.fourth)/2; y-=g_textVerticalOffset*args.YScale; y-=(g_textLineHeight/2)*args.YScale; break;
         case 8:
             sub=(g_textLineHeight+g_textVerticalOffset)*args.YScale;
-            y=area.field_C; y-=sub; break;
+            y=area.fourth; y-=sub; break;
     }
     batch=&g_textBatches[g_textBatchCount];
-    tempX=x; batch->area.field_0=tempX; batch->area.field_4=tempX+width;
+    tempX=x; batch->area.first=tempX; batch->area.second=tempX+width;
     tempY=(s32)y+(s32)(g_textVerticalOffset*args.YScale);
-    batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(g_textLineHeight*args.YScale);
-    if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
-    if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
+    batch->area.third=tempY; batch->area.fourth=tempY+(s32)(g_textLineHeight*args.YScale);
+    if (batch->area.first >= batch->area.second) batch->area.second=batch->area.first+1;
+    if (batch->area.fourth <= batch->area.third) batch->area.fourth=batch->area.third+1;
     if (textOverlaps(batch)) { Widget_FlushTextBatches(); textBegin(font, style); }
     sprite=ESmem_AllocateFrameHeapHigh(length*sizeof(TextSprite));
     sprites=sprite;
@@ -347,7 +347,7 @@ void Widget_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         if (sprite->x<g_frontendViewportWidth && sprite->x+sprite->width>0.0f) { sprite++; count++; }
         x+=glyph->width*args.XScale; x+=g_textGlyphSpacing*args.XScale;
     }
-    if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+    if (clipped) N64Eng_SetClipBounds(saved.first, saved.third, saved.second, saved.fourth);
     if (count>0) {
         g_textBatches[g_textBatchCount].count=count;
         XPlus_SortArray((char *)g_textBatches[g_textBatchCount].cursor, count, sizeof(TextSprite), Node_CompareRecordShortValuesRomEntry);

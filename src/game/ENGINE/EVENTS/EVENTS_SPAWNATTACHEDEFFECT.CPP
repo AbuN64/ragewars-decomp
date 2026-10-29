@@ -82,7 +82,7 @@ void Events_SpawnAttachedEffect(EffectSpawnSourceView *source, Shared_ParticleOw
     }
 }
 
-s32 Events_SpawnPositionedEffect(s32 unused0, Input80216D3C *targetActor, s32 unused2, Triple unused3, Extra effectParams) {
+s32 Events_SpawnPositionedEffect(s32 unused0, BarrelTrackActorView *targetActor, s32 unused2, Triple unused3, Extra effectParams) {
     CVector3 scale;
     Triple zero;
 

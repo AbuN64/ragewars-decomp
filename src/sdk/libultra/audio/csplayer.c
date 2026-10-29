@@ -137,7 +137,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 __seqpStopOsc(seqp, vs);
-            Seqplayer_ReleaseSequenceVoice((List802B663C *)seqp, voice);
+            Seqplayer_ReleaseSequenceVoice((SeqplayerVoicePool *)seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
             voice = seqp->nextEvent.msg.vol.voice;
@@ -204,7 +204,7 @@ ALMicroTime __CSPVoiceHandler(ALSeqPlayer *node)
                     alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
                         __seqpStopOsc(seqp, vs);
-                    Seqplayer_ReleaseSequenceVoice((List802B663C *)seqp, &vs->voice);
+                    Seqplayer_ReleaseSequenceVoice((SeqplayerVoicePool *)seqp, &vs->voice);
                 }
                 seqp->state = 0;
             }
@@ -751,7 +751,7 @@ unsigned int k_CsplayerEncodedWordsBlock2[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802AF2E0_CD270_us_rev1.c */
+/* ROM-grounded data: src/g___CSPHandleMIDIMsgConstantWords_Csplayer.c */
 const unsigned int g___CSPHandleMIDIMsgConstantWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };

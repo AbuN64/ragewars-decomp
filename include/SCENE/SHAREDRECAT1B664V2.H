@@ -5,7 +5,7 @@
 typedef struct SceneSelectedActorSlotView SceneSelectedActorSlotView;
 struct SceneSelectedActorSlotView {
     char pad0[0x1B664];
-    s32 unk1B664; /* +0x1B664: src/func_80286A78.c */
+    s32 unk1B664; /* +0x1B664: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char SceneSelectedActorSlotSizeCheck[(sizeof(SceneSelectedActorSlotView) == 0x1B668) ? 1 : -1];
 #endif

@@ -3,7 +3,7 @@
 
 /* 800C6B40.CPP */
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* ROM-grounded data: src/rw_constants_8020402C_us_rev1_C7740_us_rev1.c */
+/* ROM-grounded data: src/overlayOneAFloatConstantWords.c */
 #if !(defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US))
 const unsigned int k_overlayOneAFloatConstantWords[1] = {
     0x42F5C28F,

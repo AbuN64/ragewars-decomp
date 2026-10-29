@@ -27,16 +27,16 @@ void Playerai_EndHeldAlternateFire(void *actor) {
 
 /** Return the linked record with the greatest eight-slot score excluding itself. */
 void *Playerai_FindHighestScoringOtherPlayer(Context *context) {
-    RecordCode8022AE90 *node;
-    RecordCode8022AE90 *base;
-    RecordCode8022AE90 *bestNode = 0;
+    ScoredPlayerRecord *node;
+    ScoredPlayerRecord *base;
+    ScoredPlayerRecord *bestNode = 0;
     int best = -1;
 
     node = context->head;
     if (node != 0) {
         base = context->base;
         do {
-            unsigned int own = (unsigned int)((u8 *)node - (u8 *)base) / sizeof(RecordCode8022AE90);
+            unsigned int own = (unsigned int)((u8 *)node - (u8 *)base) / sizeof(ScoredPlayerRecord);
             int score = 0;
             int i;
             for (i = 0; i < 8; i++) {

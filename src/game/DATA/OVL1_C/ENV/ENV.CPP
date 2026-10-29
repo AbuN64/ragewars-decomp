@@ -31,7 +31,7 @@ unsigned int k_EnvEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802B5288_CD558_us_rev1.c */
+/* ROM-grounded data: src/g_EnvWords4_Env.c */
 const unsigned int g_EnvWords4[2] = {
     0x37800000, 0x3F800000,
 };

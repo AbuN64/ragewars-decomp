@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object g_playerCountScreen holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with s_playerCountFormat, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object g_playerCountScreen holds while Control_IsControllerConnected reports one for it and it is below Control_CountConnectedControllers_FrontendUpdateplayercountscreen's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with s_playerCountFormat, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
    Adapted from Menu_StartOptionsImageTransition with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -83,11 +83,11 @@ extern void XStdio_FormatBuffer(char *, char *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_playerCountEventIds, an actor kind at g_playerCountEventActorKinds and a handler at g_playerCountEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
+typedef s32 (*PlayerCountEventHandler)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler8042DFF0 g_playerCountEventHandlers;
+extern PlayerCountEventHandler g_playerCountEventHandlers;
 
 s32 Frontend_DestroyPlayerCountScreen(void) {
     Cache_FreeMemory(g_playerCountScreen);
@@ -190,7 +190,7 @@ s32 Frontend_DecreasePlayerCount(void *first, void *second, void *third, s32 fou
 }
 
 s32 Frontend_DispatchPlayerCountEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
-    Handler8042DFF0 *entry;
+    PlayerCountEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

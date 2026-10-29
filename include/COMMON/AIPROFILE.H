@@ -149,7 +149,7 @@ struct Player {
     u8 pad93C[0x37C];
     s32 weaponLocked; /* 0xCB8 */
     u8 padCBC[4];
-    s32 pendingWeapon; /* 0xCC0: weapon to switch to (func_80222BE8_de, Pickup_HandlePowerWeaponPickup) */
+    s32 pendingWeapon; /* 0xCC0: weapon to switch to (Player_AddAmmo_PickupApplyspecialpickup, Pickup_HandlePowerWeaponPickup) */
     u8 padCC4[0x4F0];
     s32 locked; /* 0x11B4 */
     s32 lockState; /* 0x11B8 */
@@ -212,8 +212,8 @@ struct Course {
     u8 laps;
 };
 
-struct CollisionInfo8020CD74;
-typedef struct CollisionInfo8020CD74 CollisionInfo8020CD74;
+struct CollisionQuery;
+typedef struct CollisionQuery CollisionQuery;
 
 
 struct MenuActorInputView;
@@ -411,8 +411,8 @@ typedef struct PlayerProfileStatusView PlayerProfileStatusView;
 struct ActorDefinitionPointerView;
 typedef struct ActorDefinitionPointerView ActorDefinitionPointerView;
 
-struct CollisionInfo8020CD74;
-struct CollisionInfo8020CD74 {
+struct CollisionQuery;
+struct CollisionQuery {
     s32 w[7];
 };
 

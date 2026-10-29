@@ -53,7 +53,7 @@ void Sound_RetireCompletedSampleWindows(void) {
     Window *next;
 
     value = 0;
-    for (i = 0; i < D_800CB704_de; i++) {
+    for (i = 0; i < g_audioDmaPendingReadCount; i++) {
         osRecvMesg(&g_audioDmaCompletionQueue, &value, 1);
     }
 
@@ -78,7 +78,7 @@ void Sound_RetireCompletedSampleWindows(void) {
         } while (node != 0);
     }
 
-    D_800CB704_de = 0;
+    g_audioDmaPendingReadCount = 0;
     g_audioTaskFrameIndex++;
 }
 
@@ -105,7 +105,7 @@ u32 Sound_GetCachedAudioBlockAddress(void *block, s32 size) {
         unused = (CacheEntry *)alHeapDBAlloc(0, 0, g_audioHeap, 1, 0x90);
         unused->next = g_audioCacheCountdownHead;
         g_audioCacheCountdownHead = unused;
-        D_800CB714++;
+        g_audioCacheEntryAllocCount++;
     }
     unused->key = block;
     unused->state = 3;
@@ -161,7 +161,7 @@ u32 Sound_GetSampleDmaWindowAddress(s32 offset, s32 length) {
     window->base = address;
     window->frame = g_audioTaskFrameIndex;
     word = window->buffer;
-    D_800CB704_de++;
+    g_audioDmaPendingReadCount++;
     Cartridge_SubmitReadChunks(&g_cartridgeReadWorker, address, 0x300, word, &g_audioDmaCompletionQueue, 0, 1);
     return osVirtualToPhysical(word) + odd;
 }
@@ -183,7 +183,7 @@ extern void AudioWorld_InitializePendingSoundPool(void *, void *);
 extern void Audio_InitializeVoicePool(void *, void *);
 extern void Audio_InitializeDialogPlayer(void *, void *);
 extern s32 g_audioWorkerThreadPriority;
-extern s32 D_800CB724;
+extern s32 g_audioFxConfigParams;
 void *Vhandler_AllocateVirtualRegion(s32 byteCount, s32 arg1_unused, s32 allocationMode);
 static inline void LockEnter(MenuRules *lock) {
     u32 mask = __osDisableInt();
@@ -225,7 +225,7 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
     config.maxPVoices = 0x25;
     config.maxUpdates = 0x100;
     config.fxType = 6;
-    config.params = &D_800CB724;
+    config.params = &g_audioFxConfigParams;
     timing.frequency = 0x5622;
     timing.frameTime = 1;
     config.dmaproc = 0;
@@ -280,7 +280,7 @@ void Sound_InitializeContext(GameAudioContext *ctx) {
     ctx->spatialAudioEnabled = 1;
     ctx->alpha = g_soundContextInitialPlaybackScale;
     Audio_InitializeDialogPlayer(ctx->dialog, ctx);
-    D_800CB720 = 1;
+    g_audioContextInitialized = 1;
     LockLeave(&ctx->lock);
 }
 
@@ -452,7 +452,7 @@ s32 Sound_StopSoundsByIdentifier(void *context, s32 id) {
                     voice->pending = 0;
                     voice->flags &= ~0x10;
                 }
-                if ((&((ContextCode8025A3EC *)context)->slots)[0].ids[i] != -1) {
+                if ((&((AudioVoiceContextView *)context)->slots)[0].ids[i] != -1) {
                     Audio_StopVoiceSlot(&((GameAudioContext *)(context))->menu[0], i);
                 }
             }

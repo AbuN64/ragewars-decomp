@@ -14,7 +14,7 @@
 #include "RESMGR/X_PLUS.H"
 
 /* 80233920_31.CPP */
-/* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
+/* Produces a random shake offset for an object: looks up the object's model entry in g_world_AchieveUpdateresultsscreen and
  * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
  * at 0xF4 and 0xF8 toward the pair k_floorShakeTargetHorizontal when the entry is flagged 0x10000 (toward zero when not)
  * and draws each offset component at random within the scaled amplitudes. */

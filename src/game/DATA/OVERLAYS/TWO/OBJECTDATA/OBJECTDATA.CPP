@@ -10,7 +10,7 @@ extern char addrLow_Snapshot_UpdateNoteLabel[];
 extern char addrLow_Snapshot_UpdateSpaceLabel[];
 extern char addrLow_Snapshot_HandleMenuAction[];
 extern char addrLow_Snapshot_CloseNoteBrowser[];
-extern char D_00408AC4[];
+extern char addrLow_Snapshot_UpdateThresholdLabel[];
 extern char addrLow_Pak_ConfirmProfileOrDeleteNote[];
 extern char addrLow_Pak_ClosePromptByKind[];
 extern char addrLow_Pak_ConfirmPendingOperation[];
@@ -29,13 +29,13 @@ extern char addrLow_Timer_UpdatePreviewDepthLabel[];
 extern char addrLow_Timer_FormatPreviewPageCount[];
 extern char addrLow_Timer_FormatPreviewValue[];
 extern char addrLow_Timer_DispatchPreviewHandle[];
-extern char D_0040A614[];
-extern char D_0040A6A8[];
+extern char addrLow_Timer_FormatPreviewDottedTriple[];
+extern char addrLow_Timer_UpdateAlternateActionLabel[];
 extern char addrLow_Timer_OpenSelectedPrompt[];
 extern char addrLow_Timer_EnableProfilePreview[];
 extern char addrLow_Timer_ClearProfilePreview[];
 extern char addrLow_Timer_DisablePreviewSelection[];
-extern char D_0040A7BC[];
+extern char addrLow_Timer_UpdatePreviewKindLabel[];
 extern char addrLow_Menu_FormatRightAlignedName[];
 extern char addrLow_Menu_FormatNoteTypeLabel[];
 extern char addrLow_Pak_FormatPreviewFourDigitValue[];
@@ -46,7 +46,7 @@ extern char addrLow_Pak_SelectPromptKindOne[];
 extern char addrLow_Pak_SelectPromptKindTwo[];
 extern char addrLow_Pak_SelectPromptKindThree[];
 extern char addrLow_Pak_SelectPromptKindFour[];
-extern char D_0040AB18[];
+extern char addrLow_Pak_SelectPromptKindFive[];
 extern char addrLow_Pak_SelectPromptKindSix[];
 extern char addrLow_Pak_SelectPromptKindSeven[];
 extern char addrLow_Pak_SelectPromptKindEight[];
@@ -61,7 +61,7 @@ extern char addrLow_Pak_SelectPromptKindFifteen[];
 extern char addrLow_Pak_SelectPromptActionHeading[];
 extern char addrLow_Pak_SelectPromptTextGroupOne[];
 extern char addrLow_Pak_SelectPromptTextGroupTwo[];
-extern char D_0040AEF8[];
+extern char addrLow_Pak_SelectPromptTextGroupThree[];
 extern char addrLow_Pak_SelectPromptTextGroupFour[];
 extern char addrLow_Pak_SelectPromptTextGroupFive[];
 extern char addrLow_Pak_SelectModalPromptLabel[];
@@ -70,7 +70,7 @@ extern char addrLow_Pak_EnableOperationHeading[];
 extern char addrLow_Pak_DisableOperationHeading[];
 extern char addrLow_Pak_SelectOperationHeading[];
 extern char addrLow_Pak_SelectOperationDescription[];
-extern char D_0040B444[];
+extern char addrLow_Pak_FormatOperationChannelLabel[];
 extern char addrLow_Pak_OpenPakChannel[];
 extern char addrLow_Pak_OpenPakStatusPrompt[];
 extern char addrLow_Pak_CancelPakAction[];
@@ -87,21 +87,21 @@ extern char addrLow_Frontend_SelectPakOperationTextThree[];
 extern char addrLow_Frontend_SelectPakOperationTextFour[];
 extern char addrLow_Frontend_SelectPakOperationTextFive[];
 extern char addrLow_Frontend_SelectPakConfirmationLabel[];
-extern char D_0040BB40[];
+extern char addrLow_Menu_SelectPakOperationActionLabel[];
 extern char addrLow_Encoded_HandleUnlockedLevelSelection[];
 extern char addrLow_Encoded_ResetTextEntryResult[];
 extern char addrLow_Encoded_DrawTextEntryCursor[];
 extern char addrLow_Encoded_UpdateTextEntryCursor[];
 extern char addrLow_Encoded_TextEntryReturnZero[];
 extern char addrLow_Encoded_InsertTextEntryCharacter[];
-extern char g_packedCodeAddress24_0043CCD0[];
+extern char g_Frontend_SelectPreviousEquipmentChoicePackedAddress242[];
 extern char addrLow_Encoded_ApplyCheatCode[];
-extern char D_0043CF44[];
-extern char D_0043D0F0[];
+extern char addrLow_Encoded_SetTextEntryResultLabel[];
+extern char addrLow_Menu_SetSelectedLevelLabel[];
 extern char addrLow_Pak_ToggleTextChoice[];
 extern char addrLow_Option_UpdateOptionBit0Item[];
-extern char D_0043D2E4[];
-extern char D_0043D300[];
+extern char addrLow_Option_ToggleOptionBit1[];
+extern char addrLow_Option_UpdateOptionBit1Item[];
 extern char addrLow_Option_ToggleOptionBit2[];
 extern char addrLow_Option_UpdateOptionBit2Item[];
 extern char addrLow_Option_ToggleOptionBit3[];
@@ -134,7 +134,7 @@ extern char addrLow_Menu_ForwardRulesLock[];
 extern char addrLow_Menu_HandleSessionOptionPage[];
 extern char addrLow_Items_HandleCharacterPreviewSelectionGerman[];
 extern char addrLow_Items_SelectToggleRowTextGerman[];
-extern char D_0043E1C0[];
+extern char addrLow_CMenuProfile_HasRoundProgress[];
 extern char addrLow_CMenuProfile_ResetPlayerControllerProfile[];
 extern char addrLow_CMenuProfile_HasSavedRoundProgress[];
 extern char addrLow_CMenuProfile_AdjustControllerSelection[];
@@ -145,10 +145,10 @@ extern char addrLow_CMenuProfile_BindSelectedDebugField[];
 extern char addrLow_CMenuProfile_OpenSecondaryProfileMenu[];
 extern char addrLow_CMenuProfile_UpdateProfileModeLabel[];
 extern char addrLow_CMenuProfile_EnableOwnerControllerPak[];
-extern char D_0043E504[];
+extern char addrLow_CMenuProfile_EnableControllerPakAndClearState[];
 extern char addrLow_CMenuProfile_HasProfileRoundProgress[];
 extern char addrLow_CMenuProfile_OpenTimedPlayerDialog[];
-extern char D_0043E5C8[];
+extern char addrLow_CMenuProfile_ProfileModeReturnZero[];
 extern char addrLow_CMenuProfile_GameSpeedReturnZero[];
 extern char addrLow_CMenuProfile_HasDialogRoundProgress[];
 extern char addrLow_CMenuProfile_OpenPrimaryPlayerDialog[];
@@ -157,11 +157,11 @@ extern char g_initial_ToggleMenuRowOptionEntry[];
 extern char addrLow_Initial_OpenMatchSetupMenu[];
 extern char addrLow_Initial_ProbeMenuControllerPak[];
 extern char addrLow_Initial_EnableMenuControllerPak[];
-extern char D_0043E9A8[];
+extern char addrLow_Initial_OpenDialogWithControllerPak[];
 extern char addrLow_Initial_OpenDialogAfterTimerReset[];
 extern char addrLow_Initial_RequestTransitionWithPakDisabled[];
 extern char addrLow_Initial_SelectInitialController[];
-extern char D_0043EB70[];
+extern char addrLow_Initial_UpdateMultiplayerAvailability[];
 extern char addrLow_Initial_OpenLocalPlayerSetup[];
 extern char addrLow_Initial_OpenDialog450E9C[];
 extern char addrLow_Initial_OpenDialog44F4A4[];
@@ -177,10 +177,10 @@ extern char addrLow_Menu_DrawMenuModel[];
 extern char addrLow_Menu_DrawMenuEntries[];
 extern char addrLow_Menu_DrawMenuItemLabel[];
 extern char addrLow_Menu_DrawLocalizedMenuItemText[];
-extern char D_00442384[];
+extern char addrLow_Menu_TryCreateMenu[];
 extern char addrLow_Items_PrepareMenuReturnDe[];
 extern char addrLow_Items_PrepareControllerReturn[];
-extern char D_004434E0[];
+extern char addrLow_Player_FormatPlayerPartnerStatus[];
 extern char addrLow_Player_RespawnItemPlayer[];
 extern char addrLow_Player_DrawPulsingMenuSprite[];
 extern char addrLow_Player_UpdatePlayerRespawnDelay[];
@@ -189,7 +189,7 @@ extern char addrLow_Player_ConfigureAndProbeControllerPak[];
 extern char addrLow_Player_ConfigureControllerPakMenu[];
 extern char addrLow_Items_ResetScreenModeFadeCooldown[];
 extern char addrLow_Items_CycleSceneMask[];
-extern char D_00444314[];
+extern char addrLow_Items_SelectSceneMaskText[];
 extern char addrLow_Items_AdjustPlayerOption7B[];
 extern char addrLow_Items_SelectPlayerOption7BText[];
 extern char addrLow_Items_AdjustPlayerOption7C[];
@@ -216,21 +216,21 @@ extern char addrLow_Pak_StopMusicAndResetMatch[];
 extern char addrLow_Pak_SetRecordTypeFour[];
 extern char addrLow_Pak_ResumeMenuAudio[];
 extern char addrLow_Pak_ReturnCallbackSuccess[];
-extern char D_00444EBC[];
-extern char D_00444EE8[];
-extern char D_00444F14[];
-extern char D_00444F40[];
-extern char D_00444F6C[];
+extern char addrLow_Pak_OpenMenuVariantOne_de[];
+extern char addrLow_Pak_OpenMenuVariantTwo_de[];
+extern char addrLow_Pak_OpenMenuVariantThree_de[];
+extern char addrLow_Pak_OpenMenuVariantFour_de[];
+extern char addrLow_Pak_OpenMenuVariantFive_de[];
 extern char addrLow_Pak_RestoreAudioAndCloseMenu[];
 extern char addrLow_Pak_AdjustVolumeSlotTwo[];
 extern char addrLow_Pak_UpdateThirdVolumeLabel[];
-extern char D_00445160[];
+extern char addrLow_Pak_AdjustVolumeSlotZero[];
 extern char addrLow_Pak_UpdateFirstVolumeLabel[];
 extern char addrLow_Pak_AdjustVolumeSlotOne[];
 extern char addrLow_Pak_FormatVolumeSlotOne[];
 extern char addrLow_Pak_SelectMusicPreview[];
 extern char addrLow_Pak_FormatMusicPreview[];
-extern char D_00445504[];
+extern char addrLow_Pak_OpenMusicPreviewMenu[];
 extern char addrLow_Pak_EnterPlayerOptions[];
 extern char addrLow_Pak_RestoreControllerSetup[];
 extern char addrLow_Pak_RenderMenuEntryCallback[];
@@ -276,23 +276,23 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x08000801, 0x00000008, 0x0000FF01, 0x800D37A0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_UpdateAlternatePromptLabel, 0x00000000, 0x00000000,
     0x00000000, 0x00010041, 0x00000014, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_DispatchPreviewHandle, 0x00000000,
-    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D37BC, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0040A614,
+    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D37BC, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_FormatPreviewDottedTriple,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000000A, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     (unsigned int)addrLow_Timer_UpdatePreviewDepthLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D37B4,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_FormatPreviewPageCount, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
     0x800D37B8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_FormatPreviewValue, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014,
-    0x0000FF01, 0x800D37E4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0040A6A8, 0x00000000, 0x00000000, 0x00000000, 0x00010040,
+    0x0000FF01, 0x800D37E4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_UpdateAlternateActionLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010040,
     0x007D000A, 0x00010000, 0x800D3A64, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00408870, 0x00000000, 0x00000000,
     0x00024040, 0x000A0000, 0xFF000000, 0x800D3A68, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Timer_OpenSelectedPrompt, 0x00000000,
     0x0044E51C, 0x000A0000, (unsigned int)addrLow_Timer_EnableAlternatePrompt, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00080000, 0x00000000,
     0x00000000, 0x0044E51C, 0x000A0000, (unsigned int)addrLow_Timer_DisableAlternatePrompt, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00090000,
     0x00000000, 0x00000000, 0x00010000, 0x90000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800D37C0,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0040A7BC, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000032, 0x0000FF01,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Timer_UpdatePreviewKindLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000032, 0x0000FF01,
     0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Menu_FormatRightAlignedName, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000002,
     0x0000FF01, 0x800D37D8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Menu_FormatNoteTypeLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
     0x00000002, 0x0000FF01, 0x800D37DC, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_FormatPreviewFourDigitValue, 0x00000000, 0x00000000, 0x00000000,
-    0x00010041, 0x00000002, 0x0000FF01, 0x800D37E0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_00408AC4, 0x00000000, 0x00000000,
+    0x00010041, 0x00000002, 0x0000FF01, 0x800D37E0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Snapshot_UpdateThresholdLabel, 0x00000000, 0x00000000,
     0x00000000, 0x00010041, 0x00000010, 0x0000FF01, 0x800D37E4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_UpdateProfileActionLabel, 0x00000000,
     0x00000000, 0x00000000, 0x00010040, 0x007D000A, 0x00010000, 0x800D3A64, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000,
     (unsigned int)addrLow_Pak_ConfirmProfileOrDeleteNote, 0x00000000, 0x00000000, 0x00024040, 0x000A0000, 0xFF000000, 0x800D3A68, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
@@ -305,7 +305,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x00010041, 0x0000001E, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectPromptTextGroupOne, 0x00000000,
     0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectPromptTextGroupTwo,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
-    (unsigned int)D_0040AEF8, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D3DE8,
+    (unsigned int)addrLow_Pak_SelectPromptTextGroupThree, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800D3DE8,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectPromptTextGroupFour, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01,
     0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectPromptTextGroupFive, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000019,
     0x0000FF01, 0x800D37F8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectModalPromptLabel, (unsigned int)addrLow_Pak_ClosePromptByKind, 0x00000000, 0x0044E87C, 0x00080000,
@@ -314,7 +314,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindTwo, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00070000, 0x00000000,
     0x00000000, 0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindThree, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00070000,
     0x00000000, 0x00000000, 0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindFour, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000,
-    0x00070000, 0x00000000, 0x00000000, 0x0044E87C, 0x00080000, (unsigned int)D_0040AB18, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
+    0x00070000, 0x00000000, 0x00000000, 0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindFive, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
     0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindSix, 0x00000000,
     (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044E87C, 0x00080000, (unsigned int)addrLow_Pak_SelectPromptKindSeven,
     0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044E87C, 0x00080000,
@@ -333,7 +333,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x00000000, 0x00010041, 0x00000028, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectOperationHeading,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     (unsigned int)addrLow_Pak_SelectOperationDescription, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D3DE8,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0040B444, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014, 0x0000FF01,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_FormatOperationChannelLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014, 0x0000FF01,
     0x800D395C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenPakChannel, 0x00000000, 0x00000000, 0x00010041, 0x00000005,
     0x0000FF01, 0x800D3960, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenPakStatusPrompt, 0x00000000, 0x00000000, 0x00010041,
     0x00000005, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_SelectPakLoadHeading, (unsigned int)addrLow_Pak_CancelPakAction, 0x00000000, 0x0044EC00,
@@ -347,7 +347,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Frontend_SelectPakOperationTextFour, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
     0x00000004, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Frontend_SelectPakOperationTextFive, 0x00000000, 0x00000000, 0x00000000,
     0x00012001, 0x00000023, 0x0000FF01, 0x800D39DC, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Frontend_SelectPakConfirmationLabel, (unsigned int)addrLow_Pak_ConfirmPendingOperation, 0x00000000,
-    0x00000000, 0x00012001, 0x00000005, 0x0000FF01, 0x800D39E0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0040BB40, (unsigned int)addrLow_Timer_CancelPendingOperation,
+    0x00000000, 0x00012001, 0x00000005, 0x0000FF01, 0x800D39E0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Menu_SelectPakOperationActionLabel, (unsigned int)addrLow_Timer_CancelPendingOperation,
     0x00000000, 0x0044ED68, 0x00080000, (unsigned int)addrLow_Pak_SelectPakOperationZero, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, (unsigned int)addrLow_Pak_CheckPakActionChange, 0x00070000,
     0x00000000, 0x00000000, 0x0044ED68, 0x00080000, (unsigned int)addrLow_Pak_SelectPakOperationOne, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, (unsigned int)addrLow_Pak_CheckPakActionChange,
     0x00070000, 0x00000000, 0x00000000, 0x0044ED68, 0x00080000, (unsigned int)addrLow_Pak_SelectPakOperationTwo, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
@@ -393,16 +393,16 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     (unsigned int)addrLow_Encoded_InsertTextEntryCharacter, 0x00000000, 0x00000000, 0x00024050, 0x00080000, 0xFF01F905, 0x800D3EDC, (unsigned int)addrLow_Menu_DrawLocalizedMenuItemText,
     0x00000000, (unsigned int)addrLow_Encoded_InsertTextEntryCharacter, 0x00000000, 0x00000000, 0x00024050, 0x00080000, 0xFF01F904, 0x800D3EE4,
     (unsigned int)addrLow_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)addrLow_Encoded_InsertTextEntryCharacter, 0x00000000, 0x00000000, 0x00024050, 0x00080000, 0xFF01F903,
-    0x800D3F44, (unsigned int)addrLow_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)g_packedCodeAddress24_0043CCD0, 0x00000000, 0x00000000, 0x00024050, 0x00080000,
+    0x800D3F44, (unsigned int)addrLow_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)g_Frontend_SelectPreviousEquipmentChoicePackedAddress242, 0x00000000, 0x00000000, 0x00024050, 0x00080000,
     0xFFFAF902, 0x800D3F4C, (unsigned int)addrLow_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)addrLow_Encoded_ApplyCheatCode, 0x00000000, 0x00000000, 0x00011001,
-    0x00000014, 0x00000000, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0043CF44, 0x00000000, 0x00000000, 0x00000000,
-    0x00310201, 0x00000018, 0x0000FEE2, 0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384, 0x00000000,
+    0x00000014, 0x00000000, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Encoded_SetTextEntryResultLabel, 0x00000000, 0x00000000, 0x00000000,
+    0x00310201, 0x00000018, 0x0000FEE2, 0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu, 0x00000000,
     0x0044F000, 0x00210000, (unsigned int)addrLow_Encoded_ResetTextEntryResult, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00020000, 0x00000000,
     0x00000000, 0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x08000801, 0x00000008, 0x0000FF01, 0x800D3A6C, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00411001, 0x0000000C, 0x0000FF01, 0x800D3B10,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit0Item, (unsigned int)addrLow_Pak_ToggleTextChoice, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01,
-    0x800D3B18, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0043D300, (unsigned int)D_0043D2E4, 0x00000000, 0x00000000, 0x00411001, 0x00000000,
+    0x800D3B18, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit1Item, (unsigned int)addrLow_Option_ToggleOptionBit1, 0x00000000, 0x00000000, 0x00411001, 0x00000000,
     0x0000FF01, 0x800D3B20, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit2Item, (unsigned int)addrLow_Option_ToggleOptionBit2, 0x00000000, 0x00000000, 0x00411001,
     0x00000000, 0x0000FF01, 0x800D3B28, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit3Item, (unsigned int)addrLow_Option_ToggleOptionBit3, 0x00000000, 0x00000000,
     0x00411001, 0x00000000, 0x0000FF01, 0x800D3B30, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit4Item, (unsigned int)addrLow_Option_ToggleOptionBit4, 0x00000000,
@@ -419,8 +419,8 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800D3B80, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Option_UpdateOptionBit14Item,
     (unsigned int)addrLow_Option_ToggleOptionBit14, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800D3B88, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     (unsigned int)addrLow_Option_UpdateOptionBit15Item, (unsigned int)addrLow_Option_ToggleOptionBit15, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800D3DE8,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0043D0F0, (unsigned int)addrLow_Encoded_HandleUnlockedLevelSelection, 0x00000000, 0x00000000, 0x00000201, 0x000000C0, 0x0000FF01,
-    0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384, 0x00000000, 0x0044F4C8, 0x00140000, 0x0043C550,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Menu_SetSelectedLevelLabel, (unsigned int)addrLow_Encoded_HandleUnlockedLevelSelection, 0x00000000, 0x00000000, 0x00000201, 0x000000C0, 0x0000FF01,
+    0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu, 0x00000000, 0x0044F4C8, 0x00140000, 0x0043C550,
     0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00130000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000021, 0x00000000, 0x0000FF01, 0x800D3A8C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00010081, 0x00000028, 0x0000FF01, 0x800D3A64, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_ForwardRulesLock,
@@ -437,7 +437,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x00000000, 0x800D3688, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x00000000, 0x800D3668,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_CMenuProfile_ResetPlayerControllerProfile, 0x00000000, 0x0044F850, 0x00090000, 0x00000000, 0x00000000,
-    (unsigned int)addrLow_Menu_DrawMenuEntries, (unsigned int)D_0043E1C0, 0x00080000, 0x00000000, 0x0044FA6C, 0x00000000, 0x00011001, 0x00000000,
+    (unsigned int)addrLow_Menu_DrawMenuEntries, (unsigned int)addrLow_CMenuProfile_HasRoundProgress, 0x00080000, 0x00000000, 0x0044FA6C, 0x00000000, 0x00011001, 0x00000000,
     0x0000FF02, 0x800D363C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_CMenuProfile_OpenPrimaryProfileMenu, 0x00000000, 0x00000000, 0x00010101,
     0x00000008, 0x00000000, 0x800D3640, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_CMenuProfile_BindSelectedDebugField, 0x00000000, 0x00000000, 0x00000000,
     0x00411001, 0x00000008, 0x0000FE01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_CMenuProfile_FormatProfileQuantityLabel, (unsigned int)addrLow_CMenuProfile_AdjustControllerSelection, 0x00000000,
@@ -448,9 +448,9 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0xC4610000, 0x40000000, 0x40000000, 0x40000000, 0x00000032, 0x00000050, 0x3DB2B8C4, 0x00010000,
     0x30000000, 0x00000000, 0x0000FF01, 0x00000387, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000,
     0x00030000, 0x00410021, 0x00000000, 0x0000FF01, 0x0044FA90, (unsigned int)addrLow_Menu_DrawMenuModel, (unsigned int)addrLow_CMenuProfile_GameSpeedReturnZero, (unsigned int)addrLow_Items_HandleCharacterPreviewSelectionGerman,
-    0x00000000, 0x00000000, 0x00010081, 0x00000019, 0x0000FF01, 0x800D3638, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0043E5C8,
+    0x00000000, 0x00000000, 0x00010081, 0x00000019, 0x0000FF01, 0x800D3638, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_CMenuProfile_ProfileModeReturnZero,
     (unsigned int)addrLow_CMenuProfile_OpenTimedPlayerDialog, 0x00000000, 0x0044FAC0, 0x00030000, (unsigned int)addrLow_CMenuProfile_EnableOwnerControllerPak, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, (unsigned int)addrLow_CMenuProfile_HasProfileRoundProgress,
-    0x00010000, 0x00000000, 0x00000000, 0x0044FAC0, 0x00030000, (unsigned int)D_0043E504, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
+    0x00010000, 0x00000000, 0x00000000, 0x0044FAC0, 0x00030000, (unsigned int)addrLow_CMenuProfile_EnableControllerPakAndClearState, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
     (unsigned int)addrLow_CMenuProfile_HasProfileRoundProgress, 0x00010000, 0x00000000, 0x00000000, 0x00010000, 0x30000000, 0x00000000, 0x0000FF01,
     0x00000387, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010081, 0x00000000,
     0x0000FF01, 0x800D368C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010101,
@@ -471,17 +471,17 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Items_SelectToggleRowTextGerman,
     (unsigned int)g_initial_ToggleMenuRowOptionEntry, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3DE8, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     (unsigned int)addrLow_Items_SelectToggleRowTextGerman, (unsigned int)g_initial_ToggleMenuRowOptionEntry, 0x00000000, 0x00000000, 0x00010201, 0x0000002D, 0x0000FF01, 0x800D3A88,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384, 0x00000000, 0x0044FC68, 0x000B0000, 0x00000000, 0x00000000,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu, 0x00000000, 0x0044FC68, 0x000B0000, 0x00000000, 0x00000000,
     (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x000A0000, 0x00000000, 0x0044FEA8, 0x00010000, 0x10000000, 0x00000000,
     0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000801,
     0x00000008, 0x0000FF01, 0x800D3C64, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00010081, 0x00000000, 0x0000FF01, 0x800D3D10, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenMatchSetupMenu, 0x00000000,
-    0x00000000, 0x00010201, 0x00000038, 0x0000FF01, 0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384,
+    0x00000000, 0x00010201, 0x00000038, 0x0000FF01, 0x800D3A88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu,
     0x00000000, 0x0044FE18, 0x00040000, 0x00000000, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00020000,
     0x00000000, 0x0045010C, 0x00010000, 0x10000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800D3C54,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010081, 0x00000036, 0x0000FF01,
-    0x800D3C58, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_0043E9A8, 0x00000000, 0x00000000, 0x00010081, 0x00000004,
+    0x800D3C58, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenDialogWithControllerPak, 0x00000000, 0x00000000, 0x00010081, 0x00000004,
     0x0000FF01, 0x800D3C5C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenDialogAfterTimerReset, 0x00000000, 0x00000000, 0x00010201,
     0x00000049, 0x0000FF01, 0x800D3630, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_RequestTransitionWithPakDisabled, 0x00000000, 0x0044FECC,
     0x00050000, (unsigned int)addrLow_Initial_ProbeMenuControllerPak, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00020000, 0x00000000, 0x00000000,
@@ -491,7 +491,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00020000, 0x00000000, 0x0045010C, 0x00010000, 0x10000000, 0x00000000, 0x0000FF01, 0x00000384,
     (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000081, 0x0000001E, 0x0000FF01,
     0x800D3C54, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_SelectInitialController, 0x00000000, 0x00000000, 0x00010081, 0x0000000C,
-    0x0000FF01, 0x800D3C60, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_0043EB70, (unsigned int)addrLow_Initial_OpenLocalPlayerSetup, 0x00000000, 0x00000000, 0x00010081,
+    0x0000FF01, 0x800D3C60, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Initial_UpdateMultiplayerAvailability, (unsigned int)addrLow_Initial_OpenLocalPlayerSetup, 0x00000000, 0x00000000, 0x00010081,
     0x0000000C, 0x0000FF01, 0x800D3A78, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenDialog44F4A4, 0x00000000, 0x00000000,
     0x00010081, 0x0000000C, 0x0000FF01, 0x800D3D7C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenDialog44F798, 0x00000000,
     0x00000000, 0x00010081, 0x0000000C, 0x0000FF01, 0x800D3D78, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Initial_OpenDialog450E9C,
@@ -562,17 +562,17 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00090000, 0x00000000, 0x00450E9C, 0x004508B0, 0x00010000, (unsigned int)addrLow_Items_PrepareControllerReturn,
     0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00090000, 0x00000000, 0x00000000, 0x004434A0, 0x00010000,
     0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000401, 0x00000028, 0x0000FF01, 0x800D3BC4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_004434E0, 0x00000000,
+    0x00000000, 0x00000401, 0x00000028, 0x0000FF01, 0x800D3BC4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Player_FormatPlayerPartnerStatus, 0x00000000,
     0x00000000, 0x00010000, 0x20010001, 0x00000000, 0x00000001, 0x0000012D, (unsigned int)addrLow_Player_DrawPulsingMenuSprite, 0x00000000,
     (unsigned int)addrLow_Player_RespawnItemPlayer, 0x00000000, 0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000401, 0x00000028, 0x0000FF01, 0x800D3BE4,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_004434E0, 0x00000000, 0x00000000, 0x00010000, 0x20010001, 0xFFEC0000, 0xEC000001,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Player_FormatPlayerPartnerStatus, 0x00000000, 0x00000000, 0x00010000, 0x20010001, 0xFFEC0000, 0xEC000001,
     0x0000012D, (unsigned int)addrLow_Player_DrawPulsingMenuSprite, 0x00000000, (unsigned int)addrLow_Player_RespawnItemPlayer, 0x00000000, 0x00010000, 0x50000000, 0x00000000,
     0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000401,
-    0x00000028, 0x0000FF01, 0x800D3C04, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_004434E0, 0x00000000, 0x00000000, 0x00010000,
+    0x00000028, 0x0000FF01, 0x800D3C04, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Player_FormatPlayerPartnerStatus, 0x00000000, 0x00000000, 0x00010000,
     0x20010001, 0x00000000, 0x00000001, 0x0000012D, (unsigned int)addrLow_Player_DrawPulsingMenuSprite, 0x00000000, (unsigned int)addrLow_Player_RespawnItemPlayer, 0x00000000,
     0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000401, 0x00000028, 0x0000FF01, 0x800D3C24, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_004434E0,
+    0x00000000, 0x00000000, 0x00000401, 0x00000028, 0x0000FF01, 0x800D3C24, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Player_FormatPlayerPartnerStatus,
     0x00000000, 0x00000000, 0x00010000, 0x20010001, 0x00000000, 0x00000001, 0x0000012D, (unsigned int)addrLow_Player_DrawPulsingMenuSprite,
     0x00000000, (unsigned int)addrLow_Player_RespawnItemPlayer, 0x00000000, 0x00450920, 0x00030000, (unsigned int)addrLow_Player_ConfigurePlayerMenuFlags, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries,
     (unsigned int)addrLow_Player_UpdatePlayerRespawnDelay, 0x00020000, 0x00000000, 0x00000000, 0x0045098C, 0x00030000, (unsigned int)addrLow_Player_ConfigurePlayerMenuFlags, 0x00000000,
@@ -590,7 +590,7 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     (unsigned int)addrLow_Player_ConfigureControllerPakMenu, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x000E0000, 0x00000000, 0x00000000, 0x00010000,
     0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800D3D78, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00400041, 0x0000002F, 0x0000FF01, 0x800D35A8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)D_00444314,
+    0x00000000, 0x00000000, 0x00400041, 0x0000002F, 0x0000FF01, 0x800D35A8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Items_SelectSceneMaskText,
     (unsigned int)addrLow_Items_CycleSceneMask, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D35B4, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     (unsigned int)addrLow_Items_SelectPlayerOption7BText, (unsigned int)addrLow_Items_AdjustPlayerOption7B, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D35C0,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Items_SelectPlayerOption7CText, (unsigned int)addrLow_Items_AdjustPlayerOption7C, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01,
@@ -604,18 +604,18 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     (unsigned int)addrLow_Items_SelectPlayerFlag82Text, (unsigned int)addrLow_Items_TogglePlayerFlag82, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3610,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Items_UpdateScreenModeMenuItem, (unsigned int)addrLow_Items_RequestScreenModeFade, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01,
     0x800D3628, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_FormatPackedButtonOption, (unsigned int)addrLow_Pak_AdjustPackedButtonOption, 0x00000000, 0x00000000, 0x00010201, 0x0000001E,
-    0x0000FF01, 0x800D3630, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384, 0x00000000, 0x00450C80, 0x000F0000,
+    0x0000FF01, 0x800D3630, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu, 0x00000000, 0x00450C80, 0x000F0000,
     (unsigned int)addrLow_Items_ResetScreenModeFadeCooldown, 0x00000000, (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x000E0000, 0x00000000, 0x00000000, 0x00010000,
     0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x08000041, 0x00000008, 0x0000FF01, 0x800D36C8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000101, 0x0000005D, 0x0000FF01, 0x800D3A5C, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00010101, 0x0000000A, 0x0000FF01, 0x800D3A64, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
     0x00000000, (unsigned int)addrLow_Pak_StopMusicAndResetMatch, 0x00000000, 0x00000000, 0x00010101, 0x00000000, 0x0000FF01, 0x800D3A68,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00442384, 0x00000000, 0x00450EC0, 0x00050000, (unsigned int)addrLow_Pak_SetRecordTypeFour, 0x00000000,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Menu_TryCreateMenu, 0x00000000, 0x00450EC0, 0x00050000, (unsigned int)addrLow_Pak_SetRecordTypeFour, 0x00000000,
     (unsigned int)addrLow_Menu_DrawMenuEntries, 0x00000000, 0x00040000, 0x00000000, 0x00451220, 0x00010000, 0x50000000, 0x00000000,
     0x0000FF01, 0x00000385, (unsigned int)addrLow_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08002001,
     0x00000008, 0x0000FF01, 0x800D3D88, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00410041, 0x00000032, 0x0000FF01, 0x800D3D98, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_UpdateFirstVolumeLabel, (unsigned int)D_00445160, 0x00000000,
+    0x00410041, 0x00000032, 0x0000FF01, 0x800D3D98, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_UpdateFirstVolumeLabel, (unsigned int)addrLow_Pak_AdjustVolumeSlotZero, 0x00000000,
     0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3DA8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_FormatVolumeSlotOne, (unsigned int)addrLow_Pak_AdjustVolumeSlotOne,
     0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3DB8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, (unsigned int)addrLow_Pak_UpdateThirdVolumeLabel,
     (unsigned int)addrLow_Pak_AdjustVolumeSlotTwo, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800D3DBC, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
@@ -627,12 +627,12 @@ unsigned int k_ObjectdataEncodedWords[3555] = {
     0x00010041, 0x00000028, 0x0000FF01, 0x800D36AC, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_ResumeMenuAudio, 0x00000000,
     0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D36B0, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_ReturnCallbackSuccess,
     0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D36B8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000,
-    (unsigned int)D_00444EBC, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D36C0, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
-    0x00000000, (unsigned int)D_00444EE8, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D3D88,
-    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00445504, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
-    0x800D3A78, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00444F14, 0x00000000, 0x00000000, 0x00010041, 0x00000000,
-    0x0000FF01, 0x800D36C4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00444F40, 0x00000000, 0x00000000, 0x00010041,
-    0x00000000, 0x0000FF01, 0x800D36C8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)D_00444F6C, 0x00000000, 0x004510B8,
+    (unsigned int)addrLow_Pak_OpenMenuVariantOne_de, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D36C0, (unsigned int)addrLow_Menu_DrawMenuItemLabel,
+    0x00000000, (unsigned int)addrLow_Pak_OpenMenuVariantTwo_de, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800D3D88,
+    (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenMusicPreviewMenu, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
+    0x800D3A78, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenMenuVariantThree_de, 0x00000000, 0x00000000, 0x00010041, 0x00000000,
+    0x0000FF01, 0x800D36C4, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenMenuVariantFour_de, 0x00000000, 0x00000000, 0x00010041,
+    0x00000000, 0x0000FF01, 0x800D36C8, (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_Pak_OpenMenuVariantFive_de, 0x00000000, 0x004510B8,
     0x000A0000, (unsigned int)addrLow_Pak_EnterPlayerOptions, (unsigned int)addrLow_Pak_RestoreControllerSetup, (unsigned int)addrLow_Pak_RenderMenuEntryCallback, 0x00000000, 0x00020000, 0x00000000, 0x00000000,
     0x800E2150, 0x00445B80, 0x00445924, 0x00000000, 0x00000041, 0x00000000, 0x0000FF01, 0x800D3A30,
     (unsigned int)addrLow_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00210101, 0x00000008, 0x0000FF01,

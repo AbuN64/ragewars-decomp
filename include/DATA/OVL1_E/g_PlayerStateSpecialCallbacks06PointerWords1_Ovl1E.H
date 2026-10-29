@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_E_PLAYER_JUMP_AIR_MOTION_ADDRESS_H
+#define DATA_OVL1_E_PLAYER_JUMP_AIR_MOTION_ADDRESS_H
+extern char g_Player_UpdateJumpAirMotionPackedAddress24[];
+#endif

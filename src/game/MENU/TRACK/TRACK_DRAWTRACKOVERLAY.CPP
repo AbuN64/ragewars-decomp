@@ -93,7 +93,7 @@ extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
 /* Returns 1 unless one of the current record's track-2 references names an item, in the first or
-   second item table of D_8011FE88 by its side flag, whose kind and subkind are 1 and 5, 9 and 4,
+   second item table of g_world_AchieveUpdateresultsscreen by its side flag, whose kind and subkind are 1 and 5, 9 and 4,
    or 10 and 3. */
 
 
@@ -265,7 +265,7 @@ s32 Track_HasNoTrackRequestItems(void) {
 }
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_constants_80402BA0_E1854_us_rev1.c */
+/* ROM-grounded data: src/k_trackOverlayThresholdPool_us_rev1.c */
 const unsigned int g_trackOverlayUnsignedThresholdsUsRev1[2] = {
     0x4F000000, 0x4F000000,
 };

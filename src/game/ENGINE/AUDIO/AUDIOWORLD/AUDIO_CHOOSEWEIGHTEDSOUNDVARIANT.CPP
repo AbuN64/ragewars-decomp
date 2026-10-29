@@ -22,12 +22,12 @@
 #include "RENDER/SETN64_GETPACKSECTION.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
-/* ROM-grounded data: src/rw_pool_80258B94_C9BD8_us_rev1.c */
+/* ROM-grounded data: src/k_AudioChooseweightedsoundvariantEncodedWordsUsRev1.c */
 const unsigned int k_AudioChooseweightedsoundvariantEncodedWords[2] = {
     0x41F00000, 0x00000000,
 };
 
-/* ROM-grounded data: src/rw_pool_80258E5C_C9BE0_us_rev1.c */
+/* ROM-grounded data: src/k_AudioChooseweightedsoundvariantEncodedWordsBlock1UsRev1.c */
 const unsigned int k_AudioChooseweightedsoundvariantEncodedWordsBlock1[2] = {
     0x3F800000, 0x42200000,
 };
@@ -179,7 +179,7 @@ void Audio_PlayPeriodicTrackSound(GameAudioContext *context) {
     void *result;
     CVector3 *vec;
 
-    if (D_800CB720 != 0 &&
+    if (g_audioContextInitialized != 0 &&
         context->spatialAudioEnabled != 0 &&
         SetN64_IsModeThirteen() != 0 &&
         context->track > 0) {

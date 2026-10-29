@@ -5,7 +5,7 @@
 unsigned char g_FrontendDispatchnodepairmenueventTrailingBytes[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xB0, 0x00, 0x70 };
 #endif
 
-/* DATA_800E59A8.CPP */
+/* frontendDispatchnodepairmenueventEncodedWordsData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5954_unclaimed_E65A8 */
 unsigned int g_FrontendDispatchnodepairmenueventEncodedWords[2] = {

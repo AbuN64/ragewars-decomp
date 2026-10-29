@@ -14,8 +14,8 @@ struct Box {
     CVector3 max;
 };
 
-struct Owner8020F150;
-typedef struct Owner8020F150 Owner8020F150;
+struct NavigationNodeOwnerView;
+typedef struct NavigationNodeOwnerView NavigationNodeOwnerView;
 
 struct Shared_Input;
 typedef struct Shared_Input Shared_Input;
@@ -174,7 +174,7 @@ struct Shared_Effect {
 struct Record;
 struct Record {
     char pad0[0x80];
-    s8 characterId; /* Player_PlacePlayerForRound passes it to func_8022F454_de */
+    s8 characterId; /* Player_PlacePlayerForRound passes it to Player_GetLevelProgress_MatchGetresulttext */
     char pad81[0x8F - 0x81];
     u8 fragTagEnabled;
     char pad90[0x92 - 0x90];
@@ -387,9 +387,9 @@ struct CacheResourceBlockView;
 struct Pack;
 struct CacheResourceBlockView {
     union { int first; struct Pack *pack; void *data; };
-    int field_4;
-    int field_8;
-    int field_C;
+    int second;
+    int third;
+    int fourth;
 };
 
 struct AttackBehaviorDefinitionView;
@@ -428,8 +428,8 @@ struct ActorOwnerView {
 struct PakMenuSlot;
 typedef struct PakMenuSlot PakMenuSlot;
 
-struct Owner8020F150;
-struct Owner8020F150 {
+struct NavigationNodeOwnerView;
+struct NavigationNodeOwnerView {
     char pad[0x294];
     s32 active;
 };
@@ -486,7 +486,7 @@ struct AnimationEventMaskView {
     int value;
 };
 
-extern int D_800E28CC;
+extern int g_pakStartButtonLatched;
 
 struct PakStatusProfile;
 typedef struct PakStatusProfile PakStatusProfile;

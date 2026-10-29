@@ -15,7 +15,7 @@ extern void *g_nextVideoInterfaceContext;
 
 void System_SetVideoEvent(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
     u32 savedInterruptMask;
-    RecCode802BA23C *rec;
+    VideoContextEventView *rec;
 
     savedInterruptMask = __osDisableInt();
     rec = g_nextVideoInterfaceContext;

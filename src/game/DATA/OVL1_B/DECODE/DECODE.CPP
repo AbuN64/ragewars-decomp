@@ -30,7 +30,7 @@ struct {
 };
 #endif
 
-/* DATA_800C912C.CPP */
+/* s_hicsText_Decode.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C912C */
 unsigned int s_hicsText[1] = {
@@ -38,7 +38,7 @@ unsigned int s_hicsText[1] = {
 };
 #endif
 
-/* DATA_800C942C.CPP */
+/* k_DecodeEncodedWords_Decode.CPP */
 #if defined(VERSION_US)
 unsigned int k_DecodeEncodedWords[16] = {
     0x3FDD2F1C, 0x4030F27C, 0x41A5E354, 0x3F84B5DE, 0x00000000, 0x00000000, 0x00000000, 0x403851EC,
@@ -46,7 +46,7 @@ unsigned int k_DecodeEncodedWords[16] = {
 };
 #endif
 
-/* DATA_800C9D30.CPP */
+/* k_DecodeEncodedWordsBlock1_Decode.CPP */
 #if defined(VERSION_EU)
 unsigned int k_DecodeEncodedWordsBlock1[15] = {
     0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x30000000, 0x00010000, 0x00050000, 0x00040000, 0x000C0000,

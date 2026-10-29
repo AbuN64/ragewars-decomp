@@ -259,7 +259,7 @@ struct Shared_Particle {
     char pad1C0[4];
     f32 rotationScale;
     char pad1C8[8];
-    s8 space; /* reference frame the particle is placed in (-8..2): func_8027D97C_de picks its parent transform, func_8027DD48_de its ground clamp */
+    s8 space; /* reference frame the particle is placed in (-8..2): Particle_ParentTransform_SharedParticleinstance picks its parent transform, Particle_BuildMatrix_SharedParticleinstance its ground clamp */
     union {
         s8 collisionNode; /* 0x1D1: skeleton node of the target a riding particle (flags 0x10000) follows */
         s8 quiver; /* a stuck particle's (flags 0x20000) quiver strength 0..127, decaying 6 a frame */

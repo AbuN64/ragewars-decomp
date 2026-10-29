@@ -1,8 +1,8 @@
 #ifndef COMMON_PAKQUEUESTATE_H
 #define COMMON_PAKQUEUESTATE_H
 struct ControllerProfile;
-#ifndef SPAN_1000_CODE_802636D0_H
-#define SPAN_1000_CODE_802636D0_H
+#ifndef COMMON_PAKQUEUESTATE_TYPES_H
+#define COMMON_PAKQUEUESTATE_TYPES_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
@@ -28,8 +28,8 @@ struct ControllerInputByteStateView;
 typedef struct ControllerInputByteStateView ControllerInputByteStateView;
 
 
-struct Obj80264124;
-struct Obj80264124 {
+struct ControllerRumbleView;
+struct ControllerRumbleView {
     s32 flags;
     s8 enabled;
     char pad05[3];
@@ -94,8 +94,8 @@ extern void Control_ResetControllerPak(struct ControllerProfile *pakProfile);
 
 extern int Control_IsControllerPakPresent(int controllerPort);
 
-struct Obj80264124;
-typedef struct Obj80264124 Obj80264124;
+struct ControllerRumbleView;
+typedef struct ControllerRumbleView ControllerRumbleView;
 
 struct ControllerInputRenderView;
 struct ControllerInputRenderView {

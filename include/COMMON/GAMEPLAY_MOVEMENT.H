@@ -2,12 +2,12 @@
 #define COMMON_GAMEPLAY_MOVEMENT_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-/* Shared records retained from origin/legacy include/shared and func_80220EB0.c. */
+/* Shared records retained from origin/legacy include/shared and Player_UpdateBodyMovementAndActions_GameplayMovement.c. */
 
 typedef struct Shared_Model Shared_Model;
 struct Shared_Model {
-    u16 unk0; /* +0x0: src/func_80220EB0.c */
-    u16 flags; /* +0x2: src/func_80220EB0.c */
+    u16 unk0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 flags; /* +0x2: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
@@ -19,60 +19,60 @@ struct Shared_Model {
 
 typedef struct Shared_StateInfo Shared_StateInfo;
 struct Shared_StateInfo {
-    s32 unk0; /* +0x0: src/func_80220EB0.c */
-    void (*update)(void *, void *); /* +0x4: src/func_80220EB0.c */
-    s32 * flags; /* +0x8: src/func_80220EB0.c */
-    s32 pad0C[3]; /* +0xC: src/func_80220EB0.c */
+    s32 unk0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    void (*update)(void *, void *); /* +0x4: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 * flags; /* +0x8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 pad0C[3]; /* +0xC: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Surface Shared_Surface;
 struct Shared_Surface {
     char pad0[0x28];
-    f32 timer; /* +0x28: src/func_80220EB0.c */
+    f32 timer; /* +0x28: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     char pad2C[0x18];
-    s32 flags; /* +0x44: src/func_80220EB0.c */
+    s32 flags; /* +0x44: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     char pad48[0x4];
-    u16 item; /* +0x4C: src/func_80220EB0.c */
-    u16 pad4E; /* +0x4E: src/func_80220EB0.c */
-    u16 sound; /* +0x50: src/func_80220EB0.c */
+    u16 item; /* +0x4C: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 pad4E; /* +0x4E: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 sound; /* +0x50: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     u16 flags52; /* 0x52 */
 };
 
 
 typedef struct Shared_PickupDef Shared_PickupDef;
 struct Shared_PickupDef {
-    s32 pad0; /* +0x0: src/func_80220EB0.c */
-    s32 flags; /* +0x4: src/func_80220EB0.c */
+    s32 pad0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 flags; /* +0x4: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     char pad8[0x10];
-    f32 radius; /* +0x18: src/func_80220EB0.c */
-    s32 pad1C; /* +0x1C: src/func_80220EB0.c */
-    s32 item; /* +0x20: src/func_80220EB0.c */
+    f32 radius; /* +0x18: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 pad1C; /* +0x1C: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 item; /* +0x20: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Pickup Shared_Pickup;
 struct Shared_Pickup {
     char pad0[0x8];
-    CVector3 pos; /* +0x8: src/func_80220EB0.c */
-    s32 pad14; /* +0x14: src/func_80220EB0.c */
-    struct Shared_PickupDef * def; /* +0x18: src/func_80220EB0.c */
+    CVector3 pos; /* +0x8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s32 pad14; /* +0x14: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    struct Shared_PickupDef * def; /* +0x18: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_CharInfo Shared_CharInfo;
 struct Shared_CharInfo {
-    s32 pad0; /* +0x0: src/func_80220EB0.c */
-    u16 sound; /* +0x4: src/func_80220EB0.c */
-    s16 pad6; /* +0x6: src/func_80220EB0.c */
-    s16 ammo; /* +0x8: src/func_80220EB0.c */
-    s16 padA; /* +0xA: src/func_80220EB0.c */
+    s32 pad0; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 sound; /* +0x4: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s16 pad6; /* +0x6: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s16 ammo; /* +0x8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    s16 padA; /* +0xA: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     union {
         struct {
-            s16 next_s; /* +0xC: src/func_80220EB0.c */
+            s16 next_s; /* +0xC: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
         } viewC_0;
         struct {
-            u16 next_u; /* +0xC: src/func_80220EB0.c */
+            u16 next_u; /* +0xC: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
         } viewC_1;
     } viewsC;
     char padE[0x2];
@@ -82,43 +82,43 @@ struct Shared_CharInfo {
 typedef struct Shared_Floor Shared_Floor;
 struct Shared_Floor {
     char pad0[0xE8];
-    f32 y; /* +0xE8: src/func_80220EB0.c */
+    f32 y; /* +0xE8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Profile Shared_Profile;
 struct Shared_Profile {
     char pad0[0x81];
-    u8 team; /* +0x81: src/func_80220EB0.c */
+    u8 team; /* +0x81: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     u8 controllerFlag; /* 0x82 */
     u8 quantity; /* 0x83: menu player quantity */
     char pad84[0xB];
-    u8 remote; /* +0x8F: src/func_80220EB0.c */
+    u8 remote; /* +0x8F: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
     char pad90[0x4];
-    u8 counts; /* +0x94: src/func_80220EB0.c */
+    u8 counts; /* +0x94: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Hud Shared_Hud;
 struct Shared_Hud {
     char pad0[0x120];
-    s32 score; /* +0x120: src/func_80220EB0.c */
-    u16 pad124; /* +0x124: src/func_80220EB0.c */
-    u16 bonus; /* +0x126: src/func_80220EB0.c */
+    s32 score; /* +0x120: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 pad124; /* +0x124: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
+    u16 bonus; /* +0x126: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Shadow Shared_Shadow;
 struct Shared_Shadow {
     char pad0[0x8];
-    CVector3 pos; /* +0x8: src/func_80220EB0.c */
+    CVector3 pos; /* +0x8: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 
 typedef struct Shared_Voice Shared_Voice;
 struct Shared_Voice {
     char pad0[0x10];
-    s32 bank; /* +0x10: src/func_80220EB0.c */
+    s32 bank; /* +0x10: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
 };
 
 

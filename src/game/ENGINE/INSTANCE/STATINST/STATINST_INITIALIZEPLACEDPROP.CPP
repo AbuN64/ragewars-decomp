@@ -14,7 +14,7 @@ extern s32 g_gameFrameCounter;
  * scale and position into a matrix copied into the object, sets its bounding box either as a fixed
  * cube for flag 0x40 or from the record's six signed extents at a tenth of a cell with a half-unit
  * margin, copies the position, links its path segment and takes the next colour key and colour
- * frame. This is the compact-record twin of func_8024FD6C_eu, which does the same work from a record
+ * frame. This is the compact-record twin of Statinst_InitializePlacedPropFullRecord_eu, which does the same work from a record
  * carrying full floats. The rounded literals are the cartridge's: 5.12 is 0x40A3D70A, 102.4 is
  * 0x42CCCCCC and 10.24 is 0x4123D70A. */
 
@@ -22,7 +22,7 @@ extern s32 g_gameFrameCounter;
 
 
 /* The record is packed into 0x1C bytes: the cell coordinates, the height and the six extents are
- * bytes scaled on the way in, where func_8024FD6C_eu's record carries the same quantities as floats. */
+ * bytes scaled on the way in, where Statinst_InitializePlacedPropFullRecord_eu's record carries the same quantities as floats. */
 
 
 

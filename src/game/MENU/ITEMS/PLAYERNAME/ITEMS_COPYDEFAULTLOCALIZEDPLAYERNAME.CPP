@@ -17,7 +17,7 @@ void Items_CopyDefaultLocalizedPlayerName(u8 *record) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_CopyDefaultLocalizedPlayerName);
+INCLUDE_ASM("ovl_frontendMenu", Items_CopyDefaultLocalizedPlayerName);
 #endif
 #endif
 

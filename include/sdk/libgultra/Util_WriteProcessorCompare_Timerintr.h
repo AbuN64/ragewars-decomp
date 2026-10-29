@@ -1,0 +1,6 @@
+#ifndef SDK_LIBGULTRA_UTIL_WRITEPROCESSORCOMPARE_H
+#define SDK_LIBGULTRA_UTIL_WRITEPROCESSORCOMPARE_H
+#include "TYPES.H"
+#include "COMMON/RUNTIME_DECLARATIONS.H"
+extern void Util_WriteProcessorCompare(u32 compare);
+#endif

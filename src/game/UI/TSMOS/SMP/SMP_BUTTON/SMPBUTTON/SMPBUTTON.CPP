@@ -5,7 +5,7 @@
 unsigned char g_SmpbuttonTrailingBytes[4] = { 0x44, 0x82, 0x00, 0x00 };
 #endif
 
-/* DATA_8041B65C.CPP */
+/* buttonWidgetSplitTextZeroWordUsRev1.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_8041B5BC_de_padding_18965C */
 unsigned int g_buttonWidgetSplitTextZeroWordUsRev1[1] = {

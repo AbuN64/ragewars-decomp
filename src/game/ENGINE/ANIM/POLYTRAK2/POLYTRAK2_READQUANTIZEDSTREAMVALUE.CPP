@@ -17,7 +17,7 @@
 
 
 
-static inline f32 decode(u32 *stream, Func802608ECResult range) {
+static inline f32 decode(u32 *stream, Polytrak2QuantizationRange range) {
     u32 bitAddress;
     u32 *streamPtr;
     s32 shift;

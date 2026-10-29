@@ -48,7 +48,7 @@ inline static void write_bits(u32 value, u32 bitAddress, u32 bitWidth)
 
 /* Decodes element arg1 of a packed bit-field float array into a float scaled into its range. Adapted from Polytrak2_ReadQuantizedFloatAtAddress, inlined as a helper (with the width held in a local) called with a base plus width-times-index bit address and the record's range. */
 
-static inline f32 decode(s32 bitAddress, Func802608ECResult range) {
+static inline f32 decode(s32 bitAddress, Polytrak2QuantizationRange range) {
     s32 shift;
     u32 *word;
     u32 value;
@@ -82,7 +82,7 @@ static inline f32 decode(s32 bitAddress, Func802608ECResult range) {
     return result;
 }
 
-f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range) {
+f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Polytrak2QuantizationRange range) {
     s32 shift;
     u32 *word;
     u32 value;
@@ -114,7 +114,7 @@ f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult ran
     return result;
 }
 
-void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
+void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Polytrak2QuantizationRange range, f32 sourceValue)
 {
   f32 unscaledValue;
   f32 roundedScaledValue;
@@ -146,7 +146,7 @@ void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult r
   write_bits(quantizedValue, bitAddress, range.value);
 }
 
-f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range) {
+f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Polytrak2QuantizationRange range) {
     u32 bitAddress;
     u32 *streamPtr;
     s32 shift;
@@ -188,7 +188,7 @@ f32 Polytrak2_ReadQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range
 }
 
 /** Initialize a packed array and its decoding range. */
-void Polytrak2_InitializeQuantizedArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeQuantizedArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;
@@ -200,7 +200,7 @@ f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementInde
 }
 
 /** Initialize a packed array and its decoding range. */
-void Polytrak2_InitializeUnsignedArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeUnsignedArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;
@@ -234,7 +234,7 @@ int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIn
 }
 
 /** Initialize a packed array and its decoding range. */
-void Polytrak2_InitializeHighBitsSetArray(void *decodeArray, int baseBitAddress, Func802608ECResult valueRange, int elementCount) {
+void Polytrak2_InitializeHighBitsSetArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange valueRange, int elementCount) {
     DecodeArray *array = decodeArray;
     array->base = baseBitAddress;
     array->range = valueRange;

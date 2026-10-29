@@ -190,7 +190,7 @@ s32 Cbarrel_UpdateTrackerAim(TrackerAimActorView *actor, Plan *tracker, TrackerA
 typedef struct CollisionInfo CollisionInfo;
 extern f32 g_barrelInitialBestTargetDistance;
 extern CollisionInfo g_defaultProbeMotionSettings;
-extern Instance8020CD74 *g_currentActorInstance;
+extern ActorInstanceHeader *g_currentActorInstance;
 extern char g_playerViewRenderContext[];
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 Cinema_GetSequenceRequest(void);
@@ -214,12 +214,12 @@ typedef struct CombatPlayerView {
 /* Picks the best target for an actor: the tracker's locked target (0x78) if it has one, otherwise
  * gathers up to two candidates (the tracker's own entry at 0x68 and the nearest player found around the
  * actor), keeps the nearest within g_barrelInitialBestTargetDistance that passes the territory/visibility tests
- * (func_80214624_de and a line-of-sight probe through CCollision_SweepPoint when requested), and remembers the
+ * (Cbarrel_UpdateTrackerAim_CbarrelSelectcombattarget and a line-of-sight probe through CCollision_SweepPoint when requested), and remembers the
  * actor's position as the tracker's home when nothing qualified. */
 BarrelAnchorActorView *Cbarrel_SelectCombatTarget(BarrelAnchorActorView *actor, Tracker *tracker, s32 lineOfSight,
                                                    s32 combat) {
     BarrelAnchorActorView *candidates[128];
-    Instance8020CD74 saved;
+    ActorInstanceHeader saved;
     CVector3 target;
     BarrelAnchorActorView *best;
     BarrelAnchorActorView *candidate;
@@ -299,17 +299,17 @@ BarrelAnchorActorView *Cbarrel_SelectCombatTarget(BarrelAnchorActorView *actor, 
                 }
             }
             if (lineOfSight != 0) {
-                saved = *(Instance8020CD74 *)actor;
+                saved = *(ActorInstanceHeader *)actor;
                 actor->pos.y += Gobjinst_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
                 actor->pos.y += candidate->height;
                 target = candidate->pos;
                 target.y += Gobjinst_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
                 target.y += candidate->height;
                 blocked = CCollision_SweepPoint(actor, actor->pos, target, &g_defaultProbeMotionSettings);
-                if (g_currentActorInstance == (Instance8020CD74 *)candidate) {
+                if (g_currentActorInstance == (ActorInstanceHeader *)candidate) {
                     blocked = 0;
                 }
-                *(Instance8020CD74 *)actor = saved;
+                *(ActorInstanceHeader *)actor = saved;
                 if (blocked != 0) {
                     continue;
                 }

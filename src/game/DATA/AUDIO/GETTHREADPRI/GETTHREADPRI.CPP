@@ -5,7 +5,7 @@
 unsigned char g_GetthreadpriTrailingBytesBlock1[4] = { 0x8E, 0x70, 0x00, 0x04 };
 #endif
 
-/* DATA_802BB734.CPP */
+/* g_getthreadpriConstantWords_Getthreadpri.CPP */
 #if defined(VERSION_US)
 char func_802B6664_de_padding_BC334[12] =
     "\020m_PickupInf";

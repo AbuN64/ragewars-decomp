@@ -7,14 +7,14 @@ struct PlayerPoolModeStateView {
     char pad74[0x84 - 0x74 - sizeof(s32)];
     s32 unk_84;
 };
-struct ActorCode80447BB0 {
+struct PlayerSpawnActivationActor {
     char pad[0x2E8];
     char firstEffect[0x170]; /* 0x2E8 */
     char secondEffect[0x180]; /* 0x458 */
     struct Part *part;
 };
 /* A 0x44-byte record: three leading words, two lists of 0x16DC/0x16E0-linked nodes, four trailing words. */
-struct RecordCode80447BB0 {
+struct MenuPlayerPoolRecord {
     s32 m_pmePlayers;
     s32 m_Players;
     s32 word8;

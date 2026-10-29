@@ -29,7 +29,7 @@ extern void **g_collisionCurrentActor;
 extern s32 CCollision_SweepPoint(void *actorStorage, CVector3 startPosition, CVector3 desired, void *motionSettings);
 
 /* Revives a player whose down timer at 0x1340 has run past its limit (30 ticks, or 900 in
-   control modes 12 and 15 while D_80146938 asks): clears the timer and calls Player_PlacePlayerForRound
+   control modes 12 and 15 while g_selectedProfileHealthOptionEnabled asks): clears the timer and calls Player_PlacePlayerForRound
    unless the session at 0x98 is running and the player's team membership at 0x94 and control
    mode disagree, or it is teamless and active outside session mode 3. */
 

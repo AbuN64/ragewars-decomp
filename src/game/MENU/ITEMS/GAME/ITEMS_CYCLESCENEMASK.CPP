@@ -44,7 +44,7 @@ extern char g_combinedControllerProfile;
 
 extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-/* Points an option field at the text g_itemsCyclescenemaskText_800D35B4 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_itemsCyclescenemaskText_800D35B8 when it is one, returning zero. Adapted from Items_SelectPlayerOption7EText with the settings byte made the signed byte at 0x7B and the texts changed. */
+/* Points an option field at the text g_playerOption7BText0 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_playerOption7BText1 when it is one, returning zero. Adapted from Items_SelectPlayerOption7EText with the settings byte made the signed byte at 0x7B and the texts changed. */
 
 
 
@@ -68,7 +68,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Points a field's text at g_itemsCyclescenemaskText_800D35C4 when the byte at offset 0x7C of the settings the second argument's owner holds (or of the defaults g_playerPartnerNameFallback without an owner or settings) is zero, at g_itemsCyclescenemaskText_800D35C0 when it is one, and leaves it otherwise, returning zero. Adapted from Items_SelectPlayerFlag82Text with the settings pointer checked for null, the byte offset 0x7C, and a nested test over the texts g_itemsCyclescenemaskText_800D35C4 and g_itemsCyclescenemaskText_800D35C0 changed. */
+/* Points a field's text at g_playerOption7CText0 when the byte at offset 0x7C of the settings the second argument's owner holds (or of the defaults g_playerPartnerNameFallback without an owner or settings) is zero, at g_playerOption7CText1 when it is one, and leaves it otherwise, returning zero. Adapted from Items_SelectPlayerFlag82Text with the settings pointer checked for null, the byte offset 0x7C, and a nested test over the texts g_playerOption7CText0 and g_playerOption7CText1 changed. */
 
 
 
@@ -91,7 +91,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Points an option field at the text g_itemsCyclescenemaskText_800D35CC when the byte at offset 0x7D of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_itemsCyclescenemaskText_800D35C8 when it is one, returning zero. */
+/* Points an option field at the text g_playerOption7DText0 when the byte at offset 0x7D of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_playerOption7DText1 when it is one, returning zero. */
 
 
 
@@ -115,7 +115,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Points an option field at the text g_itemsCyclescenemaskText_800D35D4 when the byte at offset 0x7E of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_itemsCyclescenemaskText_800D35D0 when it is one, returning zero. Adapted from Items_SelectPlayerOption7DText with the settings byte 0x7E and the texts g_itemsCyclescenemaskText_800D35D4 and g_itemsCyclescenemaskText_800D35D0 changed. */
+/* Points an option field at the text g_playerOption7EText0 when the byte at offset 0x7E of the second argument's owner settings (or the defaults g_playerPartnerNameFallback) is zero and at g_playerOption7EText1 when it is one, returning zero. Adapted from Items_SelectPlayerOption7DText with the settings byte 0x7E and the texts g_playerOption7EText0 and g_playerOption7EText1 changed. */
 
 
 
@@ -135,7 +135,7 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the option byte D_801462E7 with what Menu_AdjustValue returns for the second argument, that
+/* Replaces the option byte g_gameSettingsTwoPlayerScreenPreference with what Menu_AdjustValue returns for the second argument, that
    byte, 1, 0, 1 and 1, and returns zero. */
 
 /* Updates the menu item visibility and text for the current configuration. */
@@ -175,7 +175,7 @@ s32 Items_CycleSceneMask(void) {
  return 0;
 }
 
-/* Sets bit 24 of the item's flags when D_80146878 is 8 (clears it otherwise) and points the item at the text table for the configuration D_801462D0 (8, 0x10 or 0x20); returns 0. */
+/* Sets bit 24 of the item's flags when g_gameSessionMode is 8 (clears it otherwise) and points the item at the text table for the configuration g_gameOptions (8, 0x10 or 0x20); returns 0. */
 s32 Items_SelectSceneMaskText(SceneMaskLabelItem *item) {
     if (g_gameSession.mode == 8) {
         item->flags |= 0x01000000;
@@ -184,13 +184,13 @@ s32 Items_SelectSceneMaskText(SceneMaskLabelItem *item) {
     }
     switch (g_gameSettings.sceneMask) {
     case 8:
-        item->table = g_itemsCyclescenemaskTable_800D35A8;
+        item->table = g_sceneMaskLabelTable8;
         break;
     case 0x10:
-        item->table = g_itemsCyclescenemaskTable_800D35AC;
+        item->table = g_sceneMaskLabelTable0x10;
         break;
     case 0x20:
-        item->table = g_itemsCyclescenemaskTable_800D35B0;
+        item->table = g_sceneMaskLabelTable0x20;
         break;
     }
     return 0;
@@ -214,10 +214,10 @@ s32 Items_SelectPlayerOption7BText(struct Field *field, struct PlayerSettingsTex
     }
     switch (settings->option7B) {
     case 0:
-        field->text = &g_itemsCyclescenemaskText_800D35B4;
+        field->text = &g_playerOption7BText0;
         break;
     case 1:
-        field->text = &g_itemsCyclescenemaskText_800D35B8;
+        field->text = &g_playerOption7BText1;
         break;
     }
     return 0;
@@ -242,10 +242,10 @@ s32 Items_SelectPlayerOption7CText(struct PakActionLabelView *field, struct Play
     }
     if (settings->option7C != 0) {
         if (settings->option7C == 1) {
-            field->text = g_itemsCyclescenemaskText_800D35C0;
+            field->text = g_playerOption7CText1;
         }
     } else {
-        field->text = g_itemsCyclescenemaskText_800D35C4;
+        field->text = g_playerOption7CText0;
     }
     return result;
 }
@@ -268,10 +268,10 @@ s32 Items_SelectPlayerOption7DText(struct Field *field, struct PlayerSettingsTex
     }
     switch (settings->option7D) {
     case 0:
-        field->text = &g_itemsCyclescenemaskText_800D35CC;
+        field->text = &g_playerOption7DText0;
         break;
     case 1:
-        field->text = &g_itemsCyclescenemaskText_800D35C8;
+        field->text = &g_playerOption7DText1;
         break;
     }
     return 0;
@@ -295,10 +295,10 @@ s32 Items_SelectPlayerOption7EText(struct Field *field, struct PlayerSettingsTex
     }
     switch (settings->option7E) {
     case 0:
-        field->text = &g_itemsCyclescenemaskText_800D35D4;
+        field->text = &g_playerOption7EText0;
         break;
     case 1:
-        field->text = &g_itemsCyclescenemaskText_800D35D0;
+        field->text = &g_playerOption7EText1;
         break;
     }
     return 0;
@@ -314,13 +314,13 @@ s32 Items_AdjustFirstListMode(void *first, void *second) {
 s32 Items_SelectFirstListModeText(struct PakActionLabelView *field) {
     switch (g_gameSettings.bloodMode) {
     case 0:
-        field->text = g_itemsCyclescenemaskText_800D35D8;
+        field->text = g_bloodModeText0;
         break;
     case 1:
-        field->text = g_itemsCyclescenemaskText_800D35DC;
+        field->text = g_bloodModeText1;
         break;
     case 2:
-        field->text = g_itemsCyclescenemaskText_800D35E0;
+        field->text = g_bloodModeText2;
         break;
     default:
         return 0;

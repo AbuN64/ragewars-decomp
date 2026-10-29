@@ -32,10 +32,10 @@ typedef struct ViModeContextView ViModeContextView;
 
 struct OSMesgQueue;
 
-struct OSDevMgr_func_802BA350_de;
+struct VideoDeviceManager;
 struct OSMesgQueue;
 struct OSThread;
-struct OSDevMgr_func_802BA350_de {
+struct VideoDeviceManager {
     u32 active;
     struct OSThread *thread;
     struct OSMesgQueue *cmdQueue;
@@ -61,8 +61,8 @@ struct OSViCommonRegs {
     u32 vCurrent;
 };
 
-struct RecCode802BA23C;
-typedef struct RecCode802BA23C RecCode802BA23C;
+struct VideoContextEventView;
+typedef struct VideoContextEventView VideoContextEventView;
 
 extern double g_videoScaleUnsignedBias;
 
@@ -70,7 +70,7 @@ extern double g_videoScaleUnsignedBias;
 struct OSViFieldRegs;
 typedef struct OSViFieldRegs OSViFieldRegs;
 
-struct RecCode802BA23C;
+struct VideoContextEventView;
 
 struct ViVerticalScaleView;
 struct ViVerticalScaleView {
@@ -155,8 +155,8 @@ struct StateosViSetSpecialFeatures {
     u32 flags;
 };
 
-struct OSDevMgr_func_802BA350_de;
-typedef struct OSDevMgr_func_802BA350_de OSDevMgr_func_802BA350_de;
+struct VideoDeviceManager;
+typedef struct VideoDeviceManager VideoDeviceManager;
 
 struct ViSwapContextView;
 typedef struct ViSwapContextView ViSwapContextView;

@@ -6,7 +6,7 @@ const unsigned int k_PlayeraiFindtransientplayerEncodedWords[8] = {
 };
 
 /* 800C7DD4.CPP */
-/* ROM-grounded data: src/rw_pool_8022A480_C89D4_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiFindtransientplayerMaxFiniteFloatWords_PlayeraiFindtransientplayerData.c */
 const unsigned int k_PlayeraiFindtransientplayerMaxFiniteFloatWords[1] = {
     0x7F7FFFFF,
 };

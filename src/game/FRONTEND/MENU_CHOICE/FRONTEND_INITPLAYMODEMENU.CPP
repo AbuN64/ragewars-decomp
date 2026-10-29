@@ -13,9 +13,9 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "FRONTEND/SCREEN.H"
 
-extern s32 D_800E4680;
+extern s32 g_currentStagePreset;
 
-/* D_80146398 is the hub's SlotSelectionPlayerConfig array: eight 0x96-byte records at Game+0xD0.
+/* g_playerSettings_Achieve is the hub's SlotSelectionPlayerConfig array: eight 0x96-byte records at Game+0xD0.
    This unit reaches them only as settings->playerSettings and declares nothing here. */
 
 extern void MarkMenuEventHandled(void);
@@ -297,7 +297,7 @@ s32 Frontend_ApplyModeChoice(void) {
             Player_InitializeProfileSlot(0);
         }
         g_gameSettings.controllerMode = 4;
-        D_800E4680 = 0;
+        g_currentStagePreset = 0;
         break;
     default:
         return 0;

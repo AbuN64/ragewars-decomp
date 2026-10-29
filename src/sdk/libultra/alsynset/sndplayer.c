@@ -13,7 +13,7 @@ s16 alSndpAllocate(SoundPlayerSlotPool *pool, void *owner) {
     if (count > 0) {
         s16 i = 0;
         s16 state = 5;
-        f32 value = D_800C7510_de;
+        f32 value = g_soundPlayerSlotInitialValue;
         u8 flags = 0x40;
         do {
         s16 index = i;
@@ -34,7 +34,7 @@ s16 alSndpAllocate(SoundPlayerSlotPool *pool, void *owner) {
     return -1;
 }
 
-/* ROM-grounded data: src/rw_pool_802B2510_CD360_us_rev1.c */
+/* ROM-grounded data: src/g_alSndpAllocateConstantWords_Sndplayer.c */
 const unsigned int g_alSndpAllocateConstantWords[1] = {
     0x3F800000,
 };

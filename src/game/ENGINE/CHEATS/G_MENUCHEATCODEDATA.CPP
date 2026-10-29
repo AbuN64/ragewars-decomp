@@ -87,21 +87,21 @@ extern char Frontend_SelectPakOperationTextFour_PagedAddress[];
 extern char Frontend_SelectPakOperationTextFive_PagedAddress[];
 extern char Frontend_SelectPakConfirmationLabel_PagedAddress[];
 extern char Frontend_SelectPakActionLabel_PagedAddress[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_23C[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_374[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_684[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_698[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_81C[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_8F4[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_9BC[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_AE4[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_C30[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_DDC[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_F48[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_F64[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_FD0[];
-extern char rw_menu_paged_func_8043C4F4_us_rev1_offset_FEC[];
+extern char Option_InitializeTwentyItemDefinition_PagedAddress[];
+extern char Option_SelectLabelAfterOptionBits_PagedAddress[];
+extern char Option_InitializeThirtyThreeItemDefinition_PagedAddress[];
+extern char Option_DrawFirstTextItem_PagedAddress[];
+extern char Option_UpdateFirstTextItem_PagedAddress[];
+extern char Option_SelectFirstTextItem_PagedAddress[];
+extern char Option_SelectLocalizedTextItem_PagedAddress[];
+extern char Option_SelectPenultimateLocalizedTextItem_PagedAddress[];
+extern char Option_SelectLastLocalizedTextItem_PagedAddress[];
+extern char Option_UpdateLabelAfterLocalizedText_PagedAddress[];
+extern char Option_UpdateLabelAfterOptionBits_PagedAddress[];
+extern char Option_ToggleOptionBit0_PagedAddress[];
+extern char Option_UpdateOptionBit0Item_PagedAddress[];
+extern char Option_ToggleOptionBit1_PagedAddress[];
+extern char Option_UpdateOptionBit1Item_PagedAddress[];
 extern char Option_ToggleOptionBit2_PagedAddress[];
 extern char Option_UpdateOptionBit2Item_PagedAddress[];
 extern char Option_ToggleOptionBit3_PagedAddress[];
@@ -130,7 +130,7 @@ extern char Option_ToggleOptionBit14_PagedAddress[];
 extern char Option_UpdateOptionBit14Item_PagedAddress[];
 extern char Option_ToggleOptionBit15_PagedAddress[];
 extern char Option_UpdateOptionBit15Item_PagedAddress[];
-extern char rw_menu_paged_func_8043DADC_de_offset_4[];
+extern char Menu_SelectLabelBeforeSessionOptionPage_PagedAddress[];
 extern char Menu_HandleSessionOptionPage_PagedAddress[];
 extern char CMenuProfile_HasRoundProgress_PagedAddress[];
 extern char CMenuProfile_ResetPlayerControllerProfile_PagedAddress[];
@@ -138,21 +138,21 @@ extern char CMenuProfile_HasSavedRoundProgress_PagedAddress[];
 extern char CMenuProfile_AdjustControllerSelection_PagedAddress[];
 extern char CMenuProfile_FormatProfileQuantityLabel_PagedAddress[];
 extern char CMenuProfile_ToggleProfileMode_PagedAddress[];
-extern char rw_menu_paged_func_8043E418_de[];
+extern char CMenuProfile_SelectLeadLabelItem_PagedAddress[];
 extern char CMenuProfile_BindSelectedDebugField_PagedAddress[];
-extern char rw_menu_paged_func_8043E468_de[];
+extern char CMenuProfile_SelectLabelAfterModeToggle_PagedAddress[];
 extern char CMenuProfile_UpdateProfileModeLabel_PagedAddress[];
 extern char CMenuProfile_EnableOwnerControllerPak_PagedAddress[];
 extern char CMenuProfile_EnableControllerPakAndClearState_PagedAddress[];
 extern char CMenuProfile_HasProfileRoundProgress_PagedAddress[];
 extern char CMenuProfile_OpenTimedPlayerDialog_PagedAddress[];
-extern char rw_menu_paged_func_8043E5C8_de[];
-extern char rw_menu_paged_func_8043E5D0_de[];
+extern char CMenuProfile_UpdateTimedPlayerDialogItem_PagedAddress[];
+extern char CMenuProfile_UpdatePlayerModelItem_PagedAddress[];
 extern char CMenuProfile_HasDialogRoundProgress_PagedAddress[];
 extern char CMenuProfile_OpenPrimaryPlayerDialog_PagedAddress[];
 extern char CMenuProfile_OpenAlternatePlayerDialog_PagedAddress[];
 extern char Initial_ToggleMenuRowOption_PagedAddress[];
-extern char rw_menu_paged_func_8043E91C_de[];
+extern char Initial_SelectMenuRowLabelItem_PagedAddress[];
 extern char Initial_ProbeMenuControllerPak_PagedAddress[];
 extern char Initial_EnableMenuControllerPak_PagedAddress[];
 extern char Initial_OpenDialogWithControllerPak_PagedAddress[];
@@ -161,9 +161,9 @@ extern char Initial_RequestTransitionWithPakDisabled_PagedAddress[];
 extern char Initial_SelectInitialController_PagedAddress[];
 extern char Initial_UpdateMultiplayerAvailability_PagedAddress[];
 extern char Initial_OpenLocalPlayerSetup_PagedAddress[];
-extern char rw_menu_paged_func_8043EC40_de[];
-extern char rw_menu_paged_func_8043EC6C_de[];
-extern char rw_menu_paged_func_8043EC98_de[];
+extern char Initial_SelectThirdTrailingLabelItem_PagedAddress[];
+extern char Initial_SelectFirstTrailingLabelItem_PagedAddress[];
+extern char Initial_SelectSecondTrailingLabelItem_PagedAddress[];
 extern char Initial_OpenTrackPreviewMenu_PagedAddress[];
 extern char Multi_CompleteGameOverDelay_PagedAddress[];
 extern char Multi_DecreaseGameOverTimer_PagedAddress[];
@@ -364,46 +364,46 @@ struct {
     {
         { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00210041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800E5CC4, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_698, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_81C, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8F4, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0014, 0x06, 0x01, 0xFF, 0x07, 0x800D7E48, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFE, 0x07, 0x800D7E50, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFD, 0x07, 0x800D7E58, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFC, 0x07, 0x800D7E60, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFB, 0x07, 0x800D7E68, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFA, 0x07, 0x800D7E70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7E78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7E80, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E88, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E90, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E98, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EB0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7EB8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EE0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EE8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x08, 0x800D7EF0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EF8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x06, 0x800D7F00, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x05, 0x800D7F08, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x04, 0x800D7F10, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_8FC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x03, 0x800D7F70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_9BC, 0x00000000 },
-        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x02, 0x800D7F78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_AE4, 0x00000000 },
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0014, 0x00, 0x00, 0x00, 0x00, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_C30, 0x00000000, 0x00000000 },
+        { 0x0000, 0x0000, 0x00210041, 0x0000, 0x0014, 0x00, 0x00, 0xFF, 0x01, 0x800E5CC4, (unsigned int)Option_DrawFirstTextItem_PagedAddress, (unsigned int)Option_UpdateFirstTextItem_PagedAddress, (unsigned int)Option_SelectFirstTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0014, 0x06, 0x01, 0xFF, 0x07, 0x800D7E48, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFE, 0x07, 0x800D7E50, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFD, 0x07, 0x800D7E58, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFC, 0x07, 0x800D7E60, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFB, 0x07, 0x800D7E68, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xFA, 0x07, 0x800D7E70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7E78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7E80, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E88, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E90, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7E98, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EA8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EB0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x07, 0x800D7EB8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EC8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7ED8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EE0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x07, 0x800D7EE8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010050, 0x0050, 0x0008, 0x06, 0x01, 0xF9, 0x08, 0x800D7EF0, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x07, 0x800D7EF8, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x06, 0x800D7F00, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x05, 0x800D7F08, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x04, 0x800D7F10, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0x01, 0xF9, 0x03, 0x800D7F70, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectPenultimateLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00024050, 0x0008, 0x0000, 0xFF, 0xFA, 0xF9, 0x02, 0x800D7F78, (unsigned int)g_menuPaged_Menu_DrawLocalizedMenuItemText, 0x00000000, (unsigned int)Option_SelectLastLocalizedTextItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0014, 0x00, 0x00, 0x00, 0x00, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateLabelAfterLocalizedText_PagedAddress, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x00310201, 0x0000, 0x0018, 0x00, 0x00, 0xFE, 0xE2, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x0044FC50, 0x0021, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_684, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x0044FC50, 0x0021, 0x0000, (unsigned int)Option_InitializeThirtyThreeItemDefinition_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0002, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
     {
         { 0x0001, 0x0000, 0x50000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7A98, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7B3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F64, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_F48, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B44, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FEC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_FD0, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7B3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit0Item_PagedAddress, (unsigned int)Option_ToggleOptionBit0_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B44, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit1Item_PagedAddress, (unsigned int)Option_ToggleOptionBit1_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B4C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit2Item_PagedAddress, (unsigned int)Option_ToggleOptionBit2_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B54, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit3Item_PagedAddress, (unsigned int)Option_ToggleOptionBit3_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7B5C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit4Item_PagedAddress, (unsigned int)Option_ToggleOptionBit4_PagedAddress, 0x00000000 },
@@ -418,11 +418,11 @@ struct {
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit13Item_PagedAddress, (unsigned int)Option_ToggleOptionBit13_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BAC, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit14Item_PagedAddress, (unsigned int)Option_ToggleOptionBit14_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7BB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateOptionBit15Item_PagedAddress, (unsigned int)Option_ToggleOptionBit15_PagedAddress, 0x00000000 },
-        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_DDC, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_374, 0x00000000 },
+        { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Option_UpdateLabelAfterOptionBits_PagedAddress, (unsigned int)Option_SelectLabelAfterOptionBits_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00000201, 0x0000, 0x00C0, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
-        { 0x00450118, 0x0014, 0x0000, (unsigned int)rw_menu_paged_func_8043C4F4_us_rev1_offset_23C, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0013, 0x0000, 0x0000, 0x0000, 0x00000000 },
+        { 0x00450118, 0x0014, 0x0000, (unsigned int)Option_InitializeTwentyItemDefinition_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, 0x00000000, 0x0013, 0x0000, 0x0000, 0x0000, 0x00000000 },
     },
 };
 
@@ -440,7 +440,7 @@ struct {
 } g_menuPakOptionsDataPart5 = {
     {
         { 0x0000, 0x0000, 0x00000021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7A90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043DADC_de_offset_4, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0028, 0x00, 0x00, 0xFF, 0x01, 0x800D7A90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Menu_SelectLabelBeforeSessionOptionPage_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7A94, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Menu_HandleSessionOptionPage_PagedAddress, 0x00000000 },
     },
     {
@@ -460,11 +460,11 @@ struct {
         { 0x004504A0, 0x0008, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasRoundProgress_PagedAddress, 0x0007, 0x0000, 0x0000, 0x0000, 0x00450698 },
     },
     {
-        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x02, 0x800D7668, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E418_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00011001, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x02, 0x800D7668, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)CMenuProfile_SelectLeadLabelItem_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00010101, 0x0000, 0x0008, 0x00, 0x00, 0x00, 0x00, 0x800D766C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_BindSelectedDebugField_PagedAddress, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0008, 0x00, 0x00, 0xFE, 0x01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_FormatProfileQuantityLabel_PagedAddress, (unsigned int)CMenuProfile_AdjustControllerSelection_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00411001, 0x0000, 0x0002, 0x00, 0x00, 0xFF, 0x01, 0x800D7688, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_UpdateProfileModeLabel_PagedAddress, (unsigned int)CMenuProfile_ToggleProfileMode_PagedAddress, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7694, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E468_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010041, 0x0000, 0x0005, 0x00, 0x00, 0xFF, 0x01, 0x800D7694, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)CMenuProfile_SelectLabelAfterModeToggle_PagedAddress, 0x00000000 },
     },
     {
         { 0x004505E4, 0x0005, 0x0000, 0x00000000, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasSavedRoundProgress_PagedAddress, 0x0004, 0x0000, 0x0000, 0x0000, 0x00450758 },
@@ -484,8 +484,8 @@ struct {
 } g_menuPakOptionsDataPart7 = {
     {
         { 0x0001, 0x0000, 0x30000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000387, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0003, 0x0000, 0x00410021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x004506BC, (unsigned int)Menu_DrawMenuModel_PagedAddress, (unsigned int)rw_menu_paged_func_8043E5D0_de, (unsigned int)CMenuProfile_UpdatePlayerAnimationChoice_PagedAddress, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7664, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)rw_menu_paged_func_8043E5C8_de, (unsigned int)CMenuProfile_OpenTimedPlayerDialog_PagedAddress, 0x00000000 },
+        { 0x0003, 0x0000, 0x00410021, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x004506BC, (unsigned int)Menu_DrawMenuModel_PagedAddress, (unsigned int)CMenuProfile_UpdatePlayerModelItem_PagedAddress, (unsigned int)CMenuProfile_UpdatePlayerAnimationChoice_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0019, 0x00, 0x00, 0xFF, 0x01, 0x800D7664, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)CMenuProfile_UpdateTimedPlayerDialogItem_PagedAddress, (unsigned int)CMenuProfile_OpenTimedPlayerDialog_PagedAddress, 0x00000000 },
     },
     {
         { 0x004506EC, 0x0003, 0x0000, (unsigned int)CMenuProfile_EnableOwnerControllerPak_PagedAddress, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)CMenuProfile_HasProfileRoundProgress_PagedAddress, 0x0001, 0x0000, 0x0000, 0x0000, 0x00000000 },
@@ -538,7 +538,7 @@ struct {
     {
         { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000385, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x08000021, 0x0000, 0x0008, 0x00, 0x00, 0xFF, 0x01, 0x800D7C90, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043E91C_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x800D7D3C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectMenuRowLabelItem_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00010201, 0x0000, 0x0038, 0x00, 0x00, 0xFF, 0x01, 0x800D7AB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)g_menuPaged_Menu_TryCreateMenu, 0x00000000 },
     },
     {
@@ -565,9 +565,9 @@ struct {
         { 0x0001, 0x0000, 0x10000000, 0x0000, 0x0000, 0x00, 0x00, 0xFF, 0x01, 0x00000384, (unsigned int)g_menuPaged_Menu_DrawMenuOptionSprite, 0x00000000, 0x00000000, 0x00000000 },
         { 0x0000, 0x0000, 0x00000081, 0x0000, 0x001E, 0x00, 0x00, 0xFF, 0x01, 0x800D7C80, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectInitialController_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7C8C, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)Initial_UpdateMultiplayerAvailability_PagedAddress, (unsigned int)Initial_OpenLocalPlayerSetup_PagedAddress, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC6C_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC98_de, 0x00000000 },
-        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)rw_menu_paged_func_8043EC40_de, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7AA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectFirstTrailingLabelItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA8, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectSecondTrailingLabelItem_PagedAddress, 0x00000000 },
+        { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DA4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_SelectThirdTrailingLabelItem_PagedAddress, 0x00000000 },
         { 0x0000, 0x0000, 0x00010081, 0x0000, 0x000C, 0x00, 0x00, 0xFF, 0x01, 0x800D7DB4, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)Initial_OpenTrackPreviewMenu_PagedAddress, 0x00000000 },
     },
     {

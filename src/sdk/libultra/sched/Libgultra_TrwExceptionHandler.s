@@ -45,8 +45,8 @@ Libgultra_TrwExceptionHandler:
     andi $at, $at, 0x3
     bnez $at, .LLibgultra_TrwExceptionHandler_058
     nop
-    lui $at, %hi(D_B1FFFFD8)
-    lw $at, %lo(D_B1FFFFD8)($at)
+    lui $at, %hi(g_debugCartridgeHandshakeRegister)
+    lw $at, %lo(g_debugCartridgeHandshakeRegister)($at)
     nop
     andi $at, $at, 0xFFFF
     addi $at, $at, -0x202
@@ -62,8 +62,8 @@ Libgultra_TrwExceptionHandler:
     nop
     lui $at, 0x303
     ori $at, $at, 0x303
-    lui $v0, %hi(D_B1FFFFD8)
-    sw $at, %lo(D_B1FFFFD8)($v0)
+    lui $v0, %hi(g_debugCartridgeHandshakeRegister)
+    sw $at, %lo(g_debugCartridgeHandshakeRegister)($v0)
 .LLibgultra_TrwExceptionHandler_0BC:
     lui $at, 0xA460
     ori $at, $at, 0x10
@@ -72,8 +72,8 @@ Libgultra_TrwExceptionHandler:
     andi $at, $at, 0x3
     bnez $at, .LLibgultra_TrwExceptionHandler_0BC
     nop
-    lui $v0, %hi(D_B1FFFFD8)
-    lw $at, %lo(D_B1FFFFD8)($v0)
+    lui $v0, %hi(g_debugCartridgeHandshakeRegister)
+    lw $at, %lo(g_debugCartridgeHandshakeRegister)($v0)
     lui $v0, 0x303
     ori $v0, $v0, 0x303
     sub $at, $at, $v0
@@ -94,8 +94,8 @@ Libgultra_TrwExceptionHandler:
     andi $at, $at, 0x3
     bnez $at, .LLibgultra_TrwExceptionHandler_10C
     nop
-    lui $v0, %hi(D_B1FFFFD8)
-    sw $zero, %lo(D_B1FFFFD8)($v0)
+    lui $v0, %hi(g_debugCartridgeHandshakeRegister)
+    sw $zero, %lo(g_debugCartridgeHandshakeRegister)($v0)
     mfc0 $at, $13
     nop
     ori $at, $at, 0x100
@@ -109,8 +109,8 @@ Libgultra_TrwExceptionHandler:
     andi $at, $at, 0x3
     bnez $at, .LLibgultra_TrwExceptionHandler_144
     nop
-    lui $at, %hi(D_B1FFFFF0)
-    lw $at, %lo(D_B1FFFFF0)($at)
+    lui $at, %hi(g_debugCartridgeExceptionCheckRegister)
+    lw $at, %lo(g_debugCartridgeExceptionCheckRegister)($at)
     nop
     andi $at, $at, 0xFFFF
     beqz $at, .LLibgultra_TrwExceptionHandler_034
@@ -255,8 +255,8 @@ Libgultra_TrwExceptionHandler:
     addiu $at, $v0, -0x409
     bgez $at, .LLibgultra_TrwExceptionHandler_1AC
     nop
-    lui $at, %hi(jtbl_00202814)
-    addiu $at, $at, %lo(jtbl_00202814)
+    lui $at, %hi(jtbl_TrwExceptionBreakCodes)
+    addiu $at, $at, %lo(jtbl_TrwExceptionBreakCodes)
     addiu $v0, $v0, -0x400
     sll $v0, $v0, 2
     addu $v0, $v0, $at

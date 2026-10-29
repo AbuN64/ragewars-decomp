@@ -194,8 +194,8 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
     rectangleX = x;
     bottomV = endV;
     rectangleY = y;
-    if ((D_80153F60.z == 0) || (D_80153F60.y == 0)) {
-        D_800DF290 = 0;
+    if ((g_combineRenderSwitches.z == 0) || (g_combineRenderSwitches.y == 0)) {
+        g_combineTexturedRectangleState = 0;
         g_combinePipelineSyncPending = 0;
         Combine_SetRenderMode(0xC);
         Combine_SetCombineMode(5);
@@ -211,16 +211,16 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
             rectangleEmit(0xD7000000, 0x80008000);
 
         }
-        if (D_80153F60.x == 0) {
+        if (g_combineRenderSwitches.x == 0) {
             Combine_SetPrimitiveVertexMode(9);
             Combine_DrawClippedGradientQuad(rectangleX, rectangleY, rectangleWidth, rectangleHeight, (u32) color, (u32) color, (u32) color, (u32) color);
         }
-    } else if (D_80153F60.x == 0) {
+    } else if (g_combineRenderSwitches.x == 0) {
         g_combinePipelineSyncPending = 0;
         Combine_SetRenderMode(0xC);
         defaultMode = 0xD;
         textureRenderMode = defaultMode;
-        if (D_80153F68 == 0) {
+        if (g_combineTexturingEnabled == 0) {
             textureRenderMode = 0xE;
         }
         if (textureRenderMode != g_combineTextureRenderMode) {
@@ -248,7 +248,7 @@ void Combine_DrawClippedImageRectangle(f32 x, f32 y, f32 unusedDepth, f32 width,
         Combine_SetCombineMode(mode);
         left = (s32) rectangleX;
         top = (s32) rectangleY;
-        D_800DF290 = 0x13;
+        g_combineTexturedRectangleState = 0x13;
         right = (s32) ((rectangleX + rectangleWidth) - g_textureRectangleInclusivePixelOffset);
         bottom = (s32) ((rectangleY + rectangleHeight) - g_textureRectangleInclusivePixelOffset);
         if (right < left) {

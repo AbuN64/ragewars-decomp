@@ -1,6 +1,6 @@
 
 
-/* DATA_800C4254.CPP */
+/* g_taskNames_us.CPP */
 #if defined(VERSION_US)
 struct {
     unsigned int w0[3];
@@ -20,12 +20,12 @@ struct {
 };
 #endif
 
-/* DATA_800C42B4.CPP */
+/* g_taskNamesPrefix_eu_x.CPP */
 #if defined(VERSION_EU_X)
 char g_ControlRestoreactorsnapshotEncodedBytes[12] = "\000\000\000\000binaries";
 #endif
 
-/* DATA_800C45D4.CPP */
+/* g_taskNames_eu.CPP */
 #if defined(VERSION_EU)
 struct {
     unsigned int w0[3];

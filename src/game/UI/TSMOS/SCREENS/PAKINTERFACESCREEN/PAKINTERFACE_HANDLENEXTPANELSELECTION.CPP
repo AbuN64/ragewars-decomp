@@ -219,8 +219,8 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
    through PAKInterface_BeginScreenExit; otherwise by the player's state at the start of its 2920-byte record at
    0x58: in state 0 it leaves for screen 0x1B unless PAKInterface_CountActivePlayerPanels reports something pending, in
    state 0xC it blanks the character at the cursor of the name at 0xB34 of the record, and in
-   states 0x16 and 0x1B it closes the keyboard through func_80433BCC_de or func_80433D38_de with -1,
-   returns the player to state 0xD and redraws through func_804322AC_de. Returns zero. Written from
+   states 0x16 and 0x1B it closes the keyboard through PAKInterface_RelabelSlotRows_FrontendResetlinkedlocalprofile or PAKInterface_UpdatePlayerControlRows_PakinterfaceHandlenextpanelselection with -1,
+   returns the player to state 0xD and redraws through PAKInterface_RefreshPlayerPanel_PakinterfaceActivateplayerpanelaction. Returns zero. Written from
    the assembly with the player index as an unsigned short parameter. */
 
 extern void PAKInterface_RefreshPlayerPanel(s32);

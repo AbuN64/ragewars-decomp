@@ -5,7 +5,7 @@
 unsigned char g_MenuLinkGapBaf28TrailingBytesBlock1[8] = { 0x54, 0x40, 0x00, 0x06, 0x24, 0x86, 0xFF, 0xFD };
 #endif
 
-/* DATA_802B97F8.CPP */
+/* MenuLinkGapBaf28Padding.CPP */
 #if defined(VERSION_US)
 char func_802B4A08_eu_x_padding_BA3F8[8] =
     "sionType";

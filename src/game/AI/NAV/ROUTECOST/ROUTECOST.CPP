@@ -19,7 +19,7 @@ extern CNavData g_navigationGraph;
 
 extern void *Portal_GetGraphPoint(void *, s32);
 
-s32 Nav_UpdateRouteIntermediateGoal(Func8020ED50Arg *owner) {
+s32 Nav_UpdateRouteIntermediateGoal(NavigationRouteControllerView *owner) {
     s32 *base;
 
     base = &g_navigationGraph;

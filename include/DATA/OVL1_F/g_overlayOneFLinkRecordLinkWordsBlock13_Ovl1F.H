@@ -1,0 +1,4 @@
+#ifndef DATA_OVERLAY_ONE_F_SECOND_CALLBACK_ROM_ENTRY_H
+#define DATA_OVERLAY_ONE_F_SECOND_CALLBACK_ROM_ENTRY_H
+extern char addrLow_Weaponai_TryEnterAlternateStateEight[];
+#endif

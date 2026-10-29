@@ -45,7 +45,7 @@ s32 Nav_EvaluateCaptureFlagMarkerSearch(void **controller) {
     return 1;
 }
 
-/* ROM-grounded data: src/rw_pool_8020EA10_C7B40_us_rev1.c */
+/* ROM-grounded data: src/Nav_ShouldSeekUnclaimedTeamMarkerConstantWords.c */
 const unsigned int g_Nav_ShouldSeekUnclaimedTeamMarkerConstantWords[3] = {
     0x3F19999A, 0x3E4CCCCD, 0x3F800000,
 };

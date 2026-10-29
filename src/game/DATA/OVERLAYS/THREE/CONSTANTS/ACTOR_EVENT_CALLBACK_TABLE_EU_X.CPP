@@ -9,8 +9,8 @@ extern char addrLow_Events_ApplyRadialDamage[];
 extern char addrLow_Events_ApplyRadialDamageWithKnockback[];
 extern char addrLow_Events_PreserveEventArgument[];
 extern char addrLow_Events_RunFirstNodeOperation[];
-extern char D_00267C94[];
-extern char g_packedCodeAddress24_00267CC4[];
+extern char addrLow_Events_RunSecondNodeOperation_eu_x[];
+extern char g_Events_RunSecondNodeOperationPackedAddress24_us_rev1[];
 extern char addrLow_Events_ConsumeEventArgument[];
 extern char addrLow_Events_RequestActorPosition[];
 extern char addrLow_Events_StartEnabledCameraEmitter[];
@@ -24,10 +24,10 @@ extern char addrLow_Events_ApplyFlag400RadialDamage[];
 extern char addrLow_Events_ApplyFlag400RadialKnockback[];
 extern char addrLow_Events_StartActorEmitter[];
 extern char addrLow_Events_IgnoreEvent[];
-extern char D_00268264[];
+extern char addrLow_Events_PlayTeamClip_eu_x[];
 extern char addrLow_Events_SpawnFilteredActorEffect[];
 extern char addrLow_Events_FireWithinHeightRange[];
-extern char D_002684B0[];
+extern char addrLow_Events_SetActorEventBit_eu_x[];
 extern char addrLow_Events_ClearActorEventBit[];
 extern char addrLow_Events_SpawnAttachedEffect[];
 extern char addrLow_Events_SpawnPositionedEffect[];
@@ -37,7 +37,7 @@ extern char addrLow_Events_StopActorLoopingSound[];
 extern char addrLow_Events_IncrementNearbyPlayerCounter[];
 extern char addrLow_Events_SetActorEffectMode[];
 extern char addrLow_Events_DeactivateActor[];
-u32 data_unresolved_800CD260[428] = {
+u32 g_actorEventCallbackTableWords_eu_x[428] = {
     0xFFFFFF00, 0xFFFFFF00, 0x00007F00, 0x00000000, 0xD9000000, 0x00000000,
     0xD9FFFFFF, 0x00000001, 0xDB020000, 0x00000018, 0xDC08060A, 0x800CD248,
     0xDC08090A, 0x800CD240, 0xDF000000, 0x00000000, 0xE3000A01, 0x00000000,
@@ -88,13 +88,13 @@ u32 data_unresolved_800CD260[428] = {
     0xDB04001C, 0x0000FFFB, 0xDF000000, 0x00000000, 0x3F169CFB, 0x3F162965,
     (unsigned int)addrLow_Events_PlayClipEvent, 0x00000000, (unsigned int)addrLow_Events_SpawnActorEffect, 0x00000000, (unsigned int)addrLow_Events_ApplyDirectDamage, 0x00000004,
     (unsigned int)addrLow_Events_ApplyRadialDamage, 0x00000006, (unsigned int)addrLow_Events_ApplyRadialDamageWithKnockback, 0x00000006, (unsigned int)addrLow_Events_PreserveEventArgument, 0x0000000A,
-    (unsigned int)addrLow_Events_RunFirstNodeOperation, 0x00000010, (unsigned int)D_00267C94, 0x00000010, (unsigned int)addrLow_Events_SpawnActorEffect, 0x00000000,
-    (unsigned int)g_packedCodeAddress24_00267CC4, 0x00000000, (unsigned int)addrLow_Events_ConsumeEventArgument, 0x00000000, (unsigned int)addrLow_Events_RequestActorPosition, 0x00000000,
+    (unsigned int)addrLow_Events_RunFirstNodeOperation, 0x00000010, (unsigned int)addrLow_Events_RunSecondNodeOperation_eu_x, 0x00000010, (unsigned int)addrLow_Events_SpawnActorEffect, 0x00000000,
+    (unsigned int)g_Events_RunSecondNodeOperationPackedAddress24_us_rev1, 0x00000000, (unsigned int)addrLow_Events_ConsumeEventArgument, 0x00000000, (unsigned int)addrLow_Events_RequestActorPosition, 0x00000000,
     (unsigned int)addrLow_Events_StartEnabledCameraEmitter, 0x00000000, (unsigned int)addrLow_Events_StartDisabledCameraEmitter, 0x00000000, (unsigned int)addrLow_Events_PostGameplayMessage, 0x00000000,
     (unsigned int)addrLow_Events_ApplyFlag100RadialDamage, 0x00000006, (unsigned int)addrLow_Events_ApplyFlag100RadialKnockback, 0x00000006, (unsigned int)addrLow_Events_ApplyFlag200RadialDamage, 0x00000007,
     (unsigned int)addrLow_Events_ApplyFlag200RadialKnockback, 0x00000007, (unsigned int)addrLow_Events_ApplyFlag400RadialDamage, 0x00000006, (unsigned int)addrLow_Events_ApplyFlag400RadialKnockback, 0x00000006,
-    (unsigned int)addrLow_Events_StartActorEmitter, 0x00000000, (unsigned int)addrLow_Events_IgnoreEvent, 0x00000000, (unsigned int)D_00268264, 0x00000000,
-    (unsigned int)addrLow_Events_SpawnFilteredActorEffect, 0x00000000, (unsigned int)addrLow_Events_FireWithinHeightRange, 0x00000007, (unsigned int)D_002684B0, 0x00000000,
+    (unsigned int)addrLow_Events_StartActorEmitter, 0x00000000, (unsigned int)addrLow_Events_IgnoreEvent, 0x00000000, (unsigned int)addrLow_Events_PlayTeamClip_eu_x, 0x00000000,
+    (unsigned int)addrLow_Events_SpawnFilteredActorEffect, 0x00000000, (unsigned int)addrLow_Events_FireWithinHeightRange, 0x00000007, (unsigned int)addrLow_Events_SetActorEventBit_eu_x, 0x00000000,
     (unsigned int)addrLow_Events_ClearActorEventBit, 0x00000000, (unsigned int)addrLow_Events_SpawnAttachedEffect, 0x00000000, (unsigned int)addrLow_Events_PlayTeamEffect, 0x00000000,
     (unsigned int)addrLow_Events_StopClipEvent, 0x00000000, (unsigned int)addrLow_Events_SetActorLoopingSound, 0x00000000, (unsigned int)addrLow_Events_StopActorLoopingSound, 0x00000000,
     (unsigned int)addrLow_Events_IncrementNearbyPlayerCounter, 0x00000002, (unsigned int)addrLow_Events_SpawnPositionedEffect, 0x00000000, (unsigned int)addrLow_Events_SetActorEffectMode, 0x00000000,

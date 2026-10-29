@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
-/* ROM-grounded data: src/rw_constants_80212E24_eu_x_C7DC0_us_rev1.c */
+/* ROM-grounded data: src/navUpdatepatrolrouteDataFloatConstantWords.c */
 const unsigned int k_navUpdatepatrolrouteDataFloatConstantWords[1] = {
     0x42CCCCCC,
 };

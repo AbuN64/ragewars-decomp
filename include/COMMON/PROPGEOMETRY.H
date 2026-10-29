@@ -159,7 +159,7 @@ struct ModelOwner;
 struct StaticObject;
 typedef struct StaticObject StaticObject;
 
-extern f32 D_8013B190;
+extern f32 g_staticObjectSharedAngle;
 
 struct ActorSimpleInstanceSpawnModelEffect;
 

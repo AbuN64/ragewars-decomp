@@ -30,17 +30,17 @@ unsigned int k_CcollisionIntersectfrontplanefractionEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80240C8C_C942C_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntersectfrontplanefractionOneWordsVariant2UsRev1.c */
 const unsigned int k_CcollisionIntersectfrontplanefractionOneWordsVariant2[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_802412D0_C9430_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntersectfrontplanefractionOneWordsUsRev1.c */
 const unsigned int k_CcollisionIntersectfrontplanefractionOneWords[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_802413C8_C9434_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntersectfrontplanefractionOneWordsVariant1UsRev1.c */
 const unsigned int k_CcollisionIntersectfrontplanefractionOneWordsVariant1[1] = {
     0x3F800000,
 };

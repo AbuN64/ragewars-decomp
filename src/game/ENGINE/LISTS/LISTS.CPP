@@ -46,7 +46,7 @@ s32 Lists_Append(void *listHeader, void *newNode) {
     (((struct ListHeader *) ((s8 *) listHeader))->count) = count;
     return count;
 }
-int Lists_Remove(List802795C0 *listHeader, ListLink *listLink) {
+int Lists_Remove(ListLinkHeader *listHeader, ListLink *listLink) {
     if (listLink->prev != 0) {
         listLink->prev->next = listLink->next;
     }
@@ -99,7 +99,7 @@ void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count) {
 ListLink *Lists_MoveHeadToInactiveList(Lists18 *lists) {
     ListLink *node;
     ListLink *tail;
-    List802795C0 *inactive;
+    ListLinkHeader *inactive;
     node = lists->active.head;
     if (node != 0) {
         if (node->prev != 0) {
@@ -133,7 +133,7 @@ ListLink *Lists_MoveHeadToInactiveList(Lists18 *lists) {
     return node;
 }
 void Lists_MoveNodeToActiveList(Lists18 *lists, ListLink *node) {
-    List802795C0 *inactive;
+    ListLinkHeader *inactive;
     ListLink *tail;
     inactive = &lists->inactive;
     if (node->prev != 0) {

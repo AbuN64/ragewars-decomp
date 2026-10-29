@@ -8,7 +8,7 @@
 #include "AUDIO/EXTERNS.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 
-/* Updates a playing view each frame: records the result of func_802395A4_de for its position in the context, selects its channel and checks whether it still plays; a view past its end, finished once, or whose track changed is marked done, and a done view that still plays is stopped once per frame and loses its handle; a stopped view first waits out its hold count, then is released with its slot and state cleared unless it is fading, while a playing view copies its tracked position and runs its three per-frame updates. The first channel selection matches as an inline helper returning the channel. */
+/* Updates a playing view each frame: records the result of Gsky_FindNearestCamera_ChannelStartnotevoice for its position in the context, selects its channel and checks whether it still plays; a view past its end, finished once, or whose track changed is marked done, and a done view that still plays is stopped once per frame and loses its handle; a stopped view first waits out its hold count, then is released with its slot and state cleared unless it is fading, while a playing view copies its tracked position and runs its three per-frame updates. The first channel selection matches as an inline helper returning the channel. */
 
 
 
@@ -35,14 +35,14 @@ extern void Channel_UpdateVoicePitch(ViewChannelUpdateVoicePlayback *);
 
 
 
-static inline char *selectChannel(ContextCode8025A3EC *context, s32 slot) {
-    alSndpSetSound(((OwnerCode8025A3EC *)context)->sound, context->slots.ids[slot]);
-    return ((OwnerCode8025A3EC *)context)->sound;
+static inline char *selectChannel(AudioVoiceContextView *context, s32 slot) {
+    alSndpSetSound(((AudioOwnerView *)context)->sound, context->slots.ids[slot]);
+    return ((AudioOwnerView *)context)->sound;
 }
 
 void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
     char *channel;
-    ContextCode8025A3EC *context;
+    AudioVoiceContextView *context;
     Slots *slots;
     s32 playing;
 
@@ -60,7 +60,7 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
             view->tracked = 0;
             context = view->context;
             if (view->frame != context->frame) {
-                channel = ((OwnerCode8025A3EC *)context)->sound;
+                channel = ((AudioOwnerView *)context)->sound;
                 alSndpSetSound(channel, context->slots.ids[view->slot]);
                 if (alSndpGetState(channel) != 0) {
                     alSndpStop(channel);
@@ -75,13 +75,13 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
         return;
     }
     if ((view->flags & 0x18) == 0x10) {
-        alSndpPlay(((OwnerCode8025A3EC *)view->context)->sound);
+        alSndpPlay(((AudioOwnerView *)view->context)->sound);
         return;
     }
     if (playing == 0) {
         context = view->context;
         slots = &context->slots;
-        alSndpDeallocate(((OwnerCode8025A3EC *)context)->sound, slots->ids[view->slot]);
+        alSndpDeallocate(((AudioOwnerView *)context)->sound, slots->ids[view->slot]);
         slots->ids[view->slot] = -1;
         view->field38 = 0;
         view->fieldC = -1;
@@ -103,7 +103,7 @@ void Channel_UpdateVoicePlayback(ViewChannelUpdateVoicePlayback *view) {
  * lowest-priority voice below the new priority (priority 100 voices are never taken). A taken voice is released and the
  * call returns 16 (the spare voice) when that one is free, else -1. -1 also when no voice is low enough. */
 s16 Channel_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 priority, s32 unused) {
-    ContextCode8025A3EC *context;
+    AudioVoiceContextView *context;
     Slots *slots;
     SlotCC *voice;
     VoiceQueueNode *waiting;
@@ -112,7 +112,7 @@ s16 Channel_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 prior
     s32 selected;
     s32 i;
 
-    context = (ContextCode8025A3EC *)record->header;
+    context = (AudioVoiceContextView *)record->header;
     slots = &context->slots;
     best = priority;
     selected = -1;
@@ -220,7 +220,7 @@ extern s16 alSndpAllocate(void *, s32);
 /* Starts a note on a free voice: picks the voice with Channel_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */
-SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *note, s32 variant, s32 userData) {
+SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, SoundDescriptor *note, s32 variant, s32 userData) {
     SoundEngine *engine;
     SoundVoice *voice;
     s16 *slots;

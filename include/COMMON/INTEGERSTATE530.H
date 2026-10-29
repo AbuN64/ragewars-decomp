@@ -130,7 +130,7 @@ struct ObjRecAt40V1;
 
 extern MenuElementHandler FindKindHandler(s32 kind);
 
-struct ArgsCode80296014;
+struct MenuDrawEventArgs;
 
 extern int s_smackFormat;
 
@@ -179,8 +179,8 @@ struct ScreenManager {
 };
 extern ScreenManager *g_screenManager;
 
-struct ArgsCode80296014;
-typedef struct ArgsCode80296014 ArgsCode80296014;
+struct MenuDrawEventArgs;
+typedef struct MenuDrawEventArgs MenuDrawEventArgs;
 
 
 struct Widget;
@@ -194,7 +194,7 @@ typedef struct Widget Widget;
 extern s32 N64Eng_DispatchNumericWidgetEvent_Address(void *, s32, s32, s32, s32);
 /* N64Eng_DrawNumericWidgetChildren_Address: N64Eng_DrawNumericWidgetChildren */
 extern void N64Eng_DrawNumericWidgetChildren_Address();
-/* Menu_KindNineDrawHandlerAddress: second return stub in func_8040C5B8_de (+8) */
+/* Menu_KindNineDrawHandlerAddress: second return stub in Menu_ReturnStubPairGerman (+8) */
 extern s32 Menu_KindNineDrawHandlerAddress(void *, s32, s32, s32, s32);
 /* Menu_KindNineEventHandlerAddress: Menu_DrawClippedWidgetSiblings */
 extern void Menu_KindNineEventHandlerAddress();
@@ -216,19 +216,19 @@ extern s32 g_SmpSlider_DispatchTransitionEventAddress(void *, s32, s32, s32, s32
 extern void g_SmpSlider_IgnoreFormattedMessageAddress();
 /* g_SmpSlider_DispatchSliderEventAddress: SmpSlider_DispatchSliderEvent */
 extern s32 g_SmpSlider_DispatchSliderEventAddress(void *, s32, s32, s32, s32);
-/* g_SmpSlider_DrawSliderWidgetAddress: func_8041A7B4_de */
+/* g_SmpSlider_DrawSliderWidgetAddress: SmpSlider_DrawSliderWidget_Integerstate530 */
 extern void g_SmpSlider_DrawSliderWidgetAddress();
 /* g_SmpButton_DispatchListEventAddress: SmpButton_DispatchListEvent */
 extern s32 g_SmpButton_DispatchListEventAddress(void *, s32, s32, s32, s32);
-/* g_SmpButton_DrawListWidgetAddress: func_8041AE0C_de */
+/* g_SmpButton_DrawListWidgetAddress: SmpButton_DrawListWidget_Integerstate530 */
 extern void g_SmpButton_DrawListWidgetAddress();
 /* g_SmpButton_DispatchButtonEventAddress: SmpButton_DispatchButtonEvent */
 extern s32 g_SmpButton_DispatchButtonEventAddress(void *, s32, s32, s32, s32);
-/* g_SmpButton_DrawButtonWidgetAddress: func_8041B3D0_de */
+/* g_SmpButton_DrawButtonWidgetAddress: SmpButton_DrawButtonWidget_Integerstate530 */
 extern void g_SmpButton_DrawButtonWidgetAddress();
 /* g_SmpOverlay_DispatchSlotEventAddress: SmpOverlay_DispatchSlotEvent */
 extern s32 g_SmpOverlay_DispatchSlotEventAddress(void *, s32, s32, s32, s32);
-/* g_SmpOverlay_DrawOverlayWidgetAddress: func_8041BA00_de */
+/* g_SmpOverlay_DrawOverlayWidgetAddress: SmpOverlay_DrawOverlayWidget_FrontendOpenresourcearchive */
 extern void g_SmpOverlay_DrawOverlayWidgetAddress();
 
 extern s32 GetMenuScreenOwner(void);

@@ -95,7 +95,7 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
     }
 }
 
-/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2910, once the resource has been loaded by func_80285180_de. */
+/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table g_imageLowBoostNibbleRemap, once the resource has been loaded by Ppdecom_UnpackResource_SceneUnpackimageswithhighboost. */
 
 extern s32 Ppdecom_UnpackResource(void *resource, s32 flags);
 
@@ -122,7 +122,7 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
         return;
     }
     table = *resource;
-    remap = D_800D2910;
+    remap = g_imageLowBoostNibbleRemap;
     do {
         for (i = 0; i < 256; i++) {
             end = -1;
@@ -162,7 +162,7 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
     } while (0);
 }
 
-/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table D_800D2920, once the resource has been loaded by func_80285180_de. Adapted from Scene_UnpackImagesWithLowBoost with the nibble table changed to D_800D2920. */
+/* Remaps every 4-bit pixel of every image in each of the 256 entries of a resource through the nibble table g_imageHighBoostNibbleRemap, once the resource has been loaded by Ppdecom_UnpackResource_SceneUnpackimageswithhighboost. Adapted from Scene_UnpackImagesWithLowBoost with the nibble table changed to g_imageHighBoostNibbleRemap. */
 
 void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     s32 i;
@@ -187,7 +187,7 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
         return;
     }
     table = *resource;
-    remap = D_800D2920;
+    remap = g_imageHighBoostNibbleRemap;
     do {
         for (i = 0; i < 256; i++) {
             end = -1;
@@ -227,7 +227,7 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     } while (0);
 }
 
-/* ROM-grounded data: src/rw_pool_8028E78C_CB02C_us_rev1.c */
+/* ROM-grounded data: src/g_scene_TestNearbyActiveActorConstantWords_SceneUnpackimageswithhighboost.c */
 const unsigned int g_scene_TestNearbyActiveActorConstantWords[1] = {
     0x4AC80000,
 };

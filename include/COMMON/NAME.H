@@ -200,7 +200,7 @@ struct PakPanelSelectionView {
 struct Shared_Item;
 typedef struct Shared_Item Shared_Item;
 
-struct SlotsCode804196C0;
+struct SmpOverlaySlotsView;
 
 
 struct ItemFrontendRelabelSlotRows;

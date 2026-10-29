@@ -7,7 +7,7 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/CMENUPROFILE_OPENTIMEDPLAYERDIALOG.H"
 
-extern s8 Menu_AdjustValue(Outer8043E458 *menu, s8 value, s32 step, s32 minimum, s32 maximum, s32 wrap);
+extern s8 Menu_AdjustValue(ProfileModeMenuContext *menu, s8 value, s32 step, s32 minimum, s32 maximum, s32 wrap);
 
 extern void Menu_AllocateMenu(void *owner, void *params, void *list);
 
@@ -23,11 +23,11 @@ extern void Menu_AllocateMenu(void *owner, void *params, void *list);
 
 
 
-/* Forwards arg0->unk20->unk4 to func_80264770_de and clears D_800E28C0. */
+/* Forwards arg0->unk20->unk4 to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog and clears g_pakPlayerMessagePending. */
 
 
 
-extern s32 D_800E28C0;
+extern s32 g_pakPlayerMessagePending;
 
 extern void Control_EnableControllerPak(s32 kind);
 
@@ -35,22 +35,22 @@ extern void Control_EnableControllerPak(s32 kind);
 
 
 
-/* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
+/* Restarts a round for the player passed in arg1: clears the world timer flag g_pakPlayerMessagePending via
    func_804097E8_de, cancels the active countdown sound through SoundElement_StopAudioExceptKey, then reallocates a
    fresh scoreboard entry via Menu_OpenDialog using arg1's fields at 0x1C and 0x20, and always
    reports success. */
 
 extern s32 g_matchEndingTeamWheelClose;
 
-extern s32 D_0044E468;
+extern s32 g_pakProfileActionDialogResource;
 
 void Timer_ClearTimerFlag(void);
 
 void *Menu_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 
 /** Runs a target's animation/state transition through Menu_AdjustValue and stores the new state. */
-s32 CMenuProfile_ToggleProfileMode(void *menuItem, Outer8043E458 *menuContext) {
-    Target8043E458 *profileOptions;
+s32 CMenuProfile_ToggleProfileMode(void *menuItem, ProfileModeMenuContext *menuContext) {
+    ProfileOptions *profileOptions;
 
     profileOptions = menuContext->unk1C->unk5D8;
     profileOptions->unk7B = Menu_AdjustValue(menuContext, profileOptions->unk7B, 1, 0, 1, 1);
@@ -86,14 +86,14 @@ s32 CMenuProfile_UpdateProfileModeLabel(MenuLabelPointerView *modeLabel, MenuCMe
     return 0;
 }
 
-/** Forwards the pointed-to inner byte field on to func_80264770_de. */
-void CMenuProfile_EnableOwnerControllerPak(Outer8043E56C *menuOwner) {
+/** Forwards the pointed-to inner byte field on to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog. */
+void CMenuProfile_EnableOwnerControllerPak(ControllerPortOwnerView *menuOwner) {
     Control_EnableControllerPak(menuOwner->controller->controllerPort);
 }
 
 void CMenuProfile_EnableControllerPakAndClearState(struct Shared_PakMenu *pakMenu) {
     Control_EnableControllerPak(pakMenu->owner->controllerPort);
-    D_800E28C0 = 0;
+    g_pakPlayerMessagePending = 0;
 }
 
 s32 CMenuProfile_HasProfileRoundProgress(void) {
@@ -108,7 +108,7 @@ s32 CMenuProfile_OpenTimedPlayerDialog(void *unused0, Arg1Struct *menuContext) {
     val1C = menuContext->player;
     Timer_ClearTimerFlag();
     ((s32 (*)(s32))SoundElement_StopAudioExceptKey)(-1);
-    Menu_OpenDialog(&g_matchEndingTeamWheelClose, &D_0044E468, val1C, menuContext->controller, 0);
+    Menu_OpenDialog(&g_matchEndingTeamWheelClose, &g_pakProfileActionDialogResource, val1C, menuContext->controller, 0);
     return 1;
 }
 

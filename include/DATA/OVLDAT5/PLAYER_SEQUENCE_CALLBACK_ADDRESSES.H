@@ -1,5 +1,5 @@
 #ifndef DATA_OVLDAT5_PLAYER_SEQUENCE_CALLBACK_ADDRESSES_H
 #define DATA_OVLDAT5_PLAYER_SEQUENCE_CALLBACK_ADDRESSES_H
-extern char g_overlayFiveLinkRecordRomLinkTarget_0022DA74[];
-extern char g_overlayFiveLinkRecordRomLinkTarget_0022DAA0[];
+extern char g_overlayFiveLinkRecordRomLinkTarget_ResetPlayerWeaponLock[];
+extern char g_overlayFiveLinkRecordRomLinkTarget_EnterStoppedSequenceState[];
 #endif

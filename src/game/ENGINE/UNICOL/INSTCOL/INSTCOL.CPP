@@ -180,7 +180,7 @@ void CInstanceCollision_TraceInteractiveActors(char *obj) {
     f32 bound;
 
     shape = ((ActorMotion *)obj)->surface;
-    if (shape->InstanceBehavior == 0 || shape == (void *)&D_80100170) {
+    if (shape->InstanceBehavior == 0 || shape == (void *)&g_collisionSurfaceExcludedFromTrace) {
         return;
     }
     table = &g_world;

@@ -35,7 +35,7 @@ static inline void emit(unsigned int w0, unsigned int w1) {
 
 extern int g_combineRenderStateEnabled, g_combineCachedCombineMode, g_combineCachedPrimitiveMode, g_combineCachedRenderMode;
 
-extern int D_800DF284, g_combineLoadedPalette;
+extern int g_combineCachedStateWord, g_combineLoadedPalette;
 
 static inline void beginFrame(void) {
     Gfx *g;
@@ -50,7 +50,7 @@ void Rect_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
 }
 
 void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
-    D_800DF290 = 0;
+    g_combineTexturedRectangleState = 0;
     g_combinePipelineSyncPending = 0;
     Combine_SetRenderMode(0xC);
     Combine_SetCombineMode(5);
@@ -64,7 +64,7 @@ void Rect_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5,
         sync();
         emit(0xD7000000, 0x80008000);
     }
-    if (D_80153F60.x == 0) {
+    if (g_combineRenderSwitches.x == 0) {
         Combine_SetPrimitiveVertexMode(9);
         Combine_DrawClippedGradientQuad(x, y, z, a4, a5, a6, a7, a8);
     }
@@ -78,10 +78,10 @@ void Rect_ResetRenderState(void) {
         g_combineCachedPrimitiveMode = 0;
         g_combineCachedRenderMode = 0;
         g_combineTextureRenderMode = 0;
-        D_800DF284 = 0;
+        g_combineCachedStateWord = 0;
         g_combineLoadedPalette = 0;
         g_combineRectangleColor = 0;
-        D_800DF290 = 0;
+        g_combineTexturedRectangleState = 0;
     }
 }
 
@@ -106,14 +106,14 @@ void Rect_SetTexturePerspectiveMode(s32 mode) {
     }
 }
 
-/* Switches the texture mode (forced to 14 while D_80153F68 is clear), emitting a full-sync command the first time and a texture-enable command for modes 13 and 14. */
+/* Switches the texture mode (forced to 14 while g_combineTexturingEnabled is clear), emitting a full-sync command the first time and a texture-enable command for modes 13 and 14. */
 
 /* Sets the environment and primitive colours from a packed 0xAARRGGBB colour when it differs from
    the last one set, g_combineRectangleColor: appends 0xFB (environment, alpha zero) and 0xFA (primitive, with
-   alpha) commands to the display list D_80110634 points into. */
+   alpha) commands to the display list g_displayListCursor_SimpleDrawcachedmodel points into. */
 
 void Rect_SetTextureMode(s32 mode) {
-    if (D_80153F60.z == 0) {
+    if (g_combineRenderSwitches.z == 0) {
         mode = 14;
     }
     if (mode != g_combineTextureRenderMode) {
@@ -182,7 +182,7 @@ char s_RectSLOW5TText[8] =
     "_SLOW5_T";
 #endif
 
-/* ROM-grounded data: src/rw_pool_80418DA0_E2040_us_rev1.c */
+/* ROM-grounded data: src/g_rect_DrawRectConstantWords_Rect.c */
 const unsigned int g_rect_DrawRectConstantWords[1] = {
     0x3F800000,
 };

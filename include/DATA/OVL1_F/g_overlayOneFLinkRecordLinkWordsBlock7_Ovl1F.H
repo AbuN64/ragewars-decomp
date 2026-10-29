@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_F_WEAPON_STATE_EIGHT_DELAY_ADDRESS_H
+#define DATA_OVL1_F_WEAPON_STATE_EIGHT_DELAY_ADDRESS_H
+extern char addrLow_Weapon_SetDelayAndRequestStateEight[];
+#endif

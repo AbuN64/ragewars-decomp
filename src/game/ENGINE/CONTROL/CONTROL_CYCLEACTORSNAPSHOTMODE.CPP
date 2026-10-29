@@ -25,7 +25,7 @@ extern s32 g_activeActorKind;
 
 extern void *Playerai_GetFirstPlayer(void *);
 
-/** Return the global word at D_8010FC4C. */
+/** Return the global word at g_controllerActorSnapshotSavedActorId. */
 
 /** Clear the global word at VRAM 0x8010FC40. */
 
@@ -90,7 +90,7 @@ void Control_SaveControllerSetup(void)
   profileByteOffset = 0;
   do
   {
-    profileValue = *((s32 *) ((&D_8010B3F4) + profileByteOffset));
+    profileValue = *((s32 *) ((&g_controllerProfileModeBase) + profileByteOffset));
  do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) g_controllerSnapshotProfileValues) + savedValueOffset)) = profileValue; profileByteOffset += 0x224; } while (0);
   }
   while (profileIndex < 4);
@@ -104,7 +104,7 @@ void Control_SaveControllerSetup(void)
     profileCursor += 1;
   }
   while (profilesReset < 4);
-  D_800CBC18 = 1;
+  g_controllerSetupSaved = 1;
 }
 
 void Control_RestoreControllerSetup(void) {
@@ -114,7 +114,7 @@ void Control_RestoreControllerSetup(void) {
     s32 profileByteOffset;
     s32 savedProfileValue;
 
-    if (D_800CBC18 != 0) {
+    if (g_controllerSetupSaved != 0) {
         i = 0;
         slot = g_controllerProfiles;
         do {
@@ -127,11 +127,11 @@ void Control_RestoreControllerSetup(void) {
         do {
             savedProfileValue = g_controllerSnapshotProfileValues[j];
             j += 1;
-            *(s32 *)(&D_8010B3F4 + profileByteOffset) = savedProfileValue;
+            *(s32 *)(&g_controllerProfileModeBase + profileByteOffset) = savedProfileValue;
             profileByteOffset += 0x224;
         } while (j < 4);
         Rumble_FreeAllPoolNodes(&g_controllerRumblePool);
-        D_800CBC18 = 0;
+        g_controllerSetupSaved = 0;
     }
 }
 

@@ -37,14 +37,14 @@ void ScenarioSetup_SetCupCategory(s32);
 /* Advances the menu transition state and updates its visual effects. */
 
 /* The values ScenarioSetup_UpdateSetupTransition loads by address:
- * 0x800E1AF4 = 0.0033333334 (float, D_800EE144 in this cartridge's tables)
- * 0x800E1AF8 = 100.0 (float, D_800EE148 in this cartridge's tables)
+ * 0x800E1AF4 = 0.0033333334 (float, k_setupPulsePhaseScale in this cartridge's tables)
+ * 0x800E1AF8 = 100.0 (float, k_setupPulseAlphaAmplitude in this cartridge's tables)
  * 0x800E1AFC = 150.0 (float, unnamed in this cartridge's tables)
- * 0x800E1B00 = 2147483600.0 (float, D_800EE150 in this cartridge's tables)
- * 0x800E1B04 = 0.0033333334 (float, D_800EE154 in this cartridge's tables)
- * 0x800E1B08 = 100.0 (float, D_800EE158 in this cartridge's tables)
+ * 0x800E1B00 = 2147483600.0 (float, k_setupPulseFloatToIntLimit in this cartridge's tables)
+ * 0x800E1B04 = 0.0033333334 (float, k_setupPulsePhaseScale_de in this cartridge's tables)
+ * 0x800E1B08 = 100.0 (float, k_setupPulseAlphaAmplitude_de in this cartridge's tables)
  * 0x800E1B0C = 150.0 (float, unnamed in this cartridge's tables)
- * 0x800E1B10 = 2147483600.0 (float, D_800EE160 in this cartridge's tables)
+ * 0x800E1B10 = 2147483600.0 (float, k_setupPulseFloatToIntLimit_de in this cartridge's tables)
  */
 
 void Tsmos_ActivateControllerState(void);
@@ -368,15 +368,15 @@ extern ArenaCatalogueEntry g_scenarioCatalogueWidgetPairs[];
    g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls and g_cupCategoryZeroArenaControls) it walks the count ScenarioSetup_GetCategoryEntryCount gives for the
    category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records g_scenarioCatalogueWidgetPairs
    whose key matches the entry, sets the alpha of the item its key names (and of the item its second
-   word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
+   word names unless that is -1) and shows them through Widget_SetWidgetFlag08_EquipActivateequipmentpanel while the alpha is at least
    12. */
 
 /* Refreshes the selection on the screen g_setupScreen: for category 0 to 3 at 0x434 it takes the item
    the selection at 0x438 names in the 4-byte table g_cupCategoryTwoArenaControls, g_cupCategoryThreeArenaControls, g_cupCategoryOneArenaControls or
    g_cupCategoryZeroArenaControls from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
    default label for selection 0, otherwise the resource name Scene_CopyLevelName reads from
-   D_8011FE88 for the entry ScenarioSetup_ResolveArenaFromSelection finds in the category's list ScenarioSetup_CategoryToList), points the
-   label at 0x3EC to that text and calls func_80245B28_de. */
+   g_world_AchieveUpdateresultsscreen for the entry ScenarioSetup_ResolveArenaFromSelection finds in the category's list ScenarioSetup_CategoryToList), points the
+   label at 0x3EC to that text and calls Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut. */
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -546,8 +546,8 @@ void ScenarioSetup_StartSelectedScenario(void) {
 /* 80423280_51.CPP */
 /* Starts the next stage of the current cup g_scenarioCupProgress unless ScenarioSetup_IsCupComplete reports the cup over:
    draws random stage numbers below the cup's size (5, 7, 17 or 11 stages) until one not yet marked
-   in the played set at D_80154018 turns up (giving up after 15000 draws), marks it, counts the stage in
-   D_80154014, maps it through the cup's stage table to an arena id, finds that id among the 40
+   in the played set at g_scenarioCupPlayedBits turns up (giving up after 15000 draws), marks it, counts the stage in
+   g_scenarioCupStageCount, maps it through the cup's stage table to an arena id, finds that id among the 40
    arena entries at g_scenarioCatalogueWidgetPairs and starts the cup with the entry's value through Random_SetSelectedStage.
    Returns 1 when a stage was started, else 0. */
 
@@ -658,13 +658,13 @@ s32 ScenarioSetup_IsCupComplete(void) {
 
 /* 80423280_52.CPP */
 
-/* Stores its argument in D_80154014. */
+/* Stores its argument in g_scenarioCupStageCount. */
 
 
 /* Refreshes the name label of screen g_setupScreen: with no entry at 0x438 it uses the default text
    g_matchOptionLabelSlots; otherwise it formats the entry's name from ScenarioSetup_ResolveArenaFromSelection on the list ScenarioSetup_CategoryToList
-   returns for 0x434 into a 0x40-byte buffer through D_8011FE88 and takes the text XPlus_UppercaseString
-   makes of it. Either text is copied into the screen's label at 0x3F4 through func_802A025C_de, and the
+   returns for 0x434 into a 0x40-byte buffer through g_world_AchieveUpdateresultsscreen and takes the text XPlus_UppercaseString
+   makes of it. Either text is copied into the screen's label at 0x3F4 through XPlus_CopyString_ResultsFillprofileweaponrows, and the
    widget at 0x3EC is pointed at that label. */
 
 
@@ -753,7 +753,7 @@ int ScenarioSetup_GetCategoryEntryCount(int index) {
     return r;
 }
 
-/* CODE_8042B398.CPP */
+/* ScenarioSetup_ResolveArenaFromSelection_Scenariosetupscreen.CPP */
 extern s32 g_scenarioArenaSelectionTable[];
 s32 ScenarioSetup_ResolveArenaFromSelection(s32 gameMode, s32 arenaSelection) {
     s32 result = 0;
@@ -828,7 +828,7 @@ void ScenarioSetup_ResetSelectionIndicators(void) {
 
 extern void Defs_SetBitValue(void *, s32, s32);
 
-/* Clears the first 0x28 bits of the bit set D_80154018 (bit i set to 0 through Defs_SetBitValue). */
+/* Clears the first 0x28 bits of the bit set g_scenarioCupPlayedBits (bit i set to 0 through Defs_SetBitValue). */
 void ScenarioSetup_ClearFlagBits(void) {
     s32 i;
 
@@ -1098,11 +1098,11 @@ s32 ScenarioSetup_RefreshSetupScreen(void) {
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_scenarioCatalogueEventIds, an actor kind at g_scenarioCatalogueEventActorKinds and a handler at g_scenarioCatalogueEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
+typedef s32 (*ScenarioCatalogueEventHandler)(void *, s32, s32, s32, s32);
 
-extern Handler8042BCB0 g_scenarioCatalogueEventHandlers;
+extern ScenarioCatalogueEventHandler g_scenarioCatalogueEventHandlers;
 s32 ScenarioSetup_DispatchCatalogueEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
-    Handler8042BCB0 *entry;
+    ScenarioCatalogueEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
@@ -1482,9 +1482,9 @@ void ScenarioSetup_SortResultsPlayers(void) {
 /* Looks up entry arg1 of the table chosen by arg0 and returns field 0xC of the first of the forty records at g_scenarioCatalogueWidgetPairs whose first word equals it, or zero. */
 
 /* Sets the byte at offset 0x10 of the two objects at offsets 0x454 and 0x450 of the structure g_setupScreen
-   points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0x46C. */
+   points to to 0xFF, shows both through Widget_SetWidgetFlag08_EquipActivateequipmentpanel and clears the word at 0x46C. */
 
-/* Calls Defs_SetBitValue on D_80154018 for each index from 0 to 0x27 with zero. */
+/* Calls Defs_SetBitValue on g_scenarioCupPlayedBits for each index from 0 to 0x27 with zero. */
 
 /* Releases the object g_setupScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState and
    Menu_ReleaseOptionsScene, clears g_setupScreen and returns zero. */

@@ -42,28 +42,28 @@ s32 CCollision_IntegrateGravityAndDrag();
                      /* extern */
 
                          /* extern */
-extern Func80243A80Global *g_collisionCurrentActor;
+extern UnicolCurrentActor *g_collisionCurrentActor;
 
 extern s32 g_particleCollisionProbeResult;
 
-extern s32 D_801001D0;
+extern s32 g_collisionNoDetachSettingsSecond;
 
 extern s32 g_supportingPlatformCollisionQuery;
 
-extern float D_800C379C_de;
+extern float k_collisionUpNormalY_de;
 
 /* Moves an actor through collision queries and updates its contact flags and resolved position. */
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x2d0, 0x2d4, 0x2d8, 0x2dc, 0x2e0, 0x2e4, 0x2e8, 0x2f8, 0x2fc, 0x300, 0x304], gap at: 0x2ec. */
-typedef Shared_Func80243A80Frame Func80243A80Frame;
+typedef Shared_CollisionMoveFrame UnicolMotionFrame;
 
-typedef CVector3 Func80243A80Vec3;
+typedef CVector3 UnicolPosition;
 
 extern void CCollision_SetUniformSweepExtent(void *actorMotion, f32 extent);
 
-s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
+s32 Unicol_MoveActorWithCollision(UnicolActor *actor, UnicolPosition pos, u32 *motionSettings) {
     s32 CCollision_ApplyMotionResponse();
-    Func80243A80Frame frame;
+    UnicolMotionFrame frame;
     f32 headingCosine;
     f32 surfaceCeilingHeight;
     f32 high;
@@ -89,7 +89,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     u32 attachmentFlags;
     u32 loopMask;
     f32 dropDistance;
-    Func80243A80Actor *attachedActor;
+    UnicolActor *attachedActor;
     s32 collisionOne;
     f32 hitY;
     f32 actorY;
@@ -108,7 +108,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     count = Gobjinst_GetActorRadius(actor);
     high = Gobjinst_GetActorHeight(actor);
     CCollision_SetSweepRange(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
-    *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
+    *(UnicolPosition *)&frame.sp5C = *(UnicolPosition *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);
     __builtin_memcpy(&frame.sp8C, &actor->room, 12);
     frame.spC4 = actor->collision;
@@ -121,7 +121,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     frame.sp40 = (((u32) actor->flags >> 2) ^ 1) & 1;
     frame.sp44 = 1;
     frame.sp54 = actor->flags;
-    frame.sp34 = frame.sp28 * D_800C3790_de;
+    frame.sp34 = frame.sp28 * k_collisionHeightMarginScale_de;
     frame.sp50 = ((u32) *motionSettings >> 0x13) & 1;
     frame.sp58 = motionSettings;
     CCollision_IntegrateGravityAndDrag(&frame.sp18);
@@ -138,7 +138,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
             peakMoveCount = g_collisionPeakMovementCount;
         }
         g_collisionPeakMovementCount = peakMoveCount;
-        if ((motionSettings != &g_supportingPlatformCollisionQuery) && (motionSettings != &D_801001D0) && (motionSettings != &g_particleCollisionProbeResult) && (motionSettings != &D_80100170)) {
+        if ((motionSettings != &g_supportingPlatformCollisionQuery) && (motionSettings != &g_collisionNoDetachSettingsSecond) && (motionSettings != &g_particleCollisionProbeResult) && (motionSettings != &g_collisionSurfaceExcludedFromTrace)) {
             actor->attached = 0;
             frame.sp54 &= ~0x7B;
         }
@@ -183,7 +183,7 @@ loop_34:
         if (collisionFound != 0) {
             if (frame.spC8 != collisionOne) {
                 if (frame.spC8 == 4) {
-                    if (((frame.sp110 * -headingSine) + (frame.sp118 * -headingCosine)) < D_800C3794_de) {
+                    if (((frame.sp110 * -headingSine) + (frame.sp118 * -headingCosine)) < k_collisionWallFacingDotLimit_de) {
                         frame.sp54 |= 0x80;
                         CCollision_UpdateSurfaceResponseFlags(&frame.sp18, &frame.spC8);
                     }
@@ -218,7 +218,7 @@ block_42:
             frame.sp48 = 0;
             frame.sp4C = 0;
             savedY = frame.sp6C;
-            dropDistance = D_800C3798_de;
+            dropDistance = k_collisionFloorProbeDrop_de;
             frame.sp6C = savedY - dropDistance;
             __builtin_memcpy(&frame.sp2A8, &g_playerCollisionProbe, sizeof(g_playerCollisionProbe));
             frame.sp58 = &frame.sp2A8;
@@ -229,7 +229,7 @@ block_42:
             CCollision_ResetContactNormal(&frame.sp18);
             actor->contactX = 0.0f;
             actor->contactZ = 0.0f;
-            actor->contactBits = D_800C379C_de;
+            actor->contactBits = k_collisionUpNormalY_de;
             actor->groundY = (f32) (actor->y - dropDistance);
 loop_49:
             if (CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) {
@@ -243,13 +243,13 @@ loop_49:
                 actorY = actor->y;
                 hitY = frame.sp19C;
                 groundSeparation = actorY - hitY;
-                if ((frame.sp3C != 0) && (groundSeparation < D_800C37A0_de)) {
+                if ((frame.sp3C != 0) && (groundSeparation < k_collisionGroundSnapDistance_de)) {
                     frame.sp3C = 0;
                     actor->velY = 0.0f;
                     groundSeparation = actor->velY;
                     actor->y = hitY;
                 }
-                if ((actor->velY <= 0.0f) && (groundSeparation < D_800C37A4_de)) {
+                if ((actor->velY <= 0.0f) && (groundSeparation < k_collisionGroundContactDistance_de)) {
                     if (frame.spC8 == 5) {
                         frame.sp54 |= 0x2004;
                         CCollision_UpdateMaterialFlags(&frame.sp18, &frame.spC8);
@@ -298,8 +298,8 @@ block_71:
             frame.sp48 = 0;
             frame.sp4C = 0;
             frame.sp58 = &g_playerCollisionProbe.flags;
-            frame.sp68 -= headingSine * D_800C37A8_de;
-            frame.sp70 -= headingCosine * D_800C37A8_de;
+            frame.sp68 -= headingSine * k_collisionWallProbeReach_de;
+            frame.sp70 -= headingCosine * k_collisionWallProbeReach_de;
             CCollision_ResetContactNormal(&frame.sp18);
             if ((CCollision_TraceActorMotion((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
                 if (frame.sp38 != 0) {
@@ -320,7 +320,7 @@ block_71:
         if (*motionSettings & 0x80000) {
             surface = Scene_ResolveFloorPolygon(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
-            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
+            if ((surface != 0) && ((((UnicolSurfaceRecord *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
                 surfaceCeilingHeight = Graphu64_GetTrianglePlaneHeight(surface, actor->x, actor->z);
                 if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x4000;
@@ -341,7 +341,7 @@ block_71:
 
 s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 desired, s32 motionSettings) {
     extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
-    Work80244494 work;
+    CollisionSweepWork work;
     VectorPair vectors;
     char *object = actorStorage;
     char *out;
@@ -420,7 +420,7 @@ s32 CCollision_SweepPoint(char *actorStorage, CVector3 startPosition, CVector3 d
 s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *sweepSurfaceSettings,
                    f32 sweepExtent) {
     extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
-    Work80244494 work;
+    CollisionSweepWork work;
     VectorPair vectors;
     char *object = actorStorage;
     char *out;
@@ -499,7 +499,7 @@ s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CV
 s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *motionSettings,
                   CVector3 motionExtents, f32 baseOffset) {
     extern s32 CCollision_ApplyMotionResponse(void *actorStorage);
-    Work80244494 work;
+    CollisionSweepWork work;
     VectorPair vectors;
     char *object = actorStorage;
     char *out;

@@ -1,6 +1,6 @@
 #include "COMMON/RECORDRECATCV1.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "COMMON/LONE/D_0044E4F8.H"
+#include "COMMON/LONE/g_pakDialogPromptScannedChannel.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/PAK_PREVIEW_VIEWS.H"
@@ -15,7 +15,7 @@
 #include "MENU/PAK/TIMER_GETPROMPTTEXT.H"
 #include "SYSTEM/DEFS.H"
 
-/* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns D_80153784. Adapted from Timer_CheckMenuPakChange with nothing changed (identical code). */
+/* Latches g_pakMenuPromptAccepted to one when the record's team value is not -1 and both Control_PeekPakChange_Pak and Snapshot_CheckStatusPrompt accept it, then returns g_pakMenuPromptAccepted. Adapted from Timer_CheckMenuPakChange with nothing changed (identical code). */
 
 
 
@@ -34,8 +34,8 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 }
 extern s32 Snapshot_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 
-/* Latches D_80146D60 and D_800E28CC to one the first time bit 12 of the word at offset 0xB0 of the
-   object at 0x20 of a record is seen set, and returns D_80146D60. */
+/* Latches g_pakRequestLatched and g_pakStartButtonLatched to one the first time bit 12 of the word at offset 0xB0 of the
+   object at 0x20 of a record is seen set, and returns g_pakRequestLatched. */
 
 
 
@@ -49,7 +49,7 @@ extern s32 Snapshot_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 extern void SetN64_CommitSessionInputs(void *unused);
 
 
-/* Calls func_80264788_de on its second argument, then func_8044D528_de on D_8011FE88 with D_8013B2C8
+/* Calls Control_DisableControllerPakDe on its second argument, then Scene_SetSelection_MenuInitializeoptionsscene on g_world_AchieveUpdateresultsscreen with g_worldSelectionValueThree
    and 2. */
 
 
@@ -83,45 +83,45 @@ extern void Note_GetNoteGameName(s32,s32,s32 *),Note_DecodeNoteText(s32,void *,s
  /* extern */
 
 s32 Timer_CheckChangedMenuChannel(struct Shared_PakMenu *record) {
-    if (D_80153784 == 0) {
+    if (g_pakMenuPromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
                 if (Snapshot_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
-                    D_80153784 = 1;
+                    g_pakMenuPromptAccepted = 1;
                 }
             }
         }
     }
-    return D_80153784;
+    return g_pakMenuPromptAccepted;
 }
 
 s32 Timer_LatchControllerRequest(struct PakControllerRequestView *record) {
-    if ((record->inner->buttons & 0x1000) && D_800E28CC == 0) {
-        D_80146D60 = 1;
-        D_800E28CC = 1;
+    if ((record->inner->buttons & 0x1000) && g_pakStartButtonLatched == 0) {
+        g_pakRequestLatched = 1;
+        g_pakStartButtonLatched = 1;
     }
-    return D_80146D60;
+    return g_pakRequestLatched;
 }
 
 s32 Timer_UpdateManagerStatus(void *menu) {
-    if (D_80146D60 == 0) {
+    if (g_pakRequestLatched == 0) {
         SetN64_CommitSessionInputs(&g_gameSession);
         Control_TrackControllerPakChanges();
-        if (D_80146D60 == 0) {
-            if (D_8014AD9C != 0) {
-                D_8014ADA0 = 1;
+        if (g_pakRequestLatched == 0) {
+            if (g_pakUsable != 0) {
+                g_pakRecheckRequested = 1;
             }
-            D_8014AD94 = 0;
-            D_80153784 = 1;
+            g_pakScanActive = 0;
+            g_pakMenuPromptAccepted = 1;
         }
     }
-    if (D_80153784 == 0) {
+    if (g_pakMenuPromptAccepted == 0) {
         if ((g_introSelectedItem != -1) && (Control_PeekPakChange(g_introSelectedItem) != 0) && (Snapshot_CheckStatusPrompt(menu, g_introSelectedItem, 0) != 0)) {
-            D_8014AD94 = 0;
-            D_80153784 = 1;
+            g_pakScanActive = 0;
+            g_pakMenuPromptAccepted = 1;
         }
     }
-    return D_80153784;
+    return g_pakMenuPromptAccepted;
 }
 
 s32 Timer_GetChannelAndResult(struct PakChannelResultView *record, s32 *out) {
@@ -174,13 +174,13 @@ char *Timer_GetPromptByKind(int unused, int kind) {
     switch (kind) {
     case 0:
     default:
-        return D_00450BF0_de;
+        return g_pakPortZeroPrompt_de;
     case 1:
-        return D_00450C14_de;
+        return g_pakPortOnePrompt_de;
     case 2:
-        return D_00450C38_de;
+        return g_pakPortTwoPrompt_de;
     case 3:
-        return D_00450C5C_de;
+        return g_pakPortThreePrompt_de;
     }
 }
 
@@ -197,16 +197,16 @@ static inline char *Pak_GetChannelPrompt(s32 channel) {
     switch (channel) {
     case 0:
     default:
-        prompt = D_00450BF0_de;
+        prompt = g_pakPortZeroPrompt_de;
         break;
     case 1:
-        prompt = D_00450C14_de;
+        prompt = g_pakPortOnePrompt_de;
         break;
     case 2:
-        prompt = D_00450C38_de;
+        prompt = g_pakPortTwoPrompt_de;
         break;
     case 3:
-        prompt = D_00450C5C_de;
+        prompt = g_pakPortThreePrompt_de;
         break;
     }
     return prompt;
@@ -217,19 +217,19 @@ char *Timer_GetPromptText(struct Shared_PakMenu *menu) {
     char *text;
 
     text = 0;
-    if (D_8014D4C0_de != 0) {
-        if (D_8014D4EC_de == 0) {
+    if (g_pakSaveMenuActiveDe != 0) {
+        if (g_pakProfileLoadMode_de == 0) {
             return text;
         }
         Pak_GetPromptChannel(menu, &channel);
         text = Pak_GetChannelPrompt(channel);
-    } else if (D_80153760 != 0) {
+    } else if (g_pakProfileLoadActive != 0) {
         text = D_0044FFA4;
-        if (D_8014D4EC_de != 0) {
-            text = D_0044FB50;
+        if (g_pakProfileLoadMode_de != 0) {
+            text = g_pakStatusPromptAlternate;
         }
     } else if (g_pakUseScannedChannel != 0) {
-        text = D_0044E4F8;
+        text = g_pakDialogPromptScannedChannel;
     }
     return text;
 }
@@ -265,7 +265,7 @@ s32 Timer_FindNextAvailableChannel(s32 currentChannel) {
 
 /* The EU builds compile a different original body for Timer_UpdateManagerChannelLabel; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when g_pakUseScannedChannel is set, points the field at D_800D3764 and formats g_introSelectedItem plus one into it with D_800DCD7C one byte before the length Menu_CountLineChars reports, returning zero.
+/* Shows g_pakSaveMenuProfileChannelLabels in a field when both g_pakProfileLoadMode_de and g_pakSaveMenuActiveDe are set, g_pakSaveMenuSnapshotChannelLabels when only g_pakSaveMenuActiveDe is, and otherwise, when g_pakUseScannedChannel is set, points the field at g_pakScannedChannelNumberLabels and formats g_introSelectedItem plus one into it with g_pakFormatInt1_TimerGetprompttext one byte before the length Menu_CountLineChars reports, returning zero.
    Adapted from Items_FormatPackedGameOption with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
@@ -275,14 +275,14 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
     char *text;
     s32 value;
 
-    if (D_8014D4EC_de != 0 && D_8014D4C0_de != 0) {
-        field->text = D_800D3728;
-    } else if (D_8014D4EC_de == 0 && D_8014D4C0_de != 0) {
-        field->text = D_800D372C;
+    if (g_pakProfileLoadMode_de != 0 && g_pakSaveMenuActiveDe != 0) {
+        field->text = g_pakSaveMenuProfileChannelLabels;
+    } else if (g_pakProfileLoadMode_de == 0 && g_pakSaveMenuActiveDe != 0) {
+        field->text = g_pakSaveMenuSnapshotChannelLabels;
     } else if (g_pakUseScannedChannel != 0) {
         value = g_introSelectedItem;
-        field->text = D_800D3764;
-        text = D_800D3764[0];
+        field->text = g_pakScannedChannelNumberLabels;
+        text = g_pakScannedChannelNumberLabels[0];
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
     }
     return 0;
@@ -291,7 +291,7 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when g_pakUseScannedChannel is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with g_pakChannelNumberFormat and g_introSelectedItem plus one from one byte before the length Menu_CountLineChars reports; returns zero. */
+/* Points an option field at its text: when g_pakSaveMenuActiveDe is set, g_pakSaveMenuProfileChannelLabels if g_pakProfileLoadMode_de is set and g_pakSaveMenuSnapshotChannelLabels if not; otherwise, when g_pakUseScannedChannel is set, the table g_pakScannedChannelNumberLabelsByLanguage, formatting its entry for the byte g_languageIndex_TimerGetprompttext with g_pakChannelNumberFormat and g_introSelectedItem plus one from one byte before the length Menu_CountLineChars reports; returns zero. */
 
 
 
@@ -302,18 +302,18 @@ s32 Timer_UpdateManagerChannelLabel(struct Field *field) {
     char *text;
     s32 value;
 
-    if (D_8014D4EC_de != 0) {
-        if (D_8014D4C0_de != 0) {
-            field->text = D_800D3728;
+    if (g_pakProfileLoadMode_de != 0) {
+        if (g_pakSaveMenuActiveDe != 0) {
+            field->text = g_pakSaveMenuProfileChannelLabels;
             goto done;
         }
-    } else if (D_8014D4C0_de != 0) {
-        field->text = D_800D372C;
+    } else if (g_pakSaveMenuActiveDe != 0) {
+        field->text = g_pakSaveMenuSnapshotChannelLabels;
         goto done;
     }
     if (g_pakUseScannedChannel != 0) {
         do {
-            table = D_800E27E4;
+            table = g_pakScannedChannelNumberLabelsByLanguage;
         } while (0);
         field->text = table;
         value = g_introSelectedItem;

@@ -14,7 +14,7 @@
 unsigned char g_EnvTrailingBytesBlock1[12] = { 0xAF, 0xB0, 0x00, 0x18, 0x00, 0x80, 0x80, 0x21, 0xAF, 0xB1, 0x00, 0x1C };
 #endif
 
-/* DATA_80212FD4.CPP */
+/* ENV_SFX_PADDING_BYTES_US.CPP */
 #if defined(VERSION_US)
 char func_80212FBC_de_padding_13BD4[12] =
     "\000\000\000\000\000\027SFX_CE";

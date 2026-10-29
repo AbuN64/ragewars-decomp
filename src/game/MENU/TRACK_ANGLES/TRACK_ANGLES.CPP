@@ -167,7 +167,7 @@ CVector3 Menu_GetTrackStartTarget(void) {
     if (g_cinemaSequenceState->active == 0) {
         fallback.y = 0;
         fallback.z = 0;
-        fallback.x = D_800DCC7C_de;
+        fallback.x = g_trackStartTargetFallbackX;
         return fallback;
     }
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(g_cinemaSequenceState->resource, 0), 0), 1);

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800D0640.CPP */
-/* ROM-grounded data: src/rw_pool_8023D380_D1240_us_rev1.c */
+/* ROM-grounded data: src/g_CcollisionIntersectsegmentboxWords3_CcollisionIntersectsegmentboxData.c */
 const unsigned int g_CcollisionIntersectsegmentboxWords3[1] = {
     0x3CA3D70A,
 };

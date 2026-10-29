@@ -856,7 +856,7 @@ unsigned char k_LightingEncodedBytesBlock1[7] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_802784C0_CA80C_us_rev1.c */
+/* ROM-grounded data: src/g_litVerticesText_Lighting.c */
 const unsigned char g_litVerticesText[] = {
     0x4C, 0x69, 0x74, 0x20, 0x56, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
 #if defined(VERSION_US_REV1)

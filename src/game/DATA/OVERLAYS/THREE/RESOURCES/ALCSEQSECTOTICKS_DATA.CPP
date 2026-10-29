@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802AE824_CD188_us_rev1.c */
+/* ROM-grounded data: src/ALCSEQSECTOTICKS_ENCODED_WORDS_US_REV1.c */
 const unsigned int k_AlcseqsectoticksEncodedWords[3] = {
     0x41F00000, 0x00000000, 0x4F000000,
 };

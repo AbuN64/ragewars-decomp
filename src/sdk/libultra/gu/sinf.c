@@ -9,7 +9,7 @@
    evaluated in double, and anything beyond 2^28 returns zero. P, rpi, pihi, pilo and zero are the
    cartridge's tables, and the two 0.5 literals of ROUND are its own constants. */
 
-extern const f64 D_800C78D0_de[5]; /* P */
+extern const f64 g_sinePolynomialCoefficients[5]; /* P */
 extern const f64 g_sineInversePi;    /* rpi */
 extern const f64 g_sinePiHigh;    /* pihi */
 extern const f64 g_sinePiLow;    /* pilo */
@@ -33,7 +33,7 @@ float Gu_Sinf(float x)
         dx = x;
 
         if (xpt >= 0xe6) {
-            const f64 *P = D_800C78D0_de;
+            const f64 *P = g_sinePolynomialCoefficients;
 
             xsq = dx * dx;
 
@@ -61,7 +61,7 @@ float Gu_Sinf(float x)
         xsq = dx * dx;
 
         {
-            const f64 *P = D_800C78D0_de;
+            const f64 *P = g_sinePolynomialCoefficients;
 
             poly = ((P[4] * xsq + P[3]) * xsq + P[2]) * xsq + P[1];
         }

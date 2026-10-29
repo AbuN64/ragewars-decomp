@@ -11,7 +11,7 @@
 #include "MULTI/ITEM.H"
 
 #if (!(defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU))) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Multi_DrawPlayerItemAvailability);
+INCLUDE_ASM("ovl_frontendMenu", Multi_DrawPlayerItemAvailability);
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(NON_MATCHING)

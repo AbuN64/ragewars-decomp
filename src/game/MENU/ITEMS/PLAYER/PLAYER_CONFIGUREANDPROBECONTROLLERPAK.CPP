@@ -28,7 +28,7 @@ s32 Player_GetPlayerIndex(int *, s32);
 
  /* const */
 extern void Control_EnableControllerPak(s32 kind);
-extern s32 D_800E28C0[];
+extern s32 g_pakPlayerMessagePending[];
 void Player_ConfigureAndProbeControllerPak(ControllerPakMenuContext *menuContext) {
     s32 playerId;
     s32 controllerIndex;
@@ -50,7 +50,7 @@ void Player_ConfigureAndProbeControllerPak(ControllerPakMenuContext *menuContext
     statusWidgets = menuContext->actor;
     statusWidgets->flags210 = (s32) (statusWidgets->flags210 & 0xFE7FFFFF);
     g_pakUseScannedChannel[0] = 0;
-    D_800E28C0[0] = 0;
+    g_pakPlayerMessagePending[0] = 0;
     controllerIndex = 0;
     if (g_gameSettings.counters.m_bFragTagOn != 0) {
         pakAvailableWidgets = menuContext->actor;
@@ -81,7 +81,7 @@ void Player_ConfigureControllerPakMenu(ControllerPakMenuContext *menuContext) {
     ControllerPakMenuActorView *statusWidgets;
 
     playerId = menuContext->playerAddress;
-    D_800E28C0[0] = 0;
+    g_pakPlayerMessagePending[0] = 0;
     controllerIndex = 0;
     if (playerId != 0) {
         controllerIndex = Player_GetPlayerIndex((s32 *)&g_playerViewRenderContext, playerId);

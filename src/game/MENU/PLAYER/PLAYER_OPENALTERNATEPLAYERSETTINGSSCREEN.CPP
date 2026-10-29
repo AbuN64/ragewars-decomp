@@ -6,7 +6,7 @@
 extern u8 g_matchSettingsByteView[];
 typedef struct { void *a0, *a4, *a8, *aC, *a10; s32 a14; void *a18; } MenuBlockEu;
 extern MenuBlockEu *g_alternatePlayerSettingsScreen;
-extern char *D_800E1CE4[], *g_alternateSettingsModeLabels[], *D_800E1C14[], *g_alternateSettingsControlLabels[], *g_alternateSettingsHandLabels[], *g_alternateSettingsFinalChoiceLabelsEu[], *g_alternateSettingsFinalChoiceLabelsEuX[];
+extern char *g_matchOptionsCursorLabelThirdByLanguage[], *g_alternateSettingsModeLabels[], *g_optionsFirstChoiceLabels[], *g_alternateSettingsControlLabels[], *g_alternateSettingsHandLabels[], *g_alternateSettingsFinalChoiceLabelsEu[], *g_alternateSettingsFinalChoiceLabelsEuX[];
 extern void *Cache_AllocateMemory(s32);
 extern void SmpButton_WrapButtonWidget(s32), SmpButton_AppendListText(void *, char *);
 extern void *SmpButton_CreateListWidget(s32, s32), *SmpSlider_CreateSliderWidget(s32, s32, s32), *Node_FindWidgetByResourceId(void *, s32);
@@ -19,10 +19,10 @@ s32 Player_OpenAlternatePlayerSettingsScreen(void *window) {
     SmpButton_WrapButtonWidget(0x1C6);
     lang = g_matchSettingsByteView[0x581];
     g_alternatePlayerSettingsScreen->aC = SmpButton_CreateListWidget(0x1C9, 0x1CA);
-    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->aC, D_800E1CE4[lang]);
+    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->aC, g_matchOptionsCursorLabelThirdByLanguage[lang]);
     SmpButton_AppendListText(g_alternatePlayerSettingsScreen->aC, g_alternateSettingsModeLabels[lang]);
     g_alternatePlayerSettingsScreen->a8 = SmpButton_CreateListWidget(0x1D1, 0x1D2);
-    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->a8, D_800E1C14[lang]);
+    SmpButton_AppendListText(g_alternatePlayerSettingsScreen->a8, g_optionsFirstChoiceLabels[lang]);
     SmpButton_AppendListText(g_alternatePlayerSettingsScreen->a8, g_alternateSettingsControlLabels[lang]);
     SmpSlider_CreateSliderWidget(0x1CF, 0x1D0, 0xFF);
     g_alternatePlayerSettingsScreen->a0 = SmpSlider_CreateSliderWidget(0x1CD, 0x1CE, 0xFF);
@@ -38,6 +38,6 @@ s32 Player_OpenAlternatePlayerSettingsScreen(void *window) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Player_OpenAlternatePlayerSettingsScreen);
+INCLUDE_ASM("ovl_frontendMenu", Player_OpenAlternatePlayerSettingsScreen);
 #endif
 #endif

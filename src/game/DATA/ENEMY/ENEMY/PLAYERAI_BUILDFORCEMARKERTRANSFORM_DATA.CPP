@@ -7,7 +7,7 @@ const unsigned char k_PlayeraiBuildforcemarkertransformEncodedBytes[4] = {
 };
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int rodata_shared_800CBBBC[1] = {
+const unsigned int k_playeraiForceMarkerLightColorWord[1] = {
     0x38383800,
 };
 #endif

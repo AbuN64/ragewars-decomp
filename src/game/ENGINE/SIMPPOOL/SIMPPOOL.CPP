@@ -74,7 +74,7 @@ unsigned int func_80294C8C_de_padding_959A8[2] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80294C84_de);
+INCLUDE_ASM("span_1000", Simppool_NoOp);
 #endif
 
 #if defined(VERSION_DE)

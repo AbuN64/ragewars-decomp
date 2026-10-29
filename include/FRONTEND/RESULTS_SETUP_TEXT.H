@@ -5,16 +5,16 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern ResultsHeadingCharacter g_resultCharacterHeadingTranslations[];
 extern char *g_resultCharacterUnlockTranslations[], *g_resultPreviouslyCompletedTranslations[], *g_resultCampaignCompleteTranslations[], *g_resultTrialsCompleteTranslations[];
-extern char *D_800E2044_eu[], *D_800E2064_eu[], *g_resultModeHeadingTranslations[], *g_resultTrialModeTranslations[], *g_resultChallengeModeTranslations[];
-static inline char *resultsUnavailable(Shared_Game *game) { return D_800E2044_eu[game->language]; }
-static inline char *resultsFirstHeading(void) { return D_800E2064_eu[g_languageIndex]; }
+extern char *g_resultUnavailableTranslations[], *g_resultFirstHeadingTranslations[], *g_resultModeHeadingTranslations[], *g_resultTrialModeTranslations[], *g_resultChallengeModeTranslations[];
+static inline char *resultsUnavailable(Shared_Game *game) { return g_resultUnavailableTranslations[game->language]; }
+static inline char *resultsFirstHeading(void) { return g_resultFirstHeadingTranslations[g_languageIndex]; }
 static inline char *resultsSecondHeading(void) { return g_resultModeHeadingTranslations[g_languageIndex]; }
 static inline char *resultsThirdHeading(void) { return g_resultTrialModeTranslations[g_languageIndex]; }
 static inline char *resultsFourthHeading(void) { return g_resultChallengeModeTranslations[g_languageIndex]; }
 #else
-extern char *D_800D357C, *D_800D3584, *g_resultModeHeadingText, *g_resultTrialModeText, *g_resultChallengeModeText;
-static inline char *resultsUnavailable(Shared_Game *game) { return D_800D357C; }
-static inline char *resultsFirstHeading(void) { return D_800D3584; }
+extern char *g_resultUnavailableText, *g_resultFirstHeadingText, *g_resultModeHeadingText, *g_resultTrialModeText, *g_resultChallengeModeText;
+static inline char *resultsUnavailable(Shared_Game *game) { return g_resultUnavailableText; }
+static inline char *resultsFirstHeading(void) { return g_resultFirstHeadingText; }
 static inline char *resultsSecondHeading(void) { return g_resultModeHeadingText; }
 static inline char *resultsThirdHeading(void) { return g_resultTrialModeText; }
 static inline char *resultsFourthHeading(void) { return g_resultChallengeModeText; }

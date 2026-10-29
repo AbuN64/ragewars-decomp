@@ -105,7 +105,7 @@ CVector3 *Gobjinst_TransformVectorByActorAim(CVector3 *outVector, void *actor, C
     return outVector;
 }
 
-s32 Gobjinst_TestActorTriangleVerticalClearance(Shared_Func80243A80Actor *actor) {
+s32 Gobjinst_TestActorTriangleVerticalClearance(Shared_CollisionActor *actor) {
     CVector3 direction;
     Node75 *node;
     f32 upper;

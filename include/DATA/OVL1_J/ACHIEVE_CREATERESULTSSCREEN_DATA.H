@@ -1,5 +1,5 @@
 #ifndef DATA_OVL1_J_ACHIEVE_CREATERESULTSSCREEN_DATA_H
 #define DATA_OVL1_J_ACHIEVE_CREATERESULTSSCREEN_DATA_H
-extern char g_packedCodeAddress24_00438CB4[];
-extern char g_packedCodeAddress24_00438E64[];
+extern char g_Achieve_ResultScreenReturnZeroPackedAddress24_AchieveCreateresultsscreenData[];
+extern char g_Achieve_UpdateResultSelectionMessagePackedAddress24_AchieveCreateresultsscreenData[];
 #endif

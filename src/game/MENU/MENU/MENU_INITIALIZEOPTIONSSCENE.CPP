@@ -11,7 +11,7 @@ unsigned char g_MenuInitializeoptionssceneTrailingBytes[8] = { 0x8F, 0xBF, 0x00,
 /* 804221A0_2.CPP */
 /* Sets up the match display: calls Menu_ConfigureOptionsCamera, starts the objects at g_frontendScreenStatus and 0x48 bytes
    before it through Pools_ResetActorPools and Player_InitializePlayerPool, loads the resource Track_RequestTrackByKey names for
-   0x27D into D_8011FE88 through func_8044D528_de, and calls Cache_SetResourceActivityState with one when Cache_GetResourceActivityState
+   0x27D into g_world_AchieveUpdateresultsscreen through Scene_SetSelection_MenuInitializeoptionsscene, and calls Cache_SetResourceActivityState with one when Cache_GetResourceActivityState
    reports nothing. */
 
 extern void Pools_ResetActorPools(void *, s32);
@@ -34,7 +34,7 @@ void Menu_InitializeOptionsScene(void) {
     }
 }
 
-/* Calls Cinema_SetLoopMode with 1, func_80245A00_de with the pooled constant D_800E1648 and
+/* Calls Cinema_SetLoopMode with 1, Cinema_SetResponse_Setn64Drawmode4backdrop with the pooled constant k_optionsCameraResponse and
    Cinema_SetViewport with 0x43, 0x4F, 0x12 and 0x80. */
 
 void Menu_ConfigureOptionsCamera(void) {

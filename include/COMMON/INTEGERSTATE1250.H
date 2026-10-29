@@ -15,8 +15,8 @@ typedef struct PlayerTintBlendStateView PlayerTintBlendStateView;
 extern int Playerai_HasForceMarker(char *object);
 
 
-struct RecordCode8022AE90;
-typedef struct RecordCode8022AE90 RecordCode8022AE90;
+struct ScoredPlayerRecord;
+typedef struct ScoredPlayerRecord ScoredPlayerRecord;
 
 struct PlayerForceMarkerCounterView;
 
@@ -34,13 +34,13 @@ struct ScoreTable {
     u8 pad00[0x3C];
     short value[8];
 };
-struct RecordCode8022AE90;
+struct ScoredPlayerRecord;
 struct ScoreTable;
-struct RecordCode8022AE90 {
+struct ScoredPlayerRecord {
     u8 pad0000[0x5D8];
     struct ScoreTable *scores;
     u8 pad05DC[0x16E0 - 0x5DC];
-    struct RecordCode8022AE90 *next;
+    struct ScoredPlayerRecord *next;
     u8 pad16E4[4];
 };
 
@@ -89,12 +89,12 @@ struct PlayerForceMarkerMatrixView;
 struct PlayerForceMarkerOwnerView;
 
 struct Context;
-struct RecordCode8022AE90;
+struct ScoredPlayerRecord;
 struct Context {
     u8 pad00[4];
-    struct RecordCode8022AE90 *base;
+    struct ScoredPlayerRecord *base;
     u8 pad08[0x18];
-    struct RecordCode8022AE90 *head;
+    struct ScoredPlayerRecord *head;
 };
 
 

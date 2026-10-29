@@ -35,23 +35,23 @@ extern void Menu_ReturnToPreviousScreen(void);
 
 extern void Menu_ReturnToPreviousScreen(void);
 
-typedef s32 (*Handler80423930)(void *, s32, s32, s32, s32);
+typedef s32 (*CompactOptionsEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_compactOptionsEventKinds[];
 
 extern FieldRow g_compactOptionsActorKinds[];
 
-extern Handler80423930 g_compactOptionsEventHandlers;
+extern CompactOptionsEventHandler g_compactOptionsEventHandlers;
 
 /* Releases the object g_optionsShortcutScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears g_optionsShortcutScreen, calls
-   func_80245B28_de and returns zero. */
+   Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut and returns zero. */
 
 
 extern void Cinema_ReleaseSequenceContext(void);
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
-   FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen g_optionsShortcutScreen (marking it shown with timer -1 and
-   refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries ScenarioSetup_StartRandomCupStage
+   FIRST_MESSAGE (0x377 to 0x380 on us) through k_tabOptionsShortcutMessageJumpTable: one reopens screen g_optionsShortcutScreen (marking it shown with timer -1 and
+   refreshing its two windows at 0x44 and 0x4C) and calls Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut; one tries ScenarioSetup_StartRandomCupStage
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
    others pass codes 0x17, 13, 12 and 14 to Random_SetMenuChoiceResult. Any handled message then runs
    Menu_CommitTabOptionsPage. Returns zero. */
@@ -74,13 +74,13 @@ extern s32 ScenarioSetup_StartRandomCupStage(void);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_tabOptionsEventKinds, an actor kind at g_tabOptionsActorKinds and a handler at g_tabOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80423B88)(void *, s32, s32, s32, s32);
+typedef s32 (*TabOptionsEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_tabOptionsEventKinds[];
 
 extern FieldRow g_tabOptionsActorKinds[];
 
-extern Handler80423B88 g_tabOptionsEventHandlers;
+extern TabOptionsEventHandler g_tabOptionsEventHandlers;
 
 s32 Frontend_DestroyCompactOptionsPage(void) {
     Cache_FreeMemory(g_gameOptionsScreenState);
@@ -160,7 +160,7 @@ s32 Frontend_CloseCompactOptionsPage(void) {
 }
 
 s32 Frontend_DispatchCompactOptionsEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
-    Handler80423930 *entry;
+    CompactOptionsEventHandler *entry;
     MenuActorInputView *actor;
     s32 index;
     s32 wildcard;
@@ -288,7 +288,7 @@ s32 Frontend_ConsumeTabOptionsEvent(void) {
 }
 
 s32 Frontend_DispatchTabOptionsEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
-    Handler80423B88 *entry;
+    TabOptionsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

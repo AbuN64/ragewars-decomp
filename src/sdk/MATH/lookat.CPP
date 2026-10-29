@@ -107,7 +107,7 @@ const unsigned int k_LookatEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int rodata_func_802B6664_de_800C7874[1] = {
+const unsigned int k_lookatOneFloat_de[1] = {
     0x3F800000,
 };
 #endif

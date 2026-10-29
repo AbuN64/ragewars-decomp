@@ -238,7 +238,7 @@ case_default:
     ac[px->n0++] = code;
 }
 
-/* EU enters __umoddi3 one word before its symbol (data_unresolved_802C15D0), so EU keeps the ROM body. */
+/* EU enters __umoddi3 one word before its symbol (__umoddi3_Xprintf), so EU keeps the ROM body. */
 
 extern u8 g_lowercaseHexDigitsText[];
 extern u8 g_printfDigitCharacters[];

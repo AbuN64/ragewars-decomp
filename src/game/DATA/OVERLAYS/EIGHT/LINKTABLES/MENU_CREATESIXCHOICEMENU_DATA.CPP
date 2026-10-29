@@ -46,7 +46,7 @@ unsigned int g_MenuCreatesixchoicemenuEncodedWords[18] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800DF0FC[1] = {
+unsigned int k_MenuCreatesixchoicemenuTailWords[1] = {
     0x0000002B,
 };
 #endif

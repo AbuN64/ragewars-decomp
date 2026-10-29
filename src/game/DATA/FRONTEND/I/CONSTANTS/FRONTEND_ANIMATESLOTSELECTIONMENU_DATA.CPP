@@ -1,12 +1,12 @@
 #include "include_asm.h"
 
-/* DATA_800E3590.CPP */
+/* g_slotSelectionMenuInitialWord_FrontendAnimateslotselectionmenuData.CPP */
 /* ROM-grounded data: rodata/writable/800E3590 */
 unsigned int g_slotSelectionMenuInitialWord[1] = {
     0x00000000,
 };
 
-/* DATA_800E3594.CPP */
+/* k_FrontendAnimateslotselectionmenuEncodedWords_FrontendAnimateslotselectionmenuData.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 extern char g_slotSelectionTextReferenceShared1[];

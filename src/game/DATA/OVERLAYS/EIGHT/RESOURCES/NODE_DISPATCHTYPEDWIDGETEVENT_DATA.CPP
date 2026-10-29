@@ -7,7 +7,7 @@ extern char g_node_SelectPreviousGridColumnEntry[];
 extern char g_node_SelectNextGridColumnEntry[];
 extern char g_node_DestroyGridListEntry[];
 extern char g_gfx_BlinkVideoUnlessBypassedEntry[];
-u32 data_unresolved_800DEA80[492] = {
+u32 g_nodeDispatchTypedWidgetEventTable_de[492] = {
     0x00000005, 0x00007530, (unsigned int)g_node_SelectPreviousGridRowEntry, 0x00000006, 0x00007530, (unsigned int)g_node_SelectNextGridRowEntry,
     0x00000007, 0x00007530, (unsigned int)g_node_SelectPreviousGridColumnEntry, 0x00000008, 0x00007530, (unsigned int)g_node_SelectNextGridColumnEntry,
     0x00000E03, 0x00007530, (unsigned int)g_node_DestroyGridListEntry, 0x00000000, 0x00000000, 0x00000000,

@@ -29,8 +29,8 @@ extern char addrLow_Playerai_UpdateHazardDamageEntryVariant1[];
 extern char addrLow_Playerai_UpdateTargetFacingEntryVariant1[];
 extern char addrLow_Player_ZeroBodyVelocity_eu[];
 extern char addrLow_Player_StartMovingOnStickInput_eu[];
-extern char D_0022C9E4[];
-extern char D_0022C9EC[];
+extern char addrLow_Playerai_StartWalkingMovement_eu[];
+extern char addrLow_Player_StartGroundMoveState_eu[];
 extern char addrLow_Player_UpdateGroundMoveState_eu[];
 extern char addrLow_Player_BeginJump_eu[];
 extern char addrLow_Player_UpdateJumpAscent_eu[];
@@ -39,27 +39,27 @@ extern char addrLow_Player_BeginLateralLeap_eu[];
 extern char addrLow_Player_UpdateLateralLeap_eu[];
 extern char addrLow_Player_UpdateLeapMotion_eu[];
 extern char g_Player_DampMotionCallbackAddressDe[];
-extern char D_0022D030[];
+extern char addrLow_Player_AbsorbImpact_eu[];
 extern char addrLow_Player_DampMotion_eu[];
 extern char g_Player_ResetMovementInputCallbackAddressUs[];
 extern char g_PlayerStateNoOperationCallbackAddressUsVariant6[];
-extern char D_0022D280[];
+extern char addrLow_Playerai_BeginRoundEndWait[];
 extern char g_PlayerResetStunAndMotionCallbackAddressDe[];
-extern char D_0022D298[];
+extern char addrLow_Player_StartAimPreviousPositionAtReset_eu[];
 extern char addrLow_Player_AimPreviousPositionAtReset_eu[];
-extern char D_0022D304[];
+extern char addrLow_Playerai_UpdateAfterResetPlayerAfterDeath_eu[];
 extern char addrLow_Player_ResetStunAndReleaseHandles_eu[];
 extern char addrLow_Player_ResetStunFlags_eu[];
 extern char addrLow_Player_ResetStunFlags_eu_eu_x[];
 extern char addrLow_Playerai_BeginRoundEndWaitEntryVariant1[];
 extern char addrLow_Playerai_UpdateRoundEndWaitEntryVariant2[];
-extern char D_0022D4E4[];
-extern char D_0022D4EC[];
+extern char addrLow_Playerai_StartTargetFacingEntryVariant1_eu[];
+extern char addrLow_Playerai_StartRoundEndViewAngles_eu[];
 extern char addrLow_Playerai_UpdateRoundEndViewAngles[];
-extern char D_0022D518[];
+extern char addrLow_Playerai_StartRequestCinemaTrack_eu_x[];
 extern char g_PlayerRequestCinemaTrackCallbackAddressUs[];
-extern char D_0022D594[];
-extern char D_0022D59C[];
+extern char addrLow_Playerai_StartEntry5B04_eu[];
+extern char addrLow_Playerai_UpdateEntry5B04_eu[];
 extern char addrLow_Playerai_SetRunEndFlagEntryVariant1[];
 extern char addrLow_Playerai_UpdateRunEndTransition[];
 extern char g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2[];
@@ -97,9 +97,9 @@ extern char g_Playerai_EnterMovingSequenceStateCallbackAddressDe[];
 extern char addrLow_Playerai_UpdateSequence74RunEndPose_eu[];
 extern char addrLow_Playerai_InitializeActorModelEffect_eu[];
 extern char addrLow_Playerai_ClearPlayerWeaponLock[];
-extern char D_0022DB28[];
+extern char addrLow_Playerai_StartMovingSequenceState_eu_x[];
 extern char addrLow_Playerai_ResetPlayerWeaponLock[];
-extern char D_0022DBA8[];
+extern char addrLow_Playerai_StartStoppedSequenceState_eu_x[];
 extern char addrLow_Playerai_OffsetActorForState15_eu[];
 unsigned int g_playerMovementStateWordsDe[662] = {
     0x3FDD2F1C, 0x4030F27C, 0x41A5E354, 0x3F84B5DE, 0x00000000, 0x00000000, 0x00000000, 0x403851EC,
@@ -115,19 +115,19 @@ unsigned int g_playerMovementStateWordsDe[662] = {
     0xBFC90FDC, 0x3FC90FDC, 0x3F83126F, 0x40F5C28F, 0x3F03126F, 0x4123D70A, 0x3F449BA6, 0x4123D70A,
     0x42999999, 0x424CCCCC, 0x00000000, (unsigned int)addrLow_Player_ZeroBodyVelocity_eu, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001,
     0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001, 0x00020000, (unsigned int)addrLow_Player_StartMovingOnStickInput_eu,
-    (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022C9E4, (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458,
-    0x00000000, 0x000007DA, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458, 0x00000000, 0x00000A64,
+    (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00000001, 0x00020000, (unsigned int)addrLow_Playerai_StartWalkingMovement_eu, (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458,
+    0x00000000, 0x000007DA, 0x00030000, (unsigned int)addrLow_Player_StartGroundMoveState_eu, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458, 0x00000000, 0x00000A64,
     0x00030000, (unsigned int)addrLow_Player_BeginJump_eu, (unsigned int)addrLow_Player_UpdateJumpAscent_eu, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, 0x00000000,
     (unsigned int)addrLow_Player_UpdateJumpAirMotion_eu, 0x80110190, 0x00000800, 0x000007EE, 0x00020000, (unsigned int)addrLow_Player_BeginLateralLeap_eu, (unsigned int)addrLow_Player_UpdateLateralLeap_eu, 0x80110458,
     0x00000000, 0x000007EE, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateLeapMotion_eu, 0x80110458, 0x00000000, 0x000007EE,
     0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe,
-    (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
-    0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2,
+    (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)addrLow_Player_AbsorbImpact_eu, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
+    0x00000040, 0x000008A2, 0x00020000, (unsigned int)addrLow_Player_AbsorbImpact_eu, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2,
     0x00030000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)addrLow_Player_DampMotion_eu,
     (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x000007DA, 0x00020000, (unsigned int)g_PlayerStateNoOperationCallbackAddressUsVariant6, (unsigned int)addrLow_Player_UpdateSwimmingState_eu, 0x80110358,
-    0x00000100, 0x00000A3C, 0x00020000, (unsigned int)D_0022D280, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458, 0x00080000, 0x00000001,
-    0x00020000, (unsigned int)D_0022D298, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00000001, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu,
-    (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu, 0x00000000, 0x801103D8,
+    0x00000100, 0x00000A3C, 0x00020000, (unsigned int)addrLow_Playerai_BeginRoundEndWait, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458, 0x00080000, 0x00000001,
+    0x00020000, (unsigned int)addrLow_Player_StartAimPreviousPositionAtReset_eu, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00000001, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu,
+    (unsigned int)addrLow_Playerai_UpdateAfterResetPlayerAfterDeath_eu, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu, 0x00000000, 0x801103D8,
     0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunFlags_eu, (unsigned int)addrLow_Player_ResetStunFlags_eu_eu_x, 0x801103D8, 0x00000000, 0x00000000,
     0x00010000, (unsigned int)addrLow_Playerai_BeginRoundEndWaitEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRoundEndWaitEntryVariant2, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_StartSequenceTen,
     (unsigned int)addrLow_Playerai_UpdateSequence50Wait, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence30, (unsigned int)addrLow_Playerai_UpdateSequence40Wait, 0x801102F8,
@@ -140,29 +140,29 @@ unsigned int g_playerMovementStateWordsDe[662] = {
     0x00000000, 0x00001B6C, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence20, (unsigned int)addrLow_Playerai_UpdateSequence70Wait, 0x801103B8, 0x00000000, 0x00001B62,
     0x00010000, (unsigned int)addrLow_Playerai_StartSequence15, (unsigned int)addrLow_Playerai_UpdateSequence20Wait, 0x801102F8, 0x00000000, 0x00001B5C, 0x00010000, (unsigned int)g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2,
     0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_InitializeActorModelEffect_eu, (unsigned int)addrLow_Playerai_UpdateTravelSequenceEntryVariant1, 0x801101B0,
-    0x00000000, 0x000007EE, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)D_0022DB28, 0x80110010, 0x00008000, 0x000007DA,
-    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x000007DA, 0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu,
-    (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4, (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458,
-    0x00000000, 0x00000001, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458, 0x00000000, 0x00000001,
+    0x00000000, 0x000007EE, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)addrLow_Playerai_StartMovingSequenceState_eu_x, 0x80110010, 0x00008000, 0x000007DA,
+    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)addrLow_Playerai_StartStoppedSequenceState_eu_x, 0x80110010, 0x00008000, 0x000007DA, 0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu,
+    (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)addrLow_Playerai_StartTargetFacingEntryVariant1_eu, (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458,
+    0x00000000, 0x00000001, 0x00020000, (unsigned int)addrLow_Playerai_StartRoundEndViewAngles_eu, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458, 0x00000000, 0x00000001,
     0x00020000, (unsigned int)addrLow_Playerai_StartPlayerSequence71_eu, (unsigned int)addrLow_Playerai_UpdateSequence71RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B83, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence72_eu,
     (unsigned int)addrLow_Playerai_UpdateSequence72RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence73_eu, (unsigned int)addrLow_Playerai_UpdateSequence73RunEndPose_eu, 0x801102F8,
     0x00000000, 0x00001B85, 0x00010000, (unsigned int)g_Playerai_EnterMovingSequenceStateCallbackAddressDe, (unsigned int)addrLow_Playerai_UpdateSequence74RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B86,
-    0x00010000, (unsigned int)D_0022D594, (unsigned int)D_0022D59C, 0x80110458, 0x00000000, 0x00005B04, 0x00020000, (unsigned int)addrLow_Playerai_SetRunEndFlagEntryVariant1,
+    0x00010000, (unsigned int)addrLow_Playerai_StartEntry5B04_eu, (unsigned int)addrLow_Playerai_UpdateEntry5B04_eu, 0x80110458, 0x00000000, 0x00005B04, 0x00020000, (unsigned int)addrLow_Playerai_SetRunEndFlagEntryVariant1,
     (unsigned int)addrLow_Playerai_UpdateRunEndTransition, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, (unsigned int)addrLow_Player_ZeroBodyVelocity_eu, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8,
     0x00000000, 0x00000001, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateFlyMode_eu, 0x801104F8, 0x00000000, 0x00000001,
-    0x00020000, (unsigned int)addrLow_Player_StartMovingOnStickInput_eu, (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022C9E4,
-    (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458, 0x00000000, 0x00005E29, 0x00030000, (unsigned int)D_0022C9EC, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458,
+    0x00020000, (unsigned int)addrLow_Player_StartMovingOnStickInput_eu, (unsigned int)addrLow_Player_UpdateStandingState_eu, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)addrLow_Playerai_StartWalkingMovement_eu,
+    (unsigned int)addrLow_Playerai_UpdateWalkingMovement_eu, 0x80110458, 0x00000000, 0x00005E29, 0x00030000, (unsigned int)addrLow_Player_StartGroundMoveState_eu, (unsigned int)addrLow_Player_UpdateGroundMoveState_eu, 0x80110458,
     0x00000000, 0x00000A64, 0x00030000, (unsigned int)addrLow_Player_BeginJump_eu, (unsigned int)addrLow_Player_UpdateJumpAscent_eu, 0x80110190, 0x00000800, 0x00005E2D,
     0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateJumpAirMotion_eu, 0x80110190, 0x00000800, 0x00005E2D, 0x00020000, (unsigned int)addrLow_Player_BeginLateralLeap_eu,
     (unsigned int)addrLow_Player_UpdateLateralLeap_eu, 0x80110458, 0x00000000, 0x00005E2D, 0x00020000, 0x00000000, (unsigned int)addrLow_Player_UpdateLeapMotion_eu, 0x80110458,
     0x00000000, 0x00005E2D, 0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2,
-    0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)D_0022D030,
-    (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2, 0x00020000, (unsigned int)D_0022D030, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
+    0x00020000, (unsigned int)g_Player_DampMotionCallbackAddressDe, (unsigned int)addrLow_Player_UpdateWadingState_eu, 0x80110418, 0x00000080, 0x000008A2, 0x00030000, (unsigned int)addrLow_Player_AbsorbImpact_eu,
+    (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0, 0x00000040, 0x000008A2, 0x00020000, (unsigned int)addrLow_Player_AbsorbImpact_eu, (unsigned int)addrLow_Player_UpdateFloatingState_eu, 0x8010FFB0,
     0x00000040, 0x000008A2, 0x00030000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x00005E29,
     0x00020000, (unsigned int)addrLow_Player_DampMotion_eu, (unsigned int)g_Player_ResetMovementInputCallbackAddressUs, 0x801101B0, 0x00000000, 0x00005E29, 0x00020000, (unsigned int)g_PlayerStateNoOperationCallbackAddressUsVariant6,
-    (unsigned int)addrLow_Player_UpdateSwimmingState_eu, 0x80110358, 0x00000100, 0x00005E28, 0x00020000, (unsigned int)D_0022D280, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458,
-    0x00080000, 0x00005E24, 0x00020000, (unsigned int)D_0022D298, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00005E24,
-    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu, (unsigned int)D_0022D304, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu,
+    (unsigned int)addrLow_Player_UpdateSwimmingState_eu, 0x80110358, 0x00000100, 0x00005E28, 0x00020000, (unsigned int)addrLow_Playerai_BeginRoundEndWait, (unsigned int)g_PlayerResetStunAndMotionCallbackAddressDe, 0x80110458,
+    0x00080000, 0x00005E24, 0x00020000, (unsigned int)addrLow_Player_StartAimPreviousPositionAtReset_eu, (unsigned int)addrLow_Player_AimPreviousPositionAtReset_eu, 0x801104F8, 0x00100000, 0x00005E24,
+    0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerAfterDeath_eu, (unsigned int)addrLow_Playerai_UpdateAfterResetPlayerAfterDeath_eu, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunAndReleaseHandles_eu,
     0x00000000, 0x801103D8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Player_ResetStunFlags_eu, (unsigned int)addrLow_Player_ResetStunFlags_eu_eu_x, 0x801103D8,
     0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_BeginRoundEndWaitEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRoundEndWaitEntryVariant2, 0x801103D8, 0x00000000, 0x00000000,
     0x00010000, (unsigned int)addrLow_Playerai_StartSequenceTen, (unsigned int)addrLow_Playerai_UpdateSequence50Wait, 0x801102F8, 0x00000000, 0x00001B58, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence30,
@@ -175,14 +175,14 @@ unsigned int g_playerMovementStateWordsDe[662] = {
     (unsigned int)addrLow_Playerai_UpdateSequence30Wait, 0x801103B8, 0x00000000, 0x00001B6C, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence20, (unsigned int)addrLow_Playerai_UpdateSequence70Wait, 0x801103B8,
     0x00000000, 0x00001B62, 0x00010000, (unsigned int)addrLow_Playerai_StartSequence15, (unsigned int)addrLow_Playerai_UpdateSequence20Wait, 0x801102F8, 0x00000000, 0x00001B63,
     0x00010000, (unsigned int)g_PlayerSequenceRunEndUpdateCallbackAddressDeVariant2, 0x00000000, 0x801102F8, 0x00000000, 0x00000000, 0x00010000, (unsigned int)addrLow_Playerai_InitializeActorModelEffect_eu,
-    (unsigned int)addrLow_Playerai_UpdateTravelSequenceEntryVariant1, 0x801101B0, 0x00000000, 0x00005E2D, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)D_0022DB28, 0x80110010,
-    0x00008000, 0x00005E29, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)D_0022DBA8, 0x80110010, 0x00008000, 0x00005E29,
-    0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu, (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)D_0022D4E4,
-    (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D4EC, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458,
-    0x00000000, 0x00005E24, 0x00020000, (unsigned int)D_0022D518, (unsigned int)g_PlayerRequestCinemaTrackCallbackAddressUs, 0x80110458, 0x00000000, 0x00001B83,
+    (unsigned int)addrLow_Playerai_UpdateTravelSequenceEntryVariant1, 0x801101B0, 0x00000000, 0x00005E2D, 0x00010000, (unsigned int)addrLow_Playerai_ClearPlayerWeaponLock, (unsigned int)addrLow_Playerai_StartMovingSequenceState_eu_x, 0x80110010,
+    0x00008000, 0x00005E29, 0x00020000, (unsigned int)addrLow_Playerai_ResetPlayerWeaponLock, (unsigned int)addrLow_Playerai_StartStoppedSequenceState_eu_x, 0x80110010, 0x00008000, 0x00005E29,
+    0x00030000, (unsigned int)addrLow_Playerai_OffsetActorForState15_eu, (unsigned int)addrLow_Playerai_UpdateHazardDamageEntryVariant1, 0x80110458, 0x00000000, 0x000023F0, 0x00020000, (unsigned int)addrLow_Playerai_StartTargetFacingEntryVariant1_eu,
+    (unsigned int)addrLow_Playerai_UpdateTargetFacingEntryVariant1, 0x80110458, 0x00000000, 0x00005E24, 0x00020000, (unsigned int)addrLow_Playerai_StartRoundEndViewAngles_eu, (unsigned int)addrLow_Playerai_UpdateRoundEndViewAngles, 0x80110458,
+    0x00000000, 0x00005E24, 0x00020000, (unsigned int)addrLow_Playerai_StartRequestCinemaTrack_eu_x, (unsigned int)g_PlayerRequestCinemaTrackCallbackAddressUs, 0x80110458, 0x00000000, 0x00001B83,
     0x00020000, (unsigned int)addrLow_Playerai_StartPlayerSequence72_eu, (unsigned int)addrLow_Playerai_UpdateSequence72RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B84, 0x00010000, (unsigned int)addrLow_Playerai_StartPlayerSequence73_eu,
     (unsigned int)addrLow_Playerai_UpdateSequence73RunEndPose_eu, 0x801102F8, 0x00000000, 0x00001B85, 0x00010000, (unsigned int)g_Playerai_EnterMovingSequenceStateCallbackAddressDe, (unsigned int)addrLow_Playerai_UpdateSequence74RunEndPose_eu, 0x801102F8,
-    0x00000000, 0x00001B86, 0x00010000, (unsigned int)D_0022D594, (unsigned int)D_0022D59C, 0x80110458, 0x00000000, 0x00005B04,
+    0x00000000, 0x00001B86, 0x00010000, (unsigned int)addrLow_Playerai_StartEntry5B04_eu, (unsigned int)addrLow_Playerai_UpdateEntry5B04_eu, 0x80110458, 0x00000000, 0x00005B04,
     0x00020000, (unsigned int)addrLow_Playerai_SetRunEndFlagEntryVariant1, (unsigned int)addrLow_Playerai_UpdateRunEndTransition, 0x80110458, 0x00000000, 0x00005B05, 0x00020000, 0x0000012B,
     0x012B012B, 0x012B012B, 0x012B012B, 0x012B012B, 0x012B0000, 0xBE800000,
 };

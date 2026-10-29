@@ -34,17 +34,17 @@ s32 Nav_RebuildRequestedGoalRoute(void *controller) {
     if (base == 0) {
         return 1;
     }
-    requested = ((Func8020ED50Arg *)controller)->fieldC;
+    requested = ((NavigationRouteControllerView *)controller)->fieldC;
     if (requested == -1) {
         return 1;
     }
-    current = ((Func8020ED50Arg *)controller)->field4;
+    current = ((NavigationRouteControllerView *)controller)->field4;
     if (current == requested) {
         return 1;
     }
-    if (((Func8020ED50Arg *)controller)->committed == requested) {
-        link = ((Func8020ED50Arg *)controller)->links[0];
-        if (link != -1 && ((Func8020ED50Arg *)controller)->links[1] != -1) {
+    if (((NavigationRouteControllerView *)controller)->committed == requested) {
+        link = ((NavigationRouteControllerView *)controller)->links[0];
+        if (link != -1 && ((NavigationRouteControllerView *)controller)->links[1] != -1) {
             if (current == link) {
                 return 1;
             }
@@ -54,24 +54,24 @@ s32 Nav_RebuildRequestedGoalRoute(void *controller) {
         }
     }
     Portal_ResetSearchState(base);
-    if (((Func8020ED50Arg *)controller)->releaseFlags[0] != 0) {
+    if (((NavigationRouteControllerView *)controller)->releaseFlags[0] != 0) {
         Nav_SetLinkedActorNodeCosts(controller);
     }
-    if (((Func8020ED50Arg *)controller)->releaseFlags[1] != 0) {
+    if (((NavigationRouteControllerView *)controller)->releaseFlags[1] != 0) {
         Nav_AccumulateNodeTickCosts(controller);
     }
-    if (((Func8020ED50Arg *)controller)->releaseFlags[2] != 0) {
+    if (((NavigationRouteControllerView *)controller)->releaseFlags[2] != 0) {
         Nav_AddPickupCategoryCosts(controller);
     }
     Nav_SetPickupGoalWeights(controller);
     Route_ClearGoalList(base);
-    Nav_AddGoalNode(base, ((Func8020ED50Arg *)controller)->fieldC);
+    Nav_AddGoalNode(base, ((NavigationRouteControllerView *)controller)->fieldC);
     base[6] = -1;
-    Route_SearchPathByKey(base, ((Func8020ED50Arg *)controller)->field4);
-    Route_ReconstructSearchPath(base, &((Func8020ED50Arg *)controller)->links[0], 4);
-    ((Func8020ED50Arg *)controller)->linkState = 0;
-    ((Func8020ED50Arg *)controller)->selection = -1;
-    ((Func8020ED50Arg *)controller)->committed = ((Func8020ED50Arg *)controller)->fieldC;
+    Route_SearchPathByKey(base, ((NavigationRouteControllerView *)controller)->field4);
+    Route_ReconstructSearchPath(base, &((NavigationRouteControllerView *)controller)->links[0], 4);
+    ((NavigationRouteControllerView *)controller)->linkState = 0;
+    ((NavigationRouteControllerView *)controller)->selection = -1;
+    ((NavigationRouteControllerView *)controller)->committed = ((NavigationRouteControllerView *)controller)->fieldC;
     return 1;
 }
 
@@ -125,17 +125,17 @@ unsigned int k_PickupgoalEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020EDCC_C7BCC_us_rev1.c */
+/* ROM-grounded data: src/Nav_SetLinkedActorNodeCostsConstantWords_us_rev1.c */
 const unsigned int g_Nav_SetLinkedActorNodeCostsConstantWords_us_rev1[1] = {
     0x47480000,
 };
 
-/* ROM-grounded data: src/rw_pool_8020EE50_C7BD0_us_rev1.c */
+/* ROM-grounded data: src/Nav_AccumulateNodeTickCostsConstantWords.c */
 const unsigned int g_Nav_AccumulateNodeTickCostsConstantWords[1] = {
     0x4123D70A,
 };
 
-/* ROM-grounded data: src/rw_pool_8020EEA4_C7BD4_us_rev1.c */
+/* ROM-grounded data: src/Nav_AddPickupCategoryCostsConstantWords.c */
 const unsigned int g_Nav_AddPickupCategoryCostsConstantWords[1] = {
     0xC4199999,
 };

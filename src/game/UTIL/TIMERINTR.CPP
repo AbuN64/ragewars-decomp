@@ -2,7 +2,7 @@
 #include "UTIL/TIMERINTR.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "TYPES.H"
-#include "sdk/libgultra/libasm_802BBC68_19.h"
+#include "sdk/libgultra/Util_WriteProcessorCompare_Timerintr.h"
 #include "sdk/os.h"
 
 void Util_HandleTimerInterrupt(void)
@@ -68,7 +68,7 @@ void Util_InitializeTimerServices(void) {
     node->message = 0;
 }
 
-/* Arms the CP0 timer interrupt: with interrupts disabled through func_802BCF30_de, reads the Count
+/* Arms the CP0 timer interrupt: with interrupts disabled through __osDisableInt_Mutex, reads the Count
    register through Util_ReadProcessorCount into g_timerLastProcessorCount, sets the Compare register through
    Util_WriteProcessorCompare to that count plus the requested interval, then restores interrupts. */
 

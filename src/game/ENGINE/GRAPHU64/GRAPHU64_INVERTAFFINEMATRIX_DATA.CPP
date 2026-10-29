@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_8026EF58_CA3B0_us_rev1.c */
+/* ROM-grounded data: src/g_graphu64_InvertAffineMatrixConstantWords_Graphu64InvertaffinematrixData.c */
 const unsigned int g_graphu64_InvertAffineMatrixConstantWords[1] = {
     0x3F800000,
 };

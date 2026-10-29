@@ -38,12 +38,12 @@ s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *eventTarget, s32 eventId, s32
                 actor_kind = eventTarget->id;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_numericWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
+                    return (*(WidgetEventHandler *)entry)(eventTarget, eventId, eventCode, eventValue, repeatCount);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

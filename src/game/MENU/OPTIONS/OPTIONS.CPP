@@ -41,12 +41,12 @@ extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 
 extern OptionsCommitContext *g_optionsPage;
 /* Localized label pointers supplied to each option list. */
-extern u8 *D_800D3470_de[1];
+extern u8 *g_toggleListClearLabel[1];
 extern u8 *g_optionsFirstListPrimaryLabel;
 extern u8 *g_optionsFirstListSecondaryLabel;
-extern u8 *D_800D2134[1];
-extern u8 *D_800D2138;
-extern u8 *D_800D213C;
+extern u8 *g_optionsResolutionFirstChoiceLabels[1];
+extern u8 *g_optionsResolutionSecondChoiceLabels;
+extern u8 *g_optionsResolutionThirdChoiceLabels;
 
 extern void *Cache_AllocateMemory(s32);
 extern struct MenuFadeWidget *SmpFade_CreateFadeWidget(s32, s32);
@@ -72,7 +72,7 @@ s32 Options_CreateOptionsPage(void) {
     SmpButton_WrapButtonWidget(0x58);
     firstList = SmpButton_CreateListWidget(0x59, 0x5A);
     g_optionsPage->bloodModeList = firstList;
-    SmpButton_AppendListText(firstList, D_800D3470_de[0]);
+    SmpButton_AppendListText(firstList, g_toggleListClearLabel[0]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListPrimaryLabel);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListSecondaryLabel);
     settings = &g_gameSettings;
@@ -84,10 +84,10 @@ s32 Options_CreateOptionsPage(void) {
     SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
     thirdList = SmpButton_CreateListWidget(0x51, 0x52);
     g_optionsPage->resolutionList = thirdList;
-    SmpButton_AppendListText(thirdList, D_800D2134[0]);
+    SmpButton_AppendListText(thirdList, g_optionsResolutionFirstChoiceLabels[0]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D2138);
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D213C);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionSecondChoiceLabels);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionThirdChoiceLabels);
     }
     SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(0x53, 0x54, 0x80);
@@ -164,17 +164,17 @@ s32 Options_OpenOptionsScreen(void *node) {
     SmpButton_WrapButtonWidget(0x37C);
     firstListHandle = SmpButton_CreateListWidget(0x375, 0x376);
     g_optionsShortcutScreen->firstList = firstListHandle;
-    SmpButton_AppendListText(firstListHandle, D_800D3470_de[0]);
+    SmpButton_AppendListText(firstListHandle, g_toggleListClearLabel[0]);
     SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListPrimaryLabel);
     SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListSecondaryLabel);
     settings = &g_gameSettings;
     SmpButton_SelectListEntry(g_optionsShortcutScreen->firstList, settings->bloodMode);
     secondListHandle = SmpButton_CreateListWidget(0x378, 0x379);
     g_optionsShortcutScreen->secondList = secondListHandle;
-    SmpButton_AppendListText(secondListHandle, D_800D2134[0]);
+    SmpButton_AppendListText(secondListHandle, g_optionsResolutionFirstChoiceLabels[0]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D2138);
-        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D213C);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsResolutionSecondChoiceLabels);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsResolutionThirdChoiceLabels);
     }
     SmpButton_SelectListEntry(g_optionsShortcutScreen->secondList, settings->slots[7].secondListMode);
     slider = SmpSlider_CreateSliderWidget(0x37A, 0x37B, 0x80);
@@ -236,7 +236,7 @@ struct MenuResourceWidget;
 extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern Shared_OptionsScreen *g_optionsShortcutScreen;
 extern Shared_MenuReply g_selectionMessageReply;
-/* Localized label pointers for the memory-mode list (rev1 D_800D2134..D_800D213C). */
+/* Localized label pointers for the memory-mode list (rev1 g_optionsResolutionFirstChoiceLabels..g_optionsResolutionThirdChoiceLabels). */
 extern u8 *g_optionsSecondListPrimaryLabels[1];
 extern u8 *g_optionsSecondListSecondaryLabels;
 extern u8 *g_optionsSecondListTertiaryLabels;

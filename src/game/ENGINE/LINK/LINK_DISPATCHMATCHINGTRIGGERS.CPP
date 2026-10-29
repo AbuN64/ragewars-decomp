@@ -327,7 +327,7 @@ s32 Link_CheckTriggerMessage(void *trigger, struct Player *player) {
 }
 
 /* 800C9C20.CPP */
-/* ROM-grounded data: src/rw_pool_80278C10_CA820_us_rev1.c */
+/* ROM-grounded data: src/g_LinkDispatchmatchingtriggersWords1_us_rev1.c */
 const unsigned int g_LinkDispatchmatchingtriggersWords1[1] = {
     0x40800000,
 };

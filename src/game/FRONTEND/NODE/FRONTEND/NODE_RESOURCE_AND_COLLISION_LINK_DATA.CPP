@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "DATA/OVL4DAT/DATA_8044F354.H"
+#include "DATA/OVL4DAT/k_NodeResourceAndCollisionLinkEncodedWords_NodeResourceAndCollisionLinkData.H"
 
 /* 8040B45C_41.CPP */
 #if defined(VERSION_US)
@@ -12,7 +12,7 @@ unsigned int func_80412CDC_de_padding_180D5C[1] = {
 unsigned char g_NodeResourceAndCollisionLinkTrailingBytes[4] = { 0x27, 0xBD, 0x00, 0x18 };
 #endif
 
-/* DATA_8044BB18.CPP */
+/* g_collisionSetupTable_NodeResourceAndCollisionLinkData.CPP */
 #if defined(VERSION_EU)
 #include "COMMON/CCOLLISIONSETUP_T.H"
 
@@ -62,7 +62,7 @@ CCollisionSetup_t g_collisionSetupTable[36] = {
 };
 #endif
 
-/* DATA_8044F354.CPP */
+/* k_NodeResourceAndCollisionLinkEncodedWords_NodeResourceAndCollisionLinkData.CPP */
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
 unsigned int k_NodeResourceAndCollisionLinkEncodedWords[3] = {

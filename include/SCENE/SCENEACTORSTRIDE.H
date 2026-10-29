@@ -4,7 +4,7 @@
 
 typedef struct Shared_SceneActorStride Shared_SceneActorStride;
 struct Shared_SceneActorStride {
-    u8 bytes[744]; /* +0x0: src/func_80286A78.c */
+    u8 bytes[744]; /* +0x0: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char Shared_SceneActorStride_size_check[(sizeof(Shared_SceneActorStride) == 0x2E8) ? 1 : -1];
 

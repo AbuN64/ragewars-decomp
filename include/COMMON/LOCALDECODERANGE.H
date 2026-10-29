@@ -74,7 +74,7 @@ struct Anim {
 
 
 
-struct Entry802612C8;
+struct MotionPackHeader;
 
 struct Anim;
 typedef struct Anim Anim;
@@ -83,8 +83,8 @@ struct Pack;
 typedef struct Pack Pack;
 
 
-struct Entry802612C8;
-typedef struct Entry802612C8 Entry802612C8;
+struct MotionPackHeader;
+typedef struct MotionPackHeader MotionPackHeader;
 
 extern float g_motionRotationDecodeLimit;
 

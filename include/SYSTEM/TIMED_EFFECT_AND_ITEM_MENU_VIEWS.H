@@ -84,14 +84,14 @@ struct AttachedEffectTimerView {
     char padC[0x10 - 0xC - sizeof(f32)];
     s32 remainingCalls;
 };
-struct MenuCode802A6AC0 {
+struct ItemMenuCursorState {
     EntryItemMenuAdvanceSelection entries[4];
     char padE0[0xE4 - 0xE0];
     u16 cursor;
 };
 struct AttachedEffectDetachState {
     u8 pad0[8];
-    Node802A697C *node;
+    EffectBoneNode *node;
     u8 padC[0x10];
     void *object;
     u8 pad20[4];

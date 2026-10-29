@@ -1,6 +1,6 @@
 
 
-/* func_80202838_de.s */
+/* Libgultra_ReturnFromDebugException_LibgultraTrwexceptionreturnandcontextsave.s */
 .set noreorder
 .set noat
 .set gp=64
@@ -10,24 +10,24 @@
 Libgultra_ReturnFromDebugException:
     lw $at, 0x33C($k0)
     nop
-    bnez $at, .Lfunc_80202838_de_13C
+    bnez $at, .LReturnFromDebugExceptionTail
     nop
     addiu $at, $zero, 0x64
-.Lfunc_80202838_de_014:
-    bnez $at, .Lfunc_80202838_de_014
+.LReturnFromDebugExceptionDelayLoop:
+    bnez $at, .LReturnFromDebugExceptionDelayLoop
     addi $at, $at, -0x1
     lui $at, 0xA460
     ori $at, $at, 0x10
-.Lfunc_80202838_de_024:
+.LReturnFromDebugExceptionWaitPiIdle:
     lw $v0, 0x0($at)
     nop
     andi $v0, $v0, 0x3
-    bnez $v0, .Lfunc_80202838_de_024
+    bnez $v0, .LReturnFromDebugExceptionWaitPiIdle
     nop
-    lui $at, %hi(D_B1FFFFF0)
-    lw $at, %lo(D_B1FFFFF0)($at)
+    lui $at, %hi(g_debugCartridgeExceptionCheckRegister)
+    lw $at, %lo(g_debugCartridgeExceptionCheckRegister)($at)
     nop
-    beqz $at, .Lfunc_80202838_de_13C
+    beqz $at, .LReturnFromDebugExceptionTail
     nop
     bgez $zero, Libgultra_TrwExceptionHandler+0x1B8
     nop
@@ -42,35 +42,35 @@ Libgultra_ReturnFromDebugException:
     sd $v1, 0x18($k0)
     sd $a0, 0x20($k0)
     sd $ra, 0xF8($k0)
-    bal .Lfunc_80202838_de_098
+    bal .LReturnFromDebugExceptionRestoreVectors
     nop
     ld $ra, 0xF8($k0)
     ld $a0, 0x20($k0)
-    bgez $zero, .Lfunc_80202838_de_13C
+    bgez $zero, .LReturnFromDebugExceptionTail
     ld $v1, 0x18($k0)
-.Lfunc_80202838_de_098:
+.LReturnFromDebugExceptionRestoreVectors:
     lui $v1, 0x8000
     ori $v1, $v1, 0x180
     lui $v0, %hi(Libgultra_SavedExceptionVectorAddress)
     addiu $v0, $v0, %lo(Libgultra_SavedExceptionVectorAddress)
     addi $a0, $v0, 0x14
-.Lfunc_80202838_de_0AC:
+.LReturnFromDebugExceptionCopyGeneralVector:
     lw $at, 0x0($v0)
     addi $v0, $v0, 0x4
     sw $at, 0x0($v1)
     addi $v1, $v1, 0x4
-    bne $v0, $a0, .Lfunc_80202838_de_0AC
+    bne $v0, $a0, .LReturnFromDebugExceptionCopyGeneralVector
     nop
     lui $v1, %hi(g_tlbMissExceptionVector)
     lui $v0, %hi(Libgultra_SavedTlbVectorAddress)
     addiu $v0, $v0, %lo(Libgultra_SavedTlbVectorAddress)
     addi $a0, $v0, 0x14
-.Lfunc_80202838_de_0D4:
+.LReturnFromDebugExceptionCopyTlbVector:
     lw $at, 0x0($v0)
     addi $v0, $v0, 0x4
     sw $at, %lo(g_tlbMissExceptionVector)($v1)
     addi $v1, $v1, 0x4
-    bne $v0, $a0, .Lfunc_80202838_de_0D4
+    bne $v0, $a0, .LReturnFromDebugExceptionCopyTlbVector
     nop
     jal Libgultra_TrwCacheFlush0
     nop
@@ -79,7 +79,7 @@ Libgultra_ReturnFromDebugException:
     jr $ra
     nop
     sw $a0, 0x338($k0)
-    j .Lfunc_80202838_de_13C
+    j .LReturnFromDebugExceptionTail
     nop
     mfc0 $at, $14
     nop
@@ -90,11 +90,11 @@ Libgultra_ReturnFromDebugException:
     nop
     lui $v0, %hi(Libsn_InitializeHostMemoryAccess_Address)
     addiu $v0, $v0, %lo(Libsn_InitializeHostMemoryAccess_Address)
-    j .Lfunc_80202838_de_140
+    j .LReturnFromDebugExceptionAdvanceEpc
     nop
-.Lfunc_80202838_de_13C:
+.LReturnFromDebugExceptionTail:
     ld $v0, 0x330($k0)
-.Lfunc_80202838_de_140:
+.LReturnFromDebugExceptionAdvanceEpc:
     mfc0 $at, $14
     nop
     addiu $at, $at, 0x4

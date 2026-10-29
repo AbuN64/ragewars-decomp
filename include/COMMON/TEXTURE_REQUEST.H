@@ -9,7 +9,7 @@ extern char D_auto_00295B90;
 extern char s_textureText[];
 #else
 extern char addrLow_Textload_PrepareTextureVariation;
-extern char D_800C54F0_de[];
+extern char s_textureText_TextureRequest[];
 #endif
 /* Request the texture resource for this bank and variation. */
 static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wait)
@@ -25,7 +25,7 @@ static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wai
 #else
     return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                           resource[0], resource[1], 0, variation,
-                          &addrLow_Textload_PrepareTextureVariation, D_800C54F0_de, wait);
+                          &addrLow_Textload_PrepareTextureVariation, s_textureText_TextureRequest, wait);
 #endif
 }
 
@@ -43,7 +43,7 @@ static __inline__ void **rw_request_texture_sync(s32 *resource, s32 variation)
 #else
     return Cache_RequestResource(0, resource[0] + variation + g_texturePaletteOverrideEnabled * 128,
                           resource[0], resource[1], 0, variation,
-                          &addrLow_Textload_PrepareTextureVariation, D_800C54F0_de, 1);
+                          &addrLow_Textload_PrepareTextureVariation, s_textureText_TextureRequest, 1);
 #endif
 }
 #endif

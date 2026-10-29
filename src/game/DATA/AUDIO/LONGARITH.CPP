@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800C6AD8.CPP */
+/* longArithmeticFloatConstantsUsRevData.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_longArithmeticFloatConstantsUsRev1[5] = {
     0x41000000, 0x41B80000, 0x00000000, 0x3F800000, 0x00000000,

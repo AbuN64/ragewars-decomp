@@ -41,7 +41,7 @@ void Player_DrawPlayerModel(void *player, void *camera) {
 
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
-    pos.y += Gobjinst_GetActorHeight(player) * ((ScalarPair *)&D_800C22B0_us)->second;
+    pos.y += Gobjinst_GetActorHeight(player) * ((ScalarPair *)&g_playerHeightScalePair_us)->second;
     Scene_SampleWorldLighting(&g_world, &pos,
                   &((LevelActor *)player)->lighting[g_lightingBufferIndex]);
 

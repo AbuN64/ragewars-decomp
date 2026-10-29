@@ -9,7 +9,7 @@ struct PresetTable {
 };
 struct WeaponUnlockPlayerView {
     char p[0x18];
-    func_8024DED0_S2 *model;
+    WeaponUnlockModelView *model;
     char p2[0x5bc];
     struct WeaponUnlockProfileView *profile;
     char p3[0x26];

@@ -59,12 +59,12 @@ s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *player, MultiChannelItemEffect
 void *Pickup_FindBonusEntry(s32 bonusId) {
     char *v1;
     s32 i;
-    Shared_struct_D_800D34C0_0x18 *record;
+    Shared_PickupAmmoDefinition *record;
 
     v1 = (char *)g_pickupAmmoDefinitions;
     i = 0xF;
     do {
-        record = (Shared_struct_D_800D34C0_0x18 *)v1;
+        record = (Shared_PickupAmmoDefinition *)v1;
         i -= 1;
         if (record->id != bonusId) {
             v1 += 0x18;
@@ -123,7 +123,7 @@ s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *actorView) {
     return 1;
 }
 
-/* CODE_802AE254.CPP */
+/* PickupHandleItemUpdateUnit.CPP */
 /** Return the one status used by callers. */
 int Pickup_HandleItemUpdate(void) {
     return 1;

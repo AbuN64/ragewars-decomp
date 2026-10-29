@@ -3,7 +3,7 @@
 typedef struct SceneLoadedResourceView SceneLoadedResourceView;
 struct SceneLoadedResourceView {
     char pad0[0x1B664];
-    void * loadedResource; /* +0x1B664: src/func_80286A78.c */
+    void * loadedResource; /* +0x1B664: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char SceneLoadedResourceViewSizeCheck[(sizeof(SceneLoadedResourceView) == 0x1B668) ? 1 : -1];
 #endif

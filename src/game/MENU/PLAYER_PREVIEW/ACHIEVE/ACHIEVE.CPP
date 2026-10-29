@@ -13,7 +13,7 @@ const unsigned char rodata_func_8043829C_de_800DCBC4[3] = {
 unsigned char g_AchieveTrailingBytes[4] = { 0x24, 0x05, 0x00, 0x04 };
 #endif
 
-/* DATA_80444F98.CPP */
+/* k_AchieveEncodedWords_Achieve.CPP */
 #if defined(VERSION_US)
 unsigned int k_AchieveEncodedWords[1110] = {
     0x0000000F, 0x534D5F41, 0x27BDFFE8, 0xAFBF0010, 0x0C09789D, 0x2404FFFF, 0x0C0978C9, 0x00000000,
@@ -161,14 +161,14 @@ unsigned int k_AchieveEncodedWords[1110] = {
 /* 8042E080_19.CPP */
 
 #if defined(VERSION_EU_X)
-const unsigned char rodata_func_8043829C_de_800E9754[3] = {
+const unsigned char g_resultPreviewNumberFormatEuX[3] = {
     0x25, 0x64, 0x00,
 };
 #endif
 
 /* 800E1F40.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_constants_80437C28_us_rev1_E2B40_us_rev1.c */
+/* ROM-grounded data: src/k_AchieveEncodedWordsBlock1_Achieve.c */
 const unsigned int k_AchieveEncodedWordsBlock1[1] = {
     0x3D888889,
 };
@@ -183,7 +183,7 @@ const unsigned char k_AchieveEncodedBytes[3] = {
 /* 8042E080_20.CPP */
 
 #if defined(VERSION_EU)
-const unsigned char rodata_func_8043829C_de_800EE594[3] = {
+const unsigned char g_resultPreviewNumberFormatEu[3] = {
     0x25, 0x64, 0x00,
 };
 #endif

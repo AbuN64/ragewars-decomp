@@ -16,7 +16,7 @@ unsigned int g_actorCurrentInterpolationUnitUsRev1[1] = {
 };
 #endif
 
-/* CODE_80245D20.CPP */
+/* GameObject_ApplyMaterialCurrents_GameobjectMovetoxzkeepheight.CPP */
 extern void Insthdr_ResetInstanceRenderIndices(signed char *prop);
 
 extern f32 g_materialCurrentStrengthScales[];
@@ -170,7 +170,7 @@ void GameObject_ResetActorMotion(void *levelActor) {
     ((LevelActor *)levelActor)->floorDirection.y = k;
 }
 
-extern CollisionInfo8020CD74 g_portalAlternateCollisionQuery;
+extern CollisionQuery g_portalAlternateCollisionQuery;
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
 extern s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, s32 *);
 

@@ -73,7 +73,7 @@ loop_3:
     return dmaResult;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_QueryControllerPresence);
+INCLUDE_ASM("ovl_frontendMenu", Items_QueryControllerPresence);
 #endif
 #endif
 

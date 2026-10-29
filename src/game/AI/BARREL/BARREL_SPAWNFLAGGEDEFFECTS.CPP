@@ -73,7 +73,7 @@ void Barrel_FillWordPair(int *value, int word) {
 
 /* 80213ED4_22.CPP */
 /** Read the next u16 from the cursor stream, wrapping back to base on the -1 sentinel. */
-s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *sequence) {
+s16 Barrel_ReadLoopingSequenceValue(BarrelSequenceCursor *sequence) {
     u16 *cur;
     u16 value;
 
@@ -116,7 +116,7 @@ f32 Barrel_GetFlatDistanceSquared(LevelActor *actor, CVector3 point)
     return dx * dx + dz * dz;
 }
 
-void Barrel_IgnoreEffectCallback(void *unused0, void *unused1, Func802172C4Value unused2) {
+void Barrel_IgnoreEffectCallback(void *unused0, void *unused1, BarrelWordPair unused2) {
 }
 
 extern void *SoundVoicePool_GetGlobalState(void);
@@ -205,7 +205,7 @@ void Barrel_FindOffsetApproachPosition(void *actor, s32 unused, void *target, Pl
     InstHdr_CopyActorPositionAndModel(target, position, positionOut, modelFlagsOut, 0, 0);
 }
 
-void Barrel_ClearTargetInfo(Shared_ActorView *actorView, void *unused1, Output80216D3C *targetInfo) {
+void Barrel_ClearTargetInfo(Shared_ActorView *actorView, void *unused1, BarrelTargetInfo *targetInfo) {
     Triple local1;
     Triple local2;
 

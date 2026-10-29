@@ -14,14 +14,14 @@
 
 
 
-extern struct Data801462C8 g_gameSettings;
-extern s8 g_activeProfileCharacterSelections[]; /* MIXED: this unit views g_gameSettings as Data801462C8 */
+extern struct GameSettingsModeStatusView g_gameSettings;
+extern s8 g_activeProfileCharacterSelections[]; /* MIXED: this unit views g_gameSettings as GameSettingsModeStatusView */
 extern struct ScreenFrontendMarkLinkedTrialsAvailable *g_trialCatalogueScreen;
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 
 void Results_MarkLinkedTrialsAvailable(void *trialBits) {
-    struct Data801462C8 *globals;
+    struct GameSettingsModeStatusView *globals;
     struct TableFrontendMarkLinkedTrialsAvailable *table;
     unsigned int category;
     s32 kind;
@@ -29,7 +29,7 @@ void Results_MarkLinkedTrialsAvailable(void *trialBits) {
     s32 i;
 
     category=(unsigned int)&g_gameSettings;
-    globals=(struct Data801462C8 *)category;
+    globals=(struct GameSettingsModeStatusView *)category;
     switch (globals->mode) {
     case 1:
         kind = globals->status[g_trialCatalogueScreen->player].kind;

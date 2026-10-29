@@ -69,7 +69,7 @@ __osDispatchThread:
     mtc0 $k1, $14
     lw $k1, 0x18($k0)
     nop
-    beqz $k1, .Lfunc_802BC850_eu_x_1AC
+    beqz $k1, .LdispatchRestoreRcpMask
     nop
     lw $k1, 0x12C($k0)
     nop
@@ -94,7 +94,7 @@ __osDispatchThread:
     nop
     srl $k1, $k1, 16
     andi $k1, $k1, 0x400
-    beqz $k1, .Lfunc_802BC850_eu_x_1AC
+    beqz $k1, .LdispatchRestoreRcpMask
     nop
     ldc1 $f1, 0x1B0($k0)
     ldc1 $f3, 0x1B8($k0)
@@ -112,7 +112,7 @@ __osDispatchThread:
     ldc1 $f27, 0x218($k0)
     ldc1 $f29, 0x220($k0)
     ldc1 $f31, 0x228($k0)
-.Lfunc_802BC850_eu_x_1AC:
+.LdispatchRestoreRcpMask:
     lw $k1, 0x128($k0)
     lui $k0, %hi(g_globalInterruptMask)
     addiu $k0, $k0, %lo(g_globalInterruptMask)
@@ -141,17 +141,17 @@ __osDispatchThread:
     lw $v1, %lo(g_currentDiskPeripheralHandle)($v1)
 .elseif VERSION_EU
     addiu $s2, $zero, 0xFF
-    beq $v0, $s2, .Lfunc_802BC850_eu_x_280
+    beq $v0, $s2, .LdiskPostEventMessage
     nop
 .elseif VERSION_US
     nop
     .word 0x00134348 # jr $zero # 00134340 <InstrIdType: CPU_SPECIAL>
     daddiu $at, $t3, 0x6C74
 .else
-    beqz $v0, .Lfunc_802BC850_eu_x_210
+    beqz $v0, .LdiskEntrySkipMove
     addiu $s0, $zero, 0x20
     addu $s0, $s1, $zero
-.Lfunc_802BC850_eu_x_210:
+.LdiskEntrySkipMove:
 .endif
     addiu $sp, $sp, -0x30
     lui $a1, 0xA460
@@ -172,7 +172,7 @@ __osDispatchThread:
     sll $v0, $v0, 2
     addiu $v0, $v0, 0x18
     andi $v1, $v1, 0x1
-    beqz $v1, .Lfunc_802BC850_eu_x_290
+    beqz $v1, .LdiskPiIdleRecheck
     addu $s0, $s1, $v0
     addiu $v0, $zero, 0x1D
     lui $a0, %hi(g_globalInterruptMask)
@@ -182,51 +182,51 @@ __osDispatchThread:
     addiu $v1, $zero, -0x801
     and $v0, $v0, $v1
 .if VERSION_EU
-.Lfunc_802BC850_eu_x_280:
+.LdiskPostEventMessage:
 .endif
     jal Audio_PostDiskEventMessage
     sw $v0, 0x0($a0)
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     addiu $v0, $zero, 0x1
-.Lfunc_802BC850_eu_x_290:
+.LdiskPiIdleRecheck:
     lw $v0, 0x0($a1)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    beqz $v0, .Lfunc_802BC850_eu_x_2C8
+    beqz $v0, .LdiskReadAsicStatus
     lui $v0, 0xA500
     lui $v1, 0xA460
     ori $v1, $v1, 0x10
-.Lfunc_802BC850_eu_x_2B0:
+.LdiskPiIdleSpinBeforeAsicRead:
     lw $v0, 0x0($v1)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    bnez $v0, .Lfunc_802BC850_eu_x_2B0
+    bnez $v0, .LdiskPiIdleSpinBeforeAsicRead
     lui $v0, 0xA500
-.Lfunc_802BC850_eu_x_2C8:
+.LdiskReadAsicStatus:
     ori $v0, $v0, 0x508
     lw $s2, 0x0($v0)
     lui $v0, 0x200
     and $v0, $s2, $v0
-    beqz $v0, .Lfunc_802BC850_eu_x_33C
+    beqz $v0, .LdiskCheckHandleState
     lui $v0, 0xA460
     ori $v0, $v0, 0x10
     lw $v0, 0x0($v0)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    beqz $v0, .Lfunc_802BC850_eu_x_318
+    beqz $v0, .LdiskWriteBmControl
     lui $v1, 0xA460
     ori $v1, $v1, 0x10
-.Lfunc_802BC850_eu_x_300:
+.LdiskPiIdleSpinBeforeBmWrite:
     lw $v0, 0x0($v1)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    bnez $v0, .Lfunc_802BC850_eu_x_300
+    bnez $v0, .LdiskPiIdleSpinBeforeBmWrite
     nop
-.Lfunc_802BC850_eu_x_318:
+.LdiskWriteBmControl:
     lui $a1, 0xA500
     ori $a1, $a1, 0x510
     lw $a0, 0x10($s1)
@@ -234,33 +234,33 @@ __osDispatchThread:
     sw $zero, 0x0($s0)
     or $a0, $a0, $v1
     sw $a0, 0x0($a1)
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     addu $v0, $zero, $zero
-.Lfunc_802BC850_eu_x_33C:
+.LdiskCheckHandleState:
     lw $v1, 0x0($s1)
     addiu $a2, $zero, 0x2
-    beq $v1, $a2, .Lfunc_802BC850_eu_x_708
+    beq $v1, $a2, .LdiskReturn
     addiu $v0, $zero, 0x1
     lui $v0, 0x800
     and $v0, $s2, $v0
-    beqz $v0, .Lfunc_802BC850_eu_x_3E0
+    beqz $v0, .LdiskCheckStateIsOne
     lui $v0, 0xA460
     ori $v0, $v0, 0x10
     lw $v0, 0x0($v0)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    beqz $v0, .Lfunc_802BC850_eu_x_394
+    beqz $v0, .LdiskPostErrorEvent
     lui $v1, 0xA460
     ori $v1, $v1, 0x10
-.Lfunc_802BC850_eu_x_37C:
+.LdiskPiIdleSpinBeforeErrorEvent:
     lw $v0, 0x0($v1)
     sw $v0, 0x18($sp)
     lw $v0, 0x18($sp)
     andi $v0, $v0, 0x3
-    bnez $v0, .Lfunc_802BC850_eu_x_37C
+    bnez $v0, .LdiskPiIdleSpinBeforeErrorEvent
     nop
-.Lfunc_802BC850_eu_x_394:
+.LdiskPostErrorEvent:
     lui $v0, 0xA500
     ori $v0, $v0, 0x508
     lw $s2, 0x0($v0)
@@ -278,14 +278,14 @@ __osDispatchThread:
     addiu $a0, $zero, 0x2
     sw $a0, 0x0($a3)
     or $v1, $v1, $a2
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     sw $v1, 0x0($a1)
-.Lfunc_802BC850_eu_x_3E0:
+.LdiskCheckStateIsOne:
     addiu $v0, $zero, 0x1
-    bne $v1, $v0, .Lfunc_802BC850_eu_x_498
+    bne $v1, $v0, .LdiskCheckStateIsZero
     lui $v0, 0x4000
     and $v0, $s2, $v0
-    bnez $v0, .Lfunc_802BC850_eu_x_454
+    bnez $v0, .LdiskAdvanceDmaBuffer
     addiu $a1, $zero, 0x1
     lw $a0, 0x8($s1)
     lhu $v1, 0x4($s1)
@@ -294,7 +294,7 @@ __osDispatchThread:
     addu $v0, $v0, $v1
     sll $v1, $v0, 4
     addu $v0, $v0, $v1
-    bne $a0, $v0, .Lfunc_802BC850_eu_x_6F8
+    bne $a0, $v0, .LdiskStoreStatusCode
     addiu $v0, $zero, 0x18
     lui $a0, 0xA460
     ori $a0, $a0, 0x10
@@ -308,9 +308,9 @@ __osDispatchThread:
     or $v0, $v0, $a1
     jal Audio_PostDiskEventMessage
     sw $v0, 0x0($v1)
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     addiu $v0, $zero, 0x1
-.Lfunc_802BC850_eu_x_454:
+.LdiskAdvanceDmaBuffer:
     lw $v0, 0x4($s0)
     lw $v1, 0xC($s0)
     addu $v0, $v0, $v1
@@ -326,84 +326,84 @@ __osDispatchThread:
     lw $a3, 0x4($s0)
     jal __osEPiRawStartDma
     ori $a2, $a2, 0x400
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     addiu $v0, $zero, 0x1
-.Lfunc_802BC850_eu_x_498:
-    bnez $v1, .Lfunc_802BC850_eu_x_6F8
+.LdiskCheckStateIsZero:
+    bnez $v1, .LdiskStoreStatusCode
     addiu $v0, $zero, 0x4
     lhu $v1, 0x4($s1)
     addiu $v0, $zero, 0x3
-    bne $v1, $v0, .Lfunc_802BC850_eu_x_4E4
+    bne $v1, $v0, .LdiskAdvanceBufferOffset
     nop
     lw $v0, 0x10($s0)
     lw $v1, 0x8($s1)
     addiu $v0, $v0, 0x11
     slt $v0, $v0, $v1
-    beqz $v0, .Lfunc_802BC850_eu_x_4D0
+    beqz $v0, .LdiskCheckAsicBit30
     lui $v0, 0x4000
-    j .Lfunc_802BC850_eu_x_6FC
+    j .LdiskAbortTransfer
     sw $zero, 0x0($s0)
-.Lfunc_802BC850_eu_x_4D0:
+.LdiskCheckAsicBit30:
     and $v0, $s2, $v0
-    bnez $v0, .Lfunc_802BC850_eu_x_4F8
+    bnez $v0, .LdiskReadBmStatus
     lui $v0, 0xA500
-    j .Lfunc_802BC850_eu_x_6F8
+    j .LdiskStoreStatusCode
     addiu $v0, $zero, 0x17
-.Lfunc_802BC850_eu_x_4E4:
+.LdiskAdvanceBufferOffset:
     lw $v0, 0x4($s0)
     lw $v1, 0xC($s0)
     addu $v0, $v0, $v1
     sw $v0, 0x4($s0)
     lui $v0, 0xA500
-.Lfunc_802BC850_eu_x_4F8:
+.LdiskReadBmStatus:
     ori $v0, $v0, 0x510
     lw $a0, 0x0($v0)
     lui $v1, 0x60
     and $v0, $a0, $v1
-    beq $v0, $v1, .Lfunc_802BC850_eu_x_51C
+    beq $v0, $v1, .LdiskCheckRetryCount
     lui $v0, 0x200
     and $v0, $a0, $v0
-    beqz $v0, .Lfunc_802BC850_eu_x_574
+    beqz $v0, .LdiskCheckAsicBit28
     lui $v0, 0x1000
-.Lfunc_802BC850_eu_x_51C:
+.LdiskCheckRetryCount:
     lw $v1, 0x10($s0)
     sltiu $v0, $v1, 0x4
-    bnez $v0, .Lfunc_802BC850_eu_x_554
+    bnez $v0, .LdiskStoreBlockIndex
     sll $v1, $v1, 2
     lhu $v1, 0x4($s1)
     addiu $v0, $zero, 0x3
-    bne $v1, $v0, .Lfunc_802BC850_eu_x_6F8
+    bne $v1, $v0, .LdiskStoreStatusCode
     addiu $v0, $zero, 0x17
     lw $v0, 0x8($s1)
     slti $v0, $v0, 0x53
-    bnez $v0, .Lfunc_802BC850_eu_x_564
+    bnez $v0, .LdiskIncrementRetryCount
     addiu $v0, $zero, 0x17
-    j .Lfunc_802BC850_eu_x_6FC
+    j .LdiskAbortTransfer
     sw $v0, 0x0($s0)
-.Lfunc_802BC850_eu_x_554:
+.LdiskStoreBlockIndex:
     lw $v0, 0x8($s1)
     addu $v1, $s0, $v1
     addiu $v0, $v0, 0x1
     sw $v0, 0x14($v1)
-.Lfunc_802BC850_eu_x_564:
+.LdiskIncrementRetryCount:
     lw $v0, 0x10($s0)
     addiu $v0, $v0, 0x1
     sw $v0, 0x10($s0)
     lui $v0, 0x1000
-.Lfunc_802BC850_eu_x_574:
+.LdiskCheckAsicBit28:
     and $v0, $s2, $v0
-    beqz $v0, .Lfunc_802BC850_eu_x_630
+    beqz $v0, .LdiskCheckBlockCounterReset
     addiu $v1, $zero, 0x58
     lw $v0, 0x8($s1)
     addiu $v0, $v0, 0x1
-    beq $v0, $v1, .Lfunc_802BC850_eu_x_598
+    beq $v0, $v1, .LdiskCheckTransferKind
     addiu $v0, $zero, 0x18
     jal Audio_AbortDiskTransfer
     sw $v0, 0x0($s0)
-.Lfunc_802BC850_eu_x_598:
+.LdiskCheckTransferKind:
     lw $v1, 0x4($s1)
     lui $v0, 0x2
-    bne $v1, $v0, .Lfunc_802BC850_eu_x_5D4
+    bne $v1, $v0, .LdiskResetPiStatus
     lui $a1, 0xA460
     lw $v1, 0x40($s1)
     lw $a0, 0x48($s1)
@@ -414,9 +414,9 @@ __osDispatchThread:
     addiu $v0, $zero, 0x16
     subu $v1, $v1, $a0
     sw $v1, 0x40($s1)
-    j .Lfunc_802BC850_eu_x_604
+    j .LdiskStartDmaFromBuffer
     sw $v0, 0x0($s0)
-.Lfunc_802BC850_eu_x_5D4:
+.LdiskResetPiStatus:
     ori $a1, $a1, 0x10
     lui $a2, 0x10
     ori $a2, $a2, 0x401
@@ -429,7 +429,7 @@ __osDispatchThread:
     sw $zero, 0x0($s0)
     or $v1, $v1, $a2
     sw $v1, 0x0($a0)
-.Lfunc_802BC850_eu_x_604:
+.LdiskStartDmaFromBuffer:
     addu $a1, $zero, $zero
     lw $v0, 0xC($s0)
     lui $a0, %hi(g_currentDiskPeripheralHandle)
@@ -439,19 +439,19 @@ __osDispatchThread:
     lw $a3, 0x8($s0)
     jal __osEPiRawStartDma
     lui $a2, 0x500
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     addiu $v0, $zero, 0x1
-.Lfunc_802BC850_eu_x_630:
+.LdiskCheckBlockCounterReset:
     lw $v1, 0x8($s1)
     addiu $v0, $zero, -0x1
-    bne $v1, $v0, .Lfunc_802BC850_eu_x_694
+    bne $v1, $v0, .LdiskAdvanceBlockCounter
     lui $v1, 0x2
     lw $v0, 0x4($s1)
     ori $v1, $v1, 0x1
-    bne $v0, $v1, .Lfunc_802BC850_eu_x_694
+    bne $v0, $v1, .LdiskAdvanceBlockCounter
     nop
     lw $v0, 0x28($s1)
-    bnez $v0, .Lfunc_802BC850_eu_x_68C
+    bnez $v0, .LdiskPostEventClearSlot
     addiu $a1, $s1, 0x18
     lw $v1, 0x8($a1)
     lw $v0, 0x0($v1)
@@ -461,26 +461,26 @@ __osDispatchThread:
     lw $v1, 0xC($v1)
     or $v0, $v0, $a0
     or $v0, $v0, $v1
-    beqz $v0, .Lfunc_802BC850_eu_x_68C
+    beqz $v0, .LdiskPostEventClearSlot
     addiu $v0, $zero, 0x18
-    j .Lfunc_802BC850_eu_x_6FC
+    j .LdiskAbortTransfer
     sw $v0, 0x18($s1)
-.Lfunc_802BC850_eu_x_68C:
+.LdiskPostEventClearSlot:
     jal Audio_PostDiskEventMessage
     sw $zero, 0x0($a1)
-.Lfunc_802BC850_eu_x_694:
+.LdiskAdvanceBlockCounter:
     lw $v0, 0x8($s1)
     addiu $v1, $v0, 0x1
     lui $v0, 0x4000
     and $v0, $s2, $v0
-    beqz $v0, .Lfunc_802BC850_eu_x_6EC
+    beqz $v0, .LdiskCheckBlockLimit
     sw $v1, 0x8($s1)
     slti $v0, $v1, 0x55
-    bnez $v0, .Lfunc_802BC850_eu_x_6C0
+    bnez $v0, .LdiskRestartDma
     addu $a1, $zero, $zero
-    j .Lfunc_802BC850_eu_x_6F8
+    j .LdiskStoreStatusCode
     addiu $v0, $zero, 0x18
-.Lfunc_802BC850_eu_x_6C0:
+.LdiskRestartDma:
     lui $a0, %hi(g_currentDiskPeripheralHandle)
     lw $a0, %lo(g_currentDiskPeripheralHandle)($a0)
     lw $v0, 0xC($s0)
@@ -490,20 +490,20 @@ __osDispatchThread:
     jal __osEPiRawStartDma
     ori $a2, $a2, 0x400
     addiu $v0, $zero, 0x1
-    j .Lfunc_802BC850_eu_x_708
+    j .LdiskReturn
     sw $zero, 0x0($s0)
-.Lfunc_802BC850_eu_x_6EC:
+.LdiskCheckBlockLimit:
     slti $v0, $v1, 0x55
-    beqz $v0, .Lfunc_802BC850_eu_x_704
+    beqz $v0, .LdiskReturnOne
     addiu $v0, $zero, 0x18
-.Lfunc_802BC850_eu_x_6F8:
+.LdiskStoreStatusCode:
     sw $v0, 0x0($s0)
-.Lfunc_802BC850_eu_x_6FC:
+.LdiskAbortTransfer:
     jal Audio_AbortDiskTransfer
     nop
-.Lfunc_802BC850_eu_x_704:
+.LdiskReturnOne:
     addiu $v0, $zero, 0x1
-.Lfunc_802BC850_eu_x_708:
+.LdiskReturn:
     lw $ra, 0x2C($sp)
     lw $s2, 0x28($sp)
     lw $s1, 0x24($sp)

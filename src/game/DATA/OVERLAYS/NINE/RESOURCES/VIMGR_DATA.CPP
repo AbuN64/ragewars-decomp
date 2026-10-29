@@ -16,13 +16,13 @@ unsigned int g_VimgrPointerWords1[1] = {
     (unsigned int)g_Frontend_InitPlayModeMenuPackedAddress242,
 };
 
-extern char g_packedCodeAddress24_00424128[];
+extern char g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24[];
 extern char g_Frontend_DestroyPlayModeMenuPackedAddress242[];
 extern char g_Frontend_HandlePlayModeShortcutPackedAddress242[];
 extern char g_Frontend_ConsumePlayModeEventPackedAddress242[];
 unsigned int g_MenuEventHandlersPointerWords7[15] = {
     0x00000E03, 0x00000003, (unsigned int)g_Frontend_DestroyPlayModeMenuPackedAddress242, 0x00000002, 0x00000003, (unsigned int)g_Frontend_ConsumePlayModeEventPackedAddress242, 0x00000001, 0x00000003,
-    (unsigned int)g_packedCodeAddress24_00424128, 0x0000000A, 0x00000003, (unsigned int)g_Frontend_HandlePlayModeShortcutPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
+    (unsigned int)g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24, 0x0000000A, 0x00000003, (unsigned int)g_Frontend_HandlePlayModeShortcutPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
@@ -36,7 +36,7 @@ unsigned int g_VimgrWords1[10] = {
 
 /* 800E4AA0.CPP */
 #if defined(VERSION_EU)
-u32 data_unresolved_800E4AA0[908] = {
+u32 g_viManagerDataWords[908] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x63726564, 0x02000000, 0x0000311E, 0x00000140, 0x03E52239,
     0x0000020D, 0x00000C15, 0x0C150C15, 0x006C02EC, 0x00000200, 0x00000000,

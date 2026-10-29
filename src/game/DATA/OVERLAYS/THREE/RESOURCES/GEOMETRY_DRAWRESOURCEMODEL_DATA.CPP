@@ -25,7 +25,7 @@ extern char g_Events_ApplyFlag200RadialKnockbackEncodedCallbackEntryVariant2[];
 extern char g_Events_ApplyFlag400RadialDamageEncodedCallbackEntryVariant2[];
 extern char g_Events_ApplyFlag400RadialKnockbackEncodedCallbackEntryVariant2[];
 extern char g_Events_StartActorEmitterEncodedCallbackEntryVariant2[];
-extern char D_00268264[];
+extern char addrLow_Events_PlayTeamClip_eu_x[];
 extern char addrLow_Events_PlayTeamClipEntryVariant2[];
 extern char g_Events_SpawnFilteredActorEffectEncodedCallbackEntryVariant2[];
 extern char g_Events_FireWithinHeightRangeEncodedCallbackEntryVariant2[];
@@ -34,12 +34,12 @@ extern char g_Events_ClearActorEventBitEncodedCallbackEntryVariant2[];
 extern char g_Events_SpawnAttachedEffectEncodedCallbackEntryVariant2[];
 extern char g_Events_SpawnPositionedEffectPackedAddress24[];
 extern char g_Events_PlayTeamEffectPackedAddress24[];
-extern char g_packedCodeAddress24_00268864[];
+extern char g_Events_SetActorLoopingSoundPackedAddress24_us_rev1[];
 extern char g_Events_StopActorLoopingSoundPackedAddress24[];
 extern char g_Events_IncrementNearbyPlayerCounterPackedAddress24[];
 extern char g_Events_SetActorEffectModePackedAddress24[];
 extern char g_Events_DeactivateActorPackedAddress24[];
-u32 data_unresolved_800CBCB0[428] = {
+u32 g_resourceModelDisplayListAndEventCallbackWords_de[428] = {
     0xFFFFFF00, 0xFFFFFF00, 0x00007F00, 0x00000000, 0xD9000000, 0x00000000,
     0xD9FFFFFF, 0x00000001, 0xDB020000, 0x00000018, 0xDC08060A, 0x800CBC98,
     0xDC08090A, 0x800CBC90, 0xDF000000, 0x00000000, 0xE3000A01, 0x00000000,
@@ -95,10 +95,10 @@ u32 data_unresolved_800CBCB0[428] = {
     (unsigned int)g_Events_StartEnabledCameraEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_StartDisabledCameraEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_PostGameplayMessageEncodedCallbackEntryVariant2, 0x00000000,
     (unsigned int)g_Events_ApplyFlag100RadialDamageEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag100RadialKnockbackEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag200RadialDamageEncodedCallbackEntryVariant2, 0x00000007,
     (unsigned int)g_Events_ApplyFlag200RadialKnockbackEncodedCallbackEntryVariant2, 0x00000007, (unsigned int)g_Events_ApplyFlag400RadialDamageEncodedCallbackEntryVariant2, 0x00000006, (unsigned int)g_Events_ApplyFlag400RadialKnockbackEncodedCallbackEntryVariant2, 0x00000006,
-    (unsigned int)g_Events_StartActorEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)D_00268264, 0x00000000, (unsigned int)addrLow_Events_PlayTeamClipEntryVariant2, 0x00000000,
+    (unsigned int)g_Events_StartActorEmitterEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)addrLow_Events_PlayTeamClip_eu_x, 0x00000000, (unsigned int)addrLow_Events_PlayTeamClipEntryVariant2, 0x00000000,
     (unsigned int)g_Events_SpawnFilteredActorEffectEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_FireWithinHeightRangeEncodedCallbackEntryVariant2, 0x00000007, (unsigned int)addrLow_Events_SetActorEventBitEntryVariant2, 0x00000000,
     (unsigned int)g_Events_ClearActorEventBitEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_SpawnAttachedEffectEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_PlayTeamEffectPackedAddress24, 0x00000000,
-    (unsigned int)g_Events_StopClipEventEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_packedCodeAddress24_00268864, 0x00000000, (unsigned int)g_Events_StopActorLoopingSoundPackedAddress24, 0x00000000,
+    (unsigned int)g_Events_StopClipEventEncodedCallbackEntryVariant2, 0x00000000, (unsigned int)g_Events_SetActorLoopingSoundPackedAddress24_us_rev1, 0x00000000, (unsigned int)g_Events_StopActorLoopingSoundPackedAddress24, 0x00000000,
     (unsigned int)g_Events_IncrementNearbyPlayerCounterPackedAddress24, 0x00000002, (unsigned int)g_Events_SpawnPositionedEffectPackedAddress24, 0x00000000, (unsigned int)g_Events_SetActorEffectModePackedAddress24, 0x00000000,
     (unsigned int)g_Events_DeactivateActorPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00071115, 0x15110700, 0x00000000,
@@ -117,7 +117,7 @@ u32 data_unresolved_800CBCB0[428] = {
 
 /* 80268160_14.CPP */
 #if defined(VERSION_DE)
-u32 data_writable_800CC360[20] = {
+u32 g_geometryDrawResourceModelWritableWords_de[20] = {
     0xFFFFFFFF, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
     0x00000001, 0x00000001, 0x00000001, 0x00010000, 0xC4000000, 0xC8000000,
     0x00000000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000,

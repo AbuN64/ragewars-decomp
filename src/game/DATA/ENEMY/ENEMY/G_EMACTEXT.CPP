@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D2930.CPP */
+/* g_GEmactextEncodedWords_GEmactext.CPP */
 /* ROM-grounded data: rodata/writable/800D2930 */
 unsigned int g_GEmactextEncodedWords[1] = {
     0x00000001,

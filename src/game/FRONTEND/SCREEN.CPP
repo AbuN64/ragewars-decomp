@@ -202,7 +202,7 @@ void Frontend_AdvanceVideoMode(void)
   }
   g_hudReferenceViewportHeight = h;
 }
-/* Stores its argument in g_frontendCurrentVideoModeIndex, which func_8040C474_de returns, and calls Frontend_ApplyVideoMode. */
+/* Stores its argument in g_frontendCurrentVideoModeIndex, which Frontend_GetCurrentVideoModeIndex_de returns, and calls Frontend_ApplyVideoMode. */
 void Frontend_ApplyScreenModeValue(s32 value) {
     g_frontendCurrentVideoModeIndex = value;
     Frontend_ApplyVideoMode();

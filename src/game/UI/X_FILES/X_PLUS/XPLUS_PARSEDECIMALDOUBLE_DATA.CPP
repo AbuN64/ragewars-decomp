@@ -30,7 +30,7 @@ const f32 k_xplusParsedecimaldoubleDataConstantWords[34] = {
 
 /* 8029FA7C_9.CPP */
 
-/* DATA_802A0A08.CPP */
+/* XPLUS_PARSEDECIMALDOUBLE_DATA_LINK_GAP_WORDS_US.CPP */
 #if defined(VERSION_US)
 unsigned int g_xplusParsedecimaldoubleDataLinkGapWords[80] = {
     0x18474144, 0x4745545F, 0xAFA40000, 0xAFA50004, 0xAFA60008, 0xAFA7000C, 0x27BDFFE8, 0x00802821,

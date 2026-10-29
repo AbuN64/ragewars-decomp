@@ -204,5 +204,5 @@ extern float g_behaviorInitialPlayerDistance;
 
 extern s32 Graphu64_NextRandom(void);
 
-extern s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *, s32, s32 *, s32 *);
+extern s32 Portal_CollectIncidentLinks(NavigationLinkListView *, s32, s32 *, s32 *);
 #endif

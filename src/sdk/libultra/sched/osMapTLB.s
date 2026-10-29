@@ -15,21 +15,21 @@ osMapTLB:
     mtc0 $a0, $0
     mtc0 $a1, $5
     mtc0 $a2, $10
-    beq $a3, $t7, .Lfunc_802AD370_de_048
+    beq $a3, $t7, .osMapTLB_UseInvalidEntryLo0
     addi $t6, $zero, 0x1
     srl $t5, $a3, 6
     or $t5, $t5, $t9
-    b .Lfunc_802AD370_de_04C
+    b .osMapTLB_LoadEntryLo1
     mtc0 $t5, $2
-.Lfunc_802AD370_de_048:
+.osMapTLB_UseInvalidEntryLo0:
     mtc0 $t6, $2
-.Lfunc_802AD370_de_04C:
-    beq $t8, $t7, .Lfunc_802AD370_de_060
+.osMapTLB_LoadEntryLo1:
+    beq $t8, $t7, .osMapTLB_WriteIndexedEntry
     mtc0 $t6, $3
     srl $t5, $t8, 6
     or $t5, $t5, $t9
     mtc0 $t5, $3
-.Lfunc_802AD370_de_060:
+.osMapTLB_WriteIndexedEntry:
     tlbwi
     nop
     nop

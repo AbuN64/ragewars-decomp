@@ -1,4 +1,0 @@
-#ifndef DATA_OVL1_F_WEAPON_STATE_EIGHT_DELAY_ADDRESS_H
-#define DATA_OVL1_F_WEAPON_STATE_EIGHT_DELAY_ADDRESS_H
-extern char g_overlayOneFLinkRecordRomLinkTarget_0023330C[];
-#endif

@@ -28,12 +28,12 @@ s32 Menu_DispatchExtraOptionsEvent(void *object, s32 event, s32 eventData, s32 e
                 actor_kind = ((struct MenuActorInputView *) ((char *) object))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_extraOptionsActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(object, event, eventData, eventValue, eventContext);
+                    return (*(WidgetEventHandler *)entry)(object, event, eventData, eventValue, eventContext);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

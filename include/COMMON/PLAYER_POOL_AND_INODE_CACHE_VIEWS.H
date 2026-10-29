@@ -13,7 +13,7 @@ struct __OSInodeCache {
 };
 
 typedef struct CPlayerPool_t CPlayerPool;
-/* func_80449DB0_de clears0x44 and initializes lists+C,+20. */
+/* Player_ResetMenuPool_GameSession clears0x44 and initializes lists+C,+20. */
 struct CPlayerPool_t {
     void *m_pmePlayers;
     char *m_Players;
@@ -74,14 +74,14 @@ struct PlayerCharacterKindView;
 
 extern u16 Pfs_SumBytes(u8 *bytes, s32 count);
 
-struct RecordCode80447BB080449EE4;
-typedef struct RecordCode80447BB080449EE4 RecordCode80447BB080449EE4;
+struct PlayerSettingsRecordView;
+typedef struct PlayerSettingsRecordView PlayerSettingsRecordView;
 
 struct __OSPackId;
 typedef struct __OSPackId __OSPackId;
 
-struct RecordCode80447BB080449EE4;
-struct RecordCode80447BB080449EE4 {
+struct PlayerSettingsRecordView;
+struct PlayerSettingsRecordView {
     char pad0[0x7F];
     signed char slot;
     char pad80;
@@ -102,7 +102,7 @@ struct Mode;
 struct Model;
 struct Mount;
 struct Profile;
-struct RecordCode80447BB080449EE4;
+struct PlayerSettingsRecordView;
 struct Rider;
 struct Settings;
 struct Shared_Body;
@@ -123,13 +123,13 @@ struct CPlayerPool_t;
 
 struct IntPair;
 
-struct ActorCode80447BB0;
+struct PlayerSpawnActivationActor;
 struct Part;
 
 
 
 
-struct RecordCode80447BB0;
+struct MenuPlayerPoolRecord;
 
 extern short g_playerStateDialogGroups[];
 

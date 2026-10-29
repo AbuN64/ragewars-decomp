@@ -23,9 +23,9 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo g_defaultProbeMotionSettings;
 
-extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
+extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *);
 
-extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern s32 Unicol_MoveActorWithCollision(ActorInstanceHeader *, CVector3, CollisionInfo *);
 
 extern f32 Graphu64_GetPointDistance(f32 *a, f32 *b);
 
@@ -128,8 +128,8 @@ mismatch:
     return 0;
 }
 
-s32 Playerai_ProbeCollisionAdjustedPosition(Instance8020CD74 *actor, CVector3 *position) {
-    Instance8020CD74 saved;
+s32 Playerai_ProbeCollisionAdjustedPosition(ActorInstanceHeader *actor, CVector3 *position) {
+    ActorInstanceHeader saved;
     s32 moved;
 
     saved = *actor;

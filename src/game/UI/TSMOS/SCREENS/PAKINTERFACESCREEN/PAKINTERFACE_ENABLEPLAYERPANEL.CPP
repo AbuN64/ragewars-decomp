@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/PAKINTERFACE_ENABLEPLAYERPANEL.H"
 
-/* Marks entry i of the 150-byte records D_80146410 and sets the words at offsets 0x6C and 0x58
+/* Marks entry i of the 150-byte records g_playerSettingsRecords and sets the words at offsets 0x6C and 0x58
    of entry i of the 2920-byte records g_pakProfileScreenState points to to 2. */
 
 

@@ -1,6 +1,6 @@
 #ifndef AI_SHARED_PICKUPGOALNODE_H
 #define AI_SHARED_PICKUPGOALNODE_H
-struct Obj8020BC50;
+struct NavigationSearchGraphView;
 #ifndef AI_PICKUP_GOAL_SEARCH_DECLARATIONS_H
 #define AI_PICKUP_GOAL_SEARCH_DECLARATIONS_H
 #include "TYPES.H"
@@ -18,7 +18,7 @@ struct Shared_PickupGoalNode {
 
 extern PickupGoalNodeList g_navigationGraph;
 
-extern void Portal_ResetSearchState(struct Obj8020BC50 *graph);
+extern void Portal_ResetSearchState(struct NavigationSearchGraphView *graph);
 extern void Route_ClearGoalList(PickupGoalNodeList *list);
 extern s32 Nav_AddPickupGoalsByObjectIds(s32 *ids);
 extern void Route_SearchPathByKey(PickupGoalNodeList *list, s32 key);

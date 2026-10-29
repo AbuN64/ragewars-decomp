@@ -7,7 +7,7 @@ extern void List_InitializeIntrusive(IntrusiveList *list, s32 prevOffset, s32 ne
 /* Appends node at the tail and returns the new count. */
 extern s32 List_AppendIntrusive(IntrusiveList *list, void *node);
 
-struct Pool80255ACC;
+struct HeapArena_Entryrecat18v3;
 
 
 

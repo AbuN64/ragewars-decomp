@@ -15,17 +15,17 @@
 #include "stddef.h"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-/* ROM-grounded data: src/rw_pool_8025DB80_C9D0C_us_rev1.c */
+/* ROM-grounded data: src/g_trackCommandFallbackDuration_TrackSequenceAndVolume.c */
 const unsigned int g_trackCommandFallbackDuration[1] = {
     0x3DCCCCCD,
 };
 
-/* ROM-grounded data: src/rw_pool_8025DC34_C9D10_us_rev1.c */
+/* ROM-grounded data: src/g_trackNormalizedVolumeScale_TrackSequenceAndVolume.c */
 const unsigned int g_trackNormalizedVolumeScale[1] = {
     0x46FFFE00,
 };
 
-/* ROM-grounded data: src/rw_pool_8025DC88_C9D14_us_rev1.c */
+/* ROM-grounded data: src/g_trackContextVolumePercentScales_TrackSequenceAndVolume.c */
 const unsigned int g_trackContextVolumePercentScales[2] = {
     0x3C23D70A, 0x3C23D70A,
 };
@@ -100,7 +100,7 @@ void Sequencer_AttachTrackSequence(Track *track) {
     alCSeqNew(track->sequence, track->midiHeader);
     alCSPSetSeq(track->sequencePlayer, track->sequence);
     alCSPSetBank(track->sequencePlayer,
-                  track->sequenceTable->field_4);
+                  track->sequenceTable->second);
     do {
         alCSPSetChlFXMix(track->sequencePlayer, i & 0xFF, 0);
         i++;
@@ -117,7 +117,7 @@ const unsigned int g_trackContextVolumeScale[1] = {
     0x46FFFE00,
 };
 
-/* ROM-grounded data: src/rw_pool_8025DD60_C9D24_us_rev1.c */
+/* ROM-grounded data: src/g_trackSequenceVolumeFactors_TrackSequenceAndVolume.c */
 const unsigned int g_trackSequenceVolumeFactors[2] = {
     0x3C23D70A, 0x46FFFE00,
 };

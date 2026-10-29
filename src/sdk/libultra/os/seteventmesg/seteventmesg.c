@@ -17,7 +17,7 @@ void osSetEventMesg(s32 eventId, s32 messageQueue, s32 message) {
 
     mask = __osDisableInt();
     ;
-    (&g_osEventMessageBindings[eventId])->field_0 = messageQueue;
-    (*(&g_osEventMessageBindings[eventId])).field_4 = message;
+    (&g_osEventMessageBindings[eventId])->first = messageQueue;
+    (*(&g_osEventMessageBindings[eventId])).second = message;
     __osRestoreInt(mask);
 }

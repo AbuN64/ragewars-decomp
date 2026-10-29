@@ -2,7 +2,7 @@
 #include "MENU/MENU_BOX.H"
 #include "DATA/OVL1_J/G_MENUBOXCORNERS.H"
 
-/* DATA_800E5E48.CPP */
+/* GMenuboxcornersWords1.CPP */
 /* ROM-grounded data: rodata/writable/800E5E48 */
 #ifdef VERSION_DE
 unsigned int g_GMenuboxcornersWords1[11] = {
@@ -35,7 +35,7 @@ unsigned int g_GMenuboxcornersWords1[11] = {
 };
 #endif
 
-/* DATA_800E5E74.CPP */
+/* FloatRecordWords.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int D_src_afbf569b[63] = {
@@ -106,7 +106,7 @@ unsigned int g_GMenuboxcornersOurclevelTextWords1[45] = {
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-unsigned int data_unresolved_800ED7C0[189] = {
+unsigned int g_floatRecordWordsEuX[189] = {
     0x00000000, 0x41900000, 0x41C00000, 0x3F400000, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x41040000, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x412CCCCD,
     0x41866666, 0x3EE66667, 0x3F19999A, 0x02FFFFC8, 0x56472F00, 0x00000001, 0x40D80000, 0x40F00000,
@@ -158,7 +158,7 @@ unsigned int g_GMenuboxcornersLevelTextWords2[59] = {
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
 extern char g_debugMenuLocalizedLabelStorageEu[];
-unsigned int data_unresolved_800F25E0[189] = {
+unsigned int g_floatRecordWordsEu[189] = {
     0x00000000, 0x41900000, 0x41C00000, 0x3F400000, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000001,
     0x41040000, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00, 0x00000000, 0x412CCCCD,
     0x41866666, 0x3EE66667, 0x3F19999A, 0x02FFFFC8, 0x56472F00, 0x00000001, 0x40D80000, 0x40F00000,
@@ -209,22 +209,22 @@ unsigned int g_GMenuboxcornersLevelTextWords3[59] = {
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800E2094[3] = {
+unsigned int g_minusOneSentinelWords[3] = {
     0xFFFFFFFF, 0x00000000, 0x00000010,
 };
 #endif
 #if defined(VERSION_EU)
-unsigned int rodata_writable_800E2094[4] = {
+unsigned int g_minusOneSentinelWords[4] = {
     0xFFFFFFFF, 0x00000000, 0x00000010, 0x44800000,
 };
 #endif
 #if defined(VERSION_EU_X)
-unsigned int rodata_writable_800E2094[4] = {
+unsigned int g_minusOneSentinelWords[4] = {
     0xFFFFFFFF, 0x00000000, 0x00000010, 0x02202021,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800E2094[2] = {
+unsigned int g_minusOneSentinelWords[2] = {
     0xFFFFFFFF, 0x00000000,
 };
 #endif

@@ -27,8 +27,8 @@ extern double k_xmathExponentialInitialResult;
 
 extern float k_xmathArcTangentCoefficientPairOne;
 
-union DoubleBits_8029ECB0;
-typedef union DoubleBits_8029ECB0 DoubleBits_8029ECB0;
+union DoubleBits;
+typedef union DoubleBits DoubleBits;
 
 extern double k_xmathExponentialUpperLimit;
 
@@ -95,8 +95,8 @@ extern float k_xmathVectorAngleUpperThreshold;
 
 extern float k_xmathPlaneParallelFraction;
 
-union DoubleBits_8029ECB0;
-union DoubleBits_8029ECB0 {
+union DoubleBits;
+union DoubleBits {
     f64 d;
     struct {
         u32 hi;

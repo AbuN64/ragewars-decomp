@@ -10,95 +10,95 @@
 void *Level_GetScreenEventTable(s32 id) {
     switch (id) {
     case 1:
-        return g_packedCodeAddress24_00435F70;
+        return g_Frontend_DispatchPauseMenuEventAddress;
     case 31:
-        return g_packedCodeAddress24_0043630C;
+        return g_Frontend_DispatchConfirmationEventAddress;
     case 32:
-        return g_packedCodeAddress24_00436634;
+        return g_Frontend_DispatchResidentActorEventAddress;
     case 7:
-        return g_packedCodeAddress24_00420E00;
+        return g_Selection_DispatchCharacterSelectionEventAddress;
     case 8:
-        return g_packedCodeAddress24_0043C1D0;
+        return g_Frontend_DispatchEquipmentEventAddress;
     case 10:
-        return g_packedCodeAddress24_00429058;
+        return g_CTrialCatalogue_DispatchCatalogueEventAddress;
     case 15:
-        return g_packedCodeAddress24_004290E8;
+        return g_CTrialCatalogue_DispatchOptionsEventAddress;
     case 3:
-        return g_packedCodeAddress24_00424528;
+        return g_Frontend_DispatchPlayModeEventAddress;
     case 4:
-        return g_packedCodeAddress24_0042359C;
+        return g_Frontend_DispatchOptionsPageEventAddress;
     case 6:
-        return g_packedCodeAddress24_00439390;
+        return g_Menu_DispatchSoundOptionsEventAddress;
     case 5:
-        return g_packedCodeAddress24_00436FE4;
+        return g_Player_DispatchPlayerSettingsEventAddress;
     case 11:
-        return g_packedCodeAddress24_00423930;
+        return g_Frontend_DispatchCompactOptionsEventAddress;
     case 12:
-        return g_packedCodeAddress24_00437454;
+        return g_Player_DispatchAlternatePlayerSettingsEventAddress;
     case 13:
-        return g_packedCodeAddress24_0043962C;
+        return g_Menu_DispatchSoundSliderEventAddress;
     case 16:
-        return g_packedCodeAddress24_0041DF24;
+        return g_Menu_DispatchSelectionMenuEventAddress;
     case 17:
-        return g_packedCodeAddress24_0042DB38;
+        return g_Frontend_DispatchResultsEventAddress;
     case 18:
-        return g_packedCodeAddress24_0043905C;
+        return g_Achieve_DispatchResultsActorEventAddress;
     case 9:
-        return g_packedCodeAddress24_00437868;
+        return g_Menu_DispatchScrollingChoiceEventAddress;
     case 30:
-        return g_packedCodeAddress24_00437B98;
+        return g_Menu_DispatchTitleButtonEventAddress;
     case 20:
-        return g_packedCodeAddress24_0042BCB0;
+        return g_ScenarioSetup_DispatchCatalogueEventAddress;
     case 21:
-        return g_packedCodeAddress24_00429B74;
+        return g_Frontend_DispatchMatchOptionsEventAddress;
     case 23:
-        return g_packedCodeAddress24_0041F118;
+        return g_Join_DispatchJoinOptionsEventAddress;
     case 14:
-        return g_packedCodeAddress24_0042931C;
+        return g_Frontend_DispatchMatchMenuEventAddress;
     case 19:
-        return g_packedCodeAddress24_00435C54;
+        return g_Frontend_DispatchPakProfileEventAddress;
     case 22:
-        return g_packedCodeAddress24_00423B88;
+        return g_Frontend_DispatchTabOptionsEventAddress;
     case 24:
-        return g_packedCodeAddress24_00439938;
+        return g_Frontend_DispatchProfileResetEventAddress;
     case 25:
-        return g_packedCodeAddress24_0042247C;
+        return g_Menu_DispatchOptionsTransitionEventAddress;
     case 27:
-        return g_packedCodeAddress24_00421E00;
+        return g_Menu_DispatchSixChoiceEventAddress;
     case 26:
-        return g_packedCodeAddress24_0042DFF0;
+        return g_Frontend_DispatchPlayerCountEventAddress;
     case 29:
-        return g_packedCodeAddress24_0041C5EC;
+        return g_SmpOverlay_DispatchPakDialogEventAddress;
     case 28:
-        return g_packedCodeAddress24_00421A88;
+        return g_Menu_DispatchExtraOptionsEventAddress;
     case 33:
-        return g_packedCodeAddress24_0043A014;
+        return g_Frontend_DispatchNodePairMenuEventAddress;
     default:
         return 0;
     }
 }
 #endif
 #if VERSION_DE
-INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif
 #if VERSION_US
-INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1A072C);
+INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1A072C);
 #endif
 #if VERSION_EU_X
-INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_12D55C);
+INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_12D55C);
 #endif
 #if VERSION_EU
-INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1B342C);
+INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1B342C);
 #endif
 #if VERSION_DE
-INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1A254C);
+INCLUDE_DATA("ovl_frontendMenu", D_auto_func_8043C730_us_rev1_padding_1A254C);
 #endif
 #if VERSION_EU
-INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif
 #if VERSION_EU_X
-INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif
 #if VERSION_US
-INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+INCLUDE_ASM("ovl_frontendMenu", Level_GetScreenEventTable);
 #endif

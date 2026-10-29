@@ -24,7 +24,7 @@ extern char *g_characterPreviewTextReferenceEu1[], *g_characterPreviewTextRefere
 #else
 #define RESULTS_LANGUAGE 0
 #define RESULTS_CHARACTERS g_resultCharacterHeadings
-#define RESULTS_NAME_FORMAT D_800C52E4_de
+#define RESULTS_NAME_FORMAT g_resultsNameFormat_de
 #endif
 /* A results text in the language the game settings select. */
 #define RESULTS_TEXT(fixed, table) RW_LOCALIZED_TEXT(fixed, table, table, RESULTS_LANGUAGE)

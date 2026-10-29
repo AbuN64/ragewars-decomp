@@ -4,9 +4,9 @@
 
 typedef struct SceneActorDefinitionKindView SceneActorDefinitionKindView;
 struct SceneActorDefinitionKindView {
-    s32 kind; /* +0x0: src/func_80286A78.c */
+    s32 kind; /* +0x0: src/Scene_LoadLevelResources_SceneResourceState.c */
     char pad4[0x24];
-    s16 flags; /* +0x28: src/func_80286A78.c */
+    s16 flags; /* +0x28: src/Scene_LoadLevelResources_SceneResourceState.c */
     char pad2A[0x2];
 };
 typedef char SceneActorDefinitionKindSizeCheck[(sizeof(SceneActorDefinitionKindView) == 0x2C) ? 1 : -1];

@@ -12,7 +12,7 @@ unsigned char g_AnimpoolReleasepooledeffectTrailingBytes[4] = { 0x8F, 0xBF, 0x00
 unsigned int func_802630CC_eu_x[1] = { 0xAC820028U };
 #endif
 
-/* CODE_802AD1D0.CPP */
+/* g_AnimpoolReleasepooledeffectTrailingBytesBlock2_AnimpoolReleasepooledeffect.CPP */
 #if defined(VERSION_US)
 unsigned char g_AnimpoolReleasepooledeffectTrailingBytesBlock2[4] = { 0x6E, 0x54, 0x00, 0x00 };
 #endif

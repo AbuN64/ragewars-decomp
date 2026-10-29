@@ -11,9 +11,9 @@
 #include "MENU/PAK/MENU_CREATEMENUFROMTEMPLATE.H"
 
 /* Confirms the selected pak menu entry: marks the menu busy and returns when Snapshot_CheckStatusPrompt takes
-   over the selected channel; with a profile loaded (D_80153730) it creates the player through
-   func_8022A5C0_de, copies the loaded profile (flags, four words and eight name bytes) into the
-   player's profile, applies the loaded team through func_8044A0C4_de and shows the player's message
+   over the selected channel; with a profile loaded (g_pakProfileLoaded) it creates the player through
+   Playerai_FindPlayerByController_PakClosepromptbykind, copies the loaded profile (flags, four words and eight name bytes) into the
+   player's profile, applies the loaded team through Player_StartPlayerAnimation_CmenuprofileUpdateplayeranimationchoice and shows the player's message
    through Menu_AllocateMenu; otherwise it deletes the chosen note through Note_DeleteNote and shows the
    D_44F7C0 or D_44F82C result prompt. Returns 1. */
 
@@ -27,7 +27,7 @@
 
 extern s32 g_pakUseScannedChannel;
 
-extern s32 D_80153730;
+extern s32 g_pakProfileLoaded;
 
 extern u8 g_controllerPakPreviewProfileFlags;
 
@@ -58,11 +58,11 @@ extern void Menu_AllocateMenu(char *text, MenuPakConfirmProfileOrDeleteNote *men
 extern s32 Note_DeleteNote(s32 ch, s32 index);
 
 /* Closes the current pak menu prompt by its kind g_controllerPakPromptKind: kind 8 is refused (returns 0); kinds
-   9 and 5 release the slot's controller through func_80264248_de and func_802647E8_de; kind 9 then either
-   hands the channel back through func_80264788_de and reopens the player's menu 0x5EC (load menu
+   9 and 5 release the slot's controller through Control_ResetControllerPakDe and Control_SetProfileModeDe; kind 9 then either
+   hands the channel back through Control_DisableControllerPakDe and reopens the player's menu 0x5EC (load menu
    without a pending save) or returns to the main menu g_gameSession; kind 5 hands the channel back and
-   reopens menu D_8013B2C8; kind 6 in the pak manager sets D_8014ADA0; kinds 4 and 3 recheck the pak
-   and show D_44F100 or D_450BD0, or D_44F124, and any other kind shows the menu's pending prompt
+   reopens menu g_worldSelectionValueThree; kind 6 in the pak manager sets g_pakRecheckRequested; kinds 4 and 3 recheck the pak
+   and show g_controllerPakReadyDialogResource_PakClosepromptbykind or D_450BD0, or D_44F124, and any other kind shows the menu's pending prompt
    (clearing the placeholder 1) in the player's message box. Returns 1. */
 
 
@@ -75,9 +75,9 @@ extern s32 Note_DeleteNote(s32 ch, s32 index);
 
 extern s32 g_controllerPakPromptKind;
 
-extern s32 D_80153758;
+extern s32 g_pakPromptKindNinePending;
 
-extern s32 D_8014ADA0;
+extern s32 g_pakRecheckRequested;
 
 
 #include "COMMON/GAME_SESSION.H"
@@ -109,9 +109,9 @@ extern s32 g_frontendResourceLoadStage;
 
 extern s32 g_controllerPakSelectedNoteIndex;
 
-extern char D_0044EB94[];
+extern char g_pakNoteIdRepairSucceededDialogResource[];
 
-extern char D_0044ED20[];
+extern char g_pakNoteIdRepairFailedDialogResource[];
 
 extern s32 Note_RepairIdIfNeeded(s32 ch);
 
@@ -130,10 +130,10 @@ s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNo
         ch = menu->slot->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, ch, 0) != 0) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         return 1;
     }
-    if (D_80153730 != 0) {
+    if (g_pakProfileLoaded != 0) {
         player = Playerai_FindPlayerByController(&g_playerViewRenderContext, menu->slot);
         menu->player = player;
         profile = player->views5D8.view5D8_6.profile;
@@ -171,7 +171,7 @@ s32 Pak_ClosePromptByKind(void *owner, PakPromptContext *menu) {
         Control_SetProfileMode(menu->slot, 1);
     }
     if (g_controllerPakPromptKind == 9) {
-        if (D_80153760 != 0 && D_8014D4EC_de == 0 && D_80153758 == 0) {
+        if (g_pakProfileLoadActive != 0 && g_pakProfileLoadMode_de == 0 && g_pakPromptKindNinePending == 0) {
             if (g_pakUseScannedChannel != 0) {
                 ch = g_introSelectedItem;
             } else {
@@ -194,9 +194,9 @@ s32 Pak_ClosePromptByKind(void *owner, PakPromptContext *menu) {
         Scene_SetSelection(&g_world, g_world.selectionValues[3], 2);
     }
     if (g_pakUseScannedChannel != 0 && g_controllerPakPromptKind == 6) {
-        D_8014ADA0 = 1;
+        g_pakRecheckRequested = 1;
     }
-    if (g_controllerPakPromptKind == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
+    if (g_controllerPakPromptKind == 4 && g_pakProfileLoadActive != 0 && g_pakProfileLoadMode_de == 0) {
         Note_ProbeStatus(ch);
         status = Note_GetStatus(ch);
         connected = Control_TakePakChange(ch);
@@ -237,7 +237,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, PakPromptContext *menu, void *arg) 
                 ch = menu->slot->controllerPort;
             }
             if (Snapshot_CheckStatusPrompt(menu, ch, 1) != 0) {
-                D_80153784 = 1;
+                g_pakMenuPromptAccepted = 1;
                 Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
@@ -255,7 +255,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, PakPromptContext *menu, void *arg) 
                 ch = menu->slot->controllerPort;
             }
             if (Snapshot_CheckStatusPrompt(menu, ch, 1) != 0) {
-                D_80153784 = 1;
+                g_pakMenuPromptAccepted = 1;
                 Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
@@ -273,21 +273,21 @@ s32 Pak_ConfirmPendingOperation(void *owner, PakPromptContext *menu, void *arg) 
                 ch = menu->slot->controllerPort;
             }
             if (Snapshot_CheckStatusPrompt(menu, ch, 1) != 0) {
-                D_80153784 = 1;
+                g_pakMenuPromptAccepted = 1;
                 Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
             Note_ProbeStatus(ch);
             if (Note_RepairIdIfNeeded(ch) == 0) {
-                Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB94, menu->player, menu->slot, menu->prompt);
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteIdRepairSucceededDialogResource, menu->player, menu->slot, menu->prompt);
             } else {
-                Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED20, menu->player, menu->slot, menu->prompt);
+                Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakNoteIdRepairFailedDialogResource, menu->player, menu->slot, menu->prompt);
             }
             break;
         case 1:
         case 2:
             if (g_pakUseScannedChannel != 0) {
-                D_80142CAC = 1;
+                g_pakProbeRequested = 1;
             }
             Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->prompt, menu->player, menu->slot, 0);
             break;

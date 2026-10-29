@@ -41,7 +41,7 @@ s32 Menu_FormatRightAlignedName(RightAlignedNameLabelView *labelWidget) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_FormatRightAlignedName);
+INCLUDE_ASM("ovl_frontendMenu", Menu_FormatRightAlignedName);
 #endif
 #endif
 
@@ -97,7 +97,7 @@ s32 Menu_FormatNoteTypeLabel(NoteTypeLabelView *labelWidget) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_FormatNoteTypeLabel);
+INCLUDE_ASM("ovl_frontendMenu", Menu_FormatNoteTypeLabel);
 #endif
 #endif
 

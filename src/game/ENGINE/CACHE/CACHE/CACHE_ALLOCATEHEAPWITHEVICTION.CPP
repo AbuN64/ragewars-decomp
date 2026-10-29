@@ -135,8 +135,8 @@ void *Cache_AllocateHeapWithEviction(s32 unusedCache, u32 byteCount, s32 allocat
 }
 
 void Cache_InsertResourceByAddress(s32 unused, void *object) {
-    Node80254C10 *node = object;
-    Node80254C10 *scan;
+    CacheEvictionNode *node = object;
+    CacheEvictionNode *scan;
 
     scan = g_resourcesByAddress.head;
     while (scan != 0) {

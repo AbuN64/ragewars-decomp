@@ -49,6 +49,6 @@ s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakSizeRange);
+INCLUDE_ASM("ovl_frontendMenu", Menu_FormatLocalizedPakSizeRange);
 #endif
 #endif

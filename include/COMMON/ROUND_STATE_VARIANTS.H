@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void TextLoad_ResetArtsendTextureState(void), Tengine_UpdateArtsendTexturePreview(void);
-extern s32 D_800D2970;
-extern f32 g_roundTransitionTimerUsRev1, D_800C54D8_de;
+extern s32 g_roundExtraStateUsRev1;
+extern f32 g_roundTransitionTimerUsRev1, g_roundTransitionTimerDe;
 extern void InitFrontendMenus(void), Tsmos_InitializeEuropeanFrontend(void);
 static inline void resetRoundExtra(void) {
 #if defined(VERSION_US_REV1)
@@ -13,14 +13,14 @@ TextLoad_ResetArtsendTextureState();
 }
 static inline void clearRoundExtra(void) {
 #if defined(VERSION_US_REV1)
-D_800D2970 = 0;
+g_roundExtraStateUsRev1 = 0;
 #endif
 }
 static inline f32 roundTimerConstant(void) {
 #if defined(VERSION_US_REV1)
 return g_roundTransitionTimerUsRev1;
 #else
-return D_800C54D8_de;
+return g_roundTransitionTimerDe;
 #endif
 }
 /* Round transitions share the platform's player gate and localized messages. */

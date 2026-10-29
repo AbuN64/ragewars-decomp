@@ -56,7 +56,7 @@ unsigned int g_OptionsCreateoptionspageEncodedWords[3] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800DF188[54] = {
+unsigned int g_optionsCreateOptionsPageEntryTriples[54] = {
     0x00000E06, 0x00000004, 0x00422510, 0x00000E03, 0x00000004, 0x004233DC, 0x00000002, 0x00000004,
     0x00423548, 0x00000001, 0x00000004, 0x00423488, 0x00000000, 0x00000000, 0x00000000, 0x00000E08,
     0x0000000B, 0x004237F8, 0x00000E06, 0x0000000B, 0x0042362C, 0x00000E03, 0x0000000B, 0x004237C0,

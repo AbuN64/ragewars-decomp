@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_8028C568_CAFD8_us_rev1.c */
+/* ROM-grounded data: src/g_scene_QueueTriggerTimerConstantWords_SceneQueuetriggertimerData.c */
 const unsigned int g_scene_QueueTriggerTimerConstantWords[1] = {
     0x41700000,
 };

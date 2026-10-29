@@ -32,13 +32,13 @@ extern int g_gameLoopFrameCount;
 
 void SetN64_StartBootstrapThread(void) {
     XPlus_FillMemory((s32)g_bootstrapThreadStack, 0, 0x80);
-    osCreateThread((s32)g_bootstrapThread, 0, g_packedCodeAddress24_0029350C, 0, (s32)(g_bootstrapThreadStack + 0x80), g_bootstrapThreadPriority);
+    osCreateThread((s32)g_bootstrapThread, 0, g_SetN64_RunBootstrapThreadPackedAddress24, 0, (s32)(g_bootstrapThreadStack + 0x80), g_bootstrapThreadPriority);
     osStartThread(g_bootstrapThread);
 }
 
 void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 threadArgument) {
     XPlus_FillMemory((s32)g_gameThreadStack, 1, 0x8000);
-    osCreateThread((s32)g_gameThread, 1, g_packedCodeAddress24_00293534, threadArgument, (s32)g_schedulerThreadStack, g_gameThreadPriority);
+    osCreateThread((s32)g_gameThread, 1, g_SetN64_RunGameThreadPackedAddress24, threadArgument, (s32)g_schedulerThreadStack, g_gameThreadPriority);
     osStartThread(g_gameThread);
     {
         s32 schedulingPriority = g_videoFrameSchedulingMode;

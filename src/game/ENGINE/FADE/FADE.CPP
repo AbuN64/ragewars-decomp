@@ -93,7 +93,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             i = 0;
             alCSeqNew(queue->sequence, queue->midiHeader);
             alCSPSetSeq(queue->sequencePlayer, queue->sequence);
-            alCSPSetBank(queue->sequencePlayer, queue->sequenceTable->field_4);
+            alCSPSetBank(queue->sequencePlayer, queue->sequenceTable->second);
             do {
                 alCSPSetChlFXMix(queue->sequencePlayer, i & 0xFF, 0);
                 i += 1;

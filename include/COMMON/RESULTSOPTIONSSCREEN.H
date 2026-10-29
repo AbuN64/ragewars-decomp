@@ -117,8 +117,8 @@ struct EntryFrontendRefreshTrialCharacterPreview {
 };
 
 struct EntryFrontendRefreshTrialCharacterPreview;
-struct Data801462C8;
-struct Data801462C8 {
+struct GameSettingsModeStatusView;
+struct GameSettingsModeStatusView {
     char pad0[0xD];
     u8 mode;
     char padE[0xD0 - 0xE];

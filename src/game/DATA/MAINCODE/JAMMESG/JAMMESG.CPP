@@ -12,7 +12,7 @@ unsigned char g_JammesgTrailingBytes[12] = { 0xAF, 0xB0, 0x00, 0x10, 0x00, 0x80,
 #endif
 
 /* 802C0250.CPP */
-extern void func_802BC36C_de(void *threadQueue);
+extern void __osEnqueueAndYield(void *threadQueue);
 
 extern OSThread_s *g_osRunningThread;
 
@@ -27,7 +27,7 @@ s32 osJamMesg(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
             return -1;
         }
         g_osRunningThread->state = 8;
-        func_802BC36C_de(&messageQueue->fullqueue);
+        __osEnqueueAndYield(&messageQueue->fullqueue);
     }
 
     index = (messageQueue->first + messageQueue->msgCount - 1) % messageQueue->msgCount;

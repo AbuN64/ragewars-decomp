@@ -11,7 +11,7 @@
 extern OSThread_s *g_osRunnableThreadQueue;
 extern OSThread_s *g_osRunningThread;
 extern void Audio_DequeueThread(OSThread_s **queue, OSThread_s *t);
-extern void func_802BC36C_de(OSThread_s **queue);
+extern void __osEnqueueAndYield(OSThread_s **queue);
 
 void Scene_SetThreadPriority(OSThread_s *t, s32 pri)
 {
@@ -35,7 +35,7 @@ void Scene_SetThreadPriority(OSThread_s *t, s32 pri)
         runQueue = &g_osRunnableThreadQueue;
         if (g_osRunningThread->priority < (*runQueue)->priority) {
             g_osRunningThread->state = 2;
-            func_802BC36C_de(runQueue);
+            __osEnqueueAndYield(runQueue);
         }
     }
 

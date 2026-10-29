@@ -28,7 +28,7 @@ const unsigned int g_Setn64DrawfullscreenbackdropWords2[4] = {
 };
 #endif
 
-/* DATA_80290998.CPP */
+/* SETN64_DRAWFULLSCREENBACKDROP_WORDS_US.CPP */
 #if defined(VERSION_US)
 unsigned int g_Setn64DrawfullscreenbackdropWords3[249] = {
     0x7263655C, 0x55495C54, 0x27BDFF88, 0xAFB40070, 0x0080A021, 0xAFB3006C, 0x3C138012, 0x26739DC8,

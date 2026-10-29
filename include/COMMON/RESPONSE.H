@@ -71,7 +71,7 @@ struct ReadHalfword {
 
 
 
-extern unsigned char D_B2000001;
+extern unsigned char g_debugLinkReceivedDataByte;
 
 
 extern int g_debugLinkImageByteCount;

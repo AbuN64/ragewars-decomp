@@ -373,7 +373,7 @@ const unsigned int k_CseqEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802AE290_CD148_us_rev1.c */
+/* ROM-grounded data: src/g_alCSeqNewMarkerConstantWords_Cseq.c */
 const unsigned int g_alCSeqNewMarkerConstantWords[1] = {
     0x3F800000,
 };

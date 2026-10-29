@@ -16,7 +16,7 @@ extern u8 *g_defaultPlayerNameOne;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/EFFECTRENDER.H"
 #endif
-/* Highlights the name slot func_8022A5A0_de finds for the menu (display flags 0x1800000 on its model part,
+/* Highlights the name slot Player_GetPlayerIndexDe finds for the menu (display flags 0x1800000 on its model part,
    cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
    dropped, none when it starts like the default name) into the spinner; value and max = its length. */
 void Setup_SetupNameSpinner(NameSpinnerMenu *menu) {
@@ -99,7 +99,7 @@ void Setup_SetupNameSpinner(NameSpinnerMenu *menu) {
 #endif
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-/* Steps a menu spinner for the entry func_8022A5A0_de finds in g_playerViewRenderContext: advances its repeat timer by g_frameElapsedTime, wrapping at g_multiplayerNameEntryTimingLimits, and while the menu is active (state 1) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
+/* Steps a menu spinner for the entry Player_GetPlayerIndexDe finds in g_playerViewRenderContext: advances its repeat timer by g_frameElapsedTime, wrapping at g_multiplayerNameEntryTimingLimits, and while the menu is active (state 1) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
 
 
@@ -137,7 +137,7 @@ s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int rodata_func_80445964_de_800E2810[1] = {
+const unsigned int g_multiplayerNameEntryTimingLimits_SetupSetupnamespinner[1] = {
     0x41700000,
 };
 #endif

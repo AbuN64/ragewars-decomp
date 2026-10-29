@@ -12,10 +12,10 @@
 #include "TYPES.H"
 
 /* Runs a player's hold on a carried object: while the player has a view at 0x5DC, one frame in five
-   on average it tints the view through func_802391AC_de with a random alpha below 7.5 and plays effect
+   on average it tints the view through Gsky_StartFade_PlayeraiInitializeplayerhealth with a random alpha below 7.5 and plays effect
    g_frontendScreenStatus at the view's position; the hold time at 0x1D4 counts down by the frame time g_frameElapsedTime,
    and once it runs out or the hold flag at 0x5E4 is clear the player drops flag 0x800000, is released
-   through Player_SetPlayerState, and lets go of the object at 0x13D8 through func_80216488_de (flags 0x30200 when
+   through Player_SetPlayerState, and lets go of the object at 0x13D8 through Barrel_FillDamagePacket_PlayeraiInitializeplayerhealth (flags 0x30200 when
    the object is a carried actor with option 0x200, 0x4600 otherwise) before forgetting it and applying
    the result through Playerai_ApplyDamagePacket. */
 
@@ -38,7 +38,7 @@ extern void Playerai_ApplyDamagePacket(SharedPlayer *, char *, Slot *);
 
 void Playerai_UpdateHazardDamage(SharedPlayer *player) {
     Slot hit;
-    ViewCode80225D10 *view;
+    FadeEmitterView *view;
     Held *owner;
     f32 alpha;
     s32 level;
@@ -154,7 +154,7 @@ typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
 struct Shared_World;
 extern void *Scene_FindActorDefinition(struct Shared_World *, s32, s32);
 
-/* g_resultExitPending and D_80146938 are game option words, read through an option view. */
+/* g_resultExitPending and g_selectedProfileHealthOptionEnabled are game option words, read through an option view. */
 typedef struct { s32 enabled; } GameOption;
 static inline s32 optionEnabled(GameOption *option) {
     return option->enabled;

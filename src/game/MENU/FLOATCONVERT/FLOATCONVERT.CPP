@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "sdk/PERIPHERAL_PORT_BYTE_VIEWS.H"
 
-/* CODE_802B2340.CPP */
+/* Menu_GetFloatHighWord_Floatconvert.CPP */
 unsigned short Menu_GetFloatHighWord(float value) {
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
     /* A little-endian host keeps the high half (sign, exponent, top mantissa bits) at the second halfword. */
@@ -37,7 +37,7 @@ INCLUDE_ASM("span_1000", Menu_FloatConversionSplitTailEuropean);
 #endif
 #endif
 
-/* CODE_802B2350.CPP */
+/* Menu_ExpandFloatHighWord_Floatconvert.CPP */
 #if !(defined(VERSION_EU))
 float Menu_ExpandFloatHighWord(int floatHighBits) {
     int tmp = floatHighBits << 16;

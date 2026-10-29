@@ -5,7 +5,7 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 #if !(defined(VERSION_DE))
-/* Handles the team option of a menu: unless func_8026437C_de reports the confirm input, it steps the owner's team byte at 0x80 through Menu_StepValue between 1 and 18, applies it with func_8044A0C4_de and redraws it with Menu_SelectPreviewModel, returning zero; on confirm it applies the team, plays the sound g_profilePlayerAnimationChoices gives for the player's slot at 0x5E0 and shows the resource D_450698 through Menu_AllocateMenu, returning one. */
+/* Handles the team option of a menu: unless Control_IsAButtonPressed_Character reports the confirm input, it steps the owner's team byte at 0x80 through Menu_StepValue between 1 and 18, applies it with Player_StartPlayerAnimation_CmenuprofileUpdateplayeranimationchoice and redraws it with Menu_SelectPreviewModel, returning zero; on confirm it applies the team, plays the sound g_profilePlayerAnimationChoices gives for the player's slot at 0x5E0 and shows the resource g_characterPreviewMenuRomResource_CmenuprofileUpdateplayeranimationchoice through Menu_AllocateMenu, returning one. */
 
 
 

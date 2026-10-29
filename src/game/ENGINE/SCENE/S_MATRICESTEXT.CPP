@@ -6,7 +6,7 @@ const char g_matricesText[9] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80286AA8_CADF4_us_rev1.c */
+/* ROM-grounded data: src/s_matricesTextSource.c */
 const unsigned char s_matricesText[9] = {
     0x4D, 0x61, 0x74, 0x72, 0x69, 0x63, 0x65, 0x73, 0x00,
 };

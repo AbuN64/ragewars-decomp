@@ -20,7 +20,7 @@ struct SceneLightVolume {
     CVector3 axis; /* 0x14 */
     f32 inverse[16]; /* 0x20: world to volume, Graphu64_InvertAffineMatrix(inverse, transform) */
     f32 transform[16]; /* 0x60: volume to world */
-    Box bounds; /* 0xA0: func_80275954_de over the 8 corners */
+    Box bounds; /* 0xA0: Region_ComputePointBounds_LightVolumeAndTriggerViews over the 8 corners */
     u8 flagB8;
     u8 flagB9;
     u8 animatedLight; /* 0xBA: Link_GetLightAnimationOffset */

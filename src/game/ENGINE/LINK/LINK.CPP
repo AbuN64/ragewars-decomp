@@ -25,7 +25,7 @@ f32 Link_GetLightAnimationOffset(void *link)
   animationSeedValue = volume->animationSeed;
   idx = g_gameFrameCounter + ((((animationSeedValue % 7) & 0xFF) + 1) * 0x10);
   idx = idx % 90;
-  return (f32) g_enemyDispatchLinkStorage_800CD604[idx];
+  return (f32) g_lightAnimationOffsetTable[idx];
 }
 
 
@@ -53,7 +53,7 @@ void Link_AnimateVertexColors(VertexColorMeshView *object, u8 *colors) {
                 u8 *color;
 
                 if (flags & 0x70) {
-                    amount = g_enemyDispatchLinkStorage_800CD604[(state + ((flags & 0x70) >> 2)) & 0x3F];
+                    amount = g_lightAnimationOffsetTable[(state + ((flags & 0x70) >> 2)) & 0x3F];
                     amount >>= (flags & 0xC) >> 2;
                     color = colors + i * 4;
 
@@ -107,7 +107,7 @@ void Link_CaptureVertexColors(VertexColorMeshView *object, u8 *colors) {
     }
 }
 
-/* Sums the size field of the record SetN64_GetPackSection returns for each entry of the D_8011FE88 table and returns the total.
+/* Sums the size field of the record SetN64_GetPackSection returns for each entry of the g_world_AchieveUpdateresultsscreen table and returns the total.
    Adapted from alEvtqNew with the loop over the global entry table and the accumulated return changed. */
 
 

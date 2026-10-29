@@ -85,7 +85,7 @@ void Bitarray_ReadStridedFloatSamples(s32 bitCursor, void *sampleRecords, s32 sa
 }
 
 s32 Bitarray_ExpandMotionPack(void *sourceMotionPack, void *destinationMotionPack) {
-    Entry802612C8 *first;
+    MotionPackHeader *first;
     void *a;
     void *b;
     void *c;

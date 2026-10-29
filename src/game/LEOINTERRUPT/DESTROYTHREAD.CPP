@@ -1,20 +1,20 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/EXTERNS_5.H"
+#include "COMMON/__OSDISPATCHTHREAD.H"
 #include "COMMON/CTX.H"
 #include "TYPES.H"
 #include "COMMON/VERSION_CALLS.H"
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 #include "sdk/os.h"
 
-extern Func802C1F10Node *__osActiveQueue;
+extern OsThreadQueueNode *__osActiveQueue;
 extern void *g_osRunningThread;
-extern void Audio_DequeueThread(void *listHead, Func802C1F10Node *node);
+extern void Audio_DequeueThread(void *listHead, OsThreadQueueNode *node);
 
-void Audio_DestroyThread(Func802C1F10Node *thread) {
-    Func802C1F10Node *node;
-    Func802C1F10Node *cur;
-    Func802C1F10Node **head;
+void Audio_DestroyThread(OsThreadQueueNode *thread) {
+    OsThreadQueueNode *node;
+    OsThreadQueueNode *cur;
+    OsThreadQueueNode **head;
     s32 token;
     node = thread;
     token = __osDisableInt();

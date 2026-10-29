@@ -32,7 +32,7 @@ s32 CMenuProfile_HasDialogRoundProgress(void) {
 /* Clears arg1->unk1C's unk858 flag and its unk5D8's unk80, then forwards to Menu_OpenDialog. */
 
 extern void Menu_OpenDialog(s32 parent, void *list, void *player, s32 controller, s32 dialogParameter);
-extern s32 D_0044FB2C;
+extern s32 g_playerMenuDialogTable;
 
 
 
@@ -40,13 +40,13 @@ extern s32 D_0044FB2C;
 
 
 
-s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, Handle8043E788 *menuContext) {
+s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, PlayerDialogMenuContext *menuContext) {
     Obj1C *selectionPlayer;
 
     selectionPlayer = menuContext->unk1C;
     selectionPlayer->unk858 = 0;
     selectionPlayer->unk5D8->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &D_0044FB2C, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
+    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
     return 1;
 }
 
@@ -59,19 +59,19 @@ s32 CMenuProfile_OpenPrimaryPlayerDialog(void *unused0, Handle8043E788 *menuCont
 
 
 
-s32 CMenuProfile_OpenAlternatePlayerDialog(void *unused0, Handle8043E788 *menuContext) {
+s32 CMenuProfile_OpenAlternatePlayerDialog(void *unused0, PlayerDialogMenuContext *menuContext) {
     Obj1C *selectionPlayer;
 
     selectionPlayer = menuContext->unk1C;
     selectionPlayer->unk858 = 1;
     selectionPlayer->unk5D8->characterKind = 0;
-    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &D_0044FB2C, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
+    Menu_OpenDialog(selectionPlayer->unk5DC + 0x554, &g_playerMenuDialogTable, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
     return 1;
 }
 
 /* Steps the selection g_profileGameSpeedSelection through Menu_AdjustValue (a second step when Control_IsRightPressed or
-   func_8026437C_de reports the object's controller busy), then sets D_80142228 to the chosen entry of the
-   float table D_00450854 plus the offset in g_profileGameSpeedPreview, clamped between g_profileGameSpeedWrapLimit and (2.0f). */
+   Control_IsAButtonPressed_Character reports the object's controller busy), then sets g_gameSettingsSpeedFactor to the chosen entry of the
+   float table k_gameSpeedSelectionOffsets plus the offset in g_profileGameSpeedPreview, clamped between g_profileGameSpeedWrapLimit and (2.0f). */
 
 
 
@@ -92,7 +92,7 @@ s32 CMenuProfile_AdjustGameSpeedFactor(void *menuItem, struct GameSpeedMenuValue
     if (((s32 (*)(s32))Control_IsRightPressed)(obj->field_20) != 0 || Control_IsAButtonPressed(obj->field_20) != 0) {
         Menu_AdjustValue(obj, g_profileGameSpeedSelection, 1, 0, 15, 0);
     }
-    scale = D_00450854[g_profileGameSpeedSelection] + g_profileGameSpeedPreview.scale;
+    scale = k_gameSpeedSelectionOffsets[g_profileGameSpeedSelection] + g_profileGameSpeedPreview.scale;
     if (!(scale < g_profileGameSpeedWrapLimit)) {
         if (!(scale > (2.0f))) {
             if (scale < g_profileGameSpeedWrapLimit) {

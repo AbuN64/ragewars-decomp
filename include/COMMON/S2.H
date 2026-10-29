@@ -31,8 +31,8 @@ struct TeamInfo;
 struct View;
 
 
-struct BrainCode8020EAE0;
-typedef struct BrainCode8020EAE0 BrainCode8020EAE0;
+struct WeaponSelectBrain;
+typedef struct WeaponSelectBrain WeaponSelectBrain;
 
-struct BrainCode8020EAE0;
+struct WeaponSelectBrain;
 #endif

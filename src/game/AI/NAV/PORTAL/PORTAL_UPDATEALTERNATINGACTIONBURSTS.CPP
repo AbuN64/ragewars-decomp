@@ -300,7 +300,7 @@ void Portal_LoadCollisionTable(void *resourcePack) {
     s32 s4;
     s32 base2;
     char *tbl;
-    CollisionInfo8020CD74 *src;
+    CollisionQuery *src;
     char *dst;
 
     s2 = 0;
@@ -313,7 +313,7 @@ void Portal_LoadCollisionTable(void *resourcePack) {
         do {
             src = SetN64_GetPackSection(resourcePack, base2 + s0);
             dst = (char *)(s1 + (s32)tbl);
-            *(CollisionInfo8020CD74 *)dst = *src;
+            *(CollisionQuery *)dst = *src;
             s0 += 1;
             s1 += 0x1C;
         } while (s0 < 2);

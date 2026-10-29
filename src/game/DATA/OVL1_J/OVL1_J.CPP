@@ -5,7 +5,7 @@
 unsigned char g_Ovl1JTrailingBytes[8] = { 0x27, 0xA5, 0x00, 0x48, 0x27, 0xA6, 0x00, 0x44 };
 #endif
 
-/* DATA_800E59E8.CPP */
+/* g_frontendLoadoutResourceHalfwords_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 /* Resource IDs are read with lhu at +2 within each four-byte slot.
  * Keep the intervening halfwords: native u32 storage moves IDs to +0.
@@ -27,7 +27,7 @@ unsigned short g_frontendLoadoutResourceHalfwords[150] = {
 };
 #endif
 
-/* DATA_800E5B14.CPP */
+/* g_LoadoutEquipmentItemsUsRev1_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_LoadoutEquipmentItemsUsRev1[12] = {
     0x00000098, 0x00001397, 0x0000000A, 0x800D711C, 0x000000AD, 0x00001396, 0x0000000C, 0x800D7124,
@@ -35,7 +35,7 @@ unsigned int g_LoadoutEquipmentItemsUsRev1[12] = {
 };
 #endif
 
-/* DATA_800E5B44.CPP */
+/* g_loadoutWeaponItems_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_loadoutWeaponItems[32] = {
     0x000000B3, 0x000013A9, 0x00000001, 0x800D70F8, 0x000000A2, 0x0000139B, 0x0000000F, 0x800D7130,
@@ -45,7 +45,7 @@ unsigned int g_loadoutWeaponItems[32] = {
 };
 #endif
 
-/* DATA_800E5BC4.CPP */
+/* g_LoadoutAbilitiesItemsUsRev1_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_LoadoutAbilitiesItemsUsRev1[16] = {
     0x000000A9, 0x000013A7, 0x00000005, 0x800D7108, 0x000000AB, 0x0000139E, 0x00000003, 0x800D7100,
@@ -53,7 +53,7 @@ unsigned int g_LoadoutAbilitiesItemsUsRev1[16] = {
 };
 #endif
 
-/* DATA_800E5C04.CPP */
+/* g_MenuEventHandlersE6804UsRev1_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 extern char addrLow_Player_StartFourPlayerResults[];
 extern char addrLow_Player_UpdateFourPlayerResults[];
@@ -64,7 +64,7 @@ unsigned int g_MenuEventHandlersE6804UsRev1[9] = {
 };
 #endif
 
-/* DATA_800E5C28.CPP */
+/* g_MenuEventHandlersE6834UsRev1_Ovl1J.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E59E6_unclaimed_E6828 */
 extern char addrLow_Player_CreateFourPlayerResults[];

@@ -42,7 +42,7 @@ extern char g_SmpOverlay_SetListWidgetFlag40PackedAddress24[];
 extern char g_SmpOverlay_CreatePakDialogPackedAddress24[];
 extern char g_SmpOverlay_DestroyPakDialogPackedAddress24[];
 extern char g_SmpOverlay_TickPakDialogPackedAddress24[];
-extern char g_packedCodeAddress24_0041C8BC[];
+extern char g_SmpOverlay_PakDialogEvent0AHandlerPackedAddress24[];
 extern char g_SmpOverlay_ConsumePakDialogEventPackedAddress24[];
 extern char g_SmpOverlay_HandlePakDialogChoicePackedAddress24[];
 extern char g_Frontend_CreateSlotSelectionMenuPackedAddress24[];
@@ -63,7 +63,7 @@ extern char g_Join_RequestJoinOptionsExitAlternateAddressVariant3[];
 extern char g_Join_SelectPreviousJoinRowAddressVariant3[];
 extern char g_Join_SelectNextJoinRowAddressVariant3[];
 extern char g_Join_CycleJoinRequestRankAddressVariant3[];
-extern char g_packedCodeAddress24_0041F6E0[];
+extern char g_Selection_CharacterSelectionEvent0E06HandlerPackedAddress24[];
 extern char g_Character_UpdateCharacterPreviewPackedAddress24[];
 extern char g_Menu_RenderPlayerCharacterPreviewsPackedAddress24[];
 extern char g_Selection_DestroyCharacterSelectionMenuPackedAddress24[];
@@ -107,7 +107,7 @@ extern char g_Frontend_HandleCompactOptionsShortcutPackedAddress24[];
 extern char g_Frontend_CloseCompactOptionsPagePackedAddress24[];
 extern char g_Frontend_DestroyTabOptionsPagePackedAddress24[];
 extern char g_Frontend_HandleTabOptionsShortcutPackedAddress24[];
-extern char g_packedCodeAddress24_00424128[];
+extern char g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24[];
 extern char g_Frontend_InitPlayModeMenuPackedAddress24[];
 extern char g_Frontend_ApplyModeChoicePackedAddress24[];
 extern char g_Frontend_DestroyPlayModeMenuPackedAddress24[];
@@ -120,17 +120,17 @@ extern char g_Results_AnimateResultsOptionsScreenPackedAddress24[];
 extern char g_Results_RenderResultsOptionsPreviewPackedAddress24[];
 extern char g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress24[];
 extern char g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress24[];
-extern char g_packedCodeAddress24_004293B8[];
-extern char g_packedCodeAddress24_0042951C[];
-extern char g_packedCodeAddress24_00429680[];
-extern char g_packedCodeAddress24_004297E4[];
+extern char g_CTrialCatalogue_TrialOptionsEvent05HandlerPackedAddress24[];
+extern char g_CTrialCatalogue_TrialOptionsEvent06HandlerPackedAddress24[];
+extern char g_CTrialCatalogue_TrialOptionsEvent07HandlerPackedAddress24[];
+extern char g_CTrialCatalogue_TrialOptionsEvent08HandlerPackedAddress24[];
 extern char g_CTrialCatalogue_ExitTrialCataloguePackedAddress24[];
 extern char g_CTrialCatalogue_ConfirmTrialStagePackedAddress24[];
 extern char g_Frontend_ClearEuLoadingHintsPackedAddress24[];
 extern char g_Frontend_HandleMatchMenuMessagePackedAddress24[];
 extern char g_Frontend_CloseMatchMenuPackedAddress24[];
 extern char g_Frontend_CreateMatchOptionsPackedAddress24[];
-extern char g_packedCodeAddress24_0042A2B0[];
+extern char g_Frontend_MatchOptionsEvent0E03ScenarioSetupEvent0E08HandlerPackedAddress24[];
 extern char g_Frontend_ReturnMatchOptionsEventZeroPackedAddress24[];
 extern char g_Frontend_ResetMatchOptionOnEventPackedAddress24[];
 extern char g_Frontend_ActivateMatchOptionActionPackedAddress24[];
@@ -147,7 +147,7 @@ extern char g_ScenarioSetup_SelectPreviousCatalogueItemPackedAddress24[];
 extern char g_ScenarioSetup_SelectNextSetupItemPackedAddress24[];
 extern char g_ScenarioSetup_SelectPreviousCatalogueCategoryPackedAddress24[];
 extern char g_ScenarioSetup_SelectNextCatalogueCategoryPackedAddress24[];
-extern char g_packedCodeAddress24_0042C624[];
+extern char g_ScenarioSetup_SetupScreenEvent02Event08HandlerPackedAddress24[];
 extern char g_ScenarioSetup_RefreshSetupScreenPackedAddress24[];
 extern char g_ScenarioSetup_OpenResultsScreenPackedAddress24[];
 extern char g_Frontend_DestroyMatchResultsPackedAddress24[];
@@ -201,16 +201,16 @@ extern char g_Frontend_HandlePage67ChoicePackedAddress24[];
 extern char g_Player_InitPlayerSettingsScreenPackedAddress24[];
 extern char g_Player_OpenAlternatePlayerSettingsScreenPackedAddress24[];
 extern char g_Player_FreePlayerSettingsScreenPackedAddress24[];
-extern char g_packedCodeAddress24_00437AE8[];
+extern char g_Player_PlayerSettingsEvent0E07HandlerPackedAddress24[];
 extern char g_Player_UpdatePlayerSettingsExitPackedAddress24[];
-extern char g_packedCodeAddress24_00437B6C[];
+extern char g_Player_PlayerSettingsEvent0AHandlerPackedAddress24[];
 extern char g_Player_ConfirmPlayerSettingsEntryPackedAddress24[];
 extern char g_Player_CancelPlayerSettingsEntryPackedAddress24[];
 extern char g_Player_SelectNextPlayerSettingsEntryPackedAddress24[];
 extern char g_Player_SelectPreviousPlayerSettingsEntryPackedAddress24[];
 extern char g_Player_FreeAlternatePlayerSettingsScreenPackedAddress24[];
-extern char g_packedCodeAddress24_00437E64[];
-extern char g_packedCodeAddress24_00437E6C[];
+extern char g_Player_AlternatePlayerSettingsEvent0E07HandlerPackedAddress24[];
+extern char g_Player_AlternatePlayerSettingsEvent0E08HandlerPackedAddress24[];
 extern char g_Player_ConfirmAlternatePlayerSettingsEntryPackedAddress24[];
 extern char g_Player_CancelAlternatePlayerSettingsEntryPackedAddress24[];
 extern char g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24[];
@@ -250,7 +250,7 @@ extern char g_Frontend_FreeProfileResetScreenPackedAddress24[];
 extern char g_Frontend_PulseProfileResetWidgetPackedAddress24[];
 extern char g_Frontend_HandleProfileResetConfirmPackedAddress24[];
 extern char g_Frontend_AcknowledgeProfileResetEventPackedAddress24[];
-extern char g_packedCodeAddress24_0043A620[];
+extern char g_Frontend_ProfileResetEvent01HandlerPackedAddress24[];
 extern char g_Frontend_WrapNodePairEuropeanPackedAddress24[];
 extern char g_Frontend_UpdateTimedTransitionPackedAddress24[];
 extern char g_Frontend_CancelNodePairMenuPackedAddress24[];
@@ -263,18 +263,18 @@ extern char g_Frontend_FreeEquipmentScreenPackedAddress242[];
 extern char g_Frontend_RestoreEquipmentSelectionsPackedAddress242[];
 extern char g_Frontend_SelectPreviousEquipmentColumnPackedAddress242[];
 extern char g_Frontend_SelectNextEquipmentColumnPackedAddress242[];
-extern char g_packedCodeAddress24_0043CCD0[];
+extern char g_Frontend_SelectPreviousEquipmentChoicePackedAddress242[];
 extern char g_Frontend_SelectNextEquipmentChoicePackedAddress242[];
 extern char g_Frontend_CancelEquipmentSelectionPackedAddress242[];
 extern char g_CMenuProfile_ResetRoundEndDelayPackedAddress24[];
 extern char g_CMenuProfile_UpdateRoundEndDelayPackedAddress24[];
-extern char g_packedCodeAddress24_0043EF2C[];
-extern char g_packedCodeAddress24_0043EF40[];
-extern char g_packedCodeAddress24_0043EF54[];
+extern char g_Menu_MenuItemLabelRecord28CodePackedAddress24[];
+extern char g_Menu_MenuItemLabelRecord0FCodePackedAddress24[];
+extern char g_Menu_MenuItemLabelRecord23CodePackedAddress24[];
 extern char g_Menu_DrawMenuOptionSpritePackedAddress24[];
 extern char g_Menu_DrawMenuEntriesPackedAddress24[];
 extern char g_Menu_DrawMenuItemLabelPackedAddress24[];
-u32 data_unresolved_800F2A90[13916] = {
+u32 g_frontendWidgetEventTableWordsEu[13916] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -611,7 +611,7 @@ u32 data_unresolved_800F2A90[13916] = {
     0x00000010, 0x00007530, (unsigned int)g_SmpList_ResetEntryCommandsPackedAddress24, 0x00000008, 0x00007530, (unsigned int)g_SmpList_HandleIncrementInputPackedAddress24,
     0x00000007, 0x00007530, (unsigned int)g_SmpList_HandleDecrementInputPackedAddress24, 0x00000E03, 0x00007530, (unsigned int)g_SmpList_DestroyControllerPackedAddress24,
     0x0000000B, 0x00007530, (unsigned int)g_SmpList_HandleStopEventPackedAddress24, 0x00000E08, 0x00007530, (unsigned int)g_SmpList_UpdateSliderMotionPackedAddress24,
-    0x00000000, 0x00000000, 0x00000000, (unsigned int)g_packedCodeAddress24_0041F6E0, 0x00000E07, 0x00007530,
+    0x00000000, 0x00000000, 0x00000000, (unsigned int)g_Selection_CharacterSelectionEvent0E06HandlerPackedAddress24, 0x00000E07, 0x00007530,
     (unsigned int)g_SmpButton_DimListItemsPackedAddress24, 0x0000000F, 0x00007530, (unsigned int)g_SmpButton_HighlightListItemsPackedAddress24, 0x00000010, 0x00007530,
     (unsigned int)g_SmpButton_DimListItemsWithSoundPackedAddress24, 0x00000008, 0x00007530, (unsigned int)g_SmpButton_SelectNextListEntryPackedAddress24, 0x00000007, 0x00007530,
     (unsigned int)g_SmpButton_SelectPreviousListEntryPackedAddress24, 0x00000E03, 0x00007530, (unsigned int)g_SmpButton_DestroyListControllerPackedAddress24, 0x00000000, 0x00000000,
@@ -626,7 +626,7 @@ u32 data_unresolved_800F2A90[13916] = {
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000E08, 0x0000001D, (unsigned int)g_SmpOverlay_TickPakDialogPackedAddress24,
     0x00000E06, 0x0000001D, (unsigned int)g_SmpOverlay_CreatePakDialogPackedAddress24, 0x00000E03, 0x0000001D, (unsigned int)g_SmpOverlay_DestroyPakDialogPackedAddress24,
     0x00000001, 0x0000001D, (unsigned int)g_SmpOverlay_HandlePakDialogChoicePackedAddress24, 0x00000002, 0x0000001D, (unsigned int)g_SmpOverlay_ConsumePakDialogEventPackedAddress24,
-    0x0000000A, 0x0000001D, (unsigned int)g_packedCodeAddress24_0041C8BC, 0x00000000, 0x00000000, 0x00000000,
+    0x0000000A, 0x0000001D, (unsigned int)g_SmpOverlay_PakDialogEvent0AHandlerPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
     0x96969600, 0x96969600, 0xC8C8C800, 0xC8C8C800, 0x00003200, 0x00000000,
     0x00000E06, 0x00000004, 0x00000000, 0x00000201, 0x800E18C4, 0x00000202,
     0x800E18D4, 0x00000203, 0x800E18E4, 0x00000204, 0x800E18F4, 0x00000205,
@@ -778,7 +778,7 @@ u32 data_unresolved_800F2A90[13916] = {
     0x0000009B, 0x0000009A, 0x0000009E, 0x0000009F, 0x0000009D, 0x00000E07,
     0x00000007, (unsigned int)g_Selection_ActivateCharacterSelectionModePackedAddress24, 0x00000E08, 0x00000007, (unsigned int)g_Character_UpdateCharacterPreviewPackedAddress24, 0x0000000A,
     0x00000007, (unsigned int)g_Selection_HandleCharacterVariantCyclePackedAddress24, 0x00000E0A, 0x00000007, (unsigned int)g_Menu_RenderPlayerCharacterPreviewsPackedAddress24, 0x00000E06,
-    0x00000007, (unsigned int)g_packedCodeAddress24_0041F6E0, 0x00000E03, 0x00000007, (unsigned int)g_Selection_DestroyCharacterSelectionMenuPackedAddress24, 0x00000002,
+    0x00000007, (unsigned int)g_Selection_CharacterSelectionEvent0E06HandlerPackedAddress24, 0x00000E03, 0x00000007, (unsigned int)g_Selection_DestroyCharacterSelectionMenuPackedAddress24, 0x00000002,
     0x00000007, (unsigned int)g_Selection_CancelCharacterConfirmationPackedAddress24, 0x00000001, 0x00000007, (unsigned int)g_Selection_ReadSelectionSlotPackedAddress24, 0x00000008,
     0x00000007, (unsigned int)g_Selection_ReturnCharacterEventZeroAPackedAddress24, 0x00000007, 0x00000007, (unsigned int)g_Selection_ReturnCharacterEventZeroBPackedAddress24, 0x00000005,
     0x00000007, (unsigned int)g_Selection_ReturnCharacterEventZeroCPackedAddress24, 0x00000006, 0x00000007, (unsigned int)g_Selection_ReturnCharacterEventZeroDPackedAddress24, 0x00000000,
@@ -802,7 +802,7 @@ u32 data_unresolved_800F2A90[13916] = {
     (unsigned int)g_Frontend_CloseCompactOptionsPagePackedAddress24, 0x00000001, 0x0000000B, (unsigned int)g_Frontend_HandleCompactOptionsShortcutPackedAddress24, 0x00000000, 0x00000000,
     0x00000000, 0x00000E08, 0x00000016, (unsigned int)g_Menu_AnimateTabOptionsMenuPackedAddress24, 0x00000E0A, 0x00000016,
     (unsigned int)g_Menu_FinishTabOptionsTransitionPackedAddress24, 0x00000E06, 0x00000016, (unsigned int)g_Menu_OpenLocalizedGameOptionsPackedAddress24, 0x00000E03, 0x00000016,
-    (unsigned int)g_Frontend_DestroyTabOptionsPagePackedAddress24, 0x00000002, 0x00000016, (unsigned int)g_packedCodeAddress24_00424128, 0x00000001, 0x00000016,
+    (unsigned int)g_Frontend_DestroyTabOptionsPagePackedAddress24, 0x00000002, 0x00000016, (unsigned int)g_Frontend_TabOptionsEvent02PlayModeEvent01HandlerPackedAddress24, 0x00000001, 0x00000016,
     (unsigned int)g_Frontend_HandleTabOptionsShortcutPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000E08,
     0x00000003, (unsigned int)g_Frontend_UpdatePlayModeMenuPackedAddress24, 0x00000E06, 0x00000003, (unsigned int)g_Frontend_InitPlayModeMenuPackedAddress24, 0x00000E03,
     0x00000003, (unsigned int)g_Frontend_DestroyPlayModeMenuPackedAddress24, 0x00000002, 0x00000003, (unsigned int)g_Frontend_ConsumePlayModeEventPackedAddress24, 0x00000001,
@@ -888,19 +888,19 @@ u32 data_unresolved_800F2A90[13916] = {
     0x0000000A, (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress24, 0x00000E0A, 0x0000000A, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress24, 0x00000E06,
     0x0000000A, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress24, 0x00000E03, 0x0000000A, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress24, 0x00000002,
     0x0000000A, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress24, 0x00000001, 0x0000000A, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress24, 0x00000005,
-    0x0000000A, (unsigned int)g_packedCodeAddress24_004293B8, 0x00000006, 0x0000000A, (unsigned int)g_packedCodeAddress24_0042951C, 0x00000008,
-    0x0000000A, (unsigned int)g_packedCodeAddress24_004297E4, 0x00000007, 0x0000000A, (unsigned int)g_packedCodeAddress24_00429680, 0x00000000,
+    0x0000000A, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent05HandlerPackedAddress24, 0x00000006, 0x0000000A, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent06HandlerPackedAddress24, 0x00000008,
+    0x0000000A, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent08HandlerPackedAddress24, 0x00000007, 0x0000000A, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent07HandlerPackedAddress24, 0x00000000,
     0x00000000, 0x00000000, 0x00000E07, 0x0000000F, (unsigned int)g_Results_ShowResultsPlayerModelsPackedAddress24, 0x00000E08,
     0x0000000F, (unsigned int)g_Results_AnimateResultsOptionsScreenPackedAddress24, 0x0000000A, 0x0000000F, (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress24, 0x00000E0A,
     0x0000000F, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress24, 0x00000E06, 0x0000000F, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress24, 0x00000E03,
     0x0000000F, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress24, 0x00000002, 0x0000000F, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress24, 0x00000001,
-    0x0000000F, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress24, 0x00000005, 0x0000000F, (unsigned int)g_packedCodeAddress24_004293B8, 0x00000006,
-    0x0000000F, (unsigned int)g_packedCodeAddress24_0042951C, 0x00000008, 0x0000000F, (unsigned int)g_packedCodeAddress24_004297E4, 0x00000007,
-    0x0000000F, (unsigned int)g_packedCodeAddress24_00429680, 0x00000000, 0x00000000, 0x00000000, 0x00000001,
+    0x0000000F, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress24, 0x00000005, 0x0000000F, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent05HandlerPackedAddress24, 0x00000006,
+    0x0000000F, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent06HandlerPackedAddress24, 0x00000008, 0x0000000F, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent08HandlerPackedAddress24, 0x00000007,
+    0x0000000F, (unsigned int)g_CTrialCatalogue_TrialOptionsEvent07HandlerPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000001,
     0x00000E06, 0x0000000E, (unsigned int)g_Frontend_ClearEuLoadingHintsPackedAddress24, 0x00000002, 0x0000000E, (unsigned int)g_Frontend_CloseMatchMenuPackedAddress24,
     0x00000001, 0x0000000E, (unsigned int)g_Frontend_HandleMatchMenuMessagePackedAddress24, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000E06, 0x00000015, (unsigned int)g_Frontend_CreateMatchOptionsPackedAddress24, 0x00000E03, 0x00000015,
-    (unsigned int)g_packedCodeAddress24_0042A2B0, 0x00000E0A, 0x00000015, (unsigned int)g_Frontend_ReturnMatchOptionsEventZeroPackedAddress24, 0x00000002, 0x00000015,
+    (unsigned int)g_Frontend_MatchOptionsEvent0E03ScenarioSetupEvent0E08HandlerPackedAddress24, 0x00000E0A, 0x00000015, (unsigned int)g_Frontend_ReturnMatchOptionsEventZeroPackedAddress24, 0x00000002, 0x00000015,
     (unsigned int)g_Frontend_ExitMatchOptionsPackedAddress24, 0x00000001, 0x00000015, (unsigned int)g_Frontend_ActivateMatchOptionActionPackedAddress24, 0x0000000A, 0x00000015,
     (unsigned int)g_Frontend_ResetMatchOptionOnEventPackedAddress24, 0x00000008, 0x0000036E, (unsigned int)g_Frontend_RefreshMatchSlotsOnZeroEventAltPackedAddress24, 0x00000007, 0x0000036E,
     (unsigned int)g_Frontend_RefreshMatchSlotsOnZeroEventPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000032D,
@@ -940,7 +940,7 @@ u32 data_unresolved_800F2A90[13916] = {
     0x0000031B, 0x00000E08, 0x00000014, (unsigned int)g_ScenarioSetup_UpdateSetupTransitionPackedAddress24, 0x00000E07, 0x00000014,
     (unsigned int)g_ScenarioSetup_ReturnSetupEventZeroAltPackedAddress24, 0x0000000A, 0x00000014, (unsigned int)g_ScenarioSetup_BeginSetupConfirmationPackedAddress24, 0x00000E06, 0x00000014,
     (unsigned int)g_CScenarioSetup_OpenScenarioSetupScreenPackedAddress24, 0x00000E03, 0x00000014, (unsigned int)g_ScenarioSetup_CloseSetupScreenPackedAddress24, 0x00000E0A, 0x00000014,
-    (unsigned int)g_Frontend_DrawSetupResultPanelsPackedAddress24, 0x00000002, 0x00000014, (unsigned int)g_packedCodeAddress24_0042C624, 0x00000001, 0x00000014,
+    (unsigned int)g_Frontend_DrawSetupResultPanelsPackedAddress24, 0x00000002, 0x00000014, (unsigned int)g_ScenarioSetup_SetupScreenEvent02Event08HandlerPackedAddress24, 0x00000001, 0x00000014,
     (unsigned int)g_ScenarioSetup_RefreshSetupScreenPackedAddress24, 0x00000005, 0x00000014, (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueItemPackedAddress24, 0x00000006, 0x00000014,
     (unsigned int)g_ScenarioSetup_SelectNextSetupItemPackedAddress24, 0x00000008, 0x00000014, (unsigned int)g_ScenarioSetup_SelectNextCatalogueCategoryPackedAddress24, 0x00000007, 0x00000014,
     (unsigned int)g_ScenarioSetup_SelectPreviousCatalogueCategoryPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x0000023E, 0x00000262,
@@ -981,12 +981,12 @@ u32 data_unresolved_800F2A90[13916] = {
     0x00000E03, 0x00000020, (unsigned int)g_Frontend_FreePage67ScreenPackedAddress24, 0x00000001, 0x00000020, (unsigned int)g_Frontend_HandlePage67ChoicePackedAddress24,
     0x00000002, 0x00000020, (unsigned int)g_Frontend_AcknowledgePage67EventPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x00000005,
-    (unsigned int)g_packedCodeAddress24_00437AE8, 0x00000E08, 0x00000005, (unsigned int)g_Player_UpdatePlayerSettingsExitPackedAddress24, 0x00000E06, 0x00000005,
+    (unsigned int)g_Player_PlayerSettingsEvent0E07HandlerPackedAddress24, 0x00000E08, 0x00000005, (unsigned int)g_Player_UpdatePlayerSettingsExitPackedAddress24, 0x00000E06, 0x00000005,
     (unsigned int)g_Player_InitPlayerSettingsScreenPackedAddress24, 0x00000E03, 0x00000005, (unsigned int)g_Player_FreePlayerSettingsScreenPackedAddress24, 0x0000000A, 0x00000005,
-    (unsigned int)g_packedCodeAddress24_00437B6C, 0x00000002, 0x00000005, (unsigned int)g_Player_CancelPlayerSettingsEntryPackedAddress24, 0x00000001, 0x00000005,
+    (unsigned int)g_Player_PlayerSettingsEvent0AHandlerPackedAddress24, 0x00000002, 0x00000005, (unsigned int)g_Player_CancelPlayerSettingsEntryPackedAddress24, 0x00000001, 0x00000005,
     (unsigned int)g_Player_ConfirmPlayerSettingsEntryPackedAddress24, 0x00000008, 0x0000005E, (unsigned int)g_Player_SelectNextPlayerSettingsEntryPackedAddress24, 0x00000007, 0x0000005E,
     (unsigned int)g_Player_SelectPreviousPlayerSettingsEntryPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000E07, 0x0000000C,
-    (unsigned int)g_packedCodeAddress24_00437E64, 0x00000E08, 0x0000000C, (unsigned int)g_packedCodeAddress24_00437E6C, 0x00000E06, 0x0000000C,
+    (unsigned int)g_Player_AlternatePlayerSettingsEvent0E07HandlerPackedAddress24, 0x00000E08, 0x0000000C, (unsigned int)g_Player_AlternatePlayerSettingsEvent0E08HandlerPackedAddress24, 0x00000E06, 0x0000000C,
     (unsigned int)g_Player_OpenAlternatePlayerSettingsScreenPackedAddress24, 0x00000E03, 0x0000000C, (unsigned int)g_Player_FreeAlternatePlayerSettingsScreenPackedAddress24, 0x00000002, 0x0000000C,
     (unsigned int)g_Player_CancelAlternatePlayerSettingsEntryPackedAddress24, 0x00000001, 0x0000000C, (unsigned int)g_Player_ConfirmAlternatePlayerSettingsEntryPackedAddress24, 0x00000008, 0x000001C6,
     (unsigned int)g_Player_SelectNextAlternatePlayerSettingsEntryPackedAddress24, 0x00000007, 0x000001C6, (unsigned int)g_Player_SelectPreviousAlternatePlayerSettingsEntryPackedAddress24, 0x00000000, 0x00000000,
@@ -1011,7 +1011,7 @@ u32 data_unresolved_800F2A90[13916] = {
     (unsigned int)g_Menu_FreeSoundSlidersPackedAddress24, 0x00000002, 0x0000000D, (unsigned int)g_Menu_CancelSoundSliderPopupPackedAddress24, 0x00000001, 0x0000000D,
     (unsigned int)g_Menu_ConfirmSoundSliderPopupPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000E08,
     0x00000018, (unsigned int)g_Frontend_PulseProfileResetWidgetPackedAddress24, 0x00000E06, 0x00000018, (unsigned int)g_Frontend_CreateProfileResetScreenEuropeanPackedAddress24, 0x00000E03,
-    0x00000018, (unsigned int)g_Frontend_FreeProfileResetScreenPackedAddress24, 0x00000001, 0x00000018, (unsigned int)g_packedCodeAddress24_0043A620, 0x00000002,
+    0x00000018, (unsigned int)g_Frontend_FreeProfileResetScreenPackedAddress24, 0x00000001, 0x00000018, (unsigned int)g_Frontend_ProfileResetEvent01HandlerPackedAddress24, 0x00000002,
     0x00000018, (unsigned int)g_Frontend_AcknowledgeProfileResetEventPackedAddress24, 0x0000000A, 0x00000018, (unsigned int)g_Frontend_HandleProfileResetConfirmPackedAddress24, 0x00000000,
     0x00000000, 0x00000000, 0x56472F00, 0x00000001, 0x00000E06, 0x00000021,
     (unsigned int)g_Frontend_WrapNodePairEuropeanPackedAddress24, 0x00000002, 0x00000021, (unsigned int)g_Frontend_CancelNodePairMenuPackedAddress24, 0x00000001, 0x00000021,
@@ -1042,7 +1042,7 @@ u32 data_unresolved_800F2A90[13916] = {
     0x00000E08, 0x00000008, (unsigned int)g_Player_UpdateFourPlayerResultsPackedAddress242, 0x00000E0A, 0x00000008, (unsigned int)g_Player_DrawFourPlayerResultsPackedAddress242,
     0x00000E06, 0x00000008, (unsigned int)g_Player_CreateFourPlayerResultsPackedAddress242, 0x00000E03, 0x00000008, (unsigned int)g_Frontend_FreeEquipmentScreenPackedAddress242,
     0x0000000A, 0x00000008, (unsigned int)g_Frontend_RestoreEquipmentSelectionsPackedAddress242, 0x00000002, 0x00000008, (unsigned int)g_Frontend_CancelEquipmentSelectionPackedAddress242,
-    0x00000001, 0x00000008, (unsigned int)g_Frontend_ConfirmEquipmentSelectionPackedAddress242, 0x00000007, 0x00007530, (unsigned int)g_packedCodeAddress24_0043CCD0,
+    0x00000001, 0x00000008, (unsigned int)g_Frontend_ConfirmEquipmentSelectionPackedAddress242, 0x00000007, 0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentChoicePackedAddress242,
     0x00000005, 0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentColumnPackedAddress242, 0x00000008, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentChoicePackedAddress242,
     0x00000006, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentColumnPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1057,10 +1057,10 @@ u32 data_unresolved_800F2A90[13916] = {
     0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress24, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800E24B4,
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
-    0x00000028, 0x0000FF01, 0x800E41F4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, (unsigned int)g_packedCodeAddress24_0043EF2C, 0x00000000,
+    0x00000028, 0x0000FF01, 0x800E41F4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, (unsigned int)g_Menu_MenuItemLabelRecord28CodePackedAddress24, 0x00000000,
     0x00000000, 0x00000000, 0x00010041, 0x0000000F, 0x0000FF01, 0x800E41F4,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, (unsigned int)g_packedCodeAddress24_0043EF40, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
-    0x00000023, 0x0000FF01, 0x800E24E4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, 0x00000000, (unsigned int)g_packedCodeAddress24_0043EF54,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, (unsigned int)g_Menu_MenuItemLabelRecord0FCodePackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
+    0x00000023, 0x0000FF01, 0x800E24E4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress24, 0x00000000, (unsigned int)g_Menu_MenuItemLabelRecord23CodePackedAddress24,
     0x00000000, 0x800F2390, 0x00050000, (unsigned int)g_CMenuProfile_ResetRoundEndDelayPackedAddress24, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress24,
     (unsigned int)g_CMenuProfile_UpdateRoundEndDelayPackedAddress24, 0x00040000, 0x00000000, 0x00000000, 0x00000001, 0x00000001,
     0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0xFFFFFFFF,

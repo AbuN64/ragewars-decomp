@@ -15,7 +15,7 @@ struct MenuPointerEntry {
     s32 pad[3];
 };
 
-typedef signed int ( *Handler80437868)(void *, signed int, signed int, signed int, signed int);
+typedef signed int ( *MenuChoiceEventHandler)(void *, signed int, signed int, signed int, signed int);
 
 
 struct Shared_Entry;
@@ -47,7 +47,7 @@ typedef struct MenuPointerEntry MenuPointerEntry;
 struct CheatCode;
 typedef struct CheatCode CheatCode;
 
-extern void func_804397E8_de(char *);
+extern void Preview_DrawMenuModelItem_Setupresults(char *);
 
 struct CheatMenuInputView;
 typedef struct CheatMenuInputView CheatMenuInputView;

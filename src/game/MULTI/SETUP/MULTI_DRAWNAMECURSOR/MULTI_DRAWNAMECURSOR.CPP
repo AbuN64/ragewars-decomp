@@ -1,6 +1,6 @@
 
 
-/* DATA_800E2824.CPP */
+/* k_MultiDrawnamecursorEncodedWordsBlock1_MultiDrawnamecursor.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int k_MultiDrawnamecursorEncodedWordsBlock1[5] = {
     0x00000001, 0x800D72CC, 0x00000002, 0x80153140, 0x00000000,

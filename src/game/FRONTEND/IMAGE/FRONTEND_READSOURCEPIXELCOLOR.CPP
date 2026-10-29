@@ -138,7 +138,7 @@ extern void (*g_readSourceIndex)();
 
 
 u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
-    extern ShapeCode802B54A0 *g_conversionSourceImage;
+    extern ConversionImageView *g_conversionSourceImage;
     u32 r;
     u32 g;
     u32 b;
@@ -174,7 +174,7 @@ u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
 }
 
 s32 Frontend_ReadSourcePixelIndex(s32 x, s32 y) {
-    extern struct ShapeCode802B54A0 *g_conversionSourceImage;
+    extern struct ConversionImageView *g_conversionSourceImage;
     g_sourcePixelOffset = x + y * g_conversionSourceImage->width;
     g_readSourceIndex();
     return g_sourcePixelIndex;
@@ -215,7 +215,7 @@ u32 Frontend_ReadSourceColorEntry(s32 index) {
 }
 
 void Frontend_WriteDestinationPixelColor(s32 x, s32 y, u32 color) {
-    extern ShapeCode802B54A0 *g_conversionDestinationImage;
+    extern ConversionImageView *g_conversionDestinationImage;
     u32 r;
     u32 g;
     u32 b;
@@ -254,7 +254,7 @@ void Frontend_WriteDestinationPixelColor(s32 x, s32 y, u32 color) {
 }
 
 void Frontend_WriteDestinationPixelIndex(s32 x, s32 y, s32 value) {
-    extern struct ShapeCode802B54A0 *g_conversionDestinationImage;
+    extern struct ConversionImageView *g_conversionDestinationImage;
     g_destinationPixelIndex = value;
     g_destinationPixelOffset = x + y * g_conversionDestinationImage->width;
     g_writeDestinationIndex();

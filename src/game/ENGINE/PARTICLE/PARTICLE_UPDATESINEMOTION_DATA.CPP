@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800C9C30.CPP */
-/* ROM-grounded data: src/rw_pool_80279DD0_CA830_us_rev1.c */
+/* ROM-grounded data: src/g_Particle_UpdateSineMotionConstantsUsRev1Part3_ParticleUpdatesinemotionData.c */
 const unsigned int g_Particle_UpdateSineMotionConstantsUsRev1Part3[3] = {
     0x3F800000, 0x3F800000, 0x3F800000,
 };

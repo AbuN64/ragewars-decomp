@@ -16,7 +16,7 @@ unsigned int k_CloseattackEncodedWords[3] = {
 #endif
 #endif
 
-/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Scaled_GetControllerPosition gives; always returns one. */
+/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if Nav_CheckTarget_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Scaled_GetControllerPosition gives; always returns one. */
 
 
 extern char g_navigationGraph[];

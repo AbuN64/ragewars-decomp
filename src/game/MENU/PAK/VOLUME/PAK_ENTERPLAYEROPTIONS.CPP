@@ -34,7 +34,7 @@ void Pak_EnterPlayerOptions(PlayerOptionsEntry *player) {
     SoundVoicePool_Pause(SoundVoicePool_GetGlobalState(mask));
 }
 
-/* Calls func_8026495C_de and nothing else. */
+/* Calls Control_RestoreControllerSetup_FrontendDestroypausemenu and nothing else. */
 
 void Pak_RestoreControllerSetup(void) {
     Control_RestoreControllerSetup();

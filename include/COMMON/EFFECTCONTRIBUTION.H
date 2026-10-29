@@ -55,12 +55,12 @@ struct RibbonFrameBufferView;
 struct Shade;
 typedef struct Shade Shade;
 
-struct Node802A697C;
+struct EffectBoneNode;
 struct ParticleSwooshAttachment;
 struct ParticleSwooshAttachment {
     u8 pad0[4];
     struct ParticleSwooshAttachment *next;
-    struct Node802A697C *node;
+    struct EffectBoneNode *node;
     u8 padC[0x10];
     void *object;
     u8 pad20[4];
@@ -68,7 +68,7 @@ struct ParticleSwooshAttachment {
     u8 pad28[0x14];
     u32 flags;
 };
-struct Owner802A697C;
+struct SwooshAttachmentOwnerView;
 struct ParticleSwooshAttachment;
 
 struct ParticleActorListView;
@@ -280,8 +280,8 @@ typedef struct ParticleRibbonLifetimeView ParticleRibbonLifetimeView;
 
 
 
-struct Owner802A697C;
-typedef struct Owner802A697C Owner802A697C;
+struct SwooshAttachmentOwnerView;
+typedef struct SwooshAttachmentOwnerView SwooshAttachmentOwnerView;
 
 struct TexturedRibbonStateView;
 
@@ -323,7 +323,7 @@ typedef struct Vtx Vtx;
 
 struct TexturedRibbonResourceView;
 
-extern void Fx_DetachEffectOwner(Owner802A697C *owner, int object);
+extern void Fx_DetachEffectOwner(SwooshAttachmentOwnerView *owner, int object);
 
 
 struct TexturedRibbonStateView;

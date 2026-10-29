@@ -26,18 +26,18 @@ extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 extern struct MenuSettings g_gameSettings;
 
 #if defined(VERSION_EU)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800E2244 formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playerOption79ZeroText for zero and otherwise the text g_playerOption79StepText_eu formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #elif defined(VERSION_EU_X)
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800DDC28 formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playerOption79ZeroText for zero and otherwise the text g_playerOption79StepText_eu_x formatted with g_playerMenuStepFormatGerman for a positive or g_playerMenuStepFormat for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #else
-/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playeroptionText_800D35F8 for zero and otherwise the text g_playeroptionText_800D35FC formatted with g_playerMenuStepFormatGerman for a positive or D_800DE760 for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
+/* Points an option field at the settings byte 0x79 of the holder's owner settings (or the defaults g_playerPartnerNameFallback) as a signed offset from 128 in steps of eight, using the text g_playerOption79ZeroText for zero and otherwise the text g_playerOption79StepText formatted with g_playerMenuStepFormatGerman for a positive or g_fmtSpaceDec3_Playeroption for a negative step four bytes before the length Menu_CountLineChars reports, returning zero. */
 #endif
 
 
 #if defined(VERSION_EU)
-extern char *g_playeroptionText_800E2244;
+extern char *g_playerOption79StepText_eu;
 #elif defined(VERSION_EU_X)
-extern char *g_playeroptionText_800DDC28;
+extern char *g_playerOption79StepText_eu_x;
 #else
 #endif
 
@@ -61,13 +61,13 @@ extern s32 Menu_CountLineChars(struct Field *);
 
 
 #if defined(VERSION_EU)
-extern char *g_playeroptionText_800E2264;
+extern char *g_playerOption7AStepText_eu;
 #elif defined(VERSION_EU_X)
-extern char *g_playeroptionText_800DDC40;
+extern char *g_playerOption7AStepText_eu_x;
 #else
 #endif
 
-/* Points a field's text at g_playeroptionText_800D3608 when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults g_playerPartnerNameFallback without an owner, is one, and at g_playeroptionText_800D360C otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of Items_TogglePlayerFlag82 and the texts g_playeroptionText_800D3608 and g_playeroptionText_800D360C changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
+/* Points a field's text at g_playerFlag82OnText when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults g_playerPartnerNameFallback without an owner, is one, and at g_playerFlag82OffText otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of Items_TogglePlayerFlag82 and the texts g_playerFlag82OnText and g_playerFlag82OffText changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
 
 
 
@@ -90,7 +90,7 @@ extern char *g_playeroptionText_800DDC40;
 
 
 
-/* Counts the timer g_controllerPakProbeState down by g_frameElapsedTime without passing zero, then sets bit 24 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000, in which case the bit is cleared, stores what func_8040C3BC_de returns at offset 0x14 and returns zero. Adapted from Pak_UpdateScreenModeAvailability with the timer countdown added, Defs_GetMemorySize called without arguments and bit 24 instead of bit 23 changed. */
+/* Counts the timer g_controllerPakProbeState down by g_frameElapsedTime without passing zero, then sets bit 24 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000, in which case the bit is cleared, stores what Frontend_GetScreenModePalette_Playeroption returns at offset 0x14 and returns zero. Adapted from Pak_UpdateScreenModeAvailability with the timer countdown added, Defs_GetMemorySize called without arguments and bit 24 instead of bit 23 changed. */
 
 
 extern f32 g_controllerPakProbeState;
@@ -137,14 +137,14 @@ s32 Items_FormatPlayerOption79Step(struct Field *field, struct PlayerSettingsTex
     }
     step = (settings->option79 - 128) / 8;
     if (step == 0) {
-        field->text = &g_playeroptionText_800D35F8;
+        field->text = &g_playerOption79ZeroText;
     } else if (step > 0) {
 #if defined(VERSION_EU)
-        field->text = &g_playeroptionText_800E2244;
+        field->text = &g_playerOption79StepText_eu;
 #elif defined(VERSION_EU_X)
-        field->text = &g_playeroptionText_800DDC28;
+        field->text = &g_playerOption79StepText_eu_x;
 #else
-        field->text = &g_playeroptionText_800D35FC;
+        field->text = &g_playerOption79StepText;
 #endif
         text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -156,11 +156,11 @@ field->text[g_gameSettings.language]
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormatGerman, step);
     } else {
 #if defined(VERSION_EU)
-        field->text = &g_playeroptionText_800E2244;
+        field->text = &g_playerOption79StepText_eu;
 #elif defined(VERSION_EU_X)
-        field->text = &g_playeroptionText_800DDC28;
+        field->text = &g_playerOption79StepText_eu_x;
 #else
-        field->text = &g_playeroptionText_800D35FC;
+        field->text = &g_playerOption79StepText;
 #endif
         text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -198,14 +198,14 @@ s32 Items_FormatPlayerOption7AStep(struct Field *field, struct PlayerSettingsTex
     }
     step = (settings->option7A - 128) / 8;
     if (step == 0) {
-        field->text = &g_playeroptionText_800D3600;
+        field->text = &g_playerOption7AZeroText;
     } else if (step > 0) {
 #if defined(VERSION_EU)
-        field->text = &g_playeroptionText_800E2264;
+        field->text = &g_playerOption7AStepText_eu;
 #elif defined(VERSION_EU_X)
-        field->text = &g_playeroptionText_800DDC40;
+        field->text = &g_playerOption7AStepText_eu_x;
 #else
-        field->text = &g_playeroptionText_800D3604;
+        field->text = &g_playerOption7AStepText;
 #endif
         text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -217,11 +217,11 @@ field->text[g_gameSettings.language]
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_playerMenuStepFormatGerman, step);
     } else {
 #if defined(VERSION_EU)
-        field->text = &g_playeroptionText_800E2264;
+        field->text = &g_playerOption7AStepText_eu;
 #elif defined(VERSION_EU_X)
-        field->text = &g_playeroptionText_800DDC40;
+        field->text = &g_playerOption7AStepText_eu_x;
 #else
-        field->text = &g_playeroptionText_800D3604;
+        field->text = &g_playerOption7AStepText;
 #endif
         text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -247,9 +247,9 @@ s32 Items_SelectPlayerFlag82Text(struct PakActionLabelView *field, struct Player
         settings = holder->owner->settings;
     }
     if (settings->flag82 == 1) {
-        field->text = g_playeroptionText_800D3608;
+        field->text = g_playerFlag82OnText;
     } else {
-        field->text = g_playeroptionText_800D360C;
+        field->text = g_playerFlag82OffText;
     }
     return result;
 }
@@ -292,7 +292,7 @@ s32 Items_RequestScreenModeFade(void) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned short rodata_shared_800EEE10[3] = {
+const unsigned short k_fmtSpacesDec2[3] = {
     0x2020, 0x2532, 0x6400,
 };
 #endif

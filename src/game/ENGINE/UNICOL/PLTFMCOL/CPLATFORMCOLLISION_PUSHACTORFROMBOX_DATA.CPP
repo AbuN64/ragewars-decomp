@@ -24,17 +24,17 @@ unsigned int k_CplatformcollisionPushactorfromboxEncodedWordsBlock4[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80241BAC_C9448_us_rev1.c */
+/* ROM-grounded data: src/k_CplatformcollisionPushactorfromboxEncodedWordsBlock3_CplatformcollisionPushactorfromboxData.c */
 const unsigned int k_CplatformcollisionPushactorfromboxEncodedWordsBlock3[1] = {
     0x3ED1B717,
 };
 
-/* ROM-grounded data: src/rw_pool_80241F24_C944C_us_rev1.c */
+/* ROM-grounded data: src/k_CplatformcollisionPushactorfromboxEncodedWordsBlock2_CplatformcollisionPushactorfromboxData.c */
 const unsigned int k_CplatformcollisionPushactorfromboxEncodedWordsBlock2[1] = {
     0x3ED1B717,
 };
 
-/* ROM-grounded data: src/rw_pool_802426CC_C9450_us_rev1.c */
+/* ROM-grounded data: src/k_CplatformcollisionPushactorfromboxEncodedWordsBlock1_CplatformcollisionPushactorfromboxData.c */
 const unsigned int k_CplatformcollisionPushactorfromboxEncodedWordsBlock1[1] = {
     0x3ED1B717,
 };

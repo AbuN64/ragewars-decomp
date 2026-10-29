@@ -38,10 +38,10 @@ void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD
     state->allocation = alHeapDBAlloc(0, 0, &state->root->heap, 1, 0xF8);
     state->timer = 50;
     state->counter = 0;
-    state->first = D_800C3FF8_de;
-    state->second = D_800C3FFC_de;
-    state->third = D_800C3FF8_de;
-    state->fourth = D_800C3FF8_de;
+    state->first = k_musicPlayerInitialUnitValue_de;
+    state->second = k_musicPlayerInitialSecondValue_de;
+    state->third = k_musicPlayerInitialUnitValue_de;
+    state->fourth = k_musicPlayerInitialUnitValue_de;
 }
 
 void Audio_UpdateMusicFade(void *queue) {
@@ -84,7 +84,7 @@ store:
 }
 
 /* 800C90F8.CPP */
-/* ROM-grounded data: src/rw_pool_8025DA10_C9CF8_us_rev1.c */
+/* ROM-grounded data: src/g_audio_LoadMusicSequenceConstantWords_AudioUpdatemusicfade.c */
 const unsigned int g_audio_LoadMusicSequenceConstantWords[1] = {
     0x3DCCCCCD,
 };

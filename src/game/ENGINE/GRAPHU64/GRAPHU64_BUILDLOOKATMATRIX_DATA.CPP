@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800C9A98.CPP */
-/* ROM-grounded data: src/rw_pool_80274DFC_CA698_us_rev1.c */
+/* ROM-grounded data: src/g_graphu64_IsPointOnPositiveEdgeSideConstantWords_us_rev1_Graphu64BuildlookatmatrixData.c */
 const unsigned int g_graphu64_IsPointOnPositiveEdgeSideConstantWords_us_rev1[3] = {
     0xBF800000, 0x3F800000, 0x3F800000,
 };
@@ -29,7 +29,7 @@ unsigned int k_Graphu64BuildlookatmatrixEncodedWords[3] = {
 };
 #endif
 
-/* DATA_800C9AA4.CPP */
+/* g_Graphu64BuildlookatmatrixEncodedWords_Graphu64BuildlookatmatrixData.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_Graphu64BuildlookatmatrixEncodedWords[3] = {
     0x40C90FDB, 0x40490FDC, 0x4096CBE5,

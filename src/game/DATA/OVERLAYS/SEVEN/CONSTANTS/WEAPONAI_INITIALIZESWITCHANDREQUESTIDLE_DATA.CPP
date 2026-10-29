@@ -14,6 +14,6 @@ unsigned int g_WeaponResourceDirectoryWords1[22] = {
 unsigned int g_WeaponaiInitializeswitchandrequestidlePointerWords1[17] = {
     0x00000000, 0x0BEA0BEB, 0x0BECFFFF, 0x0BED0BEE, 0x0BEF0BF0, 0x800D720C, 0x800D7210, 0x800D7214,
     0x800D7218, 0x800D721C, 0x800D7220, 0x800D7224, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000000,
-    (unsigned int)g_packedCodeAddress24_00239FBC,
+    (unsigned int)g_Gsky_FloorSurfaceNoOpAddress,
 };
 #endif

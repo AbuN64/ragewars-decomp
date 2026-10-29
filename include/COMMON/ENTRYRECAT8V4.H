@@ -64,7 +64,7 @@ struct TrackOverlayNamedEntry {
 
 extern void Menu_AssignBit(u8 *bits, s32 n, s32 set);
 
-extern float D_800DCC7C_de;
+extern float g_trackStartTargetFallbackX;
 
 struct Tables;
 typedef struct Tables Tables;

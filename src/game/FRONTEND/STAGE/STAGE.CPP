@@ -29,7 +29,7 @@ struct Stage {
     char pad0[5];
     u8 opponents[7][4];
 };
-extern struct Stage *D_800E4680;
+extern struct Stage *g_currentStagePreset;
 extern s32 g_selectedLevelId;
 
 extern void MarkMenuEventHandled(void);
@@ -71,7 +71,7 @@ void Stage_StartConfiguredMatch(void) {
     match = &g_gameSettings.counters;
     match->enabled = 0;
     match->m_bPhoenixRoomActive = 0;
-    D_800E4680 = 0;
+    g_currentStagePreset = 0;
     if (settings[0xD] != 0) {
         first = 0;
         while (((struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96))->joined == 0) {
@@ -80,16 +80,16 @@ void Stage_StartConfiguredMatch(void) {
         status = (struct MatchPlayerStatus *)(settings + 0xD0 + first * 0x96);
         switch (settings[0xD]) {
         case 1:
-            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
+            g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 0, status->kind);
             break;
         case 2:
-            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 1, 0);
+            g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 1, 0);
             break;
         case 3:
-            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 3, 0);
+            g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 3, 0);
             break;
         case 4:
-            D_800E4680 = Achieve_CopyPreset(g_selectedLevelId, 2, 0);
+            g_currentStagePreset = Achieve_CopyPreset(g_selectedLevelId, 2, 0);
             break;
         }
         g_gameSettings.counters.humanWon = 0;
@@ -136,7 +136,7 @@ void Stage_StartConfiguredMatch(void) {
     }
 }
 
-/* Places the computer opponents of the stage entry D_800E4680: first frees the player settings
+/* Places the computer opponents of the stage entry g_currentStagePreset: first frees the player settings
    records still marked joined and locked, then for each of the entry's seven opponent records with a
    nonzero kind places it through Random_AddStageOpponent and, by kind, sets the returned slot's controlMode
    and the match counters: kind 12 sets 2 with enabled, timer 100 and cooldown -1; 13 sets 1 with
@@ -167,28 +167,28 @@ void Stage_PlaceStageOpponents(void) {
     for (i = 0; i < 7; i++) {
         on = 1;
         game = &g_gameSettings;
-        if (D_800E4680->opponents[i][0] == 0) {
+        if (g_currentStagePreset->opponents[i][0] == 0) {
             continue;
         }
-        switch (D_800E4680->opponents[i][0]) {
+        switch (g_currentStagePreset->opponents[i][0]) {
         case 12:
             match->enabled = on;
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             (game->playerSettings + slot)->controlMode = 2;
             match->m_nBastilleShield = 100;
             match->m_nBastilleTimer = -1;
             break;
         case 13:
             match->enabled = on;
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             (game->playerSettings + slot)->controlMode = on;
             break;
         case 16:
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             (game->playerSettings + slot)->controlMode = 2;
             break;
         case 14:
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             if (boss == 0) {
                 boss = 1;
                 match->enabled = on;
@@ -201,11 +201,11 @@ void Stage_PlaceStageOpponents(void) {
             escorted = 1;
             match->enabled = on;
             match->m_nTalsetLives = 0;
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             (game->playerSettings + slot)->controlMode = on;
             break;
         default:
-            slot = Random_AddStageOpponent(D_800E4680->opponents[i]);
+            slot = Random_AddStageOpponent(g_currentStagePreset->opponents[i]);
             game->playerSettings[slot].controlMode = 0;
             if (escorted) {
                 game->playerSettings[slot].active = on;

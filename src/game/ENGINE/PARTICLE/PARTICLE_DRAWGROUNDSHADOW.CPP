@@ -15,7 +15,7 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 extern void Cache_ReleaseResource(void *cache, void *resource);
 
-/* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into g_currentActorInstance, and when ground is found tilts the shadow model from g_actorMatrixPool to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through Geometry_DrawIntensityMask between render-mode commands. */
+/* Draws an actor's ground shadow: probes the ground under the actor through Collision_ProbeGround_de into g_currentActorInstance, and when ground is found tilts the shadow model from g_actorMatrixPool to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through Geometry_DrawIntensityMask between render-mode commands. */
 extern char g_actorMatrixPool;
 
 extern char g_defaultProbeMotionSettings;

@@ -1,5 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
-#include "COMMON/LONE/D_0044E468.H"
+#include "COMMON/LONE/g_pakProfileActionDialogResource.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "MENU/PAK_LOAD.H"
 #include "TYPES.H"
@@ -30,7 +30,7 @@ extern s32 Menu_CountLineChars(LayeredText *);
 
 
 /* Draws an item's label at its position into the text layer g_matchEndingTeamWheelClose through Menu_OpenDialog, using
-   the fixed label D_44F0B8 instead of the item's own when D_80153730 is set; returns 1. */
+   the fixed label g_profileDialogFixedLabel instead of the item's own when g_pakProfileLoaded is set; returns 1. */
 
 
 extern char g_matchEndingTeamWheelClose[];
@@ -77,10 +77,10 @@ extern void Menu_OpenDialog(char *, char *, int, int, int);
 
 
 
-/* Stores 9 in g_controllerPakPromptKind and 0 in D_80153758. */
+/* Stores 9 in g_controllerPakPromptKind and 0 in g_pakPromptKindNinePending. */
 
 
-/* Stores 9 in the state word g_controllerPakPromptKind and one in D_80153758; Pak_SelectPromptKindNine stores 9 and zero. */
+/* Stores 9 in the state word g_controllerPakPromptKind and one in g_pakPromptKindNinePending; Pak_SelectPromptKindNine stores 9 and zero. */
 
 
 /* Sets the state word g_controllerPakPromptKind to 0xA; this is one of a run of functions that each store one
@@ -108,50 +108,50 @@ extern void Menu_OpenDialog(char *, char *, int, int, int);
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: the second string through the jump table
-   jtbl_800E0E48 for states 0 to 15, and g_SelectPromptActionHeadingStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
+   k_selectPromptActionHeadingJumpTable for states 0 to 15, and g_SelectPromptActionHeadingStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
    cases lay outside the interval; its case bodies are inside it. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
-   jtbl_800E0E88 for states 0 to 15, and g_SelectPromptTextGroupOneStateOtherText for any other state. Returns zero. */
+   k_selectPromptTextGroupOneJumpTable for states 0 to 15, and g_SelectPromptTextGroupOneStateOtherText for any other state. Returns zero. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
-   jtbl_800E0EC8 for states 0 to 15, and g_SelectPromptTextGroupTwoStateOtherText for any other state. Returns zero. */
+   k_selectPromptTextGroupTwoJumpTable for states 0 to 15, and g_SelectPromptTextGroupTwoStateOtherText for any other state. Returns zero. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
-   jtbl_800E0F08 for states 0 to 15, and g_SelectPromptTextGroupThreeStateOtherText for any other state. Returns zero. */
+   k_selectPromptTextGroupThreeJumpTable for states 0 to 15, and g_SelectPromptTextGroupThreeStateOtherText for any other state. Returns zero. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
-   jtbl_800E0F48 for states 0 to 15, and g_SelectPromptTextGroupFourStateOtherText for any other state. Returns zero. */
+   k_selectPromptTextGroupFourJumpTable for states 0 to 15, and g_SelectPromptTextGroupFourStateOtherText for any other state. Returns zero. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: one of 15 strings through the jump table
-   jtbl_800E0F88 for states 0 to 15, and g_SelectPromptTextGroupFiveStateOtherText for any other state. Returns zero. */
+   k_selectPromptTextGroupFiveJumpTable for states 0 to 15, and g_SelectPromptTextGroupFiveStateOtherText for any other state. Returns zero. */
 
 
 
 
 /* Points a field's text at the label for the state word g_controllerPakPromptKind: the second string through the jump table
-   jtbl_800E0FC8 for states 0 to 15, and g_SelectModalPromptLabelStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
+   k_selectModalPromptLabelJumpTable for states 0 to 15, and g_SelectModalPromptLabelStateOtherText for any other state. Returns zero. An earlier attempt misjudged this switch as a dispatch head whose
    cases lay outside the interval; its case bodies are inside it. */
 
 
 
 
-/* Latches g_pakNamePromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns g_pakNamePromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch D_80153784 changed to g_pakNamePromptAccepted. */
+/* Latches g_pakNamePromptAccepted to one when the record's team value is not -1 and both Control_PeekPakChange_Pak and Snapshot_CheckStatusPrompt accept it, then returns g_pakNamePromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch g_pakMenuPromptAccepted changed to g_pakNamePromptAccepted. */
 
 
 
@@ -175,7 +175,7 @@ s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
 
     Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFourDigitValueFormat, value);
 #else
-    s32 value = D_8014D488.values[2];
+    s32 value = g_pakLoadedProfile.values[2];
     char *text = (char *)*field->text;
 
     Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 4), g_pakFormatInt04, value);
@@ -183,25 +183,25 @@ s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
     return 0;
 }
 
-/* Points a field's text at D_800D7810 when D_80153730 is set, at D_800D7818 when g_pakUseDefaultPreviewLabels is set instead, and at
-   D_800D7814 otherwise. Returns zero. */
+/* Points a field's text at g_pakAlternateActionLabel when g_pakProfileLoaded is set, at g_pakDefaultPreviewActionLabel when g_pakUseDefaultPreviewLabels is set instead, and at
+   g_pakActionLabel otherwise. Returns zero. */
 
 
 
 s32 Pak_UpdateProfileActionLabel(struct PakActionLabelView *field) {
-    if (D_80153730 != 0) {
-        field->text = D_800D7810;
+    if (g_pakProfileLoaded != 0) {
+        field->text = g_pakAlternateActionLabel;
     } else if (g_pakUseDefaultPreviewLabels != 0) {
-        field->text = D_800D7818;
+        field->text = g_pakDefaultPreviewActionLabel;
     } else {
-        field->text = D_800D7814;
+        field->text = g_pakActionLabel;
     }
     return 0;
 }
 
 int Pak_OpenProfileActionPrompt(int unused, PakActionPromptItemView *item) {
-    if (D_80153730 != 0) {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E468, item->x, item->y, 0);
+    if (g_pakProfileLoaded != 0) {
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakProfileActionDialogResource, item->x, item->y, 0);
     } else {
         Menu_OpenDialog(g_matchEndingTeamWheelClose, item->label, item->x, item->y, 0);
     }
@@ -249,12 +249,12 @@ void Pak_SelectPromptKindEight(struct MenuPromptKindView *record) {
 
 void Pak_SelectPromptKindNine(void) {
     g_controllerPakPromptKind = 9;
-    D_80153758 = 0;
+    g_pakPromptKindNinePending = 0;
 }
 
 void Pak_SelectPromptKindNinePending(void) {
     g_controllerPakPromptKind = 9;
-    D_80153758 = 1;
+    g_pakPromptKindNinePending = 1;
 }
 
 void Pak_SelectPromptKindTen(void) {
@@ -749,30 +749,30 @@ void Pak_DisableOperationHeading(void) {
     g_pakAlternateNameSelected = 0;
 }
 
-/* Points a field's text at D_800D7970 when the option g_pakAlternateNameSelected is set and at D_800D797C otherwise, and returns
+/* Points a field's text at g_pakAlternateOperationHeadingLabel when the option g_pakAlternateNameSelected is set and at g_pakOperationHeadingLabel otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
 s32 Pak_SelectOperationHeading(struct PakActionLabelView *field) {
     if (g_pakAlternateNameSelected != 0) {
-        field->text = D_800D7970;
+        field->text = g_pakAlternateOperationHeadingLabel;
     } else {
-        field->text = D_800D797C;
+        field->text = g_pakOperationHeadingLabel;
     }
     return 0;
 }
 
-/* Points a field's text at D_800D7974 when the option g_pakAlternateNameSelected is set and at D_800D7980 otherwise, and returns
+/* Points a field's text at g_pakAlternateOperationDescriptionLabel when the option g_pakAlternateNameSelected is set and at g_pakOperationDescriptionLabel otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
 s32 Pak_SelectOperationDescription(struct PakActionLabelView *field) {
     if (g_pakAlternateNameSelected != 0) {
-        field->text = D_800D7974;
+        field->text = g_pakAlternateOperationDescriptionLabel;
     } else {
-        field->text = D_800D7980;
+        field->text = g_pakOperationDescriptionLabel;
     }
     return 0;
 }
@@ -783,7 +783,7 @@ s32 Pak_SelectOperationDescription(struct PakActionLabelView *field) {
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/DEFS.H"
 extern char g_pakTwoDigitValueFormat[];
-extern char *D_800D394C[];
+extern char *g_pakAlternateChannelLabelTexts[];
 
 s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
@@ -795,9 +795,9 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
         value = pThis->owner->controllerPort;
     }
     if (g_pakAlternateNameSelected != 0) {
-        field->text = D_800D394C;
+        field->text = g_pakAlternateChannelLabelTexts;
     } else {
-        strings = D_800E2FB4;
+        strings = g_pakChannelLabelTexts_eu;
         field->text = strings;
         text = strings[g_gameSettings.language];
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_pakTwoDigitValueFormat, value + 1);
@@ -810,11 +810,11 @@ s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #else
 #endif
-/* Takes g_introSelectedItem when g_pakUseScannedChannel is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Menu_CountLineChars reports, returning zero.
+/* Takes g_introSelectedItem when g_pakUseScannedChannel is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows g_pakAlternateChannelLabelTexts in a field when g_pakAlternateNameSelected is set and otherwise points the field at g_pakChannelLabelTexts and formats one more than that value into it with g_digitDotFormat_Profile two bytes before the length Menu_CountLineChars reports, returning zero.
    Adapted from Timer_UpdateOwnerChannelLabel with the value source chosen by g_pakUseScannedChannel, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
 
 
-extern u8 *D_800D394C[];
+extern u8 *g_pakAlternateChannelLabelTexts[];
 
 extern char g_digitDotFormat[];
 
@@ -834,16 +834,16 @@ s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *h
         value = holder->owner->controllerPort;
     }
     if (g_pakAlternateNameSelected != 0) {
-        field->text = D_800D394C;
+        field->text = g_pakAlternateChannelLabelTexts;
     } else {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        table = ((u8 **)(void *)D_800E2FB4);
+        table = ((u8 **)(void *)g_pakChannelLabelTexts_eu);
         field->text = table;
         text = (char *)table[g_languageIndex];
 #else
-        field->text = ((u8 **)(void *)&D_800D3958);
-        text = ((char **)(void *)&D_800D3958)[0];
+        field->text = ((u8 **)(void *)&g_pakChannelLabelTexts);
+        text = ((char **)(void *)&g_pakChannelLabelTexts)[0];
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

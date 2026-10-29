@@ -606,7 +606,7 @@ const unsigned int k_CameraEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802349C0_C8EE8_us_rev1.c */
+/* ROM-grounded data: src/k_CameraEncodedWordsBlock7_Camera.c */
 const unsigned int k_CameraEncodedWordsBlock7[2] = {
     0x3F000000, 0x3F000000,
 };
@@ -701,7 +701,7 @@ const unsigned int k_CameraEncodedWordsBlock1[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80234DE0_C8EF0_us_rev1.c */
+/* ROM-grounded data: src/k_CameraEncodedWordsBlock8_Camera.c */
 const unsigned int k_CameraEncodedWordsBlock8[3] = {
     0x3C0EFA36, 0x3F000000, 0x3FC00000,
 };
@@ -756,7 +756,7 @@ typedef struct CameraFloorSurfaceView CameraFloorPolygonView;
 
 
 
-typedef struct Shared_Func_80234FDC_Callback CameraModeCallbackEntry;
+typedef struct Shared_CameraModeCallback CameraModeCallbackEntry;
 extern CameraModeCallbackEntry g_cameraModeCallbacks[];
 extern CameraGlobalRenderView g_playerWeaponClassMode;
 
@@ -1077,8 +1077,8 @@ void Camera_SetupViewportAndFog(RacerViewport *view) {
     Gfx **gfx = &g_displayListCursor;
 
     gDPPipeSync((*gfx)++);
-    gSPDisplayList((*gfx)++, ((&D_800CBCC0)));
-    gSPDisplayList((*gfx)++, ((&D_800CBCF0_de)));
+    gSPDisplayList((*gfx)++, ((&g_cameraViewDisplayListFirst)));
+    gSPDisplayList((*gfx)++, ((&g_cameraViewDisplayListSecond_de)));
     view->screenScaleX = 1.0f;
     view->screenScaleY = 1.0f;
     view->screenScaleX = view->viewportScaleX;
@@ -1272,7 +1272,7 @@ const unsigned int k_CameraEncodedWordsBlock4[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8044A370_C8FDC_us_rev1.c */
+/* ROM-grounded data: src/k_CameraOneWords_Camera.c */
 const unsigned int k_CameraOneWords[1] = {
     0x3F800000,
 };
@@ -1280,7 +1280,7 @@ const unsigned int k_CameraOneWords[1] = {
 
 /* 8023660C.CPP */
 /* Eases a camera's four framing values at 0x29C, 0x2A0, 0x2A4 and 0x2A8 toward their targets by 16 each
- * frame, snapping to the targets when func_80264B6C_de reports a cut and recording the easing rate 30 in
+ * frame, snapping to the targets when Control_IsSnapshotActive_Camera reports a cut and recording the easing rate 30 in
  * g_cameraFramingTransitionTimer whenever a value moves. Adapted from Gsky_StepValueTowardTarget as a static helper.
  */
 
@@ -1622,7 +1622,7 @@ const unsigned int k_CameraEncodedWordsBlock2[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80236874_C9010_us_rev1.c */
+/* ROM-grounded data: src/k_CameraHalfWords_Camera.c */
 const unsigned int k_CameraHalfWords[1] = {
     0x3F000000,
 };
@@ -1633,8 +1633,8 @@ extern Gfx *g_displayListCursor;
 extern s32 g_hudReferenceViewportWidth;
 extern s32 g_lightingBufferIndex;
 extern f32 g_frameElapsedTime;
-extern char D_800CBCC0;
-extern char D_800CBCF0_de;
+extern char g_cameraViewDisplayListFirst;
+extern char g_cameraViewDisplayListSecond_de;
 extern void Cache_MarkResourceInUse(s32, s32);
 extern void Gsky_DrawViewportEffectNoOp(RacerViewport *, s32);
 extern void Menu_DispatchMenuListCallback(void *);
@@ -1663,8 +1663,8 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         racer = race->header.views.head;
         if (racer != 0) {
             gDPPipeSync(g_displayListCursor++);
-            gSPDisplayList(g_displayListCursor++, ((&D_800CBCC0)));
-            gSPDisplayList(g_displayListCursor++, ((&D_800CBCF0_de)));
+            gSPDisplayList(g_displayListCursor++, ((&g_cameraViewDisplayListFirst)));
+            gSPDisplayList(g_displayListCursor++, ((&g_cameraViewDisplayListSecond_de)));
             racer->viewports[g_lightingBufferIndex].vscale[0] = SCREEN_WD;
             racer->viewports[g_lightingBufferIndex].vscale[1] = SCREEN_HT;
             racer->viewports[g_lightingBufferIndex].vtrans[0] = SCREEN_WD;

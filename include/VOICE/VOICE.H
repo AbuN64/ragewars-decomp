@@ -21,10 +21,10 @@ extern void Audio_StartSelectedVoice(AudioVoiceControlSlotView *voiceRecord);
 extern void Audio_StopVoiceForDifferentKey(AudioVoiceControlSlotView *voiceRecord);
 extern void Audio_DeallocateVoiceSlot(AudioVoiceControlSlotView *voiceRecord);
 extern void SoundVoicePool_ResetNode(void *cLoopingSoundData);
-extern void func_8025C8D0_de(void);
+extern void SoundVoicePool_ResetNodeNoOp(void);
 extern void *SoundVoicePool_PlaySpatialSound(void *voicePool, s32 soundId, CVector3 *soundPosition, void *position, s32 fallback);
 extern void SoundVoicePool_Pause(void *voicePool);
 extern void SoundVoicePool_RetireFinishedSounds(void *soundVoicePool);
 extern void SoundVoicePool_StopAll(void *soundVoicePool);
-extern void func_8025CC7C_de(void);
+extern void SoundVoicePool_GetGlobalStateNoOp(void);
 #endif

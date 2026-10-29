@@ -4,7 +4,7 @@
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
 
-/* Points arg0's unk14 field at the entry of D_44FB94 that g_encodedCheatCharacterIndex selects when it is below 12, else at g_unlockedLevelResultLabel, and returns 0. */
+/* Points arg0's unk14 field at the entry of g_encodedCheatLabelTable_EncodedFindunlockedlevel that g_encodedCheatCharacterIndex selects when it is below 12, else at g_unlockedLevelResultLabel, and returns 0. */
 
 
 

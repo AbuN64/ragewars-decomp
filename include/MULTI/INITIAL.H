@@ -10,7 +10,7 @@ struct HolderMultiIsPlayerItemAvailable {
     f32 fade;
     f32 alpha;
 };
-struct Obj8043ECE8 {
+struct MultiplayerAvailabilityItem {
     s16 availability;
     u8 pad2[10];
     struct Flagged *widget;
@@ -20,19 +20,19 @@ struct MultiplayerItemAvailabilityView {
     s32 resource;
     struct ItemDef *def;
 };
-struct Obj8043EB20 {
+struct ControllerPakDialogContext {
     u8 pad0[0x1C];
     s32 player;
-    Inner8043E56C *controller;
+    ControllerPortView *controller;
 };
 struct TypedMenuVariableView {
     char pad[0x14];
     struct Variable *variable;
 };
-extern s32 Initial_RequestTransitionWithPakDisabled(void *unused0, Outer8043E56C *dialog);
+extern s32 Initial_RequestTransitionWithPakDisabled(void *unused0, ControllerPortOwnerView *dialog);
 extern s32 Initial_OpenDialogAfterTimerReset(void *unused0, Arg1Struct *dialog);
 extern void Initial_ProbeMenuControllerPak(struct Shared_PakMenu *menu);
-extern s32 Initial_OpenDialogWithControllerPak(void *unused0, Obj8043EB20 *dialog);
+extern s32 Initial_OpenDialogWithControllerPak(void *unused0, ControllerPakDialogContext *dialog);
 extern void Initial_EnableMenuControllerPak(void *menu);
 
 extern s32 Initial_ReturnSuccess(void);

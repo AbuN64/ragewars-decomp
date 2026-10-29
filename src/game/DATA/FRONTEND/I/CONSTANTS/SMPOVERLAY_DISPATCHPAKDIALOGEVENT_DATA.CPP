@@ -39,7 +39,7 @@ unsigned int g_pakDialogEventHandlerRecordsUs[21] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800DE1D0[8] = {
+unsigned int g_pakDialogStyleAndTextWords_us[8] = {
     0x96969600, 0x96969600, 0xC8C8C800, 0xC8C8C800, 0x00003200, 0x00000000, 0x4F4E5F43, 0x48415247,
 };
 #endif

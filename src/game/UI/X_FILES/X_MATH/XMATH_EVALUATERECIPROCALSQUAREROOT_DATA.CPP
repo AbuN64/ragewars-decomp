@@ -75,7 +75,7 @@ const unsigned short k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock2[
 #endif
 #endif
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8029D8E8_CB89C_us_rev1.c */
+/* ROM-grounded data: src/k_XmathEvaluatereciprocalsquarerootOneWordsVariant1_XmathEvaluatereciprocalsquarerootData.c */
 const unsigned int k_XmathEvaluatereciprocalsquarerootOneWordsVariant1[1] = {
     0x3F800000,
 };
@@ -92,7 +92,7 @@ const unsigned int k_xmathEvaluatereciprocalsquarerootDataFloatConstantWordsBloc
     0x43300000, 0x00000000, 0x00000000, 0x00000000, 0x3FF00000, 0x00000000,
 };
 
-/* ROM-grounded data: src/rw_pool_8029DB74_CB8F0_us_rev1.c */
+/* ROM-grounded data: src/k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock5_XmathEvaluatereciprocalsquarerootData.c */
 const unsigned int k_xmathEvaluatereciprocalsquarerootDataConstantWordsBlock5[2] = {
     0x3FDBCB7B, 0x1FFFFFFF,
 };

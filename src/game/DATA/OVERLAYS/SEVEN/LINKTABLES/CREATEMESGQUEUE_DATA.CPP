@@ -15,7 +15,7 @@ unsigned int D_src_f0222606[3] = {
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
-unsigned int rodata_writable_800D3F1C[1] = {
+unsigned int __osActiveQueue_CreatemesgqueueData[1] = {
     (unsigned int)D_src_f0222606,
 };
 #endif

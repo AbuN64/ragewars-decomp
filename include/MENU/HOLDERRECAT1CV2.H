@@ -38,7 +38,7 @@ typedef struct SceneMaskLabelItem SceneMaskLabelItem;
 s32 Items_FormatPackedGameOption(struct LayeredText *field);
 #endif
 
-extern u8 *g_itemsFormatpackedgameoptionText_800D35EC[];
-extern u8 *g_itemsFormatpackedgameoptionText_800D35F0[];
+extern u8 *g_packedGameOptionZeroText[];
+extern u8 *g_packedGameOptionSixteenText[];
 extern char g_fmtDec2Pad[];
 #endif

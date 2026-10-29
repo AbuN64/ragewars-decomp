@@ -24,7 +24,7 @@ const unsigned int k_PlayerDrawtintedplayerEncodedWords[14] = {
 };
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-const unsigned int rodata_func_80228E60_eu_800C2EB4[1] = {
+const unsigned int k_playerDrawTintedPlayerEuropeanFloat[1] = {
     0x43160000,
 };
 #endif
@@ -45,10 +45,10 @@ extern Gfx *g_displayListCursor;
 extern RulesWeaponsDrawTintedPlayer g_matchRoundCounters[];
 extern s32 g_lightingBufferIndex;
 extern void Geometry_SetCombineMode(u32);
-extern void Gobjinst_DrawActorPartsWithViewEffects(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
+extern void Gobjinst_DrawActorPartsWithViewEffects(LevelActor *, PlayerControllerView *, s32, Draw *);
 
 void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw) {
-    PlayerCode80225D10 *player;
+    PlayerControllerView *player;
     Gfx *gfx;
 
     if (actor != 0) {
@@ -236,7 +236,7 @@ void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
     }
 }
 
-/* ROM-grounded data: src/rw_pool_802292B8_C8934_us_rev1.c */
+/* ROM-grounded data: src/k_PlayerDrawtintedplayerEncodedWordsBlock2_PlayerDrawtintedplayer.c */
 const unsigned int k_PlayerDrawtintedplayerEncodedWordsBlock2[3] = {
     0x43800000, 0x41300000, 0x4879C000,
 };

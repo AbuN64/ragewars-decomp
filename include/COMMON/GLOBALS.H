@@ -14,7 +14,7 @@
 
 
 
-extern f32 D_800DD610[];
+extern f32 g_cameraAspectRatios[];
 
 extern GlobalsMenuSetOptionsSceneSelection g_gameplayCameraList;
 

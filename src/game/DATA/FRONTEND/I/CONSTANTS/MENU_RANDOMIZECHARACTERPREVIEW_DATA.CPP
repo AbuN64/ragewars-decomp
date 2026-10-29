@@ -1,14 +1,14 @@
 #include "include_asm.h"
 
-/* DATA_800E39C0.CPP */
+/* g_joinOptionsInitialWord_MenuRandomizecharacterpreviewData.CPP */
 /* ROM-grounded data: rodata/writable/800E39C0 */
 unsigned int g_joinOptionsInitialWord[1] = {
     0x00000000,
 };
 
-/* DATA_800E39C4.CPP */
+/* g_joinOptionsEventHandlerRecords_MenuRandomizecharacterpreviewData.CPP */
 /* Menu event handler registry: eleven 12-byte records of {event id, sub id 0x17, handler address
-   in the func_8041DFC0-family menu code}, followed by a three-word tail. The handler addresses sit
+   in the Join_CreateUsJoinOptionsMenu_MenuRandomizecharacterpreviewData-family menu code}, followed by a three-word tail. The handler addresses sit
    in each cartridge's own menu code, so only the tail words are cartridge-stable in some pairs;
    the tail differs per cartridge and the records keep the ids common to all of them. */
 #if defined(VERSION_DE)
@@ -104,19 +104,19 @@ unsigned int g_joinOptionsEventHandlerRecords[35] = {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_US)
-unsigned int data_unresolved_800DE6B0[7] = {
+unsigned int g_joinOptionsTrailingWords[7] = {
     0x00000092, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-unsigned int data_unresolved_800EB230[7] = {
+unsigned int g_joinOptionsTrailingWords_eu_x[7] = {
     0x00000096, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned int data_unresolved_800DFA00[7] = {
+unsigned int g_joinOptionsTrailingWords_de[7] = {
     0x00000090, 0x00000000, 0x00000023, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29, 0x3E0F5C29,
 };
 #endif

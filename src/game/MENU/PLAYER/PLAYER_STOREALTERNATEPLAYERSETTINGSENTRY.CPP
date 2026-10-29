@@ -11,7 +11,7 @@ extern struct MenuStepState *g_playerSettingsScreen;
 #include "MENU/PLAYER_STOREALTERNATEPLAYERSETTINGSENTRY.H"
 #include "SCENE/CACHE_FREEMEMORY.H"
 
-/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_alternatePlayerSettingsScreen holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with g_playerSettingsScreen changed to g_alternatePlayerSettingsScreen and the object fields moved down by eight bytes. */
+/* Stores arg0 into its own g_playerSettingsSlotByteBase entry and pushes the five settings of slot arg0 of the g_profileSlotSettingsByte7B table into the objects g_alternatePlayerSettingsScreen holds through SmpButton_SelectListEntry_PlayerInitplayersettingsscreen and SmpSlider_SetSliderItem. Adapted from Player_SelectPlayerSettingsEntry_PlayerStorealternateplayersettingsentry with g_playerSettingsScreen changed to g_alternatePlayerSettingsScreen and the object fields moved down by eight bytes. */
 
 
 extern struct StateMenuSelectAlternatePlayerSettingsEntry *g_alternatePlayerSettingsScreen;

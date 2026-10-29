@@ -2,7 +2,7 @@
 
 /* 800C6E84_20.CPP */
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80212FBC_C7DD0_us_rev1.c */
+/* ROM-grounded data: src/k_navUpdateobjectarrivalchaseDataFloatConstantWords_NavUpdateobjectarrivalchaseData.c */
 const unsigned int k_navUpdateobjectarrivalchaseDataFloatConstantWords[2] = {
     0x42CCCCCC, 0x424CCCCC,
 };

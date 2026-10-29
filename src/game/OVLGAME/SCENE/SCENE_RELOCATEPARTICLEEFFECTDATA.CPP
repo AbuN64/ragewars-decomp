@@ -44,7 +44,7 @@ void Scene_DispatchSelectedEntityKinds(Level *level) {
     Cinema_SetPlaybackFlag();
 }
 
-void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *scene) {
+void Scene_DispatchAndRecycleQueuedTriggers(SceneTriggerQueueOwner *scene) {
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *entry;
     EntryOvlSceneDispatchAndRecycleQueuedTriggers *next;
 
@@ -60,7 +60,7 @@ void Scene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *scene) {
 
 void Scene_RelocateParticleEffectData(s32 world, void ***handle) {
     void *obj;
-    GroupCode8044E2B8 *group;
+    PieceGroup *group;
     Piece *piece;
     s32 base;
     s32 count;
@@ -102,7 +102,7 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***handle) {
     s32 count;
     s32 i;
 
-    scale = D_800C5304_de;
+    scale = k_sceneDefinitionFieldScale_de;
     if (Ppdecom_UnpackResource(handle, 0) != 0) {
         obj = **handle;
         count = *(s32 *) obj;
@@ -137,10 +137,10 @@ void Scene_ScaleDefinitionFields(s32 unused0, void ***handle) {
     }
 }
 
-void Scene_ResolveFrameItemReferences(OwnerCode8044E2B8 *scene, void ***handle) {
+void Scene_ResolveFrameItemReferences(SceneTriggerQueueOwner *scene, void ***handle) {
     void *obj;
-    FrameCode8044E2B8 *frame;
-    BankCode8044E2B8 *bank;
+    ParticleEffectRelocationFrame *frame;
+    SceneFrameItemBank *bank;
     struct SceneFrameItemReference *items;
     struct SceneFrameItemReference *item;
     ParticleEffectRelocationSlot *slot;

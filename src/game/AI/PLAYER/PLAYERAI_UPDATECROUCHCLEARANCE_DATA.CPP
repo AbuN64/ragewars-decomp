@@ -8,14 +8,14 @@ const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8022D428_C8AA8_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock4_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock4[1] = {
     0x40F00000,
 };
 #endif
 
 /* 800C7EAC.CPP */
-/* ROM-grounded data: src/rw_pool_8022D4BC_C8AAC_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock5_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock5[2] = {
     0x42700000, 0x3CA3D70A,
 };
@@ -28,32 +28,32 @@ const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8022D57C_C8AB4_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock3_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock3[1] = {
     0x40F00000,
 };
 #endif
 
 /* 800C7EB8.CPP */
-/* ROM-grounded data: src/rw_pool_8022DB04_C8AB8_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock8_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock8[3] = {
     0x41960000, 0x40C90FDB, 0x43C00000,
 };
 
 /* 800C7EC4.CPP */
-/* ROM-grounded data: src/rw_pool_8022DBC4_C8AC4_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceOneWords_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceOneWords[1] = {
     0x3F800000,
 };
 
 /* 800C7EC8.CPP */
-/* ROM-grounded data: src/rw_pool_8022DBE4_C8AC8_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock6_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock6[1] = {
     0x3ECD87AE,
 };
 
 /* 800C7ECC.CPP */
-/* ROM-grounded data: src/rw_pool_8022DC1C_C8ACC_us_rev1.c */
+/* ROM-grounded data: src/k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock7_PlayeraiUpdatecrouchclearanceData.c */
 const unsigned int k_PlayeraiUpdatecrouchclearanceEncodedWordsBlock7[1] = {
     0x40A3D70A,
 };

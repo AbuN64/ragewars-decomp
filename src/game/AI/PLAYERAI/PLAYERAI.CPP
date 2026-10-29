@@ -44,7 +44,7 @@
 #include "AI/PLAYER_DRAWTINTEDPLAYER.H"
 
 /* 802192C0.CPP */
-/* Steps an animation cursor one frame: looks up the clip in D_8011FE88, keeps the previous frame,
+/* Steps an animation cursor one frame: looks up the clip in g_world_AchieveUpdateresultsscreen, keeps the previous frame,
    and moves forward in states 1 and 2 or backward in states 3 and 4; at either end a looping clip
    (mode 1) wraps and a ping-pong clip (mode 0) reverses direction. */
 
@@ -98,7 +98,7 @@ void Playerai_AdvanceRouteCursor(Cursor *cursor) {
 
 extern s16 Scene_FindNearestRouteFrame(char *world);
 
-void Playerai_InitializeRouteCursor(Struct802193C8 *cursorState, s8 initialState) {
+void Playerai_InitializeRouteCursor(RouteCursorState *cursorState, s8 initialState) {
     cursorState->field0 = 1;
     cursorState->field1 = initialState;
     cursorState->field2 = Scene_FindNearestRouteFrame(&g_world);
@@ -245,7 +245,7 @@ void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
     nextMessage(&b->messageNext);
 }
 
-/* CODE_80219A40.CPP */
+/* Playerai_ApplyDamagePacket_Playerai.CPP */
 /* TurretPlayerRelation, interaction and score views used to select reactions and record statistics. */
 
 /* Selects and records a player's reaction to an interaction. */
@@ -658,7 +658,7 @@ extern void **Gobjinst_RequestAnimatedModelVariant(LevelActor *, s32);
 extern void Cache_UnlockResource(s32, void *);
 void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 animationContext, Draw *context)
 {
-    PlayerCode80225D10 *player;
+    PlayerControllerView *player;
     void **resource;
     s32 temporaryFlag, model;
 
@@ -1066,7 +1066,7 @@ extern void Player_InitActorHudState(void *);
  * point tied for the greatest distance to its nearest player. Fall back when no
  * point is available, then update the controller's current cell. The single-player arm opens with a dead
  * conditional store: its join label ends cse's path, so the mismatch call keeps passing world (s1) instead
- * of being cross-jumped into the fallback's &D_8011FE88 call; flow and jump2 remove it. */
+ * of being cross-jumped into the fallback's &g_world_AchieveUpdateresultsscreen call; flow and jump2 remove it. */
 void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
     Shared_World *world;
     Shared_Placed single;
@@ -1134,7 +1134,7 @@ done:
 }
 
 /* 800C73E8.CPP */
-/* ROM-grounded data: src/rw_pool_8021A78C_C7FE8_us_rev1.c */
+/* ROM-grounded data: src/g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1_Playerai.c */
 const unsigned int g_PlayeraiInitializeMovementAndAimConstantWordsUsRev1[2] = {
     0x3F800000, 0x3F800000,
 };

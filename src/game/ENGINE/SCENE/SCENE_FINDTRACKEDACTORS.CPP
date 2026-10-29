@@ -102,7 +102,7 @@ void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 max
 
     resourceKey = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
     levelIndexHandle = Cache_RequestWordCountedResourcePinned(0, &specialTable, resourceKey, g_levelIndexText);
-    node = Cache_RequestPackSection(0, specialTable, 8, resourceKey, (s32)world, 0, &D_800C5280_de + 4);
+    node = Cache_RequestPackSection(0, specialTable, 8, resourceKey, (s32)world, 0, &g_sceneLevelNameRequestTagDe + 4);
     count = node->unk04;
     if (maximumBytes < count) {
         count = maximumBytes;
@@ -121,7 +121,7 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
     s32 size;
     s32 one;
 
-    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
+    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct WorldTrackedRecordView *)(world))->value != record) {
         Scene_ReleaseCachedLevelData(world);
         if (((struct WorldResourceKeyView *)(world))->value != 0) {
             size = 0x10;
@@ -129,15 +129,15 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
             resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct RegionAllocatedBlockSizeView *)(world))->value, size, 0, 0,
-                                     D_800C5290_de, one);
+                                     g_sceneResourceRequestSpareDe, one);
             if (resource != 0) {
                 key = SetN64_LocatePackSection((s32)*resource, ((struct WorldResourceKeyView *)(world))->value,
                                     record, &sp28);
                 Cache_ReleaseResource(0, resource);
                 if ((((struct WorldResourceHandleView *)(world))->value =
                      Cache_RequestResource(0, key, key, sp28, size, 0,
-                                   &g_cResource_UnpackRequestEntry, D_800C52BC, one)) != 0) {
-                    ((struct MeasuredCode8028B64C *)(world))->value = record;
+                                   &g_cResource_UnpackRequestEntry, g_sceneUnpackRequestSpare, one)) != 0) {
+                    ((struct WorldTrackedRecordView *)(world))->value = record;
                 } else {
                     return 0;
                 }
@@ -295,7 +295,7 @@ void Scene_ResetTransitionViewport(void) {
     s32 viewportHeight;
 
     Cinema_SetLoopMode(0);
-    Cinema_SetResponse(D_800C5338_de);
+    Cinema_SetResponse(g_sceneTransitionCinemaResponseDe);
     viewportWidth = 0x1E0;
     if (g_frontendCurrentVideoModeIndex == 0) {
         viewportWidth = 0x17C;
@@ -313,7 +313,7 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
     s32 size;
     s32 one;
 
-    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != sectionIndex) {
+    if (((struct RegionFreeBlockSizeView *)(world))->value == 0 || ((struct WorldTrackedRecordView *)(world))->value != sectionIndex) {
         Scene_ReleaseCachedLevelData(world);
         if (((struct WorldResourceKeyView *)(world))->value != 0) {
             size = 0x10;
@@ -321,15 +321,15 @@ void Scene_CacheBlLevelData(void *world, s32 sectionIndex) {
             resource = Cache_RequestResource(0, ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct WorldResourceKeyView *)(world))->value,
                                      ((struct RegionAllocatedBlockSizeView *)(world))->value, size, 0, 0,
-                                     D_800C5290_de, one);
+                                     g_sceneResourceRequestSpareDe, one);
             if (resource != 0) {
                 key = SetN64_LocatePackSection((s32)*resource, ((struct WorldResourceKeyView *)(world))->value,
                                     sectionIndex, &sectionSize);
                 Cache_ReleaseResource(0, resource);
                 if ((((struct WorldResourceHandleView *)(world))->value =
                      Cache_RequestResource(0, key, key, sectionSize, size, 0,
-                                   &g_cResource_UnpackRequestEntry, D_800C52BC, one)) != 0) {
-                    ((struct MeasuredCode8028B64C *)(world))->value = sectionIndex;
+                                   &g_cResource_UnpackRequestEntry, g_sceneUnpackRequestSpare, one)) != 0) {
+                    ((struct WorldTrackedRecordView *)(world))->value = sectionIndex;
                 }
             }
         }

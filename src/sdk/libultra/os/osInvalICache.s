@@ -3,33 +3,33 @@
 .section .text
 .globl osInvalICache
 osInvalICache:
-    blez $a1, .Lfunc_802BD010_de_03C
+    blez $a1, .LOsInvalICacheDone
     addiu $t3, $zero, 0x4000
     sltu $at, $a1, $t3
-    beqz $at, .Lfunc_802BD010_de_044
+    beqz $at, .LOsInvalICacheWhole
     addu $t0, $a0, $zero
     addu $t1, $a0, $a1
     sltu $at, $t0, $t1
-    beqz $at, .Lfunc_802BD010_de_03C
+    beqz $at, .LOsInvalICacheDone
     addiu $t1, $t1, -0x20
     andi $t2, $t0, 0x1F
     subu $t0, $t0, $t2
-.Lfunc_802BD010_de_02C:
+.LOsInvalICacheLineLoop:
     cache 0x10, 0x0($t0)
     sltu $at, $t0, $t1
-    bnez $at, .Lfunc_802BD010_de_02C
+    bnez $at, .LOsInvalICacheLineLoop
     addiu $t0, $t0, 0x20
-.Lfunc_802BD010_de_03C:
+.LOsInvalICacheDone:
     jr $ra
     nop
-.Lfunc_802BD010_de_044:
+.LOsInvalICacheWhole:
     lui $t0, 0x8000
     addu $t1, $t0, $t3
     addiu $t1, $t1, -0x20
-.Lfunc_802BD010_de_050:
+.LOsInvalICacheWholeLoop:
     cache 0x00, 0x0($t0)
     sltu $at, $t0, $t1
-    bnez $at, .Lfunc_802BD010_de_050
+    bnez $at, .LOsInvalICacheWholeLoop
     addiu $t0, $t0, 0x20
     jr $ra
     nop

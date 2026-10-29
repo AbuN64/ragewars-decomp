@@ -16,25 +16,25 @@ extern s32 g_pakUseScannedChannel;
 
 extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 quiet);
 
-/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if Snapshot_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
+/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks g_pakMenuPromptAccepted, and if Snapshot_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
 extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
 
 /* Starts the configured action using the actor resource or the shared fallback. */
 
 
  /* extern */
-extern s32 D_800E28C0;
+extern s32 g_pakPlayerMessagePending;
 
 
 
-/* Points a field's text at g_pakStatusPrimaryLabel when the option D_80153760 is set and at g_pakStatusSecondaryLabel otherwise, and returns
+/* Points a field's text at g_pakStatusPrimaryLabel when the option g_pakProfileLoadActive is set and at g_pakStatusSecondaryLabel otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
 
 
-/* Latches g_frontendPakPromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Snapshot_CheckStatusPrompt accept it, then returns g_frontendPakPromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch D_80153784 changed to g_frontendPakPromptAccepted. */
+/* Latches g_frontendPakPromptAccepted to one when the record's team value is not -1 and both Control_PeekPakChange_Pak and Snapshot_CheckStatusPrompt accept it, then returns g_frontendPakPromptAccepted. Adapted from Timer_CheckMenuPakChange with the latch g_pakMenuPromptAccepted changed to g_frontendPakPromptAccepted. */
 
 
 
@@ -67,7 +67,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 
 
 /* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of four strings through the
-   jump table jtbl_800E1008 for states 0 to 4, and g_pakStatusDefaultLabel for any other state. Returns zero. */
+   jump table k_pakOperationTextOneStateJumpTable for states 0 to 4, and g_pakStatusDefaultLabel for any other state. Returns zero. */
 
 
 
@@ -80,7 +80,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 extern void Menu_OpenDialog(void *dst, void *text, void *player, void *controller, void *dialogParameter);
 extern char g_matchEndingTeamWheelClose[];
 extern s32 g_frontendResourceLoadStage;
-/* Starts the action's channel (g_introSelectedItem in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into g_matchEndingTeamWheelClose and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
+/* Starts the action's channel (g_introSelectedItem in demo mode, else the record's inner value) through Snapshot_CheckStatusPrompt; on success loads the record's actor resource into g_matchEndingTeamWheelClose and latches g_pakMenuPromptAccepted, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
 s32 Pak_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     s32 channel;
 
@@ -90,11 +90,11 @@ s32 Pak_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
         channel = menu->owner->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         Menu_OpenDialog(g_matchEndingTeamWheelClose, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Menu_OpenDialog(g_matchEndingTeamWheelClose, &D_0044EE88, menu->player, menu->owner, menu->unk24);
+    Menu_OpenDialog(g_matchEndingTeamWheelClose, &g_pakChannelFallbackDialogText, menu->player, menu->owner, menu->unk24);
     return 1;
 }
 
@@ -107,7 +107,7 @@ s32 Pak_OpenPakStatusPrompt(void *menuContext, Shared_PakMenu *menu) {
     } else {
         channel = menu->owner->controllerPort;
     }
-    D_80153784 = 1;
+    g_pakMenuPromptAccepted = 1;
     if (Snapshot_CheckStatusPrompt(menu, channel, 1) != 0) {
         player = menu->player;
         if (player != NULL) {
@@ -125,10 +125,10 @@ s32 Pak_OpenPakStatusPrompt(void *menuContext, Shared_PakMenu *menu) {
 s32 Pak_CancelPakAction(s32 unused0, PakCancelActionView *action) {
     void *dialogOwner;
     ActorOwnerView *actionOwner;
-    D_800E28C0 = 1;
-    D_8014D480 = 0;
+    g_pakPlayerMessagePending = 1;
+    g_pakCancelStateWord = 0;
     if (g_pakUseScannedChannel != 0) {
-        D_8014ADA0 = 1;
+        g_pakRecheckRequested = 1;
     } else {
         actionOwner = action->unk1C;
         if (actionOwner != NULL) {
@@ -142,7 +142,7 @@ s32 Pak_CancelPakAction(s32 unused0, PakCancelActionView *action) {
 }
 
 s32 Pak_SelectPakLoadHeading(struct PakActionLabelView *field) {
-    if (D_80153760 != 0) {
+    if (g_pakProfileLoadActive != 0) {
         field->text = g_pakStatusPrimaryLabel;
     } else {
         field->text = g_pakStatusSecondaryLabel;

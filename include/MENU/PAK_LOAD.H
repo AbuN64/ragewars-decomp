@@ -25,7 +25,7 @@ static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &g_pakO
 static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &g_pakLoadErrorDialogEuropean; }
 static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &g_pakLoadedProfileEuropean; }
 #else
-extern struct Saved D_8014D488;
+extern struct Saved g_pakLoadedProfile;
 extern char *g_pakProfileGameNameFixed, *g_pakSnapshotGameNameFixed, *g_pakLegacySnapshotGameNameFixed, *g_pakDefaultNoteNameFixed;
 extern u8 *g_pakCompanyCodeFixed;
 extern struct Dialog g_pakLoadedBlockDialog, g_pakSelectedBlockDialog, g_pakLoadedProfileDialog, g_pakSelectedProfileDialog, g_pakOtherNoteDialog, g_pakLoadErrorDialog;
@@ -41,6 +41,6 @@ static __inline__ struct Dialog *rw_pak_loaded_profile_dialog(void) { return &g_
 static __inline__ struct Dialog *rw_pak_selected_profile_dialog(void) { return &g_pakSelectedProfileDialog; }
 static __inline__ struct Dialog *rw_pak_other_note_dialog(void) { return &g_pakOtherNoteDialog; }
 static __inline__ struct Dialog *rw_pak_load_error_dialog(void) { return &g_pakLoadErrorDialog; }
-static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &D_8014D488; }
+static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &g_pakLoadedProfile; }
 #endif
 #endif

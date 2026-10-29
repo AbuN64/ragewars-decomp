@@ -27,7 +27,7 @@ void Gastate_ResetAnimationReference(void *record) {
 }
 
 void Gastate_ReleaseAnimationResource(void *animationState) {
-    Cache_UnlockResource(0, (struct Node80253610 *)(((struct AnimationResourceHandleView *) ((s8 *) animationState))->resourceHandle));
+    Cache_UnlockResource(0, (struct CacheResourceNode *)(((struct AnimationResourceHandleView *) ((s8 *) animationState))->resourceHandle));
     (((struct AnimationResourceHandleView *) ((s8 *) animationState))->resourceHandle) = 0;
 }
 

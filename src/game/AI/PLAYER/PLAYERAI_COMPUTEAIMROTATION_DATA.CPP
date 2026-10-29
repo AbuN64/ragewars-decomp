@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800C7474.CPP */
-/* ROM-grounded data: src/rw_pool_8021C9D8_C8074_us_rev1.c */
+/* ROM-grounded data: src/k_aimRotationPoolHalf_us_rev1.c */
 const unsigned int k_PlayeraiComputeaimrotationHalfWords[1] = {
     0x3F000000,
 };

@@ -203,8 +203,8 @@ void Polytrak2_WriteBitsAndAdvance(u32 *bitCursor, u32 bitCount, u32 fieldValue)
     *bitCursor += bitCount;
 }
 
-Func802608ECResult Polytrak2_ComputeQuantizationRange(f32 minimumValue, f32 maximumValue, f32 maximumError) {
-    Func802608ECResult result;
+Polytrak2QuantizationRange Polytrak2_ComputeQuantizationRange(f32 minimumValue, f32 maximumValue, f32 maximumError) {
+    Polytrak2QuantizationRange result;
     f32 ratio;
     s32 truncated;
     s32 bits;

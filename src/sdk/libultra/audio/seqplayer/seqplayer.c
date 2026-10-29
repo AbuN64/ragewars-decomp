@@ -643,7 +643,7 @@ ALVoiceState *__mapVoice(ALSeqPlayer *sequencePlayer, u8 noteKey, u8 noteVelocit
     return node;
 }
 
-void Seqplayer_ReleaseSequenceVoice(List802B663C *voicePool, void *voice) {
+void Seqplayer_ReleaseSequenceVoice(SeqplayerVoicePool *voicePool, void *voice) {
     NodeGskyActivateMessagePool *node;
     NodeGskyActivateMessagePool *prev;
 

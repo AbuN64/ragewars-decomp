@@ -5,7 +5,7 @@
 unsigned char g_PakTrailingBytes[12] = { 0x8C, 0x62, 0x00, 0xE0, 0x24, 0x42, 0xFE, 0x70, 0x2C, 0x42, 0x00, 0x04 };
 #endif
 
-/* DATA_80405DB4.CPP */
+/* g_PakEncodedWordsBlock1_Pak.CPP */
 #if defined(VERSION_DE)
 /* ROM-grounded data for de; supplied-list member has no us-rev1 placement. */
 unsigned int g_PakEncodedWordsBlock1[3] = {

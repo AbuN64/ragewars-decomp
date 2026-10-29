@@ -151,7 +151,7 @@ static inline void unlock(void) {
  * also gets a white inset band. Runs under the resource lock. */
 void Cache_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     struct HeapAllocationBlock *span;
-    Node80254C10 *node;
+    CacheEvictionNode *node;
     u32 total;
     s32 pass;
     s32 select;

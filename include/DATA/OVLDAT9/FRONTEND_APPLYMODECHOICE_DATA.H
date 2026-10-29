@@ -1,4 +1,4 @@
 #ifndef DATA_OVLDAT9_FRONTEND_APPLYMODECHOICE_DATA_H
 #define DATA_OVLDAT9_FRONTEND_APPLYMODECHOICE_DATA_H
-extern char g_packedCodeAddress24_0042439C[];
+extern char g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData[];
 #endif

@@ -1,4 +1,0 @@
-#ifndef DATA_OVL1_D_DATA_800CE204_H
-#define DATA_OVL1_D_DATA_800CE204_H
-extern char D_002125F0[];
-#endif

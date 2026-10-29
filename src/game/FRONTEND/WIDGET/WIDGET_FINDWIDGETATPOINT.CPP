@@ -12,7 +12,7 @@
 
 /* Draws a visible widget (flag 8): when Widget_ComputeWidgetBounds places it, and its draw flags ask for
    clipping (0x200), it narrows the current scissor from N64Eng_GetClipBounds to the widget's box through
-   func_8040F488_de (skipping the draw when nothing is left) and applies it with N64Eng_SetClipBounds; it then
+   Node_ClampRectToClip_FrontendOpenresourcearchive (skipping the draw when nothing is left) and applies it with N64Eng_SetClipBounds; it then
    draws the widget through Widget_DrawWidget and restores the saved scissor if it was narrowed. */
 
 

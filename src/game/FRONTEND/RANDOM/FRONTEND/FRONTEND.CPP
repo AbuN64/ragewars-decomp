@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800DC810.CPP */
+/* k_FrontendEncodedWordsBlock3_Frontend.CPP */
 #if defined(VERSION_US)
 unsigned int k_FrontendEncodedWordsBlock3[8] = {
     0x0042F404, 0x0042F41C, 0x0042F4C8, 0x0042F410, 0x0042F3F8, 0x0042F3E0, 0x0042F3EC, 0x0042F4F0,

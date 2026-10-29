@@ -112,7 +112,7 @@ void SoundElement_DisableMusicGainOverride(void);
 unsigned int Control_IsAButtonPressed(void *);
 extern s32 g_controllerProfiles;
 extern s32 g_playerPartnerNameFallback;
-extern struct ConfirmingControllerStatusView D_80142622[];
+extern struct ConfirmingControllerStatusView g_gameSettingsRecordActiveFlagBase[];
 
 
 
@@ -130,7 +130,7 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     s32 i;
 
     i = 7;
-    status = (s8 *)&D_80142622[0];
+    status = (s8 *)&g_gameSettingsRecordActiveFlagBase[0];
     for (; i >= 0; i--) {
         ((ConfirmingControllerStatusView *)status)->unk148 = 0;
         status -= 0x96;
@@ -149,7 +149,7 @@ void Confirming_SelectConfirmingController(MenuControllerSelectionView *menuOwne
     SoundElement_DisableMusicGainOverride();
 }
 
-/** Dispatches to func_80264770_de or func_80264788_de with a byte read from arg0->unk20->unk4, chosen by arg1. */
+/** Dispatches to Control_EnableControllerPak_CmenuprofileOpentimedplayerdialog or Control_DisableControllerPakDe with a byte read from arg0->unk20->unk4, chosen by arg1. */
 
 extern void Control_EnableControllerPak(s32 arg);
 extern void Control_DisableControllerPak(s32 arg);

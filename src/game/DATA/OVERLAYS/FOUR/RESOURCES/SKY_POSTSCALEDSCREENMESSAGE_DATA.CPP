@@ -4855,7 +4855,7 @@ unsigned int k_SkyPostscaledscreenmessageEncodedWords[5205] = {
 #endif
 
 #if defined(VERSION_EU_X)
-char data_unresolved_800D4620[33904] =
+char s_SkyPostscaledscreenmessageScreenMessageTextEuX[33904] =
     "ts massifs...\000\000\000Invuln\351rabilit\351...\000\000Bouclier pare-balles...\000Absorption d"
     "'\351nergie...\000Quelque chose d'autre...\000\000\000\000Bouclier\000\000\000\000pi\350ce de l'"
     "arme nucl\351aire\000\000\000Repr\351sailles !\000\000Le Drapeau a \351t\351 attaqu\351\000\000\000"
@@ -5431,7 +5431,7 @@ char data_unresolved_800D4620[33904] =
 #endif
 
 #if defined(VERSION_EU)
-char data_unresolved_800D3C50[52880] =
+char s_SkyPostscaledscreenmessageScreenMessageTextEu[52880] =
     ".\000\000\000Invuln\351rabilit\351...\000\000Bouclier pare-balles...\000Absorption d'\351nergie."
     "..\000Quelque chose d'autre...\000\000\000\000Bouclier\000\000\000\000pi\350ce de l'arme nucl\351"
     "aire\000\000\000Retaliation !\000\000\000Flag was claimed\000\000\000\000Flag was captured\000\000"

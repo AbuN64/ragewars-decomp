@@ -12,7 +12,7 @@
 
 void Pool_InitEntryPool(MenuEntryPoolCountView *pool) {
     s32 i;
-    struct EntryCode8044ACCC *entry;
+    struct MenuEntryPoolEntry *entry;
 
     List_InitializeIntrusive(&pool->active, 0, 4);
     List_InitializeIntrusive(&pool->free, 0, 4);

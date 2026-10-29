@@ -26,7 +26,7 @@ unsigned int k_SetselectedtargetEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020F984_C7C04_us_rev1.c */
+/* ROM-grounded data: src/g_Target_FindNearestFlaggedTargetLiteralWord.c */
 #endif
 
 /* 800C7008.CPP */

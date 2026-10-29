@@ -2,7 +2,7 @@
 
 /* 800CA440.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8028E930_CB040_us_rev1.c */
+/* ROM-grounded data: src/g_schedulerVideoYScale_StorageWords_SchedHandlerspcompletionData.c */
 const unsigned int g_schedulerVideoYScale_StorageWords[1] = {
     0x3F800000,
 };
@@ -14,7 +14,7 @@ const unsigned int g_schedulerAudioFirstDurationScale_StorageWords[4] = {
 };
 
 /* 800CA454.CPP */
-/* ROM-grounded data: src/rw_pool_8028F278_CB054_us_rev1.c */
+/* ROM-grounded data: src/g_schedulerElapsedDurationScale_StorageWords_SchedHandlerspcompletionData.c */
 const unsigned int g_schedulerElapsedDurationScale_StorageWords[1] = {
     0x358637BD,
 };

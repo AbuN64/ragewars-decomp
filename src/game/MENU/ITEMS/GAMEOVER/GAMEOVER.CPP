@@ -11,6 +11,6 @@ void Items_ResetGameOverTimer(GameOverMenuContext *menuContext) {
     menuContext->rec->flags &= 0xFBFFFFFF;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_ResetGameOverTimer);
+INCLUDE_ASM("ovl_frontendMenu", Items_ResetGameOverTimer);
 #endif
 #endif

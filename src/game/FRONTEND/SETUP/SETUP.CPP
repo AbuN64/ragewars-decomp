@@ -6,7 +6,7 @@
 /* Opens the screen g_setupScreen: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at
-   D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
+   D_80154024, clears the pending flag at 0x91 of the eight g_playerSettings_Achieve records, places the four
    character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
    request 0xE78 through SoundElement_PlayFlatSound and calls Menu_InitializeOptionsScene; returns zero. */
 #include "TYPES.H"

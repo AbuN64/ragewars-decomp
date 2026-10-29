@@ -40,7 +40,7 @@ static inline f64 round_down(f64 value) {
 
 extern f64 NaturalLogDouble(f64 value);
 
-/* Returns e raised to a double: 1 for arguments of negligible magnitude, and otherwise splits the argument into k ln 2 plus a remainder r, evaluates the rational approximation 1/2 + p(r)/(q(r) - p(r)) and scales it by two to the power k + 1 through func_8029ABA0_de. */
+/* Returns e raised to a double: 1 for arguments of negligible magnitude, and otherwise splits the argument into k ln 2 plus a remainder r, evaluates the rational approximation 1/2 + p(r)/(q(r) - p(r)) and scales it by two to the power k + 1 through ScaleDoubleExponent_XmathEvaluateexponentialdouble. */
 
 
 
@@ -64,7 +64,7 @@ extern f64 NaturalLogDouble(f64 value);
 
 
 
-/* Returns the arccosine of a value clamped to [-1, 1] as pi/2 minus the arcsine, which is computed by the polynomial approximation pi/2 - sqrt(1 - x) * p(x) on the magnitude with the sign restored. Adapted from XMath_EvaluateArcSine with the constants moved to D_800CADB4 through D_800CADD4 and the final subtraction from pi/2 added. */
+/* Returns the arccosine of a value clamped to [-1, 1] as pi/2 minus the arcsine, which is computed by the polynomial approximation pi/2 - sqrt(1 - x) * p(x) on the magnitude with the sign restored. Adapted from XMath_EvaluateArcSine with the constants moved to k_xmathArcCosineUpperClamp through k_xmathArcCosineHalfPi and the final subtraction from pi/2 added. */
 
 
 
@@ -232,7 +232,7 @@ f64 XMath_EvaluateExponentialDouble(f64 x) {
 }
 
 f64 XMath_SplitDoubleExponent(f64 value, s32 *exponent) {
-    DoubleBits_8029ECB0 u;
+    DoubleBits u;
     f64 special;
 
     special = k_xmathExponentSpecialValue;

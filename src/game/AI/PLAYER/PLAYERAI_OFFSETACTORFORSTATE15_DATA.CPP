@@ -90,10 +90,10 @@ void Playerai_UpdateRoundEndWait(Shared_ActorView *player) {
     }
 }
 
-void func_8022D3EC_de(void) {
+void Playerai_NoopRoundEndWaitFirst_de(void) {
 }
 
-void func_8022D3F4_de(void) {
+void Playerai_NoopRoundEndWaitSecond_de(void) {
 }
 
 void Playerai_UpdateRoundEndViewAngles(s32 player, s32 body) {
@@ -101,7 +101,7 @@ void Playerai_UpdateRoundEndViewAngles(s32 player, s32 body) {
 }
 
 /** Perform no operation. */
-void func_8022D420_de(void) {
+void Playerai_NoopRoundEndViewAngles_de(void) {
 }
 
 void Playerai_UpdateShortSequenceWait(void *player) {
@@ -116,10 +116,10 @@ void Playerai_UpdateShortSequenceWait(void *player) {
     }
 }
 
-void func_8022D49C_de(void) {
+void Playerai_NoopShortSequenceWaitFirst_de(void) {
 }
 
-void func_8022D4A4_de(void) {
+void Playerai_NoopShortSequenceWaitSecond_de(void) {
 }
 
 /** Set bit 0x20 in the word at object offset 0x122C. */

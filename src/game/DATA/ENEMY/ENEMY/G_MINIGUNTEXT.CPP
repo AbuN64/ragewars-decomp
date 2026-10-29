@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D274C.CPP */
+/* g_ConeAttenuationWords1_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_ConeAttenuationWords1[65] = {
     0x00000000, 0x3E000000, 0x3E350508, 0x3E5DB3C0, 0x3E800000, 0x3E8F1BCE, 0x3E9CC469, 0x3EA95400,
@@ -15,7 +15,7 @@ unsigned int g_ConeAttenuationWords1[65] = {
 };
 #endif
 
-/* DATA_800D2850.CPP */
+/* g_GMiniguntextWords1_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D2648_unclaimed_D3450 */
 unsigned int g_GMiniguntextWords1[1] = {
@@ -37,7 +37,7 @@ unsigned short g_ColorJitterHalfwords1[] = {
 /* bytes live in the preceding array */
 #endif
 
-/* DATA_800D28B0.CPP */
+/* g_minigunText_GMiniguntext.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_minigunText[21] = {
     0x00000000, 0x00000000, 0x800D28B0, 0x800D28B0, 0x800CD9D8, 0x800CD824, 0x800CD4A8, 0x800D28B0,

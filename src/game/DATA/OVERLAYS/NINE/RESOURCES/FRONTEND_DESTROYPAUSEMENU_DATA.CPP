@@ -71,7 +71,7 @@ unsigned int g_FrontendDestroypausemenuPointerWords1[27] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800E0228[50] = {
+unsigned int g_pauseMenuEventHandlerRecords[50] = {
     0x00000E07, 0x0000001F, 0x004360D4, 0x00000E08, 0x0000001F, 0x004361FC, 0x00000E0A, 0x0000001F,
     0x004360F4, 0x00000E06, 0x0000001F, 0x00436000, 0x00000E03, 0x0000001F, 0x0043609C, 0x00000001,
     0x0000001F, 0x00436224, 0x00000002, 0x0000001F, 0x00436204, 0x00000000, 0x00000000, 0x00000000,

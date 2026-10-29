@@ -38,9 +38,9 @@
 
  /* 1/CONVERT */
 
-s32 Audio_SetEffectParameter(ALFxCode802BAC64 *filter, s32 paramID, void *param)
+s32 Audio_SetEffectParameter(EffectFilterState *filter, s32 paramID, void *param)
 {
-    ALFxCode802BAC64 *f = filter;
+    EffectFilterState *f = filter;
     s32 p = (paramID - 2) % 8;
     s32 s = (paramID - 2) / 8;
     s32 val = *(s32 *)param;

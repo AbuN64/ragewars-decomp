@@ -17,9 +17,9 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_playModeEventIds, an actor kind at g_playModeEventKinds and a handler at g_playModeEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80424528)(void *, s32, s32, s32, s32);
+typedef s32 (*PlayModeEventHandler)(void *, s32, s32, s32, s32);
 
-extern Handler80424528 g_playModeEventHandlers;
+extern PlayModeEventHandler g_playModeEventHandlers;
 
 s32 Frontend_HandlePlayModeShortcut(void *first, void *second, u32 event, s32 value) {
     struct StateFrontendHandlePlayModeShortcut *state;
@@ -39,7 +39,7 @@ s32 Frontend_ConsumePlayModeEvent(void) {
 }
 
 s32 Frontend_DispatchPlayModeEvent(void *eventTarget, s32 event, s32 itemId, s32 value, s32 context) {
-    Handler80424528 *entry;
+    PlayModeEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

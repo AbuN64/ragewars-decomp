@@ -5,4 +5,4 @@ const unsigned int g_Actor_ApplyActorDefinitionConstantWords[10] = {
     0x3FA00000, 0x437F0000,
 };
 
-/* ROM-grounded data: src/rw_pool_80213AAC_us_rev1_C7E18_us_rev1.c */
+/* ROM-grounded data: src/g_Actor_InitSpawnedActorLiteralWord.c */

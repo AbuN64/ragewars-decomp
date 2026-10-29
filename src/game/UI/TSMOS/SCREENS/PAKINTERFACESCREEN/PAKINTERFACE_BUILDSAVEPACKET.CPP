@@ -6,7 +6,7 @@
 
 /* Saves entry i of the 2920-byte records of the block g_pakProfileScreenState points to into the 0x640-byte
    template at offset 0x2E28 through XPlus_CopyBytes, copies the entry's word at 0xBBC to the block's
-   0x3468, and stores in the block's 0x346C what func_804057F8_de computes over the template with 0x640
+   0x3468, and stores in the block's 0x346C what Note_Crc32_PakinterfaceBuildsavepacket computes over the template with 0x640
    and 7. */
 extern s32 Note_Crc32(void *, s32, s32);
 

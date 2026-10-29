@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800C6AB0.CPP */
+/* k_TurretMixedLinkFragmentsEncodedBytes_TurretMixedLinkFragments.CPP */
 #if defined(VERSION_US)
 const char k_TurretMixedLinkFragmentsEncodedBytes[20] =
     "RGBR\000\000\000\000\000\000\000\000\077\200\000\000\000\000\000\000";

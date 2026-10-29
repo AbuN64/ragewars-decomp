@@ -9,11 +9,11 @@
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo g_particleCollisionProbeResult;
-extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
-extern s32 CCollision_SweepPoint(Instance8020CD74 *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
+extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *);
+extern s32 CCollision_SweepPoint(ActorInstanceHeader *actorStorage, CVector3 current, CVector3 desired, CollisionInfo *motionSettings);
 
-s32 Cbarrel_TestFlaggedAimObstruction(Instance8020CD74 *probingActor, void *unused, Instance8020CD74 *target) {
-    Instance8020CD74 saved;
+s32 Cbarrel_TestFlaggedAimObstruction(ActorInstanceHeader *probingActor, void *unused, ActorInstanceHeader *target) {
+    ActorInstanceHeader saved;
     CVector3 desired;
     f32 scale;
 

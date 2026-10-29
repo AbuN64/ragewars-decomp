@@ -10,7 +10,7 @@ struct Lists {
     AudioPendingFlagsNode second;
 };
 struct AudioSpatialVoiceManagerView {
-    struct SceneCode802591C0 *scene;
+    struct AudioScene *scene;
     AudioPendingSoundLinks active;
     char padC[0xCC];
     AudioPendingSoundLinks free;
@@ -19,7 +19,7 @@ struct AudioVoiceListLinks {
     void *unk_0;
     void *unk_4;
 };
-struct CellCode802591C0 {
+struct AudioSoundCell {
     s32 index;
     s32 pad4;
     s32 texture;

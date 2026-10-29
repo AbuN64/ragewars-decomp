@@ -76,11 +76,11 @@ extern char *g_volumeOneMaximumLabel;
 extern char *g_volumeOneNeutralLabel;
 #endif
 
-extern u8 *D_800D3DBC;
-extern char D_800DE7B0_de[];
+extern u8 *g_musicPreviewFixedValueText;
+extern char g_musicPreviewValueFormat_de[];
 
 
-extern u8 *D_800D3624;
+extern u8 *g_packedButtonOptionZeroText;
 
 extern u8 *g_volumeTwoMinimumLabel;
 extern u8 *g_volumeTwoMaximumLabel;

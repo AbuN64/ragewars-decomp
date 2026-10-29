@@ -5,7 +5,7 @@
 
 /* 8020EAE0_4.CPP */
 #if !defined(VERSION_EU)
-s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *controller) {
+s32 Nav_SelectPickupGoal(PickupGoalControllerView *controller) {
     s32 buffer[30];
     s32 count;
     Shared_PickupGoalNode *record;
@@ -99,7 +99,7 @@ s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *controller) {
 /* 8020EAE0_5.CPP */
 #if defined(VERSION_EU)
 int Nav_SelectPickupGoalEu(void *self) {
-    PickupGoalObj8020EF60 *controller = self;
+    PickupGoalControllerView *controller = self;
     s32 buffer[30];
     s32 count;
     Shared_PickupGoalNode *record;

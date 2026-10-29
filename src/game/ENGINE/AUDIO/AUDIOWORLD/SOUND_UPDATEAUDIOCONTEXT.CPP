@@ -80,7 +80,7 @@ s32 Sound_UpdateAudioContext(void *context) {
     Audio_UpdateMusicFade(queue);
     Audio_UpdateMusicPlayback(queue);
 
-    if (D_800CB720 != 0 &&
+    if (g_audioContextInitialized != 0 &&
         ((struct GameAudioContext *)(object))->spatialAudioEnabled != 0 &&
         SetN64_IsModeThirteen() != 0 &&
         ((struct GameAudioContext *)(object))->track > 0) {

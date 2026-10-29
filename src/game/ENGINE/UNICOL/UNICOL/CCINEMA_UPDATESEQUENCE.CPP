@@ -15,7 +15,7 @@ extern void Cache_ReleaseResource(void *cache, void *resource);
 
 /* Starts the round once: unless already started, optionally resets the lead player (Playerai_ResetControllerMotion and its
  * three counters) and the player group, then when a new target id is pending selects it through
- * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from Track_HasNoTrackRequestItems, marks the round started with
+ * Scene_FindNearestPlacedObject_CcinemaUpdatesequence and Scene_LoadLevelResources, records the start time from Track_HasNoTrackRequestItems, marks the round started with
  * no pending target and copies the viewport rectangle into the active camera as floats. */
 
 
@@ -38,9 +38,9 @@ extern char g_controllerRumblePool;
 
 extern struct MemoryUsageStats g_activeLinkSequenceId;
 
-extern struct MemoryUsageStats D_801371E4;
+extern struct MemoryUsageStats g_activeSequenceTargetFound;
 
-extern char D_801371E8;
+extern char g_nearestPlacedObjectResult;
 
 extern struct MemoryUsageStats g_activeActorKind;
 
@@ -72,7 +72,7 @@ typedef void (*FuncPtr)(void);
 
 extern s32 g_gameFrameCounter;
 
-extern GameState D_80140FB4;
+extern GameState g_gameStateBlock;
 
 extern void Cinema_CloseSequenceOnce(void);
 
@@ -110,9 +110,9 @@ void CCinema_EnterSequenceScene(void) {
             origin.w[0] = 0;
             origin.w[1] = 0;
             origin.w[2] = 0;
-            found = Scene_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
+            found = Scene_FindNearestPlacedObject(table, &origin, target, &g_nearestPlacedObjectResult);
             g_activeActorKind.value = found;
-            D_801371E4.value = found != 0;
+            g_activeSequenceTargetFound.value = found != 0;
             Scene_LoadLevelResources(table, target, found != 0);
         }
     }
@@ -226,7 +226,7 @@ void CCinema_UpdateSequence(void) {
         return;
     }
     CCinema_ProcessPendingTrack();
-    if (Cinema_IsSequenceActive() != 0 && Cinema_GetPlaybackPauseState() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
+    if (Cinema_IsSequenceActive() != 0 && Cinema_GetPlaybackPauseState() == 0 && g_gameStateBlock.busy == 0 && g_gameStateBlock.paused == 0 &&
         g_cinemaSequenceState->loopBounds[0] == 0) {
         if (g_cinemaSequenceState->time >= g_cinemaSequenceState->end && g_cinemaSequenceState->initialized44 == 0) {
             FuncPtr cue = g_cinemaSequenceState->callback10;

@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "RENDER/SETN64_GETPACKSECTION.H"
 
-/* Draws every part of a model resource with the shared material g_tintedModelSharedMaterial when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from Geometry_DrawWithMaterialOverride with the render mode, blend and light commands added and the per-part lighting call removed. */
+/* Draws every part of a model resource with the shared material g_tintedModelSharedMaterial when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: sets the render mode, selects blend 2 through Geometry_SetCombineMode_GeometryDrawcharactereffectparts, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from Geometry_DrawWithMaterialOverride with the render mode, blend and light commands added and the per-part lighting call removed. */
 
 
 

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802850C8_CAB90_us_rev1.c */
+/* ROM-grounded data: src/g_Particle_FindNearestForeignEffectDistanceConstantsUsRev1_ParticleFindnearestforeigneffectdistanceData.c */
 const unsigned int g_Particle_FindNearestForeignEffectDistanceConstantsUsRev1[1] = {
     0x4B189680,
 };

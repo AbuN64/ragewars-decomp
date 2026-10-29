@@ -48,7 +48,7 @@ Decompress_ExpandBackReferences:
     addu $t2, $t2, $t7
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_410
+    j .Decompress_ReadControlBit
     andi $t7, $t7, 0x1
     addiu $v0, $zero, -0x1
     jr $ra
@@ -56,89 +56,89 @@ Decompress_ExpandBackReferences:
     addiu $v0, $zero, -0x2
     jr $ra
     nop
-.Lfunc_802AD9EC_de_0D4:
+.Decompress_RefillBitsForAccumulateLongRun:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_1D0
+    j .Decompress_AccumulateLongRun
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_0F0:
+.Decompress_RefillBitsForAccumulateMatchLength:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_240
+    j .Decompress_AccumulateMatchLength
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_10C:
+.Decompress_RefillBitsForTestMatchLength:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_260
+    j .Decompress_TestMatchLength
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_128:
+.Decompress_RefillBitsForAccumulateMatchEscape:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_284
+    j .Decompress_AccumulateMatchEscape
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_144:
+.Decompress_RefillBitsForTestOffsetFlag:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_2B8
+    j .Decompress_TestOffsetFlag
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_160:
+.Decompress_RefillBitsForAccumulateOffsetHigh:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_2D8
+    j .Decompress_AccumulateOffsetHigh
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_17C:
+.Decompress_RefillBitsForTestOffsetEscape:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_2F8
+    j .Decompress_TestOffsetEscape
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_198:
+.Decompress_RefillBitsForAccumulateOffsetExtra:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_324
+    j .Decompress_AccumulateOffsetExtra
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_1B4:
+.Decompress_StartLongRunBitCount:
     addiu $t0, $zero, 0x3
-.Lfunc_802AD9EC_de_1B8:
+.Decompress_ReadLongRunBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_0D4
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateLongRun
     nop
-.Lfunc_802AD9EC_de_1D0:
+.Decompress_AccumulateLongRun:
     addu $t1, $t1, $t1
     addu $t1, $t1, $t7
     srl $t7, $t1, 16
     andi $t7, $t7, 0x1
     addi $t0, $t0, -0x1
-    bgez $t0, .Lfunc_802AD9EC_de_1B8
+    bgez $t0, .Decompress_ReadLongRunBit
     nop
     addi $t1, $t1, 0x2
-.Lfunc_802AD9EC_de_1F0:
+.Decompress_CopyLongRunWords:
     lbu $t4, 0x0($v1)
     lbu $s2, 0x1($v1)
     sb $t4, 0x0($a1)
@@ -149,93 +149,93 @@ Decompress_ExpandBackReferences:
     sb $s2, 0x3($a1)
     addiu $v1, $v1, 0x4
     addi $t1, $t1, -0x1
-    bgez $t1, .Lfunc_802AD9EC_de_1F0
+    bgez $t1, .Decompress_CopyLongRunWords
     addi $a1, $a1, 0x4
-    j .Lfunc_802AD9EC_de_410
+    j .Decompress_ReadControlBit
     nop
-.Lfunc_802AD9EC_de_228:
+.Decompress_ReadMatchLengthBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_0F0
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateMatchLength
     nop
-.Lfunc_802AD9EC_de_240:
+.Decompress_AccumulateMatchLength:
     addu $t0, $t0, $t0
     addu $t0, $t0, $t7
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_10C
+    beq $zero, $t2, .Decompress_RefillBitsForTestMatchLength
     nop
-.Lfunc_802AD9EC_de_260:
-    beq $zero, $t7, .Lfunc_802AD9EC_de_2A0
+.Decompress_TestMatchLength:
+    beq $zero, $t7, .Decompress_ReadOffsetFlagBit
     nop
     addi $t0, $t0, -0x1
     add $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_128
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateMatchEscape
     nop
-.Lfunc_802AD9EC_de_284:
+.Decompress_AccumulateMatchEscape:
     addu $t0, $t0, $t0
     addu $t0, $t0, $t7
     srl $t7, $t0, 16
     andi $t7, $t7, 0x1
     addi $t4, $t0, -0x9
-    beq $zero, $t4, .Lfunc_802AD9EC_de_1B4
+    beq $zero, $t4, .Decompress_StartLongRunBitCount
     nop
-.Lfunc_802AD9EC_de_2A0:
+.Decompress_ReadOffsetFlagBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_144
+    beq $zero, $t2, .Decompress_RefillBitsForTestOffsetFlag
     nop
-.Lfunc_802AD9EC_de_2B8:
-    beq $zero, $t7, .Lfunc_802AD9EC_de_344
+.Decompress_TestOffsetFlag:
+    beq $zero, $t7, .Decompress_LoadOffsetLowByte
     nop
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_160
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateOffsetHigh
     nop
-.Lfunc_802AD9EC_de_2D8:
+.Decompress_AccumulateOffsetHigh:
     addu $t1, $t1, $t1
     addu $t1, $t1, $t7
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_17C
+    beq $zero, $t2, .Decompress_RefillBitsForTestOffsetEscape
     nop
-.Lfunc_802AD9EC_de_2F8:
-    bne $zero, $t7, .Lfunc_802AD9EC_de_4DC
+.Decompress_TestOffsetEscape:
+    bne $zero, $t7, .Decompress_ReadShortOffsetBit
     nop
-    bne $zero, $t1, .Lfunc_802AD9EC_de_334
+    bne $zero, $t1, .Decompress_SwapOffsetBytes
     nop
     addi $t1, $t1, 0x1
-.Lfunc_802AD9EC_de_30C:
+.Decompress_ReadOffsetExtraBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_198
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateOffsetExtra
     nop
-.Lfunc_802AD9EC_de_324:
+.Decompress_AccumulateOffsetExtra:
     addu $t1, $t1, $t1
     addu $t1, $t1, $t7
     srl $t7, $t1, 16
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_334:
+.Decompress_SwapOffsetBytes:
     sll $t4, $t1, 8
     andi $t4, $t4, 0xFF00
     srl $t1, $t1, 8
     or $t1, $t1, $t4
-.Lfunc_802AD9EC_de_344:
+.Decompress_LoadOffsetLowByte:
     andi $s3, $t1, 0xFF00
     lbu $t1, 0x0($v1)
     addiu $v1, $v1, 0x1
@@ -245,58 +245,58 @@ Decompress_ExpandBackReferences:
     addi $t6, $t6, -0x1
     andi $t7, $t0, 0x1
     srl $t0, $t0, 1
-    beq $zero, $t7, .Lfunc_802AD9EC_de_380
+    beq $zero, $t7, .Decompress_CopyMatchRemainder
     nop
     lbu $t4, 0x0($t6)
     addi $t6, $t6, 0x1
     sb $t4, 0x0($a1)
     addi $a1, $a1, 0x1
-.Lfunc_802AD9EC_de_380:
+.Decompress_CopyMatchRemainder:
     addi $t0, $t0, -0x1
-    bne $zero, $t1, .Lfunc_802AD9EC_de_3B8
+    bne $zero, $t1, .Decompress_CopyMatchBytePairs
     nop
     andi $s3, $t1, 0xFF00
     lbu $t1, 0x0($t6)
     nop
     or $t1, $t1, $s3
-.Lfunc_802AD9EC_de_39C:
+.Decompress_CopyRepeatedBytePairs:
     sb $t1, 0x0($a1)
     addi $t0, $t0, -0x1
     sb $t1, 0x1($a1)
-    bgez $t0, .Lfunc_802AD9EC_de_39C
+    bgez $t0, .Decompress_CopyRepeatedBytePairs
     addi $a1, $a1, 0x2
-    j .Lfunc_802AD9EC_de_410
+    j .Decompress_ReadControlBit
     nop
-.Lfunc_802AD9EC_de_3B8:
+.Decompress_CopyMatchBytePairs:
     lbu $s2, 0x1($t6)
     lbu $t4, 0x0($t6)
     sb $s2, 0x1($a1)
     sb $t4, 0x0($a1)
     addi $t6, $t6, 0x2
     addi $t0, $t0, -0x1
-    bgez $t0, .Lfunc_802AD9EC_de_3B8
+    bgez $t0, .Decompress_CopyMatchBytePairs
     addi $a1, $a1, 0x2
-    j .Lfunc_802AD9EC_de_410
+    j .Decompress_ReadControlBit
     nop
-.Lfunc_802AD9EC_de_3E0:
+.Decompress_RefillBitsForTestBackReferenceFlag:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
-    bne $zero, $t7, .Lfunc_802AD9EC_de_454
+    bne $zero, $t7, .Decompress_BeginBackReference
     nop
-.Lfunc_802AD9EC_de_400:
+.Decompress_CopyLiteralByte:
     lbu $t4, 0x0($v1)
     addi $v1, $v1, 0x1
     sb $t4, 0x0($a1)
     addi $a1, $a1, 0x1
-.Lfunc_802AD9EC_de_410:
+.Decompress_ReadControlBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
-    bne $zero, $t7, .Lfunc_802AD9EC_de_448
+    bne $zero, $t7, .Decompress_CheckBitBufferEmpty
     nop
     lbu $t4, 0x0($v1)
     addi $v1, $v1, 0x1
@@ -305,58 +305,58 @@ Decompress_ExpandBackReferences:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
-    beq $zero, $t7, .Lfunc_802AD9EC_de_400
+    beq $zero, $t7, .Decompress_CopyLiteralByte
     nop
-.Lfunc_802AD9EC_de_448:
+.Decompress_CheckBitBufferEmpty:
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_3E0
+    beq $zero, $t2, .Decompress_RefillBitsForTestBackReferenceFlag
     nop
-.Lfunc_802AD9EC_de_454:
+.Decompress_BeginBackReference:
     addiu $t0, $zero, 0x2
     addiu $t1, $zero, 0x0
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_530
+    beq $zero, $t2, .Decompress_RefillBitsForTestMatchLengthFirstBit
     nop
-.Lfunc_802AD9EC_de_474:
-    beq $zero, $t7, .Lfunc_802AD9EC_de_228
+.Decompress_TestMatchLengthFirstBit:
+    beq $zero, $t7, .Decompress_ReadMatchLengthBit
     nop
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_54C
+    beq $zero, $t2, .Decompress_RefillBitsForTestMatchLengthSecondBit
     nop
-.Lfunc_802AD9EC_de_494:
-    beq $zero, $t7, .Lfunc_802AD9EC_de_344
+.Decompress_TestMatchLengthSecondBit:
+    beq $zero, $t7, .Decompress_LoadOffsetLowByte
     nop
     addi $t0, $t0, 0x1
     add $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_568
+    beq $zero, $t2, .Decompress_RefillBitsForTestMatchLengthThirdBit
     nop
-.Lfunc_802AD9EC_de_4B8:
-    beq $zero, $t7, .Lfunc_802AD9EC_de_2A0
+.Decompress_TestMatchLengthThirdBit:
+    beq $zero, $t7, .Decompress_ReadOffsetFlagBit
     nop
     lbu $t0, 0x0($v1)
     addi $v1, $v1, 0x1
     nop
-    beq $zero, $t0, .Lfunc_802AD9EC_de_5BC
+    beq $zero, $t0, .Decompress_ReadEndMarkerBit
     addi $t0, $t0, 0x8
-    j .Lfunc_802AD9EC_de_2A0
+    j .Decompress_ReadOffsetFlagBit
     nop
-.Lfunc_802AD9EC_de_4DC:
+.Decompress_ReadShortOffsetBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_584
+    beq $zero, $t2, .Decompress_RefillBitsForAccumulateShortOffset
     nop
-.Lfunc_802AD9EC_de_4F4:
+.Decompress_AccumulateShortOffset:
     addu $t1, $t1, $t1
     addu $t1, $t1, $t7
     srl $t7, $t1, 16
@@ -366,59 +366,59 @@ Decompress_ExpandBackReferences:
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    beq $zero, $t2, .Lfunc_802AD9EC_de_5A0
+    beq $zero, $t2, .Decompress_RefillBitsForTestShortOffsetFlag
     nop
-.Lfunc_802AD9EC_de_520:
-    bne $zero, $t7, .Lfunc_802AD9EC_de_334
+.Decompress_TestShortOffsetFlag:
+    bne $zero, $t7, .Decompress_SwapOffsetBytes
     nop
-    j .Lfunc_802AD9EC_de_30C
+    j .Decompress_ReadOffsetExtraBit
     nop
-.Lfunc_802AD9EC_de_530:
+.Decompress_RefillBitsForTestMatchLengthFirstBit:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_474
+    j .Decompress_TestMatchLengthFirstBit
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_54C:
+.Decompress_RefillBitsForTestMatchLengthSecondBit:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_494
+    j .Decompress_TestMatchLengthSecondBit
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_568:
+.Decompress_RefillBitsForTestMatchLengthThirdBit:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_4B8
+    j .Decompress_TestMatchLengthThirdBit
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_584:
+.Decompress_RefillBitsForAccumulateShortOffset:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_4F4
+    j .Decompress_AccumulateShortOffset
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_5A0:
+.Decompress_RefillBitsForTestShortOffsetFlag:
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
     addu $t2, $t2, $t2
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
-    j .Lfunc_802AD9EC_de_520
+    j .Decompress_TestShortOffsetFlag
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_5BC:
+.Decompress_ReadEndMarkerBit:
     addu $t2, $t2, $t2
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
     andi $t2, $t2, 0xFF
-    bne $zero, $t2, .Lfunc_802AD9EC_de_5EC
+    bne $zero, $t2, .Decompress_TestEndMarkerBit
     nop
     lbu $t2, 0x0($v1)
     addi $v1, $v1, 0x1
@@ -426,26 +426,26 @@ Decompress_ExpandBackReferences:
     addu $t2, $t2, $t7
     srl $t7, $t2, 8
     andi $t7, $t7, 0x1
-.Lfunc_802AD9EC_de_5EC:
-    bne $zero, $t7, .Lfunc_802AD9EC_de_410
+.Decompress_TestEndMarkerBit:
+    bne $zero, $t7, .Decompress_ReadControlBit
     nop
     lhu $t5, 0x0($t3)
     addi $t3, $t3, 0x2
-    beq $zero, $t5, .Lfunc_802AD9EC_de_620
+    beq $zero, $t5, .Decompress_SkipTrailerStore
     nop
-.Lfunc_802AD9EC_de_604:
+.Decompress_CopyTrailerBytes:
     lh $s0, 0x0($t3)
     addi $t3, $t3, 0x2
     sb $s0, 0x0($a1)
     addi $a1, $a1, 0x1
     addi $t5, $t5, -0x1
-    bne $zero, $t5, .Lfunc_802AD9EC_de_604
+    bne $zero, $t5, .Decompress_CopyTrailerBytes
     nop
-.Lfunc_802AD9EC_de_620:
-    j .Lfunc_802AD9EC_de_62C
+.Decompress_SkipTrailerStore:
+    j .Decompress_ReturnSuccess
     nop
     sw $s0, 0x0($t3)
-.Lfunc_802AD9EC_de_62C:
+.Decompress_ReturnSuccess:
     addiu $v0, $zero, 0x0
     jr $ra
     nop

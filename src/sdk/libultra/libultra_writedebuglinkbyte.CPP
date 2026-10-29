@@ -6,7 +6,7 @@
 #include "sdk/OSINT/pigetstatus.H"
 
 #if defined(VERSION_US_REV1)
-/* Writes one byte through the cartridge-domain port at DEBUG_LINK_DATA_REGISTER with the control register DEBUG_LINK_MODE_REGISTER and strobe register DEBUG_LINK_HANDSHAKE_REGISTER, waiting for the ready bit of DEBUG_LINK_TRANSMIT_STATUS_BYTE to set and then clear with g_debugLinkRetryLimit retries each, setting g_debugLinkTransferFailed on a timeout and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the read of D_B2000001 changed to a write of the argument through DEBUG_LINK_DATA_REGISTER and the strobe at DEBUG_LINK_HANDSHAKE_REGISTER raised and lowered around the handshake, and the argument copied into a second local for the port write. */
+/* Writes one byte through the cartridge-domain port at DEBUG_LINK_DATA_REGISTER with the control register DEBUG_LINK_MODE_REGISTER and strobe register DEBUG_LINK_HANDSHAKE_REGISTER, waiting for the ready bit of DEBUG_LINK_TRANSMIT_STATUS_BYTE to set and then clear with g_debugLinkRetryLimit retries each, setting g_debugLinkTransferFailed on a timeout and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the read of g_debugLinkReceivedDataByte changed to a write of the argument through DEBUG_LINK_DATA_REGISTER and the strobe at DEBUG_LINK_HANDSHAKE_REGISTER raised and lowered around the handshake, and the argument copied into a second local for the port write. */
 
 
 extern u8 g_debugLinkDataByte;

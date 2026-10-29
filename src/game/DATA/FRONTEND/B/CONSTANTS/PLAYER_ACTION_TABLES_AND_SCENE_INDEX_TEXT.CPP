@@ -9,7 +9,7 @@ const unsigned char s_sceneResourceIndexTagsEuX[29] = {
 };
 #endif
 
-/* DATA_800C934C.CPP */
+/* SceneEffectMaximumColorUsRev1.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C934C */
 unsigned int g_sceneEffectMaximumColorUsRev1[1] = {
@@ -17,7 +17,7 @@ unsigned int g_sceneEffectMaximumColorUsRev1[1] = {
 };
 #endif
 
-/* DATA_800C9540.CPP */
+/* PlayerActionStateTableUs.CPP */
 #if defined(VERSION_US)
 extern char g_Player_UpdateFlyModeAddress[];
 extern char g_Player_UpdateStandingStateAddress[];
@@ -103,7 +103,7 @@ extern char g_Playerai_EnterMovingSequenceStateCallbackAddressUs[];
 extern char g_Playerai_ResetPlayerWeaponLockAddress[];
 extern char g_Playerai_EnterStoppedSequenceStateCallbackAddressUs[];
 extern char g_Playerai_OffsetActorForState15Address[];
-u32 data_unresolved_800C942C_0CA08C_0CA0B0_0CA11C_0CA140[593] = {
+u32 g_playerActionStateTableWordsUs[593] = {
     0x00000001, 0x3ECCCCCD, 0x3F000000, 0x3F800000, 0x3E800000, 0xBFC90FDC,
     0x3FC90FDC, 0x3E4CCCCD, 0x3E800000, 0x3F000000, 0x3E000000, 0xBFC90FDC,
     0x3FC90FDC, 0x3F83126F, 0x40F5C28F, 0x3F03126F, 0x4123D70A, 0x3F449BA6,
@@ -206,7 +206,7 @@ u32 data_unresolved_800C942C_0CA08C_0CA0B0_0CA11C_0CA140[593] = {
 };
 #endif
 
-/* DATA_800C9D70.CPP */
+/* SceneEffectTuningEu.CPP */
 #if defined(VERSION_EU)
 unsigned int g_sceneEffectTuningEu[4] = {
     0x3DB851EC, 0x3D4CCCCD, 0x3F000000, 0x42800000,

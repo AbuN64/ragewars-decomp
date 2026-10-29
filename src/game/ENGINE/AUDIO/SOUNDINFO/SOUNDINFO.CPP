@@ -11,67 +11,67 @@
 #include "GAME/SOUNDINFO.H"
 
 short SoundInfo_GetGroup(void *soundDescriptor) {
-    return ((ControllerCode802591C0 *)soundDescriptor)->group;
+    return ((SoundDescriptor *)soundDescriptor)->group;
 }
 
 short SoundInfo_GetSample(void *desc) {
-    return ((ControllerCode802591C0 *)desc)->sample;
+    return ((SoundDescriptor *)desc)->sample;
 }
 
 /** Return the signed byte at offset four in the supplied object. */
 int SoundInfo_GetPriority(void *object) {
-    return ((ControllerCode802591C0 *)object)->priority;
+    return ((SoundDescriptor *)object)->priority;
 }
 
 /** Return the signed byte at offset five. */
-int SoundInfo_GetMode(ControllerCode802591C0 *note) {
+int SoundInfo_GetMode(SoundDescriptor *note) {
     return note->mode;
 }
 
 /** Return the signed halfword at offset eight. */
-int func_8025E530_de(char *object) {
-    return ((ControllerCode802591C0 *)object)->pitchPresetId;
+int SoundInfo_GetPitchPresetId_de(char *object) {
+    return ((SoundDescriptor *)object)->pitchPresetId;
 }
 
 short SoundInfo_GetPreset(void *soundDescriptor) {
-    return ((ControllerCode802591C0 *)soundDescriptor)->preset;
+    return ((SoundDescriptor *)soundDescriptor)->preset;
 }
 
 /** Return the upper two bits of the halfword at object offset 6. */
 unsigned int SoundInfo_GetPan(void *soundDescriptor) {
-    return ((ControllerCode802591C0 *)soundDescriptor)->flags >> 14;
+    return ((SoundDescriptor *)soundDescriptor)->flags >> 14;
 }
 
 signed char SoundInfo_GetPitch(void *desc) {
-    return ((ControllerCode802591C0 *)desc)->pitch;
+    return ((SoundDescriptor *)desc)->pitch;
 }
 
 /** Read the signed object byte at offset 0xF. */
-signed char func_8025E560_de(void *object) {
-    return ((ControllerCode802591C0 *)object)->fieldF;
+signed char SoundInfo_GetByteF_de(void *object) {
+    return ((SoundDescriptor *)object)->fieldF;
 }
 
 /** Return the signed halfword stored at offset 0x10. */
 int SoundInfo_GetYaw(void *object) {
-    return ((ControllerCode802591C0 *)object)->yaw;
+    return ((SoundDescriptor *)object)->yaw;
 }
 
 unsigned short SoundInfo_GetFlags(void *soundDescriptor) {
-    return ((ControllerCode802591C0 *)soundDescriptor)->flags & 0x3FFF;
+    return ((SoundDescriptor *)soundDescriptor)->flags & 0x3FFF;
 }
 
-short SoundInfo_GetX(ControllerCode802591C0 *controller) {
+short SoundInfo_GetX(SoundDescriptor *controller) {
     return controller->x;
 }
 
 /** Return the signed halfword at offset 0x14 in the supplied object. */
-int SoundInfo_GetY(ControllerCode802591C0 *object) {
+int SoundInfo_GetY(SoundDescriptor *object) {
     return object->y;
 }
 
 /** Return the signed halfword at offset twelve. */
-int func_8025E59C_de(void *soundDescriptor) {
-    return ((ControllerCode802591C0 *)soundDescriptor)->fieldC;
+int SoundInfo_GetHalfwordC_de(void *soundDescriptor) {
+    return ((SoundDescriptor *)soundDescriptor)->fieldC;
 }
 
 #if defined(VERSION_US)

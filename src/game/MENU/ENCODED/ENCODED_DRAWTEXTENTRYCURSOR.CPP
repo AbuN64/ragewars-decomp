@@ -11,7 +11,7 @@
 extern Shared_Entry g_encodedTextEntryState;
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-extern func_802077F4_S2 *Menu_GetWidgetStyle(void *, s32);
+extern PaddedFloatView *Menu_GetWidgetStyle(void *, s32);
 
 extern void Menu_DrawLocalizedMenuItemText(void *, MenuLocalizedTextItemView *, void *, MenuStyle *);
 
@@ -30,7 +30,7 @@ extern s32 g_encodedCheatCharacterIndex;
 
 extern u8 g_encodedCheatCode[0x64];
 
-/* Draws the g_encodedTextEntryState spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
+/* Draws the g_encodedTextEntryState spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width Menu_GetWidgetStyle_EncodedDrawtextentrycursor reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Menu_DrawLocalizedMenuItemText. */
 void Encoded_DrawTextEntryCursor(void *menu, MenuLocalizedTextItemView *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;

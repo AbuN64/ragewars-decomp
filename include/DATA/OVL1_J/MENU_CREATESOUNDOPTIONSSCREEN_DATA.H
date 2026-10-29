@@ -1,5 +1,5 @@
 #ifndef DATA_OVL1_J_MENU_CREATESOUNDOPTIONSSCREEN_DATA_H
 #define DATA_OVL1_J_MENU_CREATESOUNDOPTIONSSCREEN_DATA_H
-extern char g_packedCodeAddress24_004391F0[];
-extern char g_packedCodeAddress24_004391F8[];
+extern char g_Menu_SoundOptionsReturnZeroPackedAddress24_MenuCreatesoundoptionsscreenData[];
+extern char g_Menu_UpdateSoundOptionsScreenPackedAddress24_MenuCreatesoundoptionsscreenData[];
 #endif

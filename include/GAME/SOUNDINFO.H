@@ -3,15 +3,15 @@
 #include "COMMON/STREAM.H"
 #include "TYPES.H"
 
-extern int func_8025E59C_de(void *soundDescriptor);
+extern int SoundInfo_GetHalfwordC_de(void *soundDescriptor);
 
-struct Output8025EF54 {
+struct ScalarSampleOutput {
     f32 value;
     s32 pad04;
     s32 pad08;
     s32 pad0C;
 };
-struct Segment8025FFD0 {
+struct PackedCurveSegment {
     s32 valueBitWidth;
     f32 baseValue;
     f32 valueRange;
@@ -21,7 +21,7 @@ struct Segment8025FFD0 {
     s32 segmentIndex;
     s32 segmentCount;
 };
-struct Decode8025EF54 {
+struct ScalarSampleDecodeState {
     s32 bits;
     f32 base;
     f32 range;

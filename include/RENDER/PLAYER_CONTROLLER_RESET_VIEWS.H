@@ -8,8 +8,8 @@
 struct PlayerControllerResetStateView;
 typedef struct PlayerControllerResetStateView PlayerControllerResetStateView;
 
-struct PlayerCode802192C0;
-struct PlayerCode802192C0 {
+struct PlayerMarkerPrismView;
+struct PlayerMarkerPrismView {
     char pad0[0x1214];
     s32 marker;
     char pad1218[0x147C - 0x1218];
@@ -175,10 +175,10 @@ struct PlayerControllerReleaseView {
     s32 unk_16D4;
 };
 
-struct Struct802193C8;
-typedef struct Struct802193C8 Struct802193C8;
+struct RouteCursorState;
+typedef struct RouteCursorState RouteCursorState;
 
-extern float D_800C22B0_us;
+extern float g_playerHeightScalePair_us;
 
 extern float g_playerAnimatedSpriteScaleYZ;
 
@@ -201,16 +201,16 @@ struct PlayerControllerResetStateView {
 struct Cursor;
 typedef struct Cursor Cursor;
 
-struct Struct802193C8;
-struct Struct802193C8 {
+struct RouteCursorState;
+struct RouteCursorState {
     s8 field0;
     s8 field1;
     s16 field2;
     s16 field4;
 };
 
-struct PlayerCode802192C0;
-typedef struct PlayerCode802192C0 PlayerCode802192C0;
+struct PlayerMarkerPrismView;
+typedef struct PlayerMarkerPrismView PlayerMarkerPrismView;
 
 struct PlayerControllerReleaseView;
 typedef struct PlayerControllerReleaseView PlayerControllerReleaseView;

@@ -13,15 +13,15 @@ unsigned char g_FrontendCreatecourseoptionsmenuTrailingBytes[8] = { 0x3C, 0x06, 
 #include "TYPES.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 
-extern struct CourseOptionsScreen *D_800E39C0;
+extern struct CourseOptionsScreen *g_courseOptionsScreen;
 
 s32 Frontend_CreateCourseOptionsMenu(void *root) {
     SlotSelectionWidget *item;
     s32 row;
 
-    { void *memory = Cache_AllocateMemory(0x20); D_800E39C0 = memory; }
-    D_800E39C0->handle = root;
-    D_800E39C0->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
+    { void *memory = Cache_AllocateMemory(0x20); g_courseOptionsScreen = memory; }
+    g_courseOptionsScreen->handle = root;
+    g_courseOptionsScreen->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
     SmpOverlay_ShowSlotById((s32) root, 0, 0x389);
     SmpOverlay_ShowSlotById((s32) root, 1, 0x389);
     SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
@@ -33,25 +33,25 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
         Widget_SetWidgetFlag08(item, 0);
     }
 
-    D_800E39C0->timer = 0;
-    D_800E39C0->selection = 0;
+    g_courseOptionsScreen->timer = 0;
+    g_courseOptionsScreen->selection = 0;
     item = Node_FindWidgetByResourceId(root, 0x38C);
-    D_800E39C0->rows[0] = item;
+    g_courseOptionsScreen->rows[0] = item;
     item = Node_FindWidgetByResourceId(root, 0x395);
-    D_800E39C0->rows[1] = item;
+    g_courseOptionsScreen->rows[1] = item;
     item = Node_FindWidgetByResourceId(root, 0x396);
-    D_800E39C0->rows[2] = item;
-    D_800E39C0->step = Join_CountUsedSlots();
+    g_courseOptionsScreen->rows[2] = item;
+    g_courseOptionsScreen->step = Join_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         Join_UpdateJoinRequestDisplay(row);
-        item = Node_FindWidgetByResourceId(D_800E39C0->rows[row], 0x392);
+        item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[row], 0x392);
         Widget_SetWidgetFlag08(item, 0);
     }
 
     Tsmos_ActivateControllerState();
 
-    item = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    item = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392);
     Widget_SetWidgetFlag08(item, 1);
     return 0;
 }

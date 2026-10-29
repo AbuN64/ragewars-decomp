@@ -165,7 +165,7 @@ s32 Note_ContainsInvalidNameByte(u8 *text, s32 count) {
 }
 
 /* Rounds a byte count up to whole 256-byte units; PAKInterface_CheckRecordsNoteCapacity passes it the 0x648-byte size
-   that func_80435424_de returns. */
+   that PAKInterface_GetRecordsNoteSize_PakAllocaterenderbuffers returns. */
 u32 Note_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
@@ -219,7 +219,7 @@ extern u32 Defs_GetMemorySize(void);
 extern Handle *Cache_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
 extern char s_bufferText[9];  /* "Z-Buffer" */
 extern char s_displayBufferText[15];    /* "Display Buffer" */
-extern char D_800DCD1C[31];    /* "color frame buffers + z buffer" */
+extern char s_colorFramesAndZBufferText[31];    /* "color frame buffers + z buffer" */
 extern char s_displayListsText[14];    /* "display lists" */
 extern char s_fifoText[5];     /* "fifo" */
 extern char s_audioHeapText[11];    /* "audio heap" */
@@ -284,7 +284,7 @@ int Note_AllocateRenderBuffers(struct RenderBufferResources *record) {
         bufferBytes = 0x1ECC0;
         memoryEnd = 0x80400000;
         buffers = Cache_AllocateResourceAt(NULL, memoryEnd - (g_renderFrameBufferCount + 1) * bufferBytes,
-                                           (g_renderFrameBufferCount + 1) * bufferBytes, D_800DCD1C);
+                                           (g_renderFrameBufferCount + 1) * bufferBytes, s_colorFramesAndZBufferText);
         record->frameBuffers[0] = buffers;
         for (i = 0; i < g_renderFrameBufferCount; i++) {
             g_colorImageBuffers[i] = (u8 *)buffers->data + bufferBytes * i;

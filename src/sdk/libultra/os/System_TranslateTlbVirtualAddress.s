@@ -20,7 +20,7 @@ System_TranslateTlbVirtualAddress:
     nop
     lui $at, 0x8000
     and $t3, $t3, $at
-    bnez $t3, .Lfunc_802BD080_de_0B8
+    bnez $t3, .LSystem_TranslateTlbVirtualAddress_returnInvalid
     nop
     tlbr
     nop
@@ -31,17 +31,17 @@ System_TranslateTlbVirtualAddress:
     addi $t3, $t3, 0x2000
     srl $t3, $t3, 1
     and $t4, $t3, $a0
-    bnez $t4, .Lfunc_802BD080_de_084
+    bnez $t4, .LSystem_TranslateTlbVirtualAddress_useEntryLo1
     addi $t3, $t3, -0x1
     mfc0 $v0, $2
-    bgez $zero, .Lfunc_802BD080_de_088
+    bgez $zero, .LSystem_TranslateTlbVirtualAddress_checkValid
     nop
-.Lfunc_802BD080_de_084:
+.LSystem_TranslateTlbVirtualAddress_useEntryLo1:
     mfc0 $v0, $3
-.Lfunc_802BD080_de_088:
+.LSystem_TranslateTlbVirtualAddress_checkValid:
     nop
     andi $t5, $v0, 0x2
-    beqz $t5, .Lfunc_802BD080_de_0B8
+    beqz $t5, .LSystem_TranslateTlbVirtualAddress_returnInvalid
     nop
     lui $at, 0x3FFF
     ori $at, $at, 0xFFC0
@@ -49,11 +49,11 @@ System_TranslateTlbVirtualAddress:
     sll $v0, $v0, 6
     and $t5, $a0, $t3
     add $v0, $v0, $t5
-    bgez $zero, .Lfunc_802BD080_de_0BC
+    bgez $zero, .LSystem_TranslateTlbVirtualAddress_restoreEntryHi
     nop
-.Lfunc_802BD080_de_0B8:
+.LSystem_TranslateTlbVirtualAddress_returnInvalid:
     addiu $v0, $zero, -0x1
-.Lfunc_802BD080_de_0BC:
+.LSystem_TranslateTlbVirtualAddress_restoreEntryHi:
     mtc0 $t0, $10
     jr $ra
     nop

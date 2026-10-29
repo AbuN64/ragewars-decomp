@@ -11,8 +11,8 @@
 #include "include_asm.h"
 
 /* 80212C90_10.CPP */
-void Nav_InitTimedJumpRoute(Root802131E0 *actor) {
-    Target802131E0 *inner;
+void Nav_InitTimedJumpRoute(JumpRouteActorView *actor) {
+    JumpRouteControllerView *inner;
 
     inner = actor->player->controller;
     inner->behaviorState = 0;
@@ -27,7 +27,7 @@ extern f32 Scaled_DistanceToNode(void *controller, s32 nodeId);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *controller);
 
-void Nav_UpdateTransientJumpRoute(Root802131E0 *actor)
+void Nav_UpdateTransientJumpRoute(JumpRouteActorView *actor)
 {
     void *state;
     s32 random;
@@ -65,7 +65,7 @@ void Nav_UpdateTransientJumpRoute(Root802131E0 *actor)
 
 /* 800C6E84_21.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8021321C_C7DE0_us_rev1.c */
+/* ROM-grounded data: src/g_Nav_UpdateTransientJumpRouteConstantWords_Jumproute.c */
 const unsigned int g_Nav_UpdateTransientJumpRouteConstantWords[1] = {
     0x42CCCCCC,
 };

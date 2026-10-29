@@ -38,7 +38,7 @@ const unsigned int g_graphu64_BlendRandomDirectionConstantWords1[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80270FE8_CA4DC_us_rev1.c */
+/* ROM-grounded data: src/g_graphu64_BlendRandomDirectionConstantWords2_Graphu64InterpolatequaternionwithlinearfallbackData.c */
 const unsigned int g_graphu64_BlendRandomDirectionConstantWords2[2] = {
     0x3F800000, 0x3F800000,
 };
@@ -58,36 +58,36 @@ const unsigned int k_Graphu64InterpolatequaternionwithlinearfallbackEncodedWords
 #endif
 
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_pool802712482_us_rev1[4] = {
+const unsigned int g_graphu64_BlendRandomYDirectionConstantWords[4] = {
     0x461C4000, 0x38D1B717, 0x3F800000, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C98E8 */
-const unsigned int g_pool802712483_us_rev1[2] = {
+const unsigned int g_graphu64_BlendRandomXDirectionConstantWords2_us_rev1[2] = {
     0x3F800000, 0x3F800000,
 };
 
-const unsigned int g_pool802714301_us_rev1[4] = {
+const unsigned int g_graphu64_BlendRandomYDirectionConstantWords_us_rev1[4] = {
     0x461C4000, 0x38D1B717, 0x3F800000, 0x3F800000,
 };
 #endif
 
 /* 800C9900.CPP */
 #if !(defined(VERSION_US_REV1))
-const unsigned int g_pool802714302_us_rev1[4] = {
+const unsigned int g_graphu64_BlendRandomZDirectionConstantWords[4] = {
     0x461C4000, 0x38D1B717, 0x3F800000, 0x3F800000,
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned int g_pool80271624_us_rev1[4] = {
+const unsigned int g_graphu64_BlendRandomZDirectionConstantWords_us_rev1[4] = {
     0x461C4000, 0x38D1B717, 0x3F800000, 0x3F800000,
 };
 #endif
 
 /* 800C9910.CPP */
-const unsigned int g_pool80271818_us_rev1[6] = {
+const unsigned int g_graphu64_BuildDirectionQuaternionConstantWords_us_rev1[6] = {
     0x3F800000, 0x3F800000, 0x3F7FFF58, 0x3F7FFF58, 0x3F800000, 0x3F000000,
 };

@@ -43,7 +43,7 @@ void Cinema_EndSequence(void) {
 
 void Cinema_RequestSequenceFade(void) {
     if (Cinema_IsSequenceActive() != 0 && Cinema_IsFadeAllowed() != 0 && g_cinemaSequenceState->fadeRequested == 0) {
-        f32 requestedFade = D_800C37D0_de;
+        f32 requestedFade = k_cinemaFadeRequestValue_de;
         g_cinemaSequenceState->fadeRequested = 1;
         g_cinemaSequenceState->fade = requestedFade;
     }
@@ -206,10 +206,10 @@ f32 Cinema_GetSequenceResponse(void) {
     f32 response;
 
     if (record->active == 0) {
-        return D_800C37D4_de;
+        return k_cinemaInactiveResponse_de;
     }
     response = record->response;
-    if (!(D_800C37D8_de < response)) {
+    if (!(k_cinemaResponseThreshold_de < response)) {
         return Track_EvaluateTrackScalar(record->time);
     }
     return response;

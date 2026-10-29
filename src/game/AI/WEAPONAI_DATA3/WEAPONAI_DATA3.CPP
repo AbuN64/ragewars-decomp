@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* 800CF5BC.CPP */
-/* ROM-grounded data: src/rw_pool_802312C8_D01BC_us_rev1.c */
+/* ROM-grounded data: src/k_WeaponaiData3EncodedWordsBlock4_WeaponaiData3.c */
 const unsigned int k_WeaponaiData3EncodedWordsBlock4[1] = {
     0x00000008,
 };
@@ -24,12 +24,12 @@ unsigned int k_WeaponaiData3EncodedWords[40] = {
 /* 800CAEBC.CPP */
 #if defined(VERSION_EU)
 extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2[];
-extern char D_00232C78[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandles[];
 extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant3[];
 extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant3[];
 unsigned int k_WeaponaiData3EncodedWordsBlock2[40] = {
     0x800CAC38, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232C78, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant3, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandles, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant3, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant3, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant3, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -54,12 +54,12 @@ unsigned int k_WeaponaiData3EncodedWordsBlock3[40] = {
 /* 800CA2DC.CPP */
 #if defined(VERSION_DE)
 extern char addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2[];
-extern char D_00232C68[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4[];
 extern char addrLow_Weapon_UpdateNormalFireActionEntryVariant2[];
 extern char addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant2[];
 unsigned int k_WeaponaiData3EncodedWordsBlock1[40] = {
     0x800CA058, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, (unsigned int)D_00232C68, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant2, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
+    0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant2, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000003, 0x00000000, (unsigned int)addrLow_Weapon_UpdateNormalFireActionEntryVariant2, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000004, (unsigned int)addrLow_Weapon_InitializeChargeAndStartupCuesEntryVariant2, (unsigned int)addrLow_Weaponai_UpdateChargeAndRepeatCueEntryVariant2, 0x00000000, 0x00004EE8, 0x3F800000, 0x00000003, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,

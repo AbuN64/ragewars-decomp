@@ -7,13 +7,13 @@ extern float k_xmathPitchRotationUnit;
 
 
 
-struct Mtx3x4_8029FD54;
-typedef struct Mtx3x4_8029FD54 Mtx3x4_8029FD54;
+struct Matrix3x4View;
+typedef struct Matrix3x4View Matrix3x4View;
 
 
 extern double k_decimalFractionRadix;
 
-struct Mtx3x4_8029FD54;
+struct Matrix3x4View;
 
 
 

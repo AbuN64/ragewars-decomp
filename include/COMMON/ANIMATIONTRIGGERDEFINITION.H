@@ -2,8 +2,8 @@
 #define COMMON_ANIMATIONTRIGGERDEFINITION_H
 struct Shared_Actor;
 struct SharedPlayer;
-#ifndef SPAN_1000_CODE_80204E78_H
-#define SPAN_1000_CODE_80204E78_H
+#ifndef COMMON_ANIMATIONTRIGGERDEFINITION_BODY_H
+#define COMMON_ANIMATIONTRIGGERDEFINITION_BODY_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -213,16 +213,16 @@ extern void DamageAI_InitializeDispatch(struct LevelActor *source, void *dest);
 
 extern int DamageAI_GetActivationMode(void *actor);
 
-struct DescriptorCode80204E78;
-struct DescriptorCode80204E78 {
+struct ActorActionDescriptor;
+struct ActorActionDescriptor {
     char pad0[0x14];
     ActionInfo info;
 };
 struct ActorTriggerDescriptorView;
-struct DescriptorCode80204E78;
+struct ActorActionDescriptor;
 struct ActorTriggerDescriptorView {
     char pad0[0x18];
-    struct DescriptorCode80204E78 *desc;
+    struct ActorActionDescriptor *desc;
     char pad1C[0xE4 - 0x1C];
     u16 model;
     char padE6[0x100 - 0xE6];

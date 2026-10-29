@@ -71,7 +71,7 @@ struct GeometryEdgeDirectionView {
 
 extern float g_randomFloatRangeScale;
 
-extern float D_800C49EC_de;
+extern float g_regionWordToFloatScaleDe;
 
 extern void Graphu64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp);
 

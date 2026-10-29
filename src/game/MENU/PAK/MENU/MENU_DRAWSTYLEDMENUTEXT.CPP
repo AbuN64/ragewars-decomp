@@ -10,15 +10,15 @@
 
 /* Chooses a text style, updates its colours and scale, then draws the text. */
 /* The values Menu_DrawStyledMenuText loads by address:
- * 0x800E2490 = 1.25 (float, D_800E2490 in this cartridge's tables)
+ * 0x800E2490 = 1.25 (float, k_menuTextSelectedColorScale in this cartridge's tables)
  * 0x800E2494 = 0.9 (float, unnamed in this cartridge's tables)
- * 0x800E2498 = 0.25 (float, D_800E2498 in this cartridge's tables)
+ * 0x800E2498 = 0.25 (float, k_menuTextDimColorScale in this cartridge's tables)
  * 0x800E28D0 = 4.48e-43 (float, g_hudReferenceViewportWidth in this cartridge's tables; not a literal: a variable, its value in the image, since g_hudReferenceViewportWidth: `sw` at %lo(g_hudReferenceViewportWidth) in Frontend_ApplyVideoMode.s)
  * 0x800E28D4 = 3.36e-43 (float, g_hudReferenceViewportHeight in this cartridge's tables)
- * 0x800E249C = 0.0035211267 (float, D_800E249C in this cartridge's tables)
- * 0x800E24A0 = 0.0045045046 (float, D_800E24A0 in this cartridge's tables)
- * 0x800E24A4 = 255.0 (float, D_800E24A4 in this cartridge's tables)
- * 0x800E24A8 = 1.0 (float, D_800E24A8 in this cartridge's tables)
+ * 0x800E249C = 0.0035211267 (float, k_menuTextViewportWidthScale in this cartridge's tables)
+ * 0x800E24A0 = 0.0045045046 (float, k_menuTextViewportHeightScale in this cartridge's tables)
+ * 0x800E24A4 = 255.0 (float, k_menuTextAlphaMax in this cartridge's tables)
+ * 0x800E24A8 = 1.0 (float, k_menuTextDrawScale in this cartridge's tables)
  */
 u32 Defs_GetMemorySize(void);
 

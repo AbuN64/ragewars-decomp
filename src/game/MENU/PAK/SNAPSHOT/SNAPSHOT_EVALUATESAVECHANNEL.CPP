@@ -1,7 +1,7 @@
 #include "COMMON/PAK_MENU.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "COMMON/LONE/D_0044E468.H"
-#include "COMMON/LONE/D_0044ED44.H"
+#include "COMMON/LONE/g_pakProfileActionDialogResource.H"
+#include "COMMON/LONE/g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
@@ -10,10 +10,10 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 
 /* Enters pak menu mode 1: sets the mode flags, clears the owner's 0x01000000 flag and, when a
-   message is pending (D_800E28C0), shows the player's message at 0x554 through Menu_OpenDialog;
+   message is pending (g_pakPlayerMessagePending), shows the player's message at 0x554 through Menu_OpenDialog;
    otherwise probes the Controller Pak on the selected channel, falls back to Snapshot_MarkSaveNotes when
-   Note_GetStatus reports none, and shows the D_44F67C, D_44F994 or D_44F610 prompt according to
-   func_80404F3C_de and Note_NeedsIdRepair. */
+   Note_GetStatus reports none, and shows the g_pakChannelReadyMessage_SnapshotEvaluatesavechannel, g_pakDialogIdRepair_SnapshotEvaluatesavechannel or g_pakChannelNotReadyDialog_SnapshotEvaluatesavechannel prompt according to
+   Note_IsChannelReady_SnapshotEvaluatesavechannel and Note_NeedsIdRepair. */
 
 
 
@@ -30,7 +30,7 @@
 
 
 extern s32 g_pakUseScannedChannel;
-extern s32 D_800E28C0;
+extern s32 g_pakPlayerMessagePending;
 extern char g_matchEndingTeamWheelClose[];
 
 extern void Note_ProbeStatus(s32 ch);
@@ -42,18 +42,18 @@ extern void Menu_OpenDialog(char *, char *, ActorOwnerView *, PakMenuSlot *, cha
 void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
     s32 ch;
 
-    D_8014D4C0_de = 0;
-    D_8014D4DC = 0;
-    D_80153760 = 1;
-    D_8014D4EC_de = 1;
-    D_800DE874 = 1;
-    D_80153784 = 0;
+    g_pakSaveMenuActiveDe = 0;
+    g_pakNoteSelectProbesNote = 0;
+    g_pakProfileLoadActive = 1;
+    g_pakProfileLoadMode_de = 1;
+    g_pakNoteTitleSelector = 1;
+    g_pakMenuPromptAccepted = 0;
     g_pakUseScannedChannel = 0;
     menu->items[20].flags &= ~0x01000000;
     ch = menu->slot->controllerPort;
-    if (D_800E28C0 != 0) {
-        D_80153784 = 1;
-        Menu_OpenDialog(menu->player->owner + 0x554, D_0044FB50, menu->player, menu->slot, 0);
+    if (g_pakPlayerMessagePending != 0) {
+        g_pakMenuPromptAccepted = 1;
+        Menu_OpenDialog(menu->player->owner + 0x554, g_pakStatusPromptAlternate, menu->player, menu->slot, 0);
         return;
     }
     Note_ProbeStatus(ch);
@@ -61,13 +61,13 @@ void Snapshot_BeginProfileLoad(Shared_PakMenu *menu) {
         Snapshot_MarkSaveNotes(menu);
         return;
     }
-    D_80153784 = 1;
+    g_pakMenuPromptAccepted = 1;
     if (Note_IsChannelReady(ch) != 0) {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EA2C, menu->player, menu->slot, D_0044FB50);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakChannelReadyMessage_SnapshotCheckstatusprompt, menu->player, menu->slot, g_pakStatusPromptAlternate);
     } else if (Note_NeedsIdRepair(ch) != 0) {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044ED44, menu->player, menu->slot, D_0044E468);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakDialogIdRepair_SnapshotCheckeuropeansaveavailability, menu->player, menu->slot, g_pakProfileActionDialogResource);
     } else {
-        Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044E9C0, menu->player, menu->slot, D_0044FB50);
+        Menu_OpenDialog(g_matchEndingTeamWheelClose, g_pakChannelNotReadyDialog_SnapshotCheckstatusprompt, menu->player, menu->slot, g_pakStatusPromptAlternate);
     }
 }
 

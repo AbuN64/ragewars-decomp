@@ -43,13 +43,13 @@ void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 f
 
 
 
-/* The option block at D_801462D0: its byte 5 is the screen mode, also read as D_801462D5 elsewhere. */
+/* The option block at g_gameOptions: its byte 5 is the screen mode, also read as g_gameControllerMode elsewhere. */
 struct GameOptions {
     s32 word0;
     u8 byte4;
     u8 mode;
 };
-extern struct GameOptions D_801462D0;
+extern struct GameOptions g_gameOptions;
 /* Builds the results options screen into g_trialCatalogueScreen: slides its two side panels in over four frames,
    finds the first active player, clears the pending flags of the eight status records, and runs the
    per-mode setup selected by the option byte. Returns zero. */
@@ -118,7 +118,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     g_trialCatalogueScreen->item = wItem;
     wItem->alpha = 0xFF;
     g_trialCatalogueScreen->modeFlag = 0;
-    mode = D_801462D0.mode;
+    mode = g_gameOptions.mode;
     if (mode < 5) {
         if (mode >= 3) {
             g_trialCatalogueScreen->modeFlag = 1;
@@ -128,7 +128,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     g_trialCatalogueScreen->blinking = 0;
     g_trialCatalogueScreen->frames = 0;
     g_trialCatalogueScreen->blinkDelay = -1;
-    switch (D_801462D0.mode) {
+    switch (g_gameOptions.mode) {
     case 1:
     case 3:
     case 4:
@@ -140,7 +140,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
     case 2:
         break;
     }
-    switch (D_801462D0.mode) {
+    switch (g_gameOptions.mode) {
     case 1:
         Results_FillProfileWeaponRows();
         break;
@@ -151,7 +151,7 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
         Results_FillTwoPlayerWeaponRows();
         break;
     }
-    if (D_801462D0.mode != 2) {
+    if (g_gameOptions.mode != 2) {
         Results_UpdateResultsHeading();
     }
     SoundElement_PlayFlatSound(0xE78);
@@ -161,8 +161,8 @@ s32 Results_CreateResultsOptionsScreen(MenuWidget *rootWidget) {
 
 /* Places the models of the first two active players on the screen g_trialCatalogueScreen: calls
    Tsmos_SetModeOneFlag(1) and Tsmos_DeactivateControllerState, clears the word at 0xA58, and for each player whose 150-byte
-   status record in D_80146398 has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
-   row of g_characterPortraitRecords through func_8041F140_de and shows object 0x38F plus the kind through
+   status record in g_playerSettings_Achieve has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
+   row of g_characterPortraitRecords through Key_FindKeyIndex_Key and shows object 0x38F plus the kind through
    Preview_InitModelPreview in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
    (uniform scale, position, float and word) for the first model and layout 2 for the second.
    Returns zero. */

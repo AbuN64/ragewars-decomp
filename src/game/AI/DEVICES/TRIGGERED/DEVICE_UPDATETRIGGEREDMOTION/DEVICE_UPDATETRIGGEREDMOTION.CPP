@@ -8,7 +8,7 @@ unsigned int g_deviceUpdatetriggeredmotionFloatConstantWords[3] = {
 #endif
 
 /* 800C6C90.CPP */
-/* ROM-grounded data: src/rw_pool_80207BB8_C7890_us_rev1.c */
+/* ROM-grounded data: src/k_DeviceUpdatetriggeredmotionOneWords_DeviceUpdatetriggeredmotion.c */
 const unsigned int k_DeviceUpdatetriggeredmotionOneWords[1] = {
     0x3F800000,
 };

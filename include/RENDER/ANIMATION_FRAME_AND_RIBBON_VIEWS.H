@@ -19,7 +19,7 @@ struct RibbonFrameBufferView {
     unsigned char padding_0[40];
     UnitMtx matrix;
 };
-struct Owner802A697C {
+struct SwooshAttachmentOwnerView {
     u8 pad0[0x7528];
     struct ParticleSwooshAttachment *head;
 };

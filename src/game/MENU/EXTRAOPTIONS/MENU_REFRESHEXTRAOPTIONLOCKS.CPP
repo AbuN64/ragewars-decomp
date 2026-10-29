@@ -20,7 +20,7 @@ extern s32 SmpButton_GetListSelection(void *);
 
 /* Updates the limit markers of the screen g_extraOptionsScreen: totals Achieve_CountEarnedAchievements over the four 400-byte
    records of g_localPlayerProfiles whose owner byte 0xD is not negative (or takes 40 when the word at 0x38 is
-   1), enables items 0x3B4, 0x3B1, 0x3AD and 0x3AF of the window at 0x8 through func_8040E950_de, then
+   1), enables items 0x3B4, 0x3B1, 0x3AD and 0x3AF of the window at 0x8 through Widget_SetWidgetFlag100_MenuRefreshextraoptionlocks, then
    disables 0x3B1 from a total of 10, 0x3B4 from 6, 0x3AD from 12 and 0x3AF from 14. Written from
    the assembly. */
 
@@ -33,11 +33,11 @@ extern s32 Achieve_CountEarnedAchievements(s32);
 extern void Widget_SetWidgetFlag100(MenuWidget *record, int enable);
 
 #if defined(VERSION_DE)
-enum { MENU_804212A4_941 = 935, MENU_804212A4_943 = 937, MENU_804212A4_945 = 939, MENU_804212A4_948 = 942 };
+enum { k_extraOptionLockAtTotal12 = 935, k_extraOptionLockAtTotal14 = 937, k_extraOptionLockAtTotal10 = 939, k_extraOptionLockAtTotal6 = 942 };
 #elif defined(VERSION_EU_X)
-enum { MENU_804212A4_941 = 950, MENU_804212A4_943 = 952, MENU_804212A4_945 = 947, MENU_804212A4_948 = 944 };
+enum { k_extraOptionLockAtTotal12 = 950, k_extraOptionLockAtTotal14 = 952, k_extraOptionLockAtTotal10 = 947, k_extraOptionLockAtTotal6 = 944 };
 #else
-enum { MENU_804212A4_941 = 941, MENU_804212A4_943 = 943, MENU_804212A4_945 = 945, MENU_804212A4_948 = 948 };
+enum { k_extraOptionLockAtTotal12 = 941, k_extraOptionLockAtTotal14 = 943, k_extraOptionLockAtTotal10 = 945, k_extraOptionLockAtTotal6 = 948 };
 #endif
 
 /* Resets the number pad of the screen g_extraOptionsScreen: shows the item at 0x20, hides item 0x3AB of the
@@ -52,11 +52,11 @@ extern void Widget_SetWidgetFlag08(void *, s32);
 extern void Menu_AdvanceTextRows();
 
 #if defined(VERSION_DE)
-enum { MENU_8042144C_939 = 933, MENU_8042144C_952 = 946, MENU_8042144C_953 = 947, MENU_8042144C_954 = 948, MENU_8042144C_955 = 949, MENU_8042144C_956 = 950, MENU_8042144C_957 = 951, MENU_8042144C_958 = 952, MENU_8042144C_959 = 953, MENU_8042144C_960 = 954, MENU_8042144C_961 = 955 };
+enum { k_keypadHiddenWidget = 933, k_keypadKeyWidgetDigit0 = 946, k_keypadKeyWidgetDigit1 = 947, k_keypadKeyWidgetDigit2 = 948, k_keypadKeyWidgetDigit3 = 949, k_keypadKeyWidgetDigit4 = 950, k_keypadKeyWidgetDigit5 = 951, k_keypadKeyWidgetDigit6 = 952, k_keypadKeyWidgetDigit7 = 953, k_keypadKeyWidgetDigit8 = 954, k_keypadKeyWidgetDigit9 = 955 };
 #elif defined(VERSION_EU_X)
-enum { MENU_8042144C_939 = 943, MENU_8042144C_952 = 956, MENU_8042144C_953 = 957, MENU_8042144C_954 = 958, MENU_8042144C_955 = 959, MENU_8042144C_956 = 960, MENU_8042144C_957 = 961, MENU_8042144C_958 = 962, MENU_8042144C_959 = 963, MENU_8042144C_960 = 964, MENU_8042144C_961 = 965 };
+enum { k_keypadHiddenWidget = 943, k_keypadKeyWidgetDigit0 = 956, k_keypadKeyWidgetDigit1 = 957, k_keypadKeyWidgetDigit2 = 958, k_keypadKeyWidgetDigit3 = 959, k_keypadKeyWidgetDigit4 = 960, k_keypadKeyWidgetDigit5 = 961, k_keypadKeyWidgetDigit6 = 962, k_keypadKeyWidgetDigit7 = 963, k_keypadKeyWidgetDigit8 = 964, k_keypadKeyWidgetDigit9 = 965 };
 #else
-enum { MENU_8042144C_939 = 939, MENU_8042144C_952 = 952, MENU_8042144C_953 = 953, MENU_8042144C_954 = 954, MENU_8042144C_955 = 955, MENU_8042144C_956 = 956, MENU_8042144C_957 = 957, MENU_8042144C_958 = 958, MENU_8042144C_959 = 959, MENU_8042144C_960 = 960, MENU_8042144C_961 = 961 };
+enum { k_keypadHiddenWidget = 939, k_keypadKeyWidgetDigit0 = 952, k_keypadKeyWidgetDigit1 = 953, k_keypadKeyWidgetDigit2 = 954, k_keypadKeyWidgetDigit3 = 955, k_keypadKeyWidgetDigit4 = 956, k_keypadKeyWidgetDigit5 = 957, k_keypadKeyWidgetDigit6 = 958, k_keypadKeyWidgetDigit7 = 959, k_keypadKeyWidgetDigit8 = 960, k_keypadKeyWidgetDigit9 = 961 };
 #endif
 
 void Menu_ApplyExtraOptionFlags(void) {
@@ -95,21 +95,21 @@ void Menu_RefreshExtraOptionLocks(void) {
     if (g_extraOptionsScreen->full == 1) {
         total = 40;
     }
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_948), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_945), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_941), 1);
-    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_943), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal6), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal10), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal12), 1);
+    Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal14), 1);
     if (total >= 10) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_945), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal10), 0);
     }
     if (total >= 6) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_948), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal6), 0);
     }
     if (total >= 12) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_941), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal12), 0);
     }
     if (total >= 14) {
-        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_804212A4_943), 0);
+        Widget_SetWidgetFlag100(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_extraOptionLockAtTotal14), 0);
     }
 }
 
@@ -118,7 +118,7 @@ void Menu_OpenOptionsKeypad(void) {
     s32 key;
 
     Widget_SetWidgetFlag08(g_extraOptionsScreen->pad, 1);
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_939), 0);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadHiddenWidget), 0);
     g_extraOptionsScreen->mode = 1;
     g_extraOptionsScreen->length = 8;
     g_extraOptionsScreen->value = 0;
@@ -126,35 +126,35 @@ void Menu_OpenOptionsKeypad(void) {
     for (key = 0; key < 10; key++) {
         switch (key) {
         case 1:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_953);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit1);
             break;
         case 2:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_954);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit2);
             break;
         case 3:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_955);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit3);
             break;
         case 4:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_956);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit4);
             break;
         case 5:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_957);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit5);
             break;
         case 6:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_958);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit6);
             break;
         case 7:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_959);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit7);
             break;
         case 8:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_960);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit8);
             break;
         case 9:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_961);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit9);
             break;
         case 0:
         default:
-            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, MENU_8042144C_952);
+            item = Node_FindWidgetByResourceId(g_extraOptionsScreen->window, k_keypadKeyWidgetDigit0);
             break;
         }
         item->alpha = 0x96;

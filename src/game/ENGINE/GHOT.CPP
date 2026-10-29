@@ -206,7 +206,7 @@ void Ghot_DispatchAttachmentEffects(ModelAttachmentEffect *effectAttachments, s3
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8026E5E0_CA3A0_us_rev1.c */
+/* ROM-grounded data: src/g_Ghot_DispatchAttachmentEffectsConstantWords_Ghot.c */
 const unsigned int g_Ghot_DispatchAttachmentEffectsConstantWords[3] = {
     0x41700000, 0x40A00000, 0x43800000,
 };

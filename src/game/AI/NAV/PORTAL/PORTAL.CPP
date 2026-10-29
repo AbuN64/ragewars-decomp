@@ -18,20 +18,20 @@ const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_de_eu_eu_x_us[2] 
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020BC50_C7A58_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_SearchRelatedGoalPathConstantWords_us_rev1_Portal.c */
 const unsigned int g_Portal_SearchRelatedGoalPathConstantWords_us_rev1[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 /* 800C6E60.CPP */
-/* ROM-grounded data: src/rw_pool_8020BE7C_C7A60_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_FindPortalRouteConstantWords_Portal.c */
 const unsigned int g_Portal_FindPortalRouteConstantWords[1] = {
     0x4E6E6B28,
 };
 
 /* 800C6E64.CPP */
-/* ROM-grounded data: src/rw_pool_8020C078_C7A64_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_SearchPortalRouteConstantWords_Portal.c */
 const unsigned int g_Portal_SearchPortalRouteConstantWords[1] = {
     0x4B189680,
 };
@@ -44,26 +44,26 @@ const unsigned int g_Portal_EstimateGoalDistanceConstantWords_de_eu_eu_x_us[2] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020C2E8_C7A68_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_EstimateGoalDistanceConstantWords_us_rev1_Portal.c */
 const unsigned int g_Portal_EstimateGoalDistanceConstantWords_us_rev1[2] = {
     0xBF800000, 0xBF800000,
 };
 #endif
 
 /* 800C6E70.CPP */
-/* ROM-grounded data: src/rw_pool_8020C5A0_C7A70_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_SearchPathConstantWords_Portal.c */
 const unsigned int g_Portal_SearchPathConstantWords[3] = {
     0xBF800000, 0xBF800000, 0x47480000,
 };
 
 /* 800C6E7C.CPP */
-/* ROM-grounded data: src/rw_pool_8020CA10_C7A7C_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_InitSearchNodeConstantWords_Portal.c */
 const unsigned int g_Portal_InitSearchNodeConstantWords[2] = {
     0xBF800000, 0x41700000,
 };
 
 /* 800C6E84_6.CPP */
-/* ROM-grounded data: src/rw_pool_8020CD74_C7A84_us_rev1.c */
+/* ROM-grounded data: src/g_Portal_IsNodeMovementBlockedConstantWords_Portal.c */
 const unsigned int g_Portal_IsNodeMovementBlockedConstantWords[1] = {
     0x4275C28F,
 };

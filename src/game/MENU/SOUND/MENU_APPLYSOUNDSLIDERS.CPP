@@ -23,15 +23,15 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_soundOptionsEventIds, an actor kind at g_soundOptionsEventKinds and a handler at g_soundOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80439390)(void *, s32, s32, s32, s32);
+typedef s32 (*SoundOptionsEventHandler)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler80439390 g_soundOptionsEventHandlers;
+extern SoundOptionsEventHandler g_soundOptionsEventHandlers;
 
 /* Builds a two-slider menu: allocates eight bytes into g_soundOptionSliders through Cache_AllocateMemory, creates the
    sliders VALUE_1D5/VALUE_1D5+1 and VALUE_1D5+2/VALUE_1D5+3 through SmpSlider_CreateSliderWidget, stores them in the block and sets them
-   to the option bytes D_801462E0[0] and [1] through SmpSlider_SetSliderItem, then calls SmpButton_WrapButtonWidget with
+   to the option bytes g_gameSettingsVolumeBytes[0] and [1] through SmpSlider_SetSliderItem, then calls SmpButton_WrapButtonWidget with
    VV_01D3. Returns zero. */
 
 
@@ -66,7 +66,7 @@ s32 Menu_CancelSoundOptionsScreen(void) {
 }
 
 s32 Menu_DispatchSoundOptionsEvent(void *eventTarget, s32 event, s32 itemId, s32 value, s32 context) {
-    Handler80439390 *entry;
+    SoundOptionsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

@@ -213,7 +213,7 @@ unsigned int g_ResultsRefreshtrialcataloguewidgetsWords1[252] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800DF6E4[283] = {
+unsigned int g_resultsRefreshTrialCatalogueWidgetsWords_us[283] = {
     0x000001A6, 0x00000158, 0x00000170, 0x000001A6, 0x00000157, 0x00000168, 0x00000158, 0x00000157,
     0x0000016E, 0x00000157, 0x00000159, 0x0000015A, 0x00000157, 0x0000019C, 0x00000175, 0x00000159,
     0x0000019C, 0x0000019B, 0x0000019C, 0x000001A7, 0x0000019D, 0x0000019C, 0x0000015D, 0x0000017C,
@@ -254,7 +254,7 @@ unsigned int data_unresolved_800DF6E4[283] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int data_unresolved_800F10A4[283] = {
+unsigned int g_resultsRefreshTrialCatalogueWidgetsWords_eu[283] = {
     0x000001A6, 0x00000158, 0x00000170, 0x000001A6, 0x00000157, 0x00000168, 0x00000158, 0x00000157,
     0x0000016E, 0x00000157, 0x00000159, 0x0000015A, 0x00000157, 0x0000019C, 0x00000175, 0x00000159,
     0x0000019C, 0x0000019B, 0x0000019C, 0x000001A7, 0x0000019D, 0x0000019C, 0x0000015D, 0x0000017C,

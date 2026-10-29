@@ -42,7 +42,7 @@ unsigned int g_MenuOpenoptionskeypadEncodedWords[18] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800DF0AC[1] = {
+unsigned int g_MenuOpenoptionskeypadTrailingWord[1] = {
     0x75042E65,
 };
 #endif

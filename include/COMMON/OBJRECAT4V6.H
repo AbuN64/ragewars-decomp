@@ -6,11 +6,11 @@ extern f32 g_initialVoiceUnitScale;
 
 extern float g_spatialSoundRangeSquared;
 
-struct RecordCode8025A3EC;
-typedef struct RecordCode8025A3EC RecordCode8025A3EC;
+struct AudioVoiceRecordView;
+typedef struct AudioVoiceRecordView AudioVoiceRecordView;
 
-struct RecordCode8025A3EC;
-struct RecordCode8025A3EC {
+struct AudioVoiceRecordView;
+struct AudioVoiceRecordView {
     s32 index;
     char pad04[4];
     s32 f08;
@@ -81,13 +81,13 @@ struct VoiceKeyTable;
 struct VoiceRecordHolder;
 typedef struct VoiceRecordHolder VoiceRecordHolder;
 
-struct OwnerCode8025A3EC8025B5F0;
-typedef struct OwnerCode8025A3EC8025B5F0 OwnerCode8025A3EC8025B5F0;
+struct AudioSoundPlayerOwnerView;
+typedef struct AudioSoundPlayerOwnerView AudioSoundPlayerOwnerView;
 
 
 
-struct OwnerCode8025A3EC8025B5F0;
-struct OwnerCode8025A3EC8025B5F0 {
+struct AudioSoundPlayerOwnerView;
+struct AudioSoundPlayerOwnerView {
     char pad[0x84];
     char sound[0x58];
     s16 samples[20];
@@ -95,7 +95,7 @@ struct OwnerCode8025A3EC8025B5F0 {
     s32 key;
 };
 
-struct OwnerCode8025A3EC8025B5F0;
+struct AudioSoundPlayerOwnerView;
 struct AudioVoiceStopKeySlotView;
 struct AudioVoiceStopKeySlotView {
     s32 index;
@@ -108,7 +108,7 @@ struct AudioVoiceStopKeySlotView {
     char pad2[0x54];
     s32 value;
     s32 active;
-    struct OwnerCode8025A3EC8025B5F0 *owner;
+    struct AudioSoundPlayerOwnerView *owner;
     char pad3[0x18];
 };
 
@@ -129,8 +129,8 @@ struct AudioVoiceSecondarySlotView;
 typedef struct AudioVoiceSecondarySlotView AudioVoiceSecondarySlotView;
 
 
-struct SlotCode8025A3EC;
-struct SlotCode8025A3EC {
+struct AudioVoiceKeyedSlotView;
+struct AudioVoiceKeyedSlotView {
     int id;
     char pad4[0x9C];
     int keyA;
@@ -139,8 +139,8 @@ struct SlotCode8025A3EC {
     char padB0[0x1C];
 };
 
-struct SlotCode8025A3EC;
-typedef struct SlotCode8025A3EC SlotCode8025A3EC;
+struct AudioVoiceKeyedSlotView;
+typedef struct AudioVoiceKeyedSlotView AudioVoiceKeyedSlotView;
 
 struct VoiceKeyPairTable;
 
@@ -172,7 +172,7 @@ struct AudioVoiceSecondarySlotView {
     char pad2[0x54];
     s32 other;
     s32 active;
-    OwnerCode8025A3EC8025B5F0 *owner;
+    AudioSoundPlayerOwnerView *owner;
     s32 value;
     char pad3[0x14];
 };
@@ -190,8 +190,8 @@ typedef struct VoiceQueueNode {
     s16 priority;
 } VoiceQueueNode;
 
-struct ContextCode8025A3EC;
-struct ContextCode8025A3EC {
+struct AudioVoiceContextView;
+struct AudioVoiceContextView {
     char pad0[0x7C];
     Slots slots;
     char padFC[0x104 - 0xFC];
@@ -204,7 +204,7 @@ struct ContextCode8025A3EC {
     s32 result;
 };
 
-struct ContextCode8025A3EC;
+struct AudioVoiceContextView;
 struct ViewChannelUpdateVoicePlayback;
 
 
@@ -227,7 +227,7 @@ struct AudioVoiceControlSlotView {
     s32 mask;
     s32 value;
     s32 active;
-    OwnerCode8025A3EC8025B5F0 *owner;
+    AudioSoundPlayerOwnerView *owner;
     s32 fieldB4;
     char padB8[0x14];
 };
@@ -288,8 +288,8 @@ typedef struct VoiceStopKeyTable VoiceStopKeyTable;
 struct IntegerStateB4;
 typedef struct IntegerStateB4 IntegerStateB4;
 
-struct ContextCode8025A3EC;
-typedef struct ContextCode8025A3EC ContextCode8025A3EC;
+struct AudioVoiceContextView;
+typedef struct AudioVoiceContextView AudioVoiceContextView;
 
 struct ViewChannelUpdateVoicePlayback;
 typedef struct ViewChannelUpdateVoicePlayback ViewChannelUpdateVoicePlayback;

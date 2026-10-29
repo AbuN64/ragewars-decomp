@@ -33,7 +33,7 @@ extern const char g_cinemaDirectoryText[];
 
 extern s32 SetN64_LocatePackSection(void *,s32,s32,s32 *);
 
-extern void Cache_UnlockResource(void *,Node80253610 *);
+extern void Cache_UnlockResource(void *,CacheResourceNode *);
 
 static inline void minTime(f32 *dest,f32 *src) {
     if(*dest>*src)*dest=*src;

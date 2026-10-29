@@ -19,17 +19,17 @@ unsigned int k_CcollisionTestsegmentdiskEncodedWordsBlock5[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8023E8D4_C93C0_us_rev1.c */
+/* ROM-grounded data: src/k_CcollisionTestsegmentdiskEncodedWordsBlock1_CcollisionTestsegmentdiskData.c */
 const unsigned int k_CcollisionTestsegmentdiskEncodedWordsBlock1[1] = {
     0x4123D70A,
 };
 
-/* ROM-grounded data: src/rw_pool_8023EA44_C93C4_us_rev1.c */
+/* ROM-grounded data: src/k_CcollisionTestsegmentdiskEncodedWordsBlock2_CcollisionTestsegmentdiskData.c */
 const unsigned int k_CcollisionTestsegmentdiskEncodedWordsBlock2[1] = {
     0x4123D70A,
 };
 
-/* ROM-grounded data: src/rw_pool_8023ED64_C93C8_us_rev1.c */
+/* ROM-grounded data: src/k_CcollisionTestsegmentdiskEncodedWordsBlock3_CcollisionTestsegmentdiskData.c */
 const unsigned int k_CcollisionTestsegmentdiskEncodedWordsBlock3[1] = {
     0x4123D70A,
 };

@@ -45,7 +45,7 @@ char s_SirawreadIoSirawwritText[13] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_802BB060_CD834_us_rev1.c */
+/* ROM-grounded data: src/s_sirawreadText_Sirawread.c */
 const unsigned char s_sirawreadText[15] = {
     0x69, 0x6F, 0x2F, 0x73, 0x69, 0x72, 0x61, 0x77, 0x72, 0x65, 0x61, 0x64, 0x2E, 0x63, 0x00,
 };

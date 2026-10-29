@@ -28,7 +28,7 @@ struct ALSndPlayeralSndpNew {
 struct ALGlobalsalSndpNew;
 typedef struct ALGlobalsalSndpNew ALGlobalsalSndpNew;
 
-extern int D_800D4340;
+extern int g_controllerInitialized;
 
 struct ALSndpConfig;
 struct ALSndpConfig {

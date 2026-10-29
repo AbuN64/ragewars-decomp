@@ -24,7 +24,7 @@ s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM/DEFS.H"
-extern u8 *D_800E22E4_eu[], *D_800E22F4[];
+extern u8 *g_packedButtonOptionZeroTextTableEu[], *g_packedButtonOptionStepTextTableEu[];
 
 s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     u32 code;
@@ -33,9 +33,9 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     Shared_Game *game = &g_gameSettings;
     code = (u32)game->lightingGamma >> 4;
     Cache_SetResourceActivityState((u32)Cache_GetResourceActivityState() + 2U);
-    if (code == 0) item->text = D_800E22E4_eu;
+    if (code == 0) item->text = g_packedButtonOptionZeroTextTableEu;
     else {
-        item->text = D_800E22F4;
+        item->text = g_packedButtonOptionStepTextTableEu;
         text = item->text[game->language];
         length = Menu_CountLineChars(item);
         Defs_FormatIntegerValue((char *)text + (length - 4), g_playerMenuStepFormatGerman, code);
@@ -46,10 +46,10 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 *D_800E22E4_eu[];
-extern u8 *D_800E22F4[];
+extern u8 *g_packedButtonOptionZeroTextTableEu[];
+extern u8 *g_packedButtonOptionStepTextTableEu[];
 #else
-extern u8 *D_800D3628;
+extern u8 *g_packedButtonOptionStepText;
 #endif
 extern s32 Cache_GetResourceActivityState(void);
 extern void Cache_SetResourceActivityState(u32);
@@ -64,16 +64,16 @@ s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     Cache_SetResourceActivityState((u32)Cache_GetResourceActivityState() + 2U);
     if (code == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        item->text = D_800E22E4_eu;
+        item->text = g_packedButtonOptionZeroTextTableEu;
 #else
-        item->text = &D_800D3624;
+        item->text = &g_packedButtonOptionZeroText;
 #endif
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        item->text = D_800E22F4;
+        item->text = g_packedButtonOptionStepTextTableEu;
         text = item->text[g_languageIndex];
 #else
-        item->text = &D_800D3628;
+        item->text = &g_packedButtonOptionStepText;
         text = *item->text;
 #endif
         length = Menu_CountLineChars(item);

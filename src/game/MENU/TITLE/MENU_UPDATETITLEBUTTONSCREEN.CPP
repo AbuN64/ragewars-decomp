@@ -6,7 +6,7 @@
 #include "include_asm.h"
 
 /* 804379C8_2.CPP */
-extern StateCode80420E90 *g_titleButtonScreen;
+extern ChoiceMenuState *g_titleButtonScreen;
 
 /* Advances a menu selection on its countdown and dispatches the exit action. */
 void SmXlate_SwitchScreen(s32);
@@ -37,11 +37,11 @@ extern char g_profileModeOnePlayedLevels[];
 extern s32 Menu_GetFocusedElementId();
 
 #if defined(VERSION_DE)
-enum { MENU_80437B10_976 = 970, MENU_80437B10_977 = 971 };
+enum { TITLE_BUTTON_CHOICE_RESET_PLAYED_LEVELS = 970, TITLE_BUTTON_CHOICE_CLEAR_PENDING_SCREEN = 971 };
 #elif defined(VERSION_EU_X)
-enum { MENU_80437B10_976 = 980, MENU_80437B10_977 = 981 };
+enum { TITLE_BUTTON_CHOICE_RESET_PLAYED_LEVELS = 980, TITLE_BUTTON_CHOICE_CLEAR_PENDING_SCREEN = 981 };
 #else
-enum { MENU_80437B10_976 = 976, MENU_80437B10_977 = 977 };
+enum { TITLE_BUTTON_CHOICE_RESET_PLAYED_LEVELS = 976, TITLE_BUTTON_CHOICE_CLEAR_PENDING_SCREEN = 977 };
 #endif
 
  /* const */
@@ -82,7 +82,7 @@ block_10:
 }
 
 s32 Menu_CancelTitleButtonScreen(void) {
-    StateCode80420E90 *state;
+    ChoiceMenuState *state;
 
     MarkMenuEventHandled();
     state = g_titleButtonScreen;
@@ -97,10 +97,10 @@ s32 Menu_HandleTitleButtonChoice(void) {
     MarkMenuEventHandled();
     choice = Menu_GetFocusedElementId();
     switch (choice) {
-    case MENU_80437B10_977:
+    case TITLE_BUTTON_CHOICE_CLEAR_PENDING_SCREEN:
         g_titleButtonScreen->unk10 = -1;
         break;
-    case MENU_80437B10_976:
+    case TITLE_BUTTON_CHOICE_RESET_PLAYED_LEVELS:
         g_titleButtonScreen->unk10 = 7;
         XPlus_FillMemory(g_profileModeOnePlayedLevels, 0, 5);
         break;

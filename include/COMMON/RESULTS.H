@@ -150,18 +150,18 @@ struct EffectSlotPool {
     struct EffectSlot *tail;
 };
 
-struct ListNode80290528;
-typedef struct ListNode80290528 ListNode80290528;
+struct EffectPoolNode;
+typedef struct EffectPoolNode EffectPoolNode;
 
 
 
-struct ListNode80290528;
-struct ListNode80290528 {
+struct EffectPoolNode;
+struct EffectPoolNode {
     char instanceStorage[0x1D0];
     unsigned int flags;
     int *reference_count;
-    struct ListNode80290528 *previous;
-    struct ListNode80290528 *next;
+    struct EffectPoolNode *previous;
+    struct EffectPoolNode *next;
 };
 
 

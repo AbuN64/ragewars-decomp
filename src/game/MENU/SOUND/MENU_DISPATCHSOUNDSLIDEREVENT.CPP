@@ -7,18 +7,18 @@
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_soundSliderEventIds, an actor kind at g_soundSliderEventKinds and a handler at g_soundSliderEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8043962C)(void *, s32, s32, s32, s32);
+typedef s32 (*SoundSliderEventHandler)(void *, s32, s32, s32, s32);
 
 
 extern FieldRow g_soundSliderEventIds[];
 extern FieldRow g_soundSliderEventKinds[];
-extern Handler8043962C g_soundSliderEventHandlers;
+extern SoundSliderEventHandler g_soundSliderEventHandlers;
 
 
 
 
 s32 Menu_DispatchSoundSliderEvent(void *eventTarget, s32 event, s32 itemId, s32 value, s32 context) {
-    Handler8043962C *entry;
+    SoundSliderEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

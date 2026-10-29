@@ -1,8 +1,8 @@
 #ifndef COMMON_RG_H
 #define COMMON_RG_H
 #include "TYPES.H"
-struct Func8043D458Arg;
-struct Func8043D458Arg {
+struct MenuOptionLabel;
+struct MenuOptionLabel {
     s8 pad0[8];
     s32 flags;
     s8 padC[8];

@@ -61,7 +61,7 @@ typedef struct ActorLinkedControllerView ActorLinkedControllerView;
 
 struct WeaponGlobalRuntimeView;
 struct WeaponGlobalRuntimeView {
-    int field_0;
+    int first;
 };
 
 
@@ -1653,11 +1653,11 @@ struct Shared_Actor {
 struct WeaponFireState;
 typedef struct WeaponFireState WeaponFireState;
 
-struct func_802077F4_S2;
-typedef struct func_802077F4_S2 func_802077F4_S2;
+struct PaddedFloatView;
+typedef struct PaddedFloatView PaddedFloatView;
 
-struct func_802077F4_S2;
-struct func_802077F4_S2 {
+struct PaddedFloatView;
+struct PaddedFloatView {
     char pad0[0x4];
     f32 unk4;
 };

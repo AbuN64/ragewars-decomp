@@ -11,7 +11,7 @@ const unsigned char g_constructMapSimpleModel[35] = {
 
 /* 8044ACCC_3.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X)
-const char data_func_8044B600_de_800C4F04[75] =
+const char k_constructMapSimpleModelStrings[75] =
     "CScene__ConstructMap: simp models index\0"
     "CScene__ConstructMap: simple model\0";
 #endif

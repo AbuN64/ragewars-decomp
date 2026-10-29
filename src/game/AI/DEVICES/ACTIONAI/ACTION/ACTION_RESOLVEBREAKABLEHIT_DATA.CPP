@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80204A68_C7774_us_rev1.c */
+/* ROM-grounded data: src/k_actionResolvebreakablehitDataFloatConstantWords_us_rev1.c */
 const unsigned int k_actionResolvebreakablehitDataFloatConstantWords[1] = {
     0x3C010204,
 };

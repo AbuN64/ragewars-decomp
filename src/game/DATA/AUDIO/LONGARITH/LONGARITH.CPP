@@ -11,7 +11,7 @@ unsigned char g_LongarithTrailingBytesBlock1[8] = { 0x34, 0x42, 0x05, 0x08, 0x8C
 unsigned int g_longarithLinkGapWordsBlock1[1] = { 0xAFB10014U };
 #endif
 
-/* DATA_802B73D4.CPP */
+/* g_longarithLinkGapWords_Longarith.CPP */
 #if defined(VERSION_US)
 unsigned int g_longarithLinkGapWords[3] = {
     0x08003800, 0x00010000, 0x01000001,

@@ -13,7 +13,7 @@ extern char addrLow_Weaponai_TryEnterChargedAlternateMode_de[];
 extern char addrLow_Weaponai_UpdateForceMarkerTrigger_de[];
 extern char addrLow_Weaponai_UpdateHeldFire_de[];
 extern char addrLow_Weapon_InitializeFireStateCallbacks_de[];
-extern char D_00232C68[];
+extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4[];
 extern char addrLow_Weapon_ApplyScaledSideYaw_de[];
 extern char addrLow_Weapon_ApplySideDependentYaw_de[];
 extern char addrLow_Weapon_EnterChargeStateWithCues_de[];
@@ -28,10 +28,10 @@ extern char addrLow_Weapon_UpdateAlternateTriggerCompletion_de[];
 extern char addrLow_Weapon_EaseSpinForActionFive_de[];
 extern char addrLow_Weapon_ApproachSpinPhaseAndRelease_de[];
 extern char addrLow_Weapon_TranslateEventSixByPitch_de[];
-extern char D_00239FCC[];
-u32 data_unresolved_800CA380[1026] = {
+extern char addrLow_Gsky_FloorSurfaceNoOp_de[];
+u32 g_weaponActionStateTable_de[1026] = {
     0x800CA058, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000002, (unsigned int)D_00232C68, (unsigned int)addrLow_Weaponai_ToggleFiringModeWithAmmoCheck_de, 0x00000000,
+    0x00000000, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4, (unsigned int)addrLow_Weaponai_ToggleFiringModeWithAmmoCheck_de, 0x00000000,
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000, 0x00000003, 0x00000000,
     (unsigned int)addrLow_Weaponai_ToggleFiringModeWithAmmoCheck_de, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000004, (unsigned int)addrLow_Weapon_EnterChargeStateWithCues_de, (unsigned int)addrLow_Weaponai_UpdateSpinAndRepeatCue_de, 0x00000000, 0x00004EE8, 0x3F800000,
@@ -64,7 +64,7 @@ u32 data_unresolved_800CA380[1026] = {
     (unsigned int)addrLow_Weapon_UpdateSpecialFireAndAmmo_de, 0x00000000, 0x00004E8E, 0x3F800000, 0x00000000, 0x00000000,
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x800CA058, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000002, (unsigned int)D_00232C68,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant4,
     (unsigned int)addrLow_Weaponai_TryEnterAlternateAmmoMode_de, 0x00000000, 0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
     0x00000003, 0x00000000, (unsigned int)addrLow_Weaponai_TryEnterAlternateAmmoMode_de, 0x00000000, 0x00004E8E, 0x3F800000,
     0x00000000, 0x00000000, 0x00000005, 0x00000000, (unsigned int)addrLow_Weapon_RequestReleaseOnEnabledEvent_de, 0x00000000,
@@ -200,6 +200,6 @@ u32 data_unresolved_800CA380[1026] = {
     0x800CB10C, 0x800CAB0C, 0x800CAB6C, 0x800CB16C, 0x800CB1CC, 0x800CB22C,
     0x800CB28C, 0x00000000, 0x0BEA0BEB, 0x0BECFFFF, 0x0BED0BEE, 0x0BEF0BF0,
     0x800D31E0, 0x800D31E4, 0x800D31E8, 0x800D31EC, 0x800D31F0, 0x800D31F4,
-    0x800D31F8, (unsigned int)D_00239FCC, 0x40400000, 0x00000000, 0x00000000, (unsigned int)D_00239FCC,
+    0x800D31F8, (unsigned int)addrLow_Gsky_FloorSurfaceNoOp_de, 0x40400000, 0x00000000, 0x00000000, (unsigned int)addrLow_Gsky_FloorSurfaceNoOp_de,
 };
 #endif

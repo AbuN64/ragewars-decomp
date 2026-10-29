@@ -16,7 +16,7 @@
 #include "include_asm.h"
 
 /* 802106E0_17.CPP */
-void *Portal_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index);
+void *Portal_GetStridedTableEntry(struct NavigationLinkListView *object, int index);
 extern void *Portal_GetGraphPoint(void *, s32);
 extern f32 Graphu64_GetSquaredDistance(f32 *, f32 *);
 
@@ -274,22 +274,22 @@ const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_de_eu_eu_x
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80212670_C7DB0_us_rev1.c */
+/* ROM-grounded data: src/Nav_SelectFarthestReachableNeighborConstantWords_us_rev1.c */
 const unsigned int g_Nav_SelectFarthestReachableNeighborConstantWords_us_rev1[1] = {
     0xBF800000,
 };
 
-/* ROM-grounded data: src/rw_pool_80212828_C7DB4_us_rev1.c */
+/* ROM-grounded data: src/Nav_ApproachCombatTargetAlongRouteConstantWords.c */
 const unsigned int g_Nav_ApproachCombatTargetAlongRouteConstantWords[1] = {
     0x484F5C28,
 };
 
-/* ROM-grounded data: src/rw_pool_80212948_C7DB8_us_rev1.c */
+/* ROM-grounded data: src/Nav_UpdateRetreatMovementConstantWords.c */
 const unsigned int g_Nav_UpdateRetreatMovementConstantWords[1] = {
     0x494F5C28,
 };
 
-/* ROM-grounded data: src/rw_pool_80212A7C_C7DBC_us_rev1.c */
+/* ROM-grounded data: src/Nav_SeekNearbyUnrestrictedGoalConstantWords.c */
 const unsigned int g_Nav_SeekNearbyUnrestrictedGoalConstantWords[1] = {
     0x49800000,
 };

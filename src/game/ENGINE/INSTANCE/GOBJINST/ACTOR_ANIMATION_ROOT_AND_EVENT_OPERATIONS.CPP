@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ACTORRESOURCEHEADER.H"
-#include "ENGINE/INSTANCE/GOBJINST_15.H"
+#include "ENGINE/INSTANCE/GOBJINST_NO_OPERATION_ANIMATION_HOOKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -31,7 +31,7 @@ void Gobjinst_NoOperationAnimationHookAlternateUs(void) {
 #endif
 
 /* GOBJINST_16.CPP */
-/* Spawns the standing effects of an animation for an object: every event whose effect id is 6 or 7 is placed by transforming its local point through the object's matrix at 0x74 and spawned through func_80265E10_de with its parameters. */
+/* Spawns the standing effects of an animation for an object: every event whose effect id is 6 or 7 is placed by transforming its local point through the object's matrix at 0x74 and spawned through Events_DeliverContactEffect_ActorAnimationRootAndEventOperations with its parameters. */
 
 extern CROMEventEntry *Gastate_GetAnimationEventEntries(void *);
 

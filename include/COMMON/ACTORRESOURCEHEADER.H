@@ -177,7 +177,7 @@ extern float g_affinePackUnsignedThresholdsRowTwo;
 struct ActorEffectFlagsView;
 typedef struct ActorEffectFlagsView ActorEffectFlagsView;
 
-struct Shared_Func80243A80Actor;
+struct Shared_CollisionActor;
 
 extern float g_affinePackUnsignedThresholdsRowOne;
 

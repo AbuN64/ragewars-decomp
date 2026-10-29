@@ -12,7 +12,7 @@ const unsigned int k_CcollisionIntegrategravityanddragEncodedWordsBlock1[4] = {
     0x3D888889, 0x41700000, 0x3F800000, 0x3F000000,
 };
 
-/* ROM-grounded data: src/rw_pool_8023D158_C9320_us_rev1.c */
+/* ROM-grounded data: src/ccollisionIntegrategravityanddragOneWordsUsRev1.c */
 const unsigned int k_CcollisionIntegrategravityanddragOneWords[1] = {
     0x3F800000,
 };

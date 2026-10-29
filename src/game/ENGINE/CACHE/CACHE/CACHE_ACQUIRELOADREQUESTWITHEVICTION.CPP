@@ -139,7 +139,7 @@ void Cache_AcknowledgeResourceSlotRelease(s32 unused, s32 request) {
         do {
             lockUsers = offset + g_resourceCacheManager;
             count += 1;
-            *(s32 *)&((Node80254C10 *)lockUsers)->flags &= mask;
+            *(s32 *)&((CacheEvictionNode *)lockUsers)->flags &= mask;
             offset += 0x28;
         } while (count < nodeLimit);
     }

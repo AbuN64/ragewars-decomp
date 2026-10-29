@@ -28,7 +28,7 @@ unsigned int k_PortalUpdatealternatingactionburstsEncodedWordsBlock1[11] = {
 
 /* 800F3D20.CPP */
 #if defined(VERSION_DE)
-u32 data_unresolved_800F3D20[11060] = {
+u32 g_actorBehaviorActionConfigs_PortalUpdatealternatingactionburstsData[11060] = {
     0x0043E150, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000000F,
     0x0000FF01, 0x800D3DDC, 0x00442024, 0x0043E164, 0x00000000, 0x00000000,
     0x00000000, 0x00010041, 0x00000023, 0x0000FF01, 0x800D3698, 0x00442024,
@@ -1878,7 +1878,7 @@ u32 data_unresolved_800F3D20[11060] = {
 
 /* 8021CD70_26.CPP */
 #if defined(VERSION_DE)
-u32 data_writable_800FE9F0[58] = {
+u32 g_playerSequenceActor_PortalUpdatealternatingactionburstsData[58] = {
     0x22EC02F3, 0xFF13C1D1, 0xE100FB00, 0x1D1FFEC1, 0x1C1F0E05, 0xBBD11D31,
     0xC20EB23D, 0x4002EDE2, 0xFFC21E9E, 0x12EDDCB2, 0xCF4BC11D, 0xA2FE203F,
     0xBE2022C1, 0x0F3F1D17, 0x142CBF01, 0xC13F2114, 0xFE7120DD, 0xC1C1A2D1,

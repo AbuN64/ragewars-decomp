@@ -51,14 +51,14 @@ extern void Tsmos_ActivateControllerState(void);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(s32);
-extern StateCode80420E90 *g_sixChoiceMenuState;
+extern ChoiceMenuState *g_sixChoiceMenuState;
 
 /* Builds the screen state g_sixChoiceMenuState: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */
 s32 Menu_CreateSixChoiceMenu(s32 root) {
     s32 screen;
     MenuWidget *window;
 
-    g_sixChoiceMenuState = (StateCode80420E90 *) Cache_AllocateMemory(0x14);
+    g_sixChoiceMenuState = (ChoiceMenuState *) Cache_AllocateMemory(0x14);
     Tsmos_ActivateControllerState();
     screen = SmpFade_CreateFadeWidget(ID_SCREEN, ID_SCREEN_B);
     g_sixChoiceMenuState->slider = (struct ObjMenuUpdateSixChoiceMenu *) screen;
@@ -101,7 +101,7 @@ s32 SmpSlider_GetTransitionMode(void *);
 
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
-   through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
+   through k_menuChooseSixChoiceOptionJumpTable: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
    result word at offset 0x10 of the screen g_sixChoiceMenuState to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
 
@@ -228,7 +228,7 @@ done:
 }
 
 s32 Menu_CancelSixChoiceMenu(void) {
-    StateCode80420E90 *state;
+    ChoiceMenuState *state;
 
     MarkMenuEventHandled();
     state = g_sixChoiceMenuState;
@@ -253,12 +253,12 @@ s32 Menu_DispatchSixChoiceEvent(void *menuActor, s32 eventKind, s32 eventDataOne
                 actor_kind = ((struct MenuActorInputView *) ((char *) menuActor))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_sixChoiceMenuActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
+                    return (*(WidgetEventHandler *)entry)(menuActor, eventKind, eventDataOne, eventDataTwo, eventDataThree);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

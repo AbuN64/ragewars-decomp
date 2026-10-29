@@ -42,7 +42,7 @@ const unsigned int g_levelUnlockBitJumpTable[11] = {
 };
 #endif
 
-/* DATA_800DCCFC.CPP */
+/* g_encodedLevelHandlersAndCheatTextUs_GLevelunlockbitjumptable.CPP */
 #if defined(VERSION_US)
 struct {
     unsigned int w0[37];
@@ -76,5 +76,5 @@ struct {
 };
 #endif
 
-/* DATA_800E21E4.CPP */
+/* g_encodedLevelUnlockTrailingBlob.CPP */
 

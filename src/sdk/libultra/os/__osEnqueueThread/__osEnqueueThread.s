@@ -1,6 +1,6 @@
 
 
-/* func_802BBC68.s */
+/* System_ExceptionEntry.s */
 .set noreorder
 .set noat
 .set gp=64
@@ -115,7 +115,7 @@ System_ExceptionEntryDe:
     lw $k1, 0x118($k0)
     nop
     andi $t1, $k1, 0xFF00
-    beqz $t1, .Lfunc_802BBC68_158
+    beqz $t1, .LExceptionSaveMiMask
     nop
     lui $t0, %hi(g_globalInterruptMask)
     addiu $t0, $t0, %lo(g_globalInterruptMask)
@@ -136,11 +136,11 @@ System_ExceptionEntryDe:
     ori $at, $at, 0xFF
     and $k1, $k1, $at
     or $k1, $k1, $t1
-.Lfunc_802BBC68_158:
+.LExceptionSaveMiMask:
     lui $t1, %hi(MI_INTERRUPT_MASK_REGISTER)
     lw $t1, %lo(MI_INTERRUPT_MASK_REGISTER)($t1)
     nop
-    beqz $t1, .Lfunc_802BBC68_198
+    beqz $t1, .LExceptionSaveEpc
     nop
     lui $t0, %hi(g_globalInterruptMask)
     addiu $t0, $t0, %lo(g_globalInterruptMask)
@@ -153,13 +153,13 @@ System_ExceptionEntryDe:
     andi $t0, $t0, 0x3F
     and $t0, $t0, $t4
     or $t1, $t1, $t0
-.Lfunc_802BBC68_198:
+.LExceptionSaveEpc:
     mfc0 $t0, $14
     sw $t1, 0x128($k0)
     sw $t0, 0x11C($k0)
     lw $t0, 0x18($k0)
     nop
-    beqz $t0, .Lfunc_802BBC68_254
+    beqz $t0, .LExceptionSaveCause
     nop
     cfc1 $t0, $31
     nop
@@ -183,7 +183,7 @@ System_ExceptionEntryDe:
     sdc1 $f30, 0x1A8($k0)
     lui $at, 0x400
     and $t1, $t1, $at
-    beqz $t1, .Lfunc_802BBC68_254
+    beqz $t1, .LExceptionSaveCause
     nop
     sdc1 $f1, 0x1B0($k0)
     sdc1 $f3, 0x1B8($k0)
@@ -201,27 +201,27 @@ System_ExceptionEntryDe:
     sdc1 $f27, 0x218($k0)
     sdc1 $f29, 0x220($k0)
     sdc1 $f31, 0x228($k0)
-.Lfunc_802BBC68_254:
+.LExceptionSaveCause:
     mfc0 $t0, $13
     addiu $t1, $zero, 0x2
     sw $t0, 0x120($k0)
     sh $t1, 0x10($k0)
     andi $t1, $t0, 0x7C
     addiu $t2, $zero, 0x24
-    beq $t1, $t2, .Lfunc_802BBC68_564
+    beq $t1, $t2, .LExceptionBreak
     addiu $t2, $zero, 0x2C
     beq $t1, $t2, .Lsend_mesg_CC
     addiu $t2, $zero, 0x0
-    bne $t1, $t2, .Lfunc_802BBC68_5D0
+    bne $t1, $t2, .LExceptionThreadFault
     and $s0, $k1, $t0
-.Lfunc_802BBC68_284:
+.LExceptionPendingLoop:
     andi $t1, $s0, 0xFF00
     srl $t2, $t1, 12
-    bnez $t2, .Lfunc_802BBC68_29C
+    bnez $t2, .LExceptionPendingLookup
     nop
     srl $t2, $t1, 8
     addi $t2, $t2, 0x10
-.Lfunc_802BBC68_29C:
+.LExceptionPendingLookup:
 .if VERSION_EU
     lui $at, %hi(g_interruptDispatchOffsetsEu)
 .elseif VERSION_EU_X
@@ -265,11 +265,11 @@ System_ExceptionEntryDe:
     nop
     addiu $at, $zero, -0x2001
     and $s0, $s0, $at
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     addiu $at, $zero, -0x4001
     and $s0, $s0, $at
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     mfc0 $t1, $11
     lui $at, 0xFFFF
@@ -278,7 +278,7 @@ System_ExceptionEntryDe:
     mtc0 $t1, $11
     jal send_mesg
     addiu $a0, $zero, 0x18
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     addiu $a0, $zero, 0x10
     addiu $at, $zero, -0x801
@@ -319,18 +319,18 @@ System_ExceptionEntryDe:
     lw $t2, 0x5290($at)
 .endif
     nop
-    beqz $t2, .Lfunc_802BBC68_350
+    beqz $t2, .LExceptionHookFallbackMessage
     nop
     jalr $t2
     addiu $a0, $zero, 0x10
-    beqz $v0, .Lfunc_802BBC68_350
+    beqz $v0, .LExceptionHookFallbackMessage
     nop
-    bgez $zero, .Lfunc_802BBC68_57C
+    bgez $zero, .LExceptionRedispatch
     nop
-.Lfunc_802BBC68_350:
+.LExceptionHookFallbackMessage:
     jal send_mesg
     nop
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     lui $s1, 0xA430
     lw $s1, 0x8($s1)
@@ -341,7 +341,7 @@ System_ExceptionEntryDe:
     srl $t0, $t0, 16
     and $s1, $s1, $t0
     andi $t1, $s1, 0x1
-    beqz $t1, .Lfunc_802BBC68_3D8
+    beqz $t1, .LExceptionRcpCheckVi
     nop
     andi $s1, $s1, 0x3E
     lui $t4, 0xA404
@@ -350,33 +350,33 @@ System_ExceptionEntryDe:
     lui $at, 0xA404
     sw $t1, 0x10($at)
     andi $t4, $t4, 0x300
-    beqz $t4, .Lfunc_802BBC68_3C8
+    beqz $t4, .LExceptionSpStatusClear
     nop
     jal send_mesg
     addiu $a0, $zero, 0x20
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-    bgez $zero, .Lfunc_802BBC68_3D8
+    bgez $zero, .LExceptionRcpCheckVi
     nop
-.Lfunc_802BBC68_3C8:
+.LExceptionSpStatusClear:
     jal send_mesg
     addiu $a0, $zero, 0x58
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-.Lfunc_802BBC68_3D8:
+.LExceptionRcpCheckVi:
     andi $t1, $s1, 0x8
     nop
-    beqz $t1, .Lfunc_802BBC68_400
+    beqz $t1, .LExceptionRcpCheckAi
     andi $s1, $s1, 0x37
     lui $at, 0xA440
     sw $zero, 0x10($at)
     jal send_mesg
     addiu $a0, $zero, 0x38
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-.Lfunc_802BBC68_400:
+.LExceptionRcpCheckAi:
     andi $t1, $s1, 0x4
-    beqz $t1, .Lfunc_802BBC68_42C
+    beqz $t1, .LExceptionRcpCheckSi
     nop
     andi $s1, $s1, 0x3B
     addiu $t1, $zero, 0x1
@@ -384,22 +384,22 @@ System_ExceptionEntryDe:
     sw $t1, 0xC($at)
     jal send_mesg
     addiu $a0, $zero, 0x30
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-.Lfunc_802BBC68_42C:
+.LExceptionRcpCheckSi:
     andi $t1, $s1, 0x2
-    beqz $t1, .Lfunc_802BBC68_454
+    beqz $t1, .LExceptionRcpCheckPi
     nop
     andi $s1, $s1, 0x3D
     lui $at, 0xA480
     sw $zero, 0x18($at)
     jal send_mesg
     addiu $a0, $zero, 0x28
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-.Lfunc_802BBC68_454:
+.LExceptionRcpCheckPi:
     andi $t1, $s1, 0x10
-    beqz $t1, .Lfunc_802BBC68_480
+    beqz $t1, .LExceptionRcpCheckDp
     nop
     andi $s1, $s1, 0x2F
     addiu $t1, $zero, 0x2
@@ -407,11 +407,11 @@ System_ExceptionEntryDe:
     sw $t1, 0x10($at)
     jal send_mesg
     addiu $a0, $zero, 0x40
-    beqz $s1, .Lfunc_802BBC68_4A4
+    beqz $s1, .LExceptionRcpDone
     nop
-.Lfunc_802BBC68_480:
+.LExceptionRcpCheckDp:
     andi $t1, $s1, 0x20
-    beqz $t1, .Lfunc_802BBC68_4A4
+    beqz $t1, .LExceptionRcpDone
     nop
     andi $s1, $s1, 0x1F
     addiu $t1, $zero, 0x800
@@ -419,18 +419,18 @@ System_ExceptionEntryDe:
     sw $t1, 0x0($at)
     jal send_mesg
     addiu $a0, $zero, 0x48
-.Lfunc_802BBC68_4A4:
+.LExceptionRcpDone:
     addiu $at, $zero, -0x401
     and $s0, $s0, $at
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     lw $k1, 0x118($k0)
 .if VERSION_EU
-    lui $t1, %hi(rodata_unresolved_800E58D4)
-    addiu $t1, $t1, %lo(rodata_unresolved_800E58D4)
+    lui $t1, %hi(g_preNmiShutdownFlagEu)
+    addiu $t1, $t1, %lo(g_preNmiShutdownFlagEu)
 .elseif VERSION_EU_X
-    lui $t1, %hi(rodata_unresolved_800E0A94)
-    addiu $t1, $t1, %lo(rodata_unresolved_800E0A94)
+    lui $t1, %hi(g_preNmiShutdownFlagEuX)
+    addiu $t1, $t1, %lo(g_preNmiShutdownFlagEuX)
 .elseif VERSION_US_REV1
     lui $t1, %hi(g_preNmiShutdownFlagUsRev1)
     addiu $t1, $t1, %lo(g_preNmiShutdownFlagUsRev1)
@@ -438,19 +438,19 @@ System_ExceptionEntryDe:
     lui $t1, 0x800D
     addiu $t1, $t1, 0x3F04
 .else
-    lui $t1, %hi(rodata_unresolved_800D5254)
-    addiu $t1, $t1, %lo(rodata_unresolved_800D5254)
+    lui $t1, %hi(g_preNmiShutdownFlagDe)
+    addiu $t1, $t1, %lo(g_preNmiShutdownFlagDe)
 .endif
     addiu $at, $zero, -0x1001
     and $k1, $k1, $at
     lw $t2, 0x0($t1)
     addiu $at, $zero, -0x1001
     and $s0, $s0, $at
-    beqz $t2, .Lfunc_802BBC68_4E4
+    beqz $t2, .LExceptionPreNmiFirstEntry
     sw $k1, 0x118($k0)
-    bgez $zero, .Lfunc_802BBC68_57C
+    bgez $zero, .LExceptionRedispatch
     nop
-.Lfunc_802BBC68_4E4:
+.LExceptionPreNmiFirstEntry:
     addiu $t2, $zero, 0x1
     sw $t2, 0x0($t1)
     jal send_mesg
@@ -463,7 +463,7 @@ System_ExceptionEntryDe:
     nop
     addiu $at, $zero, -0x1001
     and $k1, $k1, $at
-    bgez $zero, .Lfunc_802BBC68_57C
+    bgez $zero, .LExceptionRedispatch
     sw $k1, 0x118($t2)
     addiu $at, $zero, -0x201
     and $t0, $t0, $at
@@ -472,7 +472,7 @@ System_ExceptionEntryDe:
     and $s0, $s0, $at
     jal send_mesg
     addiu $a0, $zero, 0x8
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
     addiu $at, $zero, -0x101
     and $t0, $t0, $at
@@ -481,23 +481,23 @@ System_ExceptionEntryDe:
     and $s0, $s0, $at
     jal send_mesg
     addiu $a0, $zero, 0x0
-    bgez $zero, .Lfunc_802BBC68_284
+    bgez $zero, .LExceptionPendingLoop
     nop
-.Lfunc_802BBC68_564:
+.LExceptionBreak:
     addiu $t1, $zero, 0x1
     sh $t1, 0x12($k0)
     jal send_mesg
     addiu $a0, $zero, 0x50
-    bgez $zero, .Lfunc_802BBC68_57C
+    bgez $zero, .LExceptionRedispatch
     nop
-.Lfunc_802BBC68_57C:
+.LExceptionRedispatch:
     lui $t2, %hi(g_osRunnableThreadQueue)
     lw $t2, %lo(g_osRunnableThreadQueue)($t2)
     lw $t1, 0x4($k0)
     lw $t3, 0x4($t2)
     nop
     slt $at, $t1, $t3
-    beqz $at, .Lfunc_802BBC68_5B4
+    beqz $at, .LExceptionRedispatchFront
     nop
     lui $a0, %hi(g_osRunnableThreadQueue)
     addiu $a0, $a0, %lo(g_osRunnableThreadQueue)
@@ -505,7 +505,7 @@ System_ExceptionEntryDe:
     addu $a1, $k0, $zero
     j __osDispatchThread
     nop
-.Lfunc_802BBC68_5B4:
+.LExceptionRedispatchFront:
     lui $t1, %hi(g_osRunnableThreadQueue)
     addiu $t1, $t1, %lo(g_osRunnableThreadQueue)
     lw $t2, 0x0($t1)
@@ -513,7 +513,7 @@ System_ExceptionEntryDe:
     sw $t2, 0x0($k0)
     j __osDispatchThread
     sw $k0, 0x0($t1)
-.Lfunc_802BBC68_5D0:
+.LExceptionThreadFault:
     lui $at, %hi(g_audioInterruptMask)
     sw $k0, %lo(g_audioInterruptMask)($at)
     addiu $t1, $zero, 0x1
@@ -601,14 +601,14 @@ send_mesg:
     bgez $zero, send_mesg - 0x4C
     nop
 
-/* func_802BC36C_de.s */
+/* __osEnqueueAndYield.s */
 .set noreorder
 .set noat
 .set gp=64
 .set fp=64
 .section .text
-.globl func_802BC36C_de
-func_802BC36C_de:
+.globl __osEnqueueAndYield
+__osEnqueueAndYield:
     lui $a1, %hi(g_osRunningThread)
     lw $a1, %lo(g_osRunningThread)($a1)
     mfc0 $t0, $12
@@ -630,7 +630,7 @@ func_802BC36C_de:
     sw $ra, 0x11C($a1)
     lw $k1, 0x18($a1)
     nop
-    beqz $k1, .Lfunc_802BC36C_de_0FC
+    beqz $k1, .LSaveThreadStatusMerge
     nop
     cfc1 $k1, $31
     nop
@@ -654,7 +654,7 @@ func_802BC36C_de:
     nop
     lui $at, 0x400
     and $k1, $k1, $at
-    beqz $k1, .Lfunc_802BC36C_de_0FC
+    beqz $k1, .LSaveThreadStatusMerge
     nop
     sdc1 $f1, 0x1B0($a1)
     sdc1 $f3, 0x1B8($a1)
@@ -672,11 +672,11 @@ func_802BC36C_de:
     sdc1 $f27, 0x218($a1)
     sdc1 $f29, 0x220($a1)
     sdc1 $f31, 0x228($a1)
-.Lfunc_802BC36C_de_0FC:
+.LSaveThreadStatusMerge:
     lw $k1, 0x118($a1)
     nop
     andi $t1, $k1, 0xFF00
-    beqz $t1, .Lfunc_802BC36C_de_148
+    beqz $t1, .LSaveThreadMiMask
     nop
     lui $t0, %hi(g_globalInterruptMask)
     addiu $t0, $t0, %lo(g_globalInterruptMask)
@@ -692,11 +692,11 @@ func_802BC36C_de:
     and $k1, $k1, $at
     or $k1, $k1, $t1
     sw $k1, 0x118($a1)
-.Lfunc_802BC36C_de_148:
+.LSaveThreadMiMask:
     lui $k1, %hi(MI_INTERRUPT_MASK_REGISTER)
     lw $k1, %lo(MI_INTERRUPT_MASK_REGISTER)($k1)
     nop
-    beqz $k1, .Lfunc_802BC36C_de_188
+    beqz $k1, .LSaveThreadEnqueueCheck
     nop
     lui $k0, %hi(g_globalInterruptMask)
     addiu $k0, $k0, %lo(g_globalInterruptMask)
@@ -709,12 +709,12 @@ func_802BC36C_de:
     andi $k0, $k0, 0x3F
     and $k0, $k0, $t0
     or $k1, $k1, $k0
-.Lfunc_802BC36C_de_188:
-    beqz $a0, .Lfunc_802BC36C_de_198
+.LSaveThreadEnqueueCheck:
+    beqz $a0, .LSaveThreadDispatch
     sw $k1, 0x128($a1)
     jal __osEnqueueThread
     nop
-.Lfunc_802BC36C_de_198:
+.LSaveThreadDispatch:
     j __osDispatchThread
 
 /* __osEnqueueThread.s */

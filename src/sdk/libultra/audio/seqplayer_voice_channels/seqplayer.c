@@ -48,7 +48,7 @@ void *__lookupSoundQuick(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 cha
     return 0;
 }
 
-/* code_802B66A0_3.c */
+/* seqplayer_voice_channels.c */
 extern void __setInstChanState(void *seqPlayer, void *selectedInstrument, s32 channelNumber);
 
 /* __vsVol, drafted from ultralib src/audio/seqplayer.c: combine a voice's tremolo, velocity and

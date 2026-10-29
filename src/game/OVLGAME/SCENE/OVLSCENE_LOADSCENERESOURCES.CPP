@@ -22,8 +22,8 @@ extern void **Cache_RequestPackSection(s32,s32,s32,s32,s32,s32,void *);
 extern int SetN64_GetDirectoryEntry(int *,int,int);
 extern s32 SetN64_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 g_cResource_UnpackRequestEntry;
-extern char D_800F41F0;
-void Scene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBankKey) {
+extern char g_sceneCollisionStorage;
+void Scene_LoadSceneResources(SceneLoadResourcesView *sceneToLoad, s32 cartridgeBankKey) {
     s32 *cartridgeDirectory;
     s32 *bloodlustLevelDirectory;
     void **bloodlustWeaponResource;
@@ -78,7 +78,7 @@ void Scene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBankK
     sceneToLoad->placedActorStorage = &g_worldSnapshotNoteData;
     sceneToLoad->sectionTwelveData = sectionTwelveData;
     sceneToLoad->sectionSixAddress = SetN64_LocatePackSection((s32)cartridgeDirectory, cartridgeBankKey, 6, (s32 *)(sceneToLoad->pad40 + 0x4));
-    sceneToLoad->collisionStorage = &D_800F41F0;
+    sceneToLoad->collisionStorage = &g_sceneCollisionStorage;
     sceneToLoad->sectionSevenAddress = SetN64_LocatePackSection((s32)cartridgeDirectory, cartridgeBankKey, 7, (s32 *)(sceneToLoad->pad40 + 0x8));
     warpDestinationsResource = Cache_RequestPackSection(0, (s32)cartridgeDirectory, 8, cartridgeBankKey, (s32)sceneToLoad, (s32)&g_cResource_UnpackRequestEntry, &g_warpDests);
     sceneToLoad->warpDestinationsHandle = warpDestinationsResource;

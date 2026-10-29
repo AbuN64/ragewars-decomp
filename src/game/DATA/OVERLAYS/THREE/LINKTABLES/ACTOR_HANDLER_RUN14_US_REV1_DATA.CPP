@@ -1,4 +1,4 @@
-#include "DATA/OVL1_C/DATA_800CCBF4.H"
+#include "DATA/OVL1_C/NAVIGATION_CALLBACK_ADDRESS.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_actor_handler_run_CE930_us_rev1.c */

@@ -3,20 +3,20 @@
 #if defined(VERSION_US)
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-extern ResidentEventHandlerEntry D_800E54A8[];
+extern ResidentEventHandlerEntry g_pakProfileHandlerEvents[];
 
 s32 Frontend_DispatchPakProfileEventUs(ActorDefinitionHeader *actor, s32 event, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     s32 index;
     index = 0;
-    if (D_800E54A8[index].handler != 0) {
+    if (g_pakProfileHandlerEvents[index].handler != 0) {
         do {
-            if (D_800E54A8[index].event == event) {
-                if (D_800E54A8[index].actorKind == actor->character || D_800E54A8[index].actorKind == 30000) {
-                    return D_800E54A8[index].handler(actor, event, eventPayload, eventValue, eventExtra);
+            if (g_pakProfileHandlerEvents[index].event == event) {
+                if (g_pakProfileHandlerEvents[index].actorKind == actor->character || g_pakProfileHandlerEvents[index].actorKind == 30000) {
+                    return g_pakProfileHandlerEvents[index].handler(actor, event, eventPayload, eventValue, eventExtra);
                 }
             }
             index++;
-        } while (D_800E54A8[index].handler != 0);
+        } while (g_pakProfileHandlerEvents[index].handler != 0);
     }
     return 0;
 }

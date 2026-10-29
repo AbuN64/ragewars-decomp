@@ -68,7 +68,7 @@ Frontend_DrawResultModelPreviewDe
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Preview_DrawMenuModelItem
 #else
-func_804397E8_de
+Preview_DrawMenuModelItem_Setupresults
 #endif
 (g_setupScreen->panels[i]);
 #endif
@@ -88,7 +88,7 @@ Frontend_DrawResultModelPreviewDe
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Preview_DrawMenuModelItem
 #else
-func_804397E8_de
+Preview_DrawMenuModelItem_Setupresults
 #endif
 (g_setupScreen->tie);
 #endif

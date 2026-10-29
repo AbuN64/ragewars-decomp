@@ -55,7 +55,7 @@ struct Panel {
 };
 
 
-extern int D_800CD710;
+extern int g_schedulerRdpBufferSetFlag;
 
 
 struct SchedulerCurrentRspTaskView;

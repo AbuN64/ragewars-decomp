@@ -10,9 +10,9 @@ struct ArchiveChunkImageSlot {
     char data[0x20];
 };
 
-struct EntryCode8040B45C80411518;
+struct ArchiveChunkImageEntry;
 struct ArchiveChunkImageSlot;
-struct EntryCode8040B45C80411518 {
+struct ArchiveChunkImageEntry {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
@@ -21,12 +21,12 @@ struct EntryCode8040B45C80411518 {
     FontGlyphCountView *def;
     char pad490[0xC];
 };
-struct EntryCode8040B45C80411518;
+struct ArchiveChunkImageEntry;
 struct PoolFrontendReleaseChunkImages;
 struct PoolFrontendReleaseChunkImages {
     s16 count;
     char pad2[6];
-    struct EntryCode8040B45C80411518 *entries;
+    struct ArchiveChunkImageEntry *entries;
 };
 
 
@@ -107,9 +107,9 @@ typedef struct ArchiveChunkImageSlot ArchiveChunkImageSlot;
 
 extern s16 Node_GetTextureEntryHeight(s32 index);
 
-struct EntryCode8040B45C;
+struct ArchiveOwnedImageEntry;
 struct ArchiveOwnedImageSlot;
-struct EntryCode8040B45C {
+struct ArchiveOwnedImageEntry {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
@@ -119,12 +119,12 @@ struct EntryCode8040B45C {
     unsigned char refCount;
     char pad491[0xB];
 };
-struct EntryCode8040B45C;
+struct ArchiveOwnedImageEntry;
 struct PoolFrontendReleaseActiveChunkImages;
 struct PoolFrontendReleaseActiveChunkImages {
     s16 count;
     char pad2[6];
-    struct EntryCode8040B45C *entries;
+    struct ArchiveOwnedImageEntry *entries;
 };
 
 struct Style;

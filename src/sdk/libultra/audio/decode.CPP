@@ -82,10 +82,10 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
     output = 0;
     if (sampleCount > 0) {
         do {
-            if (D_800D54BC != 0) {
-                D_800D54BC--;
-                topbit = D_800D54BA & 0x8000;
-                D_800D54BA <<= 1;
+            if (g_audioDecodeBitsLeft != 0) {
+                g_audioDecodeBitsLeft--;
+                topbit = g_audioDecodeBitBuffer & 0x8000;
+                g_audioDecodeBitBuffer <<= 1;
                 if (topbit) {
                     mask = tree[(s16)node].second;
                 } else {
@@ -99,15 +99,15 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
                         samples[(s16)output] = value;
                         output++;
                     } else if ((s16)value == 0x900) {
-                        value = D_800D54BA;
-                        if (Audio_ReadPackedSamples(&D_800D54BA, table->width, 1, 0, stream) == 0) {
+                        value = g_audioDecodeBitBuffer;
+                        if (Audio_ReadPackedSamples(&g_audioDecodeBitBuffer, table->width, 1, 0, stream) == 0) {
                             return -1;
                         }
                         mask = (s16)output;
                         output++;
-                        high = D_800D54BA;
-                        next = D_800D54BC;
-                        D_800D54BA = high << (16 - next);
+                        high = g_audioDecodeBitBuffer;
+                        next = g_audioDecodeBitsLeft;
+                        g_audioDecodeBitBuffer = high << (16 - next);
                         samples[(s16)mask] = value | (high >> next);
                     } else if (mask == 0xA00) {
                         dictOffset = (value & 0xFF) * sizeof(DecodePhrase);
@@ -135,10 +135,10 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
                     node = mask;
                 }
             } else {
-                if (Audio_ReadPackedSamples(&D_800D54BA, 16, 1, 0, stream) == 0) {
+                if (Audio_ReadPackedSamples(&g_audioDecodeBitBuffer, 16, 1, 0, stream) == 0) {
                     return -1;
                 }
-                D_800D54BC += 16;
+                g_audioDecodeBitsLeft += 16;
             }
         } while ((s16)output < sampleCount);
     }
@@ -151,8 +151,8 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
     s16 i;
     s32 count;
 
-    if (D_800D54BE == 0) {
-        D_800D54BE = 1;
+    if (g_audioDecodeFrameHeaderRead == 0) {
+        g_audioDecodeFrameHeaderRead = 1;
         if ((s16)Audio_ReadPackedSamples(stream->frame, 6, 16, 0, stream) <= 0) {
             return -1;
         }

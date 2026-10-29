@@ -17,7 +17,7 @@
 
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction
- * in listener space is compared with the forward axis through Graphu64_ArcCos and func_802B7130_de, given the
+ * in listener space is compared with the forward axis through Graphu64_ArcCos and Gu_Sinf_SkyPosttargetedscreenmessage, given the
  * side's sign, and scaled around the centre by g_listenerPanCenterAndRange. */
 
 extern void Graphu64_TransformDirectionTranspose(void *, CVector3 *, CVector3 *);
@@ -60,11 +60,11 @@ s16 Channel_ComputeListenerRelativePan(CVector3 *position, GameplayCamera *liste
 extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(GameAudioContext *, s32);
 extern unsigned short Menu_GetFloatHighWord(f32);
 
-extern s32 SoundInfo_GetX(ControllerCode802591C0 *);
-extern s32 SoundInfo_GetY(ControllerCode802591C0 *);
+extern s32 SoundInfo_GetX(SoundDescriptor *);
+extern s32 SoundInfo_GetY(SoundDescriptor *);
 
 
-void Channel_InitializeVoicePitchMotion(ChannelPitchMotionView *view, ControllerCode802591C0 *controller, s32 flags) {
+void Channel_InitializeVoicePitchMotion(ChannelPitchMotionView *view, SoundDescriptor *controller, s32 flags) {
     s16 x;
     s16 y;
     f32 fx;
@@ -149,7 +149,7 @@ static inline s32 lookupPanValue(s32 panAngle) {
     return g_voiceAttenuationTable[panAngle];
 }
 
-void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
+void Channel_InitializeVoiceMix(Voice *voice, SoundDescriptor *control, s32 unused2) {
     AudioVolumeMix *mix;
     SoundEnvelopeControl *envelope;
     u8 *gainRange;

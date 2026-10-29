@@ -2,7 +2,7 @@
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/EXTERNS_21.H"
+#include "COMMON/VOLUME_MENU_RESOURCES.H"
 
 #if defined(VERSION_US_REV1)
 /* Points a field's text at g_ownerNotificationEnabledLabels when the option g_playerViewRenderingEnabled is set and at g_ownerNotificationDisabledLabels otherwise, and returns

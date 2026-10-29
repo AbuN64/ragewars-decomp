@@ -1,4 +1,0 @@
-#ifndef DATA_OVL1_E_PLAYER_JUMP_AIR_MOTION_ADDRESS_H
-#define DATA_OVL1_E_PLAYER_JUMP_AIR_MOTION_ADDRESS_H
-extern char g_packedCodeAddress24_0022CC24[];
-#endif

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80217594_C7EDC_us_rev1.c */
+/* ROM-grounded data: src/k_barrelSpawneffectsfrommaskDataFloatConstantWords_BarrelSpawneffectsfrommaskData.c */
 const unsigned int k_barrelSpawneffectsfrommaskDataFloatConstantWords[2] = {
     0x43E10000, 0x44160000,
 };

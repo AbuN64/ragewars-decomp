@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-/* Picks a computer player's next weapon: in state 14 defers to Nav_RequestRandomArmedWeapon; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by func_8022EB0C_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, Particle_CountOwnerListOneEffects reporting a threat, or a 79 percent roll through func_802744D4_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
+/* Picks a computer player's next weapon: in state 14 defers to Nav_RequestRandomArmedWeapon; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by Nav_IsWeaponAllowed_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, Particle_CountOwnerListOneEffects reporting a threat, or a 79 percent roll through Nav_RollRandom_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
 
 
 
@@ -20,16 +20,16 @@ extern WeaponInfo *g_weaponInfoByType[];
 
 extern char g_actorParticleEffectSystem[];
 
-extern void Nav_RequestRandomArmedWeapon(BrainCode8020EAE0 *);
+extern void Nav_RequestRandomArmedWeapon(WeaponSelectBrain *);
 
 extern s32 Playerai_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
 
 extern s32 Particle_CountOwnerListOneEffects(char *, SharedPlayer *);
 
 
-extern void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *, s32 *);
+extern void Nav_SelectAvailableWeapon(WeaponSelectBrain *, s32 *);
 
-void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
+void Nav_SelectAvailableWeapon(WeaponSelectBrain *brain, s32 *ammo) {
     s32 choices[8];
     u32 count;
     s32 holding;
@@ -102,35 +102,35 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
 }
 
 int Nav_SelectWeaponFromFirstAmmoGroup(void *controller) {
-    BrainCode8020EAE0 *brain = controller;
+    WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0x8C);
     return 1;
 }
 
 int Nav_SelectWeaponFromSecondAmmoGroup(void *controller) {
-    BrainCode8020EAE0 *brain = controller;
+    WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
 int Nav_SelectWeaponFromThirdAmmoGroup(void *controller) {
-    BrainCode8020EAE0 *brain = controller;
+    WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xCC);
     return 1;
 }
 
 int Nav_SelectSecondAmmoGroupVariantOne(void *controller) {
-    BrainCode8020EAE0 *brain = controller;
+    WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
 int Nav_SelectSecondAmmoGroupVariantTwo(void *controller) {
-    BrainCode8020EAE0 *brain = controller;
+    WeaponSelectBrain *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
     Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;

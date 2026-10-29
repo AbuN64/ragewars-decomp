@@ -46,7 +46,7 @@ s32 Match_InitParticleQuad(void) {
     return more;
 }
 
-/* Resets a match: calls func_80264854_de with zero, func_80285D30_de on g_controllerRumblePool and func_8022A880_de on
+/* Resets a match: calls Control_SetControllerMode_Optiontransition with zero, Rumble_FreeAllPoolNodes_Match on g_controllerRumblePool and Playerai_ResetPlayerControllers_Match on
    g_playerViewRenderContext, clears five state words of g_matchRoundCounters, and sets the byte at offset 0x26DC1 of the
    match block to 2 and its word at 0x26DBC to one. */
 
@@ -77,7 +77,7 @@ void Match_ResetMatchControllerState(char *match) {
     ((GameSession *)match)->target = 1;
 }
 
-/* Asks func_8044D220_de about D_8011FE88 with a minus-one selector, clears the words of g_matchRoundCounters and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of g_matchRoundCounters instead of set after the selector, and the state 0xC instead of 0xD changed. */
+/* Asks Scene_FindPlacedObjectsByKey_Match about g_world_AchieveUpdateresultsscreen with a minus-one selector, clears the words of g_matchRoundCounters and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from SetN64_SelectSpawnAndStartSession with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of g_matchRoundCounters instead of set after the selector, and the state 0xC instead of 0xD changed. */
 
 
 

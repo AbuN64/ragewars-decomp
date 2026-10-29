@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_8042D28C_E273C_us_rev1.c */
+/* ROM-grounded data: src/g_Frontend_DrawResultSelectionPreviewConstantsUsRev1_MatchData0.c */
 const unsigned int g_Frontend_DrawResultSelectionPreviewConstantsUsRev1[2] = {
     0x43160000, 0x437F0000,
 };

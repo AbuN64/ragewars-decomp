@@ -159,7 +159,7 @@ void Fx_RecycleOwnerParticles(ParticleQuadPoolScene *particlePool, s32 ownerId) 
     }
 }
 
-void Fx_UpdateAttachedEffects(Owner802A6DF8 *owner) {
+void Fx_UpdateAttachedEffects(RibbonWorld *owner) {
     ItemMenuRenderNode *state;
     ItemMenuRenderNode *next;
     u8 *object;
@@ -341,7 +341,7 @@ void Fx_UpdateNodeFractions(void *ribbonState) {
             do {
                 node->fraction = accum / state->amount;
                 delta = node->length;
-                node = node->unk_4;
+                node = node->next;
                 accum += delta;
             } while (node != 0);
         }
@@ -384,7 +384,7 @@ void Fx_AppendAttachedTransform(void *ribbonOwner, void *attachmentState, void *
     }
 }
 
-void *Fx_FindAttachedEffect(Owner802A6DF8 *owner, s32 particleAddress, s32 contextId) {
+void *Fx_FindAttachedEffect(RibbonWorld *owner, s32 particleAddress, s32 contextId) {
     ItemMenuRenderNode *node;
 
     node = owner->lists.inactive.head;
@@ -404,7 +404,7 @@ void *Fx_FindAttachedEffect(Owner802A6DF8 *owner, s32 particleAddress, s32 conte
 void Fx_DrawEffectPasses(void *pool, void *camera) {
     ItemMenuRenderNode *node;
 
-    node = ((Owner802A6DF8 *)pool)->lists.inactive.head;
+    node = ((RibbonWorld *)pool)->lists.inactive.head;
     while (node != 0) {
         if (node->renderMode < 0) {
             if (node->flags & 8) {
@@ -424,7 +424,7 @@ void Fx_DrawEffectPasses(void *pool, void *camera) {
         node = node->next;
     }
 
-    node = ((Owner802A6DF8 *)pool)->lists.inactive.head;
+    node = ((RibbonWorld *)pool)->lists.inactive.head;
     while (node != 0) {
         if (node->renderMode > 0) {
             if (node->flags & 8) {

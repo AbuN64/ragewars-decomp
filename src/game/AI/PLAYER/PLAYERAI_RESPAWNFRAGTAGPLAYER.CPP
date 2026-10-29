@@ -109,7 +109,7 @@ void Playerai_UpdateSurfaceHeightEffect(void *surface, CVector3 *position) {
     f32 amount;
 
     if (surface != 0 && position != 0 &&
-        (((Shared_Func80243A80Collision *)surface)->flags & 0x40)) {
+        (((Shared_CollisionSurface *)surface)->flags & 0x40)) {
         first = Graphu64_GetTrianglePlaneHeight(surface,
             position->x, position->z);
         amount = (f32)(s32)(first - Region_GetPolygonHeight(surface,
@@ -123,7 +123,7 @@ void Playerai_UpdateSurfaceHeightEffect(void *surface, CVector3 *position) {
 }
 
 /** Perform no work for callers at VRAM 0x8022EAF4. */
-void func_8022EB04_de(void) {
+void Playerai_EmptySurfaceHeightEffectHook(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
@@ -251,7 +251,7 @@ void Playerai_SelectMovementAnimation(FragTagRespawnActorView *object) {
 }
 
 /** Empty adjacent entry point included in Playerai_SelectMovementAnimation's Splat span. */
-void func_8022ECC4_de(void) {
+void Playerai_EmptyMovementAnimationHook(void) {
 }
 
 void Playerai_AdvanceCurrentRunEndState(void) {
@@ -303,7 +303,7 @@ void Playerai_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
 }
 
 /** Preserve the empty hook at VRAM 0x8022EDE4. */
-void func_8022EDF4_de(void) {
+void Playerai_EmptyPlayerResourceHook(void) {
 }
 
 void Playerai_RespawnFragTagPlayer(void *player) {

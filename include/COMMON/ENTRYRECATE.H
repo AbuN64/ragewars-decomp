@@ -30,7 +30,7 @@ struct ActorPickupCanCollect;
 struct ActorPickupCanCollect {
     u8 type;
     u8 pad1[7];
-    CVector3 position; /* 0x08: provider func_8025DE54_de takes CVector3 */
+    CVector3 position; /* 0x08: provider SoundElement_PlaySoundAtPosition_PlayerUpdatefragtagselection takes CVector3 */
     u8 pad14[0xE4 - 0x14];
     u16 team;
     char padE6[0x100 - 0xE6];
@@ -113,18 +113,18 @@ typedef struct MultiChannelItemEffect {
     s16 third;
 } MultiChannelItemEffect;
 
-extern f32 D_800C6260;
-extern f32 D_800CB3F8;
-extern f32 D_800C6270_de;
-extern f32 D_800C6274_de;
-extern f32 D_800C627C_de;
-extern f32 D_800CB414;
-extern f32 D_800C6288_de;
-extern f32 D_800C628C_de;
-extern f32 D_800C6290_de;
-extern f32 D_800C6294_de;
-extern f32 D_800C6298;
-extern f32 D_800C629C;
-extern f32 D_800C62A4;
-extern f32 D_800C62AC;
+extern f32 k_pickupApplySpecialPickupLiteralF32At00;
+extern f32 k_pickupApplySpecialPickupLiteralF32At08;
+extern f32 k_pickupApplySpecialPickupLiteralF32At10;
+extern f32 k_pickupApplySpecialPickupLiteralF32At14;
+extern f32 k_pickupApplySpecialPickupLiteralF32At1C;
+extern f32 k_pickupApplySpecialPickupLiteralF32At24;
+extern f32 k_pickupApplySpecialPickupLiteralF32At28;
+extern f32 k_pickupApplySpecialPickupLiteralF32At2C;
+extern f32 k_pickupApplySpecialPickupLiteralF32At30;
+extern f32 k_pickupApplySpecialPickupLiteralF32At34;
+extern f32 k_pickupApplySpecialPickupLiteralF32At38;
+extern f32 k_pickupApplySpecialPickupLiteralF32At3C;
+extern f32 k_pickupApplySpecialPickupLiteralF32At44;
+extern f32 k_pickupApplySpecialPickupLiteralF32At4C;
 #endif

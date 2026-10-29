@@ -12,7 +12,7 @@
 #include "COMMON/PLAYERPROFILES.H"
 
 /* Moves player p's column cursor on the screen g_equipmentAndResultsScreen: fades the shown item of the current
-   column (g_equipmentSecondaryWidgetIds[p][column]) to alpha 0x23, calls func_8040E8D8_de(0) on the item g_equipmentPrimaryWidgetIds[p][column]
+   column (g_equipmentSecondaryWidgetIds[p][column]) to alpha 0x23, calls Widget_SetWidgetFlag08_EquipActivateequipmentpanel(0) on the item g_equipmentPrimaryWidgetIds[p][column]
    unless the column is 5, then steps the column back for direction 1 (0 wraps to 5, and in mode 1
    at 0x4D4 anything above 2 becomes 2) or forward otherwise (5 wraps to 0, and in mode 1 anything
    past 2 becomes 5), and redraws through Frontend_SelectEquipmentColumn. */
@@ -53,7 +53,7 @@ extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);
    to 0x23 and redraws the column through Equip_ShowEquipChoice with the entry's value; mode 1 then also
    hides column 5's item, fades its label and hides the entry's item. Finally it hides the five
    g_equipmentPrimaryWidgetIds[p] items at alpha 0x37 and shows the selected column's label at alpha 0x96 through
-   func_8040E928_de. */
+   Widget_SetWidgetFlag40_EquipActivateequipmentpanel. */
 
 
 

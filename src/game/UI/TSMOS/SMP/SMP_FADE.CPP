@@ -93,7 +93,7 @@ unsigned int k_SmpFadeEncodedWordsBlock1[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8041A280_E2070_us_rev1.c */
+/* ROM-grounded data: src/g_fadeWidgetProgressConstantsUsRev1_SmpFade.c */
 const unsigned int g_fadeWidgetProgressConstantsUsRev1[2] = {
     0x3EAAAAAB, 0x3D4CCCCD,
 };

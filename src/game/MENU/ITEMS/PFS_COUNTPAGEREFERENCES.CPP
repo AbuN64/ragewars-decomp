@@ -40,7 +40,7 @@ s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cac
     return sum;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Pfs_CountPageReferences);
+INCLUDE_ASM("ovl_frontendMenu", Pfs_CountPageReferences);
 #endif
 #endif
 

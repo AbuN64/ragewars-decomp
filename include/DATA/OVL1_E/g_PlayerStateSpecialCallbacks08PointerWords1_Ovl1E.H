@@ -1,0 +1,4 @@
+#ifndef DATA_OVL1_E_PLAYER_STATE_CALLBACKS_08_ADDRESS_H
+#define DATA_OVL1_E_PLAYER_STATE_CALLBACKS_08_ADDRESS_H
+extern char g_Player_UpdateLeapMotionPackedAddress24[];
+#endif

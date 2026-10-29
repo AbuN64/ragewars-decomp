@@ -6,7 +6,7 @@
 
 extern OSThread_s *g_osRunningThread;
 
-extern void func_802BC36C_de(void *queue_data);
+extern void __osEnqueueAndYield(void *queue_data);
 
 
 
@@ -20,7 +20,7 @@ s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
             return -1;
         }
         g_osRunningThread->state = 8;
-        func_802BC36C_de(&queue->fullqueue);
+        __osEnqueueAndYield(&queue->fullqueue);
     }
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;
     queue->validCount++;

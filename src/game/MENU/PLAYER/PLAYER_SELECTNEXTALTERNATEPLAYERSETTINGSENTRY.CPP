@@ -98,11 +98,11 @@ extern s32 g_playerSettingsSlotNumberTranslations[];
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_alternatePlayerSettingsEventIds, an actor kind at g_alternatePlayerSettingsEventActorKinds and a handler at g_alternatePlayerSettingsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80437454)(void *, s32, s32, s32, s32);
+typedef s32 (*AlternatePlayerSettingsEventHandler)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler80437454 g_alternatePlayerSettingsEventHandlers;
+extern AlternatePlayerSettingsEventHandler g_alternatePlayerSettingsEventHandlers;
 
 s32 Player_FreeAlternatePlayerSettingsScreen(void) {
     Cache_FreeMemory(g_alternatePlayerSettingsScreen);
@@ -184,7 +184,7 @@ s32 Player_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, 
 }
 
 s32 Player_DispatchAlternatePlayerSettingsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler80437454 *entry;
+    AlternatePlayerSettingsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

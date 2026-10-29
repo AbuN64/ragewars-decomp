@@ -61,7 +61,7 @@ extern void Geometry_UnlockMaterialResources(void *handle);
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
-/* Runs func_8044D054_de and func_8044D0F0_de on a large state block, then clears its word at offset
+/* Runs Scene_LoadPreviewBufferA_SceneBuildplacedactors and Scene_LoadPreviewBufferB_SceneBuildplacedactors on a large state block, then clears its word at offset
    0x1B444, sets the word at 0x1B448 to 0x15 and copies g_menuOptionAvailabilityFlags into the word at 0x1B44C. */
 
 extern struct MemoryUsageStats g_menuOptionAvailabilityFlags;
@@ -307,7 +307,7 @@ void Scene_InitPreview(Shared_World *world, s32 level) {
     Scene_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
     world->previewTimer = 0x15;
-    world->previewStart = g_menuOptionAvailabilityFlags.first;
+    world->previewStart = g_menuOptionAvailabilityFlags.value;
 }
 
 extern void Cache_ReleaseResource(void *, void *); /* extern */

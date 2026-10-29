@@ -12,7 +12,7 @@
 #include "SYSTEM/EVENTS_DELIVERCONTACTEFFECT.H"
 extern char g_actorParticleScene, g_dynamicLightPool;
 
-/* Sets an actor's field 0x14C to 1 when something is near it: a world object from D_8011FE88 whose field 0x174 is positive within 256 units, a player from the g_transientPlayerList list other than the actor's owner whose field 0x5E4 is positive within 256 units, or another actor of type 0xC or 0x22 from the given list within 512 units (all compared as squared distances). */
+/* Sets an actor's field 0x14C to 1 when something is near it: a world object from g_world_AchieveUpdateresultsscreen whose field 0x174 is positive within 256 units, a player from the g_transientPlayerList list other than the actor's owner whose field 0x5E4 is positive within 256 units, or another actor of type 0xC or 0x22 from the given list within 512 units (all compared as squared distances). */
 
 
 

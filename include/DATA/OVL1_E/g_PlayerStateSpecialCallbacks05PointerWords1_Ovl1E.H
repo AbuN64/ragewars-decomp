@@ -1,0 +1,5 @@
+#ifndef DATA_OVL1_E_PLAYER_JUMP_CALLBACK_ADDRESSES_H
+#define DATA_OVL1_E_PLAYER_JUMP_CALLBACK_ADDRESSES_H
+extern char g_Player_BeginJumpPackedAddress24[];
+extern char g_Player_UpdateJumpAscentPackedAddress24[];
+#endif

@@ -26,7 +26,7 @@ extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 /* Returns the column of the first of the seventeen eight-byte entries in row r of g_rewardItemTiers whose
    identifier matches, or zero when none does. */
 
-/* Releases the object D_800E39C0 holds through Cache_FreeMemory, clears D_800E39C0 and returns zero. */
+/* Releases the object g_courseOptionsScreen holds through Cache_FreeMemory, clears g_courseOptionsScreen and returns zero. */
 
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
 
@@ -56,12 +56,12 @@ enum { MENU_RESOURCE = 0x392 };
 
 /* Cycles a menu selection and updates the associated character setting. */
 
-extern s32 D_8014DCF8[];
+extern s32 g_joinRequestRanks[];
 
-extern unsigned char D_8014DCFB[];
+extern unsigned char g_joinRequestRankBytes[];
 
 extern void MarkMenuEventHandled(void);
-extern struct CourseOptionsScreen *D_800E39C0;
+extern struct CourseOptionsScreen *g_courseOptionsScreen;
 extern MenuWidget *Node_FindWidgetByResourceId(void *, s32);
 
 void Join_ResetJoinRequestEntries(void) {
@@ -162,22 +162,22 @@ s32 Join_FindJoinModelIndex(s32 row, s32 id) {
 }
 
 s32 Join_DestroyJoinOptionsMenu(void) {
-    Cache_FreeMemory(D_800E39C0);
-    D_800E39C0 = 0;
+    Cache_FreeMemory(g_courseOptionsScreen);
+    g_courseOptionsScreen = 0;
     return 0;
 }
 
 s32 Join_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
-    D_800E39C0->timer += delta;
+    g_courseOptionsScreen->timer += delta;
 #if defined(VERSION_DE)
-    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x38C);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x392);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x392);
 #elif defined(VERSION_EU_X)
-    node = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], 0x396);
+    node = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], 0x396);
 #endif
-    node->alpha = (u32)(Math_Cosf(D_800E39C0->timer * 0.0033333334f) * 100.0f + 150.0f);
+    node->alpha = (u32)(Math_Cosf(g_courseOptionsScreen->timer * 0.0033333334f) * 100.0f + 150.0f);
     return 0;
 }
 
@@ -202,32 +202,32 @@ s32 Join_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 eventV
     MenuWidget *newItem;
     if (eventValue == 1) {
         MarkMenuEventHandled();
-        idx = D_800E39C0->selection;
+        idx = g_courseOptionsScreen->selection;
 #if defined(VERSION_DE)
-        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x396);
 #endif
         oldItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(oldItem, 0);
-        prevSelection = D_800E39C0->selection - 1;
-        D_800E39C0->selection = prevSelection;
+        prevSelection = g_courseOptionsScreen->selection - 1;
+        g_courseOptionsScreen->selection = prevSelection;
         if (prevSelection < 0) {
-            D_800E39C0->selection = D_800E39C0->step - 1;
+            g_courseOptionsScreen->selection = g_courseOptionsScreen->step - 1;
         }
-        idx = D_800E39C0->selection;
+        idx = g_courseOptionsScreen->selection;
 #if defined(VERSION_DE)
-        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x38C);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x392);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[idx], 0x396);
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[idx], 0x396);
 #endif
         newItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(newItem, 1);
-        D_800E39C0->timer = 0;
+        g_courseOptionsScreen->timer = 0;
         SoundElement_PlayFlatSound(0xE80);
         return 0;
     }
@@ -243,17 +243,17 @@ s32 Join_SelectNextJoinRow(s32 unusedObject, s32 unusedEvent, s32 unusedEventDat
 
     if (eventValue == 1) {
         MarkMenuEventHandled();
-        oldItem = Node_FindWidgetByResourceId(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
+        oldItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[g_courseOptionsScreen->selection], MENU_RESOURCE);
         oldItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(oldItem, 0);
-        rowCount = D_800E39C0->step;
-        followingRow = D_800E39C0->selection + 1;
+        rowCount = g_courseOptionsScreen->step;
+        followingRow = g_courseOptionsScreen->selection + 1;
         nextSelection = followingRow % rowCount;
-        D_800E39C0->selection = nextSelection;
-        newItem = Node_FindWidgetByResourceId(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
+        g_courseOptionsScreen->selection = nextSelection;
+        newItem = Node_FindWidgetByResourceId(g_courseOptionsScreen->rows[nextSelection], MENU_RESOURCE);
         newItem->alpha = 0xFF;
         Widget_SetWidgetFlag08(newItem, 1);
-        D_800E39C0->timer = 0;
+        g_courseOptionsScreen->timer = 0;
         SoundElement_PlayFlatSound(0xE80);
         return 0;
     }
@@ -268,19 +268,19 @@ s32 Join_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 eventData, s32 event
     eventKind = eventData >> 0x10;
     if ((eventKind == 3) && (eventValue == 0)) {
         MarkMenuEventHandled();
-        rowByteOffset = D_800E39C0->selection * 0x1C;
-        *(s32 *)((char *)D_8014DCF8 + rowByteOffset) = (*(s32 *)((char *)D_8014DCF8 + rowByteOffset) + 1) % 5;
-        Join_UpdateJoinRequestDisplay(D_800E39C0->selection);
+        rowByteOffset = g_courseOptionsScreen->selection * 0x1C;
+        *(s32 *)((char *)g_joinRequestRanks + rowByteOffset) = (*(s32 *)((char *)g_joinRequestRanks + rowByteOffset) + 1) % 5;
+        Join_UpdateJoinRequestDisplay(g_courseOptionsScreen->selection);
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
-            selectedRow = D_800E39C0->selection;
-            g_gameSettings.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
+            selectedRow = g_courseOptionsScreen->selection;
+            g_gameSettings.playerSettings[7 - selectedRow].rank = *(g_joinRequestRankBytes + (selectedRow * 0x1C));
         }
     }
     return 0;
 }
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const unsigned int rodata_func_8041F298_us_800DC1F0[1] = {
+const unsigned int k_joinCycleRankFloatOne[1] = {
     0x3F800000,
 };
 #endif

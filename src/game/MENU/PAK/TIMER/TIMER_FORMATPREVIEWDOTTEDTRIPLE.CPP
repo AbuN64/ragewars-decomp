@@ -31,7 +31,7 @@ extern s32 Pickup_ClassifyMenuCode(s32);
 extern s32 Menu_CountLineChars(struct Field *);
 
 
-/* Points a field's text at D_800D7810 when the option D_80153780 is set and at D_800D7814 otherwise, and returns
+/* Points a field's text at g_pakAlternateActionLabel when the option g_pakAlternateOptionEnabled is set and at g_pakActionLabel otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
@@ -43,7 +43,7 @@ extern char g_matchEndingTeamWheelClose[];
 
 extern void Menu_OpenDialog(void *, void *, s32, s32, s32);
 
-/* Stores 1 in D_80153730 and 0 in g_pakUseDefaultPreviewLabels. */
+/* Stores 1 in g_pakProfileLoaded and 0 in g_pakUseDefaultPreviewLabels. */
 
 
 
@@ -61,7 +61,7 @@ Pickup_ClassifyMenuCode
 }
 
 /* Formats the three floats at offsets 0xC, 0x10 and 0x14 of the structure g_controllerPakSnapshotPayload points to,
-   truncated to integers, into a field's text with the format D_800DCD84, nine bytes before the
+   truncated to integers, into a field's text with the format g_pakFormatDottedTriple_TimerFormatpreviewdottedtriple, nine bytes before the
    length Menu_CountLineChars reports. Returns zero. */
 
 s32 Timer_FormatPreviewDottedTriple(struct Field *field) {
@@ -85,17 +85,17 @@ s32 Timer_FormatPreviewDottedTriple(struct Field *field) {
 }
 
 s32 Timer_UpdateAlternateActionLabel(struct PakActionLabelView *field) {
-    if (D_80153780 != 0) {
-        field->text = D_800D7810;
+    if (g_pakAlternateOptionEnabled != 0) {
+        field->text = g_pakAlternateActionLabel;
     } else {
-        field->text = D_800D7814;
+        field->text = g_pakActionLabel;
     }
     return 0;
 }
 
 s32 Timer_OpenSelectedPrompt(void *unused, struct PakSelectedPromptView *record) {
     do {
-        if (D_80153780 != 0) {
+        if (g_pakAlternateOptionEnabled != 0) {
             Menu_OpenDialog(g_matchEndingTeamWheelClose, g_controllerPakReadyDialogResource, record->first, record->second, 0);
         } else {
             Menu_OpenDialog(g_matchEndingTeamWheelClose, record->resource, record->first, record->second, 0);
@@ -105,29 +105,29 @@ s32 Timer_OpenSelectedPrompt(void *unused, struct PakSelectedPromptView *record)
 }
 
 void Timer_EnableProfilePreview(void) {
-    D_80153730 = 1;
+    g_pakProfileLoaded = 1;
     g_pakUseDefaultPreviewLabels = 0;
 }
 
 void Timer_ClearProfilePreview(void) {
-    D_80153730 = 0;
+    g_pakProfileLoaded = 0;
     g_pakUseDefaultPreviewLabels = 0;
 }
 
 void Timer_DisablePreviewSelection(struct PakPreviewSelectionView *record) {
     record->target->first &= ~0x01800000;
-    D_80153730 = 0;
+    g_pakProfileLoaded = 0;
     g_pakUseDefaultPreviewLabels = 1;
     record->target->second &= ~0x01800000;
 }
 
 s32 Timer_UpdatePreviewKindLabel(struct PakActionLabelView *field) {
-    if (D_80153730 != 0) {
-        field->text = D_800D77EC;
+    if (g_pakProfileLoaded != 0) {
+        field->text = g_pakPreviewKindLabelProfile;
     } else if (g_pakUseDefaultPreviewLabels != 0) {
-        field->text = D_800D77F4;
+        field->text = g_pakPreviewKindLabelDefault;
     } else {
-        field->text = D_800D77F0;
+        field->text = g_pakPreviewKindLabelSelected;
     }
     return 0;
 }

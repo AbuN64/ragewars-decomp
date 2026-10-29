@@ -8,14 +8,14 @@
 /* 8042E080_86.CPP */
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_confirmationMenuEventIds, an actor kind at g_confirmationMenuEventActorKinds and a handler at g_confirmationMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8043630C)(void *, s32, s32, s32, s32);
+typedef s32 (*ConfirmationMenuEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_confirmationMenuEventIds[];
 extern FieldRow g_confirmationMenuEventActorKinds[];
-extern Handler8043630C g_confirmationMenuEventHandlers;
+extern ConfirmationMenuEventHandler g_confirmationMenuEventHandlers;
 
 s32 Frontend_DispatchConfirmationEvent(void *eventTarget, s32 eventId, s32 eventCode, s32 eventValue, s32 repeatCount) {
-    Handler8043630C *entry;
+    ConfirmationMenuEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
@@ -45,7 +45,7 @@ s32 Frontend_DispatchConfirmationEvent(void *eventTarget, s32 eventId, s32 event
 /* 8042E080_87.CPP */
 /* Builds screen state g_residentChoiceScreen: allocates its 0x1C bytes, resets through Tsmos_ActivateControllerState and opens
    it as page 0x67 through Frontend_InitMenuImage; then places the given window at 0x62, 0x45 in mode 1 of
-   func_8040C474_de, or at x 0x69 in mode 2. Returns zero. */
+   Frontend_GetCurrentVideoModeIndex_de, or at x 0x69 in mode 2. Returns zero. */
 
 extern void *Cache_AllocateMemory(s32);
 extern void Tsmos_ActivateControllerState(void);

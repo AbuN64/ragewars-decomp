@@ -20,7 +20,7 @@
 /* Selects a localized volume label and formats an intermediate value.
  * DE/US-rev1 source and proofs remain preserved separately. */
 
-/* Points a field's text at one of g_volumeZeroNeutralLabelFixed, g_volumeZeroMaximumLabelFixed or g_volumeZeroMinimumLabelFixed when the option byte D_801462E0 measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at g_volumeZeroValueLabelFixed with the step formatted into it, returning zero. Adapted from Pak_UpdateThirdVolumeLabel with D_801462E2 changed to D_801462E0 and the text slots g_volumeTwoMinimumLabel..g_volumeTwoValueLabel changed to g_volumeZeroMinimumLabelFixed..g_volumeZeroValueLabelFixed. */
+/* Points a field's text at one of g_volumeZeroNeutralLabelFixed, g_volumeZeroMaximumLabelFixed or g_volumeZeroMinimumLabelFixed when the option byte g_gameSettingsVolumeBytes measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at g_volumeZeroValueLabelFixed with the step formatted into it, returning zero. Adapted from Pak_UpdateThirdVolumeLabel with g_soundEffectsVolumeOption_PakFormatvolumeslotone changed to g_gameSettingsVolumeBytes and the text slots g_volumeTwoMinimumLabel..g_volumeTwoValueLabel changed to g_volumeZeroMinimumLabelFixed..g_volumeZeroValueLabelFixed. */
 
 
 

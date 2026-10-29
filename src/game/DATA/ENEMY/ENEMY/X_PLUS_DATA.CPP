@@ -2,7 +2,7 @@
 
 /* 80268160_17.CPP */
 #if defined(VERSION_US_REV1)
-u32 data_writable_800D15B0[20] = {
+u32 g_xPlusWritableWords_us_rev1[20] = {
     0xFFFFFFFF, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
     0x00000001, 0x00000001, 0x00000001, 0x00010000, 0xC4000000, 0xC8000000,
     0x00000000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000,
@@ -12,7 +12,7 @@ u32 data_writable_800D15B0[20] = {
 
 /* 802A0888_10.CPP */
 #if defined(VERSION_US)
-u32 data_writable_800CD810[40] = {
+u32 g_xPlusWritableWords_us[40] = {
     0x00000001, 0x45434F49, 0x4C540000, 0x04000000, 0x00000000, 0x12345678,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -23,7 +23,7 @@ u32 data_writable_800CD810[40] = {
 };
 #endif
 
-/* DATA_800D1600.CPP */
+/* g_materialPlusModeConstantsUsRev1_XPlusData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800D1600 */
 unsigned int g_materialPlusModeConstantsUsRev1[4] = {

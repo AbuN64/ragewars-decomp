@@ -14,7 +14,7 @@
 #include "sdk/OSINT/osyieldthread.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 
-/* DATA_800CC9C4.CPP */
+/* reverb_Reverb.CPP */
 
 /* reverb.c */
 /* alResamplePull, drafted from ultralib src/audio/resample.c: at unity pitch pull the source and

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80285630_CABA0_us_rev1.c */
+/* ROM-grounded data: src/g_Rumble_SamplePackedFloatRangeConstantsUsRev1_RumbleSamplepackedfloatrangeData.c */
 const unsigned int g_Rumble_SamplePackedFloatRangeConstantsUsRev1[3] = {
     0x41F00000, 0x00000000, 0x38000100,
 };

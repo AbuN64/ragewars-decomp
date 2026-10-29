@@ -71,8 +71,8 @@ struct CAIMovementInfo {
     f32 height;
 };
 
-struct Func802172C4Value;
-typedef struct Func802172C4Value Func802172C4Value;
+struct BarrelWordPair;
+typedef struct BarrelWordPair BarrelWordPair;
 
 
 struct ActorProfileImpulseFlagsView;
@@ -119,8 +119,8 @@ struct CActor_t {
 
 
 
-struct Func802172C4Value;
-struct Func802172C4Value {
+struct BarrelWordPair;
+struct BarrelWordPair {
     int words[2];
 };
 
@@ -142,7 +142,7 @@ struct Location {
 
 
 
-extern void Barrel_IgnoreEffectCallback(void *unused0, void *unused1, Func802172C4Value unused2);
+extern void Barrel_IgnoreEffectCallback(void *unused0, void *unused1, BarrelWordPair unused2);
 
 
 struct Tracker;
@@ -155,16 +155,16 @@ extern float g_barrelFlaggedAimProbeScale;
 
 
 
-struct Cursor802171C8;
-typedef struct Cursor802171C8 Cursor802171C8;
+struct BarrelSequenceCursor;
+typedef struct BarrelSequenceCursor BarrelSequenceCursor;
 
-struct Cursor802171C8;
-struct Cursor802171C8 {
+struct BarrelSequenceCursor;
+struct BarrelSequenceCursor {
     void *base;
     u16 *cur;
 };
 
-extern s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *cursor);
+extern s16 Barrel_ReadLoopingSequenceValue(BarrelSequenceCursor *cursor);
 
 
 

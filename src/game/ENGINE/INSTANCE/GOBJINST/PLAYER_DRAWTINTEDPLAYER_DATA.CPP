@@ -74,7 +74,7 @@ void Gobjinst_DrawActorModelWithViewEffects(FadedActorRenderView *actor, void *c
     g_menuModelFillEnabled = 0;
 }
 
-void Gobjinst_DrawActorPartsWithViewEffects(LevelActor *actor, PlayerCode80225D10 *player, s32 animationContext, Draw *params) {
+void Gobjinst_DrawActorPartsWithViewEffects(LevelActor *actor, PlayerControllerView *player, s32 animationContext, Draw *params) {
     SpawnedEffectMotionView *effect;
     f32 scale;
     s32 *node;

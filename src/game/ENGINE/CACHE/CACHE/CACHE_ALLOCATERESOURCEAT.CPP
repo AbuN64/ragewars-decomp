@@ -24,7 +24,7 @@ extern void Cache_InsertResourceByAddress(s32 unused, void *object);
 
 extern void Cache_ReleasePendingResourceEntry(s32 unused0, s32 entryAddress);
 
-extern void Cache_TouchResource(void *, Node80253610 *);
+extern void Cache_TouchResource(void *, CacheResourceNode *);
 
 extern void Cache_ReleaseResourceCompletely(void *, void *);
 
@@ -115,13 +115,13 @@ struct CacheResourceBlockView *Cache_AllocateResourceAt(void *address, void *req
     return allocatedResource;
 }
 
-void Cache_LockResource(void *cacheContext, Node80253610 *resource) {
+void Cache_LockResource(void *cacheContext, CacheResourceNode *resource) {
     extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
     u32 unlockInterruptMask;
-    Node80253610 *resourceNode;
+    CacheResourceNode *resourceNode;
 
     resourceNode = resource;
     mask = __osDisableInt();
@@ -147,13 +147,13 @@ void Cache_LockResource(void *cacheContext, Node80253610 *resource) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void Cache_UnlockResource(void *cacheContext, Node80253610 *resource) {
+void Cache_UnlockResource(void *cacheContext, CacheResourceNode *resource) {
     extern OSMesgQueue g_resourceHeapLockQueue;
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;
     u32 unlockInterruptMask;
-    Node80253610 *resourceNode;
+    CacheResourceNode *resourceNode;
 
     resourceNode = resource;
     mask = __osDisableInt();
@@ -301,7 +301,7 @@ s32 Cache_FinishResourceSlot(void) {
     return result;
 }
 
-void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
+void Cache_MarkResourceInUse(s32 unused0, CacheResourceNode *resource) {
     extern OSMesgQueue g_resourceHeapLockQueue;
     s32 index;
     s32 mask;

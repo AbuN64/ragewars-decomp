@@ -37,19 +37,19 @@ struct ControllerPakMenuContext;
 typedef struct ControllerPakMenuContext ControllerPakMenuContext;
 
 
-struct ActorCode80443868804438BC;
-struct ActorCode80443868804438BC {
+struct PlayerRespawnMenuActor;
+struct PlayerRespawnMenuActor {
     char pad0[4928];
     s32 respawnDelayFrames;
     char pad1344[268];
     s32 unk1450;
 };
 
-struct ActorCode80443868804438BC;
+struct PlayerRespawnMenuActor;
 struct PlayerRespawnMenuContext;
 struct PlayerRespawnMenuContext {
     char pad0[28];
-    struct ActorCode80443868804438BC * actor;
+    struct PlayerRespawnMenuActor * actor;
 };
 
 struct CaptionEntry;
@@ -77,8 +77,8 @@ struct NestedPlayerMenuFlagContext {
     struct Middle *middle;
 };
 
-struct OwnerCode8043DF84;
-typedef struct OwnerCode8043DF84 OwnerCode8043DF84;
+struct PlayerStateDirtyOwnerView;
+typedef struct PlayerStateDirtyOwnerView PlayerStateDirtyOwnerView;
 
 struct ControllerPakMenuActorView;
 struct PlayerMenuFlagContext;
@@ -86,22 +86,22 @@ struct PlayerMenuFlagContext {
     char pad[0xC];
     struct ControllerPakMenuActorView *actor;
     char pad10[0xC];
-    OwnerCode8043DF84 *parent;
+    PlayerStateDirtyOwnerView *parent;
 };
 
 
-struct ActorCode80443868;
-struct ActorCode80443868 {
+struct PlayerMenuResumeActor;
+struct PlayerMenuResumeActor {
     char pad[0x5D0];
     int waiting;
     char pad5D4[4];
     FragTagProfileFlagView *info;
 };
-struct ActorCode80443868;
+struct PlayerMenuResumeActor;
 struct PlayerMenuResumeContext;
 struct PlayerMenuResumeContext {
     char pad[0x1C];
-    struct ActorCode80443868 *actor;
+    struct PlayerMenuResumeActor *actor;
 };
 
 struct PlayerMenuResumeContext;
@@ -124,8 +124,8 @@ struct CaptionEntry {
 };
 
 
-struct ActorCode80443868804438BC;
-typedef struct ActorCode80443868804438BC ActorCode80443868804438BC;
+struct PlayerRespawnMenuActor;
+typedef struct PlayerRespawnMenuActor PlayerRespawnMenuActor;
 
 struct NestedPlayerMenuFlagContext;
 

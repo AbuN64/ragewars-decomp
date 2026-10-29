@@ -27,12 +27,12 @@ s32 Match_DispatchEuxMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPay
                 actor_kind = ((struct MenuActorInputView *) ((char *) eventObject))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_matchMenuEventKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
+                    return (*(WidgetEventHandler *)entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }
@@ -46,7 +46,7 @@ unsigned int func_80429DEC_eu_x_padding_119E7C[1] = {
 
 /* 80408AC4.CPP */
 #if defined(VERSION_DE)
-unsigned int data_unresolved_800DDA24[3] = {
+unsigned int g_matchPackedCodeAddresses_de[3] = {
     0x004297A8, 0x00429754, 0x004297A8,
 };
 #endif
@@ -70,7 +70,7 @@ s32 Match_ClearGermanLoadingHints(void) {
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D5: when
    Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data g_playerViewRenderContext, releases
-   D_8011FE88, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
+   g_world_AchieveUpdateresultsscreen, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
    and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Menu_ReturnToPreviousScreen. Returns zero. */
@@ -86,7 +86,7 @@ s32 Match_HandleMatchMessage(void) {
     switch (Menu_GetFocusedElementId()) {
     default:
         return 0;
-    case MENU_804291A8_473:
+    case MATCH_MENU_ELEMENT_LOAD_LEVEL_RESOURCES:
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
             Pools_ResetActorPools(&g_playerViewRenderContext.object, 0);
             Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
@@ -117,7 +117,7 @@ s32 Match_HandleMatchMessage(void) {
             Random_SetMenuChoiceResult(3);
         }
         break;
-    case MENU_804291A8_474:
+    case MATCH_MENU_ELEMENT_RETURN_PREVIOUS_OWNER:
         if (Menu_GetPreviousScreenOwner(0) == 11) {
             Random_SetMenuChoiceResult(11);
         } else {

@@ -14,7 +14,7 @@ const unsigned int k_actionaiFloatConstantWords[1] = {
 };
 #endif
 
-/* DATA_80202268.CPP */
+/* g_actionaiConstantWords_Actionai.CPP */
 #if defined(VERSION_DE)
 unsigned int g_actionaiConstantWords[30] = {
     0x063FB64E, 0x2BDF9701, 0x409AF000, 0x3C1A0020, 0x275A2460, 0x03400008, 0x00000000, 0x00000000,

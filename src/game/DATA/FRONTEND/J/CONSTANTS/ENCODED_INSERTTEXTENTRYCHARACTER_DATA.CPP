@@ -1,12 +1,12 @@
 #include "include_asm.h"
 
-/* DATA_800E5CA0.CPP */
+/* encodedInserttextentrycharacterWords1Data.CPP */
 /* ROM-grounded data: rodata/writable/800E5CA0 */
 unsigned int g_EncodedInserttextentrycharacterWords1[3] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-/* DATA_800E5CAC.CPP */
+/* encodedInserttextentrycharacterHalfwordsData.CPP */
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned short k_EncodedInserttextentrycharacterEncodedHalfwords[206] = {

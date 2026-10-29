@@ -18,7 +18,7 @@
 #include "sdk/os.h"
 extern s32 g_schedulerPendingFramebuffer;
 extern s32 g_displayedFramebufferAndRefreshRate;
-/* Initialises a panel: marks it active, clears its counters, lays out its two eight-slot rows, binds text 0x29B to 0x29D and 0x29A with the given style byte to the first row, and builds its element list from the D_28E910 template. */
+/* Initialises a panel: marks it active, clears its counters, lays out its two eight-slot rows, binds text 0x29B to 0x29D and 0x29A with the given style byte to the first row, and builds its element list from the PanelElementTemplate template. */
 
 
 

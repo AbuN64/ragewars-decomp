@@ -118,10 +118,10 @@ struct Clip {
 struct Clip;
 typedef struct Clip Clip;
 
-struct NodeCode8028469C;
-struct NodeCode8028469C {
-    struct NodeCode8028469C *previous;
-    struct NodeCode8028469C *next;
+struct RumbleEffectNode;
+struct RumbleEffectNode {
+    struct RumbleEffectNode *previous;
+    struct RumbleEffectNode *next;
     Clip *key;
     CVector3 position;
     f32 value0;
@@ -130,10 +130,10 @@ struct NodeCode8028469C {
     char pad24[8];
     u32 lifetimeHandle; /* 0x2C */
     char pad30[8];
-    struct NodeCode8028469C **owner;
+    struct RumbleEffectNode **owner;
 };
 
-/* Shared free/active node pool initialized by func_80285AC4_de. */
+/* Shared free/active node pool initialized by Rumble_InitPoolNodes_Controller. */
 struct RumbleNodePoolView {
     IntrusiveList free;
     IntrusiveList active;
@@ -229,8 +229,8 @@ struct ALEventQueue {
 
 struct ALEvent;
 
-struct Node802A697C;
-struct Node802A697C {
+struct EffectBoneNode;
+struct EffectBoneNode {
     u32 unk0;
     f32 value;
     s32 childValue; /* 0x08 */
@@ -274,8 +274,8 @@ struct NavigationBrainView {
     s32 jumpTimer;
 };
 
-struct Output80216D3C;
-struct Output80216D3C {
+struct BarrelTargetInfo;
+struct BarrelTargetInfo {
     s32 type;
     s32 unk4;
     s32 unk8;
@@ -287,8 +287,8 @@ struct Output80216D3C {
     s32 unk40;
 };
 
-struct Output80216D3C;
-typedef struct Output80216D3C Output80216D3C;
+struct BarrelTargetInfo;
+typedef struct BarrelTargetInfo BarrelTargetInfo;
 
 
 struct MatrixF;
@@ -362,7 +362,7 @@ typedef struct AudioSynthVoiceAllocatorView AudioSynthVoiceAllocatorView;
 
 
 
-typedef signed int ( *Handler802A2B50)(void *, signed int, signed int, signed int, signed int);
+typedef signed int ( *WidgetEventHandler)(void *, signed int, signed int, signed int, signed int);
 
 struct Field_f32_10;
 typedef struct Field_f32_10 Field_f32_10;
@@ -393,36 +393,36 @@ struct ResourceSmpFlickerCreateFlickerWidget {
 
 struct Field_s32_2E0;
 
-struct Entry802AB8DC;
-typedef struct Entry802AB8DC Entry802AB8DC;
+struct ImageTableEntry;
+typedef struct ImageTableEntry ImageTableEntry;
 
-struct Entry802AB8DC;
-struct Entry802AB8DC {
+struct ImageTableEntry;
+struct ImageTableEntry {
     s32 offset;
     u8 pad4[4];
 };
 
-struct Inner8043E56C;
-struct Inner8043E56C {
+struct ControllerPortView;
+struct ControllerPortView {
     u8 pad0[4];
     s8 controllerPort;
 };
 
-struct Inner8043E56C;
-struct Outer8043E56C;
-struct Outer8043E56C {
+struct ControllerPortView;
+struct ControllerPortOwnerView;
+struct ControllerPortOwnerView {
     u8 pad0[0x20];
-    struct Inner8043E56C *controller;
+    struct ControllerPortView *controller;
 };
 
-struct Outer8043E56C;
-typedef struct Outer8043E56C Outer8043E56C;
+struct ControllerPortOwnerView;
+typedef struct ControllerPortOwnerView ControllerPortOwnerView;
 
 struct MapBlockAllocatorView;
 typedef struct MapBlockAllocatorView MapBlockAllocatorView;
 
-struct OwnerCode8043DF84;
-struct OwnerCode8043DF84 {
+struct PlayerStateDirtyOwnerView;
+struct PlayerStateDirtyOwnerView {
     char pad0[0x85C];
     s32 playerStateDirty;
 };
@@ -745,7 +745,7 @@ struct Node75 {
 struct Field_s32_2E0;
 typedef struct Field_s32_2E0 Field_s32_2E0;
 
-extern int D_8014693C;
+extern int g_difficulty;
 
 
 struct InventorySlot;
@@ -757,11 +757,11 @@ struct InventorySlot {
 struct InventorySlot;
 typedef struct InventorySlot InventorySlot;
 
-struct func_8024DED0_S2;
-typedef struct func_8024DED0_S2 func_8024DED0_S2;
+struct WeaponUnlockModelView;
+typedef struct WeaponUnlockModelView WeaponUnlockModelView;
 
-struct func_8024DED0_S2;
-struct func_8024DED0_S2 {
+struct WeaponUnlockModelView;
+struct WeaponUnlockModelView {
     char pad0[0x4C];
     int reservedWord;
 };
@@ -947,11 +947,11 @@ struct ALMIDIEvent {
     u32 duration;
 };
 
-struct Func802608ECResult;
-typedef struct Func802608ECResult Func802608ECResult;
+struct Polytrak2QuantizationRange;
+typedef struct Polytrak2QuantizationRange Polytrak2QuantizationRange;
 
-struct Func802608ECResult;
-struct Func802608ECResult {
+struct Polytrak2QuantizationRange;
+struct Polytrak2QuantizationRange {
     u32 value;
     f32 start;
     f32 delta;
@@ -1067,8 +1067,8 @@ struct ObjMenuUpdateSixChoiceMenu {
 };
 struct ChoiceMenuCellView;
 struct ObjMenuUpdateSixChoiceMenu;
-struct StateCode80420E90;
-struct StateCode80420E90 {
+struct ChoiceMenuState;
+struct ChoiceMenuState {
     struct ObjMenuUpdateSixChoiceMenu *slider;
     s32 labelFlicker;
     struct ChoiceMenuCellView *transitionCell;
@@ -1127,8 +1127,8 @@ struct NodeGskyActivateMessagePool {
     struct NodeGskyActivateMessagePool *next;
 };
 
-struct ShapeCode802B54A0;
-typedef struct ShapeCode802B54A0 ShapeCode802B54A0;
+struct ConversionImageView;
+typedef struct ConversionImageView ConversionImageView;
 
 struct ControllerAxesView;
 struct ControllerAxesView {
@@ -1220,10 +1220,10 @@ struct InstanceHdr {
 };
 
 
-extern int D_800CB720;
+extern int g_audioContextInitialized;
 
-struct Input80216D3C;
-typedef struct Input80216D3C Input80216D3C;
+struct BarrelTrackActorView;
+typedef struct BarrelTrackActorView BarrelTrackActorView;
 
 struct __OSDir;
 struct __OSDir {
@@ -1498,16 +1498,16 @@ struct Params {
     s32 w;
 };
 
-struct Node80253610;
-typedef struct Node80253610 Node80253610;
+struct CacheResourceNode;
+typedef struct CacheResourceNode CacheResourceNode;
 
 
 struct ActorDefinitionFlagsView;
 typedef struct ActorDefinitionFlagsView ActorDefinitionFlagsView;
 
 
-struct Instance8020CD74;
-typedef struct Instance8020CD74 Instance8020CD74;
+struct ActorInstanceHeader;
+typedef struct ActorInstanceHeader ActorInstanceHeader;
 
 struct DamagePacketWords;
 struct DamagePacketWords {
@@ -1542,10 +1542,10 @@ extern int g_staticObjectResourceSerial;
 
 
 
-extern unsigned char D_800D297B;
+extern unsigned char g_unreadByte;
 
-struct Instance8020CD74;
-struct Instance8020CD74 {
+struct ActorInstanceHeader;
+struct ActorInstanceHeader {
     s32 w[2];
     CVector3 position;
     s32 remaining[15];
@@ -1663,8 +1663,8 @@ struct MenuPromptKindView {
     struct TargetPakSelectPromptKindEight *target;
 };
 
-struct ShapeCode802B54A0;
-struct ShapeCode802B54A0 {
+struct ConversionImageView;
+struct ConversionImageView {
     char pad0[0x8];
     short width;
 };
@@ -2115,8 +2115,8 @@ typedef struct NavigationActorWordBrainView NavigationActorWordBrainView;
 
 
 
-struct SlotsCode804196C0;
-struct SlotsCode804196C0 {
+struct SmpOverlaySlotsView;
+struct SmpOverlaySlotsView {
     char pad[0x4C];
     struct WidgetNode *values[1];
 };
@@ -2233,7 +2233,7 @@ struct ControllerProfile {
     f32 pakTimer; /* 0xD4 */
     OSPfs pak; /* 0xD8 */
     struct RumbleNodePoolView effectPool; /* 0x140 */
-    struct NodeCode8028469C effectNodes[3]; /* 0x16C */
+    struct RumbleEffectNode effectNodes[3]; /* 0x16C */
     s32 reset; /* 0x220 */
 };
 
@@ -2318,8 +2318,8 @@ struct WorldSceneDispatchEnabledEntityTrigger {
 struct Field_void_80;
 typedef struct Field_void_80 Field_void_80;
 
-struct Node80253610;
-struct Node80253610 {
+struct CacheResourceNode;
+struct CacheResourceNode {
     s32 data;
     s32 field4;
     s32 references;
@@ -2453,8 +2453,8 @@ typedef struct AudioVoicePhysicalLinkView AudioVoicePhysicalLinkView;
 
 
 
-struct Input80216D3C;
-struct Input80216D3C {
+struct BarrelTrackActorView;
+struct BarrelTrackActorView {
     s32 unk0;
     s32 unk4;
     Triple vec;
@@ -2467,8 +2467,8 @@ struct CallbackStateC_4 {
 };
 
 
-struct StateCode80420E90;
-typedef struct StateCode80420E90 StateCode80420E90;
+struct ChoiceMenuState;
+typedef struct ChoiceMenuState ChoiceMenuState;
 
 struct PakControllerRequestView;
 struct ControllerButtonFlagsView;
@@ -2572,8 +2572,8 @@ struct AudioPhysicalVoiceOffsetView {
 
 
 
-struct NodeCode8028469C;
-typedef struct NodeCode8028469C NodeCode8028469C;
+struct RumbleEffectNode;
+typedef struct RumbleEffectNode RumbleEffectNode;
 
 struct AttachmentEventTableView;
 struct AttachmentEventTableView {

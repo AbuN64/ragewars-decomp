@@ -45,7 +45,7 @@ const unsigned int k_xMathFloatConstantWordsBlock6[5] = {
     0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_8029C984_CB834_us_rev1.c */
+/* ROM-grounded data: src/k_XMathOneWordsVariant1_XMath.c */
 const unsigned int k_XMathOneWordsVariant1[1] = {
     0x3F800000,
 };
@@ -60,12 +60,12 @@ const unsigned int k_xMathFloatConstantWordsBlock8[9] = {
     0x3FC90FDB,
 };
 
-/* ROM-grounded data: src/rw_pool_8029D000_CB884_us_rev1.c */
+/* ROM-grounded data: src/k_xMathFloatConstantWordsBlock9_XMath.c */
 const unsigned int k_xMathFloatConstantWordsBlock9[2] = {
     0x3F800000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_8029D248_CB88C_us_rev1.c */
+/* ROM-grounded data: src/k_xMathFloatConstantWordsBlock10_XMath.c */
 const unsigned int k_xMathFloatConstantWordsBlock10[2] = {
     0x38D1B717, 0x3F800000,
 };

@@ -118,7 +118,7 @@ s32 Player_TryStartJump(void *player, LevelActor *actor) {
 }
 
 /** Return zero. */
-int func_8022C88C_de(void *unused0, void *unused1, s32 *unused2) {
+int Player_ReturnZeroStub(void *unused0, void *unused1, s32 *unused2) {
     return 0;
 }
 

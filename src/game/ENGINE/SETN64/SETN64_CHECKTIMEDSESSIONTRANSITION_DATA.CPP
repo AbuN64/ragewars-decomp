@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80293904_CB188_us_rev1.c */
+/* ROM-grounded data: src/g_Setn64ChecktimedsessiontransitionWords1_Setn64ChecktimedsessiontransitionData.c */
 const unsigned int g_Setn64ChecktimedsessiontransitionWords1[1] = {
     0x41700000,
 };

@@ -18,7 +18,7 @@
 
 
 
-extern f32 D_800C3690_de[];
+extern f32 g_collisionSlackThresholdFactors_de[];
 
 
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
@@ -32,7 +32,7 @@ static inline s32 accepts(RayCCollisionTestRayCylinder *ray, PolygonCCollisionTe
         if ((u32)(poly->type - 5) < 2) {
             return 0;
         }
-        if (poly->t * ray->slack < -(D_800D0648 * D_800C3690_de[2])) {
+        if (poly->t * ray->slack < -(g_collisionSlackThreshold * g_collisionSlackThresholdFactors_de[2])) {
             return 0;
         }
     }
@@ -62,7 +62,7 @@ s32 CCollision_TestRayCylinder(RayCCollisionTestRayCylinder *ray, CVector3 *cent
     if (len == 0.0f) {
         return 0;
     }
-    inv = D_800C3690_de[1] / len;
+    inv = g_collisionSlackThresholdFactors_de[1] / len;
     dir.x = ray->dir.x * inv;
     dir.z = ray->dir.z * inv;
     along = delta.x * dir.x + delta.z * dir.z;

@@ -12,7 +12,7 @@ extern void Barrel_FillAnchorTargetInfo(void *, void *, s32, void *);
 
 
 
-void Barrel_UpdateTrackGoals(Input80216D3C *actor, void *trackerState, Output80216D3C *targetInfos, s32 updateTrackedTarget, s32 updateAnchorTarget) {
+void Barrel_UpdateTrackGoals(BarrelTrackActorView *actor, void *trackerState, BarrelTargetInfo *targetInfos, s32 updateTrackedTarget, s32 updateAnchorTarget) {
     Tracker *tracker = trackerState;
     Triple first;
     Triple second;
@@ -31,7 +31,7 @@ void Barrel_UpdateTrackGoals(Input80216D3C *actor, void *trackerState, Output802
     if (updateTrackedTarget != 0) {
         Cbarrel_ResolveTrackGoal(actor, tracker, (s32)tracker->target, &targetInfos[1]);
     } else {
-        Output80216D3C *out = &targetInfos[1];
+        BarrelTargetInfo *out = &targetInfos[1];
         first = actor->vec;
         second.x = 0;
         second.y = 0;

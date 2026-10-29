@@ -4,5 +4,5 @@
 extern CVector3 *Gobjinst_TransformVectorByActorAim(CVector3 *out, void *actor, CVector3 localVector);
 extern float Gobjinst_GetActorOffsetDefault(void);
 extern void Gobjinst_SetAttachmentEffectBitTwo(void *object, int enabled);
-extern s32 Gobjinst_TestActorTriangleVerticalClearance(struct Shared_Func80243A80Actor *actor);
+extern s32 Gobjinst_TestActorTriangleVerticalClearance(struct Shared_CollisionActor *actor);
 #endif

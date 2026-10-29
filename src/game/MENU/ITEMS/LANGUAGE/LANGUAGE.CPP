@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/EXTERNS_21.H"
+#include "COMMON/VOLUME_MENU_RESOURCES.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/MEASURED_STORAGE.H"

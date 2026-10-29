@@ -29,7 +29,7 @@ extern f32 Gobjinst_GetActorHeight(void *);
 
 /* Returns whether the entity registered under an id in g_weaponInfoByType has flag 1 (mode 0) or flag 2
    (mode 1) set in its word at 0x14; other modes give 0. The interval also holds the empty function
-   func_8022E940_de that follows. */
+   Playerai_EmptyImpactSoundHook that follows. */
 
 
 extern LinkedWorldFlagsView *g_weaponInfoByType[];
@@ -97,5 +97,5 @@ int Playerai_HasWeaponModeFlag(short id, int mode) {
     return 0;
 }
 
-void func_8022E940_de(void) {
+void Playerai_EmptyImpactSoundHook(void) {
 }

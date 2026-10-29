@@ -182,7 +182,7 @@ void XStdio_InitializeStreams(void) {
         write_resource_word(&g_stdioResourceStream.opened,0);
         g_stdioResourceStream.ready = one;
     }
-    XStdio_SetStreamCallbacks((ResourceOpenCallback)&g_stdioResourceOpenRomEntry, (s32) &g_stdioResourceCloseRomEntry, (ResourceReadCallback)&g_stdioResourceReadRomEntry, (s32) &g_stdioResourceWriteRomEntry, (ResourceSeekCallback)&g_stdioResourceSeekRomEntry, (s32) &g_stdioResourceTellRomEntry, (s32) &g_xStdioRomLinkTarget_002A1230);
+    XStdio_SetStreamCallbacks((ResourceOpenCallback)&g_stdioResourceOpenRomEntry, (s32) &g_stdioResourceCloseRomEntry, (ResourceReadCallback)&g_stdioResourceReadRomEntry, (s32) &g_stdioResourceWriteRomEntry, (ResourceSeekCallback)&g_stdioResourceSeekRomEntry, (s32) &g_stdioResourceTellRomEntry, (s32) &g_stdioResourceEndRomEntry);
 }
 
 void XStdio_ShutdownStreams(void) {

@@ -17,7 +17,7 @@ extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct CCollision
 /* 80241940.CPP */
 /* Builds the eight world-space corners of an object's collision box: the extents come from the shape at
  * 0x18 + 0x14 (half width and depth, or the radius for a cylinder of kind 1), grown by the optional
- * attachment's sizes from Gobjinst_GetActorRadius, Gobjinst_GetActorHeight and func_8024E420_de; the box is turned by the object's
+ * attachment's sizes from Gobjinst_GetActorRadius, Gobjinst_GetActorHeight and InstHdr_GetActorBaseOffset_Pltfmcol; the box is turned by the object's
  * rest matrix from 0x2A4 and its heading 0x6C composed with its orientation at 0x5C, moved to its position
  * and, for shapes flagged 1, its bottom corners are dropped to the ground height of the given floor. */
 

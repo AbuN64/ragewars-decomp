@@ -151,8 +151,8 @@ void Player_InitActorParts(SharedPlayer *player, LevelPlacedActorRecord *rec, s3
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 extern char g_localPlayerProfiles[];
-extern void *D_800E4680;
-extern char g_roundStartModeSpecificDialogTable[], D_0044FB2C[], g_roundStartDefaultDialogTable[];
+extern void *g_currentStagePreset;
+extern char g_roundStartModeSpecificDialogTable[], g_playerMenuDialogTable[], g_roundStartDefaultDialogTable[];
 struct RespawnPlayer;
 extern s32 Control_IsSnapshotActive(void);
 extern void *Pools_RecycleModel(void *);
@@ -177,7 +177,7 @@ typedef struct PlayerRoundReset {
     u8 counters[2][6];
 } PlayerRoundReset;
 
-extern u8 D_801462D5; /* MIXED Player_ResetPlayerForRound */
+extern u8 g_gameControllerMode; /* MIXED Player_ResetPlayerForRound */
 void Player_ResetPlayerForRound(void *actor, s32 character) {
     s32 i;
     unsigned long counterAddress;
@@ -210,12 +210,12 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
         counterAddress--;
     } while (--i >= 0);
     if (g_frontendScreenStatus.settings.local != 0) {
-        if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
+        if (g_gameControllerMode == 1 && FIELD(s32, actor, 0x1450) == 0) {
             u32 value = Player_GetLevelProgress(g_localPlayerProfiles + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
             FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
         }
-        if (D_801462D5 == 4 && FIELD(s32, actor, 0x1450) == 0 && D_800E4680 != 0) {
-            FIELD(s32, actor, 0x133C) = FIELD(u8, D_800E4680, 0x28);
+        if (g_gameControllerMode == 4 && FIELD(s32, actor, 0x1450) == 0 && g_currentStagePreset != 0) {
+            FIELD(s32, actor, 0x133C) = FIELD(u8, g_currentStagePreset, 0x28);
         }
         FIELD(s16, actor, 0x5EA) = 1;
     } else {
@@ -260,7 +260,7 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
             FIELD(s32, actor, 0x85C) = 1;
             table = g_roundStartModeSpecificDialogTable;
             if (FIELD(s32, globals, 0x5FC) == 0) {
-                table = D_0044FB2C;
+                table = g_playerMenuDialogTable;
             }
         } else {
             table = g_roundStartDefaultDialogTable;
@@ -272,7 +272,7 @@ void Player_ResetPlayerForRound(void *actor, s32 character) {
 
 }
 #else
-INCLUDE_ASM("ovl_80400000", Player_ResetPlayerForRound);
+INCLUDE_ASM("ovl_frontendMenu", Player_ResetPlayerForRound);
 #endif
 
 #ifndef FIELD

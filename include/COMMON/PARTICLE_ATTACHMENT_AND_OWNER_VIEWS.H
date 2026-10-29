@@ -27,15 +27,15 @@ struct ObjParticleInitializeAttachmentsAndSound {
 
 
 
-struct D801041F8_Layout;
-struct D801041F8_Layout {
+struct ParticleContactStateLayout;
+struct ParticleContactStateLayout {
     Triple first;
     char pad[0xD0 - 0xC];
     Triple second;
 };
 
-struct D801041F8_Layout;
-typedef struct D801041F8_Layout D801041F8_Layout;
+struct ParticleContactStateLayout;
+typedef struct ParticleContactStateLayout ParticleContactStateLayout;
 
 struct ParticleObjectLinkView;
 struct ParticleObjectLinkView {

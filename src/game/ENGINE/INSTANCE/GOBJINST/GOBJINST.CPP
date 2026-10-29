@@ -20,7 +20,7 @@
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object
  * (g_portalAlternateCollisionQuery for flagged players; otherwise by Insthdr_IsInactiveOrCollisionOption4 and then Insthdr_GetModelCollisionFlag8 or Insthdr_GetModelCollisionFlag1 among
  * g_portalDefaultCollisionQuery, g_portalNoModelFlagCollisionQuery, g_portalModeCollisionQuery and g_portalAlternateCollisionQuery), reports it through the optional out pointer, runs
- * the collision mover func_80243A90_de and restores the object's 0x50-byte header. Adapted from
+ * the collision mover Collision_ProbeGround_de and restores the object's 0x50-byte header. Adapted from
  * Gobjinst_HasClearPathToActor. */
 
 
@@ -35,14 +35,14 @@ extern char g_portalNoModelFlagCollisionQuery;
 
 extern char g_portalAlternateCollisionQuery;
 
-extern s32 Insthdr_GetModelCollisionFlag1(Instance8020CD74 *);
+extern s32 Insthdr_GetModelCollisionFlag1(ActorInstanceHeader *);
 
-extern s32 Insthdr_IsInactiveOrCollisionOption4(Instance8020CD74 *);
+extern s32 Insthdr_IsInactiveOrCollisionOption4(ActorInstanceHeader *);
 
-extern s32 Insthdr_GetModelCollisionFlag8(Instance8020CD74 *);
+extern s32 Insthdr_GetModelCollisionFlag8(ActorInstanceHeader *);
 
 
-extern f32 Gobjinst_GetActorHeight(Instance8020CD74 *);
+extern f32 Gobjinst_GetActorHeight(ActorInstanceHeader *);
 
 extern CollisionState g_currentActorInstance;
 
@@ -119,9 +119,9 @@ extern s32 Defs_FindSortedValue(void *, s32, s32);
 extern void Lists_ClearWeightedTable(WeightedTable *);
 
 
-s32 Gobjinst_ProbeActorMovement(Instance8020CD74 *actorState, CVector3 position, char **out) {
+s32 Gobjinst_ProbeActorMovement(ActorInstanceHeader *actorState, CVector3 position, char **out) {
 
-    Instance8020CD74 saved;
+    ActorInstanceHeader saved;
     char *set;
     s32 grounded;
     s32 collisions;
@@ -151,9 +151,9 @@ s32 Gobjinst_ProbeActorMovement(Instance8020CD74 *actorState, CVector3 position,
     return collisions;
 }
 
-s32 Gobjinst_HasClearPathToActor(Instance8020CD74 *from, Instance8020CD74 *to) {
+s32 Gobjinst_HasClearPathToActor(ActorInstanceHeader *from, ActorInstanceHeader *to) {
 
-    Instance8020CD74 savedFrom;
+    ActorInstanceHeader savedFrom;
     CVector3 desired;
     f32 scale;
     s32 collisions;
@@ -169,9 +169,9 @@ s32 Gobjinst_HasClearPathToActor(Instance8020CD74 *from, Instance8020CD74 *to) {
     return collisions == 0;
 }
 
-s32 Gobjinst_HasClearInstancePath(Instance8020CD74 *actorState, CVector3 position, CollisionInfoCode80243A80 *collisionSettings) {
-    Instance8020CD74 saved;
-    CollisionInfoCode80243A80 collision_info;
+s32 Gobjinst_HasClearInstancePath(ActorInstanceHeader *actorState, CVector3 position, UnicolMotionSettings *collisionSettings) {
+    ActorInstanceHeader saved;
+    UnicolMotionSettings collision_info;
     s32 collisions;
 
     saved = *actorState;

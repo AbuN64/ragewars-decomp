@@ -3,10 +3,10 @@
 #include "TYPES.H"
 #include "COMMON/GLOBALS.H"
 
-/* Tears down the match display: calls func_80245B28_de, stops the objects at g_frontendScreenStatus and 0x48 bytes
-   before it through Pools_ResetActorPools and Player_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
+/* Tears down the match display: calls Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut, stops the objects at g_frontendScreenStatus and 0x48 bytes
+   before it through Pools_ResetActorPools and Player_InitializePlayerPool, releases resource 0x24 of g_world_AchieveUpdateresultsscreen through
    Scene_LoadLevelResources, calls Cache_SetResourceActivityState with one when Cache_GetResourceActivityState reports nothing, then calls
-   func_80245A10_de, Cinema_SetLoopMode with zero and Cinema_ResetViewport. */
+   Cinema_ClearResponse_Optionscene, Cinema_SetLoopMode with zero and Cinema_ResetViewport. */
 
 void Menu_ReleaseOptionsScene(void) {
     char *object;
@@ -28,7 +28,7 @@ void Menu_SetOptionsSceneSelection(int key) {
  GlobalsMenuSetOptionsSceneSelection *g = &g_gameplayCameraList;
  GameplayCamera *o = g->camera;
  float width = 45.0f;
- float height = D_800DD610[1];
+ float height = g_cameraAspectRatios[1];
  StateMenuSetOptionsSceneSelection *state = g_cinemaSequenceState;
  int selection;
  o->fovY = width; o->aspect = height;

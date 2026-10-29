@@ -473,7 +473,7 @@ s32 Character_CreateSelectionMenuGerman(void *screen)
 
 /* 8041F1FC_2.CPP */
 extern s32 Widget_ListHasFlag100(struct WidgetNode *);
-extern struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *, s32);
+extern struct WidgetNode *SmpOverlay_GetSlotValue(struct SmpOverlaySlotsView *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
 s32 Character_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTicks) {

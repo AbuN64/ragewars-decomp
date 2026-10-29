@@ -5,7 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 struct LocalDecodeRange {
     u32 unused;
-    Func802608ECResult range;
+    Polytrak2QuantizationRange range;
 };
 struct TrackBitarrayExpandCurveSamples {
     s32 keys;
@@ -14,14 +14,14 @@ struct TrackBitarrayExpandCurveSamples {
 };
 struct DecodeArray {
     s32 base;
-    Func802608ECResult range;
+    Polytrak2QuantizationRange range;
     s32 count; /* 0x10 */
 };
 struct BitFieldSource {
     int base;
     unsigned int width;
 };
-struct Entry802612C8 {
+struct MotionPackHeader {
     s32 x;
     s32 pad4;
     s32 z;
@@ -45,13 +45,13 @@ struct PolytrakScalarSampleMetadata {
     s32 loopStart;
     s32 ** animationHandle;
 };
-extern void Polytrak2_InitializeQuantizedArray(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
+extern void Polytrak2_InitializeQuantizedArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange t, int elementCount);
 extern int Polytrak2_GetPackedHighBitsSetElement(BitFieldSource *packedArray, int elementIndex);
 extern f32 Polytrak2_GetQuantizedArrayElement(DecodeArray *packedArray, s32 elementIndex);
 extern int Polytrak2_GetUnsignedArrayElement(BitFieldSource *packedArray, int elementIndex);
-extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range, f32 sourceValue);
-extern void Polytrak2_InitializeHighBitsSetArray(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
+extern void Polytrak2_WriteQuantizedFloatAtAddress(s32 bitAddress, Polytrak2QuantizationRange range, f32 sourceValue);
+extern void Polytrak2_InitializeHighBitsSetArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange t, int elementCount);
 extern void Polytrak2_StoreWordAndTriple(void *destination, int wordValue, Triple t);
-extern f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Func802608ECResult range);
-extern void Polytrak2_InitializeUnsignedArray(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount);
+extern f32 Polytrak2_ReadQuantizedFloatAtAddress(s32 bitAddress, Polytrak2QuantizationRange range);
+extern void Polytrak2_InitializeUnsignedArray(void *decodeArray, int baseBitAddress, Polytrak2QuantizationRange t, int elementCount);
 #endif

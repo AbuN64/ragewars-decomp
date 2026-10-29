@@ -29,7 +29,7 @@ unsigned int g_GameobjectMovetoxzkeepheightWords2[8] = {
 #endif
 
 /* 800D0670.CPP */
-/* ROM-grounded data: src/rw_pool_80245D30_D1270_us_rev1.c */
+/* ROM-grounded data: src/k_moveToXzKeepHeightPoolPair_us_rev1.c */
 const unsigned int g_GameobjectMovetoxzkeepheightWords1[2] = {
     0x3E99999A, 0x40400000,
 };

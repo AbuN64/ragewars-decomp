@@ -20,8 +20,8 @@ extern void Geometry_SetPrimitiveColorOverride(unsigned char first, unsigned cha
 
 extern float g_quaternionOppositeDirectionThreshold;
 
-struct Node8026E4F8;
-typedef struct Node8026E4F8 Node8026E4F8;
+struct MaterialTreeNode;
+typedef struct MaterialTreeNode MaterialTreeNode;
 
 extern float g_quaternionAxisNormalizeScale;
 
@@ -80,12 +80,12 @@ extern float g_randomDirectionRotationNormalizeConstants;
 
 extern void Geometry_ClearMaterialGroups(void);
 
-struct Node8026E4F8;
-struct Node8026E4F8 {
+struct MaterialTreeNode;
+struct MaterialTreeNode {
     u32 key;
     char pad4[0x14];
-    struct Node8026E4F8 *left;
-    struct Node8026E4F8 *right;
+    struct MaterialTreeNode *left;
+    struct MaterialTreeNode *right;
 };
 
 extern float g_randomDirectionPairNormalizeConstants;
@@ -97,7 +97,7 @@ typedef struct TreeNode TreeNode;
 
 extern float g_randomDirectionYRangeConstants;
 
-extern void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **root, u32 materialKey);
+extern void *Geometry_FindMaterialNodeOrParent(MaterialTreeNode **root, u32 materialKey);
 
 extern float g_fullFixedMatrixElement5ConversionConstants;
 

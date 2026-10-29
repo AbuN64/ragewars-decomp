@@ -10,13 +10,13 @@
 #include "COMMON/WEAPON_SCREEN_MESSAGE_OPERATIONS.H"
 #include "COMMON/BALLISTICPARAMS.H"
 
-/* Builds an orientation matrix whose third row is the given direction: the first row is the cross product of the up vector D_800C97B4 with it, or the X axis when the direction is within the vertical thresholds, the second row is the cross product of the first row with it, all three rows are normalised and the rest is identity. */
+/* Builds an orientation matrix whose third row is the given direction: the first row is the cross product of the up vector g_directionMatrixUnitConstants_us_rev1 with it, or the X axis when the direction is within the vertical thresholds, the second row is the cross product of the first row with it, all three rows are normalised and the rest is identity. */
 
 
 
 
 
-extern CVector3 D_800C46C0_de[2];
+extern CVector3 g_directionMatrixUnitConstants_de[2];
 
 
 extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
@@ -137,7 +137,7 @@ void Graphu64_BuildPlaneProjectionMatrix(void *projection, void *projectionDirec
 
 void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
     CVector3 up;
-    CVector3 *upVector = (void *)&D_800C46C0_de[0].y;
+    CVector3 *upVector = (void *)&g_directionMatrixUnitConstants_de[0].y;
 
     up = *upVector;
     if (direction->y < 0.0f ? (&g_planeProjectionAndDirectionConstants)[1] <= -direction->y : g_directionVerticalThreshold.value <= direction->y) {

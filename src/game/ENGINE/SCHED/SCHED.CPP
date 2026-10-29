@@ -67,8 +67,8 @@ void Sched_StartSelectedTasks(OSSched *view, OSScTask_s *current, OSScTask_s *ne
     }
     if (next != 0 && next != current) {
         osDpSetNextBuffer((s32)next->list.output_buff, *next->list.output_buff_size);
-        D_800CD710 = 1;
-        D_800CD714 = 0;
+        g_schedulerRdpBufferSetFlag = 1;
+        g_schedulerRdpBufferSetState = 0;
         view->curRDPTask = next;
     }
 }

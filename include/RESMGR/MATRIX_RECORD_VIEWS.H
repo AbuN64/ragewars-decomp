@@ -7,7 +7,7 @@ typedef struct MatrixRecord {
     u32 header[4];
     Matrix matrix;
 } MatrixRecord;
-struct Mtx3x4_8029FD54 {
+struct Matrix3x4View {
     f32 m[3][4];
 };
 #endif

@@ -174,7 +174,7 @@ void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_P
 
 
 
-SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id) {
+SceneDefinitionActorView *Scene_FindTypeFourteenActorByDefinitionId(SceneTypeFourteenActorListView *world, s32 id) {
     s32 i;
     SceneDefinitionActorView *found = 0;
 
@@ -264,7 +264,7 @@ void Scene_RegisterActorInSceneLists(SceneActorCategoryListsView *world, ObjectS
     }
     {
         s32 n = world->countType1;
-        if (n < 64 && object->descriptor->field_0 == 1) {
+        if (n < 64 && object->descriptor->value == 1) {
             world->type1[n] = object;
             object->slot = world->countType1++;
         }
@@ -278,7 +278,7 @@ void Scene_RegisterActorInSceneLists(SceneActorCategoryListsView *world, ObjectS
     }
     {
         s32 n = world->countType5;
-        if (n < 16 && object->descriptor->field_0 == 5) {
+        if (n < 16 && object->descriptor->value == 5) {
             world->type5[n] = object;
             world->countType5 = n + 1;
         }
@@ -339,13 +339,13 @@ SceneNearestActorView *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatch
     return best;
 }
 
-/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Playerai_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
+/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than g_transitionAlphaScaleTable. Adapted from Playerai_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
 
 
 
 
 
-struct ScenePositionEntry *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct ScenePositionEntry *pos) {
+struct ScenePositionEntry *Scene_FindNearestListedEntry(struct SceneListedEntryOwnerView *owner, struct ScenePositionEntry *pos) {
     s32 i;
     struct ScenePositionEntry *best;
     f32 min;
@@ -389,7 +389,7 @@ struct ScenePositionEntry *Scene_FindNearestListedEntry(struct OwnerCode8028B64C
 
 
 
-ActorLinkedControllerView *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id) {
+ActorLinkedControllerView *Scene_ResolveActorLinkGroup(SceneActorLinkGroupView *obj, int id) {
     int i;
     ActorLinkedControllerView *found;
     int count;

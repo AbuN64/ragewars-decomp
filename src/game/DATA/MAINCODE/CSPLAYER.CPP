@@ -5,7 +5,7 @@
 unsigned char g_CsplayerTrailingBytesBlock1[4] = { 0x44, 0x07, 0xB8, 0x00 };
 #endif
 
-/* DATA_80212E04.CPP */
+/* s_firePodReaText_Csplayer.CPP */
 #if defined(VERSION_US)
 char s_firePodReaText[12] =
     "FIRE_POD_REA";

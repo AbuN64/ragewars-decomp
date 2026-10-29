@@ -11,7 +11,7 @@
    the entry PAKInterface_FindEmptyPlayerLink returns (id 0, value the place, word 8 set to 1), copies the chosen
    400-byte slot from 0x18 of the player's record into that place of g_localPlayerProfiles through
    XPlus_CopyBytes, marks p as its owner at 0xD, clears the player's word at 0x4 and relabels through
-   func_80433BCC_de(-1), returning 1; otherwise it returns 0. */
+   PAKInterface_RelabelSlotRows_FrontendResetlinkedlocalprofile(-1), returning 1; otherwise it returns 0. */
 
 
 

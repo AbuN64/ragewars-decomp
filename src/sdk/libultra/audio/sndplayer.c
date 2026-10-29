@@ -197,7 +197,7 @@ void _handleEvent(ALSndPlayer *sndp, ALSndpEvent *event)
 
         case 4: /* AL_SNDP_PITCH_EVT */
             {
-                f32 min = D_800C7544;
+                f32 min = g_soundPlayerMinimumPitch;
                 if ((state->pitch = event_view->pitch.pitch) < min)
                     state->pitch = min;
             }

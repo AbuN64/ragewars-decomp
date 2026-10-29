@@ -13,7 +13,7 @@
 
 /* Runs a player's aiming action: refreshes the idle state when the action is not allowed; while the aim
  * flag 0x4000 is held and the weapon may fire (as in Weaponai_TryEnterAlternateStateEight) the attack enters aiming and, for scoped
- * weapons, zooms in through func_8022B1A8; when aiming stops it zooms back out unless the zoom was already
+ * weapons, zooms in through Playerai_ToggleForceMarker_WeaponaiUpdateheldfire; when aiming stops it zooms back out unless the zoom was already
  * cancelled; then the default action for the player's state starts unless Weaponai_TryRequestFiringState handled the
  * request or the actor is flagged 0x400. Adapted from Weaponai_TryEnterAlternateStateEight with the aiming state.
  */

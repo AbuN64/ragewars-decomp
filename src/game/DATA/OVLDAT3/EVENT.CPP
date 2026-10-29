@@ -3,7 +3,7 @@
 #include "sdk/BUF16B.H"
 #include "TYPES.H"
 
-/* ROM-grounded data: src/rw_pool_802AFE30_CD280_us_rev1.c */
+/* ROM-grounded data: src/g_audio_CentsToPitchRatioConstantWords_Event.c */
 const unsigned int g_audio_CentsToPitchRatioConstantWords[2] = {
     0x3F800000, 0x3F8012EF,
 };

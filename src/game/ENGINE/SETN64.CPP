@@ -179,12 +179,12 @@ void SetN64_RunGameLoop(GameSession *session) {
     Note_AllocateScratchBuffer();
     Tsmos_InitFrontendOnce();
     SmXlate_SwitchScreen(2);
-    D_801428D8 = 3;
-    D_8014AD94 = 0;
-    D_8014ADA0 = 0;
-    D_80146D60 = 0;
-    D_8014AD9C = 1;
-    D_80142CAC = 0;
+    g_frontendEntryState = 3;
+    g_pakScanActive = 0;
+    g_pakRecheckRequested = 0;
+    g_pakRequestLatched = 0;
+    g_pakUsable = 1;
+    g_pakProbeRequested = 0;
     Control_EnableAllControllerPaks();
     gameStatus()->transitionActive = 0;
     SetN64_BeginModeTransition(session, 0);
@@ -240,13 +240,13 @@ extern s32 g_lightingBufferIndex;
 
 #include "COMMON/VIDEO_DIMENSIONS.H"
 /* Starts the frame display list in the current ring buffer: segment 0, the two setup lists, the depth image, a
- * full-screen viewport (SCREEN_WD x SCREEN_HT) in D_80142C40[g_lightingBufferIndex] and a full-screen scissor. */
+ * full-screen viewport (SCREEN_WD x SCREEN_HT) in g_fullScreenViewports_Setn64[g_lightingBufferIndex] and a full-screen scissor. */
 void SetN64_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;
     g_displayListCursor = g_gameSession.ring.current->commands;
     gSPSegment(g_displayListCursor++, 0, 0);
-    gSPDisplayList(g_displayListCursor++, &D_800CBCC0);
-    gSPDisplayList(g_displayListCursor++, &D_800CBCF0_de);
+    gSPDisplayList(g_displayListCursor++, &g_cameraViewDisplayListFirst);
+    gSPDisplayList(g_displayListCursor++, &g_cameraViewDisplayListSecond_de);
     viewport = &g_fullScreenViewports[g_lightingBufferIndex];
     gDPSetDepthImage(g_displayListCursor++, g_depthImageBuffer);
     viewport->vscale[0] = SCREEN_WD * 2;

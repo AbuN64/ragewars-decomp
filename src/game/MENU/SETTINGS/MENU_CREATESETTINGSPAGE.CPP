@@ -13,7 +13,7 @@ struct MenuFadeWidget;
 struct MenuResourceWidget;
 extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern OptionsCommitContext *g_optionsPage;
-/* Localized label pointers for the two option lists (rev1 D_auto_800D74AC..B0, D_800D2134..213C). */
+/* Localized label pointers for the two option lists (rev1 D_auto_800D74AC..B0, g_optionsResolutionFirstChoiceLabels..213C). */
 extern u8 *g_optionsSecondListPrimaryLabels[1];
 extern u8 *g_optionsSecondListSecondaryLabels;
 extern u8 *g_optionsSecondListTertiaryLabels;

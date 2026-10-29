@@ -23,5 +23,5 @@ unsigned char g_PlayerTrailingBytesBlock3[8] = { 0x08, 0x00, 0x95, 0x00, 0x00, 0
 
 /* 800C7C64.CPP */
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80226DD0_C8864_us_rev1.c */
+/* ROM-grounded data: src/literals_Player_BuildPlayerViewTransform.c */
 #endif

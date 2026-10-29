@@ -1,8 +1,8 @@
 #ifndef COMMON_INTEGERSTATE244_H
 #define COMMON_INTEGERSTATE244_H
 struct SharedPlayer;
-#ifndef SPAN_1000_CODE_8022C894_H
-#define SPAN_1000_CODE_8022C894_H
+#ifndef COMMON_INTEGERSTATE244_DECLARATIONS_H
+#define COMMON_INTEGERSTATE244_DECLARATIONS_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -12,7 +12,7 @@ typedef struct PlayerSequenceRunEndStateView PlayerSequenceRunEndStateView;
 
 
 
-extern void func_8022D420_de(void);
+extern void Playerai_NoopRoundEndViewAngles_de(void);
 
 extern void Playerai_SetRunEndFlag(struct SharedPlayer *player);
 
@@ -21,7 +21,7 @@ typedef struct PlayerSequenceRunEndActorView PlayerSequenceRunEndActorView;
 
 extern void Player_AimPreviousPositionAtReset(void *aimPlayerState);
 
-extern void func_8022D254_de(void);
+extern void Player_EmptyHandlerAfterResetStunAndReleaseHandles_de(void);
 
 
 extern float g_playerLateralLeapVerticalSpeed;
@@ -33,7 +33,7 @@ extern float g_playerLateralLeapVerticalSpeed;
 extern float g_playerRunEndTransitionDelay;
 
 
-extern void func_8022D49C_de(void);
+extern void Playerai_NoopShortSequenceWaitFirst_de(void);
 
 extern float g_playerShortSequenceWaitLimit;
 
@@ -68,10 +68,10 @@ extern float g_playerLateralLeapNegativeInputSpeed;
 extern void Player_ClearGlobalFlagBit(void);
 
 
-extern void func_8022D20C_de(void);
+extern void Player_EmptyHandlerAfterAimPreviousPositionAtReset_de(void);
 
 
-extern void func_8022D3F4_de(void);
+extern void Playerai_NoopRoundEndWaitSecond_de(void);
 
 
 
@@ -79,13 +79,13 @@ extern void func_8022D3F4_de(void);
 extern float g_playerRunEndModelScale;
 
 
-extern void func_8022D288_de(void);
+extern void Player_EmptyHandlerAfterResetStunFlags_de(void);
 
-extern void func_8022D4A4_de(void);
+extern void Playerai_NoopShortSequenceWaitSecond_de(void);
 
 
 
-extern void func_8022C8EC_de(void);
+extern void Player_EmptyHandlerAfterStartMovingOnStickInput_de(void);
 
 
 extern float g_playerLateralLeapPositiveInputSpeed;
@@ -94,14 +94,14 @@ struct PlayerStrafeVelocityView;
 typedef struct PlayerStrafeVelocityView PlayerStrafeVelocityView;
 
 
-extern void func_8022C8F4_de(void);
+extern void Player_EmptyHandlerBeforeUpdateGroundMoveState_de(void);
 
 extern void Player_ResetStunFlags(void *actorState);
 
 
 
 
-extern void func_8022D1A0_de(void);
+extern void Player_EmptyHandlerBeforeAimPreviousPositionAtReset_de(void);
 
 struct PlayerSequenceRunEndActorView;
 struct PlayerSequenceRunEndActorView {
@@ -147,9 +147,9 @@ struct PlayerStrafeVelocityView {
 
 extern float g_playerJumpInitialSpeedScale;
 
-extern void func_8022D198_de(void);
+extern void Player_EmptyHandlerAfterResetObjectVelocity_de(void);
 
-extern void func_8022D3EC_de(void);
+extern void Playerai_NoopRoundEndWaitFirst_de(void);
 
 extern void Graphu64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Player_UpdateLeapMotion(s32 player, s32 body);

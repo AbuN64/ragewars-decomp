@@ -19,7 +19,7 @@ struct {
 extern char g_cCharacterSelection_OpenCharacterSelectionScreenEntry[];
 extern char g_character_UpdateCharacterPreviewEntry[];
 extern char g_menu_RenderPlayerCharacterPreviewsEntry[];
-extern char D_00420B80[];
+extern char g_selection_DestroyCharacterSelectionMenuEntry_GSelectionlayouttailusrevone[];
 extern char g_selection_ActivateCharacterSelectionModeEntry[];
 extern char g_selection_HandleCharacterVariantCycleEntry[];
 extern char g_selection_ReturnCharacterEventZeroAEntry[];
@@ -31,7 +31,7 @@ extern char g_selection_ReadSelectionSlotEntry[];
 unsigned int g_eventHandlers_us_rev1[39] = {
     0x00000E07, 0x00000007, (unsigned int)g_selection_ActivateCharacterSelectionModeEntry, 0x00000E08, 0x00000007, (unsigned int)g_character_UpdateCharacterPreviewEntry, 0x0000000A, 0x00000007,
     (unsigned int)g_selection_HandleCharacterVariantCycleEntry, 0x00000E0A, 0x00000007, (unsigned int)g_menu_RenderPlayerCharacterPreviewsEntry, 0x00000E06, 0x00000007, (unsigned int)g_cCharacterSelection_OpenCharacterSelectionScreenEntry, 0x00000E03,
-    0x00000007, (unsigned int)D_00420B80, 0x00000002, 0x00000007, (unsigned int)g_selection_CancelCharacterConfirmationEntry, 0x00000001, 0x00000007, (unsigned int)g_selection_ReadSelectionSlotEntry,
+    0x00000007, (unsigned int)g_selection_DestroyCharacterSelectionMenuEntry_GSelectionlayouttailusrevone, 0x00000002, 0x00000007, (unsigned int)g_selection_CancelCharacterConfirmationEntry, 0x00000001, 0x00000007, (unsigned int)g_selection_ReadSelectionSlotEntry,
     0x00000008, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroAEntry, 0x00000007, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroBEntry, 0x00000005, 0x00000007,
     (unsigned int)g_selection_ReturnCharacterEventZeroCEntry, 0x00000006, 0x00000007, (unsigned int)g_selection_ReturnCharacterEventZeroDEntry, 0x00000000, 0x00000000, 0x00000000,
 };

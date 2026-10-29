@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800E207C.CPP */
+/* FRONTEND_ENCODED_WORDS_BLOCK4.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E207C */
 unsigned int g_FrontendEncodedWordsBlock4[1] = {

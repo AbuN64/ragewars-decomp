@@ -9,7 +9,7 @@ typedef struct TeamMenu TeamMenu;
 
 extern float g_weaponWheelPositiveAnglePeriod;
 
-extern float D_800C22A8_de;
+extern float g_teamMenuFloatConstantDe;
 
 struct Shared_ActorView;
 

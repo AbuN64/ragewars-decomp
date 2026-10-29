@@ -2,7 +2,7 @@
 #define SYSTEM_VIDEO_CONTEXT_VIEWS_H
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-struct RecCode802BA23C {
+struct VideoContextEventView {
     char pad0[2];
     s16 f2;
     char pad4[0xC];

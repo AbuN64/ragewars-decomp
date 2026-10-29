@@ -7,7 +7,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SOUNDINFO.H"
 #include "COMMON/ACTORRECAT5E0.H"
-#include "COMMON/EXTERNS_21.H"
+#include "COMMON/VOLUME_MENU_RESOURCES.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
@@ -22,18 +22,18 @@ extern s32 Menu_CountLineChars(LayeredText *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The menu language byte; read as an array element, which keeps the read after the text store. */
 extern u8 g_languageIndex[];
-extern char D_800EEE20[];
-#define VALUE_TEXT D_800E4154
-#define VALUE_FORMAT D_800EEE20
+extern char g_musicPreviewValueFormat_eu[];
+#define VALUE_TEXT g_musicPreviewValueText_eu
+#define VALUE_FORMAT g_musicPreviewValueFormat_eu
 #else
-#define VALUE_TEXT ((u8 **)&D_800D3DC0)
-#define VALUE_FORMAT D_800DE7B0_de
+#define VALUE_TEXT ((u8 **)&g_musicPreviewValueText)
+#define VALUE_FORMAT g_musicPreviewValueFormat_de
 #endif
 
 s32 Pak_FormatMusicPreview(LayeredText *field) {
     char *text;
     if (g_menuMusicPreviewSelection == 0) {
-        field->text = &D_800D3DBC;
+        field->text = &g_musicPreviewFixedValueText;
     } else {
         field->text = VALUE_TEXT;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -67,7 +67,7 @@ s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Restarts sound: calls SoundElement_DisablePeriodicSound, records what SoundElement_GetMusicPlaybackEnabled returns in g_menuSavedAudioSelection, passes
    g_menuMusicPreviewSelection to SoundElement_SetMusicPlaybackEnabled, calls SoundElement_DisableMusicGainOverride and SoundElement_SetVoiceMixValue with 1, sets g_musicPreviewMenuActive,
-   calls Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and D_451F58.
+   calls Control_ClearMenuControlFlag and then Menu_AllocateMenu with the third argument, the second and g_musicPreviewMenuResource_PakOpenmusicpreviewmenu.
    Returns one. */
 
 s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
@@ -102,8 +102,8 @@ s32 Pak_ToggleOwnerMode(void *unused, struct Holder *holder) {
     return 0;
 }
 
-/* Points a field's text at D_800E6090 when the owner at offset 0x1C of the second argument has its
-   word at 0x5D0 equal to one, and at D_800E60AC otherwise; returns zero, doing nothing without an
+/* Points a field's text at g_ownerModeOneText when the owner at offset 0x1C of the second argument has its
+   word at 0x5D0 equal to one, and at g_ownerModeOtherText otherwise; returns zero, doing nothing without an
    owner. */
 
 s32 Pak_UpdateOwnerModeText(struct PakActionLabelView *field, struct Holder *holder) {
@@ -111,9 +111,9 @@ s32 Pak_UpdateOwnerModeText(struct PakActionLabelView *field, struct Holder *hol
         return 0;
     }
     if (holder->owner->value == 1) {
-        field->text = D_800E6090;
+        field->text = g_ownerModeOneText;
     } else {
-        field->text = D_800E60AC;
+        field->text = g_ownerModeOtherText;
     }
     return 0;
 }

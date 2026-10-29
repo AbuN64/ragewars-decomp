@@ -22,7 +22,7 @@
 #include "COMMON/PLAYER_GETPLAYERINDEX.H"
 #include "COMMON/WEAPON_MARKER_AND_PROFILE_VIEWS.H"
 #include "COMMON/VECTOR4F.H"
-/* func_802301E4_S* are unresolved canonical player/actor/control/attack types. */
+/* AttackTrigger* are unresolved canonical player/actor/control/attack types. */
 
 
 

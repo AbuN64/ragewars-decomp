@@ -1,10 +1,10 @@
 #ifndef DATA_OVLDAT9_FRONTEND_DISPATCHRESIDENTACTOREVENT_DATA_H
 #define DATA_OVLDAT9_FRONTEND_DISPATCHRESIDENTACTOREVENT_DATA_H
-extern char g_packedCodeAddress24_0043639C[];
-extern char g_packedCodeAddress24_00436430[];
-extern char g_packedCodeAddress24_00436468[];
-extern char g_packedCodeAddress24_00436488[];
-extern char g_packedCodeAddress24_00436574[];
-extern char g_packedCodeAddress24_0043657C[];
-extern char g_packedCodeAddress24_0043659C[];
+extern char g_Frontend_CreatePauseConfirmationPackedAddress243[];
+extern char g_Timed_DestroyPauseConfirmationPackedAddress243[];
+extern char g_Timed_SetConfirmationInputModePackedAddress243[];
+extern char g_Timed_FinishPauseConfirmationTransitionPackedAddress243[];
+extern char g_Frontend_ReturnConfirmationEventZeroPackedAddress243[];
+extern char g_Frontend_ConsumeConfirmationEventPackedAddress243[];
+extern char g_Timed_UpdateTimedScreenPackedAddress243[];
 #endif

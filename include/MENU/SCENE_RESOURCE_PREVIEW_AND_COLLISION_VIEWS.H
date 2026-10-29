@@ -108,7 +108,7 @@ struct ItemsSelectionState {
     int selection;
 };
 struct MenuEntryPoolCountView {
-    struct EntryCode8044ACCC entries[4];
+    struct MenuEntryPoolEntry entries[4];
     IntrusiveList free;
     IntrusiveList active;
     s16 count;
@@ -136,7 +136,7 @@ typedef struct CollisionBuildWorld {
     char pad1B300[0x1B40C - 0x1B300];
     s32 group;
 } CollisionBuildWorld;
-struct LevelCode8044ACCC {
+struct SceneLoadResourcesView {
     s32 unk0;
     s32 unk4;
     s32 unk8;

@@ -1,12 +1,12 @@
-#include "DATA/GFXDATA/DATA_800DD730.H"
+#include "DATA/GFXDATA/EVENT_HANDLER_CODE_TARGETS.H"
 #include "include_asm.h"
 #include "DATA/OVLDAT8/G_PIXELFORMATDESCRIPTORS.H"
 
 /* 800E2AD0.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_EventHandlersPointerWords1[18] = {
-    0x00000005, 0x00007530, (unsigned int)g_packedCodeAddress24_00412BF8, 0x00000006, 0x00007530, (unsigned int)g_packedCodeAddress24_00412C40, 0x00000007, 0x00007530,
-    (unsigned int)g_packedCodeAddress24_00412C8C, 0x00000008, 0x00007530, (unsigned int)g_packedCodeAddress24_00412CD4, 0x00000E03, 0x00007530, (unsigned int)g_packedCodeAddress24_00412D20, 0x00000000,
+    0x00000005, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId5, 0x00000006, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId6, 0x00000007, 0x00007530,
+    (unsigned int)g_eventHandlerCodeTargetId7, 0x00000008, 0x00007530, (unsigned int)g_eventHandlerCodeTargetId8, 0x00000E03, 0x00007530, (unsigned int)g_eventHandlerCodeTargetIdE03, 0x00000000,
     0x00000000, 0x00000000,
 };
 #endif
@@ -93,6 +93,6 @@ char s_GPixelformatdescriptorsALBOWTText[16] =
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E2AD0_unclaimed_E3718_unclaimed_E3E70 */
 unsigned int g_GPixelformatdescriptorsPointerWords1[4] = {
-    (unsigned int)g_packedCodeAddress24_00415CA0, 0x00000000, 0x00000089, 0x0000008A,
+    (unsigned int)g_pixelFormatPointerWordsCodeTarget, 0x00000000, 0x00000089, 0x0000008A,
 };
 #endif

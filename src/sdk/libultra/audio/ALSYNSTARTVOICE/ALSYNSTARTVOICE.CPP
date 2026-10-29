@@ -7,7 +7,7 @@
 #include "sdk/libgultra/ALSYNSTARTVOICE.H"
 #include "sdk/libultra/audio/synthesizer.h"
 
-/* code_802B8370_4.c */
+/* alSynStartVoice_Alsynstartvoice.c */
 void alSynStartVoice(void *synth, void *voice, s32 waveTable) {
     s32 updateSampleTime;
     void *controlUpdate;

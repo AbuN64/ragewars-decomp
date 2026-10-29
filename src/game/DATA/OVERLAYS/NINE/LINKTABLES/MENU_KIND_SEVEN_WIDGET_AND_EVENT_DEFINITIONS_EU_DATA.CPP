@@ -1,6 +1,6 @@
 
 #if defined(VERSION_EU)
-extern char g_packedCodeAddress24_0041F6E0[];
+extern char g_Selection_CharacterSelectionEvent0E06HandlerPackedAddress24[];
 extern char g_Character_UpdateCharacterPreviewPackedAddress24[];
 extern char g_Menu_RenderPlayerCharacterPreviewsPackedAddress24[];
 extern char g_Selection_DestroyCharacterSelectionMenuPackedAddress24[];
@@ -32,7 +32,7 @@ struct {
         0x00000E08, 0x00000007, (unsigned int)g_Character_UpdateCharacterPreviewPackedAddress24,
         0x0000000A, 0x00000007, (unsigned int)g_Selection_HandleCharacterVariantCyclePackedAddress24,
         0x00000E0A, 0x00000007, (unsigned int)g_Menu_RenderPlayerCharacterPreviewsPackedAddress24,
-        0x00000E06, 0x00000007, (unsigned int)g_packedCodeAddress24_0041F6E0,
+        0x00000E06, 0x00000007, (unsigned int)g_Selection_CharacterSelectionEvent0E06HandlerPackedAddress24,
         0x00000E03, 0x00000007, (unsigned int)g_Selection_DestroyCharacterSelectionMenuPackedAddress24,
         0x00000002, 0x00000007, (unsigned int)g_Selection_CancelCharacterConfirmationPackedAddress24,
         0x00000001, 0x00000007, (unsigned int)g_Selection_ReadSelectionSlotPackedAddress24,

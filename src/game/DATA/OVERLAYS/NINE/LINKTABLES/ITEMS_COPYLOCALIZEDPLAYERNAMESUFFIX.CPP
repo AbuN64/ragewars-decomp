@@ -65,7 +65,7 @@ unsigned int k_ItemsCopylocalizedplayernamesuffixEncodedWords[124] = {
 extern char Player_FreeAlternatePlayerSettingsScreen_Address[];
 extern char Frontend_HandleProfileResetConfirm_Address[];
 extern char g_Frontend_FreeEquipmentScreenPackedAddress24[];
-u32 data_writable_800F3660[404] = {
+u32 g_itemsCopylocalizedplayernamesuffixWritableWordsDe[404] = {
     0x00000005, 0x00436AF8, 0x0000000A, 0x00000005, 0x00436BAC, 0x00000002,
     0x00000005, 0x00436C18, 0x00000001, 0x00000005, 0x00436BB4, 0x00000008,
     0x0000005C, 0x00436C54, 0x00000007, 0x0000005C, 0x00436D0C, 0x00000000,

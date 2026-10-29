@@ -45,18 +45,18 @@ void SetN64_OnMode5DrawComplete(s32 session) {
 
 void SetN64_InitializeFrontendScreenState(GameSession *gameSession) {
     g_introSelectedItem = -1;
-    D_80146D70 = 0;
+    g_introSelectionState = 0;
     Frontend_RequestScreenMode(0);
     g_frontendScreenInitialized = 1;
-    D_80146D60 = 1;
-    D_800E28CC = 1;
-    D_8014AD94 = 0;
+    g_pakRequestLatched = 1;
+    g_pakStartButtonLatched = 1;
+    g_pakScanActive = 0;
     gameSession->timer = g_introInitialFadeTimer;
     SmXlate_SwitchScreen(0x1D);
 }
 
 void SetN64_ExitSessionAndDisablePaks(void *session) {
-    if (D_8014ADA0 != 0) {
+    if (g_pakRecheckRequested != 0) {
         SetN64_SetTransitionTarget(session, 1);
         Control_DisableAllControllerPaks();
     }

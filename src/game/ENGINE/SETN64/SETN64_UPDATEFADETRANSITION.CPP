@@ -40,7 +40,7 @@ void SetN64_DrawSessionFade(struct GameSession *session) {
     alpha = 0xFF;
     if (!(value < 0)) {
         alpha = 0;
-        if (!((&D_800CA560)[1] < value)) {
+        if (!((&g_systemTimeFrameRate)[1] < value)) {
             alpha = 0xFF;
             if (!(value < 0)) {
                 alpha = ~(s32)(value * g_sessionFadeAlphaScale);

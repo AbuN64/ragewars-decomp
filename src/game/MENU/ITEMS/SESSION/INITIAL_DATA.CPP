@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
-/* ROM-grounded data: src/rw_pool_8043EF1C_us_rev1_E2F90_us_rev1.c */
+/* ROM-grounded data: src/k_initialDataFloatConstantWords_InitialData.c */
 const unsigned int k_initialDataFloatConstantWords[1] = {
     0x42F00000,
 };

@@ -8,20 +8,20 @@ const unsigned int k_gskySetshakechannelDataFloatConstantWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80239D00_C9258_us_rev1.c */
+/* ROM-grounded data: src/k_gskySetshakechannelDataFloatConstantWordsBlock3_GskySetshakechannelData.c */
 const unsigned int k_gskySetshakechannelDataFloatConstantWordsBlock3[1] = {
     0x3DCCCCCD,
 };
 #endif
 
 /* 800C865C.CPP */
-/* ROM-grounded data: src/rw_pool_80239D1C_C925C_us_rev1.c */
+/* ROM-grounded data: src/k_gskySetshakechannelDataFloatConstantWordsBlock1_GskySetshakechannelData.c */
 const unsigned int k_gskySetshakechannelDataFloatConstantWordsBlock1[1] = {
     0x3C8EFA36,
 };
 
 /* 800C8660.CPP */
-/* ROM-grounded data: src/rw_pool_80239D90_C9260_us_rev1.c */
+/* ROM-grounded data: src/k_GskySetshakechannelOneWords_GskySetshakechannelData.c */
 const unsigned int k_GskySetshakechannelOneWords[1] = {
     0x3F800000,
 };
@@ -34,7 +34,7 @@ const unsigned int k_gskySetshakechannelDataFloatConstantWordsBlock2[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80239DE8_C9264_us_rev1.c */
+/* ROM-grounded data: src/k_gskySetshakechannelDataFloatConstantWordsBlock4_GskySetshakechannelData.c */
 const unsigned int k_gskySetshakechannelDataFloatConstantWordsBlock4[1] = {
     0x3DCCCCCD,
 };

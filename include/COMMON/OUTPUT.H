@@ -39,7 +39,7 @@ struct Ray {
     f32 nearest;
 };
 
-extern float D_800C87C0;
+extern float g_collisionSegmentPolygonSlackFactor;
 
 
 
@@ -143,9 +143,9 @@ typedef struct CapsuleSweep CapsuleSweep;
 
 struct World;
 
-extern float D_800D0648;
+extern float g_collisionSlackThreshold;
 
-extern float D_800C36D8_de;
+extern float g_collisionContactSlackFactor;
 
 
 struct Polygon;
@@ -207,12 +207,12 @@ struct CollisionPolygonNormalView {
     Triple normal;
 };
 
-struct SegmentCode8023A284;
-typedef struct SegmentCode8023A284 SegmentCode8023A284;
+struct CollisionSegmentSurface;
+typedef struct CollisionSegmentSurface CollisionSegmentSurface;
 
 
-struct SegmentCode8023A284;
-struct SegmentCode8023A284 {
+struct CollisionSegmentSurface;
+struct CollisionSegmentSurface {
     char pad0[0x40];
     Field_f32_10 *limits;
     f32 x0;

@@ -48,7 +48,7 @@ typedef struct Track Track;
 
 
 
-extern void func_8025C8D0_de(void);
+extern void SoundVoicePool_ResetNodeNoOp(void);
 
 extern int g_lastStoppedPoolSoundHandle;
 

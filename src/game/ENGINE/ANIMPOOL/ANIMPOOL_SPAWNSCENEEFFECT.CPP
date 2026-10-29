@@ -11,7 +11,7 @@
 
 /* Spawns an effect in a scene when effects are enabled and a count is given: resolves a missing effect id
  * from the variant (Scene_FindModelIdIndex, giving up when unknown) and a default variant from the id
- * (Scene_GetModelIdAtIndex), takes a node from the scene's free list when allowed (always with D_8013B290, otherwise
+ * (Scene_GetModelIdAtIndex), takes a node from the scene's free list when allowed (always with visibilityEnabled_AnimpoolSpawnsceneeffect, otherwise
  * while fewer than three are active), moves it to the active list and attaches the counted reference, then
  * initialises it through Gobjinst_InitializeActor with the position, scale, direction and colour vectors and starts it
  * with Gobjinst_DispatchActorTypeUpdate. Returns the effect or 0. */
@@ -50,13 +50,13 @@ static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
 }
 
 /* Culls a scene's active effects against the view box: effects whose bounds overlap the box ending at
- * D_801031F8 + 4 are passed to Scene_RegisterActorInSceneLists and, when idle, drop their counted reference; the others are
+ * g_cameraVolumeBoundsMinZ + 4 are passed to Scene_RegisterActorInSceneLists and, when idle, drop their counted reference; the others are
  * reset, release their reference, and are unlinked from the active list (List_RemoveIntrusive) and returned to
  * the free list (List_AppendIntrusive). */
 
 
 
-extern f32 D_801031F8;
+extern f32 g_cameraVolumeBoundsMinZ;
 
 extern void Scene_RegisterActorInSceneLists(s32, EffectAnimPoolUpdateSceneEffects *);
 
@@ -103,7 +103,7 @@ void Animpool_UpdateSceneEffects(struct CAnimPool *scene, s32 world) {
         return;
     }
     do {
-        max = (&D_801031F8 + 1);
+        max = (&g_cameraVolumeBoundsMinZ + 1);
     next_effect:
         next = effect->next;
         if (overlaps(effect, max)) {

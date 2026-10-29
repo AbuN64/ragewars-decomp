@@ -5,35 +5,35 @@
 typedef struct GameplaySoundEntry { s32 *sound; s32 hook; } GameplaySoundEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern GameplaySoundEntry g_gameplayEventMessageTable[];
-extern f32 D_800D3F58, D_800C4DE0_eu;
+extern f32 g_gameplaySoundTable, g_triggerSoundWeightEu;
 #else
-extern GameplaySoundEntry D_800D3F58[];
-extern f32 D_800C1A6C_de, D_800C4B30_de;
+extern GameplaySoundEntry g_gameplaySoundTable[];
+extern f32 k_gameplaySoundWeight_de, k_triggerSoundWeight_de;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #define gameplaySoundValue(index) (g_gameplayEventMessageTable[index].sound[g_frontendScreenStatus.settings.language])
 #else
-#define gameplaySoundValue(index) (*D_800D3F58[index].sound)
+#define gameplaySoundValue(index) (*g_gameplaySoundTable[index].sound)
 #endif
 static inline s32 gameplaySoundHook(s32 index) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     return g_gameplayEventMessageTable[index].hook;
 #else
-    return D_800D3F58[index].hook;
+    return g_gameplaySoundTable[index].hook;
 #endif
 }
 static inline f32 gameplaySoundWeight(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    return D_800D3F58;
+    return g_gameplaySoundTable;
 #else
-    return D_800C1A6C_de;
+    return k_gameplaySoundWeight_de;
 #endif
 }
 static inline f32 triggerSoundWeight(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    return D_800C4DE0_eu;
+    return g_triggerSoundWeightEu;
 #else
-    return D_800C4B30_de;
+    return k_triggerSoundWeight_de;
 #endif
 }
 #endif

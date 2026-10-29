@@ -158,12 +158,12 @@ unsigned int k_VhandlerHandleresourcepagerequestEncodedWords[575] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800FFB50[1] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWordSingle[1] = {
     0x3E300DCC,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800FFB50[1] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWordSingle[1] = {
     0x03000004,
 };
 #endif
@@ -237,12 +237,12 @@ unsigned int g_VhandlerHandleresourcepagerequestEncodedWords[179] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800FFE20[3] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWordsTriple[3] = {
     0x2EDF001D, 0x83F4FCA0, 0x0302D211,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800FFE20[3] = {
+unsigned int g_VhandlerHandleresourcepagerequestEncodedWordsTriple[3] = {
     0x32C41734, 0xCC17020A, 0x5CD81702,
 };
 #endif

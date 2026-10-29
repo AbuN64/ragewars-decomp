@@ -1,13 +1,13 @@
 
 
-/* DATA_800DCBB4.CPP */
+/* g_FrontendUpdatetimedscreenEncodedWords_FrontendUpdatetimedscreen.CPP */
 #if defined(VERSION_US)
 unsigned int g_FrontendUpdatetimedscreenEncodedWords[4] = {
     0x5241585F, 0x56494354, 0x4F52595F, 0x3D888889,
 };
 #endif
 
-/* DATA_800DDF04.CPP */
+/* g_FrontendUpdatetimedscreenEncodedWordsBlock1_FrontendUpdatetimedscreen.CPP */
 #if defined(VERSION_DE)
 unsigned int g_FrontendUpdatetimedscreenEncodedWordsBlock1[3] = {
     0x25640000, 0x25642525, 0x00000000,

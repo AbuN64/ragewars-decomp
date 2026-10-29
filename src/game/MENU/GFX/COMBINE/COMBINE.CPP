@@ -75,5 +75,5 @@ void Combine_ConfigurePrimitiveRenderFlags(s32 flags) {
     }
     g_combineRenderStateEnabled = 1;
     gDPSetRenderMode(g_displayListCursor++, cycle1, cycle2);
-    D_80153F60 = groups;
+    g_combineRenderSwitches = groups;
 }

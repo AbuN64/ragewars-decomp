@@ -292,12 +292,12 @@ unsigned int k_LibsnEnumeratememoryrangesEncodedWords[1055] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800F2D00[3] = {
+unsigned int g_libsnHostMemoryRanges_LibsnEnumeratememoryrangesData[3] = {
     0x0000018F, 0x00000190, 0x00000192,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800F2D00[3] = {
+unsigned int g_libsnHostMemoryRanges_LibsnEnumeratememoryrangesData[3] = {
     0x21240300, 0x1DAC4300, 0x588FC400,
 };
 #endif

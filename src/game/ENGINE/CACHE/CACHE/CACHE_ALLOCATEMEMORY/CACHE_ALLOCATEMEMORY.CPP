@@ -25,6 +25,6 @@ unsigned short k_CacheAllocatememoryEncodedHalfwordsBlock1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_8025305C_C9B98_us_rev1.c */
+/* ROM-grounded data: src/alloc_text_us_rev1.c */
 const char s_allocText[6] = "alloc";
 #endif

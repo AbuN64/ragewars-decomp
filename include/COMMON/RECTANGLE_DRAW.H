@@ -4,11 +4,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 /* Five cached flag groups written together by Combine_ConfigurePrimitiveRenderFlags. */
-extern RecGobjinstSampleBoneTranslation D_80153F60;
+extern RecGobjinstSampleBoneTranslation g_combineRenderSwitches;
 extern s32 g_combineTextureTileMode;
 extern s32 g_combineTextureRenderMode;
 extern s32 g_combineRectangleColor;
-extern s32 D_800DF290;
+extern s32 g_combineTexturedRectangleState;
 
 void Combine_DrawClippedGradientQuad(f32 x, f32 y, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
 void N64Eng_GetClipBounds(s32 *left, s32 *top, s32 *right, s32 *bottom);

@@ -114,11 +114,11 @@ u32 Audio_InitDecodeStream(s32 *source, u32 divisor, s32 *first)
     state->cursor = (s32 *)state->cursor + 1;
     state->third = *(s32 *)state->cursor;
     state->cursor = (s32 *)state->cursor + 1;
-    D_800D54BE = 0;
+    g_audioDecodeFrameHeaderRead = 0;
     g_audioTransformTablesInitialized = 0;
     gPackedBitsLeft = 0;
-    D_800D54BA = 0;
-    D_800D54BC = 0;
+    g_audioDecodeBitBuffer = 0;
+    g_audioDecodeBitsLeft = 0;
     *first = state->first;
     return (u64)((s64)state->count * 0xF424000) / divisor;
 }

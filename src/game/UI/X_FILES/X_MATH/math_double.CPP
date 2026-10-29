@@ -13,7 +13,7 @@ extern const f64 k_xmathScaleExponentDenormalUnit;
 /* Scales a double by 2^shift (ldexp): adds shift to the biased exponent in place, returns zeros and infinities unchanged, saturates to the
    k_xmathScaleExponentOverflow constant on overflow, flushes to zero below 2^-53 and builds denormal results through a recursive multiply. */
 f64 ScaleDoubleExponent(f64 value, s32 shift) {
-    DoubleBits_8029ECB0 *bits = (DoubleBits_8029ECB0 *)&value;
+    DoubleBits *bits = (DoubleBits *)&value;
     u32 high = bits->w.hi;
     s32 exponent;
     u32 current;
@@ -65,7 +65,7 @@ overflow:
 /* Splits a double into a mantissa in [0.5, 1) and a power of two (frexp): rewrites the biased exponent to 0x3FE and
    returns the old one minus 0x3FE through exponent; zero returns 0 with exponent 0. */
 static inline f64 Frexp(f64 value, s32 *exponent) {
-    DoubleBits_8029ECB0 bits;
+    DoubleBits bits;
 
     if (value != 0.0) {
         bits.d = value;
@@ -113,7 +113,7 @@ f64 NaturalLogDouble(f64 value) {
     return (exponent * -2.1219444170128557e-4 + x) + exponent * 0.693359375;
 }
 
-/* Raises x to the power y: 1 for a zero exponent, 0 or infinity for a zero base, exp(y log x) through NaturalLogDouble (log) and an inline exponential scaled by func_8029ABA0_de (ldexp) for a positive base, and for a negative base the same magnitude signed by the parity of an integer exponent, or negated when the exponent's reciprocal is odd, otherwise negative infinity. */
+/* Raises x to the power y: 1 for a zero exponent, 0 or infinity for a zero base, exp(y log x) through NaturalLogDouble (log) and an inline exponential scaled by ScaleDoubleExponent_XmathEvaluateexponentialdouble (ldexp) for a positive base, and for a negative base the same magnitude signed by the parity of an integer exponent, or negated when the exponent's reciprocal is odd, otherwise negative infinity. */
 
 
 

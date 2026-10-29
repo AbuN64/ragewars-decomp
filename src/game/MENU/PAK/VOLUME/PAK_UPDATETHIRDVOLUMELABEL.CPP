@@ -18,7 +18,7 @@
 #define VOLUME_BYTE g_gameSettings.volume[2]
 #endif
 /* Shows one of three fixed volume texts for steps zero, fifteen and minus
- * sixteen from the option byte D_801462E2. Other steps are formatted into
+ * sixteen from the option byte g_soundEffectsVolumeOption_PakFormatvolumeslotone. Other steps are formatted into
  * the alternate text with the positive or negative format. */
 
 

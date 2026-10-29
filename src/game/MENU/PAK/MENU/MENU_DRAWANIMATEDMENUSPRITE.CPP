@@ -12,7 +12,7 @@
 #include "SYSTEM/LIST.H"
 #include "GFX/TEXT/ONSCREEN_DRAWSCALEDMASKEDTILEGRID.H"
 
-/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through List_RemoveIntrusive and releasing its resource through Cache_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
+/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through List_RemoveIntrusive and releasing its resource through Cache_ReleaseResource. Adapted from Items_DestroyMenu_MenuDrawanimatedmenusprite with its body wrapped as an inline helper called in a loop over the list head changed. */
 
 
 
@@ -103,7 +103,7 @@ Menu_GetGermanDynamicItemText
     Menu_MeasureLine(target, scale, scale);
 }
 
-/* Clears the two words at offsets 0x1C8 and 0x1CC of an object; func_80442B40_de, which follows it,
+/* Clears the two words at offsets 0x1C8 and 0x1CC of an object; Menu_StartMenuPulse_MenuDrawanimatedmenusprite, which follows it,
    tests the word at 0x1CC. */
 
 
@@ -113,7 +113,7 @@ void Menu_StopMenuPulse(struct Object1C8 *object) {
 }
 
 /* Starts a one-shot state: when the word at offset 0x1CC is clear it sets it and clears the word
-   at 0x1C8; func_80442B34_de clears both. */
+   at 0x1C8; Menu_StopMenuPulse_MenuDrawanimatedmenusprite clears both. */
 
 
 void Menu_StartMenuPulse(struct Object1C8 *object) {

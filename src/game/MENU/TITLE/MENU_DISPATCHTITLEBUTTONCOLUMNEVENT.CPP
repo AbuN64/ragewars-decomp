@@ -28,12 +28,12 @@ s32 Menu_DispatchTitleButtonOffsetEvent(void *widget, s32 eventId, s32 eventData
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_titleButtonEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }
@@ -49,16 +49,16 @@ unsigned int func_804389A8_eu_x_padding_1289A8[2] = {
 #if defined(VERSION_DE)
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_titleButtonEventTable, an actor kind at g_titleButtonEventActorKinds and a handler at g_titleButtonEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80437B98)(void *, s32, s32, s32, s32);
+typedef s32 (*TitleButtonColumnEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_titleButtonColumnEventIds[];
 
 extern FieldRow g_titleButtonColumnEventActorKinds[];
 
-extern Handler80437B98 g_titleButtonColumnEventHandlers;
+extern TitleButtonColumnEventHandler g_titleButtonColumnEventHandlers;
 
 s32 Menu_DispatchTitleButtonColumnEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
-    Handler80437B98 *entry;
+    TitleButtonColumnEventHandler *entry;
     MenuActorInputView *actor;
     s32 index;
     s32 wildcard;

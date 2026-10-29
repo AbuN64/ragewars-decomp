@@ -8,13 +8,13 @@ void alHeapInit(void *heap, u8 *base, s32 byteLength) {
     s32 alignmentOffset;
     alignmentOffset = 0x10 - ((s32) base & 0xF);
     if (alignmentOffset != 0x10) {
-        (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_0) = (s32) (base + alignmentOffset);
+        (((struct MenuPlayerScissorRect *) ((s8 *) heap))->left) = (s32) (base + alignmentOffset);
     } else {
-        (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_0) = (s32) base;
+        (((struct MenuPlayerScissorRect *) ((s8 *) heap))->left) = (s32) base;
     }
-    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_8) = byteLength;
-    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_C) = 0;
-    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_4) = (s32) (((struct MenuPlayerScissorRect *) ((s8 *) heap))->field_0);
+    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->right) = byteLength;
+    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->bottom) = 0;
+    (((struct MenuPlayerScissorRect *) ((s8 *) heap))->top) = (s32) (((struct MenuPlayerScissorRect *) ((s8 *) heap))->left);
 }
 #endif
 

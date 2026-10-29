@@ -68,7 +68,7 @@ extern s32 g_menuOptionBit1EnabledText;
 extern s32 g_menuOptionBit1DisabledText;
 
 /* Updates the option item's flag bit and selects its associated text pointer. */
-s32 Option_RefreshOptionBit1Item(struct Func8043D458Arg *optionItem) {
+s32 Option_RefreshOptionBit1Item(struct MenuOptionLabel *optionItem) {
     if (g_menuOptionAvailabilityFlags & 2) {
         optionItem->flags |= 0x01000000;
     } else {

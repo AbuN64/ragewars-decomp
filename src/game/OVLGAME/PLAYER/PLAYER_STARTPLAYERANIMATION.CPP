@@ -22,7 +22,7 @@ void Player_ReleaseObjectHandles(struct ItemsHandleOwner *object) {
     object->second = 0;
 }
 
-/* Stores the second argument at 0x5E0 of the actor, calls Playerai_InitializePlayerHealth and Player_ResetPlayerWeapons on it, then starts sound D_8011FE88 for it through Scene_ChangeInstanceModel with 0x66, g_fragTagModelId or its type's entry of g_characterModelIds chosen by the options g_motionVisibilitySettings and g_resultExitPending.
+/* Stores the second argument at 0x5E0 of the actor, calls Playerai_InitializePlayerHealth and Player_ResetPlayerWeapons on it, then starts sound g_world_AchieveUpdateresultsscreen for it through Scene_ChangeInstanceModel with 0x66, g_fragTagModelId or its type's entry of g_characterModelIds chosen by the options g_motionVisibilitySettings and g_resultExitPending.
    Adapted from Playerai_UpdateCharacterModel with a leading field store and two calls added and the g_gameSettings offsets changed to the symbols g_motionVisibilitySettings and g_resultExitPending. */
 
 
@@ -50,7 +50,7 @@ void Player_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
     } else if (g_resultExitPending != 0 && ((Shared_ControlView *)animatedPlayer->profile)->transientFlag != 0) {
         modelResource = g_fragTagModelId;
     } else {
-        modelResource = g_characterModelIds[((Shared_struct_D_800D34C0_0x18 *)animatedPlayer->definition)->unkC];
+        modelResource = g_characterModelIds[((Shared_PickupAmmoDefinition *)animatedPlayer->definition)->unkC];
         animatedPlayer->playerId = ((Shared_ControlView *)animatedPlayer->profile)->playerId;
     }
     ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, animatedPlayer, modelResource, animatedPlayer->animation);

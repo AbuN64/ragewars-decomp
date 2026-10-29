@@ -16,7 +16,7 @@
 
 /* Handles the menu message Menu_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D9: when
    Menu_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data g_playerViewRenderContext, releases
-   D_8011FE88, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
+   g_world_AchieveUpdateresultsscreen, restarts Cache_SetResourceActivityState when Cache_GetResourceActivityState reports it idle, sets the menu stage to 8
    and sends Random_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1DA sends 11 when Menu_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Menu_ReturnToPreviousScreen. Returns zero. */
@@ -33,7 +33,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
     switch (Menu_GetFocusedElementId()) {
     default:
         return 0;
-    case MENU_804291A8_473:
+    case MATCH_MENU_ELEMENT_LOAD_LEVEL_RESOURCES:
         if (Menu_GetPreviousScreenOwner(0) == 0x16) {
             Pools_ResetActorPools(&g_playerViewRenderContext.object, 0);
             Player_InitializePlayerPool(&g_playerViewRenderContext, 0, 0);
@@ -64,7 +64,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
             Random_SetMenuChoiceResult(3);
         }
         break;
-    case MENU_804291A8_474:
+    case MATCH_MENU_ELEMENT_RETURN_PREVIOUS_OWNER:
         if (Menu_GetPreviousScreenOwner(0) == 11) {
             Random_SetMenuChoiceResult(11);
         } else {
@@ -91,16 +91,16 @@ s32 Frontend_CloseMatchMenu(void) {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_matchMenuEventIds, an actor kind at g_matchMenuEventKinds and a handler at g_matchMenuEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8042931C)(void *, s32, s32, s32, s32);
+typedef s32 (*MatchMenuEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_matchMenuEventIds[];
 extern FieldRow g_matchMenuEventKinds[];
-extern Handler8042931C g_matchMenuEventHandlers;
+extern MatchMenuEventHandler g_matchMenuEventHandlers;
 
 struct MenuActorInputView;
 
 s32 Frontend_DispatchMatchMenuEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler8042931C *entry;
+    MatchMenuEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

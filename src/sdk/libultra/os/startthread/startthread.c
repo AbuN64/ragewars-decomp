@@ -5,7 +5,7 @@
 #include "COMMON/CTX.H"
 #include "TYPES.H"
 #include "COMMON/VERSION_CALLS.H"
-#include "COMMON/EXTERNS_5.H"
+#include "COMMON/__OSDISPATCHTHREAD.H"
 #include "sdk/os.h"
 
 /* 802C0840_3.CPP */
@@ -16,7 +16,7 @@ unsigned char g_StartthreadTrailingBytes[12] = { 0x10, 0x40, 0x00, 0x09, 0x00, 0
 /* startthread.c */
 extern ThreadNode *g_osRunningThread;
 
-extern void func_802BC36C_de(ThreadNode **queue, ThreadNode *node);
+extern void __osEnqueueAndYield(ThreadNode **queue, ThreadNode *node);
 void osStartThread(void *thread) {
     ThreadNode *threadStorage = (ThreadNode *)thread;
     ThreadNode **sentinel;
@@ -50,7 +50,7 @@ state_done:
         __osDispatchThread();
     } else if (g_osRunningThread->priority < (*(ThreadNode **)&g_osRunnableThreadQueue)->priority) {
         g_osRunningThread->state = 2;
-        func_802BC36C_de((ThreadNode **)&g_osRunnableThreadQueue, g_osRunningThread);
+        __osEnqueueAndYield((ThreadNode **)&g_osRunnableThreadQueue, g_osRunningThread);
     }
     __osRestoreInt(token);
 }

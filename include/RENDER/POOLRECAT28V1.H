@@ -18,7 +18,7 @@ struct RumbleSpatialPoolView {
 };
 
 
-struct NodeCode8028469C;
+struct RumbleEffectNode;
 struct RumbleNodePoolView;
 /* RumbleNodePoolView is shared with ControllerProfile in ITEMRECAT20V1.H. */
 

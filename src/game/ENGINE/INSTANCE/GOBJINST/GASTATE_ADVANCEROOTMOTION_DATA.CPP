@@ -39,7 +39,7 @@ extern char g_actorRotationBlendAndResourceTuning;
  * placed from its local point through the object's matrix when it names no bone, otherwise through its
  * bone matrix (or at the object's position when it has none), and for models 0x44E, 0x451 and 0x453 an
  * effect flagged 4 fires only if its bone's hit box shares the object's mask; each fired event spawns its
- * effect through func_80265E10_de and is counted in g_actorRootMotionSampleCount. */
+ * effect through Events_DeliverContactEffect_ActorAnimationRootAndEventOperations and is counted in g_actorRootMotionSampleCount. */
 
 extern CROMEventEntry *Gastate_GetAnimationEventEntries(void *);
 
@@ -237,7 +237,7 @@ void Gobjinst_DispatchAnimationIntervalEvents(char *obj, void *anim, f32 from, f
                         }
                         table = SetN64_GetPackSection(*resource, 5);
                     }
-                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->value) + 0x74)))->value & ((struct RootMotionActorView *) obj)->unk_17C;
+                    fire = ((struct AnimationEventMaskView *) (((char *) table) + ((events[i].bone * table->field_0) + 0x74)))->value & ((struct RootMotionActorView *) obj)->unk_17C;
                 }
             masked:
                 if (fire == 0) {
@@ -514,5 +514,5 @@ void Gobjinst_ApplyTimedMatrixWobble(s32 time, s32 flags, f32 *matrix) {
 /* 800C8710_23.CPP */
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802472F0_C9638_us_rev1.c */
+/* ROM-grounded data: src/AdvanceRootMotionEmptyPoolSection.c */
 #endif

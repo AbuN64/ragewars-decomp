@@ -160,7 +160,7 @@ struct ItemsSelectionState;
 
 
 struct MenuEntryPoolCountView;
-struct EntryCode8044ACCC {
+struct MenuEntryPoolEntry {
     char pad0[0x228];
 };
 

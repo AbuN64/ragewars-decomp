@@ -53,7 +53,7 @@ s32 Nav_AdvancePickupRouteSelection(Selection *sel)
 }
 
 /* 80208000_14.CPP */
-/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route g_navigationGraph (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and Graphu64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
+/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route g_navigationGraph (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through Nav_MeasureNodeDistance_de and Graphu64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (Graphu64_NormalizeVector_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
 
 extern CVector3 *Portal_GetGraphPoint(PickupGoalNodeList *, s32);
 extern f32 Graphu64_GetSquaredDistance(CVector3 *, CVector3 *);

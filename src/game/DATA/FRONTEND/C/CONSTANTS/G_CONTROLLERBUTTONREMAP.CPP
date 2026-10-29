@@ -1,8 +1,8 @@
 #include "FX/CONTROLLER_INPUT.H"
 
-/* DATA_800CC7B8.CPP */
+/* GControllerbuttonremapBlock1.CPP */
 
-/* DATA_800CD114.CPP */
+/* k_GControllerbuttonremapEncodedWordsBlock2_GControllerbuttonremap.CPP */
 #if defined(VERSION_EU_X)
 unsigned int k_GControllerbuttonremapEncodedWordsBlock2[3] = {
     0x3F8A4393, 0x3F8A1F40, 0x3F89FAE7,

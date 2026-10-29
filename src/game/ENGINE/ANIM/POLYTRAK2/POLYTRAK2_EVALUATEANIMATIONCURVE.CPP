@@ -64,7 +64,7 @@ static inline void seek(Stream *compressedCurve, u32 sampleIndex) {
 
 static inline float evaluate(Poly p,float t) { return p.a + p.b*t + p.c*t*t + p.d*t*t*t; }
 
-void Polytrak2_InitializePackedCurve(Segment8025FFD0 *curve, u32 *stream) {
+void Polytrak2_InitializePackedCurve(PackedCurveSegment *curve, u32 *stream) {
     u32 bits;
     u32 first;
     u32 second;
@@ -140,7 +140,7 @@ inline static void write_bits(u32 value, u32 bitAddress, u32 width)
   words->low = (words->low & (~lowMask)) | low;
   words->high = (words->high & (~highMask)) | high;
 }
-static inline void writeQuantized(u32 bitAddress, Func802608ECResult range, f32 value) {
+static inline void writeQuantized(u32 bitAddress, Polytrak2QuantizationRange range, f32 value) {
     f32 scaled;
     s32 integral;
     s32 quantized;
@@ -159,7 +159,7 @@ static inline void writeQuantized(u32 bitAddress, Func802608ECResult range, f32 
     write_bits(quantized, bitAddress, range.value);
 }
 
-void Polytrak2_WriteQuantizedFloatAndAdvance(u32 *stream, Func802608ECResult range, f32 value) {
+void Polytrak2_WriteQuantizedFloatAndAdvance(u32 *stream, Polytrak2QuantizationRange range, f32 value) {
     writeQuantized(*stream, range, value);
     *stream += range.value;
 }

@@ -2405,7 +2405,7 @@ src/game/UTIL/800CCC20.CPP	src/game/DATA/OVL1_C/800CCC20.CPP	game/DATA/OVL1_C	-	
 src/sdk/libultra/800CD394_4.CPP	src/sdk/libultra/800CD394_4.CPP	sdk/libultra	-	-	data	n/a	TU1019.0	now	data unit; no code object claims it; grouped by single unit
 src/game/AUDIO_3/800CCC30.CPP	src/game/DATA/OVL1_C/800CCC30.CPP	game/DATA/OVL1_C	-	-	data	n/a	TU1020.0	now	moved to DATA/OVL1_C: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
 src/game/AUDIO_3/800CCC34.CPP	src/game/DATA/OVL1_C/800CCC34.CPP	game/DATA/OVL1_C	-	-	data	n/a	TU1021.0	now	moved to DATA/OVL1_C: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_5.CPP	src/sdk/libultra/800CD394_5.CPP	sdk/libultra	-	-	data	n/a	TU1022.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK10.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK10.CPP	sdk/libultra	-	-	data	n/a	TU1022.0	now	data unit; no code object claims it; grouped by single unit
 src/game/AUDIO_3/800CCC50.CPP	src/game/DATA/OVL1_C/800CCC50.CPP	game/DATA/OVL1_C	-	-	data	n/a	TU1023.0	now	moved to DATA/OVL1_C: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/800CD394_6.CPP	src/sdk/libultra/800CD394_6.CPP	sdk/libultra	-	-	data	n/a	TU1024.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/libc/800CCD40.CPP	src/sdk/libultra/libc/xprintf_DATA0.c	sdk/libultra/libc	-	-	part	pending	TU1025.0	now	part 1/2 of the object of src/sdk/libultra/libc/xprintf.c; data/rodata of a code object that cannot merge today (see reclass/cut); grouped by OWN-rodata x1, ORD x1, OWN-data x1
@@ -2421,24 +2421,24 @@ src/sdk/libultra/libc_signeddivide_data.CPP	src/sdk/libultra/libc_signeddivide_d
 src/sdk/libultra/libc_signedremainder_data.CPP	src/sdk/libultra/libc_signedremainder_data.CPP	sdk/libultra	-	-	data	n/a	TU1033.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/_umoddi3_data.CPP	src/sdk/libultra/_umoddi3_data.CPP	sdk/libultra	-	-	data	n/a	TU1034.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/longarith_data.CPP	src/sdk/libultra/longarith_data.CPP	sdk/libultra	-	-	data	n/a	TU1035.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_16.CPP	src/sdk/libultra/800CD394_16.CPP	sdk/libultra	-	-	data	n/a	TU1036.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK1.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK1.CPP	sdk/libultra	-	-	data	n/a	TU1036.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/libsn_initializepollinghost_data.CPP	src/sdk/libultra/libsn_initializepollinghost_data.CPP	sdk/libultra	-	-	data	n/a	TU1037.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/turret_construct_data.CPP	src/sdk/libultra/turret_construct_data.CPP	sdk/libultra	-	-	data	n/a	TU1038.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_19.CPP	src/sdk/libultra/800CD394_19.CPP	sdk/libultra	-	-	data	n/a	TU1039.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_20.CPP	src/sdk/libultra/800CD394_20.CPP	sdk/libultra	-	-	data	n/a	TU1040.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_21.CPP	src/sdk/libultra/800CD394_21.CPP	sdk/libultra	-	-	data	n/a	TU1041.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_22.CPP	src/sdk/libultra/800CD394_22.CPP	sdk/libultra	-	-	data	n/a	TU1042.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/TURRET_CONSTRUCT_DATA_TAIL_GAP.CPP	src/sdk/libultra/TURRET_CONSTRUCT_DATA_TAIL_GAP.CPP	sdk/libultra	-	-	data	n/a	TU1039.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK6.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK6.CPP	sdk/libultra	-	-	data	n/a	TU1040.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK12.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK12.CPP	sdk/libultra	-	-	data	n/a	TU1041.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK9.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK9.CPP	sdk/libultra	-	-	data	n/a	TU1042.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/ACTOR_STATE_62_ENTRY_DATA.CPP	src/sdk/libultra/ACTOR_STATE_62_ENTRY_DATA.CPP	sdk/libultra	-	-	data	n/a	TU1043.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_24.CPP	src/sdk/libultra/800CD394_24.CPP	sdk/libultra	-	-	data	n/a	TU1044.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_25.CPP	src/sdk/libultra/800CD394_25.CPP	sdk/libultra	-	-	data	n/a	TU1045.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK3.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK3.CPP	sdk/libultra	-	-	data	n/a	TU1044.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDS.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDS.CPP	sdk/libultra	-	-	data	n/a	TU1045.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/ACTOR_STATE_63_ENTRY_DATA.CPP	src/sdk/libultra/ACTOR_STATE_63_ENTRY_DATA.CPP	sdk/libultra	-	-	data	n/a	TU1046.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_27.CPP	src/sdk/libultra/800CD394_27.CPP	sdk/libultra	-	-	data	n/a	TU1047.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_28.CPP	src/sdk/libultra/800CD394_28.CPP	sdk/libultra	-	-	data	n/a	TU1048.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_29.CPP	src/sdk/libultra/800CD394_29.CPP	sdk/libultra	-	-	data	n/a	TU1049.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_30.CPP	src/sdk/libultra/800CD394_30.CPP	sdk/libultra	-	-	data	n/a	TU1050.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_31.CPP	src/sdk/libultra/800CD394_31.CPP	sdk/libultra	-	-	data	n/a	TU1051.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK7.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK7.CPP	sdk/libultra	-	-	data	n/a	TU1047.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK8.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK8.CPP	sdk/libultra	-	-	data	n/a	TU1048.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK4.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK4.CPP	sdk/libultra	-	-	data	n/a	TU1049.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK5.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK5.CPP	sdk/libultra	-	-	data	n/a	TU1050.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK2.CPP	src/sdk/libultra/G_LIBULTRAENCODEDWORDSBLOCK2.CPP	sdk/libultra	-	-	data	n/a	TU1051.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/ACTOR_STATE_TABLE_END_DATA.CPP	src/sdk/libultra/ACTOR_STATE_TABLE_END_DATA.CPP	sdk/libultra	-	-	data	n/a	TU1052.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_33.CPP	src/sdk/libultra/800CD394_33.CPP	sdk/libultra	-	-	data	n/a	TU1053.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK1.CPP	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK1.CPP	sdk/libultra	-	-	data	n/a	TU1053.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/action_activatebreakablestate_data.CPP	src/sdk/libultra/action_activatebreakablestate_data.CPP	sdk/libultra	-	-	data	n/a	TU1054.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/action_initbreakablemotion_data.CPP	src/sdk/libultra/action_initbreakablemotion_data.CPP	sdk/libultra	-	-	data	n/a	TU1055.0	now	data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/ACTOR_STATE_0_ENTRY_DATA.CPP	src/sdk/libultra/ACTOR_STATE_0_ENTRY_DATA.CPP	sdk/libultra	-	-	data	n/a	TU1056.0	now	data unit; no code object claims it; grouped by single unit
@@ -3921,7 +3921,7 @@ src/game/MULTI/804453C4_12.CPP	src/game/DATA/OVL4DAT/804453C4_12.CPP	game/DATA/O
 src/sdk/libultra/pfs/80446BD0_5.CPP	src/sdk/libultra/pfs/80446BD0_5.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2504.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/80446BD0_7.CPP	src/sdk/libultra/pfs/80446BD0_7.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2505.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/80446BD0_9.CPP	src/sdk/libultra/pfs/80446BD0_9.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2506.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/pfs/80447BB0_10.CPP	src/sdk/libultra/pfs/80447BB0_10.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2507.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK5.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK5.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2507.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/items.CPP	src/sdk/libultra/pfs/items.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2508.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/80447BB0_14.CPP	src/sdk/libultra/pfs/80447BB0_14.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2509.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/80447BB0_16.CPP	src/sdk/libultra/pfs/80447BB0_16.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2510.0	now	alignment fill between objects; grouped by single unit
@@ -3935,7 +3935,7 @@ src/game/DATA/OVL3/DATA_8044E904.CPP	src/game/DATA/OVL3/DATA_8044E904.CPP	game/D
 src/game/DATA/OVL3/DATA_8044E908.CPP	src/game/DATA/OVL3/DATA_8044E908.CPP	game/DATA/OVL3	-	-	fill	n/a	TU2518.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/OVL3/DATA_8044EBA4.CPP	src/game/DATA/OVL3/DATA_8044EBA4.CPP	game/DATA/OVL3	-	-	fill	n/a	TU2519.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINCODE/DATA_80202814.CPP	src/game/DATA/MAINCODE/DATA_80202814.CPP	game/DATA/MAINCODE	-	-	data	n/a	TU0538.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libsn/80200800_4.CPP	src/sdk/libsn/80200800_4.CPP	sdk/libsn	-	-	fill	n/a	TU0539.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP	src/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP	sdk/libsn	-	-	fill	n/a	TU0539.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINCODE/DATA_8020402C.CPP	src/game/DATA/MAINCODE/DATA_8020402C.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU0540.0	now	alignment fill between objects; grouped by single unit
 src/game/LEVEL/8020402C_2.CPP	src/game/DATA/MAINCODE/8020402C_2.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU0541.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/WEAPONS/80204E78_2.CPP	src/game/DATA/MAINCODE/80204E78_2.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU0542.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4087,7 +4087,7 @@ src/game/DATA/AUDIO/DATA_802BC574.CPP	src/game/DATA/AUDIO/DATA_802BC574.CPP	game
 src/game/DATA/AUDIO/802B7488_12.CPP	src/game/DATA/AUDIO/802B7488_12.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0688.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802BCC5C.CPP	src/game/DATA/AUDIO/DATA_802BCC5C.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0689.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802BCCFC.CPP	src/game/DATA/AUDIO/DATA_802BCCFC.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0690.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_26.CPP	src/sdk/libultra/os/802B7B80_26.CPP	sdk/libultra/os	-	-	fill	n/a	TU0691.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK10.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK10.CPP	sdk/libultra/os	-	-	fill	n/a	TU0691.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/os/802B7B80_29.CPP	src/sdk/libultra/os/802B7B80_29.CPP	sdk/libultra/os	-	-	fill	n/a	TU0692.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/os/802B7B80_30.CPP	src/sdk/libultra/os/802B7B80_30.CPP	sdk/libultra/os	-	-	fill	n/a	TU0693.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/os/802B7B80_31.CPP	src/sdk/libultra/os/802B7B80_31.CPP	sdk/libultra/os	-	-	fill	n/a	TU0694.0	now	alignment fill between objects; grouped by single unit
@@ -4151,16 +4151,16 @@ src/game/DATA/AUDIO/DATA_802C2168.CPP	src/game/DATA/AUDIO/DATA_802C2168.CPP	game
 src/game/DATA/AUDIO/DATA_802C2238.CPP	src/game/DATA/AUDIO/DATA_802C2238.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0752.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C224C.CPP	src/game/DATA/AUDIO/DATA_802C224C.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0753.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C2308.CPP	src/game/DATA/AUDIO/DATA_802C2308.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0754.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_16.CPP	src/sdk/libultra/audio/802BD1A8_16.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0755.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_17.CPP	src/sdk/libultra/audio/802BD1A8_17.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0756.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK7.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK7.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0755.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK11.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK11.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0756.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_18.CPP	src/sdk/libultra/audio/802BD1A8_18.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0757.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_20.CPP	src/sdk/libultra/audio/802BD1A8_20.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0758.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_21.CPP	src/sdk/libultra/audio/802BD1A8_21.CPP	sdk/libultra/audio	-	-	fill	n/a	TU0759.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C31B8.CPP	src/game/DATA/AUDIO/DATA_802C31B8.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU0760.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/802C6A00_18.CPP	src/sdk/libgcc/802C6A00_18.CPP	sdk/libgcc	-	-	fill	n/a	TU0761.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/decode.CPP	src/sdk/libgcc/decode.CPP	sdk/libgcc	-	-	fill	n/a	TU0762.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_21.CPP	src/sdk/libgcc/802C6A00_21.CPP	sdk/libgcc	-	-	fill	n/a	TU0763.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_23.CPP	src/sdk/libgcc/802C6A00_23.CPP	sdk/libgcc	-	-	fill	n/a	TU0764.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK6.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK6.CPP	sdk/libgcc	-	-	fill	n/a	TU0763.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/LIBGCC_SEPARATED_FLOAT_PAIR_EU_X_US_REV1.CPP	src/sdk/libgcc/LIBGCC_SEPARATED_FLOAT_PAIR_EU_X_US_REV1.CPP	sdk/libgcc	-	-	fill	n/a	TU0764.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINTBL/DATA_802C6414.CPP	src/game/DATA/MAINTBL/DATA_802C6414.CPP	game/DATA/MAINTBL	-	-	fill	n/a	TU0765.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINTBL/DATA_802C6914.CPP	src/game/DATA/MAINTBL/DATA_802C6914.CPP	game/DATA/MAINTBL	-	-	fill	n/a	TU0766.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINTBL/DATA_802C6968.CPP	src/game/DATA/MAINTBL/DATA_802C6968.CPP	game/DATA/MAINTBL	-	-	fill	n/a	TU0767.0	now	alignment fill between objects; grouped by single unit
@@ -4315,11 +4315,11 @@ src/game/FRONTEND/8043962C_7.CPP	src/game/DATA/OVL4DAT/8043962C_7.CPP	game/DATA/
 src/game/FRONTEND/8043962C_8.CPP	src/game/DATA/OVL4DAT/8043962C_8.CPP	game/DATA/OVL4DAT	-	-	fill	n/a	TU2785.0	now	moved to DATA/OVL4DAT: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/MENU/ITEMS/80442BC8_10.CPP	src/game/DATA/OVL4DAT/80442BC8_10.CPP	game/DATA/OVL4DAT	-	-	fill	n/a	TU2786.0	now	moved to DATA/OVL4DAT: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/DATA/OVL4DAT/DATA_80444F98.CPP	src/game/DATA/OVL4DAT/DATA_80444F98.CPP	game/DATA/OVL4DAT	-	-	data	n/a	TU2787.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/pfs/80446BD0_2.CPP	src/sdk/libultra/pfs/80446BD0_2.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2788.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/pfs/80446BD0_3.CPP	src/sdk/libultra/pfs/80446BD0_3.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2789.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTES.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTES.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2788.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK1.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK1.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2789.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/pfs/s_erwatext.CPP	src/sdk/libultra/pfs/s_erwatext.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2790.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/pfs/80447BB0_5.CPP	src/sdk/libultra/pfs/80447BB0_5.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2791.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/pfs/80447BB0_6.CPP	src/sdk/libultra/pfs/80447BB0_6.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2792.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK3.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK3.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2791.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK4.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK4.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU2792.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/OVL4DAT/DATA_8044A9B8.CPP	src/game/DATA/OVL4DAT/DATA_8044A9B8.CPP	game/DATA/OVL4DAT	-	-	data	n/a	TU2793.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVL4DAT/DATA_8044B2E8.CPP	src/game/DATA/OVL4DAT/DATA_8044B2E8.CPP	game/DATA/OVL4DAT	-	-	data	n/a	TU2794.0	now	data unit; no code object claims it; grouped by single unit
 src/game/OVLGAME/8044E2B8_2.CPP	src/game/DATA/OVL4DAT/8044E2B8_2.CPP	game/DATA/OVL4DAT	-	-	fill	n/a	TU2795.0	now	moved to DATA/OVL4DAT: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4364,10 +4364,10 @@ src/game/RESMGR/8029FA7C.CPP	src/game/DATA/MAINCODE/8029FA7C.CPP	game/DATA/MAINC
 src/game/RESMGR/802A23A4_3.CPP	src/game/DATA/MAINCODE/802A23A4_3.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2567.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM_3/802A6AC0_3.CPP	src/game/DATA/MAINCODE/802A6AC0_3.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2568.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/MENU/802ABDBC.CPP	src/game/DATA/MAINCODE/802ABDBC.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2569.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802B2378_2.c	src/sdk/libultra/libasm_802B2378_2.c	sdk/libultra	-	-	fill	n/a	TU2570.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802B29C4.c	src/sdk/libultra/libasm_802B29C4.c	sdk/libultra	-	-	fill	n/a	TU2571.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK2.c	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK2.c	sdk/libultra	-	-	fill	n/a	TU2570.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/S_LIBULTRAIMPACTSTEXT.c	src/sdk/libultra/S_LIBULTRAIMPACTSTEXT.c	sdk/libultra	-	-	fill	n/a	TU2571.0	now	alignment fill between objects; grouped by single unit
 src/game/MENU/802ABDBC_12.CPP	src/game/DATA/MAINCODE/802ABDBC_12.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2572.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
-src/sdk/libultra/802AD870_6.CPP	src/sdk/libultra/802AD870_6.CPP	sdk/libultra	-	-	fill	n/a	TU2573.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/S_LIBULTRAPARTICTEXT.CPP	src/sdk/libultra/S_LIBULTRAPARTICTEXT.CPP	sdk/libultra	-	-	fill	n/a	TU2573.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINCODE/CODE_802AD1D0.CPP	src/game/DATA/MAINCODE/CODE_802AD1D0.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2574.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINCODE/802AFEEC_2.CPP	src/game/DATA/MAINCODE/802AFEEC_2.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2575.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/MAINCODE/802AFEEC_8.CPP	src/game/DATA/MAINCODE/802AFEEC_8.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2576.0	now	alignment fill between objects; grouped by single unit
@@ -4392,8 +4392,8 @@ src/game/DATA/AUDIO/DATA_802B73D4.CPP	src/game/DATA/AUDIO/DATA_802B73D4.CPP	game
 src/game/DATA/AUDIO/802B7488_2.CPP	src/game/DATA/AUDIO/802B7488_2.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2595.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_6.CPP	src/game/DATA/AUDIO/802B7488_6.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2596.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_7.CPP	src/game/DATA/AUDIO/802B7488_7.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2597.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_11.CPP	src/sdk/libultra/os/802B7B80_11.CPP	sdk/libultra/os	-	-	fill	n/a	TU2598.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_16.CPP	src/sdk/libultra/os/802B7B80_16.CPP	sdk/libultra/os	-	-	fill	n/a	TU2599.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK4.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK4.CPP	sdk/libultra/os	-	-	fill	n/a	TU2598.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK11.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK11.CPP	sdk/libultra/os	-	-	fill	n/a	TU2599.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802B8CF8.CPP	src/game/DATA/AUDIO/DATA_802B8CF8.CPP	game/DATA/AUDIO	-	-	data	n/a	TU2600.0	now	data unit; no code object claims it; grouped by single unit
 src/game/SYSTEM/802BE040_8.CPP	src/game/DATA/AUDIO/802BE040_8.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2601.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_15.CPP	src/game/DATA/AUDIO/802BE040_15.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2602.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4417,22 +4417,22 @@ src/game/DATA/AUDIO/DATA_802BB7D4.CPP	src/game/DATA/AUDIO/DATA_802BB7D4.CPP	game
 src/sdk/libultra/os/802C0840_6.CPP	src/sdk/libultra/os/802C0840_6.CPP	sdk/libultra/os	-	-	fill	n/a	TU2620.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802BBB98.CPP	src/game/DATA/AUDIO/DATA_802BBB98.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2621.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_23.CPP	src/game/DATA/AUDIO/802B7058_23.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2622.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BBC68_12.c	src/sdk/libultra/libasm_802BBC68_12.c	sdk/libultra	-	-	fill	n/a	TU2623.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK3.c	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK3.c	sdk/libultra	-	-	fill	n/a	TU2623.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/__OSGETFPCCSR.c	src/sdk/libultra/__OSGETFPCCSR.c	sdk/libultra	-	-	fill	n/a	TU2624.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BBC68_6.c	src/sdk/libultra/libasm_802BBC68_6.c	sdk/libultra	-	-	fill	n/a	TU2625.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BBC68_15.c	src/sdk/libultra/libasm_802BBC68_15.c	sdk/libultra	-	-	fill	n/a	TU2626.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BBC68_16.c	src/sdk/libultra/libasm_802BBC68_16.c	sdk/libultra	-	-	fill	n/a	TU2627.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK4.c	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK4.c	sdk/libultra	-	-	fill	n/a	TU2625.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK5.c	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK5.c	sdk/libultra	-	-	fill	n/a	TU2626.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/S_LIBULTRACINSTANCTEXT.c	src/sdk/libultra/S_LIBULTRACINSTANCTEXT.c	sdk/libultra	-	-	fill	n/a	TU2627.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/libasm_802BBC68_17.c	src/sdk/libultra/libasm_802BBC68_17.c	sdk/libultra	-	-	fill	n/a	TU2628.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BBC68_18.c	src/sdk/libultra/libasm_802BBC68_18.c	sdk/libultra	-	-	fill	n/a	TU2629.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/S_LIBULTRAMODELRTEXT.c	src/sdk/libultra/S_LIBULTRAMODELRTEXT.c	sdk/libultra	-	-	fill	n/a	TU2629.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_31.CPP	src/game/DATA/AUDIO/802B7058_31.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2630.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_34.CPP	src/game/DATA/AUDIO/802B7058_34.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2631.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/libasm_802BD1A8.c	src/sdk/libultra/libasm_802BD1A8.c	sdk/libultra	-	-	fill	n/a	TU2632.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_2.CPP	src/sdk/libultra/audio/802BD1A8_2.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2633.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_3.CPP	src/sdk/libultra/audio/802BD1A8_3.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2634.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK7.c	src/sdk/libultra/K_LIBULTRAENCODEDWORDSBLOCK7.c	sdk/libultra	-	-	fill	n/a	TU2632.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTES.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTES.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2633.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK1.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK1.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2634.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/s_wipetext.CPP	src/sdk/libgcc/s_wipetext.CPP	sdk/libgcc	-	-	fill	n/a	TU2635.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_7.CPP	src/sdk/libgcc/802C6A00_7.CPP	sdk/libgcc	-	-	fill	n/a	TU2636.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK2.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK2.CPP	sdk/libgcc	-	-	fill	n/a	TU2636.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C1754.CPP	src/game/DATA/AUDIO/DATA_802C1754.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2637.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_15.CPP	src/sdk/libgcc/802C6A00_15.CPP	sdk/libgcc	-	-	fill	n/a	TU2638.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK11.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK11.CPP	sdk/libgcc	-	-	fill	n/a	TU2638.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_48.CPP	src/game/DATA/AUDIO/802B7058_48.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2639.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/OVLDAT1/800C1CF4.CPP	src/game/DATA/OVLDAT1/800C1CF4.CPP	game/DATA/OVLDAT1	-	-	data	n/a	TU2997.0	now	data unit; no code object claims it; grouped by single unit
 src/game/AI/NAV/80208000_27.CPP	src/game/DATA/OVLDAT1/80208000_27.CPP	game/DATA/OVLDAT1	-	-	data	n/a	TU2998.0	now	moved to DATA/OVLDAT1: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
@@ -4454,7 +4454,7 @@ src/game/DATA/OVL1_A/DATA_800C5154.CPP	src/game/DATA/OVL1_A/DATA_800C5154.CPP	ga
 src/game/MENU/ITEMS/8044ACCC_7.CPP	src/game/DATA/OVL1_A/8044ACCC_7.CPP	game/DATA/OVL1_A	-	-	data	n/a	TU3013.0	now	moved to DATA/OVL1_A: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
 src/game/SCENE/800CA258_5.CPP	src/game/DATA/OVLTAB2/800CA258_5.CPP	game/DATA/OVLTAB2	-	-	data	n/a	TU3014.0	now	moved to DATA/OVLTAB2: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
 src/game/SCENE/800CA270_4.CPP	src/game/DATA/OVLTAB2/800CA270_4.CPP	game/DATA/OVLTAB2	-	-	data	n/a	TU3015.0	now	moved to DATA/OVLTAB2: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/sched/8028DF6C_8.CPP	src/sdk/libultra/sched/8028DF6C_8.CPP	sdk/libultra/sched	-	-	data	n/a	TU3016.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/sched/S_SCHEDACCLAIMNETTEXT.CPP	src/sdk/libultra/sched/S_SCHEDACCLAIMNETTEXT.CPP	sdk/libultra/sched	-	-	data	n/a	TU3016.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVL1_A/DATA_800C57B4.CPP	src/game/DATA/OVL1_A/DATA_800C57B4.CPP	game/DATA/OVL1_A	-	-	data	n/a	TU3017.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVL1_A/DATA_800C5FF8.CPP	src/game/DATA/OVL1_A/DATA_800C5FF8.CPP	game/DATA/OVL1_A	-	-	data	n/a	TU3018.0	now	data unit; no code object claims it; grouped by single unit
 src/game/MENU/802ABDBC_22.CPP	src/game/DATA/OVL1_A/802ABDBC_22.CPP	game/DATA/OVL1_A	-	-	data	n/a	TU3019.0	now	moved to DATA/OVL1_A: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
@@ -4554,7 +4554,7 @@ src/game/MENU/ITEMS/8042FBEC_25.CPP	src/game/DATA/MAINCODE/8042FBEC_25.CPP	game/
 src/game/MENU/ITEMS/8042FBEC_28.CPP	src/game/DATA/MAINCODE/8042FBEC_28.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3111.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/MENU/ITEMS/8042FBEC_29.CPP	src/game/DATA/MAINCODE/8042FBEC_29.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3112.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/MENU/ITEMS/8042FBEC_30.CPP	src/game/DATA/MAINCODE/8042FBEC_30.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3113.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
-src/sdk/libultra/pfs/80446BD0_11.CPP	src/sdk/libultra/pfs/80446BD0_11.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU3114.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK2.CPP	src/sdk/libultra/pfs/G_LIBULTRAPFSTRAILINGBYTESBLOCK2.CPP	sdk/libultra/pfs	-	-	fill	n/a	TU3114.0	now	alignment fill between objects; grouped by single unit
 src/game/OVLGAME/80447BB0_26.CPP	src/game/DATA/MAINCODE/PAK_FILESYSTEM_LINK_GAP.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3115.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/OVLGAME/80447BB0_27.CPP	src/game/DATA/MAINCODE/80447BB0_27.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3116.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/OVLGAME/80447BB0_28.CPP	src/game/DATA/MAINCODE/80447BB0_28.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU3117.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4628,7 +4628,7 @@ src/game/RENDER/8028469C_5.CPP	src/game/DATA/MAINCODE/8028469C_5.CPP	game/DATA/M
 src/game/RENDER/8028469C_9.CPP	src/game/DATA/MAINCODE/8028469C_9.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2858.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/RENDER/8028469C_15.CPP	src/game/DATA/MAINCODE/8028469C_15.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2859.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/RENDER/8028469C_20.CPP	src/game/DATA/MAINCODE/8028469C_20.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2860.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
-src/sdk/libultra/sched/8028DF6C_4.CPP	src/sdk/libultra/sched/8028DF6C_4.CPP	sdk/libultra/sched	-	-	fill	n/a	TU2861.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/sched/G_LIBULTRASCHEDTRAILINGBYTES.CPP	src/sdk/libultra/sched/G_LIBULTRASCHEDTRAILINGBYTES.CPP	sdk/libultra/sched	-	-	fill	n/a	TU2861.0	now	alignment fill between objects; grouped by single unit
 src/game/RENDER_4/8028FD2C_8.CPP	src/game/DATA/MAINCODE/8028FD2C_8.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2862.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/RENDER_4/8028FD2C_17.CPP	src/game/DATA/MAINCODE/8028FD2C_17.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2863.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/RENDER/802909E0_10.CPP	src/game/DATA/MAINCODE/802909E0_10.CPP	game/DATA/MAINCODE	-	-	fill	n/a	TU2864.0	now	moved to DATA/MAINCODE: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4692,12 +4692,12 @@ src/game/DATA/AUDIO/802B7058_14.CPP	src/game/DATA/AUDIO/802B7058_14.CPP	game/DAT
 src/game/DATA/AUDIO/802B7488_4.CPP	src/game/DATA/AUDIO/802B7488_4.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2922.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_10.CPP	src/game/DATA/AUDIO/802B7488_10.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2923.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_11.CPP	src/game/DATA/AUDIO/802B7488_11.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2924.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_5.CPP	src/sdk/libultra/os/802B7B80_5.CPP	sdk/libultra/os	-	-	fill	n/a	TU2925.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_9.CPP	src/sdk/libultra/os/802B7B80_9.CPP	sdk/libultra/os	-	-	fill	n/a	TU2926.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_13.CPP	src/sdk/libultra/os/802B7B80_13.CPP	sdk/libultra/os	-	-	fill	n/a	TU2927.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_19.CPP	src/sdk/libultra/os/802B7B80_19.CPP	sdk/libultra/os	-	-	fill	n/a	TU2928.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_21.CPP	src/sdk/libultra/os/802B7B80_21.CPP	sdk/libultra/os	-	-	fill	n/a	TU2929.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_23.CPP	src/sdk/libultra/os/802B7B80_23.CPP	sdk/libultra/os	-	-	fill	n/a	TU2930.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTES.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTES.CPP	sdk/libultra/os	-	-	fill	n/a	TU2925.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK2.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK2.CPP	sdk/libultra/os	-	-	fill	n/a	TU2926.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK6.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK6.CPP	sdk/libultra/os	-	-	fill	n/a	TU2927.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK14.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK14.CPP	sdk/libultra/os	-	-	fill	n/a	TU2928.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK16.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK16.CPP	sdk/libultra/os	-	-	fill	n/a	TU2929.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK18.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK18.CPP	sdk/libultra/os	-	-	fill	n/a	TU2930.0	now	alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_10.CPP	src/game/DATA/AUDIO/802BE040_10.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2931.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_13.CPP	src/game/DATA/AUDIO/802BE040_13.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2932.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_19.CPP	src/game/DATA/AUDIO/802BE040_19.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2933.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4750,19 +4750,19 @@ src/game/DATA/AUDIO/802B7058_44.CPP	src/game/DATA/AUDIO/802B7058_44.CPP	game/DAT
 src/game/DATA/AUDIO/802B7058_45.CPP	src/game/DATA/AUDIO/802B7058_45.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2980.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_46.CPP	src/game/DATA/AUDIO/802B7058_46.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2981.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_47.CPP	src/game/DATA/AUDIO/802B7058_47.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2982.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_8.CPP	src/sdk/libultra/audio/802BD1A8_8.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2983.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_10.CPP	src/sdk/libultra/audio/802BD1A8_10.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2984.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_11.CPP	src/sdk/libultra/audio/802BD1A8_11.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2985.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK5.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK5.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2983.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK8.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK8.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2984.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK9.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK9.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2985.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_13.CPP	src/sdk/libultra/audio/802BD1A8_13.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2986.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_15.CPP	src/sdk/libultra/audio/802BD1A8_15.CPP	sdk/libultra/audio	-	-	fill	n/a	TU2987.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/802C6A00.CPP	src/sdk/libgcc/802C6A00.CPP	sdk/libgcc	-	-	fill	n/a	TU2988.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/802C6A00_3.CPP	src/sdk/libgcc/802C6A00_3.CPP	sdk/libgcc	-	-	fill	n/a	TU2989.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_6.CPP	src/sdk/libgcc/802C6A00_6.CPP	sdk/libgcc	-	-	fill	n/a	TU2990.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_9.CPP	src/sdk/libgcc/802C6A00_9.CPP	sdk/libgcc	-	-	fill	n/a	TU2991.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_11.CPP	src/sdk/libgcc/802C6A00_11.CPP	sdk/libgcc	-	-	fill	n/a	TU2992.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_13.CPP	src/sdk/libgcc/802C6A00_13.CPP	sdk/libgcc	-	-	data	n/a	TU2993.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libgcc/802C6A00_16.CPP	src/sdk/libgcc/802C6A00_16.CPP	sdk/libgcc	-	-	fill	n/a	TU2994.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_17.CPP	src/sdk/libgcc/802C6A00_17.CPP	sdk/libgcc	-	-	fill	n/a	TU2995.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK1.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK1.CPP	sdk/libgcc	-	-	fill	n/a	TU2990.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK4.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK4.CPP	sdk/libgcc	-	-	fill	n/a	TU2991.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK7.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK7.CPP	sdk/libgcc	-	-	fill	n/a	TU2992.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK9.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK9.CPP	sdk/libgcc	-	-	data	n/a	TU2993.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libgcc/LIBGCC_TRAILING_12_BYTES_EU.CPP	src/sdk/libgcc/LIBGCC_TRAILING_12_BYTES_EU.CPP	sdk/libgcc	-	-	fill	n/a	TU2994.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK12.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK12.CPP	sdk/libgcc	-	-	fill	n/a	TU2995.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_49.CPP	src/game/DATA/AUDIO/802B7058_49.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU2996.0	now	alignment fill between objects; grouped by single unit
 src/game/AI/NAV/800C6DB0.CPP	src/game/AI/ENEMIES/TURRETAI_DATA1.CPP	game/AI/ENEMIES	-	-	part	pending	TU0012.1	now	part 2/2 of the object of src/game/AI/ENEMIES/TURRETAI.CPP; moved to DATA/AUDIO: data-side unit outside DATA; data/rodata of a code object that cannot merge today (see reclass/cut); grouped by OWN-data x1; cut: de data: src/game/LEVEL/800C6B40.CPP between src/game/DATA/OVLDAT1/800C19E8.CPP and src/game/AI/NAV/800C6DB0.CPP
 src/game/AI/NAV/80208000_28.CPP	src/game/DATA/OVLDAT1/80208000_28.CPP	game/DATA/OVLDAT1	-	-	data	n/a	TU3203.0	now	moved to DATA/OVLDAT1: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
@@ -4792,7 +4792,7 @@ src/game/AUDIO/800C8FD4.CPP	src/game/DATA/OVLDAT2/800C8FD4.CPP	game/DATA/OVLDAT2
 src/game/DATA/OVL1_B/DATA_800C9228.CPP	src/game/DATA/OVL1_B/DATA_800C9228.CPP	game/DATA/OVL1_B	-	-	data	n/a	TU3227.0	now	data unit; no code object claims it; grouped by single unit
 src/game/SYSTEM/800C92B8.CPP	src/game/DATA/OVL1_B/800C92B8.CPP	game/DATA/OVL1_B	-	-	data	n/a	TU3228.0	now	moved to DATA/OVL1_B: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
 src/sdk/libultra/nav.CPP	src/sdk/libultra/nav.CPP	sdk/libultra	-	-	data	n/a	TU3229.0	now	data unit; no code object claims it; grouped by single unit
-src/sdk/libultra/800CD394_3.CPP	src/sdk/libultra/800CD394_3.CPP	sdk/libultra	-	-	data	n/a	TU3230.0	now	data unit; no code object claims it; grouped by single unit
+src/sdk/libultra/K_LIBULTRAENCODEDWORDS.CPP	src/sdk/libultra/K_LIBULTRAENCODEDWORDS.CPP	sdk/libultra	-	-	data	n/a	TU3230.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVLTAB2/800CA740.CPP	src/game/DATA/OVLTAB2/800CA740.CPP	game/DATA/OVLTAB2	-	-	data	n/a	TU3231.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVLTAB2/800CA780.CPP	src/game/DATA/OVLTAB2/800CA780.CPP	game/DATA/OVLTAB2	-	-	data	n/a	TU3232.0	now	data unit; no code object claims it; grouped by single unit
 src/game/DATA/OVLTAB2/800CAACC.CPP	src/game/DATA/OVLTAB2/800CAACC.CPP	game/DATA/OVLTAB2	-	-	data	n/a	TU3233.0	now	data unit; no code object claims it; grouped by single unit
@@ -4928,12 +4928,12 @@ src/game/DATA/AUDIO/802B63E4_11.CPP	src/game/DATA/AUDIO/802B63E4_11.CPP	game/DAT
 src/game/DATA/AUDIO/802B7058_9.CPP	src/game/DATA/AUDIO/802B7058_9.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3173.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802BC38C.CPP	src/game/DATA/AUDIO/DATA_802BC38C.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3174.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_5.CPP	src/game/DATA/AUDIO/802B7488_5.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3175.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_7.CPP	src/sdk/libultra/os/802B7B80_7.CPP	sdk/libultra/os	-	-	fill	n/a	TU3176.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_10.CPP	src/sdk/libultra/os/802B7B80_10.CPP	sdk/libultra/os	-	-	fill	n/a	TU3177.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_14.CPP	src/sdk/libultra/os/802B7B80_14.CPP	sdk/libultra/os	-	-	fill	n/a	TU3178.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_20.CPP	src/sdk/libultra/os/802B7B80_20.CPP	sdk/libultra/os	-	-	fill	n/a	TU3179.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_22.CPP	src/sdk/libultra/os/802B7B80_22.CPP	sdk/libultra/os	-	-	fill	n/a	TU3180.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_24.CPP	src/sdk/libultra/os/802B7B80_24.CPP	sdk/libultra/os	-	-	fill	n/a	TU3181.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK8.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK8.CPP	sdk/libultra/os	-	-	fill	n/a	TU3176.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK3.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK3.CPP	sdk/libultra/os	-	-	fill	n/a	TU3177.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK7.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK7.CPP	sdk/libultra/os	-	-	fill	n/a	TU3178.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK15.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK15.CPP	sdk/libultra/os	-	-	fill	n/a	TU3179.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK17.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK17.CPP	sdk/libultra/os	-	-	fill	n/a	TU3180.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK19.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK19.CPP	sdk/libultra/os	-	-	fill	n/a	TU3181.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/os/IO_GET_PERIPHERAL_COMMAND_QUEUE_LINK_GAP.CPP	src/sdk/libultra/os/IO_GET_PERIPHERAL_COMMAND_QUEUE_LINK_GAP.CPP	sdk/libultra/os	-	-	fill	n/a	TU3182.0	now	alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_6.CPP	src/game/DATA/AUDIO/802BE040_6.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3183.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_11.CPP	src/game/DATA/AUDIO/802BE040_11.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3184.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -4950,10 +4950,10 @@ src/game/SYSTEM/802BFD80_16.CPP	src/game/DATA/AUDIO/802BFD80_16.CPP	game/DATA/AU
 src/sdk/libultra/os/802C0840_9.CPP	src/sdk/libultra/os/802C0840_9.CPP	sdk/libultra/os	-	-	fill	n/a	TU3195.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_39.CPP	src/game/DATA/AUDIO/802B7058_39.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3196.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C1FFC.CPP	src/game/DATA/AUDIO/DATA_802C1FFC.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3197.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_9.CPP	src/sdk/libultra/audio/802BD1A8_9.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3198.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_12.CPP	src/sdk/libultra/audio/802BD1A8_12.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3199.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK6.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK6.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3198.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK10.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK10.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3199.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/802C6A00_19.CPP	src/sdk/libgcc/802C6A00_19.CPP	sdk/libgcc	-	-	fill	n/a	TU3200.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_22.CPP	src/sdk/libgcc/802C6A00_22.CPP	sdk/libgcc	-	-	fill	n/a	TU3201.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK5.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK5.CPP	sdk/libgcc	-	-	fill	n/a	TU3201.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/DATA_802C1B04.CPP	src/game/DATA/AUDIO/DATA_802C1B04.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3202.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/OVLDAT1/800C1BA4.CPP	src/game/DATA/OVLDAT1/800C1BA4.CPP	game/DATA/OVLDAT1	-	-	data	n/a	TU3500.0	now	data unit; no code object claims it; grouped by single unit
 src/game/AI/NAV/80208000_26.CPP	src/game/DATA/OVLDAT1/80208000_26.CPP	game/DATA/OVLDAT1	-	-	data	n/a	TU3501.0	now	moved to DATA/OVLDAT1: data-side unit outside DATA; data unit; no code object claims it; grouped by single unit
@@ -5200,11 +5200,11 @@ src/game/DATA/AUDIO/802B7058_8.CPP	src/game/DATA/AUDIO/802B7058_8.CPP	game/DATA/
 src/game/DATA/AUDIO/DATA_802BB584.CPP	src/game/DATA/AUDIO/DATA_802BB584.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3429.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_8.CPP	src/game/DATA/AUDIO/802B7488_8.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3430.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7488_9.CPP	src/game/DATA/AUDIO/802B7488_9.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3431.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_8.CPP	src/sdk/libultra/os/802B7B80_8.CPP	sdk/libultra/os	-	-	fill	n/a	TU3432.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_12.CPP	src/sdk/libultra/os/802B7B80_12.CPP	sdk/libultra/os	-	-	fill	n/a	TU3433.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_15.CPP	src/sdk/libultra/os/802B7B80_15.CPP	sdk/libultra/os	-	-	fill	n/a	TU3434.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_17.CPP	src/sdk/libultra/os/802B7B80_17.CPP	sdk/libultra/os	-	-	fill	n/a	TU3435.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/os/802B7B80_18.CPP	src/sdk/libultra/os/802B7B80_18.CPP	sdk/libultra/os	-	-	fill	n/a	TU3436.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK1.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK1.CPP	sdk/libultra/os	-	-	fill	n/a	TU3432.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK5.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK5.CPP	sdk/libultra/os	-	-	fill	n/a	TU3433.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK9.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK9.CPP	sdk/libultra/os	-	-	fill	n/a	TU3434.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK12.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK12.CPP	sdk/libultra/os	-	-	fill	n/a	TU3435.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK13.CPP	src/sdk/libultra/os/G_LIBULTRAOSTRAILINGBYTESBLOCK13.CPP	sdk/libultra/os	-	-	fill	n/a	TU3436.0	now	alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_4.CPP	src/game/DATA/AUDIO/802BE040_4.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3437.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_7.CPP	src/game/DATA/AUDIO/802BE040_7.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3438.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
 src/game/SYSTEM/802BE040_9.CPP	src/game/DATA/AUDIO/802BE040_9.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3439.0	now	moved to DATA/AUDIO: data-side unit outside DATA; alignment fill between objects; grouped by single unit
@@ -5257,17 +5257,17 @@ src/game/DATA/AUDIO/802B7058_30.CPP	src/game/DATA/AUDIO/802B7058_30.CPP	game/DAT
 src/game/DATA/AUDIO/802B7058_33.CPP	src/game/DATA/AUDIO/802B7058_33.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3486.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/libasm_802BBC68_19.c	src/sdk/libultra/libasm_802BBC68_19.c	sdk/libultra	-	-	fill	n/a	TU3487.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AUDIO/802B7058_42.CPP	src/game/DATA/AUDIO/802B7058_42.CPP	game/DATA/AUDIO	-	-	fill	n/a	TU3488.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_4.CPP	src/sdk/libultra/audio/802BD1A8_4.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3489.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_5.CPP	src/sdk/libultra/audio/802BD1A8_5.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3490.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libultra/audio/802BD1A8_6.CPP	src/sdk/libultra/audio/802BD1A8_6.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3491.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK2.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK2.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3489.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK3.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK3.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3490.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK4.CPP	src/sdk/libultra/audio/G_LIBULTRAAUDIOTRAILINGBYTESBLOCK4.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3491.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_7.CPP	src/sdk/libultra/audio/802BD1A8_7.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3492.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libultra/audio/802BD1A8_14.CPP	src/sdk/libultra/audio/802BD1A8_14.CPP	sdk/libultra/audio	-	-	fill	n/a	TU3493.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/802C6A00_2.CPP	src/sdk/libgcc/802C6A00_2.CPP	sdk/libgcc	-	-	fill	n/a	TU3494.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_5.CPP	src/sdk/libgcc/802C6A00_5.CPP	sdk/libgcc	-	-	fill	n/a	TU3495.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_8.CPP	src/sdk/libgcc/802C6A00_8.CPP	sdk/libgcc	-	-	fill	n/a	TU3496.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTES.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTES.CPP	sdk/libgcc	-	-	fill	n/a	TU3495.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/LIBGCC_TRAILING_4_BYTES_DE.CPP	src/sdk/libgcc/LIBGCC_TRAILING_4_BYTES_DE.CPP	sdk/libgcc	-	-	fill	n/a	TU3496.0	now	alignment fill between objects; grouped by single unit
 src/sdk/libgcc/runtime.CPP	src/sdk/libgcc/runtime.CPP	sdk/libgcc	-	-	fill	n/a	TU3497.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_12.CPP	src/sdk/libgcc/802C6A00_12.CPP	sdk/libgcc	-	-	fill	n/a	TU3498.0	now	alignment fill between objects; grouped by single unit
-src/sdk/libgcc/802C6A00_14.CPP	src/sdk/libgcc/802C6A00_14.CPP	sdk/libgcc	-	-	fill	n/a	TU3499.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/LIBGCC_TRAILING_12_BYTES_DE.CPP	src/sdk/libgcc/LIBGCC_TRAILING_12_BYTES_DE.CPP	sdk/libgcc	-	-	fill	n/a	TU3498.0	now	alignment fill between objects; grouped by single unit
+src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK10.CPP	src/sdk/libgcc/G_LIBGCCTRAILINGBYTESBLOCK10.CPP	sdk/libgcc	-	-	fill	n/a	TU3499.0	now	alignment fill between objects; grouped by single unit
 src/game/DATA/AMMO/800E2754.CPP	src/game/DATA/AMMO/800E2754.CPP	game/DATA/AMMO	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
 src/game/DATA/GFXDATA/800DC880.CPP	src/game/DATA/GFXDATA/800DC880.CPP	game/DATA/GFXDATA	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
 src/game/DATA/GFXDATA/800DCC34.CPP	src/game/DATA/GFXDATA/800DCC34.CPP	game/DATA/GFXDATA	-	-	orphan	n/a	-	now	not in any version's link (no bytes): delete, or fold into its function's module as a reference
@@ -5385,7 +5385,7 @@ src/game/UI/X_FILES/X_STDIO/X_STDIO.CPP	src/game/UI/X_FILES/X_STDIO.CPP	game/UI/
 src/sdk/libultra/audio/seqplayer_voice_channels/seqplayer.c	src/sdk/libultra/audio/seqplayer_2.c	sdk/libultra/audio	-	include/sdk/libultra/audio/seqplayer_2.h	sdk	high	TU0237.0	now	moved into its module folder by pivot wave A (L8)
 src/sdk/libultra/libc/xprintf_DATA0/xprintf_DATA0.c	src/sdk/libultra/libc/xprintf_DATA0.c	sdk/libultra/libc	-	-	part	pending	TU1025.0	now	moved into its module folder by pivot wave A (L8)
 src/game/AI/CTEAMSELECT/CTEAMSELECT.CPP	src/game/AI/CTEAMSELECT.CPP	game/AI	TeamSelect	include/AI/CTEAMSELECT.H	code	medium	TU0056.0	now	merged from 6 units by pivot wave A
-src/game/AI/DEVICES/80204E78_7_DATA2/80204E78_7_DATA2.CPP	src/game/AI/DEVICES/80204E78_7_DATA2.CPP	game/AI/DEVICES	-	-	part	pending	TU0774.2	now	merged from 2 units by pivot wave A
+src/game/AI/DEVICES/80204E78_7_DATA2/G_AIDEVICESFLOATCONSTANTWORDS.CPP	src/game/AI/DEVICES/80204E78_7_DATA2.CPP	game/AI/DEVICES	-	-	part	pending	TU0774.2	now	merged from 2 units by pivot wave A
 src/game/AI/DEVICES/80204E78_7_DATA3/80204E78_7_DATA3.CPP	src/game/AI/DEVICES/80204E78_7_DATA3.CPP	game/AI/DEVICES	-	-	part	pending	TU0774.3	now	merged from 3 units by pivot wave A
 src/game/AI/NAV/FARTHEST/FARTHEST.CPP	src/game/AI/NAV/FARTHEST.CPP	game/AI/NAV	Nav	include/AI/NAV/FARTHEST.H	code	low	TU0044.0	now	merged from 3 units by pivot wave A
 src/game/AI/NAV/PLAYER/PLAYER.CPP	src/game/AI/NAV/PLAYER.CPP	game/AI/NAV	Nav	include/AI/NAV/PLAYER.H	code	low	TU0019.0	now	merged from 14 units by pivot wave A

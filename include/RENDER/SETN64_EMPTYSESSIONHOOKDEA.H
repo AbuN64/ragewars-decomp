@@ -1,0 +1,5 @@
+#ifndef RENDER_SETN64_EMPTYSESSIONHOOKDEA_H
+#define RENDER_SETN64_EMPTYSESSIONHOOKDEA_H
+#include "COMMON/OBJRECAT20V1.H"
+extern void SetN64_EmptySessionHookDeA(void);
+#endif

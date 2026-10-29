@@ -12,6 +12,6 @@ const char g_playersText[8] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80226950_C8858_us_rev1.c */
+/* ROM-grounded data: src/s_playersText_us_rev1.c */
 const char s_playersText[8] = "Players";
 #endif

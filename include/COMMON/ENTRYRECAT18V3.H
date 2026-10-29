@@ -15,8 +15,8 @@ struct CacheEvictionEntry {
 struct EntryList;
 struct CacheEvictionEntry;
 
-struct Pool80255720;
-typedef struct Pool80255720 Pool80255720;
+struct HeapArena_Heap;
+typedef struct HeapArena_Heap HeapArena_Heap;
 
 struct EntryList;
 typedef struct EntryList EntryList;
@@ -25,25 +25,25 @@ typedef struct EntryList EntryList;
 struct CacheHashEntry;
 typedef struct CacheHashEntry CacheHashEntry;
 
-struct Block80255720;
-struct Block80255720 {
-    struct Block80255720 *prev;
-    struct Block80255720 *next;
-    struct Block80255720 *prev_phys;
-    struct Block80255720 *next_phys;
+struct HeapArenaBlock;
+struct HeapArenaBlock {
+    struct HeapArenaBlock *prev;
+    struct HeapArenaBlock *next;
+    struct HeapArenaBlock *prev_phys;
+    struct HeapArenaBlock *next_phys;
     s32 offset;
     s32 size;
 };
 
-struct Block80255720;
-typedef struct Block80255720 Block80255720;
+struct HeapArenaBlock;
+typedef struct HeapArenaBlock HeapArenaBlock;
 
-struct Pool80255ACC;
-struct Pool80255ACC {
+struct HeapArena_Entryrecat18v3;
+struct HeapArena_Entryrecat18v3 {
     s32 unk0;
     s32 unk4;
-    Block80255720 *head;
-    Block80255720 *tail;
+    HeapArenaBlock *head;
+    HeapArenaBlock *tail;
 };
 
 struct CacheHashEntry;
@@ -77,8 +77,8 @@ struct CacheEvictionEntry;
 typedef struct CacheEvictionEntry CacheEvictionEntry;
 
 
-struct Block80255720;
-struct Pool80255720;
+struct HeapArenaBlock;
+struct HeapArena_Heap;
 
 
 
@@ -91,8 +91,8 @@ struct HeapAllocationBlock;
 struct HeapFreeBlockList;
 
 
-struct Pool80255ACC;
-typedef struct Pool80255ACC Pool80255ACC;
+struct HeapArena_Entryrecat18v3;
+typedef struct HeapArena_Entryrecat18v3 HeapArena_Entryrecat18v3;
 
 
 

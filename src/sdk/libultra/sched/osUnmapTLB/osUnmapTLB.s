@@ -22,7 +22,7 @@ osUnmapTLB:
     jr $ra
     nop
 
-/* func_802AD42C_de.s */
+/* Libgultra_CaptureTlbMappingTableSource.s */
 .set noreorder
 .set noat
 .section .text
@@ -43,7 +43,7 @@ Libgultra_CaptureTlbMappingTable:
 .else
     addi $a2, $zero, 0x14E
 .endif
-.Lfunc_802AD42C_de_014:
+.Libgultra_ReadTlbEntryLoop:
     mtc0 $v0, $0
     tlbr
     nop
@@ -69,7 +69,7 @@ Libgultra_CaptureTlbMappingTable:
     sub $v1, $v1, $a2
     sh $v1, 0x6($a0)
     addi $a0, $a0, 0x8
-    bne $a1, $v0, .Lfunc_802AD42C_de_014
+    bne $a1, $v0, .Libgultra_ReadTlbEntryLoop
     addi $v0, $v0, 0x1
     jr $ra
     nop

@@ -311,7 +311,7 @@ extern void TextLoad_ResetTextureCache(void);
 extern void Linked_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
 extern void Linked_UpdateRibbonMatrices(RibbonActor *ribbon, GameplayCamera *camera);
 extern void Linked_DrawTexturedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
-/* The ribbon arena keeps its built display list at 0 and its ribbon list at 0x7528 (Owner802A697C/Root752C
+/* The ribbon arena keeps its built display list at 0 and its ribbon list at 0x7528 (SwooshAttachmentOwnerView/Root752C
  * view the same list). */
 struct VertexArena {
     Gfx *displayList; /* 0x0 */

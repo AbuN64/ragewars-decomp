@@ -131,7 +131,7 @@ void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 
 void Graphu64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
-void Cache_UnlockResource(void *cache, Node80253610 *resource);
+void Cache_UnlockResource(void *cache, CacheResourceNode *resource);
 
 void CInstanceCollision_TraceActorBounds(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];

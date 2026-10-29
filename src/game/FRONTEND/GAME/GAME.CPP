@@ -22,7 +22,7 @@ s32 Frontend_SelectPreviousLanguage(void *window, s32 b, s32 c, s32 press) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Frontend_SelectPreviousLanguage);
+INCLUDE_ASM("ovl_frontendMenu", Frontend_SelectPreviousLanguage);
 #endif
 #endif
 
@@ -39,6 +39,6 @@ s32 Frontend_SelectNextLanguage(void *window, s32 b, s32 c, s32 press) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Frontend_SelectNextLanguage);
+INCLUDE_ASM("ovl_frontendMenu", Frontend_SelectNextLanguage);
 #endif
 #endif

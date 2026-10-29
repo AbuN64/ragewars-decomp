@@ -89,14 +89,14 @@ void Random_ReplaceTextOccurrences(char *text, char *find, char *replacement) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Active *D_800E4680;
+extern Active *g_currentStagePreset;
 #include "COMMON/GAME_SESSION.H"
 extern void Random_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 Random_GetStageTransitionResource(void);
 extern void Match_StartMatchTransition(GameSession *, s32);
 void Random_StartFragTagMatch(void) {
  Shared_Game *g=&g_gameSettings;
- if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
+ if(g->controllerMode != 0) Random_InitGameStatus((f32)g_currentStagePreset->time,0,g_currentStagePreset->score,g_currentStagePreset->other,1,0,0);
  else Random_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,1,0,0);
  Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
@@ -106,7 +106,7 @@ void Random_StartFragTagMatch(void) {
 
 void Random_StartCaptureTheFlagMatch(void) {
  Shared_Game *g=&g_gameSettings;
- if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
+ if(g->controllerMode != 0) Random_InitGameStatus((f32)g_currentStagePreset->time,0,g_currentStagePreset->score,g_currentStagePreset->other,0,1,1);
  else Random_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,0,1,1);
  Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
@@ -116,7 +116,7 @@ void Random_StartCaptureTheFlagMatch(void) {
 
 void Random_StartTeamMatch(void) {
  Shared_Game *g=&g_gameSettings;
- if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
+ if(g->controllerMode != 0) Random_InitGameStatus((f32)g_currentStagePreset->time,g_currentStagePreset->limit,g_currentStagePreset->score,g_currentStagePreset->other,0,1,0);
  else Random_InitGameStatus((f32)g->laps,g_gameSettings.players,g->trialScore,g->trialOther,0,1,0);
  Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }
@@ -126,7 +126,7 @@ void Random_StartTeamMatch(void) {
 
 void Random_StartIndividualMatch(void) {
  Shared_Game *g=&g_gameSettings;
- if(g->controllerMode != 0) Random_InitGameStatus((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
+ if(g->controllerMode != 0) Random_InitGameStatus((f32)g_currentStagePreset->time,g_currentStagePreset->score,g_currentStagePreset->score,g_currentStagePreset->other,0,0,0);
  else Random_InitGameStatus((f32)g->laps,g_gameSettings.players,g->trialScore,g->trialOther,0,0,0);
  Match_StartMatchTransition(&g_gameSession,Random_GetStageTransitionResource());
 }

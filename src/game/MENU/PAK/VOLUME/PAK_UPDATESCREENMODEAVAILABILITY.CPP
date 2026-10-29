@@ -9,7 +9,7 @@
 /* 804453C4_7.CPP */
 #if !(defined(VERSION_US))
 /* Sets bit 23 of the flag word at offset 8 of a record unless Defs_GetMemorySize reports 0x400000 for
-   it, in which case the bit is cleared; then stores what func_8040C3BC_de returns at offset 0x14.
+   it, in which case the bit is cleared; then stores what Frontend_GetScreenModePalette_Playeroption returns at offset 0x14.
    Returns zero. */
 
 extern s32 Defs_GetMemorySize(struct MenuTextResultView *);
@@ -25,7 +25,7 @@ s32 Pak_UpdateScreenModeAvailability(struct MenuTextResultView *record) {
     return 0;
 }
 
-/* Calls func_8040C2F8_de and returns zero. */
+/* Calls Frontend_StartScreenModeFade_PakUpdatescreenmodeavailability and returns zero. */
 
 s32 Pak_StartScreenModeFade(void) {
     Frontend_StartScreenModeFade();

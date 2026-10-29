@@ -33,7 +33,7 @@ s32 Pak_RestoreAudioAndCloseMenu(void *first, void *second, void *third) {
     return Menu_TryCreateMenu(first, second, third);
 }
 
-/* Replaces the option byte D_801462E2 with what Menu_AdjustValue returns for the second argument, that byte, 8, 0, 0xFF and 0, turning 0xF7 into 0xF8, and returns zero. */
+/* Replaces the option byte g_soundEffectsVolumeOption_PakFormatvolumeslotone with what Menu_AdjustValue returns for the second argument, that byte, 8, 0, 0xFF and 0, turning 0xF7 into 0xF8, and returns zero. */
 
 extern s32 Menu_AdjustValue(void *, s32, s32, s32, s32, s32);
 

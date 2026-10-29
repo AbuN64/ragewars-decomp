@@ -6,7 +6,7 @@
 #include "TYPES.H"
 
 /* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of 4 strings through the jump table
-   jtbl_800E1068 for states 0 to 4, and g_pakOperationFiveDefaultLabel for any other state. Returns zero. */
+   k_pakOperationFiveLabelJumpTable for states 0 to 4, and g_pakOperationFiveDefaultLabel for any other state. Returns zero. */
 
 
 

@@ -93,7 +93,7 @@ extern void Node_LoadLanguageStrings(s32);
 /* Twelve bytes of stride and a load at offset 8. The debugger showed the global holding
    0x80697F80 and the results being 0, 0x8067E570, 0x8067F870 and 0x80697E00, so the third word is
    a pointer that may be absent. The largest index seen was 0x1D, which is inside the bound of 36
-   that func_80411DF0_de checks against g_frontendResourceScreenCount, so this is an accessor over the same table. */
+   that Node_IsValidScreenIndex_NodeConfigurescrolledtablecell checks against g_frontendResourceScreenCount, so this is an accessor over the same table. */
 
 /* Returns whether an index lies inside the table bound g_frontendResourceScreenCount, from zero up to but not
    including it. */
@@ -113,7 +113,7 @@ extern void Node_LoadLanguageStrings(s32);
 extern s32 g_frontendWidgetStateChanged;
 
 
-/* Sets the buffer pool flag, then runs Node_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and Node_GetBankTileTexture on every chunk. */
+/* Sets the buffer pool flag, then runs Node_AcquireArchiveEntry on every buffer pool entry, Node_GetImageTexture_NodeConfigurescrolledtablecell in mode 2 on every resource slot and Node_GetBankTileTexture on every chunk. */
 
 
 
@@ -132,7 +132,7 @@ extern void Node_GetBankTileTexture(s32 which, s32 index, s32 pass);
 extern void Node_ReleaseRetainedImageSlot(s32 i);
 
 /* Loads or unloads the images of a widget subtree: visits the later siblings when asked and the
-   children, then for an image widget (type 3) loads its image through func_80410674_de or unloads it
+   children, then for an image widget (type 3) loads its image through Node_GetImageTexture_NodeConfigurescrolledtablecell or unloads it
    through Node_ReleaseRetainedImageSlot, and for a button (type 8) visits its normal, pressed and highlighted
    variants without their siblings; type 4 widgets and other types have nothing to do. */
 
@@ -150,7 +150,7 @@ extern s32 s_typeText;
 
 extern s32 g_typedWidgetEventActorKinds;
 
-extern Handler802A2B50 g_typedWidgetEventHandlers;
+extern WidgetEventHandler g_typedWidgetEventHandlers;
 
 void Node_ReleaseUnprotectedBuffers(s32 force) {
     s32 i;
@@ -552,12 +552,12 @@ s32 Node_DispatchTypedWidgetEvent(void *widget, s32 eventId, s32 eventData0, s32
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_typedWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

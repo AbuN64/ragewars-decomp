@@ -32,12 +32,12 @@ unsigned int g_particleCollisionProbeResult[] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_801002E0[3] = {
+unsigned int k_navIsBallisticArcObstructedDataWords[3] = {
     0xC1DD3B02, 0x1F3EF322, 0xCEC23DDE,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_801002E0[3] = {
+unsigned int k_navIsBallisticArcObstructedDataWords[3] = {
     0x000428C0, 0x00A32821, 0x000520C0,
 };
 #endif

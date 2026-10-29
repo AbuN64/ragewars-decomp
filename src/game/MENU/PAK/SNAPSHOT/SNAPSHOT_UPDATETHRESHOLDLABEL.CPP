@@ -7,7 +7,7 @@ extern char *g_pakThresholdBelow2000Text, *g_pakThresholdBelow3000Text, *g_pakTh
 typedef struct { char pad0[0x14]; char **text; } PakThresholdLabel;
 /* Copies the 12-byte rank label chosen by the value g_pakProfileRankScore (banded 0, 50, 150, 300, 500, 800, 1300, 2000, 3000, 4500, 6500, 9999) into the text 8 bytes in; returns zero. */
 s32 Snapshot_UpdateThresholdLabel(PakThresholdLabel *label) {
-    u32 v = D_8014D488.values[2];
+    u32 v = g_pakLoadedProfile.values[2];
     char *src = 0;
     char *dst;
     s32 i;

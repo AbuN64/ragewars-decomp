@@ -43,6 +43,6 @@ char s_SirawdmaIoSprawdmaText[14] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_802B9CB0_CD7E4_us_rev1.c */
+/* ROM-grounded data: src/SirawdmaTextSource.c */
 const char s_sirawdmaText[14] = "io/sirawdma.c";
 #endif

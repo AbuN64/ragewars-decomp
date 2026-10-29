@@ -12,7 +12,7 @@ const unsigned int g_profileQuantityThreeColumnFormatWords[3] = {
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_8043E2D8_E2F20_us_rev1.c */
+/* ROM-grounded data: src/g_profileQuantityTwoDigitFormat_CmenuprofileFormatprofilequantitylabelData.c */
 const unsigned char g_profileQuantityTwoDigitFormat[5] = {
     0x25, 0x30, 0x32, 0x64, 0x00,
 };

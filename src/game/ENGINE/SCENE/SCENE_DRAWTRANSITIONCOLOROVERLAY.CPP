@@ -192,7 +192,7 @@ void Scene_DrawTransitionColorOverlay(Shared_World *world) {
             color[0] = entry->red;
             color[1] = entry->green;
             color[2] = entry->blue;
-            alpha = (world->selectionTimer * D_800CA3E0[1]) /
+            alpha = (world->selectionTimer * g_transitionAlphaScaleTable[1]) /
                     entry->value;
             if (!(g_transitionAlphaUnsignedConversionBase <= alpha)) {
                 converted = (s32)alpha;

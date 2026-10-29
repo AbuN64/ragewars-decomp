@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "DATA/OVL1_J/MENU_CREATESOUNDOPTIONSSCREEN_DATA.H"
 
-/* DATA_800E58A0.CPP */
+/* g_MenuCreatesoundoptionsscreenWords1_MenuCreatesoundoptionsscreenData.CPP */
 /* ROM-grounded data: rodata/writable/800E58A0 */
 unsigned int g_MenuCreatesoundoptionsscreenWords1[2] = {
     0x00000000, 0x00000000,
 };
 
-/* DATA_800E58A8.CPP */
+/* g_MenuCreatesoundoptionsscreenPointerWords1_MenuCreatesoundoptionsscreenData.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int D_src_3cb405cb[42] = {
@@ -44,12 +44,12 @@ unsigned int D_src_3cb405cb[42] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
 unsigned int g_MenuCreatesoundoptionsscreenPointerWords1[6] = {
-    0x00000E07, 0x00000006, (unsigned int)g_packedCodeAddress24_004391F0, 0x00000E08, 0x00000006, (unsigned int)g_packedCodeAddress24_004391F8,
+    0x00000E07, 0x00000006, (unsigned int)g_Menu_SoundOptionsReturnZeroPackedAddress24_MenuCreatesoundoptionsscreenData, 0x00000E08, 0x00000006, (unsigned int)g_Menu_UpdateSoundOptionsScreenPackedAddress24_MenuCreatesoundoptionsscreenData,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800E0520[36] = {
+unsigned int g_MenuCreatesoundoptionsscreenPointerWordsTailUs[36] = {
     0x00000E06, 0x00000006, 0x004390F0, 0x00000E03, 0x00000006, 0x004391C0, 0x00000002, 0x00000006,
     0x00439354, 0x00000001, 0x00000006, 0x00439308, 0x00000000, 0x00000000, 0x00000000, 0x00000E07,
     0x0000000D, 0x004394E0, 0x00000E08, 0x0000000D, 0x004394E8, 0x00000E06, 0x0000000D, 0x00439420,

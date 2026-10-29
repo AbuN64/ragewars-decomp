@@ -38,22 +38,22 @@ const unsigned int k_UnicolEncodedWordsBlock2[4] = {
     0x3F000000, 0x3F000000, 0x3F800000, 0x3EB33333,
 };
 
-/* ROM-grounded data: src/rw_pool_8024570C_C94C0_us_rev1.c */
+/* ROM-grounded data: src/k_UnicolOneWords_Unicol.c */
 const unsigned int k_UnicolOneWords[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_802459A0_C94C4_us_rev1.c */
+/* ROM-grounded data: src/k_UnicolEncodedWordsBlock5_Unicol.c */
 const unsigned int k_UnicolEncodedWordsBlock5[2] = {
     0x423E0000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_80245AD8_C94CC_us_rev1.c */
+/* ROM-grounded data: src/k_UnicolEncodedWordsBlock3_Unicol.c */
 const unsigned int k_UnicolEncodedWordsBlock3[1] = {
     0x4123D70A,
 };
 
-/* ROM-grounded data: src/rw_pool_80245C38_C94D0_us_rev1.c */
+/* ROM-grounded data: src/k_UnicolEncodedWordsBlock4_Unicol.c */
 const unsigned int k_UnicolEncodedWordsBlock4[1] = {
     0x3D888889,
 };

@@ -30,7 +30,7 @@ extern f32 g_frameElapsedTime;
 
 extern FragTagMatchRulesView g_gameSettings;
 
-extern Course *D_800E4680;
+extern Course *g_currentStagePreset;
 
 extern char g_localPlayerProfiles[][0x190];
 
@@ -114,8 +114,8 @@ void Playerai_InitializeLivesAndRespawn(PlayerFragTagSelectionView *player) {
         if (g_gameSettings.mode == 1 && player->isBot == 0) {
             player->lives = (unsigned char)Player_GetLevelProgress(g_localPlayerProfiles[player->character], player->info->characterKind) / 2 + 1;
         }
-        if (g_gameSettings.mode == 4 && player->isBot == 0 && D_800E4680 != 0) {
-            player->lives = D_800E4680->laps;
+        if (g_gameSettings.mode == 4 && player->isBot == 0 && g_currentStagePreset != 0) {
+            player->lives = g_currentStagePreset->laps;
         }
         state = 1;
     } else {

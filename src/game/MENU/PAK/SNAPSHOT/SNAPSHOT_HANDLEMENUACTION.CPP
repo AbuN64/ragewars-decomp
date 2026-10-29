@@ -12,21 +12,21 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
 extern char *g_pakDefaultNoteNamesLocalized[];
-extern char *D_800E27C4_eu[];
-extern u8 *D_800E2804_eu[];
+extern char *g_pakEmptyNoteNamesLocalized_eu[];
+extern u8 *g_pakSpaceLabelScannedLocalized_eu[];
 extern char *g_pakSnapshotGameNames[];
-extern char D_004501C4[];
+extern char g_pakOverwriteNoteDialogResource_eu[];
 #define ENTRY_TEXT(e) ((e)->text[g_languageIndex])
-#define PAK_HEADER_376C D_800E2804_eu
+#define PAK_HEADER_376C g_pakSpaceLabelScannedLocalized_eu
 #else
 #define ENTRY_TEXT(e) (*(e)->text)
-#define PAK_HEADER_376C (&D_800D376C)
+#define PAK_HEADER_376C (&g_pakSpaceLabelScannedText)
 #endif
 extern s32 g_pakUseScannedChannel;
 
 extern char *g_pakDefaultNoteNameFixed;
 
-extern char *D_800D375C;
+extern char *g_pakEmptyNoteNameFixed;
 
 extern s32 Note_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
@@ -46,11 +46,11 @@ extern void XPlus_CopyString(u8 *dst, char *src);
 
 extern s32 g_worldSnapshotNoteBytes;
 
-extern Digits D_800DCD78;
+extern Digits k_pakDigitsInitial;
 
-extern u8 *D_800D3754;
+extern u8 *g_pakSpaceLabelText;
 
-extern u8 *D_800D376C;
+extern u8 *g_pakSpaceLabelScannedText;
 
 extern u8 *g_unlockedLevelResultLabel;
 
@@ -62,12 +62,12 @@ static inline int space_required(int size) {size += 0x610; return Note_BytesToPa
 
 extern char g_matchEndingTeamWheelClose[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define PAK_D0044EEF4 D_004501C4
+#define PAK_OVERWRITE_NOTE_DIALOG g_pakOverwriteNoteDialogResource_eu
 #else
-#define PAK_D0044EEF4 D_0044EEF4
+#define PAK_OVERWRITE_NOTE_DIALOG g_pakOverwriteNoteDialogResource
 #endif
 
-extern char D_0044EEF4[];
+extern char g_pakOverwriteNoteDialogResource[];
 
 extern s32 Snapshot_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
 
@@ -141,7 +141,7 @@ s32 Snapshot_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
 
     c = ' ';
     index = entry->id - 3;
-    if (D_80153784 != 0) {
+    if (g_pakMenuPromptAccepted != 0) {
         return 0;
     }
     if (g_pakUseScannedChannel != 0) {
@@ -161,10 +161,10 @@ s32 Snapshot_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         game = &g_gameSettings;
-        XPlus_CopyString(name, D_800E27C4_eu[game->language]);
-        XPlus_CopyString(ext, D_800E27C4_eu[game->language]);
+        XPlus_CopyString(name, g_pakEmptyNoteNamesLocalized_eu[game->language]);
+        XPlus_CopyString(ext, g_pakEmptyNoteNamesLocalized_eu[game->language]);
 #else
-        placeholder = &D_800D375C;
+        placeholder = &g_pakEmptyNoteNameFixed;
         XPlus_CopyString(name, *placeholder);
         XPlus_CopyString(ext, *placeholder);
 #endif
@@ -216,12 +216,12 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     } else {
         ch = menu->slot->controllerPort;
     }
-    digits = D_800DCD78;
+    digits = k_pakDigitsInitial;
     buffer = &digits;
-    if (D_8014D4C0_de != 0) {
-        entry->text = &D_800D3754;
+    if (g_pakSaveMenuActiveDe != 0) {
+        entry->text = &g_pakSpaceLabelText;
         if (Note_GetFreePages(ch, &freeSpace) == 0) {
-            if (D_8014D4EC_de) need=Note_BytesToPakPages(0x18); else need=space_required(g_worldSnapshotNoteBytes);
+            if (g_pakProfileLoadMode_de) need=Note_BytesToPakPages(0x18); else need=space_required(g_worldSnapshotNoteBytes);
             text = ENTRY_TEXT(entry);
             Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
@@ -237,8 +237,8 @@ s32 Snapshot_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *men
     } else if (g_pakUseScannedChannel != 0) {
         header = PAK_HEADER_376C;
         goto fill;
-    } else if (D_80153760 != 0) {
-        header = &D_800D3754;
+    } else if (g_pakProfileLoadActive != 0) {
+        header = &g_pakSpaceLabelText;
     fill:
         entry->text = header;
         result = Note_GetFreePages(ch, &freeSpace);
@@ -272,7 +272,7 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
     s32 hasNote;
     s32 c;
 
-    if (D_8014D4C0_de != 0) {
+    if (g_pakSaveMenuActiveDe != 0) {
         pickChannel(menu, &ch);
     }
     if (g_pakUseScannedChannel != 0) {
@@ -281,18 +281,18 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
         use = ch;
     }
     if (Snapshot_CheckStatusPrompt(menu, use, 0) != 0) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         return 1;
     }
-    if (D_8014D4EC_de != 0) {
-        if (D_8014D4C0_de != 0) {
+    if (g_pakProfileLoadMode_de != 0) {
+        if (g_pakSaveMenuActiveDe != 0) {
             Snapshot_SaveControllerRecord(unused, menu, unusedEvent);
             return 1;
         }
-    } else if (D_8014D4C0_de != 0) {
+    } else if (g_pakSaveMenuActiveDe != 0) {
         hasNote = findNote(use, &g_controllerPakOverwriteNoteIndex);
         if (hasNote != 0 && g_controllerPakOverwriteNoteIndex >= 0 && g_controllerPakOverwriteNoteIndex < 16) {
-            Menu_OpenDialog(g_matchEndingTeamWheelClose, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
+            Menu_OpenDialog(g_matchEndingTeamWheelClose, PAK_OVERWRITE_NOTE_DIALOG, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
         Snapshot_SaveSnapshotAndClose(unused, menu, unusedEvent);
@@ -321,7 +321,7 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
         }
         g_introSelectedItem = next;
         if (next == -1) {
-            D_8014ADA0 = D_80153784 = 1;
+            g_pakRecheckRequested = g_pakMenuPromptAccepted = 1;
             return 1;
         }
         if (g_pakUseScannedChannel != 0) {
@@ -331,7 +331,7 @@ s32 Snapshot_HandleMenuAction(s32 unused, Shared_PakMenu *menu, s32 unusedEvent)
         }
         ch = c;
         if (Snapshot_CheckStatusPrompt(menu, c, 0) != 0) {
-            D_80153784 = 1;
+            g_pakMenuPromptAccepted = 1;
             return 1;
         }
         Snapshot_MarkSaveNotes(menu);

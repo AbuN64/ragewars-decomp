@@ -163,7 +163,7 @@ void Gsky_ActivateAllMessagePools(s32 messageOwner) {
     }
 }
 
-/** Thin wrapper forwarding an offset argument to func_8044A7D0_de. */
+/** Thin wrapper forwarding an offset argument to Pool_InitEntryPool_SkyPosttargetedscreenmessage. */
 void Gsky_InitializeMessageEntryPool(int viewAddress) {
     Pool_InitEntryPool(viewAddress + 0x570);
 }
@@ -212,7 +212,7 @@ void Gsky_SetShakeChannel(struct Channel *channel, float inputLevel, int waveMod
     channel->mode = waveMode;
 }
 
-/* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by k_screenMessageWavePhaseScale, times
+/* Evaluates a wave: kind 1 returns Gu_Sinf_SkyPosttargetedscreenmessage of the phase at 0x10 scaled by k_screenMessageWavePhaseScale, times
    the amplitude at 0xC; kind 0 returns Graphu64_RandomBetween over minus to plus the amplitude; any other
    kind returns zero. */
 

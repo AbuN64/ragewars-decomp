@@ -25,7 +25,7 @@ char s_GNotecountintformatMObjectIndeText[13] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_formats_8041BE90_E2080_us_rev1.c */
+/* ROM-grounded data: src/g_noteCountIntFormat_GNotecountintformat.c */
 const unsigned char g_noteCountIntFormat[] = {
     0x25, 0x64, 0x00,
 #if defined(VERSION_US_REV1)

@@ -109,13 +109,13 @@ s32 Heap_AllocateAtAddress(s8 *arena, void *requestedAddress, s32 requestedBytes
 
 
 
-void Heap_CoalesceEmptyPhysicalBlocks(Pool80255720 *arena)
+void Heap_CoalesceEmptyPhysicalBlocks(HeapArena_Heap *arena)
 {
-    Block80255720 *block;
-    Block80255720 *header;
-    Block80255720 *other;
-    Block80255720 *scan;
-    Block80255720 *next;
+    HeapArenaBlock *block;
+    HeapArenaBlock *header;
+    HeapArenaBlock *other;
+    HeapArenaBlock *scan;
+    HeapArenaBlock *next;
 
     while (arena->anchor->next_phys != 0) {
         header = arena->anchor->next_phys;
@@ -328,14 +328,14 @@ void *Heap_AllocateFromBack(HeapFreeBlockList *heap, s32 request)
     return 0;
 }
 
-s32 Heap_FreeAllocation(Pool80255ACC *arena, char *dataToFree) {
-    Block80255720 *block;
-    Block80255720 *header;
-    Block80255720 *other;
-    Block80255720 *scan;
+s32 Heap_FreeAllocation(HeapArena_Entryrecat18v3 *arena, char *dataToFree) {
+    HeapArenaBlock *block;
+    HeapArenaBlock *header;
+    HeapArenaBlock *other;
+    HeapArenaBlock *scan;
     u32 next;
 
-    header = (Block80255720 *)(dataToFree - 0x20);
+    header = (HeapArenaBlock *)(dataToFree - 0x20);
     block = header->prev_phys;
     if (block->size == 0) {
         other = header->prev;
@@ -357,9 +357,9 @@ s32 Heap_FreeAllocation(Pool80255ACC *arena, char *dataToFree) {
             other = scan;
         }
         next = (u32)other->next;
-        block->next = (Block80255720 *)next;
+        block->next = (HeapArenaBlock *)next;
         if (other->next != 0) {
-            *(Block80255720 **)next = block;
+            *(HeapArenaBlock **)next = block;
         }
         other->next = block;
         if (arena->tail == other) {
@@ -397,7 +397,7 @@ merge:
     return block->size - 0x20;
 }
 
-void Heap_GetFreeByteCounts(Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {
+void Heap_GetFreeByteCounts(HeapArena_Entryrecat18v3 *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {
     u32 previousLargestBytes;
     u32 largestBytes;
     void *freeBlockCursor;
@@ -407,14 +407,14 @@ void Heap_GetFreeByteCounts(Pool80255ACC *arena, s32 *totalBytesOut, u32 *larges
     freeBlockCursor = arena->head;
     if (freeBlockCursor != 0) {
         do {
-            *totalBytesOut += (u32)((Block80255720 *)freeBlockCursor)->size;
-            largestBytes = (u32)((Block80255720 *)freeBlockCursor)->size;
+            *totalBytesOut += (u32)((HeapArenaBlock *)freeBlockCursor)->size;
+            largestBytes = (u32)((HeapArenaBlock *)freeBlockCursor)->size;
             previousLargestBytes = *largestBlockBytesOut;
             if (largestBytes < previousLargestBytes) {
                 largestBytes = previousLargestBytes;
             }
             *largestBlockBytesOut = largestBytes;
-            freeBlockCursor = ((Block80255720 *)freeBlockCursor)->next;
+            freeBlockCursor = ((HeapArenaBlock *)freeBlockCursor)->next;
         } while (freeBlockCursor != 0);
     }
 }

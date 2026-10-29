@@ -70,7 +70,7 @@ extern s32 g_characterSelectionEventIds;
 
 extern s32 g_characterSelectionEventActorKinds;
 
-extern Handler802A2B50 g_characterSelectionEventHandlers;
+extern WidgetEventHandler g_characterSelectionEventHandlers;
 
 int Selection_HandleCharacterVariantCycle(int unused0, int unused1, unsigned int message, int extra) {
     int index = message & 0xFFFF;
@@ -177,12 +177,12 @@ s32 Selection_DispatchCharacterSelectionEvent(void *widget, s32 eventId, s32 eve
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_characterSelectionEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

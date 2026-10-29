@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "COMMON/LONE/D_800E4680.H"
+#include "COMMON/LONE/g_currentStagePreset.H"
 #include "COMMON/LONE/G_LANGUAGEINDEX.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -15,9 +15,9 @@
 #include "COMMON/PLAYERPROFILES.H"
 extern s32 Player_GetLevelProgress(Profile *, s32);
 
-/* Applies event *D_800E4680 to player record g_localPlayerProfiles[index] once per g_selectedLevelId: when that bit
+/* Applies event *g_currentStagePreset to player record g_localPlayerProfiles[index] once per g_selectedLevelId: when that bit
    of the record's current slot flags is already set it returns -1; otherwise it sets the bit and,
-   for an event code below 58, dispatches through jtbl_800E1790 to the effect for that code and
+   for an event code below 58, dispatches through k_matchRewardEffectJumpTable to the effect for that code and
    returns the code plus 5000 (5001 when the second effect's test clears bit 0), or -1 for a code
    the table marks unknown. The dispatch and return sit in a one-pass loop; that weighting gives
    the result its saved register ahead of the key pointer, as the cartridge has it. */
@@ -45,8 +45,8 @@ extern void Player_AddFiftyToProfileValue16(Profile *);
 extern void Player_AdvanceProfileProgress(Profile *);
 
 /* Returns the message text for an event result from Match_ApplyLevelCompletionReward: for results 5001 to 5057 the
-   text pointer jtbl_800DD848 selects for the result, where result 5002 picks between two texts by
-   bit 0 of func_8022F454_de for the first player's current slot; zero for any other result. The
+   text pointer k_matchResultTextJumpTable selects for the result, where result 5002 picks between two texts by
+   bit 0 of Player_GetLevelProgress_MatchGetresulttext for the first player's current slot; zero for any other result. The
    dispatch and return sit in a one-pass loop, whose weighting gives the text its register as the
    cartridge has it. */
 
@@ -70,7 +70,7 @@ s32 Match_ApplyLevelCompletionReward(s32 index) {
         goto done;
     }
     Defs_SetBitValue(&player->achievementFlags[0xDB + player->slot * 5], *key, 1);
-    code = *D_800E4680;
+    code = *g_currentStagePreset;
     result = code + 5000;
     do {
         if (code >= 58) {
@@ -295,7 +295,7 @@ char *Match_GetResultText(s32 result) {
         text = RW_LOCALIZED_TEXT(g_matchResult5010TextDe, g_matchResult5010TextEu, g_matchResult5010TextEuX, g_languageIndex);
         break;
     case 5011:
-        text = RW_LOCALIZED_TEXT(g_matchResult5011TextDe, D_800E1FD4, g_matchResult5011TextEuX, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5011TextDe, g_matchResult5011TextEu, g_matchResult5011TextEuX, g_languageIndex);
         break;
     case 5012:
         text = RW_LOCALIZED_TEXT(g_matchResult5012TextDe, g_matchResult5012TextEu, g_matchResult5012TextEu, g_languageIndex);
@@ -343,7 +343,7 @@ char *Match_GetResultText(s32 result) {
         text = RW_LOCALIZED_TEXT(g_matchResult5026TextDe, g_matchResult5026TextEu, g_matchResult5026TextEuX, g_languageIndex);
         break;
     case 5027:
-        text = RW_LOCALIZED_TEXT(g_matchResult5027TextDe, D_800E1FC4, g_matchResult5027TextEuX, g_languageIndex);
+        text = RW_LOCALIZED_TEXT(g_matchResult5027TextDe, g_matchResult5027TextEu, g_matchResult5027TextEuX, g_languageIndex);
         break;
     case 5028:
         text = RW_LOCALIZED_TEXT(g_matchResult5028TextDe, g_matchResult5028TextEu, g_matchResult5028TextEu, g_languageIndex);

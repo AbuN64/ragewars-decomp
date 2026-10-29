@@ -2,12 +2,12 @@
 #define FRONTEND_FRONTEND_DRAWMODELPREVIEW_H
 #include "COMMON/LABEL.H"
 extern void Preview_SetPreviewFacing(PreviewFacingView *preview, CVector3 v);
-struct Obj8041CAD8;
-extern void Preview_SelectPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
-extern void Preview_SelectMatchingPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
+struct ModelPreview;
+extern void Preview_SelectPreviewModel(struct ModelPreview *preview, s32 id, s32 extra, s32 expected);
+extern void Preview_SelectMatchingPreviewModel(struct ModelPreview *preview, s32 id, s32 extra, s32 expected);
 extern void Preview_SetPreviewAngle(PreviewAngleView *preview, s32 angle);
 extern void Preview_SetPreviewPosition(PreviewPositionView *preview, CVector3 v);
-typedef struct Ret8028CFA0 {
+typedef struct PreviewActorDefinition {
     s32 unk0;
     s32 unk4;
     f32 unk8;
@@ -19,8 +19,8 @@ typedef struct Ret8028CFA0 {
     char pad20[0x180 - 0x20];
     s32 unk180;
     s32 reservedWord;
-} Ret8028CFA0;
-typedef struct Obj8041CAD8At190 {
+} PreviewActorDefinition;
+typedef struct ModelPreviewActor {
     u8 kind;
     s8 team;
     s8 reserved2;
@@ -100,12 +100,12 @@ typedef struct Obj8041CAD8At190 {
     char pad290[0x2E0 - 0x290];
     s32 renderFlags;
     s32 reservedWord1;
-} Obj8041CAD8At190;
-typedef struct Obj8041CAD8 {
+} ModelPreviewActor;
+typedef struct ModelPreview {
     s32 actorKind;
-    Ret8028CFA0 copy4;
+    PreviewActorDefinition copy4;
     char pad18C[0x190 - 0x18C];
-    Obj8041CAD8At190 sub190;
+    ModelPreviewActor sub190;
     s32 modelLoaded;
     char pad47C[0x480 - 0x47C];
     CVector3 position;
@@ -113,6 +113,6 @@ typedef struct Obj8041CAD8 {
     f32 angleDegrees;
     s32 updatePose;
     s32 pitchDegrees;
-} Obj8041CAD8;
-extern void *Preview_InitModelPreview(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
+} ModelPreview;
+extern void *Preview_InitModelPreview(ModelPreview *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 #endif

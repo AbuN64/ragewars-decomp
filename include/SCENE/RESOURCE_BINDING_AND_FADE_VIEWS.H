@@ -59,9 +59,9 @@ struct ResourceFadeDefinition {
     u8 reserved10[0x14];
     u32 threshold; /* 0x24 */
 };
-struct NodePair80253E04 {
-    Node80253610 *first;
-    Node80253610 *second;
+struct ResourceNodePair {
+    CacheResourceNode *first;
+    CacheResourceNode *second;
 };
 /* Resource manager slot and its wait queue (g_resourceSlotLockState / g_resourceHeapLockQueue). */
 typedef struct ResourceLockState {

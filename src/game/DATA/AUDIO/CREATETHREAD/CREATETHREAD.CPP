@@ -5,7 +5,7 @@
 unsigned char g_CreatethreadTrailingBytesBlock1[8] = { 0x03, 0xE0, 0x00, 0x08, 0x27, 0xBD, 0x00, 0x18 };
 #endif
 
-/* DATA_802BA4CC.CPP */
+/* k_createThreadFuncTextWord.CPP */
 #if defined(VERSION_US)
 unsigned int func_802B56DC_eu_x_padding_BB0CC[1] = {
     0x46756E63,
@@ -19,7 +19,7 @@ unsigned int g_CreatethreadEncodedWords[1] = {
 };
 #endif
 
-/* DATA_802C1FFC.CPP */
+/* g_CreatethreadTrailingBytesBlock2_Createthread.CPP */
 #if defined(VERSION_EU_X)
 unsigned char g_CreatethreadTrailingBytesBlock2[4] = { 0x0C, 0x0B, 0x01, 0x44 };
 #endif

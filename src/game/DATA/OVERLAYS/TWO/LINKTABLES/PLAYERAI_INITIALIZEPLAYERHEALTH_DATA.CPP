@@ -6,7 +6,7 @@ extern char g_weaponai_UpdateSpinAndAlternateFireEntry[];
 extern char g_weaponai_SelectReleasedFireStateEntry[];
 extern char g_weaponai_UpdateHeldFireEntry[];
 extern char g_weapon_InitializeChargeForWeaponFiveEntry[];
-extern char D_00232B74[];
+extern char addrLow_Weapon_UpdateState0_eu[];
 extern char g_weapon_ResetControllerAndSpinEntry[];
 extern char addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3[];
 extern char g_weapon_InitializeChargeForWeaponEightEntry[];
@@ -19,7 +19,7 @@ unsigned int k_PlayeraiInitializeplayerhealthEncodedWordsBlock1[186] = {
     0x4F10000A, 0xFFFF0000, 0x5046000A, 0x5047000A, 0x5048000A, 0x5049000A, 0xFFFF0000, 0x501E000A,
     0x5028000A, 0x5032000A, 0x503C000A, 0xFFFF0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0xC0400000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, (unsigned int)D_00232B74, (unsigned int)g_weapon_ResetControllerAndSpinEntry, 0x00000000, 0x00004E20, 0x3F800000,
+    0x00000000, 0x00000000, 0x00000000, (unsigned int)addrLow_Weapon_UpdateState0_eu, (unsigned int)g_weapon_ResetControllerAndSpinEntry, 0x00000000, 0x00004E20, 0x3F800000,
     0x00000000, 0x00000000, 0x00000001, (unsigned int)g_weapon_ReleaseHandlesAndExitState39Entry, (unsigned int)g_Weaponai_UpdateAfterAmmoModeChangeEncodedCallback, 0x00000000, 0x00004E2A, 0x3F800000,
     0x00000002, 0x00000000, 0x00000002, (unsigned int)addrLow_Weapon_ReleaseLinkedActorHandlesEntryVariant3, (unsigned int)g_weaponai_UpdateAlternateFireEntry, 0x00000000, 0x00004E84, 0x3F800000,
     0x00000000, 0x00000000, 0x00000003, 0x00000000, (unsigned int)g_weaponai_UpdateAlternateFireEntry, 0x00000000, 0x00004E8E, 0x3F800000,

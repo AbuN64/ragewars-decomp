@@ -17,7 +17,7 @@
 struct MenuActorInputView;
 
 s32 Menu_DispatchScrollingChoiceEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler80437868 *entry;
+    MenuChoiceEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

@@ -17,7 +17,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
+/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Node_FindWidgetByResourceId finds for the low half of the first argument, links the record Node_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through Node_WrapNodeInParent_SmpButton and Node_ReplaceNodeRefs_SmpButton. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 
 
 
@@ -32,7 +32,7 @@ extern void Node_ReplaceNodeRefs(WidgetReferenceNodeView *node, void *from, void
 extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
-   0x114, to func_802A025C_de and increments the count. func_8041AD10_de selects an entry. */
+   0x114, to XPlus_CopyString_ResultsFillprofileweaponrows and increments the count. SmpButton_SelectListEntry_PlayerInitplayersettingsscreen selects an entry. */
 
 
 
@@ -46,7 +46,7 @@ extern u8 *XPlus_CopyString(u8 *, u8 *);
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
@@ -162,12 +162,12 @@ s32 SmpButton_DispatchListEvent(void *widget, s32 eventId, s32 eventData0, s32 e
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_listButtonEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }
@@ -336,12 +336,12 @@ s32 SmpButton_DispatchButtonEvent(void *widget, s32 eventId, s32 eventData0, s32
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_buttonWidgetEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

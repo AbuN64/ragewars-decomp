@@ -1,12 +1,12 @@
 
 
-/* DATA_800D0E51.CPP */
+/* g_OvlgameInitializecontrollersessionEncodedBytes_OvlgameInitializecontrollersessionData.CPP */
 /* ROM-grounded data: rodata/unresolved/800D0E51 */
 unsigned char g_OvlgameInitializecontrollersessionEncodedBytes[1] = {
     0x00,
 };
 
-/* DATA_800D0E52.CPP */
+/* g_OvlgameInitializecontrollersessionHalfwordAndWords.CPP */
 /* ROM-grounded data: rodata/writable/800D0E52 */
 #ifdef VERSION_DE
 /* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */

@@ -79,8 +79,8 @@ struct AudioDispatchBusySlot {
     char padB0[0x1C];
 };
 
-struct SceneCode802591C0;
-struct SceneCode802591C0 {
+struct AudioScene;
+struct AudioScene {
     char pad0[0x1DBC];
     AudioDispatchBusySlot entries[1];
     char pad1E88[0x2A84 - 0x1E88];
@@ -91,7 +91,7 @@ struct SceneCode802591C0 {
     s16 pendingSelection;
 };
 struct AudioSpatialVoiceManagerView;
-struct SceneCode802591C0;
+struct AudioScene;
 
 
 struct AudioVoiceListLinks;
@@ -129,9 +129,9 @@ struct Font {
     char pad0[0xC];
     struct Glyphs *glyphs;
 };
-struct ContextCode802591C0;
+struct SoundContext;
 struct Font;
-struct ContextCode802591C0 {
+struct SoundContext {
     char pad0[0x7C];
     struct Font *font;
     char pad80[4];
@@ -179,7 +179,7 @@ struct AudioInstanceLimitOwner {
 struct AudioInstrumentPackView;
 typedef struct AudioInstrumentPackView AudioInstrumentPackView;
 
-struct CellCode802591C0;
+struct AudioSoundCell;
 
 struct NodeAudioWorldRecyclePendingSoundsByIdentifier;
 typedef struct NodeAudioWorldRecyclePendingSoundsByIdentifier NodeAudioWorldRecyclePendingSoundsByIdentifier;
@@ -245,8 +245,8 @@ struct LinkAudioWorldQueuePrioritizedSound {
 
 
 
-struct CellCode802591C0;
-typedef struct CellCode802591C0 CellCode802591C0;
+struct AudioSoundCell;
+typedef struct AudioSoundCell AudioSoundCell;
 
 struct AudioInstanceLimitOwner;
 typedef struct AudioInstanceLimitOwner AudioInstanceLimitOwner;
@@ -296,9 +296,9 @@ struct ListHead;
 typedef struct ListHead ListHead;
 
 struct Cache;
-struct ContextCode802591C0;
+struct SoundContext;
 struct Cache {
-    struct ContextCode802591C0 *context;
+    struct SoundContext *context;
     ListHead pending;
     char padC[0xD8 - 0xC];
     ListHead done;
@@ -324,8 +324,8 @@ typedef struct LinkPair LinkPair;
 struct Glyphs;
 typedef struct Glyphs Glyphs;
 
-struct ContextCode802591C0;
-typedef struct ContextCode802591C0 ContextCode802591C0;
+struct SoundContext;
+typedef struct SoundContext SoundContext;
 
 
 struct LinkPair;

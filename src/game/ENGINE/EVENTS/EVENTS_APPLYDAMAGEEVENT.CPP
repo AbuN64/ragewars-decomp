@@ -521,7 +521,7 @@ extern f32 Gobjinst_GetRootMeanSquareScale(void *target);
 
 
 
-/* Decides whether one actor may affect another: always when the override g_motionVisibilitySettings is set; never for actors of the same kind or a target lacking flags 0x310000, nor, while D_8013B290 is set, when neither actor carries 0x300000; otherwise only when the target is in state 1, 4, 7 or 11. */
+/* Decides whether one actor may affect another: always when the override g_motionVisibilitySettings is set; never for actors of the same kind or a target lacking flags 0x310000, nor, while visibilityEnabled_AnimpoolSpawnsceneeffect is set, when neither actor carries 0x300000; otherwise only when the target is in state 1, 4, 7 or 11. */
 
 
 

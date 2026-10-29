@@ -6,7 +6,7 @@ extern float Polytrak2_UnpackUnitValue(float value, int bits);
 extern f32 Polytrak2_ScaleToRange(f32 value, f32 lower, f32 upper);
 extern void Polytrak2_WriteBitsAtAddress(u32 bitAddress, u32 bitCount, u32 fieldValue);
 extern unsigned int Polytrak2_BitAddressToWordAddress(unsigned int bitAddress);
-extern Func802608ECResult Polytrak2_ComputeQuantizationRange(f32 minimumValue, f32 maximumValue, f32 maximumError);
+extern Polytrak2QuantizationRange Polytrak2_ComputeQuantizationRange(f32 minimumValue, f32 maximumValue, f32 maximumError);
 extern void Polytrak2_WriteBitsAndAdvance(u32 *bitCursor, u32 bitCount, u32 fieldValue);
 extern void * Polytrak2_GetResidentResource(void *object);
 extern s32 Polytrak2_ByteAddressToBitAddress(s32 byteAddress);

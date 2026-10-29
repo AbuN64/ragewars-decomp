@@ -5,8 +5,8 @@
 
 typedef struct Shared_SceneResources Shared_SceneResources;
 struct Shared_SceneResources {
-    Shared_SceneFontResources font; /* +0x0: src/func_80286A78.c */
-    Shared_SceneActorResources actors; /* +0x2C8: src/func_80286A78.c */
+    Shared_SceneFontResources font; /* +0x0: src/Scene_LoadLevelResources_SceneResourceState.c */
+    Shared_SceneActorResources actors; /* +0x2C8: src/Scene_LoadLevelResources_SceneResourceState.c */
 };
 typedef char Shared_SceneResources_size_check[(sizeof(Shared_SceneResources) == 0x2C9) ? 1 : -1];
 #endif

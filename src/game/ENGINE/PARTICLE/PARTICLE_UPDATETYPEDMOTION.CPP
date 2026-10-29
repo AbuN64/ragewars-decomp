@@ -720,7 +720,7 @@ void Particle_DispatchOwnerContactLinks(ActorParticleDispatchOwnerContactLinks *
         if (is_group_c(actor)) {
             Link_DispatchActorLinks(g_currentActorInstance, 0x10, actor);
         }
-    } else if (actor->descriptor->field_0 == 1 || actor->descriptor->field_0 == 4) {
+    } else if (actor->descriptor->value == 1 || actor->descriptor->value == 4) {
         if (is_group_a(actor)) {
             Link_DispatchActorLinks(g_currentActorInstance, 0x80, actor);
         }

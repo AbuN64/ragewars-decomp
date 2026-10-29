@@ -4,7 +4,7 @@
 #include "TYPES.H"
 typedef struct EuxDrawScreen { void *window; s32 overlayNodeId; void *roots[3]; s32 selection; s32 unk18; s32 count; } EuxDrawScreen;
 typedef struct { u8 pad0[0x10]; u8 alpha; } EuxDrawItem;
-extern EuxDrawScreen *D_800E39C0;
+extern EuxDrawScreen *g_courseOptionsScreen;
 extern void *Cache_AllocateMemory(s32);
 extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
@@ -23,9 +23,9 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     s32 i;
 
     screen = Cache_AllocateMemory(0x20);
-    D_800E39C0 = screen;
+    g_courseOptionsScreen = screen;
     screen->window = window;
-    D_800E39C0->overlayNodeId = SmpOverlay_CreateOverlayNode(window, 4);
+    g_courseOptionsScreen->overlayNodeId = SmpOverlay_CreateOverlayNode(window, 4);
     SmpOverlay_ShowSlotById(window, 0, 0x38D);
     SmpOverlay_ShowSlotById(window, 1, 0x38D);
     SmpOverlay_ShowSlotById(window, 2, 0x38D);
@@ -35,18 +35,18 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     if (Menu_GetPreviousScreenOwner(0) == 0x16) {
         Widget_SetWidgetFlag08(item, 0);
     }
-    D_800E39C0->unk18 = 0;
-    D_800E39C0->selection = 0;
-    D_800E39C0->roots[0] = Node_FindWidgetByResourceId(window, 0x390);
-    D_800E39C0->roots[1] = Node_FindWidgetByResourceId(window, 0x399);
-    D_800E39C0->roots[2] = Node_FindWidgetByResourceId(window, 0x39A);
-    D_800E39C0->count = Join_CountUsedSlots();
+    g_courseOptionsScreen->unk18 = 0;
+    g_courseOptionsScreen->selection = 0;
+    g_courseOptionsScreen->roots[0] = Node_FindWidgetByResourceId(window, 0x390);
+    g_courseOptionsScreen->roots[1] = Node_FindWidgetByResourceId(window, 0x399);
+    g_courseOptionsScreen->roots[2] = Node_FindWidgetByResourceId(window, 0x39A);
+    g_courseOptionsScreen->count = Join_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         Join_UpdateJoinRequestDisplay(i);
-        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[i], 0x396), 0);
+        Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[i], 0x396), 0);
     }
     Tsmos_ActivateControllerState();
-    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(D_800E39C0->roots[D_800E39C0->selection], 0x396), 1);
+    Widget_SetWidgetFlag08(Node_FindWidgetByResourceId(g_courseOptionsScreen->roots[g_courseOptionsScreen->selection], 0x396), 1);
     return 0;
 }
 #endif

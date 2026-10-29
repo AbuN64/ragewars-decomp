@@ -5,7 +5,7 @@
 /* The common particle remains 0x1DC bytes; sound and list state follow it. */
 typedef struct LiveParticle {
     Shared_Particle particle;
-    Node80253610 *sound;
+    CacheResourceNode *sound;
     f32 scale;
 } LiveParticle;
 /* Effect arguments use the same two-word ABI with signed halfword controls. */

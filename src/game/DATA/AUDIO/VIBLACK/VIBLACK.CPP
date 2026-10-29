@@ -5,7 +5,7 @@
 unsigned char g_ViblackTrailingBytesBlock4[4] = { 0xAC, 0x86, 0x00, 0x3C };
 #endif
 
-/* DATA_802B82C8.CPP */
+/* g_viblackLinkGapWords_Viblack.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)

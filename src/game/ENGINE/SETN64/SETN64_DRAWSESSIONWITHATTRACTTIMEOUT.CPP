@@ -10,7 +10,7 @@
 #include "COMMON/ROUND_STATE_VARIANTS.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 
-/* Requests a switch of the session into mode 0x14: when the pending 0x1000 flag is set outside modes 0xB and 0xC and a target is given it records that target with phase 2 and clears the flags; otherwise, once Cinema_IsSequenceIdle accepts the flags, it saves the current mode, enters mode 0x14 with the given argument at phase 1, and sets the timer when func_80264B6C_de allows. */
+/* Requests a switch of the session into mode 0x14: when the pending 0x1000 flag is set outside modes 0xB and 0xC and a target is given it records that target with phase 2 and clears the flags; otherwise, once Cinema_IsSequenceIdle accepts the flags, it saves the current mode, enters mode 0x14 with the given argument at phase 1, and sets the timer when Control_IsSnapshotActive_Camera allows. */
 
 
 

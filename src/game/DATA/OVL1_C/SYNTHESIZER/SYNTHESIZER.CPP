@@ -3,12 +3,12 @@
 
 const char s_audioSynthesizerText[20] = "audio/synthesizer.c";
 
-/* ROM-grounded data: src/rw_pool_802B3CD0_CD3D8_us_rev1.c */
+/* ROM-grounded data: src/g__timeToSamplesConstantsUsRev1_Synthesizer.c */
 const unsigned int g__timeToSamplesConstantsUsRev1[2] = {
     0x358637BD, 0x3F000000,
 };
 
-/* ROM-grounded data: src/rw_pool_802B3DB8_CD3E0_us_rev1.c */
+/* ROM-grounded data: src/g__timeToSamplesNoRoundConstantsUsRev1_Synthesizer.c */
 const unsigned int g__timeToSamplesNoRoundConstantsUsRev1[2] = {
     0x358637BD, 0x3F000000,
 };

@@ -17,7 +17,7 @@ extern void Player_UpdateViewAngles(void *, void *, void *);
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
-/* Runs a player's grounded movement state: updates it through func_8022404C_de, eases the value at
+/* Runs a player's grounded movement state: updates it through Player_EaseOwnerHeightEffect_PlayerJumpAndLeapStates, eases the value at
    0x72C to zero by a quarter, applies the movement tables g_playerGroundViewAngleParameters and g_playerGroundMovementParameters, then leaves for
    state 2 when not on the ground (animation 0x5E24 for the g_playerSpecialAnimationTable state table, otherwise 1), or
    picks the animation from the stick at 0x6C0 and 0x6C4: 0xA64 at rest, 0xA67 or 0xA66 when the
@@ -56,10 +56,10 @@ void Player_StartMovingOnStickInput(struct SharedPlayer *player, void *bodyActor
     }
 }
 
-void func_8022C8EC_de(void) {
+void Player_EmptyHandlerAfterStartMovingOnStickInput_de(void) {
 }
 
-void func_8022C8F4_de(void) {
+void Player_EmptyHandlerBeforeUpdateGroundMoveState_de(void) {
 }
 
 void Player_UpdateGroundMoveState(struct SharedPlayer *player, void *bodyActor) {

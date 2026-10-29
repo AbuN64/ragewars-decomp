@@ -1,6 +1,6 @@
 
 
-/* DATA_800E33FC.CPP */
+/* g_listButtonEventHandlerRecordsUsRev1_SmpbuttonDispatchlisteventData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3300_unclaimed_E3FFC */
 unsigned int g_listButtonEventTablePrefixUsRev1[1] = {
@@ -20,7 +20,7 @@ unsigned int g_listButtonEventHandlerRecordsUsRev1[21] = {
 };
 #endif
 
-/* DATA_800E3454.CPP */
+/* g_buttonEventHandlerRecordsUsRev1_SmpbuttonDispatchlisteventData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E3300_unclaimed_E4054 */
 extern char g_Menu_UpdateSixChoiceMenuAddress[];
@@ -38,7 +38,7 @@ unsigned int g_buttonEventHandlerRecordsUsRev1[15] = {
 };
 #endif
 
-/* DATA_800E349C.CPP */
+/* g_buttonWidgetHandlerTailUsRev1_SmpbuttonDispatchlisteventData.CPP */
 #if defined(VERSION_US_REV1)
 extern char g_SmpOverlay_ReturnUnhandledEventAddress[];
 extern char g_SmpOverlay_FollowSlotTarget34Address[];

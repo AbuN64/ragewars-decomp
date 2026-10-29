@@ -2,7 +2,7 @@
 #define RENDER_MOVINGAI_H
 #include "COMMON/REC.H"
 #include "COMMON/SHAREDPLAYER.H"
-struct RiderCode80206258 {
+struct MovingPlatformMotionStateView {
     char pad0[0x35];
     s8 animation;
     char pad36;
@@ -77,7 +77,7 @@ struct PathMotionWaypoint {
     f32 speedCurvePhase;
     f32 pauseDuration;
 };
-struct TrackCode80206258 {
+struct MovingPlatformTrackView {
     char prefix[0x14];
     struct CPlatformIntelligence segment;
 };
@@ -90,7 +90,7 @@ struct MovingPlatformActorView {
     f32 y;
     f32 z;
     s32 model;
-    union { char *track; struct TrackCode80206258 *motionTrack; };
+    union { char *track; struct MovingPlatformTrackView *motionTrack; };
     char pad1C[0x1C];
     u32 inputFlags;
     char pad3C[0x30];

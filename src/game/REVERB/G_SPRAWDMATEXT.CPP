@@ -35,6 +35,6 @@ unsigned short k_GSprawdmatextEncodedHalfwords[7] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_802B9FD0_CD804_us_rev1.c */
+/* ROM-grounded data: src/s_sprawdmaText_GSprawdmatext.c */
 const char s_sprawdmaText[14] = "io/sprawdma.c";
 #endif

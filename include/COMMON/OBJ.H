@@ -160,7 +160,7 @@ extern void Libsn_InstallDebuggerExceptionHooks();
 extern int Libgultra_TrwGetSr();
 extern void Libgultra_TrwSetSr(int sampleRate);
 
-typedef union NavActor { SharedPlayer player; Input80216D3C input; TrackerAimActorView actor; struct Owner owner; } NavActor;
+typedef union NavActor { SharedPlayer player; BarrelTrackActorView input; TrackerAimActorView actor; struct Owner owner; } NavActor;
 typedef struct NavVec { CVector3 v; f32 fourth; } NavVec;
 
 

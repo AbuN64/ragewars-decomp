@@ -19,9 +19,9 @@ unsigned int g_MenuEventHandlersPointerWords2[24] = {
 /* 800E5628.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_MenuEventHandlersPointerWords3[24] = {
-    0x00000E07, 0x00000020, (unsigned int)g_packedCodeAddress24_00436468, 0x00000E08, 0x00000020, (unsigned int)g_packedCodeAddress24_00436574, 0x00000E0A, 0x00000020,
-    (unsigned int)g_packedCodeAddress24_00436488, 0x00000E06, 0x00000020, (unsigned int)g_packedCodeAddress24_0043639C, 0x00000E03, 0x00000020, (unsigned int)g_packedCodeAddress24_00436430, 0x00000001,
-    0x00000020, (unsigned int)g_packedCodeAddress24_0043659C, 0x00000002, 0x00000020, (unsigned int)g_packedCodeAddress24_0043657C, 0x00000000, 0x00000000, 0x00000000,
+    0x00000E07, 0x00000020, (unsigned int)g_Timed_SetConfirmationInputModePackedAddress243, 0x00000E08, 0x00000020, (unsigned int)g_Frontend_ReturnConfirmationEventZeroPackedAddress243, 0x00000E0A, 0x00000020,
+    (unsigned int)g_Timed_FinishPauseConfirmationTransitionPackedAddress243, 0x00000E06, 0x00000020, (unsigned int)g_Frontend_CreatePauseConfirmationPackedAddress243, 0x00000E03, 0x00000020, (unsigned int)g_Timed_DestroyPauseConfirmationPackedAddress243, 0x00000001,
+    0x00000020, (unsigned int)g_Timed_UpdateTimedScreenPackedAddress243, 0x00000002, 0x00000020, (unsigned int)g_Frontend_ConsumeConfirmationEventPackedAddress243, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 

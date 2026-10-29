@@ -12,7 +12,7 @@
 #include "RENDER/SOUNDELEMENT_PLAYFLATSOUND.H"
 
 /* Returns 0xBC2 plus ten times either the halfword at offset 2 of what Scene_GetBlLevelData finds for
-   g_selectedLevelId in D_8011FE88, when the option byte D_801462D5 is one, or g_selectedLevelId itself. */
+   g_selectedLevelId in g_world_AchieveUpdateresultsscreen, when the option byte g_gameControllerMode is one, or g_selectedLevelId itself. */
 
 
 

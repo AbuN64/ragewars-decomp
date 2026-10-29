@@ -13,7 +13,7 @@ unsigned int k_PakFormatmusicpreviewEncodedWords[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_80445494_E33F0_us_rev1.c */
+/* ROM-grounded data: src/g_musicPreviewTwoColumnFormat_PakFormatmusicpreviewData.c */
 const unsigned char g_musicPreviewTwoColumnFormat[4] = {
     0x25, 0x32, 0x64, 0x00,
 };

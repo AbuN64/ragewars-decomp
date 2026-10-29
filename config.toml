@@ -22,7 +22,7 @@ segments = [
   { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
   { name = "data_800C", rom = 0xC25C0, vram = 0x800C19C0 },
   { name = "retained_101000", rom = 0x101000, kind = "bin" },
-  { name = "ovl_80400000", rom = 0x166000, vram = 0x80400000 },
+  { name = "ovl_frontendMenu", rom = 0x166000, vram = 0x80400000 },
   { name = "data_8014", rom = 0x1B4144, vram = 0x8014F2FC },
   { name = "retained_1B78D0", rom = 0x1B78D0, kind = "bin" },
 ]
@@ -38,7 +38,7 @@ segments = [
   { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
   { name = "data_800C", rom = 0xC2860, vram = 0x800C1C60 },
   { name = "retained_101000", rom = 0x101000, kind = "bin" },
-  { name = "ovl_80400000", rom = 0x176000, vram = 0x80400000 },
+  { name = "ovl_frontendMenu", rom = 0x176000, vram = 0x80400000 },
   { name = "data_8014", rom = 0x1C5414, vram = 0x801605CC },
   { name = "retained_1C8BF0", rom = 0x1C8BF0, kind = "bin" },
 ]
@@ -53,7 +53,7 @@ segments = [
   { name = "retained_0", rom = 0x0, kind = "bin" },
   { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
   { name = "data_800C", rom = 0xC28A0, vram = 0x800C1CA0 },
-  { name = "ovl_80400000", rom = 0xF0000, vram = 0x80400000 },
+  { name = "ovl_frontendMenu", rom = 0xF0000, vram = 0x80400000 },
   { name = "data_8014", rom = 0x13F544, vram = 0x8015A6FC },
   { name = "retained_142D20", rom = 0x142D20, kind = "bin" },
 ]
@@ -69,7 +69,7 @@ segments = [
   { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
   { name = "data_800C", rom = 0xC24F0, vram = 0x800C18F0 },
   { name = "retained_101000", rom = 0x101000, kind = "bin" },
-  { name = "ovl_80400000", rom = 0x164000, vram = 0x80400000 },
+  { name = "ovl_frontendMenu", rom = 0x164000, vram = 0x80400000 },
   { name = "data_8014", rom = 0x1B22B4, vram = 0x8014D46C },
   { name = "retained_1B5A50", rom = 0x1B5A50, kind = "bin" },
 ]
@@ -95,7 +95,7 @@ segments = [
   { name = "rsp_audio_data", rom = 0xE1460, kind = "bin" },
   { name = "data_800C", rom = 0xE1720, vram = 0x800E0B20 },
   { name = "retained_101000", rom = 0x101000, kind = "bin" },
-  { name = "ovl_80400000", rom = 0x16E000, vram = 0x80400000 },
+  { name = "ovl_frontendMenu", rom = 0x16E000, vram = 0x80400000 },
   { name = "data_8014", rom = 0x1BCD94, vram = 0x80153F4C },
   { name = "retained_1C0860", rom = 0x1C0860, kind = "bin" },
 ]
@@ -124,10 +124,6 @@ omit = []
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-mfp32"]
 omit = []
-
-[file."src/sdk/libsn/80200800_4.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = []
 
 [file."src/sdk/libultra/audio/env.c"]
 toolchain = "gcc-2.8.1-sn64"
@@ -258,3 +254,8 @@ toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
 hilo_nops = true
+
+[file."src/sdk/libsn/LIBSN_SEPARATED_FUNCTION_DATA.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+

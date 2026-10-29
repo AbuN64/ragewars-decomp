@@ -12,9 +12,9 @@ unsigned int k_NavComputescaledpointcentroidEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8020D6E4_C7AA4_us_rev1.c */
+/* ROM-grounded data: src/g_pointCentroidUnitScale_us_rev1.c */
 
-/* ROM-grounded data: src/rw_pool_8020D9C0_C7AA8_us_rev1.c */
+/* ROM-grounded data: src/g_Nav_ComputeScaledPointCentroidConstantWords_NavComputescaledpointcentroidData.c */
 const unsigned int g_Nav_ComputeScaledPointCentroidConstantWords[1] = {
     0x3F800000,
 };

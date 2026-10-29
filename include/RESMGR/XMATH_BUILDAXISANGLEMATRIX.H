@@ -3,7 +3,7 @@
 #include "COMMON/MATRIXRECORD.H"
 #include "RESMGR/MATRIX_RECORD_VIEWS.H"
 extern void XMath_GetMatrixTranslation(char *object, float *output);
-extern void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *matrix);
+extern void XMath_ResetMatrixRotation(Matrix3x4View *matrix);
 extern void XMath_SetMatrixScaleDiagonal(Matrix *matrix, CVector3 *scale);
 extern void XMath_AddMatrixTranslation(Matrix *matrix, void *translation);
 extern void XMath_ClearMatrixTranslation(Matrix *matrix);

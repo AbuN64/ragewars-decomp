@@ -2,7 +2,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/LONE/g_controllerPakReadyDialogResource.H"
-#include "COMMON/LONE/D_0044E468.H"
+#include "COMMON/LONE/g_pakProfileActionDialogResource.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/PAK_LOAD.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
@@ -65,10 +65,10 @@ s32 Snapshot_SelectNote(s32 *selection, Shared_PakMenu *menu) {
         channel = menu->slot->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 0) != 0) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         return 1;
     }
-    if (D_8014D4DC != 0) {
+    if (g_pakNoteSelectProbesNote != 0) {
         status = Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code);
         if ((status == 0) && (exists == 0)) {
             menu->state = 0x14;
@@ -174,8 +174,8 @@ profile_failed:
         goto done;
 
     }
-    if (D_80153760 != 0) {
-        if ((D_8014D4EC_de != 0) && (readError == 0)) {
+    if (g_pakProfileLoadActive != 0) {
+        if ((g_pakProfileLoadMode_de != 0) && (readError == 0)) {
             if (((status=Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0)) {
                 Shared_Game *settings = &g_playerViewRenderContext.game;
                 if (XPlus_CompareStrings(name,rw_pak_profile_name(settings)) == 0) {
@@ -194,7 +194,7 @@ profile_failed:
             }
             goto done;
         }
-        if ((D_80153760 != 0) && (D_8014D4EC_de == 0)) {
+        if ((g_pakProfileLoadActive != 0) && (g_pakProfileLoadMode_de == 0)) {
             if (readError != 0) goto show_error;
             {
                 if (((status=Note_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (XPlus_CompareStrings(name, rw_pak_block_name(&g_playerViewRenderContext.game)) == 0)) {
@@ -245,7 +245,7 @@ done:
     result = 0;
     if (readError != 0) {
 show_error:
-        if (D_8014D4EC_de != 0) messageExtra = D_0044E468;
+        if (g_pakProfileLoadMode_de != 0) messageExtra = g_pakProfileActionDialogResource;
         else messageExtra = g_controllerPakReadyDialogResource;
         dialog = rw_pak_load_error_dialog();
         g_controllerPakSelectedNoteIndex = noteIndex;

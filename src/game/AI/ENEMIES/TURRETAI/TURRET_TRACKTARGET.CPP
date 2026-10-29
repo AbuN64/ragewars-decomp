@@ -37,7 +37,7 @@ typedef union NavRider { TurretRiderTargetView target; Rider rider; struct { cha
 /* Callers reserve a 136-byte result workspace shared by both target searches. */
 static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
-typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
+typedef union NavResult { Result result; BarrelTargetInfo output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
 static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { Graphu64_SubtractVectors(local,to,from); Graphu64_TransformDirectionTranspose(matrix,local,out); }
 

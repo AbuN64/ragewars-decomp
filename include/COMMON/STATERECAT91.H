@@ -41,8 +41,8 @@ typedef struct PresetTable PresetTable;
 struct WeaponUnlockProfileView;
 typedef struct WeaponUnlockProfileView WeaponUnlockProfileView;
 
-struct InfoCode80423280;
-struct InfoCode80423280 {
+struct PlayerLoadoutInfo;
+struct PlayerLoadoutInfo {
     char pad[0x4C];
     unsigned char enabled[22];
     unsigned char values[22];
@@ -50,7 +50,7 @@ struct InfoCode80423280 {
     char pad79[0x18];
     unsigned char locked;
 };
-struct InfoCode80423280;
+struct PlayerLoadoutInfo;
 struct PlayerLoadoutSelectionView;
 
 struct WeaponUnlockPlayerView;

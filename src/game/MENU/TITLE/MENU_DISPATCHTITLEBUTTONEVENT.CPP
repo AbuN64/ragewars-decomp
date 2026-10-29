@@ -10,18 +10,18 @@
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_titleButtonEventTable, an actor kind at g_titleButtonEventActorKinds and a handler at g_titleButtonEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80437B98)(void *, s32, s32, s32, s32);
+typedef s32 (*TitleButtonColumnEventHandler)(void *, s32, s32, s32, s32);
 
 extern FieldRow g_titleButtonEventTable[];
 
 extern FieldRow g_titleButtonEventActorKinds[];
 
-extern Handler80437B98 g_titleButtonEventHandlers;
+extern TitleButtonColumnEventHandler g_titleButtonEventHandlers;
 
 struct MenuActorInputView;
 
 s32 Menu_DispatchTitleButtonEvent(void *widget, s32 eventId, s32 eventData0, s32 eventData1, s32 eventData2) {
-    Handler80437B98 *entry;
+    TitleButtonColumnEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

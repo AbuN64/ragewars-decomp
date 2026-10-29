@@ -1,5 +1,5 @@
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
-#include "COMMON/LONE/D_800E4680.H"
+#include "COMMON/LONE/g_currentStagePreset.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -131,7 +131,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
         return;
     }
     if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
-        id = *D_800E4680 + 0x1388;
+        id = *g_currentStagePreset + 0x1388;
         if (id == 0x1388) {
             return;
         }
@@ -152,7 +152,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
         return;
     }
     if (id == 0x1388 && g_gameSettings.controllerMode == 1) {
-        id = *D_800E4680 + 0x1388;
+        id = *g_currentStagePreset + 0x1388;
         if (id == 0x1388) {
             return;
         }
@@ -355,7 +355,7 @@ void SpawnAI_InvokeActiveActorCallback(void *actor, ActorLinkCallbackEvent *call
     }
 }
 
-/* ROM-grounded data: src/rw_pool_80205F18_C77B8_us_rev1.c */
+/* ROM-grounded data: src/k_spawnaiFloatConstantWordsUsRev1.c */
 const unsigned int k_spawnaiFloatConstantWords[2] = {
     0x42340000, 0x42700000,
 };

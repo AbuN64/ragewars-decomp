@@ -126,16 +126,16 @@ typedef struct ALVoiceState ALVoiceState;
 
 struct ALSeqPlayer;
 
-struct List802B663C;
-typedef struct List802B663C List802B663C;
+struct SeqplayerVoicePool;
+typedef struct SeqplayerVoicePool SeqplayerVoicePool;
 
 extern void alHeapInit(void *heap, u8 *base, s32 byteCount);
 
 typedef signed int ( *Lane_ALOscUpdate)(void *, float *);
 
 
-struct List802B663C;
-struct List802B663C {
+struct SeqplayerVoicePool;
+struct SeqplayerVoicePool {
     char pad[0x64];
     NodeGskyActivateMessagePool *head;
     NodeGskyActivateMessagePool *tail;
@@ -174,8 +174,8 @@ struct ALVoiceState;
 
 
 
-struct Entry802B6BE4;
-struct Entry802B6BE4 {
+struct SeqplayerVoiceEvent;
+struct SeqplayerVoiceEvent {
     s16 type;
     s16 pad;
     void *object;
@@ -193,8 +193,8 @@ typedef signed int ( *Lane_ALOscInit)(void * *, float *, unsigned char, unsigned
 
 
 
-struct Entry802B6BE4;
-typedef struct Entry802B6BE4 Entry802B6BE4;
+struct SeqplayerVoiceEvent;
+typedef struct SeqplayerVoiceEvent SeqplayerVoiceEvent;
 
 
 typedef void ( *Lane_ALOscStop)(void *);

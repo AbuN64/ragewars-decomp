@@ -16,7 +16,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "AUDIO/GETTHREADID.H"
 
-/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through func_80285AC4_de, osCreateMesgQueue, func_802BB550_de, osContInit, Audio_GetThreadIdentifier and func_802BB420_de, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through func_80264788_de and counts the profiles Ovlgame_ResetControllerProfile accepts in D_800D0E52, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
+/* Resets the controller and profile state for a new session: reinitialises the input buffers and stream through Rumble_InitPoolNodes_Controller, osCreateMesgQueue, osSetEventMesg_Controller, osContInit, Audio_GetThreadIdentifier and osSendMesg_Mutex, then for slots 3 down to 0 clears the slot's three state words, refreshes its pad through Control_DisableControllerPakDe and counts the profiles Ovlgame_ResetControllerProfile accepts in g_connectedControllerProfileCount, remembering the lowest accepted slot in g_firstConnectedControllerPort; finally checks the profile just below slot 0 with mode 4, marks the session reset and returns the remembered slot. */
 
 
 extern char g_controllerRumblePool[];
@@ -25,7 +25,7 @@ extern char g_controllerSiMessageQueue[];
 
 
 
-extern signed char D_800CBC10;
+extern signed char g_controllerInputReady;
 
 extern void Rumble_InitPoolNodes(char *, char *, s32);
 extern void osSetEventMesg(s32, char *, s32);
@@ -45,7 +45,7 @@ s16 Ovlgame_InitializeControllerSession(void) {
     g_controllerAudioThreadId = -1;
     osSendMesg(&g_controllerReadMessageQueue, 0, 1);
     g_firstConnectedControllerPort = -1;
-    D_800D0E52 = 0;
+    g_connectedControllerProfileCount = 0;
     for (i = 3; i >= 0; i--) {
         g_controllerPakState[i] = 0;
         g_controllerPakReinitializePending[i] = 0;
@@ -53,11 +53,11 @@ s16 Ovlgame_InitializeControllerSession(void) {
         Control_DisableControllerPak(i);
         if (Ovlgame_ResetControllerProfile(&g_controllerProfiles[i], i) != 0) {
             g_firstConnectedControllerPort = i;
-            D_800D0E52++;
+            g_connectedControllerProfileCount++;
         }
     }
     Ovlgame_ResetControllerProfile(&g_controllerProfiles[i], 4);
-    D_800CBC10 = 1;
+    g_controllerInputReady = 1;
     return g_firstConnectedControllerPort;
 }
 

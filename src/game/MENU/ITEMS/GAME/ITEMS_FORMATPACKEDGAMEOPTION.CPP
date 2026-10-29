@@ -17,11 +17,11 @@ s32 Items_FormatPackedGameOption(LayeredText *field) {
     s32 value = g_gameSettings.packedOptions >> 4;
 
     if (value == 0) {
-        field->text = g_itemsFormatpackedgameoptionText_800D35EC;
+        field->text = g_packedGameOptionZeroText;
     } else if (value == 16) {
-        field->text = g_itemsFormatpackedgameoptionText_800D35F0;
+        field->text = g_packedGameOptionSixteenText;
     } else {
-        field->text = (u8 **)&g_itemsFormatpackedgameoptionText_800D35F4;
+        field->text = (u8 **)&g_packedGameOptionValueText;
         text = (char *)field->text[g_gameSettings.language];
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
@@ -30,7 +30,7 @@ s32 Items_FormatPackedGameOption(LayeredText *field) {
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-/* Shows g_itemsFormatpackedgameoptionText_800D35EC in a field when the top twelve bits of g_gamePackedOptions are zero, g_itemsFormatpackedgameoptionText_800D35F0 when they are sixteen, and otherwise points the field at g_itemsFormatpackedgameoptionText_800D35F4 and formats their value into it with D_800DE750_de two bytes before the length Menu_CountLineChars reports, returning zero. Adapted from Pak_FormatMusicPreview with the value taken from the top twelve bits of the halfword g_gamePackedOptions, a second fixed text for sixteen, and the texts and format changed. */
+/* Shows g_packedGameOptionZeroText in a field when the top twelve bits of g_gamePackedOptions are zero, g_packedGameOptionSixteenText when they are sixteen, and otherwise points the field at g_packedGameOptionValueText and formats their value into it with g_fmtDec2Pad_ItemsFormatpackedgameoption two bytes before the length Menu_CountLineChars reports, returning zero. Adapted from Pak_FormatMusicPreview with the value taken from the top twelve bits of the halfword g_gamePackedOptions, a second fixed text for sixteen, and the texts and format changed. */
 
 
 
@@ -43,12 +43,12 @@ s32 Items_FormatPackedGameOption(LayeredText *field) {
     s32 value = g_gameSettings.packedOptions >> 4;
 
     if (value == 0) {
-        field->text = g_itemsFormatpackedgameoptionText_800D35EC;
+        field->text = g_packedGameOptionZeroText;
     } else if (value == 16) {
-        field->text = g_itemsFormatpackedgameoptionText_800D35F0;
+        field->text = g_packedGameOptionSixteenText;
     } else {
-        field->text = (u8 **)&g_itemsFormatpackedgameoptionText_800D35F4;
-        text = (char *)*(u8 **)&g_itemsFormatpackedgameoptionText_800D35F4;
+        field->text = (u8 **)&g_packedGameOptionValueText;
+        text = (char *)*(u8 **)&g_packedGameOptionValueText;
         Defs_FormatIntegerValue(text + (Menu_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;

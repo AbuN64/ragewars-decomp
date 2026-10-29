@@ -38,18 +38,18 @@ extern char g_Results_AnimateResultsOptionsScreenPackedAddress242[];
 extern char g_Results_RenderResultsOptionsPreviewPackedAddress242[];
 extern char g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242[];
 extern char g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242[];
-extern char g_packedCodeAddress24_00428A30[];
-extern char g_packedCodeAddress24_00428B94[];
-extern char g_packedCodeAddress24_00428CF8[];
-extern char g_packedCodeAddress24_00428E5C[];
+extern char g_CTrialCatalogue_SelectNeighborTwoPackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborThreePackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborOnePackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborZeroPackedAddress242[];
 extern char g_CTrialCatalogue_ExitTrialCataloguePackedAddress242[];
 extern char g_CTrialCatalogue_ConfirmTrialStagePackedAddress242[];
 unsigned int g_MenuEventHandlersPointerWords4[39] = {
     0x00000E07, 0x0000000A, (unsigned int)g_Results_ShowResultsPlayerModelsPackedAddress242, 0x00000E08, 0x0000000A, (unsigned int)g_Results_AnimateResultsOptionsScreenPackedAddress242, 0x0000000A, 0x0000000A,
     (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242, 0x00000E0A, 0x0000000A, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress242, 0x00000E06, 0x0000000A, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress242, 0x00000E03,
     0x0000000A, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242, 0x00000002, 0x0000000A, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242, 0x00000001, 0x0000000A, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242,
-    0x00000005, 0x0000000A, (unsigned int)g_packedCodeAddress24_00428A30, 0x00000006, 0x0000000A, (unsigned int)g_packedCodeAddress24_00428B94, 0x00000008, 0x0000000A,
-    (unsigned int)g_packedCodeAddress24_00428E5C, 0x00000007, 0x0000000A, (unsigned int)g_packedCodeAddress24_00428CF8, 0x00000000, 0x00000000, 0x00000000,
+    0x00000005, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242, 0x00000006, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborThreePackedAddress242, 0x00000008, 0x0000000A,
+    (unsigned int)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242, 0x00000007, 0x0000000A, (unsigned int)g_CTrialCatalogue_SelectNeighborOnePackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
@@ -61,25 +61,25 @@ extern char g_Results_AnimateResultsOptionsScreenPackedAddress242[];
 extern char g_Results_RenderResultsOptionsPreviewPackedAddress242[];
 extern char g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242[];
 extern char g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242[];
-extern char g_packedCodeAddress24_00428A30[];
-extern char g_packedCodeAddress24_00428B94[];
-extern char g_packedCodeAddress24_00428CF8[];
-extern char g_packedCodeAddress24_00428E5C[];
+extern char g_CTrialCatalogue_SelectNeighborTwoPackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborThreePackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborOnePackedAddress242[];
+extern char g_CTrialCatalogue_SelectNeighborZeroPackedAddress242[];
 extern char g_CTrialCatalogue_ExitTrialCataloguePackedAddress242[];
 extern char g_CTrialCatalogue_ConfirmTrialStagePackedAddress242[];
 unsigned int g_MenuEventHandlersPointerWords5[39] = {
     0x00000E07, 0x0000000F, (unsigned int)g_Results_ShowResultsPlayerModelsPackedAddress242, 0x00000E08, 0x0000000F, (unsigned int)g_Results_AnimateResultsOptionsScreenPackedAddress242, 0x0000000A, 0x0000000F,
     (unsigned int)g_CTrialCatalogue_HandleTrialOptionReleasePackedAddress242, 0x00000E0A, 0x0000000F, (unsigned int)g_Results_RenderResultsOptionsPreviewPackedAddress242, 0x00000E06, 0x0000000F, (unsigned int)g_Results_CreateResultsOptionsScreenPackedAddress242, 0x00000E03,
     0x0000000F, (unsigned int)g_CTrialCatalogue_CloseTrialOptionsScreenPackedAddress242, 0x00000002, 0x0000000F, (unsigned int)g_CTrialCatalogue_ExitTrialCataloguePackedAddress242, 0x00000001, 0x0000000F, (unsigned int)g_CTrialCatalogue_ConfirmTrialStagePackedAddress242,
-    0x00000005, 0x0000000F, (unsigned int)g_packedCodeAddress24_00428A30, 0x00000006, 0x0000000F, (unsigned int)g_packedCodeAddress24_00428B94, 0x00000008, 0x0000000F,
-    (unsigned int)g_packedCodeAddress24_00428E5C, 0x00000007, 0x0000000F, (unsigned int)g_packedCodeAddress24_00428CF8, 0x00000000, 0x00000000, 0x00000000,
+    0x00000005, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborTwoPackedAddress242, 0x00000006, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborThreePackedAddress242, 0x00000008, 0x0000000F,
+    (unsigned int)g_CTrialCatalogue_SelectNeighborZeroPackedAddress242, 0x00000007, 0x0000000F, (unsigned int)g_CTrialCatalogue_SelectNeighborOnePackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif
 
 /* 800E4EBC.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_GArenacompatibilitytablePointerWords1[13] = {
-    0x3F19999A, 0x00000E06, 0x0000000E, (unsigned int)g_packedCodeAddress24_00429180, 0x00000002, 0x0000000E, (unsigned int)g_packedCodeAddress24_004292D4, 0x00000001,
-    0x0000000E, (unsigned int)g_packedCodeAddress24_004291A8, 0x00000000, 0x00000000, 0x00000000,
+    0x3F19999A, 0x00000E06, 0x0000000E, (unsigned int)g_Frontend_ClearLoadingHintsPackedAddress242, 0x00000002, 0x0000000E, (unsigned int)g_Frontend_CloseMatchMenuPackedAddress242, 0x00000001,
+    0x0000000E, (unsigned int)g_Frontend_HandleMatchMenuMessagePackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

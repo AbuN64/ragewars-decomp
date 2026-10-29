@@ -27,7 +27,7 @@ unsigned int k_StatinstDrawgeometryvariantEncodedWords[148] = {
 
 /* 8024E914_18.CPP */
 #if defined(VERSION_DE)
-u32 data_writable_800CB6D0[21] = {
+u32 g_statinstDrawGeometryVariantWords[21] = {
     0x00380000, 0x3C01800D, 0x00220821, 0xAC304370, 0x00000400, 0x00000000,
     0x00000000, 0x00431025, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,

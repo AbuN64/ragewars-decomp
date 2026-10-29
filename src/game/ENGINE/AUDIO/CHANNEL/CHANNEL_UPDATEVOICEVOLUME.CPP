@@ -186,13 +186,13 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
-extern s32 Audio_GetSpatialPanMode(OwnerCode8025A3EC *);
+extern s32 Audio_GetSpatialPanMode(AudioOwnerView *);
 extern s16 Channel_ComputeListenerRelativePan(void *, GameplayCamera *);
 
 extern void alSndpSetPan(void *, s32);
 
 static inline void apply_pan(VoiceChannelUpdateVoicePan *voice, u8 pan) {
-    OwnerCode8025A3EC *owner = voice->owner;
+    AudioOwnerView *owner = voice->owner;
     char *sound = owner->sound;
 
     alSndpSetSound(sound, owner->samples[voice->index]);
@@ -259,7 +259,7 @@ void Channel_UpdateDistancePitchFactor(Emitter *emitter) {
     if (emitter->reset != 0) {
         emitter->level = g_distancePitchInitialFactor;
     }
-    listener = ((OwnerCode8025A3EC *)emitter->scene)->listener;
+    listener = ((AudioOwnerView *)emitter->scene)->listener;
     dx = emitter->x - ((GameplayCamera *)listener)->position.x;
     dy = emitter->y - ((GameplayCamera *)listener)->position.y;
     dz = emitter->z - ((GameplayCamera *)listener)->position.z;

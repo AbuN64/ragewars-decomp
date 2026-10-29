@@ -9,12 +9,12 @@
 #include "TYPES.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Join_UpdateJoinRequestDisplay);
+INCLUDE_ASM("ovl_frontendMenu", Join_UpdateJoinRequestDisplay);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 /* Fuzzy draft in EU and EU-X: their body differs (134 words). */
-extern void *D_800E39C0;
+extern void *g_courseOptionsScreen;
 extern struct TextEntry g_rewardItemTiers[][17];
 extern u8 *XPlus_CopyString(u8 *, u8 *);
 #if defined(VERSION_DE)
@@ -31,7 +31,7 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
     void *widgetObject;
     void *variantObject;
     char ***variantSlot;
-    screen = D_800E39C0;
+    screen = g_courseOptionsScreen;
     window = screen->roots[index];
     if (screen->count < index || g_joinRequestEntries[index].id < 0) {
         Widget_SetWidgetFlag08(window, 0);
@@ -53,17 +53,17 @@ void Join_UpdateJoinRequestDisplay(s32 index) {
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_VARIANT);
         widget = widgetObject;
         widget->alpha = 125;
-        variantObject = &D_800DF964[g_joinRequestEntries[index].variant];
+        variantObject = &g_resultsRankTexts[g_joinRequestEntries[index].variant];
         variantSlot = variantObject;
         widget->text = **variantSlot;
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_FIRST);
         widget = widgetObject;
         widget->alpha = 125;
-        widget->value = D_800DF740[g_joinRequestEntries[index].word8].first;
+        widget->value = g_joinRequestDrawPairs[g_joinRequestEntries[index].word8].first;
         widgetObject = Node_FindWidgetByResourceId(window, DRAW_SECOND);
         widget = widgetObject;
         widget->alpha = 125;
-        widget->value = D_800DF740[g_joinRequestEntries[index].word8].second;
+        widget->value = g_joinRequestDrawPairs[g_joinRequestEntries[index].word8].second;
     }
 }
 #endif

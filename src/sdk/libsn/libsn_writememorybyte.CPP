@@ -14,7 +14,7 @@ void Libsn_WriteMemoryByte(s32 address, s32 byteValue) {
     int unusedValue;
     struct MemoryUsageStats *word = (struct MemoryUsageStats *) (address & ~3);
     int new_var5_2;
-    word_2 = (*word).field_0;
+    word_2 = (*word).value;
     shift_ff = 0xFF << shift;
     word_3 = word;
     new_var5_2 = shift_ff;

@@ -11,14 +11,14 @@ struct MarkerItemMenuRestoreBootMemory;
 typedef struct MarkerItemMenuRestoreBootMemory MarkerItemMenuRestoreBootMemory;
 
 
-struct Node802A697C;
-typedef struct Node802A697C Node802A697C;
+struct EffectBoneNode;
+typedef struct EffectBoneNode EffectBoneNode;
 
 struct ItemMenuRenderNode;
 struct ItemMenuRenderNode {
     struct ItemMenuRenderNode *prev;
     struct ItemMenuRenderNode *next;
-    Node802A697C *node;
+    EffectBoneNode *node;
     u8 padC[0x10];
     void *object;
     s32 contextId; /* 0x20: companion identifier used by inactive-list lookup */
@@ -32,21 +32,21 @@ struct ItemMenuRenderNode {
     s32 vertexCount; /* 0x48 */
 };
 
-struct List802A6DF8;
+struct RibbonNodeList;
 struct ItemMenuRenderNode;
-struct List802A6DF8 {
+struct RibbonNodeList {
     struct ItemMenuRenderNode *head;
     struct ItemMenuRenderNode *tail;
     s32 count;
 };
 
-struct List802A6DF8;
-typedef struct List802A6DF8 List802A6DF8;
+struct RibbonNodeList;
+typedef struct RibbonNodeList RibbonNodeList;
 
-struct Lists802A6DF8;
-struct Lists802A6DF8 {
-    List802A6DF8 active;
-    List802A6DF8 inactive;
+struct RibbonNodeLists;
+struct RibbonNodeLists {
+    RibbonNodeList active;
+    RibbonNodeList inactive;
 };
 
 
@@ -86,13 +86,13 @@ typedef struct ToggleMenu ToggleMenu;
 
 struct CItem;
 
-struct Lists802A6DF8;
-typedef struct Lists802A6DF8 Lists802A6DF8;
+struct RibbonNodeLists;
+typedef struct RibbonNodeLists RibbonNodeLists;
 
-struct Owner802A6DF8;
-struct Owner802A6DF8 {
+struct RibbonWorld;
+struct RibbonWorld {
     u8 pad0[0x751C];
-    Lists802A6DF8 lists;
+    RibbonNodeLists lists;
 };
 
 
@@ -115,8 +115,8 @@ struct Sprite;
 extern float g_spriteExtentAndUnitConstants;
 
 
-struct Owner802A6DF8;
-typedef struct Owner802A6DF8 Owner802A6DF8;
+struct RibbonWorld;
+typedef struct RibbonWorld RibbonWorld;
 
 struct CItem;
 struct CItem {
@@ -219,7 +219,7 @@ struct EntryItemMenuAdvanceSelection {
 struct EntryItemMenuAdvanceSelection;
 typedef struct EntryItemMenuAdvanceSelection EntryItemMenuAdvanceSelection;
 
-struct MenuCode802A6AC0;
+struct ItemMenuCursorState;
 
 
 extern float g_attachedTransformModelScale;
@@ -257,8 +257,8 @@ struct CItemMenu_t {
 extern float g_attachedTransformDefaultScale;
 
 
-struct MenuCode802A6AC0;
-typedef struct MenuCode802A6AC0 MenuCode802A6AC0;
+struct ItemMenuCursorState;
+typedef struct ItemMenuCursorState ItemMenuCursorState;
 
 
 

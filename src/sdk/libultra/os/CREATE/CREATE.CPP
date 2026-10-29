@@ -10,7 +10,7 @@
 
 /* 802BEA40.CPP */
 /* Takes the access token from the message queue g_peripheralDmaAccessQueue, first creating that one-message queue
-   over g_peripheralDmaAccessMessage with osCreateMesgQueue and seeding it with a null message through func_802BB420_de
+   over g_peripheralDmaAccessMessage with osCreateMesgQueue and seeding it with a null message through osSendMesg_Mutex
    when g_peripheralAccessQueueInitialized says it does not exist yet. */
 
 static inline void create_access_queue(void) {

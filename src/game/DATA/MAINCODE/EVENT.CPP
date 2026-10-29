@@ -5,7 +5,7 @@
 unsigned char g_EventTrailingBytesBlock1[8] = { 0x24, 0x06, 0x00, 0x01, 0x3C, 0x07, 0x80, 0x0D };
 #endif
 
-/* DATA_8023CFB8.CPP */
+/* g_EventEncodedWords_Event.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_8023D008_eu_x_padding_3DBB8 */
 unsigned int g_EventEncodedWords[2] = {

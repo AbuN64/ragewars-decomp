@@ -34,7 +34,7 @@ extern unsigned int osMotorStart(void *motorContext);
 
 #endif
 
-void Control_UpdateControllerRumble(Obj80264124 *profile) {
+void Control_UpdateControllerRumble(ControllerRumbleView *profile) {
     Triple zero;
     void *object;
     s32 *global;
@@ -107,7 +107,7 @@ Control_StopMotorDe
 /* 80263760_7.CPP */
 /* Reinitializes a present controller pak entry under the pak queue lock, resets its counters and label, retries initialization, and releases the lock; an unsigned pointer local and a queue address relative to the adjacent status byte separate address lifetimes and preserve register scheduling. */
 
-extern u8 D_800CBC10;
+extern u8 g_controllerInputReady;
 
 extern s8 g_controllerPakFrontendState;
 
@@ -134,15 +134,15 @@ void Control_ResetControllerPak(ControllerProfile *pakProfile) {
     u32 address=(u32)pakProfile;
     char *o=(char *)address;
 
-    if (D_800CBC10 != 0 && ((Obj80264124 *)address)->flags != 0) {
+    if (g_controllerInputReady != 0 && ((ControllerRumbleView *)address)->flags != 0) {
         if (osRecvMesg(&g_controllerReadMessageQueue, 0, 1) == 0) {
             g_controllerAudioThreadId = Audio_GetThreadIdentifier(0);
         }
         Control_ReadControllerStates();
         g_controllerPakFrontendState = 2;
-        ((Obj80264124 *)o)->state = 0;
-        ((Obj80264124 *)o)->amount = 0;
-        ((Obj80264124 *)o)->timer = 0;
+        ((ControllerRumbleView *)o)->state = 0;
+        ((ControllerRumbleView *)o)->amount = 0;
+        ((ControllerRumbleView *)o)->timer = 0;
         Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
         osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port);
 
@@ -167,7 +167,7 @@ osMotorStop
 Control_StopMotorDe
 #endif
 #endif
-(((Obj80264124 *)o)->status);
+(((ControllerRumbleView *)o)->status);
 
 #if defined(VERSION_EU)
 Control_StopMotorEu
@@ -190,9 +190,9 @@ osMotorStop
 Control_StopMotorDe
 #endif
 #endif
-(((Obj80264124 *)o)->status);
+(((ControllerRumbleView *)o)->status);
         if (osMotorInit(&g_controllerSiMessageQueue, o + 0xD8, pakProfile->port) == 0) {
-            ((Obj80264124 *)o)->active = 1;
+            ((ControllerRumbleView *)o)->active = 1;
         }
         g_controllerPakFrontendState = 2;
         g_controllerAudioThreadId = -1;
@@ -253,7 +253,7 @@ void Control_CommitControllerInputs(void) {
     s32 frontendActive;
     s32 one;
 
-    if (D_800CBC10 != 0) {
+    if (g_controllerInputReady != 0) {
         i = 0;
         one = 1;
         p = g_controllerProfiles;

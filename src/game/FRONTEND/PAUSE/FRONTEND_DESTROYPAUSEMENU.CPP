@@ -3,7 +3,7 @@
 #include "SCENE/CACHE_FREEMEMORY.H"
 
 /* Releases the object g_pauseMenuState holds through Cache_FreeMemory, clears g_pauseMenuState, calls
-   Tsmos_SetModeOneFlag with 2 and func_8026495C_de, and returns zero. */
+   Tsmos_SetModeOneFlag with 2 and Control_RestoreControllerSetup_FrontendDestroypausemenu, and returns zero. */
 extern void *g_pauseMenuState;
 
 extern void Control_RestoreControllerSetup(void);

@@ -22,7 +22,7 @@ struct Flagged {
     u32 unk58;
 };
 struct Flagged;
-struct Obj8043ECE8;
+struct MultiplayerAvailabilityItem;
 
 
 struct ItemDef;
@@ -36,20 +36,20 @@ struct ItemDef;
 struct MultiplayerItemAvailabilityView;
 
 
-struct Obj8043EB20;
-typedef struct Obj8043EB20 Obj8043EB20;
+struct ControllerPakDialogContext;
+typedef struct ControllerPakDialogContext ControllerPakDialogContext;
 
 struct GamePlayerListView;
 
 struct PlayerFrontendCountOpenPlayerSlots;
 
-struct Inner8043E56C;
-typedef struct Inner8043E56C Inner8043E56C;
+struct ControllerPortView;
+typedef struct ControllerPortView ControllerPortView;
 
-struct Obj8043EB20;
+struct ControllerPakDialogContext;
 
-struct Obj8043ECE8;
-typedef struct Obj8043ECE8 Obj8043ECE8;
+struct MultiplayerAvailabilityItem;
+typedef struct MultiplayerAvailabilityItem MultiplayerAvailabilityItem;
 
 
 struct Shared_PakMenu;

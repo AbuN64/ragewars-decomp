@@ -17,12 +17,12 @@ extern int Cache_GetPendingRequestCount(void);
 
 extern int g_resourceEntryCount;
 
-struct NodePair80253E04;
-typedef struct NodePair80253E04 NodePair80253E04;
+struct ResourceNodePair;
+typedef struct ResourceNodePair ResourceNodePair;
 
 extern int g_resourcePendingRequestCount;
 
-struct NodePair80253E04;
+struct ResourceNodePair;
 
 extern int Cache_GetResourceEntryCount(void);
 

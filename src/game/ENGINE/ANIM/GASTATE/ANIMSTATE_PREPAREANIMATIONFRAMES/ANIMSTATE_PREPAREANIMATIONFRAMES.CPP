@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802625F0_C9F48_us_rev1.c */
+/* ROM-grounded data: src/g_animationFrameAngleScale_StorageWords_AnimstatePrepareanimationframes.c */
 const unsigned int g_animationFrameAngleScale_StorageWords[1] = {
     0x38C9116D,
 };

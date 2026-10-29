@@ -624,7 +624,7 @@ typedef struct PowerupEntry {
     s16 event; /* 0x8 */
     s16 reservedA; /* 0xA */
     s16 slot; /* 0xC: row in Player.actions */
-    s16 ammoSlot; /* 0xE: Player.ammo index for func_80222BE8_de */
+    s16 ammoSlot; /* 0xE: Player.ammo index for Player_AddAmmo_PickupApplyspecialpickup */
     s16 ammoCount; /* 0x10 */
     s32 (*handle)(struct Player *player, struct PowerupEntry *entry); /* 0x14 */
 } PowerupEntry;
@@ -743,5 +743,5 @@ INCLUDE_ASM("span_1000", Pickup_ApplyEuropeanPowerup);
 #endif
 #endif
 
-/* DATA_800C61E4.CPP */
+/* PICKUP_APPLYSPECIALPICKUP_DATA.CPP */
 

@@ -1,4 +1,0 @@
-#ifndef DATA_OVL1_F_DATA_800CF5E8_H
-#define DATA_OVL1_F_DATA_800CF5E8_H
-extern char g_overlayOneFLinkRecordRomLinkTarget_00230FCC[];
-#endif

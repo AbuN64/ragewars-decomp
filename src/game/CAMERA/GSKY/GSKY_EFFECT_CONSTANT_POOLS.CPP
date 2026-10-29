@@ -6,7 +6,7 @@ const unsigned int k_gskyFloatConstantWords[6] = {
 };
 
 /* 800C8680.CPP */
-/* ROM-grounded data: src/rw_pool_80239FDC_C9280_us_rev1.c */
+/* ROM-grounded data: src/k_gskyFloatConstantWordsBlock1_us_rev1.c */
 const unsigned int k_gskyFloatConstantWordsBlock1[3] = {
     0x3DC80000, 0x41300000, 0x40A00000,
 };

@@ -141,11 +141,11 @@ void Player_ResetObjectVelocity(void *unused, void *object) {
 }
 
 /** Perform no operation. */
-void func_8022D198_de(void) {
+void Player_EmptyHandlerAfterResetObjectVelocity_de(void) {
 }
 
 /** Perform no operation. */
-void func_8022D1A0_de(void) {
+void Player_EmptyHandlerBeforeAimPreviousPositionAtReset_de(void) {
 }
 
 void Player_AimPreviousPositionAtReset(void *aimPlayerState) {
@@ -159,7 +159,7 @@ void Player_AimPreviousPositionAtReset(void *aimPlayerState) {
     Graphu64_AddVec3(&((Player *)aimPlayerState)->previousPosition, weaponAimPositionPtr, &vector);
 }
 
-void func_8022D20C_de(void) {
+void Player_EmptyHandlerAfterAimPreviousPositionAtReset_de(void) {
 }
 
 void Player_ResetStunAndReleaseHandles(void *widget) {
@@ -172,7 +172,7 @@ void Player_ResetStunAndReleaseHandles(void *widget) {
     Player_ReleaseObjectHandles((s32) widget);
 }
 
-void func_8022D254_de(void) {
+void Player_EmptyHandlerAfterResetStunAndReleaseHandles_de(void) {
 }
 
 /** Reset two object fields and replace the control word's mode bit. */
@@ -185,5 +185,5 @@ void Player_ResetStunFlags(void *actorState) {
 }
 
 /** Perform the no-op callback at VRAM 0x8022D278. */
-void func_8022D288_de(void) {
+void Player_EmptyHandlerAfterResetStunFlags_de(void) {
 }

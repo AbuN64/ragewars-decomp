@@ -144,12 +144,12 @@ block_32:
     return neighborCount;
 }
 
-s32 Portal_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
-    Node8020BC50 *node;
+s32 Portal_SearchRelatedGoalPath(NavigationSearchGraphView *obj, s32 key, s32 requested, void *owner) {
+    NavigationSearchNodeView *node;
     s32 found;
 
     {
-        Node8020BC50 *reset;
+        NavigationSearchNodeView *reset;
 
         reset = obj->nodes;
         while (reset != 0) {

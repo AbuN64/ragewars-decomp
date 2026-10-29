@@ -1,4 +1,4 @@
-#include "DATA/OVLTBL/800E4530.H"
+#include "DATA/OVLTBL/MENU_EVENT_HANDLERS3_US_REV1_DATA.H"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E451C_unclaimed_E5128_unclaimed_E5130 */

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800D2E60.CPP */
+/* FxBoundedParticleQuadsDisplayList.CPP */
 #if defined(VERSION_US)
 #if defined(VERSION_US)
 unsigned short D_src_12ed218b[48] = {
@@ -21,7 +21,7 @@ unsigned int g_FxDrawboundedparticlequadsEncodedWordsBlock1[24] = {
 };
 #endif
 
-/* DATA_800D2EC0.CPP */
+/* FxBoundedParticleQuadsShortDisplayList.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_FxDrawboundedparticlequadsEncodedWords[22] = {
     0xE3001001, 0x00000000, 0xD7FF0002, 0x80008000, 0xD9F9FBFF, 0x00000000, 0xD9FFFFFF, 0x00210004,

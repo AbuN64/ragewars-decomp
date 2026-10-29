@@ -10,7 +10,7 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "MENU/PAK_LOAD.H"
 
-/* Starts a player's run: in a multiplayer session (g_motionVisibilitySettings) picks the lap count from the chosen track through func_8022F454_de in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around Player_ResetRespawnedPlayer, then starts its vehicle through Player_PlacePlayerAtSpawnPoint with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when g_playerCount is two or more. */
+/* Starts a player's run: in a multiplayer session (g_motionVisibilitySettings) picks the lap count from the chosen track through Player_GetLevelProgress_MatchGetresulttext in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around Player_ResetRespawnedPlayer, then starts its vehicle through Player_PlacePlayerAtSpawnPoint with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when g_playerCount is two or more. */
 
 
 
@@ -18,25 +18,25 @@
 
 
 extern char g_localPlayerProfiles[];
-extern Course *D_800E4680;
+extern Course *g_currentStagePreset;
 extern s32 g_activeLinkSequenceId;
 
 extern s32 Player_GetLevelProgress(char *, s32);
 extern void Player_ResetRespawnedPlayer(SharedPlayer *);
 extern void Playerai_EndRound(void *);
 
-extern u8 D_801462D5; /* MIXED Player_PlacePlayerForRound */
+extern u8 g_gameControllerMode; /* MIXED Player_PlacePlayerForRound */
 extern u8 g_motionVisibilitySettings; /* MIXED Player_PlacePlayerForRound */
 void Player_PlacePlayerForRound(SharedPlayer *player) {
     s32 scale;
 
     scale = (g_playerCount >= 2) * 2;
     if (g_motionVisibilitySettings != 0) {
-        if (D_801462D5 == 1 && player->views1450.view1450_1.computer == 0) {
+        if (g_gameControllerMode == 1 && player->views1450.view1450_1.computer == 0) {
             player->views133C.view133C_1.laps = ((u8)Player_GetLevelProgress(g_localPlayerProfiles + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->characterId) >> 1) + 1;
         }
-        if (D_801462D5 == 4 && player->views1450.view1450_1.computer == 0 && D_800E4680 != 0) {
-            player->views133C.view133C_1.laps = D_800E4680->laps;
+        if (g_gameControllerMode == 4 && player->views1450.view1450_1.computer == 0 && g_currentStagePreset != 0) {
+            player->views133C.view133C_1.laps = g_currentStagePreset->laps;
         }
         player->views5E8.view5EA_4.runType = 1;
     } else {

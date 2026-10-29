@@ -8,7 +8,7 @@
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/ARGB_COLOR.H"
 #include "COMMON/GFX.H"
-#include "COMMON/EXTERNS_5.H"
+#include "COMMON/__OSDISPATCHTHREAD.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/LOADOUT.H"
 #include "COMMON/OWNERRECAT8V2.H"
@@ -39,7 +39,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/BOOT_MEMORY_AND_THREAD_BOUNDARIES.H"
 #include "COMMON/CTX.H"
-#include "COMMON/EXTERNS_19.H"
+#include "COMMON/OSSETFPCCSR.H"
 #include "COMMON/AUDIO_LOADDECODEDSAMPLES.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/ENTRYRECAT0V3.H"
@@ -61,11 +61,11 @@
 #include "AUDIO/SIRAW.H"
 #include "AUDIO/SIRAWWRITE.H"
 #include "ENGINE/VIRTUAL/VIRTUAL_REGION_AND_PAGER_OPERATIONS.H"
-#include "sdk/libgultra/libasm_802BBC68_14.h"
+#include "sdk/libgultra/CPU_STATUS_REGISTER_EU_X.h"
 #include "sdk/libgultra/status_register_write.h"
 #include "sdk/libgultra/CPU_STATUS_REGISTER_US.h"
 #include "sdk/libgultra/OS_GET_STATUS_REGISTER.h"
-#include "sdk/libgultra/libasm_802BBC68_8.h"
+#include "sdk/libgultra/CPU_STATUS_REGISTER_EU.h"
 #include "RESMGR/X_PLUS.H"
 #include "AUDIO/AUDIO_ASSERT.H"
 
@@ -106,10 +106,10 @@ __osGetSREuX
     while (Audio_WriteSerialInterfaceWord(0x1FC007FC, pifdata | 8)) {
         ;
     }
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *g_packedCodeAddress24_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000080 = *g_packedCodeAddress24_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000100 = *g_packedCodeAddress24_002BBC70;
-    *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *g_packedCodeAddress24_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *g_osExceptionPreamble;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000080 = *g_osExceptionPreamble;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000100 = *g_osExceptionPreamble;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *g_osExceptionPreamble;
     osWritebackDCache((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
     osInvalICache((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
     Vhandler_MapBootstrapAddressRange();

@@ -9,7 +9,7 @@ struct CollisionState {
     u8 pad[0x98];
     s32 active9c;
 };
-struct CollisionInfoCode80243A80 {
+struct UnicolMotionSettings {
     s32 flags;
     u8 ground_behavior;
     u8 instance_behavior;
@@ -34,14 +34,14 @@ struct VectorPair {
     CVector3 second;
     char pad[8];
 };
-struct Work80244494 {
+struct CollisionSweepWork {
     char data[0x1B8];
 };
-struct Shared_Func80243A80Global {
-    u8 pad[216]; /* +0x0: src/func_80243A80.c */
-    s32 x; /* +0xD8: src/func_80243A80.c */
-    f32 y; /* +0xDC: src/func_80243A80.c */
-    s32 z; /* +0xE0: src/func_80243A80.c */
+struct UnicolCurrentActorRoom {
+    u8 pad[216]; /* +0x0: src/Unicol_MoveActorWithCollision_CollisionSweepViews.c */
+    s32 x; /* +0xD8: src/Unicol_MoveActorWithCollision_CollisionSweepViews.c */
+    f32 y; /* +0xDC: src/Unicol_MoveActorWithCollision_CollisionSweepViews.c */
+    s32 z; /* +0xE0: src/Unicol_MoveActorWithCollision_CollisionSweepViews.c */
 };
 struct Access_s8_E6 {
     char pad[0xE6];
@@ -50,6 +50,6 @@ struct Access_s8_E6 {
 struct Range;
 extern s32 CCollision_TraceActorMotion(ActorMotion *object);
 extern void CCollision_SetSweepRange(struct Range *range, f32 low, f32 mid, f32 high, f32 extra);
-extern s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, CVector3 position, u32 *flags);
+extern s32 Unicol_MoveActorWithCollision(UnicolActor *actor, CVector3 position, u32 *flags);
 extern s32 CCollision_SweepUniformExtent(char *actorStorage, CVector3 startPosition, CVector3 endPosition, struct CCollisionInfo2_t *sweepSurfaceSettings, f32 sweepExtent);
 #endif

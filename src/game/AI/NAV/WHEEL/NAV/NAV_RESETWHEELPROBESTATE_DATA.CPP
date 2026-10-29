@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802110C4_C7CF0_us_rev1.c */
+/* ROM-grounded data: src/navResetWheelProbeStatePoolUsRev1.c */
 const unsigned int g_Nav_ResetWheelProbeStateConstantWords[2] = {
     0x42C80000, 0x4399999A,
 };

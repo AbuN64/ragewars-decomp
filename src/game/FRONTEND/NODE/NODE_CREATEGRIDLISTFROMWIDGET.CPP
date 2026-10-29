@@ -9,7 +9,7 @@
 #include "FRONTEND/WIDGET_DRAWTEXTWIDGET.H"
 #include "FRONTEND/NODE_FINDWIDGETBYRESOURCEID.H"
 
-/* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through Node_ConfigureScrolledTableCell and drawing it through func_8040D2D0_de with the given style. */
+/* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through Node_ConfigureScrolledTableCell and drawing it through Widget_DrawTextWidget_NodeCreategridlistfromwidget with the given style. */
 
 
 

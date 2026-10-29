@@ -74,7 +74,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
 #if defined(VERSION_DE)
     scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * g_systemTimeFrameRateDe;
 #else
-    scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * D_800CA560;
+    scaledFrameTime = (f32)elapsedUnits * g_systemTimeFrameScale * g_systemTimeFrameRate;
 #endif
     g_previousFrameSystemTime = nowTicks;
     if (Tsmos_IsFrontendActive() == 0) {
@@ -84,7 +84,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
             world->menuNodeCount = Menu_CountLiveNodes(&world->viewport.self.messageList.head);
         }
     }
-    if (D_80154048 != 0) {
+    if (g_initialMatchStartPending != 0) {
         sessionMode = world->currentMode;
         if (sessionMode == 0xB) {
             world->menuNodeCount = 1;
@@ -113,7 +113,7 @@ block_10:
     }
 #if defined(VERSION_DE)
     if (Cinema_IsSequenceInWindow() != 0) {
-        g_frameElapsedTime = g_frameElapsedTime * D_800CA560;
+        g_frameElapsedTime = g_frameElapsedTime * g_systemTimeFrameRate;
     }
 #endif
     Cache_RunCompactionPasses(0);

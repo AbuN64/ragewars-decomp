@@ -9,11 +9,11 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 
 /* Reloads a saved controller-pak block when Snapshot_CheckStatusPrompt reports no problem for the selected
-   channel: with D_80153780 set it loads the block g_controllerPakSnapshotPayload points to onto the player found at
+   channel: with g_pakAlternateOptionEnabled set it loads the block g_controllerPakSnapshotPayload points to onto the player found at
    g_playerViewRenderContext - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
    block g_gameSettings plus the word at its 0x580 (keeping the byte g_frontendSavedVideoModeIndex there), the four floats at
-   0x8 (the game clock) into g_matchRoundCounters, g_controllerPakPreviewSeconds, g_controllerPakPreviewMinutes and g_controllerPakPreviewHours, the word at D_8011FE88+0x44 as a byte
-   count for the block at 0x60C copied into g_worldSnapshotNoteData - then shows the D_0044EAE0 prompt through
+   0x8 (the game clock) into g_matchRoundCounters, g_controllerPakPreviewSeconds, g_controllerPakPreviewMinutes and g_controllerPakPreviewHours, the word at g_world_AchieveUpdateresultsscreen+0x44 as a byte
+   count for the block at 0x60C copied into g_worldSnapshotNoteData - then shows the g_pakRestoreBlockPromptText prompt through
    Menu_OpenDialog; otherwise it retries Note_DeleteNote on note g_controllerPakOverwriteNoteIndex and shows the
    D_0044EB70/D_0044EBDC result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
 
@@ -41,11 +41,11 @@ struct PakSaveOwner {
 };
 
 extern s32 g_pakUseScannedChannel;
-extern s32 D_80153780;
-extern char D_0044EAE0[];
+extern s32 g_pakAlternateOptionEnabled;
+extern char g_pakRestoreBlockPromptText[];
 extern char g_playerViewRenderContext[];
 extern char g_matchEndingTeamWheelClose[];
-extern s32 D_80140FB4[];
+extern s32 g_gameStateBlock[];
 extern s32 g_persistedOptionUnlockFlags;
 extern u8 g_frontendSavedVideoModeIndex[]; /* g_gameSettings+0x580, kept across the options reload */
 /* The ROM stores the clock's seconds/minutes/hours through three separate objects (no shared base
@@ -77,10 +77,10 @@ s32 Snapshot_RestoreSaveBlock(void *unused, PakPromptContext *menu) {
         channel = menu->slot->controllerPort;
     }
     if (Snapshot_CheckStatusPrompt(menu, channel, 0) != 0) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         return 1;
     }
-    if (D_80153780 != 0) {
+    if (g_pakAlternateOptionEnabled != 0) {
         owner = Playerai_FindPlayerByController(g_playerViewRenderContext, menu->slot);
         world = &g_world;
         kept = g_frontendSavedVideoModeIndex[0];
@@ -97,9 +97,9 @@ s32 Snapshot_RestoreSaveBlock(void *unused, PakPromptContext *menu) {
         for (i = 0; i < world->noteCount; i++) {
             *dst++ = *src++;
         }
-        D_80140FB4[0] = 0;
-        D_80140FB4[1] = 0;
-        Menu_OpenDialog(&D_80140FB4[0x16A], D_0044EAE0, owner, owner->slot698, 0);
+        g_gameStateBlock[0] = 0;
+        g_gameStateBlock[1] = 0;
+        Menu_OpenDialog(&g_gameStateBlock[0x16A], g_pakRestoreBlockPromptText, owner, owner->slot698, 0);
     } else if (Note_DeleteNote(channel, g_controllerPakOverwriteNoteIndex) == 0) {
         Menu_OpenDialog(g_matchEndingTeamWheelClose, D_0044EB70, menu->player, menu->slot, menu->prompt);
     } else {

@@ -17,8 +17,8 @@ extern f32 Cinema_GetSequenceResponse();
 
 struct CollisionState;
 
-struct CollisionInfoCode80243A80;
-typedef struct CollisionInfoCode80243A80 CollisionInfoCode80243A80;
+struct UnicolMotionSettings;
+typedef struct UnicolMotionSettings UnicolMotionSettings;
 
 
 
@@ -30,11 +30,11 @@ typedef struct Access_s32_C4 Access_s32_C4;
 
 extern void Cinema_ClearMessageCount(void);
 
-struct CollisionInfoCode80243A80;
+struct UnicolMotionSettings;
 
 
 
-extern float D_800C37D8_de;
+extern float k_cinemaResponseThreshold_de;
 
 
 
@@ -51,7 +51,7 @@ extern float g_actorVisibilityProbeHeightScale;
 
 
 
-extern float D_800C37D4_de;
+extern float k_cinemaInactiveResponse_de;
 
 extern void Cinema_ReleaseSequenceContext(void);
 

@@ -55,7 +55,7 @@ first_done:
     if (g_debugLinkTransferFailed == 0) {
         do {
         } while (osPiGetStatus() & 3);
-        *receivedByte = D_B2000001;
+        *receivedByte = g_debugLinkReceivedDataByte;
         control = g_debugLinkModeControl & 0xF7;
         g_debugLinkModeControl = control;
         do {

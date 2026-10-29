@@ -18,7 +18,7 @@ struct SwizzledImageView;
 
 struct Command;
 
-extern int D_8014DCE0;
+extern int g_primitiveRenderFlagSelect30000;
 
 struct Texture;
 struct Texture {
@@ -35,7 +35,7 @@ struct Texture {
 };
 
 
-extern int D_80153F68;
+extern int g_combineTexturingEnabled;
 
 extern float g_fullImageTextureCoordinate;
 

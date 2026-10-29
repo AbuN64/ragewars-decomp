@@ -43,14 +43,14 @@ unsigned int D_src_6bb6ec48[31] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded us-rev1 data; explicit withholding in other holders. */
 unsigned int g_FrontendApplymodechoicePointerWords1[3] = {
-    0x00000E08, 0x00000003, (unsigned int)g_packedCodeAddress24_0042439C,
+    0x00000E08, 0x00000003, (unsigned int)g_Frontend_UpdatePlayModeMenuPackedAddress24_FrontendApplymodechoiceData,
 };
 #endif
 
 #if defined(VERSION_US)
 #if defined(VERSION_US)
 extern char g_playerSettingsSlotNumberFormat[];
-unsigned int data_unresolved_800DF270[28] = {
+unsigned int g_frontendApplyModeChoiceEventHandlerRecords[28] = {
     0x00000E06, 0x00000003, 0x00423C20, 0x00000E03, 0x00000003, 0x0042436C, 0x00000002, 0x00000003,
     0x00424508, 0x00000001, 0x00000003, 0x00424128, 0x0000000A, 0x00000003, 0x004244B4, 0x00000000,
     0x00000000, 0x00000000, 0x00660000, 0x00040000, (unsigned int)g_playerSettingsSlotNumberFormat + 0x4, (unsigned int)g_playerSettingsSlotNumberFormat + 0x10, (unsigned int)g_playerSettingsSlotNumberFormat + 0xC, (unsigned int)g_playerSettingsSlotNumberFormat + 0x8,

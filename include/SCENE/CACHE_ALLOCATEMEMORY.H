@@ -2,6 +2,6 @@
 #define SCENE_CACHE_ALLOCATEMEMORY_H
 #include "COMMON/MANAGER.H"
 extern int Cache_IsResourceRetained(void *resource);
-extern void Cache_RetainResource(Node80253610 *resource);
-extern void Cache_ReleaseResourceReference(Node80253610 *resource);
+extern void Cache_RetainResource(CacheResourceNode *resource);
+extern void Cache_ReleaseResourceReference(CacheResourceNode *resource);
 #endif

@@ -23,13 +23,13 @@ extern FieldRow g_settingsColumnEventIds[];
 extern FieldRow g_settingsColumnEventKinds[];
 #else
 #endif
-extern Handler80437868 g_settingsColumnEventHandlers;
+extern MenuChoiceEventHandler g_settingsColumnEventHandlers;
 
 
 
 
 s32 Menu_DispatchSettingsColumnEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler80437868 *entry;
+    MenuChoiceEventHandler *entry;
     MenuActorInputView *actor;
     s32 index;
     s32 wildcard;

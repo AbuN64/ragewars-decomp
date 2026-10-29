@@ -357,13 +357,13 @@ extern s32 Visdata_TestBoxAgainstFrustum(void *frustum, void *box);
 
 extern void Simple_DrawCachedModel(void *obj);
 
-extern f32 D_801031F8[];
+extern f32 g_cameraVolumeBoundsMinZ[];
 
 extern s32 InstHdr_CanActorReceiveInteraction(void *actor);
 
 /** Unlink an active node and return it to the global free list. */
-void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
-    ListNode80290528 *oldHead;
+void SetN64_RecycleGlobalEffectNode(EffectPoolNode *node) {
+    EffectPoolNode *oldHead;
 
     if (node->flags & 1) {
         node->flags &= ~1;
@@ -384,7 +384,7 @@ void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
         }
         oldHead = g_effectPoolFreeHead;
         node->previous = 0;
-        *(ListNode80290528 *volatile *) &node->next = oldHead;
+        *(EffectPoolNode *volatile *) &node->next = oldHead;
         g_effectPoolFreeHead = node;
     }
 }
@@ -439,7 +439,7 @@ void SetN64_CollectVisibleEffectNodes(VisibleEffectPoolView *effectPool, Results
     if (node != 0) {
         mask = 0x30000;
         required = 0x20000;
-        bounds = D_801031F8 + 1;
+        bounds = g_cameraVolumeBoundsMinZ + 1;
         limit = 0x200;
         do {
             Simpinst_ClearCachedResource(node);
@@ -471,7 +471,7 @@ void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *container)
 {
   void *actor;
   void *node;
-  struct ListNode80290528 *next;
+  struct EffectPoolNode *next;
   if ((container->unk_3C00) == 0)
   {
     SetN64_RecycleEffectNode(container, container->unk_3C08);
@@ -498,13 +498,13 @@ void *SetN64_AllocateActorFromPool(ActorPoolFreeListView *container)
 }
 
 /* 800CA494.CPP */
-/* ROM-grounded data: src/rw_pool_80290424_CB094_us_rev1.c */
+/* ROM-grounded data: src/g_EngineSetn64RetainedWords1_Setn64.c */
 const unsigned int g_EngineSetn64RetainedWords1[1] = {
     0x42A3D70A,
 };
 
 /* 800CA498.CPP */
-/* ROM-grounded data: src/rw_pool_802905F4_CB098_us_rev1.c */
+/* ROM-grounded data: src/g_EngineSetn64RetainedWords2_Setn64.c */
 const unsigned int g_EngineSetn64RetainedWords2[2] = {
     0x40F00000, 0x42080000,
 };

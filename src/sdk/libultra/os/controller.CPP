@@ -142,7 +142,7 @@ s32 osContInit(s32 queue, s32 *valid, s32 connectedPatternOut) {
     s32 message[2];
     u64 value;
     s32 result;
-    s32 *initialized = &D_800D4340;
+    s32 *initialized = &g_controllerInitialized;
 
     if (*initialized != 0) {
         return 0;

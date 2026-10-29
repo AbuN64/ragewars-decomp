@@ -1,16 +1,16 @@
 #ifndef COMMON_LISTHEADER_H
 #define COMMON_LISTHEADER_H
 struct Shared_Actor;
-#ifndef SPAN_1000_CODE_80279208_H
-#define SPAN_1000_CODE_80279208_H
+#ifndef COMMON_LISTHEADER_BODY_H
+#define COMMON_LISTHEADER_BODY_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct NavigationPlatform;
 extern struct NavigationPlatform *g_navigationPlatformActors;
 
-struct List802795C0;
-struct List802795C0 {
+struct ListLinkHeader;
+struct ListLinkHeader {
     ListLink *head;
     ListLink *tail;
     int count;
@@ -52,13 +52,13 @@ struct Trigger;
 typedef struct Trigger Trigger;
 
 
-struct List802795C0;
-typedef struct List802795C0 List802795C0;
+struct ListLinkHeader;
+typedef struct ListLinkHeader ListLinkHeader;
 
 struct Lists18;
 struct Lists18 {
-    List802795C0 active;
-    List802795C0 inactive;
+    ListLinkHeader active;
+    ListLinkHeader inactive;
 };
 
 extern void Link_SetTriggerTrackCallback(int unused0, int unused1, void *trigger);

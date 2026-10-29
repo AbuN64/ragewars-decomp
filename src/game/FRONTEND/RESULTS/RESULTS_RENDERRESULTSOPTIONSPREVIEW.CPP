@@ -47,7 +47,7 @@ extern void Widget_SetWidgetFlag08(struct WidgetFlagsView *, s32);
 
 /* Loads the stage list of the results screen g_trialCatalogueScreen: clears its two 36-bit sets at 0xA74 and
    0xA79, copies into the first the 36 cleared-stage bits that the player record g_localPlayerProfiles[index at
-   0xA5C] keeps for the current mode D_801462D5 (at 0x7E, 0x83, 0x88 or 0x8D for modes 1 to 4), and
+   0xA5C] keeps for the current mode g_gameControllerMode (at 0x7E, 0x83, 0x88 or 0x8D for modes 1 to 4), and
    refreshes the list through Results_RefreshTrialCatalogueWidgets. */
 
 

@@ -26,12 +26,12 @@ unsigned int k_MenuDrawscreenstackEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80298FE8_CB410_us_rev1.c */
+/* ROM-grounded data: src/g_Menu_DrawScreenStackConstantWords_us_rev1_MenuDrawscreenstackData.c */
 const unsigned int g_Menu_DrawScreenStackConstantWords_us_rev1[2] = {
     0x408F4000, 0x00000000,
 };
 
-/* ROM-grounded data: src/rw_pool_80299B60_CB418_us_rev1.c */
+/* ROM-grounded data: src/g_Stream_SetFloatPairToNegativeOneConstantWords_us_rev1_MenuDrawscreenstackData.c */
 const unsigned int g_Stream_SetFloatPairToNegativeOneConstantWords_us_rev1[1] = {
     0xBF800000,
 };

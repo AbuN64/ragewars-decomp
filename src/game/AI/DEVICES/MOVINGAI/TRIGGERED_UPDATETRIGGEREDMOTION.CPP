@@ -106,7 +106,7 @@ extern f32 g_frameElapsedTime;
 
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
-void Triggered_UpdateTriggeredMotion(MovingPlatformActorView *actor, RiderCode80206258 *motion) {
+void Triggered_UpdateTriggeredMotion(MovingPlatformActorView *actor, MovingPlatformMotionStateView *motion) {
     CPlatformIntelligence *segment;
     s32 oldState;
     s32 release;
@@ -224,30 +224,30 @@ extern void Region_SetNodeGroupHeight(s32, f32);
 
 /* Steers an actor along path nodes, blending direction, speed and orientation as it advances waypoints. */
 /* The values Triggered_AdvancePathMotion loads by address:
- * 0x800C6C18 = 3.0 (float, D_800C6C18 in this cartridge's tables)
+ * 0x800C6C18 = 3.0 (float, k_triggeredMinArrivalRadius in this cartridge's tables)
  * 0x800C6C1C = 10.24 (float, unnamed in this cartridge's tables)
- * 0x800C6C20 = 1.0 (float, D_800C6C20 in this cartridge's tables)
+ * 0x800C6C20 = 1.0 (float, k_triggeredBlendClampLimit in this cartridge's tables)
  * 0x800C6C24 = 1.0 (float, unnamed in this cartridge's tables)
- * 0x800C6C28 = 1.0 (float, D_800C6C28 in this cartridge's tables)
- * 0x800C6C2C = 3.1415927 (float, D_800C6C2C in this cartridge's tables)
- * 0x800C6C30 = 0.5 (float, D_800C6C30 in this cartridge's tables)
- * 0x800C6C34 = 0.3 (float, D_800C6C34 in this cartridge's tables)
- * 0x800C6C38 = 15.0 (float, D_800C6C38 in this cartridge's tables)
+ * 0x800C6C28 = 1.0 (float, k_triggeredBlendCompleteThreshold in this cartridge's tables)
+ * 0x800C6C2C = 3.1415927 (float, k_triggeredBrakeEasePi in this cartridge's tables)
+ * 0x800C6C30 = 0.5 (float, k_triggeredBrakeFraction in this cartridge's tables)
+ * 0x800C6C34 = 0.3 (float, k_triggeredStopSpeedThreshold in this cartridge's tables)
+ * 0x800C6C38 = 15.0 (float, k_triggeredPauseDurationScale in this cartridge's tables)
  * 0x800D2988 = 1.0 (float, g_frameElapsedTime in this cartridge's tables; not a literal: a variable, its value in the image, since g_frameElapsedTime: `swc1` at %lo(g_frameElapsedTime) in Actor_UpdateActorStateAnimation.s)
- * 0x800C6C3C = 1.0 (float, D_800C6C3C in this cartridge's tables)
- * 0x800C6C40 = 3.1415927 (float, D_800C6C40 in this cartridge's tables)
- * 0x800C6C44 = 0.5 (float, D_800C6C44 in this cartridge's tables)
- * 0x800C6C48 = 2.670354 (float, D_800C6C48 in this cartridge's tables)
+ * 0x800C6C3C = 1.0 (float, k_triggeredAccelEaseOne in this cartridge's tables)
+ * 0x800C6C40 = 3.1415927 (float, k_triggeredAccelEasePi in this cartridge's tables)
+ * 0x800C6C44 = 0.5 (float, k_triggeredAccelBlendHalf in this cartridge's tables)
+ * 0x800C6C48 = 2.670354 (float, k_triggeredStartEaseAngle in this cartridge's tables)
  * 0x800C6C4C = 0.5 (float, unnamed in this cartridge's tables)
- * 0x800C6C50 = 1.0 (float, D_800C6C50 in this cartridge's tables)
+ * 0x800C6C50 = 1.0 (float, k_triggeredStartEaseOffset in this cartridge's tables)
  * 0x800C6C54 = 0.017453294 (float, unnamed in this cartridge's tables)
- * 0x800C6C58 = 0.017453294 (float, D_800C6C58 in this cartridge's tables)
+ * 0x800C6C58 = 0.017453294 (float, k_triggeredHeadingSmoothDegToRad in this cartridge's tables)
  * 0x800C6C5C = 0.1 (float, unnamed in this cartridge's tables)
- * 0x800C6C60 = 0.017453294 (float, D_800C6C60 in this cartridge's tables)
+ * 0x800C6C60 = 0.017453294 (float, k_triggeredSecondaryBlendDegToRad in this cartridge's tables)
  * 0x800C6C64 = 0.017453294 (float, unnamed in this cartridge's tables)
- * 0x800C6C68 = 0.1 (float, D_800C6C68 in this cartridge's tables)
- * 0x800C6C6C = 0.017453294 (float, D_800C6C6C in this cartridge's tables)
- * 0x800C6C70 = 0.017453294 (float, D_800C6C70 in this cartridge's tables)
+ * 0x800C6C68 = 0.1 (float, k_triggeredSecondarySmoothFactor in this cartridge's tables)
+ * 0x800C6C6C = 0.017453294 (float, k_triggeredTertiaryBlendDegToRad in this cartridge's tables)
+ * 0x800C6C70 = 0.017453294 (float, k_triggeredTertiarySmoothDegToRad in this cartridge's tables)
  * 0x800C6C74 = 0.1 (float, unnamed in this cartridge's tables)
  */
 void Barrel_ApplyClampedTurn(void *, s32, f32, f32);
@@ -283,7 +283,7 @@ extern char g_triggeredTransformRomEntry;
 
 extern f32 k_triggeredInitialMotionScale;
 
-void Triggered_PositionPlatformRider(MovingPlatformActorView *actor, RiderCode80206258 *rider) {
+void Triggered_PositionPlatformRider(MovingPlatformActorView *actor, MovingPlatformMotionStateView *rider) {
     CVector3 point;
     CPlatformIntelligence *segment;
     f32 t;
@@ -597,7 +597,7 @@ void Triggered_ResetMotionState(void *object, void *state) {
     }
 }
 
-/* ROM-grounded data: src/rw_pool_802077F4_C788C_us_rev1.c */
+/* ROM-grounded data: src/k_triggeredFullTurnFloatUsRev1.c */
 const unsigned int k_triggeredUpdatetriggeredmotionFloatConstantWords[1] = {
     0x40C90FDC,
 };

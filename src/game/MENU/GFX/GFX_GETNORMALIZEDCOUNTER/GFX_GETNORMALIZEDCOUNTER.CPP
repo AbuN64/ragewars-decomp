@@ -64,12 +64,12 @@ s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
 unsigned char g_GfxGetnormalizedcounterTrailingBytesBlock1[4] = { 0x0C, 0x0A, 0x86, 0x64 };
 #endif
 
-/* DATA_800E5CC8.CPP */
+/* bigCheatActivatedTextData.CPP */
 #if defined(VERSION_US_REV1)
 char s_bigCheatActivatedText[20] = "big cheat activated";
 #endif
 
-/* DATA_800E5CDC.CPP */
+/* janesCheatActivatedTextData.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E5CAC_unclaimed_E68DC */
 unsigned int g_GfxGetnormalizedcounterEncodedWords[1] = {
@@ -79,10 +79,10 @@ unsigned int g_GfxGetnormalizedcounterEncodedWords[1] = {
 char s_janesCheatActivatedText[24] = "janes cheat activated";
 #endif
 
-/* DATA_800E5CF8.CPP */
+/* gfxGetnormalizedcounterEncodedWordsTableData.CPP */
 #if defined(VERSION_US_REV1)
 extern char g_cMenuProfile_ResetRoundEndDelayEntry[];
-extern char D_0043E1C0[];
+extern char addrLow_CMenuProfile_HasRoundProgress[];
 extern char addrLow_CMenuProfile_SetFirstResultLabel[];
 extern char addrLow_CMenuProfile_SetSecondResultLabel[];
 extern char addrLow_CMenuProfile_ControllerSelectionReturnZero[];
@@ -97,7 +97,7 @@ unsigned int k_GfxGetnormalizedcounterEncodedWords[84] = {
     0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)addrLow_CMenuProfile_SetFirstResultLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000000F,
     0x0000FF01, 0x800D7E14, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, (unsigned int)addrLow_CMenuProfile_SetSecondResultLabel, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
     0x00000023, 0x0000FF01, 0x800D76D0, (unsigned int)g_menuPaged_Menu_DrawMenuItemLabel, 0x00000000, (unsigned int)addrLow_CMenuProfile_ControllerSelectionReturnZero, 0x00000000, 0x800E5D20,
-    0x00050000, (unsigned int)g_cMenuProfile_ResetRoundEndDelayEntry, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)D_0043E1C0, 0x00040000, 0x00000000, 0x00000000,
+    0x00050000, (unsigned int)g_cMenuProfile_ResetRoundEndDelayEntry, 0x00000000, (unsigned int)g_menuPaged_Menu_DrawMenuEntries, (unsigned int)addrLow_CMenuProfile_HasRoundProgress, 0x00040000, 0x00000000, 0x00000000,
     0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0x00000001, 0xFFFFFFFF,
     0x00000001, 0x00000001, 0x00000001, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,

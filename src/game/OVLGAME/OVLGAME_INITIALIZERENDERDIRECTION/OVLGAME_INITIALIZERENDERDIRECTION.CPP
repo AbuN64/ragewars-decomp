@@ -1,7 +1,7 @@
 
 
-/* DATA_8044E904.CPP */
-/* DATA_8044E904.CPP */
+/* k_OvlgameInitializerenderdirectionZeroWords_OvlgameInitializerenderdirection.CPP */
+/* k_OvlgameInitializerenderdirectionZeroWords_OvlgameInitializerenderdirection.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: func_8044DC60_de_padding_1BC904 */
 unsigned int k_OvlgameInitializerenderdirectionZeroWords[1] = {
@@ -9,7 +9,7 @@ unsigned int k_OvlgameInitializerenderdirectionZeroWords[1] = {
 };
 #endif
 
-/* DATA_8044E908.CPP */
+/* g_OvlgameInitializerenderdirectionEncodedWords_OvlgameInitializerenderdirection.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/8044E908 */
 unsigned int g_OvlgameInitializerenderdirectionEncodedWords[2] = {

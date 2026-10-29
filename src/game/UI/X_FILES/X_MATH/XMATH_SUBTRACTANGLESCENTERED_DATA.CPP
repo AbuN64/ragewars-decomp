@@ -41,7 +41,7 @@ const unsigned int k_xmathSubtractanglescenteredDataFloatConstantWordsBlock1[8] 
     0x40490FDB, 0x41C90FDC, 0xC1C90FDC, 0x401921FB, 0x80000000, 0x40C90FDC, 0x40C90FDC, 0x40490FDB,
 };
 
-/* ROM-grounded data: src/rw_pool_8029E52C_CBA34_us_rev1.c */
+/* ROM-grounded data: src/k_XmathSubtractanglescenteredOneWords_XmathSubtractanglescenteredData.c */
 const unsigned int k_XmathSubtractanglescenteredOneWords[1] = {
     0x3F800000,
 };

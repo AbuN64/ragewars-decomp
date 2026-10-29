@@ -33,13 +33,13 @@ static inline int isTwoWay(Link *link) {
     return 0;
 }
 
-extern CollisionInfo8020CD74 g_portalDefaultCollisionQuery;
+extern CollisionQuery g_portalDefaultCollisionQuery;
 
-extern CollisionInfo8020CD74 g_portalModeCollisionQuery;
+extern CollisionQuery g_portalModeCollisionQuery;
 
-extern CollisionInfo8020CD74 g_portalNoModelFlagCollisionQuery;
+extern CollisionQuery g_portalNoModelFlagCollisionQuery;
 
-extern CollisionInfo8020CD74 g_portalAlternateCollisionQuery;
+extern CollisionQuery g_portalAlternateCollisionQuery;
 
 extern s32 Insthdr_GetModelCollisionFlag1(void *);
 
@@ -47,7 +47,7 @@ extern s32 Insthdr_IsInactiveOrCollisionOption4(void *);
 
 extern s32 Insthdr_GetModelCollisionFlag8(void *);
 
-extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
+extern s32 Unicol_MoveActorWithCollision(ActorInstanceHeader *, CVector3, CollisionQuery *);
 
 /** Return an indexed record from the table referenced by the input. */
 void *Portal_GetGraphPoint(void *table, int index) {
@@ -57,7 +57,7 @@ void *Portal_GetGraphPoint(void *table, int index) {
 }
 
 /** Return an indexed record from the table at object offset 0x8. */
-void *Portal_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index) {
+void *Portal_GetStridedTableEntry(struct NavigationLinkListView *object, int index) {
     char *base = (char *)object->table;
     int stride = *(int *)base;
     return base + (index * stride + 8);
@@ -128,7 +128,7 @@ void Portal_InitSearchNode(void *searchNode, s32 nodeKey)
   }
 }
 
-s32 Portal_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
+s32 Portal_FindNearestPointIndex(struct NavigationSearchGraphView *pointSet, void *point) {
     CVector3 offset;
     f32 distanceSq;
     f32 bestDistanceSq;
@@ -175,7 +175,7 @@ int Portal_FindLinkIndex(Graph *graph, int from, int to) {
     return -1;
 }
 
-s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, s32 *indices) {
+s32 Portal_CollectIncidentLinks(NavigationLinkListView *list, s32 value, s32 *partners, s32 *indices) {
     s32 i;
     s32 found;
 
@@ -183,7 +183,7 @@ s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partner
     found = 0;
     if (list->count > 0) {
         do {
-            s32 product = i * list->table->field_0;
+            s32 product = i * list->table->first;
             s32 offset = product + 8;
             u16 *entry;
             u16 *other_entry;
@@ -211,10 +211,10 @@ s32 Portal_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partner
     return found;
 }
 
-s32 Portal_IsNodeMovementBlocked(s32 **nodeStorage, Instance8020CD74 *instance, s32 nodeKey) {
+s32 Portal_IsNodeMovementBlocked(s32 **nodeStorage, ActorInstanceHeader *instance, s32 nodeKey) {
     CVector3 position;
-    CollisionInfo8020CD74 collision;
-    Instance8020CD74 saved;
+    CollisionQuery collision;
+    ActorInstanceHeader saved;
     s32 first_test;
     s32 result;
     s32 *table;
@@ -262,8 +262,8 @@ void *Portal_FindSearchNode(char *object, s32 current) {
     return 0;
 }
 
-void Portal_ResetSearchState(struct Obj8020BC50 *graph) {
-    struct Node8020BC50 *node;
+void Portal_ResetSearchState(struct NavigationSearchGraphView *graph) {
+    struct NavigationSearchNodeView *node;
     f32 k;
 
     node = graph->nodes;

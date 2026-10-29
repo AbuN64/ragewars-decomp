@@ -12,15 +12,15 @@
 #include "ENGINE/INSTANCE/GOBJINST_GETACTOROFFSETPOSITIONANDMODEL.H"
 
 /* 800C6E84_25.CPP */
-/* ROM-grounded data: src/rw_pool_80216288_C7EB4_us_rev1.c */
+/* ROM-grounded data: src/k_BarrelGetfacingsideOneWords_BarrelGetfacingside.c */
 const unsigned int k_BarrelGetfacingsideOneWords[1] = {
     0x3F800000,
 };
-/* ROM-grounded data: src/rw_pool_802168B8_C7EB8_us_rev1.c */
+/* ROM-grounded data: src/k_BarrelGetfacingsideEncodedWords_BarrelGetfacingside.c */
 const unsigned int k_BarrelGetfacingsideEncodedWords[1] = {
     0x3FC00000,
 };
-/* ROM-grounded data: src/rw_pool_80216A6C_C7EBC_us_rev1.c */
+/* ROM-grounded data: src/k_BarrelGetfacingsideEncodedWordsBlock1_BarrelGetfacingside.c */
 const unsigned int k_BarrelGetfacingsideEncodedWordsBlock1[1] = {
     0x3F4CCCCD,
 };

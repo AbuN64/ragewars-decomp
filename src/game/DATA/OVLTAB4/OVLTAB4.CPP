@@ -1,7 +1,7 @@
-#include "DATA/OVL1_E/DATA_800CEDA8.H"
-#include "DATA/OVL1_E/DATA_800CEDC0.H"
-#include "DATA/OVL1_E/DATA_800CEDD8.H"
-#include "DATA/OVL1_E/DATA_800CEDF0.H"
+#include "DATA/OVL1_E/g_PlayerStateSpecialCallbacks05PointerWords1_Ovl1E.H"
+#include "DATA/OVL1_E/g_PlayerStateSpecialCallbacks06PointerWords1_Ovl1E.H"
+#include "DATA/OVL1_E/g_PlayerStateSpecialCallbacks07PointerWords1_Ovl1E.H"
+#include "DATA/OVL1_E/g_PlayerStateSpecialCallbacks08PointerWords1_Ovl1E.H"
 
 /* 800CE8DC.CPP */
 #if defined(VERSION_US_REV1)
@@ -82,9 +82,9 @@ unsigned int g_PlayerStateNormalTiming02Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_03_us_rev1.c */
 extern char g_Playerai_UpdateWalkingMovementAddress[];
-extern char g_packedCodeAddress24_0022C8DC[];
+extern char g_PlayerStateSpecialCallbacks03EmptyCallbackPackedAddress24[];
 unsigned int g_playerStateNormalCallbacks03Words[2] = {
-    (unsigned int)g_packedCodeAddress24_0022C8DC, (unsigned int)g_Playerai_UpdateWalkingMovementAddress,
+    (unsigned int)g_PlayerStateSpecialCallbacks03EmptyCallbackPackedAddress24, (unsigned int)g_Playerai_UpdateWalkingMovementAddress,
 };
 #endif
 
@@ -115,10 +115,10 @@ unsigned int g_PlayerStateNormalTiming03Words[1] = {
 /* 800CE924_2.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_04_us_rev1.c */
-extern char g_packedCodeAddress24_0022C8E4[];
+extern char g_PlayerStateSpecialCallbacks04EmptyCallbackPackedAddress24[];
 extern char g_Player_UpdateGroundMoveStateAddressVariant2[];
 unsigned int g_playerStateNormalCallbacks04Words[2] = {
-    (unsigned int)g_packedCodeAddress24_0022C8E4, (unsigned int)g_Player_UpdateGroundMoveStateAddressVariant2,
+    (unsigned int)g_PlayerStateSpecialCallbacks04EmptyCallbackPackedAddress24, (unsigned int)g_Player_UpdateGroundMoveStateAddressVariant2,
 };
 #endif
 
@@ -150,7 +150,7 @@ unsigned int g_playerStateNormalTiming04Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_05_us_rev1.c */
 unsigned int g_PlayerStateNormalCallbacks05Words[2] = {
-    (unsigned int)g_packedCodeAddress24_0022CA04, (unsigned int)g_packedCodeAddress24_0022CB4C,
+    (unsigned int)g_Player_BeginJumpPackedAddress24, (unsigned int)g_Player_UpdateJumpAscentPackedAddress24,
 };
 #endif
 
@@ -182,7 +182,7 @@ unsigned int g_PlayerStateNormalTiming05Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_06_us_rev1.c */
 unsigned int g_PlayerStateNormalCallbacks06Words[2] = {
-    0x00000000, (unsigned int)g_packedCodeAddress24_0022CC24,
+    0x00000000, (unsigned int)g_Player_UpdateJumpAirMotionPackedAddress24,
 };
 #endif
 
@@ -214,7 +214,7 @@ unsigned int g_playerStateNormalTiming06Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_07_us_rev1.c */
 unsigned int g_PlayerStateNormalCallbacks07Words[2] = {
-    (unsigned int)g_packedCodeAddress24_0022CD68, (unsigned int)g_packedCodeAddress24_0022CDAC,
+    (unsigned int)g_Player_BeginLateralLeapPackedAddress24, (unsigned int)g_Player_UpdateLateralLeapPackedAddress24,
 };
 #endif
 
@@ -246,7 +246,7 @@ unsigned int g_playerStateNormalTiming07Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_08_us_rev1.c */
 unsigned int g_playerStateNormalCallbacks08Words[2] = {
-    0x00000000, (unsigned int)g_packedCodeAddress24_0022CE68,
+    0x00000000, (unsigned int)g_Player_UpdateLeapMotionPackedAddress24,
 };
 #endif
 
@@ -414,9 +414,9 @@ unsigned int g_playerStateNormalTiming12Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_13_us_rev1.c */
 extern char g_Player_DampMotionPackedAddress24[];
-extern char D_0022D030[];
+extern char addrLow_Player_AbsorbImpact_eu[];
 unsigned int g_playerStateNormalCallbacks13Words[2] = {
-    (unsigned int)g_Player_DampMotionPackedAddress24, (unsigned int)D_0022D030,
+    (unsigned int)g_Player_DampMotionPackedAddress24, (unsigned int)addrLow_Player_AbsorbImpact_eu,
 };
 #endif
 
@@ -448,9 +448,9 @@ unsigned int g_PlayerStateNormalTiming13Words[1] = {
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_player_state_normal_callbacks_14_us_rev1.c */
 extern char g_Player_DampMotionPackedAddress24[];
-extern char D_0022D030[];
+extern char addrLow_Player_AbsorbImpact_eu[];
 unsigned int g_playerStateNormalCallbacks14Words[2] = {
-    (unsigned int)g_Player_DampMotionPackedAddress24, (unsigned int)D_0022D030,
+    (unsigned int)g_Player_DampMotionPackedAddress24, (unsigned int)addrLow_Player_AbsorbImpact_eu,
 };
 #endif
 

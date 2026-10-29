@@ -5,8 +5,8 @@
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 extern void OnScreen_LoadTextTileModeOne(void);
 
-struct Table802AB8DC;
-typedef struct Table802AB8DC Table802AB8DC;
+struct OnScreenImageTableView;
+typedef struct OnScreenImageTableView OnScreenImageTableView;
 
 struct OverlayScriptTableView;
 
@@ -66,7 +66,7 @@ struct OverlayScriptSecondaryRangeView;
 typedef struct OverlayScriptSecondaryRangeView OverlayScriptSecondaryRangeView;
 
 
-struct Table802AB8DC;
+struct OnScreenImageTableView;
 
 struct OverlayScriptTableView;
 typedef struct OverlayScriptTableView OverlayScriptTableView;

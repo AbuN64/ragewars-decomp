@@ -49,11 +49,11 @@ extern void SmXlate_SwitchScreen(s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_resultsEventIds, an actor kind at g_resultsEventKinds and a handler at g_resultsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
+typedef s32 (*ResultsEventHandler)(void *, s32, s32, s32, s32);
 
 
 
-extern Handler8042DB38 g_resultsEventHandlers;
+extern ResultsEventHandler g_resultsEventHandlers;
 
 extern s32 g_simpleObjectPauseState; /* MIXED Frontend_ActivateResultsAction */
 s32 Frontend_ActivateResultsAction(void) {
@@ -152,7 +152,7 @@ s32 Frontend_ScrollResultsForward(void *first, void *second, void *third, s32 fo
 }
 
 s32 Frontend_DispatchResultsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler8042DB38 *entry;
+    ResultsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

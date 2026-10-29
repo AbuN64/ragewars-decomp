@@ -11,7 +11,7 @@ const unsigned int g_graphu64_ArcCosConstantWords[5] = {
 };
 
 /* 800C9A50.CPP */
-/* ROM-grounded data: src/rw_pool_802746A0_CA650_us_rev1.c */
+/* ROM-grounded data: src/g_graphu64_IntegrateBoundedValueConstantWords_Graphu64NegatewrappedvalueData.c */
 const unsigned int g_graphu64_IntegrateBoundedValueConstantWords[1] = {
     0x3FC00000,
 };
@@ -23,6 +23,6 @@ const unsigned int g_pool80274870_us_rev1[1] = {
 };
 
 /* 800C9A58.CPP */
-const unsigned int g_pool80274944_us_rev1[4] = {
+const unsigned int g_graphu64_WrappedValueBoundConstantWords_us_rev1[4] = {
     0xC0490FDB, 0x40C90FDB, 0x40490FDB, 0x40C90FDB,
 };

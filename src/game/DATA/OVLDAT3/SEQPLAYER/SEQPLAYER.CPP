@@ -24,12 +24,12 @@ const unsigned int k_SeqplayerEncodedWords[3] = {
     0x42FE0000, 0x4F000000, 0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_802B1990_CD31C_us_rev1.c */
+/* ROM-grounded data: src/g___initChanStateConstantWords_Seqplayer.c */
 const unsigned int g___initChanStateConstantWords[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_802B1A40_CD320_us_rev1.c */
+/* ROM-grounded data: src/g___resetPerfChanStateConstantWords_Seqplayer.c */
 const unsigned int g___resetPerfChanStateConstantWords[1] = {
     0x3F800000,
 };

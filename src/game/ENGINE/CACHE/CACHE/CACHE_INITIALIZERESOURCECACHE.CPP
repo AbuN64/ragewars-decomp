@@ -75,7 +75,7 @@ extern s32 Mutex_InitializeQueueLock(OSMesgQueue *);
 extern u32 Defs_GetMemorySize(void);
 extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
 extern void HashTable_InitializeResourceTable(s32);
-extern s32 g_packedCodeAddress24_002524B0;
+extern s32 g_Cache_RunResourceCompletionWorkerPackedAddress24;
 extern s32 g_resourceCompletionWorkerPriority;
 extern s32 g_resourceCompletionWorkerStack;
 extern int g_resourceCacheNodeCapacity;
@@ -147,7 +147,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     /* thread block g_resourceCompletionWorkerStack - 0x348 followed by its 0x800-byte stack at g_resourceCompletionWorkerStack */
     XPlus_FillMemory(&g_resourceCompletionWorkerStack, count, 0x800);
     thread = (char *)&g_resourceCompletionWorkerStack - 0x348;
-    osCreateThread(thread, count, &g_packedCodeAddress24_002524B0, 0, (char *)&g_resourceCompletionWorkerStack + 0x800, g_resourceCompletionWorkerPriority);
+    osCreateThread(thread, count, &g_Cache_RunResourceCompletionWorkerPackedAddress24, 0, (char *)&g_resourceCompletionWorkerStack + 0x800, g_resourceCompletionWorkerPriority);
     osStartThread(thread);
 }
 
@@ -338,9 +338,9 @@ void *Cache_AcquireResourceNodeWithEviction(s32 unused0, s32 flags) {
 
 void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     IntrusiveList queue;
-    Node80254C10 *node;
-    Node80254C10 *next;
-    Node80254C10 *scan;
+    CacheEvictionNode *node;
+    CacheEvictionNode *next;
+    CacheEvictionNode *scan;
     u32 split;
     s32 *arena_end;
     s32 *arena;
@@ -358,7 +358,7 @@ void Cache_CompactResourceHeap(s32 unused, s32 compactAll) {
     arena_end = &g_runtimeHeap[2];
     arena = arena_end - 2;
     do {
-        node = (Node80254C10 *)pool[0];
+        node = (CacheEvictionNode *)pool[0];
         pool[0] = *(s32 *)&node->next;
         if (!(*(s32 *)&node->flags & 0x701) && (u32)(*arena_end + 0x20) < node->start) {
             Heap_FreeAllocation(arena, node->start);

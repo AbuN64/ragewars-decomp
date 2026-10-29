@@ -14,7 +14,7 @@
 /* Updates a particle for one frame: halves the frame step for particles owned by a slowed object, measures its bounding
  * box, kills it or bounces it off its target when its type's rule says so (the German cartridge has a gentler rule
  * table), advances its spin and size (growing towards a capped target size, or dying when a size goes negative), lets
- * nearby players react to it, and when it moves or falls probes the ground through func_80243A90_de, orients itself to the
+ * nearby players react to it, and when it moves or falls probes the ground through Collision_ProbeGround_de, orients itself to the
  * surface it hit and runs the collision responses its descriptor allows. g_frameElapsedTime (the frame step) is restored on
  * every exit after the early time check. */
 extern f32 g_frameElapsedTime;

@@ -1,0 +1,8 @@
+#ifndef DATA_OVL1_J_ACHIEVE_RESULTS_SCREEN_CALLBACK_ADDRESSES_H
+#define DATA_OVL1_J_ACHIEVE_RESULTS_SCREEN_CALLBACK_ADDRESSES_H
+extern char g_Achieve_CreateResultsScreenAddress[];
+extern char g_CPlayerPreview_CloseSelectionMessageScreenAddress[];
+extern char g_Achieve_UpdateResultsScreenAddress[];
+extern char g_Achieve_HandleResultsMenuChoiceAddress[];
+extern char g_Achieve_AcknowledgeResultsEventAddress[];
+#endif

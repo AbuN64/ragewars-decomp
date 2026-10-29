@@ -31,12 +31,12 @@ unsigned int k_GameobjectResetactormotionEncodedWordsBlock1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80246184_C9514_us_rev1.c */
+/* ROM-grounded data: src/GameObject_ResetActorMotionConstantsUsRev1.c */
 const unsigned int g_GameObject_ResetActorMotionConstantsUsRev1[1] = {
     0x3F800000,
 };
 
-/* ROM-grounded data: src/rw_pool_8024643C_C9518_us_rev1.c */
+/* ROM-grounded data: src/Gobjinst_HasClearPathToActorConstantsUsRev1.c */
 const unsigned int g_Gobjinst_HasClearPathToActorConstantsUsRev1[1] = {
     0x3F4CCCCD,
 };

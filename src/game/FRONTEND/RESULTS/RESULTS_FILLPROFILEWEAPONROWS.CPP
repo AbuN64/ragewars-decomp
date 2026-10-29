@@ -12,7 +12,7 @@
 extern ResultsOptionsScreen *g_trialCatalogueScreen;
 
 /* Formats the name of entry g_trialCatalogueScreen's word at 0xA44 into a local 0x40-byte buffer through
-   Scene_CopyLevelName from D_8011FE88, passes the length XPlus_UppercaseString measures to func_802A025C_de for the
+   Scene_CopyLevelName from g_world_AchieveUpdateresultsscreen, passes the length XPlus_UppercaseString measures to XPlus_CopyString_ResultsFillprofileweaponrows for the
    text object at offset 0xA04, and points word 0x38 of the object at 0x998 to that text object. */
 
 
@@ -39,7 +39,7 @@ extern struct ProfileWeaponRowEntry g_trialCatalogueStages[];
 
 
 /* Sets the byte at offset 0x10 of the two objects at offsets 0xA64 and 0xA60 of the structure g_trialCatalogueScreen
-   points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0xA68. */
+   points to to 0xFF, shows both through Widget_SetWidgetFlag08_EquipActivateequipmentpanel and clears the word at 0xA68. */
 
 
 
@@ -60,7 +60,7 @@ extern void Widget_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget 
 extern void Results_SetTrialWeaponRow(u32, s32, s32);
 
 /* Rebuilds the item list for the player g_trialCatalogueScreen selects: clears it through CTrialCatalogue_ShowTrialOptionChildren, looks
-   up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
+   up that player's model in g_world_AchieveUpdateresultsscreen, and for each of the model's eight slot ids at 0x4C that is
    at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through Results_SetTrialWeaponRow when
    Player_HasProfileUnlockFlag accepts it for the player's 400-byte record in g_localPlayerProfiles. */
 

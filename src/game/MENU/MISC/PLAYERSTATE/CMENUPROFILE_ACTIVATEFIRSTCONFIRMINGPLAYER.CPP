@@ -11,13 +11,13 @@
 #include "MENU/MISC/CMENUPROFILE_ACTIVATEFIRSTCONFIRMINGPLAYER.H"
 
 /* Clears eight player active flags, then marks the first settings slot whose controller profile is active. */
-extern StatusStep D_80142622[];
+extern StatusStep g_gameSettingsRecordActiveFlagBase[];
 
 extern PlayerSettings g_playerSettings[];
 
 extern s32 Control_IsAButtonPressed(ControllerProfile *);
 
-/* Finds the first of the four slots in g_controllerProfiles that func_8026437C_de accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
+/* Finds the first of the four slots in g_controllerProfiles that Control_IsAButtonPressed_Character accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
 
 
 extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
@@ -46,7 +46,7 @@ void Playerai_EndRound(void *roundContext);
 
 
 
-/* Clears D_80146914, runs func_80264788_de on the value at 0x4 of the menu's widget and then func_80264248_de and func_802647E8_de(widget, 1) on the widget itself, clears the flag at 0x85C of the owner at 0x1C, and returns 1. */
+/* Clears g_fragTagSelectionState, runs Control_DisableControllerPakDe on the value at 0x4 of the menu's widget and then Control_ResetControllerPakDe and Control_SetProfileModeDe(widget, 1) on the widget itself, clears the flag at 0x85C of the owner at 0x1C, and returns 1. */
 
 
 
@@ -75,7 +75,7 @@ void CMenuProfile_ActivateFirstConfirmingPlayer(void) {
     s32 i;
     s32 active;
     i = 7;
-    status = D_80142622;
+    status = g_gameSettingsRecordActiveFlagBase;
     for (; i >= 0; i--) {
         ((StatusView *)status)->active = 0;
         status--;

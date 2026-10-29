@@ -37,10 +37,10 @@ unsigned char g_MenuOpenlocalizedgameoptionsTrailingBytes[8] = { 0x00, 0x00, 0x2
 struct MenuFadeWidget;
 struct MenuResourceWidget;
 /* Per-language label pointer tables, indexed by the settings language byte (0x581). */
-extern u8 *D_800E1C14[];
-extern u8 *D_800D2134[];
-extern u8 *D_800D2138[];
-extern u8 *D_800D213C[];
+extern u8 *g_optionsFirstChoiceLabels[];
+extern u8 *g_optionsResolutionFirstChoiceLabels[];
+extern u8 *g_optionsResolutionSecondChoiceLabels[];
+extern u8 *g_optionsResolutionThirdChoiceLabels[];
 extern void *Cache_AllocateMemory(s32);
 extern s32 Defs_GetMemorySize(void);
 extern struct MenuFadeWidget *SmpFade_CreateFadeWidget(s32, s32);
@@ -71,7 +71,7 @@ s32 Menu_CreateEuropeanSettingsPage(void) {
     firstList = SmpButton_CreateListWidget(0x59, 0x5A);
     settings = &g_gameSettings;
     g_optionsPage->bloodModeList = firstList;
-    SmpButton_AppendListText(firstList, D_800E1C14[settings->language]);
+    SmpButton_AppendListText(firstList, g_optionsFirstChoiceLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_optionsPage->bloodModeList, g_optionsFirstListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_optionsPage->bloodModeList, settings->bloodMode);
@@ -82,10 +82,10 @@ s32 Menu_CreateEuropeanSettingsPage(void) {
     SmpButton_SelectListEntry(g_optionsPage->twoPlayerScreenList, settings->twoPlayerScreenPreference);
     thirdList = SmpButton_CreateListWidget(0x51, 0x52);
     g_optionsPage->resolutionList = thirdList;
-    SmpButton_AppendListText(thirdList, D_800D2134[settings->language]);
+    SmpButton_AppendListText(thirdList, g_optionsResolutionFirstChoiceLabels[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D2138[settings->language]);
-        SmpButton_AppendListText(g_optionsPage->resolutionList, D_800D213C[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionSecondChoiceLabels[settings->language]);
+        SmpButton_AppendListText(g_optionsPage->resolutionList, g_optionsResolutionThirdChoiceLabels[settings->language]);
     }
     SmpButton_SelectListEntry(g_optionsPage->resolutionList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(0x53, 0x54, 0x80);
@@ -127,16 +127,16 @@ s32 Menu_CreateSessionSettingsControls(void) {
     firstList = SmpButton_CreateListWidget(MENU_RESOURCE_ID(0x1BB), MENU_RESOURCE_ID(0x1BC));
     settings = &g_gameSettings;
     g_gameOptionsScreenState->firstList = firstList;
-    SmpButton_AppendListText(firstList, D_800E1C14[settings->language]);
+    SmpButton_AppendListText(firstList, g_optionsFirstChoiceLabels[settings->language]);
     SmpButton_AppendListText(g_gameOptionsScreenState->firstList, g_optionsFirstListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_gameOptionsScreenState->firstList, g_optionsFirstListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_gameOptionsScreenState->firstList, settings->bloodMode);
     secondList = SmpButton_CreateListWidget(MENU_RESOURCE_ID(0x1BE), MENU_RESOURCE_ID(0x1BF));
     g_gameOptionsScreenState->secondList = secondList;
-    SmpButton_AppendListText(secondList, D_800D2134[settings->language]);
+    SmpButton_AppendListText(secondList, g_optionsResolutionFirstChoiceLabels[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_gameOptionsScreenState->secondList, D_800D2138[settings->language]);
-        SmpButton_AppendListText(g_gameOptionsScreenState->secondList, D_800D213C[settings->language]);
+        SmpButton_AppendListText(g_gameOptionsScreenState->secondList, g_optionsResolutionSecondChoiceLabels[settings->language]);
+        SmpButton_AppendListText(g_gameOptionsScreenState->secondList, g_optionsResolutionThirdChoiceLabels[settings->language]);
     }
     SmpButton_SelectListEntry(g_gameOptionsScreenState->secondList, settings->resolution);
     slider = SmpSlider_CreateSliderWidget(MENU_RESOURCE_ID(0x1C0), MENU_RESOURCE_ID(0x1C1), 0x80);
@@ -212,16 +212,16 @@ s32 Menu_OpenLocalizedGameOptions(void *node) {
     firstListHandle = SmpButton_CreateListWidget(MENU_RESOURCE_ID(0x375), MENU_RESOURCE_ID(0x376));
     g_optionsShortcutScreen->firstList = firstListHandle;
     settings = &g_gameSettings;
-    SmpButton_AppendListText(firstListHandle, D_800E1C14[settings->language]);
+    SmpButton_AppendListText(firstListHandle, g_optionsFirstChoiceLabels[settings->language]);
     SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListChoiceZeroLabels[settings->language]);
     SmpButton_AppendListText(g_optionsShortcutScreen->firstList, g_optionsFirstListChoiceOneLabels[settings->language]);
     SmpButton_SelectListEntry(g_optionsShortcutScreen->firstList, settings->bloodMode);
     secondListHandle = SmpButton_CreateListWidget(MENU_RESOURCE_ID(0x378), MENU_RESOURCE_ID(0x379));
     g_optionsShortcutScreen->secondList = secondListHandle;
-    SmpButton_AppendListText(secondListHandle, D_800D2134[settings->language]);
+    SmpButton_AppendListText(secondListHandle, g_optionsResolutionFirstChoiceLabels[settings->language]);
     if (Defs_GetMemorySize() != 0x400000) {
-        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D2138[settings->language]);
-        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, D_800D213C[settings->language]);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsResolutionSecondChoiceLabels[settings->language]);
+        SmpButton_AppendListText(g_optionsShortcutScreen->secondList, g_optionsResolutionThirdChoiceLabels[settings->language]);
     }
     SmpButton_SelectListEntry(g_optionsShortcutScreen->secondList, settings->slots[7].secondListMode);
     slider = SmpSlider_CreateSliderWidget(MENU_RESOURCE_ID(0x37A), MENU_RESOURCE_ID(0x37B), 0x80);

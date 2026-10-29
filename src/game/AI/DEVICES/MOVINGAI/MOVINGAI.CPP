@@ -8,7 +8,7 @@
 #include "COMMON/REC.H"
 #include "TYPES.H"
 #include "WEAPONS/ACTOR_REQUESTACTORSTATE.H"
-#include "COMMON/LONE/D_800E4680.H"
+#include "COMMON/LONE/g_currentStagePreset.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/SHARED_VOIDCALLBACK.H"
@@ -116,9 +116,9 @@ extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned shor
 
 /* Spawns effect kind at an actor's position through SetN64_SpawnModelEffect in g_modelEffectPool's list: kind 0xBD7
    is skipped while both of g_matchRoundCounters's flags at 0x78 and 0x80 are set, and kind 0x1388 is offset by
-   the variant byte at D_800E4680 when option D_801462D5 is 1 (skipped for variant 0); a spawned node
+   the variant byte at g_currentStagePreset when option g_gameControllerMode is 1 (skipped for variant 0); a spawned node
    has its word at 0x1A0 cleared, takes one charge from the owner and starts effect 0x11D at its own
-   position through func_80216288_de. */
+   position through Barrel_SpawnActorEffect_Movingai. */
 
 extern SpawnDispatchActor *SetN64_SpawnModelEffect(char *, void *, s32, CVector3, Triple, s32, f32);
 
@@ -162,7 +162,7 @@ void MovingAI_SpawnConfiguredModelEffect(LevelActor *actor, ActorMotionState *ow
         }
     }
     if (kind == 0x1388 && g_gameSettings.controllerMode == 1) {
-        kind = *D_800E4680 + 0x1388;
+        kind = *g_currentStagePreset + 0x1388;
         if (kind == 0x1388) {
             return;
         }
@@ -274,7 +274,7 @@ void MovingAI_DeviceHealthNoOp(void) {
 
 /* 80204E78_7_DATA3.CPP */
 /* 800C6BD0.CPP */
-/* ROM-grounded data: src/rw_pool_802066A4_C77D0_us_rev1.c */
+/* ROM-grounded data: src/k_MovingaiOneWords_us_rev1.c */
 const unsigned int k_MovingaiOneWords[1] = {
     0x3F800000,
 };

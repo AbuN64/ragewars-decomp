@@ -62,5 +62,5 @@ struct SoundPlayerWordParameterEvent;
 typedef struct SoundPlayerWordParameterEvent SoundPlayerWordParameterEvent;
 
 
-extern const f32 D_800C7544;
+extern const f32 g_soundPlayerMinimumPitch;
 #endif

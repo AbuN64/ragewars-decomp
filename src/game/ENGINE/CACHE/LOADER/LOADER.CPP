@@ -18,7 +18,7 @@ extern void osSetEventMesg(s32 event, s32 queue, s32 message);
 extern void osCreateThread(s32 thread, s32 threadId, void *entry, s32 arg, s32 stackTop, s32 priority);
 
 
-extern char g_packedCodeAddress24_0025657C;
+extern char g_Cartridge_RunReadWorkerPackedAddress24;
 
 void *Cartridge_AcquireReadRequest(CartridgeReadWorker *cartridgeReadWorker);
 
@@ -48,7 +48,7 @@ void Cartridge_StartReadWorker(s32 workerAddress, s32 count) {
         s0 += 0x20;
     } while (s1 < 0x210);
     XPlus_FillMemory(workerAddress + 0xA68, count, 0x400);
-    osCreateThread(workerAddress, count, &g_packedCodeAddress24_0025657C, workerAddress, workerAddress + 0xE68, g_cartridgeReadWorkerPriority);
+    osCreateThread(workerAddress, count, &g_Cartridge_RunReadWorkerPackedAddress24, workerAddress, workerAddress + 0xE68, g_cartridgeReadWorkerPriority);
     osStartThread((void *)workerAddress);
 }
 

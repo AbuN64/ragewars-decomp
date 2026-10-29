@@ -7,12 +7,12 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/STATERECAT34.H"
-struct Pool80255720 {
+struct HeapArena_Heap {
     s32 unk0;
     s32 unk4;
-    struct Block80255720 *head;
-    struct Block80255720 *tail;
-    struct Block80255720 *anchor;
+    struct HeapArenaBlock *head;
+    struct HeapArenaBlock *tail;
+    struct HeapArenaBlock *anchor;
 };
 /* A first-fit heap: its byte range, the free-block list (head and tail) and the address-ordered list of all
    blocks; g_runtimeHeap is the game's main heap. */
@@ -28,6 +28,6 @@ struct HeapFreeBlockList {
     struct HeapAllocationBlock *head;
     struct HeapAllocationBlock *tail;
 };
-extern void Heap_CoalesceEmptyPhysicalBlocks(Pool80255720 *arena);
-extern void Heap_GetFreeByteCounts(struct Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut);
+extern void Heap_CoalesceEmptyPhysicalBlocks(HeapArena_Heap *arena);
+extern void Heap_GetFreeByteCounts(struct HeapArena_Entryrecat18v3 *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut);
 #endif

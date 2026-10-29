@@ -136,7 +136,7 @@ void CPlane_ResetContact(void *contactStorage)
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 1, 2 and 3 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -178,7 +178,7 @@ void Plane_BuildBoxFace0(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 7, 6, 5 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -197,7 +197,7 @@ void Plane_BuildBoxFace1(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 3, 2, 6 and 7 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -216,7 +216,7 @@ void Plane_BuildBoxFace2(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 4, 5, 1 and 0 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -235,7 +235,7 @@ void Plane_BuildBoxFace3(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 3, 7 and 4 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */
@@ -254,7 +254,7 @@ void Plane_BuildBoxFace4(struct Quad *quad, CVector3 *points) {
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 2, 1, 5 and 6 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through Graphu64_SubtractVectors, their cross product through
-   Graphu64_CrossVectors and normalisation through func_8027207C_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
+   Graphu64_CrossVectors and normalisation through Graphu64_NormalizeVector_de. Adapted from Plane_BuildBoxFace0 with the copied points changed. */
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
    the second edge's frame address in a saved register and grows the frame. */

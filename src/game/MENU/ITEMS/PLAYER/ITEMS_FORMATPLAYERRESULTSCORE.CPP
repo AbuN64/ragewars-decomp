@@ -30,9 +30,9 @@ s32 Player_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder)
 
 #else
 #endif
-/* Formats the halfword g_playerResultScoreFieldsDe holds for the player func_8022A5A0_de identifies from the owner at offset
+/* Formats the halfword g_playerResultScoreFieldsDe holds for the player Player_GetPlayerIndexDe identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
-   format D_800DE700 four bytes before the length Menu_CountLineChars reports. Returns zero. */
+   format g_fmtDec4PadDe four bytes before the length Menu_CountLineChars reports. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct LocalizedInputState g_playerViewRenderContext;

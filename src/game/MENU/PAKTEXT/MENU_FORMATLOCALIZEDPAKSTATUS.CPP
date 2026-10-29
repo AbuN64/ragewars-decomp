@@ -44,7 +44,7 @@ s32 Menu_FormatLocalizedPakStatus(struct Field *entry) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakStatus);
+INCLUDE_ASM("ovl_frontendMenu", Menu_FormatLocalizedPakStatus);
 #endif
 #endif
 

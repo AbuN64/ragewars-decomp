@@ -50,7 +50,7 @@ s32 Player_PartnerStatusZeroHookSeven(void) {
 }
 
 /* Calls SoundElement_DisableMusicGainOverride and passes what SoundVoicePool_GetGlobalState returns to SoundVoicePool_Resume; then, when g_controllerReturnPending
-   is set, calls Menu_TryCreateMenu with the three arguments, otherwise func_8026495C_de. Returns one. */
+   is set, calls Menu_TryCreateMenu with the three arguments, otherwise Control_RestoreControllerSetup_FrontendDestroypausemenu. Returns one. */
 extern s32 SoundVoicePool_GetGlobalState();
 struct SoundVoicePool;
 extern void SoundVoicePool_Resume(struct SoundVoicePool *);
@@ -126,5 +126,5 @@ s32 Player_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Player_FormatPlayerPartnerStatus);
+INCLUDE_ASM("ovl_frontendMenu", Player_FormatPlayerPartnerStatus);
 #endif

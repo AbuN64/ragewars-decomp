@@ -8,16 +8,16 @@
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_gameOptionsEventKinds, an actor kind at g_gameOptionsActorKinds and a handler at g_gameOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler8042359C)(void *, s32, s32, s32, s32);
+typedef s32 (*GameOptionsEventHandler)(void *, s32, s32, s32, s32);
 
 
-extern Handler8042359C g_gameOptionsEventHandlers;
+extern GameOptionsEventHandler g_gameOptionsEventHandlers;
 
 
 
 
 s32 Frontend_DispatchOptionsPageEvent(void *menuActor, s32 eventKind, s32 eventDataOne, s32 eventDataTwo, s32 eventDataThree) {
-    Handler8042359C *entry;
+    GameOptionsEventHandler *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

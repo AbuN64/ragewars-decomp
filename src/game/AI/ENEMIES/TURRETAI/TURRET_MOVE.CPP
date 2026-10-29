@@ -8,7 +8,7 @@
 
 typedef struct Owner Owner;
 
-/* Moves a rider along its path segment: limits the throttle change by the segment's length over its radius, then either rocks the throttle back and forth between 0 and 1 (mode 1, flipping direction at the ends) or steers it toward a target's projected distance along the segment (mode 2), eases the change through func_80274808_de, clamps the throttle to 0..1 and places the rider at the segment's circle point for that throttle through Graphu64_InterpolateVector. */
+/* Moves a rider along its path segment: limits the throttle change by the segment's length over its radius, then either rocks the throttle back and forth between 0 and 1 (mode 1, flipping direction at the ends) or steers it toward a target's projected distance along the segment (mode 2), eases the change through Graphu64_ApproachValue_TurretMove, clamps the throttle to 0..1 and places the rider at the segment's circle point for that throttle through Graphu64_InterpolateVector. */
 
 
 
@@ -24,7 +24,7 @@ extern f32 Graphu64_ApproachValue(f32, f32, f32);
 
 extern void Graphu64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-/* Picks a rider's nearest target: walks the player list g_transientPlayerList for players within the segment's range at 0x54 (squared distance through Graphu64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (g_teamScoringEnabled), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
+/* Picks a rider's nearest target: walks the player list g_transientPlayerList for players within the segment's range at 0x54 (squared distance through Graphu64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (g_teamScoringEnabled), are on the other team, keeps those with a clear line of sight between their raised centres through CCollision_SweepPoint (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through Gu_Sqrtf_TurretMove, clearing both when none qualifies. */
 
 
 

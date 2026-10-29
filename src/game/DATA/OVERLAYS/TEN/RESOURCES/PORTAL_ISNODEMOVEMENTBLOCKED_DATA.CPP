@@ -9,7 +9,7 @@ unsigned int k_PortalIsnodemovementblockedEncodedWords[8] = {
 
 /* 800FDFD0_2.CPP */
 #if defined(VERSION_US)
-const unsigned int rodata_shared_800FDFF0[1] = {
+const unsigned int k_PortalIsnodemovementblockedTrailingWord[1] = {
     0x24640018,
 };
 #endif

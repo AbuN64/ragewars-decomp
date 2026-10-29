@@ -31,7 +31,7 @@ void SetN64_SetTransitionTarget(GameSession *object, int value) {
     object->target = value;
 }
 
-typedef void (*Handler8029382C)(void *);
+typedef void (*SessionUpdateHandler)(void *);
 
 
 extern void SetN64_UpdateFrameTiming(void *world);
@@ -43,10 +43,10 @@ extern void SetN64_UpdateFrameTiming(void *world);
 
 void SetN64_UpdateGameMode(void *session) {
     s32 field;
-    Handler8029382C fn;
+    SessionUpdateHandler fn;
 
-    if (D_800CD724 != 0) {
-        D_800CD724 = 0;
+    if (g_sessionUpdateResetFlag != 0) {
+        g_sessionUpdateResetFlag = 0;
     }
     Control_TickSnapshotCountdown();
     field = ((GameSession *)session)->mode;

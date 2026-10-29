@@ -16,7 +16,7 @@ extern char g_staticDataRegionStart;
 
 extern char g_staticDataRegionByteCount;
 
-extern char jtbl_800C19C0;
+extern char g_staticJumpTableRegionStart;
 
 extern char g_staticJumpTableRegionByteCount;
 
@@ -306,7 +306,7 @@ f32 Defs_CosineEase(f32 fraction)
       clampedFraction = clampBound;
     }
   }
-  return (g_cosineEaseOutputConstants - Math_Cosf(clampedFraction * g_cosineEaseAngleScale)) * (((struct func_802077F4_S2 *) ((char *) (&g_cosineEaseOutputConstants)))->unk4);
+  return (g_cosineEaseOutputConstants - Math_Cosf(clampedFraction * g_cosineEaseAngleScale)) * (((struct PaddedFloatView *) ((char *) (&g_cosineEaseOutputConstants)))->unk4);
 }
 
 /** Return whether an address lies within one of three recognized ranges. */
@@ -315,8 +315,8 @@ int Defs_IsAddressInStaticRanges(u32 callback) {
         callback < (u32)&g_staticDataRegionStart + (u32)&g_staticDataRegionByteCount) {
         return 1;
     }
-    if (callback >= (u32)&jtbl_800C19C0 &&
-        callback < (u32)&jtbl_800C19C0 + (u32)&g_staticJumpTableRegionByteCount) {
+    if (callback >= (u32)&g_staticJumpTableRegionStart &&
+        callback < (u32)&g_staticJumpTableRegionStart + (u32)&g_staticJumpTableRegionByteCount) {
         return 1;
     }
     if (callback >= (u32)&g_cinemaSequenceState &&
@@ -445,7 +445,7 @@ unsigned int k_DefsEncodedWordsBlock1[3] = {
 };
 #endif
 
-/* DATA_800C9498.CPP */
+/* g_DefsEncodedWords_Defs.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800C9498 */
 unsigned int g_DefsEncodedWords[2] = {

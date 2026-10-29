@@ -1,6 +1,6 @@
 #include "MENU/BUILD/DEFINITION_DATA.H"
 
-/* DATA_80153F4C.CPP */
+/* k_Ovl3EncodedWords_Ovl3.CPP */
 #if defined(VERSION_US_REV1)
 
 unsigned int k_Ovl3EncodedWords[3] = {
@@ -18,7 +18,7 @@ struct {
 };
 #endif
 
-/* DATA_80153F60.CPP */
+/* g_menuItemFragment2_Ovl3.CPP */
 #if defined(VERSION_US_REV1)
 extern char g_menuPaged_Menu_DrawMenuOptionSprite[];
 

@@ -40,7 +40,7 @@ static inline int select_key(StaticModelAnimationDescriptor *descriptor, u32 tim
 /* Starts the effects attached to an object's model: loads the model resource named by the object's id,
  * finds its attachment table (group 3) and loads it, then for each 0x1C-byte attachment (all of them, or
  * only type 8 when all is clear) transforms its offset by the object's matrix at 0x68 and starts the
- * attachment's effect at that point through func_80265E10_de, releasing both resources afterwards. */
+ * attachment's effect at that point through Events_DeliverContactEffect_ActorAnimationRootAndEventOperations, releasing both resources afterwards. */
 
 extern char g_statObjectIndexText;
 

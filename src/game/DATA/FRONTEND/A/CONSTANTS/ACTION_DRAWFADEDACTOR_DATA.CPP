@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_80204808_C7764_us_rev1.c */
+/* ROM-grounded data: src/g_Actionai_DrawFadedActorConstantWords_ActionDrawfadedactorData.c */
 const unsigned int g_Actionai_DrawFadedActorConstantWords[2] = {
     0x41080000, 0x437F0000,
 };

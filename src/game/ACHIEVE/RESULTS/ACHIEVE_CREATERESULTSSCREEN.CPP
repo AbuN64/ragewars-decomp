@@ -24,12 +24,12 @@ const unsigned int g_resultPreviewTransformConstants[6] = {
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
-extern Active *D_800E4680;
+extern Active *g_currentStagePreset;
 extern struct ResultsHeadingCharacter g_resultCharacterHeadings[];
 #if !defined(VERSION_EU) && !defined(VERSION_EU_X)
 extern f32 g_resultTimeToSeconds;
 #endif
-extern char *g_resultCharacterUnlockFormat, *D_800D357C, *g_resultPreviouslyCompletedText, *g_resultModeHeadingText, *g_resultTrialModeText, *g_resultChallengeModeText, *g_resultCampaignCompleteText, *g_resultTrialsCompleteText;
+extern char *g_resultCharacterUnlockFormat, *g_resultUnavailableText, *g_resultPreviouslyCompletedText, *g_resultModeHeadingText, *g_resultTrialModeText, *g_resultChallengeModeText, *g_resultCampaignCompleteText, *g_resultTrialsCompleteText;
 extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(void *);
 extern void CPlayerPreview_ResetSelectionMessageState(void);
@@ -90,7 +90,7 @@ s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
         if (game->humanWon == 1) {
             Achieve_MarkLevelPlayed(g_resultsModelPreviewScreen->player);
             g_resultsModelPreviewScreen->rows[0].model = -1;
-            if (D_800E4680->recorded != 0) {
+            if (g_currentStagePreset->recorded != 0) {
                 slot = g_localPlayerProfiles[g_resultsModelPreviewScreen->player].slot;
                 if (Defs_TestBit(g_localPlayerProfiles[g_resultsModelPreviewScreen->player].slotLevels[slot], g_selectedLevelId) == 1) {
                     item = Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window, 0x27E + PREVIEW_ID_SHIFT);
@@ -268,11 +268,11 @@ extern char rodata_func_8043829C_de_800DCBC4[];
 extern char k_AchieveEncodedBytes[];
 #define PREVIEW_NUMBER_FORMAT k_AchieveEncodedBytes
 #elif defined(VERSION_EU)
-extern char rodata_func_8043829C_de_800EE594[];
-#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800EE594
+extern char g_resultPreviewNumberFormatEu[];
+#define PREVIEW_NUMBER_FORMAT g_resultPreviewNumberFormatEu
 #elif defined(VERSION_EU_X)
-extern char rodata_func_8043829C_de_800E9754[];
-#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800E9754
+extern char g_resultPreviewNumberFormatEuX[];
+#define PREVIEW_NUMBER_FORMAT g_resultPreviewNumberFormatEuX
 #endif
 
 /* Fill the selected player's preview statistics and optional rank badge. */
@@ -354,7 +354,7 @@ void Achieve_ConfigureResultModelPreview(void) {
  model=g_resultsModelPreviewScreen->rows[index].model;
  if(model>=0) {
   /* the hub's Item view shares the MenuWidget prefix; this unit writes alpha and image through its own view */
-  item=(MenuWidget *)Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window,MENU_804387F4_642);
+  item=(MenuWidget *)Node_FindWidgetByResourceId(g_resultsModelPreviewScreen->window,RESULTS_MODEL_PREVIEW_IMAGE_WIDGET_ID);
   Widget_SetWidgetFlag08(item,1);
   item->alpha=0xAF;
   item->image=g_resultsModelPreviewScreen->rows[index].image;

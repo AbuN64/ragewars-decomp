@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/CALLBACK.H"
 
-struct ArgsCode80296014 {
+struct MenuDrawEventArgs {
     s32 word0;
     s32 word4;
     s32 word8;

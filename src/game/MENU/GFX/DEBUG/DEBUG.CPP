@@ -41,7 +41,7 @@ const char s_gfxDebugLocationFormat[13] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_text_804142AC_E1CF0_us_rev1.c */
+/* ROM-grounded data: src/s_gfxDebugLocationFormatRev1.c */
 const unsigned char k_DebugEncodedBytes[13] = {
     0x5B, 0x20, 0x25, 0x73, 0x20, 0x3A, 0x20, 0x25, 0x64, 0x20, 0x5D, 0x0A, 0x00,
 };
@@ -49,7 +49,7 @@ const unsigned char k_DebugEncodedBytes[13] = {
 
 /* 800E1100.CPP */
 #if !(defined(VERSION_US_REV1))
-const char s_gfxDebugUnknownText[8] =
+const char s_gfxDebugUNKNOWNLabel[8] =
     "UNKNOWN\000";
 #endif
 

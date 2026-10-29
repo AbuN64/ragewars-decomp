@@ -5,7 +5,7 @@
 unsigned char g_MenuSelecteuropeanpakactionlabelTrailingBytes[4] = { 0x0C, 0x10, 0x17, 0xD6 };
 #endif
 
-/* DATA_800E0648.CPP */
+/* g_equipmentAndPlayerSettingsMenuDataEuX_MenuSelecteuropeanpakactionlabel.CPP */
 #if defined(VERSION_US)
 extern char addrLow_Player_CreateFourPlayerResults[];
 extern char addrLow_Player_StartFourPlayerResults[];
@@ -45,7 +45,7 @@ unsigned int g_equipmentAndPlayerSettingsMenuDataEuX[174] = {
 };
 #endif
 
-/* DATA_800E57DC.CPP */
+/* g_titleButtonEventHandlerRecordsUsRev1_MenuSelecteuropeanpakactionlabel.CPP */
 #if defined(VERSION_US_REV1)
 unsigned int g_titleButtonEventHandlerRecordsUsRev1[21] = {
     0x00000E08, 0x0000001E, (unsigned int)g_Menu_UpdateTitleButtonScreenAddress, 0x00000E06, 0x0000001E, (unsigned int)g_Menu_CreateTitleButtonScreenAddress, 0x00000E07, 0x0000001E,

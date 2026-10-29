@@ -1,5 +1,0 @@
-#ifndef COMMON_LEVEL_SWITCH_BYTE_TABLE_H
-#define COMMON_LEVEL_SWITCH_BYTE_TABLE_H
-#include "TYPES.H"
-extern u8 *D_800E4680;
-#endif

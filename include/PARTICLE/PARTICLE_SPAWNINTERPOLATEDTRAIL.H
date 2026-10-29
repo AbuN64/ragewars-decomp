@@ -18,7 +18,7 @@ extern s32 Particle_IsKind5To7Or9Or17Or19Or26Or257Or272(ParticleEffect *effect);
 extern s32 Particle_IsKind8Or13Or18(ParticleEffect *effect);
 extern void Particle_UpdateForcesAndMotion(ParticleEffect *effect);
 extern void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle);
-extern s32 Particle_HasClearMotionPath(Instance8020CD74 *, ParticleTrailEmitterView *);
+extern s32 Particle_HasClearMotionPath(ActorInstanceHeader *, ParticleTrailEmitterView *);
 extern void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center, ObjParticleMarkNearbyObjects * *objects, s32 count);
 extern void Particle_UpdateNearbyObjectFlags(int context, ObjParticleMarkNearbyObjects * *objects, int count);
 #endif

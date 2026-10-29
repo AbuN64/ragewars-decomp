@@ -1,4 +1,4 @@
-#include "DATA/OVLDAT7/800CFE50.H"
+#include "DATA/OVLDAT7/WEAPON_NO_OPERATION_CALLBACK_ADDRESS_US_REV1.H"
 
 #if defined(VERSION_US_REV1)
 unsigned int g_weaponSlot3BehaviorUsRev1[7] = {

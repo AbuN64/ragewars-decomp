@@ -69,13 +69,13 @@ extern char addrLow_SmpSlider_HighlightSliderItems[];
 extern char addrLow_SmpList_ResetEntryCommands[];
 extern char addrLow_SmpList_HandleIncrementInput[];
 extern char addrLow_SmpList_HandleDecrementInput[];
-extern char D_0041AB70[];
+extern char addrLow_SmpList_HandleStopEvent[];
 extern char addrLow_SmpList_UpdateSliderMotion[];
 extern char addrLow_SmpList_DestroyController[];
 unsigned int g_smpSliderListEventRecordsUsRev1[27] = {
     0x00000E07, 0x00007530, (unsigned int)g_SmpSlider_DimSliderItemsAddress, 0x0000000F, 0x00007530, (unsigned int)addrLow_SmpSlider_HighlightSliderItems, 0x00000010, 0x00007530,
     (unsigned int)addrLow_SmpList_ResetEntryCommands, 0x00000008, 0x00007530, (unsigned int)addrLow_SmpList_HandleIncrementInput, 0x00000007, 0x00007530, (unsigned int)addrLow_SmpList_HandleDecrementInput, 0x00000E03,
-    0x00007530, (unsigned int)addrLow_SmpList_DestroyController, 0x0000000B, 0x00007530, (unsigned int)D_0041AB70, 0x00000E08, 0x00007530, (unsigned int)addrLow_SmpList_UpdateSliderMotion,
+    0x00007530, (unsigned int)addrLow_SmpList_DestroyController, 0x0000000B, 0x00007530, (unsigned int)addrLow_SmpList_HandleStopEvent, 0x00000E08, 0x00007530, (unsigned int)addrLow_SmpList_UpdateSliderMotion,
     0x00000000, 0x00000000, 0x00000000,
 };
 #endif

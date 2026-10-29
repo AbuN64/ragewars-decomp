@@ -15,7 +15,7 @@ unsigned char g_FrontendCreateprofileresetscreeneuropeanTrailingBytes[4] = { 0x8
 /* 8040B45C_8.CPP */
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
 /* Points a field's text at the label for the state word g_frontendResourceLoadStage: one of 3 strings through the jump table
-   jtbl_800E1098 for states 0 to 4, and s_nodeDefaultFieldText for any other state. Returns zero. */
+   jtbl_Frontend_SelectPakActionLabel for states 0 to 4, and s_nodeDefaultFieldText for any other state. Returns zero. */
 
 s32 Frontend_SelectPakActionLabel(struct PakActionLabelView *field) {
     u32 state = g_frontendResourceLoadStage;

@@ -6,7 +6,7 @@
 
 /* Releases the current record's track-2 timed items whose time has come (or all live ones once the
    record's end time has passed): special items (kind and subkind 1 and 5, 9 and 4, 10 and 3) go to
-   func_80402FB4_de and clear the record's pending flag, others to Link_ActivateTrigger, then each entry is
+   Track_RequestTrackByIds_MenuProcesstrackitemevents and clear the record's pending flag, others to Link_ActivateTrigger, then each entry is
    marked spent and its item is flagged and refreshed through Scene_SetTriggerStateBit. Adapted from Track_HasNoTrackRequestItems: indexed entry
    access and the table base taken inside the loop. */
 

@@ -3,13 +3,13 @@
 #include "TYPES.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Node8020BC50;
-struct Node8020BC50 {
+struct NavigationSearchNodeView;
+struct NavigationSearchNodeView {
     s32 key;
     f32 value;
     s32 state;
     s32 fieldC;
-    struct Node8020BC50 *next;
+    struct NavigationSearchNodeView *next;
     s32 field14;
     s32 field18;
     s32 field1C;
@@ -43,26 +43,26 @@ extern float g_portalRelatedGoalDefaultValue;
 
 
 
-struct EntryList8020CCE8;
+struct NavigationLinkListView;
 struct IntPair;
-struct EntryList8020CCE8 {
+struct NavigationLinkListView {
     s32 pad0[2];
     struct IntPair *table;
     s32 count;
 };
 
-struct Node8020BC50;
-typedef struct Node8020BC50 Node8020BC50;
+struct NavigationSearchNodeView;
+typedef struct NavigationSearchNodeView NavigationSearchNodeView;
 
 
 struct ObjNavAddGoalNode;
 typedef struct ObjNavAddGoalNode ObjNavAddGoalNode;
 
-struct Table8020BC50;
-typedef struct Table8020BC50 Table8020BC50;
+struct NavigationStridedTableView;
+typedef struct NavigationStridedTableView NavigationStridedTableView;
 
-struct Obj8020BC50;
-typedef struct Obj8020BC50 Obj8020BC50;
+struct NavigationSearchGraphView;
+typedef struct NavigationSearchGraphView NavigationSearchGraphView;
 
 
 struct RouteRelationTableView;
@@ -73,8 +73,8 @@ struct RouteRelationTableView {
     char * unk_10;
 };
 
-struct EntryList8020CCE8;
-typedef struct EntryList8020CCE8 EntryList8020CCE8;
+struct NavigationLinkListView;
+typedef struct NavigationLinkListView NavigationLinkListView;
 
 struct Graph;
 typedef struct Graph Graph;
@@ -87,23 +87,23 @@ typedef struct Graph Graph;
 union NavigationPackedFlags;
 typedef union NavigationPackedFlags NavigationPackedFlags;
 
-struct Table8020BC50;
-struct Table8020BC50 {
+struct NavigationStridedTableView;
+struct NavigationStridedTableView {
     s32 stride;
     char data[4];
 };
 
-struct Obj8020BC50;
-struct Obj8020BC50 {
-    Table8020BC50 *records;
+struct NavigationSearchGraphView;
+struct NavigationSearchGraphView {
+    NavigationStridedTableView *records;
     s32 count;
     char pad8[8];
-    Table8020BC50 *links;
+    NavigationStridedTableView *links;
     char pad14[4];
     s32 result;
     f32 value;
     s32 selected;
-    Node8020BC50 *nodes;
+    NavigationSearchNodeView *nodes;
 };
 
 union NavigationPackedFlags;

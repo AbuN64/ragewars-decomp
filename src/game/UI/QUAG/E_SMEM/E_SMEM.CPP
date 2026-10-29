@@ -202,7 +202,7 @@ const unsigned int g_frameHeapLowAllocationStatLowerLimit_StorageWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802A13A4_CBB08_us_rev1.c */
+/* ROM-grounded data: src/g_ESmem_AllocateFrameHeapLowConstantWords_ESmem.c */
 const unsigned int g_ESmem_AllocateFrameHeapLowConstantWords[2] = {
     0xCCBEBC20, 0x4CBEBC20,
 };
@@ -215,7 +215,7 @@ const unsigned int g_frameHeapRestoreStatLowerLimit_StorageWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802A14B8_CBB10_us_rev1.c */
+/* ROM-grounded data: src/g_ESmem_RestoreFrameHeapMarkConstantWords_ESmem.c */
 const unsigned int g_ESmem_RestoreFrameHeapMarkConstantWords[2] = {
     0xCCBEBC20, 0x4CBEBC20,
 };
@@ -228,7 +228,7 @@ const unsigned int g_frameHeapHighAllocationStatLowerLimit_StorageWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802A15E4_CBB18_us_rev1.c */
+/* ROM-grounded data: src/g_ESmem_AllocateFrameHeapHighConstantWords_ESmem.c */
 const unsigned int g_ESmem_AllocateFrameHeapHighConstantWords[2] = {
     0xCCBEBC20, 0x4CBEBC20,
 };

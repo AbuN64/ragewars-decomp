@@ -367,7 +367,7 @@ char func_80204868_de_padding_5468[8] =
 
 /* 800C6B5C.CPP */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80204308_C775C_us_rev1.c */
+/* ROM-grounded data: src/k_ActionUpdatebreakableproximityFourWords_ActionUpdatebreakableproximity.c */
 const unsigned int k_ActionUpdatebreakableproximityFourWords[1] = {
     0x40800000,
 };

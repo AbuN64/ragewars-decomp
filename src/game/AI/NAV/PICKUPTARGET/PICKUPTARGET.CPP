@@ -34,19 +34,19 @@ extern void Nav_AddGoalNode(struct ObjNavAddGoalNode *, int);
 
 s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
     s32 *base;
-    Node8020BC50 *node;
+    NavigationSearchNodeView *node;
     void *record;
     s32 count;
     s32 i;
 
     base = &g_navigationGraph;
     count = 0;
-    for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
+    for (node = (NavigationSearchNodeView *)((NavigationSearchGraphView *)base)->nodes; node != 0; node = node->next) {
         record = Portal_GetGraphPoint(base, node->key);
         if (navigation_point_flags((NavigationPoint *)record) & 1) {
             for (i = 0; i < 30; i++) {
                 if (navigation_point_object_id((NavigationPoint *)record) == ids[i] && node->owner != 0
-                    && ((Owner8020F150 *)node->owner)->active != 0) {
+                    && ((NavigationNodeOwnerView *)node->owner)->active != 0) {
                     Nav_AddGoalNode(base, node->key);
                     count++;
                 }
@@ -54,7 +54,7 @@ s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
         }
     }
     if (count == 0) {
-        for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
+        for (node = (NavigationSearchNodeView *)((NavigationSearchGraphView *)base)->nodes; node != 0; node = node->next) {
             record = Portal_GetGraphPoint(base, node->key);
             if (navigation_point_flags((NavigationPoint *)record) & 1) {
                 for (i = 0; i < 30; i++) {

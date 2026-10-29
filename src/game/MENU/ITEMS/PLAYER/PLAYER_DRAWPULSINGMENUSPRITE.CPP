@@ -42,7 +42,7 @@ s32 Playerai_IsPlayerInactive(void *);
  /* extern */
 
 
-/* Points a field's text at g_playerDrawpulsingmenuspriteText_800D3BBC when the option g_resultExitPending is set and at g_playerDrawpulsingmenuspriteText_800D3BB8 otherwise, and returns
+/* Points a field's text at g_fragTagOnLabelText when the option g_resultExitPending is set and at g_fragTagOffLabelText otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
@@ -114,7 +114,7 @@ s32 Player_UpdatePlayerRespawnDelay(PlayerRespawnMenuContext *menuState) {
     CGameStatus *state;
     s32 respawnFrames;
     s32 roundFinished;
-    ActorCode80443868804438BC *player;
+    PlayerRespawnMenuActor *player;
     player = menuState->actor;
     if ((player->unk1450 == 0) && (Playerai_IsPlayerInactive(player) != 0)) {
         respawnFrames = player->respawnDelayFrames + 1;
@@ -132,9 +132,9 @@ s32 Player_UpdatePlayerRespawnDelay(PlayerRespawnMenuContext *menuState) {
 
 s32 Player_SelectFragTagLabel(struct PakActionLabelView *field) {
     if (g_gameSettings.counters.m_bFragTagOn != 0) {
-        field->text = g_playerDrawpulsingmenuspriteText_800D3BBC;
+        field->text = g_fragTagOnLabelText;
     } else {
-        field->text = g_playerDrawpulsingmenuspriteText_800D3BB8;
+        field->text = g_fragTagOffLabelText;
     }
     return 0;
 }

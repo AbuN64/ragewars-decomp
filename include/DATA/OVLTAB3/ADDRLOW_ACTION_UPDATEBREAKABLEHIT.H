@@ -1,0 +1,4 @@
+#ifndef DATA_OVLTAB3_ACTION_UPDATE_BREAKABLE_HIT_H
+#define DATA_OVLTAB3_ACTION_UPDATE_BREAKABLE_HIT_H
+extern char addrLow_Action_UpdateBreakableHit[];
+#endif

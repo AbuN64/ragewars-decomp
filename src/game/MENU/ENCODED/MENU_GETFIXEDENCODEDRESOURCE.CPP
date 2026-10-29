@@ -27,7 +27,7 @@ s32 *Menu_GetFixedEncodedResource(s32 resourceId) {
     return &g_menuFixedEncodedResource;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Menu_GetFixedEncodedResource);
+INCLUDE_ASM("ovl_frontendMenu", Menu_GetFixedEncodedResource);
 #endif
 #endif
 

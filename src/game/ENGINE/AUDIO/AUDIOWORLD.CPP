@@ -60,7 +60,7 @@ extern s16 alSndpAllocate(char *, s32);
 
 
 
-extern void Sound_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
+extern void Sound_UpdateSoundSlot(SoundContext *, s32, s32, char *);
 
 static inline void append(ListHead *head, EntryAudioWorldDispatchPendingSounds *entry) {
     entry->prev = head->prev;
@@ -131,7 +131,7 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
     s32 slot;
     s16 *cursor;
     s32 free;
-    CellCode802591C0 *cell;
+    AudioSoundCell *cell;
 
     Sound_AcquireContextLock(cache->context);
     slots = cache->context->slots;
@@ -166,7 +166,7 @@ void AudioWorld_DispatchPendingSounds(Cache *cache) {
         if (*cursor == free) {
             break;
         }
-        cell = (CellCode802591C0 *)(cache->context->cells + 4 + slot * 0xCC);
+        cell = (AudioSoundCell *)(cache->context->cells + 4 + slot * 0xCC);
         Libc_CopyBytes(cell, entry->body, 0xCC);
         cell->sequence = entry->sequence;
         cell->texture = *cursor;

@@ -14,13 +14,13 @@
 #include "particle/GRAPHU64_MATRIXFROMEULERXYZ.H"
 
 extern Gfx *g_displayListCursor;
-extern Triple D_80153F60;
+extern Triple g_combineRenderSwitches;
 extern void N64Eng_GetClipBounds(s32 *, s32 *, s32 *, s32 *);
 
 /* Clips a screen rectangle to the viewport N64Eng_GetClipBounds reports, interpolating the four corner
    colours along each clipped edge, then writes the corners into vertices 0-3 with gSPModifyVertex
    (screen position, colour rotated to RGBA, texture coordinates 0) and draws them as an outline of
-   four lines, or as two triangles when D_80153F60.y is set. */
+   four lines, or as two triangles when g_combineRenderSwitches.y is set. */
 /* Sets vertex index's screen position, colour and texture coordinates. */
 static inline void put_vertex(s32 index, s32 x, s32 y, u32 color) {
     Gfx *g;
@@ -110,7 +110,7 @@ void Combine_DrawClippedGradientQuad(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 c
     put_vertex(1, x, bottom, col2);
     put_vertex(2, right, bottom, col3);
     put_vertex(3, right, y, col1);
-    if (D_80153F60.y == 0) {
+    if (g_combineRenderSwitches.y == 0) {
         gSPLine3D(g_displayListCursor++, 0, 1, 0);
         gSPLine3D(g_displayListCursor++, 1, 2, 0);
         gSPLine3D(g_displayListCursor++, 2, 3, 0);
@@ -130,11 +130,11 @@ void Combine_SetCombineMode(int mode){
  if(!g_combinePipelineSyncPending)sync();
  gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
  switch(mode){
- case 1: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
- case 2: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
+ case 1: if(g_primitiveRenderFlagSelect3000){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
+ case 2: if(g_primitiveRenderFlagSelect3000){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
  case 3: gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);break;
- case 4: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1);}break;
- case 5: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);}else{gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, 1, 0, 0, 0, SHADE, 0, 0, 0, 1);}break;
+ case 4: if(g_primitiveRenderFlagSelect3000){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1);}break;
+ case 5: if(g_primitiveRenderFlagSelect3000){gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);}else{gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, 1, 0, 0, 0, SHADE, 0, 0, 0, 1);}break;
  }
  }
 }
@@ -194,7 +194,7 @@ void Combine_SetPrimitiveVertexMode(s32 mode) {
     g_combineCachedPrimitiveMode = mode;
 }
 
-/* Selects render mode 11 or 12 (always 11 while D_80153F60's enable word is clear) when it differs
+/* Selects render mode 11 or 12 (always 11 while g_combineRenderSwitches's enable word is clear) when it differs
    from the cached mode g_combineCachedRenderMode: flushes through Rect_ResetRenderState and applies the mode word built
    from the mode's base bits (0x53 or 0x33, with bit 2 when the first switch is set), then 0x300 or
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
@@ -206,7 +206,7 @@ extern s32 g_combineCachedRenderMode;
 void Combine_SetRenderMode(s32 mode) {
     s32 bits;
 
-    if (D_80153F60.y == 0) {
+    if (g_combineRenderSwitches.y == 0) {
         mode = 11;
     }
     if (mode == g_combineCachedRenderMode) {
@@ -215,13 +215,13 @@ void Combine_SetRenderMode(s32 mode) {
     g_combineCachedRenderMode = mode;
     if (mode == 11) {
         Rect_ResetRenderState();
-        bits = D_80153F60.x ? 0x55 : 0x53;
-        bits |= D_80153F60.z ? 0x300 : 0x500;
-        Combine_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
+        bits = g_combineRenderSwitches.x ? 0x55 : 0x53;
+        bits |= g_combineRenderSwitches.z ? 0x300 : 0x500;
+        Combine_ConfigurePrimitiveRenderFlags(bits | (g_primitiveRenderFlagSelect3000 ? 0x3000 : 0x5000) | (g_primitiveRenderFlagSelect30000 ? 0x30000 : 0x50000));
     } else if (mode == 12) {
         Rect_ResetRenderState();
-        bits = D_80153F60.x ? 0x35 : 0x33;
-        bits |= D_80153F60.z ? 0x300 : 0x500;
-        Combine_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
+        bits = g_combineRenderSwitches.x ? 0x35 : 0x33;
+        bits |= g_combineRenderSwitches.z ? 0x300 : 0x500;
+        Combine_ConfigurePrimitiveRenderFlags(bits | (g_primitiveRenderFlagSelect3000 ? 0x3000 : 0x5000) | (g_primitiveRenderFlagSelect30000 ? 0x30000 : 0x50000));
     }
 }

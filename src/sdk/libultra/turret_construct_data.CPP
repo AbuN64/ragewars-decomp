@@ -8,7 +8,7 @@ unsigned int k_TurretConstructDataEncodedWords[8] = {
 #if defined(VERSION_US)
 #if defined(VERSION_US)
 extern char k_Ovldat10EncodedWordsBlock1[];
-unsigned int data_unresolved_800C80B0[56] = {
+unsigned int g_turretConstructRecordTable_us[56] = {
     0x00000000, 0x00000000, 0x00000000, (unsigned int)k_Ovldat10EncodedWordsBlock1 + 0x80, 0x00203A94, 0x00000000, 0x00000005, 0x00000000,
     0x00000001, 0x00000000, 0x00203AB0, (unsigned int)k_Ovldat10EncodedWordsBlock1 + 0x80, 0x00203A94, 0x3F800000, 0x00000005, 0x00000000,
     0x0000003E, 0x00000000, 0x00203AD8, (unsigned int)k_Ovldat10EncodedWordsBlock1 + 0x80, 0x00002F44, 0x3F800000, 0x00000005, 0x00000000,
@@ -22,7 +22,7 @@ unsigned int data_unresolved_800C80B0[56] = {
 
 #if defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
-unsigned short data_unresolved_800C9750[112] = {
+unsigned short g_turretConstructRecordTable_eu_x[112] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8010, 0xA4B8, 0x0020, 0x3A94, 0x0000, 0x0000,
     0x0000, 0x0005, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0020, 0x3AB0, 0x8010, 0xA4B8,
     0x0020, 0x3A94, 0x3F80, 0x0000, 0x0000, 0x0005, 0x0000, 0x0000, 0x0000, 0x003E, 0x0000, 0x0000,
@@ -39,7 +39,7 @@ unsigned short data_unresolved_800C9750[112] = {
 
 #if defined(VERSION_EU)
 #if defined(VERSION_EU)
-unsigned short data_unresolved_800C8D80[112] = {
+unsigned short g_turretConstructRecordTable_eu[112] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8011, 0x04B8, 0x0020, 0x3A94, 0x0000, 0x0000,
     0x0000, 0x0005, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0020, 0x3AB0, 0x8011, 0x04B8,
     0x0020, 0x3A94, 0x3F80, 0x0000, 0x0000, 0x0005, 0x0000, 0x0000, 0x0000, 0x003E, 0x0000, 0x0000,
@@ -57,7 +57,7 @@ unsigned short data_unresolved_800C8D80[112] = {
 #if defined(VERSION_DE)
 #if defined(VERSION_DE)
 extern char g_primaryCollisionContext[];
-unsigned int data_unresolved_800C8190[56] = {
+unsigned int g_turretConstructRecordTable_de[56] = {
     0x00000000, 0x00000000, 0x00000000, (unsigned int)g_primaryCollisionContext + 0xC0, 0x00203A94, 0x00000000, 0x00000005, 0x00000000,
     0x00000001, 0x00000000, 0x00203AB0, (unsigned int)g_primaryCollisionContext + 0xC0, 0x00203A94, 0x3F800000, 0x00000005, 0x00000000,
     0x0000003E, 0x00000000, 0x00203AD8, (unsigned int)g_primaryCollisionContext + 0xC0, 0x00002F44, 0x3F800000, 0x00000005, 0x00000000,

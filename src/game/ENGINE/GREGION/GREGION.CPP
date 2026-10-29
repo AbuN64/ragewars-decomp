@@ -13,7 +13,7 @@
 #include "include_asm.h"
 
 /* 8027451C_2.CPP */
-/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into g_regionCachedEdgeCross and normalised into g_regionCachedUnitNormal whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in g_turretAimSine and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of Region_TestPolygonSlopeFlag replacing Graphu64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
+/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into g_regionCachedEdgeCross and normalised into g_regionCachedUnitNormal whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in g_turretAimSine and giving the identity when the normal is vertical. Adapted from Region_GetCachedUpQuatDe with the cached polygon normal of Region_TestPolygonSlopeFlag replacing Graphu64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
 
 extern Triangle *g_regionCachedEdgePolygon;
 
@@ -275,7 +275,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
 void Region_ScaleWordsToFloats(void *wordStorage) {
     s32 *ip = (s32 *)wordStorage;
     f32 *fp = (f32 *)wordStorage;
-    f32 scale = D_800C49EC_de;
+    f32 scale = g_regionWordToFloatScaleDe;
     fp[0] = (f32)ip[0] * scale;
     fp[1] = (f32)ip[1] * scale;
     fp[2] = (f32)ip[2] * scale;
@@ -363,7 +363,7 @@ CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
 
 /* 80275E44.CPP */
 /* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in g_regionCachedEdgeCross, or the mean vertex height when the plane is vertical.
-   Adapted from func_8027525C_de with the edge vectors computed through the Graphu64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
+   Adapted from Region_GetPolygonHeightDe with the edge vectors computed through the Graphu64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
 
 static inline void cross_node_edges(Node75 *node) {
     CVector3 a;
@@ -553,12 +553,12 @@ f32 Region_SetMatchingVertexHeights(u16 *modelTreeNode, f32 height, u16 modelId)
     u16 id = modelId;
 
     if (*node == id) {
-        if (((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 != height ||
-            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 != height ||
-            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 != height) {
-            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 = height;
-            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 = height;
-            ((struct func_802077F4_S2 *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 = height;
+        if (((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 != height ||
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 != height ||
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 != height) {
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_4)->unk4 = height;
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_8)->unk4 = height;
+            ((struct PaddedFloatView *) ((RegionTriangleVertexView *) node)->unk_C)->unk4 = height;
 
             if (((RegionTriangleVertexView *)(node))->unk_10.v0 != 0) {
                 Region_SetMatchingVertexHeights(((RegionTriangleVertexView *)(node))->unk_10.v1, height, id);
@@ -657,7 +657,7 @@ const unsigned int k_GregionEncodedWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80275688_CA6CC_us_rev1.c */
+/* ROM-grounded data: src/k_GregionEncodedWordsBlock1Source.c */
 const unsigned int k_GregionEncodedWordsBlock1[2] = {
     0x3F800000, 0x3F000000,
 };
@@ -671,38 +671,38 @@ const unsigned int g_Region_GetCachedUpQuatConstantWords[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802757E4_CA6D4_us_rev1.c */
+/* ROM-grounded data: src/g_Region_TestPolygonSlopeFlagConstantWordsSource.c */
 const unsigned int g_Region_TestPolygonSlopeFlagConstantWords[2] = {
     0x3F800000, 0x3F000000,
 };
 #endif
 
 /* 800C9ADC.CPP */
-/* ROM-grounded data: src/rw_pool_80275A58_CA6DC_us_rev1.c */
+/* ROM-grounded data: src/g_Region_ScaleWordsToFloatsConstantWordsSource.c */
 const unsigned int g_Region_ScaleWordsToFloatsConstantWords[1] = {
     0x3CF00000,
 };
 
 /* 800C9AE0.CPP */
-/* ROM-grounded data: src/rw_pool_80275BC8_CA6E0_us_rev1.c */
+/* ROM-grounded data: src/g_regionEdgeCrossDefaultUp_StorageWordsSource.c */
 const unsigned int g_regionEdgeCrossDefaultUp_StorageWords[1] = {
     0x3F800000,
 };
 
 /* 800C9AE4.CPP */
-/* ROM-grounded data: src/rw_pool_80275C94_CA6E4_us_rev1.c */
+/* ROM-grounded data: src/g_regionNormalDefaultUp_StorageWordsSource.c */
 const unsigned int g_regionNormalDefaultUp_StorageWords[2] = {
     0x3F800000, 0x3F800000,
 };
 
 /* 800C9AEC.CPP */
-/* ROM-grounded data: src/rw_pool_80275DD4_CA6EC_us_rev1.c */
+/* ROM-grounded data: src/g_regionMissingPolygonHeight_StorageWordsSource.c */
 const unsigned int g_regionMissingPolygonHeight_StorageWords[2] = {
     0xC6600000, 0x3EAAAAAB,
 };
 
 /* 800C9AF4.CPP */
-/* ROM-grounded data: src/rw_pool_80275F28_CA6F4_us_rev1.c */
+/* ROM-grounded data: src/g_regionCeilingDefaultUp_StorageWordsSource.c */
 const unsigned int g_regionCeilingDefaultUp_StorageWords[1] = {
     0xBF800000,
 };

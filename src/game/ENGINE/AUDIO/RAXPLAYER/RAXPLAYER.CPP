@@ -57,7 +57,7 @@ static inline void restart(DialogGroupPlayer *player) {
     }
 }
 
-/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from Device_RequestAndSetActiveState with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
+/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword alSndpAllocate returns for Audio_GetSoundPlayer's result on the stored resource and g_dialogDefaultSample_Raxplayer. Adapted from Device_RequestAndSetActiveState with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
 
 extern s16 alSndpAllocate(void *, void *);
 
@@ -190,7 +190,7 @@ char s_RaxplayerEHAVIORText[8] =
     "EHAVIOR_";
 #endif
 
-/* ROM-grounded data: src/rw_pool_8025D350_C9CA8_us_rev1.c */
+/* ROM-grounded data: src/g_audio_LoadDialogMetadataConstantWords_Raxplayer.c */
 const unsigned int g_audio_LoadDialogMetadataConstantWords[3] = {
     0x41F00000, 0x00000000, 0x3C23D70A,
 };

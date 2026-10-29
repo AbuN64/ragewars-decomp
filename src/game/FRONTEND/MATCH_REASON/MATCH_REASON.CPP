@@ -37,7 +37,7 @@ extern void Tsmos_DeactivateControllerState(void);
 extern void SmXlate_SwitchScreen(s32);
 
 /* Clears the words at offsets 0x78 and 0x54 of g_matchRoundCounters, then calls SmXlate_SwitchScreen with 0x14
-   unless func_8042AF28_de and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
+   unless ScenarioSetup_IsCupSelected_MatchReason and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
    Stage_StartConfiguredMatch. */
 
 
@@ -48,7 +48,7 @@ extern s32 ScenarioSetup_StartRandomCupStage(void);
 extern void Stage_StartConfiguredMatch(void);
 
 /* Reports why a match ended: time running out on a timed match, the score limit (Player_CheckScoreLimit),
-   the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
+   the rule set's own target (Player_CheckTeamPointWin_PlayerUpdatefragtagselection for rule set 0, the Frag Tag limit Player_CheckTotalScoreWin_MatchReason for
    rule set 1), or otherwise whether the last-player-standing check reached its end. */
 
 extern MatchResultsGameSettingsView g_matchEndingTeamWheelClose;
@@ -75,7 +75,7 @@ extern void Frontend_AwardMatchAchievements(s32 player, s32 *awarded);
 
 
 /* Refreshes each of 8 configured participants: for each slot, reads the participant id at offset
-   0xF0 + slot*4 of g_matchResultBadgeScreen; when it is not -1 and the id's 150-byte record in D_80146398 has
+   0xF0 + slot*4 of g_matchResultBadgeScreen; when it is not -1 and the id's 150-byte record in g_playerSettings_Achieve has
    its byte at 0x91 clear, stores Achieve_AwardMilestoneCompletion(id) at offset 0x32C of g_matchResultBadgeScreen, calls
    Achieve_AwardAllMilestoneAchievement(id, &g_matchResultBadgeScreen[0x110 + id*8]), and calls Achieve_UpdateUnlockTiers(id). */
 
@@ -98,7 +98,7 @@ extern void Preview_DrawMenuModelItem(void *);
 /* Draws player p's badge on the screen g_matchResultBadgeScreen: looks up the group item the third argument
    names in the screen window, picks its child 0x26C, 0x26B or 0x26A for kinds 1 to 3 and 0x26D
    otherwise, shows it with alpha 0x96, and sets its frame at 0x2C from the rank byte at 0x92 of
-   the player's 150-byte record in D_80146398, the cartridge's jump table jtbl_800E1B48 sending
+   the player's 150-byte record in g_playerSettings_Achieve, the cartridge's jump table jtbl_Frontend_ShowResultRankBadge sending
    ranks 0 to 4 to frame 0x63, 0x62, 0x61 or 0x5F or to hiding it again with frame 0x60, which any
    higher rank also gets. */
 
@@ -126,9 +126,9 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
    calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition and,
    once Frontend_GetMenuImageState reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls MarkMenuEventHandled, clears g_resultReplayPending and g_resultExitPending and leaves for screen 0xF when option
-   D_801462D5 is set, otherwise through Stage_StartConfiguredMatch when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
-   agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
-   at g_frontendScreenStatus and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the word at
+   g_gameControllerMode is set, otherwise through Stage_StartConfiguredMatch when ScenarioSetup_IsCupSelected_MatchReason and ScenarioSetup_StartRandomCupStage both
+   agree or for screen 0x14; choice 1 calls Frontend_RequestScreenMode_AchieveUpdateresultsscreen(0), shows the window, stops the objects
+   at g_frontendScreenStatus and 0x48 before it, releases g_world_AchieveUpdateresultsscreen through Scene_LoadLevelResources and sets the word at
    0x17F0 of g_frontendScreenStatus to 8. Returns zero. */
 
 
@@ -155,7 +155,7 @@ extern void MarkMenuEventHandled();
 
 /* Runs one frame of the screen g_matchResultBadgeScreen's confirmation prompt while g_selectionMessageStage is not positive:
    on the first frame it marks the prompt open at 0x320 and asks Menu_SetFocusedElement for message 0x238,
-   or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls Tsmos_ActivateControllerState. Once
+   or 0x237 when Widget_ListHasFlag100_AchieveUpdateresultsscreen rejects the object loaded for 0x238, then calls Tsmos_ActivateControllerState. Once
    the choice word g_selectionMessageReply[1] reads one it clears it and either enables the prompt's object at
    0xE4 and records the choice at 0x328, when the pending action g_selectionMessageReply[0] is -1, or disables
    the object, clears 0x328 and hands the pending action to SmXlate_SwitchScreen through MarkMenuEventHandled.

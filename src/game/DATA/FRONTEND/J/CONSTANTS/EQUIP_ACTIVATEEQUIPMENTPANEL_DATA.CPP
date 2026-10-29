@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800E59E6.CPP */
+/* g_EquipActivateequipmentpanelHalfwordsLabel.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU_X)
 /* bytes live in the preceding array */
 #endif
@@ -12,7 +12,7 @@ unsigned short g_EquipActivateequipmentpanelHalfwords1[1] = {
 };
 #endif
 
-/* DATA_800F2008.CPP */
+/* g_EquipActivateequipmentpanelPointerWordsLabel.CPP */
 #if defined(VERSION_EU)
 extern char g_Player_CreateFourPlayerResultsPackedAddress242[];
 extern char g_Player_StartFourPlayerResultsPackedAddress242[];
@@ -23,7 +23,7 @@ extern char g_Frontend_FreeEquipmentScreenPackedAddress242[];
 extern char g_Frontend_RestoreEquipmentSelectionsPackedAddress242[];
 extern char g_Frontend_SelectPreviousEquipmentColumnPackedAddress242[];
 extern char g_Frontend_SelectNextEquipmentColumnPackedAddress242[];
-extern char g_packedCodeAddress24_0043CCD0[];
+extern char g_Frontend_SelectPreviousEquipmentChoicePackedAddress242[];
 extern char g_Frontend_SelectNextEquipmentChoicePackedAddress242[];
 extern char g_Frontend_CancelEquipmentSelectionPackedAddress242[];
 unsigned int g_EquipActivateequipmentpanelPointerWords1[174] = {
@@ -47,7 +47,7 @@ unsigned int g_EquipActivateequipmentpanelPointerWords1[174] = {
     0x00000008, (unsigned int)g_Player_StartFourPlayerResultsPackedAddress242, 0x00000E08, 0x00000008, (unsigned int)g_Player_UpdateFourPlayerResultsPackedAddress242, 0x00000E0A, 0x00000008, (unsigned int)g_Player_DrawFourPlayerResultsPackedAddress242,
     0x00000E06, 0x00000008, (unsigned int)g_Player_CreateFourPlayerResultsPackedAddress242, 0x00000E03, 0x00000008, (unsigned int)g_Frontend_FreeEquipmentScreenPackedAddress242, 0x0000000A, 0x00000008,
     (unsigned int)g_Frontend_RestoreEquipmentSelectionsPackedAddress242, 0x00000002, 0x00000008, (unsigned int)g_Frontend_CancelEquipmentSelectionPackedAddress242, 0x00000001, 0x00000008, (unsigned int)g_Frontend_ConfirmEquipmentSelectionPackedAddress242, 0x00000007,
-    0x00007530, (unsigned int)g_packedCodeAddress24_0043CCD0, 0x00000005, 0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentColumnPackedAddress242, 0x00000008, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentChoicePackedAddress242,
+    0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentChoicePackedAddress242, 0x00000005, 0x00007530, (unsigned int)g_Frontend_SelectPreviousEquipmentColumnPackedAddress242, 0x00000008, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentChoicePackedAddress242,
     0x00000006, 0x00007530, (unsigned int)g_Frontend_SelectNextEquipmentColumnPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
 };
 #endif

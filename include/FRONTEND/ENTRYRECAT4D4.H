@@ -10,20 +10,20 @@
 
 
 
-struct EntryCode8043A0A48043B6E8;
-struct EntryCode8043A0A48043B6E8 {
+struct LoadEquipmentSelectionEntry;
+struct LoadEquipmentSelectionEntry {
     char pad0[0x4B0];
     s32 values[6];
     char pad4C8[0x4CC - 0x4C8];
     s32 mode;
 };
 
-struct EntryCode8043A0A48043B6E8;
+struct LoadEquipmentSelectionEntry;
 struct ScreenFrontendLoadEquipmentSelections;
 struct ScreenFrontendLoadEquipmentSelections {
     void *window;
     s32 pad4;
-    struct EntryCode8043A0A48043B6E8 entries[4];
+    struct LoadEquipmentSelectionEntry entries[4];
 };
 
 

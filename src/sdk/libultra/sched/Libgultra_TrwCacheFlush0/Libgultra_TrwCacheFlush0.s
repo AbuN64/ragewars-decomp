@@ -16,14 +16,14 @@ Libsn_InstallDebuggerExceptionHooks:
     ori $t2, $t2, 0x180
     lui $t3, %hi(Libgultra_SavedExceptionVectorAddress)
     addiu $t3, $t3, %lo(Libgultra_SavedExceptionVectorAddress)
-.Lfunc_802022E0_de_028:
+.LLibsn_InstallDebuggerExceptionHooks_copyGeneralVector:
     lw $t4, 0x0($t2)
     lw $t5, 0x0($t0)
     addiu $t0, $t0, 0x4
     sw $t4, 0x0($t1)
     addiu $t1, $t1, 0x4
     sw $t5, 0x0($t2)
-    bne $t0, $t3, .Lfunc_802022E0_de_028
+    bne $t0, $t3, .LLibsn_InstallDebuggerExceptionHooks_copyGeneralVector
     addiu $t2, $t2, 0x4
     lui $t0, %hi(Libgultra_DebugTlbVectorTemplateAddress)
     addiu $t0, $t0, %lo(Libgultra_DebugTlbVectorTemplateAddress)
@@ -32,14 +32,14 @@ Libsn_InstallDebuggerExceptionHooks:
     lui $t2, %hi(g_tlbMissExceptionVector)
     lui $t3, %hi(Libgultra_SavedTlbVectorAddress)
     addiu $t3, $t3, %lo(Libgultra_SavedTlbVectorAddress)
-.Lfunc_802022E0_de_064:
+.LLibsn_InstallDebuggerExceptionHooks_copyTlbVector:
     lw $t4, %lo(g_tlbMissExceptionVector)($t2)
     lw $t5, 0x0($t0)
     addiu $t0, $t0, 0x4
     sw $t4, 0x0($t1)
     addiu $t1, $t1, 0x4
     sw $t5, 0x0($t2)
-    bne $t0, $t3, .Lfunc_802022E0_de_064
+    bne $t0, $t3, .LLibsn_InstallDebuggerExceptionHooks_copyTlbVector
     addiu $t2, $t2, 0x4
     jal Libgultra_TrwCacheFlush0
     nop

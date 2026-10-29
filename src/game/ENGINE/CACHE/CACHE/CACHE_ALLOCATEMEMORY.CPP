@@ -110,15 +110,15 @@ Record *Cache_AllocateMemory(s32 size) {
 }
 
 int Cache_IsResourceRetained(void *resource) {
-    return ((Node80253610 *)resource)->flags & 0x100;
+    return ((CacheResourceNode *)resource)->flags & 0x100;
 }
 
-void Cache_RetainResource(Node80253610 *resource) {
+void Cache_RetainResource(CacheResourceNode *resource) {
     resource->references = resource->references + 1;
     resource->flags = resource->flags | 0x100;
 }
 
-void Cache_ReleaseResourceReference(Node80253610 *resource) {
+void Cache_ReleaseResourceReference(CacheResourceNode *resource) {
     s32 remainingReferences;
     remainingReferences = resource->references - 1;
     resource->references = remainingReferences;

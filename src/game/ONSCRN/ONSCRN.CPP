@@ -335,7 +335,7 @@ void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s3
         }
     }
 release:
-    Cache_UnlockResource(0, (struct Node80253610 *)sprites);
+    Cache_UnlockResource(0, (struct CacheResourceNode *)sprites);
 }
 
 void OnScreen_SetupTextRendering(void) {

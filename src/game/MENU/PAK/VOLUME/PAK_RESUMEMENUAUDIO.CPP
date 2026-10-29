@@ -4,7 +4,7 @@
 #include "MENU/PAK/PAK_RESUMEMENUAUDIO.H"
 #include "SYSTEM/SOUND_CONTEXT_MUSIC_AND_VOICE_CONTROL.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
-#include "COMMON/EXTERNS_21.H"
+#include "COMMON/VOLUME_MENU_RESOURCES.H"
 
 /* 80444EC0_6.CPP */
 #if !(defined(VERSION_US))
@@ -32,7 +32,7 @@ s32 Pak_ReturnCallbackSuccess(void) {
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4514B4,
    and returns one. */
 
-s32 func_80444EBC_de(void *first, void *second, void *third) {
+s32 Pak_AllocateMenuFirst(void *first, void *second, void *third) {
     Menu_AllocateMenu(third, second, D_00450884);
     return 1;
 }
@@ -40,11 +40,11 @@ s32 func_80444EBC_de(void *first, void *second, void *third) {
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
    and returns one. */
 
-s32 func_80444EE8_de(void *first, void *second, void *third) {
+s32 Pak_AllocateMenuSecond(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
-    Menu_AllocateMenu(third, second, D_00451B34);
+    Menu_AllocateMenu(third, second, g_pakAllocateMenuSecondResource_eu);
 #elif defined(VERSION_EU_X)
-    Menu_AllocateMenu(third, second, D_00451C64);
+    Menu_AllocateMenu(third, second, g_pakAllocateMenuSecondResource_eu_x);
 #else
     Menu_AllocateMenu(third, second, D_00450E9C);
 #endif
@@ -54,7 +54,7 @@ s32 func_80444EE8_de(void *first, void *second, void *third) {
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
    and returns one. */
 
-s32 func_80444F14_de(void *first, void *second, void *third) {
+s32 Pak_AllocateMenuThird(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
     Menu_AllocateMenu(third, second, D_00450E9C);
 #elif defined(VERSION_EU_X)
@@ -68,7 +68,7 @@ s32 func_80444F14_de(void *first, void *second, void *third) {
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
    and returns one. */
 
-s32 func_80444F40_de(void *first, void *second, void *third) {
+s32 Pak_AllocateMenuFourth(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
     Menu_AllocateMenu(third, second, D_0044F4A4);
 #elif defined(VERSION_EU_X)
@@ -82,7 +82,7 @@ s32 func_80444F40_de(void *first, void *second, void *third) {
 /* Calls Menu_AllocateMenu with the third argument, the second argument and the resource D_451BD4,
    and returns one. */
 
-s32 func_80444F6C_de(void *first, void *second, void *third) {
+s32 Pak_AllocateMenuFifth(void *first, void *second, void *third) {
 #if defined(VERSION_EU)
     Menu_AllocateMenu(third, second, D_0044F798);
 #elif defined(VERSION_EU_X)

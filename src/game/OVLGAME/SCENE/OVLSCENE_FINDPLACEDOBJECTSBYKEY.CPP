@@ -17,7 +17,7 @@
 
 extern char g_cResource_UnpackRequestEntry[];
 extern char g_gamePersistentData[];
-extern char D_800F41F0[];
+extern char g_sceneCollisionStorage[];
 extern int Control_IsSnapshotActive(void);
 
 extern void Scene_SetSelection(ItemsPreviewStateB *,int,int);
@@ -26,7 +26,7 @@ void Scene_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int id;
  if(Control_IsSnapshotActive()==0) {
   resource=Cache_RequestResource(0,state->resource,state->resource,state->bank,0,0,g_cResource_UnpackRequestEntry,g_gamePersistentData,1);
-  Libc_CopyBytes(D_800F41F0,(const void *)*resource,0x5000);
+  Libc_CopyBytes(g_sceneCollisionStorage,(const void *)*resource,0x5000);
   Cache_ReleaseResource(0,resource);
  }
 }

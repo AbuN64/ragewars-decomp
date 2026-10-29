@@ -131,6 +131,6 @@ typedef struct Shared_World {
     s32 specialActorCount; /* 0x1B6A4 */
 } Shared_World;
 extern Shared_World g_world;
-/* The actor count (D_8011FE88 + 0x140) read as its own object: each access has its own lui. */
+/* The actor count (g_world_AchieveUpdateresultsscreen + 0x140) read as its own object: each access has its own lui. */
 extern s32 g_navigationPlatformActorCount;
 #endif

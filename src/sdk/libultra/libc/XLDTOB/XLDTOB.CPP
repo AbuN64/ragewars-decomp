@@ -22,7 +22,7 @@ unsigned int func_802BE0C8_de_padding_BECC8[2] = {
 };
 #endif
 
-/* DATA_802C31B8.CPP */
+/* g_XldtobEncodedWords_Xldtob.CPP */
 #if defined(VERSION_US)
 char func_802BE3A8_eu_x_padding_C3DB8[8] =
     "\000\007GT_COO";

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_text_804058B0_E1984_us_rev1.c */
+/* ROM-grounded data: src/g_audioHeapText_AudioHeapText.c */
 const char g_audioHeapText[11] = "audio heap";
 
 #if defined(VERSION_EU_X)

@@ -21,8 +21,8 @@ typedef struct FrontendModelHeader {
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
  * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
  * the preview (Gobjinst_LoadModel with extra) and stops. */
-void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
-    Obj8041CAD8At190 *previewState = &preview->sub190;
+void Preview_SelectMatchingPreviewModel(ModelPreview *preview, s32 id, s32 extra, s32 expected) {
+    ModelPreviewActor *previewState = &preview->sub190;
     Shared_World *scene = &g_world;
     struct SceneModelIdTable *list = scene->modelIds;
     s32 count = list->count;
@@ -53,9 +53,9 @@ void Preview_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra,
                         Gobjinst_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
-                    Cache_UnlockResource(0, (struct Node80253610 *)modelResource);
+                    Cache_UnlockResource(0, (struct CacheResourceNode *)modelResource);
                 }
-                Cache_UnlockResource(0, (struct Node80253610 *)indexResource);
+                Cache_UnlockResource(0, (struct CacheResourceNode *)indexResource);
             }
         }
     }
@@ -107,11 +107,11 @@ s32 Gobjinst_DrawVisibleCachedActor(void *, void *);
 s32 Gobjinst_RotatePoseMatrixBuffers(void *);
 s32 PitchMatrixLocal(void *, f32);
 extern MenuModelScreen g_fallbackScreenMessageEmitter[];
-void Preview_DrawModelPreview(Obj8041CAD8 *self) {
+void Preview_DrawModelPreview(ModelPreview *self) {
     CVector3 local10;
     CVector3 local20;
     MenuModelScreen *view;
-    Obj8041CAD8At190 *draw;
+    ModelPreviewActor *draw;
     s32 saved;
     view = g_fallbackScreenMessageEmitter;
     draw = &self->sub190;
@@ -166,17 +166,17 @@ extern void Gobjinst_InitializeActor(void *, s32, s32, s32, void *, s32, s32, f3
 extern void Gobjinst_DispatchActorTypeUpdate();
 /* Starts a menu model preview: loads the projection, spawns the model through Scene_FindActorDefinition, keeps a copy
  * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
-void *Preview_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 previewModelId, s32 extra, CVector3 position, CVector3 facing,
+void *Preview_InitModelPreview(ModelPreview *self, s32 id, s32 modelKind, s32 previewModelId, s32 extra, CVector3 position, CVector3 facing,
                        f32 scale, s32 pitchDegrees) {
     CVector3 scales;
     CVector3 local60;
     CVector3 local70;
     CVector3 local80;
     MenuModelScreen *view;
-    Obj8041CAD8At190 *draw;
+    ModelPreviewActor *draw;
     Gfx *g;
     f32 ratio;
-    Ret8028CFA0 *source;
+    PreviewActorDefinition *source;
     XPlus_FillMemory(&local60, 0, sizeof(local60));
     g = g_displayListCursor++;
     view = g_fallbackScreenMessageEmitter;
@@ -245,7 +245,7 @@ void Preview_SetPreviewAngle(PreviewAngleView *preview, s32 angle) {
     preview->angle = angle;
 }
 
-/* Stores a value into the word at offset 0x49C of an object; func_80420618_de and Frontend_ConfirmEquipmentSelection call
+/* Stores a value into the word at offset 0x49C of an object; Menu_ApplySlotValueGfx_FrontendDrawmodelpreview and Frontend_ConfirmEquipmentSelection call
    it with zero, Preview_InitModelPreview writes the same word directly and Preview_DrawModelPreview reads it. */
 
 
@@ -254,7 +254,7 @@ void Preview_SetPreviewTransformUpdate(struct Object49C *object, s32 value) {
 }
 
 /* Clears the preview model type (sub190.type = 0xFFFF), then selects the matching preview model. */
-void Preview_SelectPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
+void Preview_SelectPreviewModel(ModelPreview *preview, s32 id, s32 extra, s32 expected) {
     preview->sub190.type = 0xFFFF;
     Preview_SelectMatchingPreviewModel(preview, id, extra, expected);
 }

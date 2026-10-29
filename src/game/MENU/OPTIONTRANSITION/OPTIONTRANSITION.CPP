@@ -25,14 +25,14 @@ s32 Menu_CreateOptionsImageTransition(void) {
     return 0;
 }
 
-/* Releases the object D_800E44A0 holds through Cache_FreeMemory, clears D_800E44A0 and returns zero. */
+/* Releases the object g_optionsImageTransition_Optiontransition holds through Cache_FreeMemory, clears g_optionsImageTransition_Optiontransition and returns zero. */
 
 
 
-/* Event callback for screen D_800E44A0: on event 1 while Frontend_GetMenuImageState reports the screen in state
+/* Event callback for screen g_optionsImageTransition_Optiontransition: on event 1 while Frontend_GetMenuImageState reports the screen in state
    1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
    state 2 it tears the match display down through Menu_ReleaseOptionsScene and Stage_StartConfiguredMatch and calls
-   func_80264854_de(1). Returns zero. */
+   Control_SetControllerMode_Optiontransition(1). Returns zero. */
 
 
 extern void Frontend_DrawMenuImage(void *);
@@ -40,15 +40,15 @@ extern void Frontend_DrawMenuImage(void *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #else
-extern void func_8042201C_de(void);
+extern void Menu_ReleaseOptionsScene_Optiontransition(void);
 #endif
 
 
 extern void Stage_StartConfiguredMatch(void);
 
-/* Unless Frontend_GetMenuImageState reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
-   the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and ScenarioSetup_ResetSelectionIndicators unless
-   the option byte D_801462D5 is set, and finally resets the object through Frontend_StartMenuImageTransition. Returns
+/* Unless Frontend_GetMenuImageState reports one for the object g_optionsImageTransition_Optiontransition holds, calls Tsmos_ActivateControllerState and, when
+   the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut and ScenarioSetup_ResetSelectionIndicators unless
+   the option byte g_gameControllerMode is set, and finally resets the object through Frontend_StartMenuImageTransition. Returns
    zero. */
 
 
@@ -65,14 +65,14 @@ extern void ScenarioSetup_ResetSelectionIndicators(void);
 extern void Frontend_StartMenuImageTransition(s32 *record);
 
 /* On event 3 with value 0xB, calls MarkMenuEventHandled and sets the word at offset 0x20 of the object
-   D_800E44A0 points to. Returns zero. */
+   g_optionsImageTransition_Optiontransition points to. Returns zero. */
 
 
 
 
 extern void MarkMenuEventHandled();
 
-/* Sets the word at offset 0x20 of the object D_800E44A0 points to and returns zero. */
+/* Sets the word at offset 0x20 of the object g_optionsImageTransition_Optiontransition points to and returns zero. */
 
 
 
@@ -107,7 +107,7 @@ s32 Menu_DrawOptionsImageTransition(s32 unused0, s32 unused1, s32 event) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 Menu_ReleaseOptionsScene
 #else
-func_8042201C_de
+Menu_ReleaseOptionsScene_Optiontransition
 #endif
 ();
 #endif
@@ -170,12 +170,12 @@ s32 Menu_DispatchOptionsTransitionEvent(void *object, s32 event, s32 eventData, 
                 actor_kind = ((struct MenuActorInputView *) ((char *) object))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_optionsTransitionActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(object, event, eventData, eventValue, eventContext);
+                    return (*(WidgetEventHandler *)entry)(object, event, eventData, eventValue, eventContext);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

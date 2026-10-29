@@ -17,7 +17,7 @@ unsigned char g_GastateTrailingBytesBlock1[12] = { 0x08, 0x09, 0x8E, 0xB2, 0x00,
 unsigned int func_80263754_us_rev1[3] = { 0x9022F308U, 0x10400003U, 0x24630001U };
 #endif
 
-/* DATA_8023F724.CPP */
+/* g_GastateEncodedWords_Gastate.CPP */
 #if defined(VERSION_US)
 unsigned int g_GastateEncodedWords[3] = {
     0x0000076D, 0x5F6E5061, 0x74682800,

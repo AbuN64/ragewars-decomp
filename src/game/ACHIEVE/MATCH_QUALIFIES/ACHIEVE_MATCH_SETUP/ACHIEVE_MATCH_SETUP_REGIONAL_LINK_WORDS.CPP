@@ -5,7 +5,7 @@
 unsigned char g_AchieveMatchSetupRegionalLinkWordsTrailingBytes[8] = { 0x08, 0x10, 0x87, 0x99, 0x00, 0x00, 0x10, 0x21 };
 #endif
 
-/* DATA_802B30F8.CPP */
+/* g_AchieveMatchSetupRegionalLinkWords.CPP */
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
 #if defined(VERSION_EU_X)

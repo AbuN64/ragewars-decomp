@@ -17,7 +17,7 @@
 /* Resets a player controller: marks the active, requested and committed selections empty, sets the
    request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
    and 0x1C8 and the target list, installs the default table g_playerDefaultBehaviorTable through Scaled_SetBehaviorTable and mode
-   2 through func_80209874_de, zeroes the tracking values from 0x23C to 0x260, runs the resets
+   2 through Scaled_SetBehaviourState_Player, zeroes the tracking values from 0x23C to 0x260, runs the resets
    Nav_ResetWheelProbeState, Scaled_ResetBehaviorState and Scaled_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
 
 extern void Scaled_SetBehaviorTable(void *, char *, s32);
@@ -84,8 +84,8 @@ void Nav_ResetPlayerState(s32 *state) {
     state[0x32C / 4] = -1;
 }
 
-/* CODE_80208158.CPP */
-/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Scaled_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (g_matchRoundCounters) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Scaled_HandlePlayerTimeout. */
+/* Nav_UpdateComputerPlayerStatus_Player.CPP */
+/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Scaled_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise Player_GetMaxHealth_Player), as a percentage, rescaled for kind 14 by the difficulty g_difficulty; in the tutorial (g_matchRoundCounters) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Scaled_HandlePlayerTimeout. */
 
 extern char g_tutorialStatusBars[];
 
@@ -602,7 +602,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
 }
 
 /* 80208000_3.CPP */
-/* Steers a computer player toward a point: measures the heading error to the point through Barrel_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to func_80209910_de and returns the heading error. */
+/* Steers a computer player toward a point: measures the heading error to the point through Barrel_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to Scaled_SetPitchFromAngle_Player and returns the heading error. */
 
 extern f32 Barrel_GetSignedAngleToPoint(PlayerAimActorView *, CVector3);
 extern void Scaled_SetPitchFromAngle(PlayerAimBrainView *, f32, s32);
@@ -684,13 +684,13 @@ const unsigned int g_Scaled_UpdateTargetPitchConstantWords[5] = {
 };
 
 /* 800C6D78.CPP */
-/* ROM-grounded data: src/rw_pool_80209910_C7978_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_SetPitchFromAngleConstantWords_Player.c */
 const unsigned int g_Scaled_SetPitchFromAngleConstantWords[1] = {
     0x3F22F982,
 };
 
 /* 800C6D7C.CPP */
-/* ROM-grounded data: src/rw_pool_802099B4_C797C_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_HasLineOfSightConstantWords_Player.c */
 const unsigned int g_Scaled_HasLineOfSightConstantWords[1] = {
     0x42CCCCCC,
 };
@@ -703,7 +703,7 @@ const unsigned int g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_de_eu
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80209AE8_C7980_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_us_rev1_Player.c */
 const unsigned int g_Scaled_GetDifficultyEngagementAdjustmentConstantWords_us_rev1[3] = {
     0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
 };
@@ -717,7 +717,7 @@ const unsigned int g_Scaled_GetScaledAggressionConstantWords_de_eu_eu_x_us[3] = 
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80209B64_C798C_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_GetScaledAggressionConstantWords_us_rev1_Player.c */
 const unsigned int g_Scaled_GetScaledAggressionConstantWords_us_rev1[3] = {
     0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
 };
@@ -744,14 +744,14 @@ const unsigned int g_Scaled_GetScaledAttackRangeConstantWords_de_eu_eu_x_us[3] =
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80209C5C_C79A4_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_GetScaledAttackRangeConstantWords_us_rev1_Player.c */
 const unsigned int g_Scaled_GetScaledAttackRangeConstantWords_us_rev1[3] = {
     0x3C23D70A, 0x3F666666, 0x3F8CCCCD,
 };
 #endif
 
 /* 800C6DB0_2.CPP */
-/* ROM-grounded data: src/rw_pool_80209DAC_C79B0_us_rev1.c */
+/* ROM-grounded data: src/g_Scaled_UpdateDifficultyAimJitterConstantWords_Player.c */
 const unsigned int g_Scaled_UpdateDifficultyAimJitterConstantWords[2] = {
     0x3E860A93, 0x3E860A93,
 };

@@ -130,9 +130,9 @@ f32 OnScreen_GetGlyphWidth(void) {
     } while (0);
 }
 
-void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
-    Table802AB8DC *table;
-    Entry802AB8DC *entry;
+void OnScreen_GetImageEntry(OnScreenImageTableView **handle, s32 index, void **out, u8 *tag) {
+    OnScreenImageTableView *table;
+    ImageTableEntry *entry;
     void *result;
     u8 entryTag;
     s32 remainder;
@@ -144,7 +144,7 @@ void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *t
         remainder = index % table->count;
         remainder *= 8;
         remainder += (s32)entry;
-        entry = (Entry802AB8DC *)remainder;
+        entry = (ImageTableEntry *)remainder;
         entryTag = entry->pad4[0];
         result = (u8 *)table + entry->offset;
         *tag = entryTag;
@@ -236,8 +236,8 @@ void OnScreen_DrawTextWithShadow(u8 *text, f32 x, f32 y, f32 scaleX, f32 scaleY,
 
 #if !(defined(VERSION_EU_X))
 
-/* Appends a pipe synchronisation and an other-mode setting to the display list D_80110634 points
-   into, then calls Geometry_SetModePreset with 0x15 and func_80268CE0_de with 0x19. */
+/* Appends a pipe synchronisation and an other-mode setting to the display list g_displayListCursor_SimpleDrawcachedmodel points
+   into, then calls Geometry_SetModePreset with 0x15 and Geometry_SetCombineMode_GeometryDrawcharactereffectparts with 0x19. */
 
 /* Emits pipe sync, primitive color and a rectangle with nonnegative coordinates. */
 
@@ -328,9 +328,9 @@ typedef struct ResourceView {
     u8 type;
 } ResourceView;
 void OnScreen_LoadFontTexture(void) {
-    Table802AB8DC **handle;
-    Table802AB8DC *table;
-    Entry802AB8DC *entry;
+    OnScreenImageTableView **handle;
+    OnScreenImageTableView *table;
+    ImageTableEntry *entry;
     ResourceView view;
     u8 entryTag;
     s32 remainder;

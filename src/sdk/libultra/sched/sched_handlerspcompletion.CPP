@@ -69,7 +69,7 @@ void Sched_HandleRspCompletion(void *object) {
  if(Sched_SelectRunnableTasks(scheduler,&nextRsp,&nextRdp,flags)!=flags) Sched_StartSelectedTasks(scheduler,nextRsp,nextRdp);
 }
 
-/* Mechanically ported from github/legacy:src/func_8028F258.c by address. */
+/* Mechanically ported from github/legacy:src/Sched_HandleRdpCompletion_SchedHandlerspcompletion.c by address. */
 #include "TYPES.H"
 #include "COMMON/RUNTIME_DECLARATIONS.H"
 #include "COMMON/WORLDSORTENTRY.H"

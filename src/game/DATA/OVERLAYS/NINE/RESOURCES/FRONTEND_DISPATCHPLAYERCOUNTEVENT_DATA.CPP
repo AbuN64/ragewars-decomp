@@ -44,6 +44,6 @@ unsigned int g_FrontendDispatchplayercounteventPointerWords1[24] = {
 #endif
 
 #if defined(VERSION_US)
-char data_unresolved_800E00F4[12] =
+char s_projectsDmPath_us[12] =
     "\\Projects\\DM";
 #endif

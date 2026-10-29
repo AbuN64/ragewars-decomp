@@ -363,8 +363,8 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
    player through Note_ProbeStatus and PAKInterface_ResolvePlayerPakState between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
    advances the menu at 0x8 with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition while Frontend_GetMenuImageState reports 1, and
    once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through Frontend_ContinueCupOrOpenResults,
-   Frontend_OpenControllerModeResults or Achieve_SelectPostResultScreen as the cartridge's jump table jtbl_800E1BB0 chooses for option
-   byte D_801462D5 up to 4. Returns zero. */
+   Frontend_OpenControllerModeResults or Achieve_SelectPostResultScreen as the cartridge's jump table k_pakProfileScreenExitJumpTable chooses for option
+   byte g_gameControllerMode up to 4. Returns zero. */
 
 
 

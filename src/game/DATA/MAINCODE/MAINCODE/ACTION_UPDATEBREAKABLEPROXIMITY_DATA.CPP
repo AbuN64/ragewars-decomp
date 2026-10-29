@@ -2,14 +2,14 @@
 
 /* TURRETAI_10.CPP */
 #if defined(VERSION_EU_X)
-const unsigned int rodata_func_8020402C_eu_x_800C1D30[1] = {
+const unsigned int g_actionSettingsRandomRangeEuX[1] = {
     0x42F5C28F,
 };
 #endif
 
 /* TURRETAI_11.CPP */
 
-/* DATA_80202C98.CPP */
+/* s_ActionUpdatebreakableproximityYObjectTText_ActionUpdatebreakableproximityData.CPP */
 #if defined(VERSION_US)
 char s_ActionUpdatebreakableproximityYObjectTText[8] =
     "yObjectT";

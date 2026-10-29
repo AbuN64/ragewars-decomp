@@ -14,7 +14,7 @@
 
 /* Tests a ray against a polygon with a radius: intersects the ray from 0x44 to 0x50 with the polygon's plane
  * through CCollision_IntersectFrontPlaneFraction and accepts a parameter nearer than the ray's nearest hit, also allowing a slightly
- * negative one (above -D_800D0648 * D_800C87C0[1] scaled by the ray's 0x80 factor) except for kind 7 and
+ * negative one (above -g_collisionSlackThreshold * g_collisionSegmentPolygonSlackFactor[1] scaled by the ray's 0x80 factor) except for kind 7 and
  * types 5 and 6; the hit point is then placed with Graphu64_InterpolateVector and tested against the polygon with the
  * given point and radius through CCollision_IsPointInsideDisk. On a hit the polygon record is optionally kept as the ray's
  * nearest hit. Adapted from CCollision_TestSegmentPolygon with the radius test and the slack constant. */
@@ -41,7 +41,7 @@ static inline s32 accepts(CapsuleSweep *ray, PolygonCCollisionTestSegmentPolygon
         if ((u32)(poly->type - 5) < 2) {
             return 0;
         }
-        if (poly->t * ray->slack < -(D_800D0648 * D_800C36D4_de)) {
+        if (poly->t * ray->slack < -(g_collisionSlackThreshold * g_collisionSegmentDiskSlackFactor)) {
             return 0;
         }
     }
@@ -130,13 +130,13 @@ void CCollision_UpdateModelSurfaceFlags(void *motionStorage, u16 *surfaceKey)
   s32 currentMotionFlags;
   s32 updatedMotionFlags;
   void *surfaceRecord;
-  initialMotionFlags = ((Shared_Func80243A80Frame *)o)->sp54;
+  initialMotionFlags = ((Shared_CollisionMoveFrame *)o)->sp54;
   if (initialMotionFlags & 0x1000)
   {
-    ((Shared_Func80243A80Frame *)o)->sp54 = initialMotionFlags & (~0x2000);
+    ((Shared_CollisionMoveFrame *)o)->sp54 = initialMotionFlags & (~0x2000);
   }
-  currentMotionFlags = ((Shared_Func80243A80Frame *)o)->sp54;
-  ((Shared_Func80243A80Frame *)o)->sp54 = currentMotionFlags & 0xFFFC7FFF;
+  currentMotionFlags = ((Shared_CollisionMoveFrame *)o)->sp54;
+  ((Shared_CollisionMoveFrame *)o)->sp54 = currentMotionFlags & 0xFFFC7FFF;
   if (currentMotionFlags & 0x7000)
   {
     surfaceRecord = Scene_GetModelRecordByIndexPointer(&g_world, surfaceKey);
@@ -145,13 +145,13 @@ void CCollision_UpdateModelSurfaceFlags(void *motionStorage, u16 *surfaceKey)
       if ((((ModelBlend *)surfaceRecord)->collisionFlags) & 0x400000)
       {
         ;
-        ((Shared_Func80243A80Frame *)o)->sp54 = (((Shared_Func80243A80Frame *)o)->sp54) | 0x8000;
+        ((Shared_CollisionMoveFrame *)o)->sp54 = (((Shared_CollisionMoveFrame *)o)->sp54) | 0x8000;
       }
       else
         if ((((ModelBlend *)surfaceRecord)->materialFlags) & 0x80)
       {
-        updatedMotionFlags = (((Shared_Func80243A80Frame *)o)->sp54) | 0x10000;
-        ((Shared_Func80243A80Frame *)o)->sp54 = updatedMotionFlags;
+        updatedMotionFlags = (((Shared_CollisionMoveFrame *)o)->sp54) | 0x10000;
+        ((Shared_CollisionMoveFrame *)o)->sp54 = updatedMotionFlags;
       }
     }
   }
@@ -169,7 +169,7 @@ s32 CCollision_IsNearerContact(BoxContactRay *ray, BoxContactPolygon *polygon) {
         if ((u32) (polygon->type - 5) < 2) {
             return 0;
         }
-        if ((hitT * ray->slack) < -(D_800D0648 * D_800C36D8_de)) {
+        if ((hitT * ray->slack) < -(g_collisionSlackThreshold * g_collisionContactSlackFactor)) {
             return 0;
         }
     }

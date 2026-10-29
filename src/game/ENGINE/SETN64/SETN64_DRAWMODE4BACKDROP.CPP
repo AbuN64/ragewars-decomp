@@ -37,13 +37,13 @@ extern void Scene_LoadLevelResources(void *, void *, void *);
 extern void SmXlate_SwitchScreen(s32 index);
 
 
-/* func_80245A00_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
+/* Cinema_SetResponse_Setn64Drawmode4backdrop: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
 
 /* Scene_ResetTransitionViewport: types.declaration: solved callee prototype */
 
 
 void SetN64_ResetMode4Effects(void) {
-    D_80141128 = 0;
+    g_mode4TextureEffectState = 0;
     Textload_SetTextureEffect(0U);
 }
 
@@ -120,7 +120,7 @@ void SetN64_DrawMode8Session(GameSession *session) {
     SetN64_DrawSessionWithRoundTimeout(session);
 }
 
-/* func_80293998_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
+/* SetN64_ResetPlayerItems_Setn64Drawmode4backdrop: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
 
 
                                                   /* size = 0x18 */

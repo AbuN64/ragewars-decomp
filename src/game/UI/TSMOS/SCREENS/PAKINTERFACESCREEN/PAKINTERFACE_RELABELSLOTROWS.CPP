@@ -4,9 +4,9 @@
 #include "COMMON/NAME.H"
 
 /* Relabels the four slot rows of the block g_pakProfileScreenState points to: for each row item (0x28B, 0x28D,
-   0x28F, then 0x291) of the block's window it calls func_8040E950_de(0) and points the text at 0x38
+   0x28F, then 0x291) of the block's window it calls Widget_SetWidgetFlag100_MenuRefreshextraoptionlocks(0) and points the text at 0x38
    of the item's label at 0x8 at player p's chosen slot (the index at 0xAEC of p's 2920-byte record
-   at 0x58, slots of 400 bytes from 0x18) when p is not -1 and func_8041B7FC_de reports
+   at 0x58, slots of 400 bytes from 0x18) when p is not -1 and SmpOverlay_GetSlotValue_PakinterfaceRelabelslotrows reports
    this row as p's focus in the list at 0x4, otherwise at the row's 400-byte record in g_localPlayerProfiles
    when its owner byte 0xD is not negative, or at nothing. */
 /* The first row item's id: eu-x numbers its items 9 higher and de 1 higher, as each cartridge's

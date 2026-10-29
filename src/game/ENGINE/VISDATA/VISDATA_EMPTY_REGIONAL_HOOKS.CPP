@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* DATA_800C5514.CPP */
+/* VisdataEmptyRegionalHooksEncodedWordsUnit.CPP */
 #if defined(VERSION_DE)
 unsigned int g_VisdataEmptyRegionalHooksEncodedWords[3] = {
     0x0029702C, 0x00296F3C, 0x00296F3C,

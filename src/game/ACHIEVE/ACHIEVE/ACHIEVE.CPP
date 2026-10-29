@@ -47,7 +47,7 @@ extern PresetTable *Scene_GetBlLevelData(void *table, s32 key);
 
 
 /* Announces the current arena's entry for a slot: selects one of four five-byte name tables from the
-   mode byte D_801462D5, indexes it by the argument times 400 and hands that entry to Defs_SetBitValue
+   mode byte g_gameControllerMode, indexes it by the argument times 400 and hands that entry to Defs_SetBitValue
    together with the current handle g_selectedLevelId and flag 1; an unrecognised mode does nothing. */
 
 extern u8 g_profileModeOnePlayedLevels[];
@@ -58,7 +58,7 @@ extern u8 g_profileModeOnePlayedLevels[];
    0x13BC. */
 
 
-/* Awards player p flag 0x31: when the player's 150-byte record in D_80146398 has its byte at
+/* Awards player p flag 0x31: when the player's 150-byte record in g_playerSettings_Achieve has its byte at
    0x78 equal to one and its byte at 0x91 clear, and the flag set at 0x4A of the player's 400-byte
    record in g_localPlayerProfiles lacks bit 0x31 while the set at 0x124 has bits 0 to 3, it sets bit 0x31
    through Defs_SetBitValue and stores 0x31 through the second argument. */

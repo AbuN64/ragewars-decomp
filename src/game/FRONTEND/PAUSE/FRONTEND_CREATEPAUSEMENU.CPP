@@ -33,9 +33,9 @@ extern s32 *Cache_AllocateMemory(s32);
 extern void Tsmos_ActivateControllerState(void); extern void Widget_SetWidgetFlag100(s32, s32);
 extern s32 Frontend_GetScreenMode(void),ScenarioSetup_IsCupSelected(void);
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-enum { MENU_80435D14_62 = 62 };
+enum { PAUSE_MENU_FLAGGED_WIDGET_ID = 62 };
 #elif defined(VERSION_EU_X)
-enum { MENU_80435D14_62 = 64 };
+enum { PAUSE_MENU_FLAGGED_WIDGET_ID = 64 };
 #endif
 s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     s32 *pauseMenuState;
@@ -52,7 +52,7 @@ s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     }
     Tsmos_ActivateControllerState();
     if ((g_gameSettings.controllerMode != 0) || (ScenarioSetup_IsCupSelected() == 0)) {
-        Widget_SetWidgetFlag100((s32)Node_FindWidgetByResourceId(root, MENU_80435D14_62), 1);
+        Widget_SetWidgetFlag100((s32)Node_FindWidgetByResourceId(root, PAUSE_MENU_FLAGGED_WIDGET_ID), 1);
     }
     g_gameSession.clockPaused = 1;
     return 0;

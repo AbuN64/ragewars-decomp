@@ -5,7 +5,7 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 
 #if !defined(VERSION_US)
-/* Steps an object's nesting count at 0x1C up and back down while it is nonzero, each step bracketed by func_802BCF30_de and __osRestoreInt: going up past one calls func_802BB2A0_de, and coming down to anything but zero calls func_802BB420_de. */
+/* Steps an object's nesting count at 0x1C up and back down while it is nonzero, each step bracketed by __osDisableInt_Mutex and __osRestoreInt: going up past one calls osRecvMesg_Mutex, and coming down to anything but zero calls osSendMesg_Mutex. */
 typedef struct Object {
     char pad0[0x1C];
     s32 depth;

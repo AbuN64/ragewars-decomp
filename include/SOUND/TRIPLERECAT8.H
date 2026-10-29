@@ -9,8 +9,8 @@ typedef struct ActorSurfaceSampleVector ActorSurfaceSampleVector;
 struct ActorSurfaceHeightView;
 typedef struct ActorSurfaceHeightView ActorSurfaceHeightView;
 
-struct ItemCode8024E130;
-struct ItemCode8024E130 {
+struct InstanceItemValueView;
+struct InstanceItemValueView {
     unsigned char kind;
     char pad[0x33];
     void *value;

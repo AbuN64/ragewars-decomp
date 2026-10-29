@@ -21,14 +21,14 @@ struct SelectionTextLoadApplyArtsendTextureOverride {
     char pad4[12];
     s32 alternative; /* 0x10 */
 };
-/* Frontend action mapping selected by D_8014AED0. */
+/* Frontend action mapping selected by g_artsendActionMappingSelection. */
 typedef struct FrontendInputSelector {
     u8 mode;
     u8 reserved1;
     u8 primaryButton;
     u8 secondaryButton;
 } FrontendInputSelector;
-struct Node80253610;
+struct CacheResourceNode;
 /* The us-rev1 resident texture menu state (g_artsendTextureViewer, 0x21BC bytes): TextLoad_ResetArtsendTextureState clears it,
    Tengine_LoadSelectedTexture loads the selected entry and Tengine_UpdateArtsendTexturePreview steps the selection. */
 struct ArtsendTextureMenuState {
@@ -41,7 +41,7 @@ struct ArtsendTextureMenuState {
     s32 selectionValue; /* +0x10 */
     s32 titleWasShown; /* +0x14: set when the selection changed */
     s32 overridesOff; /* +0x18: no texture or palette override while set */
-    struct Node80253610 *resource; /* +0x1C: the loaded entry */
+    struct CacheResourceNode *resource; /* +0x1C: the loaded entry */
     FrontendInputSelector *selector; /* +0x20 */
     s32 *textureOverride; /* +0x24 */
     s32 *paletteOverride; /* +0x28 */
@@ -60,5 +60,5 @@ struct ArtsendTextureSelection {
     s32 changed; /* +0x8: == g_artsendTextureSelectionChanged */
 };
 extern void Simppool_ResetEffectsAndControllers(void);
-extern void func_80294C84_de(void);
+extern void Simppool_NoOp(void);
 #endif

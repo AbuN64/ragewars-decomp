@@ -1,6 +1,6 @@
 
 
-/* DATA_800D2968.CPP */
+/* s_bursteText_SBurstetext.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_resident_strings_D3568_us_rev1.c */
 unsigned int s_bursteText[3] = {
@@ -8,7 +8,7 @@ unsigned int s_bursteText[3] = {
 };
 #endif
 
-/* DATA_800D2974.CPP */
+/* g_burstTextPackedStateWords_SBurstetext.CPP */
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/writable/800D2950_unclaimed_D3574 */
 /* A word (read as a word by its users) followed by three bytes; packed so the object stays 7 bytes. */

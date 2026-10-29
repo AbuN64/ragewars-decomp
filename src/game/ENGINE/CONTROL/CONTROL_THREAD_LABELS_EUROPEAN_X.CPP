@@ -1,6 +1,6 @@
 
 
-/* DATA_800C4614.CPP */
+/* g_threadLabelWordsEuropeanX_ControlThreadLabelsEuropeanX.CPP */
 #if defined(VERSION_EU_X)
 struct {
     unsigned int w0[3];
@@ -20,12 +20,12 @@ struct {
 };
 #endif
 
-/* DATA_800C4A64.CPP */
+/* g_ControlThreadLabelsEuropeanXEncodedBytes_ControlThreadLabelsEuropeanX.CPP */
 #if defined(VERSION_US)
 char g_ControlThreadLabelsEuropeanXEncodedBytes[12] = "wport_tR";
 #endif
 
-/* DATA_800C5154.CPP */
+/* g_ControlThreadLabelsEuropeanXEncodedWords_ControlThreadLabelsEuropeanX.CPP */
 #if defined(VERSION_EU)
 unsigned int g_ControlThreadLabelsEuropeanXEncodedWords[3] = {
     0x00042043, 0x00042080, 0x008A2021,

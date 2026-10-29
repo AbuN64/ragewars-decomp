@@ -1,13 +1,13 @@
 #include "include_asm.h"
 #include "DATA/OVL1_J/ACHIEVE_CREATERESULTSSCREEN_DATA.H"
 
-/* DATA_800E5830.CPP */
+/* g_AchieveCreateresultsscreenWords1_AchieveCreateresultsscreenData.CPP */
 /* ROM-grounded data: rodata/writable/800E5830 */
 unsigned int g_AchieveCreateresultsscreenWords1[1] = {
     0x00000000,
 };
 
-/* DATA_800E5834.CPP */
+/* g_AchieveCreateresultsscreenPointerWords1_AchieveCreateresultsscreenData.CPP */
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
 unsigned int D_src_e3e7c440[27] = {
@@ -38,12 +38,12 @@ unsigned int D_src_e3e7c440[27] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
 unsigned int g_AchieveCreateresultsscreenPointerWords1[6] = {
-    0x00000E08, 0x00000012, (unsigned int)g_packedCodeAddress24_00438E64, 0x00000E07, 0x00000012, (unsigned int)g_packedCodeAddress24_00438CB4,
+    0x00000E08, 0x00000012, (unsigned int)g_Achieve_UpdateResultSelectionMessagePackedAddress24_AchieveCreateresultsscreenData, 0x00000E07, 0x00000012, (unsigned int)g_Achieve_ResultScreenReturnZeroPackedAddress24_AchieveCreateresultsscreenData,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800E04AC[21] = {
+unsigned int g_AchieveCreateresultsscreenPointerWordsTailUs[21] = {
     0x00000E06, 0x00000012, 0x00437C30, 0x00000E03, 0x00000012, 0x00438C84, 0x00000002, 0x00000012,
     0x0043903C, 0x00000001, 0x00000012, 0x00438F74, 0x00000E0A, 0x00000012, 0x00438CBC, 0x00000000,
     0x00000000, 0x00000000, 0x4E452E48, 0x1CE8002B, 0x433A5C50,

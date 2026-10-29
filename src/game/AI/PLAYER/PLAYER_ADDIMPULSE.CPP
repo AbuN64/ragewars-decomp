@@ -22,7 +22,7 @@ void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource) {
     f32 clampedReserve;
 
     reserveValue = ((Shared_ActorView *)actor)->reserve - amount;
-    clampedReserve = D_800C9190_de[1];
+    clampedReserve = g_playerReserveBounds_de[1];
     if (!(reserveValue <= clampedReserve)) {
         if (actor != 0) {
             clampedReserve = reserveValue;
@@ -30,7 +30,7 @@ void Player_DrainReserveAndDamage(void *actor, f32 amount, void *damageSource) {
             clampedReserve = reserveValue;
         }
     }
-    reserveValue = D_800C9190_de[1];
+    reserveValue = g_playerReserveBounds_de[1];
     ((Shared_ActorView *)actor)->reserve = clampedReserve;
     if (clampedReserve <= reserveValue) {
         Barrel_FillDamagePacket(&damage, damageSource, ((LevelActor *)actor)->active + 0x1900, 25.599998f, 0x80, 0);

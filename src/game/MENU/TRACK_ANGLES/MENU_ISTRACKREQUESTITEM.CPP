@@ -13,7 +13,7 @@
 /* Returns one less than the word g_trackResourceDirectory points to. */
 
 /* Looks up the current menu resource through SetN64_LocatePackSection from the fields at 0x74 and 0x34 of
-   D_8011FE88 and, when found, opens it through Cache_RequestResource as widget 0x33 with the handler table
+   g_world_AchieveUpdateresultsscreen and, when found, opens it through Cache_RequestResource as widget 0x33 with the handler table
    g_cinemaDirectoryText; returns the result, or 0 when there is no resource. Matched through a local pointer to the menu. */
 
 
@@ -23,7 +23,7 @@ extern const char g_cinemaDirectoryText[];
 extern void *SetN64_LocatePackSection(int, int, int, int *);
 
 
-/* Blends two values with cubic weights: with u the pooled constant D_800E0CB0[0] less t, from is
+/* Blends two values with cubic weights: with u the pooled constant k_MenuBlendUnitConstants[0] less t, from is
    weighted by u cubed less u and to by t cubed less t. The constant lives in a shared literal
    pool outside this object, so it is read by name. */
 
@@ -49,13 +49,13 @@ int Menu_RequestTrackBundle(void) {
 }
 
 f32 Menu_BlendCubic(f32 from, f32 to, f32 t) {
-    f32 u = D_800E0CB0[0] - t;
+    f32 u = k_MenuBlendUnitConstants[0] - t;
 
     return from * (u * u * u - u) + to * (t * t * t - t);
 }
 
 f32 Menu_BlendLinear(f32 from, f32 to, f32 weight) {
-    return from * (D_800E0CB0[1] - weight) + to * weight;
+    return from * (k_MenuBlendUnitConstants[1] - weight) + to * weight;
 }
 
 void *Menu_GetPackEntry(s32 key) {

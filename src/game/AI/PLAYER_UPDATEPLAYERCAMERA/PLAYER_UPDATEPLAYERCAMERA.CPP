@@ -527,10 +527,10 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
         }
         zoom = player->zoom;
         if (zoom < 1.0f) {
-            step = (1.0f - D_800C9190_de[1]) * 0.25f;
+            step = (1.0f - g_playerReserveBounds_de[1]) * 0.25f;
             y = view->y + view->height;
             x = view->x;
-            limit = D_800C9190_de[1] + step;
+            limit = g_playerReserveBounds_de[1] + step;
             if (zoom < limit) {
                 level = 3;
             } else if (zoom < (limit += step)) {
@@ -543,14 +543,14 @@ void Player_DrawHeadsUpDisplay(Shared_HudPlayer *player, Shared_HudView *view) {
             Onscrn_SetupSpriteMode(0xFF);
             OnScreen_DrawSpriteResource(0x20B, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         } else if (zoom > 1.0f) {
-            stepOut = (D_800C9190_de[0] - 1.0f) * 0.25f;
+            stepOut = (g_playerReserveBounds_de[0] - 1.0f) * 0.25f;
             y = view->y + view->height;
             x = view->x;
-            if (D_800C9190_de[0] - stepOut < zoom) {
+            if (g_playerReserveBounds_de[0] - stepOut < zoom) {
                 level = 3;
-            } else if (D_800C9190_de[0] - (stepOut + stepOut) < zoom) {
+            } else if (g_playerReserveBounds_de[0] - (stepOut + stepOut) < zoom) {
                 level = 2;
-            } else if (D_800C9190_de[0] - (stepOut + stepOut + stepOut) < zoom) {
+            } else if (g_playerReserveBounds_de[0] - (stepOut + stepOut + stepOut) < zoom) {
                 level = 1;
             } else {
                 level = 0;
@@ -622,7 +622,7 @@ void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeap
     }
     Playerai_UpdateAimAndLockMarker(player);
 }
-/* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds g_frameElapsedTime times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at g_frontendScreenStatus.settings.local is set, the speed at 0x18's 0x24 meets g_movementHealthRegenerationSpeedThreshold's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by g_movementHealthRegenerationSpeedScale, g_frameElapsedTime and g_movementHealthRegenerationTuning's rate. */
+/* Regenerates a player's health at 0x5E4 toward the cap from Player_GetMaxHealth_Player: under flag 4 at 0x122C it adds g_frameElapsedTime times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at g_frontendScreenStatus.settings.local is set, the speed at 0x18's 0x24 meets g_movementHealthRegenerationSpeedThreshold's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by g_movementHealthRegenerationSpeedScale, g_frameElapsedTime and g_movementHealthRegenerationTuning's rate. */
 extern s32 Player_GetMaxHealth(SharedPlayer *p);
 void Player_UpdateHealthRegeneration(SharedPlayer *p) {
     f32 f0;
@@ -1153,7 +1153,7 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
         Link_DispatchObjectLinks(g_collisionProbeActorOne, linkFlags | 4, actor);
       }
       Player_TryThrowSelectedActor(player, actor, stateFlags);
-      func_8022C88C_de(player, actor, stateFlags);
+      Player_ReturnZeroStub(player, actor, stateFlags);
       if ((g_playerMovementRuleMode == 2) && (((u32) (((u16) player->views5E8.view650_16.state) - 5)) < 2))
       {
         if (actor->views1C.view20_2.velY > 0.0f)
@@ -1529,7 +1529,7 @@ void Player_UpdateBodyMovementAndActions(SharedPlayer *player)
   }
 }
 
-/* CODE_802227D0.CPP */
+/* Player_SetPlayerState_PlayerUpdateplayercamera.CPP */
 /* Switches a player to a new state unless option g_motionVisibilitySettings is on, Playerai_IsRoundEndState refuses and the
    state is not 0x13 to 0x15: keeps the previous state and timer, clears flag 0x800000, runs the new
    state's entry handler from the player's state table at 0x13B4, loads the state's timer and its
@@ -1674,7 +1674,7 @@ s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
 
 /* 8021CD70_10.CPP */
 /* Adds ammunition to a player's weapon slot: computes the slot's cap as Player_IsAmmoPickupBelowCapacity does (zero for
-   no slot, the character's cap unless option D_801462D5 is 1, otherwise g_baseAmmoCapacities's cap plus the
+   no slot, the character's cap unless option g_gameControllerMode is 1, otherwise g_baseAmmoCapacities's cap plus the
    profile bonus from g_localPlayerProfiles unless the flag at 0x1450 is set), and when the slot has room it
    selects weapon 1, 5 or 4 at 0xCC0 for slots 0, 1 and 2 if the slot was empty and ammunition is
    added, then adds the amount clamped to the cap. Returns whether the slot had room. Adapted from
@@ -1733,7 +1733,7 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
 
 /* Returns whether a player can take more ammunition for a pickup: looks up the pickup's weapon slot
    through Pickup_FindAmmoEntry, takes the cap as zero for no slot, the character's cap at 0x108 when option
-   D_801462D5 is not 1, or otherwise g_baseAmmoCapacities's cap raised, unless the flag at 0x1450 is set, by the
+   g_gameControllerMode is not 1, or otherwise g_baseAmmoCapacities's cap raised, unless the flag at 0x1450 is set, by the
    player profile's bonus byte for slots 0, 1 and 2 in g_localPlayerProfiles, and compares the slot's count at
    0x5F4 against it. */
 
@@ -2277,7 +2277,7 @@ void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
 /* 800C78C4.CPP */
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80220ED4_C84C4_us_rev1.c */
+/* ROM-grounded data: src/playerBodyMovementPoolUsRev1.c */
 #endif
 
 /* 800C7938.CPP */
@@ -2286,7 +2286,7 @@ void Player_EaseOwnerHeightEffect(struct EffectOwnerObject *object) {
 /* 800C794C.CPP */
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80222EA4_C854C_us_rev1.c */
+/* ROM-grounded data: src/playerHitReactionPoolUsRev1.c */
 #endif
 
 /* 800C7950.CPP */
@@ -2300,7 +2300,7 @@ const unsigned int g_playerOwnerHeightEffectConstants[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8022404C_C8638_us_rev1.c */
+/* ROM-grounded data: src/playerOwnerHeightEffectPoolUsRev1.c */
 const unsigned int g_playerOwnerHeightEffectConstantsUsRev1[2] = {
     0x3F666666, 0x42A5E353,
 };

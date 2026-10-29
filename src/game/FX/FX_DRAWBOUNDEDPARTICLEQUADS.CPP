@@ -25,7 +25,7 @@ extern void Graphu64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture g_materialIntensityMaskTexture (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (List_RemoveIntrusive) and returned to the free list (List_AppendIntrusive); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture g_materialIntensityMaskTexture (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at g_cameraVolumeBoundsMinZ + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (List_RemoveIntrusive) and returned to the free list (List_AppendIntrusive); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
 
 
 
@@ -37,7 +37,7 @@ extern void Graphu64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 
 
-extern f32 D_801031F8;
+extern f32 g_cameraVolumeBoundsMinZ;
 
 extern char g_materialIntensityMaskTexture;
 
@@ -97,7 +97,7 @@ CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
         angle = Graphu64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
-        angle *= ((struct func_802077F4_S2 *) ((f32 *) (&g_effectUpQuaternionConstants)))->unk4;
+        angle *= ((struct PaddedFloatView *) ((f32 *) (&g_effectUpQuaternionConstants)))->unk4;
         trig = Gu_Sinf(angle);
         result.x = cross.x * trig;
         result.y = cross.y * trig;
@@ -132,7 +132,7 @@ void Fx_DrawBoundedParticleQuads(ParticleQuadPoolScene *scene) {
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 255, 200);
     gSPDisplayList(g_displayListCursor++, (u32)&g_particleQuadRenderSetup);
     for (i = 0; i < 10; i++) {
-        max = (&D_801031F8 + 1);
+        max = (&g_cameraVolumeBoundsMinZ + 1);
         list = &scene->lists[i];
         particle = list->head;
         while (particle != 0) {
@@ -254,7 +254,7 @@ void Fx_FreeRibbonSegment(s32 ribbonWorld, void *ribbon, void *actors) {
 void Fx_RibbonNoop(void) {
 }
 
-void Fx_AddActorRibbonSamples(Owner802A6DF8 *ribbonWorld, s32 actor, char *boneMatrices) {
+void Fx_AddActorRibbonSamples(RibbonWorld *ribbonWorld, s32 actor, char *boneMatrices) {
     f32 quadMatrix[16];
     f32 quadScale;
     f32 zero;
@@ -303,7 +303,7 @@ void Fx_AddParticleRibbonSamples(ParticleRibbonStorageView *ribbonWorld, Shared_
     }
 }
 
-void Fx_DetachEffectOwner(Owner802A697C *owner, int object) {
+void Fx_DetachEffectOwner(SwooshAttachmentOwnerView *owner, int object) {
     float minimumValue;
     u8 effectReferenceCount;
     u8 ribbonReferenceCount;

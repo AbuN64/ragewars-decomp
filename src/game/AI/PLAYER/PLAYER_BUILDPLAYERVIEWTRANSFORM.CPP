@@ -46,7 +46,7 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
    the world's spin at 0x40 by 5 degrees, then for each player in the list from 0x20 runs its body
    through ContPad_BuildControllerState (restoring the frame time g_frameElapsedTime it may change), its team logic through
    Playerai_BuildEyeMarkerTransform when either team rule is set, its controls through Player_UpdateBodyMovementAndActions unless input is
-   frozen by g_simpleObjectPauseState, and its camera through func_80220A80_de; a second pass opens the pause menu
+   frozen by g_simpleObjectPauseState, and its camera through Player_UpdatePlayerCamera_PlayerBuildplayerviewtransform; a second pass opens the pause menu
    through Cinema_RequestSequenceFade for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
    one (unless the match forbids it), before the match end check Playerai_UpdateRoundLimits and the world updates

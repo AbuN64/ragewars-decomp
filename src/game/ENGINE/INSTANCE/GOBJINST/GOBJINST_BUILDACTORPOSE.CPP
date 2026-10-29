@@ -96,7 +96,7 @@ extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
 extern f32 Graphu64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
-extern void Fx_AddActorRibbonSamples(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
+extern void Fx_AddActorRibbonSamples(RibbonWorld *, Shared_PoseActor *, PoseMatrix *);
 #include "COMMON/OS_TIMER_INTERRUPT_INTERNALS.H"
 
 static inline CVector3 randVec(void) {

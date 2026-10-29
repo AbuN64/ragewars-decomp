@@ -36,9 +36,9 @@ struct COverlay {
     u8 pad34[4];
     s32 handle; /* 0x38: resource handle initialized by the mover constructor */
 };
-struct Table802AB8DC {
+struct OnScreenImageTableView {
     s16 count;
     u8 pad2[6];
-    Entry802AB8DC entries[1];
+    ImageTableEntry entries[1];
 };
 #endif

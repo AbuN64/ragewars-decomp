@@ -1,4 +1,0 @@
-#ifndef DATA_OVL4DAT_DATA_8044F354_H
-#define DATA_OVL4DAT_DATA_8044F354_H
-extern char D_800DEA60_eu_x[];
-#endif

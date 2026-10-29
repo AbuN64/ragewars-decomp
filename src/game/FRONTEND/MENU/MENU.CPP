@@ -77,7 +77,7 @@ s32 Menu_DrawMenuBlockModel(void *window, void *item, s32 event) {
     return 0;
 }
 
-/* On event 3 with value 0, calls MarkMenuEventHandled, hands func_8041DB30_de the cursor word the hub
+/* On event 3 with value 0, calls MarkMenuEventHandled, hands Focus_AdvanceActiveSlot_Menu the cursor word the hub
    names unk268 at +0x10C of the menu block g_profileStatisticsScreen points to, calls Focus_ShowUnlockedEntries with 0x6E,
    Focus_RefreshProfileStatistics and Focus_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
 
@@ -116,7 +116,7 @@ s32 Menu_ConsumeSelectionMenuEvent(void) {
 
 extern s32 g_selectionMenuHandlerEvents;
 extern s32 g_selectionMenuHandlerKinds;
-extern Handler802A2B50 g_selectionMenuHandlers;
+extern WidgetEventHandler g_selectionMenuHandlers;
 
 s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 eventData, s32 eventContext) {
     char *entry;
@@ -134,12 +134,12 @@ s32 Menu_DispatchSelectionMenuEvent(void *actor, s32 event, s32 eventValue, s32 
                 actor_kind = ((struct MenuActorInputView *) ((char *) actor))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_selectionMenuHandlerKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(actor, event, eventValue, eventData, eventContext);
+                    return (*(WidgetEventHandler *)entry)(actor, event, eventValue, eventData, eventContext);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

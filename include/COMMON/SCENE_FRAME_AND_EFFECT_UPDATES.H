@@ -21,15 +21,15 @@ struct Shared_Pickup;
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 
-extern s32 D_800CD3F4;
+extern s32 g_litGeometryResourceKeysChanged;
 
 
 struct Shared_World;
 extern void Scene_UpdateSelectionTransition(struct Shared_World *);
 extern void Scene_ClearSceneObjectCounts(void *);
 
-struct Node80253610;
-extern void Cache_MarkResourceInUse(s32, struct Node80253610 *);
+struct CacheResourceNode;
+extern void Cache_MarkResourceInUse(s32, struct CacheResourceNode *);
 extern void Fx_ResetRibbonVertexPool(void *);
 struct CPlayerPool_t;
 extern void Playerai_RotatePlayerPoseBuffers(struct CPlayerPool_t *);

@@ -363,7 +363,7 @@ char k_VisdataEncodedBytes[8] =
     "\000\000\000\003s16R";
 #endif
 
-/* ROM-grounded data: src/rw_pool_80296930_CB2A0_us_rev1.c */
+/* ROM-grounded data: src/g_planeParallelSegmentFractionStorageSource.c */
 const unsigned int g_planeParallelSegmentFraction_StorageWords[1] = {
     0x3F800000,
 };

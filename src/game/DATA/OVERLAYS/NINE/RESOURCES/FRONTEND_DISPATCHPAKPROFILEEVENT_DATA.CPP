@@ -44,13 +44,13 @@ unsigned int D_src_95297a43[42] = {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* ROM-grounded exact candidate, normalized from prior lane proof. */
 unsigned int g_FrontendDispatchpakprofileeventPointerWords1[9] = {
-    0x00000E07, 0x00000013, (unsigned int)g_packedCodeAddress24_00435BA4, 0x00000E0A, 0x00000013, (unsigned int)g_packedCodeAddress24_0042F988, 0x00000E08, 0x00000013,
-    (unsigned int)g_packedCodeAddress24_0042FAFC,
+    0x00000E07, 0x00000013, (unsigned int)g_Frontend_ReturnProfileEventZeroPackedAddress242, 0x00000E0A, 0x00000013, (unsigned int)g_Frontend_UpdatePakScreenExitPackedAddress242, 0x00000E08, 0x00000013,
+    (unsigned int)g_Frontend_UpdatePakScreenPanelsPackedAddress242,
 };
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800E012C[33] = {
+unsigned int g_FrontendDispatchpakprofileeventPointerWords2[33] = {
     0x00000E06, 0x00000013, 0x0042F130, 0x00000E03, 0x00000013, 0x00435BAC, 0x00000002, 0x00000013,
     0x00432334, 0x00000001, 0x00000013, 0x004308B8, 0x0000000A, 0x00000013, 0x0042FD28, 0x0000000B,
     0x00000013, 0x00435BEC, 0x00000005, 0x00000013, 0x004305D8, 0x00000006, 0x00000013, 0x004302F8,

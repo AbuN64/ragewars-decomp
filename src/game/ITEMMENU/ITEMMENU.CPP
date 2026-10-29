@@ -88,9 +88,9 @@ void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, ToggleMenuPlayerInputView *inpu
             menu->state = 0;
         }
     } else if (input->pressed & 0x100) {
-        ItemMenu_AdvanceSelection((MenuCode802A6AC0 *)menu, 0);
+        ItemMenu_AdvanceSelection((ItemMenuCursorState *)menu, 0);
     } else if (input->pressed & 0x200) {
-        ItemMenu_AdvanceSelection((MenuCode802A6AC0 *)menu, 1);
+        ItemMenu_AdvanceSelection((ItemMenuCursorState *)menu, 1);
     }
 }
 
@@ -107,9 +107,9 @@ static inline void clear_entry(CItem *e) {
     e->transitionFrame = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in g_systemBootMarkerComparison and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from g_graphicsTaskYieldBuffer to g_runtimeHeapStart, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in g_systemBootMarkerComparison and re-arming it through SetN64_CopyString_Itemmenu), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from g_graphicsTaskYieldBuffer to g_runtimeHeapStart, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through Audio_InitializeOperatingSystem and SetN64_StartSessionThreads. */
 
-extern char D_800F41F0;
+extern char g_sceneCollisionStorage;
 
 extern s32 g_graphicsTaskYieldBuffer;
 
@@ -136,7 +136,7 @@ static inline s32 is_restorable(u32 address) {
     if (address >= (u32)&g_worldSnapshotNoteData && address < (u32)&g_worldSnapshotNoteData + 0x5800) {
         return 0;
     }
-    if (address >= (u32)&D_800F41F0 && address < (u32)&D_800F41F0 + 0x5000) {
+    if (address >= (u32)&g_sceneCollisionStorage && address < (u32)&g_sceneCollisionStorage + 0x5000) {
         return 0;
     }
     if (address >= (u32)&g_gameSettings + 0x5D8 && address <= (u32)&g_gameSettings + 0x688) {
@@ -346,7 +346,7 @@ s32 ItemMenu_IsSelectedEntryActive(void *menu)
 }
 
 /* Moves a menu's cursor at 0xE4 over its four 0x38-byte entries, forward when arg1 is zero and backward otherwise, wrapping around and skipping entries whose word at 0x4 is zero; returns the entry landed on. */
-s32 ItemMenu_AdvanceSelection(MenuCode802A6AC0 *menu, s32 backward) {
+s32 ItemMenu_AdvanceSelection(ItemMenuCursorState *menu, s32 backward) {
     u16 cursor;
     if (backward == 0) {
         do {
@@ -428,7 +428,7 @@ s32 ItemMenu_RestoreBootMemory(void) {
     return 0;
 }
 
-void func_802A754C_de(void) {
+void ItemMenu_RestoreBootMemoryNoOp(void) {
 }
 
 s32 ItemMenu_IsRestorableAddress(u32 address) {
@@ -448,7 +448,7 @@ s32 ItemMenu_IsRestorableAddress(u32 address) {
     if (((address) >= (u32)&(g_worldSnapshotNoteData) && (address) < (u32)&(g_worldSnapshotNoteData) + (0x5800))) {
         return 0;
     }
-    if (((address) >= (u32)&(D_800F41F0) && (address) < (u32)&(D_800F41F0) + (0x5000))) {
+    if (((address) >= (u32)&(g_sceneCollisionStorage) && (address) < (u32)&(g_sceneCollisionStorage) + (0x5000))) {
         return 0;
     }
     if (address >= (u32)&g_gameSettings.counters && address <= (u32)&g_gameSettings.counters + 0xB0) {
@@ -457,7 +457,7 @@ s32 ItemMenu_IsRestorableAddress(u32 address) {
     return 1;
 }
 
-void func_802A7654_de(void) {
+void ItemMenu_IsRestorableAddressNoOp(void) {
 }
 
 /* 800CB0A0.CPP */

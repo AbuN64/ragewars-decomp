@@ -15,99 +15,99 @@ unsigned char g_EventDrawclippedwidgetchildrenTrailingBytesBlock1[4] = { 0x10, 0
 unsigned char g_EventDrawclippedwidgetchildrenTrailingBytesBlock2[8] = { 0x24, 0x06, 0x00, 0x01, 0x02, 0x60, 0x20, 0x21 };
 #endif
 
-/* DATA_8015A6FC.CPP */
+/* g_EventDrawclippedwidgetchildrenPointerWords1_EventDrawclippedwidgetchildren.CPP */
 #if defined(VERSION_EU_X)
-extern char g_overlayTwoThreeObjectRomLinkTarget_004064A8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00406730[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00406A88[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00407030[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004071A8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040783C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004080E4[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004082D0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004084D4[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004087C8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00408F30[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004090D4[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00409428[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040972C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00409F18[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_00409FF8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A11C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A550[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A61C[];
-extern char D_0040A6A8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A784[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A7A8[];
-extern char D_0040A7BC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A7CC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A800[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A85C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A8C8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A934[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040A960[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AA04[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AA38[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AAA4[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AAC0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AAD8[];
-extern char D_0040AB18[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AC68[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040ADC0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AE28[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AE7C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AEE8[];
-extern char D_0040AEF8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF0C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF20[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF34[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF48[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF5C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF70[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AF84[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AFD0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040AFEC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B00C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B020[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B034[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B048[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B05C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B070[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B084[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B0D0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B1FC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B328[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B454[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B580[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B6AC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B6F8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B7D8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B7F4[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B80C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B840[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B874[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B920[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040B9CC[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BA88[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BB0C[];
-extern char D_0040BB40[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BC20[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BC38[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BC54[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BC70[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BC8C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BCA8[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BD24[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BDA0[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BE1C[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BE98[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BF14[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0040BF80[];
+extern char g_Snapshot_BeginProfileSavePackedAddress24[];
+extern char g_Snapshot_BeginProfileLoadPackedAddress24[];
+extern char g_Snapshot_CheckEuropeanSaveAvailabilityPackedAddress24[];
+extern char g_Snapshot_BeginSnapshotSavePackedAddress24[];
+extern char g_Snapshot_BeginBlockLoadPackedAddress24[];
+extern char g_Snapshot_SelectNotePackedAddress24[];
+extern char g_Snapshot_UpdateNoteLabelPackedAddress24[];
+extern char g_Snapshot_UpdateSpaceLabelPackedAddress24[];
+extern char g_Snapshot_HandleMenuActionPackedAddress24[];
+extern char g_Snapshot_CloseNoteBrowserPackedAddress24[];
+extern char g_Pak_ConfirmProfileOrDeleteNotePackedAddress24_Objectdata[];
+extern char g_Pak_ClosePromptByKindPackedAddress24_Objectdata[];
+extern char g_Pak_ConfirmPendingOperationPackedAddress24_Objectdata[];
+extern char g_Timer_CancelPendingOperationPackedAddress24_Objectdata[];
+extern char g_Timer_CheckMenuPakChangePackedAddress24_Objectdata[];
+extern char g_Timer_CheckChangedMenuChannelPackedAddress24_Objectdata[];
+extern char g_Timer_UpdateManagerStatusPackedAddress24_Objectdata[];
+extern char g_Timer_UpdateManagerChannelLabelPackedAddress24_Objectdata[];
+extern char g_Timer_UpdateOwnerChannelLabelPackedAddress24[];
+extern char addrLow_Timer_UpdateAlternateActionLabel[];
+extern char g_Timer_SetManagerHeadingPackedAddress24_Objectdata[];
+extern char g_Timer_EnableAlternatePromptPackedAddress24_Objectdata[];
+extern char addrLow_Timer_UpdatePreviewKindLabel[];
+extern char g_Timer_UpdateAlternatePromptLabelPackedAddress24_Objectdata[];
+extern char g_Timer_UpdatePreviewDepthLabelPackedAddress24_Objectdata[];
+extern char g_Timer_FormatPreviewPageCountPackedAddress24_Objectdata[];
+extern char g_Timer_FormatPreviewValuePackedAddress24_Objectdata[];
+extern char g_Timer_DispatchPreviewHandlePackedAddress24[];
+extern char g_Timer_FormatPreviewDottedTriplePackedAddress24_Objectdata[];
+extern char g_Timer_UpdateAlternateActionLabelPackedAddress24_Objectdata[];
+extern char g_Timer_OpenSelectedPromptPackedAddress24_Objectdata[];
+extern char g_Timer_EnableProfilePreviewPackedAddress24_Objectdata[];
+extern char g_Timer_ClearProfilePreviewPackedAddress24_Objectdata[];
+extern char g_Timer_DisablePreviewSelectionPackedAddress24[];
+extern char addrLow_Pak_SelectPromptKindFive[];
+extern char g_Menu_FormatLocalizedPakStatusPackedAddress24[];
+extern char g_Pak_FormatPreviewFourDigitValuePackedAddress24_Objectdata[];
+extern char g_Pak_UpdateProfileActionLabelPackedAddress24_Objectdata[];
+extern char g_Pak_OpenProfileActionPromptPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindZeroPackedAddress24_Objectdata[];
+extern char addrLow_Pak_SelectPromptTextGroupThree[];
+extern char g_Pak_SelectPromptKindTwoPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindThreePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindFourPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindFivePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindSixPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindSevenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindEightPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindNinePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindNinePendingPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindTenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindElevenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindTwelvePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindThirteenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindFourteenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptKindFifteenPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptActionHeadingPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptTextGroupOnePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptTextGroupTwoPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptTextGroupThreePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptTextGroupFourPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPromptTextGroupFivePackedAddress24_Objectdata[];
+extern char g_Pak_SelectModalPromptLabelPackedAddress24_Objectdata[];
+extern char g_Pak_CheckOperationPakChangePackedAddress24_Objectdata[];
+extern char g_Pak_EnableOperationHeadingPackedAddress24_Objectdata[];
+extern char g_Pak_DisableOperationHeadingPackedAddress24[];
+extern char g_Pak_SelectOperationHeadingPackedAddress24_Objectdata[];
+extern char g_Pak_SelectOperationDescriptionPackedAddress24_Objectdata[];
+extern char g_Pak_FormatOperationChannelLabelPackedAddress24_Objectdata[];
+extern char g_Pak_OpenPakChannelPackedAddress24_Objectdata[];
+extern char g_Pak_OpenPakStatusPromptPackedAddress24_Objectdata[];
+extern char g_Pak_CancelPakActionPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakLoadHeadingPackedAddress24_Objectdata[];
+extern char addrLow_Menu_SelectPakOperationActionLabel[];
+extern char g_Pak_SelectPakOperationZeroPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakOperationOnePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakOperationTwoPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakOperationThreePackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakOperationFourPackedAddress24_Objectdata[];
+extern char g_Pak_SelectPakOperationTextOnePackedAddress24_Objectdata[];
+extern char g_Frontend_SelectPakOperationTextTwoPackedAddress24_Objectdata[];
+extern char g_Frontend_SelectPakOperationTextThreePackedAddress24_Objectdata[];
+extern char g_Frontend_SelectPakOperationTextFourPackedAddress24_Objectdata[];
+extern char g_Frontend_SelectPakOperationTextFivePackedAddress24_Objectdata[];
+extern char g_Frontend_SelectPakConfirmationLabelPackedAddress24_Objectdata[];
+extern char g_Menu_SelectEuropeanPakActionLabelPackedAddress24[];
 extern char g_Encoded_HandleUnlockedLevelSelectionPackedAddress242[];
-extern char g_packedCodeAddress24_0043D9A8[];
+extern char g_Option_UpdateOptionBit10ItemPackedAddress24_PlaymodeRegionalStorage3[];
 extern char g_Encoded_DrawTextEntryCursorPackedAddress242[];
-extern char g_packedCodeAddress24_0043DB40[];
-extern char g_packedCodeAddress24_0043DC18[];
+extern char g_Option_UpdateOptionBit13ItemPackedAddress24_PlaymodeRegionalStorage3[];
+extern char g_Encoded_TextEntryReturnZeroPackedAddress242[];
 extern char g_Encoded_InsertTextEntryCharacterPackedAddress242[];
 extern char g_Encoded_DeletePreviousTextEntryCharacterPackedAddress242[];
 extern char g_Encoded_ApplyCheatCodePackedAddress242[];
@@ -126,7 +126,7 @@ extern char g_Option_UpdateOptionBit4ItemPackedAddress242[];
 extern char g_Option_ToggleOptionBit5PackedAddress242[];
 extern char g_Option_UpdateOptionBit5ItemPackedAddress242[];
 extern char g_Option_ToggleOptionBit6PackedAddress242[];
-extern char D_0043E5C8[];
+extern char addrLow_CMenuProfile_ProfileModeReturnZero[];
 extern char g_Option_ToggleOptionBit7PackedAddress242[];
 extern char g_Option_UpdateOptionBit7ItemPackedAddress242[];
 extern char g_Option_ToggleOptionBit8PackedAddress242[];
@@ -153,22 +153,22 @@ extern char g_CMenuProfile_HasSavedRoundProgressPackedAddress242[];
 extern char g_CMenuProfile_AdjustControllerSelectionPackedAddress242[];
 extern char g_CMenuProfile_FormatProfileQuantityLabelPackedAddress242[];
 extern char g_CMenuProfile_ToggleProfileModePackedAddress242[];
-extern char g_packedCodeAddress24_0043F2F4[];
+extern char g_CMenuProfile_OpenPrimaryProfileMenuPackedAddress242[];
 extern char g_CMenuProfile_BindSelectedDebugFieldPackedAddress242[];
-extern char g_packedCodeAddress24_0043F344[];
+extern char g_CMenuProfile_OpenSecondaryProfileMenuPackedAddress242[];
 extern char g_CMenuProfile_UpdateProfileModeLabelPackedAddress24[];
 extern char g_CMenuProfile_EnableOwnerControllerPakPackedAddress242[];
 extern char g_CMenuProfile_EnableControllerPakAndClearStatePackedAddress242[];
 extern char g_CMenuProfile_HasProfileRoundProgressPackedAddress242[];
 extern char g_CMenuProfile_OpenTimedPlayerDialogPackedAddress242[];
-extern char g_packedCodeAddress24_0043F4A4[];
+extern char g_CMenuProfile_ItemLabelCallbackBeforeOpenTimedPlayerDialogPackedAddress242[];
 extern char g_CMenuProfile_UpdatePlayerAnimationChoicePackedAddress242[];
-extern char g_packedCodeAddress24_0043F598[];
+extern char g_CMenuProfile_GameSpeedReturnZeroPackedAddress242[];
 extern char g_CMenuProfile_HasDialogRoundProgressPackedAddress242[];
 extern char g_CMenuProfile_OpenPrimaryPlayerDialogPackedAddress242[];
 extern char g_CMenuProfile_OpenAlternatePlayerDialogPackedAddress242[];
 extern char g_Initial_ToggleMenuRowOptionPackedAddress24[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_0043F8F8[];
+extern char g_Initial_RequestTransitionWithPakDisabledPackedAddress24_Objectdata[];
 extern char g_Initial_ProbeMenuControllerPakPackedAddress242[];
 extern char g_Initial_EnableMenuControllerPakPackedAddress242[];
 extern char g_Initial_OpenDialogWithControllerPakPackedAddress242[];
@@ -177,14 +177,14 @@ extern char g_Initial_RequestTransitionWithPakDisabledPackedAddress242[];
 extern char g_Initial_SelectInitialControllerPackedAddress242[];
 extern char g_Initial_UpdateMultiplayerAvailabilityPackedAddress242[];
 extern char g_Initial_OpenLocalPlayerSetupPackedAddress242[];
-extern char g_packedCodeAddress24_0043FC1C[];
-extern char g_packedCodeAddress24_0043FC48[];
-extern char g_packedCodeAddress24_0043FC74[];
+extern char g_Initial_OpenDialogRow3PackedAddress242[];
+extern char g_Initial_OpenDialogRow1PackedAddress242[];
+extern char g_Initial_OpenDialogRow2PackedAddress242[];
 extern char g_Initial_OpenTrackPreviewMenuPackedAddress242[];
 extern char g_Initial_ResetPlayerGameOverTimerPackedAddress24[];
 extern char g_Multi_CompleteGameOverDelayPackedAddress242[];
 extern char g_Multi_DecreaseGameOverTimerPackedAddress24[];
-extern char g_packedCodeAddress24_00440010[];
+extern char g_Multi_EmptyItemHookPackedAddress242[];
 extern char g_Multi_CreateMenuWithDefaultMusicGainPackedAddress242[];
 extern char g_Menu_DrawMenuOptionSpritePackedAddress243[];
 extern char g_Menu_DrawMenuModelPackedAddress242[];
@@ -200,9 +200,9 @@ extern char g_Player_UpdatePlayerRespawnDelayPackedAddress242[];
 extern char g_Player_ConfigurePlayerMenuFlagsPackedAddress242[];
 extern char g_Player_ConfigureAndProbeControllerPakPackedAddress242[];
 extern char g_Player_ConfigureControllerPakMenuPackedAddress242[];
-extern char g_overlayTwoThreeObjectRomLinkTarget_004453D4[];
+extern char g_Items_SelectSceneMaskTextPackedAddress24_Objectdata[];
 extern char g_Items_CycleSceneMaskPackedAddress242[];
-extern char D_00445504[];
+extern char addrLow_Pak_OpenMusicPreviewMenu[];
 extern char g_Items_AdjustPlayerOption7BPackedAddress242[];
 extern char g_Items_SelectPlayerOption7BTextPackedAddress242[];
 extern char g_Items_AdjustPlayerOption7CPackedAddress242[];
@@ -228,17 +228,17 @@ extern char g_Items_RequestScreenModeFadePackedAddress242[];
 extern char g_Pak_AdjustPackedButtonOptionPackedAddress242[];
 extern char g_Pak_FormatPackedButtonOptionPackedAddress242[];
 extern char g_Items_AdjustLanguagePackedAddress24[];
-extern char g_packedCodeAddress24_004460E4[];
+extern char g_Pak_FormatPackedButtonOptionPackedAddress242_EventDrawclippedwidgetchildren[];
 extern char g_Pak_StopMusicAndResetMatchPackedAddress24[];
 extern char g_Pak_SetRecordTypeFourPackedAddress24[];
 extern char g_Pak_ResumeMenuAudioPackedAddress24[];
 extern char g_Pak_ReturnCallbackSuccessPackedAddress24[];
-extern char g_packedCodeAddress24_0044618C[];
-extern char g_packedCodeAddress24_004461B8[];
-extern char g_packedCodeAddress24_004461E4[];
-extern char g_packedCodeAddress24_00446210[];
-extern char g_packedCodeAddress24_0044623C[];
-extern char g_packedCodeAddress24_00446268[];
+extern char g_Pak_PlayerOptionsLabelRow1CallbackPackedAddress242[];
+extern char g_Pak_PlayerOptionsLabelRow2CallbackPackedAddress242[];
+extern char g_Pak_PlayerOptionsLabelRow3CallbackPackedAddress242[];
+extern char g_Pak_PlayerOptionsLabelRow4CallbackPackedAddress242[];
+extern char g_Pak_PlayerOptionsLabelRow5CallbackPackedAddress242[];
+extern char g_Pak_PlayerOptionsLabelRow6CallbackPackedAddress242[];
 extern char g_Pak_RestoreAudioAndCloseMenuPackedAddress24[];
 extern char g_Pak_AdjustVolumeSlotTwoPackedAddress24[];
 extern char g_Pak_UpdateThirdVolumeLabelPackedAddress24[];
@@ -262,116 +262,116 @@ extern char g_Setup_HasActiveGameCountersPackedAddress24[];
 unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x00024050, 0x00080000, 0x00010000, 0x90000000, 0x00000000, 0x0000FF01, 0x00000385,
     (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000041, 0x0000000A, 0x0000FF01,
-    0x800DDEE0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A61C, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000FFF8,
-    0x0000FF01, 0x800DDFE8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)D_0040A6A8, 0x00000000, 0x00000000, 0x00000000, 0x00011001,
-    0x00000006, 0x0000FF01, 0x800DDEEC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000,
-    0x00011001, 0x00000000, 0x0000FF01, 0x800DDEF8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000,
-    0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF04, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C,
-    0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF10, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF1C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF28,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01,
-    0x800DDF34, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000,
-    0x0000FF01, 0x800DDF40, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001,
-    0x00000000, 0x0000FF01, 0x800DDF4C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000,
-    0x00011001, 0x00000000, 0x0000FF01, 0x800DDF58, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000,
-    0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF64, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C,
-    0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF70, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF7C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF88,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01,
-    0x800DDF94, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001, 0x00000000,
-    0x0000FF01, 0x800DDFA0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004080E4, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040783C, 0x00000000, 0x00000000, 0x00011001,
-    0x00000003, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004082D0, 0x00000000, 0x00000000, 0x00000000,
-    0x00010041, 0x0000000A, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A550, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004084D4, 0x00000000,
-    0x00000000, 0x00010041, 0x00000004, 0x0000FF01, 0x800DE018, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A784, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004087C8,
-    0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00406730, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00409F18, 0x00150000,
-    0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004064A8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00409F18,
-    0x00140000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004071A8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00409FF8, 0x00150000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00407030, 0x00000000,
-    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00409FF8, 0x00140000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00406A88,
-    0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A11C, 0x00140000, 0x00000000, 0x00000000, 0x00010000, 0x90000000,
+    0x800DDEE0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_UpdateOwnerChannelLabelPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000FFF8,
+    0x0000FF01, 0x800DDFE8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)addrLow_Timer_UpdateAlternateActionLabel, 0x00000000, 0x00000000, 0x00000000, 0x00011001,
+    0x00000006, 0x0000FF01, 0x800DDEEC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000,
+    0x00011001, 0x00000000, 0x0000FF01, 0x800DDEF8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000,
+    0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF04, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24,
+    0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF10, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24,
+    (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF1C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
+    (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF28,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01,
+    0x800DDF34, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000,
+    0x0000FF01, 0x800DDF40, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001,
+    0x00000000, 0x0000FF01, 0x800DDF4C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000,
+    0x00011001, 0x00000000, 0x0000FF01, 0x800DDF58, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000,
+    0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF64, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24,
+    0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF70, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24,
+    (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF7C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
+    (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01, 0x800DDF88,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000, 0x0000FF01,
+    0x800DDF94, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001, 0x00000000,
+    0x0000FF01, 0x800DDFA0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateNoteLabelPackedAddress24, (unsigned int)g_Snapshot_SelectNotePackedAddress24, 0x00000000, 0x00000000, 0x00011001,
+    0x00000003, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Snapshot_UpdateSpaceLabelPackedAddress24, 0x00000000, 0x00000000, 0x00000000,
+    0x00010041, 0x0000000A, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_UpdateManagerChannelLabelPackedAddress24_Objectdata, (unsigned int)g_Snapshot_HandleMenuActionPackedAddress24, 0x00000000,
+    0x00000000, 0x00010041, 0x00000004, 0x0000FF01, 0x800DE018, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_SetManagerHeadingPackedAddress24_Objectdata, (unsigned int)g_Snapshot_CloseNoteBrowserPackedAddress24,
+    0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_Snapshot_BeginProfileLoadPackedAddress24, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Timer_CheckMenuPakChangePackedAddress24_Objectdata, 0x00150000,
+    0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_Snapshot_BeginProfileSavePackedAddress24, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Timer_CheckMenuPakChangePackedAddress24_Objectdata,
+    0x00140000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_Snapshot_BeginBlockLoadPackedAddress24, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
+    (unsigned int)g_Timer_CheckChangedMenuChannelPackedAddress24_Objectdata, 0x00150000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_Snapshot_BeginSnapshotSavePackedAddress24, 0x00000000,
+    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Timer_CheckChangedMenuChannelPackedAddress24_Objectdata, 0x00140000, 0x00000000, 0x00000000, 0x0044F550, 0x00160000, (unsigned int)g_Snapshot_CheckEuropeanSaveAvailabilityPackedAddress24,
+    0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Timer_UpdateManagerStatusPackedAddress24_Objectdata, 0x00140000, 0x00000000, 0x00000000, 0x00010000, 0x90000000,
     0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x08000801, 0x00000008, 0x0000FF01, 0x800DE114, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A7CC, 0x00000000, 0x00000000,
-    0x00000000, 0x00010041, 0x00000014, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A934, 0x00000000,
-    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DE168, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A960,
+    0x08000801, 0x00000008, 0x0000FF01, 0x800DE114, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_UpdateAlternatePromptLabelPackedAddress24_Objectdata, 0x00000000, 0x00000000,
+    0x00000000, 0x00010041, 0x00000014, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_DispatchPreviewHandlePackedAddress24, 0x00000000,
+    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DE168, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_FormatPreviewDottedTriplePackedAddress24_Objectdata,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x0000000A, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A800, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DE150,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A85C, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
-    0x800DE15C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A8C8, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014,
-    0x0000FF01, 0x800DE1E0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AA04, 0x00000000, 0x00000000, 0x00000000, 0x00010040,
+    (unsigned int)g_Timer_UpdatePreviewDepthLabelPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DE150,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_FormatPreviewPageCountPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
+    0x800DE15C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_FormatPreviewValuePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014,
+    0x0000FF01, 0x800DE1E0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Timer_UpdateAlternateActionLabelPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010040,
     0x007D000A, 0x00010000, 0x800DE960, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00408A58, 0x00000000, 0x00000000,
-    0x00024040, 0x000A0000, 0xFF000000, 0x800DE96C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AA38, 0x00000000,
-    0x0044F91C, 0x000A0000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040A7A8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00080000, 0x00000000,
-    0x00000000, 0x0044F91C, 0x000A0000, (unsigned int)D_0040A7BC, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00090000,
+    0x00024040, 0x000A0000, 0xFF000000, 0x800DE96C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Timer_OpenSelectedPromptPackedAddress24_Objectdata, 0x00000000,
+    0x0044F91C, 0x000A0000, (unsigned int)g_Timer_EnableAlternatePromptPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00080000, 0x00000000,
+    0x00000000, 0x0044F91C, 0x000A0000, (unsigned int)addrLow_Timer_UpdatePreviewKindLabel, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00090000,
     0x00000000, 0x00000000, 0x00010000, 0x90000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800DE174,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)D_0040AB18, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000032, 0x0000FF01,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)addrLow_Pak_SelectPromptKindFive, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000032, 0x0000FF01,
     0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x0040AB6C, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000002,
-    0x0000FF01, 0x800DE1BC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AC68, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
-    0x00000002, 0x0000FF01, 0x800DE1C8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040ADC0, 0x00000000, 0x00000000, 0x00000000,
+    0x0000FF01, 0x800DE1BC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Menu_FormatLocalizedPakStatusPackedAddress24, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
+    0x00000002, 0x0000FF01, 0x800DE1C8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_FormatPreviewFourDigitValuePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000,
     0x00010041, 0x00000002, 0x0000FF01, 0x800DE1D4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00408CAC, 0x00000000, 0x00000000,
-    0x00000000, 0x00010041, 0x00000010, 0x0000FF01, 0x800DE1E0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AE28, 0x00000000,
+    0x00000000, 0x00010041, 0x00000010, 0x0000FF01, 0x800DE1E0, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_UpdateProfileActionLabelPackedAddress24_Objectdata, 0x00000000,
     0x00000000, 0x00000000, 0x00010040, 0x007D000A, 0x00010000, 0x800DE960, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00408F30, 0x00000000, 0x00000000, 0x00024040, 0x000A0000, 0xFF000000, 0x800DE96C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    0x00000000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AE7C, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AAA4, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
-    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AAC0, 0x00000000,
-    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00080000, 0x00000000, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AAD8,
+    (unsigned int)g_Pak_ConfirmProfileOrDeleteNotePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00024040, 0x000A0000, 0xFF000000, 0x800DE96C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
+    0x00000000, (unsigned int)g_Pak_OpenProfileActionPromptPackedAddress24_Objectdata, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_Timer_EnableProfilePreviewPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
+    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_Timer_ClearProfilePreviewPackedAddress24_Objectdata, 0x00000000,
+    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00080000, 0x00000000, 0x00000000, 0x0044FACC, 0x00090000, (unsigned int)g_Timer_DisablePreviewSelectionPackedAddress24,
     0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00080000, 0x00000000, 0x00000000, 0x00010000, 0x90000000,
     0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x08000021, 0x00000008, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B084, 0x00000000, 0x00000000,
-    0x00000000, 0x00010041, 0x0000001E, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B0D0, 0x00000000,
-    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B1FC,
+    0x08000021, 0x00000008, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPromptActionHeadingPackedAddress24_Objectdata, 0x00000000, 0x00000000,
+    0x00000000, 0x00010041, 0x0000001E, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPromptTextGroupOnePackedAddress24_Objectdata, 0x00000000,
+    0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPromptTextGroupTwoPackedAddress24_Objectdata,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B328, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DF3EC,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B454, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01,
-    0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B580, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000019,
-    0x0000FF01, 0x800DE21C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B6AC, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004090D4, 0x00000000, 0x0044FC7C, 0x00080000,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AEE8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C,
-    0x00080000, (unsigned int)D_0040AEF8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000,
-    0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF0C, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000,
-    0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF20, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000,
-    0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF34, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000,
-    0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF48, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
-    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF5C, 0x00000000,
-    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF70,
+    (unsigned int)g_Pak_SelectPromptTextGroupThreePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DF3EC,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPromptTextGroupFourPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x0000FF01,
+    0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPromptTextGroupFivePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000019,
+    0x0000FF01, 0x800DE21C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectModalPromptLabelPackedAddress24_Objectdata, (unsigned int)g_Pak_ClosePromptByKindPackedAddress24_Objectdata, 0x00000000, 0x0044FC7C, 0x00080000,
+    (unsigned int)g_Pak_SelectPromptKindZeroPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C,
+    0x00080000, (unsigned int)addrLow_Pak_SelectPromptTextGroupThree, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000,
+    0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindTwoPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000,
+    0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindThreePackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000,
+    0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindFourPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000,
+    0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindFivePackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
+    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindSixPackedAddress24_Objectdata, 0x00000000,
+    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindSevenPackedAddress24_Objectdata,
     0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AF84, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C,
-    0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AFD0, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000,
-    0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040AFEC, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000,
-    0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B00C, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000,
-    0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B020, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000,
-    0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B034, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
-    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B070, 0x00000000,
-    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B048,
+    (unsigned int)g_Pak_SelectPromptKindEightPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C,
+    0x00080000, (unsigned int)g_Pak_SelectPromptKindNinePackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000,
+    0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindNinePendingPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000,
+    0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindTenPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000,
+    0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindElevenPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000,
+    0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindTwelvePackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
+    0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindFifteenPackedAddress24_Objectdata, 0x00000000,
+    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000, (unsigned int)g_Pak_SelectPromptKindThirteenPackedAddress24_Objectdata,
     0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x0044FC7C, 0x00080000,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B05C, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x00010000,
+    (unsigned int)g_Pak_SelectPromptKindFourteenPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00070000, 0x00000000, 0x00000000, 0x00010000,
     0x90000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800DE5F4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00010041, 0x00000028, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B80C,
+    0x00000000, 0x00000000, 0x00010041, 0x00000028, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectOperationHeadingPackedAddress24_Objectdata,
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B840, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DF3EC,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B874, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014, 0x0000FF01,
-    0x800DE648, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B920, 0x00000000, 0x00000000, 0x00010041, 0x00000005,
-    0x0000FF01, 0x800DE654, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B9CC, 0x00000000, 0x00000000, 0x00010041,
-    0x00000005, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BB0C, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BA88, 0x00000000, 0x00450000,
-    0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B7D8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B6F8, 0x00070000, 0x00000000, 0x00000000,
-    0x00450000, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B7F4, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040B6F8, 0x00050000, 0x00000000,
+    (unsigned int)g_Pak_SelectOperationDescriptionPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DF3EC,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_FormatOperationChannelLabelPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000014, 0x0000FF01,
+    0x800DE648, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_OpenPakChannelPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00010041, 0x00000005,
+    0x0000FF01, 0x800DE654, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_OpenPakStatusPromptPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00010041,
+    0x00000005, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_SelectPakLoadHeadingPackedAddress24_Objectdata, (unsigned int)g_Pak_CancelPakActionPackedAddress24_Objectdata, 0x00000000, 0x00450000,
+    0x00080000, (unsigned int)g_Pak_EnableOperationHeadingPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Pak_CheckOperationPakChangePackedAddress24_Objectdata, 0x00070000, 0x00000000, 0x00000000,
+    0x00450000, 0x00080000, (unsigned int)g_Pak_DisableOperationHeadingPackedAddress24, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_Pak_CheckOperationPakChangePackedAddress24_Objectdata, 0x00050000, 0x00000000,
     0x00000000, 0x00010000, 0x90000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x08000801, 0x00000008, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BCA8, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000023, 0x0000FF01, 0x800DF3EC,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BD24, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000004, 0x0000FF01,
-    0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BDA0, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000004,
-    0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BE1C, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
-    0x00000004, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BE98, 0x00000000, 0x00000000, 0x00000000,
-    0x00012001, 0x00000023, 0x0000FF01, 0x800DE7C8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BF14, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_00409428, 0x00000000,
-    0x00000000, 0x00012001, 0x00000005, 0x0000FF01, 0x800DE7D4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BF80, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040972C,
-    0x00000000, 0x00450168, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BC20, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)D_0040BB40, 0x00070000,
-    0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BC38, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)D_0040BB40,
-    0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BC54, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
-    (unsigned int)D_0040BB40, 0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BC70, 0x00000000,
-    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)D_0040BB40, 0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0040BC8C,
-    0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)D_0040BB40, 0x00070000, 0x00000000, 0x00000000, 0x00010201, 0x800E99BC,
+    (unsigned int)g_Pak_SelectPakOperationTextOnePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000023, 0x0000FF01, 0x800DF3EC,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Frontend_SelectPakOperationTextTwoPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000004, 0x0000FF01,
+    0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Frontend_SelectPakOperationTextThreePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000004,
+    0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Frontend_SelectPakOperationTextFourPackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000, 0x00010041,
+    0x00000004, 0x0000FF01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Frontend_SelectPakOperationTextFivePackedAddress24_Objectdata, 0x00000000, 0x00000000, 0x00000000,
+    0x00012001, 0x00000023, 0x0000FF01, 0x800DE7C8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Frontend_SelectPakConfirmationLabelPackedAddress24_Objectdata, (unsigned int)g_Pak_ConfirmPendingOperationPackedAddress24_Objectdata, 0x00000000,
+    0x00000000, 0x00012001, 0x00000005, 0x0000FF01, 0x800DE7D4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Menu_SelectEuropeanPakActionLabelPackedAddress24, (unsigned int)g_Timer_CancelPendingOperationPackedAddress24_Objectdata,
+    0x00000000, 0x00450168, 0x00080000, (unsigned int)g_Pak_SelectPakOperationZeroPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)addrLow_Menu_SelectPakOperationActionLabel, 0x00070000,
+    0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_Pak_SelectPakOperationOnePackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)addrLow_Menu_SelectPakOperationActionLabel,
+    0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_Pak_SelectPakOperationTwoPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
+    (unsigned int)addrLow_Menu_SelectPakOperationActionLabel, 0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_Pak_SelectPakOperationThreePackedAddress24_Objectdata, 0x00000000,
+    (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)addrLow_Menu_SelectPakOperationActionLabel, 0x00070000, 0x00000000, 0x00000000, 0x00450168, 0x00080000, (unsigned int)g_Pak_SelectPakOperationFourPackedAddress24_Objectdata,
+    0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)addrLow_Menu_SelectPakOperationActionLabel, 0x00070000, 0x00000000, 0x00000000, 0x00010201, 0x800E99BC,
     0x800DEA50, 0x00000020, 0x00000001, 0x800E99AC, 0x800DEA68, 0x00000080, 0x00000001, 0x800E99A4,
     0x800DEA74, 0x00000100, 0x00000001, 0x800E9998, 0x800DEA5C, 0x00000040, 0x00000001, 0x800E998C,
     0x800DEA80, 0x00000200, 0x00000001, 0x800E9978, 0x800DEA8C, 0x00000400, 0x00000001, 0x800E996C,
@@ -380,8 +380,8 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x800ED4E8, 0xFFFFFFFF, 0x00000001, 0x800E9920, 0x800ED510, 0x0400C7E0, 0x00000001, 0x00010000,
     0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x08000801, 0x00000008, 0x0000FF01, 0x800DE99C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00210041, 0x00000014, 0x0000FF01, 0x800ED4C4, (unsigned int)g_Encoded_DrawTextEntryCursorPackedAddress242, (unsigned int)g_packedCodeAddress24_0043DB40,
-    (unsigned int)g_packedCodeAddress24_0043DC18, 0x00000000, 0x00000000, 0x00010050, 0x00500014, 0x0601FF07, 0x800DF480, (unsigned int)g_Menu_DrawLocalizedMenuItemTextPackedAddress242,
+    0x00000000, 0x00000000, 0x00210041, 0x00000014, 0x0000FF01, 0x800ED4C4, (unsigned int)g_Encoded_DrawTextEntryCursorPackedAddress242, (unsigned int)g_Option_UpdateOptionBit13ItemPackedAddress24_PlaymodeRegionalStorage3,
+    (unsigned int)g_Encoded_TextEntryReturnZeroPackedAddress242, 0x00000000, 0x00000000, 0x00010050, 0x00500014, 0x0601FF07, 0x800DF480, (unsigned int)g_Menu_DrawLocalizedMenuItemTextPackedAddress242,
     0x00000000, (unsigned int)g_Encoded_InsertTextEntryCharacterPackedAddress242, 0x00000000, 0x00000000, 0x00024050, 0x00080000, 0xFF01FE07, 0x800DF494,
     (unsigned int)g_Menu_DrawLocalizedMenuItemTextPackedAddress242, 0x00000000, (unsigned int)g_Encoded_InsertTextEntryCharacterPackedAddress242, 0x00000000, 0x00000000, 0x00024050, 0x00080000, 0xFF01FD07,
     0x800DF4A8, (unsigned int)g_Menu_DrawLocalizedMenuItemTextPackedAddress242, 0x00000000, (unsigned int)g_Encoded_InsertTextEntryCharacterPackedAddress242, 0x00000000, 0x00000000, 0x00024050, 0x00080000,
@@ -415,7 +415,7 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0xFFFAF902, 0x800DF778, (unsigned int)g_Menu_DrawLocalizedMenuItemTextPackedAddress242, 0x00000000, (unsigned int)g_Encoded_ApplyCheatCodePackedAddress242, 0x00000000, 0x00000000, 0x00011001,
     0x00000014, 0x00000000, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Encoded_SetTextEntryResultLabelPackedAddress242, 0x00000000, 0x00000000, 0x00000000,
     0x00310201, 0x00000018, 0x0000FEE2, 0x800DE9CC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Menu_TryCreateMenuPackedAddress242, 0x00000000,
-    0x00450400, 0x00210000, (unsigned int)g_packedCodeAddress24_0043D9A8, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00020000, 0x00000000,
+    0x00450400, 0x00210000, (unsigned int)g_Option_UpdateOptionBit10ItemPackedAddress24_PlaymodeRegionalStorage3, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00020000, 0x00000000,
     0x00000000, 0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800DE978, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00411001, 0x0000000C, 0x0000FF01, 0x800DEB64,
@@ -425,7 +425,7 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x0000FF01, 0x800DEBAC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Option_UpdateOptionBit3ItemPackedAddress242, (unsigned int)g_Option_ToggleOptionBit3PackedAddress242, 0x00000000, 0x00000000,
     0x00411001, 0x00000000, 0x0000FF01, 0x800DEBC4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Option_UpdateOptionBit4ItemPackedAddress242, (unsigned int)g_Option_ToggleOptionBit4PackedAddress242, 0x00000000,
     0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800DEBDC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Option_UpdateOptionBit5ItemPackedAddress242, (unsigned int)g_Option_ToggleOptionBit5PackedAddress242,
-    0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800DEBF4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)D_0043E5C8,
+    0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800DEBF4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)addrLow_CMenuProfile_ProfileModeReturnZero,
     (unsigned int)g_Option_ToggleOptionBit6PackedAddress242, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800DEC24, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
     (unsigned int)g_Option_UpdateOptionBit8ItemPackedAddress242, (unsigned int)g_Option_ToggleOptionBit8PackedAddress242, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01, 0x800DEC0C,
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Option_UpdateOptionBit7ItemPackedAddress242, (unsigned int)g_Option_ToggleOptionBit7PackedAddress242, 0x00000000, 0x00000000, 0x00411001, 0x00000000, 0x0000FF01,
@@ -455,17 +455,17 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000005, 0x00000000, 0x800DDD6C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
     0x00000000, (unsigned int)g_CMenuProfile_ResetPlayerControllerProfilePackedAddress242, 0x00000000, 0x00450C50, 0x00080000, 0x00000000, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243,
     (unsigned int)g_CMenuProfile_HasRoundProgressPackedAddress242, 0x00070000, 0x00000000, 0x00450E48, 0x00000000, 0x00011001, 0x00000000, 0x0000FF02,
-    0x800DDCE8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0043F2F4, 0x00000000, 0x00000000, 0x00010101, 0x00000008,
+    0x800DDCE8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_CMenuProfile_OpenPrimaryProfileMenuPackedAddress242, 0x00000000, 0x00000000, 0x00010101, 0x00000008,
     0x00000000, 0x800DDCF4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_CMenuProfile_BindSelectedDebugFieldPackedAddress242, 0x00000000, 0x00000000, 0x00000000, 0x00411001,
     0x00000008, 0x0000FE01, 0x800DF3EC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_CMenuProfile_FormatProfileQuantityLabelPackedAddress242, (unsigned int)g_CMenuProfile_AdjustControllerSelectionPackedAddress242, 0x00000000, 0x00000000,
     0x00411001, 0x00000002, 0x0000FF01, 0x800DDD48, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_CMenuProfile_UpdateProfileModeLabelPackedAddress24, (unsigned int)g_CMenuProfile_ToggleProfileModePackedAddress242, 0x00000000,
-    0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DDD6C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0043F344,
+    0x00000000, 0x00010041, 0x00000005, 0x0000FF01, 0x800DDD6C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_CMenuProfile_OpenSecondaryProfileMenuPackedAddress242,
     0x00000000, 0x00450D94, 0x00050000, 0x00000000, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_CMenuProfile_HasSavedRoundProgressPackedAddress242, 0x00040000,
     0x00000000, 0x00450F08, 0x00000460, 0x0000000B, 0x00000000, 0x00000000, 0xC2480000, 0xC4610000,
     0x40000000, 0x40000000, 0x40000000, 0x00000032, 0x00000050, 0x3DB2B8C4, 0x00010000, 0x30000000,
     0x00000000, 0x0000FF01, 0x00000387, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00030000,
-    0x00410021, 0x00000000, 0x0000FF01, 0x00450E6C, (unsigned int)g_Menu_DrawMenuModelPackedAddress242, (unsigned int)g_packedCodeAddress24_0043F598, (unsigned int)g_CMenuProfile_UpdatePlayerAnimationChoicePackedAddress242, 0x00000000,
-    0x00000000, 0x00010081, 0x00000019, 0x0000FF01, 0x800DDCDC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_packedCodeAddress24_0043F4A4, (unsigned int)g_CMenuProfile_OpenTimedPlayerDialogPackedAddress242,
+    0x00410021, 0x00000000, 0x0000FF01, 0x00450E6C, (unsigned int)g_Menu_DrawMenuModelPackedAddress242, (unsigned int)g_CMenuProfile_GameSpeedReturnZeroPackedAddress242, (unsigned int)g_CMenuProfile_UpdatePlayerAnimationChoicePackedAddress242, 0x00000000,
+    0x00000000, 0x00010081, 0x00000019, 0x0000FF01, 0x800DDCDC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_CMenuProfile_ItemLabelCallbackBeforeOpenTimedPlayerDialogPackedAddress242, (unsigned int)g_CMenuProfile_OpenTimedPlayerDialogPackedAddress242,
     0x00000000, 0x00450E9C, 0x00030000, (unsigned int)g_CMenuProfile_EnableOwnerControllerPakPackedAddress242, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_CMenuProfile_HasProfileRoundProgressPackedAddress242, 0x00010000,
     0x00000000, 0x00000000, 0x00450E9C, 0x00030000, (unsigned int)g_CMenuProfile_EnableControllerPakAndClearStatePackedAddress242, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, (unsigned int)g_CMenuProfile_HasProfileRoundProgressPackedAddress242,
     0x00010000, 0x00000000, 0x00000000, 0x00010000, 0x30000000, 0x00000000, 0x0000FF01, 0x00000387,
@@ -492,7 +492,7 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x000A0000, 0x00000000, 0x00451284, 0x00010000, 0x10000000, 0x00000000, 0x0000FF01,
     0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000021, 0x00000008,
     0x0000FF01, 0x800DEF60, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010081,
-    0x00000000, 0x0000FF01, 0x800DF164, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_0043F8F8, 0x00000000, 0x00000000,
+    0x00000000, 0x0000FF01, 0x800DF164, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_RequestTransitionWithPakDisabledPackedAddress24_Objectdata, 0x00000000, 0x00000000,
     0x00010201, 0x00000038, 0x0000FF01, 0x800DE9CC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Menu_TryCreateMenuPackedAddress242, 0x00000000,
     0x004511F4, 0x00040000, 0x00000000, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00020000, 0x00000000,
     0x004514E8, 0x00010000, 0x10000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000,
@@ -509,9 +509,9 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000081, 0x0000001E, 0x0000FF01, 0x800DEF30,
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_SelectInitialControllerPackedAddress242, 0x00000000, 0x00000000, 0x00010081, 0x0000000C, 0x0000FF01,
     0x800DEF54, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Initial_UpdateMultiplayerAvailabilityPackedAddress242, (unsigned int)g_Initial_OpenLocalPlayerSetupPackedAddress242, 0x00000000, 0x00000000, 0x00010081, 0x0000000C,
-    0x0000FF01, 0x800DE99C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0043FC48, 0x00000000, 0x00000000, 0x00010081,
-    0x0000000C, 0x0000FF01, 0x800DF2A8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0043FC74, 0x00000000, 0x00000000,
-    0x00010081, 0x0000000C, 0x0000FF01, 0x800DF29C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0043FC1C, 0x00000000,
+    0x0000FF01, 0x800DE99C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_OpenDialogRow1PackedAddress242, 0x00000000, 0x00000000, 0x00010081,
+    0x0000000C, 0x0000FF01, 0x800DF2A8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_OpenDialogRow2PackedAddress242, 0x00000000, 0x00000000,
+    0x00010081, 0x0000000C, 0x0000FF01, 0x800DF29C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_OpenDialogRow3PackedAddress242, 0x00000000,
     0x00000000, 0x00010081, 0x0000000C, 0x0000FF01, 0x800DF2CC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Initial_OpenTrackPreviewMenuPackedAddress242,
     0x00000000, 0x004513EC, 0x00070000, 0x00000000, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00010000,
     0x00000000, 0x00000000, 0x00000000, 0x00010000, 0x00000000, 0x00000000, 0x00000000, 0x00000064,
@@ -573,7 +573,7 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x000007E9, 0x0043FE30, 0x00000000, 0x00000000, 0x110D0000, 0x00010000, 0x00024010,
     0x00030000, 0x00000000, 0x00000820, 0x0043FE30, 0x00000000, 0x00000000, 0x11940005, 0x00000000,
     0x00010081, 0x0000001E, 0x00000000, 0x800DDEA4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Multi_CreateMenuWithDefaultMusicGainPackedAddress242, 0x00000000,
-    0x00451580, 0x00310000, (unsigned int)g_packedCodeAddress24_00440010, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00300000, 0x00000000,
+    0x00451580, 0x00310000, (unsigned int)g_Multi_EmptyItemHookPackedAddress242, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00300000, 0x00000000,
     0x00452674, 0x00000000, 0x00024110, 0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385,
     (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00451C90, 0x00010000, (unsigned int)g_Items_PrepareMenuReturnEuXPackedAddress24, 0x00000000,
     (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00090000, 0x00000000, 0x004522C4, 0x00451C90, 0x00010000, 0x00444478,
@@ -607,7 +607,7 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     (unsigned int)g_Player_ConfigureControllerPakMenuPackedAddress242, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x000E0000, 0x00000000, 0x00000000, 0x00010000,
     0x50000000, 0x00000000, 0x0000FF01, 0x00000385, (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x08000021, 0x00000008, 0x0000FF01, 0x800DF29C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00400041, 0x0000002A, 0x0000FF01, 0x800DDB2C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)D_00445504,
+    0x00000000, 0x00000000, 0x00400041, 0x0000002A, 0x0000FF01, 0x800DDB2C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)addrLow_Pak_OpenMusicPreviewMenu,
     (unsigned int)g_Items_CycleSceneMaskPackedAddress242, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800DDB50, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
     (unsigned int)g_Items_SelectPlayerOption7BTextPackedAddress242, (unsigned int)g_Items_AdjustPlayerOption7BPackedAddress242, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01, 0x800DDB74,
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Items_SelectPlayerOption7CTextPackedAddress242, (unsigned int)g_Items_AdjustPlayerOption7CPackedAddress242, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01,
@@ -622,9 +622,9 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Items_SelectPlayerFlag82TextPackedAddress242, (unsigned int)g_Items_TogglePlayerFlag82PackedAddress242, 0x00000000, 0x00000000, 0x00410041, 0x00000000, 0x0000FF01,
     0x800DDC64, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Items_UpdateScreenModeMenuItemPackedAddress242, (unsigned int)g_Items_RequestScreenModeFadePackedAddress242, 0x00000000, 0x00000000, 0x00410041, 0x00000000,
     0x0000FF01, 0x800DDCAC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_FormatPackedButtonOptionPackedAddress242, (unsigned int)g_Pak_AdjustPackedButtonOptionPackedAddress242, 0x00000000, 0x00000000, 0x00410041,
-    0x00000000, 0x0000FF01, 0x800DDCB8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_packedCodeAddress24_004460E4, (unsigned int)g_Items_AdjustLanguagePackedAddress24, 0x00000000, 0x00000000,
+    0x00000000, 0x0000FF01, 0x800DDCB8, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, (unsigned int)g_Pak_FormatPackedButtonOptionPackedAddress242_EventDrawclippedwidgetchildren, (unsigned int)g_Items_AdjustLanguagePackedAddress24, 0x00000000, 0x00000000,
     0x00010201, 0x00000013, 0x0000FF01, 0x800DDCC4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Menu_TryCreateMenuPackedAddress242, 0x00000000,
-    0x00452060, 0x00110000, (unsigned int)g_overlayTwoThreeObjectRomLinkTarget_004453D4, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00100000, 0x00000000,
+    0x00452060, 0x00110000, (unsigned int)g_Items_SelectSceneMaskTextPackedAddress24_Objectdata, 0x00000000, (unsigned int)g_Menu_DrawMenuEntriesPackedAddress243, 0x00000000, 0x00100000, 0x00000000,
     0x00000000, 0x73002841, 0x495F4F42, 0x00010000, 0x50000000, 0x00000000, 0x0000FF01, 0x00000385,
     (unsigned int)g_Menu_DrawMenuOptionSpritePackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x08000041, 0x00000008, 0x0000FF01,
     0x800DDE8C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000101, 0x0000005D,
@@ -646,14 +646,14 @@ unsigned int g_EventDrawclippedwidgetchildrenPointerWords1[3575] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010041, 0x00000028, 0x0000FF01, 0x800DDE38,
     (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_ResumeMenuAudioPackedAddress24, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01,
     0x800DDE44, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_ReturnCallbackSuccessPackedAddress24, 0x00000000, 0x00000000, 0x00010041, 0x00000000,
-    0x0000FF01, 0x800DDE50, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_0044618C, 0x00000000, 0x00000000, 0x00010041,
-    0x00000000, 0x0000FF01, 0x800DDE5C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_004461B8, 0x00000000, 0x00000000,
-    0x00010041, 0x00000000, 0x0000FF01, 0x800DDE74, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_004461E4, 0x00000000,
+    0x0000FF01, 0x800DDE50, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_PlayerOptionsLabelRow1CallbackPackedAddress242, 0x00000000, 0x00000000, 0x00010041,
+    0x00000000, 0x0000FF01, 0x800DDE5C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_PlayerOptionsLabelRow2CallbackPackedAddress242, 0x00000000, 0x00000000,
+    0x00010041, 0x00000000, 0x0000FF01, 0x800DDE74, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_PlayerOptionsLabelRow3CallbackPackedAddress242, 0x00000000,
     0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DF2CC, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_OpenMusicPreviewMenuPackedAddress24,
     0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DE99C, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000,
-    (unsigned int)g_packedCodeAddress24_00446210, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DDE80, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
-    0x00000000, (unsigned int)g_packedCodeAddress24_0044623C, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DDE8C,
-    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_packedCodeAddress24_00446268, 0x00000000, 0x004524E8, 0x000B0000, (unsigned int)g_Pak_EnterPlayerOptionsPackedAddress24, (unsigned int)g_Pak_RestoreControllerSetupPackedAddress24,
+    (unsigned int)g_Pak_PlayerOptionsLabelRow4CallbackPackedAddress242, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DDE80, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243,
+    0x00000000, (unsigned int)g_Pak_PlayerOptionsLabelRow5CallbackPackedAddress242, 0x00000000, 0x00000000, 0x00010041, 0x00000000, 0x0000FF01, 0x800DDE8C,
+    (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, (unsigned int)g_Pak_PlayerOptionsLabelRow6CallbackPackedAddress242, 0x00000000, 0x004524E8, 0x000B0000, (unsigned int)g_Pak_EnterPlayerOptionsPackedAddress24, (unsigned int)g_Pak_RestoreControllerSetupPackedAddress24,
     (unsigned int)g_Pak_RenderMenuEntryCallbackPackedAddress24, 0x00000000, 0x00020000, 0x00000000, 0x00000000, 0x61682E69, 0x68290000, 0x00000000,
     0x00000041, 0x00000000, 0x0000FF01, 0x800DE8C4, (unsigned int)g_Menu_DrawMenuItemLabelPackedAddress243, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00210101, 0x00000008, 0x0000FF01, 0x800EDD30, (unsigned int)g_Setup_DrawNameCursorPackedAddress24, (unsigned int)g_Setup_UpdateNameCursorPackedAddress24, 0x00000000,

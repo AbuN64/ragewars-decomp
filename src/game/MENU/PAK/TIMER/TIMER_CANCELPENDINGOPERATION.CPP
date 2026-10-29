@@ -22,7 +22,7 @@ static __inline__ void pakShow(MenuPakBeginProfileLoad *menu) {
     if (g_pakUseScannedChannel) channel = g_introSelectedItem;
     else channel = menu->slot->controllerPort;
     if (Snapshot_CheckStatusPrompt(menu, channel, 1)) {
-        D_80153784 = 1;
+        g_pakMenuPromptAccepted = 1;
         Menu_OpenDialog(&g_playerViewRenderContext.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     } else {
         Menu_OpenDialog(&g_playerViewRenderContext.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
@@ -33,10 +33,10 @@ static __inline__ void *pakPrompt(s32 *channel) {
     char *result;
     switch (*channel) {
     case 0:
-    default: result = D_00450BF0_de; break;
-    case 1: result = D_00450C14_de; break;
-    case 2: result = D_00450C38_de; break;
-    case 3: result = D_00450C5C_de; break;
+    default: result = g_pakPortZeroPrompt_de; break;
+    case 1: result = g_pakPortOnePrompt_de; break;
+    case 2: result = g_pakPortTwoPrompt_de; break;
+    case 3: result = g_pakPortThreePrompt_de; break;
     }
     return result;
 }
@@ -45,14 +45,14 @@ static __inline__ void *menuPrompt(MenuPakBeginProfileLoad *menu) {
     s32 channel;
     void *prompt;
         prompt = 0;
-        if (D_8014D4C0_de) {
-            if (D_8014D4EC_de) {
+        if (g_pakSaveMenuActiveDe) {
+            if (g_pakProfileLoadMode_de) {
                 channel = menu->slot->controllerPort;
                 prompt = pakPrompt(&channel);
             }
-        } else if (D_80153760) {
+        } else if (g_pakProfileLoadActive) {
             prompt = D_0044FFA4;
-            if (D_8014D4EC_de) prompt = D_0044FB50;
+            if (g_pakProfileLoadMode_de) prompt = g_pakStatusPromptAlternate;
         }
     return prompt;
 }
@@ -63,8 +63,8 @@ void Note_ProbeStatus(s32);
  /* extern */
 s32 Note_GetStatus(s32);
 
-/* Clears the word held in D_800E28C0. */
-extern s32 D_800E28C0;
+/* Clears the word held in g_pakPlayerMessagePending. */
+extern s32 g_pakPlayerMessagePending;
 
 /* Dialog resources are opaque ROM addresses. The list-builder ABI carries
  * player, slot, and optional formatting data as three raw 32-bit words. */
@@ -80,10 +80,10 @@ s32 Timer_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
     case 0: pakShow(menu); return 1;
     case 1:
     case 2:
-        D_80153784 = 1;
-        D_8014D480 = 0;
+        g_pakMenuPromptAccepted = 1;
+        g_pakCancelStateWord = 0;
         if (g_pakUseScannedChannel) {
-            D_8014ADA0 = 1;
+            g_pakRecheckRequested = 1;
             return 1;
         }
         prompt = menuPrompt(menu);
@@ -132,7 +132,7 @@ s32 Timer_HasSelectedChannel(void) {
 }
 
 void Timer_ClearTimerFlag(void) {
-    D_800E28C0 = 0;
+    g_pakPlayerMessagePending = 0;
 }
 
 #if defined(VERSION_US)

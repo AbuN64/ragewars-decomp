@@ -36,7 +36,7 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 
 /* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through Node_FindWidgetByResourceId, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
 
-/* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
+/* Unless slot index is locked, hides the node in that slot and shows the given node through Widget_SetWidgetFlag40_EquipActivateequipmentpanel, storing it in that slot or, in shared mode, in all four slots. */
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_overlaySlotEventIds, an actor kind at g_overlaySlotEventActorKinds and a handler at g_overlaySlotEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -47,7 +47,7 @@ extern void Node_InsertWidgetBefore(NodeMenuCreateOverlayNode *parent, NodeMenuC
 #elif defined(VERSION_US_REV1)
 #endif
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Widget_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through Node_ClampRectToClip_FrontendOpenresourcearchive and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 extern s32 Widget_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
@@ -100,7 +100,7 @@ void SmpOverlay_ShowSlotById(MenuMultiUserOwnerView *owner, s32 index, s32 id) {
     context->locked[index] = 0;
 }
 
-/* Stores a value into entry i of the word array at offset 0x5C of an object; func_8041B7FC_de reads
+/* Stores a value into entry i of the word array at offset 0x5C of an object; SmpOverlay_GetSlotValue_PakinterfaceRelabelslotrows reads
    the parallel array at offset 0x4C. */
 
 void SmpOverlay_SetSlotValue(struct MenuSlotValueArrayView *object, s32 index, s32 value) {
@@ -122,10 +122,10 @@ s32 SmpOverlay_CountUsedSlots(struct MenuCountedSlotValueArrayView *object) {
     return used;
 }
 
-/* Returns entry i of the word array at offset 0x4C of an object; func_8041B7B4_de writes the
+/* Returns entry i of the word array at offset 0x4C of an object; SmpOverlay_SetSlotValue_SmpOverlay writes the
    parallel array at offset 0x5C. */
 
-struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *object, s32 index) {
+struct WidgetNode *SmpOverlay_GetSlotValue(struct SmpOverlaySlotsView *object, s32 index) {
     return object->values[index];
 }
 
@@ -174,7 +174,7 @@ void SmpOverlay_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlo
     }
 }
 
-/* Stores a value into the word at offset 0x6C of an object; func_8041CE18_de uses it to set that word
+/* Stores a value into the word at offset 0x6C of an object; Preview_SelectPreviewModel_SmpOverlay uses it to set that word
    to one on the object held at offset 4 of the structure g_profileStatisticsScreen points to. */
 
 void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value) {
@@ -221,12 +221,12 @@ g_overlaySlotEventHandlers
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_overlaySlotEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }
@@ -262,7 +262,7 @@ s32 SmpOverlay_ReturnUnhandledEvent(void) {
 }
 
 /* 804196C0_25.CPP */
-/* Calls MarkMenuEventHandled and, for an event of kind one on a slot with no word at 0x5C whose child at 0x4C has flag 0x10 of its halfword at 0x12 set and a target at 0x34, passes the owner, the slot and the target to func_8041B8DC_de, returning zero. */
+/* Calls MarkMenuEventHandled and, for an event of kind one on a slot with no word at 0x5C whose child at 0x4C has flag 0x10 of its halfword at 0x12 set and a target at 0x34, passes the owner, the slot and the target to SmpOverlay_ShowSlotNode_SmpOverlay, returning zero. */
 
 /* After MarkMenuEventHandled, forwards an event for a channel to Menu_RouteElementEvent with the channel's handler id
    (short at 0xC of the handler at 0x4C) when the channel is not muted (word at 0x5C) and has a handler;
@@ -392,7 +392,7 @@ s32 SmpOverlay_FreeEventObject(void *allocation) {
 #endif
 extern SlotDialog *g_pakDialog;
 
-/* Calls func_8040E928_de with flag 1 on each of the list's items (count at 0x48, items from 0x4C) and
+/* Calls Widget_SetWidgetFlag40_EquipActivateequipmentpanel with flag 1 on each of the list's items (count at 0x48, items from 0x4C) and
    returns 0. */
 
 /* Updates the slot-selection dialog after availability and capacity probes, choosing unavailable, empty and confirmation states or entering the requested transition. The negative probe statuses -4, -3 and -1 trigger the error transition. */
@@ -447,7 +447,7 @@ extern s32 g_pakDialogProbeStateUsRev1;
 
 #endif
 
-/* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
+/* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets g_pakRecheckRequested and returns
    one. */
 
 /* Refreshes each of the four ports through Note_ProbeStatus and sets field 0x1C of g_pakDialog as soon as one reports status 0, -1, -3 or -4 through Note_GetStatus, clearing it otherwise. */
@@ -459,8 +459,8 @@ extern void SmpOverlay_RefreshPakDialog(void);
 
 /* Builds screen state g_pakDialog under a parent window: allocates its 0x2C bytes, keeps the parent,
    opens windows 0x3C3 (shown), 0x3C9, 0x3C4 and 0x3C5 (hidden) at 0x4 to 0x10, clears the words at
-   0x14 and 0x18, resets through func_8040C428_de(0) and Tsmos_DeactivateControllerState, sets g_introSelectedItem to -1 and
-   D_80146D70 to 0, releases the resources of g_gameSession and of its block at 0x3C8, clears the
+   0x14 and 0x18, resets through Frontend_RequestScreenMode_AchieveUpdateresultsscreen(0) and Tsmos_DeactivateControllerState, sets g_introSelectedItem to -1 and
+   g_introSelectionState to 0, releases the resources of g_gameSession and of its block at 0x3C8, clears the
    word at 0x1C and returns zero. */
 
 extern void SetN64_ResetSessionPlayerPools(void *, s32, s32);
@@ -553,9 +553,9 @@ void SmpOverlay_RefreshPakDialog(void) {
     }
     if ((canContinue == 1) || (g_combinedControllerProfile.buttons & 0x1000)) {
         MarkMenuEventHandled();
-        D_80146D60 = 1;
-        D_800E28CC = 1;
-        D_8014AD94 = 0;
+        g_pakRequestLatched = 1;
+        g_pakStartButtonLatched = 1;
+        g_pakScanActive = 0;
         if (canContinue == 0) {
 #if defined(VERSION_DE)
             g_pakProfileOperationPhase = 0;
@@ -611,7 +611,7 @@ s32 SmpOverlay_FinishPakDialog(void) {
     Tsmos_DeactivateControllerState();
     MarkMenuEventHandled();
     SmXlate_SwitchScreen(2);
-    D_8014ADA0 = 1;
+    g_pakRecheckRequested = 1;
     return 1;
 }
 
@@ -640,7 +640,7 @@ void SmpOverlay_AdvancePakDialogPort(void) {
         Tsmos_DeactivateControllerState();
         MarkMenuEventHandled();
         SmXlate_SwitchScreen(2);
-        D_8014ADA0 = 1;
+        g_pakRecheckRequested = 1;
     } else {
         SmpOverlay_RefreshPakDialog();
     }
@@ -692,7 +692,7 @@ s32 SmpOverlay_CreatePakDialog(void *parent) {
     Frontend_RequestScreenMode(0);
     Tsmos_DeactivateControllerState();
     g_introSelectedItem = -1;
-    D_80146D70 = 0;
+    g_introSelectionState = 0;
     resources = (char *)&g_gameSession;
     SetN64_ResetSessionPlayerPools(resources, 0, 0);
     Scene_LoadLevelResources(resources + 0x3C8, 0, 0);
@@ -772,9 +772,9 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
 #else
     case 0x3C6:
 #endif
-        D_80146D60 = 1;
-        D_800E28CC = 1;
-        D_8014AD94 = 0;
+        g_pakRequestLatched = 1;
+        g_pakStartButtonLatched = 1;
+        g_pakScanActive = 0;
 #if defined(VERSION_EU)
         g_pakDialogProbeStateEu = 1;
 #elif defined(VERSION_EU_X)
@@ -809,12 +809,12 @@ s32 SmpOverlay_DispatchPakDialogEvent(void *widget, s32 eventId, s32 eventData0,
                 actor_kind = ((struct MenuActorInputView *) ((char *) widget))->input;
                 table_kind = ((struct AnimationEventMaskView *) (((char *) (&g_pakDialogEventActorKinds)) + offset))->value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler802A2B50 *)entry)(widget, eventId, eventData0, eventData1, eventData2);
+                    return (*(WidgetEventHandler *)entry)(widget, eventId, eventData0, eventData1, eventData2);
                 }
             }
             entry += 0xC;
             offset += 0xC;
-        } while (*(Handler802A2B50 *)entry != 0);
+        } while (*(WidgetEventHandler *)entry != 0);
     }
     return 0;
 }

@@ -5,5 +5,5 @@
 unsigned char g_SystemRunpimanagerTrailingBytes[8] = { 0x3C, 0x11, 0x80, 0x15, 0x26, 0x31, 0x86, 0xC0 };
 #endif
 
-/* DATA_800CCB9C.CPP */
+/* SYSTEM_RUNPIMANAGER_DATA.CPP */
 

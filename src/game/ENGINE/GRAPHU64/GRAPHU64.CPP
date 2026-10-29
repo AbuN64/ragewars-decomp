@@ -2,7 +2,7 @@
 #include "TYPES.H"
 
 /* 800C97DC.CPP */
-/* ROM-grounded data: src/rw_pool_8026F620_CA3DC_us_rev1.c */
+/* ROM-grounded data: src/g_graphu64_MultiplyAffineMatricesConstantWords_Graphu64.c */
 const unsigned int g_graphu64_MultiplyAffineMatricesConstantWords[1] = {
     0x3F800000,
 };

@@ -18,7 +18,7 @@ void Items_CacheIdentifierBand(void) {
     g_controllerReturnPending = 1;
 }
 #else
-INCLUDE_ASM("ovl_80400000", Items_CacheIdentifierBand);
+INCLUDE_ASM("ovl_frontendMenu", Items_CacheIdentifierBand);
 #endif
 #endif
 

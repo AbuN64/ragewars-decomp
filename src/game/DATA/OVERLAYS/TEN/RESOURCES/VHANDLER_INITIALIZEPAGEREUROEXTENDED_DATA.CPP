@@ -2,7 +2,7 @@
 #include "TYPES.H"
 
 #if defined(VERSION_DE)
-u32 data_writable_800FF1B0[30] = {
+u32 k_VhandlerInitializepagereuroextendedEncodedBlockDe[30] = {
     0x3DD1A331, 0x0FE1150F, 0x3161E6A1, 0x6F6137EF, 0x2612912E, 0xA1F34005,
     0x0228B2E2, 0x13A1B410, 0xF0F15124, 0x0E2FA16C, 0x29CD8A02, 0x34ED5CB3,
     0xC2E2200F, 0x20EEE1A2, 0xB3BFE01D, 0x22FEE3EF, 0x10B12F30, 0xF01F0F5F,
@@ -19,12 +19,12 @@ unsigned int k_VhandlerInitializepagereuroextendedEncodedWords[2] = {
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800FF230[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedWordFirst[1] = {
     0xB1B31D31,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800FF230[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedWordFirst[1] = {
     0x6A0402B3,
 };
 #endif
@@ -35,7 +35,7 @@ unsigned int rodata_writable_800FF230[1] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int data_unresolved_800FD234[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedTailUs[1] = {
     0x010A5C6C,
 };
 #endif
@@ -45,19 +45,19 @@ unsigned int data_unresolved_800FD234[1] = {
 #endif
 
 #if defined(VERSION_DE)
-unsigned int data_unresolved_800FF234[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedTailDe[1] = {
     0xFFDEDA0B,
 };
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-unsigned int rodata_writable_800FF238[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedWordSecond[1] = {
     0x2EA1EC3D,
 };
 #endif
 #if defined(VERSION_US)
-unsigned int rodata_writable_800FF238[1] = {
+unsigned int k_VhandlerInitializepagereuroextendedEncodedWordSecond[1] = {
     0x0402AB01,
 };
 #endif

@@ -6,10 +6,10 @@ typedef struct Shared_Scratch Shared_Scratch;
 struct Shared_Scratch {
     union {
         struct {
-            s32 damage[5]; /* +0x0: src/func_80220EB0.c */
+            s32 damage[5]; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
         } view0_0;
         struct {
-            CVector3 to; /* +0x0: src/func_80220EB0.c */
+            CVector3 to; /* +0x0: src/Player_UpdateBodyMovementAndActions_GameplayMovement.c */
         } view0_1;
     } views0;
 };

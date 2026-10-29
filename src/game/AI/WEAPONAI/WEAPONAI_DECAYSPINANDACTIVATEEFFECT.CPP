@@ -14,7 +14,7 @@
 /* Runs a spinning weapon's barrel for its holder at 0x1D8: unless the weapon is in state 4 the spin
    speed at 0x128 decays, the spin angle at 0x124 advances by twice the speed per frame, and the
    holder's model animation speed at 0x168 follows the spin speed, capped at 1; while the fire input
-   0x4000 is held and the holder is not stunned, a single player game (D_801462D5) without infinite
+   0x4000 is held and the holder is not stunned, a single player game (g_gameControllerMode) without infinite
    ammunition at 0x1450 checks the ammunition through Player_GetProfileAchievementFlag and, when it is empty, clicks
    (sound 0xD4D) and shows the empty message on the holder's view; with ammunition and a loaded
    weapon at 0x5F6 it plays the wind-up sound 0x7BC unless already firing, sets the firing flags

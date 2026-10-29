@@ -724,7 +724,7 @@ const unsigned int g_weaponPermissionNoticeDuration_StorageWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802327F4_C8D00_us_rev1.c */
+/* ROM-grounded data: src/g_weaponPermissionNoticeDuration_StorageWords_us_rev1.c */
 const unsigned int g_Weapon_CheckSinglePlayerFirePermissionConstantWords[1] = {
     0x3F800000,
 };
@@ -738,7 +738,7 @@ const unsigned int g_weaponFiveChargeRateScale_StorageWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802328D8_C8D04_us_rev1.c */
+/* ROM-grounded data: src/g_weaponFiveChargeRateScale_StorageWords_us_rev1.c */
 const unsigned int g_Weapon_InitializeChargeForWeaponFiveConstantWords[1] = {
     0x41700000,
 };
@@ -752,14 +752,14 @@ const unsigned int g_weaponFireInitialValue_StorageWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80232A48_C8D08_us_rev1.c */
+/* ROM-grounded data: src/g_weaponFireInitialValue_StorageWords_us_rev1.c */
 const unsigned int g_Weapon_InitializeFireStateCallbacksConstantWords[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800C810C.CPP */
-/* ROM-grounded data: src/rw_pool_80232BD0_C8D0C_us_rev1.c */
+/* ROM-grounded data: src/g_weaponTriggerStunThreshold_StorageWords_us_rev1.c */
 const unsigned int g_weaponTriggerStunThreshold_StorageWords[1] = {
     0x3DCCCCCD,
 };
@@ -772,7 +772,7 @@ const unsigned int g_weaponEightChargeRateScale_StorageWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80232C88_C8D10_us_rev1.c */
+/* ROM-grounded data: src/g_weaponEightChargeRateScale_StorageWords_us_rev1.c */
 const unsigned int k_WeaponEncodedWords[1] = {
     0x41700000,
 };
@@ -784,7 +784,7 @@ const unsigned int g_Weapon_InitializeChargeForWeaponEightConstantWords[7] = {
 };
 
 /* 800C8130.CPP */
-/* ROM-grounded data: src/rw_pool_80232F8C_C8D30_us_rev1.c */
+/* ROM-grounded data: src/g_weaponSideYawSpeedScale_StorageWords_us_rev1.c */
 const unsigned int g_weaponSideYawSpeedScale_StorageWords[1] = {
     0x3FC00000,
 };
@@ -797,26 +797,26 @@ const unsigned int g_weaponStartupChargeRateScale_StorageWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802330AC_C8D34_us_rev1.c */
+/* ROM-grounded data: src/g_weaponStartupChargeRateScale_StorageWords_us_rev1.c */
 const unsigned int g_Weapon_InitializeChargeAndStartupCuesConstantWords[1] = {
     0x41700000,
 };
 #endif
 
 /* 800C8138.CPP */
-/* ROM-grounded data: src/rw_pool_802331FC_C8D38_us_rev1.c */
+/* ROM-grounded data: src/g_weaponChargeEntryCueAndRate_StorageWords_us_rev1.c */
 const unsigned int g_weaponChargeEntryCueAndRate_StorageWords[2] = {
     0x40200000, 0x41700000,
 };
 
 /* 800C8140.CPP */
-/* ROM-grounded data: src/rw_pool_8023331C_C8D40_us_rev1.c */
+/* ROM-grounded data: src/g_weaponStateEightDelay_StorageWords_us_rev1.c */
 const unsigned int g_weaponStateEightDelay_StorageWords[1] = {
     0x43960000,
 };
 
 /* 800C8144.CPP */
-/* ROM-grounded data: src/rw_pool_8023334C_C8D44_us_rev1.c */
+/* ROM-grounded data: src/g_weaponAlternateFireAnimationThreshold_StorageWords_us_rev1.c */
 const unsigned int g_weaponAlternateFireAnimationThreshold_StorageWords[1] = {
     0x40800000,
 };
@@ -827,7 +827,7 @@ const unsigned int g_weaponActionFiveSpinTargetScale_StorageWords[8] = {
 };
 
 /* 800C8168.CPP */
-/* ROM-grounded data: src/rw_pool_8023371C_C8D68_us_rev1.c */
+/* ROM-grounded data: src/g_weaponReleaseSpinTarget_StorageWords_us_rev1.c */
 const unsigned int g_weaponReleaseSpinTarget_StorageWords[1] = {
     0x44160000,
 };

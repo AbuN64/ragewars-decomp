@@ -5,24 +5,24 @@ unsigned int g_SchedHandleretraceWords1[6] = {
 };
 
 #if defined(VERSION_US)
-char data_unresolved_800CD628[19] =
+char g_schedHandleretraceTailBytesUs[19] =
     "EMACIATO\000\000\000\000\000\000\000\001\000\000\000";
 #endif
 
 #if defined(VERSION_EU_X)
-char data_unresolved_800CECC8[19] =
+char g_schedHandleretraceTailBytesEuX[19] =
     "E\000\000\000SENT\000\000\000\000\000\000\000\001\000\000\000";
 #endif
 
 #if defined(VERSION_EU)
-unsigned char data_unresolved_800CE2F8[19] = {
+unsigned char g_schedHandleretraceTailBytesEu[19] = {
     0x00, 0x20, 0x7C, 0xB4, 0x80, 0x11, 0x00, 0xB0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
     0x00, 0x00, 0x00,
 };
 #endif
 
 #if defined(VERSION_DE)
-unsigned char data_unresolved_800CD718[19] = {
+unsigned char g_schedHandleretraceTailBytesDe[19] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
     0x00, 0x00, 0x00,
 };

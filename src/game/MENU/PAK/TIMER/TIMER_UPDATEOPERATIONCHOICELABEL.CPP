@@ -22,7 +22,7 @@ extern s32 g_pakUseScannedChannel;
 extern char *g_unlockedLevelResultLabel[];
 
 
-/* Sets D_80153780 to one; Timer_DisableAlternatePrompt clears it. */
+/* Sets g_pakAlternateOptionEnabled to one; Timer_DisableAlternatePrompt clears it. */
 
 
 
@@ -41,7 +41,7 @@ extern char *g_unlockedLevelResultLabel[];
 #endif
 
 /* Formats the word at offset 0x1C of the structure g_controllerPakSnapshotPayload points to, shifted down eight bits,
-   into a field's text with the format D_800E0DA4, three bytes before the length Menu_CountLineChars
+   into a field's text with the format g_pakFormatInt3_TimerUpdateoperationchoicelabel, three bytes before the length Menu_CountLineChars
    reports, and returns zero. */
 
 
@@ -60,30 +60,30 @@ s32 Timer_UpdateOperationChoiceLabel(struct Field *field, s16 *option_ptr) {
 
     option = *option_ptr;
     rel = option - 3;
-    if (D_80153760 != 0) {
-        if (D_8014D4EC_de != 0) {
-            field->text = D_800D373C;
+    if (g_pakProfileLoadActive != 0) {
+        if (g_pakProfileLoadMode_de != 0) {
+            field->text = g_pakProfileLoadProfileChoiceLabels;
         } else {
-            field->text = D_800D3744;
+            field->text = g_pakProfileLoadSnapshotChoiceLabels;
         }
         goto done;
     }
-    if (D_8014D4C0_de != 0) {
+    if (g_pakSaveMenuActiveDe != 0) {
         if (rel < 16) {
-            field->text = D_800D3750;
+            field->text = g_pakSaveMenuNoteSlotChoiceLabels;
             return 0;
         }
         if (option == 0x15) {
             field->text = g_unlockedLevelResultLabel;
-        } else if (D_8014D4EC_de != 0) {
-            field->text = D_800D3740;
+        } else if (g_pakProfileLoadMode_de != 0) {
+            field->text = g_pakSaveMenuProfileChoiceLabels;
         } else {
-            field->text = D_800D3748;
+            field->text = g_pakSaveMenuSnapshotChoiceLabels;
         }
         goto done;
     }
     if (g_pakUseScannedChannel != 0) {
-        field->text = D_800D3760;
+        field->text = g_pakScannedChannelChoiceLabels;
     }
 done:
     return 0;
@@ -91,24 +91,24 @@ done:
 
 s32 Timer_SetManagerHeading(struct MenuLabelPointerView *record) {
     if (g_pakUseScannedChannel != 0) {
-        record->label = D_800D7794;
+        record->label = g_pakScannedChannelManagerHeading;
     }
     return 0;
 }
 
 void Timer_EnableAlternatePrompt(void) {
-    D_80153780 = 1;
+    g_pakAlternateOptionEnabled = 1;
 }
 
 void Timer_DisableAlternatePrompt(void) {
-    D_80153780 = 0;
+    g_pakAlternateOptionEnabled = 0;
 }
 
 s32 Timer_UpdateAlternatePromptLabel(struct PakActionLabelView *field) {
-    if (D_80153780 != 0) {
+    if (g_pakAlternateOptionEnabled != 0) {
         field->text = g_pakNoteLabelSlots;
     } else {
-        field->text = D_800D77D0;
+        field->text = g_pakAlternatePromptDefaultLabel;
     }
     return 0;
 }

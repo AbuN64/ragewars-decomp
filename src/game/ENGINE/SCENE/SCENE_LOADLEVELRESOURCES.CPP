@@ -1,6 +1,6 @@
 #include "sdk/LIBC.H"
 #include "COMMON/SCENERECAT10C0.H"
-#include "COMMON/LONE/D_800E4680.H"
+#include "COMMON/LONE/g_currentStagePreset.H"
 #include "SCENE/SCENE_UPDATEANDDRAWWORLD.H"
 #include "TYPES.H"
 #include "COMMON/CACHE_RELEASERESOURCE.H"
@@ -66,7 +66,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 
 /* 80286050_2.CPP */
-/* Collects up to sixteen switch objects (descriptor type 0xD) of a world into its switch list, first syncing each one's flag 4 with the switch table D_800E4680 when its kind is 0xD34 to 0xD37: model 0xD2B follows table byte 1, models 0xD2C to 0xD2E follow their own table byte, and any other model clears the flag; the flag is set when the byte is zero. */
+/* Collects up to sixteen switch objects (descriptor type 0xD) of a world into its switch list, first syncing each one's flag 4 with the switch table g_currentStagePreset when its kind is 0xD34 to 0xD37: model 0xD2B follows table byte 1, models 0xD2C to 0xD2E follow their own table byte, and any other model clears the flag; the flag is set when the byte is zero. */
 
 void Scene_CollectLevelSwitches(SceneLevelSwitchCollectionView *world) {
     SceneSwitchObjectView *object;
@@ -83,10 +83,10 @@ void Scene_CollectLevelSwitches(SceneLevelSwitchCollectionView *world) {
     for (i = 0; i < world->count; object++, i++) {
         descriptor = object->descriptor;
         if (descriptor->type == 0xD) {
-            if (D_800E4680 != 0 && (unsigned)(descriptor->kind - 0xD34) < 4) {
+            if (g_currentStagePreset != 0 && (unsigned)(descriptor->kind - 0xD34) < 4) {
                 switch (descriptor->model) {
                 case 0xD2B:
-                    if (D_800E4680[1] == 0) {
+                    if (g_currentStagePreset[1] == 0) {
                         descriptor->flags |= 4;
                     } else {
                         descriptor->flags &= ~4;
@@ -95,7 +95,7 @@ void Scene_CollectLevelSwitches(SceneLevelSwitchCollectionView *world) {
                 case 0xD2C:
                 case 0xD2D:
                 case 0xD2E:
-                    if (D_800E4680[object->descriptor->model - 0xD2A] == 0) {
+                    if (g_currentStagePreset[object->descriptor->model - 0xD2A] == 0) {
                         object->descriptor->flags |= 4;
                         break;
                     }
@@ -172,9 +172,9 @@ extern unsigned char s_matricesText[];                          /* unable to gen
                           /* unable to generate initializer: unknown type; const */
 extern unsigned char s_collisionText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char g_gridBoundsAndSectionsIndexText[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5134_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char g_sceneIndexResourceTag[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_visibilityText[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5154_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char g_visibilityHeaderResourceTag[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_linksText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_levelPathsText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_levelInfoText[];                          /* unable to generate initializer: unknown type; const */
@@ -332,7 +332,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 allowTransition) {
                         OnScreen_StartSecondStatusBar(&g_tutorialStatusBars, playerActor, &((struct SceneStatusBarModeView *)playerHudProfile)->address84);
                     }
                     if (playerActor->profile->unk80 == 0xB) {
-                        OnScreen_StartFirstStatusBar(&g_tutorialStatusBars, playerActor, D_800D3164);
+                        OnScreen_StartFirstStatusBar(&g_tutorialStatusBars, playerActor, g_firstStatusBarTarget);
                     }
                 }
             }
@@ -452,12 +452,12 @@ scene_size_done:
     (((struct SceneResourceStateView *)(table))->gridBoundsAndSections) = (void *) *gridBoundsHandle;
     sceneDirectoryEntry = SetN64_GetDirectoryEntry((((struct SceneResourceStateView *)(table))->sceneResources), resourceKey, 5);
     (((struct SceneResourceStateView *)(table))->sceneDirectoryKey) = sceneDirectoryEntry;
-    (((struct SceneResourceStateView *)(table))->sceneIndexResourceHandle) = Cache_RequestWordCountedResourcePinned(0, &((struct SceneResourceStateView *)table)->sceneIndexDataSlot, sceneDirectoryEntry, &D_800C5134_de);
+    (((struct SceneResourceStateView *)(table))->sceneIndexResourceHandle) = Cache_RequestWordCountedResourcePinned(0, &((struct SceneResourceStateView *)table)->sceneIndexDataSlot, sceneDirectoryEntry, &g_sceneIndexResourceTag);
     if (*(((struct SceneResourceStateView *)(table))->sceneResources) >= 0xD) {
         visibilityResourceKey = SetN64_GetDirectoryEntry((((struct SceneResourceStateView *)(table))->sceneResources), resourceKey, 0xC);
         (((struct SceneResourceStateView *)(table))->visibilityResourceKey) = visibilityResourceKey;
         (((struct SceneResourceStateView *)(table))->visibilityResourceHandle) = Cache_RequestWordCountedResourcePinned(0, &((struct SceneResourceStateView *)table)->visibilityTable, visibilityResourceKey, &s_visibilityText);
-        sceneResourceHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->visibilityTable), 0, (((struct SceneResourceStateView *)(table))->visibilityResourceKey), table, 0, &D_800C5154_de);
+        sceneResourceHandle = Cache_RequestPackSection(0, (((struct SceneResourceStateView *)(table))->visibilityTable), 0, (((struct SceneResourceStateView *)(table))->visibilityResourceKey), table, 0, &g_visibilityHeaderResourceTag);
         visibilityHeader = *sceneResourceHandle;
         *(struct SceneResourceSixWordRecord *)&((struct SceneResourceStateView *)table)->visibilityHeaderWord0 = *visibilityHeader;
         Cache_ReleaseResource(0, sceneResourceHandle);
@@ -732,7 +732,7 @@ block_122:
 /* Native resident constant storage; absolute access symbols retain their addresses. */
 
 /* SCENE_2.CPP */
-/* Spawns an entity through Link_DispatchTrigger when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table D_8011FF08 is clear. */
+/* Spawns an entity through Link_DispatchTrigger when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table g_levelFlagTable is clear. */
 
 extern s32 SetN64_GetPackSectionSize(void *table, s32 index);
 
@@ -1111,7 +1111,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
 #undef ACTOR_OVERLAPS
 
 /* 800CA2FC.CPP */
-/* ROM-grounded data: src/rw_pool_80287F18_CAEFC_us_rev1.c */
+/* ROM-grounded data: src/g_scene_UpdateActorVisibilityConstantWords_SceneLoadlevelresources.c */
 const unsigned int g_scene_UpdateActorVisibilityConstantWords[1] = {
     0x453B8000,
 };

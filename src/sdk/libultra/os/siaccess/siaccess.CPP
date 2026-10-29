@@ -19,7 +19,7 @@ void __osSiCreateAccessQueue(void) {
 
 /* 802BECB0_2.CPP */
 /* Takes the access token from the message queue g_serialInterfaceAccessQueue, first creating that one-message queue
-   over D_8014EA70 with osCreateMesgQueue and seeding it with a null message through func_802BB420_de
+   over g_serialInterfaceAccessMessage_Siaccess with osCreateMesgQueue and seeding it with a null message through osSendMesg_Mutex
    when g_serialInterfaceAccessQueueInitialized says it does not exist yet. Adapted from __osPiGetAccess with the queue, its buffer and its flag changed. */
 
 static inline void create_access_queue(void) {

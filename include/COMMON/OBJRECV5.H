@@ -85,14 +85,14 @@ struct SubActor {
 struct FragTagLinkedActorView;
 typedef struct FragTagLinkedActorView FragTagLinkedActorView;
 
-struct PlayerCode80225D1080229FA0;
-struct PlayerCode80225D1080229FA0 {
+struct PlayerProfileView;
+struct PlayerProfileView {
     char pad0[146];
     u8 unk92;
     u8 unk93;
 };
 struct TransientDamagePlayerView;
-struct PlayerCode80225D1080229FA0;
+struct PlayerProfileView;
 struct TransientDamagePlayerView {
     u8 actorKind;
     char pad1[227];
@@ -104,7 +104,7 @@ struct TransientDamagePlayerView {
     char pad130[168];
     struct TransientDamagePlayerView * player;
     char pad1dc[1020];
-    struct PlayerCode80225D1080229FA0 * profile;
+    struct PlayerProfileView * profile;
     char pad5dc[3700];
     int computerControlled;
 };
@@ -222,8 +222,8 @@ struct ViewState {
     f32 height;
 };
 
-struct PlayerCode80225D10;
-typedef struct PlayerCode80225D10 PlayerCode80225D10;
+struct PlayerControllerView;
+typedef struct PlayerControllerView PlayerControllerView;
 
 
 
@@ -245,8 +245,8 @@ struct Game {
 };
 
 
-struct ViewCode80225D10;
-typedef struct ViewCode80225D10 ViewCode80225D10;
+struct FadeEmitterView;
+typedef struct FadeEmitterView FadeEmitterView;
 
 struct ActorNode;
 struct SubActor;
@@ -325,8 +325,8 @@ struct FragTagPlayerListView {
 struct HudGlobals;
 typedef struct HudGlobals HudGlobals;
 
-struct ViewCode80225D10;
-struct ViewCode80225D10 {
+struct FadeEmitterView;
+struct FadeEmitterView {
     char pad0[0x128];
     Triple position;
 };
@@ -352,7 +352,7 @@ struct Shared_StateInfo;
 struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
-struct ViewCode80225D10;
+struct FadeEmitterView;
 
 struct Game;
 typedef struct Game Game;
@@ -522,8 +522,8 @@ struct ObjRecV5 {
 struct PlayerWorldActorTables;
 typedef struct PlayerWorldActorTables PlayerWorldActorTables;
 
-struct PlayerCode80225D10;
-struct PlayerCode80225D10 {
+struct PlayerControllerView;
+struct PlayerControllerView {
     char pad0[0xE4];
     u16 kind;
     char padE6[0x5D8 - 0xE6];
@@ -588,7 +588,7 @@ struct Round {
     struct ActorNode *players;
 };
 
-struct PlayerCode80225D10;
+struct PlayerControllerView;
 
 
 struct SharedPlayer;

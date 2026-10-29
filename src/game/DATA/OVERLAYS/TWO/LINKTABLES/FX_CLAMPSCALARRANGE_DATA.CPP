@@ -8,7 +8,7 @@ const unsigned int g_fx_ResetEffectContributionConstantWords1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802A5A24_CBC30_us_rev1.c */
+/* ROM-grounded data: src/g_fx_ResetEffectContributionConstantWords2_FxClampscalarrangeData.c */
 const unsigned int g_fx_ResetEffectContributionConstantWords2[1] = {
     0x437F0000,
 };
@@ -22,7 +22,7 @@ const unsigned int g_fx_ClampScalarRangeConstantWords1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_802A5B4C_CBC34_us_rev1.c */
+/* ROM-grounded data: src/g_fx_ClampScalarRangeConstantWords2_FxClampscalarrangeData.c */
 const unsigned int g_fx_ClampScalarRangeConstantWords2[1] = {
     0x437F0000,
 };

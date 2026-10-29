@@ -125,7 +125,7 @@ unsigned int g_GAudiopitchratiocurveWords4[4] = {
 #endif
 
 /* 800D0DA0.CPP */
-/* ROM-grounded data: src/rw_pool_8025F434_D19A0_us_rev1.c */
+/* ROM-grounded data: src/g_GAudiopitchratiocurveWords2_GAudiopitchratiocurve.c */
 const unsigned int g_GAudiopitchratiocurveWords2[1] = {
     0x42B40000,
 };

@@ -17,7 +17,7 @@
 
 /* 800E1FC0.CPP */
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_80439EC4_E2BC0_us_rev1.c */
+/* ROM-grounded data: src/g_PlayerWords2_Player.c */
 const unsigned int g_PlayerWords2[1] = {
     0x3F800000,
 };
@@ -30,7 +30,7 @@ const unsigned int g_PlayerWords1[7] = {
 
 /* 8043A0B0_6.CPP */
 
-/* CODE_8043A0B0.CPP */
+/* Player_CreateFourPlayerResults_Player.CPP */
 extern struct FourPlayerResultsScreen *g_equipmentAndResultsScreen;
 extern Shared_PlayerSettingsRecord g_playerSettings[];
 extern struct PlayerSettingsOptionRow g_characterPortraitRecords[];
@@ -150,13 +150,13 @@ extern s32 Frontend_InitModelPreviewTransform(void *, s32, CVector3, CVector3);
 extern void Frontend_SetPreviewRotation(void *, CVector3);
 extern void Frontend_SetPreviewRotationSpeed(void *, CVector3);
 #if defined(VERSION_EU)
-/* eu keeps these two floats elsewhere: D_800E1FC4/D_800E1FD4 name its string tables */
-#define D_800E1FC4 g_fourPlayerBadgeScaleEu
-#define D_800E1FD4 g_fourPlayerBadgeSecondYEu
+/* eu keeps these two floats elsewhere: g_matchResult5027TextEu/g_matchResult5011TextEu name its string tables */
+#define g_matchResult5027TextEu g_fourPlayerBadgeScaleEu
+#define g_matchResult5011TextEu g_fourPlayerBadgeSecondYEu
 #endif
-extern f32 D_800E1FC4;
+extern f32 g_matchResult5027TextEu;
 extern f32 g_fourPlayerBadgeAngularVelocity;
-extern f32 D_800E1FD4;
+extern f32 g_matchResult5011TextEu;
 extern f32 g_fourPlayerBadgeUpperY;
 extern f32 g_fourPlayerBadgeLowerY;
 /* Initialize four rotating result badges and reveal enabled player cards. */
@@ -174,9 +174,9 @@ s32 Player_StartFourPlayerResults(void) {
     Tsmos_SetModeOneFlag(1);
     i = 0;
     badgeOffset = (s32)&((struct FourPlayerResultsScreen *)0)->badges;
-    scale.x = D_800E1FC4;
-    scale.y = D_800E1FC4;
-    scale.z = D_800E1FC4;
+    scale.x = g_matchResult5027TextEu;
+    scale.y = g_matchResult5027TextEu;
+    scale.z = g_matchResult5027TextEu;
     rotation.x = 0;
     rotation.y = 0;
     rotation.z = 0;
@@ -193,7 +193,7 @@ s32 Player_StartFourPlayerResults(void) {
             position.y = g_fourPlayerBadgeBaseY;
             break;
         case 1:
-            position.y = D_800E1FD4;
+            position.y = g_matchResult5011TextEu;
             break;
         case 2:
             position.y = g_fourPlayerBadgeUpperY;
@@ -350,7 +350,7 @@ s32 Player_DrawFourPlayerResults(void *window, void *item, s32 event) {
     return 0;
 }
 
-/* DATA_800DCC34.CPP */
+/* s_mitetText_Player.CPP */
 #if defined(VERSION_US)
 /* ROM-grounded data for us; supplied-list member has no us-rev1 placement. */
 unsigned int s_mitetText[4] = {

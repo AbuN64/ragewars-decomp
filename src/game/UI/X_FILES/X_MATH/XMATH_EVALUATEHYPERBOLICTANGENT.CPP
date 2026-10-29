@@ -341,7 +341,7 @@ void XMath_EvaluateSineCosine(f32 angle, f32 *sinOut, f32 *cosOut) {
     *cosOut = pc;
 }
 
-/* Returns the hyperbolic tangent of a double: 1 beyond 25.3, 1 - 2/(exp(2|x|) + 1) above atanh(0.5) with exp computed inline by a rational approximation scaled by func_8029ABA0_de (ldexp), and the odd rational series x + x^3 P(x^2)/Q(x^2) for small arguments, with the sign of x restored. */
+/* Returns the hyperbolic tangent of a double: 1 beyond 25.3, 1 - 2/(exp(2|x|) + 1) above atanh(0.5) with exp computed inline by a rational approximation scaled by ScaleDoubleExponent_XmathEvaluateexponentialdouble (ldexp), and the odd rational series x + x^3 P(x^2)/Q(x^2) for small arguments, with the sign of x restored. */
 
 
 

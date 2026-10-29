@@ -39,7 +39,7 @@ void __seqpReleaseVoice(void *seqPlayer, void *releasedVoice, s32 releaseDuratio
     ALEventListItem *next;
     ALVoiceState *object;
     s32 type6;
-    Entry802B6BE4 entry;
+    SeqplayerVoiceEvent entry;
 
     object = ((ALVoice_s *)releasedVoice)->clientPrivate;
     if (object->envPhase == 0) {

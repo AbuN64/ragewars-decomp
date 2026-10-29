@@ -19,8 +19,8 @@
 extern ResultsOptionsScreen *g_trialCatalogueScreen;
 
 /* Opens the five option windows of screen g_trialCatalogueScreen: for each of options 0 to 4 it picks window
-   0x149, 0x14C, 0x14D, 0x14E or 0x14F through jtbl_800DD9F0, opens it under the screen's parent at
-   0x970, opens its 0x14B child and shows that through func_8040E8D8_de. The loop walks the table with
+   0x149, 0x14C, 0x14D, 0x14E or 0x14F through k_trialOptionWindowIdJumpTable, opens it under the screen's parent at
+   0x970, opens its 0x14B child and shows that through Widget_SetWidgetFlag08_EquipActivateequipmentpanel. The loop walks the table with
    its own pointer, as the cartridge's strength-reduced dispatch does. */
 
 
@@ -35,7 +35,7 @@ enum { RESULTS_OPTION_329 = 329, RESULTS_OPTION_331 = 331, RESULTS_OPTION_332 = 
 #endif
 
 /* Releases the object g_trialCatalogueScreen holds through Cache_FreeMemory, calls Tsmos_ActivateControllerState, clears g_trialCatalogueScreen, calls
-   func_80245B28_de and returns zero. */
+   Cinema_ReleaseSequenceContext_FrontendHandletaboptionsshortcut and returns zero. */
 
 
 
@@ -55,7 +55,7 @@ extern void Tsmos_ActivateControllerState(void);
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
    (word at g_trialCatalogueNeighborTwo) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
-   flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
+   flags at 0xA79, opens the successor's window (halfword at g_trialCatalogueStageIdLowHalves) under arg0, refreshes
    through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of g_gameSettings, through Results_ShowTrialPreviewBanner and
    Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. */
 
@@ -73,7 +73,7 @@ extern s32 Defs_TestBit(u8 *, s32);
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
    (word at g_trialCatalogueNeighborThree) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
-   flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
+   flags at 0xA79, opens the successor's window (halfword at g_trialCatalogueStageIdLowHalves) under arg0, refreshes
    through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of g_gameSettings, through Results_ShowTrialPreviewBanner and
    Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from CTrialCatalogue_SelectNeighborTwo with the successor word changed. */
 
@@ -86,7 +86,7 @@ extern s32 Defs_TestBit(u8 *, s32);
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
    (word at g_trialCatalogueNeighborOne) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
-   flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
+   flags at 0xA79, opens the successor's window (halfword at g_trialCatalogueStageIdLowHalves) under arg0, refreshes
    through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of g_gameSettings, through Results_ShowTrialPreviewBanner and
    Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from CTrialCatalogue_SelectNeighborTwo with the successor word changed. */
 
@@ -99,7 +99,7 @@ extern s32 Defs_TestBit(u8 *, s32);
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
    (word at g_trialCatalogueNeighborZero) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
-   flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
+   flags at 0xA79, opens the successor's window (halfword at g_trialCatalogueStageIdLowHalves) under arg0, refreshes
    through Results_RefreshTrialSelectionLabel and, by the mode byte at 0xD of g_gameSettings, through Results_ShowTrialPreviewBanner and
    Results_UpdateResultsHeading unless the mode is 2 and Results_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from CTrialCatalogue_SelectNeighborTwo with the successor word changed. */
 
@@ -121,22 +121,22 @@ extern s32 Defs_TestBit(u8 *, s32);
 
 extern struct ResultsOptionEntry g_trialCatalogueStages[];
 /* The window table stores word-valued resource identifiers: the key is the word cast to 16 bits. The halfword at
-   word+2 (the table symbol D_800E0646_de) is only its low half on big-endian MIPS. */
+   word+2 (the table symbol g_trialCatalogueStageIdLowHalves) is only its low half on big-endian MIPS. */
 #define entryWindowKey(index) ((u16)g_trialCatalogueStages[index].id)
 
 extern void Random_SetSelectedStage(s32, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_trialCatalogueEventIds, an actor kind at g_trialCatalogueEventKinds and a handler at g_trialCatalogueEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler80429058)(void *, s32, s32, s32, s32);
+typedef s32 (*TrialCatalogueEventHandlerFn)(void *, s32, s32, s32, s32);
 
-extern Handler80429058 g_trialCatalogueEventHandlers;
+extern TrialCatalogueEventHandlerFn g_trialCatalogueEventHandlers;
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_trialOptionsEventIds, an actor kind at g_trialOptionsEventKinds and a handler at g_trialOptionsEventHandlers: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
-typedef s32 (*Handler804290E8)(void *, s32, s32, s32, s32);
+typedef s32 (*TrialOptionsEventHandlerFn)(void *, s32, s32, s32, s32);
 
-extern Handler804290E8 g_trialOptionsEventHandlers;
+extern TrialOptionsEventHandlerFn g_trialOptionsEventHandlers;
 
 void CTrialCatalogue_ShowTrialOptionChildren(void) {
     s32 id = 0;
@@ -356,7 +356,7 @@ s32 CTrialCatalogue_ConfirmTrialStage(void) {
 }
 
 s32 CTrialCatalogue_DispatchCatalogueEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler80429058 *entry;
+    TrialCatalogueEventHandlerFn *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
@@ -384,7 +384,7 @@ s32 CTrialCatalogue_DispatchCatalogueEvent(void *eventObject, s32 eventId, s32 e
 }
 
 s32 CTrialCatalogue_DispatchOptionsEvent(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
-    Handler804290E8 *entry;
+    TrialOptionsEventHandlerFn *entry;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

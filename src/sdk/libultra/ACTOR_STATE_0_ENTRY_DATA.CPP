@@ -1,4 +1,4 @@
-#include "sdk/libultra/800CD394_36.h"
+#include "sdk/libultra/ACTION_CLEARBREAKABLESTATE_ADDRESS.h"
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_actor_state_entry_CE0E4_us_rev1.c */

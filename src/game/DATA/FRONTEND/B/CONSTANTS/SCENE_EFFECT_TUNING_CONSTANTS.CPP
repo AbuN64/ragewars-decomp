@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-/* ROM-grounded data: src/rw_pool_802688E4_CA174_us_rev1.c */
+/* ROM-grounded data: src/g_Events_IncrementNearbyPlayerCounterConstantsUsRev1_SceneEffectTuningConstants.c */
 const unsigned int g_Events_IncrementNearbyPlayerCounterConstantsUsRev1[1] = {
     0x4123D70A,
 };

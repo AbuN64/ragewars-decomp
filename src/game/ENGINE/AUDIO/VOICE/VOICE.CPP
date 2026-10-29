@@ -56,7 +56,7 @@ void Audio_StopVoicesExceptKey(VoiceStopKeyTable *record, s32 value)
   {
     if (((slot->used != absent) && (record->header->local != i)) && ((value == absent) || (slot->value != value)))
     {
-      OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
+      AudioSoundPlayerOwnerView *owner = slot->owner;
       void *sound;
       slot->active = active;
       slot->flag = 0;
@@ -88,7 +88,7 @@ void Audio_StopVoicesExceptKey(VoiceStopKeyTable *record, s32 value)
    at 0x2C, 0x34 and 0xB8. */
 
 void Audio_InitializeVoiceRecord(void *voiceRecord, int owner, int slotIndex) {
-    RecordCode8025A3EC *slot = voiceRecord;
+    AudioVoiceRecordView *slot = voiceRecord;
     float k = g_initialVoiceUnitScale;
 
     slot->f0C = -1;
@@ -118,7 +118,7 @@ void Audio_InitializeVoicePool(s32 *voicePool, s32 ownerAddress) {
     f32 t;
     f32 p;
     s32 off;
-    RecordCode8025A3EC *rec;
+    AudioVoiceRecordView *rec;
     f32 k1;
     f32 k2;
     f32 k3;
@@ -143,7 +143,7 @@ void Audio_InitializeVoicePool(s32 *voicePool, s32 ownerAddress) {
     one = 1;
     off = i;
     do {
-        rec = (RecordCode8025A3EC *)((u32)off + (u32)voicePool);
+        rec = (AudioVoiceRecordView *)((u32)off + (u32)voicePool);
         rec = &((VoiceRecordHolder *)(rec))->record;
         rec->index = i;
         i += 1;
@@ -174,13 +174,13 @@ s32 Audio_GetVoiceSoundState(AudioVoiceSoundSlotView *voicePool, s16 slotIndex)
   s32 voiceAddress;
   s32 ownerAddress;
   void *soundPlayer;
-  RecordCode8025A3EC *slot;
-  OwnerCode8025A3EC8025B5F0 *owner;
+  AudioVoiceRecordView *slot;
+  AudioSoundPlayerOwnerView *owner;
   voiceAddress = (slotIndex * 0xCC) + (s32)voicePool;
   voiceAddress = voiceAddress + 4;
-  slot = (RecordCode8025A3EC *)voiceAddress;
+  slot = (AudioVoiceRecordView *)voiceAddress;
   ownerAddress = slot->owner;
-  owner = (OwnerCode8025A3EC8025B5F0 *)ownerAddress;
+  owner = (AudioSoundPlayerOwnerView *)ownerAddress;
   soundPlayer = owner->sound;
   alSndpSetSound(soundPlayer, owner->samples[slot->index]);
   return alSndpGetState(soundPlayer);
@@ -354,7 +354,7 @@ void Audio_StopVoicesByKey(VoiceStopKeyTable *record, s32 value) {
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {
-            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
+            AudioSoundPlayerOwnerView *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -377,7 +377,7 @@ void Audio_StopVoicesBySecondaryValue(VoiceSecondaryKeyTable *record, s32 value)
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {
-            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
+            AudioSoundPlayerOwnerView *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -400,7 +400,7 @@ void Audio_StopVoicesByFlags(AudioVoiceFlagsPoolView *record, s32 value) {
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && (slot->mask & value) != 0) {
-            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
+            AudioSoundPlayerOwnerView *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -525,27 +525,27 @@ f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener)
 }
 
 void Audio_SetScaledVoiceVolume(void *voiceRecord, s32 volume) {
-    RecordCode8025A3EC *slot = voiceRecord;
-    OwnerCode8025A3EC8025B5F0 *owner;
+    AudioVoiceRecordView *slot = voiceRecord;
+    AudioSoundPlayerOwnerView *owner;
     s32 ownerValue;
     void *sound;
 
     ownerValue = slot->owner;
-    owner = (OwnerCode8025A3EC8025B5F0 *)ownerValue;
+    owner = (AudioSoundPlayerOwnerView *)ownerValue;
     sound = owner->sound;
     alSndpSetSound(sound, owner->samples[slot->index]);
     alSndpSetVol(sound, (s16)(s32)((f32) volume * (slot->fC8)));
 }
 
 void Audio_SetScaledVoicePitch(void *voiceRecord, f32 pitch) {
-    RecordCode8025A3EC *slot = voiceRecord;
-    OwnerCode8025A3EC8025B5F0 *owner;
+    AudioVoiceRecordView *slot = voiceRecord;
+    AudioSoundPlayerOwnerView *owner;
     s32 ownerValue;
     void *sound;
     f32 scaled;
 
     ownerValue = slot->owner;
-    owner = (OwnerCode8025A3EC8025B5F0 *)ownerValue;
+    owner = (AudioSoundPlayerOwnerView *)ownerValue;
     sound = owner->sound;
     alSndpSetSound(sound, owner->samples[slot->index]);
     scaled = pitch * (slot->f34);
@@ -553,7 +553,7 @@ void Audio_SetScaledVoicePitch(void *voiceRecord, f32 pitch) {
     alSndpSetPitch(sound, scaled);
 }
 
-/* CODE_8025C544.CPP */
+/* Audio_SetVoicePan_Voice.CPP */
 struct ALSndPlayer;
 
 extern void alSndpSetPan(struct SoundPlayerEventStateView *player, u8 pan);
@@ -568,7 +568,7 @@ void Audio_SetVoicePan(AudioVoiceControlSlotView *voiceRecord, s32 panValue)
   soundPlayer = ownerAddress + 0x84;
   unusedPanMode = 2;
   slotIndexPointer = &voiceRecord->index;
-  alSndpSetSound(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[*slotIndexPointer]);
+  alSndpSetSound(soundPlayer, ((AudioSoundPlayerOwnerView *)ownerAddress)->samples[*slotIndexPointer]);
   alSndpSetPan(soundPlayer, panValue & 0xFF);
 }
 
@@ -579,7 +579,7 @@ void Audio_QueryVoicePlaybackState(AudioVoiceControlSlotView *voiceRecord)
   void *soundPlayer;
   ownerAddress = (s32)voiceRecord->owner;
   soundPlayer = ownerAddress + 0x84;
-  alSndpSetSound(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[voiceRecord->index]);
+  alSndpSetSound(soundPlayer, ((AudioSoundPlayerOwnerView *)ownerAddress)->samples[voiceRecord->index]);
   alSndpGetState(soundPlayer);
 }
 
@@ -595,10 +595,10 @@ void Audio_StopVoiceForDifferentKey(AudioVoiceControlSlotView *voiceRecord) {
     voiceRecord->active = 1;
     voiceRecord->flag = 0;
     s1 = (void *)(ownerValue + 0x84);
-    if (voiceRecord->key != ((OwnerCode8025A3EC8025B5F0 *)ownerValue)->key) {
+    if (voiceRecord->key != ((AudioSoundPlayerOwnerView *)ownerValue)->key) {
         s32 idx = voiceRecord->index;
         s32 addr = ownerValue + idx * 2;
-        alSndpSetSound(s1, ((OwnerCode8025A3EC8025B5F0 *)ownerValue)->samples[idx]);
+        alSndpSetSound(s1, ((AudioSoundPlayerOwnerView *)ownerValue)->samples[idx]);
         if (alSndpGetState(s1) != 0) {
             alSndpStop(s1);
         }
@@ -613,8 +613,8 @@ void Audio_DeallocateVoiceSlot(AudioVoiceControlSlotView *voiceRecord) {
     Slots *arrayBase;
     short *slot;
     base = voiceRecord->owner;
-    arrayBase = &((ContextCode8025A3EC *)base)->slots;
-    alSndpDeallocate(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[voiceRecord->index]);
+    arrayBase = &((AudioVoiceContextView *)base)->slots;
+    alSndpDeallocate(((AudioSoundPlayerOwnerView *)base)->sound, arrayBase->ids[voiceRecord->index]);
     arrayBase->ids[voiceRecord->index] = -1;
     voiceRecord->priority = 0;
     voiceRecord->fieldC = -1;
@@ -717,7 +717,7 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 track, CVector3 position, s32 sp
 
 int Audio_DeallocatePoolVoice(AudioVoiceFlagsPoolView *pool, short index) {
     AudioVoiceControlSlotView *entry;
-    ContextCode8025A3EC *context;
+    AudioVoiceContextView *context;
     Slots *slots;
     void *owner;
 
@@ -744,7 +744,7 @@ void SoundVoicePool_ResetNode(void *cLoopingSoundData) {
     voice->value = -1;
 }
 
-void func_8025C8D0_de(void) {
+void SoundVoicePool_ResetNodeNoOp(void) {
 }
 
 void SoundVoicePool_Initialize(void *soundVoicePool, CLoopingSoundData *availableNodes, s32 nodeCount) {
@@ -889,7 +889,7 @@ s32 *SoundVoicePool_GetGlobalState(void) {
 }
 
 /** Deliberately perform no work. */
-void func_8025CC7C_de(void) {
+void SoundVoicePool_GetGlobalStateNoOp(void) {
 }
 
 #if defined(VERSION_US)
@@ -906,14 +906,14 @@ const unsigned int k_VoiceEncodedWords[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8025B6F8_C9C68_us_rev1.c */
+/* ROM-grounded data: src/k_VoiceOneWordsUsRev1.c */
 const unsigned int k_VoiceOneWords[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800C906C.CPP */
-/* ROM-grounded data: src/rw_pool_8025B758_C9C6C_us_rev1.c */
+/* ROM-grounded data: src/g_audio_InitializeVoicePoolConstantWordsUsRev1.c */
 const unsigned int g_audio_InitializeVoicePoolConstantWords[3] = {
     0x3C360B61, 0x46FA0000, 0x3F800000,
 };
@@ -926,20 +926,20 @@ const unsigned int g_audio_ComputeDistanceAttenuationConstantWords1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8025C10C_C9C78_us_rev1.c */
+/* ROM-grounded data: src/g_audio_ComputeDistanceAttenuationConstantWords2UsRev1.c */
 const unsigned int g_audio_ComputeDistanceAttenuationConstantWords2[1] = {
     0x3F800000,
 };
 #endif
 
 /* 800C907C.CPP */
-/* ROM-grounded data: src/rw_pool_8025C1CC_C9C7C_us_rev1.c */
+/* ROM-grounded data: src/g_audio_InterpolatePitchTableConstantWordsUsRev1.c */
 const unsigned int g_audio_InterpolatePitchTableConstantWords[2] = {
     0x45BB8000, 0x3C888889,
 };
 
 /* 800C9084.CPP */
-/* ROM-grounded data: src/rw_pool_8025C2EC_C9C84_us_rev1.c */
+/* ROM-grounded data: src/g_audio_RandomizeScaledByteRangeConstantWordsUsRev1.c */
 const unsigned int g_audio_RandomizeScaledByteRangeConstantWords[2] = {
     0x3C23D70A, 0x3F800000,
 };
@@ -952,7 +952,7 @@ const unsigned int g_audio_ComputeSpatialAttenuationCurveConstantWords1[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-/* ROM-grounded data: src/rw_pool_8025C368_C9C8C_us_rev1.c */
+/* ROM-grounded data: src/g_audio_ComputeSpatialAttenuationCurveConstantWords2UsRev1.c */
 const unsigned int g_audio_ComputeSpatialAttenuationCurveConstantWords2[1] = {
     0x3F800000,
 };
