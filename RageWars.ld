@@ -26027,9 +26027,11 @@ SECTIONS
         src/MENU/ITEMS/ITEMS/G_PAKFORMATSPACEDINT2.CPP.o(.rodata .rdata);
         . = MAX(., 0x1BB68);
         src/MENU/ITEMS/ITEMS/G_PAKFORMATSPACEDINT3.CPP.o(.rodata .rdata);
+        . = MAX(., 0x1BB70);
+        src/DATA/AMMO/AMMO/PAK_FORMATMUSICPREVIEW_DATA.CPP.o(.rodata .rdata);
         . = MAX(., 0x1BB74);
         src/DATA/AMMO/AMMO/PAK_FORMATMUSICPREVIEW_DATA.CPP.o(.data);
-        . = MAX(., 0x1BB84);
+        . = MAX(., 0x1BB80);
         src/MULTI/SETUP/SETUP_NAME_CURSOR_CONSTANT_WORDS.CPP.o(.rodata .rdata);
         . = MAX(., 0x1BB8C);
         src/MULTI/SETUP/SETUP_DRAWNAMECURSOR.CPP.o(.rodata .rdata);
@@ -35198,7 +35200,7 @@ SECTIONS
         src/MENU/PAK/MODEL/MODEL.CPP.o(.rodata .rdata);
         . = MAX(., 0x1CEC);
         src/MENU/PAK/PAK/G_PAKENCODEDWORDS.CPP.o(.data);
-        . = MAX(., 0x1CF4);
+        . = MAX(., 0x1CF0);
         src/MULTI/SETUP/SETUP_NAME_CURSOR_CONSTANT_WORDS.CPP.o(.rodata .rdata);
         . = MAX(., 0x1CFC);
         src/MULTI/SETUP/SETUP_DRAWNAMECURSOR.CPP.o(.rodata .rdata);

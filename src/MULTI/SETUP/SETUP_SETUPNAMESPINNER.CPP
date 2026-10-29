@@ -151,8 +151,8 @@ s32 Setup_UpdateNameCursor(void *unused, NameSpinnerMenu *menu) {
     i = Player_GetPlayerIndex(g_playerViewRenderContext, menu->id);
     t = g_multiplayerNameEntryStates[i].timer + g_frameElapsedTime;
     g_multiplayerNameEntryStates[i].timer = t;
-    if (t >= 15.0f) {
-        g_multiplayerNameEntryStates[i].timer = t - 15.0f;
+    if (t >= g_multiplayerNameEntryTimingLimits) {
+        g_multiplayerNameEntryStates[i].timer = t - g_multiplayerNameEntryTimingLimits;
     }
     if (menu->state == 1) {
         if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && g_multiplayerNameEntryStates[i].value > 0) {
