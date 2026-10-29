@@ -54907,11 +54907,11 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "graphics"
 format = "resource bank child 4: particle effects"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 8312
 decoded_size = 44304
 rom."de" = [[0x72f7c4, 0x73183c]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/2" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/2" }, { artifact = "particle-graph-receipt.json", sha256 = "aea2878a0d0ec0ec7ed363219e28b98138600870efa36bf0f61d9a6e80768e1b", pointer = "/rows/2" }]
 
 [blob."resource.particle-swooshes"]
 type = "graphics"
@@ -54929,21 +54929,21 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "graphics"
 format = "resource bank child 11: particle swooshes"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 504
 decoded_size = 1712
 rom."de" = [[0x7673f4, 0x7675ec]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/6" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/6" }, { artifact = "particle-graph-receipt.json", sha256 = "aea2878a0d0ec0ec7ed363219e28b98138600870efa36bf0f61d9a6e80768e1b", pointer = "/rows/0" }]
 
 [blob."resource.particle-swooshes.eu"]
 type = "graphics"
 format = "resource bank child 11: particle swooshes"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 520
 decoded_size = 1712
 rom."eu" = [[0x769858, 0x769a60]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/6" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/6" }, { artifact = "particle-graph-receipt.json", sha256 = "aea2878a0d0ec0ec7ed363219e28b98138600870efa36bf0f61d9a6e80768e1b", pointer = "/rows/1" }]
 
 [blob."resource.resource-names.de"]
 type = "world"
