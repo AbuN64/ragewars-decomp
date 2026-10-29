@@ -212,7 +212,7 @@ void SmpFlicker_InitFlicker(FlickerUpdateState *flicker, s32 sampleCount) {
     }
     for (i = 0; i < flicker->entryCount; i++) {
         flicker->entryHoldCounts[i] = (s32) (Graphu64_NextRandom() % 3 + 1);
-        sampleValue = (offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) < 0 ? 0 : ((offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) >= 0x100 ? 0xFF : (offset = randomValueDrop = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset));
+        sampleValue = (offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) < 0 ? 0 : ((offset = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset) >= 256 ? 0xFF : (offset = randomValueDrop = Graphu64_NextRandom() % 40 + 30, flicker->restoreValue - offset));
         flicker->entryValues[i] = sampleValue;
     }
 }

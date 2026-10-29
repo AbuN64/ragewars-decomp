@@ -51,7 +51,7 @@ s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 valueOrUpperBound,
             }
             goto post;
 
-        case 0x1000:
+        case 4096:
             result = widget->value;
             goto end;
 

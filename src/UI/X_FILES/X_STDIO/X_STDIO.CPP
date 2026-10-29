@@ -167,11 +167,11 @@ void XStdio_InitializeStreams(void) {
     one = 1;
     if (read_resource_word(&g_stdioResourceStream.ready) != one) {
 #if defined(VERSION_DE)
-        g_stdioResourceStream.size = 0x8BB01;
+        g_stdioResourceStream.size = 572161;
 #elif defined(VERSION_EU_X)
-        g_stdioResourceStream.size = 0x90385;
+        g_stdioResourceStream.size = 590725;
 #else
-        g_stdioResourceStream.size = 0x8B245;
+        g_stdioResourceStream.size = 569925;
 #endif
         v0 = Cache_AllocateMemory(read_resource_word(&g_stdioResourceStream.size));
         write_resource_buffer(&g_stdioResourceStream.data, v0);
@@ -282,14 +282,14 @@ void XStdio_LoadMemoryStream(void) {
     MemoryStreamBuffer *stream;
     if (g_stdioResourceStream.ready != 1) {
 #if defined(VERSION_DE)
-        g_stdioResourceStream.size = 0x8BB01;
-        buffer = Cache_AllocateMemory(0x8BB01);
+        g_stdioResourceStream.size = 572161;
+        buffer = Cache_AllocateMemory(572161);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        g_stdioResourceStream.size = 0x8B245;
-        buffer = Cache_AllocateMemory(0x8B245);
+        g_stdioResourceStream.size = 569925;
+        buffer = Cache_AllocateMemory(569925);
 #elif defined(VERSION_EU_X)
-        g_stdioResourceStream.size = 0x90385;
-        buffer = Cache_AllocateMemory(0x90385);
+        g_stdioResourceStream.size = 590725;
+        buffer = Cache_AllocateMemory(590725);
 #endif
         g_stdioResourceStream.data = buffer;
         Cartridge_ReadChunksAndWait(&g_cartridgeReadWorker, 0x200000, g_stdioResourceStream.size, buffer);

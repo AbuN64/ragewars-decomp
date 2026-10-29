@@ -90,8 +90,8 @@ extern void Items_SetDefaultPlayerName(u8 *);
    their defaults, the controller index kept, the default name set. */
 static __inline__ void PlayerOptions_Reset(CPlayerOptions *player, s8 controller) {
     player->active = 0;
-    player->horizAnalog = 0x86;
-    player->vertAnalog = 0x84;
+    player->horizAnalog = 134;
+    player->vertAnalog = 132;
     player->controlSide = 0;
     player->controlType = 0;
     player->lookSpring = 1;

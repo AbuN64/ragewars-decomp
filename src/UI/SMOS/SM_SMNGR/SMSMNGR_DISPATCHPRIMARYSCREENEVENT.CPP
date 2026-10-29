@@ -12,9 +12,9 @@
 static inline s32 menuCategory(s32 event) {
     s32 category;
     if ((u32)event < 3584) category=0;
-    else if ((u32)(event-0x1000)<0x1000) category=1;
-    else if ((u32)(event-3584)<0x200) category=2;
-    else if ((u32)(event-0x4000)<0x4000) category=3;
+    else if ((u32)(event-4096)<4096) category=1;
+    else if ((u32)(event-3584)<512) category=2;
+    else if ((u32)(event-16384)<16384) category=3;
     else category=0;
     return category;
 }

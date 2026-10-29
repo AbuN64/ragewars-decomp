@@ -74,7 +74,7 @@ s32 Encoded_HandleUnlockedLevelSelection(s32 levelId, Shared_MenuInput *pad) {
         if (target == 8000) {
             g_gameSettings.mode1E = 1;
             Confirming_SelectConfirmingController(pad);
-            SetN64_SetTransitionTarget(&g_gameSession, 0x11);
+            SetN64_SetTransitionTarget(&g_gameSession, 17);
             return 1;
         }
         if (SetN64_IsModeThirteen() != 0) {

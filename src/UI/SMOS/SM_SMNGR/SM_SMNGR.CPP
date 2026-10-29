@@ -82,9 +82,9 @@ extern void SmXlate_SwitchScreen(s32);
 
 static inline s32 eventCategory(u32 event) {
     if (event < 3584) return 0;
-    if (event - 0x1000 < 0x1000) return 1;
-    if (event - 3584 < 0x200) return 2;
-    if (event - 0x4000 < 0x4000) return 3;
+    if (event - 4096 < 4096) return 1;
+    if (event - 3584 < 512) return 2;
+    if (event - 16384 < 16384) return 3;
     return 0;
 }
 
@@ -217,9 +217,9 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
 extern void Smos_DispatchDescendantScreenEvent(ScreenEventTreeNode *, s32, s32, s32, s32, s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
     if (code < 3584) return 0;
-    if (code - 0x1000 < 0x1000) return 1;
-    if (code - 3584 < 0x200) return 2;
-    if (code - 0x4000 < 0x4000) return 3;
+    if (code - 4096 < 4096) return 1;
+    if (code - 3584 < 512) return 2;
+    if (code - 16384 < 16384) return 3;
     return 0;
 }
 static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 argument) {
