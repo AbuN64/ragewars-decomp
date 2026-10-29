@@ -2,10 +2,6 @@
 #include "COMMON/ALFXPARAM.H"
 
 /* 800CC694_36.CPP */
-/* ROM-grounded data: src/s_epirawreadExText.c */
-const unsigned char s_epirawreadExText[3] = {
-    0x45, 0x58, 0x00,
-};
 
 /* 800CC694_37.CPP */
 /* ROM-grounded data: src/ragewars_resident_strings_CD7A4_us_rev1.c */
