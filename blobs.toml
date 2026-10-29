@@ -14777,13 +14777,54 @@ rom."de" = [[0x1e4b3e, 0x1e4d46]]
 evidence = [{ artifact = "blobs-spans-ident-copies.json", sha256 = "f9cf671e0bf9eee8a8fda359589accd831a075ae0836f2058a7b0c82e96ab782", pointer = "/rows/196" }]
 
 [blob."leftover.de.model.resource.de.305"]
-type = "model"
-format = "stale copy of blob model.resource.de.305 (de bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
-stored_size = 1186
-rom."de" = [[0x1e5a0e, 0x1e5a1c], [0x1e6411, 0x1e6692], [0x1e6696, 0x1e6754], [0x1e6756, 0x1e67ea], [0x1e68a9, 0x1e696a]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/409" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/412" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/414" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/416" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/420" }]
+state = "decoded"
+stored_size = 14
+decoded_size = 14
+rom."de" = [[0x1e5a0e, 0x1e5a1c]]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/0" }]
+
+[blob."leftover.de.model.resource.de.305.c1"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 641
+decoded_size = 641
+rom."de" = [[0x1e6411, 0x1e6692]]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/1" }]
+
+[blob."leftover.de.model.resource.de.305.c2"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 190
+decoded_size = 190
+rom."de" = [[0x1e6696, 0x1e6754]]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/2" }]
+
+[blob."leftover.de.model.resource.de.305.c3"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 148
+decoded_size = 148
+rom."de" = [[0x1e6756, 0x1e67ea]]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/3" }]
+
+[blob."leftover.de.model.resource.de.305.c4"]
+type = "leftover"
+format = "copy"
+codec = "none"
+state = "decoded"
+stored_size = 193
+decoded_size = 193
+rom."de" = [[0x1e68a9, 0x1e696a]]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/4" }]
 
 [blob."leftover.de.model.resource.de.311"]
 type = "leftover"
@@ -14926,13 +14967,14 @@ rom."de" = [[0x1efded, 0x1effc0]]
 evidence = [{ artifact = "blobs-spans-ident-copies.json", sha256 = "f9cf671e0bf9eee8a8fda359589accd831a075ae0836f2058a7b0c82e96ab782", pointer = "/rows/210" }]
 
 [blob."leftover.de.model.resource.de.337"]
-type = "model"
-format = "stale copy of blob model.resource.de.337 (de bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 15
+decoded_size = 15
 rom."de" = [[0x1f11af, 0x1f11be]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/599" }]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/5" }]
 
 [blob."leftover.de.model.resource.de.339"]
 type = "leftover"
@@ -18143,22 +18185,24 @@ rom."eu-x" = [[0x1f6b28, 0x1f6b44]]
 evidence = [{ artifact = "blobs-spans-ident-copies.json", sha256 = "f9cf671e0bf9eee8a8fda359589accd831a075ae0836f2058a7b0c82e96ab782", pointer = "/rows/510" }]
 
 [blob."leftover.eu-x.audio-bank.sample"]
-type = "audio"
-format = "stale copy of blob audio-bank.sample (us-rev1 bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 78
+decoded_size = 78
 rom."eu-x" = [[0x1526d3, 0x152721]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/eu-x/pieces/244" }]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/8" }]
 
 [blob."leftover.eu-x.audio-sample.4870a8.2058"]
-type = "audio"
-format = "stale copy of blob audio-sample.4870a8.2058 (us-rev1 bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 78
+decoded_size = 78
 rom."eu-x" = [[0x1526d3, 0x152721]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/eu-x/pieces/244" }]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/9" }]
 
 [blob."leftover.eu-x.copy.142e3e"]
 type = "leftover"
@@ -31589,22 +31633,24 @@ rom."eu-x" = [[0x168130, 0x168153]]
 evidence = [{ artifact = "stale-text-copies.json", sha256 = "07c89a602fbe46f9f64df674892a05877e2c633ef843c1c5819759bc051d4ee8", pointer = "/rows/139" }]
 
 [blob."leftover.eu.audio-bank.sample"]
-type = "audio"
-format = "stale copy of blob audio-bank.sample (us-rev1 bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 78
+decoded_size = 78
 rom."eu" = [[0x15d6d3, 0x15d721]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/eu/pieces/821" }]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/6" }]
 
 [blob."leftover.eu.audio-sample.4870a8.2058"]
-type = "audio"
-format = "stale copy of blob audio-sample.4870a8.2058 (us-rev1 bytes), left by the ROM builder; never read"
+type = "leftover"
+format = "copy"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 78
+decoded_size = 78
 rom."eu" = [[0x15d6d3, 0x15d721]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/eu/pieces/821" }]
+evidence = [{ artifact = "blobs-spans-piece-copies.json", sha256 = "c9320c9ac9d49b3d6411b6b8bc6dcfe31d62eb1838c6c7e8ba31cd401dcc17e7", pointer = "/rows/7" }]
 
 [blob."leftover.eu.copy.149aec"]
 type = "leftover"
