@@ -398,7 +398,7 @@ void Playerai_UpdatePlayerRenderResources(struct CPlayerPool_t *playerPool, void
                 } else {
                     count1 = ((TransientPlayerWorldCounts *)(world))->itemCount1;
                 }
-                if (count1 != 0x200) {
+                if (count1 != 512) {
                     scale = 4;
                     ((TransientWorldPlayerSlotView *)(((s32)world + count1 * scale)))->itemSlots = node;
                     ((TransientPlayerWorldCounts *)(world))->itemCount1 = count1 + 1;

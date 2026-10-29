@@ -398,7 +398,7 @@ block_33:
                     damagedPlayer->stun = accumulatedStun < g_playerMinimumAccumulatedStun ? g_playerMinimumAccumulatedStun : accumulatedStun;
 
                 }
-                packet->damage = 0x100;
+                packet->damage = 256;
                 goto block_46;
 block_38:
                 if (damagedPlayer->reactionFlags & 0x1000) {
